@@ -1,0 +1,23 @@
+{
+  "schema": "whole-program-asm-utilities-invalid-control-diagnostic-v1",
+  "status": "TIMEOUT_UNRESOLVED_NOT_A_PASS",
+  "attempted": {
+    "mode": "search-zero",
+    "expected_boundary": "f_24FA_0004 with count=0 invokes the explicit abort path",
+    "timeout_seconds": 5,
+    "observed": "The MinGW subprocess did not exit within the timeout; Python raised subprocess.TimeoutExpired and terminated the child. No return code was observed."
+  },
+  "not_run": ["search-null", "expand-zero-width", "expand-zero-height", "clear-zero", "clear-null"],
+  "inputs": {
+    "portable/tests/whole_program/check_asm_utilities_invalid.py": "676a1f886985ae2bdb63ddb2387f763d3574928bf8e194e76455f73bca0dd962",
+    "portable/tests/whole_program/asm_utilities_invalid_probe.c": "d2181bc94b92ea1432861962709e134f65cf7d1a670933d1c45aade6c9b62897",
+    "portable/whole_program/algorithms/asm_utilities.c": "8ab2648e20946bf48984837faeab7be4b4d48283993b8253c7b5be4e7f1c090d",
+    "portable/whole_program/algorithms/asm_utilities.h": "e7bb7cc837ca6d0c98458da941f7fac76319ada1ad71f0430ef887369010b322",
+    "build/workers/asm_utilities_invalid_v1.exe": "f853b9feb8ed85cdd27d14273f28771614e06c09fbde7def4e3a7ad58160939f"
+  },
+  "limits": [
+    "This is a native invalid-input adapter diagnostic only; it is not a DOS semantic comparison.",
+    "The other invalid controls were not run after the first timeout.",
+    "The paired valid-domain DOS comparison is independently recorded in asm-utilities-dos-v1.json."
+  ]
+}

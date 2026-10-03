@@ -1,0 +1,948 @@
+{
+  "format_pipeline_evidence": [
+    {
+      "source": "src/root/m15F8.c:fd_4E37_0000",
+      "status": "source-template grounded; DOS execution not performed",
+      "template": "C initializer contains one %d and the source printf supplies 5 - i"
+    },
+    {
+      "expansion": "source sprintf emits %-<width>s or %c%-<width>s; the resulting format is parsed by this runtime",
+      "source": "src/S10/m35F5.c:formatted menu row",
+      "status": "source-template grounded; width comes from maxLen / maxLen - 1",
+      "templates": [
+        "%%-%ds",
+        "%%c%%-%ds"
+      ]
+    },
+    {
+      "source": "src/S20/m39F1.c:fd_55B3_1CDC, fd_55B3_1CD8",
+      "status": "UNRESOLVED: data-only strings are not present in frozen C source; these calls provide no formatting arguments"
+    },
+    {
+      "source": "src/root/m205F.c:printf(msg)",
+      "status": "UNRESOLVED: runtime text is caller-provided and call supplies no formatting arguments"
+    }
+  ],
+  "input_hashes": {
+    "build/workers/whole_program/generated/dos_types.h": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+    "portable/tests/recovered/whole_program_varargs/native_format_test.c": "ab7bc7c178256d1be86d388fb143263b154263530c5ed39a6143aa53bd6ecd3c",
+    "portable/tests/recovered/whole_program_varargs/run_varargs.py": "0b33fad1478902a60693dcb181d018d9b9943e03a7e9f0155fe55e37a2e960ba",
+    "portable/tools/recover_source.py": "c1fd7616c392d39ebe4574e6ccde85b4e7f79205d21afcfbcb7ead249d5ffc50",
+    "portable/tools/whole_program.py": "849c850ac5e6487d2f77e69503e53ae8a0e510a645f6c205412bad702c3f8c48",
+    "portable/whole_program/conversions/varargs.py": "8e7678d6f3332cd553d8c200dde074d3116b6edeaf6b7435b9abc139e32c02ed",
+    "portable/whole_program/platform/dos_format.c": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1",
+    "portable/whole_program/platform/dos_format.h": "94f74d990e17b2412d25404fc27343eb81f12ba5e19e98f0000280f65deb07ff",
+    "src/S04/m35F5.c": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+    "src/S05/m35F5.c": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+    "src/S05/m3663.c": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+    "src/S06/m35F5.c": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+    "src/S07/m35F5.c": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+    "src/S08/m35F5.c": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "src/S09/m36EE.c": "e48ce08404481d1fa8921b14f24b5e1c6ea8a5afc06f8854b903c9225e91ca53",
+    "src/S10/m35F5.c": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+    "src/S11/m35F5.c": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+    "src/S12/m384C.c": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+    "src/S13/m384C.c": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+    "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+    "src/S15/m384C.c": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "src/S16/m384C.c": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+    "src/S17/m384C.c": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+    "src/S18/m384C.c": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3",
+    "src/S19/m384C.c": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+    "src/S20/m39C7.c": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a",
+    "src/S20/m39F1.c": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/S22/m3BBD.c": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+    "src/S23/m39C7.c": "4e2ff0a4d57f3159b2fb58ff64c77bb7740e2a415292cc7f2fe2e9fad095daf4",
+    "src/S24/m39C7.c": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+    "src/S25/m39C7.c": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+    "src/S25/m3BA4.c": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+    "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+    "src/data/d3D57.c": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+    "src/data/d3E1D.c": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05",
+    "src/data/d55B3_0042.c": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
+    "src/data/d55B3_0064.c": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
+    "src/data/d55B3_00B8.c": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+    "src/root/m0000.c": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+    "src/root/m004A.c": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+    "src/root/m0093.c": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+    "src/root/m00BA.c": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+    "src/root/m00DE.c": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c",
+    "src/root/m00DF.c": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+    "src/root/m00F8.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+    "src/root/m015B.c": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+    "src/root/m0244.c": "4af5c48bc82c52e82cbde616bab7606fdd0b61e38d72d8e53bd0e13a1df02a1a",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m075B.c": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+    "src/root/m078E.c": "45c68892dbbe580d9bd1142676959b7951288a37f9018f6f335c112a34eef22f",
+    "src/root/m0798.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+    "src/root/m0894.c": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+    "src/root/m0AD9.c": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+    "src/root/m0BE8.c": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+    "src/root/m0CDB.c": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+    "src/root/m0DEF.c": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+    "src/root/m0E2E.c": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+    "src/root/m0EC1.c": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+    "src/root/m0F3F.c": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+    "src/root/m10F7.c": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+    "src/root/m1383.c": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+    "src/root/m1496.c": "2b158a9367c89c7acf496efe4ff8490865fda03c5c88cfd70343264d1e2d15de",
+    "src/root/m14EE.c": "a9947226c73c4502f00e2b319b3cd7abc7f2acbc8ca9ef72448b31e55c6bdb59",
+    "src/root/m15D9.c": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/root/m1629.c": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+    "src/root/m171C.c": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+    "src/root/m1986.c": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+    "src/root/m19A9.c": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+    "src/root/m19DC.c": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+    "src/root/m1A28.c": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+    "src/root/m1A53.c": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+    "src/root/m1A96.c": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+    "src/root/m1B28.c": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343",
+    "src/root/m1C62.c": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+    "src/root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "src/root/m1D8E.c": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+    "src/root/m1E57.c": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+    "src/root/m1F80.c": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+    "src/root/m1FAA.c": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "src/root/m205F.c": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+    "src/root/m208F.c": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+    "src/root/m20E8.c": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+    "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+    "src/root/m21FA.c": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "src/root/m23AE.c": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+    "src/root/m23E6.c": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+    "src/root/m24AB.c": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+    "src/root/m2505.c": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "src/root/m259D.c": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+    "src/root/m25E7.c": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+    "src/root/m2662.c": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+    "src/root/m277D.c": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+    "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+    "src/root/m2815.c": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+    "src/root/m284A.c": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "src/root/m290D.c": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+    "src/root/m293A.c": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+    "src/root/m295C.c": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+    "src/root/m29B8.c": "630261c9ce29ece91f48e1fa0ec6c4bf1ce6270245f30d4825a66ed2a661878b",
+    "src/root/m29D6.c": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+    "src/root/m29F0.c": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302"
+  },
+  "native_controls": {
+    "claim": "native ABI and formatting boundary controls only; no DOS text/pixel equivalence claim",
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
+      "D:\\Prog\\simant_recon\\portable\\tests\\recovered\\whole_program_varargs\\native_format_test.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_format.c",
+      "-o",
+      "<TEMP>/native_format_test.exe"
+    ],
+    "compiler": "gcc",
+    "compiler_path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "compiler_version": "gcc (Rev10, Built by MSYS2 project) 12.2.0",
+    "dos_oracle_invocations": 0,
+    "executable_sha256": "cad511c91cf8e3096b7c5cda742d304c79610d1731ffe539f61e6e8fe7b1c738",
+    "generated_m22bf_repeated_format": {
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-I",
+        "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
+        "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-varargs-m7ww7sjw\\m22BF_va_copy_content.c",
+        "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_format.c",
+        "-o",
+        "<TEMP>/m22BF_va_copy_content.exe"
+      ],
+      "executable_sha256": "52de21121e07b20248c2d28c7c33e91dab04c6e1d08b80ab16d1dea294d506f5",
+      "function_body_sha256": "ce4251df1c48b8e93ee69ee2355b163573465bd542af63956cc2dffbcb5d6ed6",
+      "passed": true,
+      "provider_normalization": "one packed DOS pointer at object +0x2a is held in fixture_record_slot because native pointers are wider; the source formatting expressions/call order are unchanged",
+      "result": "generated m22BF repeated format content passed"
+    },
+    "generated_m22bf_tu_compile": {
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-I",
+        "D:\\Prog\\simant_recon",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-c",
+        "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-varargs-m7ww7sjw\\root_m22BF_varargs.c",
+        "-o",
+        "<TEMP>/root_m22BF_varargs.o"
+      ],
+      "object_sha256": "90e6a3aeda7ee0ea4970b070d12ec8cba98fc3dd17641048d8b5ddf3322dcf5d",
+      "passed": true,
+      "transformation": "actual src/root/m22BF.c -> varargs adapter -> whole_program.convert_words; standalone TU compile only"
+    },
+    "limits": [
+      "C varargs do not encode the number of supplied arguments; source calls with unresolved dynamic format strings must be proven to contain no conversions before use.",
+      "%p uses host pointer text for native diagnostics, not DOS far-pointer spelling.",
+      "No shipped-resource conversion inventory is claimed for the unresolved fd_55B3 strings."
+    ],
+    "negative": [
+      "float",
+      "%n",
+      "field over limit"
+    ],
+    "positive": [
+      "DOS16 signed/unsigned word truncation",
+      "DOS32 signed/unsigned long",
+      "width/precision and dynamic stars",
+      "strings/chars/pointers",
+      "bounded truncation"
+    ],
+    "result": "native DOS-format boundary controls passed"
+  },
+  "schema": "whole-program-dos-varargs-controls-v1",
+  "source_literal_scan": {
+    "conversion_counts": {
+      "%": 6,
+      "c": 6,
+      "d": 113,
+      "p": 12,
+      "s": 49,
+      "u": 2,
+      "x": 59
+    },
+    "dynamic_format_expressions": [
+      {
+        "expression": "fd_4E37_0000",
+        "function": "printf",
+        "path": "src/root/m15F8.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m171C.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m1C62.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m1CE2.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m1CE2.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m1FD2.c"
+      },
+      {
+        "expression": "msg",
+        "function": "printf",
+        "path": "src/root/m205F.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m208F.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m208F.c"
+      },
+      {
+        "expression": "(o = win_ObjAddr(obj)) + 0x2e",
+        "function": "vsprintf",
+        "path": "src/root/m22BF.c"
+      },
+      {
+        "expression": "o + 0x2e",
+        "function": "vsprintf",
+        "path": "src/root/m22BF.c"
+      },
+      {
+        "expression": "(o = win_ObjAddr(obj)) + 0x2e",
+        "function": "vsprintf",
+        "path": "src/root/m22BF.c"
+      },
+      {
+        "expression": "o + 0x2e",
+        "function": "vsprintf",
+        "path": "src/root/m22BF.c"
+      },
+      {
+        "expression": "format",
+        "function": "vsprintf",
+        "path": "src/root/m22BF.c"
+      },
+      {
+        "expression": "fmt",
+        "function": "sprintf",
+        "path": "src/S10/m35F5.c"
+      },
+      {
+        "expression": "fmt",
+        "function": "sprintf",
+        "path": "src/S10/m35F5.c"
+      },
+      {
+        "expression": "fd_55B3_1CDC",
+        "function": "printf",
+        "path": "src/S20/m39F1.c"
+      },
+      {
+        "expression": "fd_55B3_1CD8",
+        "function": "printf",
+        "path": "src/S20/m39F1.c"
+      }
+    ],
+    "literal_candidates": 145,
+    "scope": "all source C string literals; candidates include non-format strings and are not all proven call arguments",
+    "specifier_counts": {
+      "%#x": 5,
+      "%%": 6,
+      "%-12s": 1,
+      "%-d": 2,
+      "%-ld": 2,
+      "%03x": 1,
+      "%5ld": 2,
+      "%c": 6,
+      "%d": 90,
+      "%ld": 17,
+      "%p": 12,
+      "%s": 48,
+      "%u": 2,
+      "%x": 53
+    },
+    "unparsed_percent_candidates": []
+  },
+  "source_stack_cursor_lowering": {
+    "changed_module_count": 21,
+    "changed_module_paths": [
+      "src/S09/m35F5.c",
+      "src/S10/m35F5.c",
+      "src/S14/m384C.c",
+      "src/S19/m384C.c",
+      "src/S20/m39C7.c",
+      "src/S20/m39F1.c",
+      "src/S24/m39C7.c",
+      "src/root/m00F8.c",
+      "src/root/m15F8.c",
+      "src/root/m171C.c",
+      "src/root/m1986.c",
+      "src/root/m19A9.c",
+      "src/root/m1A28.c",
+      "src/root/m1A53.c",
+      "src/root/m1C62.c",
+      "src/root/m1CE2.c",
+      "src/root/m1FD2.c",
+      "src/root/m205F.c",
+      "src/root/m208F.c",
+      "src/root/m21FA.c",
+      "src/root/m22BF.c"
+    ],
+    "counts_by_source": {
+      "src/root/m171C.c": 1,
+      "src/root/m1C62.c": 1,
+      "src/root/m1CE2.c": 2,
+      "src/root/m1FD2.c": 1,
+      "src/root/m208F.c": 2,
+      "src/root/m22BF.c": 5
+    },
+    "cross_tu_promoted_prototypes": {
+      "src/S09/m35F5.c": [
+        {
+          "declaration_count": "1",
+          "function": "win_SetObjFormatStr",
+          "native_last_parameter": "_dos_obj_wide",
+          "source_last_parameter": "obj",
+          "source_value_local": "int16_t obj"
+        }
+      ],
+      "src/root/m00F8.c": [
+        {
+          "declaration_count": "1",
+          "function": "win_SetObjFormatStr",
+          "native_last_parameter": "_dos_obj_wide",
+          "source_last_parameter": "obj",
+          "source_value_local": "int16_t obj"
+        }
+      ]
+    },
+    "cursor_call_count": 12,
+    "m22bf_copy_proof": [
+      {
+        "last_named_parameter": "_dos_obj_wide",
+        "lowered_body_sha256": "cc64d21dacb7c22bfe5b9ace7e86c12ee65faac35e3c40df87a30b4ab68cea45",
+        "name": "win_SetObjFormatStr",
+        "original_body_sha256": "f19fb882543522d1af41d9567824579ce141ddda199e9f1eb8c44b3f30425842",
+        "source_call_order": [
+          "dos_vsprintf",
+          "dos_vsprintf"
+        ],
+        "stack_vararg_calls": 2,
+        "uses_va_copy": true
+      },
+      {
+        "last_named_parameter": "_dos_obj_wide",
+        "lowered_body_sha256": "c895e6450e30787dafec73c6c9e1ac657980e4f06ea507311d78763171b770c7",
+        "name": "win_ObjFormatPrint",
+        "original_body_sha256": "d66670de2c7aca68ffdb3a068401a6476688b0c40104a1a332bd75599cb8c8de",
+        "source_call_order": [
+          "dos_vsprintf",
+          "dos_vsprintf"
+        ],
+        "stack_vararg_calls": 2,
+        "uses_va_copy": true
+      }
+    ],
+    "module_count": 98,
+    "promoted_last_parameters": [
+      [
+        {
+          "declaration_count": "1",
+          "function": "win_SetObjFormatStr",
+          "native_last_parameter": "_dos_obj_wide",
+          "source_last_parameter": "obj",
+          "source_value_local": "int16_t obj"
+        }
+      ],
+      [
+        {
+          "declaration_count": "1",
+          "function": "win_SetObjFormatStr",
+          "native_last_parameter": "_dos_obj_wide",
+          "source_last_parameter": "obj",
+          "source_value_local": "int16_t obj"
+        }
+      ],
+      [
+        {
+          "declaration_count": "2",
+          "function": "win_SetObjFormatStr",
+          "native_last_parameter": "_dos_obj_wide",
+          "source_last_parameter": "obj",
+          "source_value_local": "int16_t obj"
+        },
+        {
+          "declaration_count": "2",
+          "function": "win_ObjFormatPrint",
+          "native_last_parameter": "_dos_obj_wide",
+          "source_last_parameter": "obj",
+          "source_value_local": "int16_t obj"
+        }
+      ]
+    ],
+    "transformation_ledgers": [
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "d4bd16351ae537e95bb2729ea07c16c493049fd9afca2660b9bc5d1d88db9c4a",
+        "promoted_last_named_parameters": [
+          {
+            "declaration_count": "1",
+            "function": "win_SetObjFormatStr",
+            "native_last_parameter": "_dos_obj_wide",
+            "source_last_parameter": "obj",
+            "source_value_local": "int16_t obj"
+          }
+        ],
+        "removed_legacy_prototypes": 0,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/S09/m35F5.c",
+        "source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "0f954d09c7e0d08d7fc18f52879099d49a08d796cb485e50a3e1f216166a253b",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 0,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/S10/m35F5.c",
+        "source_sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "733dc29d3d3b6ad22cf991bb2404086c1582c970fcce5d590839122250fe8ede",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 0,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/S14/m384C.c",
+        "source_sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "26f820e7f551b1be4cf6df7f9bb94a2753c688a9805c8f41a481296072843e15",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/S19/m384C.c",
+        "source_sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "07542ea5bd866a908beb0bd01dff75dbf27ecf3d7366662d0963a6c166a94ce7",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/S20/m39C7.c",
+        "source_sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "9a02353531fa5f52ded4497d354e8cd5bf09cf70c10d08fdc4728dd4b2fa8f10",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/S20/m39F1.c",
+        "source_sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "7edf684e76f1a68e120128614623850f6a996f891490d9b731d5c3c888143bfc",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/S24/m39C7.c",
+        "source_sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "52c02d581a151504123eda9579242768da2fe60d9a5bb7fac743f99bc2c19a0a",
+        "promoted_last_named_parameters": [
+          {
+            "declaration_count": "1",
+            "function": "win_SetObjFormatStr",
+            "native_last_parameter": "_dos_obj_wide",
+            "source_last_parameter": "obj",
+            "source_value_local": "int16_t obj"
+          }
+        ],
+        "removed_legacy_prototypes": 0,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m00F8.c",
+        "source_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "6ff3292043caf5917651b3fc0c9a277d7b441bb851c7a0ade8fa8e66a77d50db",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m15F8.c",
+        "source_sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "c952e29f44f94d14cfc69f8141a57e09237c1aea737243539adf8bedf8ce70ba",
+            "name": "f_171C_02CA",
+            "original_body_sha256": "95be674f2130023ce7d33e1a5019785c75c7125c58a0bed85cdf0c0251748513",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          }
+        ],
+        "output_sha256": "bfbad1fd93eaca5f88268c710bb66eecc1f23878aca59e0471a2d1128caa645b",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 0,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m171C.c",
+        "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "d494381dc4a2ea5c2b70f4460c2cf1387d5976db76424c7bc393bbdef1dcbb4d",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m1986.c",
+        "source_sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "4fd6879467fd2ffe8d99d20f00d53da8a3727f82e61d54ca40c38f48a0353c39",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 2,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m19A9.c",
+        "source_sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "47e385bdb9b59c6d2ea9da976717bcc26e21c3e9c0b610d123d9ac7c06b4d1de",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m1A28.c",
+        "source_sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "b159b94803a7a6e352a333e3a981e1d2e0b181cafd487d8eaa63e0c12819e86e",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m1A53.c",
+        "source_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "0f6887baeb9949bdc6e1fddb8c85d51ce3f7a25a955483cc139a245ae5b8d27d",
+            "name": "Punt",
+            "original_body_sha256": "eff9d536fe467747feb148f905671c77eb9ec77492afd367ce6b0d2c4ddebe03",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          }
+        ],
+        "output_sha256": "7d9ed2142e84f2dbf7ce436b4ec544cd37446de43eb1e64461853a8b579f63b0",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 3,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m1C62.c",
+        "source_sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "a774515afa93aa9a4f9c7b876643478b989cde2c6f3453aad03a4c593d8252a6",
+            "name": "f_1CE2_016C",
+            "original_body_sha256": "23d881b42d0dc85e13d72fb2e8567912141efeb8c6bf745dcf4333001b3a4d7f",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          },
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "c6a406210ea87973802cefa532389876be467a815c325ed8e12d9133c7521584",
+            "name": "f_1CE2_01C3",
+            "original_body_sha256": "bccdd433c11635c8c718cda1cc9adf95ca3c8638abaadd1308ecaf0fa7bb08b2",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          }
+        ],
+        "output_sha256": "6059ca8ef9d22934f99c99869a3b24bbc6872dc0496affe2c93c89f046161d61",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m1CE2.c",
+        "source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "8202be35a67a4ea1f835cbd5107d0fe53d9207eaebc350a84f10bc0348806b5c",
+            "name": "f_1FD2_0008",
+            "original_body_sha256": "202391057ebb860a1aca75b6088420c8a70202199c93798ad0c015e754932232",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          }
+        ],
+        "output_sha256": "dee79ca2e2a92894a289e9329f0f6aea33ac9f8de7ea145f55997640a7c26c2b",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m1FD2.c",
+        "source_sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "73b61a3f1182b432ac23312fca5f5db88ba5e14cd260f735fde1a02ea8e9d601",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 2,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m205F.c",
+        "source_sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "eadd039df68cc4df2437ed764c73d3e510504e8c67d1d30e83cc16537fa53d9a",
+            "name": "f_208F_038E",
+            "original_body_sha256": "d08c175f6e14b77383b14d6f65dad96e950d63fd7b6a26373d3f335f57f0a5c5",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          },
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "7426f3a1ac6895196f68905816be24c187d322363a0115f6ebc1d4c00cebff60",
+            "name": "f_208F_03BC",
+            "original_body_sha256": "5dfe630f51024e33cacb68c62693b11a818a70c97dbe33ae52379751191a2751",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          }
+        ],
+        "output_sha256": "267c8480ccf1987ff9211a6db0dd46fd1f2d980bde3c3cb78397cb240d6c183b",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m208F.c",
+        "source_sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [],
+        "output_sha256": "fdc9325f8f8104eac5a1a3404974b227dcb109e8e9fa3e003b815aaa96c90a73",
+        "promoted_last_named_parameters": [],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m21FA.c",
+        "source_sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f"
+      },
+      {
+        "fixed_symbol_rewrites": {
+          "identifier_replacements_outside_comments_and_literals": true,
+          "printf": "dos_printf",
+          "sprintf": "dos_sprintf",
+          "vsprintf": "dos_vsprintf"
+        },
+        "lowered_variadic_functions": [
+          {
+            "last_named_parameter": "_dos_obj_wide",
+            "lowered_body_sha256": "cc64d21dacb7c22bfe5b9ace7e86c12ee65faac35e3c40df87a30b4ab68cea45",
+            "name": "win_SetObjFormatStr",
+            "original_body_sha256": "f19fb882543522d1af41d9567824579ce141ddda199e9f1eb8c44b3f30425842",
+            "source_call_order": [
+              "dos_vsprintf",
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 2,
+            "uses_va_copy": true
+          },
+          {
+            "last_named_parameter": "_dos_obj_wide",
+            "lowered_body_sha256": "c895e6450e30787dafec73c6c9e1ac657980e4f06ea507311d78763171b770c7",
+            "name": "win_ObjFormatPrint",
+            "original_body_sha256": "d66670de2c7aca68ffdb3a068401a6476688b0c40104a1a332bd75599cb8c8de",
+            "source_call_order": [
+              "dos_vsprintf",
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 2,
+            "uses_va_copy": true
+          },
+          {
+            "last_named_parameter": "format",
+            "lowered_body_sha256": "03635d64afcb1c31658d015118a4f0065e9a92f707d5bbf5c1f5f077b0842900",
+            "name": "win_PrintfAtObj",
+            "original_body_sha256": "73cc4329be958429bbeecca16303490807c899b37ea5480ef86604d41602a576",
+            "source_call_order": [
+              "dos_vsprintf"
+            ],
+            "stack_vararg_calls": 1,
+            "uses_va_copy": false
+          }
+        ],
+        "output_sha256": "86d15c2d955b10a8880c4ff31d16900199937d06908e0751f80f20782df03de8",
+        "promoted_last_named_parameters": [
+          {
+            "declaration_count": "2",
+            "function": "win_SetObjFormatStr",
+            "native_last_parameter": "_dos_obj_wide",
+            "source_last_parameter": "obj",
+            "source_value_local": "int16_t obj"
+          },
+          {
+            "declaration_count": "2",
+            "function": "win_ObjFormatPrint",
+            "native_last_parameter": "_dos_obj_wide",
+            "source_last_parameter": "obj",
+            "source_value_local": "int16_t obj"
+          }
+        ],
+        "removed_legacy_prototypes": 1,
+        "schema": "whole-program-varargs-lowering-v1",
+        "semantic_boundary": "native va_list; no DOS stack-address cursor survives; 16-bit and 32-bit formatting is implemented by dos_format runtime",
+        "source_path": "src/root/m22BF.c",
+        "source_sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0"
+      }
+    ]
+  },
+  "status": "PASS"
+}

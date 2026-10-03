@@ -1,0 +1,223 @@
+{
+  "schema": "whole-program-rng-conversion-test-v1",
+  "status": "PASS",
+  "conversion": {
+    "schema": "whole-program-rng-conversion-v1",
+    "source": {
+      "path": "src/root/m0093.c",
+      "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af"
+    },
+    "host_output_sha256": "2d770e5954389d2dfecfb0140ad66ff308c64eee05e362ea679ae54768b44498",
+    "replacements": {
+      "inline_asm_rng_forms": [
+        {
+          "function": "SRand1",
+          "original_body_sha256": "1f927e75d07b520ff222c9a25bbd104002848317156efc8b857f2e05e4369d4c",
+          "operations": [
+            "carry from original bit 15",
+            "16-bit shift",
+            "conditional XOR 0x1bf5",
+            "private seed write before unsigned 16-bit DIV",
+            "AX receives DX remainder"
+          ]
+        },
+        {
+          "function": "SRand2",
+          "original_macro_invocation": "SRAND_MASK(SRand2, d2, 1)",
+          "mask": 1,
+          "ax_return": true
+        },
+        {
+          "function": "SRand4",
+          "original_macro_invocation": "SRAND_MASK(SRand4, d4, 3)",
+          "mask": 3,
+          "ax_return": true
+        },
+        {
+          "function": "SRand8",
+          "original_macro_invocation": "SRAND_MASK(SRand8, d8, 7)",
+          "mask": 7,
+          "ax_return": true
+        },
+        {
+          "function": "SRand16",
+          "original_macro_invocation": "SRAND_MASK(SRand16, d16, 0fh)",
+          "mask": 15,
+          "ax_return": true
+        },
+        {
+          "function": "SRand32",
+          "original_macro_invocation": "SRAND_MASK(SRand32, d32, 1fh)",
+          "mask": 31,
+          "ax_return": true
+        },
+        {
+          "function": "SRand64",
+          "original_macro_invocation": "SRAND_MASK(SRand64, d64, 3fh)",
+          "mask": 63,
+          "ax_return": true
+        },
+        {
+          "function": "SRand128",
+          "original_macro_invocation": "SRAND_MASK(SRand128, d128, 7fh)",
+          "mask": 127,
+          "ax_return": true
+        },
+        {
+          "function": "SRand256",
+          "original_macro_invocation": "SRAND_MASK(SRand256, d256, 0ffh)",
+          "mask": 255,
+          "ax_return": true
+        }
+      ],
+      "absolute_read": {
+        "function": "GetRRandSeed",
+        "original_body_sha256": "12c963e1f3ea0a15634b6004752b72b82f5ba1a347a53cda2063bf30036a5f00",
+        "host_leaf": "dos_host_read_u32",
+        "physical_address": "0x46c0",
+        "source_far_pointer": "046C:0000",
+        "platform_provider": "unprovided"
+      },
+      "runtime_names": {
+        "srand": "dos_crt_srand(uint16_t)",
+        "rand": "dos_crt_rand(void) -> int16_t",
+        "state_provider": "caller-owned runtime provider; may use portable/game/simulation/rng.c MSC recurrence"
+      },
+      "zero_divisor": {
+        "leaf": "dos_host_divide_fault",
+        "noreturn": true,
+        "called_after_private_seed_advance": true
+      },
+      "source_type_lowering": {
+        "unsigned int": "uint16_t",
+        "int": "int16_t",
+        "unsigned long": "uint32_t",
+        "far": "removed",
+        "scope": "target ABI spelling normalization only; no private RNG state is copied"
+      }
+    },
+    "preserved_non_asm_bodies": {
+      "SGIRand": {
+        "original_body_sha256": "fe250fe122d0f1b6ada48f68bb4c83c8d5cc179b1117c59259c7345961cd6370",
+        "normalized_body_sha256": "fb87728f12bcd1d7dedb8fb51e4b338ed5cd5d493bc39242f39e9cb98b430d2b",
+        "body_preserved_after_target_width_lowering": true
+      },
+      "SGRand": {
+        "original_body_sha256": "7c8243c81324ff26779ca74cecd18631c4d79ac900fd263b92e097e9815f77e8",
+        "normalized_body_sha256": "bc6f3ff79c6fd194c51aa16dfd61a2916988f608e86e384c1951790c1c450d11",
+        "body_preserved_after_target_width_lowering": true
+      },
+      "SGSRand": {
+        "original_body_sha256": "d034b7f3d86d98146fcf8a960196e1e6f10533d109e647ff891eb1a7fb174daa",
+        "normalized_body_sha256": "d613ef798406d7b25eb31cf728e4762fc8f8bc0e576938211e4db356fe8055b0",
+        "body_preserved_after_target_width_lowering": true
+      },
+      "SetSRandSeed": {
+        "original_body_sha256": "d6ee919e2b467e4faff8d5a04eae419be71abaf0a3302bd6b10a439052191462",
+        "normalized_body_sha256": "d6ee919e2b467e4faff8d5a04eae419be71abaf0a3302bd6b10a439052191462",
+        "body_preserved_after_target_width_lowering": true
+      },
+      "GetSRandSeed": {
+        "original_body_sha256": "12dccea92908bb96ec9a2ebb480b1bfb093cfa11db7909ee6c106c4275915106",
+        "normalized_body_sha256": "12dccea92908bb96ec9a2ebb480b1bfb093cfa11db7909ee6c106c4275915106",
+        "body_preserved_after_target_width_lowering": true
+      },
+      "SetRRandSeed": {
+        "original_body_sha256": "8eb95bcbc154530931e15fc418c8b1fe991095671409552099ea1aa596999ede",
+        "normalized_body_sha256": "8eb95bcbc154530931e15fc418c8b1fe991095671409552099ea1aa596999ede",
+        "body_preserved_after_target_width_lowering": true
+      },
+      "SeedSRand": {
+        "original_body_sha256": "fd991692304c5028dfab5d99ec86982b37a8450ce8a5db7a02901030a7708ef3",
+        "normalized_body_sha256": "e071938f3fbd93c3daefd8ee261c242b18e4484758bddd348936736e5b1e8665",
+        "body_preserved_after_target_width_lowering": true
+      },
+      "RRand": {
+        "original_body_sha256": "b52d2697c3366d661556fa8959ee7b2bb5225c874efe6c48e98351d3660787b8",
+        "normalized_body_sha256": "1ca9e048059c7f0c7e00096d2b9f05071eb5abc39922fa47dce7180a6a151121",
+        "body_preserved_after_target_width_lowering": true
+      }
+    },
+    "private_seed": {
+      "owner": "static uint16_t seed in adapted root:0093 module",
+      "storage_count": 1
+    },
+    "unprovided_platform_leaves": [
+      "TickCount",
+      "dos_host_read_u32",
+      "dos_host_divide_fault"
+    ],
+    "other_c_bodies": {
+      "GetRRandSeed": "only replaced absolute memory access with host physical-address leaf",
+      "SeedRRand": "body retains original call order; only srand/rand namespace symbols and widths are adapted"
+    }
+  },
+  "source_inputs": {
+    "src/root/m0093.c": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+    "portable/whole_program/conversions/rng.py": "fbcdcbe68237a80eb3095e4183716f70bcd88f8f566d40dd7cc33177486af398",
+    "portable/tests/whole_program/rng_conversion_probe.c": "d6a8c4e084fcb987a68cc27baa7bcc244f45d82623ebf703d257f312015aebd3",
+    "portable/game/simulation/rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+    "portable/game/simulation/rng.h": "fc68a178bb200dbc211232c39b05bc237a57771854917da59ef2ce7f57046712",
+    "portable/tests/rng/rng-dos-differential.json": "56cea5e8c2f4effcbe6baa0bef2738796622eca7fb8a5e0bff0e2988649eb9e0",
+    "portable/tests/whole_program/run_rng_conversion_v4.py": "dda3449d8cfaa8f2973da7cad21cf6f225b71c44718e79eac7e6d4501b2b65ac"
+  },
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "flags": [
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ]
+  },
+  "compile_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    ".",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program_rng\\rng_conversion_probe_v4.exe",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program_rng\\m0093_converted_v4.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\rng_conversion_probe.c"
+  ],
+  "native_executable_sha256": "71266879fa694bb567069fbf4f48d78eeb1a4a86cd9ca8bcb3597264b3f91c4f",
+  "probe": "RNG_CONVERSION_PASS masks=524288 bounded_srand1=458752 rrand=196608 zero_fault=1 dos_read=46c0",
+  "probe_stderr": "",
+  "coverage": {
+    "mask_calls": 524288,
+    "mask_functions": 8,
+    "bounded_srand1_calls": 458752,
+    "srand1_ranges": [
+      1,
+      3,
+      7,
+      8,
+      255,
+      32767,
+      65535
+    ],
+    "rrand_calls": 196608,
+    "zero_divisor": "explicit _Noreturn host leaf observed once; seed update verified before fault",
+    "get_rrand_seed": "host leaf observed physical 0x46c0 for DOS far pointer 046C:0000",
+    "runtime_rand": "dos_crt_srand/dos_crt_rand test provider delegates to existing sim_rng_msc_rand in rng.c",
+    "native_control_proof": {
+      "path": "portable/tests/rng/rng-dos-differential.json",
+      "sha256": "56cea5e8c2f4effcbe6baa0bef2738796622eca7fb8a5e0bff0e2988649eb9e0",
+      "status": "DIAGNOSTIC_PASS_NO_ACCEPTANCE_CLAIM"
+    },
+    "tick_and_get_rrand_seed_platform_hooks": "test shims only; conversion leaves those provider symbols unresolved"
+  },
+  "limits": [
+    "The test fixture supplies TickCount, the physical-memory leaf, and the divide-fault leaf; production platform implementations remain unprovided.",
+    "The test runtime provider delegates MSC rand to rng.c; no second production simulation-state owner was introduced.",
+    "SRand1 range zero checks the explicit nonreturn fault boundary; no RRand zero-limit behavior is claimed."
+  ]
+}

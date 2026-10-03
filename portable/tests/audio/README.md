@@ -35,3 +35,24 @@ exposes queue-drained status for host playback.
 Inputs stay in ignored `assets/SOUND.NDX` and `assets/SOUND.DAT`; their hashes
 are pinned in `tests/resources/ASSET_SHA256.md`. No original binaries or assets
 are copied into this directory or the source tree.
+
+`portable/platform/sdl3/audio_host.h` is the earlier request-oriented API. It
+supports decoded one-shot SOUND requests and isolated source-profile SFX, while
+MIDI song requests still return `UNSUPPORTED_MUSIC`; it has no `LIVE_DAC_SFX`
+capability query or live queue/pump calls. It does not feed synthetic BIOS or
+port reads to device detection.
+
+Whole-program source playback is a separate, later API in
+`portable/whole_program/platform/whole_audio_provider.{h,c}` and
+`portable/platform/sdl3/whole_audio_provider.{h,c}`. Generated `m284A` drives
+the original MIDI parser and cadence; generated `m295C` performs source voice
+allocation; generated `m290D` sends ordered sampled-DAC start/stop events to
+the native mixer. The current native backend explicitly selects sampled DAC
+mode 1 and does not emulate BIOS, MPU-401, OPL, or other DOS devices. The
+strict actual-song harness, `python
+portable/tests/whole_program/run_generated_song_harness.py`, uses the shipped
+SOUND kind-18/kind-20 song and kind-5 sample records. Its receipt records host
+loader/channel setup boundaries and does not claim DOS timing or waveform
+equivalence. `run_audio_provider_tests.py` separately tests the SDL3 dummy
+stream bridge with a deterministic event producer; that SDL smoke is not the
+actual-song harness.

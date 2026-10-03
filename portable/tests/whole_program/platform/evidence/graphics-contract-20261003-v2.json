@@ -1,0 +1,43 @@
+{
+  "schema": "simant-whole-program-graphics-contract-v1",
+  "status": "FAIL",
+  "scope": [
+    "640x350 indexed framebuffer ownership and source dimension defaults",
+    "bounded S00 attribute, fill, and 1bpp glyph contracts",
+    "clip stack, color-map behavior, text pen, and explicit unprovided slots"
+  ],
+  "compiler": "gcc",
+  "command": [
+    "gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\graphics.c",
+    "D:\\Prog\\simant_recon\\portable\\render\\primitives.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\platform\\graphics_test.c",
+    "-o",
+    "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-graphics-contract-wymyeey4\\graphics_test.exe"
+  ],
+  "inputs_before_sha256": {
+    "portable\\whole_program\\platform\\graphics.h": "8f0e04060cbd7ba2548598cbf2517dc14ec38b5a4cea4c1672315e8e14232ecc",
+    "portable\\whole_program\\platform\\graphics.c": "75434071a82cd5a23803306d49fb1d69165f2192f0a7b75dfcc79516df0ef379",
+    "portable\\render\\primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable\\render\\primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable\\tests\\whole_program\\platform\\graphics_test.c": "dda360b7a140bc7200f6600eb8de27f0ffcec923b610072fc56ab1225eb9f101"
+  },
+  "inputs_after_sha256": {
+    "portable\\whole_program\\platform\\graphics.h": "8f0e04060cbd7ba2548598cbf2517dc14ec38b5a4cea4c1672315e8e14232ecc",
+    "portable\\whole_program\\platform\\graphics.c": "75434071a82cd5a23803306d49fb1d69165f2192f0a7b75dfcc79516df0ef379",
+    "portable\\render\\primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable\\render\\primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable\\tests\\whole_program\\platform\\graphics_test.c": "dda360b7a140bc7200f6600eb8de27f0ffcec923b610072fc56ab1225eb9f101"
+  },
+  "inputs_stable": true,
+  "stdout": "",
+  "stderr": "CHECK failed at D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\platform\\graphics_test.c:84: pixels[9u * 640u + 28u] == 7\n",
+  "exit_code": 1
+}

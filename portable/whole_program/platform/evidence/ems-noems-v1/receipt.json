@@ -1,0 +1,53 @@
+{
+  "schema": "native-ems-noems-caller-contract-v1",
+  "status": "PASS",
+  "source_pins_before_after": {
+    "src/root/m195A.asm": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m19DC.c": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+    "portable/whole_program/platform/ems_host.h": "1a97375f17ac6e703ab242981b40e240063ab0aeddd56e506053b8e01cc2c232",
+    "portable/whole_program/platform/ems_host.c": "94845411504986cef551c7504ff8875d0c76c23192e37af976c40fb042c87a2d",
+    "portable/whole_program/platform/dos_io.h": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+    "portable/whole_program/platform/dos_io.c": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+    "portable/whole_program/platform/tests/ems_noems_callers_test.c": "9f1731540a577cdb964aaafb46a3aa34971620666a512c34420e555ef70aff8b",
+    "portable/whole_program/platform/tests/run_ems_noems_tests.py": "1eeec8b2fcaff258809debbcf81a3ee3950dfb099b99189a337c39f1a81caae2",
+    "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+  },
+  "source_pins_stable": true,
+  "extracted_caller_body_sha256": {
+    "f_0250_012D": "4bda5da513b415b7c9b843c162e6eba0ff104f4e39e86bf7fae3978836b9bebc",
+    "f_19DC_001A": "26d4a9a34afe451cc4e94daf8df8eb0d28899fc4e6af0ee7c3d271004f2238ac",
+    "f_19DC_02FB": "6ecc3d4c7a04c217a9ed3986d3ff089e29c54b8f6a854242462b662ec2de6885"
+  },
+  "assembled_api_anchors": [
+    "_f_195A_000C",
+    "_f_195A_001D",
+    "_f_195A_0035",
+    "_f_195A_004B",
+    "_f_195A_0062",
+    "_f_195A_007D",
+    "_f_195A_01CB",
+    "_f_195A_0260"
+  ],
+  "gcc": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "sha256_before": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "sha256_after": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version_before": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "version_after": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "stable": true
+  },
+  "controls": {
+    "capability_probe_unavailable_and_zeroes_fields": true,
+    "page_and_frame_queries_unavailable_and_zero_outputs": true,
+    "alloc_map_free_and_name_operations_fail_explicitly": true,
+    "invalid_handles_and_arguments_distinguished": true,
+    "actual_m0250_tile_ems_gate_returns_noems_fallback": true,
+    "actual_m19dc_ems_cache_gate_returns_plain_path": true,
+    "actual_m19dc_plain_file_read_matches_same_file_bytes": true,
+    "no_ems_map_or_page_cache_path_reached": true
+  },
+  "oracle_service_note": "No fresh Unicorn DOS INT 21h/67h run: tools/behavior.py deliberately rejects unmodeled interrupts. The no-device file-open failure path is source-traced from m195A.asm; no EMS interrupt result is invented.",
+  "claim_limit": "Native no-EMS host contract and actual caller fallback only; not EMS hardware emulation or a DOS differential claim."
+}

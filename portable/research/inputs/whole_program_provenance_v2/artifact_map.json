@@ -1,0 +1,67 @@
+{
+  "schema": "simant-whole-program-provenance-input-map-v1",
+  "claim": "Maps retained inputs and explicitly records unavailable ignored build artifacts for the frozen v2 provenance/partial-link receipt.",
+  "receipt": {
+    "path": "portable/research/whole_program_unprovided_owners_v2.json",
+    "sha256": "ff91c70e7d1458816e9a10d69945e2d87d0510fd5ebeb4bf8c391028f29229ae"
+  },
+  "retained_inputs": [
+    {
+      "role": "base primitive-view plan JSON",
+      "path": "portable/research/inputs/whole_program_provenance_v2/base_plan.json",
+      "sha256": "d50da60020111161531d3ea302a71d1fd05c1605e3e2c96123357dc2197fb106",
+      "size_bytes": 1424769,
+      "reproduction_note": "Byte-identical copy of the originally consumed ignored build/workers/whole_program/provenance_v2/base_plan.json."
+    },
+    {
+      "role": "base plan Markdown",
+      "path": "portable/research/inputs/whole_program_provenance_v2/base_plan.md",
+      "sha256": "e6c335bbfdcf70bb5057c32b4e03e40b5d70bbea18f840170509186963564f86",
+      "size_bytes": 10601
+    },
+    {
+      "role": "frozen manifest",
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "status": "retained"
+    },
+    {
+      "role": "frozen symbols",
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "status": "retained"
+    },
+    {
+      "role": "five exact OMF provider source/object pins",
+      "path": "portable/research/whole_program_unprovided_owners_v2.json#/inputs/exact_omf_modules",
+      "status": "retained in report and validated against the frozen manifest"
+    }
+  ],
+  "historical_ignored_artifacts": [
+    {
+      "role": "v2 provenance migration snapshot",
+      "original_path": "build/workers/whole_program/generated/migration.json",
+      "required_sha256": "cbe81f3ed0fea207dd48050c5bf51d774cd0e8ab9caac8e0352e87921f0f4345",
+      "status": "unavailable; central refresh overwrote the ignored path",
+      "replacement_policy": "Do not substitute a later migration as if it were this input. A new receipt must identify its own current migration."
+    },
+    {
+      "role": "v2 partial-link baseline object",
+      "original_path": "build/workers/whole_program/generated/whole_program_core.o",
+      "required_sha256": "d5a56b0b9499442dddc2136098a4c64d285b01402bc34c337c0eebbadb07d4ec",
+      "status": "unavailable; central refresh overwrote the ignored path",
+      "replacement_policy": "The v2 partial-link count remains a historical diagnostic. Recompute only under a separate receipt tied to a retained current object graph."
+    },
+    {
+      "role": "v2 migration module/native object graph",
+      "original_path": "build/workers/whole_program/generated/",
+      "required_migration_sha256": "cbe81f3ed0fea207dd48050c5bf51d774cd0e8ab9caac8e0352e87921f0f4345",
+      "status": "not archived; paths have been refreshed and no matching migration snapshot remains under build/ or portable/"
+    }
+  ],
+  "reproducibility": {
+    "candidate_and_source_provenance": "Reproducible from retained report/base plan/frozen source, manifest, symbols, and exact OMF provider pins, subject to the report's recorded compiler/toolchain inputs.",
+    "old_partial_link_diagnostic": "Not reproducible from this checkout because the exact old migration and baseline object were overwritten before they were archived.",
+    "historical_report": "Preserved unchanged; unavailable ignored inputs are not reconstructed or silently replaced."
+  }
+}

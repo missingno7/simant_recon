@@ -1,0 +1,56 @@
+{
+  "schema": "whole-program-asm-utilities-native-v1",
+  "status": "NATIVE_CONTROLS_PASS_DOS_DIFFERENTIAL_NOT_RUN",
+  "source_modules": {
+    "src/root/m1959.asm": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+    "src/root/m24FA.asm": "e538d0a8df93c3bd7ba3aabccc9a48faa6f643b7f8489c3c379c0d23ad9ac412",
+    "src/root/m2650.asm": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8"
+  },
+  "caller_sources": {
+    "src/root/m0000.c": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+    "src/root/m23E6.c": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+    "src/root/m24AB.c": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+    "src/root/m25E7.c": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530"
+  },
+  "implementation": {
+    "portable/whole_program/algorithms/asm_utilities.c": "8ab2648e20946bf48984837faeab7be4b4d48283993b8253c7b5be4e7f1c090d",
+    "portable/whole_program/algorithms/asm_utilities.h": "e7bb7cc837ca6d0c98458da941f7fac76319ada1ad71f0430ef887369010b322",
+    "portable/tests/whole_program/asm_utilities_probe.c": "2913ffb7336dec6d3d31e1de5913c3a80b4eb3c4df02f1ed4a56ee252ab88534",
+    "build/workers/asm_utilities_probe_final.exe": "9b05369432d2bb87b288b7182ae156c506fed7f596ada84296fc22dc46c6a311"
+  },
+  "reused_dos_oracle_evidence": {
+    "portable/tests/render/evidence/dos-render-differential.json": "948048171adb38ec3a6f7a2acdcba26972d247eef04d4c1060af0ec561d01fd0",
+    "scope": "Existing direct DOS comparison for font_MakeImage + f_2650_000F. Diagnostic-only status; reused as prior evidence, not rerun here."
+  },
+  "native_control": {
+    "command": "gcc -std=c11 -Wall -Wextra -Werror -O2 -Iportable/whole_program/algorithms portable/whole_program/algorithms/asm_utilities.c portable/tests/whole_program/asm_utilities_probe.c",
+    "compiler": "GCC 12.2.0 (MSYS2 Rev10)",
+    "result": "PASS",
+    "coverage": [
+      "all 65,536 uint16_t input values for the word byte-swap",
+      "boundary and mixed-byte uint32_t byte-swap vectors",
+      "descending byte search: first address, later match, miss, and single-byte span",
+      "2-bit-byte table expansion: two rows with partial final source-byte groups and destination canaries",
+      "byte inversion: count 1..3 and zero count meaning 65,536 byte LOOP iterations",
+      "positive byte clear with sentinels before and after the changed range"
+    ]
+  },
+  "source_contracts": {
+    "f_1959_0002": "mov ax,[bp+6]; xchg al,ah; return. Maps to simant_dos_swap_word.",
+    "f_1959_000C": "loads the low argument word into AX and high word into DX, swaps each word's bytes, returning DX:AX. Maps to simant_dos_swap_dword.",
+    "f_24FA_0004": "STD; REPNE SCASB scans from ES:DI toward lower addresses, CLD restores direction, and the result is the matching address. Portable admitted domain is a valid contiguous native object ending at start and positive count; zero count is excluded because the original leaves ZF dependent on incoming flags.",
+    "f_24FA_0029": "For admitted positive int16 width/height, DX=ceil(width/2) is the output bytes per row. Four 2-bit groups per source byte are read MSB-first and table-map to FF,F0,0F,00; only ceil(DX/4) source bytes are consumed per row, with unused low groups ignored. This is a byte-transform contract and makes no claim about visual geometry.",
+    "f_24FA_00A0": "NOT byte [ES:DI]; STOSB; LOOP. For CX=0 LOOP performs 65,536 iterations; the public adapter preserves that behavior and requires a matching writable span.",
+    "f_2650_0107": "word clear plus odd-byte clear. Positive counts map to simant_dos_clear_bytes. Zero count decrements DI and writes one byte before the supplied pointer; that out-of-object case is explicitly outside the portable API.",
+    "f_2650_000F": "Not duplicated: existing portable/render/font.c glyph raster is compared against font_MakeImage + original f_2650_000F in portable/tests/render/evidence/dos-render-differential.json, whose pinned status remains diagnostic only."
+  },
+  "withheld": {
+    "f_24FA_00B5": "INT 3 breakpoint trap remains unimplemented as a portable utility."
+  },
+  "limitations": [
+    "This probe validates portable controls against the inspected assembly instructions; it does not execute the original DOS functions.",
+    "Reverse search assumes the caller supplies a valid native allocation spanning the backward search domain; DOS segment wrap/alias behavior is not modeled. Zero count and null pointer fail explicitly at the original-name adapter boundary.",
+    "The packed expansion is byte-for-byte instruction-derived and has native boundary controls, but was not run against an original DOS execution harness in this task. Null pointers and nonpositive dimensions fail explicitly at the original-name adapter boundary.",
+    "Positive-count clear is equivalent for its admitted caller domain; the original zero-count write-before-pointer behavior is intentionally not reproduced."
+  ]
+}

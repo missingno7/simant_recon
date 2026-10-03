@@ -1,0 +1,232 @@
+{
+  "schema": "simant-whole-program-asm-state-proof-v1",
+  "claim": "SOURCE_DERIVED_DIAGNOSTIC_ONLY: ASM scalar initialization and C DATA alias canonicalization; no integration/admission or runtime behavior claim",
+  "input_hashes_before": {
+    "build/workers/whole_program/generated/migration.json": "82005416e44cbcdbc9f6e9b56d8144e5286bbebbf4bb700488af607430e26b44",
+    "build/workers/whole_program/generated/root_m0250.c": "cc37e8d3a4c9a4ae633a42ca67f50f22e600f307e63802452a1ab30bae4f3293",
+    "build/workers/whole_program/generated/root_m15D9.c": "ff9575ce8f79ef6543eb769b4311169b61400f79b6c87a62df2ba18a8d64a049",
+    "build/workers/whole_program/generated/root_m15F8.c": "e397f0519285541115efb584dd46a700aa8e360dad9c175b183ccf8d2f18261e",
+    "build/workers/whole_program/generated/S04_m35F5.c": "9a1707cea8d15892f277983261494aa76df5c20ac94b8c900b7585021a5100d4",
+    "build/workers/whole_program/generated/S05_m35F5.c": "8a4aa312bd2a78935c9a49c5e4eeca64a50aae597c4a11210121add527aaf396",
+    "build/workers/whole_program/generated/S20_m39F1.c": "873eb8a8cf8a98b19c93f811661509037511e577b14e92b966f15c6e8541f201",
+    "build/workers/whole_program/generated/S22_m39C7.c": "dda9f01f84f29448e9c31a79f7f1df73f6c1450d9da27757381aba831fc6622b",
+    "build/workers/whole_program/generated/S22_m3BBD.c": "4540eb6bc5cc0a93728d80186186ea21cd4acc954db62ec4a22987026b386dc8",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "portable/tests/recovered/whole_program_asm_state/run_proof.py": "b65419427b1fa55baf1d4c800b41bd9b8edbab49e900c15fab842f005cc46db9",
+    "portable/tools/asm_state_provider.py": "2c2ac44ac0d0fa52cd926bae6c8e737299170206647e43582be64cd7cb370a74",
+    "portable/tools/source_state_aliases.py": "2b2e5762bed3382f07bc4d607694a0eaca4875846ff25655423beb23a9fc00e5",
+    "portable/whole_program/state/asm_shared_state.c": "4a4450e1db8c6bd89e7a1e1a5cd8be3d88fa947d7cb2aa9cfb8ff18eceef8386",
+    "portable/whole_program/state/asm_shared_state.h": "f3177c6e6c2c1c5be0a3401bee57654061ef1d877f56dcb7ecc65ea1a385c8b8",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m15D9.c": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/root/m195A.asm": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+    "src/S04/m35F5.c": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+    "src/S05/m35F5.c": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+    "src/S20/m39F1.c": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/S22/m3BBD.c": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2"
+  },
+  "input_hashes_after": {
+    "build/workers/whole_program/generated/migration.json": "82005416e44cbcdbc9f6e9b56d8144e5286bbebbf4bb700488af607430e26b44",
+    "build/workers/whole_program/generated/root_m0250.c": "cc37e8d3a4c9a4ae633a42ca67f50f22e600f307e63802452a1ab30bae4f3293",
+    "build/workers/whole_program/generated/root_m15D9.c": "ff9575ce8f79ef6543eb769b4311169b61400f79b6c87a62df2ba18a8d64a049",
+    "build/workers/whole_program/generated/root_m15F8.c": "e397f0519285541115efb584dd46a700aa8e360dad9c175b183ccf8d2f18261e",
+    "build/workers/whole_program/generated/S04_m35F5.c": "9a1707cea8d15892f277983261494aa76df5c20ac94b8c900b7585021a5100d4",
+    "build/workers/whole_program/generated/S05_m35F5.c": "8a4aa312bd2a78935c9a49c5e4eeca64a50aae597c4a11210121add527aaf396",
+    "build/workers/whole_program/generated/S20_m39F1.c": "873eb8a8cf8a98b19c93f811661509037511e577b14e92b966f15c6e8541f201",
+    "build/workers/whole_program/generated/S22_m39C7.c": "dda9f01f84f29448e9c31a79f7f1df73f6c1450d9da27757381aba831fc6622b",
+    "build/workers/whole_program/generated/S22_m3BBD.c": "4540eb6bc5cc0a93728d80186186ea21cd4acc954db62ec4a22987026b386dc8",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "portable/tests/recovered/whole_program_asm_state/run_proof.py": "b65419427b1fa55baf1d4c800b41bd9b8edbab49e900c15fab842f005cc46db9",
+    "portable/tools/asm_state_provider.py": "2c2ac44ac0d0fa52cd926bae6c8e737299170206647e43582be64cd7cb370a74",
+    "portable/tools/source_state_aliases.py": "2b2e5762bed3382f07bc4d607694a0eaca4875846ff25655423beb23a9fc00e5",
+    "portable/whole_program/state/asm_shared_state.c": "4a4450e1db8c6bd89e7a1e1a5cd8be3d88fa947d7cb2aa9cfb8ff18eceef8386",
+    "portable/whole_program/state/asm_shared_state.h": "f3177c6e6c2c1c5be0a3401bee57654061ef1d877f56dcb7ecc65ea1a385c8b8",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m15D9.c": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/root/m195A.asm": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+    "src/S04/m35F5.c": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+    "src/S05/m35F5.c": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+    "src/S20/m39F1.c": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/S22/m3BBD.c": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2"
+  },
+  "current_input_changes": [],
+  "input_count": 25,
+  "provider_state_count": 3,
+  "canonical_alias_count": 7,
+  "canonical_storage_owners": [
+    "fd_55B3_1CD4",
+    "g_19C0",
+    "g_19C6",
+    "g_19CA",
+    "g_19CE"
+  ],
+  "controls": [
+    {
+      "name": "asm_public_scalar_positive",
+      "passed": true,
+      "names": [
+        "fd_55B3_360C",
+        "fd_55B3_3612",
+        "fd_55B3_3614"
+      ],
+      "addresses": {
+        "fd_55B3_360C": [
+          21939,
+          13836
+        ],
+        "fd_55B3_3612": [
+          21939,
+          13842
+        ],
+        "fd_55B3_3614": [
+          21939,
+          13844
+        ]
+      }
+    },
+    {
+      "name": "asm_pointer_and_width_negative",
+      "passed": true,
+      "excluded_pointer": "fd_55B3_360E",
+      "observed_directive": "dd",
+      "wrong_width_rejected": true
+    },
+    {
+      "name": "c_data_alias_address_negative",
+      "passed": true,
+      "changed_expected_offset": 6594,
+      "rejected": true
+    },
+    {
+      "name": "canonical_alias_transform_positive",
+      "passed": true,
+      "rewritten_alias_count": 6,
+      "storage_owners_created": 0,
+      "table_slot_uses": [
+        3,
+        4
+      ]
+    }
+  ],
+  "native_syntax_compile": {
+    "compiler": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "translation_units": [
+      {
+        "command": [
+          "C:\\msys64\\mingw64\\bin\\gcc.exe",
+          "-std=c11",
+          "-fsigned-char",
+          "-fno-builtin",
+          "-I",
+          "D:\\Prog\\simant_recon",
+          "-I",
+          "D:\\Prog\\simant_recon\\portable\\whole_program\\state",
+          "-I",
+          "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+          "-Werror=implicit-function-declaration",
+          "-c",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\asm_shared_state.c",
+          "-o",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\asm_shared_state.o"
+        ],
+        "returncode": 0,
+        "object_sha256": "dabf884af9b656f0471499e140316773a0e3feff8d551275c5197923ceb46d40",
+        "object_size": 527
+      },
+      {
+        "command": [
+          "C:\\msys64\\mingw64\\bin\\gcc.exe",
+          "-std=c11",
+          "-fsigned-char",
+          "-fno-builtin",
+          "-I",
+          "D:\\Prog\\simant_recon",
+          "-I",
+          "D:\\Prog\\simant_recon\\portable\\whole_program\\state",
+          "-I",
+          "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+          "-Werror=implicit-function-declaration",
+          "-c",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\m15D9_aliases.c",
+          "-o",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\m15D9_aliases.o"
+        ],
+        "returncode": 0,
+        "object_sha256": "2d32a8ad4207708addc1775dc324a06fdefeabbdb47042cdf0d056a338790370",
+        "object_size": 3349
+      },
+      {
+        "command": [
+          "C:\\msys64\\mingw64\\bin\\gcc.exe",
+          "-std=c11",
+          "-fsigned-char",
+          "-fno-builtin",
+          "-I",
+          "D:\\Prog\\simant_recon",
+          "-I",
+          "D:\\Prog\\simant_recon\\portable\\whole_program\\state",
+          "-I",
+          "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+          "-Werror=implicit-function-declaration",
+          "-c",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\m35F5_aliases.c",
+          "-o",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\m35F5_aliases.o"
+        ],
+        "returncode": 0,
+        "object_sha256": "f25a2ac4a4983bf493a191c226b0496cb287f17c911d1b9c37797313eb11aab2",
+        "object_size": 16442
+      },
+      {
+        "command": [
+          "C:\\msys64\\mingw64\\bin\\gcc.exe",
+          "-std=c11",
+          "-fsigned-char",
+          "-fno-builtin",
+          "-I",
+          "D:\\Prog\\simant_recon",
+          "-I",
+          "D:\\Prog\\simant_recon\\portable\\whole_program\\state",
+          "-I",
+          "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+          "-Werror=implicit-function-declaration",
+          "-c",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\m39F1_aliases.c",
+          "-o",
+          "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-asm-state-3bo25taq\\m39F1_aliases.o"
+        ],
+        "returncode": 0,
+        "object_sha256": "4fdd732c262890c477a5d042a77957442400ff0f53f9c03611e372526a55ea68",
+        "object_size": 9140
+      }
+    ],
+    "execution_claim": false
+  },
+  "boundaries": {
+    "asm_states": "Only PUBLIC literal scalar db/dw initializers whose parsed DGROUP offset plus accepted _DATA placement equals layout/symbols.json and migration views; three EMS scalar members.",
+    "c_aliases": "Four current missing scalar views map to initialized m0250 canonical globals by DOS-width source declaration offsets; two pointer views map to slots 3 and 4 of the initialized five-entry m15F8 table.",
+    "excluded": [
+      "EMS far-pointer fd_55B3_360E (dd/far pointer unsupported)",
+      "private ems_active",
+      "graphics driver state",
+      "font canvas/strides",
+      "audio scheduler/resource voices",
+      "input-owned state",
+      "resolved aliases absent from current migration missing contracts"
+    ],
+    "not_claimed": [
+      "No executable link",
+      "No DOS/native runtime comparison",
+      "No provider selection in production build",
+      "No pixel or resource-render equivalence"
+    ]
+  }
+}

@@ -1,0 +1,4412 @@
+{
+  "schema": "dos-dac-live-isr-differential-v1",
+  "status": "PASS",
+  "boundary": "native source-profile start/admission plus direct frozen f_28BC_0015 ISR calls; compare each source out_speaker AL and 8.8 cursors; no SDL, host-rate conversion, or acoustics claim",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "pins": {
+    "src/root/m28BC.asm": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+    "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+    "src/root/m290D.c": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+    "src/root/m295C.c": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+    "src/data/d55B3_00B8.c": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+    "assets/SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+    "assets/SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "modules": {
+    "portable/research/audio_voice_scheduler.c": "d04765178883d59798522ffd333e212135a5faf690f253afd3dcb6da898a6857",
+    "portable/research/audio_voice_scheduler.h": "ed15bfca02ce36b6283ed05b1f8a8bab2439c3a822847ec98a9d25247b8434c0",
+    "portable/research/audio_voice_admission.c": "3498084baabcb850245715490991b2cc7a599332d8ed09dd6b5e5760a09041e7",
+    "portable/tests/audio/voice_scheduler_isr_differential.py": "05c7e0bfb70d3638bc507cb090f91fc5b247e1b9432027b4a894dfccbba75eba"
+  },
+  "pit_divisor": 100,
+  "native_sample_rate_hz_approx": 11932,
+  "schedule": [
+    "SFX 1 at tick 0",
+    "SFX 2 at tick 20",
+    "SFX 55 at tick 45"
+  ],
+  "compared_ticks": 365,
+  "register_trace": [
+    {
+      "tick": 0,
+      "output": 128,
+      "positions": [
+        1,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 1,
+      "output": 128,
+      "positions": [
+        2,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 2,
+      "output": 128,
+      "positions": [
+        3,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 3,
+      "output": 134,
+      "positions": [
+        4,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 4,
+      "output": 146,
+      "positions": [
+        5,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 5,
+      "output": 150,
+      "positions": [
+        6,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 6,
+      "output": 135,
+      "positions": [
+        7,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 7,
+      "output": 119,
+      "positions": [
+        8,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 8,
+      "output": 112,
+      "positions": [
+        9,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 9,
+      "output": 116,
+      "positions": [
+        10,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 10,
+      "output": 125,
+      "positions": [
+        11,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 11,
+      "output": 134,
+      "positions": [
+        12,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 12,
+      "output": 143,
+      "positions": [
+        13,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 13,
+      "output": 140,
+      "positions": [
+        14,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 14,
+      "output": 125,
+      "positions": [
+        15,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 15,
+      "output": 117,
+      "positions": [
+        16,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 16,
+      "output": 124,
+      "positions": [
+        17,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 17,
+      "output": 130,
+      "positions": [
+        18,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 18,
+      "output": 137,
+      "positions": [
+        19,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 19,
+      "output": 141,
+      "positions": [
+        20,
+        0
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 20,
+      "output": 143,
+      "positions": [
+        21,
+        1
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 21,
+      "output": 121,
+      "positions": [
+        22,
+        2
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 22,
+      "output": 112,
+      "positions": [
+        23,
+        3
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 23,
+      "output": 121,
+      "positions": [
+        24,
+        4
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 24,
+      "output": 131,
+      "positions": [
+        25,
+        5
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 25,
+      "output": 138,
+      "positions": [
+        26,
+        6
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 26,
+      "output": 142,
+      "positions": [
+        27,
+        7
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 27,
+      "output": 139,
+      "positions": [
+        28,
+        8
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 28,
+      "output": 125,
+      "positions": [
+        29,
+        9
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 29,
+      "output": 106,
+      "positions": [
+        30,
+        10
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 30,
+      "output": 103,
+      "positions": [
+        31,
+        11
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 31,
+      "output": 113,
+      "positions": [
+        32,
+        12
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 32,
+      "output": 124,
+      "positions": [
+        33,
+        13
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 33,
+      "output": 137,
+      "positions": [
+        34,
+        14
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 34,
+      "output": 148,
+      "positions": [
+        35,
+        15
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 35,
+      "output": 140,
+      "positions": [
+        36,
+        16
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 36,
+      "output": 116,
+      "positions": [
+        37,
+        17
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 37,
+      "output": 100,
+      "positions": [
+        38,
+        18
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 38,
+      "output": 112,
+      "positions": [
+        39,
+        19
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 39,
+      "output": 137,
+      "positions": [
+        40,
+        20
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 40,
+      "output": 155,
+      "positions": [
+        41,
+        21
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 41,
+      "output": 160,
+      "positions": [
+        42,
+        22
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 42,
+      "output": 147,
+      "positions": [
+        43,
+        23
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 43,
+      "output": 132,
+      "positions": [
+        44,
+        24
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 44,
+      "output": 116,
+      "positions": [
+        45,
+        25
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 45,
+      "output": 195,
+      "positions": [
+        10,
+        26
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 46,
+      "output": 118,
+      "positions": [
+        20,
+        27
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 47,
+      "output": 83,
+      "positions": [
+        30,
+        28
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 48,
+      "output": 114,
+      "positions": [
+        40,
+        29
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 49,
+      "output": 142,
+      "positions": [
+        50,
+        30
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 50,
+      "output": 134,
+      "positions": [
+        60,
+        31
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 51,
+      "output": 115,
+      "positions": [
+        70,
+        32
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 52,
+      "output": 131,
+      "positions": [
+        80,
+        33
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 53,
+      "output": 165,
+      "positions": [
+        90,
+        34
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 54,
+      "output": 125,
+      "positions": [
+        100,
+        35
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 55,
+      "output": 148,
+      "positions": [
+        110,
+        36
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 56,
+      "output": 160,
+      "positions": [
+        120,
+        37
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 57,
+      "output": 129,
+      "positions": [
+        130,
+        38
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 58,
+      "output": 100,
+      "positions": [
+        140,
+        39
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 59,
+      "output": 108,
+      "positions": [
+        150,
+        40
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 60,
+      "output": 113,
+      "positions": [
+        161,
+        41
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 61,
+      "output": 160,
+      "positions": [
+        171,
+        42
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 62,
+      "output": 132,
+      "positions": [
+        181,
+        43
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 63,
+      "output": 128,
+      "positions": [
+        191,
+        44
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 64,
+      "output": 152,
+      "positions": [
+        201,
+        45
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 65,
+      "output": 163,
+      "positions": [
+        211,
+        46
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 66,
+      "output": 159,
+      "positions": [
+        221,
+        47
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 67,
+      "output": 156,
+      "positions": [
+        231,
+        48
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 68,
+      "output": 119,
+      "positions": [
+        241,
+        49
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 69,
+      "output": 174,
+      "positions": [
+        251,
+        50
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 70,
+      "output": 121,
+      "positions": [
+        261,
+        51
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 71,
+      "output": 114,
+      "positions": [
+        271,
+        52
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 72,
+      "output": 140,
+      "positions": [
+        281,
+        53
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 73,
+      "output": 150,
+      "positions": [
+        291,
+        54
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 74,
+      "output": 127,
+      "positions": [
+        301,
+        55
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 75,
+      "output": 109,
+      "positions": [
+        311,
+        56
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 76,
+      "output": 92,
+      "positions": [
+        322,
+        57
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 77,
+      "output": 161,
+      "positions": [
+        332,
+        58
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 78,
+      "output": 82,
+      "positions": [
+        342,
+        59
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 79,
+      "output": 52,
+      "positions": [
+        352,
+        60
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 80,
+      "output": 81,
+      "positions": [
+        362,
+        61
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 81,
+      "output": 122,
+      "positions": [
+        372,
+        62
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 82,
+      "output": 108,
+      "positions": [
+        382,
+        63
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 83,
+      "output": 85,
+      "positions": [
+        392,
+        64
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 84,
+      "output": 110,
+      "positions": [
+        402,
+        65
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 85,
+      "output": 175,
+      "positions": [
+        412,
+        66
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 86,
+      "output": 121,
+      "positions": [
+        422,
+        67
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 87,
+      "output": 88,
+      "positions": [
+        432,
+        68
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 88,
+      "output": 112,
+      "positions": [
+        442,
+        69
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 89,
+      "output": 137,
+      "positions": [
+        452,
+        70
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 90,
+      "output": 137,
+      "positions": [
+        462,
+        71
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 91,
+      "output": 117,
+      "positions": [
+        472,
+        72
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 92,
+      "output": 99,
+      "positions": [
+        483,
+        73
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 93,
+      "output": 169,
+      "positions": [
+        493,
+        74
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 94,
+      "output": 162,
+      "positions": [
+        503,
+        75
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 95,
+      "output": 137,
+      "positions": [
+        513,
+        76
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 96,
+      "output": 123,
+      "positions": [
+        523,
+        77
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 97,
+      "output": 131,
+      "positions": [
+        533,
+        78
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 98,
+      "output": 141,
+      "positions": [
+        543,
+        79
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 99,
+      "output": 135,
+      "positions": [
+        553,
+        80
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 100,
+      "output": 89,
+      "positions": [
+        563,
+        81
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 101,
+      "output": 120,
+      "positions": [
+        573,
+        82
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 102,
+      "output": 144,
+      "positions": [
+        583,
+        83
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 103,
+      "output": 145,
+      "positions": [
+        593,
+        84
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 104,
+      "output": 135,
+      "positions": [
+        603,
+        85
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 105,
+      "output": 142,
+      "positions": [
+        613,
+        86
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 106,
+      "output": 153,
+      "positions": [
+        623,
+        87
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 107,
+      "output": 169,
+      "positions": [
+        633,
+        88
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 108,
+      "output": 145,
+      "positions": [
+        644,
+        89
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 109,
+      "output": 144,
+      "positions": [
+        654,
+        90
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 110,
+      "output": 161,
+      "positions": [
+        664,
+        91
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 111,
+      "output": 165,
+      "positions": [
+        674,
+        92
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 112,
+      "output": 158,
+      "positions": [
+        684,
+        93
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 113,
+      "output": 152,
+      "positions": [
+        694,
+        94
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 114,
+      "output": 149,
+      "positions": [
+        704,
+        95
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 115,
+      "output": 166,
+      "positions": [
+        714,
+        96
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 116,
+      "output": 149,
+      "positions": [
+        724,
+        97
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 117,
+      "output": 109,
+      "positions": [
+        734,
+        98
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 118,
+      "output": 114,
+      "positions": [
+        744,
+        99
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 119,
+      "output": 127,
+      "positions": [
+        754,
+        100
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 120,
+      "output": 117,
+      "positions": [
+        764,
+        101
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 121,
+      "output": 97,
+      "positions": [
+        774,
+        102
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 122,
+      "output": 72,
+      "positions": [
+        784,
+        103
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 123,
+      "output": 79,
+      "positions": [
+        794,
+        104
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 124,
+      "output": 98,
+      "positions": [
+        805,
+        105
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 125,
+      "output": 67,
+      "positions": [
+        815,
+        106
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 126,
+      "output": 75,
+      "positions": [
+        825,
+        107
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 127,
+      "output": 95,
+      "positions": [
+        835,
+        108
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 128,
+      "output": 112,
+      "positions": [
+        845,
+        109
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 129,
+      "output": 109,
+      "positions": [
+        855,
+        110
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 130,
+      "output": 101,
+      "positions": [
+        865,
+        111
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 131,
+      "output": 85,
+      "positions": [
+        875,
+        112
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 132,
+      "output": 111,
+      "positions": [
+        885,
+        113
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 133,
+      "output": 67,
+      "positions": [
+        895,
+        114
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 134,
+      "output": 71,
+      "positions": [
+        905,
+        115
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 135,
+      "output": 99,
+      "positions": [
+        915,
+        116
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 136,
+      "output": 134,
+      "positions": [
+        925,
+        117
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 137,
+      "output": 141,
+      "positions": [
+        935,
+        118
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 138,
+      "output": 130,
+      "positions": [
+        945,
+        119
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 139,
+      "output": 126,
+      "positions": [
+        955,
+        120
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 140,
+      "output": 170,
+      "positions": [
+        966,
+        121
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 141,
+      "output": 120,
+      "positions": [
+        976,
+        122
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 142,
+      "output": 101,
+      "positions": [
+        986,
+        123
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 143,
+      "output": 121,
+      "positions": [
+        996,
+        124
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 144,
+      "output": 153,
+      "positions": [
+        1006,
+        125
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 145,
+      "output": 168,
+      "positions": [
+        1016,
+        126
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 146,
+      "output": 170,
+      "positions": [
+        1026,
+        127
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 147,
+      "output": 173,
+      "positions": [
+        1036,
+        128
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 148,
+      "output": 193,
+      "positions": [
+        1046,
+        129
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 149,
+      "output": 165,
+      "positions": [
+        1056,
+        130
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 150,
+      "output": 161,
+      "positions": [
+        1066,
+        131
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 151,
+      "output": 182,
+      "positions": [
+        1076,
+        132
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 152,
+      "output": 196,
+      "positions": [
+        1086,
+        133
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 153,
+      "output": 185,
+      "positions": [
+        1096,
+        134
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 154,
+      "output": 176,
+      "positions": [
+        1106,
+        135
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 155,
+      "output": 175,
+      "positions": [
+        1116,
+        136
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 156,
+      "output": 217,
+      "positions": [
+        1127,
+        137
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 157,
+      "output": 160,
+      "positions": [
+        1137,
+        138
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 158,
+      "output": 138,
+      "positions": [
+        1147,
+        139
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 159,
+      "output": 139,
+      "positions": [
+        1157,
+        140
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 160,
+      "output": 154,
+      "positions": [
+        1167,
+        141
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 161,
+      "output": 169,
+      "positions": [
+        1177,
+        142
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 162,
+      "output": 170,
+      "positions": [
+        1187,
+        143
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 163,
+      "output": 135,
+      "positions": [
+        1197,
+        144
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 164,
+      "output": 177,
+      "positions": [
+        1207,
+        145
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 165,
+      "output": 96,
+      "positions": [
+        1217,
+        146
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 166,
+      "output": 73,
+      "positions": [
+        1227,
+        147
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 167,
+      "output": 79,
+      "positions": [
+        1237,
+        148
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 168,
+      "output": 106,
+      "positions": [
+        1247,
+        149
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 169,
+      "output": 120,
+      "positions": [
+        1257,
+        150
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 170,
+      "output": 122,
+      "positions": [
+        1267,
+        151
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 171,
+      "output": 87,
+      "positions": [
+        1277,
+        152
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 172,
+      "output": 166,
+      "positions": [
+        1288,
+        153
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 173,
+      "output": 136,
+      "positions": [
+        1298,
+        154
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 174,
+      "output": 96,
+      "positions": [
+        1308,
+        155
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 175,
+      "output": 62,
+      "positions": [
+        1318,
+        156
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 176,
+      "output": 54,
+      "positions": [
+        1328,
+        157
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 177,
+      "output": 67,
+      "positions": [
+        1338,
+        158
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 178,
+      "output": 115,
+      "positions": [
+        1348,
+        159
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 179,
+      "output": 78,
+      "positions": [
+        1358,
+        160
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 180,
+      "output": 145,
+      "positions": [
+        1368,
+        161
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 181,
+      "output": 139,
+      "positions": [
+        1378,
+        162
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 182,
+      "output": 146,
+      "positions": [
+        1388,
+        163
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 183,
+      "output": 122,
+      "positions": [
+        1398,
+        164
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 184,
+      "output": 95,
+      "positions": [
+        1408,
+        165
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 185,
+      "output": 70,
+      "positions": [
+        1418,
+        166
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 186,
+      "output": 70,
+      "positions": [
+        1428,
+        167
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 187,
+      "output": 35,
+      "positions": [
+        1438,
+        168
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 188,
+      "output": 84,
+      "positions": [
+        1449,
+        169
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 189,
+      "output": 109,
+      "positions": [
+        1459,
+        170
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 190,
+      "output": 148,
+      "positions": [
+        1469,
+        171
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 191,
+      "output": 177,
+      "positions": [
+        1479,
+        172
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 192,
+      "output": 182,
+      "positions": [
+        1489,
+        173
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 193,
+      "output": 179,
+      "positions": [
+        1499,
+        174
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 194,
+      "output": 155,
+      "positions": [
+        1509,
+        175
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 195,
+      "output": 121,
+      "positions": [
+        1519,
+        176
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 196,
+      "output": 107,
+      "positions": [
+        1529,
+        177
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 197,
+      "output": 104,
+      "positions": [
+        1539,
+        178
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 198,
+      "output": 146,
+      "positions": [
+        1549,
+        179
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 199,
+      "output": 182,
+      "positions": [
+        1559,
+        180
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 200,
+      "output": 195,
+      "positions": [
+        1569,
+        181
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 201,
+      "output": 173,
+      "positions": [
+        1579,
+        182
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 202,
+      "output": 175,
+      "positions": [
+        1589,
+        183
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 203,
+      "output": 165,
+      "positions": [
+        1599,
+        184
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 204,
+      "output": 136,
+      "positions": [
+        1610,
+        185
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 205,
+      "output": 91,
+      "positions": [
+        1620,
+        186
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 206,
+      "output": 86,
+      "positions": [
+        1630,
+        187
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 207,
+      "output": 98,
+      "positions": [
+        1640,
+        188
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 208,
+      "output": 105,
+      "positions": [
+        1650,
+        189
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 209,
+      "output": 138,
+      "positions": [
+        1660,
+        190
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 210,
+      "output": 125,
+      "positions": [
+        1670,
+        191
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 211,
+      "output": 174,
+      "positions": [
+        1680,
+        192
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 212,
+      "output": 158,
+      "positions": [
+        1690,
+        193
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 213,
+      "output": 160,
+      "positions": [
+        1700,
+        194
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 214,
+      "output": 126,
+      "positions": [
+        1710,
+        195
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 215,
+      "output": 98,
+      "positions": [
+        1720,
+        196
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 216,
+      "output": 75,
+      "positions": [
+        1730,
+        197
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 217,
+      "output": 64,
+      "positions": [
+        1740,
+        198
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 218,
+      "output": 82,
+      "positions": [
+        1750,
+        199
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 219,
+      "output": 92,
+      "positions": [
+        1760,
+        200
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 220,
+      "output": 85,
+      "positions": [
+        1771,
+        201
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 221,
+      "output": 81,
+      "positions": [
+        1781,
+        202
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 222,
+      "output": 82,
+      "positions": [
+        1791,
+        203
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 223,
+      "output": 104,
+      "positions": [
+        1801,
+        204
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 224,
+      "output": 137,
+      "positions": [
+        1811,
+        205
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 225,
+      "output": 99,
+      "positions": [
+        1821,
+        206
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 226,
+      "output": 112,
+      "positions": [
+        1831,
+        207
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 227,
+      "output": 118,
+      "positions": [
+        1841,
+        208
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 228,
+      "output": 125,
+      "positions": [
+        1851,
+        209
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 229,
+      "output": 137,
+      "positions": [
+        1861,
+        210
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 230,
+      "output": 152,
+      "positions": [
+        1871,
+        211
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 231,
+      "output": 159,
+      "positions": [
+        1881,
+        212
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 232,
+      "output": 120,
+      "positions": [
+        1891,
+        213
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 233,
+      "output": 171,
+      "positions": [
+        1901,
+        214
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 234,
+      "output": 172,
+      "positions": [
+        1911,
+        215
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 235,
+      "output": 185,
+      "positions": [
+        1921,
+        216
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 236,
+      "output": 208,
+      "positions": [
+        1932,
+        217
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 237,
+      "output": 214,
+      "positions": [
+        1942,
+        218
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 238,
+      "output": 201,
+      "positions": [
+        1952,
+        219
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 239,
+      "output": 142,
+      "positions": [
+        1962,
+        220
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 240,
+      "output": 182,
+      "positions": [
+        1972,
+        221
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 241,
+      "output": 186,
+      "positions": [
+        1982,
+        222
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 242,
+      "output": 190,
+      "positions": [
+        1992,
+        223
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 243,
+      "output": 186,
+      "positions": [
+        2002,
+        224
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 244,
+      "output": 212,
+      "positions": [
+        2012,
+        225
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 245,
+      "output": 222,
+      "positions": [
+        2022,
+        226
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 246,
+      "output": 156,
+      "positions": [
+        2032,
+        227
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 247,
+      "output": 206,
+      "positions": [
+        2042,
+        228
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 248,
+      "output": 213,
+      "positions": [
+        2052,
+        229
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 249,
+      "output": 204,
+      "positions": [
+        2062,
+        230
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 250,
+      "output": 177,
+      "positions": [
+        2072,
+        231
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 251,
+      "output": 160,
+      "positions": [
+        2082,
+        232
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 252,
+      "output": 181,
+      "positions": [
+        2093,
+        233
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 253,
+      "output": 97,
+      "positions": [
+        2103,
+        234
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 254,
+      "output": 75,
+      "positions": [
+        2113,
+        235
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 255,
+      "output": 104,
+      "positions": [
+        2123,
+        236
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 256,
+      "output": 99,
+      "positions": [
+        2133,
+        237
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 257,
+      "output": 129,
+      "positions": [
+        2143,
+        238
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 258,
+      "output": 128,
+      "positions": [
+        2153,
+        239
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 259,
+      "output": 103,
+      "positions": [
+        2163,
+        240
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 260,
+      "output": 96,
+      "positions": [
+        2173,
+        241
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 261,
+      "output": 67,
+      "positions": [
+        2183,
+        242
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 262,
+      "output": 55,
+      "positions": [
+        2193,
+        243
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 263,
+      "output": 20,
+      "positions": [
+        2203,
+        244
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 264,
+      "output": 13,
+      "positions": [
+        2213,
+        245
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 265,
+      "output": 22,
+      "positions": [
+        2223,
+        246
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 266,
+      "output": 30,
+      "positions": [
+        2233,
+        247
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 267,
+      "output": 68,
+      "positions": [
+        2243,
+        248
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 268,
+      "output": 84,
+      "positions": [
+        2254,
+        249
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 269,
+      "output": 83,
+      "positions": [
+        2264,
+        250
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 270,
+      "output": 93,
+      "positions": [
+        2274,
+        251
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 271,
+      "output": 112,
+      "positions": [
+        2284,
+        252
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 272,
+      "output": 114,
+      "positions": [
+        2294,
+        253
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 273,
+      "output": 147,
+      "positions": [
+        2304,
+        254
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 274,
+      "output": 148,
+      "positions": [
+        2314,
+        255
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 275,
+      "output": 128,
+      "positions": [
+        2324,
+        256
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 276,
+      "output": 121,
+      "positions": [
+        2334,
+        257
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 277,
+      "output": 113,
+      "positions": [
+        2344,
+        258
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 278,
+      "output": 100,
+      "positions": [
+        2354,
+        259
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 279,
+      "output": 126,
+      "positions": [
+        2364,
+        260
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 280,
+      "output": 99,
+      "positions": [
+        2374,
+        261
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 281,
+      "output": 74,
+      "positions": [
+        2384,
+        262
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 282,
+      "output": 79,
+      "positions": [
+        2394,
+        263
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 283,
+      "output": 101,
+      "positions": [
+        2404,
+        264
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 284,
+      "output": 109,
+      "positions": [
+        2415,
+        265
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 285,
+      "output": 160,
+      "positions": [
+        2425,
+        266
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 286,
+      "output": 161,
+      "positions": [
+        2435,
+        267
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 287,
+      "output": 224,
+      "positions": [
+        2445,
+        268
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 288,
+      "output": 188,
+      "positions": [
+        2455,
+        269
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 289,
+      "output": 164,
+      "positions": [
+        2465,
+        270
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 290,
+      "output": 152,
+      "positions": [
+        2475,
+        271
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 291,
+      "output": 145,
+      "positions": [
+        2485,
+        272
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 292,
+      "output": 130,
+      "positions": [
+        2495,
+        273
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 293,
+      "output": 109,
+      "positions": [
+        2505,
+        274
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 294,
+      "output": 145,
+      "positions": [
+        2515,
+        275
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 295,
+      "output": 132,
+      "positions": [
+        2525,
+        276
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 296,
+      "output": 125,
+      "positions": [
+        2535,
+        277
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 297,
+      "output": 131,
+      "positions": [
+        2545,
+        278
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 298,
+      "output": 151,
+      "positions": [
+        2555,
+        279
+      ],
+      "fractions": [
+        224,
+        0
+      ]
+    },
+    {
+      "tick": 299,
+      "output": 105,
+      "positions": [
+        2565,
+        280
+      ],
+      "fractions": [
+        240,
+        0
+      ]
+    },
+    {
+      "tick": 300,
+      "output": 120,
+      "positions": [
+        2576,
+        281
+      ],
+      "fractions": [
+        0,
+        0
+      ]
+    },
+    {
+      "tick": 301,
+      "output": 107,
+      "positions": [
+        2586,
+        282
+      ],
+      "fractions": [
+        16,
+        0
+      ]
+    },
+    {
+      "tick": 302,
+      "output": 98,
+      "positions": [
+        2596,
+        283
+      ],
+      "fractions": [
+        32,
+        0
+      ]
+    },
+    {
+      "tick": 303,
+      "output": 68,
+      "positions": [
+        2606,
+        284
+      ],
+      "fractions": [
+        48,
+        0
+      ]
+    },
+    {
+      "tick": 304,
+      "output": 104,
+      "positions": [
+        2616,
+        285
+      ],
+      "fractions": [
+        64,
+        0
+      ]
+    },
+    {
+      "tick": 305,
+      "output": 91,
+      "positions": [
+        2626,
+        286
+      ],
+      "fractions": [
+        80,
+        0
+      ]
+    },
+    {
+      "tick": 306,
+      "output": 68,
+      "positions": [
+        2636,
+        287
+      ],
+      "fractions": [
+        96,
+        0
+      ]
+    },
+    {
+      "tick": 307,
+      "output": 103,
+      "positions": [
+        2646,
+        288
+      ],
+      "fractions": [
+        112,
+        0
+      ]
+    },
+    {
+      "tick": 308,
+      "output": 101,
+      "positions": [
+        2656,
+        289
+      ],
+      "fractions": [
+        128,
+        0
+      ]
+    },
+    {
+      "tick": 309,
+      "output": 98,
+      "positions": [
+        2666,
+        290
+      ],
+      "fractions": [
+        144,
+        0
+      ]
+    },
+    {
+      "tick": 310,
+      "output": 111,
+      "positions": [
+        2676,
+        291
+      ],
+      "fractions": [
+        160,
+        0
+      ]
+    },
+    {
+      "tick": 311,
+      "output": 113,
+      "positions": [
+        2686,
+        292
+      ],
+      "fractions": [
+        176,
+        0
+      ]
+    },
+    {
+      "tick": 312,
+      "output": 107,
+      "positions": [
+        2696,
+        293
+      ],
+      "fractions": [
+        192,
+        0
+      ]
+    },
+    {
+      "tick": 313,
+      "output": null,
+      "positions": [
+        2706,
+        293
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 314,
+      "output": 112,
+      "positions": [
+        2706,
+        294
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 315,
+      "output": 108,
+      "positions": [
+        2706,
+        295
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 316,
+      "output": 121,
+      "positions": [
+        2706,
+        296
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 317,
+      "output": 129,
+      "positions": [
+        2706,
+        297
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 318,
+      "output": 131,
+      "positions": [
+        2706,
+        298
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 319,
+      "output": 144,
+      "positions": [
+        2706,
+        299
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 320,
+      "output": 152,
+      "positions": [
+        2706,
+        300
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 321,
+      "output": 155,
+      "positions": [
+        2706,
+        301
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 322,
+      "output": 161,
+      "positions": [
+        2706,
+        302
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 323,
+      "output": 167,
+      "positions": [
+        2706,
+        303
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 324,
+      "output": 169,
+      "positions": [
+        2706,
+        304
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 325,
+      "output": 164,
+      "positions": [
+        2706,
+        305
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 326,
+      "output": 168,
+      "positions": [
+        2706,
+        306
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 327,
+      "output": 181,
+      "positions": [
+        2706,
+        307
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 328,
+      "output": 189,
+      "positions": [
+        2706,
+        308
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 329,
+      "output": 191,
+      "positions": [
+        2706,
+        309
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 330,
+      "output": 191,
+      "positions": [
+        2706,
+        310
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 331,
+      "output": 191,
+      "positions": [
+        2706,
+        311
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 332,
+      "output": 191,
+      "positions": [
+        2706,
+        312
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 333,
+      "output": 190,
+      "positions": [
+        2706,
+        313
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 334,
+      "output": 191,
+      "positions": [
+        2706,
+        314
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 335,
+      "output": 184,
+      "positions": [
+        2706,
+        315
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 336,
+      "output": 169,
+      "positions": [
+        2706,
+        316
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 337,
+      "output": 155,
+      "positions": [
+        2706,
+        317
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 338,
+      "output": 148,
+      "positions": [
+        2706,
+        318
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 339,
+      "output": 138,
+      "positions": [
+        2706,
+        319
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 340,
+      "output": 133,
+      "positions": [
+        2706,
+        320
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 341,
+      "output": 131,
+      "positions": [
+        2706,
+        321
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 342,
+      "output": 128,
+      "positions": [
+        2706,
+        322
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 343,
+      "output": 123,
+      "positions": [
+        2706,
+        323
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 344,
+      "output": 108,
+      "positions": [
+        2706,
+        324
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 345,
+      "output": 94,
+      "positions": [
+        2706,
+        325
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 346,
+      "output": 84,
+      "positions": [
+        2706,
+        326
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 347,
+      "output": 70,
+      "positions": [
+        2706,
+        327
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 348,
+      "output": 76,
+      "positions": [
+        2706,
+        328
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 349,
+      "output": 76,
+      "positions": [
+        2706,
+        329
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 350,
+      "output": 74,
+      "positions": [
+        2706,
+        330
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 351,
+      "output": 83,
+      "positions": [
+        2706,
+        331
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 352,
+      "output": 87,
+      "positions": [
+        2706,
+        332
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 353,
+      "output": 93,
+      "positions": [
+        2706,
+        333
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 354,
+      "output": 88,
+      "positions": [
+        2706,
+        334
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 355,
+      "output": 86,
+      "positions": [
+        2706,
+        335
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 356,
+      "output": 92,
+      "positions": [
+        2706,
+        336
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 357,
+      "output": 83,
+      "positions": [
+        2706,
+        337
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 358,
+      "output": 81,
+      "positions": [
+        2706,
+        338
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 359,
+      "output": 89,
+      "positions": [
+        2706,
+        339
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 360,
+      "output": 89,
+      "positions": [
+        2706,
+        340
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 361,
+      "output": 85,
+      "positions": [
+        2706,
+        341
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 362,
+      "output": 90,
+      "positions": [
+        2706,
+        342
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 363,
+      "output": 92,
+      "positions": [
+        2706,
+        343
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    },
+    {
+      "tick": 364,
+      "output": 95,
+      "positions": [
+        2706,
+        344
+      ],
+      "fractions": [
+        208,
+        0
+      ]
+    }
+  ]
+}

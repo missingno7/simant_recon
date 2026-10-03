@@ -1,0 +1,4516 @@
+{
+  "claim": "Fresh original-source OMF communal inventory for withheld FAR_BSS candidates only. No owner is emitted or accepted by this receipt.",
+  "complete_inventory": false,
+  "controls": {
+    "negative": {
+      "no_owner_without_exact_gap_and_primitive": true,
+      "object_mismatch_cannot_contribute_comdef": true
+    },
+    "passed": false,
+    "positive": {
+      "module_object_matches_manifest_before_communal_use": false,
+      "only_far_comdefs_collected": true
+    }
+  },
+  "execution": {
+    "exact_accepted_object_matches": 42,
+    "far_communal_records_for_target_names": 0,
+    "far_communal_symbol_names": 0,
+    "modules_compiled": 64,
+    "rejected_or_failed_modules": [
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "ae600f1831a7df31032a6ef4e209a67f033fd4f86c5d7eeb7bc913a400aae478",
+        "communals": [],
+        "module": "S07:35F5",
+        "recompiled_object_sha256": "bcf5250d57860599cbf3ded1973c1935598039cc75d96ad520bbc7dddbae0a87",
+        "source": "src/S07/m35F5.c",
+        "source_sha256": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "3d118ef193d612f02babb14ec79490cc90478bc6d29380f856384433301d5451",
+        "communals": [],
+        "module": "S10:35F5",
+        "recompiled_object_sha256": "982b4f0428f04b8760c99617c0013f76f6dd7b76c9958fe3889df23e06010f73",
+        "source": "src/S10/m35F5.c",
+        "source_sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "8281fd4e1c3784b0fd5eeb83387cadd4816a20eaeb5af2fc63a152a1e6ca4c6a",
+        "communals": [],
+        "module": "S11:35F5",
+        "recompiled_object_sha256": "8b88a676a5b60a356cd3a728765dfb6c54029533b456e8539f378b703b138dd3",
+        "source": "src/S11/m35F5.c",
+        "source_sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "4aa72fa30f239db14435849c4ada63346555c00101aa1fad5c92700cad0b5dde",
+        "communals": [],
+        "module": "S15:384C",
+        "recompiled_object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+        "source": "src/S15/m384C.c",
+        "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "a5ca522cb755a68e4c3074ce6b3c293bb1f80570807c19286d0c561e57b7ec3b",
+        "communals": [],
+        "module": "S20:39F1",
+        "recompiled_object_sha256": "6f0334b6d710e641050361262f5930751a35d55c1a00b380db811246f0bfdc3e",
+        "source": "src/S20/m39F1.c",
+        "source_sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "e6c9605c0aa5ff2b00362fee934560ace869ccd2e03019c721b79e884b049c54",
+        "communals": [],
+        "module": "S24:39C7",
+        "recompiled_object_sha256": "6aa83db77370b27b915ca1f5bfcc22330792856488c0e602c8858919590f01f7",
+        "source": "src/S24/m39C7.c",
+        "source_sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "9ebd600c9c7e7fb49a79a149a8dbb735c1dc17a27a37f590fda708a77c63b643",
+        "communals": [],
+        "module": "root:004A",
+        "recompiled_object_sha256": "0bbf51d981af866677af88275da0b6697bfaf345970a06b385b36cd0dc017474",
+        "source": "src/root/m004A.c",
+        "source_sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "a791667d175ea975cc03044990b6f1c4c2f704d1bedcac72d8735bbc99d63abb",
+        "communals": [],
+        "module": "root:00F8",
+        "recompiled_object_sha256": "7f4c42fa2073a32a27d27f4e0a4e9037a018f9d7eca98f138e07a14b41b27450",
+        "source": "src/root/m00F8.c",
+        "source_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "fb0aa2cc19e17b66bf88280081fbfa6902aad1a1dc1da90b734b5b845072f0ce",
+        "communals": [],
+        "module": "root:015B",
+        "recompiled_object_sha256": "d390c2d1ed85efa0ce257a71409e9eac688b65e4a8df7394f7baf2df3beade46",
+        "source": "src/root/m015B.c",
+        "source_sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "ac38049c39784dc1773d17423264acedad3e523ba84b5288cf46cc6c5b6ac131",
+        "communals": [],
+        "module": "root:0244",
+        "recompiled_object_sha256": "52bc9735c05e732f41b8c896341636b23375a3f04f314a49e9859b9964421c92",
+        "source": "src/root/m0244.c",
+        "source_sha256": "4af5c48bc82c52e82cbde616bab7606fdd0b61e38d72d8e53bd0e13a1df02a1a",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "4870ab1f2a0b9259d332af42c44799007006a9cd3dc2a97a090896221615e953",
+        "communals": [],
+        "module": "root:075B",
+        "recompiled_object_sha256": "ee39321ba20aa69fc35b27a0504dace223f7b90733d6b69208024e5c2e4bbfc6",
+        "source": "src/root/m075B.c",
+        "source_sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "ebf6df3bab232fd6aa0bc7e505d93cf2db45a586dbb2e966642f159db87e9622",
+        "communals": [],
+        "module": "root:0894",
+        "recompiled_object_sha256": "dbd3cd6239bf0d5b98edf6ba94365a3446bc5996252e3d0941bba60083d0fc5d",
+        "source": "src/root/m0894.c",
+        "source_sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "4f5e771e539d5f5004892ec25970255e36e2beb9424aeda63db9cf6dede1e0ad",
+        "communals": [],
+        "module": "root:0AD9",
+        "recompiled_object_sha256": "567bdd5f5e53768f1727bc541aa6dcef7a4435afa66acad4087891ffd5cffbe0",
+        "source": "src/root/m0AD9.c",
+        "source_sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "af6aece404a4672d7c21c93455e5b417afea582b37b83ff7cf60469f459608aa",
+        "communals": [],
+        "module": "root:0DEF",
+        "recompiled_object_sha256": "ff9620a506ee51a41614367ec77f2b80361c39e88e9db37dbb43cdf56718b274",
+        "source": "src/root/m0DEF.c",
+        "source_sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "1d1d712deb9dfc5eda4473a0db4e8567b6407e580466eb4a98e2ccaee9586210",
+        "communals": [],
+        "module": "root:0EC1",
+        "recompiled_object_sha256": "e57b15122526b0bebef4c369ce9a46b1d1f764829dbcd353958b51d5a3124f06",
+        "source": "src/root/m0EC1.c",
+        "source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "6c478937f2ec7716ed23349020ca10167ed99e9a98faa69e2814020a8c58842f",
+        "communals": [],
+        "module": "root:1383",
+        "recompiled_object_sha256": "8b3eed7b47d985f18eb4a08294963aadadd4f25637a426010430a2b847bc8e90",
+        "source": "src/root/m1383.c",
+        "source_sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "bd33edb97960c93d18369cc2af77a3263d1e13244f1f85c20e8aafbc26d41d1d",
+        "communals": [],
+        "module": "root:1E57",
+        "recompiled_object_sha256": "92b122ed23a64c561215bf0cdfbad1bbc528d59bd95b2c2e96ebf7ed4ba43edf",
+        "source": "src/root/m1E57.c",
+        "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "80a37735f4a05bdbf833188880966cfd87165d382fc98466e7f831e3d6e43809",
+        "communals": [],
+        "module": "root:1FD2",
+        "recompiled_object_sha256": "2bea1ccfce0fe4243e6664ef7e9bb07ed72431635867f0fd7e357398df841c7f",
+        "source": "src/root/m1FD2.c",
+        "source_sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "fd06e0952a1b7e4ac9a312b3f97def16c63ad44449e26edeae0ed83dcd89b404",
+        "communals": [],
+        "module": "root:218D",
+        "recompiled_object_sha256": "d463f5f5009ba642b71aacb92bbc95cab3eba152dba6acf546a561d4bd4da4af",
+        "source": "src/root/m218D.c",
+        "source_sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "12717d6bc27ddd23f7bb84a172f39310dce992a32deb7ce3fc500f18325c9633",
+        "communals": [],
+        "module": "root:2505",
+        "recompiled_object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+        "source": "src/root/m2505.c",
+        "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "a3c4ed914c71e2cb77db5b133c43a5b6589f2f79a996eb1e1e8aadb2e645caef",
+        "communals": [],
+        "module": "root:2662",
+        "recompiled_object_sha256": "c6c72752a671eb07c56017c441bb010064e8de40dedcbb788077715a174d58a1",
+        "source": "src/root/m2662.c",
+        "source_sha256": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+        "status": "object-hash-mismatch"
+      },
+      {
+        "accepted_object_match": false,
+        "accepted_object_sha256": "1b034912319ab8e1d9c7291209272a0ac1bc93e3be0edc4bcaef6a7e55a73691",
+        "communals": [],
+        "module": "root:284A",
+        "recompiled_object_sha256": "fe8acec4a8f3d81cc325993d13fa999f78c66243c515cea30386eea627722599",
+        "source": "src/root/m284A.c",
+        "source_sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+        "status": "object-hash-mismatch"
+      }
+    ]
+  },
+  "inputs": {
+    "compiler_driver_sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+    "compiler_profiles": {
+      "msc600a": null,
+      "msc600ax": null
+    },
+    "compiler_toolchain_sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+    "manifest": {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "omf_reader_sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "provenance_report": {
+      "path": "portable/research/whole_program_unprovided_owners_v2.json",
+      "sha256": "ff91c70e7d1458816e9a10d69945e2d87d0510fd5ebeb4bf8c391028f29229ae"
+    }
+  },
+  "inventory": {
+    "accepted_comdefs": {},
+    "candidate_group_results": [
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0000",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0000"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0150",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0150"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:01F0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_01F0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:01FE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "HealthR",
+          "fd_50F6_01FE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0200",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0200"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0202",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0202"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0208",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0208"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:020A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_020A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:020E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_020E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0210",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0210"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0212",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0212"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0218",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0218"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:021C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_021C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0220",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0220"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0224",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0224"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0226",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0226"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0228",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0228"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:022A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "FuzLocX"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:022C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_022C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:022E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_022E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0232",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "TilesDugR",
+          "fd_50F6_0232"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0234",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0234"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0238",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "FuzLocY"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:023A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_023A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:023E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_023E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0240",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0240"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0242",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0242"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0244",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0244"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0246",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0246"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0248",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "ChaseSpid"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:024E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_024E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0254",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0254"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0256",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0256"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:02BA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_02BA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:02BE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_02BE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:02C0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_02C0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0324",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0324"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0328",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0328"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:032C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_032C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:032E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "MapPlane",
+          "fd_50F6_032E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0330",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "BpopT",
+          "fd_50F6_0330"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0332",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0332"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0334",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0334"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:034C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_034C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0350",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "RpopT",
+          "fd_50F6_0350"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0352",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0352"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0356",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0356"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0358",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0358"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:035C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "YardMode",
+          "fd_50F6_035C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:035E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_035E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0360",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "AdviceStrs"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0366",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0366"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0368",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0368"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:036C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_036C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0370",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0370"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0376",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0376"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0378",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "ModeAuto",
+          "fd_50F6_0378"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:037C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_037C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:03E0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_03E0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:03E2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_03E2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0400",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0400"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0404",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0404"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0468",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0468"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:046A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_046A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:046C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_046C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0470",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0470"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0476",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0476"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0478",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0478"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:047A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_047A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:047E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_047E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0480",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "Barrier",
+          "fd_50F6_0480"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0482",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "casteLevels",
+          "fd_50F6_0482"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0488",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0488"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0490",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "RedLocX"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0492",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0492"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0494",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "RedLocY"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0498",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "RedPlane"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:049A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_049A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:049E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_049E",
+          "modeLevels"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04A4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04A4"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04A6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04A6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04BE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04BE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04C4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04C4"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04C6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04C6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04C8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04C8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04E0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04E0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04E2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04E2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04E4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04E4"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04E6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_04E6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04F2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04F2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04F4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_04F4"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:04F6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_04F6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0502",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0502"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0504",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0504"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0506",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0506"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0508",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0508"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0510",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0510"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0516",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0516"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0596",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0596"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:059E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_059E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:05A0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_05A0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0624",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0624"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0626",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0626"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:06A6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_06A6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:06AA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_06AA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:06AC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_06AC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:06AE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_06AE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:072E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_072E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0736",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0736"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:073A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_073A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:073C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_073C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:07BC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_07BC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:07C0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_07C0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:07C2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_07C2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:07C8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_07C8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:07CA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_07CA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:07CE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_07CE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:084E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_084E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0850",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0850"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0852",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0852"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0856",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0856"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08DA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_08DA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08DC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_08DC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08DE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_08DE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08E2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_08E2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08E8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_08E8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08EA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "InitialLions"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08EC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_08EC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:08F0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_08F0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0970",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0970"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:09F0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_09F0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:09F2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_09F2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:09FA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_09FA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A00",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0A00"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A02",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0A02"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A08",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "AntsEatenByLions"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A0A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0A0A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A8A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0A8A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A8E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0A8E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A90",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0A90"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A92",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "LionListX"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0A9E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0A9E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AA0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AA0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AA2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AA2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AA8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "LionListY"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AB2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AB2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AB6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AB6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0ABA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "LionListM"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AC4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AC4"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AC6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AC6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AC8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AC8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0ACC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "LionListS"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AD6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AD6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0ADA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0ADA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0ADE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "LionListT"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AE8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AE8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AEC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AEC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AF8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AF8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0AFA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0AFA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0B0A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0B0A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0B12",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0B12"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0B1E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0B1E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0B22",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0B22"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0C26",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0C26"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0C2A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0C2A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0C36",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "PillarSeg"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0C38",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0C38"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0C3C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "PillDir"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0C3E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0C3E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0D40",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0D40"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0D6C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0D6C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0D70",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0D70"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0D72",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0D72"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0D9C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "PillarMap"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0DA8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "ListIndexB",
+          "fd_50F6_0DA8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0EAA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "ListIndexR",
+          "fd_50F6_0EAA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0EAE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SowX"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0EF8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0EF8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0EFA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0EFA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0EFC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0EFC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F00",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SowY"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F08",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "Cycle",
+          "fd_50F6_0F08"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F0C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F0C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F0E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F0E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F12",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F12"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F1A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SowDir"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F20",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "BAntsEaten"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F26",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F26"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F28",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SowSave"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F30",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F30"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F34",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F34"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F3E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F3E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F42",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SuserX",
+          "fd_50F6_0F42"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F44",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0F44"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F46",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0F46"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F78",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "MeHealth",
+          "fd_50F6_0F78"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F7A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0F7A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F7E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SuserY",
+          "fd_50F6_0F7E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F80",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "RAntsEaten"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0F84",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0F84"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0FB8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SMode",
+          "fd_50F6_0FB8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0FBA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0FBA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0FBC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0FBC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0FC2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0FC2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0FC6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_0FC6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0FFC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "Starg",
+          "fd_50F6_0FFC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:0FFE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_0FFE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1000",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1000"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1004",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1004"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1006",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1006"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1008",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_1008"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:103C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_103C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1040",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1040"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1042",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "Scycle",
+          "fd_50F6_1042"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1044",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1044"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1048",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1048"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:104C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "CurExpTool",
+          "fd_50F6_104C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:104E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_104E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1050",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "FoodB",
+          "fd_50F6_1050"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1054",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "EatCnt",
+          "fd_50F6_1054"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1058",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1058"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:105A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SCorpseBase",
+          "fd_50F6_105A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:105C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_105C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:105E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_105E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1060",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "FoodR",
+          "fd_50F6_1060"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1066",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1066"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1068",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1068"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:106C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_106C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:106E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_106E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1072",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "Scycle2",
+          "fd_50F6_1072"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1074",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1074"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1076",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SpidBurpCnt",
+          "fd_50F6_1076"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1078",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1078"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:107E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_107E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1082",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1082"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1086",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1086"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:108A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "SpidRevenge",
+          "fd_50F6_108A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:108C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_108C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:108E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_108E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1094",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "StrategicModeB"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1096",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1096"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:109A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "DeathCnt",
+          "fd_50F6_109A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:109C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_109C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10A0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10A0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10A2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10A2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10A6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10A6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10A8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10A8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10AC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10AC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10AE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "StargLife",
+          "fd_50F6_10AE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10B0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10B0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10B2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10B2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10B4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10B4"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10B8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10B8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10BA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10BA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10BC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10BC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10BE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "HealthB",
+          "fd_50F6_10BE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10C0",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10C0"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10CC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10CC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10D2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10D2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10DA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10DA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10E2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10E2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10E6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10E6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10EA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10EA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:10EE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_10EE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1104",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1104"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:110C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_110C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:15C4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_15C4"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:1F26",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_1F26"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:37D6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_37D6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:37DE",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_37DE"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:37F2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_37F2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:37F6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_37F6"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:37FC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_37FC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:380E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_380E",
+          "triHeight"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3810",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_3810",
+          "triWidthL"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3812",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_3812",
+          "triWidthR"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3814",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_3814",
+          "triWidth"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3816",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3816"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3822",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3822"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3832",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3832",
+          "knobSize"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3836",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3836"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:383A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_383A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3842",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3842"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:384A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_384A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:385A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_385A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:385E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_385E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3862",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_3862"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:38B2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_38B2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:38C2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_38C2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3934",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3934"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3938",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3938"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:393C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_393C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3B48",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3B48"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3B4C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3B4C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3B50",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "db_handles",
+          "fd_50F6_3B50"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3B5C",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3B5C"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3B60",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3B60"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:3C14",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_3C14"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:46A8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_46A8"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:46BC",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_46BC"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:46D2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_46D2"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:46E2",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_46E2",
+          "win_colors"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:47D4",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_47D4",
+          "win_numOfGroups"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:47D6",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_47D6",
+          "win_numOfColors"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:47D8",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_47D8",
+          "win_numOfWindows"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:47DA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_47DA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4892",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_4892",
+          "win_offsets"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:49FA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_49FA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4A0A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_4A0A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4A1A",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_4A1A"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4A42",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_4A42"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4A4E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_4A4E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4B16",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_4B16"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4B28",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": false,
+        "names": [
+          "fd_50F6_4B28"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4B30",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_4B30"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4B42",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_4B42"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4B8E",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_4B8E"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      },
+      {
+        "accepted_comdefs": [],
+        "address": "50F6:4BAA",
+        "exact_gap_records": [],
+        "gap_size": null,
+        "integer_primitive_view": true,
+        "names": [
+          "fd_50F6_4BAA"
+        ],
+        "over_gap_records": [],
+        "ownership_candidate": false,
+        "ownership_limitation": "COMDEF size alone cannot create a typed owner; exact common size and complete compatible integer views are required"
+      }
+    ],
+    "exact_gap_addresses": [],
+    "exact_gap_group_count": 0,
+    "exact_gap_primitive_addresses": [],
+    "exact_gap_primitive_group_count": 0
+  },
+  "schema": "simant-farbss-comdef-audit-v1",
+  "targets": {
+    "candidate_groups": 318,
+    "candidate_names": 359,
+    "source_modules": 64,
+    "source_paths": [
+      "src/S04/m35F5.c",
+      "src/S05/m35F5.c",
+      "src/S05/m3663.c",
+      "src/S06/m35F5.c",
+      "src/S07/m35F5.c",
+      "src/S08/m35F5.c",
+      "src/S09/m35F5.c",
+      "src/S10/m35F5.c",
+      "src/S11/m35F5.c",
+      "src/S12/m384C.c",
+      "src/S13/m384C.c",
+      "src/S14/m384C.c",
+      "src/S15/m384C.c",
+      "src/S16/m384C.c",
+      "src/S17/m384C.c",
+      "src/S20/m39F1.c",
+      "src/S22/m39C7.c",
+      "src/S22/m3BBD.c",
+      "src/S24/m39C7.c",
+      "src/S25/m39C7.c",
+      "src/S25/m3BA4.c",
+      "src/S26/m39C7.c",
+      "src/data/d3D57.c",
+      "src/root/m0000.c",
+      "src/root/m004A.c",
+      "src/root/m00BA.c",
+      "src/root/m00F8.c",
+      "src/root/m015B.c",
+      "src/root/m0244.c",
+      "src/root/m0250.c",
+      "src/root/m075B.c",
+      "src/root/m0798.c",
+      "src/root/m0894.c",
+      "src/root/m0AD9.c",
+      "src/root/m0BE8.c",
+      "src/root/m0CDB.c",
+      "src/root/m0DEF.c",
+      "src/root/m0E2E.c",
+      "src/root/m0EC1.c",
+      "src/root/m0F3F.c",
+      "src/root/m10F7.c",
+      "src/root/m1383.c",
+      "src/root/m14EE.c",
+      "src/root/m15F8.c",
+      "src/root/m19DC.c",
+      "src/root/m1A53.c",
+      "src/root/m1E57.c",
+      "src/root/m1FD2.c",
+      "src/root/m208F.c",
+      "src/root/m20E8.c",
+      "src/root/m218D.c",
+      "src/root/m21FA.c",
+      "src/root/m22BF.c",
+      "src/root/m23AE.c",
+      "src/root/m23E6.c",
+      "src/root/m24AB.c",
+      "src/root/m2505.c",
+      "src/root/m2662.c",
+      "src/root/m277E.c",
+      "src/root/m2815.c",
+      "src/root/m284A.c",
+      "src/root/m290D.c",
+      "src/root/m293A.c",
+      "src/root/m295C.c"
+    ]
+  }
+}

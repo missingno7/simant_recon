@@ -1,0 +1,40 @@
+{
+  "status": "PASS_NATIVE_INTEGRATION",
+  "claim": "No fresh DOS equivalence or acceptance claim",
+  "inputs": {
+    "portable/tests/whole_program/run_runtime_rng.py": "f17536e9e288e3048972ce2ff5bf58dd88f0c0c15ee0b77f9cb837a063af5cba",
+    "portable/tests/whole_program/runtime_rng_probe.c": "7f2226fe059bc91ca3ceacf30256a056cd4dd6bde6c0b11bb84c2d5f5621f98c",
+    "build/workers/whole_program/generated/root_m0093.c": "ee4c105958db38167a2cc36e28a6eab92afa29816ecf6a980daa0d1598e6a4cb",
+    "build/workers/whole_program/generated/dos_types.h": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+    "portable/whole_program/platform/crt_rng.c": "26c9462315829ebf80e74ce2c470e7bc7b02e2f5f9f71a6889956d9e7c1f77ff",
+    "portable/whole_program/platform/crt_rng.h": "302263a678fa3f301596851bb3b90b1ec605b278baf4fcb4d0a3c15b7e5920fb",
+    "portable/whole_program/platform/dos_memory.h": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce",
+    "portable/game/simulation/rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+    "portable/game/simulation/rng.h": "fc68a178bb200dbc211232c39b05bc237a57771854917da59ef2ce7f57046712",
+    "portable/tests/rng/rng-dos-differential.json": "56cea5e8c2f4effcbe6baa0bef2738796622eca7fb8a5e0bff0e2988649eb9e0"
+  },
+  "inputs_stable": true,
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-fsigned-char",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "-Wl,--gc-sections",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\runtime-rng-v5\\probe.exe",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\runtime_rng_probe.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m0093.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\crt_rng.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c"
+  ],
+  "native_executable_sha256": "9732a5ca2d68a464149cfed7503dae1384b0f4fa12e2b4ba97127e2bd98c3885",
+  "output": "PASS: 8192 interleaved source/runtime streams, private seed isolation, restore, ordered startup warmup\n",
+  "streams": 8192,
+  "boundary": "Real source RRand and private SRand owner linked to actual native CRT runtime owner; scripted TickCount only",
+  "excluded": "Physical GetRRandSeed and divide-fault boundaries use abort-only link traps; never reached in this suite and never supply a result"
+}

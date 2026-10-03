@@ -1,0 +1,93 @@
+{
+  "schema": "native-startup-preflight-controls-v1",
+  "status": "PASS",
+  "source_pins_before_after": {
+    "portable/whole_program/platform/dos_io.h": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+    "portable/whole_program/platform/dos_io.c": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+    "portable/whole_program/platform/dos_files.h": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957",
+    "portable/whole_program/platform/startup_preflight.h": "178f20596ab55107bf94d67eeea57b431f60c43fea0685ca278183bbdd11e85d",
+    "portable/whole_program/platform/startup_preflight.c": "1eadd53026c8e237cac13b7fc46eef6cde400c2d7581bd9d7a2f5581c3c70bfe",
+    "portable/whole_program/platform/startup_host.h": "08f2cc6f2af0e56c16170e3c73197a083ac0b4475467056fc39cefa415f39f27",
+    "portable/whole_program/platform/startup_host.c": "359f00d964d6e5bbd92b6b3e27960bc81ed8cf4a6c9049747e6e87ffa2da8a1e",
+    "portable/whole_program/platform/tests/startup_preflight_test.c": "27e2552e6591c39d47753d2103632be8dc9cef833ae4ce3ea19fd47e9abcc37d",
+    "portable/whole_program/platform/tests/run_startup_preflight_tests.py": "bf7e5b4aaeba4ffc539837ae97d8e2680009107a92c8ccc87a2d300dcee56ac8",
+    "portable/whole_program/conversions/main_preflight.py": "a09148dcdf1028a16423fa0e8c4cdb5a4857540a75f218aad388cbecf39c1ba0",
+    "portable/whole_program/conversions/startup_bundle.py": "38054ee5338a2a36e0e3c9eb0f26a4cf46b793ebb3c696bdab700aa9dfa851ed",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/root/m00BA.c": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+    "src/root/m1A28.c": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+    "src/root/m1986.c": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+    "src/S20/m39F1.c": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+    "src/root/m19A9.c": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+    "src/root/m19DC.c": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+    "src/root/m208F.c": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+    "src/root/m277D.c": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+    "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+    "src/S15/m384C.c": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "portable/whole_program/conversions/startup.py": "6b2d6de7992655ce6e7d71256923c8e846629cd3dc86adcd7a51d2835e437da1",
+    "portable/whole_program/platform/startup_contract.md": "d48bd8c3bef637dd969c75f910b9cacac5702d68b37c06e4b54d45401b821aba",
+    "assets/INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\signal.h": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+    "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\dos.h": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+    "C:\\msys64\\mingw64\\include\\signal.h": "737e65e8e4c41c544e99e72ea7204d62aecaa72d5b13dce6d413311e0908c850"
+  },
+  "source_pins_stable": true,
+  "gcc": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "sha256_before": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "sha256_after": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version_before": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "version_after": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "stable": true
+  },
+  "oracle_asset": {
+    "path": "assets/INSTALL.EXE",
+    "sha256": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486",
+    "size": 24931
+  },
+  "controls": {
+    "strict_source_adapter_positive": true,
+    "strict_source_adapter_changed_anchor_rejected": true,
+    "actual_install_simultaneous_open_count": 5,
+    "actual_install_optional_headers": "absent: header.headers + 14 + 256 exceeds file length",
+    "missing_path_dos_error": 2,
+    "valid_control_file_retained_as_separate_live_fd": true,
+    "truncated_optional_block_rejected": true,
+    "closed_optional_descriptor_reuse_rejected_as_dos_error_9": true,
+    "bios_loop_retired_by_public_whole_program_adapter": true,
+    "strict_s15_anchor_rejected": true,
+    "windows_sigbreak_sigint_ignore_handlers_observed": true
+  },
+  "claim_limit": "Native platform contract controls only; no fresh original-DOS execution and no claim that historical stale-fd behavior is reproduced.",
+  "adapter": {
+    "schema": "whole-program-startup-conversion-v1",
+    "public_api": "startup_bundle.convert_startup_sources(main_text, s15_text)",
+    "sources": {
+      "src/root/m15F8.c": {
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+        "adapter": {
+          "kind": "MAIN_INSTALL_PREFLIGHT",
+          "source_path": "src\\root\\m15F8.c",
+          "source_sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+          "old_block_sha256": "e95b3ed5346ec2eed63f817b6beb55893090cdaaa31245dd6ba964e75e4a5613",
+          "new_block_sha256": "9aee1fc21cff29753c8fd96eddb6fdd673ff298f2705b25505046fa470e15ea9",
+          "policy": "Five simultaneous real opens remain; a closed descriptor number is never retained. Optional window headers require a separate real open and a bounded 256-byte region."
+        }
+      },
+      "src/S15/m384C.c": {
+        "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "retired_function_sha256": "972a80930c13e9d8892e2e22580a01bf36f78804e43dc79d06f09109cff62d5b"
+      }
+    },
+    "outputs": {
+      "src/root/m15F8.c": "5d539823f57aa6df279c2e48b376532edd447dd0aa4bc0f71d8705f06dc3cd36",
+      "src/S15/m384C.c": "1f8ab7d72a0d89b499cea8f1225b7df93e0d3447dbd94462846a99460d6bdc1c"
+    },
+    "boundaries": {
+      "install_probe": "Five real simultaneous INSTALL.EXE opens are preserved; only a separate bounded optional-header descriptor may survive.",
+      "interrupt_policy": "Numeric MSC SIGBREAK/SIGINT calls map to native SIGBREAK/SIGINT ignore policy.",
+      "bios_reset": "The physical INT 13h drive scan is retired through an explicit no-I/O host policy."
+    }
+  }
+}

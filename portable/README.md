@@ -6,6 +6,12 @@ Native work lives here. The DOS checkpoint preserves 1,611 EXACT functions and
 29 separately registered BEHAVIOR_EXACT contracts; it is not a 100% matching
 decompilation.
 
+The complete-game work now follows the [whole-program mechanical migration](docs/whole-program-migration.md).
+It converts every original C translation unit and targets the original startup
+and main loop with shared native platform services. Its relocatable core is
+under integration; it has not yet replaced the selected-module executable
+described below.
+
 The [source conversion policy](docs/source-porting-rules.md) keeps recovered
 game bodies and shared state as the authority. Mechanical type/pointer
 conversion and explicit platform services follow the Stunts/Empires port

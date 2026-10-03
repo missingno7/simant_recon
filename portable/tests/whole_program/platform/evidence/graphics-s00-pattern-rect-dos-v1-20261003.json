@@ -1,0 +1,2817 @@
+{
+  "schema": "simant-s00-patterned-rectangle-dos-native-v1",
+  "status": "PASS",
+  "scope": [
+    "source body o00_31AD_0122 through its no-overlay local _013A path",
+    "pattern data is read from original DATA g_41C0+16 in the DOS VM and passed as a view to native code",
+    "source VGA plane writes are normalized to indexed pixels only for this accepted GC mode/set-reset mask",
+    "bounded nonnegative 640x480 half-open rectangle fixtures and source pattern indices 0..15",
+    "does not claim overlay-resident rendering or a complete VGA device model"
+  ],
+  "compiler": "gcc",
+  "compiler_version": "gcc (Rev10, Built by MSYS2 project) 12.2.0",
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "compile_command": [
+    "gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-shared",
+    "-fPIC",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\graphics.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\graphics_line_1499.c",
+    "D:\\Prog\\simant_recon\\portable\\render\\primitives.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\platform\\graphics_s00_rect_probe.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\recovered_tick_proof\\graphics_s00_pattern.dll"
+  ],
+  "original_pattern_view_sha256": "bec135a336f10f7670f58ed2fd69c35615402d31dd2b8bbabe43da66d8147687",
+  "inputs_before_sha256": {
+    "portable/tests/whole_program/platform/run_graphics_s00_pattern_dos_diff.py": "ced7048deb9542a335d9acc2a5f728cb943ff84efe01212cd8d7162ded82d17d",
+    "portable/tests/whole_program/platform/graphics_s00_rect_probe.c": "5f02a6523c7f49c2f6286e344a5a0905319e30dd80216b81c442788bf8ad30d4",
+    "portable/whole_program/platform/graphics.h": "ee60b170963124ccce19dbb855f9f23bff4190ba8e38dc9b2a98ae9c8b53d16b",
+    "portable/whole_program/platform/graphics.c": "cbd6bce16d61961150bc217a8e1468ca0a0a24f41334c0943afee1c57b084b13",
+    "portable/whole_program/platform/graphics_line_1499.h": "bdade059afdc4ddbe1d64d2b436ba88530449315c3a456208efe58f1f45a3a10",
+    "portable/whole_program/platform/graphics_line_1499.c": "1eb0fc1924a834df78fc57b2441e2e7bbd336a7e28d2ff27d549ae01acd06949",
+    "portable/render/primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "src/S00/m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src/S00/m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848"
+  },
+  "inputs_after_sha256": {
+    "portable/tests/whole_program/platform/run_graphics_s00_pattern_dos_diff.py": "ced7048deb9542a335d9acc2a5f728cb943ff84efe01212cd8d7162ded82d17d",
+    "portable/tests/whole_program/platform/graphics_s00_rect_probe.c": "5f02a6523c7f49c2f6286e344a5a0905319e30dd80216b81c442788bf8ad30d4",
+    "portable/whole_program/platform/graphics.h": "ee60b170963124ccce19dbb855f9f23bff4190ba8e38dc9b2a98ae9c8b53d16b",
+    "portable/whole_program/platform/graphics.c": "cbd6bce16d61961150bc217a8e1468ca0a0a24f41334c0943afee1c57b084b13",
+    "portable/whole_program/platform/graphics_line_1499.h": "bdade059afdc4ddbe1d64d2b436ba88530449315c3a456208efe58f1f45a3a10",
+    "portable/whole_program/platform/graphics_line_1499.c": "1eb0fc1924a834df78fc57b2441e2e7bbd336a7e28d2ff27d549ae01acd06949",
+    "portable/render/primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "src/S00/m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src/S00/m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848"
+  },
+  "inputs_stable": true,
+  "case_count": 21,
+  "cases": [
+    {
+      "rect": [
+        1,
+        2,
+        5,
+        4
+      ],
+      "pattern_word": 32,
+      "pattern_index": 0,
+      "foreground": 5,
+      "background": 2,
+      "source_pixel_write_count": 8,
+      "source_first_pixel_writes": [
+        [
+          3,
+          2,
+          5
+        ],
+        [
+          1,
+          2,
+          5
+        ],
+        [
+          4,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          4,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          3,
+          2
+        ],
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      "normalized_frame_sha256_source": "c120c28179b52c5d47b967429bf922bc3c999806e2fab68d68ecb5ca13110726",
+      "normalized_frame_sha256_native": "c120c28179b52c5d47b967429bf922bc3c999806e2fab68d68ecb5ca13110726",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        7,
+        0,
+        19,
+        8
+      ],
+      "pattern_word": 35,
+      "pattern_index": 3,
+      "foreground": 5,
+      "background": 2,
+      "source_pixel_write_count": 96,
+      "source_first_pixel_writes": [
+        [
+          7,
+          0,
+          2
+        ],
+        [
+          7,
+          1,
+          2
+        ],
+        [
+          7,
+          2,
+          2
+        ],
+        [
+          7,
+          3,
+          2
+        ],
+        [
+          7,
+          4,
+          2
+        ],
+        [
+          7,
+          5,
+          2
+        ],
+        [
+          7,
+          6,
+          2
+        ],
+        [
+          7,
+          7,
+          2
+        ],
+        [
+          15,
+          0,
+          2
+        ],
+        [
+          14,
+          0,
+          2
+        ],
+        [
+          13,
+          0,
+          2
+        ],
+        [
+          12,
+          0,
+          2
+        ],
+        [
+          11,
+          0,
+          2
+        ],
+        [
+          10,
+          0,
+          2
+        ],
+        [
+          9,
+          0,
+          2
+        ],
+        [
+          8,
+          0,
+          2
+        ],
+        [
+          15,
+          1,
+          2
+        ],
+        [
+          14,
+          1,
+          2
+        ],
+        [
+          13,
+          1,
+          2
+        ],
+        [
+          12,
+          1,
+          2
+        ],
+        [
+          11,
+          1,
+          2
+        ],
+        [
+          10,
+          1,
+          2
+        ],
+        [
+          9,
+          1,
+          2
+        ],
+        [
+          8,
+          1,
+          2
+        ]
+      ],
+      "normalized_frame_sha256_source": "642eb3995782831c1317f2dfa61a53ec5d19c5ed1dcaa15bdcf2d6035dfc102a",
+      "normalized_frame_sha256_native": "642eb3995782831c1317f2dfa61a53ec5d19c5ed1dcaa15bdcf2d6035dfc102a",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        0,
+        0,
+        16,
+        8
+      ],
+      "pattern_word": 42,
+      "pattern_index": 10,
+      "foreground": 9,
+      "background": 1,
+      "source_pixel_write_count": 128,
+      "source_first_pixel_writes": [
+        [
+          5,
+          0,
+          9
+        ],
+        [
+          1,
+          0,
+          9
+        ],
+        [
+          13,
+          0,
+          9
+        ],
+        [
+          9,
+          0,
+          9
+        ],
+        [
+          7,
+          2,
+          9
+        ],
+        [
+          3,
+          2,
+          9
+        ],
+        [
+          15,
+          2,
+          9
+        ],
+        [
+          11,
+          2,
+          9
+        ],
+        [
+          5,
+          4,
+          9
+        ],
+        [
+          1,
+          4,
+          9
+        ],
+        [
+          13,
+          4,
+          9
+        ],
+        [
+          9,
+          4,
+          9
+        ],
+        [
+          7,
+          6,
+          9
+        ],
+        [
+          3,
+          6,
+          9
+        ],
+        [
+          15,
+          6,
+          9
+        ],
+        [
+          11,
+          6,
+          9
+        ],
+        [
+          7,
+          0,
+          1
+        ],
+        [
+          6,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          15,
+          0,
+          1
+        ],
+        [
+          14,
+          0,
+          1
+        ]
+      ],
+      "normalized_frame_sha256_source": "cc2b13317afcb2d1f5640eb7758584883ee98ca1977c532fafe76fb3294a562d",
+      "normalized_frame_sha256_native": "cc2b13317afcb2d1f5640eb7758584883ee98ca1977c532fafe76fb3294a562d",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        13,
+        6,
+        2,
+        1
+      ],
+      "pattern_word": 47,
+      "pattern_index": 15,
+      "foreground": 12,
+      "background": 3,
+      "source_pixel_write_count": 55,
+      "source_first_pixel_writes": [
+        [
+          6,
+          1,
+          12
+        ],
+        [
+          4,
+          1,
+          12
+        ],
+        [
+          2,
+          1,
+          12
+        ],
+        [
+          7,
+          2,
+          12
+        ],
+        [
+          5,
+          2,
+          12
+        ],
+        [
+          3,
+          2,
+          12
+        ],
+        [
+          6,
+          3,
+          12
+        ],
+        [
+          4,
+          3,
+          12
+        ],
+        [
+          2,
+          3,
+          12
+        ],
+        [
+          7,
+          4,
+          12
+        ],
+        [
+          5,
+          4,
+          12
+        ],
+        [
+          3,
+          4,
+          12
+        ],
+        [
+          6,
+          5,
+          12
+        ],
+        [
+          4,
+          5,
+          12
+        ],
+        [
+          2,
+          5,
+          12
+        ],
+        [
+          12,
+          1,
+          12
+        ],
+        [
+          10,
+          1,
+          12
+        ],
+        [
+          8,
+          1,
+          12
+        ],
+        [
+          11,
+          2,
+          12
+        ],
+        [
+          9,
+          2,
+          12
+        ],
+        [
+          12,
+          3,
+          12
+        ],
+        [
+          10,
+          3,
+          12
+        ],
+        [
+          8,
+          3,
+          12
+        ],
+        [
+          11,
+          4,
+          12
+        ]
+      ],
+      "normalized_frame_sha256_source": "42cf90c3971024940eebfef8974960ccd898e9496ba67f24c200585be303f505",
+      "normalized_frame_sha256_native": "42cf90c3971024940eebfef8974960ccd898e9496ba67f24c200585be303f505",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        639,
+        478,
+        640,
+        480
+      ],
+      "pattern_word": 33,
+      "pattern_index": 1,
+      "foreground": 4,
+      "background": 6,
+      "source_pixel_write_count": 2,
+      "source_first_pixel_writes": [
+        [
+          639,
+          479,
+          4
+        ],
+        [
+          639,
+          478,
+          6
+        ]
+      ],
+      "normalized_frame_sha256_source": "413731b926504f333335b24e6f8a2c3ca15b96cdcdd9709e30bbc6552283dfef",
+      "normalized_frame_sha256_native": "413731b926504f333335b24e6f8a2c3ca15b96cdcdd9709e30bbc6552283dfef",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 32,
+      "pattern_index": 0,
+      "foreground": 3,
+      "background": 2,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          6,
+          1,
+          3
+        ],
+        [
+          4,
+          1,
+          3
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          7,
+          2,
+          3
+        ],
+        [
+          5,
+          2,
+          3
+        ],
+        [
+          3,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          6,
+          3,
+          3
+        ],
+        [
+          4,
+          3,
+          3
+        ],
+        [
+          2,
+          3,
+          3
+        ],
+        [
+          7,
+          4,
+          3
+        ],
+        [
+          5,
+          4,
+          3
+        ],
+        [
+          3,
+          4,
+          3
+        ],
+        [
+          1,
+          4,
+          3
+        ],
+        [
+          6,
+          5,
+          3
+        ],
+        [
+          4,
+          5,
+          3
+        ],
+        [
+          2,
+          5,
+          3
+        ],
+        [
+          7,
+          6,
+          3
+        ],
+        [
+          5,
+          6,
+          3
+        ],
+        [
+          3,
+          6,
+          3
+        ],
+        [
+          1,
+          6,
+          3
+        ],
+        [
+          6,
+          7,
+          3
+        ],
+        [
+          4,
+          7,
+          3
+        ],
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      "normalized_frame_sha256_source": "a839c9dcabdc91ab99cbe927e583ce76f3bbd4ce4a3319d34502737f095f01dc",
+      "normalized_frame_sha256_native": "a839c9dcabdc91ab99cbe927e583ce76f3bbd4ce4a3319d34502737f095f01dc",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 33,
+      "pattern_index": 1,
+      "foreground": 4,
+      "background": 9,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          4
+        ],
+        [
+          5,
+          1,
+          4
+        ],
+        [
+          4,
+          1,
+          4
+        ],
+        [
+          3,
+          1,
+          4
+        ],
+        [
+          1,
+          1,
+          4
+        ],
+        [
+          6,
+          2,
+          4
+        ],
+        [
+          5,
+          2,
+          4
+        ],
+        [
+          4,
+          2,
+          4
+        ],
+        [
+          2,
+          2,
+          4
+        ],
+        [
+          1,
+          2,
+          4
+        ],
+        [
+          7,
+          3,
+          4
+        ],
+        [
+          6,
+          3,
+          4
+        ],
+        [
+          5,
+          3,
+          4
+        ],
+        [
+          3,
+          3,
+          4
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          7,
+          4,
+          4
+        ],
+        [
+          6,
+          4,
+          4
+        ],
+        [
+          4,
+          4,
+          4
+        ],
+        [
+          3,
+          4,
+          4
+        ],
+        [
+          2,
+          4,
+          4
+        ],
+        [
+          7,
+          5,
+          4
+        ],
+        [
+          5,
+          5,
+          4
+        ],
+        [
+          4,
+          5,
+          4
+        ]
+      ],
+      "normalized_frame_sha256_source": "ce8a2ff7339d569874cc0b40af4fc8e35fd748d310a18d6d594e2aeaa608e4a8",
+      "normalized_frame_sha256_native": "ce8a2ff7339d569874cc0b40af4fc8e35fd748d310a18d6d594e2aeaa608e4a8",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 34,
+      "pattern_index": 2,
+      "foreground": 5,
+      "background": 0,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          5
+        ],
+        [
+          6,
+          1,
+          5
+        ],
+        [
+          5,
+          1,
+          5
+        ],
+        [
+          4,
+          1,
+          5
+        ],
+        [
+          3,
+          1,
+          5
+        ],
+        [
+          2,
+          1,
+          5
+        ],
+        [
+          1,
+          1,
+          5
+        ],
+        [
+          7,
+          2,
+          5
+        ],
+        [
+          6,
+          2,
+          5
+        ],
+        [
+          5,
+          2,
+          5
+        ],
+        [
+          4,
+          2,
+          5
+        ],
+        [
+          3,
+          2,
+          5
+        ],
+        [
+          2,
+          2,
+          5
+        ],
+        [
+          1,
+          2,
+          5
+        ],
+        [
+          7,
+          3,
+          5
+        ],
+        [
+          6,
+          3,
+          5
+        ],
+        [
+          5,
+          3,
+          5
+        ],
+        [
+          4,
+          3,
+          5
+        ],
+        [
+          3,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          1,
+          3,
+          5
+        ],
+        [
+          7,
+          4,
+          5
+        ],
+        [
+          6,
+          4,
+          5
+        ],
+        [
+          5,
+          4,
+          5
+        ]
+      ],
+      "normalized_frame_sha256_source": "c33f55b3a06553d36f0fa28250e35a16213bda16c81fa72cefe42c20195040d6",
+      "normalized_frame_sha256_native": "c33f55b3a06553d36f0fa28250e35a16213bda16c81fa72cefe42c20195040d6",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 35,
+      "pattern_index": 3,
+      "foreground": 6,
+      "background": 7,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          7
+        ],
+        [
+          6,
+          1,
+          7
+        ],
+        [
+          5,
+          1,
+          7
+        ],
+        [
+          4,
+          1,
+          7
+        ],
+        [
+          3,
+          1,
+          7
+        ],
+        [
+          2,
+          1,
+          7
+        ],
+        [
+          1,
+          1,
+          7
+        ],
+        [
+          7,
+          2,
+          7
+        ],
+        [
+          6,
+          2,
+          7
+        ],
+        [
+          5,
+          2,
+          7
+        ],
+        [
+          4,
+          2,
+          7
+        ],
+        [
+          3,
+          2,
+          7
+        ],
+        [
+          2,
+          2,
+          7
+        ],
+        [
+          1,
+          2,
+          7
+        ],
+        [
+          7,
+          3,
+          7
+        ],
+        [
+          6,
+          3,
+          7
+        ],
+        [
+          5,
+          3,
+          7
+        ],
+        [
+          4,
+          3,
+          7
+        ],
+        [
+          3,
+          3,
+          7
+        ],
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          1,
+          3,
+          7
+        ],
+        [
+          7,
+          4,
+          7
+        ],
+        [
+          6,
+          4,
+          7
+        ],
+        [
+          5,
+          4,
+          7
+        ]
+      ],
+      "normalized_frame_sha256_source": "e6ee805b34acea00b526cce3bd9b432799411f4471a934531755234c3a7e915e",
+      "normalized_frame_sha256_native": "e6ee805b34acea00b526cce3bd9b432799411f4471a934531755234c3a7e915e",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 36,
+      "pattern_index": 4,
+      "foreground": 7,
+      "background": 14,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          5,
+          1,
+          7
+        ],
+        [
+          3,
+          2,
+          7
+        ],
+        [
+          5,
+          3,
+          7
+        ],
+        [
+          3,
+          4,
+          7
+        ],
+        [
+          5,
+          5,
+          7
+        ],
+        [
+          3,
+          6,
+          7
+        ],
+        [
+          5,
+          7,
+          7
+        ],
+        [
+          3,
+          8,
+          7
+        ],
+        [
+          5,
+          9,
+          7
+        ],
+        [
+          3,
+          10,
+          7
+        ],
+        [
+          13,
+          1,
+          7
+        ],
+        [
+          11,
+          2,
+          7
+        ],
+        [
+          13,
+          3,
+          7
+        ],
+        [
+          11,
+          4,
+          7
+        ],
+        [
+          13,
+          5,
+          7
+        ],
+        [
+          11,
+          6,
+          7
+        ],
+        [
+          13,
+          7,
+          7
+        ],
+        [
+          11,
+          8,
+          7
+        ],
+        [
+          13,
+          9,
+          7
+        ],
+        [
+          11,
+          10,
+          7
+        ],
+        [
+          21,
+          1,
+          7
+        ],
+        [
+          19,
+          2,
+          7
+        ],
+        [
+          21,
+          3,
+          7
+        ],
+        [
+          19,
+          4,
+          7
+        ]
+      ],
+      "normalized_frame_sha256_source": "cdecd75189e097eb2c934825e503ef3ad62531a1aa42f4410e337f0371b2c861",
+      "normalized_frame_sha256_native": "cdecd75189e097eb2c934825e503ef3ad62531a1aa42f4410e337f0371b2c861",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 37,
+      "pattern_index": 5,
+      "foreground": 8,
+      "background": 5,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          5
+        ],
+        [
+          6,
+          1,
+          5
+        ],
+        [
+          5,
+          1,
+          5
+        ],
+        [
+          4,
+          1,
+          5
+        ],
+        [
+          3,
+          1,
+          5
+        ],
+        [
+          2,
+          1,
+          5
+        ],
+        [
+          1,
+          1,
+          5
+        ],
+        [
+          7,
+          2,
+          5
+        ],
+        [
+          6,
+          2,
+          5
+        ],
+        [
+          5,
+          2,
+          5
+        ],
+        [
+          4,
+          2,
+          5
+        ],
+        [
+          3,
+          2,
+          5
+        ],
+        [
+          2,
+          2,
+          5
+        ],
+        [
+          1,
+          2,
+          5
+        ],
+        [
+          7,
+          3,
+          5
+        ],
+        [
+          6,
+          3,
+          5
+        ],
+        [
+          5,
+          3,
+          5
+        ],
+        [
+          4,
+          3,
+          5
+        ],
+        [
+          3,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          1,
+          3,
+          5
+        ],
+        [
+          7,
+          4,
+          5
+        ],
+        [
+          6,
+          4,
+          5
+        ],
+        [
+          5,
+          4,
+          5
+        ]
+      ],
+      "normalized_frame_sha256_source": "c33f55b3a06553d36f0fa28250e35a16213bda16c81fa72cefe42c20195040d6",
+      "normalized_frame_sha256_native": "c33f55b3a06553d36f0fa28250e35a16213bda16c81fa72cefe42c20195040d6",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 38,
+      "pattern_index": 6,
+      "foreground": 9,
+      "background": 12,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          6,
+          1,
+          9
+        ],
+        [
+          2,
+          1,
+          9
+        ],
+        [
+          7,
+          2,
+          9
+        ],
+        [
+          3,
+          2,
+          9
+        ],
+        [
+          4,
+          3,
+          9
+        ],
+        [
+          5,
+          4,
+          9
+        ],
+        [
+          1,
+          4,
+          9
+        ],
+        [
+          6,
+          5,
+          9
+        ],
+        [
+          2,
+          5,
+          9
+        ],
+        [
+          7,
+          6,
+          9
+        ],
+        [
+          3,
+          6,
+          9
+        ],
+        [
+          4,
+          7,
+          9
+        ],
+        [
+          5,
+          8,
+          9
+        ],
+        [
+          1,
+          8,
+          9
+        ],
+        [
+          6,
+          9,
+          9
+        ],
+        [
+          2,
+          9,
+          9
+        ],
+        [
+          7,
+          10,
+          9
+        ],
+        [
+          3,
+          10,
+          9
+        ],
+        [
+          14,
+          1,
+          9
+        ],
+        [
+          10,
+          1,
+          9
+        ],
+        [
+          15,
+          2,
+          9
+        ],
+        [
+          11,
+          2,
+          9
+        ],
+        [
+          12,
+          3,
+          9
+        ],
+        [
+          8,
+          3,
+          9
+        ]
+      ],
+      "normalized_frame_sha256_source": "93627aece40d2e5dd71d0fcf7863ba3713bb20704e93d5bb747c67a2a658016c",
+      "normalized_frame_sha256_native": "93627aece40d2e5dd71d0fcf7863ba3713bb20704e93d5bb747c67a2a658016c",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 39,
+      "pattern_index": 7,
+      "foreground": 10,
+      "background": 3,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          6,
+          1,
+          10
+        ],
+        [
+          4,
+          1,
+          10
+        ],
+        [
+          2,
+          1,
+          10
+        ],
+        [
+          7,
+          2,
+          10
+        ],
+        [
+          5,
+          2,
+          10
+        ],
+        [
+          3,
+          2,
+          10
+        ],
+        [
+          1,
+          2,
+          10
+        ],
+        [
+          6,
+          3,
+          10
+        ],
+        [
+          4,
+          3,
+          10
+        ],
+        [
+          2,
+          3,
+          10
+        ],
+        [
+          7,
+          4,
+          10
+        ],
+        [
+          5,
+          4,
+          10
+        ],
+        [
+          3,
+          4,
+          10
+        ],
+        [
+          1,
+          4,
+          10
+        ],
+        [
+          6,
+          5,
+          10
+        ],
+        [
+          4,
+          5,
+          10
+        ],
+        [
+          2,
+          5,
+          10
+        ],
+        [
+          7,
+          6,
+          10
+        ],
+        [
+          5,
+          6,
+          10
+        ],
+        [
+          3,
+          6,
+          10
+        ],
+        [
+          1,
+          6,
+          10
+        ],
+        [
+          6,
+          7,
+          10
+        ],
+        [
+          4,
+          7,
+          10
+        ],
+        [
+          2,
+          7,
+          10
+        ]
+      ],
+      "normalized_frame_sha256_source": "a227519b0ad245387e5bbe2b64a57bf4a0ff6228accc0cf8b974633a81254fd8",
+      "normalized_frame_sha256_native": "a227519b0ad245387e5bbe2b64a57bf4a0ff6228accc0cf8b974633a81254fd8",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 40,
+      "pattern_index": 8,
+      "foreground": 11,
+      "background": 10,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          11
+        ],
+        [
+          5,
+          1,
+          11
+        ],
+        [
+          4,
+          1,
+          11
+        ],
+        [
+          3,
+          1,
+          11
+        ],
+        [
+          1,
+          1,
+          11
+        ],
+        [
+          6,
+          2,
+          11
+        ],
+        [
+          5,
+          2,
+          11
+        ],
+        [
+          4,
+          2,
+          11
+        ],
+        [
+          2,
+          2,
+          11
+        ],
+        [
+          1,
+          2,
+          11
+        ],
+        [
+          7,
+          3,
+          11
+        ],
+        [
+          6,
+          3,
+          11
+        ],
+        [
+          5,
+          3,
+          11
+        ],
+        [
+          3,
+          3,
+          11
+        ],
+        [
+          2,
+          3,
+          11
+        ],
+        [
+          1,
+          3,
+          11
+        ],
+        [
+          7,
+          4,
+          11
+        ],
+        [
+          6,
+          4,
+          11
+        ],
+        [
+          4,
+          4,
+          11
+        ],
+        [
+          3,
+          4,
+          11
+        ],
+        [
+          2,
+          4,
+          11
+        ],
+        [
+          7,
+          5,
+          11
+        ],
+        [
+          5,
+          5,
+          11
+        ],
+        [
+          4,
+          5,
+          11
+        ]
+      ],
+      "normalized_frame_sha256_source": "db700947005b7b2077a1f6815896f9cdaa8b11b34064822e573282dfb6c74171",
+      "normalized_frame_sha256_native": "db700947005b7b2077a1f6815896f9cdaa8b11b34064822e573282dfb6c74171",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 41,
+      "pattern_index": 9,
+      "foreground": 12,
+      "background": 1,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          12
+        ],
+        [
+          6,
+          1,
+          12
+        ],
+        [
+          5,
+          1,
+          12
+        ],
+        [
+          4,
+          1,
+          12
+        ],
+        [
+          3,
+          1,
+          12
+        ],
+        [
+          2,
+          1,
+          12
+        ],
+        [
+          1,
+          1,
+          12
+        ],
+        [
+          7,
+          2,
+          12
+        ],
+        [
+          6,
+          2,
+          12
+        ],
+        [
+          5,
+          2,
+          12
+        ],
+        [
+          4,
+          2,
+          12
+        ],
+        [
+          3,
+          2,
+          12
+        ],
+        [
+          2,
+          2,
+          12
+        ],
+        [
+          1,
+          2,
+          12
+        ],
+        [
+          7,
+          3,
+          12
+        ],
+        [
+          6,
+          3,
+          12
+        ],
+        [
+          5,
+          3,
+          12
+        ],
+        [
+          4,
+          3,
+          12
+        ],
+        [
+          3,
+          3,
+          12
+        ],
+        [
+          2,
+          3,
+          12
+        ],
+        [
+          1,
+          3,
+          12
+        ],
+        [
+          7,
+          4,
+          12
+        ],
+        [
+          6,
+          4,
+          12
+        ],
+        [
+          5,
+          4,
+          12
+        ]
+      ],
+      "normalized_frame_sha256_source": "6ddbea918160ed197ec33be10f3f7f1509afbc4595a2c4b008caa7ea7c248544",
+      "normalized_frame_sha256_native": "6ddbea918160ed197ec33be10f3f7f1509afbc4595a2c4b008caa7ea7c248544",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 42,
+      "pattern_index": 10,
+      "foreground": 13,
+      "background": 8,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          2,
+          13
+        ],
+        [
+          3,
+          2,
+          13
+        ],
+        [
+          5,
+          4,
+          13
+        ],
+        [
+          1,
+          4,
+          13
+        ],
+        [
+          7,
+          6,
+          13
+        ],
+        [
+          3,
+          6,
+          13
+        ],
+        [
+          5,
+          8,
+          13
+        ],
+        [
+          1,
+          8,
+          13
+        ],
+        [
+          7,
+          10,
+          13
+        ],
+        [
+          3,
+          10,
+          13
+        ],
+        [
+          15,
+          2,
+          13
+        ],
+        [
+          11,
+          2,
+          13
+        ],
+        [
+          13,
+          4,
+          13
+        ],
+        [
+          9,
+          4,
+          13
+        ],
+        [
+          15,
+          6,
+          13
+        ],
+        [
+          11,
+          6,
+          13
+        ],
+        [
+          13,
+          8,
+          13
+        ],
+        [
+          9,
+          8,
+          13
+        ],
+        [
+          15,
+          10,
+          13
+        ],
+        [
+          11,
+          10,
+          13
+        ],
+        [
+          19,
+          2,
+          13
+        ],
+        [
+          21,
+          4,
+          13
+        ],
+        [
+          17,
+          4,
+          13
+        ],
+        [
+          19,
+          6,
+          13
+        ]
+      ],
+      "normalized_frame_sha256_source": "eb17a3b1cfc63c36e668de7aa2da2c90d63485f5189b7e5ba908653d0b24ccbe",
+      "normalized_frame_sha256_native": "eb17a3b1cfc63c36e668de7aa2da2c90d63485f5189b7e5ba908653d0b24ccbe",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 43,
+      "pattern_index": 11,
+      "foreground": 14,
+      "background": 15,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          14
+        ],
+        [
+          6,
+          1,
+          14
+        ],
+        [
+          5,
+          1,
+          14
+        ],
+        [
+          4,
+          1,
+          14
+        ],
+        [
+          3,
+          1,
+          14
+        ],
+        [
+          2,
+          1,
+          14
+        ],
+        [
+          1,
+          1,
+          14
+        ],
+        [
+          6,
+          2,
+          14
+        ],
+        [
+          5,
+          2,
+          14
+        ],
+        [
+          4,
+          2,
+          14
+        ],
+        [
+          2,
+          2,
+          14
+        ],
+        [
+          1,
+          2,
+          14
+        ],
+        [
+          7,
+          3,
+          14
+        ],
+        [
+          6,
+          3,
+          14
+        ],
+        [
+          5,
+          3,
+          14
+        ],
+        [
+          4,
+          3,
+          14
+        ],
+        [
+          3,
+          3,
+          14
+        ],
+        [
+          2,
+          3,
+          14
+        ],
+        [
+          1,
+          3,
+          14
+        ],
+        [
+          5,
+          4,
+          14
+        ],
+        [
+          4,
+          4,
+          14
+        ],
+        [
+          1,
+          4,
+          14
+        ],
+        [
+          7,
+          5,
+          14
+        ],
+        [
+          6,
+          5,
+          14
+        ]
+      ],
+      "normalized_frame_sha256_source": "f94f1a4bc8ead18f914a896c079ac191f589f869626b03a56eb62a469f1977a7",
+      "normalized_frame_sha256_native": "f94f1a4bc8ead18f914a896c079ac191f589f869626b03a56eb62a469f1977a7",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 44,
+      "pattern_index": 12,
+      "foreground": 15,
+      "background": 6,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          15
+        ],
+        [
+          6,
+          1,
+          15
+        ],
+        [
+          4,
+          1,
+          15
+        ],
+        [
+          3,
+          1,
+          15
+        ],
+        [
+          2,
+          1,
+          15
+        ],
+        [
+          7,
+          2,
+          15
+        ],
+        [
+          5,
+          2,
+          15
+        ],
+        [
+          4,
+          2,
+          15
+        ],
+        [
+          3,
+          2,
+          15
+        ],
+        [
+          1,
+          2,
+          15
+        ],
+        [
+          6,
+          3,
+          15
+        ],
+        [
+          5,
+          3,
+          15
+        ],
+        [
+          4,
+          3,
+          15
+        ],
+        [
+          2,
+          3,
+          15
+        ],
+        [
+          1,
+          3,
+          15
+        ],
+        [
+          7,
+          4,
+          15
+        ],
+        [
+          6,
+          4,
+          15
+        ],
+        [
+          5,
+          4,
+          15
+        ],
+        [
+          3,
+          4,
+          15
+        ],
+        [
+          2,
+          4,
+          15
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          7,
+          5,
+          15
+        ],
+        [
+          6,
+          5,
+          15
+        ],
+        [
+          4,
+          5,
+          15
+        ]
+      ],
+      "normalized_frame_sha256_source": "e232191e1160964c75ef9122cd999be00cceaeb91571601f963c633e732619ea",
+      "normalized_frame_sha256_native": "e232191e1160964c75ef9122cd999be00cceaeb91571601f963c633e732619ea",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 45,
+      "pattern_index": 13,
+      "foreground": 0,
+      "background": 13,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          0
+        ],
+        [
+          6,
+          1,
+          0
+        ],
+        [
+          5,
+          1,
+          0
+        ],
+        [
+          4,
+          1,
+          0
+        ],
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          7,
+          2,
+          0
+        ],
+        [
+          6,
+          2,
+          0
+        ],
+        [
+          5,
+          2,
+          0
+        ],
+        [
+          4,
+          2,
+          0
+        ],
+        [
+          3,
+          2,
+          0
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          7,
+          3,
+          0
+        ],
+        [
+          6,
+          3,
+          0
+        ],
+        [
+          5,
+          3,
+          0
+        ],
+        [
+          4,
+          3,
+          0
+        ],
+        [
+          3,
+          3,
+          0
+        ],
+        [
+          2,
+          3,
+          0
+        ],
+        [
+          1,
+          3,
+          0
+        ],
+        [
+          7,
+          4,
+          0
+        ],
+        [
+          6,
+          4,
+          0
+        ],
+        [
+          5,
+          4,
+          0
+        ]
+      ],
+      "normalized_frame_sha256_source": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "normalized_frame_sha256_native": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 46,
+      "pattern_index": 14,
+      "foreground": 1,
+      "background": 4,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          7,
+          1,
+          4
+        ],
+        [
+          6,
+          1,
+          4
+        ],
+        [
+          5,
+          1,
+          4
+        ],
+        [
+          4,
+          1,
+          4
+        ],
+        [
+          3,
+          1,
+          4
+        ],
+        [
+          2,
+          1,
+          4
+        ],
+        [
+          1,
+          1,
+          4
+        ],
+        [
+          7,
+          2,
+          4
+        ],
+        [
+          6,
+          2,
+          4
+        ],
+        [
+          5,
+          2,
+          4
+        ],
+        [
+          4,
+          2,
+          4
+        ],
+        [
+          3,
+          2,
+          4
+        ],
+        [
+          2,
+          2,
+          4
+        ],
+        [
+          1,
+          2,
+          4
+        ],
+        [
+          7,
+          3,
+          4
+        ],
+        [
+          6,
+          3,
+          4
+        ],
+        [
+          5,
+          3,
+          4
+        ],
+        [
+          4,
+          3,
+          4
+        ],
+        [
+          3,
+          3,
+          4
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          7,
+          4,
+          4
+        ],
+        [
+          6,
+          4,
+          4
+        ],
+        [
+          5,
+          4,
+          4
+        ]
+      ],
+      "normalized_frame_sha256_source": "28e65cdbb99cd6be2981293af76e3ecea60c07508088df0e9a1789a8a6316801",
+      "normalized_frame_sha256_native": "28e65cdbb99cd6be2981293af76e3ecea60c07508088df0e9a1789a8a6316801",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    },
+    {
+      "rect": [
+        1,
+        1,
+        23,
+        11
+      ],
+      "pattern_word": 47,
+      "pattern_index": 15,
+      "foreground": 2,
+      "background": 11,
+      "source_pixel_write_count": 220,
+      "source_first_pixel_writes": [
+        [
+          6,
+          1,
+          2
+        ],
+        [
+          4,
+          1,
+          2
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          7,
+          2,
+          2
+        ],
+        [
+          5,
+          2,
+          2
+        ],
+        [
+          3,
+          2,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          6,
+          3,
+          2
+        ],
+        [
+          4,
+          3,
+          2
+        ],
+        [
+          2,
+          3,
+          2
+        ],
+        [
+          7,
+          4,
+          2
+        ],
+        [
+          5,
+          4,
+          2
+        ],
+        [
+          3,
+          4,
+          2
+        ],
+        [
+          1,
+          4,
+          2
+        ],
+        [
+          6,
+          5,
+          2
+        ],
+        [
+          4,
+          5,
+          2
+        ],
+        [
+          2,
+          5,
+          2
+        ],
+        [
+          7,
+          6,
+          2
+        ],
+        [
+          5,
+          6,
+          2
+        ],
+        [
+          3,
+          6,
+          2
+        ],
+        [
+          1,
+          6,
+          2
+        ],
+        [
+          6,
+          7,
+          2
+        ],
+        [
+          4,
+          7,
+          2
+        ],
+        [
+          2,
+          7,
+          2
+        ]
+      ],
+      "normalized_frame_sha256_source": "ba68f22e13bb8f65ce77984f18e356d91b1ad94759d2dc4ae6ab014d83989c74",
+      "normalized_frame_sha256_native": "ba68f22e13bb8f65ce77984f18e356d91b1ad94759d2dc4ae6ab014d83989c74",
+      "frame_equal": true,
+      "source_depth_after": "0000"
+    }
+  ],
+  "mismatches": []
+}

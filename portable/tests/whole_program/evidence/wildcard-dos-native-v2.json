@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "claim": "Source file chooser wildcard predicate and unchanged inputs; near-pointer return identity excluded",
+  "function": "root:1F66:002D",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "unicorn_version": "2.1.4",
+  "inputs": {
+    "portable/tests/whole_program/run_wildcard_dos.py": "ff1d0331b985be886a433079403158a88309f78c4c7e523d582a0529cbb66ed6",
+    "portable/whole_program/algorithms/wildcard.c": "e7b0ff49c1df3ecf8af693dd2aaa076fdd417fa2fd10f5b320d3b6b1f9c6a636",
+    "portable/whole_program/algorithms/wildcard.h": "04ed8b9f0c6b6895f6b80e8fdb6306ed286964089cfb4807229b0f6adb5c269c",
+    "src/root/m1F66.asm": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+  },
+  "inputs_stable": true,
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-shared",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\algorithms\\wildcard.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\wildcard-v2\\wildcard.dll"
+  ],
+  "library_sha256": "a4c10ff9982c9a0cdd86ab89c80075cf47a8072b0b7f6f78516537196c1e8e92",
+  "directed": 3413,
+  "randomized": 1024,
+  "seed": 526778413,
+  "cases_executed": 4437,
+  "mismatches": [],
+  "transcript_sha256": "357a6211e0cce962f06460c5987fa50ad02145090412831ae512078cbbc4a195",
+  "negative_control": {
+    "replacement": "conventional host glob",
+    "pattern": "*.ant",
+    "name": "a.ant.b",
+    "DOS_backed_native_result": 1,
+    "host_glob_result": 0,
+    "caught": true
+  },
+  "excluded": [
+    "AX near-address value",
+    "matching name segment offset zero",
+    "unterminated inputs",
+    "search entry root:1F66:0029 (unused by current C callers)"
+  ]
+}

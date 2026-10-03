@@ -1,0 +1,89 @@
+{
+  "status": "PASS_LAYOUT_INTEGRATION",
+  "inputs": {
+    "portable/tests/whole_program/run_record_layouts.py": "15abb289052881eeeba4c06ab5ccd312715650100a5593dbd52aa8cb6c9a3e82",
+    "build/workers/whole_program/generated/root_m00BA.c": "a734a425bd9b8ce91ba90a8174e105c6e26fee625dea7d7768096938dcc5e787",
+    "build/workers/whole_program/generated/root_m25E7.c": "4d129cda9c963b615ebc9b9ca42748f5c6070f283b8a9943022ba515b9c7524e",
+    "build/workers/whole_program/generated/dos_types.h": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+    "portable/whole_program/types/fonts.h": "c54dfa0767b53dabff2f3e5c35ee9d7b004359b85d66ab33ea224523c10ce241",
+    "portable/whole_program/platform/dos_io.h": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+    "portable/whole_program/platform/dos_files.h": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957",
+    "portable/whole_program/platform/dos_memory.h": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce"
+  },
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "cases": [
+    {
+      "name": "window-header-pack2",
+      "compile_passed": true,
+      "expected": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-I",
+        "D:\\Prog\\simant_recon",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-fsyntax-only",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\record-layouts-v4\\window-header-pack2.c"
+      ]
+    },
+    {
+      "name": "window-header-pack4-rejected",
+      "compile_passed": false,
+      "expected": false,
+      "log_sha256": "e54936e18caa6d34dd5e4631a490bf0723c8301617c0b24d72865831e08cd86f",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-I",
+        "D:\\Prog\\simant_recon",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-fsyntax-only",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\record-layouts-v4\\window-header-pack4-rejected.c"
+      ]
+    },
+    {
+      "name": "font-native-extent",
+      "compile_passed": true,
+      "expected": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-I",
+        "D:\\Prog\\simant_recon",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-fsyntax-only",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\record-layouts-v4\\font-native-extent.c"
+      ]
+    },
+    {
+      "name": "font-dos-allocation-rejected",
+      "compile_passed": false,
+      "expected": false,
+      "log_sha256": "166d93016fcd8332966497fa951da34fff589fa00a93435fc2b96cfcccc35e59",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-I",
+        "D:\\Prog\\simant_recon",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-fsyntax-only",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\record-layouts-v4\\font-dos-allocation-rejected.c"
+      ]
+    }
+  ],
+  "claim": "Actual generated TU layout controls; no behavioral or DOS comparison claim"
+}

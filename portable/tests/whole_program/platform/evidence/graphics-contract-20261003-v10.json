@@ -1,0 +1,59 @@
+{
+  "schema": "simant-whole-program-graphics-contract-v1",
+  "status": "PASS",
+  "scope": [
+    "640x350 indexed framebuffer ownership and source dimension defaults",
+    "bounded S00 attribute, fill, and 1bpp glyph contracts",
+    "clip stack, color-map behavior, text pen, and explicit unprovided slots"
+  ],
+  "compiler": "gcc",
+  "source_converter_test": "graphics source converter: PASS",
+  "command": [
+    "gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\graphics.c",
+    "D:\\Prog\\simant_recon\\portable\\render\\primitives.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\platform\\graphics_test.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\platform\\graphics_source_fields_test.c",
+    "-o",
+    "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-graphics-contract-6g17fghg\\graphics_test.exe"
+  ],
+  "inputs_before_sha256": {
+    "portable\\whole_program\\platform\\graphics.h": "91acac602076d382d47039bfae48060413eefa9ff6159ecb231699ed2151dce9",
+    "portable\\whole_program\\platform\\graphics_source_fields.h": "011d2c53901bf374aed5a39f76e059be5703b441ec3585f613c3fe18b7e4f2cf",
+    "portable\\whole_program\\platform\\graphics_source_convert.py": "6551769ae00290c062f9545779fcadd8ad91b53709c7bcafd104eaeaf9034641",
+    "portable\\whole_program\\platform\\graphics.c": "79e3a44f06119d8ddf74fd9c961a161535231fc92755cd142faf68446e9696b7",
+    "portable\\render\\primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable\\render\\primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable\\tests\\whole_program\\platform\\graphics_test.c": "14d329335daa08498eafe8b1e5b27946f75129dffacb16423b2a4dc5a3ef97ee",
+    "portable\\tests\\whole_program\\platform\\graphics_source_fields_test.c": "4c2531fe47871f6af1f3f0ab15ae514a71fa6ac9a3068c5bb50e43cb3ee1d71f",
+    "src\\root\\m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src\\S00\\m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+    "src\\S00\\m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src\\S01\\m3126.asm": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a"
+  },
+  "inputs_after_sha256": {
+    "portable\\whole_program\\platform\\graphics.h": "91acac602076d382d47039bfae48060413eefa9ff6159ecb231699ed2151dce9",
+    "portable\\whole_program\\platform\\graphics_source_fields.h": "011d2c53901bf374aed5a39f76e059be5703b441ec3585f613c3fe18b7e4f2cf",
+    "portable\\whole_program\\platform\\graphics_source_convert.py": "6551769ae00290c062f9545779fcadd8ad91b53709c7bcafd104eaeaf9034641",
+    "portable\\whole_program\\platform\\graphics.c": "79e3a44f06119d8ddf74fd9c961a161535231fc92755cd142faf68446e9696b7",
+    "portable\\render\\primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable\\render\\primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable\\tests\\whole_program\\platform\\graphics_test.c": "14d329335daa08498eafe8b1e5b27946f75129dffacb16423b2a4dc5a3ef97ee",
+    "portable\\tests\\whole_program\\platform\\graphics_source_fields_test.c": "4c2531fe47871f6af1f3f0ab15ae514a71fa6ac9a3068c5bb50e43cb3ee1d71f",
+    "src\\root\\m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src\\S00\\m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+    "src\\S00\\m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src\\S01\\m3126.asm": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a"
+  },
+  "inputs_stable": true,
+  "stdout": "whole-program graphics contracts: PASS\n",
+  "stderr": "",
+  "exit_code": 0
+}

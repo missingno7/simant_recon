@@ -1,0 +1,229 @@
+{
+  "schema": "simant-native-dos-directory-provider-v1",
+  "status": "PASS_DIAGNOSTIC_NO_DOS_DIFFERENTIAL_CLAIM",
+  "platform": {
+    "os_name": "nt",
+    "python": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+    "gcc_version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "gcc_before": {
+      "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "size": 2350907,
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+    },
+    "gcc_after": {
+      "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "size": 2350907,
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+    },
+    "dll_sha256": "c9a8ec2bef287380cd6289844bbe83c0b6b4a270d59b945d2cfdd9472728f95b",
+    "compile_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O0",
+      "-shared",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\directory.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\directory_support.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_small_contracts\\directory_native_v8\\directory-provider.dll"
+    ],
+    "compile_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "sources_before_after": {
+    "before": {
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\directory.c": {
+        "path": "portable\\whole_program\\platform\\directory.c",
+        "size": 10710,
+        "sha256": "facca93cd9280376a55304c187297c9ef409de24967bfb198d46cf923c57ac09"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\directory.h": {
+        "path": "portable\\whole_program\\platform\\directory.h",
+        "size": 522,
+        "sha256": "d361c2fe64c33ce684564205176924283945216b638e4600dd2c1af4794e87e7"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_files.h": {
+        "path": "portable\\whole_program\\platform\\dos_files.h",
+        "size": 835,
+        "sha256": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\directory_support.c": {
+        "path": "portable\\whole_program\\platform\\tests\\directory_support.c",
+        "size": 40,
+        "sha256": "d7135b4c0b11abf90b27a412426928a53634689a7121ddb1df11c52be2fa72c5"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\run_directory_tests.py": {
+        "path": "portable\\whole_program\\platform\\tests\\run_directory_tests.py",
+        "size": 21993,
+        "sha256": "c32fae38526a7759fb9c508a4f81fea85f4cd0f02929aeed5a868bb4fdeb176f"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\dos.h": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\dos.h",
+        "size": 5343,
+        "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\errno.h": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\errno.h",
+        "size": 1428,
+        "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91"
+      }
+    },
+    "after": {
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\directory.c": {
+        "path": "portable\\whole_program\\platform\\directory.c",
+        "size": 10710,
+        "sha256": "facca93cd9280376a55304c187297c9ef409de24967bfb198d46cf923c57ac09"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\directory.h": {
+        "path": "portable\\whole_program\\platform\\directory.h",
+        "size": 522,
+        "sha256": "d361c2fe64c33ce684564205176924283945216b638e4600dd2c1af4794e87e7"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_files.h": {
+        "path": "portable\\whole_program\\platform\\dos_files.h",
+        "size": 835,
+        "sha256": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\directory_support.c": {
+        "path": "portable\\whole_program\\platform\\tests\\directory_support.c",
+        "size": 40,
+        "sha256": "d7135b4c0b11abf90b27a412426928a53634689a7121ddb1df11c52be2fa72c5"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\run_directory_tests.py": {
+        "path": "portable\\whole_program\\platform\\tests\\run_directory_tests.py",
+        "size": 21993,
+        "sha256": "c32fae38526a7759fb9c508a4f81fea85f4cd0f02929aeed5a868bb4fdeb176f"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\dos.h": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\dos.h",
+        "size": 5343,
+        "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\errno.h": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\errno.h",
+        "size": 1428,
+        "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91"
+      }
+    }
+  },
+  "msc_errno_header_values": {
+    "ENOENT": 2,
+    "EBADF": 9,
+    "EINVAL": 22,
+    "EMFILE": 24,
+    "EFBIG": 27
+  },
+  "msc_dos_header_attribute_values": {
+    "_A_RDONLY": 1,
+    "_A_HIDDEN": 2,
+    "_A_SYSTEM": 4,
+    "_A_SUBDIR": 16,
+    "_A_ARCH": 32
+  },
+  "fixture": {
+    "files": [
+      "FOLDER",
+      "README",
+      "hidden.SAV",
+      "readOnly.SAV",
+      "system.SAV",
+      "this-name-is-too-long.txt",
+      "visible.SAV"
+    ],
+    "stored_only_under_build_workers": true
+  },
+  "checks": {
+    "sav_default_attributes": {
+      "names": [
+        "readOnly.SAV",
+        "visible.SAV"
+      ],
+      "end_status": 18,
+      "readonly_bit": true,
+      "size_exact": true,
+      "dos_local_datetime_packed_exact": true,
+      "visible_wr_date": 21224,
+      "visible_wr_time": 18758,
+      "visible_size": 12
+    },
+    "hidden_mask": {
+      "names": [
+        "hidden.SAV",
+        "readOnly.SAV",
+        "visible.SAV"
+      ],
+      "end_status": 18
+    },
+    "system_mask": {
+      "names": [
+        "readOnly.SAV",
+        "system.SAV",
+        "visible.SAV"
+      ],
+      "end_status": 18
+    },
+    "wildcard_star_dot_star_with_subdirs": [
+      ".",
+      "..",
+      "FOLDER",
+      "README",
+      "readOnly.SAV",
+      "visible.SAV"
+    ],
+    "wildcard_without_subdir_mask": {
+      "names": [
+        "README",
+        "readOnly.SAV",
+        "visible.SAV"
+      ],
+      "end_status": 18
+    },
+    "dos_dotdot_entry_present": true,
+    "missing_result_and_last_error": {
+      "dos_status": 2,
+      "dos_errno": 2
+    },
+    "unrepresentable_long_name": {
+      "dos_status": 206,
+      "dos_errno": 22,
+      "policy": "exact unrepresentable match fails with DOS filename-range status; wildcard searches skip unrepresentable host names and never truncate into 13-byte field"
+    },
+    "copied_cookie_shared_iteration_and_close": {
+      "cookie_identical_after_copy": true,
+      "first_next_name": "readOnly.SAV",
+      "second_copy_next_name": "visible.SAV",
+      "stale_copy_status": 6,
+      "stale_copy_errno": 9
+    },
+    "interleaved_searches": {
+      "first_initial_and_next": [
+        "readOnly.SAV",
+        "visible.SAV"
+      ],
+      "second_initial_and_next": [
+        "README",
+        "readOnly.SAV"
+      ],
+      "statuses": [
+        0,
+        0
+      ]
+    },
+    "same_record_replacement_and_explicit_close_cycles": 80,
+    "simultaneous_search_slots": 32,
+    "overflow_status": 4,
+    "overflow_errno": 24,
+    "search_slot_cleanup_verified": true
+  },
+  "contract_notes": {
+    "source_callsite": "S09 m35F5 o09_35F5_03C6 searches *.* with _A_SUBDIR and then filters file entries using *.ant; directories including .. are presented by the selector.",
+    "attribute_rules": "Normal/read-only/archive entries are included by default. Hidden, system, and directory entries require their respective mask bits. Returned attributes preserve read-only/hidden/system/subdir/archive bits.",
+    "cookie": "The reserved 21-byte MSC field carries only a versioned slot/generation/checksum token; native HANDLE and pointers remain private in the provider table. Copying find_t shares one iterator. End-of-search closes its native handle; dos_findclose supports early cleanup.",
+    "error_contract": "Successful calls return 0; no initial match returns DOS 2, exhausted iteration DOS 18, invalid/stale cookie DOS 6, full provider table DOS 4, and non-8.3 or >2GB result DOS 206/223. dos_errno carries the matching MSC errno interpretation (or zero on success).",
+    "limits": "Win32 ANSI FindFirstFileA only. Host names must be representable as ASCII DOS 8.3; exact non-8.3 matches fail explicitly and wildcard searches skip them. No POSIX implementation or Unicode/long-name emulation is claimed. No DOS binary invocation was part of this provider test."
+  }
+}

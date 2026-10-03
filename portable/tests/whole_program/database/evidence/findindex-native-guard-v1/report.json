@@ -1,0 +1,957 @@
+{
+  "schema": "simant-findindex-native-onepast-guard-v1",
+  "created_unix_ns": 1790988973839701900,
+  "status": "PASS_BOUNDED_NATIVE_SAFETY_ADAPTATION",
+  "proof_category_claim": null,
+  "source_scope": {
+    "reviewed_function_module": "evidence/behavior/functions/FindIndex/module.c",
+    "reviewed_module_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+    "reviewed_body_sha256": "676aae0b691028a2a6fbe40ed5c0da91895bdf34a1615d7fc4ddea26812171f0",
+    "source_change": "native guard after preserved cursor pointer assignment and before terminal one-past field reads",
+    "historical_source_or_manifest_modified": false
+  },
+  "host_adaptation": {
+    "lane": "native host safety adapter",
+    "reviewed_module_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+    "reviewed_body_sha256": "676aae0b691028a2a6fbe40ed5c0da91895bdf34a1615d7fc4ddea26812171f0",
+    "shared_record_header": "portable/whole_program/types/database.h",
+    "guard": "if (fd_50F6_3956 == fd_50F6_3958[db].indexHeader.count) return 0L;",
+    "cursor_assignment_preserved_before_guard": true,
+    "native_addresses_unmodified": true
+  },
+  "dos_control_adaptation": {
+    "lane": "DOS-compiler negative control",
+    "reviewed_module_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+    "reviewed_body_sha256": "676aae0b691028a2a6fbe40ed5c0da91895bdf34a1615d7fc4ddea26812171f0",
+    "guard": "if (fd_50F6_3956 == fd_50F6_3958[db].indexHeader.count) return 0L;",
+    "compiled_scope": "reviewed FindIndex body only; source ABI declarations retained"
+  },
+  "fresh_original_dos_controls": {
+    "cases": [
+      {
+        "label": "empty-early-return",
+        "entries": 0,
+        "query": [
+          0,
+          0
+        ],
+        "sentinel": [
+          0,
+          4951,
+          214,
+          0
+        ],
+        "equal": true,
+        "difference": {},
+        "original_return": 0,
+        "candidate_return": 0,
+        "original_cursor": "0000",
+        "candidate_cursor": "0000"
+      },
+      {
+        "label": "singleton-last-hit",
+        "entries": 1,
+        "query": [
+          32767,
+          255
+        ],
+        "sentinel": [
+          0,
+          -32768,
+          0,
+          0
+        ],
+        "equal": true,
+        "difference": {},
+        "original_return": 2684358656,
+        "candidate_return": 2684358656,
+        "original_cursor": "0000",
+        "candidate_cursor": "0000"
+      },
+      {
+        "label": "singleton-above-max-unmatched",
+        "entries": 1,
+        "query": [
+          32767,
+          255
+        ],
+        "sentinel": [
+          8192,
+          -32768,
+          0,
+          0
+        ],
+        "equal": true,
+        "difference": {},
+        "original_return": 0,
+        "candidate_return": 0,
+        "original_cursor": "0100",
+        "candidate_cursor": "0100"
+      },
+      {
+        "label": "singleton-above-max-matching-sentinel",
+        "entries": 1,
+        "query": [
+          32767,
+          255
+        ],
+        "sentinel": [
+          8192,
+          32767,
+          255,
+          0
+        ],
+        "equal": false,
+        "difference": {
+          "return": {
+            "oracle": 2684358664,
+            "candidate": 0
+          }
+        },
+        "original_return": 2684358664,
+        "candidate_return": 0,
+        "original_cursor": "0100",
+        "candidate_cursor": "0100"
+      },
+      {
+        "label": "multirow-last-hit",
+        "entries": 3,
+        "query": [
+          300,
+          2
+        ],
+        "sentinel": [
+          0,
+          -32768,
+          0,
+          0
+        ],
+        "equal": true,
+        "difference": {},
+        "original_return": 2684358672,
+        "candidate_return": 2684358672,
+        "original_cursor": "0200",
+        "candidate_cursor": "0200"
+      },
+      {
+        "label": "multirow-above-max-unmatched",
+        "entries": 3,
+        "query": [
+          301,
+          2
+        ],
+        "sentinel": [
+          8192,
+          -32768,
+          0,
+          0
+        ],
+        "equal": true,
+        "difference": {},
+        "original_return": 0,
+        "candidate_return": 0,
+        "original_cursor": "0300",
+        "candidate_cursor": "0300"
+      },
+      {
+        "label": "multirow-above-max-matching-sentinel",
+        "entries": 3,
+        "query": [
+          301,
+          2
+        ],
+        "sentinel": [
+          8192,
+          301,
+          2,
+          0
+        ],
+        "equal": false,
+        "difference": {
+          "return": {
+            "oracle": 2684358680,
+            "candidate": 0
+          }
+        },
+        "original_return": 2684358680,
+        "candidate_return": 0,
+        "original_cursor": "0300",
+        "candidate_cursor": "0300"
+      },
+      {
+        "label": "invalid-kind-outside-byte-domain",
+        "entries": 2,
+        "query": [
+          4,
+          256
+        ],
+        "sentinel": [
+          8192,
+          -32768,
+          0,
+          0
+        ],
+        "equal": true,
+        "difference": {},
+        "original_return": 0,
+        "candidate_return": 0,
+        "original_cursor": "0200",
+        "candidate_cursor": "0200"
+      }
+    ],
+    "equal_nonmatching_controls": 6,
+    "intentional_matching_sentinel_differences": 2,
+    "candidate_object_sha256": "46d30dbea10c66a9b8cdd10dfad23d3f61c3c45dc529d69184d02dc92a3bf4ca",
+    "compiler_warnings_or_unrelated_data_diagnostics": {
+      "_DATA": {
+        "exact": false,
+        "reasons": [
+          "segment absent"
+        ]
+      },
+      "CONST": {
+        "exact": false,
+        "reasons": [
+          "data bytes differ",
+          "data relocation set differs 2 vs 3",
+          "placement size 6 != segment length 4 (claimed code could use unverified data)"
+        ],
+        "size": 6,
+        "reloc_order": "EXACT",
+        "start": 386272,
+        "class": "CONST",
+        "align": "word",
+        "far": false
+      }
+    },
+    "candidate_source_sha256": "02cc2368bd95b02678acf167e750b8d98adf100b6f787cea8a2c3206b9b595a6",
+    "compiled_text_sha256": "dd97e31cf494cf8ba6bbfbf196e3efa6fd4c1555903144ba49e781ded4f8e818",
+    "scope": "Fresh original DOS vs separately compiled guarded FindIndex function; other module peers/data are not claimed."
+  },
+  "native_guarded_page_boundary": {
+    "result": "PASS",
+    "stdout": "guarded FindIndex native boundary tests passed\n",
+    "stderr": "",
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O0",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_memory\\findindex-guard-1790988969246239000-nokj9s5s\\findindex-guard-native.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\state\\database.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\database\\findindex_guard_native_test.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_memory\\findindex-guard-1790988969246239000-nokj9s5s\\findindex-guard-native-test.exe"
+    ]
+  },
+  "unguarded_protected_page_negative_control": {
+    "result": "EXPECTED_ACCESS_VIOLATION_CAUGHT_BY_TEST_HANDLER",
+    "returncode": 86,
+    "stdout": "",
+    "stderr": "",
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O0",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-DEXPECT_UNGUARDED_CRASH",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_memory\\findindex-guard-1790988969246239000-nokj9s5s\\findindex-native-unguarded.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\state\\database.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\database\\findindex_guard_native_test.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_memory\\findindex-guard-1790988969246239000-nokj9s5s\\findindex-native-unguarded.exe"
+    ]
+  },
+  "actual_database_runtime": {
+    "result": "PASS",
+    "database_calls": {
+      "OpenDB": 4,
+      "OpenIndex": 4,
+      "FindIndex": 24,
+      "DBRecall": 16,
+      "CloseDB": 4
+    },
+    "cases": [
+      "PASS,HCEGANT,count=271,last=1/15,above_max=2/15,resources=2",
+      "PASS,SHARED,count=449,last=967/21,above_max=968/21,resources=2",
+      "PASS,SHARED,count=449,last=967/21,above_max=968/21,resources=2",
+      "PASS,SOUND,count=120,last=20011/20,above_max=20012/20,resources=2"
+    ],
+    "stdout": "PASS,HCEGANT,count=271,last=1/15,above_max=2/15,resources=2\nPASS,SHARED,count=449,last=967/21,above_max=968/21,resources=2\nPASS,SHARED,count=449,last=967/21,above_max=968/21,resources=2\nPASS,SOUND,count=120,last=20011/20,above_max=20012/20,resources=2\nPASS guarded actual-source open/read/decode/close and invalid-resource controls\n",
+    "stderr": "",
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O0",
+      "-fsigned-char",
+      "-fno-builtin-sprintf",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Werror=implicit-function-declaration",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_memory\\findindex-guard-1790988969246239000-nokj9s5s\\root_m1986_unpatched.o",
+      "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m19A9.c",
+      "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m19DC.c",
+      "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m1A28.c",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_memory\\findindex-guard-1790988969246239000-nokj9s5s\\findindex-guard-native.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\state\\database.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\conversions\\pointer_globals.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_format.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_memory.c",
+      "D:\\Prog\\simant_recon\\portable\\platform\\memory.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\algorithms\\lzss.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\resources\\database.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\database\\findindex_guard_open_recall_driver.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\database\\native_open_recall_error_symbols.c",
+      "-Wl,--gc-sections",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_memory\\findindex-guard-1790988969246239000-nokj9s5s\\guarded-open-recall.exe"
+    ],
+    "scope": "Generated actual OpenDB/OpenIndex/DBRecall/LZSS/CloseDB with only FindIndex provided by the guard helper; validates last-row hits, above-maximum and invalid-kind misses, empty table early return, real raw/compressed resource payloads compared to portable_db_load."
+  },
+  "boundary_semantics": {
+    "preserved": [
+      "binary-search updates",
+      "fd_50F6_3956 cursor",
+      "fd_50F6_3952 cursor pointer assignment"
+    ],
+    "changed_native_case": "if lower-bound insertion rank equals active count, return NULL before reading id/kind",
+    "excluded": "original DOS heap residue at index[count]; a matching initialized DOS sentinel still returns its pointer in the original and is intentionally changed by the native safety adapter",
+    "empty_table": "original early return with cursor=0 and no cursor-pointer reassignment; retained",
+    "actual_onepast_native": "forms and preserves legal C one-past pointer, then returns before dereference"
+  },
+  "oracle": {
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn": "2.1.4",
+    "fresh_dos_target_invocations": 8,
+    "original_dos_calls_in_actual_database_runtime": 0
+  },
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "identity_before": {
+      "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "size": 2350907,
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+    },
+    "identity_after": {
+      "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "size": 2350907,
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+    }
+  },
+  "inputs_before": {
+    "evidence/behavior/functions/FindIndex/module.c": {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "size": 2872,
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a"
+    },
+    "src/root/m1986.c": {
+      "path": "src/root/m1986.c",
+      "size": 3351,
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96"
+    },
+    "portable/whole_program/conversions/findindex_native_guard.py": {
+      "path": "portable/whole_program/conversions/findindex_native_guard.py",
+      "size": 8564,
+      "sha256": "e820d1eb2a56586b77ddfa72f80bf6c89fd9b39a16e6070ec116afadb70e9926"
+    },
+    "portable/whole_program/types/database.h": {
+      "path": "portable/whole_program/types/database.h",
+      "size": 2018,
+      "sha256": "8722c3fceb9f0af92bbe4129020d648ee69c8ee00c6f4614b89794fa815481a6"
+    },
+    "portable/whole_program/state/database.c": {
+      "path": "portable/whole_program/state/database.c",
+      "size": 182,
+      "sha256": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27"
+    },
+    "portable/whole_program/platform/handles.c": {
+      "path": "portable/whole_program/platform/handles.c",
+      "size": 25481,
+      "sha256": "068e9f92415773ebb087bcac78c523b49d3fb93ed60938795988a756f699dd70"
+    },
+    "portable/whole_program/platform/handles.h": {
+      "path": "portable/whole_program/platform/handles.h",
+      "size": 6000,
+      "sha256": "2b7ee389256bec2b1ccdf6cebdf89612fe15b8cdf5e945d2cd49247a3e9b7f1b"
+    },
+    "portable/whole_program/platform/dos_io.c": {
+      "path": "portable/whole_program/platform/dos_io.c",
+      "size": 10148,
+      "sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0"
+    },
+    "portable/whole_program/platform/dos_io.h": {
+      "path": "portable/whole_program/platform/dos_io.h",
+      "size": 1487,
+      "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a"
+    },
+    "portable/whole_program/platform/dos_format.c": {
+      "path": "portable/whole_program/platform/dos_format.c",
+      "size": 9840,
+      "sha256": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1"
+    },
+    "portable/whole_program/platform/dos_format.h": {
+      "path": "portable/whole_program/platform/dos_format.h",
+      "size": 823,
+      "sha256": "94f74d990e17b2412d25404fc27343eb81f12ba5e19e98f0000280f65deb07ff"
+    },
+    "portable/whole_program/platform/dos_memory.c": {
+      "path": "portable/whole_program/platform/dos_memory.c",
+      "size": 1717,
+      "sha256": "d821e60e0053ab73f648f3169e5d71c818eea0b2d2cef7dd0535720ab3ece750"
+    },
+    "portable/whole_program/platform/dos_memory.h": {
+      "path": "portable/whole_program/platform/dos_memory.h",
+      "size": 1001,
+      "sha256": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce"
+    },
+    "portable/platform/memory.c": {
+      "path": "portable/platform/memory.c",
+      "size": 1670,
+      "sha256": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec"
+    },
+    "portable/platform/memory.h": {
+      "path": "portable/platform/memory.h",
+      "size": 888,
+      "sha256": "6264b9bf6c34c0125d5d811b46d8c5f92ec580c13c3507c346677983b31a64c7"
+    },
+    "portable/whole_program/conversions/pointer_globals.c": {
+      "path": "portable/whole_program/conversions/pointer_globals.c",
+      "size": 399,
+      "sha256": "f6be2f70061b4c00ab948303c7e2f8bab60808f1c4f5198599051526542bfdac"
+    },
+    "portable/whole_program/conversions/pointer_globals.h": {
+      "path": "portable/whole_program/conversions/pointer_globals.h",
+      "size": 1170,
+      "sha256": "8cc3ffc6ed145b8d0c185fffb3da35278327189bc89bf57ffcaecc5105da65a2"
+    },
+    "portable/whole_program/algorithms/lzss.c": {
+      "path": "portable/whole_program/algorithms/lzss.c",
+      "size": 3036,
+      "sha256": "a23b65265e2d91cbd2a93333760d342dbc085bb0d9c1c676c756651d00529540"
+    },
+    "portable/whole_program/algorithms/lzss.h": {
+      "path": "portable/whole_program/algorithms/lzss.h",
+      "size": 351,
+      "sha256": "5e732a4607b180afb5954c06e0a68c13bc6be5805af07610d285c93e4679e549"
+    },
+    "portable/game/resources/database.c": {
+      "path": "portable/game/resources/database.c",
+      "size": 18671,
+      "sha256": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa"
+    },
+    "portable/game/resources/database.h": {
+      "path": "portable/game/resources/database.h",
+      "size": 3660,
+      "sha256": "3b62dd145abf89a1eb88b93fa41830ed454de2cbe493718edfb9b57da75b1272"
+    },
+    "portable/tests/whole_program/database/findindex_guard_native_test.c": {
+      "path": "portable/tests/whole_program/database/findindex_guard_native_test.c",
+      "size": 3097,
+      "sha256": "8da72fb7511ae108446c0015d5cf7edb02774ddac943a82a5a344b2a7ac48db7"
+    },
+    "portable/tests/whole_program/database/findindex_guard_open_recall_driver.c": {
+      "path": "portable/tests/whole_program/database/findindex_guard_open_recall_driver.c",
+      "size": 5112,
+      "sha256": "2a15dd96408dbb3e4d3e30247bc15cef5581a894820c4908d9910d7ae4d24a77"
+    },
+    "portable/tests/whole_program/database/native_open_recall_error_symbols.c": {
+      "path": "portable/tests/whole_program/database/native_open_recall_error_symbols.c",
+      "size": 160,
+      "sha256": "2210031cc898b17c10b67438c0e4af36e34b1ae2d4b694af77baf8aec268a787"
+    },
+    "portable/tests/resources/evidence/database_dos_differential.py": {
+      "path": "portable/tests/resources/evidence/database_dos_differential.py",
+      "size": 14465,
+      "sha256": "53cfa484e75eb6d6d10b34293c7025c9e459d290e916fdeef07d64f99b9677d5"
+    },
+    "portable/tests/resources/evidence/database-dos-differential.json": {
+      "path": "portable/tests/resources/evidence/database-dos-differential.json",
+      "size": 2497,
+      "sha256": "f7eced8adc80bde26a1fd4341edb143b46567d0ee99196ba58e39ddf5eaf7f9b"
+    },
+    "portable/tests/whole_program/database/run_findindex_guard.py": {
+      "path": "portable/tests/whole_program/database/run_findindex_guard.py",
+      "size": 22723,
+      "sha256": "e7e0902f100c78999886c00125eb2a89da13996495be2eed59d43a4c39f3e62d"
+    },
+    "portable/tests/whole_program/conversions/test_findindex_native_guard.py": {
+      "path": "portable/tests/whole_program/conversions/test_findindex_native_guard.py",
+      "size": 3441,
+      "sha256": "a2971cbd0c83dca90a7c6db2002644f15ab1b6403029c2ae881126321809e246"
+    },
+    "portable/tools/whole_program.py": {
+      "path": "portable/tools/whole_program.py",
+      "size": 42227,
+      "sha256": "140f28faa9a34439a433bb4bc9dddef3b437a7bfb40d85a984f3e48bd0edf5d5"
+    },
+    "tools/behavior.py": {
+      "path": "tools/behavior.py",
+      "size": 29979,
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    },
+    "tools/behavior_ledger.py": {
+      "path": "tools/behavior_ledger.py",
+      "size": 9510,
+      "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+    },
+    "tools/modules.py": {
+      "path": "tools/modules.py",
+      "size": 60548,
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+    },
+    "tools/modctx.py": {
+      "path": "tools/modctx.py",
+      "size": 14408,
+      "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+    },
+    "tools/match.py": {
+      "path": "tools/match.py",
+      "size": 18033,
+      "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+    },
+    "tools/exe.py": {
+      "path": "tools/exe.py",
+      "size": 7645,
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+    },
+    "tools/functions.py": {
+      "path": "tools/functions.py",
+      "size": 13467,
+      "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+    },
+    "tools/autosearch.py": {
+      "path": "tools/autosearch.py",
+      "size": 30166,
+      "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+    },
+    "tools/mismatch.py": {
+      "path": "tools/mismatch.py",
+      "size": 38673,
+      "sha256": "99c1281ef9c2814776647c86a741ed32da874feee3f9907edec5cf2b8a5efc3b"
+    },
+    "tools/omf.py": {
+      "path": "tools/omf.py",
+      "size": 29112,
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+    },
+    "tools/symbols.py": {
+      "path": "tools/symbols.py",
+      "size": 15472,
+      "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+    },
+    "tools/behavior_suites/small_contracts.py": {
+      "path": "tools/behavior_suites/small_contracts.py",
+      "size": 36208,
+      "sha256": "6f319c90f1a979c6f27a9be5e4b98f1f04f4c96caa0aac3c01cb3dabbe52be3b"
+    },
+    "layout/oracle.lock.json": {
+      "path": "layout/oracle.lock.json",
+      "size": 18807,
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    "layout/toolchain.json": {
+      "path": "layout/toolchain.json",
+      "size": 39241,
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+    },
+    "layout/manifest.json": {
+      "path": "layout/manifest.json",
+      "size": 628980,
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "layout/symbols.json": {
+      "path": "layout/symbols.json",
+      "size": 800809,
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    "evidence/toolchain/runtime-location.json": {
+      "path": "evidence/toolchain/runtime-location.json",
+      "size": 19154,
+      "sha256": "7a74606866f9645afdfe7181723a61771d4345a7be95f71dcc1fcde002405675"
+    },
+    "build/workers/whole_program/generated/dos_types.h": {
+      "path": "build/workers/whole_program/generated/dos_types.h",
+      "size": 333,
+      "sha256": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705"
+    },
+    "build/workers/whole_program/generated/migration.json": {
+      "path": "build/workers/whole_program/generated/migration.json",
+      "size": 2905132,
+      "sha256": "aafef139cc0a66fc3f542fec385973a6be9f5aeddc6d62f9848facb6c5cf6b60"
+    },
+    "build/workers/whole_program/generated/root_m1986.c": {
+      "path": "build/workers/whole_program/generated/root_m1986.c",
+      "size": 3238,
+      "sha256": "e7a0d4511c2c3759a7bb9211800bdfa8db7dc880d7fdd5c258bb7902e485d918"
+    },
+    "build/workers/whole_program/generated/root_m19A9.c": {
+      "path": "build/workers/whole_program/generated/root_m19A9.c",
+      "size": 4810,
+      "sha256": "eddce3726f1377cbc7192634f707ab34f1860eb1516830806633528352fbd95e"
+    },
+    "build/workers/whole_program/generated/root_m19DC.c": {
+      "path": "build/workers/whole_program/generated/root_m19DC.c",
+      "size": 5080,
+      "sha256": "35b91d61f33077b866d3754426faeb1d84f8792058119e30c8b8bc953449a911"
+    },
+    "build/workers/whole_program/generated/root_m1A28.c": {
+      "path": "build/workers/whole_program/generated/root_m1A28.c",
+      "size": 3029,
+      "sha256": "b958353441d8209abc79e3a3567dfc4566cae16899118f3ed7647260f1cc37ca"
+    },
+    "assets/HCEGANT.NDX": {
+      "path": "assets/HCEGANT.NDX",
+      "size": 2444,
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+    },
+    "assets/HCEGANT.DAT": {
+      "path": "assets/HCEGANT.DAT",
+      "size": 629438,
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+    },
+    "assets/SHARED.NDX": {
+      "path": "assets/SHARED.NDX",
+      "size": 3868,
+      "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477"
+    },
+    "assets/SHARED.DAT": {
+      "path": "assets/SHARED.DAT",
+      "size": 96117,
+      "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+    },
+    "assets/SOUND.NDX": {
+      "path": "assets/SOUND.NDX",
+      "size": 1236,
+      "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+    },
+    "assets/SOUND.DAT": {
+      "path": "assets/SOUND.DAT",
+      "size": 111470,
+      "sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629"
+    }
+  },
+  "inputs_after": {
+    "evidence/behavior/functions/FindIndex/module.c": {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "size": 2872,
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a"
+    },
+    "src/root/m1986.c": {
+      "path": "src/root/m1986.c",
+      "size": 3351,
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96"
+    },
+    "portable/whole_program/conversions/findindex_native_guard.py": {
+      "path": "portable/whole_program/conversions/findindex_native_guard.py",
+      "size": 8564,
+      "sha256": "e820d1eb2a56586b77ddfa72f80bf6c89fd9b39a16e6070ec116afadb70e9926"
+    },
+    "portable/whole_program/types/database.h": {
+      "path": "portable/whole_program/types/database.h",
+      "size": 2018,
+      "sha256": "8722c3fceb9f0af92bbe4129020d648ee69c8ee00c6f4614b89794fa815481a6"
+    },
+    "portable/whole_program/state/database.c": {
+      "path": "portable/whole_program/state/database.c",
+      "size": 182,
+      "sha256": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27"
+    },
+    "portable/whole_program/platform/handles.c": {
+      "path": "portable/whole_program/platform/handles.c",
+      "size": 25481,
+      "sha256": "068e9f92415773ebb087bcac78c523b49d3fb93ed60938795988a756f699dd70"
+    },
+    "portable/whole_program/platform/handles.h": {
+      "path": "portable/whole_program/platform/handles.h",
+      "size": 6000,
+      "sha256": "2b7ee389256bec2b1ccdf6cebdf89612fe15b8cdf5e945d2cd49247a3e9b7f1b"
+    },
+    "portable/whole_program/platform/dos_io.c": {
+      "path": "portable/whole_program/platform/dos_io.c",
+      "size": 10148,
+      "sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0"
+    },
+    "portable/whole_program/platform/dos_io.h": {
+      "path": "portable/whole_program/platform/dos_io.h",
+      "size": 1487,
+      "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a"
+    },
+    "portable/whole_program/platform/dos_format.c": {
+      "path": "portable/whole_program/platform/dos_format.c",
+      "size": 9840,
+      "sha256": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1"
+    },
+    "portable/whole_program/platform/dos_format.h": {
+      "path": "portable/whole_program/platform/dos_format.h",
+      "size": 823,
+      "sha256": "94f74d990e17b2412d25404fc27343eb81f12ba5e19e98f0000280f65deb07ff"
+    },
+    "portable/whole_program/platform/dos_memory.c": {
+      "path": "portable/whole_program/platform/dos_memory.c",
+      "size": 1717,
+      "sha256": "d821e60e0053ab73f648f3169e5d71c818eea0b2d2cef7dd0535720ab3ece750"
+    },
+    "portable/whole_program/platform/dos_memory.h": {
+      "path": "portable/whole_program/platform/dos_memory.h",
+      "size": 1001,
+      "sha256": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce"
+    },
+    "portable/platform/memory.c": {
+      "path": "portable/platform/memory.c",
+      "size": 1670,
+      "sha256": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec"
+    },
+    "portable/platform/memory.h": {
+      "path": "portable/platform/memory.h",
+      "size": 888,
+      "sha256": "6264b9bf6c34c0125d5d811b46d8c5f92ec580c13c3507c346677983b31a64c7"
+    },
+    "portable/whole_program/conversions/pointer_globals.c": {
+      "path": "portable/whole_program/conversions/pointer_globals.c",
+      "size": 399,
+      "sha256": "f6be2f70061b4c00ab948303c7e2f8bab60808f1c4f5198599051526542bfdac"
+    },
+    "portable/whole_program/conversions/pointer_globals.h": {
+      "path": "portable/whole_program/conversions/pointer_globals.h",
+      "size": 1170,
+      "sha256": "8cc3ffc6ed145b8d0c185fffb3da35278327189bc89bf57ffcaecc5105da65a2"
+    },
+    "portable/whole_program/algorithms/lzss.c": {
+      "path": "portable/whole_program/algorithms/lzss.c",
+      "size": 3036,
+      "sha256": "a23b65265e2d91cbd2a93333760d342dbc085bb0d9c1c676c756651d00529540"
+    },
+    "portable/whole_program/algorithms/lzss.h": {
+      "path": "portable/whole_program/algorithms/lzss.h",
+      "size": 351,
+      "sha256": "5e732a4607b180afb5954c06e0a68c13bc6be5805af07610d285c93e4679e549"
+    },
+    "portable/game/resources/database.c": {
+      "path": "portable/game/resources/database.c",
+      "size": 18671,
+      "sha256": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa"
+    },
+    "portable/game/resources/database.h": {
+      "path": "portable/game/resources/database.h",
+      "size": 3660,
+      "sha256": "3b62dd145abf89a1eb88b93fa41830ed454de2cbe493718edfb9b57da75b1272"
+    },
+    "portable/tests/whole_program/database/findindex_guard_native_test.c": {
+      "path": "portable/tests/whole_program/database/findindex_guard_native_test.c",
+      "size": 3097,
+      "sha256": "8da72fb7511ae108446c0015d5cf7edb02774ddac943a82a5a344b2a7ac48db7"
+    },
+    "portable/tests/whole_program/database/findindex_guard_open_recall_driver.c": {
+      "path": "portable/tests/whole_program/database/findindex_guard_open_recall_driver.c",
+      "size": 5112,
+      "sha256": "2a15dd96408dbb3e4d3e30247bc15cef5581a894820c4908d9910d7ae4d24a77"
+    },
+    "portable/tests/whole_program/database/native_open_recall_error_symbols.c": {
+      "path": "portable/tests/whole_program/database/native_open_recall_error_symbols.c",
+      "size": 160,
+      "sha256": "2210031cc898b17c10b67438c0e4af36e34b1ae2d4b694af77baf8aec268a787"
+    },
+    "portable/tests/resources/evidence/database_dos_differential.py": {
+      "path": "portable/tests/resources/evidence/database_dos_differential.py",
+      "size": 14465,
+      "sha256": "53cfa484e75eb6d6d10b34293c7025c9e459d290e916fdeef07d64f99b9677d5"
+    },
+    "portable/tests/resources/evidence/database-dos-differential.json": {
+      "path": "portable/tests/resources/evidence/database-dos-differential.json",
+      "size": 2497,
+      "sha256": "f7eced8adc80bde26a1fd4341edb143b46567d0ee99196ba58e39ddf5eaf7f9b"
+    },
+    "portable/tests/whole_program/database/run_findindex_guard.py": {
+      "path": "portable/tests/whole_program/database/run_findindex_guard.py",
+      "size": 22723,
+      "sha256": "e7e0902f100c78999886c00125eb2a89da13996495be2eed59d43a4c39f3e62d"
+    },
+    "portable/tests/whole_program/conversions/test_findindex_native_guard.py": {
+      "path": "portable/tests/whole_program/conversions/test_findindex_native_guard.py",
+      "size": 3441,
+      "sha256": "a2971cbd0c83dca90a7c6db2002644f15ab1b6403029c2ae881126321809e246"
+    },
+    "portable/tools/whole_program.py": {
+      "path": "portable/tools/whole_program.py",
+      "size": 42227,
+      "sha256": "140f28faa9a34439a433bb4bc9dddef3b437a7bfb40d85a984f3e48bd0edf5d5"
+    },
+    "tools/behavior.py": {
+      "path": "tools/behavior.py",
+      "size": 29979,
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    },
+    "tools/behavior_ledger.py": {
+      "path": "tools/behavior_ledger.py",
+      "size": 9510,
+      "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+    },
+    "tools/modules.py": {
+      "path": "tools/modules.py",
+      "size": 60548,
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+    },
+    "tools/modctx.py": {
+      "path": "tools/modctx.py",
+      "size": 14408,
+      "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+    },
+    "tools/match.py": {
+      "path": "tools/match.py",
+      "size": 18033,
+      "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+    },
+    "tools/exe.py": {
+      "path": "tools/exe.py",
+      "size": 7645,
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+    },
+    "tools/functions.py": {
+      "path": "tools/functions.py",
+      "size": 13467,
+      "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+    },
+    "tools/autosearch.py": {
+      "path": "tools/autosearch.py",
+      "size": 30166,
+      "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+    },
+    "tools/mismatch.py": {
+      "path": "tools/mismatch.py",
+      "size": 38673,
+      "sha256": "99c1281ef9c2814776647c86a741ed32da874feee3f9907edec5cf2b8a5efc3b"
+    },
+    "tools/omf.py": {
+      "path": "tools/omf.py",
+      "size": 29112,
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+    },
+    "tools/symbols.py": {
+      "path": "tools/symbols.py",
+      "size": 15472,
+      "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+    },
+    "tools/behavior_suites/small_contracts.py": {
+      "path": "tools/behavior_suites/small_contracts.py",
+      "size": 36208,
+      "sha256": "6f319c90f1a979c6f27a9be5e4b98f1f04f4c96caa0aac3c01cb3dabbe52be3b"
+    },
+    "layout/oracle.lock.json": {
+      "path": "layout/oracle.lock.json",
+      "size": 18807,
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    "layout/toolchain.json": {
+      "path": "layout/toolchain.json",
+      "size": 39241,
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+    },
+    "layout/manifest.json": {
+      "path": "layout/manifest.json",
+      "size": 628980,
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "layout/symbols.json": {
+      "path": "layout/symbols.json",
+      "size": 800809,
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    "evidence/toolchain/runtime-location.json": {
+      "path": "evidence/toolchain/runtime-location.json",
+      "size": 19154,
+      "sha256": "7a74606866f9645afdfe7181723a61771d4345a7be95f71dcc1fcde002405675"
+    },
+    "build/workers/whole_program/generated/dos_types.h": {
+      "path": "build/workers/whole_program/generated/dos_types.h",
+      "size": 333,
+      "sha256": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705"
+    },
+    "build/workers/whole_program/generated/migration.json": {
+      "path": "build/workers/whole_program/generated/migration.json",
+      "size": 2905132,
+      "sha256": "aafef139cc0a66fc3f542fec385973a6be9f5aeddc6d62f9848facb6c5cf6b60"
+    },
+    "build/workers/whole_program/generated/root_m1986.c": {
+      "path": "build/workers/whole_program/generated/root_m1986.c",
+      "size": 3238,
+      "sha256": "e7a0d4511c2c3759a7bb9211800bdfa8db7dc880d7fdd5c258bb7902e485d918"
+    },
+    "build/workers/whole_program/generated/root_m19A9.c": {
+      "path": "build/workers/whole_program/generated/root_m19A9.c",
+      "size": 4810,
+      "sha256": "eddce3726f1377cbc7192634f707ab34f1860eb1516830806633528352fbd95e"
+    },
+    "build/workers/whole_program/generated/root_m19DC.c": {
+      "path": "build/workers/whole_program/generated/root_m19DC.c",
+      "size": 5080,
+      "sha256": "35b91d61f33077b866d3754426faeb1d84f8792058119e30c8b8bc953449a911"
+    },
+    "build/workers/whole_program/generated/root_m1A28.c": {
+      "path": "build/workers/whole_program/generated/root_m1A28.c",
+      "size": 3029,
+      "sha256": "b958353441d8209abc79e3a3567dfc4566cae16899118f3ed7647260f1cc37ca"
+    },
+    "assets/HCEGANT.NDX": {
+      "path": "assets/HCEGANT.NDX",
+      "size": 2444,
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+    },
+    "assets/HCEGANT.DAT": {
+      "path": "assets/HCEGANT.DAT",
+      "size": 629438,
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+    },
+    "assets/SHARED.NDX": {
+      "path": "assets/SHARED.NDX",
+      "size": 3868,
+      "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477"
+    },
+    "assets/SHARED.DAT": {
+      "path": "assets/SHARED.DAT",
+      "size": 96117,
+      "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+    },
+    "assets/SOUND.NDX": {
+      "path": "assets/SOUND.NDX",
+      "size": 1236,
+      "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+    },
+    "assets/SOUND.DAT": {
+      "path": "assets/SOUND.DAT",
+      "size": 111470,
+      "sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629"
+    }
+  },
+  "native_binary_hashes": {
+    "guarded_test": {
+      "path": "build/workers/behavior_memory/findindex-guard-1790988969246239000-nokj9s5s/findindex-guard-native-test.exe",
+      "size": 123163,
+      "sha256": "1e98296c659cf04b61178d38b26add415d27fd6d81f39b417117fd1e62852ee2"
+    },
+    "unguarded_negative": {
+      "path": "build/workers/behavior_memory/findindex-guard-1790988969246239000-nokj9s5s/findindex-native-unguarded.exe",
+      "size": 124135,
+      "sha256": "b451430a04d66d31361287d19b0de88bee8b80c059bcb75854c8f97f3b8184bc"
+    },
+    "actual_runtime": {
+      "path": "build/workers/behavior_memory/findindex-guard-1790988969246239000-nokj9s5s/guarded-open-recall.exe",
+      "size": 509003,
+      "sha256": "afe2394ba1ce824b558659838f5c337408d5b4fd32006879a799edb7ce12357f"
+    },
+    "dos_candidate_object": "46d30dbea10c66a9b8cdd10dfad23d3f61c3c45dc529d69184d02dc92a3bf4ca"
+  },
+  "build_work_directory": "build/workers/behavior_memory/findindex-guard-1790988969246239000-nokj9s5s"
+}

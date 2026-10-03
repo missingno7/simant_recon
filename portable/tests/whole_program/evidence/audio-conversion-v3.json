@@ -1,0 +1,534 @@
+{
+  "schema": "whole-program-audio-conversion-test-v1",
+  "status": "PASS",
+  "input_sha256": {
+    "src/root/m29F0.c": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+    "src/root/m284A.c": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+    "src/root/m29D6.c": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+    "src/root/m293A.c": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+    "src/root/m0000.c": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+    "src/root/m171C.c": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+    "src/data/d55B3_00B8.c": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+    "portable/whole_program/conversions/audio.py": "26f06dafbd8ad20c8192569a595dbe94e27aa0020418e40035a79d7f651ec1a2",
+    "portable/whole_program/platform/audio.h": "b1cdc9df8a0b30e85d8185d19fb8abec60d93ac6f9bcb17d5ae5793e6852c069",
+    "portable/whole_program/platform/audio.c": "ba8a9a9ff65f8276c29a5ba5b76a0f6272bc8b0406e2ba6811ffc491503779d8",
+    "portable/tests/whole_program/audio_conversion_probe.c": "c5d918ed90b1c6aa16203308fda06fa6bd145029192e84aae56bb202b8e89bd9",
+    "portable/tests/whole_program/run_audio_conversion.py": "1e5af1205ec5da482ad6d920362c5450570d9bda27d39600e7f3a683e1b4a781",
+    "portable/tools/whole_program.py": "b8bbcd366ec98f855f2ceb4338b22869f25304c0f0656385569038f6b526a7ab"
+  },
+  "conversions": {
+    "src/root/m29F0.c": {
+      "conversion": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m29F0.c",
+          "sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302"
+        },
+        "dependency_pins": [],
+        "output_sha256": "2bdfa3aa24fb7f46453788554c96c14250e05ef6a9e02a9627bd42df8d72ca6a",
+        "change": {
+          "transformed_functions": [
+            "f_29F0_000A",
+            "f_29F0_0012",
+            "f_29F0_001A",
+            "f_29F0_0022",
+            "f_29F0_002A",
+            "f_29F0_0038"
+          ],
+          "source_operations": {
+            "cli": "dos_audio_host_interrupt_disable()",
+            "sti": "dos_audio_host_interrupt_enable()",
+            "out": "DX receives the low word of port; AL receives the low byte of value; host call uses uint16_t/uint8_t",
+            "in": "DX receives the low word of port; returned AL byte is provided by dos_audio_host_in8"
+          },
+          "leaves_unprovided": [
+            "dos_audio_host_interrupt_disable",
+            "dos_audio_host_interrupt_enable",
+            "dos_audio_host_out8",
+            "dos_audio_host_in8"
+          ]
+        }
+      },
+      "word_width_lowering": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 3,
+        "qualifier_removed": 6,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "bare_unsigned": 0
+      },
+      "native_source_sha256": "ce8da8bfc71710540f9ca76f3fd8419a44888b5d4f35efce0b4c436ef78d2a27"
+    },
+    "src/root/m284A.c": {
+      "conversion": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m284A.c",
+          "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5"
+        },
+        "dependency_pins": [
+          {
+            "path": "src/root/m0000.c",
+            "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+            "role": "f_0000_0193 obtains the song resource, locks its handle, and stores the handle in Song.data before m284A reads it"
+          },
+          {
+            "path": "src/root/m171C.c",
+            "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+            "role": "f_171C_1C1C returns the handle size as long; m284A's own int declaration/store retain the low 16-bit source-visible bound"
+          }
+        ],
+        "output_sha256": "7c49f51c308e8375299f3e6e86b85fb24d5f9f6124e28ce36012d03c6f1c9b16",
+        "change": {
+          "transformed_accesses": 6,
+          "handle_base": "g_8DFC is the native pointer stored in *fd_50F6_4B28 after f_0000_0193 locks the handle",
+          "record_bound": "f_171C_1C1C returns long in m171C, but m284A declares the call as int and stores it in int fd_50F6_4B2C; the source-visible bound is therefore the returned low 16 bits. The host span uses that same uint16_t size and checks each source offset at width 1.",
+          "invalid_offset_boundary": "dos_audio_host_song_bounds_fault is called instead of dereferencing outside the recorded song allocation",
+          "leaves_unprovided": [
+            "dos_audio_host_song_bounds_fault"
+          ]
+        }
+      },
+      "word_width_lowering": {
+        "uint8_t": 7,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 16,
+        "uint16_t": 0,
+        "int16_t": 55,
+        "qualifier_removed": 55,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "bare_unsigned": 6
+      },
+      "native_source_sha256": "da5d25b93d408b6fda78b539b42ce45a0914456757c011534fd429f5a0e6a048"
+    },
+    "src/root/m277E.c": {
+      "conversion": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m277E.c",
+          "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee"
+        },
+        "dependency_pins": [
+          {
+            "path": "src/data/d55B3_00B8.c",
+            "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+            "role": "struct Instr declares void *p and the referenced 56-entry voice tables use that native pointer member"
+          }
+        ],
+        "output_sha256": "c8de10db0255610f930dd7e4b4db5a6238ca28da13225a44aee3a51ff667b515",
+        "change": {
+          "field": "Voice.b",
+          "source_basis": "DATA fd_55B3_0C42 and sibling tables are arrays of {int kind, void *p}; m277E copies the second member verbatim in f_277E_010A and does not perform arithmetic on it",
+          "native_representation": "void * in both the source table projection and copied runtime table; target int remains a 16-bit word after standard whole-program lowering",
+          "source_behavior_changed": false
+        }
+      },
+      "word_width_lowering": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 1,
+        "int16_t": 75,
+        "qualifier_removed": 96,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "bare_unsigned": 1
+      },
+      "native_source_sha256": "80a07237015a4c031d98071b421b5fb86c7236092b08f9510f7b43ca8e0e10af"
+    },
+    "src/root/m29D6.c": {
+      "conversion": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m29D6.c",
+          "sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388"
+        },
+        "dependency_pins": [],
+        "output_sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+        "change": {
+          "status": "UNCHANGED_PENDING_DEVICE_BOUNDARIES",
+          "source_scan": "inline assembly contains BIOS interrupts, direct physical reads, device-status polling, or mixed-width port I/O; no simulator or detection result is substituted",
+          "host_capabilities": "unprovided"
+        }
+      },
+      "word_width_lowering": {
+        "uint8_t": 0,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 29,
+        "qualifier_removed": 9,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "bare_unsigned": 2
+      },
+      "native_source_sha256": "73d0dfe7838558271cf8f7b3976afd4921208ba476cce0e8789f0ad644edfb86"
+    },
+    "src/root/m293A.c": {
+      "conversion": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m293A.c",
+          "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6"
+        },
+        "dependency_pins": [],
+        "output_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+        "change": {
+          "status": "UNCHANGED_PENDING_DEVICE_BOUNDARIES",
+          "source_scan": "inline assembly contains BIOS interrupts, direct physical reads, device-status polling, or mixed-width port I/O; no simulator or detection result is substituted",
+          "host_capabilities": "unprovided"
+        }
+      },
+      "word_width_lowering": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 38,
+        "qualifier_removed": 29,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "bare_unsigned": 3
+      },
+      "native_source_sha256": "f6425fbd1ba76a3afa13743b6edac1ef715a89b45215bbb2f0e04a5a46c7f88d"
+    }
+  },
+  "native_probe": {
+    "compiler": {
+      "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+      "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+      "flags": [
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror"
+      ]
+    },
+    "compile_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      ".",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio_conversion_v3\\audio_conversion_probe.exe",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio_conversion_v3\\m29F0_converted.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\audio.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\audio_conversion_probe.c"
+    ],
+    "executable_sha256": "dded697d176f408e3780e9e77ce293f62f16a16ff189b0636beb10038f81966c",
+    "stdout": "audio host-intent and song-boundary controls: PASS",
+    "m284A_compile_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-unused-parameter",
+      "-I",
+      ".",
+      "-c",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio_conversion_v3\\m284A_converted.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio_conversion_v3\\m284A_converted.o"
+    ],
+    "m284A_object_sha256": "d124e16be31cdbaa96a6a413d2b2b0d6b2d38e8a2910d1b6cb42979b7d5da9dd",
+    "limits": [
+      "Host port and interrupt callbacks are recording test providers only; production implementations remain unprovided.",
+      "Song bounds-fault provider is a longjmp recorder in this test; no DOS out-of-bounds behavior is claimed.",
+      "m284A is syntax-compiled but not linked or run because its timer, MIDI, allocator, and host-service peers are not provided here.",
+      "m277E Voice.b native pointer mapping follows the source DATA table declaration and copy-only use; hardware-heavy m277E is not compiled or run in this pass.",
+      "m29D6 and m293A are pinned unchanged because their device/BIOS behavior has not been converted."
+    ]
+  },
+  "original_dos_controls": {
+    "case_count": 6,
+    "cases": [
+      {
+        "function": "f_29F0_000A",
+        "case": "cli-a",
+        "original_vs_compiler_candidate_equal": true,
+        "io": [],
+        "return": null,
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "prepared_pair": {
+          "function": "f_29F0_000A",
+          "address": {
+            "unit": "root",
+            "seg": 10736,
+            "off": 10,
+            "size": 8
+          },
+          "source": "src\\root\\m29F0.c",
+          "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "compiled_source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93",
+          "linked_code_sha256": "ee19ab81450303813870e3503f159035570d9ef521384ba73a5f414a000c0dd6",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "unicorn_version": "2.1.4",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "profile": "msc600ax",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Gs",
+            "/Zi"
+          ],
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+        }
+      },
+      {
+        "function": "f_29F0_0012",
+        "case": "sti-a",
+        "original_vs_compiler_candidate_equal": true,
+        "io": [],
+        "return": null,
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "prepared_pair": {
+          "function": "f_29F0_0012",
+          "address": {
+            "unit": "root",
+            "seg": 10736,
+            "off": 18,
+            "size": 8
+          },
+          "source": "src\\root\\m29F0.c",
+          "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "compiled_source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93",
+          "linked_code_sha256": "ee19ab81450303813870e3503f159035570d9ef521384ba73a5f414a000c0dd6",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "unicorn_version": "2.1.4",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "profile": "msc600ax",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Gs",
+            "/Zi"
+          ],
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+        }
+      },
+      {
+        "function": "f_29F0_001A",
+        "case": "cli-b",
+        "original_vs_compiler_candidate_equal": true,
+        "io": [],
+        "return": null,
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "prepared_pair": {
+          "function": "f_29F0_001A",
+          "address": {
+            "unit": "root",
+            "seg": 10736,
+            "off": 26,
+            "size": 8
+          },
+          "source": "src\\root\\m29F0.c",
+          "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "compiled_source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93",
+          "linked_code_sha256": "ee19ab81450303813870e3503f159035570d9ef521384ba73a5f414a000c0dd6",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "unicorn_version": "2.1.4",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "profile": "msc600ax",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Gs",
+            "/Zi"
+          ],
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+        }
+      },
+      {
+        "function": "f_29F0_0022",
+        "case": "sti-b",
+        "original_vs_compiler_candidate_equal": true,
+        "io": [],
+        "return": null,
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "prepared_pair": {
+          "function": "f_29F0_0022",
+          "address": {
+            "unit": "root",
+            "seg": 10736,
+            "off": 34,
+            "size": 8
+          },
+          "source": "src\\root\\m29F0.c",
+          "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "compiled_source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93",
+          "linked_code_sha256": "ee19ab81450303813870e3503f159035570d9ef521384ba73a5f414a000c0dd6",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "unicorn_version": "2.1.4",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "profile": "msc600ax",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Gs",
+            "/Zi"
+          ],
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+        }
+      },
+      {
+        "function": "f_29F0_002A",
+        "case": "out-dx-al",
+        "original_vs_compiler_candidate_equal": true,
+        "io": [
+          [
+            "out",
+            4920,
+            1,
+            171
+          ]
+        ],
+        "return": null,
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "prepared_pair": {
+          "function": "f_29F0_002A",
+          "address": {
+            "unit": "root",
+            "seg": 10736,
+            "off": 42,
+            "size": 14
+          },
+          "source": "src\\root\\m29F0.c",
+          "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "compiled_source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93",
+          "linked_code_sha256": "ee19ab81450303813870e3503f159035570d9ef521384ba73a5f414a000c0dd6",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "unicorn_version": "2.1.4",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "profile": "msc600ax",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Gs",
+            "/Zi"
+          ],
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+        }
+      },
+      {
+        "function": "f_29F0_0038",
+        "case": "in-dx-al",
+        "original_vs_compiler_candidate_equal": true,
+        "io": [
+          [
+            "in",
+            824,
+            1,
+            165
+          ]
+        ],
+        "return": 4773,
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "prepared_pair": {
+          "function": "f_29F0_0038",
+          "address": {
+            "unit": "root",
+            "seg": 10736,
+            "off": 56,
+            "size": 20
+          },
+          "source": "src\\root\\m29F0.c",
+          "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "compiled_source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+          "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93",
+          "linked_code_sha256": "ee19ab81450303813870e3503f159035570d9ef521384ba73a5f414a000c0dd6",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "unicorn_version": "2.1.4",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "profile": "msc600ax",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Gs",
+            "/Zi"
+          ],
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+        }
+      }
+    ],
+    "limitations": [
+      "The original oracle is the hash-locked DOS executable; compiler candidates use the original C module with inline assembly and all six controls match.",
+      "The IN service uses a case-provided byte at port 0338 as an explicit deterministic host boundary input.",
+      "These controls validate original instruction/compiler semantics, not a real audio device or the converted host provider implementation."
+    ]
+  }
+}

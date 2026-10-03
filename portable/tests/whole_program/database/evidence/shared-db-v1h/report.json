@@ -1,0 +1,225 @@
+{
+  "schema": "simant-whole-program-db-integration-v1",
+  "status": "PASS_DIAGNOSTIC_NO_ACCEPTANCE_CLAIM",
+  "actual_body": "generated root_m1986.c::FindIndex, linked with actual shared state/database.c",
+  "unreached_dependencies": "OpenIndex/CloseIndex-only Punt, DosPunt, f_171C_13CA and dos_free references have fail-fast abort traps; these are not successful behavioral stubs and are not called by FindIndex.",
+  "compile": {
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O0",
+      "-fsigned-char",
+      "-fno-builtin-sprintf",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Werror=implicit-function-declaration",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m1986.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\state\\database.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\database\\native_driver.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\database\\unreachable_dependency_traps.c",
+      "-Wl,--gc-sections",
+      "-o",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\database\\evidence\\shared-db-v1h\\database-actual-tu.exe"
+    ],
+    "returncode": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "binary_sha256": "4c93985aa8e4977ec69ab06238a7474a0d623156d80dafc18fa459950a4388ab"
+  },
+  "fixture": {
+    "path": "fixture.bin",
+    "sha256": "05f095afeb07c7bd034d7458eb411337c6d9de0954f3dc16741bac07e54adc4b",
+    "size": 12700
+  },
+  "native_observations": {
+    "path": "native-observations.csv",
+    "sha256": "4a10a07bb37a31f56374b9cd6df2e9e231a620b2b96078de2d5462070e74c4b7",
+    "rows": 1483
+  },
+  "tables": [
+    {
+      "asset": "HCEGANT",
+      "active_entries": 271,
+      "wire_rows_including_reserved_lookahead": 272,
+      "queries": 430,
+      "ndx_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+    },
+    {
+      "asset": "SHARED",
+      "active_entries": 449,
+      "wire_rows_including_reserved_lookahead": 450,
+      "queries": 885,
+      "ndx_sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477"
+    },
+    {
+      "asset": "SOUND",
+      "active_entries": 120,
+      "wire_rows_including_reserved_lookahead": 121,
+      "queries": 168,
+      "ndx_sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+    }
+  ],
+  "cases": {
+    "count": 1483,
+    "hits": 843,
+    "misses": 640,
+    "low_equals_active_count_reads": 21,
+    "reserved_lookahead_matches": 3,
+    "cursor_mismatches": 0,
+    "return_pointer_mismatches": 0,
+    "global_pointer_home_mismatches": 0,
+    "returned_entry_fields_and_home_entry_fields_compared": true,
+    "expected_observation_sha256": "be5004a251b5d00e951c210aea9c4991f889540c6bc8a99d6a7d847fb7a8c66d"
+  },
+  "wire_layout": {
+    "IndexEntry_size": 8,
+    "IndexEntry_offsets": {
+      "offset": 0,
+      "id": 4,
+      "kind": 6,
+      "flags": 7
+    },
+    "every_fixture_row_is_copied_from_asset_wire_bytes": true,
+    "legacy_host_pointer_negative_control": "compile rejected as expected"
+  },
+  "domain_hazard": "For a miss whose insertion rank equals active count, FindIndex dereferences index[count]. The fixture supplies the asset's actual first reserved NDX row. This validates the historical behavior only for the captured reserved row; it does not make arbitrary one-past pointers safe.",
+  "dos_comparison": {
+    "fresh_dos_call": false,
+    "prior_original_dos_evidence": "portable/tests/resources/evidence/database-dos-differential.json",
+    "prior_cases": 1454,
+    "prior_mismatches": 0,
+    "prior_oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "source_and_asset_pins": {
+    "portable/tests/whole_program/database/run_shared_database.py": {
+      "path": "portable/tests/whole_program/database/run_shared_database.py",
+      "sha256": "2ea52c6d7790bd0fd380f033364494effec89e87913edd359ad3d6b3f515b8df",
+      "size": 15059
+    },
+    "portable/tests/whole_program/database/README.md": {
+      "path": "portable/tests/whole_program/database/README.md",
+      "sha256": "9445be077111845b48721838522f7e25a6be18b8f44b19b381e8b8a3497288a2",
+      "size": 1478
+    },
+    "portable/tests/whole_program/database/native_driver.c": {
+      "path": "portable/tests/whole_program/database/native_driver.c",
+      "sha256": "b6d8481c21a5e46d52e6e9b09062e7929d31c38120b59b1648ad2fa2fef29f94",
+      "size": 2701
+    },
+    "portable/tests/whole_program/database/unreachable_dependency_traps.c": {
+      "path": "portable/tests/whole_program/database/unreachable_dependency_traps.c",
+      "sha256": "717409d70882f90c276be7fcb1184440c4f02e0a5618f7cfa54a0b71697bb5ae",
+      "size": 481
+    },
+    "portable/tests/whole_program/database/reject_legacy_pointer.c": {
+      "path": "portable/tests/whole_program/database/reject_legacy_pointer.c",
+      "sha256": "05da4e98fca37184aef93711012fd14728a540398f182711ace2029b1c596b7f",
+      "size": 268
+    },
+    "portable/tools/whole_program.py": {
+      "path": "portable/tools/whole_program.py",
+      "sha256": "92601df485cc09c6bdef6e54b583dbc6cc65184acf7443f3e80b6d463dc8aded",
+      "size": 22039
+    },
+    "portable/whole_program/types/database.h": {
+      "path": "portable/whole_program/types/database.h",
+      "sha256": "8722c3fceb9f0af92bbe4129020d648ee69c8ee00c6f4614b89794fa815481a6",
+      "size": 2018
+    },
+    "portable/whole_program/state/database.c": {
+      "path": "portable/whole_program/state/database.c",
+      "sha256": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27",
+      "size": 182
+    },
+    "build/workers/whole_program/generated/root_m1986.c": {
+      "path": "build/workers/whole_program/generated/root_m1986.c",
+      "sha256": "738a72e67f3660b4995c468fd06db9ee0dd445832ff83be542c7a9b78c9c1456",
+      "size": 3033
+    },
+    "build/workers/whole_program/generated/dos_types.h": {
+      "path": "build/workers/whole_program/generated/dos_types.h",
+      "sha256": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+      "size": 333
+    },
+    "build/workers/whole_program/generated/migration.json": {
+      "path": "build/workers/whole_program/generated/migration.json",
+      "sha256": "022e78340976ca64fe31fca1a781a59993d9faaca5b6027262b4c84055aba2c1",
+      "size": 2916857
+    },
+    "src/root/m1986.c": {
+      "path": "src/root/m1986.c",
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+      "size": 3351
+    },
+    "evidence/behavior/functions/FindIndex/module.c": {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "size": 2872
+    },
+    "portable/research/whole_program_behavior_sources.json": {
+      "path": "portable/research/whole_program_behavior_sources.json",
+      "sha256": "e29f4fb8aa736c7adca105f846a6928954d95d6fa7b57d45dfcdfd8646d34c81",
+      "size": 304406
+    },
+    "portable/tests/resources/evidence/database-dos-differential.json": {
+      "path": "portable/tests/resources/evidence/database-dos-differential.json",
+      "sha256": "f7eced8adc80bde26a1fd4341edb143b46567d0ee99196ba58e39ddf5eaf7f9b",
+      "size": 2497
+    },
+    "assets/HCEGANT.NDX": {
+      "path": "assets/HCEGANT.NDX",
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "size": 2444
+    },
+    "assets/HCEGANT.DAT": {
+      "path": "assets/HCEGANT.DAT",
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+      "size": 629438
+    },
+    "assets/SHARED.NDX": {
+      "path": "assets/SHARED.NDX",
+      "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+      "size": 3868
+    },
+    "assets/SHARED.DAT": {
+      "path": "assets/SHARED.DAT",
+      "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+      "size": 96117
+    },
+    "assets/SOUND.NDX": {
+      "path": "assets/SOUND.NDX",
+      "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+      "size": 1236
+    },
+    "assets/SOUND.DAT": {
+      "path": "assets/SOUND.DAT",
+      "sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+      "size": 111470
+    }
+  },
+  "toolchain_before_after": {
+    "before": {
+      "gcc": {
+        "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+        "size": 2350907
+      },
+      "gcc_version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+      "python": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+      "platform": "win32"
+    },
+    "after": {
+      "gcc": {
+        "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+        "size": 2350907
+      },
+      "gcc_version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+      "python": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+      "platform": "win32"
+    }
+  },
+  "replay": "python portable/tests/whole_program/database/run_shared_database.py --out portable/tests/whole_program/database/evidence/shared-db-v1h"
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "simant-whole-program-graphics-contract-v1",
+  "status": "PASS",
+  "scope": [
+    "640x350 indexed framebuffer ownership and source dimension defaults",
+    "bounded S00 attribute, fill, and 1bpp glyph contracts",
+    "clip stack, color-map behavior, text pen, and explicit unprovided slots"
+  ],
+  "compiler": "gcc",
+  "command": [
+    "gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\graphics.c",
+    "D:\\Prog\\simant_recon\\portable\\render\\primitives.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\platform\\graphics_test.c",
+    "-o",
+    "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-graphics-contract-_lgwz_ag\\graphics_test.exe"
+  ],
+  "inputs_before_sha256": {
+    "portable\\whole_program\\platform\\graphics.h": "496b5bcf5865bd1891e20d766d8a27b5a4e614b399a648126bb3843741d70572",
+    "portable\\whole_program\\platform\\graphics.c": "9e3f022f56286193106f22d6e6856426f4f026932f4204ffaa8dd024f016a074",
+    "portable\\render\\primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable\\render\\primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable\\tests\\whole_program\\platform\\graphics_test.c": "74d7c53a26bf0bab4e4a9205d3683d68cfa4ccf3398dcc9b3c32bd18c32b341b",
+    "src\\root\\m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src\\S00\\m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+    "src\\S00\\m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src\\S01\\m3126.asm": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a"
+  },
+  "inputs_after_sha256": {
+    "portable\\whole_program\\platform\\graphics.h": "496b5bcf5865bd1891e20d766d8a27b5a4e614b399a648126bb3843741d70572",
+    "portable\\whole_program\\platform\\graphics.c": "9e3f022f56286193106f22d6e6856426f4f026932f4204ffaa8dd024f016a074",
+    "portable\\render\\primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "portable\\render\\primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable\\tests\\whole_program\\platform\\graphics_test.c": "74d7c53a26bf0bab4e4a9205d3683d68cfa4ccf3398dcc9b3c32bd18c32b341b",
+    "src\\root\\m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src\\S00\\m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+    "src\\S00\\m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src\\S01\\m3126.asm": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a"
+  },
+  "inputs_stable": true,
+  "stdout": "whole-program graphics contracts: PASS\n",
+  "stderr": "",
+  "exit_code": 0
+}

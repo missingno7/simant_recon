@@ -1,0 +1,64 @@
+{
+  "schema": "whole-program-audio-provider-test-v2",
+  "status": "PASS",
+  "boundary": "Timestamped m290D sampled-DAC event records are applied in order to the frozen two-channel scheduler and queued through a real SDL3 mono-U8 stream; m284A's original sequencer can be bound at the source m28BC divider cadence.",
+  "tests": [
+    {
+      "path": "portable/tests/whole_program/audio_events_test.c",
+      "status": "PASS",
+      "stdout": "PASS: timestamped source event queue and whole-program DAC provider"
+    },
+    {
+      "path": "portable/tests/whole_program/sdl_whole_audio_test.c",
+      "status": "PASS",
+      "stdout": "PASS: SDL3 dummy playback consumes timestamped source DAC events",
+      "device": "SDL_AUDIODRIVER=dummy"
+    },
+    {
+      "path": "portable/whole_program/conversions/audio.py",
+      "status": "PASS",
+      "m290D_source_sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+      "converted_sha256": "185f7a7006e5f69a8854a806f5721089cad1fff927e6004f5db8bec1cb5728bd"
+    }
+  ],
+  "sdl": {
+    "version": "3.4.16",
+    "rate_hz": 11932,
+    "format": "mono U8",
+    "backend": "dummy test device; production stream is default SDL playback"
+  },
+  "source_pins": {
+    "src/root/m290D.c": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+    "src/root/m284A.c": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "src/root/m28BC.asm": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+    "src/root/m295C.c": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89"
+  },
+  "scheduler_reference_report_sha256": "0b93048d04c9d945071a96f51e63ae1d11c627edc09955e5066f17613601f549",
+  "inputs": {
+    "portable/whole_program/platform/audio_events.c": "f6cd2237cb32a74ec8ab8f7b73ba162a4df8e3d0e6f0a7ce86393300d8a60e9e",
+    "portable/whole_program/platform/whole_audio_provider.c": "2f78455ace60a05d03d481d97bf1fa5a54449dd13d665e98abd421a7321b1b01",
+    "portable/research/audio_voice_scheduler.c": "d04765178883d59798522ffd333e212135a5faf690f253afd3dcb6da898a6857",
+    "portable/research/audio_voice_admission.c": "3498084baabcb850245715490991b2cc7a599332d8ed09dd6b5e5760a09041e7",
+    "portable/whole_program/platform/audio_events.h": "43f0c7484e1149993154893b29c0cc20ac252fa7f9107ce88ead52cab1434f9f",
+    "portable/whole_program/platform/whole_audio_provider.h": "0134b8f471e4155ec0386a22421347dd6845199015fb43efaa7cf3235ffa8238",
+    "portable/platform/sdl3/whole_audio_provider.c": "aff4e7bc6aa5929f8491af2d0f1c019ff09d69516fc75f37e51ea0753d5245f7",
+    "portable/platform/sdl3/whole_audio_provider.h": "f675f946708e4d54020edc15258bfa1a0eadec01f179b397ebd26f7678d70795",
+    "portable/platform/sdl3/audio.c": "322725c015bb3262dd321f60204034434d56d83ce52444b369e54881c637a4f3",
+    "portable/platform/sdl3/audio.h": "1dc0f2054ceef546d2fd390d49579db5aa38507af752d01b6a66061b26215101",
+    "portable/tests/whole_program/audio_events_test.c": "3c74af7ebac87a1bbc5a5a497ac2f25797455492d4b2a32df8d4ce4e8cfd1698",
+    "portable/tests/whole_program/sdl_whole_audio_test.c": "3943917f66bab9cc8fef4113e49a11d5ae542896ba2bc294ea69ece16d470375",
+    "portable/tests/whole_program/run_audio_provider_tests.py": "f6d949bd21b5a929bf05eae43637d3cd869dc73c53eaaf10cc47aa7fca0c26b3",
+    "portable/whole_program/conversions/audio.py": "1977fc57292fa4c4f0bb96527af8987801704b08fcac5403d92f729da582db69",
+    "portable/whole_program/platform/audio_events.md": "3bb224bbc205812f51899e05c97528bc03ebd38769a16aff17e2730a857c5bcd",
+    "src/root/m290D.c": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+    "src/root/m284A.c": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "src/root/m28BC.asm": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+    "src/root/m295C.c": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+    "portable/tests/audio/evidence/voice-admission-v2/scheduler-report.json": "0b93048d04c9d945071a96f51e63ae1d11c627edc09955e5066f17613601f549"
+  },
+  "limits": [
+    "The bounded provider handles type-1 sampled-DAC voices. MIDI/OPL/type-2 hardware families and DOS device detection remain unsupported.",
+    "This test binds a sequencer cadence callback but does not execute the generated f_284A_067F against a loaded song. The live application must bind that actual generated function after source state initialization.",
+    "The separate 365-tick frozen DOS ISR differential covers scheduler cursor and register logic; this SDL test proves stream/device integration, not physical PC-speaker acoustics or a DOS-to-SDL end-to-end song comparison."
+  ]
+}
