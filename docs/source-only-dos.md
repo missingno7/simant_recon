@@ -113,7 +113,7 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus ten reviewed data-only
+The current compilation passes all 127 canonical TUs plus eleven reviewed data-only
 providers. Symbol-address joins provide 121
 code aliases and thirteen exact-base data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
@@ -157,7 +157,7 @@ The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes unde
 only the MSC startup and byte/word view contracts authorize the generated history
 owners. The link gate checks the selected linker and runtime hashes against those controls.
 
-The remaining 380 imports are data: 372 FAR_BSS names and eight requiring
+The remaining 368 imports are data: 360 FAR_BSS names and eight requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -302,6 +302,24 @@ seeded by KillSpider and is not reset by InitSpider. Word-width, signedness,
 zero-fill and byte-view controls pass under both linkers. These nine FAR_BSS
 owners do not resolve the database slot `-1` layout dependency or prove the
 unchecked `Scycle` drawing index safe for arbitrary loaded state.
+
+The lion/sow/pillar provider owns five ten-byte lion lists, two signed pillar
+words, a six-word pillar map and four three-word sow arrays. Original zero-fill
+research accounts for their preinstruction state, including sow slot zero:
+InitSow only initializes slots two and one. Typed reads/writes and SaveRec byte
+views establish each extent, and both linkers pass the word and byte-view
+fixtures with five negative controls apiece. Loaded indices, directions and
+coordinates remain unchecked by the original algorithms. The provider adds no
+reset, initializer, game code or historical communal-order claim.
+
+The generated root mouse TU also corrects the single `g_5A9C` SEG operand at
+`MOUSE_TEXT:0133`. Its OFFSET companion is already DGROUP-relative; changing
+the SEG target/frame to DGROUP preserves all bytes, extents and ordered unrelated
+fixups, including the three earlier ES corrections. Both linkers pass the
+shifted-group pointer-word check and explicitly fail the old `_DATA` SEG frame
+before dereference. The minimal fixture does not execute the whole mouse TU;
+earlier full-fixture timeouts remain recorded. Rectangle ownership and initial
+fields remain a separate unresolved data gate.
 
 The driver callback table now has one typed near array of 25 far pointers.
 The source reset writes 25 two-word slots, copy moves 50 words, and all four

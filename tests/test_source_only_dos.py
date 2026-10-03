@@ -18,6 +18,10 @@ import source_only_dos as dos
 
 class SourceOnlyDosTests(unittest.TestCase):
     def test_rtlink_alias_offsets_are_explicit_hexadecimal(self):
+        self.assertEqual(bindings.runtime_component_path('C:/TOOLS/runtime.lib'),
+                         bindings.runtime_component_path(r'C:\\tools\\RUNTIME.lib'))
+        self.assertNotEqual(bindings.runtime_component_path('C:/tools/runtime.lib'),
+                            bindings.runtime_component_path('C:/other/runtime.lib'))
         self.assertEqual(bindings.rtlink_alias_delta(12), ' + 0Ch')
         self.assertEqual(bindings.rtlink_alias_delta(40), ' + 028h')
         self.assertEqual(bindings.rtlink_alias_delta(0), '')
@@ -437,7 +441,10 @@ class SourceOnlyDosTests(unittest.TestCase):
                 return OmfReader(communals=True).read(result.obj)
             control = assemble(before)
             generated = assemble(after)
-            self.assertEqual(len(bindings.verify_objects(control, generated, row['source_binding'])['reviewed_frame_corrections']), 3)
+            proof = bindings.verify_objects(control, generated, row['source_binding'])
+            self.assertEqual([s for s in proof['reviewed_frame_corrections'] if 'target' in s],
+                             row['source_binding']['reframes'])
+            self.assertEqual(len(row['source_binding']['reframes']), 3)
             for contrast in (after.replace('assume es:DGROUP', 'assume es:_DATA'),
                              after.replace('mov cx, word ptr es:_g_9122', 'mov cx, word ptr es:_g_9124')):
                 with self.assertRaises(ValueError):
@@ -780,6 +787,81 @@ class SourceOnlyDosTests(unittest.TestCase):
                 else: contract['required_cases']['unsigned_word_consumer_sign_contrast'] = 'PASS'
                 with self.assertRaisesRegex(ValueError, 'startup contract'):
                     bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_lion_sow_pillar_provider_has_measured_word_array_shapes_and_byte_views(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:lion-sow-pillar')
+            provider = row['storage_provider']
+            text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+            bindings.review_provider_source(text, provider, symbols)
+            def compile(source):
+                result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            proof = bindings.verify_provider(compile(text), provider)
+            arrays = {c['name']: (c['count'], c['element_size'], c['length']) for c in proof['communals']}
+            self.assertEqual(arrays['_PillarMap'], (6, 2, 12))
+            self.assertEqual(arrays['_SowX'], (3, 2, 6))
+            self.assertEqual(arrays['_LionListM'], (10, 1, 10))
+            for contrast in (text.replace('int far SowX[3];', 'int far SowX[2];'),
+                             text.replace('int far PillarMap[6];', 'unsigned char far PillarMap[12];'),
+                             text.replace('int far PillDir;', 'int far PillDir = 1;')):
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(contrast), provider)
+            with self.assertRaises(ValueError):
+                bindings.review_provider_source(text.replace('int far SowDir[3];',
+                    'unsigned far SowDir[3];'), provider, symbols)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_additional_storage_contracts(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['lion_array_storage_contract']['cases'].pop(0)
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_clip_rect_seg_correction_preserves_offset_and_unrelated_fixups(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            manifest, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'root:1B73')
+            binding = row['source_binding']
+            before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
+            after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+            def compile(source):
+                result = compiler.assemble(source, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            control, generated = compile(before), compile(after)
+            proof = bindings.verify_objects(control, generated, binding)
+            self.assertEqual(len(proof['reviewed_frame_corrections']), 4)
+            offset = lambda o: [bindings.fixup_key(f) for f in o.linker_fixups
+                               if (f['segment'], f['offset']) == ('MOUSE_TEXT', 0x139)]
+            self.assertEqual(offset(control), offset(generated))
+            for change in ('site', 'target', 'addend', 'remove'):
+                wrong = json.loads(json.dumps(binding))
+                correction = wrong['segment_corrections'][0]
+                if change == 'site': correction['offset'] += 1
+                elif change == 'target': correction['new']['target'] = '_g_5A9C'
+                elif change == 'addend': correction['new']['encoded_addend'] = '0100'
+                else: wrong['segment_corrections'].clear()
+                with self.assertRaises(ValueError):
+                    bindings.verify_objects(control, generated, wrong)
+            with self.assertRaises(ValueError):
+                bindings.verify_objects(control, compile(after.replace('mov cx, DGROUP',
+                    'mov cx, seg _g_5A9C', 1)), binding)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_dgroup_rect_frame_contract(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['dgroup_rect_frame_contract']['cases'][0]['timed_out'] = True
+            with self.assertRaisesRegex(ValueError, 'shifted DGROUP contract'):
+                bindings.require_dgroup_rect_frame_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
     def test_water_pair_adds_exact_array_owners_without_changing_population_or_code(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'

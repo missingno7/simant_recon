@@ -7,6 +7,7 @@ contributions against the same source before the reviewed edits.
 from collections import Counter
 import hashlib
 import json
+import ntpath
 import re
 
 
@@ -48,6 +49,23 @@ LOCAL_SS_SITES = {
                 ('S03A_TEXT', 0xF5B, '_g_222C', 0x1E), ('S03A_TEXT', 0x100E, '_g_22E4', 0xD6),
                 ('S03A_TEXT', 0x1029, '_g_22E4', 0xD6), ('S03A_TEXT', 0x1044, '_g_22E4', 0xD6)],
 }
+
+DGROUP_RECT_SEGMENT_CORRECTION = {
+    'segment': 'MOUSE_TEXT', 'offset': 0x133,
+    'old': {'width': 2, 'loc': 'base16', 'self_relative': False,
+            'target_kind': 'external', 'target': '_g_5A9C', 'displacement': 0,
+            'frame_kind': 'segment', 'frame': '_DATA', 'encoded_addend': '0000'},
+    'new': {'width': 2, 'loc': 'base16', 'self_relative': False,
+            'target_kind': 'group', 'target': 'DGROUP', 'displacement': 0,
+            'frame_kind': 'group', 'frame': 'DGROUP', 'encoded_addend': '0000'},
+}
+
+
+def review_segment_corrections(binding):
+    specs = binding.get('segment_corrections', [])
+    if specs and (binding['module'] != 'root:1B73'
+                  or specs != [DGROUP_RECT_SEGMENT_CORRECTION]):
+        raise ValueError('unreviewed assembly SEG target/frame correction')
 
 
 def review_local_frame_sites(binding):
@@ -120,18 +138,35 @@ PROVIDER_SPECS = {
          ('_Scycle2', 2), ('_SpidBurpCnt', 2), ('_SpidRevenge', 2)),
         'int far DeathCnt; int far EatCnt; int far SCorpseBase; int far Scycle; '
         'int far Scycle2; int far SpidBurpCnt; int far SpidRevenge;'),
+    'source-owned:lion-sow-pillar': ('LIOWNER', None,
+        (('_LionListM', 10), ('_LionListS', 10), ('_LionListT', 10),
+         ('_LionListX', 10), ('_LionListY', 10), ('_PillDir', 2), ('_PillarSeg', 2),
+         ('_PillarMap', 12), ('_SowDir', 6), ('_SowSave', 6), ('_SowX', 6), ('_SowY', 6)),
+        'unsigned char far LionListM[10]; unsigned char far LionListS[10]; '
+        'unsigned char far LionListT[10]; unsigned char far LionListX[10]; '
+        'unsigned char far LionListY[10]; int far PillDir; int far PillarSeg; '
+        'int far PillarMap[6]; int far SowDir[3]; int far SowSave[3]; '
+        'int far SowX[3]; int far SowY[3];'),
 }
 
 FAR_PROVIDER_MODULES = {'source-owned:memory-far-state', 'source-owned:yard-scalars',
-                        'source-owned:database-index-state', 'source-owned:spider-counters'}
+                        'source-owned:database-index-state', 'source-owned:spider-counters',
+                        'source-owned:lion-sow-pillar'}
+
+# The compiler represents these actual word arrays by element count and width;
+# singleton words use its byte-count COMDEF form. Preserve both measured shapes.
+FAR_PROVIDER_WORD_ARRAYS = {'source-owned:lion-sow-pillar':
+                          {'_PillarMap', '_SowDir', '_SowSave', '_SowX', '_SowY'}}
 
 def provider_communals(module):
     spec = PROVIDER_SPECS.get(module)
     if not spec:
         raise ValueError('unreviewed functional storage provider')
     far = module in FAR_PROVIDER_MODULES
+    words = FAR_PROVIDER_WORD_ARRAYS.get(module, set())
     return [{'name': name, 'kind': 'far' if far else 'near', 'length': size,
-             **({'count': size, 'element_size': 1} if far else {})} for name, size in spec[2]]
+             **({'count': size // (2 if name in words else 1),
+                 'element_size': 2 if name in words else 1} if far else {})} for name, size in spec[2]]
 
 
 def review_frame_sites(binding):
@@ -239,6 +274,11 @@ def review_addresses(binding, module, symbols):
                     or offset + 256 > module['placements']['_DATA']['off'] + module['placements']['_DATA']['size']):
                 raise ValueError('pattern bank extent/interior anchor changed')
     review_frame_sites(binding)
+    review_segment_corrections(binding)
+    if binding.get('segment_corrections'):
+        anchor = symbols['data']['g_5A9C']
+        if (anchor['seg'], anchor['off']) != (0x55B3, 0x5A9C):
+            raise ValueError('assembly SEG pointer target conflicts with registry anchor')
     for spec in binding.get('reframes', []):
         if (symbols['data'][spec['target'][1:]]['seg'] != 0x55B3
                 or (spec['old_frame_kind'], spec['old_frame'], spec['frame_kind'], spec['frame']) !=
@@ -286,6 +326,11 @@ def communal_key(row):
     return tuple(row.get(k) for k in ('name', 'kind', 'count', 'element_size', 'length'))
 
 
+def runtime_component_path(path):
+    """Compare Windows tool identities independently of slash spelling/case."""
+    return ntpath.normcase(ntpath.normpath(path)).replace('\\', '/')
+
+
 def review_provider_source(text, provider, symbols=None):
     """Admit only explicitly recovered types and objects, never generic stubs."""
     spec = PROVIDER_SPECS.get(provider.get('module'))
@@ -306,7 +351,11 @@ def review_provider_source(text, provider, symbols=None):
             '_fd_50F6_0366': 0x0366, '_fd_50F6_0376': 0x0376,
             '_fd_50F6_3952': 0x3952, '_fd_50F6_3956': 0x3956,
             '_DeathCnt': 0x109A, '_EatCnt': 0x1054, '_SCorpseBase': 0x105A, '_Scycle': 0x1042,
-            '_Scycle2': 0x1072, '_SpidBurpCnt': 0x1076, '_SpidRevenge': 0x108A})
+            '_Scycle2': 0x1072, '_SpidBurpCnt': 0x1076, '_SpidRevenge': 0x108A,
+            '_LionListM': 0x0ABA, '_LionListS': 0x0ACC, '_LionListT': 0x0ADE,
+            '_LionListX': 0x0A92, '_LionListY': 0x0AA8, '_PillDir': 0x0C3C,
+            '_PillarSeg': 0x0C36, '_PillarMap': 0x0D9C, '_SowDir': 0x0F1A,
+            '_SowSave': 0x0F28, '_SowX': 0x0EAE, '_SowY': 0x0F00})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -367,7 +416,7 @@ def require_callback_storage_contract(report, profile, tool):
     contract = report.get('callback_storage_contract', {})
     required = contract.get('required_cases', {})
     cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
-    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
@@ -377,7 +426,7 @@ def require_callback_storage_contract(report, profile, tool):
             or Counter(required.values()) != Counter({'PASS': 1, 'FAIL': 3})
             or len(cases) != 4 or {r['case'] for r in cases} != set(required)
             or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
-            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
         raise ValueError('callback table lacks the selected linker/MSC startup contract')
 
 
@@ -395,7 +444,8 @@ def require_additional_storage_contracts(report, profile, tool):
         ('source-owned:clip-pointer', 'clip_pointer_contract', 2),
         ('source-owned:yard-scalars', 'yard_scalar_contract', 6, 2),
         ('source-owned:database-index-state', 'database_index_state_contract', 2),
-        ('source-owned:spider-counters', 'spider_counter_contract', 17, 2)])
+        ('source-owned:spider-counters', 'spider_counter_contract', 17, 2),
+        ('source-owned:lion-sow-pillar', 'lion_array_storage_contract', 5, 2)])
 
 
 def require_provider_contracts(report, profile, tool, specifications):
@@ -410,7 +460,7 @@ def require_provider_contracts(report, profile, tool, specifications):
         contract = report.get(key, {})
         required = contract.get('required_cases', {})
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
-        identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+        identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
         if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
                 or contract.get('communals') != provider_communals(module)
                 or Counter(required.values()) != Counter({'PASS': positives, 'FAIL': negatives})
@@ -418,7 +468,7 @@ def require_provider_contracts(report, profile, tool, specifications):
                 or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
                 or (module == 'source-owned:clip-pointer'
                     and any(not r.get('map_alias_geometry') for r in cases if r['expected'] == 'PASS'))
-                or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+                or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
             raise ValueError(f'{module} lacks the selected linker/MSC startup contract')
 
 
@@ -431,14 +481,14 @@ def require_history_startup_contract(report, profile, tool):
     required = {'crt_overlay_zero_communal': 'CRT', 'crt_overlay_nonzero_contrast': 'CRT',
                 'crt_byte_and_word_views': 'BYTE', 'crt_byte_and_word_nonzero_contrast': 'BYTE'}
     cases = [r for r in contract.get('cases', []) if r['linker'] == profile and r['case'] in required]
-    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
     if (not contract.get('all_required_checks_pass') or len(cases) != 4
             or {r['case'] for r in cases} != set(required)
             or not all(r['passed'] and r['startup'] == required[r['case']] for r in cases)
-            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
         raise ValueError('far history storage lacks the selected linker/MSC startup contract')
 
 
@@ -454,7 +504,7 @@ def require_scalar_startup_contracts(report, profile, tool):
         contract = report.get(key, {})
         required = contract.get('required_cases', {})
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
-        identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+        identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
         negative_count = 7 if family == 'yellow_reset' else 4
         if (not contract.get('all_required_checks_pass') or contract.get('root_reviewed') is not True
                 or contract.get('members') != list(members)
@@ -462,7 +512,7 @@ def require_scalar_startup_contracts(report, profile, tool):
                 or Counter(required.values()) != Counter({'PASS': 2, 'FAIL': negative_count})
                 or len(cases) != 2 + negative_count or {r['case'] for r in cases} != set(required)
                 or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
-                or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+                or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
             raise ValueError(f'{family} scalar storage lacks the selected linker/MSC startup contract')
 
 
@@ -477,14 +527,14 @@ def require_array_startup_contracts(report, profile, tool):
         contract = report.get(key, {})
         required = contract.get('required_cases', {})
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
-        identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+        identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
         if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
                 or contract.get('members') != list(members) or contract.get('element_count') != size
                 or contract.get('dos_type') != dos_type
                 or Counter(required.values()) != Counter({'PASS': 1, 'FAIL': 1})
                 or len(cases) != 2 or {r['case'] for r in cases} != set(required)
                 or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
-                or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+                or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
             raise ValueError(f'{family} array storage lacks the selected linker/MSC startup contract')
 
 
@@ -498,7 +548,7 @@ def require_queue_startup_contract(report, profile, tool):
     required = {'canonical_source_positive': 'PASS', 'reviewed_dgroup_positive': 'PASS',
                 'data_segment_frame_contrast': 'FAIL', 'queue_initializer_nonzero': 'FAIL',
                 'buffer_pointer_plus_one': 'FAIL', 'capacity_eight': 'FAIL'}
-    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
@@ -506,7 +556,7 @@ def require_queue_startup_contract(report, profile, tool):
             or {r['case'] for r in cases} != set(required)
             or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
             or contract.get('contract') != {'ring_slots': 7, 'stride': 16, 'copy_bytes': 16, 'usable_capacity': 6}
-            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
         raise ValueError('near queue storage lacks the selected linker/MSC startup contract')
 
 
@@ -516,7 +566,7 @@ def require_assembly_frame_contract(report, profile, tool):
         return
     contract = report.get('assembly_frame_contract', {})
     cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
-    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
@@ -524,8 +574,29 @@ def require_assembly_frame_contract(report, profile, tool):
     if (not contract.get('all_required_checks_pass') or len(cases) != 2
             or {r['case'] for r in cases} != set(expected)
             or not all(r['passed'] and r['expected'] == r['actual'] == expected[r['case']] for r in cases)
-            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
         raise ValueError('assembly frame correction lacks the selected linker/shifted DGROUP contract')
+
+
+def require_dgroup_rect_frame_contract(report, profile, tool):
+    if not any((r.get('source_binding') or {}).get('segment_corrections')
+               for r in report['translation_units']):
+        return
+    contract = report.get('dgroup_rect_frame_contract', {})
+    required = contract.get('required_cases', {})
+    cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
+            or contract.get('segment_corrections') != [DGROUP_RECT_SEGMENT_CORRECTION]
+            or Counter(required.values()) != Counter({'PASS': 1, 'FAIL': 1})
+            or len(cases) != 2 or {r['case'] for r in cases} != set(required)
+            or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']]
+                       and not r.get('timed_out') and r.get('emulator_exit') == 0 for r in cases)
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
+        raise ValueError('assembly SEG correction lacks the selected linker/shifted DGROUP contract')
 
 
 def require_driver_ss_frame_contract(report, profile, tool):
@@ -536,7 +607,7 @@ def require_driver_ss_frame_contract(report, profile, tool):
     contract = report.get('driver_ss_frame_contract', {})
     expected = {'canonical_DATA': 'FAIL', 'reviewed_DGROUP': 'PASS'}
     cases = [r for r in contract.get('runtime_fixture', {}).get('cases', []) if r['linker'] == profile]
-    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
@@ -550,7 +621,7 @@ def require_driver_ss_frame_contract(report, profile, tool):
             or not all(r['passed'] and r['expected'] == r['actual'] == expected[r['variant']]
                        and r['actual_DS_SS_DGROUP'] and r['map']['passed']
                        and r['map']['data_group_delta'] > 0 for r in cases)
-            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
         raise ValueError('driver SS frames lack the selected linker/shifted DGROUP contract')
 
 
@@ -563,7 +634,7 @@ def require_pattern_bank_contract(report, profile, tool):
     contract = report.get('pattern_bank_contract', {})
     required = contract.get('required_cases', {})
     cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
-    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
@@ -575,7 +646,7 @@ def require_pattern_bank_contract(report, profile, tool):
             or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']]
                        and r['actual_DS_SS_DGROUP'] and r['shifted_data_group_delta'] > 0
                        and (r['actual'] != 'PASS' or r['all_256_formula_reads_checked']) for r in cases)
-            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
         raise ValueError('pattern bank lacks the selected linker/source owner contract')
     for row in rows.values():
         review_pattern_binding(row['source_binding'])
@@ -590,7 +661,7 @@ def require_local_frame_contract(report, profile, tool):
                   for segment, offset, _, _ in sites]
     expected = {'canonical_DATA': 'FAIL', 'reviewed_DGROUP': 'PASS'}
     cases = [r for r in contract.get('runtime_fixture', {}).get('cases', []) if r['linker'] == profile]
-    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
@@ -600,7 +671,7 @@ def require_local_frame_contract(report, profile, tool):
             or not all(r['passed'] and r['expected'] == r['actual'] == expected[r['variant']]
                        and r['actual_DS_SS_DGROUP'] and r['map']['passed']
                        and r['map']['data_group_delta'] > 0 and r['map']['segment_frame_skew'] == 2 for r in cases)
-            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
         raise ValueError('local SS frames lack the selected linker/source owner contract')
     for row in rows:
         review_local_frame_sites(row['source_binding'])
@@ -638,6 +709,7 @@ def verify_objects(original, generated, binding):
     review_frame_sites(binding)
     review_pattern_binding(binding)
     review_local_frame_sites(binding)
+    review_segment_corrections(binding)
     debug = binding.get('debug_contributions', {})
     for segment, contract in debug.items():
         if (not binding.get('queue_storage') or segment not in ('$$SYMBOLS', '$$TYPES')
@@ -686,6 +758,13 @@ def verify_objects(original, generated, binding):
         if (spec['frame_kind'], spec['frame']) != ('group', 'DGROUP'):
             raise ValueError('assembly frame correction is not DGROUP')
         f.update(frame_kind=spec['frame_kind'], frame=spec['frame'])
+        frame_checks.append(spec)
+    for spec in binding.get('segment_corrections', []):
+        matches = [f for f in original_fixups if (f['segment'], f['offset']) ==
+                   (spec['segment'], spec['offset'])]
+        if len(matches) != 1 or any(matches[0][k] != v for k, v in spec['old'].items()):
+            raise ValueError('assembly SEG correction changed a different operand')
+        matches[0].update(spec['new'])
         frame_checks.append(spec)
     old_fixups = Counter(fixup_key(f) for f in original_fixups)
     new_fixups = Counter(fixup_key(f) for f in generated.linker_fixups if f['segment'] not in debug)

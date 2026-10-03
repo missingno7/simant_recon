@@ -187,7 +187,8 @@ def prepare(out, report):
                      'memory-far-storage-bindings-v1.json', 'water-storage-bindings-v1.json',
                      'driver-local-frame-bindings-v1.json', 'mono-pattern-prefix-bindings-v1.json',
                      'clip-pointer-bindings-v1.json', 'yard-scalar-bindings-v1.json',
-                     'database-index-state-bindings-v1.json', 'spider-counter-bindings-v1.json'):
+                     'database-index-state-bindings-v1.json', 'spider-counter-bindings-v1.json',
+                     'lion-array-storage-bindings-v1.json', 'dgroup-rect-frame-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -226,7 +227,9 @@ def prepare(out, report):
                                    and previous.get('scalar_storage') == {'families': ['population']})
                 local_extension = (binding['module'] in dos_source_bindings.LOCAL_SS_SITES
                                    and bool(binding.get('local_reframes')))
-                if pattern_extension or local_extension:
+                segment_extension = (binding['module'] == 'root:1B73'
+                                     and bool(binding.get('segment_corrections')))
+                if pattern_extension or local_extension or segment_extension:
                     # This third layer extends the effective binding, including the
                     # previously admitted frames. Pin its complete provenance and
                     # content rather than silently replacing either frozen packet.
@@ -241,7 +244,7 @@ def prepare(out, report):
                         raise ValueError('DOS layout extension has a different effective control binding')
                 elif not base or not (binding.get('reframes') or scalar_extension or water_extension):
                     raise ValueError('duplicate DOS binding module')
-                if not (pattern_extension or local_extension):
+                if not (pattern_extension or local_extension or segment_extension):
                     base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
                     if previous not in json.loads(base_raw)['bindings']:
                         raise ValueError('DOS frame extension has a different source/control binding')
@@ -252,6 +255,8 @@ def prepare(out, report):
                 keys = ('edits', 'exports', 'relocations', 'reframes', 'communals')
                 if 'local_reframes' in previous or 'local_reframes' in binding:
                     keys += ('local_reframes',)
+                if 'segment_corrections' in previous or 'segment_corrections' in binding:
+                    keys += ('segment_corrections',)
                 for key in keys:
                     combined[key] = previous.get(key, []) + binding.get(key, [])
                 if scalar_extension:
@@ -515,7 +520,15 @@ def audit_layout(report):
         'reason': 'Source reset/copy and four driver tables prove 25 far-pointer slots. One typed near communal owns the slots; 23 registered names are bounded aliases. The existing symbolic _g_3DF8 pointer is verified under shifted DGROUP on both linkers. Historical COMDEF TU/order and wider driver frame integration remain separate.'}, {
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
-                  'The g_5A9C pointer frame, indexed numeric bases and unchecked error-path addresses remain separate gates.'}, {
+                  'Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates.'}, {
+        'id': 'clip-rect-segment-frame',
+        'status': 'SOURCE_BOUND' if any((r.get('source_binding') or {}).get('segment_corrections')
+                                      for r in report['translation_units']) else 'UNRESOLVED',
+        'operand_count': 1,
+        'reason': 'The g_5A9C OFFSET is DGROUP-relative. Its paired SEG must name DGROUP; '
+                  'the exact BASE16 site changes target/frame together, preserving all bytes and '
+                  'ordered unrelated fixups. Both linkers pass the shifted-group helper and explicitly '
+                  'fail the old segment frame before dereference. Rect ownership/initializers remain open.'}, {
         'id': 'driver-local-ss-frames',
         'status': 'SOURCE_BOUND' if all(any(r['module'] == module and len(
             (r.get('source_binding') or {}).get('local_reframes', [])) == len(sites)
@@ -681,6 +694,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_additional_storage_contracts(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
+    dos_source_bindings.require_dgroup_rect_frame_contract(report, profile, tool)
     dos_source_bindings.require_driver_ss_frame_contract(report, profile, tool)
     dos_source_bindings.require_pattern_bank_contract(report, profile, tool)
     dos_source_bindings.require_local_frame_contract(report, profile, tool)

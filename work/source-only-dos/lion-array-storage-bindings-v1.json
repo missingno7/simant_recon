@@ -1,0 +1,137 @@
+{
+  "schema": "simant-dos-lion-array-storage-bindings-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:lion-sow-pillar",
+      "basename": "LIOWNER",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/lion-data.c",
+        "sha256": "bc537f033398e20d239796c7873a2b0a8efc82449c50219a2822918af398c66c",
+        "size": 296
+      },
+      "communals": [
+        {
+          "name": "_LionListM",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListS",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListT",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListX",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListY",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_PillDir",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_PillarSeg",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_PillarMap",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_SowDir",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowSave",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowX",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowY",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        }
+      ]
+    }
+  ],
+  "runtime_contract_key": "lion_array_storage_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/lion-array-storage-contract-v1.json",
+    "sha256": "05cbdcb1e7ae86b4e1920e19313eca6271aea5e3a69625fb858efd6fcb56b62c",
+    "size": 73659
+  },
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/lion-array-owner-review-v1.md",
+      "sha256": "fba3c9f325d9560ee4c43ee5e2d9adb3688afa470297e897bd25637f596d0868",
+      "size": 3354
+    },
+    {
+      "path": "src/root/m0AD9.c",
+      "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+      "size": 14288
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+      "size": 6796
+    }
+  ]
+}

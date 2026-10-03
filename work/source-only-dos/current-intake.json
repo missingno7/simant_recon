@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "f4d3208",
+  "source_only_base_checkpoint": "1eae0c7",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "b1374a95b26e81a25f1907a4f7ce3f58bad4aadf76933cb43b33c805998c6d2c",
-    "size": 3153971
+    "sha256": "9b6d57d1df77df2009908c63ec44c359639db1940f77d087daa62de35a93352b",
+    "size": 3271029
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "380 unresolved source symbols",
+    "368 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 137,
+  "compiled_translation_units": 138,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 380,
+  "unresolved_symbols": 368,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 372,
+    "reviewed FAR_BSS definition and compatible consumer views": 360,
     "source storage/reachability investigation": 8
   },
   "symbolic_aliases": 184,
@@ -68,7 +68,13 @@
     {
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
-      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The g_5A9C pointer frame, indexed numeric bases and unchecked error-path addresses remain separate gates."
+      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates."
+    },
+    {
+      "id": "clip-rect-segment-frame",
+      "status": "RESOLVED",
+      "operand_count": 1,
+      "reason": "The g_5A9C OFFSET is DGROUP-relative. Its paired SEG must name DGROUP; the exact BASE16 site changes target/frame together, preserving all bytes and ordered unrelated fixups. Both linkers pass the shifted-group helper and explicitly fail the old segment frame before dereference. Rect ownership/initializers remain open."
     },
     {
       "id": "driver-local-ss-frames",
@@ -254,6 +260,16 @@
     "path": "work/source-only-dos/spider-counter-bindings-v1.json",
     "sha256": "bd5683de0ac754bc425e20398c35cb32a77ff782e5c1b8738969c812e5bf91f5",
     "size": 2996
+  },
+  "lion_array_storage_bindings": {
+    "path": "work/source-only-dos/lion-array-storage-bindings-v1.json",
+    "sha256": "fd7dbbe86ce8ed6f39b09682c8fe837b7491367acdde4cebcfb1b30373450ce6",
+    "size": 3481
+  },
+  "dgroup_rect_frame_bindings": {
+    "path": "work/source-only-dos/dgroup-rect-frame-bindings-v1.json",
+    "sha256": "a202f6dceaffa65ee75f2af27e29f90d16d61b5c3d79b5bda63d88c633d3448a",
+    "size": 2876
   },
   "strict_static_index": {
     "path": "work/source-only-dos/static-completeness/index-v1.json",
@@ -2100,6 +2116,111 @@
           "length": 2,
           "count": 2,
           "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:lion-sow-pillar",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\lion-data.c",
+        "sha256": "bc537f033398e20d239796c7873a2b0a8efc82449c50219a2822918af398c66c",
+        "size": 296
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\LIOWNER.OBJ",
+        "sha256": "607795c7092155a0c2fc9826376d6be113f587c5196eed6d1f11f5bf1977bd7d",
+        "size": 356
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_LionListM",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListS",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListT",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListX",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListY",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_PillDir",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_PillarSeg",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_PillarMap",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_SowDir",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowSave",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowX",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowY",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
         }
       ],
       "publics": [],
@@ -6136,7 +6257,7 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U087.OBJ",
-        "sha256": "b7e532570c3bbe5afb0b43e76b387adc26a06f844d37680954ca02c9dabe7d5e",
+        "sha256": "557405d3d81b2b99965385dd70ff55aa77e71fe2515b3344fa9fc2618026a4df",
         "size": 8751
       },
       "status": "PASS",
@@ -6171,6 +6292,32 @@
           "old_frame": "_DATA",
           "frame_kind": "group",
           "frame": "DGROUP"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 307,
+          "old": {
+            "width": 2,
+            "loc": "base16",
+            "self_relative": false,
+            "target_kind": "external",
+            "target": "_g_5A9C",
+            "displacement": 0,
+            "frame_kind": "segment",
+            "frame": "_DATA",
+            "encoded_addend": "0000"
+          },
+          "new": {
+            "width": 2,
+            "loc": "base16",
+            "self_relative": false,
+            "target_kind": "group",
+            "target": "DGROUP",
+            "displacement": 0,
+            "frame_kind": "group",
+            "frame": "DGROUP",
+            "encoded_addend": "0000"
+          }
         }
       ],
       "storage_bytes_unchanged": true,
@@ -6308,8 +6455,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "ae5e4e6015fdcc7606d87f73d446c2dafb4fae09b89486c2672c5fc652295cd1",
-      "size": 52446
+      "sha256": "a7b03bddddf830522724f8d85994951b5a752d164a10be36bfbd2fe2e8fd9f4b",
+      "size": 53638
     },
     {
       "path": "tools\\compiler.py",
@@ -6328,28 +6475,28 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "4f4024ac1cf29caa5fa9853c347fb46b252c83d47e40765d913223695cbeab16",
-      "size": 48611
+      "sha256": "b605f02c8c2a9911b6a3720ae9ce6c1310c544e3dd79fb0f2b5c5794c5d8a997",
+      "size": 53451
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v11.log",
-      "sha256": "49e635bb2405620acaa30435e9d0866acdaf27dcb6071a1a0cf9fec44ddce8c6",
-      "size": 4176
+      "path": "build/source-only-dos-run-v12.log",
+      "sha256": "9ff2a0b78ba672ba31aaee0ca616bad800d792f9a471b149363098f758e6ceb5",
+      "size": 4229
     },
     {
-      "path": "build/source-only-dos-tests-v11.log",
-      "sha256": "256307bdf549c54c52587ce0461a21fc0348e2b9a4684b1e72ee31f0f18c8c2e",
-      "size": 603
+      "path": "build/source-only-dos-tests-v12.log",
+      "sha256": "e086c7d22e685ad12fed3ad8426744f20c014d3563d9ca2d79a178e5a98a6d7a",
+      "size": 605
     },
     {
-      "path": "build/source-only-dos-validation-v11.log",
+      "path": "build/source-only-dos-validation-v12.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "31 targeted tests included in 345 repository tests PASS (2 skips)",
+  "source_only_tests": "33 targeted tests included in 347 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }
