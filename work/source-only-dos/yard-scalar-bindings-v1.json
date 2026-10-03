@@ -1,0 +1,110 @@
+{
+  "schema": "simant-dos-yard-scalar-bindings-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:yard-scalars",
+      "basename": "YDOWNER",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/yard-scalars.c",
+        "sha256": "d94320b53cd0f3c8843df20c10c305c1a1022dafb4d8318803d7acbd0feb6602",
+        "size": 255
+      },
+      "communals": [
+        {
+          "name": "_fd_50F6_105E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0478",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0504",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0228",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MapPlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_YardMode",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0366",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0376",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ]
+    }
+  ],
+  "runtime_contract": {
+    "path": "work/source-only-dos/yard-scalar-contract-v1.json",
+    "sha256": "6bb7f9a2bab0c555af0f9267e824e72038c5c6cde07933f56fdb87351a11a044",
+    "size": 44709
+  },
+  "runtime_contract_key": "yard_scalar_contract",
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/yard-scalar-review-v1.md",
+      "sha256": "0dcbc4b16dd3659cfd786118b4bbb79b765d7cef4ec3b0a97234400dd5cd19cf",
+      "size": 3621
+    },
+    {
+      "path": "src/S08/m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "size": 22166
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    }
+  ],
+  "claim_limit": "Functional typed ownership only; no historical COMDEF TU/order/fixed placement claim."
+}

@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "25e15e7",
+  "source_only_base_checkpoint": "85ae0f7",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "6b34eab381c6b2dea6855e40c0bf28c73f19d33a2d1abedb748a3d58459f2371",
-    "size": 2518092
+    "sha256": "ce64a3d6d4d37fb6b47ffe1ff4c144c7c599b760aaa9c8bbf9d6aac56bea38d3",
+    "size": 3059375
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "412 unresolved source symbols",
+    "389 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 130,
+  "compiled_translation_units": 135,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,12 +39,12 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 412,
+  "unresolved_symbols": 389,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 397,
-    "source storage/reachability investigation": 15
+    "reviewed FAR_BSS definition and compatible consumer views": 381,
+    "source storage/reachability investigation": 8
   },
-  "symbolic_aliases": 182,
+  "symbolic_aliases": 184,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -68,7 +68,27 @@
     {
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
-      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The ten local SS operands, fill-pattern numeric operands and g_5A9C pointer frame remain separate gates."
+      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The g_5A9C pointer frame, indexed numeric bases and unchecked error-path addresses remain separate gates."
+    },
+    {
+      "id": "driver-local-ss-frames",
+      "status": "RESOLVED",
+      "operand_count": 10,
+      "reason": "Same-TU source labels own these local fields. Exact SEGDEF displacements and source anchors are guarded; scoped SS frames become DGROUP without changing bytes or ordered fixup identities. Both linkers validate shifted group addresses and paragraph-frame normalization."
+    },
+    {
+      "id": "driver-pattern-bank-addresses",
+      "status": "RESOLVED",
+      "operand_count": 3,
+      "owner": {
+        "name": "_g_41D0",
+        "segment": "_DATA",
+        "offset": 1200,
+        "length": 256,
+        "interior": "_g_4220",
+        "interior_delta": 80
+      },
+      "reason": "Sixteen accepted source records own the 256-byte bank. Selector and phase arithmetic bounds every read. A zero-byte public and exactly three symbolic DGROUP operands remove the historical numeric base; original table bytes and unrelated fixups are preserved."
     },
     {
       "id": "driver-external-ss-frames",
@@ -184,6 +204,46 @@
     "path": "work/source-only-dos/driver-ss-frame-bindings-v1.json",
     "sha256": "c3820edb19a3b0ad5981b4b929fb5dc756b6f5614894014eedfeaaf9a3a46f24",
     "size": 69890
+  },
+  "pattern_bank_bindings": {
+    "path": "work/source-only-dos/pattern-bank-bindings-v1.json",
+    "sha256": "464db3a85c08bfb845c703f09a877660f047c4538d51b6bd17b2082e279bdf38",
+    "size": 4365
+  },
+  "render_scalar_bindings": {
+    "path": "work/source-only-dos/render-scalar-bindings-v1.json",
+    "sha256": "efda227ff19dd923dc87865aa81bdc685212b32f1a744901cda07a0dc0d1c649",
+    "size": 2337
+  },
+  "memory_far_storage_bindings": {
+    "path": "work/source-only-dos/memory-far-storage-bindings-v1.json",
+    "sha256": "19c895ca80c3d8ef7f0ecf59d248b132fe979ec5a2ac7d25d0e3a2064c45a223",
+    "size": 3128
+  },
+  "water_storage_bindings": {
+    "path": "work/source-only-dos/water-storage-bindings-v1.json",
+    "sha256": "ae24b246d253cc75995ad11483fc0c191272fece899bcffea5d4611730fa5fbe",
+    "size": 17358
+  },
+  "driver_local_frame_bindings": {
+    "path": "work/source-only-dos/driver-local-frame-bindings-v1.json",
+    "sha256": "09e833bfcc02d28e9611ba5b4f9808b7f1abd61b736ef56f415d860d8ad1cd4d",
+    "size": 10170
+  },
+  "mono_pattern_prefix_bindings": {
+    "path": "work/source-only-dos/mono-pattern-prefix-bindings-v1.json",
+    "sha256": "97c931120e9e2268acdaea371ceeb8ea2b1307c65b8f63fa735aab2e75d5eac5",
+    "size": 1629
+  },
+  "clip_pointer_bindings": {
+    "path": "work/source-only-dos/clip-pointer-bindings-v1.json",
+    "sha256": "d52c7e57f476bb4ed1cc3c6da2ca5b689081a29accbce4b5a1387b4fe872ac61",
+    "size": 3458
+  },
+  "yard_scalar_bindings": {
+    "path": "work/source-only-dos/yard-scalar-bindings-v1.json",
+    "sha256": "7f846e5c0cde697dd019a3589ca64c87d7a28e8d084f731bd6837429e7ef207c",
+    "size": 2912
   },
   "strict_static_index": {
     "path": "work/source-only-dos/static-completeness/index-v1.json",
@@ -1571,6 +1631,30 @@
       "registered_interior_names": []
     }
   ],
+  "source_owned_water_arrays": [
+    {
+      "name": "_fd_50F6_0256",
+      "kind": "far",
+      "count": 100,
+      "element_size": 1,
+      "length": 100,
+      "historical_address": [
+        20726,
+        598
+      ]
+    },
+    {
+      "name": "_fd_50F6_02C0",
+      "kind": "far",
+      "count": 100,
+      "element_size": 1,
+      "length": 100,
+      "historical_address": [
+        20726,
+        704
+      ]
+    }
+  ],
   "storage_provider_proofs": [
     {
       "module": "source-owned:driver-callback-table",
@@ -1675,6 +1759,232 @@
           "name": "_g_91AC",
           "kind": "near",
           "length": 4
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:render-scalars",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\render-scalars.c",
+        "sha256": "3cf7dddcf9188d13f36e25115ac566169adceb938c0f5493a3d9a7faa70d0d7f",
+        "size": 83
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\RSOWNER.OBJ",
+        "sha256": "8410d83f48ba236320214657fe35a1314adf154d78b0859bb254037199083653",
+        "size": 237
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_g_8BD2",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_8BD4",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9126",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_94E4",
+          "kind": "near",
+          "length": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:memory-far-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\memory-far-state.c",
+        "sha256": "c5d934e134049e4c7e50a65aca8dc2327633b83523a3a9853e4842a31e999e41",
+        "size": 305
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\MFOWNER.OBJ",
+        "sha256": "ea6a8ca0db0979bc2b58c9a68da2d857285ae5bb02e12a31658cdd817538abd9",
+        "size": 283
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_394C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_394E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3950",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3948",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B48",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:mono-pattern-prefix",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\mono-pattern-prefix.c",
+        "sha256": "51ff1acd879f1abfa0be317a81d4cae076fddaa23d7e41156380c9ddf6349823",
+        "size": 32
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\MPOWNER.OBJ",
+        "sha256": "51a318dcfb6552a8176b4fd9bff689de89600d84e19d16d3cc1883dadec0abbe",
+        "size": 204
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_g_8EC0",
+          "kind": "near",
+          "length": 24
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:clip-pointer",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\clip-pointer.c",
+        "sha256": "fa8ff59a015c5078ce7b0d9c80a7a6c1d79539caac12a13b5b726069557fe48d",
+        "size": 90
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\CPOWNER.OBJ",
+        "sha256": "cfc7d7949d712ad8e57a33615b111b1321321277b47f88da461e61925a0e72c6",
+        "size": 204
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_g_5AAC",
+          "kind": "near",
+          "length": 4
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:yard-scalars",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\yard-scalars.c",
+        "sha256": "d94320b53cd0f3c8843df20c10c305c1a1022dafb4d8318803d7acbd0feb6602",
+        "size": 255
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\YDOWNER.OBJ",
+        "sha256": "6bd9e00529e1eb756c0ce4569f35cddcc6dee7349eb46171cd5f9f43e57a37c3",
+        "size": 329
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_105E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0478",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0504",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0228",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MapPlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_YardMode",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0366",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0376",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
         }
       ],
       "publics": [],
@@ -2263,8 +2573,8 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U001.OBJ",
-        "sha256": "f2aebeb338e24d33473d638d39163f522b621b32ac22633af9bc2c9f22c0abe7",
-        "size": 14747
+        "sha256": "e2e0a36b0f777c3fad35364e1e9cb4694995cbf3989f5f0ff61e3e187c78f7f7",
+        "size": 14771
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
@@ -3008,6 +3318,33 @@
           "frame": "S00B_TEXT",
           "displacement": 6848,
           "addend": "0000"
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 681,
+          "old_operand": 16848,
+          "target": "_g_41D0",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 779,
+          "old_operand": 16848,
+          "target": "_g_41D0",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 850,
+          "old_operand": 16848,
+          "target": "_g_41D0",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
         }
       ],
       "canonical_control_object": {
@@ -3083,7 +3420,7 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U004.OBJ",
-        "sha256": "d8067133416c8096eaf0c3f3dd060274ee5cefee9277ad4470a5a8fef554a0d5",
+        "sha256": "7fd7972dc8ab587f3d34de9e0ef08b763d207245b8f237223b235cf61c84670f",
         "size": 10051
       },
       "status": "PASS",
@@ -3487,6 +3824,36 @@
           "frame": "DGROUP",
           "source_line": 1537,
           "bound_source_line": 1551
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1453,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_2118",
+          "source_line": 793,
+          "bound_source_line": 801
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1595,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_2118",
+          "source_line": 853,
+          "bound_source_line": 869
         }
       ],
       "storage_bytes_unchanged": true,
@@ -3678,7 +4045,7 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U008.OBJ",
-        "sha256": "9dbece61e69233c4d8a483da3ee91d184cdee124feb9fda4e7723985caa784c9",
+        "sha256": "d578466a13940167f55cb06ecdac14e3c8d389aa0c4cffa0d1f427b7f769f963",
         "size": 8252
       },
       "status": "PASS",
@@ -3972,6 +4339,126 @@
           "frame": "DGROUP",
           "source_line": 1860,
           "bound_source_line": 1862
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3540,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 30,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_222C",
+          "source_line": 1568,
+          "bound_source_line": 1600
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3553,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 28,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_222A",
+          "source_line": 1574,
+          "bound_source_line": 1608
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3656,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 30,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_222C",
+          "source_line": 1619,
+          "bound_source_line": 1653
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3828,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 28,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_222A",
+          "source_line": 1699,
+          "bound_source_line": 1739
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3931,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 30,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_222C",
+          "source_line": 1744,
+          "bound_source_line": 1784
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4110,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 214,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_22E4",
+          "source_line": 1833,
+          "bound_source_line": 1883
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4137,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 214,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_22E4",
+          "source_line": 1845,
+          "bound_source_line": 1897
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4164,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 214,
+          "encoded_addend": "0000",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_symbol": "_g_22E4",
+          "source_line": 1857,
+          "bound_source_line": 1909
         }
       ],
       "storage_bytes_unchanged": true,
@@ -5395,8 +5882,8 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U059.OBJ",
-        "sha256": "18d40341b94f9f2183283bb193cf4cc5d832da2f00027c657dba471bdac4e02e",
-        "size": 7457
+        "sha256": "e7dffd057e8f6e21725c365c65885eb3814276d2fbb7edc7e09900d9b04e8ed6",
+        "size": 7471
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
@@ -5447,6 +5934,28 @@
             "registered exact alias fd_50F6_0350"
           ],
           "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_0256",
+          "kind": "far",
+          "count": 100,
+          "element_size": 1,
+          "length": 100,
+          "historical_address": [
+            20726,
+            598
+          ]
+        },
+        {
+          "name": "_fd_50F6_02C0",
+          "kind": "far",
+          "count": 100,
+          "element_size": 1,
+          "length": 100,
+          "historical_address": [
+            20726,
+            704
+          ]
         }
       ],
       "symbolic_operand_checks": [],
@@ -5454,6 +5963,48 @@
         "path": "build\\source-only-dos\\binding-controls\\U059.OBJ",
         "sha256": "748beb2745364e61c79ded7883dc81b5729faa74ccfbbd32ea180a2392f05272",
         "size": 7439
+      }
+    },
+    {
+      "module": "root:1B4E",
+      "source": {
+        "path": "src\\root\\m1B4E.asm",
+        "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+        "size": 8451
+      },
+      "control_source": {
+        "path": "src\\root\\m1B4E.asm",
+        "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+        "size": 8451
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U086.OBJ",
+        "sha256": "afaf236194c2951920ecf9cf9915e8c174c6cf75a56a324d0fe4f7dc457b52b9",
+        "size": 2224
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [
+        {
+          "name": "_g_41D0",
+          "segment": "_DATA",
+          "offset": 1200,
+          "registry_symbol": "g_41C0",
+          "registry_delta": 16
+        }
+      ],
+      "added_communals": [],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U086.OBJ",
+        "sha256": "5fbbf8411f6d049414e32175b66d9915af64852fd01581a61330bd4eb585e115",
+        "size": 2213
       }
     },
     {
@@ -5642,8 +6193,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "f17b3d0f0522f285b99c4e39a56babbb7ef808f15507645273b15e89fde532ac",
-      "size": 47941
+      "sha256": "7fb1207d267704ca43e24a80d04a41568f77d49b6048dbcc98f8feaa183405b0",
+      "size": 52349
     },
     {
       "path": "tools\\compiler.py",
@@ -5662,28 +6213,28 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "fb994fb321d6c343ae99849fdf898ce53791d03060016b37eb235a13a8da4ee8",
-      "size": 33476
+      "sha256": "4e5de23ce79d2dccb4f183696b8d41c15cb9f45023c49b6e984b1837c5f37f4b",
+      "size": 47391
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v9.log",
-      "sha256": "c07c4b46fb6f2c2d4a5ee0b35e3ea15f8381d5b25d13c022f7630fc85adea5eb",
-      "size": 3802
+      "path": "build/source-only-dos-run-v10.log",
+      "sha256": "d6ad70325779d9ff4d3d6eee96430d45d8cc1d90b9428ec19c9619321610a83b",
+      "size": 4086
     },
     {
-      "path": "build/source-only-dos-tests-v9.log",
-      "sha256": "7313f598d2bef2e235a012854b3ede6c92ae3d84165adcc4e8b82aff872cc290",
-      "size": 595
+      "path": "build/source-only-dos-tests-v10.log",
+      "sha256": "6f36e42ee1459680c26fec0283ba41aaf35724e261664ed3f056c03287aa04d9",
+      "size": 601
     },
     {
-      "path": "build/source-only-dos-validation-v9.log",
+      "path": "build/source-only-dos-validation-v10.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "23 targeted tests included in 337 repository tests PASS (2 skips)",
+  "source_only_tests": "29 targeted tests included in 343 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

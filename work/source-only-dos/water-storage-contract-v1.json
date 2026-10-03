@@ -1,0 +1,1431 @@
+{
+  "required_cases": {
+    "zero_far_communal": "PASS",
+    "initialized_nonzero_control": "FAIL"
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "zero_far_communal",
+      "expected": "PASS",
+      "actual": "PASS",
+      "dosbox_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "observed_log": "PASS",
+      "expected_log": "PASS"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_control",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "dosbox_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "observed_log": "FAIL_ZERO",
+      "expected_log": "FAIL_ZERO"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "zero_far_communal",
+      "expected": "PASS",
+      "actual": "PASS",
+      "dosbox_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "observed_log": "PASS",
+      "expected_log": "PASS"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_control",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "dosbox_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "observed_log": "FAIL_ZERO",
+      "expected_log": "FAIL_ZERO"
+    }
+  ],
+  "shape_controls": {
+    "wrong_extent_99_byte_far": {
+      "omf_shape_rejected": true,
+      "runtime_observations": [
+        {
+          "linker": "rtlink400",
+          "case": "wrong_extent_99_byte_control",
+          "expected": "FAIL_VIEW",
+          "actual": "FAIL_VIEW",
+          "dosbox_exit": 0,
+          "timed_out": false,
+          "passed": true
+        },
+        {
+          "linker": "rtlink610",
+          "case": "wrong_extent_99_byte_control",
+          "expected": "FAIL_OWNER",
+          "actual": "FAIL_OWNER",
+          "dosbox_exit": 0,
+          "timed_out": false,
+          "passed": true
+        }
+      ]
+    },
+    "wrong_near_100_byte": {
+      "omf_shape_rejected": true,
+      "runtime_observations": [
+        {
+          "linker": "rtlink400",
+          "case": "wrong_near_communal_control",
+          "expected": "FAIL_OWNER",
+          "actual": "FAIL_OWNER",
+          "dosbox_exit": 0,
+          "timed_out": false,
+          "passed": true
+        },
+        {
+          "linker": "rtlink610",
+          "case": "wrong_near_communal_control",
+          "expected": "FAIL_OWNER",
+          "actual": "FAIL_OWNER",
+          "dosbox_exit": 0,
+          "timed_out": false,
+          "passed": true
+        }
+      ]
+    },
+    "initialized_nonzero_public": {
+      "omf_shape_rejected": true,
+      "runtime_observations": [
+        {
+          "linker": "rtlink400",
+          "case": "initialized_nonzero_control",
+          "expected": "FAIL_ZERO",
+          "actual": "FAIL_ZERO",
+          "dosbox_exit": 0,
+          "timed_out": false,
+          "passed": true
+        },
+        {
+          "linker": "rtlink610",
+          "case": "initialized_nonzero_control",
+          "expected": "FAIL_ZERO",
+          "actual": "FAIL_ZERO",
+          "dosbox_exit": 0,
+          "timed_out": false,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "schema": "simant-dos-water-storage-contract-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "root_reviewed": true,
+  "members": [
+    "fd_50F6_0256",
+    "fd_50F6_02C0"
+  ],
+  "element_count": 100,
+  "dos_type": "unsigned char far[100]",
+  "all_required_checks_pass": true,
+  "inputs": [
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\consumer.c",
+      "sha256": "ffb9edd0e9d952df473a6d1757dae7d1c994bdc6da7a9ea597a0738fe217581a",
+      "size": 1432
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\m0BE8-control.OBJ",
+      "sha256": "a176c07e2f3f1d6a8968cc8935125fe0f126a3f1270b3a2fedad81ac59d4dee1",
+      "size": 7441
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\m0BE8-water-owner.c",
+      "sha256": "727ac0dd23d556c08920f446b0cc829c1bea7ef479d3ca18f36a34f053bc9142",
+      "size": 15244
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\m0BE8-water-owner.OBJ",
+      "sha256": "da62cd03090b8b3719ed9ff22e50d498946fdba6a3ebcb2ecb0cc8e270b39d49",
+      "size": 7451
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\owner-initialized.c",
+      "sha256": "32e5a3caaa571809442bc02d30fd0a2ec9cf740ca1261426c80523d9bc662d52",
+      "size": 240
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\owner-near.c",
+      "sha256": "ea4eb3faee7510fca345759e52634a269a2c092a660aa6907f8b8e577d6be1e6",
+      "size": 165
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\owner-short.c",
+      "sha256": "896e1aa54a4489f8981a5ee2a67ff191e06aee577311d846ce3701bb5c2d574a",
+      "size": 165
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\owner-zero.c",
+      "sha256": "a7dc2b6d61a672a323000582e0f46494e4608bee9c9892911e9838fd16dbecaf",
+      "size": 224
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\WINIT.OBJ",
+      "sha256": "d262bad217bdcdd0abfa75b61640504af6fa8e6910417d9dd0f915fa7e81931a",
+      "size": 750
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\WNEAR.OBJ",
+      "sha256": "fb18ae86f2fcebca6b8615947879090a5547c4cc7f8df38a14ac15f2f2cebaed",
+      "size": 607
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\WSHORT.OBJ",
+      "sha256": "410b26f5a02b2894219d5283d6f5c3a83049eed3607b6513efb1205fc6ea8a27",
+      "size": 650
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\WTEST.OBJ",
+      "sha256": "c5b14d175eb2e44bc6f22f95a99fc0f48974064d725ad97fc7cec52dab0b058b",
+      "size": 1329
+    },
+    {
+      "path": "build\\workers\\dos_farbss_declaration_inventory\\water-storage-js421osy\\WZERO.OBJ",
+      "sha256": "c15a1b309c19fc33ccfed6d96cbe9e4f482c83c9839e33fe814a4fb43d74c294",
+      "size": 688
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "src\\data\\d3D57.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "size": 22927
+    },
+    {
+      "path": "src\\data\\d3E1D.c",
+      "sha256": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05",
+      "size": 1492
+    },
+    {
+      "path": "src\\data\\d55B3_0042.c",
+      "sha256": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
+      "size": 589
+    },
+    {
+      "path": "src\\data\\d55B3_0064.c",
+      "sha256": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
+      "size": 1245
+    },
+    {
+      "path": "src\\data\\d55B3_00B8.c",
+      "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+      "size": 23095
+    },
+    {
+      "path": "src\\root\\m0000.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "size": 5066
+    },
+    {
+      "path": "src\\root\\m004A.c",
+      "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+      "size": 5462
+    },
+    {
+      "path": "src\\root\\m0093.c",
+      "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "size": 3129
+    },
+    {
+      "path": "src\\root\\m00BA.c",
+      "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+      "size": 3562
+    },
+    {
+      "path": "src\\root\\m00DE.c",
+      "sha256": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c",
+      "size": 119
+    },
+    {
+      "path": "src\\root\\m00DF.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881
+    },
+    {
+      "path": "src\\root\\m00F8.c",
+      "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "size": 7304
+    },
+    {
+      "path": "src\\root\\m015B.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "size": 16241
+    },
+    {
+      "path": "src\\root\\m0244.c",
+      "sha256": "4af5c48bc82c52e82cbde616bab7606fdd0b61e38d72d8e53bd0e13a1df02a1a",
+      "size": 802
+    },
+    {
+      "path": "src\\root\\m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "size": 65517
+    },
+    {
+      "path": "src\\root\\m075B.c",
+      "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+      "size": 3481
+    },
+    {
+      "path": "src\\root\\m078E.c",
+      "sha256": "45c68892dbbe580d9bd1142676959b7951288a37f9018f6f335c112a34eef22f",
+      "size": 624
+    },
+    {
+      "path": "src\\root\\m0798.c",
+      "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "size": 14874
+    },
+    {
+      "path": "src\\root\\m0894.c",
+      "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+      "size": 32636
+    },
+    {
+      "path": "src\\root\\m0AD9.c",
+      "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+      "size": 14288
+    },
+    {
+      "path": "src\\root\\m0BE8.c",
+      "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+      "size": 14621
+    },
+    {
+      "path": "src\\root\\m0CDB.c",
+      "sha256": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+      "size": 15324
+    },
+    {
+      "path": "src\\root\\m0DEF.c",
+      "sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+      "size": 4635
+    },
+    {
+      "path": "src\\root\\m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+      "size": 11858
+    },
+    {
+      "path": "src\\root\\m0EC1.c",
+      "sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "size": 7100
+    },
+    {
+      "path": "src\\root\\m0F3F.c",
+      "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+      "size": 22794
+    },
+    {
+      "path": "src\\root\\m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "src\\root\\m1383.c",
+      "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+      "size": 15679
+    },
+    {
+      "path": "src\\root\\m1496.c",
+      "sha256": "2b158a9367c89c7acf496efe4ff8490865fda03c5c88cfd70343264d1e2d15de",
+      "size": 4606
+    },
+    {
+      "path": "src\\root\\m14EE.c",
+      "sha256": "a9947226c73c4502f00e2b319b3cd7abc7f2acbc8ca9ef72448b31e55c6bdb59",
+      "size": 11666
+    },
+    {
+      "path": "src\\root\\m15D9.c",
+      "sha256": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+      "size": 1776
+    },
+    {
+      "path": "src\\root\\m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src\\root\\m1629.c",
+      "sha256": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+      "size": 7455
+    },
+    {
+      "path": "src\\root\\m171C.c",
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+      "size": 26452
+    },
+    {
+      "path": "src\\root\\m1986.c",
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+      "size": 3351
+    },
+    {
+      "path": "src\\root\\m19A9.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "size": 4870
+    },
+    {
+      "path": "src\\root\\m19DC.c",
+      "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+      "size": 4995
+    },
+    {
+      "path": "src\\root\\m1A28.c",
+      "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+      "size": 3200
+    },
+    {
+      "path": "src\\root\\m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "size": 5159
+    },
+    {
+      "path": "src\\root\\m1A96.c",
+      "sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+      "size": 6836
+    },
+    {
+      "path": "src\\root\\m1B28.c",
+      "sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343",
+      "size": 2422
+    },
+    {
+      "path": "src\\root\\m1C62.c",
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885
+    },
+    {
+      "path": "src\\root\\m1CE2.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "size": 10210
+    },
+    {
+      "path": "src\\root\\m1D8E.c",
+      "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "size": 10996
+    },
+    {
+      "path": "src\\root\\m1E57.c",
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "size": 12957
+    },
+    {
+      "path": "src\\root\\m1F80.c",
+      "sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+      "size": 3313
+    },
+    {
+      "path": "src\\root\\m1FAA.c",
+      "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+      "size": 1532
+    },
+    {
+      "path": "src\\root\\m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "src\\root\\m205F.c",
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+      "size": 6015
+    },
+    {
+      "path": "src\\root\\m208F.c",
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "size": 6853
+    },
+    {
+      "path": "src\\root\\m20E8.c",
+      "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+      "size": 11458
+    },
+    {
+      "path": "src\\root\\m218D.c",
+      "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "size": 8739
+    },
+    {
+      "path": "src\\root\\m21FA.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "size": 13758
+    },
+    {
+      "path": "src\\root\\m22BF.c",
+      "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "size": 18937
+    },
+    {
+      "path": "src\\root\\m23AE.c",
+      "sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+      "size": 5115
+    },
+    {
+      "path": "src\\root\\m23E6.c",
+      "sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "size": 11709
+    },
+    {
+      "path": "src\\root\\m24AB.c",
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "size": 5171
+    },
+    {
+      "path": "src\\root\\m2505.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "size": 10178
+    },
+    {
+      "path": "src\\root\\m259D.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "size": 6533
+    },
+    {
+      "path": "src\\root\\m25E7.c",
+      "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+      "size": 5610
+    },
+    {
+      "path": "src\\root\\m2662.c",
+      "sha256": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+      "size": 15289
+    },
+    {
+      "path": "src\\root\\m277D.c",
+      "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+      "size": 606
+    },
+    {
+      "path": "src\\root\\m277E.c",
+      "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "size": 10363
+    },
+    {
+      "path": "src\\root\\m2815.c",
+      "sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+      "size": 2257
+    },
+    {
+      "path": "src\\root\\m284A.c",
+      "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+      "size": 6899
+    },
+    {
+      "path": "src\\root\\m290D.c",
+      "sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+      "size": 3201
+    },
+    {
+      "path": "src\\root\\m293A.c",
+      "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "size": 3635
+    },
+    {
+      "path": "src\\root\\m295C.c",
+      "sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+      "size": 6086
+    },
+    {
+      "path": "src\\root\\m29B8.c",
+      "sha256": "630261c9ce29ece91f48e1fa0ec6c4bf1ce6270245f30d4825a66ed2a661878b",
+      "size": 594
+    },
+    {
+      "path": "src\\root\\m29D6.c",
+      "sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+      "size": 2848
+    },
+    {
+      "path": "src\\root\\m29F0.c",
+      "sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+      "size": 633
+    },
+    {
+      "path": "src\\S04\\m35F5.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387
+    },
+    {
+      "path": "src\\S05\\m35F5.c",
+      "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+      "size": 8438
+    },
+    {
+      "path": "src\\S05\\m3663.c",
+      "sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+      "size": 4421
+    },
+    {
+      "path": "src\\S06\\m35F5.c",
+      "sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+      "size": 43385
+    },
+    {
+      "path": "src\\S07\\m35F5.c",
+      "sha256": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+      "size": 5028
+    },
+    {
+      "path": "src\\S08\\m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "size": 22166
+    },
+    {
+      "path": "src\\S09\\m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src\\S09\\m36EE.c",
+      "sha256": "e48ce08404481d1fa8921b14f24b5e1c6ea8a5afc06f8854b903c9225e91ca53",
+      "size": 5625
+    },
+    {
+      "path": "src\\S10\\m35F5.c",
+      "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+      "size": 10707
+    },
+    {
+      "path": "src\\S11\\m35F5.c",
+      "sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "size": 4345
+    },
+    {
+      "path": "src\\S12\\m384C.c",
+      "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+      "size": 19819
+    },
+    {
+      "path": "src\\S13\\m384C.c",
+      "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+      "size": 24768
+    },
+    {
+      "path": "src\\S14\\m384C.c",
+      "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "size": 17919
+    },
+    {
+      "path": "src\\S15\\m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "src\\S16\\m384C.c",
+      "sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "size": 8239
+    },
+    {
+      "path": "src\\S17\\m384C.c",
+      "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+      "size": 2302
+    },
+    {
+      "path": "src\\S18\\m384C.c",
+      "sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3",
+      "size": 12432
+    },
+    {
+      "path": "src\\S19\\m384C.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+      "size": 7190
+    },
+    {
+      "path": "src\\S20\\m39C7.c",
+      "sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a",
+      "size": 2164
+    },
+    {
+      "path": "src\\S20\\m39F1.c",
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+      "size": 6627
+    },
+    {
+      "path": "src\\S22\\m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src\\S22\\m3BBD.c",
+      "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+      "size": 18576
+    },
+    {
+      "path": "src\\S23\\m39C7.c",
+      "sha256": "4e2ff0a4d57f3159b2fb58ff64c77bb7740e2a415292cc7f2fe2e9fad095daf4",
+      "size": 20263
+    },
+    {
+      "path": "src\\S24\\m39C7.c",
+      "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "size": 8405
+    },
+    {
+      "path": "src\\S25\\m39C7.c",
+      "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+      "size": 27923
+    },
+    {
+      "path": "src\\S25\\m3BA4.c",
+      "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+      "size": 25998
+    },
+    {
+      "path": "src\\S26\\m39C7.c",
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "size": 9163
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "09d8a4226b10e3610e0fc729d0e0458b417131aafcb915aafc722b4d58e2ac51",
+      "size": 41841
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "6ad4e3bc553eee58b280a12859d46b15a81e18ea6c918a32815cc1bd7eda7954",
+      "size": 51004
+    },
+    {
+      "path": "work\\source-only-dos\\water-storage-probe.py",
+      "sha256": "ec0b2afaa2fdd064c63d61d53f2fbcebb935cba5b73c83dfbba2488fedfff15b",
+      "size": 44816
+    }
+  ],
+  "probe_source": {
+    "path": "work/source-only-dos/water-storage-probe.py",
+    "sha256": "ec0b2afaa2fdd064c63d61d53f2fbcebb935cba5b73c83dfbba2488fedfff15b",
+    "size": 44816
+  },
+  "static_ownership": {
+    "anchors": [
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 39,
+        "text": "extern unsigned char far fd_50F6_0256[];"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 40,
+        "text": "extern unsigned char far fd_50F6_02C0[];"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 165,
+        "text": "void far DoWater(void)"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 180,
+        "text": "for (i = 0; i < 100; i++) {"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 181,
+        "text": "x = fd_50F6_0256[i];"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 182,
+        "text": "y = fd_50F6_02C0[i];"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 195,
+        "text": "for (i = 0; i < 100; i++) {"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 196,
+        "text": "x = fd_50F6_0256[i];"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 197,
+        "text": "y = fd_50F6_02C0[i];"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 210,
+        "text": "void far PlaceDrop(int i)"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 215,
+        "text": "x = RRand(128);"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 216,
+        "text": "y = RRand(64);"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 217,
+        "text": "fd_50F6_0256[i] = x;"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 218,
+        "text": "fd_50F6_02C0[i] = y;"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 237,
+        "text": "void far InitWater(void)"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 241,
+        "text": "for (i = 0; i < 100; ++i)"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 242,
+        "text": "PlaceDrop(i);"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 193,
+        "text": "fd_50F6_0352 = 0;           /* RainOn */"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 159,
+        "text": "void far o06_35F5_0000(void)"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 219,
+        "text": "o06_35F5_020C();"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 239,
+        "text": "if (fd_50F6_0352 == 0) {"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 246,
+        "text": "fd_50F6_0352 = 1;"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 248,
+        "text": "f_0BE8_063A();                      /* InitWater */"
+      },
+      {
+        "source": "src/S08/m35F5.c",
+        "line": 386,
+        "text": "o06_35F5_0000();"
+      },
+      {
+        "source": "src/S08/m35F5.c",
+        "line": 434,
+        "text": "RandYard();"
+      },
+      {
+        "source": "src/root/m0894.c",
+        "line": 188,
+        "text": "o06_35F5_0173();"
+      },
+      {
+        "source": "src/root/m0894.c",
+        "line": 189,
+        "text": "DoWater();"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 114,
+        "text": "for (p = fd_4E4B_0000; p->count != 0; p++)"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 89,
+        "text": "int far LoadGame(void)"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 98,
+        "text": "ok = 0;"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 116,
+        "text": "o09_35F5_0D7A();"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 118,
+        "text": "if ((r = read(fd, p->data, n = p->count * p->size)) != n) {"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 124,
+        "text": "ok = 1;"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 129,
+        "text": "if (ok) {"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 559,
+        "text": "RandYard();"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 966,
+        "text": "{ 1, 100, (void far *)&fd_50F6_0256 },"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 967,
+        "text": "{ 1, 100, (void far *)&fd_50F6_02C0 },"
+      },
+      {
+        "source": "src/S09/m35F5.c",
+        "line": 1132,
+        "text": "{ 2, 1, (void far *)&fd_50F6_0352 },"
+      },
+      {
+        "source": "src/S19/m384C.c",
+        "line": 73,
+        "text": "if (LoadGame(0L) == 0 && fd_50F6_0EAC == -1 && NewGame(1) < 0)"
+      }
+    ],
+    "lifecycle": {
+      "new_world_and_sim_path": [
+        {
+          "fact": "RandYard initializes the yard state before the simulation can call DoWater.",
+          "anchors": [
+            {
+              "source": "src/S08/m35F5.c",
+              "line": 373,
+              "text": "void far RandYard(void)"
+            },
+            {
+              "source": "src/S08/m35F5.c",
+              "line": 386,
+              "text": "o06_35F5_0000();"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 159,
+              "text": "void far o06_35F5_0000(void)"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 193,
+              "text": "fd_50F6_0352 = 0;           /* RainOn */"
+            },
+            {
+              "source": "src/S08/m35F5.c",
+              "line": 434,
+              "text": "RandYard();"
+            },
+            {
+              "source": "src/S15/m384C.c",
+              "line": 301,
+              "text": "RandYard();"
+            }
+          ]
+        },
+        {
+          "fact": "DoAntSim calls DoSimYard before DoWater; DoSimYard invokes SimRain, and the false-to-true SimRain branch calls InitWater before returning.",
+          "anchors": [
+            {
+              "source": "src/root/m0894.c",
+              "line": 188,
+              "text": "o06_35F5_0173();"
+            },
+            {
+              "source": "src/root/m0894.c",
+              "line": 189,
+              "text": "DoWater();"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 206,
+              "text": "void far o06_35F5_0173(void)"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 219,
+              "text": "o06_35F5_020C();"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 239,
+              "text": "if (fd_50F6_0352 == 0) {"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 246,
+              "text": "fd_50F6_0352 = 1;"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 248,
+              "text": "f_0BE8_063A();                      /* InitWater */"
+            }
+          ]
+        },
+        {
+          "fact": "InitWater loops 0..99 and calls PlaceDrop, which writes both arrays at the supplied i; DoWater has 0..99 read loops.",
+          "anchors": [
+            {
+              "source": "src/root/m0BE8.c",
+              "line": 241,
+              "text": "for (i = 0; i < 100; ++i)"
+            },
+            {
+              "source": "src/root/m0BE8.c",
+              "line": 242,
+              "text": "PlaceDrop(i);"
+            },
+            {
+              "source": "src/root/m0BE8.c",
+              "line": 217,
+              "text": "fd_50F6_0256[i] = x;"
+            },
+            {
+              "source": "src/root/m0BE8.c",
+              "line": 218,
+              "text": "fd_50F6_02C0[i] = y;"
+            },
+            {
+              "source": "src/root/m0BE8.c",
+              "line": 180,
+              "text": "for (i = 0; i < 100; i++) {"
+            },
+            {
+              "source": "src/root/m0BE8.c",
+              "line": 195,
+              "text": "for (i = 0; i < 100; i++) {"
+            }
+          ]
+        }
+      ],
+      "saved_game_path": [
+        {
+          "fact": "LoadGame prepares a fresh yard before reading records. Its table loop reads records in source order and aborts a failed read before ok/post-load reconstruction.",
+          "anchors": [
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 89,
+              "text": "int far LoadGame(void)"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 98,
+              "text": "ok = 0;"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 116,
+              "text": "o09_35F5_0D7A();"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 117,
+              "text": "for (p = fd_4E4B_0000; p->count != 0; p++) {"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 118,
+              "text": "if ((r = read(fd, p->data, n = p->count * p->size)) != n) {"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 121,
+              "text": "goto done;"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 120,
+              "text": "fd_50F6_0EAC = -1;"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 124,
+              "text": "ok = 1;"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 129,
+              "text": "if (ok) {"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 559,
+              "text": "RandYard();"
+            }
+          ]
+        },
+        {
+          "fact": "The two full 100-byte coordinate rows precede the RainOn row in the canonical SaveRec table. On a failed load before those rows finish, RandYard left RainOn off; once RainOn can be restored, both coordinate rows have already succeeded.",
+          "anchors": [
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 966,
+              "text": "{ 1, 100, (void far *)&fd_50F6_0256 },"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 967,
+              "text": "{ 1, 100, (void far *)&fd_50F6_02C0 },"
+            },
+            {
+              "source": "src/S09/m35F5.c",
+              "line": 1132,
+              "text": "{ 2, 1, (void far *)&fd_50F6_0352 },"
+            }
+          ]
+        },
+        {
+          "fact": "The caller may start a new game after failed loading; normal NewGame/RandYard reset reestablishes RainOn=0.",
+          "anchors": [
+            {
+              "source": "src/S19/m384C.c",
+              "line": 73,
+              "text": "if (LoadGame(0L) == 0 && fd_50F6_0EAC == -1 && NewGame(1) < 0)"
+            },
+            {
+              "source": "src/S15/m384C.c",
+              "line": 301,
+              "text": "RandYard();"
+            },
+            {
+              "source": "src/S06/m35F5.c",
+              "line": 193,
+              "text": "fd_50F6_0352 = 0;           /* RainOn */"
+            }
+          ]
+        }
+      ]
+    },
+    "registered_and_behavioral_reference_audit": {
+      "fd_50F6_0256": {
+        "behavioral_use_count": 3,
+        "indexed_behavior_count": 3,
+        "address_contexts_outside_SaveRec": [],
+        "bare_or_unknown_behavior": [],
+        "all_references": [
+          {
+            "source": "src/S09/m35F5.c",
+            "line": 669,
+            "text": "extern unsigned char far fd_50F6_0256[];",
+            "kind": "declaration"
+          },
+          {
+            "source": "src/S09/m35F5.c",
+            "line": 966,
+            "text": "{ 1, 100, (void far *)&fd_50F6_0256 },",
+            "kind": "SaveRec_address"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 39,
+            "text": "extern unsigned char far fd_50F6_0256[];",
+            "kind": "declaration"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 181,
+            "text": "x = fd_50F6_0256[i];",
+            "kind": "indexed_behavior"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 196,
+            "text": "x = fd_50F6_0256[i];",
+            "kind": "indexed_behavior"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 217,
+            "text": "fd_50F6_0256[i] = x;",
+            "kind": "indexed_behavior"
+          }
+        ]
+      },
+      "fd_50F6_02C0": {
+        "behavioral_use_count": 3,
+        "indexed_behavior_count": 3,
+        "address_contexts_outside_SaveRec": [],
+        "bare_or_unknown_behavior": [],
+        "all_references": [
+          {
+            "source": "src/S09/m35F5.c",
+            "line": 670,
+            "text": "extern unsigned char far fd_50F6_02C0[];",
+            "kind": "declaration"
+          },
+          {
+            "source": "src/S09/m35F5.c",
+            "line": 967,
+            "text": "{ 1, 100, (void far *)&fd_50F6_02C0 },",
+            "kind": "SaveRec_address"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 40,
+            "text": "extern unsigned char far fd_50F6_02C0[];",
+            "kind": "declaration"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 182,
+            "text": "y = fd_50F6_02C0[i];",
+            "kind": "indexed_behavior"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 197,
+            "text": "y = fd_50F6_02C0[i];",
+            "kind": "indexed_behavior"
+          },
+          {
+            "source": "src/root/m0BE8.c",
+            "line": 218,
+            "text": "fd_50F6_02C0[i] = y;",
+            "kind": "indexed_behavior"
+          }
+        ]
+      }
+    },
+    "registered": {
+      "fd_50F6_0256": {
+        "offset": "0256",
+        "owner_line": 39,
+        "save_line": 966,
+        "registered_base_aliases": [
+          "fd_50F6_0256"
+        ],
+        "registered_interiors_in_source_count_window": [],
+        "save_record": {
+          "source": "src/S09/m35F5.c",
+          "line": 966,
+          "text": "{ 1, 100, (void far *)&fd_50F6_0256 },",
+          "element_size": 1,
+          "element_count": 100,
+          "bytes": 100
+        }
+      },
+      "fd_50F6_02C0": {
+        "offset": "02C0",
+        "owner_line": 40,
+        "save_line": 967,
+        "registered_base_aliases": [
+          "fd_50F6_02C0"
+        ],
+        "registered_interiors_in_source_count_window": [],
+        "save_record": {
+          "source": "src/S09/m35F5.c",
+          "line": 967,
+          "text": "{ 1, 100, (void far *)&fd_50F6_02C0 },",
+          "element_size": 1,
+          "element_count": 100,
+          "bytes": 100
+        }
+      }
+    },
+    "manifest_c_source_scan_count": 98,
+    "interpretation": "Both objects are indexed only in DoWater/PlaceDrop; persistent address views are the two SaveRec records. The lexical audit found no other base-address escape or unclassified behavioral use, and no registered aliases except each symbol itself or registered interior within the proposed extents."
+  },
+  "whole_module_control": {
+    "all_checks_pass": true,
+    "checks": {
+      "all_segment_payload_bytes_equal_including_debug_segments": true,
+      "segment_lengths_equal": true,
+      "segment_definitions_equal": true,
+      "groups_equal": true,
+      "publics_equal": true,
+      "local_publics_equal": true,
+      "legacy_fixup_sequence_equal": true,
+      "full_ordered_linker_fixups_equal": true,
+      "comments_equal": true,
+      "local_externals_equal": true,
+      "external_name_sequence_equal": true,
+      "unrelated_external_scope_sequence_equal": true,
+      "only_two_target_external_scopes_become_communal": true,
+      "debug_line_records_equal": true,
+      "exact_two_far_byte_communal_rows": true,
+      "control_has_no_communal_rows": true
+    },
+    "ordered_fixup_count": 406,
+    "ordered_fixup_sha256": "d0d32e37128ace27afd7a922f7d8a5697d69fcf86fd799c9697ea9548b38f2f7",
+    "communal_records": [
+      {
+        "name": "_fd_50F6_0256",
+        "kind": "far",
+        "type_index": 0,
+        "count": 100,
+        "element_size": 1,
+        "length": 100
+      },
+      {
+        "name": "_fd_50F6_02C0",
+        "kind": "far",
+        "type_index": 0,
+        "count": 100,
+        "element_size": 1,
+        "length": 100
+      }
+    ],
+    "object_size_delta": 10
+  },
+  "normalization": "FAIL_ZERO is the probe failure category for nonzero initialization; all raw observations retained."
+}

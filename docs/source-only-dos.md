@@ -113,9 +113,9 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus one reviewed data-only
-callback provider. Symbol-address joins provide 121
-code aliases and eight data aliases without rewriting objects. Reviewed generated
+The current compilation passes all 127 canonical TUs plus eight reviewed data-only
+providers. Symbol-address joins provide 121
+code aliases and thirteen exact-base data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
 dispatch pointer, S02's save-rectangle flag, and the timer countdown word shared
 with root:208F, plus four sample-channel/volume-table views in the recovered audio
@@ -157,7 +157,7 @@ The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes unde
 only the MSC startup and byte/word view contracts authorize the generated history
 owners. The link gate checks the selected linker and runtime hashes against those controls.
 
-The remaining 412 imports are data: 397 FAR_BSS names and 15 requiring
+The remaining 389 imports are data: 381 FAR_BSS names and eight requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -248,7 +248,7 @@ output-pointer escapes, teardown behavior and original startup-clear containment
 support their types and lifetimes. Actual MSC startup tests on both linkers check
 zero entry, byte/word overlap and offset/segment halves, with wrong type, extent
 and initializer contrasts. These eight allocations resolve eight more of the
-original 46 storage/reachability cases, leaving fifteen open. They claim no
+original 46 storage/reachability cases, leaving fifteen open at that checkpoint. They claim no
 original TU, communal ordering or aggregate.
 
 The 128 external SS operands in S00–S03 now have scoped DGROUP frames. The
@@ -256,9 +256,42 @@ source-wide audit covers 127 canonical files, all 29 registered module snapshots
 and corrected DrawBalloons. CRT startup and interrupt CFG dominance establish
 SS=DGROUP at every audited driver entry. Signed operand tuples, whole-object
 comparisons and shifted-origin controls on both linkers reject partial site sets,
-different targets and unrelated relocation changes. Ten module-local operands,
-the `g_5A9C` segment/offset pair and three numeric pattern reads remain separate
-layout investigations. This does not close the wider address gate.
+different targets and unrelated relocation changes. A subsequent bounded review
+corrects ten module-local operands using exact `_DATA` displacements and source
+anchors. Both linkers distinguish paragraph-relative frames from DGROUP offsets
+in shifted-layout fixtures; whole objects preserve all bytes and unrelated ordered
+fixups. The `g_5A9C` segment/offset pair remains a separate investigation.
+
+The pattern-bank owner in root:1B4E consists of sixteen accepted 16-byte records.
+A zero-byte public at its start and three symbolic S00 operands replace the
+literal `41D0h` base. Selector/phase arithmetic bounds every read within 256 bytes;
+the existing `g_4220` view is at byte 80. Both shifted-linker controls exercise all
+256 test-owned bytes and detect wrong frames and shifted bases. Original source
+table bytes remain unchanged; no data-debt initializer is supplied.
+
+Two 100-byte water coordinate arrays extend the existing population-owner binding.
+Initialization and simulation loops bound entries 0–99, and two `{1,100,&array}`
+SaveRec records establish their byte views. Reset/load ordering is accounted for,
+including failed partial loads. The combined whole-TU check preserves all code,
+data, debug and ordered fixups and adds only the two far commons.
+
+The additional data-only providers supply four render scalars (including the
+one-byte `g_94E4`), three allocator far words and two far-stored far pointers,
+eight signed RandYard words, a 24-byte monochrome prefix, and a four-byte clip-list
+pointer. The clip segment-word name is a bounded `+2` alias; two yard names share
+their existing exact-base registry aliases. Source dataflow, reset/SaveRec views,
+pointer halves and lifetimes support these types; both linkers pass MSC startup
+contracts with explicit negative controls. Whole-source debug deltas in the yard
+and monochrome research experiments are retained as counterexamples, so their
+functional owners use separate providers. These allocations bring the original
+46 storage/reachability cases to eight remaining. All 113 historical data-debt
+bytes remain explicit, including adjacent clip fields and initializer questions.
+
+The monochrome `g_8ED8` payload's producer count is unavailable in supplied
+resources, and its indexed driver base remains unresolved. The window-handle
+table lacks a proven allocation extent. Database normal paths establish four
+124-byte records, but an allocation failure can continue with slot `-1` after
+`Punt`; that separate layout dependence is not closed by a four-record owner.
 
 The driver callback table now has one typed near array of 25 far pointers.
 The source reset writes 25 two-word slots, copy moves 50 words, and all four

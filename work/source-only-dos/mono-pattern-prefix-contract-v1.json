@@ -1,0 +1,532 @@
+{
+  "schema": "simant-dos-mono-pattern-prefix-contract-v1",
+  "all_required_checks_pass": true,
+  "required_cases": {
+    "typed24_zero_fill_and_byte_roundtrip": "PASS",
+    "initialized_nonzero_owner_negative": "FAIL"
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed24_zero_fill_and_byte_roundtrip",
+      "expected": "PASS",
+      "actual": "PASS",
+      "emulator_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> BEGINAREA\n=> SECTION FILE CHECK\n=> ENDAREA\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/CHECK.OBJ",
+          "sha256": "4dbaa7576018f26851d5aec0737d8978e5c155d99547a5544eeea492f80de7ad",
+          "size": 312
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/dosbox.conf",
+          "sha256": "e8e155d2ff668d5379beb26fc4492abd89a8f7a33589d3cdcbbcb1aa6a73c6a2",
+          "size": 394
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/LINK.LOG",
+          "sha256": "f3abd965cfe7d07bf65b444616e7567c6bee7aa2b4deda9af6647d1183c7f15f",
+          "size": 509
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/MAIN.OBJ",
+          "sha256": "deb6db3aaccdd6ef708fa8a2bf063819095567901d6258d756c06410f44ea419",
+          "size": 416
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/OWNER.OBJ",
+          "sha256": "51a318dcfb6552a8176b4fd9bff689de89600d84e19d16d3cc1883dadec0abbe",
+          "size": 204
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/PROBE.EXE",
+          "sha256": "c4530de04329c2d53fc302a1ffb43db04a216ea56468e9f805a5421c77f692af",
+          "size": 9453
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/PROBE.LNK",
+          "sha256": "4ef8ce3dea9f802640415b2cc2ed2088bb700b6aa54b3fadb22d5c3668778fe4",
+          "size": 130
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/PROBE.MAP",
+          "sha256": "59fba1775c14126112a5e735d4a77cadc22bff0faa415d8b7e2f7da20a8b31a7",
+          "size": 11548
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/typed24_zero_fill_and_byte_roundtrip/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_owner_negative",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> BEGINAREA\n=> SECTION FILE CHECK\n=> ENDAREA\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/CHECK.OBJ",
+          "sha256": "4dbaa7576018f26851d5aec0737d8978e5c155d99547a5544eeea492f80de7ad",
+          "size": 312
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/dosbox.conf",
+          "sha256": "dadabb400fdd534444fdc403de2b71c43b2c4d94e3c9ccd246cb5829180f4260",
+          "size": 392
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/LINK.LOG",
+          "sha256": "f3abd965cfe7d07bf65b444616e7567c6bee7aa2b4deda9af6647d1183c7f15f",
+          "size": 509
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/MAIN.OBJ",
+          "sha256": "deb6db3aaccdd6ef708fa8a2bf063819095567901d6258d756c06410f44ea419",
+          "size": 416
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/OWNER.OBJ",
+          "sha256": "715d1bce5b7d3806b59dd573c98fd782b66f1d39bf6f7ee64632c305b8380043",
+          "size": 225
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/PROBE.EXE",
+          "sha256": "dbba16909345d306c13ddd512e0ed06a156f5a1ab4857901d8c67b7be7c48b97",
+          "size": 9477
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/PROBE.LNK",
+          "sha256": "4ef8ce3dea9f802640415b2cc2ed2088bb700b6aa54b3fadb22d5c3668778fe4",
+          "size": 130
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/PROBE.MAP",
+          "sha256": "7d7f537449af7b20a777a1da96a6eea450f56867b99d88735432afe1dd157305",
+          "size": 11548
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink400/initialized_nonzero_owner_negative/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed24_zero_fill_and_byte_roundtrip",
+      "expected": "PASS",
+      "actual": "PASS",
+      "emulator_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "link_log_tail": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> BEGINAREA\n=> SECTION FILE CHECK\n=> ENDAREA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+FH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/CHECK.OBJ",
+          "sha256": "4dbaa7576018f26851d5aec0737d8978e5c155d99547a5544eeea492f80de7ad",
+          "size": 312
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/dosbox.conf",
+          "sha256": "d9ad57205fbe93fb13744a00d34272fb8125ff2de57f92d8c23aae229f87f229",
+          "size": 394
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/LINK.LOG",
+          "sha256": "f0f9e8df870782384fc4d153d2baf38f1ec399c7d705f48c634dedbcc25ee45f",
+          "size": 1200
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/MAIN.OBJ",
+          "sha256": "deb6db3aaccdd6ef708fa8a2bf063819095567901d6258d756c06410f44ea419",
+          "size": 416
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/OWNER.OBJ",
+          "sha256": "51a318dcfb6552a8176b4fd9bff689de89600d84e19d16d3cc1883dadec0abbe",
+          "size": 204
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/PROBE.EXE",
+          "sha256": "71bbf0f58e155792b3f4f35d00dad3e4250e10b38063490f12200799f4accfad",
+          "size": 10477
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/PROBE.LNK",
+          "sha256": "4ef8ce3dea9f802640415b2cc2ed2088bb700b6aa54b3fadb22d5c3668778fe4",
+          "size": 130
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/PROBE.MAP",
+          "sha256": "282caf3de123905f95f61682f0825ddd637dd46b3368bd98ad3b401db17fe79e",
+          "size": 12731
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/PROBE.VEC",
+          "sha256": "09eafd344b12960efbd43235944c6c0b418eae4b3286fb00a59c70e633a80cdc",
+          "size": 260
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/typed24_zero_fill_and_byte_roundtrip/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_owner_negative",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "timed_out": false,
+      "passed": true,
+      "link_log_tail": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> BEGINAREA\n=> SECTION FILE CHECK\n=> ENDAREA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+FH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/CHECK.OBJ",
+          "sha256": "4dbaa7576018f26851d5aec0737d8978e5c155d99547a5544eeea492f80de7ad",
+          "size": 312
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/dosbox.conf",
+          "sha256": "d1526447c0ab0a60facf1bbbb857bebd0c8f20c531dd9d5295f9596aa7818163",
+          "size": 392
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/LINK.LOG",
+          "sha256": "f0f9e8df870782384fc4d153d2baf38f1ec399c7d705f48c634dedbcc25ee45f",
+          "size": 1200
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/MAIN.OBJ",
+          "sha256": "deb6db3aaccdd6ef708fa8a2bf063819095567901d6258d756c06410f44ea419",
+          "size": 416
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/OWNER.OBJ",
+          "sha256": "715d1bce5b7d3806b59dd573c98fd782b66f1d39bf6f7ee64632c305b8380043",
+          "size": 225
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/PROBE.EXE",
+          "sha256": "198f1e7301169ed8ba15c5416c5487d2ee5b3d13e2fc9f685e409b5101830028",
+          "size": 10501
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/PROBE.LNK",
+          "sha256": "4ef8ce3dea9f802640415b2cc2ed2088bb700b6aa54b3fadb22d5c3668778fe4",
+          "size": 130
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/PROBE.MAP",
+          "sha256": "91dddac753f4c098c04165791f8c270ee9ccba12ee069d48a08c36e0c83c44b3",
+          "size": 12731
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/PROBE.VEC",
+          "sha256": "09eafd344b12960efbd43235944c6c0b418eae4b3286fb00a59c70e633a80cdc",
+          "size": 260
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_mono_pattern_prefix/rtlink610/initialized_nonzero_owner_negative/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/nmlgcdos/msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "work/source-only-dos/mono-pattern-prefix-probe.py",
+      "sha256": "822230ba8d889dba3eb2847dd116babcdbc8bcd2f8ee93c781a39babc84a1d1a",
+      "size": 11705
+    },
+    {
+      "path": "work/source-only-dos/providers/mono-pattern-prefix.c",
+      "sha256": "51ff1acd879f1abfa0be317a81d4cae076fddaa23d7e41156380c9ddf6349823",
+      "size": 32
+    }
+  ],
+  "static_ownership": {
+    "candidate_region": "DGROUP 55B3:8EC0-8ED7",
+    "registry_region_rows": [
+      {
+        "name": "g_8EC0",
+        "seg": 21939,
+        "off": 36544,
+        "alias_of": null
+      }
+    ],
+    "canonical_g8EC0_identifier_or_literal_hits": [
+      {
+        "path": "src/S15/m384C.c",
+        "line": 34,
+        "text": "extern unsigned char near g_8EC0[];"
+      },
+      {
+        "path": "src/S15/m384C.c",
+        "line": 50,
+        "text": "dst = g_8EC0;"
+      }
+    ],
+    "S15_LoadMonoPats_source_fragments_present": true,
+    "S01_indexed_base_count": 4,
+    "S01_indexed_byte_read_lines": 32,
+    "S01_indexed_base_lines": [
+      "add bx, 8ED8h",
+      "add bx, 8ED8h",
+      "add bx, 8ED8h",
+      "add bx, 8ED8h"
+    ],
+    "only_registered_base_view_in_candidate_region": true,
+    "only_canonical_identifier_view_is_S15": true,
+    "input_pins": [
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "size": 800809
+      },
+      {
+        "path": "src/S15/m384C.c",
+        "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "size": 8116
+      },
+      {
+        "path": "src/S01/m328E.asm",
+        "sha256": "610b108145bbf912a6c1b11b454eaf54a7c6053624db8b7de8f2c672dce34351",
+        "size": 4615
+      }
+    ]
+  },
+  "limits": "24-byte destination of LoadMonoPats only; separate 8ED8 producer bound remains unresolved.",
+  "root_reviewed": true,
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "status": "ROOT_REVIEWED_SOURCE_FUNCTIONAL_OWNERSHIP",
+  "communals": [
+    {
+      "name": "_g_8EC0",
+      "kind": "near",
+      "length": 24
+    }
+  ],
+  "probe_source": {
+    "path": "work/source-only-dos/mono-pattern-prefix-probe.py",
+    "sha256": "822230ba8d889dba3eb2847dd116babcdbc8bcd2f8ee93c781a39babc84a1d1a",
+    "size": 11705
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "simant-dos-mono-pattern-prefix-bindings-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:mono-pattern-prefix",
+      "basename": "MPOWNER",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/mono-pattern-prefix.c",
+        "sha256": "51ff1acd879f1abfa0be317a81d4cae076fddaa23d7e41156380c9ddf6349823",
+        "size": 32
+      },
+      "communals": [
+        {
+          "name": "_g_8EC0",
+          "kind": "near",
+          "length": 24
+        }
+      ]
+    }
+  ],
+  "runtime_contract": {
+    "path": "work/source-only-dos/mono-pattern-prefix-contract-v1.json",
+    "sha256": "a7741b0f014f47a819e2046a29234cf4eaab6aa7acd7d2b9d1209712434934cc",
+    "size": 25337
+  },
+  "runtime_contract_key": "mono_pattern_prefix_contract",
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/monochrome-pattern-owner-gap-v1.md",
+      "sha256": "4cd9e5a1182ff097d3fb2e8ed1dcd3bf31b29e398ca0986af74fce20e1cec38c",
+      "size": 5263
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "src/S01/m328E.asm",
+      "sha256": "610b108145bbf912a6c1b11b454eaf54a7c6053624db8b7de8f2c672dce34351",
+      "size": 4615
+    }
+  ],
+  "claim_limit": "Functional typed ownership only; no historical COMDEF TU/order/fixed placement claim."
+}

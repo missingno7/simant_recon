@@ -1,0 +1,112 @@
+{
+  "schema": "simant-dos-clip-pointer-bindings-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:clip-pointer",
+      "basename": "CPOWNER",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/clip-pointer.c",
+        "sha256": "fa8ff59a015c5078ce7b0d9c80a7a6c1d79539caac12a13b5b726069557fe48d",
+        "size": 90
+      },
+      "communals": [
+        {
+          "name": "_g_5AAC",
+          "kind": "near",
+          "length": 4
+        }
+      ]
+    }
+  ],
+  "runtime_contract": {
+    "path": "work/source-only-dos/clip-pointer-contract-v1.json",
+    "sha256": "9487697135d9193871278390f2c33a739df9cada9a78164957731bce3c814386",
+    "size": 33586
+  },
+  "runtime_contract_key": "clip_pointer_contract",
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/clip-pointer-review-v1.md",
+      "sha256": "3722271f79f84ad5cb55c5fb0e2e251a68d9e3762b4c29137d099eb20623f824",
+      "size": 6577
+    },
+    {
+      "path": "src/root/m1E57.c",
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "size": 12957
+    },
+    {
+      "path": "src/root/m1D8E.c",
+      "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "size": 10996
+    },
+    {
+      "path": "src/root/m21FA.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "size": 13758
+    },
+    {
+      "path": "src/root/m1C62.c",
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885
+    },
+    {
+      "path": "src/S10/m35F5.c",
+      "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+      "size": 10707
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403
+    },
+    {
+      "path": "src/S02/m3126.asm",
+      "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "size": 20400
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    }
+  ],
+  "claim_limit": "Functional typed ownership only; no historical COMDEF TU/order/fixed placement claim.",
+  "communal_aliases": [
+    {
+      "alias": "_g_5AAE",
+      "owner": "_g_5AAC",
+      "offset": 2,
+      "owner_size": 4,
+      "view_size": 2,
+      "source_anchor": "struct Rect far * near g_5AAC; segment word of four-byte far pointer",
+      "module": "source-owned:clip-pointer",
+      "source": "work/source-only-dos/providers/clip-pointer.c",
+      "source_sha256": "fa8ff59a015c5078ce7b0d9c80a7a6c1d79539caac12a13b5b726069557fe48d"
+    }
+  ]
+}

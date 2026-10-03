@@ -173,6 +173,7 @@ def prepare(out, report):
     aliases = identifier_aliases(symbols)
     report['inputs'] += [manifest_pin, registry_pin, symbols_pin]
     bindings = {}
+    binding_origins = {}
     providers = []
     report['reviewed_data_aliases'] = []
     report['reviewed_communal_aliases'] = []
@@ -181,7 +182,11 @@ def prepare(out, report):
                      'world-scalar-bindings-v1.json', 'population-owner-bindings-v1.json',
                      'lion-owner-bindings-v1.json', 'callback-table-bindings-v1.json',
                      'init-sim-scalar-bindings-v1.json', 'yellow-scalar-bindings-v1.json',
-                     'driver-ss-frame-bindings-v1.json', 'near-state-bindings-v1.json'):
+                     'driver-ss-frame-bindings-v1.json', 'near-state-bindings-v1.json',
+                     'pattern-bank-bindings-v1.json', 'render-scalar-bindings-v1.json',
+                     'memory-far-storage-bindings-v1.json', 'water-storage-bindings-v1.json',
+                     'driver-local-frame-bindings-v1.json', 'mono-pattern-prefix-bindings-v1.json',
+                     'clip-pointer-bindings-v1.json', 'yard-scalar-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -213,22 +218,52 @@ def prepare(out, report):
                 scalar_extension = (binding['module'] == 'S08:35F5'
                                     and binding.get('scalar_storage') == {'families': ['init_sim']}
                                     and previous.get('scalar_storage') == {'families': ['health', 'food_cycle']})
-                if not base or not (binding.get('reframes') or scalar_extension):
+                pattern_extension = (binding['module'] == 'S00:31AD'
+                                     and binding.get('pattern_bank_operands') is True)
+                water_extension = (binding['module'] == 'root:0BE8'
+                                   and binding.get('array_storage') == {'families': ['water_drop']}
+                                   and previous.get('scalar_storage') == {'families': ['population']})
+                local_extension = (binding['module'] in dos_source_bindings.LOCAL_SS_SITES
+                                   and bool(binding.get('local_reframes')))
+                if pattern_extension or local_extension:
+                    # This third layer extends the effective binding, including the
+                    # previously admitted frames. Pin its complete provenance and
+                    # content rather than silently replacing either frozen packet.
+                    chain = binding.get('extends_packets', binding_packet.get('extends_packets', []))
+                    if [p['path'].replace('\\', '/') for p in chain] != binding_origins[binding['module']]:
+                        raise ValueError('DOS layout extension has a different binding chain')
+                    for parent in chain:
+                        report['inputs'].append(pin(ROOT / parent['path'], parent['sha256'])[1])
+                    digest = hashlib.sha256(json.dumps(previous, sort_keys=True,
+                        separators=(',', ':')).encode()).hexdigest()
+                    if digest != binding.get('extends_effective_binding_sha256'):
+                        raise ValueError('DOS layout extension has a different effective control binding')
+                elif not base or not (binding.get('reframes') or scalar_extension or water_extension):
                     raise ValueError('duplicate DOS binding module')
-                base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
-                if previous not in json.loads(base_raw)['bindings'] or any(
-                        binding[k] != previous[k] for k in ('module', 'source', 'source_sha256')):
+                if not (pattern_extension or local_extension):
+                    base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
+                    if previous not in json.loads(base_raw)['bindings']:
+                        raise ValueError('DOS frame extension has a different source/control binding')
+                    report['inputs'].append(base_pin)
+                if any(binding[k] != previous[k] for k in ('module', 'source', 'source_sha256')):
                     raise ValueError('DOS frame extension has a different source/control binding')
-                report['inputs'].append(base_pin)
                 combined = dict(previous)
-                for key in ('edits', 'exports', 'relocations', 'reframes', 'communals'):
+                keys = ('edits', 'exports', 'relocations', 'reframes', 'communals')
+                if 'local_reframes' in previous or 'local_reframes' in binding:
+                    keys += ('local_reframes',)
+                for key in keys:
                     combined[key] = previous.get(key, []) + binding.get(key, [])
                 if scalar_extension:
                     combined['scalar_storage'] = {'families': previous['scalar_storage']['families'] + ['init_sim']}
                 if binding.get('reframes'):
                     combined['frame_review'] = binding['frame_review']
+                if pattern_extension:
+                    combined['pattern_bank_operands'] = True
+                if water_extension:
+                    combined['array_storage'] = binding['array_storage']
                 binding = combined
             bindings[binding['module']] = binding
+            binding_origins.setdefault(binding['module'], []).append(binding_pin['path'].replace('\\', '/'))
         report['reviewed_data_aliases'] += binding_packet.get('aliases', [])
         report['reviewed_communal_aliases'] += binding_packet.get('communal_aliases', [])
         providers += binding_packet.get('providers', [])
@@ -479,7 +514,19 @@ def audit_layout(report):
         'reason': 'Source reset/copy and four driver tables prove 25 far-pointer slots. One typed near communal owns the slots; 23 registered names are bounded aliases. The existing symbolic _g_3DF8 pointer is verified under shifted DGROUP on both linkers. Historical COMDEF TU/order and wider driver frame integration remain separate.'}, {
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
-                  'The ten local SS operands, fill-pattern numeric operands and g_5A9C pointer frame remain separate gates.'}, {
+                  'The g_5A9C pointer frame, indexed numeric bases and unchecked error-path addresses remain separate gates.'}, {
+        'id': 'driver-local-ss-frames',
+        'status': 'SOURCE_BOUND' if all(any(r['module'] == module and len(
+            (r.get('source_binding') or {}).get('local_reframes', [])) == len(sites)
+            for r in report['translation_units']) for module, sites in dos_source_bindings.LOCAL_SS_SITES.items()) else 'UNRESOLVED',
+        'operand_count': 10,
+        'reason': 'Same-TU source labels own these local fields. Exact SEGDEF displacements and source anchors are guarded; scoped SS frames become DGROUP without changing bytes or ordered fixup identities. Both linkers validate shifted group addresses and paragraph-frame normalization.'}, {
+        'id': 'driver-pattern-bank-addresses',
+        'status': 'SOURCE_BOUND' if all(any(r['module'] == module and
+            (r.get('source_binding') or {}).get(key) for r in report['translation_units'])
+            for module, key in [('root:1B4E', 'pattern_bank_owner'), ('S00:31AD', 'pattern_bank_operands')]) else 'UNRESOLVED',
+        'operand_count': 3, 'owner': dos_source_bindings.PATTERN_BANK_OWNER,
+        'reason': 'Sixteen accepted source records own the 256-byte bank. Selector and phase arithmetic bounds every read. A zero-byte public and exactly three symbolic DGROUP operands remove the historical numeric base; original table bytes and unrelated fixups are preserved.'}, {
         'id': 'driver-external-ss-frames',
         'status': 'SOURCE_BOUND' if all(any(r['module'] == module and len(
             (r.get('source_binding') or {}).get('reframes', [])) == count
@@ -627,11 +674,15 @@ def link_units(out, report, profile):
     tool = tc['linkers'][profile]
     dos_source_bindings.require_history_startup_contract(report, profile, tool)
     dos_source_bindings.require_scalar_startup_contracts(report, profile, tool)
+    dos_source_bindings.require_array_startup_contracts(report, profile, tool)
     dos_source_bindings.require_callback_storage_contract(report, profile, tool)
     dos_source_bindings.require_near_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_additional_storage_contracts(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
     dos_source_bindings.require_driver_ss_frame_contract(report, profile, tool)
+    dos_source_bindings.require_pattern_bank_contract(report, profile, tool)
+    dos_source_bindings.require_local_frame_contract(report, profile, tool)
     contract = report.get('linker_alias_contract', {})
     if any(row.get('offset') for row in report.get('symbolic_aliases', [])):
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]

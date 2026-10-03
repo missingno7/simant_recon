@@ -23,6 +23,11 @@ SCALAR_FAMILIES = {
                     'fd_50F6_0C38', 'fd_50F6_0C3E'), 'yellow_reset_storage_contract'),
 }
 
+ARRAY_FAMILIES = {
+    'water_drop': ('root:0BE8', ('fd_50F6_0256', 'fd_50F6_02C0'), 100,
+                   'unsigned char far[100]', 'water_storage_contract'),
+}
+
 # Signed sets of (code contribution, operand offset, external target). Only the
 # reviewed SS operands are admitted; local symbols and numeric literals remain
 # separate layout debt. A different or partial site set fails closed.
@@ -32,6 +37,47 @@ DRIVER_SS_SITE_HASHES = {
     'S02:3126': '1e3658784fcf277018f03c60eb9639e340225230de8e08f1131b3cfb3d543759',
     'S03:3126': '9aff44521bb566483058f8faee74a706275881294afa3e77079cfa143d8eccbb',
 }
+
+PATTERN_BANK_OWNER = {'name': '_g_41D0', 'segment': '_DATA', 'offset': 0x4B0,
+                      'length': 256, 'interior': '_g_4220', 'interior_delta': 80}
+PATTERN_BANK_SITES = [0x2A9, 0x30B, 0x352]
+LOCAL_SS_SITES = {
+    'S01:3126': [('S01A_TEXT', 0x5AD, '_g_2118', 0), ('S01A_TEXT', 0x63B, '_g_2118', 0)],
+    'S03:3126': [('S03A_TEXT', 0xDD4, '_g_222C', 0x1E), ('S03A_TEXT', 0xDE1, '_g_222A', 0x1C),
+                ('S03A_TEXT', 0xE48, '_g_222C', 0x1E), ('S03A_TEXT', 0xEF4, '_g_222A', 0x1C),
+                ('S03A_TEXT', 0xF5B, '_g_222C', 0x1E), ('S03A_TEXT', 0x100E, '_g_22E4', 0xD6),
+                ('S03A_TEXT', 0x1029, '_g_22E4', 0xD6), ('S03A_TEXT', 0x1044, '_g_22E4', 0xD6)],
+}
+
+
+def review_local_frame_sites(binding):
+    specs = binding.get('local_reframes', [])
+    if not specs:
+        return
+    sites = sorted((s['segment'], s['offset'], s['source_symbol'], s['displacement']) for s in specs)
+    if (sites != LOCAL_SS_SITES.get(binding['module']) or any(
+            (s['target_kind'], s['target'], s['encoded_addend'], s['old_frame_kind'], s['old_frame'],
+             s['frame_kind'], s['frame']) != ('segment', '_DATA', '0000', 'segment', '_DATA', 'group', 'DGROUP')
+            for s in specs)):
+        raise ValueError('unreviewed local assembly frame location set or source anchor')
+
+
+def review_pattern_binding(binding):
+    if binding.get('pattern_bank_owner'):
+        if (binding['module'] != 'root:1B4E' or binding['pattern_bank_owner'] != PATTERN_BANK_OWNER
+                or binding.get('exports') != [{'name': '_g_41D0', 'segment': '_DATA',
+                    'offset': 0x4B0, 'registry_symbol': 'g_41C0', 'registry_delta': 16}]):
+            raise ValueError('unreviewed pattern bank source owner')
+    if binding.get('pattern_bank_operands'):
+        specs = [s for s in binding.get('relocations', []) if s.get('pattern_operand')]
+        if (binding['module'] != 'S00:31AD' or len(specs) != 1
+                or specs[0] != {'pattern_operand': True, 'segment': 'S00B_TEXT',
+                    'offsets': PATTERN_BANK_SITES, 'count': 3, 'target_kind': 'external',
+                    'target': '_g_41D0', 'original_value': 0x41D0, 'frame_kind': 'group',
+                    'frame': 'DGROUP', 'displacement': 0, 'encoded_addend': '0000'}):
+            raise ValueError('unreviewed pattern bank operand set')
+    elif any(s.get('pattern_operand') for s in binding.get('relocations', [])):
+        raise ValueError('pattern operand lacks reviewed source owner contract')
 
 PROVIDER_SPECS = {
     'source-owned:driver-callback-table': ('CBOWNER', '_driver_callback_table',
@@ -45,7 +91,36 @@ PROVIDER_SPECS = {
         'unsigned char lock; long age; unsigned next; unsigned prev; unsigned char attr; '
         'char name[13]; } Block; unsigned near g_91A0; unsigned near g_91A2; '
         'Block far * near g_91A4; Block far * near g_91A8; Block far * near g_91AC;'),
+    'source-owned:render-scalars': ('RSOWNER', None,
+        (('_g_8BD2', 2), ('_g_8BD4', 2), ('_g_9126', 2), ('_g_94E4', 1)),
+        'int near g_8BD2; int near g_8BD4; unsigned near g_9126; unsigned char near g_94E4;'),
+    'source-owned:memory-far-state': ('MFOWNER', None,
+        (('_fd_50F6_394C', 2), ('_fd_50F6_394E', 2), ('_fd_50F6_3950', 2),
+         ('_fd_50F6_3948', 4), ('_fd_50F6_3B48', 4)),
+        'unsigned far fd_50F6_394C; unsigned far fd_50F6_394E; unsigned far fd_50F6_3950; '
+        'char far * far fd_50F6_3948; char far * far fd_50F6_3B48;'),
+    'source-owned:mono-pattern-prefix': ('MPOWNER', None, (('_g_8EC0', 24),),
+        'unsigned char near g_8EC0[24];'),
+    'source-owned:clip-pointer': ('CPOWNER', None, (('_g_5AAC', 4),),
+        'struct Rect { int left; int top; int right; int bottom; }; struct Rect far * near g_5AAC;'),
+    'source-owned:yard-scalars': ('YDOWNER', None,
+        (('_fd_50F6_105E', 2), ('_fd_50F6_0478', 2), ('_fd_50F6_0504', 2),
+         ('_fd_50F6_0228', 2), ('_MapPlane', 2), ('_YardMode', 2),
+         ('_fd_50F6_0366', 2), ('_fd_50F6_0376', 2)),
+        'int far fd_50F6_105E; int far fd_50F6_0478; int far fd_50F6_0504; '
+        'int far fd_50F6_0228; int far MapPlane; int far YardMode; '
+        'int far fd_50F6_0366; int far fd_50F6_0376;'),
 }
+
+FAR_PROVIDER_MODULES = {'source-owned:memory-far-state', 'source-owned:yard-scalars'}
+
+def provider_communals(module):
+    spec = PROVIDER_SPECS.get(module)
+    if not spec:
+        raise ValueError('unreviewed functional storage provider')
+    far = module in FAR_PROVIDER_MODULES
+    return [{'name': name, 'kind': 'far' if far else 'near', 'length': size,
+             **({'count': size, 'element_size': 1} if far else {})} for name, size in spec[2]]
 
 
 def review_frame_sites(binding):
@@ -90,7 +165,10 @@ def apply_binding(text, binding):
 
 def review_addresses(binding, module, symbols):
     """Join source-owned relative locations to already reviewed symbol anchors."""
+    review_pattern_binding(binding)
+    review_local_frame_sites(binding)
     scalar_names = set()
+    array_names = {}
     if binding.get('scalar_storage'):
         families = binding['scalar_storage']['families']
         if not families or len(families) != len(set(families)):
@@ -100,8 +178,17 @@ def review_addresses(binding, module, symbols):
             if not spec or binding['module'] != spec[0]:
                 raise ValueError('unreviewed scalar source owner')
             scalar_names.update('_' + name for name in spec[1])
-        if {c['name'] for c in binding.get('communals', [])} != scalar_names:
-            raise ValueError('scalar storage member set changed')
+    if binding.get('array_storage'):
+        families = binding['array_storage']['families']
+        if not families or len(families) != len(set(families)):
+            raise ValueError('unreviewed array storage family')
+        for family in families:
+            spec = ARRAY_FAMILIES.get(family)
+            if not spec or binding['module'] != spec[0]:
+                raise ValueError('unreviewed array source owner')
+            array_names.update(('_' + name, spec[2]) for name in spec[1])
+    if (scalar_names or array_names) and {c['name'] for c in binding.get('communals', [])} != scalar_names | set(array_names):
+        raise ValueError('scalar/array storage member set changed')
     for communal in binding.get('communals', []):
         if binding.get('queue_storage'):
             if (binding['module'] != 'root:1FD2' or communal !=
@@ -111,7 +198,9 @@ def review_addresses(binding, module, symbols):
         anchor = symbols['data'][communal['name'][1:]]
         if (anchor['seg'], anchor['off']) != tuple(communal['historical_address']):
             raise ValueError('DOS communal symbol address changed')
-        expected = ('far', 2, 1, 2) if communal['name'] in scalar_names else ('far', 64, 2, 128)
+        expected = (('far', 2, 1, 2) if communal['name'] in scalar_names else
+                    ('far', array_names[communal['name']], 1, array_names[communal['name']])
+                    if communal['name'] in array_names else ('far', 64, 2, 128))
         if (communal['kind'], communal['count'], communal['element_size'], communal['length']) != expected:
             raise ValueError('unreviewed communal type or extent')
         if anchor['seg'] != 0x50F6 or any(s['seg'] == anchor['seg'] and
@@ -128,15 +217,32 @@ def review_addresses(binding, module, symbols):
         else:
             raise ValueError('unanchored DOS storage export')
         anchor = symbols['data'][public.get('registry_symbol', public['name'][1:])]
-        if (segment, offset) != (anchor['seg'], anchor['off']):
+        delta = public.get('registry_delta', 0)
+        if delta and not binding.get('pattern_bank_owner'):
+            raise ValueError('unreviewed relative storage export')
+        if (segment, offset) != (anchor['seg'], anchor['off'] + delta):
             raise ValueError('DOS storage export conflicts with reviewed symbol address')
+        if binding.get('pattern_bank_owner'):
+            interior = symbols['data']['g_4220']
+            if ((segment, offset + 80) != (interior['seg'], interior['off'])
+                    or offset + 256 > module['placements']['_DATA']['off'] + module['placements']['_DATA']['size']):
+                raise ValueError('pattern bank extent/interior anchor changed')
     review_frame_sites(binding)
     for spec in binding.get('reframes', []):
         if (symbols['data'][spec['target'][1:]]['seg'] != 0x55B3
                 or (spec['old_frame_kind'], spec['old_frame'], spec['frame_kind'], spec['frame']) !=
                    ('segment', '_DATA', 'group', 'DGROUP')):
             raise ValueError('unreviewed assembly segment/group frame correction')
+    for spec in binding.get('local_reframes', []):
+        placement = module['placements']['_DATA']
+        anchor = symbols['data'][spec['source_symbol'][1:]]
+        if (placement['seg'], placement['off'] + spec['displacement']) != (anchor['seg'], anchor['off']):
+            raise ValueError('local frame source owner conflicts with registry anchor')
     for spec in binding.get('relocations', []):
+        if spec.get('pattern_operand'):
+            if (symbols['data']['g_41C0']['seg'], symbols['data']['g_41C0']['off'] + 16) != (0x55B3, 0x41D0):
+                raise ValueError('pattern bank base anchor changed')
+            continue
         if spec.get('storage_pointer'):
             view = symbols['data']['g_5FFE']
             placement = module['placements']['_DATA']
@@ -174,24 +280,33 @@ def review_provider_source(text, provider, symbols=None):
     spec = PROVIDER_SPECS.get(provider.get('module'))
     text = re.sub(r'/\*.*?\*/|//[^\n]*', '', text, flags=re.S)
     if (not spec or provider.get('owner') != spec[1]
-            or provider.get('communals') != [{'name': n, 'kind': 'near', 'length': size} for n, size in spec[2]]
+            or provider.get('communals') != provider_communals(provider.get('module'))
             or ' '.join(text.split()) != spec[3]):
         raise ValueError('unreviewed functional storage provider')
     if symbols is not None and spec[1] is None:
         addresses = dict(zip(('_g_9120', '_g_9122', '_g_9124', '_g_91A0', '_g_91A2',
-                             '_g_91A4', '_g_91A8', '_g_91AC'),
-                            (0x9120, 0x9122, 0x9124, 0x91A0, 0x91A2, 0x91A4, 0x91A8, 0x91AC)))
+                             '_g_91A4', '_g_91A8', '_g_91AC', '_g_8BD2', '_g_8BD4', '_g_9126', '_g_94E4',
+                             '_fd_50F6_394C', '_fd_50F6_394E', '_fd_50F6_3950', '_fd_50F6_3948', '_fd_50F6_3B48'),
+                            (0x9120, 0x9122, 0x9124, 0x91A0, 0x91A2, 0x91A4, 0x91A8, 0x91AC,
+                             0x8BD2, 0x8BD4, 0x9126, 0x94E4, 0x394C, 0x394E, 0x3950, 0x3948, 0x3B48)))
+        addresses.update({'_g_8EC0': 0x8EC0, '_g_5AAC': 0x5AAC,
+            '_fd_50F6_105E': 0x105E, '_fd_50F6_0478': 0x0478, '_fd_50F6_0504': 0x0504,
+            '_fd_50F6_0228': 0x0228, '_MapPlane': 0x032E, '_YardMode': 0x035C,
+            '_fd_50F6_0366': 0x0366, '_fd_50F6_0376': 0x0376})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
-            if ((anchor['seg'], anchor['off']) != (0x55B3, addresses[name])
-                    or any(s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size
-                           for s in symbols['data'].values())):
+            segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
+            interiors = [(n, s['off'] - anchor['off']) for n, s in symbols['data'].items()
+                         if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
+            expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
+            if ((anchor['seg'], anchor['off']) != (segment, addresses[name])
+                    or interiors != expected_interiors):
                 raise ValueError('functional storage extent conflicts with reviewed registry')
 
 
 def verify_provider(obj, provider):
     spec = PROVIDER_SPECS.get(provider.get('module'))
-    if not spec or provider.get('communals') != [{'name': n, 'kind': 'near', 'length': size} for n, size in spec[2]]:
+    if not spec or provider.get('communals') != provider_communals(provider.get('module')):
         raise ValueError('unreviewed functional storage provider')
     expected = Counter(communal_key(c) for c in provider['communals'])
     if (Counter(communal_key(c) for c in obj.communals) != expected
@@ -208,22 +323,28 @@ def bind_communal_alias(spec, obj, row, symbols):
     provider = row.get('storage_provider', {})
     source = row['source']
     offset = spec['offset']
-    if (provider.get('module') != 'source-owned:driver-callback-table'
-            or spec['owner'] != '_driver_callback_table'
+    callback = (provider.get('module') == 'source-owned:driver-callback-table'
+                and spec['owner'] == '_driver_callback_table'
+                and spec['owner_size'] == 100 and spec['view_size'] == 4
+                and isinstance(offset, int) and offset % 4 == 0 and 0 <= offset <= 96)
+    clip = (provider.get('module') == 'source-owned:clip-pointer'
+            and spec['owner'] == '_g_5AAC' and spec['alias'] == '_g_5AAE'
+            and spec['owner_size'] == 4 and spec['view_size'] == 2 and offset == 2)
+    if (not (callback or clip)
             or spec['source'].replace('\\', '/') != source['path'].replace('\\', '/')
             or spec['source_sha256'] != source['sha256']
-            or spec['owner_size'] != 100 or spec['view_size'] != 4
-            or not isinstance(offset, int) or offset % 4 or not 0 <= offset <= 96):
+            or spec['module'] != row['module']):
         raise ValueError('unreviewed communal slot view or source owner')
     verify_provider(obj, provider)
-    historical = [0x55B3, 0x9128 + offset]
+    historical = [0x55B3, (0x9128 if callback else 0x5AAC) + offset]
     anchor = symbols['data'][spec['alias'][1:]]
     if historical != [anchor['seg'], anchor['off']]:
         raise ValueError('communal slot view conflicts with reviewed registry address')
     return {'alias': spec['alias'], 'owner': spec['owner'], 'offset': offset,
             'kind': 'data', 'reason': 'reviewed source communal slot view',
             'module': row['module'], 'address': historical,
-            'owner_size': 100, 'view_size': 4, 'source_anchor': spec['source_anchor']}
+            'owner_size': spec['owner_size'], 'view_size': spec['view_size'],
+            'source_anchor': spec['source_anchor']}
 
 
 def require_callback_storage_contract(report, profile, tool):
@@ -247,11 +368,27 @@ def require_callback_storage_contract(report, profile, tool):
 
 
 def require_near_storage_contracts(report, profile, tool):
+    require_provider_contracts(report, profile, tool, [
+        ('source-owned:mouse-words', 'mouse_storage_contract', 2),
+        ('source-owned:memory-state', 'memory_storage_contract', 3)])
+
+
+def require_additional_storage_contracts(report, profile, tool):
+    require_provider_contracts(report, profile, tool, [
+        ('source-owned:render-scalars', 'render_scalar_contract', 2),
+        ('source-owned:memory-far-state', 'memory_far_storage_contract', 3),
+        ('source-owned:mono-pattern-prefix', 'mono_pattern_prefix_contract', 1),
+        ('source-owned:clip-pointer', 'clip_pointer_contract', 2),
+        ('source-owned:yard-scalars', 'yard_scalar_contract', 6, 2)])
+
+
+def require_provider_contracts(report, profile, tool, specifications):
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
-    for module, key, negatives in [('source-owned:mouse-words', 'mouse_storage_contract', 2),
-                                   ('source-owned:memory-state', 'memory_storage_contract', 3)]:
+    for specification in specifications:
+        module, key, negatives = specification[:3]
+        positives = specification[3] if len(specification) == 4 else 1
         if not any(r['module'] == module for r in report['translation_units']):
             continue
         contract = report.get(key, {})
@@ -259,11 +396,12 @@ def require_near_storage_contracts(report, profile, tool):
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
         identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
         if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
-                or contract.get('communals') != [{'name': n, 'kind': 'near', 'length': size}
-                                                for n, size in PROVIDER_SPECS[module][2]]
-                or Counter(required.values()) != Counter({'PASS': 1, 'FAIL': negatives})
-                or len(cases) != 1 + negatives or {r['case'] for r in cases} != set(required)
+                or contract.get('communals') != provider_communals(module)
+                or Counter(required.values()) != Counter({'PASS': positives, 'FAIL': negatives})
+                or len(cases) != positives + negatives or {r['case'] for r in cases} != set(required)
                 or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
+                or (module == 'source-owned:clip-pointer'
+                    and any(not r.get('map_alias_geometry') for r in cases if r['expected'] == 'PASS'))
                 or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
             raise ValueError(f'{module} lacks the selected linker/MSC startup contract')
 
@@ -310,6 +448,28 @@ def require_scalar_startup_contracts(report, profile, tool):
                 or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
                 or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
             raise ValueError(f'{family} scalar storage lacks the selected linker/MSC startup contract')
+
+
+def require_array_startup_contracts(report, profile, tool):
+    families = {family for row in report['translation_units']
+                for family in (row.get('source_binding') or {}).get('array_storage', {}).get('families', [])}
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    for family in families:
+        _, members, size, dos_type, key = ARRAY_FAMILIES[family]
+        contract = report.get(key, {})
+        required = contract.get('required_cases', {})
+        cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+        identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+        if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
+                or contract.get('members') != list(members) or contract.get('element_count') != size
+                or contract.get('dos_type') != dos_type
+                or Counter(required.values()) != Counter({'PASS': 1, 'FAIL': 1})
+                or len(cases) != 2 or {r['case'] for r in cases} != set(required)
+                or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
+                or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            raise ValueError(f'{family} array storage lacks the selected linker/MSC startup contract')
 
 
 def require_queue_startup_contract(report, profile, tool):
@@ -378,6 +538,58 @@ def require_driver_ss_frame_contract(report, profile, tool):
         raise ValueError('driver SS frames lack the selected linker/shifted DGROUP contract')
 
 
+def require_pattern_bank_contract(report, profile, tool):
+    rows = {r['module']: r for r in report['translation_units']
+            if (r.get('source_binding') or {}).get('pattern_bank_owner')
+            or (r.get('source_binding') or {}).get('pattern_bank_operands')}
+    if not rows:
+        return
+    contract = report.get('pattern_bank_contract', {})
+    required = contract.get('required_cases', {})
+    cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    if (set(rows) != {'root:1B4E', 'S00:31AD'} or contract.get('root_reviewed') is not True
+            or not contract.get('all_required_checks_pass') or contract.get('owner') != PATTERN_BANK_OWNER
+            or contract.get('sites') != [['S00B_TEXT', offset] for offset in PATTERN_BANK_SITES]
+            or Counter(required.values()) != Counter({'PASS': 1, 'FAIL': 2})
+            or len(cases) != 3 or {r['case'] for r in cases} != set(required)
+            or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']]
+                       and r['actual_DS_SS_DGROUP'] and r['shifted_data_group_delta'] > 0
+                       and (r['actual'] != 'PASS' or r['all_256_formula_reads_checked']) for r in cases)
+            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+        raise ValueError('pattern bank lacks the selected linker/source owner contract')
+    for row in rows.values():
+        review_pattern_binding(row['source_binding'])
+
+
+def require_local_frame_contract(report, profile, tool):
+    rows = [r for r in report['translation_units'] if (r.get('source_binding') or {}).get('local_reframes')]
+    if not rows:
+        return
+    contract = report.get('driver_local_frame_contract', {})
+    signatures = [[module, segment, offset, '_DATA'] for module, sites in LOCAL_SS_SITES.items()
+                  for segment, offset, _, _ in sites]
+    expected = {'canonical_DATA': 'FAIL', 'reviewed_DGROUP': 'PASS'}
+    cases = [r for r in contract.get('runtime_fixture', {}).get('cases', []) if r['linker'] == profile]
+    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
+            or contract.get('signed_site_tuples') != signatures or {r['module'] for r in rows} != set(LOCAL_SS_SITES)
+            or len(cases) != 2 or {r['variant'] for r in cases} != set(expected)
+            or not all(r['passed'] and r['expected'] == r['actual'] == expected[r['variant']]
+                       and r['actual_DS_SS_DGROUP'] and r['map']['passed']
+                       and r['map']['data_group_delta'] > 0 and r['map']['segment_frame_skew'] == 2 for r in cases)
+            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+        raise ValueError('local SS frames lack the selected linker/source owner contract')
+    for row in rows:
+        review_local_frame_sites(row['source_binding'])
+
+
 def bind_data_alias(spec, obj, row, module, symbols):
     """Bind a reviewed consumer view to a public in its one source owner."""
     if (module['source'] != spec['source'] or
@@ -408,6 +620,8 @@ def bind_data_alias(spec, obj, row, module, symbols):
 
 def verify_objects(original, generated, binding):
     review_frame_sites(binding)
+    review_pattern_binding(binding)
+    review_local_frame_sites(binding)
     debug = binding.get('debug_contributions', {})
     for segment, contract in debug.items():
         if (not binding.get('queue_storage') or segment not in ('$$SYMBOLS', '$$TYPES')
@@ -420,7 +634,7 @@ def verify_objects(original, generated, binding):
     expected_communals.update(communal_key(c) for c in binding.get('communals', []))
     if expected_communals != Counter(communal_key(c) for c in generated.communals):
         raise ValueError('DOS binding changed communal type, extent or ownership')
-    if binding.get('scalar_storage'):
+    if binding.get('scalar_storage') or binding.get('array_storage'):
         names = {c['name'] for c in binding['communals']}
         expected_scopes = ['communal' if name in names else scope
                            for name, scope in zip(original.externals, original.external_scopes)]
@@ -442,16 +656,16 @@ def verify_objects(original, generated, binding):
         raise ValueError('DOS binding changed an existing public or exported wrong storage')
     original_fixups = [dict(f) for f in original.linker_fixups if f['segment'] not in debug]
     frame_checks = []
-    for spec in binding.get('reframes', []):
+    for spec in binding.get('reframes', []) + binding.get('local_reframes', []):
         matches = [f for f in original_fixups if f['segment'] == spec['segment']
-                   and f['offset'] == spec['offset'] and f['target_kind'] == 'external'
+                   and f['offset'] == spec['offset'] and f['target_kind'] == spec.get('target_kind', 'external')
                    and f['target'] == spec['target']]
         if len(matches) != 1:
             raise ValueError('unreviewed assembly frame correction location')
         f = matches[0]
         if ((f['width'], f['loc'], f['self_relative'], f['frame_kind'], f['frame'],
                 f['displacement'], f['encoded_addend']) !=
-                (2, 'offset16', False, spec['old_frame_kind'], spec['old_frame'], 0, '0000')):
+                (2, 'offset16', False, spec['old_frame_kind'], spec['old_frame'], spec.get('displacement', 0), '0000')):
             raise ValueError('assembly frame correction changed a different operand')
         if (spec['frame_kind'], spec['frame']) != ('group', 'DGROUP'):
             raise ValueError('assembly frame correction is not DGROUP')
@@ -479,6 +693,9 @@ def verify_objects(original, generated, binding):
                    and f['displacement'] == spec['displacement']]
         if len(matches) != spec['count']:
             raise ValueError('DOS binding relocation target/addend mismatch')
+        if spec.get('pattern_operand') and sorted((f['segment'], f['offset']) for f in matches) != [
+                (spec['segment'], offset) for offset in PATTERN_BANK_SITES]:
+            raise ValueError('pattern bank relocation location set changed')
         for f in matches:
             if (f['width'] != 2 or f['loc'] != 'offset16' or f['self_relative']
                     or f['frame_kind'] != spec['frame_kind']

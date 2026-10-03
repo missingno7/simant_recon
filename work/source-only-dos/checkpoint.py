@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 130 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 135 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,8 +72,8 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v9.log',
-        'build/source-only-dos-tests-v9.log', 'build/source-only-dos-validation-v9.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v10.log',
+        'build/source-only-dos-tests-v10.log', 'build/source-only-dos-validation-v10.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not test_log.splitlines()[-1].startswith('OK'):
         raise ValueError('source-only tests did not finish successfully')
@@ -81,7 +81,7 @@ def main():
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': '25e15e7',
+        'source_only_base_checkpoint': '85ae0f7',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -117,6 +117,14 @@ def main():
         'yellow_scalar_bindings': pin(OUT / 'yellow-scalar-bindings-v1.json'),
         'near_state_bindings': pin(OUT / 'near-state-bindings-v1.json'),
         'driver_ss_frame_bindings': pin(OUT / 'driver-ss-frame-bindings-v1.json'),
+        'pattern_bank_bindings': pin(OUT / 'pattern-bank-bindings-v1.json'),
+        'render_scalar_bindings': pin(OUT / 'render-scalar-bindings-v1.json'),
+        'memory_far_storage_bindings': pin(OUT / 'memory-far-storage-bindings-v1.json'),
+        'water_storage_bindings': pin(OUT / 'water-storage-bindings-v1.json'),
+        'driver_local_frame_bindings': pin(OUT / 'driver-local-frame-bindings-v1.json'),
+        'mono_pattern_prefix_bindings': pin(OUT / 'mono-pattern-prefix-bindings-v1.json'),
+        'clip_pointer_bindings': pin(OUT / 'clip-pointer-bindings-v1.json'),
+        'yard_scalar_bindings': pin(OUT / 'yard-scalar-bindings-v1.json'),
         'strict_static_index': pin(OUT / 'static-completeness/index-v1.json'),
         'strict_static_audit': {name: {'status': row['status'], 'receipt': row['receipt']}
                                for name, row in report['strict_static_audit'].items()},
@@ -124,7 +132,9 @@ def main():
         'source_owned_history_arrays': [c for r in bound for c in r['source_binding'].get('communals', [])
                                        if c['kind'] == 'far' and c['length'] == 128],
         'source_owned_far_scalars': [c for r in bound for c in r['source_binding'].get('communals', [])
-                                    if r['source_binding'].get('scalar_storage')],
+                                    if r['source_binding'].get('scalar_storage') and c['length'] == 2],
+        'source_owned_water_arrays': [c for r in bound for c in r['source_binding'].get('communals', [])
+                                     if r['source_binding'].get('array_storage') and c['length'] == 100],
         'storage_provider_proofs': [{'module': r['module'], 'source': r['source'], 'object': r['object'],
                                     **r['provider_verification']} for r in providers],
         'reviewed_data_aliases': [r for r in report['symbolic_aliases']
@@ -135,7 +145,7 @@ def main():
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
         'historical_validation': 'PASS',
-        'source_only_tests': f'23 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'source_only_tests': f'29 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')
