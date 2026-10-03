@@ -6,6 +6,23 @@ reconstruction. SDL3 integration is paused at
 Existing native source, providers, runtime evidence and v17 packages are retained.
 Human acceptance of the DOS build is required before further major SDL3 work.
 
+Before substantial changes, check whether they recover existing logic, resolve a
+representation/platform contract, or invent a replacement. Prefer recovered
+source, keep one logical state owner, and expose unknown contracts as failing
+work items. A DOS build must work without the original executable as an ingredient.
+Confidence comes primarily from source, differential function/state/RNG evidence
+and data layout; emulator use and the user's normal-use comparison complete the
+integration gate. Do not turn a crash into new gameplay, guessed state or a
+successful no-op service.
+
+After that gate, keep SDL3 lowering mechanical and its platform boundary thin.
+Preserve the internal game window system inside one host window. Convert useful
+deterministic ASM to C only with strong differential evidence for outputs, memory,
+callbacks and state; retain the ASM oracle. Refactoring and window redesign follow
+the faithful port. Preserve unique evidence, but keep superseded implementations
+out of active builds and use Git identities, hashes and compact receipts instead
+of repeated source-tree archives.
+
 ## Authorities and build paths
 
 | Path | Authority and limitation |
@@ -79,19 +96,32 @@ to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
 The first full compilation passes all 127 TUs. Symbol-address joins provide 121
-code aliases and eight data aliases without rewriting objects. The remaining
-512 imports are data: 432 FAR_BSS names, 33 names within accepted data placements,
-and 47 requiring storage/reachability investigation. These are link ingredients
+code aliases and eight data aliases without rewriting objects. Reviewed generated
+ASM bindings now expose eight names in existing storage: S00's memory-size table and
+dispatch pointer, S02's save-rectangle flag, and the timer countdown word shared
+with root:208F, plus four sample-channel/volume-table views in the recovered audio
+module. No storage or initializer is added. The remaining
+504 imports are data: 432 FAR_BSS names, 26 names within accepted data placements,
+and 46 requiring storage/reachability investigation. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
 The report retains consumers, source declarations and possible accepted storage
 owners per missing name; an ownership candidate is not an accepted definition.
 
-There is also a concrete changed-layout hazard in the original ASM: display
-drivers use literal `3DFCh` to initialize/index the row-offset buffer whose
-accepted source owner is `_g_3DFC` in `src/root/m1B4E.asm`. All known sites are
-listed in the build report. Fixed code offsets and other numeric data operands
-still need a broader semantic audit. Exact instruction bytes at an original
-placement do not imply that those operands are correct after an independent link.
+The generated drivers replace 16 literal `3DFCh` operands with references to the
+accepted `_g_3DFC` row-offset buffer in `src/root/m1B4E.asm`. Two S00 near callback
+offsets likewise refer to their existing procedures. The pinned transformations
+are in `work/source-only-dos/source-bindings-v1.json`. Canonical ASM remains intact.
+For each of eight derived TUs, compilation reassembles a canonical control and
+checks unchanged segment extents, data, existing publics and relocations, and every
+byte outside the 18 reviewed address operands. Added fixups must have the correct
+target, frame, width and addend. DGROUP framing is explicit, including scoped
+`ASSUME SS:DGROUP` at indexed SS operands; an ordinary MASM `OFFSET` or group
+expression alone can still select the wrong frame. Negative source contrasts
+test wrong frames, the wrong timer word and unrelated instruction changes.
+
+Fixed code offsets, numeric data operands and segment/group framing still need a
+broader semantic audit, which remains a link gate. Exact instruction bytes at an
+original placement do not imply correct operands after an independent link.
 
 The simplest initial linker candidate is the already available, pinned
 RTLink/Plus 4.00 or 6.10 with source-built objects and its own stock manager.

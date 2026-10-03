@@ -1,0 +1,517 @@
+{
+  "schema": "simant-source-only-dos-compact-intake-v1",
+  "canonical_source_checkpoint": "1214fde",
+  "full_local_report": {
+    "path": "build/source-only-dos/build-report.json",
+    "sha256": "e2c8463c0289e821963691a7fdbd881830c0a2cf1a59bab0327751d2db574809",
+    "size": 1178633
+  },
+  "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
+  "status": "INCOMPLETE",
+  "errors": [
+    "data dispositions still need source-built semantic resolution",
+    "504 unresolved source symbols",
+    "assembly address/layout contracts remain unresolved",
+    "independent link refused: incomplete source/data preflight"
+  ],
+  "compiled_translation_units": 127,
+  "function_dispositions": {
+    "EXACT_C": 1244,
+    "GENUINE_ASM": 367,
+    "BEHAVIOR_EXACT": 29,
+    "UNRESOLVED": 0
+  },
+  "original_exe_bytes_used": {
+    "game_code": 0,
+    "game_data": 0,
+    "fallback_debt": 0,
+    "executable_fragments": 0
+  },
+  "denied_oracle_reads": [],
+  "standalone_dos_executable": false,
+  "runnable": "NOT_EXECUTED",
+  "human_acceptance": "PENDING",
+  "unresolved_data_disposition_bytes": 113,
+  "unresolved_symbols": 504,
+  "unresolved_symbol_categories": {
+    "reviewed FAR_BSS definition and compatible consumer views": 432,
+    "source owner/public or interior symbolic alias": 26,
+    "source storage/reachability investigation": 46
+  },
+  "symbolic_aliases": 129,
+  "duplicate_publics": {},
+  "layout_dependencies": [
+    {
+      "id": "driver-row-offset-buffer",
+      "status": "RESOLVED",
+      "sites": [],
+      "storage_source": "src/root/m1B4E.asm",
+      "storage_label": "_g_3DFC",
+      "size_from_source": 964,
+      "reason": "Driver initialization and raster paths use a fixed DGROUP offset. The accepted owner defines _g_3DFC and _g_3DAE as the DGROUP segment. A changed layout needs reviewed symbolic references or proven placement.",
+      "scope_limit": "This is one confirmed family, not a completed scan of every numeric operand."
+    },
+    {
+      "id": "remaining-assembly-address-audit",
+      "status": "UNRESOLVED",
+      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Reviewed bindings close only the listed buffer and S00 callback operands."
+    }
+  ],
+  "source_bindings": {
+    "path": "work/source-only-dos/source-bindings-v1.json",
+    "sha256": "c7fed5e7e2caac6cad41e63de2eb0ba3cfcbba112fa2877d9799c562b8f52bc4",
+    "size": 11388
+  },
+  "binding_proofs": [
+    {
+      "module": "S00:3126",
+      "source": {
+        "path": "src\\S00\\m3126.asm",
+        "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+        "size": 18484
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U000.OBJ",
+        "sha256": "53cf4a100302c03311dea82401f363d66d26e62006752df769e71f7ed19c3263",
+        "size": 3477
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [
+        {
+          "name": "_g_2078",
+          "segment": "_DATA",
+          "offset": 218
+        },
+        {
+          "name": "_g_20FC",
+          "segment": "_DATA",
+          "offset": 350
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U000.OBJ",
+        "sha256": "14239e1f28b2f8825b54d780baaa00d7768158aa09addfa975a38445d11ca555",
+        "size": 3449
+      }
+    },
+    {
+      "module": "S00:31AD",
+      "source": {
+        "path": "src\\S00\\m31AD.asm",
+        "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+        "size": 81450
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U001.OBJ",
+        "sha256": "b4260c41b1fa6ca0acbc260f80659cdecf38b9cbbfbc5565c97091117c6127e6",
+        "size": 14747
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S00B_TEXT",
+          "offset": 6936,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 6901,
+          "old_operand": 5738,
+          "target": "S00B_TEXT",
+          "frame": "S00B_TEXT",
+          "displacement": 5734,
+          "addend": "0000"
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 6910,
+          "old_operand": 6852,
+          "target": "S00B_TEXT",
+          "frame": "S00B_TEXT",
+          "displacement": 6848,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U001.OBJ",
+        "sha256": "e6fe1bf0cc782242b9cfa208ddc4d2c3e465e1c7c2b6b83f9d6e7239f105a95b",
+        "size": 14728
+      }
+    },
+    {
+      "module": "S00:31AD@2AB4",
+      "source": {
+        "path": "src\\S00\\m31AD_2AB4.asm",
+        "sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+        "size": 40286
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U002.OBJ",
+        "sha256": "6e21287124cbbe6f8268dd161ae307053076a1eb70ee091aed7f2c5a68e6a695",
+        "size": 5872
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S00B_TEXT",
+          "offset": 14,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 67,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U002.OBJ",
+        "sha256": "da884b67720cb3bb3b57c40882a0c6e81d25b4dc784365a3fa74ec3a5a5d2301",
+        "size": 5853
+      }
+    },
+    {
+      "module": "S01:3126",
+      "source": {
+        "path": "src\\S01\\m3126.asm",
+        "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+        "size": 44403
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U004.OBJ",
+        "sha256": "d97357fd25bef58711256fafe1eb4b8fe144748957d0b4674dd420b176a304ab",
+        "size": 10051
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S01A_TEXT",
+          "offset": 32,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 174,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 298,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 894,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1237,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1440,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1556,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1984,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2055,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2091,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U004.OBJ",
+        "sha256": "d93cc03df72bedecb1dea00922523894e416e747e6208d8faa820c6c8fa2cacb",
+        "size": 10001
+      }
+    },
+    {
+      "module": "S02:3126",
+      "source": {
+        "path": "src\\S02\\m3126.asm",
+        "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+        "size": 20400
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U007.OBJ",
+        "sha256": "c4b8845cadd4eaf550d836db2dfcc3b1a7ebc8bfd972e740d9dc8d1ea6572187",
+        "size": 5000
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [
+        {
+          "name": "_g_21A4",
+          "segment": "_DATA",
+          "offset": 8
+        }
+      ],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S02A_TEXT",
+          "offset": 26,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U007.OBJ",
+        "sha256": "873836a1fd394eab724861a984503bc743bbe51fbdc788d0d6f681382d34d0e7",
+        "size": 4972
+      }
+    },
+    {
+      "module": "S03:3126",
+      "source": {
+        "path": "src\\S03\\m3126.asm",
+        "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+        "size": 35317
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U008.OBJ",
+        "sha256": "32abfa2cff93bac085f21ebf8a24c63bf3bc3687c3ec559d6286e3ad6348f206",
+        "size": 8252
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S03A_TEXT",
+          "offset": 356,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2481,
+          "old_operand": 15868,
+          "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U008.OBJ",
+        "sha256": "2f77786773fb3bf5479254e9678e35cb69d3e916610a44dbacc997fb9e2d68d6",
+        "size": 8242
+      }
+    },
+    {
+      "module": "root:1B73",
+      "source": {
+        "path": "src\\root\\m1B73.asm",
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+        "size": 35010
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U087.OBJ",
+        "sha256": "d623c0ab6a8fe3ed434edc45e0c6ee24167081a0fcd67af1567b63a74e683a2e",
+        "size": 8751
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [
+        {
+          "name": "_fd_1B73_0006",
+          "segment": "MOUSE_TEXT",
+          "offset": 0
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U087.OBJ",
+        "sha256": "266246374921f3aca449a755e035a7a7f24536379f7cb6b123f71094ed1a9c95",
+        "size": 8722
+      }
+    },
+    {
+      "module": "root:28BC",
+      "source": {
+        "path": "src\\root\\m28BC.asm",
+        "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+        "size": 38288
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U118.OBJ",
+        "sha256": "4d5c66a5faf7a799a6cb34000e948f3494191e3db45466df3d08bbb1ec1ee81c",
+        "size": 5185
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [
+        {
+          "name": "_fd_55B3_6B4C",
+          "segment": "_DATA",
+          "offset": 528
+        },
+        {
+          "name": "_fd_55B3_6B4E",
+          "segment": "_DATA",
+          "offset": 530
+        },
+        {
+          "name": "_fd_55B3_6B9E",
+          "segment": "_DATA",
+          "offset": 610
+        },
+        {
+          "name": "_fd_55B3_6BA4",
+          "segment": "_DATA",
+          "offset": 616
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U118.OBJ",
+        "sha256": "f5f1054e13cee7f97b0142a3059192819480f416bde9d34e702e2f60d3d9fcd7",
+        "size": 5117
+      }
+    }
+  ],
+  "tool_inputs": [
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "8b0c6985ecab3cee57601154ef0f8b28536a11d1e8a6db4af5dd9a8558e8227c",
+      "size": 31012
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\csrc.py",
+      "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c",
+      "size": 35976
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "12a9e5407312eb71da21147e80d6bb1a9ed026c56a07cc495bca515aa6512d8f",
+      "size": 6244
+    }
+  ],
+  "validation_logs": [
+    {
+      "path": "build/source-only-dos-run-v2.log",
+      "sha256": "2fe1c0745eec70e4027c3b92d05823bf80a8a182155780f5ee230a50a2930533",
+      "size": 3716
+    },
+    {
+      "path": "build/source-only-dos-tests-v2.log",
+      "sha256": "1c47de3caaeef72ebde892e4c2750766f7556f4b5bdab5c932a39af6347734e2",
+      "size": 941
+    },
+    {
+      "path": "build/source-only-dos-validation-v2.log",
+      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
+      "size": 4752
+    }
+  ],
+  "historical_validation": "PASS",
+  "source_only_tests": "8 tests PASS",
+  "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
+}

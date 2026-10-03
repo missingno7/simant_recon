@@ -1,0 +1,322 @@
+{
+  "schema": "simant-dos-source-bindings-v1",
+  "category": "REVIEWED_SOURCE_LINK_BINDING",
+  "claim": "Expose existing storage and replace grounded addresses with assembler relocations. No algorithm or storage additions; no historical byte-identity or runtime-equivalence claim.",
+  "bindings": [
+    {
+      "module": "S00:3126",
+      "source": "src/S00/m3126.asm",
+      "source_sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+      "edits": [
+        {
+          "before": "_g_2078\tdd",
+          "after": "\tpublic _g_2078, _g_20FC\n_g_2078\tdd",
+          "count": 1
+        }
+      ],
+      "exports": [
+        {
+          "name": "_g_2078",
+          "segment": "_DATA",
+          "offset": 218
+        },
+        {
+          "name": "_g_20FC",
+          "segment": "_DATA",
+          "offset": 350
+        }
+      ],
+      "relocations": [],
+      "anchors": [
+        "Existing dd table and dispatch-pointer labels in the canonical source.",
+        "Accepted _DATA placement at DGROUP:1F9E + 218/350 agrees with registry 2078/20FC and consumer grounding."
+      ]
+    },
+    {
+      "module": "S00:31AD",
+      "source": "src/S00/m31AD.asm",
+      "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "edits": [
+        {
+          "before": "mov di, 3DFCh",
+          "after": "mov di, OFFSET DGROUP:_g_3DFC",
+          "count": 1
+        },
+        {
+          "before": "mov ax, 166Ah",
+          "after": "mov ax, OFFSET _o00_31AD_166A",
+          "count": 1
+        },
+        {
+          "before": "mov ax, 1AC4h",
+          "after": "mov ax, OFFSET _o00_31AD_1AC4",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [
+        {
+          "count": 1,
+          "target_kind": "external",
+          "target": "_g_3DFC",
+          "encoded_addend": "0000",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "original_value": 15868
+        },
+        {
+          "count": 1,
+          "target_kind": "segment",
+          "target": "S00B_TEXT",
+          "target_label": "_o00_31AD_166A",
+          "encoded_addend": "0000",
+          "displacement": 5734,
+          "frame_kind": "segment",
+          "frame": "S00B_TEXT",
+          "original_value": 5738
+        },
+        {
+          "count": 1,
+          "target_kind": "segment",
+          "target": "S00B_TEXT",
+          "target_label": "_o00_31AD_1AC4",
+          "encoded_addend": "0000",
+          "displacement": 6848,
+          "frame_kind": "segment",
+          "frame": "S00B_TEXT",
+          "original_value": 6852
+        }
+      ],
+      "anchors": [
+        "Canonical root:1B4E owns _g_3DFC (964 bytes); _g_3DAE stores DGROUP.",
+        "Literal initialization uses ES from _g_3DAE; indexed SS uses agree with existing symbolic references to the same row table.",
+        "Driver init stores two literal near callbacks into _g_9130/_g_912C; they equal the registered existing procedure offsets. Canonical object starts at frame offset 4, so independent offsets must follow its own publics."
+      ]
+    },
+    {
+      "module": "S00:31AD@2AB4",
+      "source": "src/S00/m31AD_2AB4.asm",
+      "source_sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+      "edits": [
+        {
+          "before": "mov di, 3DFCh",
+          "after": "mov di, OFFSET DGROUP:_g_3DFC",
+          "count": 2
+        },
+        {
+          "before": "\textrn\t_g_3DAE:byte",
+          "after": "\textrn\t_g_3DAE:byte\n\textrn\t_g_3DFC:byte",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [
+        {
+          "count": 2,
+          "target_kind": "external",
+          "target": "_g_3DFC",
+          "encoded_addend": "0000",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "original_value": 15868
+        }
+      ],
+      "anchors": [
+        "Canonical root:1B4E owns _g_3DFC (964 bytes); _g_3DAE stores DGROUP.",
+        "Literal initialization uses ES from _g_3DAE; indexed SS uses agree with existing symbolic references to the same row table."
+      ]
+    },
+    {
+      "module": "S01:3126",
+      "source": "src/S01/m3126.asm",
+      "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "edits": [
+        {
+          "before": "mov di, 3DFCh",
+          "after": "mov di, OFFSET DGROUP:_g_3DFC",
+          "count": 3
+        },
+        {
+          "before": "\tmov di, word ptr ss:[di+3DFCh]",
+          "after": "\tassume ss:DGROUP\n\tmov di, word ptr ss:[di+_g_3DFC]\n\tassume ss:nothing",
+          "count": 6
+        },
+        {
+          "before": "\tmov si, word ptr ss:[bx+3DFCh]",
+          "after": "\tassume ss:DGROUP\n\tmov si, word ptr ss:[bx+_g_3DFC]\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [
+        {
+          "count": 10,
+          "target_kind": "external",
+          "target": "_g_3DFC",
+          "encoded_addend": "0000",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "original_value": 15868
+        }
+      ],
+      "anchors": [
+        "Canonical root:1B4E owns _g_3DFC (964 bytes); _g_3DAE stores DGROUP.",
+        "Literal initialization uses ES from _g_3DAE; indexed SS uses agree with existing symbolic references to the same row table.",
+        "MASM chooses the memory displacement frame from ASSUME SS; scope SS:DGROUP around each reviewed SS operand, then restore SS:nothing. Explicit OFFSET group syntax alone does not change that frame."
+      ]
+    },
+    {
+      "module": "S02:3126",
+      "source": "src/S02/m3126.asm",
+      "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "edits": [
+        {
+          "before": "_g_21A2\tdw\t0\n\tdw\t0",
+          "after": "_g_21A2\tdw\t0\n\tpublic _g_21A4\n_g_21A4 label byte\n\tdw\t0",
+          "count": 1
+        },
+        {
+          "before": "mov di, 3DFCh",
+          "after": "mov di, OFFSET DGROUP:_g_3DFC",
+          "count": 1
+        }
+      ],
+      "exports": [
+        {
+          "name": "_g_21A4",
+          "segment": "_DATA",
+          "offset": 8
+        }
+      ],
+      "relocations": [
+        {
+          "count": 1,
+          "target_kind": "external",
+          "target": "_g_3DFC",
+          "encoded_addend": "0000",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "original_value": 15868
+        }
+      ],
+      "anchors": [
+        "Canonical root:1B4E owns _g_3DFC (964 bytes); _g_3DAE stores DGROUP.",
+        "Literal initialization uses ES from _g_3DAE; indexed SS uses agree with existing symbolic references to the same row table.",
+        "Accepted _DATA starts at 219C; four scratch words precede the flag word at +8, before DispatchS02. Registry consumer sets/clears byte 21A4 around GSaveRect."
+      ]
+    },
+    {
+      "module": "S03:3126",
+      "source": "src/S03/m3126.asm",
+      "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "edits": [
+        {
+          "before": "mov di, 3DFCh",
+          "after": "mov di, OFFSET DGROUP:_g_3DFC",
+          "count": 1
+        },
+        {
+          "before": "\tmov di, word ptr ss:[bx+3DFCh]",
+          "after": "\tassume ss:DGROUP\n\tmov di, word ptr ss:[bx+_g_3DFC]\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [
+        {
+          "count": 2,
+          "target_kind": "external",
+          "target": "_g_3DFC",
+          "encoded_addend": "0000",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "original_value": 15868
+        }
+      ],
+      "anchors": [
+        "Canonical root:1B4E owns _g_3DFC (964 bytes); _g_3DAE stores DGROUP.",
+        "Literal initialization uses ES from _g_3DAE; indexed SS uses agree with existing symbolic references to the same row table.",
+        "MASM chooses the memory displacement frame from ASSUME SS; scope SS:DGROUP around each reviewed SS operand, then restore SS:nothing. Explicit OFFSET group syntax alone does not change that frame."
+      ]
+    },
+    {
+      "module": "root:1B73",
+      "source": "src/root/m1B73.asm",
+      "source_sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "edits": [
+        {
+          "before": "tmr_countdown\tdw",
+          "after": "\tpublic _fd_1B73_0006\n_fd_1B73_0006 label word\ntmr_countdown\tdw",
+          "count": 1
+        }
+      ],
+      "exports": [
+        {
+          "name": "_fd_1B73_0006",
+          "segment": "MOUSE_TEXT",
+          "offset": 0
+        }
+      ],
+      "relocations": [],
+      "anchors": [
+        "Accepted module origin is frame offset 6; first MOUSE_TEXT word is tmr_countdown.",
+        "INT 08h subtracts 5 and floors the same CS word at zero; root:208F writes/busy-waits/tests registered far word 1B73:0006."
+      ]
+    },
+    {
+      "module": "root:28BC",
+      "source": "src/root/m28BC.asm",
+      "source_sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+      "edits": [
+        {
+          "before": "g_6B4C          db      CHAN_SIZE dup (0)",
+          "after": "_fd_55B3_6B4C label byte\ng_6B4C          db      CHAN_SIZE dup (0)\n_fd_55B3_6B4E equ g_6B4C+2\n                public _fd_55B3_6B4C, _fd_55B3_6B4E",
+          "count": 1
+        },
+        {
+          "before": "g_6B9E          dw",
+          "after": "                public _fd_55B3_6B9E\n_fd_55B3_6B9E label word\ng_6B9E          dw",
+          "count": 1
+        },
+        {
+          "before": "g_6BA4          label",
+          "after": "                public _fd_55B3_6BA4\n_fd_55B3_6BA4 label byte\ng_6BA4          label",
+          "count": 1
+        }
+      ],
+      "exports": [
+        {
+          "name": "_fd_55B3_6B4C",
+          "segment": "_DATA",
+          "offset": 528
+        },
+        {
+          "name": "_fd_55B3_6B4E",
+          "segment": "_DATA",
+          "offset": 530
+        },
+        {
+          "name": "_fd_55B3_6B9E",
+          "segment": "_DATA",
+          "offset": 610
+        },
+        {
+          "name": "_fd_55B3_6BA4",
+          "segment": "_DATA",
+          "offset": 616
+        }
+      ],
+      "relocations": [],
+      "anchors": [
+        "Canonical g_6B4C owns four consecutive 20-byte sample records; ASM mixer accesses the same records and field +2. The source C consumers use channel stride 20 and the field starting at 6B4E.",
+        "Canonical g_6B9E holds a symbolic DGROUP:vol_tab pointer and g_6BA4 labels the AdLib output-level table; registry grounding names the respective volume-base and indexed level-table consumers.",
+        "Accepted _DATA placement starts at 693C; compiled PUBDEFs must equal relative offsets 528,530,610,616 and join the reviewed registry addresses. No storage is added."
+      ]
+    }
+  ]
+}

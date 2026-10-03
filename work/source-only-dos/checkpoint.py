@@ -1,4 +1,4 @@
-"""Archive the incomplete source-only checkpoint and preserved v17 identities.
+"""Verify preservation and write a compact current source-only DOS receipt.
 
 This preservation audit is separate from the source-only compiler input process.
 The DOS ZIP is explicitly the old hybrid package, never a standalone-build input.
@@ -6,7 +6,7 @@ The DOS ZIP is explicitly the old hybrid package, never a standalone-build input
 from pathlib import Path
 import hashlib
 import json
-import shutil
+from collections import Counter
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = Path(__file__).resolve().parent
@@ -49,23 +49,55 @@ def main():
         'native_providers': provider_rows,
         'old_dos_package_proof': 'ORACLE_ASSISTED_HYBRID_ONLY',
         'scope': 'Preservation/provenance intake; no provider deleted, changed or admitted by this audit.'}
-    (OUT / 'paused-sdl3-v17.json').write_text(json.dumps(pause, indent=2) + '\n')
-    for original, archived in (
-        ('build/source-only-dos/build-report.json', 'compile-and-intake-v1.json'),
-        ('build/source-only-dos-run.log', 'compile-and-intake-v1.log'),
-        ('build/source-only-dos-validation.log', 'historical-validation-v1.log'),
-        ('build/source-only-dos-hybrid-diagnostic.log', 'hybrid-diagnostic-v1.log'),
-        ('docs/progress.json', 'historical-progress-v1.json'),
-        ('docs/progress.md', 'historical-progress-v1.md')):
-        if original.startswith('docs/progress') and (OUT / archived).exists():
-            continue
-        shutil.copyfile(ROOT / original, OUT / archived)
-    report = json.loads((OUT / 'compile-and-intake-v1.json').read_text())
+    pause_path = OUT / 'paused-sdl3-v17.json'
+    if pause_path.exists():
+        if json.loads(pause_path.read_text()) != pause:
+            raise ValueError('preserved v17 receipt changed')
+    else:
+        pause_path.write_text(json.dumps(pause, indent=2) + '\n')
+    report_path = ROOT / 'build/source-only-dos/build-report.json'
+    report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
     if len(report['translation_units']) != 127 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
-    print('Preserved v17 package/source hashes; archived incomplete DOS compile intake.')
+    bound = [r for r in report['translation_units'] if r.get('source_binding')]
+    if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
+        raise ValueError('source binding proof did not pass')
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v2.log',
+        'build/source-only-dos-tests-v2.log', 'build/source-only-dos-validation-v2.log')]
+    if not (ROOT / logs[1]['path']).read_text().strip().endswith('OK'):
+        raise ValueError('source-only tests did not finish successfully')
+    if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
+        raise ValueError('historical validation did not finish successfully')
+    receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
+        'canonical_source_checkpoint': '1214fde',
+        'full_local_report': pin(report_path),
+        'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
+        'status': report['status'], 'errors': report['errors'],
+        'compiled_translation_units': len(report['translation_units']),
+        'function_dispositions': report['function_dispositions'],
+        'original_exe_bytes_used': report['original_exe_bytes_used'],
+        'denied_oracle_reads': report['denied_oracle_reads'],
+        'standalone_dos_executable': report['standalone_dos_executable'],
+        'runnable': report['runnable'], 'human_acceptance': report['human_acceptance'],
+        'unresolved_data_disposition_bytes': sum(r['size'] for r in report['unresolved_data']),
+        'unresolved_symbols': len(report['unresolved_symbols']),
+        'unresolved_symbol_categories': dict(Counter(r['required_resolution']
+            for r in report['unresolved_symbols'])),
+        'symbolic_aliases': len(report['symbolic_aliases']),
+        'duplicate_publics': report['duplicate_publics'],
+        'layout_dependencies': report['layout_dependencies'],
+        'source_bindings': pin(OUT / 'source-bindings-v1.json'),
+        'binding_proofs': [{'module': r['module'], 'source': r['source'],
+            'object': r['object'], **r['binding_verification']} for r in bound],
+        'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
+        'validation_logs': logs,
+        'historical_validation': 'PASS', 'source_only_tests': '8 tests PASS',
+        'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
+                       'equivalence or human acceptance. Full inventories are reproducible build output.'}
+    (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    print('Verified preserved v17 hashes; wrote compact incomplete DOS intake (no source-tree copies).')
 
 
 if __name__ == '__main__':

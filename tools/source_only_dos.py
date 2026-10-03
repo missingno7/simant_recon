@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 import compiler
 import csrc
+import dos_source_bindings
 from omf import OmfReader
 
 PAUSED_COMMIT = 'c850830006e0b7d456bb500bf101dd432bbe8ee3'
@@ -117,6 +118,12 @@ def prepare(out, report):
     symbols = json.loads(symbols_raw)
     aliases = identifier_aliases(symbols)
     report['inputs'] += [manifest_pin, registry_pin, symbols_pin]
+    binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos/source-bindings-v1.json')
+    binding_packet = json.loads(binding_raw)
+    if binding_packet['category'] != 'REVIEWED_SOURCE_LINK_BINDING':
+        raise ValueError('unreviewed DOS source bindings')
+    report['inputs'].append(binding_pin)
+    bindings = {r['module']: r for r in binding_packet['bindings']}
     replacements = {}
     for name, entry in registry['entries'].items():
         if entry['status'] != 'BEHAVIOR_EXACT':
@@ -148,6 +155,13 @@ def prepare(out, report):
         raw, source_pin = pin(ROOT / module['source'], module['source_sha256'])
         report['inputs'].append(source_pin)
         text = raw.decode('latin1')
+        binding = bindings.get(key)
+        if binding:
+            if (module['lang'] != 'asm' or module['source'] != binding['source']
+                    or source_pin['sha256'] != binding['source_sha256']):
+                raise ValueError('DOS binding canonical source changed: ' + key)
+            dos_source_bindings.review_addresses(binding, module, symbols)
+            text = dos_source_bindings.apply_binding(text.replace('\r\n', '\n'), binding)
         imported = replacements.get(key, {})
         if imported:
             text = rename_identifiers(text, aliases)
@@ -184,7 +198,7 @@ def prepare(out, report):
             'module': key, 'unit': module['unit'], 'basename': basename,
             'source': source_pin, 'generated_source': generated_pin,
             'lang': module.get('lang', 'c'), 'profile': module['profile'], 'flags': module['flags'],
-            'reviewed_bodies': sorted(imported), 'status': 'PREPARED'})
+            'reviewed_bodies': sorted(imported), 'source_binding': binding, 'status': 'PREPARED'})
     report['function_dispositions'] = {
         'EXACT_C': sum(c.get('kind') == 'C' for m in manifest['modules'].values() for c in m.get('claims', [])),
         'GENUINE_ASM': sum(c.get('kind') == 'ASM' for m in manifest['modules'].values() for c in m.get('claims', [])),
@@ -247,6 +261,21 @@ def compile_units(out, report, jobs, reuse):
             path.write_bytes(result.obj)
             row['status'] = 'COMPILED'
         row['object'] = pin(path)[1]
+        if row.get('source_binding'):
+            # This reference object is built from canonical source, never linked.
+            # Reassemble it so a cached derived object cannot bypass the proof.
+            canonical = pin(ROOT / row['source']['path'], row['source']['sha256'])[0].decode('latin1')
+            reference = compiler.assemble(canonical, row['profile'], row['flags'], basename=row['basename'])
+            if not reference.ok:
+                raise ValueError('canonical binding control failed: ' + row['module'])
+            reference_dir = out / 'binding-controls'
+            reference_dir.mkdir(exist_ok=True)
+            reference_path = reference_dir / path.name
+            reference_path.write_bytes(reference.obj)
+            reader = OmfReader()
+            row['binding_verification'] = dos_source_bindings.verify_objects(
+                reader.read(reference.obj), reader.read(path.read_bytes()), row['source_binding'])
+            row['binding_verification']['canonical_control_object'] = pin(reference_path)[1]
         new_cache[row['module']] = {'key': key, 'sha256': row['object']['sha256']}
         print(row['module'], row['status'], flush=True)
     with ThreadPoolExecutor(max_workers=jobs) as pool:
@@ -255,6 +284,8 @@ def compile_units(out, report, jobs, reuse):
     report['generated_files'].append(pin(cache_path)[1])
     report['generated_files'] += [pin(p)[1] for p in sorted(out.glob('U*.log'))]
     report['generated_files'] += [row['object'] for row in report['translation_units'] if 'object' in row]
+    report['generated_files'] += [row['binding_verification']['canonical_control_object']
+        for row in report['translation_units'] if 'binding_verification' in row]
 
 
 def audit_layout(report):
@@ -269,13 +300,24 @@ def audit_layout(report):
                 sites.append({'module': row['module'], 'source': row['source'],
                               'line': number, 'instruction': line.strip()})
     report['layout_dependencies'] = [{
-        'id': 'driver-row-offset-buffer', 'status': 'UNRESOLVED',
+        'id': 'driver-row-offset-buffer', 'status': 'UNRESOLVED' if sites else 'SOURCE_BOUND',
         'sites': sites, 'storage_source': 'src/root/m1B4E.asm',
         'storage_label': '_g_3DFC', 'size_from_source': 964,
         'reason': 'Driver initialization and raster paths use a fixed DGROUP offset. '
                   'The accepted owner defines _g_3DFC and _g_3DAE as the DGROUP segment. '
                   'A changed layout needs reviewed symbolic references or proven placement.',
-        'scope_limit': 'This is one confirmed family, not a completed scan of every numeric operand.'}]
+        'scope_limit': 'This is one confirmed family, not a completed scan of every numeric operand.'}, {
+        'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
+        'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
+                  'Reviewed bindings close only the listed buffer and S00 callback operands.'}]
+
+
+def accept_binding_checks(report):
+    bound = [r for r in report['translation_units'] if r.get('source_binding')]
+    if bound and all(r.get('binding_verification', {}).get('status') == 'PASS' for r in bound):
+        for dependency in report['layout_dependencies']:
+            if dependency['status'] == 'SOURCE_BOUND':
+                dependency['status'] = 'RESOLVED'
 
 
 def unresolved_symbols(out, report, symbols, manifest):
@@ -468,10 +510,12 @@ def main():
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
                              ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py')]
+        report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)
         if args.compile or args.link:
             compile_units(out, report, args.jobs, args.reuse)
+            accept_binding_checks(report)
             unresolved_symbols(out, report, symbols, manifest)
         report['errors'] += [f"compile failed: {r['module']}" for r in report['translation_units']
                               if r['status'] == 'COMPILE_FAILED']
@@ -482,7 +526,7 @@ def main():
         if report.get('duplicate_publics'):
             report['errors'].append('duplicate mutable storage/function owners')
         if any(r['status'] != 'RESOLVED' for r in report.get('layout_dependencies', [])):
-            report['errors'].append('fixed DOS data-offset dependency needs symbolic/placement resolution')
+            report['errors'].append('assembly address/layout contracts remain unresolved')
         if any(report['original_exe_bytes_used'].values()):
             report['errors'].append('zero-original-byte invariant violated')
         if args.link:
