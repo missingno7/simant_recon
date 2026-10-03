@@ -58,7 +58,7 @@ runner records the executable identity, frame identity, runtime asset changes,
 and verifies that original assets did not change:
 
 ```powershell
-python portable/tools/run_whole_startup.py --application build/whole-application-v6/simant-whole-sdl3.exe --out build/workers/whole_program/new-startup-run
+python portable/tools/run_whole_startup.py --application build/whole-application-v14/simant-whole-sdl3.exe --out build/workers/whole_program/new-startup-run
 ```
 
 `--input-script PATH` accepts ordered keyboard transitions, one per line:
@@ -90,6 +90,28 @@ Direct v12 runs reported heap corruption during dialog closure; this difference
 is recorded in `portable/evidence/whole-application-runtime-progress-v1.json`.
 The run does not establish direct-run stability, tutorial/full-game coverage,
 or save/load correctness.
+
+The v13 repairs restore the default screen clip's original sentinel entry and
+make the supplied window parameters explicit. Direct 30-second Quick Game
+replays now pass in EGA and VGA, each with 115 original outer-loop iterations.
+The guarded VGA replay also exits normally without a handle guard hit. A direct
+Full Game replay renders the surface world and map. The v14 Tutorial replay
+reaches its original first instruction dialog after restoring two source-proven
+AX=0 fastcall arguments. These are bounded entry-flow checks.
+
+The direct-call arity audit now checks 7,528 calls and finds no missing required
+arguments. Its 75 extra-argument findings remain diagnostic; it is not a C type
+checker. The original keyboard's `MOV AH,8` behavior is also restored, with five
+direct DOS/native controls. F2 consequently enters the menu path, exposing an
+independent modal host-servicing stall. Blank caption bars and the black
+underground map remain visible rendering debt. Tutorial completion, interaction,
+save/load and full audio/UI coverage are still open. These results and limits
+are pinned in `portable/evidence/whole-application-runtime-progress-v2.json`.
+
+Fresh historical validation passes. The original assets match the oracle lock;
+an older menu test's diagnostic append to RALLOC.DMP was preserved separately
+and the original restored exactly. Its replacement consumer test runs against
+scratch asset copies and checks the original asset hashes before and after.
 
 The selected-source prototype in `build/portable/simant-sdl3.exe` remains a
 separate executable with its previously recorded scope. Whole-program evidence

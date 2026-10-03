@@ -1,0 +1,1807 @@
+{
+  "schema": "simant-whole-source-direct-arity-audit-v1",
+  "scope": "Diagnostic direct-call parameter counts only; no type or behavior proof",
+  "inputs": {
+    "build/workers/whole_program/generated/data_d3D57.c": "d36a8845ed9401d0984b95559f0b479ab93cb0217a7c321552a3d1b50ff6595e",
+    "build/workers/whole_program/generated/data_d3E1D.c": "dfc685f8d25dae420c88ee4be654181847692951c72f5df2a92610b7d8ac3763",
+    "build/workers/whole_program/generated/data_d55B3_0042.c": "71473b8192f882af7560c4160b8ed334e132389341a0e46b70c83975ff04f20d",
+    "build/workers/whole_program/generated/data_d55B3_0064.c": "aa8e137aff2d2383eefcc30f9794bc1f9fab013d1d976e1a7bca9de50fd7322b",
+    "build/workers/whole_program/generated/data_d55B3_00B8.c": "e34d9202c504376e684be1c7bbfc0a540184073797a71043d9306c79536ae74e",
+    "build/workers/whole_program/generated/root_m0000.c": "d0710eb0e63a5fbf1db8ea8231191e862599082c17d455f00a04ae2306d6c3c5",
+    "build/workers/whole_program/generated/root_m004A.c": "22c6df432c67b41ce0c1039ddeb53e1b04dba4adbaf806e37dfcfd8ab63979a6",
+    "build/workers/whole_program/generated/root_m0093.c": "b22b1cc576fbb1656420342026dca77c060c6e22fdab3f128f3cd10e32c6933e",
+    "build/workers/whole_program/generated/root_m00BA.c": "5741607e132e69570d3916ca8236f551b269aebc00ca67daae8246e42fa038d2",
+    "build/workers/whole_program/generated/root_m00DE.c": "e561ee008b67902dd0baf8ae410aaf65c7fb441fbfdd18c9430a776b4164f89b",
+    "build/workers/whole_program/generated/root_m00DF.c": "687d15094e5c63befdc35bfd394f70039e38464f09f88281f9428413b616d7d8",
+    "build/workers/whole_program/generated/root_m00F8.c": "9e7ee12c953dbd11cf21222cf52a427e5e678a0f6164292b825025edbcc9c2a0",
+    "build/workers/whole_program/generated/root_m015B.c": "76e44fdc6e794c456d2ed498dfce451218fa578b645ae1f5f25c491411af5d34",
+    "build/workers/whole_program/generated/root_m0244.c": "603f531f0b52dc3543942c3c6985d246f455c2a34ca32e1ead7108a89a2f76d7",
+    "build/workers/whole_program/generated/root_m0250.c": "26625d34317bb362234deff02ea07358bbafde68367f0bb7e28b0749d0388366",
+    "build/workers/whole_program/generated/root_m075B.c": "a28ddfd6147cbf62053bbe1c20c299c6e1b1ac3216676d0a45c090974058eae3",
+    "build/workers/whole_program/generated/root_m078E.c": "aaa5862c3cac1da1199424c73d7c24d999cbf30d5b40f12727d958f6fa598f56",
+    "build/workers/whole_program/generated/root_m0798.c": "f222b3fab8084dcd29fabf9ed825587b72e877e7912f953ed57a9457ddf80eee",
+    "build/workers/whole_program/generated/root_m0894.c": "6f0ec6781d28fa42883111d0aa790a8e3440309e73a6caa5f26e973ed8801796",
+    "build/workers/whole_program/generated/root_m0AD9.c": "6bca679e9f015e2bff4cd852fabae8c58233c30ea7e00a1a74dd933a1d68ea9d",
+    "build/workers/whole_program/generated/root_m0BE8.c": "09c6dd4eb1182d33cb8d7fba8b2897029759be6ada6710593ecf975a72dc9e6f",
+    "build/workers/whole_program/generated/root_m0CDB.c": "7feb07dcc7bc0ff6876f08dd7bd5214514e1028d3f57dfa0cc18fb4e6dd16ef4",
+    "build/workers/whole_program/generated/root_m0DEF.c": "1d769c7451d0e55a5fa15af2a32ce4940b1b7e6538d19d14f580bdb35bccbc6a",
+    "build/workers/whole_program/generated/root_m0E2E.c": "be115b90135014e319a6eba789043424e295a6cfab3e4240f60aafb2dbcb3cf2",
+    "build/workers/whole_program/generated/root_m0EC1.c": "7b8bffad072653c7eea7e75ef29a1464ab8d23303e37ccfa87e9bd7e89069fa4",
+    "build/workers/whole_program/generated/root_m0F3F.c": "43aa4559a362c2645e25183a5ea28bef7028af4c135f4f4cbc7bc8de308daab2",
+    "build/workers/whole_program/generated/root_m10F7.c": "448ccd47a28b5376e30298ef7bcd8afc4087c593176bd15baa033974749fddaf",
+    "build/workers/whole_program/generated/root_m1383.c": "ad0fac9a3eb10d5d51d4ace99fd0d1f572476bd6e92b5e0d3abd097cbbda6a88",
+    "build/workers/whole_program/generated/root_m1496.c": "ccc677cf6239b8c00ce087cef5ea2381f57b8d5b015939b02ec53f37ab2dc382",
+    "build/workers/whole_program/generated/root_m14EE.c": "7aa4f1966f8781296a295fa4956717e49ef1f62c0156c6ee3c2a59f7ad4e4c60",
+    "build/workers/whole_program/generated/root_m15D9.c": "32eee4a6a9de71e319936d674f9970cd6a2624da97d99cae08df87372047cd7c",
+    "build/workers/whole_program/generated/root_m15F8.c": "d03f982226e66646fddc98b2c07d2280433b76e896c4af3177c7595dc37b000c",
+    "build/workers/whole_program/generated/root_m1629.c": "5fe3d717c3e9c620755878add93b6f3392bc7852add94c6c2711044ef9aece34",
+    "build/workers/whole_program/generated/root_m1986.c": "900e8cbea167bb0f819686eb4e744c9205b9ea3b58cbd86d04e3562c8cde99bb",
+    "build/workers/whole_program/generated/root_m19A9.c": "2f04811a589bed1de4a3b3697366fb9efee2735fc4c8653b924fa5b898999e32",
+    "build/workers/whole_program/generated/root_m19DC.c": "6c79fdbc07dd84e13896c94f3d49a17281ffe92982520837a97e971985d5ef1d",
+    "build/workers/whole_program/generated/root_m1A28.c": "ddd960c3f67dfcec72e223610c9a06b23e23a2259093212ad196d9fe1fffb99f",
+    "build/workers/whole_program/generated/root_m1A53.c": "19977e34f8f999ecca1e6c2315fc1a6f625ed97ad35083f99a61711cae7764f6",
+    "build/workers/whole_program/generated/root_m1A96.c": "e1bf41ae01359fbaaa04e4ec442480c10130b601407a2ca75ccad4aa77180f18",
+    "build/workers/whole_program/generated/root_m1B28.c": "d956b5b8aae1375bfc43da5a6caf509f6afc709a5b397be5a2de4be926f70ac5",
+    "build/workers/whole_program/generated/root_m1C62.c": "3456f702a07baf9bb84d46af9715663cb65cee175e746453723deea10baa1abf",
+    "build/workers/whole_program/generated/root_m1CE2.c": "f9dc3282799b086421a1226704e91a792d349cbb270e8cc587944a83c4fa55ef",
+    "build/workers/whole_program/generated/root_m1D8E.c": "5562663e75632b4f675f13bb5cb68e7f5f6bbd8afdb63d975782bb1f6c66a835",
+    "build/workers/whole_program/generated/root_m1E57.c": "34ceb13fddd9466bfb83ecb381fd72a8d4c076a29a89afa081f74498e8ccb2ca",
+    "build/workers/whole_program/generated/root_m1F80.c": "6bcf9205d809526ef13a5c3a66ba8c8b8ab4656252aa232306d7fe6582cea590",
+    "build/workers/whole_program/generated/root_m1FAA.c": "591771fd708a096f39ccaa06accb7aff89f0db094a01fcf0c0281b128dc016ac",
+    "build/workers/whole_program/generated/root_m1FD2.c": "dc5b465e6bc48b4415586f31b5eb1146a4da184b94272f4a808568a7507aafc1",
+    "build/workers/whole_program/generated/root_m205F.c": "b7c30aa727c5c6ffb6edd7319d5e9a4d8bcd272894493198aff3107bced9abb4",
+    "build/workers/whole_program/generated/root_m208F.c": "dacf4f607595bd56013e936d4ed777f16ac23fabe33b4b54a7d59b23f86fa7fe",
+    "build/workers/whole_program/generated/root_m20E8.c": "4cff6bc74b3f6be50386851315bddffd3a99888c89ca7d494252afed31a7d251",
+    "build/workers/whole_program/generated/root_m218D.c": "5d21fe41910573172334cdaebe704fa8c23acfc44f456f484731bd26bc0471f3",
+    "build/workers/whole_program/generated/root_m21FA.c": "c8c2a4ae7b5cd59f7b543c76d1e4ef6ede7c7e597c68cd3f0f093efc40e75548",
+    "build/workers/whole_program/generated/root_m22BF.c": "53983ab7ce5919b9747472acf7148b7b1059ba7ea0a8469309a00666866f68de",
+    "build/workers/whole_program/generated/root_m23AE.c": "29d0930afd6fede1f6921c3870afe8b7da55c5e15a752a2a60514b6d229d644a",
+    "build/workers/whole_program/generated/root_m23E6.c": "860d54045f823fdfdb2103bc3b4484aaf130dd99d7d8fa57e54d54d3e78b1163",
+    "build/workers/whole_program/generated/root_m24AB.c": "dad7fd09e6361ff1e3af7787bd37c61ae7d9b6cc54f62392710207b8ec291bea",
+    "build/workers/whole_program/generated/root_m2505.c": "2fc7acb058962ca27e8a0d5a75b927081f0f2cd6f40b1021b37bfc2be1d786f9",
+    "build/workers/whole_program/generated/root_m259D.c": "4a0319e7fcc2c7b0653f0a4cb5af703415631372dad08d888daf952249282615",
+    "build/workers/whole_program/generated/root_m25E7.c": "2a70309b39acdcc4e2d4fba4932d1dd442cc66dbcdd51b683337d502ccf5cd91",
+    "build/workers/whole_program/generated/root_m2662.c": "8b44d631df194263f8bc5856246916918cf6446862b3400febb53a863266ee15",
+    "build/workers/whole_program/generated/root_m277D.c": "c32c1c4d1810f516735d877c8baa8c7690b1396b534b0382c838bd5f75b7dd52",
+    "build/workers/whole_program/generated/root_m277E.c": "a84735f7b9539482f0bb73ce79ed1d9a4990b97670868f9a49497f7694568faa",
+    "build/workers/whole_program/generated/root_m2815.c": "13e2ff986dba1358cbd6d17c14c970726f07ad581a48d2ae4c6701f718c5354b",
+    "build/workers/whole_program/generated/root_m284A.c": "cc6af2edda4fbd92b50187eaf307adf88e2a7115e233655046c372ff55847656",
+    "build/workers/whole_program/generated/root_m290D.c": "be94ac2da23872ed970b6704c8d0950c25d11352a2a945da5ed942c6cfab223d",
+    "build/workers/whole_program/generated/root_m293A.c": "0ee83b2f73f0d3ffeab2108152af2e625dea537e8254a4787f3cf2bbae5a9243",
+    "build/workers/whole_program/generated/root_m295C.c": "a9bd346ead0b7287d48e9f1fff07abb50ccc2d32cbc6f375411e3e3b5cf39ebc",
+    "build/workers/whole_program/generated/root_m29B8.c": "42a80dc1fcec036251108d9807f91fbb00d825bee2e0fcda2089554b6efa1f97",
+    "build/workers/whole_program/generated/root_m29D6.c": "1a64ad56f5e449152b90116cbe82c03483946f228f1b1e299d1e6f67f8f5faa5",
+    "build/workers/whole_program/generated/root_m29F0.c": "ca1c58891333e4cbbd5d74364178be665174f134cf38b34a6f2538aa0e6c42b2",
+    "build/workers/whole_program/generated/S04_m35F5.c": "30368ac90838628975d320057c2c2afd5ae7496efbe7c3039e13c426cb01f2bc",
+    "build/workers/whole_program/generated/S05_m35F5.c": "e32476767dc980932d1d92320424f4b11b5cc77a6af388e2da483f00b9e59dec",
+    "build/workers/whole_program/generated/S05_m3663.c": "1bace0c76bfb24ad2d3af507a319e25aa7a4982f5df56eb9088b8076cbc6c9a0",
+    "build/workers/whole_program/generated/S06_m35F5.c": "f8b66424f8aa2e25227b86c9cbe4117bfb2f7e2cf5cbf24892d939260b2475e0",
+    "build/workers/whole_program/generated/S07_m35F5.c": "c180c91dfab459ccd85aa07434214cf89f2a3b5ea0a8c7a2a75461d92eb96fe6",
+    "build/workers/whole_program/generated/S08_m35F5.c": "c5ac6a31126e612bcf22bc74139cc2539065a86ea5106c019a4b0771a0880721",
+    "build/workers/whole_program/generated/S09_m35F5.c": "112be818bea6625aba7a3a9c20a3c0e7d70055c483f15beefee52a0dcdc6028d",
+    "build/workers/whole_program/generated/S09_m36EE.c": "ce1f3b8bebdf3e36ef54ce5756ec53158410f1f9deb120fc3ed56743ee4bb16f",
+    "build/workers/whole_program/generated/S10_m35F5.c": "135944ec5efef56e7c4e05751f3e5d43a0f475bf7a1583cacd86ce9ff8e2105e",
+    "build/workers/whole_program/generated/S11_m35F5.c": "9bf3591a474e4278a1655e323cc2fc1ebbbb32bbcf8c5a42b2a7a36ee991781a",
+    "build/workers/whole_program/generated/S12_m384C.c": "a17adc0a9f7b3b231182353b2e9b14ba30df681763a3860afb75f950e827b255",
+    "build/workers/whole_program/generated/S13_m384C.c": "e83171f3398ceb8235b56c36962e43cd2ace4329d8f8f1ab4a1d2e3183e0baa2",
+    "build/workers/whole_program/generated/S14_m384C.c": "c5741ef004583135fe7d7c4117f7c1320e8fadea8c6aa8c2f82c876c7e523adc",
+    "build/workers/whole_program/generated/S15_m384C.c": "05cdd7c49a80b7f1c6cd29c99d7039d16e1dc26676c0461d6574b9d098c3364d",
+    "build/workers/whole_program/generated/S16_m384C.c": "05f77b8ec0a9a6b0cb637ebd4b2c15c46198bd191d1456a6592e3c66235915ef",
+    "build/workers/whole_program/generated/S17_m384C.c": "8a7faef28d0759ba28824062663d836ee4927363bf046921da70fa50ac07c2f0",
+    "build/workers/whole_program/generated/S18_m384C.c": "38864208d44ec92654d12cd07cabfb23aeae4d489ef9882c9255336977635342",
+    "build/workers/whole_program/generated/S19_m384C.c": "9aa0af925a75c937c8206e24007cf04bfde2860e09e89526cfde97a446924dee",
+    "build/workers/whole_program/generated/S20_m39C7.c": "a7e1077835bfe3c1c07c83f99df31c2e716a3151caa50dfe7203a80b8a8bc6c1",
+    "build/workers/whole_program/generated/S20_m39F1.c": "e8e02c964b61b994aef7658ac1c08faef99daed5d466181d049f3cfa9d598f0d",
+    "build/workers/whole_program/generated/S22_m39C7.c": "bd77016f57e5d7c2ff9e5a97d38e5c8fff2dade0170d23bbaef6313fc326ffa8",
+    "build/workers/whole_program/generated/S22_m3BBD.c": "d61699eed94e2773fd391cde29396f19888b40d27644353f1836a72cfeb2a480",
+    "build/workers/whole_program/generated/S23_m39C7.c": "3786c00e28a23bbbbb72f38f30bb1b4a4789e83c3d1d5c2c1e98e090d3749cb0",
+    "build/workers/whole_program/generated/S24_m39C7.c": "c0ab1f7938fa05c542834cd044753ddc3433c912c8c6830cfb2d038c9a0a6cbd",
+    "build/workers/whole_program/generated/S25_m39C7.c": "0c907705cdd6f2758b6714715bded30046b22dba5228e7cd622a0588d053b744",
+    "build/workers/whole_program/generated/S25_m3BA4.c": "42fdb67031e8e04dad90f6ef10e6ccf87784a07167bd3f13501e5ceec448dbfa",
+    "build/workers/whole_program/generated/S26_m39C7.c": "7dca4ba983881c6309863f34d03d7093d95a079a5cb23cf0f26b767a84c69bbb",
+    "build/workers/whole_program/generated/balloon_queue_state_v1.c": "57340ab259f3f6bc08758adc8d13992ec6f4ec7f7a019eccab5470d40d1ddec7",
+    "build/workers/whole_program/generated/minimap_scales_v1.c": "e4e264baf3333e5eb59e21e4b6a578d3f76dedbe36dcdf37b7e43d4e64f91f90",
+    "build/workers/whole_program/generated/triangle_dimensions_v1.c": "573430af6f602bd4916922d88015a0641ea05dd960b8d703e1066cd7b4a3b4f4",
+    "build/workers/whole_program/generated/simulation_grid_3e1d_v8.c": "7b2f124a46bd1ee8fa74f441f2fc31ef3609093f91dc9c773bc6850a5e3c7834",
+    "build/workers/whole_program/generated/simulation_state_50f6_v7.c": "5b827f61f46edbb002e821efe81d8f25f44c098b412e19b93429a9d05065425d",
+    "build/workers/whole_program/generated/simulation_state_50f6.c": "c2489524a8975665e0c49b3cfd19fb2b5e8161c3ac7b5ec4dca4eb9cda51c79a",
+    "build/workers/whole_program/generated/source_bounded_additive.c": "db48b8d28b413dffbc98197f797511372c17612d3a8e10bde0b4f4c147fff13b",
+    "build/workers/whole_program/generated/native_owners.c": "bd0e88c6109407ea29a5cfdb4e9d84bbbfc047b3d87411f43a39efc684f1c9f1",
+    "build/workers/whole_program/generated/source_state_owners.c": "3edf7ac51e71da9c0f10ad538178416dfafe6ca14271bcc65ddb521c2005244d",
+    "portable/whole_program/state/database.c": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27",
+    "portable/whole_program/state/game_views.c": "ae0638ac6f00413fd1c79017002ae52bc89039aeaa3e78fdab62d4d27ada4098",
+    "portable/whole_program/state/asm_display_data_v1.c": "847dfac4918b110190a56315ee900e7f3d5396792238cf0a65f2ad41d445ac96",
+    "portable/whole_program/state/asm_startup_flags_v1.c": "c2c836613b73024374e6f3b07bc505f99e9b590f932fdacb2bcd34a25b935d0d",
+    "portable/whole_program/state/eu_map_cache.c": "d1b9507dd0a24e4841853c701621875a83bb56ae168f4e2122dec76ee6fe4677",
+    "portable/whole_program/state/animation_state.c": "b296014539a55ea39626bb067d8cbf1d1038eed7ecd1a2c36eb0b69a615a1c82",
+    "portable/whole_program/ui_string_lists.c": "cfdaf5d0b04b8fbd11e3bdc9e956415e406c89646afc6c5891a0ef5eef09813b",
+    "portable/whole_program/state/menu_bar_rect.c": "30b1d11d048ad9baccda38887e479fce8b7b9d0de627afa1bd6e451db263026d",
+    "portable/whole_program/state/elevator_thumb_size.c": "64e72511859a6ac8d02fec4ca3df6546e8817a6b44b0a066486a58075cd22b40",
+    "portable/whole_program/state/minimap_rects.c": "7da26295d14e2e99d424203726f32b2bdb48a8cbd81e40d113d3933ef0ab1646",
+    "portable/whole_program/state/tri_control_state.c": "8cbb3570789b88d8d90438f7226aab6df6706eb20805b352bb0cfc0a2342cda3",
+    "portable/whole_program/state/map_cursor_rect.c": "b24c58227d3154846dd2fea374b081dbf1984f1883c1513a1f317db59a5265b2",
+    "portable/whole_program/state/asm_shared_state.c": "4a4450e1db8c6bd89e7a1e1a5cd8be3d88fa947d7cb2aa9cfb8ff18eceef8386",
+    "portable/whole_program/conversions/pointer_globals.c": "f6be2f70061b4c00ab948303c7e2f8bab60808f1c4f5198599051526542bfdac",
+    "portable/whole_program/platform/font_blit.c": "df522fd22e8a0b639bc90806cf6cfa8659efbc87d0aa28fdb291bef618fe743e",
+    "portable/whole_program/window_refs.c": "6a477661785195a43d39057fafc01348c8a9d32335072c126f0d828eefafdf93",
+    "portable/whole_program/window_runtime_owner.c": "0739647b8dc8a460ff49daf474a033dd0b8e8dfd109bd06d340d07b57890a78f",
+    "portable/whole_program/window_list_refs.c": "14830a954383cf878344a8d39ad0fb7f0697833d47459df1cb33417b17a1531d",
+    "portable/whole_program/menu_globals.c": "5c8df2c8497511d9f0fc5f5451308a1c609d3a5ec02bceb8e27870f8303a01d5",
+    "portable/ui_model/menus/source_record_view.c": "ac2ef13e2ce7b0e20801605d09324f58292e104bc1364f1d8629356cc60d61a7",
+    "portable/whole_program/window_source_globals.c": "e1d2d3603c70a05ff6d0ff47df3562db301d2f804cb5256a6bd8767436f947a5",
+    "portable/whole_program/platform/dos_memory.c": "d821e60e0053ab73f648f3169e5d71c818eea0b2d2cef7dd0535720ab3ece750",
+    "portable/whole_program/platform/crt_rng.c": "26c9462315829ebf80e74ce2c470e7bc7b02e2f5f9f71a6889956d9e7c1f77ff",
+    "portable/whole_program/platform/crt_abi.c": "2ac651c52b16e4d3c4c2b665ab1290f7b0eef71ec4c5148f564c717bef133604",
+    "portable/whole_program/platform/seed_source.c": "3108f7d9ad500026accae6a10cc0214c489b70acf6251d57bbf1b9c6f7184b76",
+    "portable/whole_program/platform/dos_io.c": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+    "portable/whole_program/platform/startup_preflight.c": "dcf4eca4d1036cfdcc076d4243ab42afdb1952f667eae182259cb4207f713d79",
+    "portable/whole_program/platform/startup_host.c": "359f00d964d6e5bbd92b6b3e27960bc81ed8cf4a6c9049747e6e87ffa2da8a1e",
+    "portable/whole_program/platform/ems_host.c": "94845411504986cef551c7504ff8875d0c76c23192e37af976c40fb042c87a2d",
+    "portable/whole_program/platform/ems_dos_abi.c": "adfcdcf6dd91a806908978912d5978b846169980a64ceee18fb465a179978d42",
+    "portable/whole_program/platform/audio.c": "ba8a9a9ff65f8276c29a5ba5b76a0f6272bc8b0406e2ba6811ffc491503779d8",
+    "portable/whole_program/platform/audio_state.c": "4645363028ec9ac385e42ced5ab8684ed97c5429dc2848881d719501a0a3c193",
+    "portable/whole_program/platform/audio_events.c": "f6cd2237cb32a74ec8ab8f7b73ba162a4df8e3d0e6f0a7ce86393300d8a60e9e",
+    "portable/whole_program/platform/audio_startup.c": "9444f05434232faac05e8578fbf02cbf9c8fc743aace88edf73f24732ea70397",
+    "portable/whole_program/platform/audio_native_mode1.c": "a48d4f1141b52a5ee7082a23ba711c9b9f24ae2ac5c93660e3c42f16dceb2124",
+    "portable/whole_program/platform/audio_clock.c": "63cdb04177f812fc98b2adc95fa0917105a539a2779aaf1786c8466fe858030b",
+    "portable/audio/dac_mixer.c": "8c5650d24ab79d1740f4f11c0941df8423e761f1c18e0bb2bcc9c29411b2e5b6",
+    "portable/audio/intent.c": "01ba4f7a26e52582970565e52a755fbaca418c3fcfb97a4b70edb63920e64e77",
+    "portable/game/resources/database.c": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa",
+    "portable/platform/sdl3/audio.c": "322725c015bb3262dd321f60204034434d56d83ce52444b369e54881c637a4f3",
+    "portable/platform/sdl3/whole_audio_provider.c": "46f9dc3d9efd8b9aad7489eaa73b0ca695618840f7f296fe4233ed7c2f01221a",
+    "portable/platform/sdl3/whole_audio_startup.c": "ee835456dc942a9aa7a9ddc4c862f441e8b172a0dd97b3250ade36de5d99d543",
+    "portable/whole_program/platform/whole_audio_provider.c": "2f78455ace60a05d03d481d97bf1fa5a54449dd13d665e98abd421a7321b1b01",
+    "portable/research/audio_voice_scheduler.c": "d04765178883d59798522ffd333e212135a5faf690f253afd3dcb6da898a6857",
+    "portable/research/audio_voice_admission.c": "3498084baabcb850245715490991b2cc7a599332d8ed09dd6b5e5760a09041e7",
+    "portable/whole_program/platform/handles.c": "5874ee755c5ca8541bea7456d91d050a755524581975d7a6332d0671eb68f970",
+    "portable/whole_program/platform/input_time.c": "d70deed56fe6cbc5a9c4edad71e25155888871281648610cfeaba0b293682731",
+    "portable/whole_program/platform/m1b73_events.c": "fb9506a47b921b9c7281fa15b62d24a77760b241cedcf9ce92168a752bf0420f",
+    "portable/whole_program/platform/m1b73_timer_view.c": "6d9123fe6eed192d019b0747e116775cb28869e93c61a711315de9dcb5ecbd36",
+    "portable/whole_program/platform/m1b73_main_input.c": "652d66ca5732a860a701e9577ed0f8aa373f3a7eafe6756f493e54f06e142f0a",
+    "portable/whole_program/platform/m1b73_mouse_state.c": "ed8196fbf480abdc6fd6fe3e3b80362106b9f712ce6cc175d32a3d1494fe9d42",
+    "portable/whole_program/platform/m1b73_mouse.c": "3975847cc8a493dc7d3c25278ab82f9b1e0a1552e07ca5bd3b9eec5a1d54cec1",
+    "portable/whole_program/platform/m1b73_queues.c": "3dab8e279242365abaa5a3896042fad0a552c7067eed7c3fd9464d0c9cad884c",
+    "portable/whole_program/platform/m1b73_queue_source.c": "fe2a5e450dee2aa77eba09a14f8b7f00d193a5942b107dafcddb00cdb92b30fa",
+    "portable/whole_program/platform/m1b73_queue_ops.c": "e9dddcc61749817824bd979834410bbe9b1f457be97ac7e4cee556a3f9c8b0e1",
+    "portable/whole_program/platform/m1b73_queue_runtime.c": "e63bc543789d28ad7d3a150d03679179ad6c2bdf48b3e545356f329dea1084b7",
+    "portable/whole_program/platform/graphics.c": "965057f9139750866b983b052113f1920d23f3acce3bb6ad53f2d190deb6fef5",
+    "portable/whole_program/platform/graphics_cursor_source.c": "4f4c42b9b3224c620d99315880b2628678a2bebf699bf80e06cb141609024966",
+    "portable/whole_program/platform/graphics_cursor_hooks.c": "d5da4849f6598c725d56f5ba94475a3b5eb59b73afb74079de5d501c7837a243",
+    "portable/whole_program/platform/graphics_source_slots.c": "86096f7ad6b51fcec2b04006c66f2441c57fc7847f68553184b039749d301157",
+    "portable/whole_program/platform/graphics_s00_raster_source.c": "89e049dd53fef44b7e55f296fe41fd5031e5d5cb488cef251d1b6023be587167",
+    "portable/whole_program/platform/graphics_s00_unowned_source.c": "8f4949652e8db7c1ba171c26aea99513429ce60e89051ca379d2f22390d853fb",
+    "portable/whole_program/platform/graphics_s00_map_tables.c": "3895ad077a4165a3224f9883e133ded16fdb778fb92e675e03ba1b0f4b9073da",
+    "portable/whole_program/state/map_render_selectors.c": "7cb0473cc00ebc1826bb5e17696bb31d97a5afbda0b0c163ebba44ae0a4a0bcf",
+    "portable/whole_program/state/font_pointer_state_v1.c": "8e244a84450ff8317549a809ec4887f884026772ea15ae51e78825b05028ef2d",
+    "portable/whole_program/state/startup_globals_v1.c": "9e771ef1cdf7971fd57943c29c1df38794713915488eb52d8250c11c5ed846ef",
+    "portable/whole_program/state/yard_cache_globals_v1.c": "1479bc2258534d3dd32820a09923bbd2297c260f11165243565f88e19805c3b0",
+    "portable/whole_program/window_parameters.c": "a44826f47bb2e945125ac7b6724d4d6e06a6d883bfca3ce7c3e3ca916f707e5b",
+    "portable/whole_program/state/main_loop_counter.c": "7dfd10d9e97d5b5c1c29f6531c825a020061191c74aa5ac9f4a387146de7fe41",
+    "portable/game/state/source_runtime_globals.c": "0e5bacbc87b7264cc35ac7ea83af3b88f363993fdca7d8e0e730fbcdee725d71",
+    "portable/whole_program/platform/map_transform_callbacks.c": "1895a03e700b33a78b06d2b5b652a5101ec501cbe4b705d10c0632b93caa4903",
+    "portable/whole_program/platform/graphics_source_clip.c": "e41019bbe98fa1fd7d0d618ab3241dd9a963fcebb06a1befa2d645a18f146e3b",
+    "portable/whole_program/platform/graphics_bitmap_source.c": "1a4c8154d24ee72eb2d35143585e381a1d78ff7816b6c7001f8a9925db06af5d",
+    "portable/whole_program/platform/graphics_capture_source.c": "d2d10be6caeb828962f85c499c2094d48f10f3ec963932fae2656ea737b13d69",
+    "portable/whole_program/platform/graphics_entry_source.c": "43f720bd83ebda2fd6cbe0708c12aab69004a0dc55cf9ef6cd5ca7b04e565685",
+    "portable/whole_program/platform/graphics_misc_source.c": "294dafd82d3bc4b553bb0417c4dfe3271ba372fb142c63972d75e51bce21fd4d",
+    "portable/whole_program/platform/graphics_tile_upload.c": "5fe5e0a59b27157a986f1fb06b984a8e0a0f696261109ab45fe6bc7c8ddfb706",
+    "portable/whole_program/platform/sdl3/palette_host.c": "829a67b035b841de2586bad1e97763ba67c36942fa510597ba5b7d9a87fa6dec",
+    "portable/whole_program/platform/ega_map_readback.c": "1322e846b4522e310cf27d24fd3ea7ea5a1467f46343d58ca9027191ffaa6931",
+    "portable/whole_program/platform/native_video_profile.c": "f2086a6be0f7205ba45cb9074457c947c325b879b33845663cc2c93d6eb556dc",
+    "portable/whole_program/platform/unsupported_video_profiles.c": "6cb9fa7dcc76645257a0b87d2e5a1939d28d54fad64223a830c92de688d96f32",
+    "portable/whole_program/platform/drive_directory.c": "3efeaa4a45f1ab3a21a61116e30cb57c81609bd0ba29b884d1a2a06dd1d9de0a",
+    "portable/game/resources/source_graphics_resources.c": "c89fb00301d909505aef702bda8cfd2911f8022ee3787a9eca49861fc9c7ab29",
+    "portable/game/resources/bios_fonts.c": "167ed9618d2ec2af7464ca7c531d15716059b05480219d021fbaa6b4763f617c",
+    "portable/whole_program/platform/bios_font_view.c": "b3b0dae7d29c155aab19dd9a901c8f4a8981a08bd1f6352cfdafb8ddb844a4f8",
+    "portable/whole_program/platform/graphics_line_1499.c": "1eb0fc1924a834df78fc57b2441e2e7bbd336a7e28d2ff27d549ae01acd06949",
+    "portable/whole_program/text_bitmap.c": "b88238cd5effba626d28baaa7f56a725d15bba9de8aeafe4d9c57636ee9f38d7",
+    "portable/whole_program/text_bitmap_bridge.c": "60f8c63c5c615090cd8d7b03cbd0ada8fba7f60c401608f31e3ada2f23277a2e",
+    "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable/whole_program/platform/sdl3/input_time_host.c": "052341313cc124a53d71b41414a102c427add4278b5a4c3c0e83e8c381e0d66a",
+    "portable/whole_program/platform/sdl3/m1b73_application_input.c": "cc2604b706ed1c08f75311ed6e9a75b2fb8d36457268d905a34cd02d132fa2c4",
+    "portable/whole_program/platform/sdl3/host.c": "8210e28ba4a0da173ced2b3547ea3e168e44100b37d4d15b8e70d2e24f8c412a",
+    "portable/game/timing.c": "90fddb1eed99a3511fecad98ff26fc147529246a3d0ff2c930420942d38cab91",
+    "portable/whole_program/platform/directory.c": "facca93cd9280376a55304c187297c9ef409de24967bfb198d46cf923c57ac09",
+    "portable/whole_program/platform/dos_format.c": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1",
+    "portable/whole_program/algorithms/lzss.c": "a23b65265e2d91cbd2a93333760d342dbc085bb0d9c1c676c756651d00529540",
+    "portable/whole_program/algorithms/wildcard.c": "e7b0ff49c1df3ecf8af693dd2aaa076fdd417fa2fd10f5b320d3b6b1f9c6a636",
+    "portable/whole_program/algorithms/asm_utilities.c": "e89b985c38ac4f8241fd84ed8e42f9308afaa8573815e4b79e7e423f2f85098f",
+    "portable/whole_program/algorithms/balloon.c": "e3e07c9bbc7770b4092e31d0162b0af96972710456d7cd04f7460ac5c4894aca",
+    "portable/whole_program/algorithms/line16b5.c": "56615ca64d7a1bca406383d392a58fee6c5722e2a807cbdae8b503411fa0e54d",
+    "portable/game/simulation/rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+    "portable/platform/memory.c": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec",
+    "portable/tools/whole_program_call_arity_audit.py": "be82f8755e8183ff4e94214c624d2397ee692f7b1181c26e78ef2bdd3eb1c36c"
+  },
+  "inputs_stable": true,
+  "changed_inputs": [],
+  "checked_calls": 7528,
+  "findings": [
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m015B.c",
+      "caller_function": "XferPatch",
+      "line": 404,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m015B.c",
+      "caller_function": "PlaceQueenInYard",
+      "line": 541,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m015B.c",
+      "caller_function": "PlaceQueenInYard",
+      "line": 545,
+      "callee": "MakeDMap",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 239,
+        "name": "MakeDMap",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  MakeDMap(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m015B.c",
+      "caller_function": "MysteryButton",
+      "line": 603,
+      "callee": "f_00DF_00E0",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 55,
+        "name": "f_00DF_00E0",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_00DF_00E0(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m015B.c",
+      "caller_function": "MysteryButton",
+      "line": 629,
+      "callee": "f_00DF_00E0",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 55,
+        "name": "f_00DF_00E0",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_00DF_00E0(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m075B.c",
+      "caller_function": "initStuff",
+      "line": 48,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m0894.c",
+      "caller_function": "DoAntSim",
+      "line": 180,
+      "callee": "EndGameDialog",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/S14_m384C.c",
+        "line": 503,
+        "name": "EndGameDialog",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  EndGameDialog(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m0AD9.c",
+      "caller_function": "DoAntLions",
+      "line": 200,
+      "callee": "f_00DF_0164",
+      "arguments": 6,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 90,
+        "name": "f_00DF_0164",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_00DF_0164(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m0AD9.c",
+      "caller_function": "DoAntLions",
+      "line": 221,
+      "callee": "f_00DF_0164",
+      "arguments": 6,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 90,
+        "name": "f_00DF_0164",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_00DF_0164(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m0BE8.c",
+      "caller_function": "CountAnts",
+      "line": 112,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m0BE8.c",
+      "caller_function": "CountAnts",
+      "line": 127,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m0BE8.c",
+      "caller_function": "TryAntTheme",
+      "line": 617,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m10F7.c",
+      "caller_function": "ExchangeLives",
+      "line": 549,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m1383.c",
+      "caller_function": "StartAttack",
+      "line": 218,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m15F8.c",
+      "caller_function": "dos_game_main",
+      "line": 139,
+      "callee": "MakeDMap",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 239,
+        "name": "MakeDMap",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  MakeDMap(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m1629.c",
+      "caller_function": "MakeBalloon",
+      "line": 91,
+      "callee": "f_24AB_0329",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m24AB.c",
+        "line": 132,
+        "name": "f_24AB_0329",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "int16_t  f_24AB_0329(char  *s)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m1629.c",
+      "caller_function": "MakeBalloon",
+      "line": 92,
+      "callee": "f_24AB_0329",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m24AB.c",
+        "line": 132,
+        "name": "f_24AB_0329",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "int16_t  f_24AB_0329(char  *s)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m1629.c",
+      "caller_function": "MakeBalloon",
+      "line": 113,
+      "callee": "f_24AB_0329",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m24AB.c",
+        "line": 132,
+        "name": "f_24AB_0329",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "int16_t  f_24AB_0329(char  *s)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m1A53.c",
+      "caller_function": "db_ReplaceObject",
+      "line": 182,
+      "callee": "DBDelete",
+      "arguments": 3,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m19A9.c",
+        "line": 131,
+        "name": "DBDelete",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  DBDelete(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m1A53.c",
+      "caller_function": "db_ReplaceObject",
+      "line": 184,
+      "callee": "DBAdd",
+      "arguments": 7,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m19A9.c",
+        "line": 126,
+        "name": "DBAdd",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  DBAdd(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/root_m1A53.c",
+      "caller_function": "db_SaveObject",
+      "line": 191,
+      "callee": "DBAdd",
+      "arguments": 7,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m19A9.c",
+        "line": 126,
+        "name": "DBAdd",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  DBAdd(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S04_m35F5.c",
+      "caller_function": "MapToolsMenu",
+      "line": 140,
+      "callee": "SetEditWinTitle",
+      "arguments": 2,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m0250.c",
+        "line": 1015,
+        "name": "SetEditWinTitle",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetEditWinTitle(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S04_m35F5.c",
+      "caller_function": "MapToolsMenu",
+      "line": 157,
+      "callee": "SetEditWinTitle",
+      "arguments": 2,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m0250.c",
+        "line": 1015,
+        "name": "SetEditWinTitle",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetEditWinTitle(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S04_m35F5.c",
+      "caller_function": "MapToolsMenu",
+      "line": 158,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S05_m35F5.c",
+      "caller_function": "EditToolsMenu",
+      "line": 94,
+      "callee": "SetEditWinTitle",
+      "arguments": 2,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m0250.c",
+        "line": 1015,
+        "name": "SetEditWinTitle",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetEditWinTitle(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S05_m35F5.c",
+      "caller_function": "EditToolsMenu",
+      "line": 109,
+      "callee": "SetEditWinTitle",
+      "arguments": 2,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m0250.c",
+        "line": 1015,
+        "name": "SetEditWinTitle",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetEditWinTitle(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S05_m35F5.c",
+      "caller_function": "EditToolsMenu",
+      "line": 110,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S06_m35F5.c",
+      "caller_function": "o06_35F5_1E54",
+      "line": 1154,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S06_m35F5.c",
+      "caller_function": "o06_35F5_1E54",
+      "line": 1166,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S06_m35F5.c",
+      "caller_function": "o06_35F5_1E54",
+      "line": 1172,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S07_m35F5.c",
+      "caller_function": "CheatKeys",
+      "line": 87,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S07_m35F5.c",
+      "caller_function": "CheatKeys",
+      "line": 88,
+      "callee": "f_00DF_00E0",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 55,
+        "name": "f_00DF_00E0",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_00DF_00E0(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S07_m35F5.c",
+      "caller_function": "CheatKeys",
+      "line": 89,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S11_m35F5.c",
+      "caller_function": "ProcMenu",
+      "line": 103,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S14_m384C.c",
+      "caller_function": "EndGameDialog",
+      "line": 511,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S14_m384C.c",
+      "caller_function": "EndGameDialog",
+      "line": 513,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S14_m384C.c",
+      "caller_function": "EndGameDialog",
+      "line": 515,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S14_m384C.c",
+      "caller_function": "EndGameDialog",
+      "line": 547,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S15_m384C.c",
+      "caller_function": "o15_384C_0152",
+      "line": 98,
+      "callee": "f_171C_0676",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "portable/whole_program/platform/handles.c",
+        "line": 536,
+        "name": "f_171C_0676",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void f_171C_0676(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S15_m384C.c",
+      "caller_function": "o15_384C_0152",
+      "line": 102,
+      "callee": "f_277D_000B",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m277D.c",
+        "line": 18,
+        "name": "f_277D_000B",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_277D_000B(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S15_m384C.c",
+      "caller_function": "SetDefaultWindows",
+      "line": 230,
+      "callee": "SetEditWinTitle",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m0250.c",
+        "line": 1015,
+        "name": "SetEditWinTitle",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetEditWinTitle(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S15_m384C.c",
+      "caller_function": "NewGame",
+      "line": 263,
+      "callee": "DoScenario",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/S14_m384C.c",
+        "line": 188,
+        "name": "DoScenario",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "int16_t  DoScenario(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S15_m384C.c",
+      "caller_function": "NewGame",
+      "line": 267,
+      "callee": "LoadGame",
+      "arguments": 2,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/S09_m35F5.c",
+        "line": 106,
+        "name": "LoadGame",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "int16_t  LoadGame(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S15_m384C.c",
+      "caller_function": "NewGame",
+      "line": 292,
+      "callee": "SetEditWinTitle",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m0250.c",
+        "line": 1015,
+        "name": "SetEditWinTitle",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetEditWinTitle(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S16_m384C.c",
+      "caller_function": "DrawSimPayoff",
+      "line": 103,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S16_m384C.c",
+      "caller_function": "ShowIntro",
+      "line": 250,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S19_m384C.c",
+      "caller_function": "o19_384C_0000",
+      "line": 88,
+      "callee": "LoadGame",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/S09_m35F5.c",
+        "line": 106,
+        "name": "LoadGame",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "int16_t  LoadGame(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S20_m39F1.c",
+      "caller_function": "IBMInitStuff",
+      "line": 82,
+      "callee": "f_171C_0676",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "portable/whole_program/platform/handles.c",
+        "line": 536,
+        "name": "f_171C_0676",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void f_171C_0676(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S20_m39F1.c",
+      "caller_function": "IBMInitStuff",
+      "line": 134,
+      "callee": "f_277D_000D",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m277D.c",
+        "line": 26,
+        "name": "f_277D_000D",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_277D_000D(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowBirth",
+      "line": 359,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowBirth",
+      "line": 420,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowBirth",
+      "line": 422,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowBirth",
+      "line": 423,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 462,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 474,
+      "callee": "o25_3BA4_0C01",
+      "arguments": 6,
+      "required": 5,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/S25_m3BA4.c",
+        "line": 364,
+        "name": "o25_3BA4_0C01",
+        "shape": [
+          5,
+          false
+        ],
+        "signature": "void  o25_3BA4_0C01(int16_t plane, int16_t x, int16_t y, int16_t dir, int16_t type)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 475,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 478,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 485,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 491,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 507,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 513,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 519,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 525,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 531,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowDeath",
+      "line": 548,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "SpecialXfer",
+      "line": 688,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowCommand",
+      "line": 943,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowCommand",
+      "line": 947,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowCommand",
+      "line": 951,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowCommand",
+      "line": 955,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowCommand",
+      "line": 959,
+      "callee": "myBeginSong",
+      "arguments": 2,
+      "required": 1,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00DF.c",
+        "line": 47,
+        "name": "myBeginSong",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "void  myBeginSong(int16_t song)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m39C7.c",
+      "caller_function": "YellowCommand",
+      "line": 974,
+      "callee": "SetSimCursor",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 167,
+        "name": "SetSimCursor",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  SetSimCursor(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m3BBD.c",
+      "caller_function": "ReDrawMapEdit",
+      "line": 139,
+      "callee": "MakeDMap",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 239,
+        "name": "MakeDMap",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  MakeDMap(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S22_m3BBD.c",
+      "caller_function": "ReDrawMapEdit",
+      "line": 144,
+      "callee": "MakeDMap",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m00F8.c",
+        "line": 239,
+        "name": "MakeDMap",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  MakeDMap(void)"
+      }
+    },
+    {
+      "caller_source": "build/workers/whole_program/generated/S23_m39C7.c",
+      "caller_function": "DisplayCard",
+      "line": 487,
+      "callee": "f_277D_000B",
+      "arguments": 1,
+      "required": 0,
+      "variadic": false,
+      "difference": "EXTRA_ARGUMENT",
+      "definition": {
+        "source": "build/workers/whole_program/generated/root_m277D.c",
+        "line": 18,
+        "name": "f_277D_000B",
+        "shape": [
+          0,
+          false
+        ],
+        "signature": "void  f_277D_000B(void)"
+      }
+    }
+  ],
+  "ambiguous_public_definitions": {
+    "font_MakeImage": [
+      {
+        "source": "build/workers/whole_program/generated/root_m25E7.c",
+        "line": 167,
+        "name": "font_MakeImage",
+        "shape": [
+          3,
+          false
+        ],
+        "signature": "struct Bitmap  *  font_MakeImage(uint8_t  *s, int16_t x, struct Font  *font)"
+      },
+      {
+        "source": "portable/whole_program/platform/font_blit.c",
+        "line": 78,
+        "name": "font_MakeImage",
+        "shape": [
+          3,
+          false
+        ],
+        "signature": "struct Bitmap *font_MakeImage(uint8_t *text, int16_t x, struct Font *font)"
+      }
+    ],
+    "REJECT_NOARGS": [
+      {
+        "source": "portable/whole_program/platform/unsupported_video_profiles.c",
+        "line": 17,
+        "name": "REJECT_NOARGS",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "REJECT_NOARGS(o01_3126_0000)\nREJECT_NOARGS(o01_3126_0068)\nREJECT_NOARGS(o01_3126_007D)\nREJECT_NOARGS(o01_3126_010A)\nvoid o01_3126_1343(int16_t x, int16_t y, char *tile, char *life, int16_t n)"
+      },
+      {
+        "source": "portable/whole_program/platform/unsupported_video_profiles.c",
+        "line": 32,
+        "name": "REJECT_NOARGS",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "REJECT_NOARGS(o01_328E_000A)\nREJECT_NOARGS(o01_328E_009D)\nvoid o01_328E_012C(char *src, char *dst, int16_t y)"
+      },
+      {
+        "source": "portable/whole_program/platform/unsupported_video_profiles.c",
+        "line": 45,
+        "name": "REJECT_NOARGS",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "REJECT_NOARGS(o01_32B5_000E)\nvoid o01_32B5_000F(char *image, char *buffer, int16_t shift, int16_t flag)"
+      },
+      {
+        "source": "portable/whole_program/platform/unsupported_video_profiles.c",
+        "line": 51,
+        "name": "REJECT_NOARGS",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "REJECT_NOARGS(o01_32B5_00AA)\nREJECT_NOARGS(o01_32B5_0152)\nREJECT_NOARGS(o01_32B5_024F)\n\nREJECT_NOARGS(o02_3126_0000)\nREJECT_NOARGS(o03_3126_0140)\n\nREJECT_NOARGS(o03_3253_0008)\nvoid o03_3253_002F(char *src, char *dst, int16_t mult)"
+      },
+      {
+        "source": "portable/whole_program/platform/unsupported_video_profiles.c",
+        "line": 65,
+        "name": "REJECT_NOARGS",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "REJECT_NOARGS(o03_3258_040C)\nvoid o03_3258_040D(char *image, char *buffer, int16_t shift, int16_t flag)"
+      },
+      {
+        "source": "portable/whole_program/platform/unsupported_video_profiles.c",
+        "line": 71,
+        "name": "REJECT_NOARGS",
+        "shape": [
+          1,
+          false
+        ],
+        "signature": "REJECT_NOARGS(o03_3258_04CE)\nREJECT_NOARGS(o03_3258_05A7)\nvoid o03_3258_0690(int16_t x, int16_t y, char *tile, char *life, int16_t mask)"
+      }
+    ]
+  },
+  "migration_sha256": "90ef902f2b3a1fa31ab29682b6163176e634eb268d43c3805eed2faf86eab2ed"
+}

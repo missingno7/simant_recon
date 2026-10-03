@@ -1,0 +1,34 @@
+{
+  "schema": "simant-whole-source-main-startup-v1",
+  "passed": false,
+  "scope": "Original main through a presented startup frame; no completed NewGame or full gameplay claim",
+  "command": [
+    "D:\\Prog\\simant_recon\\build\\whole-application-v14\\simant-whole-sdl3.exe",
+    "--headless",
+    "--smoke-ms",
+    "19000",
+    "--frame",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\source-main-vga-full-file-menu-v2\\frame.bmp",
+    "--seed",
+    "1",
+    "/dV",
+    "--input-script",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\full-game-file-menu-vga-v1.txt"
+  ],
+  "exit_code": null,
+  "timed_out": true,
+  "elapsed_seconds": 29.0,
+  "inputs": {
+    "build/whole-application-v14/simant-whole-sdl3.exe": "72bebfba969409c4be252f23682a6ba232e1a8508e795eb82e767c5557624ab3",
+    "build/whole-application-v14/report.json": "09130f4b9d32cd67d3dcd846b1d980eaa343ebcb308c568eb59e933977f87239",
+    "portable/tools/run_whole_startup.py": "c92b0b1deb32328eaa1e78b4a99cf92037402cab21549a50edfbba78f03b902a"
+  },
+  "original_assets_unchanged": true,
+  "runtime_asset_changes": {},
+  "frame_sha256": null,
+  "original_outer_loop_count": null,
+  "input_script": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\full-game-file-menu-vga-v1.txt",
+    "sha256": "c19f2010350bb08e36004bff834e947b510517f26fb0779446c4aa6e5492b879"
+  }
+}

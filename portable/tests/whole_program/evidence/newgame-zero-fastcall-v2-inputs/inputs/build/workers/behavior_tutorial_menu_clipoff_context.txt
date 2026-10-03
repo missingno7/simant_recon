@@ -1,0 +1,10 @@
+clip_Off  root:1E57:0362  linear 1E8D2  size 13  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 1E57: function 12/25; neighbours: f_1E57_0296, f_1E57_0351, f_1E57_036F, f_1E57_038E
+  frame: {'frame': 'none'}
+  0362  push cs
+  0363  call 9                             -> f_1E57_0009
+  0366  sub ax, ax
+  0368  mov word ptr [0x5aae], ax          DS:5AAE g_5AAE
+  036B  mov word ptr [0x5aac], ax          DS:5AAC g_5AAC
+  036E  retf

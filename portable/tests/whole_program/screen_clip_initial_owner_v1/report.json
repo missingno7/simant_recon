@@ -1,0 +1,46 @@
+{
+  "schema": "screen-clip-initial-owner-v1",
+  "result": "PASS",
+  "claim": "actual generated clip_SubInclude and f_1D8E_003F source bodies correctly traverse a source-backed screen Rect plus sentinel and produce a single Rect plus sentinel under the bounded handle/allocator backend",
+  "not_claimed": [
+    "full DOS handle allocator equivalence",
+    "historical heap extent ownership",
+    "full screen renderer equivalence"
+  ],
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "symbol": "_g_5A9C",
+    "unit": "S27",
+    "segment": 21939,
+    "offset": 23196,
+    "section_byte_offset": 122972,
+    "raw16_hex": "000000005d017f020080008000800080",
+    "raw16_sha256": "81d3bd60b87f7d829c304a05f3256592dc9a49b69495399366fca7fd63da8933"
+  },
+  "generated_sources": {
+    "root_m1E57.c": {
+      "sha256": "34ceb13fddd9466bfb83ecb381fd72a8d4c076a29a89afa081f74498e8ccb2ca",
+      "functions": [
+        "clip_SubInclude"
+      ]
+    },
+    "root_m1D8E.c": {
+      "sha256": "5562663e75632b4f675f13bb5cb68e7f5f6bbd8afdb63d975782bb1f6c66a835",
+      "functions": [
+        "f_1D8E_0002",
+        "f_1D8E_003F"
+      ]
+    }
+  },
+  "native": {
+    "compiler": "gcc (Rev10, Built by MSYS2 project) 12.2.0",
+    "compile": "-std=c11 -Wall -Wextra -Werror",
+    "stdout": "PASS one source rectangle plus sentinel -> one included rectangle plus sentinel"
+  },
+  "source_functions_sha256": {
+    "f_1D8E_0002": "a388ffb3bc4b41d555ef5d167abb5bcc712843a6b8245afcba08d1332cc1dfd5",
+    "f_1D8E_003F": "a2d3c431a75e7ed8b8e8555441657cd424bf2287ea498e50a2c0dec36cad58ed",
+    "clip_SubInclude": "9494a7bd073fdb227fccafe1197d2df05d280fb1959cd49c4f35b393bfdf5741"
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "schema": "native-heap-guard-readable-archive-v1",
+  "classification": "diagnostic-only; archived readable inputs and transcripts; no production acceptance",
+  "report_consistency_hashes": {
+    "v12_guard_source_expected": "ec72259bd7ce631e2e77373ee2e70ba761413500f02dcd64cad12f73fd5f7162",
+    "v12_guard_source_archived": "ec72259bd7ce631e2e77373ee2e70ba761413500f02dcd64cad12f73fd5f7162",
+    "v13_guard_source_expected": "00bc253a6c506d19885550e0f570083e1858241ef352fd8d9fe5777abe89c4e2",
+    "v13_guard_source_archived": "00bc253a6c506d19885550e0f570083e1858241ef352fd8d9fe5777abe89c4e2",
+    "v12_gdb_transcript_expected": "e3b9482530b55750531aefcfcbbcd35efae258b1eef781611f8a56825dbf830c",
+    "v12_gdb_transcript_archived": "e3b9482530b55750531aefcfcbbcd35efae258b1eef781611f8a56825dbf830c",
+    "v13_gdb_transcript_expected": "9eb967ef8db3523f7ab9f526dc36944fe8c624fb3e38b786822c10d75afd304d",
+    "v13_gdb_transcript_archived": "9eb967ef8db3523f7ab9f526dc36944fe8c624fb3e38b786822c10d75afd304d"
+  },
+  "files": [
+    {
+      "path": "diagnostic-report.json",
+      "bytes": 4821,
+      "sha256": "fe83e36ed415273877caab523d526cb14f9c786e3ce6a6896e5e876a272e2dd0"
+    },
+    {
+      "path": "quick-game-vga-v1.txt",
+      "bytes": 219,
+      "sha256": "4478b7806bd91b2ae6740e960d854d25d0b384c9c82ece6dcf06588d811cbc37"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1766,
+      "sha256": "f571c086a9a2b943e3eb89cd0b634cf0862697eee5fe230ba12f5460d1f69c8a"
+    },
+    {
+      "path": "v12/application-report.json",
+      "bytes": 71220,
+      "sha256": "073779ac3cfdf0a5aae575805a5a12fb791a3361ca749f607d0f246056b3d6ba"
+    },
+    {
+      "path": "v12/direct-run.json",
+      "bytes": 596,
+      "sha256": "23febfb72918cdc09c3a13b4886679c728d6fce06a37b14a44cacdcb1c229059"
+    },
+    {
+      "path": "v12/first-write-gdb-transcript.txt",
+      "bytes": 12425,
+      "sha256": "e3b9482530b55750531aefcfcbbcd35efae258b1eef781611f8a56825dbf830c"
+    },
+    {
+      "path": "v12/guard-gdb-transcript.txt",
+      "bytes": 7723,
+      "sha256": "8d084fca7333de275728e4f5f9df9d5181f04b3becaf0f08f85fbd58454265a6"
+    },
+    {
+      "path": "v12/guard-gdb2-transcript.txt",
+      "bytes": 13642,
+      "sha256": "43b6b6aae882781eef39d5836b8e40372675808b3573bac44cf91cb8e34bcf20"
+    },
+    {
+      "path": "v12/handles_guard.c",
+      "bytes": 29759,
+      "sha256": "ec72259bd7ce631e2e77373ee2e70ba761413500f02dcd64cad12f73fd5f7162"
+    },
+    {
+      "path": "v12/migration.json",
+      "bytes": 3273891,
+      "sha256": "9d6b1ad7392200c3c172d95d9f870a1f47dd3c54f115e04c86ba57a33dc21424"
+    },
+    {
+      "path": "v12/watch-gdb-transcript.txt",
+      "bytes": 7902,
+      "sha256": "83b7a15161b7af387b284332711342346d5610f27af90fd195b5fa3511ae2e0f"
+    },
+    {
+      "path": "v12/watch.gdb",
+      "bytes": 445,
+      "sha256": "1d0382eae2b73d52579602dca6d1695c9d73fae9586bac8e39cbbe379fa6ef08"
+    },
+    {
+      "path": "v12/winopen-gdb-transcript.txt",
+      "bytes": 7798,
+      "sha256": "d62b5a4c5117a86234fe449a4209624a15295ca402bd517779c079053f1471aa"
+    },
+    {
+      "path": "v12/winopen.gdb",
+      "bytes": 209,
+      "sha256": "99fbde7b9a75e88fe4570ad955b8f9a4c475412cc0b62e9e06aaf8d683e7147d"
+    },
+    {
+      "path": "v13/application-report.json",
+      "bytes": 71596,
+      "sha256": "869b5dad4d71996d2ca963133e2a306692cc50696c0a7e8f56aa1b8db4707d27"
+    },
+    {
+      "path": "v13/handles_guard.c",
+      "bytes": 29757,
+      "sha256": "00bc253a6c506d19885550e0f570083e1858241ef352fd8d9fe5777abe89c4e2"
+    },
+    {
+      "path": "v13/migration.json",
+      "bytes": 3303398,
+      "sha256": "9bb01ccbb58374b687bf66eb0d4d1534b8ea48c5727c63e994cfed2385e16c6b"
+    },
+    {
+      "path": "v13/no-hit-gdb-transcript.txt",
+      "bytes": 8046,
+      "sha256": "9eb967ef8db3523f7ab9f526dc36944fe8c624fb3e38b786822c10d75afd304d"
+    }
+  ],
+  "executed_inputs_not_recovered": [
+    {
+      "item": "Exact v12 first-write GDB command script",
+      "status": "unavailable",
+      "detail": "The transcript is retained, but the exact script used to produce it was not saved."
+    },
+    {
+      "item": "Exact v13 GDB command script",
+      "status": "unavailable",
+      "detail": "The no-hit transcript is retained, but the exact script used to produce it was not saved."
+    },
+    {
+      "item": "Exact v12/v13 application link command lines",
+      "status": "unavailable",
+      "detail": "Scratch app_link.txt/core_link.txt and build link.txt files are zero bytes; migration reports and object identities are retained."
+    },
+    {
+      "item": "Compiled diagnostic executables and object files",
+      "status": "not_archived",
+      "detail": "Readable archive only; executable/object hashes and runtime prerequisites are referenced by diagnostic-report.json and migration reports."
+    }
+  ]
+}

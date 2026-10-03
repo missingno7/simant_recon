@@ -21,7 +21,7 @@ def main():
         raise ValueError('new portable archive directory required')
     raw=report.read_bytes();receipt=json.loads(raw)
     pins={}
-    for key in ('inputs','input_sha256','inputs_sha256','inputs_before_sha256',
+    for key in ('inputs','input_sha256','inputs_sha256','pins_sha256','inputs_before_sha256',
                 'inputs_sha256_before','source_hashes_before','source_asset_pins_before','inputs_before'):
         for rel,value in receipt.get(key,{}).items():
             if isinstance(value,str) and len(value)==64: pins[rel.replace('\\','/')]=value

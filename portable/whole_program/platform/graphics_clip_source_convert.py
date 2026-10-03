@@ -98,7 +98,7 @@ def convert_source(name: str, text: str) -> str:
     if uses_5aac:
         declarations.append("extern struct Rect *g_5AAC;")
     if uses_5a9c:
-        declarations.append("extern struct Rect g_5A9C;")
+        declarations.append('#include "portable/whole_program/platform/graphics_source_clip.h"')
     declaration_block = "\n".join(declarations) + "\n"
     text = text.replace('#include "portable/whole_program/window_source_rects.h"\n',
                         '#include "portable/whole_program/window_source_rects.h"\n' +

@@ -1,0 +1,26 @@
+SetDefaultWindows  S15:384C:037F  linear 3883F  size 71  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call, vector
+  module frame 384C: function 7/8; neighbours: MenuQuit, o15_384C_0239, NewGame
+  frame: {'frame': 'none'}
+  037F  xor ax, ax
+  0381  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  0386  lcall 0x798, 0x115                 -> OpenCasteWindow
+  038B  lcall 0x798, 0x12b                 -> OpenModeWindow
+  0390  sub ax, ax
+  0392  push ax
+  0393  push ax
+  0394  lcall 0x250, 0x16fd                -> SetEditWinTitle
+  0399  pop bx
+  039A  pop bx
+  039B  mov es, word ptr [0x877c]          DS:877C
+  039F  push word ptr es:[0x32e]
+  03A4  lcall 0x15b, 0x53c                 -> SetMapPlane
+  03A9  pop bx
+  03AA  mov ax, 0x100
+  03AD  lcall 0x22bf, 0x9b0                -> win_IsWinOpen
+  03B2  or ax, ax
+  03B4  jne 0x3bb
+  03B6  lcall 0xf8, 0x47f                  -> YardToMap
+  03BB  lcall 0xf8, 0xd8                   -> SetMapTitle
+  03C0  lcall 0x250, 0xe70                 -> OpenEditWindow
+  03C5  retf

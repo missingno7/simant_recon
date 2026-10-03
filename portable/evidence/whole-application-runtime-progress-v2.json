@@ -1,0 +1,230 @@
+{
+  "schema": "simant-whole-application-runtime-progress-v2",
+  "classification": "MECHANICAL_INTEGRATION_PROGRESS",
+  "complete_game_verified": false,
+  "scope": "Original main with normal SDL inputs; direct Quick Game, Full Game and Tutorial entry frames. These bounded runs do not establish complete game coverage.",
+  "inputs": {
+    "build/whole-application-v13/report.json": "869b5dad4d71996d2ca963133e2a306692cc50696c0a7e8f56aa1b8db4707d27",
+    "build/whole-application-v14/report.json": "09130f4b9d32cd67d3dcd846b1d980eaa343ebcb308c568eb59e933977f87239",
+    "build/workers/whole_program/direct-arity-audit-v14.json": "6f29b0fb9688c46c86ffebe0e83658b6ed12966155ccbcc800bcfe9d241befc2",
+    "build/workers/whole_program/historical-validation-application-v13-restored.txt": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
+    "build/workers/whole_program/oracle-readiness-after-v14.json": "072e2b2db963c13f5a37d6bd2328e08cf1cd6455ed1d5005e228337fe1755d01",
+    "portable/research/native_heap_guard_diagnostic_20261003.json": "fe83e36ed415273877caab523d526cb14f9c786e3ce6a6896e5e876a272e2dd0",
+    "portable/tests/whole_program/platform/evidence/s00-0647-aperture-dos-native-v4.json": "126a9ebbda522d5d960d2d3d1ec405c2e6f330c91aae7cd8c191d33c3ecd2c16",
+    "portable/tests/whole_program/platform/evidence/s00-source-aperture-capture-v9.json": "81ac7c2d507049fce6514beb08d541b2773877b8ae12f09e9e1c26e8860d404a",
+    "portable/tests/whole_program/screen_clip_initial_owner_v1/report.json": "877d5591ea213ee34a51da8a26237fb0e2b9d19cca02d4d45789d813b7bc6b21",
+    "portable/tests/whole_program/evidence/newgame-zero-fastcall-v2.json": "0527220a11917e6c1a72b3e4f15c8bcc6bdd7e6531b7713023ea0738a3c94cb0",
+    "portable/tests/whole_program/evidence/input-time-key-ah-override-v1.json": "d3434b34c2bc20972b4ac791a4ddc359ed5efcd62cb4abf73c073b9683190bd3",
+    "build/workers/whole_program/source-main-vga-quick-game-v4/report.json": "d38a0674a65025d473cd203b470eeead8aa918d6a85c57a6b414794cffb83771",
+    "build/workers/whole_program/source-main-vga-quick-game-v4/stderr.txt": "83dd6fef674d2b15aa6c964f0079cb60d79fa1722213c5fa200b0802179057cf",
+    "build/workers/whole_program/source-main-vga-quick-game-v4/frame.bmp": "b8acbe606f4152562e32f9336c2197870b916ea618f1efbf15c488ede764ecbf",
+    "build/workers/whole_program/source-main-ega-quick-game-v3/report.json": "a3ec68d17b0a72411fbff3c2021f5dcbd7e865c15facd47d7969c2d830d918b5",
+    "build/workers/whole_program/source-main-ega-quick-game-v3/stderr.txt": "adf5c060cebcdddf440d1231499d895897dfeed9bb02fc115d90daff8ed69ab2",
+    "build/workers/whole_program/source-main-ega-quick-game-v3/frame.bmp": "70a96b7c18a34f5cc43f6282a4d13cc86cbbe1e960c8a1de502d0807f754651f",
+    "build/workers/whole_program/source-main-vga-full-game-v1/report.json": "2ea4e4b7e4a7f4448e9dfd95948e9c3cef80dbb88ce3f7ba3eca0b29122d3679",
+    "build/workers/whole_program/source-main-vga-full-game-v1/stderr.txt": "bb1cddd500d85cd9e1f368c83695b0f57a33e782f8241cf9c6ba4bf10b64d623",
+    "build/workers/whole_program/source-main-vga-full-game-v1/frame.bmp": "975d034f0ac53f2d73effa65886fb355ebc5b083df0641e392bc701c38f8c28a",
+    "build/workers/whole_program/source-main-vga-tutorial-v2/report.json": "867d0016cdabd3c71b049294ec05ddfd913844599da0cb198de8a9242072b3e8",
+    "build/workers/whole_program/source-main-vga-tutorial-v2/stderr.txt": "11a5dc4bacec4dfada1ff9cd07261e706c0f0470debc1bb91b8d598480ae8bed",
+    "build/workers/whole_program/source-main-vga-tutorial-v2/frame.bmp": "f2c3faf71304bba50c63a8553382cc6628d232e4ce6706592e88f0f6c005f595",
+    "build/workers/whole_program/source-main-vga-full-file-menu-v2/report.json": "9e5f19b236515a6508c1d7579d8beeea9a2f8a0745edb3af7040e1b035548c5a",
+    "build/workers/whole_program/source-main-vga-full-file-menu-v2/stderr.txt": "d9eeba20cac855eb6134a1dac7c522433859f6a69834c81d7894ef05618a910d",
+    "portable/tests/whole_program/application_input/full-game-file-menu-vga-v1.txt": "c19f2010350bb08e36004bff834e947b510517f26fb0779446c4aa6e5492b879",
+    "portable/tests/whole_program/application_input/full-game-vga-v1.txt": "76cb0aa0dd78fe3ec01c2af74790df2f4b4b1cfb9e24b22e064396fe20f088fd",
+    "portable/tests/whole_program/application_input/quick-game-v1.txt": "12ede4d3ea3dc8137c055c3bc302bd871df87cfab2e8f624ec2c9fbf0ff89f79",
+    "portable/tests/whole_program/application_input/quick-game-vga-v1.txt": "4478b7806bd91b2ae6740e960d854d25d0b384c9c82ece6dcf06588d811cbc37",
+    "portable/tests/whole_program/application_input/tutorial-vga-v1.txt": "0684a8855b3d9bd38b15b87c996507c6b9b20efcd445a6fb6046eaa98265f99c"
+  },
+  "direct_runs": {
+    "v13_vga_quick_game": {
+      "schema": "simant-whole-source-main-startup-v1",
+      "passed": true,
+      "scope": "Original main through a presented startup frame; no completed NewGame or full gameplay claim",
+      "command": [
+        "D:\\Prog\\simant_recon\\build\\whole-application-v13\\simant-whole-sdl3.exe",
+        "--headless",
+        "--smoke-ms",
+        "30000",
+        "--frame",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\source-main-vga-quick-game-v4\\frame.bmp",
+        "--seed",
+        "1",
+        "/dV",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\quick-game-vga-v1.txt"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 30.656000000002678,
+      "inputs": {
+        "build/whole-application-v13/simant-whole-sdl3.exe": "4d9ae0f0129467b565b563da2af0c52bd93e4efb9aa4cb66d950c998ebcbe019",
+        "build/whole-application-v13/report.json": "869b5dad4d71996d2ca963133e2a306692cc50696c0a7e8f56aa1b8db4707d27",
+        "portable/tools/run_whole_startup.py": "c92b0b1deb32328eaa1e78b4a99cf92037402cab21549a50edfbba78f03b902a"
+      },
+      "original_assets_unchanged": true,
+      "runtime_asset_changes": {},
+      "frame_sha256": "b8acbe606f4152562e32f9336c2197870b916ea618f1efbf15c488ede764ecbf",
+      "original_outer_loop_count": 115,
+      "input_script": {
+        "path": "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\quick-game-vga-v1.txt",
+        "sha256": "4478b7806bd91b2ae6740e960d854d25d0b384c9c82ece6dcf06588d811cbc37"
+      }
+    },
+    "v13_ega_quick_game": {
+      "schema": "simant-whole-source-main-startup-v1",
+      "passed": true,
+      "scope": "Original main through a presented startup frame; no completed NewGame or full gameplay claim",
+      "command": [
+        "D:\\Prog\\simant_recon\\build\\whole-application-v13\\simant-whole-sdl3.exe",
+        "--headless",
+        "--smoke-ms",
+        "30000",
+        "--frame",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\source-main-ega-quick-game-v3\\frame.bmp",
+        "--seed",
+        "1",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\quick-game-v1.txt"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 30.5,
+      "inputs": {
+        "build/whole-application-v13/simant-whole-sdl3.exe": "4d9ae0f0129467b565b563da2af0c52bd93e4efb9aa4cb66d950c998ebcbe019",
+        "build/whole-application-v13/report.json": "869b5dad4d71996d2ca963133e2a306692cc50696c0a7e8f56aa1b8db4707d27",
+        "portable/tools/run_whole_startup.py": "c92b0b1deb32328eaa1e78b4a99cf92037402cab21549a50edfbba78f03b902a"
+      },
+      "original_assets_unchanged": true,
+      "runtime_asset_changes": {},
+      "frame_sha256": "70a96b7c18a34f5cc43f6282a4d13cc86cbbe1e960c8a1de502d0807f754651f",
+      "original_outer_loop_count": 115,
+      "input_script": {
+        "path": "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\quick-game-v1.txt",
+        "sha256": "12ede4d3ea3dc8137c055c3bc302bd871df87cfab2e8f624ec2c9fbf0ff89f79"
+      }
+    },
+    "v13_vga_full_game": {
+      "schema": "simant-whole-source-main-startup-v1",
+      "passed": true,
+      "scope": "Original main through a presented startup frame; no completed NewGame or full gameplay claim",
+      "command": [
+        "D:\\Prog\\simant_recon\\build\\whole-application-v13\\simant-whole-sdl3.exe",
+        "--headless",
+        "--smoke-ms",
+        "30000",
+        "--frame",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\source-main-vga-full-game-v1\\frame.bmp",
+        "--seed",
+        "1",
+        "/dV",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\full-game-vga-v1.txt"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 30.514999999999418,
+      "inputs": {
+        "build/whole-application-v13/simant-whole-sdl3.exe": "4d9ae0f0129467b565b563da2af0c52bd93e4efb9aa4cb66d950c998ebcbe019",
+        "build/whole-application-v13/report.json": "869b5dad4d71996d2ca963133e2a306692cc50696c0a7e8f56aa1b8db4707d27",
+        "portable/tools/run_whole_startup.py": "c92b0b1deb32328eaa1e78b4a99cf92037402cab21549a50edfbba78f03b902a"
+      },
+      "original_assets_unchanged": true,
+      "runtime_asset_changes": {},
+      "frame_sha256": "975d034f0ac53f2d73effa65886fb355ebc5b083df0641e392bc701c38f8c28a",
+      "original_outer_loop_count": 115,
+      "input_script": {
+        "path": "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\full-game-vga-v1.txt",
+        "sha256": "76cb0aa0dd78fe3ec01c2af74790df2f4b4b1cfb9e24b22e064396fe20f088fd"
+      }
+    },
+    "v14_vga_tutorial": {
+      "schema": "simant-whole-source-main-startup-v1",
+      "passed": true,
+      "scope": "Original main through a presented startup frame; no completed NewGame or full gameplay claim",
+      "command": [
+        "D:\\Prog\\simant_recon\\build\\whole-application-v14\\simant-whole-sdl3.exe",
+        "--headless",
+        "--smoke-ms",
+        "30000",
+        "--frame",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\source-main-vga-tutorial-v2\\frame.bmp",
+        "--seed",
+        "1",
+        "/dV",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\tutorial-vga-v1.txt"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 30.70300000000134,
+      "inputs": {
+        "build/whole-application-v14/simant-whole-sdl3.exe": "72bebfba969409c4be252f23682a6ba232e1a8508e795eb82e767c5557624ab3",
+        "build/whole-application-v14/report.json": "09130f4b9d32cd67d3dcd846b1d980eaa343ebcb308c568eb59e933977f87239",
+        "portable/tools/run_whole_startup.py": "c92b0b1deb32328eaa1e78b4a99cf92037402cab21549a50edfbba78f03b902a"
+      },
+      "original_assets_unchanged": true,
+      "runtime_asset_changes": {},
+      "frame_sha256": "f2c3faf71304bba50c63a8553382cc6628d232e4ce6706592e88f0f6c005f595",
+      "original_outer_loop_count": 24,
+      "input_script": {
+        "path": "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\tutorial-vga-v1.txt",
+        "sha256": "0684a8855b3d9bd38b15b87c996507c6b9b20efcd445a6fb6046eaa98265f99c"
+      }
+    },
+    "v14_file_menu_timeout": {
+      "schema": "simant-whole-source-main-startup-v1",
+      "passed": false,
+      "scope": "Original main through a presented startup frame; no completed NewGame or full gameplay claim",
+      "command": [
+        "D:\\Prog\\simant_recon\\build\\whole-application-v14\\simant-whole-sdl3.exe",
+        "--headless",
+        "--smoke-ms",
+        "19000",
+        "--frame",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\source-main-vga-full-file-menu-v2\\frame.bmp",
+        "--seed",
+        "1",
+        "/dV",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\full-game-file-menu-vga-v1.txt"
+      ],
+      "exit_code": null,
+      "timed_out": true,
+      "elapsed_seconds": 29.0,
+      "inputs": {
+        "build/whole-application-v14/simant-whole-sdl3.exe": "72bebfba969409c4be252f23682a6ba232e1a8508e795eb82e767c5557624ab3",
+        "build/whole-application-v14/report.json": "09130f4b9d32cd67d3dcd846b1d980eaa343ebcb308c568eb59e933977f87239",
+        "portable/tools/run_whole_startup.py": "c92b0b1deb32328eaa1e78b4a99cf92037402cab21549a50edfbba78f03b902a"
+      },
+      "original_assets_unchanged": true,
+      "runtime_asset_changes": {},
+      "frame_sha256": null,
+      "original_outer_loop_count": null,
+      "input_script": {
+        "path": "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\full-game-file-menu-vga-v1.txt",
+        "sha256": "c19f2010350bb08e36004bff834e947b510517f26fb0779446c4aa6e5492b879"
+      }
+    }
+  },
+  "repaired_boundaries": [
+    "Screen clip owner preserves the original second sentinel Rect, stopping source list walks.",
+    "Optional window parameters are supplied explicitly and checked against real resource axis references.",
+    "NewGame Tutorial fastcall arguments carry the zero proven by the original AX flow.",
+    "Extended keyboard return preserves the original MOV AH,8 semantics.",
+    "Tile aperture offsets are absolute; scratch blits retain unaligned x.",
+    "Source off-screen capture reads bounded plane backing; historical BIOS clear behavior remains qualified."
+  ],
+  "historical_validation": {
+    "passed": true,
+    "log": "build/workers/whole_program/historical-validation-application-v13-restored.txt",
+    "fresh_progress_reconciles_with_frozen": "Only generated date differs; exact frozen metadata retained"
+  },
+  "open_runtime_debt": [
+    "Window caption bars are blank; original string and draw path are being traced.",
+    "Underground map produces image data and draw callbacks but its visible area remains black.",
+    "F2 now enters the source menu path, which stalls past the bounded runner deadline; host servicing is under investigation.",
+    "Tutorial completion, game interaction, save/load and complete sound/UI coverage require end-to-end validation.",
+    "No whole-game framebuffer differential is asserted by this progress packet."
+  ],
+  "historical_oracle": "dos-semantic-oracle-v1; exact and behavior-exact evidence unchanged"
+}

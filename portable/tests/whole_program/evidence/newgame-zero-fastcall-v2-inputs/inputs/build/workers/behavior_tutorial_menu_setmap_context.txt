@@ -1,0 +1,100 @@
+SetMapPlane  root:015B:053C  linear 01AEC  size 279  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 015B: function 9/20; neighbours: SetMapPlaneLocation, GotoMapPoint, CenterAnt, GotoMyAnt
+  frame: {'frame': 'bp', 'locals': 8, 'stack_check': True}
+  053C  push bp
+  053D  mov bp, sp
+  053F  mov ax, 8
+  0542  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  0547  push si
+  0548  cmp word ptr [bp + 6], 0
+  054C  je 0x56e
+  054E  mov es, word ptr [0x7e32]          DS:7E32
+  0552  push word ptr es:[0xffa]
+  0557  mov es, word ptr [0x7e34]          DS:7E34
+  055B  push word ptr es:[0xfb6]
+  0560  sub ax, ax
+  0562  push ax
+  0563  push ax
+  0564  lcall 0x250, 0x6e                  -> InvalEuMap
+  0569  add sp, 8
+  056C  jmp 0x57e
+  056E  mov es, word ptr [0x7e2e]          DS:7E2E
+  0572  mov ax, word ptr es:[0x32e]
+  0576  mov es, word ptr [0x7e30]          DS:7E30
+  057A  mov word ptr es:[0x332], ax
+  057E  mov ax, word ptr [bp + 6]
+  0581  mov bx, 0x32e
+  0584  mov es, word ptr [0x7e2e]          DS:7E2E
+  0588  mov word ptr [bp - 8], bx
+  058B  mov word ptr [bp - 6], es
+  058E  mov word ptr es:[bx], ax
+  0591  dec ax
+  0592  jne 0x599
+  0594  mov ax, 0x80
+  0597  jmp 0x59c
+  0599  mov ax, 0x40
+  059C  mov es, word ptr [0x7e34]          DS:7E34
+  05A0  sub ax, word ptr es:[0xfb6]
+  05A5  mov es, word ptr [0x7e36]          DS:7E36
+  05A9  mov word ptr es:[0xf36], ax
+  05AD  les bx, ptr [bp - 8]
+  05B0  mov si, word ptr es:[bx]
+  05B3  shl si, 1
+  05B5  mov es, word ptr [0x7e3e]          DS:7E3E
+  05B9  push word ptr es:[si + 0x7c0]
+  05BE  push cs
+  05BF  call 0x1b8                         -> SetEditMode
+  05C2  pop bx
+  05C3  les bx, ptr [bp - 8]
+  05C6  mov ax, word ptr es:[bx]
+  05C9  or ax, ax
+  05CB  je 0x5d8
+  05CD  dec ax
+  05CE  je 0x5e7
+  05D0  dec ax
+  05D1  je 0x5f6
+  05D3  dec ax
+  05D4  je 0x605
+  05D6  jmp 0x618
+  05D8  mov es, word ptr [0x7e3a]          DS:7E3A
+  05DC  mov ax, word ptr es:[0x7bc]
+  05E0  mov dx, word ptr es:[0x7be]
+  05E5  jmp 0x612
+  05E7  mov es, word ptr [0x7e40]          DS:7E40
+  05EB  mov ax, word ptr es:[0x596]
+  05EF  mov dx, word ptr es:[0x598]
+  05F4  jmp 0x612
+  05F6  mov es, word ptr [0x7e42]          DS:7E42
+  05FA  mov ax, word ptr es:[0x6a6]
+  05FE  mov dx, word ptr es:[0x6a8]
+  0603  jmp 0x612
+  0605  mov es, word ptr [0x7e44]          DS:7E44
+  0609  mov ax, word ptr es:[0x72e]
+  060D  mov dx, word ptr es:[0x730]
+  0612  mov word ptr [bp - 4], ax
+  0615  mov word ptr [bp - 2], dx
+  0618  push word ptr [bp - 2]
+  061B  push word ptr [bp - 4]
+  061E  push word ptr [bp + 6]
+  0621  push cs
+  0622  call 0x3c6                         -> SetMapPlaneLocation
+  0625  add sp, 6
+  0628  les bx, ptr [bp - 8]
+  062B  cmp word ptr es:[bx], 0
+  062F  je 0x63e
+  0631  push word ptr [bp - 2]
+  0634  push word ptr [bp - 4]
+  0637  lcall 0x250, 0xfc4                 -> CenterEdit
+  063C  pop bx
+  063D  pop bx
+  063E  les bx, ptr [bp - 8]
+  0641  push word ptr es:[bx]
+  0644  push cs
+  0645  call 0x1d1                         -> SetMapModeAnt
+  0648  pop bx
+  0649  lcall 0x250, 0xe9d                 -> UpdateEdit
+  064E  pop si
+  064F  mov sp, bp
+  0651  pop bp
+  0652  retf

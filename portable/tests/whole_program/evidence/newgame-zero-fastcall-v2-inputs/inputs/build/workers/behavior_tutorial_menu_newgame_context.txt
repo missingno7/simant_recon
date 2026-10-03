@@ -1,0 +1,135 @@
+NewGame  S15:384C:03C6  linear 38886  size 385  extent DESCENT  region game_or_library
+  entry evidence: vector
+  module frame 384C: function 8/8; neighbours: o15_384C_0239, SetDefaultWindows
+  frame: {'frame': 'bp', 'locals': 2, 'stack_check': True}
+  03C6  push bp
+  03C7  mov bp, sp
+  03C9  mov ax, 2
+  03CC  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  03D1  push di
+  03D2  push si
+  03D3  mov es, word ptr [0x877a]          DS:877A
+  03D7  mov word ptr es:[0x2c2], 0
+  03DE  mov di, word ptr [bp + 6]
+  03E1  push di
+  03E2  lcall 0x2cff, 0x29fc               -> DoScenario (vector 29FC)
+  03E7  pop bx
+  03E8  mov si, ax
+  03EA  cmp si, 0x205
+  03EE  je 0x40b
+  03F0  cmp si, 0x207
+  03F4  jne 0x411
+  03F6  sub ax, ax
+  03F8  push ax
+  03F9  push ax
+  03FA  lcall 0x2cff, 0x2970               -> LoadGame (vector 2970)
+  03FF  pop bx
+  0400  pop bx
+  0401  or ax, ax
+  0403  je 0x3e1
+  0405  mov si, 1
+  0408  jmp 0x4f1
+  040B  mov ax, 0xffff
+  040E  jmp 0x541
+  0411  sub ax, 0x202
+  0414  je 0x422
+  0416  dec ax
+  0417  je 0x427
+  0419  dec ax
+  041A  je 0x42c
+  041C  dec ax
+  041D  dec ax
+  041E  je 0x431
+  0420  jmp 0x433
+  0422  mov si, 1
+  0425  jmp 0x433
+  0427  mov si, 2
+  042A  jmp 0x433
+  042C  mov si, 3
+  042F  jmp 0x433
+  0431  sub si, si
+  0433  or si, si
+  0435  jge 0x43a
+  0437  jmp 0x4f1
+  043A  cmp si, 4
+  043D  jl 0x442
+  043F  jmp 0x4f1
+  0442  mov es, word ptr [0x877e]          DS:877E
+  0446  mov word ptr es:[0xeac], si
+  044B  mov es, word ptr [0x8780]          DS:8780
+  044F  mov ax, word ptr es:[0x105e]
+  0453  mov word ptr [bp - 2], ax
+  0456  cmp ax, 0xa
+  0459  jne 0x462
+  045B  lcall 0x10f7, 0xbef                -> EndLifeTransferMode
+  0460  jmp 0x46d
+  0462  cmp word ptr [bp - 2], 0xb
+  0466  jne 0x46d
+  0468  lcall 0x10f7, 0xb8f                -> EndTargetMode
+  046D  mov ax, 1
+  0470  push ax
+  0471  lcall 0x2cff, 0x2812               -> SetDefaultWindPrompt (vector 2812)
+  0476  pop bx
+  0477  sub ax, ax
+  0479  push ax
+  047A  push ax
+  047B  lcall 0x250, 0x16fd                -> SetEditWinTitle
+  0480  pop bx
+  0481  pop bx
+  0482  mov es, word ptr [0x8782]          DS:8782
+  0486  mov word ptr es:[0x354], 1
+  048D  mov es, word ptr [0x8784]          DS:8784
+  0491  mov word ptr es:[0x7c8], 0
+  0498  lcall 0x2cff, 0x2952               -> RandYard (vector 2952)
+  049D  mov es, word ptr [0x8786]          DS:8786
+  04A1  push word ptr es:[0x48c]
+  04A6  mov ax, 0x2c20                     "MePLane=%d"
+  04A9  push ds
+  04AA  push ax
+  04AB  lcall 0x277d, 0xa                  -> WinPrintf
+  04B0  add sp, 6
+  04B3  mov es, word ptr [0x8786]          DS:8786
+  04B7  push word ptr es:[0x48c]
+  04BC  lcall 0x15b, 0x53c                 -> SetMapPlane
+  04C1  pop bx
+  04C2  mov es, word ptr [0x877e]          DS:877E
+  04C6  cmp word ptr es:[0xeac], 0
+  04CC  jne 0x4f1
+  04CE  mov es, word ptr [0x8788]          DS:8788
+  04D2  mov word ptr es:[0x7a4], 1
+  04D9  mov es, word ptr [0x878a]          DS:878A
+  04DD  mov word ptr es:[0x7a6], 0
+  04E4  or di, di
+  04E6  jne 0x4f1
+  04E8  sub ax, ax
+  04EA  push ax
+  04EB  lcall 0x20e8, 0x4b6                -> win_Open
+  04F0  pop bx
+  04F1  push cs
+  04F2  call 0x37f                         -> SetDefaultWindows
+  04F5  mov es, word ptr [0x8786]          DS:8786
+  04F9  push word ptr es:[0x48c]
+  04FE  lcall 0x15b, 0x53c                 -> SetMapPlane
+  0503  pop bx
+  0504  or si, si
+  0506  jne 0x516
+  0508  lcall 0x22bf, 0xa65                -> f_22BF_0A65
+  050D  or ax, ax
+  050F  jne 0x516
+  0511  lcall 0x2cff, 0x2a10               -> o26_39C7_0000 (vector 2A10)
+  0516  mov es, word ptr [0x878c]          DS:878C
+  051A  push word ptr es:[0x48a]
+  051F  mov es, word ptr [0x878e]          DS:878E
+  0523  push word ptr es:[0x47c]
+  0528  lcall 0x250, 0xfc4                 -> CenterEdit
+  052D  pop bx
+  052E  pop bx
+  052F  lcall 0x250, 0xe9d                 -> UpdateEdit
+  0534  mov es, word ptr [0x877a]          DS:877A
+  0538  mov word ptr es:[0x2c2], 0
+  053F  mov ax, si
+  0541  pop si
+  0542  pop di
+  0543  mov sp, bp
+  0545  pop bp
+  0546  retf
