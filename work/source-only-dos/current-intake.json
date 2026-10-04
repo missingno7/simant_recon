@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "ab24905",
+  "source_only_base_checkpoint": "5e4f9ba",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "2c1a6c9d559c38ededf024e897d1b8401abde7092dd2ccbd1dc1f3929e3ba82e",
-    "size": 5550943
+    "sha256": "d76cce230344499eafe07da756f93fbe344aa2a62766ee269ce95d59cf401fd0",
+    "size": 5909189
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "288 unresolved source symbols",
+    "283 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 156,
+  "compiled_translation_units": 159,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 66,
-  "unresolved_symbols": 288,
+  "unresolved_symbols": 283,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 283,
+    "reviewed FAR_BSS definition and compatible consumer views": 278,
     "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 189,
@@ -449,6 +449,28 @@
     "path": "work/source-only-dos/serialized-state-admission-v18.md",
     "sha256": "14422bd6eb31f9523a6b69ba71e77e8bd3205d83ca32f91cbb7e2b913e6a845f",
     "size": 3471
+  },
+  "v19_owner_bindings": [
+    {
+      "path": "work/source-only-dos/saved-sound-state-bindings-v1.json",
+      "sha256": "14258becadfcb896f6260d76b32a6222e679bda8dafbfbb6d46bd8a9b9298a02",
+      "size": 28682
+    },
+    {
+      "path": "work/source-only-dos/control-flag-words-bindings-v1.json",
+      "sha256": "4273ecd3d74bec551395eac129c118a6535b1ec79e8bb53379d840f9cdefea31",
+      "size": 34212
+    },
+    {
+      "path": "work/source-only-dos/count-ants-transition-word-bindings-v1.json",
+      "sha256": "721aaff9757414fa95bd962530766c5e2e79538eb3f34bf196dabdd54a213959",
+      "size": 28197
+    }
+  ],
+  "storage_admission_v19": {
+    "path": "work/source-only-dos/storage-admission-v19.md",
+    "sha256": "907dcae7422ae6fdb36b67e5710cc824f6bce6e18ed907a4f4a19f8616fccb96",
+    "size": 3450
   },
   "s01_pattern_view_bindings": {
     "path": "work/source-only-dos/s01-pattern-4220-bindings-v1.json",
@@ -3368,6 +3390,104 @@
           "length": 12,
           "count": 6,
           "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:saved-sound-state",
+      "source": {
+        "path": "work\\source-only-dos\\saved-sound-state-v19\\provider.c",
+        "sha256": "9241c7b8ace381c4226a38f5f109a0d518ef42e7b4de99ed6425aa7346e10602",
+        "size": 181
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\SNDSTATE.OBJ",
+        "sha256": "3a48ef16c688e1c8eb541363bd6c684e38343dd1e8b62ecad99cf78a8017bded",
+        "size": 213
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_01F0",
+          "kind": "far",
+          "length": 14,
+          "count": 7,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:control-flag-words",
+      "source": {
+        "path": "work\\source-only-dos\\control-flag-words-v18\\provider.c",
+        "sha256": "8918adcd4f2cd79e5ef4bb511b314991ebf3f5ad823a498b6094a433e152c5e5",
+        "size": 145
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\CTRLFLAG.OBJ",
+        "sha256": "43a4247b0f9c45166735c883219fdf7a5e2f2850982c8c8af612baa128550aa1",
+        "size": 249
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0468",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0370",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_024E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:count-ants-transition-word",
+      "source": {
+        "path": "work\\source-only-dos\\count-ants-transition-word-v19\\provider.c",
+        "sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
+        "size": 205
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\ANTLATCH.OBJ",
+        "sha256": "06d3a9c45120f6d542b2815e1785e67b447084a599fff13c09d59a6d149389d7",
+        "size": 213
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0354",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
         }
       ],
       "publics": [],
@@ -7865,8 +7985,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "26b287754f0585392e4c210faf47a5cfd73df50338f71853be631ee7f10d2efa",
-      "size": 63580
+      "sha256": "c370cc117ee161a5e82a3db2abd6df070443566ad5a6e493677c6e1e13b9e23c",
+      "size": 63844
     },
     {
       "path": "tools\\compiler.py",
@@ -7890,8 +8010,8 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "9450a189c0666eb60d823301a2fa3fc7afe89f267194c7a66d40aa31abf711de",
-      "size": 96154
+      "sha256": "b9cd81c724b7ce41873415b5dce4fbc95cc7a8a15c225c1ac99626e7955a9434",
+      "size": 101225
     },
     {
       "path": "tools\\farbss.py",
@@ -7906,22 +8026,22 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v18.log",
-      "sha256": "a01b9166feb248ffdc9aa2aba28e6990b6941c3bf93f934e156d526e5229e755",
-      "size": 5141
+      "path": "build/source-only-dos-run-v19.log",
+      "sha256": "d69a9feac148fab5cc3fad68bcd90d19be2c7642601121ae08198fbe43cc833b",
+      "size": 5295
     },
     {
-      "path": "build/source-only-dos-tests-v18.log",
-      "sha256": "c6acc334b82e7903d24a6ea81725a0ee8ef97c081ea1a5506b8661fe652d1313",
-      "size": 30338
+      "path": "build/source-only-dos-tests-v19.log",
+      "sha256": "26ba7cbe83f6a8387c7f98aaa652a97c3eae1e122af1d20bd78c6c818fd9c6ab",
+      "size": 25564
     },
     {
-      "path": "build/source-only-dos-validation-v18.log",
+      "path": "build/source-only-dos-validation-v19.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "44 targeted tests included in 358 repository tests PASS (2 skips)",
+  "source_only_tests": "45 targeted tests included in 359 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

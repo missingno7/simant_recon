@@ -1,0 +1,240 @@
+{
+  "schema": "simant-dos-mono-signedness-address-range-review-v19",
+  "classification": "UNRESOLVED",
+  "root_reviewed": false,
+  "scope": "Bounded signedness and maximum-index review only. No storage allocation, owner/source promotion, SS/DGROUP-frame proof, or resource gate closure.",
+  "evidence_pins": {
+    "s15_source": {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116,
+      "relevant_lines": {
+        "Handle_typedef": 5,
+        "second_object_count": 58,
+        "destination": 60
+      }
+    },
+    "s01_source": {
+      "path": "src/S01/m328E.asm",
+      "sha256": "610b108145bbf912a6c1b11b454eaf54a7c6053624db8b7de8f2c672dce34351",
+      "size": 4615
+    },
+    "toolchain": {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "profile": "msc600ax",
+      "product": "Microsoft C 6.00AX (DOS-extended CL /EM: C1L, C2L, C3L), archive.org Microsoft_c_60ax disk 8",
+      "flags": [
+        "/AL",
+        "/Os"
+      ],
+      "required_flags": [
+        "/EM"
+      ],
+      "cl_sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "c1l_sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "c2l_sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "c3l_sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553"
+    },
+    "canonical_s15_diagnostic_compile": {
+      "source": "src/S15/m384C.c",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fa",
+        "/EM"
+      ],
+      "assembly": "build/workers/dos_mono_count_review_v19/cc/c2gmfb71h/S15CAN.ASM",
+      "assembly_sha256": "b40eb63e4663eb8aef3ef885eedf30808b2a4513ad205844db76030afd6e39f3",
+      "object": "build/workers/dos_mono_count_review_v19/cc/c2gmfb71h/S15CAN.OBJ",
+      "object_sha256": "067f480178b47addf61d0180953e1f4fd12a8246003fc2d2b94b0f707343bc30",
+      "staged_source_sha256": "c1c88003a08891610164d55b84069d09eec72edcb6e88300e19600e4efa68dd9",
+      "run_bat": "build/workers/dos_mono_count_review_v19/cc/c2gmfb71h/RUN.BAT"
+    },
+    "plain_char_control_compile": {
+      "source": "build/workers/dos_mono_count_review_v19/plainchar-sign-extension-probe-v19.c",
+      "source_sha256": "bf859d9ad5900c5a997ddf5c9bbc6761303f71d81dfe874e5d32e3fd05e4e5f2",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fa",
+        "/EM"
+      ],
+      "assembly": "build/workers/dos_mono_count_review_v19/cc/cvwt8yw7a/CHARTEST.ASM",
+      "assembly_sha256": "dce658fd0fd386c233ad1ecc284af52ec856231eeccdf15fdddbcaa09cfd7e61",
+      "object": "build/workers/dos_mono_count_review_v19/cc/cvwt8yw7a/CHARTEST.OBJ",
+      "object_sha256": "88d063f99487dc23fce310328faae4984029c6cdb620212ace1b834b39c88be8",
+      "staged_source_sha256": "fa2940ccf4baedd32a785a6d089fba8a05575e8b17fbcbd5cbf35136d9906732",
+      "run_bat": "build/workers/dos_mono_count_review_v19/cc/cvwt8yw7a/RUN.BAT"
+    },
+    "prior_resource_gap_review": {
+      "path": "work/source-only-dos/monochrome-pattern-owner-gap-v1.md",
+      "sha256": "4cd9e5a1182ff097d3fb2e8ed1dcd3bf31b29e398ca0986af74fce20e1cec38c",
+      "size": 5263,
+      "use": "Existing review documents absence of supplied object 0x271A kind 0x16; used only to retain the resource-availability limitation."
+    }
+  },
+  "producer": {
+    "site": "src/S15/m384C.c:58",
+    "declared_handle_type": "typedef char far * far *Handle;",
+    "expression": "n = (*h)[1] << 3;",
+    "plain_char_target_result": "For this pinned MSC 6.00AX target and flags, plain char is sign-extended: generated LoadMonoPats assembly loads the header byte to AL, executes CBW, then SHL AX,CL with CL=3. The plain-char fixture emits CBW; signed-char control also emits CBW; unsigned-char control clears AH with SUB AH,AH.",
+    "loop_result": "The generated LoadMonoPats loop initializes i=0 and compares i against n with signed JL. For a header byte 0x00..0x7F, n=8*v in [0,1016], so the copy writes exactly offsets [0,8*v), at most 1016 bytes (last byte offset 1015). For 0x80..0xFF, machine sign extension followed by the 16-bit shift yields -1024..-8; the emitted signed loop comparison is false at i=0, so the target instruction sequence copies zero bytes.",
+    "source_language_caveat": "Left-shifting a negative promoted signed char has no portable C guarantee; the high-bit case above is an inference from the pinned compiler-emitted 8086 instruction sequence, not a source-level contract.",
+    "resource_bound": "The requested (object 0x271A, kind 0x16) header/payload is absent from the available supplied resource set per the existing monochrome owner-gap evidence; therefore the header byte domain actually produced at runtime is unknown. The conditional compiler bound does not close that gate.",
+    "assembly_pin": "S15CAN.ASM lines 213-220 show byte load/CBW/shift; lines 229-252 show zero-initialized loop index and signed JL against n."
+  },
+  "consumers": [
+    {
+      "function": "o01_328E_000A",
+      "source_lines": {
+        "entry": 16,
+        "selector": 22,
+        "base": 24,
+        "loop_count": 27,
+        "row_loads": [
+          29,
+          48
+        ],
+        "lane_max": 3
+      },
+      "selector_mask": "parameter & 7",
+      "selector_range": [
+        0,
+        7
+      ],
+      "row_value_source": "xor ah,ah; lodsb; shift AX left 3",
+      "row_value_range": [
+        0,
+        255
+      ],
+      "source_bytes_read": 128,
+      "max_displacement": 2050,
+      "max_displacement_hex": "0x0802",
+      "ss_offset_range": [
+        "0x8ED8",
+        "0x96DA"
+      ]
+    },
+    {
+      "function": "o01_328E_009D",
+      "source_lines": {
+        "entry": 76,
+        "selector": 82,
+        "base": 84,
+        "loop_count": 87,
+        "row_loads": [
+          89,
+          108
+        ],
+        "lane_max": 3
+      },
+      "selector_mask": "parameter & 7",
+      "selector_range": [
+        0,
+        7
+      ],
+      "row_value_source": "xor ah,ah; lodsb; shift AX left 3",
+      "row_value_range": [
+        0,
+        255
+      ],
+      "source_bytes_read": 64,
+      "max_displacement": 2050,
+      "max_displacement_hex": "0x0802",
+      "ss_offset_range": [
+        "0x8ED8",
+        "0x96DA"
+      ]
+    },
+    {
+      "function": "o01_328E_012C",
+      "source_lines": {
+        "entry": 136,
+        "selector": 142,
+        "base": 144,
+        "loop_count": 147,
+        "row_loads": [
+          149,
+          162,
+          175,
+          188
+        ],
+        "lane_max": 1
+      },
+      "selector_mask": "parameter & 7",
+      "selector_range": [
+        0,
+        7
+      ],
+      "row_value_source": "xor ah,ah; lodsb; shift AX left 3",
+      "row_value_range": [
+        0,
+        255
+      ],
+      "source_bytes_read": 128,
+      "max_displacement": 2048,
+      "max_displacement_hex": "0x0800",
+      "ss_offset_range": [
+        "0x8ED8",
+        "0x96D8"
+      ]
+    },
+    {
+      "function": "o01_328E_01D5",
+      "source_lines": {
+        "entry": 213,
+        "selector": 219,
+        "base": 221,
+        "loop_count": 224,
+        "row_loads": [
+          226,
+          239,
+          252,
+          265
+        ],
+        "lane_max": 1
+      },
+      "selector_mask": "parameter & 7",
+      "selector_range": [
+        0,
+        7
+      ],
+      "row_value_source": "xor ah,ah; lodsb; shift AX left 3",
+      "row_value_range": [
+        0,
+        255
+      ],
+      "source_bytes_read": 64,
+      "max_displacement": 2048,
+      "max_displacement_hex": "0x0800",
+      "ss_offset_range": [
+        "0x8ED8",
+        "0x96D8"
+      ]
+    }
+  ],
+  "combined_conclusion": {
+    "consumer_possible_index_range": "S01 source bytes are zero-extended before multiplying by 8; byte values 0..255 and selector values 0..7 permit per-read displacements up to 0x0802 (three-lane routines) and 0x0800 (one-lane routines).",
+    "producer_vs_consumer": "The maximum positive producer copy from a nonnegative signed-char header is 1016 bytes, while S01 arithmetic permits byte reads through displacement 2050/2048. No evidence here bounds the row byte values or proves all reads covered by the producer copy.",
+    "unresolved_questions": [
+      "actual runtime header value and payload extent for object 0x271A kind 0x16",
+      "source owner/extent for g_8ED8",
+      "whether SS in all four S01 sites denotes the intended DGROUP storage frame",
+      "caller/source constraints, if any, on the zero-extended row selectors"
+    ],
+    "not_claimed": [
+      "no allocation or provider proposal",
+      "no fixed placement or adjacency claim",
+      "no SS/DGROUP frame closure",
+      "no resource-range closure",
+      "no canonical, production, admission, or Git changes"
+    ]
+  }
+}

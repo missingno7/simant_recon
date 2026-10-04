@@ -8,11 +8,11 @@ reviewed behavioral bodies, followed by DOSBox-X integration checks and human
 acceptance. Earlier historical-link and SDL3 next actions below are retained
 research history and do not supersede this priority.
 
-**Current SOURCE_ONLY_DOS checkpoint:** the strict static audit covers all 29
+**Current SOURCE_ONLY_DOS checkpoint (v19, 2026-10-04):** the strict static audit covers all 29
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The source-only build compiles 127 canonical TUs plus sixteen data-only
+unresolved. The v19 source-only build compiles 127 canonical TUs plus 32 data-only
 providers. The seven-slot input queue, 48 far word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
@@ -23,8 +23,11 @@ source-owned. The paired `g_5A9C` SEG now targets DGROUP, with whole-object and
 shifted-group controls; its data remains unresolved. Six spider control words,
 five Point objects, four 124-byte database records and four signed handle words
 also have source owners. The two database returning-Punt layout gates remain open.
-There are 353 missing data imports (347 FAR_BSS and six
-storage/reachability cases), 79 functional data-disposition bytes (113 historical bytes) and an open wider address/
+Serialized swarm buffers and population vectors now have complete saved-span
+owners; another S01 pattern read binds symbolically to its existing bank. A
+12-byte FAR_DATA paragraph gap is discharged as linker fill, with no added object.
+There are 283 missing data imports (278 FAR_BSS and five
+storage/reachability cases), 66 functional data-disposition bytes (113 historical bytes) and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is
 `work/source-only-dos/current-intake.json`; exact canonical ownership is unchanged.

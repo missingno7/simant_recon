@@ -613,13 +613,15 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V15_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V17_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V18_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V19_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
             interiors = [(n, s['off'] - anchor['off']) for n, s in symbols['data'].items()
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
-            reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS, **V18_STORAGE_ANCHORS}
+            reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -1463,3 +1465,80 @@ V18_STORAGE_CONTRACTS = {
 def require_v18_storage_contracts(report, profile, tool):
     _require_reviewed_storage_contracts(report, profile, tool, V18_STORAGE_CONTRACTS)
     _require_clean_owner_maps(report, profile, V18_STORAGE_CONTRACTS)
+
+
+PROVIDER_SPECS['source-owned:saved-sound-state'] = ('SNDSTATE', None,
+    (('_fd_50F6_01F0', 14),), 'int far fd_50F6_01F0[7];')
+PROVIDER_SPECS['source-owned:control-flag-words'] = ('CTRLFLAG', None,
+    (('_fd_50F6_0468', 2), ('_fd_50F6_0370', 2), ('_fd_50F6_024E', 2)),
+    'int far fd_50F6_0468; int far fd_50F6_0370; int far fd_50F6_024E;')
+PROVIDER_SPECS['source-owned:count-ants-transition-word'] = ('ANTLATCH', None,
+    (('_fd_50F6_0354', 2),), 'int far fd_50F6_0354;')
+FAR_PROVIDER_MODULES.update({'source-owned:saved-sound-state', 'source-owned:control-flag-words',
+                            'source-owned:count-ants-transition-word'})
+FAR_PROVIDER_WORD_ARRAYS['source-owned:saved-sound-state'] = {'_fd_50F6_01F0'}
+V19_STORAGE_ANCHORS = {
+    '_fd_50F6_01F0': (0x01F0, ('fd_50F6_01F0',)),
+    '_fd_50F6_0468': (0x0468, ('fd_50F6_0468',)),
+    '_fd_50F6_0370': (0x0370, ('fd_50F6_0370',)),
+    '_fd_50F6_024E': (0x024E, ('fd_50F6_024E',)),
+    '_fd_50F6_0354': (0x0354, ('fd_50F6_0354',)),
+}
+V19_STORAGE_CONTRACTS = {
+    'source-owned:saved-sound-state': ('saved_sound_state_contract', {
+        'far_bss_zero_at_main': 'PASS', 'initialized_nonzero_control': 'FAIL',
+        # These measure rejected shapes; their in-bounds zero reads do pass.
+        'wrong_width_control': 'PASS', 'short_extent_control': 'PASS'}),
+    'source-owned:control-flag-words': ('control_flag_words_contract', {
+        'positive': 'PASS',
+        'wrong_type': 'NEGATIVE: wrong_type unsigned view is 65535\nPROGRAM_NONZERO',
+        'wrong_extent': 'NEGATIVE: wrong_extent one-byte word overwrote guard\nPROGRAM_NONZERO',
+        'wrong_base': 'FAIL SaveRec2 address\nPROGRAM_NONZERO'}),
+    'source-owned:count-ants-transition-word': ('count_ants_transition_word_contract', {
+        'typed_word': 'PASS_TYPED_WORD', 'saverec_byte': 'PASS_SAVEREC_BYTE',
+        'wrong_width_long_owner': 'WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED',
+        'wrong_signedness_unsigned_view': 'WRONG_UNSIGNED_VIEW_DETECTED',
+        'initialized_nonzero_owner': 'INITIALIZED_OWNER_DETECTED',
+        'wrong_alias_base_plus_two': 'SHIFTED_ALIAS_BASE_DETECTED'}),
+}
+
+
+def require_v19_storage_contracts(report, profile, tool):
+    _require_reviewed_storage_contracts(report, profile, tool, V19_STORAGE_CONTRACTS)
+    _require_clean_owner_maps(report, profile, V19_STORAGE_CONTRACTS)
+    modules = {r['module'] for r in report['translation_units']}
+    if 'source-owned:saved-sound-state' in modules:
+        contract = report.get('saved_sound_state_contract', {})
+        shape = contract.get('candidate_source_contract', {})
+        wanted = lambda count, width: [{'name': '_fd_50F6_01F0', 'kind': 'far',
+            'count': count, 'element_size': width, 'length': count * width}]
+        controls = contract.get('controls', {})
+        if (shape.get('owner_comdef') != wanted(7, 2)
+                or shape.get('wrong_width_comdef') != wanted(7, 4)
+                or shape.get('short_extent_comdef') != wanted(6, 2)
+                or not shape.get('nonzero_control_segments')
+                or controls != dict.fromkeys(('initialized_nonzero_detected',
+                    'wrong_width_shape_rejected', 'short_extent_shape_rejected',
+                    'all_maps_have_clean_required_publics_and_separate_data_alias'), True)):
+            raise ValueError('saved sound state lacks rejected compiler shapes')
+        for case in contract['cases']:
+            if case['linker'] != profile:
+                continue
+            layout = case.get('far_bss_layout', {})
+            length = {'far_bss_zero_at_main': 14, 'wrong_width_control': 28,
+                      'short_extent_control': 12}.get(case['case'])
+            if (set(layout.get('required_publics', {})) != {'_fd_50F6_01F0', '_fd_55B3_74FE', '_main'}
+                    or length is not None and (layout.get('owner_in_far_bss') is not True
+                        or layout.get('owner_far_bss_region_length') != length)
+                    or case.get('dosbox_exit') != 0):
+                raise ValueError('saved sound state lacks actual startup/alias/extent controls')
+    if 'source-owned:control-flag-words' in modules:
+        controls = report.get('control_flag_words_contract', {}).get('compiler_negative_controls', [])
+        if (len(controls) != 3 or not all(r.get('detected') is True for r in controls)
+                or communal_key(controls[0].get('observed', {})) != ('_fd_50F6_024E', 'far', 1, 1, 1)
+                or communal_key(controls[1].get('observed', {})) != ('_fd_50F6_0370', 'far', 4, 1, 4)
+                or controls[2].get('still_communal') is not False
+                or controls[2].get('public', {}).get('name') != '_fd_50F6_0468'
+                or controls[2].get('segment', {}).get('class') != 'FAR_DATA'
+                or controls[2].get('segment', {}).get('length') != 2):
+            raise ValueError('control flag words lack rejected compiler shapes')

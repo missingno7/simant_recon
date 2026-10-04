@@ -18,6 +18,72 @@ import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_v19_storage_rejects_wrong_shapes_and_incomplete_control_receipts(self):
+        worker=ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report={'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _,symbols=dos.prepare(Path(directory),report)
+            rows=[r for r in report['translation_units'] if r['module'] in bindings.V19_STORAGE_CONTRACTS]
+            self.assertEqual(len(rows),3)
+            self.assertEqual(sum(c['length'] for r in rows for c in r['storage_provider']['communals']),22)
+            for row in rows:
+                provider=row['storage_provider']
+                source=(ROOT/row['source']['path']).read_text(encoding='ascii')
+                def compile(text):
+                    result=compiler.compile_c(text,row['profile'],row['flags'],basename=row['basename'])
+                    self.assertTrue(result.ok,result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(source,provider,symbols)
+                self.assertEqual(bindings.verify_provider(compile(source),provider)['status'],'PASS')
+                # A scalar's wider allocation and an array's identical-byte,
+                # wrong-element allocation cannot replace their recovered types.
+                wrong=(source.replace('int far','unsigned char far').replace('[7]','[14]')
+                       if row['module'].endswith('saved-sound-state') else source.replace('int far','long far'))
+                with self.assertRaises(ValueError): bindings.verify_provider(compile(wrong),provider)
+                with self.assertRaises(ValueError): bindings.review_provider_source(wrong,provider,symbols)
+                unsigned=source.replace('int far','unsigned int far')
+                # Signedness is invisible in OMF, so source and runtime evidence
+                # must enforce it rather than claiming a size check does so.
+                self.assertEqual(bindings.verify_provider(compile(unsigned),provider)['status'],'PASS')
+                with self.assertRaises(ValueError): bindings.review_provider_source(unsigned,provider,symbols)
+                registry=json.loads(json.dumps(symbols)); name=provider['communals'][0]['name'][1:]
+                registry['data']['unreviewed_interior']=dict(registry['data'][name],off=registry['data'][name]['off']+1)
+                with self.assertRaises(ValueError): bindings.review_provider_source(source,provider,registry)
+            report['runtime_components']=[]
+            tc=compiler.toolchain()
+            for profile in ('rtlink400','rtlink610'):
+                bindings.require_v19_storage_contracts(report,profile,tc['linkers'][profile])
+            for module,(key,required) in bindings.V19_STORAGE_CONTRACTS.items():
+                for change in ('root','missing','duplicate','result','map','warning','tool'):
+                    wrong=json.loads(json.dumps(report)); contract=wrong[key]
+                    index=next(i for i,r in enumerate(contract['cases']) if r['linker']=='rtlink400')
+                    if change=='root': contract['root_reviewed']=False
+                    elif change=='missing': contract['cases'].pop(index)
+                    elif change=='duplicate': contract['cases'].append(dict(contract['cases'][index]))
+                    elif change=='result': contract['cases'][index]['actual']='UNREVIEWED'
+                    elif change=='map': contract['cases'][index]['owner_publics_found_in_map'].pop()
+                    elif change=='warning': contract['cases'][index]['linker_diagnostics']=['Unresolved external']
+                    else:
+                        for identity in contract['inputs']: identity['sha256']='0'*64
+                    with self.assertRaisesRegex(ValueError,'startup contract'):
+                        bindings.require_v19_storage_contracts(wrong,'rtlink400',tc['linkers']['rtlink400'])
+            for change in ('short','width','missing_shape','measurement','alias','zero_relabel'):
+                wrong=json.loads(json.dumps(report)); contract=wrong['saved_sound_state_contract']
+                if change=='short': contract['candidate_source_contract']['short_extent_comdef'][0]['length']=14
+                elif change=='width': contract['candidate_source_contract']['wrong_width_comdef'][0]['element_size']=2
+                elif change=='missing_shape': contract['controls'].pop('short_extent_shape_rejected')
+                else:
+                    case=next(r for r in contract['cases'] if r['linker']=='rtlink400' and r['case']=='short_extent_control')
+                    if change=='measurement': case['far_bss_layout']['owner_far_bss_region_length']=14
+                    elif change=='alias': case['far_bss_layout']['required_publics'].pop('_fd_55B3_74FE')
+                    else: case['actual']='FAIL'
+                with self.assertRaises(ValueError): bindings.require_v19_storage_contracts(wrong,'rtlink400',tc['linkers']['rtlink400'])
+            wrong=json.loads(json.dumps(report))
+            wrong['control_flag_words_contract']['compiler_negative_controls'][1]['observed']['length']=2
+            with self.assertRaisesRegex(ValueError,'rejected compiler shapes'):
+                bindings.require_v19_storage_contracts(wrong,'rtlink400',tc['linkers']['rtlink400'])
+
     def test_s01_pattern_view_adds_only_the_closed_fixup_in_alternate_output(self):
         worker=ROOT/'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True,exist_ok=True)

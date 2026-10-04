@@ -216,6 +216,9 @@ def prepare(out, report):
                      'terrain-state-words-bindings-v1.json',
                      'swarm-serialized-buffers-bindings-v1.json',
                      'population-work-arrays-bindings-v1.json',
+                     'saved-sound-state-bindings-v1.json',
+                     'control-flag-words-bindings-v1.json',
+                     'count-ants-transition-word-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -813,6 +816,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v15_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v17_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v18_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v19_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)

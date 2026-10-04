@@ -1,0 +1,3011 @@
+{
+  "compiler_controls": {
+    "wrong_width": {
+      "source": {
+        "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/LONGV19.c",
+        "sha256": "dfcf23b60b193ee2058f6d1431f94935da8d1a9ad24749d08ac19f644bd273b8",
+        "size": 23
+      },
+      "omf_communal": [
+        {
+          "name": "_fd_50F6_0354",
+          "kind": "far",
+          "type_index": 130,
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "expected_length": 4,
+      "measured_length": 4
+    },
+    "wrong_signedness": {
+      "source": {
+        "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/UNSGV19.c",
+        "sha256": "65d6a709f65dfe6ec94d3f3e44fe0a7157653b6b55326a23eb3972c9eacdef03",
+        "size": 31
+      },
+      "omf_communal": [
+        {
+          "name": "_fd_50F6_0354",
+          "kind": "far",
+          "type_index": 133,
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "omf_shape_matches_signed_int": true,
+      "semantic_contrast": "unsigned consumer writes -1 and sees 65535 > 32767; the source graph's signed int view is the correct signed-word contract"
+    },
+    "initialized_owner": {
+      "source": {
+        "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/INITY19.c",
+        "sha256": "571630d51b261f8f4011e0290ce1b12e67bf09d5be98c667fc80bb3d5ad22173",
+        "size": 26
+      },
+      "target_communal_absent": true,
+      "target_initialized_public_present": true
+    },
+    "alias_base": {
+      "exact_alias_positive": "typed_word case binds ProbeAlias exactly to candidate base",
+      "wrong_alias_negative": "ProbeAlias = candidate + 2 is detected by far-pointer comparison"
+    }
+  },
+  "schema": "simant-dos-reviewed-storage-contract-v19",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "module": "source-owned:count-ants-transition-word",
+  "communals": [
+    {
+      "name": "_fd_50F6_0354",
+      "kind": "far",
+      "length": 2,
+      "count": 2,
+      "element_size": 1
+    }
+  ],
+  "required_cases": {
+    "typed_word": "PASS_TYPED_WORD",
+    "saverec_byte": "PASS_SAVEREC_BYTE",
+    "wrong_width_long_owner": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+    "wrong_signedness_unsigned_view": "WRONG_UNSIGNED_VIEW_DETECTED",
+    "initialized_nonzero_owner": "INITIALIZED_OWNER_DETECTED",
+    "wrong_alias_base_plus_two": "SHIFTED_ALIAS_BASE_DETECTED"
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_word",
+      "expected_output": "PASS_TYPED_WORD",
+      "actual_output": "PASS_TYPED_WORD",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [
+        "DEFINE _ProbeAlias = _fd_50F6_0354"
+      ],
+      "map_rows": [
+        " 01E8:0000  Res  _fd_50F6_0354",
+        " 01E8:0000  Res  _ProbeAlias",
+        " 01E8:0000  Res  _fd_50F6_0354",
+        " 01E8:0000  Res  _ProbeAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _ProbeAlias = _fd_50F6_0354\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/CRT.OBJ",
+          "sha256": "20f1272d047bd6c1f23b1bf09550289ae472b7c8c25bc7780494a296ed646c00",
+          "size": 801
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/dosbox.conf",
+          "sha256": "d7b5fd96e5d122b3e84a3a60065a7244e2aad4cf7e0cab64776eac64d45f9e59",
+          "size": 457
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/LINK.LOG",
+          "sha256": "56736de5ed5dc9b4b9ee82fab309c252a94779541cbdcba83fadb079f51c418c",
+          "size": 532
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/PROBE.EXE",
+          "sha256": "39d1e9be80057bf64ffa542c6c1d8d70946ffc9ac60a18a5606b03e0f0219203",
+          "size": 9415
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/PROBE.LNK",
+          "sha256": "2f2f7d3889fc980c5092b174174ebef793490eb97f821e61c2f33b5963ea02b0",
+          "size": 153
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/PROBE.MAP",
+          "sha256": "9ac89fc2a7f9d0f3ab08e8067c195c90a3f812aca832e3adb52a3c42800af652",
+          "size": 11730
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/RUN.LOG",
+          "sha256": "dc33cd21835636036e90118a26f024b6df4562248f833632bef75da8ec3081cf",
+          "size": 17
+        }
+      ],
+      "expected": "PASS_TYPED_WORD",
+      "actual": "PASS_TYPED_WORD",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "saverec_byte",
+      "expected_output": "PASS_SAVEREC_BYTE",
+      "actual_output": "PASS_SAVEREC_BYTE",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [],
+      "map_rows": [
+        " 01EE:0000  Res  _fd_50F6_0354",
+        " 01EE:0000  Res  _fd_50F6_0354"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/CRT.OBJ",
+          "sha256": "7b5c3d1ec3b5beda3dc85ab1d40ab98fe95d3e49fbd311a2ea115f779cbb0787",
+          "size": 1073
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/dosbox.conf",
+          "sha256": "49d2f950530831b9e54332b651e0cf4f183e4d1378508ef5389cf4f077c99596",
+          "size": 459
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/LINK.LOG",
+          "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+          "size": 493
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/PROBE.EXE",
+          "sha256": "7fc8d8d6fe05647cf0bc32ff0aec00c96b2ec5a3d13c5d661195afc06a44998e",
+          "size": 9555
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/PROBE.LNK",
+          "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+          "size": 117
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/PROBE.MAP",
+          "sha256": "8b016e4e56fcdcd950d0e499042b21d1848a70915330f3ede649c59b9e5b58f6",
+          "size": 11770
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/RUN.LOG",
+          "sha256": "3def41dab9ae948ac4c6d3fbcb59d932358b794665996a9e4a2288e5d7ab1d5a",
+          "size": 19
+        }
+      ],
+      "expected": "PASS_SAVEREC_BYTE",
+      "actual": "PASS_SAVEREC_BYTE",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_width_long_owner",
+      "expected_output": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "actual_output": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [
+        "DEFINE _ProbeUpperWord = _fd_50F6_0354 + 2",
+        "DEFINE _ProbeWhole = _fd_50F6_0354"
+      ],
+      "map_rows": [
+        " 01E8:0000  Res  _fd_50F6_0354",
+        " 01E8:0002  Res  _ProbeUpperWord",
+        " 01E8:0000  Res  _ProbeWhole",
+        " 01E8:0000  Res  _fd_50F6_0354",
+        " 01E8:0000  Res  _ProbeWhole",
+        " 01E8:0002  Res  _ProbeUpperWord"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _ProbeUpperWord = _fd_50F6_0354 + 2\n=> DEFINE _ProbeWhole = _fd_50F6_0354\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/CRT.OBJ",
+          "sha256": "cc9059e126ba76de13ac17d5338bcd38cf5dfe8555b94298b728f9dcc94087ec",
+          "size": 839
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/dosbox.conf",
+          "sha256": "1989d0d846a663215d60660ed06f26a51bcb432dfa288e5fd120d9ca14b553c4",
+          "size": 469
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/LINK.LOG",
+          "sha256": "82bfa917a088396cdd229cc517237b5008fe6df76c23fbeab5b42cdd3a71cfda",
+          "size": 579
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/OWNER.OBJ",
+          "sha256": "4b8f8cf3ba10949cd26ea6badef1d5ef1e3bd57fbeb375f3b3230fd206c72097",
+          "size": 306
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/PROBE.EXE",
+          "sha256": "84b9715ecd728ce790b1f69c65769be8f2a77d7e4b8933290681eca200e9df44",
+          "size": 9437
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/PROBE.LNK",
+          "sha256": "7ff562eeeb126d0cd7e81d6c7a21068bc39cacbfeb4cb0508383efa036faf70c",
+          "size": 197
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/PROBE.MAP",
+          "sha256": "7e0df110db21e5e20a1c4fa0a37ecf996e650e01ca4c9f31ab9343804e35407a",
+          "size": 11796
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/RUN.LOG",
+          "sha256": "eb6d97866448482903b1fa407c72bf08a4e5967ce11f41ef300108d06e1f8150",
+          "size": 38
+        }
+      ],
+      "expected": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "actual": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_signedness_unsigned_view",
+      "expected_output": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "actual_output": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [],
+      "map_rows": [
+        " 01E5:0000  Res  _fd_50F6_0354",
+        " 01E5:0000  Res  _fd_50F6_0354"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/CRT.OBJ",
+          "sha256": "8b17f4b11d39bbb3d9dac4fb0dbcaba1d85138295715f8c93468712644e075a8",
+          "size": 658
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/dosbox.conf",
+          "sha256": "c379ac5b18b696f224deff056edd4cb4f121d2a68d7648bd867d138f8271c076",
+          "size": 477
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/LINK.LOG",
+          "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+          "size": 493
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/PROBE.EXE",
+          "sha256": "814f21826729b48fd30039cae8d2014d8e5f348c12fa47a97fe316ef3914f1af",
+          "size": 9365
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/PROBE.LNK",
+          "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+          "size": 117
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/PROBE.MAP",
+          "sha256": "d0aa6d18f2dbef32f49600587ba3ff0d9cbf10b3403041a4288d8865b2167f5c",
+          "size": 11618
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/RUN.LOG",
+          "sha256": "d65bc0462c6a61b9e2be8748abd661f0adc4f8e56af780e8e12bae60bd55e6d5",
+          "size": 30
+        }
+      ],
+      "expected": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "actual": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_owner",
+      "expected_output": "INITIALIZED_OWNER_DETECTED",
+      "actual_output": "INITIALIZED_OWNER_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [],
+      "map_rows": [
+        " 01E6:0000  Res  _fd_50F6_0354",
+        " 01E6:0000  Res  _fd_50F6_0354"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/CRT.OBJ",
+          "sha256": "d36fdb78591f7c08cbcf9bae42626b948781929257ca00d58f8f19d05771878b",
+          "size": 685
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/dosbox.conf",
+          "sha256": "e98ad68699a8216940e99e1996bb63449ecfd0f10b29c57782724d84bfd6f109",
+          "size": 472
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/LINK.LOG",
+          "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+          "size": 493
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/OWNER.OBJ",
+          "sha256": "5c6f5b1fe5ec5c7c6ae3ae8ed50801a42ad7edcb22486da99edac7597d6fc4f9",
+          "size": 349
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/PROBE.EXE",
+          "sha256": "b3fa91622d64621d79283c0a01b1999c5dc8cdaa37ccbb4803b3259d39c73515",
+          "size": 9381
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/PROBE.LNK",
+          "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+          "size": 117
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/PROBE.MAP",
+          "sha256": "414ddb94b8aa2fddd02556de349e06cfa4e0066e952e49d0e707a73708dbf918",
+          "size": 11637
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/RUN.LOG",
+          "sha256": "2f11e47b08e656effed71f9fcf5010740850d337b0bee901a450be48b5f2b5db",
+          "size": 28
+        }
+      ],
+      "expected": "INITIALIZED_OWNER_DETECTED",
+      "actual": "INITIALIZED_OWNER_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_alias_base_plus_two",
+      "expected_output": "SHIFTED_ALIAS_BASE_DETECTED",
+      "actual_output": "SHIFTED_ALIAS_BASE_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [
+        "DEFINE _ProbeAlias = _fd_50F6_0354 + 2"
+      ],
+      "map_rows": [
+        " 01E6:0000  Res  _fd_50F6_0354",
+        " 01E6:0002  Res  _ProbeAlias",
+        " 01E6:0000  Res  _fd_50F6_0354",
+        " 01E6:0002  Res  _ProbeAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _ProbeAlias = _fd_50F6_0354 + 2\n=> \n12K\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/CRT.OBJ",
+          "sha256": "fd4148457da5ae058539334b444f4c86fa1670678c297bd9399bc1b6b19c43e4",
+          "size": 721
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/dosbox.conf",
+          "sha256": "b46cf81aaad5df47977fbd870a5c14fedfd53368d535acd6de279aa74a49c1eb",
+          "size": 472
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/LINK.LOG",
+          "sha256": "c2d2b67e5aa34da6df95ba849a78b8d7456fccf5d36ebbe4380b44bbca2ddc12",
+          "size": 536
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/PROBE.EXE",
+          "sha256": "0eb3f8aef0de3cdd87d5446d5651a89671d48df75192a90e6d085891d52ec47a",
+          "size": 9379
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/PROBE.LNK",
+          "sha256": "1a4fbf990541cc836f240a7c7fd2805e4214e132957d4dd6eefdb4ff8002e5ba",
+          "size": 157
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/PROBE.MAP",
+          "sha256": "41bd4f70231e65429dcc674e9dc96c7d0ce284a24cd6939cf285b64733571431",
+          "size": 11696
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/RUN.LOG",
+          "sha256": "785ec89fffd328899ce7c9a414c2f1d611bf70e7141b9d7c48b83439ac136152",
+          "size": 29
+        }
+      ],
+      "expected": "SHIFTED_ALIAS_BASE_DETECTED",
+      "actual": "SHIFTED_ALIAS_BASE_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_word",
+      "expected_output": "PASS_TYPED_WORD",
+      "actual_output": "PASS_TYPED_WORD",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [
+        "DEFINE _ProbeAlias = _fd_50F6_0354"
+      ],
+      "map_rows": [
+        " 0229:0000  Res  _fd_50F6_0354",
+        " 0229:0000  Res  _ProbeAlias",
+        " 0229:0000  Res  _fd_50F6_0354",
+        " 0229:0000  Res  _ProbeAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _ProbeAlias = _fd_50F6_0354\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+CH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/CRT.OBJ",
+          "sha256": "20f1272d047bd6c1f23b1bf09550289ae472b7c8c25bc7780494a296ed646c00",
+          "size": 801
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/dosbox.conf",
+          "sha256": "d8c9767107473e66438de362791b0079419e166e95b2bb6eed887184dc42d5aa",
+          "size": 457
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/LINK.LOG",
+          "sha256": "21e9f6c602d641c7f8d4b421e0e945eda4078b9cdae7ca1926921a9681ba47e8",
+          "size": 1223
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/PROBE.EXE",
+          "sha256": "b7b4bc8befb5ab32d4e94bd9e289fb520274dd27658ba29ecf337fe555c0800c",
+          "size": 10455
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/PROBE.LNK",
+          "sha256": "2f2f7d3889fc980c5092b174174ebef793490eb97f821e61c2f33b5963ea02b0",
+          "size": 153
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/PROBE.MAP",
+          "sha256": "ed6ccafe7180cb380dd53da7740fa5a82bdb0b6dd2b13414021e7572c9206f3a",
+          "size": 12913
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/RUN.LOG",
+          "sha256": "dc33cd21835636036e90118a26f024b6df4562248f833632bef75da8ec3081cf",
+          "size": 17
+        }
+      ],
+      "expected": "PASS_TYPED_WORD",
+      "actual": "PASS_TYPED_WORD",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "saverec_byte",
+      "expected_output": "PASS_SAVEREC_BYTE",
+      "actual_output": "PASS_SAVEREC_BYTE",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [],
+      "map_rows": [
+        " 022F:0000  Res  _fd_50F6_0354",
+        " 022F:0000  Res  _fd_50F6_0354"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+15H Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/CRT.OBJ",
+          "sha256": "7b5c3d1ec3b5beda3dc85ab1d40ab98fe95d3e49fbd311a2ea115f779cbb0787",
+          "size": 1073
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/dosbox.conf",
+          "sha256": "a1155499f5702f5ae5d46674175a73e27fe288f5256a492134d24489617095ff",
+          "size": 459
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/LINK.LOG",
+          "sha256": "61e8c44270d4b20d7a9fe4234059baead0449f58038afaa4d5c824d78edbd5bd",
+          "size": 1185
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/PROBE.EXE",
+          "sha256": "d4e686cfcf7914b80c73079490447c1fe6a95ae0891e41c500e70623a440ad27",
+          "size": 10595
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/PROBE.LNK",
+          "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+          "size": 117
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/PROBE.MAP",
+          "sha256": "7a224ec66748ed65fca84c5e3629ba52a3b94724db58a3e756a95eb84dbb2f2a",
+          "size": 12953
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/RUN.LOG",
+          "sha256": "3def41dab9ae948ac4c6d3fbcb59d932358b794665996a9e4a2288e5d7ab1d5a",
+          "size": 19
+        }
+      ],
+      "expected": "PASS_SAVEREC_BYTE",
+      "actual": "PASS_SAVEREC_BYTE",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_width_long_owner",
+      "expected_output": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "actual_output": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [
+        "DEFINE _ProbeUpperWord = _fd_50F6_0354 + 2",
+        "DEFINE _ProbeWhole = _fd_50F6_0354"
+      ],
+      "map_rows": [
+        " 0229:0000  Res  _fd_50F6_0354",
+        " 0229:0002  Res  _ProbeUpperWord",
+        " 0229:0000  Res  _ProbeWhole",
+        " 0229:0000  Res  _fd_50F6_0354",
+        " 0229:0000  Res  _ProbeWhole",
+        " 0229:0002  Res  _ProbeUpperWord"
+      ],
+      "link_log_tail": "y Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _ProbeUpperWord = _fd_50F6_0354 + 2\n=> DEFINE _ProbeWhole = _fd_50F6_0354\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+CH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/CRT.OBJ",
+          "sha256": "cc9059e126ba76de13ac17d5338bcd38cf5dfe8555b94298b728f9dcc94087ec",
+          "size": 839
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/dosbox.conf",
+          "sha256": "822d39d6338ccc6895dee05cbf2519717b749eabab020f05db8d8f3d62763f9a",
+          "size": 469
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/LINK.LOG",
+          "sha256": "7bf19605cb92b49cc54f7cd40e153e18859bae07983b56302607810906be68c3",
+          "size": 1270
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/OWNER.OBJ",
+          "sha256": "4b8f8cf3ba10949cd26ea6badef1d5ef1e3bd57fbeb375f3b3230fd206c72097",
+          "size": 306
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/PROBE.EXE",
+          "sha256": "9b51b2464f53c481d7a516af22617cf6bda5686897d4e3e0eaeb556ecaaafc11",
+          "size": 10477
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/PROBE.LNK",
+          "sha256": "7ff562eeeb126d0cd7e81d6c7a21068bc39cacbfeb4cb0508383efa036faf70c",
+          "size": 197
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/PROBE.MAP",
+          "sha256": "01d6d2813f10760c35397e6ebd6214f905f96a99c72455f51e6ecd07f8798f8c",
+          "size": 12979
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/RUN.LOG",
+          "sha256": "eb6d97866448482903b1fa407c72bf08a4e5967ce11f41ef300108d06e1f8150",
+          "size": 38
+        }
+      ],
+      "expected": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "actual": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_signedness_unsigned_view",
+      "expected_output": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "actual_output": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [],
+      "map_rows": [
+        " 0226:0000  Res  _fd_50F6_0354",
+        " 0226:0000  Res  _fd_50F6_0354"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+9H Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/CRT.OBJ",
+          "sha256": "8b17f4b11d39bbb3d9dac4fb0dbcaba1d85138295715f8c93468712644e075a8",
+          "size": 658
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/dosbox.conf",
+          "sha256": "d62f6c15aabf9ea0a7c88ff028509be7c03266c0cef215afd5aaf8099f9a875e",
+          "size": 477
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/LINK.LOG",
+          "sha256": "8a85b2d142d024d75dc9b0ee62b8ca5ba6f18cf0308ef141969e22a0146033e3",
+          "size": 1184
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/PROBE.EXE",
+          "sha256": "07c253f199d9240e87299a8733030f77825e35e3594dae5a723387488215a7cf",
+          "size": 10405
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/PROBE.LNK",
+          "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+          "size": 117
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/PROBE.MAP",
+          "sha256": "2a0a3a847444b4439a672949c82d33c8440869f480a2aaac4a9b517a70cf0471",
+          "size": 12801
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/RUN.LOG",
+          "sha256": "d65bc0462c6a61b9e2be8748abd661f0adc4f8e56af780e8e12bae60bd55e6d5",
+          "size": 30
+        }
+      ],
+      "expected": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "actual": "WRONG_UNSIGNED_VIEW_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_owner",
+      "expected_output": "INITIALIZED_OWNER_DETECTED",
+      "actual_output": "INITIALIZED_OWNER_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [],
+      "map_rows": [
+        " 0227:0000  Res  _fd_50F6_0354",
+        " 0227:0000  Res  _fd_50F6_0354"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+AH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/CRT.OBJ",
+          "sha256": "d36fdb78591f7c08cbcf9bae42626b948781929257ca00d58f8f19d05771878b",
+          "size": 685
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/dosbox.conf",
+          "sha256": "3210234557abecfbcd3dc90af1f3c0751f6de77bc9247699f596ebe0ecd33fd7",
+          "size": 472
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/LINK.LOG",
+          "sha256": "60f2cdd338604a0c7819b1e28de47501397032dfc1e2f9ea18288281b957ff13",
+          "size": 1184
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/OWNER.OBJ",
+          "sha256": "5c6f5b1fe5ec5c7c6ae3ae8ed50801a42ad7edcb22486da99edac7597d6fc4f9",
+          "size": 349
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/PROBE.EXE",
+          "sha256": "416e54508ea88830a000fbdda329faa59aaa3b8d3452051cd4932df5c6f176b4",
+          "size": 10421
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/PROBE.LNK",
+          "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+          "size": 117
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/PROBE.MAP",
+          "sha256": "4a1945ff6ee0d12a29d8d19d00bc9c89cf44b8d8037dba6f18272993380e6f30",
+          "size": 12820
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/RUN.LOG",
+          "sha256": "2f11e47b08e656effed71f9fcf5010740850d337b0bee901a450be48b5f2b5db",
+          "size": 28
+        }
+      ],
+      "expected": "INITIALIZED_OWNER_DETECTED",
+      "actual": "INITIALIZED_OWNER_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_alias_base_plus_two",
+      "expected_output": "SHIFTED_ALIAS_BASE_DETECTED",
+      "actual_output": "SHIFTED_ALIAS_BASE_DETECTED",
+      "passed": true,
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "aliases": [
+        "DEFINE _ProbeAlias = _fd_50F6_0354 + 2"
+      ],
+      "map_rows": [
+        " 0227:0000  Res  _fd_50F6_0354",
+        " 0227:0002  Res  _ProbeAlias",
+        " 0227:0000  Res  _fd_50F6_0354",
+        " 0227:0002  Res  _ProbeAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _ProbeAlias = _fd_50F6_0354 + 2\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+AH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/CRT.OBJ",
+          "sha256": "fd4148457da5ae058539334b444f4c86fa1670678c297bd9399bc1b6b19c43e4",
+          "size": 721
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/dosbox.conf",
+          "sha256": "d4389060f553d6aa8421c012b600bb5398a6989b2466d39b5d9892ca411bbb00",
+          "size": 472
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/LINK.LOG",
+          "sha256": "ff68dbe68b5bb2f37badaea4a69ddbf63da31fae514be1ada36fa258be00de6c",
+          "size": 1227
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/OWNER.OBJ",
+          "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+          "size": 304
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/PROBE.EXE",
+          "sha256": "202cc6d2d7eaa3c9aca025e1651b6273d29ae8dded0c7747ff9a7f9636c61e51",
+          "size": 10419
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/PROBE.LNK",
+          "sha256": "1a4fbf990541cc836f240a7c7fd2805e4214e132957d4dd6eefdb4ff8002e5ba",
+          "size": 157
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/PROBE.MAP",
+          "sha256": "7de764dea60ca0cc2dd92bed599626702a98f5a3c40c47b635b9e4d59f645ea7",
+          "size": 12879
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/RUN.LOG",
+          "sha256": "785ec89fffd328899ce7c9a414c2f1d611bf70e7141b9d7c48b83439ac136152",
+          "size": 29
+        }
+      ],
+      "expected": "SHIFTED_ALIAS_BASE_DETECTED",
+      "actual": "SHIFTED_ALIAS_BASE_DETECTED",
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0354"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0354"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/probe_v19.py",
+      "sha256": "5e230cbe2ba8a64a381310652375de67852beeabc8c8c8156c5c4de9780e485e",
+      "size": 17097
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/providers/saved-scalar-words-v19.c",
+      "sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
+      "size": 205
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/OWNV19.c",
+      "sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
+      "size": 205
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/OWNV19.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/LONGV19.c",
+      "sha256": "dfcf23b60b193ee2058f6d1431f94935da8d1a9ad24749d08ac19f644bd273b8",
+      "size": 23
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/LONGV19.OBJ",
+      "sha256": "4b8f8cf3ba10949cd26ea6badef1d5ef1e3bd57fbeb375f3b3230fd206c72097",
+      "size": 306
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/UNSGV19.c",
+      "sha256": "65d6a709f65dfe6ec94d3f3e44fe0a7157653b6b55326a23eb3972c9eacdef03",
+      "size": 31
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/UNSGV19.OBJ",
+      "sha256": "6323474dabc657274bd2d3e4d5e7939e07547cc4a8b112b4cb42d44f5743e8fb",
+      "size": 306
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/INITY19.c",
+      "sha256": "571630d51b261f8f4011e0290ce1b12e67bf09d5be98c667fc80bb3d5ad22173",
+      "size": 26
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/INITY19.OBJ",
+      "sha256": "5c6f5b1fe5ec5c7c6ae3ae8ed50801a42ad7edcb22486da99edac7597d6fc4f9",
+      "size": 349
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/WORDV19.c",
+      "sha256": "e0c304ddcc385a8a9b692c4bfa3cfb3086aeadb221f683a41a1544a7a91bb38e",
+      "size": 387
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/WORDV19.OBJ",
+      "sha256": "20f1272d047bd6c1f23b1bf09550289ae472b7c8c25bc7780494a296ed646c00",
+      "size": 801
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/BYTEV19.c",
+      "sha256": "2fffe513d6c5cbb810be76fad9dedd0530bd995df37a0d45c6c1db74a1f48b89",
+      "size": 707
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/BYTEV19.OBJ",
+      "sha256": "7b5c3d1ec3b5beda3dc85ab1d40ab98fe95d3e49fbd311a2ea115f779cbb0787",
+      "size": 1073
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/WIDV19.c",
+      "sha256": "808efd1284918e4c3ed9ea81ab7920bb0868d977ca0e4aeeac9ab5a22e49ffbb",
+      "size": 342
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/WIDV19.OBJ",
+      "sha256": "cc9059e126ba76de13ac17d5338bcd38cf5dfe8555b94298b728f9dcc94087ec",
+      "size": 839
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/SGNV19.c",
+      "sha256": "e1190b56c15ebc58eeff5fa2cbc1fe225994b5d5b64e92c2c17f9722ddd81352",
+      "size": 252
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/SGNV19.OBJ",
+      "sha256": "8b17f4b11d39bbb3d9dac4fb0dbcaba1d85138295715f8c93468712644e075a8",
+      "size": 658
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/ZROV19.c",
+      "sha256": "25f33d945963bb7c4a0e627bb4d5549939317c110055ceec8f9a5d64284fd55c",
+      "size": 215
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/ZROV19.OBJ",
+      "sha256": "d36fdb78591f7c08cbcf9bae42626b948781929257ca00d58f8f19d05771878b",
+      "size": 685
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/ALSV19.c",
+      "sha256": "4a18b67a05b039bb6a391cb796cef99eb26b5be29b4432cbe732db7f39855a41",
+      "size": 253
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/fixtures/ALSV19.OBJ",
+      "sha256": "fd4148457da5ae058539334b444f4c86fa1670678c297bd9399bc1b6b19c43e4",
+      "size": 721
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/CRT.OBJ",
+      "sha256": "d36fdb78591f7c08cbcf9bae42626b948781929257ca00d58f8f19d05771878b",
+      "size": 685
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/dosbox.conf",
+      "sha256": "e98ad68699a8216940e99e1996bb63449ecfd0f10b29c57782724d84bfd6f109",
+      "size": 472
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/LINK.LOG",
+      "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+      "size": 493
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/OWNER.OBJ",
+      "sha256": "5c6f5b1fe5ec5c7c6ae3ae8ed50801a42ad7edcb22486da99edac7597d6fc4f9",
+      "size": 349
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/PROBE.EXE",
+      "sha256": "b3fa91622d64621d79283c0a01b1999c5dc8cdaa37ccbb4803b3259d39c73515",
+      "size": 9381
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/PROBE.LNK",
+      "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+      "size": 117
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/PROBE.MAP",
+      "sha256": "414ddb94b8aa2fddd02556de349e06cfa4e0066e952e49d0e707a73708dbf918",
+      "size": 11637
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/RUN.BAT",
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+      "size": 75
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/initialized_nonzero_owner/RUN.LOG",
+      "sha256": "2f11e47b08e656effed71f9fcf5010740850d337b0bee901a450be48b5f2b5db",
+      "size": 28
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/CRT.OBJ",
+      "sha256": "7b5c3d1ec3b5beda3dc85ab1d40ab98fe95d3e49fbd311a2ea115f779cbb0787",
+      "size": 1073
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/dosbox.conf",
+      "sha256": "49d2f950530831b9e54332b651e0cf4f183e4d1378508ef5389cf4f077c99596",
+      "size": 459
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/LINK.LOG",
+      "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+      "size": 493
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/PROBE.EXE",
+      "sha256": "7fc8d8d6fe05647cf0bc32ff0aec00c96b2ec5a3d13c5d661195afc06a44998e",
+      "size": 9555
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/PROBE.LNK",
+      "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+      "size": 117
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/PROBE.MAP",
+      "sha256": "8b016e4e56fcdcd950d0e499042b21d1848a70915330f3ede649c59b9e5b58f6",
+      "size": 11770
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/RUN.BAT",
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+      "size": 75
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/saverec_byte/RUN.LOG",
+      "sha256": "3def41dab9ae948ac4c6d3fbcb59d932358b794665996a9e4a2288e5d7ab1d5a",
+      "size": 19
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/CRT.OBJ",
+      "sha256": "20f1272d047bd6c1f23b1bf09550289ae472b7c8c25bc7780494a296ed646c00",
+      "size": 801
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/dosbox.conf",
+      "sha256": "d7b5fd96e5d122b3e84a3a60065a7244e2aad4cf7e0cab64776eac64d45f9e59",
+      "size": 457
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/LINK.LOG",
+      "sha256": "56736de5ed5dc9b4b9ee82fab309c252a94779541cbdcba83fadb079f51c418c",
+      "size": 532
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/PROBE.EXE",
+      "sha256": "39d1e9be80057bf64ffa542c6c1d8d70946ffc9ac60a18a5606b03e0f0219203",
+      "size": 9415
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/PROBE.LNK",
+      "sha256": "2f2f7d3889fc980c5092b174174ebef793490eb97f821e61c2f33b5963ea02b0",
+      "size": 153
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/PROBE.MAP",
+      "sha256": "9ac89fc2a7f9d0f3ab08e8067c195c90a3f812aca832e3adb52a3c42800af652",
+      "size": 11730
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/RUN.BAT",
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+      "size": 75
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/typed_word/RUN.LOG",
+      "sha256": "dc33cd21835636036e90118a26f024b6df4562248f833632bef75da8ec3081cf",
+      "size": 17
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/CRT.OBJ",
+      "sha256": "fd4148457da5ae058539334b444f4c86fa1670678c297bd9399bc1b6b19c43e4",
+      "size": 721
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/dosbox.conf",
+      "sha256": "b46cf81aaad5df47977fbd870a5c14fedfd53368d535acd6de279aa74a49c1eb",
+      "size": 472
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/LINK.LOG",
+      "sha256": "c2d2b67e5aa34da6df95ba849a78b8d7456fccf5d36ebbe4380b44bbca2ddc12",
+      "size": 536
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/PROBE.EXE",
+      "sha256": "0eb3f8aef0de3cdd87d5446d5651a89671d48df75192a90e6d085891d52ec47a",
+      "size": 9379
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/PROBE.LNK",
+      "sha256": "1a4fbf990541cc836f240a7c7fd2805e4214e132957d4dd6eefdb4ff8002e5ba",
+      "size": 157
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/PROBE.MAP",
+      "sha256": "41bd4f70231e65429dcc674e9dc96c7d0ce284a24cd6939cf285b64733571431",
+      "size": 11696
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/RUN.BAT",
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+      "size": 75
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_alias_base_plus_two/RUN.LOG",
+      "sha256": "785ec89fffd328899ce7c9a414c2f1d611bf70e7141b9d7c48b83439ac136152",
+      "size": 29
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/CRT.OBJ",
+      "sha256": "8b17f4b11d39bbb3d9dac4fb0dbcaba1d85138295715f8c93468712644e075a8",
+      "size": 658
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/dosbox.conf",
+      "sha256": "c379ac5b18b696f224deff056edd4cb4f121d2a68d7648bd867d138f8271c076",
+      "size": 477
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/LINK.LOG",
+      "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+      "size": 493
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/PROBE.EXE",
+      "sha256": "814f21826729b48fd30039cae8d2014d8e5f348c12fa47a97fe316ef3914f1af",
+      "size": 9365
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/PROBE.LNK",
+      "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+      "size": 117
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/PROBE.MAP",
+      "sha256": "d0aa6d18f2dbef32f49600587ba3ff0d9cbf10b3403041a4288d8865b2167f5c",
+      "size": 11618
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/RUN.BAT",
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+      "size": 75
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_signedness_unsigned_view/RUN.LOG",
+      "sha256": "d65bc0462c6a61b9e2be8748abd661f0adc4f8e56af780e8e12bae60bd55e6d5",
+      "size": 30
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/CRT.OBJ",
+      "sha256": "cc9059e126ba76de13ac17d5338bcd38cf5dfe8555b94298b728f9dcc94087ec",
+      "size": 839
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/dosbox.conf",
+      "sha256": "1989d0d846a663215d60660ed06f26a51bcb432dfa288e5fd120d9ca14b553c4",
+      "size": 469
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/LINK.LOG",
+      "sha256": "82bfa917a088396cdd229cc517237b5008fe6df76c23fbeab5b42cdd3a71cfda",
+      "size": 579
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/OWNER.OBJ",
+      "sha256": "4b8f8cf3ba10949cd26ea6badef1d5ef1e3bd57fbeb375f3b3230fd206c72097",
+      "size": 306
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/PROBE.EXE",
+      "sha256": "84b9715ecd728ce790b1f69c65769be8f2a77d7e4b8933290681eca200e9df44",
+      "size": 9437
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/PROBE.LNK",
+      "sha256": "7ff562eeeb126d0cd7e81d6c7a21068bc39cacbfeb4cb0508383efa036faf70c",
+      "size": 197
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/PROBE.MAP",
+      "sha256": "7e0df110db21e5e20a1c4fa0a37ecf996e650e01ca4c9f31ab9343804e35407a",
+      "size": 11796
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/RUN.BAT",
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+      "size": 75
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink400/wrong_width_long_owner/RUN.LOG",
+      "sha256": "eb6d97866448482903b1fa407c72bf08a4e5967ce11f41ef300108d06e1f8150",
+      "size": 38
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/CRT.OBJ",
+      "sha256": "d36fdb78591f7c08cbcf9bae42626b948781929257ca00d58f8f19d05771878b",
+      "size": 685
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/dosbox.conf",
+      "sha256": "3210234557abecfbcd3dc90af1f3c0751f6de77bc9247699f596ebe0ecd33fd7",
+      "size": 472
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/LINK.LOG",
+      "sha256": "60f2cdd338604a0c7819b1e28de47501397032dfc1e2f9ea18288281b957ff13",
+      "size": 1184
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/OWNER.OBJ",
+      "sha256": "5c6f5b1fe5ec5c7c6ae3ae8ed50801a42ad7edcb22486da99edac7597d6fc4f9",
+      "size": 349
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/PROBE.EXE",
+      "sha256": "416e54508ea88830a000fbdda329faa59aaa3b8d3452051cd4932df5c6f176b4",
+      "size": 10421
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/PROBE.LNK",
+      "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+      "size": 117
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/PROBE.MAP",
+      "sha256": "4a1945ff6ee0d12a29d8d19d00bc9c89cf44b8d8037dba6f18272993380e6f30",
+      "size": 12820
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/RUN.BAT",
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+      "size": 77
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/initialized_nonzero_owner/RUN.LOG",
+      "sha256": "2f11e47b08e656effed71f9fcf5010740850d337b0bee901a450be48b5f2b5db",
+      "size": 28
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/CRT.OBJ",
+      "sha256": "7b5c3d1ec3b5beda3dc85ab1d40ab98fe95d3e49fbd311a2ea115f779cbb0787",
+      "size": 1073
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/dosbox.conf",
+      "sha256": "a1155499f5702f5ae5d46674175a73e27fe288f5256a492134d24489617095ff",
+      "size": 459
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/LINK.LOG",
+      "sha256": "61e8c44270d4b20d7a9fe4234059baead0449f58038afaa4d5c824d78edbd5bd",
+      "size": 1185
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/PROBE.EXE",
+      "sha256": "d4e686cfcf7914b80c73079490447c1fe6a95ae0891e41c500e70623a440ad27",
+      "size": 10595
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/PROBE.LNK",
+      "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+      "size": 117
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/PROBE.MAP",
+      "sha256": "7a224ec66748ed65fca84c5e3629ba52a3b94724db58a3e756a95eb84dbb2f2a",
+      "size": 12953
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/RUN.BAT",
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+      "size": 77
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/saverec_byte/RUN.LOG",
+      "sha256": "3def41dab9ae948ac4c6d3fbcb59d932358b794665996a9e4a2288e5d7ab1d5a",
+      "size": 19
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/CRT.OBJ",
+      "sha256": "20f1272d047bd6c1f23b1bf09550289ae472b7c8c25bc7780494a296ed646c00",
+      "size": 801
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/dosbox.conf",
+      "sha256": "d8c9767107473e66438de362791b0079419e166e95b2bb6eed887184dc42d5aa",
+      "size": 457
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/LINK.LOG",
+      "sha256": "21e9f6c602d641c7f8d4b421e0e945eda4078b9cdae7ca1926921a9681ba47e8",
+      "size": 1223
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/PROBE.EXE",
+      "sha256": "b7b4bc8befb5ab32d4e94bd9e289fb520274dd27658ba29ecf337fe555c0800c",
+      "size": 10455
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/PROBE.LNK",
+      "sha256": "2f2f7d3889fc980c5092b174174ebef793490eb97f821e61c2f33b5963ea02b0",
+      "size": 153
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/PROBE.MAP",
+      "sha256": "ed6ccafe7180cb380dd53da7740fa5a82bdb0b6dd2b13414021e7572c9206f3a",
+      "size": 12913
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/RUN.BAT",
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+      "size": 77
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/typed_word/RUN.LOG",
+      "sha256": "dc33cd21835636036e90118a26f024b6df4562248f833632bef75da8ec3081cf",
+      "size": 17
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/CRT.OBJ",
+      "sha256": "fd4148457da5ae058539334b444f4c86fa1670678c297bd9399bc1b6b19c43e4",
+      "size": 721
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/dosbox.conf",
+      "sha256": "d4389060f553d6aa8421c012b600bb5398a6989b2466d39b5d9892ca411bbb00",
+      "size": 472
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/LINK.LOG",
+      "sha256": "ff68dbe68b5bb2f37badaea4a69ddbf63da31fae514be1ada36fa258be00de6c",
+      "size": 1227
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/PROBE.EXE",
+      "sha256": "202cc6d2d7eaa3c9aca025e1651b6273d29ae8dded0c7747ff9a7f9636c61e51",
+      "size": 10419
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/PROBE.LNK",
+      "sha256": "1a4fbf990541cc836f240a7c7fd2805e4214e132957d4dd6eefdb4ff8002e5ba",
+      "size": 157
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/PROBE.MAP",
+      "sha256": "7de764dea60ca0cc2dd92bed599626702a98f5a3c40c47b635b9e4d59f645ea7",
+      "size": 12879
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/RUN.BAT",
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+      "size": 77
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_alias_base_plus_two/RUN.LOG",
+      "sha256": "785ec89fffd328899ce7c9a414c2f1d611bf70e7141b9d7c48b83439ac136152",
+      "size": 29
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/CRT.OBJ",
+      "sha256": "8b17f4b11d39bbb3d9dac4fb0dbcaba1d85138295715f8c93468712644e075a8",
+      "size": 658
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/dosbox.conf",
+      "sha256": "d62f6c15aabf9ea0a7c88ff028509be7c03266c0cef215afd5aaf8099f9a875e",
+      "size": 477
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/LINK.LOG",
+      "sha256": "8a85b2d142d024d75dc9b0ee62b8ca5ba6f18cf0308ef141969e22a0146033e3",
+      "size": 1184
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/OWNER.OBJ",
+      "sha256": "ef83a42dee0a5861b34fe7c6e2a66f95faa243c2a4d4fc5a8b560bb74e6008b3",
+      "size": 304
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/PROBE.EXE",
+      "sha256": "07c253f199d9240e87299a8733030f77825e35e3594dae5a723387488215a7cf",
+      "size": 10405
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/PROBE.LNK",
+      "sha256": "9cfa0a9a32278bc2adb446b71814e667f3a6253a7e75d827f56305f346ba1f3d",
+      "size": 117
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/PROBE.MAP",
+      "sha256": "2a0a3a847444b4439a672949c82d33c8440869f480a2aaac4a9b517a70cf0471",
+      "size": 12801
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/RUN.BAT",
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+      "size": 77
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_signedness_unsigned_view/RUN.LOG",
+      "sha256": "d65bc0462c6a61b9e2be8748abd661f0adc4f8e56af780e8e12bae60bd55e6d5",
+      "size": 30
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/CRT.OBJ",
+      "sha256": "cc9059e126ba76de13ac17d5338bcd38cf5dfe8555b94298b728f9dcc94087ec",
+      "size": 839
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/dosbox.conf",
+      "sha256": "822d39d6338ccc6895dee05cbf2519717b749eabab020f05db8d8f3d62763f9a",
+      "size": 469
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/LINK.LOG",
+      "sha256": "7bf19605cb92b49cc54f7cd40e153e18859bae07983b56302607810906be68c3",
+      "size": 1270
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/OWNER.OBJ",
+      "sha256": "4b8f8cf3ba10949cd26ea6badef1d5ef1e3bd57fbeb375f3b3230fd206c72097",
+      "size": 306
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/PROBE.EXE",
+      "sha256": "9b51b2464f53c481d7a516af22617cf6bda5686897d4e3e0eaeb556ecaaafc11",
+      "size": 10477
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/PROBE.LNK",
+      "sha256": "7ff562eeeb126d0cd7e81d6c7a21068bc39cacbfeb4cb0508383efa036faf70c",
+      "size": 197
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/PROBE.MAP",
+      "sha256": "01d6d2813f10760c35397e6ebd6214f905f96a99c72455f51e6ecd07f8798f8c",
+      "size": 12979
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/RUN.BAT",
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+      "size": 77
+    },
+    {
+      "path": "build/workers/dos_saved_scalar_words_v19/runtime/durable-v19/rtlink610/wrong_width_long_owner/RUN.LOG",
+      "sha256": "eb6d97866448482903b1fa407c72bf08a4e5967ce11f41ef300108d06e1f8150",
+      "size": 38
+    },
+    {
+      "path": "src/S00/m3126.asm",
+      "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+      "size": 18484
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/S00/m31AD_2AB4.asm",
+      "sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+      "size": 40286
+    },
+    {
+      "path": "src/S00/m35A6.asm",
+      "sha256": "0e563a69e0bc7a2ea11d7b963a9b0be7fbd3479e5dac1ed9985c47ffc533db73",
+      "size": 10105
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403
+    },
+    {
+      "path": "src/S01/m328E.asm",
+      "sha256": "610b108145bbf912a6c1b11b454eaf54a7c6053624db8b7de8f2c672dce34351",
+      "size": 4615
+    },
+    {
+      "path": "src/S01/m32B5.asm",
+      "sha256": "b8db05f10b37941e1a9cfa60f5dc87180e6075576703f29fc7b7557273b17394",
+      "size": 5260
+    },
+    {
+      "path": "src/S02/m3126.asm",
+      "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "size": 20400
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/S03/m3253.asm",
+      "sha256": "5f67726c1477bfb28285078c835fef3b8e1b9a7e1ad19ce34e225b76366b8165",
+      "size": 1544
+    },
+    {
+      "path": "src/S03/m3258.asm",
+      "sha256": "45182b0559f08e760e025fb1066203150637414c29e221ba7e6e5cea0bd30034",
+      "size": 40471
+    },
+    {
+      "path": "src/S04/m35F5.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387
+    },
+    {
+      "path": "src/S05/m35F5.c",
+      "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+      "size": 8438
+    },
+    {
+      "path": "src/S05/m3663.c",
+      "sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+      "size": 4421
+    },
+    {
+      "path": "src/S06/m35F5.c",
+      "sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+      "size": 43385
+    },
+    {
+      "path": "src/S07/m35F5.c",
+      "sha256": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+      "size": 5028
+    },
+    {
+      "path": "src/S08/m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "size": 22166
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src/S09/m36EE.c",
+      "sha256": "e48ce08404481d1fa8921b14f24b5e1c6ea8a5afc06f8854b903c9225e91ca53",
+      "size": 5625
+    },
+    {
+      "path": "src/S10/m35F5.c",
+      "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+      "size": 10707
+    },
+    {
+      "path": "src/S11/m35F5.c",
+      "sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "size": 4345
+    },
+    {
+      "path": "src/S12/m384C.c",
+      "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+      "size": 19819
+    },
+    {
+      "path": "src/S13/m384C.c",
+      "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+      "size": 24768
+    },
+    {
+      "path": "src/S14/m384C.c",
+      "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "size": 17919
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "src/S16/m384C.c",
+      "sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "size": 8239
+    },
+    {
+      "path": "src/S17/m384C.c",
+      "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+      "size": 2302
+    },
+    {
+      "path": "src/S18/m384C.c",
+      "sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3",
+      "size": 12432
+    },
+    {
+      "path": "src/S19/m384C.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+      "size": 7190
+    },
+    {
+      "path": "src/S20/m39C7.c",
+      "sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a",
+      "size": 2164
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+      "size": 6627
+    },
+    {
+      "path": "src/S21/m39C7.asm",
+      "sha256": "537d7b811340a7615c2d49e8eb5253953937bd1b037344ecbaba246c27f338bd",
+      "size": 9847
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src/S22/m3BBD.c",
+      "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+      "size": 18576
+    },
+    {
+      "path": "src/S23/m39C7.c",
+      "sha256": "4e2ff0a4d57f3159b2fb58ff64c77bb7740e2a415292cc7f2fe2e9fad095daf4",
+      "size": 20263
+    },
+    {
+      "path": "src/S24/m39C7.c",
+      "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "size": 8405
+    },
+    {
+      "path": "src/S25/m39C7.c",
+      "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+      "size": 27923
+    },
+    {
+      "path": "src/S25/m3BA4.c",
+      "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+      "size": 25998
+    },
+    {
+      "path": "src/S26/m39C7.c",
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "size": 9163
+    },
+    {
+      "path": "src/data/d3D57.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "size": 22927
+    },
+    {
+      "path": "src/data/d3E1D.c",
+      "sha256": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05",
+      "size": 1492
+    },
+    {
+      "path": "src/data/d55B3_0042.c",
+      "sha256": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
+      "size": 589
+    },
+    {
+      "path": "src/data/d55B3_0064.c",
+      "sha256": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
+      "size": 1245
+    },
+    {
+      "path": "src/data/d55B3_00B8.c",
+      "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+      "size": 23095
+    },
+    {
+      "path": "src/root/m0000.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "size": 5066
+    },
+    {
+      "path": "src/root/m004A.c",
+      "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+      "size": 5462
+    },
+    {
+      "path": "src/root/m0093.c",
+      "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "size": 3129
+    },
+    {
+      "path": "src/root/m00BA.c",
+      "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+      "size": 3562
+    },
+    {
+      "path": "src/root/m00DE.c",
+      "sha256": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c",
+      "size": 119
+    },
+    {
+      "path": "src/root/m00DF.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881
+    },
+    {
+      "path": "src/root/m00F8.c",
+      "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "size": 7304
+    },
+    {
+      "path": "src/root/m015B.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "size": 16241
+    },
+    {
+      "path": "src/root/m0244.c",
+      "sha256": "4af5c48bc82c52e82cbde616bab7606fdd0b61e38d72d8e53bd0e13a1df02a1a",
+      "size": 802
+    },
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "size": 65517
+    },
+    {
+      "path": "src/root/m075B.c",
+      "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+      "size": 3481
+    },
+    {
+      "path": "src/root/m078E.c",
+      "sha256": "45c68892dbbe580d9bd1142676959b7951288a37f9018f6f335c112a34eef22f",
+      "size": 624
+    },
+    {
+      "path": "src/root/m0798.c",
+      "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "size": 14874
+    },
+    {
+      "path": "src/root/m0894.c",
+      "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+      "size": 32636
+    },
+    {
+      "path": "src/root/m0AD9.c",
+      "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+      "size": 14288
+    },
+    {
+      "path": "src/root/m0BE8.c",
+      "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+      "size": 14621
+    },
+    {
+      "path": "src/root/m0CDB.c",
+      "sha256": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+      "size": 15324
+    },
+    {
+      "path": "src/root/m0DEF.c",
+      "sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+      "size": 4635
+    },
+    {
+      "path": "src/root/m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+      "size": 11858
+    },
+    {
+      "path": "src/root/m0EC1.c",
+      "sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "size": 7100
+    },
+    {
+      "path": "src/root/m0F3F.c",
+      "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+      "size": 22794
+    },
+    {
+      "path": "src/root/m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "src/root/m1383.c",
+      "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+      "size": 15679
+    },
+    {
+      "path": "src/root/m1496.c",
+      "sha256": "2b158a9367c89c7acf496efe4ff8490865fda03c5c88cfd70343264d1e2d15de",
+      "size": 4606
+    },
+    {
+      "path": "src/root/m14EE.c",
+      "sha256": "a9947226c73c4502f00e2b319b3cd7abc7f2acbc8ca9ef72448b31e55c6bdb59",
+      "size": 11666
+    },
+    {
+      "path": "src/root/m15D9.c",
+      "sha256": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+      "size": 1776
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src/root/m1629.c",
+      "sha256": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+      "size": 7455
+    },
+    {
+      "path": "src/root/m1699.asm",
+      "sha256": "26d9a76b86a8854105e905a11b59b83f84cac821edec495900bd296b2914a5fb",
+      "size": 3920
+    },
+    {
+      "path": "src/root/m16B5.asm",
+      "sha256": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
+      "size": 12680
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+      "size": 26452
+    },
+    {
+      "path": "src/root/m194D.asm",
+      "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+      "size": 2109
+    },
+    {
+      "path": "src/root/m1959.asm",
+      "sha256": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+      "size": 1271
+    },
+    {
+      "path": "src/root/m195A.asm",
+      "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+      "size": 7693
+    },
+    {
+      "path": "src/root/m1986.c",
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+      "size": 3351
+    },
+    {
+      "path": "src/root/m19A9.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "size": 4870
+    },
+    {
+      "path": "src/root/m19DC.c",
+      "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+      "size": 4995
+    },
+    {
+      "path": "src/root/m1A28.c",
+      "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+      "size": 3200
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "size": 5159
+    },
+    {
+      "path": "src/root/m1A96.c",
+      "sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+      "size": 6836
+    },
+    {
+      "path": "src/root/m1B05.asm",
+      "sha256": "3124ef4a45c572a54529bd5a57cd9225b40fdcafadd63c6b06cb748683cacca4",
+      "size": 5568
+    },
+    {
+      "path": "src/root/m1B28.c",
+      "sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343",
+      "size": 2422
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src/root/m1C62.c",
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885
+    },
+    {
+      "path": "src/root/m1CE2.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "size": 10210
+    },
+    {
+      "path": "src/root/m1D8E.c",
+      "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "size": 10996
+    },
+    {
+      "path": "src/root/m1E57.c",
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "size": 12957
+    },
+    {
+      "path": "src/root/m1F58.asm",
+      "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+      "size": 2852
+    },
+    {
+      "path": "src/root/m1F66.asm",
+      "sha256": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+      "size": 3748
+    },
+    {
+      "path": "src/root/m1F80.c",
+      "sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+      "size": 3313
+    },
+    {
+      "path": "src/root/m1FAA.c",
+      "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+      "size": 1532
+    },
+    {
+      "path": "src/root/m1FBD.asm",
+      "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+      "size": 3414
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "src/root/m205F.c",
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+      "size": 6015
+    },
+    {
+      "path": "src/root/m208F.c",
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "size": 6853
+    },
+    {
+      "path": "src/root/m20E8.c",
+      "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+      "size": 11458
+    },
+    {
+      "path": "src/root/m218D.c",
+      "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "size": 8739
+    },
+    {
+      "path": "src/root/m21FA.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "size": 13758
+    },
+    {
+      "path": "src/root/m22BF.c",
+      "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "size": 18937
+    },
+    {
+      "path": "src/root/m23AE.c",
+      "sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+      "size": 5115
+    },
+    {
+      "path": "src/root/m23E6.c",
+      "sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "size": 11709
+    },
+    {
+      "path": "src/root/m24AB.c",
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "size": 5171
+    },
+    {
+      "path": "src/root/m24FA.asm",
+      "sha256": "e538d0a8df93c3bd7ba3aabccc9a48faa6f643b7f8489c3c379c0d23ad9ac412",
+      "size": 2095
+    },
+    {
+      "path": "src/root/m2505.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "size": 10178
+    },
+    {
+      "path": "src/root/m259D.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "size": 6533
+    },
+    {
+      "path": "src/root/m25E7.c",
+      "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+      "size": 5610
+    },
+    {
+      "path": "src/root/m2650.asm",
+      "sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+      "size": 2925
+    },
+    {
+      "path": "src/root/m2662.c",
+      "sha256": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+      "size": 15289
+    },
+    {
+      "path": "src/root/m277D.c",
+      "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+      "size": 606
+    },
+    {
+      "path": "src/root/m277E.c",
+      "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "size": 10363
+    },
+    {
+      "path": "src/root/m2815.c",
+      "sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+      "size": 2257
+    },
+    {
+      "path": "src/root/m283E.asm",
+      "sha256": "c7fc07dbb9830dfad40597e5fe377c4a62bc9d3551a80aef602dad3925daa0c5",
+      "size": 3638
+    },
+    {
+      "path": "src/root/m284A.c",
+      "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+      "size": 6899
+    },
+    {
+      "path": "src/root/m28BC.asm",
+      "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+      "size": 38288
+    },
+    {
+      "path": "src/root/m290D.c",
+      "sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+      "size": 3201
+    },
+    {
+      "path": "src/root/m293A.c",
+      "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "size": 3635
+    },
+    {
+      "path": "src/root/m295C.c",
+      "sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+      "size": 6086
+    },
+    {
+      "path": "src/root/m29B8.c",
+      "sha256": "630261c9ce29ece91f48e1fa0ec6c4bf1ce6270245f30d4825a66ed2a661878b",
+      "size": 594
+    },
+    {
+      "path": "src/root/m29BF.asm",
+      "sha256": "bb40cbd77f380b56c0ab0c27d41f08b40f63deb3b8c14f53b15e3d526fa753ac",
+      "size": 8357
+    },
+    {
+      "path": "src/root/m29D6.c",
+      "sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+      "size": 2848
+    },
+    {
+      "path": "src/root/m29F0.c",
+      "sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+      "size": 633
+    },
+    {
+      "path": "src/root/m2CFB.asm",
+      "sha256": "d12d1eedb44a03197c55abf8701ee5f6dfc71a4472ab66d610ae68a3da79d981",
+      "size": 1755
+    },
+    {
+      "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "size": 19699
+    },
+    {
+      "path": "work/source-only-dos/corrections/DrawBalloons/module.c",
+      "sha256": "e222bc77fd4d83a777507a8ba73aa2c0ba6dd4d6fc4cb42db69cd83f6374c920",
+      "size": 65384
+    },
+    {
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+      "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+      "size": 19339
+    },
+    {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "size": 2872
+    },
+    {
+      "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v2/module.c",
+      "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+      "size": 24333
+    },
+    {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "size": 10678
+    },
+    {
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/module.c",
+      "sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+      "size": 15027
+    },
+    {
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "size": 8132
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "size": 65234
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "size": 65234
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297
+    },
+    {
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "size": 9681
+    },
+    {
+      "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/module.c",
+      "sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "size": 12563
+    },
+    {
+      "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/module.c",
+      "sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49",
+      "size": 11130
+    },
+    {
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/module.c",
+      "sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7",
+      "size": 11487
+    },
+    {
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "size": 10178
+    },
+    {
+      "path": "evidence/behavior/functions/f_2815_0165/module.c",
+      "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+      "size": 2181
+    },
+    {
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+      "size": 6612
+    },
+    {
+      "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+      "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626",
+      "size": 2919
+    },
+    {
+      "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "size": 10518
+    },
+    {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1035/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "size": 25550
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1686/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "size": 25550
+    },
+    {
+      "path": "evidence/behavior/functions/win_DrawBitMap/contracts/logical-render-v2/module.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "size": 6533
+    },
+    {
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "size": 19699
+    },
+    {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+      "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+      "size": 4802
+    },
+    {
+      "path": "work/source-only-dos/count-ants-transition-word-v19/review.json",
+      "sha256": "dff828f0627b88dab8c006670d5af95905c179e0cc26119253209d87e1df63f9",
+      "size": 56231
+    },
+    {
+      "path": "work/source-only-dos/count-ants-transition-word-v19/review.md",
+      "sha256": "2845f7374e92c8ffd88e55ab80feeae1a1999d72099285778acc5d0d6feb2d1c",
+      "size": 1725
+    },
+    {
+      "path": "work/source-only-dos/count-ants-transition-word-v19/probe.py",
+      "sha256": "5e230cbe2ba8a64a381310652375de67852beeabc8c8c8156c5c4de9780e485e",
+      "size": 17097
+    },
+    {
+      "path": "work/source-only-dos/count-ants-transition-word-v19/provider.c",
+      "sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
+      "size": 205
+    },
+    {
+      "path": "work/source-only-dos/count-ants-transition-word-v19/source-audit.py",
+      "sha256": "9208c984020bba8dcba8b4342f88ccaf4ce6daf79eaed0af07146dc9efb25756",
+      "size": 16403
+    },
+    {
+      "path": "work/source-only-dos/storage-admission-v19.md",
+      "sha256": "907dcae7422ae6fdb36b67e5710cc824f6bce6e18ed907a4f4a19f8616fccb96",
+      "size": 3450
+    },
+    {
+      "path": "work/source-only-dos/count-ants-transition-word-v19/runtime-receipt.json",
+      "sha256": "917e216b6603e68af8e955852d46d3c4002d86f81f96273578ca1864a1e6eccb",
+      "size": 110423
+    }
+  ],
+  "probe_source": {
+    "path": "work/source-only-dos/count-ants-transition-word-v19/probe.py",
+    "sha256": "5e230cbe2ba8a64a381310652375de67852beeabc8c8c8156c5c4de9780e485e",
+    "size": 17097
+  },
+  "research_receipt": {
+    "path": "work/source-only-dos/count-ants-transition-word-v19/runtime-receipt.json",
+    "sha256": "917e216b6603e68af8e955852d46d3c4002d86f81f96273578ca1864a1e6eccb",
+    "size": 110423
+  },
+  "root_admission": {
+    "path": "work/source-only-dos/storage-admission-v19.md",
+    "sha256": "907dcae7422ae6fdb36b67e5710cc824f6bce6e18ed907a4f4a19f8616fccb96",
+    "size": 3450
+  },
+  "historical_executed_driver_and_build_observations": [
+    {
+      "path": "tools/dos_source_bindings.py",
+      "sha256": "9450a189c0666eb60d823301a2fa3fc7afe89f267194c7a66d40aa31abf711de",
+      "size": 96154
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "26b287754f0585392e4c210faf47a5cfd73df50338f71853be631ee7f10d2efa",
+      "size": 63580
+    }
+  ],
+  "scope": "Functional storage and reviewed source-visible views only; no fatal-path, game runtime or historical layout closure."
+}

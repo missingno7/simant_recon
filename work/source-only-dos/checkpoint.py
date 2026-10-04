@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 156 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 159 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v18.log',
-        'build/source-only-dos-tests-v18.log', 'build/source-only-dos-validation-v18.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v19.log',
+        'build/source-only-dos-tests-v19.log', 'build/source-only-dos-validation-v19.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not re.search(r'(?m)^OK(?: \(skipped=2\))?$', test_log):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [44, 314] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 2:
+    if test_counts != [45, 314] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 2:
         raise ValueError('split repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': 'ab24905',
+        'source_only_base_checkpoint': '5e4f9ba',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -153,6 +153,8 @@ def main():
         'v17_owner_bindings': [pin(OUT / (name + '-bindings-v1.json')) for name in ('ant-ui-control-state', 'ui-resource-scalars', 'terrain-state-words')],
         'v18_owner_bindings': [pin(OUT / (name + '-bindings-v1.json')) for name in ('swarm-serialized-buffers', 'population-work-arrays')],
         'serialized_state_admission': pin(OUT / 'serialized-state-admission-v18.md'),
+        'v19_owner_bindings': [pin(OUT / (name + '-bindings-v1.json')) for name in ('saved-sound-state', 'control-flag-words', 'count-ants-transition-word')],
+        'storage_admission_v19': pin(OUT / 'storage-admission-v19.md'),
         's01_pattern_view_bindings': pin(OUT / 's01-pattern-4220-bindings-v1.json'),
         's01_pattern_view_admission': pin(OUT / 's01-pattern-4220-admission-v18.md'),
         'far_data_alignment_contract': pin(OUT / 'far-data-paragraph-fill-contract-v1.json'),
@@ -180,7 +182,7 @@ def main():
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
         'historical_validation': 'PASS',
-        'source_only_tests': f'44 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'source_only_tests': f'45 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

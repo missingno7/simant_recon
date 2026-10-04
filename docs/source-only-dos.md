@@ -511,3 +511,43 @@ The boundary passed 44 source-only tests and 314 other repository tests
 (two skips), historical validation, and all 18 required storage/frame gates
 plus the alignment gate under both linker profiles. Runtime fixtures are
 component evidence; they do not constitute execution of the complete game.
+
+## v19: sound-driver saved state and transition words
+
+Three generated-only providers own five further FAR_BSS objects (22 bytes):
+the seven-word saved sound-driver state, three signed control words, and the
+CountAnts transition latch. Complete typed source references, the sound state's
+initialized pointer alias and exact SaveRec views establish the extents. Fresh
+MSC objects and both RTLink profiles check startup, typed/byte views and rejected
+type, extent, initializer and base contrasts. The sound state's 28-byte and
+12-byte controls preserve their passing in-bounds zero measurements while the
+production gate rejects their OMF/map shapes. See the
+[root admission](../work/source-only-dos/storage-admission-v19.md).
+
+The effective build compiles 159 TUs (127 canonical plus 32 providers), with
+283 imports unresolved: 278 FAR_BSS and five DGROUP cases. Functional data debt
+remains 66 bytes; historical debt remains 113. The original DGROUP inventory
+still has 41 of 46 cases resolved. All 29 effective behavior bodies have strict
+static confirmation; all original-byte counters remain zero.
+
+The saved-state owner supplies a prerequisite for early sound cleanup but does
+not close fatal-path reachability. The independent unlock review retains the
+72-site caller-pair census and 70 ordinary by-value pairs; both memory rereads
+remain pending at transitive rendering/animation/invalidation callbacks. The
+critical-error byte and both database layout gates remain unresolved. See the
+[bounded clobber review](../work/source-only-dos/unlock-clobber-review-v19.md).
+
+The monochrome producer's header count is signed on the selected MSC target.
+The positive-header copy bound (1,016 bytes) does not establish the missing
+resource's extent or cover every arithmetic selector value in the four S01
+consumers. No guessed monochrome storage or frame assumption is admitted.
+Independent linking remains refused. DOSBox-X game execution, human acceptance
+and functional-source-oracle-v1 remain pending; SDL3 stays paused.
+
+The boundary passed 45 source-only tests and 314 other repository tests (two
+skips), historical validation, and all nineteen selected storage/frame gates
+plus the alignment gate under both linker profiles. The initial gate-field
+mismatch was fixed before the successful full rerun. The
+[runtime heap review](../work/source-only-dos/fheap-runtime-debt-v19/README.md)
+retains its fourteen-byte debt despite automatic archive selection in minimal
+controls; absent direct imports alone cannot discharge it.
