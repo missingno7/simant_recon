@@ -8,12 +8,12 @@ reviewed behavioral bodies, followed by DOSBox-X integration checks and human
 acceptance. Earlier historical-link and SDL3 next actions below are retained
 research history and do not supersede this priority.
 
-**Current SOURCE_ONLY_DOS checkpoint (v20, 2026-10-04):** the strict static audit covers all 29
+**Current SOURCE_ONLY_DOS checkpoint (v21, 2026-10-04):** the strict static audit covers all 29
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The v20 source-only build compiles 127 canonical TUs plus 33 data-only
-providers. The seven-slot input queue, 54 far word scalars, 25-slot
+unresolved. The v21 source-only build compiles 127 canonical TUs plus 37 data-only
+providers. The seven-slot input queue, reviewed FAR word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
 pattern-bank reads now target its proven 256-byte source owner. Typed water arrays,
@@ -28,7 +28,12 @@ owners; another S01 pattern read binds symbolically to its existing bank. A
 12-byte FAR_DATA paragraph gap is discharged as linker fill, with no added object.
 Six sound-control words now have complete source views and measured typed/raw,
 startup, width, signedness, initializer and alias contracts under both linkers.
-There are 277 missing data imports (272 FAR_BSS and five
+Two full sound arrays and 44 additional movement/world/history scalars now have
+complete source-owned views; every measured extent, runtime result and map alias is
+mandatory under both linkers. The parser accepts `/s9` outside its nine-entry sound
+tables: a data-as-code call and conditional cross-TU cleanup overread remain an
+explicit layout gate, without a clamp or fabricated slot.
+There are 231 missing data imports (226 FAR_BSS and five
 storage/reachability cases), 66 functional data-disposition bytes (113 historical bytes) and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is

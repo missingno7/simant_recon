@@ -220,6 +220,10 @@ def prepare(out, report):
                      'control-flag-words-bindings-v1.json',
                      'count-ants-transition-word-bindings-v1.json',
                      'sound-control-words-bindings-v1.json',
+                     'sound-record-arrays-bindings-v1.json',
+                     'ant-movement-words-bindings-v1.json',
+                     'world-output-state-bindings-v1.json',
+                     'history-scalar-state-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -564,6 +568,17 @@ def audit_layout(report):
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
                   'Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates.'}, {
+        'id': 'sound-selector-out-of-range-layout', 'status': 'UNRESOLVED',
+        'sources': ['src/S20/m39F1.c', 'src/S15/m384C.c', 'src/root/m15F8.c', 'src/root/m00DF.c', 'src/root/m277E.c',
+                    'src/root/m293A.c', 'src/root/m2815.c'],
+        'reason': 'The command-line parser accepts /s9, but detector/setup/cleanup '
+                  'tables have only nine entries (0..8). If the sound DB open returns, '
+                  'detector index 9 reads the adjacent same-TU saved-state pointer '
+                  'and calls its source-owned data as code. Return and effects are '
+                  'unproved. Conditional later setup/cleanup overreads include '
+                  'cross-TU data adjacency. Complete saved-state storage does not '
+                  'resolve this executable/layout dependency; no clamp, extra slot '
+                  'or padding is introduced.'}, {
         'id': 'graphics-computed-copy-layout', 'status': 'UNRESOLVED',
         'source': 'src/root/m1E57.c',
         'reason': 'The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. '
@@ -819,6 +834,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v18_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v19_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v20_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v21_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)

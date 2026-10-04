@@ -1,0 +1,94 @@
+f_277E_04E8  root:277E:04E8  linear 27CC8  size 286  extent REVIEWED  region game_or_library
+  entry evidence: reviewed
+  module frame 277E: function 10/18; neighbours: f_277E_034F, f_277E_040E, f_277E_0606, f_277E_0760
+  frame: {'frame': 'bp', 'locals': 6, 'stack_check': False}
+  04E8  push bp
+  04E9  mov bp, sp
+  04EB  sub sp, 6
+  04EE  push si
+  04EF  mov es, word ptr [0x8a62]          DS:8A62
+  04F3  mov ax, word ptr es:[0x4a48]
+  04F7  mov word ptr [bp - 2], ax
+  04FA  mov es, word ptr [0x8a66]          DS:8A66
+  04FE  mov word ptr es:[0x1f2], ax
+  0502  sub si, si
+  0504  jmp 0x52f
+  0506  mov ax, 6
+  0509  mov es, word ptr [0x8a64]          DS:8A64
+  050D  imul word ptr es:[0x4a4c]
+  0512  mov bx, ax
+  0514  mov es, word ptr [0x8a6a]          DS:8A6A
+  0518  mov byte ptr es:[bx + 0x4a4e], 1
+  051E  mov ax, si
+  0520  mov byte ptr es:[bx + 0x4a4f], al
+  0525  inc si
+  0526  mov es, word ptr [0x8a64]          DS:8A64
+  052A  inc word ptr es:[0x4a4c]
+  052F  cmp word ptr [bp - 2], si
+  0532  ja 0x506
+  0534  lcall 0x2815, 0x118                -> f_2815_0118
+  0539  sub si, si
+  053B  mov ax, 6
+  053E  mov es, word ptr [0x8a64]          DS:8A64
+  0542  imul word ptr es:[0x4a4c]
+  0547  mov bx, ax
+  0549  mov es, word ptr [0x8a6a]          DS:8A6A
+  054D  mov byte ptr es:[bx + 0x4a4e], 2
+  0553  mov ax, si
+  0555  mov byte ptr es:[bx + 0x4a4f], al
+  055A  inc si
+  055B  mov es, word ptr [0x8a64]          DS:8A64
+  055F  inc word ptr es:[0x4a4c]
+  0564  cmp si, 8
+  0567  jb 0x53b
+  0569  mov es, word ptr [0x8a66]          DS:8A66
+  056D  mov word ptr es:[0x1f4], 8
+  0574  mov es, word ptr [0x8a70]          DS:8A70
+  0578  mov word ptr es:[0x74c0], 0xfff6
+  057F  mov bx, 0x7564
+  0582  mov es, word ptr [0x8a80]          DS:8A80
+  0586  mov word ptr [bp - 6], bx
+  0589  mov word ptr [bp - 4], es
+  058C  cmp word ptr es:[bx], 0x210
+  0591  jae 0x5bc
+  0593  lcall 0x293a, 0x121                -> f_293A_0121
+  0598  les bx, ptr [bp - 6]
+  059B  mov ax, word ptr es:[bx]
+  059E  add ax, 0xc
+  05A1  mov es, word ptr [0x8a82]          DS:8A82
+  05A5  mov word ptr es:[0x6ba0], ax
+  05A9  mov es, word ptr [0x8a82]          DS:8A82
+  05AD  push word ptr es:[0x6ba0]
+  05B2  lcall 0x29f0, 0x38                 -> f_29F0_0038
+  05B7  pop bx
+  05B8  test al, 0x80
+  05BA  jne 0x5a9
+  05BC  les bx, ptr [bp - 6]
+  05BF  mov ax, word ptr es:[bx]
+  05C2  add ax, 0xc
+  05C5  mov es, word ptr [0x8a82]          DS:8A82
+  05C9  mov word ptr es:[0x6ba0], ax
+  05CD  mov es, word ptr [0x8a84]          DS:8A84
+  05D1  mov ax, word ptr es:[0x74b5]
+  05D5  mov es, word ptr [0x8a6e]          DS:8A6E
+  05D9  mov word ptr es:[0x6b9c], ax
+  05DD  mov ax, 0xd92
+  05E0  mov cx, 0x55b3                     [seg 55B3 DGROUP]
+  05E3  push cx
+  05E4  push ax
+  05E5  push cs
+  05E6  call 0x10a                         -> f_277E_010A
+  05E9  pop bx
+  05EA  pop bx
+  05EB  mov al, 0xd1
+  05ED  push ax
+  05EE  mov es, word ptr [0x8a82]          DS:8A82
+  05F2  push word ptr es:[0x6ba0]
+  05F7  lcall 0x29f0, 0x2a                 -> f_29F0_002A
+  05FC  pop bx
+  05FD  pop bx
+  05FE  mov ax, 1
+  0601  pop si
+  0602  mov sp, bp
+  0604  pop bp
+  0605  retf

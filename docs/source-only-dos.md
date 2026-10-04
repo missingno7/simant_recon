@@ -581,3 +581,49 @@ skips), and historical validation. All 20 storage/frame gates and the alignment 
 linker profiles. The [replay wrapper](../work/source-only-dos/sound-control-words-v20/replay.py)
 reruns the pinned component probe in a fresh unadmitted directory, preserving
 the admitted research outputs; its smoke run passed all ten cases.
+
+
+## v21: complete sound records and individual scalar owners
+
+The two sound record arrays now have complete functional owners: 56 six-byte
+Voice records and 33 six-byte Chan records, with independently checked long/far
+pointer and signed/unsigned byte views. Copy/reset/cleanup loops and the complete
+effective source/caller census establish the extents. Both linkers passed fourteen
+runtime rows; two additional wrong-name links were diagnosed and never executed,
+although they emitted executables. Those actual outcomes remain explicit. The
+[sound admission](../work/source-only-dos/storage-admission-v21.md) is storage-only;
+post-init selectors and full sound behavior remain separate requirements.
+
+Three further providers own 44 independent scalars: sixteen movement words,
+sixteen world outputs and twelve history words/longs. Each complete source view
+and exact SaveRec span was reviewed. The four-byte world object 0472 retains its
+signed and unsigned long views; all four source stores write zero, with no readers
+or pointer escapes. Its purpose and nonzero interpretation remain unknown.
+History resets retain their conditional newGame==1 behavior; generic raw loads
+remain unchecked. See the [scalar admission](../work/source-only-dos/scalar-storage-admission-v21.md).
+Production objects emit only the reviewed commons. The 34 scalar runtime rows,
+compiler contrasts, both map sections and all expected alias/address matrices are
+mandatory gates. Passing overrun diagnostics do not establish object bounds.
+
+The sound selector review exposes an actual path: `/s9` passes the parser but
+indexes outside each nine-entry table. The detector overread aliases the same-TU
+saved-state pointer and calls the data it targets as code. Return is unproved;
+conditional later setup/cleanup accesses include cross-TU historical adjacency.
+SOURCE_ONLY_DOS now reports a distinct unresolved gate. No clamp, tenth entry,
+padding or original bytes hide it. See the
+[root review](../work/source-only-dos/sound-selector-layout-review-v21.md).
+
+All 164 TUs compile (127 canonical plus 37 providers). Missing imports are 231:
+226 FAR_BSS and five DGROUP storage/reachability cases. The original DGROUP census
+remains 41 of 46 resolved. Functional data debt is 66 bytes; historical debt is
+113. All 29 effective behavior bodies remain strictly confirmed, all original-byte
+counters remain zero, and canonical ownership is unchanged. Independent linking
+is refused; DOS game execution, comparison, human acceptance and
+functional-source-oracle-v1 remain pending. SDL3 stays paused.
+
+The boundary passed 48 source-only tests and 314 other tests (two skips), plus
+historical validation. All 21 mandatory storage/frame gates (including the four
+new owner families) and the alignment gate pass under both RTLink profiles.
+The sound-record replay wrapper passed all sixteen fresh component cases while
+preserving the admitted outputs. Research compile contexts remain distinct from
+the separately checked production provider context.

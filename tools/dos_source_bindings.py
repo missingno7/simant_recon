@@ -615,6 +615,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V18_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V19_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V20_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V21_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -622,7 +623,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -1623,3 +1624,265 @@ def require_v20_storage_contracts(report, profile, tool):
                 addresses.append((alias, target))
             if relation.get('passed') is not True or addresses[0] != addresses[1]:
                 raise ValueError('sound control word map sections disagree')
+
+
+# Complete source views and loop extents, independently checked by both linkers.
+PROVIDER_SPECS['source-owned:sound-record-arrays'] = ('SNDRECS', None,
+    (('_fd_50F6_0000', 336), ('_fd_50F6_4A4E', 198)),
+    'union VoicePayload { long offset; char far *sample; }; struct Voice { int kind; '
+    'union VoicePayload payload; }; struct Chan { char type; char num; char c2; '
+    'char c3; char c4; char c5; }; struct Voice far fd_50F6_0000[56]; '
+    'struct Chan far fd_50F6_4A4E[33];')
+FAR_PROVIDER_MODULES.add('source-owned:sound-record-arrays')
+FAR_PROVIDER_RECORD_ARRAYS['source-owned:sound-record-arrays'] = {
+    '_fd_50F6_0000': 6, '_fd_50F6_4A4E': 6}
+V21_STORAGE_ANCHORS = {'_fd_50F6_0000': (0, ('fd_50F6_0000',)),
+                       '_fd_50F6_4A4E': (0x4A4E, ('fd_50F6_4A4E',))}
+V21_STORAGE_CONTRACTS = {'source-owned:sound-record-arrays': ('sound_record_arrays_contract', {
+    'positive_exact_provider': 'PASS',
+    'wrong_total_size_57_voice_rows': 'LINKED',
+    'wrong_record_stride_near_pointer': 'LINKED',
+    'signed_word_unsigned_view_negative': 'UNSIGNED_WORD_CONTROL_DETECTED',
+    'near_pointer_consumer_view_negative': 'NEAR_POINTER_CONTROL_DETECTED',
+    'short_extent_55_voice_32_channels': 'LINKED',
+    'initialized_storage_negative': 'INITIALIZED_CONTROL_DETECTED'})}
+
+SOUND_RECORD_OFFSETS = [
+    'sizeof(int)=2, sizeof(long)=4, sizeof(far data pointer)=4, sizeof(near data pointer)=2',
+    'Voice: sizeof 6; kind@0; union payload@2; external array sizeof 336',
+    'InstrSample(char far*), InstrByte(unsigned char far*), InstrVoid(void far*), Drv(int far*): sizeof 6 and payload@2',
+    'Chan plain-char writer and unsigned-char reader views: sizeof 6; offsets 0,1,2,3,4,5; external array sizeof 198']
+
+def require_v21_storage_contracts(report, profile, tool):
+    _require_reviewed_storage_contracts(report, profile, tool, V21_STORAGE_CONTRACTS)
+    _require_clean_owner_maps(report, profile, V21_STORAGE_CONTRACTS)
+    _require_sound_record_controls(report, profile)
+    _require_v21_scalar_controls(report, profile)
+
+def _require_sound_record_controls(report, profile):
+    module = 'source-owned:sound-record-arrays'
+    if not any(row['module'] == module for row in report['translation_units']):
+        return
+    contract = report.get('sound_record_arrays_contract', {})
+    expected = provider_communals(module)
+    voice, chan = expected
+    shapes = {
+        'SNDRECS': expected, 'SNDUNSG': expected,
+        'SND57': [dict(voice, count=57, length=342), chan],
+        'SNDS4': [dict(voice, element_size=4, length=224), chan],
+        'SND32': [dict(voice, count=55, length=330), dict(chan, count=32, length=192)],
+        'SNDBASE': [dict(voice, name='_fd_50F6_0002'), chan], 'SNDINIT': []}
+    controls = contract.get('compiler_controls', {})
+    if (set(controls) != set(shapes)
+            or contract.get('sizeof_offsetof_assertions') != SOUND_RECORD_OFFSETS):
+        raise ValueError('sound record owners lack complete view/extent controls')
+    for name, communals in shapes.items():
+        row = controls[name]
+        if row.get('communals') != communals or (name != 'SNDINIT' and (
+                row.get('publics') != [] or row.get('nonempty_segments') != []
+                or row.get('initialized_segment_names_and_hex') != {}
+                or any(row.get('segment_lengths', {}).values()))):
+            raise ValueError('sound record compiler contrast changed')
+    init = controls['SNDINIT']
+    segments = init.get('nonempty_segments', [])
+    if (len(segments) != 1 or segments[0].get('class') != 'FAR_DATA'
+            or segments[0].get('length') != 534
+            or init.get('publics') != [
+                {'name': voice['name'], 'offset': 0, 'segment': 'SNDINIT5_DATA'},
+                {'name': chan['name'], 'offset': 336, 'segment': 'SNDINIT5_DATA'}]):
+        raise ValueError('sound record initialized owner contrast changed')
+    names = sorted(row['name'] for row in expected)
+    lengths = {'wrong_total_size_57_voice_rows': 540,
+               'wrong_record_stride_near_pointer': 422,
+               'short_extent_55_voice_32_channels': 522}
+    for case in contract['cases']:
+        if case['linker'] != profile:
+            continue
+        sections = case.get('map_public_sections', {})
+        layout = case.get('far_bss_layout', {})
+        initialized = case['case'] == 'initialized_storage_negative'
+        if (case.get('executed') is not True or case.get('dosbox_exit') != 0
+                or set(sections) != {'Name', 'Value'}
+                or any(section.get('heading_present') is not True
+                       or any(name not in section.get('publics', {}) for name in names)
+                       for section in sections.values())
+                or any(sections['Name']['publics'][name] != sections['Value']['publics'][name]
+                       for name in names)
+                or layout.get('region_present') is not (not initialized)
+                or (not initialized and layout.get('length') != lengths.get(case['case'], 534))):
+            raise ValueError('sound record owners lack measured resolved map extents')
+        addresses = []
+        sizes = {'_fd_50F6_0000': 336, '_fd_50F6_4A4E': 198}
+        if case['case'] == 'wrong_total_size_57_voice_rows': sizes[voice['name']] = 342
+        elif case['case'] == 'wrong_record_stride_near_pointer': sizes[voice['name']] = 224
+        elif case['case'] == 'short_extent_55_voice_32_channels':
+            sizes = {voice['name']:330, chan['name']:192}
+        for name in names:
+            try:
+                segment, offset = (int(n, 16) for n in sections['Name']['publics'][name].split(':'))
+            except (KeyError, ValueError, AttributeError):
+                raise ValueError('sound record owner address missing')
+            if layout.get('symbols', {}).get(name.upper()) != {'segment':segment, 'offset':offset}:
+                raise ValueError('sound record map address disagrees with measured owner')
+            start = 16*segment+offset
+            if not initialized and not (layout['start_linear'] <= start
+                    and start+sizes[name]-1 <= layout['stop_linear']
+                    and layout['stop_linear']-layout['start_linear']+1 == layout['length']):
+                raise ValueError('sound record owner outside measured communal allocation')
+            addresses.append((start, start+sizes[name]))
+        if not (addresses[0][1] <= addresses[1][0] or addresses[1][1] <= addresses[0][0]):
+            raise ValueError('sound record owners overlap')
+    negatives = [r for r in contract.get('link_binding_negative_controls', []) if r.get('linker') == profile]
+    if (len(negatives) != 1 or negatives[0].get('case') != 'wrong_symbol_base_name_negative'
+            or negatives[0].get('executed') is not False or negatives[0].get('passed') is not True
+            or negatives[0].get('diagnosed_symbol') != '_fd_50F6_0000'
+            or negatives[0].get('unresolved_target_diagnosed') is not True
+            or negatives[0].get('run_log_absent') is not True
+            or negatives[0].get('actual_log') != ''
+            or negatives[0].get('expected') != 'UNRESOLVED_NOT_EXECUTED'
+            or negatives[0].get('actual') != 'UNRESOLVED_NOT_EXECUTED'
+            or negatives[0].get('linker_produced_executable') is not True
+            or negatives[0].get('linker_produced_map') is not True):
+        raise ValueError('sound record wrong-name control was not diagnosed and kept unexecuted')
+    sections = negatives[0].get('map_public_sections', {})
+    wrong_names = ['_fd_50F6_0002', '_fd_50F6_4A4E']
+    if (set(sections) != {'Name', 'Value'}
+            or any(s.get('heading_present') is not True
+                   or any(n not in s.get('publics', {}) for n in wrong_names)
+                   or '_fd_50F6_0000' in s.get('publics', {}) for s in sections.values())
+            or any(sections['Name']['publics'][n] != sections['Value']['publics'][n] for n in wrong_names)):
+        raise ValueError('sound record wrong-name map did not retain the distinct owner and unresolved target')
+
+
+# Individual source-functional scalar owners; no allocation-order assumptions.
+PROVIDER_SPECS['source-owned:ant-movement-words'] = ('ANTMOVE', None, (('_fd_50F6_0496', 2), ('_fd_50F6_04C2', 2), ('_fd_50F6_04C4', 2), ('_fd_50F6_04E2', 2), ('_fd_50F6_07C0', 2), ('_fd_50F6_084E', 2), ('_fd_50F6_08DA', 2), ('_fd_50F6_08E2', 2), ('_fd_50F6_09F0', 2), ('_fd_50F6_0AB6', 2), ('_fd_50F6_0AC6', 2), ('_fd_50F6_0AD6', 2), ('_fd_50F6_0AE8', 2), ('_fd_50F6_0AF8', 2), ('_fd_50F6_104E', 2), ('_fd_50F6_1058', 2)), 'int far fd_50F6_0496; int far fd_50F6_04C2; int far fd_50F6_04C4; int far fd_50F6_04E2; int far fd_50F6_07C0; int far fd_50F6_084E; int far fd_50F6_08DA; int far fd_50F6_08E2; int far fd_50F6_09F0; int far fd_50F6_0AB6; int far fd_50F6_0AC6; int far fd_50F6_0AD6; int far fd_50F6_0AE8; int far fd_50F6_0AF8; int far fd_50F6_104E; int far fd_50F6_1058;')
+FAR_PROVIDER_MODULES.add('source-owned:ant-movement-words')
+V21_STORAGE_ANCHORS.update({'_fd_50F6_0496': [1174, ['fd_50F6_0496']], '_fd_50F6_04C2': [1218, ['fd_50F6_04C2']], '_fd_50F6_04C4': [1220, ['fd_50F6_04C4']], '_fd_50F6_04E2': [1250, ['fd_50F6_04E2']], '_fd_50F6_07C0': [1984, ['fd_50F6_07C0']], '_fd_50F6_084E': [2126, ['fd_50F6_084E']], '_fd_50F6_08DA': [2266, ['fd_50F6_08DA']], '_fd_50F6_08E2': [2274, ['fd_50F6_08E2']], '_fd_50F6_09F0': [2544, ['fd_50F6_09F0']], '_fd_50F6_0AB6': [2742, ['fd_50F6_0AB6']], '_fd_50F6_0AC6': [2758, ['fd_50F6_0AC6']], '_fd_50F6_0AD6': [2774, ['fd_50F6_0AD6']], '_fd_50F6_0AE8': [2792, ['fd_50F6_0AE8']], '_fd_50F6_0AF8': [2808, ['fd_50F6_0AF8']], '_fd_50F6_104E': [4174, ['fd_50F6_104E']], '_fd_50F6_1058': [4184, ['fd_50F6_1058']]})
+PROVIDER_SPECS['source-owned:world-output-state'] = ('WORLDOUT', None, (('_fd_50F6_0200', 2), ('_fd_50F6_020E', 2), ('_fd_50F6_0224', 2), ('_fd_50F6_0242', 2), ('_fd_50F6_035E', 2), ('_fd_50F6_036C', 2), ('_fd_50F6_0472', 4), ('_fd_50F6_09FA', 2), ('_fd_50F6_0A00', 2), ('_fd_50F6_1040', 2), ('_fd_50F6_1068', 4), ('_fd_50F6_1082', 4), ('_fd_50F6_108E', 4), ('_fd_50F6_10A2', 4), ('_fd_50F6_10B2', 2), ('_fd_50F6_10C0', 2)), 'int far fd_50F6_0200; int far fd_50F6_020E; int far fd_50F6_0224; int far fd_50F6_0242; int far fd_50F6_035E; int far fd_50F6_036C; typedef union { long signed_view; unsigned long unsigned_view; } FAR_LONG_VIEWS; FAR_LONG_VIEWS far fd_50F6_0472; int far fd_50F6_09FA; int far fd_50F6_0A00; int far fd_50F6_1040; long far fd_50F6_1068; long far fd_50F6_1082; long far fd_50F6_108E; long far fd_50F6_10A2; int far fd_50F6_10B2; int far fd_50F6_10C0;')
+FAR_PROVIDER_MODULES.add('source-owned:world-output-state')
+V21_STORAGE_ANCHORS.update({'_fd_50F6_0200': [512, ['fd_50F6_0200']], '_fd_50F6_020E': [526, ['fd_50F6_020E']], '_fd_50F6_0224': [548, ['fd_50F6_0224']], '_fd_50F6_0242': [578, ['fd_50F6_0242']], '_fd_50F6_035E': [862, ['fd_50F6_035E']], '_fd_50F6_036C': [876, ['fd_50F6_036C']], '_fd_50F6_0472': [1138, ['fd_50F6_0472']], '_fd_50F6_09FA': [2554, ['fd_50F6_09FA']], '_fd_50F6_0A00': [2560, ['fd_50F6_0A00']], '_fd_50F6_1040': [4160, ['fd_50F6_1040']], '_fd_50F6_1068': [4200, ['fd_50F6_1068']], '_fd_50F6_1082': [4226, ['fd_50F6_1082']], '_fd_50F6_108E': [4238, ['fd_50F6_108E']], '_fd_50F6_10A2': [4258, ['fd_50F6_10A2']], '_fd_50F6_10B2': [4274, ['fd_50F6_10B2']], '_fd_50F6_10C0': [4288, ['fd_50F6_10C0']]})
+PROVIDER_SPECS['source-owned:history-scalar-state'] = ('HISTOTAL', None, (('_fd_50F6_04F4', 2), ('_fd_50F6_0A90', 2), ('_fd_50F6_0A9E', 2), ('_fd_50F6_0AC4', 2), ('_fd_50F6_0AC8', 2), ('_fd_50F6_0ADA', 4), ('_fd_50F6_0EFC', 4), ('_fd_50F6_0F30', 4), ('_fd_50F6_0F3E', 4), ('_fd_50F6_0FBC', 4), ('_fd_50F6_0FC2', 4), ('_fd_50F6_1000', 4)), 'int far fd_50F6_04F4; int far fd_50F6_0A90; int far fd_50F6_0A9E; int far fd_50F6_0AC4; int far fd_50F6_0AC8; long far fd_50F6_0ADA; long far fd_50F6_0EFC; long far fd_50F6_0F30; long far fd_50F6_0F3E; long far fd_50F6_0FBC; long far fd_50F6_0FC2; long far fd_50F6_1000;')
+FAR_PROVIDER_MODULES.add('source-owned:history-scalar-state')
+V21_STORAGE_ANCHORS.update({'_fd_50F6_04F4': [1268, ['fd_50F6_04F4']], '_fd_50F6_0A90': [2704, ['fd_50F6_0A90']], '_fd_50F6_0A9E': [2718, ['fd_50F6_0A9E']], '_fd_50F6_0AC4': [2756, ['fd_50F6_0AC4']], '_fd_50F6_0AC8': [2760, ['fd_50F6_0AC8']], '_fd_50F6_0ADA': [2778, ['fd_50F6_0ADA']], '_fd_50F6_0EFC': [3836, ['fd_50F6_0EFC']], '_fd_50F6_0F30': [3888, ['fd_50F6_0F30']], '_fd_50F6_0F3E': [3902, ['fd_50F6_0F3E']], '_fd_50F6_0FBC': [4028, ['fd_50F6_0FBC']], '_fd_50F6_0FC2': [4034, ['fd_50F6_0FC2']], '_fd_50F6_1000': [4096, ['fd_50F6_1000']]})
+V21_SCALAR_CONTRACTS = {'source-owned:ant-movement-words': ('ant_movement_words_contract', {'typed_raw_save_positive': 'PASS_TYPED16_SAVE_RAW16_ZERO_STARTUP', 'wrong_width_long_owner': 'WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED', 'wrong_signedness_unsigned_view': 'WRONG_UNSIGNED_VIEW_DETECTED', 'initialized_nonzero_owner': 'INITIALIZED_NONZERO_OWNER_DETECTED', 'shifted_save_rec_base': 'SHIFTED_SAVEREC_BASE_DETECTED', 'short_extent_overrun_runtime': 'OVERFLOW_RUNTIME_PASS_SHORT_OWNER_REJECTED_BY_OMF'}), 'source-owned:world-output-state': ('world_output_state_contract', {'typed_raw_saverec_zero_crt': 'PASS_TYPED_RAW_SAVEREC_ZERO_CRT', 'wrong_unsigned_long_consumer': 'WRONG_UNSIGNED_VIEW_DETECTED', 'initialized_nonzero_owner': 'INITIALIZED_NONZERO_OWNER_DETECTED', 'shifted_saverec_base': 'SHIFTED_SAVEREC_BASE_DETECTED'}), 'source-owned:history-scalar-state': ('history_scalar_state_contract', {'typed_positive': 'PASS_TYPED_SIGNED_STARTUP', 'raw_saverec_positive': 'PASS_RAW_SAVEREC_SIGNED', 'width_short_long': 'WIDTH_LAYOUT_CONTRAST_DETECTED', 'width_wide_int': 'WIDTH_LAYOUT_CONTRAST_DETECTED', 'unsigned_contrast': 'UNSIGNED_SIGN_CONTRAST_DETECTED', 'initializer_contrast': 'NONZERO_INITIALIZER_DETECTED', 'shifted_saverec_contrast': 'SHIFTED_SAVEREC_BASE_DETECTED'})}
+
+def _v21_scalar_case_layout(module, groups=(), extra_publics=(), literal_aliases=()):
+    names = [c['name'].lower() for c in provider_communals(module)]
+    aliases = [(prefix+str(i), names[target], deltas.get(i, 0))
+               for prefix, targets, deltas in groups for i,target in enumerate(targets)]
+    aliases += [(alias,names[target],delta) for alias,target,delta in literal_aliases]
+    return {'required_publics': sorted(names + list(extra_publics) + [a for a,_,_ in aliases]),
+            'aliases': sorted(aliases)}
+
+V21_SCALAR_CASE_LAYOUTS = {}
+V21_SCALAR_CASE_LAYOUTS['source-owned:ant-movement-words'] = {
+    'typed_raw_save_positive': _v21_scalar_case_layout('source-owned:ant-movement-words', [('_probeexact', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), {})], ('_probesaverows',), ()),
+    'wrong_width_long_owner': _v21_scalar_case_layout('source-owned:ant-movement-words', [('_probeupper', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), {0: 2, 1: 2, 2: 2, 3: 2, 4: 2, 5: 2, 6: 2, 7: 2, 8: 2, 9: 2, 10: 2, 11: 2, 12: 2, 13: 2, 14: 2, 15: 2}), ('_probewhole', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), {})], (), ()),
+    'wrong_signedness_unsigned_view': _v21_scalar_case_layout('source-owned:ant-movement-words', [], (), ()),
+    'initialized_nonzero_owner': _v21_scalar_case_layout('source-owned:ant-movement-words', [], (), ()),
+    'shifted_save_rec_base': _v21_scalar_case_layout('source-owned:ant-movement-words', [], ('_probesaverows',), ()),
+    'short_extent_overrun_runtime': _v21_scalar_case_layout('source-owned:ant-movement-words', [], (), ()),
+}
+V21_SCALAR_CASE_LAYOUTS['source-owned:world-output-state'] = {
+    'typed_raw_saverec_zero_crt': _v21_scalar_case_layout('source-owned:world-output-state', [('_probee', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), {}), ('_probes', (0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15), {})], (), ()),
+    'wrong_unsigned_long_consumer': _v21_scalar_case_layout('source-owned:world-output-state', [], (), (('_probesign', 10, 0),)),
+    'initialized_nonzero_owner': _v21_scalar_case_layout('source-owned:world-output-state', [('_probee', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), {})], (), ()),
+    'shifted_saverec_base': _v21_scalar_case_layout('source-owned:world-output-state', [('_probee', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), {}), ('_probes', (0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15), {0: 2})], (), ()),
+}
+V21_SCALAR_CASE_LAYOUTS['source-owned:history-scalar-state'] = {
+    'typed_positive': _v21_scalar_case_layout('source-owned:history-scalar-state', [('_probetyped', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), {})], (), ()),
+    'raw_saverec_positive': _v21_scalar_case_layout('source-owned:history-scalar-state', [('_probesave', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), {})], (), ()),
+    'width_short_long': _v21_scalar_case_layout('source-owned:history-scalar-state', [], (), ()),
+    'width_wide_int': _v21_scalar_case_layout('source-owned:history-scalar-state', [], (), ()),
+    'unsigned_contrast': _v21_scalar_case_layout('source-owned:history-scalar-state', [], (), ()),
+    'initializer_contrast': _v21_scalar_case_layout('source-owned:history-scalar-state', [], (), ()),
+    'shifted_saverec_contrast': _v21_scalar_case_layout('source-owned:history-scalar-state', [('_probeshift', (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), {0: 2})], (), ()),
+}
+
+def _v21_scalar_compiler_shapes(module, wide_names, short_widths, initialized_names,
+                                 initialized_segment, unsigned=False, save_fixups=False):
+    owner = provider_communals(module)
+    result = {'owner': owner,
+              'wide': [dict(c, count=4, length=4) if c['name'] in wide_names else c for c in owner],
+              'short': [dict(c, count=short_widths[c['name']], length=short_widths[c['name']])
+                        if c['name'] in short_widths else c for c in owner],
+              'initialized': [c for c in owner if c['name'] not in initialized_names],
+              'initialized_publics': sorted(initialized_names),
+              'initialized_segments': [dict(name=initialized_segment, kind='FAR_DATA',
+                  length=sum(c['length'] for c in owner if c['name'] in initialized_names))]}
+    if unsigned: result['unsigned'] = owner
+    if save_fixups: result['save_rec_pointer_fixups'] = True
+    return result
+
+V21_SCALAR_SHAPES = {}
+V21_SCALAR_SHAPES['source-owned:ant-movement-words'] = _v21_scalar_compiler_shapes(
+    'source-owned:ant-movement-words', ('_fd_50F6_0496', '_fd_50F6_04C2', '_fd_50F6_04C4', '_fd_50F6_04E2', '_fd_50F6_07C0', '_fd_50F6_084E', '_fd_50F6_08DA', '_fd_50F6_08E2', '_fd_50F6_09F0', '_fd_50F6_0AB6', '_fd_50F6_0AC6', '_fd_50F6_0AD6', '_fd_50F6_0AE8', '_fd_50F6_0AF8', '_fd_50F6_104E', '_fd_50F6_1058'), {'_fd_50F6_0496': 1},
+    ('_fd_50F6_0496', '_fd_50F6_04C2', '_fd_50F6_04C4', '_fd_50F6_04E2', '_fd_50F6_07C0', '_fd_50F6_084E', '_fd_50F6_08DA', '_fd_50F6_08E2', '_fd_50F6_09F0', '_fd_50F6_0AB6', '_fd_50F6_0AC6', '_fd_50F6_0AD6', '_fd_50F6_0AE8', '_fd_50F6_0AF8', '_fd_50F6_104E', '_fd_50F6_1058'), 'ANTMINI7_DATA', unsigned=False, save_fixups=True)
+V21_SCALAR_SHAPES['source-owned:world-output-state'] = _v21_scalar_compiler_shapes(
+    'source-owned:world-output-state', ('_fd_50F6_0200',), {'_fd_50F6_1068': 2},
+    ('_fd_50F6_0200',), 'INITOWN7_DATA', unsigned=True, save_fixups=False)
+V21_SCALAR_SHAPES['source-owned:history-scalar-state'] = _v21_scalar_compiler_shapes(
+    'source-owned:history-scalar-state', ('_fd_50F6_04F4',), {'_fd_50F6_0ADA': 2},
+    ('_fd_50F6_04F4',), 'HISTINIT5_DATA', unsigned=False, save_fixups=False)
+V21_STORAGE_CONTRACTS.update(V21_SCALAR_CONTRACTS)
+
+def _require_v21_scalar_controls(report, profile):
+    for module, (key, _) in V21_SCALAR_CONTRACTS.items():
+        if not any(r['module'] == module for r in report['translation_units']):
+            continue
+        contract = report.get(key, {})
+        expected = provider_communals(module)
+        shapes = V21_SCALAR_SHAPES[module]
+        controls = contract.get('compiler_controls', {})
+        if (set(controls) != set(shapes)
+                or any(controls.get(name) != value for name, value in shapes.items()
+                       if name != 'save_rec_pointer_fixups')):
+            raise ValueError('v21 scalar owner lacks measured type/width/initializer contrasts')
+        if 'save_rec_pointer_fixups' in shapes:
+            fixups = controls.get('save_rec_pointer_fixups', {})
+            for key, addend, segment in [('positive_rows', 0, 'ANTPOS7_DATA'),
+                                         ('shifted_rows', 1, 'ANTSHFT7_DATA')]:
+                wanted = [dict(segment=segment, field_offset=4+8*i, target=c['name'],
+                               fixup_displacement=0, raw_offset_addend=addend)
+                          for i,c in enumerate(expected)]
+                if fixups.get(key) != wanted:
+                    raise ValueError('v21 movement SaveRec pointer fixup/addend matrix changed')
+            if (fixups.get('positive_expected_raw_offset_addend') != 0
+                    or fixups.get('shifted_expected_raw_offset_addend') != 1
+                    or fixups.get('fixup_displacement_for_both') != 0):
+                raise ValueError('v21 movement SaveRec pointer contrast changed')
+        for case in contract['cases']:
+            if case['linker'] != profile:
+                continue
+            spec = V21_SCALAR_CASE_LAYOUTS[module][case['case']]
+            matrix = case.get('public_address_matrix', {})
+            relations = case.get('reviewed_alias_relations', [])
+            marker = V21_SCALAR_CONTRACTS[module][1][case['case']]
+            if (case.get('runner_returncode') != 0 or case.get('exe_created') is not True
+                    or case.get('actual_marker_verbatim') != marker+'\r\n'
+                    or case.get('actual_marker_bytes_hex') != (marker+'\r\n').encode().hex()
+                    or case.get('all_required_publics_in_both_sections') is not True
+                    or case.get('required_publics') != spec['required_publics']
+                    or set(matrix) != {'Name','Value'}
+                    or any(sorted(rows) != spec['required_publics'] for rows in matrix.values())
+                    or matrix.get('Name') != matrix.get('Value')
+                    or len(relations) != len(spec['aliases'])
+                    or sorted((r.get('alias'),r.get('target'),r.get('delta')) for r in relations)
+                       != [tuple(r) for r in spec['aliases']]):
+                raise ValueError('v21 scalar owner lacks complete raw output/public/alias matrices')
+            try:
+                addresses = {n:tuple(int(x,16) for x in a.split(':'))
+                             for n,a in matrix['Name'].items()}
+                if any(len(a)!=2 or any(v<0 or v>0xffff for v in a) for a in addresses.values()):
+                    raise ValueError()
+            except (ValueError, AttributeError):
+                raise ValueError('v21 scalar public address is invalid')
+            for relation in relations:
+                alias,target=relation['alias'],relation['target']
+                a,t=addresses[alias],addresses[target]
+                if (relation.get('passed') is not True or a[0]!=t[0] or a[1]!=t[1]+relation['delta']
+                        or relation.get('name_alias')!=matrix['Name'][alias]
+                        or relation.get('value_alias')!=matrix['Value'][alias]
+                        or relation.get('name_target')!=matrix['Name'][target]
+                        or relation.get('value_target')!=matrix['Value'][target]):
+                    raise ValueError('v21 scalar alias displacement/address disagrees')

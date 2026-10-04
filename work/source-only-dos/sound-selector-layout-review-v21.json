@@ -1,0 +1,109 @@
+{
+  "schema": "simant-sound-selector-layout-root-review-v21",
+  "root_reviewed": true,
+  "classification": "UNRESOLVED",
+  "gate": "sound-selector-out-of-range-layout",
+  "source_inputs": [
+    {
+      "path": "src/root/m00DF.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881
+    },
+    {
+      "path": "src/root/m277E.c",
+      "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "size": 10363
+    },
+    {
+      "path": "src/root/m293A.c",
+      "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "size": 3635
+    },
+    {
+      "path": "src/root/m2815.c",
+      "sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+      "size": 2257
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+      "size": 6627
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src/root/m0000.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "size": 5066
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "work/source-only-dos/saved-sound-state-contract-v1.json",
+      "sha256": "985e29185d67c37da23c1e50bd343d741b526bb942a7cd07e35fc7dd89a39330",
+      "size": 114303
+    },
+    {
+      "path": "work/source-only-dos/c-data-bindings-v1.json",
+      "sha256": "dbc792e0fba712cd1fb251149078cb3aa902c8860d6cc5e738aa1b8ddecc6f89",
+      "size": 17508
+    },
+    {
+      "path": "work/source-only-dos/sound-selector-layout-v21/worker-receipt.json",
+      "sha256": "fcd296fd2e07d1d174f72f07523062deb7640a187b9976ccf1ce8928546b12c4",
+      "size": 20229
+    },
+    {
+      "path": "work/source-only-dos/sound-selector-layout-v21/worker-review.md",
+      "sha256": "efda105dc8b0bab4975a2f87cb670c13186cd54d3d5da817dc57bd6f3279b297",
+      "size": 5277
+    }
+  ],
+  "historical_research_and_build_observations": [
+    {
+      "path": "build/source-only-dos/build-report.json",
+      "sha256": "be2871f8acfdcce12ec4026d673a38661a3c67c21bace19d590c8ef8a4a6b61d",
+      "size": 6097447
+    },
+    {
+      "path": "tools/context.py",
+      "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+      "size": 8661
+    }
+  ],
+  "selector_domain": {
+    "parser": "digits 0..9",
+    "detector_setup_cleanup": "indices 0..8",
+    "automatic": "-1 -> indices 0..8",
+    "explicit_zero": "returns before init"
+  },
+  "first_unresolved_edge": "Explicit selector 9 enters fd_55B3_74DA[9] after sound DB open returns; adjacent pointer targets saved-state storage as code.",
+  "conditional_edges": [
+    "If that call returns false normally, mode falls back to 1.",
+    "If it returns nonzero normally, setup[9] aliases cleanup[0] within one accepted TU.",
+    "If 9 is saved and cleanup runs, cleanup[9] reads separate-TU g_68FE data as a function pointer; independent layout does not preserve this adjacency."
+  ],
+  "controls_status": "Worker negative_controls are static contrast expectations; no claim of executed game/negative runtime cases.",
+  "unchanged": [
+    "canonical sources",
+    "manifest",
+    "oracle lock"
+  ],
+  "milestone": "Preflight unresolved; no repair by clamp, fabricated slot, physical padding or original bytes."
+}

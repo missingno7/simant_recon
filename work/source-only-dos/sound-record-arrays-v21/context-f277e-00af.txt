@@ -1,0 +1,36 @@
+f_277E_00AF  root:277E:00AF  linear 2788F  size 91  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call
+  module frame 277E: function 2/18; neighbours: f_277E_0000, f_277E_010A, f_277E_0154
+  frame: {'frame': 'none'}
+  00AF  push si
+  00B0  sub si, si
+  00B2  mov ax, 0x50f6                     [seg 50F6]
+  00B5  mov es, ax
+  00B7  jmp 0xe5
+  00B9  mov ax, si
+  00BB  mov cx, 6
+  00BE  imul cx
+  00C0  mov bx, ax
+  00C2  sub al, al
+  00C4  mov byte ptr es:[bx + 0x4a4e], al
+  00C9  mov byte ptr es:[bx + 0x4a4f], al
+  00CE  mov byte ptr es:[bx + 0x4a52], al
+  00D3  mov byte ptr es:[bx + 0x4a53], 0xf
+  00D9  mov byte ptr es:[bx + 0x4a50], al
+  00DE  mov byte ptr es:[bx + 0x4a51], 0xff
+  00E4  inc si
+  00E5  cmp si, 0x21
+  00E8  jl 0xb9
+  00EA  mov ax, 0x50f6                     [seg 50F6]
+  00ED  mov ds, ax
+  00EF  sub ax, ax
+  00F1  mov word ptr [0x1f2], ax           DS:01F2
+  00F4  mov word ptr [0x1f4], ax           DS:01F4
+  00F7  mov word ptr [0x1f6], ax           DS:01F6
+  00FA  mov word ptr [0x1f8], ax           DS:01F8
+  00FD  mov word ptr [0x1fa], ax           DS:01FA
+  0100  mov word ptr [0x1fc], ax           DS:01FC
+  0103  mov cx, 0x55b3                     [seg 55B3 DGROUP]
+  0106  mov ds, cx
+  0108  pop si
+  0109  retf

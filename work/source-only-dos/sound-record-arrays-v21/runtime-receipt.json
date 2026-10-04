@@ -1,0 +1,2609 @@
+{
+  "admitted": false,
+  "all_required_checks_pass": true,
+  "candidate": {
+    "basename": "SNDRECS",
+    "code_less": true,
+    "communals": [
+      {
+        "count": 56,
+        "element_size": 6,
+        "kind": "far",
+        "length": 336,
+        "name": "_fd_50F6_0000"
+      },
+      {
+        "count": 33,
+        "element_size": 6,
+        "kind": "far",
+        "length": 198,
+        "name": "_fd_50F6_4A4E"
+      }
+    ],
+    "initialized_segments": {},
+    "module_label": "source-owned:sound-record-arrays",
+    "provider_source": {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\provider.c",
+      "sha256": "2642ee9d18c8869d8ae624b0819274e9972cb47cca1236e72b883ef19c0786d0"
+    }
+  },
+  "compiler": {
+    "basename": "SNDRECS",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Gs"
+    ],
+    "product": "Microsoft C 6.00AX (DOS-extended CL /EM: C1L, C2L, C3L), archive.org Microsoft_c_60ax disk 8",
+    "profile": "msc600ax",
+    "required_flags": [
+      "/EM"
+    ]
+  },
+  "denied_oracle_reads": [],
+  "fixtures": [
+    {
+      "actual_log": "PASS",
+      "case": "positive_exact_provider",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 534,
+      "expected_link_failure_for": null,
+      "expected_log": "PASS",
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "629d14cd18818058d21e8c5421c7bd7a5b9f6f63114fa080b306c3657396ce50",
+        "region_present": true,
+        "start_linear": 4592,
+        "stop_linear": 5125,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 198,
+            "segment": 287
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 0,
+            "segment": 287
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\CHRDR.OBJ",
+          "sha256": "f0be2426722a79c498f2bc6804cd606bd08fda4a27ebeece8343d3360a0647fd",
+          "size": 380
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\CHWRT.OBJ",
+          "sha256": "c589ab6fed02875f2d894379b98636a12787f062429a7358602fb9e2d86b6350",
+          "size": 342
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\dosbox.conf",
+          "sha256": "14d4160693e00bcc8b8c6d50a443fad75504aba821b6fd50cb04c21b5f050fd4",
+          "size": 456
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\LINK.LOG",
+          "sha256": "87a60d7830969d19e58e62eb059909b54ceecc997cb8e2875eccfb821663ad03",
+          "size": 467
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\MAIN.OBJ",
+          "sha256": "dfc9a76246ee494a72385aa5227498da49c3a2458779f1b9f44c7a592b731f45",
+          "size": 774
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\PROBE.EXE",
+          "sha256": "f96776398c62528a501cf6e74a2598f6a96db7d4e1ced9e79ed8523d8811b8e7",
+          "size": 6675
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\PROBE.LNK",
+          "sha256": "884a786d9c3d7ea7acaa90fbdf1c44f51f64f9839d17e309dbf2e573c70f9e77",
+          "size": 101
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\PROBE.MAP",
+          "sha256": "629d14cd18818058d21e8c5421c7bd7a5b9f6f63114fa080b306c3657396ce50",
+          "size": 9178
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\RUN.BAT",
+          "sha256": "f2e2f123cd6b90f53d938e9c0e5664658039ac5b0f5d666f7befc7fa4b0408cc",
+          "size": 94
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\positive_exact_provider\\SNDRECS.OBJ",
+          "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
+          "size": 229
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, CHWRT, CHRDR, SNDRECS\n=> \n9K\n",
+      "link_log_sha256": "feb28328c1eb86e72519c2f01ecfaa0df3d98644cb8563d0a8200537f5f20b0c",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "LINKED",
+      "case": "wrong_total_size_57_voice_rows",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 540,
+      "expected_link_failure_for": null,
+      "expected_log": "LINKED",
+      "far_bss_layout": {
+        "length": 540,
+        "raw_map_sha256": "7f24741f238e4092f33ddaa67f62775d1b3a26099d32328d48a9cdefa9e72a47",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4747,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 342,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\dosbox.conf",
+          "sha256": "4282c84acec75c3e668d7ce9ffe167d0495e443f0cfb5edc89226c10fdf87b16",
+          "size": 463
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\MAIN.OBJ",
+          "sha256": "6a9f0b55445e8c036ed1f31ab488ee65a347f8188870d8e72f294a0ab134735e",
+          "size": 279
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\OWNER.OBJ",
+          "sha256": "98ab4eca441f557fff11fecf7e94f19ca4840b3d8945ea9662f4d55bcb492264",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\PROBE.EXE",
+          "sha256": "6026d7f461ac3d36d9ef547ef54ad00dcd195dffdc16144d2a8dadb09cde27b1",
+          "size": 6261
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\PROBE.MAP",
+          "sha256": "7f24741f238e4092f33ddaa67f62775d1b3a26099d32328d48a9cdefa9e72a47",
+          "size": 8920
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\RUN.BAT",
+          "sha256": "f2e2f123cd6b90f53d938e9c0e5664658039ac5b0f5d666f7befc7fa4b0408cc",
+          "size": 94
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_total_size_57_voice_rows\\RUN.LOG",
+          "sha256": "73e19f82dcc881fc163a0fb14b547db95a769d9ad68a2ca6701ee677c0664da3",
+          "size": 8
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n9K\n",
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "LINKED",
+      "case": "wrong_record_stride_near_pointer",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 422,
+      "expected_link_failure_for": null,
+      "expected_log": "LINKED",
+      "far_bss_layout": {
+        "length": 422,
+        "raw_map_sha256": "0199b6bc185d7caf7cf861adbc39d2ba1e0894f372f49dddbedc72039ae2f0c6",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4629,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 224,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\dosbox.conf",
+          "sha256": "4388c02010d4156ab23755c1c16c3021e438a2c58fcd89d861bbabb0f45226ae",
+          "size": 465
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\MAIN.OBJ",
+          "sha256": "6a9f0b55445e8c036ed1f31ab488ee65a347f8188870d8e72f294a0ab134735e",
+          "size": 279
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\OWNER.OBJ",
+          "sha256": "e1257ff39469087952ecaf63a008477bd1eba5db7ac6d372763089f904534f8d",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\PROBE.EXE",
+          "sha256": "59b1db558a79b19cd6a4be4c956c5f410ea9f91565e02fc752530d82e0b7c5a6",
+          "size": 6149
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\PROBE.MAP",
+          "sha256": "0199b6bc185d7caf7cf861adbc39d2ba1e0894f372f49dddbedc72039ae2f0c6",
+          "size": 8920
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\RUN.BAT",
+          "sha256": "f2e2f123cd6b90f53d938e9c0e5664658039ac5b0f5d666f7befc7fa4b0408cc",
+          "size": 94
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_record_stride_near_pointer\\RUN.LOG",
+          "sha256": "73e19f82dcc881fc163a0fb14b547db95a769d9ad68a2ca6701ee677c0664da3",
+          "size": 8
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n9K\n",
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "UNSIGNED_WORD_CONTROL_DETECTED",
+      "case": "signed_word_unsigned_view_negative",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 534,
+      "expected_link_failure_for": null,
+      "expected_log": "UNSIGNED_WORD_CONTROL_DETECTED",
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "6e69e4b4eccac62411a81ab7426101a140522dbe32d4b43b880a488aeaaaffa2",
+        "region_present": true,
+        "start_linear": 4224,
+        "stop_linear": 4757,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 264
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 264
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\dosbox.conf",
+          "sha256": "1cf56a71400400fcbd8395f696d19b3506a12984071e9f8d2769c173b6aff689",
+          "size": 467
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\MAIN.OBJ",
+          "sha256": "d0e8551097dc9a4380a6b1a99c2917bbf1aba03f237759f8421bda865038db0c",
+          "size": 358
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\OWNER.OBJ",
+          "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\PROBE.EXE",
+          "sha256": "0b2c15b55ac86f84b08a57127314399dc3e7b1786ccf8ba73a901a140dc63684",
+          "size": 6307
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\PROBE.MAP",
+          "sha256": "6e69e4b4eccac62411a81ab7426101a140522dbe32d4b43b880a488aeaaaffa2",
+          "size": 8920
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\RUN.BAT",
+          "sha256": "f2e2f123cd6b90f53d938e9c0e5664658039ac5b0f5d666f7befc7fa4b0408cc",
+          "size": 94
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\signed_word_unsigned_view_negative\\RUN.LOG",
+          "sha256": "cb9f5c7023b5db4ae72eff4396e719900b283cf9d6fa2debf502872d677879d5",
+          "size": 32
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n9K\n",
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "NEAR_POINTER_CONTROL_DETECTED",
+      "case": "near_pointer_consumer_view_negative",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 534,
+      "expected_link_failure_for": null,
+      "expected_log": "NEAR_POINTER_CONTROL_DETECTED",
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "89d982669726913c2fc1ccd9bed00b3c09346e351ed592fae721e28a25e01357",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4741,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\dosbox.conf",
+          "sha256": "1013453bab08ca7f0414a5978941e810f9ae3baca4bacae0b94fba442958c7be",
+          "size": 468
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\MAIN.OBJ",
+          "sha256": "dec54fea353e32ca4681a0d29bbebff905d48753340a9110a8ff19a63602449d",
+          "size": 307
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\OWNER.OBJ",
+          "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\PROBE.EXE",
+          "sha256": "7492b3816b207eee46a5c233fc237e94aea57067584cb3b23855123230e9c7f1",
+          "size": 6289
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\PROBE.MAP",
+          "sha256": "89d982669726913c2fc1ccd9bed00b3c09346e351ed592fae721e28a25e01357",
+          "size": 8920
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\RUN.BAT",
+          "sha256": "f2e2f123cd6b90f53d938e9c0e5664658039ac5b0f5d666f7befc7fa4b0408cc",
+          "size": 94
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\near_pointer_consumer_view_negative\\RUN.LOG",
+          "sha256": "e26f7534d6314f04d8592d1da682ef846cddff3968f3580ca59b430b0a130e7b",
+          "size": 31
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n9K\n",
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "LINKED",
+      "case": "short_extent_55_voice_32_channels",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 522,
+      "expected_link_failure_for": null,
+      "expected_log": "LINKED",
+      "far_bss_layout": {
+        "length": 522,
+        "raw_map_sha256": "2010b3670773fc4294f0fe3bd9376768ba8b77f8e6bf43098d3b8ef240b0af21",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4729,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 330,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\dosbox.conf",
+          "sha256": "e5bfc89bb31fea6fc160416d7f6fc395e49403b2f4d8998071cabdd6d6cb661c",
+          "size": 466
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\MAIN.OBJ",
+          "sha256": "6a9f0b55445e8c036ed1f31ab488ee65a347f8188870d8e72f294a0ab134735e",
+          "size": 279
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\OWNER.OBJ",
+          "sha256": "dff1aae04adcc7f76b1762b19bbcf71a275d83316625092841752f4600d5dc47",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\PROBE.EXE",
+          "sha256": "8033e52c529b59f6b1792a67a88879bc939b1473879516f2f76afc93752e395b",
+          "size": 6245
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\PROBE.MAP",
+          "sha256": "2010b3670773fc4294f0fe3bd9376768ba8b77f8e6bf43098d3b8ef240b0af21",
+          "size": 8920
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\RUN.BAT",
+          "sha256": "f2e2f123cd6b90f53d938e9c0e5664658039ac5b0f5d666f7befc7fa4b0408cc",
+          "size": 94
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\short_extent_55_voice_32_channels\\RUN.LOG",
+          "sha256": "73e19f82dcc881fc163a0fb14b547db95a769d9ad68a2ca6701ee677c0664da3",
+          "size": 8
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n9K\n",
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "INITIALIZED_CONTROL_DETECTED",
+      "case": "initialized_storage_negative",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": null,
+      "expected_link_failure_for": null,
+      "expected_log": "INITIALIZED_CONTROL_DETECTED",
+      "far_bss_layout": {
+        "raw_map_sha256": "d8af75eeef7e7fa82c7d08fdfe28c2e58032271720c329a5c34507e54d85a2bd",
+        "region_present": false,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 265
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 265
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\dosbox.conf",
+          "sha256": "f6e68fcff1ee6d45574183ecda861cafce87ab96f1389fc98af0d8f12b4ebe9f",
+          "size": 461
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\MAIN.OBJ",
+          "sha256": "d1022850fb022e4cd4c99f31e9df5273c8b954c679e8cc11585e7b5802ea941e",
+          "size": 405
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\OWNER.OBJ",
+          "sha256": "748a937e5b415ecb3be0d24b7dbeb4dac5e97e0e402babad44d8aaa1f0d834af",
+          "size": 306
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\PROBE.EXE",
+          "sha256": "79926987b8fca06bee951df18062e7776ff2765b24476416077437c2286d4604",
+          "size": 6323
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\PROBE.MAP",
+          "sha256": "d8af75eeef7e7fa82c7d08fdfe28c2e58032271720c329a5c34507e54d85a2bd",
+          "size": 8921
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\RUN.BAT",
+          "sha256": "f2e2f123cd6b90f53d938e9c0e5664658039ac5b0f5d666f7befc7fa4b0408cc",
+          "size": 94
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\initialized_storage_negative\\RUN.LOG",
+          "sha256": "ba557a99b8d7280767476924b7239a910a312f3362d75bf0f43c55a7eabbe5e4",
+          "size": 30
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n9K\n",
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "",
+      "case": "wrong_symbol_base_name_negative",
+      "dosbox_exit": 0,
+      "executed": false,
+      "expected_far_bss_length": null,
+      "expected_link_failure_for": "_fd_50F6_0000",
+      "expected_log": null,
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "5a2e324e6ab76a5cbc04ddef30166632c9c6e7630baba00cfeae93858f48ed7f",
+        "region_present": true,
+        "start_linear": 2208,
+        "stop_linear": 2741,
+        "symbols": {
+          "_FD_50F6_0002": {
+            "offset": 0,
+            "segment": 138
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 138
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\dosbox.conf",
+          "sha256": "ea7be411de761a2516032475efccddefb24539b6e2ab957407fa385500b5966b",
+          "size": 464
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\LINK.LOG",
+          "sha256": "f468a1a539f5656ef3996039d526c7dfc13db9c7f5d78b2a74706f0f6195729a",
+          "size": 680
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\MAIN.OBJ",
+          "sha256": "37c56397da7e8293160857839db9b43e6e70224ccd6b6ddad4bbf3f28f1ddf9b",
+          "size": 289
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\OWNER.OBJ",
+          "sha256": "0700b58880d8bd0f9617b83917f5433be2fd30d0d2f63dabf8db4cdddd927dae",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\PROBE.EXE",
+          "sha256": "519bad5b09bcf11ce6a4fdcefc79e4721d03aca3296da48788be8af95fb891e8",
+          "size": 3727
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\PROBE.MAP",
+          "sha256": "5a2e324e6ab76a5cbc04ddef30166632c9c6e7630baba00cfeae93858f48ed7f",
+          "size": 7401
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink400\\wrong_symbol_base_name_negative\\RUN.BAT",
+          "sha256": "b499f9f23ab1789125eb2ebac4e5a1ed21299320520e59153f2a3c11d2f749de",
+          "size": 54
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\nUNDEFINED SYMBOL(S) AFTER LIBRARY SEARCH:\n\tSYMBOL\t\t\t\t\t\tFIRST REFERENCE\n\t------\t\t\t\t\t\t---------------\n\t'_fd_50F6_0000'\t\t\t\t\tMAIN.OBJ\n\nwarning wrt0022: .EXE may not execute properly -- undefined symbols\n6K\n1 warning message(s)\n",
+      "link_log_sha256": "79a7e0f93a40f6425f36b9c7d0ad611a798d4f31b24eb8c9f455e34fa0ad7421",
+      "link_succeeded": true,
+      "linker": "rtlink400",
+      "passed": true,
+      "unresolved_target_diagnosed": true
+    },
+    {
+      "actual_log": "PASS",
+      "case": "positive_exact_provider",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 534,
+      "expected_link_failure_for": null,
+      "expected_log": "PASS",
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "66329c3337fe3b6e39248c59b90903f845da6f520041ab2a0d430d333a7e60a4",
+        "region_present": true,
+        "start_linear": 4592,
+        "stop_linear": 5125,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 198,
+            "segment": 287
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 0,
+            "segment": 287
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\CHRDR.OBJ",
+          "sha256": "f0be2426722a79c498f2bc6804cd606bd08fda4a27ebeece8343d3360a0647fd",
+          "size": 380
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\CHWRT.OBJ",
+          "sha256": "c589ab6fed02875f2d894379b98636a12787f062429a7358602fb9e2d86b6350",
+          "size": 342
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\dosbox.conf",
+          "sha256": "3eace2832c44eacbbf2016800ec787742a361b103a86dae3b48c60a3f3e1fc7b",
+          "size": 456
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\LINK.LOG",
+          "sha256": "671663471e24300d6130aff50bd5a8af564b31af1c3b9bea6f0a490cbeb65f70",
+          "size": 998
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\MAIN.OBJ",
+          "sha256": "dfc9a76246ee494a72385aa5227498da49c3a2458779f1b9f44c7a592b731f45",
+          "size": 774
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\PROBE.EXE",
+          "sha256": "b5ce08f3b87f51155827f8f144c1c2cb0d67cf13ee7522cb248fa42e56c9e9f4",
+          "size": 6675
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\PROBE.LNK",
+          "sha256": "884a786d9c3d7ea7acaa90fbdf1c44f51f64f9839d17e309dbf2e573c70f9e77",
+          "size": 101
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\PROBE.MAP",
+          "sha256": "66329c3337fe3b6e39248c59b90903f845da6f520041ab2a0d430d333a7e60a4",
+          "size": 9278
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\RUN.BAT",
+          "sha256": "e8f3c25d809f7f12ad6cae8f19352a6a0a4b141eaea76c827527ac65994219ce",
+          "size": 96
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\positive_exact_provider\\SNDRECS.OBJ",
+          "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
+          "size": 229
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, CHWRT, CHRDR, SNDRECS\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+22H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "link_log_sha256": "935a75bd51a7ffa584ecf3c81ac85872159c68a6052f920814bf64ad0201f0e6",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "LINKED",
+      "case": "wrong_total_size_57_voice_rows",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 540,
+      "expected_link_failure_for": null,
+      "expected_log": "LINKED",
+      "far_bss_layout": {
+        "length": 540,
+        "raw_map_sha256": "6da3ae4df07c23d95ff93608278c495dea66a44eb8c690a5ee5a0c0277ffb3f4",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4747,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 342,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\dosbox.conf",
+          "sha256": "853c188ee75a6e1bea4895f086911e04992a16be54e28c9a32d9ca316b8202c1",
+          "size": 463
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\LINK.LOG",
+          "sha256": "07dde12221d6304e020b2a51587e234a9856b8f84d6b0814af73717cd90f48ab",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\MAIN.OBJ",
+          "sha256": "6a9f0b55445e8c036ed1f31ab488ee65a347f8188870d8e72f294a0ab134735e",
+          "size": 279
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\OWNER.OBJ",
+          "sha256": "98ab4eca441f557fff11fecf7e94f19ca4840b3d8945ea9662f4d55bcb492264",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\PROBE.EXE",
+          "sha256": "874f25ac8f2ff48a6f01abdcaff030342d85a4c3cd35d070a91a18277c3ce1e3",
+          "size": 6261
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\PROBE.MAP",
+          "sha256": "6da3ae4df07c23d95ff93608278c495dea66a44eb8c690a5ee5a0c0277ffb3f4",
+          "size": 9020
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\RUN.BAT",
+          "sha256": "e8f3c25d809f7f12ad6cae8f19352a6a0a4b141eaea76c827527ac65994219ce",
+          "size": 96
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_total_size_57_voice_rows\\RUN.LOG",
+          "sha256": "73e19f82dcc881fc163a0fb14b547db95a769d9ad68a2ca6701ee677c0664da3",
+          "size": 8
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+8H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "link_log_sha256": "98c5608f7f8bb734c41e6d0c7a859aab43fef7dbdfac1d175cb1724170847ec8",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "LINKED",
+      "case": "wrong_record_stride_near_pointer",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 422,
+      "expected_link_failure_for": null,
+      "expected_log": "LINKED",
+      "far_bss_layout": {
+        "length": 422,
+        "raw_map_sha256": "ea42e499f05e90ee09f1a926f23fa2f60a310afb466cd31198af428bdbe70943",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4629,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 224,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\dosbox.conf",
+          "sha256": "f98194267f9d5df14714e2e455c5d15b219cf99cdbda3e61a79fe30f8c8ec04b",
+          "size": 465
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\LINK.LOG",
+          "sha256": "d7ec80d75968e329f08630697f7860950ec9e8a54df4a3d17991701e65e85b34",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\MAIN.OBJ",
+          "sha256": "6a9f0b55445e8c036ed1f31ab488ee65a347f8188870d8e72f294a0ab134735e",
+          "size": 279
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\OWNER.OBJ",
+          "sha256": "e1257ff39469087952ecaf63a008477bd1eba5db7ac6d372763089f904534f8d",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\PROBE.EXE",
+          "sha256": "c0d8017ca851e63ef988de0aa11936188a5ba0e28aa77962e0279957ae16ad1c",
+          "size": 6149
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\PROBE.MAP",
+          "sha256": "ea42e499f05e90ee09f1a926f23fa2f60a310afb466cd31198af428bdbe70943",
+          "size": 9020
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\RUN.BAT",
+          "sha256": "e8f3c25d809f7f12ad6cae8f19352a6a0a4b141eaea76c827527ac65994219ce",
+          "size": 96
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_record_stride_near_pointer\\RUN.LOG",
+          "sha256": "73e19f82dcc881fc163a0fb14b547db95a769d9ad68a2ca6701ee677c0664da3",
+          "size": 8
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+1H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "link_log_sha256": "da65b038fac2c59d373a82eb5c595bc968bf39011bddd1d13e86768bb3409767",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "UNSIGNED_WORD_CONTROL_DETECTED",
+      "case": "signed_word_unsigned_view_negative",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 534,
+      "expected_link_failure_for": null,
+      "expected_log": "UNSIGNED_WORD_CONTROL_DETECTED",
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "29649c4214f7f445c2e8157a18eb2579ebcf1dbb515a3f606ded661f754d619b",
+        "region_present": true,
+        "start_linear": 4224,
+        "stop_linear": 4757,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 264
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 264
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\dosbox.conf",
+          "sha256": "5b98863e7b0c8dccd48994e52a144d0038e44ebb3d34272854a8a530dc3991fb",
+          "size": 467
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\LINK.LOG",
+          "sha256": "98a9966618f692356a5e06e656436698d98faf0ed3fa7ff008ff74f35ce4e1cc",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\MAIN.OBJ",
+          "sha256": "d0e8551097dc9a4380a6b1a99c2917bbf1aba03f237759f8421bda865038db0c",
+          "size": 358
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\OWNER.OBJ",
+          "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\PROBE.EXE",
+          "sha256": "eaccf67e93c3216eaf422b2876011fcd2d74099b9d674a4f9e7997b953e588f1",
+          "size": 6307
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\PROBE.MAP",
+          "sha256": "29649c4214f7f445c2e8157a18eb2579ebcf1dbb515a3f606ded661f754d619b",
+          "size": 9020
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\RUN.BAT",
+          "sha256": "e8f3c25d809f7f12ad6cae8f19352a6a0a4b141eaea76c827527ac65994219ce",
+          "size": 96
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\signed_word_unsigned_view_negative\\RUN.LOG",
+          "sha256": "cb9f5c7023b5db4ae72eff4396e719900b283cf9d6fa2debf502872d677879d5",
+          "size": 32
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+BH Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "link_log_sha256": "91472135af898569951411d371aa23cebb834afa11b0bf865fe63db7fa1343cd",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "NEAR_POINTER_CONTROL_DETECTED",
+      "case": "near_pointer_consumer_view_negative",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 534,
+      "expected_link_failure_for": null,
+      "expected_log": "NEAR_POINTER_CONTROL_DETECTED",
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "792fad0969f9be9230252a67dcb556e366174ac4ef48b67b7514c7055bd6e9b2",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4741,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\dosbox.conf",
+          "sha256": "63a85ca194056cfc6611aad12a61744e850be9ee4799e2181fa33b5210d2d0de",
+          "size": 468
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\LINK.LOG",
+          "sha256": "f67b31fd8d76af6f961f8aa893a1f5623057681f6ad0e23b13298a940432d7ed",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\MAIN.OBJ",
+          "sha256": "dec54fea353e32ca4681a0d29bbebff905d48753340a9110a8ff19a63602449d",
+          "size": 307
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\OWNER.OBJ",
+          "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\PROBE.EXE",
+          "sha256": "6c8455887e47781401486fe78210009b257f5baba20d19300602f527cc8f25cf",
+          "size": 6289
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\PROBE.MAP",
+          "sha256": "792fad0969f9be9230252a67dcb556e366174ac4ef48b67b7514c7055bd6e9b2",
+          "size": 9020
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\RUN.BAT",
+          "sha256": "e8f3c25d809f7f12ad6cae8f19352a6a0a4b141eaea76c827527ac65994219ce",
+          "size": 96
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\near_pointer_consumer_view_negative\\RUN.LOG",
+          "sha256": "e26f7534d6314f04d8592d1da682ef846cddff3968f3580ca59b430b0a130e7b",
+          "size": 31
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+AH Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "link_log_sha256": "2c03e0767b54cb00b97374e137f62eae3ce45850969f2f6c971d3562c4150de0",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "LINKED",
+      "case": "short_extent_55_voice_32_channels",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": 522,
+      "expected_link_failure_for": null,
+      "expected_log": "LINKED",
+      "far_bss_layout": {
+        "length": 522,
+        "raw_map_sha256": "e0fea010c0718539788c05bb28292c9ef44df4e61e86e2e86e6059fc8b1323c0",
+        "region_present": true,
+        "start_linear": 4208,
+        "stop_linear": 4729,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 263
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 330,
+            "segment": 263
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\dosbox.conf",
+          "sha256": "f8c05ef97bb4c2e4b8a83a3420a935082ff6e807abfad4ce18368eca996140c0",
+          "size": 466
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\LINK.LOG",
+          "sha256": "9a9403abf816e537357bd02553558e65f2eee532c913fbc673a38c1d7950aff2",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\MAIN.OBJ",
+          "sha256": "6a9f0b55445e8c036ed1f31ab488ee65a347f8188870d8e72f294a0ab134735e",
+          "size": 279
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\OWNER.OBJ",
+          "sha256": "dff1aae04adcc7f76b1762b19bbcf71a275d83316625092841752f4600d5dc47",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\PROBE.EXE",
+          "sha256": "8e33fbf6c1134a59cab736c03b820532562fd4342cc29ff9af4d7028d3423a96",
+          "size": 6245
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\PROBE.MAP",
+          "sha256": "e0fea010c0718539788c05bb28292c9ef44df4e61e86e2e86e6059fc8b1323c0",
+          "size": 9020
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\RUN.BAT",
+          "sha256": "e8f3c25d809f7f12ad6cae8f19352a6a0a4b141eaea76c827527ac65994219ce",
+          "size": 96
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\short_extent_55_voice_32_channels\\RUN.LOG",
+          "sha256": "73e19f82dcc881fc163a0fb14b547db95a769d9ad68a2ca6701ee677c0664da3",
+          "size": 8
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+7H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "link_log_sha256": "02ca9658a835a961ab997af1a7fa211c6a9655c7c39e194927350e86f060c0f1",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "INITIALIZED_CONTROL_DETECTED",
+      "case": "initialized_storage_negative",
+      "dosbox_exit": 0,
+      "executed": true,
+      "expected_far_bss_length": null,
+      "expected_link_failure_for": null,
+      "expected_log": "INITIALIZED_CONTROL_DETECTED",
+      "far_bss_layout": {
+        "raw_map_sha256": "33a8348bf005f6bc58a53a1f09241c4fe58db76a9e9c56262745944380a24440",
+        "region_present": false,
+        "symbols": {
+          "_FD_50F6_0000": {
+            "offset": 0,
+            "segment": 265
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 265
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\dosbox.conf",
+          "sha256": "12627450c4bc4eaf7783a3d9a420d0fdb3ca385f85d9494ebaa22fd7d0f8b162",
+          "size": 461
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\LINK.LOG",
+          "sha256": "a438ca527547ad75a1de43a0267c7be3cac8fa31bddfe457e780e5fd15de15dc",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\MAIN.OBJ",
+          "sha256": "d1022850fb022e4cd4c99f31e9df5273c8b954c679e8cc11585e7b5802ea941e",
+          "size": 405
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\OWNER.OBJ",
+          "sha256": "748a937e5b415ecb3be0d24b7dbeb4dac5e97e0e402babad44d8aaa1f0d834af",
+          "size": 306
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\PROBE.EXE",
+          "sha256": "ab7115a7162c163ad7650820a0611fe924de52b5a2fd7b535d7b31745cd7ce27",
+          "size": 6323
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\PROBE.MAP",
+          "sha256": "33a8348bf005f6bc58a53a1f09241c4fe58db76a9e9c56262745944380a24440",
+          "size": 9021
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\RUN.BAT",
+          "sha256": "e8f3c25d809f7f12ad6cae8f19352a6a0a4b141eaea76c827527ac65994219ce",
+          "size": 96
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\initialized_storage_negative\\RUN.LOG",
+          "sha256": "ba557a99b8d7280767476924b7239a910a312f3362d75bf0f43c55a7eabbe5e4",
+          "size": 30
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+CH Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "link_log_sha256": "a5a8c4d3c4e29945466a6158cf63919bdee9021c0586e193024fcd14106a9b91",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": false
+    },
+    {
+      "actual_log": "",
+      "case": "wrong_symbol_base_name_negative",
+      "dosbox_exit": 0,
+      "executed": false,
+      "expected_far_bss_length": null,
+      "expected_link_failure_for": "_fd_50F6_0000",
+      "expected_log": null,
+      "far_bss_layout": {
+        "length": 534,
+        "raw_map_sha256": "95ff7737b563f5e2b60560f29ffb6046b3531e1755150e8d85970d2ed74099f4",
+        "region_present": true,
+        "start_linear": 2208,
+        "stop_linear": 2741,
+        "symbols": {
+          "_FD_50F6_0002": {
+            "offset": 0,
+            "segment": 138
+          },
+          "_FD_50F6_4A4E": {
+            "offset": 336,
+            "segment": 138
+          }
+        }
+      },
+      "files": [
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\dosbox.conf",
+          "sha256": "0da84fa54b1f6bbfdd5272d930a7103392ef04e3b7870afaf06e1f7fb8e95775",
+          "size": 464
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\LINK.LOG",
+          "sha256": "82082f93fc8dc8b361c2439f1d6c1f7b1f57aa45b525d0a7e70fa9b2806a4aab",
+          "size": 1297
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\MAIN.OBJ",
+          "sha256": "37c56397da7e8293160857839db9b43e6e70224ccd6b6ddad4bbf3f28f1ddf9b",
+          "size": 289
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\OWNER.OBJ",
+          "sha256": "0700b58880d8bd0f9617b83917f5433be2fd30d0d2f63dabf8db4cdddd927dae",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\PROBE.EXE",
+          "sha256": "44a4bebf9a3ad8846898aeb3ee471f7383b701545cd4df605a7790cadc17f4cc",
+          "size": 3727
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\PROBE.MAP",
+          "sha256": "95ff7737b563f5e2b60560f29ffb6046b3531e1755150e8d85970d2ed74099f4",
+          "size": 7501
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\fixtures\\rtlink610\\wrong_symbol_base_name_negative\\RUN.BAT",
+          "sha256": "4d1d1d80faa09aca8ef6d6f4c3c37875c3e0d3377940a4f2bc23c549698cfde9",
+          "size": 56
+        }
+      ],
+      "link_log_excerpt": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN, OWNER\n=> \n\nUNDEFINED SYMBOL(S) AFTER LIBRARY SEARCH:\n\tSYMBOL\t\t\t\t\t\tFIRST REFERENCE\n\t------\t\t\t\t\t\t---------------\n\t'_fd_50F6_0000'\t\t\t\t\tMAIN.OBJ\n\nwarning wrt0022: Undefined symbols imply that the .EXE may not run.\n  Sometimes, the NOTABLEOFCONTENTS command/option can help with\n  undefined symbols.\n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t5.K\t+9H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n1 warning message(s)\n",
+      "link_log_sha256": "4add656b05b6e0be3df462fa3e9791b70312da1bf4dfc96ee9e636330fb304e8",
+      "link_succeeded": true,
+      "linker": "rtlink610",
+      "passed": true,
+      "unresolved_target_diagnosed": true
+    }
+  ],
+  "inputs": [
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "fd589935b696d2067ff2b4625a15105b4ee1ce70488db23cbc12d7dc986cb891",
+      "size": 106056
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "0c661638d6de3c75f4990f3f80cf2b2c9645ed9479817e1ee5c1778242eef835",
+      "size": 63982
+    },
+    {
+      "path": "work\\source-only-dos\\database-index-state-probe.py",
+      "sha256": "c1c2ffdcf60e1fdc2406eb90284c29fdd7a694ae8aea52e37bff0592bcdd671d",
+      "size": 16608
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\provider.c",
+      "sha256": "2642ee9d18c8869d8ae624b0819274e9972cb47cca1236e72b883ef19c0786d0",
+      "size": 298
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\probe.py",
+      "sha256": "75d6f4cf11bb7934edb6f32e607fcf7af4c5f2e2e6b8d8cd8df492ba7c184ad6",
+      "size": 28425
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\assert.h",
+      "sha256": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+      "size": 594
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bios.h",
+      "sha256": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+      "size": 4499
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bse.h",
+      "sha256": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+      "size": 1462
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedev.h",
+      "sha256": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+      "size": 12893
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedos.h",
+      "sha256": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+      "size": 48326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bseerr.h",
+      "sha256": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+      "size": 26788
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsesub.h",
+      "sha256": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+      "size": 19051
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\conio.h",
+      "sha256": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+      "size": 965
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\ctype.h",
+      "sha256": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+      "size": 2979
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\direct.h",
+      "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+      "size": 892
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\dos.h",
+      "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+      "size": 5343
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\errno.h",
+      "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+      "size": 1428
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\fcntl.h",
+      "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+      "size": 1126
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\float.h",
+      "sha256": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+      "size": 4911
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\graph.h",
+      "sha256": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+      "size": 15438
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\io.h",
+      "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+      "size": 1512
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\limits.h",
+      "sha256": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+      "size": 1326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\locale.h",
+      "sha256": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+      "size": 1519
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\malloc.h",
+      "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+      "size": 4008
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\math.h",
+      "sha256": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+      "size": 7881
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\memory.h",
+      "sha256": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+      "size": 1628
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2.h",
+      "sha256": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+      "size": 676
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2def.h",
+      "sha256": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+      "size": 10400
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pgchart.h",
+      "sha256": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+      "size": 8749
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pm.h",
+      "sha256": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+      "size": 2255
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmavio.h",
+      "sha256": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+      "size": 2069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmbitmap.h",
+      "sha256": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+      "size": 1851
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmdev.h",
+      "sha256": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+      "size": 8606
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmerr.h",
+      "sha256": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+      "size": 30095
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmfont.h",
+      "sha256": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+      "size": 3458
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmgpi.h",
+      "sha256": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+      "size": 49655
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmhelp.h",
+      "sha256": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+      "size": 11291
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmmle.h",
+      "sha256": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+      "size": 8802
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmord.h",
+      "sha256": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+      "size": 23140
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmpic.h",
+      "sha256": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+      "size": 691
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmshl.h",
+      "sha256": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+      "size": 14249
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmtypes.h",
+      "sha256": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+      "size": 9645
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmwin.h",
+      "sha256": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+      "size": 85827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\process.h",
+      "sha256": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+      "size": 2829
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\search.h",
+      "sha256": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+      "size": 1159
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\setjmp.h",
+      "sha256": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+      "size": 822
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\share.h",
+      "sha256": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+      "size": 450
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\signal.h",
+      "sha256": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+      "size": 2019
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdarg.h",
+      "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+      "size": 894
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stddef.h",
+      "sha256": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+      "size": 1254
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdio.h",
+      "sha256": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+      "size": 6047
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdlib.h",
+      "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+      "size": 6539
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\string.h",
+      "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+      "size": 4975
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\locking.h",
+      "sha256": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+      "size": 468
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\stat.h",
+      "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+      "size": 1330
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\timeb.h",
+      "sha256": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+      "size": 827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\types.h",
+      "sha256": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+      "size": 734
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\utime.h",
+      "sha256": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+      "size": 968
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\time.h",
+      "sha256": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+      "size": 3069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\varargs.h",
+      "sha256": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b",
+      "size": 922
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDRECS.c",
+      "sha256": "c46b5b749c05f1f45cea0d1ac73e553e074e7d87b4e42acb9666acd39c5199b9",
+      "size": 318
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDRECS.OBJ",
+      "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
+      "size": 229
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\c427x6jv_\\CL.LOG",
+      "sha256": "11565a26257720c1e16fa7e96a2f2fc31154355dedc53e3a00e90bc2ad6269ed",
+      "size": 11
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SND57.c",
+      "sha256": "c8a9ebf27ad4e7f19a6aac5f2b7d3a76f5c17179b5a44b5327c79fb32f1c94e5",
+      "size": 253
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SND57.OBJ",
+      "sha256": "98ab4eca441f557fff11fecf7e94f19ca4840b3d8945ea9662f4d55bcb492264",
+      "size": 225
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cfogoqfes\\CL.LOG",
+      "sha256": "cd6219aaed6dc749ec5e6994a5b0692311eefa609e1a2e5dfc4bf7d99f9ae04d",
+      "size": 9
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDS4.c",
+      "sha256": "b68723a138cb4cd4efae72e352e84207fa2695abf1e174194628cd0e78e87a99",
+      "size": 189
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDS4.OBJ",
+      "sha256": "e1257ff39469087952ecaf63a008477bd1eba5db7ac6d372763089f904534f8d",
+      "size": 225
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\c4pco8mq0\\CL.LOG",
+      "sha256": "cc2a6e7ddaf3434caa9f9b937d4407f66b04e7009f195af513aab35673a476e8",
+      "size": 9
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDUNSG.c",
+      "sha256": "befb581065ae198af5cb7c1bae4ce8c003a3a6fbf9bf7df113f27245617e2694",
+      "size": 262
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDUNSG.OBJ",
+      "sha256": "db214c3382b0e961ad04de6e7ede9f003e3508d93a4fd1e0ce8854b85f4df404",
+      "size": 229
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cwz9m3kgm\\CL.LOG",
+      "sha256": "878d14ed261834ac27fdab9ee79ba45301c7cddcf46f6568297db1e22524a352",
+      "size": 11
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SND32.c",
+      "sha256": "50322ad53006ff86cc2bca0dc6123b6e44bda4a451325d2ff8d0cabf62690d25",
+      "size": 253
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SND32.OBJ",
+      "sha256": "dff1aae04adcc7f76b1762b19bbcf71a275d83316625092841752f4600d5dc47",
+      "size": 225
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cnpzi6gje\\CL.LOG",
+      "sha256": "74962bee74db644ffd2df10489fb931a7b6a2507c8dbac6d1c92431611f56a20",
+      "size": 9
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDINIT.c",
+      "sha256": "f8a406b175fc3a0f43c0b1216ca038bc03024b015807860ab59439779cbc5243",
+      "size": 269
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDINIT.OBJ",
+      "sha256": "748a937e5b415ecb3be0d24b7dbeb4dac5e97e0e402babad44d8aaa1f0d834af",
+      "size": 306
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cu5qxb9t1\\CL.LOG",
+      "sha256": "314df4f7e4dd39db88fa697bd1de8df211fb29c9e1bc6af163c6d7453484fc90",
+      "size": 11
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDBASE.c",
+      "sha256": "9751294cf277b059f296784ba5f6575136327ce20bba9987bde8437f459f8965",
+      "size": 253
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDBASE.OBJ",
+      "sha256": "0700b58880d8bd0f9617b83917f5433be2fd30d0d2f63dabf8db4cdddd927dae",
+      "size": 229
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cj5xks9p_\\CL.LOG",
+      "sha256": "7e2b16059a69cae88ff80233d05cd33fec69b4303d6fbab709bf3a79ac0978c6",
+      "size": 11
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDPOS.c",
+      "sha256": "d5e56f5d94e02924dba7d38ed7ce48cfa75dd56f3d9498cd2e9434fcc27e6c4d",
+      "size": 3996
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDPOS.OBJ",
+      "sha256": "dfc9a76246ee494a72385aa5227498da49c3a2458779f1b9f44c7a592b731f45",
+      "size": 774
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\c8mqnn7ha\\CL.LOG",
+      "sha256": "bd05c6662a843fc23c9e065d4d5e3a1af2926f4b4089c09b0058668bb5fc4625",
+      "size": 10
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\CHWRT.c",
+      "sha256": "ef5b7be105de8604a8a302c189aa56aa46ec5d1079b00b2ff4a9dcdb8a7b73d1",
+      "size": 349
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\CHWRT.OBJ",
+      "sha256": "c589ab6fed02875f2d894379b98636a12787f062429a7358602fb9e2d86b6350",
+      "size": 342
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\ckzrfz6il\\CL.LOG",
+      "sha256": "2f02ae878aad1f45809ea34bddac95e5a9cacf2b60cdee9296b02fd78a141f77",
+      "size": 9
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\CHRDR.c",
+      "sha256": "f0759813c3347143a6fa19c97df7cb15c73e68d6244d5dee02428d563d17ff56",
+      "size": 461
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\CHRDR.OBJ",
+      "sha256": "f0be2426722a79c498f2bc6804cd606bd08fda4a27ebeece8343d3360a0647fd",
+      "size": 380
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cbigbl0oa\\CL.LOG",
+      "sha256": "0fa0916f9fe31026ac007ac4c2d0dc4a061cc8a06ed1b5a8091598fa746f5691",
+      "size": 9
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDLNK.c",
+      "sha256": "adfbd139e71d560a6f23048013517052f37fc43045e97617bc3c80ab50346fc4",
+      "size": 84
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDLNK.OBJ",
+      "sha256": "6a9f0b55445e8c036ed1f31ab488ee65a347f8188870d8e72f294a0ab134735e",
+      "size": 279
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cdi2qp1_7\\CL.LOG",
+      "sha256": "b8ca17685140ee5863aa0307d7520d2e70f2d2e4fd82fed4e5d97cd55d82481b",
+      "size": 10
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDSIG.c",
+      "sha256": "2fb9541994aaec936f15ad61f8c7bdbeec5d2c9262325749bbf8854cbe507a8c",
+      "size": 485
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDSIG.OBJ",
+      "sha256": "d0e8551097dc9a4380a6b1a99c2917bbf1aba03f237759f8421bda865038db0c",
+      "size": 358
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\c1j7sre44\\CL.LOG",
+      "sha256": "ebd82100eea5ffa7df0f81035dc57433601f336ebceeac6ace7890563f879540",
+      "size": 10
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDNPR.c",
+      "sha256": "6bd707abf22c60149adf4a300368e9a050bd12fad55188a08409dffd0860aacc",
+      "size": 519
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDNPR.OBJ",
+      "sha256": "dec54fea353e32ca4681a0d29bbebff905d48753340a9110a8ff19a63602449d",
+      "size": 307
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\c1htkoq85\\CL.LOG",
+      "sha256": "c825e056229af685da827cfa66e0de186dbc2f2a2488a8e6f787ef3c53805a10",
+      "size": 10
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDINI.c",
+      "sha256": "7e7332dd3c9c8276666506d1675dc5aaa6afff6fc7c7e70b9596f5d3c9c7b127",
+      "size": 459
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDINI.OBJ",
+      "sha256": "d1022850fb022e4cd4c99f31e9df5273c8b954c679e8cc11585e7b5802ea941e",
+      "size": 405
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\c9a589k8_\\CL.LOG",
+      "sha256": "5248d934ccc79b7876721e0f8b642a3618ec1d4f26d9e85940b8cbeeb461d3fb",
+      "size": 10
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\sources\\SNDWBG.c",
+      "sha256": "f6bcee87e0ca18277d5bf2883577814b4c8ee4b327367ce3d1a2fc4d4e5c702b",
+      "size": 142
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\objects\\SNDWBG.OBJ",
+      "sha256": "37c56397da7e8293160857839db9b43e6e70224ccd6b6ddad4bbf3f28f1ddf9b",
+      "size": 289
+    },
+    {
+      "path": "build\\workers\\dos_sound_record_owners_v20\\msc-probe-v2\\cc\\cmgiboba9\\CL.LOG",
+      "sha256": "fd0a5dde7a9cd4d798e0e1fe4cb2317a1fae32e269b4a8afbabec21b538218cd",
+      "size": 10
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    }
+  ],
+  "limits": [
+    "RTLink maps prove each test fixture's symbol names and COMDEF lengths only; fixture-local placement does not prove original 50F6 base/order.",
+    "The provider is a natural uninitialized-storage candidate; this receipt does not edit project bindings, canonical sources, or promotions.",
+    "The test confirms MSC 6.00AX and RTLink 4.00/6.10 behavior, not compatibility of any source consumer omitted from the audited graph.",
+    "The unchecked myBeginSound argument was independently censused through the canonical plus strict-effective source graph; source-only control does not establish safety for non-source external callers.",
+    "Resource indices, MIDI/song data contracts, and full sound safety remain separate from these two storage extents.",
+    "No original executable bytes, game objects, or original data were compiler, linker, or runtime inputs."
+  ],
+  "negative_control_contrasts": {
+    "initialized_storage": {
+      "initialized_segments": {
+        "SNDINIT5_DATA": "010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "observed_commons": []
+    },
+    "pointer_near_view": {
+      "fixture": "near_pointer_consumer_view_negative",
+      "runtime_log": "NEAR_POINTER_CONTROL_DETECTED"
+    },
+    "short_extent": {
+      "expected_positive": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "observed": [
+        {
+          "count": 55,
+          "element_size": 6,
+          "kind": "far",
+          "length": 330,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 32,
+          "element_size": 6,
+          "kind": "far",
+          "length": 192,
+          "name": "_fd_50F6_4A4E"
+        }
+      ]
+    },
+    "signed_word_owner_type": {
+      "limitation": "OMF COMDEF encodes extent but not signedness; source views and runtime signed/unsigned contrast carry this part of the contract.",
+      "observed": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "same_representation_as_positive": true
+    },
+    "signed_word_view": {
+      "fixture": "signed_word_unsigned_view_negative",
+      "runtime_log": "UNSIGNED_WORD_CONTROL_DETECTED"
+    },
+    "wrong_stride_near_pointer": {
+      "expected_positive": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "observed": [
+        {
+          "count": 56,
+          "element_size": 4,
+          "kind": "far",
+          "length": 224,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ]
+    },
+    "wrong_symbol_base": {
+      "expected_names": [
+        "_fd_50F6_0000",
+        "_fd_50F6_4A4E"
+      ],
+      "observed": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0002"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ]
+    },
+    "wrong_total_size_count_57": {
+      "expected_positive": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "observed": [
+        {
+          "count": 57,
+          "element_size": 6,
+          "kind": "far",
+          "length": 342,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ]
+    }
+  },
+  "omf_variant_shapes": {
+    "SND32": {
+      "communals": [
+        {
+          "count": 55,
+          "element_size": 6,
+          "kind": "far",
+          "length": 330,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 32,
+          "element_size": 6,
+          "kind": "far",
+          "length": 192,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "debug_bytes": 0,
+      "initialized_segment_names_and_hex": {},
+      "nonempty_segments": [],
+      "publics": [],
+      "segment_lengths": {
+        "CONST": 0,
+        "SND32_TEXT": 0,
+        "_BSS": 0,
+        "_DATA": 0
+      }
+    },
+    "SND57": {
+      "communals": [
+        {
+          "count": 57,
+          "element_size": 6,
+          "kind": "far",
+          "length": 342,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "debug_bytes": 0,
+      "initialized_segment_names_and_hex": {},
+      "nonempty_segments": [],
+      "publics": [],
+      "segment_lengths": {
+        "CONST": 0,
+        "SND57_TEXT": 0,
+        "_BSS": 0,
+        "_DATA": 0
+      }
+    },
+    "SNDBASE": {
+      "communals": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0002"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "debug_bytes": 0,
+      "initialized_segment_names_and_hex": {},
+      "nonempty_segments": [],
+      "publics": [],
+      "segment_lengths": {
+        "CONST": 0,
+        "SNDBASE_TEXT": 0,
+        "_BSS": 0,
+        "_DATA": 0
+      }
+    },
+    "SNDINIT": {
+      "communals": [],
+      "debug_bytes": 0,
+      "initialized_segment_names_and_hex": {
+        "SNDINIT5_DATA": "010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "nonempty_segments": [
+        {
+          "acbp": 104,
+          "alignment": "paragraph",
+          "alignment_code": 3,
+          "big": false,
+          "class": "FAR_DATA",
+          "combine": "public",
+          "combine_code": 2,
+          "frame": null,
+          "index": 5,
+          "length": 534,
+          "name": "SNDINIT5_DATA",
+          "offset": null,
+          "overlay_index": 1,
+          "use_32bit_offset": false
+        }
+      ],
+      "publics": [
+        {
+          "name": "_fd_50F6_0000",
+          "offset": 0,
+          "segment": "SNDINIT5_DATA"
+        },
+        {
+          "name": "_fd_50F6_4A4E",
+          "offset": 336,
+          "segment": "SNDINIT5_DATA"
+        }
+      ],
+      "segment_lengths": {
+        "CONST": 0,
+        "SNDINIT5_DATA": 534,
+        "SNDINIT_TEXT": 0,
+        "_BSS": 0,
+        "_DATA": 0
+      }
+    },
+    "SNDRECS": {
+      "communals": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "debug_bytes": 0,
+      "initialized_segment_names_and_hex": {},
+      "nonempty_segments": [],
+      "publics": [],
+      "segment_lengths": {
+        "CONST": 0,
+        "SNDRECS_TEXT": 0,
+        "_BSS": 0,
+        "_DATA": 0
+      }
+    },
+    "SNDS4": {
+      "communals": [
+        {
+          "count": 56,
+          "element_size": 4,
+          "kind": "far",
+          "length": 224,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "debug_bytes": 0,
+      "initialized_segment_names_and_hex": {},
+      "nonempty_segments": [],
+      "publics": [],
+      "segment_lengths": {
+        "CONST": 0,
+        "SNDS4_TEXT": 0,
+        "_BSS": 0,
+        "_DATA": 0
+      }
+    },
+    "SNDUNSG": {
+      "communals": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "debug_bytes": 0,
+      "initialized_segment_names_and_hex": {},
+      "nonempty_segments": [],
+      "publics": [],
+      "segment_lengths": {
+        "CONST": 0,
+        "SNDUNSG_TEXT": 0,
+        "_BSS": 0,
+        "_DATA": 0
+      }
+    }
+  },
+  "root_reviewed": false,
+  "schema": "sound-record-arrays-msc-omf-runtime-probe-v1",
+  "sizeof_offsetof_assertions": [
+    "sizeof(int)=2, sizeof(long)=4, sizeof(far data pointer)=4, sizeof(near data pointer)=2",
+    "Voice: sizeof 6; kind@0; union payload@2; external array sizeof 336",
+    "InstrSample(char far*), InstrByte(unsigned char far*), InstrVoid(void far*), Drv(int far*): sizeof 6 and payload@2",
+    "Chan plain-char writer and unsigned-char reader views: sizeof 6; offsets 0,1,2,3,4,5; external array sizeof 198"
+  ],
+  "tool_hashes_after": {
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/toolchain.json": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+    "tools/compiler.py": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+    "tools/dos_source_bindings.py": "fd589935b696d2067ff2b4625a15105b4ee1ce70488db23cbc12d7dc986cb891",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "tools/source_only_dos.py": "0c661638d6de3c75f4990f3f80cf2b2c9645ed9479817e1ee5c1778242eef835"
+  }
+}

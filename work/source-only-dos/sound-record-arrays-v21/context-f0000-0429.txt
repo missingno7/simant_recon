@@ -1,0 +1,32 @@
+f_0000_0429  root:0000:0429  linear 00429  size 70  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 0000: function 7/8; neighbours: f_0000_0193, f_0000_039B, f_0000_046F
+  frame: {'frame': 'bp', 'locals': 2, 'stack_check': False}
+  0429  push bp
+  042A  mov bp, sp
+  042C  sub sp, 2
+  042F  push si
+  0430  lcall 0x284a, 0x10a                -> StopSong
+  0435  lcall 0x295c, 0x391                -> f_295C_0391
+  043A  sub si, si
+  043C  mov ax, si
+  043E  mov cx, 6
+  0441  imul cx
+  0443  mov bx, ax
+  0445  mov word ptr [bp - 2], bx
+  0448  mov es, word ptr [0x7ddc]          DS:7DDC
+  044C  cmp word ptr es:[bx], 1
+  0452  jne 0x464
+  0454  push word ptr es:[bx + 4]
+  0459  push word ptr es:[bx + 2]
+  045E  push cs
+  045F  call 0x149                         -> f_0000_0149
+  0462  pop bx
+  0463  pop bx
+  0464  inc si
+  0465  cmp si, 0x38
+  0468  jl 0x43c
+  046A  pop si
+  046B  mov sp, bp
+  046D  pop bp
+  046E  retf

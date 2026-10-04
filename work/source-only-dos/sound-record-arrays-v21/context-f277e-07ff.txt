@@ -1,0 +1,123 @@
+f_277E_07FF  root:277E:07FF  linear 27FDF  size 313  extent REVIEWED  region game_or_library
+  entry evidence: reviewed
+  module frame 277E: function 13/18; neighbours: f_277E_0606, f_277E_0760, f_277E_0938, f_277E_0939
+  frame: {'frame': 'none'}
+  07FF  push si
+  0800  mov es, word ptr [0x8a66]          DS:8A66
+  0804  mov word ptr es:[0x1fc], 8
+  080B  lcall 0x293a, 0x121                -> f_293A_0121
+  0810  or ax, ax
+  0812  je 0x820
+  0814  push cs
+  0815  call 0x4e8                         -> f_277E_04E8
+  0818  mov ax, 0x1422
+  081B  mov cx, 0x55b3                     [seg 55B3 DGROUP]
+  081E  jmp 0x82a
+  0820  push cs
+  0821  call 0x17d                         -> f_277E_017D
+  0824  mov ax, 0x12d2
+  0827  mov cx, 0x55b3                     [seg 55B3 DGROUP]
+  082A  push cx
+  082B  push ax
+  082C  push cs
+  082D  call 0x10a                         -> f_277E_010A
+  0830  pop bx
+  0831  pop bx
+  0832  sub si, si
+  0834  mov es, word ptr [0x8a70]          DS:8A70
+  0838  mov word ptr es:[0x74c0], si
+  083D  mov ax, 0x50f6                     [seg 50F6]
+  0840  mov es, ax
+  0842  mov ax, 0x50f6                     [seg 50F6]
+  0845  mov ds, ax
+  0847  jmp 0x865
+  0849  mov ax, 6
+  084C  imul word ptr [0x4a4c]             DS:4A4C
+  0850  mov bx, ax
+  0852  mov byte ptr es:[bx + 0x4a4e], 6
+  0858  lea ax, [si + 1]
+  085B  mov byte ptr es:[bx + 0x4a4f], al
+  0860  inc si
+  0861  inc word ptr [0x4a4c]              DS:4A4C
+  0865  cmp si, 8
+  0868  jl 0x849
+  086A  sub si, si
+  086C  mov ax, 6
+  086F  imul word ptr [0x4a4c]             DS:4A4C
+  0873  mov bx, ax
+  0875  mov byte ptr es:[bx + 0x4a4e], 7
+  087B  mov byte ptr es:[bx + 0x4a4f], 0xa
+  0881  inc si
+  0882  inc word ptr [0x4a4c]              DS:4A4C
+  0886  cmp si, 0xa
+  0889  jl 0x86c
+  088B  mov ax, 0x55b3                     [seg 55B3 DGROUP]
+  088E  mov ds, ax
+  0890  mov ax, 0x8a
+  0893  push ax
+  0894  lcall 0x295c, 0x3ff                -> f_295C_03FF
+  0899  pop bx
+  089A  mov ax, 0xd7
+  089D  push ax
+  089E  lcall 0x295c, 0x3ff                -> f_295C_03FF
+  08A3  pop bx
+  08A4  sub si, si
+  08A6  mov ax, 0xd7
+  08A9  push ax
+  08AA  lcall 0x295c, 0x3ff                -> f_295C_03FF
+  08AF  pop bx
+  08B0  lea ax, [si + 0xb0]
+  08B4  push ax
+  08B5  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  08BA  pop bx
+  08BB  mov ax, 0x79
+  08BE  push ax
+  08BF  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  08C4  pop bx
+  08C5  sub ax, ax
+  08C7  push ax
+  08C8  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  08CD  pop bx
+  08CE  lea ax, [si + 0xb0]
+  08D2  push ax
+  08D3  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  08D8  pop bx
+  08D9  mov ax, 0x7b
+  08DC  push ax
+  08DD  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  08E2  pop bx
+  08E3  sub ax, ax
+  08E5  push ax
+  08E6  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  08EB  pop bx
+  08EC  lea ax, [si + 0xb0]
+  08F0  push ax
+  08F1  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  08F6  pop bx
+  08F7  mov ax, 0xa
+  08FA  push ax
+  08FB  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  0900  pop bx
+  0901  mov ax, 0x40
+  0904  push ax
+  0905  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  090A  pop bx
+  090B  lea ax, [si + 0xb0]
+  090F  push ax
+  0910  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  0915  pop bx
+  0916  mov ax, 7
+  0919  push ax
+  091A  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  091F  pop bx
+  0920  mov ax, 0x7f
+  0923  push ax
+  0924  lcall 0x295c, 0x3dc                -> f_295C_03DC
+  0929  pop bx
+  092A  inc si
+  092B  cmp si, 0x10
+  092E  jge 0x933
+  0930  jmp 0x8a6
+  0933  mov ax, 1
+  0936  pop si
+  0937  retf

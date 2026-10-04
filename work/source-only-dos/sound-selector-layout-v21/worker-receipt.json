@@ -1,0 +1,339 @@
+{
+  "schema": "simant-dos-sound-selector-layout-audit-v21",
+  "root_reviewed": false,
+  "classification": "UNRESOLVED",
+  "gate_change": "NONE",
+  "scope": "Static selector-domain, caller/alias/escape, and indexed far-call layout audit only; separate from pre-init fifth-sound-open/Punt-frontier proof and timer fatal-path DOSBox comparison.",
+  "conclusion": "/s9 is syntactically accepted but outside all three nine-entry selector tables. Source/layout establish two same-TU aliases and one cross-TU layout alias; the detector alias is a call into the saved-state object, so its return behavior is not source-closed. Do not infer a valid post-init /s9 path, clamp it, add a tenth entry, or invent padding.",
+  "source_snapshot": [
+    {
+      "path": "src/root/m00DF.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/root/m00DF.c"
+    },
+    {
+      "path": "src/root/m277E.c",
+      "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "size": 10363,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/root/m277E.c"
+    },
+    {
+      "path": "src/root/m293A.c",
+      "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "size": 3635,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/root/m293A.c"
+    },
+    {
+      "path": "src/root/m2815.c",
+      "sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+      "size": 2257,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/root/m2815.c"
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+      "size": 6627,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/S20/m39F1.c"
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/root/m15F8.c"
+    },
+    {
+      "path": "src/root/m0000.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "size": 5066,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/root/m0000.c"
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116,
+      "snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-sources/src/S15/m384C.c"
+    }
+  ],
+  "mutable_observations": {
+    "build_report": {
+      "path": "build/source-only-dos/build-report.json",
+      "sha256": "be2871f8acfdcce12ec4026d673a38661a3c67c21bace19d590c8ef8a4a6b61d",
+      "tu_count": 160,
+      "status": "INCOMPLETE",
+      "label": "current uncommitted v20 observation; not a claim about HEAD",
+      "original_exe_bytes_used": {
+        "game_code": 0,
+        "game_data": 0,
+        "fallback_debt": 0,
+        "executable_fragments": 0
+      }
+    },
+    "build_inputs": {
+      "root:277E": {
+        "generated_source_sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+        "object_sha256": "38d596e85596d3d1745859e9aa4cc9bbdbe0e9b4522eb8d6eb6d567fcc089141",
+        "status": "COMPILED_REUSED",
+        "generated_source_path": "build/source-only-dos/sources/U114.c",
+        "object_path": "build/source-only-dos/objects/U114.OBJ",
+        "source_path": "src/root/m277E.c",
+        "source_sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee"
+      },
+      "root:293A": {
+        "generated_source_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+        "object_sha256": "e81ab2004b7cd1e8194ff5f0dae03338167f2d0931b0f5694d6b27bd83738370",
+        "status": "COMPILED_REUSED",
+        "generated_source_path": "build/source-only-dos/sources/U120.c",
+        "object_path": "build/source-only-dos/objects/U120.OBJ",
+        "source_path": "src/root/m293A.c",
+        "source_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6"
+      },
+      "root:2815": {
+        "generated_source_sha256": "6d7a3e90d0e6555dc5c1d205f18ad9df9579c743d829ba86011e36c95a2010eb",
+        "object_sha256": "8b7575046dc09f84e6aefc88988a3cfdcb9191749e686e4038f07651cc216a4b",
+        "status": "COMPILED_REUSED",
+        "generated_source_path": "build/source-only-dos/sources/U115.c",
+        "object_path": "build/source-only-dos/objects/U115.OBJ",
+        "source_path": "src/root/m2815.c",
+        "source_sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38"
+      },
+      "root:00DF": {
+        "generated_source_sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+        "object_sha256": "df1a1a0dbf9dbc371c7cff073c5fb48b14c7a328c75bb1a1e9111cc9a750012e",
+        "status": "COMPILED_REUSED",
+        "generated_source_path": "build/source-only-dos/sources/U049.c",
+        "object_path": "build/source-only-dos/objects/U049.OBJ",
+        "source_path": "src/root/m00DF.c",
+        "source_sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4"
+      }
+    },
+    "manifest": {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "symbols": {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    "context_tool": {
+      "path": "tools/context.py",
+      "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be"
+    },
+    "saved_sound_state_admission": {
+      "path": "work/source-only-dos/saved-sound-state-contract-v1.json",
+      "sha256": "985e29185d67c37da23c1e50bd343d741b526bb942a7cd07e35fc7dd89a39330",
+      "schema": "simant-dos-reviewed-storage-contract-v19",
+      "root_reviewed": true,
+      "owner_shape": "14-byte far BSS; seven 2-byte words; zero at main",
+      "scope": "storage contract only, not selector/control-flow safety"
+    },
+    "selector_data_binding": {
+      "path": "work/source-only-dos/c-data-bindings-v1.json",
+      "sha256": "dbc792e0fba712cd1fb251149078cb3aa902c8860d6cc5e738aa1b8ddecc6f89",
+      "fact": "source g_610A exported as fd_55B3_610A at S20:39F1 _DATA offset 72"
+    },
+    "context_queries": {
+      "tool_path": "tools/context.py",
+      "tool_sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+      "queries": [
+        "f_277E_0000",
+        "f_277E_0154",
+        "f_293A_0006",
+        "f_00DF_0004"
+      ],
+      "mode": "non-raw instruction/call/frame evidence only"
+    }
+  },
+  "selector_semantics": {
+    "parser": "IBMInitStuff sets g_610A=-1, ReadConfig may replace it from a digit language field, then command args are scanned in order. Only argv[i][0]==\"/\", argv[i][1]==\"s\", and isdigit(argv[i][2]) set it to argv[i][2]-'0'; later valid /sN overrides earlier/config values; trailing chars are ignored.",
+    "domain": "Syntactically accepted explicit values 0..9; actual table domain 0..8. -1 is the auto-detect sentinel and is transformed by f_293A_0006 before f_277E_0000. No other source caller supplies f_277E_0000.",
+    "automatic": "f_293A_0006 probes table entries 8 down through 1, returning the first truthy index or 0. f_277E_0000 then checks that returned mode; entry 0 is f_293A_0029 (true), so default 0 is retained.",
+    "zero": "Explicit /s0 returns from f_00DF_0004 before sound init; automatic detection returning 0 still calls f_277E_0000(0,0).",
+    "seven": "Mode 7 skips the detector-table call; it still indexes setup/cleanup tables at 7.",
+    "one_through_eight": "In-range explicit selectors call detector[index]; false falls back to 1, true retains index, then setup[index] and saved-state word zero are used.",
+    "nine": "No upper-bound check exists. Explicit /s9 enters f_277E_0000(9,0) after main\u2019s sound DB call returns; detector[9] is an out-of-bounds far call. Its result is not source-closed."
+  },
+  "table_edges": [
+    {
+      "access": "fd_55B3_74DA[9] in f_277E_0000",
+      "calculation": "74DA + 9*4 = 74FE",
+      "neighbor": "initialized pointer object fd_55B3_74FE, declared immediately after the 9-entry detector table in root:293A; it is initialized to fd_50F6_01F0",
+      "evidence": "root:293A complete-TU _DATA placement seg 55B3 off 74DA size 40: nine 4-byte far function pointers (36 bytes) plus the 4-byte far data pointer. Source/order and pointer relocation are same-TU, accepted. The admitted 7-word state is initially zero. The OOB call therefore targets the saved-state object as code, not a source-defined detector function. Whether it returns, what AX it produces, and side effects are unresolved."
+    },
+    {
+      "access": "g_68B6[9] in f_277E_0000, conditional on the invalid detector call returning",
+      "calculation": "68B6 + 9*4 = 68DA",
+      "neighbor": "g_68DA[0] = f_277E_0938 (empty function)",
+      "evidence": "both arrays are adjacent in root:277E source and its accepted complete-TU _DATA placement seg 55B3 off 68B6 size 72; each has nine 4-byte far function pointers. This alias is within accepted same-TU source/object placement, not padding. If the prior call returns with selector 9 retained, this setup alias is deterministic; if detector reports zero, code falls back to mode 1."
+    },
+    {
+      "access": "g_68DA[9] in f_277E_0154, conditional on saved word zero containing 9 and cleanup being entered",
+      "calculation": "68DA + 9*4 = 68FE",
+      "neighbor": "g_68FE[0..3] from root:2815, a char array beginning {0,1,2,6}; as a far function pointer these bytes are offset 0x0100, segment 0x0602",
+      "evidence": "not same-TU: root:277E _DATA ends at 68FE and separate root:2815 _DATA is explicitly placed at seg 55B3 off 68FE (size 62) in manifest. This is cross-TU fixed-layout adjacency, not an accepted source/fixup alias inside m277E. The indexed call target has no declared function meaning; no return behavior is proven."
+    }
+  ],
+  "reachability_and_escapes": {
+    "entry": "main calls IBMInitStuff, then db_SetDataBase(\"sound\"), then f_00DF_0004. The /s9 selector frontier exists only after the sound DB call returns. f_00DF_0004 is called only from main.",
+    "cleanup": "o15_384C_0152 tests fd_55B3_610A (so /s9 is nonzero) then calls f_277E_0154. Punt routes to o15_384C_0152; main cancellation also calls it. Before successful sound init, saved word zero remains startup zero and cleanup dispatches table[0]. After a hypothetically returned /s9 init that saves 9, later cleanup indexes table[9].",
+    "saved_state": "source references are limited to fd_55B3_74FE report reads [0..6], f_277E_0000 write [0], f_277E_00AF clear [1..6], setup writes [1..6], f_0000_046F read [0], f_277E_0154 read [0], and the fd_55B3_74FE initializer alias. The 14-byte 7-word storage contract covers those indices; it does not authorize detector[9] as code.",
+    "no_escape": "source-wide references show no other caller of f_277E_0000, no other consumer or writer of fd_55B3_74DA, g_68B6, or g_68DA, and fd_55B3_74FE is not passed or stored elsewhere."
+  },
+  "other_required_semantics": "f_277E_0000 retains its post-table setup calls and timer setup f_28BC_046B/0488, then f_28BC_03CC; f_277E_0154 retains f_295C_0391, f_0000_0429 and timer reset f_28BC_04E0(0). Timer/DOS/PIT effects are not a no-op and are not merged into this selector blocker. Fatal-path DOSBox comparison remains separate.",
+  "negative_controls": [
+    {
+      "case": "/s0 explicit",
+      "expected": "f_00DF_0004 returns before detector/setup tables; no g_1926 set by that path"
+    },
+    {
+      "case": "automatic no-detection",
+      "expected": "f_293A_0006 returns 0; initializer mode 0 checks detector entry 0, sets up mode 0, and saves 0"
+    },
+    {
+      "case": "/s9",
+      "expected": "must remain UNRESOLVED: OOB detector call aliases pointer data; never treat as valid, clamp, add entry, or infer cleanup path as safe"
+    },
+    {
+      "case": "cleanup after saved 9",
+      "expected": "must remain UNRESOLVED: cross-TU layout alias into g_68FE data is called as a far function pointer"
+    }
+  ],
+  "actions": {
+    "source_edits": false,
+    "canonical_edits": false,
+    "layout_edits": false,
+    "tool_build_search": false,
+    "gate_changes": false
+  },
+  "reviewed_metadata_revisions": [
+    {
+      "id": "v21-build-input-verification-1",
+      "reviewed_against_report": {
+        "path": "build/source-only-dos/build-report.json",
+        "sha256": "be2871f8acfdcce12ec4026d673a38661a3c67c21bace19d590c8ef8a4a6b61d",
+        "tu_count": 160,
+        "status": "INCOMPLETE"
+      },
+      "verification": "For all four module rows, current source, generated source and object files were read, hashed, size-checked, and copied into pinned-build-inputs; all current file identities match their report row.",
+      "correction": {
+        "module": "root:277E",
+        "field": "generated_source_sha256",
+        "previous_receipt_value": "4e928689e9b8d9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+        "verified_value": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+        "report_path": "build/source-only-dos/sources/U114.c",
+        "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_277E/generated/U114.c"
+      },
+      "verified_rows": {
+        "root:277E": {
+          "status_reported": "COMPILED_REUSED",
+          "source": {
+            "path": "src/root/m277E.c",
+            "sha256_reported": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+            "sha256_verified": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+            "size_reported": 10363,
+            "size_verified": 10363,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_277E/source/m277E.c"
+          },
+          "generated_source": {
+            "path": "build/source-only-dos/sources/U114.c",
+            "sha256_reported": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+            "sha256_verified": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+            "size_reported": 10363,
+            "size_verified": 10363,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_277E/generated/U114.c"
+          },
+          "object": {
+            "path": "build/source-only-dos/objects/U114.OBJ",
+            "sha256_reported": "38d596e85596d3d1745859e9aa4cc9bbdbe0e9b4522eb8d6eb6d567fcc089141",
+            "sha256_verified": "38d596e85596d3d1745859e9aa4cc9bbdbe0e9b4522eb8d6eb6d567fcc089141",
+            "size_reported": 5663,
+            "size_verified": 5663,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_277E/object/U114.OBJ"
+          }
+        },
+        "root:293A": {
+          "status_reported": "COMPILED_REUSED",
+          "source": {
+            "path": "src/root/m293A.c",
+            "sha256_reported": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+            "sha256_verified": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+            "size_reported": 3635,
+            "size_verified": 3635,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_293A/source/m293A.c"
+          },
+          "generated_source": {
+            "path": "build/source-only-dos/sources/U120.c",
+            "sha256_reported": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+            "sha256_verified": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+            "size_reported": 3635,
+            "size_verified": 3635,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_293A/generated/U120.c"
+          },
+          "object": {
+            "path": "build/source-only-dos/objects/U120.OBJ",
+            "sha256_reported": "e81ab2004b7cd1e8194ff5f0dae03338167f2d0931b0f5694d6b27bd83738370",
+            "sha256_verified": "e81ab2004b7cd1e8194ff5f0dae03338167f2d0931b0f5694d6b27bd83738370",
+            "size_reported": 3381,
+            "size_verified": 3381,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_293A/object/U120.OBJ"
+          }
+        },
+        "root:2815": {
+          "status_reported": "COMPILED_REUSED",
+          "source": {
+            "path": "src/root/m2815.c",
+            "sha256_reported": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+            "sha256_verified": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+            "size_reported": 2257,
+            "size_verified": 2257,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_2815/source/m2815.c"
+          },
+          "generated_source": {
+            "path": "build/source-only-dos/sources/U115.c",
+            "sha256_reported": "6d7a3e90d0e6555dc5c1d205f18ad9df9579c743d829ba86011e36c95a2010eb",
+            "sha256_verified": "6d7a3e90d0e6555dc5c1d205f18ad9df9579c743d829ba86011e36c95a2010eb",
+            "size_reported": 2183,
+            "size_verified": 2183,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_2815/generated/U115.c"
+          },
+          "object": {
+            "path": "build/source-only-dos/objects/U115.OBJ",
+            "sha256_reported": "8b7575046dc09f84e6aefc88988a3cfdcb9191749e686e4038f07651cc216a4b",
+            "sha256_verified": "8b7575046dc09f84e6aefc88988a3cfdcb9191749e686e4038f07651cc216a4b",
+            "size_reported": 2776,
+            "size_verified": 2776,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_2815/object/U115.OBJ"
+          }
+        },
+        "root:00DF": {
+          "status_reported": "COMPILED_REUSED",
+          "source": {
+            "path": "src/root/m00DF.c",
+            "sha256_reported": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+            "sha256_verified": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+            "size_reported": 1881,
+            "size_verified": 1881,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_00DF/source/m00DF.c"
+          },
+          "generated_source": {
+            "path": "build/source-only-dos/sources/U049.c",
+            "sha256_reported": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+            "sha256_verified": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+            "size_reported": 1881,
+            "size_verified": 1881,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_00DF/generated/U049.c"
+          },
+          "object": {
+            "path": "build/source-only-dos/objects/U049.OBJ",
+            "sha256_reported": "df1a1a0dbf9dbc371c7cff073c5fb48b14c7a328c75bb1a1e9111cc9a750012e",
+            "sha256_verified": "df1a1a0dbf9dbc371c7cff073c5fb48b14c7a328c75bb1a1e9111cc9a750012e",
+            "size_reported": 3488,
+            "size_verified": 3488,
+            "scratch_snapshot": "build/workers/dos_sound_selector_layout_v21/pinned-build-inputs/root_00DF/object/U049.OBJ"
+          }
+        }
+      },
+      "context_output_repinning": "none; original four non-raw context query identities/outputs were not changed"
+    }
+  ]
+}

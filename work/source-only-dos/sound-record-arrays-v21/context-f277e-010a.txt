@@ -1,0 +1,34 @@
+f_277E_010A  root:277E:010A  linear 278EA  size 74  extent REVIEWED  region game_or_library
+  entry evidence: reviewed
+  module frame 277E: function 3/18; neighbours: f_277E_0000, f_277E_00AF, f_277E_0154, f_277E_0179
+  frame: {'frame': 'bp', 'stack_check': False}
+  010A  push bp
+  010B  mov bp, sp
+  010D  push di
+  010E  push si
+  010F  sub bx, bx
+  0111  mov ax, bx
+  0113  mov cx, 6
+  0116  imul cx
+  0118  mov si, ax
+  011A  add si, word ptr [bp + 6]
+  011D  mov es, word ptr [bp + 8]
+  0120  mov cx, word ptr es:[si]
+  0123  mov di, ax
+  0125  mov dx, es
+  0127  mov es, word ptr [0x8a68]          DS:8A68
+  012B  mov word ptr es:[di], cx
+  0130  mov es, dx
+  0132  mov cx, word ptr es:[si + 2]
+  0136  mov dx, word ptr es:[si + 4]
+  013A  mov es, word ptr [0x8a68]          DS:8A68
+  013E  mov word ptr es:[di + 2], cx
+  0143  mov word ptr es:[di + 4], dx
+  0148  inc bx
+  0149  cmp bx, 0x38
+  014C  jl 0x111
+  014E  pop si
+  014F  pop di
+  0150  mov sp, bp
+  0152  pop bp
+  0153  retf
