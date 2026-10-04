@@ -667,3 +667,30 @@ This boundary passed 363 repository tests (two skips), including 49 source-only
 tests, canonical validation, and all 22 mandatory evidence gates plus alignment
 under both RTLinks. The root raw histogram check reopened all 104 preserved
 artifacts and independently decoded all seven compiler fixtures.
+
+
+## v23: complete event record owners
+
+Two separate `struct Event far` records now own 16 bytes each. Their eight signed
+word fields, dequeue writes, dispatcher views and whole-record assignment come
+from the complete source. Fresh production compilation as `EVRECS` checks the
+data-only OMF owner. Both RTLinks pass all-field/zero/patterned-copy and shifted
+layout controls; width, initializer, +2 and wrong-symbol controls are rejected.
+Root reopened all 184 preserved artifacts and checked 14 complete raw outputs,
+clean link logs, both public-map sections and actual four-byte pointer fixups.
+See the [root admission](../work/source-only-dos/event-records-v23/root-admission.md).
+
+This storage admission leaves the possible decoder overwrite of active event
+state open. It does not infer Event[2] ownership from adjacent linked addresses,
+historical producer identity, placement or original initializer.
+
+Preflight compiles 166 TUs (127 canonical plus 39 providers) and reports 228
+missing imports: 223 FAR_BSS and five DGROUP storage/reachability cases. Functional
+data debt remains 62 bytes, historical debt 113 bytes, and all 29 strict effective
+functions remain confirmed. All original-byte counters stay zero. The independent
+link remains refused, game execution has not run, and human acceptance is pending.
+Further owner candidates remain unadmitted until root review.
+
+This boundary passed 364 repository tests (two skips), including 50 source-only
+tests, canonical validation, and all 23 mandatory evidence gates plus alignment
+under both RTLinks. The canonical manifest remains unchanged.

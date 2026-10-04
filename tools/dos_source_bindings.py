@@ -617,6 +617,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V20_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V21_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V22_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V23_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -624,7 +625,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -2004,3 +2005,131 @@ def require_v22_storage_contracts(report, profile, tool):
                     or relation.get('alias_address') != alias or relation.get('target_address') != target
                     or relation.get('same_segment') is not True or relation.get('passed') is not True):
                 raise ValueError('histogram measured alias geometry changed')
+
+
+# The event records are independently declared objects; neither map adjacency nor
+# the historical numeric distance supplies their extents.
+PROVIDER_SPECS['source-owned:event-records'] = ('EVRECS', None,
+    (('_fd_50F6_49FA', 16), ('_fd_50F6_4A0A', 16)),
+    'struct Event { int what; int message; int x4; int modifiers; int h; int v; int code; int xE; }; '
+    'struct Event far fd_50F6_49FA; struct Event far fd_50F6_4A0A;')
+FAR_PROVIDER_MODULES.add('source-owned:event-records')
+V23_STORAGE_ANCHORS = {
+    '_fd_50F6_49FA': (0x49FA, ('fd_50F6_49FA',)),
+    '_fd_50F6_4A0A': (0x4A0A, ('fd_50F6_4A0A',))}
+V23_STORAGE_CONTRACTS = {'source-owned:event-records': ('event_records_contract', {
+    'positive': 'PASS', 'positive_shifted': 'PASS',
+    'wrong_wide_field': 'REJECTED: wide code moved xE to +16; Event size is 18\nPROGRAM_NONZERO',
+    'wrong_narrow_field': 'REJECTED: narrow xE stays +14; packed Event size is 15\nPROGRAM_NONZERO',
+    'nonzero_initializer': 'REJECTED: nonzero initialized Event at CRT entry\nPROGRAM_NONZERO',
+    'base_plus_two': 'REJECTED: symbolic base mismatch\nPROGRAM_NONZERO',
+    'wrong_symbol_base': 'REJECTED: symbolic base mismatch\nPROGRAM_NONZERO'})}
+
+
+def _event_public_address(address):
+    try:
+        parts = tuple(int(v, 16) for v in address.split(':'))
+        if len(parts) != 2 or any(v < 0 or v > 0xffff for v in parts):
+            raise ValueError()
+        return parts
+    except (AttributeError, ValueError):
+        raise ValueError('event storage public address malformed')
+
+
+def require_v23_storage_contracts(report, profile, tool):
+    """Check source ABI, full outputs, per-object OMF and symbolic pointer controls.
+
+    Stored measurements are metadata, never ignored OBJ/EXE build inputs. The
+    current provider is independently compiled and checked by verify_provider.
+    """
+    _require_reviewed_storage_contracts(report, profile, tool, V23_STORAGE_CONTRACTS)
+    _require_clean_owner_maps(report, profile, V23_STORAGE_CONTRACTS)
+    module = 'source-owned:event-records'
+    if not any(r['module'] == module for r in report['translation_units']):
+        return
+    contract = report['event_records_contract']
+    required = V23_STORAGE_CONTRACTS[module][1]
+    names = ['_fd_50F6_49FA', '_fd_50F6_4A0A']
+    if (contract.get('source_abi') != {'size': 16,
+            'fields': ['what','message','x4','modifiers','h','v','code','xE'],
+            'offsets': list(range(0,16,2))}
+            or contract.get('event_code_stability_claimed') is not False
+            or contract.get('historical_producer_or_placement_claimed') is not False
+            or contract.get('save_rec_pointer_fixups') != []):
+        raise ValueError('event record ABI or storage scope changed')
+    cases = contract['cases']
+    if (len(cases) != 14 or {(r['linker'],r['case']) for r in cases}
+            != {(p,c) for p in ('rtlink400','rtlink610') for c in required}):
+        raise ValueError('event record case matrix incomplete or duplicated')
+    for row in cases:
+        if row['linker'] != profile:
+            continue
+        raw = (required[row['case']].replace('\n','\r\n')+'\r\n').encode('ascii')
+        log = row.get('runtime_log', {})
+        matrix = row.get('public_address_matrix', {})
+        sections = row.get('map_sections', {})
+        if (row.get('runner_exit') != 0 or row.get('timed_out') is not False
+                or log.get('exact_raw_bytes_hex') != raw.hex()
+                or log.get('sha256') != hashlib.sha256(raw).hexdigest() or log.get('size') != len(raw)
+                or set(matrix) != {'Name','Value'} or set(sections) != {'Name','Value'}
+                or matrix['Name'] != matrix['Value']
+                or any(set(m) != set(names) for m in matrix.values())
+                or any(s.get('heading_present') is not True for s in sections.values())):
+            raise ValueError('event record lacks complete raw output and both public matrices')
+        addresses = {n: _event_public_address(a) for n,a in matrix['Name'].items()}
+        size = {'wrong_wide_field': 18, 'wrong_narrow_field': 15}.get(row['case'],16)
+        initialized = row['case'] == 'nonzero_initializer'
+        shape = row.get('owner_omf', {})
+        expected_commons = [_communal(n,size,1) for n in (names[:1] if initialized else names)]
+        expected_publics = [{'name': names[1], 'segment': 'OWNINIT5_DATA', 'offset': 0}] if initialized else []
+        expected_segments = {'OWNER_TEXT': 0, '_DATA': 0, 'CONST': 0, '_BSS': 0}
+        if row['case'] in ('wrong_wide_field','wrong_narrow_field','nonzero_initializer'):
+            basename = {'wrong_wide_field': 'OWNWIDE', 'wrong_narrow_field': 'OWNSHORT',
+                        'nonzero_initializer': 'OWNINIT'}[row['case']]
+            expected_segments = {basename+'_TEXT': 0, '_DATA': 0, 'CONST': 0, '_BSS': 0}
+        if initialized:
+            expected_segments['OWNINIT5_DATA'] = 16
+        if (shape.get('communals') != expected_commons or shape.get('publics') != expected_publics
+                or shape.get('externals') != (names[:1] if initialized else names) or shape.get('linker_fixups') != []
+                or shape.get('segment_lengths') != expected_segments
+                or shape.get('initialized_segment_hex') != ({'OWNINIT5_DATA': '00'*14+'0100'} if initialized else {})):
+            raise ValueError('event record measured width/initializer OMF control changed')
+        pointers = row.get('pointer_fixups', [])
+        base = row.get('base_initializer_omf', {})
+        basename = {'base_plus_two':'BADADD', 'wrong_symbol_base':'BADOTHER'}.get(row['case'],'BASES')
+        if (base.get('communals') != []
+                or base.get('publics') != [{'name':'_eventBases','segment':basename+'5_DATA','offset':0}]
+                or base.get('externals') != (names[1:] if row['case'] == 'wrong_symbol_base' else names)
+                or base.get('segment_lengths') != {basename+'_TEXT':0,'_DATA':0,'CONST':0,
+                    '_BSS':0,basename+'5_DATA':8}
+                or base.get('initialized_segment_hex') != {basename+'5_DATA':
+                    ('0200'+'00'*6 if row['case'] == 'base_plus_two' else '00'*8)}):
+            raise ValueError('event record pointer initializer shape changed')
+        fixups = base.get('linker_fixups', [])
+        if len(pointers) != 2 or len(fixups) != 2 or {f.get('offset') for f in fixups} != {0,4}:
+            raise ValueError('event record lacks both four-byte initializer slots')
+        for slot, pointer in enumerate(pointers):
+            target = names[1] if row['case'] == 'wrong_symbol_base' and slot == 0 else names[slot]
+            delta = 2 if row['case'] == 'base_plus_two' and slot == 0 else 0
+            encoded = delta.to_bytes(2,'little').hex()+'0000'
+            fixup = next(f for f in fixups if f['offset'] == 4*slot)
+            seg,off = addresses[target]
+            resolved = f'{seg:04X}:{off+delta:04X}'
+            if (pointer.get('eventBases_far_pointer_slot_offset') != 4*slot
+                    or pointer.get('pointer_width_bytes') != 4 or pointer.get('target_kind') != 'external'
+                    or pointer.get('target_symbol') != target or pointer.get('encoded_addend_hex') != encoded
+                    or pointer.get('resolved_far_pointer') != resolved
+                    or any(fixup.get(k) != v for k,v in {'width':4,'loc':'pointer32',
+                        'target_kind':'external','target':target,'frame_kind':'target','frame':target,
+                        'segment':basename+'5_DATA',
+                        'self_relative':False,'displacement':0,'encoded_addend':encoded}.items())):
+                raise ValueError('event record symbolic base/target/addend control changed')
+    shift = contract.get('positive_layout_shift', {}).get(profile, {})
+    if shift.get('pad_communals') != [_communal('_aaEvent16Pad',32,1)]:
+        raise ValueError('event layout shift lacks an independent 32-byte common')
+    positives = {r['case']: r for r in cases if r['linker'] == profile and r['case'] in ('positive','positive_shifted')}
+    for name in names:
+        starts = [_event_public_address(positives[c]['public_address_matrix']['Name'][name])
+                  for c in ('positive','positive_shifted')]
+        if (starts[1][0]*16+starts[1][1]) - (starts[0][0]*16+starts[0][1]) != 32:
+            raise ValueError('event records did not both relocate by the measured 32 bytes')

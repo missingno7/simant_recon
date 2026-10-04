@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 165 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 166 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v22.log',
-        'build/source-only-dos-tests-v22-final.log', 'build/source-only-dos-validation-v22.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v23-event.log',
+        'build/source-only-dos-tests-all-v23-event.log', 'build/source-only-dos-validation-v23-event.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not re.search(r'(?m)^OK(?: \(skipped=2\))?$', test_log):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [363] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
+    if test_counts != [364] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
         raise ValueError('repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': 'd246d2d',
+        'source_only_base_checkpoint': '75a8277',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -193,9 +193,12 @@ def main():
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
         'historical_validation': 'PASS',
-        'mandatory_evidence_gates_v22': pin(ROOT / 'build/source-only-dos-gates-v22.log'),
+        'mandatory_evidence_gates_v23': pin(ROOT / 'build/source-only-dos-gates-v23-event.log'),
+        'event_records_binding_v23': pin(OUT / 'event-records-bindings-v1.json'),
+        'event_records_admission_v23': pin(OUT / 'event-records-v23/root-admission.md'),
+        'event_records_raw_acceptance_v23': pin(ROOT / 'build/source-only-dos-event-raw-acceptance-v23.log'),
         'histogram_raw_acceptance_v22': pin(ROOT / 'build/source-only-dos-histogram-raw-acceptance-v22-verified.log'),
-        'source_only_tests': f'49 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'source_only_tests': f'50 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

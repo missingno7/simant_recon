@@ -18,6 +18,71 @@ import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_v23_event_records_require_complete_typed_storage_and_symbolic_bases(self):
+        worker = ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:event-records')
+            provider = row['storage_provider']
+            source = (ROOT/row['source']['path']).read_text(encoding='ascii')
+            def compile(text):
+                result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            bindings.review_provider_source(source, provider, symbols)
+            proof = bindings.verify_provider(compile(source), provider)
+            self.assertEqual(proof['communals'], [
+                {'name': n, 'kind': 'far', 'count': 16, 'element_size': 1, 'length': 16}
+                for n in ('_fd_50F6_49FA','_fd_50F6_4A0A')])
+            for wrong in (source.replace('int code;', 'long code;'),
+                          source.replace('fd_50F6_4A0A;', 'fd_50F6_4A0A = {0,0,0,0,0,0,0,1};')):
+                with self.assertRaises(ValueError): bindings.verify_provider(compile(wrong), provider)
+            # COMDEF cannot encode field order or signedness: the reviewed natural
+            # source, separately from allocation geometry, must reject both.
+            for wrong in (source.replace('int code;', 'unsigned int code;'),
+                          source.replace('int h;\n    int v;', 'int v;\n    int h;')):
+                self.assertEqual(bindings.verify_provider(compile(wrong), provider)['status'], 'PASS')
+                with self.assertRaises(ValueError): bindings.review_provider_source(wrong, provider, symbols)
+            for delta in (0,2):
+                wrong = json.loads(json.dumps(symbols))
+                wrong['data']['event_extra_view'] = dict(wrong['data']['fd_50F6_49FA'], off=0x49FA+delta)
+                with self.assertRaises(ValueError): bindings.review_provider_source(source, provider, wrong)
+            report['runtime_components'] = []
+            tools = compiler.toolchain()['linkers']
+            for profile in ('rtlink400','rtlink610'):
+                bindings.require_v23_storage_contracts(report, profile, tools[profile])
+            for change in ('root','case','duplicate','raw','hash','timeout','warning','abi','common',
+                           'initialized','public','section','slot','target','addend','fixup','pad','shift','tool','scope'):
+                wrong = json.loads(json.dumps(report)); contract = wrong['event_records_contract']
+                case = next(r for r in contract['cases'] if r['linker'] == 'rtlink400' and r['case'] == 'positive')
+                if change == 'root': contract['root_reviewed'] = False
+                elif change == 'case': contract['cases'].remove(case)
+                elif change == 'duplicate': contract['cases'].append(case)
+                elif change == 'raw': case['runtime_log']['exact_raw_bytes_hex'] = '504153530a'
+                elif change == 'hash': case['runtime_log']['sha256'] = '0'*64
+                elif change == 'timeout': case['timed_out'] = True
+                elif change == 'warning': case['linker_diagnostics'] = ['warning']
+                elif change == 'abi': contract['source_abi']['offsets'][-1] = 16
+                elif change == 'common': case['owner_omf']['communals'][0]['count'] = 15
+                elif change == 'initialized': case['owner_omf']['initialized_segment_hex'] = {'extra':'00'}
+                elif change == 'public': case['public_address_matrix']['Name'].pop('_fd_50F6_49FA')
+                elif change == 'section': case['map_sections']['Value']['heading_present'] = False
+                elif change == 'slot': case['pointer_fixups'][0]['eventBases_far_pointer_slot_offset'] = 2
+                elif change == 'target': case['pointer_fixups'][0]['target_symbol'] = '_fd_50F6_4A0A'
+                elif change == 'addend': case['pointer_fixups'][0]['encoded_addend_hex'] = '02000000'
+                elif change == 'fixup': case['base_initializer_omf']['linker_fixups'].pop()
+                elif change == 'pad': contract['positive_layout_shift']['rtlink400']['pad_communals'][0]['count'] = 1
+                elif change == 'shift':
+                    shifted = next(r for r in contract['cases'] if r['linker'] == 'rtlink400' and r['case'] == 'positive_shifted')
+                    shifted['public_address_matrix']['Name']['_fd_50F6_49FA'] = '0000:0000'
+                elif change == 'tool': contract['inputs'] = []
+                elif change == 'scope': contract['event_code_stability_claimed'] = True
+                with self.subTest(change=change):
+                    with self.assertRaises(ValueError):
+                        bindings.require_v23_storage_contracts(wrong, 'rtlink400', tools['rtlink400'])
+
     def test_v22_histogram_requires_source_extent_and_complete_runtime_evidence(self):
         worker = ROOT/'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

@@ -233,6 +233,7 @@ def prepare(out, report):
                      'world-output-state-bindings-v1.json',
                      'history-scalar-state-bindings-v1.json',
                      'ant-class-histogram-bindings-v1.json',
+                     'event-records-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -892,6 +893,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v20_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v21_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v22_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v23_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)

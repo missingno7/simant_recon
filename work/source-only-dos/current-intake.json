@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "d246d2d",
+  "source_only_base_checkpoint": "75a8277",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "ef09bba162ba09b7317f3fdc47ae935e680331d83007a3921d2aa98d5c1bf739",
-    "size": 7640746
+    "sha256": "033d38bbda39e061ea840fa5ea9a73951e542c310cad9880a12974f7290a31ed",
+    "size": 7793640
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "230 unresolved source symbols",
+    "228 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 165,
+  "compiled_translation_units": 166,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 62,
-  "unresolved_symbols": 230,
+  "unresolved_symbols": 228,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 225,
+    "reviewed FAR_BSS definition and compatible consumer views": 223,
     "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 189,
@@ -4077,6 +4077,41 @@
           "count": 32,
           "element_size": 2,
           "length": 64
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:event-records",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\event-records.c",
+        "sha256": "0dcaae2b70a71ba380a4434ab04e5fd93c908fafa16e27927619eb3e337dff4c",
+        "size": 190
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\EVRECS.OBJ",
+        "sha256": "3965e1b172e1730430c3d748130b6b4db4d9bad63c5518a4b4ecb891901a6548",
+        "size": 227
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_49FA",
+          "kind": "far",
+          "length": 16,
+          "count": 16,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A0A",
+          "kind": "far",
+          "length": 16,
+          "count": 16,
+          "element_size": 1
         }
       ],
       "publics": [],
@@ -8574,8 +8609,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "fe8072d7905b925272a5a0fd958bdc9af9c7b52ed7bed6c81c8d88c8c598cb89",
-      "size": 68972
+      "sha256": "533dd2dd627836023a69fcd877f5efd382562ae74ee37fe98e7dbd6333ec363c",
+      "size": 69104
     },
     {
       "path": "tools\\compiler.py",
@@ -8599,8 +8634,8 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "1a0b515bfa8d6a0e252c6f839fabc1436a2d5265a9d244e773956e8c475ebe0d",
-      "size": 137241
+      "sha256": "2c5cdee627aeca70c737fdc7faf4f31868f25c2e05e0eae8868905ea7ac82a72",
+      "size": 145776
     },
     {
       "path": "tools\\farbss.py",
@@ -8615,32 +8650,47 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v22.log",
-      "sha256": "439f20cfa8cc3e7b54aebc7373f1c71ac24689f69d56c1078769aae2990cc958",
-      "size": 5587
+      "path": "build/source-only-dos-run-v23-event.log",
+      "sha256": "915fdf0c8fa1844c7c7cea56043375fef9108de41f211bee4552622b4f529f49",
+      "size": 5638
     },
     {
-      "path": "build/source-only-dos-tests-v22-final.log",
-      "sha256": "d5a6fc3a868a0ae359756e9a35b763cf296c3ba2f8d262113c9e6cbfad703852",
-      "size": 621
+      "path": "build/source-only-dos-tests-all-v23-event.log",
+      "sha256": "a2fd795849300974fb5faa803d2ae960f059284604676ff54bd121f02ca57f9e",
+      "size": 622
     },
     {
-      "path": "build/source-only-dos-validation-v22.log",
+      "path": "build/source-only-dos-validation-v23-event.log",
       "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
       "size": 4752
     }
   ],
   "historical_validation": "PASS",
-  "mandatory_evidence_gates_v22": {
-    "path": "build/source-only-dos-gates-v22.log",
-    "sha256": "e1866ee0be297a657a53dca7f347d7282103e708eff73c144bb9201b0f35eb49",
-    "size": 202
+  "mandatory_evidence_gates_v23": {
+    "path": "build/source-only-dos-gates-v23-event.log",
+    "sha256": "abfd9f15fe97550246fc6e1fa7b5ba7b7d3b5614d136aad88aa9374d07945861",
+    "size": 207
+  },
+  "event_records_binding_v23": {
+    "path": "work/source-only-dos/event-records-bindings-v1.json",
+    "sha256": "e46d5aa6f96018e0d16f4e8c401e883a7e9857d151c64a9590bebdafdf80d5a7",
+    "size": 36807
+  },
+  "event_records_admission_v23": {
+    "path": "work/source-only-dos/event-records-v23/root-admission.md",
+    "sha256": "3e6a7fce77afbb8fc0015a87bdfd4dfd845b1c47437ab1b352ca34db31cec833",
+    "size": 1839
+  },
+  "event_records_raw_acceptance_v23": {
+    "path": "build/source-only-dos-event-raw-acceptance-v23.log",
+    "sha256": "f54dca523e15ab88aa7663c7c28857d9900113763f7dd913ddb109cd941dc51a",
+    "size": 99
   },
   "histogram_raw_acceptance_v22": {
     "path": "build/source-only-dos-histogram-raw-acceptance-v22-verified.log",
     "sha256": "6287dd81c46522585b0033322ae6271e0b1f1158c3e850e8d02fdd6d2a54f07b",
     "size": 91
   },
-  "source_only_tests": "49 targeted tests included in 363 repository tests PASS (2 skips)",
+  "source_only_tests": "50 targeted tests included in 364 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }
