@@ -84,7 +84,7 @@ def main():
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': '1f7cbc1276d7ba50f80f9f1a1afbb116d6d8de58',
+        'source_only_base_checkpoint': 'f932bb22583a757d4bc357a94faf5d9a70b77147',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -236,6 +236,10 @@ def main():
         'structural_audits_v29': pin(OUT / 'structural-audits-v29/archive-index.json'),
         'storage_focused_tests_v29': pin(ROOT / 'build/source-only-dos-focused-final-v29.log'),
         'selector_regression_v29': pin(ROOT / 'build/source-only-dos-selector-regression-v29.log'),
+        'static_frontier_archive_v30': pin(OUT / 'structural-audits-v30/archive-index.json'),
+        'static_frontier_root_review_v30': pin(OUT / 'structural-audits-v30/root-frontier-review.json'),
+        'hotbox_semantic_root_review_v30': pin(OUT / 'structural-audits-v30/hotbox/root-semantic-review.json'),
+        'static_frontier_recheck_v30': pin(ROOT / 'build/source-only-dos-static-frontier-recheck-v30.log'),
         'source_only_tests': f'59 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}

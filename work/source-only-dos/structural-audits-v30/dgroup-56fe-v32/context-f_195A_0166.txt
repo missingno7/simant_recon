@@ -1,0 +1,19 @@
+f_195A_0166  root:195A:0166  linear 19706  size 28  extent REVIEWED  region game_or_library
+  entry evidence: reviewed
+  module frame 195A: function 16/29; neighbours: f_195A_0122, f_195A_0144, f_195A_0182, f_195A_019C
+  frame: {'frame': 'bp', 'stack_check': False}
+  0166  push bp
+  0167  mov bp, sp
+  0169  push ds
+  016A  push si
+  016B  lds si, ptr [bp + 6]
+  016E  mov ax, 0x5700
+  0171  int 0x67
+  0173  and ah, ah
+  0175  je 0x17c
+  0177  lcall 0x195a, 0x2b7                -> f_195A_02B7
+  017C  xor al, al
+  017E  pop si
+  017F  pop ds
+  0180  pop bp
+  0181  retf

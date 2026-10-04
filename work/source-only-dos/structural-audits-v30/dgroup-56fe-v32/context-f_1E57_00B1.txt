@@ -1,0 +1,51 @@
+f_1E57_00B1  root:1E57:00B1  linear 1E621  size 100  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 1E57: function 6/25; neighbours: f_1E57_0043, f_1E57_0052, clip_KillWin, clip_SetWin
+  frame: {'frame': 'bp', 'locals': 66, 'stack_check': False}
+  00B1  push bp
+  00B2  mov bp, sp
+  00B4  sub sp, 0x42
+  00B7  push di
+  00B8  push si
+  00B9  mov dx, word ptr [bp + 6]
+  00BC  sub dl, dl
+  00BE  mov word ptr [bp - 0x40], dx
+  00C1  sub bx, bx
+  00C3  mov si, 1
+  00C6  mov word ptr [bp + 6], dx
+  00C9  jmp 0xe9
+  00CB  mov di, bx
+  00CD  shl di, 1
+  00CF  mov ax, word ptr [di + 0x5702]
+  00D3  mov word ptr [bp - 0x42], ax
+  00D6  cmp ax, 0x8000
+  00D9  je 0xee
+  00DB  mov di, si
+  00DD  shl di, 1
+  00DF  mov word ptr [bp + di - 0x40], ax
+  00E2  cmp ax, dx
+  00E4  jne 0xe7
+  00E6  dec si
+  00E7  inc bx
+  00E8  inc si
+  00E9  cmp si, 0x1f
+  00EC  jl 0xcb
+  00EE  shl si, 1
+  00F0  mov word ptr [bp + si - 0x40], 0x8000
+  00F5  mov ax, 0x40
+  00F8  push ax
+  00F9  lea ax, [bp - 0x40]
+  00FC  push ss
+  00FD  push ax
+  00FE  mov ax, 0x5702
+  0101  push ds
+  0102  push ax
+  0103  lcall 0x29f4, 0x281a               -> __fmemcpy
+  0108  add sp, 0xa
+  010B  push cs
+  010C  call 0x38e                         -> f_1E57_038E
+  010F  pop si
+  0110  pop di
+  0111  mov sp, bp
+  0113  pop bp
+  0114  retf

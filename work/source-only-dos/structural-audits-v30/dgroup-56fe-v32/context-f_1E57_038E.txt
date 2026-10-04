@@ -1,0 +1,403 @@
+f_1E57_038E  root:1E57:038E  linear 1E8FE  size 997  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 1E57: function 14/25; neighbours: clip_Off, f_1E57_036F, clip_SubInclude, f_1E57_08F5
+  frame: {'frame': 'bp', 'locals': 50, 'stack_check': False}
+  best draft: build/search/f_1E57_038E/best.c  MISMATCH ratio 0.9834
+  038E  push bp
+  038F  mov bp, sp
+  0391  sub sp, 0x32
+  0394  push di
+  0395  push si
+  0396  push cs
+  0397  call 9                             -> f_1E57_0009
+  039A  cmp word ptr [0x584c], 0           DS:584C g_584C
+  039F  jne 0x3be
+  03A1  mov ax, 0xb4
+  03A4  push ax
+  03A5  sub ax, ax
+  03A7  push ax
+  03A8  mov ax, 0x3b60                     " database closed"
+  03AB  mov cx, 0x50f6                     [seg 50F6]
+  03AE  push cx
+  03AF  push ax
+  03B0  lcall 0x29f4, 0x2878               -> __fmemset
+  03B5  add sp, 8
+  03B8  mov word ptr [0x584c], 1           DS:584C g_584C
+  03BE  mov ax, word ptr [0x574c]          DS:574C
+  03C1  or ax, word ptr [0x574a]           DS:574A g_574A
+  03C5  je 0x3e7
+  03C7  mov ax, 0x574e
+  03CA  mov cx, ds
+  03CC  cmp ax, word ptr [0x574a]          DS:574A g_574A
+  03D0  jne 0x3d8
+  03D2  cmp cx, word ptr [0x574c]          DS:574C
+  03D6  je 0x3e7
+  03D8  push word ptr [0x574c]             DS:574C
+  03DC  push word ptr [0x574a]             DS:574A g_574A
+  03E0  lcall 0x171c, 0x1c0a               -> f_171C_1C0A
+  03E5  pop bx
+  03E6  pop bx
+  03E7  mov ax, word ptr [0x5702]          DS:5702 g_5702
+  03EA  mov word ptr [bp - 0x14], ax
+  03ED  cmp ax, 0x8000
+  03F0  jne 0x3ff
+  03F2  mov word ptr [0x574a], 0x574e      DS:574A g_574A
+  03F8  mov word ptr [0x574c], ds          DS:574C
+  03FC  jmp 0x76d
+  03FF  mov ax, 0x57de                     "tmprects"
+  0402  push ds
+  0403  push ax
+  0404  sub ax, ax
+  0406  push ax
+  0407  mov cx, 0x800
+  040A  sub dx, dx
+  040C  push dx
+  040D  push cx
+  040E  lcall 0x171c, 0x1a9e               -> f_171C_1A9E
+  0413  add sp, 0xa
+  0416  mov word ptr [bp - 0x28], ax
+  0419  mov word ptr [bp - 0x26], dx
+  041C  push dx
+  041D  push ax
+  041E  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  0423  pop bx
+  0424  pop bx
+  0425  mov word ptr [bp - 0x2c], ax
+  0428  mov word ptr [bp - 0x2a], dx
+  042B  mov ax, 0x57e7                     "clipout"
+  042E  push ds
+  042F  push ax
+  0430  sub ax, ax
+  0432  push ax
+  0433  mov cx, 0x800
+  0436  sub dx, dx
+  0438  push dx
+  0439  push cx
+  043A  lcall 0x171c, 0x1a9e               -> f_171C_1A9E
+  043F  add sp, 0xa
+  0442  mov word ptr [0x574a], ax          DS:574A g_574A
+  0445  mov word ptr [0x574c], dx          DS:574C
+  0449  mov word ptr [bp - 2], 0
+  044E  mov bx, word ptr [bp - 2]
+  0451  shl bx, 1
+  0453  shl bx, 1
+  0455  add bx, 0x3b60
+  0459  mov es, word ptr [0x89d0]          DS:89D0
+  045D  mov word ptr [bp - 0x30], bx
+  0460  mov word ptr [bp - 0x2e], es
+  0463  mov ax, word ptr es:[bx + 2]
+  0467  or ax, word ptr es:[bx]
+  046A  je 0x486
+  046C  push word ptr es:[bx + 2]
+  0470  push word ptr es:[bx]
+  0473  lcall 0x171c, 0x1c0a               -> f_171C_1C0A
+  0478  pop bx
+  0479  pop bx
+  047A  les bx, ptr [bp - 0x30]
+  047D  sub ax, ax
+  047F  mov word ptr es:[bx + 2], ax
+  0483  mov word ptr es:[bx], ax
+  0486  inc word ptr [bp - 2]
+  0489  cmp word ptr [bp - 2], 0x2d
+  048D  jl 0x44e
+  048F  push word ptr [0x574c]             DS:574C
+  0493  push word ptr [0x574a]             DS:574A g_574A
+  0497  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  049C  pop bx
+  049D  pop bx
+  049E  mov word ptr [bp - 0x1c], ax
+  04A1  mov word ptr [bp - 0x1a], dx
+  04A4  mov ax, 0x55b3                     [seg 55B3 DGROUP]
+  04A7  push ds
+  04A8  mov si, 0x5a9c
+  04AB  mov ds, ax
+  04AD  les di, ptr [bp - 0x1c]
+  04B0  movsw word ptr es:[di], word ptr [si]
+  04B1  movsw word ptr es:[di], word ptr [si]
+  04B2  movsw word ptr es:[di], word ptr [si]
+  04B3  movsw word ptr es:[di], word ptr [si]
+  04B4  pop ds
+  04B5  mov bx, word ptr [bp - 0x1c]
+  04B8  mov word ptr es:[bx + 0xa], 0x8000
+  04BE  lea ax, [bp - 0x24]
+  04C1  push ss
+  04C2  push ax
+  04C3  mov ax, word ptr [bp - 0x14]
+  04C6  lcall 0x2505, 0x288                -> win_GetObjRect
+  04CB  mov ax, 0x57ef                     "winClipList"
+  04CE  push ds
+  04CF  push ax
+  04D0  mov ax, 1
+  04D3  push ax
+  04D4  sub cx, cx
+  04D6  push cx
+  04D7  push cx
+  04D8  push word ptr [bp - 0x2a]
+  04DB  push word ptr [bp - 0x2c]
+  04DE  push word ptr [bp - 0x1a]
+  04E1  push word ptr [bp - 0x1c]
+  04E4  lea cx, [bp - 0x24]
+  04E7  push ss
+  04E8  push cx
+  04E9  lcall 0x1d8e, 0x2bd                -> f_1D8E_02BD
+  04EE  add sp, 0x10
+  04F1  sub ax, word ptr [bp - 0x2c]
+  04F4  and al, 0xf8
+  04F6  add ax, 8
+  04F9  cdq
+  04FA  push dx
+  04FB  push ax
+  04FC  mov si, ax
+  04FE  lcall 0x171c, 0x1a9e               -> f_171C_1A9E
+  0503  add sp, 0xa
+  0506  mov es, word ptr [0x89d0]          DS:89D0
+  050A  mov cl, 8
+  050C  mov bx, word ptr [bp - 0x14]
+  050F  sar bx, cl
+  0511  shl bx, 1
+  0513  shl bx, 1
+  0515  mov word ptr es:[bx + 0x3b60], ax
+  051A  mov word ptr es:[bx + 0x3b62], dx
+  051F  push si
+  0520  push word ptr [bp - 0x2a]
+  0523  push word ptr [bp - 0x2c]
+  0526  push dx
+  0527  push word ptr es:[bx + 0x3b60]
+  052C  mov si, bx
+  052E  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  0533  pop bx
+  0534  pop bx
+  0535  push dx
+  0536  push ax
+  0537  lcall 0x29f4, 0x281a               -> __fmemcpy
+  053C  add sp, 0xa
+  053F  mov es, word ptr [0x89d0]          DS:89D0
+  0543  push word ptr es:[si + 0x3b62]
+  0548  push word ptr es:[si + 0x3b60]
+  054D  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  0552  pop bx
+  0553  pop bx
+  0554  mov word ptr [bp - 2], 1
+  0559  mov di, word ptr [bp - 0x2c]
+  055C  jmp 0x6a8
+  055F  mov bx, word ptr [bp - 2]
+  0562  shl bx, 1
+  0564  mov ax, word ptr [bx + 0x5702]
+  0568  mov word ptr [bp - 4], ax
+  056B  cmp ax, 0x8000
+  056E  jne 0x573
+  0570  jmp 0x6b1
+  0573  lea ax, [bp - 0x24]
+  0576  push ss
+  0577  push ax
+  0578  mov ax, word ptr [bp - 0x14]
+  057B  lcall 0x2505, 0x288                -> win_GetObjRect
+  0580  push word ptr [bp - 0x2a]
+  0583  push di
+  0584  sub ax, ax
+  0586  push ax
+  0587  push ax
+  0588  push word ptr [bp - 0x1a]
+  058B  push word ptr [bp - 0x1c]
+  058E  lea ax, [bp - 0x24]
+  0591  push ss
+  0592  push ax
+  0593  lcall 0x1d8e, 0x2bd                -> f_1D8E_02BD
+  0598  add sp, 0x10
+  059B  mov si, ax
+  059D  mov word ptr [bp - 0xc], dx
+  05A0  mov cx, di
+  05A2  sub ax, cx
+  05A4  mov cl, 3
+  05A6  sar ax, cl
+  05A8  mov word ptr [bp - 0x32], ax
+  05AB  cmp ax, 0x100
+  05AE  jl 0x5be
+  05B0  push ax
+  05B1  mov ax, 0x57fb                     "C097: Clip overflow %d"
+  05B4  push ds
+  05B5  push ax
+  05B6  lcall 0x1c62, 0xc                  -> Punt
+  05BB  add sp, 6
+  05BE  mov cl, 3
+  05C0  mov ax, word ptr [bp - 0x32]
+  05C3  inc ax
+  05C4  shl ax, cl
+  05C6  push ax
+  05C7  push word ptr [bp - 0x2a]
+  05CA  push di
+  05CB  push word ptr [bp - 0x1a]
+  05CE  push word ptr [bp - 0x1c]
+  05D1  lcall 0x29f4, 0x281a               -> __fmemcpy
+  05D6  add sp, 0xa
+  05D9  lea ax, [bp - 0x24]
+  05DC  push ss
+  05DD  push ax
+  05DE  mov ax, word ptr [bp - 4]
+  05E1  lcall 0x2505, 0x288                -> win_GetObjRect
+  05E6  sub ax, ax
+  05E8  push ax
+  05E9  push ax
+  05EA  push word ptr [bp - 0x2a]
+  05ED  push di
+  05EE  push word ptr [bp - 0x1a]
+  05F1  push word ptr [bp - 0x1c]
+  05F4  lea ax, [bp - 0x24]
+  05F7  push ss
+  05F8  push ax
+  05F9  lcall 0x1d8e, 0x2bd                -> f_1D8E_02BD
+  05FE  add sp, 0x10
+  0601  mov si, ax
+  0603  mov word ptr [bp - 0xc], dx
+  0606  mov cx, di
+  0608  sub ax, cx
+  060A  mov cl, 3
+  060C  sar ax, cl
+  060E  mov word ptr [bp - 6], ax
+  0611  mov word ptr [bp - 0x32], ax
+  0614  cmp ax, 0x100
+  0617  jl 0x627
+  0619  push ax
+  061A  mov ax, 0x5812                     "C098: Clip overflow %d"
+  061D  push ds
+  061E  push ax
+  061F  lcall 0x1c62, 0xc                  -> Punt
+  0624  add sp, 6
+  0627  sub ax, ax
+  0629  push ax
+  062A  push word ptr [bp - 6]
+  062D  push cs
+  062E  call 6                             -> f_1E57_0006
+  0631  pop bx
+  0632  pop bx
+  0633  mov ax, 0x5829                     "winClipList"
+  0636  push ds
+  0637  push ax
+  0638  mov ax, 1
+  063B  push ax
+  063C  add ax, word ptr [bp - 6]
+  063F  mov cl, 3
+  0641  shl ax, cl
+  0643  mov word ptr [bp - 6], ax
+  0646  cdq
+  0647  push dx
+  0648  push ax
+  0649  lcall 0x171c, 0x1a9e               -> f_171C_1A9E
+  064E  add sp, 0xa
+  0651  mov es, word ptr [0x89d0]          DS:89D0
+  0655  mov cl, 8
+  0657  mov bx, word ptr [bp - 4]
+  065A  sar bx, cl
+  065C  shl bx, 1
+  065E  shl bx, 1
+  0660  mov word ptr es:[bx + 0x3b60], ax
+  0665  mov word ptr es:[bx + 0x3b62], dx
+  066A  push word ptr [bp - 6]
+  066D  push word ptr [bp - 0x2a]
+  0670  push di
+  0671  push dx
+  0672  push word ptr es:[bx + 0x3b60]
+  0677  mov si, bx
+  0679  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  067E  pop bx
+  067F  pop bx
+  0680  push dx
+  0681  push ax
+  0682  lcall 0x29f4, 0x281a               -> __fmemcpy
+  0687  add sp, 0xa
+  068A  mov es, word ptr [0x89d0]          DS:89D0
+  068E  push word ptr es:[si + 0x3b62]
+  0693  push word ptr es:[si + 0x3b60]
+  0698  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  069D  pop bx
+  069E  pop bx
+  069F  mov ax, word ptr [bp - 4]
+  06A2  mov word ptr [bp - 0x14], ax
+  06A5  inc word ptr [bp - 2]
+  06A8  cmp word ptr [bp - 2], 0x20
+  06AC  jge 0x6b1
+  06AE  jmp 0x55f
+  06B1  lea ax, [bp - 0x24]
+  06B4  push ss
+  06B5  push ax
+  06B6  mov ax, word ptr [bp - 0x14]
+  06B9  lcall 0x2505, 0x288                -> win_GetObjRect
+  06BE  push word ptr [bp - 0x2a]
+  06C1  push di
+  06C2  sub ax, ax
+  06C4  push ax
+  06C5  push ax
+  06C6  push word ptr [bp - 0x1a]
+  06C9  push word ptr [bp - 0x1c]
+  06CC  lea ax, [bp - 0x24]
+  06CF  push ss
+  06D0  push ax
+  06D1  lcall 0x1d8e, 0x2bd                -> f_1D8E_02BD
+  06D6  add sp, 0x10
+  06D9  mov es, dx
+  06DB  mov si, ax
+  06DD  mov ax, di
+  06DF  sub si, ax
+  06E1  mov cl, 3
+  06E3  sar si, cl
+  06E5  cmp si, 0x100
+  06E9  jl 0x6f9
+  06EB  push si
+  06EC  mov ax, 0x5835                     "C099: Clip overflow %d"
+  06EF  push ds
+  06F0  push ax
+  06F1  lcall 0x1c62, 0xc                  -> Punt
+  06F6  add sp, 6
+  06F9  sub ax, ax
+  06FB  push ax
+  06FC  push si
+  06FD  push cs
+  06FE  call 6                             -> f_1E57_0006
+  0701  pop bx
+  0702  pop bx
+  0703  mov cl, 3
+  0705  lea ax, [si + 1]
+  0708  shl ax, cl
+  070A  mov si, ax
+  070C  push si
+  070D  mov ax, word ptr [bp - 0x2a]
+  0710  push ax
+  0711  push di
+  0712  push word ptr [bp - 0x1a]
+  0715  push word ptr [bp - 0x1c]
+  0718  lcall 0x29f4, 0x281a               -> __fmemcpy
+  071D  add sp, 0xa
+  0720  push word ptr [0x574c]             DS:574C
+  0724  push word ptr [0x574a]             DS:574A g_574A
+  0728  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  072D  pop bx
+  072E  pop bx
+  072F  mov ax, 1
+  0732  push ax
+  0733  mov ax, si
+  0735  cdq
+  0736  push dx
+  0737  push ax
+  0738  push word ptr [0x574c]             DS:574C
+  073C  push word ptr [0x574a]             DS:574A g_574A
+  0740  lcall 0x171c, 0x1b2c               -> f_171C_1B2C
+  0745  add sp, 0xa
+  0748  mov word ptr [0x574a], ax          DS:574A g_574A
+  074B  mov word ptr [0x574c], dx          DS:574C
+  074F  push word ptr [bp - 0x26]
+  0752  push word ptr [bp - 0x28]
+  0755  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  075A  pop bx
+  075B  pop bx
+  075C  push word ptr [bp - 0x26]
+  075F  push word ptr [bp - 0x28]
+  0762  lcall 0x171c, 0x1c0a               -> f_171C_1C0A
+  0767  pop bx
+  0768  pop bx
+  0769  push cs
+  076A  call 7                             -> f_1E57_0007
+  076D  pop si
+  076E  pop di
+  076F  mov sp, bp
+  0771  pop bp
+  0772  retf

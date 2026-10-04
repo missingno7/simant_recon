@@ -856,8 +856,27 @@ registration remains unknown, and corrected stock-library selection controls.
 Its raw-log reconciliation distinguishes file-byte hashes from earlier
 newline-normalized text hashes. `8ED8` ownership/entry frame, hot-box registration,
 the app-specific fdata selection trigger and historical `79F0` mapping remain open.
+The historical ledger's `Timer` label for `60B0` is superseded by this field-level
+event-region interpretation; it remains in the copied historical description,
+not as a current type conclusion or an admitted source owner.
 
 The v29 acceptance boundary passes 373 repository tests (two skips), including
 59 source-only tests, historical validation and all 29 mandatory evidence gates
 plus alignment under both RTLinks. The read-only archive check preserves frozen
 observations and reports later intake drift separately.
+
+## v30 bounded static frontier review
+
+The [static archive](../work/source-only-dos/structural-audits-v30/README.md) connects
+the four S01:328E entry stacks to CRT mainline and DGROUP interrupt stacks. A root
+scan checks all 188 generated sources; all twelve SS setters belong to the two
+audited handler modules. A separate addendum corrects one displayed call arrow
+without changing the original receipt. Entry state is understood; buffer extent,
+index ranges and symbolic replacement of the four numeric bases remain separate.
+
+The 56FE investigation rejects the apparent `5700h` data reference: it selects an
+EMS service before INT 67h. Accepted neighboring contributions do not explain the
+four bytes. The root review also confirms the 60B0 record's event-region fields
+while keeping its source instance and registration unknown. The read-only recheck
+passes 397 input identities. This research discharges no debt and changes no
+provider, function disposition or open-gate count.
