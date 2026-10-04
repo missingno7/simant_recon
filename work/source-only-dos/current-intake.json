@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "bbae599",
+  "source_only_base_checkpoint": "bf19d25",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "2e44fce4855d025148763f30373faca8fd8222909687679c2827c5c96421dd0c",
-    "size": 15357335
+    "sha256": "b2d1f4056c82f15bf655b73d86f4f6fe2bd22b0c48ed08a64bf06c1962c2ab95",
+    "size": 16321787
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "43 unresolved source symbols",
+    "22 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 182,
+  "compiled_translation_units": 186,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 62,
-  "unresolved_symbols": 43,
+  "unresolved_symbols": 22,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 38,
+    "reviewed FAR_BSS definition and compatible consumer views": 17,
     "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 191,
@@ -111,6 +111,28 @@
       ],
       "declared_grid": "fd_50F6_15C4[30][40]",
       "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout."
+    },
+    {
+      "id": "menu-table-cross-owner-layout",
+      "status": "UNRESOLVED",
+      "sources": [
+        "src/root/m1FD2.c",
+        "src/S10/m35F5.c",
+        "src/S17/m384C.c"
+      ],
+      "historical_intersections": [
+        {
+          "array": "fd_50F6_46BC",
+          "index": 10,
+          "target": "fd_50F6_46D0"
+        },
+        {
+          "array": "fd_50F6_46A8",
+          "index": 20,
+          "target": "fd_50F6_46D0"
+        }
+      ],
+      "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout."
     },
     {
       "id": "database-open-minus-one-record",
@@ -5749,6 +5771,237 @@
       ],
       "publics": [],
       "fixups": []
+    },
+    {
+      "module": "source-owned:render-delay-word",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\render-delay-word.c",
+        "sha256": "576e0fc638e0274cc5f95b7fde9d78f0a4786ddbad64d8366ac9867fb0387ad5",
+        "size": 22
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\DELAYW27.OBJ",
+        "sha256": "91ab3f37557de66b67e1af887e2b6fbe5b924619888bba2735868f6bb76e5502",
+        "size": 213
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:window-ralloc-handles",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\window-ralloc-handles.c",
+        "sha256": "6a8afe2038120da5e55ecc3dd4f31fa498fd785d9353d1dd4360d04ac1e885e7",
+        "size": 82
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\WINHD27.OBJ",
+        "sha256": "d0d9c6e9191b21a225c2424a4f312c4377101746c3f19187850e1e3a775c9c60",
+        "size": 229
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_385A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-sound-storage",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-sound-storage.c",
+        "sha256": "984e0db28de921d9d4ccd1e0be9f73e40a2880d1786f6222cc1718d2f4e90aec",
+        "size": 298
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\SNDST27.OBJ",
+        "sha256": "3f4107153504d1ffaa1b5e6588c00aaa2311652cf1cf8baa1c03d9aaf9fc4e58",
+        "size": 355
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_47DA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A1A",
+          "kind": "far",
+          "length": 16,
+          "count": 4,
+          "element_size": 4
+        },
+        {
+          "name": "_fd_50F6_4A42",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B28",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B2C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B2E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B8A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B8E",
+          "kind": "far",
+          "length": 28,
+          "count": 14,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_4BAA",
+          "kind": "far",
+          "length": 28,
+          "count": 14,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-misc-storage",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-misc-storage.c",
+        "sha256": "14e4a1dee10178208042f2959b670aad9051dfe3dcdcad11d1d3019709b1147a",
+        "size": 298
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\MISCST27.OBJ",
+        "sha256": "850deaaf759b02b1f40a639a2ad7a08f56839dbd1ce775d009bbe886a1b35822",
+        "size": 361
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_07CA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0852",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08DE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08EC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_09F2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B0A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B22",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1114",
+          "kind": "far",
+          "length": 1200,
+          "count": 1200,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_15C4",
+          "kind": "far",
+          "length": 2400,
+          "count": 1200,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
     }
   ],
   "reviewed_data_aliases": [
@@ -10307,8 +10560,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "d55ff3225c4124a5a633c93c6d243a2b27a0cb504d1553a890071853f4815569",
-      "size": 72671
+      "sha256": "bb5052e3475343c5ab780a52a8105abcda4a64679e73a2e445bdce4a74c0fc04",
+      "size": 73898
     },
     {
       "path": "tools\\compiler.py",
@@ -10346,9 +10599,14 @@
       "size": 7794
     },
     {
+      "path": "tools\\dos_storage_policies_v27.py",
+      "sha256": "c0b349e4fcdb03612903e118efd133ef7903f70319a632c2b7e8b2914ff276a8",
+      "size": 49747
+    },
+    {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "9d55c50b4b26e98cdb98b6115d1986d6931c0dbda1f06d93c2507284f996bd48",
-      "size": 180344
+      "sha256": "9202c990cf513d607601efeec08126c8d8b6ad55fb603c83ca9e3652f28dedcc",
+      "size": 186752
     },
     {
       "path": "tools\\farbss.py",
@@ -10363,17 +10621,17 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v26.log",
-      "sha256": "75b63035fcc5b3de938776c6f29d372f825f5fa1604c781d0aa487e90d0ef400",
-      "size": 6469
+      "path": "build/source-only-dos-run-v27.log",
+      "sha256": "94ad17f0d9f813823cabc69aa8ee27be76ec97ca7c0a9f0d172922799eb02fca",
+      "size": 6648
     },
     {
-      "path": "build/source-only-dos-tests-accepted-final-v26.log",
-      "sha256": "a16077d7aa93c99cd14b87f835ccf187a152dd185dfc37a6207726279ee1ac5c",
-      "size": 627
+      "path": "build/source-only-dos-tests-accepted-final-v27.log",
+      "sha256": "95dba3da757df1d665b5063f2cec6c1f93a5378c09864c97710942fc3f2ca158",
+      "size": 32042
     },
     {
-      "path": "build/source-only-dos-validation-v26.log",
+      "path": "build/source-only-dos-validation-v27.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
@@ -10523,6 +10781,48 @@
     "sha256": "6287dd81c46522585b0033322ae6271e0b1f1158c3e850e8d02fdd6d2a54f07b",
     "size": 91
   },
-  "source_only_tests": "55 targeted tests included in 369 repository tests PASS (2 skips)",
+  "storage_admission_v27": {
+    "path": "work/source-only-dos/storage-admission-v27/root-admission.md",
+    "sha256": "0aff779cddcebe6b22f1bf6b0e49da76cc06cc87be75956bbac288b47a52b0ef",
+    "size": 3200
+  },
+  "storage_gates_v27": {
+    "path": "build/source-only-dos-gates-v27.log",
+    "sha256": "3c1a3f670ebb042eb8e531d5c11dd4cdf629c5a8357517b7343119c635048a51",
+    "size": 231
+  },
+  "storage_raw_review_v27": {
+    "path": "build/source-only-dos-raw-recheck-v27.log",
+    "sha256": "ed141a3c4e420c1e5d5242961c82a082310a8114d950751baec5b9dde5a7bf2e",
+    "size": 388
+  },
+  "structural_audits_v27": {
+    "path": "work/source-only-dos/structural-audits-v27/archive-index.json",
+    "sha256": "0a991be0059ded239dba5889ee65324919b7f5da6739df611dd64601da0e4283",
+    "size": 2913
+  },
+  "storage_owner_bindings_v27": [
+    {
+      "path": "work/source-only-dos/remaining-sound-storage-bindings-v1.json",
+      "sha256": "d3cc6bf806342160a5e7796e9d1cd305092c6222fd2feadb1a473643453a8035",
+      "size": 34640
+    },
+    {
+      "path": "work/source-only-dos/remaining-misc-storage-bindings-v1.json",
+      "sha256": "7db2afa95e037abba5910ea029882dc17fc4c1c5afe909191e881148ef13a632",
+      "size": 34635
+    },
+    {
+      "path": "work/source-only-dos/window-ralloc-handles-bindings-v1.json",
+      "sha256": "e5b42be7ea7d30ca3dc4a2f0d32f7c9c8e36565c1ca1d9cfbc3e9415c5b8a25f",
+      "size": 33552
+    },
+    {
+      "path": "work/source-only-dos/render-delay-word-bindings-v1.json",
+      "sha256": "e2e0607402259c77611031a61b73dce8dbf6d040e4688953039f966559399539",
+      "size": 33367
+    }
+  ],
+  "source_only_tests": "56 targeted tests included in 370 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

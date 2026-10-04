@@ -251,6 +251,10 @@ def prepare(out, report):
                      'remaining-window-state-bindings-v1.json',
                      'remaining-scalar-tail-bindings-v1.json',
                      'balloon-buffer-tables-bindings-v1.json',
+                     'render-delay-word-bindings-v1.json',
+                     'window-ralloc-handles-bindings-v1.json',
+                     'remaining-sound-storage-bindings-v1.json',
+                     'remaining-misc-storage-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -641,6 +645,17 @@ def audit_layout(report):
                   'from object 4 rectangles; resize and loaded window offsets are not yet proved '
                   'to enforce that grid bound. A baseline resource rectangle in range does not '
                   'prove all reachable writes or preserve cross-object overreads under a new layout.'}, {
+        'id': 'menu-table-cross-owner-layout', 'status': 'UNRESOLVED',
+        'sources': ['src/root/m1FD2.c', 'src/S10/m35F5.c', 'src/S17/m384C.c'],
+        'historical_intersections': [
+            {'array': 'fd_50F6_46BC', 'index': 10, 'target': 'fd_50F6_46D0'},
+            {'array': 'fd_50F6_46A8', 'index': 20, 'target': 'fd_50F6_46D0'}],
+        'reason': 'Menu title-length and x-position arrays are written until a resource '
+                  'title sentinel, with no established capacity or title-count cap. '
+                  'Original word indices 10 and 20 respectively reach the separately '
+                  'owned render-delay word. Further words reach the bitmap Handle slot. '
+                  'The scalar owner does not prove those writes unreachable or preserve '
+                  'their cross-object effects under an independent layout.'}, {
         'id': 'database-open-minus-one-record', 'status': 'UNRESOLVED',
         'source': 'src/root/m1A28.c', 'normal_owner': 'fd_50F6_3958[4]',
         'historical_failure_address': '50F6:38DC',
@@ -941,6 +956,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v24_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v25_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v26_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v27_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
@@ -1059,7 +1075,7 @@ def main():
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
                              ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py', 'dos_alignment_debt.py',
-                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py')]
+                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py', 'dos_storage_policies_v27.py')]
         report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)

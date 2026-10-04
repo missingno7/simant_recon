@@ -1955,6 +1955,71 @@ class SourceOnlyDosTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     bindings.require_v26_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
+    def test_v27_storage_types_extents_and_full_control_evidence_fail_closed(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            contrasts = {
+                'source-owned:remaining-sound-storage': ('int far fd_50F6_4B8E[14];',
+                    'unsigned far fd_50F6_4B8E[14];', 'int far fd_50F6_4B8E[13];'),
+                'source-owned:remaining-misc-storage': ('char far fd_50F6_0B0A[4];',
+                    'unsigned char far fd_50F6_0B0A[4];', 'char far fd_50F6_0B0A[3];'),
+                'source-owned:window-ralloc-handles': ('Handle far fd_50F6_385A;',
+                    'char far * far fd_50F6_385A;', 'Handle far fd_50F6_385A[2];'),
+                'source-owned:render-delay-word': ('int far fd_50F6_46D0;',
+                    'unsigned far fd_50F6_46D0;', 'long far fd_50F6_46D0;'),
+            }
+            total = 0
+            for module, (anchor, type_error, extent_error) in contrasts.items():
+                row = next(r for r in report['translation_units'] if r['module'] == module)
+                provider = row['storage_provider']
+                text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                self.assertIn(anchor, text)
+                def compile(source):
+                    result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(text, provider, symbols)
+                proof = bindings.verify_provider(compile(text), provider)
+                total += sum(c['length'] for c in proof['communals'])
+                self.assertEqual((proof['code_bytes'], proof['live_initialized_bytes']), (0, 0))
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(text.replace(anchor, type_error), provider, symbols)
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(text.replace(anchor, extent_error)), provider)
+            self.assertEqual(total, 3730)
+            dos.audit_layout(report)
+            self.assertEqual(next(r['status'] for r in report['layout_dependencies']
+                                  if r['id'] == 'map-viewport-grid-layout'), 'UNRESOLVED')
+            self.assertEqual(next(r['status'] for r in report['layout_dependencies']
+                                  if r['id'] == 'menu-table-cross-owner-layout'), 'UNRESOLVED')
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_v27_storage_contracts(report, profile, tc['linkers'][profile])
+            for module, (key, _) in bindings.V27_STORAGE_CONTRACTS.items():
+                for tamper in ('case', 'omf', 'raw', 'map', 'runtime_duplicate'):
+                    wrong = json.loads(json.dumps(report))
+                    contract = wrong[key]
+                    if tamper == 'case':
+                        contract['cases'].pop()
+                    elif tamper == 'omf':
+                        control = next(iter(contract['compiler_controls'].values()))
+                        control['communals'][0]['length'] += 2
+                    elif tamper == 'raw':
+                        contract['cases'][0]['raw']['hex'] += '00'
+                    elif tamper == 'map':
+                        case = contract['cases'][0]
+                        name = next(iter(case['public_address_matrix']['Name']))
+                        case['public_address_matrix']['Name'][name] = 'FFFF:FFFF'
+                    else:
+                        original = next(p for p in contract['inputs']
+                                        if p['path'].lower().endswith('llibcr.lib'))
+                        contract['inputs'].append(dict(original, sha256='0' * 64))
+                    with self.assertRaises(ValueError, msg=(module, tamper)):
+                        bindings.require_v27_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
     def test_water_pair_adds_exact_array_owners_without_changing_population_or_code(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

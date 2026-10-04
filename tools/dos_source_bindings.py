@@ -709,6 +709,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V24_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V25_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V26_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V27_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -716,7 +717,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS, **V26_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS, **V26_STORAGE_ANCHORS, **V27_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -2338,3 +2339,51 @@ def require_v26_storage_contracts(report, profile, tool):
             raise ValueError('v26 storage contract scope or admission changed')
         dos_storage_contracts.validate(contract,
             dos_storage_policies_v26.policy(module, provider_communals(module)))
+
+# Reviewed v27 typed sound, miscellaneous and Ralloc Handle owners.
+PROVIDER_SPECS['source-owned:render-delay-word'] = ('DELAYW27', None, (('_fd_50F6_46D0', 2),), 'int far fd_50F6_46D0;')
+FAR_PROVIDER_MODULES.add('source-owned:render-delay-word')
+PROVIDER_SPECS['source-owned:window-ralloc-handles'] = ('WINHD27', None, (('_fd_50F6_385A', 4), ('_fd_50F6_385E', 4)), 'typedef char far * far *Handle; Handle far fd_50F6_385A; Handle far fd_50F6_385E;')
+FAR_PROVIDER_MODULES.add('source-owned:window-ralloc-handles')
+PROVIDER_SPECS['source-owned:remaining-sound-storage'] = ('SNDST27', None, (('_fd_50F6_47DA', 4), ('_fd_50F6_4A1A', 16), ('_fd_50F6_4A42', 4), ('_fd_50F6_4B28', 4), ('_fd_50F6_4B2C', 2), ('_fd_50F6_4B2E', 2), ('_fd_50F6_4B8A', 4), ('_fd_50F6_4B8E', 28), ('_fd_50F6_4BAA', 28)), 'struct Pt { int x; int y; }; struct AnimObj; struct Pt far fd_50F6_47DA; void far * far fd_50F6_4A1A[4]; struct AnimObj far * far fd_50F6_4A42; char far * far * far fd_50F6_4B28; int far fd_50F6_4B2C; int far fd_50F6_4B2E; long far fd_50F6_4B8A; int far fd_50F6_4B8E[14]; int far fd_50F6_4BAA[14];')
+FAR_PROVIDER_MODULES.add('source-owned:remaining-sound-storage')
+FAR_PROVIDER_WORD_ARRAYS['source-owned:remaining-sound-storage'] = {'_fd_50F6_4BAA', '_fd_50F6_4B8E'}
+FAR_PROVIDER_RECORD_ARRAYS['source-owned:remaining-sound-storage'] = {'_fd_50F6_4A1A': 4}
+PROVIDER_SPECS['source-owned:remaining-misc-storage'] = ('MISCST27', None, (('_fd_50F6_07CA', 4), ('_fd_50F6_0852', 4), ('_fd_50F6_08DE', 4), ('_fd_50F6_08EC', 4), ('_fd_50F6_09F2', 4), ('_fd_50F6_0B0A', 4), ('_fd_50F6_0B22', 4), ('_fd_50F6_1114', 1200), ('_fd_50F6_15C4', 2400)), 'struct Pnt { int x; int y; }; struct Pnt far fd_50F6_07CA; struct Pnt far fd_50F6_0852; struct Pnt far fd_50F6_08DE; struct Pnt far fd_50F6_08EC; struct Pnt far fd_50F6_09F2; char far fd_50F6_0B0A[4]; char far * far fd_50F6_0B22; unsigned char far fd_50F6_1114[1200]; int far fd_50F6_15C4[30][40];')
+FAR_PROVIDER_MODULES.add('source-owned:remaining-misc-storage')
+FAR_PROVIDER_WORD_ARRAYS['source-owned:remaining-misc-storage'] = {'_fd_50F6_15C4'}
+V27_STORAGE_ANCHORS = {'_fd_50F6_46D0': (18128, ('fd_50F6_46D0',)), '_fd_50F6_385A': (14426, ('fd_50F6_385A',)), '_fd_50F6_385E': (14430, ('fd_50F6_385E',)), '_fd_50F6_47DA': (18394, ('fd_50F6_47DA',)), '_fd_50F6_4A1A': (18970, ('fd_50F6_4A1A',)), '_fd_50F6_4A42': (19010, ('fd_50F6_4A42',)), '_fd_50F6_4B28': (19240, ('fd_50F6_4B28',)), '_fd_50F6_4B2C': (19244, ('fd_50F6_4B2C',)), '_fd_50F6_4B2E': (19246, ('fd_50F6_4B2E',)), '_fd_50F6_4B8A': (19338, ('fd_50F6_4B8A',)), '_fd_50F6_4B8E': (19342, ('fd_50F6_4B8E',)), '_fd_50F6_4BAA': (19370, ('fd_50F6_4BAA',)), '_fd_50F6_07CA': (1994, ('fd_50F6_07CA',)), '_fd_50F6_0852': (2130, ('fd_50F6_0852',)), '_fd_50F6_08DE': (2270, ('fd_50F6_08DE',)), '_fd_50F6_08EC': (2284, ('fd_50F6_08EC',)), '_fd_50F6_09F2': (2546, ('fd_50F6_09F2',)), '_fd_50F6_0B0A': (2826, ('fd_50F6_0B0A',)), '_fd_50F6_0B22': (2850, ('fd_50F6_0B22',)), '_fd_50F6_1114': (4372, ('fd_50F6_1114',)), '_fd_50F6_15C4': (5572, ('fd_50F6_15C4',))}
+V27_STORAGE_CONTRACTS = {'source-owned:render-delay-word': ('render_delay_word_contract', {'typed_raw_positive': 'PASS_TYPED_RAW', 'wrong_width_long_owner': 'WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED', 'wrong_signedness_unsigned_view': 'WRONG_UNSIGNED_VIEW_DETECTED', 'initialized_nonzero_owner': 'INITIALIZED_NONZERO_OWNER_DETECTED', 'shifted_alias_base': 'SHIFTED_ALIAS_BASE_DETECTED'}), 'source-owned:window-ralloc-handles': ('window_ralloc_handles_contract', {'typed_opaque_positive': 'PASS', 'wrong_width_control': 'FAIL', 'initialized_nonzero_control': 'FAIL'}), 'source-owned:remaining-sound-storage': ('remaining_sound_storage_contract', {'initialized_nonzero_owner': 'INITIALIZED_NONZERO_OWNER_DETECTED', 'separate_backing_alias_collapse': 'SEPARATE_BACKING_ALIAS_COLLAPSE_DETECTED', 'shifted_alias_base_plus_two': 'SHIFTED_ALIAS_BASE_DETECTED', 'typed_raw_positive': 'PASS_TYPED_RAW', 'wrong_signedness_unsigned_view': 'WRONG_UNSIGNED_VIEW_DETECTED', 'wrong_width_long_owner': 'WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED'}), 'source-owned:remaining-misc-storage': ('remaining_misc_storage_contract', {'positive': 'PASS', 'signedness': 'FAIL', 'wrong_width': 'FAIL', 'nonzero_initializer': 'FAIL', 'pointer_depth': 'FAIL', 'base_plus2': 'FAIL'})}
+
+def require_v27_storage_contracts(report, profile, tool):
+    """Reviewed natural owners and independently literal compiler controls."""
+    import dos_storage_contracts
+    import dos_storage_policies_v27
+    _require_reviewed_storage_contracts(report, profile, tool, V27_STORAGE_CONTRACTS)
+    modules = {r['module'] for r in report['translation_units']}
+    for module, (key, _) in V27_STORAGE_CONTRACTS.items():
+        if module not in modules:
+            continue
+        contract = report[key]
+        # Every identity occurrence must agree, including redundant copied-library pins.
+        identities = {}
+        for pin in contract.get('inputs', []):
+            identity = runtime_component_path(pin['path'])
+            if identity in identities and identities[identity] != pin['sha256']:
+                raise ValueError('v27 storage duplicate input identities conflict')
+            identities[identity] = pin['sha256']
+        from pathlib import Path
+        components = [(str(Path(tool['directory']) / name), digest)
+                      for name, digest in tool['files'].items()]
+        components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+        for path, digest in components:
+            matches = [p for p in contract.get('inputs', [])
+                       if runtime_component_path(p['path']) == runtime_component_path(path)]
+            if not matches or any(p['sha256'] != digest for p in matches):
+                raise ValueError('v27 storage runtime component identities conflict')
+        if (contract.get('admitted') is not True or contract.get('original_game_bytes_used') != 0
+                or contract.get('historical_producer_or_placement_claimed') is not False
+                or contract.get('game_lifecycle_claimed') is not False):
+            raise ValueError('v27 storage contract scope or admission changed')
+        dos_storage_contracts.validate(contract,
+            dos_storage_policies_v27.policy(module, provider_communals(module)))

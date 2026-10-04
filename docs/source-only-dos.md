@@ -113,7 +113,7 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus 51 reviewed data-only
+The current compilation passes all 127 canonical TUs plus 59 reviewed data-only
 providers. Symbol-address joins provide 121
 code aliases and 70 reviewed data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
@@ -772,3 +772,34 @@ tests, canonical validation and all 27 mandatory gates plus alignment under
 both RTLinks. Six layout gates remain open, including the newly explicit
 map viewport grid dependency. The callback evidence gate rejects conflicting
 duplicate runtime component pins.
+
+## v27: remaining sound, miscellaneous and allocator storage
+
+Four cohorts resolve 21 further FAR imports through typed source objects/views:
+nine sound objects, nine miscellaneous objects, two allocator Handle slots and
+one signed delay word, totaling 3,730 bytes. Root reopened the complete source
+census, actual OMF controls, 40 preserved runtime cases, clean links and full
+public tables under both RTLinks. Independent literal policies reject type,
+extent, raw-output, map and duplicate-identity changes. See the
+[root admission](../work/source-only-dos/storage-admission-v27/root-admission.md).
+
+The 30x40 grid still requires its viewport index proof. Uncapped menu title loops
+can reach the delay word through 46BC[10] and 46A8[20]; the new seventh layout
+gate preserves that physical dependency. Admission of the signed-word view
+does not freeze an assumed no-clobber or resource-count contract.
+
+Current preflight compiles 186 TUs (127 canonical +59 providers), with 22 missing
+imports (17 FAR_BSS and five DGROUP cases), 62 functional data bytes and seven
+open layout gates. Historical data debt remains 113 bytes; every original-byte
+counter is zero. All 29 effective behavioral implementations retain strict
+static completeness. Independent linking is refused pending source/data/layout
+closure. Runtime and human acceptance remain outstanding.
+
+The [preserved v27 research](../work/source-only-dos/structural-audits-v27/README.md)
+keeps bitmap capacity, readonly producers, menu overlap and stock runtime heap
+ownership explicit. Known runtime ownership and historical address provenance
+are separate questions; no original byte initializer is introduced.
+
+The v27 acceptance boundary passes 370 repository tests (two skips), including
+56 source-only tests, historical validation and all 28 mandatory evidence gates
+plus alignment under both RTLinks.

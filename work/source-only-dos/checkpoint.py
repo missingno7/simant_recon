@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 182 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 186 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v26.log',
-        'build/source-only-dos-tests-accepted-final-v26.log', 'build/source-only-dos-validation-v26.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v27.log',
+        'build/source-only-dos-tests-accepted-final-v27.log', 'build/source-only-dos-validation-v27.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not re.search(r'(?m)^OK(?: \(skipped=2\))?$', test_log):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [369] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
+    if test_counts != [370] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
         raise ValueError('repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': 'bbae599',
+        'source_only_base_checkpoint': 'bf19d25',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -218,7 +218,13 @@ def main():
         'event_records_admission_v23': pin(OUT / 'event-records-v23/root-admission.md'),
         'event_records_raw_acceptance_v23': pin(ROOT / 'build/source-only-dos-event-raw-acceptance-v23.log'),
         'histogram_raw_acceptance_v22': pin(ROOT / 'build/source-only-dos-histogram-raw-acceptance-v22-verified.log'),
-        'source_only_tests': f'55 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'storage_admission_v27': pin(OUT / 'storage-admission-v27/root-admission.md'),
+        'storage_gates_v27': pin(ROOT / 'build/source-only-dos-gates-v27.log'),
+        'storage_raw_review_v27': pin(ROOT / 'build/source-only-dos-raw-recheck-v27.log'),
+        'structural_audits_v27': pin(OUT / 'structural-audits-v27/archive-index.json'),
+        'storage_owner_bindings_v27': [pin(OUT / (name + '-bindings-v1.json')) for name in
+            ('remaining-sound-storage', 'remaining-misc-storage', 'window-ralloc-handles', 'render-delay-word')],
+        'source_only_tests': f'56 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

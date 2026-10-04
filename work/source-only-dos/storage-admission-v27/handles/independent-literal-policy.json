@@ -1,0 +1,271 @@
+{
+  "module": "source-owned:window-ralloc-handles",
+  "owners": [
+    "_fd_50F6_385A",
+    "_fd_50F6_385E"
+  ],
+  "communals": [
+    {
+      "name": "_fd_50F6_385A",
+      "kind": "far",
+      "count": 4,
+      "element_size": 1,
+      "length": 4
+    },
+    {
+      "name": "_fd_50F6_385E",
+      "kind": "far",
+      "count": 4,
+      "element_size": 1,
+      "length": 4
+    }
+  ],
+  "required_cases": {
+    "typed_opaque_positive": "PASS",
+    "wrong_width_control": "FAIL",
+    "initialized_nonzero_control": "FAIL"
+  },
+  "control_outcomes": {
+    "typed_opaque_positive": "PASS",
+    "wrong_width_control": "FAIL",
+    "initialized_nonzero_control": "FAIL"
+  },
+  "linkers": [
+    "rtlink400",
+    "rtlink610"
+  ],
+  "aliases": {
+    "typed_opaque_positive": [],
+    "wrong_width_control": [],
+    "initialized_nonzero_control": []
+  },
+  "raw_text": {
+    "typed_opaque_positive": "HANDLE_TEST PASS stride=4 typed=5A opaque=6B\r\n",
+    "wrong_width_control": "HANDLE_TEST FAIL stride=2 typed=00 opaque=6B\r\n",
+    "initialized_nonzero_control": "HANDLE_TEST INIT_NONZERO stride=4\r\n"
+  },
+  "save_rec_pointer_fixups": [],
+  "compiler_controls": {
+    "natural_handle_owner": {
+      "module_name": "OWNPOS.C",
+      "owner_names": [
+        "_fd_50F6_385A",
+        "_fd_50F6_385E"
+      ],
+      "owner_communals": [
+        {
+          "name": "_fd_50F6_385A",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "owner_publics": [],
+      "segment_lengths": {
+        "OWNPOS_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0
+      },
+      "initialized_data_hex": {},
+      "linker_fixups": [],
+      "data_only": true,
+      "no_external_fixups": true,
+      "full_communals": true,
+      "all_communals": [
+        {
+          "name": "_fd_50F6_385A",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "full_publics": true,
+      "all_publics": [],
+      "full_segment_lengths": true,
+      "all_segment_lengths": {
+        "OWNPOS_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0
+      },
+      "full_initialized_data": true,
+      "all_initialized_data_hex": {}
+    },
+    "wrong_width_owner": {
+      "module_name": "OWNWID.C",
+      "owner_names": [
+        "_fd_50F6_385A",
+        "_fd_50F6_385E"
+      ],
+      "owner_communals": [
+        {
+          "name": "_fd_50F6_385A",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "owner_publics": [],
+      "segment_lengths": {
+        "OWNWID_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0
+      },
+      "initialized_data_hex": {},
+      "linker_fixups": [],
+      "data_only": true,
+      "no_external_fixups": true,
+      "full_communals": true,
+      "all_communals": [
+        {
+          "name": "_fd_50F6_385A",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "full_publics": true,
+      "all_publics": [],
+      "full_segment_lengths": true,
+      "all_segment_lengths": {
+        "OWNWID_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0
+      },
+      "full_initialized_data": true,
+      "all_initialized_data_hex": {}
+    },
+    "initialized_nonzero_owner": {
+      "module_name": "OWNINI.C",
+      "owner_names": [
+        "_fd_50F6_385A",
+        "_fd_50F6_385E"
+      ],
+      "owner_communals": [],
+      "owner_publics": [
+        {
+          "name": "_fd_50F6_385A",
+          "segment": "OWNINI5_DATA",
+          "offset": 8
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "segment": "OWNINI5_DATA",
+          "offset": 12
+        }
+      ],
+      "segment_lengths": {
+        "OWNINI_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "OWNINI5_DATA": 16
+      },
+      "initialized_data_hex": {
+        "OWNINI5_DATA": "00000000000000000000000004000000"
+      },
+      "linker_fixups": [
+        {
+          "segment": "OWNINI5_DATA",
+          "offset": 12,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "OWNINI5_DATA",
+          "frame_kind": "target",
+          "frame": "OWNINI5_DATA",
+          "displacement": 0,
+          "encoded_addend": "04000000"
+        },
+        {
+          "segment": "OWNINI5_DATA",
+          "offset": 8,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "OWNINI5_DATA",
+          "frame_kind": "target",
+          "frame": "OWNINI5_DATA",
+          "displacement": 0,
+          "encoded_addend": "00000000"
+        }
+      ],
+      "data_only": true,
+      "no_external_fixups": true,
+      "full_communals": true,
+      "all_communals": [],
+      "full_publics": true,
+      "all_publics": [
+        {
+          "name": "_fd_50F6_385A",
+          "segment": "OWNINI5_DATA",
+          "offset": 8
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "segment": "OWNINI5_DATA",
+          "offset": 12
+        }
+      ],
+      "full_segment_lengths": true,
+      "all_segment_lengths": {
+        "OWNINI_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "OWNINI5_DATA": 16
+      },
+      "full_initialized_data": true,
+      "all_initialized_data_hex": {
+        "OWNINI5_DATA": "00000000000000000000000004000000"
+      }
+    }
+  },
+  "independent_type_policy": {
+    "source_typedef": "typedef char far * far *Handle;",
+    "pointer_levels": 2,
+    "owner_declarator": "Handle far",
+    "owner_object_width_each": 4,
+    "s04_view": "char far * far",
+    "s04_view_pointer_levels": 1,
+    "s04_claim": "four-byte ABI-only opaque forwarding; not ISO C type equivalence",
+    "do_not_infer_3862_extent": true
+  }
+}

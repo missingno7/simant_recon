@@ -1,0 +1,455 @@
+{
+  "schema": "simant-dos-delay-word-source-addendum-v33",
+  "status": "ROOT_REVIEW_PENDING_UNADMITTED",
+  "root_reviewed": false,
+  "v32_preserved_unchanged": true,
+  "claim_boundary": "source-type evidence for the 50F6:46D0 signed word only; this addendum withdraws any implication of complete writer closure, no-clobber, historical ownership, startup value, or lifetime safety",
+  "v32_receipts": {
+    "candidate": {
+      "path": "build/workers/dos_delay_word_owner_v32/candidate-v32.json",
+      "sha256": "eb80be4dada163e246f39af9d6fa263f03653d8711203d4a81b1f47d63bc57e5",
+      "size": 56761
+    },
+    "runtime": {
+      "path": "build/workers/dos_delay_word_owner_v32/runtime/probe-v32.json",
+      "sha256": "d758b75e10b3577e0c4dee901010a62e80a33cc051ff9e903bd9b97a51111021",
+      "size": 123979
+    },
+    "source_review": {
+      "path": "build/workers/dos_delay_word_owner_v32/source-review-v32.json",
+      "sha256": "b5b2eb5e1774b933064b606e27c82dc3b8bffcb4af0c0d761de937108e472578",
+      "size": 63317
+    }
+  },
+  "source_graph": {
+    "canonical_translation_units": 127,
+    "effective_strict_sources": 29,
+    "unique_pinned_source_paths": 156,
+    "all_156_source_hashes_revalidated": true,
+    "source_review_pin": {
+      "path": "build/workers/dos_delay_word_owner_v32/source-review-v32.json",
+      "sha256": "b5b2eb5e1774b933064b606e27c82dc3b8bffcb4af0c0d761de937108e472578",
+      "size": 63317
+    }
+  },
+  "relevant_source_pins": [
+    {
+      "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "size": 10518
+    },
+    {
+      "path": "src/S10/m35F5.c",
+      "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+      "size": 10707
+    },
+    {
+      "path": "src/S17/m384C.c",
+      "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+      "size": 2302
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "src/root/m208F.c",
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "size": 6853
+    }
+  ],
+  "registry_source_pins": [
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+      "size": 6796
+    }
+  ],
+  "registered_addresses": {
+    "fd_50F6_46A8": {
+      "seg": "50F6",
+      "off": "46A8",
+      "grounding": "o10_35F5_01C3/0384: mov es,[CONST 89DE = 50F6]; push es:[bx+46A8] with bx=menu*2 -> x position of menu title (int array)"
+    },
+    "fd_50F6_46BC": {
+      "seg": "50F6",
+      "off": "46BC",
+      "grounding": "o10_35F5_0384: mov es,[CONST 89E2 = 50F6]; mov ax,es:[bx+46BC] with bx=menu*2; sub ax,maxLen; sar ax,1 -> width of menu title (int array)"
+    },
+    "fd_50F6_46D0": {
+      "seg": "50F6",
+      "off": "46D0",
+      "grounding": "f_208F_04D0: mov es,[8A14] (CONST 50F6); mov es:[46D0],ax (delay for WaitedEnough in f_208F_04EE)"
+    },
+    "fd_50F6_46D2": {
+      "seg": "50F6",
+      "off": "46D2",
+      "grounding": "f_208F_027F: mov es,[8A12] (CONST 50F6); les bx,es:[46D2]; far pointer to a far pointer (small-icon bitmap base), + n*32"
+    }
+  },
+  "typed_source_hits_by_name": {
+    "fd_50F6_46A8": [
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "line": 87,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46A8[];",
+        "set": "effective_strict_29"
+      },
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "line": 111,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1FD2_0008(fd_50F6_46A8[curMenu], 1, 1, fd_55B3_6054[0][curMenu]);",
+        "set": "effective_strict_29"
+      },
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "line": 117,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1FD2_0008(fd_50F6_46A8[m], 1, 0, fd_55B3_6054[0][m]);",
+        "set": "effective_strict_29"
+      },
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "line": 145,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1B73_09E9(fd_50F6_46A8[m] + g_3DDE * 3, g_3DDC / 2);",
+        "set": "effective_strict_29"
+      },
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "line": 222,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "r.left = ((fd_50F6_46BC[curMenu] - maxLen) >> 1) * g_3DDE + fd_50F6_46A8[curMenu];",
+        "set": "effective_strict_29"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "line": 87,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46A8[];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "line": 111,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1FD2_0008(fd_50F6_46A8[curMenu], 1, 1, fd_55B3_6054[0][curMenu]);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "line": 117,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1FD2_0008(fd_50F6_46A8[m], 1, 0, fd_55B3_6054[0][m]);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "line": 145,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1B73_09E9(fd_50F6_46A8[m] + g_3DDE * 3, g_3DDC / 2);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "line": 223,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "r.left = ((fd_50F6_46BC[curMenu] - maxLen) >> 1) * g_3DDE + fd_50F6_46A8[curMenu];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S17/m384C.c",
+        "line": 34,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46A8[];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S17/m384C.c",
+        "line": 62,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "o17_384C_0184(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 126,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46A8[];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 137,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1FD2_0008(fd_50F6_46A8[menu], 1, 1, p);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 153,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "f_1FD2_0008(fd_50F6_46A8[menu], 1, 1, p);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 408,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "fd_50F6_46A8[i] = x;",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 425,
+        "name": "fd_50F6_46A8",
+        "domain": "C-identifier",
+        "text": "x = g_3DDE * 4 + fd_50F6_46A8[menu];",
+        "set": "canonical_127"
+      }
+    ],
+    "fd_50F6_46BC": [
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "line": 154,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46BC[];",
+        "set": "effective_strict_29"
+      },
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "line": 222,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "r.left = ((fd_50F6_46BC[curMenu] - maxLen) >> 1) * g_3DDE + fd_50F6_46A8[curMenu];",
+        "set": "effective_strict_29"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "line": 154,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46BC[];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "line": 223,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "r.left = ((fd_50F6_46BC[curMenu] - maxLen) >> 1) * g_3DDE + fd_50F6_46A8[curMenu];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S17/m384C.c",
+        "line": 33,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46BC[];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/S17/m384C.c",
+        "line": 62,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "o17_384C_0184(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 373,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46BC[];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 395,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "fd_50F6_46BC[i] = _fstrlen(*t);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 396,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "total += fd_50F6_46BC[i];",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "line": 411,
+        "name": "fd_50F6_46BC",
+        "domain": "C-identifier",
+        "text": "x += (fd_50F6_46BC[i] + g_6050) * g_3DDE;",
+        "set": "canonical_127"
+      }
+    ],
+    "fd_50F6_46D0": [
+      {
+        "path": "src/root/m208F.c",
+        "line": 248,
+        "name": "fd_50F6_46D0",
+        "domain": "C-identifier",
+        "text": "extern int far fd_50F6_46D0;",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m208F.c",
+        "line": 254,
+        "name": "fd_50F6_46D0",
+        "domain": "C-identifier",
+        "text": "fd_50F6_46D0 = delay;",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m208F.c",
+        "line": 270,
+        "name": "fd_50F6_46D0",
+        "domain": "C-identifier",
+        "text": "return WaitedEnough(&g_8CE8, fd_50F6_46D0) || key;",
+        "set": "canonical_127"
+      }
+    ],
+    "fd_50F6_46D2": [
+      {
+        "path": "src/root/m208F.c",
+        "line": 133,
+        "name": "fd_50F6_46D2",
+        "domain": "C-identifier",
+        "text": "extern char far * far * far fd_50F6_46D2;",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m208F.c",
+        "line": 143,
+        "name": "fd_50F6_46D2",
+        "domain": "C-identifier",
+        "text": "g_914C(r.left, r.top, *fd_50F6_46D2 + (n << 5), 8, 8);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m208F.c",
+        "line": 147,
+        "name": "fd_50F6_46D2",
+        "domain": "C-identifier",
+        "text": "g_914C(r.left, r.top, *fd_50F6_46D2 + (n << 5), 16, 16);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m208F.c",
+        "line": 156,
+        "name": "fd_50F6_46D2",
+        "domain": "C-identifier",
+        "text": "g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m208F.c",
+        "line": 158,
+        "name": "fd_50F6_46D2",
+        "domain": "C-identifier",
+        "text": "g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);",
+        "set": "canonical_127"
+      },
+      {
+        "path": "src/root/m208F.c",
+        "line": 162,
+        "name": "fd_50F6_46D2",
+        "domain": "C-identifier",
+        "text": "g_914C(x, y, *fd_50F6_46D2 + (n << 5), 16, 16);",
+        "set": "canonical_127"
+      }
+    ]
+  },
+  "source_files_with_relevant_identifiers": [
+    "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+    "src/S10/m35F5.c",
+    "src/S17/m384C.c",
+    "src/root/m1FD2.c",
+    "src/root/m208F.c"
+  ],
+  "numeric_50F6_46D0_offset_hits_in_156_sources": [],
+  "physical_alias_arithmetic": [
+    {
+      "view": "relationship between fd_50F6_46A8[] and fd_50F6_46BC[]",
+      "calculation": "46BC = 46A8 + 10 * 2, so fd_50F6_46A8[k+10] and fd_50F6_46BC[k] resolve to the same word address whenever those indexes are accessed",
+      "qualification": "both declarations are unsized extern arrays; this reports address arithmetic and possible indexed overlap, not a proven complete allocation extent"
+    },
+    {
+      "view": "fd_50F6_46BC[] title-length words",
+      "element_type": "int (2 bytes in the MSC 6.00AX target)",
+      "index": 10,
+      "calculation": "46BC + 10 * 2 = 46D0",
+      "writer": "f_1FD2_0663 first title-sentinel loop, src/root/m1FD2.c:394-399",
+      "write_condition": "at least 11 non-null title entries before the null sentinel"
+    },
+    {
+      "view": "fd_50F6_46A8[] x-position words",
+      "element_type": "int (2 bytes in the MSC 6.00AX target)",
+      "index": 20,
+      "calculation": "46A8 + 20 * 2 = 46D0",
+      "writer": "f_1FD2_0663 second title-sentinel loop, src/root/m1FD2.c:407-412",
+      "write_condition": "at least 21 non-null title entries before the null sentinel"
+    }
+  ],
+  "writer_bound_evidence": {
+    "menu_data_type": "src/root/m1FD2.c:23-27 defines MenuData.titles as char far * far * with no count member",
+    "menu_pointer": "src/root/m1FD2.c:60 initializes struct MenuData far *g_6054 = 0",
+    "first_loop": "for (t = g_6054->titles; *t; t++) writes fd_50F6_46BC[i] then increments i; no numeric cap is checked",
+    "post_loop_count": "g_604C = i records the sentinel count only after the unbounded writer loop",
+    "second_loop": "after resetting i=0, for (t = g_6054->titles; *t; t++, i++) writes fd_50F6_46A8[i]; no numeric cap is checked",
+    "other_reader": "src/S17/m384C.c:61-62 has a sentinel walk and reads both arrays at the advancing index; it is another unsized view, not a capacity proof",
+    "strict_effective_menu_reader": {
+      "source": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "line": 222,
+      "view": "reads fd_50F6_46BC[curMenu] and fd_50F6_46A8[curMenu] together for menu geometry; this is a reader view and does not supply a complete array bound"
+    },
+    "possible_array_overlap": "If the title sentinel has more than 10 entries, the second x-position loop writes fd_50F6_46A8[10] at the same address as fd_50F6_46BC[0]; later indexes continue the same ten-word displacement. Resource bounds and intended reuse are not established."
+  },
+  "disposition": {
+    "natural_signed_word_type_remains_source_grounded": true,
+    "reason": "f_208F_04D0 stores its signed int delay argument to the word; f_208F_04EE passes the word by value to WaitedEnough(..., int delay)",
+    "complete_writer_closure": false,
+    "historical_owner_or_placement_claim": false,
+    "startup_zero_claim_for_game_state": false,
+    "no_clobber_or_lifetime_claim": false,
+    "wider_layout_audit": "OPEN: menu resource title-count/bounds and the two overlapping array views need source/resource review",
+    "excluded_neighbor": "fd_50F6_46D2 and its fontHandles/table ownership are outside this candidate"
+  },
+  "work_performed": "Pinned source/token/address review only. No compiler, emulation, linker fixture, or new probe was run."
+}

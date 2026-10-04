@@ -1,0 +1,1537 @@
+{
+  "schema": "simant-dgroup-fheap-source-owner-v35",
+  "root_reviewed": false,
+  "admitted": false,
+  "status": "KNOWN_PINNED_RUNTIME_DATA_OWNER; HISTORICAL_DGROUP_79F0_RANGE_OPEN",
+  "scope": "current accepted source-object imports, pinned LLIBCR provider/consumers, installed MSC 6.00 CRT source/header semantics, and natural RTLink controls; no original executable reads",
+  "image_executed": false,
+  "debt": {
+    "id": "dgroup_79f0",
+    "bytes": 14,
+    "functional_owner_disposition": "accounted as pinned third-party runtime data member llibcr.lib(fdata.asm), the sole __fheap provider",
+    "historical_disposition": "open: original DGROUP:79F0 placement, neighbor/order, and original byte identity are not proved by this source-only owner investigation"
+  },
+  "inputs": {
+    "manifest": {
+      "path": "layout/manifest.json",
+      "size": 628980,
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "symbols": {
+      "path": "layout/symbols.json",
+      "size": 800809,
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    "source_only_build_report": {
+      "path": "build/source-only-dos/build-report.json",
+      "size": 15357335,
+      "sha256": "2e44fce4855d025148763f30373faca8fd8222909687679c2827c5c96421dd0c"
+    },
+    "root_allocator_source": {
+      "path": "src/root/m171C.c",
+      "size": 26452,
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+    },
+    "toolchain": {
+      "path": "layout/toolchain.json",
+      "size": 39241,
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+    },
+    "runtime_libraries": {
+      "llibcr.lib": {
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "size": 148711,
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+      },
+      "libh.lib": {
+        "path": "C:/tools/msc-6.00/LIB/libh.lib",
+        "size": 21033,
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+      }
+    },
+    "prior_quarantined_production_partial_link": {
+      "receipt": {
+        "path": "build/workers/dos_fheap_production_plan_v28/diagnostic-receipt-v28.json",
+        "size": 206376,
+        "sha256": "d40b13b0a2ddfab165d9e6576063711df4e38228ead2409ac92c107d0c494cfd"
+      },
+      "link_log": {
+        "path": "build/workers/dos_fheap_production_plan_v28/run-v5/baseline/rtlink610/LINK.LOG",
+        "size": 24171,
+        "sha256": "7bfc4db70f26f14e6c4ce9e9340d0eb1a948879e43f7f164db30bbfd4d5c6ace"
+      },
+      "map": {
+        "path": "build/workers/dos_fheap_production_plan_v28/run-v5/baseline/rtlink610/SOURCE.MAP",
+        "size": 1091941,
+        "sha256": "dc189ca2873599b41f7e828b69b339031eeebd24348cc1fdc07ffa94777724d2"
+      },
+      "link_script": {
+        "path": "build/workers/dos_fheap_production_plan_v28/run-v5/baseline/rtlink610/T.LNK",
+        "size": 9017,
+        "sha256": "d6fe9b9d4d8c9254e0db313570615adf3aa611ab76b810a44461e3dc6068889b"
+      },
+      "reported_object_count": 178,
+      "reported_selected_fdata": true,
+      "reported_selected_members_importing___fheap": [],
+      "exe_executed": false,
+      "qualification": "Preserved expected-failure v28 partial-link snapshot. It predates this v35 build-report/source-object set (178 vs 182 TUs); it is cross-evidence, not a fresh v35 run or historical address proof."
+    },
+    "msc_source_and_headers": {
+      "C:\\tools\\msc-6.00\\STARTUP\\heap.inc": {
+        "path": "C:/tools/msc-6.00/STARTUP/heap.inc",
+        "size": 3015,
+        "sha256": "61f9321fa552ecae0b8fcf5b4f695a2464dddd88342fee4b60d34e819f4b59ba"
+      },
+      "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0.asm": {
+        "path": "C:/tools/msc-6.00/STARTUP/dos/crt0.asm",
+        "size": 13807,
+        "sha256": "f22c6ef87a1187486605f1b185b3b241d7ba8ee773fc97cdeb0736e2a83e956b"
+      },
+      "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0dat.asm": {
+        "path": "C:/tools/msc-6.00/STARTUP/dos/crt0dat.asm",
+        "size": 19539,
+        "sha256": "33eead508c0b2941f9cc95d17ebbda1ba8de196431a90091a8e2f26527ce11e0"
+      },
+      "C:\\tools\\msc-6.00\\STARTUP\\dos\\stdalloc.asm": {
+        "path": "C:/tools/msc-6.00/STARTUP/dos/stdalloc.asm",
+        "size": 2484,
+        "sha256": "caa693a5da1b62082d94170a5c11fe5e560490282333e97b8b83587adca1becb"
+      },
+      "C:\\tools\\msc-6.00\\INCLUDE\\malloc.h": {
+        "path": "C:/tools/msc-6.00/INCLUDE/malloc.h",
+        "size": 4008,
+        "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24"
+      },
+      "C:\\tools\\msc-6.00\\INCLUDE\\stdlib.h": {
+        "path": "C:/tools/msc-6.00/INCLUDE/stdlib.h",
+        "size": 6539,
+        "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476"
+      }
+    },
+    "source_object_set": {
+      "count": 182,
+      "sha256": "0a043f1ea3877e39504484c80fc0cfb6ad54ea4eea22165f09b7177782522536",
+      "root_allocator_object": {
+        "path": "build\\source-only-dos\\objects\\U074.OBJ",
+        "sha256": "84767f7d939c38cb19b2d8b0e59e861183375109b5a43fa333a98b8bc238a961",
+        "size": 30288
+      }
+    },
+    "omf_reader": {
+      "path": "tools/omf.py",
+      "size": 29112,
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+    },
+    "runtime_gate": {
+      "path": "tools/runtime.py",
+      "size": 41951,
+      "sha256": "fafa18d0e7fd296e51b72e947d19b73b7021ed3e37843de54b6ca404686eb66d"
+    },
+    "link_runner": {
+      "path": "tools/rtlink.py",
+      "size": 27158,
+      "sha256": "76ec98e0b5ca807e1c21f13993048c105d85294d20f4343bf640a5c1215bd155"
+    },
+    "compiler_runner": {
+      "path": "tools/compiler.py",
+      "size": 11765,
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+    },
+    "probe_script": {
+      "path": "build/workers/dos_fheap_source_owner_v35/probe_fheap_source_owner_v35.py",
+      "size": 35272,
+      "sha256": "bd1eea25c67bbbfca769995e7b0df7f9dee83e2edc93f88641ee2079c44bba15"
+    }
+  },
+  "tool_inputs": {
+    "compiler_profile": {
+      "name": "msc600ax",
+      "files": {
+        "BIN/CL.EXE": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+          "size": 81184,
+          "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347"
+        },
+        "BIN/C1L.EXE": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+          "size": 213680,
+          "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3"
+        },
+        "BIN/C2L.EXE": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+          "size": 473258,
+          "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0"
+        },
+        "BIN/C3L.EXE": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+          "size": 195439,
+          "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553"
+        },
+        "BIN/CL.ERR": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+          "size": 1656,
+          "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7"
+        },
+        "BIN/C1.ERR": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+          "size": 19500,
+          "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e"
+        },
+        "BIN/C23.ERR": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+          "size": 3649,
+          "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151"
+        },
+        "BIN/CL.MSG": {
+          "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+          "size": 2697,
+          "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+        }
+      },
+      "runner": {
+        "path": "C:/tools/dosbox-x/dosbox-x.exe",
+        "size": 20481536,
+        "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+      }
+    },
+    "dosbox_runner": {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "size": 20481536,
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+    },
+    "linkers": {
+      "rtlink400": {
+        "executable": {
+          "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+          "size": 449497,
+          "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74"
+        },
+        "files": {
+          "RTLINK.EXE": {
+            "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+            "size": 449497,
+            "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74"
+          },
+          "RTLINK.DAT": {
+            "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+            "size": 63824,
+            "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea"
+          },
+          "RTLUTILS.LIB": {
+            "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+            "size": 266625,
+            "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162"
+          },
+          "RTLINKST.COM": {
+            "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+            "size": 7184,
+            "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2"
+          }
+        }
+      },
+      "rtlink610": {
+        "executable": {
+          "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+          "size": 692123,
+          "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3"
+        },
+        "files": {
+          "RTL-REAL.EXE": {
+            "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+            "size": 717922,
+            "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773"
+          },
+          "RTL-SWAP.EXE": {
+            "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+            "size": 692123,
+            "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3"
+          },
+          "RTLINK.DAT": {
+            "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+            "size": 100100,
+            "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b"
+          },
+          "RTLUTILS.LIB": {
+            "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+            "size": 423823,
+            "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb"
+          },
+          "RTLINKST.COM": {
+            "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+            "size": 11031,
+            "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f"
+          },
+          "RTLINK.EXE": {
+            "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+            "size": 687531,
+            "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb"
+          },
+          "DOS4GW.EXE": {
+            "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+            "size": 231179,
+            "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c"
+          }
+        }
+      }
+    }
+  },
+  "current_guarded_build": {
+    "target": "SOURCE_ONLY_DOS",
+    "status": "INCOMPLETE",
+    "translation_unit_count": 182,
+    "compiled_source_object_count": 182,
+    "original_exe_bytes_used": {
+      "game_code": 0,
+      "game_data": 0,
+      "fallback_debt": 0,
+      "executable_fragments": 0
+    },
+    "denied_oracle_reads": [],
+    "linker_components": [],
+    "link_unavailable_reason": [
+      "data dispositions still need source-built semantic resolution",
+      "43 unresolved source symbols",
+      "source address/layout contracts remain unresolved",
+      "independent link refused: incomplete source/data preflight"
+    ]
+  },
+  "accepted_source_allocator_path": {
+    "root_module": "root:171C",
+    "source": {
+      "path": "src/root/m171C.c",
+      "size": 26452,
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+    },
+    "manifest_module_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+    "source_anchors": [
+      {
+        "line": 1062,
+        "text": "void far * far malloc(unsigned size)"
+      },
+      {
+        "line": 1064,
+        "text": "return f_171C_21CC(size);"
+      },
+      {
+        "line": 1067,
+        "text": "void far _ffree(char far *p)"
+      },
+      {
+        "line": 1083,
+        "text": "_ffree(p);"
+      },
+      {
+        "line": 1086,
+        "text": "char far * far _frealloc(char far *p, unsigned size)"
+      },
+      {
+        "line": 1093,
+        "text": "return f_171C_21CC(size);"
+      }
+    ],
+    "root_allocator_publics": [
+      {
+        "module": "root:171C",
+        "name": "_free",
+        "segment": "U074_TEXT",
+        "offset": 8822
+      },
+      {
+        "module": "root:171C",
+        "name": "__ffree",
+        "segment": "U074_TEXT",
+        "offset": 8726
+      },
+      {
+        "module": "root:171C",
+        "name": "_malloc",
+        "segment": "U074_TEXT",
+        "offset": 8712
+      },
+      {
+        "module": "root:171C",
+        "name": "__frealloc",
+        "segment": "U074_TEXT",
+        "offset": 8840
+      }
+    ],
+    "source_object_imports_of_crt_far_heap_api": [],
+    "current_import_scan_complete_for_compiled_tus": true,
+    "interpretation": "Compiled accepted game objects define _malloc/_free and __ffree/__frealloc in root:171C; no compiled game code imports the MSC far-heap API. This static link graph is not a completed whole-program link."
+  },
+  "original_79f0_reliance_census": {
+    "scope": "all 182 currently compiled accepted source TUs and parsed OMF segment payloads; does not inspect original executable bytes",
+    "source_numeric_address_literals": [],
+    "object_symbol_names_containing_79f0": [],
+    "object_segments_containing_79f0_word_patterns": [],
+    "source_literal_hit_count": 0,
+    "object_symbol_hit_count": 0,
+    "object_word_pattern_hit_count_reported": 0,
+    "compiled_game_external_fixups_to___fheap": [],
+    "interpretation": "The accepted source/object graph has no numeric source reference or symbol name for the historical 79F0 anchor and no symbolic __fheap import. Raw 16-bit object-word patterns, if any, are recorded as byte coincidences only and are not treated as address references without a relocation/symbol anchor."
+  },
+  "accepted_runtime_library_membership": {
+    "selected_member_count": 98,
+    "selected_runtime_members_importing_far_heap_api": [],
+    "selected_runtime_members_importing_malloc_free": [
+      {
+        "library": "llibcr.lib",
+        "module_index": 11,
+        "member": "dos\\stdalloc.asm",
+        "references": [
+          "_malloc"
+        ]
+      },
+      {
+        "library": "llibcr.lib",
+        "module_index": 29,
+        "member": "_freebuf.asm",
+        "references": [
+          "_free"
+        ]
+      },
+      {
+        "library": "llibcr.lib",
+        "module_index": 30,
+        "member": "_getbuf.asm",
+        "references": [
+          "_malloc"
+        ]
+      },
+      {
+        "library": "llibcr.lib",
+        "module_index": 32,
+        "member": "_sftbuf.asm",
+        "references": [
+          "_malloc"
+        ]
+      },
+      {
+        "library": "llibcr.lib",
+        "module_index": 300,
+        "member": "dos\\getcwd.c",
+        "references": [
+          "_malloc"
+        ]
+      }
+    ],
+    "pinned_fdata_provider": {
+      "module_index": 51,
+      "member": "fdata.asm",
+      "member_sha256": "7eb6a9bfcb257d6470b0bc9c9f7c6215052a7a78749e463a4a6ebaa2294e70ec",
+      "data_segments": {
+        "_DATA": 14
+      },
+      "data_segment_defs": [
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 14,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        }
+      ],
+      "publics": [
+        {
+          "name": "__fheap",
+          "segment": "_DATA",
+          "offset": 0
+        }
+      ],
+      "selected_in_accepted_runtime": false
+    },
+    "archive_members_in_allocator_dependency_family": [
+      {
+        "module_index": 11,
+        "member": "dos\\stdalloc.asm",
+        "references": [
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": true
+      },
+      {
+        "module_index": 14,
+        "member": "wild.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 29,
+        "member": "_freebuf.asm",
+        "references": [
+          "_free"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": true
+      },
+      {
+        "module_index": 30,
+        "member": "_getbuf.asm",
+        "references": [
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": true
+      },
+      {
+        "module_index": 32,
+        "member": "_sftbuf.asm",
+        "references": [
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": true
+      },
+      {
+        "module_index": 47,
+        "member": "malloc.asm",
+        "references": [
+          "__fmalloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 48,
+        "member": "free.asm",
+        "references": [
+          "__ffree"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 50,
+        "member": "fmalloc.asm",
+        "references": [
+          "__fheap"
+        ],
+        "publics": [
+          "__ffree",
+          "__fmalloc"
+        ],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 51,
+        "member": "fdata.asm",
+        "references": [],
+        "publics": [
+          "__fheap"
+        ],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 111,
+        "member": "setvbuf.c",
+        "references": [
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 114,
+        "member": "tempnam.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 131,
+        "member": "frealloc.asm",
+        "references": [
+          "__ffree",
+          "__fheap",
+          "__fmalloc"
+        ],
+        "publics": [
+          "__frealloc"
+        ],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 132,
+        "member": "realloc.asm",
+        "references": [
+          "__frealloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 133,
+        "member": "fexpand.asm",
+        "references": [
+          "__fheap"
+        ],
+        "publics": [
+          "__fexpand"
+        ],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 135,
+        "member": "calloc.asm",
+        "references": [
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 137,
+        "member": "calloc.asm",
+        "references": [
+          "__fmalloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 140,
+        "member": "fheapchk.asm",
+        "references": [
+          "__fheap"
+        ],
+        "publics": [
+          "__fheapchk",
+          "__fheapset"
+        ],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 141,
+        "member": "fheapwal.asm",
+        "references": [
+          "__fheap"
+        ],
+        "publics": [
+          "__fheapwalk"
+        ],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 152,
+        "member": "fheapmin.asm",
+        "references": [
+          "__fheap"
+        ],
+        "publics": [
+          "__fheapmin"
+        ],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 159,
+        "member": "heapadd.asm",
+        "references": [
+          "__fheap"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 210,
+        "member": "strdup.asm",
+        "references": [
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 223,
+        "member": "strdup.asm",
+        "references": [
+          "__fmalloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 272,
+        "member": "dos\\cenvarg.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 281,
+        "member": "dos\\execve.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 283,
+        "member": "execvpe.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 290,
+        "member": "dos\\spawnve.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 292,
+        "member": "spawnvpe.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 300,
+        "member": "dos\\getcwd.c",
+        "references": [
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": true
+      },
+      {
+        "module_index": 305,
+        "member": "fullpath.c",
+        "references": [
+          "_free",
+          "_malloc"
+        ],
+        "publics": [],
+        "selected_in_accepted_runtime": false
+      }
+    ],
+    "all_direct___fheap_consumers": [
+      {
+        "module_index": 50,
+        "member": "fmalloc.asm",
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 131,
+        "member": "frealloc.asm",
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 133,
+        "member": "fexpand.asm",
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 140,
+        "member": "fheapchk.asm",
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 141,
+        "member": "fheapwal.asm",
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 152,
+        "member": "fheapmin.asm",
+        "selected_in_accepted_runtime": false
+      },
+      {
+        "module_index": 159,
+        "member": "heapadd.asm",
+        "selected_in_accepted_runtime": false
+      }
+    ],
+    "all_direct_consumers_unselected": true,
+    "fdata_selected_in_current_runtime_manifest": false,
+    "functional_owner_accounting": "Known pinned third-party component: llibcr.lib(fdata.asm) is the sole __fheap DATA owner. The current selected-runtime manifest does not include it or a direct consumer; the preserved v28 RTLink 6.10 partial map separately selected fdata with no direct __fheap-importing member."
+  },
+  "installed_msc_source_semantics": {
+    "heap_list_descriptor": {
+      "source": {
+        "path": "C:/tools/msc-6.00/STARTUP/heap.inc",
+        "size": 3015,
+        "sha256": "61f9321fa552ecae0b8fcf5b4f695a2464dddd88342fee4b60d34e819f4b59ba"
+      },
+      "fields": [
+        {
+          "name": "startseg",
+          "width_bytes": 4,
+          "offset": 0,
+          "comment": "pointer to first heap descriptor"
+        },
+        {
+          "name": "roverseg",
+          "width_bytes": 4,
+          "offset": 4,
+          "comment": "rover pointer"
+        },
+        {
+          "name": "lastseg",
+          "width_bytes": 4,
+          "offset": 8,
+          "comment": "pointer to last heap descriptor"
+        },
+        {
+          "name": "segflags",
+          "width_bytes": 2,
+          "offset": 12,
+          "comment": "flags word for init'ing new segs"
+        }
+      ],
+      "declared_total_bytes": 14,
+      "flag_constants": {
+        "_HEAP_MODIFY": 1,
+        "_HEAP_FREE": 2,
+        "combined_word": 3
+      },
+      "source_text_markers": [
+        "_heap_list_desc struc",
+        "startseg\tdd\t0",
+        "roverseg\tdd\t0",
+        "lastseg \tdd\t0",
+        "segflags\tdw\t0",
+        "_heap_list_desc ends",
+        "_HEAP_MODIFY\tequ\t01h",
+        "_HEAP_FREE\tequ\t02h"
+      ]
+    },
+    "fdata_object": {
+      "archive_member": "llibcr.lib(fdata.asm)",
+      "segment": "_DATA",
+      "byte_count": 14,
+      "initialized_bytes_hex": "0000000000000000000000000300",
+      "publics": [
+        {
+          "name": "__fheap",
+          "segment": "_DATA",
+          "offset": 0
+        }
+      ],
+      "interpretation": "The archive object is 14 bytes and is structurally compatible with the installed heap-list descriptor: three null far pointers followed by segflags=3 (_HEAP_MODIFY|_HEAP_FREE). The shipped source does not name __fheap in heap.inc or the public headers, so this is a strong layout/value compatibility observation, not a direct source declaration binding."
+    },
+    "public_headers": {
+      "malloc_h": {
+        "path": "C:/tools/msc-6.00/INCLUDE/malloc.h",
+        "size": 4008,
+        "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24"
+      },
+      "stdlib_h": {
+        "path": "C:/tools/msc-6.00/INCLUDE/stdlib.h",
+        "size": 6539,
+        "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476"
+      },
+      "far_heap_prototypes": {
+        "104": "void _FAR_ _cdecl _ffree(void _far *);",
+        "105": "int _FAR_ _cdecl _fheapchk(void);",
+        "106": "int _FAR_ _cdecl _fheapmin(void);",
+        "107": "int _FAR_ _cdecl _fheapset(unsigned int);",
+        "108": "int _FAR_ _cdecl _fheapwalk(_HEAPINFO _FAR_ *);",
+        "109": "void _far * _FAR_ _cdecl _fmalloc(size_t);",
+        "111": "void _far * _FAR_ _cdecl _frealloc(void _far *, size_t);"
+      },
+      "declare_internal___fheap": false
+    },
+    "crt_startup_source": {
+      "crt0_asm": {
+        "path": "C:/tools/msc-6.00/STARTUP/dos/crt0.asm",
+        "size": 13807,
+        "sha256": "f22c6ef87a1187486605f1b185b3b241d7ba8ee773fc97cdeb0736e2a83e956b"
+      },
+      "crt0dat_asm": {
+        "path": "C:/tools/msc-6.00/STARTUP/dos/crt0dat.asm",
+        "size": 19539,
+        "sha256": "33eead508c0b2941f9cc95d17ebbda1ba8de196431a90091a8e2f26527ce11e0"
+      },
+      "stdalloc_asm": {
+        "path": "C:/tools/msc-6.00/STARTUP/dos/stdalloc.asm",
+        "size": 2484,
+        "sha256": "caa693a5da1b62082d94170a5c11fe5e560490282333e97b8b83587adca1becb"
+      },
+      "relevant_crt0_lines": {
+        "163": "externW\t__qczrinit\t\t\t;* QC -Zr initializer call address",
+        "182": ";*\tThe following (_asizds and _nheap_desc) must be in this order!",
+        "187": "labelW\t<PUBLIC,_nheap_desc>\t; near heap descriptor",
+        "188": "_heap_seg_desc <0,_HEAP_NEAR OR _HEAP_MODIFY, 0,0,0,0,0,0>",
+        "191": ".ERRE\t_asizds+2\tEQ\t_nheap_desc\t; make sure!",
+        "360": "mov\tbx,dataoffset _nheap_desc ; ds:bx = near heap descriptor",
+        "368": "mov\tbx,dataoffset _nheap_desc ; ss:bx = near heap descriptor",
+        "454": ";\tMust run this initializer prior to any far heap allocations being",
+        "458": "mov\tcx,__qczrinit\t\t;* Get initializer addr"
+      },
+      "interpretation": "CRT startup zeroes BSS and invokes __qczrinit before argv/environment allocation, with a comment requiring that initializer before far-heap allocations. The available source does not tie that initializer or a startup writer to __fheap; crt0's explicit _heap_seg_desc is the distinct near-heap descriptor."
+    }
+  },
+  "natural_link_controls": {
+    "runs": [
+      {
+        "linker": "rtlink400",
+        "case": "natural_main_no_heap_import",
+        "return_code": 0,
+        "control_role": "minimal natural MSC CRT startup; fixture imports no heap API",
+        "map_contains_fmalloc": true,
+        "map_contains_fdata": true,
+        "map_sha256": "be6286486cc5193b810d25fba9d38f788a26ed27d8d25e89cad215486314efa0",
+        "map_owner_rows": [
+          "0089:00BE       __fheap                                                                          Y fdata.asm",
+          "0089:00BE       __fheap                                                                          Y fdata.asm"
+        ],
+        "log_sha256": "92d2cf8d7a45e6c5d0007525d793092a86bf3c295a16cb1a800b35f65c0dc089",
+        "linked_output_exe": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/PROBE.EXE",
+          "size": 3165,
+          "sha256": "6b3eec4b307ff017e394ab99c7a9cb43a2f56199bf4f0fbf9281bb7d1a671363"
+        },
+        "linked_output_exe_executed": false,
+        "selected_llibcr_member_names": [
+          "dos\\crt0.asm",
+          "dos\\crt0dat.asm",
+          "dos\\crt0msg.asm",
+          "crt0fp.asm",
+          "chksum.asm",
+          "dos\\stdargv.asm",
+          "dos\\stdenvp.asm",
+          "dos\\nmsghdr.asm",
+          "dos\\stdalloc.asm",
+          "malloc.asm",
+          "fmalloc.asm",
+          "fdata.asm",
+          "initseg.asm",
+          "linkseg.asm",
+          "searchsg.asm",
+          "growseg.asm",
+          "newseg.asm"
+        ],
+        "selected_allocator_chain": [
+          {
+            "member": "dos\\stdalloc.asm",
+            "module_index": 11,
+            "allocator_publics": [],
+            "allocator_imports": [
+              "_malloc"
+            ],
+            "allocator_external_declarations": [
+              "_malloc"
+            ]
+          },
+          {
+            "member": "malloc.asm",
+            "module_index": 47,
+            "allocator_publics": [
+              "_malloc"
+            ],
+            "allocator_imports": [
+              "__fmalloc"
+            ],
+            "allocator_external_declarations": [
+              "__fmalloc"
+            ]
+          },
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "allocator_publics": [
+              "__ffree",
+              "__fmalloc"
+            ],
+            "allocator_imports": [
+              "__fheap"
+            ],
+            "allocator_external_declarations": [
+              "__fheap"
+            ]
+          },
+          {
+            "member": "fdata.asm",
+            "module_index": 51,
+            "allocator_publics": [
+              "__fheap"
+            ],
+            "allocator_imports": [],
+            "allocator_external_declarations": []
+          }
+        ],
+        "selected_members_directly_importing___fheap": [
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "imports___fheap": true
+          }
+        ],
+        "diagnostic_warnings": [],
+        "link_script": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/T.LNK",
+          "size": 91,
+          "sha256": "cf3a8f23098ba557d2208b7e7d88f1d349586d500fdccb8d86578bbf2c25cdf5"
+        },
+        "rtlink_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        "dosbox_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/dosbox.conf",
+          "size": 467,
+          "sha256": "641d898c9bf319abebd2c385b94264830f99b5460887b92913b13110fd890ad8"
+        },
+        "runner_batch": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/RUN.BAT",
+          "size": 54,
+          "sha256": "7b71a9c54dda0e6d5fc1b20c22457e3af33824c0d1a5a3359beb6b73b67005b2"
+        },
+        "runtime_library_copies": {
+          "llibcr.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/LLIBCR.LIB",
+            "size": 148711,
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+          },
+          "libh.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/LIBH.LIB",
+            "size": 21033,
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+          }
+        },
+        "fixture": {
+          "source": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/natural_main_no_heap_import.c",
+            "size": 30,
+            "sha256": "c1252d25811797e4231ce5c5d8df9c9e74e7c68e615332f79be594d09d23776a"
+          },
+          "object": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/natural_main_no_heap_import/MAIN.OBJ",
+            "size": 232,
+            "sha256": "07a32f7a375b0c718d3a5c825a81c701b6087375c41a08ce70b726179a3e2946"
+          },
+          "fixture_role": "minimal source-built MSC large-model main; no allocator API use",
+          "interesting_publics": [],
+          "interesting_external_symbols": [],
+          "unresolved_interesting_external_symbols": []
+        },
+        "map_public_addresses": {
+          "_malloc": "0000:05BE",
+          "_free": null,
+          "__ffree": "0000:05C4",
+          "__frealloc": null,
+          "__fmalloc": "0000:05D7",
+          "__fheap": "0089:00BE"
+        }
+      },
+      {
+        "linker": "rtlink400",
+        "case": "source_owned_malloc_no_far_heap",
+        "return_code": 0,
+        "control_role": "minimal natural MSC CRT startup; fixture imports no heap API",
+        "map_contains_fmalloc": true,
+        "map_contains_fdata": true,
+        "map_sha256": "437bf04b49772fc1730b55c3fec02fb55ba348561316f7ff4c727a0b8f016c21",
+        "map_owner_rows": [
+          "008C:00BE       __fheap                                                                          Y fdata.asm",
+          "008C:00BE       __fheap                                                                          Y fdata.asm"
+        ],
+        "log_sha256": "ac69e52d03ad302fbfcd25d1cd4b66e5ebc81da9ff84d67cc4a75483f8ef5659",
+        "linked_output_exe": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/PROBE.EXE",
+          "size": 3213,
+          "sha256": "2da0521179ba701eec63da74a1e4faf069154fc696c0f4e55931acba2e71e7c0"
+        },
+        "linked_output_exe_executed": false,
+        "selected_llibcr_member_names": [
+          "dos\\crt0.asm",
+          "dos\\crt0dat.asm",
+          "dos\\crt0msg.asm",
+          "crt0fp.asm",
+          "chksum.asm",
+          "dos\\stdargv.asm",
+          "dos\\stdenvp.asm",
+          "dos\\nmsghdr.asm",
+          "dos\\stdalloc.asm",
+          "fmalloc.asm",
+          "fdata.asm",
+          "initseg.asm",
+          "linkseg.asm",
+          "searchsg.asm",
+          "growseg.asm",
+          "newseg.asm"
+        ],
+        "selected_allocator_chain": [
+          {
+            "member": "dos\\stdalloc.asm",
+            "module_index": 11,
+            "allocator_publics": [],
+            "allocator_imports": [
+              "_malloc"
+            ],
+            "allocator_external_declarations": [
+              "_malloc"
+            ]
+          },
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "allocator_publics": [
+              "__ffree",
+              "__fmalloc"
+            ],
+            "allocator_imports": [
+              "__fheap"
+            ],
+            "allocator_external_declarations": [
+              "__fheap"
+            ]
+          },
+          {
+            "member": "fdata.asm",
+            "module_index": 51,
+            "allocator_publics": [
+              "__fheap"
+            ],
+            "allocator_imports": [],
+            "allocator_external_declarations": []
+          }
+        ],
+        "selected_members_directly_importing___fheap": [
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "imports___fheap": true
+          }
+        ],
+        "diagnostic_warnings": [],
+        "link_script": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/T.LNK",
+          "size": 91,
+          "sha256": "cf3a8f23098ba557d2208b7e7d88f1d349586d500fdccb8d86578bbf2c25cdf5"
+        },
+        "rtlink_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        "dosbox_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/dosbox.conf",
+          "size": 471,
+          "sha256": "f84ad8dddc0f5d42121c2af33e1db2059bc0b1f2ec029984c0d68e5990d7e843"
+        },
+        "runner_batch": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/RUN.BAT",
+          "size": 54,
+          "sha256": "7b71a9c54dda0e6d5fc1b20c22457e3af33824c0d1a5a3359beb6b73b67005b2"
+        },
+        "runtime_library_copies": {
+          "llibcr.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/LLIBCR.LIB",
+            "size": 148711,
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+          },
+          "libh.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/LIBH.LIB",
+            "size": 21033,
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+          }
+        },
+        "fixture": {
+          "source": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/source_owned_malloc_no_far_heap.c",
+            "size": 127,
+            "sha256": "d51e9814a4a384b8a62b99f08fa3e9516515b1dcd571993438223691396ab4a5"
+          },
+          "object": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink400/source_owned_malloc_no_far_heap/MAIN.OBJ",
+            "size": 326,
+            "sha256": "8f6f93cb285a7997efcff8ae25f23d6f5e9234ebccc8c870009c001ab285f105"
+          },
+          "fixture_role": "minimal source-owned _malloc symbol-provider contrast; it is a link-control stub, not a recovered allocator",
+          "interesting_publics": [
+            {
+              "name": "_malloc",
+              "segment": "MAIN_TEXT",
+              "offset": 0
+            }
+          ],
+          "interesting_external_symbols": [
+            "_malloc"
+          ],
+          "unresolved_interesting_external_symbols": []
+        },
+        "map_public_addresses": {
+          "_malloc": "0000:0000",
+          "_free": null,
+          "__ffree": "0002:05BA",
+          "__frealloc": null,
+          "__fmalloc": "0002:05CD",
+          "__fheap": "008C:00BE"
+        }
+      },
+      {
+        "linker": "rtlink610",
+        "case": "natural_main_no_heap_import",
+        "return_code": 0,
+        "control_role": "minimal natural MSC CRT startup; fixture imports no heap API",
+        "map_contains_fmalloc": true,
+        "map_contains_fdata": true,
+        "map_sha256": "2d68bb5b25d940c6deba3e3ddd355d2a6e35327f3092bad4c6d29e7168d8cf0c",
+        "map_owner_rows": [
+          "0000:0644 0000 C=CODE         S=_TEXT             G=(none)  M=fdata.asm",
+          "008D:007E 000E C=DATA         S=_DATA             G=DGROUP  M=fdata.asm",
+          "0089:00BE       __fheap                                                                   N      U fdata.asm",
+          "0089:00BE       __fheap                                                                   N      U fdata.asm"
+        ],
+        "log_sha256": "de585593a0f8ad4543d1de31f73e19c6d1249e221e647a3daaaa5eea6b4784f2",
+        "linked_output_exe": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/PROBE.EXE",
+          "size": 3165,
+          "sha256": "b8b01a42a23ccab9c6ed6eea09736c812db7553393dba208124656468c61a646"
+        },
+        "linked_output_exe_executed": false,
+        "selected_llibcr_member_names": [
+          "dos\\crt0.asm",
+          "dos\\crt0dat.asm",
+          "dos\\crt0msg.asm",
+          "crt0fp.asm",
+          "chksum.asm",
+          "dos\\stdargv.asm",
+          "dos\\stdenvp.asm",
+          "dos\\nmsghdr.asm",
+          "dos\\stdalloc.asm",
+          "malloc.asm",
+          "fmalloc.asm",
+          "fdata.asm",
+          "initseg.asm",
+          "linkseg.asm",
+          "searchsg.asm",
+          "growseg.asm",
+          "newseg.asm"
+        ],
+        "selected_allocator_chain": [
+          {
+            "member": "dos\\stdalloc.asm",
+            "module_index": 11,
+            "allocator_publics": [],
+            "allocator_imports": [
+              "_malloc"
+            ],
+            "allocator_external_declarations": [
+              "_malloc"
+            ]
+          },
+          {
+            "member": "malloc.asm",
+            "module_index": 47,
+            "allocator_publics": [
+              "_malloc"
+            ],
+            "allocator_imports": [
+              "__fmalloc"
+            ],
+            "allocator_external_declarations": [
+              "__fmalloc"
+            ]
+          },
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "allocator_publics": [
+              "__ffree",
+              "__fmalloc"
+            ],
+            "allocator_imports": [
+              "__fheap"
+            ],
+            "allocator_external_declarations": [
+              "__fheap"
+            ]
+          },
+          {
+            "member": "fdata.asm",
+            "module_index": 51,
+            "allocator_publics": [
+              "__fheap"
+            ],
+            "allocator_imports": [],
+            "allocator_external_declarations": []
+          }
+        ],
+        "selected_members_directly_importing___fheap": [
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "imports___fheap": true
+          }
+        ],
+        "diagnostic_warnings": [],
+        "link_script": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/T.LNK",
+          "size": 91,
+          "sha256": "cf3a8f23098ba557d2208b7e7d88f1d349586d500fdccb8d86578bbf2c25cdf5"
+        },
+        "rtlink_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        "dosbox_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/dosbox.conf",
+          "size": 467,
+          "sha256": "b482fd399fa48cdf76c9a80589a81cce9331ea77f7d5d952fc4e684cce5ee2be"
+        },
+        "runner_batch": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/RUN.BAT",
+          "size": 56,
+          "sha256": "11495445f379bee8e47150e802fc2ba44ebcd960244b5819b6563adcf85b3e3f"
+        },
+        "runtime_library_copies": {
+          "llibcr.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/LLIBCR.LIB",
+            "size": 148711,
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+          },
+          "libh.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/LIBH.LIB",
+            "size": 21033,
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+          }
+        },
+        "fixture": {
+          "source": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/natural_main_no_heap_import.c",
+            "size": 30,
+            "sha256": "c1252d25811797e4231ce5c5d8df9c9e74e7c68e615332f79be594d09d23776a"
+          },
+          "object": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/natural_main_no_heap_import/MAIN.OBJ",
+            "size": 232,
+            "sha256": "07a32f7a375b0c718d3a5c825a81c701b6087375c41a08ce70b726179a3e2946"
+          },
+          "fixture_role": "minimal source-built MSC large-model main; no allocator API use",
+          "interesting_publics": [],
+          "interesting_external_symbols": [],
+          "unresolved_interesting_external_symbols": []
+        },
+        "map_public_addresses": {
+          "_malloc": "0000:05BE",
+          "_free": null,
+          "__ffree": "0000:05C4",
+          "__frealloc": null,
+          "__fmalloc": "0000:05D7",
+          "__fheap": "0089:00BE"
+        }
+      },
+      {
+        "linker": "rtlink610",
+        "case": "source_owned_malloc_no_far_heap",
+        "return_code": 0,
+        "control_role": "minimal natural MSC CRT startup; fixture imports no heap API",
+        "map_contains_fmalloc": true,
+        "map_contains_fdata": true,
+        "map_sha256": "c6567c59f06f8932dbdb284330ca1bc5c3aa19fb5414ef75ad4b0edbe17f3a4f",
+        "map_owner_rows": [
+          "0002:063A 0000 C=CODE         S=_TEXT             G=(none)  M=fdata.asm",
+          "0090:007E 000E C=DATA         S=_DATA             G=DGROUP  M=fdata.asm",
+          "008C:00BE       __fheap                                                                   N      U fdata.asm",
+          "008C:00BE       __fheap                                                                   N      U fdata.asm"
+        ],
+        "log_sha256": "4ccfa8d7c00fe2f235cf86cdeb56d5e83b103589a038e767ec37576ce8e470bc",
+        "linked_output_exe": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/PROBE.EXE",
+          "size": 3213,
+          "sha256": "90fbd6dc940c91899b39856a2286afe4c0211430674be28af7e52eb8c3019bd1"
+        },
+        "linked_output_exe_executed": false,
+        "selected_llibcr_member_names": [
+          "dos\\crt0.asm",
+          "dos\\crt0dat.asm",
+          "dos\\crt0msg.asm",
+          "crt0fp.asm",
+          "chksum.asm",
+          "dos\\stdargv.asm",
+          "dos\\stdenvp.asm",
+          "dos\\nmsghdr.asm",
+          "dos\\stdalloc.asm",
+          "fmalloc.asm",
+          "fdata.asm",
+          "initseg.asm",
+          "linkseg.asm",
+          "searchsg.asm",
+          "growseg.asm",
+          "newseg.asm"
+        ],
+        "selected_allocator_chain": [
+          {
+            "member": "dos\\stdalloc.asm",
+            "module_index": 11,
+            "allocator_publics": [],
+            "allocator_imports": [
+              "_malloc"
+            ],
+            "allocator_external_declarations": [
+              "_malloc"
+            ]
+          },
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "allocator_publics": [
+              "__ffree",
+              "__fmalloc"
+            ],
+            "allocator_imports": [
+              "__fheap"
+            ],
+            "allocator_external_declarations": [
+              "__fheap"
+            ]
+          },
+          {
+            "member": "fdata.asm",
+            "module_index": 51,
+            "allocator_publics": [
+              "__fheap"
+            ],
+            "allocator_imports": [],
+            "allocator_external_declarations": []
+          }
+        ],
+        "selected_members_directly_importing___fheap": [
+          {
+            "member": "fmalloc.asm",
+            "module_index": 50,
+            "imports___fheap": true
+          }
+        ],
+        "diagnostic_warnings": [],
+        "link_script": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/T.LNK",
+          "size": 91,
+          "sha256": "cf3a8f23098ba557d2208b7e7d88f1d349586d500fdccb8d86578bbf2c25cdf5"
+        },
+        "rtlink_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        "dosbox_config": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/dosbox.conf",
+          "size": 471,
+          "sha256": "c56e8c120e80a213264c4588002b96c15f57017ab73c8a887ae98e4a1124657b"
+        },
+        "runner_batch": {
+          "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/RUN.BAT",
+          "size": 56,
+          "sha256": "11495445f379bee8e47150e802fc2ba44ebcd960244b5819b6563adcf85b3e3f"
+        },
+        "runtime_library_copies": {
+          "llibcr.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/LLIBCR.LIB",
+            "size": 148711,
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+          },
+          "libh.lib": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/LIBH.LIB",
+            "size": 21033,
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+          }
+        },
+        "fixture": {
+          "source": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/source_owned_malloc_no_far_heap.c",
+            "size": 127,
+            "sha256": "d51e9814a4a384b8a62b99f08fa3e9516515b1dcd571993438223691396ab4a5"
+          },
+          "object": {
+            "path": "build/workers/dos_fheap_source_owner_v35/natural-controls/rtlink610/source_owned_malloc_no_far_heap/MAIN.OBJ",
+            "size": 326,
+            "sha256": "8f6f93cb285a7997efcff8ae25f23d6f5e9234ebccc8c870009c001ab285f105"
+          },
+          "fixture_role": "minimal source-owned _malloc symbol-provider contrast; it is a link-control stub, not a recovered allocator",
+          "interesting_publics": [
+            {
+              "name": "_malloc",
+              "segment": "MAIN_TEXT",
+              "offset": 0
+            }
+          ],
+          "interesting_external_symbols": [
+            "_malloc"
+          ],
+          "unresolved_interesting_external_symbols": []
+        },
+        "map_public_addresses": {
+          "_malloc": "0000:0000",
+          "_free": null,
+          "__ffree": "0002:05BA",
+          "__frealloc": null,
+          "__fmalloc": "0002:05CD",
+          "__fheap": "008C:00BE"
+        }
+      }
+    ],
+    "interpretation": "The ordinary no-heap main fixture links cleanly under both RTLink versions, has no direct far-heap import, and maps __fheap to fdata.asm. Its verbose archive log exposes the natural CRT chain dos\\stdalloc.asm -> malloc.asm -> fmalloc.asm -> fdata.asm. In the source-owned-_malloc contrast, malloc.asm drops out but fmalloc.asm and fdata.asm remain selected; the selected fmalloc member itself imports __fheap, yet no other selected member in that contrast is a direct __fheap importer, so that contrast does not identify the extraction trigger. The fixture is a link-control stub, not an accepted allocator. Neither control establishes that the source-only application selected the same chain or proves DGROUP placement."
+  },
+  "conclusion": {
+    "current_source_objects_do_not_request_msc_far_heap": true,
+    "accepted_selected_runtime_members_do_not_request_msc_far_heap_api": true,
+    "logical_stock_runtime_owner_accounted": true,
+    "current_game_graph_has_no_direct_fheap_use": true,
+    "current_game_reliance_on_original_79f0_bytes_or_order": false,
+    "clean_minimal_natural_crt_controls_select_fdata_without_direct_application_heap_import": true,
+    "clean_control_allocator_publics": {
+      "rtlink400": {
+        "natural_main_no_heap_import": {
+          "fmalloc_public": true,
+          "fdata_public": true
+        },
+        "source_owned_malloc_no_far_heap": {
+          "fmalloc_public": true,
+          "fdata_public": true
+        }
+      },
+      "rtlink610": {
+        "natural_main_no_heap_import": {
+          "fmalloc_public": true,
+          "fdata_public": true
+        },
+        "source_owned_malloc_no_far_heap": {
+          "fmalloc_public": true,
+          "fdata_public": true
+        }
+      }
+    },
+    "whole_application_independent_link_completed": false,
+    "stock_crt_14_byte_layout_candidate_supported": true,
+    "fdata_public_identified_by_pinned_runtime_and_selected_symbol_as___fheap": true,
+    "startup_initialization_of___fheap_proven_by_installed_source": false,
+    "dgroup_79f0_bytes_closed": 0,
+    "reason": "The owner is accounted as a known pinned runtime component rather than a guessed C declaration: fdata.asm is the sole LLIBCR member defining the symbolic public __fheap, current linker evidence maps that public back to this member, and a clean natural CRT link in both RTLink versions demonstrates the stock malloc.asm -> fmalloc.asm -> __fheap -> fdata.asm dependency. The heap.inc match is corroborative only. The current game source and accepted runtime graph have no direct __fheap use, and the accepted-TU source/OMF census finds no numeric 79F0 anchor dependency; the preserved production partial map selected fdata without selected consumers. The source-owned-_malloc control also selects fmalloc/fdata but leaves the extraction trigger unexplained. This supports accounting the pinned runtime component independently while leaving historical DGROUP:79F0 bytes, order, and original identity open. The partial application link is still incomplete; no runnable whole-source build is claimed."
+  }
+}

@@ -1,0 +1,381 @@
+{
+  "schema": "simant-dos-storage-policy-independent-v33",
+  "module": "source-owned:render-delay-word",
+  "owners": [
+    "_fd_50F6_46D0"
+  ],
+  "communals": [
+    {
+      "name": "_fd_50F6_46D0",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2
+    }
+  ],
+  "required_cases": {
+    "typed_raw_positive": "PASS_TYPED_RAW",
+    "wrong_width_long_owner": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED",
+    "wrong_signedness_unsigned_view": "WRONG_UNSIGNED_VIEW_DETECTED",
+    "initialized_nonzero_owner": "INITIALIZED_NONZERO_OWNER_DETECTED",
+    "shifted_alias_base": "SHIFTED_ALIAS_BASE_DETECTED"
+  },
+  "control_outcomes": {
+    "typed_raw_positive": "PASS",
+    "wrong_width_long_owner": "FAIL",
+    "wrong_signedness_unsigned_view": "FAIL",
+    "initialized_nonzero_owner": "FAIL",
+    "shifted_alias_base": "FAIL"
+  },
+  "case_owners": {
+    "typed_raw_positive": [
+      "_fd_50F6_46D0",
+      "_probeexact0"
+    ],
+    "wrong_width_long_owner": [
+      "_fd_50F6_46D0",
+      "_probewhole0",
+      "_probeupper0"
+    ],
+    "wrong_signedness_unsigned_view": [
+      "_fd_50F6_46D0"
+    ],
+    "initialized_nonzero_owner": [
+      "_fd_50F6_46D0"
+    ],
+    "shifted_alias_base": [
+      "_fd_50F6_46D0",
+      "_probeshift0"
+    ]
+  },
+  "raw_text": {
+    "typed_raw_positive": "PASS_TYPED_RAW\r\n",
+    "wrong_width_long_owner": "WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED\r\n",
+    "wrong_signedness_unsigned_view": "WRONG_UNSIGNED_VIEW_DETECTED\r\n",
+    "initialized_nonzero_owner": "INITIALIZED_NONZERO_OWNER_DETECTED\r\n",
+    "shifted_alias_base": "SHIFTED_ALIAS_BASE_DETECTED\r\n"
+  },
+  "linkers": [
+    "rtlink400",
+    "rtlink610"
+  ],
+  "aliases": {
+    "typed_raw_positive": [
+      {
+        "alias": "_probeexact0",
+        "target": "_fd_50f6_46d0",
+        "delta": 0
+      }
+    ],
+    "wrong_width_long_owner": [
+      {
+        "alias": "_probewhole0",
+        "target": "_fd_50f6_46d0",
+        "delta": 0
+      },
+      {
+        "alias": "_probeupper0",
+        "target": "_fd_50f6_46d0",
+        "delta": 2
+      }
+    ],
+    "wrong_signedness_unsigned_view": [],
+    "initialized_nonzero_owner": [],
+    "shifted_alias_base": [
+      {
+        "alias": "_probeshift0",
+        "target": "_fd_50f6_46d0",
+        "delta": 2
+      }
+    ]
+  },
+  "save_rec_pointer_fixups": [],
+  "compiler_controls": {
+    "natural_signed_provider": {
+      "module_name": "DELAYWD.C",
+      "owner_names": [
+        "_fd_50F6_46D0"
+      ],
+      "owner_communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "owner_publics": [],
+      "segment_lengths": {
+        "DELAYWD_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0
+      },
+      "initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000081000C66645F353046365F34364430"
+      },
+      "linker_fixups": [
+        {
+          "segment": "$$SYMBOLS",
+          "offset": 8,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D0",
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D0",
+          "displacement": 0,
+          "encoded_addend": "00000000"
+        }
+      ],
+      "data_only": true,
+      "full_communals": true,
+      "all_communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "full_publics": true,
+      "all_publics": [],
+      "full_segment_lengths": true,
+      "all_segment_lengths": {
+        "DELAYWD_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0
+      },
+      "full_initialized_data": true,
+      "all_initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000081000C66645F353046365F34364430"
+      }
+    },
+    "wrong_width_long": {
+      "module_name": "WIDSCN.C",
+      "owner_names": [
+        "_fd_50F6_46D0"
+      ],
+      "owner_communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "owner_publics": [],
+      "segment_lengths": {
+        "WIDSCN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0
+      },
+      "initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000082000C66645F353046365F34364430"
+      },
+      "linker_fixups": [
+        {
+          "segment": "$$SYMBOLS",
+          "offset": 8,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D0",
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D0",
+          "displacement": 0,
+          "encoded_addend": "00000000"
+        }
+      ],
+      "data_only": true,
+      "full_communals": true,
+      "all_communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "full_publics": true,
+      "all_publics": [],
+      "full_segment_lengths": true,
+      "all_segment_lengths": {
+        "WIDSCN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0
+      },
+      "full_initialized_data": true,
+      "all_initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000082000C66645F353046365F34364430"
+      }
+    },
+    "wrong_unsigned_same_width": {
+      "module_name": "UNSGSCN.C",
+      "owner_names": [
+        "_fd_50F6_46D0"
+      ],
+      "owner_communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "owner_publics": [],
+      "segment_lengths": {
+        "UNSGSCN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0
+      },
+      "initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000085000C66645F353046365F34364430"
+      },
+      "linker_fixups": [
+        {
+          "segment": "$$SYMBOLS",
+          "offset": 8,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D0",
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D0",
+          "displacement": 0,
+          "encoded_addend": "00000000"
+        }
+      ],
+      "data_only": true,
+      "full_communals": true,
+      "all_communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "full_publics": true,
+      "all_publics": [],
+      "full_segment_lengths": true,
+      "all_segment_lengths": {
+        "UNSGSCN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0
+      },
+      "full_initialized_data": true,
+      "all_initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000085000C66645F353046365F34364430"
+      }
+    },
+    "initialized_nonzero": {
+      "module_name": "INITSCN.C",
+      "owner_names": [
+        "_fd_50F6_46D0"
+      ],
+      "owner_communals": [],
+      "owner_publics": [
+        {
+          "name": "_fd_50F6_46D0",
+          "segment": "INITSCN7_DATA",
+          "offset": 0
+        }
+      ],
+      "segment_lengths": {
+        "INITSCN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0,
+        "INITSCN7_DATA": 2
+      },
+      "initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000081000C66645F353046365F34364430",
+        "INITSCN7_DATA": "0100"
+      },
+      "linker_fixups": [
+        {
+          "segment": "$$SYMBOLS",
+          "offset": 8,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "INITSCN7_DATA",
+          "frame_kind": "target",
+          "frame": "INITSCN7_DATA",
+          "displacement": 0,
+          "encoded_addend": "00000000"
+        }
+      ],
+      "data_only": true,
+      "full_communals": true,
+      "all_communals": [],
+      "full_publics": true,
+      "all_publics": [
+        {
+          "name": "_fd_50F6_46D0",
+          "segment": "INITSCN7_DATA",
+          "offset": 0
+        }
+      ],
+      "full_segment_lengths": true,
+      "all_segment_lengths": {
+        "INITSCN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "$$SYMBOLS": 27,
+        "$$TYPES": 0,
+        "INITSCN7_DATA": 2
+      },
+      "full_initialized_data": true,
+      "all_initialized_data_hex": {
+        "$$SYMBOLS": "050D00001A0014050000000081000C66645F353046365F34364430",
+        "INITSCN7_DATA": "0100"
+      }
+    }
+  },
+  "literal_omf_type_indices": {
+    "DELAYWD": 129,
+    "WIDSCN": 130,
+    "UNSGSCN": 133,
+    "INITSCN": 129
+  },
+  "source_type_policy": {
+    "provider": "int far fd_50F6_46D0;",
+    "declaration": "extern int far fd_50F6_46D0;",
+    "setter_and_consumer": "signed-by-default 16-bit int",
+    "source_view_bytes": 2,
+    "scope_warning": "does not close physical alias, menu resource bounds, or writer lifetime"
+  },
+  "admission_blocker": "index 10 of int far fd_50F6_46BC[] and index 20 of int far fd_50F6_46A8[] both address 50F6:46D0"
+}

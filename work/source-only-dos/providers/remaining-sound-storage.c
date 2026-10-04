@@ -1,0 +1,11 @@
+struct Pt { int x; int y; };
+struct AnimObj;
+struct Pt far fd_50F6_47DA;
+void far * far fd_50F6_4A1A[4];
+struct AnimObj far * far fd_50F6_4A42;
+char far * far * far fd_50F6_4B28;
+int far fd_50F6_4B2C;
+int far fd_50F6_4B2E;
+long far fd_50F6_4B8A;
+int far fd_50F6_4B8E[14];
+int far fd_50F6_4BAA[14];
