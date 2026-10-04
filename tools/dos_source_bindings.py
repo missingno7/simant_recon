@@ -618,6 +618,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V21_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V22_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V23_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V24_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -625,7 +626,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -2133,3 +2134,33 @@ def require_v23_storage_contracts(report, profile, tool):
                   for c in ('positive','positive_shifted')]
         if (starts[1][0]*16+starts[1][1]) - (starts[0][0]*16+starts[0][1]) != 32:
             raise ValueError('event records did not both relocate by the measured 32 bytes')
+
+
+# Complete source-owned pointer, scalar and array views; no address-gap extents.
+PROVIDER_SPECS['source-owned:remaining-preparestrings-string-pointers'] = ('STRREST', None, (('_fd_50F6_020A', 4), ('_fd_50F6_0218', 4), ('_fd_50F6_021C', 4), ('_fd_50F6_0234', 4), ('_fd_50F6_023A', 4), ('_fd_50F6_034C', 4), ('_fd_50F6_046C', 4), ('_fd_50F6_106E', 4), ('_fd_50F6_1078', 4), ('_fd_50F6_1086', 4), ('_fd_50F6_1096', 4), ('_fd_50F6_10A8', 4), ('_fd_50F6_10B4', 4)), 'typedef char far * far *StrList; StrList far fd_50F6_020A; StrList far fd_50F6_0218; StrList far fd_50F6_021C; StrList far fd_50F6_0234; StrList far fd_50F6_023A; StrList far fd_50F6_034C; StrList far fd_50F6_046C; StrList far fd_50F6_106E; StrList far fd_50F6_1078; StrList far fd_50F6_1086; StrList far fd_50F6_1096; StrList far fd_50F6_10A8; StrList far fd_50F6_10B4;')
+FAR_PROVIDER_MODULES.add('source-owned:remaining-preparestrings-string-pointers')
+PROVIDER_SPECS['source-owned:yard-init-state'] = ('YARDISCL', None, (('_fd_50F6_0220', 4), ('_fd_50F6_107E', 4), ('_fd_50F6_109C', 4), ('_fd_50F6_0202', 2), ('_fd_50F6_022C', 2), ('_fd_50F6_023E', 2), ('_fd_50F6_0244', 2), ('_fd_50F6_0246', 2), ('_fd_50F6_0364', 2), ('_fd_50F6_036E', 2), ('_fd_50F6_046A', 2), ('_fd_50F6_0470', 2), ('_fd_50F6_047A', 2), ('_fd_50F6_04BE', 2), ('_fd_50F6_04C6', 2), ('_fd_50F6_04E4', 2), ('_fd_50F6_0506', 2), ('_fd_50F6_0624', 2), ('_fd_50F6_07C2', 2), ('_fd_50F6_105C', 2), ('_fd_50F6_1066', 2), ('_fd_50F6_108C', 2), ('_fd_50F6_10A0', 2), ('_fd_50F6_10B0', 2), ('_fd_50F6_10BC', 2)), 'long far fd_50F6_0220; long far fd_50F6_107E; long far fd_50F6_109C; int far fd_50F6_0202; int far fd_50F6_022C; int far fd_50F6_023E; int far fd_50F6_0244; int far fd_50F6_0246; int far fd_50F6_0364; int far fd_50F6_036E; int far fd_50F6_046A; int far fd_50F6_0470; int far fd_50F6_047A; int far fd_50F6_04BE; int far fd_50F6_04C6; int far fd_50F6_04E4; int far fd_50F6_0506; int far fd_50F6_0624; int far fd_50F6_07C2; int far fd_50F6_105C; int far fd_50F6_1066; int far fd_50F6_108C; int far fd_50F6_10A0; int far fd_50F6_10B0; int far fd_50F6_10BC;')
+FAR_PROVIDER_MODULES.add('source-owned:yard-init-state')
+PROVIDER_SPECS['source-owned:yard-animation-arrays'] = ('YARDARR', None, (('_fd_50F6_0334', 24), ('_fd_50F6_38CA', 30), ('_fd_50F6_38E8', 34), ('_fd_50F6_390A', 34)), 'int far fd_50F6_0334[12]; int far fd_50F6_38CA[15]; int far fd_50F6_38E8[17]; int far fd_50F6_390A[17];')
+FAR_PROVIDER_MODULES.add('source-owned:yard-animation-arrays')
+FAR_PROVIDER_WORD_ARRAYS['source-owned:yard-animation-arrays'] = {'_fd_50F6_38CA', '_fd_50F6_0334', '_fd_50F6_38E8', '_fd_50F6_390A'}
+V24_STORAGE_ANCHORS = {'_fd_50F6_020A': (522, ('fd_50F6_020A',)), '_fd_50F6_0218': (536, ('fd_50F6_0218',)), '_fd_50F6_021C': (540, ('fd_50F6_021C',)), '_fd_50F6_0234': (564, ('fd_50F6_0234',)), '_fd_50F6_023A': (570, ('fd_50F6_023A',)), '_fd_50F6_034C': (844, ('fd_50F6_034C',)), '_fd_50F6_046C': (1132, ('fd_50F6_046C',)), '_fd_50F6_106E': (4206, ('fd_50F6_106E',)), '_fd_50F6_1078': (4216, ('fd_50F6_1078',)), '_fd_50F6_1086': (4230, ('fd_50F6_1086',)), '_fd_50F6_1096': (4246, ('fd_50F6_1096',)), '_fd_50F6_10A8': (4264, ('fd_50F6_10A8',)), '_fd_50F6_10B4': (4276, ('fd_50F6_10B4',)), '_fd_50F6_0220': (544, ('fd_50F6_0220',)), '_fd_50F6_107E': (4222, ('fd_50F6_107E',)), '_fd_50F6_109C': (4252, ('fd_50F6_109C',)), '_fd_50F6_0202': (514, ('fd_50F6_0202',)), '_fd_50F6_022C': (556, ('fd_50F6_022C',)), '_fd_50F6_023E': (574, ('fd_50F6_023E',)), '_fd_50F6_0244': (580, ('fd_50F6_0244',)), '_fd_50F6_0246': (582, ('fd_50F6_0246',)), '_fd_50F6_0364': (868, ('fd_50F6_0364',)), '_fd_50F6_036E': (878, ('fd_50F6_036E',)), '_fd_50F6_046A': (1130, ('fd_50F6_046A',)), '_fd_50F6_0470': (1136, ('fd_50F6_0470',)), '_fd_50F6_047A': (1146, ('fd_50F6_047A',)), '_fd_50F6_04BE': (1214, ('fd_50F6_04BE',)), '_fd_50F6_04C6': (1222, ('fd_50F6_04C6',)), '_fd_50F6_04E4': (1252, ('fd_50F6_04E4',)), '_fd_50F6_0506': (1286, ('fd_50F6_0506',)), '_fd_50F6_0624': (1572, ('fd_50F6_0624',)), '_fd_50F6_07C2': (1986, ('fd_50F6_07C2',)), '_fd_50F6_105C': (4188, ('fd_50F6_105C',)), '_fd_50F6_1066': (4198, ('fd_50F6_1066',)), '_fd_50F6_108C': (4236, ('fd_50F6_108C',)), '_fd_50F6_10A0': (4256, ('fd_50F6_10A0',)), '_fd_50F6_10B0': (4272, ('fd_50F6_10B0',)), '_fd_50F6_10BC': (4284, ('fd_50F6_10BC',)), '_fd_50F6_0334': (820, ('fd_50F6_0334',)), '_fd_50F6_38CA': (14538, ('fd_50F6_38CA',)), '_fd_50F6_38E8': (14568, ('fd_50F6_38E8',)), '_fd_50F6_390A': (14602, ('fd_50F6_390A',))}
+V24_STORAGE_CONTRACTS = {'source-owned:remaining-preparestrings-string-pointers': ('remaining_preparestrings_contract', {'typed_far_pointer_halves_zero_and_write': 'PASS', 'independent_BYTE_pointer_storage_roundtrip': 'PASS', 'initialized_nonzero_owner_typed_zero_contrast': 'FAIL', 'initialized_nonzero_owner_BYTE_zero_contrast': 'FAIL', 'wrong_near_outer_pointer_view': 'FAIL', 'wrong_near_row_pointer_view': 'FAIL', 'wrong_pointer_depth_view': 'FAIL', 'wrong_eight_byte_array_extent_view': 'FAIL', 'wrong_plus2_shifted_base_alias': 'FAIL'}), 'source-owned:yard-init-state': ('yard_init_state_contract', {'typed_raw_startup0': 'PASS', 'unsigned_signedness_contrast': 'FAIL', 'shifted_SaveRec_base': 'FAIL', 'initialized_owner_startup_contrast': 'FAIL'}), 'source-owned:yard-animation-arrays': ('yard_animation_arrays_contract', {'positive_zero_all_elements_raw_grass_SaveRec_reset': 'PASS', 'negative_shifted_grass_base': 'FAIL', 'negative_shifted_rain_base': 'FAIL', 'negative_unsigned_handle_view': 'FAIL', 'negative_initialized_grass_owner': 'FAIL'})}
+
+
+def require_v24_storage_contracts(report, profile, tool):
+    """Require complete typed owners and both independently linked control matrices."""
+    import dos_storage_contracts
+    _require_reviewed_storage_contracts(report, profile, tool, V24_STORAGE_CONTRACTS)
+    _require_clean_owner_maps(report, profile, V24_STORAGE_CONTRACTS)
+    modules = {r['module'] for r in report['translation_units']}
+    for module, (key, _) in V24_STORAGE_CONTRACTS.items():
+        if module not in modules:
+            continue
+        contract = report[key]
+        if (contract.get('admitted') is not True or contract.get('original_game_bytes_used') != 0
+                or contract.get('historical_producer_or_placement_claimed') is not False
+                or contract.get('game_lifecycle_claimed') is not False):
+            raise ValueError('v24 storage contract scope or admission changed')
+        dos_storage_contracts.validate(contract,
+            dos_storage_contracts.policy(module, provider_communals(module)))

@@ -8,11 +8,11 @@ reviewed behavioral bodies, followed by DOSBox-X integration checks and human
 acceptance. Earlier historical-link and SDL3 next actions below are retained
 research history and do not supersede this priority.
 
-**Current SOURCE_ONLY_DOS checkpoint (v23, 2026-10-04):** the strict static audit covers all 29
+**Current SOURCE_ONLY_DOS checkpoint (v24, 2026-10-04):** the strict static audit covers all 29
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The v23 source-only build compiles 127 canonical TUs plus 39 data-only
+unresolved. The v24 source-only build compiles 127 canonical TUs plus 42 data-only
 providers. The seven-slot input queue, reviewed FAR word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
@@ -38,7 +38,11 @@ The CountAnts histogram now has its explicit 32-word source owner. Four already
 owned clip-pointer bytes are discharged from functional data accounting; the
 Rect/list sentinel and computed-copy gates remain open.
 Two separate 16-byte event records now have reviewed source owners; the resource-height/event-code clobber frontier remains open.
-There are 228 missing data imports (223 FAR_BSS and five
+Thirteen remaining PrepareStrings pointer globals, 25 yard scalars and four
+yard animation arrays now have reviewed natural source owners. The root reopened
+the full compiler objects, maps and positive/negative runs under both RTLink
+versions; complete storage-control matrices are mandatory at link preflight.
+There are 186 missing data imports (181 FAR_BSS and five
 storage/reachability cases), 62 functional data-disposition bytes (113 historical bytes) and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is

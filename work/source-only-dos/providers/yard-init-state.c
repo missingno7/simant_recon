@@ -1,0 +1,26 @@
+/* Data-only source functional owner candidate: InitSimYard scalars. */
+long far fd_50F6_0220;
+long far fd_50F6_107E;
+long far fd_50F6_109C;
+int far fd_50F6_0202;
+int far fd_50F6_022C;
+int far fd_50F6_023E;
+int far fd_50F6_0244;
+int far fd_50F6_0246;
+int far fd_50F6_0364;
+int far fd_50F6_036E;
+int far fd_50F6_046A;
+int far fd_50F6_0470;
+int far fd_50F6_047A;
+int far fd_50F6_04BE;
+int far fd_50F6_04C6;
+int far fd_50F6_04E4;
+int far fd_50F6_0506;
+int far fd_50F6_0624;
+int far fd_50F6_07C2;
+int far fd_50F6_105C;
+int far fd_50F6_1066;
+int far fd_50F6_108C;
+int far fd_50F6_10A0;
+int far fd_50F6_10B0;
+int far fd_50F6_10BC;

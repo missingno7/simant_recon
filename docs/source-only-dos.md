@@ -694,3 +694,24 @@ Further owner candidates remain unadmitted until root review.
 This boundary passed 364 repository tests (two skips), including 50 source-only
 tests, canonical validation, and all 23 mandatory evidence gates plus alignment
 under both RTLinks. The canonical manifest remains unchanged.
+
+## v24: remaining string pointers and yard state
+
+Thirteen four-byte PrepareStrings pointer globals, 25 typed yard scalars and four
+12/15/17/17-word yard animation arrays now have complete functional source owners.
+Root checked the complete effective source corpus, whole writes and SaveRec spans,
+actual OMF controls, full maps and raw positive/negative executions under both
+RTLinks. The complete compiler and clean-link control matrices are mandatory.
+See the [root admission](../work/source-only-dos/storage-admission-v24/root-admission.md).
+
+Preflight compiles 169 TUs (127 canonical plus 42 providers), with 186 missing
+imports: 181 FAR_BSS and five DGROUP storage/reachability cases. Functional data
+debt remains 62 bytes, historical debt 113, and the five layout gates remain open.
+All 29 strict behavioral implementations remain confirmed; original-byte counters
+are zero. Link is refused, game execution has not run and human acceptance is pending.
+
+This boundary passes 365 repository tests (two skips), including 51 source-only
+tests, canonical validation and 24 mandatory evidence gates plus alignment under
+both RTLinks. Historical communal producer/order, string payload extents and
+first-use game lifecycle remain separate questions; no original initializer or
+guessed capacity was admitted.

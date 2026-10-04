@@ -18,6 +18,72 @@ import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_v24_pointer_and_yard_owners_require_complete_storage_controls(self):
+        worker = ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            tools = compiler.toolchain()['linkers']
+            report['runtime_components'] = []
+            for module, (key, _) in bindings.V24_STORAGE_CONTRACTS.items():
+                row = next(r for r in report['translation_units'] if r['module'] == module)
+                provider = row['storage_provider']
+                source = (ROOT/row['source']['path']).read_text(encoding='ascii')
+                def compile(text):
+                    result = compiler.compile_c(text,row['profile'],row['flags'],basename=row['basename'])
+                    self.assertTrue(result.ok,result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(source,provider,symbols)
+                self.assertEqual(bindings.verify_provider(compile(source),provider)['communals'],
+                                 bindings.provider_communals(module))
+                if module.endswith('string-pointers'):
+                    bad = source.replace('far * far *StrList','far * near *StrList')
+                    same_shape = source.replace('typedef char far','typedef void far')
+                elif module.endswith('yard-init-state'):
+                    bad = source.replace('long far fd_50F6_0220','int far fd_50F6_0220')
+                    same_shape = source.replace('long far fd_50F6_0220','unsigned long far fd_50F6_0220')
+                else:
+                    bad = source.replace('0334[12]','0334[11]')
+                    same_shape = source.replace('int far fd_50F6_0334','unsigned int far fd_50F6_0334')
+                with self.assertRaises(ValueError): bindings.verify_provider(compile(bad),provider)
+                self.assertEqual(bindings.verify_provider(compile(same_shape),provider)['status'],'PASS')
+                with self.assertRaises(ValueError): bindings.review_provider_source(same_shape,provider,symbols)
+                for change in ('root','case','duplicate','raw','hash','pin','warning','timeout',
+                               'public','heading','map-count','common','extra-storage','initializer','scope','tools'):
+                    wrong = json.loads(json.dumps(report)); c=wrong[key]; case=c['cases'][0]
+                    control=next(iter(c['compiler_controls'].values()))
+                    if change=='root':c['root_reviewed']=False
+                    elif change=='case':c['cases'].pop()
+                    elif change=='duplicate':c['cases'].append(case)
+                    elif change=='raw':case['raw']['hex']='504153530a'
+                    elif change=='hash':case['raw']['sha256']='0'*64
+                    elif change=='pin':case['raw']['artifact_pin']['size']=0
+                    elif change=='warning':case['linker_diagnostics']=['warning']
+                    elif change=='timeout':case['timed_out']=True
+                    elif change=='public':case['public_address_matrix']['Name'].pop(case['expected_owner_publics'][0].lower())
+                    elif change=='heading':case['map_sections']['Value']['heading_count']=0
+                    elif change=='map-count':case['map_sections']['Name']['public_count']+=1
+                    elif change=='common':control['communals'][0]['count']+=1
+                    elif change=='extra-storage':control['communals'].append(dict(control['communals'][0],name='_invented_owner'))
+                    elif change=='initializer':control['initialized_data_hex']['unexpected']='01'
+                    elif change=='scope':c['historical_producer_or_placement_claimed']=True
+                    elif change=='tools':c['inputs']=[]
+                    with self.subTest(module=module,change=change):
+                        with self.assertRaises(ValueError):
+                            bindings.require_v24_storage_contracts(wrong,'rtlink400',tools['rtlink400'])
+                c=report[key]
+                alias_case=next((r for r in c['cases'] if r['aliases']),None)
+                if alias_case:
+                    wrong=json.loads(json.dumps(report));case=next(r for r in wrong[key]['cases'] if r['aliases'])
+                    case['aliases'][0]['delta']+=1
+                    with self.assertRaises(ValueError):bindings.require_v24_storage_contracts(wrong,'rtlink400',tools['rtlink400'])
+                if c['save_rec_pointer_fixups']:
+                    wrong=json.loads(json.dumps(report));wrong[key]['save_rec_pointer_fixups'][0]['encoded_addend']='02000000'
+                    with self.assertRaises(ValueError):bindings.require_v24_storage_contracts(wrong,'rtlink400',tools['rtlink400'])
+            for profile in ('rtlink400','rtlink610'):
+                bindings.require_v24_storage_contracts(report,profile,tools[profile])
+
     def test_v23_event_records_require_complete_typed_storage_and_symbolic_bases(self):
         worker = ROOT/'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

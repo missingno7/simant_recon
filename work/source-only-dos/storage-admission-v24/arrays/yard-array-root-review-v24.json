@@ -1,0 +1,3927 @@
+{
+  "candidate": {
+    "path": "build/workers/dos_yard_reset_arrays_v23/yard-array-owner-contract-candidate-v23.json",
+    "sha256": "92873a1d25719ab75930a080db58553a445ee79f9bec63c1e1bef56789c40221",
+    "size": 204711
+  },
+  "candidate_contract_key": "yard_animation_arrays_contract",
+  "category": "ROOT_REVIEW_SUPPORT_READ_ONLY",
+  "checks": {
+    "156_source_29_receipt_22_tool_runtime_pins_reopened": true,
+    "all_10_run_link_complete_map_sections_reopened": true,
+    "all_11_actual_omf_controls_and_target_initializer_payloads_reopened": true,
+    "all_120_raw_case_artifacts_reopened": true,
+    "both_full_map_sections_have_all_eight_expected_publics": true,
+    "both_whole_modules_exact_segment_public_fixup_comparisons_reopened": true,
+    "final_v23_candidate_hash_and_root_false_match": true,
+    "s09_saverec_slot644_pointer32_zero_addend_reopened": true
+  },
+  "compiler_controls": [
+    {
+      "actual_target_communals": [
+        {
+          "count": 11,
+          "element_size": 2,
+          "kind": "far",
+          "length": 22,
+          "name": "_fd_50F6_0334",
+          "type_index": 541
+        }
+      ],
+      "case": "short_extent",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_0334": 22
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 4514,
+          "sha256": "80bcb435e172edf83036be425aca5e6dd2d1ad4a9a9c9c06a90e90f39f7be2a1"
+        },
+        "$$TYPES": {
+          "length": 713,
+          "sha256": "7b961559992ff86e2a9a43431fcd258d3dff4716a7f2d538f169fc7190a588a9"
+        },
+        "CONST": {
+          "length": 202,
+          "sha256": "916139a9353551422db94de6e03bca92d34749d37da3e43bd6c4011825b5142b"
+        },
+        "_DATA": {
+          "length": 638,
+          "sha256": "b4ce6b438bdf51002aeb7cc79935058f0d1fd665a394de77cd3faf117ca87f97"
+        }
+      },
+      "module": "S06:35F5",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S06N0.OBJ",
+        "sha256": "36d89fd06c8a5e0b85f1ebde73d6ad10403e38a55abdf556a88661eccfcb4df2",
+        "size": 28549
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "0ae60cdc4dffe67808ce91d2bdedae21d66095c37a1164b33e8f5f63defd5e11",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 9583,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 638,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 202,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 4514,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 713,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "communal",
+        "_fd_50F6_38CA": "absent",
+        "_fd_50F6_38E8": "absent",
+        "_fd_50F6_390A": "absent"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 24,
+          "element_size": 1,
+          "kind": "far",
+          "length": 24,
+          "name": "_fd_50F6_0334",
+          "type_index": 541
+        }
+      ],
+      "case": "byte_width",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_0334": 24
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 4514,
+          "sha256": "4530427178c14c5d7aa39f29c7825bc6918b591a7ca21e332f6dfeb659a5c32e"
+        },
+        "$$TYPES": {
+          "length": 713,
+          "sha256": "eea1a5c5c390f53802179316d93642a9c59e07f96a249585d64f6a0ce9af2567"
+        },
+        "CONST": {
+          "length": 202,
+          "sha256": "916139a9353551422db94de6e03bca92d34749d37da3e43bd6c4011825b5142b"
+        },
+        "_DATA": {
+          "length": 638,
+          "sha256": "b4ce6b438bdf51002aeb7cc79935058f0d1fd665a394de77cd3faf117ca87f97"
+        }
+      },
+      "module": "S06:35F5",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S06N1.OBJ",
+        "sha256": "089395da794f7d364d5600768cef3a88616a1413ece68c48fb64200109e21719",
+        "size": 28546
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "dbb1d6ab8f972a4dcb776d1db47dbcb935e96802e00a7e7b4bed627dac476102",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 9580,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 638,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 202,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 4514,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 713,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "communal",
+        "_fd_50F6_38CA": "absent",
+        "_fd_50F6_38E8": "absent",
+        "_fd_50F6_390A": "absent"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 12,
+          "element_size": 4,
+          "kind": "far",
+          "length": 48,
+          "name": "_fd_50F6_0334",
+          "type_index": 541
+        }
+      ],
+      "case": "wide_width",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_0334": 48
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 4514,
+          "sha256": "5f8d2343276068176a23a8a2eb8c1dcf786c43ff15a2efa03207571c87351645"
+        },
+        "$$TYPES": {
+          "length": 713,
+          "sha256": "cc96af00156c2404a882e46a7157f0057918cba4842e221da786f2435dd34b5f"
+        },
+        "CONST": {
+          "length": 202,
+          "sha256": "916139a9353551422db94de6e03bca92d34749d37da3e43bd6c4011825b5142b"
+        },
+        "_DATA": {
+          "length": 638,
+          "sha256": "b4ce6b438bdf51002aeb7cc79935058f0d1fd665a394de77cd3faf117ca87f97"
+        }
+      },
+      "module": "S06:35F5",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S06N2.OBJ",
+        "sha256": "7abf1113d40a71f0fb17decf231730fd16b95bffd9d5b7229188179c5f09a1cf",
+        "size": 28624
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "fe5fdb0a1b9082d36d9c6390021bd253cb9c5f077a157fcc91e54ed610023517",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 9624,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 638,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 202,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 4514,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 713,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "communal",
+        "_fd_50F6_38CA": "absent",
+        "_fd_50F6_38E8": "absent",
+        "_fd_50F6_390A": "absent"
+      }
+    },
+    {
+      "actual_target_communals": [],
+      "case": "initialized",
+      "exact_initialized_target_payloads": [
+        {
+          "extent_bytes": 24,
+          "name": "_fd_50F6_0334",
+          "offset": 0,
+          "payload_hex": "010000000000000000000000000000000000000000000000",
+          "payload_sha256": "32edb6022c0921d99aa347e9cda5dc2db413f5574eebaaa8592234308ffebd2b",
+          "segment": "UNIT7_DATA"
+        }
+      ],
+      "expected_communal_lengths": {
+        "_fd_50F6_0334": null
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 4514,
+          "sha256": "80bcb435e172edf83036be425aca5e6dd2d1ad4a9a9c9c06a90e90f39f7be2a1"
+        },
+        "$$TYPES": {
+          "length": 713,
+          "sha256": "92f92a3d9260648080adb875c92318c07d165093eb8ed262e209d4343240411b"
+        },
+        "CONST": {
+          "length": 202,
+          "sha256": "916139a9353551422db94de6e03bca92d34749d37da3e43bd6c4011825b5142b"
+        },
+        "UNIT7_DATA": {
+          "length": 24,
+          "sha256": "32edb6022c0921d99aa347e9cda5dc2db413f5574eebaaa8592234308ffebd2b"
+        },
+        "_DATA": {
+          "length": 638,
+          "sha256": "b4ce6b438bdf51002aeb7cc79935058f0d1fd665a394de77cd3faf117ca87f97"
+        }
+      },
+      "module": "S06:35F5",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S06N3.OBJ",
+        "sha256": "5ec89a59796f3b760d8ad681efd310bd6fd0743f4efa8271a7a4ce349b91ad6f",
+        "size": 28601
+      },
+      "public_count": 25,
+      "public_sequence_sha256": "5feedcd28240dc5c85dfe1d35b1cf4449ad1bfcd96e07d1ced90b7283cedd3f7",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 9583,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 638,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 202,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 4514,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 713,
+          "name": "$$TYPES"
+        },
+        {
+          "class": "FAR_DATA",
+          "length": 24,
+          "name": "UNIT7_DATA"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "public",
+        "_fd_50F6_38CA": "absent",
+        "_fd_50F6_38E8": "absent",
+        "_fd_50F6_390A": "absent"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 14,
+          "element_size": 2,
+          "kind": "far",
+          "length": 28,
+          "name": "_fd_50F6_38CA",
+          "type_index": 633
+        }
+      ],
+      "case": "rain_short_extent",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_38CA": 28
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "3594a7f500bba9c25d68a43eb7f2328a8c575144a5bb29f084ea0e8d7586d61e"
+        },
+        "$$TYPES": {
+          "length": 1160,
+          "sha256": "3a1957bef3a77345d00af2d77746ffaf80edd2367e2276fab2ffd34715e5b188"
+        },
+        "CONST": {
+          "length": 114,
+          "sha256": "802bbf1167e97e336bc7e1d1574466db744c7021efe0f0ff01ff7e352c44f56b"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "module": "S13:384C",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13N0.OBJ",
+        "sha256": "f523295c65c38cffe7fd7165a30ea4ac5f7800ce7328bd69109f08fb523ce4f3",
+        "size": 19741
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "003a01eb03a75346e207edb95bb862d4a82c1065e8ed14f8629e9d8cba9d29f4",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 6050,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 206,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 114,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 2757,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 1160,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "absent",
+        "_fd_50F6_38CA": "communal",
+        "_fd_50F6_38E8": "external",
+        "_fd_50F6_390A": "external"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 16,
+          "element_size": 2,
+          "kind": "far",
+          "length": 32,
+          "name": "_fd_50F6_38E8",
+          "type_index": 634
+        }
+      ],
+      "case": "swarm_short_extent",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_38E8": 32
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "6cbeab45bc4a31ab83e6e259ce4d31a797f93ba0f083b4ba545040ee6f22301e"
+        },
+        "$$TYPES": {
+          "length": 1170,
+          "sha256": "3d0375ed44ea53bfc2410240f9425355fd05374c3fe77ea5ba86e848fd5e8691"
+        },
+        "CONST": {
+          "length": 114,
+          "sha256": "802bbf1167e97e336bc7e1d1574466db744c7021efe0f0ff01ff7e352c44f56b"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "module": "S13:384C",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13N1.OBJ",
+        "sha256": "a502ee7ec494a7d1e83bd2891679b3b24c0e1627d07d003c16b36d895a28d599",
+        "size": 19751
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "003a01eb03a75346e207edb95bb862d4a82c1065e8ed14f8629e9d8cba9d29f4",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 6050,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 206,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 114,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 2757,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 1170,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "absent",
+        "_fd_50F6_38CA": "external",
+        "_fd_50F6_38E8": "communal",
+        "_fd_50F6_390A": "external"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 16,
+          "element_size": 2,
+          "kind": "far",
+          "length": 32,
+          "name": "_fd_50F6_390A",
+          "type_index": 635
+        }
+      ],
+      "case": "fly_short_extent",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_390A": 32
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "6cbeab45bc4a31ab83e6e259ce4d31a797f93ba0f083b4ba545040ee6f22301e"
+        },
+        "$$TYPES": {
+          "length": 1170,
+          "sha256": "ed8e45889adace139de0a2e1050d0be3204118b85c996ea5598d2506a265a28a"
+        },
+        "CONST": {
+          "length": 114,
+          "sha256": "802bbf1167e97e336bc7e1d1574466db744c7021efe0f0ff01ff7e352c44f56b"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "module": "S13:384C",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13N2.OBJ",
+        "sha256": "b4b45cfb1480ca988b440a5ba226dbae8ab41d0c4d1c4f0f105e58b122bf9534",
+        "size": 19751
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "003a01eb03a75346e207edb95bb862d4a82c1065e8ed14f8629e9d8cba9d29f4",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 6050,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 206,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 114,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 2757,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 1170,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "absent",
+        "_fd_50F6_38CA": "external",
+        "_fd_50F6_38E8": "external",
+        "_fd_50F6_390A": "communal"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 30,
+          "element_size": 1,
+          "kind": "far",
+          "length": 30,
+          "name": "_fd_50F6_38CA",
+          "type_index": 633
+        }
+      ],
+      "case": "rain_byte_width",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_38CA": 30
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "540bd483a30bb97b41a173d1297f7692bdc99c7f2e40282c0af786a4e0768400"
+        },
+        "$$TYPES": {
+          "length": 1160,
+          "sha256": "084dbfe7f4a647a5f426da752065fe49be77702a6bca79be2020cbb96da31ad3"
+        },
+        "CONST": {
+          "length": 114,
+          "sha256": "802bbf1167e97e336bc7e1d1574466db744c7021efe0f0ff01ff7e352c44f56b"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "module": "S13:384C",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13N3.OBJ",
+        "sha256": "40d1abf4ab0aa704aa94408034f5c3bac04cd8e84c9923ddd97fabf5c0f8e3e4",
+        "size": 19746
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "106f72da0c13f9f2cc7913cff0341f32f52c1798c2e13f0f51196dd1016e6257",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 6055,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 206,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 114,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 2757,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 1160,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "absent",
+        "_fd_50F6_38CA": "communal",
+        "_fd_50F6_38E8": "external",
+        "_fd_50F6_390A": "external"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 68,
+          "element_size": 1,
+          "kind": "far",
+          "length": 68,
+          "name": "_fd_50F6_38E8",
+          "type_index": 634
+        }
+      ],
+      "case": "swarm_byte_width",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_38E8": 68
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "fbb0934aa967b62c335c976afd96c6bff57d3af39c8ee74436e7125a2a3bd785"
+        },
+        "$$TYPES": {
+          "length": 1170,
+          "sha256": "98febe338df280874fe6f622eb5e97eaed38351c8220ebd392b1ae159b3e432c"
+        },
+        "CONST": {
+          "length": 114,
+          "sha256": "802bbf1167e97e336bc7e1d1574466db744c7021efe0f0ff01ff7e352c44f56b"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "module": "S13:384C",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13N4.OBJ",
+        "sha256": "0edf3bdf92ed3db713de852b00fd20f06d93c0dc76fef217593f8a9e945b57b4",
+        "size": 19756
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "77831f54176f5f9d68b18b0efe0aa478e002253f32e863ed254db0cfd4cfa1b9",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 6055,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 206,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 114,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 2757,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 1170,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "absent",
+        "_fd_50F6_38CA": "external",
+        "_fd_50F6_38E8": "communal",
+        "_fd_50F6_390A": "external"
+      }
+    },
+    {
+      "actual_target_communals": [
+        {
+          "count": 68,
+          "element_size": 1,
+          "kind": "far",
+          "length": 68,
+          "name": "_fd_50F6_390A",
+          "type_index": 635
+        }
+      ],
+      "case": "fly_byte_width",
+      "exact_initialized_target_payloads": [],
+      "expected_communal_lengths": {
+        "_fd_50F6_390A": 68
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "fbb0934aa967b62c335c976afd96c6bff57d3af39c8ee74436e7125a2a3bd785"
+        },
+        "$$TYPES": {
+          "length": 1170,
+          "sha256": "0903cfbf1c17f1ca411f817dd92826616fc38f5780968f46e3e9845b90930a52"
+        },
+        "CONST": {
+          "length": 114,
+          "sha256": "802bbf1167e97e336bc7e1d1574466db744c7021efe0f0ff01ff7e352c44f56b"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "module": "S13:384C",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13N5.OBJ",
+        "sha256": "f358ecbe5a6e3608429e7b074a635f9264a5a4535c91f694e5f3778d5e972bbc",
+        "size": 19756
+      },
+      "public_count": 24,
+      "public_sequence_sha256": "77831f54176f5f9d68b18b0efe0aa478e002253f32e863ed254db0cfd4cfa1b9",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 6055,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 206,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 114,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 2757,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 1170,
+          "name": "$$TYPES"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "absent",
+        "_fd_50F6_38CA": "external",
+        "_fd_50F6_38E8": "external",
+        "_fd_50F6_390A": "communal"
+      }
+    },
+    {
+      "actual_target_communals": [],
+      "case": "initialized_rain",
+      "exact_initialized_target_payloads": [
+        {
+          "extent_bytes": 30,
+          "name": "_fd_50F6_38CA",
+          "offset": 0,
+          "payload_hex": "010000000000000000000000000000000000000000000000000000000000",
+          "payload_sha256": "96af7e21333d4a0e7b127c893c72d496abee72218ff511a2f0d18c5c9cb8dd28",
+          "segment": "UNIT7_DATA"
+        }
+      ],
+      "expected_communal_lengths": {
+        "_fd_50F6_38CA": null
+      },
+      "initialized_non_code_segments": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "3594a7f500bba9c25d68a43eb7f2328a8c575144a5bb29f084ea0e8d7586d61e"
+        },
+        "$$TYPES": {
+          "length": 1160,
+          "sha256": "84009a857c4d09863d567bc46df15a0aeb07d17ce34ff9e255f98af1b9c72b94"
+        },
+        "CONST": {
+          "length": 116,
+          "sha256": "5b517952cbe9c4c147bc3f3434f9d82409e76d09ea58905aefe7fb5415912d9a"
+        },
+        "UNIT7_DATA": {
+          "length": 30,
+          "sha256": "96af7e21333d4a0e7b127c893c72d496abee72218ff511a2f0d18c5c9cb8dd28"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "module": "S13:384C",
+      "object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13N6.OBJ",
+        "sha256": "a263b6130b5c40fce45ca18066b6b08dcc5592915a3565d337a637a49c7456e5",
+        "size": 19825
+      },
+      "public_count": 25,
+      "public_sequence_sha256": "af8d2cd62d409f6d06e4321291fe28c63a7fd876b3d05825d6c5a5567db6faff",
+      "segments": [
+        {
+          "class": "CODE",
+          "length": 6050,
+          "name": "UNIT_TEXT"
+        },
+        {
+          "class": "DATA",
+          "length": 206,
+          "name": "_DATA"
+        },
+        {
+          "class": "CONST",
+          "length": 116,
+          "name": "CONST"
+        },
+        {
+          "class": "BSS",
+          "length": 0,
+          "name": "_BSS"
+        },
+        {
+          "class": "DEBSYM",
+          "length": 2757,
+          "name": "$$SYMBOLS"
+        },
+        {
+          "class": "DEBTYP",
+          "length": 1160,
+          "name": "$$TYPES"
+        },
+        {
+          "class": "FAR_DATA",
+          "length": 30,
+          "name": "UNIT7_DATA"
+        }
+      ],
+      "source": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-probe.py",
+        "sha256": "1d7f07cd6ce79c78fc7fbf8455fa90677426fdbd5807ba6e722b8f92eb965a71",
+        "size": 39884,
+        "variant": "reconstructed from the preserved in-script compile control; no source dump embedded"
+      },
+      "target_external_scopes": {
+        "_fd_50F6_0334": "absent",
+        "_fd_50F6_38CA": "public",
+        "_fd_50F6_38E8": "external",
+        "_fd_50F6_390A": "external"
+      }
+    }
+  ],
+  "consumers_and_lifecycle_scope": {
+    "S06": "InitGrassMap initializes fd_50F6_0334[0..2]=0 and [3..11]=-1; NotMowed reads/writes the typed words. Normal GetMowDir checks IsValidYard before NotMowed; the loader can restore arbitrary payloads, so malformed-state safety is outside the claim.",
+    "S09": "SaveRec keeps an address-only unsigned-byte far view for fd_50F6_0334 and stores the row {size=2,count=12}; the measured pointer fixup is recorded separately below.",
+    "S13": "Draw_SimYard resets the three animation arrays to -1 with exact 0x1e/0x22/0x22 byte lengths before handle access on the first-animation-set path. DrawRain normal producer indices are 0..13, cleanup visits 0..14; DrawSwarm gates producers and cleanup to 0..15. Slot 16 in both swarm arrays is reset but not accessed by scanned normal paths.",
+    "lifecycle_limits": "Animation resets are conditional on mode<=1 and fd_50F6_10DA being false, then handles are reused/cleared per source; no universal reset schedule or malformed-load range guarantee is asserted."
+  },
+  "historical_claim_limit": "No historical COMDEF-producing TU identity/order, original communal ordering/padding, independent-link absolute placement, historical runtime execution, or address-gap ownership inference is claimed.",
+  "module": "source-owned:yard-animation-arrays",
+  "no_toolchain_or_runtime_rerun": true,
+  "provider": {
+    "basename": "YARDARR",
+    "bindings": [],
+    "communals": [
+      {
+        "count": 12,
+        "element_size": 2,
+        "kind": "far",
+        "length": 24,
+        "name": "_fd_50F6_0334"
+      },
+      {
+        "count": 15,
+        "element_size": 2,
+        "kind": "far",
+        "length": 30,
+        "name": "_fd_50F6_38CA"
+      },
+      {
+        "count": 17,
+        "element_size": 2,
+        "kind": "far",
+        "length": 34,
+        "name": "_fd_50F6_38E8"
+      },
+      {
+        "count": 17,
+        "element_size": 2,
+        "kind": "far",
+        "length": 34,
+        "name": "_fd_50F6_390A"
+      }
+    ],
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Gs"
+    ],
+    "profile": "msc600ax",
+    "runtime_object": {
+      "path": "build/workers/dos_yard_reset_arrays_v22/YDOWNER.OBJ",
+      "sha256": "5aec031bd8cc2f7a7352843ea46e350ad815d79848ee0c4a5d3b35989c92c2d0",
+      "size": 265
+    },
+    "source": {
+      "path": "build/workers/dos_yard_reset_arrays_v22/YARDARR.C",
+      "sha256": "e2c5687ed2ced3628158b66107c4c7d791334fdd7605480e7df623bd8a17ad34",
+      "size": 108
+    }
+  },
+  "root_admitted": false,
+  "root_reviewed": false,
+  "runtime_artifact_summary": {
+    "case_count": 10,
+    "cases": [
+      {
+        "actual": "PASS",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "021E:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "021E:0000",
+            "name_target_address": "021E:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0000",
+            "passed": true,
+            "probe_alias_public_address": "021E:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "021E:0000",
+            "value_target_address": "021E:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "021E:0018",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0018",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "021E:0018",
+            "name_target_address": "021E:0018",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0018",
+            "passed": true,
+            "probe_alias_public_address": "021E:0018",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "021E:0018",
+            "value_target_address": "021E:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "021E:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "021E:0036",
+            "name_target_address": "021E:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0036",
+            "passed": true,
+            "probe_alias_public_address": "021E:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "021E:0036",
+            "value_target_address": "021E:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "021E:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "021E:0058",
+            "name_target_address": "021E:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0058",
+            "passed": true,
+            "probe_alias_public_address": "021E:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "021E:0058",
+            "value_target_address": "021E:0058"
+          }
+        ],
+        "case": "positive_zero_all_elements_raw_grass_SaveRec_reset",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "PASS",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/positive_zero_all_elements_raw_grass_SaveRec_reset/LINK.LOG",
+          "sha256": "9d6c3e39c0919cf4334c47a75b36b3521951efc4ff48f414e30eb1d7ceb1ab0d",
+          "size": 689
+        },
+        "linker": "rtlink400",
+        "map": {
+          "FAR_BSS": [
+            "021E0H 02259H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/positive_zero_all_elements_raw_grass_SaveRec_reset/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "703e07d6081b769aa540e3921e39a52e47e0f5d171c5a6412193ddd16a5a1923",
+              "complete_section_size": 4488,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "923de2a7f1c93a49136ddf39fbcb3dc3445789036e680baf07807cbd366e52ce",
+              "complete_section_size": 4489,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "d66647d0adced8b8db755938f439fbb6b4e39ed85df40adaf726b245b2082cd3",
+          "size": 12737
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "504153530D0A",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6,
+          "verbatim": "PASS\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/positive_zero_all_elements_raw_grass_SaveRec_reset/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 2,
+            "control_target_address": "021E:0000",
+            "delta": 2,
+            "expected_offset_delta": 2,
+            "linker_target_address": "021E:0002",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334 + 2",
+            "name_alias_address": "021E:0002",
+            "name_target_address": "021E:0000",
+            "negative_base_control": true,
+            "observed_offset_delta": 2,
+            "owner_public_address": "021E:0000",
+            "passed": true,
+            "probe_alias_public_address": "021E:0002",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "021E:0002",
+            "value_target_address": "021E:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "021E:0018",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0018",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "021E:0018",
+            "name_target_address": "021E:0018",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0018",
+            "passed": true,
+            "probe_alias_public_address": "021E:0018",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "021E:0018",
+            "value_target_address": "021E:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "021E:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "021E:0036",
+            "name_target_address": "021E:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0036",
+            "passed": true,
+            "probe_alias_public_address": "021E:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "021E:0036",
+            "value_target_address": "021E:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "021E:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "021E:0058",
+            "name_target_address": "021E:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0058",
+            "passed": true,
+            "probe_alias_public_address": "021E:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "021E:0058",
+            "value_target_address": "021E:0058"
+          }
+        ],
+        "case": "negative_shifted_grass_base",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_shifted_grass_base/LINK.LOG",
+          "sha256": "1e6b39bf0e79e6ae1eeca3fbc8ab0e22a9497f11bec256c7e2f65abc20806cfa",
+          "size": 693
+        },
+        "linker": "rtlink400",
+        "map": {
+          "FAR_BSS": [
+            "021E0H 02259H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_shifted_grass_base/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "d756939aa39b52c581840597ea7c40238996b7ded3d22f7d0227dba33574e3da",
+              "complete_section_size": 4488,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0002",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0002  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "1d48e9c8949af31021c4285711373528e2db0c25cddeba80f978f4ccb10ac915",
+              "complete_section_size": 4489,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0002",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0002  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "0920df670cb1cb96fe50996c406e8a6e89fbd7fefd455f99fd4bf1fe32a77f64",
+          "size": 12737
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_shifted_grass_base/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "021E:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "021E:0000",
+            "name_target_address": "021E:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0000",
+            "passed": true,
+            "probe_alias_public_address": "021E:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "021E:0000",
+            "value_target_address": "021E:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 2,
+            "control_target_address": "021E:0018",
+            "delta": 2,
+            "expected_offset_delta": 2,
+            "linker_target_address": "021E:001A",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA + 2",
+            "name_alias_address": "021E:001A",
+            "name_target_address": "021E:0018",
+            "negative_base_control": true,
+            "observed_offset_delta": 2,
+            "owner_public_address": "021E:0018",
+            "passed": true,
+            "probe_alias_public_address": "021E:001A",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "021E:001A",
+            "value_target_address": "021E:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "021E:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "021E:0036",
+            "name_target_address": "021E:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0036",
+            "passed": true,
+            "probe_alias_public_address": "021E:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "021E:0036",
+            "value_target_address": "021E:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "021E:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "021E:0058",
+            "name_target_address": "021E:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0058",
+            "passed": true,
+            "probe_alias_public_address": "021E:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "021E:0058",
+            "value_target_address": "021E:0058"
+          }
+        ],
+        "case": "negative_shifted_rain_base",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_shifted_rain_base/LINK.LOG",
+          "sha256": "d3c1ba6c777e8e140e428a286883692985b87d004ecc0456d2db8fe61f33a80b",
+          "size": 693
+        },
+        "linker": "rtlink400",
+        "map": {
+          "FAR_BSS": [
+            "021E0H 02259H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_shifted_rain_base/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "0279da5fce3fcc2da0ccf1d54b86a12bd8a737fc350ed8039729f408e78bd363",
+              "complete_section_size": 4488,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:001A",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:001A  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "b3c164bf2d6c3310672fd70045fc16deacac8332b768dc2b4220dc7f888b279a",
+              "complete_section_size": 4489,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:001A",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:001A  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "d34720bf027a55f4bcb2a7f4c7602c47f14db98b1a20127e95378a968d83a191",
+          "size": 12737
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_shifted_rain_base/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "021E:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "021E:0000",
+            "name_target_address": "021E:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0000",
+            "passed": true,
+            "probe_alias_public_address": "021E:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "021E:0000",
+            "value_target_address": "021E:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "021E:0018",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0018",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "021E:0018",
+            "name_target_address": "021E:0018",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0018",
+            "passed": true,
+            "probe_alias_public_address": "021E:0018",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "021E:0018",
+            "value_target_address": "021E:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "021E:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "021E:0036",
+            "name_target_address": "021E:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0036",
+            "passed": true,
+            "probe_alias_public_address": "021E:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "021E:0036",
+            "value_target_address": "021E:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "021E:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "021E:0058",
+            "name_target_address": "021E:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0058",
+            "passed": true,
+            "probe_alias_public_address": "021E:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "021E:0058",
+            "value_target_address": "021E:0058"
+          }
+        ],
+        "case": "negative_unsigned_handle_view",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_unsigned_handle_view/LINK.LOG",
+          "sha256": "9d6c3e39c0919cf4334c47a75b36b3521951efc4ff48f414e30eb1d7ceb1ab0d",
+          "size": 689
+        },
+        "linker": "rtlink400",
+        "map": {
+          "FAR_BSS": [
+            "021E0H 02259H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_unsigned_handle_view/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "46b31b1d8cde7a63c2bcf21aed19703bf2bdcc95d67a7161707f220e3e3dfd4f",
+              "complete_section_size": 4488,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "43f6ab1f5996f8679fd0cebaf6e31c31c9a97fd7cad611cfbbbac289942c1f12",
+              "complete_section_size": 4489,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "021E:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "021E:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "021E:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "021E:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "021E:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "021E:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "021E:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "021E:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "149d4ad10cdd872ca089ad3559538098a046712e5e508807de4bbb1078c44ab4",
+          "size": 12739
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_unsigned_handle_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "021E:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "021E:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "021E:0000",
+            "name_target_address": "021E:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "021E:0000",
+            "passed": true,
+            "probe_alias_public_address": "021E:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "021E:0000",
+            "value_target_address": "021E:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "0220:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "0220:0000",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "0220:0000",
+            "name_target_address": "0220:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "0220:0000",
+            "passed": true,
+            "probe_alias_public_address": "0220:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "0220:0000",
+            "value_target_address": "0220:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "0220:001E",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "0220:001E",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "0220:001E",
+            "name_target_address": "0220:001E",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "0220:001E",
+            "passed": true,
+            "probe_alias_public_address": "0220:001E",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "0220:001E",
+            "value_target_address": "0220:001E"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "0220:0040",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "0220:0040",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "0220:0040",
+            "name_target_address": "0220:0040",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "0220:0040",
+            "passed": true,
+            "probe_alias_public_address": "0220:0040",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "0220:0040",
+            "value_target_address": "0220:0040"
+          }
+        ],
+        "case": "negative_initialized_grass_owner",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_initialized_grass_owner/LINK.LOG",
+          "sha256": "9d6c3e39c0919cf4334c47a75b36b3521951efc4ff48f414e30eb1d7ceb1ab0d",
+          "size": 689
+        },
+        "linker": "rtlink400",
+        "map": {
+          "FAR_BSS": [
+            "02200H 02261H 00062H FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_initialized_grass_owner/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "e2b030571f9259cd7b4300ff6855929138eeeee992637e1fc5a37f9a73e19403",
+              "complete_section_size": 4488,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "0220:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "0220:0000  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "0220:001E",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "0220:001E  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "0220:0040",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "0220:0040  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "0220:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "0220:0000  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "0220:001E",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "0220:001E  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "0220:0040",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "0220:0040  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 150,
+              "complete_section_line_count": 153,
+              "complete_section_sha256": "1f6b69a35195714b9a9c3cc6d5011358db3b870448e57d89caad76b01d33416d",
+              "complete_section_size": 4489,
+              "required_public_rows": [
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "021E:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "021E:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "021E:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "0220:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "0220:0000  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "0220:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "0220:0000  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "0220:001E",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "0220:001E  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "0220:001E",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "0220:001E  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "0220:0040",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "0220:0040  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "0220:0040",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "0220:0040  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "87976976162b1c7c7582616d94f489fbe0616aea36f8e4b78d74d375d882227c",
+          "size": 12792
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink400/negative_initialized_grass_owner/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      },
+      {
+        "actual": "PASS",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "025F:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "025F:0000",
+            "name_target_address": "025F:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0000",
+            "passed": true,
+            "probe_alias_public_address": "025F:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "025F:0000",
+            "value_target_address": "025F:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "025F:0018",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0018",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "025F:0018",
+            "name_target_address": "025F:0018",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0018",
+            "passed": true,
+            "probe_alias_public_address": "025F:0018",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "025F:0018",
+            "value_target_address": "025F:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "025F:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "025F:0036",
+            "name_target_address": "025F:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0036",
+            "passed": true,
+            "probe_alias_public_address": "025F:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "025F:0036",
+            "value_target_address": "025F:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "025F:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "025F:0058",
+            "name_target_address": "025F:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0058",
+            "passed": true,
+            "probe_alias_public_address": "025F:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "025F:0058",
+            "value_target_address": "025F:0058"
+          }
+        ],
+        "case": "positive_zero_all_elements_raw_grass_SaveRec_reset",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "PASS",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/positive_zero_all_elements_raw_grass_SaveRec_reset/LINK.LOG",
+          "sha256": "d48b803d2e4510e10df7f01b1902723263fd08371a55c211772afe67201d03da",
+          "size": 1380
+        },
+        "linker": "rtlink610",
+        "map": {
+          "FAR_BSS": [
+            "025F0H 02669H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/positive_zero_all_elements_raw_grass_SaveRec_reset/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "70bd8336aa5da6f94ace8018653aa286d10a4aa0511863f47d7e78e35c76b57c",
+              "complete_section_size": 5022,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "ca4a106a8433fd300048f11161b6771b163b4e774ef62dd0f62fbba288feabb4",
+              "complete_section_size": 5023,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "d8f4747ae5412d818285fbc1d923474569bd0ef132d1d9187d9e5230f769dd07",
+          "size": 13920
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "504153530D0A",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6,
+          "verbatim": "PASS\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/positive_zero_all_elements_raw_grass_SaveRec_reset/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 2,
+            "control_target_address": "025F:0000",
+            "delta": 2,
+            "expected_offset_delta": 2,
+            "linker_target_address": "025F:0002",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334 + 2",
+            "name_alias_address": "025F:0002",
+            "name_target_address": "025F:0000",
+            "negative_base_control": true,
+            "observed_offset_delta": 2,
+            "owner_public_address": "025F:0000",
+            "passed": true,
+            "probe_alias_public_address": "025F:0002",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "025F:0002",
+            "value_target_address": "025F:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "025F:0018",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0018",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "025F:0018",
+            "name_target_address": "025F:0018",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0018",
+            "passed": true,
+            "probe_alias_public_address": "025F:0018",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "025F:0018",
+            "value_target_address": "025F:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "025F:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "025F:0036",
+            "name_target_address": "025F:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0036",
+            "passed": true,
+            "probe_alias_public_address": "025F:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "025F:0036",
+            "value_target_address": "025F:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "025F:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "025F:0058",
+            "name_target_address": "025F:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0058",
+            "passed": true,
+            "probe_alias_public_address": "025F:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "025F:0058",
+            "value_target_address": "025F:0058"
+          }
+        ],
+        "case": "negative_shifted_grass_base",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_shifted_grass_base/LINK.LOG",
+          "sha256": "f892f18dc165c956f4d3e4fd2839659b037e822cfbefc177a7b34ba33ad4b881",
+          "size": 1384
+        },
+        "linker": "rtlink610",
+        "map": {
+          "FAR_BSS": [
+            "025F0H 02669H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_shifted_grass_base/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "57fb9df2f686b39af0481075ba591baba2e33997928c7e8b5115dfb2d1ea5caa",
+              "complete_section_size": 5022,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0002",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0002  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "dcb7f2f80b2c2bcf59746a015d93fa0cbaa229aaf4477205eac33d821bee52b9",
+              "complete_section_size": 5023,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0002",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0002  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "1000df27b3d7beef188745432f1495cbf541f7d3b4e2685bc1fec69327362247",
+          "size": 13920
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_shifted_grass_base/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "025F:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "025F:0000",
+            "name_target_address": "025F:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0000",
+            "passed": true,
+            "probe_alias_public_address": "025F:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "025F:0000",
+            "value_target_address": "025F:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 2,
+            "control_target_address": "025F:0018",
+            "delta": 2,
+            "expected_offset_delta": 2,
+            "linker_target_address": "025F:001A",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA + 2",
+            "name_alias_address": "025F:001A",
+            "name_target_address": "025F:0018",
+            "negative_base_control": true,
+            "observed_offset_delta": 2,
+            "owner_public_address": "025F:0018",
+            "passed": true,
+            "probe_alias_public_address": "025F:001A",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "025F:001A",
+            "value_target_address": "025F:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "025F:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "025F:0036",
+            "name_target_address": "025F:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0036",
+            "passed": true,
+            "probe_alias_public_address": "025F:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "025F:0036",
+            "value_target_address": "025F:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "025F:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "025F:0058",
+            "name_target_address": "025F:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0058",
+            "passed": true,
+            "probe_alias_public_address": "025F:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "025F:0058",
+            "value_target_address": "025F:0058"
+          }
+        ],
+        "case": "negative_shifted_rain_base",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_shifted_rain_base/LINK.LOG",
+          "sha256": "f16707995f0bd2472d05a36e5da4453a7794869e5991f1466310112be79caaa3",
+          "size": 1384
+        },
+        "linker": "rtlink610",
+        "map": {
+          "FAR_BSS": [
+            "025F0H 02669H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_shifted_rain_base/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "1ac549f12d12e42737bd51371b6f1f76b217904e2cc981026f99cf32e8c22ec6",
+              "complete_section_size": 5022,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:001A",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:001A  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "4f44c6db620adbfa138d9687eafc93f5c05bd6bc26e185b7932bdae8b1ac07a0",
+              "complete_section_size": 5023,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:001A",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:001A  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "06ac8992182543263c41eb6c4aeefefcaf3fe0ddd7e0d77701bf84e21aed1154",
+          "size": 13920
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_shifted_rain_base/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "025F:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "025F:0000",
+            "name_target_address": "025F:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0000",
+            "passed": true,
+            "probe_alias_public_address": "025F:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "025F:0000",
+            "value_target_address": "025F:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "025F:0018",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0018",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "025F:0018",
+            "name_target_address": "025F:0018",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0018",
+            "passed": true,
+            "probe_alias_public_address": "025F:0018",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "025F:0018",
+            "value_target_address": "025F:0018"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "025F:0036",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0036",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "025F:0036",
+            "name_target_address": "025F:0036",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0036",
+            "passed": true,
+            "probe_alias_public_address": "025F:0036",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "025F:0036",
+            "value_target_address": "025F:0036"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "025F:0058",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0058",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "025F:0058",
+            "name_target_address": "025F:0058",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0058",
+            "passed": true,
+            "probe_alias_public_address": "025F:0058",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "025F:0058",
+            "value_target_address": "025F:0058"
+          }
+        ],
+        "case": "negative_unsigned_handle_view",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_unsigned_handle_view/LINK.LOG",
+          "sha256": "d48b803d2e4510e10df7f01b1902723263fd08371a55c211772afe67201d03da",
+          "size": 1380
+        },
+        "linker": "rtlink610",
+        "map": {
+          "FAR_BSS": [
+            "025F0H 02669H 0007AH FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_unsigned_handle_view/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "b58259fa6bc9aba9168efbb0f65ec04e81fc55bfc63785a90133c80a19150144",
+              "complete_section_size": 5022,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "9cc5ee7e136779afd96986f3e1c85424adc9f53b1017b35176742436ce4bf763",
+              "complete_section_size": 5023,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "025F:0018  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "025F:0018",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "025F:0018  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "025F:0036  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "025F:0036",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "025F:0036  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "025F:0058  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0058",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "025F:0058  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "a5d7a2327cb21d8e482d9a31fe731dfc5e9a4e3c4781d8daa68b5a3e9eaa802c",
+          "size": 13922
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_unsigned_handle_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      },
+      {
+        "actual": "FAIL",
+        "alias_geometry": [
+          {
+            "alias": "_yard_probe_base_0334",
+            "byte_delta": 0,
+            "control_target_address": "025F:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "025F:0000",
+            "linker_target_expression": "_yard_probe_base_0334 = _fd_50F6_0334",
+            "name_alias_address": "025F:0000",
+            "name_target_address": "025F:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "025F:0000",
+            "passed": true,
+            "probe_alias_public_address": "025F:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_0334",
+            "value_alias_address": "025F:0000",
+            "value_target_address": "025F:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38CA",
+            "byte_delta": 0,
+            "control_target_address": "0261:0000",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "0261:0000",
+            "linker_target_expression": "_yard_probe_base_38CA = _fd_50F6_38CA",
+            "name_alias_address": "0261:0000",
+            "name_target_address": "0261:0000",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "0261:0000",
+            "passed": true,
+            "probe_alias_public_address": "0261:0000",
+            "same_segment": true,
+            "target": "_fd_50F6_38CA",
+            "value_alias_address": "0261:0000",
+            "value_target_address": "0261:0000"
+          },
+          {
+            "alias": "_yard_probe_base_38E8",
+            "byte_delta": 0,
+            "control_target_address": "0261:001E",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "0261:001E",
+            "linker_target_expression": "_yard_probe_base_38E8 = _fd_50F6_38E8",
+            "name_alias_address": "0261:001E",
+            "name_target_address": "0261:001E",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "0261:001E",
+            "passed": true,
+            "probe_alias_public_address": "0261:001E",
+            "same_segment": true,
+            "target": "_fd_50F6_38E8",
+            "value_alias_address": "0261:001E",
+            "value_target_address": "0261:001E"
+          },
+          {
+            "alias": "_yard_probe_base_390A",
+            "byte_delta": 0,
+            "control_target_address": "0261:0040",
+            "delta": 0,
+            "expected_offset_delta": 0,
+            "linker_target_address": "0261:0040",
+            "linker_target_expression": "_yard_probe_base_390A = _fd_50F6_390A",
+            "name_alias_address": "0261:0040",
+            "name_target_address": "0261:0040",
+            "negative_base_control": false,
+            "observed_offset_delta": 0,
+            "owner_public_address": "0261:0040",
+            "passed": true,
+            "probe_alias_public_address": "0261:0040",
+            "same_segment": true,
+            "target": "_fd_50F6_390A",
+            "value_alias_address": "0261:0040",
+            "value_target_address": "0261:0040"
+          }
+        ],
+        "case": "negative_initialized_grass_owner",
+        "clean_owner_map": {
+          "diagnostics": [],
+          "executable_exists": true,
+          "expected_owner_publics": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ],
+          "map_exists": true,
+          "owner_publics_found_in_map": [
+            "_fd_50F6_0334",
+            "_fd_50F6_38CA",
+            "_fd_50F6_38E8",
+            "_fd_50F6_390A"
+          ]
+        },
+        "expected": "FAIL",
+        "link_log": {
+          "diagnostics": [],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_initialized_grass_owner/LINK.LOG",
+          "sha256": "f09b750e16e08058f91c4f1a036e7232ee5affabbc499b37c85b21b21b691196",
+          "size": 1380
+        },
+        "linker": "rtlink610",
+        "map": {
+          "FAR_BSS": [
+            "02610H 02671H 00062H FAR_BSS                FAR_BSS"
+          ],
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_initialized_grass_owner/PROBE.MAP",
+          "sections": {
+            "Name": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "1c50064b010ba9c9ccfa9f9c4b08a180f016742509a2f35491f4d7e41ae45114",
+              "complete_section_size": 5022,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "0261:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "0261:0000  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "0261:001E",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "0261:001E  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "0261:0040",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "0261:0040  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "0261:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "0261:0000  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "0261:001E",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "0261:001E  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "0261:0040",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "0261:0040  Res  _yard_probe_base_390A"
+                }
+              ]
+            },
+            "Value": {
+              "complete_public_row_count": 165,
+              "complete_section_line_count": 168,
+              "complete_section_sha256": "2e7e1b2e36669cb667cba572236c50f8fdf84fe1f3e6ede9662d08018f067b9b",
+              "complete_section_size": 5023,
+              "required_public_rows": [
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_0334",
+                  "raw": "025F:0000  Res  _fd_50F6_0334"
+                },
+                {
+                  "address": "025F:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_0334",
+                  "raw": "025F:0000  Res  _yard_probe_base_0334"
+                },
+                {
+                  "address": "0261:0000",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38CA",
+                  "raw": "0261:0000  Res  _fd_50F6_38CA"
+                },
+                {
+                  "address": "0261:0000",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38CA",
+                  "raw": "0261:0000  Res  _yard_probe_base_38CA"
+                },
+                {
+                  "address": "0261:001E",
+                  "kind": "Res",
+                  "name": "_fd_50F6_38E8",
+                  "raw": "0261:001E  Res  _fd_50F6_38E8"
+                },
+                {
+                  "address": "0261:001E",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_38E8",
+                  "raw": "0261:001E  Res  _yard_probe_base_38E8"
+                },
+                {
+                  "address": "0261:0040",
+                  "kind": "Res",
+                  "name": "_fd_50F6_390A",
+                  "raw": "0261:0040  Res  _fd_50F6_390A"
+                },
+                {
+                  "address": "0261:0040",
+                  "kind": "Res",
+                  "name": "_yard_probe_base_390A",
+                  "raw": "0261:0040  Res  _yard_probe_base_390A"
+                }
+              ]
+            }
+          },
+          "sha256": "e3456142e6e64bfa36d0604325310a477faf2b1e2c7e115fb9bea42967549d46",
+          "size": 13975
+        },
+        "passed": true,
+        "raw_output": {
+          "hex": "4641494C0D0A",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "verbatim": "FAIL\r\n"
+        },
+        "run_log": {
+          "path": "build/workers/dos_yard_reset_arrays_v22/rtlink610/negative_initialized_grass_owner/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      }
+    ],
+    "inventory_sha256": "e26b083d18087837aec847a11372a1d35316f5b67cf421f16fe1fdba2a215851",
+    "linker_counts": {
+      "rtlink400": {
+        "FAIL": 4,
+        "PASS": 1
+      },
+      "rtlink610": {
+        "FAIL": 4,
+        "PASS": 1
+      }
+    },
+    "raw_artifact_count": 120
+  },
+  "saverec_fixup": {
+    "displacement": 0,
+    "encoded_addend": "00000000",
+    "fixup_loc": "pointer32",
+    "fixup_width": 4,
+    "historical_measurement_only": true,
+    "object": {
+      "path": "build/workers/dos_yard_reset_arrays_v22/S09CTL.OBJ",
+      "sha256": "1b044d505b8367efe4389777211d41aa5f630d4a7dcfd6bfe763b12e83def236",
+      "size": 29288
+    },
+    "pointer_field_offset": 4,
+    "record_stride_bytes": 8,
+    "row_index": 80,
+    "segment": "UNIT7_DATA",
+    "slot_offset": 644,
+    "source": "src/S09/m35F5.c",
+    "source_line": 974,
+    "source_row": "{ 2, 12, (void far *)&fd_50F6_0334 },",
+    "source_row_fields": {
+      "count": 12,
+      "size": 2
+    },
+    "source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "target": "_fd_50F6_0334"
+  },
+  "schema": "simant-dos-yard-array-root-review-support-v24",
+  "source_anchors": {
+    "animation_reset": {
+      "full_extent_reset_anchors": [
+        {
+          "line": 521,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S13_384C_tentative_owner.c",
+          "text": "_fmemset(fd_50F6_38CA, -1, 0x1e);"
+        },
+        {
+          "line": 522,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S13_384C_tentative_owner.c",
+          "text": "_fmemset(fd_50F6_38E8, -1, 0x22);"
+        },
+        {
+          "line": 523,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S13_384C_tentative_owner.c",
+          "text": "_fmemset(fd_50F6_390A, -1, 0x22);"
+        }
+      ],
+      "function_line": 513,
+      "meaning": "conditional first-animation-set reset writes -1 for exactly 30/34/34 bytes",
+      "source": "build/workers/dos_yard_reset_arrays_v22/S13_384C_tentative_owner.c"
+    },
+    "array_definitions": [
+      {
+        "bounded_bulk_operation_count": 0,
+        "canonical_extern_anchor": {
+          "line": 156,
+          "path": "src/S06/m35F5.c",
+          "text": "extern int far fd_50F6_0334[12];"
+        },
+        "count": 12,
+        "definition_anchor": {
+          "line": 156,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S06_35F5_tentative_owner.c",
+          "text": "int far fd_50F6_0334[12];"
+        },
+        "extent_bytes": 24,
+        "historical_address": [
+          20726,
+          820
+        ],
+        "name": "_fd_50F6_0334",
+        "non_save_address_escapes": [],
+        "numeric_or_assembly_hits": {
+          "exact_symbol_asm_occurrences": [],
+          "explicit_50F6_segment_or_far_address_occurrences": [],
+          "explicit_hex_offset_literal_occurrences": []
+        },
+        "owner_module": "S06:35F5",
+        "registered_exact_base_views": [
+          {
+            "alias_of": null,
+            "name": "fd_50F6_0334",
+            "offset": 820
+          }
+        ],
+        "registered_interior_names": [],
+        "type": "int far"
+      },
+      {
+        "bounded_bulk_operation_count": 2,
+        "canonical_extern_anchor": {
+          "line": 498,
+          "path": "src/S13/m384C.c",
+          "text": "extern int far fd_50F6_38CA[15];"
+        },
+        "count": 15,
+        "definition_anchor": {
+          "line": 498,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S13_384C_tentative_owner.c",
+          "text": "int far fd_50F6_38CA[15];"
+        },
+        "extent_bytes": 30,
+        "historical_address": [
+          20726,
+          14538
+        ],
+        "name": "_fd_50F6_38CA",
+        "non_save_address_escapes": [],
+        "numeric_or_assembly_hits": {
+          "exact_symbol_asm_occurrences": [],
+          "explicit_50F6_segment_or_far_address_occurrences": [],
+          "explicit_hex_offset_literal_occurrences": []
+        },
+        "owner_module": "S13:384C",
+        "registered_exact_base_views": [
+          {
+            "alias_of": null,
+            "name": "fd_50F6_38CA",
+            "offset": 14538
+          }
+        ],
+        "registered_interior_names": [],
+        "type": "int far"
+      },
+      {
+        "bounded_bulk_operation_count": 2,
+        "canonical_extern_anchor": {
+          "line": 499,
+          "path": "src/S13/m384C.c",
+          "text": "extern int far fd_50F6_38E8[17];"
+        },
+        "count": 17,
+        "definition_anchor": {
+          "line": 499,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S13_384C_tentative_owner.c",
+          "text": "int far fd_50F6_38E8[17];"
+        },
+        "extent_bytes": 34,
+        "historical_address": [
+          20726,
+          14568
+        ],
+        "name": "_fd_50F6_38E8",
+        "non_save_address_escapes": [],
+        "numeric_or_assembly_hits": {
+          "exact_symbol_asm_occurrences": [],
+          "explicit_50F6_segment_or_far_address_occurrences": [],
+          "explicit_hex_offset_literal_occurrences": []
+        },
+        "owner_module": "S13:384C",
+        "registered_exact_base_views": [
+          {
+            "alias_of": null,
+            "name": "fd_50F6_38E8",
+            "offset": 14568
+          }
+        ],
+        "registered_interior_names": [],
+        "type": "int far"
+      },
+      {
+        "bounded_bulk_operation_count": 2,
+        "canonical_extern_anchor": {
+          "line": 500,
+          "path": "src/S13/m384C.c",
+          "text": "extern int far fd_50F6_390A[17];"
+        },
+        "count": 17,
+        "definition_anchor": {
+          "line": 500,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S13_384C_tentative_owner.c",
+          "text": "int far fd_50F6_390A[17];"
+        },
+        "extent_bytes": 34,
+        "historical_address": [
+          20726,
+          14602
+        ],
+        "name": "_fd_50F6_390A",
+        "non_save_address_escapes": [],
+        "numeric_or_assembly_hits": {
+          "exact_symbol_asm_occurrences": [],
+          "explicit_50F6_segment_or_far_address_occurrences": [],
+          "explicit_hex_offset_literal_occurrences": []
+        },
+        "owner_module": "S13:384C",
+        "registered_exact_base_views": [
+          {
+            "alias_of": null,
+            "name": "fd_50F6_390A",
+            "offset": 14602
+          }
+        ],
+        "registered_interior_names": [],
+        "type": "int far"
+      }
+    ],
+    "grass_initializer": {
+      "element_reset_anchors": [
+        {
+          "line": 476,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S06_35F5_tentative_owner.c",
+          "text": "fd_50F6_0334[0] = 0;"
+        },
+        {
+          "line": 477,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S06_35F5_tentative_owner.c",
+          "text": "fd_50F6_0334[1] = 0;"
+        },
+        {
+          "line": 478,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S06_35F5_tentative_owner.c",
+          "text": "fd_50F6_0334[2] = 0;"
+        },
+        {
+          "line": 480,
+          "path": "build/workers/dos_yard_reset_arrays_v22/S06_35F5_tentative_owner.c",
+          "text": "fd_50F6_0334[i] = -1;"
+        }
+      ],
+      "function_line": 472,
+      "meaning": "indices 0..2 assigned 0; loop assigns indices 3..11 to -1",
+      "source": "build/workers/dos_yard_reset_arrays_v22/S06_35F5_tentative_owner.c"
+    },
+    "saverec_address_view": {
+      "line": 974,
+      "path": "src/S09/m35F5.c",
+      "text": "{ 2, 12, (void far *)&fd_50F6_0334 },"
+    }
+  },
+  "source_and_tool_pin_summaries": {
+    "omf_reader": {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    "preserved_review": {
+      "path": "build/workers/dos_yard_reset_arrays_v22/yard-array-owner-review.json",
+      "sha256": "6289cae79ea3d6eff45bfd96115da702773cf464b93e0f51ef55e04cc7166856",
+      "size": 126597
+    },
+    "selected_tool_runtime": {
+      "count": 22,
+      "sha256": "10aeaf0be4685868fc0258f6aaa7b49cc6f71776842d9cdff2d55a11b9a0780a"
+    },
+    "source_files": {
+      "canonical": 127,
+      "count": 156,
+      "sha256": "14d8734663a375c4805b6bd63b9bf8dec03eb526283dd1bcc5248d490e75376f",
+      "strict_effective": 29
+    },
+    "strict_receipts": {
+      "count": 29,
+      "sha256": "3348db433d65600e1a68e64261fc29102db20a4c994e8a18fa1a82bdeb6f8bd0"
+    },
+    "supporting_inputs": {
+      "count": 15
+    }
+  },
+  "verifier": {
+    "path": "build/workers/dos_yard_array_root_support_v24/review-check-v24.py",
+    "sha256": "fd4878a73dde0c2c8eba1993094e09a64df068052feef927769befecf4571f7d",
+    "size": 29151
+  },
+  "whole_module_comparisons": [
+    {
+      "all_segment_bytes_exactly_equal": true,
+      "candidate_object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S06OWN.OBJ",
+        "sha256": "c1d8af40583313bf50c7fe913a6d3ab52c7c9c44bbb3de2dd1c73f07f8ed404e",
+        "size": 28549
+      },
+      "control_object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S06CTL.OBJ",
+        "sha256": "7ab48dc3b6b969d43454e5030b92c30ba87dfb49bb0c65d1b3f90e20e95dcbf7",
+        "size": 28537
+      },
+      "extern_to_communal_scope_changes": [
+        {
+          "candidate": "communal",
+          "control": "external",
+          "name": "_fd_50F6_0334"
+        }
+      ],
+      "external_order_equal_except_moved_names": true,
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi"
+      ],
+      "historical_COMDEF_owner_identity_claimed": false,
+      "manifest_control_object_sha256_match": true,
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "module": "S06:35F5",
+      "ordered_fixup_count": 1303,
+      "ordered_fixups_exactly_equal_by_target_addend": true,
+      "ordered_named_fixup_sha256": "cdbaecfa7fa9d88accd73de10ae4b6b029d220fb444c39b5bac342accd1477c8",
+      "public_count": 24,
+      "public_sequence_sha256": "0ae60cdc4dffe67808ce91d2bdedae21d66095c37a1164b33e8f5f63defd5e11",
+      "publics_exactly_equal": true,
+      "segment_count": 6,
+      "segment_definitions_lengths_groups_exactly_equal": true,
+      "segment_payload_pins": {
+        "$$SYMBOLS": {
+          "length": 4514,
+          "sha256": "80bcb435e172edf83036be425aca5e6dd2d1ad4a9a9c9c06a90e90f39f7be2a1"
+        },
+        "$$TYPES": {
+          "length": 713,
+          "sha256": "92f92a3d9260648080adb875c92318c07d165093eb8ed262e209d4343240411b"
+        },
+        "CONST": {
+          "length": 202,
+          "sha256": "916139a9353551422db94de6e03bca92d34749d37da3e43bd6c4011825b5142b"
+        },
+        "UNIT_TEXT": {
+          "length": 9583,
+          "sha256": "7688384f46f54c532831bdbe1e3f63c3a3a21f9c205957e6c2b77da11ddd0730"
+        },
+        "_DATA": {
+          "length": 638,
+          "sha256": "b4ce6b438bdf51002aeb7cc79935058f0d1fd665a394de77cd3faf117ca87f97"
+        }
+      },
+      "source": "src/S06/m35F5.c",
+      "source_sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86"
+    },
+    {
+      "all_segment_bytes_exactly_equal": true,
+      "candidate_object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13OWN.OBJ",
+        "sha256": "350231f5b8c8feb05e652f77af266f988209677045a73aa29e71ed970c4f9143",
+        "size": 19765
+      },
+      "control_object": {
+        "path": "build/workers/dos_yard_reset_arrays_v22/S13CTL.OBJ",
+        "sha256": "37716fe03562f2f9fd6c96cffddec140e765963b76e33cb86e3771485cc53aba",
+        "size": 19729
+      },
+      "extern_to_communal_scope_changes": [
+        {
+          "candidate": "communal",
+          "control": "external",
+          "name": "_fd_50F6_38CA"
+        },
+        {
+          "candidate": "communal",
+          "control": "external",
+          "name": "_fd_50F6_38E8"
+        },
+        {
+          "candidate": "communal",
+          "control": "external",
+          "name": "_fd_50F6_390A"
+        }
+      ],
+      "external_order_equal_except_moved_names": true,
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi"
+      ],
+      "historical_COMDEF_owner_identity_claimed": false,
+      "manifest_control_object_sha256_match": true,
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "module": "S13:384C",
+      "ordered_fixup_count": 801,
+      "ordered_fixups_exactly_equal_by_target_addend": true,
+      "ordered_named_fixup_sha256": "cea0eda95da778c4ae365ee6461ca7db86e43a9c26466b8e15a6169b925c0c12",
+      "public_count": 24,
+      "public_sequence_sha256": "003a01eb03a75346e207edb95bb862d4a82c1065e8ed14f8629e9d8cba9d29f4",
+      "publics_exactly_equal": true,
+      "segment_count": 6,
+      "segment_definitions_lengths_groups_exactly_equal": true,
+      "segment_payload_pins": {
+        "$$SYMBOLS": {
+          "length": 2757,
+          "sha256": "3594a7f500bba9c25d68a43eb7f2328a8c575144a5bb29f084ea0e8d7586d61e"
+        },
+        "$$TYPES": {
+          "length": 1160,
+          "sha256": "84009a857c4d09863d567bc46df15a0aeb07d17ce34ff9e255f98af1b9c72b94"
+        },
+        "CONST": {
+          "length": 114,
+          "sha256": "802bbf1167e97e336bc7e1d1574466db744c7021efe0f0ff01ff7e352c44f56b"
+        },
+        "UNIT_TEXT": {
+          "length": 6050,
+          "sha256": "ec31e551c6bf8635bd273b4980b634f0a37360a309c15ced80a4374636c57b4f"
+        },
+        "_DATA": {
+          "length": 206,
+          "sha256": "ae8355c37d03e4ae3d166282c25a51d8deee28313ea532d778e6c289ba884989"
+        }
+      },
+      "source": "src/S13/m384C.c",
+      "source_sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a"
+    }
+  ]
+}

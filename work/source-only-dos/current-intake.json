@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "75a8277",
+  "source_only_base_checkpoint": "582266a",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "033d38bbda39e061ea840fa5ea9a73951e542c310cad9880a12974f7290a31ed",
-    "size": 7793640
+    "sha256": "dabd537dd760cbfdac2036d99db6ea011cec593a97e20c731fecb9c885d9673e",
+    "size": 8845110
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "228 unresolved source symbols",
+    "186 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 166,
+  "compiled_translation_units": 169,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 62,
-  "unresolved_symbols": 228,
+  "unresolved_symbols": 186,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 223,
+    "reviewed FAR_BSS definition and compatible consumer views": 181,
     "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 189,
@@ -4112,6 +4112,363 @@
           "length": 16,
           "count": 16,
           "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-preparestrings-string-pointers",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-preparestrings-string-pointers.c",
+        "sha256": "5e57ca8ffae57d5c31840b96eb452a2b732a58be065119a1c89c057c1a4f4ac7",
+        "size": 371
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\STRREST.OBJ",
+        "sha256": "61034b300305f1d45a3e03b84ccda02c53084a80224812e1ca847ea3f2e7d96c",
+        "size": 427
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_020A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0218",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_021C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0234",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_023A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_034C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_046C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_106E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1078",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1086",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1096",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10A8",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10B4",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:yard-init-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\yard-init-state.c",
+        "sha256": "60f4ce38198c183332dda8b20d23af5d502c21f8c405ad8d6176cbe8d486464a",
+        "size": 651
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\YARDISCL.OBJ",
+        "sha256": "7096600e61d7da9e21513f116eb39e6d56c962f6ee3496a478eb0ff370c9997c",
+        "size": 645
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0220",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_107E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_109C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0202",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_022C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_023E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0244",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0246",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0364",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_036E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_046A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0470",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_047A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04BE",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04C6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04E4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0506",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0624",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_07C2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_105C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1066",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_108C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10A0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10B0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10BC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:yard-animation-arrays",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\yard-animation-arrays.c",
+        "sha256": "e2c5687ed2ced3628158b66107c4c7d791334fdd7605480e7df623bd8a17ad34",
+        "size": 108
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\YARDARR.OBJ",
+        "sha256": "ef7838af0edcd0636388de6ba4958c4fe07f0226fe7453ec7f6c9e0899673d1d",
+        "size": 265
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0334",
+          "kind": "far",
+          "length": 24,
+          "count": 12,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_38CA",
+          "kind": "far",
+          "length": 30,
+          "count": 15,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_38E8",
+          "kind": "far",
+          "length": 34,
+          "count": 17,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_390A",
+          "kind": "far",
+          "length": 34,
+          "count": 17,
+          "element_size": 2
         }
       ],
       "publics": [],
@@ -8609,8 +8966,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "533dd2dd627836023a69fcd877f5efd382562ae74ee37fe98e7dbd6333ec363c",
-      "size": 69104
+      "sha256": "04c30f8ee8842c8a8dae3589e716fbbeb122de15511e06c05ff8551c8202f08a",
+      "size": 69441
     },
     {
       "path": "tools\\compiler.py",
@@ -8633,9 +8990,14 @@
       "size": 4254
     },
     {
+      "path": "tools\\dos_storage_contracts.py",
+      "sha256": "2c48963d324c3fc70e74b6f8cb36dd4435f1085e980ed3c585c4e091c286da9b",
+      "size": 18607
+    },
+    {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "2c5cdee627aeca70c737fdc7faf4f31868f25c2e05e0eae8868905ea7ac82a72",
-      "size": 145776
+      "sha256": "4352bb606366ab8d9c0d9c560b558b06e5ba7c9464a1c7d28b40b1435860fe87",
+      "size": 152438
     },
     {
       "path": "tools\\farbss.py",
@@ -8650,19 +9012,19 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v23-event.log",
-      "sha256": "915fdf0c8fa1844c7c7cea56043375fef9108de41f211bee4552622b4f529f49",
-      "size": 5638
+      "path": "build/source-only-dos-run-v24.log",
+      "sha256": "cfb7873af885ec228c322db2b84109f5dedb23bb9506d39d877b315439976456",
+      "size": 5786
     },
     {
-      "path": "build/source-only-dos-tests-all-v23-event.log",
-      "sha256": "a2fd795849300974fb5faa803d2ae960f059284604676ff54bd121f02ca57f9e",
-      "size": 622
+      "path": "build/source-only-dos-tests-all-v24.log",
+      "sha256": "c8c0cd5af9b7d03b4cd2fe649cd8ffb3fb4541814b9c0aed5ff4593865acb823",
+      "size": 31456
     },
     {
-      "path": "build/source-only-dos-validation-v23-event.log",
-      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
-      "size": 4752
+      "path": "build/source-only-dos-validation-v24.log",
+      "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
+      "size": 4736
     }
   ],
   "historical_validation": "PASS",
@@ -8670,6 +9032,43 @@
     "path": "build/source-only-dos-gates-v23-event.log",
     "sha256": "abfd9f15fe97550246fc6e1fa7b5ba7b7d3b5614d136aad88aa9374d07945861",
     "size": 207
+  },
+  "mandatory_evidence_gates_v24": {
+    "path": "build/source-only-dos-gates-v24.log",
+    "sha256": "f955b83da0000f73a60185044127347d9ab7a652a392c4a631142378933657e2",
+    "size": 207
+  },
+  "v24_owner_bindings": [
+    {
+      "path": "work/source-only-dos/remaining-preparestrings-string-pointers-bindings-v1.json",
+      "sha256": "a5ef25ce8e9419e777ca02775b89c6dc449dddbd85d871d192f574c123f656ae",
+      "size": 42841
+    },
+    {
+      "path": "work/source-only-dos/yard-init-state-bindings-v1.json",
+      "sha256": "dcd6f2c14b6fdc065e0e32bdddce4b1c99156621b3faec02244d05cbcd250944",
+      "size": 44586
+    },
+    {
+      "path": "work/source-only-dos/yard-animation-arrays-bindings-v1.json",
+      "sha256": "fc04ba93ca7748224abd539f697efa73784ec01c96f1068b08987f7dbf6b8a19",
+      "size": 41377
+    }
+  ],
+  "storage_admission_v24": {
+    "path": "work/source-only-dos/storage-admission-v24/root-admission.md",
+    "sha256": "2a275485f1c46b3ffa9ab671f90156a3ce47fdbae1831342b580bd9168083eae",
+    "size": 3591
+  },
+  "storage_raw_review_v24": {
+    "path": "build/source-only-dos-raw-review-v24.log",
+    "sha256": "33e29aeb9d58a5923b41464da810aaf500a96bc111056c4a5d8b58f4d07bc493",
+    "size": 331
+  },
+  "storage_fresh_compile_v24": {
+    "path": "build/source-only-dos-fresh-providers-v24.log",
+    "sha256": "d9154aac428ca0894311f155551fa9e7975eb94014e1fdd200b5b606072bb1ee",
+    "size": 244
   },
   "event_records_binding_v23": {
     "path": "work/source-only-dos/event-records-bindings-v1.json",
@@ -8691,6 +9090,6 @@
     "sha256": "6287dd81c46522585b0033322ae6271e0b1f1158c3e850e8d02fdd6d2a54f07b",
     "size": 91
   },
-  "source_only_tests": "50 targeted tests included in 364 repository tests PASS (2 skips)",
+  "source_only_tests": "51 targeted tests included in 365 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

@@ -1,0 +1,862 @@
+{
+  "schema": "simant-root-owner-acceptance-v24",
+  "root_reviewed": true,
+  "module": "source-owned:remaining-preparestrings-string-pointers",
+  "candidate_sha256": "94736cc423e620781304d910f70f576b1f84e0b4508b4632a28b6e51b3926cb9",
+  "source_count": 156,
+  "strict_selection_pins": 30,
+  "production_basename": "STRREST",
+  "production_source": {
+    "path": "work/source-only-dos/providers/remaining-preparestrings-string-pointers.c",
+    "sha256": "5e57ca8ffae57d5c31840b96eb452a2b732a58be065119a1c89c057c1a4f4ac7",
+    "size": 371
+  },
+  "fresh_production_compile": "PASS: exact natural communals; no live code/data/publics/fixups",
+  "full_run_link_map_cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_far_pointer_halves_zero_and_write",
+      "raw": {
+        "hex": "504153530d0a",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/typed_far_pointer_halves_zero_and_write/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/typed_far_pointer_halves_zero_and_write/RUN.LOG",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/typed_far_pointer_halves_zero_and_write/LINK.LOG",
+        "sha256": "8069ce4be1bc299cc68b5f2714cebeb73e1441573e5ef908845ab8f0e72cfc8a",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/typed_far_pointer_halves_zero_and_write/PROBE.MAP",
+        "sha256": "54264f94c8de1be10104b071da0ffe3865b209e50325b07acbff1edcde798763",
+        "size": 13303,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "independent_BYTE_pointer_storage_roundtrip",
+      "raw": {
+        "hex": "504153530d0a",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/independent_BYTE_pointer_storage_roundtrip/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/independent_BYTE_pointer_storage_roundtrip/RUN.LOG",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/independent_BYTE_pointer_storage_roundtrip/LINK.LOG",
+        "sha256": "6717e32eefc041aa31bdfa65ab177ae7c828b957c49d6226c10bf07e6b10afd1",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/independent_BYTE_pointer_storage_roundtrip/PROBE.MAP",
+        "sha256": "8e9d4d092a37cfcc95a26c675a5d64b18b657b2e7bfaec11eb6e0c9473d6c979",
+        "size": 13501,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_owner_typed_zero_contrast",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_typed_zero_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_typed_zero_contrast/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_typed_zero_contrast/LINK.LOG",
+        "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_typed_zero_contrast/PROBE.MAP",
+        "sha256": "7c0b2849be2ea5e318c804ace8b0a83af45c2b99fb8530d35e80c1442598c82b",
+        "size": 12256,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_owner_BYTE_zero_contrast",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_BYTE_zero_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_BYTE_zero_contrast/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_BYTE_zero_contrast/LINK.LOG",
+        "sha256": "8069ce4be1bc299cc68b5f2714cebeb73e1441573e5ef908845ab8f0e72cfc8a",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/initialized_nonzero_owner_BYTE_zero_contrast/PROBE.MAP",
+        "sha256": "de06032b4ce6dfbac6c1701906d492742a530790bf64279d00587a4b7cfc0373",
+        "size": 12256,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_near_outer_pointer_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_outer_pointer_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_outer_pointer_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_outer_pointer_view/LINK.LOG",
+        "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_outer_pointer_view/PROBE.MAP",
+        "sha256": "a72c9ea8b5d8e26fd64fb584e5c84dd40520bdff9d105e72ec39f607fa15c24e",
+        "size": 12255,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_near_row_pointer_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_row_pointer_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_row_pointer_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_row_pointer_view/LINK.LOG",
+        "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_near_row_pointer_view/PROBE.MAP",
+        "sha256": "95fcdbc1851eec94e26a82175bc8ff30a788a6a33425d0333477630006e6d2f8",
+        "size": 12255,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_pointer_depth_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_pointer_depth_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_pointer_depth_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_pointer_depth_view/LINK.LOG",
+        "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_pointer_depth_view/PROBE.MAP",
+        "sha256": "c66d24eb501b8f10503c284f8fc6e0f727e5039c69075c78f3451fdf00c904e7",
+        "size": 12255,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_eight_byte_array_extent_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_eight_byte_array_extent_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 153
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_eight_byte_array_extent_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_eight_byte_array_extent_view/LINK.LOG",
+        "sha256": "13d9d8e1365fa7004bea15f37f7a93daea9e9ecd71f07217bc3df46ece15afd3",
+        "size": 493,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_eight_byte_array_extent_view/PROBE.MAP",
+        "sha256": "79530d9697747c75153647a9561ebb4c2fd593ca50feea1697ca073c4130b2e3",
+        "size": 12255,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_plus2_shifted_base_alias",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_plus2_shifted_base_alias/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 166
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 166
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_plus2_shifted_base_alias/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_plus2_shifted_base_alias/LINK.LOG",
+        "sha256": "69082838cdbb8547cfcb53744117f59ef06deeb7cde9ba8c27dd4842974818b8",
+        "size": 1247,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink400/wrong_plus2_shifted_base_alias/PROBE.MAP",
+        "sha256": "983620c98080cb33d3da768c58d6146f9db95fb7046639a14bd2d31b096259cc",
+        "size": 13425,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_far_pointer_halves_zero_and_write",
+      "raw": {
+        "hex": "504153530d0a",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/typed_far_pointer_halves_zero_and_write/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/typed_far_pointer_halves_zero_and_write/RUN.LOG",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/typed_far_pointer_halves_zero_and_write/LINK.LOG",
+        "sha256": "07a0855937290d916fc544ad01da5c93d824bbf8baad268f452cf4b4ae706e77",
+        "size": 1185,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/typed_far_pointer_halves_zero_and_write/PROBE.MAP",
+        "sha256": "9f15e21ce1f329f19f2635892fccd0e8d05909a46992a4b8d2c054a54759e389",
+        "size": 14486,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "independent_BYTE_pointer_storage_roundtrip",
+      "raw": {
+        "hex": "504153530d0a",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/independent_BYTE_pointer_storage_roundtrip/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/independent_BYTE_pointer_storage_roundtrip/RUN.LOG",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/independent_BYTE_pointer_storage_roundtrip/LINK.LOG",
+        "sha256": "572e14b130b38d3c5d868b7ea5abc060e088c92727df494acfd77f20dc605fda",
+        "size": 1185,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/independent_BYTE_pointer_storage_roundtrip/PROBE.MAP",
+        "sha256": "d5447095fe7cfe1d8697d2546f4c06a7b2ea80faa60bd54513bb11ce1b4827ea",
+        "size": 14684,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_owner_typed_zero_contrast",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_typed_zero_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_typed_zero_contrast/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_typed_zero_contrast/LINK.LOG",
+        "sha256": "120f6dc474a07cacdfcb735419369197e8e105bad1a574f3062ff994b150802c",
+        "size": 1185,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_typed_zero_contrast/PROBE.MAP",
+        "sha256": "cb714e6383e154bd84c8c1ce1eae4cc125111fa92d0a0239982a00fa6cb9497c",
+        "size": 13439,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_owner_BYTE_zero_contrast",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_BYTE_zero_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_BYTE_zero_contrast/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_BYTE_zero_contrast/LINK.LOG",
+        "sha256": "c75dd9f24759de2848fcd419e86327c6617277707090ccae54c5439fb9fe08d5",
+        "size": 1185,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/initialized_nonzero_owner_BYTE_zero_contrast/PROBE.MAP",
+        "sha256": "d2ecbda203ab129bbd0b70c14fa2b25852e5ab7088ac5d4e9cf41f3b53f13a8f",
+        "size": 13439,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_near_outer_pointer_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_outer_pointer_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_outer_pointer_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_outer_pointer_view/LINK.LOG",
+        "sha256": "c896309e9fcde0b439b90775b641b93f7a6841a63935a060d3bdd7ecdd3a3ac6",
+        "size": 1184,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_outer_pointer_view/PROBE.MAP",
+        "sha256": "f65dc9cfee6e0817be9aa137b6d17355e5784e5bfab3d13542a80f8e235a5701",
+        "size": 13438,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_near_row_pointer_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_row_pointer_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_row_pointer_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_row_pointer_view/LINK.LOG",
+        "sha256": "c896309e9fcde0b439b90775b641b93f7a6841a63935a060d3bdd7ecdd3a3ac6",
+        "size": 1184,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_near_row_pointer_view/PROBE.MAP",
+        "sha256": "3f7114e56b92924ec0f7520daac77e0e4144acce82d0c63b23367825717dfb1d",
+        "size": 13438,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_pointer_depth_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_pointer_depth_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_pointer_depth_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_pointer_depth_view/LINK.LOG",
+        "sha256": "c896309e9fcde0b439b90775b641b93f7a6841a63935a060d3bdd7ecdd3a3ac6",
+        "size": 1184,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_pointer_depth_view/PROBE.MAP",
+        "sha256": "521e4810b78dabece63adcf50adb69b22644c1b3a0c64cecdd8a52cd220d184e",
+        "size": 13438,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_eight_byte_array_extent_view",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_eight_byte_array_extent_view/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 168
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_eight_byte_array_extent_view/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_eight_byte_array_extent_view/LINK.LOG",
+        "sha256": "3f57ead1d7499cea6dfdbb3c7b824bc19578c0d27300d5f3b1017cafe57921e7",
+        "size": 1184,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_eight_byte_array_extent_view/PROBE.MAP",
+        "sha256": "4e26ddf7da9008456e9bf5ef6c20aea36a36f7733bb3a89feec347766c9bdf07",
+        "size": 13438,
+        "role": "probe.map"
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_plus2_shifted_base_alias",
+      "raw": {
+        "hex": "4641494c0d0a",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "artifact_pin": {
+          "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_plus2_shifted_base_alias/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6,
+          "role": "run.log"
+        }
+      },
+      "map_sections": {
+        "Name": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 181
+        },
+        "Value": {
+          "heading_present": true,
+          "heading_count": 1,
+          "public_count": 181
+        }
+      },
+      "run_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_plus2_shifted_base_alias/RUN.LOG",
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "size": 6,
+        "role": "run.log"
+      },
+      "link_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_plus2_shifted_base_alias/LINK.LOG",
+        "sha256": "83e270cbeb6206e16de7a88dfe2af723d09bc1930560744b6b171ea66350b424",
+        "size": 1939,
+        "role": "link.log"
+      },
+      "map_pin": {
+        "path": "build/workers/dos_remaining_string_pointer_owners_v22/run-v22/fixtures/rtlink610/wrong_plus2_shifted_base_alias/PROBE.MAP",
+        "sha256": "f12668f1af90f35a3bcc633dd7fc186a4cc2c82837a71fc0463de89b86a27564",
+        "size": 14608,
+        "role": "probe.map"
+      }
+    }
+  ],
+  "source_extent_basis": "PrepareStrings owns each four-byte StrList far global; table payload extents remain separate",
+  "limits": "Storage ownership only. Historical COMDEF producer/order/placement, first-use game lifecycle, resource/index domains and malformed LoadGame remain unclaimed.",
+  "original_game_bytes_used": 0,
+  "support_review_pins": [
+    {
+      "path": "work/source-only-dos/storage-admission-v24/strings/worker-candidate.json",
+      "sha256": "94736cc423e620781304d910f70f576b1f84e0b4508b4632a28b6e51b3926cb9",
+      "size": 342126
+    },
+    {
+      "path": "work/source-only-dos/storage-admission-v24/strings/root-review-facts-v24.json",
+      "sha256": "f342332071312eeeb2a2f25ca0d87b550acc062b535f73460548f1573e7d8f5f",
+      "size": 158085
+    },
+    {
+      "path": "work/source-only-dos/storage-admission-v24/strings/review-v24.md",
+      "sha256": "2a0b737e3b8e5555141fd9434c9b075e6630ce7306f4d05636b661e4156d9d9f",
+      "size": 5461
+    },
+    {
+      "path": "work/source-only-dos/storage-admission-v24/strings/verify-string-root-support-v24.py",
+      "sha256": "6b397aec715b74646470e560dcebd394bcd789a3ba112d6eda05ba280b45bf0c",
+      "size": 34454
+    },
+    {
+      "path": "work/source-only-dos/storage-admission-v24/strings/historical-probe.py",
+      "sha256": "39f369dc61cb316f6749ffc574a105e43e7983d3275ca94f28d7a2504b4eb8eb",
+      "size": 36710
+    },
+    {
+      "path": "work/source-only-dos/providers/remaining-preparestrings-string-pointers.c",
+      "sha256": "5e57ca8ffae57d5c31840b96eb452a2b732a58be065119a1c89c057c1a4f4ac7",
+      "size": 371
+    }
+  ]
+}
