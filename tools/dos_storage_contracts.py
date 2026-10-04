@@ -1,4 +1,4 @@
-"""Read-only validator for root-authored v24 storage-contract candidates.
+"""Read-only validator for independently reviewed storage-contract evidence.
 
 The JSON contract is evidence; policy is the independent root literal.  This
 module reads only those two JSON documents.  It never opens pinned binaries,
@@ -124,7 +124,13 @@ def validate(contract: dict[str, Any], policy: dict[str, Any]) -> int:
     need(canon(contract["communals"]) == canon(policy["communals"]), "provider communal layout differs from root literal")
     required = policy["required_cases"]
     need(contract["required_cases"] == required, "required case marker matrix differs from root literal")
-    need(set(required.values()) == {"PASS", "FAIL"}, "case matrix must contain positive and negative controls")
+    outcomes = policy.get("control_outcomes", required)
+    need(set(outcomes) == set(required) and set(outcomes.values()) == {"PASS", "FAIL"},
+         "case matrix must contain independently classified positive and negative controls")
+    raw_text = policy.get("raw_text", {})
+    raw_patterns = policy.get("raw_patterns", {})
+    need(set(raw_text) | set(raw_patterns) <= set(required) and not set(raw_text) & set(raw_patterns),
+         "raw policy has unknown or duplicate cases")
     linkers = policy["linkers"]
     need(linkers == ["rtlink400", "rtlink610"], "policy must use the reviewed rtlink400/rtlink610 pair")
     inputs = contract["inputs"]
@@ -149,9 +155,17 @@ def validate(contract: dict[str, Any], policy: dict[str, Any]) -> int:
         need(row.get("expected") == marker and row.get("actual") == marker,
              f"{key}: expected/actual marker mismatch")
         raw = row.get("raw", {})
-        need(raw.get("hex") == (marker + "\r\n").encode("ascii").hex(),
-             f"{key}: raw bytes are not the full CRLF marker")
-        raw_bytes = bytes.fromhex(raw["hex"])
+        try:
+            raw_bytes = bytes.fromhex(raw.get("hex", ""))
+            raw_ascii = raw_bytes.decode("ascii")
+        except (ValueError, UnicodeError):
+            raise GateError(f"{key}: malformed full raw output")
+        if key[1] in raw_patterns:
+            need(re.fullmatch(raw_patterns[key[1]], raw_ascii) is not None,
+                 f"{key}: full raw output differs from independent pattern")
+        else:
+            need(raw_ascii == raw_text.get(key[1], marker + "\r\n"),
+                 f"{key}: raw bytes are not the complete expected CRLF output")
         digest = hashlib.sha256(raw_bytes).hexdigest()
         need(raw.get("sha256") == digest and raw.get("size") == len(raw_bytes), f"{key}: raw hash/size mismatch")
         pin = raw.get("artifact_pin", {})
@@ -166,7 +180,7 @@ def validate(contract: dict[str, Any], policy: dict[str, Any]) -> int:
         need(row.get("clean") is True and row.get("linker_diagnostics") == [] and
              row.get("linker_produced_executable") is True and row.get("linker_produced_map") is True,
              f"{key}: clean link metadata mismatch (no linker exit is inferred)")
-        owners = policy["owners"]
+        owners = policy.get("case_owners", {}).get(key[1], policy["owners"])
         need(same_names(row.get("expected_owner_publics"), owners), f"{key}: expected owner list mismatch")
         need(same_names(row.get("owner_publics_found"), owners), f"{key}: found owner list mismatch")
         maps = row.get("map_sections", {})

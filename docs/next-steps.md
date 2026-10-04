@@ -8,11 +8,11 @@ reviewed behavioral bodies, followed by DOSBox-X integration checks and human
 acceptance. Earlier historical-link and SDL3 next actions below are retained
 research history and do not supersede this priority.
 
-**Current SOURCE_ONLY_DOS checkpoint (v24, 2026-10-04):** the strict static audit covers all 29
+**Current SOURCE_ONLY_DOS checkpoint (v25, 2026-10-04):** the strict static audit covers all 29
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The v24 source-only build compiles 127 canonical TUs plus 42 data-only
+unresolved. The v25 source-only build compiles 127 canonical TUs plus 51 data-only
 providers. The seven-slot input queue, reviewed FAR word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
@@ -42,14 +42,20 @@ Thirteen remaining PrepareStrings pointer globals, 25 yard scalars and four
 yard animation arrays now have reviewed natural source owners. The root reopened
 the full compiler objects, maps and positive/negative runs under both RTLink
 versions; complete storage-control matrices are mandatory at link preflight.
-There are 186 missing data imports (181 FAR_BSS and five
+Nine more cohorts now own four balloon deadlines, four population vectors, an
+experiment coordinate pair, the 45-slot clip Handle table, two floor/task words,
+four UI geometry objects, and 53 ant/world/history objects. Root checked actual
+compiler controls, complete original stdout and full public tables under both
+RTLinks; unused-DEFINE warning fixtures were replaced with clean runs.
+There are 115 missing data imports (110 FAR_BSS and five
 storage/reachability cases), 62 functional data-disposition bytes (113 historical bytes) and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is
 `work/source-only-dos/current-intake.json`; exact canonical ownership is unchanged.
 
 Next ownership work is bounded: the remaining FAR_BSS owners, the window-handle table's
-real extent, and the remaining numeric bases. The window-table audit
+real extent, and the remaining numeric bases. The clip Handle table is owned;
+the separate window-handle, draw-hook, offset and color tables remain open. Their audit
 found no source cap or original owner extent; adjacent arrays/runtime commons do
 not close it. The g_5A9C storage/initializers and S01's `8ED8h` base remain distinct audit
 items. The database audit also found a real unchecked slot `-1` path if `Punt`

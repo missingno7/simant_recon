@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "582266a",
+  "source_only_base_checkpoint": "b2ff35c",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "dabd537dd760cbfdac2036d99db6ea011cec593a97e20c731fecb9c885d9673e",
-    "size": 8845110
+    "sha256": "56ff060691f127e5d5836394ac126eb91097f07ed57334f6eb279c83f7e5e890",
+    "size": 12871380
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "186 unresolved source symbols",
+    "115 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 169,
+  "compiled_translation_units": 178,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,12 +39,12 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 62,
-  "unresolved_symbols": 186,
+  "unresolved_symbols": 115,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 181,
+    "reviewed FAR_BSS definition and compatible consumer views": 110,
     "source storage/reachability investigation": 5
   },
-  "symbolic_aliases": 189,
+  "symbolic_aliases": 191,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -4469,6 +4469,678 @@
           "length": 34,
           "count": 17,
           "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:balloon-deadline-timers",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\balloon-deadline-timers.c",
+        "sha256": "e9b3d73a57ce9442bc51ab3b839bd960ea00a6f65f837d4bd7c769ef532599f7",
+        "size": 92
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\BLNTMR.OBJ",
+        "sha256": "e87d094e5b48f800a9b89ad204d1e50dc767b7c3fa8246b28773e95e6fd86dfe",
+        "size": 263
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_050C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_059A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0732",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_07C4",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:experiment-anchor",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\experiment-anchor.c",
+        "sha256": "b9d65fc35f1cd8d069f4b57b2f44771ff08fa10c403ee4dc9ed7e2097e99e35d",
+        "size": 190
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\EXPANCH.OBJ",
+        "sha256": "db0a8decee2cd738d82fbadde37c6e7a6993c7195b23974eadd9a1a150920fcb",
+        "size": 211
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_09FC",
+          "kind": "far",
+          "length": 4,
+          "count": 2,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:window-clip-handles",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\window-clip-handles.c",
+        "sha256": "55690c8a8fed23d230f0af9b4605f32ab23da032be72ab38eeaac8c52619ab8e",
+        "size": 108
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\WCLIPH.OBJ",
+        "sha256": "c8a16afa07acc848c88bf46a4eb3991a22346eacfce9daee947ba82969fb6c48",
+        "size": 209
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_3B60",
+          "kind": "far",
+          "length": 180,
+          "count": 45,
+          "element_size": 4
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-history-words",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-history-words.c",
+        "sha256": "5806da0f9d498afde90de584fb7038419739f30696abd06d07e3e76f6022001b",
+        "size": 503
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\HISTSC25.OBJ",
+        "sha256": "4e0f1d247bdba22c623f4124c3705c7ca8b0990319ea7ba5b5bb16c0d98a07c5",
+        "size": 519
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0EAC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EB4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EF6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EF8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EFA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F06",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F0C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F0E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F10",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F12",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F26",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F2E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F34",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F36",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F3C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F44",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F7A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FC0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:mode-population-vectors",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\mode-population-vectors.c",
+        "sha256": "67be68b136c4d6cbf8ee7d82fc5dcfa7e505682f326b02a560b93c6313325ea4",
+        "size": 102
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\MPVOWNR.OBJ",
+        "sha256": "9c1b4a21f48c45ae02cab9f4cc1c213563a24b1b2227f5542696c51d222abc69",
+        "size": 265
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0B12",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0C2A",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0D40",
+          "kind": "far",
+          "length": 40,
+          "count": 20,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0D72",
+          "kind": "far",
+          "length": 40,
+          "count": 20,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:floor-task-words",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\floor-task-words.c",
+        "sha256": "83824c6ff01de286edd65e26c55105c3a50958b0f581d889963031234349e89b",
+        "size": 33
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\FLRTSK.OBJ",
+        "sha256": "50b24a87684dc0de8048adfa44f280e5a441d5849cb92fc95a76ae7c5ff5585d",
+        "size": 216
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_DROPdir",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_Tindex",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:ui-geometry-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\ui-geometry-state.c",
+        "sha256": "283176f1769968d7db9a0e1d002d54fd566e523120285778bdf1b137e106a85e",
+        "size": 422
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\UIGEO.OBJ",
+        "sha256": "d3d07f90dba659a1ad0ae2e5500e3a67124b022c0d8bf6be8ff76423a75e4103",
+        "size": 261
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_10D2",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_110C",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1104",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_392C",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-world-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-world-state.c",
+        "sha256": "57ed89be36dac0695106d3ffcf7d89cbf8b9ada0d35c85d9938b14507694edbf",
+        "size": 376
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\WRLDSC25.OBJ",
+        "sha256": "4cf7711e19d0c4819cb8ece4dae3d6b530a781268c23dc17ef9bfac41a701946",
+        "size": 501
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0204",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0208",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0210",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0212",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0214",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0226",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0240",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0332",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_037A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0402",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0476",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_047E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0488",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_048E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0492",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_049A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04A4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-ant-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-ant-state.c",
+        "sha256": "53d30a8315c50882c50f857755719eb8c15d9b93c6ecd18d76c69753dc5d9c56",
+        "size": 611
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\ANTSCL25.OBJ",
+        "sha256": "b132cf319683b72649007ddaeebfc014229389dceea5207736aaad10e263239d",
+        "size": 519
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0A02",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0A8A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AA2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AB2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0A06",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0A9C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AA6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0ACA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AD8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AEA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B06",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B08",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0C3A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D68",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D6C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D6E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D70",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0C26",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
         }
       ],
       "publics": [],
@@ -8966,8 +9638,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "04c30f8ee8842c8a8dae3589e716fbbeb122de15511e06c05ff8551c8202f08a",
-      "size": 69441
+      "sha256": "69146455cccd4f108fad163070a75d6ed7e05938f719ebba223def396b4fd7d6",
+      "size": 70105
     },
     {
       "path": "tools\\compiler.py",
@@ -8991,13 +9663,18 @@
     },
     {
       "path": "tools\\dos_storage_contracts.py",
-      "sha256": "2c48963d324c3fc70e74b6f8cb36dd4435f1085e980ed3c585c4e091c286da9b",
-      "size": 18607
+      "sha256": "277adc739b17728a12a1a0c1e13701744dfe7dd246430a8d4de5efce407a2027",
+      "size": 19426
+    },
+    {
+      "path": "tools\\dos_storage_policies_v25.py",
+      "sha256": "d6d69a026135277aa602db7e3dde18382ca1c71c89358c7b94c98e7c70fd7942",
+      "size": 15758
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "4352bb606366ab8d9c0d9c560b558b06e5ba7c9464a1c7d28b40b1435860fe87",
-      "size": 152438
+      "sha256": "6bc6e1d9cb07eba782ab21f3453701777a7ea7a21eedc905a912bec824738275",
+      "size": 164425
     },
     {
       "path": "tools\\farbss.py",
@@ -9012,17 +9689,17 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v24.log",
-      "sha256": "cfb7873af885ec228c322db2b84109f5dedb23bb9506d39d877b315439976456",
-      "size": 5786
+      "path": "build/source-only-dos-run-v25.log",
+      "sha256": "acb0b688b8f53e2c7df19c32a2dc86789b08d0fdabf3c461bb5dd8976b6452a0",
+      "size": 6264
     },
     {
-      "path": "build/source-only-dos-tests-all-v24.log",
-      "sha256": "c8c0cd5af9b7d03b4cd2fe649cd8ffb3fb4541814b9c0aed5ff4593865acb823",
-      "size": 31456
+      "path": "build/source-only-dos-tests-all-v25.log",
+      "sha256": "50d55b1d2f13bd3431dac2114742df02fe183d5e2f18e3fb647aec95c8cf7b63",
+      "size": 624
     },
     {
-      "path": "build/source-only-dos-validation-v24.log",
+      "path": "build/source-only-dos-validation-v25.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
@@ -9070,6 +9747,26 @@
     "sha256": "d9154aac428ca0894311f155551fa9e7975eb94014e1fdd200b5b606072bb1ee",
     "size": 244
   },
+  "storage_admission_v25": {
+    "path": "work/source-only-dos/storage-admission-v25/root-admission.md",
+    "sha256": "56e38eccb302761623f8d092a2b39a99b60b88097db7dd6fc8430be31533b645",
+    "size": 3948
+  },
+  "storage_gates_v25": {
+    "path": "build/source-only-dos-gates-v25.log",
+    "sha256": "86aa47125fe5feedf34615dae0a01e1986b9094f1de0b04a370626a5216b8f32",
+    "size": 207
+  },
+  "storage_raw_review_v25": {
+    "path": "build/source-only-dos-raw-review-v25.log",
+    "sha256": "208d919e0d79f83ec73db534dcf7c2f5b195a6b7e29ec6767e839880356243bb",
+    "size": 880
+  },
+  "storage_fresh_compile_v25": {
+    "path": "build/source-only-dos-fresh-providers-v25c.log",
+    "sha256": "35dd03fcda8c08f0b1ed7938e1151ebacb601a4ab07acc7be3cd392ccc4378f1",
+    "size": 676
+  },
   "event_records_binding_v23": {
     "path": "work/source-only-dos/event-records-bindings-v1.json",
     "sha256": "e46d5aa6f96018e0d16f4e8c401e883a7e9857d151c64a9590bebdafdf80d5a7",
@@ -9090,6 +9787,6 @@
     "sha256": "6287dd81c46522585b0033322ae6271e0b1f1158c3e850e8d02fdd6d2a54f07b",
     "size": 91
   },
-  "source_only_tests": "51 targeted tests included in 365 repository tests PASS (2 skips)",
+  "source_only_tests": "52 targeted tests included in 366 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

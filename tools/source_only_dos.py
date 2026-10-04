@@ -237,6 +237,15 @@ def prepare(out, report):
                      'remaining-preparestrings-string-pointers-bindings-v1.json',
                      'yard-init-state-bindings-v1.json',
                      'yard-animation-arrays-bindings-v1.json',
+                     'balloon-deadline-timers-bindings-v1.json',
+                     'experiment-anchor-bindings-v1.json',
+                     'window-clip-handles-bindings-v1.json',
+                     'remaining-history-words-bindings-v1.json',
+                     'mode-population-vectors-bindings-v1.json',
+                     'floor-task-words-bindings-v1.json',
+                     'ui-geometry-state-bindings-v1.json',
+                     'remaining-world-state-bindings-v1.json',
+                     'remaining-ant-state-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -898,6 +907,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v22_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v23_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v24_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v25_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
@@ -1015,7 +1025,7 @@ def main():
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
                              ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py', 'dos_alignment_debt.py',
-                              'dos_storage_contracts.py')]
+                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py')]
         report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)

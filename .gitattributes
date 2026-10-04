@@ -41,3 +41,6 @@ work/source-only-dos/** -text whitespace=cr-at-eol
 work/source-only-dos/*.log whitespace=cr-at-eol,-blank-at-eof
 # Complete historical review captures preserve their existing trailing lines.
 work/source-only-dos/population-work-arrays-v18/source_views/** whitespace=cr-at-eol,-blank-at-eof
+
+# Retained compiler fixture is hashed with its historical trailing line.
+work/source-only-dos/storage-admission-v25/geometry/historical-probe.c whitespace=cr-at-eol,-blank-at-eof

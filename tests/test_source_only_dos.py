@@ -18,6 +18,53 @@ import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_v25_whole_storage_controls_reject_semantic_and_metadata_drift(self):
+        import copy
+        import hashlib
+        worker = ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            report['runtime_components'] = []
+            tools = compiler.toolchain()['linkers']
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_v25_storage_contracts(report, profile, tools[profile])
+            for module, (key, _) in bindings.V25_STORAGE_CONTRACTS.items():
+                for change in ('review', 'missing-case', 'raw-with-consistent-hash', 'map',
+                               'extra-owner', 'width', 'initializer', 'warning', 'scope', 'tools'):
+                    wrong = copy.deepcopy(report); c = wrong[key]; row = c['cases'][0]
+                    natural = next(o for o in c['compiler_controls'].values() if o['communals'])
+                    if change == 'review': c['root_reviewed'] = False
+                    elif change == 'missing-case': c['cases'].pop()
+                    elif change == 'raw-with-consistent-hash':
+                        raw = bytes.fromhex(row['raw']['hex']) + b'EXTRA\r\n'
+                        digest = hashlib.sha256(raw).hexdigest()
+                        row['raw'].update(hex=raw.hex(), sha256=digest, size=len(raw))
+                        row['raw']['artifact_pin'].update(sha256=digest, size=len(raw))
+                    elif change == 'map': row['public_address_matrix']['Value'].pop(next(iter(row['public_address_matrix']['Value'])))
+                    elif change == 'extra-owner': natural['communals'].append(dict(natural['communals'][0], name='_unproved_object'))
+                    elif change == 'width': natural['communals'][0]['element_size'] += 1
+                    elif change == 'initializer': natural['initialized_data_hex']['invented_DATA'] = '01'
+                    elif change == 'warning': row['linker_diagnostics'] = ['warning wrt0052']
+                    elif change == 'scope': c['game_lifecycle_claimed'] = True
+                    elif change == 'tools': c['inputs'] = []
+                    with self.subTest(module=module, change=change):
+                        with self.assertRaises(ValueError):
+                            bindings.require_v25_storage_contracts(wrong, 'rtlink400', tools['rtlink400'])
+                if report[key]['save_rec_pointer_fixups']:
+                    wrong = copy.deepcopy(report)
+                    wrong[key]['save_rec_pointer_fixups'][0]['encoded_addend'] = '01000000'
+                    with self.assertRaises(ValueError): bindings.require_v25_storage_contracts(wrong, 'rtlink400', tools['rtlink400'])
+            geo = report['ui_geometry_state_contract']
+            self.assertIn(b'ZERO32=', bytes.fromhex(geo['cases'][0]['raw']['hex']))
+            self.assertIn(b'POST32=', bytes.fromhex(geo['cases'][0]['raw']['hex']))
+            # The isolated world backing contrast deliberately links only the
+            # one tested owner. Every complete-provider case still needs 17.
+            world = report['remaining_world_state_contract']
+            self.assertEqual(len(next(r for r in world['cases'] if r['case']=='plus2_independent_saverec_backing')['expected_owner_publics']), 1)
+            self.assertEqual(len(next(r for r in world['cases'] if r['case']=='typed_raw_startup_saverec_pointer32')['expected_owner_publics']), 17)
+
     def test_v24_pointer_and_yard_owners_require_complete_storage_controls(self):
         worker = ROOT/'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

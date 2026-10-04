@@ -113,9 +113,9 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus 24 reviewed data-only
+The current compilation passes all 127 canonical TUs plus 51 reviewed data-only
 providers. Symbol-address joins provide 121
-code aliases and thirteen exact-base data aliases without rewriting objects. Reviewed generated
+code aliases and 70 reviewed data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
 dispatch pointer, S02's save-rectangle flag, and the timer countdown word shared
 with root:208F, plus four sample-channel/volume-table views in the recovered audio
@@ -715,3 +715,32 @@ tests, canonical validation and 24 mandatory evidence gates plus alignment under
 both RTLinks. Historical communal producer/order, string payload extents and
 first-use game lifecycle remain separate questions; no original initializer or
 guessed capacity was admitted.
+
+## v25: deadlines, clip handles and remaining typed state
+
+Nine providers own 69 typed objects and resolve 71 further FAR imports: four
+balloon deadlines, four population vectors, an experiment coordinate pair,
+the 45-slot clip Handle table, floor/task words, UI geometry, and 53
+ant/world/history objects. The ant long owner preserves both signed and unsigned
+views; the two world unsigned long views are accounted for as zero stores.
+Extents come from complete typed operations and source SaveRec spans. See the
+[root admission](../work/source-only-dos/storage-admission-v25/root-admission.md).
+
+Root reopened actual compiler controls, complete stdout and both full public
+sections for 84 component cases under the two RTLinks. Fresh ant fixtures remove
+unused DEFINE warnings. Geometry gates use the original field/pointer dump;
+worker marker sidecars and partial public projections cannot substitute for
+that evidence. The isolated world backing contrast explicitly checks one word;
+all whole-provider cases require all seventeen owners.
+
+Preflight compiles 178 TUs (127 canonical +51 providers), with 115 unresolved
+imports: 110 FAR_BSS and five DGROUP cases. Functional data debt is 62 bytes;
+historical debt remains 113. The five layout gates remain open. All 29 strict
+effective implementations are confirmed, all original-byte counters are zero,
+and the independent link remains refused. Game execution has not run and human
+acceptance is pending.
+
+This boundary passes 366 repository tests (two skips), including 52 source-only
+tests, canonical validation and all 25 mandatory gates plus alignment under
+both RTLinks. Further scalar, UI, balloon-buffer, window and sound candidates
+remain outside these accepted counts until independent root review.

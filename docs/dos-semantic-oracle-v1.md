@@ -5,6 +5,13 @@ reference for portable development on a separate branch. The original inputs
 remain local, hash-locked prerequisites; the tag contains no original executable,
 game resource archives, or historical tool binaries.
 
+This is a semantic freeze. The active milestone is
+`functional-source-oracle-v1`: zero original-byte fallback, zero unresolved
+imports/layout dependencies, an independent RTLink build, DOSBox-X validation
+and comparison, then human acceptance. SDL3 remains paused. The current strict
+audit confirms all 29 effective implementations, including the separately
+reviewed DrawBalloons correction; see [SOURCE_ONLY_DOS](source-only-dos.md).
+
 The simulation/game behavior needed for the port is closed and oracle-backed,
 while some final historical compiler/linker identities remain intentionally
 separate proof debt. Behavioral closure refers to the finite reviewed domains
