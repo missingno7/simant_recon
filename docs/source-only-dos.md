@@ -472,3 +472,42 @@ The boundary checks 41 source-only tests and 314 other repository tests, with
 two skips, plus historical validation. The three source-review documents were
 finalized before the successful boundary; fresh execution receipts retain their
 original tool/probe identities.
+
+## v18: serialized arrays, S01 pattern view and paragraph fill
+
+Two generated-only providers own four 50-byte swarm buffers and two six-word
+population vectors: six objects, 224 bytes. Complete source graphs, typed
+producers/consumers and exact SaveRec views establish the extents, including
+the serialized swarm tails. Fresh MSC objects and both RTLink profiles check
+zero startup, typed access, save views and wrong type, extent and base controls.
+See the [serialized-state admission](../work/source-only-dos/serialized-state-admission-v18.md).
+
+The [S01 admission](../work/source-only-dos/s01-pattern-4220-admission-v18.md)
+replaces one numeric 4220h displacement with a symbolic DGROUP reference to
+the existing pattern-bank view. Whole-object comparison preserves every other
+byte and ordered fixup. The source bounds the index to 76h; shifted-group,
+wrong-frame and +1-base controls pass their expected outcomes under both linkers.
+The wider numeric-address and segment-frame audit remains open.
+
+The [alignment admission](../work/source-only-dos/far-data-paragraph-fill-admission-v18.md)
+discharges 12 bytes as linker paragraph fill after a source-owned 100-byte
+FAR_DATA segment. It adds no storage. Both linkers independently reproduce
+the fill with clean maps; the 112-byte contrast removes it while preserving
+the following FAR_BSS address. Historical ownership debt stays at 113 bytes.
+
+All 156 TUs compile, including 29 typed providers. Missing imports are 288:
+283 FAR_BSS and five DGROUP cases. The original DGROUP inventory still has
+41 of 46 cases resolved. Functional data debt is 66 bytes. All 29 effective
+behavior implementations have strict static confirmation, with no contract-only
+or unresolved substitution. Original-byte input counters remain zero.
+
+The saved sound-state owner and lock/unlock clobber review remain pending;
+the first fatal-path cleanup cannot yet support database or critical-error
+reachability closure. Clip/default-sentinel state, resource bounds and remaining
+fixed-address dependencies also block independent linking. No game executable,
+DOSBox-X game comparison or human acceptance is claimed. SDL3 remains paused.
+
+The boundary passed 44 source-only tests and 314 other repository tests
+(two skips), historical validation, and all 18 required storage/frame gates
+plus the alignment gate under both linker profiles. Runtime fixtures are
+component evidence; they do not constitute execution of the complete game.

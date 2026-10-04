@@ -291,6 +291,28 @@ def review_graphics_binding(binding):
         raise ValueError('unreviewed graphics mask operand site')
 
 
+S01_PATTERN_VIEW_SITE = {
+    'segment': 'S01A_TEXT', 'offsets': [0x5A8], 'count': 1,
+    'target_kind': 'external', 'target': '_g_4220', 'original_value': 0x4220,
+    'frame_kind': 'group', 'frame': 'DGROUP', 'displacement': 0,
+    'encoded_addend': '0000', 's01_pattern_view_operand': True,
+}
+
+
+def review_s01_pattern_view(binding, symbols=None):
+    specs = [s for s in binding.get('relocations', []) if s.get('s01_pattern_view_operand')]
+    if binding.get('s01_pattern_view_operands'):
+        if (binding['module'] != 'S01:3126' or specs != [S01_PATTERN_VIEW_SITE]
+                or binding.get('s01_pattern_view_owner') != PATTERN_BANK_OWNER):
+            raise ValueError('unreviewed S01 pattern-view operand site or owner')
+        if symbols is not None:
+            anchor = symbols['data']['g_4220']
+            if (anchor['seg'], anchor['off']) != (0x55B3, 0x4220):
+                raise ValueError('S01 pattern-view symbol anchor changed')
+    elif specs or binding.get('s01_pattern_view_owner'):
+        raise ValueError('S01 pattern-view operand lacks its closed owner contract')
+
+
 INITIALIZED_PROVIDER_SPECS = {
     'source-owned:graphics-formulas': ('consumer_mask_formulas',
         [('_g_2100', 0, 8), ('_mono_tail_masks', 8, 8), ('_packed_tail_masks', 16, 2)]),
@@ -430,6 +452,7 @@ def review_addresses(binding, module, symbols):
     review_local_frame_sites(binding)
     review_indexed_binding(binding, module, symbols)
     review_graphics_binding(binding)
+    review_s01_pattern_view(binding, symbols)
     scalar_names = set()
     array_names = {}
     if binding.get('scalar_storage'):
@@ -509,7 +532,7 @@ def review_addresses(binding, module, symbols):
         if (placement['seg'], placement['off'] + spec['displacement']) != (anchor['seg'], anchor['off']):
             raise ValueError('local frame source owner conflicts with registry anchor')
     for spec in binding.get('relocations', []):
-        if spec.get('indexed_operand') or spec.get('graphics_mask_operand'):
+        if spec.get('indexed_operand') or spec.get('graphics_mask_operand') or spec.get('s01_pattern_view_operand'):
             continue  # Closed site sets checked above, not speculative registry names.
         if spec.get('pattern_operand'):
             if (symbols['data']['g_41C0']['seg'], symbols['data']['g_41C0']['off'] + 16) != (0x55B3, 0x41D0):
@@ -589,13 +612,14 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({'_g_5A97': 0x5A97})
         addresses.update({name: row[0] for name, row in V15_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V17_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V18_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
             interiors = [(n, s['off'] - anchor['off']) for n, s in symbols['data'].items()
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
-            reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS}
+            reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS, **V18_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -728,7 +752,12 @@ def _require_reviewed_storage_contracts(report, profile, tool, contracts):
 
 def require_v17_storage_contracts(report, profile, tool):
     _require_reviewed_storage_contracts(report, profile, tool, V17_STORAGE_CONTRACTS)
-    for module, (key, _) in V17_STORAGE_CONTRACTS.items():
+    _require_clean_owner_maps(report, profile, V17_STORAGE_CONTRACTS)
+    _require_ant_control_compiler_controls(report)
+
+
+def _require_clean_owner_maps(report, profile, contracts):
+    for module, (key, _) in contracts.items():
         if not any(r['module'] == module for r in report['translation_units']):
             continue
         expected_names = sorted(n for n, _ in PROVIDER_SPECS[module][2])
@@ -741,6 +770,9 @@ def require_v17_storage_contracts(report, profile, tool):
                     or sorted(case.get('expected_owner_publics', [])) != expected_names
                     or sorted(case.get('owner_publics_found_in_map', [])) != expected_names):
                 raise ValueError(f'{module} lacks clean resolved owner maps in its startup contract')
+
+
+def _require_ant_control_compiler_controls(report):
     if any(r['module'] == 'source-owned:ant-ui-control-state' for r in report['translation_units']):
         controls = report.get('ant_ui_control_state_contract', {}).get('compiler_negative_controls', [])
         if (len(controls) != 2 or controls[0].get('name') != 'mode triple shortened to two words'
@@ -1011,6 +1043,35 @@ def require_pattern_bank_contract(report, profile, tool):
         review_pattern_binding(row['source_binding'])
 
 
+def require_s01_pattern_view_contract(report, profile, tool):
+    rows = [r for r in report['translation_units'] if (r.get('source_binding') or {}).get('s01_pattern_view_operands')]
+    if not rows:
+        return
+    from pathlib import Path
+    contract = report.get('s01_pattern_view_contract', {})
+    required = {'group_frame': 'PASS', 'wrong_segment_frame': 'FAIL', 'one_byte_shift': 'FAIL'}
+    cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
+    components = [(str(Path(tool['directory'])/name), digest) for name,digest in tool['files'].items()]
+    components += [(r['path'],r['sha256']) for r in report['runtime_components']]
+    if (len(rows) != 1 or rows[0]['module'] != 'S01:3126'
+            or contract.get('root_reviewed') is not True or contract.get('all_required_checks_pass') is not True
+            or contract.get('owner') != PATTERN_BANK_OWNER
+            or contract.get('sites') != [['S01:3126','S01A_TEXT',0x5A8,'_g_4220']]
+            or contract.get('required_cases') != required or len(cases) != 3
+            or {r['case'] for r in cases} != set(required)
+            or not all(r['passed'] is True and r['actual'] == r['expected'] == required[r['case']]
+                       and r['runner_returncode'] == 0 and r['actual_DS_SS_DGROUP'] is True
+                       and r['dgroup_data_shift'] > 0 and r['map']['passed'] is True
+                       and r.get('linker_diagnostics') == [] and r.get('linker_produced_executable') is True
+                       for r in cases)
+            or any(identities.get(runtime_component_path(path)) != digest for path,digest in components)):
+        raise ValueError('S01 pattern view lacks selected linker/source-owner/frame proof')
+    review_s01_pattern_view(rows[0]['source_binding'])
+    require_pattern_bank_contract(report, profile, tool)
+    require_driver_ss_frame_contract(report, profile, tool)
+
+
 def require_local_frame_contract(report, profile, tool):
     rows = [r for r in report['translation_units'] if (r.get('source_binding') or {}).get('local_reframes')]
     if not rows:
@@ -1071,6 +1132,7 @@ def verify_objects(original, generated, binding):
     review_segment_corrections(binding)
     review_indexed_binding(binding)
     review_graphics_binding(binding)
+    review_s01_pattern_view(binding)
     debug = binding.get('debug_contributions', {})
     for segment, contract in debug.items():
         if (not binding.get('queue_storage') or segment not in ('$$SYMBOLS', '$$TYPES')
@@ -1152,7 +1214,7 @@ def verify_objects(original, generated, binding):
         if spec.get('pattern_operand') and sorted((f['segment'], f['offset']) for f in matches) != [
                 (spec['segment'], offset) for offset in PATTERN_BANK_SITES]:
             raise ValueError('pattern bank relocation location set changed')
-        if (spec.get('indexed_operand') or spec.get('graphics_mask_operand')) and sorted(
+        if (spec.get('indexed_operand') or spec.get('graphics_mask_operand') or spec.get('s01_pattern_view_operand')) and sorted(
                 (f['segment'], f['offset']) for f in matches) != [
                 (spec['segment'], offset) for offset in spec['offsets']]:
             raise ValueError('indexed relocation location set changed')
@@ -1365,3 +1427,39 @@ V17_STORAGE_CONTRACTS = {
         'initialized_nonzero_owner_rejected': 'FAIL_ZERO',
         'unsigned_consumer_is_semantically_different': 'TYPE_NEGATIVE_UNSIGNED_VIEW'}),
 }
+
+# Functional serialized owners: complete source-visible saved spans, no
+# historical COMDEF TU, placement or communal-order claim.
+PROVIDER_SPECS['source-owned:swarm-serialized-buffers'] = ('SWARMOWN', None,
+    (('_fd_50F6_0F46', 50), ('_fd_50F6_0F84', 50), ('_fd_50F6_0FC6', 50), ('_fd_50F6_1008', 50)),
+    'unsigned char far fd_50F6_0F46[50]; unsigned char far fd_50F6_0F84[50]; '
+    'unsigned char far fd_50F6_0FC6[50]; unsigned char far fd_50F6_1008[50];')
+PROVIDER_SPECS['source-owned:population-work-arrays'] = ('POPWORK', None,
+    (('_fd_50F6_0AEC', 12), ('_fd_50F6_0AFA', 12)),
+    'int far fd_50F6_0AEC[6]; int far fd_50F6_0AFA[6];')
+FAR_PROVIDER_MODULES.update({'source-owned:swarm-serialized-buffers', 'source-owned:population-work-arrays'})
+FAR_PROVIDER_WORD_ARRAYS['source-owned:population-work-arrays'] = {'_fd_50F6_0AEC', '_fd_50F6_0AFA'}
+V18_STORAGE_ANCHORS = {
+    '_fd_50F6_0F46': (0x0F46, ('fd_50F6_0F46',)),
+    '_fd_50F6_0F84': (0x0F84, ('fd_50F6_0F84',)),
+    '_fd_50F6_0FC6': (0x0FC6, ('fd_50F6_0FC6',)),
+    '_fd_50F6_1008': (0x1008, ('fd_50F6_1008',)),
+    '_fd_50F6_0AEC': (0x0AEC, ('fd_50F6_0AEC',)),
+    '_fd_50F6_0AFA': (0x0AFA, ('fd_50F6_0AFA',)),
+}
+V18_STORAGE_CONTRACTS = {
+    'source-owned:swarm-serialized-buffers': ('swarm_serialized_buffers_contract', {
+        'zero': 'PASS', 'typed': 'PASS', 'saverec': 'PASS',
+        'wrong_type': 'FAIL', 'wrong_extent': 'FAIL', 'wrong_base': 'FAIL'}),
+    'source-owned:population-work-arrays': ('population_work_arrays_contract', {
+        'typed_SaveRec_alias_positive': 'PASS',
+        'wrong_element_type_same_12_byte_extent': 'REJECTED',
+        'wrong_sixth_word_array_extent': 'REJECTED_GUARD_OVERLAP',
+        'wrong_exact_base_plus_one_word': 'REJECTED',
+        'wrong_SaveRec_count_extent': 'REJECTED'}),
+}
+
+
+def require_v18_storage_contracts(report, profile, tool):
+    _require_reviewed_storage_contracts(report, profile, tool, V18_STORAGE_CONTRACTS)
+    _require_clean_owner_maps(report, profile, V18_STORAGE_CONTRACTS)

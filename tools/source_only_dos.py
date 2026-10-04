@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import compiler
 import csrc
 import dos_source_bindings
+import dos_alignment_debt
 from omf import OmfReader
 
 PAUSED_COMMIT = 'c850830006e0b7d456bb500bf101dd432bbe8ee3'
@@ -172,6 +173,15 @@ def prepare(out, report):
     symbols = json.loads(symbols_raw)
     aliases = identifier_aliases(symbols)
     report['inputs'] += [manifest_pin, registry_pin, symbols_pin]
+    raw, identity = pin(ROOT / 'work/source-only-dos/far-data-paragraph-fill-contract-v1.json')
+    alignment = json.loads(raw)
+    dos_alignment_debt.require_contract(alignment)
+    for item in (alignment['inputs'] + alignment['pinned_tool_inputs'] + alignment['runtime_artifacts']
+                 + [alignment['research_receipt'], alignment['root_admission']]):
+        path = Path(item['path'])
+        report['inputs'].append(pin(path if path.is_absolute() else ROOT / path, item['sha256'])[1])
+    report['inputs'].append(identity)
+    report['far_data_alignment_contract'] = alignment
     bindings = {}
     binding_origins = {}
     providers = []
@@ -203,7 +213,10 @@ def prepare(out, report):
                      'display-mode-selector-bindings-v1.json',
                      'ant-ui-control-state-bindings-v1.json',
                      'ui-resource-scalars-bindings-v1.json',
-                     'terrain-state-words-bindings-v1.json'):
+                     'terrain-state-words-bindings-v1.json',
+                     'swarm-serialized-buffers-bindings-v1.json',
+                     'population-work-arrays-bindings-v1.json',
+                     's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -246,7 +259,9 @@ def prepare(out, report):
                                      and bool(binding.get('segment_corrections')))
                 indexed_extension = (binding['module'] in dos_source_bindings.INDEXED_OPERANDS
                                      and binding.get('indexed_address_operands') is True)
-                if pattern_extension or local_extension or segment_extension or indexed_extension:
+                s01_view_extension = (binding['module'] == 'S01:3126'
+                                      and binding.get('s01_pattern_view_operands') is True)
+                if pattern_extension or local_extension or segment_extension or indexed_extension or s01_view_extension:
                     # This third layer extends the effective binding, including the
                     # previously admitted frames. Pin its complete provenance and
                     # content rather than silently replacing either frozen packet.
@@ -261,7 +276,7 @@ def prepare(out, report):
                         raise ValueError('DOS layout extension has a different effective control binding')
                 elif not base or not (binding.get('reframes') or scalar_extension or water_extension):
                     raise ValueError('duplicate DOS binding module')
-                if not (pattern_extension or local_extension or segment_extension or indexed_extension):
+                if not (pattern_extension or local_extension or segment_extension or indexed_extension or s01_view_extension):
                     base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
                     if previous not in json.loads(base_raw)['bindings']:
                         raise ValueError('DOS frame extension has a different source/control binding')
@@ -286,6 +301,9 @@ def prepare(out, report):
                     combined['array_storage'] = binding['array_storage']
                 if indexed_extension:
                     combined['indexed_address_operands'] = True
+                if s01_view_extension:
+                    combined['s01_pattern_view_operands'] = True
+                    combined['s01_pattern_view_owner'] = binding['s01_pattern_view_owner']
                 binding = combined
             bindings[binding['module']] = binding
             binding_origins.setdefault(binding['module'], []).append(binding_pin['path'].replace('\\', '/'))
@@ -599,6 +617,13 @@ def audit_layout(report):
             for module, key in [('root:1B4E', 'pattern_bank_owner'), ('S00:31AD', 'pattern_bank_operands')]) else 'UNRESOLVED',
         'operand_count': 3, 'owner': dos_source_bindings.PATTERN_BANK_OWNER,
         'reason': 'Sixteen accepted source records own the 256-byte bank. Selector and phase arithmetic bounds every read. A zero-byte public and exactly three symbolic DGROUP operands remove the historical numeric base; original table bytes and unrelated fixups are preserved.'}, {
+        'id': 's01-pattern-view-4220',
+        'status': 'SOURCE_BOUND' if any((r.get('source_binding') or {}).get('s01_pattern_view_operands')
+            for r in report['translation_units']) else 'UNRESOLVED',
+        'site': ['S01:3126', 'S01A_TEXT', 0x5A8, '_g_4220'],
+        'owner': '_g_41D0', 'owner_bytes': 256, 'view_offset': 80, 'max_displacement': 0x76,
+        'reason': 'Source initialized high byte and masked overlapping word producer bound the phase reads within the existing bank. Scoped DGROUP frame and whole ordered-object proof remove one historical literal.',
+        'scope_limit': 'Reviewed normal/interrupt SS routes and direct writer closure only; the broader numeric/frame audit remains unresolved.'}, {
         'id': 'driver-external-ss-frames',
         'status': 'SOURCE_BOUND' if all(any(r['module'] == module and len(
             (r.get('source_binding') or {}).get('reframes', [])) == count
@@ -628,6 +653,14 @@ def accept_binding_checks(report):
     providers = [r for r in report['translation_units'] if r.get('storage_provider')]
     if (bound and all(r.get('binding_verification', {}).get('status') == 'PASS' for r in bound)
             and all(r.get('provider_verification', {}).get('status') == 'PASS' for r in providers)):
+        if (not report.get('resolved_segment_alignment') and any(
+                r.get('module') == 'root:1F80' and 'object' in r for r in report['translation_units'])):
+            proof = dos_alignment_debt.verify_source_object(ROOT, report)
+            debt = [s for s in report['unresolved_data'] if s['id'] == 'far_data']
+            if len(debt) != 1 or debt[0]['size'] != 12:
+                raise ValueError('FAR_DATA alignment debt inventory changed')
+            report['resolved_segment_alignment'] = [dict(proof, id='far_data', size=12)]
+            report['unresolved_data'] = [s for s in report['unresolved_data'] if s['id'] != 'far_data']
         for dependency in report['layout_dependencies']:
             if dependency['status'] == 'SOURCE_BOUND':
                 dependency['status'] = 'RESOLVED'
@@ -768,6 +801,9 @@ def link_units(out, report, profile):
     link_dir.mkdir()
     tc = compiler.toolchain()
     tool = tc['linkers'][profile]
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    dos_alignment_debt.require_contract(report['far_data_alignment_contract'], profile, components)
     dos_source_bindings.require_history_startup_contract(report, profile, tool)
     dos_source_bindings.require_scalar_startup_contracts(report, profile, tool)
     dos_source_bindings.require_array_startup_contracts(report, profile, tool)
@@ -776,12 +812,14 @@ def link_units(out, report, profile):
     dos_source_bindings.require_additional_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v15_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v17_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v18_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
     dos_source_bindings.require_dgroup_rect_frame_contract(report, profile, tool)
     dos_source_bindings.require_driver_ss_frame_contract(report, profile, tool)
     dos_source_bindings.require_pattern_bank_contract(report, profile, tool)
+    dos_source_bindings.require_s01_pattern_view_contract(report, profile, tool)
     dos_source_bindings.require_local_frame_contract(report, profile, tool)
     dos_source_bindings.require_initialized_and_indexed_contracts(report, profile, tool)
     contract = report.get('linker_alias_contract', {})
@@ -891,7 +929,7 @@ def main():
               'status': 'INCOMPLETE', 'errors': []}
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
-                             ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py')]
+                             ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py', 'dos_alignment_debt.py')]
         report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)

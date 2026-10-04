@@ -14,9 +14,147 @@ import compiler
 import dos_source_bindings as bindings
 from omf import OmfReader
 import source_only_dos as dos
+import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_s01_pattern_view_adds_only_the_closed_fixup_in_alternate_output(self):
+        worker=ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report={'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            manifest,symbols=dos.prepare(Path(directory),report)
+            row=next(r for r in report['translation_units'] if r['module']=='S01:3126')
+            binding=row['source_binding']
+            self.assertTrue(binding['s01_pattern_view_operands'])
+            self.assertTrue((ROOT/row['generated_source']['path']).is_relative_to(Path(directory)))
+            before=(ROOT/row['binding_control_source']['path']).read_text(encoding='latin1')
+            after=(ROOT/row['generated_source']['path']).read_text(encoding='latin1')
+            def assemble(text):
+                result=compiler.assemble(text,row['profile'],row['flags'],basename=row['basename'])
+                self.assertTrue(result.ok,result.log)
+                return OmfReader(communals=True).read(result.obj)
+            control=assemble(before)
+            self.assertEqual(bindings.verify_objects(control,assemble(after),binding)['status'],'PASS')
+            operand='mov bh, byte ptr ss:[bx+_g_4220]'
+            self.assertEqual(after.count(operand),1)
+            for text in (after.replace(operand,operand.replace('_g_4220','_g_4220+1')),
+                         after.replace('assume ss:DGROUP\n\t'+operand,'assume ss:_DATA\n\t'+operand)):
+                self.assertNotEqual(text,after)
+                with self.assertRaises(ValueError): bindings.verify_objects(control,assemble(text),binding)
+            wrong=json.loads(json.dumps(binding))
+            site=next(s for s in wrong['relocations'] if s.get('s01_pattern_view_operand'))
+            site['offsets']=[0x5A9]
+            with self.assertRaisesRegex(ValueError,'unreviewed S01'):
+                bindings.review_addresses(wrong,manifest['modules'][row['module']],symbols)
+            report['runtime_components']=[]
+            tc=compiler.toolchain()
+            for profile in ('rtlink400','rtlink610'):
+                bindings.require_s01_pattern_view_contract(report,profile,tc['linkers'][profile])
+            for change in ('root','site','missing','frame','map','warning'):
+                wrong=json.loads(json.dumps(report)); c=wrong['s01_pattern_view_contract']
+                if change=='root': c['root_reviewed']=False
+                elif change=='site': c['sites'][0][2]+=1
+                elif change=='missing': c['cases'].pop(0)
+                elif change=='frame': c['cases'][0]['actual_DS_SS_DGROUP']=False
+                elif change=='map': c['cases'][0]['map']['passed']=False
+                else: c['cases'][0]['linker_diagnostics']=['Unresolved external']
+                with self.assertRaisesRegex(ValueError,'S01 pattern view'):
+                    bindings.require_s01_pattern_view_contract(wrong,'rtlink400',tc['linkers']['rtlink400'])
+
+    def test_serialized_owners_require_element_shape_and_complete_clean_runtime_matrix(self):
+        worker=ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report={'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _,symbols=dos.prepare(Path(directory),report)
+            rows=[r for r in report['translation_units'] if r['module'] in bindings.V18_STORAGE_CONTRACTS]
+            self.assertEqual(len(rows),2)
+            self.assertEqual(sum(c['length'] for r in rows for c in r['storage_provider']['communals']),224)
+            for row in rows:
+                provider=row['storage_provider']
+                source=(ROOT/row['source']['path']).read_text(encoding='ascii')
+                def compile(text):
+                    r=compiler.compile_c(text,row['profile'],row['flags'],basename=row['basename'])
+                    self.assertTrue(r.ok,r.log)
+                    return OmfReader(communals=True).read(r.obj)
+                bindings.review_provider_source(source,provider,symbols)
+                self.assertEqual(bindings.verify_provider(compile(source),provider)['status'],'PASS')
+                contrast=(source.replace('unsigned char far','unsigned int far').replace('[50]','[25]')
+                          if row['module'].endswith('swarm-serialized-buffers') else
+                          source.replace('int far','unsigned char far').replace('[6]','[12]'))
+                # Equal total extent cannot replace the recovered element width.
+                with self.assertRaises(ValueError): bindings.verify_provider(compile(contrast),provider)
+                with self.assertRaises(ValueError): bindings.review_provider_source(contrast,provider,symbols)
+                wrong=json.loads(json.dumps(symbols))
+                name=provider['communals'][0]['name'][1:]
+                wrong['data']['unreviewed_interior']=dict(wrong['data'][name],off=wrong['data'][name]['off']+1)
+                with self.assertRaises(ValueError): bindings.review_provider_source(source,provider,wrong)
+            report['runtime_components']=[]
+            tc=compiler.toolchain()
+            for profile in ('rtlink400','rtlink610'):
+                bindings.require_v18_storage_contracts(report,profile,tc['linkers'][profile])
+            for module,(key,required) in bindings.V18_STORAGE_CONTRACTS.items():
+                for change in ('root','missing','duplicate','result','map','warning','tool'):
+                    wrong=json.loads(json.dumps(report)); contract=wrong[key]
+                    index=next(i for i,r in enumerate(contract['cases']) if r['linker']=='rtlink400')
+                    if change=='root': contract['root_reviewed']=False
+                    elif change=='missing': contract['cases'].pop(index)
+                    elif change=='duplicate': contract['cases'].append(dict(contract['cases'][index]))
+                    elif change=='result': contract['cases'][index]['actual']='UNREVIEWED'
+                    elif change=='map': contract['cases'][index]['owner_publics_found_in_map'].pop()
+                    elif change=='warning': contract['cases'][index]['linker_diagnostics']=['Unresolved external']
+                    else:
+                        for identity in contract['inputs']: identity['sha256']='0'*64
+                    with self.assertRaisesRegex(ValueError,'startup contract'):
+                        bindings.require_v18_storage_contracts(wrong,'rtlink400',tc['linkers']['rtlink400'])
+
+    def test_far_data_gap_requires_real_source_object_and_exact_linker_contrast(self):
+        contract = json.loads((ROOT/'work/source-only-dos/far-data-paragraph-fill-contract-v1.json').read_text())
+        tc = compiler.toolchain()
+        for profile in ('rtlink400', 'rtlink610'):
+            tool = tc['linkers'][profile]
+            components = [(str(Path(tool['directory'])/name), digest) for name,digest in tool['files'].items()]
+            alignment.require_contract(contract, profile, components)
+        for change in ('root', 'missing', 'duplicate', 'gap', 'map', 'warning', 'extra_owner', 'moved_bss'):
+            wrong = json.loads(json.dumps(contract))
+            rows = wrong['controls']['linker_results']
+            if change == 'root': wrong['root_reviewed'] = False
+            elif change == 'missing': rows.pop()
+            elif change == 'duplicate': rows[1] = dict(rows[0])
+            elif change == 'gap': rows[0]['gap_bytes'] = 0
+            elif change == 'map': rows[0]['map_rows_asserted'].pop()
+            elif change == 'warning': rows[0]['linker_diagnostics'] = ['unresolved symbol']
+            elif change == 'extra_owner': wrong['extra_storage_bytes'] = 12
+            else: rows[1]['far_bss']['start_offset'] += 16
+            with self.assertRaises(ValueError): alignment.require_contract(wrong)
+        with self.assertRaises(ValueError):
+            alignment.require_contract(contract, 'rtlink400', [('unknown-linker', '0'*64)])
+        worker = ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module']=='root:1F80')
+            source = (ROOT/row['generated_source']['path']).read_text(encoding='latin1')
+            def object_for(text):
+                result=compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                path=Path(directory)/'owner.obj'
+                path.write_bytes(result.obj)
+                row['object']=dos.pin(path)[1]
+            object_for(source)
+            self.assertEqual(alignment.verify_source_object(ROOT, report)['functional_fill_bytes'],12)
+            # The original source declares a 100-byte static far text buffer.
+            self.assertIn('[100]',source)
+            object_for(source.replace('[100]', '[112]'))
+            with self.assertRaisesRegex(ValueError,'OMF extent/alignment'):
+                alignment.verify_source_object(ROOT, report)
+            object_for(source)
+            row['generated_source']['sha256']='0'*64
+            with self.assertRaisesRegex(ValueError,'generated source'):
+                alignment.verify_source_object(ROOT, report)
+
     def test_control_resource_terrain_owners_require_source_types_and_full_control_matrix(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

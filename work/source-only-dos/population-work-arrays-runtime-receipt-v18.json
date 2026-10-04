@@ -1,0 +1,2302 @@
+{
+  "schema": "simant-population-work-arrays-probe-v18",
+  "status": "SCRATCH_ONLY_UNADMITTED_NO_PROMOTION",
+  "provider": {
+    "path": "work/source-only-dos/providers/population-work-arrays.c",
+    "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+    "size": 207,
+    "role": "data-only natural C provider; exactly two tentative int far[6] definitions; no functions",
+    "omf_communals": [
+      {
+        "name": "_fd_50F6_0AEC",
+        "kind": "far",
+        "type_index": 514,
+        "count": 6,
+        "element_size": 2,
+        "length": 12
+      },
+      {
+        "name": "_fd_50F6_0AFA",
+        "kind": "far",
+        "type_index": 514,
+        "count": 6,
+        "element_size": 2,
+        "length": 12
+      }
+    ],
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "compiler_profile": "msc600ax"
+  },
+  "probe_script": {
+    "path": "work/source-only-dos/population-work-arrays-probe-v18.py",
+    "sha256": "a1122fd9f3c3c18e94aab95d3dc5eb4dc29f16dd1dae760fd1463343f6e9fd99",
+    "size": 18760
+  },
+  "compiler_and_runtime": {
+    "compiler_profile": {
+      "name": "msc600ax",
+      "product": "Microsoft C 6.00AX (DOS-extended CL /EM: C1L, C2L, C3L), archive.org Microsoft_c_60ax disk 8",
+      "directory": "C:/tools/msc-6.00ax-archive",
+      "executable": "CL.EXE",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "profile_files": {
+        "BIN/CL.EXE": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+        "BIN/C1L.EXE": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+        "BIN/C2L.EXE": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+        "BIN/C3L.EXE": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+        "BIN/CL.ERR": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+        "BIN/C1.ERR": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+        "BIN/C23.ERR": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+        "BIN/CL.MSG": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+      },
+      "include_file_pins": {
+        "assert.h": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+        "bios.h": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+        "bse.h": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+        "bsedev.h": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+        "bsedos.h": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+        "bseerr.h": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+        "bsesub.h": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+        "conio.h": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+        "ctype.h": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+        "direct.h": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+        "dos.h": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+        "errno.h": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+        "fcntl.h": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+        "float.h": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+        "graph.h": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+        "io.h": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+        "limits.h": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+        "locale.h": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+        "malloc.h": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+        "math.h": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+        "memory.h": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+        "os2.h": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+        "os2def.h": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+        "pgchart.h": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+        "pm.h": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+        "pmavio.h": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+        "pmbitmap.h": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+        "pmdev.h": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+        "pmerr.h": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+        "pmfont.h": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+        "pmgpi.h": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+        "pmhelp.h": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+        "pmmle.h": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+        "pmord.h": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+        "pmpic.h": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+        "pmshl.h": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+        "pmtypes.h": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+        "pmwin.h": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+        "process.h": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+        "search.h": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+        "setjmp.h": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+        "share.h": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+        "signal.h": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+        "stdarg.h": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+        "stddef.h": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+        "stdio.h": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+        "stdlib.h": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+        "string.h": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+        "sys/locking.h": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+        "sys/stat.h": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+        "sys/timeb.h": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+        "sys/types.h": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+        "sys/utime.h": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+        "time.h": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+        "varargs.h": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b"
+      }
+    },
+    "compiler_tools": [
+      {
+        "path": "tools/compiler.py",
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+        "size": 11765
+      },
+      {
+        "path": "tools/modules.py",
+        "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+        "size": 60548
+      },
+      {
+        "path": "tools/omf.py",
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+        "size": 29112
+      },
+      {
+        "path": "layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+        "size": 39241
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "size": 628980
+      }
+    ],
+    "runner": {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "conf": {
+        "dosbox": {
+          "memsize": "16",
+          "quit warning": "false"
+        },
+        "cpu": {
+          "cycles": "max",
+          "core": "normal",
+          "cputype": "386"
+        },
+        "dos": {
+          "xms": "true",
+          "ems": "false",
+          "umb": "false"
+        },
+        "mixer": {
+          "nosound": "true"
+        },
+        "sdl": {
+          "output": "surface"
+        }
+      }
+    },
+    "runtime_libraries": [
+      {
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+      },
+      {
+        "path": "C:/tools/msc-6.00/LIB/libh.lib",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+      }
+    ],
+    "linkers": {
+      "rtlink400": {
+        "directory": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest",
+        "executable": "RTLINK.EXE",
+        "files": {
+          "RTLINK.EXE": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+          "RTLINK.DAT": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+          "RTLUTILS.LIB": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+          "RTLINKST.COM": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2"
+        },
+        "profile_note": "experimental instrument for level (c) trials; exact historical version unconfirmed"
+      },
+      "rtlink610": {
+        "directory": "C:/tools/rtlink-plus-6.10/installed",
+        "executable": "RTL-SWAP.EXE",
+        "files": {
+          "RTL-REAL.EXE": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+          "RTL-SWAP.EXE": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+          "RTLINK.DAT": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+          "RTLUTILS.LIB": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+          "RTLINKST.COM": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+          "RTLINK.EXE": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+          "DOS4GW.EXE": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c"
+        },
+        "profile_note": "experimental instrument for level (c) trials; NOT the historical SIMANT.EXE linker (exact version/manager still missing)"
+      }
+    },
+    "consumer_flags": [
+      "/AL",
+      "/Os",
+      "/Zi"
+    ]
+  },
+  "fixture_inputs": [
+    {
+      "case": "typed_SaveRec_alias_positive",
+      "owner_source": {
+        "path": "work/source-only-dos/providers/population-work-arrays.c",
+        "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+        "size": 207
+      },
+      "owner_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+        "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+        "size": 375
+      },
+      "consumer_source": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTGOOD.c",
+        "sha256": "5ac61cea55c1f60b3baa683894ea3cc27e465e1a5bd47766f0da7b8d743ac240",
+        "size": 1953
+      },
+      "consumer_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTGOOD.OBJ",
+        "sha256": "591002a5eecbd35a2b7d43053827413ceabf1869894f848642d5c178f0b45b91",
+        "size": 1943
+      },
+      "consumer_mode": "positive",
+      "owner_shape": "data-only provider source",
+      "startup_state": "both six-word vectors must be zero before any seed/write",
+      "SaveRec_rows": [
+        {
+          "size": 2,
+          "count": 6
+        },
+        {
+          "size": 2,
+          "count": 6
+        }
+      ],
+      "owner_omf_commons": [
+        {
+          "name": "_fd_50F6_0AEC",
+          "kind": "far",
+          "type_index": 514,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        },
+        {
+          "name": "_fd_50F6_0AFA",
+          "kind": "far",
+          "type_index": 514,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        }
+      ],
+      "consumer_omf_commons": []
+    },
+    {
+      "case": "wrong_element_type_same_12_byte_extent",
+      "owner_source": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNBYTE.c",
+        "sha256": "5f0df035389ffe10f06cfccb4602d7ba4aa58215fea5f10c4f33999e886ad332",
+        "size": 218
+      },
+      "owner_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNBYTE.OBJ",
+        "sha256": "e822ae1935c517e6b6ca725dfe0a335029b4dc039880896a031ac194c32d2be1",
+        "size": 733
+      },
+      "consumer_source": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTTYPE.c",
+        "sha256": "7a838130fe24fa877e07701d74b12203115958a4598e475c8d3d204518981beb",
+        "size": 2133
+      },
+      "consumer_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTTYPE.OBJ",
+        "sha256": "50bb8025cf3cf45de415e665d1fa4d7b662c83e31bfc87578597ec070929680c",
+        "size": 1770
+      },
+      "consumer_mode": "wrong_type",
+      "owner_shape": "unsigned char far[12] Blue, int far[6] Red",
+      "startup_state": "both six-word vectors must be zero before any seed/write",
+      "SaveRec_rows": [
+        {
+          "size": 2,
+          "count": 6
+        },
+        {
+          "size": 2,
+          "count": 6
+        }
+      ],
+      "owner_omf_commons": [
+        {
+          "name": "_fd_50F6_0AEC",
+          "kind": "far",
+          "type_index": 514,
+          "count": 12,
+          "element_size": 1,
+          "length": 12
+        },
+        {
+          "name": "_fd_50F6_0AFA",
+          "kind": "far",
+          "type_index": 515,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        }
+      ],
+      "consumer_omf_commons": []
+    },
+    {
+      "case": "wrong_sixth_word_array_extent",
+      "owner_source": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNEXT.c",
+        "sha256": "e3dd2a6e2049b0b4108d565e12d1ad31f90a85f4da91fd8232b6e02d7b6d2884",
+        "size": 389
+      },
+      "owner_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNEXT.OBJ",
+        "sha256": "fdf48cea0ff65d54b3693109ee9421059a6702468a3c8837283773f8f2a4bf10",
+        "size": 1048
+      },
+      "consumer_source": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTEXNT.c",
+        "sha256": "ddc5328a797bfd6ce1654eebe72d36d76ecb5add9447b26d4a25d342b078ee36",
+        "size": 2044
+      },
+      "consumer_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTEXNT.OBJ",
+        "sha256": "91ad5db67c56c38efb901b7f42d8b8629af7531e2dd55d3bcd3cfb4e1af8c2b9",
+        "size": 1768
+      },
+      "consumer_mode": "wrong_extent",
+      "owner_shape": "five-word array subobject plus adjacent int guard",
+      "startup_state": "both six-word vectors must be zero before any seed/write",
+      "SaveRec_rows": [
+        {
+          "size": 2,
+          "count": 6
+        },
+        {
+          "size": 2,
+          "count": 6
+        }
+      ],
+      "owner_omf_commons": [
+        {
+          "name": "_fd_50F6_0AEC",
+          "kind": "far",
+          "type_index": 514,
+          "count": 12,
+          "element_size": 1,
+          "length": 12
+        },
+        {
+          "name": "_fd_50F6_0AFA",
+          "kind": "far",
+          "type_index": 518,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        }
+      ],
+      "consumer_omf_commons": []
+    },
+    {
+      "case": "wrong_exact_base_plus_one_word",
+      "owner_source": {
+        "path": "work/source-only-dos/providers/population-work-arrays.c",
+        "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+        "size": 207
+      },
+      "owner_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+        "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+        "size": 375
+      },
+      "consumer_source": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTBASE.c",
+        "sha256": "5ac61cea55c1f60b3baa683894ea3cc27e465e1a5bd47766f0da7b8d743ac240",
+        "size": 1953
+      },
+      "consumer_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTBASE.OBJ",
+        "sha256": "6e1075049c105f3dcf3ace4ebda2ff6aa13812329a7430f10a1b46eba5881e14",
+        "size": 1943
+      },
+      "consumer_mode": "wrong_base",
+      "owner_shape": "data-only provider source",
+      "startup_state": "both six-word vectors must be zero before any seed/write",
+      "SaveRec_rows": [
+        {
+          "size": 2,
+          "count": 6
+        },
+        {
+          "size": 2,
+          "count": 6
+        }
+      ],
+      "owner_omf_commons": [
+        {
+          "name": "_fd_50F6_0AEC",
+          "kind": "far",
+          "type_index": 514,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        },
+        {
+          "name": "_fd_50F6_0AFA",
+          "kind": "far",
+          "type_index": 514,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        }
+      ],
+      "consumer_omf_commons": []
+    },
+    {
+      "case": "wrong_SaveRec_count_extent",
+      "owner_source": {
+        "path": "work/source-only-dos/providers/population-work-arrays.c",
+        "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+        "size": 207
+      },
+      "owner_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+        "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+        "size": 375
+      },
+      "consumer_source": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTSAVE.c",
+        "sha256": "958f28bcd0cb13d59030e583a112d83dc6ff4a69dba0b85cf4a88dd33b740377",
+        "size": 1953
+      },
+      "consumer_object": {
+        "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTSAVE.OBJ",
+        "sha256": "5b30c87c3f1ad5c7025c1f246d41c329c952ee56bb1ec9cf4f4c7ade964970e0",
+        "size": 1943
+      },
+      "consumer_mode": "wrong_save_count",
+      "owner_shape": "data-only provider source",
+      "startup_state": "both six-word vectors must be zero before any seed/write",
+      "SaveRec_rows": [
+        {
+          "size": 2,
+          "count": 5
+        },
+        {
+          "size": 2,
+          "count": 6
+        }
+      ],
+      "owner_omf_commons": [
+        {
+          "name": "_fd_50F6_0AEC",
+          "kind": "far",
+          "type_index": 514,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        },
+        {
+          "name": "_fd_50F6_0AFA",
+          "kind": "far",
+          "type_index": 514,
+          "count": 6,
+          "element_size": 2,
+          "length": 12
+        }
+      ],
+      "consumer_omf_commons": []
+    }
+  ],
+  "case_summary": {
+    "fresh_cases_expected": 10,
+    "fresh_cases_passed": 10,
+    "all_five_cases_both_linkers_clean_and_passed": true
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_SaveRec_alias_positive",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "work/source-only-dos/providers/population-work-arrays.c",
+          "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+          "size": 207
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTGOOD.c",
+          "sha256": "5ac61cea55c1f60b3baa683894ea3cc27e465e1a5bd47766f0da7b8d743ac240",
+          "size": 1953
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTGOOD.OBJ",
+          "sha256": "591002a5eecbd35a2b7d43053827413ceabf1869894f848642d5c178f0b45b91",
+          "size": 1943
+        },
+        "consumer_mode": "positive",
+        "owner_shape": "data-only provider source",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "PASS",
+      "actual_output": "PASS",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0201:0000  Res  _BlueSaveAlias",
+        "0201:0000  Res  _fd_50F6_0AEC",
+        "0201:000C  Res  _fd_50F6_0AFA",
+        "0201:000C  Res  _RedSaveAlias",
+        "0201:0000  Res  _BlueSaveAlias",
+        "0201:0000  Res  _fd_50F6_0AEC",
+        "0201:000C  Res  _fd_50F6_0AFA",
+        "0201:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n13K\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "591002a5eecbd35a2b7d43053827413ceabf1869894f848642d5c178f0b45b91",
+          "size": 1943
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "7527c0bb54770fddc312f2bf63af0cd4c88c74dfab271e35c85ac4afa24405fc",
+          "size": 4277
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "77d7a0dd081f582c1db0b126191c4d7075e370648ebbefb0f4f9d9df566414d8",
+          "size": 400
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "dd4dd00d730569817988c7a01fc12fcf36418c5a552542d994264b6931e4bafe",
+          "size": 576
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "a774cabf285c7f1d46c064c56ed19668f359d24e4c9290af2cf5f5a49f903efb",
+          "size": 9841
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "4b4fe05cb714f8ad4b1cf35b97f59d139f91de9915aabcc624e86f1982092a87",
+          "size": 12341
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_element_type_same_12_byte_extent",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNBYTE.c",
+          "sha256": "5f0df035389ffe10f06cfccb4602d7ba4aa58215fea5f10c4f33999e886ad332",
+          "size": 218
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNBYTE.OBJ",
+          "sha256": "e822ae1935c517e6b6ca725dfe0a335029b4dc039880896a031ac194c32d2be1",
+          "size": 733
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTTYPE.c",
+          "sha256": "7a838130fe24fa877e07701d74b12203115958a4598e475c8d3d204518981beb",
+          "size": 2133
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTTYPE.OBJ",
+          "sha256": "50bb8025cf3cf45de415e665d1fa4d7b662c83e31bfc87578597ec070929680c",
+          "size": 1770
+        },
+        "consumer_mode": "wrong_type",
+        "owner_shape": "unsigned char far[12] Blue, int far[6] Red",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED",
+      "actual_output": "REJECTED",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 518,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 518,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 518,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 518,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 518,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 518,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 518,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 518,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0206:0000  Res  _BlueSaveAlias",
+        "0206:0000  Res  _fd_50F6_0AEC",
+        "0206:000C  Res  _fd_50F6_0AFA",
+        "0206:000C  Res  _RedSaveAlias",
+        "0206:0000  Res  _BlueSaveAlias",
+        "0206:0000  Res  _fd_50F6_0AEC",
+        "0206:000C  Res  _fd_50F6_0AFA",
+        "0206:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n13K\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "50bb8025cf3cf45de415e665d1fa4d7b662c83e31bfc87578597ec070929680c",
+          "size": 1770
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "9456f0d3b78913309d4009995144e25ed96efc1b4dfc05b926bebce42a79e5e6",
+          "size": 4287
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "5a4b62c870cbb734d17b3ac34442100d7c7d4a8816aff29ed31171c92f56fc3e",
+          "size": 410
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "dd4dd00d730569817988c7a01fc12fcf36418c5a552542d994264b6931e4bafe",
+          "size": 576
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "e822ae1935c517e6b6ca725dfe0a335029b4dc039880896a031ac194c32d2be1",
+          "size": 733
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "1b78ebb616acae04be42285a32bf9159f866019df91c9612899c7a8d06734c9d",
+          "size": 9979
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "a3aecfe268579f3eeb189e5687e303d0cefe6a2fcae07a63c50db8fa929a5888",
+          "size": 12420
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "36b6f0f5b755d76fcedafbc4dc784e9d40d6e0d880f0bf0dcc31d0ab462f4d28",
+          "size": 10
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_sixth_word_array_extent",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNEXT.c",
+          "sha256": "e3dd2a6e2049b0b4108d565e12d1ad31f90a85f4da91fd8232b6e02d7b6d2884",
+          "size": 389
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNEXT.OBJ",
+          "sha256": "fdf48cea0ff65d54b3693109ee9421059a6702468a3c8837283773f8f2a4bf10",
+          "size": 1048
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTEXNT.c",
+          "sha256": "ddc5328a797bfd6ce1654eebe72d36d76ecb5add9447b26d4a25d342b078ee36",
+          "size": 2044
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTEXNT.OBJ",
+          "sha256": "91ad5db67c56c38efb901b7f42d8b8629af7531e2dd55d3bcd3cfb4e1af8c2b9",
+          "size": 1768
+        },
+        "consumer_mode": "wrong_extent",
+        "owner_shape": "five-word array subobject plus adjacent int guard",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED_GUARD_OVERLAP",
+      "actual_output": "REJECTED_GUARD_OVERLAP",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 519,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 519,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_ExtentGuardWasWritten": [
+          {
+            "segment": 511,
+            "offset": 70,
+            "state": "Ovl"
+          },
+          {
+            "segment": 511,
+            "offset": 70,
+            "state": "Ovl"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 519,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 519,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 519,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 519,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 519,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 519,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0207:0000  Res  _BlueSaveAlias",
+        "01FF:0046  Ovl  _ExtentGuardWasWritten (2H)",
+        "0207:0000  Res  _fd_50F6_0AEC",
+        "0207:000C  Res  _fd_50F6_0AFA",
+        "0207:000C  Res  _RedSaveAlias",
+        "0207:0000  Res  _BlueSaveAlias",
+        "0207:0000  Res  _fd_50F6_0AEC",
+        "0207:000C  Res  _fd_50F6_0AFA",
+        "0207:000C  Res  _RedSaveAlias",
+        "01FF:0046  Ovl  _ExtentGuardWasWritten (2H)"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n13K\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "91ad5db67c56c38efb901b7f42d8b8629af7531e2dd55d3bcd3cfb4e1af8c2b9",
+          "size": 1768
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "8f17ea87f13ee65be1d934fca535dc3dd9ef5848c96471ed9b8dae741f36597c",
+          "size": 4278
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "d68e2f75d4d3900163595836a1eda813e42e37e15615f4b148b55bc9e5889d8f",
+          "size": 401
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "dd4dd00d730569817988c7a01fc12fcf36418c5a552542d994264b6931e4bafe",
+          "size": 576
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "fdf48cea0ff65d54b3693109ee9421059a6702468a3c8837283773f8f2a4bf10",
+          "size": 1048
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "85d44ff1dc7c08bcb5a1342bff29e267f2b957e3b9c0c703dac4cb782f1e5bfd",
+          "size": 10021
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "5e98a94b57ca6617e1f203a0581dce85928d4c695a3d9575f9908bac535ee33e",
+          "size": 12528
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "07c3b13806134c1f61b73f6fb0d41f8b52866c1ca411abf797895b58ef63ef48",
+          "size": 24
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_exact_base_plus_one_word",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "work/source-only-dos/providers/population-work-arrays.c",
+          "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+          "size": 207
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTBASE.c",
+          "sha256": "5ac61cea55c1f60b3baa683894ea3cc27e465e1a5bd47766f0da7b8d743ac240",
+          "size": 1953
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTBASE.OBJ",
+          "sha256": "6e1075049c105f3dcf3ace4ebda2ff6aa13812329a7430f10a1b46eba5881e14",
+          "size": 1943
+        },
+        "consumer_mode": "wrong_base",
+        "owner_shape": "data-only provider source",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED",
+      "actual_output": "REJECTED",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 513,
+            "offset": 2,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 2,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0201:0002  Res  _BlueSaveAlias",
+        "0201:0000  Res  _fd_50F6_0AEC",
+        "0201:000C  Res  _fd_50F6_0AFA",
+        "0201:000C  Res  _RedSaveAlias",
+        "0201:0000  Res  _fd_50F6_0AEC",
+        "0201:0002  Res  _BlueSaveAlias",
+        "0201:000C  Res  _fd_50F6_0AFA",
+        "0201:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC + 2\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n13K\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "6e1075049c105f3dcf3ace4ebda2ff6aa13812329a7430f10a1b46eba5881e14",
+          "size": 1943
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "3e073aadcebbf24fd709239bc5c8fd22fafbb67701950be10f1d38a9aeedd222",
+          "size": 4279
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "419b4ff0dc06a3100a515baf87e220f0fc6cd6cb05ad4ba8a53f170b87a9e031",
+          "size": 402
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "559b9e7b4a445878bd9da10b3e102c2d6cb164e7c6897879a4d2051be1f0a1a9",
+          "size": 580
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "cdd527c274366f5927dabbd803be8a5ed10c5e247dc2f22062f6be69bb99a9ed",
+          "size": 9841
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "038209dcf900df7eadf2a0942b7dfbd5298e97f932449205e6370d8e7ebe151c",
+          "size": 198
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "93d99119d2445ec25afd08f10a48fede13be1de20e401165ba32fc4be515a08b",
+          "size": 12341
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "36b6f0f5b755d76fcedafbc4dc784e9d40d6e0d880f0bf0dcc31d0ab462f4d28",
+          "size": 10
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_SaveRec_count_extent",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "work/source-only-dos/providers/population-work-arrays.c",
+          "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+          "size": 207
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTSAVE.c",
+          "sha256": "958f28bcd0cb13d59030e583a112d83dc6ff4a69dba0b85cf4a88dd33b740377",
+          "size": 1953
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTSAVE.OBJ",
+          "sha256": "5b30c87c3f1ad5c7025c1f246d41c329c952ee56bb1ec9cf4f4c7ade964970e0",
+          "size": 1943
+        },
+        "consumer_mode": "wrong_save_count",
+        "owner_shape": "data-only provider source",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 5
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED",
+      "actual_output": "REJECTED",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 513,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0201:0000  Res  _BlueSaveAlias",
+        "0201:0000  Res  _fd_50F6_0AEC",
+        "0201:000C  Res  _fd_50F6_0AFA",
+        "0201:000C  Res  _RedSaveAlias",
+        "0201:0000  Res  _BlueSaveAlias",
+        "0201:0000  Res  _fd_50F6_0AEC",
+        "0201:000C  Res  _fd_50F6_0AFA",
+        "0201:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n13K\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "5b30c87c3f1ad5c7025c1f246d41c329c952ee56bb1ec9cf4f4c7ade964970e0",
+          "size": 1943
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "11328114c1e36e32b302f71304d301011b1d4f61d902b3bff2632caafb874442",
+          "size": 4275
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "bdd566a497231c39dfaed293dab7030a2881aa2f039fda70b67149679ccbab58",
+          "size": 398
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "dd4dd00d730569817988c7a01fc12fcf36418c5a552542d994264b6931e4bafe",
+          "size": 576
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "2c67c262ca7f0d027ae2a6767065e22f89e11f57858edebeb663f4946d6393f6",
+          "size": 9841
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "849d5caa234a85d83025e7295935ab12fc5daa977ecacf0b536740fa743346c8",
+          "size": 12341
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "36b6f0f5b755d76fcedafbc4dc784e9d40d6e0d880f0bf0dcc31d0ab462f4d28",
+          "size": 10
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_SaveRec_alias_positive",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "work/source-only-dos/providers/population-work-arrays.c",
+          "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+          "size": 207
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTGOOD.c",
+          "sha256": "5ac61cea55c1f60b3baa683894ea3cc27e465e1a5bd47766f0da7b8d743ac240",
+          "size": 1953
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTGOOD.OBJ",
+          "sha256": "591002a5eecbd35a2b7d43053827413ceabf1869894f848642d5c178f0b45b91",
+          "size": 1943
+        },
+        "consumer_mode": "positive",
+        "owner_shape": "data-only provider source",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "PASS",
+      "actual_output": "PASS",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0242:0000  Res  _BlueSaveAlias",
+        "0242:0000  Res  _fd_50F6_0AEC",
+        "0242:000C  Res  _fd_50F6_0AFA",
+        "0242:000C  Res  _RedSaveAlias",
+        "0242:0000  Res  _BlueSaveAlias",
+        "0242:0000  Res  _fd_50F6_0AEC",
+        "0242:000C  Res  _fd_50F6_0AFA",
+        "0242:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": "eserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+26H Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "591002a5eecbd35a2b7d43053827413ceabf1869894f848642d5c178f0b45b91",
+          "size": 1943
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "9f2e341743c168ba81811cf90a44cbe902732cc75bf8ad994c67008362c04a25",
+          "size": 4387
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "48b0bf10a6f31e0d4fb7674b6c9f9db8f7d324c66562207f834b4b0d790cbd18",
+          "size": 400
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "7fcf4b4289dd0e66a9a54317c8518524da540cb1a68b5ce4f5b92a76f95d4695",
+          "size": 1268
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "16ac2cba85cfd62994d23d64064d7f7776d01628621bc1888556add40772bc94",
+          "size": 10881
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "835d8062193a5f7fc1177113999d7fd73cb58b09f5ef567f211f0aa99ec12b8d",
+          "size": 13524
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_element_type_same_12_byte_extent",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNBYTE.c",
+          "sha256": "5f0df035389ffe10f06cfccb4602d7ba4aa58215fea5f10c4f33999e886ad332",
+          "size": 218
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNBYTE.OBJ",
+          "sha256": "e822ae1935c517e6b6ca725dfe0a335029b4dc039880896a031ac194c32d2be1",
+          "size": 733
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTTYPE.c",
+          "sha256": "7a838130fe24fa877e07701d74b12203115958a4598e475c8d3d204518981beb",
+          "size": 2133
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTTYPE.OBJ",
+          "sha256": "50bb8025cf3cf45de415e665d1fa4d7b662c83e31bfc87578597ec070929680c",
+          "size": 1770
+        },
+        "consumer_mode": "wrong_type",
+        "owner_shape": "unsigned char far[12] Blue, int far[6] Red",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED",
+      "actual_output": "REJECTED",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 582,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 582,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 582,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 582,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 582,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 582,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 582,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 582,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0246:0000  Res  _BlueSaveAlias",
+        "0246:0000  Res  _fd_50F6_0AEC",
+        "0246:000C  Res  _fd_50F6_0AFA",
+        "0246:000C  Res  _RedSaveAlias",
+        "0246:0000  Res  _BlueSaveAlias",
+        "0246:0000  Res  _fd_50F6_0AEC",
+        "0246:000C  Res  _fd_50F6_0AFA",
+        "0246:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": "eserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+2BH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "50bb8025cf3cf45de415e665d1fa4d7b662c83e31bfc87578597ec070929680c",
+          "size": 1770
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "2d2e2ba171402c0e27de4ff76dba1e8bcefb268338577d502a735971bb6ac8bb",
+          "size": 4397
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "4cfacdaac49f25d142fb5a8853ee882b0164876654504becf0831f0b1c15dad4",
+          "size": 410
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "337a22c266b89763e3a7b90c265b4776763a7d736f8654dffa03d903c485cd1d",
+          "size": 1268
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "e822ae1935c517e6b6ca725dfe0a335029b4dc039880896a031ac194c32d2be1",
+          "size": 733
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "f723e33feeb54a05848c14f7fb0deef8bd2d4eb3df44319279b6ba0c3209673d",
+          "size": 11003
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "f85ae293d2c930b809f55d41b7320108d25c7aeda356dd961cc91038ce57af04",
+          "size": 13603
+        },
+        {
+          "path": "PROBE.VEC",
+          "sha256": "0dd5d798cd91a9d35da5b754412f14eb283d6b9ddee2adf4f7bd14c8a5910455",
+          "size": 262
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "36b6f0f5b755d76fcedafbc4dc784e9d40d6e0d880f0bf0dcc31d0ab462f4d28",
+          "size": 10
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_sixth_word_array_extent",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNEXT.c",
+          "sha256": "e3dd2a6e2049b0b4108d565e12d1ad31f90a85f4da91fd8232b6e02d7b6d2884",
+          "size": 389
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/OWNEXT.OBJ",
+          "sha256": "fdf48cea0ff65d54b3693109ee9421059a6702468a3c8837283773f8f2a4bf10",
+          "size": 1048
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTEXNT.c",
+          "sha256": "ddc5328a797bfd6ce1654eebe72d36d76ecb5add9447b26d4a25d342b078ee36",
+          "size": 2044
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTEXNT.OBJ",
+          "sha256": "91ad5db67c56c38efb901b7f42d8b8629af7531e2dd55d3bcd3cfb4e1af8c2b9",
+          "size": 1768
+        },
+        "consumer_mode": "wrong_extent",
+        "owner_shape": "five-word array subobject plus adjacent int guard",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED_GUARD_OVERLAP",
+      "actual_output": "REJECTED_GUARD_OVERLAP",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 583,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 583,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_ExtentGuardWasWritten": [
+          {
+            "segment": 575,
+            "offset": 70,
+            "state": "Ovl"
+          },
+          {
+            "segment": 575,
+            "offset": 70,
+            "state": "Ovl"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 583,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 583,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 583,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 583,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 583,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 583,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0247:0000  Res  _BlueSaveAlias",
+        "023F:0046  Ovl  _ExtentGuardWasWritten (2H)",
+        "0247:0000  Res  _fd_50F6_0AEC",
+        "0247:000C  Res  _fd_50F6_0AFA",
+        "0247:000C  Res  _RedSaveAlias",
+        "0247:0000  Res  _BlueSaveAlias",
+        "0247:0000  Res  _fd_50F6_0AEC",
+        "0247:000C  Res  _fd_50F6_0AFA",
+        "0247:000C  Res  _RedSaveAlias",
+        "023F:0046  Ovl  _ExtentGuardWasWritten (2H)"
+      ],
+      "link_log_tail": "eserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+2EH Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "91ad5db67c56c38efb901b7f42d8b8629af7531e2dd55d3bcd3cfb4e1af8c2b9",
+          "size": 1768
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "da6e8a862300f5314b8102011187e850d399588750b042094c722c92ac07af77",
+          "size": 4388
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "031221d0831bdb9baab605f3c8e13bf2678a29dbb2179adc567e336591c68643",
+          "size": 401
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "3cefb2e27a960bf12327d494933dc83179c3874633e829e1ab56b09e58379ee9",
+          "size": 1268
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "fdf48cea0ff65d54b3693109ee9421059a6702468a3c8837283773f8f2a4bf10",
+          "size": 1048
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "defd9f3d825247c2fe91668a7c95618a734ada13d61f3d5f6bb5c31edb6c57ef",
+          "size": 11045
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "48eb6789e9667b73b2b223a92c92e442e7c2b5b27f43a80b1dbf93ed118b635a",
+          "size": 13711
+        },
+        {
+          "path": "PROBE.VEC",
+          "sha256": "805dea4b5429bb6ff38c174d7bf3f6ed0f2e8cc6a4f727b5defe7a4c0b966e8a",
+          "size": 276
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "07c3b13806134c1f61b73f6fb0d41f8b52866c1ca411abf797895b58ef63ef48",
+          "size": 24
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_exact_base_plus_one_word",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "work/source-only-dos/providers/population-work-arrays.c",
+          "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+          "size": 207
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTBASE.c",
+          "sha256": "5ac61cea55c1f60b3baa683894ea3cc27e465e1a5bd47766f0da7b8d743ac240",
+          "size": 1953
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTBASE.OBJ",
+          "sha256": "6e1075049c105f3dcf3ace4ebda2ff6aa13812329a7430f10a1b46eba5881e14",
+          "size": 1943
+        },
+        "consumer_mode": "wrong_base",
+        "owner_shape": "data-only provider source",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 6
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED",
+      "actual_output": "REJECTED",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 578,
+            "offset": 2,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 2,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0242:0002  Res  _BlueSaveAlias",
+        "0242:0000  Res  _fd_50F6_0AEC",
+        "0242:000C  Res  _fd_50F6_0AFA",
+        "0242:000C  Res  _RedSaveAlias",
+        "0242:0000  Res  _fd_50F6_0AEC",
+        "0242:0002  Res  _BlueSaveAlias",
+        "0242:000C  Res  _fd_50F6_0AFA",
+        "0242:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": "ved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC + 2\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+26H Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "6e1075049c105f3dcf3ace4ebda2ff6aa13812329a7430f10a1b46eba5881e14",
+          "size": 1943
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "d704477636f82dfa4aa4c0239f1cc98bd05eb0144f30b663c4510c146da06528",
+          "size": 4389
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "44e4866e48ad8bf62b7055ea23db9180493d24d985d70293de94eef8404a6b79",
+          "size": 402
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "15a5173a9d650ad67534b4bccb2b2dba0eaf197fd517c36287d0d8d1e45df6b8",
+          "size": 1272
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "5f32aaee41ae0d97bcefd7b0b38f6dbda3d7f036da6be4ea8bca660a3c293a93",
+          "size": 10881
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "038209dcf900df7eadf2a0942b7dfbd5298e97f932449205e6370d8e7ebe151c",
+          "size": 198
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "daa97c969c052ed877a061ac88aa2a404fbb0867839686eb9172b3fe04d97035",
+          "size": 13524
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "36b6f0f5b755d76fcedafbc4dc784e9d40d6e0d880f0bf0dcc31d0ab462f4d28",
+          "size": 10
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_SaveRec_count_extent",
+      "fixture_inputs": {
+        "owner_source": {
+          "path": "work/source-only-dos/providers/population-work-arrays.c",
+          "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+          "size": 207
+        },
+        "owner_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/PROVIDER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        "consumer_source": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTSAVE.c",
+          "sha256": "958f28bcd0cb13d59030e583a112d83dc6ff4a69dba0b85cf4a88dd33b740377",
+          "size": 1953
+        },
+        "consumer_object": {
+          "path": "build/dos_population_work_arrays/durable-v18/fixtures/CRTSAVE.OBJ",
+          "sha256": "5b30c87c3f1ad5c7025c1f246d41c329c952ee56bb1ec9cf4f4c7ade964970e0",
+          "size": 1943
+        },
+        "consumer_mode": "wrong_save_count",
+        "owner_shape": "data-only provider source",
+        "startup_state": "both six-word vectors must be zero before any seed/write",
+        "SaveRec_rows": [
+          {
+            "size": 2,
+            "count": 5
+          },
+          {
+            "size": 2,
+            "count": 6
+          }
+        ]
+      },
+      "expected_output": "REJECTED",
+      "actual_output": "REJECTED",
+      "runner_returncode": 0,
+      "timed_out": false,
+      "exe_created": true,
+      "link_clean": true,
+      "map_clean": true,
+      "unresolved_symbols": [],
+      "map_symbols": {
+        "_BlueSaveAlias": [
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AEC": [
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 0,
+            "state": "Res"
+          }
+        ],
+        "_fd_50F6_0AFA": [
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          }
+        ],
+        "_RedSaveAlias": [
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          },
+          {
+            "segment": 578,
+            "offset": 12,
+            "state": "Res"
+          }
+        ]
+      },
+      "map_rows": [
+        "0242:0000  Res  _BlueSaveAlias",
+        "0242:0000  Res  _fd_50F6_0AEC",
+        "0242:000C  Res  _fd_50F6_0AFA",
+        "0242:000C  Res  _RedSaveAlias",
+        "0242:0000  Res  _BlueSaveAlias",
+        "0242:0000  Res  _fd_50F6_0AEC",
+        "0242:000C  Res  _fd_50F6_0AFA",
+        "0242:000C  Res  _RedSaveAlias"
+      ],
+      "link_log_tail": "eserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE CRT\n=> BEGINAREA\n=> SECTION FILE OWNER\n=> ENDAREA\n=> DEFINE _BlueSaveAlias = _fd_50F6_0AEC\n=> DEFINE _RedSaveAlias = _fd_50F6_0AFA\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t12.K\t+26H Para\n\n  No Overlay Cache\n\n  About 512. extra bytes will be needed during startup to serve as a\n    temporary stack while bringing in the Preloaded Data Section.\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "files": [
+        {
+          "path": "CRT.OBJ",
+          "sha256": "5b30c87c3f1ad5c7025c1f246d41c329c952ee56bb1ec9cf4f4c7ade964970e0",
+          "size": 1943
+        },
+        {
+          "path": "DOSBOX-HOST.LOG",
+          "sha256": "962bfb75455b9c211acb6c8a500dcb4df6610981892452ed0fe92956bf7c68da",
+          "size": 4385
+        },
+        {
+          "path": "dosbox.conf",
+          "sha256": "31b33c4ae7c8a4dfe1528324f69c25e707e0f023740ae6241363a740936bc176",
+          "size": 398
+        },
+        {
+          "path": "LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "LINK.LOG",
+          "sha256": "7fcf4b4289dd0e66a9a54317c8518524da540cb1a68b5ce4f5b92a76f95d4695",
+          "size": 1268
+        },
+        {
+          "path": "LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "OWNER.OBJ",
+          "sha256": "213346c21fd0bd05fe16f90abdbb3eb9e70465a5961c6e13d77861210a768b66",
+          "size": 375
+        },
+        {
+          "path": "PROBE.EXE",
+          "sha256": "da9fe4796b7e46a3f10c4b4eed54cbf9504811dc255c520d54738aaeace4e22a",
+          "size": 10881
+        },
+        {
+          "path": "PROBE.LNK",
+          "sha256": "a6416fa2491a25f83a0ac69c556def01dcce35930a70d0b37ca36f08d9ff2fff",
+          "size": 194
+        },
+        {
+          "path": "PROBE.MAP",
+          "sha256": "523b1d26257a18a56fa68a3d501aeb1a41c7f550429b5eb4430492602bd3e7a2",
+          "size": 13524
+        },
+        {
+          "path": "RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "RUN.LOG",
+          "sha256": "36b6f0f5b755d76fcedafbc4dc784e9d40d6e0d880f0bf0dcc31d0ab462f4d28",
+          "size": 10
+        }
+      ]
+    }
+  ],
+  "provider_boundary": "Natural C source-functional storage ownership only. The historical COMDEF-producing TU/order/absolute layout/padding remain unknown; no source promotion or canonical change is performed.",
+  "source_limits": "Unchecked raw SaveRec values remain outside this typed-storage claim; no universal game-index/value/lifetime domain is claimed."
+}

@@ -1,0 +1,587 @@
+{
+  "accepted_module": {
+    "actual_source_sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+    "far_data_segdef": {
+      "alignment": "paragraph",
+      "class": "FAR_DATA",
+      "combine": "public",
+      "length": 100,
+      "name": "UNIT5_DATA"
+    },
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Gs"
+    ],
+    "manifest_object_sha256": "6e7e70861104e9d5bed66aced947de2f05fd7c58bbeaf89e9eac5b4965ceb9d8",
+    "manifest_placement": {
+      "off": 0,
+      "seg": 20719,
+      "size": 100
+    },
+    "manifest_source_sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+    "module": "root:1F80",
+    "object_hash_matches_manifest": true,
+    "profile": "msc600ax",
+    "recompiled_object_sha256": "6e7e70861104e9d5bed66aced947de2f05fd7c58bbeaf89e9eac5b4965ceb9d8",
+    "source": "src/root/m1F80.c",
+    "source_extent_end_linear": "50F54"
+  },
+  "admitted": false,
+  "conclusion": "The accepted 100-byte paragraph-aligned FAR_DATA extent ends at 50F54; the next FAR_BSS frame begins at 50F60. Natural MSC/RTLink 4.00 and 6.10 controls reproduce a 12-byte gap for a 100-byte contribution and no gap for a 112-byte contribution while keeping the following FAR_BSS start fixed.",
+  "controls": {
+    "assertions": {
+      "accepted_far_data_end_is_50F54": true,
+      "accepted_source_and_object_match_manifest": true,
+      "exactly_four_expected_linker_rows_have_clean_diagnostics_and_map_rows": true,
+      "registry_far_bss_base_is_50F60": true,
+      "rtlink400_gaps_are_12_then_0_with_same_far_bss_start": true,
+      "rtlink610_gaps_are_12_then_0_with_same_far_bss_start": true
+    },
+    "compiler": "MSC 6.00AX, manifest profile msc600ax, accepted root:1F80 flags",
+    "compiler_translation_unit_include_inputs": [],
+    "fixtures": [
+      {
+        "array_size": 100,
+        "far_communal": [
+          {
+            "count": 1,
+            "element_size": 1,
+            "kind": "far",
+            "length": 1,
+            "name": "_tail_common"
+          }
+        ],
+        "far_data_segdef": {
+          "alignment": "paragraph",
+          "class": "FAR_DATA",
+          "combine": "public",
+          "length": 100,
+          "name": "FIXTURE5_DATA"
+        },
+        "object_sha256": "96ab3ee9d23159299dc148bd00a6d3643d1d74a9788f924717e253fa631493cd",
+        "source": {
+          "path": "build/workers/dos_linker_alignment_debt/package-run-20261004-v2-clean2/fixture_100.c",
+          "sha256": "f33473edb331f9ea05db0c0e6a714d35a557aee0a74ad91d4ce6a8445f63d563",
+          "size": 124
+        }
+      },
+      {
+        "array_size": 112,
+        "far_communal": [
+          {
+            "count": 1,
+            "element_size": 1,
+            "kind": "far",
+            "length": 1,
+            "name": "_tail_common"
+          }
+        ],
+        "far_data_segdef": {
+          "alignment": "paragraph",
+          "class": "FAR_DATA",
+          "combine": "public",
+          "length": 112,
+          "name": "FIXTURE5_DATA"
+        },
+        "object_sha256": "5ec76074b531423b0e6d7a6c2543f634310b984783842401293ae8e8725a4828",
+        "source": {
+          "path": "build/workers/dos_linker_alignment_debt/package-run-20261004-v2-clean2/fixture_112.c",
+          "sha256": "3bce064727a572da573ff14fdd0bf559e5aa2432b4ca78bc95e49ca67f9a6a49",
+          "size": 124
+        }
+      }
+    ],
+    "linker_profile_notes": {
+      "rtlink400": "experimental instrument for level (c) trials; exact historical version unconfirmed",
+      "rtlink610": "experimental instrument for level (c) trials; NOT the historical SIMANT.EXE linker (exact version/manager still missing)"
+    },
+    "linker_results": [
+      {
+        "array_size": 100,
+        "far_bss": {
+          "last_offset": 2320,
+          "length": 1,
+          "name": "FAR_BSS",
+          "start_offset": 2320
+        },
+        "far_data": {
+          "end_exclusive_offset": 2308,
+          "last_offset": 2307,
+          "length": 100,
+          "name": "FIXTURE5_DATA",
+          "start_offset": 2208
+        },
+        "gap_bytes": 12,
+        "linker": "rtlink400",
+        "linker_diagnostics": [],
+        "map_rows_asserted": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2307,
+            "length": 100,
+            "name": "FIXTURE5_DATA",
+            "start": 2208
+          },
+          {
+            "class": "FAR_BSS",
+            "last_offset": 2320,
+            "length": 1,
+            "name": "FAR_BSS",
+            "start": 2320
+          }
+        ],
+        "other_zero_length_far_data_rows": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2320,
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 2320
+          }
+        ],
+        "outputs": {
+          "dosbox_config_sha256": "9b0b8ea8824ea9274b07ee513362bc3eee4431b97e5d2658ddb0457708fae94b",
+          "exe_sha256": "3649b4adc774aa2d2d53d30283913fc20ee887d004481bf8b6bcc39e7d84490d",
+          "exe_size": 3313,
+          "link_log_sha256": "fa4ec5bf78d1d9f87b7d166ef2e74a2410ae3940747486f32a9e8a151ef09664",
+          "link_script_sha256": "97df3755e594242e7189bff934b43a9b157ccde68ad55ef5378076f3ddec5444",
+          "map_sha256": "b62f3fedbfb5248305e0d4ecd34f32c6e17310e4fbfb1597329dcdb0300be03c"
+        }
+      },
+      {
+        "array_size": 112,
+        "far_bss": {
+          "last_offset": 2320,
+          "length": 1,
+          "name": "FAR_BSS",
+          "start_offset": 2320
+        },
+        "far_data": {
+          "end_exclusive_offset": 2320,
+          "last_offset": 2319,
+          "length": 112,
+          "name": "FIXTURE5_DATA",
+          "start_offset": 2208
+        },
+        "gap_bytes": 0,
+        "linker": "rtlink400",
+        "linker_diagnostics": [],
+        "map_rows_asserted": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2319,
+            "length": 112,
+            "name": "FIXTURE5_DATA",
+            "start": 2208
+          },
+          {
+            "class": "FAR_BSS",
+            "last_offset": 2320,
+            "length": 1,
+            "name": "FAR_BSS",
+            "start": 2320
+          }
+        ],
+        "other_zero_length_far_data_rows": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2320,
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 2320
+          }
+        ],
+        "outputs": {
+          "dosbox_config_sha256": "1a28337df36149a8058305708e06bf1cb4c9f51f716f7fe3c47cb628664c3f77",
+          "exe_sha256": "3649b4adc774aa2d2d53d30283913fc20ee887d004481bf8b6bcc39e7d84490d",
+          "exe_size": 3313,
+          "link_log_sha256": "fa4ec5bf78d1d9f87b7d166ef2e74a2410ae3940747486f32a9e8a151ef09664",
+          "link_script_sha256": "97df3755e594242e7189bff934b43a9b157ccde68ad55ef5378076f3ddec5444",
+          "map_sha256": "e58dea38f06c26314a26fef20ad87681ae6fab7dd76c89465c28f4871b76e57e"
+        }
+      },
+      {
+        "array_size": 100,
+        "far_bss": {
+          "last_offset": 2320,
+          "length": 1,
+          "name": "FAR_BSS",
+          "start_offset": 2320
+        },
+        "far_data": {
+          "end_exclusive_offset": 2308,
+          "last_offset": 2307,
+          "length": 100,
+          "name": "FIXTURE5_DATA",
+          "start_offset": 2208
+        },
+        "gap_bytes": 12,
+        "linker": "rtlink610",
+        "linker_diagnostics": [],
+        "map_rows_asserted": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2307,
+            "length": 100,
+            "name": "FIXTURE5_DATA",
+            "start": 2208
+          },
+          {
+            "class": "FAR_BSS",
+            "last_offset": 2320,
+            "length": 1,
+            "name": "FAR_BSS",
+            "start": 2320
+          }
+        ],
+        "other_zero_length_far_data_rows": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2320,
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 2320
+          }
+        ],
+        "outputs": {
+          "dosbox_config_sha256": "6c88171e3d7b42b602cecd9fd0a6e4a9e7a3c970e000e6bcc0d4f4715d514363",
+          "exe_sha256": "ce9a1ff0641da1fad68623f24466962764a1e5265f9148be86969993ce9231b7",
+          "exe_size": 3313,
+          "link_log_sha256": "204a27e65533400d1c32c5321916533cb9f034c2b55228e05b0bb10ad7a64c0e",
+          "link_script_sha256": "97df3755e594242e7189bff934b43a9b157ccde68ad55ef5378076f3ddec5444",
+          "map_sha256": "4a07b029bddfdf9a7d9e8f8c54873841995597c3f04250384373a05bd2f67658"
+        }
+      },
+      {
+        "array_size": 112,
+        "far_bss": {
+          "last_offset": 2320,
+          "length": 1,
+          "name": "FAR_BSS",
+          "start_offset": 2320
+        },
+        "far_data": {
+          "end_exclusive_offset": 2320,
+          "last_offset": 2319,
+          "length": 112,
+          "name": "FIXTURE5_DATA",
+          "start_offset": 2208
+        },
+        "gap_bytes": 0,
+        "linker": "rtlink610",
+        "linker_diagnostics": [],
+        "map_rows_asserted": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2319,
+            "length": 112,
+            "name": "FIXTURE5_DATA",
+            "start": 2208
+          },
+          {
+            "class": "FAR_BSS",
+            "last_offset": 2320,
+            "length": 1,
+            "name": "FAR_BSS",
+            "start": 2320
+          }
+        ],
+        "other_zero_length_far_data_rows": [
+          {
+            "class": "FAR_DATA",
+            "last_offset": 2320,
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 2320
+          }
+        ],
+        "outputs": {
+          "dosbox_config_sha256": "2d646dc6b932253fefa5134a5cce00191bd547f24e428e7091fdba2313338869",
+          "exe_sha256": "ce9a1ff0641da1fad68623f24466962764a1e5265f9148be86969993ce9231b7",
+          "exe_size": 3313,
+          "link_log_sha256": "204a27e65533400d1c32c5321916533cb9f034c2b55228e05b0bb10ad7a64c0e",
+          "link_script_sha256": "97df3755e594242e7189bff934b43a9b157ccde68ad55ef5378076f3ddec5444",
+          "map_sha256": "e98188f6dcfc2c9bdc2f9a524e099da923bff308f114692908df97f95ea24e0f"
+        }
+      }
+    ],
+    "runtime_library_inputs": {
+      "libh.lib": {
+        "path": "C:/tools/msc-6.00/LIB/libh.lib",
+        "role": "manifest-pinned MSC runtime library libh.lib",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "size": 21033
+      },
+      "llibcr.lib": {
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "role": "manifest-pinned MSC runtime library llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "size": 148711
+      }
+    },
+    "sole_source_variant": "static far array extent 100 versus 112; both use a natural one-byte far COMDEF tail_common"
+  },
+  "explicit_exclusions": {
+    "canonical_source_or_layout_edits": 0,
+    "common_tail_overlap_3": "UNADMITTED; this packet makes no finding or debt-count change for the three tail-overlap bytes",
+    "extra_padding_C_owner": "NONE; fixtures define no C object for the 12-byte gap",
+    "original_executable_inputs": 0,
+    "production_tool_edits": 0
+  },
+  "historical_boundary": {
+    "approved_ledger": "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+    "far_data_historical_status": "APPROVED_DISPOSITION",
+    "functional_alignment_candidate_does_not_claim_historical_owner_or_rewrite_bytes": true,
+    "historical_ledger_edited": false,
+    "total_explicit_bytes_before_and_after": 113
+  },
+  "inputs": [
+    {
+      "path": "src/root/m1F80.c",
+      "role": "accepted root:1F80 C source",
+      "sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+      "size": 3313
+    },
+    {
+      "path": "layout/manifest.json",
+      "role": "accepted module/object/placement manifest",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "work/data/s27_map.json",
+      "role": "S27 range map registry",
+      "sha256": "1567460fb893a26016e7b89feaed5454e505aeca0579635d0945be391e91fa40",
+      "size": 62661
+    },
+    {
+      "path": "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+      "role": "historical data-debt ledger, read-only preservation pin",
+      "sha256": "44ec036b5c7d5f0c98ba03ca8a4b7b96032d3dcabb1c2e6e63459a9ca67240c3",
+      "size": 18443
+    },
+    {
+      "path": "layout/toolchain.json",
+      "role": "compiler, assembler, linker and runner identities",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools/compiler.py",
+      "role": "historical compiler/assembler driver",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/omf.py",
+      "role": "OMF reader used to inspect SEGDEF and COMDEF records",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "work/source-only-dos/far-data-paragraph-fill-probe-v2.py",
+      "role": "reproducer self-pin",
+      "sha256": "482b9f97a11bedfd823d9c62b17e7dad9d8522151f49d8620c3cdec3dee1f49f",
+      "size": 24361
+    }
+  ],
+  "pinned_tool_inputs": [
+    {
+      "path": "layout/toolchain.json",
+      "role": "toolchain profile and expected tool identities",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools/compiler.py",
+      "role": "compiler driver implementation",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/omf.py",
+      "role": "OMF reader implementation",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "role": "DOSBox-X linker runner",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "role": "msc600ax profile pinned file",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "role": "msc600ax profile pinned file",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "role": "msc600ax profile pinned file",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "role": "msc600ax profile pinned file",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "role": "msc600ax profile pinned file",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "role": "msc600ax profile pinned file",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "role": "msc600ax profile pinned file",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "role": "msc600ax profile pinned file",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "role": "rtlink400 profile pinned file",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "role": "rtlink400 profile pinned file",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "role": "rtlink400 profile pinned file",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "role": "rtlink400 profile pinned file",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "role": "rtlink610 profile pinned file",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "role": "rtlink610 profile pinned file",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "role": "rtlink610 profile pinned file",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "role": "rtlink610 profile pinned file",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "role": "rtlink610 profile pinned file",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "role": "rtlink610 profile pinned file",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "role": "rtlink610 profile pinned file",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "role": "manifest-pinned MSC runtime library llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "role": "manifest-pinned MSC runtime library libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    }
+  ],
+  "registry_assertions": {
+    "accepted_segment_end": "50F54",
+    "far_bss_base": "50F60",
+    "far_bss_map_row": {
+      "cat": "FAR_BSS",
+      "frame": "50F6",
+      "linear": "50F60",
+      "off": "0000",
+      "owner": "linker: far communals (COMDEF), no TU",
+      "size": 19408,
+      "status": "DEBT: needs a FAR_BSS / communal allocation check"
+    },
+    "far_data_map_row": {
+      "cat": "FAR_DATA",
+      "frame": "50EF",
+      "linear": "50EF0",
+      "off": "0000",
+      "owner": "root:1F80 (text centring buffer)",
+      "size": 112,
+      "status": "RECIPE (worker rootF): static char far buf[N], 97<=N<=112 (all zero: size not fixed by bytes)"
+    },
+    "gap_bytes": 12,
+    "map_envelope_end_matches_far_bss": true,
+    "range_fields": [
+      "cat",
+      "evidence",
+      "frame",
+      "linear",
+      "nonzero",
+      "off",
+      "owner",
+      "relocs",
+      "size",
+      "status"
+    ],
+    "schema": "work/data/s27_map.json top-level ranges[] records",
+    "source": "work/data/s27_map.json"
+  },
+  "reproduce": "python work/source-only-dos/far-data-paragraph-fill-probe-v2.py --out build/workers/dos_linker_alignment_debt/<fresh-run-dir>",
+  "root_reviewed": false,
+  "schema": "simant-far-data-paragraph-fill-evidence-v2",
+  "scope": "Only the 12-byte functional paragraph-fill candidate at linear 50F54..50F5F.",
+  "scratch_output": "build/workers/dos_linker_alignment_debt/package-run-20261004-v2-clean2",
+  "status": "CANDIDATE_FOR_PARENT_REVIEW"
+}

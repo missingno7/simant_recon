@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "c244dcf",
+  "source_only_base_checkpoint": "ab24905",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "2f2d140a4cac1609ea1c7704f83ccf60dd4939c471b222162dfa0122cf06d1f8",
-    "size": 5129954
+    "sha256": "2c1a6c9d559c38ededf024e897d1b8401abde7092dd2ccbd1dc1f3929e3ba82e",
+    "size": 5550943
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "294 unresolved source symbols",
+    "288 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 154,
+  "compiled_translation_units": 156,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -38,10 +38,10 @@
   "standalone_dos_executable": false,
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
-  "unresolved_data_disposition_bytes": 78,
-  "unresolved_symbols": 294,
+  "unresolved_data_disposition_bytes": 66,
+  "unresolved_symbols": 288,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 289,
+    "reviewed FAR_BSS definition and compatible consumer views": 283,
     "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 189,
@@ -129,6 +129,22 @@
         "interior_delta": 80
       },
       "reason": "Sixteen accepted source records own the 256-byte bank. Selector and phase arithmetic bounds every read. A zero-byte public and exactly three symbolic DGROUP operands remove the historical numeric base; original table bytes and unrelated fixups are preserved."
+    },
+    {
+      "id": "s01-pattern-view-4220",
+      "status": "RESOLVED",
+      "site": [
+        "S01:3126",
+        "S01A_TEXT",
+        1448,
+        "_g_4220"
+      ],
+      "owner": "_g_41D0",
+      "owner_bytes": 256,
+      "view_offset": 80,
+      "max_displacement": 118,
+      "reason": "Source initialized high byte and masked overlapping word producer bound the phase reads within the existing bank. Scoped DGROUP frame and whole ordered-object proof remove one historical literal.",
+      "scope_limit": "Reviewed normal/interrupt SS routes and direct writer closure only; the broader numeric/frame audit remains unresolved."
     },
     {
       "id": "driver-external-ss-frames",
@@ -415,6 +431,59 @@
       "path": "work/source-only-dos/terrain-state-words-bindings-v1.json",
       "sha256": "602c792fd87663802fbbd326be5091bd82ccbf1881b3600a8a8ea956077f6a53",
       "size": 28043
+    }
+  ],
+  "v18_owner_bindings": [
+    {
+      "path": "work/source-only-dos/swarm-serialized-buffers-bindings-v1.json",
+      "sha256": "5ecdd02a76deb241f91233d8d2f186d95635582b3206f4b7e2f06d619d8d0a2c",
+      "size": 34988
+    },
+    {
+      "path": "work/source-only-dos/population-work-arrays-bindings-v1.json",
+      "sha256": "9ed9dd8ed179a5539928fc91e8c2531a05ae37a36e786559931b2b16e6d9903b",
+      "size": 28732
+    }
+  ],
+  "serialized_state_admission": {
+    "path": "work/source-only-dos/serialized-state-admission-v18.md",
+    "sha256": "14422bd6eb31f9523a6b69ba71e77e8bd3205d83ca32f91cbb7e2b913e6a845f",
+    "size": 3471
+  },
+  "s01_pattern_view_bindings": {
+    "path": "work/source-only-dos/s01-pattern-4220-bindings-v1.json",
+    "sha256": "85a88a4c1b49905c51b5af1adc3e256d923bd78bf6312c616b84c4d38640906e",
+    "size": 29674
+  },
+  "s01_pattern_view_admission": {
+    "path": "work/source-only-dos/s01-pattern-4220-admission-v18.md",
+    "sha256": "763c6150d3f8e23cbb5d647596ce0c7dc887ac956af5e32919302c6e0b96427f",
+    "size": 2024
+  },
+  "far_data_alignment_contract": {
+    "path": "work/source-only-dos/far-data-paragraph-fill-contract-v1.json",
+    "sha256": "cb13eb356f399a379c52a6276d9677d83d0e6c0dee793ba9e2008807cb723354",
+    "size": 23983
+  },
+  "far_data_alignment_admission": {
+    "path": "work/source-only-dos/far-data-paragraph-fill-admission-v18.md",
+    "sha256": "596f0e47c25ad01bfe5b010e1a3c9234f77d56752c6d4bb21fc2be5238cf17bb",
+    "size": 1702
+  },
+  "resolved_segment_alignment": [
+    {
+      "status": "PASS",
+      "module": "root:1F80",
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U094.OBJ",
+        "sha256": "e563fecd7aef5b3e0893dcb5a7864188045c089c4256e9cd5733e1dcc7c7390b",
+        "size": 1481
+      },
+      "functional_fill_bytes": 12,
+      "extra_storage_bytes": 0,
+      "historical_byte_identity_claimed": false,
+      "id": "far_data",
+      "size": 12
     }
   ],
   "historical_data_debt_bytes": 113,
@@ -3219,6 +3288,90 @@
       ],
       "publics": [],
       "fixups": []
+    },
+    {
+      "module": "source-owned:swarm-serialized-buffers",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\swarm-serialized-buffers.c",
+        "sha256": "81779084ec88a02935189f0daa87cb996bf2192fd12c6ce62b87adc3cae50e69",
+        "size": 228
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\SWARMOWN.OBJ",
+        "sha256": "46b6c70e8d7c032a4011c748787815ad588556438b5a2d7718861b26ffe786dd",
+        "size": 267
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0F46",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F84",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FC6",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1008",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:population-work-arrays",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\population-work-arrays.c",
+        "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+        "size": 207
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\POPWORK.OBJ",
+        "sha256": "cec9dd6f85da7e307d6a7968c20909c7b3dc8570c3e12884bdc144f2ae42a310",
+        "size": 229
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0AEC",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0AFA",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
     }
   ],
   "reviewed_data_aliases": [
@@ -4703,8 +4856,8 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U004.OBJ",
-        "sha256": "7fd7972dc8ab587f3d34de9e0ef08b763d207245b8f237223b235cf61c84670f",
-        "size": 10051
+        "sha256": "332fe6254b30c5bc3f739a024c16fb6e786b954bc0e2709e5547564daec2dfa8",
+        "size": 10056
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
@@ -5230,6 +5383,15 @@
           "offset": 2091,
           "old_operand": 15868,
           "target": "_g_3DFC",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1448,
+          "old_operand": 16928,
+          "target": "_g_4220",
           "frame": "DGROUP",
           "displacement": 0,
           "addend": "0000"
@@ -7703,8 +7865,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "59264e96df3355448e8fe1c41b1513a1ff3c42ce7cbbe49610d41c6301f607fc",
-      "size": 60512
+      "sha256": "26b287754f0585392e4c210faf47a5cfd73df50338f71853be631ee7f10d2efa",
+      "size": 63580
     },
     {
       "path": "tools\\compiler.py",
@@ -7722,34 +7884,44 @@
       "size": 29112
     },
     {
+      "path": "tools\\dos_alignment_debt.py",
+      "sha256": "49dc7a2217764c10f1de438edc5295d54844080c35f58ce698b6c60c2b9c807a",
+      "size": 4254
+    },
+    {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "2be0d094ad69596ce0fb40a0f245e0098f02c64c4742fb626bbb9d57c8ec902e",
-      "size": 90534
+      "sha256": "9450a189c0666eb60d823301a2fa3fc7afe89f267194c7a66d40aa31abf711de",
+      "size": 96154
     },
     {
       "path": "tools\\farbss.py",
       "sha256": "8c2c32ce7ce760d30f257c50ab6e984883dd4a083b8902cd79910b616d84a178",
       "size": 16330
+    },
+    {
+      "path": "tools\\modules.py",
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+      "size": 60548
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v17.log",
-      "sha256": "ba45c231e01c40a0430ff07d2c6c661efda4a48fbe87ef30b30698e66c66a11b",
-      "size": 5033
+      "path": "build/source-only-dos-run-v18.log",
+      "sha256": "a01b9166feb248ffdc9aa2aba28e6990b6941c3bf93f934e156d526e5229e755",
+      "size": 5141
     },
     {
-      "path": "build/source-only-dos-tests-v17.log",
-      "sha256": "a0e330f1ac28b4803c3b583c384727e39d2c7ddd15b0e552b3f12fa1bebde298",
-      "size": 29971
+      "path": "build/source-only-dos-tests-v18.log",
+      "sha256": "c6acc334b82e7903d24a6ea81725a0ee8ef97c081ea1a5506b8661fe652d1313",
+      "size": 30338
     },
     {
-      "path": "build/source-only-dos-validation-v17.log",
+      "path": "build/source-only-dos-validation-v18.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "41 targeted tests included in 355 repository tests PASS (2 skips)",
+  "source_only_tests": "44 targeted tests included in 358 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }
