@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "5e4f9ba",
+  "source_only_base_checkpoint": "e803d8d",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "d76cce230344499eafe07da756f93fbe344aa2a62766ee269ce95d59cf401fd0",
-    "size": 5909189
+    "sha256": "be2871f8acfdcce12ec4026d673a38661a3c67c21bace19d590c8ef8a4a6b61d",
+    "size": 6097447
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "283 unresolved source symbols",
+    "277 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 159,
+  "compiled_translation_units": 160,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 66,
-  "unresolved_symbols": 283,
+  "unresolved_symbols": 277,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 278,
+    "reviewed FAR_BSS definition and compatible consumer views": 272,
     "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 189,
@@ -471,6 +471,18 @@
     "path": "work/source-only-dos/storage-admission-v19.md",
     "sha256": "907dcae7422ae6fdb36b67e5710cc824f6bce6e18ed907a4f4a19f8616fccb96",
     "size": 3450
+  },
+  "v20_owner_bindings": [
+    {
+      "path": "work/source-only-dos/sound-control-words-bindings-v1.json",
+      "sha256": "a25989cdc440f79677ecd39376484506ede34533d03a659ec5f0c8f742eecbcb",
+      "size": 34892
+    }
+  ],
+  "storage_admission_v20": {
+    "path": "work/source-only-dos/storage-admission-v20.md",
+    "sha256": "e133f7331f7745e051c29e9f862ce239edd9990165b8992476f2cd4e2acca070",
+    "size": 2043
   },
   "s01_pattern_view_bindings": {
     "path": "work/source-only-dos/s01-pattern-4220-bindings-v1.json",
@@ -3484,6 +3496,69 @@
       "communals": [
         {
           "name": "_fd_50F6_0354",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:sound-control-words",
+      "source": {
+        "path": "work\\source-only-dos\\sound-control-words-v20\\provider.c",
+        "sha256": "43432778e132096f7fe228f01d08a510a1b8ad52dd4fb1fd96098f87f2b05fb0",
+        "size": 217
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\SNDCTRL.OBJ",
+        "sha256": "34d9910cc8afa9f401c08af71194db9b1ada301df9386cf25b7213ff69e4b82c",
+        "size": 301
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_4A46",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A48",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A4A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A4C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B14",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B16",
           "kind": "far",
           "length": 2,
           "count": 2,
@@ -7985,8 +8060,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "c370cc117ee161a5e82a3db2abd6df070443566ad5a6e493677c6e1e13b9e23c",
-      "size": 63844
+      "sha256": "0c661638d6de3c75f4990f3f80cf2b2c9645ed9479817e1ee5c1778242eef835",
+      "size": 63982
     },
     {
       "path": "tools\\compiler.py",
@@ -8010,8 +8085,8 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "b9cd81c724b7ce41873415b5dce4fbc95cc7a8a15c225c1ac99626e7955a9434",
-      "size": 101225
+      "sha256": "fd589935b696d2067ff2b4625a15105b4ee1ce70488db23cbc12d7dc986cb891",
+      "size": 106056
     },
     {
       "path": "tools\\farbss.py",
@@ -8026,22 +8101,22 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v19.log",
-      "sha256": "d69a9feac148fab5cc3fad68bcd90d19be2c7642601121ae08198fbe43cc833b",
-      "size": 5295
+      "path": "build/source-only-dos-run-v20-final.log",
+      "sha256": "f6763b7a1aacdbc675c24372f31316196bb44113a7724dca3081a1f07da4470c",
+      "size": 5345
     },
     {
-      "path": "build/source-only-dos-tests-v19.log",
-      "sha256": "26ba7cbe83f6a8387c7f98aaa652a97c3eae1e122af1d20bd78c6c818fd9c6ab",
+      "path": "build/source-only-dos-tests-v20-combined.log",
+      "sha256": "101dd69e1202a8d8550cc43f9aad2c3ebc2f7db35e3966bf25a46495c102b42b",
       "size": 25564
     },
     {
-      "path": "build/source-only-dos-validation-v19.log",
+      "path": "build/source-only-dos-validation-v20.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "45 targeted tests included in 359 repository tests PASS (2 skips)",
+  "source_only_tests": "46 targeted tests included in 360 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

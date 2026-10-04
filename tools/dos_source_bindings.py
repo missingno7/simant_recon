@@ -614,6 +614,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V17_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V18_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V19_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V20_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -621,7 +622,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -1542,3 +1543,83 @@ def require_v19_storage_contracts(report, profile, tool):
                 or controls[2].get('segment', {}).get('class') != 'FAR_DATA'
                 or controls[2].get('segment', {}).get('length') != 2):
             raise ValueError('control flag words lack rejected compiler shapes')
+
+
+# Source-functional sound-control storage. All six words have complete signed
+# word views; they are distinct objects, not an inferred packed common block.
+PROVIDER_SPECS['source-owned:sound-control-words'] = ('SNDCTRL', None,
+    (('_fd_50F6_4A46', 2), ('_fd_50F6_4A48', 2), ('_fd_50F6_4A4A', 2),
+     ('_fd_50F6_4A4C', 2), ('_fd_50F6_4B14', 2), ('_fd_50F6_4B16', 2)),
+    'int far fd_50F6_4A46; int far fd_50F6_4A48; int far fd_50F6_4A4A; '
+    'int far fd_50F6_4A4C; int far fd_50F6_4B14; int far fd_50F6_4B16;')
+FAR_PROVIDER_MODULES.add('source-owned:sound-control-words')
+V20_STORAGE_ANCHORS = {
+    '_fd_50F6_4A46': (0x4A46, ('fd_50F6_4A46',)),
+    '_fd_50F6_4A48': (0x4A48, ('fd_50F6_4A48',)),
+    '_fd_50F6_4A4A': (0x4A4A, ('fd_50F6_4A4A',)),
+    '_fd_50F6_4A4C': (0x4A4C, ('fd_50F6_4A4C',)),
+    '_fd_50F6_4B14': (0x4B14, ('fd_50F6_4B14',)),
+    '_fd_50F6_4B16': (0x4B16, ('fd_50F6_4B16',)),
+}
+V20_STORAGE_CONTRACTS = {
+    'source-owned:sound-control-words': ('sound_control_words_contract', {
+        'typed_raw_positive': 'PASS_TYPED_RAW',
+        'wrong_width_long_owner': 'WRONG_WIDTH_FOUR_BYTE_OWNER_DETECTED',
+        'wrong_signedness_unsigned_view': 'WRONG_UNSIGNED_VIEW_DETECTED',
+        'initialized_nonzero_owner': 'INITIALIZED_NONZERO_OWNER_DETECTED',
+        'shifted_alias_base': 'SHIFTED_ALIAS_BASE_DETECTED'}),
+}
+
+
+def require_v20_storage_contracts(report, profile, tool):
+    _require_reviewed_storage_contracts(report, profile, tool, V20_STORAGE_CONTRACTS)
+    _require_clean_owner_maps(report, profile, V20_STORAGE_CONTRACTS)
+    module = 'source-owned:sound-control-words'
+    if not any(row['module'] == module for row in report['translation_units']):
+        return
+    contract = report.get('sound_control_words_contract', {})
+    expected = provider_communals(module)
+    controls = contract.get('compiler_controls', {})
+    if (controls.get('owner_communals') != expected
+            or controls.get('wider_communals') != [dict(c, count=4, length=4) for c in expected]
+            or controls.get('unsigned_communals') != expected
+            or controls.get('initialized_communal_absent') is not True
+            or sorted(controls.get('initialized_publics', [])) != sorted(c['name'] for c in expected)):
+        raise ValueError('sound control words lack measured compiler shapes')
+    names = [name.lower() for name, _ in PROVIDER_SPECS[module][2]]
+    for case in contract['cases']:
+        if case['linker'] != profile:
+            continue
+        aliases = []
+        for prefix, delta in {
+                'typed_raw_positive': (('exact', 0),),
+                'wrong_width_long_owner': (('whole', 0), ('upper', 2)),
+                'shifted_alias_base': (('shift', 2),)}.get(case['case'], ()):
+            aliases.extend((f'_probe{prefix}{i}', name, delta) for i, name in enumerate(names))
+        relations = case.get('alias_map_relations', [])
+        required = sorted(names + [alias for alias, _, _ in aliases])
+        if (case.get('runner_returncode') != 0
+                or case.get('all_required_publics_in_both_sections') is not True
+                or sorted(case.get('required_publics', [])) != required
+                or set(case.get('map_public_sections', {})) != {'Name', 'Value'}
+                or any(section.get('heading_present') is not True
+                       or section.get('missing_required_publics') != []
+                       for section in case['map_public_sections'].values())
+                or len(relations) != len(aliases)
+                or sorted((r.get('alias'), r.get('target'), r.get('expected_offset_delta'))
+                          for r in relations) != sorted(aliases)):
+            raise ValueError('sound control words lack complete map/alias controls')
+        for relation in relations:
+            addresses = []
+            for section in ('name', 'value'):
+                try:
+                    alias = tuple(int(n, 16) for n in relation[f'alias_address_{section}_section'].split(':'))
+                    target = tuple(int(n, 16) for n in relation[f'target_address_{section}_section'].split(':'))
+                except (KeyError, ValueError, AttributeError):
+                    raise ValueError('sound control words lack measured alias addresses')
+                if (len(alias) != 2 or len(target) != 2 or alias[0] != target[0]
+                        or alias[1] != target[1] + relation['expected_offset_delta']):
+                    raise ValueError('sound control word alias displacement changed')
+                addresses.append((alias, target))
+            if relation.get('passed') is not True or addresses[0] != addresses[1]:
+                raise ValueError('sound control word map sections disagree')

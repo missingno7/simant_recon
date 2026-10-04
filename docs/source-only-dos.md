@@ -551,3 +551,33 @@ mismatch was fixed before the successful full rerun. The
 [runtime heap review](../work/source-only-dos/fheap-runtime-debt-v19/README.md)
 retains its fourteen-byte debt despite automatic archive selection in minimal
 controls; absent direct imports alone cannot discharge it.
+
+## v20: sound-control word owners
+
+Six independent signed two-byte FAR objects now have a source-functional
+provider. The 156-source census accounts for all 79 non-declaration references
+and finds no alternate bases, interiors, numeric operands, assembly accesses,
+address escapes or SaveRec views. Their extents follow complete scalar types.
+Root reviewed the actual OMF objects, link logs and both public map sections;
+both RTLink versions passed startup and typed/raw access plus width,
+signedness, initializer and shifted-alias controls. The gate requires every
+measured alias displacement and rejects missing or contradictory map evidence.
+See the [root admission](../work/source-only-dos/storage-admission-v20.md).
+
+All 160 TUs compile (127 canonical plus 33 providers). Missing imports are now
+277: 272 FAR_BSS and five DGROUP cases. The original DGROUP inventory remains
+41 of 46 resolved. Functional data debt remains 66 bytes, with 113 historical
+bytes; all 29 effective behavioral implementations remain strictly confirmed.
+Original-byte counters and denied oracle reads remain zero.
+
+The six-word provider does not close the separate channel/voice record owners
+or fatal-path cleanup. Both database returning-Punt gates, mutable unlock
+rereads, graphics state/copy bounds and the wider numeric/frame audit remain
+open. Independent linking is refused; full DOS execution, human acceptance and
+functional-source-oracle-v1 remain pending. SDL3 remains paused.
+
+The boundary passed 46 source-only tests, 314 other repository tests (two
+skips), and historical validation. All 20 storage/frame gates and the alignment gate pass under both
+linker profiles. The [replay wrapper](../work/source-only-dos/sound-control-words-v20/replay.py)
+reruns the pinned component probe in a fresh unadmitted directory, preserving
+the admitted research outputs; its smoke run passed all ten cases.

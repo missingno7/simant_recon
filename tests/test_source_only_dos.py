@@ -18,6 +18,56 @@ import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_v20_sound_words_require_types_shapes_and_complete_alias_maps(self):
+        worker=ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report={'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _,symbols=dos.prepare(Path(directory),report)
+            row=next(r for r in report['translation_units'] if r['module']=='source-owned:sound-control-words')
+            provider=row['storage_provider'];source=(ROOT/row['source']['path']).read_text(encoding='ascii')
+            def compile(text):
+                result=compiler.compile_c(text,row['profile'],row['flags'],basename=row['basename'])
+                self.assertTrue(result.ok,result.log)
+                return OmfReader(communals=True).read(result.obj)
+            bindings.review_provider_source(source,provider,symbols)
+            self.assertEqual(bindings.verify_provider(compile(source),provider)['status'],'PASS')
+            wide=source.replace('int far','long far')
+            with self.assertRaises(ValueError): bindings.verify_provider(compile(wide),provider)
+            unsigned=source.replace('int far','unsigned int far')
+            self.assertEqual(bindings.verify_provider(compile(unsigned),provider)['status'],'PASS')
+            with self.assertRaises(ValueError): bindings.review_provider_source(unsigned,provider,symbols)
+            initialized=source.replace('fd_50F6_4A46;','fd_50F6_4A46 = 1;')
+            with self.assertRaises(ValueError): bindings.verify_provider(compile(initialized),provider)
+            for off in (0,1):
+                registry=json.loads(json.dumps(symbols))
+                registry['data']['unreviewed_view']=dict(registry['data']['fd_50F6_4A46'],off=0x4A46+off)
+                with self.assertRaises(ValueError): bindings.review_provider_source(source,provider,registry)
+            report['runtime_components']=[];tc=compiler.toolchain()
+            for profile in ('rtlink400','rtlink610'):
+                bindings.require_v20_storage_contracts(report,profile,tc['linkers'][profile])
+            for change in ('root','missing','duplicate','result','warning','tool','shape','heading',
+                           'required_public','empty_aliases','missing_alias','delta','address','section'):
+                wrong=json.loads(json.dumps(report));contract=wrong['sound_control_words_contract']
+                case=next(r for r in contract['cases'] if r['linker']=='rtlink400' and r['case']=='typed_raw_positive')
+                if change=='root':contract['root_reviewed']=False
+                elif change=='missing':contract['cases'].remove(case)
+                elif change=='duplicate':contract['cases'].append(dict(case))
+                elif change=='result':case['actual']='UNREVIEWED'
+                elif change=='warning':case['linker_diagnostics']=['Unresolved external']
+                elif change=='tool':
+                    for identity in contract['inputs']:identity['sha256']='0'*64
+                elif change=='shape':contract['compiler_controls']['wider_communals'][0]['length']=2
+                elif change=='heading':case['map_public_sections']['Name']['heading_present']=False
+                elif change=='required_public':case['required_publics'].pop()
+                elif change=='empty_aliases':case['alias_map_relations']=[]
+                elif change=='missing_alias':case['alias_map_relations'].pop()
+                elif change=='delta':case['alias_map_relations'][0]['expected_offset_delta']=2
+                elif change=='address':case['alias_map_relations'][0]['alias_address_name_section']='FFFF:0000'
+                else:case['alias_map_relations'][0]['alias_address_value_section']='FFFF:0000'
+                with self.assertRaises(ValueError,msg=change):
+                    bindings.require_v20_storage_contracts(wrong,'rtlink400',tc['linkers']['rtlink400'])
+
     def test_v19_storage_rejects_wrong_shapes_and_incomplete_control_receipts(self):
         worker=ROOT/'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True,exist_ok=True)
