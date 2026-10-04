@@ -803,3 +803,19 @@ are separate questions; no original byte initializer is introduced.
 The v27 acceptance boundary passes 370 repository tests (two skips), including
 56 source-only tests, historical validation and all 28 mandatory evidence gates
 plus alignment under both RTLinks.
+
+## v28 structural investigations (no admission)
+
+The [preserved investigations](../work/source-only-dos/structural-audits-v28/README.md)
+prove loaded-image zero for five remaining FAR_BSS words, confirm five menu titles
+for the supplied SHARED resource with retained-ring-tail controls, and distinguish
+the missing resident clip-list initializer from dynamic list allocation. Their
+backing owners and wider layout contracts remain open.
+
+Real pinned-runtime heap controls execute under both RTLinks. Full-app research
+links retain 22 undefined imports and were never executed; RTLink 4.00 also
+reports duplicate __ffree. RTLink 6.10's unused fdata contribution has no selected
+far-heap-family importer. Its selection cause and historical 79F0 mapping remain
+open. The read-only archive recheck passes against 186 current object hashes,
+183 readonly receipt pins, six resource identities and saved runtime/map outputs.
+No production or historical debt count changes at this research boundary.

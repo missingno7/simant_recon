@@ -1,0 +1,410 @@
+{
+  "schema": "simant-dos-farbss-zero-owner-disassembly-sweep-v33",
+  "read_only": true,
+  "original_bytes_serialized": false,
+  "original_image": {
+    "path_from_oracle_lock": "assets/SIMANT.EXE",
+    "oracle_lock_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "far_bss_frame": "50F6",
+    "far_bss_region_start_linear": "50F60",
+    "far_bss_region_end_linear": "55B30",
+    "far_bss_region_bytes": 19408,
+    "far_bss_region_all_zero": true,
+    "zero_region_sha256": "67acd3e124fce1ef4ee41749b2a41bd2a30ee3310047d8b7ff8eab893e557a1a"
+  },
+  "disassembly_scope": {
+    "function_table": "layout/functions.json",
+    "function_rows": 1730,
+    "units": 28,
+    "scan": "all direct ES:[immediate] operands at target offsets; frame cross-check via dataref.far_refs",
+    "unclassified_or_unframed_references": []
+  },
+  "farbss_accounting": {
+    "region_accounted": true,
+    "all_zero_failures": [],
+    "target_classification_source": "declaration parsed by farbss.py; no compiler --probe run"
+  },
+  "targets": {
+    "fd_50F6_04C0": {
+      "address": "50F6:04C0",
+      "initial_image_bytes_hex": "0000",
+      "registered_names_at_offset": [
+        "fd_50F6_04C0"
+      ],
+      "next_registered_offset": "04C2",
+      "next_registered_gap_bytes": 2,
+      "farbss_size_status": "consistent",
+      "farbss_size_evidence": [
+        "declaration:2@root:15F8"
+      ],
+      "direct_reference_count": 1,
+      "direct_reference_reads": 1,
+      "direct_reference_writes": 0,
+      "direct_reference_unknowns": 0,
+      "direct_references": [
+        {
+          "unit": "root",
+          "function": "main",
+          "function_address": "15F8:0004",
+          "instruction_offset": "0255",
+          "mnemonic": "cmp",
+          "operands": "word ptr es:[0x4c0], ax",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        }
+      ]
+    },
+    "fd_50F6_0B20": {
+      "address": "50F6:0B20",
+      "initial_image_bytes_hex": "0000",
+      "registered_names_at_offset": [
+        "fd_50F6_0B20"
+      ],
+      "next_registered_offset": "0B22",
+      "next_registered_gap_bytes": 2,
+      "farbss_size_status": "consistent",
+      "farbss_size_evidence": [
+        "declaration:2@S06:35F5"
+      ],
+      "direct_reference_count": 2,
+      "direct_reference_reads": 2,
+      "direct_reference_writes": 0,
+      "direct_reference_unknowns": 0,
+      "direct_references": [
+        {
+          "unit": "S06",
+          "function": "o06_35F5_020C",
+          "function_address": "35F5:020C",
+          "instruction_offset": "0031",
+          "mnemonic": "cmp",
+          "operands": "word ptr es:[0xb20], 0xa8",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "S06",
+          "function": "o06_35F5_14CC",
+          "function_address": "35F5:14CC",
+          "instruction_offset": "02ED",
+          "mnemonic": "cmp",
+          "operands": "word ptr es:[0xb20], 0x8d",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        }
+      ]
+    },
+    "fd_50F6_0F38": {
+      "address": "50F6:0F38",
+      "initial_image_bytes_hex": "0000",
+      "registered_names_at_offset": [
+        "fd_50F6_0F38"
+      ],
+      "next_registered_offset": "0F3A",
+      "next_registered_gap_bytes": 2,
+      "farbss_size_status": "consistent",
+      "farbss_size_evidence": [
+        "declaration:2@root:004A"
+      ],
+      "direct_reference_count": 3,
+      "direct_reference_reads": 3,
+      "direct_reference_writes": 0,
+      "direct_reference_unknowns": 0,
+      "direct_references": [
+        {
+          "unit": "root",
+          "function": "f_004A_008A",
+          "function_address": "004A:008A",
+          "instruction_offset": "0015",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xf38]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_0172",
+          "function_address": "004A:0172",
+          "instruction_offset": "0012",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xf38]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_01E9",
+          "function_address": "004A:01E9",
+          "instruction_offset": "0012",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xf38]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        }
+      ]
+    },
+    "fd_50F6_0FB6": {
+      "address": "50F6:0FB6",
+      "initial_image_bytes_hex": "0000",
+      "registered_names_at_offset": [
+        "fd_50F6_0FB6"
+      ],
+      "next_registered_offset": "0FB8",
+      "next_registered_gap_bytes": 2,
+      "farbss_size_status": "consistent",
+      "farbss_size_evidence": [
+        "declaration:2@S08:35F5",
+        "declaration:2@S22:39C7",
+        "declaration:2@root:004A",
+        "declaration:2@root:015B"
+      ],
+      "direct_reference_count": 12,
+      "direct_reference_reads": 12,
+      "direct_reference_writes": 0,
+      "direct_reference_unknowns": 0,
+      "direct_references": [
+        {
+          "unit": "S08",
+          "function": "RandWorld",
+          "function_address": "35F5:0050",
+          "instruction_offset": "04EB",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "S22",
+          "function": "SetAlarmDropState",
+          "function_address": "39C7:1A57",
+          "instruction_offset": "00A2",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_02AD",
+          "function_address": "004A:02AD",
+          "instruction_offset": "001F",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_02AD",
+          "function_address": "004A:02AD",
+          "instruction_offset": "005D",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_02AD",
+          "function_address": "004A:02AD",
+          "instruction_offset": "009B",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_038B",
+          "function_address": "004A:038B",
+          "instruction_offset": "001E",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_038B",
+          "function_address": "004A:038B",
+          "instruction_offset": "003E",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_038B",
+          "function_address": "004A:038B",
+          "instruction_offset": "005E",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "SetMapPlaneLocation",
+          "function_address": "015B:03C6",
+          "instruction_offset": "0020",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "SetMapPlaneLocation",
+          "function_address": "015B:03C6",
+          "instruction_offset": "0065",
+          "mnemonic": "sub",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "SetMapPlane",
+          "function_address": "015B:053C",
+          "instruction_offset": "001F",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "SetMapPlane",
+          "function_address": "015B:053C",
+          "instruction_offset": "0064",
+          "mnemonic": "sub",
+          "operands": "ax, word ptr es:[0xfb6]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        }
+      ]
+    },
+    "fd_50F6_0FFA": {
+      "address": "50F6:0FFA",
+      "initial_image_bytes_hex": "0000",
+      "registered_names_at_offset": [
+        "fd_50F6_0FFA"
+      ],
+      "next_registered_offset": "0FFC",
+      "next_registered_gap_bytes": 2,
+      "farbss_size_status": "consistent",
+      "farbss_size_evidence": [
+        "declaration:2@S08:35F5",
+        "declaration:2@S22:39C7",
+        "declaration:2@root:004A",
+        "declaration:2@root:015B"
+      ],
+      "direct_reference_count": 10,
+      "direct_reference_reads": 10,
+      "direct_reference_writes": 0,
+      "direct_reference_unknowns": 0,
+      "direct_references": [
+        {
+          "unit": "S08",
+          "function": "RandWorld",
+          "function_address": "35F5:0050",
+          "instruction_offset": "04E2",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "S22",
+          "function": "SetAlarmDropState",
+          "function_address": "39C7:1A57",
+          "instruction_offset": "0099",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_02AD",
+          "function_address": "004A:02AD",
+          "instruction_offset": "003D",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_02AD",
+          "function_address": "004A:02AD",
+          "instruction_offset": "007B",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_02AD",
+          "function_address": "004A:02AD",
+          "instruction_offset": "00B9",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_040E",
+          "function_address": "004A:040E",
+          "instruction_offset": "001E",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_040E",
+          "function_address": "004A:040E",
+          "instruction_offset": "003E",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "f_004A_040E",
+          "function_address": "004A:040E",
+          "instruction_offset": "005E",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "SetMapPlaneLocation",
+          "function_address": "015B:03C6",
+          "instruction_offset": "0017",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        },
+        {
+          "unit": "root",
+          "function": "SetMapPlane",
+          "function_address": "015B:053C",
+          "instruction_offset": "0016",
+          "mnemonic": "push",
+          "operands": "word ptr es:[0xffa]",
+          "access": "read",
+          "frame_50F6_confirmed_by_dataref": true
+        }
+      ]
+    }
+  }
+}

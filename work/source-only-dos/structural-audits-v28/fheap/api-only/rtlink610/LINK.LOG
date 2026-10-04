@@ -1,0 +1,52 @@
+.RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,
+Version 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in
+DOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.
+with data swapping  Serial Number: 836-103-6260
+
+Pocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)
+Information. "Microsoft" and "CodeView" are registered trademarks of
+Microsoft Corporation.
+
+=> OUTPUT APIONLY
+=> MAP = APIONLY S,N,A,L,V,X
+=> NODEFLIB
+=> FILE APIONLY
+=> LIBRARY LLIBCR, LIBH
+=> VERBOSE
+=> 
+**** LOAD OBJECT CODE ****
+APIONLY.OBJ(APIONLY.C)
+**** LIBRARY SEARCH ****
+LLIBCR.LIB(dos\crt0.asm)
+LLIBCR.LIB(dos\crt0dat.asm)
+LLIBCR.LIB(dos\crt0msg.asm)
+LLIBCR.LIB(crt0fp.asm)
+LLIBCR.LIB(chksum.asm)
+LLIBCR.LIB(dos\stdargv.asm)
+LLIBCR.LIB(dos\stdenvp.asm)
+LLIBCR.LIB(dos\nmsghdr.asm)
+LLIBCR.LIB(dos\stdalloc.asm)
+LLIBCR.LIB(malloc.asm)
+LLIBCR.LIB(free.asm)
+LLIBCR.LIB(fmalloc.asm)
+LLIBCR.LIB(fdata.asm)
+LLIBCR.LIB(initseg.asm)
+LLIBCR.LIB(linkseg.asm)
+LLIBCR.LIB(searchsg.asm)
+LLIBCR.LIB(growseg.asm)
+LLIBCR.LIB(newseg.asm)
+**** ASSIGN ADDRESSES ****
+**** WRITING EXECUTABLE ****
+**** PRINT MAP ****
+
+____________________________________________________________________________
+
+MEMORY LAYOUT SUMMARY for: APIONLY.EXE
+
+  Load Size:						4.K	+2BH Para
+
+NOTE: Your program may have additional memory requirements depending on the
+  memory usage characteristics of your compiler. See your compiler
+  documentation for specifics.
+____________________________________________________________________________
+

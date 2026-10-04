@@ -1,0 +1,263 @@
+{
+  "schema": "simant-dos-menu-resource-bound-v34",
+  "status": "REVIEW_ONLY_GATE_OPEN",
+  "existing_gate": {
+    "name": "menu-table-cross-owner-layout",
+    "status": "OPEN"
+  },
+  "scope": "bounded source and installed-resource inventory; no production source, manifest, gate, or promotion edits",
+  "claims": {
+    "array_views": {
+      "xpos": "fd_50F6_46A8, int far[]",
+      "widths": "fd_50F6_46BC, int far[]",
+      "delay": "fd_50F6_46D0, signed int far word",
+      "handle": "fd_50F6_46D2, excluded neighboring pointer/table storage",
+      "aliases": [
+        "widths[10] is 50F6:46D0 (delay)",
+        "xpos[10] is 50F6:46BC (widths[0])",
+        "xpos[20] is 50F6:46D0 (delay)"
+      ]
+    },
+    "writer": {
+      "function": "f_1FD2_0663",
+      "loop_shape": "two uncapped null-sentinel passes over g_6054->titles",
+      "first_pass": "writes widths[i] and only afterward records g_604C=i",
+      "second_pass": "resets i and writes xpos[i]",
+      "mode_resource_count_is_not_a_source_capacity": true
+    },
+    "startup_selection": {
+      "source": "src/S20/m39F1.c::IBMInitStuff",
+      "condition": "if g_3DB2 == 320, try MENU object 1; if it is missing, try object 0; otherwise try object 0 directly",
+      "failure": "Punt(\"Cannot load menu\") if the selected/fallback object cannot be loaded",
+      "lookup": "db_LoadObject searches currently open db_handles in order and returns the first DBRecall hit",
+      "open_database_order": "optional language, shared, optional lrshare for modes 2/4, then adapter/mode database; sound is opened later in main",
+      "adapter_database_name": "f_205F_0004 appends \"nt\" to g_629A[g_5A97]"
+    },
+    "installed_resource_result": {
+      "supplied_dat_ndx_pairs": [
+        "HCEGANT.NDX",
+        "SHARED.NDX",
+        "SOUND.NDX"
+      ],
+      "kind6_object_1_in_supplied_indices": false,
+      "kind6_object_0_locations": [
+        "SHARED.NDX"
+      ],
+      "bundled_menu_object_0": {
+        "database": "SHARED",
+        "object_id": 0,
+        "kind": 6,
+        "kind_name_from_src_root_m19A9": "MENU",
+        "index_ordinal_zero_based": 153,
+        "index_record_offset": 51378,
+        "index_flags": 1,
+        "packed_record_bytes": 455,
+        "expanded_resource_bytes": 514,
+        "compressed_input_bytes_consumed": 453,
+        "expanded_resource_sha256": "4b8b92a60651c809455189afff58c547eb34593f427aa35e1c8a855f51f732e4",
+        "menu_data_titles_pointer_offset": 28,
+        "nonnull_title_pointer_count": 5,
+        "null_sentinel_present": true,
+        "active_item_table_counts": [
+          8,
+          7,
+          8,
+          6,
+          6
+        ],
+        "raw_or_expanded_resource_bytes_embedded": false,
+        "strings_embedded": false
+      },
+      "bundled_object_0_title_count_below_overlap": true,
+      "scope_limit": "This count is for the exact SHARED object 0 in the supplied assets. Optional language.dat, lrshare, and other adapter databases are not present here, so their first-hit resources and object-1 count are not established."
+    },
+    "ownership_model": {
+      "result": "resource/index-owned for the observed menu payload; the C loader selects and relocates the loaded pointer graph, while the resource count is carried by the loaded MENU object",
+      "effective_index_source": {
+        "path": "evidence/behavior/functions/FindIndex/module.c",
+        "status": "BEHAVIOR_EXACT_CONFIRMED",
+        "whole_module": true,
+        "module": "root:1986",
+        "preconditions": "sorted valid index arrays and valid database handles, as recorded by the strict review",
+        "canonical_note": "src/root/m1986.c keeps a scaffolded historical draft, but the strict-effective source-only module supplies the complete FindIndex body; source-level lookup behavior is not open on that path",
+        "historical_bytes": "behavioral closure does not claim historical byte identity"
+      }
+    },
+    "gate_disposition": "KEEP OPEN: object 0 in SHARED is bounded at five titles, but object 1 and optional/mode-specific first-hit resources are not inventoried; no source cap exists, and the pointer arrays physically alias after ten entries. FindIndex lookup behavior is closed by its strict-effective whole-module source under documented preconditions, so the remaining frontier is missing resource coverage and count."
+  },
+  "pins": {
+    "current_source_files": [
+      {
+        "path": "src/root/m1FD2.c",
+        "bytes": 10086,
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8"
+      },
+      {
+        "path": "src/S17/m384C.c",
+        "bytes": 2302,
+        "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "bytes": 10707,
+        "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5"
+      },
+      {
+        "path": "src/S20/m39F1.c",
+        "bytes": 6627,
+        "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b"
+      },
+      {
+        "path": "src/root/m205F.c",
+        "bytes": 6015,
+        "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "bytes": 5159,
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+      },
+      {
+        "path": "src/root/m1A28.c",
+        "bytes": 3200,
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+      },
+      {
+        "path": "src/root/m1986.c",
+        "bytes": 3351,
+        "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96"
+      },
+      {
+        "path": "src/root/m19A9.c",
+        "bytes": 4870,
+        "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523"
+      },
+      {
+        "path": "src/root/m1B05.asm",
+        "bytes": 5568,
+        "sha256": "3124ef4a45c572a54529bd5a57cd9225b40fdcafadd63c6b06cb748683cacca4"
+      },
+      {
+        "path": "src/root/m15F8.c",
+        "bytes": 4897,
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      {
+        "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+        "bytes": 10518,
+        "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888"
+      },
+      {
+        "path": "evidence/behavior/functions/FindIndex/module.c",
+        "bytes": 2872,
+        "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a"
+      },
+      {
+        "path": "build/workers/dos_delay_word_owner_v33/source-addendum-v33.json",
+        "bytes": 16858,
+        "sha256": "a6fad53037d90f7dca76828a1c45a73569eb8e8877736dbf0be90b303dde990a"
+      },
+      {
+        "path": "build/workers/dos_delay_word_owner_v33/source-addendum-v33.md",
+        "bytes": 2329,
+        "sha256": "c8ebc194e070ba7774cf11602818e65d02b33976077c91a00ed60ac34d95e073"
+      }
+    ],
+    "current_registries": [
+      {
+        "path": "layout/symbols.json",
+        "bytes": 800809,
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+      },
+      {
+        "path": "layout/manifest.json",
+        "bytes": 628980,
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "bytes": 18807,
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      {
+        "path": "layout/functions.json",
+        "bytes": 356104,
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/index-v1.json",
+        "bytes": 6796,
+        "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a"
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/FindIndex.json",
+        "bytes": 14600,
+        "sha256": "d9f61367df4d79b2bd07e284140b8c9a34db80dda5b1d4bceac7f31ffd6ec5fc"
+      },
+      {
+        "path": "evidence/behavior/manifest.json",
+        "bytes": 28379,
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea"
+      },
+      {
+        "path": "evidence/behavior/functions/FindIndex/evidence.json",
+        "bytes": 11108,
+        "sha256": "8de2f5ff812103303c0240d944214bbd0e996a5c9f26ac1b7987abba81a52e1e"
+      }
+    ],
+    "installed_dat_ndx_pairs": [
+      {
+        "ndx": "HCEGANT.NDX",
+        "dat": "HCEGANT.DAT",
+        "ndx_bytes": 2444,
+        "dat_bytes": 629438,
+        "ndx_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+        "dat_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+        "index_entry_count": 271,
+        "kind6_entries": [],
+        "menu_id0_present": false,
+        "menu_id1_present": false
+      },
+      {
+        "ndx": "SHARED.NDX",
+        "dat": "SHARED.DAT",
+        "ndx_bytes": 3868,
+        "dat_bytes": 96117,
+        "ndx_sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+        "dat_sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+        "index_entry_count": 449,
+        "kind6_entries": [
+          {
+            "ordinal_zero_based": 153,
+            "object_id": 0,
+            "kind": 6,
+            "flags": 1,
+            "record_offset": 51378,
+            "record_packed_size": 455
+          }
+        ],
+        "menu_id0_present": true,
+        "menu_id1_present": false
+      },
+      {
+        "ndx": "SOUND.NDX",
+        "dat": "SOUND.DAT",
+        "ndx_bytes": 1236,
+        "dat_bytes": 111470,
+        "ndx_sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+        "dat_sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+        "index_entry_count": 120,
+        "kind6_entries": [],
+        "menu_id0_present": false,
+        "menu_id1_present": false
+      }
+    ],
+    "oracle_executable_read": false
+  },
+  "research_method": {
+    "ndx_entry_format": "20-byte index header followed by 8-byte entries: 32-bit data offset, 16-bit object ID, 8-bit kind, 8-bit flags; this matches src/root/m1986.c and src/root/m19A9.c",
+    "menu_kind": "kind 6 is MENU in src/root/m19A9.c::g_36F6",
+    "resource_decode": "the SHARED object 0 payload was decoded in memory with the ring-buffer LZSS structure and parameters in src/root/m1B05.asm; output retained only expanded size, pointer counts, table counts and SHA-256",
+    "original_asset_bytes_in_artifact": false
+  }
+}
