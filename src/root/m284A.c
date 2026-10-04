@@ -82,15 +82,18 @@ void far StopSong(void)
     }
 }
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_284A_0138 (big-endian 16-bit read): the original zero-extends the first
- * byte into AX and builds the word with mov ch,al / mov ax,cx; no C spelling
- * tried reproduces it (mov ah,byte / or ax,cx instead). */
+
+extern int far fd_50F6_4B2E;
+extern long far fd_50F6_4B42[];
+extern unsigned char far fd_50F6_4B30[];
+extern long far fd_50F6_4B8A;
+extern void far f_295C_02E8(int program, int note);
+extern void far f_295C_01EC(int bank, int program, int note, int velocity);
 int far f_284A_0138(int off)
 {
     return SONG(off) << 8 | SONG(off + 1);
 }
-/* SCAFFOLD END */
+
 
 long far f_284A_0151(int off)
 {

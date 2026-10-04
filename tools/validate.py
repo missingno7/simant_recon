@@ -70,6 +70,9 @@ def main() -> int:
         man_bytes = modmod.MANIFEST.read_bytes()
         man = json.loads(man_bytes)
         snapshot = {k: (ROOT / m["source"]).read_bytes() for k, m in man["modules"].items()}
+    import canonical
+    program = canonical.load() if canonical.PROGRAM.exists() else None
+    current_context_claims = []
     for prof in sorted({m["profile"] for m in man["modules"].values()} | {"msc600", "msc600a", "masm510"}):
         try:
             compiler.verify_profile(prof)
@@ -102,6 +105,15 @@ def main() -> int:
     layout_modules, origin_unevidenced = [], []
     per_unit = defaultdict(int)
     listed = {str((ROOT / m["source"]).resolve()).lower() for m in man["modules"].values()}
+    if program:
+        listed |= {str((ROOT / m['source']).resolve()).lower() for m in program['modules']}
+        listed.add(str(canonical.PROGRAM.resolve()).lower())
+        for item in program['modules']:
+            raw = (ROOT / item['source']).read_bytes()
+            if sha(raw) != item['source_sha256']:
+                failures.append(item['key'] + ': canonical inventory source pin differs')
+            if item['key'] in man['modules'] and item['source_sha256'] != man['modules'][item['key']]['source_sha256']:
+                failures.append(item['key'] + ': source authorities disagree')
     for f in sorted((ROOT / "src").rglob("*")):
         if f.is_file() and str(f.resolve()).lower() not in listed:
             failures.append(f"{f.relative_to(ROOT)}: file in src/ not published by promote.py (drafts belong in build/workers/)")
@@ -138,9 +150,18 @@ def main() -> int:
                 mreasons.append(f"link_after {m['link_after'] or 'FIRST'} also claimed by {link_after_seen[lk]}")
             link_after_seen[lk] = key
         ok_mod = res["exact"] and not mreasons
-        status = ("OK" + (" (data only)" if not m["claims"] else "")) if ok_mod else f"FAIL {bad + dbad} {mreasons[:3]}"
+        context_ok = False
+        if m.get('canonical_admission'):
+            context_errors = canonical.audit_context(key, res, m['canonical_admission'])
+            failures += [key + ': ' + error for error in context_errors]
+            context_ok = not context_errors and not mreasons
+            current_context_claims += [c['name'] for c in m['claims']
+                                       if not res['claims'][c['name']]['exact']]
+        status = ('REVIEWED CANONICAL CONTEXT (historical differences retained)' if context_ok
+                  else ("OK" + (" (data only)" if not m["claims"] else "")) if ok_mod
+                  else f"FAIL {bad + dbad} {mreasons[:3]}")
         print(f"  {key:<10} {len(m['claims']):3d} claims  {status}")
-        if not ok_mod:
+        if not ok_mod and not context_ok:
             failures.append(f"{key}: {bad + dbad} {mreasons[:3]} {res.get('log', '')}")
         if not m["claims"]:
             data_only_modules.append(key)
@@ -160,6 +181,10 @@ def main() -> int:
         acct["data_bytes_opaque_unmarked"] += res.get("opaque_unmarked_bytes", 0)
         for c in m["claims"]:
             claimed.append((c["unit"], c["seg"] * 16 + c["off"], c["size"], c["name"]))
+            if not res['claims'][c['name']]['exact']:
+                # Historical exact source authority is preserved through Git;
+                # the rebuilt contribution is never counted as byte exact.
+                continue
             if transcribed and c.get("kind") in ("ASM", modmod.DATA_KIND):
                 acct["asm_transcribed_bytes"] += c["size"]
             if c.get("layout_inferred"):
@@ -342,6 +367,7 @@ def main() -> int:
         "known_functions": len(table),
         "known_game_functions": len(game),
         "exact_c_functions": exact_c,
+        "historical_exact_source_rebuilt_functions": sorted(current_context_claims),
         "exact_c_bytes": exact_c_bytes,
         "exact_asm_functions": exact_asm,
         "exact_asm_bytes": exact_asm_bytes,

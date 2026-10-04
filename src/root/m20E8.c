@@ -91,7 +91,7 @@ extern int far win_numOfWindows;
 extern int far win_numOfColors;
 extern int far win_numOfGroups;
 extern char far win_colors[][6];
-extern void far f_1A53_034F(int object, int kind);
+extern void far db_UnhookObject(int object, int kind);
 
 int far win_LoadAllWindows(void)
 {
@@ -134,7 +134,7 @@ int far win_LoadAllWindows(void)
     for (i = 0; i < win_numOfWindows; i++) {
         if (purge[i] == 0) {
             win_LoadWindow(i << 8);
-            f_1A53_034F(i, 0);
+            db_UnhookObject(i, 0);
         }
     }
     return 1;
@@ -198,7 +198,7 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
 }
 
 extern void _fastcall win_LockWinHigh(int win);
-extern void _fastcall f_2505_0288(int obj, struct Rect far *rect);
+extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int near g_3DB4;
 extern struct Rect far fd_50F6_393C;
 extern int near g_3DB2;
@@ -224,7 +224,7 @@ void far win_Open(int win, ...)
         w = f_2505_0006(win);
         if (*(int far *)(w + 0x1c) & 0x1000) {
             dx = dy = 0;
-            f_2505_0288(win, &r);
+            win_GetObjRect(win, &r);
             if (r.bottom > g_3DB4)
                 dy = g_3DB4 - r.bottom;
             else if (r.top <= fd_50F6_393C.bottom)
@@ -288,7 +288,7 @@ void _fastcall win_Close(int win)
     }
 }
 
-extern char far * _fastcall f_2505_0345(int win);
+extern char far * _fastcall win_WinAddr(int win);
 
 void _fastcall f_20E8_0725(int win)
 {
@@ -299,7 +299,7 @@ void _fastcall f_20E8_0725(int win)
     if (top != win) {
         if (top != (int)0x8000) {
             win_LockWin(top);
-            flag = *(int far *)(f_2505_0345(top) + 0x1c) & 1;
+            flag = *(int far *)(win_WinAddr(top) + 0x1c) & 1;
             win_UnlockWin(top);
             if (flag)
                 win_Close(top);
@@ -319,7 +319,7 @@ void _fastcall f_20E8_0776(int win)
 
     win_LockWin(win);
     f_2505_0006(win);
-    flag = *(int far *)(f_2505_0345(g_5702[0]) + 0x1c) & 1;
+    flag = *(int far *)(win_WinAddr(g_5702[0]) + 0x1c) & 1;
     win_UnlockWin(win);
     (*g_62E4)();
     if (g_5702[0] == win) {
@@ -383,13 +383,10 @@ void _fastcall f_20E8_08EF(void (far *hook)(void))
     g_62F0 = hook;
 }
 
-/* SCAFFOLD BEGIN: f_20E8_0903 best draft.
-   Residue: loops 2/3 index with DI=i*2 and base in BX (les bx,[ptr];
-   mov ax,es:[bx+di]); the original moves the index to BX and loads the far
-   base into DI (mov bx,di; les di,[ptr]; ...) with a dead les bx,[bp-20h]
-   before rect[i]-o[i]: 258 vs 286 bytes. */
-extern int far * _fastcall f_2505_02D7(int obj);
 
+extern int far * _fastcall win_ObjAddr(int obj);
+
+extern int far f_2505_036E(void);
 void _fastcall f_20E8_0903(int obj, int far *rect)
 {
     int j;
@@ -402,7 +399,7 @@ void _fastcall f_20E8_0903(int obj, int far *rect)
 
     win = obj & 0xff00;
     win_LockWin(win);
-    o = f_2505_02D7(obj);
+    o = win_ObjAddr(obj);
     origin = o + 4;
     mode = o + 12;
     ref = o + 8;
@@ -424,7 +421,7 @@ void _fastcall f_20E8_0903(int obj, int far *rect)
     win_UnlockWin(win);
 }
 
-/* SCAFFOLD END */
+
 
 extern int far f_2505_036E(void);
 
@@ -435,7 +432,7 @@ void far f_20E8_0A21(void)
     top = g_5702[0];
     if (f_2505_036E()) {
         win_LockWin(top);
-        if (*(int far *)(f_2505_0345(top) + 0x1c) & 1)
+        if (*(int far *)(win_WinAddr(top) + 0x1c) & 1)
             win_Close(top);
         win_UnlockWin(top);
     }

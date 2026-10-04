@@ -73,12 +73,7 @@ void far CloseIndex(int db)
         free(fd_50F6_3958[db].index);
 }
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * FindIndex (index binary search) best draft (/Oeg): equal length, 17 bytes differ.
- * Residue: the original lays out the probe test as jg -> top=mid-1 (first), jne/jl ->
- * lastTop=mid+1 (last, falling into the loop test) and loads id before the entry
- * pointer for the id compare; every spelling tried (||/&& forms, negations, else-if,
- * continue/goto, operand order) compiles to the mirrored layout. */
+
 IndexEntry far * far FindIndex(int db, int id, int kind)
 {
     int mid;
@@ -91,7 +86,7 @@ IndexEntry far * far FindIndex(int db, int id, int kind)
     while (fd_50F6_3956 <= top) {
         mid = (fd_50F6_3956 + top) / 2;
         fd_50F6_3952 = &fd_50F6_3958[db].index[mid];
-        if (fd_50F6_3952->kind > kind || (fd_50F6_3952->kind == kind && fd_50F6_3952->id >= id))
+        if (!(fd_50F6_3952->kind < kind || (fd_50F6_3952->kind == kind && fd_50F6_3952->id < id)))
             top = mid - 1;
         else
             fd_50F6_3956 = mid + 1;
@@ -101,7 +96,7 @@ IndexEntry far * far FindIndex(int db, int id, int kind)
         return fd_50F6_3952;
     return 0L;
 }
-/* SCAFFOLD END */
+
 
 /* The index module's remaining write-side entry points (Win16 order after FindIndex:
  * DeleteCurrentIndex, AddIndex, DeleteIndex) are empty in the read-only DOS build, like

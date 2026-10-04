@@ -1,0 +1,1315 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "win_PrintStyleTextInRect",
+  "module": "S23:39C7",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "fa9b1b94e0590bee7fd08c8716cad5ddb78c680c21aae218d25bf18581a89fa5",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/win_PrintStyleTextInRect.json",
+    "sha256": "ba6c9d3f06c6327a55273efa2b5181df3338c7af346d80b4c0cf327235e43ed0"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "win_PrintStyleTextInRect",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "status_scope": "Complete original caller algorithm/CFG, machine-width behavior, calls, direct state effects, and composed exact helper effects are statically accounted for under identical function-entry state and pointer contents. Finite differential cases corroborate the conclusion but are not its basis.",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "function_lines": [
+        108,
+        238
+      ]
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/evidence.json",
+      "sha256": "2c2c403b2892bd7dff568a90c9384475c83be29d4441e3c2b35e5c0b388ad350",
+      "manifest_path": "evidence/behavior/manifest.json",
+      "manifest_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "registered_status": "BEHAVIOR_EXACT",
+      "registered_evidence_path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/evidence.json",
+      "registered_evidence_sha256": "2c2c403b2892bd7dff568a90c9384475c83be29d4441e3c2b35e5c0b388ad350"
+    },
+    "inputs": [
+      {
+        "path": "README.md",
+        "sha256": "eef0ab97d6cac61fe607ffc8101932389608cd96cd043adfcfa39bfc99c0b632",
+        "role": "required working instructions"
+      },
+      {
+        "path": "docs/codegen-rules.md",
+        "sha256": "3ebff671acfb39d8e482163ffb0cc4294e76bcd669fd5099cda5a7a9744840d4",
+        "role": "required code generation context"
+      },
+      {
+        "path": "docs/tu-evidence.md",
+        "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26",
+        "role": "required translation-unit context"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "no-raw original disassembly generator"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "pinned original identity"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original oracle identity; bytes not copied into artifact"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+        "role": "target function address and extent row"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "role": "historical claims and exact-callee/runtime evidence"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "role": "far runtime alias identities"
+      },
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "registered behavior entry"
+      },
+      {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/evidence.json",
+        "sha256": "2c2c403b2892bd7dff568a90c9384475c83be29d4441e3c2b35e5c0b388ad350",
+        "role": "registry-selected evidence"
+      },
+      {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+        "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+        "role": "whole source module"
+      },
+      {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/run.json",
+        "sha256": "ed049a4aa2de06a8ad0f2b9950ab5628345e53169e0b37cc931f17a0f861dbf9",
+        "role": "primary differential run"
+      },
+      {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/cases.jsonl.gz",
+        "sha256": "e634a3c4bf70706104ca34523516f536e1583c6e0be770eab4905bb959f44d2a",
+        "role": "positive case ledger"
+      },
+      {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/negative-controls.json",
+        "sha256": "7cd911185f6e6fdba66a7062eb667ddfb5f3cc94776530b2f9bd3a677781a107",
+        "role": "negative control result"
+      },
+      {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/negative-0.c",
+        "sha256": "a10dba162b5c8a829f5bd2bdbde259f6f83745c576c1cca402e909e897874fbd",
+        "role": "negative mutant source"
+      },
+      {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/contract-review.json",
+        "sha256": "8e7c45eb3940058f3265fb1c16b77920e4de1cb8c1f5cf3a5a788e5bd2930127",
+        "role": "reviewed contract/effect boundaries"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/helper-source-review.json",
+        "sha256": "027f01be61afda7de3868e10d16a723bf78c2b047186ec492e2ee6bdc9c212b1",
+        "role": "helper source review"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/source-pins-v3.json",
+        "sha256": "2372d34c28eb39b39f0daac169ef52d50a2112d219f49018cf079f79d608a972",
+        "role": "review source pins"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/negative-controls.json",
+        "sha256": "c0a7608336ee41b669a404d2e38d2511091f3f260666ab4268451741a7cb96cb",
+        "role": "root-review negative replay"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/cases.jsonl.gz",
+        "sha256": "e634a3c4bf70706104ca34523516f536e1583c6e0be770eab4905bb959f44d2a",
+        "role": "root-review positive ledger"
+      },
+      {
+        "path": "build/workers/dos_static_printstyle/win_PrintStyleTextInRect.disasm.txt",
+        "sha256": "bf8181edf1413e50318b09af1475817cf140eafd6356ad78228f9bad597744c8",
+        "role": "research-only no-raw target disassembly"
+      },
+      {
+        "path": "build/workers/dos_static_printstyle/f_24AB_038D.disasm.txt",
+        "sha256": "b6b5a9a18cb6fd3409905581e67162f490f2409c59f92b83e37709bfc9d45f2b",
+        "role": "research-only no-raw exact helper disassembly"
+      },
+      {
+        "path": "src/root/m1B4E.asm",
+        "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+        "role": "source for manifest EXACT_NATURAL helper claim"
+      },
+      {
+        "path": "src/root/m1C62.c",
+        "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+        "role": "source for manifest EXACT_NATURAL helper claim"
+      },
+      {
+        "path": "src/root/m1FBD.asm",
+        "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+        "role": "source for manifest EXACT_NATURAL helper claim"
+      },
+      {
+        "path": "src/root/m24AB.c",
+        "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+        "role": "source for manifest EXACT_NATURAL helper claim"
+      },
+      {
+        "path": "src/root/m25E7.c",
+        "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+        "role": "source for manifest EXACT_NATURAL helper claim"
+      },
+      {
+        "path": "src/root/m2650.asm",
+        "sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+        "role": "source for manifest EXACT_NATURAL helper claim"
+      },
+      {
+        "path": "src/root/m277D.c",
+        "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+        "role": "source for manifest EXACT_NATURAL helper claim"
+      }
+    ],
+    "original_function": {
+      "unit": "S23",
+      "seg": "39C7",
+      "off": "0092",
+      "linear": "39D02",
+      "size": 1039,
+      "end_exclusive_off": "04A1",
+      "extent_status": "DESCENT",
+      "disassembly_path": "build/workers/dos_static_printstyle/win_PrintStyleTextInRect.disasm.txt",
+      "disassembly_sha256": "bf8181edf1413e50318b09af1475817cf140eafd6356ad78228f9bad597744c8",
+      "command": "python tools/context.py win_PrintStyleTextInRect (no --raw)"
+    },
+    "branch_map": [
+      {
+        "address": "00AD",
+        "mnemonic": "je",
+        "targets": [
+          "00BF"
+        ],
+        "source_line": 131,
+        "predicate": "styl == 0 selects a null style-array pointer; otherwise styles = styl + 1",
+        "width_signedness": "far pointer truth: low/high 16-bit words ORed"
+      },
+      {
+        "address": "0110",
+        "mnemonic": "jle",
+        "targets": [
+          "011A"
+        ],
+        "source_line": 138,
+        "predicate": "first metric result <= lineH keeps prior lineH; greater falls through to a second helper call and assignment",
+        "width_signedness": "signed 16-bit int compare"
+      },
+      {
+        "address": "0130",
+        "mnemonic": "je",
+        "targets": [
+          "0138"
+        ],
+        "source_line": 141,
+        "predicate": "record == 0 skips resetting g_8C24",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "013E",
+        "mnemonic": "je",
+        "targets": [
+          "0150"
+        ],
+        "source_line": 143,
+        "predicate": "styl == 0 short-circuits styles[0].face and selects font1",
+        "width_signedness": "far pointer truth: low/high 16-bit words ORed"
+      },
+      {
+        "address": "0149",
+        "mnemonic": "jne",
+        "targets": [
+          "0150"
+        ],
+        "source_line": 143,
+        "predicate": "styles[0].face != 0x100 selects font1; equal selects font2",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "0166",
+        "mnemonic": "jg",
+        "targets": [
+          "016B"
+        ],
+        "source_line": 147,
+        "predicate": "line < firstLine + maxLines enters outer-loop body",
+        "width_signedness": "signed 16-bit int; sum uses target word arithmetic"
+      },
+      {
+        "address": "018F",
+        "mnemonic": "jle",
+        "targets": [
+          "0197"
+        ],
+        "source_line": 153,
+        "predicate": "width <= w exits inner character loop",
+        "width_signedness": "signed 16-bit int compare"
+      },
+      {
+        "address": "0195",
+        "mnemonic": "je",
+        "targets": [
+          "019A"
+        ],
+        "source_line": 153,
+        "predicate": "done == 0 continues inner character loop; nonzero exits",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "01A0",
+        "mnemonic": "jne",
+        "targets": [
+          "01A5"
+        ],
+        "source_line": 154,
+        "predicate": "styl != 0 permits the style-count and next-run checks",
+        "width_signedness": "far pointer truth: low/high 16-bit words ORed"
+      },
+      {
+        "address": "01AF",
+        "mnemonic": "jle",
+        "targets": [
+          "01C6"
+        ],
+        "source_line": 154,
+        "predicate": "*styl <= styleIdx + 1 means there is no next style run",
+        "width_signedness": "signed 16-bit compare; increment is target-word width"
+      },
+      {
+        "address": "01C4",
+        "mnemonic": "jle",
+        "targets": [
+          "01C9"
+        ],
+        "source_line": 154,
+        "predicate": "next StyleRun.pos high word <= sign-extended pos high word continues the signed-long comparison; greater skips transition",
+        "width_signedness": "signed 16-bit high-word stage of signed 32-bit compare"
+      },
+      {
+        "address": "01C9",
+        "mnemonic": "jl",
+        "targets": [
+          "01D4"
+        ],
+        "source_line": 154,
+        "predicate": "next StyleRun.pos high word < pos high word makes signed-long <= true",
+        "width_signedness": "signed 16-bit high-word stage"
+      },
+      {
+        "address": "01CF",
+        "mnemonic": "jbe",
+        "targets": [
+          "01D4"
+        ],
+        "source_line": 154,
+        "predicate": "equal high words: next StyleRun.pos low word <= pos low word makes signed-long <= true",
+        "width_signedness": "unsigned 16-bit low-word stage of signed 32-bit compare"
+      },
+      {
+        "address": "01E3",
+        "mnemonic": "jg",
+        "targets": [
+          "01E8"
+        ],
+        "source_line": 157,
+        "predicate": "pos - start > 0 emits a style segment",
+        "width_signedness": "signed 16-bit int compare"
+      },
+      {
+        "address": "01EB",
+        "mnemonic": "jle",
+        "targets": [
+          "01FB"
+        ],
+        "source_line": 158,
+        "predicate": "n <= 110 continues; n > 110 calls Punt",
+        "width_signedness": "signed 16-bit int compare"
+      },
+      {
+        "address": "0263",
+        "mnemonic": "jne",
+        "targets": [
+          "0268"
+        ],
+        "source_line": 164,
+        "predicate": "record != 0 evaluates previous run face",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "0272",
+        "mnemonic": "je",
+        "targets": [
+          "0277"
+        ],
+        "source_line": 164,
+        "predicate": "styles[styleIdx - 1].face == 0x100 enters highlight resource lookup",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "0297",
+        "mnemonic": "je",
+        "targets": [
+          "027E"
+        ],
+        "source_line": 166,
+        "predicate": "buf[start] == ' ' repeats leading-space removal",
+        "width_signedness": "8-bit byte equality"
+      },
+      {
+        "address": "02A7",
+        "mnemonic": "je",
+        "targets": [
+          "02AE"
+        ],
+        "source_line": 169,
+        "predicate": "ctype flag bit 2 clear skips uppercasing this byte",
+        "width_signedness": "8-bit bit-test; char index is signed and sign-extended"
+      },
+      {
+        "address": "02B4",
+        "mnemonic": "jne",
+        "targets": [
+          "029B"
+        ],
+        "source_line": 168,
+        "predicate": "buf[start] != 0 continues the uppercase scan",
+        "width_signedness": "8-bit byte equality against NUL"
+      },
+      {
+        "address": "02D7",
+        "mnemonic": "je",
+        "targets": [
+          "02F4"
+        ],
+        "source_line": 172,
+        "predicate": "_fstrcmp return == 0 breaks the TextRez search",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "02F2",
+        "mnemonic": "jne",
+        "targets": [
+          "02BD"
+        ],
+        "source_line": 171,
+        "predicate": "current TextRez.id != 0 repeats search; zero terminates it",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "030F",
+        "mnemonic": "je",
+        "targets": [
+          "0353"
+        ],
+        "source_line": 174,
+        "predicate": "current TextRez.id == 0 emits the error; nonzero writes a HotSpot",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "0384",
+        "mnemonic": "jne",
+        "targets": [
+          "038B"
+        ],
+        "source_line": 187,
+        "predicate": "styles[styleIdx].face != 0x100 selects font1; equal selects font2",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "03B4",
+        "mnemonic": "jge",
+        "targets": [
+          "0407"
+        ],
+        "source_line": 194,
+        "predicate": "w >= width skips the switch",
+        "width_signedness": "signed 16-bit int compare"
+      },
+      {
+        "address": "03C3",
+        "mnemonic": "je",
+        "targets": [
+          "040D"
+        ],
+        "source_line": 212,
+        "predicate": "text[pos] == '}': set brk = pos + 1",
+        "width_signedness": "signed char promoted to 16-bit int, equality"
+      },
+      {
+        "address": "03C5",
+        "mnemonic": "ja",
+        "targets": [
+          "0407"
+        ],
+        "source_line": 195,
+        "predicate": "promoted text[pos] > 0x7d under unsigned compare skips the remaining switch labels",
+        "width_signedness": "unsigned 16-bit range guard over sign-extended char"
+      },
+      {
+        "address": "03C9",
+        "mnemonic": "je",
+        "targets": [
+          "03FD"
+        ],
+        "source_line": 196,
+        "predicate": "text[pos] == 0 sets done and brk = pos",
+        "width_signedness": "8-bit zero test"
+      },
+      {
+        "address": "03CD",
+        "mnemonic": "je",
+        "targets": [
+          "03FD"
+        ],
+        "source_line": 197,
+        "predicate": "text[pos] == '\\n' sets done and brk = pos",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03D1",
+        "mnemonic": "je",
+        "targets": [
+          "03FD"
+        ],
+        "source_line": 198,
+        "predicate": "text[pos] == '\\r' sets done and brk = pos",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03D5",
+        "mnemonic": "je",
+        "targets": [
+          "0402"
+        ],
+        "source_line": 200,
+        "predicate": "text[pos] == ' ' sets brk = pos",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03D9",
+        "mnemonic": "je",
+        "targets": [
+          "040D"
+        ],
+        "source_line": 206,
+        "predicate": "text[pos] == '!' sets brk = pos + 1",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03DD",
+        "mnemonic": "je",
+        "targets": [
+          "0402"
+        ],
+        "source_line": 201,
+        "predicate": "text[pos] == '(' sets brk = pos",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03E1",
+        "mnemonic": "je",
+        "targets": [
+          "040D"
+        ],
+        "source_line": 207,
+        "predicate": "text[pos] == ')' sets brk = pos + 1",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03E5",
+        "mnemonic": "jl",
+        "targets": [
+          "0407"
+        ],
+        "source_line": 195,
+        "predicate": "transformed AL < 0 filters unmatched values 42/43 before the punctuation interval",
+        "width_signedness": "signed 8-bit intermediate in switch lowering"
+      },
+      {
+        "address": "03E9",
+        "mnemonic": "jle",
+        "targets": [
+          "040D"
+        ],
+        "source_line": 208,
+        "predicate": "text[pos] in ',' / '-' / '.': set brk = pos + 1",
+        "width_signedness": "signed 8-bit intermediate <= 0 after subtract"
+      },
+      {
+        "address": "03ED",
+        "mnemonic": "je",
+        "targets": [
+          "040D"
+        ],
+        "source_line": 211,
+        "predicate": "text[pos] == '?': set brk = pos + 1",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03F1",
+        "mnemonic": "je",
+        "targets": [
+          "0402"
+        ],
+        "source_line": 202,
+        "predicate": "text[pos] == '[': set brk = pos",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03F5",
+        "mnemonic": "je",
+        "targets": [
+          "040D"
+        ],
+        "source_line": 212,
+        "predicate": "text[pos] == ']': set brk = pos + 1",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "03F9",
+        "mnemonic": "je",
+        "targets": [
+          "0402"
+        ],
+        "source_line": 203,
+        "predicate": "text[pos] == '{': set brk = pos",
+        "width_signedness": "8-bit subtract/equality"
+      },
+      {
+        "address": "041C",
+        "mnemonic": "je",
+        "targets": [
+          "0427"
+        ],
+        "source_line": 221,
+        "predicate": "brk == 0 retains end = pos; otherwise applies brk",
+        "width_signedness": "signed 16-bit equality"
+      },
+      {
+        "address": "0423",
+        "mnemonic": "jge",
+        "targets": [
+          "0427"
+        ],
+        "source_line": 223,
+        "predicate": "brk >= start keeps start; brk < start assigns start = end",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "042D",
+        "mnemonic": "jg",
+        "targets": [
+          "046A"
+        ],
+        "source_line": 226,
+        "predicate": "firstLine > line skips final draw for the clipped line",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "0435",
+        "mnemonic": "jle",
+        "targets": [
+          "046A"
+        ],
+        "source_line": 226,
+        "predicate": "end - start <= 0 skips final draw",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "0471",
+        "mnemonic": "je",
+        "targets": [
+          "0469"
+        ],
+        "source_line": 231,
+        "predicate": "text[end] == ' ' repeats whitespace skip",
+        "width_signedness": "8-bit byte equality"
+      },
+      {
+        "address": "047C",
+        "mnemonic": "je",
+        "targets": [
+          "0482"
+        ],
+        "source_line": 233,
+        "predicate": "text[end] == '\\n' increments end",
+        "width_signedness": "8-bit byte equality"
+      },
+      {
+        "address": "0480",
+        "mnemonic": "jne",
+        "targets": [
+          "0483"
+        ],
+        "source_line": 233,
+        "predicate": "text[end] != '\\r' skips increment; equality falls through to increment",
+        "width_signedness": "8-bit byte compare"
+      },
+      {
+        "address": "0496",
+        "mnemonic": "jle",
+        "targets": [
+          "049B"
+        ],
+        "source_line": 147,
+        "predicate": "len <= pos exits outer line loop; otherwise checks the line limit",
+        "width_signedness": "signed 16-bit int compare"
+      }
+    ],
+    "unconditional_edges": [
+      {
+        "address": "00BD",
+        "mnemonic": "jmp",
+        "target": "00C7",
+        "source_line": 131,
+        "role": "join style pointer conditional initialization"
+      },
+      {
+        "address": "014E",
+        "mnemonic": "jmp",
+        "target": "0153",
+        "source_line": 143,
+        "role": "join font choice"
+      },
+      {
+        "address": "015B",
+        "mnemonic": "jmp",
+        "target": "0490",
+        "source_line": 147,
+        "role": "initial outer-loop entry with line counter zero"
+      },
+      {
+        "address": "0168",
+        "mnemonic": "jmp",
+        "target": "049B",
+        "source_line": 147,
+        "role": "outer-loop line-limit exit"
+      },
+      {
+        "address": "0197",
+        "mnemonic": "jmp",
+        "target": "0412",
+        "source_line": 153,
+        "role": "inner-loop exit to end/brk handling"
+      },
+      {
+        "address": "01A2",
+        "mnemonic": "jmp",
+        "target": "039A",
+        "source_line": 154,
+        "role": "style pointer short-circuit skip"
+      },
+      {
+        "address": "01C6",
+        "mnemonic": "jmp",
+        "target": "039A",
+        "source_line": 154,
+        "role": "style count rejects next run"
+      },
+      {
+        "address": "01D1",
+        "mnemonic": "jmp",
+        "target": "039A",
+        "source_line": 154,
+        "role": "next run position rejects transition"
+      },
+      {
+        "address": "01E5",
+        "mnemonic": "jmp",
+        "target": "0366",
+        "source_line": 157,
+        "role": "empty style span skips output"
+      },
+      {
+        "address": "0265",
+        "mnemonic": "jmp",
+        "target": "0366",
+        "source_line": 164,
+        "role": "record false skips highlight lookup"
+      },
+      {
+        "address": "0274",
+        "mnemonic": "jmp",
+        "target": "0366",
+        "source_line": 164,
+        "role": "previous run face rejects highlight lookup"
+      },
+      {
+        "address": "027C",
+        "mnemonic": "jmp",
+        "target": "0292",
+        "source_line": 166,
+        "role": "enter leading-space loop condition"
+      },
+      {
+        "address": "0299",
+        "mnemonic": "jmp",
+        "target": "02AF",
+        "source_line": 166,
+        "role": "leave leading-space loop into uppercase pass"
+      },
+      {
+        "address": "02BB",
+        "mnemonic": "jmp",
+        "target": "02DC",
+        "source_line": 171,
+        "role": "enter catalogue loop condition"
+      },
+      {
+        "address": "0351",
+        "mnemonic": "jmp",
+        "target": "0366",
+        "source_line": 174,
+        "role": "join after successful HotSpot writes"
+      },
+      {
+        "address": "0389",
+        "mnemonic": "jmp",
+        "target": "038E",
+        "source_line": 187,
+        "role": "join font choice"
+      },
+      {
+        "address": "03FB",
+        "mnemonic": "jmp",
+        "target": "0407",
+        "source_line": 195,
+        "role": "unmatched switch value leaves brk unchanged"
+      },
+      {
+        "address": "040A",
+        "mnemonic": "jmp",
+        "target": "0189",
+        "source_line": 218,
+        "role": "inner scan back edge"
+      },
+      {
+        "address": "0410",
+        "mnemonic": "jmp",
+        "target": "0404",
+        "source_line": 214,
+        "role": "join break-after-character assignment"
+      },
+      {
+        "address": "0467",
+        "mnemonic": "jmp",
+        "target": "046A",
+        "source_line": 229,
+        "role": "join final draw before whitespace handling"
+      },
+      {
+        "address": "0498",
+        "mnemonic": "jmp",
+        "target": "015E",
+        "source_line": 147,
+        "role": "outer line-loop back edge"
+      }
+    ],
+    "call_map": [
+      {
+        "order": 1,
+        "address": "0098",
+        "callee": "__aFchkstk",
+        "source_line": null,
+        "dynamic_order": "prologue, once",
+        "abi": "far runtime stack-check helper; AX=0x00a4 frame bytes",
+        "arguments": "compiler-generated frame size",
+        "effect": "stack check only"
+      },
+      {
+        "order": 2,
+        "address": "00CD",
+        "callee": "_fstrlen",
+        "source_line": 132,
+        "dynamic_order": "once before rectangle/font access",
+        "abi": "far cdecl; caller removes 4-byte far pointer",
+        "arguments": "text",
+        "effect": "reads NUL-terminated input; unsigned-int result stored as 16-bit len"
+      },
+      {
+        "order": 3,
+        "address": "00F1",
+        "callee": "f_24AB_02AD",
+        "source_line": 135,
+        "dynamic_order": "once",
+        "abi": "far cdecl; signed 16-bit int; caller cleanup",
+        "arguments": "font1",
+        "effect": "selects metric/render font"
+      },
+      {
+        "order": 4,
+        "address": "00F7",
+        "callee": "f_24AB_030B",
+        "source_line": 136,
+        "dynamic_order": "once",
+        "abi": "far cdecl; no args",
+        "arguments": "none",
+        "effect": "returns first lineH metric"
+      },
+      {
+        "order": 5,
+        "address": "0102",
+        "callee": "f_24AB_02AD",
+        "source_line": 137,
+        "dynamic_order": "once",
+        "abi": "far cdecl; signed 16-bit int; caller cleanup",
+        "arguments": "font2",
+        "effect": "selects second font"
+      },
+      {
+        "order": 6,
+        "address": "0108",
+        "callee": "f_24AB_030B",
+        "source_line": 138,
+        "dynamic_order": "once",
+        "abi": "far cdecl; no args",
+        "arguments": "none",
+        "effect": "first font2 metric used in comparison"
+      },
+      {
+        "order": 7,
+        "address": "0112",
+        "callee": "f_24AB_030B",
+        "source_line": 139,
+        "dynamic_order": "only if call 6 returns > lineH",
+        "abi": "far cdecl; no args",
+        "arguments": "none",
+        "effect": "second distinct metric call supplies assigned lineH"
+      },
+      {
+        "order": 8,
+        "address": "0153",
+        "callee": "f_24AB_02AD",
+        "source_line": 143,
+        "dynamic_order": "once after optional g_8C24 reset",
+        "abi": "far cdecl; signed 16-bit int; caller cleanup",
+        "arguments": "font2 iff styl && styles[0].face==0x100, else font1",
+        "effect": "selects initial style font"
+      },
+      {
+        "order": 9,
+        "address": "01F3",
+        "callee": "Punt",
+        "source_line": 159,
+        "dynamic_order": "per nonempty style span when n>110",
+        "abi": "far cdecl varargs; format far pointer and 16-bit int; caller cleanup",
+        "arguments": "\"len = %d\", n",
+        "effect": "diagnostic; target proceeds to strncpy if helper returns"
+      },
+      {
+        "order": 10,
+        "address": "020D",
+        "callee": "_fstrncpy",
+        "source_line": 160,
+        "dynamic_order": "per nonempty style span after optional Punt",
+        "abi": "far cdecl; unsigned 16-bit count and two far pointers; caller cleanup",
+        "arguments": "buf, text + start, n converted to unsigned word",
+        "effect": "writes n bytes to local buf"
+      },
+      {
+        "order": 11,
+        "address": "0243",
+        "callee": "WinPrintf",
+        "source_line": 162,
+        "dynamic_order": "per nonempty style span",
+        "abi": "far cdecl varargs; caller cleanup",
+        "arguments": "\"%d(%d)(%d): [%s]\\n\", pos, n, styles[styleIdx].face, buf",
+        "effect": "formatted diagnostic read/output"
+      },
+      {
+        "order": 12,
+        "address": "0257",
+        "callee": "f_24AB_038D",
+        "source_line": 163,
+        "dynamic_order": "per nonempty style span, before optional record lookup",
+        "abi": "far cdecl; two signed 16-bit ints and far text pointer; caller cleanup",
+        "arguments": "x, y, buf (NUL-terminated from call 10)",
+        "effect": "exact draw helper call; direct draw/pen path is composed through its EXACT_NATURAL implementation"
+      },
+      {
+        "order": 13,
+        "address": "028A",
+        "callee": "_fstrcpy",
+        "source_line": 167,
+        "dynamic_order": "per stripped leading space",
+        "abi": "far cdecl; two far pointers; caller cleanup",
+        "arguments": "buf + start, buf + start + 1",
+        "effect": "shifts local buffer left including NUL"
+      },
+      {
+        "order": 14,
+        "address": "02CD",
+        "callee": "_fstrcmp",
+        "source_line": 172,
+        "dynamic_order": "per nonzero-id catalogue row until match/terminator",
+        "abi": "far cdecl; two far pointers; caller cleanup",
+        "arguments": "buf, fd_4EE5_0500[start].name",
+        "effect": "compares pointed bytes"
+      },
+      {
+        "order": 15,
+        "address": "035E",
+        "callee": "WinPrintf",
+        "source_line": 182,
+        "dynamic_order": "if no matching nonzero TextRez id",
+        "abi": "far cdecl varargs; caller cleanup",
+        "arguments": "\"\\nERROR: Cannot file text rez(%s)\\n\", buf",
+        "effect": "error diagnostic output"
+      },
+      {
+        "order": 16,
+        "address": "038E",
+        "callee": "f_24AB_02AD",
+        "source_line": 187,
+        "dynamic_order": "once per qualifying style transition, even when n<=0",
+        "abi": "far cdecl; signed 16-bit int; caller cleanup",
+        "arguments": "font2 iff styles[styleIdx].face==0x100, else font1",
+        "effect": "sets font for following character metric calls"
+      },
+      {
+        "order": 17,
+        "address": "03A5",
+        "callee": "f_24AB_0367",
+        "source_line": 193,
+        "dynamic_order": "once per consumed text byte",
+        "abi": "far cdecl; signed char promoted/sign-extended to 16-bit int; caller cleanup",
+        "arguments": "text[pos]",
+        "effect": "returns signed advance added to w"
+      },
+      {
+        "order": 18,
+        "address": "0446",
+        "callee": "_fstrncpy",
+        "source_line": 227,
+        "dynamic_order": "once when line>=firstLine and end-start>0",
+        "abi": "far cdecl; unsigned 16-bit count and two far pointers; caller cleanup",
+        "arguments": "buf, text + start, end - start converted to unsigned word",
+        "effect": "writes final line bytes to local buf"
+      },
+      {
+        "order": 19,
+        "address": "045F",
+        "callee": "f_24AB_038D",
+        "source_line": 229,
+        "dynamic_order": "once after final span copy",
+        "abi": "far cdecl; two signed 16-bit ints and far text pointer; caller cleanup",
+        "arguments": "x, y, buf (NUL-terminated from call 18)",
+        "effect": "exact draw helper call; direct draw/pen path is composed through its EXACT_NATURAL implementation"
+      }
+    ],
+    "memory_state_effects": {
+      "inputs_read": [
+        "far NUL-terminated text",
+        "far style count and StyleRun records",
+        "far Rect words left/top/right/bottom",
+        "firstLine/font1/font2/record arguments",
+        "near _ctype table through signed-char index",
+        "TextRez table fd_4EE5_0500 names/ids",
+        "current font, metrics, font image and dynamic draw callback state"
+      ],
+      "direct_nonstack_writes": [
+        "record!=0 resets DGROUP g_8C24",
+        "a recognized highlighted text resource writes HotSpot left=x, right=rect.left+w, top=y, bottom=y+lineH, id=catalogue id, then increments g_8C24"
+      ],
+      "direct_stack_writes": [
+        "styleIdx and pos initialization; line-local width/done/brk/start/x; updates to pos/end/n/line/y/styleIdx/lineH/maxLines/width; buf copy, NUL termination, left shift, and uppercase mutation"
+      ],
+      "composed_callee_effects": [
+        "All direct game callees identified in the call map are EXACT_NATURAL manifest claims. In particular f_24AB_038D is an exact 127-byte function that writes g_3DA0 on empty/active-font paths, calls exact f_1FBD_0000 or exact font_MakeImage, and forwards exact bitmap/coordinates through the same current g_9154 callback pointer.",
+        "f_1FBD_0000 and its f_1B4E routines are exact claims; font_MakeImage, _font_StringWidth, _font_CharWidth, and f_2650 routines are exact claims. The dynamic g_9154 pointer is read from the same entry state and passed the same arguments; its value is not written by the target or helper.",
+        "Punt and WinPrintf have exact source claims. Far _fstrlen/_fstrncpy/_fstrcpy/_fstrcmp resolve to the pinned verified large-model aliases of accepted MSC runtime members."
+      ],
+      "pointer_contents": [
+        "Both draw-helper calls receive x,y and local buf. Before each call buf is populated from the same text slice and explicitly NUL-terminated; the first call has only a read-only WinPrintf between copy and draw, the final call follows its copy directly. Exact helper code consumes pointed string contents and does not retain/compare the caller buffer address.",
+        "Style/table/rectangle pointers are dereferenced at the mapped offsets; source inputs and table contents are pinned, and the recorded run reports peer_data_gates=PASS."
+      ],
+      "return_abi": "void far; restores BP/SI/DI and far-returns; caller removes arguments; no semantic return value"
+    },
+    "static_axes": {
+      "algorithm_and_cfg": {
+        "status": "COMPLETE",
+        "evidence": "All 48 conditional sites and 21 unconditional edges are mapped. Source lines 129-237 account for initialization, font selection, outer line loop, style transition and output, per-character advance and punctuation switch, clipping, final draw, whitespace/newline handling and exit."
+      },
+      "conditions_constants_width_signedness": {
+        "status": "COMPLETE",
+        "evidence": "Each branch record states source predicate, operand width and signedness. Model: 16-bit signed int, 16-bit unsigned int, 32-bit signed long, signed char, 16:16 far pointers. Constants 0x100, 110, 0x7d, punctuation bytes, LF/CR/space, and zero sentinels are mapped."
+      },
+      "pointer_arithmetic_and_layout": {
+        "status": "COMPLETE",
+        "evidence": "Far text/styl/rect pointer offsets, count-word styl+1, 20-byte StyleRun stride with signed-long pos/face offset 10, 34-byte TextRez stride/id offset 32, 10-byte HotSpot stride, signed _ctype indexing, and target-word arithmetic are accounted for."
+      },
+      "calls_abi_and_order": {
+        "status": "COMPLETE",
+        "evidence": "All 18 source calls and the generated stack-check call are mapped with dynamic repetition/conditions, arguments, far/cdecl ABI and caller cleanup. The conditional second f_24AB_030B call at 0112 is preserved."
+      },
+      "direct_memory_and_state": {
+        "status": "COMPLETE",
+        "evidence": "Direct nonstack writes are only g_8C24 and successful HotSpot fields; local buf mutation and all reads are inventoried."
+      },
+      "callee_composition": {
+        "status": "COMPLETE",
+        "evidence": [
+          {
+            "name": "f_1B4E_005E",
+            "module": "root:1B4E",
+            "kind": "ASM",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "482daf166ddc43695d79fb1015a42c53d0bfad6fce2e9a617bf7ba1a968f0e18",
+            "source": "src/root/m1B4E.asm",
+            "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+          },
+          {
+            "name": "f_1B4E_0081",
+            "module": "root:1B4E",
+            "kind": "ASM",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "c49c450cdb7acc00f5ce353051e754c41f7b7579ea59b3e35edf86baf640640f",
+            "source": "src/root/m1B4E.asm",
+            "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+          },
+          {
+            "name": "Punt",
+            "module": "root:1C62",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "e62db67a9e3945a4bde86967970ab147ca7302c3457269777b091fce8322c859",
+            "source": "src/root/m1C62.c",
+            "source_sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c"
+          },
+          {
+            "name": "f_1FBD_0000",
+            "module": "root:1FBD",
+            "kind": "ASM",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "a703caef8bb3f08ee60abd12bd7d5d7b0fd2659c62abb7a099d0cfd9ed40fcee",
+            "source": "src/root/m1FBD.asm",
+            "source_sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417"
+          },
+          {
+            "name": "f_24AB_02AD",
+            "module": "root:24AB",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "5f46b39f2de729836e9e876dda7413da2e73ff07c20bfd10bf7e0705f6823bd5",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+          },
+          {
+            "name": "f_24AB_030B",
+            "module": "root:24AB",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "dfb1efa7951e5130f497577e04f93e51d17717a02d05f944b6b3edbff1fe6785",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+          },
+          {
+            "name": "f_24AB_0367",
+            "module": "root:24AB",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "500aada35de83cd4d90b8e8c4baf6ec755f3e4e26bdc65a03dbb6804fadf0f76",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+          },
+          {
+            "name": "f_24AB_038D",
+            "module": "root:24AB",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "b962d86c60a850aff67edab2baf28fb48b0a1908c7a46151bf1b32c2ed1d2baa",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+          },
+          {
+            "name": "_font_StringWidth",
+            "module": "root:25E7",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "dc1af11712a3ab8399bb053256318d982b6806e7a9189f186c00ddd90eb6f965",
+            "source": "src/root/m25E7.c",
+            "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530"
+          },
+          {
+            "name": "_font_CharWidth",
+            "module": "root:25E7",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "08298280ae2a6a66647e819d88b9d297d1a50ec92129ba01468de6b69bc25597",
+            "source": "src/root/m25E7.c",
+            "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530"
+          },
+          {
+            "name": "font_MakeImage",
+            "module": "root:25E7",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "b933a4839a3e351e4c826883518c0a53bbf5d2d9cc95f519e18dab418771a4ba",
+            "source": "src/root/m25E7.c",
+            "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530"
+          },
+          {
+            "name": "f_2650_000F",
+            "module": "root:2650",
+            "kind": "ASM",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "4be011eb287d2a1dd45a518d4553653e6039b1e91dcf3283f1110fb112d8b3a4",
+            "source": "src/root/m2650.asm",
+            "source_sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8"
+          },
+          {
+            "name": "f_2650_0107",
+            "module": "root:2650",
+            "kind": "ASM",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "cc072732339317ca9d0f208c1b7b8bc26e29c313e2702317e872c68089deb13b",
+            "source": "src/root/m2650.asm",
+            "source_sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8"
+          },
+          {
+            "name": "WinPrintf",
+            "module": "root:277D",
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+            "source": "src/root/m277D.c",
+            "source_sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+          }
+        ],
+        "dynamic_callback": "g_9154 is an indirect call through the same input-state pointer; exact helper code forwards the same x/y/bitmap/width/height arguments and no code in the audited caller changes that pointer."
+      },
+      "table_data": {
+        "status": "CORROBORATED",
+        "evidence": "Registered whole module source contains the TextRez initializer; primary behavioral run reports peer_data_gates=PASS. The source module hash and run pin are recorded."
+      },
+      "effective_8086_extension_widths": {
+        "status": "VERIFIED",
+        "evidence": "At 0125 and 01BF the one-byte extension opcodes have no operand-size override, so use 8086 CWD (AX sign-extends to DX:AX); at 029F, 03A3 and 03BF use 8086 CBW (AL sign-extends to AX). Capstone labels shown by context (cdq/cwde) are decoder aliases and not the effective 16-bit operation."
+      },
+      "function_boundary": {
+        "status": "COMPLETE",
+        "evidence": "Original extent S23:39C7:0092, 1,039 bytes; the source definition is lines 108-238; context identifies retf at 04A0 and exclusive end 04A1."
+      }
+    },
+    "remaining_differences": [
+      {
+        "classification": "CODEGEN_ONLY",
+        "addresses": [
+          "0092-00A4",
+          "049B-04A0"
+        ],
+        "source_anchor": "module.c:108-127,238",
+        "description": "8086 BP frame, stack check, local allocation, SI/DI saves and far epilogue are compiler ABI/frame emissions; the source algorithm and far return match."
+      },
+      {
+        "classification": "CODEGEN_ONLY",
+        "addresses": [
+          "01C4",
+          "01C9",
+          "01CF"
+        ],
+        "source_anchor": "module.c:154",
+        "description": "MSC lowers one signed 32-bit StyleRun.pos <= (long)pos predicate into signed high-word and unsigned low-word branches; all stages map to the same source predicate."
+      },
+      {
+        "classification": "CODEGEN_ONLY",
+        "addresses": [
+          "03C3-03FB"
+        ],
+        "source_anchor": "module.c:195-216",
+        "description": "MSC lowers switch labels to a byte-subtract decision chain and range guard; every case assigns the source brk/done result and default leaves brk unchanged."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "existing_differential_and_negative_evidence": {
+      "registered_status": "BEHAVIOR_EXACT",
+      "registry_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "primary_run": {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/run.json",
+        "sha256": "ed049a4aa2de06a8ad0f2b9950ab5628345e53169e0b37cc931f17a0f861dbf9",
+        "completion": "COMPLETE",
+        "original_executed": true,
+        "candidate_executed": true,
+        "mismatches": 0,
+        "directed_cases": 360,
+        "randomized_cases": 1000,
+        "random_seed": 969343122,
+        "vm": "Unicorn 2.1.4",
+        "peer_data_gates": "PASS",
+        "effects": [
+          "ordered draw calls and pointed text",
+          "font helper sequence and metrics",
+          "hotspot writes and all nonstack memory",
+          "return value and caller ABI"
+        ]
+      },
+      "positive_ledger": {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/cases.jsonl.gz",
+        "sha256": "e634a3c4bf70706104ca34523516f536e1583c6e0be770eab4905bb959f44d2a",
+        "rows": 1360
+      },
+      "negative_control": {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/negative-controls.json",
+        "sha256": "7cd911185f6e6fdba66a7062eb667ddfb5f3cc94776530b2f9bd3a677781a107",
+        "mutant_source": {
+          "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/negative-0.c",
+          "sha256": "a10dba162b5c8a829f5bd2bdbde259f6f83745c576c1cca402e909e897874fbd"
+        },
+        "mutant_object": {
+          "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/negative-0.obj",
+          "sha256": "451e301f1df0c62a985848ccfb2b880fd7848efae2afbf1783db9b012c58b845"
+        },
+        "case_id": "negative/x-origin-plus-one",
+        "mismatches_detected": 1,
+        "difference": "x-origin mutant produces candidate x=2 while original x=1; mismatch appears in state and draw trace"
+      },
+      "contract_review": {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/contract-review.json",
+        "sha256": "8e7c45eb3940058f3265fb1c16b77920e4de1cb8c1f5cf3a5a788e5bd2930127",
+        "status": "APPROVED",
+        "reviewer": "root",
+        "date": "2026-10-02"
+      },
+      "limits": [
+        "The differential set is finite: 360 directed plus 1,000 seeded randomized cases.",
+        "The approved contract deliberately compares logical draw requests rather than framebuffer pixels; this does not limit the static claim because the exact original draw helper and same callback pointer/arguments are composed above.",
+        "Only listed valid resource/font fixtures were replayed; test counts are corroboration, not proof for untested values."
+      ]
+    },
+    "historical_claim_note": "The behavior manifest registers BEHAVIOR_EXACT. The historical byte-exact function extent remains DESCENT and no canonical claim is changed. This receipt confirms strict static behavior, not exact source-byte reconstruction."
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

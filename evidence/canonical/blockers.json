@@ -1,0 +1,542 @@
+{
+  "schema": "simant-canonical-blockers-v1",
+  "claim": "Current standalone DOS link/execution and human acceptance are incomplete. No functional milestone or harmlessness finding is inferred from storage consolidation.",
+  "runnable": false,
+  "standalone_DOS_executable": false,
+  "human_acceptance": "PENDING",
+  "imports": [
+    {
+      "name": "_fd_50F6_0150",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:0000"
+      ],
+      "consumer_declarations": [
+        "extern struct Sample far * far fd_50F6_0150[];"
+      ],
+      "grounding": "f_0000_0149: mov es,[7DD4] (CONST 50F6); mov es:[bx+150h],ax / es:[bx+152h],dx with bx = 4*[181C] -> far array of far pointers (sample free list, limit 38) (worker rootF)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_1F26",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:0250"
+      ],
+      "consumer_declarations": [
+        "extern Pnt far fd_50F6_1F26;"
+      ],
+      "grounding": "PreDrawSpider (0250:179F): mov es,[7EEA]; es:[1F26]=7*tileW, es:[1F28]=7*tileH (Win16 spiderBuf.x/.y); f_0250_13A6 passes 50F6:1F26 as far pointer",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_3862",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "S09:35F5"
+      ],
+      "consumer_declarations": [
+        "extern char far fd_50F6_3862[];"
+      ],
+      "grounding": "o09_35F5_0000 (LoadGame): _fstrcpy(MK_FP(50F6,3862), name) after FileSelect (last file name)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_3C14",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:1E57"
+      ],
+      "consumer_declarations": [
+        "extern struct Rect far fd_50F6_3C14[];"
+      ],
+      "grounding": "f_1E57_0174 (root:1E57 clip unit): far address 50F6:3C14 temporary clip rect buffer (memcpy target, stored into g_5AAC)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_46A8",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "S10:35F5",
+        "S17:384C",
+        "root:1FD2"
+      ],
+      "consumer_declarations": [
+        "extern int far fd_50F6_46A8[];"
+      ],
+      "grounding": "o10_35F5_01C3/0384: mov es,[CONST 89DE = 50F6]; push es:[bx+46A8] with bx=menu*2 -> x position of menu title (int array)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_46BC",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "S10:35F5",
+        "S17:384C",
+        "root:1FD2"
+      ],
+      "consumer_declarations": [
+        "extern int far fd_50F6_46BC[];"
+      ],
+      "grounding": "o10_35F5_0384: mov es,[CONST 89E2 = 50F6]; mov ax,es:[bx+46BC] with bx=menu*2; sub ax,maxLen; sar ax,1 -> width of menu title (int array)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_46D2",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:208F"
+      ],
+      "consumer_declarations": [
+        "extern char far * far * far fd_50F6_46D2;"
+      ],
+      "grounding": "f_208F_027F: mov es,[8A12] (CONST 50F6); les bx,es:[46D2]; far pointer to a far pointer (small-icon bitmap base), + n*32",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_4B30",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:284A"
+      ],
+      "consumer_declarations": [
+        "extern unsigned char far fd_50F6_4B30[];"
+      ],
+      "grounding": "f_284A_0256: mov es,[8AB6]; mov es:[si+4B30],al (far byte array, running status per track)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_fd_50F6_4B42",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:284A"
+      ],
+      "consumer_declarations": [
+        "extern long far fd_50F6_4B42[];"
+      ],
+      "grounding": "f_284A_0256: mov es,[8AB4]; mov es:[bx+4B42],ax; es:[bx+4B44],dx (far long array, next event time per track)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_g_8ED8",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "S01:328E",
+        "S15:384C"
+      ],
+      "consumer_declarations": [
+        "extern unsigned char near g_8ED8[];"
+      ],
+      "grounding": "LoadMonoPats: far pointer 8ED8:DS destination of inverted pattern bytes (second object 0x271a)",
+      "required_resolution": "source storage/reachability investigation",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_win_colors",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:20E8",
+        "root:21FA",
+        "root:22BF"
+      ],
+      "consumer_declarations": [
+        "extern char far win_colors[][6];"
+      ],
+      "grounding": "f_21FA_00EE/0144/0315: 6*index + 46E2, seg 50F6 -> colour table entries (6 bytes each)",
+      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "name": "_win_handles",
+      "kind": "data",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "consumers": [
+        "root:20E8",
+        "root:22BF",
+        "root:23AE",
+        "root:2505"
+      ],
+      "consumer_declarations": [
+        "extern char far * far * near win_handles[];"
+      ],
+      "grounding": "f_2505_0006/0545: les bx,[bx+9230] indexed by win>>8 (window handle table, 4-byte entries)",
+      "required_resolution": "source storage/reachability investigation",
+      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "proof_refs": [
+        "layout/symbols.json",
+        "tools/source_only_dos.py"
+      ]
+    }
+  ],
+  "data_debt": [
+    {
+      "id": "dgroup_56fe",
+      "bytes": 4,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "UNKNOWN_FIELD_SEMANTICS",
+      "reason": "Four zero bytes lie before g_5702; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "id": "dgroup_5a28",
+      "bytes": 2,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "PARTLY_ANCHORED_STATE_UNKNOWN_LEADING_WORD",
+      "reason": "Two leading zero bytes begin a root:1F58 state range followed by identified keyboard/interrupt fields; no read/write is identified for this word.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "id": "dgroup_5a96",
+      "bytes": 5,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "PARTLY_TYPED_SHARED_UI_STATE",
+      "reason": "A 26-byte portion of a shared 1,360-byte UI region includes named/used fields (display selector, far pointer, saved cursor pointers) and other incompletely typed bytes.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "tools/source_only_dos.py"
+      ],
+      "residual_ranges": [
+        {
+          "offset": 0,
+          "size": 1
+        },
+        {
+          "offset": 2,
+          "size": 4
+        }
+      ]
+    },
+    {
+      "id": "dgroup_60b0",
+      "bytes": 18,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "UNREFERENCED_TIMER_COMPATIBLE_RECORD_WITH_REAL_RELOCATION",
+      "reason": "18-byte Timer-shaped record includes a relocated callback pointer; exhaustive bounded scan found no static inbound reference/registration, but computed or unowned accesses are not excluded.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "tools/source_only_dos.py"
+      ]
+    },
+    {
+      "id": "dgroup_79f0",
+      "bytes": 14,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "RUNTIME_MEMBER_SELECTION_AND_ORDER_UNRESOLVED",
+      "reason": "Heap-shaped __fheap data overlaps signed (_ctype+1)[char] prefix reads D1..DE at 79F0..79FD. Six relocated CMISC pointers and startup heap mutation affect the prefix; moving crt0fp code changes twelve predicates. App heap-state equivalence remains unproved.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "common_tail_overlap_3",
+      "bytes": 1,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "LINKER_FILE_BOUNDARY_UNRESOLVED",
+      "reason": "One residual boundary byte has no accepted erasure/irrelevance proof. Two other prior file values were erased in the reviewed ordinary manager/CRT/DOS control; actual linked-game startup clear dominance remains required.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "tools/source_only_dos.py",
+        "work/source-only-dos/startup-tail-erasure-contract-v36.json",
+        "work/source-only-dos/structural-audits-v36/README.md"
+      ],
+      "residual_ranges": [
+        {
+          "offset": 0,
+          "size": 1
+        }
+      ]
+    }
+  ],
+  "semantic_gates": [
+    {
+      "id": "remaining-assembly-address-audit",
+      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates.",
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "ctype-out-of-range-index-layout",
+      "reason": "Styled text and menu item classification sign-extend character bytes before indexing the near CRT table. Bytes D1..DE can read original DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. The stock runtime table owns its 257 bytes, not the preceding memory. The styled-text predicate can change the copied buffer and its text-resource match. Other dialog/menu sites also read outside the table; result relevance is assessed separately. No source guard or accepted input-domain proof excludes these prefix reads, and independent linkage does not preserve the original prefix. Keep the heap-shaped data debt; do not substitute unsigned indexing or add an invented table prefix/suffix. Whole-member controls on both linkers realize __fheap at _ctype-46, but identical data order still leaves six relocated CMISC pointers in the signed prefix: moving only crt0fp code changes twelve predicate results. Stock startup also changes heap descriptor pointers before main; original __myalloc binds the game allocator 171C:2208. App heap-state equivalence remains unproved, so relative owner attribution alone discharges no bytes.",
+      "sources": [
+        "src/S23/m39C7.c",
+        "src/S10/m35F5.c",
+        "src/root/m1C62.c"
+      ],
+      "consumer": "(_ctype + 1)[signed character or keyboard code]",
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "sound-selector-out-of-range-layout",
+      "reason": "The command-line parser accepts /s9, but detector/setup/cleanup tables have only nine entries (0..8). If the sound DB open returns, detector index 9 reads the adjacent same-TU saved-state pointer and calls its source-owned data as code. Return and effects are unproved. Conditional later setup/cleanup overreads include cross-TU data adjacency. Complete saved-state storage does not resolve this executable/layout dependency; no clamp, extra slot or padding is introduced.",
+      "sources": [
+        "src/S20/m39F1.c",
+        "src/S15/m384C.c",
+        "src/root/m15F8.c",
+        "src/root/m00DF.c",
+        "src/root/m277E.c",
+        "src/root/m293A.c",
+        "src/root/m2815.c"
+      ],
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "graphics-computed-copy-layout",
+      "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved.",
+      "source": "src/root/m1E57.c",
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "map-viewport-grid-layout",
+      "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout.",
+      "sources": [
+        "src/root/m0250.c",
+        "src/S26/m39C7.c"
+      ],
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "menu-table-cross-owner-layout",
+      "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout.",
+      "sources": [
+        "src/root/m1FD2.c",
+        "src/S10/m35F5.c",
+        "src/S17/m384C.c"
+      ],
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "database-open-minus-one-record",
+      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A conditional returning zero-target fatal callback reaches the uninitialized raster path, whose zero-height LOOP traverses every DGROUP byte before cleanup; callback/guard invariance cannot be inferred from explicit C assignments alone.",
+      "source": "src/root/m1A28.c",
+      "normal_owner": "fd_50F6_3958[4]",
+      "historical_failure_address": "50F6:38DC",
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "database-handle-plus-four",
+      "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate.",
+      "source": "src/root/m1A53.c",
+      "normal_owner": "db_handles[4]",
+      "historical_failure_address": "50F6:3B58",
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md"
+      ]
+    },
+    {
+      "id": "window-index-resource-cross-owner-layout",
+      "reason": "Unconditional reset spans prove 45 callbacks and 45 Rects. They do not bound every window ID or resource count. Negative and >=45 indices, returning Punt, pre-lock handle writes, signed palette-copy lengths, and purge-list counts remain open. Historical palette row 63 reads hook31/hook32 words; its shipped control lacks the ordinary selection gate, but no complete selection/redraw or cross-owner exclusion exists. Callback45 intersects Rect0 and Rect45 intersects Event fields. No padding, invented palette rows, clamp or maximum historical capacity is supplied by the minimum owners.",
+      "owners": [
+        "win_drawHooks[45]",
+        "win_offsets[45]"
+      ],
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md",
+        "work/source-only-dos/structural-audits-v36/README.md"
+      ]
+    },
+    {
+      "id": "critical-selector-computed-alias-layout",
+      "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner.",
+      "owner": "g_8CCB signed mutable byte",
+      "status": "UNRESOLVED",
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "proof_refs": [
+        "tools/source_only_dos.py",
+        "work/source-only-dos/structural-audits-v35/README.md",
+        "work/source-only-dos/structural-audits-v36/README.md"
+      ]
+    }
+  ],
+  "counts": {
+    "imports": 12,
+    "data_ranges": 6,
+    "data_bytes": 44,
+    "semantic_gates": 10
+  },
+  "historical_binary_only_outside_current_44": [
+    {
+      "id": "far_data_alignment",
+      "bytes": 12,
+      "classification": "HISTORICAL-BINARY-ONLY",
+      "reason": "Reviewed independent paragraph alignment needs no source initializer or owner.",
+      "proof_refs": [
+        "work/source-only-dos/far-data-paragraph-fill-contract-v1.json"
+      ]
+    },
+    {
+      "id": "common_tail_overlap_3+1",
+      "bytes": 2,
+      "classification": "HISTORICAL-BINARY-ONLY",
+      "reason": "Reviewed ordinary manager/CRT/DOS startup erases these prior file values; actual-game entry clear dominance remains required.",
+      "proof_refs": [
+        "work/source-only-dos/startup-tail-erasure-contract-v36.json"
+      ]
+    }
+  ],
+  "history": {
+    "revision": "a1938e61452a63581718aee6659829528c3b8635",
+    "reference_policy": "Passive immutable Git receipts. Resolve revision:path when auditing history; no old path or old source hash is an active build prerequisite.",
+    "report_receipt": {
+      "original_path": "build/source-only-dos-v36/build-report.json",
+      "sha256": "2b6b24a4ade222f82cfd4665f4cf15ce77bedc5388fa969fe5c828f41a127151",
+      "scope": "Ignored admitted build report, transcribed into standalone shape records. Tracked proof packets below provide replay inputs."
+    },
+    "references": [
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "sha256_scope": "admitted_worktree_bytes",
+        "git_blob_sha256": "f1bbefb3deecc5bdffa1323d50cf10ae80304e11f04947d971d0a2a7fa68dde4",
+        "encoding_note": "Git blob bytes differ from admitted worktree bytes; both digests are historical receipts, not active source prerequisites."
+      },
+      {
+        "path": "tools/source_only_dos.py",
+        "sha256": "a06e560e254861350849392df399b2b33910867856f938d9efe74b3d8802fad7",
+        "sha256_scope": "admitted_worktree_bytes"
+      },
+      {
+        "path": "work/source-only-dos/far-data-paragraph-fill-contract-v1.json",
+        "sha256": "cb13eb356f399a379c52a6276d9677d83d0e6c0dee793ba9e2008807cb723354",
+        "sha256_scope": "admitted_worktree_bytes"
+      },
+      {
+        "path": "work/source-only-dos/startup-tail-erasure-contract-v36.json",
+        "sha256": "ced793ff307436f5f8108c3c48b8e0c8f398268f937567a75b19fbf6cc29c202",
+        "sha256_scope": "admitted_worktree_bytes"
+      },
+      {
+        "path": "work/source-only-dos/structural-audits-v35/README.md",
+        "sha256": "5a7d0e7186685fbe4c0227ae73e9062dd7ebab41436085b2c298d775ce6784c1",
+        "sha256_scope": "git_blob_bytes"
+      },
+      {
+        "path": "work/source-only-dos/structural-audits-v36/README.md",
+        "sha256": "1c032354f5cd6c3f45113d6bda0ea6311763a78915c8616274c52165dc374cc2",
+        "sha256_scope": "git_blob_bytes"
+      },
+      {
+        "path": "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "sha256": "44ec036b5c7d5f0c98ba03ca8a4b7b96032d3dcabb1c2e6e63459a9ca67240c3",
+        "sha256_scope": "admitted_worktree_bytes"
+      }
+    ]
+  }
+}

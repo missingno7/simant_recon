@@ -5,13 +5,14 @@
 ; code segment, push es; push ds; push si; push di saves (MSC saves DI first, rule ASM-2).
 
 _DATA	segment word public 'DATA'
-	public	_fd_55B3_6770, _fd_55B3_6772
+	public	_fd_55B3_6770, _fd_55B3_6772, _glyph_edge_masks
 _g_676C		dw	0		; source, destination segment
 _g_676E		dw	0
 _fd_55B3_6770	dw	0		; source, destination row bytes (set by module 25E7)
 _fd_55B3_6772	dw	0
 		dw	0		; not referenced
 _g_6776		dw	0		; row count
+_glyph_edge_masks label byte
 		db	0FFh, 80h, 0C0h, 0E0h, 0F0h, 0F8h, 0FCh, 0FEh	; not referenced (edge masks)
 _DATA	ends
 DGROUP	group	_DATA

@@ -99,10 +99,7 @@ struct Rect {
     int bottom;
 };
 
-/* SCAFFOLD BEGIN: win_UnlockWin best draft (original position: after f_23AE_0069).
-   Residue: the object pointer w->objs[i] is kept in es:bx and p computed as dx:ax
-   (mov ax,bx; mov dx,es; add ax,34h); the original copies it to DI and uses
-   lea bx,[di+34h]/[di+2Ah]; frame 20h vs 1Ch. */
+
 struct Obj {
     char pad[0x21];
     char type;
@@ -128,6 +125,8 @@ extern void far f_171C_2086(struct Win far * far *handle);
 extern void far f_171C_20E2(struct Win far * far *handle);
 extern struct Rect far win_offsets[];
 
+extern int far WinPrintf(char far *format, ...);
+extern void far f_24FA_00B5(void);
 void _fastcall win_UnlockWin(int win)
 {
     char far * far * far *p;
@@ -178,7 +177,7 @@ void _fastcall win_UnlockWin(int win)
         }
     }
 }
-/* SCAFFOLD END */
+
 
 extern int far WinPrintf(char far *format, ...);
 extern void far f_24FA_00B5(void);

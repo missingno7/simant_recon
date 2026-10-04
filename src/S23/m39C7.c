@@ -105,7 +105,38 @@ extern unsigned char near _ctype[];
 extern int far _fstrcmp(char far *a, char far *b);
 extern int far f_24AB_0367(int c);
 
-/* SCAFFOLD BEGIN: (split from a shared block by autosearch) */
+
+extern char far * far f_1A53_00F0(int object, int kind, int type);
+extern char far * far f_171C_1B84(char far *handle);
+extern void far win_SetObjFormatStr(int obj, char far *text);
+extern void far f_171C_1BBA(char far *handle);
+extern void far db_PurgeObject(int object, int kind);
+extern void _fastcall win_DrawTitle(int obj);
+extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
+extern void far clip_SetWin(int win);
+extern void far clip_SubInclude(struct Rect far *rect);
+extern long far f_171C_1C1C(char far *handle);
+extern void _fastcall win_SetColorFromObjNum(int obj);
+extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
+extern int _fastcall win_DrawBitMap(int x, int y, int id);
+extern void far * far _fmemchr(void far *buf, int c, unsigned int n);
+extern void far * far _fmemmove(void far *dst, void far *src, unsigned int n);
+extern void far f_277D_000B(char far *text);
+extern int _fastcall win_IsWinOpen(int win);
+extern void far win_Open(int win);
+extern int near g_3DB2;
+extern int _fastcall win_GetEvent(struct Event far *ev);
+extern void far clip_Push(void);
+extern char far * far GSaveRect(struct Rect far *r);
+extern unsigned char near g_5A97;
+extern int near g_3DE0;
+extern void far f_1CE2_0013(int left, int top, int right, int bottom, int width);
+extern int far StillDown(void);
+extern void far win_Events(void);
+extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
+extern void far clip_Pop(void);
+extern int far f_1FD2_04E5(struct Point far *pt, struct Rect far *rect);
+extern void _fastcall win_DrawWindow(int win);
 void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far *rect,
                                   int firstLine, int font1, int font2, int record)
 {
@@ -237,7 +268,7 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
         y += lineH;
     }
 }
-/* SCAFFOLD END */
+
 
 extern char far * far f_1A53_00F0(int object, int kind, int type);
 extern char far * far f_171C_1B84(char far *handle);
@@ -322,10 +353,10 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
 }
 
 
-extern void far f_22BF_059A(int obj, char far *text);
+extern void far win_SetObjFormatStr(int obj, char far *text);
 extern void far f_171C_1BBA(char far *handle);
 extern void far db_PurgeObject(int object, int kind);
-extern void _fastcall f_21FA_0AA7(int obj);
+extern void _fastcall win_DrawTitle(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far clip_SetWin(int win);
 extern void far clip_SubInclude(struct Rect far *rect);
@@ -351,12 +382,7 @@ struct TextRec {
     int nFrames;
 };
 
-/* SCAFFOLD BEGIN: DisplayCard best draft: instruction sequence identical (558 insns), 89 bytes
- * differ, all in stack slot assignment (frame 7A vs 76) plus the operand order of base + off
- * and one loop compare.  Target packs the underscore-loop iterator into size's slot (-6/-8) and
- * the memmove iterator into h2's slot (-1E/-20); MSC 6 packs locals with disjoint live ranges
- * (separate q/q2 variables reproduce the size packing but not the h2 one).
- */
+
 void far DisplayCard(int card)
 {
     long off;
@@ -396,10 +422,10 @@ void far DisplayCard(int card)
         for (q = p; *q; q++)
             if (*q == '_')
                 *q = ' ';
-        f_22BF_059A(0x501, p);
+        win_SetObjFormatStr(0x501, p);
         f_171C_1BBA(h2);
         db_PurgeObject(card, 0x13);
-        f_21FA_0AA7(0x501);
+        win_DrawTitle(0x501);
     }
     win_GetObjRect(0x502, &r);
     clip_SetWin(0x500);
@@ -504,7 +530,7 @@ void far DisplayCard(int card)
     db_PurgeObject(card, 0x11);
 }
 
-/* SCAFFOLD END */
+
 
 struct Point {
     int x;
@@ -521,25 +547,25 @@ struct Event {
     int xE;
 };
 
-extern int _fastcall f_22BF_09B0(int win);
-extern void far f_20E8_04B6(int win);
+extern int _fastcall win_IsWinOpen(int win);
+extern void far win_Open(int win);
 extern int near g_3DB2;
-extern int _fastcall f_218D_03F1(struct Event far *ev);
+extern int _fastcall win_GetEvent(struct Event far *ev);
 void far ProcInfoEvent(struct Event far *ev);
 
 void far OpenInfoWindow(void)
 {
     struct Event ev;
 
-    if (f_22BF_09B0(0x500) == 0) {
+    if (win_IsWinOpen(0x500) == 0) {
         g_2E26 = 0x80;
         g_2E04[0] = 0x80;
         g_2E24 = 0;
     }
-    f_20E8_04B6(0x500);
+    win_Open(0x500);
     if (g_3DB2 == 0x140) {
-        while (f_22BF_09B0(0x500)) {
-            if (f_218D_03F1(&ev))
+        while (win_IsWinOpen(0x500)) {
+            if (win_GetEvent(&ev))
                 ProcInfoEvent(&ev);
         }
     }
@@ -550,8 +576,8 @@ extern char far * far GSaveRect(struct Rect far *r);
 extern unsigned char near g_5A97;
 extern int near g_3DE0;
 extern void far f_1CE2_0013(int left, int top, int right, int bottom, int width);
-extern int far f_1FD2_0542(void);
-extern void far f_218D_03E8(void);
+extern int far StillDown(void);
+extern void far win_Events(void);
 extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
 extern void far clip_Pop(void);
 
@@ -632,14 +658,14 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
             db_PurgeObject(rez, 0x15);
         }
     }
-    while (f_1FD2_0542())
-        f_218D_03E8();
+    while (StillDown())
+        win_Events();
     f_1CE2_056C(&frame, bits);
     clip_Pop();
 }
 
 extern int far f_1FD2_04E5(struct Point far *pt, struct Rect far *rect);
-extern void _fastcall f_21FA_08E2(int win);
+extern void _fastcall win_DrawWindow(int win);
 
 void far ProcInfoEvent(struct Event far *ev)
 {
@@ -661,14 +687,14 @@ void far ProcInfoEvent(struct Event far *ev)
                 prev = g_2E04[(g_2E24 - 1) & 0xf];
                 if (prev) {
                     g_2E26 = prev;
-                    f_21FA_08E2(0x500);
+                    win_DrawWindow(0x500);
                     g_2E24--;
                 }
             } else if (fd_4EE5_0280[i].id > 0) {
                 g_2E04[++g_2E24 & 0xf] = fd_4EE5_0280[i].id;
                 g_2E26 = fd_4EE5_0280[i].id;
                 g_2E04[(g_2E24 + 1) & 0xf] = 0;
-                f_21FA_08E2(0x500);
+                win_DrawWindow(0x500);
             } else {
                 PopUpInfoWindow((fd_4EE5_0280[i].r.right - fd_4EE5_0280[i].r.left) / 2 + fd_4EE5_0280[i].r.left,
                                 fd_4EE5_0280[i].r.top, fd_4EE5_0280[i].r.bottom, -fd_4EE5_0280[i].id);

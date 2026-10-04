@@ -1,0 +1,383 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "SpiderScan",
+  "module": "root:0CDB",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "1b6b35205b75649246f40c0f2fefd6e9df77708931e1d2e2052ad883e226f42e",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/SpiderScan.json",
+    "sha256": "17e0a3640c87bae41616cdbe3683b1ccc95e92ba193af072a3ba7e91705b4c89"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "SpiderScan",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/module.c",
+      "sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/evidence.json",
+      "sha256": "f33c28dd24f9d070513b66fb9bb1f02b7c789cafe269f2dc61cd09531447bc67"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea"
+      },
+      {
+        "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/run.json",
+        "sha256": "9acc398f6d94bb48318466267c5fe8d505d676426b07562a5a753a5b75050b7d"
+      },
+      {
+        "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/negative-controls.json",
+        "sha256": "8e20b85f26a9206499afbc397b8ac2bda28d9f0e4ffb3266667828c2d8a2bdce"
+      },
+      {
+        "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/contract-review.json",
+        "sha256": "edff77ea72fafb87455b62b944226420b97bbdc3edbd7098dd979d6ced58cbb9"
+      },
+      {
+        "path": "tools/behavior_suites/archive/spider_nest-20261002-current-runner-ledger-final.py",
+        "sha256": "41fa2c46acdc8c74d033d07d4d2afcf13abd77cd9cdee80e5060a61649aa8f67"
+      },
+      {
+        "path": "evidence/behavior/helpers/simulation-v1/DoLaserFire.json",
+        "sha256": "0243150da2a44db5336b60cdbbe4673d7b88d2dd4db8710160d337b77723fa5a"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+      },
+      {
+        "path": "src/root/m0093.c",
+        "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be"
+      },
+      {
+        "path": "tools/exe.py",
+        "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+      },
+      {
+        "path": "tools/functions.py",
+        "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0CDB",
+      "off": "0F90",
+      "linear": "0DD40",
+      "size": 392,
+      "extent": "DESCENT",
+      "disassembly_research": {
+        "command": "python tools/context.py SpiderScan (no --raw)",
+        "output": "build/workers/dos_static_spider/SpiderScan.disasm.txt",
+        "supporting_rng_output": "build/workers/dos_static_spider/rng-helper-disasm.txt",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "renderer_note": "Capstone/context renders one-byte opcode 0x99 as CDQ; selected 16-bit instructions at 1000, 1006, 1016, 102F, and 103D have no 0x66 prefix, so their DOS-mode operation is CWD (sign-extend AX into DX:AX). No byte arrays are recorded here."
+      }
+    },
+    "branch_map": [
+      {
+        "address": "0FDE",
+        "mnemonic": "JL 0FE3",
+        "predicate": "signed pass < 2",
+        "source": "module.c:490",
+        "taken": "initialize a=dir-32, then test the inner loop at 1096",
+        "fallthrough": "0FE0 JMP 110F; return current found"
+      },
+      {
+        "address": "0FEC",
+        "mnemonic": "JMP 1096",
+        "predicate": "inner-loop initialization edge",
+        "source": "module.c:491",
+        "taken": "test a < dir+32 before the first sample"
+      },
+      {
+        "address": "1053",
+        "mnemonic": "JL 1093",
+        "predicate": "signed x < 0",
+        "source": "module.c:495",
+        "taken": "reject sample; increment a",
+        "fallthrough": "1055: test signed x <= 127"
+      },
+      {
+        "address": "1058",
+        "mnemonic": "JG 1093",
+        "predicate": "signed x > 127",
+        "source": "module.c:495",
+        "taken": "reject sample; increment a",
+        "fallthrough": "105A: test signed y >= 0"
+      },
+      {
+        "address": "105C",
+        "mnemonic": "JL 1093",
+        "predicate": "signed y < 0",
+        "source": "module.c:495",
+        "taken": "reject sample; increment a",
+        "fallthrough": "105E: test signed y <= 63"
+      },
+      {
+        "address": "1061",
+        "mnemonic": "JG 1093",
+        "predicate": "signed y > 63",
+        "source": "module.c:495",
+        "taken": "reject sample; increment a",
+        "fallthrough": "1063: read LifeA[x][y]"
+      },
+      {
+        "address": "107B",
+        "mnemonic": "JE 1093",
+        "predicate": "unsigned LifeA[x][y] == 0",
+        "source": "module.c:495",
+        "taken": "reject empty cell; increment a",
+        "fallthrough": "call FindAntIndex and test its result"
+      },
+      {
+        "address": "1091",
+        "mnemonic": "JGE 10AA",
+        "predicate": "signed FindAntIndex result (stored in found) >= 0",
+        "source": "module.c:496",
+        "taken": "issue laser request and possibly kill the ant",
+        "fallthrough": "1093: increment a; preserve a negative helper result in found"
+      },
+      {
+        "address": "109F",
+        "mnemonic": "JLE 10A4",
+        "predicate": "signed dir+32 <= a, inverse of a < dir+32",
+        "source": "module.c:491",
+        "taken": "finish this sweep and increment pass",
+        "fallthrough": "10A1 JMP 0FEF; take another random sample"
+      },
+      {
+        "address": "10A1",
+        "mnemonic": "JMP 0FEF",
+        "predicate": "inner-loop back edge",
+        "source": "module.c:491-492",
+        "taken": "sample at the next angle after a was incremented"
+      },
+      {
+        "address": "10A7",
+        "mnemonic": "JMP 0FDA",
+        "predicate": "outer-loop back edge",
+        "source": "module.c:490",
+        "taken": "test pass < 2; if true, reset a to dir-32"
+      },
+      {
+        "address": "10DD",
+        "mnemonic": "JE 110F",
+        "predicate": "SRand4() == 0",
+        "source": "module.c:498-503",
+        "taken": "skip all kill writes and return found",
+        "fallthrough": "clear LifeA cell and AlistT entry, call DeadAntHere, return found"
+      },
+      {
+        "address": "1117",
+        "mnemonic": "RETF",
+        "predicate": "single far-return epilogue at 110F-1117",
+        "source": "module.c:503,507",
+        "taken": "return found in AX; restore SI, DI, BP"
+      }
+    ],
+    "call_map": [
+      {
+        "address": "0F96",
+        "original_call": "__aFchkstk",
+        "source_counterpart": "compiler stack check for the 0x14-byte framed allocation; implicit, not a source call",
+        "ordering": "entry before saved DI/SI and body"
+      },
+      {
+        "address": "0FF3",
+        "original_call": "SRand1(12)",
+        "source_counterpart": "module.c:492; add one to the 16-bit result and store radius r",
+        "callee_abi_note": "SpiderScan declares a signed int parameter but the pinned exact SRand1 definition takes unsigned int; the literal 12 is word 0x000C in either declaration and the helper performs unsigned division.",
+        "ordering": "first helper call per sampled angle; mutates original RNG state"
+      },
+      {
+        "address": "1010",
+        "original_call": "fracCOS(a)",
+        "source_counterpart": "module.c:493; signed 16-bit angle",
+        "ordering": "after SRand1 and before long arithmetic"
+      },
+      {
+        "address": "1019",
+        "original_call": "__aFlmul",
+        "source_counterpart": "signed 32-bit fracCOS(a) * (long)r",
+        "ordering": "immediately after fracCOS; compiler runtime arithmetic"
+      },
+      {
+        "address": "1020",
+        "original_call": "__aFldiv",
+        "source_counterpart": "signed 32-bit division by 32767L",
+        "ordering": "immediately after multiply; quotient narrowed to int before sx is added"
+      },
+      {
+        "address": "1037",
+        "original_call": "fracSIN(a)",
+        "source_counterpart": "module.c:494; signed 16-bit angle",
+        "ordering": "after x is fully computed"
+      },
+      {
+        "address": "1040",
+        "original_call": "__aFlmul",
+        "source_counterpart": "signed 32-bit fracSIN(a) * (long)r",
+        "ordering": "immediately after fracSIN; compiler runtime arithmetic"
+      },
+      {
+        "address": "1049",
+        "original_call": "__aFldiv",
+        "source_counterpart": "signed 32-bit division by 32767L",
+        "ordering": "immediately after multiply; quotient narrowed to int before sy is added"
+      },
+      {
+        "address": "1084",
+        "original_call": "FindAntIndex(1, x, y, life)",
+        "source_counterpart": "module.c:496; four 16-bit C arguments, caller pushes life,y,x,1 then removes eight argument bytes",
+        "ordering": "only after signed bounds pass and the unsigned LifeA byte is nonzero; result stored in found"
+      },
+      {
+        "address": "10CE",
+        "original_call": "DoLaserFire(x1, y1, x2, y2)",
+        "source_counterpart": "module.c:497; x1/y1 are fresh raw spider-position words; x2=(x<<4)+7; y2=(y<<4)+7",
+        "ordering": "only when FindAntIndex returns >=0; caller pushes y2,x2,y1,x1, then removes eight bytes"
+      },
+      {
+        "address": "10D6",
+        "original_call": "SRand4()",
+        "source_counterpart": "module.c:498",
+        "ordering": "after the laser request; nonzero controls all three kill effects"
+      },
+      {
+        "address": "1107",
+        "original_call": "DeadAntHere(x, y, life & 0x80)",
+        "source_counterpart": "module.c:501; three 16-bit arguments, caller pushes flag,y,x",
+        "ordering": "after LifeA[x][y]=0 and AlistT[found]=0, only when SRand4() is nonzero"
+      }
+    ],
+    "memory_state": {
+      "entry_reads": [
+        {
+          "object": "fd_50F6_1004",
+          "access": "one byte read at far address 50F6:1004 via the segment word at DS:0x814E; only its low three bits survive the subtract/mask",
+          "source": "module.c:479"
+        },
+        {
+          "object": "fd_50F6_0F12",
+          "access": "signed 16-bit word read once at far address 50F6:0F12 via DS:0x8156; arithmetic SAR by four gives sx",
+          "source": "module.c:480"
+        },
+        {
+          "object": "fd_50F6_0F34",
+          "access": "signed 16-bit word read once at far address 50F6:0F34 via DS:0x8158; arithmetic SAR by four gives sy",
+          "source": "module.c:481"
+        }
+      ],
+      "loop_reads": [
+        {
+          "object": "LifeA[x][y]",
+          "access": "one unsigned byte from far array base 3E1D:6180 selected via DS:0x8184, offset 0x6180 + (x << 6) + y; x is the major 128 dimension and y the minor 64 dimension",
+          "source": "module.c:495"
+        }
+      ],
+      "conditional_writes": [
+        {
+          "object": "LifeA[x][y]",
+          "access": "one byte set to zero at 3E1D:(0x6180 + (x << 6) + y)",
+          "condition": "FindAntIndex >= 0 and SRand4() != 0",
+          "source": "module.c:499"
+        },
+        {
+          "object": "AlistT[found]",
+          "access": "one byte set to zero at 3E1D:(0xAD3B + found); original uses modulo-16-bit displacement found-0x52C5 via DS:0x8168",
+          "condition": "FindAntIndex >= 0 and SRand4() != 0",
+          "source": "module.c:500"
+        }
+      ],
+      "delegated_effects": [
+        "SRand1 and SRand4 consume/update the original 16-bit LFSR seed at DGROUP:8BA2; no RNG state address is directly read or written by SpiderScan. The pinned exact root:0093 helper source and original disassembly show the shared transition seed=(seed<<1) XOR 0x1BF5 only when the shift carries; SRand1 returns unsigned remainder by its range, while SRand4 returns updated seed & 3.",
+        "fracCOS, fracSIN, FindAntIndex and DeadAntHere execute as the original helpers in the registered run. Their calls, arguments and ordering are part of the scanner behavior; helper effects are compared at the oracle boundary.",
+        "DoLaserFire is a far C call. Its exact argument tuple and event order are compared; the reviewed helper certificate places physical rendering/audio-device effects outside this simulation contract and reports no feedback into RNG, LifeA, ant-list or map state."
+      ],
+      "other_direct_writes": "None. On a successful sample SpiderScan returns found; otherwise it returns the initial -1 or the last negative FindAntIndex result. All exits share the far-return epilogue."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "control": "dir = ((direction-2)&7)<<5; two passes; each sweep begins at dir-32 and samples while signed a < dir+32, so both sweeps cover 64 angle values.",
+      "sampling": "SRand1(12)+1 is a 16-bit int radius in 1..12. The SpiderScan declaration calls the helper through signed int while its pinned definition takes unsigned int; the constant argument is the same ABI word 0x000C, and SRand1 performs unsigned division. Trig returns signed int; it is sign-extended to signed 32-bit long, multiplied by signed long radius, divided with signed truncation toward zero by 32767L, narrowed to 16-bit int, then added to signed 16-bit sx/sy with DOS-word wrap behavior.",
+      "bounds": "Signed 16-bit x in [0,127] and y in [0,63] are checked before indexing; each failed predicate branches to the common angle increment. LifeA byte is zero-extended into the 16-bit int life.",
+      "laser": "Plane/index selector is 1 for FindAntIndex. Laser endpoint is cell center (x*16+7,y*16+7); first endpoint rereads current raw 16-bit spider coordinates. Kill flag life&0x80 yields only 0 or 128.",
+      "abi": "DOS large-model far C calls with 16-bit int/stack arguments; observed caller cleanup is 2, 6, or 8 bytes as applicable. SpiderScan preserves SI/DI, returns int in AX, and exits via RETF. MSC long arithmetic uses signed helper calls; 0x99 instructions at 1000/1006/1016/102F/103D are 16-bit CWD operations, not CDQ (one byte, no 0x66 prefix).",
+      "stack_and_dead_initialization": "Original has a 20-byte stack-check request, saves DI then SI, and allocates 10 bytes of locals. found is initialized to -1; pass to 0; local r occupies the [BP-2] home evidenced by its sample assignment at 0FFA and read at 1003. The original zero store to that r home at 0FD4 is dead: direction masking gives dir in 0..224, so initial a=dir-32 is always below dir+32; pass=0 and the first inner-loop condition are both true. SRand1(12)+1 therefore overwrites r at 0FFA before its first read at 1003."
+    },
+    "static_axes": {
+      "algorithm_and_cfg": "Every original conditional and loop edge is mapped above: two 64-sample sweeps; signed coordinate bounds; nonempty LifeA gate; nonnegative FindAntIndex gate; laser request; optional random kill; and common return. No switch or indirect branch occurs. Source && evaluation is left-to-right and matches the original guard order.",
+      "calls_and_order": "All twelve machine calls are accounted for, including the implicit stack checker and two generated signed-long multiply/divide pairs. The original helper calls and source counterparts preserve per-sample order and branch reachability.",
+      "rng_state": "SRand1(12) occurs once before each cosine/sine sample; SRand4 occurs exactly once only after a found target's laser request. Pinned root:0093 helper source/disassembly identifies the shared LFSR seed at DGROUP:8BA2 and its shift/carry/XOR transition; each scanner helper call advances it once. The signed local prototype for SRand1 passes 0x000C, the same word consumed by its unsigned helper definition. Ordering and final non-stack state were compared in the pinned run.",
+      "memory_and_state": "Entry snapshots, LifeA byte read, and the two conditional zero stores are listed with original far segment bases and array stride. Other state effects occur only through listed helper calls. The first endpoint to DoLaserFire deliberately rereads raw coordinates; the second uses local sampled cell coordinates.",
+      "constants_and_widths": "All loop limits, angle/radius constants, map bounds, plane, laser center offset and kill-bit mask are accounted for. Target int is 16-bit signed, long 32-bit signed, LifeA/AlistT bytes unsigned; SAR and CWD interpretations are explicit.",
+      "pointer_and_abi": "LifeA base is 3E1D:6180 and indexing is x*64+y after bounds; AlistT base is 3E1D:AD3B and indexing is found after found>=0 (the 16-bit effective displacement is found-52C5). Far calls use right-to-left 16-bit stack arguments and caller cleanup; return is AX and register/stack restoration reaches the one far epilogue.",
+      "observable_effects": "Return value, RNG/helper trace, LifeA/AlistT writes, and exact laser request are accounted. The only bounded-contract exclusion is physical device rendering/audio output inside DoLaserFire, whose reviewed certificate establishes the request boundary and noninterference with scanner simulation state."
+    },
+    "remaining_differences": [
+      {
+        "classification": "CODEGEN_ONLY",
+        "original_address": "0FD4",
+        "source_anchor": "module.c:483",
+        "explanation": "The 392-byte original includes a 16-bit zero store into the local r home [BP-2] before the pass loop; the registered 389-byte candidate omits this dead initialization. The value is overwritten by SRand1(12)+1 at 0FFA before its first read at 1003 on every path (pass is set to zero and is therefore <2), so the store has no dataflow to a branch, call, return or memory effect. The registry labels this the historical dead-initialization residue."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "existing_suite": "SpiderScan_bounded_contract_v1 / spider_nest_contracts_v1: 146 directed plus 10,000 deterministic randomized cases (seed 0x5A17E2), 10,146 actual original/candidate pairs, zero mismatches or execution errors. Compared return, declared simulation globals/arrays/maps, ordered helper/callback names and arguments, union of non-stack writes, and caller-preserved register/stack ABI.",
+      "original_helper_execution": "Pinned run reports original helper execution and entry watching for SRand1 (1,109,278), SRand4 (2,997), fracCOS (1,109,278), fracSIN (2,218,556), FindAntIndex (2,160), and DeadAntHere (1,272). DoLaserFire request traced 1,725 times.",
+      "negative_controls": [
+        {
+          "id": "SpiderScan-omit-deadant",
+          "result": "detected mismatch in nonstack memory, ranges, and trace"
+        },
+        {
+          "id": "SpiderScan-laser-coordinate",
+          "result": "detected mismatch in trace"
+        }
+      ],
+      "limits": "These runs establish the finite registered domain only: bounded valid positions/modes/directions, ant/life fixtures and RNG seeds; malformed pointers/memory, arbitrary full histories and arbitrary interrupt schedules are excluded. DoLaserFire physical render/audio output is represented by its exact ordered logical request tuple. Differential success supports but does not replace the static CFG/dataflow comparison above."
+    },
+    "review_notes": [
+      "The registered source and evidence hashes match the behavior manifest. This worker receipt is a review candidate and does not alter or self-admit a frozen claim.",
+      "The context listing uses Capstone 5.0.3 and labels the one-byte 16-bit opcode 0x99 as CDQ. Inspection of the selected instruction lengths confirms no 0x66 prefix at the five listed sites; the correct 16-bit operation is CWD. This is a renderer alias, not an original/source semantic difference.",
+      "SRand1's prototype in SpiderScan declares a signed int parameter, while the exact root:0093 definition is unsigned int. This scanner passes only constant 12 (word 0x000C), so width, ABI bits and helper result are identical; the helper then performs the documented unsigned remainder. This signature difference is explicitly bounded to this call.",
+      "C signed-overflow and negative-right-shift behavior is not portable ISO C. The conclusion is scoped to the pinned MSC 6.00AX DOS build and the registered valid input domain, where the 16-bit wrap, SAR, and signed-long helper behavior are explicit in the original instructions and differential harness.",
+      "UI/render and audio-device output in DoLaserFire remains outside this function's simulation contract; its helper identity, exact request arguments and order are accounted, and the helper review documents noninterference with RNG, LifeA, ant-list and map state."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

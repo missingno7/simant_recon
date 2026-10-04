@@ -113,7 +113,7 @@ extern void far o10_35F5_0000(int x, int y, char far *label, int id);
 extern void far f_1FD2_02FF(void);
 extern void far f_1B73_0510(void);
 extern long far TickCount(void);
-extern int far f_1FD2_0542(void);
+extern int far StillDown(void);
 int far WaitedEnough(long far *timer, int delay);
 extern int far f_1F58_0038(void);
 extern int far f_1F58_005A(void);
@@ -160,7 +160,7 @@ void far f_1C62_00D5(char far *msg, int timed)
     f_1FD2_02FF();
     f_1B73_0510();
     stamp = TickCount();
-    down = f_1FD2_0542();
+    down = StillDown();
     for (;;) {
         if (timed && WaitedEnough(&stamp, 0x21c))
             break;
@@ -175,8 +175,8 @@ void far f_1C62_00D5(char far *msg, int timed)
             }
         }
         if (down)
-            down = f_1FD2_0542();
-        else if (f_1FD2_0542())
+            down = StillDown();
+        else if (StillDown())
             break;
         if (f_1B73_032A()) {
             f_1B73_032E(&ev);
@@ -188,7 +188,7 @@ done:
     f_1FD2_0438(0x900);
     f_1FD2_031A();
     f_1CE2_056C(&pr, save);
-    while (f_1FD2_0542())
+    while (StillDown())
         ;
     win_FlushEvents();
     f_1B73_050E();
@@ -247,14 +247,17 @@ void far f_1C62_0737(void);
 extern int far f_1F58_0090(void);
 extern void far o10_35F5_0A63(int key, int far *sel, int count, int id);
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1C62_0415 (button dialog): local slot layout and the kept dead
- * store y = 0 are not reproduced yet (3 bytes short). */
+
+extern char far * near sys_errlist[];
+extern int near sys_nerr;
+extern char near g_8CCB;
 int far f_1C62_0415(char far *msg, int set)
 {
     int c;
     int i;
-    struct Point pt;
+    int j;
+    int h;
+    int v;
     int width;
     int count;
     int sel;
@@ -271,10 +274,11 @@ int far f_1C62_0415(char far *msg, int set)
     size = f_1F80_000C(msg);
     width = size.x;
     count = g_5584[set];
-    c = pt.v = pt.h = i = 0;
-    for (; i < count; i++) {
-        widths[i] = _fstrlen(labels[i] + 1);
-        pt.h += widths[i];
+    c = v = h = j = 0;
+    for (; j < count;) {
+        widths[j] = _fstrlen(labels[j] + 1);
+        h += widths[j];
+        j++;
         c += 2;
     }
     if (width < c)
@@ -289,12 +293,12 @@ int far f_1C62_0415(char far *msg, int set)
     f_1CE2_044D(&pr, 1);
     g_9128(0x404, 0xf0f, 0xc0);
     f_1C62_0306(&g_557C, g_557C.top, msg);
-    pt.h = (width - pt.h - 2) / 2 + g_557C.left;
-    pt.v = g_557C.bottom - 2;
+    h = (width - h - 2) / 2 + g_557C.left;
+    v = g_557C.bottom - 2;
     g_9128(0x404, 0xc0c, 0xc0);
-    for (i = 0; i < count; i++) {
-        o10_35F5_0000(pt.h, pt.v, labels[i] + 1, i + 0x900);
-        pt.h += widths[i] + 2;
+    for (j = 0; j < count; j++) {
+        o10_35F5_0000(h, v, labels[j] + 1, j + 0x900);
+        h += widths[j] + 2;
     }
     f_1FD2_02FF();
     for (;;) {
@@ -322,7 +326,7 @@ done:
     f_1CE2_056C(&pr, save);
     return (unsigned char)ev.code;
 }
-/* SCAFFOLD END */
+
 
 extern char far * near sys_errlist[];
 extern int near sys_nerr;

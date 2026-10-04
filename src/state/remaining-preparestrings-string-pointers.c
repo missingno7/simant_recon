@@ -1,0 +1,14 @@
+typedef char far * far *StrList;
+StrList far fd_50F6_020A;
+StrList far fd_50F6_0218;
+StrList far fd_50F6_021C;
+StrList far fd_50F6_0234;
+StrList far fd_50F6_023A;
+StrList far fd_50F6_034C;
+StrList far fd_50F6_046C;
+StrList far fd_50F6_106E;
+StrList far fd_50F6_1078;
+StrList far fd_50F6_1086;
+StrList far fd_50F6_1096;
+StrList far fd_50F6_10A8;
+StrList far fd_50F6_10B4;

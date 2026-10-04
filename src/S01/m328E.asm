@@ -2,6 +2,7 @@
 ; Overlay section S01, code frame 328E, linear 328EA-32B5E.
 
 _DATA	segment word public 'DATA'
+	extrn	_g_8ED8:byte
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -21,7 +22,7 @@ _o01_328E_000A	proc	far
 	push ds
 	mov bx, word ptr [bp+0Eh]
 	and bx, 7
-	add bx, 8ED8h
+	add bx, offset DGROUP:_g_8ED8
 	lds si, dword ptr [bp+6]
 	les di, dword ptr [bp+0Ah]
 	mov cx, 40h
@@ -81,7 +82,7 @@ _o01_328E_009D	proc	far
 	push ds
 	mov bx, word ptr [bp+10h]
 	and bx, 7
-	add bx, 8ED8h
+	add bx, offset DGROUP:_g_8ED8
 	lds si, dword ptr [bp+6]
 	les di, dword ptr [bp+0Ah]
 	mov cx, 20h
@@ -141,7 +142,7 @@ _o01_328E_012C	proc	far
 	push ds
 	mov bx, word ptr [bp+0Eh]
 	and bx, 7
-	add bx, 8ED8h
+	add bx, offset DGROUP:_g_8ED8
 	lds si, dword ptr [bp+6]
 	les di, dword ptr [bp+0Ah]
 	mov cx, 20h
@@ -218,7 +219,7 @@ _o01_328E_01D5	proc	far
 	push ds
 	mov bx, word ptr [bp+0Eh]
 	and bx, 7
-	add bx, 8ED8h
+	add bx, offset DGROUP:_g_8ED8
 	lds si, dword ptr [bp+6]
 	les di, dword ptr [bp+0Ah]
 	mov cx, 10h

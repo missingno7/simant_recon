@@ -83,6 +83,78 @@ def module_path(unit: str, seg: int, origin: int | None, lang: str) -> Path:
     return ROOT / modmod.module_source(unit, seg, origin, lang)
 
 
+def publish_program_metadata(program: dict, prior_sha256: str) -> None:
+    """Publish reviewed inventory metadata without changing any source claim."""
+    import canonical
+    from lockfile import atomic_write_text
+    with Lock():
+        if sha(canonical.PROGRAM.read_bytes()) != prior_sha256:
+            raise ValueError('canonical inventory changed during metadata review')
+        current = canonical.load()
+        def sources(data):
+            return [(m['key'], m['source'], m['source_sha256'], m['lang'], m['profile'], m['flags'])
+                    for m in data['modules']]
+        if sources(program) != sources(current):
+            raise ValueError('metadata publication cannot replace source or compiler context')
+        for item in program['modules']:
+            if sha((ROOT / item['source']).read_bytes()) != item['source_sha256']:
+                raise ValueError('metadata publication has stale source')
+        atomic_write_text(canonical.PROGRAM, json.dumps(program, indent=2) + '\n', newline='\n')
+        with JOURNAL.open('a') as stream:
+            stream.write(json.dumps({'canonical_metadata': 'src/program.json',
+                'prior_sha256': prior_sha256, 'sha256': sha(canonical.PROGRAM.read_bytes())}) + '\n')
+
+
+def publish_evidence_metadata(updates: dict, prior_sha256: str) -> None:
+    """Move proof citations without changing source, claims or geometry."""
+    with Lock():
+        if sha(modmod.MANIFEST.read_bytes()) != prior_sha256:
+            raise ValueError('historical manifest changed during evidence review')
+        man = modmod.load_manifest()
+        for key, fields in updates.items():
+            if set(fields) - {'asm_evidence', 'origin_evidence'}:
+                raise ValueError('evidence relocation cannot change historical claims')
+            if fields.get('asm_evidence') and modmod.evidence_path_reasons(fields['asm_evidence']):
+                raise ValueError('relocated assembly evidence is unavailable')
+            man['modules'][key].update(fields)
+        modmod.write_manifest(man)
+        with JOURNAL.open('a') as stream:
+            stream.write(json.dumps({'evidence_relocation': updates,
+                'prior_manifest_sha256': prior_sha256}) + '\n')
+
+
+def normalize_canonical_sources() -> None:
+    """Use the same LF source spelling as normal historical promotion.
+
+    Both compiler entry points already normalize CRLF before staging. This
+    changes no compiled input, token, type, body or runtime contribution.
+    """
+    import canonical
+    from lockfile import atomic_write_text
+    with Lock():
+        program = canonical.load()
+        man = modmod.load_manifest()
+        changes = []
+        for item in program['modules']:
+            path = ROOT / item['source']
+            raw = path.read_bytes()
+            if sha(raw) != item['source_sha256']:
+                raise ValueError('line-ending normalization has stale source')
+            normalized = raw.replace(b'\r\n', b'\n')
+            if raw == normalized:
+                continue
+            changes.append({'source': item['source'], 'before': sha(raw), 'after': sha(normalized)})
+            path.write_bytes(normalized)
+            item['source_sha256'] = sha(normalized)
+            if item['key'] in man['modules']:
+                man['modules'][item['key']]['source_sha256'] = item['source_sha256']
+        modmod.write_manifest(man)
+        atomic_write_text(canonical.PROGRAM, json.dumps(program, indent=2) + '\n', newline='\n')
+        with JOURNAL.open('a') as stream:
+            stream.write(json.dumps({'canonical_line_endings': changes,
+                'reason': 'Compiler staging normalizes CRLF; Git canonical sources use LF.'}) + '\n')
+
+
 def promote_runtime_data(member: str, verify_only: bool, notes: list[str]) -> int:
     """Accept a complete data-only member from the pinned historical libraries.
 
@@ -137,6 +209,8 @@ def promote_runtime_data(member: str, verify_only: bool, notes: list[str]) -> in
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("candidate", type=Path, nargs="?")
+    ap.add_argument("--canonical-plan", type=Path,
+                    help="publish reviewed whole-TU canonical corrections and storage")
     ap.add_argument("--runtime-data", help="complete data-only member of an accepted pinned runtime library")
     ap.add_argument("--module",
                     help="UNIT:SEG, e.g. root:00F8 or S05:35F5; UNIT:SEG@OFF for a later object of a frame")
@@ -180,6 +254,11 @@ def main() -> int:
                     help="free-text journal note (e.g. the source rewrites a search tool applied)")
     ap.add_argument("--verify-only", action="store_true")
     a = ap.parse_args()
+    if a.canonical_plan:
+        if a.candidate or a.module or a.runtime_data:
+            ap.error('--canonical-plan is a whole-program publication operation')
+        import canonical
+        return canonical.publish(a.canonical_plan, a.verify_only)
 
     if a.runtime_data:
         allowed = {"runtime_data", "verify_only", "note"}

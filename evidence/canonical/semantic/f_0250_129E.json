@@ -1,0 +1,411 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "f_0250_129E",
+  "module": "root:0250",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "6c2c42d7639aec90b0211ef08fcd89409cd37ce566bb4f6b68dba8529c016883",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_0250_129E.json",
+    "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_0250_129E",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/evidence.json",
+      "sha256": "2fa51f664b8d89603b85960376d79d3c2daf0ffa6cbf248c8c2cf7685f155717"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "behavior registry"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+        "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+        "role": "registered whole-module C source"
+      },
+      {
+        "path": "tools/behavior_suites/archive/render_small-dec2831104d224ad.py",
+        "sha256": "dec2831104d224ad8623c534782f57a5ad2742d151ec482b120982ec5f6ea7f4",
+        "role": "archived differential suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/render-small-dec283-20261002/tools/behavior.py",
+        "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "role": "pinned harness runner"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/run.json",
+        "sha256": "7b794eece728abf7d76b71910d520b3dbd88843e68d65b8b819193bce2b83b43",
+        "role": "completed differential report"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/cases.jsonl.gz",
+        "sha256": "ee02d86867d2e7f750f23cb9993ebf32714e09e666f4b2e02339310131e7c9ac",
+        "role": "directed and randomized case ledger"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/contract-review.json",
+        "sha256": "73e91b7a7412c2efc5825261353701a724cfc5090a1684fdbde4fa1b586ce578",
+        "role": "contract review record"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/negative-controls.json",
+        "sha256": "37ba19627fc734af7cdfb0baa7820ee5ce480970786072c5afd8bf02c8acf8f2",
+        "role": "negative-control summary"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/negative-0.c",
+        "sha256": "487b4f24838b5bd971250954d5229f3a10384bccabc5f0ac9bcf2c48ada50dd5",
+        "role": "compiled negative-control source"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/negative-0.obj",
+        "sha256": "52ea11d5017b9fbac9761b09bc6e043d2321bb40ca5d8b3510e66177bfee9253",
+        "role": "compiled negative-control object"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/supplemental/callsite-abi.json",
+        "sha256": "787cb07492ac1095d8984133d72b20ddb51c47bbced8f0845a5a22c080361482",
+        "role": "call-site ABI evidence"
+      },
+      {
+        "path": "src/root/m0250.c",
+        "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "role": "pinned current caller/helper module referenced by call-site evidence"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "original executable lock"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "read-only original executable identity"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "disassembly research tool"
+      },
+      {
+        "path": "build/workers/dos_static_render0250/f_0250_129E.disassembly.txt",
+        "sha256": "8570eed4092901d8c21f9da887a4d37be35dddbb7b62dc0e9b9d20504abf2745",
+        "role": "saved context.py disassembly transcript"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0x0250",
+      "off": "0x129E",
+      "linear": "0x0379E",
+      "size": "0x0108",
+      "disassembly_research": {
+        "path": "build/workers/dos_static_render0250/f_0250_129E.disassembly.txt",
+        "sha256": "8570eed4092901d8c21f9da887a4d37be35dddbb7b62dc0e9b9d20504abf2745",
+        "method": "python tools/context.py f_0250_129E (without --raw); readable disassembly transcript, no original byte capsule"
+      }
+    },
+    "branch_map": {
+      "conditional_sites": [
+        {
+          "address": "0x12BC",
+          "mnemonic": "jl",
+          "target": "0x12CD",
+          "predicate": "x < 0; invalid coordinates return",
+          "source_anchor": "module.c:850",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x12C0",
+          "mnemonic": "jl",
+          "target": "0x12CD",
+          "predicate": "y < 0; invalid coordinates return",
+          "source_anchor": "module.c:850",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x12C6",
+          "mnemonic": "jge",
+          "target": "0x12CD",
+          "predicate": "x >= 40; invalid coordinates return",
+          "source_anchor": "module.c:850",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x12CB",
+          "mnemonic": "jl",
+          "target": "0x12D0",
+          "predicate": "y < 30; continue validation; otherwise return",
+          "source_anchor": "module.c:850",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x12D3",
+          "mnemonic": "jle",
+          "target": "0x12E1",
+          "predicate": "ay <= 0x3F; otherwise call Punt then continue if it returns",
+          "source_anchor": "module.c:852",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1305",
+          "mnemonic": "jne",
+          "target": "0x1313",
+          "predicate": "cache word != -2; otherwise increment it to -1 and return",
+          "source_anchor": "module.c:856",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1327",
+          "mnemonic": "jne",
+          "target": "0x1341",
+          "predicate": "cached word != g_9126; mismatch enters redraw/update block",
+          "source_anchor": "module.c:861",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1335",
+          "mnemonic": "jne",
+          "target": "0x1341",
+          "predicate": "cached tile byte != g_94E4; mismatch enters redraw/update block",
+          "source_anchor": "module.c:861",
+          "operand_width": "8-bit",
+          "signedness": "unsigned byte"
+        },
+        {
+          "address": "0x1339",
+          "mnemonic": "jne",
+          "target": "0x13A0",
+          "predicate": "y != 0; skip the forced-row-0 predicate and return without updating",
+          "source_anchor": "module.c:861",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x133F",
+          "mnemonic": "je",
+          "target": "0x13A0",
+          "predicate": "g_19CE == y == 0; no forced row-0 update",
+          "source_anchor": "module.c:861",
+          "operand_width": "16-bit",
+          "signedness": "signed int"
+        },
+        {
+          "address": "0x1346",
+          "mnemonic": "je",
+          "target": "0x1369",
+          "predicate": "g_9126 == 0; use the ground-tile helper",
+          "source_anchor": "module.c:862",
+          "operand_width": "16-bit",
+          "signedness": "unsigned word"
+        }
+      ],
+      "unconditional_and_terminal_edges": [
+        {
+          "address": "0x12CD",
+          "mnemonic": "jmp",
+          "target": "0x13A0",
+          "meaning": "out-of-range x/y return epilogue"
+        },
+        {
+          "address": "0x1307",
+          "mnemonic": "inc",
+          "target": null,
+          "meaning": "cache sentinel -2 is incremented as a 16-bit word to -1"
+        },
+        {
+          "address": "0x1310",
+          "mnemonic": "jmp",
+          "target": "0x13A0",
+          "meaning": "sentinel path returns without calling f_0250_1018 helpers or tile cache write"
+        },
+        {
+          "address": "0x1367",
+          "mnemonic": "jmp",
+          "target": "0x1389",
+          "meaning": "life/tile helper joins common post-call cache update"
+        },
+        {
+          "address": "0x13A5",
+          "mnemonic": "retf",
+          "target": null,
+          "meaning": "single far return; caller removes the two argument words"
+        }
+      ],
+      "switch_and_fallthrough_accounting": "The source short-circuit coordinate predicate matches the four sequential bounds branches. The Punt path falls through to f_0250_1018 if Punt returns. Sentinel and no-update branches reach the common epilogue; f_0250_0721 falls through the caller-cleanup join before both cache writes.",
+      "loops": "none",
+      "indirect_jumps": "none",
+      "returns": [
+        "Out-of-range coordinates, sentinel cache, unchanged cache, and completed redraw/update converge on epilogue 0x13A0 and retf 0x13A5."
+      ]
+    },
+    "call_map": [
+      {
+        "address": "0x12A4",
+        "callee": "__aFchkstk",
+        "source_counterpart": "compiler-generated stack-check prologue; no source-level function call",
+        "order": "entry before parameter-derived state and checks",
+        "arguments_abi": "MSC stack-check helper, generated for a 8-byte BP local frame",
+        "effects": "stack guard only"
+      },
+      {
+        "address": "0x12DA",
+        "callee": "Punt",
+        "source_counterpart": "module.c:853 Punt(\"Y>MAXAY\")",
+        "order": "after valid x/y bounds and ay>63, before f_0250_1018; execution falls through after caller cleanup if Punt returns",
+        "arguments_abi": "far varargs call with far string pointer \"Y>MAXAY\"; caller removes 4 argument bytes",
+        "effects": "external error/reporting service; any service-internal effects are outside this target body"
+      },
+      {
+        "address": "0x12E5",
+        "callee": "f_0250_1018",
+        "source_counterpart": "module.c:854 f_0250_1018(x,y)",
+        "order": "for every in-range coordinate after the optional Punt call; before sentinel/cache checks",
+        "arguments_abi": "same-TU far C function emitted as push cs/call near; two signed 16-bit stack words (x,y), caller cleanup",
+        "effects": "sets g_94E4/g_9126 from map, scent and life tables; full target behavior is separately receipted"
+      },
+      {
+        "address": "0x1364",
+        "callee": "f_0250_0721",
+        "source_counterpart": "module.c:863 f_0250_0721(pixel_x,pixel_y)",
+        "order": "only on redraw/update when post-f_0250_1018 g_9126 != 0; caller reads g_9126 after this helper returns",
+        "arguments_abi": "far C call with signed word pixel_x then pixel_y; caller removes 4 argument bytes",
+        "effects": "same-module helper normalizes g_9126 in place by removing its 0x100/0x200/0x280 life/page base, then delegates physical tile/life drawing to renderer callbacks; target caches the post-helper g_9126"
+      },
+      {
+        "address": "0x1386",
+        "callee": "f_0250_0ADB",
+        "source_counterpart": "module.c:865 f_0250_0ADB(pixel_x,pixel_y)",
+        "order": "else arm only when post-f_0250_1018 g_9126 == 0; caller reads/cache-writes g_9126 after return",
+        "arguments_abi": "far C call with signed word pixel_x then pixel_y; caller removes 4 argument bytes",
+        "effects": "same-module ground-tile helper reads g_94E4 and dispatches the renderer by function pointer; source body does not rewrite g_9126"
+      }
+    ],
+    "memory_state_inventory": {
+      "reads": [
+        "signed x/y arguments at SS:BP+6/+8",
+        "fd_50F6_0508.y word before range validation to form ay",
+        "f_0250_1018 outputs g_9126 word and g_94E4 byte",
+        "fd_50F6_15C4[0][i] as 16-bit cache word",
+        "fd_50F6_1114[i] as unsigned-byte tile cache, only when prior cache word equals g_9126",
+        "g_19CE word only when cache matches, tile matches, and y==0",
+        "g_19BE/g_19C0 scale words and fd_50F6_110C.left/top words when a redraw helper is called"
+      ],
+      "writes": [
+        "if cache word is -2, that word alone increments modulo 65536 to -1, then return",
+        "on redraw path, after helper return, write current g_9126 to cache word, then write g_94E4 to the byte tile cache"
+      ],
+      "delegated_writes": "f_0250_1018 writes the two draw globals; f_0250_0721 may transform g_9126 before the cache store and dispatches renderer callbacks; f_0250_0ADB dispatches ground drawing. Punt is a far external boundary. No other target-local game-state writes are present.",
+      "pointer": "i=y*40+x (signed 16-bit) indexes 1200 row-major 16-bit entries at fd_50F6_15C4; p is a far pointer to that exact word. The independent tile cache is byte-indexed by the same i."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "bounds": "x in [0,39], y in [0,29], validated in that short-circuit order after reading origin y. ay=origin_y+y is a signed 16-bit sum; Punt is called when signed ay>63, with no return in the caller after it.",
+      "index": "i=40*y+x; for accepted x/y this is 0..1199. Sentinel comparison and increment are 16-bit signed-word bit patterns (-2 to -1).",
+      "redraw_predicate": "Update when cached word differs from g_9126, OR cached tile byte differs from g_94E4, OR (y==0 AND g_19CE!=0). The source short-circuit order matches the original conditional sequence.",
+      "coordinates": "Both helpers receive (g_19BE*x+rect.left, g_19C0*y+rect.top), using 16-bit signed products/adds. Original pushes y then x because caller stack layout is right-to-left; helper BP+6 is x and BP+8 is y.",
+      "post_helper_state": "The life helper changes g_9126 before the caller caches it; the ground helper leaves g_9126 at zero. g_94E4 remains the tile byte produced by f_0250_1018."
+    },
+    "static_axes": {
+      "source_scope": "The registered module.c is a whole root:0250 translation-unit snapshot; both target bodies and same-module render helpers are in this exact pinned file.",
+      "abstract_machine": "Interpret integer operations as the pinned 16-bit MSC/DOS execution: int and pointers are 16-bit words, far pointers carry offset+segment, byte loads are zero-extended where source types are unsigned char, and word assignment/arithmetic wraps as the observed x86 target does. ISO-C signed-overflow portability is not claimed.",
+      "control_flow": "Every conditional site is enumerated with original target and source predicate. Neither target has a loop or indirect branch. Switch defaults, fall-throughs, early returns, joins, and common epilogues are separately recorded.",
+      "algorithm": "The target reads origin y, rejects out-of-grid coordinates, optionally reports ay>63, always derives map tile/life outputs for valid x/y, honors cache sentinel -2 by changing it to -1 and returning, then compares the word/tile caches plus forced row-0 invalidation. On a mismatch it calls the life/tile or ground renderer with scaled pixel coordinates, then caches the post-helper draw word and tile byte.",
+      "branch_coverage": "11 conditional sites are listed below. Bounds short-circuit order, Punt continuation, cache sentinel early return, short-circuited cache comparisons, forced row-0 condition, and life-vs-ground helper split all map to explicit source predicates. There are no loops, switch jumps, or indirect branches in this target.",
+      "types_and_order": "x/y/i/ay and scale terms are signed 16-bit ints; cache words are 16-bit; cached tile is unsigned byte; g_9126 is unsigned word; g_94E4 is unsigned byte. Cache writes occur word first then byte. Punt occurs before the map calculation; f_0250_1018 occurs before cache sentinel handling.",
+      "memory_effects": {
+        "reads": [
+          "signed x/y arguments at SS:BP+6/+8",
+          "fd_50F6_0508.y word before range validation to form ay",
+          "f_0250_1018 outputs g_9126 word and g_94E4 byte",
+          "fd_50F6_15C4[0][i] as 16-bit cache word",
+          "fd_50F6_1114[i] as unsigned-byte tile cache, only when prior cache word equals g_9126",
+          "g_19CE word only when cache matches, tile matches, and y==0",
+          "g_19BE/g_19C0 scale words and fd_50F6_110C.left/top words when a redraw helper is called"
+        ],
+        "writes": [
+          "if cache word is -2, that word alone increments modulo 65536 to -1, then return",
+          "on redraw path, after helper return, write current g_9126 to cache word, then write g_94E4 to the byte tile cache"
+        ],
+        "delegated_writes": "f_0250_1018 writes the two draw globals; f_0250_0721 may transform g_9126 before the cache store and dispatches renderer callbacks; f_0250_0ADB dispatches ground drawing. Punt is a far external boundary. No other target-local game-state writes are present.",
+        "pointer": "i=y*40+x (signed 16-bit) indexes 1200 row-major 16-bit entries at fd_50F6_15C4; p is a far pointer to that exact word. The independent tile cache is byte-indexed by the same i."
+      },
+      "constants_and_pointer_arithmetic": {
+        "bounds": "x in [0,39], y in [0,29], validated in that short-circuit order after reading origin y. ay=origin_y+y is a signed 16-bit sum; Punt is called when signed ay>63, with no return in the caller after it.",
+        "index": "i=40*y+x; for accepted x/y this is 0..1199. Sentinel comparison and increment are 16-bit signed-word bit patterns (-2 to -1).",
+        "redraw_predicate": "Update when cached word differs from g_9126, OR cached tile byte differs from g_94E4, OR (y==0 AND g_19CE!=0). The source short-circuit order matches the original conditional sequence.",
+        "coordinates": "Both helpers receive (g_19BE*x+rect.left, g_19C0*y+rect.top), using 16-bit signed products/adds. Original pushes y then x because caller stack layout is right-to-left; helper BP+6 is x and BP+8 is y.",
+        "post_helper_state": "The life helper changes g_9126 before the caller caches it; the ground helper leaves g_9126 at zero. g_94E4 remains the tile byte produced by f_0250_1018."
+      },
+      "calls": "All five calls (including generated stack check) are listed with order, condition, argument width and caller-cleanup behavior. The two renderer helpers are present in the same registered source; the life helper mutates g_9126 before the caller caches it.",
+      "dependencies": "f_0250_1018 is an adjacent same-TU target and is independently receipted. f_0250_0721 and f_0250_0ADB bodies are at module.c:304-403 and :405-426, respectively; the original mode-0 run executed original bodies when reached (881 and 127 observed calls). Their downstream physical renderer callbacks and Punt internals remain explicit service boundaries, not silently treated as target-local effects."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "0x129E-0x12AA and 0x12AB-0x12F7",
+        "source_anchor": "module.c:843-855; local declarations module.c:841-847",
+        "explanation": "Targeted compile diagnostics report 265-byte candidate extent versus the 264-byte original; the compared target payloads have the same semantic sequence. Register/local allocation differs (original y is held in DI and the linear index in SI; candidate roles use different registers, and instruction/branch layout shifts). These values remain local and do not alter bounds, index, calls, cache predicate or writes. The candidate is one byte larger (265 vs 264); the one-byte tail shift puts the candidate return beyond the aligned compared payload, while the source still has a normal void return. This is a historical extent mismatch, not a claim of byte acceptance."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/run.json",
+      "sha256": "7b794eece728abf7d76b71910d520b3dbd88843e68d65b8b819193bce2b83b43",
+      "cases": {
+        "directed": 231,
+        "randomized": 1000,
+        "total": 1231,
+        "seed": "0xBEEF"
+      },
+      "completion": "COMPLETE",
+      "mismatches": 0,
+      "errors": 0,
+      "helper_original_execution_counts": {
+        "f_0250_0721": 881,
+        "f_0250_0ADB": 127
+      },
+      "negative_control": "negative/draw-kind detected; mismatch categories include nonstack_memory, ranges, and trace",
+      "limits": [
+        "Finite target-specific domain only; not universal proof.",
+        "Mode-0 compares normalized draw intent and helper state effects; physical framebuffer/display-driver effects are excluded.",
+        "Historical byte/fixup/extent acceptance is separate."
+      ]
+    },
+    "review_notes": [
+      "Candidate for independent root review; this worker did not edit source, manifest, registry or frozen behavior evidence.",
+      "The static conclusion is grounded in the complete original extent and complete reconstructed C body; differential evidence corroborates but its finite input domain is not universal proof.",
+      "Assumes the pinned single-threaded DOS/MSC 16-bit execution model. Asynchronous mutation/reentrancy between non-volatile global reads is not separately modeled.",
+      "For f_0250_129E, physical driver/framebuffer state and Punt service internals lie behind explicit call boundaries; the target call, condition, order, arguments and post-call cache behavior are accounted for.",
+      "The behavior registry status remains unchanged; this receipt is a research review candidate only.",
+      "Targeted diag.py comparison reports parameter/index register substitutions and branch-layout shifts; original and source control flow still map site by site.",
+      "The legacy fd_50F6_15C4[0][i] syntax relies on MSC linear far-memory addressing across the declared 40-word row; for valid grid x/y, original address is base + 2*i, with i in 0..1199. ISO C subarray bounds are not used as a portability claim."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

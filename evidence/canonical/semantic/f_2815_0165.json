@@ -1,0 +1,278 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "f_2815_0165",
+  "module": "root:2815",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "59f25aa7a75f57cb012080460d815f7ae3d42a817c36de4045157ab061be8915",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_2815_0165.json",
+    "sha256": "f681fde7fd5100f7e18463f4798df0697b805f73b9796e73bb5a19c9e0f765ad"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_2815_0165",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_2815_0165/module.c",
+      "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+      "function_anchor_line": 51
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_2815_0165/evidence.json",
+      "sha256": "dde6cb84a43ab8668dca3c9c4869ef6af534bf17e2e790d5a64ea9e290b0dc2a",
+      "manifest_path": "evidence/behavior/manifest.json",
+      "manifest_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "registered_status": "BEHAVIOR_EXACT",
+      "validation_receipt_sha256": "6012b3f4407a3ca36a14612086d0461aedca6d0cd5fbd64c4ec02cdb695ac108"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "current behavioral registration index"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+        "role": "function identity/address table"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "locked original executable identity"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "role": "historical source/build baseline pinned by run evidence"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original read only through context.py and archived behavioral runner"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "original disassembly extraction command; invoked by exact function name without --raw"
+      },
+      {
+        "path": "build/workers/dos_static_small_helpers/original-disassembly.md",
+        "sha256": "fb4e1263b90aebe3b3b4fed069b49a0c0f7f453071565ef86ece054f5f04654a",
+        "role": "readable context.py disassembly for targets and directly-called I/O helpers; contains no raw bytes"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2815_0165/run.json",
+        "sha256": "686b7c234b26a867549529baed80aff538b6cdc7d2e9ec2291ff300d482b1b5e",
+        "role": "actual-original and candidate differential run"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2815_0165/cases.jsonl.gz",
+        "sha256": "27b05d71e75e7bd3a142301cdcf118e180260cf0f930d24cc019705da72cc641",
+        "role": "pinned per-case execution ledger"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2815_0165/negative-controls.json",
+        "sha256": "86d931e002b5012f2ac0374bd93e5a26dce85bc2834425681c4eef7673ed24a2",
+        "role": "compiled mutant detection report"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2815_0165/contract-review.json",
+        "sha256": "ab7324a2470454f2c569773c53d080f1294e48108a2298ee2fb2bb68f371eaad",
+        "role": "reviewed input/effect contract"
+      },
+      {
+        "path": "tools/behavior_suites/archive/adlib-finalmanifest-20261002.py",
+        "sha256": "4e1a9f2b86d8920af25e7681adce326cfcb9b423a10cfbf4cae44504317c2681",
+        "role": "archived directed/randomized suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py",
+        "sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+        "role": "archived reviewed execution harness identity"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "2815",
+      "off": "0x0165",
+      "size": "0x00E8",
+      "linear_start": "0x282B5",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "research": "python tools/context.py FUNCTION (no --raw); disassembly transcript is pinned in inputs"
+    },
+    "differential_evidence": {
+      "suite": {
+        "path": "tools/behavior_suites/archive/adlib-finalmanifest-20261002.py",
+        "sha256": "4e1a9f2b86d8920af25e7681adce326cfcb9b423a10cfbf4cae44504317c2681"
+      },
+      "run": {
+        "path": "evidence/behavior/functions/f_2815_0165/run.json",
+        "sha256": "686b7c234b26a867549529baed80aff538b6cdc7d2e9ec2291ff300d482b1b5e",
+        "completion": "COMPLETE",
+        "cases": 7851,
+        "mismatches": 0,
+        "actual_original_execution": true,
+        "actual_candidate_execution": true
+      },
+      "case_ledger": {
+        "path": "evidence/behavior/functions/f_2815_0165/cases.jsonl.gz",
+        "sha256": "27b05d71e75e7bd3a142301cdcf118e180260cf0f930d24cc019705da72cc641",
+        "rows": 7851
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/f_2815_0165/negative-controls.json",
+        "sha256": "86d931e002b5012f2ac0374bd93e5a26dce85bc2834425681c4eef7673ed24a2"
+      },
+      "contract_review": {
+        "path": "evidence/behavior/functions/f_2815_0165/contract-review.json",
+        "sha256": "ab7324a2470454f2c569773c53d080f1294e48108a2298ee2fb2bb68f371eaad"
+      },
+      "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+      "validation_receipt_sha256": "6012b3f4407a3ca36a14612086d0461aedca6d0cd5fbd64c4ec02cdb695ac108",
+      "limits": "These executions are corroboration only; the static CFG/dataflow/arithmetic comparison below is the completeness basis. See review_notes for valid-state and excluded-domain limits.",
+      "compiled_candidate_identity": {
+        "source": "work\\takeover\\hardtail\\seeds\\root_2815_8b6ca1b25908.c",
+        "source_sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+        "compiled_source_sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+        "object_sha256": "d1d622e942c88a01c7b3af11732255c1a92e312a077b777aba7565f199227011",
+        "linked_code_sha256": "d841d69830373870896d837ee0035f2edabc79deb090afdd0bcf2a538a6e9714",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    },
+    "branch_map": [
+      {
+        "address": "root:2815:0194",
+        "mnemonic": "JNS",
+        "target": "root:2815:0198",
+        "fallthrough": "root:2815:0196",
+        "source_anchor": "module.c:58-59",
+        "predicate": "signed 16-bit adjusted volume >= 0; taken path skips zeroing, fallthrough writes DI=0",
+        "width_signedness": "word, signed flags from ADD"
+      },
+      {
+        "address": "root:2815:019B",
+        "mnemonic": "JLE",
+        "target": "root:2815:01A0",
+        "fallthrough": "root:2815:019D",
+        "source_anchor": "module.c:60-61",
+        "predicate": "signed 16-bit adjusted volume <= 0x7f; fallthrough writes 0x7f",
+        "width_signedness": "word, signed comparison"
+      },
+      {
+        "address": "root:2815:01F6",
+        "mnemonic": "JS",
+        "target": "root:2815:0247",
+        "fallthrough": "root:2815:01F8",
+        "source_anchor": "module.c:65",
+        "predicate": "signed 16-bit transposed note < 0; taken path skips both pitch calls",
+        "width_signedness": "word, signed sign flag from ADD"
+      },
+      {
+        "address": "root:2815:01FC",
+        "mnemonic": "JG",
+        "target": "root:2815:0247",
+        "fallthrough": "root:2815:01FE",
+        "source_anchor": "module.c:65",
+        "predicate": "signed 16-bit transposed note > 0x7f; taken path skips both pitch calls",
+        "width_signedness": "word, signed comparison"
+      }
+    ],
+    "cfg_summary": "Four conditional branch sites above are the complete target CFG decision sites. No loop, switch, indirect jump, or alternate return exists. Every path reaches the single far return; the volume call is unconditional and the two pitch calls share the note-in-range path.",
+    "call_map": [
+      {
+        "order": 1,
+        "original_site": "root:2815:01E2",
+        "callee": "root:283E:000A f_283E_000A",
+        "source_anchor": "module.c:62-63",
+        "condition": "unconditional; occurs after volume calculation",
+        "arguments": "register = g_6912[g_6908[voice]] + 0x40; value = six-bit attenuation result OR original instrument upper two bits",
+        "ordering": "first direct call on every invocation"
+      },
+      {
+        "order": 2,
+        "original_site": "root:2815:021D",
+        "callee": "root:283E:000A f_283E_000A",
+        "source_anchor": "module.c:66",
+        "condition": "only when the signed 16-bit transposed note is 0..127",
+        "arguments": "register = voice + 0xa0 (low-byte ABI value); value = g_6924[note % 12]",
+        "ordering": "first pitch call; follows volume write"
+      },
+      {
+        "order": 3,
+        "original_site": "root:2815:0240",
+        "callee": "root:283E:000A f_283E_000A",
+        "source_anchor": "module.c:67",
+        "condition": "same in-range path, after call 2",
+        "arguments": "register = voice + 0xb0 (low-byte ABI value); value = ((note / 12 + 8) << 2) + (g_6924[note % 12] >> 8)",
+        "ordering": "second pitch call; final direct call"
+      }
+    ],
+    "transitive_call_effects": {
+      "chain": "root:283E:000A -> root:283E:0020",
+      "evidence": "Pinned context disassembly in original-disassembly.md: 283E:000A sets DX=0x388, loads byte register/value arguments and calls 283E:0020. That helper outputs register to 0x388, polls input 0x388 in fixed 10-iteration and 40-iteration LOOPs, outputs value to 0x389, and returns; each direct call therefore causes two byte OUTs and 50 status INs. Poll status is not used to choose an f_2815_0165 branch. This describes the transitive I/O contract, not additional branch_map entries for the target."
+    },
+    "memory_state": {
+      "reads": [
+        "BP+0x06 signed word instr; BP+0x08 signed word note; BP+0x0a signed word vol; BP+0x0c signed word voice.",
+        "Far signed word fd_50F6_4B16; fd_50F6_0000[instr] using 6-byte entries and far pointer member at +2; instrument bytes p[2], signed word *(int far *)(p+0x0d), signed word *(int far *)(p+0x0b).",
+        "Far table fd_55B3_6BA4[vol] as the low byte of each 2-byte element; byte tables g_6908[voice], g_6912[g_6908[voice]], and word table g_6924[remainder] (low and high bytes for the two pitch writes).",
+        "Transitive helper reads status port 0x388 for its fixed delay loops; target function does not inspect those values."
+      ],
+      "writes": [
+        "BP+0x08 note argument slot receives the 16-bit transposed note before the signed range check. This is transient caller argument-area state under the far-call ABI.",
+        "Frame temporaries store the far instrument pointer at BP-8/BP-6 and the saved voice word at BP-0xa; saved SI/DI/BP and call argument stack space are restored/unwound.",
+        "No instrument/table/global memory is written. Observable device effects are only the ordered f_283E_000A calls and their transitive 0x388/0x389 I/O."
+      ],
+      "global_state": "No global data mutation and no return value (void far). The input vol value is held in DI for clamp/index use; original code does not overwrite BP+0xa."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "widths_signedness": "MSC target int is signed 16-bit. Initial volume additions, clamps, instrument transposition multiply-by-12 and note update are word operations interpreted signed by JNS/JLE/JS/JG. The attenuation multiply is unsigned 16-bit: operands are in 0..63 so product <=3969 and no product truncation changes the value; SHR 6 is logical. Table values and masks are then reduced to the low byte passed to the char helper ABI.",
+      "pointer_math": "instr indexes 6-byte Instr records; the far pointer is loaded from member offset +2. p+0x0d and p+0x0b are byte-offset far accesses to signed words; p[2] is an unsigned byte. The volume lookup uses element stride 2 (int table) and the low byte. note%12 and note/12 are evaluated only on the 0..127 signed range, so signed IDIV remainder/quotient equal the C source operations.",
+      "constants": "Volume clamps 0 and 0x7f; attenuation uses 0x3f and shift 6, preserving p[2] upper mask 0xc0; note transposition multiplier 12; note bounds 0..0x7f; semitone divisor/table length 12; pitch register bases 0xa0/0xb0 and octave offset 8; operator-volume register base 0x40."
+    },
+    "static_axes": {
+      "algorithm": "The source and original both add global and instrument signed-word volume offsets, clamp in order to [0,127], compute the same unsigned 6-bit operator level while retaining instrument bits 7..6, then add instrument semitone transpose*12 and emit pitch registers only for adjusted note 0..127.",
+      "control_flow": "Each of four original branch sites has a source predicate, signed word width, target and fallthrough recorded above. The two volume branches always converge before one volume write; two note branches jointly gate both pitch writes. No missing CFG edge found.",
+      "calls": "Direct helper count/order/condition/arguments match source lines 62-67. Callee boundary and its actual fixed I/O/polling side effects are traced to 283E:0020.",
+      "memory": "All data reads, word/byte widths, far pointer member and offsets, parameter-slot update, frame temporaries, no-global-write fact, and transitive I/O effects are inventoried above.",
+      "return_abi": "Both are void far functions; one epilogue; saved callee-preserved registers restored.",
+      "completeness_basis": "Static reconstruction uses the full 232-byte original context disassembly plus full registered module.c function body, definitions and types. Differential cases corroborate but are not the proof."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:2815:0165..024C",
+        "source_anchor": "module.c:51-68",
+        "explanation": "Pinned behavioral dossier records target 232 bytes versus natural-C candidate 246 bytes, with arithmetic-width lowering, far-pointer lowering and allocation differences. The complete path/predicate and 16-bit/byte arithmetic review above explains the operation-level behavior for the registered valid instrument/voice/note domain; no residual output or memory semantic difference is left unexplained. Historical byte identity remains open."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "review_notes": [
+      "Registered caller state is 56 accessible instrument records, voices 0..8, byte volumes and MIDI notes 0..127, with the documented instrument/frequency tables. Invalid instrument or voice indexes and acoustic equivalence of ISA hardware are excluded.",
+      "Signed 16-bit arithmetic and far pointer behavior are the pinned MSC/DOS model; the receipt makes those widths explicit rather than asserting portable ISO C overflow semantics.",
+      "Differential evidence: 4,851 directed plus 3,000 randomized actual original/candidate executions; 7,851 ledger rows, zero mismatches; three compiled mutants detected. It corroborates the static result but its finite corpus alone does not establish completeness.",
+      "This receipt is a worker audit candidate for independent root review; it does not edit or reclassify the historical or behavioral registry."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

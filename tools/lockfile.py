@@ -34,7 +34,7 @@ def _alive(pid: int) -> bool:
             return False
 
 
-def atomic_write_text(path, text: str, attempts: int = 50) -> None:
+def atomic_write_text(path, text: str, attempts: int = 50, newline: str | None = None) -> None:
     """Write via a temp file and os.replace, retrying while a concurrent reader holds the
     target open (Windows PermissionError); never leaves a partial target or a stray temp."""
     import os
@@ -42,7 +42,7 @@ def atomic_write_text(path, text: str, attempts: int = 50) -> None:
     from pathlib import Path
     path = Path(path)
     tmp = path.with_suffix(path.suffix + f".tmp{os.getpid()}")
-    tmp.write_text(text)
+    tmp.write_text(text, newline=newline)
     for i in range(attempts):
         try:
             os.replace(tmp, path)

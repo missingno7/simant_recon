@@ -37,9 +37,9 @@ extern void far clip_SetWin(int win);
 extern int far f_1B4E_000D(int color);
 extern void _fastcall win_FillObjRect(int obj, int color);
 void far drawHistGraph(int graph, int hilite, int slot);
-extern int far f_1FD2_0542(void);
+extern int far StillDown(void);
 void far win_DrawHistoryWindow(int flags);
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 
 void far ProcHistoryEvent(struct Event far *ev)
 {
@@ -55,10 +55,10 @@ void far ProcHistoryEvent(struct Event far *ev)
         for (i = 0; i < 4; i++)
             if (shownGraphs[i] != (int)0x8000)
                 drawHistGraph(shownGraphs[i], 1, i);
-        while (f_1FD2_0542())
+        while (StillDown())
             ;
         win_DrawHistoryWindow(3);
-        f_1E57_0362();
+        clip_Off();
         break;
     default:
         if (ev->code >= 0x1503 && ev->code <= 0x150c)
@@ -107,19 +107,19 @@ void far ToggleHistButton(int item)
             }
     }
     win_DrawHistoryWindow(3);
-    f_1E57_0362();
+    clip_Off();
 }
 
-extern int far fd_50F6_0516[64];
-extern int far fd_50F6_05A0[64];
-extern int far fd_50F6_0626[64];
-extern int far fd_50F6_06AE[64];
-extern int far fd_50F6_073C[64];
-extern int far fd_50F6_07CE[64];
-extern int far fd_50F6_0856[64];
-extern int far fd_50F6_08F0[64];
-extern int far fd_50F6_0970[64];
-extern int far fd_50F6_0A0A[64];
+int far fd_50F6_0516[64];
+int far fd_50F6_05A0[64];
+int far fd_50F6_0626[64];
+int far fd_50F6_06AE[64];
+int far fd_50F6_073C[64];
+int far fd_50F6_07CE[64];
+int far fd_50F6_0856[64];
+int far fd_50F6_08F0[64];
+int far fd_50F6_0970[64];
+int far fd_50F6_0A0A[64];
 extern long far fd_50F6_0ADA;
 extern int far fd_50F6_0A90;
 extern int far fd_50F6_0AC4;
@@ -199,7 +199,15 @@ extern void far f_24AB_038D(int x, int y, char far *text);
 extern int far f_24AB_0329(char far *text);
 extern void far f_1CE2_01F8(int left, int top, int right, int bottom, int width);
 
-/* SCAFFOLD BEGIN: drawHistGraph best draft (714 vs 732 bytes): logic complete; the original keeps the loop counter n, x and y in BP slots (frame 0x46, SI/DI only for temporaries and the label pointer), this draft enregisters n and uses an 0x4E frame */
+
+extern int far BpopT;
+extern int far RpopT;
+extern int far FoodB;
+extern int far FoodR;
+extern int far HealthB;
+extern int far HealthR;
+extern int far fd_50F6_1040;
+extern int _fastcall win_IsWinOpen(int win);
 void far drawHistGraph(int graph, int hilite, int slot)
 {
     struct Rect r;
@@ -286,7 +294,7 @@ void far drawHistGraph(int graph, int hilite, int slot)
     f_1CE2_01F8(x - 1, ty - 1, f_24AB_0329(s) + x + 1, ty + th + 1, 1);
     f_24AB_02AD(0);
 }
-/* SCAFFOLD END */
+
 
 extern int far BpopT;
 extern int far RpopT;
@@ -315,6 +323,6 @@ void far HistUpdate(void)
     if (win_IsWinOpen(0x1500)) {
         clip_SetWin(0x1500);
         win_DrawHistoryWindow(3);
-        f_1E57_0362();
+        clip_Off();
     }
 }

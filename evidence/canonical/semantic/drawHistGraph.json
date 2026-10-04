@@ -1,0 +1,1954 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "drawHistGraph",
+  "module": "S24:39C7",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "cbabab99b3e0572aac87502073c3e42f2593975ba56da06b05d68167c829ce06",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/drawHistGraph.json",
+    "sha256": "c611f04ff64c8a0ce969762670506fe2682a6ad697367c63011a1c18dc18a3a9"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "drawHistGraph",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/evidence.json",
+      "sha256": "45068b9f8d3ee028f6522b5450958fbea09feeab2f75a5ecb71c3df61e2dba89"
+    },
+    "inputs": [
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+      },
+      {
+        "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/contract-review.json",
+        "sha256": "5e0f502681eeba982b496b017434a777d98422643ffb69f7f87d6f445aac8beb"
+      },
+      {
+        "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/negative-controls.json",
+        "sha256": "c746f5778a539cd45ba9de78619845ba46b9f9dabb7988eff6ea33e70829d404"
+      },
+      {
+        "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/run.json",
+        "sha256": "0bade4faf9f52da810ac315378556a30eb05f479b96dad055b7571dd82fc7f58"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-source-review.json",
+        "sha256": "1a5f73687571f6a949e67aa779c081d399c967d68e9905bd201599b4291e2ba2"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/source-pins-v3.json",
+        "sha256": "065e78a8a217b2aab6bdf6833d190c0bf7d8e7089e0713de5eab529d2883cb23"
+      },
+      {
+        "path": "evidence/behavior/helpers/text-contracts-v1/drawHistGraph/f_1CE2_01F8.json",
+        "sha256": "4dd16a2b210b50c5df7da04db4c29154e0eed4c3772c7e609eb86855dd89f041"
+      },
+      {
+        "path": "evidence/behavior/helpers/text-contracts-v1/drawHistGraph/f_24AB_038D.json",
+        "sha256": "cf8a0d0ebeed8af9f3cc827d9f5802157a06ff79b63a3d1825765d74d0c467eb"
+      },
+      {
+        "path": "evidence/behavior/helpers/text-contracts-v1/drawHistGraph/win_DrawBitMap.json",
+        "sha256": "249deb820703b1c8d9a5da831223cc9b60e3f45db2f1830ec67f56f180ef4200"
+      },
+      {
+        "path": "evidence/behavior/helpers/text-contracts-v1/drawHistGraph/win_GetObjRect.json",
+        "sha256": "5af027cd82586dc554489f58ef37f9f27c0df816e51246f61116bac377a23f0f"
+      },
+      {
+        "path": "evidence/behavior/helpers/text-contracts-v1/drawHistGraph/win_SetColorFromObjNum.json",
+        "sha256": "66ec057c222784794f4d4197375c12ba4f02ad32d797d30bb861992cedeac802"
+      },
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+      },
+      {
+        "path": "src/S00/m31AD.asm",
+        "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e"
+      },
+      {
+        "path": "src/S01/m3126.asm",
+        "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a"
+      },
+      {
+        "path": "src/S02/m3126.asm",
+        "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b"
+      },
+      {
+        "path": "src/S03/m3126.asm",
+        "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff"
+      },
+      {
+        "path": "src/root/m1B4E.asm",
+        "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+      },
+      {
+        "path": "src/root/m1CE2.c",
+        "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+      },
+      {
+        "path": "src/root/m1D8E.c",
+        "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556"
+      },
+      {
+        "path": "src/root/m1FBD.asm",
+        "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417"
+      },
+      {
+        "path": "src/root/m21FA.c",
+        "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f"
+      },
+      {
+        "path": "src/root/m23AE.c",
+        "sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c"
+      },
+      {
+        "path": "src/root/m24AB.c",
+        "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+      },
+      {
+        "path": "src/root/m2505.c",
+        "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+      },
+      {
+        "path": "src/root/m259D.c",
+        "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+      },
+      {
+        "path": "src/root/m25E7.c",
+        "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530"
+      },
+      {
+        "path": "src/root/m2650.asm",
+        "sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8"
+      },
+      {
+        "path": "tools/behavior_suites/archive/text-card-20261002-drawHistGraph.py",
+        "sha256": "e818f63eaa89e2ef1490634c5b234cd9df421c0a9c07a4dfba9862e504a6a217"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0x39C7",
+      "off": "0x032C",
+      "size": 732,
+      "extent_end_exclusive": "0x0608",
+      "disassembly_source": "python tools/context.py drawHistGraph (full function; no --raw)",
+      "oracle_identity": "assets/SIMANT.EXE SHA-256 aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+    },
+    "branch_map": [
+      {
+        "address": "0x03F5",
+        "mnemonic": "JLE",
+        "targets": {
+          "taken": "0x0403",
+          "fallthrough": "0x03F7"
+        },
+        "source": "module.c:240-241",
+        "predicate": "if (data[j] > max) max = data[j]",
+        "width_signedness": "signed 16-bit int compare; equality skips update"
+      },
+      {
+        "address": "0x0415",
+        "mnemonic": "JLE",
+        "targets": {
+          "taken": "0x041A",
+          "fallthrough": "0x0417"
+        },
+        "source": "module.c:242-243",
+        "predicate": "if (data2[j] > max) max = data2[j]",
+        "width_signedness": "signed 16-bit int compare; equality skips update"
+      },
+      {
+        "address": "0x042C",
+        "mnemonic": "JG",
+        "targets": {
+          "taken": "0x03E2",
+          "fallthrough": "0x042E"
+        },
+        "source": "module.c:239",
+        "predicate": "for (n = 0; n < count; n++)",
+        "width_signedness": "signed 16-bit loop index and count; continue iff count > n"
+      },
+      {
+        "address": "0x043B",
+        "mnemonic": "JLE",
+        "targets": {
+          "taken": "0x0455",
+          "fallthrough": "0x043D"
+        },
+        "source": "module.c:248-256",
+        "predicate": "if (max > 0) run scale selection",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "0x0448",
+        "mnemonic": "JL",
+        "targets": {
+          "taken": "0x043F",
+          "fallthrough": "0x044A"
+        },
+        "source": "module.c:249-250",
+        "predicate": "for (mul = 1; max * mul < height; mul++)",
+        "width_signedness": "signed 16-bit product/compare under MSC wrap semantics; positive valid screen dimensions bound this product"
+      },
+      {
+        "address": "0x0450",
+        "mnemonic": "JLE",
+        "targets": {
+          "taken": "0x0480",
+          "fallthrough": "0x0452"
+        },
+        "source": "module.c:251-255",
+        "predicate": "if (mul > 1) decrement mul; otherwise enter divisor loop",
+        "width_signedness": "signed 16-bit compare; taken edge bypasses the later r.left store"
+      },
+      {
+        "address": "0x0468",
+        "mnemonic": "JNE",
+        "targets": {
+          "taken": "0x0491",
+          "fallthrough": "0x046A"
+        },
+        "source": "module.c:259-262",
+        "predicate": "if (div == 1) multiply samples, else divide samples",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "0x048A",
+        "mnemonic": "JLE",
+        "targets": {
+          "taken": "0x0455",
+          "fallthrough": "0x048C"
+        },
+        "source": "module.c:254-255",
+        "predicate": "while (max / div > height) div++",
+        "width_signedness": "signed signed-division quotient and signed 16-bit compare; taken edge exits after quotient <= height"
+      },
+      {
+        "address": "0x04E7",
+        "mnemonic": "JNE",
+        "targets": {
+          "taken": "0x04F9",
+          "fallthrough": "0x04E9"
+        },
+        "source": "module.c:268-271",
+        "predicate": "if (div == 1) multiply sample, else divide sample",
+        "width_signedness": "signed 16-bit compare"
+      },
+      {
+        "address": "0x0537",
+        "mnemonic": "JL",
+        "targets": {
+          "taken": "0x04BB",
+          "fallthrough": "0x0539"
+        },
+        "source": "module.c:265",
+        "predicate": "for (n = 1; n < 64; n++)",
+        "width_signedness": "signed 16-bit compare; exactly 63 loop iterations"
+      },
+      {
+        "address": "0x053D",
+        "mnemonic": "JNE",
+        "targets": {
+          "taken": "0x055D",
+          "fallthrough": "0x053F"
+        },
+        "source": "module.c:276-280",
+        "predicate": "if (hilite == 0) use graph label; else format data[j]",
+        "width_signedness": "signed 16-bit zero compare"
+      }
+    ],
+    "unconditional_edges": [
+      {
+        "address": "0x03E0",
+        "target": "0x0426",
+        "source": "module.c:239",
+        "role": "enter first-scan loop condition before its body"
+      },
+      {
+        "address": "0x043D",
+        "target": "0x0440",
+        "source": "module.c:249",
+        "role": "enter multiply-scale loop test/body"
+      },
+      {
+        "address": "0x047E",
+        "target": "0x04A6",
+        "source": "module.c:259-262",
+        "role": "join after the div==1 initial-y multiply path"
+      },
+      {
+        "address": "0x048F",
+        "target": "0x0480",
+        "source": "module.c:254-255",
+        "role": "repeat divisor loop after div++"
+      },
+      {
+        "address": "0x04F7",
+        "target": "0x0508",
+        "source": "module.c:268-271",
+        "role": "join after the div==1 per-point multiply path"
+      },
+      {
+        "address": "0x055B",
+        "target": "0x0582",
+        "source": "module.c:276-280",
+        "role": "join after selecting the history-label pointer"
+      }
+    ],
+    "returns": [
+      {
+        "address": "0x0607",
+        "mnemonic": "RETF",
+        "source": "module.c:202-287",
+        "role": "single far return; no C return value"
+      }
+    ],
+    "call_map": [
+      {
+        "address": "0x0332",
+        "original": "__aFchkstk",
+        "source": "MSC stack check for 0x46-byte frame",
+        "order": 1,
+        "arguments_abi": "AX=0x46; direct far runtime call",
+        "effects": "stack availability check before local-frame work"
+      },
+      {
+        "address": "0x0353",
+        "original": "win_GetObjRect",
+        "source": "module.c:227",
+        "order": 2,
+        "arguments_abi": "fastcall obj=0x150E in AX; SS:BP-0x26 points to four signed 16-bit Rect words",
+        "effects": "writes left/top/right/bottom into local r"
+      },
+      {
+        "address": "0x051D",
+        "original": "indirect far call [DS:0x916C] / g_916C",
+        "source": "module.c:272",
+        "order": 3,
+        "count": 63,
+        "arguments_abi": "five signed 16-bit stack words px,py,x,y,color; caller pushes in reverse order",
+        "effects": "ordered graph-line request per n=1..63; px/py are advanced only after each call"
+      },
+      {
+        "address": "0x056D",
+        "original": "sprintf",
+        "source": "module.c:279",
+        "order": 4,
+        "condition": "hilite != 0",
+        "arguments_abi": "far destination buf, far format \"%d\", signed int data[j]",
+        "effects": "writes a decimal label and NUL into local buf[30]"
+      },
+      {
+        "address": "0x058B",
+        "original": "indirect far call [DS:0x9128] / g_9128",
+        "source": "module.c:282",
+        "order": 5,
+        "arguments_abi": "three signed 16-bit stack words color,0,color; caller pushes in reverse order",
+        "effects": "ordered logical color-selection request"
+      },
+      {
+        "address": "0x0596",
+        "original": "f_24AB_02AD",
+        "source": "module.c:283",
+        "order": 6,
+        "arguments_abi": "one signed int stack word, font=3",
+        "effects": "select font before measuring/drawing label"
+      },
+      {
+        "address": "0x05A3",
+        "original": "f_24AB_030B",
+        "source": "module.c:284",
+        "order": 7,
+        "arguments_abi": "no arguments; signed int return in AX",
+        "effects": "font-height read used to compute ty and th"
+      },
+      {
+        "address": "0x05BE",
+        "original": "f_24AB_038D",
+        "source": "module.c:284",
+        "order": 8,
+        "arguments_abi": "x and ty as signed ints plus far char pointer s",
+        "effects": "logical text draw after font-height query"
+      },
+      {
+        "address": "0x05CC",
+        "original": "f_24AB_0329",
+        "source": "module.c:285",
+        "order": 9,
+        "arguments_abi": "far char pointer s; signed int width return in AX",
+        "effects": "label width read while constructing border right edge"
+      },
+      {
+        "address": "0x05F1",
+        "original": "f_1CE2_01F8",
+        "source": "module.c:285",
+        "order": 10,
+        "arguments_abi": "five signed ints: x-1, ty-1, textWidth+x+1, ty+th+1, 1",
+        "effects": "logical border request after text draw"
+      },
+      {
+        "address": "0x05FD",
+        "original": "f_24AB_02AD",
+        "source": "module.c:286",
+        "order": 11,
+        "arguments_abi": "one signed int stack word, font=0",
+        "effects": "restore default font after border request"
+      }
+    ],
+    "memory_state_read_write_inventory": {
+      "inputs": [
+        {
+          "name": "graph",
+          "read": "bp+6; first indexes histColor, then remapped by (graph&1)*5+(graph>>1)",
+          "width": "signed 16-bit"
+        },
+        {
+          "name": "hilite",
+          "read": "bp+8; compared with zero at 0x053D",
+          "width": "signed 16-bit"
+        },
+        {
+          "name": "slot",
+          "read": "bp+0x0A; added to each plotted x",
+          "width": "signed 16-bit"
+        }
+      ],
+      "direct_reads": [
+        "graphColors[histColor[original graph]] before graph remapping",
+        "fd_3D57_082A[remapped graph] and fd_3D57_0852[remapped graph] far pointers",
+        "fd_50F6_04F4 ring-buffer start and fd_3D57_0828 sample count",
+        "data[j] then data2[j] for each of count scan iterations, with j=(start-count)&0x3F and one masked increment per iteration",
+        "data[start] for the initial plotted y; start is intentionally unmasked at this access, matching original 0x0472-0x047B",
+        "data[j] for each of 63 plotted points, with j masked to 0..63 before each access",
+        "fd_50F6_02BA[remapped graph] only on hilite==0; otherwise data[final j] is passed to sprintf"
+      ],
+      "direct_writes": [
+        "local Rect r receives four signed words through win_GetObjRect, then r.bottom is reduced by 8 and r.top increased by 8",
+        "local max, count, start, j, mul, div, n, x/y and previous point coordinates track scan/scaling/plot state",
+        "local buf[30] is written by sprintf only when hilite!=0; s selects either the far history label or buf",
+        "no direct nonstack/global store by drawHistGraph"
+      ],
+      "ordered_external_effects": [
+        "one rectangle query",
+        "63 ordered g_916C line requests",
+        "optional local sprintf formatting before color selection",
+        "one g_9128 color request, font 3 selection, font-height query, text draw, text-width query, border request, then font 0 selection"
+      ],
+      "backend_effects": "Indirect driver effects are reached through the same callback slots (0, 1, 2, 3, 11, 17) and same mode-specific EXACT_NATURAL callable claims, in the same sequence and with the same ABI words/far pointers. Exact helper composition and state updates are listed under callee_composition. Nested win_UnlockWin body and driver lifecycle are separately auditable transitive work, not an unexplained drawHistGraph call-site difference."
+    },
+    "constants_width_signedness_pointer_arithmetic_findings": {
+      "integer_model": "16-bit signed int; far data pointers are 16:16, array elements are signed 16-bit ints, and far pointer-table entries are four bytes",
+      "constants": [
+        "0x150E object id",
+        "0x40 horizontal inset",
+        "8 top/bottom insets",
+        "5 in graph remapping",
+        "0x3F ring mask",
+        "64 plotted sample positions and 63 line segments",
+        "1 initial mul/div, font reset, and border width",
+        "font selector 3 then 0",
+        "format string \"%d\""
+      ],
+      "signedness": "Comparisons, graph arithmetic, max, dimensions, sample values, multiplication and division are signed 16-bit operations. `graph >> 1` is arithmetic (original SAR). Signed division truncates toward zero; the original signed scale-by-64 sequence uses sign correction around SAR to match C division.",
+      "pointer_math": "The remapped graph scales by four to index far-pointer tables; data sample indices scale by two bytes. Scan and plot ring indices are masked with 0x3F. The first plotted sample uses raw start, while later indices are masked; the registered/caller state domain keeps start in 0..63. Text pointers preserve far segment:offset values; buf is a far pointer into SS local storage.",
+      "scaling": "Both maxima arrays contribute to max. For max>0, mul grows until max*mul>=height; if mul>1 it is decremented, otherwise div grows while max/div>height. Plotting uses data only: r.bottom-data[index]*mul when div==1, otherwise r.bottom-data[index]/div.",
+      "horizontal_coordinate": "For n=1..63, x=n*width/64+slot+r.left. Original 0x04C6-0x04D8 computes signed truncation-toward-zero division by 64 through sign correction and SAR.",
+      "graph_remapping": "Original graph selects color before mapping. The mapping is (graph&1)*5+(graph>>1); the mapped value selects both sample-array pointers and the history-label pointer."
+    },
+    "static_axes": {
+      "algorithm_and_cfg": "Source lines 226-286 account for all original conditional branches, loop bodies/exits, unconditional joins, and the single far return listed above. The scan reads both series for max; plotting reads only the primary series. The divisor path is reached directly from 0x0450 when mul<=1, before the later reuse of the max stack slot for r.left.",
+      "constants_widths_signedness": "All relevant objects are 16-bit ints under the DOS model; branch comparisons and divisions map to the original signed instructions. Ring masks, graph remapping, insets, font ids, and border width are listed above.",
+      "pointer_and_abi": "Far array/table/string accesses and stack-local Rect/buf far pointers are accounted for. win_GetObjRect is called with fastcall object id in AX and a stack far pointer. g_916C and g_9128 use the target's indirect five-word and three-word stack protocols, distinct from canonical entry ABIs as recorded in the helper review.",
+      "calls_and_order": "All 11 call instructions are mapped; the line service repeats exactly 63 times. Label formatting is conditional and precedes color/font/text/border calls. Font reset is last.",
+      "memory_and_state": "Every direct static/global read, local output and callback effect is inventoried. The target itself makes no direct nonstack writes; local Rect and buf are its direct call-written memory.",
+      "dependencies": "Direct helper targets are pinned EXACT_NATURAL claims; runtime routines are pinned to exact members/symbol aliases in frozen runtime metadata; indirect driver calls are composed through slots 0/1/2/3/11/17 with per-mode callable claim IDs, ABI order and source effects. No call-site target, argument, pointer, pre-call state update or ordering difference was found. win_UnlockWin is explicit nested scaffold debt recorded separately."
+    },
+    "remaining_differences": [
+      {
+        "classification": "CODEGEN_ONLY",
+        "original_address": "0x04C6-0x04D8",
+        "source_anchor": "module.c:267",
+        "explanation": "The compiler expands signed division by 64 into sign correction plus SAR; this implements the C signed truncation-toward-zero expression for the positive screen-width domain."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "run": {
+        "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/run.json",
+        "sha256": "0bade4faf9f52da810ac315378556a30eb05f479b96dad055b7571dd82fc7f58",
+        "mismatches": 0,
+        "errors": 0
+      },
+      "suite": {
+        "id": "history-graph-v1",
+        "path": "tools/behavior_suites/archive/text-card-20261002-drawHistGraph.py",
+        "sha256": "e818f63eaa89e2ef1490634c5b234cd9df421c0a9c07a4dfba9862e504a6a217",
+        "directed_cases": 48,
+        "randomized_cases": 2000,
+        "seed": 539365378,
+        "domain": "graphs 0..3; both highlight paths; sample counts 0..64 and starts 0..63; valid 64-sample zero, maximum, ramp and seeded 0..120 arrays; positive rectangles up to 640x480"
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/negative-controls.json",
+        "sha256": "c746f5778a539cd45ba9de78619845ba46b9f9dabb7988eff6ea33e70829d404",
+        "controls": [
+          "negative/x-coordinate-plus-one",
+          "negative/label-value-plus-one"
+        ],
+        "both_executed_and_differed": true
+      },
+      "limits": "Finite suite only; no exhaustive all-16-bit proof. Loaded-font and alternate clipping/backend paths are covered by source-level composition of pinned exact helper/callback claims rather than by this fixture domain. Pixel/framebuffer behavior and display lifecycle remain outside the registered logical-text-v3 behavioral suite; differential results and negative controls corroborate the static conclusion but do not establish it."
+    },
+    "review_notes": [
+      "The earlier apparent max/r.left mismatch was rejected after reconstructing the CFG: the taken JLE at 0x0450 enters the divisor loop at 0x0480 before 0x045E-0x0461 can reuse the max slot; the later JLE at 0x048A exits that loop. No semantic gap exists there.",
+      "Callee composition pins direct helper claim IDs and target hashes, runtime member hashes, and exact display callback source claims by dynamic slot. It records line/bitmap/color ABI words, four-edge border order, font-selection state transitions, helper return use, and side effects.",
+      "The caller performs no direct nonstack/global store. Its observable memory effects are local Rect/buffer writes plus effects of the same helper/callback calls in original order. No unexplained caller semantic difference remains.",
+      "win_UnlockWin remains a nested scaffold implementation inside win_GetObjRect and is recorded as transitive build/audit debt. It is not evidence of a different drawHistGraph call, pointer, argument or ordering.",
+      "Behavioral tests cover 48 directed and 2,000 seeded cases with negative controls. Their finite domain is corroboration only; alternate font/backend paths are statically mapped through source-pinned helper and callable claims."
+    ],
+    "callee_composition": {
+      "basis": "Composition is based on registered caller source plus EXACT_NATURAL target claims and pinned runtime members, not helper-source-review.json. Claim identities include module-source hashes and target-function hashes. This proves drawHistGraph selects and calls the same helper identities/callback slots with the same ABI arguments, ordering, and prior state updates; it does not promote every transitive service as independently audited.",
+      "callee_claims": {
+        "get_rect": {
+          "claim_id": "root:2505:win_GetObjRect",
+          "source": "src/root/m2505.c",
+          "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+          "segment": "0x2505",
+          "offset": "0x0288",
+          "size": 79,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "c2a872ecb96037a37a5af8f8f3d7cc52f5f4cd710f2e6f84a7e869491936879d"
+        },
+        "window_pointer": {
+          "claim_id": "root:2505:f_2505_0006",
+          "source": "src/root/m2505.c",
+          "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+          "segment": "0x2505",
+          "offset": "0x0006",
+          "size": 66,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "e0edbc05189bc0efe6ae9d010ef02c0b18b0088ae3e61626bda4ede96b1d2946"
+        },
+        "lock": {
+          "claim_id": "root:23AE:win_LockWin",
+          "source": "src/root/m23AE.c",
+          "source_sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+          "segment": "0x23AE",
+          "offset": "0x0377",
+          "size": 7,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "2ee8df406191f7e93f646bd5215c689717ceb2164fa94bd47dbb2eb3f52a3fa0"
+        },
+        "lock_body": {
+          "claim_id": "root:23AE:f_23AE_0069",
+          "source": "src/root/m23AE.c",
+          "source_sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+          "segment": "0x23AE",
+          "offset": "0x0069",
+          "size": 370,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "50f35feec0e52bfff3b4fa57da7ab70388fc5b1cf258252604caa39d5473433e"
+        },
+        "locked_predicate": {
+          "claim_id": "root:23AE:win_IsWinLocked",
+          "source": "src/root/m23AE.c",
+          "source_sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+          "segment": "0x23AE",
+          "offset": "0x0051",
+          "size": 24,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "e7467839131fdccd096b00d6acfd2cf4b65dc3a2fdaf8e52070e3c3f1845d131"
+        },
+        "font_select": {
+          "claim_id": "root:24AB:f_24AB_02AD",
+          "source": "src/root/m24AB.c",
+          "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+          "segment": "0x24AB",
+          "offset": "0x02AD",
+          "size": 94,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "5f46b39f2de729836e9e876dda7413da2e73ff07c20bfd10bf7e0705f6823bd5"
+        },
+        "font_height_dispatch": {
+          "claim_id": "root:24AB:f_24AB_030B",
+          "source": "src/root/m24AB.c",
+          "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+          "segment": "0x24AB",
+          "offset": "0x030B",
+          "size": 30,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "dfb1efa7951e5130f497577e04f93e51d17717a02d05f944b6b3edbff1fe6785"
+        },
+        "font_width_dispatch": {
+          "claim_id": "root:24AB:f_24AB_0329",
+          "source": "src/root/m24AB.c",
+          "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+          "segment": "0x24AB",
+          "offset": "0x0329",
+          "size": 62,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "2c9d4db6f536d251960f12cbec569f6f7dcd3347a23879ebccf0481943ce2431"
+        },
+        "text_draw_dispatch": {
+          "claim_id": "root:24AB:f_24AB_038D",
+          "source": "src/root/m24AB.c",
+          "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+          "segment": "0x24AB",
+          "offset": "0x038D",
+          "size": 127,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "b962d86c60a850aff67edab2baf28fb48b0a1908c7a46151bf1b32c2ed1d2baa"
+        },
+        "font_height": {
+          "claim_id": "root:25E7:_font_FontHeight",
+          "source": "src/root/m25E7.c",
+          "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+          "segment": "0x25E7",
+          "offset": "0x047B",
+          "size": 30,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "fc93847ba426f5e2278ed4095bb2de2cf614a99cfc6410fe4f95473311134f01"
+        },
+        "font_width": {
+          "claim_id": "root:25E7:_font_StringWidth",
+          "source": "src/root/m25E7.c",
+          "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+          "segment": "0x25E7",
+          "offset": "0x02FE",
+          "size": 215,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "dc1af11712a3ab8399bb053256318d982b6806e7a9189f186c00ddd90eb6f965"
+        },
+        "font_image": {
+          "claim_id": "root:25E7:font_MakeImage",
+          "source": "src/root/m25E7.c",
+          "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+          "segment": "0x25E7",
+          "offset": "0x04BE",
+          "size": 471,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "b933a4839a3e351e4c826883518c0a53bbf5d2d9cc95f519e18dab418771a4ba"
+        },
+        "border": {
+          "claim_id": "root:1CE2:f_1CE2_01F8",
+          "source": "src/root/m1CE2.c",
+          "source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+          "segment": "0x1CE2",
+          "offset": "0x01F8",
+          "size": 128,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "a9aa1c6d093aca757a08635845ef81025ed740d47b1fcc63b7225ddf914cbbc1"
+        },
+        "text_fallback": {
+          "claim_id": "root:1FBD:f_1FBD_0000",
+          "source": "src/root/m1FBD.asm",
+          "source_sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+          "segment": "0x1FBD",
+          "offset": "0x0000",
+          "size": 343,
+          "kind": "ASM",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "a703caef8bb3f08ee60abd12bd7d5d7b0fd2659c62abb7a099d0cfd9ed40fcee"
+        },
+        "text_bitmap": {
+          "claim_id": "root:1B4E:f_1B4E_005E",
+          "source": "src/root/m1B4E.asm",
+          "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+          "segment": "0x1B4E",
+          "offset": "0x005E",
+          "size": 35,
+          "kind": "ASM",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "482daf166ddc43695d79fb1015a42c53d0bfad6fce2e9a617bf7ba1a968f0e18"
+        },
+        "text_glyph": {
+          "claim_id": "root:1B4E:f_1B4E_0081",
+          "source": "src/root/m1B4E.asm",
+          "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+          "segment": "0x1B4E",
+          "offset": "0x0081",
+          "size": 77,
+          "kind": "ASM",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "c49c450cdb7acc00f5ce353051e754c41f7b7579ea59b3e35edf86baf640640f"
+        },
+        "clip_line": {
+          "claim_id": "root:1D8E:f_1D8E_0435",
+          "source": "src/root/m1D8E.c",
+          "source_sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+          "segment": "0x1D8E",
+          "offset": "0x0435",
+          "size": 729,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "b06865489cca62f2580aabc55d65be7b971d9c943edf28101805f621f86b83a5"
+        },
+        "clip_bitmap": {
+          "claim_id": "root:1D8E:f_1D8E_070E",
+          "source": "src/root/m1D8E.c",
+          "source_sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+          "segment": "0x1D8E",
+          "offset": "0x070E",
+          "size": 232,
+          "kind": "C",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "330fc9e41e4eda5f7a95395023e31ec33c0ea91dd62eec13d6784aa8f6f73fa1"
+        },
+        "bitmap_clear": {
+          "claim_id": "root:2650:f_2650_0107",
+          "source": "src/root/m2650.asm",
+          "source_sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+          "segment": "0x2650",
+          "offset": "0x0107",
+          "size": 32,
+          "kind": "ASM",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "cc072732339317ca9d0f208c1b7b8bc26e29c313e2702317e872c68089deb13b"
+        },
+        "glyph_copy": {
+          "claim_id": "root:2650:f_2650_000F",
+          "source": "src/root/m2650.asm",
+          "source_sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+          "segment": "0x2650",
+          "offset": "0x000F",
+          "size": 248,
+          "kind": "ASM",
+          "provenance": "EXACT_NATURAL",
+          "target_sha256": "4be011eb287d2a1dd45a518d4553653e6039b1e91dcf3283f1110fb112d8b3a4"
+        }
+      },
+      "runtime_members": {
+        "stack_check": {
+          "symbol": "__aFchkstk",
+          "address": "29F4:02CC",
+          "library": "llibcr.lib",
+          "member": "chkstk.asm",
+          "module_index": 5,
+          "member_size": 36,
+          "member_sha256": "f49aabfb1b5d4442a9e8261817381a5d766df0f742e4a5d1b27a323915677a88",
+          "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "symbol_record": {
+            "unit": "root",
+            "seg": 10740,
+            "off": 716,
+            "library": "llibcr.lib",
+            "member": "chkstk.asm",
+            "module_index": 5
+          },
+          "linked_alias_of": null
+        },
+        "sprintf": {
+          "symbol": "_sprintf",
+          "address": "29F4:1E6E",
+          "library": "llibcr.lib",
+          "member": "sprintf.c",
+          "module_index": 112,
+          "member_size": 108,
+          "member_sha256": "2046a56192e8d658ec66eee895d24a636545ef81bac15341ec65c6bb0b4620d8",
+          "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "symbol_record": {
+            "unit": "root",
+            "seg": 10740,
+            "off": 7790,
+            "library": "llibcr.lib",
+            "member": "sprintf.c",
+            "module_index": 112
+          },
+          "linked_alias_of": null
+        },
+        "sprintf_vformat": {
+          "symbol": "_vsprintf",
+          "address": "29F4:1EDA",
+          "library": "llibcr.lib",
+          "member": "vsprintf.c",
+          "module_index": 118,
+          "member_size": 106,
+          "member_sha256": "3af32017687ba0a50fe6c81b964f5b504f8bb505ea8b225706c0211becf6b48f",
+          "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "symbol_record": {
+            "unit": "root",
+            "seg": 10740,
+            "off": 7898,
+            "library": "llibcr.lib",
+            "member": "vsprintf.c",
+            "module_index": 118
+          },
+          "linked_alias_of": null
+        },
+        "far_strlen_alias": {
+          "symbol": "__fstrlen",
+          "address": "29F4:1C36",
+          "library": "llibcr.lib",
+          "member": "strlen.asm",
+          "module_index": 62,
+          "member_size": 23,
+          "member_sha256": "36407dec2d2121638e1743614974f899b5c156e863373de4f9499e8c60d4a714",
+          "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "symbol_record": {
+            "unit": "root",
+            "seg": 10740,
+            "off": 7222,
+            "library": "libh.lib",
+            "member": "strlen.asm",
+            "alias_note": "same code as the verified near-named member at this address (large-model alias); one linked copy"
+          },
+          "linked_alias_of": "_strlen"
+        }
+      },
+      "indirect_callback_slots": [
+        {
+          "slot_index": 0,
+          "symbol": "g_9128",
+          "address": "DGROUP:0x9128",
+          "mode_targets": [
+            {
+              "mode": "S00",
+              "module_source": "src/S00/m31AD.asm",
+              "module_source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S00:31AD:o00_31AD_1659",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x1659",
+                  "size": 17,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "41a9aa0ad68d3e25dcbef6ed63b404d21d2599e36c9bbb5f513f604a0c2c0ebd"
+                }
+              ]
+            },
+            {
+              "mode": "S01",
+              "module_source": "src/S01/m3126.asm",
+              "module_source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S01:3126:o01_3126_0167",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x0167",
+                  "size": 51,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "4932e882147939bba3b4c52bb095a8c8a645594ec1a853f1bde5e292fcfb5f74"
+                }
+              ]
+            },
+            {
+              "mode": "S02",
+              "module_source": "src/S02/m3126.asm",
+              "module_source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S02:3126:o02_3126_0040",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x0040",
+                  "size": 17,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "404952bd42d825b00d774ea382c33bacd2375ed73f5f316830287c5fa684135d"
+                }
+              ]
+            },
+            {
+              "mode": "S03",
+              "module_source": "src/S03/m3126.asm",
+              "module_source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S03:3126:o03_3126_019E",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x019E",
+                  "size": 21,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "e22e647310012b2feb07580980b61348c3a78f8d20180606b4c99f1423aa0a2d"
+                }
+              ]
+            }
+          ],
+          "callers": [
+            "drawHistGraph@0x058B"
+          ],
+          "abi": "three signed 16-bit words (fore, back, pattern), far callback; drawHistGraph supplies (color, 0, color).",
+          "meaning": "display colour/attribute setter; mode implementation is the exact callable claim listed per driver.",
+          "symbol_grounding": {
+            "seg": 21939,
+            "off": 37160,
+            "grounding": "f_21FA_00EE/0144/01D0: lcall [9128](fore*0x101, back*0x101, pat*0x101) attribute setter (far function pointer)"
+          }
+        },
+        {
+          "slot_index": 1,
+          "symbol": "g_912C",
+          "address": "DGROUP:0x912C",
+          "mode_targets": [
+            {
+              "mode": "S00",
+              "module_source": "src/S00/m31AD.asm",
+              "module_source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S00:31AD:o00_31AD_166A",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x166A",
+                  "size": 34,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "e1b759f2ef5cc18d9d58af8d800087aa14cd7ed6b474ba24183adccf07ed350b"
+                }
+              ]
+            },
+            {
+              "mode": "S01",
+              "module_source": "src/S01/m3126.asm",
+              "module_source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S01:3126:o01_3126_019A",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x019A",
+                  "size": 24,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "95867e9999bd44d470ac208f840b745841d145f6756e7e4948822cbbaa67f9bf"
+                }
+              ]
+            },
+            {
+              "mode": "S02",
+              "module_source": "src/S02/m3126.asm",
+              "module_source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S02:3126:o02_3126_005C",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x005C",
+                  "size": 29,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "d3d31813006e809c23aeaa59ebb9c48e6d153b1634ae02302f6c6e00d0d7d814"
+                }
+              ]
+            },
+            {
+              "mode": "S03",
+              "module_source": "src/S03/m3126.asm",
+              "module_source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S03:3126:o03_3126_01BE",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x01BE",
+                  "size": 29,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "a11d5622c07adf3cc6bb8b356cec71d479b6960482215868bee7d04eba0d4631"
+                }
+              ]
+            }
+          ],
+          "callers": [
+            "f_24AB_02AD(font=0) when g_3DB2==320",
+            "f_24AB_02AD(font=1) when g_3DB2!=320"
+          ],
+          "abi": "zero-argument far callback.",
+          "meaning": "mode-specific default font/cell-metric selection.",
+          "symbol_grounding": {
+            "seg": 21939,
+            "off": 37164,
+            "grounding": "S00 driver (31AD) : extrn\t_g_912C:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+          }
+        },
+        {
+          "slot_index": 2,
+          "symbol": "g_9130",
+          "address": "DGROUP:0x9130",
+          "mode_targets": [
+            {
+              "mode": "S00",
+              "module_source": "src/S00/m31AD.asm",
+              "module_source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S00:31AD:o00_31AD_168C",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x168C",
+                  "size": 29,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "00e4c4a81bab7bac86f78b09a347315ce9acf93f694cb183d9956548813c7a63"
+                }
+              ]
+            },
+            {
+              "mode": "S01",
+              "module_source": "src/S01/m3126.asm",
+              "module_source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S01:3126:o01_3126_01B2",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x01B2",
+                  "size": 24,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "9374e831d5fbc282b0e7131fd31a829a74cc46cab3ddefadaced527a1ff9b794"
+                }
+              ]
+            },
+            {
+              "mode": "S02",
+              "module_source": "src/S02/m3126.asm",
+              "module_source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S02:3126:o02_3126_0079",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x0079",
+                  "size": 29,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "cdbb406aa479ef3186e9c03ed86d74e7bfe03cd7d6304009defc8d9b4ca41e0a"
+                }
+              ]
+            },
+            {
+              "mode": "S03",
+              "module_source": "src/S03/m3126.asm",
+              "module_source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S03:3126:o03_3126_01DB",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x01DB",
+                  "size": 29,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "3579ef04f2f94cc46ef22c1d906bedac59cc3d07b4e704f3b7b1e614de927b0b"
+                }
+              ]
+            }
+          ],
+          "callers": [
+            "f_24AB_02AD(font=0) when g_3DB2!=320",
+            "f_24AB_02AD(font=1) when g_3DB2==320"
+          ],
+          "abi": "zero-argument far callback.",
+          "meaning": "mode-specific default font/cell-metric selection.",
+          "symbol_grounding": {
+            "seg": 21939,
+            "off": 37168,
+            "grounding": "o10_35F5_01C3: lcall [9130] with no arguments (far function pointer in BSS, next to g_9128/g_9134)"
+          }
+        },
+        {
+          "slot_index": 3,
+          "symbol": "g_9134",
+          "address": "DGROUP:0x9134",
+          "mode_targets": [
+            {
+              "mode": "S00",
+              "module_source": "src/S00/m31AD.asm",
+              "module_source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S00:31AD:o00_31AD_16A9",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x16A9",
+                  "size": 59,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "19f74fb58faefac2b5c5ab466322a6c12ec3dde9f041340b137a88a73ad65ed1"
+                }
+              ]
+            },
+            {
+              "mode": "S01",
+              "module_source": "src/S01/m3126.asm",
+              "module_source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S01:3126:o01_3126_024C",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x024C",
+                  "size": 456,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "82af4678c91ce699f909902f7b87c6a726b2f6a6e138cfa9fa057e89cbb29c11"
+                }
+              ]
+            },
+            {
+              "mode": "S02",
+              "module_source": "src/S02/m3126.asm",
+              "module_source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S02:3126:o02_3126_027C",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x027C",
+                  "size": 309,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "84b08bde2594532293b3a458b42ab01c0cbd8766b2802d5a6f1f2956e64f5bc0"
+                }
+              ]
+            },
+            {
+              "mode": "S03",
+              "module_source": "src/S03/m3126.asm",
+              "module_source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S03:3126:o03_3126_059C",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x059C",
+                  "size": 366,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "17a02549fb601ad0d7cb50d4b2f4e6c00ce7b6598a5eeaecc1b84eb8812078d8"
+                }
+              ]
+            }
+          ],
+          "callers": [
+            "f_1CE2_01F8 four ordered times when width!=0"
+          ],
+          "abi": "five signed 16-bit words (left, top, right, bottom, color), far callback.",
+          "meaning": "display line/edge primitive; drawHistGraph border width is 1.",
+          "symbol_grounding": {
+            "seg": 21939,
+            "off": 37172,
+            "grounding": "f_21FA_0002/0413: lcall [9134](a,x0,y0,x1,y1) line drawer (far function pointer)"
+          }
+        },
+        {
+          "slot_index": 11,
+          "symbol": "g_9154",
+          "address": "DGROUP:0x9154",
+          "mode_targets": [
+            {
+              "mode": "S00",
+              "module_source": "src/S00/m31AD.asm",
+              "module_source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S00:31AD:o00_31AD_1206",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x1206",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "9a7416be70905331b1976c8739fac57b15fa045b8bd1107a3e5ef8545f7e8729"
+                },
+                {
+                  "claim_id": "S00:31AD:o00_31AD_1213",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x1213",
+                  "size": 536,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "8aa978abbd8e72fa58b499924350c8d743bd0db18d0fa28a6e29269f84f64e7d"
+                }
+              ]
+            },
+            {
+              "mode": "S01",
+              "module_source": "src/S01/m3126.asm",
+              "module_source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S01:3126:o01_3126_0516",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x0516",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "9a7416be70905331b1976c8739fac57b15fa045b8bd1107a3e5ef8545f7e8729"
+                },
+                {
+                  "claim_id": "S01:3126:o01_3126_0523",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x0523",
+                  "size": 377,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "370e351fe3dd7e9e13b5533e8d654cb7d134be1e7449ee1f959ad21150acc6ab"
+                }
+              ]
+            },
+            {
+              "mode": "S02",
+              "module_source": "src/S02/m3126.asm",
+              "module_source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S02:3126:o02_3126_0636",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x0636",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "d86f3561c4b7fe80a258d701160ca50700b633c2ec259dfda6c80b145573eb3e"
+                },
+                {
+                  "claim_id": "S02:3126:o02_3126_0643",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x0643",
+                  "size": 247,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "07c5680a510a16e1593962414df7a21e9ea139579ca559fd88bc6f8788124cf7"
+                }
+              ]
+            },
+            {
+              "mode": "S03",
+              "module_source": "src/S03/m3126.asm",
+              "module_source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S03:3126:o03_3126_0C11",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x0C11",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "654218a62c39857fbe34a7d745c4be32fd426cd244a0c5acfd227ef51321757c"
+                },
+                {
+                  "claim_id": "S03:3126:o03_3126_0C1E",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x0C1E",
+                  "size": 831,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "5591af4e4e97ba82b0064942a0ec914c0acd795e3a17e2869b8af54bfcb67b06"
+                }
+              ]
+            }
+          ],
+          "callers": [
+            "f_24AB_038D loaded-font branch",
+            "f_1B4E_005E default-font bitmap branch"
+          ],
+          "abi": "x,y as signed 16-bit words, far bits pointer as segment:offset, then signed 16-bit width,height; far callback.",
+          "meaning": "bitmap blit. Each selected mode begins with a 13-byte exact wrapper: if g_5AAE is nonzero it calls exact f_1D8E_070E with the existing five-word payload; otherwise it falls through to the mode blitter body.",
+          "dispatcher_abi_bridge": "In the nonzero-g_5AAE path, the 13-byte slot wrapper makes a far call to f_1D8E_070E without pushing replacement args. Its unused leading far `port` formal consumes the two-word wrapper return frame; x,y,bits,width,height then consume the original five-word/far-pointer callback payload.",
+          "symbol_grounding": {
+            "seg": 21939,
+            "off": 37204,
+            "grounding": "GPutPacked: mov ax,[9154]; mov dx,[9156] (far code pointer, BSS)"
+          }
+        },
+        {
+          "slot_index": 17,
+          "symbol": "g_916C",
+          "address": "DGROUP:0x916C",
+          "mode_targets": [
+            {
+              "mode": "S00",
+              "module_source": "src/S00/m31AD.asm",
+              "module_source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S00:31AD:o00_31AD_148C",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x148C",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "e485edc5eaca97c99909d0623a53472ac0873c5712510bc1cfdc4acc2aa5449b"
+                },
+                {
+                  "claim_id": "S00:31AD:o00_31AD_1499",
+                  "source": "src/S00/m31AD.asm",
+                  "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+                  "segment": "0x31AD",
+                  "offset": "0x1499",
+                  "size": 448,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "71ed9d30c179b00c5296e283a788e9692c38f23399eb65d0141ba09a1c65acac"
+                }
+              ]
+            },
+            {
+              "mode": "S01",
+              "module_source": "src/S01/m3126.asm",
+              "module_source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S01:3126:o01_3126_0C7A",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x0C7A",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "e485edc5eaca97c99909d0623a53472ac0873c5712510bc1cfdc4acc2aa5449b"
+                },
+                {
+                  "claim_id": "S01:3126:o01_3126_0C87",
+                  "source": "src/S01/m3126.asm",
+                  "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+                  "segment": "0x3126",
+                  "offset": "0x0C87",
+                  "size": 684,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "660c999ce1517fc4ef59a1d8e5168611bb4aa24f9b7c72043bf754f364f9afbc"
+                }
+              ]
+            },
+            {
+              "mode": "S02",
+              "module_source": "src/S02/m3126.asm",
+              "module_source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S02:3126:o02_3126_073A",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x073A",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "e485edc5eaca97c99909d0623a53472ac0873c5712510bc1cfdc4acc2aa5449b"
+                },
+                {
+                  "claim_id": "S02:3126:o02_3126_0747",
+                  "source": "src/S02/m3126.asm",
+                  "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+                  "segment": "0x3126",
+                  "offset": "0x0747",
+                  "size": 263,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "081d4669658d0a08531778bb55cf53838c2cbac0c5fa0cc6fd09d73b49a893db"
+                }
+              ]
+            },
+            {
+              "mode": "S03",
+              "module_source": "src/S03/m3126.asm",
+              "module_source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+              "entry_and_body_claims": [
+                {
+                  "claim_id": "S03:3126:o03_3126_104D",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x104D",
+                  "size": 13,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "e485edc5eaca97c99909d0623a53472ac0873c5712510bc1cfdc4acc2aa5449b"
+                },
+                {
+                  "claim_id": "S03:3126:o03_3126_105A",
+                  "source": "src/S03/m3126.asm",
+                  "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+                  "segment": "0x3126",
+                  "offset": "0x105A",
+                  "size": 294,
+                  "kind": "ASM",
+                  "provenance": "EXACT_NATURAL",
+                  "target_sha256": "fc917db1bf3750b6c7c2f2b8cf09b4bd602502ad9ae0b46e926bc68eab872643"
+                }
+              ]
+            }
+          ],
+          "callers": [
+            "drawHistGraph@0x051D, exactly 63 times"
+          ],
+          "abi": "five signed 16-bit words (x0,y0,x1,y1,color), far callback; caller pushes in reverse stack order and advances prior point only after return.",
+          "meaning": "display line primitive. Each selected mode begins with a 13-byte exact wrapper: if g_5AAE is nonzero it calls exact f_1D8E_0435 with the existing five-word payload; otherwise it falls through to the mode line body.",
+          "dispatcher_abi_bridge": "In the nonzero-g_5AAE path, the 13-byte slot wrapper makes a far call to f_1D8E_0435 without pushing replacement args. The helper source declares an unused leading far `port`; the far return frame from the wrapper call occupies that two-word home, so its x1,y1,x2,y2,color formals consume the original five callback words. The original helper extent also has arg_bytes_min=14, consistent with the wrapper return frame plus five words.",
+          "symbol_grounding": {
+            "seg": 21939,
+            "off": 37228,
+            "grounding": "DoLaserFire (S22:39C7:0540): lcall [916C](x0,y0,x1,y1,color) line drawer far function pointer (companion of g_9134)"
+          }
+        }
+      ],
+      "direct_call_effects": [
+        {
+          "address": "0x0332",
+          "target": "__aFchkstk",
+          "claim": {
+            "symbol": "__aFchkstk",
+            "address": "29F4:02CC",
+            "library": "llibcr.lib",
+            "member": "chkstk.asm",
+            "module_index": 5,
+            "member_size": 36,
+            "member_sha256": "f49aabfb1b5d4442a9e8261817381a5d766df0f742e4a5d1b27a323915677a88",
+            "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "symbol_record": {
+              "unit": "root",
+              "seg": 10740,
+              "off": 716,
+              "library": "llibcr.lib",
+              "member": "chkstk.asm",
+              "module_index": 5
+            },
+            "linked_alias_of": null
+          },
+          "abi_args": "AX=0x46 byte frame request.",
+          "effect": "stack availability check before drawing locals."
+        },
+        {
+          "address": "0x0353",
+          "target": "win_GetObjRect",
+          "claim": {
+            "claim_id": "root:2505:win_GetObjRect",
+            "source": "src/root/m2505.c",
+            "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+            "segment": "0x2505",
+            "offset": "0x0288",
+            "size": 79,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "c2a872ecb96037a37a5af8f8f3d7cc52f5f4cd710f2e6f84a7e869491936879d"
+          },
+          "abi_args": "fastcall obj=0x150E in AX; SS:BP-0x26 is a far pointer to four signed 16-bit Rect fields.",
+          "order_effect": "locks object; obtains window pointer; copies Rect at window offset 0x2C indexed by low-byte object number into local r; unlocks before caller computes width/height.",
+          "transitive_calls": [
+            {
+              "claim_id": "root:23AE:win_LockWin",
+              "source": "src/root/m23AE.c",
+              "source_sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+              "segment": "0x23AE",
+              "offset": "0x0377",
+              "size": 7,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "2ee8df406191f7e93f646bd5215c689717ceb2164fa94bd47dbb2eb3f52a3fa0"
+            },
+            {
+              "claim_id": "root:2505:f_2505_0006",
+              "source": "src/root/m2505.c",
+              "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+              "segment": "0x2505",
+              "offset": "0x0006",
+              "size": 66,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "e0edbc05189bc0efe6ae9d010ef02c0b18b0088ae3e61626bda4ede96b1d2946"
+            },
+            {
+              "claim_id": "root:23AE:win_IsWinLocked",
+              "source": "src/root/m23AE.c",
+              "source_sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+              "segment": "0x23AE",
+              "offset": "0x0051",
+              "size": 24,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "e7467839131fdccd096b00d6acfd2cf4b65dc3a2fdaf8e52070e3c3f1845d131"
+            }
+          ]
+        },
+        {
+          "address": "0x051D",
+          "target": "g_916C",
+          "callback_slot": "DGROUP:0x916C, entry 17",
+          "abi_args": "(px,py,x,y,color), 5 signed words; exactly 63 calls for n=1..63. Source updates px/py only after each callback returns.",
+          "effect": "mode-specific line request through exact entry/body claims in indirect_callback_slots."
+        },
+        {
+          "address": "0x056D",
+          "target": "sprintf",
+          "claim": {
+            "symbol": "_sprintf",
+            "address": "29F4:1E6E",
+            "library": "llibcr.lib",
+            "member": "sprintf.c",
+            "module_index": 112,
+            "member_size": 108,
+            "member_sha256": "2046a56192e8d658ec66eee895d24a636545ef81bac15341ec65c6bb0b4620d8",
+            "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "symbol_record": {
+              "unit": "root",
+              "seg": 10740,
+              "off": 7790,
+              "library": "llibcr.lib",
+              "member": "sprintf.c",
+              "module_index": 112
+            },
+            "linked_alias_of": null
+          },
+          "format_dependency": {
+            "symbol": "_vsprintf",
+            "address": "29F4:1EDA",
+            "library": "llibcr.lib",
+            "member": "vsprintf.c",
+            "module_index": 118,
+            "member_size": 106,
+            "member_sha256": "3af32017687ba0a50fe6c81b964f5b504f8bb505ea8b225706c0211becf6b48f",
+            "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "symbol_record": {
+              "unit": "root",
+              "seg": 10740,
+              "off": 7898,
+              "library": "llibcr.lib",
+              "member": "vsprintf.c",
+              "module_index": 118
+            },
+            "linked_alias_of": null
+          },
+          "abi_args": "far destination buf[30], far format \"%d\", signed 16-bit data[j] promoted as int.",
+          "effect": "writes decimal representation and NUL only to caller local buf; only on hilite!=0."
+        },
+        {
+          "address": "0x058B",
+          "target": "g_9128",
+          "callback_slot": "DGROUP:0x9128, entry 0",
+          "abi_args": "(color,0,color), 3 signed 16-bit words.",
+          "effect": "exact mode-specific colour/attribute callback; follows all graph lines and optional local formatting."
+        },
+        {
+          "address": "0x0596",
+          "target": "f_24AB_02AD",
+          "claim": {
+            "claim_id": "root:24AB:f_24AB_02AD",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+            "segment": "0x24AB",
+            "offset": "0x02AD",
+            "size": 94,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "5f46b39f2de729836e9e876dda7413da2e73ff07c20bfd10bf7e0705f6823bd5"
+          },
+          "abi_args": "one signed int, 3.",
+          "effect": "sets selected font to fd_50F6_4A1A[1] (font selector 3 minus 2); does not invoke g_912C/g_9130 in this case."
+        },
+        {
+          "address": "0x05A3",
+          "target": "f_24AB_030B",
+          "claim": {
+            "claim_id": "root:24AB:f_24AB_030B",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+            "segment": "0x24AB",
+            "offset": "0x030B",
+            "size": 30,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "dfb1efa7951e5130f497577e04f93e51d17717a02d05f944b6b3edbff1fe6785"
+          },
+          "abi_args": "none; signed 16-bit AX result.",
+          "effect": "reads selected font pointer; returns g_3DDC if null, otherwise calls exact _font_FontHeight which reads font->fRectHeight-1."
+        },
+        {
+          "address": "0x05BE",
+          "target": "f_24AB_038D",
+          "claim": {
+            "claim_id": "root:24AB:f_24AB_038D",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+            "segment": "0x24AB",
+            "offset": "0x038D",
+            "size": 127,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "b962d86c60a850aff67edab2baf28fb48b0a1908c7a46151bf1b32c2ed1d2baa"
+          },
+          "abi_args": "(x,ty,far s): two signed words and a far pointer.",
+          "effect": "empty s only writes g_3DA0 pen; null-font branch calls f_1FBD_0000; nonnull-font branch calls font_MakeImage(s,0,font), then g_9154(x,y,bits,width,height), then writes g_3DA0=(bitmap.width+x,y). String pointer is graph label or caller-local sprintf buffer."
+        },
+        {
+          "address": "0x05CC",
+          "target": "f_24AB_0329",
+          "claim": {
+            "claim_id": "root:24AB:f_24AB_0329",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+            "segment": "0x24AB",
+            "offset": "0x0329",
+            "size": 62,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "2c9d4db6f536d251960f12cbec569f6f7dcd3347a23879ebccf0481943ce2431"
+          },
+          "abi_args": "far s; signed 16-bit AX result.",
+          "effect": "if selected font is null returns _fstrlen(s)*g_3DDE; otherwise calls _font_StringWidth(s,font), which reads font width tables and string bytes."
+        },
+        {
+          "address": "0x05F1",
+          "target": "f_1CE2_01F8",
+          "claim": {
+            "claim_id": "root:1CE2:f_1CE2_01F8",
+            "source": "src/root/m1CE2.c",
+            "source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+            "segment": "0x1CE2",
+            "offset": "0x01F8",
+            "size": 128,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "a9aa1c6d093aca757a08635845ef81025ed740d47b1fcc63b7225ddf914cbbc1"
+          },
+          "abi_args": "(x-1,ty-1,textWidth+x+1,ty+th+1,1), five signed words.",
+          "effect": "width is nonzero, so invokes g_9134 four times in source order with top, bottom, left, right edge endpoints and g_3DE0 color."
+        },
+        {
+          "address": "0x05FD",
+          "target": "f_24AB_02AD",
+          "claim": {
+            "claim_id": "root:24AB:f_24AB_02AD",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+            "segment": "0x24AB",
+            "offset": "0x02AD",
+            "size": 94,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "5f46b39f2de729836e9e876dda7413da2e73ff07c20bfd10bf7e0705f6823bd5"
+          },
+          "abi_args": "one signed int, 0.",
+          "effect": "calls g_912C iff g_3DB2==320, otherwise g_9130, then writes fd_55B3_65A4=0. The callback selection sees same g_3DB2/prior state as the original sequence."
+        }
+      ],
+      "helper_memory_state_composition": [
+        {
+          "function": "win_GetObjRect",
+          "claim": {
+            "claim_id": "root:2505:win_GetObjRect",
+            "source": "src/root/m2505.c",
+            "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+            "segment": "0x2505",
+            "offset": "0x0288",
+            "size": 79,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "c2a872ecb96037a37a5af8f8f3d7cc52f5f4cd710f2e6f84a7e869491936879d"
+          },
+          "effects": "local destination Rect receives four signed words; win_LockWin brackets lookup/copy. f_2505_0006 consults g_6300/win_IsWinLocked and reads win_handles[win>>8], then the far Rect pointer table at window+0x2C indexed by win&0xFF. Final win_UnlockWin call is present at same argument/position in exact helper and original caller chain."
+        },
+        {
+          "function": "f_24AB_02AD",
+          "claim": {
+            "claim_id": "root:24AB:f_24AB_02AD",
+            "source": "src/root/m24AB.c",
+            "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+            "segment": "0x24AB",
+            "offset": "0x02AD",
+            "size": 94,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "5f46b39f2de729836e9e876dda7413da2e73ff07c20bfd10bf7e0705f6823bd5"
+          },
+          "effects": "selector 3 writes selected font pointer from fd_50F6_4A1A[1]; selector 0 performs one no-arg display font reset callback selected by current screen width, then zeroes selected font pointer."
+        },
+        {
+          "function": "f_24AB_030B / _font_FontHeight",
+          "claims": [
+            {
+              "claim_id": "root:24AB:f_24AB_030B",
+              "source": "src/root/m24AB.c",
+              "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+              "segment": "0x24AB",
+              "offset": "0x030B",
+              "size": 30,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "dfb1efa7951e5130f497577e04f93e51d17717a02d05f944b6b3edbff1fe6785"
+            },
+            {
+              "claim_id": "root:25E7:_font_FontHeight",
+              "source": "src/root/m25E7.c",
+              "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+              "segment": "0x25E7",
+              "offset": "0x047B",
+              "size": 30,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "fc93847ba426f5e2278ed4095bb2de2cf614a99cfc6410fe4f95473311134f01"
+            }
+          ],
+          "effects": "read selected-font pointer; null path reads cell height g_3DDC; loaded path reads font->fRectHeight and subtracts one."
+        },
+        {
+          "function": "f_24AB_038D / font_MakeImage",
+          "claims": [
+            {
+              "claim_id": "root:24AB:f_24AB_038D",
+              "source": "src/root/m24AB.c",
+              "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+              "segment": "0x24AB",
+              "offset": "0x038D",
+              "size": 127,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "b962d86c60a850aff67edab2baf28fb48b0a1908c7a46151bf1b32c2ed1d2baa"
+            },
+            {
+              "claim_id": "root:25E7:font_MakeImage",
+              "source": "src/root/m25E7.c",
+              "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+              "segment": "0x25E7",
+              "offset": "0x04BE",
+              "size": 471,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "b933a4839a3e351e4c826883518c0a53bbf5d2d9cc95f519e18dab418771a4ba"
+            },
+            {
+              "claim_id": "root:2650:f_2650_0107",
+              "source": "src/root/m2650.asm",
+              "source_sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+              "segment": "0x2650",
+              "offset": "0x0107",
+              "size": 32,
+              "kind": "ASM",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "cc072732339317ca9d0f208c1b7b8bc26e29c313e2702317e872c68089deb13b"
+            },
+            {
+              "claim_id": "root:2650:f_2650_000F",
+              "source": "src/root/m2650.asm",
+              "source_sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+              "segment": "0x2650",
+              "offset": "0x000F",
+              "size": 248,
+              "kind": "ASM",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "4be011eb287d2a1dd45a518d4553653e6039b1e91dcf3283f1110fb112d8b3a4"
+            }
+          ],
+          "effects": "fallback f_1FBD_0000 uses pinned scratch bitmap/font globals and updates text pen; loaded-font path clears fd_50F6_392C.bits, updates bitmap dimensions and raster scratch globals, reads string/font tables, composes glyph bits, calls g_9154, then writes g_3DA0. Both branches are source-pinned and receive same arguments/prior selected-font state as original caller sequence."
+        },
+        {
+          "function": "f_24AB_0329 / _font_StringWidth",
+          "claims": [
+            {
+              "claim_id": "root:24AB:f_24AB_0329",
+              "source": "src/root/m24AB.c",
+              "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+              "segment": "0x24AB",
+              "offset": "0x0329",
+              "size": 62,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "2c9d4db6f536d251960f12cbec569f6f7dcd3347a23879ebccf0481943ce2431"
+            },
+            {
+              "claim_id": "root:25E7:_font_StringWidth",
+              "source": "src/root/m25E7.c",
+              "source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+              "segment": "0x25E7",
+              "offset": "0x02FE",
+              "size": 215,
+              "kind": "C",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "dc1af11712a3ab8399bb053256318d982b6806e7a9189f186c00ddd90eb6f965"
+            }
+          ],
+          "runtime_dependency": {
+            "symbol": "__fstrlen",
+            "address": "29F4:1C36",
+            "library": "llibcr.lib",
+            "member": "strlen.asm",
+            "module_index": 62,
+            "member_size": 23,
+            "member_sha256": "36407dec2d2121638e1743614974f899b5c156e863373de4f9499e8c60d4a714",
+            "library_sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "symbol_record": {
+              "unit": "root",
+              "seg": 10740,
+              "off": 7222,
+              "library": "libh.lib",
+              "member": "strlen.asm",
+              "alias_note": "same code as the verified near-named member at this address (large-model alias); one linked copy"
+            },
+            "linked_alias_of": "_strlen"
+          },
+          "effects": "null-font path reads far string bytes via exact runtime far strlen and g_3DDE; loaded-font path sums glyph widths/kerning from font tables and string bytes, or calls same far strlen for a nonproportional font."
+        },
+        {
+          "function": "f_1FBD_0000 / f_1B4E_005E / f_1B4E_0081",
+          "claims": [
+            {
+              "claim_id": "root:1FBD:f_1FBD_0000",
+              "source": "src/root/m1FBD.asm",
+              "source_sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+              "segment": "0x1FBD",
+              "offset": "0x0000",
+              "size": 343,
+              "kind": "ASM",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "a703caef8bb3f08ee60abd12bd7d5d7b0fd2659c62abb7a099d0cfd9ed40fcee"
+            },
+            {
+              "claim_id": "root:1B4E:f_1B4E_005E",
+              "source": "src/root/m1B4E.asm",
+              "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+              "segment": "0x1B4E",
+              "offset": "0x005E",
+              "size": 35,
+              "kind": "ASM",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "482daf166ddc43695d79fb1015a42c53d0bfad6fce2e9a617bf7ba1a968f0e18"
+            },
+            {
+              "claim_id": "root:1B4E:f_1B4E_0081",
+              "source": "src/root/m1B4E.asm",
+              "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+              "segment": "0x1B4E",
+              "offset": "0x0081",
+              "size": 77,
+              "kind": "ASM",
+              "provenance": "EXACT_NATURAL",
+              "target_sha256": "c49c450cdb7acc00f5ce353051e754c41f7b7579ea59b3e35edf86baf640640f"
+            }
+          ],
+          "effects": "null-font text path reads font glyph data and updates global scratch/pen state; g_5A97==6 selects f_1B4E_0081, otherwise f_1B4E_005E forwards x,y,bitmap pointer,width,height to g_9154."
+        },
+        {
+          "function": "f_1CE2_01F8",
+          "claim": {
+            "claim_id": "root:1CE2:f_1CE2_01F8",
+            "source": "src/root/m1CE2.c",
+            "source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+            "segment": "0x1CE2",
+            "offset": "0x01F8",
+            "size": 128,
+            "kind": "C",
+            "provenance": "EXACT_NATURAL",
+            "target_sha256": "a9aa1c6d093aca757a08635845ef81025ed740d47b1fcc63b7225ddf914cbbc1"
+          },
+          "effects": "width 1 makes all four ordered g_9134 calls active; no direct global store in helper body beyond effects of those callees."
+        }
+      ],
+      "transitive_debt_separate_from_caller_gap": [
+        {
+          "symbol": "win_UnlockWin",
+          "original_identity": "root:23AE:0x01DB",
+          "current_source": "src/root/m23AE.c:102-188 (SCAFFOLD BEGIN/END)",
+          "manifest_claim": "none",
+          "scope": "Nested call inside exact win_GetObjRect. This receipt composes drawHistGraph call-site, fastcall object value, destination pointer, helper identity and order; strict peer audit of the memory-manager body is separate and not a semantic difference in drawHistGraph."
+        },
+        {
+          "domain": "display backend internals",
+          "scope": "Mode-specific callback functions are pinned as exact callable claims above. Internal raster/blitter effects are downstream of unchanged slots and arguments; callback ownership/lifecycle remains a separate structural gate."
+        }
+      ],
+      "legacy_helper_review_role": "The pinned helper-source-review.json is retained only as historical context; its PENDING_ROOT_REVIEW state is not used to classify the caller. Source/claim composition above replaces it for caller ABI and ordering.",
+      "slot_table_copy_claim": {
+        "claim_id": "root:1B4E:f_1B4E_0165",
+        "source": "src/root/m1B4E.asm",
+        "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+        "segment": "0x1B4E",
+        "offset": "0x0165",
+        "size": 18,
+        "kind": "ASM",
+        "provenance": "EXACT_NATURAL",
+        "target_sha256": "7c278dca6f7f68e9253fed868c7e8460acf9232c6d88d4b57af6ac982cb6d915"
+      },
+      "table_ownership_note": "g_3DF8 is a 25-far-pointer table beginning at DGROUP:0x9128; exact f_1B4E_0165 copies 0x32 words into its 100-byte table. Each listed mode-specific entry/body has an EXACT_NATURAL function claim. S01-S03 dispatch arrays are present in their pinned mode source; S00 source notes the driver table at DGROUP:0x2098 but does not reproduce those data bytes, so driver table ownership remains a separate structural gate. drawHistGraph itself reads unchanged slots and calls them with the same arguments/order."
+    }
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

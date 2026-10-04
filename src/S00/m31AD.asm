@@ -43,6 +43,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DF2:byte
 	extrn	_g_3DFC:byte
 	extrn	_g_41C0:byte
+	extrn	_g_41D0:byte
 	extrn	_g_4331:byte
 	extrn	_g_4333:byte
 	extrn	_g_4340:byte
@@ -419,7 +420,9 @@ L0289:
 	mov cx, word ptr [bp+8]
 	mov si, word ptr [bp+0Eh]
 L02AA:
-	mov bh, byte ptr ss:[si+41D0h]
+	assume ss:DGROUP
+	mov bh, byte ptr ss:[si+_g_41D0]
+	assume ss:nothing
 L02AF:
 	and bh, bh
 	and bh, ah
@@ -430,7 +433,9 @@ L02AF:
 	mov al, bh
 	out dx, al
 	inc byte ptr es:[di]
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	add si, 2
 	and si, 0F7h
 	loop L02AA
@@ -455,7 +460,9 @@ L02E3:
 	mov al, 0FFh
 	out dx, al
 	mov dx, word ptr [bp+8]
+	assume ss:DGROUP
 	mov al, byte ptr ss:_g_3DB6
+	assume ss:nothing
 	sub al, bh
 	xor ah, ah
 	mov word ptr [bp-2], ax
@@ -469,7 +476,9 @@ L02E3:
 	mov ds, bx
 	mov si, word ptr [bp+0Eh]
 L030C:
-	mov bh, byte ptr ss:[si+41D0h]
+	assume ss:DGROUP
+	mov bh, byte ptr ss:[si+_g_41D0]
+	assume ss:nothing
 L0311:
 	and bh, bh
 	mov al, 8
@@ -498,7 +507,9 @@ L033D:
 	mov al, bl
 	cbw
 	mov si, ax
-	mov ah, byte ptr ss:[si+3DCAh]
+	assume ss:DGROUP
+	mov ah, byte ptr ss:[si+_g_3DCA]
+	assume ss:nothing
 	mov bl, bh
 	xor bh, bh
 	add di, bx
@@ -506,7 +517,9 @@ L034D:
 	mov cx, word ptr [bp+8]
 	mov si, word ptr [bp+0Eh]
 L0353:
-	mov bh, byte ptr ss:[si+41D0h]
+	assume ss:DGROUP
+	mov bh, byte ptr ss:[si+_g_41D0]
+	assume ss:nothing
 L0358:
 	and bh, bh
 	and bh, ah
@@ -517,7 +530,9 @@ L0358:
 	mov al, bh
 	out dx, al
 	inc byte ptr es:[di]
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	add si, 2
 	and si, 0F7h
 	loop L0353
@@ -835,7 +850,9 @@ L05DF:
 	inc ah
 	cmp ah, 4
 	jne L05CA
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DB6
+	assume ss:nothing
 	pop dx
 	dec dx
 	jne L05C7
@@ -942,12 +959,16 @@ L0684:
 	cmp word ptr [si+4], dx
 	jg L0707
 L06B1:
+	assume ss:DGROUP
 	inc byte ptr ss:_g_3DD4
+	assume ss:nothing
 	mov si, word ptr [bp+0Ah]
 	lea di, [bp-80h]
 	mov ax, ss
 	mov es, ax
+	assume ss:DGROUP
 	mov ds, word ptr ss:_g_3DB0
+	assume ss:nothing
 	mov dx, 10h
 L06C8:
 	mov ah, 0
@@ -1034,77 +1055,107 @@ L0740:
 	mov si, word ptr [bp+0Ah]
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
 	movsb
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec di
 	dec di
 	movsb
@@ -1936,67 +1987,99 @@ L0DA8:
 	out dx, al
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	movsw
 	add si, 6
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	sub di, 2
 	sub si, 7Eh
 	pop di
@@ -2021,7 +2104,9 @@ L0E85:
 	shl ah, 1
 	cmp ah, 10h
 	jne L0E85
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec word ptr [bp-2]
 	jne L0E83
 	jmp short L0EDE
@@ -2031,7 +2116,9 @@ L0EA7:
 	call near ptr _o00_31AD_0F56
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-2], dx
+	assume ss:DGROUP
 	cmp byte ptr ss:_g_3DD2, 0
+	assume ss:nothing
 	jne L0E83
 L0EBC:
 	mov ah, 1
@@ -2048,7 +2135,9 @@ L0EBE:
 	shl ah, 1
 	cmp ah, 10h
 	jne L0EBE
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec word ptr [bp-2]
 	jne L0EBC
 L0EDE:
@@ -2105,14 +2194,18 @@ L0F34:
 	shl ah, 1
 	cmp ah, 10h
 	jne L0F34
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DB6
+	assume ss:nothing
 	dec word ptr [bp-2]
 	jne L0F32
 	jmp L0EDE
 _o00_31AD_0D06	endp
 
 _o00_31AD_0F56	proc	far
+	assume ss:DGROUP
 	mov ch, byte ptr ss:_g_3DD2
+	assume ss:nothing
 	and ch, ch
 	je L0F69
 	mov al, 3
@@ -2164,7 +2257,9 @@ L0F69:
 	mov bl, al
 	sub dl, al
 	mov byte ptr _g_3DEA, dl
+	assume ss:DGROUP
 	sub bl, byte ptr ss:_g_3DEF
+	assume ss:nothing
 	cmp bl, 1
 	jne L0FF0
 	mov bh, byte ptr _g_3DEC
@@ -2174,17 +2269,23 @@ L0FF0:
 	lds si, dword ptr [bp+0Ah]
 	pop ax
 	add di, ax
+	assume ss:DGROUP
 	add di, word ptr ss:_g_3DEF
+	assume ss:nothing
 	add si, ax
 	retn
 _o00_31AD_0F56	endp
 
 _o00_31AD_1002	proc	far
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
+	assume ss:nothing
 	cmp bl, 1
 	je L104E
 	mov cl, bl
+	assume ss:DGROUP
 	mov bh, byte ptr ss:_g_3DEC
+	assume ss:nothing
 	and bh, bh
 	js L102A
 	mov al, 8
@@ -2207,7 +2308,9 @@ L102A:
 	mov al, 0FFh
 	out dx, al
 	xor ch, ch
+	assume ss:DGROUP
 	mov bh, byte ptr ss:_g_3DED
+	assume ss:nothing
 	test bh, 1
 	je L1047
 L1040:
@@ -2233,16 +2336,22 @@ L105C:
 	and al, al
 	stosb
 L105F:
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEA
+	assume ss:nothing
 	retn
 _o00_31AD_1002	endp
 
 _o00_31AD_1065	proc	far
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
+	assume ss:nothing
 	cmp bl, 1
 	je L104E
 	mov cl, bl
+	assume ss:DGROUP
 	mov bh, byte ptr ss:_g_3DEC
+	assume ss:nothing
 	and bh, bh
 	js L108A
 	mov al, 8
@@ -2262,7 +2371,9 @@ L108A:
 	mov al, 0FFh
 	out dx, al
 	xor ch, ch
+	assume ss:DGROUP
 	mov bh, byte ptr ss:_g_3DED
+	assume ss:nothing
 	test bh, 1
 	je L10B3
 	test di, 1
@@ -2290,7 +2401,9 @@ L10B5:
 	mov al, byte ptr es:[di]
 	movsb
 L10C8:
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEA
+	assume ss:nothing
 	retn
 L10CE:
 	mov ax, word ptr cs:L1108
@@ -2322,8 +2435,12 @@ _o00_31AD_110C	proc	far
 	sub sp, 52h
 	push bx
 	push ax
+	assume ss:DGROUP
 	mov cl, byte ptr ss:_g_3DEE
+	assume ss:nothing
+	assume ss:DGROUP
 	mov ch, byte ptr ss:_g_3DF2
+	assume ss:nothing
 	xor dh, dh
 	lea bx, [bp-52h]
 L1123:
@@ -2342,11 +2459,15 @@ L1123:
 	pop bx
 	push si
 	lea si, [bp-52h]
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
+	assume ss:nothing
 	cmp bl, 1
 	je L118F
 	mov cl, bl
+	assume ss:DGROUP
 	mov bh, byte ptr ss:_g_3DEC
+	assume ss:nothing
 	and bh, bh
 	js L116A
 	mov al, 8
@@ -2369,7 +2490,9 @@ L116A:
 	inc dx
 	mov al, 0FFh
 	out dx, al
+	assume ss:DGROUP
 	mov bh, byte ptr ss:_g_3DED
+	assume ss:nothing
 	test bh, 1
 	je L1188
 L117E:
@@ -2405,7 +2528,9 @@ L11A8:
 	cmp bl, 1
 	je L11E7
 	mov cl, bl
+	assume ss:DGROUP
 	mov ah, byte ptr ss:_g_3DEC
+	assume ss:nothing
 	and ah, ah
 	js L11C8
 	mov al, 8
@@ -2418,7 +2543,9 @@ L11A8:
 	stosb
 	dec cl
 L11C8:
+	assume ss:DGROUP
 	mov bh, byte ptr ss:_g_3DED
+	assume ss:nothing
 	test bh, 1
 	jne L11D4
 	dec cl
@@ -2443,7 +2570,9 @@ L11E7:
 	mov al, byte ptr es:[di]
 	stosb
 L11F5:
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEA
+	assume ss:nothing
 	retn
 _o00_31AD_110C	endp
 
@@ -2600,7 +2729,9 @@ L133A:
 	inc dx
 	mov al, 0
 	out dx, al
+	assume ss:DGROUP
 	mov ch, byte ptr ss:_g_3DD2
+	assume ss:nothing
 	and ch, ch
 	je L1357
 	mov al, 3
@@ -2657,7 +2788,9 @@ L1394:
 L13B8:
 	mov di, word ptr [bp-0Ah]
 	call near ptr _o00_31AD_110C
+	assume ss:DGROUP
 	mov cx, word ptr ss:_g_3DB6
+	assume ss:nothing
 	add word ptr [bp-0Ah], cx
 	dec word ptr [bp-6]
 	jne L13B8
@@ -2683,7 +2816,9 @@ L13CD:
 L13F1:
 	mov di, word ptr [bp-0Ah]
 	call near ptr _o00_31AD_110C
+	assume ss:DGROUP
 	mov cx, word ptr ss:_g_3DB6
+	assume ss:nothing
 	add word ptr [bp-0Ah], cx
 	dec word ptr [bp-6]
 	jne L13F1
@@ -3550,7 +3685,9 @@ _o00_31AD_1A8F	proc	far
 	mov es, ax
 	lea di, _g_3D20
 	rep movsw
+	assume ss:DGROUP
 	dec byte ptr ss:_g_3DD4
+	assume ss:nothing
 	pop ds
 	pop si
 	pop di
@@ -3580,17 +3717,17 @@ _o00_31AD_1AE7	proc	far
 	push di
 	call far ptr _o00_31AD_145E
 	lea bx, _g_9130
-	mov ax, 166Ah
+	mov ax, OFFSET _o00_31AD_166A
 	mov word ptr [bx], ax
 	lea bx, _g_912C
-	mov ax, 1AC4h
+	mov ax, OFFSET _o00_31AD_1AC4
 	mov word ptr [bx], ax
 	mov word ptr _g_3DB6, 28h
 	mov word ptr _g_3DB2, 140h
 	mov cx, 0C8h
 	mov word ptr _g_3DB4, cx
 	xor ax, ax
-	mov di, 3DFCh
+	mov di, OFFSET DGROUP:_g_3DFC
 	mov es, word ptr _g_3DAE
 L1B22:
 	stosw

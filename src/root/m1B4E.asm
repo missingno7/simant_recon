@@ -13,7 +13,7 @@ _DATA	segment word public 'DATA'
 	public	_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _g_3DDE, _g_3DE0, _g_3DE1, _g_3DE2
 	public	_g_3DE3, _g_3DE4, _g_3DE5, _fd_55B3_3DE6, _fd_55B3_3DE8, _g_3DEA, _g_3DEC
 	public	_g_3DED, _g_3DEE, _g_3DEF, _g_3DF1, _g_3DF2, _g_3DF4, _g_3DF8, _g_3DFC
-	public	_g_41C0, _g_4220
+	public	_g_41C0, _g_41D0, _g_4220
 _g_3D20		db	128 dup (0)	; scratch bitmap row buffer
 _g_3DA0		dw	0		; text pen x, y
 _g_3DA2		dw	0
@@ -57,6 +57,7 @@ _g_3DF8		dd	_g_9128		; driver entry table (25 far pointers)
 _g_3DFC		db	964 dup (0)
 _g_41C0		db	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15	; colour map
 		; 16-byte fill patterns
+_g_41D0	label	byte
 		db	55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh
 		db	0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h, 0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h
 		db	16 dup (0FFh)

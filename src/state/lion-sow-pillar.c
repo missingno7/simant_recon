@@ -1,0 +1,12 @@
+unsigned char far LionListM[10];
+unsigned char far LionListS[10];
+unsigned char far LionListT[10];
+unsigned char far LionListX[10];
+unsigned char far LionListY[10];
+int far PillDir;
+int far PillarSeg;
+int far PillarMap[6];
+int far SowDir[3];
+int far SowSave[3];
+int far SowX[3];
+int far SowY[3];

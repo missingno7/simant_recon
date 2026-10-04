@@ -208,10 +208,10 @@ extern struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *li
                                          struct Rect far *in, struct Rect far *out);
 extern Handle far f_171C_1B2C(Handle h, long size, int flags);
 
-/* SCAFFOLD BEGIN: f_1E57_038E (rebuild all window clip lists) best draft, 985 vs 997 bytes.
- * Control flow, calls and data match; the original frame is 0x32 with seven unused /Oe homes
- * (three far-pointer-sized) and keeps `next` in memory with TMP's offset cached in DI during
- * the window loop; this draft allocates `next` to DI.  The variable set is not recovered. */
+
+extern struct Rect far * far f_1D8E_003F(struct Rect far *r, struct Rect far *c,
+                                         struct Rect far *in, struct Rect far *out);
+extern Handle far fd_50F6_3B5C;
 void far f_1E57_038E(void)
 {
     int i;
@@ -288,7 +288,7 @@ void far f_1E57_038E(void)
     f_171C_1C0A(tmpH);
     f_1E57_0007();
 }
-/* SCAFFOLD END */
+
 
 extern struct Rect far * far f_1D8E_003F(struct Rect far *r, struct Rect far *c,
                                          struct Rect far *in, struct Rect far *out);

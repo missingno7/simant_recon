@@ -151,6 +151,28 @@ def sha(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
+def contribution_sha256(obj) -> str:
+    """Pin every live object contribution while excluding CodeView metadata.
+
+    Full segment bytes/extents, publics, imports, groups, COMDEFs and linker
+    fixups remain part of the identity. Debug record paths/timestamps are not
+    runtime contributions. No code, initialized data or fixup is masked.
+    """
+    segments = [s for s in obj.segment_defs if s.get('class') not in DEBUG_CLASSES]
+    names = {s['name'] for s in segments}
+    record = {
+        'segments': segments,
+        'bytes': {n: bytes(obj.segments[n]).hex() for n in sorted(names) if n in obj.segments},
+        'publics': [p for p in obj.publics if p['segment'] in names],
+        'local_publics': [p for p in getattr(obj, 'local_publics', []) if p['segment'] in names],
+        'fixups': [f for f in obj.linker_fixups if f['segment'] in names],
+        'communals': getattr(obj, 'communals', []),
+        'imports': obj.externals,
+        'groups': obj.groups,
+    }
+    return sha(json.dumps(record, sort_keys=True).encode('utf8'))
+
+
 # ---- source-content lint (rule SRC-1; audit F-3) ------------------------------------------
 # Refused: opcode bytes instead of instructions (C `_emit`, asm db/dw/dd inside a proc), asm
 # `org` and `include`, numeric (non-symbolic) call/jump targets, `#include` names that leave the
@@ -439,6 +461,7 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
         return out
     obj = OmfReader(communals=True).read(r.obj)
     out["object_sha256"] = sha(r.obj)
+    out['contribution_sha256'] = contribution_sha256(obj)
     if collect is not None:
         collect["object"] = r.obj
     scaff = scaffold_names(text)
@@ -522,8 +545,19 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
         dseg = next(iter(stops))
         s0, s1 = data_spans[c["name"]]
         reasons = []
+        data_publics = module.get('code_data_publics', {})
         inside = [p["name"] for p in obj.publics + getattr(obj, "local_publics", [])
-                  if p["segment"] == dseg and s0 <= p["offset"] < s1]
+                  if p["segment"] == dseg and s0 <= p["offset"] < s1
+                  and data_publics.get(match.c_name(p['name'])) != p['offset'] + delta]
+        for pname, poff in data_publics.items():
+            if not c['off'] <= poff < c['off'] + c['size']:
+                continue
+            anchor = match.obj_name_lookup('_' + pname)
+            public = next((p for p in obj.publics if match.c_name(p['name']) == pname), None)
+            if (not anchor or anchor.get('kind') != 'data' or anchor.get('seg') != module['seg']
+                    or anchor.get('off') != poff or public is None
+                    or public['segment'] != dseg or public['offset'] + delta != poff):
+                reasons.append('code-data public lacks its reviewed symbolic anchor: ' + pname)
         if inside:
             reasons.append(f"code-segment data covers publics {inside[:4]}")
         if s0 < 0 or s1 > len(obj.segments.get(dseg, b"")):
@@ -624,7 +658,8 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
     code_segs = {p["segment"] for p in obj.publics if undecorated(p["name"]) in claimed}
     out["inplace_drafts"] = sorted(undecorated(p["name"]) for p in obj.publics
                                    if p["segment"] in code_segs and undecorated(p["name"]) not in claimed
-                                   and undecorated(p["name"]) not in scaff)
+                                   and undecorated(p["name"]) not in scaff
+                                   and undecorated(p['name']) not in module.get('code_data_publics', {}))
     return out
 
 
@@ -672,6 +707,7 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
     reasons += code_alignment_reasons(segment_def(obj, seg), start)
     if len(body) != end - start:
         reasons.append(f"segment length {len(body)} != extent {end - start}")
+    names |= set((module or {}).get('code_data_publics', {}))
     if {match.c_name(p["name"]) for p in obj.publics if p["segment"] == seg} != names:
         reasons.append("segment publics differ from claims")
     misplaced = []

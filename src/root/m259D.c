@@ -43,9 +43,7 @@ extern void (far * near g_9148)(int x0, int y0, int x1, int y1, char far *buffer
 
 int _fastcall win_DrawBitMap(int x, int y, int id);
 
-/* SCAFFOLD BEGIN: win_DrawBitMap remains inexact (675 vs 663 bytes).
- * Register and stack-home allocation remain unresolved.
- * This module follows original function order; no new code is claimed. */
+
 int _fastcall win_DrawBitMap(int x, int y, int id)
 {
     char far *h;
@@ -107,7 +105,7 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
     }
     return 0;
 }
-/* SCAFFOLD END */
+
 
 
 void _fastcall win_DrawBitMapAtObj(int id, struct Rect far *rect)

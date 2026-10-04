@@ -6,7 +6,7 @@ struct Pt {
 };
 
 static char g_6108 = 0;         /* /! option: memory check override */
-static int g_610A = -1;
+int g_610A = -1;
 static int g_610C[9] = { 0x6d60, 0, 0x6d61, 0x6d62, 0x6d61, 0x6d62, 0, 0x6d62, 0x6d63 };
 
 void far ReadConfig(void);

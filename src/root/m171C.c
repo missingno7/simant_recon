@@ -402,7 +402,7 @@ void far f_171C_07BE(void)
     atexit(f_171C_0678);
 }
 
-/* SCAFFOLD BEGIN: draft; residue: register allocation (original keeps paras in DI, next block pointer in memory with two copies [bp-0Ah]/[bp-2]) */
+
 int far f_171C_09CC(Handle h, unsigned paras, int type)
 {
     Block far *b;
@@ -420,7 +420,7 @@ int far f_171C_09CC(Handle h, unsigned paras, int type)
     f_171C_068C(f_171C_0160(b, 0), paras, type);
     return 1;
 }
-/* SCAFFOLD END */
+
 
 Handle far f_171C_0A5C(void)
 {
@@ -442,7 +442,7 @@ Handle far f_171C_0A5C(void)
     Punt("Handle free - but none found");
 }
 
-/* SCAFFOLD BEGIN: draft; residue: original keeps the long local seg in memory ([bp-28h]); MSC here enregisters it in SI:DI */
+
 void far f_171C_0ADC(Block far *b)
 {
     Block far *n;
@@ -470,7 +470,7 @@ void far f_171C_0ADC(Block far *b)
             n->prev = SEG(b);
     }
 }
-/* SCAFFOLD END */
+
 
 int far f_171C_0BE2(int emsOnly)
 {
@@ -503,53 +503,56 @@ int far f_171C_0BE2(int emsOnly)
     return 0;
 }
 
-/* SCAFFOLD BEGIN: draft; needs runtime __disable/__enable (29F4:2D76/2D78) registered; a 490-byte near-exact draft is in work/mem (unsigned seg loop, comma-hoisted type test) but it shifts the object layout and breaks 125C relocation order */
+
 int far f_171C_0CF4(int emsOnly)
 {
-    int moved;
-    Block far *b;
-    unsigned end;
-    Block far *n;
-    unsigned paras;
+    int t;
+    unsigned seg;
     long size;
+    unsigned paras;
+    Block far *n;
+    unsigned end;
+    Block far *b;
+    unsigned long moved;
     Block far *nb;
 
     moved = 0;
     b = g_91A4;
     end = emsOnly ? fd_50F6_3950 : s_8C70;
-    for (; SEG(b) < end; b = BLK(SEG(b) + b->paras)) {
+    for (; (seg = (unsigned)SEG(b)) < end; b = BLK(b->paras + seg)) {
         if (b->type != 0x80)
             continue;
-        n = BLK(SEG(b) + b->paras);
-        if (SEG(n) < end && !n->lock && (n->type == 1 || n->type == 3) && !(n->attr & 0x10)) {
+        n = BLK(b->paras + seg);
+        if ((unsigned)SEG(n) < end && (t = n->type, !n->lock) && (t == 1 || t == 3) && !(n->attr & 0x10)) {
             f_171C_0ADC(b);
             continue;
         }
-        for (; SEG(n) < end; n = BLK(SEG(n) + n->paras)) {
-            if (!n->lock && (n->type == 1 || n->type == 3) && b->paras >= n->paras)
-                break;
+        while ((unsigned)SEG(n) < end) {
+            if ((t = n->type, !n->lock) && (t == 1 || t == 3) && b->paras >= n->paras)
+                goto found;
+            n = BLK((unsigned)SEG(n) + (unsigned long)n->paras);
         }
-        if (SEG(n) >= end)
-            continue;
+        continue;
+found:
         paras = n->paras;
         size = n->size;
-        f_171C_068C(b, paras, n->type);
+        f_171C_068C(b, paras, t);
         _fmemcpy(b->name, n->name, 13);
         nb = b;
         nb->size = size;
-        f_194D_0006((char far *)nb + 0x20000L, (char far *)n + 0x20000L, paras - 2);
+        f_194D_0006((char far *)((long)nb + 0x20000L), (char far *)((long)n + 0x20000L), paras - 2);
         nb->handle = n->handle;
         nb->age = n->age;
         nb->attr = n->attr;
         _disable();
-        *(char far * far *)((char far *)s_2F46 + nb->handle) = (char far *)nb + 0x20000L;
+        *(Handle)((char far *)s_2F46 + nb->handle) = (char far *)((long)nb + 0x20000L);
         _enable();
         f_171C_0160(n, 1);
         moved = 1;
     }
-    return moved;
+    return (int)moved;
 }
-/* SCAFFOLD END */
+
 
 int far f_171C_0EDE(void)
 {
@@ -579,7 +582,7 @@ Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems)
     Punt(buffer);
 }
 
-/* SCAFFOLD BEGIN: draft; residue: register allocation (original: SI for inner-loop block/size/result, DI for best/paras by region) and frame layout */
+
 Block far * far f_171C_0FBC(unsigned paras, int type)
 {
     int first;
@@ -637,7 +640,7 @@ again:
             first = 0;
     }
 }
-/* SCAFFOLD END */
+
 
 void far f_171C_11F2(Block far *b)
 {

@@ -1,0 +1,336 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "f_2505_0453",
+  "module": "root:2505",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "874d51be00c92adc78543c34b4b6d23fbf30b480cfd2d7bd9205eef0feb6ca74",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_2505_0453.json",
+    "sha256": "ff8acbd9390b6f8ede9aa5ec465b37fb624de5bb80233521fac60f9c404f5c73"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_2505_0453",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "status_basis": "The registered whole-module C function at lines 243-263 maps to every original conditional, call, memory read, pointer computation, return path and ABI action in the complete 132-byte function extent. The registered differential result is finite-domain corroboration only; this status is based on the full static CFG and operation mapping recorded here. Call equivalence is established at the caller boundary by matching target, ABI, arguments, branch reachability and order; transitive helper internals are outside this function extent.",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/evidence.json",
+      "sha256": "c65527040e4aa8ac8dfcbbb90366d7f65aa92efdb2540fe919c890d96ee5b45e"
+    },
+    "input_pins": [
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+        "role": "original function-table extent and frame"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "role": "code/data names and win_numOfWindows address"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "pinned original executable identity"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "role": "historical exact-reconstruction manifest checkpoint"
+      },
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "registered behavior evidence index"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/evidence.json",
+        "sha256": "c65527040e4aa8ac8dfcbbb90366d7f65aa92efdb2540fe919c890d96ee5b45e",
+        "role": "registered finite-domain behavior evidence"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+        "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+        "role": "registered whole-module C source"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/run.json",
+        "sha256": "055dc2bccd119761fa0c63428342680f7e3bc3e450b6ac56e2b89bbee7c062da",
+        "role": "100-case differential run pin"
+      },
+      {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/negative-controls.json",
+        "sha256": "97ee1dd248c33c99935c3fb9a3bdc11204c6dd4ab6653a8451cebd202f729f70",
+        "role": "compiled wrong-field negative control"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "original function extent/disassembly context tool"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "2505",
+      "off": "0453",
+      "size": 132,
+      "end_exclusive": "04D7",
+      "linear": "254A3",
+      "function_table_extent": "DESCENT"
+    },
+    "branch_map": [
+      {
+        "address": "0471",
+        "mnemonic": "JL",
+        "target": "0479",
+        "predicate": "signed16(sign_extend8(high_byte(U16(obj)))) < signed16(win_numOfWindows)",
+        "effects": "Taken enters guarded body; fallthrough evaluates the second disjunct. The 16-bit CBW operation sign-extends the extracted high byte before the signed word compare.",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:250-252",
+        "widths": "high-byte extraction to signed 16-bit; win_numOfWindows is signed 16-bit",
+        "signedness": "signed",
+        "loop": false
+      },
+      {
+        "address": "0477",
+        "mnemonic": "JL",
+        "target": "04CE",
+        "predicate": "signed16(U16(obj & 0xFF00)) < 0x2800",
+        "effects": "Taken returns sentinel 0x8000 without locking; fallthrough enters the guarded body. This is the false branch of source predicate win >= 0x2800.",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:250-252",
+        "widths": "16-bit compare",
+        "signedness": "signed",
+        "loop": false
+      },
+      {
+        "address": "0498",
+        "mnemonic": "JNG (JLE)",
+        "target": "04C7",
+        "predicate": "signed16(window_header.count) <= signed16(obj & 0x00FF)",
+        "effects": "Taken unlocks and returns sentinel 0x8000. Fallthrough loads the selected far pointer and field, unlocks, then returns the field.",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:253-260",
+        "widths": "16-bit count and index; index is masked to 0..255",
+        "signedness": "signed compare; index value is nonnegative",
+        "loop": false
+      },
+      {
+        "address": "04C5",
+        "mnemonic": "JMP",
+        "target": "04D1",
+        "predicate": "unconditional",
+        "effects": "Success path bypasses the sentinel load and joins the shared register/frame epilogue with the selected word already in AX.",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:257-259",
+        "widths": "near in-segment control transfer",
+        "signedness": "not applicable",
+        "loop": false,
+        "conditional": false
+      }
+    ],
+    "loop_map": [],
+    "call_map": [
+      {
+        "address": "047B",
+        "target": "root:23AE:0377",
+        "callee": "win_LockWin",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:7,252",
+        "reachable_when": "Outer guard is true (either the first predicate is true or win >= 0x2800).",
+        "abi": "far _fastcall; one signed 16-bit win argument in AX; void return.",
+        "argument_setup": "AX is loaded from SI, where SI holds U16(obj & 0xFF00).",
+        "order": "1 of 3 direct helper stages; always precedes f_2505_0006 on guarded paths.",
+        "effects": "Acquires/updates the DOS window lock state; function itself performs no direct non-stack store."
+      },
+      {
+        "address": "0489",
+        "target": "root:2505:0006",
+        "callee": "f_2505_0006",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:39-44,254",
+        "reachable_when": "After win_LockWin on every guarded path.",
+        "abi": "Same-TU far C function with default stack argument convention, lowered as push CS plus near call; one 16-bit win word is pushed from SI and caller-cleaned by pop BX; far data-pointer result is returned in DX:AX.",
+        "argument_setup": "push SI supplies win; push CS/call near preserves the far-return form; pop BX removes the argument after return.",
+        "order": "After lock and before the header count read.",
+        "effects": "Returns the window-memory pointer. Its source checks g_6300 and lock status and may call Punt; it reads win_handles[win >> 8]."
+      },
+      {
+        "address": "04B5",
+        "target": "root:23AE:01DB",
+        "callee": "win_UnlockWin",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:8,257",
+        "reachable_when": "Only when signed window_header.count > idx.",
+        "abi": "far _fastcall; one signed 16-bit win argument in AX; void return.",
+        "argument_setup": "AX is loaded from SI.",
+        "order": "After the far object pointer is copied to local storage and before r[kind] is read.",
+        "effects": "Releases/updates the DOS window lock state; selected field memory access occurs after this call."
+      },
+      {
+        "address": "04C9",
+        "target": "root:23AE:01DB",
+        "callee": "win_UnlockWin",
+        "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:8,260",
+        "reachable_when": "Only when the outer guard is true and signed window_header.count <= idx.",
+        "abi": "far _fastcall; one signed 16-bit win argument in AX; void return.",
+        "argument_setup": "AX is loaded from SI.",
+        "order": "Failure-path unlock before the shared sentinel return.",
+        "effects": "Releases/updates the DOS window lock state; no selected-object pointer is dereferenced on this path."
+      }
+    ],
+    "memory_state_inventory": {
+      "abi_entry_exit": {
+        "entry": "DOS large-model far routine; _fastcall int(int obj, int kind). obj is received in AX and kind in DX; both are saved to stack homes. Return is signed-int bit pattern in AX; exit uses RETF.",
+        "frame": "BP frame with 16 local bytes and no stack-check call. SI and DI are saved/restored. DX/AX argument homes are discarded by restoring SP from BP; caller-visible stack is balanced.",
+        "locals": {
+          "BP-0x14": "saved obj word",
+          "BP-0x12": "saved kind word",
+          "BP-0x0C": "window pointer offset word",
+          "BP-0x10": "selected record pointer offset word",
+          "BP-0x0E": "selected record pointer segment word"
+        }
+      },
+      "direct_reads": [
+        {
+          "object": "win_numOfWindows",
+          "address": "far data at 50F6:47D8 (segment selector loaded from DGROUP:8A48)",
+          "width_bits": 16,
+          "signed": true,
+          "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:241,251"
+        },
+        {
+          "object": "window header count",
+          "address": "ES:[window_offset + 0x0C]",
+          "width_bits": 16,
+          "signed": true,
+          "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:255"
+        },
+        {
+          "object": "far object pointer table entry",
+          "address": "ES:[window_offset + 0x2C + (idx * 4)]",
+          "width_bits": 32,
+          "layout": "16-bit offset word followed by 16-bit segment word; idx*4 is performed with two 16-bit shifts",
+          "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:256"
+        },
+        {
+          "object": "selected int field",
+          "address": "ES:[record_offset + (kind * 2)] after LES loads record segment:offset",
+          "width_bits": 16,
+          "signed": true,
+          "layout": "kind is the full signed 16-bit input; address scaling is a 16-bit shift by one",
+          "source_anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c:259"
+        }
+      ],
+      "direct_writes": [
+        "Stack-only homes for arguments and the selected far record pointer; no direct non-stack memory write occurs in this function."
+      ],
+      "helper_state_effects": [
+        "win_LockWin then win_UnlockWin update the external window lock state on guarded paths.",
+        "f_2505_0006 reads window handle state and can invoke the lock diagnostic Punt path; it is called only after win_LockWin.",
+        "The success path copies the object far pointer before unlock and dereferences it after unlock, exactly as source line 257-259 orders it."
+      ],
+      "pointer_arithmetic": [
+        "win is the 16-bit bit pattern obj & 0xFF00; its high byte is sign-extended for the first signed bound comparison.",
+        "idx is obj & 0x00FF, a 16-bit value in 0..255; table byte offset is idx*4.",
+        "The table entry yields an offset:segment far pointer to a record; the selected field byte offset is kind*2.",
+        "Effective far-pointer offset arithmetic is 16-bit; the function has no explicit kind or pointer-bounds check. For malformed/unmapped addresses, the target performs the corresponding direct memory read and may fault."
+      ],
+      "returns": [
+        {
+          "condition": "first guard false",
+          "value": "0x8000",
+          "side_effects": "No lock/helper calls."
+        },
+        {
+          "condition": "guard true and signed count <= idx",
+          "value": "0x8000",
+          "side_effects": "Lock, window lookup, unlock; no object-table entry read."
+        },
+        {
+          "condition": "guard true and signed count > idx",
+          "value": "word at record[kind]",
+          "side_effects": "Lock, window lookup, pointer-table read, unlock, then selected field read."
+        }
+      ]
+    },
+    "static_axes": [
+      {
+        "axis": "extent",
+        "result": "PROVEN",
+        "evidence": "context.py identifies root:2505:0453, size 132; the instruction listing begins at 0453 and ends with RETF at 04D6, so the exclusive end is 04D7."
+      },
+      {
+        "axis": "complete_cfg",
+        "result": "PROVEN",
+        "evidence": "disasm.txt enumerates the full extent; three conditional branches are mapped above; there are no loops or back edges."
+      },
+      {
+        "axis": "predicate_width_signedness",
+        "result": "PROVEN",
+        "evidence": "The first comparison uses 16-bit CBW sign extension of the masked high byte and signed JL; the threshold comparison is signed 16-bit JL; count/index uses signed JNG/JLE. Source anchors are lines 250-255."
+      },
+      {
+        "axis": "calls_and_abi",
+        "result": "PROVEN",
+        "evidence": "All four call sites and both conditional unlock paths are mapped above. Fastcall AX arguments, same-TU stack argument lowering, far result, cleanup and call order are visible in the listing and source prototypes."
+      },
+      {
+        "axis": "memory_and_state",
+        "result": "PROVEN",
+        "evidence": "All direct far reads, stack-only writes, pointer scaling, lock effects, return values and post-unlock result-read ordering are inventoried above."
+      },
+      {
+        "axis": "decoder_crosscheck",
+        "result": "PROVEN",
+        "evidence": "context.py labels 0467 as CWDE; independent 16-bit ndisasm decodes it as CBW with no operand-size override. CBW sign-extends AL into AX, matching the signed high-byte expression."
+      },
+      {
+        "axis": "behavioral_corroboration",
+        "result": "FINITE_ONLY",
+        "evidence": "Registered run has 100 actual original/candidate invocations; the compiled wrong-field negative control is detected. These tests are corroboration only and are not the basis of the complete static mapping."
+      },
+      {
+        "axis": "callee_boundary",
+        "result": "PROVEN",
+        "evidence": "The target invokes the same registered helper entry points with the same argument values and path order as the source. This is a caller-body proof; transitive helper internals remain governed by their own function evidence."
+      }
+    ],
+    "remaining_differences": [
+      {
+        "category": "CODEGEN_ONLY",
+        "difference": "Historical byte-exact source/compiler reconstruction remains open. The registered evidence explicitly records the exact claim as unresolved because compiler allocation/structure is not recovered; this static audit closes the behavior mapping only and does not claim byte identity.",
+        "anchor": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/evidence.json:historical_difference",
+        "semantic_effect": "None found in the complete CFG/operation mapping."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_negative_pins": {
+      "run": {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/run.json",
+        "sha256": "055dc2bccd119761fa0c63428342680f7e3bc3e450b6ac56e2b89bbee7c062da",
+        "observed": "100 actual original/candidate invocations (1 directed, 99 randomized)."
+      },
+      "negative_control": {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/negative-controls.json",
+        "sha256": "97ee1dd248c33c99935c3fb9a3bdc11204c6dd4ab6653a8451cebd202f729f70",
+        "observed": "Compiled actual-field-wrong-value mutant was executed and detected by return mismatch."
+      },
+      "limits": [
+        "Differential suite covers 100 deterministic Ralloc-backed windows, 1-6 packed objects, in-range selected object, initialized 16-field records, and selector 0..3.",
+        "Malformed window/object pointers and invalid IDs are excluded by the reviewed contract.",
+        "The full static status comes from the assembly-to-source control/data-flow mapping, not extrapolation from this finite suite."
+      ]
+    },
+    "disassembly_text": "build/workers/dos_static_window0453/disasm.txt",
+    "human_review": "build/workers/dos_static_window0453/readable.md"
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

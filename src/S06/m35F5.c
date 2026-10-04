@@ -1326,5 +1326,5 @@ void far o06_35F5_24CA(int x, int y)
         fd_3D57_00A4[nx][ny] = 0xfa;
 }
 
-/* SCAFFOLD BEGIN: unrecovered same-module functions */
-/* SCAFFOLD END */
+
+

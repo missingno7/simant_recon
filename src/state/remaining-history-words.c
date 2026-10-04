@@ -1,0 +1,19 @@
+/* Source-only data candidate; root review pending; no historical TU identity claim. */
+int far fd_50F6_0EAC;
+int far fd_50F6_0EB4;
+int far fd_50F6_0EF6;
+int far fd_50F6_0EF8;
+int far fd_50F6_0EFA;
+int far fd_50F6_0F06;
+int far fd_50F6_0F0C;
+int far fd_50F6_0F0E;
+int far fd_50F6_0F10;
+int far fd_50F6_0F12;
+int far fd_50F6_0F26;
+int far fd_50F6_0F2E;
+int far fd_50F6_0F34;
+int far fd_50F6_0F36;
+int far fd_50F6_0F3C;
+int far fd_50F6_0F44;
+int far fd_50F6_0F7A;
+int far fd_50F6_0FC0;

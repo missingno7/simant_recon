@@ -213,6 +213,8 @@ MOUSE_TEXT	segment word public 'CODE'
 	public	_f_1B73_0EEE
 
 ; code-segment variables (addressed cs:, shared with the interrupt handlers)
+	public _fd_1B73_0006
+_fd_1B73_0006 label word
 tmr_countdown	dw	0		; INT 08h: decremented by 5 per tick, floor 0
 mickey_mode	db	0		; set when the driver reports version 7.00: handler works in mickeys
 		db	0
@@ -354,7 +356,7 @@ _f_1B73_0122	proc	near
 	push word ptr [di+2]
 	push word ptr _fd_55B3_3DE6
 	push word ptr _fd_55B3_3DE8
-	mov cx, seg _g_5A9C
+	mov cx, DGROUP
 	mov word ptr [di+2], cx
 	mov cx, offset DGROUP:_g_5A9C
 	mov word ptr [di], cx
@@ -491,7 +493,7 @@ _f_1B73_0235	proc	far
 	mov cx, 7Fh
 	push cs
 	pop es
-	lea dx, ds:_f_1B73_03EE
+	lea dx, _f_1B73_03EE
 	int 33h
 	push ds
 	push cs
@@ -501,21 +503,21 @@ _f_1B73_0235	proc	far
 	mov word ptr cs:old_int15, bx
 	mov word ptr cs:old_int15+2, es
 	mov ax, 2515h
-	lea dx, ds:_f_1B73_065A
+	lea dx, _f_1B73_065A
 	int 21h
 	mov ax, 3509h
 	int 21h
 	mov word ptr cs:old_int09, bx
 	mov word ptr cs:old_int09+2, es
 	mov ax, 2509h
-	lea dx, ds:_f_1B73_06E3
+	lea dx, _f_1B73_06E3
 	int 21h
 	mov ax, 3508h
 	int 21h
 	mov word ptr cs:old_int08, bx
 	mov word ptr cs:old_int08+2, es
 	mov ax, 2508h
-	lea dx, ds:_f_1B73_051F
+	lea dx, _f_1B73_051F
 	int 21h
 	pop ds
 	inc byte ptr _g_53BC
@@ -1528,7 +1530,7 @@ _f_1B73_0AA3	proc	far
 	les bx, dword ptr _g_5484+6
 	mov word ptr es:[bx], ax
 	mov byte ptr _g_5FF8, al
-	lea ax, ds:_f_1B73_0CB3
+	lea ax, _f_1B73_0CB3
 	mov word ptr _g_5FFA, ax
 	mov al, 1Fh
 	mov byte ptr _g_5FF9, al
@@ -1805,9 +1807,11 @@ _f_1B73_0CB3	proc	near
 	mov si, DGROUP
 	mov es, si
 	mov si, offset DGROUP:_g_5484
+	assume es:DGROUP
 	mov ax, word ptr es:_g_9120
 	mov cx, word ptr es:_g_9122
 	mov dx, word ptr es:_g_9124
+	assume es:nothing
 L0CCD:
 	lds di, dword ptr es:[si]
 	mov bx, word ptr es:[si+4]

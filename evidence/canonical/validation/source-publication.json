@@ -1,0 +1,51 @@
+{
+  "schema": "simant-canonical-validation-v1",
+  "canonical_publication": "evidence/canonical/publication.json",
+  "dos": {
+    "translation_units": 190,
+    "storage_units": 63,
+    "audit": {
+      "translation_units": 190,
+      "storage_providers_verified": 63,
+      "public_symbols": 2091,
+      "communal_symbols": 431,
+      "symbolic_aliases": 193,
+      "unresolved_imports": 12,
+      "unresolved_semantic_gates": 10
+    },
+    "status": "REFUSED",
+    "blockers": [
+      "12 unresolved symbols",
+      "10 unresolved semantic gates"
+    ],
+    "original_exe_bytes_used": {
+      "game_code": 0,
+      "game_data": 0,
+      "fallback_debt": 0,
+      "executable_fragments": 0
+    },
+    "denied_oracle_reads": []
+  },
+  "historical": {
+    "exact_c_functions": 1235,
+    "historical_exact_source_rebuilt_functions": [
+      "DrawCurBalloons",
+      "DrawSpider",
+      "PopUpInfoWindow",
+      "PrevListLine",
+      "f_1E57_0F8E",
+      "f_23E6_0392",
+      "f_2505_0831",
+      "f_2505_08EA",
+      "win_Recalc"
+    ],
+    "exact_asm_functions": 367,
+    "historical_runtime_members_accepted": 90,
+    "historical_runtime_data_bytes_accepted": 2021,
+    "manifest_sha256": "a2e219367353e6eb7bd0a9606513cf07b1251292c6f33d7ffa06f3b578711116",
+    "codegen_rules_reproduced": 48,
+    "validation": "PASS"
+  },
+  "functional_source_oracle": false,
+  "full_native_consolidation": "IN_PROGRESS"
+}

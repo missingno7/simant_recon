@@ -55,7 +55,7 @@ extern int far fd_50F6_0A8E;
 extern signed char far fd_3D57_0994[];
 extern signed char far fd_3D57_099C[];
 extern int far fd_3D57_07A8[];
-extern void far f_015B_06A2(void);
+extern void far GotoMyAnt(void);
 extern int far SRand1(int range);
 int far ScanForAnts(void);
 void far KillSpider(void);
@@ -68,7 +68,7 @@ extern unsigned char far AlistX[];
 int far SGetDis(int x1, int y1, int x2, int y2);
 extern void far myBeginSound(int sound, int a, int b);
 extern int far DeathCnt;
-extern void far f_0BE8_0812(int x, int y);
+extern void far DropFoodA(int x, int y);
 extern long far RAntsEaten;
 extern long far BAntsEaten;
 extern unsigned char far LifeA[128][64];
@@ -82,7 +82,7 @@ extern unsigned char far MapA[128][64];
 extern int far SRand4(void);
 extern int far SRand256(void);
 extern void far DeadAntHere(int x, int y, int type);
-extern int far f_10F7_2867(int x, int y);
+extern int far IsValidA(int x, int y);
 
 void far MoveSpider(void)
 {
@@ -133,7 +133,7 @@ void far MoveSpider(void)
         MeLocX = fd_50F6_0F12 >> 4;
         MeLocY = fd_50F6_0F34 >> 4;
         if (fd_3D57_07A8[0])
-            f_015B_06A2();
+            GotoMyAnt();
         return;
     }
     if (!fd_50F6_0F0C) {
@@ -241,7 +241,7 @@ void far MoveSpider(void)
                 if (fd_50F6_06AC == 6)
                     fd_50F6_06AC = 0;
                 if (fd_3D57_07A8[0])
-                    f_015B_06A2();
+                    GotoMyAnt();
                 return;
             }
         } else if (MePlane > 1) {
@@ -286,7 +286,7 @@ void far MoveSpider(void)
             MeLocX = fd_50F6_0F12 >> 4;
             MeLocY = fd_50F6_0F34 >> 4;
             if (fd_3D57_07A8[0])
-                f_015B_06A2();
+                GotoMyAnt();
         }
         break;
     case 3:
@@ -297,7 +297,7 @@ void far MoveSpider(void)
             if (fd_50F6_06AC == 6)
                 fd_50F6_06AC = 0;
             if (fd_3D57_07A8[0])
-                f_015B_06A2();
+                GotoMyAnt();
         }
         if (Starg != -2) {
             if (Starg >= 0) {
@@ -368,9 +368,9 @@ void far MoveSpider(void)
     case 5:
         if (--DeathCnt == 0) {
             SMode = fd_50F6_0F0C = 0;
-            f_0BE8_0812(x, y);
-            f_0BE8_0812(x, y);
-            f_0BE8_0812(x, y);
+            DropFoodA(x, y);
+            DropFoodA(x, y);
+            DropFoodA(x, y);
             return;
         }
         if (SRand1(1000) < DeathCnt) {
@@ -381,7 +381,7 @@ void far MoveSpider(void)
         }
         break;
     }
-    if (!f_10F7_2867(fd_50F6_0F12 >> 4, fd_50F6_0F34 >> 4)) {
+    if (!IsValidA(fd_50F6_0F12 >> 4, fd_50F6_0F34 >> 4)) {
         fd_50F6_0F0C = 0;
         if (fd_50F6_0A06 == 1) {
             fd_50F6_0A06 = 0;
@@ -455,7 +455,7 @@ int far SFoundAnt(void)
     for (i = 0; i < 20; i++) {
         y += Dy8[fd_50F6_1004];
         x += Dx8[fd_50F6_1004];
-        if (!f_10F7_2867(x, y))
+        if (!IsValidA(x, y))
             return -2;
         if (GetDis(sx, sy, x, y) > 400)
             return -2;
@@ -474,9 +474,7 @@ extern int far fracCOS(int angle);
 extern int far fracSIN(int angle);
 extern void far DoLaserFire(int x1, int y1, int x2, int y2);
 
-/* SCAFFOLD BEGIN: SpiderScan best draft (389 vs 392 bytes).  Only difference: the original keeps
- * the dead store r = 0 (sub ax,ax; mov [bp-2],ax; mov [bp-8],ax before the pass loop); every
- * spelling tried here (statement, chained, initialiser) is dead-store eliminated. */
+
 int far SpiderScan(void)
 {
     int dir = ((fd_50F6_1004 - 2) & 7) << 5;
@@ -509,7 +507,7 @@ int far SpiderScan(void)
     }
     return found;
 }
-/* SCAFFOLD END */
+
 
 int far SGetDis(int x1, int y1, int x2, int y2)
 {

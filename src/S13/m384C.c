@@ -31,11 +31,11 @@ static int g_2A2E = -1;
 static int g_2A30 = -1;
 static int g_2A32 = -1;
 static int g_2A34 = -1;
-static long g_2A36 = 0;
-static long g_2A3A = 0;
+long g_2A36 = 0;
+long g_2A3A = 0;
 static int g_2A3E = -1;
 static int g_2A40 = -1;
-static int g_2A42[8] = { 0xa9, 0x43, 0xc1, 0x43, 0xba, 0x4a, 0xa2, 0x4a };
+int g_2A42[8] = { 0xa9, 0x43, 0xc1, 0x43, 0xba, 0x4a, 0xa2, 0x4a };
 static int g_2A52 = 0;
 static int g_2A54 = -1;
 static signed char kidX[12] = { 3, 3, 1, 0, 3, 0, 1, 4, 4, 3, 7, 2 };
@@ -53,21 +53,21 @@ static int g_2ACA[4] = { 15, 31, 35, 72 };
 static int g_2AD2[4] = { 15, 19, 35, 72 };
 
 void far YardArea(struct Event far *ev);
-extern void far f_00F8_047F(void);
-extern int far fd_50F6_035C;
-extern void far f_015B_0273(int mode);
+extern void far YardToMap(void);
+extern int far YardMode;
+extern void far SetYardMode(int mode);
 extern int far fd_50F6_0EAC;
 extern void far myBeginSound(int sound, int a, int b);
 extern char far * far * far fd_50F6_034C;
-extern void far f_15D9_009C(void far *text, long pos, int mode);
+extern void far EditMessage(void far *text, long pos, int mode);
 extern int far fd_50F6_0AEC[];
 extern int far fd_50F6_04C2;
 extern int far fd_50F6_08DC;
 extern int far fd_3D57_02C0;
-extern void _fastcall f_22BF_03BE(int obj);
-extern void far f_015B_094A(void);
+extern void _fastcall win_MakeObjSelected(int obj);
+extern void far PlaceQueenInYard(void);
 void far UpdateYard(void);
-extern void _fastcall f_22BF_03C6(int obj);
+extern void _fastcall win_MakeObjUnselected(int obj);
 extern void far DoWinHelp(int win);
 
 void far ProcYardEvent(struct Event far *ev)
@@ -79,34 +79,34 @@ void far ProcYardEvent(struct Event far *ev)
         YardArea(ev);
         break;
     case 0x1907:
-        f_00F8_047F();
+        YardToMap();
         break;
     case 0x1908:
-        if (fd_50F6_035C < 2)
-            f_015B_0273(fd_50F6_035C ^ 1);
+        if (YardMode < 2)
+            SetYardMode(YardMode ^ 1);
         else
-            f_015B_0273(0);
+            SetYardMode(0);
         break;
     case 0x1909:
-        f_015B_0273(2);
+        SetYardMode(2);
         break;
     case 0x190a:
-        f_015B_0273(3);
+        SetYardMode(3);
         break;
     case 0x190b:
         if (fd_50F6_0EAC != 2) {
             myBeginSound(1, 0, 0x7e);
-            f_15D9_009C(fd_50F6_034C[15], 180L, 1);
+            EditMessage(fd_50F6_034C[15], 180L, 1);
         } else {
             n = fd_50F6_0AEC[3] + fd_50F6_0AEC[4];
             if (fd_50F6_04C2 == 0x40 || fd_50F6_04C2 == 0x20)
                 n--;
             if (n <= 0) {
                 myBeginSound(1, 0, 0x7e);
-                f_15D9_009C(fd_50F6_034C[5], 180L, 1);
+                EditMessage(fd_50F6_034C[5], 180L, 1);
             } else {
                 fd_50F6_08DC = 200;
-                f_15D9_009C(fd_50F6_034C[6], 180L, 1);
+                EditMessage(fd_50F6_034C[6], 180L, 1);
             }
         }
         break;
@@ -117,11 +117,11 @@ void far ProcYardEvent(struct Event far *ev)
         fd_3D57_02C0 = 0;
         break;
     case 0x1910:
-        f_22BF_03BE(0x190e);
-        f_22BF_03BE(0x1910);
-        f_015B_094A();
+        win_MakeObjSelected(0x190e);
+        win_MakeObjSelected(0x1910);
+        PlaceQueenInYard();
         UpdateYard();
-        f_22BF_03C6(0x1910);
+        win_MakeObjUnselected(0x1910);
         break;
     case 0x1911:
         DoWinHelp(0x1906);
@@ -152,7 +152,7 @@ extern long far fd_55B3_299A;
 extern long far TickCount(void);
 extern long far fd_55B3_299E;
 extern int far fd_55B3_29A2;
-extern void _fastcall f_21FA_00EE(int color);
+extern void _fastcall win_SetColorNum(int color);
 extern struct Rect far fd_50F6_10D2;
 extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
 
@@ -164,8 +164,8 @@ void far o13_384C_01E5(void)
                 fd_55B3_29A2 = 1;
             fd_55B3_299A = 0;
         } else {
-            f_21FA_00EE(3);
-            if (fd_50F6_035C > 1)
+            win_SetColorNum(3);
+            if (YardMode > 1)
                 f_15D9_0006(fd_55B3_299A, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
         }
     }
@@ -173,17 +173,17 @@ void far o13_384C_01E5(void)
 
 void far Draw_SimYard(int mode, int force);
 extern int far fd_50F6_07C8;
-extern void far f_22BF_0706(int obj, ...);
+extern void far win_ObjFormatPrint(int obj, ...);
 extern int far fd_50F6_03E2;
 extern int far fd_50F6_0400;
 
 void far o13_384C_027C(void)
 {
     o13_384C_01E5();
-    Draw_SimYard(fd_50F6_035C, 1);
-    f_22BF_0706(0x190c, fd_50F6_07C8);
-    f_22BF_0706(0x1912, fd_50F6_03E2);
-    f_22BF_0706(0x1913, fd_50F6_0400);
+    Draw_SimYard(YardMode, 1);
+    win_ObjFormatPrint(0x190c, fd_50F6_07C8);
+    win_ObjFormatPrint(0x1912, fd_50F6_03E2);
+    win_ObjFormatPrint(0x1913, fd_50F6_0400);
 }
 
 extern int near g_3DB2;
@@ -202,8 +202,8 @@ void far win_DrawYardWindow(int flags)
 
     if (flags & 1) {
         EraseYardCursor();
-        if (fd_50F6_035C > 1) {
-            if (fd_50F6_035C > 2 || fd_55B3_29A2 || !(flags & 4) || fd_50F6_035C != g_2A54) {
+        if (YardMode > 1) {
+            if (YardMode > 2 || fd_55B3_29A2 || !(flags & 4) || YardMode != g_2A54) {
                 if (g_3DB2 != 320 && !(g_5A97 & 1)) {
                     o13_384C_01E5();
                     win_DrawObjectNum(0x1914);
@@ -220,7 +220,7 @@ void far win_DrawYardWindow(int flags)
                     win_DrawBitMap(fd_50F6_10D2.left - ((g_5A97 & 1) != 0), fd_50F6_10D2.top, 0x1b5a);
             }
         }
-        g_2A54 = fd_50F6_035C;
+        g_2A54 = YardMode;
     }
     if (flags & 2) {
         fd_55B3_2990 = 0;
@@ -230,29 +230,29 @@ void far win_DrawYardWindow(int flags)
     }
 }
 
-extern int _fastcall f_22BF_09B0(int win);
+extern int _fastcall win_IsWinOpen(int win);
 extern void far clip_SetWin(int win);
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 
 void far o13_384C_03F8(void)
 {
-    if (f_22BF_09B0(0x1900) && fd_55B3_29A2) {
+    if (win_IsWinOpen(0x1900) && fd_55B3_29A2) {
         clip_SetWin(0x1900);
         EraseYardCursor();
         o13_384C_01E5();
         win_DrawObjectNum(0x1914);
         DrawYardCursor();
-        f_1E57_0362();
+        clip_Off();
         fd_55B3_29A2 = 0;
     }
 }
 
 void far DrawYard(void)
 {
-    if (f_22BF_09B0(0x1900)) {
+    if (win_IsWinOpen(0x1900)) {
         clip_SetWin(0x1900);
         win_DrawYardWindow(7);
-        f_1E57_0362();
+        clip_Off();
     }
 }
 
@@ -269,13 +269,13 @@ extern Handle far fd_50F6_10DA;
 extern void far hanim_SetObjectPos(int x, int y, int pic, Handle h, int id, int pri);
 extern int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri);
 extern int far fd_50F6_047E;
-extern long far f_00F8_02BE(void);
+extern long far MacTickCount(void);
 extern long far fd_50F6_109C;
 extern int far fd_50F6_10B0;
 extern void far hanim_RemoveAnimObject(Handle h, int id);
 extern void far f_171C_1C0A(long h);
 extern void far f_24AB_02AD(int font);
-extern long far f_1629_000C(char far *msg, int flags);
+extern long far MakeBalloon(char far *msg, int flags);
 extern int far fd_50F6_10BC;
 extern char far * far * far fd_50F6_10A8;
 
@@ -306,7 +306,7 @@ void far DrawSimKid(void)
         hanim_SetObjectPos(x, y, fd_3D57_0C32 + 0x1f40, fd_50F6_10DA, g_2A2A, -1);
     else
         g_2A2A = hanim_AddAnimObject(fd_50F6_10DA, x, y, fd_3D57_0C32 + 0x1f40, -1);
-    if (fd_50F6_047E == 0 && f_00F8_02BE() > fd_50F6_109C)
+    if (fd_50F6_047E == 0 && MacTickCount() > fd_50F6_109C)
         fd_50F6_10B0 = 0;
     if (g_2A3E != -1) {
         hanim_RemoveAnimObject(fd_50F6_10DA, g_2A3E);
@@ -318,7 +318,7 @@ void far DrawSimKid(void)
     }
     if (fd_50F6_10B0) {
         f_24AB_02AD(2);
-        g_2A36 = f_1629_000C(fd_50F6_10A8[fd_50F6_10BC], 0);
+        g_2A36 = MakeBalloon(fd_50F6_10A8[fd_50F6_10BC], 0);
         f_24AB_02AD(0);
         f_208F_0419(&sz, 30000);
         y = fd_3D57_0C2E;
@@ -713,7 +713,14 @@ extern void far clip_Push(void);
 extern void far f_1FAA_0006(struct Pt far *pts, int a, int b);
 extern void far clip_Pop(void);
 
-/* SCAFFOLD BEGIN: InvertPatch draft: one byte short. Original layout (worker resA): i -2, org -6/-4 directly above pts[4] (-0x16), CSE temps x*28 -0x1c, y*10 -0x1a, left -0x18, top -0x1e; h and v live in SI/DI with no BP homes and x, y are not enregistered; the first org.h is computed as x*28 + (left - y*10). The sibling DrawSimColonies became exact once org was dropped (h/v homes) and color = c == 0 ? 3 : 2 */
+
+extern unsigned char far fd_3D57_0164[12][16];
+extern unsigned char far fd_3D57_00A4[12][16];
+extern int far f_1B4E_000D(int color);
+extern void far f_1CE2_046D(struct Rect far *rect, int color);
+extern int far fd_50F6_07BC[2];
+extern void far WinPrintf(char far *format, ...);
+extern void far XferPatch(void);
 void far InvertPatch(int x, int y)
 {
     struct Pt pts[4];
@@ -749,7 +756,7 @@ void far InvertPatch(int x, int y)
     clip_Pop();
 }
 
-/* SCAFFOLD END */
+
 
 extern unsigned char far fd_3D57_0164[12][16];
 extern unsigned char far fd_3D57_00A4[12][16];
@@ -845,7 +852,7 @@ void far DrawColonyBars(int mode)
 
 extern int far fd_50F6_07BC[2];
 extern void far WinPrintf(char far *format, ...);
-extern void far f_015B_0798(void);
+extern void far XferPatch(void);
 
 void far YardArea(struct Event far *ev)
 {
@@ -865,7 +872,7 @@ void far YardArea(struct Event far *ev)
         fd_50F6_07BC[0] = x;
         fd_50F6_07BC[1] = y;
         if (ev->modifiers & 0x6000)
-            f_015B_0798();
+            XferPatch();
         DrawYardCursor();
     }
 }

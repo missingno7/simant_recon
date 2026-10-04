@@ -48,7 +48,7 @@ extern int far fd_50F6_4B16;
 extern struct Instr far fd_50F6_0000[];
 extern int far fd_55B3_6BA4[];
 
-/* SCAFFOLD BEGIN: unclaimed AdLib volume/pitch draft */
+
 void far f_2815_0165(int instr, int note, int vol, int voice)
 {
     unsigned char far *p;
@@ -68,7 +68,7 @@ void far f_2815_0165(int instr, int note, int vol, int voice)
         f_283E_000A(voice + 0xb0, ((note / 12 + 8) << 2) + (g_6924[note % 12] >> 8));
     }
 }
-/* SCAFFOLD END */
+
 
 void far f_2815_024D(int a, int voice)
 {

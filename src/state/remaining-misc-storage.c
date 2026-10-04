@@ -1,0 +1,10 @@
+struct Pnt { int x; int y; };
+struct Pnt far fd_50F6_07CA;
+struct Pnt far fd_50F6_0852;
+struct Pnt far fd_50F6_08DE;
+struct Pnt far fd_50F6_08EC;
+struct Pnt far fd_50F6_09F2;
+char far fd_50F6_0B0A[4];
+char far * far fd_50F6_0B22;
+unsigned char far fd_50F6_1114[1200];
+int far fd_50F6_15C4[30][40];

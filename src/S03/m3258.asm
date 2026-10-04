@@ -3,6 +3,7 @@
 
 _DATA	segment word public 'DATA'
 	extrn	_g_3D20:byte
+	extrn	_packed_tail_masks:byte
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -187,7 +188,9 @@ _o03_3258_04CE	proc	far
 	shr ax, 1
 	mov word ptr [bp-4], ax
 	and bx, 1
-	mov al, byte ptr ss:[bx+68B4h]
+	assume ss:DGROUP
+	mov al, byte ptr ss:_packed_tail_masks[bx]
+	assume ss:nothing
 	mov byte ptr [bp-0Ch], al
 	mov ax, word ptr es:[di]
 	add ax, 1

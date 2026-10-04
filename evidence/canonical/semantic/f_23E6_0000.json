@@ -1,0 +1,283 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "f_23E6_0000",
+  "module": "root:23E6",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "bc65c4b44fbc62b0d50041b65401aab15bf2660f5b55a4a73519318af2363ab8",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_23E6_0000.json",
+    "sha256": "93340ca87d10bd2679b9905d882bd7f2867edc17a692c50a1450230cc9540508"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_23E6_0000",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/module.c",
+      "sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/evidence.json",
+      "sha256": "33dd6ae134d51692b0d719e9694c7563d92afdac0a584b68178759a9058789ca"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be"
+      },
+      {
+        "path": "tools/behavior_suites/lists.py",
+        "sha256": "6e1ad2f73a5812aa18f44888d3de732736c4f9656c3bcdb42a9ad473ceb31adf"
+      },
+      {
+        "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/run.json",
+        "sha256": "01a831a0e6f29a1e564d2140a065b1b3dcfbe30f2768632df19b873c5fe5caff"
+      },
+      {
+        "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/negative-controls.json",
+        "sha256": "d1999c3ab24de49b07c50c96da0b39d68701e4a98619f1d2965be80ea00c6a17"
+      },
+      {
+        "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/contract-review.json",
+        "sha256": "f729e52b2d65861ff8ee737407b0bdf9cceee35c0ff1777452cab995f7dafb17"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0x23E6",
+      "off": "0x0000",
+      "size": "0x009F"
+    },
+    "original_disassembly_identity": {
+      "obtained_with": "python tools/context.py f_23E6_0000 (no --raw)",
+      "executable": "assets/SIMANT.EXE",
+      "executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "oracle_lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "recording": "Mnemonic/address analysis only; no original byte arrays or capsules copied."
+    },
+    "branch_map": [
+      {
+        "address": "root:23E6:0018",
+        "mnemonic": "jg",
+        "target": "root:23E6:003D",
+        "taken": "top > line: source line 30 else arm sets off=n=0",
+        "fallthrough": "top <= line: source line 30 body",
+        "width_signedness": "16-bit signed int comparison"
+      },
+      {
+        "address": "root:23E6:0023",
+        "mnemonic": "jg",
+        "target": "root:23E6:0037",
+        "taken": "visible + n > line: source line 31 else arm selects topOff and preserves n=top",
+        "fallthrough": "visible + n <= line: source lines 31-33 select endOff and assign n=visible+n",
+        "width_signedness": "16-bit addition followed by signed int comparison; valid-cache domain keeps this sum in range"
+      },
+      {
+        "address": "root:23E6:0035",
+        "mnemonic": "jmp",
+        "target": "root:23E6:0045",
+        "source": "source lines 31-33; skips the topOff/zero merge after selecting endOff"
+      },
+      {
+        "address": "root:23E6:003B",
+        "mnemonic": "jmp",
+        "target": "root:23E6:0042",
+        "source": "source lines 34-35; merges topOff into the off assignment"
+      },
+      {
+        "address": "root:23E6:005C",
+        "mnemonic": "jmp",
+        "target": "root:23E6:0079",
+        "source": "source line 39; enters the while-condition before the first scan"
+      },
+      {
+        "address": "root:23E6:0065",
+        "mnemonic": "je",
+        "target": "root:23E6:0081",
+        "taken": "*s == 0: source lines 40-41 break to unlock",
+        "fallthrough": "*s != 0: source lines 42-44 measure and skip this string, then increment n",
+        "width_signedness": "one-byte zero comparison; signedness does not affect equality"
+      },
+      {
+        "address": "root:23E6:007F",
+        "mnemonic": "jl",
+        "target": "root:23E6:005E",
+        "taken": "n < line: source line 39 repeats from the current far pointer",
+        "fallthrough": "n >= line: source lines 46-47 unlock and return",
+        "width_signedness": "16-bit signed int comparison"
+      }
+    ],
+    "call_map": [
+      {
+        "address": "root:23E6:004D",
+        "callee": "f_171C_1B84",
+        "source": "module.c:38",
+        "order": 1,
+        "arguments": "address of list->text handle (far pointer to far pointer); original pushes segment and offset from list fields at +0x0C/+0x0A",
+        "result": "far text base in DX:AX; source adds 16-bit off to the offset while preserving the segment"
+      },
+      {
+        "address": "root:23E6:0069",
+        "callee": "_fstrlen",
+        "source": "module.c:42",
+        "order": "0..N, only after while condition is true and *s != 0",
+        "arguments": "current far string pointer ES:SI (source s)",
+        "result": "16-bit unsigned length in AX; source advances by length and then one byte for the NUL"
+      },
+      {
+        "address": "root:23E6:008C",
+        "callee": "f_171C_1BBA",
+        "source": "module.c:46",
+        "order": "last, exactly once on every normal path after the lock call",
+        "arguments": "list->text handle reread from the original list argument",
+        "result": "ignored; releases the lock"
+      }
+    ],
+    "entry_and_return_abi": {
+      "source_signature": "char far * _fastcall f_23E6_0000(int line, struct List far *list)",
+      "original": "line arrives in AX and is saved to its BP home; far List pointer is stack-passed at BP+6/BP+8; retf 4 consumes that pointer argument; far char pointer result is DX:AX",
+      "cross_check": "context disassembly of same-TU caller f_23E6_009F at offsets 00D1-00D9 pushes the List segment/offset, loads line into AX, then calls f_23E6_0000"
+    },
+    "memory_state_inventory": {
+      "direct_reads": [
+        {
+          "item": "list->top",
+          "address": "+0x04",
+          "width": "16-bit signed int",
+          "when": "always"
+        },
+        {
+          "item": "list->visible",
+          "address": "+0x00",
+          "width": "16-bit signed int",
+          "when": "read for the range test when top <= line; reread on the endOff arm to assign n=visible+n"
+        },
+        {
+          "item": "list->endOff",
+          "address": "+0x08",
+          "width": "16-bit int",
+          "when": "top <= line and visible+top <= line"
+        },
+        {
+          "item": "list->topOff",
+          "address": "+0x06",
+          "width": "16-bit int",
+          "when": "top <= line and visible+top > line"
+        },
+        {
+          "item": "list->text handle",
+          "address": "+0x0A/+0x0C",
+          "width": "32-bit far pointer",
+          "when": "once for lock and reread once for unlock"
+        },
+        {
+          "item": "text bytes",
+          "width": "8-bit",
+          "when": "one sentinel byte per scan iteration; _fstrlen reads the current NUL-terminated row when the sentinel is nonzero"
+        }
+      ],
+      "not_read": [
+        {
+          "item": "list->count",
+          "address": "+0x02",
+          "reason": "no instruction in the extent reads it"
+        }
+      ],
+      "direct_writes": "None outside stack homes and outgoing call frames.",
+      "helper_effects": "The source and original execute one lock helper before scanning, zero or more original _fstrlen calls in scan order, then one unlock helper. Existing evidence records original lock/age changes, global age, all nonstack writes, and call traces; the function itself does not write the List or text."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "struct_layout": "16-bit int fields: visible +0, count +2, top +4, topOff +6, endOff +8; far text handle at +0x0A (offset word) and +0x0C (segment word).",
+      "control_values": "Zero is the NUL/sentinel and reset value; one is the row terminator skip and n increment. Comparisons on n/line are signed 16-bit; string length is unsigned 16-bit.",
+      "pointer_math": "Lock returns a far pointer; off and strlen-derived increments update its 16-bit offset with target wrap behavior and retain the same segment. The source expresses skip as s += _fstrlen(s); s++; the original increments length then adds it to SI, equivalent modulo 2^16.",
+      "return": "Current far pointer returned as DX:AX. The handle pointer passed to lock/unlock is distinct from the returned text pointer."
+    },
+    "static_axes": {
+      "algorithm_and_cfg": "Every original conditional and unconditional branch in the 0x009F-byte extent is mapped above. Both cache-selection branches, reset path, pre-scan condition, NUL break and signed scan loop correspond to source lines 29-47.",
+      "calls_and_order": "All three call sites are mapped. The lock is unconditional and first; strlen is loop-conditional; unlock is unconditional and last. Source argument expressions and far-pointer ABI agree with the original.",
+      "observable_effects": "Return far pointer, list-field/text reads, original helper calls, helper state changes, no direct nonstack writes and caller ABI are accounted for.",
+      "dependencies": "f_171C_1B84 obtains the locked handle's far data pointer, f_171C_1BBA releases that handle, and the original _fstrlen scans the row. The retained behavior evidence confirms all three original helpers execute in positive controls; this audit does not replace or inline their bodies.",
+      "widths_and_addresses": "16-bit signed list/index arithmetic, 16-bit unsigned strlen result, byte sentinel, field offsets, far pointer offset-only traversal, and DX:AX return are documented above.",
+      "completeness_scope": "No semantic gap found for the registered list-text-lookup-v1 valid-cache contract. The finite suite is corroboration, not a substitute for the static path comparison."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:23E6:0073",
+        "original_instruction": "mov cx, word ptr [bp-0x0A]",
+        "source_anchor": "module.c:42-44; no source operation corresponds to this reload",
+        "explanation": "The reload writes only volatile CX and changes no flags. On loop continuation ES is reloaded from the saved segment at 0x005E; _fstrlen initializes its own working state. On loop exit the unlock call precedes the return, which reloads DX:AX from saved values. CX is not consumed on either path. It is therefore a dead compiler-generated register reload, not a semantic difference."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "suite": {
+        "id": "list-text-lookup-v1",
+        "path": "tools/behavior_suites/lists.py",
+        "sha256": "6e1ad2f73a5812aa18f44888d3de732736c4f9656c3bcdb42a9ad473ceb31adf"
+      },
+      "positive_control": {
+        "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/run.json",
+        "sha256": "01a831a0e6f29a1e564d2140a065b1b3dcfbe30f2768632df19b873c5fe5caff",
+        "directed": 600,
+        "randomized": 10000,
+        "mismatches": 0,
+        "errors": 0,
+        "original_and_candidate_executed": true,
+        "observed_effects": "far pointer return, list cache, text, lock count and block age, global age, ordered lock/unlock/strlen calls, all nonstack writes, caller ABI"
+      },
+      "negative_control": {
+        "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/negative-controls.json",
+        "sha256": "d1999c3ab24de49b07c50c96da0b39d68701e4a98619f1d2965be80ea00c6a17",
+        "mutation": "n += 2",
+        "detected": true,
+        "mismatch_categories": [
+          "return",
+          "trace"
+        ],
+        "execution_errors": 0
+      },
+      "review": {
+        "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/contract-review.json",
+        "sha256": "f729e52b2d65861ff8ee737407b0bdf9cceee35c0ff1777452cab995f7dafb17",
+        "status": "APPROVED",
+        "reviewed_at": "2026-10-02"
+      },
+      "limits": [
+        "Finite randomized validation does not exhaust all integer and string-byte states.",
+        "Invalid/discarded handles, lock-depth violations, and cross-segment huge strings are outside the valid list contract."
+      ]
+    },
+    "review_notes": [
+      "Conclusion is scoped to valid cached-list state and single-segment text, matching the registered contract; malformed handles, invalid lock depths, and cross-segment huge strings remain outside it.",
+      "Source and current registry evidence hashes were checked against evidence/behavior/manifest.json. The original disassembly was obtained from the locked SIMANT.EXE through context.py without --raw; no original bytes were copied into this receipt."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

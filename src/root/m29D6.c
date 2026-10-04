@@ -25,14 +25,13 @@ unsigned g_7600[] = {
 
 extern void far f_29F0_002A(int port, char value);
 
+extern void far f_29BF_00E6(int reg, int value);
+extern int far fd_50F6_4B14;
 void far f_29D6_000A(int a, int note, int vol, int chan)
 {
     int f;
 
-    _asm {
-        mov cl, 5
-        shl chan, cl
-    }
+    chan <<= 5;
     f = g_75E8[note % 12] >> note / 12;
     f_29F0_002A(0x205, (f & 0xf) + ((char)chan + 0x80));
     f_29F0_002A(0x205, f >> 4);

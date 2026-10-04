@@ -1,0 +1,333 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "f_171C_09CC",
+  "module": "root:171C",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_171C_09CC.json",
+    "sha256": "86eec4845d02974e8b6764fe5884360cb7da5a796a5cbbfed78e8a423f8ed5a8"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_171C_09CC",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "function_lines": "406-422"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/evidence.json",
+      "sha256": "3eb10d7520c4f48c708d5c16d18e16b66d72f7262cc39d8a2863c9f4fd90f88d"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "behavior registration manifest"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "no-raw original disassembly tool"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "immutable oracle lock"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original oracle identity; no bytes copied into receipt"
+      },
+      {
+        "path": "tools/behavior_suites/archive/memory-final-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d",
+        "role": "executed differential suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/memory-final-20261002/tools/behavior.py",
+        "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "role": "pinned behavior runner"
+      },
+      {
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/ordered-sequence-plan.json",
+        "sha256": "d7a75b6979c978a5f0214bd4cee7c1afe387f35e36fa975dd75e03f109e3485c",
+        "role": "persistent sequence plan"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+        "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "role": "registered reconstructed C whole module"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/evidence.json",
+        "sha256": "3eb10d7520c4f48c708d5c16d18e16b66d72f7262cc39d8a2863c9f4fd90f88d",
+        "role": "registered behavior evidence"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/run.json",
+        "sha256": "3af3551dfc2b6563bffbb029808bbbd2a494086d0b5b6467cfbe07180c7603f1",
+        "role": "pinned execution evidence"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/negative-controls.json",
+        "sha256": "c067d8725693b4dc50c3ce69ba20518a084e14cffd406bb2ea5115715389b514",
+        "role": "pinned negative-control evidence"
+      },
+      {
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/f_171C_09CC.worker-report.json",
+        "sha256": "5e2a3087256aac608e5258adba9a21b58978d77c79d827bc5cb854c6e1b78396",
+        "role": "per-function differential report"
+      },
+      {
+        "path": "build/workers/behavior_memory/final-pinned-20261002/snapshot/build/workers/behavior_memory/final-run/f_171C_09CC-case-ledger.jsonl.gz",
+        "sha256": "61ada385364efb9cb94e61c89f6f5bebc466e830508aa0926718c46c7f6309fa",
+        "role": "per-function differential case ledger"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "171C",
+      "off": "09CC",
+      "size": 144
+    },
+    "disassembly_research": {
+      "tool": {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "invocation": "python tools/context.py f_171C_09CC (no --raw)"
+      },
+      "oracle": {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      "rendered_text": "disassembly.txt in this worker directory; addresses/mnemonics only, no byte arrays"
+    },
+    "branch_map": [
+      {
+        "address": "0x09E9",
+        "mnemonic": "jbe",
+        "target": "0x0A02",
+        "assembly_condition": "b->paras <= paras",
+        "source_anchor": "module.c:412-415",
+        "width_signedness": "unsigned 16-bit paragraph words",
+        "taken_edge": "Take the adjacent-block growth path; otherwise test the current block slack."
+      },
+      {
+        "address": "0x09F2",
+        "mnemonic": "jae",
+        "target": "0x0A33",
+        "assembly_condition": "b->paras >= paras + 0x20",
+        "source_anchor": "module.c:413-414",
+        "width_signedness": "unsigned 16-bit addition and comparison",
+        "taken_edge": "Skip the early-success return and resize the current block."
+      },
+      {
+        "address": "0x0A15",
+        "mnemonic": "jae",
+        "target": "0x0A54",
+        "assembly_condition": "SEG(next) >= SEG(g_91A8)",
+        "source_anchor": "module.c:416-418",
+        "width_signedness": "unsigned 16-bit segment comparison",
+        "taken_edge": "Reject when next is at or beyond heap end."
+      },
+      {
+        "address": "0x0A1D",
+        "mnemonic": "jne",
+        "target": "0x0A54",
+        "assembly_condition": "next->type != 0x80",
+        "source_anchor": "module.c:417-418",
+        "width_signedness": "unsigned-byte type compared to 0x80",
+        "taken_edge": "Reject unless next is free."
+      },
+      {
+        "address": "0x0A2F",
+        "mnemonic": "jb",
+        "target": "0x0A54",
+        "assembly_condition": "next->paras + b->paras < paras",
+        "source_anchor": "module.c:417-418",
+        "width_signedness": "unsigned 16-bit paragraph sum wraps modulo 65536",
+        "taken_edge": "Reject when combined adjacent space is too small."
+      }
+    ],
+    "returns": [
+      {
+        "address": "0x0A00",
+        "source_anchor": "module.c:414",
+        "value": "AX=1; true; no helper call or state write."
+      },
+      {
+        "address": "0x0A5B",
+        "source_anchor": "module.c:418-419",
+        "value": "AX=0; false; no helper call or state write on rejection."
+      }
+    ],
+    "call_map": [
+      {
+        "address": "0x0A3D",
+        "callee": "f_171C_0160",
+        "source_anchor": "module.c:420",
+        "order": "First, as the first argument to f_171C_068C; evaluated once.",
+        "arguments": "(b, 0); merge flag is signed int zero. Returns Block far * consumed by the outer call. Same-TU near call; caller cleans 4 argument bytes."
+      },
+      {
+        "address": "0x0A4B",
+        "callee": "f_171C_068C",
+        "source_anchor": "module.c:420",
+        "order": "Immediately after f_171C_0160 returns.",
+        "arguments": "(returned block, paras, type); paras unsigned 16-bit, type int 16-bit passed then stored as the block type byte. Same-TU near call; caller cleans 8 argument bytes."
+      }
+    ],
+    "memory_state": {
+      "reads": [
+        "h far master-pointer slot; resulting block header at segment SEG(*h)-2, offset 0; b.paras at +0x06.",
+        "For growth: g_91A8 segment at +0x91AA; next header type byte +0x08 and paras word +0x06."
+      ],
+      "writes": [
+        "No direct nonstack write on early true/false returns.",
+        "On successful resize, writes are delegated in strict order to f_171C_0160(b,0), then f_171C_068C(returnedBlock,paras,type), which update free-list and allocator counters/header state."
+      ]
+    },
+    "constants_widths_pointer_arithmetic": {
+      "findings": [
+        "0x20 is a 16-bit unsigned paragraph slack threshold; equality takes the resize path because the fast return is strictly b.paras < paras+0x20.",
+        "0x80 is the unsigned-byte free-block type.",
+        "End and size comparisons are unsigned; next->paras + b->paras is a 16-bit unsigned sum; paras is unsigned 16-bit; return is int 16-bit."
+      ],
+      "pointer_accesses": [
+        "HDR(h) loads the far master pointer from *h, subtracts two paragraphs from its segment, and uses header offset 0.",
+        "The adjacent header is at segment SEG(b)+b->paras, offset zero. Heap-end comparison uses segment only.",
+        "No payload-byte copy or master-handle update occurs in this function body."
+      ]
+    },
+    "static_axes": {
+      "algorithm_and_control_flow": {
+        "complete": true,
+        "evidence": "Every conditional/loop site in the complete 0x09CC function extent is mapped above, including taken/fallthrough effects and returns."
+      },
+      "constants_widths_signedness": {
+        "complete": true,
+        "evidence": [
+          "0x20 is a 16-bit unsigned paragraph slack threshold; equality takes the resize path because the fast return is strictly b.paras < paras+0x20.",
+          "0x80 is the unsigned-byte free-block type.",
+          "End and size comparisons are unsigned; next->paras + b->paras is a 16-bit unsigned sum; paras is unsigned 16-bit; return is int 16-bit."
+        ]
+      },
+      "pointer_calculation_and_heap_layout": {
+        "complete": true,
+        "evidence": [
+          "HDR(h) loads the far master pointer from *h, subtracts two paragraphs from its segment, and uses header offset 0.",
+          "The adjacent header is at segment SEG(b)+b->paras, offset zero. Heap-end comparison uses segment only.",
+          "No payload-byte copy or master-handle update occurs in this function body."
+        ]
+      },
+      "calls_arguments_order_and_abi": {
+        "complete": true,
+        "evidence": "All observed calls are listed with source anchor, argument values, call ordering, call distance and caller stack cleanup where applicable."
+      },
+      "memory_and_state_effects": {
+        "complete": true,
+        "evidence": [
+          "h far master-pointer slot; resulting block header at segment SEG(*h)-2, offset 0; b.paras at +0x06.",
+          "For growth: g_91A8 segment at +0x91AA; next header type byte +0x08 and paras word +0x06.",
+          "No direct nonstack write on early true/false returns.",
+          "On successful resize, writes are delegated in strict order to f_171C_0160(b,0), then f_171C_068C(returnedBlock,paras,type), which update free-list and allocator counters/header state."
+        ]
+      },
+      "observable_side_effects": {
+        "complete": true,
+        "evidence": "Heap/list/counter effects are delegated at the mapped helper boundaries; diagnostics and Punt/sprintf effects and their order are included where applicable."
+      },
+      "dependency_boundaries": {
+        "complete": true,
+        "evidence": "Same-TU near calls: f_171C_0160 and f_171C_068C. Their source bodies are in the same registered root:171C translation unit; this function has no external call boundary."
+      },
+      "residual_semantics": {
+        "complete": true,
+        "evidence": "No branch, condition, constant, width, pointer calculation, call, ordered side effect, memory access, or state update in the original extent is left without a C counterpart."
+      }
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "0x09CC",
+        "source_anchor": "module.c:406-422",
+        "explicit_explanation": "Pinned production candidate is not strict-byte exact: length 146 != target 144, bytes differ (first at +0x9, 85 differing). The complete original CFG and all observable operations map to the source body; the residual is candidate instruction encoding/register/frame/ordering output under MSC, with no semantic difference identified by this audit. This receipt does not claim byte exactness."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "contract": "f_171C_09CC-valid-live-ralloc-sequences-v1",
+      "suite": {
+        "path": "tools/behavior_suites/archive/memory-final-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d",
+        "id": "ralloc-memory-final-20261002"
+      },
+      "run_report": {
+        "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/run.json",
+        "sha256": "3af3551dfc2b6563bffbb029808bbbd2a494086d0b5b6467cfbe07180c7603f1"
+      },
+      "matched": 265,
+      "calls": 265,
+      "mismatches": 0,
+      "errors": 0,
+      "target_invocations": 265,
+      "negative_control": {
+        "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/negative-controls.json",
+        "sha256": "c067d8725693b4dc50c3ce69ba20518a084e14cffd406bb2ea5115715389b514",
+        "errors": 0,
+        "mismatches_detected": 1,
+        "categories": [
+          "ranges",
+          "nonstack_memory"
+        ],
+        "mutant_executed": true,
+        "baseline_matches": true
+      },
+      "limits": [
+        "Finite directed plus deterministic seeded randomized differential run; not exhaustive.",
+        "The candidate module includes SCAFFOLD regions outside recovered target bodies.",
+        "Candidate target byte extents remain nonexact; any acceptance must be separate BEHAVIOR_EXACT and must not alter historical EXACT."
+      ],
+      "contract_excluded": [
+        {
+          "effect": "Invalid/corrupt heap and invalid-handle rejection paths",
+          "reason": "The corpus is intentionally restricted to structurally valid initialized heaps and live handle identities."
+        },
+        {
+          "effect": "Rootgate Punt/nonreturning paths",
+          "reason": "No Punt result is replaced with a synthetic allocator failure; terminal Punt behavior is outside this valid-state corpus."
+        },
+        {
+          "effect": "Unsequenced external callers, concurrency, and arbitrary aliasing",
+          "reason": "The run covers only the pinned deterministic operation sequences and their listed inputs."
+        }
+      ],
+      "case_ledger": {
+        "path": "build/workers/behavior_memory/final-pinned-20261002/snapshot/build/workers/behavior_memory/final-run/f_171C_09CC-case-ledger.jsonl.gz",
+        "sha256": "61ada385364efb9cb94e61c89f6f5bebc466e830508aa0926718c46c7f6309fa"
+      }
+    },
+    "review_notes": [
+      "Static correspondence covers the entire disassembled body and registered C function, including validation/error and loop paths present in the body.",
+      "Differential evidence is finite: valid initialized paragraph-aligned heaps and deterministic operation sequences only; the contract excludes corrupt/invalid heap and handle rejection behavior, terminal Punt behavior, unsequenced callers, concurrency, and arbitrary aliasing.",
+      "Calls into Punt, WinPrintf, compiler/runtime helpers, and any external host/VM behavior remain dependency boundaries. This audit proves the call sites and arguments/order, not those callees internals.",
+      "The source is a behavior reconstruction candidate; strict historical byte identity remains independently false and is not upgraded by this receipt."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

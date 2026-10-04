@@ -43,15 +43,22 @@ g_6B44          dw      1               ; channel 0 sample (4-channel mixer)
                 dw      1
 g_6B48          dw      3               ; speaker output state (0, 1, 2)
 _fd_55B3_6B4A   dw      10h             ; DAC port base (out to port + 1)
+_fd_55B3_6B4C label byte
 g_6B4C          db      CHAN_SIZE dup (0)
+_fd_55B3_6B4E equ g_6B4C+2
+                public _fd_55B3_6B4C, _fd_55B3_6B4E
 g_6B60          db      CHAN_SIZE dup (0)
 g_6B74          db      CHAN_SIZE dup (0)
 g_6B88          db      CHAN_SIZE dup (0)
 _fd_55B3_6B9C   dw      offset out_speaker      ; current output routine
+                public _fd_55B3_6B9E
+_fd_55B3_6B9E label word
 g_6B9E          dw      offset DGROUP:vol_tab   ; volume table base
 _fd_55B3_6BA0   dw      0               ; Sound Blaster DSP write port
                 dw      0
 ; AdLib output level table (indexed by sample value, read by f_2815_0165 in steps of 2)
+                public _fd_55B3_6BA4
+_fd_55B3_6BA4 label byte
 g_6BA4          label   byte
                 db      40h, 38h, 33h, 30h, 2Dh, 2Bh, 29h, 28h, 26h, 25h, 24h, 23h, 22h, 21h, 20h, 20h
                 db      1Fh, 1Eh, 1Eh, 1Dh, 1Ch, 1Ch, 1Bh, 1Bh, 1Ah, 1Ah, 1Ah, 19h, 19h, 18h, 18h, 18h

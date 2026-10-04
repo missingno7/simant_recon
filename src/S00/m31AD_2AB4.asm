@@ -10,6 +10,7 @@
 _DATA	segment word public 'DATA'
 	extrn	_g_3D20:byte
 	extrn	_g_3DAE:byte
+	extrn	_g_3DFC:byte
 	extrn	_g_3DB0:byte
 	extrn	_g_3DB4:byte
 	extrn	_g_3DD4:byte
@@ -38,7 +39,7 @@ _o00_31AD_2AB4	proc	far
 	push di
 	mov cx, 15Eh
 	xor ax, ax
-	mov di, 3DFCh
+	mov di, OFFSET DGROUP:_g_3DFC
 	mov es, word ptr _g_3DAE
 L2AC8:
 	stosw
@@ -66,7 +67,7 @@ _o00_31AD_2AE5	proc	far
 	mov cx, 1E0h
 	mov word ptr _g_3DB4, cx
 	xor ax, ax
-	mov di, 3DFCh
+	mov di, OFFSET DGROUP:_g_3DFC
 	mov es, word ptr _g_3DAE
 L2AFD:
 	stosw

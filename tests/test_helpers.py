@@ -226,14 +226,15 @@ class IdScan(unittest.TestCase):
         self.assertEqual(idscan.padded(t, 0, 2).count("idscan_pad"), 2)
 
     def test_count_sensitivity_is_periodic(self):
-        """root:2505 is exact as promoted (N=0); one dummy extern changes some claims, and
-        17 dummies give the N=0 result again (the 17-bucket symbol hash)."""
+        """One extern changes allocation; 17 restores the current whole-TU context."""
         ctx = modctx.resolve(module="root:2505")
         pos = idscan.position(ctx.text, top=True)
         rows = variants.run(ctx, [(f"N={n}", idscan.padded(ctx.text, pos, n), "") for n in (0, 1, 17)],
                             claims_only=True, jobs=3)
         st = [{k: modctx.status_char(v) for k, v in r["result"]["claims"].items()} for r in rows]
-        self.assertTrue(all(ch == "E" for ch in st[0].values()), st[0])
+        rebuilt = {c['name'] for c in ctx.claims
+                   if c.get('current_proof') == 'HISTORICAL_EXACT_SOURCE_REBUILT'}
+        self.assertEqual({name for name, status in st[0].items() if status != 'E'}, rebuilt)
         self.assertNotEqual(st[0], st[1])
         self.assertEqual(st[0], st[2])
 

@@ -126,7 +126,7 @@ void far f_0250_01E7(void)
 
 static int g_1A2E = -1;
 
-extern int far fd_50F6_0F24;
+extern int far TERRAINset;
 extern char near g_5A97;
 extern Handle far f_1A53_00BA(int object, int kind);
 extern Handle far fd_50F6_37DE;
@@ -144,7 +144,7 @@ void far f_0250_0256(int set)
     if (g_1A2E == set)
         return;
     g_1A2E = set;
-    fd_50F6_0F24 = set;
+    TERRAINset = set;
     if ((g_5A97 & 1) || g_5A97 == 2) {
         if (fd_50F6_10EE)
             f_171C_1C0A(fd_50F6_10EE);
@@ -161,17 +161,17 @@ void far f_0250_0256(int set)
     }
 }
 
-extern int far fd_50F6_0480;
+extern int far Barrier;
 
 void far OverlayTileSet(int type, int id)
 {
     if (type == 0) {
         if (id == 0x3e9) {
             f_0250_0256(1);
-            fd_50F6_0480 = 0x90;
+            Barrier = 0x90;
         } else if (id == 0x3e8) {
             f_0250_0256(0);
-            fd_50F6_0480 = 0x50;
+            Barrier = 0x50;
         }
     }
 }
@@ -439,19 +439,19 @@ void far f_0250_0B86(void)
 
 extern void far clip_SetWin(int win);
 extern void far processEdit(struct Event far *event);
-extern void far o04_35F5_075F(void);
+extern void far OpenMiniMapWin(void);
 extern void far DoWinHelp(int mode);
 extern void far EditToolsMenu(void);
-extern void far f_015B_053C(int plane);
-extern void far f_015B_06A2(void);
-extern void far f_015B_06F5(void);
+extern void far SetMapPlane(int plane);
+extern void far GotoMyAnt(void);
+extern void far GotoSpider(void);
 extern void far GotoBQueen(void);
 extern void far GotoRQueen(void);
 extern int far fd_50F6_047E;
 extern void far SetPause(int pause);
-extern void far o05_35F5_0000(void);
-extern void far o05_35F5_0684(struct Event far *event);
-extern void far o05_35F5_0642(struct Event far *event);
+extern void far EditScentMenu(void);
+extern void far DoHealthSetY(struct Event far *event);
+extern void far DoWarnSetB(struct Event far *event);
 extern void far clip_Off(void);
 
 void far ProcEditEvent(struct Event far *event)
@@ -463,7 +463,7 @@ void far ProcEditEvent(struct Event far *event)
         processEdit(event);
         break;
     case 5:
-        o04_35F5_075F();
+        OpenMiniMapWin();
         break;
     case 6:
         DoWinHelp(2);
@@ -472,19 +472,19 @@ void far ProcEditEvent(struct Event far *event)
         EditToolsMenu();
         break;
     case 8:
-        f_015B_053C(1);
+        SetMapPlane(1);
         break;
     case 9:
-        f_015B_053C(2);
+        SetMapPlane(2);
         break;
     case 10:
-        f_015B_053C(3);
+        SetMapPlane(3);
         break;
     case 11:
-        f_015B_06A2();
+        GotoMyAnt();
         break;
     case 12:
-        f_015B_06F5();
+        GotoSpider();
         break;
     case 13:
         GotoBQueen();
@@ -496,13 +496,13 @@ void far ProcEditEvent(struct Event far *event)
         SetPause(fd_50F6_047E == 0);
         break;
     case 16:
-        o05_35F5_0000();
+        EditScentMenu();
         break;
     case 17:
-        o05_35F5_0684(event);
+        DoHealthSetY(event);
         break;
     case 18:
-        o05_35F5_0642(event);
+        DoWarnSetB(event);
         break;
     }
     clip_Off();
@@ -601,11 +601,11 @@ void far f_0250_0E15(void)
     f_0250_0F2C();
 }
 
-extern void far f_20E8_04B6(int win, ...);
+extern void far win_Open(int win, ...);
 
 void far OpenEditWindow(void)
 {
-    f_20E8_04B6(0);
+    win_Open(0);
 }
 
 void far ForceUpdateEdit(void)
@@ -619,7 +619,7 @@ void far DoEditUpdateDraw(void)
     ForceUpdateEdit();
 }
 
-extern int _fastcall f_22BF_09B0(int win);
+extern int _fastcall win_IsWinOpen(int win);
 void far f_0250_13A6(void);
 void far DrawEditGraphs(void);
 void far f_0250_13A6(void);
@@ -627,7 +627,7 @@ void far DrawEditGraphs(void);
 
 void far UpdateEdit(void)
 {
-    if (f_22BF_09B0(0)) {
+    if (win_IsWinOpen(0)) {
         clip_SetWin(0);
         f_0250_13A6();
         DrawEditGraphs();
@@ -730,10 +730,164 @@ extern unsigned char far LifeR[64][64];
  * between fd_049A and fd_04C2 (mod-17 symbol order). */
 extern void (far * far fd_50F6_37EA)(char far *src, char far *dst, int x, int y);
 
-/* SCAFFOLD BEGIN: unclaimed f_0250_1018; retained whole-module context */
+
 extern int far fd_50F6_03E0;
 extern int far fd_50F6_046A;
 
+extern unsigned char far fd_50F6_1114[30 * 40];
+extern void far clip_Push(void);
+extern long far TickCount(void);
+extern void _fastcall win_SetColorNum(int color);
+extern void far f_15D9_0006(char far *msg, struct Rect far *rect, int y);
+extern int far fd_50F6_37D2;
+extern int far fd_50F6_37D4;
+extern void far f_1B4E_003B(int x, int y, char far *image);
+extern Pnt far fd_50F6_1F26;
+extern struct Rect far fd_50F6_37D6;
+extern void far clip_Pop(void);
+extern int far MeHealth;
+extern int far HealthB;
+extern int far HealthR;
+extern int near g_3DE0;
+extern void far f_1CE2_046D(struct Rect far *rect, int color);
+extern void far f_1CE2_044D(struct Rect far *rect, int width);
+extern int near g_3DE2;
+extern int far fd_50F6_0FBA;
+extern int far f_1B4E_000D(int color);
+extern int far fd_50F6_0FFE;
+extern void far f_1CE2_0430(struct Rect far *rect);
+extern char far * far _fstrcpy(char far *dest, char far *src);
+extern char far * far * far fd_50F6_0368;
+extern char far * far _fstrcat(char far *dest, char far *src);
+extern char far * far * far fd_50F6_0324;
+extern void far win_SetObjFormatStr(int obj, char far *text);
+extern void _fastcall win_DrawTitle(int obj);
+extern int far fd_50F6_0F0C;
+extern int far fd_50F6_0F12;
+extern int far fd_50F6_0F34;
+extern void far f_2662_1120(int x, int y, Pnt far *buf, int id);
+extern void far f_16B5_0033(Pnt far *buf, int mode);
+extern int far SMode;
+extern int far Scycle;
+extern char far fd_3D57_09CC[];
+extern char far fd_3D57_09D0[];
+extern int far fd_50F6_1004;
+extern char far fd_3D57_09BC[];
+extern char far fd_3D57_09C4[];
+extern int far fd_3D57_07B2;
+extern long far fd_3D57_098E;
+extern int far SRand64(void);
+extern int far SRand2(void);
+extern int far fd_50F6_0D6E;
+extern int far fd_3D57_0992;
+extern int far fd_50F6_0EB4;
+extern char far * far * far fd_50F6_10B4;
+extern char far Dy8[8];
+extern char far Dx8[8];
+extern int far SRand32(void);
+extern int far fd_3D57_0C30;
+extern int far fd_3D57_0C28;
+extern int far fd_50F6_0470;
+extern int far fd_50F6_047A;
+extern void far f_16B5_0008(int x0, int y0, int x1, int y1, int color);
+extern int far fd_50F6_06AC;
+extern int far SRand1(int range);
+extern int far fd_50F6_0A06;
+extern char far fd_3D57_09E8[4];
+extern char far fd_3D57_09E4[4];
+extern char far fd_3D57_09F0[4];
+extern char far fd_3D57_09EC[4];
+extern char far fd_3D57_09F8[4];
+extern char far fd_3D57_09F4[4];
+extern char far fd_3D57_0A00[4];
+extern char far fd_3D57_09FC[4];
+extern char far fd_3D57_0A08[4];
+extern char far fd_3D57_0A04[4];
+extern char far fd_3D57_0A4C[8];
+extern char far fd_3D57_0A0C[8];
+extern char far fd_3D57_0A54[8];
+extern char far fd_3D57_0A14[8];
+extern char far fd_3D57_0A5C[8];
+extern char far fd_3D57_0A1C[8];
+extern char far fd_3D57_0A64[8];
+extern char far fd_3D57_0A24[8];
+extern char far fd_3D57_0A6C[8];
+extern char far fd_3D57_0A2C[8];
+extern char far fd_3D57_0A74[8];
+extern char far fd_3D57_0A34[8];
+extern char far fd_3D57_0A7C[8];
+extern char far fd_3D57_0A3C[8];
+extern char far fd_3D57_0A84[8];
+extern char far fd_3D57_0A44[8];
+extern char far fd_3D57_0A90[4];
+extern char far fd_3D57_0A8C[4];
+extern char far fd_3D57_0A9C[8];
+extern char far fd_3D57_0A94[8];
+extern char far fd_3D57_0ADC[8];
+extern char far fd_3D57_0AD4[8];
+extern char far fd_3D57_0AAC[8];
+extern char far fd_3D57_0AA4[8];
+extern char far fd_3D57_0AEC[8];
+extern char far fd_3D57_0AE4[8];
+extern char far fd_3D57_0ABC[8];
+extern char far fd_3D57_0AB4[8];
+extern char far fd_3D57_0AFC[8];
+extern char far fd_3D57_0AF4[8];
+extern char far fd_3D57_0ACC[8];
+extern char far fd_3D57_0AC4[8];
+extern char far fd_3D57_0B0C[8];
+extern char far fd_3D57_0B04[8];
+extern int far fd_50F6_0EF6;
+extern Pnt far fd_50F6_08DE;
+extern int far fd_50F6_0AD8;
+extern Pnt far fd_50F6_0852;
+extern int far fd_50F6_0ACA;
+extern int far fd_50F6_0F06;
+extern Pnt far fd_50F6_09F2;
+extern int far fd_50F6_0B06;
+extern Pnt far fd_50F6_08EC;
+extern int far fd_50F6_0AEA;
+extern int far fd_50F6_0F10;
+extern Pnt far fd_50F6_0A8A;
+extern int far fd_50F6_0C3A;
+extern Pnt far fd_50F6_0A02;
+extern int far fd_50F6_0B08;
+extern int far fd_50F6_0F2E;
+extern Pnt far fd_50F6_0AB2;
+extern int far fd_50F6_0D9A;
+extern Pnt far fd_50F6_0AA2;
+extern int far fd_50F6_0D68;
+extern int far fd_50F6_1092;
+extern Pnt far fd_50F6_04C8[];
+extern int far fd_50F6_04F6[];
+extern int far fd_50F6_04E6[];
+extern char far * far fd_50F6_04A6[];
+extern int far fd_50F6_1046;
+extern int far fd_50F6_0F3C;
+extern char far * far * far fd_50F6_020A;
+extern int far fd_50F6_1064;
+extern int far fd_50F6_0FF8;
+extern char far * far * far fd_50F6_0218;
+extern int far fd_50F6_104A;
+extern long far fd_50F6_050C;
+extern long far fd_50F6_0732;
+extern long far fd_50F6_059A;
+extern long far fd_50F6_0620;
+extern int far SRand4(void);
+extern int far fd_50F6_0F7A;
+extern char far * far * far fd_50F6_021C;
+extern int far fd_50F6_1062;
+extern int far fd_50F6_0FC0;
+extern char far * far * far fd_50F6_0234;
+extern int far fd_50F6_107C;
+extern int far fd_50F6_103A;
+extern char far * far * far fd_50F6_023A;
+extern void far f_24AB_02AD(int font);
+extern Handle far MakeBalloon(char far *msg, int flags);
+extern long far fd_50F6_07C4;
+extern Handle far f_171C_1A9E(long size, int flags, char far *name);
+extern struct Rect far fd_50F6_1104;
+extern void far f_1E57_08F5(struct Rect far *rects);
 void far f_0250_1018(int x, int y)
 {
     int v;
@@ -836,13 +990,13 @@ noscent:
         break;
     }
 }
-/* SCAFFOLD END */
+
 
 extern unsigned char far fd_50F6_1114[30 * 40];
 
 /* OPEN: residue 2 extra frame words ([bp-2],[bp-4]) and SI/DI swapped (y param in DI,
  * index in SI in the original). */
-/* SCAFFOLD BEGIN: unclaimed f_0250_129E; retained whole-module context */
+
 void far f_0250_129E(int x, int y)
 {
     int ay;
@@ -870,12 +1024,12 @@ void far f_0250_129E(int x, int y)
         fd_50F6_1114[i] = g_94E4;
     }
 }
-/* SCAFFOLD END */
+
 
 extern void far clip_Push(void);
 void far f_0250_5058(void);
 extern long far TickCount(void);
-extern void _fastcall f_21FA_00EE(int color);
+extern void _fastcall win_SetColorNum(int color);
 extern void far f_15D9_0006(char far *msg, struct Rect far *rect, int y);
 void far PreDrawSpider(void);
 void far PreDrawBalloons(void);
@@ -916,7 +1070,7 @@ void far f_0250_13A6(void)
                 g_19CE = 1;
             g_19C6 = 0;
         } else {
-            f_21FA_00EE(3);
+            win_SetColorNum(3);
             f_15D9_0006(g_19C6, &fd_50F6_110C, fd_50F6_110C.top + 4);
         }
     }
@@ -959,9 +1113,9 @@ void far f_0250_13A6(void)
     g_19CE = 0;
 }
 
-extern int far fd_50F6_0F78;
-extern int far fd_50F6_10BE;
-extern int far fd_50F6_01FE;
+extern int far MeHealth;
+extern int far HealthB;
+extern int far HealthR;
 extern int near g_3DE0;
 extern void far f_1CE2_046D(struct Rect far *rect, int color);
 extern void (far * near g_9128)(int a, int b, int c);
@@ -987,7 +1141,7 @@ void far DrawEditGraphs(void)
     int i;
     int top;
 
-    vals[0] = &fd_50F6_0F78; vals[1] = &fd_50F6_10BE; vals[2] = &fd_50F6_01FE;
+    vals[0] = &MeHealth; vals[1] = &HealthB; vals[2] = &HealthR;
     for (i = 0; i < 3; i++) {
         obj = objs[i];
         frac = ((long)*vals[i] << 16) / 100;
@@ -1026,8 +1180,8 @@ extern char far * far _fstrcpy(char far *dest, char far *src);
 extern char far * far * far fd_50F6_0368;
 extern char far * far _fstrcat(char far *dest, char far *src);
 extern char far * far * far fd_50F6_0324;
-extern void far f_22BF_059A(int obj, char far *text);
-extern void _fastcall f_21FA_0AA7(int obj);
+extern void far win_SetObjFormatStr(int obj, char far *text);
+extern void _fastcall win_DrawTitle(int obj);
 
 void far SetEditWinTitle(void)
 {
@@ -1036,11 +1190,11 @@ void far SetEditWinTitle(void)
     _fstrcpy(buf, "SimAnt");
     _fstrcat(buf, fd_50F6_0368[15]);
     _fstrcat(buf, fd_50F6_0324[fd_50F6_0EAC]);
-    f_22BF_059A(1, buf);
-    if (f_22BF_09B0(0)) {
+    win_SetObjFormatStr(1, buf);
+    if (win_IsWinOpen(0)) {
         clip_Push();
         clip_SetWin(0);
-        f_21FA_0AA7(1);
+        win_DrawTitle(1);
         clip_Pop();
     }
 }
@@ -1792,7 +1946,7 @@ extern int far fd_50F6_107C;
 extern int far fd_50F6_103A;
 extern char far * far * far fd_50F6_023A;
 extern void far f_24AB_02AD(int font);
-extern Handle far f_1629_000C(char far *msg, int flags);
+extern Handle far MakeBalloon(char far *msg, int flags);
 extern long far fd_50F6_07C4;
 extern Handle far f_171C_1A9E(long size, int flags, char far *name);
 extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void far *d);
@@ -1917,7 +2071,7 @@ void far PreDrawBalloons(void)
 
 
 /* OPEN: residue frame layout (0x58), i in DI, pic pointer in memory; logic complete. */
-/* SCAFFOLD BEGIN: unclaimed DrawBalloons; retained whole-module context */
+
 void far DrawBalloons(void)
 {
     int idx;
@@ -1943,7 +2097,7 @@ void far DrawBalloons(void)
     Handle h;
     int i;
     int row;
-    unsigned n;
+    unsigned n; /* low-word byte count retained for _fmemset */
 
     f_24AB_02AD(2);
     bpp = 2;
@@ -1971,7 +2125,7 @@ void far DrawBalloons(void)
             continue;
         WinPrintf("Vis message %s at %d,%d", fd_50F6_04A6[i], pos.x, pos.y);
         shown++;
-        hs[i] = h = f_1629_000C(fd_50F6_04A6[i], 0);
+        hs[i] = h = MakeBalloon(fd_50F6_04A6[i], 0);
         pic = (int far *)f_171C_1B84(h);
         by = pos.y - pic[5] - 4;
         bx = pos.x + 4;
@@ -1983,7 +2137,8 @@ void far DrawBalloons(void)
         balTileRect.right = balTileRect.left + wt;
         wpix = g_19BE * wt;
         n = ht * wt * rowbytes;
-        balBufHandle = f_171C_1A9E((long)(n + 4), 9, "balbuf");
+        /* Original CWD-sign-extends the 16-bit allocation sum; keep n unsigned for _fmemset. */
+        balBufHandle = f_171C_1A9E((long)(int)(n + 4), 9, "balbuf");
         balBufPtr = f_171C_1B84(balBufHandle);
         bufp = balBufPtr;
         ((int far *)bufp)[0] = g_19BE * wt;
@@ -2023,7 +2178,7 @@ void far DrawBalloons(void)
     f_24AB_02AD(0);
     fd_50F6_1092 = 0;
 }
-/* SCAFFOLD END */
+
 
 extern struct Rect far fd_50F6_1104;
 extern void far f_1E57_08F5(struct Rect far *rects);

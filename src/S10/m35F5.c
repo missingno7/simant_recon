@@ -83,7 +83,7 @@ void far o10_35F5_00D7(int x, int y, char far *s, int v)
 
 extern void (far * near g_9130)(void);
 extern char far * far * far * far fd_55B3_6054;
-extern int far f_1FD2_0542(void);
+extern int far StillDown(void);
 extern int far fd_50F6_46A8[];
 extern void far f_1FD2_0008(int x, int y, int mode, char far *s);
 int far o10_35F5_0384(char far *sel, char far * far *items);
@@ -104,7 +104,7 @@ int far o10_35F5_01C3(struct Event far *ev)
     m = ev->code & 0xff;
     if (fd_55B3_6054[0][m][0] & 0x80)
         return 0;
-    if ((!f_1FD2_0542() && (char)(ev->modifiers >> 8)) || curMenu == m)
+    if ((!StillDown() && (char)(ev->modifiers >> 8)) || curMenu == m)
         return;
     if (curMenu != -1) {
 again:
@@ -167,7 +167,8 @@ extern void far f_1B73_0A6C(void);
 extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
 extern void far free(char far *block);
 
-/* SCAFFOLD BEGIN: o10_35F5_0384 (pull-down menu) best draft: logic and length close; block order of the key switch, local slot layout and the dead old=0 store differ */
+
+extern void far f_1B73_0C80(int item);
 int far o10_35F5_0384(char far *sel, char far * far *items)
 {
     int j;
@@ -274,13 +275,13 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
             Punt("Menu data too long");
     }
     f_1FD2_02FF();
-    if (!f_1FD2_0542())
+    if (!StillDown())
         down = 0;
     k = -1;
     for (;;) {
-        if (down && !f_1FD2_0542())
+        if (down && !StillDown())
             goto done;
-        if (f_1FD2_0542() && !down)
+        if (StillDown() && !down)
             down = 1;
         if (f_1B73_032A()) {
             f_1B73_032E(&ev);
@@ -382,7 +383,7 @@ flush:
 escape:
     cur = -1;
 done:
-    if (!f_1FD2_0542() && curMenu != -1) {
+    if (!StillDown() && curMenu != -1) {
         if (cur != -1)
             f_1B73_030F((curMenu << 4) + cur - 0x2ff, 0, 0, 0);
         result = 1;
@@ -404,7 +405,7 @@ none:
     *sel = 0;
     return 1;
 }
-/* SCAFFOLD END */
+
 
 extern void far f_1B73_0C80(int item);
 

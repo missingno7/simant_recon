@@ -20,9 +20,29 @@ extern char far * far f_171C_1B84(char far * far *handle);
 extern void far f_171C_1BBA(char far * far *handle);
 extern unsigned int far _fstrlen(char far *s);
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_23E6_0000 (list line address): best draft is 3 bytes short; the original
- * reloads the string segment (mov cx,[bp-0Ah]) after "s += _fstrlen(s) + 1". */
+
+extern void _fastcall win_LockWin(int win);
+extern char far * _fastcall win_ObjAddr(int obj);
+extern void _fastcall win_UnlockWin(int win);
+extern char far * far * far f_171C_18A6(char far * far *handle, long size, int flags);
+extern char far * far * far f_171C_13CA(long size, int flags, char far *name);
+extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
+extern void far f_24AB_02AD(int font);
+extern void far clip_Push(void);
+extern void far clip_SubInclude(struct Rect far *rect);
+extern int far f_24AB_030B(void);
+extern void _fastcall win_SetColorNum(int color);
+extern void far f_24AB_042B(struct Rect far *rect, int y, char far *text);
+extern int near g_3DE2;
+extern void far clip_Pop(void);
+extern void far Punt(char far *format, ...);
+extern struct Pt far fd_50F6_47DA;
+extern int far WinPrintf(char far *format, ...);
+extern int near g_3DE0;
+extern int _fastcall win_DrawBitMap(int x, int y, int id);
+extern char far * far f_24FA_0004(char far *p, char c, unsigned int n);
+extern void far f_1F80_0081(int ticks);
+extern int far StillDown(void);
 char far * _fastcall f_23E6_0000(int line, struct List far *list)
 {
     int n;
@@ -42,29 +62,30 @@ char far * _fastcall f_23E6_0000(int line, struct List far *list)
     while (n < line) {
         if (*s == 0)
             break;
-        s += _fstrlen(s) + 1;
+        s += _fstrlen(s);
+        s++;
         n++;
     }
     f_171C_1BBA(list->text);
     return s;
 }
-/* SCAFFOLD END */
 
-extern void _fastcall f_23AE_0377(int win);
+
+extern void _fastcall win_LockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
-extern void _fastcall f_23AE_01DB(int win);
+extern void _fastcall win_UnlockWin(int win);
 
 int _fastcall f_23E6_009F(int obj, int line)
 {
     struct List far *list;
     int sel;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     list = (struct List far *)(win_ObjAddr(obj) + 0x2a);
     f_171C_1B84(list->text);
     sel = *f_23E6_0000(line, list) & 1;
     f_171C_1BBA(list->text);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
     return sel;
 }
 
@@ -72,9 +93,9 @@ int _fastcall f_23E6_0109(int obj)
 {
     int count;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     count = ((struct List far *)(win_ObjAddr(obj) + 0x2a))->count;
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
     return count;
 }
 
@@ -82,9 +103,9 @@ char far * _fastcall f_23E6_0132(int obj, int line)
 {
     char far *s;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     s = f_23E6_0000(line, (struct List far *)(win_ObjAddr(obj) + 0x2a));
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
     return s;
 }
 
@@ -94,13 +115,13 @@ void _fastcall f_23E6_016B(int obj)
     struct List far *list;
     char far *s;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     o = win_ObjAddr(obj);
     list = (struct List far *)(o + 0x2a);
     for (s = f_171C_1B84(list->text); *s; s += _fstrlen(s) + 1)
         *s &= ~1;
     f_171C_1BBA(list->text);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 void _fastcall f_23E6_01DC(int obj, int line, int sel)
@@ -109,7 +130,7 @@ void _fastcall f_23E6_01DC(int obj, int line, int sel)
     struct List far *list;
     char far *s;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     o = win_ObjAddr(obj);
     list = (struct List far *)(o + 0x2a);
     if (list->text) {
@@ -120,7 +141,7 @@ void _fastcall f_23E6_01DC(int obj, int line, int sel)
                 *s |= 1;
             else
                 *s &= ~1;
-            f_23AE_01DB(obj);
+            win_UnlockWin(obj);
         }
         f_171C_1BBA(list->text);
     }
@@ -141,7 +162,7 @@ void _fastcall f_23E6_0266(int obj, char far *text)
     char far * far *h;
     struct Rect r;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     for (n = len = 0; *(p = text + len); n++)
         len += _fstrlen(p) + 1;
     len++;
@@ -162,13 +183,13 @@ void _fastcall f_23E6_0266(int obj, char far *text)
     list->endOff = -1;
     list->text = h;
     f_24AB_02AD(0);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 extern void far clip_Push(void);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern int far f_24AB_030B(void);
-extern void _fastcall f_21FA_00EE(int color);
+extern void _fastcall win_SetColorNum(int color);
 extern void far f_24AB_042B(struct Rect far *rect, int y, char far *text);
 extern int near g_3DE2;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
@@ -207,14 +228,14 @@ void _fastcall f_23E6_0392(char far *o)
         if (*s) {
             sel = *s & 1;
             if (sel != cur) {
-                f_21FA_00EE(sel ? color1 : color0);
+                win_SetColorNum(sel ? color1 : color0);
                 cur = sel;
             }
             f_24AB_042B(r, y, s + 1);
             s += _fstrlen(s) + 1;
         } else {
             if (cur)
-                f_21FA_00EE(color0);
+                win_SetColorNum(color0);
             g_9134(r->left, y, r->right, y + h, g_3DE2);
         }
         y += h;
@@ -255,7 +276,7 @@ void _fastcall win_DrawElevator(char far *o)
     list = (struct List far *)(lo + 0x2a);
     if (list->count <= list->visible)
         return;
-    f_21FA_00EE(o[0x26]);
+    win_SetColorNum(o[0x26]);
     r.left++;
     r.right--;
     r.top += fd_50F6_47DA.y + 1;
@@ -343,7 +364,7 @@ int _fastcall f_23E6_07A2(char far *o)
     list->top++;
     list->topOff += _fstrlen(base + list->topOff) + 1;
     base += list->endOff;
-    f_21FA_00EE((*base & 1) ? o[0x27] : o[0x26]);
+    win_SetColorNum((*base & 1) ? o[0x27] : o[0x26]);
     f_24AB_042B(&r, r.bottom - h, base + 1);
     list->endOff += _fstrlen(base) + 1;
     clip_Pop();
@@ -380,7 +401,7 @@ int _fastcall PrevListLine(char far *o)
     s = base;
 found:
     list->topOff = s - base;
-    f_21FA_00EE((*s & 1) ? o[0x27] : o[0x26]);
+    win_SetColorNum((*s & 1) ? o[0x27] : o[0x26]);
     f_24AB_042B(&r, r.top, s + 1);
     list->endOff = f_24FA_0004(base + list->endOff - 2, 0, 0xffff) - base + 1;
     clip_Pop();
@@ -424,7 +445,7 @@ void _fastcall f_23E6_0A53(struct Event far *ev)
 }
 
 extern void far f_1F80_0081(int ticks);
-extern int far f_1FD2_0542(void);
+extern int far StillDown(void);
 
 void _fastcall win_ProcSliderEvent(struct Event far *ev)
 {
@@ -454,7 +475,7 @@ void _fastcall win_ProcSliderEvent(struct Event far *ev)
                 PrevListLine(lo);
                 win_DrawElevator(o);
                 f_1F80_0081(1);
-            } while (f_1FD2_0542());
+            } while (StillDown());
         }
     } else if (r.bottom - fd_50F6_47DA.y < ev->v) {
         if (ev->modifiers & 0x6800) {
@@ -465,7 +486,7 @@ void _fastcall win_ProcSliderEvent(struct Event far *ev)
                 f_23E6_07A2(lo);
                 win_DrawElevator(o);
                 f_1F80_0081(1);
-            } while (f_1FD2_0542());
+            } while (StillDown());
         }
     }
 }

@@ -240,6 +240,14 @@ int _fastcall f_2505_03B9(int axis, int win, char far *obj)
 
 extern int far win_numOfWindows;
 
+extern char far * far f_171C_1B84(char far * far *handle);
+extern void far f_171C_1BBA(char far * far *handle);
+extern void far f_1FD2_0883(int x, int y, int id, int mode, int flag);
+extern void far f_1FD2_03EB(char far *obj, int objNum);
+extern void far f_1FD2_044F(char far *w, int id);
+extern void far f_218D_01EB(void);
+extern void far f_1FD2_0438(int objNum);
+extern void far f_1FD2_049C(int id);
 int _fastcall f_2505_0453(int obj, int kind)
 {
     int win;

@@ -1,13 +1,13 @@
 /* Overlay section S08, code frame 35F5: world generation (RandWorld unit). */
 
 extern int far fd_3D57_07CC;
-extern int far fd_50F6_0FBA;
-extern int far fd_50F6_0FFE;
-extern int far CurExpTool;
-extern int far fd_50F6_073A;
-extern int far fd_50F6_06AA;
-extern int far fd_50F6_0850;
-extern int far fd_50F6_07C8;
+int far fd_50F6_0FBA;
+int far fd_50F6_0FFE;
+int far CurExpTool;
+int far fd_50F6_073A;
+int far fd_50F6_06AA;
+int far fd_50F6_0850;
+int far fd_50F6_07C8;
 
 extern unsigned char far MapA[128][64];
 extern unsigned char far MapB[64][64];
@@ -42,15 +42,15 @@ extern int far fd_50F6_035E;
 extern int far fd_50F6_036C;
 extern int far fd_3D57_02B4[2];
 extern int far fd_3D57_02B8[2];
-extern int far FoodB;
-extern int far FoodR;
+int far FoodB;
+int far FoodR;
 extern int far fd_50F6_1040;
-extern int far HealthB;
-extern int far HealthR;
+int far HealthB;
+int far HealthR;
 extern unsigned long far fd_50F6_0472;
 extern int far fd_50F6_09FA;
 extern int far fd_50F6_0A00;
-extern int far Cycle;
+int far Cycle;
 extern int far fd_50F6_0FFA;
 extern int far fd_50F6_0FB6;
 extern int far fd_50F6_0508[2];

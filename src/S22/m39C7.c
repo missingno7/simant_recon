@@ -56,13 +56,13 @@ extern int far IsYellowAnt(int life);
 extern int far FindAntIndex(int plane, int x, int y, int life);
 extern int far fd_50F6_07C0;
 extern int far fd_50F6_04E2;
-extern int far fd_50F6_0A8E;
+int far fd_50F6_0A8E;
 extern int far fd_50F6_084E;
 extern int far fd_50F6_08DA;
 extern int far fd_50F6_08E2;
 extern int far fd_50F6_09F0;
 void far SetGoalsY(int plane, int x, int y);
-extern int far fd_50F6_0AA0;
+int far fd_50F6_0AA0;
 extern int far IsItDigable(int plane, int x, int y);
 extern int far GetMap(int plane, int x, int y);
 extern int far IsThisGrass(int plane, int tile);
@@ -293,9 +293,9 @@ extern int far fd_50F6_0AD6;
 extern int far fd_50F6_0AC6;
 extern int far fd_50F6_0AE8;
 extern int far fd_50F6_048A;
-extern int far fd_50F6_0B1E;
-extern int far fd_50F6_0C38;
-extern int far fd_50F6_0C3E;
+int far fd_50F6_0B1E;
+int far fd_50F6_0C38;
+int far fd_50F6_0C3E;
 extern int far fd_50F6_0D6C;
 
 void far ResetYellowVars(int plane, int x, int y)

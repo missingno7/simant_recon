@@ -1,0 +1,627 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "DrawMapCursor",
+  "module": "S12:384C",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "d504c8f483373a6ac9b0f6dac36a2ed9cfa80b3a9e0d72efe656258a1156790a",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/DrawMapCursor.json",
+    "sha256": "d40aac74106f86a115d56f01ca04c3aa6c98b6a1fa18306705490f92fce2e41a"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "DrawMapCursor",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+      "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/evidence.json",
+      "sha256": "088fcdbfce80ba2838939df6a66904bbad765530afdec664b228ca971671d224"
+    },
+    "inputs": [
+      {
+        "path": "build/workers/dos_static_audit_instructions.md",
+        "sha256": "925289751d7b969d6cf3269db46f502d0133c94e5210cb35ae2f9dbfb6ff212a"
+      },
+      {
+        "path": "docs/tu-evidence.md",
+        "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26"
+      },
+      {
+        "path": "docs/codegen-rules.md",
+        "sha256": "3ebff671acfb39d8e482163ffb0cc4294e76bcd669fd5099cda5a7a9744840d4"
+      },
+      {
+        "path": "README.md",
+        "sha256": "eef0ab97d6cac61fe607ffc8101932389608cd96cd043adfcfa39bfc99c0b632"
+      },
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be"
+      },
+      {
+        "path": "tools/diag.py",
+        "sha256": "b82fb81504e6a1fdc6f5dc460aa346ea408121e6701537cb7f934c26e1b62fc4"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+        "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/evidence.json",
+        "sha256": "088fcdbfce80ba2838939df6a66904bbad765530afdec664b228ca971671d224"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/contract-review.json",
+        "sha256": "bceb9618af0f9d4fa447c8f2bd15f5dfc51ade121e16b1cfe9db7e08f6906392"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/run.json",
+        "sha256": "74f4a9d7952e290be1b221e461f906d81c1b298b7f2266f2bb652f324c4b4559"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/raw-run.json",
+        "sha256": "9ae39705a31b7f0adc450a581372ec8a98da9cd9e04be057361c9ab574666d48"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/cases.jsonl.gz",
+        "sha256": "31dfdecd34312230e5ce7bd4a3d852d022c85b6303331140e54d549b3746daaa"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/negative-controls.json",
+        "sha256": "b4b4d0602e575cde561d4d2615245350a0767d602f9eb13845f72e4779359ab2"
+      },
+      {
+        "path": "evidence/behavior/harnesses/render-small-e86e7f47-20261002/reviews/DrawMapCursor/callsite-abi.json",
+        "sha256": "e80f104339f1eddb5f13026647b63c06563d58158d2b01609a119cc982aae4a4"
+      },
+      {
+        "path": "tools/behavior_suites/archive/render_small-e86e7f479c726b0a.py",
+        "sha256": "e86e7f479c726b0aca78f5ee5d06d3c684f93086513f52ea05157d7c0e06f2fc"
+      },
+      {
+        "path": "evidence/behavior/helpers/render-contracts-v2/DrawMapCursor/clip_Push.json",
+        "sha256": "b0ba2a31e8f548d49e8e1bfae8d0397e1c152d51c9643d4681beb15b9d1c17ff"
+      },
+      {
+        "path": "evidence/behavior/helpers/render-contracts-v2/DrawMapCursor/clip_SetWin.json",
+        "sha256": "eba0d27497a95c07c8e8e890a0bcd4bd6bb6bf421954b3001bd25b17d72e2a0b"
+      },
+      {
+        "path": "evidence/behavior/helpers/render-contracts-v2/DrawMapCursor/clip_Pop.json",
+        "sha256": "2982210aa8471349e280c70bcede746b465d7f352a37121b2893d5ddd6470f02"
+      },
+      {
+        "path": "evidence/behavior/helpers/render-contracts-v2/DrawMapCursor/f_1CE2_0410.json",
+        "sha256": "3aad636e40b3b4971c063637b2df9557a8b152c5b8920c6f6a70477d2909a5bc"
+      },
+      {
+        "path": "src/root/m22BF.c",
+        "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0"
+      },
+      {
+        "path": "src/root/m1CE2.c",
+        "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+      },
+      {
+        "path": "src/root/m1E57.c",
+        "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3"
+      },
+      {
+        "path": "build/workers/dos_static_map_render/DrawMapCursor.disassembly.txt",
+        "sha256": "d8ed1edb075ad03897243704bb89b5b3a3f9579166b584e1a915ab689c4aac17"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+      },
+      {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/evidence.json",
+        "sha256": "2b7ed4379388ba1fcb93cd78c19c10f43965185e3c96ee61bbf5ebea8ef955c8"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+        "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/contract-review.json",
+        "sha256": "d87a353aa31a854637e2db7c7861b25e502404b539ff37c73205a4f32eabc05c"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/evidence.json",
+        "sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+        "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/contract-review.json",
+        "sha256": "2b9c41252ed000b94e1ece35629ceb2257d5809ce1d0b5ecb2615f06b18305d5"
+      },
+      {
+        "path": "build/workers/dos_static_memorycf4/static-completeness.json",
+        "sha256": "a91ccec0145fb58bafaca44b9e77cf0579bdcc8fa9acad112486ca999a661e5e"
+      },
+      {
+        "path": "build/workers/dos_static_memory_small/f_171C_0ADC.json",
+        "sha256": "bb2bc1aa0bc1c0c82a148ed099f8fb3388456acb462572ad16699856da326465"
+      }
+    ],
+    "original_function": {
+      "unit": "S12",
+      "seg": "384C",
+      "off": "02A2",
+      "size": 205
+    },
+    "branch_map": [
+      {
+        "site": "0x02B3",
+        "mnemonic": "je",
+        "targets": [
+          "0x02BC",
+          "0x02B5"
+        ],
+        "condition": "AX==0 after win_IsWinOpen(0x100); taken path returns",
+        "source_anchor": "module.c:157-158",
+        "width_signedness": "AX is a 16-bit int result; zero test"
+      },
+      {
+        "site": "0x02BA",
+        "mnemonic": "je",
+        "targets": [
+          "0x02BF",
+          "0x02BC"
+        ],
+        "condition": "g_298E==0; taken path enters draw body, fallthrough returns",
+        "source_anchor": "module.c:157-158",
+        "width_signedness": "g_298E is a 16-bit int; equality"
+      },
+      {
+        "site": "0x02BC",
+        "mnemonic": "jmp",
+        "targets": [
+          "0x036E"
+        ],
+        "condition": "common early-return edge",
+        "source_anchor": "module.c:158",
+        "width_signedness": "unconditional"
+      },
+      {
+        "site": "0x036E",
+        "mnemonic": "retf",
+        "targets": [],
+        "condition": "single far return for both early and drawn paths",
+        "source_anchor": "module.c:158,168",
+        "width_signedness": "void far return"
+      }
+    ],
+    "call_map": [
+      {
+        "site": "0x02A4",
+        "callee": "__aFchkstk",
+        "source_counterpart": "compiler-generated stack check; no C call",
+        "order": 1,
+        "arguments_abi": "AX=0; far runtime call",
+        "effect": "stack check; prologue-only"
+      },
+      {
+        "site": "0x02AC",
+        "callee": "f_22BF_09B0 / win_IsWinOpen",
+        "source_counterpart": "module.c:157 f_22BF_09B0(0x100)",
+        "order": 2,
+        "arguments_abi": "fastcall window handle 0x0100 in AX, no stack arguments; integer result in AX",
+        "effect": "gate; original helper reads handle/object state and may clear stale window handle"
+      },
+      {
+        "site": "0x02BF",
+        "callee": "clip_Push",
+        "source_counterpart": "module.c:159",
+        "order": 3,
+        "arguments_abi": "far call, no arguments"
+      },
+      {
+        "site": "0x02C8",
+        "callee": "clip_SetWin",
+        "source_counterpart": "module.c:160 clip_SetWin(0x100)",
+        "order": 4,
+        "arguments_abi": "one 16-bit stack word 0x0100; caller removes it"
+      },
+      {
+        "site": "0x035B",
+        "callee": "f_1CE2_0410 / GRectInvOutline",
+        "source_counterpart": "module.c:165 f_1CE2_0410(&fd_50F6_38C2, 2)",
+        "order": 5,
+        "arguments_abi": "far pointer to SS/DGROUP Rect data as appropriate plus one 16-bit stack word width=2; far return; caller removes 6 bytes",
+        "effect": "request contains rect fields written at 0x02CE-0x034E"
+      },
+      {
+        "site": "0x0369",
+        "callee": "clip_Pop",
+        "source_counterpart": "module.c:167",
+        "order": 6,
+        "arguments_abi": "far call, no arguments; follows cursor-visible write"
+      }
+    ],
+    "memory_state": {
+      "reads": [
+        "g_298E: 16-bit cursor-visible state, tested only after win_IsWinOpen returns nonzero.",
+        "fd_50F6_3858 and fd_50F6_0508[1]: signed 16-bit vertical scale and map coordinate.",
+        "fd_50F6_10D2.top and fd_50F6_10DE: signed 16-bit viewport top and vertical cursor extent.",
+        "fd_50F6_3856, fd_50F6_0508[0], fd_50F6_10D2.left, fd_50F6_38C0, fd_50F6_10E0: signed 16-bit horizontal scale, map coordinate, viewport left, horizontal offset and extent.",
+        "The called win_IsWinOpen helper reads the selected window handle, locked object and open flag; its stale-handle clearing is a dependency effect, covered by the pinned executed-helper fixture evidence."
+      ],
+      "writes": [
+        "On the draw path, writes four 16-bit fields of fd_50F6_38C2 in source order: top, bottom, left, right (Rect offsets +2,+6,+0,+4).",
+        "After the outline call, writes g_298E=1; early return writes none of these target-owned fields.",
+        "No target-owned global write occurs on the early-return path; helper effects are separately identified in call_map and review_notes."
+      ],
+      "local_stack": "No source locals or target-owned stack data; compiler stack-check call is listed separately."
+    },
+    "constants_widths_signedness": {
+      "constants": [
+        "0x0100 window handle",
+        "2 outline width",
+        "1 cursor-visible store",
+        "0 early-state comparison"
+      ],
+      "types": "All geometry, scales, Rect fields and cursor state are signed 16-bit int words under the pinned 16-bit MSC target.",
+      "arithmetic": "Two 16-bit signed IMUL calculations for each axis; word additions form the four Rect fields. The compiled historical target has 16-bit word behavior; no 32-bit promotion is present.",
+      "comparisons": "Window result is truth-tested; g_298E is compared to zero; no ordering comparison or signed-range test occurs."
+    },
+    "pointer_calculation": {
+      "map_coordinate": "fd_50F6_0508 is a far array of two 16-bit ints; index 0 is horizontal, index 1 vertical, stride 2 bytes.",
+      "rectangles": "fd_50F6_10D2 and fd_50F6_38C2 are far Rect objects; left/top/right/bottom are 16-bit words at byte offsets 0/2/4/6.",
+      "draw_pointer": "&fd_50F6_38C2 is passed as a far pointer with width 2; no other target pointer arithmetic occurs."
+    },
+    "static_axes": {
+      "algorithm": "The entire source function at module.c:155-168 implements the original entry, early gate, clipping scope, four-vertex rectangle construction, outline request, visible-state update and clip restoration.",
+      "cfg": "All original conditional sites, common return edge, and sole RETF are mapped above. The two draw conditions preserve source short-circuit order: window query first, state read only after a nonzero result.",
+      "call_order_and_abi": "All calls, including compiler stack check, are enumerated above. The window query uses AX fastcall; render and clipping calls preserve observed far-call/stack conventions and cleanup.",
+      "observable_effects": "Target-owned persistent effects are the Rect write, outline request, cursor-visible flag, and ordered clip calls. The original win_IsWinOpen helper's stale-handle side effect is identified separately.",
+      "dependency_boundary": "The target does not inspect clip internals after issuing calls; actual clip save/select/restore helper composition and its separately registered allocator dependencies are recorded in actual_callee_composition. Raster helpers and callback slots, prototypes, arguments, pointer data and order are composed there; backend target ownership/pixels remain outside caller-level proof.",
+      "path_completeness": "Both early-return conditions and the complete draw path map to the original control flow; no loop, switch or indirect branch exists in this function."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "0x02A2",
+        "source_anchor": "module.c:155-168",
+        "explanation": "Across the function extent, the pinned MSC600AX diagnostic reports a 205-byte original versus a 210-byte candidate, with register allocation, segment-load/instruction order, branch/layout, extra/missing-instruction and epilogue categories. The source-level path, arithmetic and effects map to the original; these are code-generation byte differences and remain outside historical acceptance. The diagnostic also labels some sites LOCAL_CODEGEN_UNCLASSIFIED, so this receipt does not assert byte recovery."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "run": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/run.json (pinned above): original and candidate actually executed; 16 directed + 1000 randomized cases, 0 mismatches/errors; peer-data gate PASS.",
+      "negative_control": "negative/cursor-offset; baseline matched, mutated source executed and mismatch detected in trace, ranges and nonstack memory.",
+      "limits": "The recorded domain is finite. The finite render run models clip/XOR requests and does not itself execute physical backend pixels or prove integration. Exact caller composition is established separately; allocator compaction behavior is supported by its separately registered valid-live-heap receipts. The render run remains corroboration, not proof by itself."
+    },
+    "review_notes": [
+      "Static correspondence covers the complete target function CFG, constants, signed widths, pointer data, ordered direct calls, caller-owned writes and state effects; no unexplained caller semantic difference remains.",
+      "All same-callee clip, outline/polygon, handle and allocator compositions are recorded with actual arguments and pointer data. f_171C_0CF4/f_171C_0ADC are separate BEHAVIOR_EXACT registrations with independent BEHAVIOR_EXACT_CONFIRMED receipts; their valid-live-heap/corrupt-state domain limits are retained as dependency assumptions.",
+      "The caller statically chooses g_913C (and for InvertPatch g_9128) and uses the original far-pointer prototypes, same slots, arguments and order. Concrete runtime pointer ownership/implementation is a separate source-only structural gate, not a caller semantic gap.",
+      "Finite original/candidate render runs and negative controls corroborate the bounded logical contract only. They do not establish physical pixels or end-to-end driver integration.",
+      "This status is source-level behavioral completeness under the pinned ABI and valid helper/caller domain, not historical byte identity.",
+      "Clip helper state effects include g_5742/g_5746/g_5AAC, fd_50F6_3B5C, g_5756, g_5758 and sentinel-list copies. Valid clip stack/handle state and nonterminal Punt behavior are explicit assumptions, not universal input claims."
+    ],
+    "actual_callee_composition": {
+      "basis": "The target bodies and direct helper callees are mapped to the original control/data flow. Canonical exact helper claims and separately behavior-registered allocator dependencies are pinned below; this is a caller-level behavioral conclusion under those contracts, not byte identity or driver integration.",
+      "exact_claims": [
+        {
+          "claim_id": "root:22BF:09B0",
+          "name": "win_IsWinOpen",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m22BF.c",
+          "source_sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+          "source_anchor": "src/root/m22BF.c:483-499",
+          "composition_role": "Tests selected window handle/open state; a stale invalid handle is cleared. Uses exact handle lock/unlock helpers."
+        },
+        {
+          "claim_id": "root:1E57:0009",
+          "name": "f_1E57_0009",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m1E57.c",
+          "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+          "source_anchor": "src/root/m1E57.c:34-43",
+          "composition_role": "Disposes the previously popped clip handle when present; clears saved clip handle and active pointer."
+        },
+        {
+          "claim_id": "root:1E57:0174",
+          "name": "clip_SetWin",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m1E57.c",
+          "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+          "source_anchor": "src/root/m1E57.c:120-140",
+          "composition_role": "Masks window id, queries open status, locks selected per-window clip list, copies sentinel-terminated list to the fixed active buffer, unlocks; otherwise active pointer is null."
+        },
+        {
+          "claim_id": "root:1E57:0DAA",
+          "name": "clip_Push",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m1E57.c",
+          "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+          "source_anchor": "src/root/m1E57.c:446-470",
+          "composition_role": "Copies active sentinel-terminated list and prior pointer into a stack node; updates clip stack head and depth."
+        },
+        {
+          "claim_id": "root:1E57:0EB9",
+          "name": "clip_Pop",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m1E57.c",
+          "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+          "source_anchor": "src/root/m1E57.c:473-495",
+          "composition_role": "Restores previous stack head; restores prior clip presence and contents by copying the saved list into the shared active buffer (it does not restore the old pointer identity); decrements depth and leaves popped allocation pending for next cleanup."
+        },
+        {
+          "claim_id": "root:171C:1A9E",
+          "name": "f_171C_1A9E",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:868-874",
+          "composition_role": "Clip node handle allocation wrapper; delegates to exact paragraph allocator and rebases handle."
+        },
+        {
+          "claim_id": "root:171C:125C",
+          "name": "f_171C_125C",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:665-695",
+          "composition_role": "Allocates storage and a handle, initializes lock count and header/name/size metadata."
+        },
+        {
+          "claim_id": "root:171C:0EEA",
+          "name": "f_171C_0EEA",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:559-580",
+          "composition_role": "Exact free-block search/pressure path; can call separately behavior-registered f_171C_0CF4 when compaction is needed; dependency evidence is pinned separately."
+        },
+        {
+          "claim_id": "root:171C:0BE2",
+          "name": "f_171C_0BE2",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:475-505",
+          "composition_role": "Exact discard-selection fallback from f_171C_0EEA; may free an unlocked discardable block and update handle/header state."
+        },
+        {
+          "claim_id": "root:171C:11F2",
+          "name": "f_171C_11F2",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:642-657",
+          "composition_role": "Exact sorted free-list insertion helper used by f_171C_0160."
+        },
+        {
+          "claim_id": "root:171C:0A5C",
+          "name": "f_171C_0A5C",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:425-443",
+          "composition_role": "Exact handle allocation used by f_171C_125C."
+        },
+        {
+          "claim_id": "root:171C:068C",
+          "name": "f_171C_068C",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:312-363",
+          "composition_role": "Exact block metadata initialization used by f_171C_125C."
+        },
+        {
+          "claim_id": "root:171C:1B84",
+          "name": "f_171C_1B84",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:888-896",
+          "composition_role": "Locks a handle and returns its far data pointer (or null)."
+        },
+        {
+          "claim_id": "root:171C:1FC2",
+          "name": "f_171C_1FC2",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:1002-1011",
+          "composition_role": "Checks handle/type/depth, updates age, increments lock."
+        },
+        {
+          "claim_id": "root:171C:1BBA",
+          "name": "f_171C_1BBA",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:898-902",
+          "composition_role": "Checks and delegates to exact unlock."
+        },
+        {
+          "claim_id": "root:171C:2086",
+          "name": "f_171C_2086",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:1014-1020",
+          "composition_role": "Validates handle range, decrements lock and returns rebased handle."
+        },
+        {
+          "claim_id": "root:171C:1C0A",
+          "name": "f_171C_1C0A",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:904-907",
+          "composition_role": "Disposal wrapper used for popped clip-node cleanup."
+        },
+        {
+          "claim_id": "root:171C:13E4",
+          "name": "f_171C_13E4",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:703-720",
+          "composition_role": "Exact free path rejects locked handles, clears lock and delegates block/handle release."
+        },
+        {
+          "claim_id": "root:171C:1246",
+          "name": "f_171C_1246",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:659-663",
+          "composition_role": "Exact handle release used by f_171C_13E4."
+        },
+        {
+          "claim_id": "root:171C:0160",
+          "name": "f_171C_0160",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m171C.c",
+          "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+          "source_anchor": "src/root/m171C.c:177-230",
+          "composition_role": "Exact conditional block merge/free helper used by free path."
+        },
+        {
+          "claim_id": "root:1CE2:0410",
+          "name": "GRectInvOutline",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m1CE2.c",
+          "source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+          "source_anchor": "src/root/m1CE2.c:135-138",
+          "composition_role": "Forwards the four far Rect fields and width to exact outline helper."
+        },
+        {
+          "claim_id": "root:1CE2:032B",
+          "name": "f_1CE2_032B",
+          "provenance": "EXACT_NATURAL",
+          "source": "src/root/m1CE2.c",
+          "source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+          "source_anchor": "src/root/m1CE2.c:112-122",
+          "composition_role": "With width 2, invokes g_913C four times in original strip order."
+        }
+      ],
+      "ordered_effect_composition": [
+        "Entry gate: win_IsWinOpen(0x0100) is called by the target; on a valid open window it returns open status, while the exact helper can clear a stale invalid handle. If closed, or if g_298E!=0 after an open result, the target returns without entering clip/render code.",
+        "Draw path call order is clip_Push(); clip_SetWin(0x0100); construct fd_50F6_38C2 in top,bottom,left,right write order; GRectInvOutline(&fd_50F6_38C2,2); set g_298E=1; clip_Pop(). clip_SetWin masks the id to 0x0100 and internally calls f_1E57_0009 before selecting the window clip list.",
+        "clip_Push measures the currently active list through its top==0x8000 sentinel, copies the list including sentinel into a size+8 allocation when present, and saves previous stack head and active pointer in node[0]/node[1]. It advances the stack head and depth. Allocation goes through exact f_171C_1A9E -> f_171C_125C -> f_171C_0EEA/f_171C_0A5C/f_171C_068C; f_171C_0EEA also has a conditional call to separately BEHAVIOR_EXACT-registered f_171C_0CF4 and f_171C_0ADC on its compaction path, detailed in registered_behavior_dependencies. Lock/data access and unlock use f_171C_1B84 -> f_171C_1FC2 and f_171C_1BBA -> f_171C_2086.",
+        "clip_SetWin masks the handle to its high-byte window id, calls exact win_IsWinOpen, selects fd_50F6_3B60[win>>8], locks the handle and copies its sentinel-terminated Rect list to fd_50F6_3C14; this fixed buffer becomes g_5AAC. Closed window selects null; open-with-null clip punts. The list pointer and contents remain runtime input state, but every access/copy/lock operation in this helper is statically composed.",
+        "GRectInvOutline forwards Rect fields and width 2 to f_1CE2_032B. That helper calls g_913C in this exact order: top horizontal strip (left+2,top+2,right-2,top); bottom horizontal (left+2,bottom-2,right-2,bottom); left vertical (left+2,top,left,bottom); right vertical (right,top,right-2,bottom).",
+        "clip_Pop begins with f_1E57_0009 cleanup of any earlier popped handle, makes the current stack node the pending popped handle, restores previous stack head and prior clip presence/list contents; for a non-null saved list, it copies node+2 into the shared active buffer rather than restoring the old pointer identity, decrements depth, and unlocks the node. f_1E57_0009 eventually disposes the pending handle through f_171C_1C0A -> f_171C_13E4 -> f_171C_1246, with exact lock/type/free helpers pinned above."
+      ],
+      "clip_pointer_data": {
+        "rect_list": "Far Rect records are 8-byte elements and terminate when top==0x8000. clip_Push copies the active list to node+2 and saves the prior active pointer; clip_SetWin and clip_Pop copy selected/restored contents into fd_50F6_3C14. The contents and handles are runtime state inputs, not fixed constants.",
+        "draw_rect": "Caller passes far &fd_50F6_38C2; helper reads four 16-bit signed Rect words at left/top/right/bottom offsets 0/2/4/6."
+      },
+      "status_boundary": "Caller-level helper selection, call composition and callback requests are statically accounted. Concrete graphics callback target identity/ownership and framebuffer integration are separate structural matters; they do not block this caller verdict. The finite render run corroborates the bounded logical contract only.",
+      "registered_behavior_dependencies": [
+        {
+          "claim_id": "f_171C_0CF4",
+          "registry_status": "BEHAVIOR_EXACT",
+          "registry_entry": "evidence/behavior/manifest.json:f_171C_0CF4",
+          "evidence_path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/evidence.json",
+          "evidence_sha256": "2b7ed4379388ba1fcb93cd78c19c10f43965185e3c96ee61bbf5ebea8ef955c8",
+          "source_path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+          "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+          "source_anchor": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c:506-553",
+          "static_receipt": "build/workers/dos_static_memorycf4/static-completeness.json",
+          "static_receipt_sha256": "a91ccec0145fb58bafaca44b9e77cf0579bdcc8fa9acad112486ca999a661e5e",
+          "static_status": "BEHAVIOR_EXACT_CONFIRMED",
+          "composition": "Exact layout callee f_171C_0EEA can call f_171C_0CF4 during compaction when a direct suitable free block is not found. This helper\u2019s valid-live-heap behavior is separately registered and statically reviewed; it is a transitive helper dependency, not an unexplained DrawMapCursor/InvertPatch caller semantic.",
+          "registered_contract_id": "f_171C_0CF4-valid-live-ralloc-sequences-v1",
+          "contract_scope": "Valid initialized paragraph-aligned Ralloc heaps with ordered free list, matching counters, live handle table and initialized discard entry; finite persistent operation sequences.",
+          "contract_exclusions": "Corrupt/invalid heaps and handles, terminal Punt paths, unsequenced external callers, concurrency and arbitrary aliasing are outside the separate helper contract."
+        },
+        {
+          "claim_id": "f_171C_0ADC",
+          "registry_status": "BEHAVIOR_EXACT",
+          "registry_entry": "evidence/behavior/manifest.json:f_171C_0ADC",
+          "evidence_path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/evidence.json",
+          "evidence_sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+          "source_path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+          "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+          "source_anchor": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c:446-472 (f_171C_0ADC; whole module pin)",
+          "static_receipt": "build/workers/dos_static_memory_small/f_171C_0ADC.json",
+          "static_receipt_sha256": "bb2bc1aa0bc1c0c82a148ed099f8fb3388456acb462572ad16699856da326465",
+          "static_status": "BEHAVIOR_EXACT_CONFIRMED",
+          "composition": "f_171C_0ADC is called by the registered exact compaction helper above. Its memory movement/handle rebasing is covered by its separate valid-live-heap behavior registration and static receipt.",
+          "registered_contract_id": "f_171C_0ADC-valid-live-ralloc-sequences-v1",
+          "contract_scope": "Valid initialized paragraph-aligned Ralloc heaps, live handles and finite persistent operation sequences.",
+          "contract_exclusions": "Corrupt/invalid heaps and handles, terminal Punt paths, unsequenced external callers, concurrency and arbitrary aliasing are outside the separate helper contract."
+        }
+      ],
+      "source_only_structural_gate": {
+        "topic": "Runtime ownership and concrete implementation of graphics callback pointers.",
+        "known": "Caller call sites select the same near data slots, use the same far-function-pointer ABI, pass the same widths/signedness/arguments, and preserve the same call order. layout/symbols.json pins g_9128 at 55B3:9128 and g_913C at 55B3:913C; source prototypes are listed under indirect_callback_abi.",
+        "unresolved": "The concrete runtime target/storage owner and backend implementation for the driver slots are not resolved by these caller sources.",
+        "classification": "Separate source-only structural gate. It is not an unexplained caller semantic because the callers\u2019 slot selection, pointer dataflow, arguments, order, and relevant prior state are statically accounted."
+      },
+      "caller_verdict": {
+        "status": "BEHAVIOR_EXACT_CONFIRMED",
+        "basis": "No caller-level semantic gap remains: complete CFG/dataflow, memory/state accesses, clip save/select/restore composition, exact target helper bodies, indirect callback slots/ABIs/arguments/order, and observable caller-owned writes are accounted. Separately registered allocator behavior is referenced above for the compaction branch.",
+        "scope": "Static behavioral conclusion under the pinned valid caller/heap contracts. No strict byte identity, arbitrary invalid/corrupt heap behavior, runtime driver ownership, or physical framebuffer integration is claimed. The composed clip state proof assumes valid sentinel-terminated pointers, valid stack depth, and successful/nonterminal allocation according to the separately pinned helper domains; invalid-state/Punt paths remain outside the registered behavior contracts."
+      },
+      "clip_state_effects": {
+        "persistent_clip_globals": [
+          "g_5742: pending popped clip handle; f_1E57_0009 disposes it through f_171C_1C0A and clears it.",
+          "g_5746: selected per-window clip handle; cleanup clears it, then clip_SetWin assigns the selected list handle.",
+          "g_5AAC: active near-held far Rect pointer; cleanup clears it; SetWin selects copied window list or null; Pop restores prior presence and, if nonnull, saved list contents through shared buffer fd_50F6_3C14.",
+          "fd_50F6_3B5C: clip stack head; Push links its new node and Pop restores node[0].",
+          "g_5756: clip stack depth; Push increments and Pop decrements.",
+          "g_5758: cumulative pushed Rect count; Push adds size/sizeof(Rect) only when active list is nonnull (size includes the sentinel Rect)."
+        ],
+        "ordered_clip_node_layout": "Allocated size is list byte size+8. node[0] stores previous fd_50F6_3B5C; node[1] stores prior g_5AAC pointer/null marker; node+2 stores the copied sentinel-terminated Rect list. Pop tests node[1] for nullness and restores copied bytes from node+2; old pointer identity is not reinstated.",
+        "normal_preconditions": "Window/clip state is caller-valid, active list pointers reference accessible far memory ending in top==0x8000, clip depth is valid (<=20 before push and >0 before pop), and clip node allocations/locks succeed under the separately registered valid-live-heap domain.",
+        "error_paths": "clip_Push calls Punt on null allocation and after depth exceeds 20; clip_SetWin calls Punt if a window reports open but its clip handle is null; clip_Pop calls Punt at depth zero. The C sequence continues after Punt if it returns; the registered helper contracts exclude terminal Punt/invalid-state paths, so no noreturn assumption is made."
+      }
+    },
+    "indirect_callback_abi": [
+      {
+        "symbol": "g_913C",
+        "slot": "55B3:913C (near data slot; layout/symbols.json data record, segment 0x55B3 offset 0x913C)",
+        "declaration": "src/root/m1CE2.c:112: extern void (far * near g_913C)(int left, int top, int right, int bottom);",
+        "abi": "Near-stored pointer to far void function; four signed 16-bit int parameters in left,top,right,bottom order. The original call sites supply four words and far-call through the slot.",
+        "uses": "f_1CE2_032B invokes it four times in order listed above for width=2.",
+        "binding_status": "No C definition/initializer or direct assignment was found by searching canonical src for g_913C. layout/symbols.json grounds it as a far code pointer in BSS used as a four-argument XOR-rectangle callback; concrete loaded target and its raster implementation are unknown. This is tracked by source_only_structural_gate; caller slot selection/call composition is known."
+      }
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

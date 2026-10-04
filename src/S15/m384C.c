@@ -156,6 +156,35 @@ extern Handle far f_171C_1BBA(Handle h);
 extern void far db_ReleaseHandle(Handle handle);
 extern void _fastcall win_Close(int win);
 
+extern void far OpenCasteWindow(void);
+extern void far OpenModeWindow(void);
+extern void far SetEditWinTitle(char far *title);
+extern int far MapPlane;
+extern void far SetMapPlane(int plane);
+extern int _fastcall win_IsWinOpen(int win);
+extern void far YardToMap(void);
+extern void far SetMapTitle(void);
+extern void far OpenEditWindow(void);
+extern int far DoScenario(int flag);
+extern int far LoadGame(int a, int b);
+extern int far fd_50F6_0EAC;
+extern int far fd_50F6_105E;
+extern void far EndLifeTransferMode(void);
+extern void far EndTargetMode(void);
+extern void far SetDefaultWindPrompt(int);
+extern int far fd_50F6_0354;
+extern int far fd_50F6_07C8;
+extern void far RandYard(void);
+extern int far MePlane;
+extern int far WinPrintf(char far *format, ...);
+extern int far fd_3D57_07A4;
+extern int far fd_3D57_07A6;
+extern int far f_22BF_0A65(void);
+extern void far o26_39C7_0000(void);
+extern int far MeLocY;
+extern int far MeLocX;
+extern void far CenterEdit(int x, int y);
+extern void far UpdateEdit(void);
 int far o15_384C_0239(int which)
 {
     struct Event ev;
@@ -221,7 +250,7 @@ extern void far OpenCasteWindow(void);
 extern void far OpenModeWindow(void);
 extern void far SetEditWinTitle(char far *title);
 extern int far MapPlane;
-extern void far f_015B_053C(int plane);
+extern void far SetMapPlane(int plane);
 extern int _fastcall win_IsWinOpen(int win);
 extern void far YardToMap(void);
 extern void far SetMapTitle(void);
@@ -232,7 +261,7 @@ void far SetDefaultWindows(void)
     OpenCasteWindow();
     OpenModeWindow();
     SetEditWinTitle(0L);
-    f_015B_053C(MapPlane);
+    SetMapPlane(MapPlane);
     if (!win_IsWinOpen(0x100))
         YardToMap();
     SetMapTitle();
@@ -240,7 +269,7 @@ void far SetDefaultWindows(void)
 }
 
 extern int far DoScenario(int flag);
-extern int far o09_35F5_0000(int a, int b);
+extern int far LoadGame(int a, int b);
 extern int far fd_50F6_0EAC;
 extern int far fd_50F6_105E;
 extern void far EndLifeTransferMode(void);
@@ -270,7 +299,7 @@ int far NewGame(int flag)
         if (r == 0x205)
             return -1;
         if (r == 0x207) {
-            if (o09_35F5_0000(0, 0) == 0)
+            if (LoadGame(0, 0) == 0)
                 continue;
             r = 1;
         } else {
@@ -300,7 +329,7 @@ int far NewGame(int flag)
                 fd_50F6_07C8 = 0;
                 RandYard();
                 WinPrintf("MePLane=%d", MePlane);
-                f_015B_053C(MePlane);
+                SetMapPlane(MePlane);
                 if (fd_50F6_0EAC == 0) {
                     fd_3D57_07A4 = 1;
                     fd_3D57_07A6 = 0;
@@ -312,7 +341,7 @@ int far NewGame(int flag)
         break;
     }
     SetDefaultWindows();
-    f_015B_053C(MePlane);
+    SetMapPlane(MePlane);
     if (r == 0 && !f_22BF_0A65())
         o26_39C7_0000();
     CenterEdit(MeLocX, MeLocY);

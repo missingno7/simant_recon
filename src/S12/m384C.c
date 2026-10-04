@@ -24,7 +24,7 @@ static int g_298E = 0;
 int fd_55B3_2990 = 0;
 static int g_2992 = -1;
 static int g_2994 = 0;
-static int g_2996 = 0;
+int g_2996 = 0;
 static int g_2998 = -1;
 long fd_55B3_299A = 0;
 long fd_55B3_299E = 0;
@@ -89,58 +89,58 @@ void far InitMapFunctions(void)
 }
 
 extern void far MapAreaEvent(struct Event far *ev);
-extern void far f_00F8_04C7(void);
-extern void far f_00F8_0252(void);
-extern void far f_015B_053C(int plane);
+extern void far MapToYard(void);
+extern void far ClearMapScentButtons(void);
+extern void far SetMapPlane(int plane);
 extern void _fastcall f_20E8_0725(int win);
-extern void far f_015B_01D1(int mode);
-extern void far f_0798_012B(void);
+extern void far SetMapModeAnt(int mode);
+extern void far OpenModeWindow(void);
 void far o12_384C_12D3(struct Event far *ev);
-extern void far f_0798_0115(void);
-extern void far f_015B_0D0C(void);
-extern void far o24_39C7_0000(void);
+extern void far OpenCasteWindow(void);
+extern void far MysteryButton(void);
+extern void far OpenHistoryWindow(void);
 extern void far ScoreDialog(void);
-extern void far o23_39C7_0C19(void);
+extern void far OpenInfoWindow(void);
 extern int far fd_50F6_1074;
 extern void far DoWinHelp(int win);
-extern void far o04_35F5_0000(void);
+extern void far MapToolsMenu(void);
 extern void far DrawCastePopUp(void);
 
 void far ProcMapEvent(struct Event far *ev)
 {
     switch (ev->code) {
     case 0x102: MapAreaEvent(ev); break;
-    case 0x105: f_00F8_04C7(); break;
-    case 0x106: f_00F8_0252(); f_015B_053C(1); break;
-    case 0x107: f_00F8_0252(); f_015B_053C(2); break;
-    case 0x108: f_00F8_0252(); f_015B_053C(3); f_20E8_0725(0x100); break;
-    case 0x109: f_015B_01D1(4); f_20E8_0725(0x100); break;
-    case 0x10a: f_015B_01D1(5); break;
-    case 0x10b: f_015B_01D1(8); break;
-    case 0x10c: f_015B_01D1(6); break;
-    case 0x10d: f_015B_01D1(7); break;
+    case 0x105: MapToYard(); break;
+    case 0x106: ClearMapScentButtons(); SetMapPlane(1); break;
+    case 0x107: ClearMapScentButtons(); SetMapPlane(2); break;
+    case 0x108: ClearMapScentButtons(); SetMapPlane(3); f_20E8_0725(0x100); break;
+    case 0x109: SetMapModeAnt(4); f_20E8_0725(0x100); break;
+    case 0x10a: SetMapModeAnt(5); break;
+    case 0x10b: SetMapModeAnt(8); break;
+    case 0x10c: SetMapModeAnt(6); break;
+    case 0x10d: SetMapModeAnt(7); break;
     case 0x10e: g_2994 = !g_2994; break;
-    case 0x10f: f_0798_012B(); break;
+    case 0x10f: OpenModeWindow(); break;
     case 0x110: o12_384C_12D3(ev); break;
-    case 0x111: f_0798_0115(); break;
-    case 0x112: f_015B_0D0C(); break;
-    case 0x113: o24_39C7_0000(); break;
+    case 0x111: OpenCasteWindow(); break;
+    case 0x112: MysteryButton(); break;
+    case 0x113: OpenHistoryWindow(); break;
     case 0x114: ScoreDialog(); break;
-    case 0x115: o23_39C7_0C19(); break;
+    case 0x115: OpenInfoWindow(); break;
     case 0x116: fd_50F6_1074 = 1; DoWinHelp(0x103); break;
-    case 0x117: o04_35F5_0000(); break;
+    case 0x117: MapToolsMenu(); break;
     case 0x118: DrawCastePopUp(); break;
     }
 }
 
-extern void far f_20E8_04B6(int win, ...);
+extern void far win_Open(int win, ...);
 
 void far OpenMapWindow(void)
 {
-    f_20E8_04B6(0x100);
+    win_Open(0x100);
 }
 
-extern int _fastcall f_22BF_09B0(int win);
+extern int _fastcall win_IsWinOpen(int win);
 extern void far clip_Push(void);
 extern void far clip_SetWin(int win);
 extern int far fd_50F6_0508[2];
@@ -149,13 +149,80 @@ extern struct Rect far fd_50F6_38C2;
 extern int far fd_50F6_10DE;
 extern int far fd_50F6_38C0;
 extern int far fd_50F6_10E0;
-extern void far f_1CE2_0410(struct Rect far *rect, int width);
+extern void far GRectInvOutline(struct Rect far *rect, int width);
 extern void far clip_Pop(void);
 
-/* SCAFFOLD BEGIN: DrawMapCursor draft (worker resA): with +2..+13 identifiers declared before the first extern the length is exact and the original value-CSE of fd_50F6_3858 appears (symbol-table state, probe SYM-1); left over (37 bytes): the original saves the rect segment (mov dx,es) after the left store and adds fd_50F6_10D2.left before fd_50F6_38C0; a 1024-point search over dummy positions found no exact state. Same residue as S04 DrawMiniMapCursor */
+
+extern int far fd_50F6_3854;
+extern void far win_MapChanged(void);
+extern int far fd_3D57_07C8;
+extern char far * far * far fd_50F6_385A;
+extern char far * far f_171C_1B84(char far * far *handle);
+extern void far f_171C_1BBA(char far * far *handle);
+extern unsigned char far LifeA[128][64];
+extern unsigned char far MapA[128][64];
+extern int far TERRAINset;
+extern unsigned char far fd_3D57_046E[];
+extern unsigned char far fd_3D57_039E[];
+extern unsigned char far fd_3D57_030E[];
+extern unsigned char far fd_3D57_061E[];
+extern unsigned char far fd_3D57_054E[];
+extern unsigned char far fd_3D57_04CE[];
+extern unsigned char far LifeR[64][64];
+extern unsigned char far MapR[64][64];
+extern unsigned char far LifeB[64][64];
+extern unsigned char far MapB[64][64];
+extern unsigned char far fd_3D57_0656[];
+extern unsigned char far fd_3D57_04A6[];
+extern int far BpopT;
+extern int far RpopT;
+extern int far HealthR;
+extern int near g_3DB2;
+extern void far f_24AB_02AD(int font);
+extern void far win_PrintfAtObj(int obj, char far *format, ...);
+extern int far HealthB;
+extern void far win_DrawHBar(int obj, long fraction);
+extern char far * far * far fd_50F6_385E;
+extern void far Punt(char far *msg);
+extern unsigned char far PherMapBN[];
+extern unsigned char far PherMapBT[];
+extern unsigned char far PherMapRN[];
+extern unsigned char far PherMapRT[];
+extern unsigned char far PherMapA[];
+extern int far f_1B4E_000D(int color);
+extern long far TickCount(void);
+extern void _fastcall win_SetColorNum(int color);
+extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
+extern void far clip_SubInclude(struct Rect far *rect);
+extern int far fd_50F6_0F0C;
+extern int far MapPlane;
+extern int far fd_50F6_0F12;
+extern int far fd_50F6_0F34;
+extern int far fd_50F6_1004;
+extern void far f_171C_1C0A(char far * far *handle);
+extern void far clip_Off(void);
+extern int far fd_50F6_0EAC;
+extern int far CurExpTool;
+extern void _fastcall win_SetColorFromObjNum(int obj);
+extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
+extern int _fastcall win_DrawBitMap(int x, int y, int id);
+extern int far fd_3D57_0C3E;
+extern int far fd_50F6_03E0;
+extern int far fd_50F6_046A;
+extern int far fd_3D57_0C30;
+extern int far fd_3D57_0C28;
+extern int far fd_50F6_0470;
+extern int far fd_50F6_047A;
+extern void far AddFood(int count, int sound);
+extern void far myBeginSound(int sound, int a, int b);
+extern void far KillSomeAnts(int side);
+extern void far AddSomeAnts(int side);
+extern void far SubtractFood(void);
+extern void far GotoMyAnt(void);
+extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 void far DrawMapCursor(void)
 {
-    if (!f_22BF_09B0(0x100) || g_298E != 0)
+    if (!win_IsWinOpen(0x100) || g_298E != 0)
         return;
     clip_Push();
     clip_SetWin(0x100);
@@ -163,20 +230,20 @@ void far DrawMapCursor(void)
     fd_50F6_38C2.bottom = fd_50F6_38C2.top + fd_50F6_3858 * fd_50F6_10DE;
     fd_50F6_38C2.left = fd_50F6_3856 * fd_50F6_0508[0] + fd_50F6_10D2.left + fd_50F6_38C0;
     fd_50F6_38C2.right = fd_50F6_38C2.left + fd_50F6_3856 * fd_50F6_10E0;
-    f_1CE2_0410(&fd_50F6_38C2, 2);
+    GRectInvOutline(&fd_50F6_38C2, 2);
     g_298E = 1;
     clip_Pop();
 }
 
-/* SCAFFOLD END */
+
 
 void far EraseMapCursor(void)
 {
-    if (!f_22BF_09B0(0x100) || g_298E != 1)
+    if (!win_IsWinOpen(0x100) || g_298E != 1)
         return;
     clip_Push();
     clip_SetWin(0x100);
-    f_1CE2_0410(&fd_50F6_38C2, 2);
+    GRectInvOutline(&fd_50F6_38C2, 2);
     g_298E = 0;
     clip_Pop();
 }
@@ -199,11 +266,11 @@ void far o12_384C_03D0(char far *src, char far *dst, int n)
         (*fd_50F6_38B8)(src, dst, fd_50F6_3854, n);
 }
 
-extern void far f_00F8_00A4(void);
+extern void far win_MapChanged(void);
 
 void far o12_384C_0425(void)
 {
-    f_00F8_00A4();
+    win_MapChanged();
 }
 
 extern int far fd_3D57_07C8;
@@ -382,9 +449,9 @@ extern int far RpopT;
 extern int far HealthR;
 extern int near g_3DB2;
 extern void far f_24AB_02AD(int font);
-extern void far f_22BF_0D53(int obj, char far *format, ...);
+extern void far win_PrintfAtObj(int obj, char far *format, ...);
 extern int far HealthB;
-extern void far f_22BF_0D81(int obj, long fraction);
+extern void far win_DrawHBar(int obj, long fraction);
 
 void far DrawMapData(void)
 {
@@ -398,17 +465,17 @@ void far DrawMapData(void)
         popMax = RpopT;
     redHealth = RpopT == 0 ? 0 : HealthR;
     f_24AB_02AD(g_3DB2 == 320 ? 0 : 3);
-    f_22BF_0D53(0x119, "%-d", BpopT);
-    f_22BF_0D53(0x11a, "%-d", RpopT);
+    win_PrintfAtObj(0x119, "%-d", BpopT);
+    win_PrintfAtObj(0x11a, "%-d", RpopT);
     f_24AB_02AD(0);
-    f_22BF_0D81(0x11b, ((long)HealthB << 16) / 100);
+    win_DrawHBar(0x11b, ((long)HealthB << 16) / 100);
     maxPop = popMax;
-    f_22BF_0D81(0x11d, ((long)BpopT << 16) / maxPop);
-    f_22BF_0D81(0x11c, ((long)redHealth << 16) / 100);
-    f_22BF_0D81(0x11e, ((long)RpopT << 16) / maxPop);
+    win_DrawHBar(0x11d, ((long)BpopT << 16) / maxPop);
+    win_DrawHBar(0x11c, ((long)redHealth << 16) / 100);
+    win_DrawHBar(0x11e, ((long)RpopT << 16) / maxPop);
 }
 
-extern void far f_00F8_04C7(void);
+extern void far MapToYard(void);
 extern char far * far * far fd_50F6_385E;
 extern void far Punt(char far *msg);
 extern unsigned char far PherMapBN[];
@@ -419,11 +486,11 @@ extern unsigned char far PherMapA[];
 extern int far f_1B4E_000D(int color);
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 extern long far TickCount(void);
-extern void _fastcall f_21FA_00EE(int color);
+extern void _fastcall win_SetColorNum(int color);
 extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern int far fd_50F6_0F0C;
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern int far fd_50F6_0F12;
 extern int far fd_50F6_0F34;
 extern void (far * near g_914C)(int x, int y, char far *image, int width, int height);
@@ -440,7 +507,7 @@ void far o12_384C_0B76(void)
     char far *old;
 
     if (fd_3D57_07C8 == 0) {
-        f_00F8_04C7();
+        MapToYard();
         return;
     }
     fd_50F6_3854 = 0x80;
@@ -448,7 +515,7 @@ void far o12_384C_0B76(void)
     fd_50F6_385E = f_171C_1A9E(0x400L, 1, "Map window image");
     fd_50F6_385A = f_171C_1A9E(0x2000L, 1, "Generated map window");
     if (fd_3D57_07C8 != g_2992)
-        f_00F8_00A4();
+        win_MapChanged();
     switch (fd_3D57_07C8) {
     case 0:
         Punt("Draw map - yard");
@@ -493,7 +560,7 @@ void far o12_384C_0B76(void)
                 g_29A4 = 1;
             fd_55B3_299A = 0;
         } else {
-            f_21FA_00EE(3);
+            win_SetColorNum(3);
             f_15D9_0006(fd_55B3_299A, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
         }
     }
@@ -501,7 +568,7 @@ void far o12_384C_0B76(void)
     clip_SubInclude(&fd_50F6_10D2);
     img = f_171C_1B84(fd_50F6_385A);
     gen = f_171C_1B84(fd_50F6_385E);
-    if (fd_50F6_0F0C && !g_2994 && fd_50F6_032E == 1) {
+    if (fd_50F6_0F0C && !g_2994 && MapPlane == 1) {
         sx = fd_50F6_0F12 >> 4;
         sy = fd_50F6_0F34 >> 4;
     } else
@@ -527,7 +594,7 @@ void far o12_384C_0B76(void)
     f_171C_1BBA(fd_50F6_385A);
     f_171C_1C0A(fd_50F6_385E);
     f_171C_1C0A(fd_50F6_385A);
-    if (fd_50F6_032E == 1 && !g_2994)
+    if (MapPlane == 1 && !g_2994)
         o12_384C_1181();
     DrawMapCursor();
     clip_Pop();
@@ -536,20 +603,20 @@ void far o12_384C_0B76(void)
 }
 
 
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 
 void far o12_384C_100A(void)
 {
-    if (f_22BF_09B0(0x100)) {
+    if (win_IsWinOpen(0x100)) {
         clip_SetWin(0x100);
         o12_384C_0B76();
         DrawMapData();
-        f_1E57_0362();
+        clip_Off();
     }
 }
 
 extern int far fd_50F6_0EAC;
-extern int far fd_50F6_104C;
+extern int far CurExpTool;
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
 
@@ -559,13 +626,13 @@ void far o12_384C_1035(int flags)
 
     if (flags & 2) {
         if (fd_3D57_07C8 == 0)
-            f_00F8_04C7();
+            MapToYard();
         else {
-            f_00F8_00A4();
+            win_MapChanged();
             clip_SetWin(0x100);
             DrawMapData();
             o12_384C_0B76();
-            id = fd_50F6_0EAC == 3 ? fd_50F6_104C + 0x13ec : 0x13f3;
+            id = fd_50F6_0EAC == 3 ? CurExpTool + 0x13ec : 0x13f3;
             win_SetColorFromObjNum(0x117);
             win_DrawBitMapAtObjNum(0x117, id);
         }
@@ -649,10 +716,10 @@ void far o12_384C_1181(void)
 
 extern void far AddFood(int count, int sound);
 extern void far myBeginSound(int sound, int a, int b);
-extern void far f_015B_006F(int side);
-extern void far f_015B_000E(int side);
-extern void far f_015B_0157(void);
-extern void far f_015B_06A2(void);
+extern void far KillSomeAnts(int side);
+extern void far AddSomeAnts(int side);
+extern void far SubtractFood(void);
+extern void far GotoMyAnt(void);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 
 void far o12_384C_12D3(struct Event far *ev)
@@ -666,14 +733,14 @@ void far o12_384C_12D3(struct Event far *ev)
             side = (r.left + r.right) / 2;
             side = ev->h >= side ? 0 : 1;
             if (*(unsigned char far *)0x00000417L & 8)
-                f_015B_006F(side);
+                KillSomeAnts(side);
             else
-                f_015B_000E(side);
+                AddSomeAnts(side);
         } else if (*(unsigned char far *)0x00000417L & 8) {
             myBeginSound(0x20, 0, 0x7e);
-            f_015B_0157();
+            SubtractFood();
         } else
             AddFood(0x96, 1);
     } else
-        f_015B_06A2();
+        GotoMyAnt();
 }

@@ -1,0 +1,1417 @@
+{
+  "schema": "consolidation-context-residue-review-v1",
+  "reviewer": "canonical_peer_semantic_review",
+  "proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+  "historical_exact_authority": "historical source snapshots and original exact receipts remain separate; the current compiled bodies are explicitly byte inexact",
+  "new_behavior_exact_claims": 0,
+  "known_context_residue_count": 9,
+  "unexplained_instruction_differences": 0,
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "manifest_sha256_at_review": "a2e219367353e6eb7bd0a9606513cf07b1251292c6f33d7ffa06f3b578711116",
+  "symbols_sha256_at_review": "faf038047fbed7ef219666d90c5b1acaa4c7b9b5452992031932d02dc4d43836",
+  "toolchain_sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+  "full_machine_evidence": {
+    "path": "build/workers/consolidation_peer_review/machine-evidence.json",
+    "sha256": "8534c6d19998e5f5a719417594deba7bb5bc94c5b4b831043b3cd863139af73e"
+  },
+  "full_static_receipts": {
+    "path": "build/workers/consolidation_peer_review/static-receipts.json",
+    "sha256": "f192b1a55cde5aff67d050532838de2c94390a8c818815fd3188201230c95aeb"
+  },
+  "functions": {
+    "PopUpInfoWindow": {
+      "module": "S23:39C7",
+      "address": {
+        "unit": "S23",
+        "seg": 14791,
+        "off": 3196
+      },
+      "current_source": "build/source-only-dos-v36/sources/U034.c",
+      "current_source_sha256": "c9a26f97557c8a1b9cd4db2c17eb910787e7719aec0499041dcfd2c69eee1301",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/S23_39C7.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U034.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/S23_39C7.historical.c",
+      "historical_source_sha256": "4e2ff0a4d57f3159b2fb58ff64c77bb7740e2a415292cc7f2fe2e9fad095daf4",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/S23/m39C7.c",
+      "object_sha256": "a3d8555df45e30bc062be150788ede6aba6f53545c2fceef3c94b146ab2405f5",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "original_size": 724,
+      "current_size": 724,
+      "original_sha256": "ce4008881c82c42f52b06ff27b4fa020c239bb1ec556400e1acd4f9f3dbef65c",
+      "current_bound_sha256": "f0078d693f3e17495ae2fc84585d8e5251de0bd45f06aed08b5ccc6b4fb74c75",
+      "historical_strict_reasons": [
+        "bytes differ (first at +0x53, 10 differing)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 2,
+      "original_instruction_count": 283,
+      "current_instruction_count": 283,
+      "unchanged_instruction_pairs": 265,
+      "classified_changes": [
+        {
+          "original_range": [
+            81,
+            101
+          ],
+          "current_range": [
+            81,
+            101
+          ],
+          "kind": "reassociated word arithmetic",
+          "relation": "Let q=halfW/2, l=wr.left, x=x. Original NEG(q-l)+x and current NEG(q-x)+l both equal l+x-q modulo 65536. The other sequence forms q+l+x in either addition order. Left/right words and all later comparisons match.",
+          "live_state": "AX=[bp-3C]=l+x-q; CX=[bp-38]=q+l+x. Arithmetic flags can differ and are overwritten by ADD/CMP before any branch consumes them."
+        },
+        {
+          "original_range": [
+            410,
+            442
+          ],
+          "current_range": [
+            410,
+            442
+          ],
+          "kind": "commuted addition and subtraction",
+          "relation": "Let t=wr.top,h=text height. Original t-h+top and current top-h+t both equal t+top-h; t+top and t+bottom are commuted additions. Both arms produce identical box.top/box.bottom words modulo 65536.",
+          "live_state": "Each branch writes identical [bp-3A] and AX. Intermediate flags are overwritten before a condition uses them."
+        }
+      ],
+      "original_relocation_offsets": [
+        673,
+        638,
+        9,
+        540,
+        525,
+        716,
+        264,
+        685,
+        191,
+        162,
+        690,
+        47,
+        574,
+        659,
+        624,
+        708,
+        37,
+        32,
+        246,
+        219
+      ],
+      "current_relocation_offsets": [
+        9,
+        47,
+        37,
+        32,
+        716,
+        708,
+        690,
+        685,
+        673,
+        659,
+        638,
+        624,
+        574,
+        540,
+        525,
+        264,
+        246,
+        219,
+        191,
+        162
+      ],
+      "relocation_disposition": "All relocation sites and symbolic targets preserve their runtime meaning.",
+      "symbolic_calls_preserved": [
+        "_aFchkstk",
+        "win_GetObjRect",
+        "clip_Push",
+        "clip_SubInclude",
+        "f_1A53_00F0",
+        "f_1A53_00F0",
+        "f_171C_1B84",
+        "f_171C_1B84",
+        "f_171C_1C1C",
+        "FlipWords",
+        "XFlipLong",
+        "win_GetStyleTextHeight",
+        "GSaveRect",
+        "win_SetColorFromObjNum",
+        "f_1CE2_0013",
+        "win_PrintStyleTextInRect",
+        "f_171C_1BBA",
+        "db_PurgeObject",
+        "f_171C_1BBA",
+        "db_PurgeObject",
+        "win_Events",
+        "StillDown",
+        "f_1CE2_056C",
+        "clip_Pop"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "_DATA": {
+          "seg": 21939,
+          "off": 11780,
+          "size": 228
+        },
+        "CONST": {
+          "seg": 21939,
+          "off": 34992,
+          "size": 2
+        },
+        "_BSS": {
+          "seg": 21939,
+          "off": 35874,
+          "size": 4
+        },
+        "UNIT7_DATA": {
+          "seg": 20197,
+          "off": 0,
+          "size": 2198
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/S23_39C7.current.obj"
+    },
+    "DrawCurBalloons": {
+      "module": "root:0250",
+      "address": {
+        "unit": "root",
+        "seg": 592,
+        "off": 17741
+      },
+      "current_source": "build/source-only-dos-v36/sources/U053.c",
+      "current_source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_0250.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U053.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_0250.historical.c",
+      "historical_source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m0250.c",
+      "object_sha256": "12675e0cfa17dbe0989fc3d67b2a48816fc0767c7ebd7009fb84492b0e64db25",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "original_size": 1680,
+      "current_size": 1680,
+      "original_sha256": "8321fb9488615fc252bb7a43316fe4f39b699530296fff3b1f4a68013989799a",
+      "current_bound_sha256": "a25a73a33470afbcda8bac82add5111931acbff8f728e4be4cc82c7361713aa4",
+      "historical_strict_reasons": [
+        "bytes differ (first at +0xba, 25 differing)",
+        "relocation order inside a target group differs from the object's FIXUPP order"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 5,
+      "original_instruction_count": 465,
+      "current_instruction_count": 465,
+      "unchanged_instruction_pairs": 435,
+      "classified_changes": [
+        {
+          "original_range": [
+            185,
+            204
+          ],
+          "current_range": [
+            185,
+            204
+          ],
+          "kind": "paired comparison reversal",
+          "relation": "CMP operands are exchanged together with signed JG/JL or JLE/JGE and unsigned JAE/JBE. Strictness and equality paths are preserved, including signed high-word then unsigned low-word comparisons. The values are read once and the resulting flags are used only by the paired branches.",
+          "live_state": "Every successor is the same semantic basic block; memory, registers and calls are unchanged except EFLAGS, which are consumed by corresponding inverse condition codes before a later defining instruction."
+        },
+        {
+          "original_range": [
+            332,
+            351
+          ],
+          "current_range": [
+            332,
+            351
+          ],
+          "kind": "paired comparison reversal",
+          "relation": "CMP operands are exchanged together with signed JG/JL or JLE/JGE and unsigned JAE/JBE. Strictness and equality paths are preserved, including signed high-word then unsigned low-word comparisons. The values are read once and the resulting flags are used only by the paired branches.",
+          "live_state": "Every successor is the same semantic basic block; memory, registers and calls are unchanged except EFLAGS, which are consumed by corresponding inverse condition codes before a later defining instruction."
+        },
+        {
+          "original_range": [
+            757,
+            776
+          ],
+          "current_range": [
+            757,
+            776
+          ],
+          "kind": "paired comparison reversal",
+          "relation": "CMP operands are exchanged together with signed JG/JL or JLE/JGE and unsigned JAE/JBE. Strictness and equality paths are preserved, including signed high-word then unsigned low-word comparisons. The values are read once and the resulting flags are used only by the paired branches.",
+          "live_state": "Every successor is the same semantic basic block; memory, registers and calls are unchanged except EFLAGS, which are consumed by corresponding inverse condition codes before a later defining instruction."
+        },
+        {
+          "original_range": [
+            1109,
+            1128
+          ],
+          "current_range": [
+            1109,
+            1128
+          ],
+          "kind": "paired comparison reversal",
+          "relation": "CMP operands are exchanged together with signed JG/JL or JLE/JGE and unsigned JAE/JBE. Strictness and equality paths are preserved, including signed high-word then unsigned low-word comparisons. The values are read once and the resulting flags are used only by the paired branches.",
+          "live_state": "Every successor is the same semantic basic block; memory, registers and calls are unchanged except EFLAGS, which are consumed by corresponding inverse condition codes before a later defining instruction."
+        },
+        {
+          "original_range": [
+            1461,
+            1480
+          ],
+          "current_range": [
+            1461,
+            1480
+          ],
+          "kind": "paired comparison reversal",
+          "relation": "CMP operands are exchanged together with signed JG/JL or JLE/JGE and unsigned JAE/JBE. Strictness and equality paths are preserved, including signed high-word then unsigned low-word comparisons. The values are read once and the resulting flags are used only by the paired branches.",
+          "live_state": "Every successor is the same semantic basic block; memory, registers and calls are unchanged except EFLAGS, which are consumed by corresponding inverse condition codes before a later defining instruction."
+        }
+      ],
+      "original_relocation_offsets": [
+        9,
+        1492,
+        819,
+        1171,
+        779,
+        751,
+        354,
+        326,
+        207,
+        179,
+        1103,
+        1483,
+        1455,
+        1131,
+        788,
+        363,
+        216,
+        1140,
+        393,
+        246,
+        1522
+      ],
+      "current_relocation_offsets": [
+        9,
+        819,
+        788,
+        779,
+        751,
+        393,
+        363,
+        354,
+        326,
+        246,
+        216,
+        207,
+        179,
+        1171,
+        1140,
+        1131,
+        1103,
+        1522,
+        1492,
+        1483,
+        1455
+      ],
+      "relocation_disposition": "Object FIXUPP target-group ordering differs while current bound instructions and relocation sites/targets are preserved. This is a historical ordering failure, not a runtime effect.",
+      "symbolic_calls_preserved": [
+        "_aFchkstk",
+        "TickCount",
+        "TickCount",
+        "SRand32",
+        "SRand2",
+        "TickCount",
+        "TickCount",
+        "SRand32",
+        "SRand2",
+        "AddMsgBalloon",
+        "AddMsgBalloon",
+        "TickCount",
+        "TickCount",
+        "SRand32",
+        "SRand4",
+        "AddMsgBalloon",
+        "TickCount",
+        "TickCount",
+        "SRand32",
+        "SRand4",
+        "AddMsgBalloon",
+        "TickCount",
+        "TickCount",
+        "SRand64",
+        "SRand2",
+        "AddMsgBalloon"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "CONST": {
+          "seg": 21939,
+          "off": 32396,
+          "size": 326
+        },
+        "_DATA": {
+          "seg": 21939,
+          "off": 6590,
+          "size": 274
+        },
+        "_BSS": {
+          "seg": 21939,
+          "off": 35758,
+          "size": 28
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_0250.current.obj"
+    },
+    "DrawSpider": {
+      "module": "root:0250",
+      "address": {
+        "unit": "root",
+        "seg": 592,
+        "off": 6375
+      },
+      "current_source": "build/source-only-dos-v36/sources/U053.c",
+      "current_source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_0250.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U053.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_0250.historical.c",
+      "historical_source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m0250.c",
+      "object_sha256": "12675e0cfa17dbe0989fc3d67b2a48816fc0767c7ebd7009fb84492b0e64db25",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "original_size": 1433,
+      "current_size": 1433,
+      "original_sha256": "8dd6e981d93377f763d6ede6e05e68569b6efe25afc2943cf4d0657250d72ae1",
+      "current_bound_sha256": "d748a50db97f20269d180dcff9c8daa7178ddb60776b72b076a47b5c65699130",
+      "historical_strict_reasons": [
+        "bytes differ (first at +0x3db, 9 differing)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 2,
+      "original_instruction_count": 500,
+      "current_instruction_count": 500,
+      "unchanged_instruction_pairs": 489,
+      "classified_changes": [
+        {
+          "original_range": [
+            985,
+            999
+          ],
+          "current_range": [
+            985,
+            999
+          ],
+          "kind": "commuted word additions",
+          "relation": "The same two stable 16-bit operands are loaded and added in reversed order. The resulting word, ADD flags, call argument and all memory effects are identical modulo 65536. The first MOV has no flags or effects.",
+          "live_state": "AX at the region exit and the subsequent pushed argument match; stack homes and memory are unchanged."
+        },
+        {
+          "original_range": [
+            1101,
+            1117
+          ],
+          "current_range": [
+            1101,
+            1117
+          ],
+          "kind": "paired comparison reversal",
+          "relation": "CMP operands are exchanged together with signed JG/JL or JLE/JGE and unsigned JAE/JBE. Strictness and equality paths are preserved, including signed high-word then unsigned low-word comparisons. The values are read once and the resulting flags are used only by the paired branches.",
+          "live_state": "Every successor is the same semantic basic block; memory, registers and calls are unchanged except EFLAGS, which are consumed by corresponding inverse condition codes before a later defining instruction."
+        }
+      ],
+      "original_relocation_offsets": [
+        1002,
+        907,
+        762,
+        9,
+        1129,
+        1120,
+        1095,
+        1366,
+        606,
+        377,
+        1375,
+        1160
+      ],
+      "current_relocation_offsets": [
+        9,
+        1160,
+        1129,
+        1120,
+        1095,
+        1002,
+        907,
+        762,
+        606,
+        377,
+        1375,
+        1366
+      ],
+      "relocation_disposition": "All relocation sites and symbolic targets preserve their runtime meaning.",
+      "symbolic_calls_preserved": [
+        "_aFchkstk",
+        "f_0250_0643",
+        "f_0250_1018",
+        "f_0250_0915",
+        "f_0250_0B86",
+        "es:[0x37e6]",
+        "f_0250_062A",
+        "f_16B5_0033",
+        "f_2662_1120",
+        "f_2662_1120",
+        "f_2662_1120",
+        "DrawLegs",
+        "DrawPalps",
+        "TickCount",
+        "TickCount",
+        "SRand64",
+        "SRand2",
+        "AddMsgBalloon",
+        "TickCount",
+        "SRand32"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "CONST": {
+          "seg": 21939,
+          "off": 32396,
+          "size": 326
+        },
+        "_DATA": {
+          "seg": 21939,
+          "off": 6590,
+          "size": 274
+        },
+        "_BSS": {
+          "seg": 21939,
+          "off": 35758,
+          "size": 28
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_0250.current.obj"
+    },
+    "f_1E57_0F8E": {
+      "module": "root:1E57",
+      "address": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 3982
+      },
+      "current_source": "build/source-only-dos-v36/sources/U091.c",
+      "current_source_sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_1E57.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U091.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_1E57.historical.c",
+      "historical_source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m1E57.c",
+      "object_sha256": "476cef55acc341d339d27fd09d920a0cb13505b86c5c11b4808a440c16f9b22a",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "original_size": 78,
+      "current_size": 83,
+      "original_sha256": "b782e6e94e944ec9b1bd3a69b6f8a8b5ae7f3e05ce63352a92e86447555bf8b7",
+      "current_bound_sha256": "30c612fc6545475d0a202b34192726c50958f5696546ca377ed4077ca2384400",
+      "historical_strict_reasons": [
+        "length 83 != target 78",
+        "fixup at +0x4d crosses the extent end",
+        "bytes differ (first at +0x13, 30 differing)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 1,
+      "original_instruction_count": 28,
+      "current_instruction_count": 29,
+      "unchanged_instruction_pairs": 24,
+      "classified_changes": [
+        {
+          "original_range": [
+            51,
+            64
+          ],
+          "current_range": [
+            51,
+            69
+          ],
+          "kind": "reversed rectangle comparison with segment reload",
+          "relation": "Original loads clip.right into AX from the clip segment, reloads ES from r.segment, and tests r.right>AX (signed JG). Current loads r.right into AX after reloading ES from r.segment, reloads the clip segment into ES, and tests clip.right<AX (signed JL). Both reject precisely signed(r.right)>signed(clip.right); equality stays accepted. The two extra ES reloads account for all five extra bytes.",
+          "live_state": "BX remains r.offset. AX/ES are volatile at the helper boundary; the selected helper and state are identical. clip_Off/f_1E57_0351 invoke f_1E57_0009, whose pre-call operations have no ES input; its optional f_171C_1C0A uses explicit far pointer arguments. DS, BP, SP and memory agree."
+        }
+      ],
+      "original_relocation_offsets": [],
+      "current_relocation_offsets": [],
+      "relocation_disposition": "The target-size crossing diagnostic is caused by the historical 78-byte comparison clipping its real 83-byte candidate. The full 83-byte extent, both self-relative fixups and both calls are retained here; neither side has an MZ relocation within this function.",
+      "symbolic_calls_preserved": [
+        "clip_Off",
+        "f_1E57_0351"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "_DATA": {
+          "seg": 21939,
+          "off": 22274,
+          "size": 806
+        },
+        "CONST": {
+          "seg": 21939,
+          "off": 35280,
+          "size": 6
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_1E57.current.obj"
+    },
+    "f_23E6_0392": {
+      "module": "root:23E6",
+      "address": {
+        "unit": "root",
+        "seg": 9190,
+        "off": 914
+      },
+      "current_source": "build/source-only-dos-v36/sources/U105.c",
+      "current_source_sha256": "d0a490f75ee880984374da56620d49d146da879e50895c81802b537cff7d2bc3",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_23E6.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U105.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_23E6.historical.c",
+      "historical_source_sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m23E6.c",
+      "object_sha256": "bf4c9346c93cc6413aaa67d4d44bde4a3388b40cb67cada0ceac89b61dc25f44",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "original_size": 390,
+      "current_size": 390,
+      "original_sha256": "a1e1b2a57b22558f81445951e5ab2e2ac7a5e74fb986a0ce46b6cb029ffadb97",
+      "current_bound_sha256": "07b04733b1734698e294ca946e0c2b29c11416673181e1e97db5840526147178",
+      "historical_strict_reasons": [
+        "bytes differ (first at +0x124, 2 differing)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 1,
+      "original_instruction_count": 139,
+      "current_instruction_count": 139,
+      "unchanged_instruction_pairs": 137,
+      "classified_changes": [
+        {
+          "original_range": [
+            290,
+            296
+          ],
+          "current_range": [
+            290,
+            296
+          ],
+          "kind": "commuted word addition",
+          "relation": "The same two stable 16-bit operands are loaded and added in reversed order. The resulting word, ADD flags, call argument and all memory effects are identical modulo 65536. The first MOV has no flags or effects.",
+          "live_state": "AX at the region exit and the subsequent pushed argument match; stack homes and memory are unchanged."
+        }
+      ],
+      "original_relocation_offsets": [
+        248,
+        362,
+        150,
+        142,
+        262,
+        68,
+        219,
+        284,
+        378,
+        49,
+        356,
+        55,
+        86
+      ],
+      "current_relocation_offsets": [
+        262,
+        248,
+        219,
+        150,
+        142,
+        86,
+        68,
+        55,
+        49,
+        378,
+        362,
+        356,
+        284
+      ],
+      "relocation_disposition": "All relocation sites and symbolic targets preserve their runtime meaning.",
+      "symbolic_calls_preserved": [
+        "f_24AB_02AD",
+        "clip_Push",
+        "clip_SubInclude",
+        "f_171C_1B84",
+        "f_24AB_030B",
+        "f_24AB_030B",
+        "win_SetColorNum",
+        "f_24AB_042B",
+        "_fstrlen",
+        "win_SetColorNum",
+        "[0x9134]",
+        "f_24AB_02AD",
+        "clip_Pop",
+        "f_171C_1BBA"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "_DATA": {
+          "seg": 21939,
+          "off": 25840,
+          "size": 156
+        },
+        "CONST": {
+          "seg": 21939,
+          "off": 35388,
+          "size": 2
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_23E6.current.obj"
+    },
+    "PrevListLine": {
+      "module": "root:23E6",
+      "address": {
+        "unit": "root",
+        "seg": 9190,
+        "off": 2262
+      },
+      "current_source": "build/source-only-dos-v36/sources/U105.c",
+      "current_source_sha256": "d0a490f75ee880984374da56620d49d146da879e50895c81802b537cff7d2bc3",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_23E6.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U105.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_23E6.historical.c",
+      "historical_source_sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m23E6.c",
+      "object_sha256": "bf4c9346c93cc6413aaa67d4d44bde4a3388b40cb67cada0ceac89b61dc25f44",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "original_size": 381,
+      "current_size": 381,
+      "original_sha256": "0879bd53d95ebaf5349da75538d3b7d848b61cd960c107bf4db14b084f8a7e76",
+      "current_bound_sha256": "b96dfe164195d7ad7f590cc83de28df2a0dbc0f8c1619e93030cfc5c6f4abeca",
+      "historical_strict_reasons": [
+        "bytes differ (first at +0x7a, 2 differing)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 1,
+      "original_instruction_count": 159,
+      "current_instruction_count": 159,
+      "unchanged_instruction_pairs": 157,
+      "classified_changes": [
+        {
+          "original_range": [
+            120,
+            126
+          ],
+          "current_range": [
+            120,
+            126
+          ],
+          "kind": "commuted word addition",
+          "relation": "The same two stable 16-bit operands are loaded and added in reversed order. The resulting word, ADD flags, call argument and all memory effects are identical modulo 65536. The first MOV has no flags or effects.",
+          "live_state": "AX at the region exit and the subsequent pushed argument match; stack homes and memory are unchanged."
+        }
+      ],
+      "original_relocation_offsets": [
+        302,
+        353,
+        98,
+        116,
+        215,
+        283,
+        369,
+        92,
+        193,
+        334,
+        106,
+        70
+      ],
+      "current_relocation_offsets": [
+        215,
+        193,
+        116,
+        106,
+        98,
+        92,
+        70,
+        369,
+        353,
+        334,
+        302,
+        283
+      ],
+      "relocation_disposition": "All relocation sites and symbolic targets preserve their runtime meaning.",
+      "symbolic_calls_preserved": [
+        "f_171C_1B84",
+        "f_24AB_02AD",
+        "f_24AB_030B",
+        "clip_Push",
+        "clip_SubInclude",
+        "[0x9188]",
+        "f_24FA_0004",
+        "Punt",
+        "win_SetColorNum",
+        "f_24AB_042B",
+        "f_24FA_0004",
+        "clip_Pop",
+        "f_171C_1BBA"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "_DATA": {
+          "seg": 21939,
+          "off": 25840,
+          "size": 156
+        },
+        "CONST": {
+          "seg": 21939,
+          "off": 35388,
+          "size": 2
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_23E6.current.obj"
+    },
+    "win_Recalc": {
+      "module": "root:2505",
+      "address": {
+        "unit": "root",
+        "seg": 9477,
+        "off": 1349
+      },
+      "current_source": "build/source-only-dos-v36/sources/U108.c",
+      "current_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_2505.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U108.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_2505.historical.c",
+      "historical_source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m2505.c",
+      "object_sha256": "3cea33717f2147f8ac4757247b17b6831b5e2425728af0db443ccabb6b7bdd57",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "original_size": 372,
+      "current_size": 371,
+      "original_sha256": "b142cab1334f46271c11561816f5d6464f3b2e1fad71509bb098058d1e17b13c",
+      "current_bound_sha256": "9098bd257548a49d956a88331490f05b1c0eb9439141647c8fcd825ca9187439",
+      "historical_strict_reasons": [
+        "length 371 != target 372",
+        "bytes differ (first at +0x41, 298 differing)",
+        "relocation set differs (3 vs 3)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 4,
+      "original_instruction_count": 148,
+      "current_instruction_count": 146,
+      "unchanged_instruction_pairs": 129,
+      "classified_changes": [
+        {
+          "original_range": [
+            66,
+            81
+          ],
+          "current_range": [
+            66,
+            83
+          ],
+          "kind": "equivalent table address calculation",
+          "relation": "Original carries AX=i from its loop test, shifts it twice, loads SI=w.offset and ES=w.segment, adds 0x2C and AX, then LDS BX,ES:[SI]. Current reloads i into SI, shifts SI twice, adds w.offset, loads ES=w.segment, then LDS BX,ES:[SI+0x2C]. Both read the same far pointer at segment w.segment and offset (w.offset+4*i+0x2C) mod 65536.",
+          "live_state": "DS:BX becomes the identical object pointer. Old SI is table address, new SI is table address-0x2C; SI is overwritten before use by the iterative loop and finally restored. AX is overwritten by the common following rectangle-word load. The loop test defines flags before branching."
+        },
+        {
+          "original_range": [
+            100,
+            108
+          ],
+          "current_range": [
+            102,
+            110
+          ],
+          "kind": "paired signed loop-test reversal",
+          "relation": "Original AX=i; CMP n,AX; JG body. Current AX=n; CMP i,AX; JL body. Both enter iff signed i<signed n, including n<=0. The old AX=i carry feeds its first address calculation; current calculation explicitly reloads i.",
+          "live_state": "Branch successors agree; body-address relation above accounts for the deliberate AX carry difference. After loop, common MOV AX,DGROUP restores identical state."
+        },
+        {
+          "original_range": [
+            142,
+            159
+          ],
+          "current_range": [
+            144,
+            160
+          ],
+          "kind": "equivalent table address calculation",
+          "relation": "Original forms AX=4*BX, loads ES:SI=w, adds 0x2C and AX, then LES SI,ES:[SI]. Current forms SI=4*BX, adds w.offset, loads ES=w.segment, then LES SI,ES:[SI+0x2C]. Both load the identical far object pointer at (w.offset+4*i+0x2C) mod 65536.",
+          "live_state": "ES:SI and [bp-1E]/[bp-1C] agree. AX differs until redefined: it is not read by TEST/Jcc/push/LEA or, on the no-autosize arm, before common MOV AX,[bp-1E]. Autosize entry receives explicit object pointer and hidden result pointer; AX is volatile and unused as a helper argument."
+        },
+        {
+          "original_range": [
+            310,
+            320
+          ],
+          "current_range": [
+            311,
+            319
+          ],
+          "kind": "folded table displacements",
+          "relation": "Original adds 0x2C to BX=w.offset then pushes ES:[BX+DI+2] and ES:[BX+DI]. Current retains BX=w.offset and pushes ES:[BX+DI+0x2E] and ES:[BX+DI+0x2C]. With DI=4*i, both push segment then offset of the same far Rect pointer. Removing ADD (3 bytes) and enlarging both operand displacements by one byte each saves one byte.",
+          "live_state": "Both stack words and the f_2505_0511 call target agree. BX is volatile and not an argument of f_2505_0511. That helper defines BX using its far parameter before any read; subsequent LES BX reloads w."
+        }
+      ],
+      "original_relocation_offsets": [
+        109,
+        362,
+        38
+      ],
+      "current_relocation_offsets": [
+        361,
+        111,
+        38
+      ],
+      "relocation_disposition": "Shifted relocation sites follow the mapped instructions. All targets remain symbolically equal; historical site/set identity fails and remains recorded.",
+      "symbolic_calls_preserved": [
+        "f_171C_1B84",
+        "win_AutoSize",
+        "f_2505_03B9",
+        "f_2505_0511",
+        "f_171C_1BBA"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "CONST": {
+          "seg": 21939,
+          "off": 35396,
+          "size": 6
+        },
+        "_DATA": {
+          "seg": 21939,
+          "off": 26048,
+          "size": 248
+        },
+        "_BSS": {
+          "seg": 21939,
+          "off": 36308,
+          "size": 4
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_2505.current.obj"
+    },
+    "f_2505_0831": {
+      "module": "root:2505",
+      "address": {
+        "unit": "root",
+        "seg": 9477,
+        "off": 2097
+      },
+      "current_source": "build/source-only-dos-v36/sources/U108.c",
+      "current_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_2505.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U108.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_2505.historical.c",
+      "historical_source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m2505.c",
+      "object_sha256": "3cea33717f2147f8ac4757247b17b6831b5e2425728af0db443ccabb6b7bdd57",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "original_size": 185,
+      "current_size": 185,
+      "original_sha256": "3f3d0e90d73a10551d26af5277a9f759d9fe58ef9f5c48cb1b73f61ba249c2da",
+      "current_bound_sha256": "4ef8a7470383809de76fdf009cc696d7cf3d43a0c9505ff13b251df46e8894fc",
+      "historical_strict_reasons": [
+        "bytes differ (first at +0x54, 2 differing)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 1,
+      "original_instruction_count": 70,
+      "current_instruction_count": 70,
+      "unchanged_instruction_pairs": 68,
+      "classified_changes": [
+        {
+          "original_range": [
+            82,
+            88
+          ],
+          "current_range": [
+            82,
+            88
+          ],
+          "kind": "commuted word addition",
+          "relation": "The same two stable 16-bit operands are loaded and added in reversed order. The resulting word, ADD flags, call argument and all memory effects are identical modulo 65536. The first MOV has no flags or effects.",
+          "live_state": "AX at the region exit and the subsequent pushed argument match; stack homes and memory are unchanged."
+        }
+      ],
+      "original_relocation_offsets": [
+        94,
+        177,
+        161,
+        19,
+        169
+      ],
+      "current_relocation_offsets": [
+        177,
+        169,
+        161,
+        94,
+        19
+      ],
+      "relocation_disposition": "All relocation sites and symbolic targets preserve their runtime meaning.",
+      "symbolic_calls_preserved": [
+        "win_LockWin",
+        "f_2505_0006",
+        "f_1FD2_03EB",
+        "f_2505_06B9",
+        "f_1FD2_044F",
+        "f_218D_01EB",
+        "win_UnlockWin"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "CONST": {
+          "seg": 21939,
+          "off": 35396,
+          "size": 6
+        },
+        "_DATA": {
+          "seg": 21939,
+          "off": 26048,
+          "size": 248
+        },
+        "_BSS": {
+          "seg": 21939,
+          "off": 36308,
+          "size": 4
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_2505.current.obj"
+    },
+    "f_2505_08EA": {
+      "module": "root:2505",
+      "address": {
+        "unit": "root",
+        "seg": 9477,
+        "off": 2282
+      },
+      "current_source": "build/source-only-dos-v36/sources/U108.c",
+      "current_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "current_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_2505.current.c",
+      "current_snapshot_origin": "build/source-only-dos-v36/sources/U108.c",
+      "historical_source_snapshot": "build/workers/consolidation_peer_review/source-snapshots/root_2505.historical.c",
+      "historical_source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "historical_snapshot_origin": "portable/evidence/whole-program-foundation-v12-inputs/inputs/src/root/m2505.c",
+      "object_sha256": "3cea33717f2147f8ac4757247b17b6831b5e2425728af0db443ccabb6b7bdd57",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "original_size": 164,
+      "current_size": 164,
+      "original_sha256": "7e3ae557103b529590624ca110312d6fcda26acee1b1bb297962d8a544118c2d",
+      "current_bound_sha256": "f57b302b19d4a8c73bd1f9439dad054a985fb9dfa17af60402f31e8cf692d6c4",
+      "historical_strict_reasons": [
+        "bytes differ (first at +0x51, 2 differing)"
+      ],
+      "historical_byte_exact": false,
+      "current_proof_label": "STATIC_CONTEXT_RESIDUE_EQUIVALENCE",
+      "new_behavior_exact_claim": false,
+      "changed_region_count": 1,
+      "original_instruction_count": 63,
+      "current_instruction_count": 63,
+      "unchanged_instruction_pairs": 61,
+      "classified_changes": [
+        {
+          "original_range": [
+            79,
+            85
+          ],
+          "current_range": [
+            79,
+            85
+          ],
+          "kind": "commuted word addition",
+          "relation": "The same two stable 16-bit operands are loaded and added in reversed order. The resulting word, ADD flags, call argument and all memory effects are identical modulo 65536. The first MOV has no flags or effects.",
+          "live_state": "AX at the region exit and the subsequent pushed argument match; stack homes and memory are unchanged."
+        }
+      ],
+      "original_relocation_offsets": [
+        156,
+        89,
+        19,
+        147
+      ],
+      "current_relocation_offsets": [
+        89,
+        19,
+        156,
+        147
+      ],
+      "relocation_disposition": "All relocation sites and symbolic targets preserve their runtime meaning.",
+      "symbolic_calls_preserved": [
+        "win_LockWin",
+        "f_2505_0006",
+        "f_1FD2_0438",
+        "f_2505_06B9",
+        "f_1FD2_049C",
+        "win_UnlockWin"
+      ],
+      "unexplained_instruction_differences": 0,
+      "placements": {
+        "CONST": {
+          "seg": 21939,
+          "off": 35396,
+          "size": 6
+        },
+        "_DATA": {
+          "seg": 21939,
+          "off": 26048,
+          "size": 248
+        },
+        "_BSS": {
+          "seg": 21939,
+          "off": 36308,
+          "size": 4
+        }
+      },
+      "object_snapshot": "build/workers/consolidation_peer_review/object-snapshots/root_2505.current.obj"
+    }
+  },
+  "bounded_execution": {
+    "f_1E57_0F8E": {
+      "path": "build/workers/consolidation_peer_review/f_1E57_0F8E/run.json",
+      "sha256": "6df09cbd7ab4a819eb40d0585c1726efee6bcb5b49a7e8bcf04e6d86b275fbac",
+      "counts": {
+        "directed": 160,
+        "randomized": 256
+      },
+      "mismatches": 0,
+      "errors": 0,
+      "identity": {
+        "function": "f_1E57_0F8E",
+        "source": "build/source-only-dos-v36/sources/U091.c",
+        "source_sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+        "compiled_source_sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+        "object_sha256": "476cef55acc341d339d27fd09d920a0cb13505b86c5c11b4808a440c16f9b22a",
+        "linked_code_sha256": "157ce6942475d1a593520d2fab70a8210c23b9b73f3f712422724a70bc7dc662",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "manifest_sha256": "a2e219367353e6eb7bd0a9606513cf07b1251292c6f33d7ffa06f3b578711116",
+        "research_adapter_sha256": "1aaa9ef8678db02c4076e3c119c07d1984f472d43d44bcea67a60c31c9a648eb",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Gs",
+          "/Zi"
+        ],
+        "address": {
+          "unit": "root",
+          "seg": 7767,
+          "off": 3982,
+          "size": 78
+        },
+        "historical_gate_disposition": "KNOWN_FAILED_CONTEXT_RESIDUE; research execution only",
+        "historical_gate_reasons": [
+          "length 83 != target 78",
+          "fixup at +0x4d crosses the extent end",
+          "bytes differ (first at +0x13, 30 differing)"
+        ],
+        "unicorn_version": "2.1.4"
+      },
+      "ledger": {
+        "schema": "behavior-case-ledger-v1",
+        "path": "D:/Prog/simant_recon/build/workers/consolidation_peer_review/f_1E57_0F8E/cases.jsonl.gz",
+        "sha256": "9c82124dd87f2457a818953e7d7c9e34672d4a3d76d3e3c7c6aba46e1fe99089",
+        "row_count": 416,
+        "lane_counts": {
+          "directed": 160,
+          "randomized": 256
+        },
+        "identity": {
+          "address": {
+            "off": 3982,
+            "seg": 7767,
+            "size": 78,
+            "unit": "root"
+          },
+          "compiled_source_sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Oe",
+            "/Og",
+            "/Gs",
+            "/Zi"
+          ],
+          "function": "f_1E57_0F8E",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "historical_gate_disposition": "KNOWN_FAILED_CONTEXT_RESIDUE; research execution only",
+          "historical_gate_reasons": [
+            "length 83 != target 78",
+            "fixup at +0x4d crosses the extent end",
+            "bytes differ (first at +0x13, 30 differing)"
+          ],
+          "linked_code_sha256": "157ce6942475d1a593520d2fab70a8210c23b9b73f3f712422724a70bc7dc662",
+          "manifest_sha256": "a2e219367353e6eb7bd0a9606513cf07b1251292c6f33d7ffa06f3b578711116",
+          "object_sha256": "476cef55acc341d339d27fd09d920a0cb13505b86c5c11b4808a440c16f9b22a",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "profile": "msc600ax",
+          "research_adapter_sha256": "1aaa9ef8678db02c4076e3c119c07d1984f472d43d44bcea67a60c31c9a648eb",
+          "source": "build/source-only-dos-v36/sources/U091.c",
+          "source_sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+          "unicorn_version": "2.1.4"
+        },
+        "compression": "gzip"
+      }
+    },
+    "win_Recalc": {
+      "path": "build/workers/consolidation_peer_review/win_Recalc/run.json",
+      "sha256": "0fee0a41dd29e6292fc0896b25972396a8b46bbc0ccbda85cab5e8652bc84de3",
+      "counts": {
+        "directed": 46,
+        "randomized": 64
+      },
+      "mismatches": 0,
+      "errors": 0,
+      "identity": {
+        "function": "win_Recalc",
+        "source": "build/source-only-dos-v36/sources/U108.c",
+        "source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+        "compiled_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+        "object_sha256": "3cea33717f2147f8ac4757247b17b6831b5e2425728af0db443ccabb6b7bdd57",
+        "linked_code_sha256": "a337f759c09df3e8c63af9ce9eef0d816382caaf128901d16b78dd1be8f2773d",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "manifest_sha256": "a2e219367353e6eb7bd0a9606513cf07b1251292c6f33d7ffa06f3b578711116",
+        "research_adapter_sha256": "1aaa9ef8678db02c4076e3c119c07d1984f472d43d44bcea67a60c31c9a648eb",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Gs",
+          "/Zi"
+        ],
+        "address": {
+          "unit": "root",
+          "seg": 9477,
+          "off": 1349,
+          "size": 372
+        },
+        "historical_gate_disposition": "KNOWN_FAILED_CONTEXT_RESIDUE; research execution only",
+        "historical_gate_reasons": [
+          "length 371 != target 372",
+          "bytes differ (first at +0x41, 298 differing)",
+          "relocation set differs (3 vs 3)"
+        ],
+        "unicorn_version": "2.1.4"
+      },
+      "ledger": {
+        "schema": "behavior-case-ledger-v1",
+        "path": "D:/Prog/simant_recon/build/workers/consolidation_peer_review/win_Recalc/cases.jsonl.gz",
+        "sha256": "8ee51366c9ffdda711970087efa524b5b29681b7672f9209df293e57f0d198e1",
+        "row_count": 110,
+        "lane_counts": {
+          "directed": 46,
+          "randomized": 64
+        },
+        "identity": {
+          "address": {
+            "off": 1349,
+            "seg": 9477,
+            "size": 372,
+            "unit": "root"
+          },
+          "compiled_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Oe",
+            "/Og",
+            "/Gs",
+            "/Zi"
+          ],
+          "function": "win_Recalc",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "historical_gate_disposition": "KNOWN_FAILED_CONTEXT_RESIDUE; research execution only",
+          "historical_gate_reasons": [
+            "length 371 != target 372",
+            "bytes differ (first at +0x41, 298 differing)",
+            "relocation set differs (3 vs 3)"
+          ],
+          "linked_code_sha256": "a337f759c09df3e8c63af9ce9eef0d816382caaf128901d16b78dd1be8f2773d",
+          "manifest_sha256": "a2e219367353e6eb7bd0a9606513cf07b1251292c6f33d7ffa06f3b578711116",
+          "object_sha256": "3cea33717f2147f8ac4757247b17b6831b5e2425728af0db443ccabb6b7bdd57",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "profile": "msc600ax",
+          "research_adapter_sha256": "1aaa9ef8678db02c4076e3c119c07d1984f472d43d44bcea67a60c31c9a648eb",
+          "source": "build/source-only-dos-v36/sources/U108.c",
+          "source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+          "unicorn_version": "2.1.4"
+        },
+        "compression": "gzip"
+      }
+    }
+  },
+  "negative_control": {
+    "path": "build/workers/consolidation_peer_review/fixture-negative-control.json",
+    "sha256": "5bbba19807ee69bdd70a2d77a3a1999f4f28ccdccf0c2e0db6a1a7139c944a01",
+    "kind": "FIXTURE_BOUNDARY_OBSERVATION_CONTROL",
+    "source_mutation": false,
+    "executable_mutation": false,
+    "limitation": "This tests detection of helper/state differences from divergent boundary input; it is not a source-based negative control and cannot support BEHAVIOR_EXACT registration.",
+    "original_input_sha256": "d69b94897e7c341d38639ccb527a225485759d0cb1ffcfa1d11466dc8341f90b",
+    "current_input_sha256": "77fc162b0ae6c8a112ab5ca0171c482cf493cbdb37d4965e3341136b1aed7df7",
+    "detected": true,
+    "diff": {
+      "ranges": {
+        "oracle": {
+          "clip_state": "00000000",
+          "clip_rect": "f6fff6ff0a000a00",
+          "input_rect": "fbfffbff0a000500"
+        },
+        "candidate": {
+          "clip_state": "9c5ab355",
+          "clip_rect": "f6fff6ff09000a00",
+          "input_rect": "fbfffbff0a000500"
+        }
+      },
+      "trace": {
+        "oracle": [
+          {
+            "name": "clip_Off",
+            "args": [],
+            "state_at_entry": {
+              "clip_state": "77778888",
+              "clip_rect": "f6fff6ff0a000a00",
+              "input_rect": "fbfffbff0a000500"
+            },
+            "modified_state_at_entry": []
+          }
+        ],
+        "candidate": [
+          {
+            "name": "f_1E57_0351",
+            "args": [],
+            "state_at_entry": {
+              "clip_state": "77778888",
+              "clip_rect": "f6fff6ff09000a00",
+              "input_rect": "fbfffbff0a000500"
+            },
+            "modified_state_at_entry": []
+          }
+        ]
+      },
+      "nonstack_memory": {
+        "oracle": [
+          [
+            374236,
+            0
+          ],
+          [
+            374237,
+            0
+          ],
+          [
+            374238,
+            0
+          ],
+          [
+            374239,
+            0
+          ]
+        ],
+        "candidate": [
+          [
+            374236,
+            156
+          ],
+          [
+            374237,
+            90
+          ],
+          [
+            374238,
+            179
+          ],
+          [
+            374239,
+            85
+          ]
+        ]
+      }
+    }
+  },
+  "enforcement": "Keep historical matching failures visible. Current-residue validation must require source/body/context pins, historical profile/flags, the exact complete current extent and bound-code SHA256, no unbound fixups, and the same symbolic target sequence. The instruction relation and expected relocations are explicit; unknown changes fail. These pins identify the five compiled C modules and nine reviewed functions only; no generic similarity waiver is authorized."
+}

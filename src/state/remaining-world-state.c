@@ -1,0 +1,17 @@
+long far fd_50F6_0204;
+int far fd_50F6_0208;
+int far fd_50F6_0210;
+int far fd_50F6_0212;
+long far fd_50F6_0214;
+int far fd_50F6_0226;
+int far fd_50F6_0240;
+int far fd_50F6_0332;
+int far fd_50F6_037A;
+int far fd_50F6_0402;
+int far fd_50F6_0476;
+int far fd_50F6_047E;
+int far fd_50F6_0488;
+int far fd_50F6_048E;
+int far fd_50F6_0492;
+int far fd_50F6_049A;
+int far fd_50F6_04A4;

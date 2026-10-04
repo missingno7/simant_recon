@@ -1,0 +1,698 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "f_1C62_0415",
+  "module": "root:1C62",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "6cd5c6dab7579f167f2f04a0fcee8d33d2d186cfc7c939dd9c7e39ff131e6e91",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_1C62_0415.json",
+    "sha256": "b6494106b027cdc91f1f53c3afbf9d479853658f50bff8d975fda7eb6aa7de59"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_1C62_0415",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "whole_module": true,
+      "module": "root:1C62",
+      "function_lines": "250-324"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "entry": "f_1C62_0415",
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/evidence.json",
+      "evidence_sha256": "5a187518c7864bf81caf5c7499e013b76767a8232577e830dbc0d055d5c5dd7a"
+    },
+    "inputs": [
+      {
+        "path": "README.md",
+        "sha256": "eef0ab97d6cac61fe607ffc8101932389608cd96cd043adfcfa39bfc99c0b632"
+      },
+      {
+        "path": "docs/codegen-rules.md",
+        "sha256": "3ebff671acfb39d8e482163ffb0cc4294e76bcd669fd5099cda5a7a9744840d4"
+      },
+      {
+        "path": "docs/tu-evidence.md",
+        "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26"
+      },
+      {
+        "path": "build/workers/dos_static_audit_instructions.md",
+        "sha256": "925289751d7b969d6cf3269db46f502d0133c94e5210cb35ae2f9dbfb6ff212a"
+      },
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+      },
+      {
+        "path": "tools/behavior_suites/archive/tutorial-menu-e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a.py",
+        "sha256": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a"
+      },
+      {
+        "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/run.json",
+        "sha256": "b19ddec94b8deb18dbdbefb10a14edee851d8190133d40af86950e465e2297d2"
+      },
+      {
+        "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/negative-controls.json",
+        "sha256": "0267746a1558fc77c7a26be184b32d468a2f32d8850e7327c004ec9ba85515e6"
+      },
+      {
+        "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/contract-review.json",
+        "sha256": "a8cac68e7ffe5f36826a560ecd9837909daba7ca5ecf91eba0eea72052e88d6b"
+      },
+      {
+        "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/cases.jsonl.gz",
+        "sha256": "e899ed4e82140c77be2c44aafbb70c64d73f955404d4db3ce8116399e4522c3a"
+      },
+      {
+        "path": "build/workers/dos_static_misc_calls/f_1C62_0415.disasm.txt",
+        "sha256": "a376fac72164b691fbd9e26d29f5046e1366ad8b0823fd58c29ccecbad63918c"
+      },
+      {
+        "path": "build/workers/dos_static_misc_calls/diag_f_1C62_0415/f_1C62_0415.json",
+        "sha256": "a170729998d45f486e2715b21e43f39e11b38d8a3c07b1f759d3cfc1eadd65d0"
+      },
+      {
+        "path": "build/workers/dos_static_misc_calls/diag_f_1C62_0415/index.json",
+        "sha256": "bb40ce456c10ea9ff56bbff8863924e48591c9e1a1d2c285fc8c2ee6e25e30f0"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/GSaveRect.json",
+        "sha256": "94d9d4dcc43362137da566ffff44269b553880b955c949c468b2055d5a58ae5d"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1B73_032A.json",
+        "sha256": "763c45b723a57c670b00ecd43a280988a42fcfb01304a3c8d07a8ad057fa6a7a"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1B73_032E.json",
+        "sha256": "0bf5bf7174edc39fe166b8aa1855424e12da82c92a6a2159efdbef7d50e999ae"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1CE2_056C.json",
+        "sha256": "541245de8b9bbd0a64a1eac6de14ccfd95706d7527dafe9e3aacaf701888b98f"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_0038.json",
+        "sha256": "2e313ae2e2d60b9376d0ec7ad9b95a0452497a46f3b734e39ade36aa0a5cfb95"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_005A.json",
+        "sha256": "6c25ee77f8bca6914f4c8f93973dc0902268cee68aa387d84615cf4d8a751e2e"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_0090.json",
+        "sha256": "6dd957bd2b893b5c426f3de8f8a706e5924d140ac6304fbace1f3b6d940426c5"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FBD_0000.json",
+        "sha256": "6d03235ee8163d56bae90d2fec75cc0830a5373e1f3a9637793074a24cf18472"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FD2_02B1.json",
+        "sha256": "8ec71fabb4e42892fd00fa41c2307ec6f145c434304680a40e9efcb3fbfc1b0f"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FD2_031A.json",
+        "sha256": "6dff36345fea9d1ed336af56dc6b3deb1cc1c6606847a2467064b7eea5ef0d37"
+      },
+      {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/callback-boundary-audit.json",
+        "sha256": "660c83c937c0cc219cb9dba6c11eeb09e67d76d20f9fbde4128a38e189562b88"
+      },
+      {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/focused-boundary-probe.json",
+        "sha256": "59747cd86858cac776a2cc6a9d3aafa09628e34d99149e8f53c0a8ece38c4282"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0x1C62",
+      "off": "0x0415",
+      "size": 649,
+      "linear_start": "0x1CA35",
+      "end_exclusive_segment_offset": "0x069E",
+      "address_convention": "original segment offsets in hex"
+    },
+    "original_disassembly": {
+      "path": "build/workers/dos_static_misc_calls/f_1C62_0415.disasm.txt",
+      "sha256": "a376fac72164b691fbd9e26d29f5046e1366ad8b0823fd58c29ccecbad63918c",
+      "method": "python tools/context.py f_1C62_0415 (no --raw)",
+      "source_image": "assets/SIMANT.EXE",
+      "source_image_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "oracle_lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    "comparison": {
+      "scope": "Complete 649-byte original extent compared to complete registered C definition at module.c:250-324. Every original branch/call/state effect is accounted for. Targeted compiler diagnostic is bounded and diagnostic only: candidate is 653 bytes, compared prefix 649 bytes; strict extent remains mismatched.",
+      "compiler_diagnostic": {
+        "path": "build/workers/dos_static_misc_calls/diag_f_1C62_0415/f_1C62_0415.json",
+        "sha256": "a170729998d45f486e2715b21e43f39e11b38d8a3c07b1f759d3cfc1eadd65d0",
+        "index_path": "build/workers/dos_static_misc_calls/diag_f_1C62_0415/index.json",
+        "index_sha256": "bb40ce456c10ea9ff56bbff8863924e48591c9e1a1d2c285fc8c2ee6e25e30f0",
+        "target_bytes": 649,
+        "candidate_bytes": 653,
+        "compared_candidate_bytes": 649,
+        "target_instructions": 274,
+        "candidate_instructions_in_bound": 272,
+        "candidate_complete": false,
+        "relocations": "18 each; recorded set differs",
+        "strict_status": "MISMATCH; diagnostic explicitly leaves candidate tail outside comparison"
+      }
+    },
+    "branch_map": [
+      {
+        "address": "root:1C62:0x046A",
+        "mnemonic": "JMP",
+        "source_anchor": "module.c:274-279",
+        "predicate_or_role": "loop preheader to j<count test",
+        "target": "0x0496"
+      },
+      {
+        "address": "root:1C62:0x049C",
+        "mnemonic": "JG",
+        "source_anchor": "module.c:274-279",
+        "predicate_or_role": "signed 16-bit j<count (original cmp count,j; JG; candidate reverses operands and uses JL)",
+        "taken": "0x046C",
+        "width_bits": 16,
+        "signedness": "signed"
+      },
+      {
+        "address": "root:1C62:0x04A1",
+        "mnemonic": "JGE",
+        "source_anchor": "module.c:280-281",
+        "predicate_or_role": "signed width>=c; otherwise width=c; c=2*count",
+        "taken": "0x04A6",
+        "width_bits": 16,
+        "signedness": "signed"
+      },
+      {
+        "address": "root:1C62:0x0598",
+        "mnemonic": "JMP",
+        "source_anchor": "module.c:295-298",
+        "predicate_or_role": "render-loop preheader",
+        "target": "0x05D0"
+      },
+      {
+        "address": "root:1C62:0x05D6",
+        "mnemonic": "JG",
+        "source_anchor": "module.c:295-298",
+        "predicate_or_role": "signed 16-bit j<count (same candidate operand/condition inversion)",
+        "taken": "0x059A",
+        "width_bits": 16,
+        "signedness": "signed"
+      },
+      {
+        "address": "root:1C62:0x05E4",
+        "mnemonic": "JE",
+        "source_anchor": "module.c:300-301",
+        "predicate_or_role": "f_1F58_0038()==0; short-circuit key read",
+        "taken": "0x0643",
+        "width_bits": 16,
+        "signedness": "zero/equality or readiness test"
+      },
+      {
+        "address": "root:1C62:0x05EF",
+        "mnemonic": "JLE",
+        "source_anchor": "module.c:301",
+        "predicate_or_role": "signed f_1F58_0090()<=0; skip key normalization",
+        "taken": "0x0643",
+        "width_bits": 16,
+        "signedness": "signed"
+      },
+      {
+        "address": "root:1C62:0x05F6",
+        "mnemonic": "JE",
+        "source_anchor": "module.c:302-303",
+        "predicate_or_role": "(_ctype[c+1]&2)==0; otherwise subtract 0x20",
+        "taken": "0x05FB",
+        "width_bits": 8,
+        "signedness": "byte bit/equality after zero-extension"
+      },
+      {
+        "address": "root:1C62:0x0600",
+        "mnemonic": "JMP",
+        "source_anchor": "module.c:304-309",
+        "predicate_or_role": "hotkey scan preheader",
+        "target": "0x0629"
+      },
+      {
+        "address": "root:1C62:0x061D",
+        "mnemonic": "JE",
+        "source_anchor": "module.c:304-307",
+        "predicate_or_role": "labels[i][0]==normalized key; assign ev.code=i and cleanup",
+        "taken": "0x0663",
+        "width_bits": 16,
+        "signedness": "8-bit plain char sign-extended to 16-bit int; pinned hotkey bytes are all ASCII 0x00..0x7F"
+      },
+      {
+        "address": "root:1C62:0x0626",
+        "mnemonic": "JE",
+        "source_anchor": "module.c:304-307",
+        "predicate_or_role": "labels[i][1]==normalized key; assign ev.code=i and cleanup",
+        "taken": "0x0663",
+        "width_bits": 16,
+        "signedness": "8-bit plain char sign-extended to 16-bit int; pinned hotkey bytes are all ASCII 0x00..0x7F"
+      },
+      {
+        "address": "root:1C62:0x062C",
+        "mnemonic": "JG",
+        "source_anchor": "module.c:304-309",
+        "predicate_or_role": "after increment signed i<count; continue scan",
+        "taken": "0x0602",
+        "width_bits": 16,
+        "signedness": "signed"
+      },
+      {
+        "address": "root:1C62:0x064A",
+        "mnemonic": "JE",
+        "source_anchor": "module.c:312-315",
+        "predicate_or_role": "f_1B73_032A()==0; return to poll without event read",
+        "taken": "0x065E",
+        "width_bits": 16,
+        "signedness": "zero/equality or readiness test"
+      },
+      {
+        "address": "root:1C62:0x065C",
+        "mnemonic": "JE",
+        "source_anchor": "module.c:313-317",
+        "predicate_or_role": "high byte ev.code==0x09; accept event and cleanup",
+        "taken": "0x0661",
+        "width_bits": 8,
+        "signedness": "exact high-byte equality with 0x09"
+      },
+      {
+        "address": "root:1C62:0x065E",
+        "mnemonic": "JMP",
+        "source_anchor": "module.c:312-317",
+        "predicate_or_role": "non-0x09xx event returns to poll",
+        "target": "0x05DD"
+      },
+      {
+        "address": "root:1C62:0x0661",
+        "mnemonic": "JMP",
+        "source_anchor": "module.c:313-323",
+        "predicate_or_role": "accepted event skips keyboard selection store and enters cleanup",
+        "target": "0x0666"
+      },
+      {
+        "address": "root:1C62:0x0668",
+        "mnemonic": "JMP",
+        "source_anchor": "module.c:319-320",
+        "predicate_or_role": "cleanup loop preheader",
+        "target": "0x0676"
+      },
+      {
+        "address": "root:1C62:0x0679",
+        "mnemonic": "JG",
+        "source_anchor": "module.c:319-320",
+        "predicate_or_role": "after increment signed i<count; clear each button ID",
+        "taken": "0x066A",
+        "width_bits": 16,
+        "signedness": "signed"
+      }
+    ],
+    "returns": [
+      {
+        "address": "root:1C62:0x0693-0x069D",
+        "source_anchor": "module.c:323",
+        "value": "zero-extended low byte of ev.code in AX. Keyboard path first writes selected index to ev.code; accepted event path retains the 0x09xx code. Far return/caller stack cleanup."
+      }
+    ],
+    "call_map": [
+      {
+        "address": "root:1C62:0x0423",
+        "callee": "f_1C62_0737",
+        "source_anchor": "module.c:268",
+        "ordering_and_guard": "once before setup",
+        "arguments_and_abi": "()"
+      },
+      {
+        "address": "root:1C62:0x0441",
+        "callee": "f_1F80_000C",
+        "source_anchor": "module.c:270",
+        "ordering_and_guard": "once",
+        "arguments_and_abi": "(msg:far char*)"
+      },
+      {
+        "address": "root:1C62:0x047F",
+        "callee": "__fstrlen",
+        "source_anchor": "module.c:275",
+        "ordering_and_guard": "once per label; count times",
+        "arguments_and_abi": "(labels[j]+1:far char*)"
+      },
+      {
+        "address": "root:1C62:0x04B8",
+        "callee": "f_1F80_01A8",
+        "source_anchor": "module.c:282",
+        "ordering_and_guard": "once",
+        "arguments_and_abi": "(&g_557C:far Rect*,width+2:int16,size.y+4:int16)"
+      },
+      {
+        "address": "root:1C62:0x04C5",
+        "callee": "f_1CE2_039B",
+        "source_anchor": "module.c:283",
+        "ordering_and_guard": "once",
+        "arguments_and_abi": "(&g_557C:far Rect*) -> far Rect* copied to pr"
+      },
+      {
+        "address": "root:1C62:0x04DF",
+        "callee": "GSaveRect",
+        "source_anchor": "module.c:284",
+        "ordering_and_guard": "once",
+        "arguments_and_abi": "(&pr:far Rect*) -> save:far char*"
+      },
+      {
+        "address": "root:1C62:0x04F5",
+        "callee": "f_1CE2_046D",
+        "source_anchor": "module.c:285",
+        "ordering_and_guard": "once",
+        "arguments_and_abi": "(&pr:far Rect*,0x0F2F:int16)"
+      },
+      {
+        "address": "root:1C62:0x0506",
+        "callee": "g_9128",
+        "source_anchor": "module.c:286",
+        "ordering_and_guard": "once; indirect far call through near global slot DS:0x9128",
+        "arguments_and_abi": "(0x0404,0x0404,0x0040:int16)"
+      },
+      {
+        "address": "root:1C62:0x0516",
+        "callee": "f_1CE2_044D",
+        "source_anchor": "module.c:287",
+        "ordering_and_guard": "once",
+        "arguments_and_abi": "(&pr:far Rect*,4:int16)"
+      },
+      {
+        "address": "root:1C62:0x0523",
+        "callee": "g_9128",
+        "source_anchor": "module.c:288",
+        "ordering_and_guard": "once; indirect far call",
+        "arguments_and_abi": "(0,0,0:int16)"
+      },
+      {
+        "address": "root:1C62:0x0533",
+        "callee": "f_1CE2_044D",
+        "source_anchor": "module.c:289",
+        "ordering_and_guard": "once",
+        "arguments_and_abi": "(&pr:far Rect*,1:int16)"
+      },
+      {
+        "address": "root:1C62:0x0547",
+        "callee": "g_9128",
+        "source_anchor": "module.c:290",
+        "ordering_and_guard": "once; indirect far call",
+        "arguments_and_abi": "(0x0404,0x0F0F,0x00C0:int16)"
+      },
+      {
+        "address": "root:1C62:0x055D",
+        "callee": "f_1C62_0306",
+        "source_anchor": "module.c:291",
+        "ordering_and_guard": "once; same-module helper",
+        "arguments_and_abi": "(&g_557C:far Rect*,g_557C.top:int16,msg:far char*)"
+      },
+      {
+        "address": "root:1C62:0x058C",
+        "callee": "g_9128",
+        "source_anchor": "module.c:294",
+        "ordering_and_guard": "once; indirect far call",
+        "arguments_and_abi": "(0x0404,0x0C0C,0x00C0:int16)"
+      },
+      {
+        "address": "root:1C62:0x05B8",
+        "callee": "o10_35F5_0000",
+        "source_anchor": "module.c:295-298",
+        "ordering_and_guard": "once per button; count times",
+        "arguments_and_abi": "(h:int16,v:int16,labels[j]+1:far char*,j+0x0900:int16)"
+      },
+      {
+        "address": "root:1C62:0x05D8",
+        "callee": "f_1FD2_02FF",
+        "source_anchor": "module.c:299",
+        "ordering_and_guard": "once before poll",
+        "arguments_and_abi": "()"
+      },
+      {
+        "address": "root:1C62:0x05DD",
+        "callee": "f_1F58_0038",
+        "source_anchor": "module.c:301",
+        "ordering_and_guard": "each poll iteration until exit",
+        "arguments_and_abi": "() -> int16 readiness"
+      },
+      {
+        "address": "root:1C62:0x05E6",
+        "callee": "f_1F58_0090",
+        "source_anchor": "module.c:301",
+        "ordering_and_guard": "only when key readiness is nonzero",
+        "arguments_and_abi": "() -> signed int16 key"
+      },
+      {
+        "address": "root:1C62:0x063A",
+        "callee": "o10_35F5_0A63",
+        "source_anchor": "module.c:310",
+        "ordering_and_guard": "positive unmatched key only",
+        "arguments_and_abi": "(c:int16,&sel:near int*,count:int16,0x0900:int16)"
+      },
+      {
+        "address": "root:1C62:0x0643",
+        "callee": "f_1B73_032A",
+        "source_anchor": "module.c:312",
+        "ordering_and_guard": "each poll iteration after unmatched/no key",
+        "arguments_and_abi": "() -> int16 readiness"
+      },
+      {
+        "address": "root:1C62:0x0651",
+        "callee": "f_1B73_032E",
+        "source_anchor": "module.c:313",
+        "ordering_and_guard": "only when event readiness is nonzero",
+        "arguments_and_abi": "(&ev:far Event*); reads/writes eight 16-bit words and consumes one event"
+      },
+      {
+        "address": "root:1C62:0x066F",
+        "callee": "f_1FD2_0438",
+        "source_anchor": "module.c:319-320",
+        "ordering_and_guard": "once per button during cleanup; count times",
+        "arguments_and_abi": "(i+0x0900:int16)"
+      },
+      {
+        "address": "root:1C62:0x067B",
+        "callee": "f_1FD2_031A",
+        "source_anchor": "module.c:321",
+        "ordering_and_guard": "once after cleanup loop",
+        "arguments_and_abi": "()"
+      },
+      {
+        "address": "root:1C62:0x068B",
+        "callee": "f_1CE2_056C",
+        "source_anchor": "module.c:322",
+        "ordering_and_guard": "once; restore saved surface",
+        "arguments_and_abi": "(&pr:far Rect*,save:far char*)"
+      }
+    ],
+    "memory_state": {
+      "reads": [
+        "msg through text/font helpers",
+        "g_5570[set] selects far pointer array of far label pointers; g_5584[set] is button count",
+        "each label byte 0 is primary hotkey, byte 1 secondary hotkey; visible label is labels[j]+1",
+        "_ctype[c+1] bit 0x02 tests lowercase for ASCII uppercase conversion",
+        "g_557C full Rect and left/top/bottom; g_9128 is an indirect far callback target"
+      ],
+      "writes": [
+        "g_557C resized in place and retained; clipped rectangle pr is a local copy",
+        "widths[0..count-1] receive string lengths; h/c/j/i/width/v/count are 16-bit locals",
+        "sel starts at -1 and is passed by address; source never reads it after o10_35F5_0A63",
+        "ev.code is assigned selected hotkey index or filled by event helper",
+        "f_1C62_0737 drains pending keys; f_1F58_0090 consumes each positive polling key; f_1B73_032E consumes one ready eight-word event",
+        "render callback/helper calls emit ordered requests; final helper restores saved pr surface"
+      ],
+      "no_direct_writes": [
+        "g_5570, label literals, g_5584 and _ctype are read-only here"
+      ],
+      "observable_effects": [
+        "return low byte; call order and arguments; keyboard/event consumption; g_557C and pointed rect/event/selection writes; logical geometry, text, color and restore requests"
+      ]
+    },
+    "constants_widths_pointer_math": {
+      "abi": "far int function(char far *msg,int set); msg at BP+6/+8, signed set word BP+0xA, caller cleanup; AX is low byte zero-extended; SI/DI/BP preserved. g_9128 is near data slot holding a far function pointer.",
+      "layouts": "Rect=4 signed 16-bit ints (8 bytes); Event=8 signed 16-bit words (16 bytes), code byte offset 0x0C. g_5570[set] and labels[j] each use 4-byte far-pointer indexing; widths[j] uses 2-byte int indexing. Coordinates, counts, IDs and keys are signed 16-bit int.",
+      "arithmetic": "labels[j]+1 skips prefix byte; width=max(size.x,2*count); h=sum of _fstrlen results; x=(width-h-2)/2+g_557C.left using signed 16-bit division truncating toward zero; y=g_557C.bottom-2; next x += widths[j]+2. Valid set gives count 2 or 3, lengths and geometry stay in range.",
+      "constants": "fill 0x0F2F; attributes/callback g_9128 args (0x0404,0x0404,0x40), (0,0,0), (0x0404,0x0F0F,0xC0), (0x0404,0x0C0C,0xC0); border widths 4 and 1; button spacing/padding +2; rect dimensions +2/+4; base ID 0x0900; event high byte 0x09.",
+      "keys_events": "Hotkey byte equality after lowercase bit-test/0x20 subtraction; compare both bytes. Event code is 16-bit; high byte == 9 is the exit predicate and low byte is returned."
+    },
+    "dependency_boundaries": {
+      "same_module_helpers": [
+        "f_1C62_0737 at line 268 drains keys by polling f_1F58_0038 and consuming f_1F58_005A; original disassembly at 0x0737 confirms the loop and far-call sequence.",
+        "f_1C62_0306 at line 291 receives far Rect*, signed line, far text; it wraps and draws message lines; source call stack matches original argument order and pointer widths."
+      ],
+      "pinned_service_certificates": [
+        {
+          "helper": "GSaveRect",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/GSaveRect.json",
+          "sha256": "94d9d4dcc43362137da566ffff44269b553880b955c949c468b2055d5a58ae5d"
+        },
+        {
+          "helper": "f_1B73_032A",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1B73_032A.json",
+          "sha256": "763c45b723a57c670b00ecd43a280988a42fcfb01304a3c8d07a8ad057fa6a7a"
+        },
+        {
+          "helper": "f_1B73_032E",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1B73_032E.json",
+          "sha256": "0bf5bf7174edc39fe166b8aa1855424e12da82c92a6a2159efdbef7d50e999ae"
+        },
+        {
+          "helper": "f_1CE2_056C",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1CE2_056C.json",
+          "sha256": "541245de8b9bbd0a64a1eac6de14ccfd95706d7527dafe9e3aacaf701888b98f"
+        },
+        {
+          "helper": "f_1F58_0038",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_0038.json",
+          "sha256": "2e313ae2e2d60b9376d0ec7ad9b95a0452497a46f3b734e39ade36aa0a5cfb95"
+        },
+        {
+          "helper": "f_1F58_005A",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_005A.json",
+          "sha256": "6c25ee77f8bca6914f4c8f93973dc0902268cee68aa387d84615cf4d8a751e2e"
+        },
+        {
+          "helper": "f_1F58_0090",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_0090.json",
+          "sha256": "6dd957bd2b893b5c426f3de8f8a706e5924d140ac6304fbace1f3b6d940426c5"
+        },
+        {
+          "helper": "f_1FBD_0000",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FBD_0000.json",
+          "sha256": "6d03235ee8163d56bae90d2fec75cc0830a5373e1f3a9637793074a24cf18472"
+        },
+        {
+          "helper": "f_1FD2_02B1",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FD2_02B1.json",
+          "sha256": "8ec71fabb4e42892fd00fa41c2307ec6f145c434304680a40e9efcb3fbfc1b0f"
+        },
+        {
+          "helper": "f_1FD2_031A",
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FD2_031A.json",
+          "sha256": "6dff36345fea9d1ed336af56dc6b3deb1cc1c6606847a2467064b7eea5ef0d37"
+        }
+      ],
+      "scope": "Host-service certificates document provider-visible return/queue/pointed effects and omitted backend state. f_1FD2_02FF and same-module f_1C62_0737 have no separate provider certificate and execute against the original image. Pinned run records zero unmodeled boundaries."
+    },
+    "static_axes": [
+      {
+        "axis": "complete_algorithm",
+        "result": "Sizing labels, resizing/clipping/saving, painting and drawing, pending-key drain, input normalization, both hotkey bytes, unmatched-key callback, event queue poll/read/category exit, ID cleanup, surface restore and low-byte return all map to original."
+      },
+      {
+        "axis": "all_original_control_flow",
+        "result": "All 12 conditional sites and six unconditional jumps (loop preheaders, cleanup/event exits and poll backedge) are mapped; no switch or indirect jump."
+      },
+      {
+        "axis": "calls_order_arguments",
+        "result": "All 24 call sites mapped including four indirect g_9128 calls, guards, repeated loops, far pointers and 16-bit arguments."
+      },
+      {
+        "axis": "width_signedness_constants",
+        "result": "Signed 16-bit coordinates/counters/IDs, unsigned 16-bit string length, label-byte comparison, 0x09xx event handling, center division and all visual constants are accounted for."
+      },
+      {
+        "axis": "pointer_arithmetic_layout",
+        "result": "Far string/rect/surface pointers, pointer-array strides, width-array stride, Rect/Event sizes, ev.code offset, g_557C mutation and pr copy are explicit."
+      },
+      {
+        "axis": "side_effects_dependencies",
+        "result": "Direct globals, stack records, callback-visible pointers, consumed key/event order, render calls and restoration are inventoried; host-only exclusions are pinned to reviewed helper certificates."
+      },
+      {
+        "axis": "scope_boundary",
+        "result": "Static equivalence is for valid set 0..2 and documented provider contract. Arbitrary BIOS scheduling, full framebuffer/backend internals and unbounded input sequences remain outside that contract."
+      }
+    ],
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:1C62:0x049C",
+        "source_anchor": "module.c:274-279",
+        "explanation": "Original cmp count,j / JG and candidate cmp j,count / JL express the same signed j<count predicate."
+      },
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:1C62:0x05D6",
+        "source_anchor": "module.c:295-298",
+        "explanation": "Same signed compare operand/branch inversion in button loop."
+      },
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:1C62:0x046C and root:1C62:0x059A",
+        "source_anchor": "module.c:274-279 and 295-298",
+        "explanation": "Candidate reloads loop index from BP home where original retains it in AX; stack homes and branch layout differ while selected label index/address/ID are unchanged."
+      },
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:1C62:0x0698-0x069D",
+        "source_anchor": "module.c:323",
+        "explanation": "Compiled C extent is four bytes longer and has different frame/epilogue layout. The diagnostic does not decode the final four candidate bytes beyond its 649-byte bound; strict historical extent/relocation mismatch remains explicit debt, with no semantic difference inferred from byte similarity."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "run": {
+        "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/run.json",
+        "sha256": "b19ddec94b8deb18dbdbefb10a14edee851d8190133d40af86950e465e2297d2",
+        "result": "156 original/candidate executions: 56 directed and 100 fixed-seed randomized; zero errors/mismatches/unmodeled boundaries; compares return, ordered calls/input, pointed rect/string data, global/pointed and all non-stack writes, caller ABI. All 12 positive helper controls matched."
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/negative-controls.json",
+        "sha256": "0267746a1558fc77c7a26be184b32d468a2f32d8850e7327c004ec9ba85515e6",
+        "result": "Compiled second-byte-hotkey mutant detected by return, trace and state mismatch."
+      },
+      "review": {
+        "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/contract-review.json",
+        "sha256": "a8cac68e7ffe5f36826a560ecd9837909daba7ca5ecf91eba0eea72052e88d6b",
+        "result": "Root-approved finite question-dialog contract with key/event/geometry domains and documented helper limits."
+      },
+      "callback_boundary_audit": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/callback-boundary-audit.json",
+        "sha256": "660c83c937c0cc219cb9dba6c11eeb09e67d76d20f9fbde4128a38e189562b88",
+        "result": "Pinned target row covers all 156 cases, records each modeled callback execution mode, stack-word count, callee-pop bytes and total observed count; f_1FD2_02FF and f_1C62_0737 execute from the original image."
+      },
+      "focused_pending_key_probe": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/focused-boundary-probe.json",
+        "sha256": "59747cd86858cac776a2cc6a9d3aafa09628e34d99149e8f53c0a8ece38c4282",
+        "result": "Pinned ignored-key case matches return and callback trace; confirms original f_1C62_0737 drains a pending prefix before dialog setup."
+      }
+    },
+    "review_notes": [
+      "Status is source-level semantic completeness under the question-dialog host-service contract, not universal behavior for arbitrary host backends.",
+      "Original is 649 bytes; registered C compiles to 653 bytes and evidence reports differing relocation set (18 each). The exactness failure is preserved independently.",
+      "Static source/control-flow comparison supports no semantic gap. The compiler diagnostic bounds candidate decode to 649 bytes, so its final four generated bytes are uninspected as code and are retained as exactness/codegen debt.",
+      "The suite is finite and does not model unrestricted BIOS/event scheduling or full framebuffer state."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}

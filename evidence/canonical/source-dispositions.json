@@ -1,0 +1,4773 @@
+{
+  "schema": "simant-consolidation-review-checklist-v1",
+  "method": "read-only assessment; no automatic claim changes or publication",
+  "source_mappings": [
+    {
+      "module": "S00:3126",
+      "canonical_path": "src/S00/m3126.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U000.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S00:31AD",
+      "canonical_path": "src/S00/m31AD.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U001.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S00:31AD@2AB4",
+      "canonical_path": "src/S00/m31AD_2AB4.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U002.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S00:35A6",
+      "canonical_path": "src/S00/m35A6.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U003.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S01:3126",
+      "canonical_path": "src/S01/m3126.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U004.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S01:328E",
+      "canonical_path": "src/S01/m328E.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U005.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S01:32B5",
+      "canonical_path": "src/S01/m32B5.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U006.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S02:3126",
+      "canonical_path": "src/S02/m3126.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U007.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S03:3126",
+      "canonical_path": "src/S03/m3126.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U008.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S03:3253",
+      "canonical_path": "src/S03/m3253.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U009.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S03:3258",
+      "canonical_path": "src/S03/m3258.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U010.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S04:35F5",
+      "canonical_path": "src/S04/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U011.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S05:35F5",
+      "canonical_path": "src/S05/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U012.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S05:3663",
+      "canonical_path": "src/S05/m3663.c",
+      "effective_path": "build/source-only-dos-v36/sources/U013.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S06:35F5",
+      "canonical_path": "src/S06/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U014.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "S07:35F5",
+      "canonical_path": "src/S07/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U015.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S08:35F5",
+      "canonical_path": "src/S08/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U016.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S09:35F5",
+      "canonical_path": "src/S09/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U017.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S09:36EE",
+      "canonical_path": "src/S09/m36EE.c",
+      "effective_path": "build/source-only-dos-v36/sources/U018.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S10:35F5",
+      "canonical_path": "src/S10/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U019.c",
+      "reviewed_bodies": [
+        "o10_35F5_0384"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "S11:35F5",
+      "canonical_path": "src/S11/m35F5.c",
+      "effective_path": "build/source-only-dos-v36/sources/U020.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S12:384C",
+      "canonical_path": "src/S12/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U021.c",
+      "reviewed_bodies": [
+        "DrawMapCursor"
+      ],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S13:384C",
+      "canonical_path": "src/S13/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U022.c",
+      "reviewed_bodies": [
+        "InvertPatch"
+      ],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S14:384C",
+      "canonical_path": "src/S14/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U023.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S15:384C",
+      "canonical_path": "src/S15/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U024.c",
+      "reviewed_bodies": [
+        "o15_384C_0239"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "S16:384C",
+      "canonical_path": "src/S16/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U025.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S17:384C",
+      "canonical_path": "src/S17/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U026.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S18:384C",
+      "canonical_path": "src/S18/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U027.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S19:384C",
+      "canonical_path": "src/S19/m384C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U028.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S20:39C7",
+      "canonical_path": "src/S20/m39C7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U029.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S20:39F1",
+      "canonical_path": "src/S20/m39F1.c",
+      "effective_path": "build/source-only-dos-v36/sources/U030.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S21:39C7",
+      "canonical_path": "src/S21/m39C7.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U031.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S22:39C7",
+      "canonical_path": "src/S22/m39C7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U032.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S22:3BBD",
+      "canonical_path": "src/S22/m3BBD.c",
+      "effective_path": "build/source-only-dos-v36/sources/U033.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S23:39C7",
+      "canonical_path": "src/S23/m39C7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U034.c",
+      "reviewed_bodies": [
+        "DisplayCard",
+        "win_PrintStyleTextInRect"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "S24:39C7",
+      "canonical_path": "src/S24/m39C7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U035.c",
+      "reviewed_bodies": [
+        "drawHistGraph"
+      ],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "S25:39C7",
+      "canonical_path": "src/S25/m39C7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U036.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "S25:3BA4",
+      "canonical_path": "src/S25/m3BA4.c",
+      "effective_path": "build/source-only-dos-v36/sources/U037.c",
+      "reviewed_bodies": [
+        "o25_3BA4_1035",
+        "o25_3BA4_1686"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "S26:39C7",
+      "canonical_path": "src/S26/m39C7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U038.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "data:3D57",
+      "canonical_path": "src/data/d3D57.c",
+      "effective_path": "build/source-only-dos-v36/sources/U039.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "data:3E1D",
+      "canonical_path": "src/data/d3E1D.c",
+      "effective_path": "build/source-only-dos-v36/sources/U040.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "data:55B3@0042",
+      "canonical_path": "src/data/d55B3_0042.c",
+      "effective_path": "build/source-only-dos-v36/sources/U041.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "data:55B3@0064",
+      "canonical_path": "src/data/d55B3_0064.c",
+      "effective_path": "build/source-only-dos-v36/sources/U042.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "data:55B3@00B8",
+      "canonical_path": "src/data/d55B3_00B8.c",
+      "effective_path": "build/source-only-dos-v36/sources/U043.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0000",
+      "canonical_path": "src/root/m0000.c",
+      "effective_path": "build/source-only-dos-v36/sources/U044.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:004A",
+      "canonical_path": "src/root/m004A.c",
+      "effective_path": "build/source-only-dos-v36/sources/U045.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0093",
+      "canonical_path": "src/root/m0093.c",
+      "effective_path": "build/source-only-dos-v36/sources/U046.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:00BA",
+      "canonical_path": "src/root/m00BA.c",
+      "effective_path": "build/source-only-dos-v36/sources/U047.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:00DE",
+      "canonical_path": "src/root/m00DE.c",
+      "effective_path": "build/source-only-dos-v36/sources/U048.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:00DF",
+      "canonical_path": "src/root/m00DF.c",
+      "effective_path": "build/source-only-dos-v36/sources/U049.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:00F8",
+      "canonical_path": "src/root/m00F8.c",
+      "effective_path": "build/source-only-dos-v36/sources/U050.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:015B",
+      "canonical_path": "src/root/m015B.c",
+      "effective_path": "build/source-only-dos-v36/sources/U051.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0244",
+      "canonical_path": "src/root/m0244.c",
+      "effective_path": "build/source-only-dos-v36/sources/U052.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0250",
+      "canonical_path": "src/root/m0250.c",
+      "effective_path": "build/source-only-dos-v36/sources/U053.c",
+      "reviewed_bodies": [
+        "DrawBalloons",
+        "f_0250_1018",
+        "f_0250_129E"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:075B",
+      "canonical_path": "src/root/m075B.c",
+      "effective_path": "build/source-only-dos-v36/sources/U054.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:078E",
+      "canonical_path": "src/root/m078E.c",
+      "effective_path": "build/source-only-dos-v36/sources/U055.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0798",
+      "canonical_path": "src/root/m0798.c",
+      "effective_path": "build/source-only-dos-v36/sources/U056.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0894",
+      "canonical_path": "src/root/m0894.c",
+      "effective_path": "build/source-only-dos-v36/sources/U057.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0AD9",
+      "canonical_path": "src/root/m0AD9.c",
+      "effective_path": "build/source-only-dos-v36/sources/U058.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "root:0BE8",
+      "canonical_path": "src/root/m0BE8.c",
+      "effective_path": "build/source-only-dos-v36/sources/U059.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "root:0CDB",
+      "canonical_path": "src/root/m0CDB.c",
+      "effective_path": "build/source-only-dos-v36/sources/U060.c",
+      "reviewed_bodies": [
+        "SpiderScan"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:0DEF",
+      "canonical_path": "src/root/m0DEF.c",
+      "effective_path": "build/source-only-dos-v36/sources/U061.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0E2E",
+      "canonical_path": "src/root/m0E2E.c",
+      "effective_path": "build/source-only-dos-v36/sources/U062.c",
+      "reviewed_bodies": [
+        "LessonDone"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:0EC1",
+      "canonical_path": "src/root/m0EC1.c",
+      "effective_path": "build/source-only-dos-v36/sources/U063.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:0F3F",
+      "canonical_path": "src/root/m0F3F.c",
+      "effective_path": "build/source-only-dos-v36/sources/U064.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:10F7",
+      "canonical_path": "src/root/m10F7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U065.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1383",
+      "canonical_path": "src/root/m1383.c",
+      "effective_path": "build/source-only-dos-v36/sources/U066.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1496",
+      "canonical_path": "src/root/m1496.c",
+      "effective_path": "build/source-only-dos-v36/sources/U067.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:14EE",
+      "canonical_path": "src/root/m14EE.c",
+      "effective_path": "build/source-only-dos-v36/sources/U068.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:15D9",
+      "canonical_path": "src/root/m15D9.c",
+      "effective_path": "build/source-only-dos-v36/sources/U069.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:15F8",
+      "canonical_path": "src/root/m15F8.c",
+      "effective_path": "build/source-only-dos-v36/sources/U070.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1629",
+      "canonical_path": "src/root/m1629.c",
+      "effective_path": "build/source-only-dos-v36/sources/U071.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1699",
+      "canonical_path": "src/root/m1699.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U072.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:16B5",
+      "canonical_path": "src/root/m16B5.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U073.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:171C",
+      "canonical_path": "src/root/m171C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U074.c",
+      "reviewed_bodies": [
+        "f_171C_09CC",
+        "f_171C_0ADC",
+        "f_171C_0CF4",
+        "f_171C_0FBC"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:194D",
+      "canonical_path": "src/root/m194D.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U075.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1959",
+      "canonical_path": "src/root/m1959.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U076.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:195A",
+      "canonical_path": "src/root/m195A.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U077.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1986",
+      "canonical_path": "src/root/m1986.c",
+      "effective_path": "build/source-only-dos-v36/sources/U078.c",
+      "reviewed_bodies": [
+        "FindIndex"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:19A9",
+      "canonical_path": "src/root/m19A9.c",
+      "effective_path": "build/source-only-dos-v36/sources/U079.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:19DC",
+      "canonical_path": "src/root/m19DC.c",
+      "effective_path": "build/source-only-dos-v36/sources/U080.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1A28",
+      "canonical_path": "src/root/m1A28.c",
+      "effective_path": "build/source-only-dos-v36/sources/U081.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1A53",
+      "canonical_path": "src/root/m1A53.c",
+      "effective_path": "build/source-only-dos-v36/sources/U082.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1A96",
+      "canonical_path": "src/root/m1A96.c",
+      "effective_path": "build/source-only-dos-v36/sources/U083.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1B05",
+      "canonical_path": "src/root/m1B05.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U084.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1B28",
+      "canonical_path": "src/root/m1B28.c",
+      "effective_path": "build/source-only-dos-v36/sources/U085.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1B4E",
+      "canonical_path": "src/root/m1B4E.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U086.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "root:1B73",
+      "canonical_path": "src/root/m1B73.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U087.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "root:1C62",
+      "canonical_path": "src/root/m1C62.c",
+      "effective_path": "build/source-only-dos-v36/sources/U088.c",
+      "reviewed_bodies": [
+        "f_1C62_0415"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:1CE2",
+      "canonical_path": "src/root/m1CE2.c",
+      "effective_path": "build/source-only-dos-v36/sources/U089.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1D8E",
+      "canonical_path": "src/root/m1D8E.c",
+      "effective_path": "build/source-only-dos-v36/sources/U090.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1E57",
+      "canonical_path": "src/root/m1E57.c",
+      "effective_path": "build/source-only-dos-v36/sources/U091.c",
+      "reviewed_bodies": [
+        "f_1E57_038E"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:1F58",
+      "canonical_path": "src/root/m1F58.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U092.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1F66",
+      "canonical_path": "src/root/m1F66.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U093.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1F80",
+      "canonical_path": "src/root/m1F80.c",
+      "effective_path": "build/source-only-dos-v36/sources/U094.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1FAA",
+      "canonical_path": "src/root/m1FAA.c",
+      "effective_path": "build/source-only-dos-v36/sources/U095.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1FBD",
+      "canonical_path": "src/root/m1FBD.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U096.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:1FD2",
+      "canonical_path": "src/root/m1FD2.c",
+      "effective_path": "build/source-only-dos-v36/sources/U097.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "root:205F",
+      "canonical_path": "src/root/m205F.c",
+      "effective_path": "build/source-only-dos-v36/sources/U098.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:208F",
+      "canonical_path": "src/root/m208F.c",
+      "effective_path": "build/source-only-dos-v36/sources/U099.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:20E8",
+      "canonical_path": "src/root/m20E8.c",
+      "effective_path": "build/source-only-dos-v36/sources/U100.c",
+      "reviewed_bodies": [
+        "f_20E8_0903"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:218D",
+      "canonical_path": "src/root/m218D.c",
+      "effective_path": "build/source-only-dos-v36/sources/U101.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:21FA",
+      "canonical_path": "src/root/m21FA.c",
+      "effective_path": "build/source-only-dos-v36/sources/U102.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:22BF",
+      "canonical_path": "src/root/m22BF.c",
+      "effective_path": "build/source-only-dos-v36/sources/U103.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:23AE",
+      "canonical_path": "src/root/m23AE.c",
+      "effective_path": "build/source-only-dos-v36/sources/U104.c",
+      "reviewed_bodies": [
+        "win_UnlockWin"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:23E6",
+      "canonical_path": "src/root/m23E6.c",
+      "effective_path": "build/source-only-dos-v36/sources/U105.c",
+      "reviewed_bodies": [
+        "f_23E6_0000"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:24AB",
+      "canonical_path": "src/root/m24AB.c",
+      "effective_path": "build/source-only-dos-v36/sources/U106.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:24FA",
+      "canonical_path": "src/root/m24FA.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U107.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:2505",
+      "canonical_path": "src/root/m2505.c",
+      "effective_path": "build/source-only-dos-v36/sources/U108.c",
+      "reviewed_bodies": [
+        "f_2505_0453"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:259D",
+      "canonical_path": "src/root/m259D.c",
+      "effective_path": "build/source-only-dos-v36/sources/U109.c",
+      "reviewed_bodies": [
+        "win_DrawBitMap"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:25E7",
+      "canonical_path": "src/root/m25E7.c",
+      "effective_path": "build/source-only-dos-v36/sources/U110.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:2650",
+      "canonical_path": "src/root/m2650.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U111.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "root:2662",
+      "canonical_path": "src/root/m2662.c",
+      "effective_path": "build/source-only-dos-v36/sources/U112.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:277D",
+      "canonical_path": "src/root/m277D.c",
+      "effective_path": "build/source-only-dos-v36/sources/U113.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:277E",
+      "canonical_path": "src/root/m277E.c",
+      "effective_path": "build/source-only-dos-v36/sources/U114.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:2815",
+      "canonical_path": "src/root/m2815.c",
+      "effective_path": "build/source-only-dos-v36/sources/U115.c",
+      "reviewed_bodies": [
+        "f_2815_0165"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:283E",
+      "canonical_path": "src/root/m283E.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U116.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:284A",
+      "canonical_path": "src/root/m284A.c",
+      "effective_path": "build/source-only-dos-v36/sources/U117.c",
+      "reviewed_bodies": [
+        "f_284A_0138"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:28BC",
+      "canonical_path": "src/root/m28BC.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U118.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": true,
+      "changed": true
+    },
+    {
+      "module": "root:290D",
+      "canonical_path": "src/root/m290D.c",
+      "effective_path": "build/source-only-dos-v36/sources/U119.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:293A",
+      "canonical_path": "src/root/m293A.c",
+      "effective_path": "build/source-only-dos-v36/sources/U120.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:295C",
+      "canonical_path": "src/root/m295C.c",
+      "effective_path": "build/source-only-dos-v36/sources/U121.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:29B8",
+      "canonical_path": "src/root/m29B8.c",
+      "effective_path": "build/source-only-dos-v36/sources/U122.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:29BF",
+      "canonical_path": "src/root/m29BF.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U123.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:29D6",
+      "canonical_path": "src/root/m29D6.c",
+      "effective_path": "build/source-only-dos-v36/sources/U124.c",
+      "reviewed_bodies": [
+        "f_29D6_000A"
+      ],
+      "bindings_admitted": false,
+      "changed": true
+    },
+    {
+      "module": "root:29F0",
+      "canonical_path": "src/root/m29F0.c",
+      "effective_path": "build/source-only-dos-v36/sources/U125.c",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    },
+    {
+      "module": "root:2CFB",
+      "canonical_path": "src/root/m2CFB.asm",
+      "effective_path": "build/source-only-dos-v36/sources/U126.asm",
+      "reviewed_bodies": [],
+      "bindings_admitted": false,
+      "changed": false
+    }
+  ],
+  "storage_mappings": [
+    {
+      "module": "source-owned:driver-callback-table",
+      "canonical_path": "src/state/driver-callback-table.c",
+      "accepted_source": "work/source-only-dos/providers/callback-table.c",
+      "effective_path": "build/source-only-dos-v36/sources/CBOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_driver_callback_table",
+          "kind": "near",
+          "length": 100
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:mouse-words",
+      "canonical_path": "src/state/mouse-words.c",
+      "accepted_source": "work/source-only-dos/providers/mouse-words.c",
+      "effective_path": "build/source-only-dos-v36/sources/MSOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_g_9120",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9122",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9124",
+          "kind": "near",
+          "length": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:memory-state",
+      "canonical_path": "src/state/memory-state.c",
+      "accepted_source": "work/source-only-dos/providers/memory-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/MMOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_g_91A0",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_91A2",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_91A4",
+          "kind": "near",
+          "length": 4
+        },
+        {
+          "name": "_g_91A8",
+          "kind": "near",
+          "length": 4
+        },
+        {
+          "name": "_g_91AC",
+          "kind": "near",
+          "length": 4
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:render-scalars",
+      "canonical_path": "src/state/render-scalars.c",
+      "accepted_source": "work/source-only-dos/providers/render-scalars.c",
+      "effective_path": "build/source-only-dos-v36/sources/RSOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_g_8BD2",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_8BD4",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9126",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_94E4",
+          "kind": "near",
+          "length": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:memory-far-state",
+      "canonical_path": "src/state/memory-far-state.c",
+      "accepted_source": "work/source-only-dos/providers/memory-far-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/MFOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_394C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_394E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3950",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3948",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B48",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:mono-pattern-prefix",
+      "canonical_path": "src/state/mono-pattern-prefix.c",
+      "accepted_source": "work/source-only-dos/providers/mono-pattern-prefix.c",
+      "effective_path": "build/source-only-dos-v36/sources/MPOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_g_8EC0",
+          "kind": "near",
+          "length": 24
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:clip-pointer",
+      "canonical_path": "src/state/clip-pointer.c",
+      "accepted_source": "work/source-only-dos/providers/clip-pointer.c",
+      "effective_path": "build/source-only-dos-v36/sources/CPOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_g_5AAC",
+          "kind": "near",
+          "length": 4
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:yard-scalars",
+      "canonical_path": "src/state/yard-scalars.c",
+      "accepted_source": "work/source-only-dos/providers/yard-scalars.c",
+      "effective_path": "build/source-only-dos-v36/sources/YDOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_105E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0478",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0504",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0228",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MapPlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_YardMode",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0366",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0376",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:database-index-state",
+      "canonical_path": "src/state/database-index-state.c",
+      "accepted_source": "work/source-only-dos/providers/database-index-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/DIOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_3952",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3956",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:spider-counters",
+      "canonical_path": "src/state/spider-counters.c",
+      "accepted_source": "work/source-only-dos/providers/spider-counters.c",
+      "effective_path": "build/source-only-dos-v36/sources/SPIDATA.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_DeathCnt",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_EatCnt",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SCorpseBase",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_Scycle",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_Scycle2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SpidBurpCnt",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SpidRevenge",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:lion-sow-pillar",
+      "canonical_path": "src/state/lion-sow-pillar.c",
+      "accepted_source": "work/source-only-dos/providers/lion-data.c",
+      "effective_path": "build/source-only-dos-v36/sources/LIOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_LionListM",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListS",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListT",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListX",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_LionListY",
+          "kind": "far",
+          "length": 10,
+          "count": 10,
+          "element_size": 1
+        },
+        {
+          "name": "_PillDir",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_PillarSeg",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_PillarMap",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_SowDir",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowSave",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowX",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        },
+        {
+          "name": "_SowY",
+          "kind": "far",
+          "length": 6,
+          "count": 3,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:spider-controls",
+      "canonical_path": "src/state/spider-controls.c",
+      "accepted_source": "work/source-only-dos/providers/spider-controls.c",
+      "effective_path": "build/source-only-dos-v36/sources/SPICTRL.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_ChaseSpid",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SMode",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SuserX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SuserY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_Starg",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_StargLife",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:point-state",
+      "canonical_path": "src/state/point-state.c",
+      "accepted_source": "work/source-only-dos/providers/point-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/PTOWNER.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0508",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0596",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_06A6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_072E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_07BC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:database-record-state",
+      "canonical_path": "src/state/database-record-state.c",
+      "accepted_source": "work/source-only-dos/providers/database-record-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/DBRECOWN.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_3958",
+          "kind": "far",
+          "length": 496,
+          "count": 4,
+          "element_size": 124
+        },
+        {
+          "name": "_db_handles",
+          "kind": "far",
+          "length": 8,
+          "count": 4,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:graphics-formulas",
+      "canonical_path": "src/state/graphics-formulas.c",
+      "accepted_source": "work/source-only-dos/providers/graphics-formulas.c",
+      "effective_path": "build/source-only-dos-v36/sources/GFXOWNER.c",
+      "publics": [
+        {
+          "name": "_g_2100",
+          "segment": "_DATA",
+          "offset": 0
+        },
+        {
+          "name": "_mono_tail_masks",
+          "segment": "_DATA",
+          "offset": 8
+        },
+        {
+          "name": "_packed_tail_masks",
+          "segment": "_DATA",
+          "offset": 16
+        }
+      ],
+      "communals": [],
+      "initialized_bytes": 18
+    },
+    {
+      "module": "source-owned:g2108-color-translation",
+      "canonical_path": "src/state/g2108-color-translation.c",
+      "accepted_source": "work/source-only-dos/providers/color-translation.c",
+      "effective_path": "build/source-only-dos-v36/sources/G210808.c",
+      "publics": [
+        {
+          "name": "_g_2108",
+          "segment": "_DATA",
+          "offset": 0
+        }
+      ],
+      "communals": [],
+      "initialized_bytes": 16
+    },
+    {
+      "module": "source-owned:ant-list-counts",
+      "canonical_path": "src/state/ant-list-counts.c",
+      "accepted_source": "work/source-only-dos/providers/ant-list-counts.c",
+      "effective_path": "build/source-only-dos-v36/sources/ALCOUNT.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_ListIndexA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_ListIndexB",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_ListIndexR",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:colony-simulation-words",
+      "canonical_path": "src/state/colony-simulation-words.c",
+      "accepted_source": "work/source-only-dos/providers/colony-simulation-words.c",
+      "effective_path": "build/source-only-dos-v36/sources/COLWORD.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0254",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_02BE",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_032C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0352",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0356",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_03E0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_03E2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0400",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:player-locations",
+      "canonical_path": "src/state/player-locations.c",
+      "accepted_source": "work/source-only-dos/providers/player-location-words.c",
+      "effective_path": "build/source-only-dos-v36/sources/PLOCOWN.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_MeLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MeLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MePlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedPlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:ant-counters-timer",
+      "canonical_path": "src/state/ant-counters-timer.c",
+      "accepted_source": "work/source-only-dos/providers/ant-counters-timer.c",
+      "effective_path": "build/source-only-dos-v36/sources/ANTCTR.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_BAntsEaten",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_RAntsEaten",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0620",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:language-string-list-pointers",
+      "canonical_path": "src/state/language-string-list-pointers.c",
+      "accepted_source": "work/source-only-dos/providers/language-string-list-pointers.c",
+      "effective_path": "build/source-only-dos-v36/sources/LANGPTR.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_AdviceStrs",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_02BA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0324",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0328",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0368",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:dead-ant-coordinate-rings",
+      "canonical_path": "src/state/dead-ant-coordinate-rings.c",
+      "accepted_source": "work/source-only-dos/providers/dead-ant-coordinate-rings.c",
+      "effective_path": "build/source-only-dos-v36/sources/DEADXY.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_037C",
+          "kind": "far",
+          "length": 100,
+          "count": 100,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0404",
+          "kind": "far",
+          "length": 100,
+          "count": 100,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:ant-player-state",
+      "canonical_path": "src/state/ant-player-state.c",
+      "accepted_source": "work/source-only-dos/providers/ant-player-state-words.c",
+      "effective_path": "build/source-only-dos-v36/sources/ANTSTATE.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_FuzLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_FuzLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MeHealth",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_ModeAuto",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_StrategicModeB",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_TilesDugR",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:display-mode-selector",
+      "canonical_path": "src/state/display-mode-selector.c",
+      "accepted_source": "work/source-only-dos/providers/display-mode-selector.c",
+      "effective_path": "build/source-only-dos-v36/sources/MODEOWN.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_g_5A97",
+          "kind": "near",
+          "length": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:ant-ui-control-state",
+      "canonical_path": "src/state/ant-ui-control-state.c",
+      "accepted_source": "work/source-only-dos/providers/ant-ui-control-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/ANTCTRL.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_casteLevels",
+          "kind": "far",
+          "length": 6,
+          "count": 6,
+          "element_size": 1
+        },
+        {
+          "name": "_modeLevels",
+          "kind": "far",
+          "length": 6,
+          "count": 6,
+          "element_size": 1
+        },
+        {
+          "name": "_knobSize",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_triHeight",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_triWidth",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_triWidthL",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_triWidthR",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3816",
+          "kind": "far",
+          "length": 12,
+          "count": 12,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3822",
+          "kind": "far",
+          "length": 12,
+          "count": 12,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_382E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0358",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_022E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:ui-resource-scalars",
+      "canonical_path": "src/state/ui-resource-scalars.c",
+      "accepted_source": "work/source-only-dos/providers/ui-resource-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/UIRESOWN.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_win_numOfWindows",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_win_numOfColors",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_win_numOfGroups",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B4C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B58",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B5C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:terrain-state-words",
+      "canonical_path": "src/state/terrain-state-words.c",
+      "accepted_source": "work/source-only-dos/providers/terrain-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/TERRNOWN.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_Barrier",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_TERRAINset",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:swarm-serialized-buffers",
+      "canonical_path": "src/state/swarm-serialized-buffers.c",
+      "accepted_source": "work/source-only-dos/providers/swarm-serialized-buffers.c",
+      "effective_path": "build/source-only-dos-v36/sources/SWARMOWN.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0F46",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F84",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FC6",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1008",
+          "kind": "far",
+          "length": 50,
+          "count": 50,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:population-work-arrays",
+      "canonical_path": "src/state/population-work-arrays.c",
+      "accepted_source": "work/source-only-dos/providers/population-work-arrays.c",
+      "effective_path": "build/source-only-dos-v36/sources/POPWORK.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0AEC",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0AFA",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:saved-sound-state",
+      "canonical_path": "src/state/saved-sound-state.c",
+      "accepted_source": "work/source-only-dos/saved-sound-state-v19/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/SNDSTATE.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_01F0",
+          "kind": "far",
+          "length": 14,
+          "count": 7,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:control-flag-words",
+      "canonical_path": "src/state/control-flag-words.c",
+      "accepted_source": "work/source-only-dos/control-flag-words-v18/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/CTRLFLAG.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0468",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0370",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_024E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:count-ants-transition-word",
+      "canonical_path": "src/state/count-ants-transition-word.c",
+      "accepted_source": "work/source-only-dos/count-ants-transition-word-v19/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/ANTLATCH.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0354",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:sound-control-words",
+      "canonical_path": "src/state/sound-control-words.c",
+      "accepted_source": "work/source-only-dos/sound-control-words-v20/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/SNDCTRL.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_4A46",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A48",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A4A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A4C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B14",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B16",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:sound-record-arrays",
+      "canonical_path": "src/state/sound-record-arrays.c",
+      "accepted_source": "work/source-only-dos/sound-record-arrays-v21/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/SNDRECS.c",
+      "publics": [],
+      "communals": [
+        {
+          "count": 56,
+          "element_size": 6,
+          "kind": "far",
+          "length": 336,
+          "name": "_fd_50F6_0000"
+        },
+        {
+          "count": 33,
+          "element_size": 6,
+          "kind": "far",
+          "length": 198,
+          "name": "_fd_50F6_4A4E"
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:ant-movement-words",
+      "canonical_path": "src/state/ant-movement-words.c",
+      "accepted_source": "work/source-only-dos/ant-movement-words-v21/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/ANTMOVE.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0496",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_04C2",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_04C4",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_04E2",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_07C0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_084E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_08DA",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_08E2",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_09F0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0AB6",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0AC6",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0AD6",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0AE8",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0AF8",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_104E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_1058",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:world-output-state",
+      "canonical_path": "src/state/world-output-state.c",
+      "accepted_source": "work/source-only-dos/world-output-state-v21/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/WORLDOUT.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0200",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_020E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0224",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0242",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_035E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_036C",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0472",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_09FA",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0A00",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_1040",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_1068",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_1082",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_108E",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_10A2",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_10B2",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_10C0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:history-scalar-state",
+      "canonical_path": "src/state/history-scalar-state.c",
+      "accepted_source": "work/source-only-dos/history-scalar-state-v21/provider.c",
+      "effective_path": "build/source-only-dos-v36/sources/HISTOTAL.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_04F4",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0A90",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0A9E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0AC4",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0AC8",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2
+        },
+        {
+          "name": "_fd_50F6_0ADA",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_0EFC",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_0F30",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_0F3E",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_0FBC",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_0FC2",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        {
+          "name": "_fd_50F6_1000",
+          "kind": "far",
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:ant-class-histogram",
+      "canonical_path": "src/state/ant-class-histogram.c",
+      "accepted_source": "work/source-only-dos/providers/ant-class-histogram.c",
+      "effective_path": "build/source-only-dos-v36/sources/ANTCOUNT.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0EB6",
+          "kind": "far",
+          "count": 32,
+          "element_size": 2,
+          "length": 64
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:event-records",
+      "canonical_path": "src/state/event-records.c",
+      "accepted_source": "work/source-only-dos/providers/event-records.c",
+      "effective_path": "build/source-only-dos-v36/sources/EVRECS.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_49FA",
+          "kind": "far",
+          "length": 16,
+          "count": 16,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A0A",
+          "kind": "far",
+          "length": 16,
+          "count": 16,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-preparestrings-string-pointers",
+      "canonical_path": "src/state/remaining-preparestrings-string-pointers.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-preparestrings-string-pointers.c",
+      "effective_path": "build/source-only-dos-v36/sources/STRREST.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_020A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0218",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_021C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0234",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_023A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_034C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_046C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_106E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1078",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1086",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1096",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10A8",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10B4",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:yard-init-state",
+      "canonical_path": "src/state/yard-init-state.c",
+      "accepted_source": "work/source-only-dos/providers/yard-init-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/YARDISCL.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0220",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_107E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_109C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0202",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_022C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_023E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0244",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0246",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0364",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_036E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_046A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0470",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_047A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04BE",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04C6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04E4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0506",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0624",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_07C2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_105C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1066",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_108C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10A0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10B0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10BC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:yard-animation-arrays",
+      "canonical_path": "src/state/yard-animation-arrays.c",
+      "accepted_source": "work/source-only-dos/providers/yard-animation-arrays.c",
+      "effective_path": "build/source-only-dos-v36/sources/YARDARR.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0334",
+          "kind": "far",
+          "length": 24,
+          "count": 12,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_38CA",
+          "kind": "far",
+          "length": 30,
+          "count": 15,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_38E8",
+          "kind": "far",
+          "length": 34,
+          "count": 17,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_390A",
+          "kind": "far",
+          "length": 34,
+          "count": 17,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:balloon-deadline-timers",
+      "canonical_path": "src/state/balloon-deadline-timers.c",
+      "accepted_source": "work/source-only-dos/providers/balloon-deadline-timers.c",
+      "effective_path": "build/source-only-dos-v36/sources/BLNTMR.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_050C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_059A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0732",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_07C4",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:experiment-anchor",
+      "canonical_path": "src/state/experiment-anchor.c",
+      "accepted_source": "work/source-only-dos/providers/experiment-anchor.c",
+      "effective_path": "build/source-only-dos-v36/sources/EXPANCH.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_09FC",
+          "kind": "far",
+          "length": 4,
+          "count": 2,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:window-clip-handles",
+      "canonical_path": "src/state/window-clip-handles.c",
+      "accepted_source": "work/source-only-dos/providers/window-clip-handles.c",
+      "effective_path": "build/source-only-dos-v36/sources/WCLIPH.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_3B60",
+          "kind": "far",
+          "length": 180,
+          "count": 45,
+          "element_size": 4
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-history-words",
+      "canonical_path": "src/state/remaining-history-words.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-history-words.c",
+      "effective_path": "build/source-only-dos-v36/sources/HISTSC25.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0EAC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EB4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EF6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EF8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0EFA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F06",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F0C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F0E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F10",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F12",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F26",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F2E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F34",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F36",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F3C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F44",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F7A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FC0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:mode-population-vectors",
+      "canonical_path": "src/state/mode-population-vectors.c",
+      "accepted_source": "work/source-only-dos/providers/mode-population-vectors.c",
+      "effective_path": "build/source-only-dos-v36/sources/MPVOWNR.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0B12",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0C2A",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0D40",
+          "kind": "far",
+          "length": 40,
+          "count": 20,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_0D72",
+          "kind": "far",
+          "length": 40,
+          "count": 20,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:floor-task-words",
+      "canonical_path": "src/state/floor-task-words.c",
+      "accepted_source": "work/source-only-dos/providers/floor-task-words.c",
+      "effective_path": "build/source-only-dos-v36/sources/FLRTSK.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_DROPdir",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_Tindex",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:ui-geometry-state",
+      "canonical_path": "src/state/ui-geometry-state.c",
+      "accepted_source": "work/source-only-dos/providers/ui-geometry-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/UIGEO.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_10D2",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_110C",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1104",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_392C",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-world-state",
+      "canonical_path": "src/state/remaining-world-state.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-world-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/WRLDSC25.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0204",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0208",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0210",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0212",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0214",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0226",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0240",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0332",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_037A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0402",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0476",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_047E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0488",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_048E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0492",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_049A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04A4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-ant-state",
+      "canonical_path": "src/state/remaining-ant-state.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-ant-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/ANTSCL25.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_0A02",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0A8A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AA2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AB2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0A06",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0A9C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AA6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0ACA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AD8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0AEA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B06",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B08",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0C3A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D68",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D6C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D6E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D70",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0C26",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-ui-state",
+      "canonical_path": "src/state/remaining-ui-state.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-ui-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/UISTTE26.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_1062",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1064",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_106C",
+          "kind": "far",
+          "length": 1,
+          "count": 1,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1074",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_107C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1092",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10A6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10AC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10B8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10BA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10CC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10D0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10DA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10DE",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10E0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10E2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10E6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10EA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10EE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1102",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-window-state",
+      "canonical_path": "src/state/remaining-window-state.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-window-state.c",
+      "effective_path": "build/source-only-dos-v36/sources/WINSC26.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_3938",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_393C",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3944",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37D2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37D4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37D6",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37DE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37E6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37EA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37EE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37F2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37F6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37FA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37FC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3836",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_383A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3842",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_384A",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3852",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3854",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3856",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3858",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38B2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38B6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38B8",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38BC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38C0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38C2",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3934",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-scalar-tail",
+      "canonical_path": "src/state/remaining-scalar-tail.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-scalar-tail.c",
+      "effective_path": "build/source-only-dos-v36/sources/SCALTL26.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_04E0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04F2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0502",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0510",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_059E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_06AC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0736",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08DC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08E8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D9A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FF8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1004",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1006",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_103A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_103C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1044",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1046",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1048",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_104A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:balloon-buffer-tables",
+      "canonical_path": "src/state/balloon-buffer-tables.c",
+      "accepted_source": "work/source-only-dos/providers/balloon-buffer-tables.c",
+      "effective_path": "build/source-only-dos-v36/sources/BLNTAB26.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_04A6",
+          "kind": "far",
+          "length": 24,
+          "count": 6,
+          "element_size": 4
+        },
+        {
+          "name": "_fd_50F6_04C8",
+          "kind": "far",
+          "length": 24,
+          "count": 6,
+          "element_size": 4
+        },
+        {
+          "name": "_fd_50F6_04E6",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_04F6",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:render-delay-word",
+      "canonical_path": "src/state/render-delay-word.c",
+      "accepted_source": "work/source-only-dos/providers/render-delay-word.c",
+      "effective_path": "build/source-only-dos-v36/sources/DELAYW27.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_46D0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:window-ralloc-handles",
+      "canonical_path": "src/state/window-ralloc-handles.c",
+      "accepted_source": "work/source-only-dos/providers/window-ralloc-handles.c",
+      "effective_path": "build/source-only-dos-v36/sources/WINHD27.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_385A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_385E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-sound-storage",
+      "canonical_path": "src/state/remaining-sound-storage.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-sound-storage.c",
+      "effective_path": "build/source-only-dos-v36/sources/SNDST27.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_47DA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4A1A",
+          "kind": "far",
+          "length": 16,
+          "count": 4,
+          "element_size": 4
+        },
+        {
+          "name": "_fd_50F6_4A42",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B28",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B2C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B2E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B8A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_4B8E",
+          "kind": "far",
+          "length": 28,
+          "count": 14,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_4BAA",
+          "kind": "far",
+          "length": 28,
+          "count": 14,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:remaining-misc-storage",
+      "canonical_path": "src/state/remaining-misc-storage.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-misc-storage.c",
+      "effective_path": "build/source-only-dos-v36/sources/MISCST27.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_07CA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0852",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08DE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08EC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_09F2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B0A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B22",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1114",
+          "kind": "far",
+          "length": 1200,
+          "count": 1200,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_15C4",
+          "kind": "far",
+          "length": 2400,
+          "count": 1200,
+          "element_size": 2
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:screen-clip-list",
+      "canonical_path": "src/state/screen-clip-list.c",
+      "accepted_source": "work/source-only-dos/providers/screen-clip-list.c",
+      "effective_path": "build/source-only-dos-v36/sources/SCRLIST.c",
+      "publics": [
+        {
+          "name": "_g_5A9C",
+          "segment": "_DATA",
+          "offset": 0
+        }
+      ],
+      "communals": [],
+      "initialized_bytes": 16
+    },
+    {
+      "module": "source-owned:remaining-far-state-words",
+      "canonical_path": "src/state/remaining-far-state-words.c",
+      "accepted_source": "work/source-only-dos/providers/remaining-far-state-words.c",
+      "effective_path": "build/source-only-dos-v36/sources/FARW29.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_fd_50F6_04C0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B20",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F38",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FB6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FFA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:window-initialized-views",
+      "canonical_path": "src/state/window-initialized-views.c",
+      "accepted_source": "work/source-only-dos/providers/window-initialized-views-v36.c",
+      "effective_path": "build/source-only-dos-v36/sources/WINVW36.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_win_drawHooks",
+          "kind": "far",
+          "length": 180,
+          "count": 45,
+          "element_size": 4
+        },
+        {
+          "name": "_win_offsets",
+          "kind": "far",
+          "length": 360,
+          "count": 45,
+          "element_size": 8
+        }
+      ],
+      "initialized_bytes": 0
+    },
+    {
+      "module": "source-owned:critical-selector-byte",
+      "canonical_path": "src/state/critical-selector-byte.c",
+      "accepted_source": "work/source-only-dos/providers/critical-selector-byte-v36.c",
+      "effective_path": "build/source-only-dos-v36/sources/CRITBY36.c",
+      "publics": [],
+      "communals": [
+        {
+          "name": "_g_8CCB",
+          "kind": "near",
+          "length": 1
+        }
+      ],
+      "initialized_bytes": 0
+    }
+  ],
+  "accepted_new_symbol_anchors": [
+    {
+      "name": "g_41D0",
+      "kind": "data",
+      "seg": 21939,
+      "off": 16848,
+      "review_required": "Register through symbol writer using reviewed owner/site/contract anchors"
+    },
+    {
+      "name": "glyph_edge_masks",
+      "kind": "data",
+      "seg": 21939,
+      "off": 26488,
+      "review_required": "Register through symbol writer using reviewed owner/site/contract anchors"
+    },
+    {
+      "name": "mono_tail_masks",
+      "kind": "data",
+      "seg": 21939,
+      "off": 26796,
+      "review_required": "Register through symbol writer using reviewed owner/site/contract anchors"
+    },
+    {
+      "name": "packed_tail_masks",
+      "kind": "data",
+      "seg": 21939,
+      "off": 26804,
+      "review_required": "Register through symbol writer using reviewed owner/site/contract anchors"
+    },
+    {
+      "name": "input_queue",
+      "kind": "data",
+      "seg": 21939,
+      "off": 37296,
+      "review_required": "Register through symbol writer using reviewed owner/site/contract anchors"
+    }
+  ],
+  "alias_closure_assessment": {
+    "S00:31AD": {
+      "exact": true,
+      "failed_claims": {},
+      "extent": {
+        "exact": true,
+        "reasons": [],
+        "reloc_order": "CROSS_FUNCTION_PENDING",
+        "order_reasons": [
+          "cross-function relocation order inside target group external:_f_1B4E_015B differs"
+        ]
+      },
+      "data": {},
+      "module_reasons": []
+    },
+    "S00:35A6": {
+      "exact": true,
+      "failed_claims": {},
+      "extent": {
+        "exact": true,
+        "reasons": [],
+        "reloc_order": "EXACT",
+        "order_reasons": []
+      },
+      "data": {},
+      "module_reasons": []
+    },
+    "S01:32B5": {
+      "exact": true,
+      "failed_claims": {},
+      "extent": {
+        "exact": true,
+        "reasons": [],
+        "reloc_order": "EXACT",
+        "order_reasons": []
+      },
+      "data": {},
+      "module_reasons": []
+    },
+    "S03:3258": {
+      "exact": true,
+      "failed_claims": {},
+      "extent": {
+        "exact": true,
+        "reasons": [],
+        "reloc_order": "EXACT",
+        "order_reasons": []
+      },
+      "data": {},
+      "module_reasons": []
+    },
+    "root:1FD2": {
+      "exact": true,
+      "failed_claims": {},
+      "extent": {
+        "exact": true,
+        "reasons": [],
+        "reloc_order": "GROUPED",
+        "order_reasons": []
+      },
+      "data": {
+        "CONST": {
+          "exact": true,
+          "reasons": [],
+          "size": 6,
+          "reloc_order": "GROUPED",
+          "start": 386310,
+          "class": "CONST",
+          "align": "word",
+          "far": false
+        },
+        "_DATA": {
+          "exact": true,
+          "reasons": [],
+          "size": 163,
+          "reloc_order": "GROUPED",
+          "start": 375574,
+          "class": "DATA",
+          "align": "word",
+          "far": false
+        },
+        "_BSS": {
+          "exact": true,
+          "reasons": [],
+          "size": 8,
+          "kind": "BSS",
+          "start": 387084,
+          "align": "word"
+        }
+      },
+      "module_reasons": []
+    }
+  },
+  "gate_extension_review": {
+    "module": "root:1B73",
+    "existing_code_data": "cd_root_1B73_0006",
+    "new_data_public": "_fd_1B73_0006",
+    "requirement": "Permit reviewed data publics in explicit DATA_IN_CODE claim; continue checking all bytes/fixups/extent"
+  },
+  "changed_exact_code_reviews": [
+    {
+      "name": "PopUpInfoWindow",
+      "module": "S23:39C7",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "bytes differ (first at +0x53, 10 differing)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "DrawCurBalloons",
+      "module": "root:0250",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "bytes differ (first at +0xba, 25 differing)",
+        "relocation order inside a target group differs from the object's FIXUPP order"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "DrawSpider",
+      "module": "root:0250",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "bytes differ (first at +0x3db, 9 differing)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "f_1E57_0F8E",
+      "module": "root:1E57",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "length 83 != target 78",
+        "fixup at +0x4d crosses the extent end",
+        "bytes differ (first at +0x13, 30 differing)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "f_23E6_0392",
+      "module": "root:23E6",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "bytes differ (first at +0x124, 2 differing)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "PrevListLine",
+      "module": "root:23E6",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "bytes differ (first at +0x7a, 2 differing)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "win_Recalc",
+      "module": "root:2505",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "length 371 != target 372",
+        "bytes differ (first at +0x41, 298 differing)",
+        "relocation set differs (3 vs 3)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "f_2505_0831",
+      "module": "root:2505",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "bytes differ (first at +0x54, 2 differing)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    },
+    {
+      "name": "f_2505_08EA",
+      "module": "root:2505",
+      "own_body_unchanged_after_registered_aliases": true,
+      "current_historical_comparison_reasons": [
+        "bytes differ (first at +0x51, 2 differing)"
+      ],
+      "review_artifact": "build/workers/consolidation_canonical/peer-differences.json",
+      "review_required": "Record current codegen change and explicit historical proof disposition; do not silently retain EXACT or create BEHAVIOR_EXACT"
+    }
+  ],
+  "changed_exact_data_review": {
+    "module": "root:0E2E",
+    "old_verdict": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+    },
+    "new_verdict": {
+      "exact": false,
+      "reasons": [
+        "data bytes differ"
+      ],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+    },
+    "changed_words": [
+      {
+        "offset": 40,
+        "historical_dgroup_offset": 33264,
+        "original_segment": 20726,
+        "candidate_segment": 15703,
+        "old_fixups": [
+          {
+            "segment": "CONST",
+            "offset": 40,
+            "width": 2,
+            "loc": "base16",
+            "self_relative": false,
+            "target_kind": "external",
+            "target": "_modeLevels",
+            "displacement": 0,
+            "frame_method": 5,
+            "frame_index": 0,
+            "target_method": 2,
+            "target_index": 15,
+            "frame_kind": "target",
+            "frame": "_modeLevels",
+            "encoded_addend": "0000"
+          }
+        ],
+        "new_fixups": [
+          {
+            "segment": "CONST",
+            "offset": 40,
+            "width": 2,
+            "loc": "base16",
+            "self_relative": false,
+            "target_kind": "external",
+            "target": "_fd_3D57_049E",
+            "displacement": 0,
+            "frame_method": 5,
+            "frame_index": 0,
+            "target_method": 2,
+            "target_index": 15,
+            "frame_kind": "target",
+            "frame": "_fd_3D57_049E",
+            "encoded_addend": "0000"
+          }
+        ]
+      }
+    ]
+  },
+  "private_data_affected_peer_names": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson"
+  ],
+  "totals": {
+    "historical_TUs": 127,
+    "storage_TUs": 63,
+    "reviewed_bodies": 29,
+    "binding_modules": 23,
+    "changed_historical_TUs": 43,
+    "genuine_current_historical_conflict_modules": 6,
+    "changed_historical_peer_code_claims": 9,
+    "root_0E2E_code_peers_with_changed_private_data_context": 3
+  }
+}

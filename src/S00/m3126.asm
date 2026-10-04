@@ -26,6 +26,7 @@ _g_2002	db	0FFh, 0FFh, 0FFh, 0FFh, 0, 0FFh, 0FFh, 0FFh, 0, 0, 0FFh, 0FFh
 	db	0FFh, 0, 0FFh, 0FFh
 D2066	db	0, 1, 010h, 030h, 4, 5, 014h, 7, 038h, 9, 2, 00Bh, 024h, 02Dh, 036h, 03Fh	; EGA attribute-controller palette registers 0-15
 	db	0, 0
+	public _g_2078, _g_20FC
 _g_2078	dd	004000h, 008000h, 00C000h, 010000h, 020000h, 020000h, 020000h, 020000h
 DispatchS00	label	dword
 	dd	_o00_31AD_1659

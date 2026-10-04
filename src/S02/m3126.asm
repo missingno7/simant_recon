@@ -44,6 +44,8 @@ _g_219C	dw	0
 _g_219E	dw	0
 _g_21A0	dw	0
 _g_21A2	dw	0
+	public _g_21A4
+_g_21A4 label byte
 	dw	0
 DispatchS02	label	dword
 	dd	_o02_3126_0040
@@ -126,7 +128,7 @@ _o02_3126_0000	proc	far
 	mov word ptr _g_3DB4, cx
 	mov word ptr _g_3DB2, 140h
 	xor ax, ax
-	mov di, 3DFCh
+	mov di, OFFSET DGROUP:_g_3DFC
 	mov es, word ptr _g_3DAE
 L0020:
 	stosw
@@ -789,7 +791,9 @@ L05D2:
 	add si, ax
 	test bx, 1
 	jne L05EB
+	assume ss:DGROUP
 	cmp byte ptr ss:_g_3DD2, 0
+	assume ss:nothing
 	jne L05EB
 L05EB:
 	push di
@@ -897,7 +901,9 @@ L06D4:
 	and al, al
 	stosb
 	loop L06C6
+	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEA
+	assume ss:nothing
 	pop di
 	add di, 140h
 	dec word ptr [bp-2]

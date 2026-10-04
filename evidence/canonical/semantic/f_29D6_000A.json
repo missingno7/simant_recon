@@ -1,0 +1,237 @@
+{
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "f_29D6_000A",
+  "module": "root:29D6",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "definition_sha256": "71f92d7e66d305e1ef35ffc1372bd8ef36b3b43fb2aff0c57d3ebd73eee5873b",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_29D6_000A.json",
+    "sha256": "3ad0a71454669b67e468b75d9d907639a4c3f78e1db1d044dbf0172579580234"
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_29D6_000A",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+      "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626",
+      "function_anchor_line": 28
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_29D6_000A/evidence.json",
+      "sha256": "fc2ddba53c13660ea8201699b7bf08c4d08a33ddc4d46c0face2d2bb3d49b91e",
+      "manifest_path": "evidence/behavior/manifest.json",
+      "manifest_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "registered_status": "BEHAVIOR_EXACT",
+      "validation_receipt_sha256": "31dbdfd1116b0182be449fbaa0f1a05baa128935e8a6dcf22e8087fbbad36104"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "current behavioral registration index"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+        "role": "function identity/address table"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "locked original executable identity"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "role": "historical source/build baseline pinned by run evidence"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original read only through context.py and archived behavioral runner"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "original disassembly extraction command; invoked by exact function name without --raw"
+      },
+      {
+        "path": "build/workers/dos_static_small_helpers/original-disassembly.md",
+        "sha256": "fb4e1263b90aebe3b3b4fed069b49a0c0f7f453071565ef86ece054f5f04654a",
+        "role": "readable context.py disassembly for targets and directly-called I/O helpers; contains no raw bytes"
+      },
+      {
+        "path": "evidence/behavior/functions/f_29D6_000A/run.json",
+        "sha256": "7c4dc1f6d09c51c0ed11a8f58a5ef792e1992707cc74a86dc4c86eb44b1d26ad",
+        "role": "actual-original and candidate differential run"
+      },
+      {
+        "path": "evidence/behavior/functions/f_29D6_000A/cases.jsonl.gz",
+        "sha256": "e5d92743052af3e9a7370a444365b43ca82f04a15557bbce31d964725c0a0ace",
+        "role": "pinned per-case execution ledger"
+      },
+      {
+        "path": "evidence/behavior/functions/f_29D6_000A/negative-controls.json",
+        "sha256": "28ca75406fd6e12660ce1abc20b0322dd7b236d051f837db55762ec8387af1cc",
+        "role": "compiled mutant detection report"
+      },
+      {
+        "path": "evidence/behavior/functions/f_29D6_000A/contract-review.json",
+        "sha256": "9a4be89acfca67d8082a37fbfd26294794b3182c55167e02934bfe85a3e91e47",
+        "role": "reviewed input/effect contract"
+      },
+      {
+        "path": "tools/behavior_suites/archive/small-contracts-review20261002.py",
+        "sha256": "6f319c90f1a979c6f27a9be5e4b98f1f04f4c96caa0aac3c01cb3dabbe52be3b",
+        "role": "archived directed/randomized suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py",
+        "sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+        "role": "archived reviewed execution harness identity"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "29D6",
+      "off": "0x000A",
+      "size": "0x0078",
+      "linear_start": "0x29D6A",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "research": "python tools/context.py FUNCTION (no --raw); disassembly transcript is pinned in inputs"
+    },
+    "differential_evidence": {
+      "suite": {
+        "path": "tools/behavior_suites/archive/small-contracts-review20261002.py",
+        "sha256": "6f319c90f1a979c6f27a9be5e4b98f1f04f4c96caa0aac3c01cb3dabbe52be3b"
+      },
+      "run": {
+        "path": "evidence/behavior/functions/f_29D6_000A/run.json",
+        "sha256": "7c4dc1f6d09c51c0ed11a8f58a5ef792e1992707cc74a86dc4c86eb44b1d26ad",
+        "completion": "COMPLETE",
+        "cases": 118364,
+        "mismatches": 0,
+        "actual_original_execution": true,
+        "actual_candidate_execution": true
+      },
+      "case_ledger": {
+        "path": "evidence/behavior/functions/f_29D6_000A/cases.jsonl.gz",
+        "sha256": "e5d92743052af3e9a7370a444365b43ca82f04a15557bbce31d964725c0a0ace",
+        "rows": 118364
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/f_29D6_000A/negative-controls.json",
+        "sha256": "28ca75406fd6e12660ce1abc20b0322dd7b236d051f837db55762ec8387af1cc"
+      },
+      "contract_review": {
+        "path": "evidence/behavior/functions/f_29D6_000A/contract-review.json",
+        "sha256": "9a4be89acfca67d8082a37fbfd26294794b3182c55167e02934bfe85a3e91e47"
+      },
+      "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+      "validation_receipt_sha256": "31dbdfd1116b0182be449fbaa0f1a05baa128935e8a6dcf22e8087fbbad36104",
+      "limits": "These executions are corroboration only; the static CFG/dataflow/arithmetic comparison below is the completeness basis. See review_notes for valid-state and excluded-domain limits.",
+      "compiled_candidate_identity": {
+        "source": "build\\workers\\behavior_small_contracts_review20261002\\tandy-natural-c.c",
+        "source_sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626",
+        "compiled_source_sha256": "cd00dfd7095a082d37822c30f0f0b1e6878f22e83d6544e0c82e11899aae1b7b",
+        "object_sha256": "474805ca93816becac8eeb79c06cb35e01cf182ea5f329f3187f15e89a4ea615",
+        "linked_code_sha256": "fd36413a27c7dfbb00f7da194fd05b1af1bb0841391e37bb68c7192f45a21764",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    },
+    "branch_map": [],
+    "cfg_summary": "Straight-line target with three unconditional far calls, then one far return. No conditional, loop, switch or indirect branch occurs in this function.",
+    "call_map": [
+      {
+        "order": 1,
+        "original_site": "root:29D6:0045",
+        "callee": "root:29F0:002A f_29F0_002A",
+        "source_anchor": "module.c:34",
+        "condition": "unconditional",
+        "arguments": "port 0x0205; value low byte of (f & 0x0f) + (channel_base + 0x80)",
+        "effect": "callee loads the 16-bit port and low value byte, then performs one OUT DX,AL"
+      },
+      {
+        "order": 2,
+        "original_site": "root:29D6:0058",
+        "callee": "root:29F0:002A f_29F0_002A",
+        "source_anchor": "module.c:35",
+        "condition": "unconditional, after call 1",
+        "arguments": "port 0x0205; value low byte of arithmetic f >> 4",
+        "effect": "one byte OUT DX,AL"
+      },
+      {
+        "order": 3,
+        "original_site": "root:29D6:0077",
+        "callee": "root:29F0:002A f_29F0_002A",
+        "source_anchor": "module.c:38",
+        "condition": "unconditional, after volume transform",
+        "arguments": "port 0x0205; value low byte of (0x0f - arithmetic(vol >> 3)) + (channel_base + 0x80) + 0x10",
+        "effect": "one byte OUT DX,AL"
+      }
+    ],
+    "memory_state": {
+      "reads": [
+        "BP+0x08 signed word note; BP+0x0a signed word vol; BP+0x0c signed word chan. The first argument BP+0x06 (a) is never read.",
+        "Near word table g_75E8[note % 12], one 2-byte entry at base + 2*(note%12).",
+        "Port argument 0x0205 and byte value passed to f_29F0_002A; the helper reads its stack arguments and performs the port write."
+      ],
+      "writes": [
+        "BP+0x0c argument cell is shifted left 5 in place; BP+0x0a is arithmetic-shifted right 3 and then overwritten by 0x0f minus that result. These are transient far-call argument-area words, matching the source parameter assignments; the behavioral harness intentionally excludes private call-stack bytes.",
+        "BP-0x02 stores f and BP-0x04 stores the channel-derived byte/word temporary. Frame and call-stack writes are restored/unwound.",
+        "No global data/table write. Exactly three ordered byte OUT effects to port 0x0205 through f_29F0_002A."
+      ],
+      "state": "No return value; no global state update; unused a has no load or side effect."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "widths_signedness": "MSC int/parameters/table elements are signed 16-bit. note uses signed IDIV by 12 for quotient and remainder. Caller note 0..127 makes both nonnegative: remainder 0..11, quotient 0..10. Every g_75E8 entry is a positive word, so target SAR and source signed >> yield the same value. Caller byte velocity is passed as nonnegative int 0..255; arithmetic SAR 3 equals floor(vol/8). chan is 0..2, so chan<<5 is 0/32/64 and conversion to char remains nonnegative. Helper value is char/byte; only the low 8 bits are observable at OUT.",
+      "pointer_math": "No far/near pointer expression. Table addressing is 16-bit near base plus 2-byte signed-int element stride indexed by remainder 0..11.",
+      "constants": "channel scale 5 bits (<<5); note divisor/table length 12; frequency mask 0x0f; channel register base 0x80; volume register offset 0x10; volume inversion 0x0f; port 0x0205; helper value writes are 8-bit."
+    },
+    "static_axes": {
+      "algorithm": "The source and original derive the semitone frequency from the same table and signed quotient shift; write its low nibble with channel base, write remaining frequency bits shifted by four, then invert the 3-bit volume level and write the channel volume register.",
+      "control_flow": "All instructions are accounted for in a straight-line CFG. Three unconditional calls remain in source order; no branch or alternate return exists.",
+      "calls": "Each call is f_29F0_002A(port=0x0205,value=low byte). Its pinned disassembly at root:29F0:002A is exactly one OUT DX,AL between argument loads and far return; thus three one-byte writes occur in the same order.",
+      "memory": "Table word read, parameter argument-area stores, two local stack temporaries and call frames are accounted for. No global data writes.",
+      "return_abi": "void far; frame and far return restored; a unused.",
+      "completeness_basis": "Static reconstruction uses complete 120-byte original context and full registered module source/types/table values; the caller-domain bounds establish safe table and shift ranges. Differential output is only corroborating evidence."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:29D6:000A..0081",
+        "source_anchor": "module.c:28-38",
+        "explanation": "The registered dossier records a natural-C candidate with a different byte length and an unresolved historical ADD/CSE instruction shape. The complete original arithmetic, argument stores, table index, three calls and byte writes map to the source statements; on channels 0..2, notes 0..127 and byte velocities 0..255 the width/sign reasoning above yields the same call arguments and OUT sequence. Historical codegen/byte identity stays open."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "review_notes": [
+      "The accepted caller domain is channel 0..2, MIDI note 0..127 and byte velocity 0..255. The 60 wider/out-of-domain robustness probes are diagnostic only; invalid negative/out-of-table notes and host acoustic/timing equivalence are excluded.",
+      "Original code stores chan and vol back into their transient argument stack slots. The static inventory records both writes; the harness contract excludes private call-stack bytes, so its pass is not evidence for those bytes. Under the C ABI they are parameter working storage, not a caller-owned persistent object.",
+      "Run provenance check: source_sha256 pins the 43b2... module bytes; compiled_source_sha256 is cd00..., exactly SHA-256 of the same file after Python universal-newline normalization (111 CRLF sequences -> LF). The reviewed harness hashes read_bytes for source_sha256 but read_text/normalized text after unscaffold for compiled_source_sha256; this source contains no SCAFFOLD block. Thus the two digests identify the same body, not a different candidate.",
+      "Differential evidence: 98,364 directed cases (98,304 exhaustive valid grid plus 60 tagged diagnostics) and 20,000 randomized valid cases, 118,364 ledger rows, zero mismatches; a compiled arithmetic/port mutant was detected. Valid-domain static arithmetic and call mapping, not finite execution count, support this result.",
+      "This receipt is a worker audit candidate for independent root review; it does not edit or reclassify the historical or behavioral registry."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  },
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+}
