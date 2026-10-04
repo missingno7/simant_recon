@@ -1,0 +1,142 @@
+[
+  {
+    "library": "llibcr.lib",
+    "member": "dos\\crt0.asm",
+    "module_index": 0,
+    "linear": 171868,
+    "size": 255,
+    "segment": "_TEXT",
+    "member_sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+    "data_segments": [
+      {
+        "segment": "_DATA",
+        "linear": 381488,
+        "size": 30,
+        "rule": "REFERENCED"
+      },
+      {
+        "segment": "DBDATA",
+        "linear": 383204,
+        "size": 14,
+        "rule": "REFERENCED"
+      }
+    ]
+  },
+  {
+    "library": "llibcr.lib",
+    "member": "dos\\crt0dat.asm",
+    "module_index": 1,
+    "linear": 172124,
+    "size": 392,
+    "segment": "_TEXT",
+    "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+    "extra_segments": [
+      {
+        "segment": "EMULATOR_TEXT",
+        "linear": 184240,
+        "size": 2
+      }
+    ],
+    "data_segments": [
+      {
+        "segment": "CDATA",
+        "linear": 383218,
+        "size": 14,
+        "rule": "REFERENCED"
+      },
+      {
+        "segment": "_DATA",
+        "linear": 381518,
+        "size": 86,
+        "rule": "REFERENCED"
+      },
+      {
+        "segment": "XIQC",
+        "linear": 383202,
+        "size": 2,
+        "rule": "REFERENCED_PUBLIC"
+      }
+    ]
+  },
+  {
+    "library": "llibcr.lib",
+    "member": "dos\\crt0msg.asm",
+    "module_index": 2,
+    "linear": 172516,
+    "size": 34,
+    "segment": "_TEXT",
+    "member_sha256": "5db3773118ea0299a46b9a439f14f9e471493d6e3dea1b2a1eefabc26cd9cb92",
+    "data_segments": [
+      {
+        "segment": "MSG",
+        "linear": 386548,
+        "size": 130,
+        "rule": "CLASS_SEQUENCE"
+      },
+      {
+        "segment": "PAD",
+        "linear": 386762,
+        "size": 2,
+        "rule": "CLASS_SEQUENCE"
+      },
+      {
+        "segment": "_DATA",
+        "linear": 381604,
+        "size": 4,
+        "rule": "REFERENCED"
+      }
+    ]
+  },
+  {
+    "library": "llibcr.lib",
+    "member": "crt0fp.asm",
+    "module_index": 3,
+    "linear": 172550,
+    "size": 6,
+    "segment": "_TEXT",
+    "member_sha256": "7c6d3419d89083e30fa0156f660c6b1b899af5244bb8c10906dd0f095519f19c",
+    "data_segments": [
+      {
+        "segment": "MSG",
+        "linear": 386678,
+        "size": 47,
+        "rule": "CLASS_SEQUENCE"
+      },
+      {
+        "segment": "PAD",
+        "linear": 386762,
+        "size": 2,
+        "rule": "CLASS_SEQUENCE"
+      }
+    ]
+  },
+  {
+    "library": "llibcr.lib",
+    "member": "dos\\nmsghdr.asm",
+    "module_index": 9,
+    "linear": 173218,
+    "size": 97,
+    "segment": "_TEXT",
+    "member_sha256": "e9b58fa3aa27d2b06d906ea99bf7639e6d0c07c3b84ba9fdc0d05eac19f086ce",
+    "data_segments": [
+      {
+        "segment": "HDR",
+        "linear": 386540,
+        "size": 8,
+        "rule": "REFERENCED"
+      },
+      {
+        "segment": "PAD",
+        "linear": 386762,
+        "size": 2,
+        "rule": "CLASS_SEQUENCE"
+      },
+      {
+        "segment": "EPAD",
+        "linear": 386764,
+        "size": 1,
+        "rule": "CLASS_SEQUENCE"
+      }
+    ]
+  }
+]

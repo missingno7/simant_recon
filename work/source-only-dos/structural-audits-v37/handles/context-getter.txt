@@ -1,0 +1,30 @@
+f_2505_0006  root:2505:0006  linear 25056  size 66  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 2505: function 1/20; neighbours: RepointObjects, f_2505_00AA
+  frame: {'frame': 'bp', 'stack_check': False}
+  0006  push bp
+  0007  mov bp, sp
+  0009  mov es, word ptr [0x8a44]          DS:8A44
+  000D  cmp word ptr es:[0x6300], 0
+  0013  jne 0x2e
+  0015  mov ax, word ptr [bp + 6]
+  0018  lcall 0x23ae, 0x51                 -> win_IsWinLocked
+  001D  or ax, ax
+  001F  jne 0x2e
+  0021  push word ptr [bp + 6]
+  0024  mov ax, 0x65c0                     "
+WINDOW %x NOT LOCKED DURING CALL TO GETWINPTR!!"
+  0027  push ds
+  0028  push ax
+  0029  lcall 0x1c62, 0xc                  -> Punt
+  002E  mov cl, 8
+  0030  mov bx, word ptr [bp + 6]
+  0033  sar bx, cl
+  0035  shl bx, 1
+  0037  shl bx, 1
+  0039  les bx, ptr [bx - 0x6dd0]
+  003D  mov ax, word ptr es:[bx]
+  0040  mov dx, word ptr es:[bx + 2]
+  0044  mov sp, bp
+  0046  pop bp
+  0047  retf

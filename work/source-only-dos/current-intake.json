@@ -7,19 +7,19 @@
     "size": 628980
   },
   "full_local_report": {
-    "path": "build/source-only-dos-v35/build-report.json",
-    "sha256": "5f8832a5a616407dcff9b5aca55299a94387ce2e704cb003834c0e07051be835",
-    "size": 19347274
+    "path": "build/source-only-dos-v36/build-report.json",
+    "size": 19524587,
+    "sha256": "2b6b24a4ade222f82cfd4665f4cf15ce77bedc5388fa969fe5c828f41a127151"
   },
-  "reproduction": "python tools/source_only_dos.py --out build/source-only-dos-v35 --compile --link --reuse --linker rtlink610 --jobs 4",
+  "reproduction": "python tools/source_only_dos.py --out build/source-only-dos-v36 --compile --link --reuse --linker rtlink610 --jobs 8",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "15 unresolved source symbols",
+    "12 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 188,
+  "compiled_translation_units": 190,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -38,11 +38,11 @@
   "standalone_dos_executable": false,
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
-  "unresolved_data_disposition_bytes": 46,
-  "unresolved_symbols": 15,
+  "unresolved_data_disposition_bytes": 44,
+  "unresolved_symbols": 12,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 12,
-    "source storage/reachability investigation": 3
+    "reviewed FAR_BSS definition and compatible consumer views": 10,
+    "source storage/reachability investigation": 2
   },
   "symbolic_aliases": 193,
   "duplicate_publics": {},
@@ -85,7 +85,9 @@
         31261
       ],
       "overlapping_data_debt": "dgroup_79f0",
-      "reason": "Styled text and menu item classification sign-extend character bytes before indexing the near CRT table. Bytes D1..DE can read original DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. The stock runtime table owns its 257 bytes, not the preceding memory. The styled-text predicate can change the copied buffer and its text-resource match. Other dialog/menu sites also read outside the table; result relevance is assessed separately. No source guard or accepted input-domain proof excludes these prefix reads, and independent linkage does not preserve the original prefix. Keep the heap-shaped data debt; do not substitute unsigned indexing or add an invented table prefix/suffix.",
+      "relocated_prefix_far_pointers": 6,
+      "heap_state_equivalence": "UNRESOLVED",
+      "reason": "Styled text and menu item classification sign-extend character bytes before indexing the near CRT table. Bytes D1..DE can read original DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. The stock runtime table owns its 257 bytes, not the preceding memory. The styled-text predicate can change the copied buffer and its text-resource match. Other dialog/menu sites also read outside the table; result relevance is assessed separately. No source guard or accepted input-domain proof excludes these prefix reads, and independent linkage does not preserve the original prefix. Keep the heap-shaped data debt; do not substitute unsigned indexing or add an invented table prefix/suffix. Whole-member controls on both linkers realize __fheap at _ctype-46, but identical data order still leaves six relocated CMISC pointers in the signed prefix: moving only crt0fp code changes twelve predicate results. Stock startup also changes heap descriptor pointers before main; original __myalloc binds the game allocator 171C:2208. App heap-state equivalence remains unproved, so relative owner attribution alone discharges no bytes.",
       "scope_limit": "Conditional input path, not a shipped-resource execution witness. The reconstructed algorithms and strict static registrations remain unchanged."
     },
     {
@@ -166,7 +168,7 @@
       "source": "src/root/m1A28.c",
       "normal_owner": "fd_50F6_3958[4]",
       "historical_failure_address": "50F6:38DC",
-      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately."
+      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A conditional returning zero-target fatal callback reaches the uninitialized raster path, whose zero-height LOOP traverses every DGROUP byte before cleanup; callback/guard invariance cannot be inferred from explicit C assignments alone."
     },
     {
       "id": "database-handle-plus-four",
@@ -175,6 +177,21 @@
       "normal_owner": "db_handles[4]",
       "historical_failure_address": "50F6:3B58",
       "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate."
+    },
+    {
+      "id": "window-index-resource-cross-owner-layout",
+      "status": "UNRESOLVED",
+      "owners": [
+        "win_drawHooks[45]",
+        "win_offsets[45]"
+      ],
+      "reason": "Unconditional reset spans prove 45 callbacks and 45 Rects. They do not bound every window ID or resource count. Negative and >=45 indices, returning Punt, pre-lock handle writes, signed palette-copy lengths, and purge-list counts remain open. Historical palette row 63 reads hook31/hook32 words; its shipped control lacks the ordinary selection gate, but no complete selection/redraw or cross-owner exclusion exists. Callback45 intersects Rect0 and Rect45 intersects Event fields. No padding, invented palette rows, clamp or maximum historical capacity is supplied by the minimum owners."
+    },
+    {
+      "id": "critical-selector-computed-alias-layout",
+      "status": "UNRESOLVED",
+      "owner": "g_8CCB signed mutable byte",
+      "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner."
     },
     {
       "id": "clip-rect-segment-frame",
@@ -2113,7 +2130,7 @@
         "size": 47
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\CBOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\CBOWNER.OBJ",
         "sha256": "74658ed2e7ef9f9461988dec8bd9b9c23150faaeed88ed51f945972c4332fde9",
         "size": 219
       },
@@ -2139,7 +2156,7 @@
         "size": 280
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\MSOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\MSOWNER.OBJ",
         "sha256": "04ab7a979fb1b43babc78282263e1306b1e1503ec1ee7cd39aebcff30a3c943b",
         "size": 226
       },
@@ -2175,7 +2192,7 @@
         "size": 658
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\MMOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\MMOWNER.OBJ",
         "sha256": "7ee44f25e06b597fb9a2269b8bf8131d597bba0094c6f236baefa4fcea8d3908",
         "size": 248
       },
@@ -2221,7 +2238,7 @@
         "size": 83
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\RSOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\RSOWNER.OBJ",
         "sha256": "8410d83f48ba236320214657fe35a1314adf154d78b0859bb254037199083653",
         "size": 237
       },
@@ -2262,7 +2279,7 @@
         "size": 305
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\MFOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\MFOWNER.OBJ",
         "sha256": "ea6a8ca0db0979bc2b58c9a68da2d857285ae5bb02e12a31658cdd817538abd9",
         "size": 283
       },
@@ -2318,7 +2335,7 @@
         "size": 32
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\MPOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\MPOWNER.OBJ",
         "sha256": "51a318dcfb6552a8176b4fd9bff689de89600d84e19d16d3cc1883dadec0abbe",
         "size": 204
       },
@@ -2344,7 +2361,7 @@
         "size": 90
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\CPOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\CPOWNER.OBJ",
         "sha256": "cfc7d7949d712ad8e57a33615b111b1321321277b47f88da461e61925a0e72c6",
         "size": 204
       },
@@ -2370,7 +2387,7 @@
         "size": 255
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\YDOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\YDOWNER.OBJ",
         "sha256": "6bd9e00529e1eb756c0ce4569f35cddcc6dee7349eb46171cd5f9f43e57a37c3",
         "size": 329
       },
@@ -2447,7 +2464,7 @@
         "size": 458
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\DIOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\DIOWNER.OBJ",
         "sha256": "5805361122eb8ab3c389260a20ce31f2a790856408a254b6a160b381eb8bcbe3",
         "size": 229
       },
@@ -2482,7 +2499,7 @@
         "size": 212
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SPIDATA.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SPIDATA.OBJ",
         "sha256": "0eca3aa06bb8beff01ed7f93816a40d9c4499be796078db43550705eb1abbb70",
         "size": 295
       },
@@ -2552,7 +2569,7 @@
         "size": 296
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\LIOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\LIOWNER.OBJ",
         "sha256": "607795c7092155a0c2fc9826376d6be113f587c5196eed6d1f11f5bf1977bd7d",
         "size": 356
       },
@@ -2657,7 +2674,7 @@
         "size": 181
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SPICTRL.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SPICTRL.OBJ",
         "sha256": "64ece0d32b4ce6a15efd69428eea40f9a470e71bdbf55d3762695d2398cd02b4",
         "size": 269
       },
@@ -2720,7 +2737,7 @@
         "size": 463
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\PTOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\PTOWNER.OBJ",
         "sha256": "e91f203b5ee54eb8f8dc22f49993bc5d0557704d21f443ee9a67ad0b903d0bd0",
         "size": 283
       },
@@ -2776,7 +2793,7 @@
         "size": 1295
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\DBRECOWN.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\DBRECOWN.OBJ",
         "sha256": "37850c5f5dc95a3a3330bcc1deea78eb48f1df4d2309eddba1a0b6c079b5e362",
         "size": 229
       },
@@ -2811,7 +2828,7 @@
         "size": 1526
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\GFXOWNER.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\GFXOWNER.OBJ",
         "sha256": "9c91a242f71afdc157c00616c010da03cc73f8ddf83f2f01d541cec57d349a97",
         "size": 275
       },
@@ -2849,7 +2866,7 @@
         "size": 183
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\G210808.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\G210808.OBJ",
         "sha256": "bf14f21d4c5d5ff791dafd5b457f9efa2ee20afbc619d66b698f700e738a946d",
         "size": 229
       },
@@ -2877,7 +2894,7 @@
         "size": 143
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ALCOUNT.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ALCOUNT.OBJ",
         "sha256": "96603dd548293eb6ed2841b0241b4c5d5c6e53a9a7b9d80db85fbbf994e3fc15",
         "size": 241
       },
@@ -2919,7 +2936,7 @@
         "size": 424
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\COLWORD.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\COLWORD.OBJ",
         "sha256": "b849b70d0c3fe5cdc77b9e5be7ba6e92509d43b3befc8bcc72b8340ca3287412",
         "size": 337
       },
@@ -2996,7 +3013,7 @@
         "size": 178
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\PLOCOWN.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\PLOCOWN.OBJ",
         "sha256": "e76232fba889e1a14929448ff083cafc18e339b65b2d02bf88d26e299322d6fe",
         "size": 270
       },
@@ -3059,7 +3076,7 @@
         "size": 65
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ANTCTR.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ANTCTR.OBJ",
         "sha256": "43437dac0d0e922865d15f2d22e127ac68877c087f8972237838a70eabaec410",
         "size": 241
       },
@@ -3101,7 +3118,7 @@
         "size": 167
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\LANGPTR.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\LANGPTR.OBJ",
         "sha256": "2d29053f0e6e2e8c8486fa4401d1ebaa07380392a2d899bef0efbe2020ee5a9b",
         "size": 281
       },
@@ -3157,7 +3174,7 @@
         "size": 76
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\DEADXY.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\DEADXY.OBJ",
         "sha256": "d983b13e8ebfcbec19dc4a391451f9df00e29b95bce8884e760633bf65550b2a",
         "size": 227
       },
@@ -3192,7 +3209,7 @@
         "size": 196
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ANTSTATE.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ANTSTATE.OBJ",
         "sha256": "4f01054fc9d5873f583dd3b97e45a49dadeceb85937af7cae0b5d80e50ba092e",
         "size": 284
       },
@@ -3255,7 +3272,7 @@
         "size": 18
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\MODEOWN.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\MODEOWN.OBJ",
         "sha256": "61240402b6e412d187673ad616c9a0d3075cea8d047287427c058ad62230dde1",
         "size": 204
       },
@@ -3281,7 +3298,7 @@
         "size": 1034
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ANTCTRL.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ANTCTRL.OBJ",
         "sha256": "87abd9939bc814560361f28d1193396e6078dfc77157adaa53311458babd7476",
         "size": 389
       },
@@ -3386,7 +3403,7 @@
         "size": 479
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\UIRESOWN.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\UIRESOWN.OBJ",
         "sha256": "cae9f3fc15c2a9ae03e6bdc6c52867efb0e15f1bad97adb99b8a7856ba00ca32",
         "size": 313
       },
@@ -3449,7 +3466,7 @@
         "size": 199
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\TERRNOWN.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\TERRNOWN.OBJ",
         "sha256": "10829be45f08888db7470464cd0123a11a7aa4304d3971d459ba24885fc166f7",
         "size": 224
       },
@@ -3484,7 +3501,7 @@
         "size": 228
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SWARMOWN.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SWARMOWN.OBJ",
         "sha256": "46b6c70e8d7c032a4011c748787815ad588556438b5a2d7718861b26ffe786dd",
         "size": 267
       },
@@ -3533,7 +3550,7 @@
         "size": 207
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\POPWORK.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\POPWORK.OBJ",
         "sha256": "cec9dd6f85da7e307d6a7968c20909c7b3dc8570c3e12884bdc144f2ae42a310",
         "size": 229
       },
@@ -3568,7 +3585,7 @@
         "size": 181
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SNDSTATE.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SNDSTATE.OBJ",
         "sha256": "3a48ef16c688e1c8eb541363bd6c684e38343dd1e8b62ecad99cf78a8017bded",
         "size": 213
       },
@@ -3596,7 +3613,7 @@
         "size": 145
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\CTRLFLAG.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\CTRLFLAG.OBJ",
         "sha256": "43a4247b0f9c45166735c883219fdf7a5e2f2850982c8c8af612baa128550aa1",
         "size": 249
       },
@@ -3638,7 +3655,7 @@
         "size": 205
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ANTLATCH.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ANTLATCH.OBJ",
         "sha256": "06d3a9c45120f6d542b2815e1785e67b447084a599fff13c09d59a6d149389d7",
         "size": 213
       },
@@ -3666,7 +3683,7 @@
         "size": 217
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SNDCTRL.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SNDCTRL.OBJ",
         "sha256": "34d9910cc8afa9f401c08af71194db9b1ada301df9386cf25b7213ff69e4b82c",
         "size": 301
       },
@@ -3729,7 +3746,7 @@
         "size": 298
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SNDRECS.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SNDRECS.OBJ",
         "sha256": "d6e82ed01370099a60ef7b0472d7bee849884b8c22e3eb17523ec68a31e3a83e",
         "size": 229
       },
@@ -3764,7 +3781,7 @@
         "size": 352
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ANTMOVE.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ANTMOVE.OBJ",
         "sha256": "05271726b1acf4e4edc95a47bfcf440ad1487861574ad8a2ed0c4769d607cbf3",
         "size": 481
       },
@@ -3897,7 +3914,7 @@
         "size": 534
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\WORLDOUT.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\WORLDOUT.OBJ",
         "sha256": "c7f3d291dd428efec4ceb73ed2d6c4ad2ed2f3ba771f23f186fd4333273b75b4",
         "size": 483
       },
@@ -4030,7 +4047,7 @@
         "size": 350
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\HISTOTAL.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\HISTOTAL.OBJ",
         "sha256": "f29c300a8a5cabecfbae50d958f4520f45c0abbec25e8a3ca5e4a39b3eef6b1c",
         "size": 411
       },
@@ -4135,7 +4152,7 @@
         "size": 190
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ANTCOUNT.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ANTCOUNT.OBJ",
         "sha256": "a825e454c2f03828e8cc6e36593115e602dc039bfcc9e612409f1d53fc165534",
         "size": 213
       },
@@ -4163,7 +4180,7 @@
         "size": 190
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\EVRECS.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\EVRECS.OBJ",
         "sha256": "3965e1b172e1730430c3d748130b6b4db4d9bad63c5518a4b4ecb891901a6548",
         "size": 227
       },
@@ -4198,7 +4215,7 @@
         "size": 371
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\STRREST.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\STRREST.OBJ",
         "sha256": "61034b300305f1d45a3e03b84ccda02c53084a80224812e1ca847ea3f2e7d96c",
         "size": 427
       },
@@ -4310,7 +4327,7 @@
         "size": 651
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\YARDISCL.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\YARDISCL.OBJ",
         "sha256": "7096600e61d7da9e21513f116eb39e6d56c962f6ee3496a478eb0ff370c9997c",
         "size": 645
       },
@@ -4506,7 +4523,7 @@
         "size": 108
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\YARDARR.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\YARDARR.OBJ",
         "sha256": "ef7838af0edcd0636388de6ba4958c4fe07f0226fe7453ec7f6c9e0899673d1d",
         "size": 265
       },
@@ -4555,7 +4572,7 @@
         "size": 92
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\BLNTMR.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\BLNTMR.OBJ",
         "sha256": "e87d094e5b48f800a9b89ad204d1e50dc767b7c3fa8246b28773e95e6fd86dfe",
         "size": 263
       },
@@ -4604,7 +4621,7 @@
         "size": 190
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\EXPANCH.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\EXPANCH.OBJ",
         "sha256": "db0a8decee2cd738d82fbadde37c6e7a6993c7195b23974eadd9a1a150920fcb",
         "size": 211
       },
@@ -4632,7 +4649,7 @@
         "size": 108
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\WCLIPH.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\WCLIPH.OBJ",
         "sha256": "c8a16afa07acc848c88bf46a4eb3991a22346eacfce9daee947ba82969fb6c48",
         "size": 209
       },
@@ -4660,7 +4677,7 @@
         "size": 503
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\HISTSC25.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\HISTSC25.OBJ",
         "sha256": "4e0f1d247bdba22c623f4124c3705c7ca8b0990319ea7ba5b5bb16c0d98a07c5",
         "size": 519
       },
@@ -4807,7 +4824,7 @@
         "size": 102
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\MPVOWNR.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\MPVOWNR.OBJ",
         "sha256": "9c1b4a21f48c45ae02cab9f4cc1c213563a24b1b2227f5542696c51d222abc69",
         "size": 265
       },
@@ -4856,7 +4873,7 @@
         "size": 33
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\FLRTSK.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\FLRTSK.OBJ",
         "sha256": "50b24a87684dc0de8048adfa44f280e5a441d5849cb92fc95a76ae7c5ff5585d",
         "size": 216
       },
@@ -4891,7 +4908,7 @@
         "size": 422
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\UIGEO.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\UIGEO.OBJ",
         "sha256": "d3d07f90dba659a1ad0ae2e5500e3a67124b022c0d8bf6be8ff76423a75e4103",
         "size": 261
       },
@@ -4940,7 +4957,7 @@
         "size": 376
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\WRLDSC25.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\WRLDSC25.OBJ",
         "sha256": "4cf7711e19d0c4819cb8ece4dae3d6b530a781268c23dc17ef9bfac41a701946",
         "size": 501
       },
@@ -5080,7 +5097,7 @@
         "size": 611
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\ANTSCL25.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\ANTSCL25.OBJ",
         "sha256": "b132cf319683b72649007ddaeebfc014229389dceea5207736aaad10e263239d",
         "size": 519
       },
@@ -5227,7 +5244,7 @@
         "size": 510
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\UISTTE26.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\UISTTE26.OBJ",
         "sha256": "4d36721e5244aae9d691ffafa02dff4b9fea13a52bc9aca80e31809ccd522a4d",
         "size": 555
       },
@@ -5388,7 +5405,7 @@
         "size": 851
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\WINSC26.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\WINSC26.OBJ",
         "sha256": "065736d6553acfdf9534b63eb9b7db05fb91367ac0383df4459ef5154f3af808",
         "size": 715
       },
@@ -5612,7 +5629,7 @@
         "size": 419
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SCALTL26.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SCALTL26.OBJ",
         "sha256": "6595ecba70e78bcfaa2b925f1a5de11c4315e638adc8972af1d5f1b01efb1045",
         "size": 537
       },
@@ -5766,7 +5783,7 @@
         "size": 149
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\BLNTAB26.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\BLNTAB26.OBJ",
         "sha256": "40e68769f7e6f39880a11cd26cbae477ef18fae5a5bd662b7a6b3863cea79513",
         "size": 267
       },
@@ -5815,7 +5832,7 @@
         "size": 22
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\DELAYW27.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\DELAYW27.OBJ",
         "sha256": "91ab3f37557de66b67e1af887e2b6fbe5b924619888bba2735868f6bb76e5502",
         "size": 213
       },
@@ -5843,7 +5860,7 @@
         "size": 82
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\WINHD27.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\WINHD27.OBJ",
         "sha256": "d0d9c6e9191b21a225c2424a4f312c4377101746c3f19187850e1e3a775c9c60",
         "size": 229
       },
@@ -5878,7 +5895,7 @@
         "size": 298
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SNDST27.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SNDST27.OBJ",
         "sha256": "3f4107153504d1ffaa1b5e6588c00aaa2311652cf1cf8baa1c03d9aaf9fc4e58",
         "size": 355
       },
@@ -5962,7 +5979,7 @@
         "size": 298
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\MISCST27.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\MISCST27.OBJ",
         "sha256": "850deaaf759b02b1f40a639a2ad7a08f56839dbd1ce775d009bbe886a1b35822",
         "size": 361
       },
@@ -6046,7 +6063,7 @@
         "size": 271
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\SCRLIST.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\SCRLIST.OBJ",
         "sha256": "3b6d0600819c4c488f0296f22067ca32a178c3022b841a06e1b11f21d0f33ab5",
         "size": 229
       },
@@ -6074,7 +6091,7 @@
         "size": 110
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\FARW29.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\FARW29.OBJ",
         "sha256": "b4de3f55a4f410e91d50911855157a2f7ea5099c9b37ec43892e70afb72a9ce9",
         "size": 281
       },
@@ -6117,6 +6134,67 @@
           "length": 2,
           "count": 2,
           "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:window-initialized-views",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\window-initialized-views-v36.c",
+        "sha256": "d6437002b02272766235788e5318b6cf1cfc32ff37ed1c9ad72f36bf6dc577f6",
+        "size": 127
+      },
+      "object": {
+        "path": "build\\source-only-dos-v36\\objects\\WINVW36.OBJ",
+        "sha256": "c6ea2423196aa30f823c6d0579b4d686ac62c79ef0974cf959615fe563c42d76",
+        "size": 229
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_win_drawHooks",
+          "kind": "far",
+          "length": 180,
+          "count": 45,
+          "element_size": 4
+        },
+        {
+          "name": "_win_offsets",
+          "kind": "far",
+          "length": 360,
+          "count": 45,
+          "element_size": 8
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:critical-selector-byte",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\critical-selector-byte-v36.c",
+        "sha256": "b511cfdeb3c161e08bb2635ad4a37ef80d3180b93935f254ad9af95de13d794f",
+        "size": 94
+      },
+      "object": {
+        "path": "build\\source-only-dos-v36\\objects\\CRITBY36.OBJ",
+        "sha256": "da878a2e8b6ab512ad9759461f536663d2b0552d81abcc3f5b97ce6e5f1ad608",
+        "size": 206
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_g_8CCB",
+          "kind": "near",
+          "length": 1
         }
       ],
       "publics": [],
@@ -6675,7 +6753,7 @@
         "size": 18484
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U000.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U000.OBJ",
         "sha256": "53cf4a100302c03311dea82401f363d66d26e62006752df769e71f7ed19c3263",
         "size": 3477
       },
@@ -6702,7 +6780,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U000.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U000.OBJ",
         "sha256": "14239e1f28b2f8825b54d780baaa00d7768158aa09addfa975a38445d11ca555",
         "size": 3449
       }
@@ -6720,7 +6798,7 @@
         "size": 81450
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U001.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U001.OBJ",
         "sha256": "f44df0165e7ab30e4a31d98ee73cc9af066de4850a5122e9c568a120cdc07858",
         "size": 14776
       },
@@ -7505,7 +7583,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U001.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U001.OBJ",
         "sha256": "e6fe1bf0cc782242b9cfa208ddc4d2c3e465e1c7c2b6b83f9d6e7239f105a95b",
         "size": 14728
       }
@@ -7523,7 +7601,7 @@
         "size": 40286
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U002.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U002.OBJ",
         "sha256": "6e21287124cbbe6f8268dd161ae307053076a1eb70ee091aed7f2c5a68e6a695",
         "size": 5872
       },
@@ -7558,7 +7636,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U002.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U002.OBJ",
         "sha256": "da884b67720cb3bb3b57c40882a0c6e81d25b4dc784365a3fa74ec3a5a5d2301",
         "size": 5853
       }
@@ -7576,7 +7654,7 @@
         "size": 10105
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U003.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U003.OBJ",
         "sha256": "f9e47a15bf4bf29287e09ca4150ac5290e0d5a4f35ffcb6aeaa4fb68b5ffaaf2",
         "size": 1494
       },
@@ -7602,7 +7680,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U003.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U003.OBJ",
         "sha256": "4bcdf8b6e3dac89461bb55d9990a314bc43df4f028ad842542ec8bf40cfce25f",
         "size": 1466
       }
@@ -7620,7 +7698,7 @@
         "size": 44403
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U004.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U004.OBJ",
         "sha256": "332fe6254b30c5bc3f739a024c16fb6e786b954bc0e2709e5547564daec2dfa8",
         "size": 10056
       },
@@ -8163,7 +8241,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U004.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U004.OBJ",
         "sha256": "d93cc03df72bedecb1dea00922523894e416e747e6208d8faa820c6c8fa2cacb",
         "size": 10001
       }
@@ -8181,7 +8259,7 @@
         "size": 4615
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U005.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U005.OBJ",
         "sha256": "4187e18554a2173e27704bcc4efecfc15197fb40294e8116edfe612cc4c1058a",
         "size": 854
       },
@@ -8234,7 +8312,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U005.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U005.OBJ",
         "sha256": "bfc48f536a19b32abdc64438880c5cbdf1614bb6ec8d5fa1113020a57024166d",
         "size": 821
       }
@@ -8252,7 +8330,7 @@
         "size": 5260
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U006.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U006.OBJ",
         "sha256": "29df29f96a0a016c4728e41f83d3f0ec2e75a418fd7efe279f9b6966f48058d8",
         "size": 891
       },
@@ -8278,7 +8356,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U006.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U006.OBJ",
         "sha256": "0b189f3cd0aef0232ecc449b89cc88db15a85b2364325ec5f1600ab6a37710d7",
         "size": 868
       }
@@ -8296,7 +8374,7 @@
         "size": 20400
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U007.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U007.OBJ",
         "sha256": "53ddfdfc7369a32ec227c6716af11410b976ec1b955a78dd698a1da98bcb2746",
         "size": 5000
       },
@@ -8351,7 +8429,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U007.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U007.OBJ",
         "sha256": "873836a1fd394eab724861a984503bc743bbe51fbdc788d0d6f681382d34d0e7",
         "size": 4972
       }
@@ -8369,7 +8447,7 @@
         "size": 35317
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U008.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U008.OBJ",
         "sha256": "86356a5819ca72aa5490ba2e35cc7a432bcb83c796d6c57763d98646cf200999",
         "size": 8308
       },
@@ -8883,7 +8961,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U008.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U008.OBJ",
         "sha256": "2f77786773fb3bf5479254e9678e35cb69d3e916610a44dbacc997fb9e2d68d6",
         "size": 8242
       }
@@ -8901,7 +8979,7 @@
         "size": 40471
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U010.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U010.OBJ",
         "sha256": "353aa26b33bd7b51718e103be9d37f6427984117e599ea078f941295af738709",
         "size": 6420
       },
@@ -8927,7 +9005,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U010.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U010.OBJ",
         "sha256": "c8f40634a7c699ed250c526999d6ce1bfa7a9d12d4ef327b71784edc618080f3",
         "size": 6395
       }
@@ -8940,12 +9018,12 @@
         "size": 22166
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U016.c",
+        "path": "src\\S08\\m35F5.c",
         "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
         "size": 22166
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U016.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U016.OBJ",
         "sha256": "1817feeddd6ebb64412c85843d527e31bad76a591daaaa1ecb4996e2dca6848f",
         "size": 18628
       },
@@ -9156,7 +9234,7 @@
       ],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U016.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U016.OBJ",
         "sha256": "5c77bb2bd1edc298168442992f5acc3ba6c114a425b95a747ef40e147ec78c1e",
         "size": 18492
       }
@@ -9169,12 +9247,12 @@
         "size": 19819
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U021.c",
-        "sha256": "e821cbf561c5d2731ca92d2514e15bb46121ae31a4a179a02b5e65e85b35f077",
-        "size": 22049
+        "path": "src\\S12\\m384C.c",
+        "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+        "size": 19819
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U021.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U021.OBJ",
         "sha256": "59a2ad980f4b79664aef3cca259290ddbde66ab23bd324a8bc880facd2dc1172",
         "size": 16974
       },
@@ -9197,7 +9275,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U021.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U021.OBJ",
         "sha256": "5e7871720df3600a645954ba6f0b2cdf4bdefa887f808983a7fc605a9bbd0b9e",
         "size": 16962
       }
@@ -9210,12 +9288,12 @@
         "size": 24768
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U022.c",
-        "sha256": "7af93661de6e55e2ffce33a5876ec94b6175d735e5d75bd10a2eb7e533efb76b",
-        "size": 24691
+        "path": "src\\S13\\m384C.c",
+        "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+        "size": 24768
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U022.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U022.OBJ",
         "sha256": "d4d05eacbe1ad0e3fb4b7fac8e1794bc1e1aacae24889df6a10d721002847618",
         "size": 19799
       },
@@ -9250,7 +9328,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U022.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U022.OBJ",
         "sha256": "7fbbf2ca5aa5afa4eee70f9a9d4e21f0a079b32d0f3d4c4f55bebebf5edee4ac",
         "size": 19751
       }
@@ -9263,12 +9341,12 @@
         "size": 6627
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U030.c",
+        "path": "src\\S20\\m39F1.c",
         "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
         "size": 6627
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U030.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U030.OBJ",
         "sha256": "5e801d6062c29d6beddba2641b536835031fc6f97e0f9cb05ddd955ac8981a01",
         "size": 5218
       },
@@ -9291,7 +9369,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U030.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U030.OBJ",
         "sha256": "7204d9910795660593c3c021465c8ca8d51ea0c57ed287bc6982d2ff0f1910ba",
         "size": 5194
       }
@@ -9304,12 +9382,12 @@
         "size": 31328
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U032.c",
+        "path": "src\\S22\\m39C7.c",
         "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
         "size": 31328
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U032.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U032.OBJ",
         "sha256": "2ab58e8f3c3f3a3813a44fc124d56119f967e14b9f9a8795cd2d9c9b25184a4f",
         "size": 23358
       },
@@ -10046,7 +10124,7 @@
       ],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U032.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U032.OBJ",
         "sha256": "16eff3306b8815d2df30e55e7790cef19aa3502e355fb4b5649b3c1ee4b791d1",
         "size": 23302
       }
@@ -10059,12 +10137,12 @@
         "size": 8405
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U035.c",
-        "sha256": "ec3c092d7ad54138e8778e31f7d7a1d13b69ce14d84d92cd722c8d0242b8886b",
-        "size": 8328
+        "path": "src\\S24\\m39C7.c",
+        "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+        "size": 8405
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U035.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U035.OBJ",
         "sha256": "31ec7d57b7f3add6269f5f1fe47102a63ccc7789d3d4c900a95449a74a559d12",
         "size": 7515
       },
@@ -10231,7 +10309,7 @@
       ],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U035.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U035.OBJ",
         "sha256": "9c35bcb53ad04b84a384287b9224634058eec7d3cb135c619999af3c98e37f60",
         "size": 7419
       }
@@ -10244,12 +10322,12 @@
         "size": 14288
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U058.c",
+        "path": "src\\root\\m0AD9.c",
         "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
         "size": 14288
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U058.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U058.OBJ",
         "sha256": "39b1c8623affbe48682a471d514d32b59fc501f1d7bd6bf6c213333d67bddd01",
         "size": 12695
       },
@@ -10304,7 +10382,7 @@
       ],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U058.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U058.OBJ",
         "sha256": "d58baeb5f4389f4017aead5a6035dd96eebe6bc2e4899b75fcc0dcfbb3bbdd9c",
         "size": 12671
       }
@@ -10317,12 +10395,12 @@
         "size": 14621
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U059.c",
+        "path": "src\\root\\m0BE8.c",
         "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
         "size": 14621
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U059.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U059.OBJ",
         "sha256": "e7dffd057e8f6e21725c365c65885eb3814276d2fbb7edc7e09900d9b04e8ed6",
         "size": 7471
       },
@@ -10401,7 +10479,7 @@
       ],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U059.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U059.OBJ",
         "sha256": "748beb2745364e61c79ded7883dc81b5729faa74ccfbbd32ea180a2392f05272",
         "size": 7439
       }
@@ -10419,7 +10497,7 @@
         "size": 8451
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U086.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U086.OBJ",
         "sha256": "afaf236194c2951920ecf9cf9915e8c174c6cf75a56a324d0fe4f7dc457b52b9",
         "size": 2224
       },
@@ -10443,7 +10521,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U086.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U086.OBJ",
         "sha256": "5fbbf8411f6d049414e32175b66d9915af64852fd01581a61330bd4eb585e115",
         "size": 2213
       }
@@ -10461,7 +10539,7 @@
         "size": 35010
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U087.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U087.OBJ",
         "sha256": "5f37d1fc5bcd86e2078d62d1416a7579f1420c6f105ae1ee35249f46d4a8c817",
         "size": 8751
       },
@@ -10602,7 +10680,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U087.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U087.OBJ",
         "sha256": "266246374921f3aca449a755e035a7a7f24536379f7cb6b123f71094ed1a9c95",
         "size": 8722
       }
@@ -10615,12 +10693,12 @@
         "size": 10086
       },
       "control_source": {
-        "path": "build\\source-only-dos\\binding-controls\\U097.c",
+        "path": "src\\root\\m1FD2.c",
         "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
         "size": 10086
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U097.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U097.OBJ",
         "sha256": "23376e993ef04bee5dee2d9b03298c337bc46eb1003671ba40338e7d9312038b",
         "size": 12521
       },
@@ -10661,7 +10739,7 @@
         }
       ],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U097.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U097.OBJ",
         "sha256": "58905601d6a607270663fb3418e2ca7eb7bb7f8ec40e85429e8a8821e0634de6",
         "size": 12446
       }
@@ -10679,7 +10757,7 @@
         "size": 2925
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U111.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U111.OBJ",
         "sha256": "4f8690be47b3d59578d56785d45b513b31b41532adfd03521e5e076b75e874b9",
         "size": 614
       },
@@ -10702,7 +10780,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U111.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U111.OBJ",
         "sha256": "500b750e29535ca78e2d2407b7519c6b637187f1097b97b49d5b2de98cb28e08",
         "size": 593
       }
@@ -10720,7 +10798,7 @@
         "size": 38288
       },
       "object": {
-        "path": "build\\source-only-dos\\objects\\U118.OBJ",
+        "path": "build\\source-only-dos-v36\\objects\\U118.OBJ",
         "sha256": "4d5c66a5faf7a799a6cb34000e948f3494191e3db45466df3d08bbb1ec1ee81c",
         "size": 5185
       },
@@ -10757,7 +10835,7 @@
       "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
-        "path": "build\\source-only-dos\\binding-controls\\U118.OBJ",
+        "path": "build\\source-only-dos-v36\\binding-controls\\U118.OBJ",
         "sha256": "f5f1054e13cee7f97b0142a3059192819480f416bde9d34e702e2f60d3d9fcd7",
         "size": 5117
       }
@@ -10766,8 +10844,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "e718138b9b356868dfe18293c52aa3773952f5212cb00df3da88e628f63b0449",
-      "size": 78816
+      "sha256": "a06e560e254861350849392df399b2b33910867856f938d9efe74b3d8802fad7",
+      "size": 84846
     },
     {
       "path": "tools\\compiler.py",
@@ -10820,9 +10898,19 @@
       "size": 11972
     },
     {
+      "path": "tools\\dos_minimum_views.py",
+      "sha256": "d7f2bdee5349e41e7fd986d2f30a27284fad9ac86b66dec6576586f87605e2d1",
+      "size": 11181
+    },
+    {
+      "path": "tools\\dos_startup_debt.py",
+      "sha256": "fa9f295824ae638c9ddf4a137a25eb44ea5aff87da5ff6de29f19807eff83458",
+      "size": 8540
+    },
+    {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "697e9905af11ebaee3f389bb782094ceaae51b03fabf8c4d44a7587303db65f2",
-      "size": 191932
+      "sha256": "12d7850b1ee6e53424ced9bfdcf0ad31dee9893d8c0f3c6650e8d6334a76d0de",
+      "size": 192985
     },
     {
       "path": "tools\\farbss.py",
@@ -10850,6 +10938,26 @@
       "path": "build/source-only-dos-validation-v29.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
+    },
+    {
+      "path": "build/workers/dos_root_admission_v36/validate-rerun.log",
+      "size": 4752,
+      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7"
+    },
+    {
+      "path": "build/workers/dos_root_admission_v36/focused-tests.log",
+      "size": 1241,
+      "sha256": "3e0f21fe8c30d82f07ab627b86060fa3d63af81dfe5c8a5e005c36206ee03f83"
+    },
+    {
+      "path": "build/workers/dos_root_admission_v36/regression-test.log",
+      "size": 228,
+      "sha256": "ec2980c332eb01aefc06d7e69edd87328372fdc0bccbd21a3470c12d195a78e4"
+    },
+    {
+      "path": "build/workers/dos_root_admission_v36/preflight-final-rerun.log",
+      "size": 6891,
+      "sha256": "6ce32afdd0666a383f4627391da77816cbdef816016b8a2b5c3fcde0c3d1dc98"
     }
   ],
   "historical_validation": "PASS",
@@ -11176,6 +11284,64 @@
     "size": 232
   },
   "validation_scope_v31": "Historical validation v29 retained: canonical sources/manifest/lock unchanged. v31 changes only generated source bindings and their proof tooling.",
-  "source_only_tests": "61 targeted tests included in 375 repository tests PASS (2 skips)",
-  "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
+  "source_only_tests": "10 v36 negative-control tests PASS; full validation recorded separately",
+  "claim_limit": "Compiled source and reviewed minimum views; computed layout gates remain open. Two prior file values are erased under ordinary startup, with actual game-entry review mandatory. No complete link, game execution/comparison or human acceptance.",
+  "resolved_runtime_state_erasure": [
+    {
+      "id": "common_tail_overlap_3",
+      "offset": 1,
+      "size": 2,
+      "disposition": "prior_file_values_overwritten_before_initializers_or_main",
+      "source_owner_claim": false,
+      "actual_game_entry_review": "PENDING_ACTUAL_GAME_IMAGE"
+    }
+  ],
+  "minimum_view_admission_v36": {
+    "path": "work/source-only-dos/structural-audits-v36/root/minimum-views-admission.json",
+    "size": 1422,
+    "sha256": "a7f1ada6e79542586ae4d21cb7432b50604b6fa4de79d91ac77ead34d967bf97"
+  },
+  "minimum_view_verification": [
+    {
+      "status": "PASS",
+      "module": "source-owned:window-initialized-views",
+      "minimum_source_view_bytes": 540,
+      "computed_alias_gate": "window-index-resource-cross-owner-layout",
+      "historical_maximum_extent_claimed": false
+    },
+    {
+      "status": "PASS",
+      "module": "source-owned:critical-selector-byte",
+      "minimum_source_view_bytes": 1,
+      "computed_alias_gate": "critical-selector-computed-alias-layout",
+      "historical_maximum_extent_claimed": false
+    }
+  ],
+  "minimum_view_contracts": [
+    {
+      "path": "work/source-only-dos/window-minimum-view-contract-v36.json",
+      "size": 24446,
+      "sha256": "e13210b21bf7adfaf7d1f5b788735f0ad49b2d4b105801828c7b80d221826965"
+    },
+    {
+      "path": "work/source-only-dos/selector-minimum-view-contract-v36.json",
+      "size": 43050,
+      "sha256": "a6f8d934de909238121321d5cd4a4c53088a2214073c1675a2f6bfeff841bd57"
+    }
+  ],
+  "startup_erasure_contract_v36": {
+    "path": "work/source-only-dos/startup-tail-erasure-contract-v36.json",
+    "size": 32461,
+    "sha256": "ced793ff307436f5f8108c3c48b8e0c8f398268f937567a75b19fbf6cc29c202"
+  },
+  "structural_audits_v36": {
+    "path": "work/source-only-dos/structural-audits-v36/preservation-index.json",
+    "size": 114070,
+    "sha256": "331b8b792ccc414413f23a086bb93a9624ee5db0fe898694bc7fc717bef96d0a"
+  },
+  "structural_research_v37": {
+    "path": "work/source-only-dos/structural-audits-v37/preservation-index.json",
+    "size": 96306,
+    "sha256": "7ca53ab16216ee65840d475fa6a23d5aaa25b5419d4d81f0804fbad0839983c5"
+  }
 }

@@ -723,6 +723,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V26_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V27_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V29_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V36_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -730,7 +731,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS, **V26_STORAGE_ANCHORS, **V27_STORAGE_ANCHORS, **V29_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS, **V26_STORAGE_ANCHORS, **V27_STORAGE_ANCHORS, **V29_STORAGE_ANCHORS, **V36_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -2474,3 +2475,19 @@ def require_v29_storage_contracts(report, profile, tool):
             if aliases != SCREEN_LIST_ALIASES or contract.get('public_DATA') != initialized_publics(module):
                 raise ValueError('screen-list complete owner/views changed')
             review_initialized_provider(row['storage_provider'])
+
+
+# Minimum source-visible spans, not historical maximum arrays. Their independent
+# computed-alias/layout gates remain mandatory in SOURCE_ONLY_DOS.
+PROVIDER_SPECS['source-owned:window-initialized-views'] = ('WINVW36', None,
+    (('_win_drawHooks', 180), ('_win_offsets', 360)),
+    'struct Rect { int left,top,right,bottom; }; '
+    'void (far * far win_drawHooks[45])(int phase); struct Rect far win_offsets[45];')
+PROVIDER_SPECS['source-owned:critical-selector-byte'] = ('CRITBY36', None,
+    (('_g_8CCB', 1),), 'char near g_8CCB;')
+FAR_PROVIDER_MODULES.add('source-owned:window-initialized-views')
+FAR_PROVIDER_RECORD_ARRAYS['source-owned:window-initialized-views'] = {
+    '_win_drawHooks': 4, '_win_offsets': 8}
+V36_STORAGE_ANCHORS = {'_win_drawHooks': (0x47DE, ('fd_50F6_47DE', 'win_drawHooks')),
+                       '_win_offsets': (0x4892, ('fd_50F6_4892', 'win_offsets')),
+                       '_g_8CCB': (0x8CCB, ('g_8CCB',))}

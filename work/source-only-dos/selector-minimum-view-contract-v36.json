@@ -1,0 +1,991 @@
+{
+  "schema": "simant-dos-minimum-source-view-contract-v36",
+  "module": "source-owned:critical-selector-byte",
+  "root_reviewed": true,
+  "admitted": true,
+  "all_required_checks_pass": true,
+  "communals": [
+    {
+      "name": "_g_8CCB",
+      "kind": "near",
+      "length": 1
+    }
+  ],
+  "historical_producer_or_placement_claimed": false,
+  "maximal_extent_claimed": false,
+  "computed_aliases_closed": false,
+  "game_lifecycle_claimed": false,
+  "original_game_bytes_used": 0,
+  "required_unresolved_gate": "critical-selector-computed-alias-layout",
+  "probe_source": {
+    "path": "work/source-only-dos/structural-audits-v36/selector/fixture_v36.py",
+    "size": 16238,
+    "sha256": "070224a66e060397a21a6dd995e4d2cd5bfc3b54a3424f50d416c490e4e9f84d"
+  },
+  "root_admission": {
+    "path": "work/source-only-dos/structural-audits-v36/root/minimum-views-admission.json",
+    "size": 1422,
+    "sha256": "a7f1ada6e79542586ae4d21cb7432b50604b6fa4de79d91ac77ead34d967bf97"
+  },
+  "receipts": {
+    "fixture-receipt-v36.json": {
+      "path": "work/source-only-dos/structural-audits-v36/selector/fixture-receipt-v36.json",
+      "size": 328649,
+      "sha256": "9c10d67e22065cc68a27cf70539f8eaad56848f52092d1a7880fed5254647c75"
+    },
+    "whole-tu-v36.json": {
+      "path": "work/source-only-dos/structural-audits-v36/selector/whole-tu-v36.json",
+      "size": 80426,
+      "sha256": "69bd906feedbe611d0798564a4d913dfa5a371ed878a6941818aeeeb743d56ad"
+    },
+    "proposal-v36.json": {
+      "path": "work/source-only-dos/structural-audits-v36/selector/proposal-v36.json",
+      "size": 121227,
+      "sha256": "04aef9e98acf08bcc490955b9e451d574030b4e6f6788874f67619d2744b81d3"
+    }
+  },
+  "inputs": [
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    }
+  ],
+  "control_pins": [
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/fixture-receipt-v36.json",
+      "size": 328649,
+      "sha256": "9c10d67e22065cc68a27cf70539f8eaad56848f52092d1a7880fed5254647c75"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/fixture_v36.py",
+      "size": 16238,
+      "sha256": "070224a66e060397a21a6dd995e4d2cd5bfc3b54a3424f50d416c490e4e9f84d"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/intake/sources/U088.c",
+      "size": 9762,
+      "sha256": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36"
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/context/source_only_dos.py",
+      "size": 80313,
+      "sha256": "9cd6bbfbbde03894360f0df71bab4bda68fbca27a4e0c667f2d791057e1deae6"
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/whole-tu-v36.json",
+      "size": 80426,
+      "sha256": "69bd906feedbe611d0798564a4d913dfa5a371ed878a6941818aeeeb743d56ad"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/selector-view.c",
+      "size": 89,
+      "sha256": "f5305195b862ef3c2b16f60c1012b057dd5b1d55e426220c600a4f2218ce755b"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELVIEW.OBJ",
+      "sha256": "ce484cdf9a4efc935a73da8165f21107d5640daac14cf2985754cbf7886f8b4b",
+      "size": 204
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELVIEW.log",
+      "size": 11,
+      "sha256": "f483b10a31e7a4d04130ac8e5903b13b5d011b335d7a1cd3755e655ee1d797bc"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/selector-initialized-contrast.c",
+      "size": 23,
+      "sha256": "a18c32fe8f86891b25475fc415e36882e786f900d9d72e5c592749433636da29"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELINIT.OBJ",
+      "sha256": "168a9c1a7cd5397dc2f1e5c84c926eff66f6c6ec58be64a7930eb694e608381d",
+      "size": 214
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELINIT.log",
+      "size": 11,
+      "sha256": "9e90bd1b311163b0ad85f6fb1aeb21fd15fe18327f388de924f882c18d9073ec"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/selector-width-contrast.c",
+      "size": 18,
+      "sha256": "dde6dcb87617f44746d5dd1e74cce9657732ace62df1847b44964d07adefe9f3"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELWORD.OBJ",
+      "sha256": "3995a46097721a4756faa2d5eb1acc77891d96efa8082fcec0f2d229d6f8ebbc",
+      "size": 204
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELWORD.log",
+      "size": 11,
+      "sha256": "499f4da20fd6ac36709f213ba716a994082c1ce470837a569facde903f0db598"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/selector-unsigned-diagnostic.c",
+      "size": 28,
+      "sha256": "d2cc0671f18d21e2105e380641e79bdb0a8c5cf3d69871c0483ac8cbadd37329"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELUNSG.OBJ",
+      "sha256": "a349729590625b1e90c8618cadcf6934d6006beda4cd32156acb81d2383ee846",
+      "size": 204
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELUNSG.log",
+      "size": 11,
+      "sha256": "d20a1a5ddf205b5fed40ba34c69329d5c132f464758d594bd2bffbc1ca7b7071"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/selector-consumer.c",
+      "size": 1698,
+      "sha256": "1345bc1c70d43b40935bdd0914cdc4d8d5f67f0f8146f77450b8797a50bd1e0a"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELTEST.OBJ",
+      "sha256": "bfe6a13987f64f9fd0eaec6457304b0348233a65533b27767f7d1a7e5db186a0",
+      "size": 1261
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELTEST.log",
+      "size": 11,
+      "sha256": "fa70da2850b38e712216b8bc2df3276c618c32d73850e8fbac637e344f70784f"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/selector-width-consumer.c",
+      "size": 1697,
+      "sha256": "d89a33c229a87a107656dc51b7d721471d71cad63e4a0cf83befb5841294a417"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELWTEST.OBJ",
+      "sha256": "a7ee37c941208741d0704948c08feb72ecf293f4da8671b53c9d7d241953d942",
+      "size": 1138
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELWTEST.log",
+      "size": 12,
+      "sha256": "0fd68842807f3f90b91282ba944f3a0ed3425d0cba1569c11da4e72cfbffd203"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/selector-shift-consumer.c",
+      "size": 1897,
+      "sha256": "0a42e0cae6ab1c2fca86d69b80c7c88e9e0a966ff726ae56e4f6e7010366af62"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELSHIFT.OBJ",
+      "sha256": "6f1084dce1a4cb54207b5e3219bcfe0281195ff5a4d10b3ca0cc542b04ac17c0",
+      "size": 1346
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELSHIFT.log",
+      "size": 12,
+      "sha256": "d68f509e2306f7bf9fe1f210c0ab78a8c52805465ee0767e30df68277b3de2f2"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/context-storage.c",
+      "size": 57,
+      "sha256": "bf57baae720384a63854b7a631857392da2a2cbc081224ad59eacef503c92fcb"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/CONTEXT.OBJ",
+      "sha256": "771f484a350ae0bc6fb86a913f4251c3af416bdb7bc7a7196a4cecfbbf82c953",
+      "size": 241
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/CONTEXT.log",
+      "size": 11,
+      "sha256": "b84e18dbe69f93adfe1f1759e140106a91bd3bd701ba2dc155151910f548769c"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELVIEWD.OBJ",
+      "sha256": "d8fecb23533d61c62ab6d8319957c131238694c12bfee387b3a19357794376af",
+      "size": 295
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELVIEWD.log",
+      "size": 12,
+      "sha256": "60157e457cad348cdb561a847551226811b27e3b78185ef233fb480f214be4f7"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/SELUNSGD.OBJ",
+      "sha256": "b948c51aba5651a0204ff8b363d7d339106a51f69362f160e5ebfd71b47109c1",
+      "size": 295
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/SELUNSGD.log",
+      "size": 12,
+      "sha256": "a99d3b64bda34d07c1cc4656ed553447531c197f1b6294ae16b9f78d99fb287a"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/byte_view/dosbox.conf",
+      "size": 417,
+      "sha256": "214a53d38d59b96ffd2f2fde53418f62208389ba8137861b11a58aedf439a55a"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/byte_view/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/byte_view/LINK.LOG",
+      "size": 461,
+      "sha256": "151e4248579d7c9dc2ecba5d3ab90702571130e61c7705012f78a0e5269533d2"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/byte_view/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/byte_view/PROBE.EXE",
+      "sha256": "2b79091624b6933a8fc6c56e82d7c41f7d03b1017b44a09cf86ba9f19a463c65",
+      "size": 7729
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/byte_view/PROBE.LNK",
+      "size": 94,
+      "sha256": "0e5f22dc14256f07dfb2d9b25b1f2976542939ce95898556a4f390137e0f90aa"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/byte_view/PROBE.MAP",
+      "size": 28488,
+      "sha256": "2899e811167df524f04271ea9a4f9b25c9fb744d0f1ab1bd3485fab80b0e12e8"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/byte_view/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/byte_view/RUN.BAT",
+      "size": 75,
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/byte_view/RUN.LOG",
+      "size": 53,
+      "sha256": "fbbd2cbec0eba03311df44e71083db761a37f4901c128afba5de44eddfd76a65"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/byte_view/SELTEST.OBJ",
+      "sha256": "bfe6a13987f64f9fd0eaec6457304b0348233a65533b27767f7d1a7e5db186a0",
+      "size": 1261
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/byte_view/SELVIEW.OBJ",
+      "sha256": "ce484cdf9a4efc935a73da8165f21107d5640daac14cf2985754cbf7886f8b4b",
+      "size": 204
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/initialized_one/dosbox.conf",
+      "size": 423,
+      "sha256": "e3916975466c328765268b0fc823277d1f3e1050895501b5d0ae122d3d402067"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/initialized_one/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/initialized_one/LINK.LOG",
+      "size": 461,
+      "sha256": "0f6fb38045d6095eb116d187fe4a0a447961cd439921d04667795de19c26c61f"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/initialized_one/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/initialized_one/PROBE.EXE",
+      "sha256": "5c084161d137f4a0cc34b01e1e485ce9f5b44f40272206bc46db91a6e9bc2f0e",
+      "size": 7731
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/initialized_one/PROBE.LNK",
+      "size": 94,
+      "sha256": "ccc708f82502df747f279764fdf1b2a96042b806eb7b3b079d388710a5d9acf5"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/initialized_one/PROBE.MAP",
+      "size": 28488,
+      "sha256": "f0a97f36dafe361b388712fd6eca21974e56f9722c3e8ff89aa9202def53595a"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/initialized_one/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/initialized_one/RUN.BAT",
+      "size": 75,
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/initialized_one/RUN.LOG",
+      "size": 22,
+      "sha256": "55c6b838e466388c3bdbb6b705b4d65a59ba54eaa89e34d9f62a4ed9439ae4b9"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/initialized_one/SELINIT.OBJ",
+      "sha256": "168a9c1a7cd5397dc2f1e5c84c926eff66f6c6ec58be64a7930eb694e608381d",
+      "size": 214
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/initialized_one/SELTEST.OBJ",
+      "sha256": "bfe6a13987f64f9fd0eaec6457304b0348233a65533b27767f7d1a7e5db186a0",
+      "size": 1261
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/word_width/dosbox.conf",
+      "size": 418,
+      "sha256": "fb2081e2335320b7c5f0e50c69a9fe47fbebb544aff1aa5eac6a8935405829df"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/word_width/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/word_width/LINK.LOG",
+      "size": 462,
+      "sha256": "7942578bc08006de9f31abff4756349cd95812356b57b657a487b8e3af175188"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/word_width/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/word_width/PROBE.EXE",
+      "sha256": "e166a2683a2b56d9d38eebb5435f227e941c9afc82d2286d14f0ff0b1135c125",
+      "size": 7649
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/word_width/PROBE.LNK",
+      "size": 95,
+      "sha256": "eb4ca83454cb5bc9c48433b2dbb1e62a6cf933d12c1ef6bb5b1612334b01fc79"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/word_width/PROBE.MAP",
+      "size": 28492,
+      "sha256": "940e0a9b15d11d3aa550c31c0de03874da0dcf9c1a39df27327e43d0222fddaf"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/word_width/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/word_width/RUN.BAT",
+      "size": 75,
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/word_width/RUN.LOG",
+      "size": 23,
+      "sha256": "138be39ed91f7942f3375514395b84ee6d976e56f858ad3a8da6ff5e4f8b255f"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/word_width/SELWORD.OBJ",
+      "sha256": "3995a46097721a4756faa2d5eb1acc77891d96efa8082fcec0f2d229d6f8ebbc",
+      "size": 204
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/word_width/SELWTEST.OBJ",
+      "sha256": "a7ee37c941208741d0704948c08feb72ecf293f4da8671b53c9d7d241953d942",
+      "size": 1138
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/CONTEXT.OBJ",
+      "sha256": "771f484a350ae0bc6fb86a913f4251c3af416bdb7bc7a7196a4cecfbbf82c953",
+      "size": 241
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/dosbox.conf",
+      "size": 422,
+      "sha256": "212b164958d1f86f29961ad517e6ea162ab38b8be08f64c69e78924a872a3d66"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/LINK.LOG",
+      "size": 471,
+      "sha256": "1379b583ab5a25d5f4e55da30e5714a3dcc027aad7943ea44d37963ee5dff9d7"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/PROBE.EXE",
+      "sha256": "717a121af68c315cf7f2e9f1d03858550cef26c71ff428c86743a19515f83615",
+      "size": 8035
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/PROBE.LNK",
+      "size": 104,
+      "sha256": "f3e4aa9ef50ea343ac1e3af36392950202d5bee989eed638938f4f68e95eb9cd"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/PROBE.MAP",
+      "size": 28765,
+      "sha256": "b1f9413c2784fc4d8e01dea794ed216679b669aabb589350834bc44760de1887"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/RUN.BAT",
+      "size": 75,
+      "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/RUN.LOG",
+      "size": 53,
+      "sha256": "fbbd2cbec0eba03311df44e71083db761a37f4901c128afba5de44eddfd76a65"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/SELSHIFT.OBJ",
+      "sha256": "6f1084dce1a4cb54207b5e3219bcfe0281195ff5a4d10b3ca0cc542b04ac17c0",
+      "size": 1346
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink400/shifted_dgroup/SELVIEW.OBJ",
+      "sha256": "ce484cdf9a4efc935a73da8165f21107d5640daac14cf2985754cbf7886f8b4b",
+      "size": 204
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/byte_view/dosbox.conf",
+      "size": 417,
+      "sha256": "c51169a23c8b5338f86237aae88f651dff522a7b813fddf6e7f20570b7e1c631"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/byte_view/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/byte_view/LINK.LOG",
+      "size": 991,
+      "sha256": "3a00cec14871ef32f9ddd70452d6698fd1c3c95bd5191fe27f5984f74fa27f1d"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/byte_view/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/byte_view/PROBE.EXE",
+      "sha256": "a2b06ac007d87079a06d351950365548ed0d4eebfa9b010a6c59b6ac36e72b70",
+      "size": 7729
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/byte_view/PROBE.LNK",
+      "size": 94,
+      "sha256": "0e5f22dc14256f07dfb2d9b25b1f2976542939ce95898556a4f390137e0f90aa"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/byte_view/PROBE.MAP",
+      "size": 37897,
+      "sha256": "2bd22428fc80f3620753f06505a4e2872a9470ba7d9dd2eceb19d16c9ae3a755"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/byte_view/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/byte_view/RUN.BAT",
+      "size": 77,
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/byte_view/RUN.LOG",
+      "size": 53,
+      "sha256": "fbbd2cbec0eba03311df44e71083db761a37f4901c128afba5de44eddfd76a65"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/byte_view/SELTEST.OBJ",
+      "sha256": "bfe6a13987f64f9fd0eaec6457304b0348233a65533b27767f7d1a7e5db186a0",
+      "size": 1261
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/byte_view/SELVIEW.OBJ",
+      "sha256": "ce484cdf9a4efc935a73da8165f21107d5640daac14cf2985754cbf7886f8b4b",
+      "size": 204
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/initialized_one/dosbox.conf",
+      "size": 423,
+      "sha256": "946b67e11fd18a81ffe40ba31995a5b95778a63c573ec2ee4297ec3a419a48e1"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/initialized_one/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/initialized_one/LINK.LOG",
+      "size": 991,
+      "sha256": "a4c39a2aabdfcea19524f7bf5917e23591267283c97e7b69e2a0a79fef787e6c"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/initialized_one/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/initialized_one/PROBE.EXE",
+      "sha256": "0f8887304ef98cb9107f1af6e10df630024cdda9f46a8e924e1d6dba856a4efa",
+      "size": 7731
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/initialized_one/PROBE.LNK",
+      "size": 94,
+      "sha256": "ccc708f82502df747f279764fdf1b2a96042b806eb7b3b079d388710a5d9acf5"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/initialized_one/PROBE.MAP",
+      "size": 37897,
+      "sha256": "183fe8c324a9ca7582e009bb3e1be52b9155dc8f0efb5ed2585522a7f8f2feb4"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/initialized_one/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/initialized_one/RUN.BAT",
+      "size": 77,
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/initialized_one/RUN.LOG",
+      "size": 22,
+      "sha256": "55c6b838e466388c3bdbb6b705b4d65a59ba54eaa89e34d9f62a4ed9439ae4b9"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/initialized_one/SELINIT.OBJ",
+      "sha256": "168a9c1a7cd5397dc2f1e5c84c926eff66f6c6ec58be64a7930eb694e608381d",
+      "size": 214
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/initialized_one/SELTEST.OBJ",
+      "sha256": "bfe6a13987f64f9fd0eaec6457304b0348233a65533b27767f7d1a7e5db186a0",
+      "size": 1261
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/word_width/dosbox.conf",
+      "size": 418,
+      "sha256": "755285162c60b50ccadb409475271ca516eee65afadbc2f955e0e293cfe40abb"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/word_width/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/word_width/LINK.LOG",
+      "size": 992,
+      "sha256": "49feeb94c812cb586ce28b399cacde0428e8743757879ce430337c3d31847af5"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/word_width/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/word_width/PROBE.EXE",
+      "sha256": "e76c21f0be71feb2ef31b9c145623a6d03991eb97fe3819bb289e0e96ee0f0fc",
+      "size": 7649
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/word_width/PROBE.LNK",
+      "size": 95,
+      "sha256": "eb4ca83454cb5bc9c48433b2dbb1e62a6cf933d12c1ef6bb5b1612334b01fc79"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/word_width/PROBE.MAP",
+      "size": 37905,
+      "sha256": "3e14ddddbe07bb62e5a9f438d6ac9cd058b0618889bb62e97a01ff6a716e3fb8"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/word_width/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/word_width/RUN.BAT",
+      "size": 77,
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/word_width/RUN.LOG",
+      "size": 23,
+      "sha256": "138be39ed91f7942f3375514395b84ee6d976e56f858ad3a8da6ff5e4f8b255f"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/word_width/SELWORD.OBJ",
+      "sha256": "3995a46097721a4756faa2d5eb1acc77891d96efa8082fcec0f2d229d6f8ebbc",
+      "size": 204
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/word_width/SELWTEST.OBJ",
+      "sha256": "a7ee37c941208741d0704948c08feb72ecf293f4da8671b53c9d7d241953d942",
+      "size": 1138
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/CONTEXT.OBJ",
+      "sha256": "771f484a350ae0bc6fb86a913f4251c3af416bdb7bc7a7196a4cecfbbf82c953",
+      "size": 241
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/dosbox.conf",
+      "size": 422,
+      "sha256": "3b140aac0bc216a396bae772d797a88d5d88c013988cd3da8efdc769a01ae3e2"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/LIBH.LIB",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/LINK.LOG",
+      "size": 1001,
+      "sha256": "0cc71012fac30a5b62ffaf9ae6cfeb4e2a9249512ae4ea961593f6cdbb58ee64"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/LLIBCR.LIB",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/PROBE.EXE",
+      "sha256": "c2310f6cd03aebed50b0e0d2437a1511b01b6e271b092b10d1b924724fe75ddd",
+      "size": 8035
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/PROBE.LNK",
+      "size": 104,
+      "sha256": "f3e4aa9ef50ea343ac1e3af36392950202d5bee989eed638938f4f68e95eb9cd"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/PROBE.MAP",
+      "size": 38474,
+      "sha256": "61334b4ef0595422e0b09853028a113d428db7ddcef9070c056f2328a2d5c41c"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/RTLINK.CFG",
+      "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+      "size": 21
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/RUN.BAT",
+      "size": 77,
+      "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/RUN.LOG",
+      "size": 53,
+      "sha256": "fbbd2cbec0eba03311df44e71083db761a37f4901c128afba5de44eddfd76a65"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/SELSHIFT.OBJ",
+      "sha256": "6f1084dce1a4cb54207b5e3219bcfe0281195ff5a4d10b3ca0cc542b04ac17c0",
+      "size": 1346
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/runtime/rtlink610/shifted_dgroup/SELVIEW.OBJ",
+      "sha256": "ce484cdf9a4efc935a73da8165f21107d5640daac14cf2985754cbf7886f8b4b",
+      "size": 204
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/whole-tu-v36.json",
+      "size": 80426,
+      "sha256": "69bd906feedbe611d0798564a4d913dfa5a371ed878a6941818aeeeb743d56ad"
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/objects/U088.OBJ",
+      "sha256": "8550fe31dfd3e639f904e01813b67590ca3ee38356da61a120ea5141178e1178",
+      "size": 5041
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/raw-controls/dos_critical_selector_v36/objects/U088.log",
+      "size": 8,
+      "sha256": "a6763f7d842aa0bbf43a7bddc3c5082d0b2b3d04251c4f6c9e518c92beba2087"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/proposal-v36.json",
+      "size": 121227,
+      "sha256": "04aef9e98acf08bcc490955b9e451d574030b4e6f6788874f67619d2744b81d3"
+    },
+    {
+      "path": "work/source-only-dos/providers/critical-error-selector.c",
+      "sha256": "1376df31e9585bda5fd6f041b5f8b22acb4bf9255ed27e3f1cc250c94a819d17",
+      "size": 206
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/receipt-v36.json",
+      "size": 136443,
+      "sha256": "bfbf5463a03c611871c5a02c76f30b535ee6fddb1706f1b7a6595e8f762f6e60"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/fixture-receipt-v36.json",
+      "size": 328649,
+      "sha256": "9c10d67e22065cc68a27cf70539f8eaad56848f52092d1a7880fed5254647c75"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/proposal-v36.md",
+      "size": 9263,
+      "sha256": "e6b07ce005b8685f84e7ff34e0cd0aebf9c8376f396eafd9c5b96fd2d0006ff6"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v36/selector/make_review_packet.py",
+      "size": 5312,
+      "sha256": "81d3be11a4b2e5de7d351358e6aed734e5a1a75eb6ceebbe6080c7381e6268dc"
+    }
+  ]
+}

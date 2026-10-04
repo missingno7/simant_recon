@@ -1,0 +1,49 @@
+{
+  "schema": "simant-dos-reviewed-minimum-view-bindings-v36",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "root_reviewed": true,
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:critical-selector-byte",
+      "basename": "CRITBY36",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/critical-selector-byte-v36.c",
+        "size": 94,
+        "sha256": "b511cfdeb3c161e08bb2635ad4a37ef80d3180b93935f254ad9af95de13d794f"
+      },
+      "communals": [
+        {
+          "name": "_g_8CCB",
+          "kind": "near",
+          "length": 1
+        }
+      ]
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/structural-audits-v36/root/minimum-views-admission.json",
+      "size": 1422,
+      "sha256": "a7f1ada6e79542586ae4d21cb7432b50604b6fa4de79d91ac77ead34d967bf97"
+    },
+    {
+      "path": "work/source-only-dos/providers/critical-selector-byte-v36.c",
+      "size": 94,
+      "sha256": "b511cfdeb3c161e08bb2635ad4a37ef80d3180b93935f254ad9af95de13d794f"
+    }
+  ],
+  "runtime_contract": {
+    "path": "work/source-only-dos/selector-minimum-view-contract-v36.json",
+    "size": 43050,
+    "sha256": "a6f8d934de909238121321d5cd4a4c53088a2214073c1675a2f6bfeff841bd57"
+  },
+  "runtime_contract_key": "selector_minimum_view_contract"
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "dos-icon-minimum-functional-slot-proposal-v37",
+  "status": "SOURCE_FUNCTIONAL_MINIMUM_SLOT_SUPPORTED_WITH_UNRESOLVED_INTEGRATION_GATES",
+  "admitted": false,
+  "parent_review_required": true,
+  "historical_extent_admitted": false,
+  "provider": {
+    "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/icon-functional-provider.c",
+    "size": 36,
+    "sha256": "fd8000b7374d62d1c7e6b0ad48a9053dd25ea7e21630b666b1b1c3c85e84b978"
+  },
+  "natural_definition": "char far * far * far fd_50F6_46D2;",
+  "symbol": "fd_50F6_46D2",
+  "minimum_mutable_slot_bytes": 4,
+  "storage_type": "far scalar whose value is a far pointer to a far char-pointer cell (DOS Handle-shaped view)",
+  "compiler_ownership": "one four-byte FAR COMDEF; zero initialized/code segment bytes; zero fixups",
+  "initial_state": "four loaded zero bytes and no overlapping loader relocation; typed null representation verified under real CRT/RTLink controls",
+  "source_lifetime_limit": "slot storage only; no valid master-pointer cell or bitmap payload is allocated or initialized by this provider",
+  "historical_identity": "defining TU, declaration spelling, maximal extent and link order remain unknown",
+  "naming": "address names retained; no xver pair for either consumer; unrelated Win16 DrawWinIcons stub is not an anchor",
+  "menu_gate": {
+    "id": "menu-table-cross-owner-layout",
+    "status": "UNRESOLVED",
+    "mandatory": true,
+    "historical_intersections": [
+      {
+        "array": "fd_50F6_46BC",
+        "index": 11,
+        "target_word": 0
+      },
+      {
+        "array": "fd_50F6_46BC",
+        "index": 12,
+        "target_word": 1
+      },
+      {
+        "array": "fd_50F6_46A8",
+        "index": 21,
+        "target_word": 0
+      },
+      {
+        "array": "fd_50F6_46A8",
+        "index": 22,
+        "target_word": 1
+      }
+    ],
+    "reason": "Uncapped loops can reach both pointer words. A shifted natural owner does not preserve physical out-of-owner writes; shipped five-title evidence is not a global bound."
+  },
+  "computed_alias_gate": {
+    "id": "icon-handle-computed-alias-and-activation",
+    "status": "UNRESOLVED",
+    "mandatory": true,
+    "reason": "Computed writers/readers, indirect control and source/resource activation are not excluded. No whole-program deadness, permanent-zero, missing setup writer or null-dereference execution contract is admitted."
+  },
+  "cell_lifetime_obligation": {
+    "status": "UNRESOLVED",
+    "mandatory_if_consumer_activated": true,
+    "reason": "A pointer-load mode requires a valid far master-pointer cell and live byte payload; no game producer/allocator/lock/unhook contract for this slot was identified. Test-owned cells are ABI controls only."
+  },
+  "claims_not_made": [
+    "historical complete owner",
+    "original C declaration",
+    "producer or resource identity",
+    "pointee lifetime",
+    "maximal object extent",
+    "safe null dereference",
+    "helper deadness",
+    "historical layout preservation",
+    "standalone executable",
+    "game execution",
+    "freeze"
+  ],
+  "packet_inputs": [
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/audit_v37.py",
+      "size": 10219,
+      "sha256": "c525b3185a259604763ffbc8eea1b29293fe4b8a74d8e6817ca6d4f3eced74d3"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime_v37.py",
+      "size": 10789,
+      "sha256": "00c37658b70ac3f9b2cf1c7d331106bb1e3542dc1ef4d6d77977ae1cf0d413c9"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/verify_v37.py",
+      "size": 5394,
+      "sha256": "c0ab4d59f9ce3a68bd53c232e1998992fb2c5e7b1b60701db611f71e4065bb7e"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/audit-facts.json",
+      "size": 511134,
+      "sha256": "c80a590b3a9681b1997d0ef4d18f4e31496dfc203ef8948e0d4f52160e47774f"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-facts.json",
+      "size": 144130,
+      "sha256": "12dea2bc6f09e135404e4acc96f7505fbbaa0ab5b691ad6a644d9296c2589d13"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/review-v37.md",
+      "size": 6585,
+      "sha256": "67afab77c31793163884c17908df988b3e1b0b64ea6a83caf74d53d7122411b3"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/context-f_208F_027F.txt",
+      "size": 1540,
+      "sha256": "5ed8ded9d942c0b799f8cc7ed02d8a6eff6215d7e11b9f701ad7994917ec4ede"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/context-f_208F_02F0.txt",
+      "size": 1455,
+      "sha256": "9a4fcfe108fcf8bedc6d0f353e5c9a644a24b397253c42d45b7549e5b5638f86"
+    }
+  ],
+  "production_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+}

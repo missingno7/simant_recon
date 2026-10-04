@@ -1,0 +1,4517 @@
+{
+  "schema": "dos-icon-handle-stock-controls-v37",
+  "admitted": false,
+  "compiler_controls": [
+    {
+      "label": "MAIN",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/MAIN.c",
+        "size": 2048,
+        "sha256": "04a15a8d3a9b0a2d90d09c87032b201496d54cad8de36f4e1f284f12f448037b"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/MAIN.obj",
+        "size": 1678,
+        "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
+      },
+      "communals": [],
+      "segment_defs": [
+        {
+          "index": 1,
+          "name": "MAIN_TEXT",
+          "class": "CODE",
+          "length": 564,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 327,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 3,
+          "name": "CONST",
+          "class": "CONST",
+          "length": 4,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 4,
+          "name": "_BSS",
+          "class": "BSS",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 5,
+          "name": "MAIN5_DATA",
+          "class": "FAR_DATA",
+          "length": 264,
+          "alignment_code": 3,
+          "alignment": "paragraph",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 104
+        }
+      ],
+      "segment_lengths": {
+        "MAIN_TEXT": 564,
+        "_DATA": 327,
+        "CONST": 4,
+        "_BSS": 0,
+        "MAIN5_DATA": 264
+      },
+      "publics": [
+        {
+          "name": "_fixturePixelsA",
+          "segment": "MAIN5_DATA",
+          "offset": 0
+        },
+        {
+          "name": "_fixturePixelsB",
+          "segment": "MAIN5_DATA",
+          "offset": 128
+        },
+        {
+          "name": "_fixtureMaster",
+          "segment": "MAIN5_DATA",
+          "offset": 256
+        },
+        {
+          "name": "_fixtureMaster2",
+          "segment": "MAIN5_DATA",
+          "offset": 260
+        },
+        {
+          "name": "_derive",
+          "segment": "MAIN_TEXT",
+          "offset": 0
+        },
+        {
+          "name": "_main",
+          "segment": "MAIN_TEXT",
+          "offset": 28
+        }
+      ],
+      "ordered_fixups": [
+        {
+          "segment": "CONST",
+          "offset": 0,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 17,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 12,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "CONST",
+          "offset": 2,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 551,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 546,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "2701"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 534,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 529,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "1301"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 524,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 519,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 515,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 475,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 470,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "fa00"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 459,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 456,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "6000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 452,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 444,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 442,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0601"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 437,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 435,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0401"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 430,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 416,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 411,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "e200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 400,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 397,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "e000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 393,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 383,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 376,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 371,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 367,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 364,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0401"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 335,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 330,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "c400"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 325,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 323,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 316,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0001"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 305,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 301,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 298,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 293,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0401"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 284,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 279,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "9f00"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 266,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 261,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "8d00"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 250,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 247,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "a000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 243,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 235,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 233,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0201"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 228,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "8000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 226,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0001"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 221,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 207,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 202,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "6b00"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 191,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 188,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "4000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 184,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 168,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 165,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "2000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 161,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 153,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 148,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 144,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 140,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 137,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "0001"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 130,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 125,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "3d00"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 112,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 107,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "2400"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 102,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 97,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 93,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 79,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 74,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "1200"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 43,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN_TEXT",
+          "offset": 38,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MAIN5_DATA",
+          "offset": 260,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "80000000"
+        },
+        {
+          "segment": "MAIN5_DATA",
+          "offset": 256,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "MAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "MAIN5_DATA",
+          "encoded_addend": "00000000"
+        }
+      ],
+      "segment_sha256": {
+        "CONST": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "MAIN_TEXT": "b8dee632d95ab82e0e5cc5738612a7a989d6639eae01bd60910326a56758ff67",
+        "_DATA": "d2029c0dc3e5d103d52fdaaa74d848c6d97aee9fd7449d734049e0d58a9b8638",
+        "MAIN5_DATA": "a61458965c272187a2d440bb6bb69b6d8286212c8f955254cec606b929c5209f"
+      }
+    },
+    {
+      "label": "OWN",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/OWN.c",
+        "size": 59,
+        "sha256": "14af94bc6d0525d8e2f81098dd11eb34985855b24c6107fe084a9c87973c85be"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/OWN.obj",
+        "size": 203,
+        "sha256": "66e6c8b9d9ea7f8e9b606d3e0464cda06627fe3957519b51212ffab42cd50a88"
+      },
+      "communals": [
+        {
+          "name": "_fd_50F6_46D2",
+          "kind": "far",
+          "type_index": 0,
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "segment_defs": [
+        {
+          "index": 1,
+          "name": "OWN_TEXT",
+          "class": "CODE",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 3,
+          "name": "CONST",
+          "class": "CONST",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 4,
+          "name": "_BSS",
+          "class": "BSS",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        }
+      ],
+      "segment_lengths": {
+        "OWN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0
+      },
+      "publics": [],
+      "ordered_fixups": [],
+      "segment_sha256": {}
+    },
+    {
+      "label": "ZERO",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/ZERO.c",
+        "size": 63,
+        "sha256": "e3fb6d7283b7941ad3fbab7664136979b37af4c88454d207c1aba2959d09271d"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/ZERO.obj",
+        "size": 247,
+        "sha256": "6b4647b66abb2a76938ee89ce61e12a0a1cf27f83b84aa417e6f383a2b235a62"
+      },
+      "communals": [],
+      "segment_defs": [
+        {
+          "index": 1,
+          "name": "ZERO_TEXT",
+          "class": "CODE",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 3,
+          "name": "CONST",
+          "class": "CONST",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 4,
+          "name": "_BSS",
+          "class": "BSS",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 5,
+          "name": "ZERO5_DATA",
+          "class": "FAR_DATA",
+          "length": 4,
+          "alignment_code": 3,
+          "alignment": "paragraph",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 104
+        }
+      ],
+      "segment_lengths": {
+        "ZERO_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "ZERO5_DATA": 4
+      },
+      "publics": [
+        {
+          "name": "_fd_50F6_46D2",
+          "segment": "ZERO5_DATA",
+          "offset": 0
+        }
+      ],
+      "ordered_fixups": [],
+      "segment_sha256": {
+        "ZERO5_DATA": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      }
+    },
+    {
+      "label": "INIT",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/INIT.c",
+        "size": 114,
+        "sha256": "08f4a1e13d04098d6d931f9bb7ab749ea9b43b3c830cc84c3679e4b0ade9bdaf"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/INIT.obj",
+        "size": 275,
+        "sha256": "4b86353aab17aa73bb812c015aab2ddb82963ba7b559caf7911f7c4fc2f2cfab"
+      },
+      "communals": [],
+      "segment_defs": [
+        {
+          "index": 1,
+          "name": "INIT_TEXT",
+          "class": "CODE",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 3,
+          "name": "CONST",
+          "class": "CONST",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 4,
+          "name": "_BSS",
+          "class": "BSS",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 5,
+          "name": "INIT5_DATA",
+          "class": "FAR_DATA",
+          "length": 4,
+          "alignment_code": 3,
+          "alignment": "paragraph",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 104
+        }
+      ],
+      "segment_lengths": {
+        "INIT_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "INIT5_DATA": 4
+      },
+      "publics": [
+        {
+          "name": "_fd_50F6_46D2",
+          "segment": "INIT5_DATA",
+          "offset": 0
+        }
+      ],
+      "ordered_fixups": [
+        {
+          "segment": "INIT5_DATA",
+          "offset": 0,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fixtureMaster",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 1,
+          "frame_kind": "target",
+          "frame": "_fixtureMaster",
+          "encoded_addend": "00000000"
+        }
+      ],
+      "segment_sha256": {
+        "INIT5_DATA": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      }
+    },
+    {
+      "label": "SHIFT",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/SHIFT.c",
+        "size": 38,
+        "sha256": "41d5d9b5aefe66c3741405c130de29e8cb27f40c043228f1b2281ea59a06f033"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/SHIFT.obj",
+        "size": 261,
+        "sha256": "4f2eb938954ddce9763c890aa9874733e92e23d5fed7a697d21a92b3c083fc1f"
+      },
+      "communals": [],
+      "segment_defs": [
+        {
+          "index": 1,
+          "name": "SHIFT_TEXT",
+          "class": "CODE",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 3,
+          "name": "CONST",
+          "class": "CONST",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 4,
+          "name": "_BSS",
+          "class": "BSS",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 5,
+          "name": "SHIFT5_DATA",
+          "class": "FAR_DATA",
+          "length": 257,
+          "alignment_code": 3,
+          "alignment": "paragraph",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 104
+        }
+      ],
+      "segment_lengths": {
+        "SHIFT_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0,
+        "SHIFT5_DATA": 257
+      },
+      "publics": [
+        {
+          "name": "_fixtureShift",
+          "segment": "SHIFT5_DATA",
+          "offset": 0
+        }
+      ],
+      "ordered_fixups": [],
+      "segment_sha256": {
+        "SHIFT5_DATA": "00b2a3df72964ecb2d4b6c04db9f00f60637d7155a01777784f0e990d92f1600"
+      }
+    },
+    {
+      "label": "RAWOWN",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/RAWOWN.c",
+        "size": 30,
+        "sha256": "900ce3314b8158d2f4f8b722ab8f0c8a456f1d74e343e0a275b50d53f99f9a74"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/RAWOWN.obj",
+        "size": 209,
+        "sha256": "fbdb2657cc6235a9499476e22c405a0ad8a4b4cbde5629fae113e03fd90b7908"
+      },
+      "communals": [
+        {
+          "name": "_fd_50F6_46D2",
+          "kind": "far",
+          "type_index": 0,
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        }
+      ],
+      "segment_defs": [
+        {
+          "index": 1,
+          "name": "RAWOWN_TEXT",
+          "class": "CODE",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 3,
+          "name": "CONST",
+          "class": "CONST",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 4,
+          "name": "_BSS",
+          "class": "BSS",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        }
+      ],
+      "segment_lengths": {
+        "RAWOWN_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0
+      },
+      "publics": [],
+      "ordered_fixups": [],
+      "segment_sha256": {}
+    },
+    {
+      "label": "RAWMAIN",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/RAWMAIN.c",
+        "size": 2167,
+        "sha256": "640241d59b51d096f398a822446218aaaa746c15d3a5c26760f0c2c9a2440aa6"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-sources/RAWMAIN.obj",
+        "size": 1713,
+        "sha256": "d0ccb78b9aabb5f68ca44a4a476245e692b0664f690f834df05f4d785d2cb682"
+      },
+      "communals": [],
+      "segment_defs": [
+        {
+          "index": 1,
+          "name": "RAWMAIN_TEXT",
+          "class": "CODE",
+          "length": 563,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 2,
+          "name": "_DATA",
+          "class": "DATA",
+          "length": 327,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 3,
+          "name": "CONST",
+          "class": "CONST",
+          "length": 4,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 4,
+          "name": "_BSS",
+          "class": "BSS",
+          "length": 0,
+          "alignment_code": 2,
+          "alignment": "word",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 72
+        },
+        {
+          "index": 5,
+          "name": "RAWMAIN5_DATA",
+          "class": "FAR_DATA",
+          "length": 388,
+          "alignment_code": 3,
+          "alignment": "paragraph",
+          "combine_code": 2,
+          "combine": "public",
+          "big": false,
+          "use_32bit_offset": false,
+          "frame": null,
+          "offset": null,
+          "overlay_index": 1,
+          "acbp": 104
+        }
+      ],
+      "segment_lengths": {
+        "RAWMAIN_TEXT": 563,
+        "_DATA": 327,
+        "CONST": 4,
+        "_BSS": 0,
+        "RAWMAIN5_DATA": 388
+      },
+      "publics": [
+        {
+          "name": "_fixturePixelsA",
+          "segment": "RAWMAIN5_DATA",
+          "offset": 0
+        },
+        {
+          "name": "_fixturePixelsB",
+          "segment": "RAWMAIN5_DATA",
+          "offset": 128
+        },
+        {
+          "name": "_fixtureCell",
+          "segment": "RAWMAIN5_DATA",
+          "offset": 256
+        },
+        {
+          "name": "_fixtureMaster2",
+          "segment": "RAWMAIN5_DATA",
+          "offset": 384
+        },
+        {
+          "name": "_derive",
+          "segment": "RAWMAIN_TEXT",
+          "offset": 0
+        },
+        {
+          "name": "_main",
+          "segment": "RAWMAIN_TEXT",
+          "offset": 26
+        }
+      ],
+      "ordered_fixups": [
+        {
+          "segment": "CONST",
+          "offset": 0,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 22,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 17,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 12,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "CONST",
+          "offset": 2,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 550,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 545,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "2701"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 533,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 528,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "1301"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 523,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 518,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 514,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 474,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 469,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "fa00"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 458,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 455,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "6000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 451,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 443,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 441,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "8201"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 436,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 434,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "8001"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 429,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 415,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 410,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "e200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 399,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 396,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "e000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 392,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 382,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 375,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 370,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 366,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 363,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "8001"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 334,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 329,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "c400"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 324,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 319,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 314,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0001"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 303,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 299,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 296,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 291,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "8001"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 282,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 277,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "9f00"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 264,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 259,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "8d00"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 248,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 245,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "a000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 241,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 233,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 231,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0201"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 226,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "8000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 224,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0001"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 219,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 205,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 200,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "6b00"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 189,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 186,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "4000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 182,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 166,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 163,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "2000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 159,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": true,
+          "target_kind": "external",
+          "target": "_derive",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 4,
+          "frame_kind": "target",
+          "frame": "_derive",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 151,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 146,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 142,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 138,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 135,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "0001"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 128,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 123,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "3d00"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 110,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 105,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "2400"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 100,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 95,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 91,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "CONST",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 3,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 77,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_puts",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 3,
+          "frame_kind": "target",
+          "frame": "_puts",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 72,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "_DATA",
+          "displacement": 0,
+          "frame_method": 1,
+          "frame_index": 1,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "1200"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 41,
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN_TEXT",
+          "offset": 36,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_fd_50F6_46D2",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 2,
+          "frame_kind": "target",
+          "frame": "_fd_50F6_46D2",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "RAWMAIN5_DATA",
+          "offset": 256,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "00000000"
+        },
+        {
+          "segment": "RAWMAIN5_DATA",
+          "offset": 384,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "RAWMAIN5_DATA",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 0,
+          "target_index": 5,
+          "frame_kind": "target",
+          "frame": "RAWMAIN5_DATA",
+          "encoded_addend": "80000000"
+        }
+      ],
+      "segment_sha256": {
+        "CONST": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "RAWMAIN_TEXT": "b635b3812cc13bcd26076bb04e30a5e9aed91ec28eaf6ac07bbc669fd391642f",
+        "_DATA": "d2029c0dc3e5d103d52fdaaa74d848c6d97aee9fd7449d734049e0d58a9b8638",
+        "RAWMAIN5_DATA": "1547675d0e6213a60e0700a05d4b5813f132d2d612deb6ea9f7693dc6ba29316"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "profile": "rtlink400",
+      "case": "typed-root",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          315,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/dosbox.conf",
+          "size": 402,
+          "sha256": "b815f78a1084ca080b4e8c0a21663290532e92cd46f373798497ae5c815d9ce8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/RUN.BAT",
+          "size": 75,
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/PROBE.MAP",
+          "size": 9233,
+          "sha256": "7f0300bcfc5686021b752d28d7f803f7a99b1d104b9dfd9c0e1411ccf7883a57"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/LINK.LOG",
+          "size": 459,
+          "sha256": "31fdde5169e1d3442a5d4d4002eb30eba673f43acef3cc43a3460dc44d295a3b"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-root/PROBE.EXE",
+          "size": 6889,
+          "sha256": "a8863150af9c64744bd10061e19d826802c53b67012abf94035208d30679285d"
+        }
+      ],
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "typed-overlay",
+      "owner_overlay": true,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          535,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": [],
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/PROBE.LNK",
+          "size": 118,
+          "sha256": "23eacd8b372162775b2a5473ca12e33f1345dfad2695532fa0412400207fd64d"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/dosbox.conf",
+          "size": 405,
+          "sha256": "4cfac6211b8364acaddf3e4823689ada43428a11a63bf4ba4a26b906456ce8f9"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/RUN.BAT",
+          "size": 75,
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/PROBE.MAP",
+          "size": 11864,
+          "sha256": "ee5c628efcc2f60be58aaac286a6d0d1f3e5c83c2dc0c394c0742b57dea475b3"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/LINK.LOG",
+          "size": 494,
+          "sha256": "ce47df166d94706e171eff0cb498d4d8d8ded0e5cf517c0a84135223c7b29e3a"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-overlay/PROBE.EXE",
+          "size": 10457,
+          "sha256": "176c13d3a3920079653b8f4da8b2e35af86c2d8776813983b2142a52438b9dac"
+        }
+      ],
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "typed-shifted",
+      "owner_overlay": false,
+      "shifted_layout": true,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          332,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/PROBE.LNK",
+          "size": 102,
+          "sha256": "66f17c6e9051707efb21016b83bcd3fd51614023a1f1b6e1e239f1d8b1ea7202"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/dosbox.conf",
+          "size": 405,
+          "sha256": "be540e42834980f331f0ee83f2216201efed6a09000927f10826b74e13bc45c5"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/RUN.BAT",
+          "size": 75,
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/PROBE.MAP",
+          "size": 9403,
+          "sha256": "c6ea209b00a7009f26893e63e5407c8b82a5925d9e7d7bd50965afbf6d7f37bd"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/LINK.LOG",
+          "size": 474,
+          "sha256": "70bb1ec1d88cceae96da2649af1152b1a32e7b1e263f0eb80c174987dd08c545"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/typed-shifted/PROBE.EXE",
+          "size": 7161,
+          "sha256": "78e0842952d7b7fa94536173627c5396afba4d0b626209b506d4b1d9c890692a"
+        }
+      ],
+      "location_changed_from_root": true,
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "rawfar-negative",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nFAIL_POINTER_CHAIN_OR_BYTE_STRIDE\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          323,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/dosbox.conf",
+          "size": 407,
+          "sha256": "0fe3fc93a4858663e8620d418c7e087d5414090eef58ab77c313f5ae098edcd7"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/RUN.BAT",
+          "size": 75,
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/PROBE.MAP",
+          "size": 9229,
+          "sha256": "eb59fb04f620aab3e9a39d1cd4eb7fc54ea38aac8ad6d971c34f30488c08d34e"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/LINK.LOG",
+          "size": 459,
+          "sha256": "31fdde5169e1d3442a5d4d4002eb30eba673f43acef3cc43a3460dc44d295a3b"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/RUN.LOG",
+          "size": 65,
+          "sha256": "2758a7eac0755984d045377021c6041ac8976b9a4ea82497c56dcab4293cb79d"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/rawfar-negative/PROBE.EXE",
+          "size": 7017,
+          "sha256": "03b69e425129aa864618cac3de9d1cb83ec6f52ca116633f7112913f6cdeba8d"
+        }
+      ],
+      "expected_observation": "FAIL_POINTER_CHAIN_OR_BYTE_STRIDE",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "nonzero-initializer-negative",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "FAIL_INITIAL_ZERO\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          315,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": false,
+        "overlapping_relocation_word_offsets": [
+          2
+        ],
+        "zero_before_crt": false,
+        "slot_sha256": "08b6ea0fb06c45aa4862a7f546003df3317650ea9f4a08e76eefd8aee28d529c"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/dosbox.conf",
+          "size": 420,
+          "sha256": "b49c36bbed2b876572c65854431638356e30187b8fa32e9966e8ea575bb221b4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/RUN.BAT",
+          "size": 75,
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/PROBE.MAP",
+          "size": 9234,
+          "sha256": "ea57e6506ca1b59ee684ca76f191d5330e0f2d53dbf803137cba4d00bda988b3"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/LINK.LOG",
+          "size": 459,
+          "sha256": "31fdde5169e1d3442a5d4d4002eb30eba673f43acef3cc43a3460dc44d295a3b"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/RUN.LOG",
+          "size": 19,
+          "sha256": "69ecd521ac3eed5a0401f1185d1c883bebc79f1e7272e563fe443672cc1b09cb"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/nonzero-initializer-negative/PROBE.EXE",
+          "size": 6889,
+          "sha256": "fb9333eb094720e98873f71d54bfc75a757f6fc04c1cdd104f58327a07ebff3d"
+        }
+      ],
+      "expected_observation": "FAIL_INITIAL_ZERO",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "explicit-zero-nondiscriminator",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          315,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/dosbox.conf",
+          "size": 422,
+          "sha256": "2ac37b8ab8f26e70476d1ed563d5d516e11dd4d8566dba555ae843333c4d8c4c"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/RUN.BAT",
+          "size": 75,
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/PROBE.MAP",
+          "size": 9234,
+          "sha256": "661175713b583b8d22fd50f634f814eae74a59410d9eef1049844b8a410fa0cd"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/LINK.LOG",
+          "size": 459,
+          "sha256": "31fdde5169e1d3442a5d4d4002eb30eba673f43acef3cc43a3460dc44d295a3b"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink400/explicit-zero-nondiscriminator/PROBE.EXE",
+          "size": 6889,
+          "sha256": "edc656caf1a4f890e27b355b53adcd4265a4fd2500fba1f553cd050782f6820a"
+        }
+      ],
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "typed-root",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          315,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/dosbox.conf",
+          "size": 402,
+          "sha256": "d543d0fdfe0197bcd00ea198ed368839bd61540f084363a24c6a94b1be4d9ea8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/RUN.BAT",
+          "size": 77,
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/PROBE.MAP",
+          "size": 9333,
+          "sha256": "fe7650cb77ba0c3943f78e91358c5d09c696ebd2773ee6b763925b9cbea888e7"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/LINK.LOG",
+          "size": 990,
+          "sha256": "3e8472de3d9872772c2a33878ecc2cfe325bcc865104dbb093a5e3077940bee2"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-root/PROBE.EXE",
+          "size": 6889,
+          "sha256": "94b71e16d61f777d78d67ed01fc734d60add3e9c767fdf583eb1a6a029eab84b"
+        }
+      ],
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "typed-overlay",
+      "owner_overlay": true,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          600,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": [],
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/PROBE.LNK",
+          "size": 118,
+          "sha256": "23eacd8b372162775b2a5473ca12e33f1345dfad2695532fa0412400207fd64d"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/dosbox.conf",
+          "size": 405,
+          "sha256": "04980883164358dab644c7b3bf2568e60462fd6f7a3f8ab8619fa8cdc9bf568a"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/RUN.BAT",
+          "size": 77,
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/PROBE.MAP",
+          "size": 13047,
+          "sha256": "a76bd210b31bb03202843ce4357949f12d6ab3a811f1158d9be3f667e80ee319"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/LINK.LOG",
+          "size": 1185,
+          "sha256": "414f29317981a077a7adde1cbf1b6bf577a88e299ac1e20808a6168287e2d2a8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-overlay/PROBE.EXE",
+          "size": 11497,
+          "sha256": "47adfd24a4548e70a9cfa0a4ce3bf535f6cac87a5489701c39b70cfc01b078bb"
+        }
+      ],
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "typed-shifted",
+      "owner_overlay": false,
+      "shifted_layout": true,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          332,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/PROBE.LNK",
+          "size": 102,
+          "sha256": "66f17c6e9051707efb21016b83bcd3fd51614023a1f1b6e1e239f1d8b1ea7202"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/dosbox.conf",
+          "size": 405,
+          "sha256": "4b0396aecba77890a66ac3848a438e721818e1ecb2a9ac5aaa535ef30b19d810"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/RUN.BAT",
+          "size": 77,
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/PROBE.MAP",
+          "size": 9503,
+          "sha256": "7ce599f84241a9a877c3bd4ada1e30b72cbb8d0efef3ab697acf6a2ceee92f54"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/LINK.LOG",
+          "size": 1004,
+          "sha256": "bee779a46ef4d602f8ebe6fa8dbee88963cdf339bb3dfbe271b9b7d97e852fa3"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/typed-shifted/PROBE.EXE",
+          "size": 7161,
+          "sha256": "8827ce73976338de1a91f70b0f9eb959dbf9a458fbfabf4afc9201f9e3b0b980"
+        }
+      ],
+      "location_changed_from_root": true,
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "rawfar-negative",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nFAIL_POINTER_CHAIN_OR_BYTE_STRIDE\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          323,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/dosbox.conf",
+          "size": 407,
+          "sha256": "eddae03c76a522209cd2698612ddbfdfeea9fe6fbeb1244aaebf1590ca06c663"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/RUN.BAT",
+          "size": 77,
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/PROBE.MAP",
+          "size": 9329,
+          "sha256": "ebcbb2e5bc2d7f66e6db272d0cae482b22fd772f2c5ee732f47045eb06da14ba"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/LINK.LOG",
+          "size": 990,
+          "sha256": "18fb25cf48586c5632c211f63a17bcf56eeee4dfefac556d1863dc3ef6458ec4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/RUN.LOG",
+          "size": 65,
+          "sha256": "2758a7eac0755984d045377021c6041ac8976b9a4ea82497c56dcab4293cb79d"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/rawfar-negative/PROBE.EXE",
+          "size": 7017,
+          "sha256": "8a617eb614437aa49147989bc2c3c5067cf9e4cbf8622056652393106ef4b808"
+        }
+      ],
+      "expected_observation": "FAIL_POINTER_CHAIN_OR_BYTE_STRIDE",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "nonzero-initializer-negative",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "FAIL_INITIAL_ZERO\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          315,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": false,
+        "overlapping_relocation_word_offsets": [
+          2
+        ],
+        "zero_before_crt": false,
+        "slot_sha256": "08b6ea0fb06c45aa4862a7f546003df3317650ea9f4a08e76eefd8aee28d529c"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/dosbox.conf",
+          "size": 420,
+          "sha256": "36392e4329dc822a6edc0156f4c36658edf790d0c40e078bf109f9d8b9c11192"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/RUN.BAT",
+          "size": 77,
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/PROBE.MAP",
+          "size": 9334,
+          "sha256": "2714ee10224124e6aacfeb83e7f443f55d10c06d794f5e0534d804debb870f48"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/LINK.LOG",
+          "size": 990,
+          "sha256": "3e8472de3d9872772c2a33878ecc2cfe325bcc865104dbb093a5e3077940bee2"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/RUN.LOG",
+          "size": 19,
+          "sha256": "69ecd521ac3eed5a0401f1185d1c883bebc79f1e7272e563fe443672cc1b09cb"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/nonzero-initializer-negative/PROBE.EXE",
+          "size": 6889,
+          "sha256": "cbd847719056090a2bb466494ad8d2412a7fa686c3dc56e817ffaf2592f775bb"
+        }
+      ],
+      "expected_observation": "FAIL_INITIAL_ZERO",
+      "observation_pass": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "explicit-zero-nondiscriminator",
+      "owner_overlay": false,
+      "shifted_layout": false,
+      "runner_returncode": 0,
+      "run_log": "PASS_INITIAL_ZERO_4BYTE_VIEW\nPASS_HANDLE_CELL_REPOINT_BYTE_STRIDE\nPASS_TYPED_RAW_WRITE_ZERO_RESET\n",
+      "link_diagnostics": [],
+      "map_slot_locations": [
+        [
+          315,
+          0
+        ]
+      ],
+      "mz_slot_before_crt": {
+        "slot_length": 4,
+        "unrelocated_all_zero": true,
+        "overlapping_relocation_word_offsets": [],
+        "zero_before_crt": true,
+        "slot_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "inputs": [
+        {
+          "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+          "size": 148711,
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+        },
+        {
+          "path": "C:/tools/msc-6.00/LIB/libh.lib",
+          "size": 21033,
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+        },
+        {
+          "path": "C:/tools/dosbox-x/dosbox-x.exe",
+          "size": 20481536,
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/PROBE.LNK",
+          "size": 90,
+          "sha256": "4666e6b17942390baf987d6055273e6562aa8d7f495facb439682788f776d1e4"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/RTLINK.CFG",
+          "size": 21,
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/dosbox.conf",
+          "size": 422,
+          "sha256": "23e11918fcbd6e3ab64cbc1f722427d85da83cb2891d3af9ce302c95f3a667a8"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/RUN.BAT",
+          "size": 77,
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/PROBE.MAP",
+          "size": 9334,
+          "sha256": "5d857fe8fdb4481c0313ee6cf98894191e23dd7106fbea807316d56fbc69aead"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/LINK.LOG",
+          "size": 990,
+          "sha256": "3e8472de3d9872772c2a33878ecc2cfe325bcc865104dbb093a5e3077940bee2"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/RUN.LOG",
+          "size": 101,
+          "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
+        },
+        {
+          "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime/rtlink610/explicit-zero-nondiscriminator/PROBE.EXE",
+          "size": 6889,
+          "sha256": "62de6c50257b209a3071e9c3f68db0b068139893028d470511ca6858cd66c8e8"
+        }
+      ],
+      "expected_observation": "PASS_TYPED_RAW_WRITE_ZERO_RESET",
+      "observation_pass": true
+    }
+  ],
+  "all_observations_as_expected": true,
+  "limits": [
+    "Test-owned cell/payload validity proves a typed ABI, not a game producer or resource lifetime.",
+    "Initial zero is observed before any dereference. Nonzero initializer is rejected before dereference; rawfar contrast compares pointer values only.",
+    "Explicit zero succeeds intentionally: runtime observations cannot distinguish zero initialized FAR_DATA from tentative FAR_BSS.",
+    "Shifted layout tests symbolic references within this fixture, not the historical menu adjacency or hidden computed aliases.",
+    "No original payload or game execution. Wrong two-byte ownership is compile-only in audit_v37.py."
+  ]
+}

@@ -1,0 +1,485 @@
+{
+  "schema": "dos-tail-runtime-erasure-functional-contract-v36",
+  "root_reviewed": false,
+  "admitted": false,
+  "functional_bytes": 2,
+  "historical_data_debt_modified": false,
+  "added_storage_bytes": 0,
+  "new_owner_or_field_claim": false,
+  "original_build_bytes": 0,
+  "member_sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+  "edata": 35742,
+  "end": 38128,
+  "historical_tail_offset": 35741,
+  "historical_tail_size": 3,
+  "scope": "ordinary_tracked_loader_crt_dos_api",
+  "prefix_after_resident_load_no_value_observation": true,
+  "failure_routes_terminal_or_value_independent": true,
+  "clear_dominates_initializers_and_main": true,
+  "candidate_runtime_and_linker_pinned": true,
+  "source_built_controls_pass": true,
+  "functional_residual_ranges": [
+    {
+      "offset": 0,
+      "size": 1
+    }
+  ],
+  "functional_disposition": {
+    "offset": 1,
+    "size": 2
+  },
+  "historical_ledger_bytes": 113,
+  "expected_functional_ledger_before": 46,
+  "expected_functional_ledger_after": 44,
+  "candidate_status": "BOUNDED_RUNTIME_STATE_ERASURE_SUPPORTED; PARENT_REVIEW_REQUIRED",
+  "artifact_pins": [
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\source-only-dos\\structural-audits-v32\\tail-bss-v32\\tail-bss-boundary-v32.json",
+      "size": 77931,
+      "sha256": "e5eab62c66c13a699baa314514fdf0170fa66609710ac0c4d35348eeb54cd947"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\source-only-dos\\structural-audits-v32\\tail-root-review.json",
+      "size": 830,
+      "sha256": "cae703bbf38912c6617dc2c86e5e285b22b4c92cef3345633ccb0cd5be96ee3c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\source-only-dos\\structural-audits-v35\\original-debt-operands.json",
+      "size": 16708,
+      "sha256": "ded2c8c801a2d095989a6ea6de05d0c163575c8c694d2df41922371b74b357a3"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\takeover\\behavioral-oracle\\data-debt-disposition-approved-v1.json",
+      "size": 18443,
+      "sha256": "44ec036b5c7d5f0c98ba03ca8a4b7b96032d3dcabb1c2e6e63459a9ca67240c3"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\layout\\manifest.json",
+      "size": 628980,
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\layout\\oracle.lock.json",
+      "size": 18807,
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\layout\\toolchain.json",
+      "size": 39241,
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "size": 148711,
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0.asm",
+      "size": 13807,
+      "sha256": "f22c6ef87a1187486605f1b185b3b241d7ba8ee773fc97cdeb0736e2a83e956b"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0dat.asm",
+      "size": 19539,
+      "sha256": "33eead508c0b2941f9cc95d17ebbda1ba8de196431a90091a8e2f26527ce11e0"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0msg.asm",
+      "size": 2943,
+      "sha256": "c7f60cdaa0aaccb1cd49c236f4bd81a843680ba3c20b2c0701888e95f84f40ea"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\nmsghdr.asm",
+      "size": 3433,
+      "sha256": "48f91c59ecb0616ff3b44d9937e1c484055e67c4cd19ede08150952e58ed72bb"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\pre-clear-prefix-review.json",
+      "size": 2681,
+      "sha256": "8c23318abc154ddb06893a7cdfae760fe7820ec89ee90d20a14f781bad917442"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\original-manager-analysis.txt",
+      "size": 37469,
+      "sha256": "63352d6bbd9e73d94e0ec0ce07d6befad981870ca1463766e2d5e7df53e13f3f"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\original-manager-selected-analysis.txt",
+      "size": 26896,
+      "sha256": "60b9b3fcd37bf474f47c443e70245149743d397b2274c8ed49394f1f1b7f153c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\original-cinit-analysis.txt",
+      "size": 4215,
+      "sha256": "0545b136924c3d7b92ab753d148c4eae232f55d781b9c102416343be4ca2cff0"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\cinit-object-analysis.json",
+      "size": 25395,
+      "sha256": "56ee8427a44292804a3db76c38c55805c13d0f975bbb887ba633ad808880ba08"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\runtime-startup-rows.json",
+      "size": 3204,
+      "sha256": "c4bba3856340a8178e970cc90bf74965f09f53a42c1dae3f631086c2b787c4bf"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\inspect_startup.py",
+      "size": 2485,
+      "sha256": "cad51ed144c02c938b90d0b05b69097eebc985007e5c000fb7aac0a3d23e37a3"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\probe_stock_crt.py",
+      "size": 11864,
+      "sha256": "e311c488f6cbff1ffec7e8bb7e56004739eae41b7f5e93ea4503876c49d4ddb1"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\stock-crt-controls.json",
+      "size": 32754,
+      "sha256": "7f431c01603c67102c684d81de2b3cf3dad3aa5a0abee5034aa2588d1f052667"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\run_fixture_dos.py",
+      "size": 2176,
+      "sha256": "2d44bcb73f2cd554d8957bfa1d3b6c2ce335bb7c9c3856c79f16a3753c7864a8"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\full-dos-execution.json",
+      "size": 1128,
+      "sha256": "c39a9b39f63d5c80a4c8d7bdcb3780648bfc7e93080bd552ac35b9be39ae9814"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\policy_candidate.py",
+      "size": 2467,
+      "sha256": "0bbd146b6eea57aa52743b2911a47db05716bff513e635ff1eb21d32d0f067fd"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\test_policy_candidate.py",
+      "size": 2865,
+      "sha256": "12c528bf4f2a5275387e9a4d31c0178d86aa14da9823ef0488f1b8d37cf659d3"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\review.md",
+      "size": 7347,
+      "sha256": "d86a615a3c4133cf1e82b2e3962925989f5380ef76005c9edacbbc2ce9cc53fc"
+    }
+  ],
+  "source_fixture_artifact_pins": [
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\bss_shift.c",
+      "size": 146,
+      "sha256": "8114d1beb973284ecb350b529470208decc298cdcb4b52c9918a8b65a08b3046"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\bss_two.c",
+      "size": 78,
+      "sha256": "dd99120e1f56299d385a4089a9f97c2b293b8f56d25392218c723b6222520622"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\file_seed.c",
+      "size": 92,
+      "sha256": "66ef22524bdac07c377e14ef1e1d9172fcfc6b1ae29f91fc625ac3ebbfb1ac09"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\dosbox.conf",
+      "size": 399,
+      "sha256": "ed9b68f2bd351d55611d91ef8b4379d2b24624458caf2de5a2d1a683f8daf458"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\FULLRUN.BAT",
+      "size": 162,
+      "sha256": "f8dc241a123feae7fc2d5875d455eeec4c3a023ef968c96de15495fe02ae109c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\fullrun.conf",
+      "size": 297,
+      "sha256": "0133167755cc0a7de5e332287b91719d32d827dc1bd1ce0239f70e868665bb82"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\MAIN.OBJ",
+      "size": 575,
+      "sha256": "45c8a6af58a0589152e990a6aa4114e02cd2782b8b59db8e089d320e5289fe94"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.EXE",
+      "size": 3205,
+      "sha256": "1b44fe660a0bdbc1737cfc13c113b3109b92d09fa526cae6a7bd67f2fc8a49d9"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.LNK",
+      "size": 78,
+      "sha256": "8e94632d0acbc7479b453545f1e50eb46921f1f6facdc19a6c7760b6fd2826ff"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.MAP",
+      "size": 7277,
+      "sha256": "53b2358ba4864c3a2f871fa2df30a03796644d251af82474ab40230998856f57"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\RUN.BAT",
+      "size": 54,
+      "sha256": "b499f9f23ab1789125eb2ebac4e5a1ed21299320520e59153f2a3c11d2f749de"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\dosbox.conf",
+      "size": 397,
+      "sha256": "64bf844f2452bdde2ad9adcf8fdafa349327c21389c07b9e5b38cb7a69c94dc3"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\FULLRUN.BAT",
+      "size": 128,
+      "sha256": "5e40b34783b9c0d7f3dc299c082de0e87234ef70e5896a91c89a021dc5f6fb9a"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\fullrun.conf",
+      "size": 295,
+      "sha256": "57d3faade620676b1c7efa91648d3504a67799677f6478f66f4ca31ef7c9b487"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\MAIN.OBJ",
+      "size": 483,
+      "sha256": "9e192f7aeb22804d1fd8c48086b139b3c1df9429c069ba204a3a490d7a43a994"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.EXE",
+      "size": 3181,
+      "sha256": "f449f3baca82609c81bfb66d1237f3aceb21b3556272f41a9e992aa7f73ef86b"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.LNK",
+      "size": 78,
+      "sha256": "8e94632d0acbc7479b453545f1e50eb46921f1f6facdc19a6c7760b6fd2826ff"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.MAP",
+      "size": 7227,
+      "sha256": "79866e8ee537f2dfc4f8f61556606b8f075dcc41fa66b0cf509d8669a10dc4fd"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\RUN.BAT",
+      "size": 54,
+      "sha256": "b499f9f23ab1789125eb2ebac4e5a1ed21299320520e59153f2a3c11d2f749de"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\dosbox.conf",
+      "size": 399,
+      "sha256": "661d2890428a172b489d05dbaee53aa576582e8bc39886f3a582a7bcc1ee746f"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\FULLRUN.BAT",
+      "size": 162,
+      "sha256": "f60c7bd044e8e90815382b180924e7095b04ad0540831656379105dcf51a39e6"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\fullrun.conf",
+      "size": 297,
+      "sha256": "bb2697791fa928cee25ca8bbc0df1160c7d876f933664f983280a124f68a6210"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\MAIN.OBJ",
+      "size": 487,
+      "sha256": "27a76df7d3c1238b21540d3eebffee762d2e7f59d3111c4abe211290c443c219"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.EXE",
+      "size": 3183,
+      "sha256": "9e6c88469e959296407628eaa03df42768cdfbbd4831dea16cbe2dfc4faf7a5b"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.LNK",
+      "size": 78,
+      "sha256": "8e94632d0acbc7479b453545f1e50eb46921f1f6facdc19a6c7760b6fd2826ff"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.MAP",
+      "size": 7154,
+      "sha256": "54f6120906145c4d5e5b0cfa2e0c890f8c55283fe2e3a5444e7cd6594856aed5"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\RUN.BAT",
+      "size": 54,
+      "sha256": "b499f9f23ab1789125eb2ebac4e5a1ed21299320520e59153f2a3c11d2f749de"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\dosbox.conf",
+      "size": 399,
+      "sha256": "4ec6278f29d6649ba05820135c69a8ae7958f5675942259446ab154a8a9a32b4"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\FULLRUN.BAT",
+      "size": 162,
+      "sha256": "f8dc241a123feae7fc2d5875d455eeec4c3a023ef968c96de15495fe02ae109c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\fullrun.conf",
+      "size": 297,
+      "sha256": "e107c29f8148acfcf7f9a99a837b7a0b5aad6168e91b3d4ab8357c232080795e"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\MAIN.OBJ",
+      "size": 575,
+      "sha256": "45c8a6af58a0589152e990a6aa4114e02cd2782b8b59db8e089d320e5289fe94"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.EXE",
+      "size": 3205,
+      "sha256": "9d8888f8f4fe0e751210bcb209da52ec66ddd86fee3a3d98db90a9662f30aa0b"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.LNK",
+      "size": 78,
+      "sha256": "8e94632d0acbc7479b453545f1e50eb46921f1f6facdc19a6c7760b6fd2826ff"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.MAP",
+      "size": 7377,
+      "sha256": "246fb0a1c008f3cfff916b86ddee76d450d3ee221d246c53d19b2df1e96efef7"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\RUN.BAT",
+      "size": 56,
+      "sha256": "4d1d1d80faa09aca8ef6d6f4c3c37875c3e0d3377940a4f2bc23c549698cfde9"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\dosbox.conf",
+      "size": 397,
+      "sha256": "fe090ee34da46880f203d38c8bd3b89151206630884b20b6abd556ce78f65838"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\FULLRUN.BAT",
+      "size": 128,
+      "sha256": "5e40b34783b9c0d7f3dc299c082de0e87234ef70e5896a91c89a021dc5f6fb9a"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\fullrun.conf",
+      "size": 295,
+      "sha256": "eac93d501ed9f5a1dfd34f12eb563c9f875cfc02336d4e1a8f09af0c74246ac9"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\MAIN.OBJ",
+      "size": 483,
+      "sha256": "9e192f7aeb22804d1fd8c48086b139b3c1df9429c069ba204a3a490d7a43a994"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.EXE",
+      "size": 3181,
+      "sha256": "005bec1112c3b1bf69ee5e2fa43197b196edb6e049bf86be56353c9b244e97c4"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.LNK",
+      "size": 78,
+      "sha256": "8e94632d0acbc7479b453545f1e50eb46921f1f6facdc19a6c7760b6fd2826ff"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.MAP",
+      "size": 7327,
+      "sha256": "6980e82fc493d23ea24fe90ab9773c6ee81045dd312a754e7a2614b16161eebc"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\RUN.BAT",
+      "size": 56,
+      "sha256": "4d1d1d80faa09aca8ef6d6f4c3c37875c3e0d3377940a4f2bc23c549698cfde9"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\dosbox.conf",
+      "size": 399,
+      "sha256": "a88243c5406dcd818bbb3f9a749eed929dd2b67ea17726d8b383397a21e42e30"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\FULLRUN.BAT",
+      "size": 162,
+      "sha256": "f60c7bd044e8e90815382b180924e7095b04ad0540831656379105dcf51a39e6"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\fullrun.conf",
+      "size": 297,
+      "sha256": "05a789063b35bd01a484c5a83e9ab68e9f3eeb7c55e73c2c80c5f93fa2b5412c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\MAIN.OBJ",
+      "size": 487,
+      "sha256": "27a76df7d3c1238b21540d3eebffee762d2e7f59d3111c4abe211290c443c219"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.EXE",
+      "size": 3183,
+      "sha256": "daa54f6323f7688558356cb0ec0f0829e3e3ab3a9b91d277db7c781a3972aafb"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.LNK",
+      "size": 78,
+      "sha256": "8e94632d0acbc7479b453545f1e50eb46921f1f6facdc19a6c7760b6fd2826ff"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.MAP",
+      "size": 7254,
+      "sha256": "5b1ee5f9608fa49de02b903fec1d0fbf8a87957ae3ee3b5ceec5c07fc8938fe0"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\RUN.BAT",
+      "size": 56,
+      "sha256": "4d1d1d80faa09aca8ef6d6f4c3c37875c3e0d3377940a4f2bc23c549698cfde9"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\FULLRUN.LOG",
+      "size": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\LINK.LOG",
+      "size": 444,
+      "sha256": "8b4e9fe95749b553908506bf20c809f859012c01349aabbb81fb599a9d4647e4"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\FULLRUN.LOG",
+      "size": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\LINK.LOG",
+      "size": 444,
+      "sha256": "8b4e9fe95749b553908506bf20c809f859012c01349aabbb81fb599a9d4647e4"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\FULLRUN.LOG",
+      "size": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\LINK.LOG",
+      "size": 444,
+      "sha256": "8b4e9fe95749b553908506bf20c809f859012c01349aabbb81fb599a9d4647e4"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\FULLRUN.LOG",
+      "size": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\LINK.LOG",
+      "size": 975,
+      "sha256": "d47fe98db6ef78e1f30c2ae7b53d529cffa5473f901f0be9b4ee3d1761da693b"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\FULLRUN.LOG",
+      "size": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\LINK.LOG",
+      "size": 975,
+      "sha256": "809d8fd964e829357c8db0634abe93d9e811142c84bb3748b100ce5dad84358e"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\FULLRUN.LOG",
+      "size": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\LINK.LOG",
+      "size": 975,
+      "sha256": "38fe99f9a4ff4418de5281d2d723dd4705490ecca028b4380795f1fb03f50d5f"
+    }
+  ],
+  "actual_candidate_game_entry_check": "Independent game link remains blocked. Require the ordinary pinned runtime/linker entry and clear-dominance contract at eventual link/execution; arbitrary entry/vector overrides fail."
+}

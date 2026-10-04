@@ -1,0 +1,140 @@
+{
+  "schema": "simant-dos-parent-bounded-acceptance-v36",
+  "root_reviewed": true,
+  "verdict": "SOURCE_VIEWS_AND_ORDINARY_STARTUP_ERASURE_ACCEPTED_WITH_OPEN_INTEGRATION_GATES",
+  "accepted_minimum_objects": [
+    "win_drawHooks[45]",
+    "win_offsets[45]",
+    "signed mutable g_8CCB byte"
+  ],
+  "functional_erasure": {
+    "id": "common_tail_overlap_3",
+    "offset": 1,
+    "size": 2
+  },
+  "historical_debt_unchanged": 113,
+  "functional_data_debt": 44,
+  "unresolved_imports": 12,
+  "open_layout_gates": 10,
+  "compiled_translation_units": 190,
+  "source_providers": 63,
+  "strict_behavior_confirmed": 29,
+  "contract_only_algorithms": 0,
+  "original_build_bytes": {
+    "game_code": 0,
+    "game_data": 0,
+    "fallback_debt": 0,
+    "executable_fragments": 0
+  },
+  "denied_oracle_reads": [],
+  "game_linked": false,
+  "game_executed": false,
+  "human_acceptance": "PENDING",
+  "validation": {
+    "repository_tests": 386,
+    "skipped": 2,
+    "codegen_rules": 48,
+    "runtime_members": 90,
+    "runtime_code_bytes": 12339,
+    "runtime_data_segments": 38,
+    "runtime_data_bytes": 2021,
+    "full_validation": {
+      "path": "work/source-only-dos/structural-audits-v36/root/validate-rerun.log",
+      "size": 4752,
+      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7"
+    },
+    "suite_cardinality": {
+      "path": "work/source-only-dos/structural-audits-v36/root/suite-discovery.json",
+      "size": 4151,
+      "sha256": "342b05bdc231ff0b34b2b7cffde491c3a023b8d1224f796859feb9c08363b8cc"
+    },
+    "initial_failure_retained": {
+      "path": "work/source-only-dos/structural-audits-v36/root/validate.log",
+      "size": 5922,
+      "sha256": "4472339b40d0ebcdbc31260b06ed87568a51edbb3c12355378a5bdae8a175ac5"
+    },
+    "integration_regression": {
+      "path": "work/source-only-dos/structural-audits-v36/root/regression-test.log",
+      "size": 228,
+      "sha256": "ec2980c332eb01aefc06d7e69edd87328372fdc0bccbd21a3470c12d195a78e4"
+    }
+  },
+  "final_preflight": {
+    "path": "build/source-only-dos-v36/build-report.json",
+    "size": 19524587,
+    "sha256": "2b6b24a4ade222f82cfd4665f4cf15ce77bedc5388fa969fe5c828f41a127151"
+  },
+  "accepted_inputs": [
+    {
+      "path": "tools/source_only_dos.py",
+      "size": 84846,
+      "sha256": "a06e560e254861350849392df399b2b33910867856f938d9efe74b3d8802fad7"
+    },
+    {
+      "path": "tools/dos_source_bindings.py",
+      "size": 192985,
+      "sha256": "12d7850b1ee6e53424ced9bfdcf0ad31dee9893d8c0f3c6650e8d6334a76d0de"
+    },
+    {
+      "path": "tools/dos_minimum_views.py",
+      "size": 11181,
+      "sha256": "d7f2bdee5349e41e7fd986d2f30a27284fad9ac86b66dec6576586f87605e2d1"
+    },
+    {
+      "path": "tools/dos_startup_debt.py",
+      "size": 8540,
+      "sha256": "fa9f295824ae638c9ddf4a137a25eb44ea5aff87da5ff6de29f19807eff83458"
+    },
+    {
+      "path": "tests/test_dos_minimum_views.py",
+      "size": 9007,
+      "sha256": "3277539e6a962dda9d2559b0af3f48b979b209d05193d76abdf298e69bc80a95"
+    },
+    {
+      "path": "layout/manifest.json",
+      "size": 628980,
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    {
+      "path": "work/source-only-dos/window-minimum-view-bindings-v36.json",
+      "size": 1701,
+      "sha256": "b333a832e20e72eaf81879b1dc8ea895a11f97ff0539e24648037b3a9c344b82"
+    },
+    {
+      "path": "work/source-only-dos/selector-minimum-view-bindings-v36.json",
+      "size": 1473,
+      "sha256": "4c15533fd637e8d4b1902fc7ffc80ea9d1e45082249cb2d6613f7a043b97901a"
+    },
+    {
+      "path": "work/source-only-dos/window-minimum-view-contract-v36.json",
+      "size": 24446,
+      "sha256": "e13210b21bf7adfaf7d1f5b788735f0ad49b2d4b105801828c7b80d221826965"
+    },
+    {
+      "path": "work/source-only-dos/selector-minimum-view-contract-v36.json",
+      "size": 43050,
+      "sha256": "a6f8d934de909238121321d5cd4a4c53088a2214073c1675a2f6bfeff841bd57"
+    },
+    {
+      "path": "work/source-only-dos/startup-tail-erasure-contract-v36.json",
+      "size": 32461,
+      "sha256": "ced793ff307436f5f8108c3c48b8e0c8f398268f937567a75b19fbf6cc29c202"
+    },
+    {
+      "path": "work/source-only-dos/providers/window-initialized-views-v36.c",
+      "size": 127,
+      "sha256": "d6437002b02272766235788e5318b6cf1cfc32ff37ed1c9ad72f36bf6dc577f6"
+    },
+    {
+      "path": "work/source-only-dos/providers/critical-selector-byte-v36.c",
+      "size": 94,
+      "sha256": "b511cfdeb3c161e08bb2635ad4a37ef80d3180b93935f254ad9af95de13d794f"
+    }
+  ],
+  "parent_corrections": [
+    "Provider basename WINVIEW36 exceeded DOS 8.3 limit; final registry and binding use WINVW36.",
+    "Tail contract explicitly includes the real pinned LibH runtime prerequisite.",
+    "Legacy sparse test TU rows lack module; the new optional-module lookup preserves existing admission behavior."
+  ],
+  "claim_limit": "No defining historical TU/maximal extent, alias closure, complete game link, game execution or functional-source-oracle milestone. Actual linked-game startup review remains mandatory."
+}

@@ -1,0 +1,384 @@
+{
+  "schema": "simant-dos-window-functional-minimum-view-proposal-v36",
+  "module": "source-owned:window-initialized-views",
+  "root_reviewed": false,
+  "admitted": false,
+  "all_required_checks_pass": false,
+  "worker_supported_checks_pass": true,
+  "status": "PROPOSED_MINIMUM_FUNCTIONAL_OWNERS_WITH_MANDATORY_OPEN_LAYOUT_GATE",
+  "communals": [
+    {
+      "name": "_win_drawHooks",
+      "kind": "far",
+      "count": 45,
+      "element_size": 4,
+      "length": 180
+    },
+    {
+      "name": "_win_offsets",
+      "kind": "far",
+      "count": 45,
+      "element_size": 8,
+      "length": 360
+    }
+  ],
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:window-initialized-views",
+      "basename": "WINVIEWS",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_window_owner_v36/window-functional-provider45.c",
+        "size": 127,
+        "sha256": "d6437002b02272766235788e5318b6cf1cfc32ff37ed1c9ad72f36bf6dc577f6"
+      },
+      "compiled_object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_window_owner_v36/window-functional-provider45.obj",
+        "size": 223,
+        "sha256": "76a94436e510d41f6782a7a4fa2538b3c394b5ebcc16bf80c07d80a08a578877"
+      },
+      "communals": [
+        {
+          "name": "_win_drawHooks",
+          "kind": "far",
+          "count": 45,
+          "element_size": 4,
+          "length": 180
+        },
+        {
+          "name": "_win_offsets",
+          "kind": "far",
+          "count": 45,
+          "element_size": 8,
+          "length": 360
+        }
+      ]
+    }
+  ],
+  "view_types": {
+    "win_drawHooks": {
+      "element": "void (far *)(int phase)",
+      "element_bytes": 4,
+      "count": 45,
+      "element_fields": {
+        "offset": {
+          "byte_offset": 0,
+          "width": 2
+        },
+        "segment": {
+          "byte_offset": 2,
+          "width": 2
+        }
+      },
+      "source_proof": "root:20E8 win_LoadAllWindows unconditional _fmemset(...,0,0xb4)",
+      "escapes": [
+        "Indexed callback invocation in win_DrawWindow; no whole-table pointer escape found except _fmemset argument."
+      ]
+    },
+    "win_offsets": {
+      "element": "struct Rect { int left,top,right,bottom; }",
+      "element_bytes": 8,
+      "count": 45,
+      "element_fields": {
+        "left": {
+          "byte_offset": 0,
+          "signed_bits": 16
+        },
+        "top": {
+          "byte_offset": 2,
+          "signed_bits": 16
+        },
+        "right": {
+          "byte_offset": 4,
+          "signed_bits": 16
+        },
+        "bottom": {
+          "byte_offset": 6,
+          "signed_bits": 16
+        }
+      },
+      "source_proof": "root:20E8 win_LoadAllWindows writes all four signed fields for i=0..44; fixed resource copy covers only0..39",
+      "escapes": [
+        "Whole table pointer passed to _fmemcpy(...,320); indexed Rect values copied to/from window object0."
+      ]
+    }
+  },
+  "unconditional_claims": [
+    "Every load-all reset requires180 hook bytes and360 Rect bytes regardless of resource counts.",
+    "Natural typed arrays45 provide exactly the independently proved minimum spans with no source initializer.",
+    "Consumer addressing/callback ABI and full reset/copy effects are preserved within those views.",
+    "Original preloaded FarBSS and stock linked natural commons are zero before CRT; near-only CRT clear is not the justification."
+  ],
+  "bounded_compatible_domains": [
+    "Installed HCEGANT header has34 windows and all34 window records IDs0..33.",
+    "Direct hook registrations use indices0,1,21,18,19,25,5.",
+    "Intended lock-check admitted signed-char indices0..40 fit; Punt return does not enforce that domain.",
+    "All explicit indexed formulas are in source-census.json; none imposes a new maximum or proves external call reachability."
+  ],
+  "not_claimed": [
+    "Historical maximum capacity, original owner declaration/producing TU, allocation identity/order/address.",
+    "All public/dynamic window IDs are bounded, all palette/menu computed aliases are absent, all shipped alternate colors are consumed in bounds.",
+    "win_colors or win_handles owner/capacity; any color-table padding, initializer or extra row."
+  ],
+  "mandatory_open_gate": {
+    "id": "WINDOW_INDEX_RESOURCE_CROSS_OWNER_LAYOUT_V36",
+    "status": "UNRESOLVED",
+    "must_block_independent_link": true,
+    "reason": "Solving minimum source owners does not make original unchecked computed-address effects safe or layout-independent.",
+    "requirements": [
+      "Account for signed window index<0 or>=45 in setters, drawing, open/close/load/unlock/resize paths.",
+      "Account for invalid-window Punt returning, including load handle store before lock, and high-ID getter bypasses.",
+      "Validate or account for source resource count/length producers: signed numWindows, purge40 overrun and signed numColors*6 truncated to16-bit copy length.",
+      "Preserve or exclude computed palette and menu reads/writes reaching hooks/Rects/Event owners.",
+      "Resolve shipped window18 object3 alternate color63 selection-plus-redraw reachability or its cross-owner byte observation.",
+      "If a valid-domain access beyond44 is found, extend only with new independent source/representation evidence; do not waive this gate."
+    ],
+    "specific_aliases": [
+      {
+        "expression": "win_drawHooks[45]",
+        "original_target": "win_offsets[0] left/top words",
+        "original_offset": "50F6:4892"
+      },
+      {
+        "expression": "win_offsets[45]",
+        "original_target": "current Event fields0..3",
+        "original_offset": "50F6:49FA"
+      },
+      {
+        "expression": "win_offsets[46]",
+        "original_target": "current Event fields4..7",
+        "original_offset": "50F6:4A02"
+      },
+      {
+        "expression": "win_offsets[47..48]",
+        "original_target": "previous Event fields0..7",
+        "original_offset": "50F6:4A0A"
+      },
+      {
+        "expression": "win_colors[42]",
+        "original_target": "hook0 plus first two bytes of hook1",
+        "original_offset": "50F6:47DE"
+      },
+      {
+        "expression": "win_colors[63]",
+        "original_target": "hook31 segment word, hook32 offset word, hook32 segment word",
+        "original_offset": "50F6:485C"
+      },
+      {
+        "expression": "fd_50F6_46BC[145] / fd_50F6_46A8[155]",
+        "original_target": "hook0 offset word",
+        "original_offset": "50F6:47DE"
+      },
+      {
+        "expression": "fd_50F6_46BC[235] / fd_50F6_46A8[245]",
+        "original_target": "Rect0 left word",
+        "original_offset": "50F6:4892"
+      }
+    ]
+  },
+  "controls": [
+    {
+      "profile": "rtlink400",
+      "case": "view45-root",
+      "link_diagnostics": [],
+      "run_log": "PASS_SIGNED_WINDOW_INDEX\nPASS_45_VIEW_RESET_40_COPY_CALLBACK\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            333,
+            2
+          ]
+        ],
+        "_win_offsets": [
+          [
+            333,
+            182
+          ]
+        ]
+      },
+      "passed_expected": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "view45-overlay",
+      "link_diagnostics": [],
+      "run_log": "PASS_SIGNED_WINDOW_INDEX\nPASS_45_VIEW_RESET_40_COPY_CALLBACK\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            553,
+            2
+          ]
+        ],
+        "_win_offsets": [
+          [
+            553,
+            182
+          ]
+        ]
+      },
+      "passed_expected": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "view46-counterexample",
+      "link_diagnostics": [],
+      "run_log": "PASS_SIGNED_WINDOW_INDEX\nPASS_45_VIEW_RESET_40_COPY_CALLBACK\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            333,
+            2
+          ]
+        ],
+        "_win_offsets": [
+          [
+            333,
+            186
+          ]
+        ]
+      },
+      "passed_expected": true
+    },
+    {
+      "profile": "rtlink400",
+      "case": "nonzero-initializer",
+      "link_diagnostics": [],
+      "run_log": "FAIL_INITIAL_FAR_HOOKS\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            333,
+            0
+          ]
+        ],
+        "_win_offsets": [
+          [
+            345,
+            2
+          ]
+        ]
+      },
+      "passed_expected": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "view45-root",
+      "link_diagnostics": [],
+      "run_log": "PASS_SIGNED_WINDOW_INDEX\nPASS_45_VIEW_RESET_40_COPY_CALLBACK\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            333,
+            2
+          ]
+        ],
+        "_win_offsets": [
+          [
+            333,
+            182
+          ]
+        ]
+      },
+      "passed_expected": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "view45-overlay",
+      "link_diagnostics": [],
+      "run_log": "PASS_SIGNED_WINDOW_INDEX\nPASS_45_VIEW_RESET_40_COPY_CALLBACK\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            618,
+            2
+          ]
+        ],
+        "_win_offsets": [
+          [
+            618,
+            182
+          ]
+        ]
+      },
+      "passed_expected": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "view46-counterexample",
+      "link_diagnostics": [],
+      "run_log": "PASS_SIGNED_WINDOW_INDEX\nPASS_45_VIEW_RESET_40_COPY_CALLBACK\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            333,
+            2
+          ]
+        ],
+        "_win_offsets": [
+          [
+            333,
+            186
+          ]
+        ]
+      },
+      "passed_expected": true
+    },
+    {
+      "profile": "rtlink610",
+      "case": "nonzero-initializer",
+      "link_diagnostics": [],
+      "run_log": "FAIL_INITIAL_FAR_HOOKS\n",
+      "map_owner_locations": {
+        "_win_drawHooks": [
+          [
+            333,
+            0
+          ]
+        ],
+        "_win_offsets": [
+          [
+            345,
+            2
+          ]
+        ]
+      },
+      "passed_expected": true
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_window_owner_v36/review-facts.json",
+      "size": 462710,
+      "sha256": "f5071d764cfb8c3fae7ea344456241d0ebf0e12a4a84936343dbd82798512142"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_window_owner_v36/runtime-normalized.json",
+      "size": 72315,
+      "sha256": "a21a496b59cea6734c8918c478f82de706a5002c5faaea6c22973ed4c4319be3"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_window_owner_v36/source-census.json",
+      "size": 92366,
+      "sha256": "bc1fed93e211f43c67b1c35565b10b7b1df9c364ec5cf89416530e4af2751c2f"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_window_owner_v36/functional-view-proposal.json",
+      "size": 3055,
+      "sha256": "a73a97a9009450a74a0212d9dd291f691b8802b8fe4783af3d6b21a4a508cac2"
+    }
+  ],
+  "integration_instructions": [
+    "Parent independently reviews and admits a provider/contract through existing functional storage authorities.",
+    "Use standalone WINVIEWS provider rather than changing canonical/generated consumer TU ownership.",
+    "Keep WINDOW_INDEX_RESOURCE_CROSS_OWNER_LAYOUT_V36 mandatory and open, separate from the solved minimum storage imports.",
+    "No scalar alias is exposed: bindings[] is empty; array-base names resolve to their two natural common owners."
+  ]
+}

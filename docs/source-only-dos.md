@@ -1028,3 +1028,54 @@ bytes and 113 historical bytes; **eight** layout gates are now explicit.
 Independent linking is refused. Full validation passes with 376 tests (two
 skips), 48 codegen rules and all historical runtime claims. Standalone game
 execution/comparison and human acceptance remain pending.
+
+## v36 minimum source views and bounded startup erasure
+
+The [v36 admissions](../work/source-only-dos/structural-audits-v36/README.md)
+discharge the hook, Rect and critical-selector imports with independently
+reviewed minimum views. Complete reset spans prove 45 hooks and 45 Rects;
+the selector is a mutable signed near byte. Whole-consumer TU effects and
+ordered fixups remain intact, and both RTLinks pass the ABI, initialization,
+shifted-layout and negative controls. Historical defining TUs and maximal
+extents remain unclaimed.
+
+Two mandatory computed-alias gates retain unchecked window/resource indices
+and selector overlaps. Minimum storage cannot silently discharge those
+dependencies. The ctype review further shows that relocation of genuine CRT
+code can change out-of-table predicates despite unchanged data order; the
+14-byte heap gap remains functional debt. Clip capacity and returning-Punt
+database behavior likewise remain open.
+
+Only two prior file values in the tail overlap are discharged under the
+ordinary tracked manager/CRT/DOS boundary. Eighteen VM controls, six full
+DOSBox-X CRT/main controls and an independent counter-review support this
+scope. The first byte and all 113 historical bytes remain. No storage or
+padding is introduced. The eventual linked game requires its own concrete
+startup/clear-dominance review before standalone success.
+
+The current preflight compiles and verifies 190 TUs with 12 remaining imports,
+193 aliases, 44 functional data bytes and ten open layout gates. All 29 strict
+behavioral registrations remain confirmed, with zero contract-only algorithms
+and zero original build bytes. Independent linking remains refused; game
+execution/comparison and human acceptance remain pending.
+
+Full validation passes the 386-case repository suite (two skips), all 48
+codegen rules, 90 runtime members and 38 runtime data segments. The initial
+legacy fixture integration failure and its successful rerun remain archived
+separately. Frozen semantic progress metadata is preserved after verifying
+that only its generated date changed.
+
+## v37 bounded ownership follow-up
+
+The [research follow-up](../work/source-only-dos/structural-audits-v37/README.md)
+independently verifies a minimum four-byte Handle-shaped icon slot, with its
+producer, cell/payload lifetime, activation and aliases still unresolved.
+No provider is admitted. Original LockInit resets the separate lock cache
+and depth arrays, never the handle table; the 0..40 guard and identical
+extern41/42 compiles do not establish an allocation.
+
+The bitmap audit likewise retains its import. Conditional rendering spans
+and the 6316-byte public gap do not recover a header-plus-pixels owner.
+Modes 1/6 and an unassigned spider divisor leave the writer domain open;
+normal resource bounds do not cover every restored state/font/decoder path.
+These findings change no preflight input, count or algorithm disposition.

@@ -1,0 +1,4146 @@
+{
+  "schema": "simant-dos-critical-selector-v36",
+  "status": "INT24_CRT_ATTRIBUTION_EXCLUDED; SOURCE_OWNER_UNADMITTED",
+  "parent_checkpoint": "8feed73 (supplied by parent; current input hashes are independently bound below)",
+  "scope": {
+    "generated_full_TUs": 188,
+    "source_generation_only": true,
+    "no_original_payload_serialized": true,
+    "writes_confined_to": "build/workers/dos_critical_selector_v36"
+  },
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "pins": [
+    {
+      "path": "build/workers/dos_critical_selector_v36/audit_v36.py",
+      "sha256": "42f78cc8c3be6e4c46a176f2f012b14de6674af1f0f5cfcbbf7aeda1c043778d",
+      "size": 22346
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+      "size": 356104
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "9cd6bbfbbde03894360f0df71bab4bda68fbca27a4e0c667f2d791057e1deae6",
+      "size": 80313
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/build-report.json",
+      "sha256": "8a921c1dd978c6d3949f2ed83df5ccb9daef1102eb35bc8197a2c14e7bf1edbd",
+      "size": 18925667
+    },
+    {
+      "path": "work/source-only-dos/critical-error-selector-source-review-v18.json",
+      "sha256": "d2192f9581551f8bd6af6a8904cd911642a6e4e905a84da3ada1b4e5381d6b92",
+      "size": 111085
+    },
+    {
+      "path": "build/workers/dos_critical_selector_closure_v25/root-false-source-completeness-v25.json",
+      "sha256": "d9d83548ba0af26d1d7a9cfeb4fcd3367e65490858be7ec77ebab0c2e8c38919",
+      "size": 13002
+    },
+    {
+      "path": "build/workers/dos_critical_selector_closure_v25/correction-addendum-v25.json",
+      "sha256": "2c09d5e1becc4c71fc292917a509956b95aefda2024642214417bb14c67dee2e",
+      "size": 8285
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v33/icon-v33/receipt-v33.json",
+      "sha256": "53006efbb7d87c6b9402d9ea2acc689dbef99d6f28543891ac3e8d1734f87178",
+      "size": 74698
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v35/track-review-v35.json",
+      "sha256": "68ed3a8f01dee4b619f569c0b3b026532fb829fa47f97f69512bcaa75f059205",
+      "size": 7860
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v35/sound-domain-replay.json",
+      "sha256": "9dfc36c2579dfdc13cd8c7f66992206145a6b36ccb4e7a52c659258ae5282f47",
+      "size": 87983
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v35/sound-report-v35.md",
+      "sha256": "31a1dc70d4043701e8501a48eafba68b1774ab2b4225852d558f0cf53d8fd089",
+      "size": 10815
+    }
+  ],
+  "generated_source_pins": [
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U000.asm",
+      "sha256": "596d463f05bbb39c78f11a1e9a85a6c72e3e467cf2567e2db9cb3ad227d5c4c3",
+      "size": 18509,
+      "module": "S00:3126",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U001.asm",
+      "sha256": "8ffce643519fc5d6fdb3d1d688b1e1e738857b9d04a50544b91bb5076cdaef7f",
+      "size": 84042,
+      "module": "S00:31AD",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U002.asm",
+      "sha256": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
+      "size": 40338,
+      "module": "S00:31AD@2AB4",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U003.asm",
+      "sha256": "62a8b50548f6f2e39d3620f2e9063a6d4b817266e950655b6a22f54abc55dac1",
+      "size": 10184,
+      "module": "S00:35A6",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U004.asm",
+      "sha256": "5cfa946e9ec5da99b70726c0d30550721c25103bbcfd9e9a3d665ca68831fc2b",
+      "size": 46169,
+      "module": "S01:3126",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U005.asm",
+      "sha256": "af31ebb956e1d89743a66647fa8ea8beb5f1d6c57a9eab476fa39103df88c521",
+      "size": 4699,
+      "module": "S01:328E",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U006.asm",
+      "sha256": "446836eb5562f7ceee6f9d5e862d2cccd7c59b327421cf9e06ad3e420590b22d",
+      "size": 5336,
+      "module": "S01:32B5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U007.asm",
+      "sha256": "fcc39ce40a7355fc18024397e9be8666a398609fca720b18e77a41b694996292",
+      "size": 20525,
+      "module": "S02:3126",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U008.asm",
+      "sha256": "a549082547bc78147264d0ddd745f01416034cd9a2adf126405439ae64ebfbf9",
+      "size": 36942,
+      "module": "S03:3126",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U009.asm",
+      "sha256": "5f67726c1477bfb28285078c835fef3b8e1b9a7e1ad19ce34e225b76366b8165",
+      "size": 1544,
+      "module": "S03:3253",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U010.asm",
+      "sha256": "d8ff15b40f04cd28560e31a4940b65585bdb2cae7f12b0a5b30a4bb21a0f3552",
+      "size": 40551,
+      "module": "S03:3258",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U011.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387,
+      "module": "S04:35F5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U012.c",
+      "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+      "size": 8438,
+      "module": "S05:35F5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U013.c",
+      "sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+      "size": 4421,
+      "module": "S05:3663",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U014.c",
+      "sha256": "35bc42f86a81bda325536562963f862f938188e657a800ccade1db99f2d22a53",
+      "size": 43312,
+      "module": "S06:35F5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U015.c",
+      "sha256": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+      "size": 5028,
+      "module": "S07:35F5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U016.c",
+      "sha256": "f950e7c22b112adef492d745164e80755669e2e9218052d4b9b48e5c8a22adc6",
+      "size": 22082,
+      "module": "S08:35F5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U017.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150,
+      "module": "S09:35F5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U018.c",
+      "sha256": "e48ce08404481d1fa8921b14f24b5e1c6ea8a5afc06f8854b903c9225e91ca53",
+      "size": 5625,
+      "module": "S09:36EE",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U019.c",
+      "sha256": "e68eeb865aedf6ff9e2f72ec9fa3f3ab620ed0dd788ec967c59cf6f8f92fdf99",
+      "size": 10547,
+      "module": "S10:35F5",
+      "reviewed_bodies": [
+        "o10_35F5_0384"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U020.c",
+      "sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "size": 4345,
+      "module": "S11:35F5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U021.c",
+      "sha256": "9d4b6840fb8aeb4f51235011d10ebed108a523783ab1a2ec075c656dea5d84e1",
+      "size": 22042,
+      "module": "S12:384C",
+      "reviewed_bodies": [
+        "DrawMapCursor"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U022.c",
+      "sha256": "333908e9217239d66c34f8ad9e4d277da330576fab74d912a13b2e91633b52e1",
+      "size": 24670,
+      "module": "S13:384C",
+      "reviewed_bodies": [
+        "InvertPatch"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U023.c",
+      "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "size": 17919,
+      "module": "S14:384C",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U024.c",
+      "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+      "size": 9120,
+      "module": "S15:384C",
+      "reviewed_bodies": [
+        "o15_384C_0239"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U025.c",
+      "sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "size": 8239,
+      "module": "S16:384C",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U026.c",
+      "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+      "size": 2302,
+      "module": "S17:384C",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U027.c",
+      "sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3",
+      "size": 12432,
+      "module": "S18:384C",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U028.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+      "size": 7190,
+      "module": "S19:384C",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U029.c",
+      "sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a",
+      "size": 2164,
+      "module": "S20:39C7",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U030.c",
+      "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+      "size": 6620,
+      "module": "S20:39F1",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U031.asm",
+      "sha256": "537d7b811340a7615c2d49e8eb5253953937bd1b037344ecbaba246c27f338bd",
+      "size": 9847,
+      "module": "S21:39C7",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U032.c",
+      "sha256": "58f8a4a7ae524fae65d8abca7972253e6f0e83cf384cfcb356bc5a580ac738c6",
+      "size": 31293,
+      "module": "S22:39C7",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U033.c",
+      "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+      "size": 18576,
+      "module": "S22:3BBD",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U034.c",
+      "sha256": "c9a26f97557c8a1b9cd4db2c17eb910787e7719aec0499041dcfd2c69eee1301",
+      "size": 21323,
+      "module": "S23:39C7",
+      "reviewed_bodies": [
+        "DisplayCard",
+        "win_PrintStyleTextInRect"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U035.c",
+      "sha256": "1eb5a0000fccff4615c0ed490460fa997569b38d95201cb0f472f5c1bdd8f98b",
+      "size": 8258,
+      "module": "S24:39C7",
+      "reviewed_bodies": [
+        "drawHistGraph"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U036.c",
+      "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+      "size": 27923,
+      "module": "S25:39C7",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U037.c",
+      "sha256": "696985898b539d5795435bbd3d03cf5331cfb334aaffafb84ecea668c00a8e17",
+      "size": 24509,
+      "module": "S25:3BA4",
+      "reviewed_bodies": [
+        "o25_3BA4_1035",
+        "o25_3BA4_1686"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U038.c",
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "size": 9163,
+      "module": "S26:39C7",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U039.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "size": 22927,
+      "module": "data:3D57",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U040.c",
+      "sha256": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05",
+      "size": 1492,
+      "module": "data:3E1D",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U041.c",
+      "sha256": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
+      "size": 589,
+      "module": "data:55B3@0042",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U042.c",
+      "sha256": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
+      "size": 1245,
+      "module": "data:55B3@0064",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U043.c",
+      "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+      "size": 23095,
+      "module": "data:55B3@00B8",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U044.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "size": 5066,
+      "module": "root:0000",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U045.c",
+      "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+      "size": 5462,
+      "module": "root:004A",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U046.c",
+      "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "size": 3129,
+      "module": "root:0093",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U047.c",
+      "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+      "size": 3562,
+      "module": "root:00BA",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U048.c",
+      "sha256": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c",
+      "size": 119,
+      "module": "root:00DE",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U049.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881,
+      "module": "root:00DF",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U050.c",
+      "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "size": 7304,
+      "module": "root:00F8",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U051.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "size": 16241,
+      "module": "root:015B",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U052.c",
+      "sha256": "4af5c48bc82c52e82cbde616bab7606fdd0b61e38d72d8e53bd0e13a1df02a1a",
+      "size": 802,
+      "module": "root:0244",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U053.c",
+      "sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+      "size": 70665,
+      "module": "root:0250",
+      "reviewed_bodies": [
+        "DrawBalloons",
+        "f_0250_1018",
+        "f_0250_129E"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U054.c",
+      "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+      "size": 3481,
+      "module": "root:075B",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U055.c",
+      "sha256": "45c68892dbbe580d9bd1142676959b7951288a37f9018f6f335c112a34eef22f",
+      "size": 624,
+      "module": "root:078E",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U056.c",
+      "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "size": 14874,
+      "module": "root:0798",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U057.c",
+      "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+      "size": 32636,
+      "module": "root:0894",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U058.c",
+      "sha256": "57155ef036a29cf9f584e2eb8d3da1575af371a1cf87c936e8fcd18fcbfa2821",
+      "size": 14274,
+      "module": "root:0AD9",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U059.c",
+      "sha256": "3649d25a2024ce0474db430ccb1db8355270d9def303a01e009081b5751764e1",
+      "size": 14599,
+      "module": "root:0BE8",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U060.c",
+      "sha256": "a118a8c5096cee9fa887e4414ea36b6f96fa9069ccad86bcd4cc411826fa31dd",
+      "size": 15002,
+      "module": "root:0CDB",
+      "reviewed_bodies": [
+        "SpiderScan"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U061.c",
+      "sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+      "size": 4635,
+      "module": "root:0DEF",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U062.c",
+      "sha256": "08813518761e90c41d35eac763fab1d0745e642a6801200332858d678ccad3ee",
+      "size": 10696,
+      "module": "root:0E2E",
+      "reviewed_bodies": [
+        "LessonDone"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U063.c",
+      "sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "size": 7100,
+      "module": "root:0EC1",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U064.c",
+      "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+      "size": 22794,
+      "module": "root:0F3F",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U065.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707,
+      "module": "root:10F7",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U066.c",
+      "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+      "size": 15679,
+      "module": "root:1383",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U067.c",
+      "sha256": "2b158a9367c89c7acf496efe4ff8490865fda03c5c88cfd70343264d1e2d15de",
+      "size": 4606,
+      "module": "root:1496",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U068.c",
+      "sha256": "a9947226c73c4502f00e2b319b3cd7abc7f2acbc8ca9ef72448b31e55c6bdb59",
+      "size": 11666,
+      "module": "root:14EE",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U069.c",
+      "sha256": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+      "size": 1776,
+      "module": "root:15D9",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U070.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897,
+      "module": "root:15F8",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U071.c",
+      "sha256": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+      "size": 7455,
+      "module": "root:1629",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U072.asm",
+      "sha256": "26d9a76b86a8854105e905a11b59b83f84cac821edec495900bd296b2914a5fb",
+      "size": 3920,
+      "module": "root:1699",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U073.asm",
+      "sha256": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
+      "size": 12680,
+      "module": "root:16B5",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U074.c",
+      "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "size": 25820,
+      "module": "root:171C",
+      "reviewed_bodies": [
+        "f_171C_09CC",
+        "f_171C_0ADC",
+        "f_171C_0CF4",
+        "f_171C_0FBC"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U075.asm",
+      "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+      "size": 2109,
+      "module": "root:194D",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U076.asm",
+      "sha256": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+      "size": 1271,
+      "module": "root:1959",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U077.asm",
+      "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+      "size": 7693,
+      "module": "root:195A",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U078.c",
+      "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+      "size": 2874,
+      "module": "root:1986",
+      "reviewed_bodies": [
+        "FindIndex"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U079.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "size": 4870,
+      "module": "root:19A9",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U080.c",
+      "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+      "size": 4995,
+      "module": "root:19DC",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U081.c",
+      "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+      "size": 3200,
+      "module": "root:1A28",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U082.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "size": 5159,
+      "module": "root:1A53",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U083.c",
+      "sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+      "size": 6836,
+      "module": "root:1A96",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U084.asm",
+      "sha256": "3124ef4a45c572a54529bd5a57cd9225b40fdcafadd63c6b06cb748683cacca4",
+      "size": 5568,
+      "module": "root:1B05",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U085.c",
+      "sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343",
+      "size": 2422,
+      "module": "root:1B28",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U086.asm",
+      "sha256": "9f18195ddfa42822f0e54c8a3edf016a751dd7c23b67620c647c75de02c12714",
+      "size": 8479,
+      "module": "root:1B4E",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U087.asm",
+      "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+      "size": 35074,
+      "module": "root:1B73",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U088.c",
+      "sha256": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36",
+      "size": 9762,
+      "module": "root:1C62",
+      "reviewed_bodies": [
+        "f_1C62_0415"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U089.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "size": 10210,
+      "module": "root:1CE2",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U090.c",
+      "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "size": 10996,
+      "module": "root:1D8E",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U091.c",
+      "sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+      "size": 12763,
+      "module": "root:1E57",
+      "reviewed_bodies": [
+        "f_1E57_038E"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U092.asm",
+      "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+      "size": 2852,
+      "module": "root:1F58",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U093.asm",
+      "sha256": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+      "size": 3748,
+      "module": "root:1F66",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U094.c",
+      "sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+      "size": 3313,
+      "module": "root:1F80",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U095.c",
+      "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+      "size": 1532,
+      "module": "root:1FAA",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U096.asm",
+      "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+      "size": 3414,
+      "module": "root:1FBD",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U097.c",
+      "sha256": "c751c5267a0f73137dcc5a93b1e354ccd7352b24c8f95f5db7db607695352099",
+      "size": 10146,
+      "module": "root:1FD2",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U098.c",
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+      "size": 6015,
+      "module": "root:205F",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U099.c",
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "size": 6853,
+      "module": "root:208F",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U100.c",
+      "sha256": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+      "size": 11180,
+      "module": "root:20E8",
+      "reviewed_bodies": [
+        "f_20E8_0903"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U101.c",
+      "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "size": 8739,
+      "module": "root:218D",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U102.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "size": 13758,
+      "module": "root:21FA",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U103.c",
+      "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "size": 18937,
+      "module": "root:22BF",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U104.c",
+      "sha256": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+      "size": 4888,
+      "module": "root:23AE",
+      "reviewed_bodies": [
+        "win_UnlockWin"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U105.c",
+      "sha256": "d0a490f75ee880984374da56620d49d146da879e50895c81802b537cff7d2bc3",
+      "size": 12604,
+      "module": "root:23E6",
+      "reviewed_bodies": [
+        "f_23E6_0000"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U106.c",
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "size": 5171,
+      "module": "root:24AB",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U107.asm",
+      "sha256": "e538d0a8df93c3bd7ba3aabccc9a48faa6f643b7f8489c3c379c0d23ad9ac412",
+      "size": 2095,
+      "module": "root:24FA",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U108.c",
+      "sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "size": 10580,
+      "module": "root:2505",
+      "reviewed_bodies": [
+        "f_2505_0453"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U109.c",
+      "sha256": "43968368c6b26af3635aac9ab5160771a8e104d8160ca1e9be7749b26d7a466a",
+      "size": 6314,
+      "module": "root:259D",
+      "reviewed_bodies": [
+        "win_DrawBitMap"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U110.c",
+      "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+      "size": 5610,
+      "module": "root:25E7",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U111.asm",
+      "sha256": "bc33db1cc3b47590b79e091fd070708cfbdfbc525c82796a38d44533fb4ad621",
+      "size": 2973,
+      "module": "root:2650",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U112.c",
+      "sha256": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+      "size": 15289,
+      "module": "root:2662",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U113.c",
+      "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+      "size": 606,
+      "module": "root:277D",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U114.c",
+      "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "size": 10363,
+      "module": "root:277E",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U115.c",
+      "sha256": "6d7a3e90d0e6555dc5c1d205f18ad9df9579c743d829ba86011e36c95a2010eb",
+      "size": 2183,
+      "module": "root:2815",
+      "reviewed_bodies": [
+        "f_2815_0165"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U116.asm",
+      "sha256": "c7fc07dbb9830dfad40597e5fe377c4a62bc9d3551a80aef602dad3925daa0c5",
+      "size": 3638,
+      "module": "root:283E",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U117.c",
+      "sha256": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100",
+      "size": 6874,
+      "module": "root:284A",
+      "reviewed_bodies": [
+        "f_284A_0138"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U118.asm",
+      "sha256": "e1b3d7a49330d3e7f817da331c3142ce0db64bd03de8c75ad3c7e6cddf4b82cf",
+      "size": 38516,
+      "module": "root:28BC",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U119.c",
+      "sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+      "size": 3201,
+      "module": "root:290D",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U120.c",
+      "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "size": 3635,
+      "module": "root:293A",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U121.c",
+      "sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+      "size": 6086,
+      "module": "root:295C",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U122.c",
+      "sha256": "630261c9ce29ece91f48e1fa0ec6c4bf1ce6270245f30d4825a66ed2a661878b",
+      "size": 594,
+      "module": "root:29B8",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U123.asm",
+      "sha256": "bb40cbd77f380b56c0ab0c27d41f08b40f63deb3b8c14f53b15e3d526fa753ac",
+      "size": 8357,
+      "module": "root:29BF",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U124.c",
+      "sha256": "7e964e498af12c291de8086527b09e9dde8da6a71b4eeda2ab7ef2c87fc82306",
+      "size": 2897,
+      "module": "root:29D6",
+      "reviewed_bodies": [
+        "f_29D6_000A"
+      ]
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U125.c",
+      "sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+      "size": 633,
+      "module": "root:29F0",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/U126.asm",
+      "sha256": "d12d1eedb44a03197c55abf8701ee5f6dfc71a4472ab66d610ae68a3da79d981",
+      "size": 1755,
+      "module": "root:2CFB",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/CBOWNER.c",
+      "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "size": 47,
+      "module": "source-owned:driver-callback-table",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/MSOWNER.c",
+      "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+      "size": 280,
+      "module": "source-owned:mouse-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/MMOWNER.c",
+      "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+      "size": 658,
+      "module": "source-owned:memory-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/RSOWNER.c",
+      "sha256": "3cf7dddcf9188d13f36e25115ac566169adceb938c0f5493a3d9a7faa70d0d7f",
+      "size": 83,
+      "module": "source-owned:render-scalars",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/MFOWNER.c",
+      "sha256": "c5d934e134049e4c7e50a65aca8dc2327633b83523a3a9853e4842a31e999e41",
+      "size": 305,
+      "module": "source-owned:memory-far-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/MPOWNER.c",
+      "sha256": "51ff1acd879f1abfa0be317a81d4cae076fddaa23d7e41156380c9ddf6349823",
+      "size": 32,
+      "module": "source-owned:mono-pattern-prefix",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/CPOWNER.c",
+      "sha256": "fa8ff59a015c5078ce7b0d9c80a7a6c1d79539caac12a13b5b726069557fe48d",
+      "size": 90,
+      "module": "source-owned:clip-pointer",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/YDOWNER.c",
+      "sha256": "d94320b53cd0f3c8843df20c10c305c1a1022dafb4d8318803d7acbd0feb6602",
+      "size": 255,
+      "module": "source-owned:yard-scalars",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/DIOWNER.c",
+      "sha256": "a052b1148cf3dca2ee2157bffeee5e2b92b3f51ef78235e37c8e5fe5d8b4f4d8",
+      "size": 458,
+      "module": "source-owned:database-index-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SPIDATA.c",
+      "sha256": "5ffb18cd1256b1d6e42586386a573cd1c62d2bf9c2d6eaaab96d333e9a642f64",
+      "size": 212,
+      "module": "source-owned:spider-counters",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/LIOWNER.c",
+      "sha256": "bc537f033398e20d239796c7873a2b0a8efc82449c50219a2822918af398c66c",
+      "size": 296,
+      "module": "source-owned:lion-sow-pillar",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SPICTRL.c",
+      "sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
+      "size": 181,
+      "module": "source-owned:spider-controls",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/PTOWNER.c",
+      "sha256": "94fd7ae1a436fe595f4ad987e24f21773633c95af9f121f03581002e54a3ce48",
+      "size": 463,
+      "module": "source-owned:point-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/DBRECOWN.c",
+      "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
+      "size": 1295,
+      "module": "source-owned:database-record-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/GFXOWNER.c",
+      "sha256": "27c6dd4d4f5781765b866824b125470b66a3c1b2aae463f2a270d59717100e40",
+      "size": 1526,
+      "module": "source-owned:graphics-formulas",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/G210808.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183,
+      "module": "source-owned:g2108-color-translation",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ALCOUNT.c",
+      "sha256": "da1689b4afbed9e65a06c858990d7a852c737456c06d00b1b6354e25f9a43786",
+      "size": 143,
+      "module": "source-owned:ant-list-counts",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/COLWORD.c",
+      "sha256": "8b1b0eb6cee06eaf04490d4ca6e4199238116ebb1eb3efbf51ee05f2dc404c52",
+      "size": 424,
+      "module": "source-owned:colony-simulation-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/PLOCOWN.c",
+      "sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244",
+      "size": 178,
+      "module": "source-owned:player-locations",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ANTCTR.c",
+      "sha256": "ca5eb0d24c723abf646adcb03a1afacfc0d5000e13136ec7807a764c8e567a5f",
+      "size": 65,
+      "module": "source-owned:ant-counters-timer",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/LANGPTR.c",
+      "sha256": "600fda1972caf3b4d5016818fc3ad8900f370a00a02f2a5d670e92bfe848d466",
+      "size": 167,
+      "module": "source-owned:language-string-list-pointers",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/DEADXY.c",
+      "sha256": "b957f894c7703593a14444cddc20091e1695e75e4696cfe8d4502135925b7cbe",
+      "size": 76,
+      "module": "source-owned:dead-ant-coordinate-rings",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ANTSTATE.c",
+      "sha256": "df1e92794d57c8fa0a602102b4d18fa8d42c2d1d9be1c87b3047de5fa8da7006",
+      "size": 196,
+      "module": "source-owned:ant-player-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/MODEOWN.c",
+      "sha256": "f5c1287217cc9863e38a636036a62b1c47ba72d073e557b5c6289bdd5647605f",
+      "size": 18,
+      "module": "source-owned:display-mode-selector",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ANTCTRL.c",
+      "sha256": "c9457e4a6c711c889e9be3bc57bf38f86aea710f78297caf4b998f208e5a6c20",
+      "size": 1034,
+      "module": "source-owned:ant-ui-control-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/UIRESOWN.c",
+      "sha256": "9025b51b87cc6b7c55e72fded546123307378e8ed41cca7add54121c882d9c6c",
+      "size": 479,
+      "module": "source-owned:ui-resource-scalars",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/TERRNOWN.c",
+      "sha256": "f132ac4e22801d8576c9bb556fa7b23cd70efe54455b37b1666eeebe173855b4",
+      "size": 199,
+      "module": "source-owned:terrain-state-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SWARMOWN.c",
+      "sha256": "81779084ec88a02935189f0daa87cb996bf2192fd12c6ce62b87adc3cae50e69",
+      "size": 228,
+      "module": "source-owned:swarm-serialized-buffers",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/POPWORK.c",
+      "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+      "size": 207,
+      "module": "source-owned:population-work-arrays",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SNDSTATE.c",
+      "sha256": "9241c7b8ace381c4226a38f5f109a0d518ef42e7b4de99ed6425aa7346e10602",
+      "size": 181,
+      "module": "source-owned:saved-sound-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/CTRLFLAG.c",
+      "sha256": "8918adcd4f2cd79e5ef4bb511b314991ebf3f5ad823a498b6094a433e152c5e5",
+      "size": 145,
+      "module": "source-owned:control-flag-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ANTLATCH.c",
+      "sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
+      "size": 205,
+      "module": "source-owned:count-ants-transition-word",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SNDCTRL.c",
+      "sha256": "43432778e132096f7fe228f01d08a510a1b8ad52dd4fb1fd96098f87f2b05fb0",
+      "size": 217,
+      "module": "source-owned:sound-control-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SNDRECS.c",
+      "sha256": "2642ee9d18c8869d8ae624b0819274e9972cb47cca1236e72b883ef19c0786d0",
+      "size": 298,
+      "module": "source-owned:sound-record-arrays",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ANTMOVE.c",
+      "sha256": "ae6d7471d89259d5ba656d7d3ac2be12a141d13812bf724c204aad6e8bc841dd",
+      "size": 352,
+      "module": "source-owned:ant-movement-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/WORLDOUT.c",
+      "sha256": "15deda16456dbf034f43c277a6af0c546ee08a5df8a64de536141886c4318e5b",
+      "size": 534,
+      "module": "source-owned:world-output-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/HISTOTAL.c",
+      "sha256": "33ea85f0b46e55cbe52ca7d758abbc9bf0e991b0117070841e870b4519b937c2",
+      "size": 350,
+      "module": "source-owned:history-scalar-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ANTCOUNT.c",
+      "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+      "size": 190,
+      "module": "source-owned:ant-class-histogram",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/EVRECS.c",
+      "sha256": "0dcaae2b70a71ba380a4434ab04e5fd93c908fafa16e27927619eb3e337dff4c",
+      "size": 190,
+      "module": "source-owned:event-records",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/STRREST.c",
+      "sha256": "5e57ca8ffae57d5c31840b96eb452a2b732a58be065119a1c89c057c1a4f4ac7",
+      "size": 371,
+      "module": "source-owned:remaining-preparestrings-string-pointers",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/YARDISCL.c",
+      "sha256": "60f4ce38198c183332dda8b20d23af5d502c21f8c405ad8d6176cbe8d486464a",
+      "size": 651,
+      "module": "source-owned:yard-init-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/YARDARR.c",
+      "sha256": "e2c5687ed2ced3628158b66107c4c7d791334fdd7605480e7df623bd8a17ad34",
+      "size": 108,
+      "module": "source-owned:yard-animation-arrays",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/BLNTMR.c",
+      "sha256": "e9b3d73a57ce9442bc51ab3b839bd960ea00a6f65f837d4bd7c769ef532599f7",
+      "size": 92,
+      "module": "source-owned:balloon-deadline-timers",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/EXPANCH.c",
+      "sha256": "b9d65fc35f1cd8d069f4b57b2f44771ff08fa10c403ee4dc9ed7e2097e99e35d",
+      "size": 190,
+      "module": "source-owned:experiment-anchor",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/WCLIPH.c",
+      "sha256": "55690c8a8fed23d230f0af9b4605f32ab23da032be72ab38eeaac8c52619ab8e",
+      "size": 108,
+      "module": "source-owned:window-clip-handles",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/HISTSC25.c",
+      "sha256": "5806da0f9d498afde90de584fb7038419739f30696abd06d07e3e76f6022001b",
+      "size": 503,
+      "module": "source-owned:remaining-history-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/MPVOWNR.c",
+      "sha256": "67be68b136c4d6cbf8ee7d82fc5dcfa7e505682f326b02a560b93c6313325ea4",
+      "size": 102,
+      "module": "source-owned:mode-population-vectors",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/FLRTSK.c",
+      "sha256": "83824c6ff01de286edd65e26c55105c3a50958b0f581d889963031234349e89b",
+      "size": 33,
+      "module": "source-owned:floor-task-words",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/UIGEO.c",
+      "sha256": "283176f1769968d7db9a0e1d002d54fd566e523120285778bdf1b137e106a85e",
+      "size": 422,
+      "module": "source-owned:ui-geometry-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/WRLDSC25.c",
+      "sha256": "57ed89be36dac0695106d3ffcf7d89cbf8b9ada0d35c85d9938b14507694edbf",
+      "size": 376,
+      "module": "source-owned:remaining-world-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/ANTSCL25.c",
+      "sha256": "53d30a8315c50882c50f857755719eb8c15d9b93c6ecd18d76c69753dc5d9c56",
+      "size": 611,
+      "module": "source-owned:remaining-ant-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/UISTTE26.c",
+      "sha256": "26e147cfe361cd74f3baf9c8696c735364d9e5dec663fbd310895cbfaabc8b7f",
+      "size": 510,
+      "module": "source-owned:remaining-ui-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/WINSC26.c",
+      "sha256": "fd2f545af87160b49456eeb534f9400d256d7e0ffe0ec07da21b6d3c86e1bfaf",
+      "size": 851,
+      "module": "source-owned:remaining-window-state",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SCALTL26.c",
+      "sha256": "f9746dc82fdfa8f532920e1aeb7d4a75c7ef1cc40ceaae6aae23ecb5f0c7b428",
+      "size": 419,
+      "module": "source-owned:remaining-scalar-tail",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/BLNTAB26.c",
+      "sha256": "81ba70b1b41be95b198a1b27332e22a713b27089540c4757f6b417950fa2a6fd",
+      "size": 149,
+      "module": "source-owned:balloon-buffer-tables",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/DELAYW27.c",
+      "sha256": "576e0fc638e0274cc5f95b7fde9d78f0a4786ddbad64d8366ac9867fb0387ad5",
+      "size": 22,
+      "module": "source-owned:render-delay-word",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/WINHD27.c",
+      "sha256": "6a8afe2038120da5e55ecc3dd4f31fa498fd785d9353d1dd4360d04ac1e885e7",
+      "size": 82,
+      "module": "source-owned:window-ralloc-handles",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SNDST27.c",
+      "sha256": "984e0db28de921d9d4ccd1e0be9f73e40a2880d1786f6222cc1718d2f4e90aec",
+      "size": 298,
+      "module": "source-owned:remaining-sound-storage",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/MISCST27.c",
+      "sha256": "14e4a1dee10178208042f2959b670aad9051dfe3dcdcad11d1d3019709b1147a",
+      "size": 298,
+      "module": "source-owned:remaining-misc-storage",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/SCRLIST.c",
+      "sha256": "7933eb61262e3684eb44ee2f5220598e8eb6e4d5f1ff0841837e2831d0264b96",
+      "size": 271,
+      "module": "source-owned:screen-clip-list",
+      "reviewed_bodies": []
+    },
+    {
+      "path": "build/workers/dos_critical_selector_v36/intake/sources/FARW29.c",
+      "sha256": "cc38095d94023d9fe71c8939a7ef3847d51a2d5e4c6392d97e0ed85024b6e082",
+      "size": 110,
+      "module": "source-owned:remaining-far-state-words",
+      "reviewed_bodies": []
+    }
+  ],
+  "source_identifier_occurrences": [
+    {
+      "module": "S20:39F1",
+      "line": 38,
+      "text": "extern int far f_208F_058B();",
+      "identifiers": [
+        "f_208F_058B"
+      ]
+    },
+    {
+      "module": "S20:39F1",
+      "line": 39,
+      "text": "extern void far _harderr(int (far *handler)());",
+      "identifiers": [
+        "_harderr"
+      ]
+    },
+    {
+      "module": "S20:39F1",
+      "line": 154,
+      "text": "_harderr(f_208F_058B);",
+      "identifiers": [
+        "f_208F_058B",
+        "_harderr"
+      ]
+    },
+    {
+      "module": "root:1C62",
+      "line": 253,
+      "text": "extern char near g_8CCB;",
+      "identifiers": [
+        "g_8CCB"
+      ]
+    },
+    {
+      "module": "root:1C62",
+      "line": 333,
+      "text": "extern char near g_8CCB;",
+      "identifiers": [
+        "g_8CCB"
+      ]
+    },
+    {
+      "module": "root:1C62",
+      "line": 354,
+      "text": "char far * far f_1C62_06A6(int err)",
+      "identifiers": [
+        "f_1C62_06A6"
+      ]
+    },
+    {
+      "module": "root:1C62",
+      "line": 357,
+      "text": "return g_567A[g_8CCB];",
+      "identifiers": [
+        "g_8CCB"
+      ]
+    },
+    {
+      "module": "root:208F",
+      "line": 300,
+      "text": "int far f_208F_058B(void)",
+      "identifiers": [
+        "f_208F_058B"
+      ]
+    }
+  ],
+  "original_xref_and_near_storage_scan": {
+    "functions_scanned": 1730,
+    "units_scanned": 29,
+    "relocations_scanned": 9075,
+    "vectors_scanned": 136,
+    "direct_control_transfers": [
+      {
+        "unit": "root",
+        "function": "f_29F4_2D88",
+        "address": "29F4:2DDD",
+        "linear": "2CD1D",
+        "instruction": "jmp 0x2dc7",
+        "target": "__harderr",
+        "target_delta": 63,
+        "internal": false
+      },
+      {
+        "unit": "S20",
+        "function": "IBMInitStuff",
+        "address": "39F1:02B6",
+        "linear": "3A1C6",
+        "instruction": "lcall 0x29f4, 0x2d88",
+        "target": "__harderr",
+        "target_delta": 0,
+        "internal": false
+      }
+    ],
+    "relocated_contiguous_pointers": [
+      {
+        "unit": "S20",
+        "site": "39F1:02B9",
+        "target": "__harderr",
+        "target_delta": 0,
+        "instruction_owner": {
+          "unit": "S20",
+          "function": "IBMInitStuff",
+          "address": "39F1:02B6",
+          "linear": "3A1C6",
+          "instruction": "lcall 0x29f4, 0x2d88"
+        }
+      }
+    ],
+    "vectors": [],
+    "selector_frame_relocations": [
+      {
+        "unit": "root",
+        "site": "0000:015B",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_0000_0149",
+          "address": "0000:0158",
+          "linear": "00158",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "00F8:0190",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_00F8_017D",
+          "address": "00F8:018D",
+          "linear": "0110D",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "root",
+        "site": "00F8:028E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "myDelay",
+          "address": "00F8:028B",
+          "linear": "0120B",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "root",
+        "site": "00F8:0357",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DialogWait",
+          "address": "00F8:0354",
+          "linear": "012D4",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "root",
+        "site": "0250:075C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_0250_0721",
+          "address": "0250:0759",
+          "linear": "02C59",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "0250:0950",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_0250_0915",
+          "address": "0250:094D",
+          "linear": "02E4D",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "0250:0AF7",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_0250_0ADB",
+          "address": "0250:0AF4",
+          "linear": "02FF4",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "0250:12DD",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_0250_129E",
+          "address": "0250:12DA",
+          "linear": "037DA",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "078E:002C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_078E_000C",
+          "address": "078E:0029",
+          "linear": "07909",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "15F8:02A5",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "main",
+          "address": "15F8:02A2",
+          "linear": "16222",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "root",
+        "site": "1629:0047",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "MakeBalloon",
+          "address": "1629:0044",
+          "linear": "162D4",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:0018",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_0002",
+          "address": "171C:0015",
+          "linear": "171D5",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:018C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_0160",
+          "address": "171C:0189",
+          "linear": "17349",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:0794",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_068C",
+          "address": "171C:0791",
+          "linear": "17951",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:0A85",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_0A5C",
+          "address": "171C:0A82",
+          "linear": "17C42",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:0A6F",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_0A5C",
+          "address": "171C:0A6C",
+          "linear": "17C2C",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:0AD4",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_0A5C",
+          "address": "171C:0AD1",
+          "linear": "17C91",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:0FB0",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_0EEA",
+          "address": "171C:0FAD",
+          "linear": "1816D",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:112C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_0FBC",
+          "address": "171C:1129",
+          "linear": "182E9",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1282",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_125C",
+          "address": "171C:127F",
+          "linear": "1843F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1304",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_125C",
+          "address": "171C:1301",
+          "linear": "184C1",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1496",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_13E4",
+          "address": "171C:1493",
+          "linear": "18653",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:142E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_13E4",
+          "address": "171C:142B",
+          "linear": "185EB",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1504",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_14BE",
+          "address": "171C:1501",
+          "linear": "186C1",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1572",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_152C",
+          "address": "171C:156F",
+          "linear": "1872F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:15C7",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_15A2",
+          "address": "171C:15C4",
+          "linear": "18784",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:164B",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_15A2",
+          "address": "171C:1648",
+          "linear": "18808",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1628",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_15A2",
+          "address": "171C:1625",
+          "linear": "187E5",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:16CC",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1686",
+          "address": "171C:16C9",
+          "linear": "18889",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1730",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_16EA",
+          "address": "171C:172D",
+          "linear": "188ED",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:17DA",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1794",
+          "address": "171C:17D7",
+          "linear": "18997",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:184E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1804",
+          "address": "171C:184B",
+          "linear": "18A0B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1901",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_18A6",
+          "address": "171C:18FE",
+          "linear": "18ABE",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:18E0",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_18A6",
+          "address": "171C:18DD",
+          "linear": "18A9D",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:18CB",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_18A6",
+          "address": "171C:18C8",
+          "linear": "18A88",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1B0E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1AD4",
+          "address": "171C:1B0B",
+          "linear": "18CCB",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1B66",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1B2C",
+          "address": "171C:1B63",
+          "linear": "18D23",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1BF4",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1BBA",
+          "address": "171C:1BF1",
+          "linear": "18DB1",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1C62",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1C1C",
+          "address": "171C:1C5F",
+          "linear": "18E1F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1CBC",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1C82",
+          "address": "171C:1CB9",
+          "linear": "18E79",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1D10",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1CD6",
+          "address": "171C:1D0D",
+          "linear": "18ECD",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1DDE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1D40",
+          "address": "171C:1DDB",
+          "linear": "18F9B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1D7E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1D40",
+          "address": "171C:1D7B",
+          "linear": "18F3B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1ED4",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1E9A",
+          "address": "171C:1ED1",
+          "linear": "19091",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:2040",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1FC2",
+          "address": "171C:203D",
+          "linear": "191FD",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:201F",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1FC2",
+          "address": "171C:201C",
+          "linear": "191DC",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:1FFE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_1FC2",
+          "address": "171C:1FFB",
+          "linear": "191BB",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:20B5",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_2086",
+          "address": "171C:20B2",
+          "linear": "19272",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:211C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_20E2",
+          "address": "171C:2119",
+          "linear": "192D9",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:2180",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_171C_2136",
+          "address": "171C:217D",
+          "linear": "1933D",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:224A",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "_ffree",
+          "address": "171C:2247",
+          "linear": "19407",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "171C:22D4",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "_frealloc",
+          "address": "171C:22D1",
+          "linear": "19491",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "195A:02C0",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_195A_02B7",
+          "address": "195A:02BD",
+          "linear": "1985D",
+          "instruction": "ljmp 0x1c62:0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1986:00D1",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "OpenIndex",
+          "address": "1986:00CE",
+          "linear": "1992E",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19A9:02BB",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DBRecall",
+          "address": "19A9:02B8",
+          "linear": "19D48",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19A9:013E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DBRecall",
+          "address": "19A9:013B",
+          "linear": "19BCB",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19A9:0318",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DBAdd",
+          "address": "19A9:0315",
+          "linear": "19DA5",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19A9:0325",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DBDelete",
+          "address": "19A9:0322",
+          "linear": "19DB2",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19A9:0332",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DBPack",
+          "address": "19A9:032F",
+          "linear": "19DBF",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19DC:0463",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_19DC_02FB",
+          "address": "19DC:0460",
+          "linear": "1A220",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19DC:043C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_19DC_02FB",
+          "address": "19DC:0439",
+          "linear": "1A1F9",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19DC:03ED",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_19DC_02FB",
+          "address": "19DC:03EA",
+          "linear": "1A1AA",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19DC:03C8",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_19DC_02FB",
+          "address": "19DC:03C5",
+          "linear": "1A185",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "19DC:0387",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_19DC_02FB",
+          "address": "19DC:0384",
+          "linear": "1A144",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A28:0021",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "OpenDB",
+          "address": "1A28:001E",
+          "linear": "1A29E",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A28:02AF",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DosPunt",
+          "address": "1A28:02AC",
+          "linear": "1A52C",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A28:0289",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "DosPunt",
+          "address": "1A28:0286",
+          "linear": "1A506",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:00AE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_SetDataBase",
+          "address": "1A53:00AB",
+          "linear": "1A5DB",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:01C1",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_LoadObject",
+          "address": "1A53:01BE",
+          "linear": "1A6EE",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:013C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_LoadObject",
+          "address": "1A53:0139",
+          "linear": "1A669",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:0214",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_PurgeObject",
+          "address": "1A53:0211",
+          "linear": "1A741",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:0274",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_PurgeHandle",
+          "address": "1A53:0271",
+          "linear": "1A7A1",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:0346",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_ReleaseObject",
+          "address": "1A53:0343",
+          "linear": "1A873",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:0308",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_ReleaseObject",
+          "address": "1A53:0305",
+          "linear": "1A835",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A53:0361",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "db_UnhookObject",
+          "address": "1A53:035E",
+          "linear": "1A88E",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A96:03C2",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "ch_AddEntry",
+          "address": "1A96:03BF",
+          "linear": "1AD1F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1A96:061A",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "ch_DumpOldest",
+          "address": "1A96:0617",
+          "linear": "1AF77",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1B73:01B1",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1B73_0196",
+          "address": "1B73:01AE",
+          "linear": "1B8DE",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1B73:0AFE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1B73_0AC3",
+          "address": "1B73:0AFB",
+          "linear": "1C22B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1CE2:067B",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "GPutPacked",
+          "address": "1CE2:0678",
+          "linear": "1D498",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:01BF",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_SetWin",
+          "address": "1E57:01BC",
+          "linear": "1E72C",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:02DB",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1E57_0296",
+          "address": "1E57:02D8",
+          "linear": "1E848",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:06F4",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1E57_038E",
+          "address": "1E57:06F1",
+          "linear": "1EC61",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0622",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1E57_038E",
+          "address": "1E57:061F",
+          "linear": "1EB8F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:05B9",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1E57_038E",
+          "address": "1E57:05B6",
+          "linear": "1EB26",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0824",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_SubInclude",
+          "address": "1E57:0821",
+          "linear": "1ED91",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0886",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_SubInclude",
+          "address": "1E57:0883",
+          "linear": "1EDF3",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0832",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_SubInclude",
+          "address": "1E57:082F",
+          "linear": "1ED9F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0A32",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1E57_08F5",
+          "address": "1E57:0A2F",
+          "linear": "1EF9F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:09E0",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1E57_08F5",
+          "address": "1E57:09DD",
+          "linear": "1EF4D",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0BBE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_SubExclude",
+          "address": "1E57:0BBB",
+          "linear": "1F12B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0B5F",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_SubExclude",
+          "address": "1E57:0B5C",
+          "linear": "1F0CC",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0B51",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_SubExclude",
+          "address": "1E57:0B4E",
+          "linear": "1F0BE",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0D2C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_1E57_0C2D",
+          "address": "1E57:0D29",
+          "linear": "1F299",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0E9A",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_Push",
+          "address": "1E57:0E97",
+          "linear": "1F407",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0E1D",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_Push",
+          "address": "1E57:0E1A",
+          "linear": "1F38A",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1E57:0ECF",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "clip_Pop",
+          "address": "1E57:0ECC",
+          "linear": "1F43C",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "1FD2:0634",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "SetMenuItemState",
+          "address": "1FD2:0631",
+          "linear": "20351",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "205F:0155",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_205F_0004",
+          "address": "205F:0152",
+          "linear": "20742",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "208F:0382",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_208F_0357",
+          "address": "208F:037F",
+          "linear": "20C6F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "208F:051E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_208F_04EE",
+          "address": "208F:051B",
+          "linear": "20E0B",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "root",
+        "site": "20E8:0034",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_LoadWindow",
+          "address": "20E8:0031",
+          "linear": "20EB1",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "20E8:02D2",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_LoadAllWindows",
+          "address": "20E8:02CF",
+          "linear": "2114F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "20E8:0217",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_LoadAllWindows",
+          "address": "20E8:0214",
+          "linear": "21094",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "22BF:0995",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_SetObjBitmap",
+          "address": "22BF:0992",
+          "linear": "23582",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23AE:0016",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_NoWindowsShouldBeLocked",
+          "address": "23AE:0013",
+          "linear": "23AF3",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23AE:01CD",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_23AE_0069",
+          "address": "23AE:01CA",
+          "linear": "23CAA",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23AE:009D",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_23AE_0069",
+          "address": "23AE:009A",
+          "linear": "23B7A",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23AE:0239",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_UnlockWin",
+          "address": "23AE:0236",
+          "linear": "23D16",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23AE:021A",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_UnlockWin",
+          "address": "23AE:0217",
+          "linear": "23CF7",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23E6:0532",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_DrawElevator",
+          "address": "23E6:052F",
+          "linear": "2438F",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23E6:09AD",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "PrevListLine",
+          "address": "23E6:09AA",
+          "linear": "2480A",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "23E6:0B3E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_ProcSliderEvent",
+          "address": "23E6:0B3B",
+          "linear": "2499B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2505:002C",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_2505_0006",
+          "address": "2505:0029",
+          "linear": "25079",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2505:0277",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_WinRectAddr",
+          "address": "2505:0274",
+          "linear": "252C4",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2505:0314",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_ObjAddr",
+          "address": "2505:0311",
+          "linear": "25361",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2505:02F0",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "win_ObjAddr",
+          "address": "2505:02ED",
+          "linear": "2533D",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2662:0186",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "f_2662_0100",
+          "address": "2662:0183",
+          "linear": "267A3",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2662:05FE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "hanim_RemoveAnimObject",
+          "address": "2662:05FB",
+          "linear": "26C1B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2662:084B",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "hanim_HideObject",
+          "address": "2662:0848",
+          "linear": "26E68",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2662:08DD",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "hanim_ShowObject",
+          "address": "2662:08DA",
+          "linear": "26EFA",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2662:097D",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "hanim_SetObjectPos",
+          "address": "2662:097A",
+          "linear": "26F9A",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "root",
+        "site": "2662:0EE6",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "root",
+          "function": "hanim_RenderAnimSet",
+          "address": "2662:0EE3",
+          "linear": "27503",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:039B",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "o09_35F5_0188",
+          "address": "35F5:0398",
+          "linear": "362E8",
+          "instruction": "lcall 0x1c62, 0xc0"
+        },
+        "contiguous_far_pointer_target": "1C62:00C0"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:0120",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "LoadGame",
+          "address": "35F5:011D",
+          "linear": "3606D",
+          "instruction": "lcall 0x1c62, 0xac"
+        },
+        "contiguous_far_pointer_target": "1C62:00AC"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:00AA",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "LoadGame",
+          "address": "35F5:00A7",
+          "linear": "35FF7",
+          "instruction": "lcall 0x1c62, 0xac"
+        },
+        "contiguous_far_pointer_target": "1C62:00AC"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:02A0",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "o09_35F5_0188",
+          "address": "35F5:029D",
+          "linear": "361ED",
+          "instruction": "lcall 0x1c62, 0xac"
+        },
+        "contiguous_far_pointer_target": "1C62:00AC"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:0348",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "o09_35F5_0188",
+          "address": "35F5:0345",
+          "linear": "36295",
+          "instruction": "lcall 0x1c62, 0xac"
+        },
+        "contiguous_far_pointer_target": "1C62:00AC"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:0637",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "FileSelect",
+          "address": "35F5:0634",
+          "linear": "36584",
+          "instruction": "lcall 0x1c62, 0xac"
+        },
+        "contiguous_far_pointer_target": "1C62:00AC"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:0613",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "FileSelect",
+          "address": "35F5:0610",
+          "linear": "36560",
+          "instruction": "lcall 0x1c62, 0xac"
+        },
+        "contiguous_far_pointer_target": "1C62:00AC"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:05D8",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "FileSelect",
+          "address": "35F5:05D5",
+          "linear": "36525",
+          "instruction": "lcall 0x1c62, 0xac"
+        },
+        "contiguous_far_pointer_target": "1C62:00AC"
+      },
+      {
+        "unit": "S09",
+        "site": "35F5:0209",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "o09_35F5_0188",
+          "address": "35F5:0206",
+          "linear": "36156",
+          "instruction": "lcall 0x1c62, 0x415"
+        },
+        "contiguous_far_pointer_target": "1C62:0415"
+      },
+      {
+        "unit": "S09",
+        "site": "36EE:00DC",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S09",
+          "function": "o09_36EE_0092",
+          "address": "36EE:00D9",
+          "linear": "36FB9",
+          "instruction": "lcall 0x1c62, 0x737"
+        },
+        "contiguous_far_pointer_target": "1C62:0737"
+      },
+      {
+        "unit": "S10",
+        "site": "35F5:06A9",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S10",
+          "function": "o10_35F5_0384",
+          "address": "35F5:06A6",
+          "linear": "365F6",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S12",
+        "site": "384C:0C59",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S12",
+          "function": "o12_384C_0B76",
+          "address": "384C:0C59",
+          "linear": "39119",
+          "instruction": "bound bx, dword ptr [si]"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S15",
+        "site": "384C:01BE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S15",
+          "function": "o15_384C_0152",
+          "address": "384C:01BB",
+          "linear": "3867B",
+          "instruction": "lcall 0x1c62, 0xa1"
+        },
+        "contiguous_far_pointer_target": "1C62:00A1"
+      },
+      {
+        "unit": "S15",
+        "site": "384C:01C3",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S15",
+          "function": "o15_384C_0152",
+          "address": "384C:01C0",
+          "linear": "38680",
+          "instruction": "lcall 0x1c62, 0x90"
+        },
+        "contiguous_far_pointer_target": "1C62:0090"
+      },
+      {
+        "unit": "S15",
+        "site": "384C:00C4",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S15",
+          "function": "LoadMonoPats",
+          "address": "384C:00C1",
+          "linear": "38581",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S15",
+        "site": "384C:0051",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S15",
+          "function": "LoadMonoPats",
+          "address": "384C:004E",
+          "linear": "3850E",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S16",
+        "site": "384C:02EA",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S16",
+          "function": "AboutDialog",
+          "address": "384C:02E7",
+          "linear": "387A7",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "S16",
+        "site": "384C:024A",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S16",
+          "function": "AboutDialog",
+          "address": "384C:0247",
+          "linear": "38707",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "S19",
+        "site": "384C:02DE",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S19",
+          "function": "o19_384C_0246",
+          "address": "384C:02DB",
+          "linear": "3879B",
+          "instruction": "lcall 0x1c62, 0xc0"
+        },
+        "contiguous_far_pointer_target": "1C62:00C0"
+      },
+      {
+        "unit": "S19",
+        "site": "384C:0379",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S19",
+          "function": "o19_384C_0320",
+          "address": "384C:0376",
+          "linear": "38836",
+          "instruction": "lcall 0x1c62, 0xc0"
+        },
+        "contiguous_far_pointer_target": "1C62:00C0"
+      },
+      {
+        "unit": "S20",
+        "site": "39C7:00D8",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S20",
+          "function": "o20_39C7_0069",
+          "address": "39C7:00D5",
+          "linear": "39D45",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S20",
+        "site": "39C7:0281",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S20",
+          "function": "o20_39C7_0212",
+          "address": "39C7:027E",
+          "linear": "39EEE",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S20",
+        "site": "39F1:03A1",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S20",
+          "function": "IBMInitStuff",
+          "address": "39F1:039E",
+          "linear": "3A2AE",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S20",
+        "site": "39F1:03CA",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S20",
+          "function": "IBMInitStuff",
+          "address": "39F1:03C7",
+          "linear": "3A2D7",
+          "instruction": "lcall 0x1c62, 0x6dc"
+        },
+        "contiguous_far_pointer_target": "1C62:06DC"
+      },
+      {
+        "unit": "S23",
+        "site": "39C7:01F6",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S23",
+          "function": "win_PrintStyleTextInRect",
+          "address": "39C7:01F3",
+          "linear": "39E63",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      },
+      {
+        "unit": "S26",
+        "site": "39C7:070E",
+        "kind": "direct_far_control_transfer",
+        "instruction_owner": {
+          "unit": "S26",
+          "function": "o26_39C7_0671",
+          "address": "39C7:070B",
+          "linear": "3A37B",
+          "instruction": "lcall 0x1c62, 0xc"
+        },
+        "contiguous_far_pointer_target": "1C62:000C"
+      }
+    ],
+    "selector_frame_relocation_classes": {
+      "direct_far_control_transfer": 149
+    },
+    "raw_near_call_jump_candidates_into_selector_extent": [],
+    "fixed_DS_references_covering_selector": [
+      {
+        "unit": "root",
+        "function": "f_1C62_06A6",
+        "address": "1C62:06C8",
+        "linear": "1CCE8",
+        "instruction": "mov al, byte ptr [0x8ccb]",
+        "access": "read_or_address",
+        "width": 1,
+        "offset": "8CCB"
+      }
+    ],
+    "immediate_8CCB_address_materializations": [],
+    "indexed_DS_stores_with_displacement_within_0200_of_selector": [
+      {
+        "unit": "root",
+        "function": "f_1B28_0006",
+        "address": "1B28:0023",
+        "linear": "1B2A3",
+        "instruction": "mov word ptr [bx - 0x7384], ax",
+        "width": 2,
+        "displacement": "8C7C"
+      },
+      {
+        "unit": "root",
+        "function": "f_1B28_0006",
+        "address": "1B28:0027",
+        "linear": "1B2A7",
+        "instruction": "mov word ptr [bx - 0x7382], dx",
+        "width": 2,
+        "displacement": "8C7E"
+      },
+      {
+        "unit": "root",
+        "function": "f_1B28_0006",
+        "address": "1B28:0039",
+        "linear": "1B2B9",
+        "instruction": "mov word ptr [di - 0x7364], ax",
+        "width": 2,
+        "displacement": "8C9C"
+      },
+      {
+        "unit": "root",
+        "function": "f_1B28_0006",
+        "address": "1B28:003D",
+        "linear": "1B2BD",
+        "instruction": "mov word ptr [di - 0x7362], dx",
+        "width": 2,
+        "displacement": "8C9E"
+      },
+      {
+        "unit": "root",
+        "function": "f_23AE_0069",
+        "address": "23AE:00DD",
+        "linear": "23BBD",
+        "instruction": "inc byte ptr [si - 0x725a]",
+        "width": 1,
+        "displacement": "8DA6"
+      },
+      {
+        "unit": "root",
+        "function": "f_23AE_0069",
+        "address": "23AE:0194",
+        "linear": "23C74",
+        "instruction": "mov word ptr [bx - 0x730e], ax",
+        "width": 2,
+        "displacement": "8CF2"
+      },
+      {
+        "unit": "root",
+        "function": "f_23AE_0069",
+        "address": "23AE:0198",
+        "linear": "23C78",
+        "instruction": "mov word ptr [bx - 0x730c], dx",
+        "width": 2,
+        "displacement": "8CF4"
+      },
+      {
+        "unit": "root",
+        "function": "f_23AE_0069",
+        "address": "23AE:01BB",
+        "linear": "23C9B",
+        "instruction": "inc byte ptr [si - 0x725a]",
+        "width": 1,
+        "displacement": "8DA6"
+      },
+      {
+        "unit": "root",
+        "function": "win_UnlockWin",
+        "address": "23AE:0241",
+        "linear": "23D21",
+        "instruction": "dec byte ptr [bx - 0x725a]",
+        "width": 1,
+        "displacement": "8DA6"
+      },
+      {
+        "unit": "root",
+        "function": "win_UnlockWin",
+        "address": "23AE:031A",
+        "linear": "23DFA",
+        "instruction": "mov word ptr [bx - 0x730c], ax",
+        "width": 2,
+        "displacement": "8CF4"
+      },
+      {
+        "unit": "root",
+        "function": "win_UnlockWin",
+        "address": "23AE:031E",
+        "linear": "23DFE",
+        "instruction": "mov word ptr [bx - 0x730e], ax",
+        "width": 2,
+        "displacement": "8CF2"
+      },
+      {
+        "unit": "root",
+        "function": "f_284A_0199",
+        "address": "284A:01BD",
+        "linear": "2865D",
+        "instruction": "mov word ptr [bx - 0x7228], ax",
+        "width": 2,
+        "displacement": "8DD8"
+      },
+      {
+        "unit": "S24",
+        "function": "ToggleHistButton",
+        "address": "39C7:0116",
+        "linear": "39D86",
+        "instruction": "mov byte ptr [di - 0x73b2], 0",
+        "width": 1,
+        "displacement": "8C4E"
+      },
+      {
+        "unit": "S24",
+        "function": "ToggleHistButton",
+        "address": "39C7:012C",
+        "linear": "39D9C",
+        "instruction": "mov byte ptr [di - 0x73b2], 1",
+        "width": 1,
+        "displacement": "8C4E"
+      },
+      {
+        "unit": "S24",
+        "function": "ToggleHistButton",
+        "address": "39C7:013B",
+        "linear": "39DAB",
+        "instruction": "mov byte ptr [si - 0x73b2], 0",
+        "width": 1,
+        "displacement": "8C4E"
+      },
+      {
+        "unit": "S24",
+        "function": "ToggleHistButton",
+        "address": "39C7:01A0",
+        "linear": "39E10",
+        "instruction": "mov word ptr [bx - 0x73da], di",
+        "width": 2,
+        "displacement": "8C26"
+      }
+    ],
+    "original_harderr_setup_context": [
+      {
+        "address": "39F1:02A9",
+        "instruction": "lcall 0x2cff, 0x2b0a"
+      },
+      {
+        "address": "39F1:02AE",
+        "instruction": "mov ax, 0x58b"
+      },
+      {
+        "address": "39F1:02B1",
+        "instruction": "mov dx, 0x208f"
+      },
+      {
+        "address": "39F1:02B4",
+        "instruction": "push dx"
+      },
+      {
+        "address": "39F1:02B5",
+        "instruction": "push ax"
+      },
+      {
+        "address": "39F1:02B6",
+        "instruction": "lcall 0x29f4, 0x2d88"
+      },
+      {
+        "address": "39F1:02BB",
+        "instruction": "pop bx"
+      }
+    ]
+  },
+  "fresh_whole_runtime_member_binding": {
+    "record": {
+      "library": "llibcr.lib",
+      "member": "dos\\harderr.asm",
+      "module_index": 335,
+      "linear": 183496,
+      "size": 87,
+      "segment": "_TEXT",
+      "member_sha256": "9ce5bb861411a27d8b3db967d3a52a20967eb823be47c58fe67a4b12c4d43b9d",
+      "data_segments": [
+        {
+          "segment": "_DATA",
+          "linear": 383196,
+          "size": 6,
+          "rule": "REFERENCED"
+        }
+      ]
+    },
+    "library_pin": {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    "member_sha256": "9ce5bb861411a27d8b3db967d3a52a20967eb823be47c58fe67a4b12c4d43b9d",
+    "all_segments": [
+      {
+        "index": 1,
+        "name": "_TEXT",
+        "class": "CODE",
+        "length": 87,
+        "alignment_code": 2,
+        "alignment": "word",
+        "combine_code": 2,
+        "combine": "public",
+        "big": false,
+        "use_32bit_offset": false,
+        "frame": null,
+        "offset": null,
+        "overlay_index": 1,
+        "acbp": 72
+      },
+      {
+        "index": 2,
+        "name": "_DATA",
+        "class": "DATA",
+        "length": 6,
+        "alignment_code": 2,
+        "alignment": "word",
+        "combine_code": 2,
+        "combine": "public",
+        "big": false,
+        "use_32bit_offset": false,
+        "frame": null,
+        "offset": null,
+        "overlay_index": 1,
+        "acbp": 72
+      }
+    ],
+    "publics": [
+      {
+        "name": "__hardretn_return",
+        "segment": "_TEXT",
+        "offset": 67
+      },
+      {
+        "name": "__hardresume",
+        "segment": "_TEXT",
+        "offset": 79
+      },
+      {
+        "name": "__oldsp",
+        "segment": "_DATA",
+        "offset": 4
+      },
+      {
+        "name": "__harderr",
+        "segment": "_TEXT",
+        "offset": 0
+      }
+    ],
+    "communals": [],
+    "positive_registered_placement": {
+      "code_extent": 87,
+      "code_matches": true,
+      "bound_code_sha256": "59a5fd9d4833c12bbd9ae0082af509cd5e984ffa48480a74d55e223c7b84a856",
+      "fixup_fields": [
+        {
+          "object_offset": 8,
+          "target": "_DATA",
+          "displacement": 2,
+          "bound_offset": "7DAE",
+          "matches_original": true
+        },
+        {
+          "object_offset": 12,
+          "target": "_DATA",
+          "displacement": 0,
+          "bound_offset": "7DAC",
+          "matches_original": true
+        },
+        {
+          "object_offset": 20,
+          "target": "_TEXT",
+          "displacement": 35,
+          "bound_offset": "2DAB",
+          "matches_original": true
+        },
+        {
+          "object_offset": 47,
+          "target": "__dataseg",
+          "displacement": 0,
+          "bound_offset": "0119",
+          "matches_original": true
+        },
+        {
+          "object_offset": 53,
+          "target": "_DATA",
+          "displacement": 4,
+          "bound_offset": "7DB0",
+          "matches_original": true
+        },
+        {
+          "object_offset": 61,
+          "target": "_DATA",
+          "displacement": 0,
+          "bound_offset": "7DAC",
+          "matches_original": true
+        },
+        {
+          "object_offset": 65,
+          "target": "_DATA",
+          "displacement": 4,
+          "bound_offset": "7DB0",
+          "matches_original": true
+        }
+      ],
+      "different_instruction_operand_fields": []
+    },
+    "negative_oldsp_at_selector": {
+      "code_extent": 87,
+      "code_matches": false,
+      "bound_code_sha256": "5e264bdf4be6f8d4692786bdd05b6fb7ffc2c57a304972f0fdeadcaca775525c",
+      "fixup_fields": [
+        {
+          "object_offset": 8,
+          "target": "_DATA",
+          "displacement": 2,
+          "bound_offset": "8CC9",
+          "matches_original": false
+        },
+        {
+          "object_offset": 12,
+          "target": "_DATA",
+          "displacement": 0,
+          "bound_offset": "8CC7",
+          "matches_original": false
+        },
+        {
+          "object_offset": 20,
+          "target": "_TEXT",
+          "displacement": 35,
+          "bound_offset": "2DAB",
+          "matches_original": true
+        },
+        {
+          "object_offset": 47,
+          "target": "__dataseg",
+          "displacement": 0,
+          "bound_offset": "0119",
+          "matches_original": true
+        },
+        {
+          "object_offset": 53,
+          "target": "_DATA",
+          "displacement": 4,
+          "bound_offset": "8CCB",
+          "matches_original": false
+        },
+        {
+          "object_offset": 61,
+          "target": "_DATA",
+          "displacement": 0,
+          "bound_offset": "8CC7",
+          "matches_original": false
+        },
+        {
+          "object_offset": 65,
+          "target": "_DATA",
+          "displacement": 4,
+          "bound_offset": "8CCB",
+          "matches_original": false
+        }
+      ],
+      "different_instruction_operand_fields": [
+        8,
+        12,
+        53,
+        61,
+        65
+      ]
+    },
+    "data_matches_complete_6_byte_extent": true,
+    "code_relocation_set": [],
+    "actual_callback_slot": "55B3:7DAC..7DB0",
+    "actual_oldsp_slot": "55B3:7DB0..7DB2",
+    "handler_entry": "29F4:2DAB",
+    "complete_original_symbolic_disassembly": [
+      {
+        "address": "29F4:2D88",
+        "instruction": "push bp"
+      },
+      {
+        "address": "29F4:2D89",
+        "instruction": "mov bp, sp"
+      },
+      {
+        "address": "29F4:2D8B",
+        "instruction": "les dx, ptr [bp + 6]"
+      },
+      {
+        "address": "29F4:2D8E",
+        "instruction": "mov word ptr [0x7dae], es"
+      },
+      {
+        "address": "29F4:2D92",
+        "instruction": "mov word ptr [0x7dac], dx"
+      },
+      {
+        "address": "29F4:2D96",
+        "instruction": "push ds"
+      },
+      {
+        "address": "29F4:2D97",
+        "instruction": "mov ax, cs"
+      },
+      {
+        "address": "29F4:2D99",
+        "instruction": "mov ds, ax"
+      },
+      {
+        "address": "29F4:2D9B",
+        "instruction": "mov dx, 0x2dab"
+      },
+      {
+        "address": "29F4:2D9E",
+        "instruction": "mov al, 0x24"
+      },
+      {
+        "address": "29F4:2DA0",
+        "instruction": "mov ah, 0x25"
+      },
+      {
+        "address": "29F4:2DA2",
+        "instruction": "int 0x21"
+      },
+      {
+        "address": "29F4:2DA4",
+        "instruction": "pop ds"
+      },
+      {
+        "address": "29F4:2DA5",
+        "instruction": "xor ax, ax"
+      },
+      {
+        "address": "29F4:2DA7",
+        "instruction": "mov sp, bp"
+      },
+      {
+        "address": "29F4:2DA9",
+        "instruction": "pop bp"
+      },
+      {
+        "address": "29F4:2DAA",
+        "instruction": "retf "
+      },
+      {
+        "address": "29F4:2DAB",
+        "instruction": "push es"
+      },
+      {
+        "address": "29F4:2DAC",
+        "instruction": "push ds"
+      },
+      {
+        "address": "29F4:2DAD",
+        "instruction": "push bp"
+      },
+      {
+        "address": "29F4:2DAE",
+        "instruction": "push di"
+      },
+      {
+        "address": "29F4:2DAF",
+        "instruction": "push si"
+      },
+      {
+        "address": "29F4:2DB0",
+        "instruction": "push dx"
+      },
+      {
+        "address": "29F4:2DB1",
+        "instruction": "push cx"
+      },
+      {
+        "address": "29F4:2DB2",
+        "instruction": "push bx"
+      },
+      {
+        "address": "29F4:2DB3",
+        "instruction": "push ax"
+      },
+      {
+        "address": "29F4:2DB4",
+        "instruction": "mov bx, word ptr cs:[0x119]"
+      },
+      {
+        "address": "29F4:2DB9",
+        "instruction": "mov ds, bx"
+      },
+      {
+        "address": "29F4:2DBB",
+        "instruction": "mov word ptr [0x7db0], sp"
+      },
+      {
+        "address": "29F4:2DBF",
+        "instruction": "push bp"
+      },
+      {
+        "address": "29F4:2DC0",
+        "instruction": "push si"
+      },
+      {
+        "address": "29F4:2DC1",
+        "instruction": "push di"
+      },
+      {
+        "address": "29F4:2DC2",
+        "instruction": "push ax"
+      },
+      {
+        "address": "29F4:2DC3",
+        "instruction": "lcall [0x7dac]"
+      },
+      {
+        "address": "29F4:2DC7",
+        "instruction": "mov sp, word ptr [0x7db0]"
+      },
+      {
+        "address": "29F4:2DCB",
+        "instruction": "add sp, 2"
+      },
+      {
+        "address": "29F4:2DCE",
+        "instruction": "pop bx"
+      },
+      {
+        "address": "29F4:2DCF",
+        "instruction": "pop cx"
+      },
+      {
+        "address": "29F4:2DD0",
+        "instruction": "pop dx"
+      },
+      {
+        "address": "29F4:2DD1",
+        "instruction": "pop si"
+      },
+      {
+        "address": "29F4:2DD2",
+        "instruction": "pop di"
+      },
+      {
+        "address": "29F4:2DD3",
+        "instruction": "pop bp"
+      },
+      {
+        "address": "29F4:2DD4",
+        "instruction": "pop ds"
+      },
+      {
+        "address": "29F4:2DD5",
+        "instruction": "pop es"
+      },
+      {
+        "address": "29F4:2DD6",
+        "instruction": "iret "
+      },
+      {
+        "address": "29F4:2DD7",
+        "instruction": "push bp"
+      },
+      {
+        "address": "29F4:2DD8",
+        "instruction": "mov bp, sp"
+      },
+      {
+        "address": "29F4:2DDA",
+        "instruction": "mov ax, word ptr [bp + 6]"
+      },
+      {
+        "address": "29F4:2DDD",
+        "instruction": "jmp 0x2dc7"
+      }
+    ]
+  },
+  "installed_INT24_closure": {
+    "setup": "IBMInitStuff -> _harderr(f_208F_058B)",
+    "handler": "DOS INT24 -> harderr.asm +35 -> far callback [55B3:7DAC] -> f_208F_058B -> harderr.asm +67 -> IRET",
+    "callback_instructions": [
+      "mov ax, 3",
+      "retf "
+    ],
+    "only_fixed_DGROUP_writes": "_harderr stores callback at 7DAC/7DAE; INT24 stores SP at 7DB0",
+    "selector_reads_or_writes": 0,
+    "calls_to_selector_consumer": 0,
+    "domain": "After successful sole represented registration, callback slot remains the installed handler, without arbitrary memory corruption. Before registration DOS owns INT24."
+  },
+  "minimal_contract": {
+    "direct_view": "signed char near, one byte; fallback indexes 14 far pointers; signed CBW is original",
+    "initial_state": "Original __astart clears [55B3:8B9E,55B3:94F0) before main (retained v18); includes 8CCB",
+    "later_state": "No direct producer; computed alias remains unresolved, so read-only source occurrences do not prove read-only physical storage",
+    "historical_owner_requirement": "A source-functional owner need not recover its historical TU/public/COMDEF; missing historical provenance is separate from this alias/observable-domain gate"
+  },
+  "ordinary_symbolic_consumer_reachability": {
+    "known_source_paths_to_read": [],
+    "known_indirect_target_producers_of_consumer_address": [],
+    "target_producer_exclusion": "All 188 full TUs: function identifier appears only as its definition, including underscore-spelled ASM names. No registration, initializer, argument or call names it. Original: all 149 relocations to its frame are immediate far calls/jumps elsewhere; no relocated address producer names its extent. The raw same-frame near-transfer overapproximation is empty.",
+    "observable_clobber_conclusion": "No known real path reaches this sole read after any prospective alias write. The conditional stores are not demonstrated observable differences.",
+    "general_proof_limit": "This closes ordinary named/symbolic call and pointer production. It does not prove all unchecked computed dispatch or memory-corrupted continuations cannot enter the helper; existing data-as-code/layout gates remain open."
+  },
+  "new_near_indexed_writer_frontier": {
+    "function": "f_284A_0199",
+    "call_closure": "f_284A_0013 -> f_284A_0256 -> f_284A_0199",
+    "producer": "g_7566 = f_284A_0138(10), a signed int from the song object's big-endian header; no source cap",
+    "original_store": "284A:01B9 mov bx,si; 01BB shl bx,1; 01BD mov word ptr [bx-7228h],ax",
+    "base": "55B3:8DD8",
+    "wrapped_selector_store_index": 32633,
+    "wrapped_word_store": "(8DD8 + 2*32633) & FFFF = 8CCA; high byte covers 8CCB",
+    "count_threshold": 32634,
+    "retained_shipped_domain": "v35 pins all 30 supplied SOUND streams at 2..10 tracks with no cursor wrap; an intact load of those streams excludes this count threshold. This is not a shipped-resource counterexample.",
+    "domain_limit": "Conditional arithmetic frontier only outside the intact v35 stream domain. Earlier out-of-bounds stores overwrite other player/CRT state and potentially stack; no execution to index 32633 is asserted. Source has no count cap, and no general all-input/loop-state proof is made."
+  },
+  "unclosed_premises": [
+    "For lock calls with invalid signed high byte, full first-Punt termination under actual /s9 and saved-selector dispatch remains a separate integration/layout gate. Pairing calls alone does not exclude a returning invalid lock.",
+    "For ev->code reread, the reachable decoder resource-height/dimension domain must prevent f_2662_1120 -> selected S00/S01/S03 decoder from overwriting Event.code at 50F6:4A06 before f_218D_000C unlock. 1F2A destination to 4A06 distance is 2ADC.",
+    "The g_5702[0] reread has a bounded prior helper review; a full transitive physical-clobber exclusion is not established.",
+    "New nearby DS-store sweep finds uncapped song count and wrapped g_8DD8[32633] alias; intact supplied v35 streams (2..10 tracks) exclude it. A broader altered/corrupted-resource domain is unclosed, not an executed counterexample.",
+    "Absence of static inbound edges and split segment materializations is not a universal unreachability theorem while unchecked indirect code-as-data, corruptible far-pointer dispatch and their reachable input domain remain unclosed."
+  ],
+  "admission_proposal": "No automatic admission. The directly proven one-byte signed-char view can support a minimal source-functional owner only within a root-reviewed consumer/writer domain. Historical TU/COMDEF provenance alone is not an obstacle. This receipt alone does not prove universal dead-consumer or physical-write closure; no known post-write read path is asserted."
+}

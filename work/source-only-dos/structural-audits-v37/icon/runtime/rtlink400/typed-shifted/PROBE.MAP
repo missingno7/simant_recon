@@ -1,0 +1,281 @@
+
+ Start  Stop   Length Name                   Class               Group
+ 00000H 00000H 00000H SHIFT_TEXT             CODE
+ 00000H 00233H 00234H MAIN_TEXT              CODE
+ 00234H 00234H 00000H OWN_TEXT               CODE
+ 00234H 01283H 01050H _TEXT                  CODE
+ 01290H 01291H 00002H EMULATOR_TEXT          CODE
+ 01292H 01292H 00000H C_ETEXT                ENDCODE
+ 012A0H 013A0H 00101H SHIFT5_DATA            FAR_DATA
+ 013B0H 014B7H 00108H MAIN5_DATA             FAR_DATA
+ 014C0H 014C0H 00000H EMULATOR_DATA          FAR_DATA
+ 014C0H 014C3H 00004H FAR_BSS                FAR_BSS
+ 014D0H 01511H 00042H NULL                   BEGDATA             DGROUP
+ 01512H 018F1H 003E0H _DATA                  DATA                DGROUP
+ 018F2H 018F3H 00002H XIQC                   DATA                DGROUP
+ 018F4H 01901H 0000EH DBDATA                 DATA                DGROUP
+ 01902H 0190FH 0000EH CDATA                  DATA                DGROUP
+ 01910H 01910H 00000H XIFB                   DATA                DGROUP
+ 01910H 01910H 00000H XIF                    DATA                DGROUP
+ 01910H 01910H 00000H XIFE                   DATA                DGROUP
+ 01910H 01910H 00000H XIB                    DATA                DGROUP
+ 01910H 01910H 00000H XI                     DATA                DGROUP
+ 01910H 01910H 00000H XIE                    DATA                DGROUP
+ 01910H 01910H 00000H XPB                    DATA                DGROUP
+ 01910H 01913H 00004H XP                     DATA                DGROUP
+ 01914H 01914H 00000H XPE                    DATA                DGROUP
+ 01914H 01914H 00000H XCB                    DATA                DGROUP
+ 01914H 01914H 00000H XC                     DATA                DGROUP
+ 01914H 01914H 00000H XCE                    DATA                DGROUP
+ 01914H 01914H 00000H XCFB                   DATA                DGROUP
+ 01914H 01914H 00000H XCF                    DATA                DGROUP
+ 01914H 01914H 00000H XCFE                   DATA                DGROUP
+ 01914H 01917H 00004H CONST                  CONST               DGROUP
+ 01918H 0191FH 00008H HDR                    MSG                 DGROUP
+ 01920H 019F5H 000D6H MSG                    MSG                 DGROUP
+ 019F6H 019F7H 00002H PAD                    MSG                 DGROUP
+ 019F8H 019F8H 00001H EPAD                   MSG                 DGROUP
+ 019FAH 019FAH 00000H _BSS                   BSS                 DGROUP
+ 019FAH 019FAH 00000H XOB                    BSS                 DGROUP
+ 019FAH 019FAH 00000H XO                     BSS                 DGROUP
+ 019FAH 019FAH 00000H XOE                    BSS                 DGROUP
+ 01A00H 01BFFH 00200H c_common               BSS                 DGROUP
+ 01C00H 023FFH 00800H STACK                  STACK               DGROUP
+
+ Section# Fname          Faddr  Maddr  Size   Father   Section Name
+    1H    PROBE.EXE      00200H 00000H 02400H    0H
+
+ Origin   Group
+ 014D:0   DGROUP
+
+  Address         Publics by Name
+
+ 0023:0014       $$MAIN
+ 014D:0206       STKHQQ
+ 0000:0000       _derive
+ 014D:052A       _edata
+ 014D:0730       _end
+ 014D:01ED       _environ
+ 014D:01C4       _errno
+ 0023:01D9       _exit
+ 014C:0000       _fd_50F6_46D2
+ 0023:09D2       _fflush
+ 013B:0100       _fixtureMaster
+ 013B:0104       _fixtureMaster2
+ 013B:0000       _fixturePixelsA
+ 013B:0080       _fixturePixelsB
+ 012A:0000       _fixtureShift
+ 0023:0A52       _flushall
+ 0023:0638       _fwrite
+ 0023:0AA6       _lseek
+ 0000:001C       _main
+ 0023:0C94       _malloc
+ 0023:0FF6       _memcpy
+ 0023:0F6C       _puts
+ 0023:0C80       _stackavail
+ 0023:0F54       _strlen
+ 0023:0B20       _write
+ 014D:0202       __aaltstkovr
+ 014D:01A8       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 014D:01FE       __adbgmsg
+ 014D:018C       __aexit_rtn
+ 0023:02C4       __aFchkstk
+ 0000:1000  Abs  __AHINCR
+ 0000:000C  Abs  __AHSHIFT
+ 014D:01B6       __aintdiv
+ 014D:0420       __amblksiz
+ 0023:00EF       __amsg_exit
+ 014D:0042       __anullsize
+ 014D:01A4       __aseghi
+ 014D:01A6       __aseglo
+ 014D:018E       __asizds
+ 0023:0014       __astart
+ 014D:018A       __atopsp
+ 014D:0530       __bufin
+ 0023:01E8       __cexit
+ 014D:0220       __cflush
+ 014D:01F6       __child
+ 0023:02C4       __chkstk
+ 0023:0114       __cinit
+ 0023:00DF       __cintDIV
+ 0023:025C       __ctermsub
+ 0023:01F2       __c_exit
+ 0023:0111       __dataseg
+ 014D:01CF       __doserrno
+ 0023:05E2       __dosret0
+ 0023:05F7       __dosretax
+ 0023:05EA       __dosreturn
+ 014D:01CC       __dosvermajor
+ 014D:01CD       __dosverminor
+ 0129:0000       __EmDataSeg
+ 0023:01E0       __exit
+ 014D:01BA       __fac
+ 0023:0C9A       __ffree
+ 0023:029C       __FF_MSGBANNER
+ 014D:0412       __fheap
+ 0023:0EF0       __findlast
+ 0023:07D0       __flsbuf
+ 0023:0CAD       __fmalloc
+ 014D:0434       __fpinit
+ 0023:02BE       __fptrap
+ 0023:0989       __ftbuf
+ 0023:08BC       __getbuf
+ 0023:0E10       __growseg
+ 0023:0E9F       __incseg
+ 0023:0D2A       __initseg
+ 014D:01F9       __intno
+ 014D:0222       __iob
+ 014D:0312       __iob2
+ 014D:0402       __lastiob
+ 0023:0D5E       __linkseg
+ 0023:0604       __maperror
+ 0023:05BC       __myalloc
+ 0023:0F10       __newseg
+ 014D:01D1       __nfile
+ 014D:0190       __nheap_desc
+ 0023:055A       __NMSG_TEXT
+ 0023:0585       __NMSG_WRITE
+ 0023:02E8       __nullcheck
+ 014D:01CF       __oserr
+ 014D:01D3       __osfile
+ 014D:01CC       __osmajor
+ 014D:01CD       __osminor
+ 014D:01CE       __osmode
+ 014D:01CC       __osversion
+ 014D:01F8       __ovlflag
+ 014D:01FA       __ovlvec
+ 014D:01F1       __pgmptr
+ 014D:01CA       __psp
+ 014D:01C8       __pspadr
+ 0023:0D94       __searchseg
+ 0023:030C       __setargv
+ 0023:04BA       __setenvp
+ 0023:0908       __stbuf
+ 014D:01C6       __umaskval
+ 014D:042A       ___aDBexit
+ 014D:0430       ___aDBptrchk
+ 014D:0428       ___aDBrterr
+ 014D:0426       ___aDBswpchk
+ 014D:0424       ___aDBswpflg
+ 014D:01E7       ___argc
+ 014D:01E9       ___argv
+ 014D:0422       ___qczrinit
+
+  Address         Publics by Value
+
+ 0000:0000       _derive
+ 0000:000C  Abs  __AHSHIFT
+ 0000:1000  Abs  __AHINCR
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0000:001C       _main
+ 0023:0014       $$MAIN
+ 0023:0014       __astart
+ 0023:00DF       __cintDIV
+ 0023:00EF       __amsg_exit
+ 0023:0111       __dataseg
+ 0023:0114       __cinit
+ 0023:01D9       _exit
+ 0023:01E0       __exit
+ 0023:01E8       __cexit
+ 0023:01F2       __c_exit
+ 0023:025C       __ctermsub
+ 0023:029C       __FF_MSGBANNER
+ 0023:02BE       __fptrap
+ 0023:02C4       __aFchkstk
+ 0023:02C4       __chkstk
+ 0023:02E8       __nullcheck
+ 0023:030C       __setargv
+ 0023:04BA       __setenvp
+ 0023:055A       __NMSG_TEXT
+ 0023:0585       __NMSG_WRITE
+ 0023:05BC       __myalloc
+ 0023:05E2       __dosret0
+ 0023:05EA       __dosreturn
+ 0023:05F7       __dosretax
+ 0023:0604       __maperror
+ 0023:0638       _fwrite
+ 0023:07D0       __flsbuf
+ 0023:08BC       __getbuf
+ 0023:0908       __stbuf
+ 0023:0989       __ftbuf
+ 0023:09D2       _fflush
+ 0023:0A52       _flushall
+ 0023:0AA6       _lseek
+ 0023:0B20       _write
+ 0023:0C80       _stackavail
+ 0023:0C94       _malloc
+ 0023:0C9A       __ffree
+ 0023:0CAD       __fmalloc
+ 0023:0D2A       __initseg
+ 0023:0D5E       __linkseg
+ 0023:0D94       __searchseg
+ 0023:0E10       __growseg
+ 0023:0E9F       __incseg
+ 0023:0EF0       __findlast
+ 0023:0F10       __newseg
+ 0023:0F54       _strlen
+ 0023:0F6C       _puts
+ 0023:0FF6       _memcpy
+ 0129:0000       __EmDataSeg
+ 012A:0000       _fixtureShift
+ 013B:0000       _fixturePixelsA
+ 013B:0080       _fixturePixelsB
+ 013B:0100       _fixtureMaster
+ 013B:0104       _fixtureMaster2
+ 014C:0000       _fd_50F6_46D2
+ 014D:0042       __anullsize
+ 014D:018A       __atopsp
+ 014D:018C       __aexit_rtn
+ 014D:018E       __asizds
+ 014D:0190       __nheap_desc
+ 014D:01A4       __aseghi
+ 014D:01A6       __aseglo
+ 014D:01A8       __acfinfo
+ 014D:01B6       __aintdiv
+ 014D:01BA       __fac
+ 014D:01C4       _errno
+ 014D:01C6       __umaskval
+ 014D:01C8       __pspadr
+ 014D:01CA       __psp
+ 014D:01CC       __dosvermajor
+ 014D:01CC       __osmajor
+ 014D:01CC       __osversion
+ 014D:01CD       __dosverminor
+ 014D:01CD       __osminor
+ 014D:01CE       __osmode
+ 014D:01CF       __doserrno
+ 014D:01CF       __oserr
+ 014D:01D1       __nfile
+ 014D:01D3       __osfile
+ 014D:01E7       ___argc
+ 014D:01E9       ___argv
+ 014D:01ED       _environ
+ 014D:01F1       __pgmptr
+ 014D:01F6       __child
+ 014D:01F8       __ovlflag
+ 014D:01F9       __intno
+ 014D:01FA       __ovlvec
+ 014D:01FE       __adbgmsg
+ 014D:0202       __aaltstkovr
+ 014D:0206       STKHQQ
+ 014D:0220       __cflush
+ 014D:0222       __iob
+ 014D:0312       __iob2
+ 014D:0402       __lastiob
+ 014D:0412       __fheap
+ 014D:0420       __amblksiz
+ 014D:0422       ___qczrinit
+ 014D:0424       ___aDBswpflg
+ 014D:0426       ___aDBswpchk
+ 014D:0428       ___aDBrterr
+ 014D:042A       ___aDBexit
+ 014D:0430       ___aDBptrchk
+ 014D:0434       __fpinit
+ 014D:052A       _edata
+ 014D:0530       __bufin
+ 014D:0730       _end

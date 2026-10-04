@@ -1,0 +1,356 @@
+{
+  "schema": "dos-icon-independent-counterreview-v37",
+  "status": "MINIMUM_FOUR_BYTE_MUTABLE_VIEW_SUPPORTED_WITH_MANDATORY_OPEN_GATES",
+  "admitted": false,
+  "historical_owner_admitted": false,
+  "definition": "char far * far * far fd_50F6_46D2;",
+  "scope_supported": [
+    "Four-byte mutable far cell-pointer access view",
+    "Initial null representation for slot only",
+    "Consumer-required second far-pointer load and byte stride",
+    "Source-built fixture ABI and shifted symbolic references"
+  ],
+  "scope_rejected": [
+    "Historical declaration/defining TU/maximal extent/layout/order",
+    "Valid game cell or payload ownership/lifetime/extent",
+    "Producer/resource/allocator/lock/unhook identity",
+    "Safe null dereference, permanent zero or helper deadness",
+    "Computed alias/indirect activation closure",
+    "Preserved historical menu cross-owner effects",
+    "Game execution, standalone build or freeze"
+  ],
+  "mandatory_open_gates": [
+    "menu-table-cross-owner-layout",
+    "icon-handle-computed-alias-and-activation",
+    "cell-and-payload-lifetime-and-extent-if-pointer-load-branch-activated"
+  ],
+  "fresh_independent_checks": {
+    "whole_consumer_objects_rebound": 5,
+    "baseline_and_array_one": {
+      "claims": 24,
+      "extent_bytes": 1415,
+      "private_data_fixups_relocations_order": "PASS"
+    },
+    "contrasts": {
+      "rawfar": "FAIL both consumers; -3 bytes each",
+      "near_cell": "FAIL both consumers; -2 bytes each",
+      "word_payload": "FAIL both consumers; +0 bytes; one shift operand each"
+    },
+    "nondebug_OMF_models_reopened": 13,
+    "provider_COMDEF_bytes": 4,
+    "provider_material_segment_bytes": 0,
+    "provider_fixups": 0,
+    "raw_runtime_maps_logs_MZ_checks": 12,
+    "linked_object_and_library_copy_checks": 50,
+    "shifted_root_map": [
+      "013B:0000",
+      "014C:0000"
+    ],
+    "original_FAR_BSS_bytes": 19408,
+    "original_FAR_BSS_zero": true,
+    "original_slot_bytes": 4,
+    "original_slot_zero": true,
+    "original_slot_overlapping_relocations": 0,
+    "fresh_original_scan_equal_retained": true,
+    "original_function_rows": 1730,
+    "original_units": 29,
+    "observed_fixed_reads": 2,
+    "observed_external_inbound_direct_relocated_pointer_vectors": [
+      0,
+      0,
+      0
+    ],
+    "inbound_positive_control_direct_pointer_object_fixups": [
+      21,
+      21,
+      21
+    ]
+  },
+  "integrity": {
+    "stable_retained_transitive_pins": 733,
+    "drifted_pins": 1,
+    "drift": {
+      "path": "build/source-only-dos-v36/build-report.json",
+      "retained_sha256": "1146ef1d38dd220985544f52ca6f6b22417df39919a204f140c4c6f2cd3564eb",
+      "current_sha256": "2b6b24a4ade222f82cfd4665f4cf15ce77bedc5388fa969fe5c828f41a127151",
+      "retained_and_current_size": 19524587,
+      "cause": "Parent v36 preflight rerun; original retained report bytes unavailable in v37",
+      "worker_receipts_repinned": false
+    },
+    "current_report_source_object_join_matches": 190,
+    "current_report_source_object_join_mismatches": 0,
+    "unmodified_verify_v37": "FAIL at report identity; stable raw checks independently PASS",
+    "candidate_index_present": false
+  },
+  "pins": [
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/proposal-v37.json",
+      "size": 4974,
+      "sha256": "de01ae1a1fc6666787a67848af6edeaec53846064f2374b4b1f8a11f5f44885d"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/review-v37.md",
+      "size": 6585,
+      "sha256": "67afab77c31793163884c17908df988b3e1b0b64ea6a83caf74d53d7122411b3"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/verify_v37.py",
+      "size": 5394,
+      "sha256": "c0ab4d59f9ce3a68bd53c232e1998992fb2c5e7b1b60701db611f71e4065bb7e"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/audit_v37.py",
+      "size": 10219,
+      "sha256": "c525b3185a259604763ffbc8eea1b29293fe4b8a74d8e6817ca6d4f3eced74d3"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime_v37.py",
+      "size": 10789,
+      "sha256": "00c37658b70ac3f9b2cf1c7d331106bb1e3542dc1ef4d6d77977ae1cf0d413c9"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/audit-facts.json",
+      "size": 511134,
+      "sha256": "c80a590b3a9681b1997d0ef4d18f4e31496dfc203ef8948e0d4f52160e47774f"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/runtime-facts.json",
+      "size": 144130,
+      "sha256": "12dea2bc6f09e135404e4acc96f7505fbbaa0ab5b691ad6a644d9296c2589d13"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/icon-functional-provider.c",
+      "size": 36,
+      "sha256": "fd8000b7374d62d1c7e6b0ad48a9053dd25ea7e21630b666b1b1c3c85e84b978"
+    },
+    {
+      "path": "D:/Prog/simant_recon/layout/manifest.json",
+      "size": 628980,
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    {
+      "path": "D:/Prog/simant_recon/layout/toolchain.json",
+      "size": 39241,
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+    },
+    {
+      "path": "D:/Prog/simant_recon/src/root/m208F.c",
+      "size": 6853,
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e"
+    },
+    {
+      "path": "D:/Prog/simant_recon/src/root/m1FD2.c",
+      "size": 10086,
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8"
+    },
+    {
+      "path": "D:/Prog/simant_recon/src/root/m205F.c",
+      "size": 6015,
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+    },
+    {
+      "path": "D:/Prog/simant_recon/src/root/m1B28.c",
+      "size": 2422,
+      "sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343"
+    },
+    {
+      "path": "D:/Prog/simant_recon/src/root/m171C.c",
+      "size": 26452,
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+    },
+    {
+      "path": "D:/Prog/simant_recon/work/source-only-dos/structural-audits-v33/root/root-inbound.json",
+      "size": 54616,
+      "sha256": "024a4d02d6f2b7feea490d8f10198ccbd57ceb64f2cd5ea0cfc9af06ace49c6a"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/source-only-dos-v36/build-report.json",
+      "size": 19524587,
+      "sha256": "2b6b24a4ade222f82cfd4665f4cf15ce77bedc5388fa969fe5c828f41a127151"
+    },
+    {
+      "path": "D:/Prog/simant_recon/build/workers/dos_icon_counterreview_v37/review-v37.md",
+      "size": 4987,
+      "sha256": "9d3ff9306976c28b27f4d7145c6d50fa98093d0137efc205779ce1db24c11050"
+    }
+  ],
+  "consumer_provider_artifacts": [
+    {
+      "label": "m208F_baseline",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_baseline.c",
+        "size": 7156,
+        "sha256": "919cc85e604f47095de30c37b3b5112c5f92106395a19822e5aeea000cbcd618"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_baseline.obj",
+        "size": 3282,
+        "sha256": "71af35ba7efd78f9e98a7f06af5a1a65e3bcbba069157b0eaafd93f18693bbc2"
+      }
+    },
+    {
+      "label": "m208F_rawfar",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_rawfar.c",
+        "size": 7145,
+        "sha256": "09d450e40c4602bbe873a9207544bdcd61108bf457095cf38af5c4e20ad26445"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_rawfar.obj",
+        "size": 3284,
+        "sha256": "f9dbf31c5c07b935b5bc02dd942f490133c06465b169d7ca03a6ec25db60ea09"
+      }
+    },
+    {
+      "label": "m208F_near_cell",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_near_cell.c",
+        "size": 7157,
+        "sha256": "015320091e2806998613a27d3caf5cf3136974b482870cd729b87412d239176e"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_near_cell.obj",
+        "size": 3278,
+        "sha256": "8537871797e8fb1d83465b9b319a739a511edcaedf6c021975f8088c879207ef"
+      }
+    },
+    {
+      "label": "m208F_word_payload",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_word_payload.c",
+        "size": 7155,
+        "sha256": "7929c8705a8a65a89c969d25943149c864452a6a62c22f4f494dbc67166382f9"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_word_payload.obj",
+        "size": 3282,
+        "sha256": "5ddc930587be9ca4f625b87ac488eb23ab3a2a8aa3314b458e562d2f32c84b2a"
+      }
+    },
+    {
+      "label": "m208F_array_one",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_array_one.c",
+        "size": 7174,
+        "sha256": "b196c38fd8c8569d0297019041f3bf214e878df8335b29bbed02405139c8a8f7"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/m208F_array_one.obj",
+        "size": 3282,
+        "sha256": "71af35ba7efd78f9e98a7f06af5a1a65e3bcbba069157b0eaafd93f18693bbc2"
+      }
+    },
+    {
+      "label": "icon-functional-provider",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/icon-functional-provider.c",
+        "size": 36,
+        "sha256": "fd8000b7374d62d1c7e6b0ad48a9053dd25ea7e21630b666b1b1c3c85e84b978"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/icon-functional-provider.obj",
+        "size": 205,
+        "sha256": "a25f87bcb562dffe2571c5e0e3a7dbb133b68dc60eaa6cfde085e5d6450a9df5"
+      }
+    },
+    {
+      "label": "provider_typedef",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_typedef.c",
+        "size": 59,
+        "sha256": "14af94bc6d0525d8e2f81098dd11eb34985855b24c6107fe084a9c87973c85be"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_typedef.obj",
+        "size": 205,
+        "sha256": "a25f87bcb562dffe2571c5e0e3a7dbb133b68dc60eaa6cfde085e5d6450a9df5"
+      }
+    },
+    {
+      "label": "provider_rawfar",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_rawfar.c",
+        "size": 30,
+        "sha256": "900ce3314b8158d2f4f8b722ab8f0c8a456f1d74e343e0a275b50d53f99f9a74"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_rawfar.obj",
+        "size": 205,
+        "sha256": "a25f87bcb562dffe2571c5e0e3a7dbb133b68dc60eaa6cfde085e5d6450a9df5"
+      }
+    },
+    {
+      "label": "provider_unsigned_long",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_unsigned_long.c",
+        "size": 33,
+        "sha256": "3c97e2bd983cf6f4458403046446871e46c8faf3f71918047735d6db2bc674ef"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_unsigned_long.obj",
+        "size": 205,
+        "sha256": "a25f87bcb562dffe2571c5e0e3a7dbb133b68dc60eaa6cfde085e5d6450a9df5"
+      }
+    },
+    {
+      "label": "provider_near_handle",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_near_handle.c",
+        "size": 37,
+        "sha256": "b0f62c2555a25c7dfbb6cc30b524a6e2af0e8037fa047d446a7f29d8d83a541e"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_near_handle.obj",
+        "size": 205,
+        "sha256": "e42f5ddf3825420f22b28f70dcbdab5c2f284f62f0c7595cacf4d48028f498a6"
+      }
+    },
+    {
+      "label": "provider_two_handles",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_two_handles.c",
+        "size": 39,
+        "sha256": "8823bd5925ef05580f58bbdb88f8d4cd871138bca1c6d1b5e96428202504874e"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_two_handles.obj",
+        "size": 205,
+        "sha256": "969fd115fcba4358ff4a15e39d55bf70c5b988a64d831814c7f64eed2d86fcf9"
+      }
+    },
+    {
+      "label": "provider_explicit_zero",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_explicit_zero.c",
+        "size": 40,
+        "sha256": "cdfd647db277e0e7225744f5aa681f3faf2167d6684dc397501aa354f056b28c"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_explicit_zero.obj",
+        "size": 247,
+        "sha256": "e615068137ed8040ad9106eb5f44554da0dc4645e3f27616734fc5963fb7ab3b"
+      }
+    },
+    {
+      "label": "provider_nonzero",
+      "source": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_nonzero.c",
+        "size": 91,
+        "sha256": "1ef197375a2802a277c3ceee7fe31361f9f739a4817068858cc6b246032eefcd"
+      },
+      "object": {
+        "path": "D:/Prog/simant_recon/build/workers/dos_icon_minimum_v37/provider_nonzero.obj",
+        "size": 275,
+        "sha256": "00ea62a11fe7f7dd821c9462d67b053e55bd69a5e53d1620e5a879d0e3de8184"
+      }
+    }
+  ],
+  "actions": {
+    "writes": "Own counterreview scratch receipt and prose only",
+    "canonical_production_work_Git_mutations": 0,
+    "promotion": false,
+    "full_validate": false,
+    "compile_link_run": false,
+    "original_bytes_serialized": 0
+  }
+}

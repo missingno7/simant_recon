@@ -1,0 +1,211 @@
+
+ Start  Stop   Length Name                   Class               Group
+ 00000H 0000DH 0000EH MAIN_TEXT              CODE
+ 0000EH 00887H 0087AH _TEXT                  CODE
+ 00890H 00891H 00002H EMULATOR_TEXT          CODE
+ 00892H 00892H 00000H C_ETEXT                ENDCODE
+ 008A0H 008A0H 00000H EMULATOR_DATA          FAR_DATA
+ 008A0H 008E1H 00042H NULL                   BEGDATA             DGROUP
+ 008E2H 0096FH 0008EH _DATA                  DATA                DGROUP
+ 00970H 00971H 00002H XIQC                   DATA                DGROUP
+ 00972H 0097FH 0000EH DBDATA                 DATA                DGROUP
+ 00980H 0098DH 0000EH CDATA                  DATA                DGROUP
+ 0098EH 0098EH 00000H XIFB                   DATA                DGROUP
+ 0098EH 0098EH 00000H XIF                    DATA                DGROUP
+ 0098EH 0098EH 00000H XIFE                   DATA                DGROUP
+ 0098EH 0098EH 00000H XIB                    DATA                DGROUP
+ 0098EH 0098EH 00000H XI                     DATA                DGROUP
+ 0098EH 0098EH 00000H XIE                    DATA                DGROUP
+ 0098EH 0098EH 00000H XPB                    DATA                DGROUP
+ 0098EH 0098EH 00000H XP                     DATA                DGROUP
+ 0098EH 0098EH 00000H XPE                    DATA                DGROUP
+ 0098EH 0098EH 00000H XCB                    DATA                DGROUP
+ 0098EH 0098EH 00000H XC                     DATA                DGROUP
+ 0098EH 0098EH 00000H XCE                    DATA                DGROUP
+ 0098EH 0098EH 00000H XCFB                   DATA                DGROUP
+ 0098EH 0098EH 00000H XCF                    DATA                DGROUP
+ 0098EH 0098EH 00000H XCFE                   DATA                DGROUP
+ 0098EH 0098EH 00000H CONST                  CONST               DGROUP
+ 0098EH 00995H 00008H HDR                    MSG                 DGROUP
+ 00996H 00A6BH 000D6H MSG                    MSG                 DGROUP
+ 00A6CH 00A6DH 00002H PAD                    MSG                 DGROUP
+ 00A6EH 00A6EH 00001H EPAD                   MSG                 DGROUP
+ 00A70H 00A70H 00000H _BSS                   BSS                 DGROUP
+ 00A70H 00A70H 00000H XOB                    BSS                 DGROUP
+ 00A70H 00A70H 00000H XO                     BSS                 DGROUP
+ 00A70H 00A70H 00000H XOE                    BSS                 DGROUP
+ 00A70H 0126FH 00800H STACK                  STACK               DGROUP
+
+ Section# Fname          Faddr  Maddr  Size   Father   Section Name
+    1H    PROBE.EXE      00200H 00000H 01270H    0H
+
+ Origin   Group
+ 008A:0   DGROUP
+
+  Address         Publics by Name
+
+ 0000:001E       $$MAIN
+ 008A:01D0       _edata
+ 008A:01D0       _end
+ 008A:00A7       _environ
+ 008A:007E       _errno
+ 0000:01E3       _exit
+ 0000:0000       _main
+ 0000:05C8       _malloc
+ 008A:0042       _probe
+ 008A:0062       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 008A:00B8       __adbgmsg
+ 008A:0046       __aexit_rtn
+ 008A:0070       __aintdiv
+ 008A:00CE       __amblksiz
+ 0000:00F9       __amsg_exit
+ 008A:0042       __anullsize
+ 008A:005E       __aseghi
+ 008A:0060       __aseglo
+ 008A:0048       __asizds
+ 0000:001E       __astart
+ 008A:0044       __atopsp
+ 0000:01F2       __cexit
+ 008A:00B0       __child
+ 0000:011E       __cinit
+ 0000:00E9       __cintDIV
+ 0000:0266       __ctermsub
+ 0000:01FC       __c_exit
+ 0000:011B       __dataseg
+ 008A:0089       __doserrno
+ 008A:0086       __dosvermajor
+ 008A:0087       __dosverminor
+ 008A:01D0       __edata
+ 0089:0000       __EmDataSeg
+ 008A:01D0       __end
+ 0000:01EA       __exit
+ 008A:0074       __fac
+ 0000:05CE       __ffree
+ 0000:02A6       __FF_MSGBANNER
+ 008A:00C0       __fheap
+ 0000:0824       __findlast
+ 0000:05E1       __fmalloc
+ 008A:00E2       __fpinit
+ 0000:02C8       __fptrap
+ 0000:0744       __growseg
+ 0000:07D3       __incseg
+ 0000:065E       __initseg
+ 008A:00B3       __intno
+ 0000:0692       __linkseg
+ 0000:05A2       __myalloc
+ 0000:0844       __newseg
+ 008A:008B       __nfile
+ 008A:004A       __nheap_desc
+ 0000:0540       __NMSG_TEXT
+ 0000:056B       __NMSG_WRITE
+ 0000:02CE       __nullcheck
+ 008A:0089       __oserr
+ 008A:008D       __osfile
+ 008A:0086       __osmajor
+ 008A:0087       __osminor
+ 008A:0088       __osmode
+ 008A:0086       __osversion
+ 008A:00B2       __ovlflag
+ 008A:00B4       __ovlvec
+ 008A:00AB       __pgmptr
+ 008A:0084       __psp
+ 008A:0082       __pspadr
+ 0000:06C8       __searchseg
+ 0000:02F2       __setargv
+ 0000:04A0       __setenvp
+ 008A:0080       __umaskval
+ 008A:00D8       ___aDBexit
+ 008A:00DE       ___aDBptrchk
+ 008A:00D6       ___aDBrterr
+ 008A:00D4       ___aDBswpchk
+ 008A:00D2       ___aDBswpflg
+ 008A:00A1       ___argc
+ 008A:00A3       ___argv
+ 008A:00D0       ___qczrinit
+
+  Address         Publics by Value
+
+ 0000:0000       _main
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0000:001E       $$MAIN
+ 0000:001E       __astart
+ 0000:00E9       __cintDIV
+ 0000:00F9       __amsg_exit
+ 0000:011B       __dataseg
+ 0000:011E       __cinit
+ 0000:01E3       _exit
+ 0000:01EA       __exit
+ 0000:01F2       __cexit
+ 0000:01FC       __c_exit
+ 0000:0266       __ctermsub
+ 0000:02A6       __FF_MSGBANNER
+ 0000:02C8       __fptrap
+ 0000:02CE       __nullcheck
+ 0000:02F2       __setargv
+ 0000:04A0       __setenvp
+ 0000:0540       __NMSG_TEXT
+ 0000:056B       __NMSG_WRITE
+ 0000:05A2       __myalloc
+ 0000:05C8       _malloc
+ 0000:05CE       __ffree
+ 0000:05E1       __fmalloc
+ 0000:065E       __initseg
+ 0000:0692       __linkseg
+ 0000:06C8       __searchseg
+ 0000:0744       __growseg
+ 0000:07D3       __incseg
+ 0000:0824       __findlast
+ 0000:0844       __newseg
+ 0089:0000       __EmDataSeg
+ 008A:0042       _probe
+ 008A:0042       __anullsize
+ 008A:0044       __atopsp
+ 008A:0046       __aexit_rtn
+ 008A:0048       __asizds
+ 008A:004A       __nheap_desc
+ 008A:005E       __aseghi
+ 008A:0060       __aseglo
+ 008A:0062       __acfinfo
+ 008A:0070       __aintdiv
+ 008A:0074       __fac
+ 008A:007E       _errno
+ 008A:0080       __umaskval
+ 008A:0082       __pspadr
+ 008A:0084       __psp
+ 008A:0086       __dosvermajor
+ 008A:0086       __osmajor
+ 008A:0086       __osversion
+ 008A:0087       __dosverminor
+ 008A:0087       __osminor
+ 008A:0088       __osmode
+ 008A:0089       __doserrno
+ 008A:0089       __oserr
+ 008A:008B       __nfile
+ 008A:008D       __osfile
+ 008A:00A1       ___argc
+ 008A:00A3       ___argv
+ 008A:00A7       _environ
+ 008A:00AB       __pgmptr
+ 008A:00B0       __child
+ 008A:00B2       __ovlflag
+ 008A:00B3       __intno
+ 008A:00B4       __ovlvec
+ 008A:00B8       __adbgmsg
+ 008A:00C0       __fheap
+ 008A:00CE       __amblksiz
+ 008A:00D0       ___qczrinit
+ 008A:00D2       ___aDBswpflg
+ 008A:00D4       ___aDBswpchk
+ 008A:00D6       ___aDBrterr
+ 008A:00D8       ___aDBexit
+ 008A:00DE       ___aDBptrchk
+ 008A:00E2       __fpinit
+ 008A:01D0       _edata
+ 008A:01D0       _end
+ 008A:01D0       __edata
+ 008A:01D0       __end

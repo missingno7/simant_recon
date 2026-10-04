@@ -1,0 +1,135 @@
+win_LoadWindow  root:20E8:0001  linear 20E81  size 320  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 20E8: function 2/17; neighbours: f_20E8_0000, win_LoadAllWindows, win_Swap
+  frame: {'frame': 'bp', 'locals': 28, 'stack_check': False}
+  win16: _win_LoadWindow [MEDIUM] string "cannot load window %03x"
+  0001  push bp
+  0002  mov bp, sp
+  0004  sub sp, 0x1c
+  0007  push di
+  0008  push si
+  0009  mov ax, 1
+  000C  push ax
+  000D  sub ax, ax
+  000F  push ax
+  0010  mov al, byte ptr [bp + 7]
+  0013  cwde
+  0014  mov word ptr [bp - 0x18], ax
+  0017  push ax
+  0018  lcall 0x1a53, 0xf0                 -> f_1A53_00F0
+  001D  add sp, 6
+  0020  mov si, ax
+  0022  mov word ptr [bp - 0xc], dx
+  0025  or dx, ax
+  0027  jne 0x39
+  0029  push word ptr [bp + 6]
+  002C  mov ax, 0x6302                     "CANNOT LOAD WINDOW %03x"
+  002F  push ds
+  0030  push ax
+  0031  lcall 0x1c62, 0xc                  -> Punt
+  0036  add sp, 6
+  0039  mov ax, word ptr [bp - 0xc]
+  003C  mov bx, word ptr [bp - 0x18]
+  003F  shl bx, 1
+  0041  shl bx, 1
+  0043  mov word ptr [bx - 0x6dd0], si
+  0047  mov word ptr [bx - 0x6dce], ax
+  004B  mov es, ax
+  004D  mov ax, word ptr es:[si]
+  0050  mov dx, word ptr es:[si + 2]
+  0054  mov word ptr [bp - 0x16], ax
+  0057  mov word ptr [bp - 0x14], dx
+  005A  mov ax, word ptr [bp + 6]
+  005D  lcall 0x23ae, 0x377                -> win_LockWin
+  0062  mov ax, word ptr [bp + 6]
+  0065  lcall 0x2505, 0x48                 -> RepointObjects
+  006A  les bx, ptr [bp - 0x16]
+  006D  mov ax, word ptr es:[bx + 0x2c]
+  0071  mov dx, word ptr es:[bx + 0x2e]
+  0075  mov word ptr [bp - 0x12], ax
+  0078  mov word ptr [bp - 0x10], dx
+  007B  mov cl, 3
+  007D  mov bx, word ptr [bp - 0x18]
+  0080  shl bx, cl
+  0082  add bx, 0x4892
+  0086  mov es, word ptr [0x8a18]          DS:8A18
+  008A  mov word ptr [bp - 0x1c], bx
+  008D  mov word ptr [bp - 0x1a], es
+  0090  cmp word ptr es:[bx], 0x8000
+  0095  je 0xaa
+  0097  les bx, ptr [bp - 0x12]
+  009A  mov ax, word ptr [bp - 0x1c]
+  009D  mov dx, word ptr [bp - 0x1a]
+  00A0  push ds
+  00A1  lea di, [bx + 8]
+  00A4  mov si, ax
+  00A6  mov ds, dx
+  00A8  jmp 0xb5
+  00AA  add ax, 8
+  00AD  push ds
+  00AE  mov si, ax
+  00B0  mov ds, dx
+  00B2  les di, ptr [bp - 0x1c]
+  00B5  movsw word ptr es:[di], word ptr [si]
+  00B6  movsw word ptr es:[di], word ptr [si]
+  00B7  movsw word ptr es:[di], word ptr [si]
+  00B8  movsw word ptr es:[di], word ptr [si]
+  00B9  pop ds
+  00BA  mov word ptr [bp - 6], 0
+  00BF  jmp 0x127
+  00C1  mov si, ax
+  00C3  shl si, 1
+  00C5  shl si, 1
+  00C7  add bx, 0x2c
+  00CA  mov ax, word ptr es:[bx + si]
+  00CD  mov dx, word ptr es:[bx + si + 2]
+  00D1  mov word ptr [bp - 0x12], ax
+  00D4  mov word ptr [bp - 0x10], dx
+  00D7  cmp word ptr [bp - 6], 0
+  00DB  jne 0xea
+  00DD  push ds
+  00DE  mov si, ax
+  00E0  mov ds, dx
+  00E2  mov di, word ptr [bp - 0x16]
+  00E5  movsw word ptr es:[di], word ptr [si]
+  00E6  movsw word ptr es:[di], word ptr [si]
+  00E7  movsw word ptr es:[di], word ptr [si]
+  00E8  movsw word ptr es:[di], word ptr [si]
+  00E9  pop ds
+  00EA  les bx, ptr [bp - 0x12]
+  00ED  mov al, byte ptr es:[bx + 0x21]
+  00F1  cwde
+  00F2  sub ax, 4
+  00F5  je 0x102
+  00F7  sub ax, 0xc
+  00FA  jl 0x124
+  00FC  dec ax
+  00FD  dec ax
+  00FE  jle 0x11a
+  0100  jmp 0x124
+  0102  mov ax, 0xe
+  0105  push ax
+  0106  sub ax, ax
+  0108  push ax
+  0109  mov ax, bx
+  010B  add ax, 0x2a
+  010E  push dx
+  010F  push ax
+  0110  lcall 0x29f4, 0x2878               -> __fmemset
+  0115  add sp, 8
+  0118  jmp 0x124
+  011A  sub ax, ax
+  011C  mov word ptr es:[bx + 0x2c], ax
+  0120  mov word ptr es:[bx + 0x2a], ax
+  0124  inc word ptr [bp - 6]
+  0127  mov ax, word ptr [bp - 6]
+  012A  les bx, ptr [bp - 0x16]
+  012D  cmp word ptr es:[bx + 0xc], ax
+  0131  jg 0xc1
+  0133  mov ax, word ptr [bp + 6]
+  0136  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  013B  pop si
+  013C  pop di
+  013D  mov sp, bp
+  013F  pop bp
+  0140  retf

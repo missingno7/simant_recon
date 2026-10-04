@@ -1,0 +1,1014 @@
+{
+  "schema": "simant-dos-database-exit-boundary-v36",
+  "verdict": "UNRESOLVED_WITH_NEW_CONDITIONAL_COUNTEREXAMPLE",
+  "root_reviewed": false,
+  "head_observation": "8feed73f63e4284c42a653923ea61e00f4d3a8f9",
+  "build_report": {
+    "path": "build/source-only-dos/build-report.json",
+    "sha256": "0edcb3285074975704645520158975bd20a32a7cae542127812b54a9e78cffbf",
+    "size": 19342027
+  },
+  "report_head_provenance_claim": null,
+  "translation_units_verified": 188,
+  "generated_sources_verified": 188,
+  "objects_verified": 188,
+  "strict_imports": 29,
+  "gates_unchanged": [
+    {
+      "id": "database-open-minus-one-record",
+      "status": "UNRESOLVED",
+      "source": "src/root/m1A28.c",
+      "normal_owner": "fd_50F6_3958[4]",
+      "historical_failure_address": "50F6:38DC",
+      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately."
+    },
+    {
+      "id": "database-handle-plus-four",
+      "status": "UNRESOLVED",
+      "source": "src/root/m1A53.c",
+      "normal_owner": "db_handles[4]",
+      "historical_failure_address": "50F6:3B58",
+      "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate."
+    }
+  ],
+  "direct_tu_pins": [
+    {
+      "module": "S15:384C",
+      "source": {
+        "path": "src/S15/m384C.c",
+        "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "size": 8116
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U024.c",
+        "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+        "size": 9120
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U024.OBJ",
+        "sha256": "f36949de9103ba94cbe718b796e790a199964048e90cb57ec08f84020d39fc16",
+        "size": 6324
+      },
+      "reviewed_bodies": [
+        "o15_384C_0239"
+      ]
+    },
+    {
+      "module": "S20:39F1",
+      "source": {
+        "path": "src/S20/m39F1.c",
+        "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+        "size": 6627
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U030.c",
+        "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+        "size": 6620
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U030.OBJ",
+        "sha256": "5e801d6062c29d6beddba2641b536835031fc6f97e0f9cb05ddd955ac8981a01",
+        "size": 5218
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:0000",
+      "source": {
+        "path": "src/root/m0000.c",
+        "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+        "size": 5066
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U044.c",
+        "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+        "size": 5066
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U044.OBJ",
+        "sha256": "4f4ac92baa0bfa7edc8cb739fc57b92a034c7cf96589c01595b07667e294a690",
+        "size": 4982
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:0250",
+      "source": {
+        "path": "src/root/m0250.c",
+        "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "size": 65517
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U053.c",
+        "sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+        "size": 70665
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U053.OBJ",
+        "sha256": "0c18053004a91d00f4513c44fa44bee4e9b57306a41a6fa0a691527f9fe5efcb",
+        "size": 57556
+      },
+      "reviewed_bodies": [
+        "DrawBalloons",
+        "f_0250_1018",
+        "f_0250_129E"
+      ]
+    },
+    {
+      "module": "root:15F8",
+      "source": {
+        "path": "src/root/m15F8.c",
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+        "size": 4897
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U070.c",
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+        "size": 4897
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U070.OBJ",
+        "sha256": "d7787bb84c9cdfb5941bfb093fd0bbcc6477fdbe2b79755bb73fbd2204a0cdaf",
+        "size": 2790
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:171C",
+      "source": {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+        "size": 26452
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U074.c",
+        "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+        "size": 25820
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U074.OBJ",
+        "sha256": "84767f7d939c38cb19b2d8b0e59e861183375109b5a43fa333a98b8bc238a961",
+        "size": 30288
+      },
+      "reviewed_bodies": [
+        "f_171C_09CC",
+        "f_171C_0ADC",
+        "f_171C_0CF4",
+        "f_171C_0FBC"
+      ]
+    },
+    {
+      "module": "root:195A",
+      "source": {
+        "path": "src/root/m195A.asm",
+        "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+        "size": 7693
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U077.asm",
+        "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+        "size": 7693
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U077.OBJ",
+        "sha256": "e831d628fd0f5c852304d362ccaf670c597edeaf30e631ca07d116be42f4360a",
+        "size": 1643
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1986",
+      "source": {
+        "path": "src/root/m1986.c",
+        "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+        "size": 3351
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U078.c",
+        "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+        "size": 2874
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U078.OBJ",
+        "sha256": "700c91fdfee64d7ca76e153f8ea70b9b3da1ce8d0d3b50b58d785ba83b1fc2f9",
+        "size": 3083
+      },
+      "reviewed_bodies": [
+        "FindIndex"
+      ]
+    },
+    {
+      "module": "root:19DC",
+      "source": {
+        "path": "src/root/m19DC.c",
+        "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+        "size": 4995
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U080.c",
+        "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+        "size": 4995
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U080.OBJ",
+        "sha256": "ea11c91a271cc0c63c629a5d21487e7c621ef6669e4929779683850e3cbebf61",
+        "size": 4702
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1A28",
+      "source": {
+        "path": "src/root/m1A28.c",
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+        "size": 3200
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U081.c",
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+        "size": 3200
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U081.OBJ",
+        "sha256": "af0032a13af50934919cc64571c78d25093f76583be128f3e7d680ea7ba09109",
+        "size": 3328
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1A53",
+      "source": {
+        "path": "src/root/m1A53.c",
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+        "size": 5159
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U082.c",
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+        "size": 5159
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U082.OBJ",
+        "sha256": "cfe9447d0651e1ba22b3ddd74fde0a4a40a6f2a66ba652393a8036a7178def66",
+        "size": 5979
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1B4E",
+      "source": {
+        "path": "src/root/m1B4E.asm",
+        "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+        "size": 8451
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U086.asm",
+        "sha256": "9f18195ddfa42822f0e54c8a3edf016a751dd7c23b67620c647c75de02c12714",
+        "size": 8479
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U086.OBJ",
+        "sha256": "afaf236194c2951920ecf9cf9915e8c174c6cf75a56a324d0fe4f7dc457b52b9",
+        "size": 2224
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1B73",
+      "source": {
+        "path": "src/root/m1B73.asm",
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+        "size": 35010
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U087.asm",
+        "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+        "size": 35074
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U087.OBJ",
+        "sha256": "5f37d1fc5bcd86e2078d62d1416a7579f1420c6f105ae1ee35249f46d4a8c817",
+        "size": 8751
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1C62",
+      "source": {
+        "path": "src/root/m1C62.c",
+        "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+        "size": 9885
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U088.c",
+        "sha256": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36",
+        "size": 9762
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U088.OBJ",
+        "sha256": "8550fe31dfd3e639f904e01813b67590ca3ee38356da61a120ea5141178e1178",
+        "size": 5041
+      },
+      "reviewed_bodies": [
+        "f_1C62_0415"
+      ]
+    },
+    {
+      "module": "root:1CE2",
+      "source": {
+        "path": "src/root/m1CE2.c",
+        "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+        "size": 10210
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U089.c",
+        "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+        "size": 10210
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U089.OBJ",
+        "sha256": "0ab3b93e894d557240995b9eda280a5fd4a73b64a0d345f8293bbd16bd45abd6",
+        "size": 11636
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1FBD",
+      "source": {
+        "path": "src/root/m1FBD.asm",
+        "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+        "size": 3414
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U096.asm",
+        "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+        "size": 3414
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U096.OBJ",
+        "sha256": "1dd06a2086d3dba31c80abb2f28a4e84921f798f2b35d4e8928743cbfe4c1c5d",
+        "size": 897
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:1FD2",
+      "source": {
+        "path": "src/root/m1FD2.c",
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "size": 10086
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U097.c",
+        "sha256": "c751c5267a0f73137dcc5a93b1e354ccd7352b24c8f95f5db7db607695352099",
+        "size": 10146
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U097.OBJ",
+        "sha256": "23376e993ef04bee5dee2d9b03298c337bc46eb1003671ba40338e7d9312038b",
+        "size": 12521
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:205F",
+      "source": {
+        "path": "src/root/m205F.c",
+        "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+        "size": 6015
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U098.c",
+        "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+        "size": 6015
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U098.OBJ",
+        "sha256": "f85c10730b031c8763bcf1851b277a10eace87500de5f89f83b72cbcb1336fbf",
+        "size": 4233
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:24AB",
+      "source": {
+        "path": "src/root/m24AB.c",
+        "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+        "size": 5171
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U106.c",
+        "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+        "size": 5171
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U106.OBJ",
+        "sha256": "045e79a26228bb61bdad0bc17c6e1305ff7fbaeadf883a31b5320ad0b00f617c",
+        "size": 5311
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:277E",
+      "source": {
+        "path": "src/root/m277E.c",
+        "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+        "size": 10363
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U114.c",
+        "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+        "size": 10363
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U114.OBJ",
+        "sha256": "38d596e85596d3d1745859e9aa4cc9bbdbe0e9b4522eb8d6eb6d567fcc089141",
+        "size": 5663
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:28BC",
+      "source": {
+        "path": "src/root/m28BC.asm",
+        "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+        "size": 38288
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U118.asm",
+        "sha256": "e1b3d7a49330d3e7f817da331c3142ce0db64bd03de8c75ad3c7e6cddf4b82cf",
+        "size": 38516
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U118.OBJ",
+        "sha256": "4d5c66a5faf7a799a6cb34000e948f3494191e3db45466df3d08bbb1ec1ee81c",
+        "size": 5185
+      },
+      "reviewed_bodies": []
+    },
+    {
+      "module": "root:295C",
+      "source": {
+        "path": "src/root/m295C.c",
+        "sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+        "size": 6086
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U121.c",
+        "sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+        "size": 6086
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U121.OBJ",
+        "sha256": "d50cf631a6bb0b92a50029abdbdc76cbd4de3f2e402f6bb8b003171df25d0f72",
+        "size": 6724
+      },
+      "reviewed_bodies": []
+    }
+  ],
+  "input_pins": [
+    {
+      "path": "work/source-only-dos/database-punt-root-review-v17.md",
+      "sha256": "030bde3e38f52080e9d63f95cedb55ad1b997ccb68afb7b3713815207d8e6259",
+      "size": 2414
+    },
+    {
+      "path": "work/source-only-dos/database-punt-static-dependency-review-v3.md",
+      "sha256": "c42ab3303cf0ef8fb607d6cc3eb2a389ab0aa6ad80240a3d3db415126dda4e23",
+      "size": 21405
+    },
+    {
+      "path": "work/source-only-dos/database-punt-static-dependency-proof-candidate-v3.json",
+      "sha256": "65e6adb9f1e76e39b65c6a1cb49774ac73df7e2cad3dbbed2a24292a5a6fd2b5",
+      "size": 41599
+    },
+    {
+      "path": "work/source-only-dos/database-punt-call-closure-supplement-v3.json",
+      "sha256": "3bb735dde63c05607dc36debebfa1fc4ff72a90415399f21cc124bf356b64cf8",
+      "size": 14279
+    },
+    {
+      "path": "work/source-only-dos/database-punt-effective-overlay-check-v16.json",
+      "sha256": "e3e0bc1ce638206b61c203a797f4e84f7b867dda18e4ee4dd6c2298d3d3fc165",
+      "size": 92323
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/root-review.md",
+      "sha256": "031973c0c80948bd7596687330a9d06b96966cfb5f8b6aaa7ea869868901b1d3",
+      "size": 1553
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/receipt.md",
+      "sha256": "f558bde1d04eb14add0b3a31affd56ce94ba3fb63390e3db873e4b575829eaff",
+      "size": 5436
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/v22-static-closure-receipt.json",
+      "sha256": "7fdb97555575f7960242b94c14ae1273aef11e04fbede6be50f865c9b5eb2048",
+      "size": 59682
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/v22-early-punt-continuation-addendum.md",
+      "sha256": "730de24167ad1708fd146208033b0188577af64e10049e439eadb245e633113e",
+      "size": 4101
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/v22-early-punt-continuation-addendum.json",
+      "sha256": "c5de34a4a412fbda47be28a6c3088cf357b8420871fde6ca41c0215b7860203f",
+      "size": 5166
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v32/database-v32/review.md",
+      "sha256": "6b90eef5ce948d635fdb5112caa9c24eb1f45ad95e4e3d9de8d523a01621779d",
+      "size": 2575
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v32/database-v32/receipt.json",
+      "sha256": "2f259b62ca0e4379c96baee53d0dade10497f6f0158d79236435a321c015e62a",
+      "size": 26045
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v26/dos_remaining_misc_owners_v31/free-list-punt-reentry-v31.md",
+      "sha256": "cb5aa8e4af7ac4df4c0d8ce9d6bf9879a81a80f334686545b2696e5917448f01",
+      "size": 4913
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v35/sound-report-v35.md",
+      "sha256": "31a1dc70d4043701e8501a48eafba68b1774ab2b4225852d558f0cf53d8fd089",
+      "size": 10815
+    },
+    {
+      "path": "work/source-only-dos/callback-table-reviewed-contract-v1.json",
+      "sha256": "687b19c934090234f23a129088fede174c97394bceb65f83c83b48ddd61c83d1",
+      "size": 89177
+    },
+    {
+      "path": "work/source-only-dos/callback-table-bindings-v1.json",
+      "sha256": "457cdc94b7b1c2b07908352e4b736d0de8cb47f8d65e44b475e993e5b93d648d",
+      "size": 17144
+    },
+    {
+      "path": "work/source-only-dos/providers/callback-table.c",
+      "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "size": 47
+    },
+    {
+      "path": "work/source-only-dos/database-record-state-contract-v1.json",
+      "sha256": "d0d3bba3db6df11a0ad60829786ae390a2bb773767b27b12a92d9302b404d93d",
+      "size": 83910
+    },
+    {
+      "path": "work/source-only-dos/database-record-state-bindings-v1.json",
+      "sha256": "eb170ae0622b157da8b20c836935fe938c3a0b0bf6a10bec93022b90430daec9",
+      "size": 10328
+    },
+    {
+      "path": "work/source-only-dos/providers/database-record-state.c",
+      "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
+      "size": 1295
+    },
+    {
+      "path": "work/source-only-dos/driver-ss-frame-contract-v1.json",
+      "sha256": "d7187b30f6c474e69ec38594a71727e4dab34e18afa81406162a94135e1c5fda",
+      "size": 303238
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work/source-only-dos/database-punt-crt-control/crt-exit-control-result.json",
+      "sha256": "60f9faf32a0ef8b989011797338cff0860a58f11548b0272fd8683ae14532d36",
+      "size": 23779
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+      "size": 356104
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "tools/context.py",
+      "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+      "size": 8661
+    },
+    {
+      "path": "tools/search.py",
+      "sha256": "90b1f5795024012467103f51a50c036187f15342f1fb3703ae6ceefdd067623a",
+      "size": 8557
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/match.py",
+      "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+      "size": 18033
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "9cd6bbfbbde03894360f0df71bab4bda68fbca27a4e0c667f2d791057e1deae6",
+      "size": 80313
+    },
+    {
+      "path": "tools/dos_source_bindings.py",
+      "sha256": "697e9905af11ebaee3f389bb782094ceaae51b03fabf8c4d44a7587303db65f2",
+      "size": 191932
+    },
+    {
+      "path": "C:/tools/msc-6.00/STARTUP/dos/crt0.asm",
+      "sha256": "f22c6ef87a1187486605f1b185b3b241d7ba8ee773fc97cdeb0736e2a83e956b",
+      "size": 13807
+    },
+    {
+      "path": "C:/tools/msc-6.00/STARTUP/dos/crt0dat.asm",
+      "sha256": "33eead508c0b2941f9cc95d17ebbda1ba8de196431a90091a8e2f26527ce11e0",
+      "size": 19539
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    }
+  ],
+  "contexts": [
+    {
+      "path": "build/workers/dos_database_exit_v36/OpenDB.context.txt",
+      "sha256": "b61f539b27a7146c2439b932131605a5669d20b3c999a934a882c2a559758963",
+      "size": 4000
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/GetFreeHandle.context.txt",
+      "sha256": "19d6a45444efd2d123590414eee76b1bd6dd6558a1070cbcd0f62c0a3f5b0c1d",
+      "size": 1027
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/db_SetDataBase.context.txt",
+      "sha256": "2a2a1efe611b9b1bf5a94f8525c9c2dc35ec62ace7931b027bb866549c53aa82",
+      "size": 1744
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/DosPunt.context.txt",
+      "sha256": "3091a3823a77a95eb42dc17b254c2ec093ffa6ff1c6bb5a99b0025ae1466402e",
+      "size": 1347
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/Punt.context.txt",
+      "sha256": "b161dbd50ac6c526e23e4d5659bc1de051e57fb9c5e2cd827da9acabb4bdc3b7",
+      "size": 2115
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/IBMInitStuff.context.txt",
+      "sha256": "96c72ea729aaf69d2cb4728dd12fe926311b1938b739a2f627e78c37b8de2579",
+      "size": 11428
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/f_205F_0004.context.txt",
+      "sha256": "8974aa2f2091c82a19902307c72f9388184bcd4d8d3d7ee64cd218bafbbf971a",
+      "size": 8508
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/f_1CE2_01C3.context.txt",
+      "sha256": "d337532b231c202bcb74e00827753198d0a5fb4e7f16846d2cfc5c5a71db181d",
+      "size": 871
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/f_24AB_038D.context.txt",
+      "sha256": "b6b5a9a18cb6fd3409905581e67162f490f2409c59f92b83e37709bfc9d45f2b",
+      "size": 1732
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/f_1FBD_0000.context.txt",
+      "sha256": "90777352bb8888398feb26798b10bdf389221f8c1c2759f9af8d440dd962a105",
+      "size": 4408
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/f_1B4E_005E.context.txt",
+      "sha256": "e8dc3924ee529475cce2cfe0acd332548504c4fb808dfcc788a3891e9fd4d552",
+      "size": 690
+    },
+    {
+      "path": "build/workers/dos_database_exit_v36/o15_384C_0152.context.txt",
+      "sha256": "ef22f036b535edb3e33b02659b3ecf935fb22773a2f8dc79bb7e2abb5816ad04",
+      "size": 2028
+    }
+  ],
+  "whole_module_source_control": [
+    {
+      "source": "D:\\Prog\\simant_recon\\build\\workers\\dos_database_exit_v36\\m1FBD.asm",
+      "module": "root:1FBD",
+      "profile": "masm510",
+      "flags": [
+        "/Mx"
+      ],
+      "placements": {
+        "_DATA": {
+          "seg": 21939,
+          "off": 23226
+        }
+      },
+      "source_sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+      "status": "EXACT",
+      "reasons": [],
+      "opcode_ratio": 1.0,
+      "first_diff_insn": null,
+      "unbound": []
+    }
+  ],
+  "compiled_module_research_check": {
+    "generated_object_exact_to_original": true,
+    "original_function_hash": "a703caef8bb3f08ee60abd12bd7d5d7b0fd2659c62abb7a099d0cfd9ed40fcee",
+    "bound_candidate_hash": "a703caef8bb3f08ee60abd12bd7d5d7b0fd2659c62abb7a099d0cfd9ed40fcee",
+    "original_function_extent": 343,
+    "source_data_extent": 1324,
+    "selected_instructions": [
+      {
+        "offset": "0084",
+        "mnemonic": "mov",
+        "operands": "cx, word ptr [0x3dda]"
+      },
+      {
+        "offset": "0088",
+        "mnemonic": "mul",
+        "operands": "cl"
+      },
+      {
+        "offset": "008B",
+        "mnemonic": "lds",
+        "operands": "si, ptr [0x3dd6]"
+      },
+      {
+        "offset": "0093",
+        "mnemonic": "movsb",
+        "operands": "byte ptr es:[di], byte ptr [si]"
+      },
+      {
+        "offset": "0094",
+        "mnemonic": "add",
+        "operands": "di, dx"
+      },
+      {
+        "offset": "0096",
+        "mnemonic": "loop",
+        "operands": "0x93"
+      }
+    ]
+  },
+  "fatal_function_object_checks": [
+    {
+      "name": "OpenDB",
+      "module": "root:1A28",
+      "extent": 322,
+      "exact": true,
+      "sha256": "88b98a5221a450a103b758cc1dc5bf9741be6d8d7b6e3f67583ac447369c2481"
+    },
+    {
+      "name": "GetFreeHandle",
+      "module": "root:1A28",
+      "extent": 83,
+      "exact": true,
+      "sha256": "7b2a3868a94aab6253969278218da7a559746fce37bf293cfc196e8d511b05fc"
+    },
+    {
+      "name": "db_SetDataBase",
+      "module": "root:1A53",
+      "extent": 120,
+      "exact": true,
+      "sha256": "679805c4768d13519023e635679e9acb4994b14df0527355071824b6115ab40f"
+    },
+    {
+      "name": "DosPunt",
+      "module": "root:1A28",
+      "extent": 62,
+      "exact": true,
+      "sha256": "634072603928a3645e9fa95cfe56e75e28685680c3e1bb27e67b5e03cf848904"
+    },
+    {
+      "name": "Punt",
+      "module": "root:1C62",
+      "extent": 132,
+      "exact": true,
+      "sha256": "e62db67a9e3945a4bde86967970ab147ca7302c3457269777b091fce8322c859"
+    },
+    {
+      "name": "f_1CE2_01C3",
+      "module": "root:1CE2",
+      "extent": 53,
+      "exact": true,
+      "sha256": "3015ef5d38a51b5e1667179b8899bc63aba3b24b5ed401b0d7338e1f998ca74d"
+    },
+    {
+      "name": "f_24AB_038D",
+      "module": "root:24AB",
+      "extent": 127,
+      "exact": true,
+      "sha256": "b962d86c60a850aff67edab2baf28fb48b0a1908c7a46151bf1b32c2ed1d2baa"
+    },
+    {
+      "name": "f_1B4E_005E",
+      "module": "root:1B4E",
+      "extent": 35,
+      "exact": true,
+      "sha256": "482daf166ddc43695d79fb1015a42c53d0bfad6fce2e9a617bf7ba1a968f0e18"
+    },
+    {
+      "name": "o15_384C_0152",
+      "module": "S15:384C",
+      "extent": 156,
+      "exact": true,
+      "sha256": "5233b9ad0b92b97a3b9f72f0c6f44202b149428eabf90ca7f55972e7525f379b"
+    }
+  ],
+  "compiled_initial_fields": [
+    {
+      "name": "_g_3DD6",
+      "segment": "_DATA",
+      "object_offset": 182,
+      "value": 0
+    },
+    {
+      "name": "_g_3DD8",
+      "segment": "_DATA",
+      "object_offset": 184,
+      "value": 0
+    },
+    {
+      "name": "_g_3DDA",
+      "segment": "_DATA",
+      "object_offset": 186,
+      "value": 0
+    },
+    {
+      "name": "_g_3DDC",
+      "segment": "_DATA",
+      "object_offset": 188,
+      "value": 0
+    },
+    {
+      "name": "_g_3DDE",
+      "segment": "_DATA",
+      "object_offset": 190,
+      "value": 8
+    }
+  ],
+  "compiled_callback_owner": {
+    "source": {
+      "path": "build/source-only-dos/sources/CBOWNER.c",
+      "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "size": 47
+    },
+    "object": {
+      "path": "build/source-only-dos/objects/CBOWNER.OBJ",
+      "sha256": "74658ed2e7ef9f9461988dec8bd9b9c23150faaeed88ed51f945972c4332fde9",
+      "size": 219
+    },
+    "communal": {
+      "name": "_driver_callback_table",
+      "kind": "near",
+      "type_index": 0,
+      "length": 100
+    },
+    "no_initialized_segment_bytes": true
+  },
+  "runtime_diagnostic_check": {
+    "library": {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    "member": "syserr.c",
+    "member_sha256": "e69df544dd5695d067f6701d3784a3f6643e47c1c2be0d8f3a8618916e6355a9",
+    "errno": 2,
+    "pointer_site": 316,
+    "string_offset": 9,
+    "error_text_chars": 25,
+    "expected_text_verified": true
+  },
+  "new_boundary": {
+    "condition": "Early first Punt; pre-display g_5A97 != 6; g_9128 returns normally with source startup state and DF=0 preserved.",
+    "direct_source_state": {
+      "fd_55B3_65A4": 0,
+      "g_3DD6_far_pointer": "0000:0000",
+      "g_3DDA": 0,
+      "g_3DDC": 0,
+      "g_3DDE": 8
+    },
+    "source_path": [
+      "Punt",
+      "f_1CE2_01C3",
+      "f_24AB_038D",
+      "f_1FBD_0000:L0093"
+    ],
+    "diagnostic_length_example": {
+      "message_chars": 58,
+      "fatal_chars": 87,
+      "copied_chars": 79
+    },
+    "address_recurrence": "destination(k) = (bitmap_base + 79*k) mod 65536, k=0..65535",
+    "stores_before_next_character": 65536,
+    "unique_DGROUP_byte_offsets": 65536,
+    "first_outside_bitmap": {
+      "zero_based_iteration": 14,
+      "ordinal_store": 15,
+      "bitmap_relative_offset": 1106,
+      "same_TU_text_copy_relative_offset": 66
+    },
+    "first_outside_whole_TU": {
+      "zero_based_iteration": 17,
+      "ordinal_store": 18,
+      "bitmap_relative_offset": 1343,
+      "TU_relative_offset": 1347
+    },
+    "consequence": "The first inner loop writes every near byte offset, including callbacks, guard, and stack under SS=DGROUP, before g_9154 or fatal cleanup. Written values and subsequent control cannot be predicted without external physical memory. The prior ordinary-return continuation is not a state-preserving closure.",
+    "does_not_claim": [
+      "actual 0000:0000 return",
+      "actual startup escape",
+      "reachable fifth invalid record/handle access",
+      "specific overwritten values",
+      "physical IVT bytes",
+      "whole-game runtime test"
+    ],
+    "controls": [
+      {
+        "initial_CX": 1,
+        "column_count": 79,
+        "first_glyph_stores": 1,
+        "unique_first_glyph_destinations": 1,
+        "first_glyph_within_1040_byte_bitmap": true,
+        "max_full_string_bitmap_offset_for_positive_height": 78
+      },
+      {
+        "initial_CX": 8,
+        "column_count": 79,
+        "first_glyph_stores": 8,
+        "unique_first_glyph_destinations": 8,
+        "first_glyph_within_1040_byte_bitmap": true,
+        "max_full_string_bitmap_offset_for_positive_height": 631
+      },
+      {
+        "initial_CX": 13,
+        "column_count": 79,
+        "first_glyph_stores": 13,
+        "unique_first_glyph_destinations": 13,
+        "first_glyph_within_1040_byte_bitmap": true,
+        "max_full_string_bitmap_offset_for_positive_height": 1026
+      },
+      {
+        "initial_CX": 0,
+        "column_count": 79,
+        "first_glyph_stores": 65536,
+        "unique_first_glyph_destinations": 65536,
+        "first_glyph_within_1040_byte_bitmap": false,
+        "max_full_string_bitmap_offset_for_positive_height": null
+      }
+    ]
+  },
+  "source_owned_alias_attempt": {
+    "status": "EXCLUDED_WITHIN_AUTHORIZED_SCOPE",
+    "reasons": [
+      "g_9128/g_9154 are already bounded views of the same zero-startup 25-slot owner.",
+      "g_3DF4 contains the real empty entry but is a distinct initialized pointer; rebinding slot zero to it would detach it from the table copied by f_1B4E_0025/f_1B4E_01AE.",
+      "No prior source call to f_1B4E_0025 or driver font setup precedes the early opens.",
+      "Pre-initializing callbacks/fonts or guarding zero CX changes historical source semantics.",
+      "Growing bitmap/record/handle owners cannot close a 64KiB uncontrolled DGROUP copy."
+    ]
+  },
+  "oracle": {
+    "size": 506509,
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "original_executable_role": "read-only research in context/search/binder; zero oracle bytes emitted in any source or build input",
+  "scope": "Source/disassembly/address arithmetic counterexample; no promotion, gate mutation, standalone game link, or acceptance claim.",
+  "probe_source": {
+    "path": "build/workers/dos_database_exit_v36/review_exit_v36.py",
+    "sha256": "e27249e0afe47b9b897347657f38a0657b8368b6614aca2a52d5d1d9af0cc5b2",
+    "size": 19293
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "window-handles-minimum-negative-worker-v37",
+  "root_reviewed": false,
+  "admitted": false,
+  "disposition": "NO_SOURCE_RESET_OWNER_RECOVERED",
+  "provider_proposed": false,
+  "extent41_claimed": false,
+  "original_full_defining_tu_recovered": false,
+  "full_consumer_tus_compiled": 4,
+  "compiler_cases": 17,
+  "dimension_controls_equal": 8,
+  "far_outer_negatives_different": 4,
+  "crt_before_main_clear_independently_disassembled": true,
+  "meaningful_pointer_abi_words": [
+    2,
+    4,
+    4,
+    4
+  ],
+  "effective_tus": 190,
+  "c_tus": 161,
+  "asm_tus": 29,
+  "parsed_functions": 1264,
+  "handle_unsized_extern_declarations": 4,
+  "handle_body_occurrences": 10,
+  "baseline_warnings": "root:20E8 C4113 lines12 and17 persist unchanged in each variant; other compiler logs have no warnings/errors",
+  "runtime_cases_executed": 0,
+  "unsafe_cases_executed": 0,
+  "mandatory_gates_preserved": [
+    "window-index-resource-cross-owner-layout",
+    "critical-selector"
+  ],
+  "proposed_count_changes": {
+    "translation_units": 0,
+    "providers": 0,
+    "imports": 0,
+    "layout_gates": 0
+  },
+  "limitations": [
+    "41 is guard-derived domain cardinality only.",
+    "The actual initializer clears45 cache pointers and45 depth bytes, never win_handles.",
+    "CRT zero interval proves initial null representation but no producing TU/extent.",
+    "Named-source census does not close unrestricted computed aliases/reachability/invalid resource domains.",
+    "Returning Punt, saved selector cleanup and event decoder clobber continuation stay unresolved."
+  ],
+  "writes": {
+    "scope": "D:/Prog/simant_recon/build/workers/dos_window_handles_minimum_v37",
+    "canonical": false,
+    "production": false,
+    "git": false,
+    "promote": false,
+    "validate": false
+  },
+  "original_bytes_as_compiler_inputs": false
+}

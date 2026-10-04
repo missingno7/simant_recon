@@ -1,0 +1,58 @@
+{
+  "schema": "simant-dos-reviewed-minimum-view-bindings-v36",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "root_reviewed": true,
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:window-initialized-views",
+      "basename": "WINVW36",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/window-initialized-views-v36.c",
+        "size": 127,
+        "sha256": "d6437002b02272766235788e5318b6cf1cfc32ff37ed1c9ad72f36bf6dc577f6"
+      },
+      "communals": [
+        {
+          "name": "_win_drawHooks",
+          "kind": "far",
+          "length": 180,
+          "count": 45,
+          "element_size": 4
+        },
+        {
+          "name": "_win_offsets",
+          "kind": "far",
+          "length": 360,
+          "count": 45,
+          "element_size": 8
+        }
+      ]
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/structural-audits-v36/root/minimum-views-admission.json",
+      "size": 1422,
+      "sha256": "a7f1ada6e79542586ae4d21cb7432b50604b6fa4de79d91ac77ead34d967bf97"
+    },
+    {
+      "path": "work/source-only-dos/providers/window-initialized-views-v36.c",
+      "size": 127,
+      "sha256": "d6437002b02272766235788e5318b6cf1cfc32ff37ed1c9ad72f36bf6dc577f6"
+    }
+  ],
+  "runtime_contract": {
+    "path": "work/source-only-dos/window-minimum-view-contract-v36.json",
+    "size": 24446,
+    "sha256": "e13210b21bf7adfaf7d1f5b788735f0ad49b2d4b105801828c7b80d221826965"
+  },
+  "runtime_contract_key": "window_minimum_view_contract"
+}

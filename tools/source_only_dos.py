@@ -22,6 +22,8 @@ import compiler
 import csrc
 import dos_source_bindings
 import dos_alignment_debt
+import dos_minimum_views
+import dos_startup_debt
 from omf import OmfReader
 
 PAUSED_COMMIT = 'c850830006e0b7d456bb500bf101dd432bbe8ee3'
@@ -258,7 +260,8 @@ def prepare(out, report):
                      'remaining-misc-storage-bindings-v1.json',
                      'screen-clip-list-bindings-v1.json',
                      'remaining-far-state-words-bindings-v1.json',
-                     's01-pattern-4220-bindings-v1.json', 'mono-base-bindings-v1.json'):
+                     's01-pattern-4220-bindings-v1.json', 'mono-base-bindings-v1.json',
+                     'window-minimum-view-bindings-v36.json', 'selector-minimum-view-bindings-v36.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -497,6 +500,20 @@ def prepare(out, report):
         report['runtime_components'].append({'name': name, 'role': 'third-party MSC runtime library',
                                              **library_pin})
         report['inputs'].append(library_pin)
+    for module, key in dos_minimum_views.CONTRACTS.items():
+        contract = report[key]
+        dos_minimum_views.require_contract(ROOT, contract, module)
+        for item in contract['control_pins'] + [contract['root_admission']]:
+            path = Path(item['path'])
+            report['inputs'].append(pin(path if path.is_absolute() else ROOT / path, item['sha256'])[1])
+    raw, identity = pin(ROOT / 'work/source-only-dos/startup-tail-erasure-contract-v36.json')
+    erasure = json.loads(raw)
+    dos_startup_debt.require_contract(ROOT, erasure)
+    report['startup_tail_erasure_contract'] = erasure
+    report['inputs'].append(identity)
+    for item in erasure['control_pins']:
+        path = Path(item['path'])
+        report['inputs'].append(pin(path if path.is_absolute() else ROOT / path, item['sha256'])[1])
     return manifest, symbols
 
 
@@ -613,6 +630,8 @@ def audit_layout(report):
         'original_ctype_offset': 0x7A1E,
         'signed_char_prefix_range': [0x799F, 0x7A1D],
         'overlapping_data_debt': 'dgroup_79f0',
+        'relocated_prefix_far_pointers': 6,
+        'heap_state_equivalence': 'UNRESOLVED',
         'reason': 'Styled text and menu item classification sign-extend character bytes '
                   'before indexing the near CRT table. Bytes D1..DE can read original '
                   'DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. '
@@ -623,7 +642,13 @@ def audit_layout(report):
                   'No source guard or accepted input-domain proof excludes these prefix '
                   'reads, and independent linkage does not preserve the original prefix. '
                   'Keep the heap-shaped data debt; do not substitute unsigned indexing '
-                  'or add an invented table prefix/suffix.',
+                  'or add an invented table prefix/suffix. Whole-member controls on both '
+                  'linkers realize __fheap at _ctype-46, but identical data order still '
+                  'leaves six relocated CMISC pointers in the signed prefix: moving '
+                  'only crt0fp code changes twelve predicate results. Stock startup also '
+                  'changes heap descriptor pointers before main; original __myalloc '
+                  'binds the game allocator 171C:2208. App heap-state equivalence remains '
+                  'unproved, so relative owner attribution alone discharges no bytes.',
         'scope_limit': 'Conditional input path, not a shipped-resource execution witness. '
                        'The reconstructed algorithms and strict static registrations remain unchanged.'}, {
         'id': 'monochrome-table-symbolic-base',
@@ -693,7 +718,10 @@ def audit_layout(report):
         'reason': 'GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt '
                   'and then computes the record address if it returns. A four-record typed '
                   'owner supplies no preceding storage; returning-Punt reachability and layout '
-                  'semantics must be proved separately.'}, {
+                  'semantics must be proved separately. A conditional returning zero-target '
+                  'fatal callback reaches the uninitialized raster path, whose zero-height '
+                  'LOOP traverses every DGROUP byte before cleanup; callback/guard invariance '
+                  'cannot be inferred from explicit C assignments alone.'}, {
         'id': 'database-handle-plus-four', 'status': 'UNRESOLVED',
         'source': 'src/root/m1A53.c', 'normal_owner': 'db_handles[4]',
         'historical_failure_address': '50F6:3B58',
@@ -701,6 +729,26 @@ def audit_layout(report):
                   'front end checks the negative result. The original address overlaps the '
                   'distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption '
                   'is introduced; this remains a separate source-only preflight gate.'}, {
+        'id': 'window-index-resource-cross-owner-layout', 'status': 'UNRESOLVED',
+        'owners': ['win_drawHooks[45]', 'win_offsets[45]'],
+        'reason': 'Unconditional reset spans prove 45 callbacks and 45 Rects. They do not '
+                  'bound every window ID or resource count. Negative and >=45 indices, '
+                  'returning Punt, pre-lock handle writes, signed palette-copy lengths, '
+                  'and purge-list counts remain open. Historical palette row 63 reads '
+                  'hook31/hook32 words; its shipped control lacks the ordinary selection '
+                  'gate, but no complete selection/redraw or cross-owner exclusion exists. '
+                  'Callback45 intersects Rect0 and Rect45 intersects Event fields. '
+                  'No padding, invented palette rows, clamp or maximum historical capacity '
+                  'is supplied by the minimum owners.'}, {
+        'id': 'critical-selector-computed-alias-layout', 'status': 'UNRESOLVED',
+        'owner': 'g_8CCB signed mutable byte',
+        'reason': 'The exact consumer and genuine CRT prove a minimal signed-byte view '
+                  'and startup zero. Window-pointer[-10] and a conditional uncapped song '
+                  'word-store continuation can cover the historical byte. No ordinary '
+                  'symbolic inbound selector edge exists, but computed/control-corrupted '
+                  'continuations and returning Punt are not globally excluded. Independent '
+                  'placement does not preserve those aliases. No constant-zero, dead-read '
+                  'or physical-alias waiver follows from the byte owner.'}, {
         'id': 'clip-rect-segment-frame',
         'status': 'SOURCE_BOUND' if any((r.get('source_binding') or {}).get('segment_corrections')
                                       for r in report['translation_units']) else 'UNRESOLVED',
@@ -805,6 +853,12 @@ def accept_binding_checks(report):
                 'scope_limit': 'Other shared UI bytes, Rect sentinel and computed-copy layout remain unresolved.'}]
         accept_clip_pointer_data(report)
         accept_screen_list_data(report)
+        for profile in ('rtlink400', 'rtlink610'):
+            dos_minimum_views.require_all(ROOT, report, profile, compiler.toolchain()['linkers'][profile])
+        report['minimum_source_view_verification'] = [dos_minimum_views.require_contract(
+            ROOT, report[key], module) for module,key in dos_minimum_views.CONTRACTS.items()]
+        if all('object' in row for row in report['translation_units']):
+            dos_startup_debt.apply(ROOT, report)
 
 
 def accept_clip_pointer_data(report):
@@ -1045,6 +1099,8 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v26_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v27_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v29_storage_contracts(report, profile, tool)
+    dos_minimum_views.require_all(ROOT, report, profile, tool)
+    dos_startup_debt.require_contract(ROOT, report['startup_tail_erasure_contract'], components)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
@@ -1132,10 +1188,14 @@ def link_units(out, report, profile):
     if raw[:2] != b'MZ':
         report['errors'].append('link output is not an MZ executable')
         return
+    report['generated_files'] += [pin(p)[1] for p in link_dir.iterdir() if p.is_file()]
+    if not dos_startup_debt.require_linked_game_review(ROOT, report, image_pin, profile):
+        report['candidate_executable'] = image_pin
+        report['errors'].append('linked candidate requires actual manager/CRT startup-erasure review')
+        return
     report['standalone_dos_executable'] = True
     report['executable'] = image_pin
     report['status'] = 'LINKED_NOT_EXECUTED'
-    report['generated_files'] += [pin(p)[1] for p in link_dir.iterdir() if p.is_file()]
 
 
 def main():
@@ -1164,7 +1224,7 @@ def main():
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
                              ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py', 'dos_alignment_debt.py',
-                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py', 'dos_storage_policies_v27.py', 'dos_storage_policies_v29.py', 'dos_mono_base.py')]
+                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py', 'dos_storage_policies_v27.py', 'dos_storage_policies_v29.py', 'dos_mono_base.py', 'dos_minimum_views.py', 'dos_startup_debt.py')]
         report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)

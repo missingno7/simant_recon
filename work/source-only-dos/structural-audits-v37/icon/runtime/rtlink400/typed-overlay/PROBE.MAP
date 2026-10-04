@@ -1,0 +1,352 @@
+
+ Start  Stop   Length Name                   Class               Group
+ Resident
+ 00000H 00233H 00234H MAIN_TEXT              CODE
+ 00234H 01283H 01050H _TEXT                  CODE
+ 01290H 01291H 00002H EMULATOR_TEXT          CODE
+ 012A0H 01BE3H 00944H $$OVLMGR               $$OVLMGR
+ 01BE4H 0205DH 0047AH $$OVLMGR_UTILS         $$OVLMGR_UTILS
+ Overlay 2H
+ 02060H 02060H 00000H OWN_TEXT               CODE
+ Overlay 3H
+ 02060H 02060H 00000H C_ETEXT                ENDCODE
+ 02060H 02167H 00108H MAIN5_DATA             FAR_DATA
+ 02170H 02170H 00000H EMULATOR_DATA          FAR_DATA
+ 02170H 02173H 00004H FAR_BSS                FAR_BSS
+ 02180H 021C1H 00042H NULL                   BEGDATA             DGROUP
+ 021C2H 025A1H 003E0H _DATA                  DATA                DGROUP
+ 025A2H 025A3H 00002H XIQC                   DATA                DGROUP
+ 025A4H 025B1H 0000EH DBDATA                 DATA                DGROUP
+ 025B2H 025BFH 0000EH CDATA                  DATA                DGROUP
+ 025C0H 025C0H 00000H XIFB                   DATA                DGROUP
+ 025C0H 025C0H 00000H XIF                    DATA                DGROUP
+ 025C0H 025C0H 00000H XIFE                   DATA                DGROUP
+ 025C0H 025C0H 00000H XIB                    DATA                DGROUP
+ 025C0H 025C0H 00000H XI                     DATA                DGROUP
+ 025C0H 025C0H 00000H XIE                    DATA                DGROUP
+ 025C0H 025C0H 00000H XPB                    DATA                DGROUP
+ 025C0H 025C3H 00004H XP                     DATA                DGROUP
+ 025C4H 025C4H 00000H XPE                    DATA                DGROUP
+ 025C4H 025C4H 00000H XCB                    DATA                DGROUP
+ 025C4H 025C4H 00000H XC                     DATA                DGROUP
+ 025C4H 025C4H 00000H XCE                    DATA                DGROUP
+ 025C4H 025C4H 00000H XCFB                   DATA                DGROUP
+ 025C4H 025C4H 00000H XCF                    DATA                DGROUP
+ 025C4H 025C4H 00000H XCFE                   DATA                DGROUP
+ 025C4H 025C7H 00004H CONST                  CONST               DGROUP
+ 025C8H 025CFH 00008H HDR                    MSG                 DGROUP
+ 025D0H 026A5H 000D6H MSG                    MSG                 DGROUP
+ 026A6H 026A7H 00002H PAD                    MSG                 DGROUP
+ 026A8H 026A8H 00001H EPAD                   MSG                 DGROUP
+ 026AAH 026AAH 00000H _BSS                   BSS                 DGROUP
+ 026AAH 026AAH 00000H XOB                    BSS                 DGROUP
+ 026AAH 026AAH 00000H XO                     BSS                 DGROUP
+ 026AAH 026AAH 00000H XOE                    BSS                 DGROUP
+ 026B0H 028AFH 00200H c_common               BSS                 DGROUP
+ 028B0H 030AFH 00800H STACK                  STACK               DGROUP
+
+ Section# Fname          Faddr  Maddr  Size   Father   Section Name
+    1H    PROBE.EXE      00200H 00000H 0205EH    0H
+    2H    PROBE.EXE      02260H 02060H 00000H    1H
+    3H    PROBE.EXE      02260H 02060H 01050H    0H    preloaded data
+
+ Origin   Group
+ 0218:0   DGROUP
+
+  Address         Publics by Name
+
+ 0023:0014  Res  $$MAIN
+ 01BE:0005  Res  $$OVCOFF
+ 01BE:0005  Res  $$OVCON
+ 012A:0000  Res  $$OVLCHANGE
+ 012A:05C1  Res  $$OVLCLOSE
+ 012A:0892  Res  $$OVLINFO
+ 012A:0035  Res  $$OVLLOAD
+ 012A:033A  Res  $$OVLLOADIL
+ 012A:0882  Res  $$OVLPBLOCK
+ 012A:0558  Res  $$OVLRESTORE
+ 012A:0513  Res  $$OVLSAVE
+ 012A:04E6  Res  $$OVLSAVESIZE
+ 012A:0002  Res  $$OVLUNLOAD
+ 0000:0001  Abs  $$RTLDATA_DUMMY
+ 01BE:0036  Res  $$RTLGETENV
+ 01BE:01D8  Res  $$RTLGETPROGNAME
+ 012A:035F  Res  $$RTLOVLINIT
+ 01BE:047A  Res  $$RTLOVL_CLOSE_SAVE_FILE
+ 01BE:0006  Res  $$RTLOVL_CONVERT_VAL
+ 01BE:047A  Res  $$RTLOVL_CREATE_SAVE_FILE
+ 01BE:047A  Res  $$RTLOVL_DELETE_SAVE_FILE
+ 0000:0001  Abs  $$RTLOVL_DUMMY_CACHE
+ 01BE:047A  Res  $$RTLOVL_EXTEND_SAVE_FILE
+ 01BE:0004  Res  $$RTLOVL_INIT_CACHE
+ 01BE:047A  Res  $$RTLOVL_INIT_SAVE_FILE
+ 01BE:0004  Res  $$RTLOVL_LOAD_FROM_CACHE
+ 01BE:0004  Res  $$RTLOVL_PLACE_INTO_CACHE
+ 01BE:047A  Res  $$RTLOVL_SEEK_SAVE_FILE
+ 01BE:0094  Res  $$RTLPATHSEARCH
+ 01BE:036C  Res  $$RTLSETERROR
+ 01BE:037D  Res  $$RTL_FATAL_ERROR
+ 01BE:043D  Res  $$RTL_REGISTER
+ 01BE:0434  Res  $$RTL_TERMCALL
+ 01BE:03C4  Res  $$RTL_TERMINATE
+ 01BE:0435  Res  $$RTL_TERM_INIT
+ 0218:0206  Res  STKHQQ
+ 0000:0000  Res  _derive
+ 0218:052A  Res  _edata
+ 0218:0730  Res  _end
+ 0218:01ED  Res  _environ
+ 0218:01C4  Res  _errno
+ 0023:01D9  Res  _exit
+ 0217:0000  Res  _fd_50F6_46D2
+ 0023:09D2  Res  _fflush
+ 0206:0100  Res  _fixtureMaster
+ 0206:0104  Res  _fixtureMaster2
+ 0206:0000  Res  _fixturePixelsA
+ 0206:0080  Res  _fixturePixelsB
+ 0023:0A52  Res  _flushall
+ 0023:0638  Res  _fwrite
+ 0023:0AA6  Res  _lseek
+ 0000:001C  Res  _main
+ 0023:0C94  Res  _malloc
+ 0023:0FF6  Res  _memcpy
+ 0023:0F6C  Res  _puts
+ 0023:0C80  Res  _stackavail
+ 0023:0F54  Res  _strlen
+ 0023:0B20  Res  _write
+ 0218:0202  Res  __aaltstkovr
+ 0218:01A8  Res  __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0218:01FE  Res  __adbgmsg
+ 0218:018C  Res  __aexit_rtn
+ 0023:02C4  Res  __aFchkstk
+ 0000:1000  Abs  __AHINCR
+ 0000:000C  Abs  __AHSHIFT
+ 0218:01B6  Res  __aintdiv
+ 0218:0420  Res  __amblksiz
+ 0023:00EF  Res  __amsg_exit
+ 0218:0042  Res  __anullsize
+ 0218:01A4  Res  __aseghi
+ 0218:01A6  Res  __aseglo
+ 0218:018E  Res  __asizds
+ 0023:0014  Res  __astart
+ 0218:018A  Res  __atopsp
+ 0218:0530  Res  __bufin
+ 0023:01E8  Res  __cexit
+ 0218:0220  Res  __cflush
+ 0218:01F6  Res  __child
+ 0023:02C4  Res  __chkstk
+ 0023:0114  Res  __cinit
+ 0023:00DF  Res  __cintDIV
+ 0023:025C  Res  __ctermsub
+ 0023:01F2  Res  __c_exit
+ 0023:0111  Res  __dataseg
+ 0218:01CF  Res  __doserrno
+ 0023:05E2  Res  __dosret0
+ 0023:05F7  Res  __dosretax
+ 0023:05EA  Res  __dosreturn
+ 0218:01CC  Res  __dosvermajor
+ 0218:01CD  Res  __dosverminor
+ 0129:0000  Res  __EmDataSeg
+ 0023:01E0  Res  __exit
+ 0218:01BA  Res  __fac
+ 0023:0C9A  Res  __ffree
+ 0023:029C  Res  __FF_MSGBANNER
+ 0218:0412  Res  __fheap
+ 0023:0EF0  Res  __findlast
+ 0023:07D0  Res  __flsbuf
+ 0023:0CAD  Res  __fmalloc
+ 0218:0434  Res  __fpinit
+ 0023:02BE  Res  __fptrap
+ 0023:0989  Res  __ftbuf
+ 0023:08BC  Res  __getbuf
+ 0023:0E10  Res  __growseg
+ 0023:0E9F  Res  __incseg
+ 0023:0D2A  Res  __initseg
+ 0218:01F9  Res  __intno
+ 0218:0222  Res  __iob
+ 0218:0312  Res  __iob2
+ 0218:0402  Res  __lastiob
+ 0023:0D5E  Res  __linkseg
+ 0023:0604  Res  __maperror
+ 0023:05BC  Res  __myalloc
+ 0023:0F10  Res  __newseg
+ 0218:01D1  Res  __nfile
+ 0218:0190  Res  __nheap_desc
+ 0023:055A  Res  __NMSG_TEXT
+ 0023:0585  Res  __NMSG_WRITE
+ 0023:02E8  Res  __nullcheck
+ 0218:01CF  Res  __oserr
+ 0218:01D3  Res  __osfile
+ 0218:01CC  Res  __osmajor
+ 0218:01CD  Res  __osminor
+ 0218:01CE  Res  __osmode
+ 0218:01CC  Res  __osversion
+ 0218:01F8  Res  __ovlflag
+ 0218:01FA  Res  __ovlvec
+ 0218:01F1  Res  __pgmptr
+ 0218:01CA  Res  __psp
+ 0218:01C8  Res  __pspadr
+ 0023:0D94  Res  __searchseg
+ 0023:030C  Res  __setargv
+ 0023:04BA  Res  __setenvp
+ 0023:0908  Res  __stbuf
+ 0218:01C6  Res  __umaskval
+ 0218:042A  Res  ___aDBexit
+ 0218:0430  Res  ___aDBptrchk
+ 0218:0428  Res  ___aDBrterr
+ 0218:0426  Res  ___aDBswpchk
+ 0218:0424  Res  ___aDBswpflg
+ 0218:01E7  Res  ___argc
+ 0218:01E9  Res  ___argv
+ 0218:0422  Res  ___qczrinit
+
+  Address         Publics by Value
+
+ 0000:0000  Res  _derive
+ 0000:0001  Abs  $$RTLDATA_DUMMY
+ 0000:0001  Abs  $$RTLOVL_DUMMY_CACHE
+ 0000:000C  Abs  __AHSHIFT
+ 0000:1000  Abs  __AHINCR
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0000:001C  Res  _main
+ 0023:0014  Res  $$MAIN
+ 0023:0014  Res  __astart
+ 0023:00DF  Res  __cintDIV
+ 0023:00EF  Res  __amsg_exit
+ 0023:0111  Res  __dataseg
+ 0023:0114  Res  __cinit
+ 0023:01D9  Res  _exit
+ 0023:01E0  Res  __exit
+ 0023:01E8  Res  __cexit
+ 0023:01F2  Res  __c_exit
+ 0023:025C  Res  __ctermsub
+ 0023:029C  Res  __FF_MSGBANNER
+ 0023:02BE  Res  __fptrap
+ 0023:02C4  Res  __aFchkstk
+ 0023:02C4  Res  __chkstk
+ 0023:02E8  Res  __nullcheck
+ 0023:030C  Res  __setargv
+ 0023:04BA  Res  __setenvp
+ 0023:055A  Res  __NMSG_TEXT
+ 0023:0585  Res  __NMSG_WRITE
+ 0023:05BC  Res  __myalloc
+ 0023:05E2  Res  __dosret0
+ 0023:05EA  Res  __dosreturn
+ 0023:05F7  Res  __dosretax
+ 0023:0604  Res  __maperror
+ 0023:0638  Res  _fwrite
+ 0023:07D0  Res  __flsbuf
+ 0023:08BC  Res  __getbuf
+ 0023:0908  Res  __stbuf
+ 0023:0989  Res  __ftbuf
+ 0023:09D2  Res  _fflush
+ 0023:0A52  Res  _flushall
+ 0023:0AA6  Res  _lseek
+ 0023:0B20  Res  _write
+ 0023:0C80  Res  _stackavail
+ 0023:0C94  Res  _malloc
+ 0023:0C9A  Res  __ffree
+ 0023:0CAD  Res  __fmalloc
+ 0023:0D2A  Res  __initseg
+ 0023:0D5E  Res  __linkseg
+ 0023:0D94  Res  __searchseg
+ 0023:0E10  Res  __growseg
+ 0023:0E9F  Res  __incseg
+ 0023:0EF0  Res  __findlast
+ 0023:0F10  Res  __newseg
+ 0023:0F54  Res  _strlen
+ 0023:0F6C  Res  _puts
+ 0023:0FF6  Res  _memcpy
+ 0129:0000  Res  __EmDataSeg
+ 012A:0000  Res  $$OVLCHANGE
+ 012A:0002  Res  $$OVLUNLOAD
+ 012A:0035  Res  $$OVLLOAD
+ 012A:033A  Res  $$OVLLOADIL
+ 012A:035F  Res  $$RTLOVLINIT
+ 012A:04E6  Res  $$OVLSAVESIZE
+ 012A:0513  Res  $$OVLSAVE
+ 012A:0558  Res  $$OVLRESTORE
+ 012A:05C1  Res  $$OVLCLOSE
+ 012A:0882  Res  $$OVLPBLOCK
+ 012A:0892  Res  $$OVLINFO
+ 01BE:0004  Res  $$RTLOVL_INIT_CACHE
+ 01BE:0004  Res  $$RTLOVL_LOAD_FROM_CACHE
+ 01BE:0004  Res  $$RTLOVL_PLACE_INTO_CACHE
+ 01BE:0005  Res  $$OVCOFF
+ 01BE:0005  Res  $$OVCON
+ 01BE:0006  Res  $$RTLOVL_CONVERT_VAL
+ 01BE:0036  Res  $$RTLGETENV
+ 01BE:0094  Res  $$RTLPATHSEARCH
+ 01BE:01D8  Res  $$RTLGETPROGNAME
+ 01BE:036C  Res  $$RTLSETERROR
+ 01BE:037D  Res  $$RTL_FATAL_ERROR
+ 01BE:03C4  Res  $$RTL_TERMINATE
+ 01BE:0434  Res  $$RTL_TERMCALL
+ 01BE:0435  Res  $$RTL_TERM_INIT
+ 01BE:043D  Res  $$RTL_REGISTER
+ 01BE:047A  Res  $$RTLOVL_CLOSE_SAVE_FILE
+ 01BE:047A  Res  $$RTLOVL_CREATE_SAVE_FILE
+ 01BE:047A  Res  $$RTLOVL_DELETE_SAVE_FILE
+ 01BE:047A  Res  $$RTLOVL_EXTEND_SAVE_FILE
+ 01BE:047A  Res  $$RTLOVL_INIT_SAVE_FILE
+ 01BE:047A  Res  $$RTLOVL_SEEK_SAVE_FILE
+ 0206:0000  Res  _fixturePixelsA
+ 0206:0080  Res  _fixturePixelsB
+ 0206:0100  Res  _fixtureMaster
+ 0206:0104  Res  _fixtureMaster2
+ 0217:0000  Res  _fd_50F6_46D2
+ 0218:0042  Res  __anullsize
+ 0218:018A  Res  __atopsp
+ 0218:018C  Res  __aexit_rtn
+ 0218:018E  Res  __asizds
+ 0218:0190  Res  __nheap_desc
+ 0218:01A4  Res  __aseghi
+ 0218:01A6  Res  __aseglo
+ 0218:01A8  Res  __acfinfo
+ 0218:01B6  Res  __aintdiv
+ 0218:01BA  Res  __fac
+ 0218:01C4  Res  _errno
+ 0218:01C6  Res  __umaskval
+ 0218:01C8  Res  __pspadr
+ 0218:01CA  Res  __psp
+ 0218:01CC  Res  __dosvermajor
+ 0218:01CC  Res  __osmajor
+ 0218:01CC  Res  __osversion
+ 0218:01CD  Res  __dosverminor
+ 0218:01CD  Res  __osminor
+ 0218:01CE  Res  __osmode
+ 0218:01CF  Res  __doserrno
+ 0218:01CF  Res  __oserr
+ 0218:01D1  Res  __nfile
+ 0218:01D3  Res  __osfile
+ 0218:01E7  Res  ___argc
+ 0218:01E9  Res  ___argv
+ 0218:01ED  Res  _environ
+ 0218:01F1  Res  __pgmptr
+ 0218:01F6  Res  __child
+ 0218:01F8  Res  __ovlflag
+ 0218:01F9  Res  __intno
+ 0218:01FA  Res  __ovlvec
+ 0218:01FE  Res  __adbgmsg
+ 0218:0202  Res  __aaltstkovr
+ 0218:0206  Res  STKHQQ
+ 0218:0220  Res  __cflush
+ 0218:0222  Res  __iob
+ 0218:0312  Res  __iob2
+ 0218:0402  Res  __lastiob
+ 0218:0412  Res  __fheap
+ 0218:0420  Res  __amblksiz
+ 0218:0422  Res  ___qczrinit
+ 0218:0424  Res  ___aDBswpflg
+ 0218:0426  Res  ___aDBswpchk
+ 0218:0428  Res  ___aDBrterr
+ 0218:042A  Res  ___aDBexit
+ 0218:0430  Res  ___aDBptrchk
+ 0218:0434  Res  __fpinit
+ 0218:052A  Res  _edata
+ 0218:0530  Res  __bufin
+ 0218:0730  Res  _end

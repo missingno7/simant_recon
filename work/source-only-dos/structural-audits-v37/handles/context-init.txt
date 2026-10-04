@@ -1,0 +1,25 @@
+win_LockInit  root:23AE:0022  linear 23B02  size 47  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 23AE: function 2/8; neighbours: win_NoWindowsShouldBeLocked, win_IsWinLocked, f_23AE_0069
+  frame: {'frame': 'none'}
+  win16: _myBeginSong [LOW] unique constant 0x8da6
+  0022  mov ax, 0xb4
+  0025  push ax
+  0026  sub ax, ax
+  0028  push ax
+  0029  mov cx, 0x8cf2
+  002C  push ds
+  002D  push cx
+  002E  lcall 0x29f4, 0x2878               -> __fmemset
+  0033  add sp, 8
+  0036  mov ax, 0x2d
+  0039  push ax
+  003A  sub ax, ax
+  003C  push ax
+  003D  mov ax, 0x8da6
+  0040  push ds
+  0041  push ax
+  0042  lcall 0x29f4, 0x2878               -> __fmemset
+  0047  add sp, 8
+  004A  mov word ptr [0x644c], 1           DS:644C
+  0050  retf

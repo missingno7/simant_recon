@@ -1,0 +1,54 @@
+{
+  "root_reviewed": false,
+  "admitted": false,
+  "canonical_and_effective_view_effects_equal": true,
+  "extractions": [
+    {
+      "source": {
+        "path": "D:/Prog/simant_recon/src/root/m20E8.c",
+        "size": 11458,
+        "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2"
+      },
+      "function": "int far win_LoadAllWindows(void)\n{\n    char purge[0x28];\n    int i;\n    char far * far *h;\n    int far *p;\n    char far *q;\n\n    font_InitFonts();\n    win_LockInit();\n    _fmemset(win_drawHooks, 0, 0xb4);\n    for (i = 0; i < 45; i++) win_offsets[i] = g_635C;\n    h = db_LoadObject(g_5A97, 9);\n    if (h) {\n        _fmemcpy(win_offsets, f_171C_1B84(h), 0x140);\n        f_171C_1BBA(h);\n        db_PurgeObject(g_5A97, 9);\n    }\n    f_208F_0419(&fd_50F6_47DA, 0x6f);\n    h = db_LoadObject(0x80, 0);\n    if (h == 0) {\n        Punt(\"Cannot load resource\\nplease try another\");\n    } else {\n        p = (int far *)*h;\n        win_numOfWindows = p[0];\n        win_numOfColors = p[1];\n        win_numOfGroups = p[2];\n        db_PurgeObject(0x80, 0);\n    }\n    h = db_LoadObject(0x81, 0);\n    _fmemcpy(win_colors, *h, win_numOfColors * 6);\n    db_PurgeObject(0x81, 0);\n    h = db_LoadObject(0x83, 0);\n    q = *h;\n    if (h == 0)\n        Punt(\"Could not load purge list\");\n    _fmemcpy(purge, q, 0x28);\n    db_PurgeObject(0x83, 0);\n    for (i = 0; i < win_numOfWindows; i++) {\n        if (purge[i] == 0) {\n            win_LoadWindow(i << 8);\n            f_1A53_034F(i, 0);\n        }\n    }\n    return 1;\n}",
+      "function_sha256_normalized_latin1": "fbef27bfca6982b65b3e893848c72d0a4f9a3a2f8693522e9283e1200af86b11",
+      "view_effects": {
+        "hook_clear": "_fmemset(win_drawHooks, 0, 0xb4)",
+        "offset_reset_loop": "for (i = 0; i < 45; i++) win_offsets[i] = g_635C;",
+        "offset_copy": "_fmemcpy(win_offsets, f_171C_1B84(h), 0x140)"
+      },
+      "sentinel_declaration": "struct Rect g_635C = { (int)0x8000, (int)0x8000, (int)0x8000, (int)0x8000 };"
+    },
+    {
+      "source": {
+        "path": "D:/Prog/simant_recon/build/source-only-dos-v35/sources/U100.c",
+        "size": 11180,
+        "sha256": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821"
+      },
+      "function": "int far win_LoadAllWindows(void)\n{\n    char purge[0x28];\n    int i;\n    char far * far *h;\n    int far *p;\n    char far *q;\n\n    font_InitFonts();\n    win_LockInit();\n    _fmemset(win_drawHooks, 0, 0xb4);\n    for (i = 0; i < 45; i++) win_offsets[i] = g_635C;\n    h = db_LoadObject(g_5A97, 9);\n    if (h) {\n        _fmemcpy(win_offsets, f_171C_1B84(h), 0x140);\n        f_171C_1BBA(h);\n        db_PurgeObject(g_5A97, 9);\n    }\n    f_208F_0419(&fd_50F6_47DA, 0x6f);\n    h = db_LoadObject(0x80, 0);\n    if (h == 0) {\n        Punt(\"Cannot load resource\\nplease try another\");\n    } else {\n        p = (int far *)*h;\n        win_numOfWindows = p[0];\n        win_numOfColors = p[1];\n        win_numOfGroups = p[2];\n        db_PurgeObject(0x80, 0);\n    }\n    h = db_LoadObject(0x81, 0);\n    _fmemcpy(win_colors, *h, win_numOfColors * 6);\n    db_PurgeObject(0x81, 0);\n    h = db_LoadObject(0x83, 0);\n    q = *h;\n    if (h == 0)\n        Punt(\"Could not load purge list\");\n    _fmemcpy(purge, q, 0x28);\n    db_PurgeObject(0x83, 0);\n    for (i = 0; i < win_numOfWindows; i++) {\n        if (purge[i] == 0) {\n            win_LoadWindow(i << 8);\n            db_UnhookObject(i, 0);\n        }\n    }\n    return 1;\n}",
+      "function_sha256_normalized_latin1": "328a50040b0eba0194c4081b8c1b37a4d0f92d81f5d7bf6eb16d8ab4e381cf73",
+      "view_effects": {
+        "hook_clear": "_fmemset(win_drawHooks, 0, 0xb4)",
+        "offset_reset_loop": "for (i = 0; i < 45; i++) win_offsets[i] = g_635C;",
+        "offset_copy": "_fmemcpy(win_offsets, f_171C_1B84(h), 0x140)"
+      },
+      "sentinel_declaration": "struct Rect g_635C = { (int)0x8000, (int)0x8000, (int)0x8000, (int)0x8000 };"
+    }
+  ],
+  "runtime_comparison": {
+    "fixture": {
+      "path": "D:/Prog/simant_recon/build/workers/dos_window_owner_v36/runtime-sources/MAIN.c",
+      "size": 2784,
+      "sha256": "cfe16a770d3d4b8b80682f35ebb855e033538fa418e9ca3c55b2573b280b49eb"
+    },
+    "reset_hook_length": 180,
+    "rect_reset_count": 45,
+    "rect_copy_length": 320,
+    "rect_sentinel_signed_fields": [
+      -32768,
+      -32768,
+      -32768,
+      -32768
+    ],
+    "claim": "Independent natural fixture exercises these exact extracted reset/copy effects and signed callback indexing; does not execute the DB/font/window-loader remainder."
+  }
+}

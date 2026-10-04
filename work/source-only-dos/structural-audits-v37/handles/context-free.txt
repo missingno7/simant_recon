@@ -1,0 +1,55 @@
+win_IsWinOpen  root:22BF:09B0  linear 235A0  size 114  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 22BF: function 32/47; neighbours: f_22BF_094F, win_SetObjBitmap, win_IsWinInFront, f_22BF_0A34
+  frame: {'frame': 'bp', 'locals': 12, 'stack_check': False}
+  09B0  push bp
+  09B1  mov bp, sp
+  09B3  sub sp, 0xc
+  09B6  push di
+  09B7  push si
+  09B8  mov word ptr [bp - 6], 0
+  09BD  mov cl, 8
+  09BF  mov bx, ax
+  09C1  sar bx, cl
+  09C3  shl bx, 1
+  09C5  shl bx, 1
+  09C7  add bx, 0x9230
+  09CB  mov word ptr [bp - 0xc], bx
+  09CE  mov ax, word ptr [bx]
+  09D0  mov dx, word ptr [bx + 2]
+  09D3  mov si, ax
+  09D5  mov word ptr [bp - 8], dx
+  09D8  or dx, ax
+  09DA  je 0xa19
+  09DC  push word ptr [bp - 8]
+  09DF  push si
+  09E0  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  09E5  pop bx
+  09E6  pop bx
+  09E7  mov di, ax
+  09E9  mov word ptr [bp - 2], dx
+  09EC  or dx, ax
+  09EE  je 0xa0f
+  09F0  mov cl, 9
+  09F2  mov es, word ptr [bp - 2]
+  09F5  mov ah, byte ptr es:[di + 0x1d]
+  09F9  and ax, 0x200
+  09FC  shr ax, cl
+  09FE  mov word ptr [bp - 6], ax
+  0A01  mov ax, word ptr [bp - 8]
+  0A04  push ax
+  0A05  push si
+  0A06  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  0A0B  pop bx
+  0A0C  pop bx
+  0A0D  jmp 0xa19
+  0A0F  mov bx, word ptr [bp - 0xc]
+  0A12  sub ax, ax
+  0A14  mov word ptr [bx + 2], ax
+  0A17  mov word ptr [bx], ax
+  0A19  mov ax, word ptr [bp - 6]
+  0A1C  pop si
+  0A1D  pop di
+  0A1E  mov sp, bp
+  0A20  pop bp
+  0A21  retf

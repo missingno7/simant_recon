@@ -1,0 +1,204 @@
+{
+  "schema": "simant-clip-owner-extent-controls-v36",
+  "root_reviewed": false,
+  "status": "NO_EXTENT_IDENTIFICATION",
+  "profile": "msc600ax",
+  "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+  ],
+  "scope": "Whole original-order canonical TU compile controls, no definition or admission. Scaffold 038E remains unclaimed. No original executable read.",
+  "inputs": [
+    {
+      "path": "src\\root\\m1E57.c",
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "size": 12957
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "9cd6bbfbbde03894360f0df71bab4bda68fbca27a4e0c667f2d791057e1deae6",
+      "size": 80313
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    }
+  ],
+  "controls": [
+    {
+      "label": "unsized",
+      "declaration_dimension": "unsized",
+      "source": {
+        "path": "build\\workers\\dos_clip_owner_v36\\unsized.c",
+        "sha256": "6db9fd09ae44017d1e178873377aef8df844ea4ff6b8b43cb4004d8c2cd9ca47",
+        "size": 13472
+      },
+      "object": {
+        "path": "build\\workers\\dos_clip_owner_v36\\unsized.OBJ",
+        "sha256": "a99ee78f0f6deba067be1ec9dc89c84317adea2e30fee9e1ebbc833e6b9f58ee",
+        "size": 13527
+      },
+      "live_projection": {
+        "path": "build\\workers\\dos_clip_owner_v36\\unsized-live.json",
+        "sha256": "b69ec883de5940819371ea026f349f9322e14922e7f1134b22000c94faaeb33b",
+        "size": 267370
+      },
+      "compiler_log": {
+        "path": "build\\workers\\dos_clip_owner_v36\\cc\\c62psdkx4\\compiler.log",
+        "sha256": "078b239c804cf70d8b5f41c092b09c052c38966842ae157023ab65e536c45427",
+        "size": 11
+      },
+      "live_same_as_unsized": true,
+      "buffer_external": true,
+      "buffer_communal": false
+    },
+    {
+      "label": "one",
+      "declaration_dimension": "1",
+      "source": {
+        "path": "build\\workers\\dos_clip_owner_v36\\one.c",
+        "sha256": "1694e6c65f669c1adc91bcb3b4cc772fd71c639fb4a656b6dc67ad2b941bef64",
+        "size": 13473
+      },
+      "object": {
+        "path": "build\\workers\\dos_clip_owner_v36\\one.OBJ",
+        "sha256": "1e8ff23abdf6e3d1761459cf2c427396f6580a2307ec6e3a7bd61982930aad0c",
+        "size": 13527
+      },
+      "live_projection": {
+        "path": "build\\workers\\dos_clip_owner_v36\\one-live.json",
+        "sha256": "b69ec883de5940819371ea026f349f9322e14922e7f1134b22000c94faaeb33b",
+        "size": 267370
+      },
+      "compiler_log": {
+        "path": "build\\workers\\dos_clip_owner_v36\\cc\\c7lfzus75\\compiler.log",
+        "sha256": "078b239c804cf70d8b5f41c092b09c052c38966842ae157023ab65e536c45427",
+        "size": 11
+      },
+      "live_same_as_unsized": true,
+      "buffer_external": true,
+      "buffer_communal": false
+    },
+    {
+      "label": "limit256",
+      "declaration_dimension": "256",
+      "source": {
+        "path": "build\\workers\\dos_clip_owner_v36\\limit256.c",
+        "sha256": "69593ec989a1af2b4255bcaba5d932ab08cc7f6a3219e1f7248b69739e51fd93",
+        "size": 13475
+      },
+      "object": {
+        "path": "build\\workers\\dos_clip_owner_v36\\limit256.OBJ",
+        "sha256": "cd7643d2adae56023d989991b7c4477000877caa4ce1b289e2e6a467e2234d6a",
+        "size": 13529
+      },
+      "live_projection": {
+        "path": "build\\workers\\dos_clip_owner_v36\\limit256-live.json",
+        "sha256": "b69ec883de5940819371ea026f349f9322e14922e7f1134b22000c94faaeb33b",
+        "size": 267370
+      },
+      "compiler_log": {
+        "path": "build\\workers\\dos_clip_owner_v36\\cc\\cij3evmj6\\compiler.log",
+        "sha256": "078b239c804cf70d8b5f41c092b09c052c38966842ae157023ab65e536c45427",
+        "size": 11
+      },
+      "live_same_as_unsized": true,
+      "buffer_external": true,
+      "buffer_communal": false
+    },
+    {
+      "label": "wide512",
+      "declaration_dimension": "512",
+      "source": {
+        "path": "build\\workers\\dos_clip_owner_v36\\wide512.c",
+        "sha256": "f6e25bca3a44c50f0161cfbb8bb7d6f42c9c98e2a402bddb78e5be3daa4a167a",
+        "size": 13475
+      },
+      "object": {
+        "path": "build\\workers\\dos_clip_owner_v36\\wide512.OBJ",
+        "sha256": "407a9a741149bf326a67e3e7c3e3f396e2ae272624053a94774307cb258f2a75",
+        "size": 13529
+      },
+      "live_projection": {
+        "path": "build\\workers\\dos_clip_owner_v36\\wide512-live.json",
+        "sha256": "b69ec883de5940819371ea026f349f9322e14922e7f1134b22000c94faaeb33b",
+        "size": 267370
+      },
+      "compiler_log": {
+        "path": "build\\workers\\dos_clip_owner_v36\\cc\\c20ittoap\\compiler.log",
+        "sha256": "078b239c804cf70d8b5f41c092b09c052c38966842ae157023ab65e536c45427",
+        "size": 11
+      },
+      "live_same_as_unsized": true,
+      "buffer_external": true,
+      "buffer_communal": false
+    }
+  ],
+  "denied_oracle_reads": [],
+  "conclusion": "Extern Rect[1], Rect[256], Rect[512] and unsized Rect[] have identical complete live OMF contributions. Capacity does not enter code, data, publics, ordered fixups, externals or COMDEFs. Declaring 256 would supply new information."
+}

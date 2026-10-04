@@ -1,0 +1,4592 @@
+{
+  "schema": "dos-tail-admission-reopening-v36",
+  "root_reviewed": false,
+  "admitted": false,
+  "pin_checks": [
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\source-only-dos\\structural-audits-v32\\tail-bss-v32\\tail-bss-boundary-v32.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\source-only-dos\\structural-audits-v32\\tail-root-review.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\source-only-dos\\structural-audits-v35\\original-debt-operands.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\work\\takeover\\behavioral-oracle\\data-debt-disposition-approved-v1.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\layout\\manifest.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\layout\\oracle.lock.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\layout\\toolchain.json",
+      "exact": true
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "exact": true
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0.asm",
+      "exact": true
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0dat.asm",
+      "exact": true
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\crt0msg.asm",
+      "exact": true
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\STARTUP\\dos\\nmsghdr.asm",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\pre-clear-prefix-review.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\original-manager-analysis.txt",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\original-manager-selected-analysis.txt",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\original-cinit-analysis.txt",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\cinit-object-analysis.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\runtime-startup-rows.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\inspect_startup.py",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\probe_stock_crt.py",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\stock-crt-controls.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\run_fixture_dos.py",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\full-dos-execution.json",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\policy_candidate.py",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\test_policy_candidate.py",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\review.md",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\bss_shift.c",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\bss_two.c",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\file_seed.c",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\dosbox.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\FULLRUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\fullrun.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\MAIN.OBJ",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.EXE",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.LNK",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.MAP",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\RUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\dosbox.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\FULLRUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\fullrun.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\MAIN.OBJ",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.EXE",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.LNK",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.MAP",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\RUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\dosbox.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\FULLRUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\fullrun.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\MAIN.OBJ",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.EXE",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.LNK",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.MAP",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\RUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\dosbox.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\FULLRUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\fullrun.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\MAIN.OBJ",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.EXE",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.LNK",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.MAP",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\RUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\dosbox.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\FULLRUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\fullrun.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\MAIN.OBJ",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.EXE",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.LNK",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.MAP",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\RUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\dosbox.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\FULLRUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\fullrun.conf",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\MAIN.OBJ",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.EXE",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.LNK",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.MAP",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\RUN.BAT",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\FULLRUN.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\LINK.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\FULLRUN.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\LINK.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\FULLRUN.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\LINK.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\FULLRUN.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\LINK.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\FULLRUN.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\LINK.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\FULLRUN.LOG",
+      "exact": true
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\LINK.LOG",
+      "exact": true
+    }
+  ],
+  "runtime_member_count": 90,
+  "retained_receipt_input_checks": [
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "README.md",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "docs/codegen-rules.md",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "docs/tu-evidence.md",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "docs/exe-format.md",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "layout/manifest.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "layout/symbols.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "build/source-only-dos/build-report.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "layout/oracle.lock.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "layout/toolchain.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "evidence/toolchain/runtime-location.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "tools/exe.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "tools/omf.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "tools/runtime.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "tools/rtlink.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "tools/compiler.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/STARTUP/dos/crt0.asm",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/STARTUP/dos/crt0msg.asm",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/STARTUP/dos/nmsghdr.asm",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/STARTUP/cmacros.inc",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/STARTUP/version.inc",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/STARTUP/rterr.inc",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/STARTUP/msdos.inc",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "build/source-only-dos/objects/U046.OBJ",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "C:/msys64/usr/bin/ndisasm.exe",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v32/tail-bss-v32/tail-bss-boundary-v32.json",
+      "path": "build/workers/dos_tail_bss_boundary_v32/probe_tail_bss_boundary_v32.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "build/workers/dos_root_structural_v35/original_debt_operands.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "tools/exe.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "tools/functions.py",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "layout/manifest.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "layout/functions.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "layout/symbols.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "layout/oracle.lock.json",
+      "exact": true
+    },
+    {
+      "receipt": "work/source-only-dos/structural-audits-v35/original-debt-operands.json",
+      "path": "assets/SIMANT.EXE",
+      "exact": true
+    }
+  ],
+  "selected_tool_checks": [
+    {
+      "role": "rtlink400",
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "exact": true
+    },
+    {
+      "role": "rtlink400",
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "exact": true
+    },
+    {
+      "role": "rtlink400",
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "exact": true
+    },
+    {
+      "role": "rtlink400",
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "exact": true
+    },
+    {
+      "role": "rtlink610",
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "exact": true
+    },
+    {
+      "role": "rtlink610",
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "exact": true
+    },
+    {
+      "role": "rtlink610",
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "exact": true
+    },
+    {
+      "role": "rtlink610",
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "exact": true
+    },
+    {
+      "role": "rtlink610",
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "exact": true
+    },
+    {
+      "role": "rtlink610",
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "exact": true
+    },
+    {
+      "role": "rtlink610",
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "exact": true
+    },
+    {
+      "role": "llibcr.lib",
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "exact": true
+    },
+    {
+      "role": "libh.lib",
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "exact": true
+    },
+    {
+      "role": "dosbox-x",
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "exact": true
+    }
+  ],
+  "compiler_profile_verified": "msc600ax",
+  "runtime_all_exact": true,
+  "runtime_conflicts": {},
+  "startup_data_checks": [
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0.asm",
+      "module_index": 0,
+      "segment": "_DATA",
+      "class": "DATA",
+      "size": 30,
+      "code_member": true,
+      "member_sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+      "align": "word",
+      "linear": 381488,
+      "rule": "REFERENCED",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {
+        "__aexit_rtn": [
+          21939,
+          30466
+        ],
+        "__nheap_desc": [
+          21939,
+          30470
+        ],
+        "__aseghi": [
+          21939,
+          30490
+        ],
+        "__aseglo": [
+          21939,
+          30492
+        ],
+        "__asizds": [
+          21939,
+          30468
+        ],
+        "__atopsp": [
+          21939,
+          30464
+        ]
+      }
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0.asm",
+      "module_index": 0,
+      "segment": "DBDATA",
+      "class": "DATA",
+      "size": 14,
+      "code_member": true,
+      "member_sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+      "align": "word",
+      "linear": 383204,
+      "rule": "REFERENCED",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {
+        "___aDBptrchk": [
+          21939,
+          32192
+        ],
+        "___aDBswpchk": [
+          21939,
+          32182
+        ],
+        "___aDBswpflg": [
+          21939,
+          32180
+        ],
+        "___aDBexit": [
+          21939,
+          32186
+        ],
+        "___aDBrterr": [
+          21939,
+          32184
+        ]
+      }
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0dat.asm",
+      "module_index": 1,
+      "segment": "CDATA",
+      "class": "DATA",
+      "size": 14,
+      "code_member": true,
+      "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+      "align": "word",
+      "linear": 383218,
+      "rule": "REFERENCED",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {
+        "__fpinit": [
+          21939,
+          32196
+        ]
+      }
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0dat.asm",
+      "module_index": 1,
+      "segment": "_DATA",
+      "class": "DATA",
+      "size": 86,
+      "code_member": true,
+      "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+      "align": "word",
+      "linear": 381518,
+      "rule": "REFERENCED",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {
+        "__osversion": [
+          21939,
+          30530
+        ],
+        "_errno": [
+          21939,
+          30522
+        ],
+        "__child": [
+          21939,
+          30572
+        ],
+        "__nfile": [
+          21939,
+          30535
+        ],
+        "___argc": [
+          21939,
+          30557
+        ],
+        "__intno": [
+          21939,
+          30575
+        ],
+        "__dosvermajor": [
+          21939,
+          30530
+        ],
+        "__oserr": [
+          21939,
+          30533
+        ],
+        "___argv": [
+          21939,
+          30559
+        ],
+        "__dosverminor": [
+          21939,
+          30531
+        ],
+        "_environ": [
+          21939,
+          30563
+        ],
+        "__osfile": [
+          21939,
+          30537
+        ],
+        "__osmode": [
+          21939,
+          30532
+        ],
+        "__pspadr": [
+          21939,
+          30526
+        ],
+        "__ovlvec": [
+          21939,
+          30576
+        ],
+        "__pgmptr": [
+          21939,
+          30567
+        ],
+        "__acfinfo": [
+          21939,
+          30494
+        ],
+        "__ovlflag": [
+          21939,
+          30574
+        ],
+        "__aintdiv": [
+          21939,
+          30508
+        ],
+        "__osmajor": [
+          21939,
+          30530
+        ],
+        "__osminor": [
+          21939,
+          30531
+        ],
+        "__umaskval": [
+          21939,
+          30524
+        ],
+        "__doserrno": [
+          21939,
+          30533
+        ],
+        "__fac": [
+          21939,
+          30512
+        ],
+        "__psp": [
+          21939,
+          30528
+        ]
+      }
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0dat.asm",
+      "module_index": 1,
+      "segment": "XIQC",
+      "class": "DATA",
+      "size": 2,
+      "code_member": true,
+      "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+      "align": "word",
+      "linear": 383202,
+      "rule": "REFERENCED_PUBLIC",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {
+        "___qczrinit": [
+          21939,
+          32178
+        ]
+      }
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0msg.asm",
+      "module_index": 2,
+      "segment": "MSG",
+      "class": "MSG",
+      "size": 130,
+      "code_member": true,
+      "member_sha256": "5db3773118ea0299a46b9a439f14f9e471493d6e3dea1b2a1eefabc26cd9cb92",
+      "align": "byte",
+      "linear": 386548,
+      "rule": "CLASS_SEQUENCE",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {}
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0msg.asm",
+      "module_index": 2,
+      "segment": "PAD",
+      "class": "MSG",
+      "size": 2,
+      "code_member": true,
+      "member_sha256": "5db3773118ea0299a46b9a439f14f9e471493d6e3dea1b2a1eefabc26cd9cb92",
+      "align": "byte",
+      "linear": 386762,
+      "rule": "CLASS_SEQUENCE",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {}
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\crt0msg.asm",
+      "module_index": 2,
+      "segment": "_DATA",
+      "class": "DATA",
+      "size": 4,
+      "code_member": true,
+      "member_sha256": "5db3773118ea0299a46b9a439f14f9e471493d6e3dea1b2a1eefabc26cd9cb92",
+      "align": "word",
+      "linear": 381604,
+      "rule": "REFERENCED",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {
+        "__adbgmsg": [
+          21939,
+          30580
+        ]
+      }
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "crt0fp.asm",
+      "module_index": 3,
+      "segment": "MSG",
+      "class": "MSG",
+      "size": 47,
+      "code_member": true,
+      "member_sha256": "7c6d3419d89083e30fa0156f660c6b1b899af5244bb8c10906dd0f095519f19c",
+      "align": "byte",
+      "linear": 386678,
+      "rule": "CLASS_SEQUENCE",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {}
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "crt0fp.asm",
+      "module_index": 3,
+      "segment": "PAD",
+      "class": "MSG",
+      "size": 2,
+      "code_member": true,
+      "member_sha256": "7c6d3419d89083e30fa0156f660c6b1b899af5244bb8c10906dd0f095519f19c",
+      "align": "byte",
+      "linear": 386762,
+      "rule": "CLASS_SEQUENCE",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {}
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\nmsghdr.asm",
+      "module_index": 9,
+      "segment": "HDR",
+      "class": "MSG",
+      "size": 8,
+      "code_member": true,
+      "member_sha256": "e9b58fa3aa27d2b06d906ea99bf7639e6d0c07c3b84ba9fdc0d05eac19f086ce",
+      "align": "byte",
+      "linear": 386540,
+      "rule": "REFERENCED",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {}
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\nmsghdr.asm",
+      "module_index": 9,
+      "segment": "PAD",
+      "class": "MSG",
+      "size": 2,
+      "code_member": true,
+      "member_sha256": "e9b58fa3aa27d2b06d906ea99bf7639e6d0c07c3b84ba9fdc0d05eac19f086ce",
+      "align": "byte",
+      "linear": 386762,
+      "rule": "CLASS_SEQUENCE",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {}
+    },
+    {
+      "library": "llibcr.lib",
+      "member": "dos\\nmsghdr.asm",
+      "module_index": 9,
+      "segment": "EPAD",
+      "class": "MSG",
+      "size": 1,
+      "code_member": true,
+      "member_sha256": "e9b58fa3aa27d2b06d906ea99bf7639e6d0c07c3b84ba9fdc0d05eac19f086ce",
+      "align": "byte",
+      "linear": 386764,
+      "rule": "CLASS_SEQUENCE",
+      "exact": true,
+      "reasons": [],
+      "public_addresses": {}
+    }
+  ],
+  "crt_member": {
+    "name": "dos\\crt0.asm",
+    "size": 1230,
+    "sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+    "fixups": [
+      {
+        "segment": "DBDATA",
+        "offset": 2,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_TEXT",
+        "displacement": 202,
+        "frame_method": 0,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 1,
+        "frame_kind": "segment",
+        "frame": "_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "DBDATA",
+        "offset": 4,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_TEXT",
+        "displacement": 202,
+        "frame_method": 0,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 1,
+        "frame_kind": "segment",
+        "frame": "_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "DBDATA",
+        "offset": 6,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_TEXT",
+        "displacement": 202,
+        "frame_method": 0,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 1,
+        "frame_kind": "segment",
+        "frame": "_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "DBDATA",
+        "offset": 12,
+        "width": 2,
+        "loc": "base16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "C_ETEXT",
+        "displacement": 0,
+        "frame_method": 0,
+        "frame_index": 2,
+        "target_method": 0,
+        "target_index": 2,
+        "frame_kind": "segment",
+        "frame": "C_ETEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_DATA",
+        "offset": 2,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "__exit",
+        "displacement": 0,
+        "frame_method": 0,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 2,
+        "frame_kind": "segment",
+        "frame": "_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 14,
+        "width": 2,
+        "loc": "base16",
+        "self_relative": false,
+        "target_kind": "group",
+        "target": "DGROUP",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 1,
+        "target_index": 1,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 36,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_end",
+        "displacement": 65534,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 12,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 45,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": true,
+        "target_kind": "external",
+        "target": "__FF_MSGBANNER",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 8,
+        "target_method": 2,
+        "target_index": 8,
+        "frame_kind": "external",
+        "frame": "__FF_MSGBANNER",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 52,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": true,
+        "target_kind": "external",
+        "target": "__NMSG_WRITE",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 3,
+        "target_method": 2,
+        "target_index": 3,
+        "frame_kind": "external",
+        "frame": "__NMSG_WRITE",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 68,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_DATA",
+        "displacement": 4,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 3,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 71,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_DATA",
+        "displacement": 6,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 3,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 105,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_DATA",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 3,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 126,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "__psp",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 15,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 132,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_edata",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 16,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 135,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_end",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 12,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 147,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "___qczrinit",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 1,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 154,
+        "width": 4,
+        "loc": "pointer32",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "__setenvp",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 11,
+        "target_method": 2,
+        "target_index": 11,
+        "frame_kind": "external",
+        "frame": "__setenvp",
+        "encoded_addend": "00000000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 159,
+        "width": 4,
+        "loc": "pointer32",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "__setargv",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 10,
+        "target_method": 2,
+        "target_index": 10,
+        "frame_kind": "external",
+        "frame": "__setargv",
+        "encoded_addend": "00000000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 166,
+        "width": 4,
+        "loc": "pointer32",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "__cinit",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 4,
+        "target_method": 2,
+        "target_index": 4,
+        "frame_kind": "external",
+        "frame": "__cinit",
+        "encoded_addend": "00000000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 174,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_environ",
+        "displacement": 2,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 7,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 178,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_environ",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 7,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 182,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "___argv",
+        "displacement": 2,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 6,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 186,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "___argv",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 6,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 190,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "___argc",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 5,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 193,
+        "width": 4,
+        "loc": "pointer32",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_main",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 13,
+        "target_method": 2,
+        "target_index": 13,
+        "frame_kind": "external",
+        "frame": "_main",
+        "encoded_addend": "00000000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 200,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": true,
+        "target_kind": "external",
+        "target": "_exit",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 14,
+        "target_method": 2,
+        "target_index": 14,
+        "frame_kind": "external",
+        "frame": "_exit",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 205,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_TEXT",
+        "displacement": 253,
+        "frame_method": 0,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 1,
+        "frame_kind": "segment",
+        "frame": "_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 215,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_DATA",
+        "displacement": 2,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 3,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 217,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_exit",
+        "displacement": 0,
+        "frame_method": 0,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 14,
+        "frame_kind": "segment",
+        "frame": "_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 222,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": true,
+        "target_kind": "external",
+        "target": "__FF_MSGBANNER",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 8,
+        "target_method": 2,
+        "target_index": 8,
+        "frame_kind": "external",
+        "frame": "__FF_MSGBANNER",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 226,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": true,
+        "target_kind": "external",
+        "target": "__NMSG_WRITE",
+        "displacement": 0,
+        "frame_method": 2,
+        "frame_index": 3,
+        "target_method": 2,
+        "target_index": 3,
+        "frame_kind": "external",
+        "frame": "__NMSG_WRITE",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 231,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "DBDATA",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 6,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 242,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "DBDATA",
+        "displacement": 4,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 6,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 251,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "_DATA",
+        "displacement": 2,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 0,
+        "target_index": 3,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "_TEXT",
+        "offset": 253,
+        "width": 2,
+        "loc": "base16",
+        "self_relative": false,
+        "target_kind": "group",
+        "target": "DGROUP",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 1,
+        "target_index": 1,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      }
+    ]
+  },
+  "static": {
+    "original_identity": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "original_research_only": true,
+    "mz_image_bytes": 201305,
+    "historical_tail_linear": 386765,
+    "mz_entry": {
+      "cs": 11519,
+      "ip": 1784
+    },
+    "section27": {
+      "flags": 256,
+      "mem_paras": 8875,
+      "file_paras": 8470,
+      "relocation_records": 2771,
+      "tail_relocation_overlap": []
+    },
+    "manager_header_flags": 1,
+    "fatal_slot": [
+      4742,
+      12211
+    ],
+    "fatal_target": [
+      4752,
+      12211
+    ],
+    "crt_boundaries": {
+      "edata": 35742,
+      "end": 38128,
+      "count": 2386,
+      "actual_sp": 4096,
+      "actual_stack_top": 42222
+    },
+    "excerpts": {
+      "manager_entry": [
+        {
+          "at": "2CFF:06F8",
+          "mnemonic": "mov",
+          "operands": "word ptr cs:[0x9de], ds"
+        },
+        {
+          "at": "2CFF:06FD",
+          "mnemonic": "mov",
+          "operands": "bx, 0x2cff"
+        },
+        {
+          "at": "2CFF:0700",
+          "mnemonic": "mov",
+          "operands": "ds, bx"
+        },
+        {
+          "at": "2CFF:0702",
+          "mnemonic": "push",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:0703",
+          "mnemonic": "call",
+          "operands": "0x73c"
+        },
+        {
+          "at": "2CFF:0706",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:0707",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0xb61]"
+        },
+        {
+          "at": "2CFF:070B",
+          "mnemonic": "or",
+          "operands": "bx, bx"
+        },
+        {
+          "at": "2CFF:070D",
+          "mnemonic": "je",
+          "operands": "0x71a"
+        },
+        {
+          "at": "2CFF:070F",
+          "mnemonic": "mov",
+          "operands": "cx, ss"
+        },
+        {
+          "at": "2CFF:0711",
+          "mnemonic": "mov",
+          "operands": "dx, sp"
+        },
+        {
+          "at": "2CFF:0713",
+          "mnemonic": "cli",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:0714",
+          "mnemonic": "mov",
+          "operands": "ss, bx"
+        },
+        {
+          "at": "2CFF:0716",
+          "mnemonic": "mov",
+          "operands": "sp, 0x200"
+        },
+        {
+          "at": "2CFF:0719",
+          "mnemonic": "sti",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:071A",
+          "mnemonic": "push",
+          "operands": "bx"
+        },
+        {
+          "at": "2CFF:071B",
+          "mnemonic": "push",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:071C",
+          "mnemonic": "push",
+          "operands": "dx"
+        },
+        {
+          "at": "2CFF:071D",
+          "mnemonic": "push",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:071E",
+          "mnemonic": "call",
+          "operands": "0x79d"
+        },
+        {
+          "at": "2CFF:0721",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:0722",
+          "mnemonic": "pop",
+          "operands": "dx"
+        },
+        {
+          "at": "2CFF:0723",
+          "mnemonic": "pop",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:0724",
+          "mnemonic": "pop",
+          "operands": "bx"
+        },
+        {
+          "at": "2CFF:0725",
+          "mnemonic": "or",
+          "operands": "bx, bx"
+        },
+        {
+          "at": "2CFF:0727",
+          "mnemonic": "je",
+          "operands": "0x72f"
+        },
+        {
+          "at": "2CFF:0729",
+          "mnemonic": "cli",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:072A",
+          "mnemonic": "mov",
+          "operands": "ss, cx"
+        },
+        {
+          "at": "2CFF:072C",
+          "mnemonic": "mov",
+          "operands": "sp, dx"
+        },
+        {
+          "at": "2CFF:072E",
+          "mnemonic": "sti",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:072F",
+          "mnemonic": "mov",
+          "operands": "es, word ptr [0x9de]"
+        },
+        {
+          "at": "2CFF:0733",
+          "mnemonic": "mov",
+          "operands": "ds, word ptr [0x9de]"
+        },
+        {
+          "at": "2CFF:0737",
+          "mnemonic": "ljmp",
+          "operands": "0x29f4:0x1c"
+        }
+      ],
+      "manager_selected_load": [
+        {
+          "at": "2CFF:02AD",
+          "mnemonic": "test",
+          "operands": "byte ptr [0x9db], 0xff"
+        },
+        {
+          "at": "2CFF:02B2",
+          "mnemonic": "je",
+          "operands": "0x2c8"
+        },
+        {
+          "at": "2CFF:02B4",
+          "mnemonic": "test",
+          "operands": "byte ptr [bx + 7], 0xc"
+        },
+        {
+          "at": "2CFF:02B8",
+          "mnemonic": "je",
+          "operands": "0x2c8"
+        },
+        {
+          "at": "2CFF:02BA",
+          "mnemonic": "push",
+          "operands": "es"
+        },
+        {
+          "at": "2CFF:02BB",
+          "mnemonic": "mov",
+          "operands": "es, word ptr [bx]"
+        },
+        {
+          "at": "2CFF:02BD",
+          "mnemonic": "lcall",
+          "operands": "0x2fb3, 0x665"
+        },
+        {
+          "at": "2CFF:02C2",
+          "mnemonic": "pop",
+          "operands": "es"
+        },
+        {
+          "at": "2CFF:02C3",
+          "mnemonic": "jb",
+          "operands": "0x2c8"
+        },
+        {
+          "at": "2CFF:02C5",
+          "mnemonic": "jmp",
+          "operands": "0x3f7"
+        },
+        {
+          "at": "2CFF:02C8",
+          "mnemonic": "mov",
+          "operands": "si, word ptr [bx + 2]"
+        },
+        {
+          "at": "2CFF:02CB",
+          "mnemonic": "test",
+          "operands": "byte ptr [bx + 7], 8"
+        },
+        {
+          "at": "2CFF:02CF",
+          "mnemonic": "je",
+          "operands": "0x2d3"
+        },
+        {
+          "at": "2CFF:02D1",
+          "mnemonic": "mov",
+          "operands": "si, word ptr [si]"
+        },
+        {
+          "at": "2CFF:02D3",
+          "mnemonic": "call",
+          "operands": "0x429"
+        },
+        {
+          "at": "2CFF:02D6",
+          "mnemonic": "mov",
+          "operands": "dx, word ptr [bx + 0xa]"
+        },
+        {
+          "at": "2CFF:02D9",
+          "mnemonic": "add",
+          "operands": "dx, 3"
+        },
+        {
+          "at": "2CFF:02DC",
+          "mnemonic": "shr",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:02DE",
+          "mnemonic": "shr",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:02E0",
+          "mnemonic": "xor",
+          "operands": "ch, ch"
+        },
+        {
+          "at": "2CFF:02E2",
+          "mnemonic": "mov",
+          "operands": "cl, byte ptr [bx + 6]"
+        },
+        {
+          "at": "2CFF:02E5",
+          "mnemonic": "add",
+          "operands": "dx, word ptr [bx + 4]"
+        },
+        {
+          "at": "2CFF:02E8",
+          "mnemonic": "adc",
+          "operands": "cx, 0"
+        },
+        {
+          "at": "2CFF:02EB",
+          "mnemonic": "mov",
+          "operands": "di, dx"
+        },
+        {
+          "at": "2CFF:02ED",
+          "mnemonic": "mov",
+          "operands": "ax, 0xf"
+        },
+        {
+          "at": "2CFF:02F0",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:02F2",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:02F4",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:02F6",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:02F8",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:02FA",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:02FC",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:02FE",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:0300",
+          "mnemonic": "and",
+          "operands": "ax, dx"
+        },
+        {
+          "at": "2CFF:0302",
+          "mnemonic": "or",
+          "operands": "cx, ax"
+        },
+        {
+          "at": "2CFF:0304",
+          "mnemonic": "xor",
+          "operands": "dx, ax"
+        },
+        {
+          "at": "2CFF:0306",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0x9e4]"
+        },
+        {
+          "at": "2CFF:030A",
+          "mnemonic": "mov",
+          "operands": "ax, 0x4200"
+        },
+        {
+          "at": "2CFF:030D",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2CFF:030F",
+          "mnemonic": "push",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:0310",
+          "mnemonic": "mov",
+          "operands": "ax, bx"
+        },
+        {
+          "at": "2CFF:0312",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0x9e0]"
+        },
+        {
+          "at": "2CFF:0316",
+          "mnemonic": "mov",
+          "operands": "cx, word ptr [bx + 0x10]"
+        },
+        {
+          "at": "2CFF:0319",
+          "mnemonic": "mov",
+          "operands": "ds, word ptr [bx]"
+        },
+        {
+          "at": "2CFF:031B",
+          "mnemonic": "test",
+          "operands": "byte ptr cs:[bx + 7], 0x20"
+        },
+        {
+          "at": "2CFF:0320",
+          "mnemonic": "jne",
+          "operands": "0x358"
+        },
+        {
+          "at": "2CFF:0322",
+          "mnemonic": "mov",
+          "operands": "bx, ax"
+        },
+        {
+          "at": "2CFF:0324",
+          "mnemonic": "dec",
+          "operands": "di"
+        },
+        {
+          "at": "2CFF:0325",
+          "mnemonic": "and",
+          "operands": "di, 0x7f"
+        },
+        {
+          "at": "2CFF:0328",
+          "mnemonic": "inc",
+          "operands": "di"
+        },
+        {
+          "at": "2CFF:0329",
+          "mnemonic": "sub",
+          "operands": "di, 0x1000"
+        },
+        {
+          "at": "2CFF:032D",
+          "mnemonic": "neg",
+          "operands": "di"
+        },
+        {
+          "at": "2CFF:032F",
+          "mnemonic": "jcxz",
+          "operands": "0x373"
+        },
+        {
+          "at": "2CFF:0331",
+          "mnemonic": "mov",
+          "operands": "ax, cx"
+        },
+        {
+          "at": "2CFF:0333",
+          "mnemonic": "cmp",
+          "operands": "ax, di"
+        },
+        {
+          "at": "2CFF:0335",
+          "mnemonic": "jbe",
+          "operands": "0x339"
+        },
+        {
+          "at": "2CFF:0337",
+          "mnemonic": "mov",
+          "operands": "ax, di"
+        },
+        {
+          "at": "2CFF:0339",
+          "mnemonic": "push",
+          "operands": "ax"
+        },
+        {
+          "at": "2CFF:033A",
+          "mnemonic": "push",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:033B",
+          "mnemonic": "mov",
+          "operands": "cl, 4"
+        },
+        {
+          "at": "2CFF:033D",
+          "mnemonic": "shl",
+          "operands": "ax, cl"
+        },
+        {
+          "at": "2CFF:033F",
+          "mnemonic": "mov",
+          "operands": "cx, ax"
+        },
+        {
+          "at": "2CFF:0341",
+          "mnemonic": "xor",
+          "operands": "dx, dx"
+        },
+        {
+          "at": "2CFF:0343",
+          "mnemonic": "mov",
+          "operands": "ah, 0x3f"
+        },
+        {
+          "at": "2CFF:0345",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2CFF:0347",
+          "mnemonic": "jb",
+          "operands": "0x368"
+        },
+        {
+          "at": "2CFF:0349",
+          "mnemonic": "pop",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:034A",
+          "mnemonic": "pop",
+          "operands": "ax"
+        },
+        {
+          "at": "2CFF:034B",
+          "mnemonic": "sub",
+          "operands": "cx, ax"
+        },
+        {
+          "at": "2CFF:034D",
+          "mnemonic": "mov",
+          "operands": "dx, ds"
+        },
+        {
+          "at": "2CFF:034F",
+          "mnemonic": "add",
+          "operands": "dx, ax"
+        },
+        {
+          "at": "2CFF:0351",
+          "mnemonic": "mov",
+          "operands": "ds, dx"
+        },
+        {
+          "at": "2CFF:0353",
+          "mnemonic": "mov",
+          "operands": "di, 0xf80"
+        },
+        {
+          "at": "2CFF:0356",
+          "mnemonic": "jmp",
+          "operands": "0x32f"
+        },
+        {
+          "at": "2CFF:0358",
+          "mnemonic": "push",
+          "operands": "ax"
+        },
+        {
+          "at": "2CFF:0359",
+          "mnemonic": "push",
+          "operands": "word ptr cs:[bx + 8]"
+        },
+        {
+          "at": "2CFF:035D",
+          "mnemonic": "push",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:035E",
+          "mnemonic": "lcall",
+          "operands": "0, 0"
+        },
+        {
+          "at": "2CFF:0363",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:0364",
+          "mnemonic": "or",
+          "operands": "ax, ax"
+        },
+        {
+          "at": "2CFF:0366",
+          "mnemonic": "je",
+          "operands": "0x385"
+        },
+        {
+          "at": "2CFF:0368",
+          "mnemonic": "mov",
+          "operands": "cx, 0x13f"
+        },
+        {
+          "at": "2CFF:036B",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr cs:[6]"
+        },
+        {
+          "at": "2CFF:0370",
+          "mnemonic": "jmp",
+          "operands": "0x984"
+        },
+        {
+          "at": "2CFF:0373",
+          "mnemonic": "mov",
+          "operands": "ax, ds"
+        },
+        {
+          "at": "2CFF:0375",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:0376",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0x9e0]"
+        },
+        {
+          "at": "2CFF:037A",
+          "mnemonic": "mov",
+          "operands": "dx, word ptr [bx + 8]"
+        },
+        {
+          "at": "2CFF:037D",
+          "mnemonic": "sub",
+          "operands": "dx, word ptr [bx + 0x10]"
+        },
+        {
+          "at": "2CFF:0380",
+          "mnemonic": "add",
+          "operands": "dx, ax"
+        },
+        {
+          "at": "2CFF:0382",
+          "mnemonic": "call",
+          "operands": "0x5b3"
+        },
+        {
+          "at": "2CFF:0385",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0x9e0]"
+        },
+        {
+          "at": "2CFF:0389",
+          "mnemonic": "mov",
+          "operands": "dx, word ptr [bx + 4]"
+        },
+        {
+          "at": "2CFF:038C",
+          "mnemonic": "mov",
+          "operands": "cl, byte ptr [bx + 6]"
+        },
+        {
+          "at": "2CFF:038F",
+          "mnemonic": "xor",
+          "operands": "ch, ch"
+        },
+        {
+          "at": "2CFF:0391",
+          "mnemonic": "mov",
+          "operands": "ax, 0xf"
+        },
+        {
+          "at": "2CFF:0394",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:0396",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:0398",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:039A",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:039C",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:039E",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:03A0",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:03A2",
+          "mnemonic": "rol",
+          "operands": "dx, 1"
+        },
+        {
+          "at": "2CFF:03A4",
+          "mnemonic": "and",
+          "operands": "ax, dx"
+        },
+        {
+          "at": "2CFF:03A6",
+          "mnemonic": "or",
+          "operands": "cx, ax"
+        },
+        {
+          "at": "2CFF:03A8",
+          "mnemonic": "xor",
+          "operands": "dx, ax"
+        },
+        {
+          "at": "2CFF:03AA",
+          "mnemonic": "mov",
+          "operands": "si, word ptr [bx + 0xa]"
+        },
+        {
+          "at": "2CFF:03AD",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0x9e4]"
+        },
+        {
+          "at": "2CFF:03B1",
+          "mnemonic": "mov",
+          "operands": "ax, 0x4200"
+        },
+        {
+          "at": "2CFF:03B4",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2CFF:03B6",
+          "mnemonic": "mov",
+          "operands": "cx, si"
+        },
+        {
+          "at": "2CFF:03B8",
+          "mnemonic": "jcxz",
+          "operands": "0x3f7"
+        },
+        {
+          "at": "2CFF:03BA",
+          "mnemonic": "cmp",
+          "operands": "cx, 0x58"
+        },
+        {
+          "at": "2CFF:03BD",
+          "mnemonic": "jbe",
+          "operands": "0x3c2"
+        },
+        {
+          "at": "2CFF:03BF",
+          "mnemonic": "mov",
+          "operands": "cx, 0x58"
+        },
+        {
+          "at": "2CFF:03C2",
+          "mnemonic": "sub",
+          "operands": "si, cx"
+        },
+        {
+          "at": "2CFF:03C4",
+          "mnemonic": "push",
+          "operands": "si"
+        },
+        {
+          "at": "2CFF:03C5",
+          "mnemonic": "push",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:03C6",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:03C8",
+          "mnemonic": "shl",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2CFF:03CA",
+          "mnemonic": "mov",
+          "operands": "dx, 0x9e8"
+        },
+        {
+          "at": "2CFF:03CD",
+          "mnemonic": "mov",
+          "operands": "ah, 0x3f"
+        },
+        {
+          "at": "2CFF:03CF",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2CFF:03D1",
+          "mnemonic": "jb",
+          "operands": "0x368"
+        },
+        {
+          "at": "2CFF:03D3",
+          "mnemonic": "cmp",
+          "operands": "ax, cx"
+        },
+        {
+          "at": "2CFF:03D5",
+          "mnemonic": "jne",
+          "operands": "0x368"
+        },
+        {
+          "at": "2CFF:03D7",
+          "mnemonic": "mov",
+          "operands": "si, dx"
+        },
+        {
+          "at": "2CFF:03D9",
+          "mnemonic": "mov",
+          "operands": "dx, word ptr [0x9de]"
+        },
+        {
+          "at": "2CFF:03DD",
+          "mnemonic": "add",
+          "operands": "dx, 0x10"
+        },
+        {
+          "at": "2CFF:03E0",
+          "mnemonic": "pop",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:03E1",
+          "mnemonic": "mov",
+          "operands": "ax, dx"
+        },
+        {
+          "at": "2CFF:03E3",
+          "mnemonic": "add",
+          "operands": "ax, word ptr [si + 2]"
+        },
+        {
+          "at": "2CFF:03E6",
+          "mnemonic": "jb",
+          "operands": "0x3ef"
+        },
+        {
+          "at": "2CFF:03E8",
+          "mnemonic": "mov",
+          "operands": "es, ax"
+        },
+        {
+          "at": "2CFF:03EA",
+          "mnemonic": "mov",
+          "operands": "di, word ptr [si]"
+        },
+        {
+          "at": "2CFF:03EC",
+          "mnemonic": "add",
+          "operands": "word ptr es:[di], dx"
+        },
+        {
+          "at": "2CFF:03EF",
+          "mnemonic": "add",
+          "operands": "si, 4"
+        },
+        {
+          "at": "2CFF:03F2",
+          "mnemonic": "loop",
+          "operands": "0x3e1"
+        },
+        {
+          "at": "2CFF:03F4",
+          "mnemonic": "pop",
+          "operands": "si"
+        },
+        {
+          "at": "2CFF:03F5",
+          "mnemonic": "jmp",
+          "operands": "0x3b6"
+        },
+        {
+          "at": "2CFF:03F7",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0x9e0]"
+        },
+        {
+          "at": "2CFF:03FB",
+          "mnemonic": "or",
+          "operands": "byte ptr [bx + 7], 2"
+        },
+        {
+          "at": "2CFF:03FF",
+          "mnemonic": "clc",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:0400",
+          "mnemonic": "push",
+          "operands": "cs"
+        },
+        {
+          "at": "2CFF:0401",
+          "mnemonic": "call",
+          "operands": "0x1b0"
+        },
+        {
+          "at": "2CFF:0404",
+          "mnemonic": "mov",
+          "operands": "bx, word ptr [0x9e0]"
+        },
+        {
+          "at": "2CFF:0408",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr [bx + 0xc]"
+        },
+        {
+          "at": "2CFF:040B",
+          "mnemonic": "pop",
+          "operands": "es"
+        },
+        {
+          "at": "2CFF:040C",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "2CFF:040D",
+          "mnemonic": "pop",
+          "operands": "bp"
+        },
+        {
+          "at": "2CFF:040E",
+          "mnemonic": "pop",
+          "operands": "si"
+        },
+        {
+          "at": "2CFF:040F",
+          "mnemonic": "pop",
+          "operands": "di"
+        },
+        {
+          "at": "2CFF:0410",
+          "mnemonic": "pop",
+          "operands": "dx"
+        },
+        {
+          "at": "2CFF:0411",
+          "mnemonic": "pop",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:0412",
+          "mnemonic": "jb",
+          "operands": "0x425"
+        },
+        {
+          "at": "2CFF:0414",
+          "mnemonic": "test",
+          "operands": "byte ptr cs:[0xb48], 0xff"
+        },
+        {
+          "at": "2CFF:041A",
+          "mnemonic": "je",
+          "operands": "0x425"
+        },
+        {
+          "at": "2CFF:041C",
+          "mnemonic": "cmp",
+          "operands": "ax, -1"
+        },
+        {
+          "at": "2CFF:041F",
+          "mnemonic": "je",
+          "operands": "0x425"
+        },
+        {
+          "at": "2CFF:0421",
+          "mnemonic": "push",
+          "operands": "cs"
+        },
+        {
+          "at": "2CFF:0422",
+          "mnemonic": "call",
+          "operands": "0x21c"
+        },
+        {
+          "at": "2CFF:0425",
+          "mnemonic": "pop",
+          "operands": "bx"
+        },
+        {
+          "at": "2CFF:0426",
+          "mnemonic": "pop",
+          "operands": "ax"
+        },
+        {
+          "at": "2CFF:0427",
+          "mnemonic": "popf",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:0428",
+          "mnemonic": "retf",
+          "operands": ""
+        }
+      ],
+      "manager_initial_load_selection": [
+        {
+          "at": "2CFF:079D",
+          "mnemonic": "pushf",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:079E",
+          "mnemonic": "cld",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:079F",
+          "mnemonic": "mov",
+          "operands": "ax, 0x3000"
+        },
+        {
+          "at": "2CFF:07A2",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2CFF:07A4",
+          "mnemonic": "cmp",
+          "operands": "al, 3"
+        },
+        {
+          "at": "2CFF:07A6",
+          "mnemonic": "jb",
+          "operands": "0x7ad"
+        },
+        {
+          "at": "2CFF:07A8",
+          "mnemonic": "mov",
+          "operands": "byte ptr [0x9dc], 0x20"
+        },
+        {
+          "at": "2CFF:07AD",
+          "mnemonic": "test",
+          "operands": "word ptr [0xb5f], 0x100"
+        },
+        {
+          "at": "2CFF:07B3",
+          "mnemonic": "je",
+          "operands": "0x7b8"
+        },
+        {
+          "at": "2CFF:07B5",
+          "mnemonic": "call",
+          "operands": "0x5eb"
+        },
+        {
+          "at": "2CFF:07B8",
+          "mnemonic": "test",
+          "operands": "word ptr [0xb5f], 2"
+        },
+        {
+          "at": "2CFF:07BE",
+          "mnemonic": "jne",
+          "operands": "0x7d1"
+        },
+        {
+          "at": "2CFF:07C0",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr [0xb63]"
+        },
+        {
+          "at": "2CFF:07C3",
+          "mnemonic": "or",
+          "operands": "ax, word ptr [0xb65]"
+        },
+        {
+          "at": "2CFF:07C7",
+          "mnemonic": "or",
+          "operands": "ax, word ptr [0xb67]"
+        },
+        {
+          "at": "2CFF:07CB",
+          "mnemonic": "or",
+          "operands": "ax, word ptr [0xb69]"
+        },
+        {
+          "at": "2CFF:07CF",
+          "mnemonic": "je",
+          "operands": "0x80d"
+        },
+        {
+          "at": "2CFF:07D1",
+          "mnemonic": "mov",
+          "operands": "cx, word ptr [0xb6b]"
+        },
+        {
+          "at": "2CFF:07D5",
+          "mnemonic": "xor",
+          "operands": "ax, ax"
+        },
+        {
+          "at": "2CFF:07D7",
+          "mnemonic": "mov",
+          "operands": "bx, 0xb71"
+        },
+        {
+          "at": "2CFF:07DA",
+          "mnemonic": "mov",
+          "operands": "ax, 0xffff"
+        },
+        {
+          "at": "2CFF:07DD",
+          "mnemonic": "xor",
+          "operands": "dx, dx"
+        },
+        {
+          "at": "2CFF:07DF",
+          "mnemonic": "push",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:07E0",
+          "mnemonic": "mov",
+          "operands": "cx, word ptr [bx]"
+        },
+        {
+          "at": "2CFF:07E2",
+          "mnemonic": "or",
+          "operands": "cx, cx"
+        },
+        {
+          "at": "2CFF:07E4",
+          "mnemonic": "je",
+          "operands": "0x7f5"
+        },
+        {
+          "at": "2CFF:07E6",
+          "mnemonic": "cmp",
+          "operands": "ax, cx"
+        },
+        {
+          "at": "2CFF:07E8",
+          "mnemonic": "jbe",
+          "operands": "0x7ec"
+        },
+        {
+          "at": "2CFF:07EA",
+          "mnemonic": "mov",
+          "operands": "ax, cx"
+        },
+        {
+          "at": "2CFF:07EC",
+          "mnemonic": "add",
+          "operands": "cx, word ptr [bx + 8]"
+        },
+        {
+          "at": "2CFF:07EF",
+          "mnemonic": "cmp",
+          "operands": "dx, cx"
+        },
+        {
+          "at": "2CFF:07F1",
+          "mnemonic": "jae",
+          "operands": "0x7f5"
+        },
+        {
+          "at": "2CFF:07F3",
+          "mnemonic": "mov",
+          "operands": "dx, cx"
+        },
+        {
+          "at": "2CFF:07F5",
+          "mnemonic": "pop",
+          "operands": "cx"
+        },
+        {
+          "at": "2CFF:07F6",
+          "mnemonic": "add",
+          "operands": "bx, 0x12"
+        },
+        {
+          "at": "2CFF:07F9",
+          "mnemonic": "loop",
+          "operands": "0x7df"
+        },
+        {
+          "at": "2CFF:07FB",
+          "mnemonic": "mov",
+          "operands": "word ptr [0xb4b], ax"
+        },
+        {
+          "at": "2CFF:07FE",
+          "mnemonic": "mov",
+          "operands": "word ptr [0xb4d], dx"
+        },
+        {
+          "at": "2CFF:0802",
+          "mnemonic": "test",
+          "operands": "word ptr [0xb5f], 2"
+        },
+        {
+          "at": "2CFF:0808",
+          "mnemonic": "je",
+          "operands": "0x80d"
+        },
+        {
+          "at": "2CFF:080A",
+          "mnemonic": "call",
+          "operands": "0x5b3"
+        },
+        {
+          "at": "2CFF:080D",
+          "mnemonic": "mov",
+          "operands": "cx, word ptr cs:[0xb6b]"
+        },
+        {
+          "at": "2CFF:0812",
+          "mnemonic": "xor",
+          "operands": "ax, ax"
+        },
+        {
+          "at": "2CFF:0814",
+          "mnemonic": "xor",
+          "operands": "si, si"
+        },
+        {
+          "at": "2CFF:0816",
+          "mnemonic": "mov",
+          "operands": "bx, 0xb71"
+        },
+        {
+          "at": "2CFF:0819",
+          "mnemonic": "or",
+          "operands": "si, si"
+        },
+        {
+          "at": "2CFF:081B",
+          "mnemonic": "jne",
+          "operands": "0x82c"
+        },
+        {
+          "at": "2CFF:081D",
+          "mnemonic": "mov",
+          "operands": "si, word ptr [bx + 2]"
+        },
+        {
+          "at": "2CFF:0820",
+          "mnemonic": "or",
+          "operands": "si, si"
+        },
+        {
+          "at": "2CFF:0822",
+          "mnemonic": "je",
+          "operands": "0x82c"
+        },
+        {
+          "at": "2CFF:0824",
+          "mnemonic": "test",
+          "operands": "byte ptr [bx + 7], 8"
+        },
+        {
+          "at": "2CFF:0828",
+          "mnemonic": "je",
+          "operands": "0x82c"
+        },
+        {
+          "at": "2CFF:082A",
+          "mnemonic": "mov",
+          "operands": "si, word ptr [si]"
+        },
+        {
+          "at": "2CFF:082C",
+          "mnemonic": "test",
+          "operands": "byte ptr [bx + 7], 1"
+        },
+        {
+          "at": "2CFF:0830",
+          "mnemonic": "je",
+          "operands": "0x836"
+        },
+        {
+          "at": "2CFF:0832",
+          "mnemonic": "push",
+          "operands": "cs"
+        },
+        {
+          "at": "2CFF:0833",
+          "mnemonic": "call",
+          "operands": "0x21c"
+        },
+        {
+          "at": "2CFF:0836",
+          "mnemonic": "add",
+          "operands": "bx, 0x12"
+        },
+        {
+          "at": "2CFF:0839",
+          "mnemonic": "inc",
+          "operands": "ax"
+        },
+        {
+          "at": "2CFF:083A",
+          "mnemonic": "loop",
+          "operands": "0x819"
+        },
+        {
+          "at": "2CFF:083C",
+          "mnemonic": "cmp",
+          "operands": "word ptr [0x9e2], 0"
+        },
+        {
+          "at": "2CFF:0841",
+          "mnemonic": "jne",
+          "operands": "0x84a"
+        },
+        {
+          "at": "2CFF:0843",
+          "mnemonic": "or",
+          "operands": "si, si"
+        },
+        {
+          "at": "2CFF:0845",
+          "mnemonic": "je",
+          "operands": "0x84a"
+        },
+        {
+          "at": "2CFF:0847",
+          "mnemonic": "call",
+          "operands": "0x429"
+        },
+        {
+          "at": "2CFF:084A",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr [0xb63]"
+        },
+        {
+          "at": "2CFF:084D",
+          "mnemonic": "or",
+          "operands": "ax, word ptr [0xb65]"
+        },
+        {
+          "at": "2CFF:0851",
+          "mnemonic": "je",
+          "operands": "0x85d"
+        },
+        {
+          "at": "2CFF:0853",
+          "mnemonic": "les",
+          "operands": "bx, ptr [0xb63]"
+        },
+        {
+          "at": "2CFF:0857",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr [0xb4b]"
+        },
+        {
+          "at": "2CFF:085A",
+          "mnemonic": "mov",
+          "operands": "word ptr es:[bx], ax"
+        },
+        {
+          "at": "2CFF:085D",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr [0xb67]"
+        },
+        {
+          "at": "2CFF:0860",
+          "mnemonic": "or",
+          "operands": "ax, word ptr [0xb69]"
+        },
+        {
+          "at": "2CFF:0864",
+          "mnemonic": "je",
+          "operands": "0x870"
+        },
+        {
+          "at": "2CFF:0866",
+          "mnemonic": "les",
+          "operands": "bx, ptr [0xb67]"
+        },
+        {
+          "at": "2CFF:086A",
+          "mnemonic": "mov",
+          "operands": "ax, word ptr [0xb4d]"
+        },
+        {
+          "at": "2CFF:086D",
+          "mnemonic": "mov",
+          "operands": "word ptr es:[bx], ax"
+        },
+        {
+          "at": "2CFF:0870",
+          "mnemonic": "popf",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:0871",
+          "mnemonic": "ret",
+          "operands": ""
+        }
+      ],
+      "manager_default_callback": [
+        {
+          "at": "2CFF:01B0",
+          "mnemonic": "nop",
+          "operands": ""
+        },
+        {
+          "at": "2CFF:01B1",
+          "mnemonic": "retf",
+          "operands": ""
+        }
+      ],
+      "manager_fatal": [
+        {
+          "at": "2FB3:1290",
+          "mnemonic": "push",
+          "operands": "bx"
+        },
+        {
+          "at": "2FB3:1291",
+          "mnemonic": "mov",
+          "operands": "bx, 2"
+        },
+        {
+          "at": "2FB3:1294",
+          "mnemonic": "mov",
+          "operands": "cx, 1"
+        },
+        {
+          "at": "2FB3:1297",
+          "mnemonic": "mov",
+          "operands": "ah, 0x46"
+        },
+        {
+          "at": "2FB3:1299",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2FB3:129B",
+          "mnemonic": "pop",
+          "operands": "bx"
+        },
+        {
+          "at": "2FB3:129C",
+          "mnemonic": "push",
+          "operands": "ds"
+        },
+        {
+          "at": "2FB3:129D",
+          "mnemonic": "mov",
+          "operands": "ax, cs"
+        },
+        {
+          "at": "2FB3:129F",
+          "mnemonic": "mov",
+          "operands": "ds, ax"
+        },
+        {
+          "at": "2FB3:12A1",
+          "mnemonic": "mov",
+          "operands": "dx, word ptr [0x13be]"
+        },
+        {
+          "at": "2FB3:12A5",
+          "mnemonic": "mov",
+          "operands": "ah, 9"
+        },
+        {
+          "at": "2FB3:12A7",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2FB3:12A9",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "2FB3:12AA",
+          "mnemonic": "mov",
+          "operands": "si, word ptr [bx]"
+        },
+        {
+          "at": "2FB3:12AC",
+          "mnemonic": "or",
+          "operands": "si, si"
+        },
+        {
+          "at": "2FB3:12AE",
+          "mnemonic": "je",
+          "operands": "0x12c2"
+        },
+        {
+          "at": "2FB3:12B0",
+          "mnemonic": "lodsb",
+          "operands": "al, byte ptr [si]"
+        },
+        {
+          "at": "2FB3:12B1",
+          "mnemonic": "or",
+          "operands": "al, al"
+        },
+        {
+          "at": "2FB3:12B3",
+          "mnemonic": "je",
+          "operands": "0x12bd"
+        },
+        {
+          "at": "2FB3:12B5",
+          "mnemonic": "mov",
+          "operands": "dl, al"
+        },
+        {
+          "at": "2FB3:12B7",
+          "mnemonic": "mov",
+          "operands": "ah, 2"
+        },
+        {
+          "at": "2FB3:12B9",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2FB3:12BB",
+          "mnemonic": "jmp",
+          "operands": "0x12b0"
+        },
+        {
+          "at": "2FB3:12BD",
+          "mnemonic": "add",
+          "operands": "bx, 2"
+        },
+        {
+          "at": "2FB3:12C0",
+          "mnemonic": "jmp",
+          "operands": "0x12aa"
+        },
+        {
+          "at": "2FB3:12C2",
+          "mnemonic": "mov",
+          "operands": "ax, cs"
+        },
+        {
+          "at": "2FB3:12C4",
+          "mnemonic": "mov",
+          "operands": "ds, ax"
+        },
+        {
+          "at": "2FB3:12C6",
+          "mnemonic": "mov",
+          "operands": "ah, 0xf"
+        },
+        {
+          "at": "2FB3:12C8",
+          "mnemonic": "int",
+          "operands": "0x10"
+        },
+        {
+          "at": "2FB3:12CA",
+          "mnemonic": "cmp",
+          "operands": "al, 3"
+        },
+        {
+          "at": "2FB3:12CC",
+          "mnemonic": "jbe",
+          "operands": "0x12de"
+        },
+        {
+          "at": "2FB3:12CE",
+          "mnemonic": "cmp",
+          "operands": "al, 7"
+        },
+        {
+          "at": "2FB3:12D0",
+          "mnemonic": "je",
+          "operands": "0x12de"
+        },
+        {
+          "at": "2FB3:12D2",
+          "mnemonic": "mov",
+          "operands": "dx, word ptr [0x13c0]"
+        },
+        {
+          "at": "2FB3:12D6",
+          "mnemonic": "mov",
+          "operands": "ah, 9"
+        },
+        {
+          "at": "2FB3:12D8",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2FB3:12DA",
+          "mnemonic": "mov",
+          "operands": "ah, 7"
+        },
+        {
+          "at": "2FB3:12DC",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "2FB3:12DE",
+          "mnemonic": "mov",
+          "operands": "ax, 0x4c01"
+        },
+        {
+          "at": "2FB3:12E1",
+          "mnemonic": "int",
+          "operands": "0x21"
+        }
+      ],
+      "crt_startup": [
+        {
+          "at": "29F4:001C",
+          "mnemonic": "mov",
+          "operands": "ah, 0x30"
+        },
+        {
+          "at": "29F4:001E",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "29F4:0020",
+          "mnemonic": "cmp",
+          "operands": "al, 2"
+        },
+        {
+          "at": "29F4:0022",
+          "mnemonic": "jae",
+          "operands": "0x29"
+        },
+        {
+          "at": "29F4:0024",
+          "mnemonic": "xor",
+          "operands": "ax, ax"
+        },
+        {
+          "at": "29F4:0026",
+          "mnemonic": "push",
+          "operands": "es"
+        },
+        {
+          "at": "29F4:0027",
+          "mnemonic": "push",
+          "operands": "ax"
+        },
+        {
+          "at": "29F4:0028",
+          "mnemonic": "retf",
+          "operands": ""
+        },
+        {
+          "at": "29F4:0029",
+          "mnemonic": "mov",
+          "operands": "di, 0x55b3"
+        },
+        {
+          "at": "29F4:002C",
+          "mnemonic": "mov",
+          "operands": "si, word ptr [2]"
+        },
+        {
+          "at": "29F4:0030",
+          "mnemonic": "sub",
+          "operands": "si, di"
+        },
+        {
+          "at": "29F4:0032",
+          "mnemonic": "cmp",
+          "operands": "si, 0x1000"
+        },
+        {
+          "at": "29F4:0036",
+          "mnemonic": "jb",
+          "operands": "0x3b"
+        },
+        {
+          "at": "29F4:0038",
+          "mnemonic": "mov",
+          "operands": "si, 0x1000"
+        },
+        {
+          "at": "29F4:003B",
+          "mnemonic": "cli",
+          "operands": ""
+        },
+        {
+          "at": "29F4:003C",
+          "mnemonic": "mov",
+          "operands": "ss, di"
+        },
+        {
+          "at": "29F4:003E",
+          "mnemonic": "add",
+          "operands": "sp, 0x94ee"
+        },
+        {
+          "at": "29F4:0042",
+          "mnemonic": "sti",
+          "operands": ""
+        },
+        {
+          "at": "29F4:0043",
+          "mnemonic": "jae",
+          "operands": "0x57"
+        },
+        {
+          "at": "29F4:0045",
+          "mnemonic": "push",
+          "operands": "ss"
+        },
+        {
+          "at": "29F4:0046",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "29F4:0047",
+          "mnemonic": "push",
+          "operands": "cs"
+        },
+        {
+          "at": "29F4:0048",
+          "mnemonic": "call",
+          "operands": "0x2a4"
+        },
+        {
+          "at": "29F4:004B",
+          "mnemonic": "xor",
+          "operands": "ax, ax"
+        },
+        {
+          "at": "29F4:004D",
+          "mnemonic": "push",
+          "operands": "ax"
+        },
+        {
+          "at": "29F4:004E",
+          "mnemonic": "push",
+          "operands": "cs"
+        },
+        {
+          "at": "29F4:004F",
+          "mnemonic": "call",
+          "operands": "0x58d"
+        },
+        {
+          "at": "29F4:0052",
+          "mnemonic": "mov",
+          "operands": "ax, 0x4cff"
+        },
+        {
+          "at": "29F4:0055",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "29F4:0057",
+          "mnemonic": "mov",
+          "operands": "ax, si"
+        },
+        {
+          "at": "29F4:0059",
+          "mnemonic": "mov",
+          "operands": "cl, 4"
+        },
+        {
+          "at": "29F4:005B",
+          "mnemonic": "shl",
+          "operands": "ax, cl"
+        },
+        {
+          "at": "29F4:005D",
+          "mnemonic": "dec",
+          "operands": "ax"
+        },
+        {
+          "at": "29F4:005E",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[0x7704], ax"
+        },
+        {
+          "at": "29F4:0062",
+          "mnemonic": "mov",
+          "operands": "bx, 0x7706"
+        },
+        {
+          "at": "29F4:0065",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[bx], ss"
+        },
+        {
+          "at": "29F4:0068",
+          "mnemonic": "and",
+          "operands": "sp, 0xfffe"
+        },
+        {
+          "at": "29F4:006B",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[bx + 4], sp"
+        },
+        {
+          "at": "29F4:006F",
+          "mnemonic": "mov",
+          "operands": "ax, 0xfffe"
+        },
+        {
+          "at": "29F4:0072",
+          "mnemonic": "push",
+          "operands": "ax"
+        },
+        {
+          "at": "29F4:0073",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[bx + 0xa], sp"
+        },
+        {
+          "at": "29F4:0077",
+          "mnemonic": "not",
+          "operands": "ax"
+        },
+        {
+          "at": "29F4:0079",
+          "mnemonic": "push",
+          "operands": "ax"
+        },
+        {
+          "at": "29F4:007A",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[bx + 6], sp"
+        },
+        {
+          "at": "29F4:007E",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[bx + 8], sp"
+        },
+        {
+          "at": "29F4:0082",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[0x7700], sp"
+        },
+        {
+          "at": "29F4:0087",
+          "mnemonic": "add",
+          "operands": "si, di"
+        },
+        {
+          "at": "29F4:0089",
+          "mnemonic": "mov",
+          "operands": "word ptr [2], si"
+        },
+        {
+          "at": "29F4:008D",
+          "mnemonic": "mov",
+          "operands": "bx, es"
+        },
+        {
+          "at": "29F4:008F",
+          "mnemonic": "sub",
+          "operands": "bx, si"
+        },
+        {
+          "at": "29F4:0091",
+          "mnemonic": "neg",
+          "operands": "bx"
+        },
+        {
+          "at": "29F4:0093",
+          "mnemonic": "mov",
+          "operands": "ah, 0x4a"
+        },
+        {
+          "at": "29F4:0095",
+          "mnemonic": "int",
+          "operands": "0x21"
+        },
+        {
+          "at": "29F4:0097",
+          "mnemonic": "mov",
+          "operands": "word ptr ss:[0x7740], ds"
+        },
+        {
+          "at": "29F4:009C",
+          "mnemonic": "push",
+          "operands": "ss"
+        },
+        {
+          "at": "29F4:009D",
+          "mnemonic": "pop",
+          "operands": "es"
+        },
+        {
+          "at": "29F4:009E",
+          "mnemonic": "cld",
+          "operands": ""
+        },
+        {
+          "at": "29F4:009F",
+          "mnemonic": "mov",
+          "operands": "di, 0x8b9e"
+        },
+        {
+          "at": "29F4:00A2",
+          "mnemonic": "mov",
+          "operands": "cx, 0x94f0"
+        },
+        {
+          "at": "29F4:00A5",
+          "mnemonic": "sub",
+          "operands": "cx, di"
+        },
+        {
+          "at": "29F4:00A7",
+          "mnemonic": "xor",
+          "operands": "ax, ax"
+        },
+        {
+          "at": "29F4:00A9",
+          "mnemonic": "rep stosb",
+          "operands": "byte ptr es:[di], al"
+        },
+        {
+          "at": "29F4:00AB",
+          "mnemonic": "push",
+          "operands": "ss"
+        },
+        {
+          "at": "29F4:00AC",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "29F4:00AD",
+          "mnemonic": "mov",
+          "operands": "cx, word ptr [0x7db2]"
+        },
+        {
+          "at": "29F4:00B1",
+          "mnemonic": "jcxz",
+          "operands": "0xb5"
+        },
+        {
+          "at": "29F4:00B3",
+          "mnemonic": "call",
+          "operands": "cx"
+        },
+        {
+          "at": "29F4:00B5",
+          "mnemonic": "lcall",
+          "operands": "0x29f4, 0x4c2"
+        },
+        {
+          "at": "29F4:00BA",
+          "mnemonic": "lcall",
+          "operands": "0x29f4, 0x314"
+        },
+        {
+          "at": "29F4:00BF",
+          "mnemonic": "xor",
+          "operands": "bp, bp"
+        },
+        {
+          "at": "29F4:00C1",
+          "mnemonic": "lcall",
+          "operands": "0x29f4, 0x11c"
+        },
+        {
+          "at": "29F4:00C6",
+          "mnemonic": "push",
+          "operands": "ss"
+        },
+        {
+          "at": "29F4:00C7",
+          "mnemonic": "pop",
+          "operands": "ds"
+        },
+        {
+          "at": "29F4:00C8",
+          "mnemonic": "push",
+          "operands": "word ptr [0x7765]"
+        },
+        {
+          "at": "29F4:00CC",
+          "mnemonic": "push",
+          "operands": "word ptr [0x7763]"
+        },
+        {
+          "at": "29F4:00D0",
+          "mnemonic": "push",
+          "operands": "word ptr [0x7761]"
+        },
+        {
+          "at": "29F4:00D4",
+          "mnemonic": "push",
+          "operands": "word ptr [0x775f]"
+        },
+        {
+          "at": "29F4:00D8",
+          "mnemonic": "push",
+          "operands": "word ptr [0x775d]"
+        },
+        {
+          "at": "29F4:00DC",
+          "mnemonic": "lcall",
+          "operands": "0x15f8, 4"
+        },
+        {
+          "at": "29F4:00E1",
+          "mnemonic": "push",
+          "operands": "ax"
+        },
+        {
+          "at": "29F4:00E2",
+          "mnemonic": "push",
+          "operands": "cs"
+        },
+        {
+          "at": "29F4:00E3",
+          "mnemonic": "call",
+          "operands": "0x1e1"
+        },
+        {
+          "at": "29F4:00E6",
+          "mnemonic": "ret",
+          "operands": ""
+        }
+      ]
+    }
+  },
+  "vm_replay_exact": true,
+  "vm_runs": [
+    {
+      "name": "bss_two",
+      "linker": "rtlink400",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "a50000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "f449f3baca82609c81bfb66d1237f3aceb21b3556272f41a9e992aa7f73ef86b"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink400",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "5a0000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "f449f3baca82609c81bfb66d1237f3aceb21b3556272f41a9e992aa7f73ef86b"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink610",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "a50000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "005bec1112c3b1bf69ee5e2fa43197b196edb6e049bf86be56353c9b244e97c4"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink610",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "5a0000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "005bec1112c3b1bf69ee5e2fa43197b196edb6e049bf86be56353c9b244e97c4"
+      }
+    },
+    {
+      "name": "bss_shift",
+      "linker": "rtlink400",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 486,
+      "end": 512,
+      "boundary_final": "a50000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4097,
+        "ip": 173,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 512,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2554
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.EXE",
+        "size": 3205,
+        "sha256": "1b44fe660a0bdbc1737cfc13c113b3109b92d09fa526cae6a7bd67f2fc8a49d9"
+      }
+    },
+    {
+      "name": "bss_shift",
+      "linker": "rtlink400",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 486,
+      "end": 512,
+      "boundary_final": "5a0000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4097,
+        "ip": 173,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 512,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2554
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_shift\\PROBE.EXE",
+        "size": 3205,
+        "sha256": "1b44fe660a0bdbc1737cfc13c113b3109b92d09fa526cae6a7bd67f2fc8a49d9"
+      }
+    },
+    {
+      "name": "bss_shift",
+      "linker": "rtlink610",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 486,
+      "end": 512,
+      "boundary_final": "a50000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4097,
+        "ip": 173,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 512,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2554
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.EXE",
+        "size": 3205,
+        "sha256": "9d8888f8f4fe0e751210bcb209da52ec66ddd86fee3a3d98db90a9662f30aa0b"
+      }
+    },
+    {
+      "name": "bss_shift",
+      "linker": "rtlink610",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 486,
+      "end": 512,
+      "boundary_final": "5a0000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4097,
+        "ip": 173,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 512,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2554
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_shift\\PROBE.EXE",
+        "size": 3205,
+        "sha256": "9d8888f8f4fe0e751210bcb209da52ec66ddd86fee3a3d98db90a9662f30aa0b"
+      }
+    },
+    {
+      "name": "file_seed",
+      "linker": "rtlink400",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 464,
+      "end": 464,
+      "boundary_final": "a5a5a5",
+      "probe_final": "3157",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 464,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2506
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.EXE",
+        "size": 3183,
+        "sha256": "9e6c88469e959296407628eaa03df42768cdfbbd4831dea16cbe2dfc4faf7a5b"
+      }
+    },
+    {
+      "name": "file_seed",
+      "linker": "rtlink400",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 464,
+      "end": 464,
+      "boundary_final": "5a5a5a",
+      "probe_final": "3157",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 464,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2506
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\file_seed\\PROBE.EXE",
+        "size": 3183,
+        "sha256": "9e6c88469e959296407628eaa03df42768cdfbbd4831dea16cbe2dfc4faf7a5b"
+      }
+    },
+    {
+      "name": "file_seed",
+      "linker": "rtlink610",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 464,
+      "end": 464,
+      "boundary_final": "a5a5a5",
+      "probe_final": "3157",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 464,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2506
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.EXE",
+        "size": 3183,
+        "sha256": "daa54f6323f7688558356cb0ec0f0829e3e3ab3a9b91d277db7c781a3972aafb"
+      }
+    },
+    {
+      "name": "file_seed",
+      "linker": "rtlink610",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 464,
+      "end": 464,
+      "boundary_final": "5a5a5a",
+      "probe_final": "3157",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 464,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2506
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\file_seed\\PROBE.EXE",
+        "size": 3183,
+        "sha256": "daa54f6323f7688558356cb0ec0f0829e3e3ab3a9b91d277db7c781a3972aafb"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink400",
+      "poison": 199,
+      "dos_version": 1,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "c7c7c7",
+      "probe_final": "c7c7",
+      "events": [
+        "dos1-transfer-to-psp-zero"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [],
+      "terminated": true,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 42,
+        "ds": 4080,
+        "es": 4080,
+        "si": 0,
+        "di": 0,
+        "cx": 0,
+        "ss": 4264,
+        "sp": 2044
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "f449f3baca82609c81bfb66d1237f3aceb21b3556272f41a9e992aa7f73ef86b"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink400",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": true,
+      "observer_output": [
+        "a5a5"
+      ],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "a50000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "f449f3baca82609c81bfb66d1237f3aceb21b3556272f41a9e992aa7f73ef86b"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink400",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": true,
+      "observer_output": [
+        "5a5a"
+      ],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "5a0000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink400\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "f449f3baca82609c81bfb66d1237f3aceb21b3556272f41a9e992aa7f73ef86b"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink610",
+      "poison": 199,
+      "dos_version": 1,
+      "injected_external_observer": false,
+      "observer_output": [],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "c7c7c7",
+      "probe_final": "c7c7",
+      "events": [
+        "dos1-transfer-to-psp-zero"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [],
+      "terminated": true,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 42,
+        "ds": 4080,
+        "es": 4080,
+        "si": 0,
+        "di": 0,
+        "cx": 0,
+        "ss": 4264,
+        "sp": 2044
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "005bec1112c3b1bf69ee5e2fa43197b196edb6e049bf86be56353c9b244e97c4"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink610",
+      "poison": 165,
+      "dos_version": 5,
+      "injected_external_observer": true,
+      "observer_output": [
+        "a5a5"
+      ],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "a50000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "005bec1112c3b1bf69ee5e2fa43197b196edb6e049bf86be56353c9b244e97c4"
+      }
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink610",
+      "poison": 90,
+      "dos_version": 5,
+      "injected_external_observer": true,
+      "observer_output": [
+        "5a5a"
+      ],
+      "edata": 462,
+      "end": 480,
+      "boundary_final": "5a0000",
+      "probe_final": "0000",
+      "events": [
+        "clear-complete",
+        "qczrinit-after-clear",
+        "first-environment-call-after-clear"
+      ],
+      "pre_clear_target_reads": [],
+      "clear_written_relative_offsets": [
+        0,
+        1
+      ],
+      "terminated": false,
+      "genuine_whole_stock_crt_member": true,
+      "stop_registers": {
+        "cs": 4096,
+        "ip": 183,
+        "ds": 4234,
+        "es": 4234,
+        "si": 8330,
+        "di": 480,
+        "cx": 0,
+        "ss": 4234,
+        "sp": 2522
+      },
+      "executable_pin": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\dos_tail_clear_v36\\rtlink610\\bss_two\\PROBE.EXE",
+        "size": 3181,
+        "sha256": "005bec1112c3b1bf69ee5e2fa43197b196edb6e049bf86be56353c9b244e97c4"
+      }
+    }
+  ],
+  "fixture_checks": [
+    {
+      "name": "bss_two",
+      "linker": "rtlink400",
+      "mz_entry": [
+        0,
+        30
+      ],
+      "publics": {
+        "__astart": [
+          0,
+          30
+        ],
+        "__cinit": [
+          0,
+          286
+        ],
+        "_main": [
+          0,
+          0
+        ],
+        "_edata": [
+          138,
+          462
+        ],
+        "_end": [
+          138,
+          480
+        ],
+        "_probe": [
+          138,
+          464
+        ]
+      },
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> \n5K\n",
+      "whole_crt_all_fixups_bound": true,
+      "whole_crt_relocations_exact": true,
+      "bound_text_fixups": 30,
+      "fullrun": "PASS"
+    },
+    {
+      "name": "bss_two",
+      "linker": "rtlink610",
+      "mz_entry": [
+        0,
+        30
+      ],
+      "publics": {
+        "__astart": [
+          0,
+          30
+        ],
+        "__cinit": [
+          0,
+          286
+        ],
+        "_main": [
+          0,
+          0
+        ],
+        "_edata": [
+          138,
+          462
+        ],
+        "_end": [
+          138,
+          480
+        ],
+        "_probe": [
+          138,
+          464
+        ]
+      },
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t4.K\t+28H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "whole_crt_all_fixups_bound": true,
+      "whole_crt_relocations_exact": true,
+      "bound_text_fixups": 30,
+      "fullrun": "PASS"
+    },
+    {
+      "name": "bss_shift",
+      "linker": "rtlink400",
+      "mz_entry": [
+        1,
+        20
+      ],
+      "publics": {
+        "__astart": [
+          1,
+          20
+        ],
+        "__cinit": [
+          1,
+          276
+        ],
+        "_main": [
+          0,
+          0
+        ],
+        "_edata": [
+          138,
+          486
+        ],
+        "_end": [
+          138,
+          512
+        ],
+        "_probe": [
+          138,
+          496
+        ]
+      },
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> \n5K\n",
+      "whole_crt_all_fixups_bound": true,
+      "whole_crt_relocations_exact": true,
+      "bound_text_fixups": 30,
+      "fullrun": "PASS"
+    },
+    {
+      "name": "bss_shift",
+      "linker": "rtlink610",
+      "mz_entry": [
+        1,
+        20
+      ],
+      "publics": {
+        "__astart": [
+          1,
+          20
+        ],
+        "__cinit": [
+          1,
+          276
+        ],
+        "_main": [
+          0,
+          0
+        ],
+        "_edata": [
+          138,
+          486
+        ],
+        "_end": [
+          138,
+          512
+        ],
+        "_probe": [
+          138,
+          496
+        ]
+      },
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t4.K\t+2AH Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "whole_crt_all_fixups_bound": true,
+      "whole_crt_relocations_exact": true,
+      "bound_text_fixups": 30,
+      "fullrun": "PASS"
+    },
+    {
+      "name": "file_seed",
+      "linker": "rtlink400",
+      "mz_entry": [
+        0,
+        30
+      ],
+      "publics": {
+        "__astart": [
+          0,
+          30
+        ],
+        "__cinit": [
+          0,
+          286
+        ],
+        "_main": [
+          0,
+          0
+        ],
+        "_edata": [
+          138,
+          464
+        ],
+        "_end": [
+          138,
+          464
+        ],
+        "_probe": [
+          138,
+          66
+        ]
+      },
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> \n5K\n",
+      "whole_crt_all_fixups_bound": true,
+      "whole_crt_relocations_exact": true,
+      "bound_text_fixups": 30,
+      "fullrun": "PASS"
+    },
+    {
+      "name": "file_seed",
+      "linker": "rtlink610",
+      "mz_entry": [
+        0,
+        30
+      ],
+      "publics": {
+        "__astart": [
+          0,
+          30
+        ],
+        "__cinit": [
+          0,
+          286
+        ],
+        "_main": [
+          0,
+          0
+        ],
+        "_edata": [
+          138,
+          464
+        ],
+        "_end": [
+          138,
+          464
+        ],
+        "_probe": [
+          138,
+          66
+        ]
+      },
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t4.K\t+27H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "whole_crt_all_fixups_bound": true,
+      "whole_crt_relocations_exact": true,
+      "bound_text_fixups": 30,
+      "fullrun": "PASS"
+    }
+  ]
+}

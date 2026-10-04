@@ -1,0 +1,129 @@
+{
+  "schema": "simant-ctype-runtime-sequence-v36",
+  "status": "RESEARCH_SUPPORTED_RELATIVE_VIEW; NO_ADMISSION",
+  "complete_clean_isolated_link_and_execution_count": 8,
+  "controls": [
+    {
+      "profile": "rtlink400",
+      "positive_whole_data_order": {
+        "output.asm": -146,
+        "txtmode.asm": -48,
+        "fdata.asm": -46,
+        "growseg.asm": -32,
+        "cmiscdat.asm": -30,
+        "ctype.asm": 0,
+        "syserr.c": 258
+      },
+      "genuine_462_byte_dgroup_shift": 462,
+      "shift_preserves_all_127_startup_raw_bytes_and_predicates": true,
+      "typed_heap_flags_DD_observation": [
+        1,
+        0
+      ],
+      "wrong_order_heap_DD_observation": [
+        0,
+        0
+      ],
+      "code_binding_contrast_publics": [
+        [
+          17,
+          1548
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "unchanged_data_order_changed_predicate_inputs": [
+        -31,
+        -30,
+        -27,
+        -26,
+        -23,
+        -22,
+        -19,
+        -18,
+        -15,
+        -14,
+        -11,
+        -10
+      ],
+      "whole_bound_data_and_relocation_set_checks": 24
+    },
+    {
+      "profile": "rtlink610",
+      "positive_whole_data_order": {
+        "output.asm": -146,
+        "txtmode.asm": -48,
+        "fdata.asm": -46,
+        "growseg.asm": -32,
+        "cmiscdat.asm": -30,
+        "ctype.asm": 0,
+        "syserr.c": 258
+      },
+      "genuine_462_byte_dgroup_shift": 462,
+      "shift_preserves_all_127_startup_raw_bytes_and_predicates": true,
+      "typed_heap_flags_DD_observation": [
+        1,
+        0
+      ],
+      "wrong_order_heap_DD_observation": [
+        0,
+        0
+      ],
+      "code_binding_contrast_publics": [
+        [
+          17,
+          1548
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "unchanged_data_order_changed_predicate_inputs": [
+        -31,
+        -30,
+        -27,
+        -26,
+        -23,
+        -22,
+        -19,
+        -18,
+        -15,
+        -14,
+        -11,
+        -10
+      ],
+      "whole_bound_data_and_relocation_set_checks": 24
+    }
+  ],
+  "cross_linker": {
+    "sequence": {
+      "runtime_raw_and_predicates_equal_between_linkers": true,
+      "unrelocated_127_bytes_equal": true
+    },
+    "shift_dgroup": {
+      "runtime_raw_and_predicates_equal_between_linkers": true,
+      "unrelocated_127_bytes_equal": true
+    },
+    "wrong_data_order": {
+      "runtime_raw_and_predicates_equal_between_linkers": true,
+      "unrelocated_127_bytes_equal": true
+    },
+    "shift_code_binding": {
+      "runtime_raw_and_predicates_equal_between_linkers": true,
+      "unrelocated_127_bytes_equal": true
+    }
+  },
+  "build_ingredients": "fresh MSC600AX MAIN.C plus eight complete unmodified pinned LLIBCR OMF members, with real LLIBCR/LIBH dependency search",
+  "original_usage": "research-only neighboring-byte, reference and relocation comparisons; no build construction",
+  "historical_owner": "fdata.asm is strongly corroborated by independently code/public-anchored neighbors, segment identity/order and descriptor-vs-bdata flag contrast; no original direct __fheap public/fixup anchor",
+  "functional_closure": "relative view is realizable; complete original memory-state equivalence for D1..DE remains unproved; full prefix has code/load-dependent pointer bytes; suffix remains separate",
+  "recommended_disposition": "retain all 14 functional/historical bytes and ctype gate; preserve new exact relative-owner binding as research evidence, not a count-reducing owner-only waiver",
+  "no_application_fixture_stubs": true,
+  "no_original_bytes_in_build": true,
+  "no_source_rewrite_or_canonical_edits": true,
+  "no_object_or_image_patching": true,
+  "initial_fixture_limitation": "Preserved sequence-initial emitted MUT 1 1 because same-function ctype reads were compiler-reused. Corrected main calls separately emitted lower_test, which contains the signed ctype read; all eight primary cases use its fresh object. The initial result is not an alias negative."
+}

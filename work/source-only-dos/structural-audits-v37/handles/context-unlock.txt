@@ -1,0 +1,156 @@
+win_UnlockWin  root:23AE:01DB  linear 23CBB  size 386  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 23AE: function 5/8; neighbours: win_IsWinLocked, f_23AE_0069, f_23AE_035D, win_LockWinHigh
+  frame: {'frame': 'bp', 'locals': 28, 'stack_check': False}
+  best draft: build/search/win_UnlockWin/best.c  MISMATCH ratio 0.9568
+  01DB  push bp
+  01DC  mov bp, sp
+  01DE  sub sp, 0x1c
+  01E1  push ax
+  01E2  push di
+  01E3  push si
+  01E4  cmp word ptr [0x644c], 0           DS:644C
+  01E9  jne 0x1ee
+  01EB  jmp 0x357
+  01EE  mov cl, 8
+  01F0  mov bx, ax
+  01F2  sar bx, cl
+  01F4  mov word ptr [bp - 0x10], bx
+  01F7  shl bx, 1
+  01F9  shl bx, 1
+  01FB  mov ax, word ptr [bx - 0x6dd0]
+  01FF  mov dx, word ptr [bx - 0x6dce]
+  0203  mov si, ax
+  0205  mov word ptr [bp - 0x1a], dx
+  0208  mov bx, word ptr [bp - 0x10]
+  020B  cmp byte ptr [bx - 0x725a], 0
+  0210  jne 0x21e
+  0212  mov ax, 0x6487                     "Attemp to unlock when not locked!!"
+  0215  push ds
+  0216  push ax
+  0217  lcall 0x1c62, 0xc                  -> Punt
+  021C  pop bx
+  021D  pop bx
+  021E  push word ptr [bp - 0x1a]
+  0221  push si
+  0222  lcall 0x171c, 0x1686               -> f_171C_1686
+  0227  pop bx
+  0228  pop bx
+  0229  cmp ax, 5
+  022C  jne 0x23e
+  022E  push word ptr [bp - 0x1e]
+  0231  mov ax, 0x64aa                     "Attemp to unlock when discarded win %x"
+  0234  push ds
+  0235  push ax
+  0236  lcall 0x1c62, 0xc                  -> Punt
+  023B  add sp, 6
+  023E  mov bx, word ptr [bp - 0x10]
+  0241  dec byte ptr [bx - 0x725a]
+  0245  je 0x24a
+  0247  jmp 0x357
+  024A  mov es, word ptr [bp - 0x1a]
+  024D  les bx, ptr es:[si]
+  0250  test byte ptr es:[bx + 0x1d], 2
+  0255  jne 0x26b
+  0257  mov es, word ptr [bp - 0x1a]
+  025A  les bx, ptr es:[si]
+  025D  test byte ptr es:[bx + 0x1d], 8
+  0262  je 0x26b
+  0264  cmp word ptr [0x644e], 0           DS:644E
+  0269  je 0x26e
+  026B  jmp 0x34b
+  026E  mov es, word ptr [bp - 0x1a]
+  0271  mov ax, word ptr es:[si]
+  0274  mov dx, word ptr es:[si + 2]
+  0278  mov word ptr [bp - 0x18], ax
+  027B  mov word ptr [bp - 0x16], dx
+  027E  mov word ptr [bp - 0xa], 0
+  0283  mov word ptr [bp - 0x1c], si
+  0286  jmp 0x2e3
+  0288  mov si, ax
+  028A  shl si, 1
+  028C  shl si, 1
+  028E  add bx, 0x2c
+  0291  les bx, ptr es:[bx + si]
+  0294  mov di, bx
+  0296  mov al, byte ptr es:[bx + 0x21]
+  029A  cwde
+  029B  sub ax, 4
+  029E  je 0x2b0
+  02A0  sub ax, 6
+  02A3  je 0x2b0
+  02A5  sub ax, 6
+  02A8  jl 0x2e0
+  02AA  dec ax
+  02AB  dec ax
+  02AC  jle 0x2b5
+  02AE  jmp 0x2e0
+  02B0  lea bx, [di + 0x34]
+  02B3  jmp 0x2b8
+  02B5  lea bx, [di + 0x2a]
+  02B8  mov si, bx
+  02BA  mov word ptr [bp - 2], es
+  02BD  mov ax, word ptr es:[bx + 2]
+  02C1  or ax, word ptr es:[bx]
+  02C4  je 0x2e0
+  02C6  push word ptr es:[si + 2]
+  02CA  push word ptr es:[si]
+  02CD  lcall 0x171c, 0x13e4               -> f_171C_13E4
+  02D2  pop bx
+  02D3  pop bx
+  02D4  mov es, word ptr [bp - 2]
+  02D7  sub ax, ax
+  02D9  mov word ptr es:[si + 2], ax
+  02DD  mov word ptr es:[si], ax
+  02E0  inc word ptr [bp - 0xa]
+  02E3  mov ax, word ptr [bp - 0xa]
+  02E6  les bx, ptr [bp - 0x18]
+  02E9  cmp word ptr es:[bx + 0xc], ax
+  02ED  jg 0x288
+  02EF  push word ptr [bp - 0x1a]
+  02F2  push word ptr [bp - 0x1c]
+  02F5  lcall 0x171c, 0x2086               -> f_171C_2086
+  02FA  pop bx
+  02FB  pop bx
+  02FC  push word ptr [bp - 0x1a]
+  02FF  push word ptr [bp - 0x1c]
+  0302  lcall 0x171c, 0x20e2               -> f_171C_20E2
+  0307  pop bx
+  0308  pop bx
+  0309  mov bx, word ptr [bp - 0x10]
+  030C  shl bx, 1
+  030E  shl bx, 1
+  0310  sub ax, ax
+  0312  mov word ptr [bx - 0x6dce], ax
+  0316  mov word ptr [bx - 0x6dd0], ax
+  031A  mov word ptr [bx - 0x730c], ax
+  031E  mov word ptr [bx - 0x730e], ax
+  0322  les bx, ptr [bp - 0x18]
+  0325  mov ax, word ptr es:[bx + 0x2c]
+  0329  mov dx, word ptr es:[bx + 0x2e]
+  032D  add ax, 8
+  0330  mov cl, 3
+  0332  mov bx, word ptr [bp - 0x10]
+  0335  shl bx, cl
+  0337  mov es, word ptr [0x8a3a]          DS:8A3A
+  033B  push ds
+  033C  lea di, [bx + 0x4892]
+  0340  mov si, ax
+  0342  mov ds, dx
+  0344  movsw word ptr es:[di], word ptr [si]
+  0345  movsw word ptr es:[di], word ptr [si]
+  0346  movsw word ptr es:[di], word ptr [si]
+  0347  movsw word ptr es:[di], word ptr [si]
+  0348  pop ds
+  0349  jmp 0x357
+  034B  mov ax, word ptr [bp - 0x1a]
+  034E  push ax
+  034F  push si
+  0350  lcall 0x171c, 0x2086               -> f_171C_2086
+  0355  pop bx
+  0356  pop bx
+  0357  pop si
+  0358  pop di
+  0359  mov sp, bp
+  035B  pop bp
+  035C  retf
