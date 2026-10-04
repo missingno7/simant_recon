@@ -1,0 +1,21 @@
+myBeginSound  root:00DF:00E8  linear 00ED8  size 42  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 00DF: function 6/12; neighbours: myBeginSong, f_00DF_00E0, myBeginSoundReverse, mySoundIsDone
+  frame: {'frame': 'bp', 'locals': 0, 'stack_check': True}
+  win16: _myBeginSound [MEDIUM] 15 anchored neighbours agree: caller:AddFood, caller:CheatKeys, caller:DoAntMoveY, caller:DoDigInB, caller:DoDigInR; size ratio 0.02
+  00E8  push bp
+  00E9  mov bp, sp
+  00EB  xor ax, ax
+  00ED  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  00F2  cmp word ptr [0x1926], 0           DS:1926 g_1926
+  00F7  je 0x10e
+  00F9  mov es, word ptr [0x7dfc]          DS:7DFC
+  00FD  cmp word ptr es:[0x7ac], 0
+  0103  je 0x10e
+  0105  push word ptr [bp + 6]
+  0108  lcall 0x295c, 0x367                -> f_295C_0367
+  010D  pop bx
+  010E  mov sp, bp
+  0110  pop bp
+  0111  retf
+  bytes: 558bec33c09acc02f429833e26190074158e06fc7d26833eac07007409ff76069a67035c295b8be55dcb

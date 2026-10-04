@@ -1,0 +1,204 @@
+f_0000_0193  root:0000:0193  linear 00193  size 520  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 0000: function 5/8; neighbours: f_0000_00DE, f_0000_0149, f_0000_039B, f_0000_0429
+  frame: {'frame': 'bp', 'locals': 20, 'stack_check': False, 'arg_bytes_min': 6}
+  0193  push bp
+  0194  mov bp, sp
+  0196  sub sp, 0x14
+  0199  push di
+  019A  push si
+  019B  lcall 0x284a, 4                    -> f_284A_0004
+  01A0  or ax, ax
+  01A2  jne 0x1a9
+  01A4  lcall 0x284a, 0x10a                -> StopSong
+  01A9  mov ax, 0x12
+  01AC  push ax
+  01AD  push word ptr [bp + 0xa]
+  01B0  lcall 0x1a53, 0xba                 -> f_1A53_00BA
+  01B5  pop bx
+  01B6  pop bx
+  01B7  mov si, ax
+  01B9  mov word ptr [bp - 2], dx
+  01BC  or dx, ax
+  01BE  jne 0x1c6
+  01C0  mov ax, 0xffff
+  01C3  jmp 0x395
+  01C6  mov ax, word ptr [bp - 2]
+  01C9  push ax
+  01CA  push si
+  01CB  mov di, ax
+  01CD  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  01D2  pop bx
+  01D3  pop bx
+  01D4  mov es, dx
+  01D6  mov bx, ax
+  01D8  push word ptr es:[bx]
+  01DB  mov word ptr [bp - 0xa], bx
+  01DE  mov word ptr [bp - 8], es
+  01E1  lcall 0x1959, 2                    -> f_1959_0002
+  01E6  pop bx
+  01E7  mov word ptr [bp + 0xa], ax
+  01EA  les bx, ptr [bp - 0xa]
+  01ED  mov ax, word ptr es:[bx + 6]
+  01F1  mov es, word ptr [0x7dd8]          DS:7DD8
+  01F5  mov word ptr es:[0x7576], ax
+  01F9  push ax
+  01FA  lcall 0x1959, 2                    -> f_1959_0002
+  01FF  pop bx
+  0200  mov es, word ptr [0x7dd8]          DS:7DD8
+  0204  mov word ptr es:[0x7576], ax
+  0208  push di
+  0209  push si
+  020A  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  020F  pop bx
+  0210  pop bx
+  0211  push di
+  0212  push si
+  0213  lcall 0x1a53, 0x2d5                -> db_ReleaseHandle
+  0218  pop bx
+  0219  pop bx
+  021A  mov ax, word ptr [bp + 0xa]
+  021D  mov es, word ptr [0x7dda]          DS:7DDA
+  0221  mov word ptr es:[0x7578], ax
+  0225  mov cx, 0x14
+  0228  push cx
+  0229  push ax
+  022A  lcall 0x1a53, 0xba                 -> f_1A53_00BA
+  022F  pop bx
+  0230  pop bx
+  0231  les bx, ptr [bp + 6]
+  0234  mov word ptr es:[bx + 0x38], ax
+  0238  mov word ptr es:[bx + 0x3a], dx
+  023C  mov ax, 0x14
+  023F  push ax
+  0240  push word ptr [bp + 0xa]
+  0243  lcall 0x1a53, 0x34f                -> db_UnhookObject
+  0248  pop bx
+  0249  pop bx
+  024A  mov ax, 0x31
+  024D  push ax
+  024E  les bx, ptr [bp + 6]
+  0251  push word ptr es:[bx + 0x3a]
+  0255  push word ptr es:[bx + 0x38]
+  0259  lcall 0x171c, 0x1e86               -> f_171C_1E86
+  025E  add sp, 6
+  0261  les bx, ptr [bp + 6]
+  0264  mov ax, word ptr es:[bx + 0x3a]
+  0268  or ax, word ptr es:[bx + 0x38]
+  026C  jne 0x271
+  026E  jmp 0x1c0
+  0271  mov di, bx
+  0273  push word ptr es:[di + 0x3a]
+  0277  push word ptr es:[di + 0x38]
+  027B  lcall 0x171c, 0x1e9a               -> f_171C_1E9A
+  0280  pop bx
+  0281  pop bx
+  0282  or ax, ax
+  0284  jne 0x289
+  0286  jmp 0x310
+  0289  mov ax, 0x182c                     "song"
+  028C  push ds
+  028D  push ax
+  028E  mov ax, 0x39
+  0291  push ax
+  0292  mov es, word ptr [bp + 8]
+  0295  mov ax, word ptr es:[di + 0x38]
+  0299  mov dx, word ptr es:[di + 0x3a]
+  029D  mov si, ax
+  029F  mov word ptr [bp - 2], dx
+  02A2  push dx
+  02A3  push ax
+  02A4  mov word ptr [bp - 0xe], di
+  02A7  mov word ptr [bp - 0xc], es
+  02AA  lcall 0x171c, 0x1c1c               -> f_171C_1C1C
+  02AF  pop bx
+  02B0  pop bx
+  02B1  mov word ptr [bp - 6], ax
+  02B4  sub dx, dx
+  02B6  push dx
+  02B7  push ax
+  02B8  lcall 0x171c, 0x13ca               -> f_171C_13CA
+  02BD  add sp, 0xa
+  02C0  les bx, ptr [bp - 0xe]
+  02C3  mov word ptr es:[bx + 0x38], ax
+  02C7  mov word ptr es:[bx + 0x3a], dx
+  02CB  mov ax, dx
+  02CD  or ax, word ptr es:[bx + 0x38]
+  02D1  jne 0x2e1
+  02D3  push word ptr [bp - 2]
+  02D6  push si
+  02D7  lcall 0x171c, 0x13e4               -> f_171C_13E4
+  02DC  pop bx
+  02DD  pop bx
+  02DE  jmp 0x1c0
+  02E1  push word ptr [bp - 6]
+  02E4  mov es, word ptr [bp - 2]
+  02E7  push word ptr es:[si + 2]
+  02EB  push word ptr es:[si]
+  02EE  mov es, word ptr [bp + 8]
+  02F1  les bx, ptr es:[di + 0x38]
+  02F5  push word ptr es:[bx + 2]
+  02F9  push word ptr es:[bx]
+  02FC  lcall 0x29f4, 0x281a               -> __fmemcpy
+  0301  add sp, 0xa
+  0304  mov ax, word ptr [bp - 2]
+  0307  push ax
+  0308  push si
+  0309  lcall 0x171c, 0x13e4               -> f_171C_13E4
+  030E  pop bx
+  030F  pop bx
+  0310  mov es, word ptr [bp + 8]
+  0313  push word ptr es:[di + 0x3a]
+  0317  push word ptr es:[di + 0x38]
+  031B  lcall 0x171c, 0x1c1c               -> f_171C_1C1C
+  0320  pop bx
+  0321  pop bx
+  0322  sub si, si
+  0324  cmp si, 0xe
+  0327  jge 0x393
+  0329  mov ax, 6
+  032C  mov bx, di
+  032E  mov es, word ptr [bp + 8]
+  0331  mov cx, si
+  0333  shl cx, 1
+  0335  add bx, cx
+  0337  add bx, 0x1c
+  033A  mov word ptr [bp - 0x14], bx
+  033D  mov word ptr [bp - 0x12], es
+  0340  mul word ptr es:[bx]
+  0343  mov bx, ax
+  0345  mov es, word ptr [0x7ddc]          DS:7DDC
+  0349  cmp word ptr es:[bx], 1
+  034F  jne 0x37e
+  0351  push word ptr es:[bx + 4]
+  0356  push word ptr es:[bx + 2]
+  035B  push cs
+  035C  call 0x90                          -> f_0000_0090
+  035F  pop bx
+  0360  pop bx
+  0361  inc ax
+  0362  je 0x381
+  0364  mov ax, 6
+  0367  les bx, ptr [bp - 0x14]
+  036A  mul word ptr es:[bx]
+  036D  mov bx, ax
+  036F  mov es, word ptr [0x7ddc]          DS:7DDC
+  0373  les bx, ptr es:[bx + 2]
+  0378  mov word ptr es:[bx + 0xc], 2
+  037E  inc si
+  037F  jmp 0x324
+  0381  push word ptr [bp + 0xa]
+  0384  mov ax, word ptr [bp + 8]
+  0387  push ax
+  0388  push di
+  0389  push cs
+  038A  call 0x39b                         -> f_0000_039B
+  038D  add sp, 6
+  0390  jmp 0x1c0
+  0393  sub ax, ax
+  0395  pop si
+  0396  pop di
+  0397  mov sp, bp
+  0399  pop bp
+  039A  retf
+  bytes: 558bec83ec1457569a04004a280bc075059a0a014a28b8120050ff760a9aba00531a5b5b8bf08956fe0bd07506b8ffffe9cf018b46fe50568bf89a841b1c175b5b8ec28bd826ff37895ef68c46f89a020059195b89460ac45ef6268b47068e06d87d26a37675509a020059195b8e06d87d26a3767557569aba1b1c175b5b57569ad502531a5b5b8b460a8e06da7d26a37875b9140051509aba00531a5b5bc45e06268947382689573ab8140050ff760a9a4f03531a5b5bb8310050c45e0626ff773a26ff77389a861e1c1783c406c45e06268b473a260b47387503e94fff8bfb26ff753a26ff75389a9a1e1c175b5b0bc07503e98700b82c181e50b83900508e4608268b4538268b553a8bf08956fe5250897ef28c46f49a1c1c1c175b5b8946fa2bd252509aca131c1783c40ac45ef2268947382689573a8bc2260b4738750eff76fe569ae4131c175b5be9dffeff76fa8e46fe26ff740226ff348e460826c45d3826ff770226ff379a1a28f42983c40a8b46fe50569ae4131c175b5b8e460826ff753a26ff75389a1c1c1c175b5b2bf683fe0e7d6ab806008bdf8e46088bced1e103d983c31c895eec8c46ee26f7278bd88e06dc7d2683bf000001752d26ffb7040026ffb702000ee831fd5b5b40741db80600c45eec26f7278bd88e06dc7d26c49f020026c7470c020046eba3ff760a8b460850570ee80e0083c406e92dfe2bc05e5f8be55dcb

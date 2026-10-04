@@ -1,0 +1,32 @@
+f_0000_0149  root:0000:0149  linear 00149  size 74  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 0000: function 4/8; neighbours: f_0000_0090, f_0000_00DE, f_0000_0193, f_0000_039B
+  frame: {'frame': 'bp', 'stack_check': False}
+  0149  push bp
+  014A  mov bp, sp
+  014C  cmp word ptr [0x181c], 0x26        DS:181C
+  0151  jle 0x15f
+  0153  mov ax, 0x181e                     "FREELIST > 38"
+  0156  push ds
+  0157  push ax
+  0158  lcall 0x1c62, 0xc                  -> Punt
+  015D  pop bx
+  015E  pop bx
+  015F  mov ax, word ptr [bp + 6]
+  0162  mov dx, word ptr [bp + 8]
+  0165  mov es, word ptr [0x7dd4]          DS:7DD4
+  0169  mov bx, word ptr [0x181c]          DS:181C
+  016D  shl bx, 1
+  016F  shl bx, 1
+  0171  mov word ptr es:[bx + 0x150], ax
+  0176  mov word ptr es:[bx + 0x152], dx
+  017B  inc word ptr [0x181c]              DS:181C
+  017F  mov es, word ptr [0x7dd6]          DS:7DD6
+  0183  cmp word ptr es:[0x7574], 0
+  0189  jne 0x18f
+  018B  push cs
+  018C  call 0xde                          -> f_0000_00DE
+  018F  mov sp, bp
+  0191  pop bp
+  0192  retf
+  bytes: 558bec833e1c18267e0cb81e181e509a0c00621c5b5b8b46068b56088e06d47d8b1e1c18d1e3d1e326898750012689975201ff061c188e06d67d26833e74750075040ee84fff8be55dcb

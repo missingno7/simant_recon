@@ -1,0 +1,48 @@
+f_277E_017D  root:277E:017D  linear 2795D  size 125  extent REVIEWED  region game_or_library
+  entry evidence: reviewed
+  module frame 277E: function 6/18; neighbours: f_277E_0154, f_277E_0179, f_277E_01FA, f_277E_034F
+  frame: {'frame': 'bp', 'locals': 2, 'stack_check': False}
+  017D  push bp
+  017E  mov bp, sp
+  0180  sub sp, 2
+  0183  push si
+  0184  mov es, word ptr [0x8a62]          DS:8A62
+  0188  mov ax, word ptr es:[0x4a48]
+  018C  mov word ptr [bp - 2], ax
+  018F  mov es, word ptr [0x8a66]          DS:8A66
+  0193  mov word ptr es:[0x1f2], ax
+  0197  sub si, si
+  0199  jmp 0x1c4
+  019B  mov ax, 6
+  019E  mov es, word ptr [0x8a64]          DS:8A64
+  01A2  imul word ptr es:[0x4a4c]
+  01A7  mov bx, ax
+  01A9  mov es, word ptr [0x8a6a]          DS:8A6A
+  01AD  mov byte ptr es:[bx + 0x4a4e], 1
+  01B3  mov ax, si
+  01B5  mov byte ptr es:[bx + 0x4a4f], al
+  01BA  inc si
+  01BB  mov es, word ptr [0x8a64]          DS:8A64
+  01BF  inc word ptr es:[0x4a4c]
+  01C4  cmp word ptr [bp - 2], si
+  01C7  jg 0x19b
+  01C9  mov es, word ptr [0x8a6c]          DS:8A6C
+  01CD  mov ax, word ptr es:[0x74ad]
+  01D1  mov es, word ptr [0x8a6e]          DS:8A6E
+  01D5  mov word ptr es:[0x6b9c], ax
+  01D9  mov es, word ptr [0x8a70]          DS:8A70
+  01DD  mov word ptr es:[0x74c0], 0x40
+  01E4  mov ax, 0xc42
+  01E7  mov cx, 0x55b3                     [seg 55B3 DGROUP]
+  01EA  push cx
+  01EB  push ax
+  01EC  push cs
+  01ED  call 0x10a                         -> f_277E_010A
+  01F0  pop bx
+  01F1  pop bx
+  01F2  mov ax, 1
+  01F5  pop si
+  01F6  mov sp, bp
+  01F8  pop bp
+  01F9  retf
+  bytes: 558bec83ec02568e06628a26a1484a8946fe8e06668a26a3f2012bf6eb29b806008e06648a26f72e4c4a8bd88e066a8a26c6874e4a018bc62688874f4a468e06648a26ff064c4a3976fe7fd28e066c8a26a1ad748e066e8a26a39c6b8e06708a26c706c0744000b8420cb9b35551500ee81aff5b5bb801005e8be55dcb

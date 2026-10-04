@@ -1,0 +1,39 @@
+f_0000_0090  root:0000:0090  linear 00090  size 78  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 0000: function 2/8; neighbours: f_0000_0000, f_0000_00DE, f_0000_0149
+  frame: {'frame': 'bp', 'stack_check': False}
+  0090  push bp
+  0091  mov bp, sp
+  0093  push di
+  0094  push si
+  0095  mov si, word ptr [bp + 6]
+  0098  mov es, word ptr [bp + 8]
+  009B  cmp word ptr es:[si + 0xc], 0
+  00A0  je 0xa7
+  00A2  mov ax, 1
+  00A5  jmp 0xd8
+  00A7  mov ax, 5
+  00AA  push ax
+  00AB  push word ptr es:[si + 0x1d]
+  00AF  mov di, es
+  00B1  lcall 0x1a53, 0xba                 -> f_1A53_00BA
+  00B6  pop bx
+  00B7  pop bx
+  00B8  mov es, di
+  00BA  mov word ptr es:[si], ax
+  00BD  mov word ptr es:[si + 2], dx
+  00C1  push dx
+  00C2  push ax
+  00C3  lcall 0x171c, 0x1c1c               -> f_171C_1C1C
+  00C8  pop bx
+  00C9  pop bx
+  00CA  mov es, di
+  00CC  mov word ptr es:[si + 4], ax
+  00D0  mov word ptr es:[si + 0xc], 1
+  00D6  sub ax, ax
+  00D8  pop si
+  00D9  pop di
+  00DA  mov sp, bp
+  00DC  pop bp
+  00DD  retf
+  bytes: 558bec57568b76068e460826837c0c007405b80100eb31b805005026ff741d8cc79aba00531a5b5b8ec72689042689540252509a1c1c1c175b5b8ec72689440426c7440c01002bc05e5f8be55dcb

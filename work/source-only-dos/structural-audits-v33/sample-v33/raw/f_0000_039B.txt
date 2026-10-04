@@ -1,0 +1,61 @@
+f_0000_039B  root:0000:039B  linear 0039B  size 142  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 0000: function 6/8; neighbours: f_0000_0149, f_0000_0193, f_0000_0429, f_0000_046F
+  frame: {'frame': 'bp', 'locals': 6, 'stack_check': False}
+  039B  push bp
+  039C  mov bp, sp
+  039E  sub sp, 6
+  03A1  push di
+  03A2  push si
+  03A3  les bx, ptr [bp + 6]
+  03A6  mov ax, word ptr es:[bx + 0x3a]
+  03AA  or ax, word ptr es:[bx + 0x38]
+  03AE  je 0x3cc
+  03B0  push word ptr es:[bx + 0x3a]
+  03B4  push word ptr es:[bx + 0x38]
+  03B8  lcall 0x171c, 0x1c0a               -> f_171C_1C0A
+  03BD  pop bx
+  03BE  pop bx
+  03BF  les bx, ptr [bp + 6]
+  03C2  sub ax, ax
+  03C4  mov word ptr es:[bx + 0x3a], ax
+  03C8  mov word ptr es:[bx + 0x38], ax
+  03CC  sub si, si
+  03CE  mov ax, 6
+  03D1  mov di, si
+  03D3  shl di, 1
+  03D5  les bx, ptr [bp + 6]
+  03D8  add bx, 0x1c
+  03DB  mul word ptr es:[bx + di]
+  03DE  mov bx, ax
+  03E0  mov es, word ptr [0x7ddc]          DS:7DDC
+  03E4  cmp word ptr es:[bx], 1
+  03EA  jne 0x41d
+  03EC  mov ax, word ptr es:[bx + 2]
+  03F1  mov dx, word ptr es:[bx + 4]
+  03F6  mov cx, ax
+  03F8  mov bx, dx
+  03FA  mov di, cx
+  03FC  mov word ptr [bp - 2], dx
+  03FF  or bx, cx
+  0401  je 0x41d
+  0403  mov es, dx
+  0405  cmp word ptr es:[di + 0xc], 2
+  040A  jne 0x412
+  040C  mov word ptr es:[di + 0xc], 1
+  0412  mov ax, word ptr [bp - 2]
+  0415  push ax
+  0416  push di
+  0417  push cs
+  0418  call 0x149                         -> f_0000_0149
+  041B  pop bx
+  041C  pop bx
+  041D  inc si
+  041E  cmp si, 0xe
+  0421  jl 0x3ce
+  0423  pop si
+  0424  pop di
+  0425  mov sp, bp
+  0427  pop bp
+  0428  retf
+  bytes: 558bec83ec065756c45e06268b473a260b4738741c26ff773a26ff77389a0a1c1c175b5bc45e062bc02689473a268947382bf6b806008bfed1e7c45e0683c31c26f7218bd88e06dc7d2683bf0000017531268b870200268b9704008bc88bda8bf98956fe0bd9741a8ec226837d0c02750626c7450c01008b46fe50570ee82efd5b5b4683fe0e7cab5e5f8be55dcb

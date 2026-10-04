@@ -1,0 +1,184 @@
+ProcMenu  S11:35F5:018D  linear 360DD  size 473  extent DESCENT  region game_or_library
+  entry evidence: vector
+  module frame 35F5: function 4/4; neighbours: PauseGame, SetPause
+  frame: {'frame': 'bp', 'locals': 0, 'stack_check': True}
+  018D  push bp
+  018E  mov bp, sp
+  0190  xor ax, ax
+  0192  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  0197  push si
+  0198  les bx, ptr [bp + 6]
+  019B  mov si, word ptr es:[bx + 0xc]
+  019F  and si, 0xff
+  01A3  mov ax, si
+  01A5  dec ax
+  01A6  cmp ax, 0x45
+  01A9  jbe 0x1ae
+  01AB  jmp 0x242
+  01AE  shl ax, 1
+  01B0  xchg bx, ax
+  01B1  jmp word ptr cs:[bx + 0x1b6]
+  01B6  push bp
+  01B7  add al, byte ptr [bp + si + 2]
+  01BA  pop bp
+  01BB  add bh, byte ptr [bx + si + 2]
+  01BE  js 0x1c2
+  01C0  js 0x1c4
+  01C2  inc dx
+  01C3  add bh, byte ptr [bx + si + 2]
+  01C6  inc dx
+  01C7  add al, byte ptr [bp + si + 2]
+  01CA  inc dx
+  01CB  add al, byte ptr [bp + si + 2]
+  01CE  inc dx
+  01CF  add al, byte ptr [bp + si + 2]
+  01D2  inc dx
+  01D3  add al, byte ptr [bp + si + 2]
+  01D6  test byte ptr [bp + si], al
+  01D8  mov word ptr [bp + si], es
+  01DA  xchg sp, ax
+  01DB  add bl, byte ptr [si - 0x5bfe]
+  01DF  add ch, byte ptr [si - 0x4bfe]
+  01E3  add al, byte ptr [bp + si + 2]
+  01E6  inc dx
+  01E7  add al, byte ptr [bp + si + 2]
+  01EA  inc dx
+  01EB  add al, byte ptr [bp + si + 2]
+  01EE  inc dx
+  01EF  add al, byte ptr [bp + si + 2]
+  01F2  inc dx
+  01F3  add al, byte ptr [bp + si + 2]
+  01F6  mov sp, 0xbc02
+  01F9  add bh, byte ptr [si - 0x43fe]
+  01FD  add al, byte ptr [bp + si + 2]
+  0200  stc
+  0201  add al, byte ptr [di]
+  0203  add cx, word ptr [bp + si]
+  0205  add ax, word ptr [bp + si + 2]
+  0208  inc dx
+  0209  add al, byte ptr [bp + si + 2]
+  020C  inc dx
+  020D  add al, byte ptr [bp + si + 2]
+  0210  inc dx
+  0211  add al, byte ptr [bp + si + 2]
+  0214  inc dx
+  0215  add al, byte ptr [bp + si + 2]
+  0218  lsl ax, word ptr [bp + si + 2]
+  021C  inc dx
+  021D  add al, byte ptr [bp + si + 2]
+  0220  inc dx
+  0221  add al, byte ptr [bp + si + 2]
+  0224  inc dx
+  0225  add al, byte ptr [bp + si + 2]
+  0228  inc dx
+  0229  add al, byte ptr [bp + si + 2]
+  022C  inc dx
+  022D  add al, byte ptr [bp + si + 2]
+  0230  inc dx
+  0231  add al, byte ptr [bp + si + 2]
+  0234  inc dx
+  0235  add ch, byte ptr [di]
+  0237  add ax, word ptr [bp + si + 2]
+  023A  inc bx
+  023B  add ax, word ptr [bx + 3]
+  023E  dec sp
+  023F  add dx, word ptr [bx + di + 3]
+  0242  cmp si, 0x31
+  0245  jge 0x24a
+  0247  jmp 0x361
+  024A  cmp si, 0x36
+  024D  jle 0x252
+  024F  jmp 0x361
+  0252  jmp 0x314
+  0255  lcall 0x2cff, 0x29ac               -> AboutDialog (vector 29AC)
+  025A  jmp 0x361
+  025D  mov ax, 0x7e
+  0260  push ax
+  0261  mov ax, 0x2711
+  0264  push ax
+  0265  lcall 0xdf, 0xb1                   -> myBeginSong
+  026A  pop bx
+  026B  pop bx
+  026C  sub ax, ax
+  026E  push ax
+  026F  lcall 0x2cff, 0x2858               -> NewGame (vector 2858)
+  0274  pop bx
+  0275  jmp 0x361
+  0278  mov es, word ptr [0x866a]          DS:866A
+  027C  mov word ptr es:[0x2cbc], si
+  0281  jmp 0x361
+  0284  lcall 0x250, 0xe70                 -> OpenEditWindow
+  0289  jmp 0x361
+  028C  lcall 0xf8, 0x50a                  -> OpenMapYard
+  0291  jmp 0x361
+  0294  lcall 0x798, 0x12b                 -> OpenModeWindow
+  0299  jmp 0x361
+  029C  lcall 0x798, 0x115                 -> OpenCasteWindow
+  02A1  jmp 0x361
+  02A4  lcall 0x2cff, 0x29ca               -> OpenHistoryWindow (vector 29CA)
+  02A9  jmp 0x361
+  02AC  lcall 0x2cff, 0x29c0               -> OpenInfoWindow (vector 29C0)
+  02B1  jmp 0x361
+  02B4  lcall 0x2cff, 0x29b6               -> ScoreDialog (vector 29B6)
+  02B9  jmp 0x361
+  02BC  lea cx, [si - 0x21]
+  02BF  mov es, word ptr [0x866c]          DS:866C
+  02C3  cmp cx, word ptr es:[0x35c]
+  02C8  je 0x2d1
+  02CA  push cx
+  02CB  lcall 0x15b, 0x273                 -> SetYardMode
+  02D0  pop bx
+  02D1  mov es, word ptr [0x866e]          DS:866E
+  02D5  cmp word ptr es:[0x32e], 0
+  02DB  je 0x2e6
+  02DD  sub ax, ax
+  02DF  push ax
+  02E0  lcall 0x15b, 0x53c                 -> SetMapPlane
+  02E5  pop bx
+  02E6  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  02E9  lcall 0x22bf, 0x9b0                -> win_IsWinOpen
+  02EE  or ax, ax
+  02F0  jne 0x361
+  02F2  lcall 0xf8, 0x4c7                  -> MapToYard
+  02F7  jmp 0x361
+  02F9  mov ax, 1
+  02FC  push ax
+  02FD  lcall 0x15b, 0x53c                 -> SetMapPlane
+  0302  jmp 0x274
+  0305  mov ax, 2
+  0308  jmp 0x2fc
+  030A  mov ax, 3
+  030D  jmp 0x2fc
+  030F  lcall 0x284a, 0x10a                -> StopSong
+  0314  mov es, word ptr [0x8664]          DS:8664
+  0318  mov bx, si
+  031A  shl bx, 1
+  031C  cmp word ptr es:[bx + 0x746], 1
+  0322  sbb ax, ax
+  0324  neg ax
+  0326  mov word ptr es:[bx + 0x746], ax
+  032B  jmp 0x35d
+  032D  mov es, word ptr [0x8662]          DS:8662
+  0331  xor byte ptr es:[0x47e], 1
+  0337  push word ptr es:[0x47e]
+  033C  push cs
+  033D  call 0x9e                          -> SetPause
+  0340  jmp 0x274
+  0343  sub cx, cx
+  0345  jmp 0x354
+  0347  mov cx, 1
+  034A  jmp 0x354
+  034C  mov cx, 2
+  034F  jmp 0x354
+  0351  mov cx, 3
+  0354  mov es, word ptr [0x8660]          DS:8660
+  0358  mov word ptr es:[0x7cc], cx
+  035D  push cs
+  035E  call 0                             -> SetMenuEntries
+  0361  pop si
+  0362  mov sp, bp
+  0364  pop bp
+  0365  retf
+  bytes: 558bec33c09acc02f42956c45e06268b770c81e6ff008bc6483d45007603e99400d1e0932effa7b601550242025d02780278027802420278024202420242024202420242024202420284028c0294029c02a402ac02b402420242024202420242024202420242024202bc02bc02bc02bc024202f90205030a034202420242024202420242024202420242020f03420242024202420242024202420242024202420242024202420242022d034202430347034c03510383fe317d03e9170183fe367e03e90f01e9bf009aac29ff2ce90401b87e0050b81127509ab100df005b5b2bc0509a5828ff2c5be9e9008e066a86268936bc2ce9dd009a700e5002e9d5009a0a05f800e9cd009a2b019807e9c5009a15019807e9bd009aca29ff2ce9b5009ac029ff2ce9ad009ab629ff2ce9a5008d4cdf8e066c86263b0e5c037407519a73025b015b8e066e8626833e2e030074092bc0509a3c055b015bb800199ab009bf220bc0756f9ac704f800eb68b80100509a3c055b01e96fffb80200ebf2b80300ebed9a0a014a288e0664868bded1e32683bf4607011bc0f7d82689874607eb308e0662862680367e040126ff367e040ee85efde931ff2bc9eb0db90100eb08b90200eb03b903008e06608626890ecc070ee89ffc5e8be55dcb

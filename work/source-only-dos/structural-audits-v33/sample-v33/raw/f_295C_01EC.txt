@@ -1,0 +1,98 @@
+f_295C_01EC  root:295C:01EC  linear 297AC  size 252  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 295C: function 4/15; neighbours: f_295C_0015, f_295C_00C9, f_295C_02E8, f_295C_0367
+  frame: {'frame': 'bp', 'locals': 10, 'stack_check': False, 'arg_bytes_min': 8}
+  01EC  push bp
+  01ED  mov bp, sp
+  01EF  sub sp, 0xa
+  01F2  push si
+  01F3  push word ptr [bp + 6]
+  01F6  mov ax, 6
+  01F9  imul word ptr [bp + 8]
+  01FC  mov bx, ax
+  01FE  mov es, word ptr [0x8aa2]          DS:8AA2
+  0202  push word ptr es:[bx]
+  0207  push cs
+  0208  call 0xc9                          -> f_295C_00C9
+  020B  pop bx
+  020C  pop bx
+  020D  mov si, ax
+  020F  or si, si
+  0211  jge 0x216
+  0213  jmp 0x2e3
+  0216  mov ax, word ptr [bp + 0xc]
+  0219  mul word ptr [0x7502]              DS:7502
+  021D  mov cl, 7
+  021F  shr ax, cl
+  0221  mov word ptr [bp + 0xc], ax
+  0224  push word ptr [bp + 8]
+  0227  mov ax, si
+  0229  mov cx, 6
+  022C  imul cx
+  022E  mov bx, ax
+  0230  mov word ptr [bp - 6], bx
+  0233  add bx, 0x4a4f
+  0237  mov es, word ptr [0x8a9e]          DS:8A9E
+  023B  mov word ptr [bp - 0xa], bx
+  023E  mov word ptr [bp - 8], es
+  0241  mov al, byte ptr es:[bx]
+  0244  sub ah, ah
+  0246  push ax
+  0247  mov bx, word ptr [bp - 6]
+  024A  mov al, byte ptr es:[bx + 0x4a52]
+  024F  push ax
+  0250  add bx, 0x4a4e
+  0254  mov word ptr [bp - 4], bx
+  0257  mov word ptr [bp - 2], es
+  025A  mov bl, byte ptr es:[bx]
+  025D  sub bh, bh
+  025F  shl bx, 1
+  0261  shl bx, 1
+  0263  lcall [bx + 0x7524]
+  0267  add sp, 6
+  026A  mov es, word ptr [0x8a9e]          DS:8A9E
+  026E  mov bx, word ptr [bp - 6]
+  0271  mov al, byte ptr es:[bx + 0x4a51]
+  0276  sub ah, ah
+  0278  cmp ax, word ptr [bp + 8]
+  027B  je 0x299
+  027D  les bx, ptr [bp - 0xa]
+  0280  mov al, byte ptr es:[bx]
+  0283  push ax
+  0284  push word ptr [bp + 8]
+  0287  les bx, ptr [bp - 4]
+  028A  mov bl, byte ptr es:[bx]
+  028D  sub bh, bh
+  028F  shl bx, 1
+  0291  shl bx, 1
+  0293  lcall [bx + 0x7544]
+  0297  pop bx
+  0298  pop bx
+  0299  les bx, ptr [bp - 0xa]
+  029C  mov al, byte ptr es:[bx]
+  029F  sub ah, ah
+  02A1  push ax
+  02A2  push word ptr [bp + 0xc]
+  02A5  push word ptr [bp + 0xa]
+  02A8  push word ptr [bp + 8]
+  02AB  les bx, ptr [bp - 4]
+  02AE  mov bl, byte ptr es:[bx]
+  02B1  sub bh, bh
+  02B3  shl bx, 1
+  02B5  shl bx, 1
+  02B7  lcall [bx + 0x7504]
+  02BB  add sp, 8
+  02BE  mov al, byte ptr [bp + 6]
+  02C1  mov es, word ptr [0x8a9e]          DS:8A9E
+  02C5  mov bx, word ptr [bp - 6]
+  02C8  mov byte ptr es:[bx + 0x4a50], al
+  02CD  mov al, byte ptr [bp + 8]
+  02D0  mov byte ptr es:[bx + 0x4a51], al
+  02D5  mov al, byte ptr [bp + 0xa]
+  02D8  mov byte ptr es:[bx + 0x4a52], al
+  02DD  mov byte ptr es:[bx + 0x4a53], 0
+  02E3  pop si
+  02E4  mov sp, bp
+  02E6  pop bp
+  02E7  retf
+  bytes: 558bec83ec0a56ff7606b80600f76e088bd88e06a28a26ffb700000ee8befe5b5b8bf00bf67d03e9cd008b460cf7260275b107d3e889460cff76088bc6b90600f7e98bd8895efa81c34f4a8e069e8a895ef68c46f8268a072ae4508b5efa268a87524a5081c34e4a895efc8c46fe268a1f2affd1e3d1e3ff9f247583c4068e069e8a8b5efa268a87514a2ae43b4608741cc45ef6268a0750ff7608c45efc268a1f2affd1e3d1e3ff9f44755b5bc45ef6268a072ae450ff760cff760aff7608c45efc268a1f2affd1e3d1e3ff9f047583c4088a46068e069e8a8b5efa268887504a8a4608268887514a8a460a268887524a26c687534a005e8be55dcb

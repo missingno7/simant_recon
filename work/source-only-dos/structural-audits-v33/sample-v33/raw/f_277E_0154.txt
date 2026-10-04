@@ -1,0 +1,17 @@
+f_277E_0154  root:277E:0154  linear 27934  size 37  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 277E: function 4/18; neighbours: f_277E_00AF, f_277E_010A, f_277E_0179, f_277E_017D
+  frame: {'frame': 'none'}
+  0154  lcall 0x295c, 0x391                -> f_295C_0391
+  0159  lcall 0, 0x429                     -> f_0000_0429
+  015E  mov es, word ptr [0x8a66]          DS:8A66
+  0162  mov bx, word ptr es:[0x1f0]
+  0167  shl bx, 1
+  0169  shl bx, 1
+  016B  lcall [bx + 0x68da]
+  016F  sub ax, ax
+  0171  push ax
+  0172  lcall 0x28bc, 0x4e0                -> f_28BC_04E0
+  0177  pop bx
+  0178  retf
+  bytes: 9a91035c299a290400008e06668a268b1ef001d1e3d1e3ff9fda682bc0509ae004bc285bcb

@@ -1,0 +1,71 @@
+f_295C_0015  root:295C:0015  linear 295D5  size 180  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 295C: function 2/15; neighbours: f_295C_000A, f_295C_00C9, f_295C_01EC
+  frame: {'frame': 'bp', 'locals': 10, 'stack_check': False}
+  0015  push bp
+  0016  mov bp, sp
+  0018  sub sp, 0xa
+  001B  push di
+  001C  push si
+  001D  mov word ptr [bp - 2], 0
+  0022  jmp 0xa5
+  0025  mov es, word ptr [bp - 4]
+  0028  cmp byte ptr es:[si], 1
+  002C  jne 0x9d
+  002E  mov al, 0x14
+  0030  mul byte ptr es:[si + 1]
+  0034  mov bx, ax
+  0036  mov es, word ptr [0x8aa0]          DS:8AA0
+  003A  mov ax, word ptr es:[bx + 0x6b50]
+  003F  or ax, word ptr es:[bx + 0x6b4e]
+  0044  jne 0x9d
+  0046  mov es, word ptr [bp - 4]
+  0049  mov byte ptr es:[si + 2], 0
+  004E  mov al, 0x14
+  0050  mul byte ptr es:[si + 1]
+  0054  mov bx, ax
+  0056  mov es, word ptr [0x8aa0]          DS:8AA0
+  005A  mov ax, word ptr es:[bx + 0x6b5c]
+  005F  mov dx, word ptr es:[bx + 0x6b5e]
+  0064  mov cx, ax
+  0066  mov bx, dx
+  0068  mov di, cx
+  006A  or bx, cx
+  006C  je 0x82
+  006E  mov es, dx
+  0070  cmp word ptr es:[di + 0xc], 1
+  0075  jne 0x82
+  0077  mov ax, es
+  0079  push ax
+  007A  push di
+  007B  lcall 0, 0x149                     -> f_0000_0149
+  0080  pop bx
+  0081  pop bx
+  0082  mov ds, word ptr [bp - 4]
+  0085  mov al, 0x14
+  0087  mul byte ptr [si + 1]
+  008A  mov bx, ax
+  008C  mov ax, 0x55b3                     [seg 55B3 DGROUP]
+  008F  mov es, ax
+  0091  sub ax, ax
+  0093  mov word ptr es:[bx + 0x6b5e], ax
+  0098  mov word ptr es:[bx + 0x6b5c], ax
+  009D  inc word ptr [bp - 2]
+  00A0  mov ax, 0x55b3                     [seg 55B3 DGROUP]
+  00A3  mov ds, ax
+  00A5  mov ax, 6
+  00A8  imul word ptr [bp - 2]
+  00AB  mov bx, ax
+  00AD  add bx, 0x4a4e
+  00B1  mov es, word ptr [0x8a9e]          DS:8A9E
+  00B5  mov si, bx
+  00B7  mov word ptr [bp - 4], es
+  00BA  cmp byte ptr es:[bx], 0
+  00BE  je 0xc3
+  00C0  jmp 0x25
+  00C3  pop si
+  00C4  pop di
+  00C5  mov sp, bp
+  00C7  pop bp
+  00C8  retf
+  bytes: 558bec83ec0a5756c746fe0000e980008e46fc26803c01756fb01426f664018bd88e06a08a268b87506b260b874e6b75578e46fc26c6440200b01426f664018bd88e06a08a268b875c6b268b975e6b8bc88bda8bf90bd974148ec226837d0c01750b8cc050579a490100005b5b8e5efcb014f664018bd8b8b3558ec02bc02689875e6b2689875c6bff46feb8b3558ed8b80600f76efe8bd881c34e4a8e069e8a8bf38c46fc26803f007403e962ff5e5f8be55dcb

@@ -948,3 +948,40 @@ At this evidence boundary, historical validation passes with 375 repository
 tests (two skips) and 48 codegen rules. The earlier pinned-document failure and
 the successful rerun are preserved separately. Frozen source/evidence hashes
 are retained; no old receipt is repinned to absorb the correction.
+
+## v33 source ownership and reachability review
+
+The [bounded v33 archive](../work/source-only-dos/structural-audits-v33/README.md)
+keeps storage views distinct from proven owners. The filename selector reads an
+uninitialized load/new-save name before clearing it and builds full paths without
+a capacity argument. Its basename editor limit therefore proves no remembered
+path capacity. The existing window-handle admission explicitly excludes `3862`.
+
+The icon helpers have no observed source caller, direct original inbound edge,
+relocated code pointer, overlay vector or current live external fixup. Root's
+independent scan includes conditional branches and loops, with a real 21-edge
+positive control. This does not close indirect control or establish an owning
+declaration. Uncapped menu writes can overlap both words of the four-byte slot;
+the supplied five-title menu does not bound every resource.
+
+The deferred sample-free count survives sequencer returns. Mainline SFX reseeding
+and later ISR replacement provide a conditional accumulation path, while song-bank
+preloading suppresses the naive repeated-note witness. Reaching count 39 remains
+dependent on resources, voices, game sound paths, interrupt timing and drains.
+Neither the guard nor neighboring addresses prove the array's physical extent.
+
+Parent review corrects the worker's missing-gate-writer claim: `ProcMenu` toggles
+sound word 2, and the accepted initializer already sets it to one. More broadly,
+the six-word option view spans several separate initialized byte declarations.
+Its typed owner, scalar aliases and remaining word at `07B4` need structural
+follow-up; their current adjacency is not a completed source ownership proof.
+
+The current 188-object frame review verifies 16 source-binding tuples and 157
+packet sites. All four monochrome bases retain symbolic DGROUP fixups; the buffer
+extent and computed alias bounds remain unresolved. Frozen production and
+preflight identities pass review; no compiler input or admission changes.
+
+Counts remain 188 TUs, 15 imports, 46 functional data bytes, 113 historical bytes,
+193 aliases, 29 strictly confirmed behavioral implementations and seven open
+layout gates. Independent game linking, DOSBox-X execution/comparison and human
+acceptance remain pending.
