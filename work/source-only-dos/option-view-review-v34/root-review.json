@@ -1,0 +1,135 @@
+{
+  "schema": "simant-parent-option-view-v34",
+  "status": "PASS",
+  "root_reviewed": true,
+  "new_source_or_layout_admission": false,
+  "canonical_or_production_changes": false,
+  "clarifies": "v33 root/option-gate-review.json structural follow-up: this is an existing compiler-proven within-object view, not an unresolved original-link-order assumption.",
+  "verified_view": {
+    "type": "six 16-bit int words",
+    "length": 12,
+    "initialized_values": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "sound_gate_word_index": 2,
+    "sound_gate_initial_value": 1
+  },
+  "existing_storage": {
+    "module": "data:3D57",
+    "segment": "U0397_DATA",
+    "segment_length": 3162,
+    "current_public_offsets": {
+      "_fd_3D57_07A8": 1960,
+      "_fd_3D57_07AA": 1962,
+      "_fd_3D57_07AE": 1966,
+      "_fd_3D57_07B0": 1968,
+      "_fd_3D57_07B2": 1970,
+      "_ExpSubStates": 1974
+    }
+  },
+  "boundary": "The two bytes at 07B4 are already within fd_3D57_07B2[4]. Their zero initializer is observed; their DOS semantic role and a seventh DOS option declaration are not established. No padding, reserve field or extra storage is proposed.",
+  "fragment": "Explanatory extern declaration only, not a whole TU, build input or promotion candidate.",
+  "runtime": "No link/runtime/game trace. Count-39 audio schedule remains unresolved.",
+  "input_pins": [
+    {
+      "path": "build/workers/dos_option_state_owner_v34/ownership-receipt.md",
+      "sha256": "a82f3b4ff68ec7e747bca7f51fb6654657c7b3f19ae91eb5ab1f9ce01126c0c9",
+      "size": 4524
+    },
+    {
+      "path": "build/workers/dos_option_state_owner_v34/typed-owner-candidate.c",
+      "sha256": "2697735e951d7543ec73d62cb32eac5c0a736c5849d2c40b3c11d9648fe8c8d6",
+      "size": 538
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "build/source-only-dos/build-report.json",
+      "sha256": "0edcb3285074975704645520158975bd20a32a7cae542127812b54a9e78cffbf",
+      "size": 19342027
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "build/workers/dos_root_option_followup_v34/review.py",
+      "sha256": "d410cbaa1c50121a00288a9b8916a3dc0acb07423ef34eca4785be5397404517",
+      "size": 4949
+    },
+    {
+      "path": "src/data/d3D57.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "size": 22927
+    },
+    {
+      "path": "build/source-only-dos/sources/U039.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "size": 22927
+    },
+    {
+      "path": "build/source-only-dos/objects/U039.OBJ",
+      "sha256": "3ef01f1f7d5fab68fa8a20742d7b2bfcbe16a956527b3e292d3c0ae99b9c062c",
+      "size": 10323
+    },
+    {
+      "path": "src/S11/m35F5.c",
+      "sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "size": 4345
+    },
+    {
+      "path": "build/source-only-dos/sources/U020.c",
+      "sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "size": 4345
+    },
+    {
+      "path": "build/source-only-dos/objects/U020.OBJ",
+      "sha256": "e9c3bd4a5aedf1d1b910eb95170f6a9c8b5bb20d92d2ca2f09c74e23f551028b",
+      "size": 3769
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "build/source-only-dos/sources/U017.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "build/source-only-dos/objects/U017.OBJ",
+      "sha256": "ec09650ac46188adb9b419d5d25594005b0c7062451503584013f50cb3b81119",
+      "size": 29288
+    },
+    {
+      "path": "src/root/m00DF.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881
+    },
+    {
+      "path": "build/source-only-dos/sources/U049.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881
+    },
+    {
+      "path": "build/source-only-dos/objects/U049.OBJ",
+      "sha256": "df1a1a0dbf9dbc371c7cff073c5fb48b14c7a328c75bb1a1e9111cc9a750012e",
+      "size": 3488
+    },
+    {
+      "path": "D:/Prog/simantw_recon/src/recovered/data_08a_controls-4d265af87b.c",
+      "sha256": "4d265af87b4de8363e55d3648b582ca62b4e73c050e717f110a91fb2b3bd01de",
+      "size": 1002
+    }
+  ]
+}

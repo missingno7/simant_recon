@@ -985,3 +985,14 @@ Counts remain 188 TUs, 15 imports, 46 functional data bytes, 113 historical byte
 193 aliases, 29 strictly confirmed behavioral implementations and seven open
 layout gates. Independent game linking, DOSBox-X execution/comparison and human
 acceptance remain pending.
+
+## v34 initialized option-view clarification
+
+The [focused follow-up](../work/source-only-dos/option-view-review-v34/README.md)
+confirms the six-word view and its `[0,1,1,1,1,0]` initializer. All adjacent
+declarations belong to the same accepted 3,162-byte data object; their offsets
+are compiler-proven, so this is no additional cross-object link-order gate.
+The extra word at `07B4` has existing storage and a zero initializer, while its
+DOS meaning remains unknown. Win16's seven-word initializer does not justify a
+seventh DOS option. No source rewrite, storage addition or admission is proposed;
+the preflight counts and runtime frontier remain unchanged.
