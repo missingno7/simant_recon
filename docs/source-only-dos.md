@@ -996,3 +996,35 @@ The extra word at `07B4` has existing storage and a zero initializer, while its
 DOS meaning remains unknown. Win16's seven-word initializer does not justify a
 seventh DOS option. No source rewrite, storage addition or admission is proposed;
 the preflight counts and runtime frontier remain unchanged.
+
+## v35 computed ctype dependency and bounded ownership review
+
+The [v35 review](../work/source-only-dos/structural-audits-v35/README.md) exposes
+a computed C dependency missed by literal-address scans. Styled text uses a
+signed character to index the CRT ctype table; bytes D1..DE can read original
+DGROUP:79F0..79FD. A conditional DOS VM control confirms state relevance:
+starting with the original uppercase catalogue, the uncapped hotspot writer
+overwrites its first name at index 128. A later high-bit style span produces
+130 versus 129 registrations when only the prefix flag changes. The reviewed
+C agrees with the original in both states. The fixture uses a valid
+zero-advance font and does not establish shipped-font/resource reachability.
+
+This is an explicit `ctype-out-of-range-index-layout` integration gate.
+Algorithm completeness and the 29 strict registrations remain unchanged;
+the independent executable still needs its memory environment accounted for.
+The real pinned `__fheap` runtime owner does not discharge the 14 functional
+bytes while that computed read remains unresolved. Likewise, correlated
+18-track array geometry is insufficient to admit the two unsized far arrays.
+
+The supplied sound streams now have source-parser domain evidence with exact
+target widths and callback exit conditions. Their maxima are 14 dispatched
+events and five note-event actions per immediate callback, without a free-list
+capacity or timing claim. Selector-7 dig/spider rows are DAC samples 18/47;
+this corrects the earlier v33 dig exclusion in a separate receipt.
+
+Fresh preflight verifies all 188 TUs with zero original build bytes and no
+denied oracle reads. Counts remain 15 imports, 193 aliases, 46 functional data
+bytes and 113 historical bytes; **eight** layout gates are now explicit.
+Independent linking is refused. Full validation passes with 376 tests (two
+skips), 48 codegen rules and all historical runtime claims. Standalone game
+execution/comparison and human acceptance remain pending.

@@ -1050,6 +1050,28 @@ class SourceOnlyDosTests(unittest.TestCase):
             self.assertIn('independent link refused: incomplete source/data preflight', report['errors'])
             self.assertFalse((Path(directory) / 'link').exists())
 
+    def test_ctype_out_of_range_dependency_blocks_link_with_other_gates_clear(self):
+        report = {'translation_units': []}
+        dos.audit_layout(report)
+        gate = next(r for r in report['layout_dependencies']
+                    if r['id'] == 'ctype-out-of-range-index-layout')
+        self.assertEqual(gate['status'], 'UNRESOLVED')
+        # Signed-byte promotion accesses the unresolved historical prefix even
+        # though the instruction's displacement names the valid _ctype table.
+        self.assertEqual(0x7A1F + (0xD1 - 256), 0x79F0)
+        self.assertEqual(0x7A1F + (0xDE - 256), 0x79FD)
+        self.assertGreater(0x7A1F + 0x850, 0x7A1E + 256)
+        report.update(errors=[], unresolved_functions=[], unresolved_data=[],
+                      unresolved_symbols=[], duplicate_publics={},
+                      layout_dependencies=[gate])
+        with tempfile.TemporaryDirectory(dir=ROOT / 'build') as directory:
+            with patch.object(dos.compiler, 'toolchain',
+                              side_effect=AssertionError('linker must not launch')):
+                dos.link_units(Path(directory), report, 'rtlink610')
+            self.assertIn('independent link refused: incomplete source/data preflight',
+                          report['errors'])
+            self.assertFalse((Path(directory) / 'link').exists())
+
     def test_binding_proof_rejects_wrong_frames_and_unrelated_instruction_changes(self):
         packet = json.loads((ROOT / 'work/source-only-dos/source-bindings-v1.json').read_text())
         binding = next(r for r in packet['bindings'] if r['module'] == 'S01:3126')

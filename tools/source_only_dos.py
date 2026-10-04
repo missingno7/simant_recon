@@ -607,6 +607,25 @@ def audit_layout(report):
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
                   'The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates.'}, {
+        'id': 'ctype-out-of-range-index-layout', 'status': 'UNRESOLVED',
+        'sources': ['src/S23/m39C7.c', 'src/S10/m35F5.c', 'src/root/m1C62.c'],
+        'consumer': '(_ctype + 1)[signed character or keyboard code]',
+        'original_ctype_offset': 0x7A1E,
+        'signed_char_prefix_range': [0x799F, 0x7A1D],
+        'overlapping_data_debt': 'dgroup_79f0',
+        'reason': 'Styled text and menu item classification sign-extend character bytes '
+                  'before indexing the near CRT table. Bytes D1..DE can read original '
+                  'DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. '
+                  'The stock runtime table owns its 257 bytes, not the preceding memory. '
+                  'The styled-text predicate can change the copied buffer and its '
+                  'text-resource match. Other dialog/menu sites also read outside '
+                  'the table; result relevance is assessed separately. '
+                  'No source guard or accepted input-domain proof excludes these prefix '
+                  'reads, and independent linkage does not preserve the original prefix. '
+                  'Keep the heap-shaped data debt; do not substitute unsigned indexing '
+                  'or add an invented table prefix/suffix.',
+        'scope_limit': 'Conditional input path, not a shipped-resource execution witness. '
+                       'The reconstructed algorithms and strict static registrations remain unchanged.'}, {
         'id': 'monochrome-table-symbolic-base',
         'status': 'SOURCE_BOUND' if any(r['module'] == 'S01:328E' and
             (r.get('source_binding') or {}).get('mono_base_operands') for r in report['translation_units']) else 'UNRESOLVED',

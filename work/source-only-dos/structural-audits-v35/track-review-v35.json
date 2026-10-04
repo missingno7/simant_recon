@@ -1,0 +1,148 @@
+{
+  "schema": "simant-dos-far-bss-track-owner-review-v35",
+  "decision": "exclude_storage_and_capacity_admission",
+  "targets": [
+    {
+      "name": "fd_50F6_4B30",
+      "frame": "0x50F6",
+      "offset": "0x4B30",
+      "observed_element_view": "unsigned char far[]",
+      "proposed_extent": 18,
+      "extent_status": "unproven"
+    },
+    {
+      "name": "fd_50F6_4B42",
+      "frame": "0x50F6",
+      "offset": "0x4B42",
+      "observed_element_view": "long far[]",
+      "proposed_extent": 18,
+      "extent_status": "unproven"
+    }
+  ],
+  "conclusion": "The accepted root g_8DD8[18] offset table, matching local BSS geometry, paired shared-index uses, and 18/72-byte FAR_BSS address gaps make 18 a strong structural hypothesis. They do not prove exact imported-array extents or a runtime track maximum. The current source TU remains partial and its candidate OMF defines no communals for these names.",
+  "original_sites": [
+    {
+      "id": "root:284A:0199",
+      "length_bytes": 60,
+      "observations": [
+        "019F initializes index to zero",
+        "01B9-01BD scales index by two and stores through base 0x8DD8",
+        "01CB compares the index against caller-provided count"
+      ]
+    },
+    {
+      "id": "root:284A:0256",
+      "length_bytes": 142,
+      "observations": [
+        "0269 reads track count from header offset 10",
+        "029D-02A2 computes the per-track word slot from 0x8DD8 + 2*i",
+        "02B7-02BC addresses time entries at 0x4B42 with four-byte stride",
+        "02D3 addresses status entries at 0x4B30 with one-byte stride",
+        "02D9 bounds the loop by shared count 0x7566"
+      ]
+    },
+    {
+      "id": "root:284A:038F",
+      "length_bytes": 314,
+      "observations": [
+        "reads current status through 0x8E02",
+        "scans time/status arrays to shared count 0x7566",
+        "retargets selected-track pointers for offset and status arrays",
+        "no maximum guard is observed"
+      ]
+    }
+  ],
+  "canonical_source": {
+    "path": "src/root/m284A.c",
+    "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "line_pins": [
+      "36-37: static int g_8DD8[18], followed by g_8DFC",
+      "146-147: both FAR_BSS imports are unsized",
+      "155-161: shared count loop writes the offset table, time array, and status array",
+      "172,202-217,275,303-312: pointer setup, scan, and status accesses"
+    ]
+  },
+  "far_bss_address_pin": {
+    "path": "layout/symbols.json",
+    "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "entries": [
+      { "name": "fd_50F6_4B30", "frame_decimal": 20726, "offset_decimal": 19248 },
+      { "name": "fd_50F6_4B42", "frame_decimal": 20726, "offset_decimal": 19266 },
+      { "next_registered_offset": "0x4B8A", "gap_from_4B30_bytes": 90, "gap_from_4B42_bytes": 72 }
+    ],
+    "interpretation": "The 4B30-to-4B42 gap is 18 bytes and the 4B42-to-4B8A gap is 72 bytes; these are address distances, not independent extent proof."
+  },
+  "canonical_manifest": {
+    "path": "layout/manifest.json",
+    "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "module": "root:284A",
+    "placement": { "segment": "_BSS", "segment_id_hex": "0x55B3", "offset_hex": "0x8DD8", "size_bytes": 46 },
+    "scaffold": ["f_284A_0138"],
+    "extent": null,
+    "source_sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5"
+  },
+  "candidate_omf": {
+    "path": "build/source-only-dos-v35/objects/U117.OBJ",
+    "sha256": "552054d34def7f644872f5af19fca5c4cacbb05f00144e3b8c345a5b4ccd601",
+    "candidate_source": {
+      "path": "build/source-only-dos-v35/sources/U117.c",
+      "sha256": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100"
+    },
+    "observed": {
+      "bss_segdef_length": 46,
+      "communals": [],
+      "target_symbols": "externals only"
+    },
+    "scope_limit": "Current source-only candidate, not original defining object or COMDEF evidence; module remains partial."
+  },
+  "existing_exclusion": {
+    "path": "work/source-only-dos/storage-admission-v27/sound/root-acceptance.json",
+    "sha256": "5e814fc341cab7f24061df1a8f8aa0132b8f88518eb17c81d85dbfaf10227f6f",
+    "pin": "source_extent_basis, line 87",
+    "finding": "4B30 and 4B42 remain excluded/open as unsized imports. Neighboring 4B8A, 4B8E[14], and 4BAA[14] are admitted from independent producer/count/type contracts and complete OMF/runtime controls; nearby symbols 4B28, 4B2C, and 4B2E do not confer extent."
+  },
+  "current_intake": {
+    "path": "work/source-only-dos/current-intake.json",
+    "sha256": "4106d47aefa7e2da91172440424cc1e65152b4f7aef5b6c0fad6bb5d76e82c37",
+    "finding": "Both names remain unresolved, with accepted_storage_candidates empty and unsized declarations unsigned char far[] / long far[]."
+  },
+  "history_positive_control": {
+    "packet": {
+      "path": "work/source-only-dos/history-storage-bindings-v1.json",
+      "sha256": "9de05b5bf7b34c168581189d4f4749a53b37576600205be32f0500e14b17c80a",
+      "scope": "Ten bounded arrays in generated S24 only; explicitly disclaims neighbor-gap sizing."
+    },
+    "runtime_contract": {
+      "path": "work/source-only-dos/history-storage-contract-v1.json",
+      "sha256": "7fc4c0f32f70521f8d730121fd75e9bccab0c4e87a7611e25c48f5dd7b8470bf"
+    },
+    "anchor": "S24 int far[64], ClearHistory i<64, HistUpdate ring index masked to 63, and S09 {2,64,&array} serialization; 128-byte extent is independently anchored.",
+    "source_pins": [
+      { "path": "src/S24/m39C7.c", "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240", "role": "typed 64-word owner and ring operations" },
+      { "path": "src/S09/m35F5.c", "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a", "role": "serialized byte-view records" },
+      { "path": "src/data/d3D57.c", "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5", "role": "initialized typed pointer graph" },
+      { "path": "src/S14/m384C.c", "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020", "role": "additional score reads" }
+    ],
+    "contrast": "Track arrays lack an explicit owner, bounded source accesses, accepted complete-TU evidence, and original defining COMDEF pin."
+  },
+  "historical_source_context": {
+    "seed_path": "work/takeover/hardtail/seeds/root_284A_5d328bf943dd.c",
+    "seed_sha256": "5D328BF943DD3B1DD8DD797BA7D63885777FACF9EA5C194B6B222244BD937A35",
+    "finding": "The seed already contains static int g_8DD8[18], but is not independent extent evidence.",
+    "promotion_journal_path": "evidence/promotions.jsonl",
+    "promotion_journal_sha256": "d14326c8ee4f24b92002c92ebc1e27c13929f9c0b41964311fd6530966b13dda",
+    "finding_2": "Earliest root:284A accepted function record is 2026-09-30 03:35:25 and does not use --extent; later /Zi promotion also remains without complete-TU extent proof."
+  },
+  "resource_observation": {
+    "shipped_track_count_range": "2-10",
+    "scope": "Observed shipped resources per bounded task input only; not a maximum-runtime assertion and not evidence for an extent of 18."
+  },
+  "rejected_inferences": [
+    "Do not infer FAR_BSS extents from next-symbol gaps alone.",
+    "Do not transfer g_8DD8[18] ownership to adjacent FAR_BSS symbols.",
+    "Do not infer a maxtrack18 guard or runtime cap from a shared unguarded count.",
+    "Do not use the candidate U117 OMF as an original defining COMDEF record."
+  ],
+  "next_evidence_gate": "If reopened, require an original defining COMDEF/OMF extent or an accepted complete source TU with explicit ownership plus build/layout controls.",
+  "changes_made": "Only this review-v35.md and review-v35.json in build/workers/dos_track_parallel_owner_v35. No source, canonical, provider, manifest, promotion journal, or Git edits."
+}

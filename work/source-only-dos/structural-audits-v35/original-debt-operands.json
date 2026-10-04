@@ -1,0 +1,615 @@
+{
+  "schema": "simant-original-debt-operand-observation-v35",
+  "root_reviewed": true,
+  "admitted": false,
+  "original_analysis_only": true,
+  "original_build_bytes_used": 0,
+  "decoder_version": "5.0.3",
+  "ranges": {
+    "dgroup_56fe": [
+      22270,
+      4
+    ],
+    "dgroup_5a28": [
+      23080,
+      2
+    ],
+    "dgroup_5a96_residual_0": [
+      23190,
+      1
+    ],
+    "dgroup_5a96_residual_2": [
+      23192,
+      4
+    ],
+    "dgroup_60b0": [
+      24752,
+      18
+    ],
+    "dgroup_79f0": [
+      31216,
+      14
+    ],
+    "common_tail_overlap_3": [
+      35741,
+      3
+    ],
+    "positive_ctype": [
+      31262,
+      257
+    ],
+    "positive_queue_pointer": [
+      24574,
+      2
+    ]
+  },
+  "function_extents": 1730,
+  "runtime_member_extents": 90,
+  "instructions": 128555,
+  "incomplete_decodes": [],
+  "hits": {
+    "dgroup_56fe": [
+      {
+        "unit": "root",
+        "owner": "f_195A_0166",
+        "kind": "function",
+        "site": 104206,
+        "operand": 1,
+        "instruction": "mov ax, 0x5700",
+        "operand_form": "immediate",
+        "value": 22272
+      }
+    ],
+    "dgroup_5a28": [],
+    "dgroup_5a96_residual_0": [],
+    "dgroup_5a96_residual_2": [],
+    "dgroup_60b0": [],
+    "dgroup_79f0": [],
+    "common_tail_overlap_3": [
+      {
+        "unit": "root",
+        "owner": "f_29F4_001C",
+        "kind": "function",
+        "site": 171999,
+        "operand": 1,
+        "instruction": "mov di, 0x8b9e",
+        "operand_form": "immediate",
+        "value": 35742
+      },
+      {
+        "unit": "root",
+        "owner": "dos\\crt0.asm",
+        "kind": "runtime_member",
+        "site": 171999,
+        "operand": 1,
+        "instruction": "mov di, 0x8b9e",
+        "operand_form": "immediate",
+        "value": 35742
+      }
+    ],
+    "positive_ctype": [
+      {
+        "unit": "root",
+        "owner": "OpenModeWindow",
+        "kind": "function",
+        "site": 31411,
+        "operand": 0,
+        "instruction": "call 0x7a57",
+        "operand_form": "immediate",
+        "value": 31319
+      },
+      {
+        "unit": "root",
+        "owner": "ProcCasteEvent",
+        "kind": "function",
+        "site": 31464,
+        "operand": 0,
+        "instruction": "jbe 0x7aed",
+        "operand_form": "immediate",
+        "value": 31469
+      },
+      {
+        "unit": "root",
+        "owner": "ProcCasteEvent",
+        "kind": "function",
+        "site": 31947,
+        "operand": 0,
+        "instruction": "jmp 0x7b1c",
+        "operand_form": "immediate",
+        "value": 31516
+      },
+      {
+        "unit": "root",
+        "owner": "ProcCasteEvent",
+        "kind": "function",
+        "site": 31963,
+        "operand": 0,
+        "instruction": "jmp 0x7b1c",
+        "operand_form": "immediate",
+        "value": 31516
+      },
+      {
+        "unit": "root",
+        "owner": "initControls",
+        "kind": "function",
+        "site": 35123,
+        "operand": 0,
+        "instruction": "call 0x7a57",
+        "operand_form": "immediate",
+        "value": 31319
+      },
+      {
+        "unit": "root",
+        "owner": "f_1C62_00D5",
+        "kind": "function",
+        "site": 116888,
+        "operand": 0,
+        "instruction": "test byte ptr [si + 0x7a1f], 2",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "si",
+        "index": null
+      },
+      {
+        "unit": "root",
+        "owner": "f_1C62_0415",
+        "kind": "function",
+        "site": 117777,
+        "operand": 0,
+        "instruction": "test byte ptr [di + 0x7a1f], 2",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "di",
+        "index": null
+      },
+      {
+        "unit": "root",
+        "owner": "f_29F4_2350",
+        "kind": "function",
+        "site": 181025,
+        "operand": 0,
+        "instruction": "test byte ptr [bx + 0x7a1f], 4",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "bx",
+        "index": null
+      },
+      {
+        "unit": "root",
+        "owner": "f_29F4_2924",
+        "kind": "function",
+        "site": 182431,
+        "operand": 1,
+        "instruction": "and al, byte ptr [bx + 0x7a1f]",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "bx",
+        "index": null
+      },
+      {
+        "unit": "S09",
+        "owner": "FileSelect",
+        "kind": "function",
+        "site": 223597,
+        "operand": 0,
+        "instruction": "test byte ptr [si + 0x7a1f], 7",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "si",
+        "index": null
+      },
+      {
+        "unit": "S10",
+        "owner": "o10_35F5_0384",
+        "kind": "function",
+        "site": 223006,
+        "operand": 0,
+        "instruction": "test byte ptr [bx + 0x7a1f], 2",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "bx",
+        "index": null
+      },
+      {
+        "unit": "S10",
+        "owner": "o10_35F5_0384",
+        "kind": "function",
+        "site": 223118,
+        "operand": 0,
+        "instruction": "test byte ptr [si + 0x7a1f], 3",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "si",
+        "index": null
+      },
+      {
+        "unit": "S10",
+        "owner": "o10_35F5_0384",
+        "kind": "function",
+        "site": 223241,
+        "operand": 0,
+        "instruction": "test byte ptr [bx + 0x7a1f], 2",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "bx",
+        "index": null
+      },
+      {
+        "unit": "S23",
+        "owner": "win_PrintStyleTextInRect",
+        "kind": "function",
+        "site": 237330,
+        "operand": 0,
+        "instruction": "test byte ptr [bx + 0x7a1f], 2",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "bx",
+        "index": null
+      },
+      {
+        "unit": "root",
+        "owner": "tzset.c",
+        "kind": "runtime_member",
+        "site": 181025,
+        "operand": 0,
+        "instruction": "test byte ptr [bx + 0x7a1f], 4",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "bx",
+        "index": null
+      },
+      {
+        "unit": "root",
+        "owner": "_ctype.asm",
+        "kind": "runtime_member",
+        "site": 182431,
+        "operand": 1,
+        "instruction": "and al, byte ptr [bx + 0x7a1f]",
+        "operand_form": "memory_displacement",
+        "value": 31263,
+        "segment": null,
+        "base": "bx",
+        "index": null
+      }
+    ],
+    "positive_queue_pointer": [
+      {
+        "unit": "root",
+        "owner": "f_1B73_032E",
+        "kind": "function",
+        "site": 113283,
+        "operand": 1,
+        "instruction": "mov si, word ptr [0x5ffe]",
+        "operand_form": "memory_displacement",
+        "value": 24574,
+        "segment": null,
+        "base": null,
+        "index": null
+      },
+      {
+        "unit": "root",
+        "owner": "f_1B73_036E",
+        "kind": "function",
+        "site": 113351,
+        "operand": 1,
+        "instruction": "mov si, word ptr [0x5ffe]",
+        "operand_form": "memory_displacement",
+        "value": 24574,
+        "segment": null,
+        "base": null,
+        "index": null
+      }
+    ]
+  },
+  "explicit_switch_table_checks": [
+    {
+      "owner": "MysteryButton",
+      "frame": 347,
+      "linear": 8926,
+      "entries": 15,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0xd2e]"
+    },
+    {
+      "owner": "LoadTiles",
+      "frame": 592,
+      "linear": 10503,
+      "entries": 9,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x407]"
+    },
+    {
+      "owner": "ProcEditEvent",
+      "frame": 592,
+      "linear": 12608,
+      "entries": 18,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0xc40]"
+    },
+    {
+      "owner": "DrawPalps",
+      "frame": 592,
+      "linear": 18136,
+      "entries": 8,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x21d8]"
+    },
+    {
+      "owner": "DrawLegs",
+      "frame": 592,
+      "linear": 19586,
+      "entries": 8,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x2782]"
+    },
+    {
+      "owner": "ProcCasteEvent",
+      "frame": 1944,
+      "linear": 31477,
+      "entries": 15,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x175]"
+    },
+    {
+      "owner": "ProcModeEvent",
+      "frame": 1944,
+      "linear": 32059,
+      "entries": 15,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x3bb]"
+    },
+    {
+      "owner": "DoAntSimA",
+      "frame": 2196,
+      "linear": 36272,
+      "entries": 20,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x470]"
+    },
+    {
+      "owner": "MoveSpider",
+      "frame": 3291,
+      "linear": 53884,
+      "entries": 6,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x4cc]"
+    },
+    {
+      "owner": "GiveLesson",
+      "frame": 3630,
+      "linear": 58629,
+      "entries": 56,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x225]"
+    },
+    {
+      "owner": "LessonDone",
+      "frame": 3630,
+      "linear": 59740,
+      "entries": 56,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x67c]"
+    },
+    {
+      "owner": "DoNestAntR",
+      "frame": 3903,
+      "linear": 62744,
+      "entries": 18,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x128]"
+    },
+    {
+      "owner": "ForceModeA",
+      "frame": 4995,
+      "linear": 81315,
+      "entries": 9,
+      "bound_authority": "parent CMP AX,8/JBE review",
+      "dispatch": "jmp word ptr cs:[bx + 0x573]"
+    },
+    {
+      "owner": "f_205F_0004",
+      "frame": 8287,
+      "linear": 132907,
+      "entries": 9,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x13b]"
+    },
+    {
+      "owner": "f_218D_000C",
+      "frame": 8589,
+      "linear": 137498,
+      "entries": 15,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x4a]"
+    },
+    {
+      "owner": "f_218D_02D5",
+      "frame": 8589,
+      "linear": 138291,
+      "entries": 7,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x363]"
+    },
+    {
+      "owner": "win_DrawObjectI",
+      "frame": 8698,
+      "linear": 140292,
+      "entries": 23,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x464]"
+    },
+    {
+      "owner": "win_AutoSize",
+      "frame": 9477,
+      "linear": 152035,
+      "entries": 14,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x193]"
+    },
+    {
+      "owner": "f_2505_03B9",
+      "frame": 9477,
+      "linear": 152623,
+      "entries": 6,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x3df]"
+    },
+    {
+      "owner": "Mini_MakeTable",
+      "frame": 13813,
+      "linear": 222098,
+      "entries": 9,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x442]"
+    },
+    {
+      "owner": "SimKidInside",
+      "frame": 13813,
+      "linear": 223977,
+      "entries": 22,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0xb99]"
+    },
+    {
+      "owner": "CheatKeys",
+      "frame": 13813,
+      "linear": 221269,
+      "entries": 23,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x105]"
+    },
+    {
+      "owner": "ProcMenu",
+      "frame": 13813,
+      "linear": 221446,
+      "entries": 70,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x1b6]"
+    },
+    {
+      "owner": "InitMapFunctions",
+      "frame": 14412,
+      "linear": 230698,
+      "entries": 9,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x6a]"
+    },
+    {
+      "owner": "ProcMapEvent",
+      "frame": 14412,
+      "linear": 230984,
+      "entries": 23,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x188]"
+    },
+    {
+      "owner": "o12_384C_0B76",
+      "frame": 14412,
+      "linear": 233727,
+      "entries": 9,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0xc3f]"
+    },
+    {
+      "owner": "ProcYardEvent",
+      "frame": 14412,
+      "linear": 230629,
+      "entries": 16,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x25]"
+    },
+    {
+      "owner": "MakeHousePatch",
+      "frame": 14412,
+      "linear": 230709,
+      "entries": 38,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x75]"
+    },
+    {
+      "owner": "YellowDeath",
+      "frame": 14791,
+      "linear": 240319,
+      "entries": 11,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0xe4f]"
+    },
+    {
+      "owner": "YellowCommand",
+      "frame": 14791,
+      "linear": 244083,
+      "entries": 13,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x1d03]"
+    },
+    {
+      "owner": "DoTool",
+      "frame": 15293,
+      "linear": 245160,
+      "entries": 7,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x1d8]"
+    },
+    {
+      "owner": "o25_39C7_006D",
+      "frame": 14791,
+      "linear": 236944,
+      "entries": 18,
+      "bound_authority": "pinned function registry",
+      "dispatch": "jmp word ptr cs:[bx + 0x120]"
+    }
+  ],
+  "input_pins": [
+    {
+      "path": "build/workers/dos_root_structural_v35/original_debt_operands.py",
+      "sha256": "4761f324dfbcbafc02d553426a0d27620375ff4635464b722648bcf15416c46a",
+      "size": 6857
+    },
+    {
+      "path": "tools/exe.py",
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+      "size": 7645
+    },
+    {
+      "path": "tools/functions.py",
+      "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+      "size": 13467
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+      "size": 356104
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "assets/SIMANT.EXE",
+      "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "size": 506509
+    }
+  ],
+  "scope": "Literal immediate and memory-displacement operands in registered function and accepted runtime code extents. Values are candidates, not address or reachability proofs. Does not cover unregistered code, embedded data, computed aliases, segment provenance, or indirect references. This is linear decoding between registered switch tables, not complete CFG-boundary proof. No debt is discharged by absence of a literal."
+}
