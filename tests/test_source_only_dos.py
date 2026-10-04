@@ -18,6 +18,60 @@ import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_v22_histogram_requires_source_extent_and_complete_runtime_evidence(self):
+        worker = ROOT/'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:ant-class-histogram')
+            provider = row['storage_provider']
+            source = (ROOT/row['source']['path']).read_text(encoding='ascii')
+            def compile(text):
+                result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            bindings.review_provider_source(source, provider, symbols)
+            proof = bindings.verify_provider(compile(source), provider)
+            self.assertEqual(proof['communals'], [{'name': '_fd_50F6_0EB6', 'kind': 'far',
+                'count': 32, 'element_size': 2, 'length': 64}])
+            for wrong in (source.replace('[32]', '[31]'), source.replace('int far', 'unsigned char far').replace('[32]', '[64]'),
+                          source.replace('[32];', '[32] = {1};')):
+                with self.assertRaises(ValueError): bindings.verify_provider(compile(wrong), provider)
+            unsigned = source.replace('int far', 'unsigned int far')
+            self.assertEqual(bindings.verify_provider(compile(unsigned), provider)['status'], 'PASS')
+            with self.assertRaises(ValueError): bindings.review_provider_source(unsigned, provider, symbols)
+            for delta in (0, 2):
+                wrong = json.loads(json.dumps(symbols))
+                wrong['data']['histogram_extra_view'] = dict(wrong['data']['fd_50F6_0EB6'], off=0x0EB6+delta)
+                with self.assertRaises(ValueError): bindings.review_provider_source(source, provider, wrong)
+            report['runtime_components'] = []
+            tool = compiler.toolchain()['linkers']
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_v22_storage_contracts(report, profile, tool[profile])
+            for change in ('root', 'missing', 'duplicate', 'result', 'raw', 'hash', 'timeout', 'warning',
+                           'shape', 'initializer', 'public', 'section', 'delta', 'empty_relations', 'tool'):
+                wrong = json.loads(json.dumps(report)); contract = wrong['ant_class_histogram_contract']
+                case = next(r for r in contract['cases'] if r['linker'] == 'rtlink400')
+                if change == 'root': contract['root_reviewed'] = False
+                elif change == 'missing': contract['cases'].remove(case)
+                elif change == 'duplicate': contract['cases'].append(case)
+                elif change == 'result': case['actual'] = 'FAIL'
+                elif change == 'raw': case['actual_marker_bytes_hex'] = '504153530a'
+                elif change == 'hash': case['run_log_pin']['sha256'] = '0'*64
+                elif change == 'timeout': case['timed_out'] = True
+                elif change == 'warning': case['linker_diagnostics'] = ['warning']
+                elif change == 'shape': contract['compiler_controls']['fixtures']['BYTE']['actual_communals'][0]['element_size'] = 2
+                elif change == 'initializer': contract['compiler_controls']['fixtures']['INITIALIZED']['initialized_segments_hex'] = {}
+                elif change == 'public': case['public_address_matrix']['Name'].pop('_fd_50f6_0eb6')
+                elif change == 'section': case['map_public_sections']['Value']['heading_present'] = False
+                elif change == 'delta': case['alias_map_relations'][0]['expected_offset_delta'] = 2
+                elif change == 'empty_relations': case['alias_map_relations'] = []
+                elif change == 'tool': contract['inputs'] = []
+                with self.subTest(change=change):
+                    with self.assertRaises(ValueError):
+                        bindings.require_v22_storage_contracts(wrong, 'rtlink400', tool['rtlink400'])
+
     def test_v21_scalar_cohorts_require_typed_owners_and_complete_raw_map_controls(self):
         worker=ROOT/'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True,exist_ok=True)
@@ -1342,6 +1396,7 @@ class SourceOnlyDosTests(unittest.TestCase):
                     bindings.review_provider_source(wrong_type, provider, symbols)
                 with self.assertRaises(ValueError):
                     bindings.verify_provider(compile(contrast), provider)
+            clip_row['provider_verification'] = bindings.verify_provider(clip_obj, clip_row['storage_provider'])
             alias = next(a for a in report['reviewed_communal_aliases'] if a['alias'] == '_g_5AAE')
             self.assertEqual(bindings.bind_communal_alias(alias, clip_obj, clip_row, symbols)['offset'], 2)
             for field, value in (('offset', 0), ('view_size', 4), ('owner_size', 8), ('alias', '_g_5A9C')):
@@ -1351,6 +1406,41 @@ class SourceOnlyDosTests(unittest.TestCase):
             tc = compiler.toolchain()
             for profile in ('rtlink400', 'rtlink610'):
                 bindings.require_additional_storage_contracts(report, profile, tc['linkers'][profile])
+            # The independently compiled pointer closes its four bytes only.
+            report['unresolved_data'] = [{'id': 'dgroup_5a96', 'size': 25,
+                'residual_ranges': [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 24}]}]
+            report['historical_data_debt'] = [{'id': 'dgroup_5a96', 'size': 26}]
+            report['resolved_source_state'] = [{'id': 'dgroup_5a96', 'offset': 1,
+                'size': 1, 'module': 'source-owned:display-mode-selector'}]
+            report['layout_dependencies'] = [{'id': 'graphics-computed-copy-layout', 'status': 'UNRESOLVED'}]
+            for change in ('uncompiled', 'width', 'root', 'control', 'geometry', 'residual', 'decision'):
+                wrong = json.loads(json.dumps(report))
+                owner = next(r for r in wrong['translation_units'] if r['module'] == modules[1])
+                if change == 'uncompiled': owner.pop('provider_verification')
+                elif change == 'width': owner['provider_verification']['communals'][0]['length'] = 8
+                elif change == 'root': wrong['clip_pointer_contract']['root_reviewed'] = False
+                elif change == 'control': wrong['clip_pointer_contract']['required_cases']['wrong_alias_plus0'] = 'PASS'
+                elif change == 'geometry': wrong['clip_pointer_contract']['cases'][0]['map_alias_geometry'] = False
+                elif change == 'residual': wrong['unresolved_data'][0]['residual_ranges'][1]['size'] = 20
+                else: wrong['clip_pointer_data_disposition']['accepted'][0]['size'] = 8
+                if change in ('uncompiled', 'width'):
+                    dos.accept_clip_pointer_data(wrong)
+                    self.assertEqual(wrong['unresolved_data'][0]['size'], 25)
+                    self.assertEqual(len(wrong['resolved_source_state']), 1)
+                else:
+                    with self.assertRaises(ValueError): dos.accept_clip_pointer_data(wrong)
+            dos.accept_clip_pointer_data(report)
+            self.assertEqual(report['unresolved_data'], [{'id': 'dgroup_5a96', 'size': 21,
+                'residual_ranges': [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}]}])
+            self.assertEqual(report['historical_data_debt'][0]['size'], 26)
+            self.assertEqual(report['resolved_source_state'][1]['offset'], 22)
+            self.assertEqual(report['resolved_source_state'][1]['size'], 4)
+            self.assertEqual(report['layout_dependencies'][0]['status'], 'UNRESOLVED')
+            dos.accept_clip_pointer_data(report)
+            self.assertEqual(len(report['resolved_source_state']), 2)
+            wrong = json.loads(json.dumps(report))
+            wrong['resolved_source_state'][1]['offset'] = 2
+            with self.assertRaises(ValueError): dos.accept_clip_pointer_data(wrong)
             for key in ('mono_pattern_prefix_contract', 'clip_pointer_contract', 'yard_scalar_contract'):
                 wrong = json.loads(json.dumps(report))
                 wrong[key]['cases'].pop(0)

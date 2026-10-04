@@ -1,0 +1,103 @@
+{
+  "schema": "dos-event-postload-alias-review-v23",
+  "disposition": "definition-aliases-resolved; no selector normalization established",
+  "source_graph": {
+    "path": "build/workers/dos_unlock_event_closure_v20/source-graph-v20.json",
+    "sha256": "703e01692b4fb84fc1e9b6cb68d4fb0168630cacacbc54c0274c523015b37eba",
+    "unique_source_paths": 156,
+    "sets": {
+      "canonical_127": 127,
+      "effective_strict_29": 29
+    }
+  },
+  "review_inputs": {
+    "symbols_sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "relevant_source_pins_verified": [
+      "src/S09/m35F5.c",
+      "src/S11/m35F5.c",
+      "src/root/m15D9.c"
+    ]
+  },
+  "calls": [
+    {
+      "loadgame_import": "f_15D9_009C",
+      "loadgame_expression": "f_15D9_009C(0L, -2L, 1)",
+      "caller_source": "src/S09/m35F5.c:30,125",
+      "registry": {
+        "unit": "root",
+        "segment": "15D9",
+        "offset": "009C",
+        "alias_of": "EditMessage"
+      },
+      "accepted_definition": {
+        "name": "EditMessage",
+        "source": "src/root/m15D9.c:46",
+        "module": "root:15D9",
+        "offset": "009C",
+        "size": 344,
+        "provenance": "EXACT_NATURAL",
+        "extent_bearing_module": true,
+        "scaffold_count": 0
+      },
+      "effect_for_call": "mode 1 bypasses the mode-0 guard; negative duration writes sentinel message deadlines, null message pointers and refresh flags. It does not read or write SMode, Scycle, or fd_50F6_1004."
+    },
+    {
+      "loadgame_import": "o11_35F5_0000",
+      "loadgame_expression": "o11_35F5_0000()",
+      "caller_source": "src/S09/m35F5.c:31,130",
+      "registry": {
+        "unit": "S11",
+        "segment": "35F5",
+        "offset": "0000",
+        "alias_of": "SetMenuEntries"
+      },
+      "accepted_definition": {
+        "name": "SetMenuEntries",
+        "source": "src/S11/m35F5.c:9",
+        "module": "S11:35F5",
+        "offset": "0000",
+        "size": 136,
+        "provenance": "EXACT_NATURAL",
+        "extent_bearing_module": true,
+        "scaffold_count": 0
+      },
+      "effect_for_call": "updates menu item state and pause-item text from tool, option, and pause fields. Its source-visible calls write menu storage; it does not read or write the spider selectors."
+    },
+    {
+      "loadgame_import": "o11_35F5_0088",
+      "loadgame_expression": "o11_35F5_0088(1)",
+      "caller_source": "src/S09/m35F5.c:32,131",
+      "registry": {
+        "unit": "S11",
+        "segment": "35F5",
+        "offset": "0088",
+        "alias_of": "PauseGame"
+      },
+      "accepted_definition": {
+        "name": "PauseGame",
+        "source": "src/S11/m35F5.c:30",
+        "module": "S11:35F5",
+        "offset": "0088",
+        "size": 22,
+        "provenance": "EXACT_NATURAL",
+        "extent_bearing_module": true,
+        "scaffold_count": 0
+      },
+      "transitive_definition": {
+        "name": "SetPause",
+        "source": "src/S11/m35F5.c:40",
+        "module": "S11:35F5",
+        "offset": "009E",
+        "size": 239,
+        "provenance": "EXACT_NATURAL"
+      },
+      "effect_for_call": "PauseGame delegates to SetPause(1). SetPause's EndLifeTransfer/EndTargetMode branch runs only for value 0 and is skipped. The value-1 path writes pause/UI state, message state, clipping and object selection, then refreshes menus; it does not constrain or write the spider selectors."
+    }
+  ],
+  "postload_result": {
+    "visible_rebuild": "o09_35F5_0DBB (defined in src/S09/m35F5.c:563); life-map and yard/UI rebuild, no SMode/Scycle/fd_50F6_1004 writes",
+    "selector_source": "LoadGame reads the three 2-byte SaveRec entries directly into their target fields (src/S09/m35F5.c:1145-1149), with no range checks; successful reads are followed by calls above (src/S09/m35F5.c:125-132).",
+    "classification": "The prior report's 'post-load sanitizer definitions are missing' wording was incorrect. The called names are imports bound through registered code-address aliases to accepted definitions. Those definitions do not sanitize selector state. Restored values remain unbounded by this post-load chain, so the resource-domain closure remains unresolved."
+  }
+}

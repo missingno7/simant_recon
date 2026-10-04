@@ -1,0 +1,3391 @@
+{
+  "schema": "simant-dos-source-storage-contract-candidate-v22",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "status": "ROOT_REVIEWED_FUNCTIONAL_STORAGE_ONLY",
+  "root_reviewed": true,
+  "admitted": true,
+  "all_required_checks_pass": true,
+  "module": "source-owned:ant-class-histogram",
+  "communals": [
+    {
+      "name": "_fd_50F6_0EB6",
+      "kind": "far",
+      "count": 32,
+      "element_size": 2,
+      "length": 64
+    }
+  ],
+  "required_cases": {
+    "positive_crt_zero_all_32_signed_words_raw_bytes": "PASS",
+    "wrong_test_base_plus_one_word": "REJECTED_BASE",
+    "wrong_initialized_data_owner": "REJECTED_CRT_ZERO",
+    "wrong_unsigned_consumer_view": "REJECTED_UNSIGNED_VIEW"
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "positive_crt_zero_all_32_signed_words_raw_bytes",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+            "sha256": "3d047d18fa9f188cada1c530e903858325015994c548bbdf4798744789434d8e",
+            "size": 11565
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+            "sha256": "3d047d18fa9f188cada1c530e903858325015994c548bbdf4798744789434d8e",
+            "size": 11565
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "01F2:0000",
+          "_histogramprobealias": "01F2:0000"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "01F2:0000",
+          "_histogramprobealias": "01F2:0000"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "01F2:0000",
+          "target_address": "01F2:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "01F2:0000",
+          "target_address": "01F2:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "PASS\r\n",
+      "actual_marker_verbatim": "PASS\r\n",
+      "expected_marker_bytes_hex": "504153530d0a",
+      "actual_marker_bytes_hex": "504153530d0a",
+      "expected_marker_sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "actual_marker_sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.LOG",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/LINK.LOG",
+        "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+        "size": 541
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+        "sha256": "3d047d18fa9f188cada1c530e903858325015994c548bbdf4798744789434d8e",
+        "size": 11565
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/CRT.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/DOSBOX-HOST.LOG",
+          "sha256": "5fd8fb3777ef7331fab40d58a3923b853549414cee871f75162ea11be8f93d75",
+          "size": 4321
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/dosbox.conf",
+          "sha256": "10283e142cf3a7c4f12478c1482b42e888773f9525fa251793a05d28385695f9",
+          "size": 444
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/LINK.LOG",
+          "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+          "size": 541
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.EXE",
+          "sha256": "4c979964c58341cf7c49c6e122a7bddb0ded0c4343d36c80894bfc0438aac3de",
+          "size": 9663
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.LNK",
+          "sha256": "aab973225dcd851212d37fb1cb1070cdafc6ce0d71ecfd08b7abe39fce7f4bb4",
+          "size": 162
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+          "sha256": "3d047d18fa9f188cada1c530e903858325015994c548bbdf4798744789434d8e",
+          "size": 11565
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_test_base_plus_one_word",
+      "expected": "REJECTED_BASE",
+      "actual": "REJECTED_BASE",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/PROBE.MAP",
+            "sha256": "fbdb817624d09a030ef729d15ba526b4adc3dfd3a2de0eddb280c3c8c5c065b3",
+            "size": 11565
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/PROBE.MAP",
+            "sha256": "fbdb817624d09a030ef729d15ba526b4adc3dfd3a2de0eddb280c3c8c5c065b3",
+            "size": 11565
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "01F2:0000",
+          "_histogramprobealias": "01F2:0002"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "01F2:0000",
+          "_histogramprobealias": "01F2:0002"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 2,
+          "observed_offset_delta": 2,
+          "alias_address": "01F2:0002",
+          "target_address": "01F2:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 2,
+          "observed_offset_delta": 2,
+          "alias_address": "01F2:0002",
+          "target_address": "01F2:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "REJECTED_BASE\r\n",
+      "actual_marker_verbatim": "REJECTED_BASE\r\n",
+      "expected_marker_bytes_hex": "52454a45435445445f424153450d0a",
+      "actual_marker_bytes_hex": "52454a45435445445f424153450d0a",
+      "expected_marker_sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+      "actual_marker_sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/RUN.LOG",
+        "sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+        "size": 15
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/LINK.LOG",
+        "sha256": "ff572b1b7997efc80ab114b175af79b84ee7b362acf99ffd61187695a65925e9",
+        "size": 545
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/PROBE.MAP",
+        "sha256": "fbdb817624d09a030ef729d15ba526b4adc3dfd3a2de0eddb280c3c8c5c065b3",
+        "size": 11565
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/CRT.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/DOSBOX-HOST.LOG",
+          "sha256": "14b67f4fde0e2444eb9b69d780260f09fb21213c89a0f0ce6656edc33aa22887",
+          "size": 4303
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/dosbox.conf",
+          "sha256": "5f6da80dcf60738436ca292df3a1d598c3c01ffb6baf7af08b6677e85052ff73",
+          "size": 426
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/LINK.LOG",
+          "sha256": "ff572b1b7997efc80ab114b175af79b84ee7b362acf99ffd61187695a65925e9",
+          "size": 545
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/PROBE.EXE",
+          "sha256": "fe80d3a5bf7da08716ef3d8424453f2d921cff29f682738871a9056b7c584e1c",
+          "size": 9663
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/PROBE.LNK",
+          "sha256": "29ad9bd86a0913dcf8c575ed05e0e5c8b5ccfeb9c8f42f43f9614bae63241288",
+          "size": 166
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/PROBE.MAP",
+          "sha256": "fbdb817624d09a030ef729d15ba526b4adc3dfd3a2de0eddb280c3c8c5c065b3",
+          "size": 11565
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/RUN.LOG",
+          "sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+          "size": 15
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_initialized_data_owner",
+      "expected": "REJECTED_CRT_ZERO",
+      "actual": "REJECTED_CRT_ZERO",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/PROBE.MAP",
+            "sha256": "6b1da8c240cf0e55b2c93aff33ac8cc768fc59dcda3074c46435440e9043849b",
+            "size": 11566
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/PROBE.MAP",
+            "sha256": "6b1da8c240cf0e55b2c93aff33ac8cc768fc59dcda3074c46435440e9043849b",
+            "size": 11566
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "01F2:0000",
+          "_histogramprobealias": "01F2:0000"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "01F2:0000",
+          "_histogramprobealias": "01F2:0000"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "01F2:0000",
+          "target_address": "01F2:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "01F2:0000",
+          "target_address": "01F2:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "REJECTED_CRT_ZERO\r\n",
+      "actual_marker_verbatim": "REJECTED_CRT_ZERO\r\n",
+      "expected_marker_bytes_hex": "52454a45435445445f4352545f5a45524f0d0a",
+      "actual_marker_bytes_hex": "52454a45435445445f4352545f5a45524f0d0a",
+      "expected_marker_sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+      "actual_marker_sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/RUN.LOG",
+        "sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+        "size": 19
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/LINK.LOG",
+        "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+        "size": 541
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/PROBE.MAP",
+        "sha256": "6b1da8c240cf0e55b2c93aff33ac8cc768fc59dcda3074c46435440e9043849b",
+        "size": 11566
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/CRT.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/DOSBOX-HOST.LOG",
+          "sha256": "9f5b34fbdd99df7b852ea812d091dda30a568cc0a8880604a158a202de1fc399",
+          "size": 4302
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/dosbox.conf",
+          "sha256": "1fc0516126c43b1927ad72e4b1a5b51c76f9ca32d8064ab4cd4348f746d16ed7",
+          "size": 425
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/LINK.LOG",
+          "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+          "size": 541
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/OWNER.OBJ",
+          "sha256": "ed1cdb7e8c51abec8651c8ede2f3f146da6500d6118243812d16a11a1a533bee",
+          "size": 259
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/PROBE.EXE",
+          "sha256": "508eab93499b6c83d44a49c7e50a548719e94b59afc707cc7d060de601eb1205",
+          "size": 9663
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/PROBE.LNK",
+          "sha256": "aab973225dcd851212d37fb1cb1070cdafc6ce0d71ecfd08b7abe39fce7f4bb4",
+          "size": 162
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/PROBE.MAP",
+          "sha256": "6b1da8c240cf0e55b2c93aff33ac8cc768fc59dcda3074c46435440e9043849b",
+          "size": 11566
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/RUN.LOG",
+          "sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+          "size": 19
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_unsigned_consumer_view",
+      "expected": "REJECTED_UNSIGNED_VIEW",
+      "actual": "REJECTED_UNSIGNED_VIEW",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/PROBE.MAP",
+            "sha256": "a5ae97a94799b8771c2268f8635eff0b3f81a3723775d58b7a875a1c6ffcec05",
+            "size": 11565
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/PROBE.MAP",
+            "sha256": "a5ae97a94799b8771c2268f8635eff0b3f81a3723775d58b7a875a1c6ffcec05",
+            "size": 11565
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "01E6:0000",
+          "_histogramprobealias": "01E6:0000"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "01E6:0000",
+          "_histogramprobealias": "01E6:0000"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "01E6:0000",
+          "target_address": "01E6:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "01E6:0000",
+          "target_address": "01E6:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "REJECTED_UNSIGNED_VIEW\r\n",
+      "actual_marker_verbatim": "REJECTED_UNSIGNED_VIEW\r\n",
+      "expected_marker_bytes_hex": "52454a45435445445f554e5349474e45445f564945570d0a",
+      "actual_marker_bytes_hex": "52454a45435445445f554e5349474e45445f564945570d0a",
+      "expected_marker_sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+      "actual_marker_sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/RUN.LOG",
+        "sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+        "size": 24
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/LINK.LOG",
+        "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+        "size": 541
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/PROBE.MAP",
+        "sha256": "a5ae97a94799b8771c2268f8635eff0b3f81a3723775d58b7a875a1c6ffcec05",
+        "size": 11565
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/CRT.OBJ",
+          "sha256": "fe28633fe83d44d5cbc9c927ad730a24cdc9de5835994e743aad4d6a92bcdf8b",
+          "size": 450
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/DOSBOX-HOST.LOG",
+          "sha256": "e1e9580680008084e0c3894e6aceb4f57e92f051ddac4766ae04d9f21216e69d",
+          "size": 4302
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/dosbox.conf",
+          "sha256": "77ab6376d8198d74746ce7271da5b7e39013a228818d12eee1ea82859eed309b",
+          "size": 425
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/LINK.LOG",
+          "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+          "size": 541
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/PROBE.EXE",
+          "sha256": "774cf502461bbc7afae3cd70da335af4abd162c658cb3da98c23e6119db261c8",
+          "size": 9435
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/PROBE.LNK",
+          "sha256": "aab973225dcd851212d37fb1cb1070cdafc6ce0d71ecfd08b7abe39fce7f4bb4",
+          "size": 162
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/PROBE.MAP",
+          "sha256": "a5ae97a94799b8771c2268f8635eff0b3f81a3723775d58b7a875a1c6ffcec05",
+          "size": 11565
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/RUN.LOG",
+          "sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+          "size": 24
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    },
+    {
+      "linker": "rtlink610",
+      "case": "positive_crt_zero_all_32_signed_words_raw_bytes",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+            "sha256": "dc8a584fe736b0bd211adf1ba5a6f453a016c2c2dcb02b9f86033ff8d8baaab0",
+            "size": 12748
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+            "sha256": "dc8a584fe736b0bd211adf1ba5a6f453a016c2c2dcb02b9f86033ff8d8baaab0",
+            "size": 12748
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "0233:0000",
+          "_histogramprobealias": "0233:0000"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "0233:0000",
+          "_histogramprobealias": "0233:0000"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "0233:0000",
+          "target_address": "0233:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "0233:0000",
+          "target_address": "0233:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "PASS\r\n",
+      "actual_marker_verbatim": "PASS\r\n",
+      "expected_marker_bytes_hex": "504153530d0a",
+      "actual_marker_bytes_hex": "504153530d0a",
+      "expected_marker_sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "actual_marker_sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.LOG",
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "size": 6
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/LINK.LOG",
+        "sha256": "a95f7c2c913a69a25ceeceeec4ae87ed4cc9bcfef4065d2ad15c7e071c1d6d4b",
+        "size": 1233
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+        "sha256": "dc8a584fe736b0bd211adf1ba5a6f453a016c2c2dcb02b9f86033ff8d8baaab0",
+        "size": 12748
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/CRT.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/DOSBOX-HOST.LOG",
+          "sha256": "f569fde1dab8c1f66403f2912dcf2b8ccdc2336e7ba01c1011dc570fe5f8c8f0",
+          "size": 4431
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/dosbox.conf",
+          "sha256": "b862b0d29f934d76cd14b8e1fc424f5da5986a75fcf6ef44857d3e22bc3813f2",
+          "size": 444
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/LINK.LOG",
+          "sha256": "a95f7c2c913a69a25ceeceeec4ae87ed4cc9bcfef4065d2ad15c7e071c1d6d4b",
+          "size": 1233
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.EXE",
+          "sha256": "143eab0622db22889eb83473405043d1d7fc183711af417991df88c5e9c59846",
+          "size": 10703
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.LNK",
+          "sha256": "aab973225dcd851212d37fb1cb1070cdafc6ce0d71ecfd08b7abe39fce7f4bb4",
+          "size": 162
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+          "sha256": "dc8a584fe736b0bd211adf1ba5a6f453a016c2c2dcb02b9f86033ff8d8baaab0",
+          "size": 12748
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_test_base_plus_one_word",
+      "expected": "REJECTED_BASE",
+      "actual": "REJECTED_BASE",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/PROBE.MAP",
+            "sha256": "e819970d611cec545e49c83a1287f8603d574363f82f433a035301182a544963",
+            "size": 12748
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/PROBE.MAP",
+            "sha256": "e819970d611cec545e49c83a1287f8603d574363f82f433a035301182a544963",
+            "size": 12748
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "0233:0000",
+          "_histogramprobealias": "0233:0002"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "0233:0000",
+          "_histogramprobealias": "0233:0002"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 2,
+          "observed_offset_delta": 2,
+          "alias_address": "0233:0002",
+          "target_address": "0233:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 2,
+          "observed_offset_delta": 2,
+          "alias_address": "0233:0002",
+          "target_address": "0233:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "REJECTED_BASE\r\n",
+      "actual_marker_verbatim": "REJECTED_BASE\r\n",
+      "expected_marker_bytes_hex": "52454a45435445445f424153450d0a",
+      "actual_marker_bytes_hex": "52454a45435445445f424153450d0a",
+      "expected_marker_sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+      "actual_marker_sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/RUN.LOG",
+        "sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+        "size": 15
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/LINK.LOG",
+        "sha256": "019733ceb943e055cf45d2fb846c4c65a0e7de709df7b71b0a8d218a61856696",
+        "size": 1237
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/PROBE.MAP",
+        "sha256": "e819970d611cec545e49c83a1287f8603d574363f82f433a035301182a544963",
+        "size": 12748
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/CRT.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/DOSBOX-HOST.LOG",
+          "sha256": "3baa5bd8b0ba1becba91a96b97740ccec7a3aa496069fa2d45e722cde293d4a0",
+          "size": 4413
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/dosbox.conf",
+          "sha256": "33de8fe4c4b76efc24eb4b6e3e5a7a6a46368148c37fa0ef6109c790acfe073b",
+          "size": 426
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/LINK.LOG",
+          "sha256": "019733ceb943e055cf45d2fb846c4c65a0e7de709df7b71b0a8d218a61856696",
+          "size": 1237
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/PROBE.EXE",
+          "sha256": "af9d99e6f538aad90a77431c08e24370c300bf0ef14cdf32eaf2c0f43c6a4231",
+          "size": 10703
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/PROBE.LNK",
+          "sha256": "29ad9bd86a0913dcf8c575ed05e0e5c8b5ccfeb9c8f42f43f9614bae63241288",
+          "size": 166
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/PROBE.MAP",
+          "sha256": "e819970d611cec545e49c83a1287f8603d574363f82f433a035301182a544963",
+          "size": 12748
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/RUN.LOG",
+          "sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+          "size": 15
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_initialized_data_owner",
+      "expected": "REJECTED_CRT_ZERO",
+      "actual": "REJECTED_CRT_ZERO",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/PROBE.MAP",
+            "sha256": "7df128b150f8d0c996f12b04dd784e59b2567d01aab37a15d570856c12573e44",
+            "size": 12749
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/PROBE.MAP",
+            "sha256": "7df128b150f8d0c996f12b04dd784e59b2567d01aab37a15d570856c12573e44",
+            "size": 12749
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "0233:0000",
+          "_histogramprobealias": "0233:0000"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "0233:0000",
+          "_histogramprobealias": "0233:0000"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "0233:0000",
+          "target_address": "0233:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "0233:0000",
+          "target_address": "0233:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "REJECTED_CRT_ZERO\r\n",
+      "actual_marker_verbatim": "REJECTED_CRT_ZERO\r\n",
+      "expected_marker_bytes_hex": "52454a45435445445f4352545f5a45524f0d0a",
+      "actual_marker_bytes_hex": "52454a45435445445f4352545f5a45524f0d0a",
+      "expected_marker_sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+      "actual_marker_sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/RUN.LOG",
+        "sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+        "size": 19
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/LINK.LOG",
+        "sha256": "a95f7c2c913a69a25ceeceeec4ae87ed4cc9bcfef4065d2ad15c7e071c1d6d4b",
+        "size": 1233
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/PROBE.MAP",
+        "sha256": "7df128b150f8d0c996f12b04dd784e59b2567d01aab37a15d570856c12573e44",
+        "size": 12749
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/CRT.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/DOSBOX-HOST.LOG",
+          "sha256": "77923ba5eee79a150131cea166b50c22d95eb135bc3fa5611ae96a66e74ead16",
+          "size": 4412
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/dosbox.conf",
+          "sha256": "acbcb269b2f0d29f6d14a3aaa3e467aee7ffb1db1647f459d675e306dde5a5ba",
+          "size": 425
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/LINK.LOG",
+          "sha256": "a95f7c2c913a69a25ceeceeec4ae87ed4cc9bcfef4065d2ad15c7e071c1d6d4b",
+          "size": 1233
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/OWNER.OBJ",
+          "sha256": "ed1cdb7e8c51abec8651c8ede2f3f146da6500d6118243812d16a11a1a533bee",
+          "size": 259
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/PROBE.EXE",
+          "sha256": "a24e1b19d8a7d205db73fd7a606e213c0c1f46820c9e0edcd2a347edcb5ab70d",
+          "size": 10703
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/PROBE.LNK",
+          "sha256": "aab973225dcd851212d37fb1cb1070cdafc6ce0d71ecfd08b7abe39fce7f4bb4",
+          "size": 162
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/PROBE.MAP",
+          "sha256": "7df128b150f8d0c996f12b04dd784e59b2567d01aab37a15d570856c12573e44",
+          "size": 12749
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/RUN.LOG",
+          "sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+          "size": 19
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_unsigned_consumer_view",
+      "expected": "REJECTED_UNSIGNED_VIEW",
+      "actual": "REJECTED_UNSIGNED_VIEW",
+      "passed": true,
+      "timed_out": false,
+      "runner_returncode": 0,
+      "linker_diagnostics": [],
+      "linker_produced_executable": true,
+      "linker_produced_map": true,
+      "expected_owner_publics": [
+        "_fd_50F6_0EB6"
+      ],
+      "owner_publics_found_in_map": [
+        "_fd_50F6_0EB6"
+      ],
+      "map_public_sections": {
+        "Name": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/PROBE.MAP",
+            "sha256": "bad8de3c2c7e4a08d404e4a4b89c00e4c27b37b9a570b4680b7f505275e070e8",
+            "size": 12748
+          }
+        },
+        "Value": {
+          "heading_present": true,
+          "missing_required_publics": [],
+          "owner_publics_found": [
+            "_fd_50f6_0eb6"
+          ],
+          "test_alias_found": true,
+          "map_pin": {
+            "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/PROBE.MAP",
+            "sha256": "bad8de3c2c7e4a08d404e4a4b89c00e4c27b37b9a570b4680b7f505275e070e8",
+            "size": 12748
+          }
+        }
+      },
+      "all_required_publics_in_both_sections": true,
+      "public_address_matrix": {
+        "Name": {
+          "_fd_50f6_0eb6": "0227:0000",
+          "_histogramprobealias": "0227:0000"
+        },
+        "Value": {
+          "_fd_50f6_0eb6": "0227:0000",
+          "_histogramprobealias": "0227:0000"
+        }
+      },
+      "alias_map_relations": [
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Name",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "0227:0000",
+          "target_address": "0227:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        },
+        {
+          "alias": "_histogramprobealias",
+          "target": "_fd_50f6_0eb6",
+          "section": "Value",
+          "expected_offset_delta": 0,
+          "observed_offset_delta": 0,
+          "alias_address": "0227:0000",
+          "target_address": "0227:0000",
+          "same_segment": true,
+          "passed": true,
+          "claim_limit": "relative test-owned alias geometry only; no historical placement or adjacency claim"
+        }
+      ],
+      "expected_marker_verbatim": "REJECTED_UNSIGNED_VIEW\r\n",
+      "actual_marker_verbatim": "REJECTED_UNSIGNED_VIEW\r\n",
+      "expected_marker_bytes_hex": "52454a45435445445f554e5349474e45445f564945570d0a",
+      "actual_marker_bytes_hex": "52454a45435445445f554e5349474e45445f564945570d0a",
+      "expected_marker_sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+      "actual_marker_sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+      "run_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/RUN.LOG",
+        "sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+        "size": 24
+      },
+      "link_log_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/LINK.LOG",
+        "sha256": "1541a8adac5b1faa7b23acaee5cb354d28cab3c829fe423c4bf8dc30f62953b8",
+        "size": 1232
+      },
+      "map_input_pin": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/PROBE.MAP",
+        "sha256": "bad8de3c2c7e4a08d404e4a4b89c00e4c27b37b9a570b4680b7f505275e070e8",
+        "size": 12748
+      },
+      "raw_case_artifact_pins": [
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/CRT.OBJ",
+          "sha256": "fe28633fe83d44d5cbc9c927ad730a24cdc9de5835994e743aad4d6a92bcdf8b",
+          "size": 450
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/DOSBOX-HOST.LOG",
+          "sha256": "381542688482df30f950b5276c377ea5a3878e658f9c411406abd9a8180bcb70",
+          "size": 4412
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/dosbox.conf",
+          "sha256": "ea52344c40458aca2518271534efb94a4bb7cf9537dd4b7ec48c0513aa2a8239",
+          "size": 425
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/LINK.LOG",
+          "sha256": "1541a8adac5b1faa7b23acaee5cb354d28cab3c829fe423c4bf8dc30f62953b8",
+          "size": 1232
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/PROBE.EXE",
+          "sha256": "9d5b8c94bcc732c50fc54eefb9d8352616c29d2b222a5f80c3e7bf5c9c09ce86",
+          "size": 10475
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/PROBE.LNK",
+          "sha256": "aab973225dcd851212d37fb1cb1070cdafc6ce0d71ecfd08b7abe39fce7f4bb4",
+          "size": 162
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/PROBE.MAP",
+          "sha256": "bad8de3c2c7e4a08d404e4a4b89c00e4c27b37b9a570b4680b7f505275e070e8",
+          "size": 12748
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/RUN.LOG",
+          "sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+          "size": 24
+        }
+      ],
+      "runtime_claim_limit": "relative test alias and runtime fixture only; no historical absolute placement or adjacency is inferred",
+      "save_rec_pointer_fixups": []
+    }
+  ],
+  "inputs": [
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/work/source-only-dos/providers/ant-class-histogram.c",
+      "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+      "size": 190,
+      "kind": "provider_source"
+    },
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/work/source-only-dos/ant-histogram-owner-probe-v22.py",
+      "sha256": "6b87f27d6c73da8f36a423aa999479bac1491d3807beff7bd8362ba662fdde8a",
+      "size": 27358,
+      "kind": "probe_source"
+    },
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/work/source-only-dos/ant-histogram-owner-candidate-v22.json",
+      "sha256": "ded924189b279dba07e3fcd5f8192cbdbf86e26899fe8d71365d62645e5a19ce",
+      "size": 3415,
+      "kind": "source_review"
+    },
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/work/source-only-dos/ant-histogram-owner-candidate-v22.md",
+      "sha256": "3ea5b7e61e3872bc809b3f40665f484db2fed596f854ea8441430abbe6371027",
+      "size": 2456,
+      "kind": "source_review_markdown"
+    },
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/evidence/source-audit-v22.json",
+      "sha256": "377551451f21473df2feefedc048762834124003cea3cd6cbffb00efd97a7498",
+      "size": 56825,
+      "kind": "source_audit_receipt"
+    },
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/evidence/candidate-receipt-v22.json",
+      "sha256": "6f45d2d9b928e98a2dbf27d7c872db8d879c78cad08af38d3e5ea7d8dfd03c18",
+      "size": 72931,
+      "kind": "runtime_research_receipt"
+    },
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/evidence/parent-admission-normalized-v22.json",
+      "sha256": "e7cab29bd0b7d473082bc1fa17c0c7dace1ecc817c144da00e5f0e34a2775240",
+      "size": 119106,
+      "kind": "check_only_normalized_receipt"
+    },
+    {
+      "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/evidence/parent-admission-check-v22.py",
+      "sha256": "91a86c9a523c16f7926b6f383affbf9bb7c3beb2e4acde6ecd2dab2ffa21a0b2",
+      "size": 26135,
+      "kind": "check_only_normalizer"
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "tools/modules.py",
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+      "size": 60548,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\assert.h",
+      "sha256": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+      "size": 594,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bios.h",
+      "sha256": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+      "size": 4499,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bse.h",
+      "sha256": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+      "size": 1462,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedev.h",
+      "sha256": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+      "size": 12893,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedos.h",
+      "sha256": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+      "size": 48326,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bseerr.h",
+      "sha256": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+      "size": 26788,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsesub.h",
+      "sha256": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+      "size": 19051,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\conio.h",
+      "sha256": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+      "size": 965,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\ctype.h",
+      "sha256": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+      "size": 2979,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\direct.h",
+      "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+      "size": 892,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\dos.h",
+      "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+      "size": 5343,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\errno.h",
+      "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+      "size": 1428,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\fcntl.h",
+      "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+      "size": 1126,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\float.h",
+      "sha256": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+      "size": 4911,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\graph.h",
+      "sha256": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+      "size": 15438,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\io.h",
+      "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+      "size": 1512,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\limits.h",
+      "sha256": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+      "size": 1326,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\locale.h",
+      "sha256": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+      "size": 1519,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\malloc.h",
+      "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+      "size": 4008,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\math.h",
+      "sha256": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+      "size": 7881,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\memory.h",
+      "sha256": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+      "size": 1628,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2.h",
+      "sha256": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+      "size": 676,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2def.h",
+      "sha256": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+      "size": 10400,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pgchart.h",
+      "sha256": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+      "size": 8749,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pm.h",
+      "sha256": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+      "size": 2255,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmavio.h",
+      "sha256": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+      "size": 2069,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmbitmap.h",
+      "sha256": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+      "size": 1851,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmdev.h",
+      "sha256": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+      "size": 8606,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmerr.h",
+      "sha256": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+      "size": 30095,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmfont.h",
+      "sha256": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+      "size": 3458,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmgpi.h",
+      "sha256": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+      "size": 49655,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmhelp.h",
+      "sha256": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+      "size": 11291,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmmle.h",
+      "sha256": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+      "size": 8802,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmord.h",
+      "sha256": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+      "size": 23140,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmpic.h",
+      "sha256": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+      "size": 691,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmshl.h",
+      "sha256": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+      "size": 14249,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmtypes.h",
+      "sha256": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+      "size": 9645,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmwin.h",
+      "sha256": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+      "size": 85827,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\process.h",
+      "sha256": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+      "size": 2829,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\search.h",
+      "sha256": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+      "size": 1159,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\setjmp.h",
+      "sha256": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+      "size": 822,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\share.h",
+      "sha256": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+      "size": 450,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\signal.h",
+      "sha256": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+      "size": 2019,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdarg.h",
+      "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+      "size": 894,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stddef.h",
+      "sha256": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+      "size": 1254,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdio.h",
+      "sha256": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+      "size": 6047,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdlib.h",
+      "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+      "size": 6539,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\string.h",
+      "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+      "size": 4975,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\locking.h",
+      "sha256": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+      "size": 468,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\stat.h",
+      "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+      "size": 1330,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\timeb.h",
+      "sha256": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+      "size": 827,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\types.h",
+      "sha256": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+      "size": 734,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\utime.h",
+      "sha256": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+      "size": 968,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\time.h",
+      "sha256": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+      "size": 3069,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\varargs.h",
+      "sha256": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b",
+      "size": 922,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241,
+      "kind": "toolchain_or_runtime_pin"
+    },
+    {
+      "path": "evidence/behavior/manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379,
+      "kind": "canonical_or_strict_source_pin"
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980,
+      "kind": "canonical_or_strict_source_pin"
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809,
+      "kind": "canonical_or_strict_source_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+      "size": 6796,
+      "kind": "canonical_or_strict_source_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DisplayCard.json",
+      "sha256": "a0be46440557ac606df28a451f62a228b3229a9ab04a10a56bbf374931ae841e",
+      "size": 51033,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DrawBalloons.json",
+      "sha256": "7f86d2fe0e5b44300572c7115398d05c25799a3d03ba1e57dc0288242a8a91cc",
+      "size": 46914,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DrawMapCursor.json",
+      "sha256": "d40aac74106f86a115d56f01ca04c3aa6c98b6a1fa18306705490f92fce2e41a",
+      "size": 40582,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/FindIndex.json",
+      "sha256": "d9f61367df4d79b2bd07e284140b8c9a34db80dda5b1d4bceac7f31ffd6ec5fc",
+      "size": 14600,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/InvertPatch.json",
+      "sha256": "8591af179c72f5f42457d64f7e84834c70381f7f00d3a164b165e480d88e214c",
+      "size": 41836,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/LessonDone.json",
+      "sha256": "4aae722737a8b4d52384a70ed51521158603871d4ef99139ba2a2b48d30046db",
+      "size": 41553,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/SpiderScan.json",
+      "sha256": "17e0a3640c87bae41616cdbe3683b1ccc95e92ba193af072a3ba7e91705b4c89",
+      "size": 22880,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/drawHistGraph.json",
+      "sha256": "c611f04ff64c8a0ce969762670506fe2682a6ad697367c63011a1c18dc18a3a9",
+      "size": 91762,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_0250_1018.json",
+      "sha256": "b5fe86ea28f66ddca56f5936d17d4313789399f18209e5ddf0d15df35be22682",
+      "size": 29049,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_0250_129E.json",
+      "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80",
+      "size": 24394,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_09CC.json",
+      "sha256": "86eec4845d02974e8b6764fe5884360cb7da5a796a5cbbfed78e8a423f8ed5a8",
+      "size": 16862,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0ADC.json",
+      "sha256": "67a87d50fad0aec23795a8d29481a12db52f94a7f9b2e2ea7b66cbd5fcfd70ee",
+      "size": 18079,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0CF4.json",
+      "sha256": "b860fa8984346175477cf27005777a6af6580baf6bd2bfdcb78fe2e849562627",
+      "size": 17802,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0FBC.json",
+      "sha256": "179a08d1234950861fab6d162ea5f0a2c8b7d332f27c10c03c118216686b6e80",
+      "size": 27289,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_1C62_0415.json",
+      "sha256": "b6494106b027cdc91f1f53c3afbf9d479853658f50bff8d975fda7eb6aa7de59",
+      "size": 33234,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_1E57_038E.json",
+      "sha256": "c7977122410f6b0e80cac5b0317d55d2f4a04130bee0bd0f98d5a5de51a8a333",
+      "size": 26879,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_20E8_0903.json",
+      "sha256": "01d26e670b47c645029865b37962a3b53a711b3c23ee6fd4f702345f20f00f8a",
+      "size": 15629,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_23E6_0000.json",
+      "sha256": "93340ca87d10bd2679b9905d882bd7f2867edc17a692c50a1450230cc9540508",
+      "size": 14839,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_2505_0453.json",
+      "sha256": "ff8acbd9390b6f8ede9aa5ec465b37fb624de5bb80233521fac60f9c404f5c73",
+      "size": 18683,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_2815_0165.json",
+      "sha256": "f681fde7fd5100f7e18463f4798df0697b805f73b9796e73bb5a19c9e0f765ad",
+      "size": 17249,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_284A_0138.json",
+      "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e",
+      "size": 12344,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_29D6_000A.json",
+      "sha256": "3ad0a71454669b67e468b75d9d907639a4c3f78e1db1d044dbf0172579580234",
+      "size": 14942,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o10_35F5_0384.json",
+      "sha256": "beebdbfcfed76215fe7dbf69a61801b9142aef6686f7fdb3508e3342edb4a0c8",
+      "size": 60547,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o15_384C_0239.json",
+      "sha256": "c00dadc8421083c9f2c33bb0b057b92e1c1a57867a5c7cc4e83bf9f9c5c6534a",
+      "size": 48386,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o25_3BA4_1035.json",
+      "sha256": "8fdd8925b614cc419c7dc1ab25fb262be105b29977e9c6c33ec5d862e5888274",
+      "size": 13286,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o25_3BA4_1686.json",
+      "sha256": "ef11dec31ab3193184b52c308f25c67c70a49d2cd44a823fd91fbd90ac96204a",
+      "size": 21440,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_DrawBitMap.json",
+      "sha256": "bb0288e993a44fedacb0ab657c2acb565133638098ca7c7e30eb56ec3d96937a",
+      "size": 34038,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_PrintStyleTextInRect.json",
+      "sha256": "ba6c9d3f06c6327a55273efa2b5181df3338c7af346d80b4c0cf327235e43ed0",
+      "size": 51131,
+      "kind": "strict_effective_receipt_pin"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_UnlockWin.json",
+      "sha256": "078841cf92bdea90f52e733ff8587336f061d4045c784899553681bef8ca03a9",
+      "size": 26532,
+      "kind": "strict_effective_receipt_pin"
+    }
+  ],
+  "probe_source": {
+    "path": "work/source-only-dos/ant-histogram-owner-probe-v22.py",
+    "sha256": "6b87f27d6c73da8f36a423aa999479bac1491d3807beff7bd8362ba662fdde8a",
+    "size": 27358
+  },
+  "research_receipt": {
+    "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/evidence/candidate-receipt-v22.json",
+    "sha256": "6f45d2d9b928e98a2dbf27d7c872db8d879c78cad08af38d3e5ea7d8dfd03c18",
+    "size": 72931
+  },
+  "source_review": {
+    "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/evidence/source-audit-v22.json",
+    "sha256": "377551451f21473df2feefedc048762834124003cea3cd6cbffb00efd97a7498",
+    "size": 56825
+  },
+  "source_review_markdown": {
+    "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/work/source-only-dos/ant-histogram-owner-candidate-v22.md",
+    "sha256": "3ea5b7e61e3872bc809b3f40665f484db2fed596f854ea8441430abbe6371027",
+    "size": 2456
+  },
+  "source_review_json": {
+    "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/work/source-only-dos/ant-histogram-owner-candidate-v22.json",
+    "sha256": "ded924189b279dba07e3fcd5f8192cbdbf86e26899fe8d71365d62645e5a19ce",
+    "size": 3415
+  },
+  "normalized_check_only_receipt": {
+    "path": "build/workers/dos_ant_histogram_v22/proposed-durable-v22-20261004-03/evidence/parent-admission-normalized-v22.json",
+    "sha256": "e7cab29bd0b7d473082bc1fa17c0c7dace1ecc817c144da00e5f0e34a2775240",
+    "size": 119106
+  },
+  "source_coverage": {
+    "canonical_source_count": 127,
+    "strict_effective_source_count": 29,
+    "strict_receipt_count": 29,
+    "unique_source_count": 156,
+    "strict_receipts_verified": true,
+    "source_pin_set_sha256": "5bd02ae492d8e12457d74441d866ea2a4a4c39aaf800859a15c5552eafdca785",
+    "registry_source_pins": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "size": 28379
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "size": 628980
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "size": 800809
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/index-v1.json",
+        "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+        "size": 6796
+      }
+    ],
+    "strict_receipt_pins": [
+      {
+        "path": "work/source-only-dos/static-completeness/DisplayCard.json",
+        "sha256": "a0be46440557ac606df28a451f62a228b3229a9ab04a10a56bbf374931ae841e",
+        "size": 51033
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/DrawBalloons.json",
+        "sha256": "7f86d2fe0e5b44300572c7115398d05c25799a3d03ba1e57dc0288242a8a91cc",
+        "size": 46914
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/DrawMapCursor.json",
+        "sha256": "d40aac74106f86a115d56f01ca04c3aa6c98b6a1fa18306705490f92fce2e41a",
+        "size": 40582
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/FindIndex.json",
+        "sha256": "d9f61367df4d79b2bd07e284140b8c9a34db80dda5b1d4bceac7f31ffd6ec5fc",
+        "size": 14600
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/InvertPatch.json",
+        "sha256": "8591af179c72f5f42457d64f7e84834c70381f7f00d3a164b165e480d88e214c",
+        "size": 41836
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/LessonDone.json",
+        "sha256": "4aae722737a8b4d52384a70ed51521158603871d4ef99139ba2a2b48d30046db",
+        "size": 41553
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/SpiderScan.json",
+        "sha256": "17e0a3640c87bae41616cdbe3683b1ccc95e92ba193af072a3ba7e91705b4c89",
+        "size": 22880
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/drawHistGraph.json",
+        "sha256": "c611f04ff64c8a0ce969762670506fe2682a6ad697367c63011a1c18dc18a3a9",
+        "size": 91762
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_0250_1018.json",
+        "sha256": "b5fe86ea28f66ddca56f5936d17d4313789399f18209e5ddf0d15df35be22682",
+        "size": 29049
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_0250_129E.json",
+        "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80",
+        "size": 24394
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_171C_09CC.json",
+        "sha256": "86eec4845d02974e8b6764fe5884360cb7da5a796a5cbbfed78e8a423f8ed5a8",
+        "size": 16862
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_171C_0ADC.json",
+        "sha256": "67a87d50fad0aec23795a8d29481a12db52f94a7f9b2e2ea7b66cbd5fcfd70ee",
+        "size": 18079
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_171C_0CF4.json",
+        "sha256": "b860fa8984346175477cf27005777a6af6580baf6bd2bfdcb78fe2e849562627",
+        "size": 17802
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_171C_0FBC.json",
+        "sha256": "179a08d1234950861fab6d162ea5f0a2c8b7d332f27c10c03c118216686b6e80",
+        "size": 27289
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_1C62_0415.json",
+        "sha256": "b6494106b027cdc91f1f53c3afbf9d479853658f50bff8d975fda7eb6aa7de59",
+        "size": 33234
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_1E57_038E.json",
+        "sha256": "c7977122410f6b0e80cac5b0317d55d2f4a04130bee0bd0f98d5a5de51a8a333",
+        "size": 26879
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_20E8_0903.json",
+        "sha256": "01d26e670b47c645029865b37962a3b53a711b3c23ee6fd4f702345f20f00f8a",
+        "size": 15629
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_23E6_0000.json",
+        "sha256": "93340ca87d10bd2679b9905d882bd7f2867edc17a692c50a1450230cc9540508",
+        "size": 14839
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_2505_0453.json",
+        "sha256": "ff8acbd9390b6f8ede9aa5ec465b37fb624de5bb80233521fac60f9c404f5c73",
+        "size": 18683
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_2815_0165.json",
+        "sha256": "f681fde7fd5100f7e18463f4798df0697b805f73b9796e73bb5a19c9e0f765ad",
+        "size": 17249
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_284A_0138.json",
+        "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e",
+        "size": 12344
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/f_29D6_000A.json",
+        "sha256": "3ad0a71454669b67e468b75d9d907639a4c3f78e1db1d044dbf0172579580234",
+        "size": 14942
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/o10_35F5_0384.json",
+        "sha256": "beebdbfcfed76215fe7dbf69a61801b9142aef6686f7fdb3508e3342edb4a0c8",
+        "size": 60547
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/o15_384C_0239.json",
+        "sha256": "c00dadc8421083c9f2c33bb0b057b92e1c1a57867a5c7cc4e83bf9f9c5c6534a",
+        "size": 48386
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/o25_3BA4_1035.json",
+        "sha256": "8fdd8925b614cc419c7dc1ab25fb262be105b29977e9c6c33ec5d862e5888274",
+        "size": 13286
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/o25_3BA4_1686.json",
+        "sha256": "ef11dec31ab3193184b52c308f25c67c70a49d2cd44a823fd91fbd90ac96204a",
+        "size": 21440
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/win_DrawBitMap.json",
+        "sha256": "bb0288e993a44fedacb0ab657c2acb565133638098ca7c7e30eb56ec3d96937a",
+        "size": 34038
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/win_PrintStyleTextInRect.json",
+        "sha256": "ba6c9d3f06c6327a55273efa2b5181df3338c7af346d80b4c0cf327235e43ed0",
+        "size": 51131
+      },
+      {
+        "path": "work/source-only-dos/static-completeness/win_UnlockWin.json",
+        "sha256": "078841cf92bdea90f52e733ff8587336f061d4045c784899553681bef8ca03a9",
+        "size": 26532
+      }
+    ]
+  },
+  "toolchain_and_runtime_pins": [
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/modules.py",
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+      "size": 60548
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\assert.h",
+      "sha256": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+      "size": 594
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bios.h",
+      "sha256": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+      "size": 4499
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bse.h",
+      "sha256": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+      "size": 1462
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedev.h",
+      "sha256": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+      "size": 12893
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedos.h",
+      "sha256": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+      "size": 48326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bseerr.h",
+      "sha256": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+      "size": 26788
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsesub.h",
+      "sha256": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+      "size": 19051
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\conio.h",
+      "sha256": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+      "size": 965
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\ctype.h",
+      "sha256": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+      "size": 2979
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\direct.h",
+      "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+      "size": 892
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\dos.h",
+      "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+      "size": 5343
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\errno.h",
+      "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+      "size": 1428
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\fcntl.h",
+      "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+      "size": 1126
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\float.h",
+      "sha256": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+      "size": 4911
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\graph.h",
+      "sha256": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+      "size": 15438
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\io.h",
+      "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+      "size": 1512
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\limits.h",
+      "sha256": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+      "size": 1326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\locale.h",
+      "sha256": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+      "size": 1519
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\malloc.h",
+      "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+      "size": 4008
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\math.h",
+      "sha256": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+      "size": 7881
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\memory.h",
+      "sha256": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+      "size": 1628
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2.h",
+      "sha256": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+      "size": 676
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2def.h",
+      "sha256": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+      "size": 10400
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pgchart.h",
+      "sha256": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+      "size": 8749
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pm.h",
+      "sha256": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+      "size": 2255
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmavio.h",
+      "sha256": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+      "size": 2069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmbitmap.h",
+      "sha256": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+      "size": 1851
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmdev.h",
+      "sha256": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+      "size": 8606
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmerr.h",
+      "sha256": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+      "size": 30095
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmfont.h",
+      "sha256": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+      "size": 3458
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmgpi.h",
+      "sha256": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+      "size": 49655
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmhelp.h",
+      "sha256": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+      "size": 11291
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmmle.h",
+      "sha256": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+      "size": 8802
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmord.h",
+      "sha256": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+      "size": 23140
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmpic.h",
+      "sha256": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+      "size": 691
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmshl.h",
+      "sha256": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+      "size": 14249
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmtypes.h",
+      "sha256": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+      "size": 9645
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmwin.h",
+      "sha256": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+      "size": 85827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\process.h",
+      "sha256": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+      "size": 2829
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\search.h",
+      "sha256": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+      "size": 1159
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\setjmp.h",
+      "sha256": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+      "size": 822
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\share.h",
+      "sha256": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+      "size": 450
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\signal.h",
+      "sha256": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+      "size": 2019
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdarg.h",
+      "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+      "size": 894
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stddef.h",
+      "sha256": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+      "size": 1254
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdio.h",
+      "sha256": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+      "size": 6047
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdlib.h",
+      "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+      "size": 6539
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\string.h",
+      "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+      "size": 4975
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\locking.h",
+      "sha256": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+      "size": 468
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\stat.h",
+      "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+      "size": 1330
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\timeb.h",
+      "sha256": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+      "size": 827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\types.h",
+      "sha256": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+      "size": 734
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\utime.h",
+      "sha256": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+      "size": 968
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\time.h",
+      "sha256": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+      "size": 3069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\varargs.h",
+      "sha256": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b",
+      "size": 922
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    }
+  ],
+  "compiler_controls": {
+    "fixtures": {
+      "BYTE": {
+        "actual_communals": [
+          {
+            "count": 64,
+            "element_size": 1,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "BYTE_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "unsigned char far fd_50F6_0EB6[64];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/BYTE.OBJ",
+          "sha256": "5280e33419eca5bacae98a0f8eb0be7ca95789bcd5750cc10e87919d75cf8bea",
+          "size": 205
+        },
+        "source": {
+          "path": "work/source-only-dos/ant-histogram-v22/fixtures/BYTE.c",
+          "sha256": "c30030ef4056caf2d71056da191dbf051d1f2dca67ed1028ab60463d53376cb9",
+          "size": 36
+        }
+      },
+      "CRTGOOD": {
+        "actual_communals": [],
+        "actual_publics": [
+          {
+            "name": "_main",
+            "offset": 0,
+            "segment": "CRTGOOD_TEXT"
+          }
+        ],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 249,
+            "name": "CRTGOOD_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 95,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 2,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": null,
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/CRTGOOD.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        "source": {
+          "path": "work/source-only-dos/ant-histogram-v22/fixtures/CRTGOOD.c",
+          "sha256": "abf79293185ae02e36bbc8813d197a0ced194640fa34b269f11c1ced14db4a18",
+          "size": 1083
+        }
+      },
+      "CRTSIGNED": {
+        "actual_communals": [],
+        "actual_publics": [
+          {
+            "name": "_main",
+            "offset": 0,
+            "segment": "CRTSIGN_TEXT"
+          }
+        ],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 51,
+            "name": "CRTSIGN_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 60,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 2,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": null,
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/CRTSIGN.OBJ",
+          "sha256": "fe28633fe83d44d5cbc9c927ad730a24cdc9de5835994e743aad4d6a92bcdf8b",
+          "size": 450
+        },
+        "source": {
+          "path": "work/source-only-dos/ant-histogram-v22/fixtures/CRTSIGN.c",
+          "sha256": "aa9da4eb2d5c08710a4c3055c8ba4b295487397dc2e12a7a41c5e3f909c07ed8",
+          "size": 411
+        }
+      },
+      "INITIALIZED": {
+        "actual_communals": [],
+        "actual_publics": [
+          {
+            "name": "_fd_50F6_0EB6",
+            "offset": 0,
+            "segment": "INIT5_DATA"
+          }
+        ],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "INIT_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          },
+          {
+            "alignment": "paragraph",
+            "big": false,
+            "class": "FAR_DATA",
+            "combine": "public",
+            "index": 5,
+            "length": 64,
+            "name": "INIT5_DATA"
+          }
+        ],
+        "declaration": "int far fd_50F6_0EB6[32] = { 0x1357 };",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/INIT.OBJ",
+          "sha256": "ed1cdb7e8c51abec8651c8ede2f3f146da6500d6118243812d16a11a1a533bee",
+          "size": 259
+        },
+        "source": {
+          "path": "work/source-only-dos/ant-histogram-v22/fixtures/INIT.c",
+          "sha256": "608d1adec4bdbb901003e99902e797ae9bdbdb0fcc5ba2654def428242ee37c6",
+          "size": 39
+        },
+        "initialized_segments_hex": {
+          "INIT5_DATA": "57130000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      },
+      "OWNER": {
+        "actual_communals": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "OWNER_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "int far fd_50F6_0EB6[32];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        "source": {
+          "path": "work/source-only-dos/ant-histogram-v22/fixtures/OWNER.c",
+          "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+          "size": 190
+        }
+      },
+      "SHORT": {
+        "actual_communals": [
+          {
+            "count": 31,
+            "element_size": 2,
+            "kind": "far",
+            "length": 62,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "SHORT_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "int far fd_50F6_0EB6[31];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/SHORT.OBJ",
+          "sha256": "c733779dcbf4841932caa2b72f27b9fb1c02258123783242560ec2604e0c697d",
+          "size": 207
+        },
+        "source": {
+          "path": "work/source-only-dos/ant-histogram-v22/fixtures/SHORT.c",
+          "sha256": "62730b869233c0a71830582e236ab493d5001e6aca609fe22f11e6b84996f86d",
+          "size": 26
+        }
+      },
+      "UNSIGNED": {
+        "actual_communals": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "UNSIGNED_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "unsigned int far fd_50F6_0EB6[32];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/UNSIGNED.OBJ",
+          "sha256": "9e232519a3bfa2349713e450bea625096646775c58b9f66e742670df8812ab37",
+          "size": 213
+        },
+        "source": {
+          "path": "work/source-only-dos/ant-histogram-v22/fixtures/UNSIGNED.c",
+          "sha256": "b0125b5671a53c5d4947506c99274d625c5e713021ca10805ffc9633649feea8",
+          "size": 35
+        }
+      }
+    },
+    "msc_profile_and_flags": true,
+    "omf": {
+      "byte_width_negative": [
+        {
+          "count": 64,
+          "element_size": 1,
+          "kind": "far",
+          "length": 64,
+          "name": "_fd_50F6_0EB6",
+          "type_index": 0
+        }
+      ],
+      "candidate": {
+        "actual_omf": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "count": 32,
+        "element_size": 2,
+        "kind": "far",
+        "length": 64
+      },
+      "initialized_owner_negative": {
+        "actual_commons": [],
+        "actual_far_data_segments": [
+          {
+            "alignment": "paragraph",
+            "big": false,
+            "class": "FAR_DATA",
+            "combine": "public",
+            "index": 5,
+            "length": 64,
+            "name": "INIT5_DATA"
+          }
+        ],
+        "actual_publics": [
+          {
+            "name": "_fd_50F6_0EB6",
+            "offset": 0,
+            "segment": "INIT5_DATA"
+          }
+        ],
+        "rejected_by_crt_zero_runtime_control": true
+      },
+      "short_extent_negative": [
+        {
+          "count": 31,
+          "element_size": 2,
+          "kind": "far",
+          "length": 62,
+          "name": "_fd_50F6_0EB6",
+          "type_index": 0
+        }
+      ],
+      "unsigned_type_control": {
+        "actual_omf": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "resolution": "signedness is pinned by canonical extern and natural-C provider source declarations",
+        "same_abi_shape_as_signed_int": true,
+        "signedness_encoded_in_omf": false
+      }
+    },
+    "rtlink_profiles": [
+      "rtlink400",
+      "rtlink610"
+    ],
+    "runtime_case_count": 8
+  },
+  "omf_controls": {
+    "byte_width_negative": [
+      {
+        "count": 64,
+        "element_size": 1,
+        "kind": "far",
+        "length": 64,
+        "name": "_fd_50F6_0EB6",
+        "type_index": 0
+      }
+    ],
+    "candidate": {
+      "actual_omf": [
+        {
+          "count": 32,
+          "element_size": 2,
+          "kind": "far",
+          "length": 64,
+          "name": "_fd_50F6_0EB6",
+          "type_index": 0
+        }
+      ],
+      "count": 32,
+      "element_size": 2,
+      "kind": "far",
+      "length": 64
+    },
+    "initialized_owner_negative": {
+      "actual_commons": [],
+      "actual_far_data_segments": [
+        {
+          "alignment": "paragraph",
+          "big": false,
+          "class": "FAR_DATA",
+          "combine": "public",
+          "index": 5,
+          "length": 64,
+          "name": "INIT5_DATA"
+        }
+      ],
+      "actual_publics": [
+        {
+          "name": "_fd_50F6_0EB6",
+          "offset": 0,
+          "segment": "INIT5_DATA"
+        }
+      ],
+      "rejected_by_crt_zero_runtime_control": true
+    },
+    "short_extent_negative": [
+      {
+        "count": 31,
+        "element_size": 2,
+        "kind": "far",
+        "length": 62,
+        "name": "_fd_50F6_0EB6",
+        "type_index": 0
+      }
+    ],
+    "unsigned_type_control": {
+      "actual_omf": [
+        {
+          "count": 32,
+          "element_size": 2,
+          "kind": "far",
+          "length": 64,
+          "name": "_fd_50F6_0EB6",
+          "type_index": 0
+        }
+      ],
+      "resolution": "signedness is pinned by canonical extern and natural-C provider source declarations",
+      "same_abi_shape_as_signed_int": true,
+      "signedness_encoded_in_omf": false
+    }
+  },
+  "source_limits": {
+    "separate_overflow_frontier": {
+      "fd_50F6_04C2_indices": "The expressions fd_50F6_04C2 >> 3 and (fd_50F6_04C2 | 0x80) >> 3 have no bound established here; no malformed-input or index-safety claim is made.",
+      "list_byte_indices": "CountAnts skips zero and shifts unsigned-byte values 1..255 to indexes 0..31.",
+      "signedness": "Natural C source and canonical extern both use signed int. MSC OMF common records do not encode signedness; the unsigned-view fixture is a runtime consumer-type contrast only."
+    },
+    "claims": [
+      "one source-functional signed int far[32] object only",
+      "no historical defining TU, object order, original absolute placement, or initializer claim",
+      "no malformed-index safety or bound claim for fd_50F6_04C2-derived expressions",
+      "OMF common records do not encode signedness; natural-C provider declaration pins signed int"
+    ]
+  },
+  "save_rec_pointer_fixups": []
+}

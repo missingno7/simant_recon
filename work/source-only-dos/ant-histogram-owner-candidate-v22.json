@@ -1,0 +1,68 @@
+{
+  "schema": "simant-dos-source-storage-candidate-v22",
+  "category": "SOURCE_FUNCTIONAL_STORAGE_CANDIDATE",
+  "root_reviewed": false,
+  "candidate_checks_pass": true,
+  "module": "source-owned:ant-class-histogram",
+  "provider": {
+    "path": "work/source-only-dos/providers/ant-class-histogram.c",
+    "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+    "basename": "ANTCOUNT",
+    "owner": null,
+    "compiler_profile": "msc600ax",
+    "flags": ["/AL", "/Os", "/Gs"],
+    "source_declaration": "int far fd_50F6_0EB6[32];",
+    "communals": [
+      {
+        "name": "_fd_50F6_0EB6",
+        "kind": "far",
+        "count": 32,
+        "element_size": 2,
+        "length": 64
+      }
+    ],
+    "historical_comdef_tu_or_order_claimed": false,
+    "historical_absolute_address_claimed": false,
+    "original_initializer_claimed": false
+  },
+  "source_audit": {
+    "probe": "work/source-only-dos/ant-histogram-owner-probe-v22.py",
+    "probe_sha256": "6b87f27d6c73da8f36a423aa999479bac1491d3807beff7bd8362ba662fdde8a",
+    "source_count": 156,
+    "canonical_modules": 127,
+    "strict_effective_sources": 29,
+    "named_reference_count": 21,
+    "named_reference_sources": ["src/root/m0BE8.c"],
+    "numeric_address_reference_count": 0,
+    "address_taken_or_save_table_escapes": 0,
+    "registered_names_inside_candidate_64_byte_interval": ["fd_50F6_0EB6"],
+    "source_audit_path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/source-audit.json",
+    "source_audit_sha256": "377551451f21473df2feefedc048762834124003cea3cd6cbffb00efd97a7498"
+  },
+  "runtime_proof": {
+    "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/candidate-receipt.json",
+    "sha256": "6f45d2d9b928e98a2dbf27d7c872db8d879c78cad08af38d3e5ea7d8dfd03c18",
+    "case_count": 8,
+    "passed_case_count": 8,
+    "required_cases": {
+      "positive_crt_zero_all_32_signed_words_raw_bytes": "PASS",
+      "wrong_test_base_plus_one_word": "REJECTED_BASE",
+      "wrong_initialized_data_owner": "REJECTED_CRT_ZERO",
+      "wrong_unsigned_consumer_view": "REJECTED_UNSIGNED_VIEW"
+    },
+    "linkers": ["rtlink400", "rtlink610"]
+  },
+  "object_controls": {
+    "short_signed_int[31]": "62-byte FAR COMDEF; rejected by OMF extent",
+    "unsigned_char[64]": "64-byte FAR COMDEF with 64 one-byte elements; rejected by OMF width/count",
+    "unsigned_int[32]": "same OMF shape as int[32]; signedness must be pinned by source and is not a runtime/OMF distinction",
+    "initialized_int[32]": "initialized FAR_DATA/PUBDEF replaces the uninitialized FAR COMDEF; CRT-zero negative run rejects it"
+  },
+  "limits": [
+    "CountAnts clears all 32 words before ordinary bucket use, but no original pre-main value is claimed.",
+    "Unsigned-char list values map to indexes 0..31 after zero is skipped; the fd_50F6_04C2-derived expressions have no bound proven by this storage audit.",
+    "No historical object ownership, TU order, absolute FAR_BSS placement, adjacent-owner relation, or original initialization is claimed.",
+    "Runtime aliases are test-owned and relative to each fixture; no adjacency or original layout conclusion follows from them."
+  ],
+  "input_policy": "Canonical and selected strict-effective source text, manifests, tool metadata, pinned MSC/RTLink/CRT inputs, and generated test fixtures only; no original executable or original data bytes."
+}

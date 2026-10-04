@@ -8,11 +8,11 @@ reviewed behavioral bodies, followed by DOSBox-X integration checks and human
 acceptance. Earlier historical-link and SDL3 next actions below are retained
 research history and do not supersede this priority.
 
-**Current SOURCE_ONLY_DOS checkpoint (v21, 2026-10-04):** the strict static audit covers all 29
+**Current SOURCE_ONLY_DOS checkpoint (v22, 2026-10-04):** the strict static audit covers all 29
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The v21 source-only build compiles 127 canonical TUs plus 37 data-only
+unresolved. The v22 source-only build compiles 127 canonical TUs plus 38 data-only
 providers. The seven-slot input queue, reviewed FAR word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
@@ -22,7 +22,8 @@ monochrome prefix, clip-pointer views and twelve lion/sow/pillar objects are
 source-owned. The paired `g_5A9C` SEG now targets DGROUP, with whole-object and
 shifted-group controls; its data remains unresolved. Six spider control words,
 five Point objects, four 124-byte database records and four signed handle words
-also have source owners. The two database returning-Punt layout gates remain open.
+also have source owners. The two database returning-Punt layout gates remain open: ordinary returns from
+early zero callbacks continue to fatal exit; their actual execution remains unproved.
 Serialized swarm buffers and population vectors now have complete saved-span
 owners; another S01 pattern read binds symbolically to its existing bank. A
 12-byte FAR_DATA paragraph gap is discharged as linker fill, with no added object.
@@ -33,8 +34,11 @@ complete source-owned views; every measured extent, runtime result and map alias
 mandatory under both linkers. The parser accepts `/s9` outside its nine-entry sound
 tables: a data-as-code call and conditional cross-TU cleanup overread remain an
 explicit layout gate, without a clamp or fabricated slot.
-There are 231 missing data imports (226 FAR_BSS and five
-storage/reachability cases), 66 functional data-disposition bytes (113 historical bytes) and an open wider address/
+The CountAnts histogram now has its explicit 32-word source owner. Four already
+owned clip-pointer bytes are discharged from functional data accounting; the
+Rect/list sentinel and computed-copy gates remain open.
+There are 230 missing data imports (225 FAR_BSS and five
+storage/reachability cases), 62 functional data-disposition bytes (113 historical bytes) and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is
 `work/source-only-dos/current-intake.json`; exact canonical ownership is unchanged.

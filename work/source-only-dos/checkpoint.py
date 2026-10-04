@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 164 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 165 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v21.log',
-        'build/source-only-dos-tests-v21-combined.log', 'build/source-only-dos-validation-v21.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v22.log',
+        'build/source-only-dos-tests-v22-final.log', 'build/source-only-dos-validation-v22.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not re.search(r'(?m)^OK(?: \(skipped=2\))?$', test_log):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [48, 314] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 2:
-        raise ValueError('split repository test boundary is incomplete')
+    if test_counts != [363] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
+        raise ValueError('repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': '3a71dd9',
+        'source_only_base_checkpoint': 'd246d2d',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -160,6 +160,10 @@ def main():
         'v21_owner_bindings': [pin(OUT / (name + '-bindings-v1.json')) for name in
             ('sound-record-arrays', 'ant-movement-words', 'world-output-state', 'history-scalar-state')],
         'storage_admission_v21': pin(OUT / 'storage-admission-v21.md'),
+        'histogram_binding_v22': pin(OUT / 'ant-class-histogram-bindings-v1.json'),
+        'histogram_admission_v22': pin(OUT / 'ant-histogram-admission-v22.md'),
+        'clip_pointer_disposition_v22': pin(OUT / 'clip-pointer-data-disposition-v22.json'),
+        'database_layout_review_v22': pin(OUT / 'database-layout-review-v22/root-review.md'),
         'scalar_storage_admission_v21': pin(OUT / 'scalar-storage-admission-v21.md'),
         'sound_selector_layout_review_v21': pin(OUT / 'sound-selector-layout-review-v21.json'),
         's01_pattern_view_bindings': pin(OUT / 's01-pattern-4220-bindings-v1.json'),
@@ -189,7 +193,9 @@ def main():
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
         'historical_validation': 'PASS',
-        'source_only_tests': f'48 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'mandatory_evidence_gates_v22': pin(ROOT / 'build/source-only-dos-gates-v22.log'),
+        'histogram_raw_acceptance_v22': pin(ROOT / 'build/source-only-dos-histogram-raw-acceptance-v22-verified.log'),
+        'source_only_tests': f'49 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

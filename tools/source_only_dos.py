@@ -182,6 +182,14 @@ def prepare(out, report):
         report['inputs'].append(pin(path if path.is_absolute() else ROOT / path, item['sha256'])[1])
     report['inputs'].append(identity)
     report['far_data_alignment_contract'] = alignment
+    raw, identity = pin(ROOT / 'work/source-only-dos/clip-pointer-data-disposition-v22.json')
+    disposition = json.loads(raw)
+    if disposition.get('root_reviewed') is not True or disposition.get('historical_data_debt_modified') is not False:
+        raise ValueError('unreviewed functional clip-pointer data disposition')
+    report['inputs'].append(identity)
+    for item in disposition['review_inputs']:
+        report['inputs'].append(pin(ROOT / item['path'], item['sha256'])[1])
+    report['clip_pointer_data_disposition'] = disposition
     bindings = {}
     binding_origins = {}
     providers = []
@@ -224,6 +232,7 @@ def prepare(out, report):
                      'ant-movement-words-bindings-v1.json',
                      'world-output-state-bindings-v1.json',
                      'history-scalar-state-bindings-v1.json',
+                     'ant-class-histogram-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -707,6 +716,53 @@ def accept_binding_checks(report):
                 'module': 'source-owned:display-mode-selector',
                 'proof': 'Reviewed source first-write dominance plus real config-producer/CRT tests; original initializer unobserved.',
                 'scope_limit': 'Other shared UI bytes, Rect sentinel and computed-copy layout remain unresolved.'}]
+        accept_clip_pointer_data(report)
+
+
+def accept_clip_pointer_data(report):
+    """Account for an already admitted pointer without closing its pointee debt."""
+    module = 'source-owned:clip-pointer'
+    owners = [r for r in report['translation_units'] if r.get('module') == module]
+    if not owners:
+        return
+    expected = [{'name': '_g_5AAC', 'kind': 'near', 'length': 4}]
+    if (len(owners) != 1 or owners[0].get('provider_verification') != {
+            'status': 'PASS', 'data_only': True, 'live_initialized_bytes': 0,
+            'code_bytes': 0, 'communals': expected, 'publics': [], 'fixups': []}):
+        return  # An uncompiled or incomplete proof cannot discharge data debt.
+    disposition = report.get('clip_pointer_data_disposition', {})
+    accepted = [{'id': 'dgroup_5a96', 'offset': 22, 'size': 4, 'module': module,
+        'owner': '_g_5AAC', 'view': '_g_5AAE', 'view_offset': 2, 'view_size': 2,
+        'new_residual_ranges': [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}]}]
+    if (disposition.get('root_reviewed') is not True or disposition.get('accepted') != accepted
+            or disposition.get('historical_data_debt_modified') is not False):
+        raise ValueError('clip-pointer data disposition lacks its bounded root decision')
+    contract = report.get('clip_pointer_contract', {})
+    required = {'positive_communal_alias_plus2': 'PASS', 'wrong_alias_plus0': 'FAIL',
+                'nonzero_initializer': 'FAIL'}
+    if contract.get('required_cases') != required:
+        raise ValueError('clip-pointer data disposition lacks its exact controls')
+    for profile in ('rtlink400', 'rtlink610'):
+        dos_source_bindings.require_provider_contracts(report, profile,
+            compiler.toolchain()['linkers'][profile], [(module, 'clip_pointer_contract', 2)])
+    state = report.setdefault('resolved_source_state', [])
+    shared = next(r for r in report['unresolved_data'] if r['id'] == 'dgroup_5a96')
+    resolution = {'id': 'dgroup_5a96', 'offset': 22, 'size': 4, 'module': module,
+        'proof': 'Reviewed typed pointer and +2 segment-word view, whole data-only object and both RTLink/MSC startup controls.',
+        'contract': 'work/source-only-dos/clip-pointer-contract-v1.json',
+        'scope_limit': 'Only functional pointer storage; historical ledger, Rect/sentinel and computed-copy layout remain unresolved.'}
+    previous = [r for r in state if r.get('module') == module]
+    if previous:
+        if (previous != [resolution] or shared['size'] != 21 or shared.get('residual_ranges') !=
+                [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}]):
+            raise ValueError('clip-pointer data disposition recorded state changed')
+        return
+    if (shared['size'] != 25 or shared.get('residual_ranges') !=
+            [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 24}]):
+        raise ValueError('clip-pointer data disposition residual inventory changed')
+    shared['size'] = 21
+    shared['residual_ranges'] = [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}]
+    state.append(resolution)
 
 
 def unresolved_symbols(out, report, symbols, manifest):
@@ -835,6 +891,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v19_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v20_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v21_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v22_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)

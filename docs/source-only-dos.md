@@ -627,3 +627,43 @@ new owner families) and the alignment gate pass under both RTLink profiles.
 The sound-record replay wrapper passed all sixteen fresh component cases while
 preserving the admitted outputs. Research compile contexts remain distinct from
 the separately checked production provider context.
+
+
+## v22: histogram ownership and bounded clip-pointer accounting
+
+`CountAnts` now has its complete source-derived `int far[32]` histogram,
+64 bytes, with data-only COMDEF validation and startup/typed/raw, shifted-base,
+initializer and unsigned-view controls under both RTLinks. The full clear loop
+and all consumers establish this owner; neighboring addresses are not an extent
+source. The two special-selector indexes remain unchecked. See the
+[admission](../work/source-only-dos/ant-histogram-admission-v22.md).
+
+The existing four-byte `g_5AAC` far pointer and `g_5AAE` segment-word view are now
+removed from functional unowned-data accounting only after actual whole-provider
+and both-linker startup/alias evidence. No storage was added. The unknown Rect
+fields, static sentinel and copy/layout dependencies remain open. The historical
+113-byte ledger is unchanged. See the
+[bounded disposition](../work/source-only-dos/clip-pointer-data-disposition-v22.md).
+
+The refreshed database review separates ordinary callback returns from execution
+of invalid zero far targets before display initialization. Ordinary ABI-preserving
+returns continue to unconditional fatal exit; no actual early-return counterexample
+is claimed. Both database layout gates remain unresolved. The
+[root review and continuation addendum](../work/source-only-dos/database-layout-review-v22/root-review.md)
+preserve the earlier observations and correct their wording.
+
+Preflight compiles 165 TUs (127 canonical plus 38 providers), with 230 remaining
+imports: 225 FAR_BSS and the five unresolved cases from the original 46-case
+DGROUP inventory. Functional data debt is 62 bytes. All 29 strict effective
+implementations remain confirmed, original-byte counters remain zero, and the
+wider address/frame and five layout gates remain open. Independent linking is
+refused, game runtime has not run, and human acceptance remains pending.
+
+Four further storage families are under root review; their worker probes do not
+change these accepted counts. SDL3 remains paused until the standalone DOS
+milestone and human acceptance.
+
+This boundary passed 363 repository tests (two skips), including 49 source-only
+tests, canonical validation, and all 22 mandatory evidence gates plus alignment
+under both RTLinks. The root raw histogram check reopened all 104 preserved
+artifacts and independently decoded all seven compiler fixtures.

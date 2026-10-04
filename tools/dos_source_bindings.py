@@ -616,6 +616,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V19_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V20_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V21_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V22_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -623,7 +624,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -1886,3 +1887,120 @@ def _require_v21_scalar_controls(report, profile):
                         or relation.get('name_target')!=matrix['Name'][target]
                         or relation.get('value_target')!=matrix['Value'][target]):
                     raise ValueError('v21 scalar alias displacement/address disagrees')
+
+
+# Source-derived CountAnts histogram; no historical placement claim.
+PROVIDER_SPECS['source-owned:ant-class-histogram'] = ('ANTCOUNT', None,
+    (('_fd_50F6_0EB6', 64),), 'int far fd_50F6_0EB6[32];')
+FAR_PROVIDER_MODULES.add('source-owned:ant-class-histogram')
+FAR_PROVIDER_WORD_ARRAYS['source-owned:ant-class-histogram'] = {'_fd_50F6_0EB6'}
+V22_STORAGE_ANCHORS = {'_fd_50F6_0EB6': (0x0EB6, ('fd_50F6_0EB6',))}
+V22_STORAGE_CONTRACTS = {'source-owned:ant-class-histogram': ('ant_class_histogram_contract', {
+    'positive_crt_zero_all_32_signed_words_raw_bytes': 'PASS',
+    'wrong_test_base_plus_one_word': 'REJECTED_BASE',
+    'wrong_initialized_data_owner': 'REJECTED_CRT_ZERO',
+    'wrong_unsigned_consumer_view': 'REJECTED_UNSIGNED_VIEW'})}
+
+def _communal(name: str, count: int, element_size: int) -> dict:
+    return {"count": count, "element_size": element_size, "kind": "far",
+            "length": count * element_size, "name": name, "type_index": 0}
+
+
+def _segments(text_name: str, text_size: int, data_size: int,
+              const_size: int, far_data: tuple[str, int] | None = None) -> list[dict]:
+    rows = [(text_name, "CODE", text_size, "word"), ("_DATA", "DATA", data_size, "word"),
+            ("CONST", "CONST", const_size, "word"), ("_BSS", "BSS", 0, "word")]
+    if far_data:
+        rows.append((far_data[0], "FAR_DATA", far_data[1], "paragraph"))
+    return [{"alignment": a, "big": False, "class": c, "combine": "public",
+             "index": i, "length": n, "name": s}
+            for i, (s, c, n, a) in enumerate(rows, 1)]
+
+
+def _fixture(declaration, communals, publics, segments):
+    return {"declaration": declaration, "actual_communals": communals,
+            "actual_publics": publics, "actual_segments": segments}
+
+
+# OMF summary literals only. Deliberately omit each fixture's ignored OBJ/EXE
+# artifact pin; production build admission must not need historical binaries.
+HIST_OMF_FIXTURES = {
+    "BYTE": _fixture("unsigned char far fd_50F6_0EB6[64];",
+        [_communal("_fd_50F6_0EB6", 64, 1)], [], _segments("BYTE_TEXT", 0, 0, 0)),
+    "CRTGOOD": _fixture(None, [], [{"name": "_main", "offset": 0, "segment": "CRTGOOD_TEXT"}],
+        _segments("CRTGOOD_TEXT", 249, 95, 2)),
+    "CRTSIGNED": _fixture(None, [], [{"name": "_main", "offset": 0, "segment": "CRTSIGN_TEXT"}],
+        _segments("CRTSIGN_TEXT", 51, 60, 2)),
+    "INITIALIZED": _fixture("int far fd_50F6_0EB6[32] = { 0x1357 };", [],
+        [{"name": "_fd_50F6_0EB6", "offset": 0, "segment": "INIT5_DATA"}],
+        _segments("INIT_TEXT", 0, 0, 0, ("INIT5_DATA", 64))),
+    "OWNER": _fixture("int far fd_50F6_0EB6[32];",
+        [_communal("_fd_50F6_0EB6", 32, 2)], [], _segments("OWNER_TEXT", 0, 0, 0)),
+    "SHORT": _fixture("int far fd_50F6_0EB6[31];",
+        [_communal("_fd_50F6_0EB6", 31, 2)], [], _segments("SHORT_TEXT", 0, 0, 0)),
+    "UNSIGNED": _fixture("unsigned int far fd_50F6_0EB6[32];",
+        [_communal("_fd_50F6_0EB6", 32, 2)], [], _segments("UNSIGNED_TEXT", 0, 0, 0)),
+}
+def require_v22_storage_contracts(report, profile, tool):
+    """Check reviewed evidence metadata; ignored probe binaries are not build inputs."""
+    _require_reviewed_storage_contracts(report, profile, tool, V22_STORAGE_CONTRACTS)
+    _require_clean_owner_maps(report, profile, V22_STORAGE_CONTRACTS)
+    module = 'source-owned:ant-class-histogram'
+    if not any(r['module'] == module for r in report['translation_units']):
+        return
+    contract = report['ant_class_histogram_contract']
+    fixtures = contract.get('compiler_controls', {}).get('fixtures', {})
+    if set(fixtures) != set(HIST_OMF_FIXTURES) or contract.get('save_rec_pointer_fixups') != []:
+        raise ValueError('histogram compiler control or source-escape matrix changed')
+    for name, wanted in HIST_OMF_FIXTURES.items():
+        if {k: fixtures[name].get(k) for k in wanted} != wanted:
+            raise ValueError('histogram measured compiler shape changed')
+    if fixtures['INITIALIZED'].get('initialized_segments_hex') != {'INIT5_DATA': '5713' + '00'*62}:
+        raise ValueError('histogram initializer contrast changed')
+    required = V22_STORAGE_CONTRACTS[module][1]
+    rows = contract['cases']
+    pairs = [(r.get('linker'), r.get('case')) for r in rows]
+    if (len(pairs) != 8 or set(pairs) != {(p, c) for p in ('rtlink400', 'rtlink610') for c in required}):
+        raise ValueError('histogram complete linker/case matrix changed')
+    names = {'_fd_50f6_0eb6', '_histogramprobealias'}
+    for row in rows:
+        if row['linker'] != profile:
+            continue
+        raw = (required[row['case']] + '\r\n').encode('ascii')
+        digest = hashlib.sha256(raw).hexdigest()
+        if (row.get('runner_returncode') != 0 or row.get('timed_out') is not False
+                or row.get('all_required_publics_in_both_sections') is not True
+                or row.get('save_rec_pointer_fixups') != []
+                or any(row.get(k) != raw.decode('ascii') for k in ('expected_marker_verbatim', 'actual_marker_verbatim'))
+                or any(row.get(k) != raw.hex() for k in ('expected_marker_bytes_hex', 'actual_marker_bytes_hex'))
+                or any(row.get(k) != digest for k in ('expected_marker_sha256', 'actual_marker_sha256'))
+                or row.get('run_log_pin', {}).get('sha256') != digest
+                or row.get('run_log_pin', {}).get('size') != len(raw)):
+            raise ValueError('histogram lacks complete raw execution evidence')
+        sections = row.get('map_public_sections', {})
+        matrix = row.get('public_address_matrix', {})
+        if (set(sections) != {'Name', 'Value'} or set(matrix) != {'Name', 'Value'}
+                or any(s.get('heading_present') is not True or s.get('missing_required_publics') != []
+                       for s in sections.values())
+                or any(set(m) != names for m in matrix.values()) or matrix['Name'] != matrix['Value']):
+            raise ValueError('histogram lacks both complete public address matrices')
+        delta = 2 if row['case'] == 'wrong_test_base_plus_one_word' else 0
+        relations = row.get('alias_map_relations', [])
+        if len(relations) != 2 or {r.get('section') for r in relations} != {'Name', 'Value'}:
+            raise ValueError('histogram alias relations missing or duplicated')
+        for relation in relations:
+            public = matrix[relation['section']]
+            target = public['_fd_50f6_0eb6']; alias = public['_histogramprobealias']
+            try:
+                tseg, toff = (int(n, 16) for n in target.split(':'))
+                aseg, aoff = (int(n, 16) for n in alias.split(':'))
+            except (ValueError, AttributeError):
+                raise ValueError('histogram public address malformed')
+            if (tseg != aseg or aoff != toff + delta
+                    or relation.get('alias') != '_histogramprobealias'
+                    or relation.get('target') != '_fd_50f6_0eb6'
+                    or relation.get('expected_offset_delta') != delta
+                    or relation.get('observed_offset_delta') != delta
+                    or relation.get('alias_address') != alias or relation.get('target_address') != target
+                    or relation.get('same_segment') is not True or relation.get('passed') is not True):
+                raise ValueError('histogram measured alias geometry changed')

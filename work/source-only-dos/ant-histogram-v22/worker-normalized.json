@@ -1,0 +1,4100 @@
+{
+  "adapter": {
+    "path": "build/workers/dos_ant_histogram_v22/parent-admission-check-v22.py",
+    "sha256": "91a86c9a523c16f7926b6f383affbf9bb7c3beb2e4acde6ecd2dab2ffa21a0b2",
+    "size": 26135
+  },
+  "admission_status": "PARENT_REVIEW_PENDING",
+  "all_technical_checks_pass": true,
+  "cases": [
+    {
+      "alias_delta_bytes": 0,
+      "case": "positive_crt_zero_all_32_signed_words_raw_bytes",
+      "linker": "rtlink400",
+      "name_and_value_sections_match": true,
+      "output": "PASS",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "01F2",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0000",
+        "segment": "01F2",
+        "state": "Res"
+      }
+    },
+    {
+      "alias_delta_bytes": 2,
+      "case": "wrong_test_base_plus_one_word",
+      "linker": "rtlink400",
+      "name_and_value_sections_match": true,
+      "output": "REJECTED_BASE",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "01F2",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0002",
+        "segment": "01F2",
+        "state": "Res"
+      }
+    },
+    {
+      "alias_delta_bytes": 0,
+      "case": "wrong_initialized_data_owner",
+      "linker": "rtlink400",
+      "name_and_value_sections_match": true,
+      "output": "REJECTED_CRT_ZERO",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "01F2",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0000",
+        "segment": "01F2",
+        "state": "Res"
+      }
+    },
+    {
+      "alias_delta_bytes": 0,
+      "case": "wrong_unsigned_consumer_view",
+      "linker": "rtlink400",
+      "name_and_value_sections_match": true,
+      "output": "REJECTED_UNSIGNED_VIEW",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "01E6",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0000",
+        "segment": "01E6",
+        "state": "Res"
+      }
+    },
+    {
+      "alias_delta_bytes": 0,
+      "case": "positive_crt_zero_all_32_signed_words_raw_bytes",
+      "linker": "rtlink610",
+      "name_and_value_sections_match": true,
+      "output": "PASS",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "0233",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0000",
+        "segment": "0233",
+        "state": "Res"
+      }
+    },
+    {
+      "alias_delta_bytes": 2,
+      "case": "wrong_test_base_plus_one_word",
+      "linker": "rtlink610",
+      "name_and_value_sections_match": true,
+      "output": "REJECTED_BASE",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "0233",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0002",
+        "segment": "0233",
+        "state": "Res"
+      }
+    },
+    {
+      "alias_delta_bytes": 0,
+      "case": "wrong_initialized_data_owner",
+      "linker": "rtlink610",
+      "name_and_value_sections_match": true,
+      "output": "REJECTED_CRT_ZERO",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "0233",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0000",
+        "segment": "0233",
+        "state": "Res"
+      }
+    },
+    {
+      "alias_delta_bytes": 0,
+      "case": "wrong_unsigned_consumer_view",
+      "linker": "rtlink610",
+      "name_and_value_sections_match": true,
+      "output": "REJECTED_UNSIGNED_VIEW",
+      "passed": true,
+      "raw_artifacts_checked": 13,
+      "target_public": {
+        "offset": "0000",
+        "segment": "0227",
+        "state": "Res"
+      },
+      "test_alias_public": {
+        "offset": "0000",
+        "segment": "0227",
+        "state": "Res"
+      }
+    }
+  ],
+  "category": "SOURCE_STORAGE_CONTRACT_CANDIDATE",
+  "communals": [
+    {
+      "count": 32,
+      "element_size": 2,
+      "kind": "far",
+      "length": 64,
+      "name": "_fd_50f6_0eb6"
+    }
+  ],
+  "compiler_controls": {
+    "fixtures": {
+      "BYTE": {
+        "actual_communals": [
+          {
+            "count": 64,
+            "element_size": 1,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "BYTE_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "unsigned char far fd_50F6_0EB6[64];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/BYTE.OBJ",
+          "sha256": "5280e33419eca5bacae98a0f8eb0be7ca95789bcd5750cc10e87919d75cf8bea",
+          "size": 205
+        },
+        "source": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/BYTE.c",
+          "sha256": "c30030ef4056caf2d71056da191dbf051d1f2dca67ed1028ab60463d53376cb9",
+          "size": 36
+        }
+      },
+      "CRTGOOD": {
+        "actual_communals": [],
+        "actual_publics": [
+          {
+            "name": "_main",
+            "offset": 0,
+            "segment": "CRTGOOD_TEXT"
+          }
+        ],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 249,
+            "name": "CRTGOOD_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 95,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 2,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": null,
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/CRTGOOD.OBJ",
+          "sha256": "48833bdd2a8b9740f0b584067bad95ad949a6544a8e1d169ff1f7c1d272905b8",
+          "size": 718
+        },
+        "source": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/CRTGOOD.c",
+          "sha256": "abf79293185ae02e36bbc8813d197a0ced194640fa34b269f11c1ced14db4a18",
+          "size": 1083
+        }
+      },
+      "CRTSIGNED": {
+        "actual_communals": [],
+        "actual_publics": [
+          {
+            "name": "_main",
+            "offset": 0,
+            "segment": "CRTSIGN_TEXT"
+          }
+        ],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 51,
+            "name": "CRTSIGN_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 60,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 2,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": null,
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/CRTSIGN.OBJ",
+          "sha256": "fe28633fe83d44d5cbc9c927ad730a24cdc9de5835994e743aad4d6a92bcdf8b",
+          "size": 450
+        },
+        "source": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/CRTSIGN.c",
+          "sha256": "aa9da4eb2d5c08710a4c3055c8ba4b295487397dc2e12a7a41c5e3f909c07ed8",
+          "size": 411
+        }
+      },
+      "INITIALIZED": {
+        "actual_communals": [],
+        "actual_publics": [
+          {
+            "name": "_fd_50F6_0EB6",
+            "offset": 0,
+            "segment": "INIT5_DATA"
+          }
+        ],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "INIT_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          },
+          {
+            "alignment": "paragraph",
+            "big": false,
+            "class": "FAR_DATA",
+            "combine": "public",
+            "index": 5,
+            "length": 64,
+            "name": "INIT5_DATA"
+          }
+        ],
+        "declaration": "int far fd_50F6_0EB6[32] = { 0x1357 };",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/INIT.OBJ",
+          "sha256": "ed1cdb7e8c51abec8651c8ede2f3f146da6500d6118243812d16a11a1a533bee",
+          "size": 259
+        },
+        "source": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/INIT.c",
+          "sha256": "608d1adec4bdbb901003e99902e797ae9bdbdb0fcc5ba2654def428242ee37c6",
+          "size": 39
+        }
+      },
+      "OWNER": {
+        "actual_communals": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "OWNER_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "int far fd_50F6_0EB6[32];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/OWNER.OBJ",
+          "sha256": "96877dd03d1fbb1e61773d532b6f98f931fbad63fe789c6fb394566b14b9f5b5",
+          "size": 207
+        },
+        "source": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/OWNER.c",
+          "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+          "size": 190
+        }
+      },
+      "SHORT": {
+        "actual_communals": [
+          {
+            "count": 31,
+            "element_size": 2,
+            "kind": "far",
+            "length": 62,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "SHORT_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "int far fd_50F6_0EB6[31];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/SHORT.OBJ",
+          "sha256": "c733779dcbf4841932caa2b72f27b9fb1c02258123783242560ec2604e0c697d",
+          "size": 207
+        },
+        "source": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/SHORT.c",
+          "sha256": "62730b869233c0a71830582e236ab493d5001e6aca609fe22f11e6b84996f86d",
+          "size": 26
+        }
+      },
+      "UNSIGNED": {
+        "actual_communals": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "actual_publics": [],
+        "actual_segments": [
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CODE",
+            "combine": "public",
+            "index": 1,
+            "length": 0,
+            "name": "UNSIGNED_TEXT"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "DATA",
+            "combine": "public",
+            "index": 2,
+            "length": 0,
+            "name": "_DATA"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "CONST",
+            "combine": "public",
+            "index": 3,
+            "length": 0,
+            "name": "CONST"
+          },
+          {
+            "alignment": "word",
+            "big": false,
+            "class": "BSS",
+            "combine": "public",
+            "index": 4,
+            "length": 0,
+            "name": "_BSS"
+          }
+        ],
+        "declaration": "unsigned int far fd_50F6_0EB6[32];",
+        "object": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/UNSIGNED.OBJ",
+          "sha256": "9e232519a3bfa2349713e450bea625096646775c58b9f66e742670df8812ab37",
+          "size": 213
+        },
+        "source": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/fixtures/UNSIGNED.c",
+          "sha256": "b0125b5671a53c5d4947506c99274d625c5e713021ca10805ffc9633649feea8",
+          "size": 35
+        }
+      }
+    },
+    "msc_profile_and_flags": true,
+    "omf": {
+      "byte_width_negative": [
+        {
+          "count": 64,
+          "element_size": 1,
+          "kind": "far",
+          "length": 64,
+          "name": "_fd_50F6_0EB6",
+          "type_index": 0
+        }
+      ],
+      "candidate": {
+        "actual_omf": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "count": 32,
+        "element_size": 2,
+        "kind": "far",
+        "length": 64
+      },
+      "initialized_owner_negative": {
+        "actual_commons": [],
+        "actual_far_data_segments": [
+          {
+            "alignment": "paragraph",
+            "big": false,
+            "class": "FAR_DATA",
+            "combine": "public",
+            "index": 5,
+            "length": 64,
+            "name": "INIT5_DATA"
+          }
+        ],
+        "actual_publics": [
+          {
+            "name": "_fd_50F6_0EB6",
+            "offset": 0,
+            "segment": "INIT5_DATA"
+          }
+        ],
+        "rejected_by_crt_zero_runtime_control": true
+      },
+      "short_extent_negative": [
+        {
+          "count": 31,
+          "element_size": 2,
+          "kind": "far",
+          "length": 62,
+          "name": "_fd_50F6_0EB6",
+          "type_index": 0
+        }
+      ],
+      "unsigned_type_control": {
+        "actual_omf": [
+          {
+            "count": 32,
+            "element_size": 2,
+            "kind": "far",
+            "length": 64,
+            "name": "_fd_50F6_0EB6",
+            "type_index": 0
+          }
+        ],
+        "resolution": "signedness is pinned by canonical extern and natural-C provider source declarations",
+        "same_abi_shape_as_signed_int": true,
+        "signedness_encoded_in_omf": false
+      }
+    },
+    "rtlink_profiles": [
+      "rtlink400",
+      "rtlink610"
+    ],
+    "runtime_case_count": 8
+  },
+  "input_pins": {
+    "preserved_probe_receipt": {
+      "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/candidate-receipt.json",
+      "sha256": "6f45d2d9b928e98a2dbf27d7c872db8d879c78cad08af38d3e5ea7d8dfd03c18",
+      "size": 72931
+    },
+    "probe_source": {
+      "path": "work/source-only-dos/ant-histogram-owner-probe-v22.py",
+      "sha256": "6b87f27d6c73da8f36a423aa999479bac1491d3807beff7bd8362ba662fdde8a",
+      "size": 27358
+    },
+    "provider_source": {
+      "path": "work/source-only-dos/providers/ant-class-histogram.c",
+      "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+      "size": 190
+    },
+    "source_scope": {
+      "canonical_source_count": 127,
+      "mismatches": 0,
+      "registry_pins": {
+        "evidence/behavior/manifest.json": {
+          "path": "evidence/behavior/manifest.json",
+          "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+          "size": 28379
+        },
+        "layout/manifest.json": {
+          "path": "layout/manifest.json",
+          "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+          "size": 628980
+        },
+        "layout/symbols.json": {
+          "path": "layout/symbols.json",
+          "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+          "size": 800809
+        },
+        "work/source-only-dos/static-completeness/index-v1.json": {
+          "path": "work/source-only-dos/static-completeness/index-v1.json",
+          "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+          "size": 6796
+        }
+      },
+      "source_audit": {
+        "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/source-audit.json",
+        "sha256": "377551451f21473df2feefedc048762834124003cea3cd6cbffb00efd97a7498",
+        "size": 56825
+      },
+      "source_pin_set_sha256": "5bd02ae492d8e12457d74441d866ea2a4a4c39aaf800859a15c5552eafdca785",
+      "strict_effective_source_count": 29,
+      "strict_receipt_count": 29,
+      "strict_receipt_pins": {
+        "DisplayCard": {
+          "path": "work/source-only-dos/static-completeness/DisplayCard.json",
+          "sha256": "a0be46440557ac606df28a451f62a228b3229a9ab04a10a56bbf374931ae841e",
+          "size": 51033
+        },
+        "DrawBalloons": {
+          "path": "work/source-only-dos/static-completeness/DrawBalloons.json",
+          "sha256": "7f86d2fe0e5b44300572c7115398d05c25799a3d03ba1e57dc0288242a8a91cc",
+          "size": 46914
+        },
+        "DrawMapCursor": {
+          "path": "work/source-only-dos/static-completeness/DrawMapCursor.json",
+          "sha256": "d40aac74106f86a115d56f01ca04c3aa6c98b6a1fa18306705490f92fce2e41a",
+          "size": 40582
+        },
+        "FindIndex": {
+          "path": "work/source-only-dos/static-completeness/FindIndex.json",
+          "sha256": "d9f61367df4d79b2bd07e284140b8c9a34db80dda5b1d4bceac7f31ffd6ec5fc",
+          "size": 14600
+        },
+        "InvertPatch": {
+          "path": "work/source-only-dos/static-completeness/InvertPatch.json",
+          "sha256": "8591af179c72f5f42457d64f7e84834c70381f7f00d3a164b165e480d88e214c",
+          "size": 41836
+        },
+        "LessonDone": {
+          "path": "work/source-only-dos/static-completeness/LessonDone.json",
+          "sha256": "4aae722737a8b4d52384a70ed51521158603871d4ef99139ba2a2b48d30046db",
+          "size": 41553
+        },
+        "SpiderScan": {
+          "path": "work/source-only-dos/static-completeness/SpiderScan.json",
+          "sha256": "17e0a3640c87bae41616cdbe3683b1ccc95e92ba193af072a3ba7e91705b4c89",
+          "size": 22880
+        },
+        "drawHistGraph": {
+          "path": "work/source-only-dos/static-completeness/drawHistGraph.json",
+          "sha256": "c611f04ff64c8a0ce969762670506fe2682a6ad697367c63011a1c18dc18a3a9",
+          "size": 91762
+        },
+        "f_0250_1018": {
+          "path": "work/source-only-dos/static-completeness/f_0250_1018.json",
+          "sha256": "b5fe86ea28f66ddca56f5936d17d4313789399f18209e5ddf0d15df35be22682",
+          "size": 29049
+        },
+        "f_0250_129E": {
+          "path": "work/source-only-dos/static-completeness/f_0250_129E.json",
+          "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80",
+          "size": 24394
+        },
+        "f_171C_09CC": {
+          "path": "work/source-only-dos/static-completeness/f_171C_09CC.json",
+          "sha256": "86eec4845d02974e8b6764fe5884360cb7da5a796a5cbbfed78e8a423f8ed5a8",
+          "size": 16862
+        },
+        "f_171C_0ADC": {
+          "path": "work/source-only-dos/static-completeness/f_171C_0ADC.json",
+          "sha256": "67a87d50fad0aec23795a8d29481a12db52f94a7f9b2e2ea7b66cbd5fcfd70ee",
+          "size": 18079
+        },
+        "f_171C_0CF4": {
+          "path": "work/source-only-dos/static-completeness/f_171C_0CF4.json",
+          "sha256": "b860fa8984346175477cf27005777a6af6580baf6bd2bfdcb78fe2e849562627",
+          "size": 17802
+        },
+        "f_171C_0FBC": {
+          "path": "work/source-only-dos/static-completeness/f_171C_0FBC.json",
+          "sha256": "179a08d1234950861fab6d162ea5f0a2c8b7d332f27c10c03c118216686b6e80",
+          "size": 27289
+        },
+        "f_1C62_0415": {
+          "path": "work/source-only-dos/static-completeness/f_1C62_0415.json",
+          "sha256": "b6494106b027cdc91f1f53c3afbf9d479853658f50bff8d975fda7eb6aa7de59",
+          "size": 33234
+        },
+        "f_1E57_038E": {
+          "path": "work/source-only-dos/static-completeness/f_1E57_038E.json",
+          "sha256": "c7977122410f6b0e80cac5b0317d55d2f4a04130bee0bd0f98d5a5de51a8a333",
+          "size": 26879
+        },
+        "f_20E8_0903": {
+          "path": "work/source-only-dos/static-completeness/f_20E8_0903.json",
+          "sha256": "01d26e670b47c645029865b37962a3b53a711b3c23ee6fd4f702345f20f00f8a",
+          "size": 15629
+        },
+        "f_23E6_0000": {
+          "path": "work/source-only-dos/static-completeness/f_23E6_0000.json",
+          "sha256": "93340ca87d10bd2679b9905d882bd7f2867edc17a692c50a1450230cc9540508",
+          "size": 14839
+        },
+        "f_2505_0453": {
+          "path": "work/source-only-dos/static-completeness/f_2505_0453.json",
+          "sha256": "ff8acbd9390b6f8ede9aa5ec465b37fb624de5bb80233521fac60f9c404f5c73",
+          "size": 18683
+        },
+        "f_2815_0165": {
+          "path": "work/source-only-dos/static-completeness/f_2815_0165.json",
+          "sha256": "f681fde7fd5100f7e18463f4798df0697b805f73b9796e73bb5a19c9e0f765ad",
+          "size": 17249
+        },
+        "f_284A_0138": {
+          "path": "work/source-only-dos/static-completeness/f_284A_0138.json",
+          "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e",
+          "size": 12344
+        },
+        "f_29D6_000A": {
+          "path": "work/source-only-dos/static-completeness/f_29D6_000A.json",
+          "sha256": "3ad0a71454669b67e468b75d9d907639a4c3f78e1db1d044dbf0172579580234",
+          "size": 14942
+        },
+        "o10_35F5_0384": {
+          "path": "work/source-only-dos/static-completeness/o10_35F5_0384.json",
+          "sha256": "beebdbfcfed76215fe7dbf69a61801b9142aef6686f7fdb3508e3342edb4a0c8",
+          "size": 60547
+        },
+        "o15_384C_0239": {
+          "path": "work/source-only-dos/static-completeness/o15_384C_0239.json",
+          "sha256": "c00dadc8421083c9f2c33bb0b057b92e1c1a57867a5c7cc4e83bf9f9c5c6534a",
+          "size": 48386
+        },
+        "o25_3BA4_1035": {
+          "path": "work/source-only-dos/static-completeness/o25_3BA4_1035.json",
+          "sha256": "8fdd8925b614cc419c7dc1ab25fb262be105b29977e9c6c33ec5d862e5888274",
+          "size": 13286
+        },
+        "o25_3BA4_1686": {
+          "path": "work/source-only-dos/static-completeness/o25_3BA4_1686.json",
+          "sha256": "ef11dec31ab3193184b52c308f25c67c70a49d2cd44a823fd91fbd90ac96204a",
+          "size": 21440
+        },
+        "win_DrawBitMap": {
+          "path": "work/source-only-dos/static-completeness/win_DrawBitMap.json",
+          "sha256": "bb0288e993a44fedacb0ab657c2acb565133638098ca7c7e30eb56ec3d96937a",
+          "size": 34038
+        },
+        "win_PrintStyleTextInRect": {
+          "path": "work/source-only-dos/static-completeness/win_PrintStyleTextInRect.json",
+          "sha256": "ba6c9d3f06c6327a55273efa2b5181df3338c7af346d80b4c0cf327235e43ed0",
+          "size": 51131
+        },
+        "win_UnlockWin": {
+          "path": "work/source-only-dos/static-completeness/win_UnlockWin.json",
+          "sha256": "078841cf92bdea90f52e733ff8587336f061d4045c784899553681bef8ca03a9",
+          "size": 26532
+        }
+      },
+      "strict_receipts_verified": true,
+      "unique_source_count": 156
+    },
+    "toolchain": {
+      "all_toolchain_pins_match": true,
+      "toolchain_json": {
+        "path": "layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+        "size": 39241
+      },
+      "verified_external_and_workspace_pins": [
+        {
+          "path": "tools/compiler.py",
+          "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+          "size": 11765
+        },
+        {
+          "path": "tools/modules.py",
+          "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+          "size": 60548
+        },
+        {
+          "path": "tools/omf.py",
+          "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+          "size": 29112
+        },
+        {
+          "path": "layout/toolchain.json",
+          "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+          "size": 39241
+        },
+        {
+          "path": "layout/manifest.json",
+          "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+          "size": 628980
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+          "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+          "size": 81184
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+          "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+          "size": 213680
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+          "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+          "size": 473258
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+          "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+          "size": 195439
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+          "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+          "size": 1656
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+          "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+          "size": 19500
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+          "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+          "size": 3649
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+          "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+          "size": 2697
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\assert.h",
+          "sha256": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+          "size": 594
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bios.h",
+          "sha256": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+          "size": 4499
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bse.h",
+          "sha256": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+          "size": 1462
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedev.h",
+          "sha256": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+          "size": 12893
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedos.h",
+          "sha256": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+          "size": 48326
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bseerr.h",
+          "sha256": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+          "size": 26788
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsesub.h",
+          "sha256": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+          "size": 19051
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\conio.h",
+          "sha256": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+          "size": 965
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\ctype.h",
+          "sha256": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+          "size": 2979
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\direct.h",
+          "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+          "size": 892
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\dos.h",
+          "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+          "size": 5343
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\errno.h",
+          "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+          "size": 1428
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\fcntl.h",
+          "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+          "size": 1126
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\float.h",
+          "sha256": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+          "size": 4911
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\graph.h",
+          "sha256": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+          "size": 15438
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\io.h",
+          "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+          "size": 1512
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\limits.h",
+          "sha256": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+          "size": 1326
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\locale.h",
+          "sha256": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+          "size": 1519
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\malloc.h",
+          "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+          "size": 4008
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\math.h",
+          "sha256": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+          "size": 7881
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\memory.h",
+          "sha256": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+          "size": 1628
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2.h",
+          "sha256": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+          "size": 676
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2def.h",
+          "sha256": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+          "size": 10400
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pgchart.h",
+          "sha256": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+          "size": 8749
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pm.h",
+          "sha256": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+          "size": 2255
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmavio.h",
+          "sha256": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+          "size": 2069
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmbitmap.h",
+          "sha256": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+          "size": 1851
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmdev.h",
+          "sha256": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+          "size": 8606
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmerr.h",
+          "sha256": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+          "size": 30095
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmfont.h",
+          "sha256": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+          "size": 3458
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmgpi.h",
+          "sha256": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+          "size": 49655
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmhelp.h",
+          "sha256": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+          "size": 11291
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmmle.h",
+          "sha256": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+          "size": 8802
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmord.h",
+          "sha256": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+          "size": 23140
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmpic.h",
+          "sha256": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+          "size": 691
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmshl.h",
+          "sha256": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+          "size": 14249
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmtypes.h",
+          "sha256": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+          "size": 9645
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmwin.h",
+          "sha256": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+          "size": 85827
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\process.h",
+          "sha256": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+          "size": 2829
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\search.h",
+          "sha256": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+          "size": 1159
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\setjmp.h",
+          "sha256": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+          "size": 822
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\share.h",
+          "sha256": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+          "size": 450
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\signal.h",
+          "sha256": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+          "size": 2019
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdarg.h",
+          "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+          "size": 894
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stddef.h",
+          "sha256": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+          "size": 1254
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdio.h",
+          "sha256": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+          "size": 6047
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdlib.h",
+          "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+          "size": 6539
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\string.h",
+          "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+          "size": 4975
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\locking.h",
+          "sha256": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+          "size": 468
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\stat.h",
+          "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+          "size": 1330
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\timeb.h",
+          "sha256": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+          "size": 827
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\types.h",
+          "sha256": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+          "size": 734
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\utime.h",
+          "sha256": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+          "size": 968
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\time.h",
+          "sha256": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+          "size": 3069
+        },
+        {
+          "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\varargs.h",
+          "sha256": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b",
+          "size": 922
+        },
+        {
+          "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+          "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+          "size": 20481536
+        },
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+          "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+          "size": 449497
+        },
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+          "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+          "size": 63824
+        },
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+          "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+          "size": 266625
+        },
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+          "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+          "size": 7184
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+          "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+          "size": 717922
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+          "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+          "size": 692123
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+          "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+          "size": 100100
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+          "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+          "size": 423823
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+          "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+          "size": 11031
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+          "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+          "size": 687531
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+          "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+          "size": 231179
+        },
+        {
+          "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "layout/toolchain.json",
+          "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+          "size": 39241
+        }
+      ],
+      "verified_pin_counts": {
+        "compiler_includes": 55,
+        "compiler_profile_files": 8,
+        "linker_files": 11,
+        "runner": 1,
+        "runtime_libraries": 2,
+        "workspace_helpers": 5
+      }
+    }
+  },
+  "input_policy": "Check-only reader of the 156 selected source pins, strict receipts, tool/runtime pins and previously generated probe artifacts. No compile, link, emulator, original executable, original data bytes, or production tools were used.",
+  "maps": {
+    "rtlink400": {
+      "positive_crt_zero_all_32_signed_words_raw_bytes": {
+        "alias_delta_bytes": 0,
+        "case": "positive_crt_zero_all_32_signed_words_raw_bytes",
+        "far_bss_sections": [
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 7968,
+            "stop": 8031
+          }
+        ],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/LINK.LOG",
+          "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+          "size": 541
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+          "sha256": "3d047d18fa9f188cada1c530e903858325015994c548bbdf4798744789434d8e",
+          "size": 11565
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 249,
+            "name": "CRTGOOD_TEXT",
+            "start": 0,
+            "stop": 248
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 250,
+            "stop": 4425
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4432,
+            "stop": 4433
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 2372,
+            "name": "$$OVLMGR",
+            "start": 4448,
+            "stop": 6819
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1146,
+            "name": "$$OVLMGR_UTILS",
+            "start": 6820,
+            "stop": 7965
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "OWNER_TEXT",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 7968,
+            "stop": 8031
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 8032,
+            "stop": 8097
+          },
+          {
+            "class": "DATA",
+            "length": 760,
+            "name": "_DATA",
+            "start": 8098,
+            "stop": 8857
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 8858,
+            "stop": 8859
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 8860,
+            "stop": 8873
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 8874,
+            "stop": 8887
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 8888,
+            "stop": 8891
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 8892,
+            "stop": 8893
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 8894,
+            "stop": 8901
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 8902,
+            "stop": 9115
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 9116,
+            "stop": 9117
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 9118,
+            "stop": 9118
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 9120,
+            "stop": 9631
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 9632,
+            "stop": 11679
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      },
+      "wrong_initialized_data_owner": {
+        "alias_delta_bytes": 0,
+        "case": "wrong_initialized_data_owner",
+        "far_bss_sections": [],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/LINK.LOG",
+          "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+          "size": 541
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/PROBE.MAP",
+          "sha256": "6b1da8c240cf0e55b2c93aff33ac8cc768fc59dcda3074c46435440e9043849b",
+          "size": 11566
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 249,
+            "name": "CRTGOOD_TEXT",
+            "start": 0,
+            "stop": 248
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 250,
+            "stop": 4425
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4432,
+            "stop": 4433
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 2372,
+            "name": "$$OVLMGR",
+            "start": 4448,
+            "stop": 6819
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1146,
+            "name": "$$OVLMGR_UTILS",
+            "start": 6820,
+            "stop": 7965
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "INIT_TEXT",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 64,
+            "name": "INIT5_DATA",
+            "start": 7968,
+            "stop": 8031
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 8032,
+            "stop": 8032
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 8032,
+            "stop": 8097
+          },
+          {
+            "class": "DATA",
+            "length": 760,
+            "name": "_DATA",
+            "start": 8098,
+            "stop": 8857
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 8858,
+            "stop": 8859
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 8860,
+            "stop": 8873
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 8874,
+            "stop": 8887
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 8888,
+            "stop": 8891
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 8892,
+            "stop": 8893
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 8894,
+            "stop": 8901
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 8902,
+            "stop": 9115
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 9116,
+            "stop": 9117
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 9118,
+            "stop": 9118
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 9120,
+            "stop": 9631
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 9632,
+            "stop": 11679
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_initialized_data_owner/RUN.LOG",
+          "sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+          "size": 19
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      },
+      "wrong_test_base_plus_one_word": {
+        "alias_delta_bytes": 2,
+        "case": "wrong_test_base_plus_one_word",
+        "far_bss_sections": [
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 7968,
+            "stop": 8031
+          }
+        ],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/LINK.LOG",
+          "sha256": "ff572b1b7997efc80ab114b175af79b84ee7b362acf99ffd61187695a65925e9",
+          "size": 545
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/PROBE.MAP",
+          "sha256": "fbdb817624d09a030ef729d15ba526b4adc3dfd3a2de0eddb280c3c8c5c065b3",
+          "size": 11565
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 249,
+            "name": "CRTGOOD_TEXT",
+            "start": 0,
+            "stop": 248
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 250,
+            "stop": 4425
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4432,
+            "stop": 4433
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 2372,
+            "name": "$$OVLMGR",
+            "start": 4448,
+            "stop": 6819
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1146,
+            "name": "$$OVLMGR_UTILS",
+            "start": 6820,
+            "stop": 7965
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "OWNER_TEXT",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 7968,
+            "stop": 7968
+          },
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 7968,
+            "stop": 8031
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 8032,
+            "stop": 8097
+          },
+          {
+            "class": "DATA",
+            "length": 760,
+            "name": "_DATA",
+            "start": 8098,
+            "stop": 8857
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 8858,
+            "stop": 8859
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 8860,
+            "stop": 8873
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 8874,
+            "stop": 8887
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 8888,
+            "stop": 8888
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 8888,
+            "stop": 8891
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 8892,
+            "stop": 8893
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 8894,
+            "stop": 8901
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 8902,
+            "stop": 9115
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 9116,
+            "stop": 9117
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 9118,
+            "stop": 9118
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 9120,
+            "stop": 9120
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 9120,
+            "stop": 9631
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 9632,
+            "stop": 11679
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0002",
+              "segment": "01F2",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0002",
+              "segment": "01F2",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01F2",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_test_base_plus_one_word/RUN.LOG",
+          "sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+          "size": 15
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      },
+      "wrong_unsigned_consumer_view": {
+        "alias_delta_bytes": 0,
+        "case": "wrong_unsigned_consumer_view",
+        "far_bss_sections": [
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 7776,
+            "stop": 7839
+          }
+        ],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/LINK.LOG",
+          "sha256": "47cbb07f0324ba70c627e44d66305441addeb0ab1be723c71e32635ccd926c53",
+          "size": 541
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/PROBE.MAP",
+          "sha256": "a5ae97a94799b8771c2268f8635eff0b3f81a3723775d58b7a875a1c6ffcec05",
+          "size": 11565
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 51,
+            "name": "CRTSIGN_TEXT",
+            "start": 0,
+            "stop": 50
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 52,
+            "stop": 4227
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4240,
+            "stop": 4241
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 2372,
+            "name": "$$OVLMGR",
+            "start": 4256,
+            "stop": 6627
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1146,
+            "name": "$$OVLMGR_UTILS",
+            "start": 6628,
+            "stop": 7773
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "OWNER_TEXT",
+            "start": 7776,
+            "stop": 7776
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 7776,
+            "stop": 7776
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 7776,
+            "stop": 7776
+          },
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 7776,
+            "stop": 7839
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 7840,
+            "stop": 7905
+          },
+          {
+            "class": "DATA",
+            "length": 724,
+            "name": "_DATA",
+            "start": 7906,
+            "stop": 8629
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 8630,
+            "stop": 8631
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 8632,
+            "stop": 8645
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 8646,
+            "stop": 8659
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 8660,
+            "stop": 8660
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 8660,
+            "stop": 8660
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 8660,
+            "stop": 8660
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 8660,
+            "stop": 8660
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 8660,
+            "stop": 8660
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 8660,
+            "stop": 8660
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 8660,
+            "stop": 8660
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 8660,
+            "stop": 8663
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 8664,
+            "stop": 8664
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 8664,
+            "stop": 8664
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 8664,
+            "stop": 8664
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 8664,
+            "stop": 8664
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 8664,
+            "stop": 8664
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 8664,
+            "stop": 8664
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 8664,
+            "stop": 8664
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 8664,
+            "stop": 8665
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 8666,
+            "stop": 8673
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 8674,
+            "stop": 8887
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 8888,
+            "stop": 8889
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 8890,
+            "stop": 8890
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 8892,
+            "stop": 8892
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 8896,
+            "stop": 9407
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 9408,
+            "stop": 11455
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "01E6",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01E6",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "01E6",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "01E6",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink400/wrong_unsigned_consumer_view/RUN.LOG",
+          "sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+          "size": 24
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      }
+    },
+    "rtlink610": {
+      "positive_crt_zero_all_32_signed_words_raw_bytes": {
+        "alias_delta_bytes": 0,
+        "case": "positive_crt_zero_all_32_signed_words_raw_bytes",
+        "far_bss_sections": [
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 9008,
+            "stop": 9071
+          }
+        ],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/LINK.LOG",
+          "sha256": "a95f7c2c913a69a25ceeceeec4ae87ed4cc9bcfef4065d2ad15c7e071c1d6d4b",
+          "size": 1233
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/PROBE.MAP",
+          "sha256": "dc8a584fe736b0bd211adf1ba5a6f453a016c2c2dcb02b9f86033ff8d8baaab0",
+          "size": 12748
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 249,
+            "name": "CRTGOOD_TEXT",
+            "start": 0,
+            "stop": 248
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 250,
+            "stop": 4425
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4432,
+            "stop": 4433
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 3009,
+            "name": "$$OVLMGR",
+            "start": 4448,
+            "stop": 7456
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 0,
+            "name": "$$OVLVEC",
+            "start": 7457,
+            "stop": 7457
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1540,
+            "name": "$$OVLMGR_UTILS",
+            "start": 7457,
+            "stop": 8996
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "OWNER_TEXT",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 9008,
+            "stop": 9071
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 9072,
+            "stop": 9137
+          },
+          {
+            "class": "DATA",
+            "length": 760,
+            "name": "_DATA",
+            "start": 9138,
+            "stop": 9897
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 9898,
+            "stop": 9899
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 9900,
+            "stop": 9913
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 9914,
+            "stop": 9927
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 9928,
+            "stop": 9931
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 9932,
+            "stop": 9933
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 9934,
+            "stop": 9941
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 9942,
+            "stop": 10155
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 10156,
+            "stop": 10157
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 10158,
+            "stop": 10158
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 10160,
+            "stop": 10671
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 10672,
+            "stop": 12719
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/positive_crt_zero_all_32_signed_words_raw_bytes/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      },
+      "wrong_initialized_data_owner": {
+        "alias_delta_bytes": 0,
+        "case": "wrong_initialized_data_owner",
+        "far_bss_sections": [],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/LINK.LOG",
+          "sha256": "a95f7c2c913a69a25ceeceeec4ae87ed4cc9bcfef4065d2ad15c7e071c1d6d4b",
+          "size": 1233
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/PROBE.MAP",
+          "sha256": "7df128b150f8d0c996f12b04dd784e59b2567d01aab37a15d570856c12573e44",
+          "size": 12749
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 249,
+            "name": "CRTGOOD_TEXT",
+            "start": 0,
+            "stop": 248
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 250,
+            "stop": 4425
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4432,
+            "stop": 4433
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 3009,
+            "name": "$$OVLMGR",
+            "start": 4448,
+            "stop": 7456
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 0,
+            "name": "$$OVLVEC",
+            "start": 7457,
+            "stop": 7457
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1540,
+            "name": "$$OVLMGR_UTILS",
+            "start": 7457,
+            "stop": 8996
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "INIT_TEXT",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 64,
+            "name": "INIT5_DATA",
+            "start": 9008,
+            "stop": 9071
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 9072,
+            "stop": 9072
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 9072,
+            "stop": 9137
+          },
+          {
+            "class": "DATA",
+            "length": 760,
+            "name": "_DATA",
+            "start": 9138,
+            "stop": 9897
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 9898,
+            "stop": 9899
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 9900,
+            "stop": 9913
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 9914,
+            "stop": 9927
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 9928,
+            "stop": 9931
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 9932,
+            "stop": 9933
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 9934,
+            "stop": 9941
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 9942,
+            "stop": 10155
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 10156,
+            "stop": 10157
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 10158,
+            "stop": 10158
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 10160,
+            "stop": 10671
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 10672,
+            "stop": 12719
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_initialized_data_owner/RUN.LOG",
+          "sha256": "4127f10944901c1238eb741280d07057a4254f8829905889d24bfac3542654e1",
+          "size": 19
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      },
+      "wrong_test_base_plus_one_word": {
+        "alias_delta_bytes": 2,
+        "case": "wrong_test_base_plus_one_word",
+        "far_bss_sections": [
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 9008,
+            "stop": 9071
+          }
+        ],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/LINK.LOG",
+          "sha256": "019733ceb943e055cf45d2fb846c4c65a0e7de709df7b71b0a8d218a61856696",
+          "size": 1237
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/PROBE.MAP",
+          "sha256": "e819970d611cec545e49c83a1287f8603d574363f82f433a035301182a544963",
+          "size": 12748
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 249,
+            "name": "CRTGOOD_TEXT",
+            "start": 0,
+            "stop": 248
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 250,
+            "stop": 4425
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4432,
+            "stop": 4433
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 3009,
+            "name": "$$OVLMGR",
+            "start": 4448,
+            "stop": 7456
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 0,
+            "name": "$$OVLVEC",
+            "start": 7457,
+            "stop": 7457
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1540,
+            "name": "$$OVLMGR_UTILS",
+            "start": 7457,
+            "stop": 8996
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "OWNER_TEXT",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 9008,
+            "stop": 9008
+          },
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 9008,
+            "stop": 9071
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 9072,
+            "stop": 9137
+          },
+          {
+            "class": "DATA",
+            "length": 760,
+            "name": "_DATA",
+            "start": 9138,
+            "stop": 9897
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 9898,
+            "stop": 9899
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 9900,
+            "stop": 9913
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 9914,
+            "stop": 9927
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 9928,
+            "stop": 9928
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 9928,
+            "stop": 9931
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 9932,
+            "stop": 9933
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 9934,
+            "stop": 9941
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 9942,
+            "stop": 10155
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 10156,
+            "stop": 10157
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 10158,
+            "stop": 10158
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 10160,
+            "stop": 10160
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 10160,
+            "stop": 10671
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 10672,
+            "stop": 12719
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0002",
+              "segment": "0233",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0002",
+              "segment": "0233",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0233",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_test_base_plus_one_word/RUN.LOG",
+          "sha256": "3ae4957660862be96f72e0592e12c5a759a2bb158b9ecd4bd7676eb6350aaa44",
+          "size": 15
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      },
+      "wrong_unsigned_consumer_view": {
+        "alias_delta_bytes": 0,
+        "case": "wrong_unsigned_consumer_view",
+        "far_bss_sections": [
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 8816,
+            "stop": 8879
+          }
+        ],
+        "link_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/LINK.LOG",
+          "sha256": "1541a8adac5b1faa7b23acaee5cb354d28cab3c829fe423c4bf8dc30f62953b8",
+          "size": 1232
+        },
+        "map_input": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/PROBE.MAP",
+          "sha256": "bad8de3c2c7e4a08d404e4a4b89c00e4c27b37b9a570b4680b7f505275e070e8",
+          "size": 12748
+        },
+        "memory_sections": [
+          {
+            "class": "CODE",
+            "length": 51,
+            "name": "CRTSIGN_TEXT",
+            "start": 0,
+            "stop": 50
+          },
+          {
+            "class": "CODE",
+            "length": 4176,
+            "name": "_TEXT",
+            "start": 52,
+            "stop": 4227
+          },
+          {
+            "class": "CODE",
+            "length": 2,
+            "name": "EMULATOR_TEXT",
+            "start": 4240,
+            "stop": 4241
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 3009,
+            "name": "$$OVLMGR",
+            "start": 4256,
+            "stop": 7264
+          },
+          {
+            "class": "$$OVLMGR",
+            "length": 0,
+            "name": "$$OVLVEC",
+            "start": 7265,
+            "stop": 7265
+          },
+          {
+            "class": "$$OVLMGR_UTILS",
+            "length": 1540,
+            "name": "$$OVLMGR_UTILS",
+            "start": 7265,
+            "stop": 8804
+          },
+          {
+            "class": "CODE",
+            "length": 0,
+            "name": "OWNER_TEXT",
+            "start": 8816,
+            "stop": 8816
+          },
+          {
+            "class": "ENDCODE",
+            "length": 0,
+            "name": "C_ETEXT",
+            "start": 8816,
+            "stop": 8816
+          },
+          {
+            "class": "FAR_DATA",
+            "length": 0,
+            "name": "EMULATOR_DATA",
+            "start": 8816,
+            "stop": 8816
+          },
+          {
+            "class": "FAR_BSS",
+            "length": 64,
+            "name": "FAR_BSS",
+            "start": 8816,
+            "stop": 8879
+          },
+          {
+            "class": "BEGDATA",
+            "length": 66,
+            "name": "NULL",
+            "start": 8880,
+            "stop": 8945
+          },
+          {
+            "class": "DATA",
+            "length": 724,
+            "name": "_DATA",
+            "start": 8946,
+            "stop": 9669
+          },
+          {
+            "class": "DATA",
+            "length": 2,
+            "name": "XIQC",
+            "start": 9670,
+            "stop": 9671
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "DBDATA",
+            "start": 9672,
+            "stop": 9685
+          },
+          {
+            "class": "DATA",
+            "length": 14,
+            "name": "CDATA",
+            "start": 9686,
+            "stop": 9699
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFB",
+            "start": 9700,
+            "stop": 9700
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIF",
+            "start": 9700,
+            "stop": 9700
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIFE",
+            "start": 9700,
+            "stop": 9700
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIB",
+            "start": 9700,
+            "stop": 9700
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XI",
+            "start": 9700,
+            "stop": 9700
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XIE",
+            "start": 9700,
+            "stop": 9700
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPB",
+            "start": 9700,
+            "stop": 9700
+          },
+          {
+            "class": "DATA",
+            "length": 4,
+            "name": "XP",
+            "start": 9700,
+            "stop": 9703
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XPE",
+            "start": 9704,
+            "stop": 9704
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCB",
+            "start": 9704,
+            "stop": 9704
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XC",
+            "start": 9704,
+            "stop": 9704
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCE",
+            "start": 9704,
+            "stop": 9704
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFB",
+            "start": 9704,
+            "stop": 9704
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCF",
+            "start": 9704,
+            "stop": 9704
+          },
+          {
+            "class": "DATA",
+            "length": 0,
+            "name": "XCFE",
+            "start": 9704,
+            "stop": 9704
+          },
+          {
+            "class": "CONST",
+            "length": 2,
+            "name": "CONST",
+            "start": 9704,
+            "stop": 9705
+          },
+          {
+            "class": "MSG",
+            "length": 8,
+            "name": "HDR",
+            "start": 9706,
+            "stop": 9713
+          },
+          {
+            "class": "MSG",
+            "length": 214,
+            "name": "MSG",
+            "start": 9714,
+            "stop": 9927
+          },
+          {
+            "class": "MSG",
+            "length": 2,
+            "name": "PAD",
+            "start": 9928,
+            "stop": 9929
+          },
+          {
+            "class": "MSG",
+            "length": 1,
+            "name": "EPAD",
+            "start": 9930,
+            "stop": 9930
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "_BSS",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOB",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XO",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "BSS",
+            "length": 0,
+            "name": "XOE",
+            "start": 9932,
+            "stop": 9932
+          },
+          {
+            "class": "BSS",
+            "length": 512,
+            "name": "c_common",
+            "start": 9936,
+            "stop": 10447
+          },
+          {
+            "class": "STACK",
+            "length": 2048,
+            "name": "STACK",
+            "start": 10448,
+            "stop": 12495
+          }
+        ],
+        "publics": {
+          "name": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "0227",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0227",
+              "state": "Res"
+            }
+          },
+          "value": {
+            "_HistogramProbeAlias": {
+              "offset": "0000",
+              "segment": "0227",
+              "state": "Res"
+            },
+            "_fd_50f6_0eb6": {
+              "offset": "0000",
+              "segment": "0227",
+              "state": "Res"
+            }
+          }
+        },
+        "run_log": {
+          "path": "build/workers/dos_ant_histogram_v22/run-20261004T031319Z-ca15a6bce736/rtlink/rtlink610/wrong_unsigned_consumer_view/RUN.LOG",
+          "sha256": "814037b41fc66b9231822d753140076d61a10f0bcf78daaf76616015f45cff75",
+          "size": 24
+        },
+        "sections_verified": [
+          "Publics by Name",
+          "Publics by Value"
+        ]
+      }
+    }
+  },
+  "module": "source-owned:ant-class-histogram",
+  "preserved_run": "run-20261004T031319Z-ca15a6bce736",
+  "provider": {
+    "absolute_historical_placement_claimed": false,
+    "basename": "ANTCOUNT",
+    "compiler_profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Gs"
+    ],
+    "historical_owner_or_tu_order_claimed": false,
+    "normalized_source_declaration": "int far fd_50F6_0EB6[32];",
+    "original_initializer_claimed": false,
+    "owner": null,
+    "source": {
+      "path": "work/source-only-dos/providers/ant-class-histogram.c",
+      "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+      "size": 190
+    }
+  },
+  "raw_artifact_validation": {
+    "all_file_hashes_and_sizes_match": true,
+    "both_map_public_sections_checked": true,
+    "case_count": 8,
+    "historical_absolute_geometry_claimed": false,
+    "target_alias_geometry_checked_for_every_case": true,
+    "verified_file_count": 104
+  },
+  "root_reviewed": false,
+  "schema": "simant-reviewed-source-storage-contract-candidate-v1",
+  "separate_overflow_frontier": {
+    "fd_50F6_04C2_indices": "The expressions fd_50F6_04C2 >> 3 and (fd_50F6_04C2 | 0x80) >> 3 have no bound established here; no malformed-input or index-safety claim is made.",
+    "list_byte_indices": "CountAnts skips zero and shifts unsigned-byte values 1..255 to indexes 0..31.",
+    "signedness": "Natural C source and canonical extern both use signed int. MSC OMF common records do not encode signedness; the unsigned-view fixture is a runtime consumer-type contrast only."
+  }
+}
