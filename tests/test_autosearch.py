@@ -308,23 +308,25 @@ class Driver(unittest.TestCase):
         ev.cache_fingerprint = 'reframed registries'
         self.assertNotEqual(initial, ev.key('void f(void) {}'))
 
-    def test_continuation_finds_preserved_draft_and_handles_missing_file(self):
+    def test_continuation_uses_its_current_build_output(self):
         import autosearch as A
         import tempfile
         from pathlib import Path
+        from unittest.mock import patch
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
-            saved = root / 'work/autosearch/runs/old-run/best.c'
+            saved = root / 'build/helpers/autosearch/run/best.c'
             saved.parent.mkdir(parents=True)
             saved.write_text('void f(void) {}')
-            entry = {'out': str(root / 'build/deleted/old-run'), 'base': [1, 9], 'best': [1, 3]}
-            self.assertEqual(A.continuation_base(entry, root / 'work/autosearch/results.json'), saved)
-            # A previous baseline can be a better whole-module draft than the canonical stub
-            # even when that search did not improve it (DoAntMoveY).
-            entry['best'] = entry['base']
-            self.assertEqual(A.continuation_base(entry, root / 'work/autosearch/results.json'), saved)
-            saved.unlink()
-            self.assertIsNone(A.continuation_base(entry, root / 'work/autosearch/results.json'))
+            results = root / 'build/helpers/autosearch/results.json'
+            entry = {'out': str(saved.parent), 'base': [1, 9], 'best': [1, 3]}
+            with patch.object(A, 'ROOT', root):
+                self.assertEqual(A.continuation_base(entry, results), saved)
+                entry['best'] = entry['base']
+                self.assertEqual(A.continuation_base(entry, results), saved)
+                self.assertIsNone(A.continuation_base(entry, root / 'work/results.json'))
+                saved.unlink()
+                self.assertIsNone(A.continuation_base(entry, results))
 
     def test_all_targets_includes_inplace_drafts_and_honors_explicit_skip(self):
         import autosearch as A

@@ -15,17 +15,16 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "tools"))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
 import behavior as b
 from behavior_ledger import CaseLedger
 
 FUNCTION = "win_PrintStyleTextInRect"
 CARD_FUNCTION = "DisplayCard"
 HISTORY_FUNCTION = "drawHistGraph"
-FORMAT_CURSOR_PROOF = "evidence/behavior/runtime/format-cursors/format_cursor_proof.json"
+FORMAT_CURSOR_PROOF = "evidence/canonical/runtime/format-cursors.json"
 FORMAT_CURSOR_PROOF_SHA256 = "140c1d240cf48c5c868ccdd723b4651d71735f592b3d5baed1f4d552cbfbc628"
-SOURCE = ROOT / "build/workers/behavior_text_card/S23.c"
 SUITE_BYTES = Path(__file__).read_bytes()
 TEXT = (0x1000, 0xA000)
 STYLES = (0x3000, 0xA000)
@@ -36,10 +35,6 @@ def far(off, seg):
     return struct.pack("<HH", off, seg)
 
 
-def _json_default(value):
-    if isinstance(value, bytes):
-        return {"bytes_hex": value.hex()}
-    raise TypeError(type(value).__name__)
 
 
 def style_record(pos, face, height=12, ascent=9, font=2, size=12):
@@ -503,208 +498,9 @@ def history_cases(random_count=2000, seed=0xD15EA5E):
             rect, case_seed, mode)
 
 
-def run_history(out, random_count=2000, seed=0xD15EA5E):
-    suite_digest = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:12]
-    harness_digest = hashlib.sha256(b.HARNESS_SOURCE).hexdigest()[:12]
-    out = out / "draw-history" / f"run-{suite_digest}-{harness_digest}"
-    out.mkdir(parents=True, exist_ok=True)
-    snapshot = out / "text_card_suite_snapshot.py"
-    snapshot.write_bytes(Path(__file__).read_bytes())
-    source = ROOT / "build/workers/behavior_text_card/S24.c"
-    pair = b.PreparedPair(HISTORY_FUNCTION, source=source, out=out)
-    ledger = CaseLedger(out / f"cases-{seed:08x}-{random_count}.jsonl.gz", pair,
-        ["ordered line segments", "label text and border geometry",
-         "history selection/scaling", "all raw nonstack bytes plus approved private formatter views",
-         "return value and caller ABI"])
-    totals = {"directed": 0, "randomized": 0}
-    failures = []
-    started = time.monotonic()
-    for lane, case in history_cases(random_count, seed):
-        try:
-            result = pair.compare(case)
-        except Exception as exc:
-            failures.append({"case": case.metadata, "error": str(exc)})
-            break
-        totals[lane] += 1
-        ledger.record(case, result, lane=lane)
-        if not result.equal:
-            failures.append({"case": case.metadata, "diff": result.diff})
-            break
-    source_text = source.read_text(encoding="latin1")
-    anchor = "x = n * width / 64 + slot + r.left;"
-    if source_text.count(anchor) != 1:
-        raise RuntimeError("drawHistGraph negative-control anchor not unique")
-    mutant = out / "negative.c"
-    mutant.write_text(source_text.replace(anchor,
-        "x = n * width / 64 + slot + r.left + 1;", 1), encoding="latin1")
-    negative = b.PreparedPair(HISTORY_FUNCTION, source=mutant).compare(
-        _history_case("negative/x-coordinate-plus-one", 0, 0, 0, 8, 8,
-                      (0, 0, 320, 200), 0x39C7032C))
-    label_anchor = 'sprintf(buf, "%d", data[j]);'
-    if source_text.count(label_anchor) != 1:
-        raise RuntimeError("drawHistGraph label negative-control anchor not unique")
-    label_mutant = out / "negative-label.c"
-    label_mutant.write_text(source_text.replace(label_anchor,
-        'sprintf(buf, "%d", data[j] + 1);', 1), encoding="latin1")
-    negative_label = b.PreparedPair(HISTORY_FUNCTION, source=label_mutant).compare(
-        _history_case("negative/label-value-plus-one", 0, 1, 0, 0, 8,
-                      (0, 0, 320, 200), 0x39C7032C, "ramp"))
-    ledger_pin = ledger.finalize()
-    report = {"schema": "behavior-suite-run-v1", "function": HISTORY_FUNCTION,
-        "identity": pair.identity, "suite_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
-        "case_ledger": ledger_pin, "directed": totals["directed"],
-        "randomized": totals["randomized"], "requested_randomized": random_count,
-        "seed": seed,
-        "mismatches": sum("diff" in f for f in failures),
-        "errors": sum("error" in f for f in failures), "failures": failures,
-        "negative_control": {"detected": not negative.equal,
-            "changed_fields": sorted(negative.diff)},
-        "label_negative_control": {"detected": not negative_label.equal,
-            "changed_fields": sorted(negative_label.diff)},
-        "compared": ["ordered line segments", "label rendering and border geometry",
-            "private state and all nonstack writes", "caller ABI"],
-        "domain": "graphs 0..3; both highlight paths; sample counts 0..64 and ring-buffer starts 0..63; valid 64-sample zero, maximum, ramp, and seeded 0..120 arrays; positive rectangles up to 640x480",
-        "boundaries": "window rect and line/color/text/border raster callbacks; all graph reads/scaling, sprintf, font/string helpers execute in original/candidate code; the reviewed sprintf cursor view retains semantic advancement/count and raw observations",
-        "status": "UNRESOLVED pending contract review",
-        "elapsed_seconds": round(time.monotonic() - started, 3)}
-    (out / "report.json").write_text(json.dumps(report, indent=2, default=_json_default) + "\n")
-    if failures or negative.equal or negative_label.equal:
-        raise AssertionError(f"drawHistGraph differential failure or negative control missed: {failures}")
-    return report
 
 
-def run(count, seed, out):
-    suite_digest = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:12]
-    harness_digest = hashlib.sha256(b.HARNESS_SOURCE).hexdigest()[:12]
-    out = out / f"run-{seed:08x}-{count}-{suite_digest}-{harness_digest}"
-    out.mkdir(parents=True, exist_ok=True)
-    # Pin the exact suite source before any VM execution; ledger names encode
-    # seed/count so exploratory runs remain separately auditable.
-    snapshot = out / "text_card_suite_snapshot.py"
-    snapshot.write_bytes(Path(__file__).read_bytes())
-    pair = b.PreparedPair(FUNCTION, source=SOURCE, out=out)
-    ledger = CaseLedger(out / f"cases-{seed:08x}-{count}.jsonl.gz", pair,
-        ["ordered draw calls and pointed text", "font helper sequence and metrics",
-         "hotspot writes and all nonstack memory", "return value and caller ABI"])
-    totals = {"directed": 0, "randomized": 0}
-    failures = []
-    started = time.monotonic()
-    for group, case in cases(count, seed):
-        try:
-            result = pair.compare(case)
-        except Exception as exc:
-            failures.append({"case": case.metadata, "error": str(exc)})
-            break
-        totals[group] += 1
-        ledger.record(case, result, lane=group)
-        if not result.equal:
-            failures.append({"case": case.metadata, "diff": result.diff})
-            break
-    # A source mutation changes line origin while preserving all fixture inputs.
-    source = SOURCE.read_text(encoding="latin1")
-    anchor = "x = rect->left + 1;"
-    if source.count(anchor) != 1:
-        raise RuntimeError("negative-control anchor not unique")
-    mutant = out / "negative.c"
-    mutant.write_text(source.replace(anchor, "x = rect->left + 2;", 1), encoding="latin1")
-    negative = b.PreparedPair(FUNCTION, source=mutant).compare(
-        make_case("negative/x-origin-plus-one", b"negative probe", (0, 0, 120, 60)))
-    ledger_pin = ledger.finalize()
-    report = {"schema": "behavior-suite-run-v1", "function": FUNCTION,
-        "identity": pair.identity, "suite_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
-        "case_ledger": ledger_pin,
-        **totals, "seed": seed, "mismatches": sum("diff" in x for x in failures),
-        "errors": sum("error" in x for x in failures), "failures": failures,
-        "negative_control": {"detected": not negative.equal, "diff": negative.diff},
-        "compared": ["ordered draw x/y/text", "font helper effects and call order",
-            "recorded hotspot arrays and count", "all nonstack writes", "caller ABI"],
-        "domain": "directed text/control/punctuation, style-run positions/faces/font IDs 2..5, rectangle sizes/origins, first-line clipping and record mode; deterministic random strings and valid sorted styles; original font selection and metric helpers over explicit valid proportional/fixed font tables",
-        "boundaries": "only the logical f_24AB_038D draw request is modeled; projection reads the complete pointed-to NUL-terminated text; font selection, height/string/character metrics and string helpers execute from the DOS image against explicit valid Font records; glyph bitmap generation and framebuffer pixels are not compared",
-        "status": "UNRESOLVED pending contract review",
-        "elapsed_seconds": round(time.monotonic() - started, 3)}
-    (out / "report.json").write_text(json.dumps(report, indent=2, default=_json_default) + "\n")
-    if failures or negative.equal:
-        raise AssertionError(f"differential failure or ineffective negative control: {failures}")
-    return report
 
 
-def run_cards(out, count=500, seed=0x5A23):
-    suite_digest = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:12]
-    harness_digest = hashlib.sha256(b.HARNESS_SOURCE).hexdigest()[:12]
-    out = out / "display-card" / f"run-{suite_digest}-{harness_digest}-{seed:08x}-{count}"
-    out.mkdir(parents=True, exist_ok=True)
-    snapshot = out / "text_card_suite_snapshot.py"
-    snapshot.write_bytes(Path(__file__).read_bytes())
-    pair = b.PreparedPair(CARD_FUNCTION, source=SOURCE, out=out)
-    ledger = CaseLedger(out / f"cases-{seed:08x}-{count}.jsonl.gz", pair,
-        ["resource request/lock/size/unlock/purge order",
-         "ordered window, bitmap and text draw commands",
-         "projected draw text and coordinates", "all nonstack memory", "caller ABI"])
-    totals = {"directed": 0, "randomized": 0}
-    failures = []
-    started = time.monotonic()
-    card_cases_for_negative = None
-    for group, case in card_cases(count, seed):
-        try:
-            result = pair.compare(case)
-        except Exception as exc:
-            failures.append({"case": case.metadata, "error": str(exc)})
-            break
-        totals[group] += 1
-        ledger.record(case, result, lane=group)
-        if not result.equal:
-            failures.append({"case": case.metadata, "diff": result.diff})
-            break
-        if case.metadata["scenario"] == "bitmap-link":
-            card_cases_for_negative = case
-    source = SOURCE.read_text(encoding="latin1")
-    anchor = "win_DrawBitMap(pic.left + r.left, pic.top + r.top, pic.id);"
-    if source.count(anchor) != 1:
-        raise RuntimeError("DisplayCard negative-control anchor not unique")
-    mutant = out / "negative.c"
-    mutant.write_text(source.replace(anchor,
-        "win_DrawBitMap(pic.left + r.left + 1, pic.top + r.top, pic.id);", 1),
-        encoding="latin1")
-    negative = b.PreparedPair(CARD_FUNCTION, source=mutant).compare(
-        card_cases_for_negative or _resource_case("negative/bitmap", "bitmap-link"))
-    ledger_pin = ledger.finalize()
-    report = {"schema": "behavior-suite-run-v1", "function": CARD_FUNCTION,
-        "identity": pair.identity,
-        "suite_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
-        "case_ledger": ledger_pin, **totals,
-        "mismatches": sum("diff" in f for f in failures),
-        "errors": sum("error" in f for f in failures), "failures": failures,
-        "negative_control": {"detected": not negative.equal,
-            "changed_fields": sorted(negative.diff),
-            "oracle_bitmaps": negative.original["state"].get("bitmaps", []),
-            "candidate_bitmaps": negative.candidate["state"].get("bitmaps", [])},
-        "compared": ["resource lifecycle calls", "bitmap/text draw call order and values",
-            "card parser writes", "all nonstack memory", "caller ABI"],
-        "seed": seed, "requested_randomized": count,
-        "domain": "missing card resource; valid unknown-record card; one bitmap with one hotspot; one plain text frame; one styled CHITIN text frame; seeded valid card streams of 1..8 P/T records, 0..6 in-range hotspot links per P record, 1..4 text frames, 1..4 sorted style runs, text resources, variable positive rectangles, fixed valid window geometry, and explicit font fallback metrics",
-        "boundaries": "resource lookup and handle lock/size/unlock, window rectangle/clipping/color, bitmap raster and text raster are deterministic host services; all resource bytes, card parsing, transforms, text cleanup, style conversion and line layout execute in the DOS VM",
-        "status": "UNRESOLVED pending contract review",
-        "elapsed_seconds": round(time.monotonic() - started, 3)}
-    (out / "report.json").write_text(json.dumps(report, indent=2, default=_json_default) + "\n")
-    if failures or negative.equal:
-        raise AssertionError(f"DisplayCard differential failure or negative control missed: {failures}")
-    return report
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--count", type=int, default=1000)
-    parser.add_argument("--history-count", type=int, default=2000)
-    parser.add_argument("--seed", type=lambda s: int(s, 0), default=0x39C70092)
-    parser.add_argument("--out", type=Path, default=ROOT / "build/workers/behavior_text_card/text")
-    parser.add_argument("--target", choices=("text", "card", "history", "all"), default="text")
-    args = parser.parse_args()
-    results = {}
-    if args.target in ("text", "all"):
-        results["text"] = run(args.count, args.seed, args.out)
-    if args.target in ("card", "all"):
-        results["card"] = run_cards(args.out, args.count, args.seed ^ 0x5A23)
-    if args.target in ("history", "all"):
-        results["history"] = run_history(args.out, random_count=args.history_count,
-                                         seed=args.seed)
-    print(json.dumps(results, indent=2, default=_json_default))

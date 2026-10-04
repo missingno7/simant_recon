@@ -67,6 +67,137 @@ def audit_context(key: str, result: dict, admission: dict) -> list[str]:
     return failures
 
 
+import copy
+import json
+
+
+def semantic_context_sha(text: str) -> str:
+    """Declarations, initializers, signatures and all preprocessor directives.
+
+    Exact helper-body improvements may preserve a caller contract. Changes to
+    its types, macros, globals or signatures require a new whole-TU review.
+    """
+    import csrc
+    spans = [(f.body.s, f.body.e) for f in csrc.Source(text).functions()]
+    significant = (t for t in csrc.tokenize(text) if t.kind not in ('ws', 'nl', 'cmt'))
+    return sha(' '.join(t.text for t in significant if t.kind == 'pp' or
+                       not any(start <= t.s < end for start, end in spans)).encode('utf8'))
+
+
+def check_semantic_review(row: dict, text: str) -> dict:
+    """Check a current canonical definition against its complete static review."""
+    path = (ROOT / row['receipt']).resolve()
+    if not path.is_relative_to((ROOT / 'evidence').resolve()):
+        raise ValueError('semantic receipt outside evidence: ' + row['function'])
+    review = json.loads(path.read_text())
+    pin = definition_sha(text, row['function'])
+    if (review.get('schema') != 'simant-canonical-semantic-review-v1' or
+            review.get('function') != row['function'] or review.get('module') != row['module'] or
+            review.get('status') != 'BEHAVIOR_EXACT_CONFIRMED' or
+            row.get('status') != 'BEHAVIOR_EXACT_CONFIRMED' or
+            row.get('definition_sha256') != pin or review.get('definition_sha256') != pin):
+        raise ValueError('canonical semantic definition/review differs: ' + row['function'])
+    audit = review.get('audit', {})
+    root = review.get('root_review', {})
+    if (audit.get('status') != 'BEHAVIOR_EXACT_CONFIRMED' or
+            audit.get('unexplained_semantic_differences') != [] or
+            root.get('reviewer') != 'root' or
+            any(root.get(axis) is not True for axis in
+                ('complete_cfg', 'complete_data_widths', 'complete_calls_effects', 'codegen_only_residue'))):
+        raise ValueError('incomplete canonical semantic review: ' + row['function'])
+    return review
+
+
+def exact_inventory(program: dict, key: str, module: dict, raw: bytes,
+                    previous: dict | None, *, source: str) -> dict:
+    """Prepare metadata for an already exact promotion, without writing files.
+
+    A normal exact promotion cannot replace a registered behavioral definition
+    or its declaration context. Those changes use a reviewed canonical plan.
+    """
+    after = copy.deepcopy(program)
+    items = {m['key']: m for m in after['modules']}
+    item = items.get(key)
+    if previous is not None:
+        if item is None:
+            raise ValueError('historical module absent from canonical inventory: ' + key)
+        for field in ('source', 'source_sha256', 'lang', 'profile', 'flags'):
+            if item[field] != previous[field]:
+                raise ValueError('canonical/historical context differs: ' + key + ': ' + field)
+        old_raw = (ROOT / item['source']).read_bytes()
+        if sha(old_raw) != item['source_sha256']:
+            raise ValueError('current canonical source pin differs: ' + key)
+        if source != item['source']:
+            raise ValueError('source path/language replacement requires a canonical plan: ' + key)
+        old_text, text = old_raw.decode('latin1'), raw.decode('latin1')
+        registered = [s for s in program.get('semantics', []) if s['module'] == key]
+        for semantic in registered:
+            check_semantic_review(semantic, old_text)
+            check_semantic_review(semantic, text)
+        compiler_changed = any(module[field] != item[field] for field in ('lang', 'profile', 'flags'))
+        if registered and (compiler_changed or semantic_context_sha(old_text) != semantic_context_sha(text)):
+            raise ValueError('registered semantic declaration context changed; use a reviewed canonical plan: ' + key)
+        if item.get('storage_contract'):
+            raise ValueError('provider storage changes require a canonical plan: ' + key)
+    elif item is not None or (ROOT / source).exists():
+        raise ValueError('new historical module conflicts with an existing canonical source: ' + key)
+    else:
+        item = {'key': key}
+        after['modules'].append(item)
+    item.update({'source': source, 'source_sha256': sha(raw), 'unit': module['unit'],
+                 'lang': module['lang'], 'profile': module['profile'], 'flags': list(module['flags'])})
+    after['modules'].sort(key=lambda m: m['key'])
+    return after
+
+
+def check_semantic_publication(program: dict, payloads: dict, previous: dict | None,
+                               prior_program_sha256: str | None) -> None:
+    """Allow reviewed revisions, bound to the unchanged current predecessor.
+
+    A fresh receipt's supersedes record pins prior program, whole TU, accepted
+    definition and receipt. A new definition and changed surrounding context
+    both retain complete static/root review requirements.
+    """
+    rows = program.get('semantics', [])
+    names = [r['function'] for r in rows]
+    if len(names) != len(set(names)):
+        raise ValueError('duplicate canonical semantic registration')
+    modules = {m['key']: m for m in program['modules']}
+    old_rows = {s['function']: s for s in (previous or {}).get('semantics', [])}
+    old_modules = {m['key']: m for m in (previous or {}).get('modules', [])}
+    if old_rows.keys() - set(names):
+        raise ValueError('canonical plan drops accepted semantic registrations')
+    for row in rows:
+        key = row['module']
+        if key not in modules or modules[key]['lang'] != 'c':
+            raise ValueError('semantic registration requires canonical C TU: ' + row['function'])
+        text = payloads[key].decode('latin1')
+        review = check_semantic_review(row, text)
+        prior = old_rows.get(row['function'])
+        if prior is None:
+            continue
+        if key != prior['module']:
+            raise ValueError('semantic owner relocation requires a separate ownership review: ' + row['function'])
+        old_item = old_modules[key]
+        old_raw = (ROOT / old_item['source']).read_bytes()
+        if sha(old_raw) != old_item['source_sha256']:
+            raise ValueError('current canonical source pin differs: ' + key)
+        old_text = old_raw.decode('latin1')
+        old_review = check_semantic_review(prior, old_text)
+        compiler_changed = any(modules[key][field] != old_item[field] for field in ('lang', 'profile', 'flags'))
+        revised = (row != prior or compiler_changed or definition_sha(text, row['function']) != prior['definition_sha256'] or
+                   semantic_context_sha(text) != semantic_context_sha(old_text))
+        if not revised:
+            continue
+        expected = {'program_sha256': prior_program_sha256,
+                    'source_sha256': old_item['source_sha256'],
+                    'definition_sha256': prior['definition_sha256'],
+                    'receipt_sha256': sha((ROOT / prior['receipt']).read_bytes())}
+        if (review == old_review or review.get('supersedes') != expected or
+                review.get('root_review', {}).get('source_correction_reviewed') is not True):
+            raise ValueError('semantic revision lacks a fresh review pinned to prior canonical context: ' + row['function'])
+
+
 def publish(plan_path: Path, verify_only: bool) -> int:
     """Publish a reviewed set of whole TUs through promote.py's sole writer.
 
@@ -79,9 +210,24 @@ def publish(plan_path: Path, verify_only: bool) -> int:
     import symbols
     from lockfile import CanonicalLock, atomic_write_text
     from omf import OmfReader
+    import sys
+    sys.path.insert(0, str(ROOT))
+    from dos.build import verify_storage
 
     plan = json.loads(plan_path.read_text())
     man = modules.load_manifest()
+    prior_program_sha256 = sha(PROGRAM.read_bytes()) if PROGRAM.exists() else None
+    previous = load() if prior_program_sha256 else None
+    if previous and plan.get('prior_program_sha256') != prior_program_sha256:
+        raise ValueError('canonical publication plan has a stale or missing program pin')
+    if previous:
+        old_modules = {m['key']: m for m in previous['modules']}
+        if old_modules.keys() - {m['key'] for m in plan['program']['modules']}:
+            raise ValueError('canonical publication cannot silently drop live modules')
+        for item in plan['files']:
+            old = old_modules.get(item['key'])
+            if old and (item['source'] != old['source'] or item.get('prior_sha256') != old['source_sha256']):
+                raise ValueError('publication does not pin current canonical source: ' + item['key'])
     if sha(modules.MANIFEST.read_bytes()) != plan['prior_manifest_sha256']:
         raise ValueError('canonical publication plan has a stale manifest')
     payloads = {}
@@ -97,6 +243,11 @@ def publish(plan_path: Path, verify_only: bool) -> int:
         payloads[item['key']] = raw.replace(b'\r\n', b'\n')
         item['sha256'] = sha(payloads[item['key']])
         next(m for m in plan['program']['modules'] if m['key'] == item['key'])['source_sha256'] = item['sha256']
+
+    check_semantic_publication(plan['program'], payloads, previous, prior_program_sha256)
+    review_paths = {row['receipt'] for data in (previous or {}, plan['program'])
+                    for row in data.get('semantics', [])}
+    review_pins = {path: sha((ROOT / path).read_bytes()) for path in review_paths}
 
     # Grounded data views, not new allocation. The registry writer publishes
     # these only after all source/object checks pass.
@@ -128,7 +279,8 @@ def publish(plan_path: Path, verify_only: bool) -> int:
         def compile_item(item):
             text = payloads[item['key']].decode('latin1')
             if item['key'] in man['modules']:
-                module = man['modules'][item['key']]
+                module = {**man['modules'][item['key']],
+                          'lang': item['lang'], 'profile': item['profile'], 'flags': item['flags']}
                 return modules.verify_module(text, module, module['claims'], man=man)
             return compiler.compile_c(text, item['profile'], item['flags'])
         with ThreadPoolExecutor(max_workers=8) as pool:
@@ -161,10 +313,10 @@ def publish(plan_path: Path, verify_only: bool) -> int:
                     failures.append(f'{key}: storage compile failed {compiled.log}')
                     continue
                 obj = OmfReader(communals=True).read(compiled.obj)
-                got = sorted((c['name'], c['kind'], c['length']) for c in obj.communals)
-                want = sorted((c['name'], c['kind'], c['length']) for c in item['storage_contract']['communals'])
-                if got != want:
-                    failures.append(f'{key}: canonical storage shape differs')
+                try:
+                    verify_storage(obj, item['storage_contract'])
+                except ValueError as exc:
+                    failures.append(f'{key}: canonical storage contract differs: {exc}')
                 print(key, 'STORAGE', flush=True)
     finally:
         symbols.load = original_symbols_load
@@ -175,17 +327,34 @@ def publish(plan_path: Path, verify_only: bool) -> int:
         print('VERIFY-ONLY OK: canonical publication, historical comparisons preserved')
         return 0
     with CanonicalLock():
+        if previous and sha(PROGRAM.read_bytes()) != prior_program_sha256:
+            raise ValueError('canonical inventory changed during publication')
+        for path, pin in review_pins.items():
+            if sha((ROOT / path).read_bytes()) != pin:
+                raise ValueError('semantic review changed during publication: ' + path)
         if sha(modules.MANIFEST.read_bytes()) != plan['prior_manifest_sha256']:
             raise ValueError('manifest changed during publication')
         for file in plan['files']:
             dest = ROOT / file['source']
             if file.get('prior_sha256') and sha(dest.read_bytes()) != file['prior_sha256']:
                 raise ValueError('source changed during publication')
+        results_by_key = dict(zip((item['key'] for item in plan['program']['modules']), results))
+        inventory_by_key = {item['key']: item for item in plan['program']['modules']}
+        for file in plan['files']:
+            dest = ROOT / file['source']
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(payloads[file['key']])
             if file['key'] in man['modules']:
                 module = man['modules'][file['key']]
-                module['source_sha256'] = file['sha256']
+                item = inventory_by_key[file['key']]
+                result = results_by_key[file['key']]
+                module.update({field: item[field] for field in ('source', 'source_sha256', 'lang', 'profile', 'flags')})
+                module['object_sha256'] = result.get('object_sha256')
+                module['scaffold'] = result['scaffold']
+                for claim in module['claims']:
+                    claim.pop('current_proof', None)
+                if file['key'] not in allowed:
+                    module.pop('canonical_admission', None)
                 if file['key'] in allowed:
                     module['canonical_admission'] = {'receipt': plan['receipt_path'],
                         'historical_checkpoint': receipt['prior_commit'],

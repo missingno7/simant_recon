@@ -6,49 +6,19 @@ include/** text eol=lf
 *.md text eol=lf
 .gitattributes text eol=lf
 .gitignore text eol=lf
+portable/**/*.c text eol=lf
+portable/**/*.h text eol=lf
 
-# Archived proof inputs are hashed as file bytes. Preserve their recorded
-# line endings so checkout cannot silently invalidate a certificate or ledger.
-evidence/behavior/** -text
-tools/archive/** -text
-tools/behavior_suites/archive/** -text
-work/takeover/behavioral-oracle/** -text
-work/takeover/hardtail/** -text
-work/takeover/compiler-ir/** -text
-# Validation receipts pin these files directly, including generated metadata.
+# Current validator and proof identities retain their exact recorded bytes.
 tools/** -text
 tests/** -text
 layout/manifest.json -text
 docs/progress.json -text
 evidence/promotions.jsonl -text
-# Current proof records retain their recorded file identities. They never
-# supply implementation bodies to either build.
 evidence/canonical/** -text
-# These immutable/existing metadata blobs remain LF in Git. Their recorded
-# working-file identities use CRLF; make checkout reproduce those identities
-# on every host without editing the lock or rewriting historical evidence.
+
+# Locked historical metadata has a recorded CRLF working-file identity.
 layout/functions.json text eol=crlf
 layout/oracle.lock.json text eol=crlf
 layout/symbols.json text eol=crlf
 layout/toolchain.json text eol=crlf
-# Native proof archives also pin exact file bytes, including scripts and logs.
-portable/evidence/** -text
-portable/tests/**/evidence/** -text
-portable/tests/whole_program/runtime_flow_v13/** -text
-portable/tests/whole_program/text_bitmap/bridge-payload-v1-inputs/** -text
-portable/tests/whole_program/text_bitmap/caption-runtime-v14/** -text
-portable/tests/whole_program/s26_window_object_views_v1/fixtures/** -text
-portable/tests/whole_program/title_drag_s26_v17/** -text
-# DOS intake receipts pin exact source/tool/report bytes across checkouts.
-work/source-only-dos/** -text whitespace=cr-at-eol
-work/source-only-dos/*.log whitespace=cr-at-eol,-blank-at-eof
-# Complete historical review captures preserve their existing trailing lines.
-work/source-only-dos/population-work-arrays-v18/source_views/** whitespace=cr-at-eol,-blank-at-eof
-
-# Retained compiler fixture is hashed with its historical trailing line.
-work/source-only-dos/storage-admission-v25/geometry/historical-probe.c whitespace=cr-at-eol,-blank-at-eof
-work/source-only-dos/mouse-code-offset-frame-v26/historical-runtime-probe.py whitespace=cr-at-eol,-blank-at-eof
-work/source-only-dos/mouse-code-offset-frame-v26/recheck-normalized.py whitespace=cr-at-eol,-blank-at-eof
-# Raw listings and period-linker logs retain their hashed whitespace verbatim.
-work/source-only-dos/structural-audits-v36/** whitespace=cr-at-eol,-trailing-space,-blank-at-eof
-work/source-only-dos/structural-audits-v37/** whitespace=cr-at-eol,-trailing-space,-blank-at-eof

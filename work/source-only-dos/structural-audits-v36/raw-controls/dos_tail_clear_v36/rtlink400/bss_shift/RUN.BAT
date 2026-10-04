@@ -1,2 +1,0 @@
-@echo off
-D:\RTLINK.EXE @PROBE.LNK < NUL > LINK.LOG

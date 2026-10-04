@@ -2,7 +2,7 @@
 
 Examples::
     python tools/hardtail.py S15:384C:0239
-    python tools/hardtail.py --triage --catalog work/takeover/hardtail/catalog.json
+    python tools/hardtail.py --triage --catalog build/workers/hardtail/catalog.json
     python tools/hardtail.py FUNCTION --source draft.c --json build/workers/NAME/report.json
 
 All reports retain the strict ``modules.verify_module`` verdict separately from

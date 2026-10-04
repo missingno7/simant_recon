@@ -74,7 +74,7 @@ class SearchOptions(unittest.TestCase):
 class SearchCompilerControls(unittest.TestCase):
     def test_bare_search_matches_accepted_memory_peer_and_preserves_negative(self):
         # The same whole module has an accepted peer and an unclaimed six-byte residue.
-        source = ROOT / "work/takeover/context-next/memory-near-repaired.c"
+        source = ROOT / "tests/fixtures/memory-near-repaired.c"
         with contextlib.redirect_stdout(io.StringIO()):
             peer = search.run("f_171C_2086", [source], None, None, None, {}, quiet=True)[0]
             target = search.run("f_171C_0CF4", [source], None, None, None, {}, quiet=True)[0]
@@ -85,7 +85,7 @@ class SearchCompilerControls(unittest.TestCase):
         self.assertIn("6 differing", " ".join(target["reasons"]))
 
     def test_explicit_wrong_placement_remains_a_strict_failure(self):
-        source = ROOT / "work/takeover/context-next/memory-near-repaired.c"
+        source = ROOT / "tests/fixtures/memory-near-repaired.c"
         m = modules.load_manifest()["modules"]["root:171C"]
         p = m["placements"]["_DATA"]
         with contextlib.redirect_stdout(io.StringIO()):

@@ -108,12 +108,19 @@ def main() -> int:
     if program:
         listed |= {str((ROOT / m['source']).resolve()).lower() for m in program['modules']}
         listed.add(str(canonical.PROGRAM.resolve()).lower())
+        canonical_payloads = {}
         for item in program['modules']:
             raw = (ROOT / item['source']).read_bytes()
+            canonical_payloads[item['key']] = raw
             if sha(raw) != item['source_sha256']:
                 failures.append(item['key'] + ': canonical inventory source pin differs')
             if item['key'] in man['modules'] and item['source_sha256'] != man['modules'][item['key']]['source_sha256']:
                 failures.append(item['key'] + ': source authorities disagree')
+        try:
+            canonical.check_semantic_publication(program, canonical_payloads, program,
+                                                 sha(canonical.PROGRAM.read_bytes()))
+        except ValueError as error:
+            failures.append('canonical semantic completeness: ' + str(error))
     for f in sorted((ROOT / "src").rglob("*")):
         if f.is_file() and str(f.resolve()).lower() not in listed:
             failures.append(f"{f.relative_to(ROOT)}: file in src/ not published by promote.py (drafts belong in build/workers/)")
@@ -424,7 +431,12 @@ def main() -> int:
         "complete_tus_relocation_order_proven": len(tu_order_proven),
         "complete_tus_cross_function_order_pending": sorted(tu_order_pending),
         "codegen_rules_reproduced": rules_ok,
-        "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
+        "behavior_exact_confirmed_functions": len(program['semantics']) if program else 0,
+        "historical_exact_source_rebuilt_function_count": len(current_context_claims),
+        "canonical_translation_units": len(program['modules']) if program else 0,
+        "canonical_storage_units": sum('storage_contract' in m for m in program['modules']) if program else 0,
+        "canonical_program_sha256": sha(canonical.PROGRAM.read_bytes()) if program else None,
+        "whole_executable": "NOT_BUILT (canonical DOS link has open semantic gates; see docs/canonical-source.md)",
         "validation": "PASS" if not failures else "FAIL",
         "failures": failures,
     }
@@ -434,6 +446,8 @@ def main() -> int:
           f"Validation: **{progress['validation']}** ({progress['generated']})", "",
           "| Measure | Value |", "|---|---:|"]
     for k in ("known_functions", "known_game_functions", "exact_c_functions", "exact_c_bytes",
+              "historical_exact_source_rebuilt_function_count", "behavior_exact_confirmed_functions",
+              "canonical_translation_units", "canonical_storage_units",
               "exact_asm_bytes", "exact_code_segment_data_bytes",
               "historical_runtime_bytes_accepted", "historical_runtime_members_accepted",
               "runtime_functions_known", "runtime_functions_owned", "owned_functions",

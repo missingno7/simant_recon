@@ -8,8 +8,8 @@ is assigned by this suite.
 from __future__ import annotations
 import argparse, hashlib, json, random, struct, sys, time
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "tools"))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
 import behavior, match
 from behavior_ledger import CaseLedger
 
@@ -110,127 +110,10 @@ def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contr
         metadata={"suite":SUITE,"contract":contract,"heap_start":HEAP_SEG,"heap_end":end,
                   "blocks":[{"seg":s,"paras":p,"type":k,**o} for s,p,k,o in starts]})
 
-def directed():
-    h=[0xffc,HANDLE_SEG]
-    resize=[
-      heap_case("09cc/shrink-small",[(48,1,{"size":700}),(48,0x80)],args=h+[44,3],handles=[0],contract="shrink below split threshold"),
-      heap_case("09cc/shrink-split",[(96,1,{"size":1400}),(64,0x80)],args=h+[40,3],handles=[0],contract="shrink and add a free tail"),
-      heap_case("09cc/grow-adjacent-free",[(20,1,{"size":288}),(36,0x80),(32,0)],args=h+[48,0],handles=[0],contract="grow into adjacent free block"),
-      heap_case("09cc/grow-locked-neighbor",[(20,1,{"size":288}),(36,3,{"lock":1}),(32,0x80)],args=h+[48,0],handles=[0],contract="reject growth across locked block"),
-      heap_case("09cc/grow-too-large",[(20,1,{"size":288}),(8,0x80),(32,0)],args=h+[40,1],handles=[0],contract="reject insufficient adjacent space"),
-    ]
-    move=[
-      heap_case("0adc/move-soft",[(24,0x80),(20,3,{"size":275}),(22,0x80),(16,0)],args=[0,HEAP_SEG],result="void",handles=[0],contract="move eligible soft block into preceding hole and repair handle"),
-      heap_case("0adc/move-firm",[(16,0x80),(24,1,{"size":350,"age":9}),(18,0),(20,0x80),(16,0)],args=[0,HEAP_SEG],result="void",handles=[0],contract="move firm block while retaining other free-list nodes"),
-    ]
-    compact=[
-      heap_case("0cf4/immediate-soft",[(22,0x80),(18,3,{"size":250}),(20,0x80),(16,0)],args=[0],handles=[0],contract="move immediate unlocked soft block into an adjacent hole"),
-      heap_case("0cf4/later-firm",[(34,0x80),(14,1,{"lock":1}),(20,1,{"size":300}),(18,0x80)],args=[0],handles=[0],contract="skip locked block, move later fitting firm block"),
-      heap_case("0cf4/no-eligible",[(20,0x80),(14,1,{"lock":1}),(18,3,{"attr":0x10}),(20,0x80)],args=[0],handles=[0],contract="leave locked or pinned blocks in place"),
-      heap_case("0cf4/discarded-barrier",[(26,0x80),(16,5,{"attr":0x10}),(20,0x80)],args=[0],contract="discarded blocks are not compacted as firm or soft allocations"),
-      heap_case("0cf4/ems-boundary",[(20,0x80),(18,3,{"size":260}),(20,0x80)],args=[1],handles=[0],extra=[(dga(0x3950),w(HEAP_SEG+2))],contract="respect EMS-only upper boundary"),
-    ]
-    alloc=[
-      heap_case("0fbc/split",[(18,1,{"size":250,"lock":1}),(24,0x80),(72,0x80)],args=[24,3],result="farptr",handles=[0],contract="select last fit and split prefix for soft allocation"),
-      heap_case("0fbc/whole",[(28,0x80),(40,1,{"lock":1}),(24,0)],args=[24,1],result="farptr",contract="consume near-fit block below split threshold"),
-      heap_case("0fbc/later-fit",[(18,0x80),(30,0),(42,0x80),(20,1,{"lock":1})],args=[36,0],result="farptr",contract="select a later adequate free block"),
-      heap_case("0fbc/reclaim-oldest-soft",[(10,0x80),(18,3,{"size":200,"age":1,"attr":0x10}),(10,0x80),(20,0)],args=[25,1],result="farptr",handles=[0],extra=[(dga(0x3948),far(0,0x7100))],contract="reclaim an unlocked soft handle when total free plus soft space can satisfy allocation"),
-    ]
-    return {"f_171C_09CC":resize,"f_171C_0ADC":move,"f_171C_0CF4":compact,"f_171C_0FBC":alloc}
 
-def randomized(count=300,seed=0x171c):
-    rng=random.Random(seed); out={k:[] for k in directed()}
-    for i in range(count):
-        kind=rng.choice(tuple(out))
-        if kind=="f_171C_09CC":
-            old=rng.randrange(18,72); nb=rng.randrange(8,40)
-            request=max(4,rng.choice((old-2,old//2,old+rng.randrange(1,nb+1),old+nb+8)))
-            rows=[(old,rng.choice((0,1,3)),{"size":(old-2)*16}),(nb,rng.choice((0x80,0,1,3)),{"lock":rng.choice((0,0,1))}),(16,0x80)]
-            c=heap_case(f"random/{seed:08x}/{i}/resize",rows,args=[0xffc,HANDLE_SEG,request,rng.choice((0,1,3))],handles=[0],contract="resize branches")
-        elif kind=="f_171C_0ADC":
-            b,z=rng.randrange(6,32),rng.randrange(6,32); a=rng.randrange(b,40)
-            rows=[(a,0x80),(b,rng.choice((1,3)),{"size":(b-2)*16,"attr":rng.choice((0,0,0x10)),"lock":rng.choice((0,0,1))}),(z,0x80)]
-            c=heap_case(f"random/{seed:08x}/{i}/move",rows,args=[0,HEAP_SEG],result="void",handles=[0],contract="move state/preconditions")
-        elif kind=="f_171C_0CF4":
-            # Keep the first free hole large enough for the sole eligible later
-            # firm/soft block; the locked separator exercises skip semantics.
-            movable=rng.randrange(6,24); hole=rng.randrange(movable,36)
-            rows=[(hole,0x80),(rng.randrange(6,18),1,{"lock":1}),
-                  (movable,rng.choice((1,3)),{"size":100}),
-                  (rng.randrange(6,24),0x80)]
-            c=heap_case(f"random/{seed:08x}/{i}/compact",rows,args=[rng.choice((0,1))],handles=[0],extra=[(dga(0x3950),w(HEAP_SEG+rng.randrange(1,10)))],contract="compaction/reclaim")
-        else:
-            available=rng.randrange(24,64)
-            rows=[(available,0x80),(rng.randrange(6,30),rng.choice((0,5)),{}),
-                  (rng.randrange(6,30),1,{"lock":1}),(rng.randrange(6,30),0x80)]
-            c=heap_case(f"random/{seed:08x}/{i}/alloc",rows,args=[rng.randrange(6,available+1),rng.choice((0,1,3))],result="farptr",handles=[0],contract="allocation fit/split with locked/pinned neighbors")
-        out[kind].append(c)
-    return out
 
-def run(target,cases,outdir):
-    pair=behavior.PreparedPair(target,out=outdir/target); failures=[]; errors=[]; started=time.time()
-    for i,case in enumerate(cases):
-        try: cmp=pair.compare(case)
-        except behavior.ExecutionError as e:
-            errors.append({"index":i,"label":case.label,"error":str(e),"fixture":case.metadata}); continue
-        if not cmp.equal:
-            failures.append({"index":i,"label":case.label,"diff":cmp.diff,"original":cmp.original,"candidate":cmp.candidate,"fixture":case.metadata})
-            if len(failures)>=20: break
-    report={"schema":"behavior-suite-run-v1","suite":SUITE,"function":target,
-      "suite_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-      "address":pair.identity["address"],"source":pair.identity["source"],"source_sha256":pair.identity["source_sha256"],
-      "compiled_source_sha256":pair.identity["compiled_source_sha256"],"object_sha256":pair.identity["object_sha256"],
-      "oracle_sha256":pair.identity["oracle_sha256"],"harness_sha256":pair.identity["harness_sha256"],
-      "profile":pair.identity["profile"],"flags":pair.identity["flags"],
-      "candidate_strict":pair.strict.get("claims",{}).get(target,{}),
-      "whole_module_peers_and_data":"PreparedPair gates passed","cases_generated":len(cases),
-      "cases_run":len(cases)-len(errors),"mismatches":len(failures),"execution_errors":errors,
-      "failures":failures,"elapsed_seconds":round(time.time()-started,3),
-      "behavioral_status":"UNRESOLVED; pending supervisor review"}
-    (outdir/f"{target}.json").write_text(json.dumps(report,indent=2)+"\n")
-    return report
 
-def function_body(text,name):
-    import re
-    match_sig=re.search(r"^[^\n;]*\b"+re.escape(name)+r"\s*\([^;]*?\)\s*\{",text,re.M)
-    if not match_sig: raise ValueError(f"cannot locate definition of {name}")
-    start=match_sig.end()-1; depth=0
-    for pos in range(start,len(text)):
-        if text[pos]=="{": depth+=1
-        elif text[pos]=="}":
-            depth-=1
-            if depth==0: return start,pos+1,text[start:pos+1]
-    raise ValueError(f"unterminated definition of {name}")
 
-def negative_controls(outdir,cases):
-    """Compile one source mutant per function and require oracle sensitivity."""
-    specs={
-      "f_171C_09CC":("return 1;","return 0;",0),
-      "f_171C_0ADC":("(unsigned long)b + 0x20000L","(unsigned long)b + 0x30000L",0),
-      "f_171C_0CF4":("return *(int near *)&moved;","return 0;",1),
-      "f_171C_0FBC":("return n;","return 0L;",0),
-    }
-    report=[]; mutant_root=outdir/"negative"; mutant_root.mkdir(parents=True,exist_ok=True)
-    for target,(old,new,case_index) in specs.items():
-        seed=ROOT/"work/takeover/hardtail/seeds"/Path(next(
-            r["best_source"] for r in json.loads((ROOT/"work/takeover/hardtail/catalog.json").read_text())["records"]
-            if r["function"]==target)).name
-        original=seed.read_text(encoding="latin1"); start,end,body=function_body(original,target)
-        if body.count(old)<1: raise RuntimeError(f"negative control anchor missing for {target}: {old!r}")
-        mutant_text=original[:start]+body.replace(old,new,1)+original[end:]
-        mutant_path=mutant_root/f"{target}.c"; mutant_path.write_text(mutant_text,encoding="latin1")
-        pair=behavior.PreparedPair(target,source=mutant_path,out=mutant_root/target)
-        case=cases[target][case_index]
-        comparison=pair.compare(case)
-        row={"function":target,"source":str(mutant_path.relative_to(ROOT)),
-             "source_sha256":pair.identity["source_sha256"],"object_sha256":pair.identity["object_sha256"],
-             "candidate_strict":pair.strict.get("claims",{}).get(target,{}),
-             "case":case.label,"detected":not comparison.equal,"diff":comparison.diff,
-             "oracle":comparison.original,"mutant":comparison.candidate}
-        if comparison.equal: raise AssertionError(f"behavior oracle failed to detect negative control: {target}")
-        report.append(row)
-    (outdir/"negative-controls.json").write_text(json.dumps(report,indent=2)+"\n")
-    return report
 
 
 TARGETS = ("f_171C_09CC", "f_171C_0ADC", "f_171C_0CF4", "f_171C_0FBC")
@@ -239,24 +122,8 @@ SEQUENCE_EFFECTS = ["operation return", "allocator and master-table state",
     "heap headers and payload bytes", "handle identity and payload preservation",
     "free-list topology", "lock/unlock/free/reclaim effects", "all nonstack writes",
     "ordered actual helper calls", "caller ABI"]
-MODULE_SEED = ROOT / "work/takeover/hardtail/seeds/root_171C_7decbec511e9.c"
 
 
-def source_copy(outdir):
-    """Retain the exact whole-module C input beside its immutable run reports."""
-    path = outdir / "source" / "ralloc-module.c"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    text = MODULE_SEED.read_text(encoding="latin1")
-    alias = "return *(int near *)&moved;"
-    if text.count(alias) != 1:
-        raise RuntimeError("expected one private moved-result alias in the 0CF4 draft")
-    # Keep the function's C type natural for a semantic oracle proof. The
-    # historical low-word alias was only a code-generation hypothesis.
-    raw = text.replace(alias,"return (int)moved;",1).encode("latin1")
-    if path.exists() and path.read_bytes() != raw:
-        raise RuntimeError(f"refusing to replace retained source {path}")
-    if not path.exists(): path.write_bytes(raw)
-    return path
 
 
 def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
@@ -370,216 +237,12 @@ class _StepIdentity:
                        "address":{k:fn[k] for k in ("unit","seg","off","size")}}
 
 
-def function_body(text,name):
-    import re
-    sig=re.search(r"^[^\n;]*\b"+re.escape(name)+r"\s*\([^;]*?\)\s*\{",text,re.M)
-    if not sig: raise ValueError(f"cannot locate definition of {name}")
-    start=sig.end()-1; depth=0
-    for pos in range(start,len(text)):
-        if text[pos]=="{": depth+=1
-        elif text[pos]=="}":
-            depth-=1
-            if depth==0:return start,pos+1,text[start:pos+1]
-    raise ValueError(f"unterminated definition of {name}")
 
 
-def _mutant(source_text,target):
-    specs={
-      "f_171C_09CC":("if (b->paras < paras + 0x20)","if (b->paras <= paras + 0x20)"),
-      "f_171C_0ADC":("(unsigned long)b + 0x20000L","(unsigned long)b + 0x30000L"),
-      "f_171C_0CF4":("return (int)moved;","return 0;"),
-      "f_171C_0FBC":("return n;","return 0L;")}
-    old,new=specs[target]
-    start,end,body=function_body(source_text,target)
-    if body.count(old)!=1: raise RuntimeError(f"mutant anchor is not unique in {target}: {old}")
-    return source_text[:start]+body.replace(old,new,1)+source_text[end:]
 
 
-def _pointer_arithmetic_mutant(source_text):
-    target="f_171C_0CF4"
-    start,end,body=function_body(source_text,target)
-    old_nb="(long)nb + 0x20000L"
-    old_n="(long)n + 0x20000L"
-    if body.count(old_nb)!=2 or body.count(old_n)!=1:
-        raise RuntimeError("unexpected far-pointer expression count in 0CF4")
-    body=body.replace(old_nb,"(char far *)nb + 0x20000L")
-    body=body.replace(old_n,"(char far *)n + 0x20000L")
-    return source_text[:start]+body+source_text[end:]
 
 
-def _run_negative_controls(outdir,source_path,steps):
-    negroot=outdir/"negative"; negroot.mkdir(parents=True,exist_ok=True)
-    source_text=source_path.read_text(encoding="latin1")
-    report=[]
-    for target in TARGETS:
-        mutant=negroot/f"{target}.c"
-        mutant.write_text(_mutant(source_text,target),encoding="latin1")
-        pair=behavior.PreparedPair(TARGETS[0],source=mutant,out=negroot/target,
-                                  sequence_targets=TARGETS)
-        control_steps=(make_sequence("negative/cf4-moved-return",hole=70,soft=48,
-                         gap=18,firm=20,tail=32,soft_lock=1,seed=0x171C)
-                       if target=="f_171C_0CF4" else steps)
-        errors=[]; detected=None; compared=0
-        for (step_target,case),cmp in zip(control_steps,pair.compare_sequence(control_steps)):
-            compared+=1
-            if not cmp.equal:
-                detected={"step":case.label,"operation":step_target,"diff":cmp.diff}
-                break
-        row={"target":target,"source":pair.identity["source"],
-             "source_sha256":pair.identity["source_sha256"],
-             "object_sha256":pair.identity["object_sha256"],
-             "oracle_sha256":pair.identity["oracle_sha256"],
-             "manifest_sha256":pair.identity["manifest_sha256"],
-             "mutant_detected":detected is not None,"first_difference":detected,
-             "steps_executed":compared,"errors":errors}
-        if detected is None: raise AssertionError(f"stateful negative control not detected: {target}")
-        report.append(row)
-    # A minimized valid arena proves that byte-wise far-pointer arithmetic in
-    # 0CF4 wraps differently from the original's packed-long paragraph update.
-    pointer_steps=make_sequence("negative/pointer-arithmetic",hole=70,soft=48,
-        gap=18,firm=20,tail=32,soft_lock=1,seed=0x171C)
-    pointer_case=pointer_steps[0][1]
-    pointer_case.metadata["contract"]="single-call locked-soft barrier; later firm block is moved into first free hole"
-    baseline=behavior.PreparedPair(TARGETS[0],source=source_path,
-        out=negroot/"pointer-arithmetic-baseline",sequence_targets=TARGETS)
-    baseline_cmp=next(baseline.compare_sequence([("f_171C_0CF4",pointer_case)]))
-    if not baseline_cmp.equal:
-        raise RuntimeError(f"pointer arithmetic control baseline is not semantically matched: {baseline_cmp.diff}")
-    mutant=negroot/"f_171C_0CF4-pointer-arithmetic.c"
-    mutant.write_text(_pointer_arithmetic_mutant(source_text),encoding="latin1")
-    pair=behavior.PreparedPair(TARGETS[0],source=mutant,out=negroot/"pointer-arithmetic-mutant",
-                              sequence_targets=TARGETS)
-    cmp=next(pair.compare_sequence([("f_171C_0CF4",pointer_case)]))
-    if cmp.equal: raise AssertionError("pointer arithmetic negative control did not reproduce the semantic difference")
-    report.append({"target":"f_171C_0CF4","id":"far-pointer-arithmetic-wrap",
-        "source":pair.identity["source"],"source_sha256":pair.identity["source_sha256"],
-        "object_sha256":pair.identity["object_sha256"],"oracle_sha256":pair.identity["oracle_sha256"],
-        "manifest_sha256":pair.identity["manifest_sha256"],"baseline_matched":True,
-        "fixture":pointer_case.metadata,"steps_executed":1,"mutant_detected":True,
-        "first_difference":{"step":pointer_case.label,"operation":"f_171C_0CF4","diff":cmp.diff}})
-    (outdir/"negative-controls.json").write_text(json.dumps(report,indent=2)+"\n")
-    return report
 
 
-def run_stateful(random_count,seed,outdir,*,negative_controls=True):
-    outdir.mkdir(parents=True,exist_ok=True)
-    source=source_copy(outdir)
-    pair=behavior.PreparedPair(TARGETS[0],source=source,out=outdir/"candidate",
-                              sequence_targets=TARGETS)
-    ledgers={target:CaseLedger(outdir/f"{target}-case-ledger.jsonl.gz",
-                _StepIdentity(pair,target),SEQUENCE_EFFECTS) for target in TRACKED_FUNCTIONS}
-    per_target={target:{"calls":0,"equal":0,"mismatches":0,"errors":0,
-                        "original_nonstack_dgroup_write_observations":0,
-                        "candidate_nonstack_dgroup_write_observations":0}
-                for target in TRACKED_FUNCTIONS}
-    dgroup_samples={target:{"original":set(),"candidate":set()} for target in TRACKED_FUNCTIONS}
-    failures=[]; errors=[]; completed_sequences=0; started=time.monotonic()
-    directed=[operation_plan("directed/basic",seed=seed),
-              make_sequence("directed/large-arena",hole=90,soft=58,gap=18,firm=20,tail=34,seed=seed+1),
-              make_sequence("directed/locked-soft",hole=70,soft=48,gap=18,firm=20,tail=32,
-                            soft_lock=1,seed=seed+2),
-              # A locked and a pinned soft block before a later movable firm
-              # block exercise the second compaction scan and skip conditions.
-              make_sequence("directed/lock-and-pin",hole=72,soft=48,gap=18,firm=20,tail=32,
-                            soft_lock=0,firm_lock=0,pinned=True,seed=seed+3),
-              make_sequence("directed/resize-boundary-noop",hole=86,soft=50,gap=16,firm=18,tail=32,
-                            resize_delta=31,seed=seed+4),
-              make_sequence("directed/resize-boundary-split",hole=86,soft=50,gap=16,firm=18,tail=32,
-                            resize_delta=33,seed=seed+5),
-              make_sequence("directed/alloc-exact-fit",hole=86,soft=50,gap=16,firm=18,tail=32,
-                            allocation_mode="exact-fit",seed=seed+6),
-              make_sequence("directed/alloc-plus-four",hole=86,soft=50,gap=16,firm=18,tail=32,
-                            allocation_mode="threshold-plus-four",seed=seed+7),
-              make_sequence("directed/alloc-plus-five",hole=86,soft=50,gap=16,firm=18,tail=32,
-                            allocation_mode="split-plus-five",seed=seed+8)]
-    generated=list(directed)
-    for i in range(random_count):
-        generated.append(operation_plan(f"random/{seed:08x}/{i}",seed=seed+i+1,random_case=True))
-    random_meta=[steps[0][1].metadata["sequence"] for steps in generated[len(directed):]]
-    def histogram(key):
-        from collections import Counter
-        return dict(sorted(Counter(str(meta[key]) for meta in random_meta).items()))
-    random_coverage={"sequence_count":len(random_meta),
-        "distinct_payload_patterns":len({meta["content_seed"] for meta in random_meta}),
-        "resize_delta_histogram":histogram("resize_delta_paras"),
-        "allocation_mode_histogram":histogram("allocation_mode"),
-        "firm_type_histogram":histogram("firm_type"),
-        "pinned_soft_sequences":sum(bool(meta["soft_pinned_initial"]) for meta in random_meta),
-        "three_separated_free_nodes_per_initial_heap":len(random_meta),
-        "paragraph_ranges":{key:[min(meta[key] for meta in random_meta),max(meta[key] for meta in random_meta)]
-            for key in ("hole_paras","soft_paras","gap_paras","firm_paras","tail_paras")}
-        } if random_meta else {"sequence_count":0}
-    for seq_index,steps in enumerate(generated):
-        lane="directed" if seq_index<len(directed) else "randomized"
-        try:
-            for step_index,((target,case),cmp) in enumerate(zip(steps,pair.compare_sequence(steps))):
-                per_target[target]["calls"]+=1
-                for side,machine,observation in (("original",pair.original_machine,cmp.original),
-                                                  ("candidate",pair.candidate_machine,cmp.candidate)):
-                    lower,upper=machine.stack_bounds
-                    addresses={at for at in observation["written_addresses"]
-                               if DG*16 <= at < (DG+0x1000)*16 and not lower <= at < upper}
-                    per_target[target][side+"_nonstack_dgroup_write_observations"]+=len(addresses)
-                    dgroup_samples[target][side].update(addresses)
-                row=ledgers[target].record(case,cmp,lane=lane)
-                if cmp.equal: per_target[target]["equal"]+=1
-                else:
-                    per_target[target]["mismatches"]+=1
-                    failures.append({"sequence":case.metadata.get("sequence",{}).get("sequence_id"),
-                                     "step":step_index,"target":target,"label":case.label,
-                                     "diff":cmp.diff,"ledger_row":row})
-                    break
-            else:
-                completed_sequences+=1
-        except Exception as exc:
-            target=steps[min(step_index if "step_index" in locals() else 0,len(steps)-1)][0] if steps else "unknown"
-            per_target[target]["errors"]+=1
-            errors.append({"sequence_index":seq_index,"sequence_id":steps[0][1].metadata.get("sequence",{}).get("sequence_id") if steps else None,
-                           "step":step_index if "step_index" in locals() else None,
-                           "error":str(exc)})
-            continue
-    ledger_pins={target:ledgers[target].finalize() for target in TRACKED_FUNCTIONS}
-    negative=_run_negative_controls(outdir,source,directed[0]) if negative_controls else []
-    suite_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
-    summary={"schema":"behavior-suite-run-v1","suite":SUITE,"suite_sha256":suite_hash,
-        "source_sha256":pair.identity["source_sha256"],"source":pair.identity["source"],
-        "compiled_source_sha256":pair.identity["compiled_source_sha256"],
-        "object_sha256":pair.identity["object_sha256"],"oracle_sha256":pair.identity["oracle_sha256"],
-        "harness_sha256":pair.identity["harness_sha256"],"manifest_sha256":pair.identity["manifest_sha256"],
-        "sequence_targets":list(TARGETS),"identity":pair.identity,
-        "seed":seed,"directed_sequences":len(directed),"randomized_sequences_requested":random_count,
-        "randomized_sequences_generated":random_count,"sequences_completed":completed_sequences,
-        "randomized_fixture_coverage":random_coverage,
-        "execution_errors":errors,"errors":len(errors),"mismatches":len(failures),"failures":failures,
-        "per_target":per_target,"case_ledgers":ledger_pins,
-        "nonstack_dgroup_write_samples":{target:{side:sorted(values)[:32]
-            for side,values in dgroup_samples[target].items()} for target in TRACKED_FUNCTIONS},
-        "negative_controls":negative,
-        "contract":"persistent live original-DOS vs compiler-produced whole-module C; all same-module non-target helper calls execute original DOS code on both sides; first case initializes only; later steps preserve each VM's state",
-        "domains":"valid 3-hole paragraph heaps with initialized linked free lists, descending master slots, matching counters, patterned payloads and discard sentinel; direct and noncontiguous relocation; soft lock/pin and firm/hard types; resize deltas 31/32/33/40; exact-fit, best==request+4 and +5 split thresholds; unlock/reclaim/free/allocate/second compact",
-        "status":"UNRESOLVED; diagnostic behavioral differential only; supervisor review required",
-        "elapsed_seconds":round(time.monotonic()-started,3)}
-    for target in TARGETS:
-        report={"schema":"behavior-suite-run-v1","suite":SUITE,"function":target,
-            "source":pair.identity["source"],"source_sha256":pair.identity["source_sha256"],
-            "object_sha256":pair.identity["object_sha256"],"oracle_sha256":pair.identity["oracle_sha256"],
-            "manifest_sha256":pair.identity["manifest_sha256"],"harness_sha256":pair.identity["harness_sha256"],
-            "suite_sha256":suite_hash,"candidate_strict":pair.strict.get("claims",{}).get(target,{}),
-            "case_ledger":ledger_pins[target],"calls":per_target[target]["calls"],
-            "matched":per_target[target]["equal"],"mismatches":per_target[target]["mismatches"],
-            "errors":per_target[target]["errors"],"negative_control_detected":next((x["mutant_detected"] for x in negative if x["target"]==target),None),
-            "behavioral_status":"UNRESOLVED; diagnostic behavioral differential only; supervisor review required"}
-        (outdir/f"{target}.json").write_text(json.dumps(report,indent=2)+"\n")
-    (outdir/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
-    return summary
 
-def main():
-    p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--random-count",type=int,default=256)
-    p.add_argument("--seed",type=lambda s:int(s,0),default=0x171c)
-    p.add_argument("--no-negative-controls",action="store_true")
-    p.add_argument("--out",type=Path,default=ROOT/"build/workers/behavior_memory/stateful-20261002")
-    a=p.parse_args()
-    report=run_stateful(a.random_count,a.seed,a.out,negative_controls=not a.no_negative_controls)
-    print(json.dumps(report,indent=2))
-if __name__=="__main__": main()

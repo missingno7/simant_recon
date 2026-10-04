@@ -1,2 +1,0 @@
-@echo off
-D:\RTL-SWAP.EXE @PROBE.LNK < NUL > LINK.LOG

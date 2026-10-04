@@ -11,7 +11,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
 sys.path.insert(0, str(ROOT / 'tools'))
 try:
     import behavior as b
@@ -111,7 +111,7 @@ class ExecutionControls(unittest.TestCase):
                        for i,v in enumerate(values))+'cb'
 
     def cursor_case(self, root):
-        rel='evidence/behavior/runtime/unit-cursor.json'
+        rel='evidence/canonical/runtime/unit-cursor.json'
         path=root/rel;path.parent.mkdir(parents=True)
         raw=json.dumps({'schema':'behavior-format-cursor-proof-v1',
             'oracle_sha256':b.exe.load().sha256,'review':{'status':'APPROVED','reviewer':'root'},

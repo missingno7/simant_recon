@@ -1,6 +1,6 @@
 """Bounded original-DOS differential contracts for small rendering routines.
 
-All candidate code is compiled from retained whole-module seeds and runs beside
+All candidate code is compiled from the current canonical whole module and runs beside
 the hash-locked EXE through tools.behavior.PreparedPair.  Graphics operations
 are modeled only at named host boundaries; pointer arguments are projected into
 semantic rectangles/points before comparison.
@@ -16,8 +16,8 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "tools"))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
 import behavior
 import behavior_ledger
 from behavior_suites import lists as lists_suite
@@ -335,9 +335,9 @@ def _malloc_buffer(machine, args):
     size = args[0]
     # 0x9000 is the PreparedPair candidate code segment. Keep host scratch at
     # a disjoint high-memory arena, away from the code, Ralloc blocks and stack.
-    next_linear = machine.state.get("malloc_next_linear", 0xA1000)
+    next_linear = machine.state.get("malloc_next_linear", 0xC1000)
     linear = (next_linear + 15) & ~15
-    if linear + size >= 0xB0000:
+    if linear + size >= 0xD0000:
         raise behavior.ExecutionError("modeled graphics scratch arena exhausted")
     machine.state["malloc_next_linear"] = linear + size
     pointer = (linear & 0xF, linear >> 4)
@@ -437,7 +437,7 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
     rows = [(16, 1, {"size": 224, "age": 1}), (0xF0, 0x80)]
     arena = memory_suite.heap_case(label + "/ralloc", rows, handles=[0],
         contract="one message picture handle and a valid free block for DrawBalloons temporary buffers")
-    handle_off = memory_suite.HANDLE_TOP - 4
+    handle_off = memory_suite.MASTER_FIRST
     handle = (handle_off, memory_suite.HANDLE_SEG)
     resource_ptr = (memory_suite.HEAP_SEG + 2, 0)
     # Picture bytes begin with width/height at byte 8, as read by the original
@@ -565,7 +565,7 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
     rows = [(16, 1, {"size": 224, "age": 1}), (0xF0, 0x80)]
     arena = memory_suite.heap_case(label + "/ralloc", rows, handles=[0],
         contract="one valid Ralloc-owned picture handle with a free block and real lock/unlock helpers")
-    handle = (memory_suite.HANDLE_TOP - 4, memory_suite.HANDLE_SEG)
+    handle = (memory_suite.MASTER_FIRST, memory_suite.HANDLE_SEG)
     pic_seg, pic_off = memory_suite.HEAP_SEG + 2, 0
     if pic_type == 3:
         if display == 2:
@@ -618,7 +618,7 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
                "format_commands": [], "resource_requests": [], "resource_releases": [],
                "screen_read_rectangles": [], "screen_pixel_captures": [],
                "scratch_allocations": [], "scratch_releases": [],
-               "temp_buffer": None, "temp_buffer_size": 0, "malloc_next_linear": 0xA1000},
+               "temp_buffer": None, "temp_buffer_size": 0, "malloc_next_linear": 0xC1000},
         metadata={"suite": SUITE, "contract": "win_DrawBitMap resource type dispatch, output result, ordered host render/release calls and complete pointed picture data",
                   "resource_picture": {"type": pic_type, "mode": mode, "width": width, "height": height, "pixel_bytes": len(pixels), "resource_available": available},
                   "calling_convention": "_fastcall: CX=x, DX=y, AX=id; far return; original Ralloc arena supports the handle pointer",
@@ -658,512 +658,17 @@ def bitmap_cases(random_count=0, seed=0xB17B17):
     return cases
 
 
-def _helper_boundary_specs(target, pair, counts, positive):
-    """Describe the execution boundary actually used by this suite.
-
-    Original DOS callees without a handler execute from the pinned EXE. A
-    callback with a handler is an explicit deterministic host/resource model.
-    The output is deliberately a boundary inventory, not a certification.
-    """
-    if target == "DrawMapCursor":
-        modeled = {
-            "f_22BF_09B0": "window-open query returns the fixture-selected Boolean used by the caller's branch",
-            "clip_Push": "ordered clipping stack command trace; clip geometry is not simulated",
-            "clip_SetWin": "ordered clipping window command trace; clip geometry is not simulated",
-            "clip_Pop": "ordered clipping stack command trace; clip geometry is not simulated",
-            "f_1CE2_0410": "host XOR draw boundary with semantic Rect fields and width projected from the pointed record",
-        }
-        original = {}
-    elif target == "InvertPatch":
-        modeled = {
-            "clip_Push": "ordered clipping stack command trace; clip geometry is not simulated",
-            "clip_SetWin": "ordered clipping window command trace; clip geometry is not simulated",
-            "f_1FAA_0006": "host polygon draw boundary with four pointed semantic vertices and two draw arguments",
-            "clip_Pop": "ordered clipping stack command trace; clip geometry is not simulated",
-        }
-        original = {}
-    elif target == "f_0250_1018":
-        modeled = {
-            "f_0250_0721": "available drawing boundary callback; no raster is modeled and this target does not normally dispatch it",
-            "f_0250_0ADB": "available drawing boundary callback; no raster is modeled and this target does not normally dispatch it",
-            "Punt": "invalid-state diagnostic boundary; valid directed/random domains avoid it",
-        }
-        original = {}
-    elif target == "f_0250_129E":
-        modeled = {"Punt": "invalid-state diagnostic boundary; valid directed/random domains avoid it"}
-        original = {
-            "f_0250_0721": "unhandled trace-and-pass-through to the original helper body; mode 0 executes caller-visible g_9126 transition and avoids hardware renderer dispatch",
-            "f_0250_0ADB": "unhandled trace-and-pass-through to the original helper body; mode 0 avoids hardware function-pointer dispatch",
-        }
-    elif target == "DrawBalloons":
-        modeled = {
-            "f_1629_000C": "message database resource acquisition and message bytes",
-            "f_1A53_00BA": "tile resource handle acquisition fixture",
-            "db_ReleaseHandle": "tile resource handle release fixture",
-            "f_24AB_02AD": "font selection state",
-            "WinPrintf": "formatted text command projection",
-            "f_0250_5058": "window clipping state setup",
-            "f_0250_0915": "tile raster request and deterministic tile pixels",
-            "f_0250_0B86": "alternate tile raster request and deterministic tile pixels",
-            "f_0250_0ADB": "tile pixel transfer into the composition buffer",
-            "f_0250_0721": "synthetic function-pointer slot fd_50F6_37EA: message picture host blit trace; this is not execution of the original two-argument f_0250_0721 body",
-            "f_0250_0D10": "clipping save/restore copy trace",
-        }
-        original = {
-            "f_0250_062A": "original tile-set lookup helper; entry arguments traced",
-            "f_0250_0643": "original tile-set selection helper; entry arguments traced",
-            "f_171C_1A9E": "original Ralloc allocation helper over valid fixture arena",
-            "f_171C_1B84": "original Ralloc lock helper over valid fixture handle table",
-            "f_171C_1BBA": "original Ralloc unlock helper over valid fixture handle table",
-            "f_171C_1C0A": "original Ralloc free helper over valid fixture arena",
-        }
-    else:
-        modeled = {
-            "db_LoadObject": "picture resource acquisition and valid-handle fixture selection",
-            "db_ReleaseObject": "picture resource lifetime release trace",
-            "GPutPacked": "packed-pixel host draw command and pointed picture projection",
-            "f_1B4E_003B": "mode-0 pixel host draw command and pointed pixel projection",
-            "f_1B4E_005E": "mode-1 pixel host draw command and pointed pixel projection",
-            "f_0250_0721": "synthetic g_9140 function-pointer slot: display buffer-size contract; its address reuses this symbol but its four-argument ABI does not execute the original two-argument root helper",
-            "f_0250_0D10": "synthetic g_9148 function-pointer slot: host pixel readback into deterministic packed buffer",
-            "WinPrintf": "debug format string projection",
-            "malloc": "deterministic disjoint host scratch-buffer arena",
-            "free": "host scratch-buffer release trace",
-        }
-        original = {
-            "o03_3258_040D": "original S03 4bpp packed decoder",
-            "o01_32B5_000F": "original S01 two-plane 1bpp decoder",
-            "o00_35A6_0007": "original S00 four-plane 1bpp decoder",
-        }
-    rows = []
-    for name, contract in sorted({**original, **modeled}.items()):
-        is_original = name in original
-        rows.append({"name": name,
-                     "execution_mode": "ORIGINAL_EXE" if is_original else "MODELED",
-                     "observed_call_count": counts["original"].get(name, 0),
-                     "executed_from_original": is_original,
-                     "contract": contract,
-                     "binding_role": ("original DOS helper body" if is_original else
-                         "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body"),
-                     "certification": None if is_original else {
-                         "status": "PENDING_SUPERVISOR_REVIEW",
-                         "positive_control_id": positive["id"] if positive else None,
-                         "negative_control_ids": []}})
-    return rows
 
 
-def _coverage_summary(target, cases):
-    summary = {"directed_labels": [c.label for c in cases if not c.label.startswith("random/")],
-               "randomized_labels_sha256": behavior.digest("\n".join(
-                   c.label for c in cases if c.label.startswith("random/")).encode("utf-8")),
-               "domain_values": {}}
-    if target == "DrawBalloons":
-        meta = [c.metadata["resource_picture"] for c in cases]
-        summary["domain_values"] = {
-            "modes": sorted({c.metadata["buffer_layout"]["mode"] for c in cases}),
-            "planes": sorted({c.metadata["resource_picture"].get("plane", 0) for c in cases}),
-            "picture_widths": sorted({x["width"] for x in meta}),
-            "picture_heights": sorted({x["height"] for x in meta}),
-            "coordinate_ranges": {"x": [min(c.metadata["coordinates"]["x"] for c in cases),
-                                         max(c.metadata["coordinates"]["x"] for c in cases)],
-                                  "y": [min(c.metadata["coordinates"]["y"] for c in cases),
-                                         max(c.metadata["coordinates"]["y"] for c in cases)]},
-            "spider_clip_cases": sum(bool(c.state.get("spider_clip")) for c in cases),
-        }
-    elif target == "win_DrawBitMap":
-        pictures = [c.metadata["resource_picture"] for c in cases]
-        summary["domain_values"] = {
-            "resource_types": sorted({x["type"] for x in pictures}),
-            "display_modes": sorted({x["mode"] for x in pictures}),
-            "display_families": sorted({c.state["display"] for c in cases}),
-            "picture_widths": sorted({x["width"] for x in pictures}),
-            "picture_heights": sorted({x["height"] for x in pictures}),
-            "missing_resource_cases": sum(not x["resource_available"] for x in pictures),
-            "pixel_encodings": {"type3/display0": "four one-bit planes, row bytes ceil(width/8)",
-                                "type3/display1": "two one-bit planes, row bytes ceil(width/8)",
-                                "type3/display2": "four-bit packed pixels, row bytes ceil(width/2)"},
-        }
-    else:
-        summary["domain_values"] = {
-            "directed_labels": [c.label for c in cases if not c.label.startswith("random/")],
-            "randomized_count": sum(c.label.startswith("random/") for c in cases),
-            "argument_domains_from_case_generator": "See the target-specific case generator in this pinned suite snapshot; case labels and input_sha256 are preserved in the per-case ledger.",
-        }
-    return summary
 
 
-def _write_helper_plan(target, run_evidence, outdir, negative_reports=None):
-    plan = {"schema": "behavior-helper-boundary-plan-v1",
-            "function": target, "suite_id": SUITE,
-            "status": "PENDING_SUPERVISOR_REVIEW",
-            "source_pins": {key: run_evidence["identity"][key] for key in
-                            ("source_sha256", "compiled_source_sha256", "suite_sha256",
-                             "harness_sha256", "oracle_sha256", "historical_manifest_sha256",
-                             "object_sha256")},
-            "case_ledger": run_evidence["case_ledger"],
-            "helpers": run_evidence["helper_boundaries"],
-            "coverage": run_evidence["coverage"],
-            "positive_control_ids": [x["id"] for x in run_evidence["positive_controls"]],
-            "negative_control_reports": negative_reports or [],
-            "limits": ["host render/resource services are deterministic explicit callbacks",
-                       "the suite observes ordered calls, semantic pointer contents, and modeled buffer writes",
-                       "it does not claim a final display framebuffer"]}
-    path = outdir / f"{target}.helper-boundary-plan.json"
-    path.write_text(json.dumps(plan, indent=2) + "\n")
-    return path
 
 
-def _run_target(target, casegen, count, seed, outdir, source=None):
-    pair = behavior.PreparedPair(target, source=source, out=outdir / target)
-    cases = casegen(count, seed)
-    effects = ["return and caller ABI", "ordered helper/render commands and arguments",
-               "global/map/cache writes", "projected far-pointer data and nonstack memory"]
-    ledger = behavior_ledger.CaseLedger(outdir / f"{target}.cases.jsonl.gz", pair, effects)
-    driver_pairs = {}
-    failures = []
-    lane_counts = {"directed": 0, "randomized": 0}
-    helper_counts = {"original": {}, "candidate": {}}
-    first_positive = None
-    started = time.time()
-    for i, case in enumerate(cases):
-        active_pair = pair
-        if target == "win_DrawBitMap":
-            display = case.state.get("display", 0)
-            unit = {0: "S00", 1: "S01", 2: "S03"}.get(display)
-            if unit is None:
-                raise behavior.ExecutionError(f"uncovered bitmap display type {display}")
-            if unit not in driver_pairs:
-                active_pair = behavior.PreparedPair(target, source=source,
-                    out=outdir / target / f"driver-{unit}")
-                active_pair.original_machine._load_overlay(unit)
-                active_pair.candidate_machine._load_overlay(unit)
-                driver_pairs[unit] = active_pair
-            else:
-                active_pair = driver_pairs[unit]
-            ledger.pair = active_pair
-        cmp = active_pair.compare(case)
-        lane = "randomized" if case.label.startswith("random/") else "directed"
-        row = ledger.record(case, cmp, lane=lane)
-        lane_counts[lane] += 1
-        for side, result in (("original", cmp.original), ("candidate", cmp.candidate)):
-            for call in result["trace"]:
-                helper_counts[side][call["name"]] = helper_counts[side].get(call["name"], 0) + 1
-        if cmp.equal and first_positive is None:
-            first_positive = {"id": case.label, "executed": True, "matched": True,
-                "execution_errors": 0, "original_executed": True, "candidate_executed": True,
-                "source_sha256": pair.identity["source_sha256"],
-                "object_sha256": pair.identity["object_sha256"],
-                "oracle_sha256": pair.identity["oracle_sha256"],
-                "compared_effects": row["compared_effects"],
-                "original_observation_sha256": row["original_observation_sha256"],
-                "candidate_observation_sha256": row["candidate_observation_sha256"]}
-        if not cmp.equal:
-            failures.append(behavior_ledger._json_value({"index": i, "label": case.label, "diff": cmp.diff,
-                             "original": cmp.original, "candidate": cmp.candidate}))
-            if len(failures) >= 20:
-                break
-    ran = failures[-1]["index"] + 1 if failures else len(cases)
-    ledger_report = ledger.finalize()
-    result = {"schema": "behavior-suite-run-v1", "suite": SUITE, "function": target,
-        **pair.identity, "candidate_strict": pair.strict.get("claims", {}).get(target, {}),
-        "module_peers_and_data": "passed PreparedPair strict whole-module peer/private-data gates",
-        "cases_generated": len(cases), "cases_run": ran, "directed_cases": sum(c.label.startswith(("directed/", "boundary/")) for c in cases[:ran]),
-        "randomized_cases": sum(c.label.startswith("random/") for c in cases[:ran]), "mismatches": len(failures), "failures": failures,
-        "compared_effects": effects, "case_ledger": ledger_report,
-        "helper_call_counts": helper_counts,
-        "seed": seed, "elapsed_seconds": round(time.time() - started, 3),
-        "behavioral_status": "UNRESOLVED; evidence pending supervisor contract review"}
-    if target in ("DrawMapCursor", "InvertPatch", "f_0250_1018", "f_0250_129E", "DrawBalloons", "win_DrawBitMap"):
-        snapshot_dir = outdir / "source-snapshots"
-        snapshot_dir.mkdir(parents=True, exist_ok=True)
-        snapshot = snapshot_dir / ("DrawBalloons.c" if target == "DrawBalloons" else
-            "m259D.c" if target == "win_DrawBitMap" else f"{target}.c")
-        shutil.copyfile(pair.source, snapshot)
-        suite_hash = behavior.digest(Path(__file__).read_bytes())
-        module = f'{pair.identity["address"]["unit"]}:{pair.identity["address"]["seg"]:04X}'
-        helper_specs = _helper_boundary_specs(target, pair, helper_counts, first_positive)
-        ledger_identity = {"path": (outdir / f"{target}.cases.jsonl.gz").resolve().relative_to(ROOT).as_posix(),
-            "sha256": ledger_report["sha256"], "row_count": ledger_report["row_count"],
-            "lane_counts": ledger_report["lane_counts"], "compression": ledger_report["compression"],
-            "identity": ledger_report["identity"]}
-        run_evidence = {
-            "schema": "behavior-run-evidence-v1",
-            "completion": "COMPLETE" if ran == len(cases) and not failures else "INCOMPLETE",
-            "identity": {"function": target, "suite_id": SUITE, "module": module,
-                "address": pair.identity["address"], "source_sha256": pair.identity["source_sha256"],
-                "compiled_source_sha256": pair.identity["compiled_source_sha256"],
-                "suite_sha256": suite_hash, "harness_sha256": pair.identity["harness_sha256"],
-                "oracle_sha256": pair.identity["oracle_sha256"],
-                "historical_manifest_sha256": pair.identity["manifest_sha256"],
-                "object_sha256": pair.identity["object_sha256"],
-                "profile": pair.identity["profile"], "flags": pair.identity["flags"]},
-            "execution": {"engine": "PreparedPair.compare", "actual_original_execution": True,
-                "actual_candidate_execution": True, "original_exe_sha256": pair.identity["oracle_sha256"]},
-            "cases": {lane: {"generated": sum(1 for c in cases if
-                    (c.label.startswith("random/") if lane == "randomized" else not c.label.startswith("random/"))),
-                    "executed": lane_counts[lane], "actual_original_invocations": lane_counts[lane],
-                    "actual_candidate_invocations": lane_counts[lane],
-                    "seeds": [seed] if lane == "randomized" and count else []}
-                    for lane in ("directed", "randomized")},
-            "errors": 0, "mismatches": len(failures), "compared_effects": effects,
-            "case_ledger": ledger_identity, "unmodeled_boundaries": 0,
-            "peer_data_gates": "PASS", "positive_controls": [first_positive] if first_positive else [],
-            "helper_boundaries": helper_specs,
-            "source_snapshot": {"path": snapshot.resolve().relative_to(ROOT).as_posix(),
-                                "sha256": behavior.digest(snapshot.read_bytes())},
-            "helper_boundary_plan": f"{target}.helper-boundary-plan.json",
-            "coverage": _coverage_summary(target, cases),
-        }
-        plan_path = _write_helper_plan(target, run_evidence, outdir)
-        run_evidence["helper_boundary_plan_sha256"] = behavior.digest(plan_path.read_bytes())
-        evidence_path = outdir / f"{target}.run-evidence.json"
-        evidence_path.write_text(json.dumps(run_evidence, indent=2) + "\n")
-        result["suite_sha256"] = suite_hash
-        result["run_evidence"] = evidence_path.resolve().relative_to(ROOT).as_posix()
-        result["helper_boundary_plan"] = run_evidence["helper_boundary_plan"]
-    outdir.mkdir(parents=True, exist_ok=True)
-    (outdir / f"{target}.json").write_text(json.dumps(result, indent=2) + "\n")
-    return result
 
 
-def negative_controls(outdir):
-    """Compile one-source mutants and require the paired oracle to detect each."""
-    seed_dir = ROOT / "work/takeover/hardtail/seeds"
-    specs = [
-        ("DrawMapCursor", "S12_384C_daa607847c4c.c",
-         "fd_50F6_38C2.left = fd_50F6_3856 * fd_50F6_0508[0] + fd_50F6_10D2.left + fd_50F6_38C0;",
-         "fd_50F6_38C2.left = fd_50F6_3856 * fd_50F6_0508[1] + fd_50F6_10D2.left + fd_50F6_38C0;",
-         _map_cursor_case("negative/cursor-offset", 5, 9, 21, 17, 4, 8, 11, -7, 23)),
-        ("InvertPatch", "S13_384C_1ace9a298569.c",
-         "h = (h >> 1) + fd_50F6_10D2.left + 4;",
-         "h = (h >> 1) + fd_50F6_10D2.left + 5;",
-         _invert_case("negative/patch-point", 4, 7, -12, 9, 320)),
-        ("f_0250_1018", "root_0250_e41a4ab8c56c.c",
-         "if (v > 0x10)",
-         "if (v >= 0x10)",
-         _mapdata_case("negative/life-zero", "f_0250_1018", 3, 4, 0, 0, 0x42, 0, pher=0x10)),
-        ("f_0250_129E", "root_0250_e41a4ab8c56c.c",
-         "if (g_9126)\n            f_0250_0721",
-         "if (!g_9126)\n            f_0250_0721",
-         _mapdata_case("negative/draw-kind", "f_0250_129E", 3, 4, 0, 0, 0x42, 1, cache=-1)),
-    ]
-    rows = []
-    by_target = {}
-    baselines = {}
-    for target, filename, old, new, case in specs:
-        source_path = seed_dir / filename
-        source = source_path.read_text(encoding="latin1")
-        baseline_pair = baselines.get(target)
-        if baseline_pair is None:
-            baseline_pair = behavior.PreparedPair(target, source=source_path,
-                out=outdir / "negative" / f"{target}-baseline")
-            baselines[target] = baseline_pair
-        baseline = baseline_pair.compare(case)
-        if not baseline.equal:
-            raise AssertionError(f"negative-control baseline did not match {target}: {baseline.diff}")
-        if source.count(old) != 1:
-            raise RuntimeError(f"negative-control source anchor not unique for {target}: {source.count(old)}")
-        mutant = outdir / "negative" / f"{target}.c"
-        mutant.parent.mkdir(parents=True, exist_ok=True)
-        mutant.write_text(source.replace(old, new, 1), encoding="latin1")
-        pair = behavior.PreparedPair(target, source=mutant, out=outdir / "negative" / target)
-        cmp = pair.compare(case)
-        mutant_hash = behavior.digest(mutant.read_bytes())
-        object_path = outdir / "negative" / target / "candidate.obj"
-        row = {"id": case.label, "target": target,
-               "executed": True, "detected_mismatch": not cmp.equal,
-               "original_executed": True, "mutant_executed": True,
-               "baseline_matches": baseline.equal, "mutant_differs": not cmp.equal,
-               "execution_errors": 0, "mismatch_categories": sorted(cmp.diff.keys()),
-               "mutant_source_sha256": mutant_hash,
-               "mutant_source": {"path": mutant.resolve().relative_to(ROOT).as_posix(), "sha256": mutant_hash},
-               "mutant_object": {"path": object_path.resolve().relative_to(ROOT).as_posix(),
-                                 "sha256": behavior.digest(object_path.read_bytes())},
-               "baseline_object_sha256": baseline_pair.identity["object_sha256"],
-               "diff": behavior_ledger._json_value(cmp.diff)}
-        rows.append(row)
-        by_target.setdefault(target, []).append(row)
-        if cmp.equal:
-            raise AssertionError(f"behavior observations failed to detect negative control: {target}")
-    (outdir / "negative-controls.json").write_text(json.dumps(rows, indent=2) + "\n")
-    for target, controls in by_target.items():
-        baseline_pair = baselines[target]
-        report = {"schema": "behavior-negative-controls-v1", "function": target,
-                  "suite_id": SUITE, "errors": 0,
-                  "mismatches_detected": sum(c["detected_mismatch"] for c in controls),
-                  "identity": {"source_sha256": baseline_pair.identity["source_sha256"],
-                               "oracle_sha256": baseline_pair.identity["oracle_sha256"],
-                               "harness_sha256": baseline_pair.identity["harness_sha256"],
-                               "historical_manifest_sha256": baseline_pair.identity["manifest_sha256"]},
-                  "baseline": {"equal": True, "source_sha256": baseline_pair.identity["source_sha256"],
-                               "object_sha256": baseline_pair.identity["object_sha256"],
-                               "oracle_sha256": baseline_pair.identity["oracle_sha256"]},
-                  "controls": controls}
-        neg_path = outdir / f"{target}.negative-controls.json"
-        neg_path.write_text(json.dumps(report, indent=2) + "\n")
-        evidence_path = outdir / f"{target}.run-evidence.json"
-        evidence = json.loads(evidence_path.read_text())
-        report_ref = {"path": neg_path.resolve().relative_to(ROOT).as_posix(),
-                      "sha256": behavior.digest(neg_path.read_bytes())}
-        evidence["negative_controls"] = report_ref
-        plan = json.loads((outdir / evidence["helper_boundary_plan"]).read_text())
-        plan["negative_control_reports"] = [report_ref]
-        ids = [c["id"] for c in controls]
-        for helper in evidence["helper_boundaries"]:
-            cert = helper.get("certification")
-            if isinstance(cert, dict) and cert.get("status") == "PENDING_SUPERVISOR_REVIEW":
-                cert["negative_control_ids"] = ids
-        plan["helpers"] = evidence["helper_boundaries"]
-        plan_path = outdir / evidence["helper_boundary_plan"]
-        plan_path.write_text(json.dumps(plan, indent=2) + "\n")
-        evidence["helper_boundary_plan_sha256"] = behavior.digest(plan_path.read_bytes())
-        evidence_path.write_text(json.dumps(evidence, indent=2) + "\n")
-    return rows
 
 
-def resource_negative_controls(outdir):
-    """Exercise width, pixel-address, and host-call-order sensitivities."""
-    catalog = json.loads((ROOT / "work/takeover/hardtail/catalog.json").read_text())
-    balloon_source = ROOT / next(r["best_source"] for r in catalog["records"]
-                                 if r["function"] == "DrawBalloons")
-    bitmap_source = ROOT / "src/root/m259D.c"
-    specs = [
-        ("DrawBalloons", "width-increment", balloon_source,
-         "wpix = g_19BE * wt;", "wpix = g_19BE * wt + 1;",
-         balloon_cases()[0]),
-        ("DrawBalloons", "buffer-destination-offset", balloon_source,
-         "dst = bufp + 4;", "dst = bufp + 6;",
-         balloon_cases()[0]),
-        ("win_DrawBitMap", "pixel-source-offset", bitmap_source,
-        "f_1B4E_003B(x, y, (char far *)pic + 8);", "f_1B4E_003B(x, y, (char far *)pic + 9);",
-         bitmap_cases()[3]),
-        ("win_DrawBitMap", "draw-release-order", bitmap_source,
-         "GPutPacked(x, y, (char far *)pic);\n            db_ReleaseObject(id, 2);",
-         "db_ReleaseObject(id, 2);\n            GPutPacked(x, y, (char far *)pic);",
-         bitmap_cases()[1]),
-    ]
-    rows = []
-    baselines = {}
-    by_target = {}
-    for index, (target, control_name, source_path, old, new, case) in enumerate(specs):
-        base_pair = baselines.get(target)
-        if base_pair is None:
-            base_pair = behavior.PreparedPair(target, source=source_path,
-                out=outdir / "negative" / f"{target}-baseline")
-            baselines[target] = base_pair
-        baseline = base_pair.compare(case)
-        if not baseline.equal:
-            raise AssertionError(f"resource negative baseline did not match {target}: {baseline.diff}")
-        source = source_path.read_text(encoding="latin1")
-        import re
-        sig = re.search(r"^[^\n;]*\b" + re.escape(target) + r"\s*\([^;]*?\)\s*\{", source, re.M)
-        if not sig:
-            raise RuntimeError(f"cannot locate resource negative definition {target}")
-        start = sig.end() - 1
-        depth = 0
-        end = None
-        for pos in range(start, len(source)):
-            if source[pos] == "{": depth += 1
-            elif source[pos] == "}":
-                depth -= 1
-                if depth == 0:
-                    end = pos + 1
-                    break
-        if end is None:
-            raise RuntimeError(f"unterminated resource negative definition {target}")
-        body = source[start:end]
-        if body.count(old) != 1:
-            raise RuntimeError(f"resource negative anchor not unique in {target}: {body.count(old)} {old!r}")
-        mutant = outdir / "negative" / f"{target}-resource-{index}.c"
-        mutant.parent.mkdir(parents=True, exist_ok=True)
-        mutant.write_text(source[:start] + body.replace(old, new, 1) + source[end:], encoding="latin1")
-        pair = behavior.PreparedPair(target, source=mutant, out=outdir / "negative" / f"{target}-resource-{index}")
-        cmp = pair.compare(case)
-        source_hash = behavior.digest(mutant.read_bytes())
-        obj_path = outdir / "negative" / f"{target}-resource-{index}" / "candidate.obj"
-        if not obj_path.is_file():
-            raise RuntimeError(f"negative-control object was not retained for {target}: {obj_path}")
-        row = {"id": f"{target}/{control_name}", "target": target,
-               "executed": True, "detected_mismatch": not cmp.equal,
-               "original_executed": True, "mutant_executed": True,
-               "baseline_matches": baseline.equal, "mutant_differs": not cmp.equal,
-               "execution_errors": 0, "mismatch_categories": sorted(cmp.diff.keys()),
-               "mutant_source_sha256": source_hash,
-               "mutant_source": {"path": mutant.resolve().relative_to(ROOT).as_posix(), "sha256": source_hash},
-               "mutant_object": {"path": obj_path.resolve().relative_to(ROOT).as_posix(),
-                                 "sha256": behavior.digest(obj_path.read_bytes())},
-               "baseline_object_sha256": base_pair.identity["object_sha256"],
-               "diff": behavior_ledger._json_value(cmp.diff)}
-        rows.append(row)
-        by_target.setdefault(target, []).append(row)
-        if cmp.equal:
-            raise AssertionError(f"resource behavior observations missed negative control: {target} {case.label}")
-    (outdir / "resource-negative-controls.json").write_text(json.dumps(rows, indent=2) + "\n")
-    for target, controls in by_target.items():
-        baseline_pair = baselines[target]
-        report = {"schema": "behavior-negative-controls-v1", "function": target,
-                  "suite_id": SUITE, "errors": 0,
-                  "mismatches_detected": sum(c["detected_mismatch"] for c in controls),
-                  "identity": {"source_sha256": baseline_pair.identity["source_sha256"],
-                               "oracle_sha256": baseline_pair.identity["oracle_sha256"],
-                               "harness_sha256": baseline_pair.identity["harness_sha256"],
-                               "historical_manifest_sha256": baseline_pair.identity["manifest_sha256"]},
-                  "baseline": {"equal": True, "source_sha256": baseline_pair.identity["source_sha256"],
-                               "object_sha256": baseline_pair.identity["object_sha256"],
-                               "oracle_sha256": baseline_pair.identity["oracle_sha256"]},
-                  "controls": controls}
-        neg_path = outdir / f"{target}.negative-controls.json"
-        neg_path.write_text(json.dumps(report, indent=2) + "\n")
-        evidence_path = outdir / f"{target}.run-evidence.json"
-        evidence = json.loads(evidence_path.read_text())
-        report_ref = {"path": neg_path.resolve().relative_to(ROOT).as_posix(),
-                      "sha256": behavior.digest(neg_path.read_bytes())}
-        evidence["negative_controls"] = report_ref
-        plan = json.loads((outdir / evidence["helper_boundary_plan"]).read_text())
-        plan["negative_control_reports"] = [report_ref]
-        ids = [c["id"] for c in controls]
-        for helper in evidence["helper_boundaries"]:
-            cert = helper.get("certification")
-            if isinstance(cert, dict) and cert.get("status") == "PENDING_SUPERVISOR_REVIEW":
-                cert["negative_control_ids"] = ids
-        plan["helpers"] = evidence["helper_boundaries"]
-        plan_path = outdir / evidence["helper_boundary_plan"]
-        plan_path.write_text(json.dumps(plan, indent=2) + "\n")
-        evidence["helper_boundary_plan_sha256"] = behavior.digest(plan_path.read_bytes())
-        evidence_path.write_text(json.dumps(evidence, indent=2) + "\n")
-    return rows
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--count", type=int, default=500)
-    ap.add_argument("--seed", type=lambda x: int(x, 0), default=0xBEEF)
-    ap.add_argument("--out", type=Path, default=OUT)
-    ap.add_argument("--targets", nargs="+", choices=["DrawMapCursor", "InvertPatch", "f_0250_1018", "f_0250_129E", "DrawBalloons", "win_DrawBitMap"],
-                    default=["DrawMapCursor", "InvertPatch", "f_0250_1018", "f_0250_129E"])
-    args = ap.parse_args()
-    outdir = args.out if args.out.is_absolute() else ROOT / args.out
-    outdir.mkdir(parents=True, exist_ok=True)
-    gens = {"DrawMapCursor": map_cursor_cases, "InvertPatch": invert_cases,
-            "f_0250_1018": lambda n, s: map_cell_cases("f_0250_1018", n, s),
-            "f_0250_129E": lambda n, s: map_cell_cases("f_0250_129E", n, s),
-            "DrawBalloons": balloon_cases,
-            "win_DrawBitMap": bitmap_cases}
-    results = []
-    for target in args.targets:
-        source = ROOT / "src/root/m259D.c" if target == "win_DrawBitMap" else None
-        results.append(_run_target(target, gens[target], args.count, args.seed, outdir, source))
-    negatives = negative_controls(outdir) if all(t in args.targets for t in ("DrawMapCursor", "InvertPatch", "f_0250_1018", "f_0250_129E")) else []
-    resource_negatives = resource_negative_controls(outdir) if all(t in args.targets for t in ("DrawBalloons", "win_DrawBitMap")) else []
-    (outdir / "summary.json").write_text(json.dumps({"suite": SUITE, "results": results,
-                                                    "negative_controls": negatives,
-                                                    "resource_negative_controls": resource_negatives}, indent=2) + "\n")
-    print(json.dumps({"functions": len(results), "cases_run": sum(r["cases_run"] for r in results),
-                      "mismatches": sum(r["mismatches"] for r in results),
-                      "negative_controls_detected": sum(r.get("detected", r.get("detected_mismatch", False))
-                                                          for r in negatives + resource_negatives),
-                      "reports": [str((outdir / (r["function"] + ".json")).relative_to(ROOT)) for r in results]}, indent=2))
 
 
-if __name__ == "__main__":
-    main()

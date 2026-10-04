@@ -7,7 +7,6 @@ their contracts are recorded in each case and are not proof of manager behavior.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import random
 import struct
@@ -17,17 +16,11 @@ from pathlib import Path
 from dataclasses import replace
 
 _HERE = Path(__file__).resolve()
-ROOT = _HERE.parents[3] if _HERE.parent.name == "archive" else _HERE.parents[2]
-sys.path.insert(0, str(ROOT / "tools"))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
 import behavior
-sys.path.insert(0, str(ROOT / "tools" / "behavior_suites"))
-# Use the byte-pinned fixture helper that was reviewed with this bounded suite;
-# never silently pick up a sibling's in-progress edits from memory.py.
-_MEMORY_FIXTURE = ROOT / "tools" / "behavior_suites" / "archive" / "window-memory-fixture-dda4f6dd.py"
-_memory_spec = importlib.util.spec_from_file_location("window_fixture_memory", _MEMORY_FIXTURE)
-memory_suite = importlib.util.module_from_spec(_memory_spec)
-sys.modules[_memory_spec.name] = memory_suite
-_memory_spec.loader.exec_module(memory_suite)
+
+from behavior_suites import memory as memory_suite
 from behavior_ledger import CaseLedger
 
 SUITE = "windows_v1"
@@ -525,288 +518,13 @@ def randomized_clip_cases(count=5000, seed=0x1E57038E):
     return out
 
 
-def _run_evidence(pair, ledger_pin, target, suite_hash, seed, directed, randomized, errors,
-                  mismatches, effects, helper_boundaries, positive):
-    ident = pair.identity
-    module = f"{ident['address']['unit']}:{ident['address']['seg']:04X}"
-    return {
-        "schema": "behavior-run-evidence-v1",
-        "completion": "COMPLETE" if not errors and not mismatches else "INCOMPLETE",
-        "identity": {"function": target, "suite_id": SUITE, "module": module,
-                     "source_sha256": ident["source_sha256"],
-                     "compiled_source_sha256": ident["compiled_source_sha256"],
-                     "suite_sha256": suite_hash, "harness_sha256": ident["harness_sha256"],
-                     "oracle_sha256": ident["oracle_sha256"],
-                     "historical_manifest_sha256": ident["manifest_sha256"],
-                     "object_sha256": ident["object_sha256"], "profile": ident["profile"],
-                     "flags": ident["flags"]},
-        "execution": {"engine": "PreparedPair.compare", "actual_original_execution": True,
-                      "actual_candidate_execution": True,
-                      "original_exe_sha256": ident["oracle_sha256"]},
-        "cases": {
-            "directed": {"generated": directed, "executed": ledger_pin["lane_counts"]["directed"],
-                         "actual_original_invocations": ledger_pin["lane_counts"]["directed"],
-                         "actual_candidate_invocations": ledger_pin["lane_counts"]["directed"], "seeds": []},
-            "randomized": {"generated": randomized, "executed": ledger_pin["lane_counts"]["randomized"],
-                           "actual_original_invocations": ledger_pin["lane_counts"]["randomized"],
-                           "actual_candidate_invocations": ledger_pin["lane_counts"]["randomized"],
-                           "seeds": [seed] if randomized else []}},
-        "errors": len(errors), "mismatches": len(mismatches), "compared_effects": effects,
-        "case_ledger": {"path": Path(ledger_pin["path"]).name, "sha256": ledger_pin["sha256"],
-                        "row_count": ledger_pin["row_count"], "lane_counts": ledger_pin["lane_counts"],
-                        "compression": ledger_pin["compression"], "identity": ledger_pin["identity"]},
-        "unmodeled_boundaries": 0, "peer_data_gates": "PASS",
-        "positive_controls": [positive] if positive else [],
-        "helper_boundaries": helper_boundaries,
-    }
 
 
-def run_target(target, cases, outdir, *, seed, directed_count, helper_boundaries, effects):
-    pair = behavior.PreparedPair(target, out=outdir / target)
-    # Ledger only the stable run input, not custom attributes on PreparedPair.
-    started = time.time()
-    suite_hash = behavior.digest(Path(__file__).read_bytes())
-    case_ledger = CaseLedger(outdir / f"{target}-case-ledger.jsonl.gz", pair, effects)
-    failures, errors, positive = [], [], None
-    helper_counts = {"original": {}, "candidate": {}}
-    for i, case in enumerate(cases):
-        lane = "randomized" if case.label.startswith("random/") else "directed"
-        try:
-            cmp = pair.compare(case)
-        except Exception as exc:
-            errors.append({"index": i, "label": case.label, "error": str(exc),
-                           "metadata": case.metadata})
-            continue
-        row = case_ledger.record(case, cmp, lane=lane)
-        for side, observation in (("original", cmp.original), ("candidate", cmp.candidate)):
-            for event in observation["trace"]:
-                name = event["name"]
-                helper_counts[side][name] = helper_counts[side].get(name, 0) + 1
-        if cmp.equal and positive is None:
-            positive = {"id": row["case_id"], "executed": True, "matched": True,
-                        "execution_errors": 0, "original_executed": True,
-                        "candidate_executed": True, "source_sha256": pair.identity["source_sha256"],
-                        "object_sha256": pair.identity["object_sha256"],
-                        "oracle_sha256": pair.identity["oracle_sha256"],
-                        "compared_effects": row["compared_effects"],
-                        "original_observation_sha256": row["original_observation_sha256"],
-                        "candidate_observation_sha256": row["candidate_observation_sha256"]}
-        if not cmp.equal:
-            failures.append({"index": i, "label": case.label, "diff": cmp.diff})
-    ledger_pin = case_ledger.finalize()
-    boundaries = []
-    for spec in helper_boundaries:
-        row = dict(spec)
-        row["original_call_count"] = helper_counts["original"].get(row["name"], 0)
-        row["candidate_call_count"] = helper_counts["candidate"].get(row["name"], 0)
-        boundaries.append(row)
-    run_evidence = _run_evidence(pair, ledger_pin, target, suite_hash, seed, directed_count,
-                                 len(cases) - directed_count, errors, failures, effects,
-                                 boundaries, positive)
-    run_path = outdir / f"{target}-run-evidence.json"
-    run_path.write_text(json.dumps(run_evidence, indent=2) + "\n")
-    result = {"schema": "behavior-suite-run-v1", "suite": SUITE, "function": target,
-              "function_address": pair.identity["address"], "source": pair.identity["source"],
-              "source_sha256": pair.identity["source_sha256"],
-              "compiled_source_sha256": pair.identity["compiled_source_sha256"],
-              "object_sha256": pair.identity["object_sha256"],
-              "oracle_sha256": pair.identity["oracle_sha256"],
-              "harness_sha256": pair.identity["harness_sha256"],
-              "manifest_sha256": pair.identity["manifest_sha256"],
-              "suite_sha256": suite_hash, "profile": pair.identity["profile"],
-              "flags": pair.identity["flags"],
-              "candidate_strict": pair.strict.get("claims", {}).get(target, {}),
-              "cases_generated": len(cases), "cases_run": ledger_pin["row_count"],
-              "directed_cases": directed_count,
-              "randomized_cases": len(cases) - directed_count,
-              "case_ledger": ledger_pin, "run_evidence": run_path.name,
-              "execution_errors": errors, "errors": len(errors),
-              "mismatches": len(failures), "failures": failures,
-              "elapsed_seconds": round(time.time() - started, 3),
-              "behavioral_status": "UNRESOLVED; diagnostic run only, synthetic manager contracts remain bounded"}
-    (outdir / f"{target}.json").write_text(json.dumps(result, indent=2) + "\n")
-    return result
 
 
-def _negative_control(target, baseline, source_text, old, new, case, outdir, ident):
-    if source_text.count(old) != 1:
-        raise RuntimeError(f"unexpected negative-control anchor for {target}: {old!r}")
-    control_id, mutant = ident, outdir / "negative" / f"{ident}.c"
-    mutant.parent.mkdir(parents=True, exist_ok=True)
-    mutant.write_text(source_text.replace(old, new, 1), encoding="latin1")
-    base_pair = behavior.PreparedPair(target, out=outdir / "negative" / f"{ident}-baseline")
-    base = base_pair.compare(case)
-    if not base.equal:
-        raise RuntimeError(f"negative-control baseline does not match for {target}/{ident}: {base.diff}")
-    pair = behavior.PreparedPair(target, source=mutant, out=outdir / "negative" / ident)
-    cmp = pair.compare(case)
-    obj = outdir / "negative" / ident / "candidate.obj"
-    if not obj.is_file():
-        raise RuntimeError(f"mutant compiler object is missing for {target}/{ident}")
-    return {"id": control_id, "target": target, "executed": True,
-            "detected_mismatch": not cmp.equal, "original_executed": True,
-            "mutant_executed": True, "baseline_matches": True,
-            "mutant_differs": not cmp.equal, "execution_errors": 0,
-            "mismatch_categories": sorted(cmp.diff),
-            "baseline_observation_sha256": behavior.digest(json.dumps(base.original, sort_keys=True).encode()),
-            "mutant_observation_sha256": behavior.digest(json.dumps(cmp.candidate, sort_keys=True).encode()),
-            "mutant_source_sha256": pair.identity["source_sha256"],
-            "mutant_source": {"path": mutant.resolve().relative_to(ROOT).as_posix(),
-                              "sha256": pair.identity["source_sha256"]},
-            "mutant_object": {"path": obj.resolve().relative_to(ROOT).as_posix(),
-                              "sha256": behavior.digest(obj.read_bytes())}}
 
 
-def negative_controls(outdir):
-    """Compile baseline-tested whole-module source mutants for every target."""
-    specs = []
-    coord_source = (ROOT / "work/takeover/hardtail/seeds/root_20E8_e9f7805d6d35.c").read_text(encoding="latin1")
-    rect_anchor = "origin[i] = rect[i] - o[i];"
-    pieces = coord_source.split(rect_anchor)
-    if len(pieces) != 3:
-        raise RuntimeError("unexpected coordinate state anchor count")
-    state_anchor = "if (mode[i] && mode[i] != 5 && ref[i] == obj)\n            " + rect_anchor
-    state_replacement = state_anchor.replace("origin[i] = rect[i] - o[i];",
-                                            "o[i] = rect[i] - o[i];")
-    cases_by_target = {
-        "f_20E8_0903": [
-            ("wrong-rectangle", coord_source,
-             "else\n            " + rect_anchor,
-             "else\n            origin[i] = rect[(i + 1) & 3] - o[i];",
-             coordinate_case("negative/coordinate-rectangle", (0, 0, 0, 0),
-                             (WIN_ID + 1,) * 4, (10, 20, 210, 220), (1, 2, 300, 400))),
-            ("wrong-object-state", coord_source,
-             state_anchor, state_replacement,
-             coordinate_case("negative/coordinate-state", (1, 0, 0, 0),
-                             (WIN_ID,) * 4, (10, 20, 210, 220), (1, 2, 300, 400))),
-        ],
-        "f_2505_0453": [
-            ("wrong-field", (ROOT / "work/takeover/hardtail/seeds/root_2505_22a03f15e95f.c").read_text(encoding="latin1"),
-             "return r[kind];", "return r[kind] ^ 1;",
-             _field_service_fixture("negative/field", 0, 0, 1, [0x1234] * 16)),
-        ],
-        "win_UnlockWin": [],
-        "f_1E57_038E": [],
-    }
-    for target in ("win_UnlockWin", "f_1E57_038E"):
-        pair = behavior.PreparedPair(target, out=outdir / "negative" / f"{target}-source-probe")
-        source_text = pair.source.read_text(encoding="latin1")
-        if target == "win_UnlockWin":
-            anchor = "if (--g_8DA6[n] == 0) {"
-            case = unlock_live_case("negative/unlock", (4, 18))
-            replacement = "if (--g_8DA6[n] == 1) {"
-            ident = "wrong-final-unlock"
-        else:
-            anchor = "win_GetObjRect(win, &r);\n    fd_50F6_3B60[win >> 8]"
-            case = clip_live_case("negative/clip-geometry",
-                                  [(30, 30, 330, 230), (180, 100, 520, 340)])
-            replacement = "win_GetObjRect(win, &r);\n    r.right++;\n    fd_50F6_3B60[win >> 8]"
-            ident = "wrong-clip-rectangle"
-        cases_by_target[target].append((ident, source_text, anchor, replacement, case))
-    all_results, report_paths = [], {}
-    for target, controls in cases_by_target.items():
-        baseline = behavior.PreparedPair(target, out=outdir / "negative" / f"{target}-control-base")
-        rows = []
-        for ident, text, old, new, case in controls:
-            row = _negative_control(target, baseline, text, old, new, case, outdir, ident)
-            rows.append(row)
-        report = {"schema": "behavior-negative-controls-v1", "function": target,
-                  "suite_id": SUITE,
-                  "identity": {"source_sha256": baseline.identity["source_sha256"],
-                               "oracle_sha256": baseline.identity["oracle_sha256"],
-                               "harness_sha256": baseline.identity["harness_sha256"],
-                               "historical_manifest_sha256": baseline.identity["manifest_sha256"]},
-                  "controls": rows, "errors": 0,
-                  "mismatches_detected": sum(bool(r["detected_mismatch"]) for r in rows)}
-        path = outdir / f"{target}-negative-controls.json"
-        path.write_text(json.dumps(report, indent=2) + "\n")
-        report_paths[target] = {"path": path.name, "sha256": behavior.digest(path.read_bytes())}
-        all_results.extend(rows)
-    return all_results, report_paths
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("target", choices=("coordinates", "fields", "unlock", "clip-empty", "clip-live", "clip", "all"))
-    parser.add_argument("--count", type=int, default=1000)
-    parser.add_argument("--clip-count", type=int, default=5000)
-    parser.add_argument("--unlock-count", type=int, default=500)
-    parser.add_argument("--seed", type=lambda s: int(s, 0), default=0x20080903)
-    parser.add_argument("--clip-seed", type=lambda s: int(s, 0), default=0x1E57038E)
-    parser.add_argument("--unlock-seed", type=lambda s: int(s, 0), default=0x23AE01DB)
-    parser.add_argument("--out", type=Path, default=ROOT / "build/workers/behavior_window")
-    parser.add_argument("--negative-controls", action="store_true")
-    a = parser.parse_args()
-    a.out = a.out.resolve()
-    a.out.mkdir(parents=True, exist_ok=True)
-    if min(a.count, a.clip_count, a.unlock_count) < 0:
-        parser.error("case counts must be nonnegative")
-    selected = ("coordinates", "fields", "unlock", "clip") if a.target == "all" else (
-        "clip" if a.target in ("clip-empty", "clip-live") else a.target,)
-    coordinate_effects = ["origin/object bytes", "input rectangle bytes", "ordered recalc callbacks",
-                          "lock balance", "all non-stack writes", "caller ABI"]
-    field_effects = ["return word or 0x8000 sentinel", "complete indexed field array",
-                     "ordered lock/unlock callbacks", "all non-stack writes", "caller ABI"]
-    unlock_effects = ["lock-count bytes", "real Ralloc handle/header/free-list state",
-                      "window-handle and object state", "window-offset map copy",
-                      "all non-stack writes", "caller ABI"]
-    clip_effects = ["ordered screen/window clipping rectangles", "45-entry clip handle table",
-                    "Ralloc heap/master-table state", "window stack and screen rectangle",
-                    "geometry callback order", "all non-stack writes", "caller ABI"]
-    managers = [
-        {"name": "win_LockWin", "execution_mode": "DETERMINISTIC_CALLBACK"},
-        {"name": "win_UnlockWin", "execution_mode": "DETERMINISTIC_CALLBACK"},
-        {"name": "win_ObjAddr/f_2505_02D7", "execution_mode": "DETERMINISTIC_CALLBACK"},
-        {"name": "f_2505_0006", "execution_mode": "DETERMINISTIC_CALLBACK"},
-        {"name": "win_Recalc", "execution_mode": "DETERMINISTIC_CALLBACK"},
-    ]
-    field_helpers = [x for x in managers if x["name"] in ("win_LockWin", "win_UnlockWin", "f_2505_0006")]
-    reports = []
-    if "coordinates" in selected:
-        cases = coordinate_cases(a.count, a.seed)
-        reports.append(run_target("f_20E8_0903", cases, a.out, seed=a.seed,
-                                  directed_count=len(cases) - a.count,
-                                  helper_boundaries=managers, effects=coordinate_effects))
-    if "fields" in selected:
-        seed = a.seed ^ 0x2505
-        cases = field_cases(a.count, seed)
-        reports.append(run_target("f_2505_0453", cases, a.out, seed=seed,
-                                  directed_count=len(cases) - a.count,
-                                  helper_boundaries=field_helpers, effects=field_effects))
-    if "unlock" in selected:
-        directed = [unlock_case(f"nested-depth-{depth}", depth, 0) for depth in (2, 3, 255)]
-        directed += [unlock_live_case("final-release/nonhandle-object", (0,)),
-                     unlock_live_case("final-release/supported-handle-fields", (4, 10, 16, 17, 18)),
-                     unlock_live_case("deferred-redraw/flag-200", (4, 18), window_flags=0xA00),
-                     unlock_live_case("deferred-redraw/pending-update", (10, 17), redraw_pending=1),
-                     unlock_live_case("final-release/no-auto-update-flag", (16,), window_flags=0)]
-        cases = directed + randomized_unlock_cases(a.unlock_count, a.unlock_seed)
-        reports.append(run_target("win_UnlockWin", cases, a.out, seed=a.unlock_seed,
-                                  directed_count=len(directed), helper_boundaries=[], effects=unlock_effects))
-    if "clip" in selected:
-        directed = [clip_empty_case("clip/empty-stack")] + clip_live_cases()
-        cases = directed + randomized_clip_cases(a.clip_count, a.clip_seed)
-        helpers = [{"name": "win_GetObjRect", "execution_mode": "DETERMINISTIC_CALLBACK"}]
-        reports.append(run_target("f_1E57_038E", cases, a.out, seed=a.clip_seed,
-                                  directed_count=len(directed), helper_boundaries=helpers,
-                                  effects=clip_effects))
-    if a.negative_controls:
-        negatives, negative_reports = negative_controls(a.out)
-    else:
-        negatives, negative_reports = [], {}
-    summary = {"schema": "behavior-suite-run-v1", "suite": SUITE,
-               "suite_sha256": behavior.digest(Path(__file__).read_bytes()),
-               "reports": [{k: r.get(k) for k in ("function", "cases_generated", "cases_run",
-                                                   "errors", "mismatches", "elapsed_seconds")}
-                           for r in reports],
-               "negative_controls_detected": sum(bool(n["detected_mismatch"]) for n in negatives),
-               "negative_reports": negative_reports,
-               "diagnostic_limits": ["manager-provided object geometry is deterministic callback data",
-                                     "coordinate recalc records order but does not model dependency resolution"],
-               "behavioral_status": "UNRESOLVED; evidence remains diagnostic pending independent contract review"}
-    (a.out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
-    print(json.dumps(summary, indent=2))
 
 
-if __name__ == "__main__":
-    main()

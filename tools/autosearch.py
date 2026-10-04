@@ -565,15 +565,15 @@ def targets(skip, only):
 
 
 def continuation_base(entry: dict, results_file: Path) -> Path | None:
-    """Locate a previous best draft, including artifacts moved from build/ into work/."""
+    """Resume a current search from its own preserved build output."""
     if not (entry.get("out") and entry.get("best") and entry.get("base")
             and entry["best"] <= entry["base"]):
         return None
-    old = Path(entry["out"])
-    for p in (old / "best.c", results_file.parent / "runs" / old.name / "best.c"):
-        if p.is_file():
-            return p
-    return None
+    build_root = (ROOT / "build").resolve()
+    if not Path(results_file).resolve().is_relative_to(build_root):
+        return None
+    best = (Path(entry["out"]) / "best.c").resolve()
+    return best if best.is_relative_to(build_root) and best.is_file() else None
 
 
 def run_all_main(argv=None):

@@ -288,6 +288,9 @@ def main() -> int:
     with Lock() if not a.verify_only else _NoLock():
         man = modmod.load_manifest()
         mod = man["modules"].get(key)
+        import canonical
+        program = canonical.load()
+        prior_program_sha256 = sha(canonical.PROGRAM.read_bytes())
         old_claims = [dict(c) for c in mod["claims"]] if mod else []
         if origin is not None and mod is None and not (a.origin_evidence or "").strip():
             raise SystemExit(f"{key}: a new object UNIT:SEG@OFF needs --origin-evidence (why LINK started an "
@@ -424,6 +427,8 @@ def main() -> int:
                             raise SystemExit(f"{n['name']} overlaps owned {c['name']}")
         module = {"unit": unit, "seg": seg, "profile": profile, "flags": flags, "placements": placements,
                   "lang": lang}
+        if mod and "code_data_publics" in mod:
+            module["code_data_publics"] = dict(mod["code_data_publics"])
         if origin is not None:
             module["origin"] = origin
             ev = a.origin_evidence or (mod or {}).get("origin_evidence")
@@ -495,22 +500,34 @@ def main() -> int:
         if not res["exact"]:
             print("REFUSED: not every claim is exact (existing claims must not regress)")
             return 1
+        path = module_path(unit, seg, origin, lang)
+        source = path.relative_to(ROOT).as_posix()
+        data = text.replace("\r\n", "\n").encode("latin1")
+        program_after = canonical.exact_inventory(program, key, module, data, mod, source=source)
+        if mod and mod.get("canonical_admission"):
+            prior_text = (ROOT / mod["source"]).read_bytes().decode("latin1")
+            prior_result = modmod.verify_module(prior_text, mod, mod["claims"], man=man)
+            errors = canonical.audit_context(key, prior_result, mod["canonical_admission"])
+            if errors:
+                raise SystemExit("prior canonical context receipt differs: " + "; ".join(errors))
         if a.verify_only:
             print(f"VERIFY-ONLY OK: {len(claims)} claims in {key}"
                   + (f", {len(placements)} placement(s) (data only)" if not claims else ""))
             return 0
-        path = module_path(unit, seg, origin, lang)
         before = path.read_bytes() if path.exists() else None
         if before is not None and mod and sha(before) != mod.get("source_sha256"):
             raise SystemExit(f"{path} differs from its manifest hash; refusing to overwrite unreviewed edits")
         path.parent.mkdir(parents=True, exist_ok=True)
-        data = text.replace("\r\n", "\n").encode("latin1")
+        for claim in claims:
+            claim.pop("current_proof", None)  # all current claims just passed exact verification
         path.write_bytes(data)
         man["modules"][key] = {**module, "source": str(path.relative_to(ROOT)).replace("\\", "/"),
                                "source_sha256": sha(data), "claims": claims,
                                "scaffold": res["scaffold"], "object_sha256": res.get("object_sha256")}
         man["modules"] = dict(sorted(man["modules"].items()))
         modmod.write_manifest(man)
+        from lockfile import atomic_write_text
+        atomic_write_text(canonical.PROGRAM, json.dumps(program_after, indent=2) + "\n", newline="\n")
         JOURNAL.parent.mkdir(parents=True, exist_ok=True)
         with JOURNAL.open("a") as fh:
             fh.write(json.dumps({"time": dt.datetime.now().isoformat(timespec="seconds"), "module": key,
@@ -525,6 +542,8 @@ def main() -> int:
                                  **({"source_origin": origin_src} if origin_src != (mod or {}).get("source_origin") else {}),
                                  **({"origin_evidence": module["origin_evidence"]}
                                     if module.get("origin_evidence") and module.get("origin_evidence") != (mod or {}).get("origin_evidence") else {}),
+                                 "prior_program_sha256": prior_program_sha256,
+                                 "program_sha256": sha(canonical.PROGRAM.read_bytes()),
                                  "flags": flags, "source_sha256": sha(data),
                                  "object_sha256": res.get("object_sha256")}) + "\n")
         print(f"PROMOTED {len(new_claims)} new claim(s)"

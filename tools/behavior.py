@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
 sys.path.insert(0, str(ROOT / 'build/behavior/deps'))
 try:
     import unicorn as uc
@@ -29,6 +29,10 @@ import functions
 import match
 import modctx
 import modules
+import compiler
+import csrc
+import canonical
+import re
 
 REGS = {n: getattr(xr, 'UC_X86_REG_' + n.upper()) for n in
         ('ax','bx','cx','dx','si','di','bp','sp','ip','cs','ds','es','ss','eflags')}
@@ -216,7 +220,7 @@ class Machine:
         for view in self.case.format_cursor_views:
             path = (ROOT/view.proof_path).resolve()
             path.relative_to(ROOT)
-            if not view.proof_path.startswith('evidence/behavior/runtime/'):
+            if not view.proof_path.startswith('evidence/canonical/runtime/'):
                 raise ExecutionError('formatter view requires retained runtime evidence')
             if view.proof_sha256 not in self.cursor_proofs:
                 raw = path.read_bytes()
@@ -378,7 +382,7 @@ class Machine:
             self.cpu.mem_write(start, bytes(data))
             self.dirty.clear()
 
-    def run(self, case, *, preserve=False, function=None):
+    def run(self, case, *, preserve=False, function=None, original_entry=None):
         if preserve:
             if case.writes or case.state:
                 raise ExecutionError('continuation cannot reinitialize memory or model state')
@@ -443,7 +447,11 @@ class Machine:
         self.initial_registers = defaults
         self._validate_cursor_views()
         self.write(defaults['ss'] * 16 + defaults['sp'], frame)
-        if function is None:
+        if original_entry is not None:
+            if self.candidate:
+                raise ExecutionError('explicit oracle initializer requires an original machine')
+            entry = (original_entry['seg'], original_entry['off'])
+        elif function is None:
             entry = self.pair.candidate_entry if self.candidate else (self.pair.function['seg'], self.pair.function['off'])
         else:
             target = self.pair.sequence_function(function)
@@ -499,36 +507,73 @@ class Comparison:
 
 
 class PreparedPair:
-    def __init__(self, function, source=None, out=None, *, sequence_targets=()):
+    def __init__(self, function, out=None, *, sequence_targets=(), mutation=None):
         self.function = functions.get(function)
         name = self.function['name']
         self.sequence_targets = frozenset(sequence_targets)
         for target in self.sequence_targets:
             self.sequence_function(target)
-        if source is None:
-            catalog = json.loads((ROOT/'work/takeover/hardtail/catalog.json').read_text())
-            source = ROOT / next(r['best_source'] for r in catalog['records'] if r['function'] == name)
-        self.source = Path(source).resolve()
-        self.ctx = modctx.resolve(func=name, source=self.source)
-        text = self.source.read_text(encoding='latin1')
-        import autosearch
-        text = autosearch.unscaffold(text, name)
-        for target in sorted(self.sequence_targets - {name}):
-            text = autosearch.unscaffold(text, target)
-        # Retain normal whole-module peer/data gates; an inexact target is expected.
-        claims = list(self.ctx.claims)
-        if not any(c['name'] == name for c in claims): claims.append(self.function)
-        for target in sorted(self.sequence_targets):
-            if not any(c['name'] == target for c in claims): claims.append(self.sequence_function(target))
-        collected = {}
-        self.strict = modules.verify_module(text, self.ctx.module_dict(), claims, collect=collected)
-        if not self.strict.get('compile_ok'):
-            raise ExecutionError(self.strict.get('log','candidate compile failed'))
-        peers = [c['name'] for c in self.ctx.claims if not self.strict['claims'].get(c['name'],{}).get('exact')]
-        data = [n for n,r in self.strict.get('data',{}).items() if not r.get('exact')]
-        if peers or data:
-            raise ExecutionError(f'candidate has existing peer/data regressions: {peers} / {data}')
-        self.obj = modctx.read_obj(collected['object'])
+        program_path = ROOT / 'src/program.json'
+        program = json.loads(program_path.read_text())
+        if program.get('schema') != 'simant-canonical-program-v1':
+            raise ExecutionError('unsupported canonical program schema')
+        semantics = {r['function']: r for r in program['semantics']}
+        if name not in semantics:
+            raise ExecutionError(f'{name} has no canonical semantic registration')
+        key = semantics[name]['module']
+        records = [r for r in program['modules'] if r['key'] == key]
+        if len(records) != 1 or records[0]['lang'] != 'c':
+            raise ExecutionError(f'{name} requires one canonical C translation unit')
+        record = records[0]
+        self.source = (ROOT / record['source']).resolve()
+        if not self.source.is_relative_to((ROOT / 'src').resolve()):
+            raise ExecutionError('candidate source must be under src/')
+        raw_source = self.source.read_bytes()
+        if digest(raw_source) != record['source_sha256']:
+            raise ExecutionError(f'current canonical source pin differs: {self.source}')
+        text = raw_source.decode('latin1')
+        if 'SCAFFOLD BEGIN' in text:
+            raise ExecutionError('canonical candidate contains scaffold')
+        self.ctx = modctx.resolve(func=name, source=self.source,
+                                  profile=record['profile'], flags=record['flags'])
+        definition = csrc.Source(text).function(name)
+        self.definition_sha256 = canonical.definition_sha(text, name)
+        if self.definition_sha256 != semantics[name]['definition_sha256']:
+            raise ExecutionError(f'current canonical definition pin differs: {name}')
+        self.review_pins = {}
+        for active in {name} | self.sequence_targets:
+            registration = semantics[active]
+            review_path = ROOT / registration['receipt']
+            review = json.loads(review_path.read_text())
+            definition_pin = canonical.definition_sha(text, active)
+            if (registration['module'] != key or
+                    review.get('schema') != 'simant-canonical-semantic-review-v1' or
+                    review.get('function') != active or review.get('module') != key or
+                    review.get('status') != 'BEHAVIOR_EXACT_CONFIRMED' or
+                    review.get('definition_sha256') != definition_pin or
+                    registration['definition_sha256'] != definition_pin):
+                raise ExecutionError(f'current canonical semantic review differs: {active}')
+            self.review_pins[active] = {'definition_sha256': definition_pin,
+                                       'receipt_sha256': digest(review_path.read_bytes())}
+        self.mutation = mutation
+        if mutation is not None:
+            mutation_target, old, new = (name, *mutation) if len(mutation) == 2 else mutation
+            if mutation_target != name and mutation_target not in self.sequence_targets:
+                raise ExecutionError('mutation target is not an active candidate entry')
+            definition = csrc.Source(text).function(mutation_target)
+            body = text[definition.body.s:definition.body.e]
+            pattern = r'\s*'.join(re.escape(t.text) for t in csrc.tokenize(old)
+                                   if t.kind not in ('ws', 'nl', 'cmt'))
+            anchors = list(re.finditer(pattern, body))
+            if len(anchors) != 1:
+                raise ExecutionError(f'mutation anchor is not unique in {mutation_target}: {len(anchors)}')
+            anchor = anchors[0]
+            changed = body[:anchor.start()] + new + body[anchor.end():]
+            text = text[:definition.body.s] + changed + text[definition.body.e:]
+        result = compiler.compile_c(text, self.ctx.profile, self.ctx.flags)
+        if not result.ok:
+            raise ExecutionError(result.log)
+        self.obj = modctx.read_obj(result.obj)
         public, record = match.public_in(self.obj, name)
         if record is None: raise ExecutionError('candidate lacks function public')
         segment = record['segment']
@@ -555,17 +600,22 @@ class PreparedPair:
             raise ExecutionError('sequence target lacks a candidate definition')
         self.vectors = {exe.MANAGER_SEG*16+v.offset:v for v in exe.load().vectors}
         self.identity = {'function':name,'address':{k:self.function[k] for k in ('unit','seg','off','size')},
-                         'source':str(self.source.relative_to(ROOT)), 'source_sha256':digest(self.source.read_bytes()),
+                         'source':str(self.source.relative_to(ROOT)), 'source_sha256':digest(raw_source), 'definition_sha256':self.definition_sha256,
                          'compiled_source_sha256':digest(text.encode('latin1')),
-                         'object_sha256':digest(collected['object']), 'linked_code_sha256':digest(self.code),
+                         'object_sha256':digest(result.obj), 'linked_code_sha256':digest(self.code),
                          'oracle_sha256':exe.load().sha256,'unicorn_version':uc.__version__,
                          'harness_sha256':digest(HARNESS_SOURCE),'profile':self.ctx.profile,'flags':self.ctx.flags,
                          'manifest_sha256':digest((ROOT/'layout/manifest.json').read_bytes())}
+        self.identity['program_sha256'] = digest(program_path.read_bytes())
+        self.identity['semantic_reviews'] = self.review_pins
+        if mutation is not None:
+            self.identity['mutation'] = {'target':mutation_target, 'old':old, 'new':new}
         if self.sequence_targets:
             self.identity['sequence_targets'] = sorted(self.sequence_targets)
         if out:
             out = modctx.under_build(Path(out)); out.mkdir(parents=True,exist_ok=True)
-            (out/'candidate.obj').write_bytes(collected['object'])
+            (out/'candidate.obj').write_bytes(result.obj)
+            if mutation is not None: (out/'mutant.c').write_bytes(text.encode('latin1'))
             (out/'identity.json').write_text(json.dumps(self.identity,indent=2)+'\n')
             (out/'behavior-harness.py').write_bytes(HARNESS_SOURCE)
         self.original_machine = Machine(self)

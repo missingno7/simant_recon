@@ -23,5 +23,9 @@ Read README.md, docs/codegen-rules.md and docs/tu-evidence.md first.
   edit `layout/oracle.lock.json`, hand-edit `layout/manifest.json` or the promotions
   journal, or treat similarity as acceptance. Unknown bytes stay explicit debt.
 * Canonical files (`src/`, `layout/manifest.json`) have one writer: `promote.py`.
+  `src/program.json` is the single program inventory for DOS and SDL3. Promote
+  reviewed corrections and proven ownership directly; never add source overlays.
   Workers may run searches concurrently in their own scratch directories.
-* Keep modern/port work out of this tree until the historical freeze.
+* Published oracle checkpoints are immutable. Active reconstruction is corrigible.
+  Portable changes must remain mechanical ABI/type conversion or actual platform
+  boundaries; ordinary game algorithms and state belong in canonical source.

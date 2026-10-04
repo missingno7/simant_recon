@@ -1,6 +1,6 @@
 """Differential fixtures for tutorial completion and DOS menu interaction.
 
-The source remains the catalog's whole-module hard-tail seed. Cases initialize
+The source is selected from the current canonical program. Cases initialize
 the tutorial globals or valid far menu/string tables, execute the original DOS
 helpers by default, and replace only host-facing input/presentation boundaries.
 """
@@ -14,8 +14,8 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "tools"))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
 import behavior as b
 from behavior_ledger import CaseLedger
 
@@ -27,7 +27,7 @@ ITEMS_OFF = 0x1000
 STRINGS_OFF = 0x2000
 SAVE_OFF = 0x7000
 MENU_BUFFER_OFF = 0x8000
-FORMAT_CURSOR_PROOF = "evidence/behavior/runtime/format-cursors/format_cursor_proof.json"
+FORMAT_CURSOR_PROOF = "evidence/canonical/runtime/format-cursors.json"
 FORMAT_CURSOR_PROOF_SHA256 = "140c1d240cf48c5c868ccdd723b4651d71735f592b3d5baed1f4d552cbfbc628"
 MENU_FORMAT_CURSOR_VIEWS = [
     b.FormatCursorView("sprintf-output-stream", DG * 16 + 0x8E06,
@@ -516,96 +516,9 @@ def question_cases(random_count=80,seed=0x1C620415):
     return out
 
 
-def _run_target(target, cases, out):
-    pair=b.PreparedPair(target,out=out/target)
-    failures=[]; errors=[]; start=time.monotonic()
-    ledger=CaseLedger(out/(target+".jsonl.gz"),pair,["return","ordered host/helper calls","ordered input consumption",
-        "pointed rectangles and strings","global and pointed writes","all nonstack writes","caller ABI"])
-    for i,c in enumerate(cases):
-        try: cmp=pair.compare(c)
-        except Exception as exc:
-            errors.append({"index":i,"label":c.label,"case":_jsonable(c.metadata),"error":str(exc)}); continue
-        ledger.record(c,cmp,lane="randomized" if c.label.startswith("random/") else "directed")
-        if not cmp.equal:
-            failures.append({"index":i,"label":c.label,"case":_jsonable(c.metadata),
-                             "diff":_diff_summary(cmp.diff)})
-    ledger_pin=ledger.finalize()
-    return {"target":target,"identity":pair.identity,"candidate_strict":pair.strict.get("claims",{}).get(target,{}),
-        "cases_generated":len(cases),"cases_attempted":len(cases),
-        "completed_comparisons":ledger_pin["row_count"],"execution_error_count":len(errors),
-        "mismatches":len(failures),"execution_errors":errors,"failures":failures,
-        "ledger":ledger_pin,"elapsed_seconds":round(time.monotonic()-start,3),
-        "behavioral_status":"UNRESOLVED pending contract review"}
 
 
-def negative_controls(out):
-    results=[]
-    src=(ROOT/"work/takeover/hardtail/seeds/root_0E2E_c611660dde4d.c").read_text(encoding="latin1")
-    old="if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)"
-    if src.count(old)!=2: raise RuntimeError("LessonDone negative anchor changed")
-    mutant=out/"negative"/"lesson-wrong-threshold.c"; mutant.parent.mkdir(parents=True,exist_ok=True)
-    mutant.write_text(src.replace(old,"if (fd_50F6_0224 >= fd_50F6_0204 && fd_50F6_0AA0 == 0)",1),encoding="latin1")
-    vals={"fd_50F6_0224":10,"fd_50F6_0204":10,"fd_50F6_0AA0":0}
-    case=tutorial_case("negative/equal-threshold",3,vals,{"clock":(0,0),"top_window":0})
-    baseline=b.PreparedPair("LessonDone",out=out/"negative"/"baseline-lesson")
-    base_cmp=baseline.compare(case)
-    p=b.PreparedPair("LessonDone",source=mutant,out=out/"negative"/"lesson")
-    cmp=p.compare(case)
-    results.append({"id":"lesson-strict-threshold","target":"LessonDone","mutation":"strict > changed to >= for lesson 3",
-        "baseline_matches":base_cmp.equal,"detected":base_cmp.equal and not cmp.equal,"mutant_differs":not cmp.equal,
-        "baseline_diff":base_cmp.diff,"diff":cmp.diff,"mutant_source":str(mutant),"mutant_identity":p.identity})
-    src=(ROOT/"work/takeover/hardtail/seeds/S10_35F5_4b9dda15dbea.c").read_text(encoding="latin1")
-    old="k = (k + 1) % nItems;"
-    if src.count(old)!=1: raise RuntimeError("menu negative anchor changed")
-    mutant=out/"negative"/"menu-wrong-next.c"
-    mutant.write_text(src.replace(old,"k = (k + 2) % nItems;",1),encoding="latin1")
-    case=menu_case("negative/next-skips-item",[ord('+'),13],curmenu=0)
-    baseline=b.PreparedPair("o10_35F5_0384",out=out/"negative"/"baseline-menu")
-    base_cmp=baseline.compare(case)
-    p=b.PreparedPair("o10_35F5_0384",source=mutant,out=out/"negative"/"menu")
-    cmp=p.compare(case)
-    results.append({"id":"menu-next-option","target":"o10_35F5_0384","mutation":"next option advances by two",
-        "baseline_matches":base_cmp.equal,"detected":base_cmp.equal and not cmp.equal,"mutant_differs":not cmp.equal,
-        "baseline_diff":base_cmp.diff,"diff":cmp.diff,"mutant_source":str(mutant),"mutant_identity":p.identity})
-    src=(ROOT/"work/takeover/hardtail/seeds/root_1C62_1a75da44054b.c").read_text(encoding="latin1")
-    old="labels[i][0] == c || labels[i][1] == c"
-    if src.count(old)!=1: raise RuntimeError("question negative anchor changed")
-    mutant=out/"negative"/"question-wrong-hotkey.c"
-    mutant.write_text(src.replace(old,"labels[i][0] == c",1),encoding="latin1")
-    case=question_case("negative/second-byte-hotkey",b"Question?",0,[ord('Y')],
-                       events=[(1,0x1234,0x2345,0x3456,11,12,0x0901,13)])
-    baseline=b.PreparedPair("f_1C62_0415",out=out/"negative"/"baseline-question")
-    base_cmp=baseline.compare(case)
-    p=b.PreparedPair("f_1C62_0415",source=mutant,out=out/"negative"/"question")
-    cmp=p.compare(case)
-    results.append({"id":"question-second-byte-hotkey","target":"f_1C62_0415","mutation":"hotkey second-byte match removed",
-        "baseline_matches":base_cmp.equal,"detected":base_cmp.equal and not cmp.equal,"mutant_differs":not cmp.equal,
-        "baseline_diff":base_cmp.diff,"diff":cmp.diff,"mutant_source":str(mutant),"mutant_identity":p.identity})
-    if any(not x["detected"] for x in results): raise AssertionError("source mutant escaped its contract or baseline")
-    return results
 
 
-def run(count=80,seed=0x35F50384,out=ROOT/"build/workers/behavior_tutorial_menu",negative=True):
-    out.mkdir(parents=True,exist_ok=True)
-    started=time.monotonic()
-    reports=[_run_target("LessonDone",tutorial_cases(count*5,seed^0x0E2E065E),out),
-             _run_target("o10_35F5_0384",menu_cases(count,seed),out),
-             _run_target("f_1C62_0415",question_cases(count,seed^0x1C620415),out)]
-    negatives=negative_controls(out) if negative else []
-    report={"schema":"behavior-suite-run-v1","suite":SUITE,"suite_sha256":b.digest(Path(__file__).read_bytes()),
-        "targets":reports,"negative_controls":negatives,"seed":seed,
-        "elapsed_seconds":round(time.monotonic()-started,3),
-        "scope":"Directed LessonDone switch and threshold partitions plus fixed-seed signed/unsigned world states; valid far-menu keyboard, separator/disabled-item, selected-menu, event, mouse, geometry and dimension partitions plus fixed-seed valid item tables.",
-        "limits":"Finite bounded domains only. Tutorial world-query helpers and host input/presentation boundary contracts are modeled explicitly; other helpers execute original DOS code. Menu suite does not claim arbitrary RTLink, window manager or display-driver behavior.",
-        "status":"UNRESOLVED pending independent review of fixture validity and boundary contracts"}
-    (out/"report.json").write_text(json.dumps(report,indent=2)+"\n")
-    if any(r["mismatches"] or r["execution_errors"] for r in reports): raise AssertionError(json.dumps(reports,indent=2))
-    return report
 
 
-if __name__=="__main__":
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--count",type=int,default=80)
-    p.add_argument("--seed",type=lambda s:int(s,0),default=0x35F50384)
-    p.add_argument("--out",type=Path,default=ROOT/"build/workers/behavior_tutorial_menu")
-    p.add_argument("--no-negative-controls",action="store_true")
-    a=p.parse_args();print(json.dumps(run(a.count,a.seed,a.out,not a.no_negative_controls),indent=2))

@@ -8,8 +8,8 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'tools'))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
 import behavior as b
 from behavior_ledger import CaseLedger
 
@@ -71,44 +71,5 @@ def cases(count,seed):
                                     rng.randrange(1<<32),rng.randrange(100))
 
 
-def run(count,seed,out):
-    pair = b.PreparedPair(FUNCTION,out=out)
-    ledger=CaseLedger(out/'cases.jsonl.gz',pair,EFFECTS)
-    counts = {'directed':0,'randomized':0}; failures=[]
-    started=time.monotonic()
-    for group,case in cases(count,seed):
-        result=pair.compare(case); counts[group]+=1
-        ledger.record(case,result,lane=group)
-        if not result.equal:
-            failures.append({'label':case.label,'state':case.metadata,'diff':result.diff})
-            break
-    source = pair.source.read_text(encoding='latin1')
-    anchor='s++;\n        n++;'
-    if source.count(anchor)!=1: raise RuntimeError('negative source anchor not unique')
-    mutant=out/'negative.c'; mutant.write_text(source.replace(anchor,'s++;\n        n += 2;',1),encoding='latin1')
-    negpair=b.PreparedPair(FUNCTION,source=mutant,out=out/'negative')
-    negative=negpair.compare(make_case('negative/skip-line',[b'a',b'bb',b'ccc'],0,3,2))
-    report={'schema':'behavior-suite-run-v1','function':FUNCTION,'identity':pair.identity,
-        'suite_sha256':hashlib.sha256(SUITE_SOURCE).hexdigest(),
-        'case_ledger':ledger.finalize(),
-        'directed':counts['directed'],'randomized':counts['randomized'],'seed':seed,
-        'mismatches':len(failures),'errors':0,'failures':failures,
-        'negative_control':{'detected':not negative.equal,'diff':negative.diff},
-        'compared':EFFECTS,
-        'domain':'all cache ranges for six finite line-length patterns; random valid cached lists 0..128 rows, 0..64 bytes per row; signed line extremes; all 32-bit ages; lock 0..99',
-        'boundaries':'all helpers execute original; no modeled callbacks or I/O',
-        'historical_difference':'original additionally reloads pointer segment into CX at +0x73; later instructions do not consume CX before return or redefine it',
-        'status':'UNRESOLVED pending supervisor review',
-        'elapsed_seconds':round(time.monotonic()-started,3)}
-    (out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
-    if failures or negative.equal: raise AssertionError('list differential failed')
-    return report
 
 
-if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--count',type=int,default=10000)
-    p.add_argument('--seed',type=lambda s:int(s,0),default=0x23E6)
-    p.add_argument('--out',type=Path,default=ROOT/'build/workers/behavior_lists/ledger-20261002')
-    args=p.parse_args()
-    print(json.dumps(run(args.count,args.seed,args.out),indent=2))

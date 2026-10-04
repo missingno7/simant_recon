@@ -1,9 +1,0 @@
-# Control flag words: functional source review v18
-
-This rootfalse, unadmitted candidate is limited to `fd_50F6_0468`, `fd_50F6_0370`, and `fd_50F6_024E`. The source graph contains 127 canonical translation units and 29 receipt-verified effective strict sources (156 distinct files total). `src/root/m0798.c` declares each word as plain signed `int far`; `initControls` writes `1, -1, -1`. `src/S09/m35F5.c` has three `{2,1,pointer}` SaveRec rows, and its generic `LoadGame`/`SaveGame` loops pass the data pointer and two-byte count to `read`/`write`.
-
-The proposed data-only provider is `provider.c`. It defines exactly three tentative `int far` objects. The inventory finds no other registered aliases/interiors, numeric offsets, assembly references, or computed-address views. Source ownership and the generic save/restore byte interface are supported; flag meaning, initialization/restore ordering, downstream behavior outside the scanned graph, and historical COMDEF ownership/placement remain open.
-
-Fresh MSC 6.00AX plus RTLink 4.00 and 6.10 runs produce six-byte FAR_BSS maps at relative offsets 0, 2, and 4. Both positive runtimes pass zero-fill, signed word/byte view, and SaveRec2 roundtrip checks. Runtime negatives for wrong type view, short extent with adjacent guard, and shifted SaveRec base run under both linkers. OMF controls also detect short/long extents and a static initializer. All raw maps, EXEs, objects, logs, and copied runtime libraries are under `raw/`; their SHA-256 pins are in the JSON review.
-
-No mutable build report is used as source authority. The probe uses only scratch fixtures, pinned tools/runtime inputs and generic compiler tooling; original game executables, objects, image bytes, and fallback artifacts are excluded. This package has not been admitted or promoted.

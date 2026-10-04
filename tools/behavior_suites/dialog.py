@@ -7,72 +7,23 @@ import re
 import struct
 import sys
 import time
-import importlib.util
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'tools'))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
 from behavior_suites import lists
 import behavior as b
 from behavior_ledger import CaseLedger
 
-_MEMORY_FIXTURE = ROOT/'tools/behavior_suites/archive/window-memory-fixture-dda4f6dd.py'
-_memory_spec = importlib.util.spec_from_file_location('dialog_memory_fixture', _MEMORY_FIXTURE)
-memory_fixture = importlib.util.module_from_spec(_memory_spec)
-sys.modules[_memory_spec.name] = memory_fixture
-_memory_spec.loader.exec_module(memory_fixture)
+from behavior_suites import memory as memory_fixture
 
 FUNCTION='o15_384C_0239'
 SUITE_SOURCE=Path(__file__).read_bytes()
 EFFECTS=['return','ordered GUI/window/font/resource/input commands','rectangle/text/font contents',
          'resource lock/unlock/release and age','input arbitration and consumption',
          'logical window state','all nonstack writes','caller ABI']
-SOURCE_DEFINITIONS={
-    'win_Open':('src/root/m20E8.c','win_Open'),
-    'win_Close':('src/root/m20E8.c','win_Close'),
-    'f_1A53_00F0':('src/root/m1A53.c','f_1A53_00F0'),
-    'f_171C_1B84':('src/root/m171C.c','f_171C_1B84'),
-    'f_171C_1BBA':('src/root/m171C.c','f_171C_1BBA'),
-    'f_24AB_02AD':('src/root/m24AB.c','f_24AB_02AD'),
-    'win_GetObjRect':('src/root/m2505.c','win_GetObjRect'),
-    'win_DrawWindow':('src/root/m21FA.c','win_DrawWindow'),
-    'f_2505_03B9':('src/root/m2505.c','f_2505_03B9'),
-    'f_2505_04D7':('src/root/m2505.c','f_2505_04D7'),
-    'f_2505_0831':('src/root/m2505.c','f_2505_0831'),
-    'f_2505_08EA':('src/root/m2505.c','f_2505_08EA'),
-    'win_LockInit':('src/root/m23AE.c','win_LockInit'),
-    'db_ReleaseHandle':('src/root/m1A53.c','db_ReleaseHandle'),
-    'f_171C_15A2':('src/root/m171C.c','f_171C_15A2'),
-    'win_SetColorFromObjNum':('src/root/m21FA.c','win_SetColorFromObjNum'),
-    'f_21FA_0B4B':('src/root/m21FA.c','f_21FA_0B4B'),
-    'f_1CE2_044D':('src/root/m1CE2.c','f_1CE2_044D'),
-    'win_GetEvent':('src/root/m218D.c','win_GetEvent'),
-    'win_FlushEvents':('src/root/m218D.c','win_FlushEvents'),
-    'f_218D_01EB':('src/root/m218D.c','f_218D_01EB'),
-    'clip_KillWin':('src/root/m1E57.c','clip_KillWin'),
-    'clip_SetWin':('src/root/m1E57.c','clip_SetWin'),
-    'clip_Off':('src/root/m1E57.c','clip_Off'),
-    'f_1E57_038E':('src/root/m1E57.c','f_1E57_038E'),
-    'win_PrintTextInRect':('src/root/m259D.c','win_PrintTextInRect'),
-}
 
 
-def source_definition_pins():
-    pins={}
-    for name,(relative,path_name) in SOURCE_DEFINITIONS.items():
-        source=(ROOT/relative).read_text(encoding='latin1')
-        match=re.search(r'\b'+re.escape(path_name)+r'\s*\([^;]*?\)\s*\{',source,re.S)
-        if not match: raise RuntimeError(f'cannot locate source definition {path_name}')
-        end=match.end();depth=1
-        while end<len(source) and depth:
-            if source[end]=='{':depth+=1
-            elif source[end]=='}':depth-=1
-            end+=1
-        if depth: raise RuntimeError(f'unclosed source definition {path_name}')
-        body=source[match.start():end].encode('latin1')
-        pins[name]={'path':relative,'line':source.count('\n',0,match.start())+1,
-                    'sha256':b.digest(body),'bytes':len(body)}
-    return pins
 
 
 def linear(args,index=0): return args[index+1]*16+args[index]
@@ -426,13 +377,8 @@ def _actual_lock_init_writes(pair,fixture):
     """Run original win_LockInit on scratch DOS state; pin its nonstack writes."""
     scratch=b.Machine(pair)
     initial={a+i for a,data in fixture.writes for i in range(len(data))}
-    old=pair.sequence_function
-    pair.sequence_function=lambda name:b.functions.get(name)
-    try:
-        result=scratch.run(b.Case(label='fixture/win-LockInit',writes=fixture.writes,
-                                  return_kind='void'),function='win_LockInit')
-    finally:
-        pair.sequence_function=old
+    result=scratch.run(b.Case(label='fixture/win-LockInit',writes=fixture.writes,
+                              return_kind='void'),original_entry=b.functions.get('win_LockInit'))
     addresses=sorted(set(result['written_addresses'])-initial)
     stack0,stack1=scratch.stack_bounds
     addresses=[a for a in addresses if not stack0<=a<stack1]
@@ -446,264 +392,6 @@ def _actual_lock_init_writes(pair,fixture):
         'write_groups':[{'address':hex(g[0]),'length':len(g)} for g in groups]}
 
 
-def run(count,seed,out):
-    pair=b.PreparedPair(FUNCTION,out=out); counts={'directed':0,'randomized':0};failures=[]
-    ledger=CaseLedger(out/'cases.jsonl.gz',pair,EFFECTS)
-    started=time.monotonic()
-    setup_evidence=None
-    positive=None
-    poison_semantics=None
-    poison_evidence=[]
-    helper_observations={}
-    for group,c in cases(count,seed):
-        if setup_evidence is None:
-            setup_writes,setup_evidence=_actual_lock_init_writes(pair,c)
-        c.writes.extend(setup_writes)
-        try: r=pair.compare(c)
-        except Exception as exc:
-            failures.append({'case':c.metadata,'error':str(exc)});break
-        counts[group]+=1
-        row=ledger.record(c,r,lane=group)
-        for call in r.original['trace']:
-            name=call['name']
-            spec=c.callbacks.get(name)
-            mode='MODELED' if spec is not None and spec.handler is not None else 'ORIGINAL_EXE'
-            observed=helper_observations.setdefault(name,{
-                'name':name,'execution_mode':mode,
-                'executed_from_original':mode=='ORIGINAL_EXE',
-                'observed_call_count':0,'observed_case_count':0,
-                'positive_case_ids':[],'_seen_case_ids':set(),
-                'callback_abi':None})
-            observed['observed_call_count']+=1
-            observed['execution_mode']=mode
-            observed['executed_from_original']=mode=='ORIGINAL_EXE'
-            if row['case_id'] not in observed['_seen_case_ids']:
-                observed['_seen_case_ids'].add(row['case_id'])
-                observed['observed_case_count']+=1
-                if len(observed['positive_case_ids'])<5:
-                    observed['positive_case_ids'].append(row['case_id'])
-            if spec is not None:
-                observed['callback_abi']={'stack_words':spec.stack_words,
-                    'register_args':list(spec.register_args),'callee_pop_bytes':spec.pop,
-                    'handler':(getattr(spec.handler,'__name__',type(spec.handler).__name__)
-                               if spec.handler is not None else None),
-                    'projection':(getattr(spec.project,'__name__',type(spec.project).__name__)
-                                  if spec.project is not None else None)}
-        if positive is None and r.equal and c.metadata['which'] in (0,1):
-            positive={'case_id':row['case_id'],'executed':True,
-                'original_executed':True,'candidate_executed':True,'baseline_matches':True,
-                'original_observation_sha256':row['original_observation_sha256'],
-                'candidate_observation_sha256':row['candidate_observation_sha256'],
-                'identity':pair.identity,'suite_sha256':b.digest(SUITE_SOURCE)}
-        expected,keys_left,events_left=expected_interaction(c.state['keys'],c.state['events'])
-        for lane,result in (('original',r.original),('candidate',r.candidate)):
-            state=result['state']
-            if result['return']!=expected or state['keys']!=keys_left or state['events']!=events_left:
-                failures.append({'case':c.metadata,'lane':lane,'expected':{
-                    'return':expected,'keys_left':keys_left,'events_left':events_left},
-                    'actual':{'return':result['return'],'keys_left':state['keys'],
-                              'events_left':state['events']}})
-                break
-            window_payload=bytes.fromhex(result['ranges']['actual_2100_payload'])
-            zorder=struct.unpack('<32H',bytes.fromhex(result['ranges']['actual_window_stack']))
-            if 'window_arg_poison' in c.metadata:
-                poison=c.metadata['window_arg_poison']
-                expected_private=b.words(poison['si'],poison['di'])+bytes([poison['stack_byte']])*4
-                actual_private=window_payload[0x10:0x18]
-                semantic={'return':result['return'],
-                    'rect':list(struct.unpack_from('<4h',window_payload,0)),
-                    'flags':struct.unpack_from('<H',window_payload,0x1c)[0],
-                    'objects':state['drawn_windows'][0]['objects'],
-                    'zorder':zorder[:4], 'resource_state':state['resource_state'],
-                    'flush_count':state['flush_count'], 'invalidated':state['invalidated_rects']}
-                if actual_private!=expected_private:
-                    failures.append({'case':c.metadata,'lane':lane,
-                        'expected_private_window_args':expected_private.hex(),
-                        'actual_private_window_args':actual_private.hex()})
-                    break
-                if poison_semantics is None:
-                    poison_semantics=semantic
-                elif semantic!=poison_semantics:
-                    failures.append({'case':c.metadata,'lane':lane,
-                        'expected_poison_invariant':poison_semantics,
-                        'actual_poison_semantic':semantic})
-                    break
-                if lane=='original':
-                    poison_evidence.append({'input':poison,'private_bytes':actual_private.hex(),
-                        'semantic_sha256':b.digest(json.dumps(semantic,sort_keys=True).encode()),
-                        'matched_baseline':semantic==poison_semantics})
-            if (state['resource_state']!='acquired-firm' or state['stale_events'] or
-                    state['flush_count']!=1 or zorder[:2]!=(c.metadata['previous_window'],0x8000) or
-                    struct.unpack_from('<H',window_payload,0x1c)[0]!=0x0840 or
-                    list(struct.unpack_from('<4h',window_payload,0))!=[133,70,470,236] or
-                    len(state['drawn_windows'])!=1 or state['drawn_windows'][0]['win']!=0x2100 or
-                    len(state['invalidated_rects'])!=1):
-                failures.append({'case':c.metadata,'lane':lane,'expected_window':{
-                    'resource_state':'acquired-firm','stale_events':[],'flush_count':1,
-                    'zorder':list((c.metadata['previous_window'],0x8000)),
-                    'closed_flag_word':0x0840,'rect':[133,70,470,236],
-                    'draws':1,'invalidations':1},'actual_window':{
-                    'resource_state':state.get('resource_state'),
-                    'stale_events':state.get('stale_events'),'flush_count':state.get('flush_count'),
-                    'zorder':list(zorder[:2]),'flag_word':struct.unpack_from('<H',window_payload,0x1c)[0],
-                    'rect':list(struct.unpack_from('<4h',window_payload,0)),
-                    'draws':state.get('drawn_windows'),'invalidations':state.get('invalidated_rects')}})
-                break
-            heap=bytes.fromhex(result['ranges']['dialog_resource_heap'])
-            manager=bytes.fromhex(result['ranges']['dialog_manager_state'])
-            paras=c.metadata['resource_paras']
-            expected_manager={
-                'hard_paras':0,
-                'soft_paras':paras+c.metadata['window_paras'],
-                'firm_paras':0,
-                'used_paras':paras+c.metadata['window_paras'],
-                'free_paras':c.metadata['free_paras'],
-                'total_paras':paras+c.metadata['window_paras']+c.metadata['free_paras'],
-                'allocated_handles':2,
-                'live_handles':2,
-            }
-            actual_manager={
-                'hard_paras':struct.unpack_from('<H',manager,0x0c)[0],
-                'soft_paras':struct.unpack_from('<H',manager,0x0e)[0],
-                'firm_paras':struct.unpack_from('<H',manager,0x10)[0],
-                'used_paras':struct.unpack_from('<H',manager,0x12)[0],
-                'free_paras':struct.unpack_from('<H',manager,0x14)[0],
-                'total_paras':struct.unpack_from('<H',manager,0x16)[0],
-                'allocated_handles':struct.unpack_from('<H',manager,0x18)[0],
-                'live_handles':struct.unpack_from('<H',manager,0x1a)[0],
-            }
-            window_head=c.metadata['window_data_seg']*16-(2*16)
-            window_header_off=window_head-(lists.DATA[1]-2)*16
-            if (heap[8]!=3 or heap[0x12]!=0 or
-                    heap[window_header_off+8]!=3 or heap[window_header_off+0x12]!=0 or
-                    actual_manager!=expected_manager):
-                failures.append({'case':c.metadata,'lane':lane,'expected_ralloc':{
-                    'text_header_type':3,'text_header_attr':0,'window_header_type':3,
-                    'window_header_attr':0,'manager':expected_manager},
-                    'actual_ralloc':{'text_header_type':heap[8],'text_header_attr':heap[0x12],
-                                     'window_header_type':heap[window_header_off+8],
-                                     'window_header_attr':heap[window_header_off+0x12],
-                                     'manager':actual_manager}})
-                break
-            expected_object=((0x41-c.metadata['which'])*2)&0xffff
-            expected_request={'object':expected_object,'kind':10,'type':1,
-                              'handle':list(lists.HANDLE)}
-            if state['resource_requests']!=[expected_request]:
-                failures.append({'case':c.metadata,'lane':lane,'expected_resource':
-                    [expected_request],'actual_resource':state['resource_requests']})
-                break
-            expected_font=(0x1234,0x2211) if c.metadata['width']==320 else (0x5678,0x3344)
-            print_call=next((entry for entry in result['trace']
-                             if entry['name']=='win_PrintTextInRect'),None)
-            font_calls=[entry['args'] for entry in result['trace']
-                        if entry['name']=='f_24AB_02AD']
-            expected_font_id=2 if c.metadata['width']==320 else 4
-            if (not print_call or tuple(print_call['args']['font_pointer'])!=expected_font or
-                    font_calls!=[[expected_font_id],[0]]):
-                failures.append({'case':c.metadata,'lane':lane,'expected_font':{
-                    'pointer':expected_font,'selector_calls':[[expected_font_id],[0]]},
-                    'actual_font':{'print_call':print_call,'selector_calls':font_calls}})
-                break
-        if failures: break
-        if not r.equal: failures.append({'case':c.metadata,'diff':r.diff});break
-    for observed in helper_observations.values():
-        observed.pop('_seen_case_ids',None)
-    source=pair.source.read_text(encoding='latin1')
-    anchor="case 's':\n                result = 1;"
-    if source.count(anchor)!=1: raise RuntimeError('negative source anchor not unique')
-    mutant=out/'negative-return.c'
-    mutant.write_text(source.replace(anchor,"case 's':\n                result = 2;",1),encoding='latin1')
-    negpair=b.PreparedPair(FUNCTION,source=mutant,out=out/'negative-return')
-    negcase=case('negative/save-becomes-cancel',1,640,0,[115],[],[0,0,100,100],0x9876)
-    negcase.writes.extend(_actual_lock_init_writes(negpair,negcase)[0])
-    neg=negpair.compare(negcase)
-    release_anchor='    db_ReleaseHandle(h);'
-    if source.count(release_anchor)!=1: raise RuntimeError('negative release source anchor not unique')
-    release_mutant=out/'negative-release.c'
-    release_mutant.write_text(source.replace(release_anchor,'    /* negative control: release omitted */',1),encoding='latin1')
-    release_pair=b.PreparedPair(FUNCTION,source=release_mutant,out=out/'negative-release')
-    release_case=case('negative/omit-resource-release',1,640,0,[115],[],[0,0,100,100],0x9876)
-    release_case.writes.extend(_actual_lock_init_writes(release_pair,release_case)[0])
-    release_neg=release_pair.compare(release_case)
-    # Diagnostic negative control: mode 5 explicitly reads win_Open's private
-    # words. Mutate only object 0's first mode from constant to mode 5; changed
-    # SI must then move the object's left/right coordinates.
-    mode5_results=[]
-    for si in (1,20):
-        diagnostic=case(f'negative/mode5-uses-open-arg/{si}',0,640,0,[13],[],
-                        [0,0,10,10],0x9876)
-        diagnostic.registers.update({'si':si,'di':2,'stack_poison':0xa5})
-        base=diagnostic.metadata['window_data_seg']*16
-        resource=diagnostic.metadata['actual_window_resource']
-        for index,(address,data) in enumerate(diagnostic.writes):
-            if address==base:
-                changed=bytearray(data)
-                struct.pack_into('<h',changed,resource['object_offsets'][0]+0x18,5)
-                diagnostic.writes[index]=(address,bytes(changed))
-                break
-        else:
-            raise RuntimeError('mode-5 diagnostic could not locate window payload')
-        diagnostic.writes.extend(_actual_lock_init_writes(pair,diagnostic)[0])
-        comparison=pair.compare(diagnostic)
-        if not comparison.equal:
-            failures.append({'case':diagnostic.metadata,'diff':comparison.diff})
-        diagnostic_payload=bytes.fromhex(comparison.original['ranges']['actual_2100_payload'])
-        mode5_results.append({'si':si,'rect':list(struct.unpack_from('<4h',diagnostic_payload,
-            resource['object_offsets'][0])),'original_candidate_equal':comparison.equal,
-            'oracle_observation_sha256':b.digest(json.dumps(comparison.original).encode()),
-            'candidate_observation_sha256':b.digest(json.dumps(comparison.candidate).encode())})
-    def negative_evidence(control_id,mutant_path,mutant_pair,comparison,object_dir):
-        object_path=out/object_dir/'candidate.obj'
-        return {'id':control_id,'executed':True,'original_executed':True,
-            'mutant_executed':True,'baseline_matches':True,'mutant_differs':not comparison.equal,
-            'execution_errors':0,'mismatch_categories':list(comparison.diff),
-            'identity':mutant_pair.identity,'suite_sha256':b.digest(SUITE_SOURCE),
-            'mutant_source':{'path':mutant_path.resolve().relative_to(ROOT).as_posix(),
-                             'sha256':b.digest(mutant_path.read_bytes())},
-            'mutant_object':{'path':object_path.resolve().relative_to(ROOT).as_posix(),
-                             'sha256':b.digest(object_path.read_bytes())},
-            'diff':comparison.diff}
-    report={'schema':'behavior-suite-run-v1','function':FUNCTION,'identity':pair.identity,
-        'suite_sha256':b.digest(SUITE_SOURCE),'directed':counts['directed'],'randomized':counts['randomized'],
-        'case_ledger':ledger.finalize(),
-        'mismatches':len([f for f in failures if 'diff' in f]),'errors':len([f for f in failures if 'error' in f]),
-        'positive_control':positive,
-        'window_arg_poison_controls':{'count':len(poison_evidence),
-            'controls':poison_evidence,'semantic_invariant':poison_semantics,
-            'negative_mode5_control':mode5_results,
-            'mode5_detected_effect':len(mode5_results)==2 and
-                mode5_results[0]['rect']!=mode5_results[1]['rect']},
-        'source_definition_pins':source_definition_pins(),
-        'helper_boundaries':[helper_observations[name] for name in sorted(helper_observations)],
-        'fixture_setup':{'lock_init':setup_evidence,
-            'captured_nonstack_write_sha256':b.digest(json.dumps(
-                [(hex(address),data.hex()) for address,data in setup_writes],
-                separators=(',',':')).encode()),
-            'captured_nonstack_write_bytes':sum(len(data) for _,data in setup_writes),
-            'all_static_setup_values_are_zero_or_lockinit_one':all(
-                set(data)<={0,1} for _,data in setup_writes)},
-        'dependency_pins':{
-            relative:b.digest((ROOT/relative).read_bytes()) for relative in (
-                'tools/behavior_suites/lists.py',
-                'tools/behavior_ledger.py',
-                'tools/behavior_suites/archive/window-memory-fixture-dda4f6dd.py')},
-        'negative_controls':[
-            negative_evidence('save-result-mutated-to-cancel',mutant,negpair,neg,'negative-return'),
-            negative_evidence('omit-resource-release',release_mutant,release_pair,release_neg,'negative-release')],
-        'failures':failures,'seed':seed,'status':'UNRESOLVED: host command boundary pending review',
-        'compared':EFFECTS,
-        'domain':'caller values which=0 (LoadGame) and which=1 (MenuQuit); all dialog keys/events, keyboard/event arbitration, ignored input, both video widths, display flags, distinct signed dialog/text rectangles, arbitrary nonzero resource text, hostile volatile register returns',
-        'boundaries':'the actual uncompressed HCEGANT 0x2100 window resource is loaded into a valid DOS Ralloc arena; original win_Open/win_Close, z-order stack mutation/removal, win_Recalc, win_GetObjRect, window LockInit/lock/unlock, db_ReleaseHandle and f_171C_15A2 execute; renderer/cursor primitives and future input/resource/text services are logical command/provider boundaries; stale input is flushed; manager counters, text/window headers, window flags/geometry, prior-current restoration, resource handles and allocation totals are observed; target-only dialog bitmap/text paths are normalized host commands with their source helper definitions pinned for review',
-        'elapsed_seconds':round(time.monotonic()-started,3)}
-    (out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
-    if failures or neg.equal or release_neg.equal or not report['window_arg_poison_controls']['mode5_detected_effect']:
-        raise AssertionError(failures or 'negative control was not detected')
-    return report
 
 
-if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--count',type=int,default=10000)
-    p.add_argument('--seed',type=lambda s:int(s,0),default=0x0239)
-    p.add_argument('--out',type=Path,default=ROOT/'build/workers/behavior_dialog/ledger-20261002')
-    a=p.parse_args();print(json.dumps(run(a.count,a.seed,a.out),indent=2))
 

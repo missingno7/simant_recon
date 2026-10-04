@@ -1,6 +1,6 @@
 """Compile and audit the canonical DOS program; link only complete accepted inputs.
 
-Proposed installation: dos/build.py. Sources come only from the explicit program
+Sources come only from the explicit program
 inventory. No historical executable, behavior source selection, source overlay,
 object patching, or frozen archival contract is used to build this program.
 """
@@ -373,7 +373,7 @@ def main(argv=None):
     out.relative_to(ROOT / 'build')
     out.mkdir(parents=True, exist_ok=True)
     denied = install_input_guard()
-    report = {'schema': 'simant-canonical-dos-build-v1', 'target': 'SOURCE_ONLY_DOS',
+    report = {'schema': 'simant-canonical-dos-build-v1', 'target': 'CANONICAL_DOS',
         'inputs': [], 'build_tools': [], 'translation_units': [], 'errors': [],
         'original_exe_bytes_used': {'game_code': 0, 'game_data': 0, 'fallback_debt': 0, 'executable_fragments': 0},
         'standalone_dos_executable': False, 'runnable': False, 'human_acceptance': False}

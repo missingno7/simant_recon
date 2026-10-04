@@ -1,0 +1,229 @@
+{
+  "schema": "simant-native-findindex-port-blocking-exception-v1",
+  "status": "SEMANTIC_PORT_BLOCKING",
+  "validation_report": {
+    "path": "build/workers/consolidation_native_db/final-v18/report.json",
+    "sha256": "db2023bddc093eb4b1657a6a327ac419d268d29916b3c32c03238cbef7565f5b",
+    "size": 379581
+  },
+  "asset_query_differences": [
+    {
+      "database": "HCEGANT",
+      "query_id": -32222,
+      "query_kind": 148,
+      "active_count": 271,
+      "guarded": [
+        0,
+        9,
+        271,
+        -32222,
+        148,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        271,
+        1441211506,
+        -32222,
+        148,
+        102
+      ],
+      "unguarded": [
+        0,
+        9,
+        271,
+        -32222,
+        148,
+        271,
+        1441211506,
+        -32222,
+        148,
+        102,
+        271,
+        1441211506,
+        -32222,
+        148,
+        102
+      ]
+    },
+    {
+      "database": "SHARED",
+      "query_id": -32222,
+      "query_kind": 148,
+      "active_count": 449,
+      "guarded": [
+        1,
+        12,
+        449,
+        -32222,
+        148,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        449,
+        1441211506,
+        -32222,
+        148,
+        102
+      ],
+      "unguarded": [
+        1,
+        12,
+        449,
+        -32222,
+        148,
+        449,
+        1441211506,
+        -32222,
+        148,
+        102,
+        449,
+        1441211506,
+        -32222,
+        148,
+        102
+      ]
+    },
+    {
+      "database": "SOUND",
+      "query_id": -32222,
+      "query_kind": 148,
+      "active_count": 120,
+      "guarded": [
+        2,
+        5,
+        120,
+        -32222,
+        148,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        120,
+        1441211506,
+        -32222,
+        148,
+        102
+      ],
+      "unguarded": [
+        2,
+        5,
+        120,
+        -32222,
+        148,
+        120,
+        1441211506,
+        -32222,
+        148,
+        102,
+        120,
+        1441211506,
+        -32222,
+        148,
+        102
+      ]
+    }
+  ],
+  "defined_lookahead_positive": {
+    "guarded": [
+      [
+        0,
+        0,
+        2,
+        9,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        2,
+        2,
+        9,
+        2,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        10,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        2,
+        2,
+        9,
+        2,
+        0
+      ]
+    ],
+    "unguarded": [
+      [
+        0,
+        0,
+        2,
+        9,
+        2,
+        2,
+        2,
+        9,
+        2,
+        0,
+        2,
+        2,
+        9,
+        2,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        10,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        2,
+        2,
+        9,
+        2,
+        0
+      ]
+    ]
+  },
+  "actual_delta": "At insertion rank count, both preserve cursor and global one-past pointer; guard skips comparison/read and returns NULL instead of matching reserved-row entry.",
+  "successful_asset_recall_domain": "840 in-range existing records use ranks below count; the guard is not reached for these lookup hits.",
+  "reachability_gap": "No general original caller/resource/heap invariant excludes a matching one-past row on misses; this conditional fixture proves the observable delta but is not a shipped-resource witness.",
+  "asset_fixture_allocation": "Native query fixture allocates count+1 rows and copies the first reserved row from each NDX. Original source OpenIndex reads and allocates only count*8 bytes, so the reserved file row does not establish original adjacent heap contents.",
+  "fresh_dos_calls": 0,
+  "mechanical_guard_removal_is_safe_general_port": false,
+  "canonical_source": {
+    "path": "src/root/m1986.c",
+    "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+    "size": 2874
+  },
+  "canonical_semantic_review": "evidence/canonical/semantic/FindIndex.json",
+  "native_guarded_source": {
+    "path": "build/workers/consolidation_portable/core-attempt-v18/root_1986.c",
+    "sha256": "eb62b4411cbcf2818a07f4047dfdb97ccf44a76250df44a7306a82873e535059",
+    "size": 2834
+  },
+  "native_guardless_source": {
+    "path": "build/workers/consolidation_native_db/final-v18/root_1986-without-native-guard.c",
+    "sha256": "5fe9939ed99867b87219c319b74a6f878d298aa83f0820c678d7b411b373ef40",
+    "size": 2762
+  },
+  "root_reviewed": false,
+  "new_proof_claim": null
+}

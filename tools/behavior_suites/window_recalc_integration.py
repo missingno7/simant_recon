@@ -7,30 +7,19 @@ the DOS lock/object/recalc helpers from the original image.
 from __future__ import annotations
 
 import json
-import importlib.util
 import random
 import struct
 import sys
 import time
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "tools"))
-sys.path.insert(0, str(ROOT / "tools" / "behavior_suites"))
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
+
+
 
 import behavior
-# Pin the fixture dependency by file hash for this evidence run.
-_MEMORY_FIXTURE = ROOT / "tools" / "behavior_suites" / "archive" / "window-memory-fixture-dda4f6dd.py"
-_memory_spec = importlib.util.spec_from_file_location("window_fixture_memory", _MEMORY_FIXTURE)
-memory_suite = importlib.util.module_from_spec(_memory_spec)
-sys.modules[_memory_spec.name] = memory_suite
-_memory_spec.loader.exec_module(memory_suite)
-sys.modules["memory"] = memory_suite
-_WINDOW_SUITE = ROOT / "tools" / "behavior_suites" / "archive" / "windows-fixture-76c6cf56.py"
-_window_spec = importlib.util.spec_from_file_location("window_fixture_suite", _WINDOW_SUITE)
-window_suite = importlib.util.module_from_spec(_window_spec)
-sys.modules[_window_spec.name] = window_suite
-_window_spec.loader.exec_module(window_suite)
+from behavior_suites import memory as memory_suite
+from behavior_suites import windows as window_suite
 from behavior_ledger import CaseLedger
 
 SUITE = "window_recalc_integration_v1"
@@ -209,17 +198,6 @@ def randomized_cases(count=100, seed=0x2505ECA1):
     return cases
 
 
-def getobjrect_cases(count=32, seed=0x2505A11C):
-    rng = random.Random(seed)
-    cases = []
-    for index in range(count):
-        n = 1 + rng.randrange(6)
-        target_index = rng.randrange(n)
-        rects = [_rect(rng) for _ in range(n)]
-        label = "getobjrect/positive" if index == 0 else f"random/{seed:08x}/{index - 1}"
-        cases.append(live_case(label, rng.randrange(0x100000000), count=n,
-                                target_index=target_index, object_rects=rects))
-    return cases
 
 
 def field_cases(count=64, seed=0x25050453):
@@ -272,130 +250,7 @@ def unlock_cases(count=500, seed=0x23AE01DB):
     return cases
 
 
-def run(cases, outdir, *, target=TARGET, source=None, seed=0x2505ECA1):
-    outdir.mkdir(parents=True, exist_ok=True)
-    pair = behavior.PreparedPair(target, source=source, out=outdir / target)
-    if target == TARGET:
-        effects = ["f_20E8_0903 return and far-pointer ABI",
-                   "all object geometry/origin/reference/mode fields",
-                   "valid Ralloc heap, handles, and window lock state",
-                   "actual ordered original lock/object/recalc/unlock helper calls",
-                   "all non-stack writes and final bytes", "preserved registers and caller stack"]
-    elif target == "win_GetObjRect":
-        effects = ["win_GetObjRect returned Rect through far output pointer",
-                   "selected real DOS window/object table and geometry",
-                   "valid Ralloc handle/header/free-list and lock state",
-                   "actual original win_LockWin/f_2505_0006/win_UnlockWin execution",
-                   "all non-stack writes and final bytes", "preserved registers and caller stack"]
-    elif target == "win_UnlockWin":
-        effects = ["nested and final window lock-count bytes",
-                   "real Ralloc handle/header/free-list state and supported object handles",
-                   "window-handle map and all object-handle slots",
-                   "deferred redraw flags, map copy, and all non-stack writes",
-                   "actual ordered original Ralloc lock/free/unlock/update helpers",
-                   "preserved registers and caller stack"]
-    else:
-        effects = ["f_2505_0453 indexed object field return and sentinel behavior",
-                   "selected real DOS window/object table and geometry",
-                   "valid Ralloc handle/header/free-list and lock state",
-                   "actual original win_LockWin/f_2505_0006/win_UnlockWin execution",
-                   "all non-stack writes and final bytes", "preserved registers and caller stack"]
-    ledger = CaseLedger(outdir / f"{target}-case-ledger.jsonl.gz", pair, effects)
-    started = time.time()
-    errors, mismatches, helper_counts, positive = [], [], {"original": {}, "candidate": {}}, None
-    for index, case in enumerate(cases):
-        try:
-            cmp = pair.compare(case)
-        except Exception as exc:
-            errors.append({"index": index, "label": case.label, "error": str(exc),
-                           "metadata": case.metadata})
-            continue
-        row = ledger.record(case, cmp, lane="directed" if case.label.endswith("/positive") else "randomized")
-        for side, observation in (("original", cmp.original), ("candidate", cmp.candidate)):
-            for event in observation["trace"]:
-                helper_counts[side][event["name"]] = helper_counts[side].get(event["name"], 0) + 1
-        if cmp.equal and positive is None:
-            positive = {"id": row["case_id"], "executed": True, "matched": True,
-                        "execution_errors": 0, "original_executed": True,
-                        "candidate_executed": True, "source_sha256": pair.identity["source_sha256"],
-                        "object_sha256": pair.identity["object_sha256"],
-                        "oracle_sha256": pair.identity["oracle_sha256"],
-                        "compared_effects": row["compared_effects"],
-                        "original_observation_sha256": row["original_observation_sha256"],
-                        "candidate_observation_sha256": row["candidate_observation_sha256"]}
-        if not cmp.equal:
-            mismatches.append({"index": index, "label": case.label, "diff": cmp.diff})
-    ledger_pin = ledger.finalize()
-    suite_hash = behavior.digest(Path(__file__).read_bytes())
-    helpers = []
-    names = (("win_LockWin", "f_2505_02D7", "win_Recalc", "win_UnlockWin")
-             if target == TARGET else
-             (("win_LockWin", "f_2505_0006", "win_UnlockWin") if target == "f_2505_0453" or target == "win_GetObjRect"
-              else ("f_171C_1686", "f_171C_13E4", "f_171C_2086", "f_171C_20E2")))
-    for name in names:
-        observed = helper_counts["original"].get(name, 0)
-        helpers.append({"name": name, "execution_mode": "ORIGINAL_EXE",
-                        "executed_from_original": True,
-                        "observed_call_count": observed,
-                        "original_call_count": observed,
-                        "candidate_call_count": helper_counts["candidate"].get(name, 0),
-                        "observed_call_count_scope": "all integration cases"})
-    evidence = {
-        "schema": "behavior-run-evidence-v1",
-        "completion": "COMPLETE" if not errors and not mismatches else "INCOMPLETE",
-        "identity": {"function": target, "suite_id": SUITE,
-                     "module": f"{pair.identity['address']['unit']}:{pair.identity['address']['seg']:04X}",
-                     **{key: pair.identity[key] for key in (
-                         "source_sha256", "compiled_source_sha256", "object_sha256", "linked_code_sha256",
-                         "oracle_sha256", "harness_sha256", "manifest_sha256", "profile", "flags", "address")},
-                     "suite_sha256": suite_hash,
-                     "historical_manifest_sha256": pair.identity["manifest_sha256"]},
-        "execution": {"engine": "PreparedPair.compare", "actual_original_execution": True,
-                      "actual_candidate_execution": True,
-                      "original_exe_sha256": pair.identity["oracle_sha256"]},
-        "cases": {"directed": {"generated": 1, "executed": ledger_pin["lane_counts"]["directed"],
-                                 "actual_original_invocations": ledger_pin["lane_counts"]["directed"],
-                                 "actual_candidate_invocations": ledger_pin["lane_counts"]["directed"],
-                                 "seeds": []},
-                  "randomized": {"generated": len(cases) - 1,
-                                 "executed": ledger_pin["lane_counts"]["randomized"],
-                                 "actual_original_invocations": ledger_pin["lane_counts"]["randomized"],
-                                 "actual_candidate_invocations": ledger_pin["lane_counts"]["randomized"],
-                                 "seeds": [seed]}},
-        "errors": len(errors), "mismatches": len(mismatches), "compared_effects": effects,
-        "case_ledger": {"path": Path(ledger_pin["path"]).name, "sha256": ledger_pin["sha256"],
-                        "row_count": ledger_pin["row_count"], "lane_counts": ledger_pin["lane_counts"],
-                        "compression": ledger_pin["compression"], "identity": ledger_pin["identity"]},
-        "unmodeled_boundaries": 0, "peer_data_gates": "PASS",
-        "positive_controls": [positive] if positive else [], "helper_boundaries": helpers,
-    }
-    run_path = outdir / f"{target}-run-evidence.json"
-    run_path.write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
-    report = {"schema": "behavior-suite-run-v1", "suite": SUITE, "function": target,
-              "suite_sha256": suite_hash, "source_sha256": pair.identity["source_sha256"],
-              "object_sha256": pair.identity["object_sha256"], "harness_sha256": pair.identity["harness_sha256"],
-              "manifest_sha256": pair.identity["manifest_sha256"], "cases_generated": len(cases),
-              "cases_run": ledger_pin["row_count"], "errors": len(errors), "mismatches": len(mismatches),
-              "execution_errors": errors, "failures": mismatches,
-              "elapsed_seconds": round(time.time() - started, 3),
-              "behavioral_status": "UNRESOLVED; diagnostic until independent review"}
-    (outdir / f"{target}.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    return pair, evidence, report
 
 
-def main():
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--count", type=int, default=100)
-    parser.add_argument("--out", type=Path, default=ROOT / "build/workers/behavior_window/recalc-integration")
-    args = parser.parse_args()
-    if args.count < 1:
-        parser.error("count must be positive")
-    cases = randomized_cases(args.count)
-    _, _, report = run(cases, args.out.resolve())
-    print(json.dumps(report, indent=2))
-    return 0 if report["errors"] == 0 and report["mismatches"] == 0 else 1
 
 
-if __name__ == "__main__":
-    raise SystemExit(main())
