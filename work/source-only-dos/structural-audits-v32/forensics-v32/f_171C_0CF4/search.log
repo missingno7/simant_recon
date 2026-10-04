@@ -1,0 +1,22 @@
+[module.c] MISMATCH: bytes differ (first at +0xc, 6 differing)  (opcode similarity 1.000, 182 vs 182 insns)
+      ... 6 equal instructions ...
+  ! 0CFE mov word ptr [bp - 0x1a], ax        | 0CFE mov word ptr [bp - 0x16], ax
+      ... 19 equal instructions ...
+  ! 0D38 add ax, word ptr [bp - 0x16]        | 0D38 add ax, word ptr [bp - 0x1a]
+      ... 137 equal instructions ...
+  ! 0EB1 mov word ptr [bp - 0x1a], 1         | 0EB1 mov word ptr [bp - 0x16], 1
+    0EB6 mov es, word ptr [bp - 0x12]        | 0EB6 mov es, word ptr [bp - 0x12]
+    0EB9 mov ax, word ptr es:[di + 6]        | 0EB9 mov ax, word ptr es:[di + 6]
+  ! 0EBD add ax, word ptr [bp - 0x16]        | 0EBD add ax, word ptr [bp - 0x1a]
+    0EC0 sub cx, cx                          | 0EC0 sub cx, cx
+    0EC2 mov di, cx                          | 0EC2 mov di, cx
+    0EC4 mov word ptr [bp - 0x12], ax        | 0EC4 mov word ptr [bp - 0x12], ax
+    0EC7 mov ax, word ptr [bp - 0x12]        | 0EC7 mov ax, word ptr [bp - 0x12]
+  ! 0ECA mov word ptr [bp - 0x16], ax        | 0ECA mov word ptr [bp - 0x1a], ax
+    0ECD cmp ax, word ptr [bp - 0x10]        | 0ECD cmp ax, word ptr [bp - 0x10]
+    0ED0 jae 0xed5                           | 0ED0 jae 0xed5
+    0ED2 jmp 0xd28                           | 0ED2 jmp 0xd28
+  ! 0ED5 mov ax, word ptr [bp - 0x1a]        | 0ED5 mov ax, word ptr [bp - 0x16]
+      ... 5 equal instructions ...
+  relocations expected ['0x18042', '0x1805e', '0x17fcb', '0x1800a']
+  relocations candidate ['0x1805e', '0x18042', '0x1800a', '0x17fcb']

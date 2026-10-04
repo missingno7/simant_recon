@@ -1,0 +1,2128 @@
+{
+  "target": "f_171C_0CF4",
+  "candidate_extent": 490,
+  "target_extent": 490,
+  "candidate_insns": 182,
+  "original_insns": 182,
+  "differing_instructions": [
+    {
+      "index": 6,
+      "candidate": [
+        3326,
+        "8946e6",
+        "mov word ptr [bp - 0x1a], ax"
+      ],
+      "original": [
+        3326,
+        "8946ea",
+        "mov word ptr [bp - 0x16], ax"
+      ]
+    },
+    {
+      "index": 26,
+      "candidate": [
+        3384,
+        "0346ea",
+        "add ax, word ptr [bp - 0x16]"
+      ],
+      "original": [
+        3384,
+        "0346e6",
+        "add ax, word ptr [bp - 0x1a]"
+      ]
+    },
+    {
+      "index": 164,
+      "candidate": [
+        3761,
+        "c746e60100",
+        "mov word ptr [bp - 0x1a], 1"
+      ],
+      "original": [
+        3761,
+        "c746ea0100",
+        "mov word ptr [bp - 0x16], 1"
+      ]
+    },
+    {
+      "index": 167,
+      "candidate": [
+        3773,
+        "0346ea",
+        "add ax, word ptr [bp - 0x16]"
+      ],
+      "original": [
+        3773,
+        "0346e6",
+        "add ax, word ptr [bp - 0x1a]"
+      ]
+    },
+    {
+      "index": 172,
+      "candidate": [
+        3786,
+        "8946ea",
+        "mov word ptr [bp - 0x16], ax"
+      ],
+      "original": [
+        3786,
+        "8946e6",
+        "mov word ptr [bp - 0x1a], ax"
+      ]
+    },
+    {
+      "index": 176,
+      "candidate": [
+        3797,
+        "8b46e6",
+        "mov ax, word ptr [bp - 0x1a]"
+      ],
+      "original": [
+        3797,
+        "8b46ea",
+        "mov ax, word ptr [bp - 0x16]"
+      ]
+    }
+  ],
+  "differing_bytes": [
+    {
+      "relative": 12,
+      "candidate": 230,
+      "original": 234
+    },
+    {
+      "relative": 70,
+      "candidate": 234,
+      "original": 230
+    },
+    {
+      "relative": 447,
+      "candidate": 230,
+      "original": 234
+    },
+    {
+      "relative": 459,
+      "candidate": 234,
+      "original": 230
+    },
+    {
+      "relative": 472,
+      "candidate": 234,
+      "original": 230
+    },
+    {
+      "relative": 483,
+      "candidate": 230,
+      "original": 234
+    }
+  ],
+  "candidate_disassembly": [
+    [
+      3316,
+      "55",
+      "push bp"
+    ],
+    [
+      3317,
+      "8bec",
+      "mov bp, sp"
+    ],
+    [
+      3319,
+      "83ec26",
+      "sub sp, 0x26"
+    ],
+    [
+      3322,
+      "57",
+      "push di"
+    ],
+    [
+      3323,
+      "56",
+      "push si"
+    ],
+    [
+      3324,
+      "2bc0",
+      "sub ax, ax"
+    ],
+    [
+      3326,
+      "8946e6",
+      "mov word ptr [bp - 0x1a], ax"
+    ],
+    [
+      3329,
+      "a1a491",
+      "mov ax, word ptr [0x91a4]"
+    ],
+    [
+      3332,
+      "8b16a691",
+      "mov dx, word ptr [0x91a6]"
+    ],
+    [
+      3336,
+      "8bf8",
+      "mov di, ax"
+    ],
+    [
+      3338,
+      "8956ee",
+      "mov word ptr [bp - 0x12], dx"
+    ],
+    [
+      3341,
+      "837e0600",
+      "cmp word ptr [bp + 6], 0"
+    ],
+    [
+      3345,
+      "740b",
+      "je 0xd1e"
+    ],
+    [
+      3347,
+      "8e06ac89",
+      "mov es, word ptr [0x89ac]"
+    ],
+    [
+      3351,
+      "26a15039",
+      "mov ax, word ptr es:[0x3950]"
+    ],
+    [
+      3355,
+      "eb04",
+      "jmp 0xd21"
+    ],
+    [
+      3357,
+      "90",
+      "nop"
+    ],
+    [
+      3358,
+      "a1708c",
+      "mov ax, word ptr [0x8c70]"
+    ],
+    [
+      3361,
+      "8946f0",
+      "mov word ptr [bp - 0x10], ax"
+    ],
+    [
+      3364,
+      "e9a001",
+      "jmp 0xec7"
+    ],
+    [
+      3367,
+      "90",
+      "nop"
+    ],
+    [
+      3368,
+      "8ec0",
+      "mov es, ax"
+    ],
+    [
+      3370,
+      "26807d0880",
+      "cmp byte ptr es:[di + 8], 0x80"
+    ],
+    [
+      3375,
+      "7403",
+      "je 0xd34"
+    ],
+    [
+      3377,
+      "e98201",
+      "jmp 0xeb6"
+    ],
+    [
+      3380,
+      "268b4506",
+      "mov ax, word ptr es:[di + 6]"
+    ],
+    [
+      3384,
+      "0346ea",
+      "add ax, word ptr [bp - 0x16]"
+    ],
+    [
+      3387,
+      "2bc9",
+      "sub cx, cx"
+    ],
+    [
+      3389,
+      "8bf1",
+      "mov si, cx"
+    ],
+    [
+      3391,
+      "8946f4",
+      "mov word ptr [bp - 0xc], ax"
+    ],
+    [
+      3394,
+      "3b46f0",
+      "cmp ax, word ptr [bp - 0x10]"
+    ],
+    [
+      3397,
+      "732d",
+      "jae 0xd74"
+    ],
+    [
+      3399,
+      "8ec0",
+      "mov es, ax"
+    ],
+    [
+      3401,
+      "268a4c08",
+      "mov cl, byte ptr es:[si + 8]"
+    ],
+    [
+      3405,
+      "2aed",
+      "sub ch, ch"
+    ],
+    [
+      3407,
+      "26386c09",
+      "cmp byte ptr es:[si + 9], ch"
+    ],
+    [
+      3411,
+      "751f",
+      "jne 0xd74"
+    ],
+    [
+      3413,
+      "83f901",
+      "cmp cx, 1"
+    ],
+    [
+      3416,
+      "7405",
+      "je 0xd5f"
+    ],
+    [
+      3418,
+      "83f903",
+      "cmp cx, 3"
+    ],
+    [
+      3421,
+      "7515",
+      "jne 0xd74"
+    ],
+    [
+      3423,
+      "26f6441210",
+      "test byte ptr es:[si + 0x12], 0x10"
+    ],
+    [
+      3428,
+      "750e",
+      "jne 0xd74"
+    ],
+    [
+      3430,
+      "ff76ee",
+      "push word ptr [bp - 0x12]"
+    ],
+    [
+      3433,
+      "57",
+      "push di"
+    ],
+    [
+      3434,
+      "0e",
+      "push cs"
+    ],
+    [
+      3435,
+      "e86efd",
+      "call 0xadc"
+    ],
+    [
+      3438,
+      "83c404",
+      "add sp, 4"
+    ],
+    [
+      3441,
+      "e94201",
+      "jmp 0xeb6"
+    ],
+    [
+      3444,
+      "8b46f0",
+      "mov ax, word ptr [bp - 0x10]"
+    ],
+    [
+      3447,
+      "3946f4",
+      "cmp word ptr [bp - 0xc], ax"
+    ],
+    [
+      3450,
+      "7203",
+      "jb 0xd7f"
+    ],
+    [
+      3452,
+      "e93701",
+      "jmp 0xeb6"
+    ],
+    [
+      3455,
+      "8e46f4",
+      "mov es, word ptr [bp - 0xc]"
+    ],
+    [
+      3458,
+      "268a4c08",
+      "mov cl, byte ptr es:[si + 8]"
+    ],
+    [
+      3462,
+      "2aed",
+      "sub ch, ch"
+    ],
+    [
+      3464,
+      "26386c09",
+      "cmp byte ptr es:[si + 9], ch"
+    ],
+    [
+      3468,
+      "7517",
+      "jne 0xda5"
+    ],
+    [
+      3470,
+      "83f901",
+      "cmp cx, 1"
+    ],
+    [
+      3473,
+      "7405",
+      "je 0xd98"
+    ],
+    [
+      3475,
+      "83f903",
+      "cmp cx, 3"
+    ],
+    [
+      3478,
+      "750d",
+      "jne 0xda5"
+    ],
+    [
+      3480,
+      "268b4406",
+      "mov ax, word ptr es:[si + 6]"
+    ],
+    [
+      3484,
+      "8e46ee",
+      "mov es, word ptr [bp - 0x12]"
+    ],
+    [
+      3487,
+      "26394506",
+      "cmp word ptr es:[di + 6], ax"
+    ],
+    [
+      3491,
+      "7315",
+      "jae 0xdba"
+    ],
+    [
+      3493,
+      "8e46f4",
+      "mov es, word ptr [bp - 0xc]"
+    ],
+    [
+      3496,
+      "268b4406",
+      "mov ax, word ptr es:[si + 6]"
+    ],
+    [
+      3500,
+      "8cc2",
+      "mov dx, es"
+    ],
+    [
+      3502,
+      "03c2",
+      "add ax, dx"
+    ],
+    [
+      3504,
+      "2bc9",
+      "sub cx, cx"
+    ],
+    [
+      3506,
+      "8bf1",
+      "mov si, cx"
+    ],
+    [
+      3508,
+      "8946f4",
+      "mov word ptr [bp - 0xc], ax"
+    ],
+    [
+      3511,
+      "ebbb",
+      "jmp 0xd74"
+    ],
+    [
+      3513,
+      "90",
+      "nop"
+    ],
+    [
+      3514,
+      "8e46f4",
+      "mov es, word ptr [bp - 0xc]"
+    ],
+    [
+      3517,
+      "268b4406",
+      "mov ax, word ptr es:[si + 6]"
+    ],
+    [
+      3521,
+      "8946f6",
+      "mov word ptr [bp - 0xa], ax"
+    ],
+    [
+      3524,
+      "268b5402",
+      "mov dx, word ptr es:[si + 2]"
+    ],
+    [
+      3528,
+      "268b5c04",
+      "mov bx, word ptr es:[si + 4]"
+    ],
+    [
+      3532,
+      "8956f8",
+      "mov word ptr [bp - 8], dx"
+    ],
+    [
+      3535,
+      "895efa",
+      "mov word ptr [bp - 6], bx"
+    ],
+    [
+      3538,
+      "51",
+      "push cx"
+    ],
+    [
+      3539,
+      "50",
+      "push ax"
+    ],
+    [
+      3540,
+      "ff76ee",
+      "push word ptr [bp - 0x12]"
+    ],
+    [
+      3543,
+      "57",
+      "push di"
+    ],
+    [
+      3544,
+      "8976e2",
+      "mov word ptr [bp - 0x1e], si"
+    ],
+    [
+      3547,
+      "8c46e4",
+      "mov word ptr [bp - 0x1c], es"
+    ],
+    [
+      3550,
+      "0e",
+      "push cs"
+    ],
+    [
+      3551,
+      "e8aaf8",
+      "call 0x68c"
+    ],
+    [
+      3554,
+      "83c408",
+      "add sp, 8"
+    ],
+    [
+      3557,
+      "b80d00",
+      "mov ax, 0xd"
+    ],
+    [
+      3560,
+      "50",
+      "push ax"
+    ],
+    [
+      3561,
+      "8b46e2",
+      "mov ax, word ptr [bp - 0x1e]"
+    ],
+    [
+      3564,
+      "8b56e4",
+      "mov dx, word ptr [bp - 0x1c]"
+    ],
+    [
+      3567,
+      "051300",
+      "add ax, 0x13"
+    ],
+    [
+      3570,
+      "52",
+      "push dx"
+    ],
+    [
+      3571,
+      "50",
+      "push ax"
+    ],
+    [
+      3572,
+      "8bc7",
+      "mov ax, di"
+    ],
+    [
+      3574,
+      "8b56ee",
+      "mov dx, word ptr [bp - 0x12]"
+    ],
+    [
+      3577,
+      "8bda",
+      "mov bx, dx"
+    ],
+    [
+      3579,
+      "051300",
+      "add ax, 0x13"
+    ],
+    [
+      3582,
+      "52",
+      "push dx"
+    ],
+    [
+      3583,
+      "50",
+      "push ax"
+    ],
+    [
+      3584,
+      "8bf7",
+      "mov si, di"
+    ],
+    [
+      3586,
+      "8976de",
+      "mov word ptr [bp - 0x22], si"
+    ],
+    [
+      3589,
+      "895ee0",
+      "mov word ptr [bp - 0x20], bx"
+    ],
+    [
+      3592,
+      "9a1a28f429",
+      "lcall 0x29f4, 0x281a"
+    ],
+    [
+      3597,
+      "83c40a",
+      "add sp, 0xa"
+    ],
+    [
+      3600,
+      "8b46f8",
+      "mov ax, word ptr [bp - 8]"
+    ],
+    [
+      3603,
+      "8b56fa",
+      "mov dx, word ptr [bp - 6]"
+    ],
+    [
+      3606,
+      "c45ede",
+      "les bx, ptr [bp - 0x22]"
+    ],
+    [
+      3609,
+      "26894702",
+      "mov word ptr es:[bx + 2], ax"
+    ],
+    [
+      3613,
+      "26895704",
+      "mov word ptr es:[bx + 4], dx"
+    ],
+    [
+      3617,
+      "8b46f6",
+      "mov ax, word ptr [bp - 0xa]"
+    ],
+    [
+      3620,
+      "48",
+      "dec ax"
+    ],
+    [
+      3621,
+      "48",
+      "dec ax"
+    ],
+    [
+      3622,
+      "50",
+      "push ax"
+    ],
+    [
+      3623,
+      "8b46e2",
+      "mov ax, word ptr [bp - 0x1e]"
+    ],
+    [
+      3626,
+      "8b56e4",
+      "mov dx, word ptr [bp - 0x1c]"
+    ],
+    [
+      3629,
+      "050000",
+      "add ax, 0"
+    ],
+    [
+      3632,
+      "83d202",
+      "adc dx, 2"
+    ],
+    [
+      3635,
+      "52",
+      "push dx"
+    ],
+    [
+      3636,
+      "50",
+      "push ax"
+    ],
+    [
+      3637,
+      "8cc0",
+      "mov ax, es"
+    ],
+    [
+      3639,
+      "83c300",
+      "add bx, 0"
+    ],
+    [
+      3642,
+      "150200",
+      "adc ax, 2"
+    ],
+    [
+      3645,
+      "50",
+      "push ax"
+    ],
+    [
+      3646,
+      "53",
+      "push bx"
+    ],
+    [
+      3647,
+      "8bf0",
+      "mov si, ax"
+    ],
+    [
+      3649,
+      "895eda",
+      "mov word ptr [bp - 0x26], bx"
+    ],
+    [
+      3652,
+      "8976dc",
+      "mov word ptr [bp - 0x24], si"
+    ],
+    [
+      3655,
+      "9a06004d19",
+      "lcall 0x194d, 6"
+    ],
+    [
+      3660,
+      "83c40a",
+      "add sp, 0xa"
+    ],
+    [
+      3663,
+      "c45ee2",
+      "les bx, ptr [bp - 0x1e]"
+    ],
+    [
+      3666,
+      "268b07",
+      "mov ax, word ptr es:[bx]"
+    ],
+    [
+      3669,
+      "c476de",
+      "les si, ptr [bp - 0x22]"
+    ],
+    [
+      3672,
+      "268904",
+      "mov word ptr es:[si], ax"
+    ],
+    [
+      3675,
+      "c45ee2",
+      "les bx, ptr [bp - 0x1e]"
+    ],
+    [
+      3678,
+      "268b470a",
+      "mov ax, word ptr es:[bx + 0xa]"
+    ],
+    [
+      3682,
+      "268b570c",
+      "mov dx, word ptr es:[bx + 0xc]"
+    ],
+    [
+      3686,
+      "c476de",
+      "les si, ptr [bp - 0x22]"
+    ],
+    [
+      3689,
+      "2689440a",
+      "mov word ptr es:[si + 0xa], ax"
+    ],
+    [
+      3693,
+      "2689540c",
+      "mov word ptr es:[si + 0xc], dx"
+    ],
+    [
+      3697,
+      "c45ee2",
+      "les bx, ptr [bp - 0x1e]"
+    ],
+    [
+      3700,
+      "268a4712",
+      "mov al, byte ptr es:[bx + 0x12]"
+    ],
+    [
+      3704,
+      "c476de",
+      "les si, ptr [bp - 0x22]"
+    ],
+    [
+      3707,
+      "26884412",
+      "mov byte ptr es:[si + 0x12], al"
+    ],
+    [
+      3711,
+      "9a762df429",
+      "lcall 0x29f4, 0x2d76"
+    ],
+    [
+      3716,
+      "8b46da",
+      "mov ax, word ptr [bp - 0x26]"
+    ],
+    [
+      3719,
+      "8b56dc",
+      "mov dx, word ptr [bp - 0x24]"
+    ],
+    [
+      3722,
+      "c45ede",
+      "les bx, ptr [bp - 0x22]"
+    ],
+    [
+      3725,
+      "268b1f",
+      "mov bx, word ptr es:[bx]"
+    ],
+    [
+      3728,
+      "c436462f",
+      "les si, ptr [0x2f46]"
+    ],
+    [
+      3732,
+      "268900",
+      "mov word ptr es:[bx + si], ax"
+    ],
+    [
+      3735,
+      "26895002",
+      "mov word ptr es:[bx + si + 2], dx"
+    ],
+    [
+      3739,
+      "9a782df429",
+      "lcall 0x29f4, 0x2d78"
+    ],
+    [
+      3744,
+      "b80100",
+      "mov ax, 1"
+    ],
+    [
+      3747,
+      "50",
+      "push ax"
+    ],
+    [
+      3748,
+      "ff76e4",
+      "push word ptr [bp - 0x1c]"
+    ],
+    [
+      3751,
+      "ff76e2",
+      "push word ptr [bp - 0x1e]"
+    ],
+    [
+      3754,
+      "0e",
+      "push cs"
+    ],
+    [
+      3755,
+      "e8b2f2",
+      "call 0x160"
+    ],
+    [
+      3758,
+      "83c406",
+      "add sp, 6"
+    ],
+    [
+      3761,
+      "c746e60100",
+      "mov word ptr [bp - 0x1a], 1"
+    ],
+    [
+      3766,
+      "8e46ee",
+      "mov es, word ptr [bp - 0x12]"
+    ],
+    [
+      3769,
+      "268b4506",
+      "mov ax, word ptr es:[di + 6]"
+    ],
+    [
+      3773,
+      "0346ea",
+      "add ax, word ptr [bp - 0x16]"
+    ],
+    [
+      3776,
+      "2bc9",
+      "sub cx, cx"
+    ],
+    [
+      3778,
+      "8bf9",
+      "mov di, cx"
+    ],
+    [
+      3780,
+      "8946ee",
+      "mov word ptr [bp - 0x12], ax"
+    ],
+    [
+      3783,
+      "8b46ee",
+      "mov ax, word ptr [bp - 0x12]"
+    ],
+    [
+      3786,
+      "8946ea",
+      "mov word ptr [bp - 0x16], ax"
+    ],
+    [
+      3789,
+      "3b46f0",
+      "cmp ax, word ptr [bp - 0x10]"
+    ],
+    [
+      3792,
+      "7303",
+      "jae 0xed5"
+    ],
+    [
+      3794,
+      "e953fe",
+      "jmp 0xd28"
+    ],
+    [
+      3797,
+      "8b46e6",
+      "mov ax, word ptr [bp - 0x1a]"
+    ],
+    [
+      3800,
+      "5e",
+      "pop si"
+    ],
+    [
+      3801,
+      "5f",
+      "pop di"
+    ],
+    [
+      3802,
+      "8be5",
+      "mov sp, bp"
+    ],
+    [
+      3804,
+      "5d",
+      "pop bp"
+    ],
+    [
+      3805,
+      "cb",
+      "retf"
+    ]
+  ],
+  "original_disassembly": [
+    [
+      3316,
+      "55",
+      "push bp"
+    ],
+    [
+      3317,
+      "8bec",
+      "mov bp, sp"
+    ],
+    [
+      3319,
+      "83ec26",
+      "sub sp, 0x26"
+    ],
+    [
+      3322,
+      "57",
+      "push di"
+    ],
+    [
+      3323,
+      "56",
+      "push si"
+    ],
+    [
+      3324,
+      "2bc0",
+      "sub ax, ax"
+    ],
+    [
+      3326,
+      "8946ea",
+      "mov word ptr [bp - 0x16], ax"
+    ],
+    [
+      3329,
+      "a1a491",
+      "mov ax, word ptr [0x91a4]"
+    ],
+    [
+      3332,
+      "8b16a691",
+      "mov dx, word ptr [0x91a6]"
+    ],
+    [
+      3336,
+      "8bf8",
+      "mov di, ax"
+    ],
+    [
+      3338,
+      "8956ee",
+      "mov word ptr [bp - 0x12], dx"
+    ],
+    [
+      3341,
+      "837e0600",
+      "cmp word ptr [bp + 6], 0"
+    ],
+    [
+      3345,
+      "740b",
+      "je 0xd1e"
+    ],
+    [
+      3347,
+      "8e06ac89",
+      "mov es, word ptr [0x89ac]"
+    ],
+    [
+      3351,
+      "26a15039",
+      "mov ax, word ptr es:[0x3950]"
+    ],
+    [
+      3355,
+      "eb04",
+      "jmp 0xd21"
+    ],
+    [
+      3357,
+      "90",
+      "nop"
+    ],
+    [
+      3358,
+      "a1708c",
+      "mov ax, word ptr [0x8c70]"
+    ],
+    [
+      3361,
+      "8946f0",
+      "mov word ptr [bp - 0x10], ax"
+    ],
+    [
+      3364,
+      "e9a001",
+      "jmp 0xec7"
+    ],
+    [
+      3367,
+      "90",
+      "nop"
+    ],
+    [
+      3368,
+      "8ec0",
+      "mov es, ax"
+    ],
+    [
+      3370,
+      "26807d0880",
+      "cmp byte ptr es:[di + 8], 0x80"
+    ],
+    [
+      3375,
+      "7403",
+      "je 0xd34"
+    ],
+    [
+      3377,
+      "e98201",
+      "jmp 0xeb6"
+    ],
+    [
+      3380,
+      "268b4506",
+      "mov ax, word ptr es:[di + 6]"
+    ],
+    [
+      3384,
+      "0346e6",
+      "add ax, word ptr [bp - 0x1a]"
+    ],
+    [
+      3387,
+      "2bc9",
+      "sub cx, cx"
+    ],
+    [
+      3389,
+      "8bf1",
+      "mov si, cx"
+    ],
+    [
+      3391,
+      "8946f4",
+      "mov word ptr [bp - 0xc], ax"
+    ],
+    [
+      3394,
+      "3b46f0",
+      "cmp ax, word ptr [bp - 0x10]"
+    ],
+    [
+      3397,
+      "732d",
+      "jae 0xd74"
+    ],
+    [
+      3399,
+      "8ec0",
+      "mov es, ax"
+    ],
+    [
+      3401,
+      "268a4c08",
+      "mov cl, byte ptr es:[si + 8]"
+    ],
+    [
+      3405,
+      "2aed",
+      "sub ch, ch"
+    ],
+    [
+      3407,
+      "26386c09",
+      "cmp byte ptr es:[si + 9], ch"
+    ],
+    [
+      3411,
+      "751f",
+      "jne 0xd74"
+    ],
+    [
+      3413,
+      "83f901",
+      "cmp cx, 1"
+    ],
+    [
+      3416,
+      "7405",
+      "je 0xd5f"
+    ],
+    [
+      3418,
+      "83f903",
+      "cmp cx, 3"
+    ],
+    [
+      3421,
+      "7515",
+      "jne 0xd74"
+    ],
+    [
+      3423,
+      "26f6441210",
+      "test byte ptr es:[si + 0x12], 0x10"
+    ],
+    [
+      3428,
+      "750e",
+      "jne 0xd74"
+    ],
+    [
+      3430,
+      "ff76ee",
+      "push word ptr [bp - 0x12]"
+    ],
+    [
+      3433,
+      "57",
+      "push di"
+    ],
+    [
+      3434,
+      "0e",
+      "push cs"
+    ],
+    [
+      3435,
+      "e86efd",
+      "call 0xadc"
+    ],
+    [
+      3438,
+      "83c404",
+      "add sp, 4"
+    ],
+    [
+      3441,
+      "e94201",
+      "jmp 0xeb6"
+    ],
+    [
+      3444,
+      "8b46f0",
+      "mov ax, word ptr [bp - 0x10]"
+    ],
+    [
+      3447,
+      "3946f4",
+      "cmp word ptr [bp - 0xc], ax"
+    ],
+    [
+      3450,
+      "7203",
+      "jb 0xd7f"
+    ],
+    [
+      3452,
+      "e93701",
+      "jmp 0xeb6"
+    ],
+    [
+      3455,
+      "8e46f4",
+      "mov es, word ptr [bp - 0xc]"
+    ],
+    [
+      3458,
+      "268a4c08",
+      "mov cl, byte ptr es:[si + 8]"
+    ],
+    [
+      3462,
+      "2aed",
+      "sub ch, ch"
+    ],
+    [
+      3464,
+      "26386c09",
+      "cmp byte ptr es:[si + 9], ch"
+    ],
+    [
+      3468,
+      "7517",
+      "jne 0xda5"
+    ],
+    [
+      3470,
+      "83f901",
+      "cmp cx, 1"
+    ],
+    [
+      3473,
+      "7405",
+      "je 0xd98"
+    ],
+    [
+      3475,
+      "83f903",
+      "cmp cx, 3"
+    ],
+    [
+      3478,
+      "750d",
+      "jne 0xda5"
+    ],
+    [
+      3480,
+      "268b4406",
+      "mov ax, word ptr es:[si + 6]"
+    ],
+    [
+      3484,
+      "8e46ee",
+      "mov es, word ptr [bp - 0x12]"
+    ],
+    [
+      3487,
+      "26394506",
+      "cmp word ptr es:[di + 6], ax"
+    ],
+    [
+      3491,
+      "7315",
+      "jae 0xdba"
+    ],
+    [
+      3493,
+      "8e46f4",
+      "mov es, word ptr [bp - 0xc]"
+    ],
+    [
+      3496,
+      "268b4406",
+      "mov ax, word ptr es:[si + 6]"
+    ],
+    [
+      3500,
+      "8cc2",
+      "mov dx, es"
+    ],
+    [
+      3502,
+      "03c2",
+      "add ax, dx"
+    ],
+    [
+      3504,
+      "2bc9",
+      "sub cx, cx"
+    ],
+    [
+      3506,
+      "8bf1",
+      "mov si, cx"
+    ],
+    [
+      3508,
+      "8946f4",
+      "mov word ptr [bp - 0xc], ax"
+    ],
+    [
+      3511,
+      "ebbb",
+      "jmp 0xd74"
+    ],
+    [
+      3513,
+      "90",
+      "nop"
+    ],
+    [
+      3514,
+      "8e46f4",
+      "mov es, word ptr [bp - 0xc]"
+    ],
+    [
+      3517,
+      "268b4406",
+      "mov ax, word ptr es:[si + 6]"
+    ],
+    [
+      3521,
+      "8946f6",
+      "mov word ptr [bp - 0xa], ax"
+    ],
+    [
+      3524,
+      "268b5402",
+      "mov dx, word ptr es:[si + 2]"
+    ],
+    [
+      3528,
+      "268b5c04",
+      "mov bx, word ptr es:[si + 4]"
+    ],
+    [
+      3532,
+      "8956f8",
+      "mov word ptr [bp - 8], dx"
+    ],
+    [
+      3535,
+      "895efa",
+      "mov word ptr [bp - 6], bx"
+    ],
+    [
+      3538,
+      "51",
+      "push cx"
+    ],
+    [
+      3539,
+      "50",
+      "push ax"
+    ],
+    [
+      3540,
+      "ff76ee",
+      "push word ptr [bp - 0x12]"
+    ],
+    [
+      3543,
+      "57",
+      "push di"
+    ],
+    [
+      3544,
+      "8976e2",
+      "mov word ptr [bp - 0x1e], si"
+    ],
+    [
+      3547,
+      "8c46e4",
+      "mov word ptr [bp - 0x1c], es"
+    ],
+    [
+      3550,
+      "0e",
+      "push cs"
+    ],
+    [
+      3551,
+      "e8aaf8",
+      "call 0x68c"
+    ],
+    [
+      3554,
+      "83c408",
+      "add sp, 8"
+    ],
+    [
+      3557,
+      "b80d00",
+      "mov ax, 0xd"
+    ],
+    [
+      3560,
+      "50",
+      "push ax"
+    ],
+    [
+      3561,
+      "8b46e2",
+      "mov ax, word ptr [bp - 0x1e]"
+    ],
+    [
+      3564,
+      "8b56e4",
+      "mov dx, word ptr [bp - 0x1c]"
+    ],
+    [
+      3567,
+      "051300",
+      "add ax, 0x13"
+    ],
+    [
+      3570,
+      "52",
+      "push dx"
+    ],
+    [
+      3571,
+      "50",
+      "push ax"
+    ],
+    [
+      3572,
+      "8bc7",
+      "mov ax, di"
+    ],
+    [
+      3574,
+      "8b56ee",
+      "mov dx, word ptr [bp - 0x12]"
+    ],
+    [
+      3577,
+      "8bda",
+      "mov bx, dx"
+    ],
+    [
+      3579,
+      "051300",
+      "add ax, 0x13"
+    ],
+    [
+      3582,
+      "52",
+      "push dx"
+    ],
+    [
+      3583,
+      "50",
+      "push ax"
+    ],
+    [
+      3584,
+      "8bf7",
+      "mov si, di"
+    ],
+    [
+      3586,
+      "8976de",
+      "mov word ptr [bp - 0x22], si"
+    ],
+    [
+      3589,
+      "895ee0",
+      "mov word ptr [bp - 0x20], bx"
+    ],
+    [
+      3592,
+      "9a1a28f429",
+      "lcall 0x29f4, 0x281a"
+    ],
+    [
+      3597,
+      "83c40a",
+      "add sp, 0xa"
+    ],
+    [
+      3600,
+      "8b46f8",
+      "mov ax, word ptr [bp - 8]"
+    ],
+    [
+      3603,
+      "8b56fa",
+      "mov dx, word ptr [bp - 6]"
+    ],
+    [
+      3606,
+      "c45ede",
+      "les bx, ptr [bp - 0x22]"
+    ],
+    [
+      3609,
+      "26894702",
+      "mov word ptr es:[bx + 2], ax"
+    ],
+    [
+      3613,
+      "26895704",
+      "mov word ptr es:[bx + 4], dx"
+    ],
+    [
+      3617,
+      "8b46f6",
+      "mov ax, word ptr [bp - 0xa]"
+    ],
+    [
+      3620,
+      "48",
+      "dec ax"
+    ],
+    [
+      3621,
+      "48",
+      "dec ax"
+    ],
+    [
+      3622,
+      "50",
+      "push ax"
+    ],
+    [
+      3623,
+      "8b46e2",
+      "mov ax, word ptr [bp - 0x1e]"
+    ],
+    [
+      3626,
+      "8b56e4",
+      "mov dx, word ptr [bp - 0x1c]"
+    ],
+    [
+      3629,
+      "050000",
+      "add ax, 0"
+    ],
+    [
+      3632,
+      "83d202",
+      "adc dx, 2"
+    ],
+    [
+      3635,
+      "52",
+      "push dx"
+    ],
+    [
+      3636,
+      "50",
+      "push ax"
+    ],
+    [
+      3637,
+      "8cc0",
+      "mov ax, es"
+    ],
+    [
+      3639,
+      "83c300",
+      "add bx, 0"
+    ],
+    [
+      3642,
+      "150200",
+      "adc ax, 2"
+    ],
+    [
+      3645,
+      "50",
+      "push ax"
+    ],
+    [
+      3646,
+      "53",
+      "push bx"
+    ],
+    [
+      3647,
+      "8bf0",
+      "mov si, ax"
+    ],
+    [
+      3649,
+      "895eda",
+      "mov word ptr [bp - 0x26], bx"
+    ],
+    [
+      3652,
+      "8976dc",
+      "mov word ptr [bp - 0x24], si"
+    ],
+    [
+      3655,
+      "9a06004d19",
+      "lcall 0x194d, 6"
+    ],
+    [
+      3660,
+      "83c40a",
+      "add sp, 0xa"
+    ],
+    [
+      3663,
+      "c45ee2",
+      "les bx, ptr [bp - 0x1e]"
+    ],
+    [
+      3666,
+      "268b07",
+      "mov ax, word ptr es:[bx]"
+    ],
+    [
+      3669,
+      "c476de",
+      "les si, ptr [bp - 0x22]"
+    ],
+    [
+      3672,
+      "268904",
+      "mov word ptr es:[si], ax"
+    ],
+    [
+      3675,
+      "c45ee2",
+      "les bx, ptr [bp - 0x1e]"
+    ],
+    [
+      3678,
+      "268b470a",
+      "mov ax, word ptr es:[bx + 0xa]"
+    ],
+    [
+      3682,
+      "268b570c",
+      "mov dx, word ptr es:[bx + 0xc]"
+    ],
+    [
+      3686,
+      "c476de",
+      "les si, ptr [bp - 0x22]"
+    ],
+    [
+      3689,
+      "2689440a",
+      "mov word ptr es:[si + 0xa], ax"
+    ],
+    [
+      3693,
+      "2689540c",
+      "mov word ptr es:[si + 0xc], dx"
+    ],
+    [
+      3697,
+      "c45ee2",
+      "les bx, ptr [bp - 0x1e]"
+    ],
+    [
+      3700,
+      "268a4712",
+      "mov al, byte ptr es:[bx + 0x12]"
+    ],
+    [
+      3704,
+      "c476de",
+      "les si, ptr [bp - 0x22]"
+    ],
+    [
+      3707,
+      "26884412",
+      "mov byte ptr es:[si + 0x12], al"
+    ],
+    [
+      3711,
+      "9a762df429",
+      "lcall 0x29f4, 0x2d76"
+    ],
+    [
+      3716,
+      "8b46da",
+      "mov ax, word ptr [bp - 0x26]"
+    ],
+    [
+      3719,
+      "8b56dc",
+      "mov dx, word ptr [bp - 0x24]"
+    ],
+    [
+      3722,
+      "c45ede",
+      "les bx, ptr [bp - 0x22]"
+    ],
+    [
+      3725,
+      "268b1f",
+      "mov bx, word ptr es:[bx]"
+    ],
+    [
+      3728,
+      "c436462f",
+      "les si, ptr [0x2f46]"
+    ],
+    [
+      3732,
+      "268900",
+      "mov word ptr es:[bx + si], ax"
+    ],
+    [
+      3735,
+      "26895002",
+      "mov word ptr es:[bx + si + 2], dx"
+    ],
+    [
+      3739,
+      "9a782df429",
+      "lcall 0x29f4, 0x2d78"
+    ],
+    [
+      3744,
+      "b80100",
+      "mov ax, 1"
+    ],
+    [
+      3747,
+      "50",
+      "push ax"
+    ],
+    [
+      3748,
+      "ff76e4",
+      "push word ptr [bp - 0x1c]"
+    ],
+    [
+      3751,
+      "ff76e2",
+      "push word ptr [bp - 0x1e]"
+    ],
+    [
+      3754,
+      "0e",
+      "push cs"
+    ],
+    [
+      3755,
+      "e8b2f2",
+      "call 0x160"
+    ],
+    [
+      3758,
+      "83c406",
+      "add sp, 6"
+    ],
+    [
+      3761,
+      "c746ea0100",
+      "mov word ptr [bp - 0x16], 1"
+    ],
+    [
+      3766,
+      "8e46ee",
+      "mov es, word ptr [bp - 0x12]"
+    ],
+    [
+      3769,
+      "268b4506",
+      "mov ax, word ptr es:[di + 6]"
+    ],
+    [
+      3773,
+      "0346e6",
+      "add ax, word ptr [bp - 0x1a]"
+    ],
+    [
+      3776,
+      "2bc9",
+      "sub cx, cx"
+    ],
+    [
+      3778,
+      "8bf9",
+      "mov di, cx"
+    ],
+    [
+      3780,
+      "8946ee",
+      "mov word ptr [bp - 0x12], ax"
+    ],
+    [
+      3783,
+      "8b46ee",
+      "mov ax, word ptr [bp - 0x12]"
+    ],
+    [
+      3786,
+      "8946e6",
+      "mov word ptr [bp - 0x1a], ax"
+    ],
+    [
+      3789,
+      "3b46f0",
+      "cmp ax, word ptr [bp - 0x10]"
+    ],
+    [
+      3792,
+      "7303",
+      "jae 0xed5"
+    ],
+    [
+      3794,
+      "e953fe",
+      "jmp 0xd28"
+    ],
+    [
+      3797,
+      "8b46ea",
+      "mov ax, word ptr [bp - 0x16]"
+    ],
+    [
+      3800,
+      "5e",
+      "pop si"
+    ],
+    [
+      3801,
+      "5f",
+      "pop di"
+    ],
+    [
+      3802,
+      "8be5",
+      "mov sp, bp"
+    ],
+    [
+      3804,
+      "5d",
+      "pop bp"
+    ],
+    [
+      3805,
+      "cb",
+      "retf"
+    ]
+  ],
+  "slots": {
+    "slots": {
+      "emsOnly": 6,
+      "seg": -22,
+      "size": -8,
+      "paras": -10,
+      "n": -14,
+      "end": -16,
+      "b": -20,
+      "moved": -26,
+      "nb": -4
+    },
+    "regs": [
+      [
+        "cx",
+        "t"
+      ]
+    ],
+    "names": {
+      "3324": [
+        [
+          -26,
+          "moved"
+        ]
+      ],
+      "3339": [
+        [
+          6,
+          "emsOnly"
+        ]
+      ],
+      "3359": [
+        [
+          -16,
+          "end"
+        ]
+      ],
+      "3382": [
+        [
+          -22,
+          "seg"
+        ]
+      ],
+      "3392": [
+        [
+          -16,
+          "end"
+        ]
+      ],
+      "3442": [
+        [
+          -16,
+          "end"
+        ]
+      ],
+      "3519": [
+        [
+          -10,
+          "paras"
+        ]
+      ],
+      "3530": [
+        [
+          -8,
+          "size"
+        ]
+      ],
+      "3598": [
+        [
+          -8,
+          "size"
+        ]
+      ],
+      "3615": [
+        [
+          -10,
+          "paras"
+        ]
+      ],
+      "3759": [
+        [
+          -26,
+          "moved"
+        ]
+      ],
+      "3771": [
+        [
+          -22,
+          "seg"
+        ]
+      ],
+      "3784": [
+        [
+          -22,
+          "seg"
+        ]
+      ],
+      "3787": [
+        [
+          -16,
+          "end"
+        ]
+      ],
+      "3795": [
+        [
+          -26,
+          "moved"
+        ]
+      ]
+    },
+    "bpnames": {
+      "6": [
+        "emsOnly"
+      ],
+      "-22": [
+        "seg"
+      ],
+      "-8": [
+        "size"
+      ],
+      "-10": [
+        "paras"
+      ],
+      "-14": [
+        "n"
+      ],
+      "-16": [
+        "end"
+      ],
+      "-20": [
+        "b"
+      ],
+      "-26": [
+        "moved"
+      ],
+      "-4": [
+        "nb"
+      ]
+    }
+  },
+  "unbound": [],
+  "relocs_expected": [
+    98251,
+    98314,
+    98370,
+    98398
+  ],
+  "relocs_candidate": [
+    98251,
+    98314,
+    98370,
+    98398
+  ],
+  "target_reasons": [
+    "bytes differ (first at +0xc, 6 differing)"
+  ],
+  "context": {
+    "unit": "root",
+    "seg": 5916,
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Oeg",
+      "/Gs",
+      "/Zi"
+    ],
+    "placements": {
+      "_DATA": {
+        "seg": 21939,
+        "off": 12052,
+        "size": 1726
+      },
+      "CONST": {
+        "seg": 21939,
+        "off": 35234,
+        "size": 14
+      },
+      "_BSS": {
+        "seg": 21939,
+        "off": 35938,
+        "size": 18
+      }
+    },
+    "lang": "c"
+  }
+}

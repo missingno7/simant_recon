@@ -910,3 +910,41 @@ the actual adjacent eight-byte object. Its four labels are private; no PUBDEF or
 source contribution identifies the preceding two bytes. No direct operand,
 address immediate or relocation in the bounded game scan proves an owner, and
 computed aliases remain outside that scan. Those two bytes remain explicit debt.
+
+## v32 bounded historical and structural review
+
+The [v32 evidence archive](../work/source-only-dos/structural-audits-v32/README.md)
+preserves one GPT-6.1 Sol forensic review of `o15_384C_0239`, `FindIndex` and
+`f_171C_0CF4`. Fresh parent whole-TU compiles reproduce their two, three and six
+differing bytes, with 7, 6 and 57 accepted peers, private data, fixups and
+relocations intact. Retained declaration/lifetime/pointer/Boolean controls cover
+the plausible families. No credible new source hypothesis or exact candidate
+emerged; there was no expansion or promotion.
+
+The 188-object heap census excludes an application `__fheap` EXTDEF or live
+fixup as the extraction trigger. Four partial links move only the application's
+allocator object first; both linkers retain their respective archive selection
+sequences. The images remain incomplete and unexecuted. The cause of 6.10's
+`fdata` selection without `fmalloc`, and the historical `79F0` owner, stay open.
+
+The database audit bounds pre-display opens to three and distinguishes them
+from the two fifth-call hazards. An early zero-target callback has no accepted
+control/state contract; later continuation with the Punt guard latched cannot
+be excluded. Both database layout gates remain unresolved.
+
+A static tail review establishes that normal stock CRT startup overwrites two
+of the three section-overlap bytes; the first lies outside the clear interval.
+The physical owner and historical mastering boundary remain open. A
+[separate file-format addendum](exe-format-tail-v32.md) carries the correction;
+the original document remains a frozen preflight input. No storage or debt
+disposition changes.
+
+This research leaves the v31 acceptance counts and source-only compiler inputs
+unchanged: 188 TUs, 15 imports, 46 functional data bytes, 113 historical bytes,
+29 strictly confirmed behavioral implementations and seven open layout gates.
+No standalone game link, execution or human acceptance is claimed.
+
+At this evidence boundary, historical validation passes with 375 repository
+tests (two skips) and 48 codegen rules. The earlier pinned-document failure and
+the successful rerun are preserved separately. Frozen source/evidence hashes
+are retained; no old receipt is repinned to absorb the correction.

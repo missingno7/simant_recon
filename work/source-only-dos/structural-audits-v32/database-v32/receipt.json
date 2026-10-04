@@ -1,0 +1,549 @@
+{
+  "schema": "simant-dos-database-terminal-closure-v32",
+  "verdict": "UNRESOLVED",
+  "scope": "Read-only source-reachability audit; not a full game fatal-path execution or production admission.",
+  "workspace": {
+    "head": "e4227d5",
+    "report_head_association": "not asserted; build report is a mutable current build observation.",
+    "build_report": {
+      "path": "build/source-only-dos/build-report.json",
+      "sha256": "0edcb3285074975704645520158975bd20a32a7cae542127812b54a9e78cffbf",
+      "status": "INCOMPLETE",
+      "standalone_dos_executable": false,
+      "translation_units": 188,
+      "generated_sources_verified": 188,
+      "objects_verified": 188,
+      "hash_mismatches": [],
+      "source_owned_tus": 61,
+      "strict_effective_count": 29,
+      "strict_effective_names": [
+        "DisplayCard",
+        "DrawBalloons",
+        "drawHistGraph",
+        "DrawMapCursor",
+        "f_0250_1018",
+        "f_0250_129E",
+        "f_171C_09CC",
+        "f_171C_0ADC",
+        "f_171C_0CF4",
+        "f_171C_0FBC",
+        "f_1C62_0415",
+        "f_1E57_038E",
+        "f_20E8_0903",
+        "f_23E6_0000",
+        "f_2505_0453",
+        "f_2815_0165",
+        "f_284A_0138",
+        "f_29D6_000A",
+        "FindIndex",
+        "InvertPatch",
+        "LessonDone",
+        "o10_35F5_0384",
+        "o15_384C_0239",
+        "o25_3BA4_1035",
+        "o25_3BA4_1686",
+        "SpiderScan",
+        "win_DrawBitMap",
+        "win_PrintStyleTextInRect",
+        "win_UnlockWin"
+      ],
+      "strict_status_failures": [],
+      "database_open_minus_one_record": "UNRESOLVED",
+      "database_handle_plus_four": "UNRESOLVED"
+    }
+  },
+  "exact_accesses": {
+    "database_open_minus_one_record": {
+      "hazard": "GetFreeHandle returns -1 after all four name slots are occupied; OpenDB calls Punt then evaluates fd_50F6_3958[-1] if control returns.",
+      "source": "src/root/m1A28.c:45-67,100-113",
+      "pre_display_bound": "IBMInitStuff reaches at most optional language, required shared, optional lrshare before f_205F_0004; therefore the pre-display failing DB call itself is no later than DB call 3, and cannot be the 5th active-slot access under source-controlled slot state."
+    },
+    "database_handle_plus_four": {
+      "hazard": "The fifth db_SetDataBase invocation stores OpenDB result to db_handles[4] before testing handle<0.",
+      "source": "src/root/m1A53.c:42-55",
+      "pre_display_bound": "At most three db_SetDataBase calls precede f_205F_0004; db_handles[4] is not the direct pre-display failure access."
+    },
+    "same_early_route": "To reach either exact access from an early pre-display error requires the first Punt to continue through the not-yet-initialized callback/display path and resume startup; that continuation is not established.",
+    "guard_persistence_if_resumed": "If the unsupported early path resumes startup, Punt has already set g_54F8=1; later first-looking Punt sites take the recursive immediate-return branch, leaving OpenDB to evaluate slot -1 and, if it returns -1, db_SetDataBase to store db_handles[4]."
+  },
+  "source_route": {
+    "call_sequence": "main opens/closes five DOS descriptors, calls IBMInitStuff, then db_SetDataBase(\"sound\"); IBMInitStuff optionally opens language, opens shared, optionally opens lrshare, then calls f_205F_0004.",
+    "callback_init": "f_205F_0004 first calls f_1B4E_0025; the reviewed 25x4-byte callback table starts zero and is filled from a far pointer to the empty retf stub. Slot zero g_9128 and slot 11 g_9154 are zero before this init.",
+    "first_punt": "Punt sets g_54F8=1 before its first indirect g_9128(0,15,0) call. The narrow source path then calls f_1CE2_01C3 with nonempty fatal text; before display init its raster fallback can issue g_9154, also zero. Punt has no source noreturn declaration.",
+    "ordinary_return_condition": "If both invalid far targets and intervening helpers return with ordinary ABI/control-state preservation, source reaches o15_384C_0152; every switch arm falls through to unconditional exit(0). This is conditional source reachability, not a proof of the invalid target behavior.",
+    "five_call_startup": "All four predecessors (language if selected/present, shared, lrshare if selected, display database) must return normally before main opens sound and can hit the fifth-call sites. Four attempted calls alone do not establish this premise."
+  },
+  "cleanup_and_registrations": {
+    "tracked_db_calls": "Current generated source call-site census: OpenDB is called only by db_SetDataBase; only IBMInitStuff has the three predecessor calls; f_205F_0004 is called once from IBMInitStuff and contains one DB call; main has the sound call. No source call to db_CloseDataBase before sound is present.",
+    "cleanup": "Fatal helper o15_384C_0152 conditionally calls f_277E_0154, then reaches exit(0). f_277E_0154 runs channel/free-list cleanup, f_0000_0429 can queue sample handles and f_0000_00DE can call db_ReleaseHandle -> effective root:171C Ralloc INIT/release. This DB-release edge is included; no OpenDB/db_SetDataBase reentry appears in pinned v3 effective-Ralloc/source closure.",
+    "registered_handlers": "Reachable source atexit registrations are f_171C_0020 (EMS release), f_171C_0678 (Ralloc free), f_19DC_0008 (EMS release), and f_0250_0114 (EMS release); EMS wrappers can raise nested guarded Punt via f_195A_02B7. Source shows no DB open/switch from these handlers. The asm INT23 registration f_1F58_00B8 has no source call/address-taking caller in the 188-TU source inventory.",
+    "interrupts": "Game INT 15h/09h/08h and mouse INT 33h callback registration occurs through o17_384C_0000 after display DB setup; audited handler/queue producer closure has no DB open/switch edge. Prior DOS/TSR vector owners remain external. main earlier signals INT 15h and INT 2 to ignored.",
+    "nested_punt": "The v31 candidate finds a conditional fatal-cleanup re-entry: if g_181C==39, g_7574!=0, fd_55B3_610A!=0 and a type-1 Voice exists, guarded nested Punt returns and f_0000_0149 performs a 40th sample-pointer store before eventual exit. The specific startup state/resource preconditions are unproved and root_reviewed=false; do not use broad Punt-noreturn reasoning. On the bounded main-startup fifth-open route, source initializers and call order show g_181C/g_7574/g_756E zero and the Voice owner zero-startup, but this is a source-startup conditional argument, not full game execution.",
+    "out_of_scope_reentry": "The v19 ev->code and g_5702[0] lock/unlock re-read closures remain REVIEW_PENDING because interactive render/control callbacks may clobber those values. They are not an identified DB open/switch edge in this startup-fatal closure and are kept separate rather than silently treated as closed."
+  },
+  "classification": {
+    "actual_blocker": "Semantics/control-state effect of executing source-zero g_9128=0000:0000 before display setup, followed on ordinary-return continuation by source-zero g_9154=0000:0000 in raster fallback, are unspecified. Without an accepted source/runtime contract, cannot exclude trap, return, nonlocal control transfer, return-address/stack clobber, or DB-state clobber; cannot prove no continuation to display+sound and the two exact hazards.",
+    "unwired_not_independent_counterexample": [
+      "Full game executable is absent: current report INCOMPLETE and standalone_dos_executable=false; no end-to-end fatal game path was run.",
+      "Standalone real MSC/RTLink controls verify C exit and LIFO atexit only for a minimal unrelated fixture (MAIN SECOND FIRST; after-exit marker absent) under RTLink 4.00 and 6.10. They do not characterize either zero target or game CRT terminator integration.",
+      "The v3 closure is explicitly root_reviewed=false and limits foreign runtime hooks/nonempty terminator tables; current report is bound by current exact hashes, but game-linked preterminator/termination evidence is not supplied."
+    ],
+    "not_used_as_blockers": [
+      "The early failing DB call itself is source-bounded to at most three pre-display API calls; it does not itself evaluate either fifth-call hazard absent clobber.",
+      "Conditional v31 sample-list 40th store is a real reentrant source path under unproved runtime preconditions, but is not demonstrated on this initial DB startup fatal path.",
+      "No tracked atexit, EMS, interrupt, or queue callback has a direct OpenDB/db_SetDataBase re-entry edge."
+    ],
+    "old_v17_status": "Superseded by v22 receipt and early-Punt addendum; v17 blanket conclusion that recursive Punt returns cannot resume the first failed DB frame is not current authority."
+  },
+  "direct_tu_pins": [
+    {
+      "module": "root:15F8",
+      "source": {
+        "path": "src/root/m15F8.c",
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U070.c",
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U070.OBJ",
+        "sha256": "d7787bb84c9cdfb5941bfb093fd0bbcc6477fdbe2b79755bb73fbd2204a0cdaf"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "S20:39F1",
+      "source": {
+        "path": "src/S20/m39F1.c",
+        "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U030.c",
+        "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U030.OBJ",
+        "sha256": "5e801d6062c29d6beddba2641b536835031fc6f97e0f9cb05ddd955ac8981a01"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:205F",
+      "source": {
+        "path": "src/root/m205F.c",
+        "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U098.c",
+        "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U098.OBJ",
+        "sha256": "f85c10730b031c8763bcf1851b277a10eace87500de5f89f83b72cbcb1336fbf"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1A28",
+      "source": {
+        "path": "src/root/m1A28.c",
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U081.c",
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U081.OBJ",
+        "sha256": "af0032a13af50934919cc64571c78d25093f76583be128f3e7d680ea7ba09109"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1A53",
+      "source": {
+        "path": "src/root/m1A53.c",
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U082.c",
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U082.OBJ",
+        "sha256": "cfe9447d0651e1ba22b3ddd74fde0a4a40a6f2a66ba652393a8036a7178def66"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1C62",
+      "source": {
+        "path": "src/root/m1C62.c",
+        "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U088.c",
+        "sha256": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U088.OBJ",
+        "sha256": "8550fe31dfd3e639f904e01813b67590ca3ee38356da61a120ea5141178e1178"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "S15:384C",
+      "source": {
+        "path": "src/S15/m384C.c",
+        "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U024.c",
+        "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U024.OBJ",
+        "sha256": "f36949de9103ba94cbe718b796e790a199964048e90cb57ec08f84020d39fc16"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:277E",
+      "source": {
+        "path": "src/root/m277E.c",
+        "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U114.c",
+        "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U114.OBJ",
+        "sha256": "38d596e85596d3d1745859e9aa4cc9bbdbe0e9b4522eb8d6eb6d567fcc089141"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:0000",
+      "source": {
+        "path": "src/root/m0000.c",
+        "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U044.c",
+        "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U044.OBJ",
+        "sha256": "4f4ac92baa0bfa7edc8cb739fc57b92a034c7cf96589c01595b07667e294a690"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:171C",
+      "source": {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U074.c",
+        "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U074.OBJ",
+        "sha256": "84767f7d939c38cb19b2d8b0e59e861183375109b5a43fa333a98b8bc238a961"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:19DC",
+      "source": {
+        "path": "src/root/m19DC.c",
+        "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U080.c",
+        "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U080.OBJ",
+        "sha256": "ea11c91a271cc0c63c629a5d21487e7c621ef6669e4929779683850e3cbebf61"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:0250",
+      "source": {
+        "path": "src/root/m0250.c",
+        "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U053.c",
+        "sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U053.OBJ",
+        "sha256": "0c18053004a91d00f4513c44fa44bee4e9b57306a41a6fa0a691527f9fe5efcb"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1B4E",
+      "source": {
+        "path": "src/root/m1B4E.asm",
+        "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U086.asm",
+        "sha256": "9f18195ddfa42822f0e54c8a3edf016a751dd7c23b67620c647c75de02c12714"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U086.OBJ",
+        "sha256": "afaf236194c2951920ecf9cf9915e8c174c6cf75a56a324d0fe4f7dc457b52b9"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1FBD",
+      "source": {
+        "path": "src/root/m1FBD.asm",
+        "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U096.asm",
+        "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U096.OBJ",
+        "sha256": "1dd06a2086d3dba31c80abb2f28a4e84921f798f2b35d4e8928743cbfe4c1c5d"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:195A",
+      "source": {
+        "path": "src/root/m195A.asm",
+        "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U077.asm",
+        "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U077.OBJ",
+        "sha256": "e831d628fd0f5c852304d362ccaf670c597edeaf30e631ca07d116be42f4360a"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1B73",
+      "source": {
+        "path": "src/root/m1B73.asm",
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U087.asm",
+        "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U087.OBJ",
+        "sha256": "5f37d1fc5bcd86e2078d62d1416a7579f1420c6f105ae1ee35249f46d4a8c817"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "S17:384C",
+      "source": {
+        "path": "src/S17/m384C.c",
+        "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U026.c",
+        "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U026.OBJ",
+        "sha256": "338f5da812cb756fe104bdac596407166263ed88af6d3fd9b82fbe54e4fbe482"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1F58",
+      "source": {
+        "path": "src/root/m1F58.asm",
+        "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U092.asm",
+        "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U092.OBJ",
+        "sha256": "370bf95449a10cf4876a62b3f2778378bc13b46e1ef324b089a48dca2d902e06"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:1CE2",
+      "source": {
+        "path": "src/root/m1CE2.c",
+        "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U089.c",
+        "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U089.OBJ",
+        "sha256": "0ab3b93e894d557240995b9eda280a5fd4a73b64a0d345f8293bbd16bd45abd6"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:24AB",
+      "source": {
+        "path": "src/root/m24AB.c",
+        "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U106.c",
+        "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U106.OBJ",
+        "sha256": "045e79a26228bb61bdad0bc17c6e1305ff7fbaeadf883a31b5320ad0b00f617c"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:00F8",
+      "source": {
+        "path": "src/root/m00F8.c",
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U050.c",
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U050.OBJ",
+        "sha256": "709e63a01398b29c13aecc7a743da96aa3d3e904fb426181acd73249781d257d"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:00DE",
+      "source": {
+        "path": "src/root/m00DE.c",
+        "sha256": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U048.c",
+        "sha256": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U048.OBJ",
+        "sha256": "8516f2a2b4ee808a39fa39b8c643c4100abdaab6fba3ded36bd425715adad064"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "root:284A",
+      "source": {
+        "path": "src/root/m284A.c",
+        "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U117.c",
+        "sha256": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U117.OBJ",
+        "sha256": "552054d34dedf7f644872f5af19fca5c4cacbb05f00144e3b8c345a5b4ccd601"
+      },
+      "status": "COMPILED_REUSED"
+    },
+    {
+      "module": "data:55B3@00B8",
+      "source": {
+        "path": "src/data/d55B3_00B8.c",
+        "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d"
+      },
+      "generated_source": {
+        "path": "build/source-only-dos/sources/U043.c",
+        "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d"
+      },
+      "object": {
+        "path": "build/source-only-dos/objects/U043.OBJ",
+        "sha256": "59082c8c4378f866c1351784d9b39dde61afdd062c99b8ec0fdd2d852fb5bb08"
+      },
+      "status": "COMPILED_REUSED"
+    }
+  ],
+  "historical_input_pins": [
+    {
+      "path": "work/source-only-dos/database-punt-root-review-v17.md",
+      "sha256": "030bde3e38f52080e9d63f95cedb55ad1b997ccb68afb7b3713815207d8e6259"
+    },
+    {
+      "path": "work/source-only-dos/database-punt-call-closure-supplement-v3.json",
+      "sha256": "3bb735dde63c05607dc36debebfa1fc4ff72a90415399f21cc124bf356b64cf8"
+    },
+    {
+      "path": "work/source-only-dos/database-punt-effective-overlay-check-v16.json",
+      "sha256": "e3e0bc1ce638206b61c203a797f4e84f7b867dda18e4ee4dd6c2298d3d3fc165"
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/v22-static-closure-receipt.json",
+      "sha256": "7fdb97555575f7960242b94c14ae1273aef11e04fbede6be50f865c9b5eb2048"
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/v22-early-punt-continuation-addendum.md",
+      "sha256": "730de24167ad1708fd146208033b0188577af64e10049e439eadb245e633113e"
+    },
+    {
+      "path": "work/source-only-dos/database-layout-review-v22/v22-early-punt-continuation-addendum.json",
+      "sha256": "c5de34a4a412fbda47be28a6c3088cf357b8420871fde6ca41c0215b7860203f"
+    },
+    {
+      "path": "work/source-only-dos/unlock-clobber-review-v19.md",
+      "sha256": "96f5c6d0ac1b02fece7da8c16ff92d686bcc6e64c21f0be6a1172f0b8be0df26"
+    },
+    {
+      "path": "work/source-only-dos/unlock-clobber-review-v19.json",
+      "sha256": "4d7ef72f7f1af4184b64785bb71d7061de7cd5fd1489bed0bf2e6084abe70672"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v26/dos_remaining_misc_owners_v31/free-list-punt-reentry-v31.md",
+      "sha256": "cb5aa8e4af7ac4df4c0d8ce9d6bf9879a81a80f334686545b2696e5917448f01"
+    },
+    {
+      "path": "work/source-only-dos/structural-audits-v26/dos_remaining_misc_owners_v31/free-list-punt-reentry-v31.json",
+      "sha256": "e81479f5b66195d92cde1d1471499b6c4174771471dc3fa03a5a13a9f7599ea3"
+    },
+    {
+      "path": "work/source-only-dos/database-punt-crt-control/crt-exit-control-result.json",
+      "sha256": "60f9faf32a0ef8b989011797338cff0860a58f11548b0272fd8683ae14532d36"
+    },
+    {
+      "path": "work/source-only-dos/callback-table-reviewed-contract-v1.json",
+      "sha256": "687b19c934090234f23a129088fede174c97394bceb65f83c83b48ddd61c83d1"
+    },
+    {
+      "path": "work/source-only-dos/callback-table-bindings-v1.json",
+      "sha256": "457cdc94b7b1c2b07908352e4b736d0de8cb47f8d65e44b475e993e5b93d648d"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a"
+    }
+  ],
+  "method": {
+    "read_only": true,
+    "production_files_changed": false,
+    "git_state_changed": false,
+    "generic_matching_or_probes_used": false,
+    "source_or_object_compare": "Current build report pins all 188 generated sources and 188 objects; actual per-unit source/object SHA-256 values all match report. Focused startup/fatal route checked against canonical/generated TUs and 29 current strict effective imports."
+  }
+}

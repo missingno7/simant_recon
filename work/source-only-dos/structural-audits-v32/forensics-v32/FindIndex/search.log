@@ -1,0 +1,9 @@
+[module.c] MISMATCH: bytes differ (first at +0x79, 3 differing)  (opcode similarity 0.990, 98 vs 98 insns)
+      ... 44 equal instructions ...
+  ! 01A3 jl 0x1c8                            | 01A3 jg 0x1c3
+    01A5 les bx, ptr [bp - 0xa]              | 01A5 les bx, ptr [bp - 0xa]
+    01A8 les bx, ptr es:[bx]                 | 01A8 les bx, ptr es:[bx]
+    01AB mov al, byte ptr es:[bx + 6]        | 01AB mov al, byte ptr es:[bx + 6]
+    01AF cmp ax, word ptr [bp + 0xa]         | 01AF cmp ax, word ptr [bp + 0xa]
+  ! 01B2 jne 0x1c3                           | 01B2 jne 0x1c8
+      ... 48 equal instructions ...

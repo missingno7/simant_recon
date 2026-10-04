@@ -1,0 +1,142 @@
+o15_384C_0239  S15:384C:0239  linear 386F9  size 326  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call, vector
+  module frame 384C: function 6/8; neighbours: o15_384C_0152, MenuQuit, SetDefaultWindows, NewGame
+  frame: {'frame': 'bp', 'locals': 40, 'stack_check': True}
+  best draft: build/search/o15_384C_0239/best.c  MISMATCH ratio 1.0
+  0239  push bp
+  023A  mov bp, sp
+  023C  mov ax, 0x28
+  023F  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  0244  push di
+  0245  push si
+  0246  mov ax, 0x2100
+  0249  push ax
+  024A  lcall 0x20e8, 0x4b6                -> win_Open
+  024F  pop bx
+  0250  mov ax, 1
+  0253  push ax
+  0254  mov ax, 0xa
+  0257  push ax
+  0258  mov ax, 0x41
+  025B  sub ax, word ptr [bp + 6]
+  025E  shl ax, 1
+  0260  push ax
+  0261  lcall 0x1a53, 0xf0                 -> f_1A53_00F0
+  0266  add sp, 6
+  0269  mov di, ax
+  026B  mov word ptr [bp - 0x12], dx
+  026E  push dx
+  026F  push ax
+  0270  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  0275  pop bx
+  0276  pop bx
+  0277  mov si, ax
+  0279  mov word ptr [bp - 6], dx
+  027C  cmp word ptr [0x3db2], 0x140       DS:3DB2 g_3DB2
+  0282  jne 0x289
+  0284  mov ax, 2
+  0287  jmp 0x28c
+  0289  mov ax, 4
+  028C  push ax
+  028D  lcall 0x24ab, 0x2ad                -> f_24AB_02AD
+  0292  pop bx
+  0293  test byte ptr [0x5a97], 1          DS:5A97 g_5A97
+  0298  je 0x2c4
+  029A  lea ax, [bp - 0x10]
+  029D  push ss
+  029E  push ax
+  029F  mov ax, 0x2100
+  02A2  lcall 0x2505, 0x288                -> win_GetObjRect
+  02A7  sub ax, ax
+  02A9  push ax
+  02AA  push ax
+  02AB  push ax
+  02AC  lcall [0x9128]                     DS:9128 g_9128
+  02B0  add sp, 6
+  02B3  mov ax, 2
+  02B6  push ax
+  02B7  lea ax, [bp - 0x10]
+  02BA  push ss
+  02BB  push ax
+  02BC  lcall 0x1ce2, 0x44d                -> f_1CE2_044D
+  02C1  add sp, 6
+  02C4  lea ax, [bp - 0x10]
+  02C7  push ss
+  02C8  push ax
+  02C9  mov ax, 0x2101
+  02CC  lcall 0x2505, 0x288                -> win_GetObjRect
+  02D1  mov ax, 0x2101
+  02D4  lcall 0x21fa, 0x1ad                -> win_SetColorFromObjNum
+  02D9  push word ptr [bp - 6]
+  02DC  push si
+  02DD  lea ax, [bp - 0x10]
+  02E0  push ss
+  02E1  push ax
+  02E2  sub ax, ax
+  02E4  lcall 0x259d, 0x32a                -> win_PrintTextInRect
+  02E9  sub ax, ax
+  02EB  push ax
+  02EC  lcall 0x24ab, 0x2ad                -> f_24AB_02AD
+  02F1  pop bx
+  02F2  mov word ptr [bp - 0x14], di
+  02F5  lcall 0x1f58, 0x38                 -> f_1F58_0038
+  02FA  or ax, ax
+  02FC  je 0x326
+  02FE  lcall 0x1f58, 0x90                 -> f_1F58_0090
+  0303  cmp ax, 0x73
+  0306  je 0x348
+  0308  ja 0x326
+  030A  sub al, 0xd
+  030C  je 0x344
+  030E  sub al, 0xe
+  0310  je 0x34d
+  0312  sub al, 0x28
+  0314  je 0x34d
+  0316  dec al
+  0318  je 0x344
+  031A  sub al, 0xf
+  031C  je 0x348
+  031E  sub al, 0x10
+  0320  je 0x34d
+  0322  dec al
+  0324  je 0x344
+  0326  lea ax, [bp - 0x24]
+  0329  push ss
+  032A  push ax
+  032B  lcall 0x218d, 0x3f1                -> win_GetEvent
+  0330  or ax, ax
+  0332  je 0x2f5
+  0334  mov ax, word ptr [bp - 0x18]
+  0337  sub ax, 0x2103
+  033A  je 0x344
+  033C  dec ax
+  033D  je 0x348
+  033F  dec ax
+  0340  je 0x34d
+  0342  jmp 0x2f5
+  0344  sub si, si
+  0346  jmp 0x350
+  0348  mov si, 1
+  034B  jmp 0x350
+  034D  mov si, 2
+  0350  mov ax, word ptr [bp - 0x12]
+  0353  push ax
+  0354  push di
+  0355  mov word ptr [bp - 0x28], di
+  0358  mov word ptr [bp - 0x26], ax
+  035B  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  0360  pop bx
+  0361  pop bx
+  0362  push word ptr [bp - 0x26]
+  0365  push word ptr [bp - 0x28]
+  0368  lcall 0x1a53, 0x2d5                -> db_ReleaseHandle
+  036D  pop bx
+  036E  pop bx
+  036F  mov ax, 0x2100
+  0372  lcall 0x20e8, 0x635                -> win_Close
+  0377  mov ax, si
+  0379  pop si
+  037A  pop di
+  037B  mov sp, bp
+  037D  pop bp
+  037E  retf
