@@ -207,6 +207,7 @@ def prepare(out, report):
                      'clip-pointer-bindings-v1.json', 'yard-scalar-bindings-v1.json',
                      'database-index-state-bindings-v1.json', 'spider-counter-bindings-v1.json',
                      'lion-array-storage-bindings-v1.json', 'dgroup-rect-frame-bindings-v1.json',
+                     'mouse-code-offset-frame-bindings-v1.json',
                      'spider-control-storage-bindings-v1.json', 'point-state-bindings-v1.json',
                      'database-record-state-bindings-v1.json',
                      'graphics-formula-bindings-v1.json', 'g2108-color-translation-bindings-v1.json',
@@ -246,6 +247,10 @@ def prepare(out, report):
                      'ui-geometry-state-bindings-v1.json',
                      'remaining-world-state-bindings-v1.json',
                      'remaining-ant-state-bindings-v1.json',
+                     'remaining-ui-state-bindings-v1.json',
+                     'remaining-window-state-bindings-v1.json',
+                     'remaining-scalar-tail-bindings-v1.json',
+                     'balloon-buffer-tables-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -287,11 +292,13 @@ def prepare(out, report):
                                    and bool(binding.get('local_reframes')))
                 segment_extension = (binding['module'] == 'root:1B73'
                                      and bool(binding.get('segment_corrections')))
+                code_offset_extension = (binding['module'] == 'root:1B73'
+                                         and bool(binding.get('code_offset_reframes')))
                 indexed_extension = (binding['module'] in dos_source_bindings.INDEXED_OPERANDS
                                      and binding.get('indexed_address_operands') is True)
                 s01_view_extension = (binding['module'] == 'S01:3126'
                                       and binding.get('s01_pattern_view_operands') is True)
-                if pattern_extension or local_extension or segment_extension or indexed_extension or s01_view_extension:
+                if pattern_extension or local_extension or segment_extension or code_offset_extension or indexed_extension or s01_view_extension:
                     # This third layer extends the effective binding, including the
                     # previously admitted frames. Pin its complete provenance and
                     # content rather than silently replacing either frozen packet.
@@ -306,7 +313,7 @@ def prepare(out, report):
                         raise ValueError('DOS layout extension has a different effective control binding')
                 elif not base or not (binding.get('reframes') or scalar_extension or water_extension):
                     raise ValueError('duplicate DOS binding module')
-                if not (pattern_extension or local_extension or segment_extension or indexed_extension or s01_view_extension):
+                if not (pattern_extension or local_extension or segment_extension or code_offset_extension or indexed_extension or s01_view_extension):
                     base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
                     if previous not in json.loads(base_raw)['bindings']:
                         raise ValueError('DOS frame extension has a different source/control binding')
@@ -319,6 +326,8 @@ def prepare(out, report):
                     keys += ('local_reframes',)
                 if 'segment_corrections' in previous or 'segment_corrections' in binding:
                     keys += ('segment_corrections',)
+                if 'code_offset_reframes' in previous or 'code_offset_reframes' in binding:
+                    keys += ('code_offset_reframes',)
                 for key in keys:
                     combined[key] = previous.get(key, []) + binding.get(key, [])
                 if scalar_extension:
@@ -624,6 +633,14 @@ def audit_layout(report):
         'operand_count': 2,
         'reason': 'Two bounded mask reads bind symbolically to mutable formula-derived near arrays '
                   'with exact DGROUP-frame OFFSET16 sites. Initial state and unchecked copies are separate proofs.'}, {
+        'id': 'map-viewport-grid-layout', 'status': 'UNRESOLVED',
+        'sources': ['src/root/m0250.c', 'src/S26/m39C7.c'],
+        'declared_grid': 'fd_50F6_15C4[30][40]',
+        'reason': 'ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, '
+                  'rather than the thirty-row/forty-column storage extent. Dimensions derive '
+                  'from object 4 rectangles; resize and loaded window offsets are not yet proved '
+                  'to enforce that grid bound. A baseline resource rectangle in range does not '
+                  'prove all reachable writes or preserve cross-object overreads under a new layout.'}, {
         'id': 'database-open-minus-one-record', 'status': 'UNRESOLVED',
         'source': 'src/root/m1A28.c', 'normal_owner': 'fd_50F6_3958[4]',
         'historical_failure_address': '50F6:38DC',
@@ -646,6 +663,15 @@ def audit_layout(report):
                   'the exact BASE16 site changes target/frame together, preserving all bytes and '
                   'ordered unrelated fixups. Both linkers pass the shifted-group helper and explicitly '
                   'fail the old segment frame before dereference. Rect ownership/initializers remain open.'}, {
+        'id': 'mouse-callback-code-offset-frames',
+        'status': 'SOURCE_BOUND' if any(r['module'] == 'root:1B73' and len(
+            (r.get('source_binding') or {}).get('code_offset_reframes', [])) == 5
+            for r in report['translation_units']) else 'UNRESOLVED',
+        'operand_count': 5,
+        'reason': 'Four interrupt callback offsets and one same-module near callback use MOUSE_TEXT. '
+                  'Natural LEA source operands retain every instruction byte and all target displacements; '
+                  'five closed OMF frame fields change from DGROUP to the code segment. '
+                  'Both linkers pass separate shifted-group fixtures; the wrong-frame negative fails before its callback call.'}, {
         'id': 'driver-local-ss-frames',
         'status': 'SOURCE_BOUND' if all(any(r['module'] == module and len(
             (r.get('source_binding') or {}).get('local_reframes', [])) == len(sites)
@@ -875,6 +901,12 @@ def unresolved_symbols(out, report, symbols, manifest):
         + [r for r in report['unresolved_symbols'] if r['kind'] == 'code'])
 
 
+def independent_link_diagnostics(log_text):
+    """Reject RTLink diagnostics even when it writes a partial MZ image."""
+    return bool(re.search(r'\bwrt\d{4}\b|\b(?:warnings?|errors?|fatal|undefined|unresolved|aborted)\b|cannot\s+open',
+                          log_text, re.IGNORECASE))
+
+
 def link_units(out, report, profile):
     """Independent period link. Only successful, complete inputs can reach it."""
     if (report['errors'] or report['unresolved_functions'] or report['unresolved_data']
@@ -908,10 +940,12 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v23_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v24_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v25_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v26_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
     dos_source_bindings.require_dgroup_rect_frame_contract(report, profile, tool)
+    dos_source_bindings.require_mouse_code_offset_contract(report, profile, tool)
     dos_source_bindings.require_driver_ss_frame_contract(report, profile, tool)
     dos_source_bindings.require_pattern_bank_contract(report, profile, tool)
     dos_source_bindings.require_s01_pattern_view_contract(report, profile, tool)
@@ -986,7 +1020,7 @@ def link_units(out, report, profile):
     log_text = log.read_text(encoding='latin1') if log.exists() else ''
     report['linker_log'] = pin(log)[1] if log.exists() else None
     image = link_dir / 'SOURCE.EXE'
-    if result.returncode or not image.exists() or re.search(r'(?i)unresolved|undefined|error|fatal', log_text):
+    if result.returncode or not image.exists() or not log_text.strip() or independent_link_diagnostics(log_text):
         report['errors'].append('independent linker failed; inspect linker log')
         return
     raw, image_pin = pin(image)
@@ -1025,7 +1059,7 @@ def main():
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
                              ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py', 'dos_alignment_debt.py',
-                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py')]
+                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py')]
         report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)

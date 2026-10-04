@@ -1,0 +1,1609 @@
+{
+  "schema": "simant-dos-readonly-map-dimensions-source-audit-v28",
+  "status": "READONLY_LINEAGE_AUDIT_COMPLETE_ROOT_REVIEW_PENDING",
+  "root_reviewed": false,
+  "conclusion": "No accepted current source-owned provider extent contains either target, but a logical readonly-zero invariant is not proved. Both remain unresolved FAR_BSS words; the whole current effective source graph shows only signed-int imports and reads. Identified adjacent swarm buffers are bounded source-owned commons, not interior owners for either word.",
+  "scope": {
+    "source_universe": "current SOURCE_ONLY_DOS 127 report-canonical U000-U126 plus 29 strict-effective whole modules selected by current intake/index/receipts",
+    "source_count": 156,
+    "canonical_count": 127,
+    "strict_effective_count": 29,
+    "strict_status_counts": {
+      "BEHAVIOR_EXACT_CONFIRMED": 29
+    },
+    "pins_file": {
+      "path": "build/workers/dos_readonly_map_dimensions_v28/source-pins-v28.json",
+      "sha256": "d2bd3b9473f03c3106cb6569d853305416a0a4a6d63e93a4c0d4b4cb9d457428",
+      "size": 49279
+    },
+    "symbols_registry": {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    "save_record_source": {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    "current_intake": {
+      "path": "work/source-only-dos/current-intake.json",
+      "sha256": "237d5e76f3e3e1fc4f6b774b05ee819ed95232824ac16419e212970a3042d80f",
+      "size": 307265
+    },
+    "build_report": {
+      "path": "build/source-only-dos/build-report.json",
+      "sha256": "56ff060691f127e5d5836394ac126eb91097f07ed57334f6eb279c83f7e5e890",
+      "size": 12871380
+    },
+    "current_cross_version_decisions": {
+      "path": "evidence/cross_version/decisions.json",
+      "sha256": "5384199aa0a2c7c02e1cb681e2bb42295c03735010f67fdefad59a01b725ac07",
+      "size": 494750
+    },
+    "cross_version_correspondence": {
+      "path": "evidence/cross_version/simantw_correspondence.json",
+      "sha256": "57ca18670e67e2f2155625123980cbaefa316ac8c3f2d9986dc0d715943fe3a1",
+      "size": 82901
+    },
+    "source_files_read_only": true,
+    "original_byte_arrays_or_fallback_used": false,
+    "runtime_or_game_run": false,
+    "context_py_mode": "non-raw disassembly only; no --raw option"
+  },
+  "targets": {
+    "fd_50F6_0FB6": {
+      "address": "50F6:0FB6",
+      "registered_symbol": {
+        "seg": 20726,
+        "off": 4022,
+        "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+      },
+      "declarations": [
+        {
+          "path": "src/S08/m35F5.c",
+          "source_kind": "canonical_127",
+          "module": "S08:35F5",
+          "line": 55,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FB6;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        },
+        {
+          "path": "src/S22/m39C7.c",
+          "source_kind": "canonical_127",
+          "module": "S22:39C7",
+          "line": 873,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FB6;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 202,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FB6;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 201,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FB6;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        }
+      ],
+      "consumer_views": [
+        "{\"bytes\": 2, \"kind\": \"word\", \"signedness\": \"signed\"}"
+      ],
+      "direct_read_count": 14,
+      "direct_reads": [
+        {
+          "path": "src/S08/m35F5.c",
+          "source_kind": "canonical_127",
+          "module": "S08:35F5",
+          "line": 361,
+          "function": "RandWorld",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        },
+        {
+          "path": "src/S22/m39C7.c",
+          "source_kind": "canonical_127",
+          "module": "S22:39C7",
+          "line": 894,
+          "function": "SetAlarmDropState",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 214,
+          "function": "f_004A_02AD",
+          "access": "read_or_expression",
+          "text": "fd_50F6_0596.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 218,
+          "function": "f_004A_02AD",
+          "access": "read_or_expression",
+          "text": "fd_50F6_06A6.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 222,
+          "function": "f_004A_02AD",
+          "access": "read_or_expression",
+          "text": "fd_50F6_072E.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 234,
+          "function": "f_004A_038B",
+          "access": "read_or_expression",
+          "text": "fd_50F6_0596.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 237,
+          "function": "f_004A_038B",
+          "access": "read_or_expression",
+          "text": "fd_50F6_06A6.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 240,
+          "function": "f_004A_038B",
+          "access": "read_or_expression",
+          "text": "fd_50F6_072E.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 216,
+          "function": "SetMapPlaneLocation",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 221,
+          "function": "SetMapPlaneLocation",
+          "access": "arithmetic_read",
+          "text": "fd_50F6_0F36 = 0x80 - fd_50F6_0FB6;"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 223,
+          "function": "SetMapPlaneLocation",
+          "access": "arithmetic_read",
+          "text": "fd_50F6_0F36 = 0x40 - fd_50F6_0FB6;"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 285,
+          "function": "SetMapPlane",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 290,
+          "function": "SetMapPlane",
+          "access": "arithmetic_read",
+          "text": "fd_50F6_0F36 = 0x80 - fd_50F6_0FB6;"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 292,
+          "function": "SetMapPlane",
+          "access": "arithmetic_read",
+          "text": "fd_50F6_0F36 = 0x40 - fd_50F6_0FB6;"
+        }
+      ],
+      "direct_write_count": 0,
+      "direct_writes": [],
+      "address_escapes_outside_SaveRec": [],
+      "same_offset_registered_names": [
+        {
+          "name": "fd_50F6_0FB6",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        }
+      ],
+      "nearby_registered_names": [
+        {
+          "name": "SMode",
+          "offset": "0FB8",
+          "alias_of": null,
+          "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FB8] far data reference"
+        },
+        {
+          "name": "fd_50F6_0FB6",
+          "offset": "0FB6",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        },
+        {
+          "name": "fd_50F6_0FB8",
+          "offset": "0FB8",
+          "alias_of": "SMode",
+          "grounding": null
+        },
+        {
+          "name": "fd_50F6_0FBA",
+          "offset": "0FBA",
+          "alias_of": null,
+          "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FBA],..."
+        },
+        {
+          "name": "fd_50F6_0FBC",
+          "offset": "0FBC",
+          "alias_of": null,
+          "grounding": "f_0F3F_0075: mov es,[8248] (50F6); add es:[0FBC],1; adc es:[0FBE],0 (long counter, red ants expired)"
+        },
+        {
+          "name": "fd_50F6_0FC0",
+          "offset": "0FC0",
+          "alias_of": null,
+          "grounding": "DrawCurBalloons: mov es,[7FC2]; inc es:[FC0] index into 50F6:0234"
+        },
+        {
+          "name": "fd_50F6_0FC2",
+          "offset": "0FC2",
+          "alias_of": null,
+          "grounding": "S25:39C7 o25_39C7_0AB0:0CAD add word es:[0FC2],1; adc es:[0FC4],0 (long counter; CONST 8932=50F6)"
+        },
+        {
+          "name": "fd_50F6_0FC6",
+          "offset": "0FC6",
+          "alias_of": null,
+          "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0FC6; mov es,[872E]; signed char offset array"
+        }
+      ],
+      "source_only_interpretation": "The imports are used as values, not passed as addresses; source reads place 0FB6 in the right/x boundary role and 0FFA in the bottom/y boundary role."
+    },
+    "fd_50F6_0FFA": {
+      "address": "50F6:0FFA",
+      "registered_symbol": {
+        "seg": 20726,
+        "off": 4090,
+        "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+      },
+      "declarations": [
+        {
+          "path": "src/S08/m35F5.c",
+          "source_kind": "canonical_127",
+          "module": "S08:35F5",
+          "line": 54,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FFA;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        },
+        {
+          "path": "src/S22/m39C7.c",
+          "source_kind": "canonical_127",
+          "module": "S22:39C7",
+          "line": 872,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FFA;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 204,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FFA;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 200,
+          "function": null,
+          "access": "declaration",
+          "text": "extern int far fd_50F6_0FFA;",
+          "view": {
+            "bytes": 2,
+            "kind": "word",
+            "signedness": "signed"
+          }
+        }
+      ],
+      "consumer_views": [
+        "{\"bytes\": 2, \"kind\": \"word\", \"signedness\": \"signed\"}"
+      ],
+      "direct_read_count": 10,
+      "direct_reads": [
+        {
+          "path": "src/S08/m35F5.c",
+          "source_kind": "canonical_127",
+          "module": "S08:35F5",
+          "line": 361,
+          "function": "RandWorld",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        },
+        {
+          "path": "src/S22/m39C7.c",
+          "source_kind": "canonical_127",
+          "module": "S22:39C7",
+          "line": 894,
+          "function": "SetAlarmDropState",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 215,
+          "function": "f_004A_02AD",
+          "access": "read_or_expression",
+          "text": "fd_50F6_0596.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 219,
+          "function": "f_004A_02AD",
+          "access": "read_or_expression",
+          "text": "fd_50F6_06A6.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 223,
+          "function": "f_004A_02AD",
+          "access": "read_or_expression",
+          "text": "fd_50F6_072E.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 251,
+          "function": "f_004A_040E",
+          "access": "read_or_expression",
+          "text": "fd_50F6_0596.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 254,
+          "function": "f_004A_040E",
+          "access": "read_or_expression",
+          "text": "fd_50F6_06A6.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;"
+        },
+        {
+          "path": "src/root/m004A.c",
+          "source_kind": "canonical_127",
+          "module": "root:004A",
+          "line": 257,
+          "function": "f_004A_040E",
+          "access": "read_or_expression",
+          "text": "fd_50F6_072E.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 216,
+          "function": "SetMapPlaneLocation",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        },
+        {
+          "path": "src/root/m015B.c",
+          "source_kind": "canonical_127",
+          "module": "root:015B",
+          "line": 285,
+          "function": "SetMapPlane",
+          "access": "read_or_expression",
+          "text": "InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);"
+        }
+      ],
+      "direct_write_count": 0,
+      "direct_writes": [],
+      "address_escapes_outside_SaveRec": [],
+      "same_offset_registered_names": [
+        {
+          "name": "fd_50F6_0FFA",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        }
+      ],
+      "nearby_registered_names": [
+        {
+          "name": "Starg",
+          "offset": "0FFC",
+          "alias_of": null,
+          "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FFC] far data reference"
+        },
+        {
+          "name": "fd_50F6_0FF8",
+          "offset": "0FF8",
+          "alias_of": null,
+          "grounding": "DrawCurBalloons: mov es,[7FB2]; inc es:[FF8] message index into 50F6:0218"
+        },
+        {
+          "name": "fd_50F6_0FFA",
+          "offset": "0FFA",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        },
+        {
+          "name": "fd_50F6_0FFC",
+          "offset": "0FFC",
+          "alias_of": "Starg",
+          "grounding": null
+        },
+        {
+          "name": "fd_50F6_0FFE",
+          "offset": "0FFE",
+          "alias_of": null,
+          "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FFE],..."
+        },
+        {
+          "name": "fd_50F6_1000",
+          "offset": "1000",
+          "alias_of": null,
+          "grounding": "S25:39C7 o25_39C7_006D:0300 mov es,[CONST 8912=50F6]; add word es:[1000],1; adc word es:[1002],0 (long counter)"
+        },
+        {
+          "name": "fd_50F6_1004",
+          "offset": "1004",
+          "alias_of": null,
+          "grounding": "S12:384C:0B76: mov es,[86B2]; push es:[1004] third argument of 384C:10A5"
+        },
+        {
+          "name": "fd_50F6_1006",
+          "offset": "1006",
+          "alias_of": null,
+          "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..1006] far data reference"
+        },
+        {
+          "name": "fd_50F6_1008",
+          "offset": "1008",
+          "alias_of": null,
+          "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,1008; mov es,[872C]; signed char offset array"
+        }
+      ],
+      "source_only_interpretation": "The imports are used as values, not passed as addresses; source reads place 0FB6 in the right/x boundary role and 0FFA in the bottom/y boundary role."
+    }
+  },
+  "source_owned_provider_census": {
+    "provider_proofs": [
+      {
+        "module": "source-owned:spider-controls",
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "source": {
+          "path": "work\\source-only-dos\\providers\\spider-controls.c",
+          "sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
+          "size": 181
+        },
+        "verified_source_pin": {
+          "path": "work/source-only-dos/providers/spider-controls.c",
+          "sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
+          "size": 181
+        },
+        "object": {
+          "path": "build\\source-only-dos\\objects\\SPICTRL.OBJ",
+          "sha256": "64ece0d32b4ce6a15efd69428eea40f9a470e71bdbf55d3762695d2398cd02b4",
+          "size": 269
+        },
+        "verified_object_pin": {
+          "path": "build/source-only-dos/objects/SPICTRL.OBJ",
+          "sha256": "64ece0d32b4ce6a15efd69428eea40f9a470e71bdbf55d3762695d2398cd02b4",
+          "size": 269
+        },
+        "communals": [
+          {
+            "name": "_SMode",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_Starg",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      },
+      {
+        "module": "source-owned:swarm-serialized-buffers",
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "source": {
+          "path": "work\\source-only-dos\\providers\\swarm-serialized-buffers.c",
+          "sha256": "81779084ec88a02935189f0daa87cb996bf2192fd12c6ce62b87adc3cae50e69",
+          "size": 228
+        },
+        "verified_source_pin": {
+          "path": "work/source-only-dos/providers/swarm-serialized-buffers.c",
+          "sha256": "81779084ec88a02935189f0daa87cb996bf2192fd12c6ce62b87adc3cae50e69",
+          "size": 228
+        },
+        "object": {
+          "path": "build\\source-only-dos\\objects\\SWARMOWN.OBJ",
+          "sha256": "46b6c70e8d7c032a4011c748787815ad588556438b5a2d7718861b26ffe786dd",
+          "size": 267
+        },
+        "verified_object_pin": {
+          "path": "build/source-only-dos/objects/SWARMOWN.OBJ",
+          "sha256": "46b6c70e8d7c032a4011c748787815ad588556438b5a2d7718861b26ffe786dd",
+          "size": 267
+        },
+        "communals": [
+          {
+            "name": "_fd_50F6_0F84",
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0FC6",
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    ],
+    "registered_source_owned_extents_near_targets": {
+      "fd_50F6_0FB6": [
+        {
+          "module": "source-owned:swarm-serialized-buffers",
+          "name": "fd_50F6_0F46",
+          "start": "0F46",
+          "length": 50,
+          "end_exclusive": "0F78",
+          "communal": {
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 112,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:ant-player-state",
+          "name": "MeHealth",
+          "start": "0F78",
+          "length": 2,
+          "end_exclusive": "0F7A",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 62,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:remaining-history-words",
+          "name": "fd_50F6_0F7A",
+          "start": "0F7A",
+          "length": 2,
+          "end_exclusive": "0F7C",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 60,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:spider-controls",
+          "name": "SuserY",
+          "start": "0F7E",
+          "length": 2,
+          "end_exclusive": "0F80",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 56,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:ant-counters-timer",
+          "name": "RAntsEaten",
+          "start": "0F80",
+          "length": 4,
+          "end_exclusive": "0F84",
+          "communal": {
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 54,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:swarm-serialized-buffers",
+          "name": "fd_50F6_0F84",
+          "start": "0F84",
+          "length": 50,
+          "end_exclusive": "0FB6",
+          "communal": {
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 50,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:spider-controls",
+          "name": "SMode",
+          "start": "0FB8",
+          "length": 2,
+          "end_exclusive": "0FBA",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -2,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:history-scalar-state",
+          "name": "fd_50F6_0FBC",
+          "start": "0FBC",
+          "length": 4,
+          "end_exclusive": "0FC0",
+          "communal": {
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -6,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:remaining-history-words",
+          "name": "fd_50F6_0FC0",
+          "start": "0FC0",
+          "length": 2,
+          "end_exclusive": "0FC2",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -10,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:history-scalar-state",
+          "name": "fd_50F6_0FC2",
+          "start": "0FC2",
+          "length": 4,
+          "end_exclusive": "0FC6",
+          "communal": {
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -12,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:swarm-serialized-buffers",
+          "name": "fd_50F6_0FC6",
+          "start": "0FC6",
+          "length": 50,
+          "end_exclusive": "0FF8",
+          "communal": {
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -16,
+          "contains_target": false
+        }
+      ],
+      "fd_50F6_0FFA": [
+        {
+          "module": "source-owned:spider-controls",
+          "name": "SMode",
+          "start": "0FB8",
+          "length": 2,
+          "end_exclusive": "0FBA",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 66,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:history-scalar-state",
+          "name": "fd_50F6_0FBC",
+          "start": "0FBC",
+          "length": 4,
+          "end_exclusive": "0FC0",
+          "communal": {
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 62,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:remaining-history-words",
+          "name": "fd_50F6_0FC0",
+          "start": "0FC0",
+          "length": 2,
+          "end_exclusive": "0FC2",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 58,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:history-scalar-state",
+          "name": "fd_50F6_0FC2",
+          "start": "0FC2",
+          "length": 4,
+          "end_exclusive": "0FC6",
+          "communal": {
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 56,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:swarm-serialized-buffers",
+          "name": "fd_50F6_0FC6",
+          "start": "0FC6",
+          "length": 50,
+          "end_exclusive": "0FF8",
+          "communal": {
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          "delta_target_minus_start": 52,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:spider-controls",
+          "name": "Starg",
+          "start": "0FFC",
+          "length": 2,
+          "end_exclusive": "0FFE",
+          "communal": {
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -2,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:history-scalar-state",
+          "name": "fd_50F6_1000",
+          "start": "1000",
+          "length": 4,
+          "end_exclusive": "1004",
+          "communal": {
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -6,
+          "contains_target": false
+        },
+        {
+          "module": "source-owned:swarm-serialized-buffers",
+          "name": "fd_50F6_1008",
+          "start": "1008",
+          "length": 50,
+          "end_exclusive": "103A",
+          "communal": {
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          "delta_target_minus_start": -14,
+          "contains_target": false
+        }
+      ]
+    },
+    "all_provider_extents_containing_target": {
+      "fd_50F6_0FB6": [],
+      "fd_50F6_0FFA": []
+    },
+    "interpretation": "The current intake/build report records 50-byte source-owned commons for fd_50F6_0F84 and fd_50F6_0FC6. Against their registered starts these spans are [0F84,0FB6) and [0FC6,0FF8), so the first ends exactly at 0FB6 and the second ends two bytes before 0FFA. No provider span in the intake contains either target. This rejects only these registered provider extents; it does not synthesize an owner or prove a historical layout for the unresolved words."
+  },
+  "save_record_audit": {
+    "source": {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    "declaration": "fd_4E4B_0000[308]",
+    "payload_rows": 307,
+    "sentinel_present": true,
+    "loadgame_write_surface": "LoadGame reads each explicit p->data span with read(fd, p->data, p->count * p->size), iterating until count==0.",
+    "rows_overlapping_targets": {
+      "fd_50F6_0FB6": [],
+      "fd_50F6_0FFA": []
+    },
+    "nearby_registered_50f6_rows": {
+      "fd_50F6_0FB6": [
+        {
+          "index": 40,
+          "line": 933,
+          "element_bytes": 4,
+          "count": 1,
+          "span_bytes": 4,
+          "target": "&RAntsEaten",
+          "start": "0F80",
+          "end_exclusive": "0F84",
+          "segment": 20726
+        },
+        {
+          "index": 41,
+          "line": 934,
+          "element_bytes": 4,
+          "count": 1,
+          "span_bytes": 4,
+          "target": "&fd_50F6_0FBC",
+          "start": "0FBC",
+          "end_exclusive": "0FC0",
+          "segment": 20726
+        },
+        {
+          "index": 48,
+          "line": 941,
+          "element_bytes": 4,
+          "count": 1,
+          "span_bytes": 4,
+          "target": "&fd_50F6_0FC2",
+          "start": "0FC2",
+          "end_exclusive": "0FC6",
+          "segment": 20726
+        },
+        {
+          "index": 62,
+          "line": 955,
+          "element_bytes": 1,
+          "count": 50,
+          "span_bytes": 50,
+          "target": "&fd_50F6_0F46",
+          "start": "0F46",
+          "end_exclusive": "0F78",
+          "segment": 20726
+        },
+        {
+          "index": 63,
+          "line": 956,
+          "element_bytes": 1,
+          "count": 50,
+          "span_bytes": 50,
+          "target": "&fd_50F6_0FC6",
+          "start": "0FC6",
+          "end_exclusive": "0FF8",
+          "segment": 20726
+        },
+        {
+          "index": 64,
+          "line": 957,
+          "element_bytes": 1,
+          "count": 50,
+          "span_bytes": 50,
+          "target": "&fd_50F6_0F84",
+          "start": "0F84",
+          "end_exclusive": "0FB6",
+          "segment": 20726
+        },
+        {
+          "index": 201,
+          "line": 1094,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&MeHealth",
+          "start": "0F78",
+          "end_exclusive": "0F7A",
+          "segment": 20726
+        },
+        {
+          "index": 221,
+          "line": 1114,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&fd_50F6_0FBA",
+          "start": "0FBA",
+          "end_exclusive": "0FBC",
+          "segment": 20726
+        },
+        {
+          "index": 252,
+          "line": 1145,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&SMode",
+          "start": "0FB8",
+          "end_exclusive": "0FBA",
+          "segment": 20726
+        },
+        {
+          "index": 266,
+          "line": 1159,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&SuserY",
+          "start": "0F7E",
+          "end_exclusive": "0F80",
+          "segment": 20726
+        }
+      ],
+      "fd_50F6_0FFA": [
+        {
+          "index": 41,
+          "line": 934,
+          "element_bytes": 4,
+          "count": 1,
+          "span_bytes": 4,
+          "target": "&fd_50F6_0FBC",
+          "start": "0FBC",
+          "end_exclusive": "0FC0",
+          "segment": 20726
+        },
+        {
+          "index": 47,
+          "line": 940,
+          "element_bytes": 4,
+          "count": 1,
+          "span_bytes": 4,
+          "target": "&fd_50F6_1000",
+          "start": "1000",
+          "end_exclusive": "1004",
+          "segment": 20726
+        },
+        {
+          "index": 48,
+          "line": 941,
+          "element_bytes": 4,
+          "count": 1,
+          "span_bytes": 4,
+          "target": "&fd_50F6_0FC2",
+          "start": "0FC2",
+          "end_exclusive": "0FC6",
+          "segment": 20726
+        },
+        {
+          "index": 63,
+          "line": 956,
+          "element_bytes": 1,
+          "count": 50,
+          "span_bytes": 50,
+          "target": "&fd_50F6_0FC6",
+          "start": "0FC6",
+          "end_exclusive": "0FF8",
+          "segment": 20726
+        },
+        {
+          "index": 65,
+          "line": 958,
+          "element_bytes": 1,
+          "count": 50,
+          "span_bytes": 50,
+          "target": "&fd_50F6_1008",
+          "start": "1008",
+          "end_exclusive": "103A",
+          "segment": 20726
+        },
+        {
+          "index": 114,
+          "line": 1007,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&fd_50F6_0FFE",
+          "start": "0FFE",
+          "end_exclusive": "1000",
+          "segment": 20726
+        },
+        {
+          "index": 202,
+          "line": 1095,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&fd_50F6_1006",
+          "start": "1006",
+          "end_exclusive": "1008",
+          "segment": 20726
+        },
+        {
+          "index": 221,
+          "line": 1114,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&fd_50F6_0FBA",
+          "start": "0FBA",
+          "end_exclusive": "0FBC",
+          "segment": 20726
+        },
+        {
+          "index": 252,
+          "line": 1145,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&SMode",
+          "start": "0FB8",
+          "end_exclusive": "0FBA",
+          "segment": 20726
+        },
+        {
+          "index": 256,
+          "line": 1149,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&fd_50F6_1004",
+          "start": "1004",
+          "end_exclusive": "1006",
+          "segment": 20726
+        },
+        {
+          "index": 261,
+          "line": 1154,
+          "element_bytes": 2,
+          "count": 1,
+          "span_bytes": 2,
+          "target": "&Starg",
+          "start": "0FFC",
+          "end_exclusive": "0FFE",
+          "segment": 20726
+        }
+      ]
+    },
+    "source_schema_note": "S09 comment identifies rows as element-size/count/symbolic-pointer records; does not declare target-only extern views as sizes; exactly one explicit interior pointer elsewhere in table."
+  },
+  "whole_graph_scan": {
+    "source_count": 156,
+    "target_site_counts": {
+      "fd_50F6_0FB6": {
+        "declarations": 4,
+        "direct_operations": 14,
+        "direct_writes": 0
+      },
+      "fd_50F6_0FFA": {
+        "declarations": 4,
+        "direct_operations": 10,
+        "direct_writes": 0
+      }
+    },
+    "numeric_target_offset_rows": [],
+    "asm_50f6_segment_literal_rows": [],
+    "target_address_escapes": {
+      "fd_50F6_0FB6": [],
+      "fd_50F6_0FFA": []
+    },
+    "same_offset_registered_names": {
+      "fd_50F6_0FB6": [
+        {
+          "name": "fd_50F6_0FB6",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        }
+      ],
+      "fd_50F6_0FFA": [
+        {
+          "name": "fd_50F6_0FFA",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        }
+      ]
+    },
+    "nearby_registered_names": {
+      "fd_50F6_0FB6": [
+        {
+          "name": "SMode",
+          "offset": "0FB8",
+          "alias_of": null,
+          "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FB8] far data reference"
+        },
+        {
+          "name": "fd_50F6_0FB6",
+          "offset": "0FB6",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        },
+        {
+          "name": "fd_50F6_0FB8",
+          "offset": "0FB8",
+          "alias_of": "SMode",
+          "grounding": null
+        },
+        {
+          "name": "fd_50F6_0FBA",
+          "offset": "0FBA",
+          "alias_of": null,
+          "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FBA],..."
+        },
+        {
+          "name": "fd_50F6_0FBC",
+          "offset": "0FBC",
+          "alias_of": null,
+          "grounding": "f_0F3F_0075: mov es,[8248] (50F6); add es:[0FBC],1; adc es:[0FBE],0 (long counter, red ants expired)"
+        },
+        {
+          "name": "fd_50F6_0FC0",
+          "offset": "0FC0",
+          "alias_of": null,
+          "grounding": "DrawCurBalloons: mov es,[7FC2]; inc es:[FC0] index into 50F6:0234"
+        },
+        {
+          "name": "fd_50F6_0FC2",
+          "offset": "0FC2",
+          "alias_of": null,
+          "grounding": "S25:39C7 o25_39C7_0AB0:0CAD add word es:[0FC2],1; adc es:[0FC4],0 (long counter; CONST 8932=50F6)"
+        },
+        {
+          "name": "fd_50F6_0FC6",
+          "offset": "0FC6",
+          "alias_of": null,
+          "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0FC6; mov es,[872E]; signed char offset array"
+        }
+      ],
+      "fd_50F6_0FFA": [
+        {
+          "name": "Starg",
+          "offset": "0FFC",
+          "alias_of": null,
+          "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FFC] far data reference"
+        },
+        {
+          "name": "fd_50F6_0FF8",
+          "offset": "0FF8",
+          "alias_of": null,
+          "grounding": "DrawCurBalloons: mov es,[7FB2]; inc es:[FF8] message index into 50F6:0218"
+        },
+        {
+          "name": "fd_50F6_0FFA",
+          "offset": "0FFA",
+          "alias_of": null,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        },
+        {
+          "name": "fd_50F6_0FFC",
+          "offset": "0FFC",
+          "alias_of": "Starg",
+          "grounding": null
+        },
+        {
+          "name": "fd_50F6_0FFE",
+          "offset": "0FFE",
+          "alias_of": null,
+          "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FFE],..."
+        },
+        {
+          "name": "fd_50F6_1000",
+          "offset": "1000",
+          "alias_of": null,
+          "grounding": "S25:39C7 o25_39C7_006D:0300 mov es,[CONST 8912=50F6]; add word es:[1000],1; adc word es:[1002],0 (long counter)"
+        },
+        {
+          "name": "fd_50F6_1004",
+          "offset": "1004",
+          "alias_of": null,
+          "grounding": "S12:384C:0B76: mov es,[86B2]; push es:[1004] third argument of 384C:10A5"
+        },
+        {
+          "name": "fd_50F6_1006",
+          "offset": "1006",
+          "alias_of": null,
+          "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..1006] far data reference"
+        },
+        {
+          "name": "fd_50F6_1008",
+          "offset": "1008",
+          "alias_of": null,
+          "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,1008; mov es,[872C]; signed char offset array"
+        }
+      ]
+    },
+    "bulk_api_control": {
+      "selected_LoadGame_source_call": {
+        "path": "src/S09/m35F5.c",
+        "line": 118,
+        "text": "if ((r = read(fd, p->data, n = p->count * p->size)) != n) {"
+      },
+      "other_target_address_passes_or_pointer_initializers": 0,
+      "interpretation": "Generic memcpy/read helpers can write through pointers in principle, but no source path takes either target address, gives either name as a pointer base, or presents a covering SaveRec record. No known indirect pointer can be traced to either target from this graph."
+    },
+    "adjacent_array_index_bounds": [
+      {
+        "path": "src/S13/m384C.c",
+        "function": "DrawSwarm",
+        "array": "fd_50F6_0F84",
+        "source_owner_span": "50 bytes at registered start 0F84, [0F84,0FB6)",
+        "bounds": "for-loop guard breaks for i >= 16 or i >= fd_3D57_07C8 before indexed reads/writes; observed indexed writes use i in [0,16).",
+        "target_relation": "0FB6 is the exclusive end; not indexed by this bounded loop."
+      },
+      {
+        "path": "src/S13/m384C.c",
+        "function": "DrawSwarm",
+        "array": "fd_50F6_0FC6",
+        "source_owner_span": "50 bytes at registered start 0FC6, [0FC6,0FF8)",
+        "bounds": "for-loop guard breaks for i >= 16 or i >= fd_50F6_0850 before indexed reads/writes; observed indexed writes use i in [0,16).",
+        "target_relation": "0FFA is beyond the exclusive end; not indexed by this bounded loop."
+      }
+    ]
+  },
+  "semantics_and_xver": {
+    "consumer_role": "Source calls InvalEuMap(0,0,fd_50F6_0FB6,fd_50F6_0FFA), matching right/bottom bound positions. In SetMapPlaneLocation and SetMapPlane, 0FB6 also participates in 0x80-width or 0x40-width scroll limits. f_004A_* readers use half of 0FB6 for x and half of 0FFA for y. This supports dimensions-as-consumed semantics; it does not establish initializer or owner.",
+    "confirmed_win16_code_pairs": {
+      "S08:35F5:0050": {
+        "win16": "_RandWorld",
+        "confidence": "CONFIRMED",
+        "reviewed": "2026-09-30",
+        "evidence": [
+          "(c) call_seq of anchored functions identical to Win16 _RandWorld: SetSRandSeed!, InitSpider!, MakeMap!, the SRand4/1/2/SGRand/64/16/8 series, MakeNewHoleB!, MakeNewHoleR!, DigOutBNest!, DigOutRNest!, BuildAntListA!, ClearListB!, ClearListR, (red queen), PlaceBlackQueen!, InitYelloAnt!, AddFood!, ClearHistory!, InvalEuMap!",
+          "(e) Win16 inlines PlaceRedQueen at exactly the DOS PlaceRedQueen call point",
+          "(d) DOS S08:35F5 18 functions = Win16 SIMTWO_MODULE #65-#82 (InitSimVars..ClrArrays) 1:1 in order; independently anchored DigOutBNest, DigOutRNest, InitYelloAnt, PlaceBlackQueen, MakeBlkQueen (pos 5-9) and AddFood (pos 14) at the same positions"
+        ],
+        "reviewer": "worker names5, supervisor spot-checked 2026-09-30"
+      },
+      "root:015B:03C6": {
+        "win16": "_SetMapPlaneLocation",
+        "confidence": "CONFIRMED",
+        "reviewed": "2026-09-30",
+        "evidence": [
+          "(e) body = Win16 recovered SetMapPlaneLocation: plane!=0 -> InvalEuMap!, else save last plane; MapPlane=plane; scroll limit 0x80-cols (plane 1) / 0x40-cols; CenterEdit(x,y) if plane!=0; SetMapModeAnt(MapPlane); switch plane -> buttons 8/9/10 and objects 0x105..0x108 (constants 261..264)",
+          "(c) first callee InvalEuMap! in both; callers GotoMapPoint/SetMapPlane match Win16 callers",
+          "(d) unit alignment: DOS 015B positions 1-12 (AddSomeAnts..GotoSpider) = Win16 SIMANT_MODULE #119-#130 in the same order and count (DOS f_015B_01B8 <-> _SetEditMode at pos 4); the tail differs only by explained items (DOS 073E/075F fixed-point goto stubs + three empty stubs 0780/0788/0790 vs Win16 GotoQueen/GotoBQueen/GotoRQueen; f_015B_0798<->_XferPatch same constants 10000..10007,11002), then PlaceQueenInYard, MysteryButton! last in both"
+        ],
+        "reviewer": "worker names5, supervisor spot-checked 2026-09-30"
+      },
+      "root:015B:053C": {
+        "win16": "_SetMapPlane",
+        "confidence": "CONFIRMED",
+        "reviewed": "2026-09-30",
+        "evidence": [
+          "(c) callers ProcEditEvent! and ProcMapEvent! (both in Win16 _SetMapPlane caller list); first callee InvalEuMap!",
+          "(e) body = Win16 _SetMapPlane card/scaffold: InvalEuMap/scroll-limit prologue, CurEditMode=MapPlane2EditTab[plane] (DOS via f_015B_01B8(table[plane])), switch plane -> saved point, SetMapPlaneLocation, CenterEdit, SetMapModeAnt",
+          "(d) unit alignment: DOS 015B positions 1-12 (AddSomeAnts..GotoSpider) = Win16 SIMANT_MODULE #119-#130 in the same order and count (DOS f_015B_01B8 <-> _SetEditMode at pos 4); the tail differs only by explained items (DOS 073E/075F fixed-point goto stubs + three empty stubs 0780/0788/0790 vs Win16 GotoQueen/GotoBQueen/GotoRQueen; f_015B_0798<->_XferPatch same constants 10000..10007,11002), then PlaceQueenInYard, MysteryButton! last in both"
+        ],
+        "reviewer": "worker names5, supervisor spot-checked 2026-09-30"
+      },
+      "S22:39C7:1A57": {
+        "win16": "_SetAlarmDropState",
+        "confidence": "CONFIRMED",
+        "reviewed": "2026-09-30",
+        "evidence": [
+          "callee order win_SetObjSelectedState x2, myBeginSound, InvalEuMap (f_0250_006E)",
+          "size 180 vs 149; body matches Win16 recovered source (state/quiet)"
+        ],
+        "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+      },
+      "root:0250:006E": {
+        "win16": "_InvalEuMap",
+        "confidence": "CONFIRMED",
+        "reviewed": "2026-09-30",
+        "evidence": [
+          "callers SetMapPlaneLocation, SetMapPlane, RandWorld, SetAlarmDropState are all Win16 InvalEuMap callers",
+          "body clamps a tile rectangle to 128x64 and marks the edit-update cells -1 (rect variant of ZapEuMapAt); unit position 2, size 166 vs 168"
+        ],
+        "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+      }
+    },
+    "confirmed_variable_pair_hits_for_target_names": [],
+    "data_variable_pair_status": "No confirmed Win16 data-variable name/address pair for either target was found in the reviewed decisions/correspondence; the confirmed xver entries are function identities and caller/body evidence only.",
+    "context_py_nonraw_observation": [
+      {
+        "function": "S08:35F5:0050 RandWorld",
+        "reads": [
+          "+0532 push [ES:0FFA]",
+          "+053B push [ES:0FB6]"
+        ],
+        "use": "InvalEuMap"
+      },
+      {
+        "function": "root:015B:03C6 SetMapPlaneLocation",
+        "reads": [
+          "+03DD push [ES:0FFA]",
+          "+03E6 push [ES:0FB6]",
+          "+042B subtract [ES:0FB6]"
+        ],
+        "use": "InvalEuMap and scroll limit"
+      },
+      {
+        "function": "root:015B:053C SetMapPlane",
+        "reads": [
+          "+0552 push [ES:0FFA]",
+          "+055B push [ES:0FB6]",
+          "+05A0 subtract [ES:0FB6]"
+        ],
+        "use": "InvalEuMap and scroll limit"
+      },
+      {
+        "function": "S22:39C7:1A57 SetAlarmDropState",
+        "reads": [
+          "+1AF0 push [ES:0FFA]",
+          "+1AF9 push [ES:0FB6]"
+        ],
+        "use": "InvalEuMap"
+      }
+    ]
+  },
+  "initialization_and_writes": {
+    "direct_source_writes": {
+      "fd_50F6_0FB6": 0,
+      "fd_50F6_0FFA": 0
+    },
+    "target_address_escapes": {
+      "fd_50F6_0FB6": 0,
+      "fd_50F6_0FFA": 0
+    },
+    "numeric_or_asm_address_spelling": {
+      "numeric_offset_rows": 0,
+      "asm_50f6_segment_rows": 0
+    },
+    "current_build_unresolved_rows": {
+      "fd_50F6_0FB6": {
+        "name": "_fd_50F6_0FB6",
+        "kind": "data",
+        "consumers": [
+          "S08:35F5",
+          "S22:39C7",
+          "root:004A",
+          "root:015B"
+        ],
+        "registry": {
+          "seg": 20726,
+          "off": 4022,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        },
+        "accepted_storage_candidates": [],
+        "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+        "declaration_contexts": [
+          {
+            "module": "S08:35F5",
+            "declaration": "extern int far fd_50F6_0FB6;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U016.c",
+              "sha256": "f950e7c22b112adef492d745164e80755669e2e9218052d4b9b48e5c8a22adc6",
+              "size": 22082
+            }
+          },
+          {
+            "module": "S22:39C7",
+            "declaration": "extern int far fd_50F6_0FB6;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U032.c",
+              "sha256": "58f8a4a7ae524fae65d8abca7972253e6f0e83cf384cfcb356bc5a580ac738c6",
+              "size": 31293
+            }
+          },
+          {
+            "module": "root:004A",
+            "declaration": "extern int far fd_50F6_0FB6;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U045.c",
+              "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+              "size": 5462
+            }
+          },
+          {
+            "module": "root:015B",
+            "declaration": "extern int far fd_50F6_0FB6;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U051.c",
+              "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+              "size": 16241
+            }
+          }
+        ]
+      },
+      "fd_50F6_0FFA": {
+        "name": "_fd_50F6_0FFA",
+        "kind": "data",
+        "consumers": [
+          "S08:35F5",
+          "S22:39C7",
+          "root:004A",
+          "root:015B"
+        ],
+        "registry": {
+          "seg": 20726,
+          "off": 4090,
+          "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+        },
+        "accepted_storage_candidates": [],
+        "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
+        "declaration_contexts": [
+          {
+            "module": "S08:35F5",
+            "declaration": "extern int far fd_50F6_0FFA;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U016.c",
+              "sha256": "f950e7c22b112adef492d745164e80755669e2e9218052d4b9b48e5c8a22adc6",
+              "size": 22082
+            }
+          },
+          {
+            "module": "S22:39C7",
+            "declaration": "extern int far fd_50F6_0FFA;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U032.c",
+              "sha256": "58f8a4a7ae524fae65d8abca7972253e6f0e83cf384cfcb356bc5a580ac738c6",
+              "size": 31293
+            }
+          },
+          {
+            "module": "root:004A",
+            "declaration": "extern int far fd_50F6_0FFA;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U045.c",
+              "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+              "size": 5462
+            }
+          },
+          {
+            "module": "root:015B",
+            "declaration": "extern int far fd_50F6_0FFA;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U051.c",
+              "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+              "size": 16241
+            }
+          }
+        ]
+      }
+    },
+    "startup_evidence": {
+      "current_intake_status": "INCOMPLETE",
+      "standalone_dos_executable": false,
+      "runnable": "NOT_EXECUTED",
+      "human_acceptance": "PENDING",
+      "unresolved_data_disposition_bytes": 62,
+      "interpretation": "No completed standalone DOS/CRT/BSS execution in the current intake proves that these unowned imports start at zero."
+    },
+    "zero_invariant": "NOT_ESTABLISHED",
+    "why_not": [
+      "The current build report has no accepted storage candidates for either import and requires a reviewed FAR_BSS definition with compatible consumer views.",
+      "All scanned source declarations are extern signed-int views; none creates either object or writes either value.",
+      "SaveRec covers explicit 307 rows; none covers either target.",
+      "The documented source-owned neighboring arrays stop before the target offsets; no other provider extent contains them.",
+      "The current intake is INCOMPLETE, has no standalone DOS executable, and records runnable NOT_EXECUTED, so CRT/BSS zero reachability is not demonstrated.",
+      "Generic pointer utilities could write through their arguments, but no source-known target address/base or covering input record reaches either word; the exhaustive source graph is not itself a CRT/runtime closed-world proof."
+    ]
+  },
+  "exact_unresolved_frontier": [
+    "A candidate must supply a source-owned object extent and address anchor for each target (or a typed larger source object whose exact span genuinely contains it); no adjacency-based padding or alias is acceptable.",
+    "For any zero-value claim, prove the candidate source/object emits the right FAR_BSS/COMDEF span, the source-built startup CRT/RTLink zeroes those exact bytes, and all direct and indirect writers/reachability paths are closed; current evidence proves no source write but does not meet the startup/owner requirement.",
+    "If a larger-object/interior hypothesis is proposed, identify its source definition and emitted length and trace all indexing/pointer arithmetic through the target; current accepted 0F84/0FC6 owner spans do not include either word.",
+    "A Win16 variable-level pair remains absent; confirmed code pairs support consumer semantics but do not rename or allocate either data word."
+  ],
+  "root_review_notes": [
+    "Read-only scratch evidence only.",
+    "No canonical sources, production providers, admissions, layout registry, manifest, or Git state were edited.",
+    "No original bytes, byte arrays, initializer guesses, or game execution were used."
+  ]
+}

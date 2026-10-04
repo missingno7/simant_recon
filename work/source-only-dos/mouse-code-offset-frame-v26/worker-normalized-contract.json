@@ -1,0 +1,819 @@
+{
+  "schema": "simant-callback-frame-runtime-contract-normalized-v30",
+  "root_reviewed": false,
+  "scope": "stdlib-only integrity/normalization of pinned v29 fixture outputs and source receipts; no original executable is read and no compiler/linker is invoked",
+  "v29_scope_wording_correction": "The v29 whole-module receipt says no warning-image execution; this is too broad. The test-only wrong-frame RTLink 6.10 negative was executed and returned FAIL before the sole callback call, after the first mismatch branch at offset 000D; it emitted five WRT0082 warnings. Natural-frame candidate images were clean and passed. No game or original executable was linked or run.",
+  "source_receipts": {
+    "whole_module": {
+      "path": "build/workers/dos_mouse_callback_frames_v29/callback-frame-whole-module-v29.json",
+      "size": 39703,
+      "sha256": "f500d8930076f9074b2a30da53aefa054fa5a4026267c9d7be1fda96b1695c97"
+    },
+    "runtime": {
+      "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/callback-frame-runtime-fixture-v29.json",
+      "size": 40771,
+      "sha256": "b7ef8370417553e27e83dea4c9342752d157d4d1d50d7d49229cddb34c70e682"
+    }
+  },
+  "source_fixup_controls": {
+    "wrong_source_all_five_DGROUP": {
+      "passed": true
+    },
+    "natural_source_all_five_code_segment": {
+      "passed": true
+    },
+    "wrong_frame_exits_before_callback_call": {
+      "passed": true,
+      "first_failure_branch_offset": 13,
+      "only_callback_call_offset": 101,
+      "control_listing": {
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/objects/CHECK_wrong_dgroup_frame.LST",
+        "size": 4083,
+        "sha256": "6fb8f20741a1da92905fc12a3d741fd908c42e87bbcbc7aa261438517008ca42"
+      }
+    }
+  },
+  "required_case_matrix": [
+    {
+      "profile": "rtlink400",
+      "frame_form": "wrong_dgroup_frame",
+      "expected": "FAIL"
+    },
+    {
+      "profile": "rtlink400",
+      "frame_form": "natural_code_frame",
+      "expected": "PASS"
+    },
+    {
+      "profile": "rtlink610",
+      "frame_form": "wrong_dgroup_frame",
+      "expected": "FAIL"
+    },
+    {
+      "profile": "rtlink610",
+      "frame_form": "natural_code_frame",
+      "expected": "PASS"
+    }
+  ],
+  "cases": [
+    {
+      "linker_profile": "rtlink400",
+      "frame_form": "wrong_dgroup_frame",
+      "expected_run": "FAIL",
+      "actual_run": "FAIL",
+      "run_log_text": "FAIL\r\n",
+      "linker_identity": "RTLink/Plus 4.00",
+      "link_log_text": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\r\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\r\n\r\nSerial# 854-002-0162\r\n\r\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\r\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\r\nMicrosoft Corporation.\r\n\r\n=> OUTPUT FRAMEFIX\r\n=> MAP = FRAMEFIX S,N,A,L\r\n=> NODEFLIB\r\n=> LIBRARY LLIBCR, LIBH\r\n=> FILE OWNER\r\n=> FILE CRT\r\n=> FILE CHECK\r\n=> \r\n5K\r\n",
+      "warning_lines": [],
+      "error_lines": [],
+      "link_clean": true,
+      "warning_policy_passed": true,
+      "emulator_exit": 0,
+      "map_physical_frame": {
+        "origin": {
+          "segment": 148,
+          "offset": 0,
+          "group": "DGROUP"
+        },
+        "segments": {
+          "PREFIX": {
+            "start": 2434,
+            "stop": 2449,
+            "length": 16,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "_DATA": {
+            "start": 2450,
+            "stop": 2599,
+            "length": 150,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "CALLBACK_TEXT": {
+            "start": 14,
+            "stop": 144,
+            "length": 131,
+            "class": "CODE",
+            "group": null
+          }
+        },
+        "prefix_start": {
+          "segment": 148,
+          "offset": 66
+        },
+        "prefix_end": {
+          "segment": 148,
+          "offset": 82
+        },
+        "prefix_offset_in_group": 66,
+        "prefix_span": 16,
+        "data_offset_in_group": 82,
+        "callback_code_is_separate": true,
+        "shifted_physical_layout": true
+      },
+      "artifacts": {
+        "exe": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/FRAMEFIX.EXE",
+          "size": 3367,
+          "sha256": "055ff1d07eabcc52f11da5d5b6d1588a4427271eef37dfcfc548d39569706efe"
+        },
+        "map_file": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/FRAMEFIX.MAP",
+          "size": 7742,
+          "sha256": "abd60b50c2f27a368becb79fdac2bd6339b00223db87a0ff48ab3d6a0876e33e"
+        },
+        "link_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/LINK.LOG",
+          "size": 479,
+          "sha256": "d5909cde105ff6a42c87305b5de2e08b277ecea8203be2a3b2215e3a44802e83"
+        },
+        "run_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/RUN.LOG",
+          "size": 6,
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938"
+        }
+      },
+      "passed": true
+    },
+    {
+      "linker_profile": "rtlink400",
+      "frame_form": "natural_code_frame",
+      "expected_run": "PASS",
+      "actual_run": "PASS",
+      "run_log_text": "PASS\r\n",
+      "linker_identity": "RTLink/Plus 4.00",
+      "link_log_text": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\r\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\r\n\r\nSerial# 854-002-0162\r\n\r\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\r\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\r\nMicrosoft Corporation.\r\n\r\n=> OUTPUT FRAMEFIX\r\n=> MAP = FRAMEFIX S,N,A,L\r\n=> NODEFLIB\r\n=> LIBRARY LLIBCR, LIBH\r\n=> FILE OWNER\r\n=> FILE CRT\r\n=> FILE CHECK\r\n=> \r\n5K\r\n",
+      "warning_lines": [],
+      "error_lines": [],
+      "link_clean": true,
+      "warning_policy_passed": true,
+      "emulator_exit": 0,
+      "map_physical_frame": {
+        "origin": {
+          "segment": 148,
+          "offset": 0,
+          "group": "DGROUP"
+        },
+        "segments": {
+          "PREFIX": {
+            "start": 2434,
+            "stop": 2449,
+            "length": 16,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "_DATA": {
+            "start": 2450,
+            "stop": 2599,
+            "length": 150,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "CALLBACK_TEXT": {
+            "start": 14,
+            "stop": 144,
+            "length": 131,
+            "class": "CODE",
+            "group": null
+          }
+        },
+        "prefix_start": {
+          "segment": 148,
+          "offset": 66
+        },
+        "prefix_end": {
+          "segment": 148,
+          "offset": 82
+        },
+        "prefix_offset_in_group": 66,
+        "prefix_span": 16,
+        "data_offset_in_group": 82,
+        "callback_code_is_separate": true,
+        "shifted_physical_layout": true
+      },
+      "artifacts": {
+        "exe": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/FRAMEFIX.EXE",
+          "size": 3367,
+          "sha256": "92ac1f8828da1106ed8c124a540972bf712d7f354bd4478becbb6de69d60d0da"
+        },
+        "map_file": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/FRAMEFIX.MAP",
+          "size": 7742,
+          "sha256": "abd60b50c2f27a368becb79fdac2bd6339b00223db87a0ff48ab3d6a0876e33e"
+        },
+        "link_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/LINK.LOG",
+          "size": 479,
+          "sha256": "d5909cde105ff6a42c87305b5de2e08b277ecea8203be2a3b2215e3a44802e83"
+        },
+        "run_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/RUN.LOG",
+          "size": 6,
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+        }
+      },
+      "passed": true
+    },
+    {
+      "linker_profile": "rtlink610",
+      "frame_form": "wrong_dgroup_frame",
+      "expected_run": "FAIL",
+      "actual_run": "FAIL",
+      "run_log_text": "FAIL\r\n",
+      "linker_identity": "RTLink/Plus 6.10",
+      "link_log_text": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\r\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\r\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\r\nwith data swapping  Serial Number: 836-103-6260\r\n\r\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\r\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\r\nMicrosoft Corporation.\r\n\r\n=> OUTPUT FRAMEFIX\r\n=> MAP = FRAMEFIX S,N,A,L\r\n=> NODEFLIB\r\n=> LIBRARY LLIBCR, LIBH\r\n=> FILE OWNER\r\n=> FILE CRT\r\n=> FILE CHECK\r\n=> \r\nwarning wrt0082: Illegal fixup values\r\n  Reason:\r\n    requested address lies before the address it is relative to\r\n  Fixup requests address of:\r\n    segment 'CALLBACK_TEXT' (class 'CODE') + 7EH bytes\r\n  Relative to:\r\n    group 'DGROUP'\r\n  Segment where applied:\r\n    'CALLBACK_TEXT' (class 'CODE')\r\nwarning wrt0082: Illegal fixup values\r\n  Reason:\r\n    requested address lies before the address it is relative to\r\n  Fixup requests address of:\r\n    segment 'CALLBACK_TEXT' (class 'CODE') + 7DH bytes\r\n  Relative to:\r\n    group 'DGROUP'\r\n  Segment where applied:\r\n    'CALLBACK_TEXT' (class 'CODE')\r\nwarning wrt0082: Illegal fixup values\r\n  Reason:\r\n    requested address lies before the address it is relative to\r\n  Fixup requests address of:\r\n    segment 'CALLBACK_TEXT' (class 'CODE') + 7CH bytes\r\n  Relative to:\r\n    group 'DGROUP'\r\n  Segment where applied:\r\n    'CALLBACK_TEXT' (class 'CODE')\r\nwarning wrt0082: Illegal fixup values\r\n  Reason:\r\n    requested address lies before the address it is relative to\r\n  Fixup requests address of:\r\n    segment 'CALLBACK_TEXT' (class 'CODE') + 7BH bytes\r\n  Relative to:\r\n    group 'DGROUP'\r\n  Segment where applied:\r\n    'CALLBACK_TEXT' (class 'CODE')\r\nwarning wrt0082: Illegal fixup values\r\n  Reason:\r\n    requested address lies before the address it is relative to\r\n  Fixup requests address of:\r\n    segment 'CALLBACK_TEXT' (class 'CODE') + 7AH bytes\r\n  Relative to:\r\n    group 'DGROUP'\r\n  Segment where applied:\r\n    'CALLBACK_TEXT' (class 'CODE')\r\n\r\n____________________________________________________________________________\r\n\r\nMEMORY LAYOUT SUMMARY for: FRAMEFIX.EXE\r\n\r\n  Load Size:\t\t\t\t\t\t4.K\t+33H Para\r\n\r\nNOTE: Your program may have additional memory requirements depending on the\r\n  memory usage characteristics of your compiler. See your compiler\r\n  documentation for specifics.\r\n____________________________________________________________________________\r\n\r\n5 warning message(s)\r\n",
+      "warning_lines": [
+        "warning wrt0082: Illegal fixup values",
+        "warning wrt0082: Illegal fixup values",
+        "warning wrt0082: Illegal fixup values",
+        "warning wrt0082: Illegal fixup values",
+        "warning wrt0082: Illegal fixup values"
+      ],
+      "error_lines": [],
+      "link_clean": false,
+      "warning_policy_passed": true,
+      "emulator_exit": 0,
+      "map_physical_frame": {
+        "origin": {
+          "segment": 148,
+          "offset": 0,
+          "group": "DGROUP"
+        },
+        "segments": {
+          "PREFIX": {
+            "start": 2434,
+            "stop": 2449,
+            "length": 16,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "_DATA": {
+            "start": 2450,
+            "stop": 2599,
+            "length": 150,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "CALLBACK_TEXT": {
+            "start": 14,
+            "stop": 144,
+            "length": 131,
+            "class": "CODE",
+            "group": null
+          }
+        },
+        "prefix_start": {
+          "segment": 148,
+          "offset": 66
+        },
+        "prefix_end": {
+          "segment": 148,
+          "offset": 82
+        },
+        "prefix_offset_in_group": 66,
+        "prefix_span": 16,
+        "data_offset_in_group": 82,
+        "callback_code_is_separate": true,
+        "shifted_physical_layout": true
+      },
+      "artifacts": {
+        "exe": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/FRAMEFIX.EXE",
+          "size": 3367,
+          "sha256": "832b40cede86a05540e20b6bdfea622b9fd17088fe30bf42d2d732c0698e05ee"
+        },
+        "map_file": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/FRAMEFIX.MAP",
+          "size": 7842,
+          "sha256": "ddbfa4c9d30b9783901a350ebcda4dadd6b8abb08e5dab417e9865f23487cdca"
+        },
+        "link_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/LINK.LOG",
+          "size": 2530,
+          "sha256": "ec3d9be5f8fe10b261765832d937053d92ab32f11299099e69fc3ac05ea5a7b7"
+        },
+        "run_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/RUN.LOG",
+          "size": 6,
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938"
+        }
+      },
+      "passed": true
+    },
+    {
+      "linker_profile": "rtlink610",
+      "frame_form": "natural_code_frame",
+      "expected_run": "PASS",
+      "actual_run": "PASS",
+      "run_log_text": "PASS\r\n",
+      "linker_identity": "RTLink/Plus 6.10",
+      "link_log_text": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\r\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\r\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\r\nwith data swapping  Serial Number: 836-103-6260\r\n\r\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\r\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\r\nMicrosoft Corporation.\r\n\r\n=> OUTPUT FRAMEFIX\r\n=> MAP = FRAMEFIX S,N,A,L\r\n=> NODEFLIB\r\n=> LIBRARY LLIBCR, LIBH\r\n=> FILE OWNER\r\n=> FILE CRT\r\n=> FILE CHECK\r\n=> \r\n\r\n____________________________________________________________________________\r\n\r\nMEMORY LAYOUT SUMMARY for: FRAMEFIX.EXE\r\n\r\n  Load Size:\t\t\t\t\t\t4.K\t+33H Para\r\n\r\nNOTE: Your program may have additional memory requirements depending on the\r\n  memory usage characteristics of your compiler. See your compiler\r\n  documentation for specifics.\r\n____________________________________________________________________________\r\n\r\n",
+      "warning_lines": [],
+      "error_lines": [],
+      "link_clean": true,
+      "warning_policy_passed": true,
+      "emulator_exit": 0,
+      "map_physical_frame": {
+        "origin": {
+          "segment": 148,
+          "offset": 0,
+          "group": "DGROUP"
+        },
+        "segments": {
+          "PREFIX": {
+            "start": 2434,
+            "stop": 2449,
+            "length": 16,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "_DATA": {
+            "start": 2450,
+            "stop": 2599,
+            "length": 150,
+            "class": "DATA",
+            "group": "DGROUP"
+          },
+          "CALLBACK_TEXT": {
+            "start": 14,
+            "stop": 144,
+            "length": 131,
+            "class": "CODE",
+            "group": null
+          }
+        },
+        "prefix_start": {
+          "segment": 148,
+          "offset": 66
+        },
+        "prefix_end": {
+          "segment": 148,
+          "offset": 82
+        },
+        "prefix_offset_in_group": 66,
+        "prefix_span": 16,
+        "data_offset_in_group": 82,
+        "callback_code_is_separate": true,
+        "shifted_physical_layout": true
+      },
+      "artifacts": {
+        "exe": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/FRAMEFIX.EXE",
+          "size": 3367,
+          "sha256": "1d1ccfbd261a780964150890c019bf8c6f9209232e2e89439c8abe184002e311"
+        },
+        "map_file": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/FRAMEFIX.MAP",
+          "size": 7842,
+          "sha256": "ddbfa4c9d30b9783901a350ebcda4dadd6b8abb08e5dab417e9865f23487cdca"
+        },
+        "link_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/LINK.LOG",
+          "size": 1013,
+          "sha256": "083f6f9f6e2ad59e04591337a69d513e736ea48609a4e6ae94c5f1ee6416c2c0"
+        },
+        "run_log": {
+          "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/RUN.LOG",
+          "size": 6,
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+        }
+      },
+      "passed": true
+    }
+  ],
+  "all_natural_links_clean": true,
+  "mutable_build_report_observation": {
+    "historical_receipt_pin": {
+      "path": "build/source-only-dos/build-report.json",
+      "size": 12871380,
+      "sha256": "56ff060691f127e5d5836394ac126eb91097f07ed57334f6eb279c83f7e5e890"
+    },
+    "current_pin": {
+      "path": "build/source-only-dos/build-report.json",
+      "size": 15296391,
+      "sha256": "a38e79bd9fe910190170720fabb8096c89bbcb52149f6ca51df75a591f06fc59"
+    },
+    "whole_file_changed": true,
+    "root_1B73_source_generated_object_rows_match": true
+  },
+  "integrity": {
+    "helper": {
+      "path": "build/workers/dos_mouse_callback_frames_v30/normalize_callback_runtime_contract_v30.py",
+      "size": 15306,
+      "sha256": "f28bcb1d30096b2e58873e244e8c460efc5b3cb71d977402a2e19e632afb1dbe"
+    },
+    "verified_artifacts": [
+      {
+        "role": "main-input:canonical_source",
+        "path": "src/root/m1B73.asm",
+        "size": 35010,
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+        "passed": true
+      },
+      {
+        "role": "main-input:generated_source",
+        "path": "build/source-only-dos/sources/U087.asm",
+        "size": 35089,
+        "sha256": "78c44e0e279943a6fe84178485ec1515c1016ea3692219ab1b079afab53bfa7e",
+        "passed": true
+      },
+      {
+        "role": "main-input:admitted_object",
+        "path": "build/source-only-dos/objects/U087.OBJ",
+        "size": 8751,
+        "sha256": "557405d3d81b2b99965385dd70ff55aa77e71fe2515b3344fa9fc2618026a4df",
+        "passed": true
+      },
+      {
+        "role": "main-input:toolchain",
+        "path": "layout/toolchain.json",
+        "size": 39241,
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+        "passed": true
+      },
+      {
+        "role": "main-input:omf_reader",
+        "path": "tools/omf.py",
+        "size": 29112,
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+        "passed": true
+      },
+      {
+        "role": "main-input:compiler_tool",
+        "path": "tools/compiler.py",
+        "size": 11765,
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+        "passed": true
+      },
+      {
+        "role": "main-input:context_tool",
+        "path": "tools/context.py",
+        "size": 8661,
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "passed": true
+      },
+      {
+        "role": "main-input:context_output",
+        "path": "build/workers/dos_mouse_callback_frames_v29/context-f_1B73_0235.txt",
+        "size": 1469,
+        "sha256": "e3fb022eab1f32977a92b791742c59c5017986813ba501e7d7253ddf7bf589d4",
+        "passed": true
+      },
+      {
+        "role": "main-input:callback_fixture_script",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback_fixture_v29.py",
+        "size": 12016,
+        "sha256": "eb004914d0ae09a7c08e40464d6561de5c2904a63510c7426dfd2e4fcc92251c",
+        "passed": true
+      },
+      {
+        "role": "main-input:callback_fixture_report",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/callback-frame-runtime-fixture-v29.json",
+        "size": 40771,
+        "sha256": "b7ef8370417553e27e83dea4c9342752d157d4d1d50d7d49229cddb34c70e682",
+        "passed": true
+      },
+      {
+        "role": "main-input:probe_script",
+        "path": "build/workers/dos_mouse_callback_frames_v29/probe_mouse_callback_frames_v29.py",
+        "size": 16849,
+        "sha256": "bdc5e8af1e37ca909bdf0e91c747a3398c38df6090e8eeb7e12058dcf86f1769",
+        "passed": true
+      },
+      {
+        "role": "binding-packet-0",
+        "path": "work/source-only-dos/source-bindings-v1.json",
+        "size": 11388,
+        "sha256": "c7fed5e7e2caac6cad41e63de2eb0ba3cfcbba112fa2877d9799c562b8f52bc4",
+        "passed": true
+      },
+      {
+        "role": "binding-packet-1",
+        "path": "work/source-only-dos/assembly-frame-bindings-v1.json",
+        "size": 2362,
+        "sha256": "3aec6a05ee17e0e3ed972a5ae193c38524651095d9847b030970283734e7d8e5",
+        "passed": true
+      },
+      {
+        "role": "binding-packet-2",
+        "path": "work/source-only-dos/dgroup-rect-frame-bindings-v1.json",
+        "size": 2876,
+        "sha256": "a202f6dceaffa65ee75f2af27e29f90d16d61b5c3d79b5bda63d88c633d3448a",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-0",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback_fixture_v29.py",
+        "size": 12016,
+        "sha256": "eb004914d0ae09a7c08e40464d6561de5c2904a63510c7426dfd2e4fcc92251c",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-1",
+        "path": "layout/toolchain.json",
+        "size": 39241,
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-2",
+        "path": "layout/manifest.json",
+        "size": 628980,
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-3",
+        "path": "tools/compiler.py",
+        "size": 11765,
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-4",
+        "path": "tools/omf.py",
+        "size": 29112,
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-5",
+        "path": "C:/tools/nmlgcdos/msdos.exe",
+        "size": 686592,
+        "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-6",
+        "path": "C:/tools/dosbox-x/dosbox-x.exe",
+        "size": 20481536,
+        "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-7",
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "size": 148711,
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-8",
+        "path": "C:/tools/msc-6.00/LIB/libh.lib",
+        "size": 21033,
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-9",
+        "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+        "size": 449497,
+        "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-10",
+        "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+        "size": 63824,
+        "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-11",
+        "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+        "size": 266625,
+        "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-12",
+        "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+        "size": 7184,
+        "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-13",
+        "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+        "size": 717922,
+        "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-14",
+        "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+        "size": 692123,
+        "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-15",
+        "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+        "size": 100100,
+        "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-16",
+        "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+        "size": 423823,
+        "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-17",
+        "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+        "size": 11031,
+        "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-18",
+        "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+        "size": 687531,
+        "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+        "passed": true
+      },
+      {
+        "role": "runtime-tool-input-19",
+        "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+        "size": 231179,
+        "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+        "passed": true
+      },
+      {
+        "role": "fixture-source:OWNER",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/sources/OWNER.asm",
+        "size": 278,
+        "sha256": "15618c710c74ae2277125f6a1f433a6ea529cc71dacd5526f8dac680e6bba75c",
+        "passed": true
+      },
+      {
+        "role": "fixture-source:CRT",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/sources/CRT.c",
+        "size": 79,
+        "sha256": "86012a69efa92b0794314aa3d50b327cd5943d311ff31c1cf2cc13bbefd81b72",
+        "passed": true
+      },
+      {
+        "role": "fixture-source:wrong_checker",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/sources/CHECK_wrong_dgroup_frame.asm",
+        "size": 1259,
+        "sha256": "feb21804cd36123f9add6555fe518a0dd0c2ad5bd4587a9ec4d96f30e1d29859",
+        "passed": true
+      },
+      {
+        "role": "fixture-source:natural_checker",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/sources/CHECK_natural_code_frame.asm",
+        "size": 1244,
+        "sha256": "26b85e862c5f7c772c98499c1b8e5e21fecaa19cf4a19c461a976e8425e1c4d8",
+        "passed": true
+      },
+      {
+        "role": "fixture-object:wrong_dgroup_frame",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/objects/CHECK_wrong_dgroup_frame.OBJ",
+        "size": 371,
+        "sha256": "d33764a8c32792cbcc77508ecfc54783e02038c8546fa5d23275cbd43f16cac5",
+        "passed": true
+      },
+      {
+        "role": "fixture-listing:wrong_dgroup_frame",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/objects/CHECK_wrong_dgroup_frame.LST",
+        "size": 4083,
+        "sha256": "6fb8f20741a1da92905fc12a3d741fd908c42e87bbcbc7aa261438517008ca42",
+        "passed": true
+      },
+      {
+        "role": "fixture-object:natural_code_frame",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/objects/CHECK_natural_code_frame.OBJ",
+        "size": 371,
+        "sha256": "10a1b83f99eb9f5766e8e58cf3e9d0de860fc3a775f89ab148a2090956afb678",
+        "passed": true
+      },
+      {
+        "role": "fixture-listing:natural_code_frame",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/objects/CHECK_natural_code_frame.LST",
+        "size": 4068,
+        "sha256": "caa7903ebcb5590f8144b982065a9186932852e7faf8a1df59888bd4082f3cd6",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:wrong_dgroup_frame:exe",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/FRAMEFIX.EXE",
+        "size": 3367,
+        "sha256": "055ff1d07eabcc52f11da5d5b6d1588a4427271eef37dfcfc548d39569706efe",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:wrong_dgroup_frame:map_file",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/FRAMEFIX.MAP",
+        "size": 7742,
+        "sha256": "abd60b50c2f27a368becb79fdac2bd6339b00223db87a0ff48ab3d6a0876e33e",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:wrong_dgroup_frame:link_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/LINK.LOG",
+        "size": 479,
+        "sha256": "d5909cde105ff6a42c87305b5de2e08b277ecea8203be2a3b2215e3a44802e83",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:wrong_dgroup_frame:run_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/wrong_dgroup_frame/RUN.LOG",
+        "size": 6,
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:natural_code_frame:exe",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/FRAMEFIX.EXE",
+        "size": 3367,
+        "sha256": "92ac1f8828da1106ed8c124a540972bf712d7f354bd4478becbb6de69d60d0da",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:natural_code_frame:map_file",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/FRAMEFIX.MAP",
+        "size": 7742,
+        "sha256": "abd60b50c2f27a368becb79fdac2bd6339b00223db87a0ff48ab3d6a0876e33e",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:natural_code_frame:link_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/LINK.LOG",
+        "size": 479,
+        "sha256": "d5909cde105ff6a42c87305b5de2e08b277ecea8203be2a3b2215e3a44802e83",
+        "passed": true
+      },
+      {
+        "role": "rtlink400:natural_code_frame:run_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink400/natural_code_frame/RUN.LOG",
+        "size": 6,
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:wrong_dgroup_frame:exe",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/FRAMEFIX.EXE",
+        "size": 3367,
+        "sha256": "832b40cede86a05540e20b6bdfea622b9fd17088fe30bf42d2d732c0698e05ee",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:wrong_dgroup_frame:map_file",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/FRAMEFIX.MAP",
+        "size": 7842,
+        "sha256": "ddbfa4c9d30b9783901a350ebcda4dadd6b8abb08e5dab417e9865f23487cdca",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:wrong_dgroup_frame:link_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/LINK.LOG",
+        "size": 2530,
+        "sha256": "ec3d9be5f8fe10b261765832d937053d92ab32f11299099e69fc3ac05ea5a7b7",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:wrong_dgroup_frame:run_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/wrong_dgroup_frame/RUN.LOG",
+        "size": 6,
+        "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:natural_code_frame:exe",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/FRAMEFIX.EXE",
+        "size": 3367,
+        "sha256": "1d1ccfbd261a780964150890c019bf8c6f9209232e2e89439c8abe184002e311",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:natural_code_frame:map_file",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/FRAMEFIX.MAP",
+        "size": 7842,
+        "sha256": "ddbfa4c9d30b9783901a350ebcda4dadd6b8abb08e5dab417e9865f23487cdca",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:natural_code_frame:link_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/LINK.LOG",
+        "size": 1013,
+        "sha256": "083f6f9f6e2ad59e04591337a69d513e736ea48609a4e6ae94c5f1ee6416c2c0",
+        "passed": true
+      },
+      {
+        "role": "rtlink610:natural_code_frame:run_log",
+        "path": "build/workers/dos_mouse_callback_frames_v29/callback-fixtures/linkers/rtlink610/natural_code_frame/RUN.LOG",
+        "size": 6,
+        "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+        "passed": true
+      }
+    ],
+    "problems": [],
+    "all_pins_match": true
+  },
+  "passed": true
+}

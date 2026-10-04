@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "b2ff35c",
+  "source_only_base_checkpoint": "bbae599",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "56ff060691f127e5d5836394ac126eb91097f07ed57334f6eb279c83f7e5e890",
-    "size": 12871380
+    "sha256": "2e44fce4855d025148763f30373faca8fd8222909687679c2827c5c96421dd0c",
+    "size": 15357335
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "115 unresolved source symbols",
+    "43 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 178,
+  "compiled_translation_units": 182,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 62,
-  "unresolved_symbols": 115,
+  "unresolved_symbols": 43,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 110,
+    "reviewed FAR_BSS definition and compatible consumer views": 38,
     "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 191,
@@ -103,6 +103,16 @@
       "reason": "Two bounded mask reads bind symbolically to mutable formula-derived near arrays with exact DGROUP-frame OFFSET16 sites. Initial state and unchecked copies are separate proofs."
     },
     {
+      "id": "map-viewport-grid-layout",
+      "status": "UNRESOLVED",
+      "sources": [
+        "src/root/m0250.c",
+        "src/S26/m39C7.c"
+      ],
+      "declared_grid": "fd_50F6_15C4[30][40]",
+      "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout."
+    },
+    {
       "id": "database-open-minus-one-record",
       "status": "UNRESOLVED",
       "source": "src/root/m1A28.c",
@@ -123,6 +133,12 @@
       "status": "RESOLVED",
       "operand_count": 1,
       "reason": "The g_5A9C OFFSET is DGROUP-relative. Its paired SEG must name DGROUP; the exact BASE16 site changes target/frame together, preserving all bytes and ordered unrelated fixups. Both linkers pass the shifted-group helper and explicitly fail the old segment frame before dereference. Rect ownership/initializers remain open."
+    },
+    {
+      "id": "mouse-callback-code-offset-frames",
+      "status": "RESOLVED",
+      "operand_count": 5,
+      "reason": "Four interrupt callback offsets and one same-module near callback use MOUSE_TEXT. Natural LEA source operands retain every instruction byte and all target displacements; five closed OMF frame fields change from DGROUP to the code segment. Both linkers pass separate shifted-group fixtures; the wrong-frame negative fails before its callback call."
     },
     {
       "id": "driver-local-ss-frames",
@@ -5145,6 +5161,594 @@
       ],
       "publics": [],
       "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-ui-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-ui-state.c",
+        "sha256": "26e147cfe361cd74f3baf9c8696c735364d9e5dec663fbd310895cbfaabc8b7f",
+        "size": 510
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\UISTTE26.OBJ",
+        "sha256": "4d36721e5244aae9d691ffafa02dff4b9fea13a52bc9aca80e31809ccd522a4d",
+        "size": 555
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_1062",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1064",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_106C",
+          "kind": "far",
+          "length": 1,
+          "count": 1,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1074",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_107C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1092",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10A6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10AC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10B8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10BA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10CC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10D0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10DA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10DE",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10E0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10E2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10E6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10EA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_10EE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1102",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-window-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-window-state.c",
+        "sha256": "fd2f545af87160b49456eeb534f9400d256d7e0ffe0ec07da21b6d3c86e1bfaf",
+        "size": 851
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\WINSC26.OBJ",
+        "sha256": "065736d6553acfdf9534b63eb9b7db05fb91367ac0383df4459ef5154f3af808",
+        "size": 715
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_3938",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_393C",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3944",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37D2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37D4",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37D6",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37DE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37E6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37EA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37EE",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37F2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37F6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37FA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_37FC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3836",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_383A",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3842",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_384A",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3852",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3854",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3856",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3858",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38B2",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38B6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38B8",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38BC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38C0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_38C2",
+          "kind": "far",
+          "length": 8,
+          "count": 8,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3934",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:remaining-scalar-tail",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-scalar-tail.c",
+        "sha256": "f9746dc82fdfa8f532920e1aeb7d4a75c7ef1cc40ceaae6aae23ecb5f0c7b428",
+        "size": 419
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\SCALTL26.OBJ",
+        "sha256": "6595ecba70e78bcfaa2b925f1a5de11c4315e638adc8972af1d5f1b01efb1045",
+        "size": 537
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_04E0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_04F2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0502",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0510",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_059E",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_06AC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0736",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08DC",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_08E8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0D9A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FF8",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1004",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1006",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_103A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_103C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1044",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1046",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_1048",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_104A",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:balloon-buffer-tables",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\balloon-buffer-tables.c",
+        "sha256": "81ba70b1b41be95b198a1b27332e22a713b27089540c4757f6b417950fa2a6fd",
+        "size": 149
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\BLNTAB26.OBJ",
+        "sha256": "40e68769f7e6f39880a11cd26cbae477ef18fae5a5bd662b7a6b3863cea79513",
+        "size": 267
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_04A6",
+          "kind": "far",
+          "length": 24,
+          "count": 6,
+          "element_size": 4
+        },
+        {
+          "name": "_fd_50F6_04C8",
+          "kind": "far",
+          "length": 24,
+          "count": 6,
+          "element_size": 4
+        },
+        {
+          "name": "_fd_50F6_04E6",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        },
+        {
+          "name": "_fd_50F6_04F6",
+          "kind": "far",
+          "length": 12,
+          "count": 6,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
     }
   ],
   "reviewed_data_aliases": [
@@ -9399,7 +10003,7 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U087.OBJ",
-        "sha256": "557405d3d81b2b99965385dd70ff55aa77e71fe2515b3344fa9fc2618026a4df",
+        "sha256": "5f37d1fc5bcd86e2078d62d1416a7579f1420c6f105ae1ee35249f46d4a8c817",
         "size": 8751
       },
       "status": "PASS",
@@ -9434,6 +10038,71 @@
           "old_frame": "_DATA",
           "frame_kind": "group",
           "frame": "DGROUP"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 590,
+          "source_symbol": "_f_1B73_03EE",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1000,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 617,
+          "source_symbol": "_f_1B73_065A",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1620,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 641,
+          "source_symbol": "_f_1B73_06E3",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1757,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 665,
+          "source_symbol": "_f_1B73_051F",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1305,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 2738,
+          "source_symbol": "_f_1B73_0CB3",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 3245,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
         },
         {
           "segment": "MOUSE_TEXT",
@@ -9638,8 +10307,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "69146455cccd4f108fad163070a75d6ed7e05938f719ebba223def396b4fd7d6",
-      "size": 70105
+      "sha256": "d55ff3225c4124a5a633c93c6d243a2b27a0cb504d1553a890071853f4815569",
+      "size": 72671
     },
     {
       "path": "tools\\compiler.py",
@@ -9672,9 +10341,14 @@
       "size": 15758
     },
     {
+      "path": "tools\\dos_storage_policies_v26.py",
+      "sha256": "42cd9fe23d52c49e1d1ca082c270ea1f0eaf74c27d1addc973be6db6c0286db9",
+      "size": 7794
+    },
+    {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "6bc6e1d9cb07eba782ab21f3453701777a7ea7a21eedc905a912bec824738275",
-      "size": 164425
+      "sha256": "9d55c50b4b26e98cdb98b6115d1986d6931c0dbda1f06d93c2507284f996bd48",
+      "size": 180344
     },
     {
       "path": "tools\\farbss.py",
@@ -9689,17 +10363,17 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v25.log",
-      "sha256": "acb0b688b8f53e2c7df19c32a2dc86789b08d0fdabf3c461bb5dd8976b6452a0",
-      "size": 6264
+      "path": "build/source-only-dos-run-v26.log",
+      "sha256": "75b63035fcc5b3de938776c6f29d372f825f5fa1604c781d0aa487e90d0ef400",
+      "size": 6469
     },
     {
-      "path": "build/source-only-dos-tests-all-v25.log",
-      "sha256": "50d55b1d2f13bd3431dac2114742df02fe183d5e2f18e3fb647aec95c8cf7b63",
-      "size": 624
+      "path": "build/source-only-dos-tests-accepted-final-v26.log",
+      "sha256": "a16077d7aa93c99cd14b87f835ccf187a152dd185dfc37a6207726279ee1ac5c",
+      "size": 627
     },
     {
-      "path": "build/source-only-dos-validation-v25.log",
+      "path": "build/source-only-dos-validation-v26.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
@@ -9767,6 +10441,68 @@
     "sha256": "35dd03fcda8c08f0b1ed7938e1151ebacb601a4ab07acc7be3cd392ccc4378f1",
     "size": 676
   },
+  "storage_admission_v26": {
+    "path": "work/source-only-dos/storage-admission-v26/root-admission.md",
+    "sha256": "6384c9a155e8ba33233deff912b151ef5df622a2d9e791ae59a7ed847ab4d281",
+    "size": 4080
+  },
+  "storage_gates_v26": {
+    "path": "build/source-only-dos-gates-v26.log",
+    "sha256": "f46cb7ae4d21313236784b5598600430c110e58069a6f09f7491a09417945130",
+    "size": 229
+  },
+  "storage_raw_review_v26": {
+    "path": "build/source-only-dos-raw-recheck-v26.log",
+    "sha256": "38a762a461bf146fbf4e84121c0c67de59392b8545228fb634268a5e9359b80c",
+    "size": 388
+  },
+  "storage_fresh_compile_v26": {
+    "path": "build/source-only-dos-fresh-owners-v26.log",
+    "sha256": "7aec9fb08ebf259367b586974dddd40dc807e35f2563166d546e2ea5d7d96f95",
+    "size": 251
+  },
+  "storage_owner_bindings_v26": [
+    {
+      "path": "work/source-only-dos/remaining-ui-state-bindings-v1.json",
+      "sha256": "89e243c74d4362b8c44a6d7467b9e659d4bec996984d1c1e8bcc909b325fa271",
+      "size": 36074
+    },
+    {
+      "path": "work/source-only-dos/remaining-window-state-bindings-v1.json",
+      "sha256": "446afc5d9889b7d3836d50035f4435d4cd056fbcf88e062f39d33371d6ae6705",
+      "size": 37499
+    },
+    {
+      "path": "work/source-only-dos/remaining-scalar-tail-bindings-v1.json",
+      "sha256": "71e8ef7386256505e1181ecff9232e4e1f8c561a750e8cc9a9531109f8ff3865",
+      "size": 35956
+    },
+    {
+      "path": "work/source-only-dos/balloon-buffer-tables-bindings-v1.json",
+      "sha256": "8e472ffaa80c72e6ef76d4a54fc2a1266d847ce34311d00bc975e552b65746b4",
+      "size": 33653
+    }
+  ],
+  "mouse_code_offset_binding_v26": {
+    "path": "work/source-only-dos/mouse-code-offset-frame-bindings-v1.json",
+    "sha256": "412cf1c3dd275187630e8f277d33ab459765617a397cc43daa85e4ddab56f95b",
+    "size": 6002
+  },
+  "mouse_code_offset_contract_v26": {
+    "path": "work/source-only-dos/mouse-code-offset-frame-contract-v1.json",
+    "sha256": "a4bd2bd7501b51e6e0cb224e6aaaaf5989bd53ddfdfe4e83668ffc057a62a705",
+    "size": 38845
+  },
+  "mouse_code_offset_fresh_proof_v26": {
+    "path": "build/source-only-dos-frame-fresh-v26.log",
+    "sha256": "6c12cdc8b47c47011a84aecb0a50a4c7e8657b794f68dec58689f70e82e58101",
+    "size": 142
+  },
+  "mouse_code_offset_raw_recheck_v26": {
+    "path": "build/source-only-dos-frame-current-recheck-v26.log",
+    "sha256": "d9cc71355c3ad5c9236f4a7beb447f0528f2dbb724368be2c86c1479da806dc6",
+    "size": 103
+  },
   "event_records_binding_v23": {
     "path": "work/source-only-dos/event-records-bindings-v1.json",
     "sha256": "e46d5aa6f96018e0d16f4e8c401e883a7e9857d151c64a9590bebdafdf80d5a7",
@@ -9787,6 +10523,6 @@
     "sha256": "6287dd81c46522585b0033322ae6271e0b1f1158c3e850e8d02fdd6d2a54f07b",
     "size": 91
   },
-  "source_only_tests": "52 targeted tests included in 366 repository tests PASS (2 skips)",
+  "source_only_tests": "55 targeted tests included in 369 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

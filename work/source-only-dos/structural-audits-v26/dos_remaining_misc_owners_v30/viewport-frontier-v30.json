@@ -1,0 +1,442 @@
+{
+  "schema": "simant-viewport-layout-frontier-v30",
+  "root_reviewed": false,
+  "admitted": false,
+  "claim": "bounded source/resource layout audit for 15C4 and 1114; no source, manifest, or original receipt modified",
+  "corpus_basis": {
+    "prior_audit": "build/workers/dos_remaining_misc_owners_v26/source-audit-v26.json",
+    "source_count": 156,
+    "unique_paths": 156,
+    "composition": "127 canonical TUs plus 29 strict-effective whole-module sources; DrawBalloons corrected source is separately named below",
+    "save_rec_rows_for_candidates": {
+      "fd_50F6_1114": [],
+      "fd_50F6_15C4": []
+    },
+    "numeric_50f6_asm_hits": []
+  },
+  "viewport_resource_observation": {
+    "schema": "viewport-resource-observation-v30",
+    "inputs": {
+      "HCEGANT.NDX": {
+        "size": 2444,
+        "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+      },
+      "HCEGANT.DAT": {
+        "size": 629438,
+        "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+      }
+    },
+    "index": {
+      "header_count": 271,
+      "source_offset": 20,
+      "row_size": 8,
+      "window0_kind0": {
+        "record_offset": 0,
+        "flags": 8,
+        "header": [
+          22136,
+          4660,
+          0,
+          1074,
+          0
+        ],
+        "payload_size": 1074
+      },
+      "window0_kind9": {
+        "record_offset": 391079,
+        "flags": 8,
+        "header": [
+          22136,
+          4660,
+          0,
+          320,
+          0
+        ],
+        "payload_size": 320
+      }
+    },
+    "window0_kind0": {
+      "window_object_count": 23,
+      "window_flags": 1294,
+      "has_resize_flag_0x0008": true,
+      "has_screen_clamp_flag_0x1000": false,
+      "objects": {
+        "0": {
+          "offset": 136,
+          "rect": [
+            14,
+            22,
+            418,
+            379
+          ],
+          "origin": [
+            14,
+            22,
+            404,
+            357
+          ],
+          "references": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "modes": [
+            0,
+            0,
+            1,
+            2
+          ],
+          "type": 15,
+          "flags24": 3
+        },
+        "1": {
+          "offset": 177,
+          "rect": [
+            16,
+            24,
+            416,
+            42
+          ],
+          "origin": [
+            2,
+            2,
+            -2,
+            18
+          ],
+          "references": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "modes": [
+            1,
+            2,
+            3,
+            2
+          ],
+          "type": 18,
+          "flags24": 3
+        },
+        "3": {
+          "offset": 270,
+          "rect": [
+            16,
+            41,
+            64,
+            376
+          ],
+          "origin": [
+            0,
+            17,
+            48,
+            -3
+          ],
+          "references": [
+            1,
+            1,
+            3,
+            0
+          ],
+          "modes": [
+            1,
+            2,
+            1,
+            4
+          ],
+          "type": 6,
+          "flags24": 513
+        },
+        "4": {
+          "offset": 312,
+          "rect": [
+            64,
+            41,
+            416,
+            362
+          ],
+          "origin": [
+            48,
+            0,
+            -2,
+            -17
+          ],
+          "references": [
+            3,
+            3,
+            0,
+            0
+          ],
+          "modes": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": 1,
+          "flags24": 3
+        }
+      }
+    },
+    "window0_kind9": {
+      "first_win_offsets_rect": [
+        14,
+        22,
+        404,
+        325
+      ]
+    },
+    "source_recalc_observation": {
+      "root_rect_after_kind9_override": [
+        14,
+        22,
+        418,
+        347
+      ],
+      "object3_rect_after_recalc": [
+        16,
+        41,
+        64,
+        344
+      ],
+      "object4_rect_after_recalc": [
+        64,
+        41,
+        416,
+        330
+      ],
+      "object4_pixels": {
+        "width": 352,
+        "height": 289
+      },
+      "tile_counts_at_16px": {
+        "width": 22,
+        "height": 19
+      },
+      "tile_counts_at_12px": {
+        "width": 29,
+        "height": 25
+      }
+    }
+  },
+  "target_conclusions": {
+    "fd_50F6_1114": {
+      "declared_candidate_view": "unsigned char[30 * 40] = 1200 bytes",
+      "direct_write_function": "f_0250_129E only in the 156-path source audit",
+      "write_index": "i = y * 40 + x, after early return for x<0, y<0, x>=40, or y>=30",
+      "conclusion": "All reached 1114 indexed writes are within indices 0..1199. Draw loops may use dynamic viewport bounds, but their only 1114 mutation route is through the fixed-domain f_0250_129E guard.",
+      "limits": "This is the bounded source view/access claim only; it does not establish unrelated caller or resource lifetime contracts."
+    },
+    "fd_50F6_15C4": {
+      "declared_candidate_view": "signed int[30][40] = 2400 bytes, 40-element row stride",
+      "fixed_domain_write_paths": [
+        "f_0250_129E: same fixed 40x30 early return before y*40+x",
+        "DrawSpider and DrawBalloons: linear idx stores guarded by 0<=idx<1200",
+        "f_0250_05CB: whole 0x960-byte clear"
+      ],
+      "dynamic_write_paths": [
+        "ZapEuMapAt: checks x/y against fd_50F6_10E0/fd_50F6_10DE, then writes [v][h]",
+        "InvalEuMap: clamps source/map coordinates to 0..127 and 0..63, but guards only against fd_10E0/fd_10DE; linear i=y*40+left then increments with x"
+      ],
+      "dimension_producer": "f_0250_0E15 calls win_GetObjRect(4), sets 10E0=(right-left)/g_19BE and 10DE=(bottom-top)/g_19C0+1, clears the cache, then clamps map scroll; dimensions are derived from live window object geometry.",
+      "refresh_paths": [
+        "win 0 draw hook f_0250_0EDA recalculates before and after f_0250_13A6",
+        "window geometry-change callback f_00BA_01C3 invokes f_0250_0E15",
+        "opening callback f_00BA_0228 invokes f_0250_0E15"
+      ],
+      "reachability": "f_218D_02D5 handles resize event 0xF084 by calling o26_39C7_0671. For HCEGANT window 0, resource flags 0x050E include resizable bit 0x0008 and omit screen-clamp bit 0x1000. The resize path adjusts object 0 width/height, recalculates child rectangles, and invokes g_62EC (installed as f_00BA_01C3). o26_39C7_022F enforces a screen-width condition but does not enforce a bottom-edge upper bound when 0x1000 is absent; the available source/resource evidence therefore does not prove a 40x30 tile cap for every reachable viewport.",
+      "conclusion": "The declared 30x40 cache layout remains a candidate source view, but its all-reachable-write footprint is not established. Keep the explicit viewport/layout gate; do not claim zero fallback or runtime closure for 15C4 from the baseline asset alone."
+    },
+    "MapUpdate_and_MapPreDraw": {
+      "DoMapUpdateDraw": "empty function in src/root/m10F7.c; DoEditAndMapUpdateDraw calls it then DoEditUpdateDraw",
+      "Draw_prepass": "PreDrawSpider and PreDrawBalloons are reached by f_0250_13A6; the viewport loops call fixed-domain f_0250_129E for map-cell cache work",
+      "result": "No fixed viewport cap was found here; geometry is produced in f_0250_0E15 from current window object 4."
+    },
+    "current_window_resource": {
+      "source_path": "win_LoadWindow -> f_1A53_00F0(window_id,0,1) -> db_LoadObject/DBRecall; win_LoadAllWindows reads selected g_5A97 kind-9 offsets and then calls win_LoadWindow",
+      "database_frontier": "The source chooses the active display database from g_5A97; optional language/shared databases precede it in DB search order. HCEGANT is only the checked-in resource baseline, not proof for alternate or missing packages.",
+      "actual_HCEGANT_condition": "For the checked-in uncompressed HCEGANT (0,0) and (0,9) records, kind-9 offsets replace root object 0's origin with [14,22,404,325]; source Recalc gives object 4 [64,41,416,330], 352x289 pixels. The corresponding baseline counts are 22x19 at 16px tiles and 29x25 at 12px tiles, both within 40x30.",
+      "winheaders_name_note": "The separate 0x100-byte allocation named winheaders in f_00BA_0002 is read into fd_50F6_10CC, later consumed by ShowIntro for CustomerID material. It is not copied to win_offsets and is not counted as geometry proof or a geometry override.",
+      "setter_note": "No function named SetWinRect occurs in source. The window manager's resize/move handlers directly mutate the live root window/object fields and call win_Recalc. f_20E8_0903 is a rect-setting helper in an unclaimed scaffold and has no direct source callsite in the scanned graph; it is not needed to establish the reachable UI-resize path."
+    }
+  },
+  "assigned_0150_disposition": {
+    "v26_target_list_contains_0150": "fd_50F6_0150 is absent from the v26 source-audit targets; that audit has nine misc targets.",
+    "registry_symbol": {
+      "seg": 20726,
+      "off": 336,
+      "grounding": "f_0000_0149: mov es,[7DD4] (CONST 50F6); mov es:[bx+150h],ax / es:[bx+152h],dx with bx = 4*[181C] -> far array of far pointers (sample free list, limit 38) (worker rootF)"
+    },
+    "source_owner_candidate": "src/root/m0000.c:f_0000_0149 appends struct Sample far * to fd_50F6_0150[g_181C++]; it rejects g_181C>38, so the candidate indexing path allows 39 pointer slots (156 bytes); f_0000_00DE consumes i<g_181C.",
+    "prior_review_status": {
+      "root_reviewed": false,
+      "admitted": false
+    },
+    "disposition": "The omission is not an accepted-owner/exclusion decision. It is covered only as a separate prior sound-record candidate whose v21 review remains root-false and unadmitted. If the original assignment includes all ten addresses, 0150 must remain separately tracked/requeued."
+  },
+  "inputs": [
+    {
+      "path": "README.md",
+      "size": 8813,
+      "sha256": "062dcfd782a5b01d597a381b47f795c1dd065767c94341bb486d82db4cde4887"
+    },
+    {
+      "path": "docs/codegen-rules.md",
+      "size": 25972,
+      "sha256": "3ebff671acfb39d8e482163ffb0cc4294e76bcd669fd5099cda5a7a9744840d4"
+    },
+    {
+      "path": "docs/tu-evidence.md",
+      "size": 9038,
+      "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26"
+    },
+    {
+      "path": "src/root/m0250.c",
+      "size": 65517,
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+    },
+    {
+      "path": "src/root/m10F7.c",
+      "size": 35707,
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88"
+    },
+    {
+      "path": "src/root/m00BA.c",
+      "size": 3562,
+      "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc"
+    },
+    {
+      "path": "src/root/m20E8.c",
+      "size": 11458,
+      "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2"
+    },
+    {
+      "path": "src/root/m23AE.c",
+      "size": 5115,
+      "sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c"
+    },
+    {
+      "path": "src/root/m2505.c",
+      "size": 10178,
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+    },
+    {
+      "path": "src/S26/m39C7.c",
+      "size": 9163,
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4"
+    },
+    {
+      "path": "src/root/m218D.c",
+      "size": 8739,
+      "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e"
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "size": 4897,
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "size": 6627,
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b"
+    },
+    {
+      "path": "src/root/m205F.c",
+      "size": 6015,
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "size": 5159,
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+    },
+    {
+      "path": "src/root/m1986.c",
+      "size": 3351,
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96"
+    },
+    {
+      "path": "src/root/m19A9.c",
+      "size": 4870,
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523"
+    },
+    {
+      "path": "src/root/m0000.c",
+      "size": 5066,
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9"
+    },
+    {
+      "path": "work/source-only-dos/corrections/DrawBalloons/module.c",
+      "size": 65384,
+      "sha256": "e222bc77fd4d83a777507a8ba73aa2c0ba6dd4d6fc4cb42db69cd83f6374c920"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "size": 6796,
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DrawBalloons.json",
+      "size": 46914,
+      "sha256": "7f86d2fe0e5b44300572c7115398d05c25799a3d03ba1e57dc0288242a8a91cc"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_0250_129E.json",
+      "size": 24394,
+      "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80"
+    },
+    {
+      "path": "build/workers/dos_remaining_misc_owners_v26/source-audit-v26.json",
+      "size": 426390,
+      "sha256": "890864568900d1b0b35268a217f239f1cf1af814d25d03b304dfa558c70fcd37"
+    },
+    {
+      "path": "build/workers/dos_remaining_misc_owners_v26/source-review-v26.md",
+      "size": 5551,
+      "sha256": "862dc59291255c81c1e335ed5c7a6451215654037ebd7b34e18f99fc38421c6b"
+    },
+    {
+      "path": "layout/symbols.json",
+      "size": 800809,
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "size": 18807,
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    {
+      "path": "work/source-only-dos/sound-record-arrays-v21/review.json",
+      "size": 218404,
+      "sha256": "8c24ad370f10cad6b4fd2058158d2ff04490c741dcf71ac0feadd659266c36c8"
+    },
+    {
+      "path": "work/source-only-dos/sound-record-arrays-v21/review.md",
+      "size": 8227,
+      "sha256": "08c745ea9fed33cfda9726fb6c7761da620086f7bade9c651e4a16a7c3ced5df"
+    },
+    {
+      "path": "assets/HCEGANT.NDX",
+      "size": 2444,
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+    },
+    {
+      "path": "assets/HCEGANT.DAT",
+      "size": 629438,
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+    }
+  ],
+  "analysis_artifacts": [
+    {
+      "path": "build/workers/dos_remaining_misc_owners_v30/viewport-resource-v30.py",
+      "size": 4736,
+      "sha256": "89e59b687f2cec7a6c0b9a407819e1466aea0a9e2abac1bf790a5ea3d61eb190"
+    },
+    {
+      "path": "build/workers/dos_remaining_misc_owners_v30/write-viewport-receipt-v30.py",
+      "size": 12793,
+      "sha256": "902cb71709e355cd0216d16722c1d3a0ace1e6c6d95d773a8064271a318b54d4"
+    }
+  ]
+}

@@ -8,11 +8,11 @@ reviewed behavioral bodies, followed by DOSBox-X integration checks and human
 acceptance. Earlier historical-link and SDL3 next actions below are retained
 research history and do not supersede this priority.
 
-**Current SOURCE_ONLY_DOS checkpoint (v25, 2026-10-04):** the strict static audit covers all 29
+**Current SOURCE_ONLY_DOS checkpoint (v26, 2026-10-04):** the strict static audit covers all 29
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The v25 source-only build compiles 127 canonical TUs plus 51 data-only
+unresolved. The v26 source-only build compiles 127 canonical TUs plus 55 data-only
 providers. The seven-slot input queue, reviewed FAR word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
@@ -47,11 +47,22 @@ experiment coordinate pair, the 45-slot clip Handle table, two floor/task words,
 four UI geometry objects, and 53 ant/world/history objects. Root checked actual
 compiler controls, complete original stdout and full public tables under both
 RTLinks; unused-DEFINE warning fixtures were replaced with clean runs.
-There are 115 missing data imports (110 FAR_BSS and five
+Four further cohorts own 72 scalar/UI/window/balloon objects (279 bytes), with
+the shared balloon count owned once and a complete six-slot producer/consumer
+join. Five mouse callback LEAs now use their code segment frame; fresh whole-module
+checks preserve all instruction bytes and ordered unrelated fixups. Both corrected
+callback fixtures pass cleanly. The production link rejects WRT diagnostics and
+warnings even when RTLink leaves a partial MZ image.
+There are 43 missing data imports (38 FAR_BSS and five
 storage/reachability cases), 62 functional data-disposition bytes (113 historical bytes) and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is
 `work/source-only-dos/current-intake.json`; exact canonical ownership is unchanged.
+The map viewport grid now has a separate sixth unresolved layout gate: dynamic
+window dimensions are not yet proved to stay inside 30x40. The
+[preserved structural audits](../work/source-only-dos/structural-audits-v26/README.md)
+also record the readonly words, runtime frames, resource-count frontier and
+runtime-library duplicate investigation.
 
 Next ownership work is bounded: the remaining FAR_BSS owners, the window-handle table's
 real extent, and the remaining numeric bases. The clip Handle table is owned;

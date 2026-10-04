@@ -1,0 +1,83 @@
+{
+  "schema": "simant-dos-free-list-punt-reentry-v1",
+  "status": "candidate_for_root_review",
+  "root_reviewed": false,
+  "production_changed": false,
+  "probe_run": false,
+  "claim": {
+    "normal_path_guard_limit_entries": 39,
+    "exact_physical_extent_proven": false,
+    "fortieth_store": "conditional fatal-cleanup re-entry is present in source; the specific shipped runtime/resource preconditions that first reach count 39 under g_7574 != 0 are not established here",
+    "guard_alone_blocks_fortieth_store": false,
+    "physical_layout_debt_open": true
+  },
+  "count_state": {
+    "initializer": "src/root/m0000.c:31 g_181C = 0",
+    "reads": ["src/root/m0000.c:82 f_0000_00DE loop bound"],
+    "resets": ["src/root/m0000.c:90 f_0000_00DE sets g_181C = 0"],
+    "guard": "src/root/m0000.c:99 if (g_181C > 38) Punt(...) ",
+    "write": "src/root/m0000.c:101 fd_50F6_0150[g_181C++] = s",
+    "other_source_occurrences": 0
+  },
+  "direct_producers": [
+    {"source": "src/root/m0000.c", "line": 181, "function": "f_0000_039B", "predicate": "up to 14 song-bank rows: kind == 1 and sample != 0"},
+    {"source": "src/root/m0000.c", "line": 196, "function": "f_0000_0429", "predicate": "up to 56 instrument rows: kind == 1; order StopSong, channel cleanup, row scan; no final drain"},
+    {"source": "src/root/m290D.c", "line": 112, "function": "f_290D_0193", "predicate": "old owner non-null and loaded == 1"},
+    {"source": "src/root/m290D.c", "line": 137, "function": "f_290D_026C", "predicate": "owner non-null and loaded == 1"},
+    {"source": "src/root/m295C.c", "line": 95, "function": "f_295C_0015", "predicate": "channel type 1, busy == 0, snd non-null, snd.state == 1"},
+    {"source": "src/root/m295C.c", "line": 119, "function": "f_295C_00C9", "predicate": "channel type 1, busy == 0, snd non-null, snd.state == 1"}
+  ],
+  "critical_call_order": [
+    "f_0000_0149 at count 39 calls first Punt before its store",
+    "Punt sets static g_54F8 to 1 and dispatches o15_384C_0152(text, 1)",
+    "o15_384C_0152 conditionally calls f_277E_0154 when fd_55B3_610A != 0, then eventually calls exit(0)",
+    "f_277E_0154 calls f_295C_0391 then f_0000_0429",
+    "f_0000_0429 calls StopSong, f_295C_0391, then scans 56 runtime instrument rows and calls f_0000_0149 for each kind == 1 row",
+    "nested Punt sees g_54F8 == 1 and returns; f_0000_0149 proceeds to the store"
+  ],
+  "runtime_preconditions_unclaimed": [
+    "g_181C reaches 39 while g_7574 remains nonzero",
+    "fd_55B3_610A is nonzero on that overflow path",
+    "fatal audio shutdown reaches an eligible type-1 sample producer in its 14-bank/56-row/voice cleanup"
+  ],
+  "strict_source_inventory": {
+    "canonical_files": 127,
+    "strict_effective_files": 29,
+    "unique_paths_scanned": 156,
+    "source_extensions": [".c", ".asm"],
+    "prior_owner_inventory_role_entries_rechecked": 189,
+    "current_hash_mismatches": 0,
+    "overlay_check": {
+      "path": "work/source-only-dos/database-punt-effective-overlay-check-v16.json",
+      "sha256": "e3e0bc1ce638206b61c203a797f4e84f7b867dda18e4ee4dd6c2298d3d3fc165"
+    },
+    "owner_inventory": {
+      "path": "work/source-only-dos/sound-record-arrays-v21/review.json",
+      "sha256": "8c24ad370f10cad6b4fd2058158d2ff04490c741dcf71ac0feadd659266c36c8"
+    }
+  },
+  "pins": [
+    {"path": "README.md", "sha256": "062dcfd782a5b01d597a381b47f795c1dd065767c94341bb486d82db4cde4887"},
+    {"path": "docs/codegen-rules.md", "sha256": "3ebff671acfb39d8e482163ffb0cc4294e76bcd669fd5099cda5a7a9744840d4"},
+    {"path": "docs/tu-evidence.md", "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26"},
+    {"path": "src/root/m0000.c", "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9"},
+    {"path": "src/root/m284A.c", "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5"},
+    {"path": "src/root/m290D.c", "sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed"},
+    {"path": "src/root/m295C.c", "sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89"},
+    {"path": "src/root/m1C62.c", "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c"},
+    {"path": "src/S15/m384C.c", "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"},
+    {"path": "src/root/m277E.c", "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee"},
+    {"path": "src/root/m00DF.c", "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4"},
+    {"path": "src/root/m28BC.asm", "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5"},
+    {"path": "src/data/d55B3_00B8.c", "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d"}
+  ],
+  "method": {
+    "original_disassembly_used": false,
+    "generic_behavior_matching_used": false,
+    "compile_or_runtime_probe_used": false,
+    "artifacts": [
+      "build/workers/dos_remaining_misc_owners_v31/free-list-punt-reentry-v31.md",
+      "build/workers/dos_remaining_misc_owners_v31/free-list-punt-reentry-v31.json"
+    ]
+  }
+}

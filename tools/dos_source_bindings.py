@@ -50,6 +50,93 @@ LOCAL_SS_SITES = {
                 ('S03A_TEXT', 0x1029, '_g_22E4', 0xD6), ('S03A_TEXT', 0x1044, '_g_22E4', 0xD6)],
 }
 
+MOUSE_CODE_OFFSET_SITES = [
+    (0x24E, '_f_1B73_03EE', 0x3E8),
+    (0x269, '_f_1B73_065A', 0x654),
+    (0x281, '_f_1B73_06E3', 0x6DD),
+    (0x299, '_f_1B73_051F', 0x519),
+    (0xAB2, '_f_1B73_0CB3', 0xCAD),
+]
+
+
+def review_code_offset_frames(binding, module=None):
+    specs = binding.get('code_offset_reframes', [])
+    if not specs:
+        return
+    sites = [(s['offset'], s['source_symbol'], s['displacement']) for s in specs]
+    if (binding['module'] != 'root:1B73' or sites != MOUSE_CODE_OFFSET_SITES
+            or any((s['segment'], s['target_kind'], s['target'], s['encoded_addend'],
+                    s['old_frame_kind'], s['old_frame'], s['frame_kind'], s['frame']) !=
+                   ('MOUSE_TEXT', 'segment', 'MOUSE_TEXT', '0000',
+                    'group', 'DGROUP', 'segment', 'MOUSE_TEXT') for s in specs)):
+        raise ValueError('unreviewed mouse code-offset frame sites')
+    if module is not None:
+        origin = module['extent']['start'] - module['seg'] * 16
+        if origin != 6 or any(int(s['source_symbol'].rsplit('_', 1)[1], 16) !=
+                              origin + s['displacement'] for s in specs):
+            raise ValueError('mouse code-offset target/source extent changed')
+
+
+def require_mouse_code_offset_contract(report, profile, tool):
+    """Five code-offset frames and isolated shifted-layout execution controls."""
+    rows = [r for r in report['translation_units']
+            if (r.get('source_binding') or {}).get('code_offset_reframes')]
+    if not rows:
+        return
+    contract = report.get('mouse_code_offset_contract', {})
+    def need(ok):
+        if not ok:
+            raise ValueError('mouse code-offset frames lack complete selected-linker proof')
+    need(len(rows) == 1 and rows[0]['module'] == 'root:1B73')
+    review_code_offset_frames(rows[0]['source_binding'])
+    need(contract.get('root_reviewed') is True and contract.get('all_required_checks_pass') is True
+         and contract.get('passed') is True and contract.get('all_natural_links_clean') is True)
+    control = contract.get('source_fixup_controls', {})
+    need(control.get('wrong_source_all_five_DGROUP', {}).get('passed') is True
+         and control.get('natural_source_all_five_code_segment', {}).get('passed') is True)
+    early = control.get('wrong_frame_exits_before_callback_call', {})
+    need(early.get('passed') is True and early.get('first_failure_branch_offset') == 13
+         and early.get('only_callback_call_offset') == 101)
+    expected = {'wrong_dgroup_frame': 'FAIL', 'natural_code_frame': 'PASS'}
+    cases = contract.get('cases', [])
+    need(len(cases) == 4 and {(r['linker_profile'], r['frame_form']) for r in cases} ==
+         {(p, form) for p in ('rtlink400', 'rtlink610') for form in expected})
+    for row in cases:
+        need(row.get('passed') is True and row.get('emulator_exit') == 0
+             and row['actual_run'] == row['expected_run'] == expected[row['frame_form']])
+        for field, key in (('run_log_text', 'run_log'), ('link_log_text', 'link_log')):
+            raw = row[field].encode('latin1')
+            identity = row['artifacts'][key]
+            need(identity['size'] == len(raw) and identity['sha256'] == hashlib.sha256(raw).hexdigest())
+        need(row['run_log_text'] == expected[row['frame_form']] + '\r\n')
+        lines = [s.strip() for s in re.findall(
+            r'(?im)^.*(?:\bwrt\d{4}\b|\bwarning\b).*$', row['link_log_text'])]
+        summaries = [s for s in lines if s == '5 warning message(s)']
+        lines = [s for s in lines if s != '5 warning message(s)']
+        allowed = row['linker_profile'] == 'rtlink610' and row['frame_form'] == 'wrong_dgroup_frame'
+        need(summaries == (['5 warning message(s)'] if allowed else []))
+        need(row['error_lines'] == [] and row['warning_policy_passed'] is True
+             and row['warning_lines'] == lines
+             and not re.search(r'\b(?:errors?|fatal|undefined|unresolved|aborted)\b|cannot\s+open',
+                               row['link_log_text'], re.I))
+        need((len(lines) == 5 and all(s.strip() == 'warning wrt0082: Illegal fixup values' for s in lines)
+              and row['link_clean'] is False) if allowed else (not lines and row['link_clean'] is True))
+        m = row['map_physical_frame']
+        need(m['shifted_physical_layout'] is True and m['callback_code_is_separate'] is True
+             and m['origin']['group'] == 'DGROUP' and m['prefix_span'] == 16
+             and m['prefix_offset_in_group'] >= 16
+             and m['data_offset_in_group'] == m['prefix_offset_in_group'] + 16
+             and m['segments']['CALLBACK_TEXT']['group'] is None)
+    from pathlib import Path
+    identities = {}
+    for item in contract.get('inputs', []):
+        identities.setdefault(runtime_component_path(item['path']), []).append(item['sha256'])
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    need(all(identities.get(runtime_component_path(path))
+             and all(value == digest for value in identities[runtime_component_path(path)])
+             for path, digest in components))
+
 DGROUP_RECT_SEGMENT_CORRECTION = {
     'segment': 'MOUSE_TEXT', 'offset': 0x133,
     'old': {'width': 2, 'loc': 'base16', 'self_relative': False,
@@ -450,6 +537,7 @@ def review_addresses(binding, module, symbols):
     """Join source-owned relative locations to already reviewed symbol anchors."""
     review_pattern_binding(binding)
     review_local_frame_sites(binding)
+    review_code_offset_frames(binding, module)
     review_indexed_binding(binding, module, symbols)
     review_graphics_binding(binding)
     review_s01_pattern_view(binding, symbols)
@@ -620,6 +708,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V23_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V24_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V25_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V26_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -627,7 +716,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS, **V26_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -1137,6 +1226,7 @@ def verify_objects(original, generated, binding):
     review_frame_sites(binding)
     review_pattern_binding(binding)
     review_local_frame_sites(binding)
+    review_code_offset_frames(binding)
     review_segment_corrections(binding)
     review_indexed_binding(binding)
     review_graphics_binding(binding)
@@ -1175,7 +1265,8 @@ def verify_objects(original, generated, binding):
         raise ValueError('DOS binding changed an existing public or exported wrong storage')
     original_fixups = [dict(f) for f in original.linker_fixups if f['segment'] not in debug]
     frame_checks = []
-    for spec in binding.get('reframes', []) + binding.get('local_reframes', []):
+    for spec in (binding.get('reframes', []) + binding.get('local_reframes', [])
+                 + binding.get('code_offset_reframes', [])):
         matches = [f for f in original_fixups if f['segment'] == spec['segment']
                    and f['offset'] == spec['offset'] and f['target_kind'] == spec.get('target_kind', 'external')
                    and f['target'] == spec['target']]
@@ -1186,8 +1277,14 @@ def verify_objects(original, generated, binding):
                 f['displacement'], f['encoded_addend']) !=
                 (2, 'offset16', False, spec['old_frame_kind'], spec['old_frame'], spec.get('displacement', 0), '0000')):
             raise ValueError('assembly frame correction changed a different operand')
-        if (spec['frame_kind'], spec['frame']) != ('group', 'DGROUP'):
+        if (spec not in binding.get('code_offset_reframes', [])
+                and (spec['frame_kind'], spec['frame']) != ('group', 'DGROUP')):
             raise ValueError('assembly frame correction is not DGROUP')
+        if spec in binding.get('code_offset_reframes', []):
+            labels = [p for p in original.publics if p['name'] == spec['source_symbol']]
+            if len(labels) != 1 or (labels[0]['segment'], labels[0]['offset']) != (
+                    spec['target'], spec['displacement']):
+                raise ValueError('mouse code-offset target is not its source public')
         f.update(frame_kind=spec['frame_kind'], frame=spec['frame'])
         frame_checks.append(spec)
     for spec in binding.get('segment_corrections', []):
@@ -2207,3 +2304,37 @@ def require_v25_storage_contracts(report, profile, tool):
             raise ValueError('v25 storage contract scope or admission changed')
         dos_storage_contracts.validate(contract,
             dos_storage_policies_v25.policy(module, provider_communals(module)))
+
+# Reviewed v26 typed scalar, UI, window and coupled balloon owners.
+PROVIDER_SPECS['source-owned:remaining-ui-state'] = ('UISTTE26', None, (('_fd_50F6_1062', 2), ('_fd_50F6_1064', 2), ('_fd_50F6_106C', 1), ('_fd_50F6_1074', 2), ('_fd_50F6_107C', 2), ('_fd_50F6_1092', 2), ('_fd_50F6_10A6', 2), ('_fd_50F6_10AC', 2), ('_fd_50F6_10B8', 2), ('_fd_50F6_10BA', 2), ('_fd_50F6_10CC', 4), ('_fd_50F6_10D0', 2), ('_fd_50F6_10DA', 4), ('_fd_50F6_10DE', 2), ('_fd_50F6_10E0', 2), ('_fd_50F6_10E2', 4), ('_fd_50F6_10E6', 4), ('_fd_50F6_10EA', 4), ('_fd_50F6_10EE', 4), ('_fd_50F6_1102', 2)), 'typedef char far * far *Handle; int far fd_50F6_1062; int far fd_50F6_1064; unsigned char far fd_50F6_106C; int far fd_50F6_1074; int far fd_50F6_107C; int far fd_50F6_1092; int far fd_50F6_10A6; int far fd_50F6_10AC; int far fd_50F6_10B8; int far fd_50F6_10BA; Handle far fd_50F6_10CC; int far fd_50F6_10D0; Handle far fd_50F6_10DA; int far fd_50F6_10DE; int far fd_50F6_10E0; char far * far * far fd_50F6_10E2; Handle far fd_50F6_10E6; Handle far fd_50F6_10EA; Handle far fd_50F6_10EE; int far fd_50F6_1102;')
+FAR_PROVIDER_MODULES.add('source-owned:remaining-ui-state')
+PROVIDER_SPECS['source-owned:remaining-window-state'] = ('WINSC26', None, (('_fd_50F6_3938', 4), ('_fd_50F6_393C', 8), ('_fd_50F6_3944', 4), ('_fd_50F6_37D2', 2), ('_fd_50F6_37D4', 2), ('_fd_50F6_37D6', 8), ('_fd_50F6_37DE', 4), ('_fd_50F6_37E6', 4), ('_fd_50F6_37EA', 4), ('_fd_50F6_37EE', 4), ('_fd_50F6_37F2', 4), ('_fd_50F6_37F6', 4), ('_fd_50F6_37FA', 2), ('_fd_50F6_37FC', 2), ('_fd_50F6_3836', 4), ('_fd_50F6_383A', 4), ('_fd_50F6_3842', 8), ('_fd_50F6_384A', 8), ('_fd_50F6_3852', 2), ('_fd_50F6_3854', 2), ('_fd_50F6_3856', 2), ('_fd_50F6_3858', 2), ('_fd_50F6_38B2', 4), ('_fd_50F6_38B6', 2), ('_fd_50F6_38B8', 4), ('_fd_50F6_38BC', 4), ('_fd_50F6_38C0', 2), ('_fd_50F6_38C2', 8), ('_fd_50F6_3934', 4)), 'struct Rect { int left; int top; int right; int bottom; }; typedef char far * far *Handle; int far fd_50F6_37D2; int far fd_50F6_37D4; struct Rect far fd_50F6_37D6; Handle far fd_50F6_37DE; void (far * far fd_50F6_37E6)(); void (far * far fd_50F6_37EA)(); void (far * far fd_50F6_37EE)(); Handle far fd_50F6_37F2; Handle far fd_50F6_37F6; int far fd_50F6_37FA; int far fd_50F6_37FC; Handle far fd_50F6_3836; long far fd_50F6_383A; struct Rect far fd_50F6_3842; struct Rect far fd_50F6_384A; int far fd_50F6_3852; int far fd_50F6_3854; int far fd_50F6_3856; int far fd_50F6_3858; char far * far fd_50F6_38B2; int far fd_50F6_38B6; void (far * far fd_50F6_38B8)(); void (far * far fd_50F6_38BC)(); int far fd_50F6_38C0; struct Rect far fd_50F6_38C2; Handle far fd_50F6_3934; Handle far fd_50F6_3938; struct Rect far fd_50F6_393C; long far fd_50F6_3944;')
+FAR_PROVIDER_MODULES.add('source-owned:remaining-window-state')
+PROVIDER_SPECS['source-owned:remaining-scalar-tail'] = ('SCALTL26', None, (('_fd_50F6_04E0', 2), ('_fd_50F6_04F2', 2), ('_fd_50F6_0502', 2), ('_fd_50F6_0510', 2), ('_fd_50F6_059E', 2), ('_fd_50F6_06AC', 2), ('_fd_50F6_0736', 4), ('_fd_50F6_08DC', 2), ('_fd_50F6_08E8', 2), ('_fd_50F6_0D9A', 2), ('_fd_50F6_0FF8', 2), ('_fd_50F6_1004', 2), ('_fd_50F6_1006', 2), ('_fd_50F6_103A', 2), ('_fd_50F6_103C', 2), ('_fd_50F6_1044', 2), ('_fd_50F6_1046', 2), ('_fd_50F6_1048', 2), ('_fd_50F6_104A', 2)), 'int far fd_50F6_04E0; int far fd_50F6_04F2; int far fd_50F6_0502; int far fd_50F6_0510; int far fd_50F6_059E; int far fd_50F6_06AC; long far fd_50F6_0736; int far fd_50F6_08DC; int far fd_50F6_08E8; int far fd_50F6_0D9A; int far fd_50F6_0FF8; int far fd_50F6_1004; int far fd_50F6_1006; int far fd_50F6_103A; int far fd_50F6_103C; int far fd_50F6_1044; int far fd_50F6_1046; int far fd_50F6_1048; int far fd_50F6_104A;')
+FAR_PROVIDER_MODULES.add('source-owned:remaining-scalar-tail')
+PROVIDER_SPECS['source-owned:balloon-buffer-tables'] = ('BLNTAB26', None, (('_fd_50F6_04A6', 24), ('_fd_50F6_04C8', 24), ('_fd_50F6_04E6', 12), ('_fd_50F6_04F6', 12)), 'typedef struct Pnt { int x; int y; } Pnt; char far * far fd_50F6_04A6[6]; Pnt far fd_50F6_04C8[6]; int far fd_50F6_04E6[6]; int far fd_50F6_04F6[6];')
+FAR_PROVIDER_MODULES.add('source-owned:balloon-buffer-tables')
+FAR_PROVIDER_WORD_ARRAYS['source-owned:balloon-buffer-tables'] = {'_fd_50F6_04F6', '_fd_50F6_04E6'}
+FAR_PROVIDER_RECORD_ARRAYS['source-owned:balloon-buffer-tables'] = {'_fd_50F6_04A6': 4, '_fd_50F6_04C8': 4}
+V26_STORAGE_ANCHORS = {'_fd_50F6_1062': (4194, ('fd_50F6_1062',)), '_fd_50F6_1064': (4196, ('fd_50F6_1064',)), '_fd_50F6_106C': (4204, ('fd_50F6_106C',)), '_fd_50F6_1074': (4212, ('fd_50F6_1074',)), '_fd_50F6_107C': (4220, ('fd_50F6_107C',)), '_fd_50F6_1092': (4242, ('fd_50F6_1092',)), '_fd_50F6_10A6': (4262, ('fd_50F6_10A6',)), '_fd_50F6_10AC': (4268, ('fd_50F6_10AC',)), '_fd_50F6_10B8': (4280, ('fd_50F6_10B8',)), '_fd_50F6_10BA': (4282, ('fd_50F6_10BA',)), '_fd_50F6_10CC': (4300, ('fd_50F6_10CC',)), '_fd_50F6_10D0': (4304, ('fd_50F6_10D0',)), '_fd_50F6_10DA': (4314, ('fd_50F6_10DA',)), '_fd_50F6_10DE': (4318, ('fd_50F6_10DE',)), '_fd_50F6_10E0': (4320, ('fd_50F6_10E0',)), '_fd_50F6_10E2': (4322, ('fd_50F6_10E2',)), '_fd_50F6_10E6': (4326, ('fd_50F6_10E6',)), '_fd_50F6_10EA': (4330, ('fd_50F6_10EA',)), '_fd_50F6_10EE': (4334, ('fd_50F6_10EE',)), '_fd_50F6_1102': (4354, ('fd_50F6_1102',)), '_fd_50F6_3938': (14648, ('fd_50F6_3938',)), '_fd_50F6_393C': (14652, ('fd_50F6_393C',)), '_fd_50F6_3944': (14660, ('fd_50F6_3944',)), '_fd_50F6_37D2': (14290, ('fd_50F6_37D2',)), '_fd_50F6_37D4': (14292, ('fd_50F6_37D4',)), '_fd_50F6_37D6': (14294, ('fd_50F6_37D6',)), '_fd_50F6_37DE': (14302, ('fd_50F6_37DE',)), '_fd_50F6_37E6': (14310, ('fd_50F6_37E6',)), '_fd_50F6_37EA': (14314, ('fd_50F6_37EA',)), '_fd_50F6_37EE': (14318, ('fd_50F6_37EE',)), '_fd_50F6_37F2': (14322, ('fd_50F6_37F2',)), '_fd_50F6_37F6': (14326, ('fd_50F6_37F6',)), '_fd_50F6_37FA': (14330, ('fd_50F6_37FA',)), '_fd_50F6_37FC': (14332, ('fd_50F6_37FC',)), '_fd_50F6_3836': (14390, ('fd_50F6_3836',)), '_fd_50F6_383A': (14394, ('fd_50F6_383A',)), '_fd_50F6_3842': (14402, ('fd_50F6_3842',)), '_fd_50F6_384A': (14410, ('fd_50F6_384A',)), '_fd_50F6_3852': (14418, ('fd_50F6_3852',)), '_fd_50F6_3854': (14420, ('fd_50F6_3854',)), '_fd_50F6_3856': (14422, ('fd_50F6_3856',)), '_fd_50F6_3858': (14424, ('fd_50F6_3858',)), '_fd_50F6_38B2': (14514, ('fd_50F6_38B2',)), '_fd_50F6_38B6': (14518, ('fd_50F6_38B6',)), '_fd_50F6_38B8': (14520, ('fd_50F6_38B8',)), '_fd_50F6_38BC': (14524, ('fd_50F6_38BC',)), '_fd_50F6_38C0': (14528, ('fd_50F6_38C0',)), '_fd_50F6_38C2': (14530, ('fd_50F6_38C2',)), '_fd_50F6_3934': (14644, ('fd_50F6_3934',)), '_fd_50F6_04E0': (1248, ('fd_50F6_04E0',)), '_fd_50F6_04F2': (1266, ('fd_50F6_04F2',)), '_fd_50F6_0502': (1282, ('fd_50F6_0502',)), '_fd_50F6_0510': (1296, ('fd_50F6_0510',)), '_fd_50F6_059E': (1438, ('fd_50F6_059E',)), '_fd_50F6_06AC': (1708, ('fd_50F6_06AC',)), '_fd_50F6_0736': (1846, ('fd_50F6_0736',)), '_fd_50F6_08DC': (2268, ('fd_50F6_08DC',)), '_fd_50F6_08E8': (2280, ('fd_50F6_08E8',)), '_fd_50F6_0D9A': (3482, ('fd_50F6_0D9A',)), '_fd_50F6_0FF8': (4088, ('fd_50F6_0FF8',)), '_fd_50F6_1004': (4100, ('fd_50F6_1004',)), '_fd_50F6_1006': (4102, ('fd_50F6_1006',)), '_fd_50F6_103A': (4154, ('fd_50F6_103A',)), '_fd_50F6_103C': (4156, ('fd_50F6_103C',)), '_fd_50F6_1044': (4164, ('fd_50F6_1044',)), '_fd_50F6_1046': (4166, ('fd_50F6_1046',)), '_fd_50F6_1048': (4168, ('fd_50F6_1048',)), '_fd_50F6_104A': (4170, ('fd_50F6_104A',)), '_fd_50F6_04A6': (1190, ('fd_50F6_04A6',)), '_fd_50F6_04C8': (1224, ('fd_50F6_04C8',)), '_fd_50F6_04E6': (1254, ('fd_50F6_04E6',)), '_fd_50F6_04F6': (1270, ('fd_50F6_04F6',))}
+V26_STORAGE_CONTRACTS = {'source-owned:remaining-ui-state': ('remaining_ui_state_contract', {'nonzero_initialized_owner_contrast': 'FAIL', 'positive_typed_raw_startup_zero': 'PASS', 'separate_backing_plus2_alias_contrast': 'FAIL', 'wrong_near_pointer_view': 'FAIL', 'wrong_pointer_depth_consumer_view': 'FAIL', 'wrong_signedness_consumer_view': 'FAIL', 'wrong_width_consumer_view': 'FAIL'}), 'source-owned:remaining-window-state': ('remaining_window_state_contract', {'POSITIVE': 'PASS', 'UNSIGN': 'FAIL', 'WIDE': 'PASS', 'INIT': 'FAIL', 'DEPTH': 'PASS', 'SHIFT02': 'PASS'}), 'source-owned:remaining-scalar-tail': ('remaining_scalar_tail_contract', {'POSITIVE': 'PASS', 'UNSIGN': 'FAIL', 'WIDE': 'PASS', 'INIT': 'FAIL', 'SHIFT02': 'PASS'}), 'source-owned:balloon-buffer-tables': ('balloon_buffer_tables_contract', {'six_slot_typed_raw_coupled_positive': 'PASS', 'wrong_pointer_depth_owner_omf_contrast': 'MEASURED', 'unsigned_style_signedness_contrast': 'FAIL', 'wrong_four_byte_plane_width_omf_contrast': 'MEASURED', 'five_slot_short_extent_omf_contrast': 'MEASURED', 'seven_slot_plus_one_extent_omf_contrast': 'MEASURED', 'initialized_nonzero_count_startup_contrast': 'FAIL', 'plus_two_alias_independent_backing_contrast': 'FAIL'})}
+
+def require_v26_storage_contracts(report, profile, tool):
+    """Complete typed storage controls and one shared balloon-count owner."""
+    import dos_storage_contracts
+    import dos_storage_policies_v26
+    _require_reviewed_storage_contracts(report, profile, tool, V26_STORAGE_CONTRACTS)
+    modules = {r['module'] for r in report['translation_units']}
+    if ('source-owned:balloon-buffer-tables' in modules
+            and 'source-owned:remaining-ui-state' not in modules):
+        raise ValueError('balloon tables lack the separately verified count owner')
+    for module, (key, _) in V26_STORAGE_CONTRACTS.items():
+        if module not in modules:
+            continue
+        contract = report[key]
+        if (contract.get('admitted') is not True or contract.get('original_game_bytes_used') != 0
+                or contract.get('historical_producer_or_placement_claimed') is not False
+                or contract.get('game_lifecycle_claimed') is not False):
+            raise ValueError('v26 storage contract scope or admission changed')
+        dos_storage_contracts.validate(contract,
+            dos_storage_policies_v26.policy(module, provider_communals(module)))

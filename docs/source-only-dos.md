@@ -744,3 +744,31 @@ This boundary passes 366 repository tests (two skips), including 52 source-only
 tests, canonical validation and all 25 mandatory gates plus alignment under
 both RTLinks. Further scalar, UI, balloon-buffer, window and sound candidates
 remain outside these accepted counts until independent root review.
+
+## v26: remaining typed state and mouse callback offsets
+
+Four providers resolve 72 further FAR imports with 279 bytes of source-owned
+scalar, UI, window and balloon state. The balloon count is owned once in UI
+state; its complete writer/callback census joins the guarded six-slot producer
+and strict consumer reset. Complete typed outputs and SaveRec spans establish
+the other extents. See the [root admission](../work/source-only-dos/storage-admission-v26/root-admission.md).
+
+Five mouse code-label LEAs incorrectly used DGROUP OMF frames. Removing their
+ds: qualifiers preserves the full 3,830-byte module and 440 fixups except the
+five frame fields. Fresh whole-module and individual reverted-site checks pass.
+Both natural callback fixtures pass cleanly; the isolated wrong RTLink 6.10
+fixture fails before its only callback call with five disclosed WRT0082 warnings.
+The independent production link rejects warnings and WRT diagnostics even if
+a partial executable exists.
+
+Preflight compiles 182 TUs (127 canonical +55 providers) with 43 unresolved imports
+(38 FAR_BSS and five DGROUP cases). Functional data debt remains 62 bytes versus
+113 historical bytes. All 29 strict effective implementations remain confirmed,
+all original-byte counters are zero, and linking remains refused. Further sound,
+Handle and miscellaneous candidates require separate root admission.
+
+The boundary passes 369 repository tests (two skips), including 55 source-only
+tests, canonical validation and all 27 mandatory gates plus alignment under
+both RTLinks. Six layout gates remain open, including the newly explicit
+map viewport grid dependency. The callback evidence gate rejects conflicting
+duplicate runtime component pins.

@@ -1,0 +1,177 @@
+{
+  "root_reviewed": true,
+  "whole_module_proof": {
+    "status": "PASS",
+    "segment_extents_unchanged": true,
+    "live_segment_extents_unchanged": true,
+    "existing_publics_and_relocations_unchanged": false,
+    "live_existing_publics_and_relocations_unchanged": false,
+    "reviewed_frame_corrections": [
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 3259,
+        "target": "_g_9120",
+        "old_frame_kind": "segment",
+        "old_frame": "_DATA",
+        "frame_kind": "group",
+        "frame": "DGROUP"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 3264,
+        "target": "_g_9122",
+        "old_frame_kind": "segment",
+        "old_frame": "_DATA",
+        "frame_kind": "group",
+        "frame": "DGROUP"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 3269,
+        "target": "_g_9124",
+        "old_frame_kind": "segment",
+        "old_frame": "_DATA",
+        "frame_kind": "group",
+        "frame": "DGROUP"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 590,
+        "source_symbol": "_f_1B73_03EE",
+        "target_kind": "segment",
+        "target": "MOUSE_TEXT",
+        "displacement": 1000,
+        "encoded_addend": "0000",
+        "old_frame_kind": "group",
+        "old_frame": "DGROUP",
+        "frame_kind": "segment",
+        "frame": "MOUSE_TEXT"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 617,
+        "source_symbol": "_f_1B73_065A",
+        "target_kind": "segment",
+        "target": "MOUSE_TEXT",
+        "displacement": 1620,
+        "encoded_addend": "0000",
+        "old_frame_kind": "group",
+        "old_frame": "DGROUP",
+        "frame_kind": "segment",
+        "frame": "MOUSE_TEXT"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 641,
+        "source_symbol": "_f_1B73_06E3",
+        "target_kind": "segment",
+        "target": "MOUSE_TEXT",
+        "displacement": 1757,
+        "encoded_addend": "0000",
+        "old_frame_kind": "group",
+        "old_frame": "DGROUP",
+        "frame_kind": "segment",
+        "frame": "MOUSE_TEXT"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 665,
+        "source_symbol": "_f_1B73_051F",
+        "target_kind": "segment",
+        "target": "MOUSE_TEXT",
+        "displacement": 1305,
+        "encoded_addend": "0000",
+        "old_frame_kind": "group",
+        "old_frame": "DGROUP",
+        "frame_kind": "segment",
+        "frame": "MOUSE_TEXT"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 2738,
+        "source_symbol": "_f_1B73_0CB3",
+        "target_kind": "segment",
+        "target": "MOUSE_TEXT",
+        "displacement": 3245,
+        "encoded_addend": "0000",
+        "old_frame_kind": "group",
+        "old_frame": "DGROUP",
+        "frame_kind": "segment",
+        "frame": "MOUSE_TEXT"
+      },
+      {
+        "segment": "MOUSE_TEXT",
+        "offset": 307,
+        "old": {
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_g_5A9C",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        "new": {
+          "width": 2,
+          "loc": "base16",
+          "self_relative": false,
+          "target_kind": "group",
+          "target": "DGROUP",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        }
+      }
+    ],
+    "storage_bytes_unchanged": true,
+    "reviewed_debug_contributions": {},
+    "added_exports": [
+      {
+        "name": "_fd_1B73_0006",
+        "segment": "MOUSE_TEXT",
+        "offset": 0
+      }
+    ],
+    "added_communals": [],
+    "symbolic_operand_checks": []
+  },
+  "mouse_bytes": 3830,
+  "fixup_count": 440,
+  "unchanged_all_instruction_bytes": true,
+  "separate_reverted_site_negatives": 5,
+  "artifacts": [
+    {
+      "path": "build/workers/dos_root_admission_v26/frame-fresh/control.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "build/workers/dos_root_admission_v26/frame-fresh/control.OBJ",
+      "sha256": "266246374921f3aca449a755e035a7a7f24536379f7cb6b123f71094ed1a9c95",
+      "size": 8722
+    },
+    {
+      "path": "build/workers/dos_root_admission_v26/frame-fresh/control.LOG",
+      "sha256": "c618370830ab7ee2ae6900aa2a58b09441a50c55ed63e79993dec140d59465b6",
+      "size": 196
+    },
+    {
+      "path": "build/workers/dos_root_admission_v26/frame-fresh/candidate.asm",
+      "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+      "size": 35074
+    },
+    {
+      "path": "build/workers/dos_root_admission_v26/frame-fresh/candidate.OBJ",
+      "sha256": "5f37d1fc5bcd86e2078d62d1416a7579f1420c6f105ae1ee35249f46d4a8c817",
+      "size": 8751
+    },
+    {
+      "path": "build/workers/dos_root_admission_v26/frame-fresh/candidate.LOG",
+      "sha256": "f32f237dd667476764737e2266180c1bbd83e704cf2f786bc10690a124c0798a",
+      "size": 196
+    }
+  ]
+}

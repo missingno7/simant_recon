@@ -18,6 +18,20 @@ import dos_alignment_debt as alignment
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_partial_link_images_do_not_override_structural_diagnostics(self):
+        # RTLink writes an MZ file after these actual diagnostic classes.
+        # Neither the file nor exit status proves an independent link succeeded.
+        for log in (
+            "warning wrt0082: Illegal fixup: Target MOUSE_TEXT, Relative to DGROUP",
+            "wrt0011: Public symbol '__ffree' doubly defined",
+            "Warning: unresolved public _missing_owner",
+            "Fatal: cannot open input object",
+        ):
+            with self.subTest(log=log):
+                self.assertTrue(dos.independent_link_diagnostics(log))
+        self.assertFalse(dos.independent_link_diagnostics(
+            'RTLink/Plus 6.10\nProcessing SOURCE.LNK\nFile: U087.OBJ\nCreating SOURCE.EXE\n'))
+
     def test_v25_whole_storage_controls_reject_semantic_and_metadata_drift(self):
         import copy
         import hashlib
@@ -1312,7 +1326,8 @@ class SourceOnlyDosTests(unittest.TestCase):
             control = assemble(before)
             generated = assemble(after)
             proof = bindings.verify_objects(control, generated, row['source_binding'])
-            self.assertEqual([s for s in proof['reviewed_frame_corrections'] if 'target' in s],
+            self.assertEqual([s for s in proof['reviewed_frame_corrections']
+                              if 'target' in s and s.get('target_kind', 'external') == 'external'],
                              row['source_binding']['reframes'])
             self.assertEqual(len(row['source_binding']['reframes']), 3)
             for contrast in (after.replace('assume es:DGROUP', 'assume es:_DATA'),
@@ -1830,7 +1845,7 @@ class SourceOnlyDosTests(unittest.TestCase):
                 return OmfReader(communals=True).read(result.obj)
             control, generated = compile(before), compile(after)
             proof = bindings.verify_objects(control, generated, binding)
-            self.assertEqual(len(proof['reviewed_frame_corrections']), 4)
+            self.assertEqual(len(proof['reviewed_frame_corrections']), 9)
             offset = lambda o: [bindings.fixup_key(f) for f in o.linker_fixups
                                if (f['segment'], f['offset']) == ('MOUSE_TEXT', 0x139)]
             self.assertEqual(offset(control), offset(generated))
@@ -1853,6 +1868,92 @@ class SourceOnlyDosTests(unittest.TestCase):
             wrong['dgroup_rect_frame_contract']['cases'][0]['timed_out'] = True
             with self.assertRaisesRegex(ValueError, 'shifted DGROUP contract'):
                 bindings.require_dgroup_rect_frame_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_mouse_code_offset_frames_are_closed_and_runtime_controls_are_mandatory(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            manifest, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'root:1B73')
+            binding = row['source_binding']
+            self.assertEqual(len(binding['code_offset_reframes']), 5)
+            for change in ('site', 'target', 'displacement', 'frame', 'missing'):
+                wrong = json.loads(json.dumps(binding))
+                spec = wrong['code_offset_reframes'][0]
+                if change == 'site': spec['offset'] += 1
+                elif change == 'target': spec['source_symbol'] = '_f_1B73_051F'
+                elif change == 'displacement': spec['displacement'] += 1
+                elif change == 'frame': spec['frame'] = 'DGROUP'
+                else: wrong['code_offset_reframes'].pop()
+                with self.assertRaisesRegex(ValueError, 'code-offset'):
+                    bindings.review_addresses(wrong, manifest['modules'][row['module']], symbols)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_mouse_code_offset_contract(report, profile, tc['linkers'][profile])
+            for change in ('case', 'text', 'map', 'ordering', 'runtime'):
+                wrong = json.loads(json.dumps(report))
+                c = wrong['mouse_code_offset_contract']
+                if change == 'case': c['cases'].pop()
+                elif change == 'text': c['cases'][0]['run_log_text'] = 'PASS\r\n'
+                elif change == 'map': c['cases'][0]['map_physical_frame']['prefix_span'] = 15
+                elif change == 'ordering': c['source_fixup_controls']['wrong_frame_exits_before_callback_call']['only_callback_call_offset'] = 12
+                else:
+                    next(p for p in c['inputs'] if p['path'].lower().endswith('llibcr.lib'))['sha256'] = '0' * 64
+                with self.assertRaises(ValueError):
+                    bindings.require_mouse_code_offset_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_v26_storage_types_and_shared_balloon_count_fail_closed(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            contrasts = {
+                'source-owned:remaining-ui-state': ('int far fd_50F6_1092;',
+                    'unsigned far fd_50F6_1092;', 'long far fd_50F6_1092;'),
+                'source-owned:remaining-window-state': ('struct Rect far fd_50F6_3842;',
+                    'Handle far fd_50F6_3842;', 'struct Rect far fd_50F6_3842[2];'),
+                'source-owned:remaining-scalar-tail': ('long far fd_50F6_0736;',
+                    'unsigned long far fd_50F6_0736;', 'int far fd_50F6_0736;'),
+                'source-owned:balloon-buffer-tables': ('int far fd_50F6_04E6[6];',
+                    'unsigned far fd_50F6_04E6[6];', 'int far fd_50F6_04E6[5];'),
+            }
+            total = 0
+            for module, (anchor, type_error, extent_error) in contrasts.items():
+                row = next(r for r in report['translation_units'] if r['module'] == module)
+                provider = row['storage_provider']
+                text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                self.assertIn(anchor, text)
+                def compile(source):
+                    result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(text, provider, symbols)
+                proof = bindings.verify_provider(compile(text), provider)
+                total += sum(c['length'] for c in proof['communals'])
+                self.assertEqual((proof['code_bytes'], proof['live_initialized_bytes']), (0, 0))
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(text.replace(anchor, type_error), provider, symbols)
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(text.replace(anchor, extent_error)), provider)
+            self.assertEqual(total, 279)
+            dos.audit_layout(report)
+            self.assertEqual(next(r['status'] for r in report['layout_dependencies']
+                                  if r['id'] == 'map-viewport-grid-layout'), 'UNRESOLVED')
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_v26_storage_contracts(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['translation_units'] = [r for r in wrong['translation_units']
+                                         if r['module'] != 'source-owned:remaining-ui-state']
+            with self.assertRaisesRegex(ValueError, 'count owner'):
+                bindings.require_v26_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            for module, (key, _) in bindings.V26_STORAGE_CONTRACTS.items():
+                wrong = json.loads(json.dumps(report))
+                wrong[key]['cases'].pop()
+                with self.assertRaises(ValueError):
+                    bindings.require_v26_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
     def test_water_pair_adds_exact_array_owners_without_changing_population_or_code(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'

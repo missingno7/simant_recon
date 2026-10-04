@@ -1,0 +1,176 @@
+{
+  "schema": "simant-dos-mouse-code-offset-frame-bindings-v1",
+  "root_reviewed": true,
+  "category": "REVIEWED_SOURCE_LINK_BINDING",
+  "bindings": [
+    {
+      "module": "root:1B73",
+      "source": "src/root/m1B73.asm",
+      "source_sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "extends_packets": [
+        {
+          "path": "work/source-only-dos/source-bindings-v1.json",
+          "sha256": "c7fed5e7e2caac6cad41e63de2eb0ba3cfcbba112fa2877d9799c562b8f52bc4",
+          "size": 11388
+        },
+        {
+          "path": "work/source-only-dos/assembly-frame-bindings-v1.json",
+          "sha256": "3aec6a05ee17e0e3ed972a5ae193c38524651095d9847b030970283734e7d8e5",
+          "size": 2362
+        },
+        {
+          "path": "work/source-only-dos/dgroup-rect-frame-bindings-v1.json",
+          "sha256": "a202f6dceaffa65ee75f2af27e29f90d16d61b5c3d79b5bda63d88c633d3448a",
+          "size": 2876
+        }
+      ],
+      "extends_effective_binding_sha256": "1ba3988689c81c2ec2d495d50f2011842e4b5b77e0a106a5e09fa7d6c53f4337",
+      "edits": [
+        {
+          "before": "lea dx, ds:_f_1B73_03EE",
+          "after": "lea dx, _f_1B73_03EE",
+          "count": 1
+        },
+        {
+          "before": "lea dx, ds:_f_1B73_065A",
+          "after": "lea dx, _f_1B73_065A",
+          "count": 1
+        },
+        {
+          "before": "lea dx, ds:_f_1B73_06E3",
+          "after": "lea dx, _f_1B73_06E3",
+          "count": 1
+        },
+        {
+          "before": "lea dx, ds:_f_1B73_051F",
+          "after": "lea dx, _f_1B73_051F",
+          "count": 1
+        },
+        {
+          "before": "lea ax, ds:_f_1B73_0CB3",
+          "after": "lea ax, _f_1B73_0CB3",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [],
+      "code_offset_reframes": [
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 590,
+          "source_symbol": "_f_1B73_03EE",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1000,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 617,
+          "source_symbol": "_f_1B73_065A",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1620,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 641,
+          "source_symbol": "_f_1B73_06E3",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1757,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 665,
+          "source_symbol": "_f_1B73_051F",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 1305,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 2738,
+          "source_symbol": "_f_1B73_0CB3",
+          "target_kind": "segment",
+          "target": "MOUSE_TEXT",
+          "displacement": 3245,
+          "encoded_addend": "0000",
+          "old_frame_kind": "group",
+          "old_frame": "DGROUP",
+          "frame_kind": "segment",
+          "frame": "MOUSE_TEXT"
+        }
+      ]
+    }
+  ],
+  "providers": [],
+  "runtime_contract_key": "mouse_code_offset_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/mouse-code-offset-frame-contract-v1.json",
+    "sha256": "a4bd2bd7501b51e6e0cb224e6aaaaf5989bd53ddfdfe4e83668ffc057a62a705",
+    "size": 38845
+  },
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/worker-normalized-contract.json",
+      "sha256": "bb3321e4ec4e5b4b96e77359754b44862541b19c8633b17cb51c578a881037a5",
+      "size": 35829
+    },
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/worker-whole-module.json",
+      "sha256": "f500d8930076f9074b2a30da53aefa054fa5a4026267c9d7be1fda96b1695c97",
+      "size": 39703
+    },
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/worker-runtime-fixture.json",
+      "sha256": "b7ef8370417553e27e83dea4c9342752d157d4d1d50d7d49229cddb34c70e682",
+      "size": 40771
+    },
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/root-fresh-review.json",
+      "sha256": "414434c01d978dffa3ef5013dded3d90c9832035f8835cec80c08802c996ee74",
+      "size": 5141
+    },
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/worker-review.md",
+      "sha256": "a939305a8a3f7076f096890174aef2e00b92355a7294132c1a13130eb501730d",
+      "size": 4979
+    },
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/recheck-normalized.py",
+      "sha256": "f28bcb1d30096b2e58873e244e8c460efc5b3cb71d977402a2e19e632afb1dbe",
+      "size": 15306
+    },
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/historical-whole-module-probe.py",
+      "sha256": "bdc5e8af1e37ca909bdf0e91c747a3398c38df6090e8eeb7e12058dcf86f1769",
+      "size": 16849
+    },
+    {
+      "path": "work/source-only-dos/mouse-code-offset-frame-v26/historical-runtime-probe.py",
+      "sha256": "eb004914d0ae09a7c08e40464d6561de5c2904a63510c7426dfd2e4fcc92251c",
+      "size": 12016
+    }
+  ],
+  "scope": "Exactly five same-module code-offset frame fields. Full instruction bytes and ordered unrelated fixups unchanged. No broader layout or game execution closure."
+}

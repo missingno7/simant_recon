@@ -1,0 +1,4463 @@
+{
+  "acceptance_claim": false,
+  "input_scan": {
+    "canonical_registered_source_checks": "PASS",
+    "generated_sources_checked": 182,
+    "object_fixups_scanned": 32500,
+    "object_hash_size_checks": "PASS",
+    "objects": 182,
+    "report_linker_components": [],
+    "rtlink_utility_inputs": [
+      {
+        "matches_for_62_runtime_imports": [],
+        "module_count": 31,
+        "parse_status": "PASS",
+        "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+        "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+        "size": 266625
+      },
+      {
+        "matches_for_62_runtime_imports": null,
+        "parse_error": "OMF record 0x99 is a 32-bit variant; this reader implements the 16-bit records only, and skipping it would drop bytes or fixups out of the comparison",
+        "parse_status": "FAILED",
+        "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+        "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+        "size": 423823
+      }
+    ],
+    "runtime_components": [
+      {
+        "module_count": 343,
+        "name": "llibcr.lib",
+        "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+        "role": "third-party MSC runtime library",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "size": 148711
+      },
+      {
+        "module_count": 80,
+        "name": "libh.lib",
+        "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+        "role": "third-party MSC runtime library",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "size": 21033
+      }
+    ],
+    "tools_omf_py": {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    }
+  },
+  "open_scopes": [
+    "_g_5A9C intended storage owner and storage/frame correction remain unresolved.",
+    "Remaining fixed numeric address operands and register-state/frame invariants remain open; this runtime import pass does not close the numeric audit.",
+    "No historical final-image claim is made about extraction of every direct runtime owner. The report's accepted CRT startup receipt specifically matches the pinned dos\\crt0.asm member.",
+    "The RTLink Plus 6.10 RTLUTILS.LIB pin contains an OMF 32-bit record variant refused by the 16-bit reader; no no-match conclusion is made for that utility library. It is not a report runtime_component."
+  ],
+  "psp_initialization_case": {
+    "frame_audit_runtime_symbol_row": {
+      "examples": [
+        {
+          "displacement": 0,
+          "encoded_addend": "0000",
+          "frame": "DGROUP",
+          "frame_kind": "group",
+          "loc": "offset16",
+          "module": "root:195A",
+          "object_segment": "EMS_TEXT",
+          "offset": 606,
+          "source": "src\\root\\m195A.asm",
+          "target": "__psp",
+          "target_kind": "external"
+        }
+      ],
+      "name": "__psp",
+      "owner": {
+        "group": "DGROUP",
+        "initialized_bytes_at_public": "0000000000000014",
+        "library": "llibcr.lib",
+        "member": "dos\\crt0dat.asm",
+        "member_module_index": 1,
+        "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+        "member_size": 1973,
+        "public_offset": 34,
+        "segment": "_DATA",
+        "segment_class": "DATA",
+        "segment_length": 86
+      },
+      "reference_module_count": 1,
+      "reference_patterns": [
+        {
+          "count": 1,
+          "frame": "DGROUP",
+          "frame_kind": "group",
+          "loc": "offset16"
+        }
+      ],
+      "references": 1
+    },
+    "interpretation_scope": "The pinned DOS CRT startup member loads the DGROUP selector into DI, loads SS from DI, then follows the normal path to write entry DS through SS at the external __psp offset. The __psp word is in CRT _DATA/DGROUP. This grounds selected-library layout and initialization; it is not a claim about an unexamined historical final image.",
+    "root_import": {
+      "fixup": {
+        "displacement": 0,
+        "encoded_addend": "0000",
+        "frame": "DGROUP",
+        "frame_kind": "group",
+        "loc": "offset16",
+        "target": "__psp",
+        "target_kind": "external"
+      },
+      "instruction": {
+        "line": 461,
+        "text": "\tmov es, __psp"
+      },
+      "module": "root:195A",
+      "object_offset": 606,
+      "object_segment": "EMS_TEXT",
+      "source": "src\\root\\m195A.asm",
+      "source_sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81"
+    },
+    "runtime_owner": {
+      "group": "DGROUP",
+      "initial_word_bytes": "0000",
+      "library": "llibcr.lib",
+      "member": "dos\\crt0dat.asm",
+      "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+      "member_size": 1973,
+      "offset": 34,
+      "segment": "_DATA",
+      "segment_class": "DATA",
+      "segment_length": 86,
+      "symbol": "__psp"
+    },
+    "startup_member": {
+      "accepted_report_startup_receipt": {
+        "conclusion": "SS=DGROUP before the accepted far call to main; the main path preserves that SS.",
+        "crt_member": {
+          "accepted_manifest_match": true,
+          "exact_runtime_verifier_result": true,
+          "member": "dos\\crt0.asm",
+          "module_index": 0,
+          "segment": "_TEXT",
+          "sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+          "size": 255
+        },
+        "dg_group_selector": "0x55b3",
+        "instruction_order": [
+          "mov di, 0x55b3",
+          "mov ss, di"
+        ]
+      },
+      "code_sites": {
+        "capture_entry_DS_in___psp": {
+          "bytes": "368c1e0000",
+          "decoded": "mov word ptr ss:[disp16], ds",
+          "offset": 123
+        },
+        "copy_SS_to_DS": {
+          "bytes": "161f",
+          "decoded": "push ss; pop ds",
+          "offset": 143
+        },
+        "copy_SS_to_ES": {
+          "bytes": "1607",
+          "decoded": "push ss; pop es",
+          "offset": 128
+        },
+        "load_DGROUP_selector_into_DI": {
+          "bytes": "bf0000",
+          "decoded": "mov di, imm16",
+          "offset": 13
+        },
+        "load_SS_from_DI": {
+          "bytes": "8ed7",
+          "decoded": "mov ss, di",
+          "offset": 32
+        }
+      },
+      "fixups": [
+        {
+          "displacement": 0,
+          "encoded_addend": "0000",
+          "frame": "DGROUP",
+          "frame_kind": "group",
+          "loc": "base16",
+          "offset": 14,
+          "segment": "_TEXT",
+          "target": "DGROUP",
+          "target_kind": "group"
+        },
+        {
+          "displacement": 0,
+          "encoded_addend": "0000",
+          "frame": "DGROUP",
+          "frame_kind": "group",
+          "loc": "offset16",
+          "offset": 126,
+          "segment": "_TEXT",
+          "target": "__psp",
+          "target_kind": "external"
+        }
+      ],
+      "group_membership": [
+        {
+          "index": 1,
+          "name": "DGROUP",
+          "segment_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "segments": [
+            "_DATA",
+            "XIQC",
+            "STACK",
+            "DBDATA"
+          ]
+        }
+      ],
+      "library": "llibcr.lib",
+      "member": "dos\\crt0.asm",
+      "member_index": 0,
+      "member_sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+      "member_size": 1230,
+      "text_segment_length": 255
+    }
+  },
+  "reference_frame_check": {
+    "mismatch_count": 0,
+    "mismatches": [],
+    "patterns_by_owner_class_group_and_site_frame": [
+      {
+        "frame": "_atexit",
+        "frame_kind": "external",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_close",
+        "frame_kind": "external",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_open",
+        "frame_kind": "external",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_puts",
+        "frame_kind": "external",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_read",
+        "frame_kind": "external",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__aFNalmul",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__aFchkstk",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 713
+      },
+      {
+        "frame": "__aFldiv",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 59
+      },
+      {
+        "frame": "__aFlmul",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 23
+      },
+      {
+        "frame": "__aFlshl",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 12
+      },
+      {
+        "frame": "__aFlshr",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 3
+      },
+      {
+        "frame": "__aFuldiv",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 11
+      },
+      {
+        "frame": "__aFulmul",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 5
+      },
+      {
+        "frame": "__disable",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__dos_allocmem",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "__dos_findfirst",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__dos_findnext",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__dos_freemem",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__enable",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__fmemchr",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__fmemcmp",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 8
+      },
+      {
+        "frame": "__fmemcpy",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 57
+      },
+      {
+        "frame": "__fmemmove",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 9
+      },
+      {
+        "frame": "__fmemset",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 16
+      },
+      {
+        "frame": "__fstrcat",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 7
+      },
+      {
+        "frame": "__fstrchr",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 4
+      },
+      {
+        "frame": "__fstrcmp",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 3
+      },
+      {
+        "frame": "__fstrcpy",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 22
+      },
+      {
+        "frame": "__fstrlen",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 36
+      },
+      {
+        "frame": "__fstrncmp",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "__fstrncpy",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 9
+      },
+      {
+        "frame": "__fstrrchr",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 4
+      },
+      {
+        "frame": "__harderr",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_access",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_asctime",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_atexit",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 4
+      },
+      {
+        "frame": "_chdir",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 3
+      },
+      {
+        "frame": "_close",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 10
+      },
+      {
+        "frame": "_exit",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 7
+      },
+      {
+        "frame": "_fclose",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_fopen",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_fread",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_getcwd",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_getenv",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_isdigit",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_isspace",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_localtime",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_lseek",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 5
+      },
+      {
+        "frame": "_open",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 10
+      },
+      {
+        "frame": "_printf",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 9
+      },
+      {
+        "frame": "_puts",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_rand",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_read",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 13
+      },
+      {
+        "frame": "_remove",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_signal",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 2
+      },
+      {
+        "frame": "_sprintf",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 39
+      },
+      {
+        "frame": "_srand",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_stricmp",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_strlen",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_time",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 1
+      },
+      {
+        "frame": "_vsprintf",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 12
+      },
+      {
+        "frame": "_write",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "CODE",
+        "owner_group": null,
+        "references": 3
+      },
+      {
+        "frame": "DGROUP",
+        "frame_kind": "group",
+        "loc": "offset16",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 1
+      },
+      {
+        "frame": "__ctype",
+        "frame_kind": "target",
+        "loc": "offset16",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 7
+      },
+      {
+        "frame": "_errno",
+        "frame_kind": "target",
+        "loc": "offset16",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 9
+      },
+      {
+        "frame": "_sys_errlist",
+        "frame_kind": "target",
+        "loc": "offset16",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 12
+      },
+      {
+        "frame": "_sys_nerr",
+        "frame_kind": "target",
+        "loc": "offset16",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 1
+      },
+      {
+        "frame": "__ctype",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 3
+      },
+      {
+        "frame": "_errno",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 2
+      },
+      {
+        "frame": "_sys_errlist",
+        "frame_kind": "target",
+        "loc": "pointer32",
+        "owner_class": "DATA",
+        "owner_group": "DGROUP",
+        "references": 2
+      }
+    ],
+    "policy": {
+      "CODE": "pointer32 references framed by target/external symbol segment",
+      "DGROUP_DATA_offset16_base16": "symbol segment, DGROUP, or owner segment frame accepted because the exported near data symbol is in that group",
+      "DGROUP_DATA_pointer32": "pointer32 references framed by target/external symbol segment",
+      "note": "OMF frame metadata does not prove the CPU segment register used by an instruction."
+    }
+  },
+  "report": {
+    "path": "build/source-only-dos/build-report.json",
+    "sha256": "a38e79bd9fe910190170720fabb8096c89bbcb52149f6ca51df75a591f06fc59",
+    "status": "INCOMPLETE",
+    "translation_units": 182,
+    "unresolved_data": 6,
+    "unresolved_functions": 0,
+    "unresolved_symbols": 43
+  },
+  "root_reviewed": false,
+  "runtime_export_resolution": {
+    "ambiguous_direct_owners": 0,
+    "direct_unique_pubdef_owners": 62,
+    "external_references": 1195,
+    "owner_class_counts": {
+      "CODE": 57,
+      "DATA": 5
+    },
+    "owners": [
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFNalmul",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S14:384C",
+            "object_segment": "U023_TEXT",
+            "offset": 1147,
+            "source": "src\\S14\\m384C.c",
+            "target": "__aFNalmul",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFNalmul",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec538b5e06ff",
+          "library": "libh.lib",
+          "member": "almul.asm",
+          "member_module_index": 14,
+          "member_sha256": "bdf37d3e13ce899522f9dbed9578cd2bb6f9d15e37ce05e2dc0acb277060f59a",
+          "member_size": 207,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 32
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__aFNalmul",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFchkstk",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S04:35F5",
+            "object_segment": "U011_TEXT",
+            "offset": 7,
+            "source": "src\\S04\\m35F5.c",
+            "target": "__aFchkstk",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFchkstk",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S04:35F5",
+            "object_segment": "U011_TEXT",
+            "offset": 609,
+            "source": "src\\S04\\m35F5.c",
+            "target": "__aFchkstk",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFchkstk",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S04:35F5",
+            "object_segment": "U011_TEXT",
+            "offset": 1066,
+            "source": "src\\S04\\m35F5.c",
+            "target": "__aFchkstk",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFchkstk",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "595a8bdc2bd8720b",
+          "library": "llibcr.lib",
+          "member": "chkstk.asm",
+          "member_module_index": 5,
+          "member_sha256": "f49aabfb1b5d4442a9e8261817381a5d766df0f742e4a5d1b27a323915677a88",
+          "member_size": 282,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 36
+        },
+        "reference_module_count": 50,
+        "reference_patterns": [
+          {
+            "count": 713,
+            "frame": "__aFchkstk",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 713
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFldiv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S08:35F5",
+            "object_segment": "U016_TEXT",
+            "offset": 4016,
+            "source": "src\\S08\\m35F5.c",
+            "target": "__aFldiv",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFldiv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S08:35F5",
+            "object_segment": "U016_TEXT",
+            "offset": 3974,
+            "source": "src\\S08\\m35F5.c",
+            "target": "__aFldiv",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFldiv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S12:384C",
+            "object_segment": "U021_TEXT",
+            "offset": 2915,
+            "source": "src\\S12\\m384C.c",
+            "target": "__aFldiv",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFldiv",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec57565333ff",
+          "library": "libh.lib",
+          "member": "ldiv.asm",
+          "member_module_index": 8,
+          "member_sha256": "f79431ca0a0a0d6d62049af8c1dac37fece8b6e67fa593326e6e3016fa7fd17e",
+          "member_size": 286,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 154
+        },
+        "reference_module_count": 14,
+        "reference_patterns": [
+          {
+            "count": 59,
+            "frame": "__aFldiv",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 59
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlmul",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S08:35F5",
+            "object_segment": "U016_TEXT",
+            "offset": 4009,
+            "source": "src\\S08\\m35F5.c",
+            "target": "__aFlmul",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlmul",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S08:35F5",
+            "object_segment": "U016_TEXT",
+            "offset": 3967,
+            "source": "src\\S08\\m35F5.c",
+            "target": "__aFlmul",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlmul",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S14:384C",
+            "object_segment": "U023_TEXT",
+            "offset": 327,
+            "source": "src\\S14\\m384C.c",
+            "target": "__aFlmul",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFlmul",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b46088b4e",
+          "library": "libh.lib",
+          "member": "lmul.asm",
+          "member_module_index": 9,
+          "member_sha256": "d8822a76aac196541594109c77e8a91f4252d211d3e15096f9731dbd745a89dc",
+          "member_size": 203,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 50
+        },
+        "reference_module_count": 9,
+        "reference_patterns": [
+          {
+            "count": 23,
+            "frame": "__aFlmul",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 23
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlshl",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:075B",
+            "object_segment": "U054_TEXT",
+            "offset": 675,
+            "source": "src\\root\\m075B.c",
+            "target": "__aFlshl",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlshl",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0798",
+            "object_segment": "U056_TEXT",
+            "offset": 83,
+            "source": "src\\root\\m0798.c",
+            "target": "__aFlshl",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlshl",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:19DC",
+            "object_segment": "U080_TEXT",
+            "offset": 636,
+            "source": "src\\root\\m19DC.c",
+            "target": "__aFlshl",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFlshl",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "32ede306d1e0d1d2",
+          "library": "libh.lib",
+          "member": "lshl.asm",
+          "member_module_index": 11,
+          "member_sha256": "020216b17826a28d39d17a077381364f4578d35b15bb25b70df8bfcbc6ec4453",
+          "member_size": 135,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 11
+        },
+        "reference_module_count": 6,
+        "reference_patterns": [
+          {
+            "count": 12,
+            "frame": "__aFlshl",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 12
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlshr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:19DC",
+            "object_segment": "U080_TEXT",
+            "offset": 86,
+            "source": "src\\root\\m19DC.c",
+            "target": "__aFlshr",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlshr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:19DC",
+            "object_segment": "U080_TEXT",
+            "offset": 841,
+            "source": "src\\root\\m19DC.c",
+            "target": "__aFlshr",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFlshr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:284A",
+            "object_segment": "U117_TEXT",
+            "offset": 1196,
+            "source": "src\\root\\m284A.c",
+            "target": "__aFlshr",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFlshr",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "32ede306d1fad1d8",
+          "library": "libh.lib",
+          "member": "lshr.asm",
+          "member_module_index": 12,
+          "member_sha256": "97772bd66f6056183ca725fe0a6215c06edce7e181c63b0b102f8cdc1d5dbe76",
+          "member_size": 135,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 11
+        },
+        "reference_module_count": 2,
+        "reference_patterns": [
+          {
+            "count": 3,
+            "frame": "__aFlshr",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 3
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFuldiv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0250",
+            "object_segment": "U053_TEXT",
+            "offset": 3507,
+            "source": "src\\root\\m0250.c",
+            "target": "__aFuldiv",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFuldiv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0250",
+            "object_segment": "U053_TEXT",
+            "offset": 3418,
+            "source": "src\\root\\m0250.c",
+            "target": "__aFuldiv",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFuldiv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0798",
+            "object_segment": "U056_TEXT",
+            "offset": 2942,
+            "source": "src\\root\\m0798.c",
+            "target": "__aFuldiv",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFuldiv",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec53568b460c",
+          "library": "libh.lib",
+          "member": "uldiv.asm",
+          "member_module_index": 21,
+          "member_sha256": "f3f49613336319e4ae671f45ade59f550dd058d010c53bdea7fafdbb05f1d50b",
+          "member_size": 230,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 95
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 11,
+            "frame": "__aFuldiv",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 11
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFulmul",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0798",
+            "object_segment": "U056_TEXT",
+            "offset": 2929,
+            "source": "src\\root\\m0798.c",
+            "target": "__aFulmul",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFulmul",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0798",
+            "object_segment": "U056_TEXT",
+            "offset": 3698,
+            "source": "src\\root\\m0798.c",
+            "target": "__aFulmul",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__aFulmul",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1383",
+            "object_segment": "U066_TEXT",
+            "offset": 834,
+            "source": "src\\root\\m1383.c",
+            "target": "__aFulmul",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__aFulmul",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b46088b4e",
+          "library": "libh.lib",
+          "member": "lmul.asm",
+          "member_module_index": 9,
+          "member_sha256": "d8822a76aac196541594109c77e8a91f4252d211d3e15096f9731dbd745a89dc",
+          "member_size": 203,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 50
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 5,
+            "frame": "__aFulmul",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 5
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "0100",
+            "frame": "__ctype",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 2591,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__ctype",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__ctype",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "$$SYMBOLS",
+            "offset": 5377,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__ctype",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "0100",
+            "frame": "__ctype",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S10:35F5",
+            "object_segment": "U019_TEXT",
+            "offset": 1995,
+            "source": "src\\S10\\m35F5.c",
+            "target": "__ctype",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__ctype",
+        "owner": {
+          "group": "DGROUP",
+          "initialized_bytes_at_public": "0020202020202020",
+          "library": "llibcr.lib",
+          "member": "ctype.asm",
+          "member_module_index": 78,
+          "member_sha256": "9b7dd91fa60b803dfa5a4f7b3b03e45022c44e42291fc9c813ac55481839a1a2",
+          "member_size": 281,
+          "public_offset": 0,
+          "segment": "_DATA",
+          "segment_class": "DATA",
+          "segment_length": 257
+        },
+        "reference_module_count": 4,
+        "reference_patterns": [
+          {
+            "count": 7,
+            "frame": "__ctype",
+            "frame_kind": "target",
+            "loc": "offset16"
+          },
+          {
+            "count": 3,
+            "frame": "__ctype",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 10
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__disable",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 3710,
+            "source": "src\\root\\m171C.c",
+            "target": "__disable",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__disable",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "facb",
+          "library": "llibcr.lib",
+          "member": "dos\\disable.asm",
+          "member_module_index": 328,
+          "member_sha256": "29940025d1f4a666eee6e7439b4979a52cf05d543e83a1fc6ead04355e9da934",
+          "member_size": 135,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 2
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__disable",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__dos_allocmem",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 2034,
+            "source": "src\\root\\m171C.c",
+            "target": "__dos_allocmem",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__dos_allocmem",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 2008,
+            "source": "src\\root\\m171C.c",
+            "target": "__dos_allocmem",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__dos_allocmem",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b5e06b448",
+          "library": "llibcr.lib",
+          "member": "dos\\allocmem.asm",
+          "member_module_index": 307,
+          "member_sha256": "0925a8da386770e20d50d129b53c1108fc2ab4b0d5e75849642d060e3525f91a",
+          "member_size": 191,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 25
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "__dos_allocmem",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 2
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__dos_findfirst",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1937,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__dos_findfirst",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__dos_findfirst",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec1eb04ec556",
+          "library": "llibcr.lib",
+          "member": "dos\\d_find.asm",
+          "member_module_index": 319,
+          "member_sha256": "4e5fbea275bc90541dcec9ba3f4856e34e86013aacac21c50fd62bdc10b6f32f",
+          "member_size": 243,
+          "public_offset": 11,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 62
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__dos_findfirst",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__dos_findnext",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1955,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__dos_findnext",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__dos_findnext",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec1eb04fc556",
+          "library": "llibcr.lib",
+          "member": "dos\\d_find.asm",
+          "member_module_index": 319,
+          "member_sha256": "4e5fbea275bc90541dcec9ba3f4856e34e86013aacac21c50fd62bdc10b6f32f",
+          "member_size": 243,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 62
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__dos_findnext",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__dos_freemem",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 1659,
+            "source": "src\\root\\m171C.c",
+            "target": "__dos_freemem",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__dos_freemem",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8e4606b449",
+          "library": "llibcr.lib",
+          "member": "dos\\freemem.asm",
+          "member_module_index": 331,
+          "member_sha256": "2aca686ab79a5d51629b10c3b886957e2cc4a7634ffc56c2932569e3c48d9ece",
+          "member_size": 176,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 13
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__dos_freemem",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__enable",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 3738,
+            "source": "src\\root\\m171C.c",
+            "target": "__enable",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__enable",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "fbcb",
+          "library": "llibcr.lib",
+          "member": "dos\\enable.asm",
+          "member_module_index": 330,
+          "member_sha256": "277f94bd627277b38f44a26f72e488d30290dcec8b5e2889978096f1f8f4c670",
+          "member_size": 132,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 2
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__enable",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemchr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S23:39C7",
+            "object_segment": "U034_TEXT",
+            "offset": 2708,
+            "source": "src\\S23\\m39C7.c",
+            "target": "__fmemchr",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fmemchr",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec578b4e0ce3",
+          "library": "libh.lib",
+          "member": "hmemchr.asm",
+          "member_module_index": 53,
+          "member_sha256": "f3f87454bd5fed44949448d9bfa25a97e3720bdd32e3367c5b9a3fa7d6518f48",
+          "member_size": 218,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 66
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__fmemchr",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemcmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 2429,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fmemcmp",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemcmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S10:35F5",
+            "object_segment": "U019_TEXT",
+            "offset": 1855,
+            "source": "src\\S10\\m35F5.c",
+            "target": "__fmemcmp",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemcmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S12:384C",
+            "object_segment": "U021_TEXT",
+            "offset": 3740,
+            "source": "src\\S12\\m384C.c",
+            "target": "__fmemcmp",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fmemcmp",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec33c08b4e0e",
+          "library": "libh.lib",
+          "member": "hmemcmp.asm",
+          "member_module_index": 55,
+          "member_sha256": "11cb5cd9503c270442d5b410eb584ec8f17e6234d355c8d44d094294551307c5",
+          "member_size": 248,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 91
+        },
+        "reference_module_count": 6,
+        "reference_patterns": [
+          {
+            "count": 8,
+            "frame": "__fmemcmp",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 8
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemcpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S12:384C",
+            "object_segment": "U021_TEXT",
+            "offset": 1198,
+            "source": "src\\S12\\m384C.c",
+            "target": "__fmemcpy",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemcpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S12:384C",
+            "object_segment": "U021_TEXT",
+            "offset": 2191,
+            "source": "src\\S12\\m384C.c",
+            "target": "__fmemcpy",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemcpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S12:384C",
+            "object_segment": "U021_TEXT",
+            "offset": 3792,
+            "source": "src\\S12\\m384C.c",
+            "target": "__fmemcpy",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fmemcpy",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b4e0e1e57",
+          "library": "libh.lib",
+          "member": "hmemcpy.asm",
+          "member_module_index": 56,
+          "member_sha256": "e619ad0b26ae0d866473a0364add2bc7582d392bf8ff1012d7f2315048ca848a",
+          "member_size": 251,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 94
+        },
+        "reference_module_count": 15,
+        "reference_patterns": [
+          {
+            "count": 57,
+            "frame": "__fmemcpy",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 57
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemmove",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:36EE",
+            "object_segment": "U018_TEXT",
+            "offset": 1003,
+            "source": "src\\S09\\m36EE.c",
+            "target": "__fmemmove",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemmove",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:36EE",
+            "object_segment": "U018_TEXT",
+            "offset": 807,
+            "source": "src\\S09\\m36EE.c",
+            "target": "__fmemmove",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemmove",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:36EE",
+            "object_segment": "U018_TEXT",
+            "offset": 1195,
+            "source": "src\\S09\\m36EE.c",
+            "target": "__fmemmove",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fmemmove",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b4e0e1e57",
+          "library": "libh.lib",
+          "member": "hmemcpy.asm",
+          "member_module_index": 78,
+          "member_sha256": "f93e277ff0040f6597f5cf0f3d2cf187dfe206d4b8f5404aa6f6e90f3fd498cb",
+          "member_size": 405,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 202
+        },
+        "reference_module_count": 5,
+        "reference_patterns": [
+          {
+            "count": 9,
+            "frame": "__fmemmove",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 9
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemset",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1207,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fmemset",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemset",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S10:35F5",
+            "object_segment": "U019_TEXT",
+            "offset": 1539,
+            "source": "src\\S10\\m35F5.c",
+            "target": "__fmemset",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fmemset",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S13:384C",
+            "object_segment": "U022_TEXT",
+            "offset": 2953,
+            "source": "src\\S13\\m384C.c",
+            "target": "__fmemset",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fmemset",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b4e0ce338",
+          "library": "libh.lib",
+          "member": "hmemset.asm",
+          "member_module_index": 72,
+          "member_sha256": "f86c34c5e1a23fb70eb02d77e0e3ee6c0f387db10edc408e2efdb6c07f0ca405",
+          "member_size": 224,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 72
+        },
+        "reference_module_count": 11,
+        "reference_patterns": [
+          {
+            "count": 16,
+            "frame": "__fmemset",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 16
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcat",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1091,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrcat",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcat",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1696,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrcat",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcat",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S14:384C",
+            "object_segment": "U023_TEXT",
+            "offset": 1901,
+            "source": "src\\S14\\m384C.c",
+            "target": "__fstrcat",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrcat",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8bd78bde1e",
+          "library": "libh.lib",
+          "member": "strcat.asm",
+          "member_module_index": 71,
+          "member_sha256": "4e246b46f78f0f14cc5b992e01d990c51a9c0ad7487007df56fe9493620d14ce",
+          "member_size": 198,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 70
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 7,
+            "frame": "__fstrcat",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 7
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrchr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:36EE",
+            "object_segment": "U018_TEXT",
+            "offset": 708,
+            "source": "src\\S09\\m36EE.c",
+            "target": "__fstrchr",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrchr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1C62",
+            "object_segment": "U088_TEXT",
+            "offset": 829,
+            "source": "src\\root\\m1C62.c",
+            "target": "__fstrchr",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrchr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1F80",
+            "object_segment": "U094_TEXT",
+            "offset": 36,
+            "source": "src\\root\\m1F80.c",
+            "target": "__fstrchr",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrchr",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec57c47e068b",
+          "library": "libh.lib",
+          "member": "strchr.asm",
+          "member_module_index": 57,
+          "member_sha256": "892aa42b14407cb1d0527f388393d54bf8465f6b4697440974c8bca85fc19c46",
+          "member_size": 173,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 45
+        },
+        "reference_module_count": 4,
+        "reference_patterns": [
+          {
+            "count": 4,
+            "frame": "__fstrchr",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 4
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 2043,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrcmp",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1998,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrcmp",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S23:39C7",
+            "object_segment": "U034_TEXT",
+            "offset": 718,
+            "source": "src\\S23\\m39C7.c",
+            "target": "__fstrcmp",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrcmp",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8bd78bde1e",
+          "library": "libh.lib",
+          "member": "strcmp.asm",
+          "member_module_index": 69,
+          "member_sha256": "896344017049357d1e1c05fe4a15f7dfdb3d1efead4bb7906015d7ddbfd4128f",
+          "member_size": 169,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 41
+        },
+        "reference_module_count": 2,
+        "reference_patterns": [
+          {
+            "count": 3,
+            "frame": "__fstrcmp",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 3
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 109,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrcpy",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 448,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrcpy",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrcpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 594,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrcpy",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrcpy",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8bd78bde1e",
+          "library": "libh.lib",
+          "member": "strcpy.asm",
+          "member_module_index": 70,
+          "member_sha256": "4a020d63a15cf79046c8ec6c428103b83a43a6401e81d796b3672ce5e0d0deb6",
+          "member_size": 182,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 54
+        },
+        "reference_module_count": 8,
+        "reference_patterns": [
+          {
+            "count": 22,
+            "frame": "__fstrcpy",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 22
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrlen",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1064,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrlen",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrlen",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1669,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrlen",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrlen",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 2101,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrlen",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrlen",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8bd7c47e06",
+          "library": "libh.lib",
+          "member": "strlen.asm",
+          "member_module_index": 68,
+          "member_sha256": "ef3d061bbcb2e1ad03da02aeb75dc9ffc46a3db9877a22569879b68c76a13ff3",
+          "member_size": 151,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 23
+        },
+        "reference_module_count": 13,
+        "reference_patterns": [
+          {
+            "count": 36,
+            "frame": "__fstrlen",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 36
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrncmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 8089,
+            "source": "src\\root\\m171C.c",
+            "target": "__fstrncmp",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrncmp",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec57561e8b4e",
+          "library": "libh.lib",
+          "member": "strncmp.asm",
+          "member_module_index": 60,
+          "member_sha256": "44e610ba8d5db35a7bbdfcef88031dc6cd0e761c18238439034e3be0f538376c",
+          "member_size": 190,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 59
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__fstrncmp",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrncpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S23:39C7",
+            "object_segment": "U034_TEXT",
+            "offset": 526,
+            "source": "src\\S23\\m39C7.c",
+            "target": "__fstrncpy",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrncpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S23:39C7",
+            "object_segment": "U034_TEXT",
+            "offset": 1095,
+            "source": "src\\S23\\m39C7.c",
+            "target": "__fstrncpy",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrncpy",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 1370,
+            "source": "src\\root\\m171C.c",
+            "target": "__fstrncpy",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrncpy",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec57561ec47e",
+          "library": "libh.lib",
+          "member": "strncpy.asm",
+          "member_module_index": 61,
+          "member_sha256": "538ede3625eec66589039f3675075781b625bd2b80a05b3a44c7789a1f22e87e",
+          "member_size": 173,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 42
+        },
+        "reference_module_count": 5,
+        "reference_patterns": [
+          {
+            "count": 9,
+            "frame": "__fstrncpy",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 9
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrrchr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1873,
+            "source": "src\\S09\\m35F5.c",
+            "target": "__fstrrchr",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrrchr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1A28",
+            "object_segment": "U081_TEXT",
+            "offset": 518,
+            "source": "src\\root\\m1A28.c",
+            "target": "__fstrrchr",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__fstrrchr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1A28",
+            "object_segment": "U081_TEXT",
+            "offset": 492,
+            "source": "src\\root\\m1A28.c",
+            "target": "__fstrrchr",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__fstrrchr",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec57c47e0633",
+          "library": "libh.lib",
+          "member": "strrchr.asm",
+          "member_module_index": 63,
+          "member_sha256": "f91c6e60c686835f91c407a0c16244fc8454905076b306981271d74f12201fd5",
+          "member_size": 177,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 46
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 4,
+            "frame": "__fstrrchr",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 4
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "__harderr",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 685,
+            "source": "src\\S20\\m39F1.c",
+            "target": "__harderr",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__harderr",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558becc456068c06",
+          "library": "llibcr.lib",
+          "member": "dos\\harderr.asm",
+          "member_module_index": 335,
+          "member_sha256": "9ce5bb861411a27d8b3db967d3a52a20967eb823be47c58fe67a4b12c4d43b9d",
+          "member_size": 355,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 87
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "__harderr",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "0000",
+            "frame": "DGROUP",
+            "frame_kind": "group",
+            "loc": "offset16",
+            "module": "root:195A",
+            "object_segment": "EMS_TEXT",
+            "offset": 606,
+            "source": "src\\root\\m195A.asm",
+            "target": "__psp",
+            "target_kind": "external"
+          }
+        ],
+        "name": "__psp",
+        "owner": {
+          "group": "DGROUP",
+          "initialized_bytes_at_public": "0000000000000014",
+          "library": "llibcr.lib",
+          "member": "dos\\crt0dat.asm",
+          "member_module_index": 1,
+          "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+          "member_size": 1973,
+          "public_offset": 34,
+          "segment": "_DATA",
+          "segment_class": "DATA",
+          "segment_length": 86
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "DGROUP",
+            "frame_kind": "group",
+            "loc": "offset16"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_access",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1A53",
+            "object_segment": "U082_TEXT",
+            "offset": 39,
+            "source": "src\\root\\m1A53.c",
+            "target": "_access",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_access",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec1ec55606b8",
+          "library": "llibcr.lib",
+          "member": "dos\\access.asm",
+          "member_module_index": 295,
+          "member_sha256": "d0023cbf5f7e7ce66ae546d56904273a496336f0e4ed31d417512353a1753d1f",
+          "member_size": 186,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 33
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_access",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_asctime",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 848,
+            "source": "src\\root\\m171C.c",
+            "target": "_asctime",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_asctime",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec065756",
+          "library": "llibcr.lib",
+          "member": "asctime.c",
+          "member_module_index": 190,
+          "member_sha256": "4e0ba9b834e12e3191e87f0fcbf676e060ebab7a6af42f342093b34ff74090db",
+          "member_size": 547,
+          "public_offset": 46,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 262
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_asctime",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_atexit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0250",
+            "object_segment": "U053_TEXT",
+            "offset": 458,
+            "source": "src\\root\\m0250.c",
+            "target": "_atexit",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_atexit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 233,
+            "source": "src\\root\\m171C.c",
+            "target": "_atexit",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_atexit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 2496,
+            "source": "src\\root\\m171C.c",
+            "target": "_atexit",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_atexit",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558becb8ffffeb05",
+          "library": "llibcr.lib",
+          "member": "onexit.asm",
+          "member_module_index": 250,
+          "member_sha256": "63d299d252d0221df6b86c3272775b18ddc24bb4d10939d50cc49f8482b5b05c",
+          "member_size": 276,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 50
+        },
+        "reference_module_count": 4,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_atexit",
+            "frame_kind": "external",
+            "loc": "pointer32"
+          },
+          {
+            "count": 4,
+            "frame": "_atexit",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 5
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_chdir",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 999,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_chdir",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_chdir",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 3092,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_chdir",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_chdir",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 3322,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_chdir",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_chdir",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558becb43b1ec556",
+          "library": "llibcr.lib",
+          "member": "dos\\dir.asm",
+          "member_module_index": 297,
+          "member_sha256": "944d6bd1d61d8723d9dc106224e64d547febbf09c7ddb3d4e89d0d2676274419",
+          "member_size": 229,
+          "public_offset": 7,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 63
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 3,
+            "frame": "_chdir",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 3
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_close",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 335,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_close",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_close",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 537,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_close",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_close",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 953,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_close",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_close",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b5e063b1e",
+          "library": "llibcr.lib",
+          "member": "dos\\close.asm",
+          "member_module_index": 40,
+          "member_sha256": "ae0ee3e459d3b0189e6e266e4b4faca3f3a1df3c8d0d7b0c5b3ab473542f547a",
+          "member_size": 211,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 32
+        },
+        "reference_module_count": 7,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_close",
+            "frame_kind": "external",
+            "loc": "pointer32"
+          },
+          {
+            "count": 10,
+            "frame": "_close",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 11
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "0000",
+            "frame": "_errno",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 153,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_errno",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "0000",
+            "frame": "_errno",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 655,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_errno",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "0000",
+            "frame": "_errno",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 823,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_errno",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_errno",
+        "owner": {
+          "group": "DGROUP",
+          "initialized_bytes_at_public": "0000000000000000",
+          "library": "llibcr.lib",
+          "member": "dos\\crt0dat.asm",
+          "member_module_index": 1,
+          "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+          "member_size": 1973,
+          "public_offset": 28,
+          "segment": "_DATA",
+          "segment_class": "DATA",
+          "segment_length": 86
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 9,
+            "frame": "_errno",
+            "frame_kind": "target",
+            "loc": "offset16"
+          },
+          {
+            "count": 2,
+            "frame": "_errno",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 11
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_exit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S15:384C",
+            "object_segment": "U024_TEXT",
+            "offset": 485,
+            "source": "src\\S15\\m384C.c",
+            "target": "_exit",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_exit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 423,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_exit",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_exit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 206,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_exit",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_exit",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec33c9eb1a55",
+          "library": "llibcr.lib",
+          "member": "dos\\crt0dat.asm",
+          "member_module_index": 1,
+          "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18",
+          "member_size": 1973,
+          "public_offset": 197,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 392
+        },
+        "reference_module_count": 5,
+        "reference_patterns": [
+          {
+            "count": 7,
+            "frame": "_exit",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 7
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_fclose",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:25E7",
+            "object_segment": "U110_TEXT",
+            "offset": 512,
+            "source": "src\\root\\m25E7.c",
+            "target": "_fclose",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_fclose",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec105756",
+          "library": "llibcr.lib",
+          "member": "fclose.c",
+          "member_module_index": 17,
+          "member_sha256": "7bf43615707b019b3ad40071b242cc9c8eccef226eba03bee75fa302c155ee8d",
+          "member_size": 541,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 198
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_fclose",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_fopen",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:25E7",
+            "object_segment": "U110_TEXT",
+            "offset": 182,
+            "source": "src\\root\\m25E7.c",
+            "target": "_fopen",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_fopen",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec2bc050ff76",
+          "library": "llibcr.lib",
+          "member": "fopen.c",
+          "member_module_index": 18,
+          "member_sha256": "bd7d05dff1cd2fc6e941673675634167d0fa1731e03c243d4f0e467055afc91d",
+          "member_size": 354,
+          "public_offset": 52,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 80
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_fopen",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_fread",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:25E7",
+            "object_segment": "U110_TEXT",
+            "offset": 33,
+            "source": "src\\root\\m25E7.c",
+            "target": "_fread",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_fread",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:25E7",
+            "object_segment": "U110_TEXT",
+            "offset": 442,
+            "source": "src\\root\\m25E7.c",
+            "target": "_fread",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_fread",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec045657",
+          "library": "llibcr.lib",
+          "member": "fread.asm",
+          "member_module_index": 20,
+          "member_sha256": "988d9046a58dadb3888ae020015d0d6aa909e553e9f6f1a4454b7a65bee3a9eb",
+          "member_size": 594,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 369
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "_fread",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 2
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_getcwd",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 449,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_getcwd",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_getcwd",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558becff760aff76",
+          "library": "llibcr.lib",
+          "member": "dos\\getcwd.c",
+          "member_module_index": 300,
+          "member_sha256": "c165bac32f08453c1e860290e4b9ee6dab7350334ed4cdc3171409427ea8426d",
+          "member_size": 642,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 286
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_getcwd",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_getenv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 335,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_getenv",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_getenv",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 314,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_getenv",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_getenv",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec0456a1",
+          "library": "llibcr.lib",
+          "member": "getenv.c",
+          "member_module_index": 79,
+          "member_sha256": "d1c9eecee72ea1d503430b8cde9e7608e24400ddf5b6a739407ad7be41f3c21c",
+          "member_size": 404,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 142
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "_getenv",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 2
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_isdigit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 280,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_isdigit",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_isdigit",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 1381,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_isdigit",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_isdigit",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "b80400eb21b88000",
+          "library": "llibcr.lib",
+          "member": "_ctype.asm",
+          "member_module_index": 240,
+          "member_sha256": "e495ac7b08104d69cdffa3aed692f84de11ff1a5217477eb898283f1b8b935ea",
+          "member_size": 337,
+          "public_offset": 15,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 65
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "_isdigit",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 2
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_isspace",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 1071,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_isspace",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_isspace",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 1019,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_isspace",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_isspace",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "b80800eb17b81000",
+          "library": "llibcr.lib",
+          "member": "_ctype.asm",
+          "member_module_index": 240,
+          "member_sha256": "e495ac7b08104d69cdffa3aed692f84de11ff1a5217477eb898283f1b8b935ea",
+          "member_size": 337,
+          "public_offset": 25,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 65
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "_isspace",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 2
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_localtime",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 838,
+            "source": "src\\root\\m171C.c",
+            "target": "_localtime",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_localtime",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec089a00",
+          "library": "llibcr.lib",
+          "member": "localtim.c",
+          "member_module_index": 196,
+          "member_sha256": "7431c72ca3587a4dd76f147c74723842aa937fa16a1eb165d775ca0d41b2641e",
+          "member_size": 435,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 132
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_localtime",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_lseek",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:00BA",
+            "object_segment": "U047_TEXT",
+            "offset": 275,
+            "source": "src\\root\\m00BA.c",
+            "target": "_lseek",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_lseek",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:00BA",
+            "object_segment": "U047_TEXT",
+            "offset": 221,
+            "source": "src\\root\\m00BA.c",
+            "target": "_lseek",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_lseek",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:19DC",
+            "object_segment": "U080_TEXT",
+            "offset": 644,
+            "source": "src\\root\\m19DC.c",
+            "target": "_lseek",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_lseek",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec048b5e",
+          "library": "llibcr.lib",
+          "member": "dos\\lseek.asm",
+          "member_module_index": 41,
+          "member_sha256": "3b5d9ed3cedbad4fa2dd75c8034eb59f1a2c5b8629391f2bede72ea4d02cebaf",
+          "member_size": 302,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 122
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 5,
+            "frame": "_lseek",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 5
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_open",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 137,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_open",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_open",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 468,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_open",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_open",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 639,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_open",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_open",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec0432ff",
+          "library": "llibcr.lib",
+          "member": "dos\\open.asm",
+          "member_module_index": 42,
+          "member_sha256": "f4f0a50ba9bad363e5bc1dcb507ef19d7d71d192f43dc93275f5332b2d021c3a",
+          "member_size": 771,
+          "public_offset": 26,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 460
+        },
+        "reference_module_count": 7,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_open",
+            "frame_kind": "external",
+            "loc": "pointer32"
+          },
+          {
+            "count": 10,
+            "frame": "_open",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 11
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_printf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39C7",
+            "object_segment": "U029_TEXT",
+            "offset": 202,
+            "source": "src\\S20\\m39C7.c",
+            "target": "_printf",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_printf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39C7",
+            "object_segment": "U029_TEXT",
+            "offset": 627,
+            "source": "src\\S20\\m39C7.c",
+            "target": "_printf",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_printf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 412,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_printf",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_printf",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec0657b8",
+          "library": "llibcr.lib",
+          "member": "printf.c",
+          "member_module_index": 23,
+          "member_sha256": "02530add7f76434c46b935b3a682732bc8ac013da0b80e4f929d8b62fd243111",
+          "member_size": 340,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 68
+        },
+        "reference_module_count": 6,
+        "reference_patterns": [
+          {
+            "count": 9,
+            "frame": "_printf",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 9
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_puts",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S15:384C",
+            "object_segment": "U024_TEXT",
+            "offset": 460,
+            "source": "src\\S15\\m384C.c",
+            "target": "_puts",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_puts",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 1303,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_puts",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_puts",
+            "frame_kind": "external",
+            "loc": "pointer32",
+            "module": "root:1B73",
+            "object_segment": "MOUSE_TEXT",
+            "offset": 420,
+            "source": "src\\root\\m1B73.asm",
+            "target": "_puts",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_puts",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec065756",
+          "library": "llibcr.lib",
+          "member": "puts.c",
+          "member_module_index": 106,
+          "member_sha256": "437368b1ddc2ea64066c552cbc8acc7d47a8d6ae1e87b288046f4daee88d47df",
+          "member_size": 440,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 138
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "_puts",
+            "frame_kind": "external",
+            "loc": "pointer32"
+          },
+          {
+            "count": 2,
+            "frame": "_puts",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 4
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_rand",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0093",
+            "object_segment": "U046_TEXT",
+            "offset": 263,
+            "source": "src\\root\\m0093.c",
+            "target": "_rand",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_rand",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0093",
+            "object_segment": "U046_TEXT",
+            "offset": 290,
+            "source": "src\\root\\m0093.c",
+            "target": "_rand",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_rand",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "b8fd43ba03005250",
+          "library": "llibcr.lib",
+          "member": "rand.c",
+          "member_module_index": 253,
+          "member_sha256": "b569e225824dcaef61bcaa7e351b1a764772804fa376b7be2586935616220f02",
+          "member_size": 330,
+          "public_offset": 18,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 58
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "_rand",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 2
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_read",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 261,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_read",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_read",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 1054,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_read",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_read",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 1002,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_read",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_read",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec028b5e",
+          "library": "llibcr.lib",
+          "member": "dos\\read.asm",
+          "member_module_index": 43,
+          "member_sha256": "67b7894fabd4e937149f3a6e8543e80fe3d2f429928d622aac592598c09a2191",
+          "member_size": 530,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 254
+        },
+        "reference_module_count": 7,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_read",
+            "frame_kind": "external",
+            "loc": "pointer32"
+          },
+          {
+            "count": 13,
+            "frame": "_read",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 14
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_remove",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 857,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_remove",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_remove",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec1ec55606b4",
+          "library": "llibcr.lib",
+          "member": "dos\\unlink.asm",
+          "member_module_index": 306,
+          "member_sha256": "ceacd3148954ab9ccca58bef8bb3df544f5874eed71969475e00dd51647cba63",
+          "member_size": 179,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 15
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_remove",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_signal",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:15F8",
+            "object_segment": "U070_TEXT",
+            "offset": 261,
+            "source": "src\\root\\m15F8.c",
+            "target": "_signal",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_signal",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:15F8",
+            "object_segment": "U070_TEXT",
+            "offset": 243,
+            "source": "src\\root\\m15F8.c",
+            "target": "_signal",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_signal",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec048b46",
+          "library": "llibcr.lib",
+          "member": "dos\\signal.asm",
+          "member_module_index": 255,
+          "member_sha256": "28f51622ab03720d4fc6d78e35f5bf2545d1ecd6c7b29e864841da896daba151",
+          "member_size": 969,
+          "public_offset": 6,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 407
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 2,
+            "frame": "_signal",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 2
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_sprintf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 502,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_sprintf",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_sprintf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 907,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_sprintf",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_sprintf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 1122,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_sprintf",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_sprintf",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec045756",
+          "library": "llibcr.lib",
+          "member": "sprintf.c",
+          "member_module_index": 112,
+          "member_sha256": "2046a56192e8d658ec66eee895d24a636545ef81bac15341ec65c6bb0b4620d8",
+          "member_size": 377,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 108
+        },
+        "reference_module_count": 13,
+        "reference_patterns": [
+          {
+            "count": 39,
+            "frame": "_sprintf",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 39
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_srand",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:0093",
+            "object_segment": "U046_TEXT",
+            "offset": 253,
+            "source": "src\\root\\m0093.c",
+            "target": "_srand",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_srand",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8b4606a300",
+          "library": "llibcr.lib",
+          "member": "rand.c",
+          "member_module_index": 253,
+          "member_sha256": "b569e225824dcaef61bcaa7e351b1a764772804fa376b7be2586935616220f02",
+          "member_size": 330,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 58
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_srand",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_stricmp",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 344,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_stricmp",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_stricmp",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8bd61ec576",
+          "library": "llibcr.lib",
+          "member": "stricmp.asm",
+          "member_module_index": 209,
+          "member_sha256": "c7384f78630166042dca86b0987b5586e2eb861b4882e03a6291e33253ba0f40",
+          "member_size": 209,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 69
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_stricmp",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_strlen",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S20:39F1",
+            "object_segment": "U030_TEXT",
+            "offset": 491,
+            "source": "src\\S20\\m39F1.c",
+            "target": "_strlen",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_strlen",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec8bd7c47e06",
+          "library": "llibcr.lib",
+          "member": "strlen.asm",
+          "member_module_index": 62,
+          "member_sha256": "36407dec2d2121638e1743614974f899b5c156e863373de4f9499e8c60d4a714",
+          "member_size": 148,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 23
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_strlen",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "0000",
+            "frame": "_sys_errlist",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 165,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_sys_errlist",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "0200",
+            "frame": "_sys_errlist",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 161,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_sys_errlist",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "0000",
+            "frame": "_sys_errlist",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 667,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_sys_errlist",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_sys_errlist",
+        "owner": {
+          "group": "DGROUP",
+          "initialized_bytes_at_public": "0000000008000000",
+          "library": "llibcr.lib",
+          "member": "syserr.c",
+          "member_module_index": 257,
+          "member_sha256": "e69df544dd5695d067f6701d3784a3f6643e47c1c2be0d8f3a8618916e6355a9",
+          "member_size": 800,
+          "public_offset": 308,
+          "segment": "_DATA",
+          "segment_class": "DATA",
+          "segment_length": 462
+        },
+        "reference_module_count": 4,
+        "reference_patterns": [
+          {
+            "count": 12,
+            "frame": "_sys_errlist",
+            "frame_kind": "target",
+            "loc": "offset16"
+          },
+          {
+            "count": 2,
+            "frame": "_sys_errlist",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 14
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "0000",
+            "frame": "_sys_nerr",
+            "frame_kind": "target",
+            "loc": "offset16",
+            "module": "root:1C62",
+            "object_segment": "U088_TEXT",
+            "offset": 1686,
+            "source": "src\\root\\m1C62.c",
+            "target": "_sys_nerr",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_sys_nerr",
+        "owner": {
+          "group": "DGROUP",
+          "initialized_bytes_at_public": "2500",
+          "library": "llibcr.lib",
+          "member": "syserr.c",
+          "member_module_index": 257,
+          "member_sha256": "e69df544dd5695d067f6701d3784a3f6643e47c1c2be0d8f3a8618916e6355a9",
+          "member_size": 800,
+          "public_offset": 460,
+          "segment": "_DATA",
+          "segment_class": "DATA",
+          "segment_length": 462
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_sys_nerr",
+            "frame_kind": "target",
+            "loc": "offset16"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_time",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 825,
+            "source": "src\\root\\m171C.c",
+            "target": "_time",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_time",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec56b42acd21",
+          "library": "llibcr.lib",
+          "member": "dos\\time.asm",
+          "member_module_index": 197,
+          "member_sha256": "c0694a75a049ef372bede496f508dcafed697896fde2606ff0b4bdc71f7d81f6",
+          "member_size": 233,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 85
+        },
+        "reference_module_count": 1,
+        "reference_patterns": [
+          {
+            "count": 1,
+            "frame": "_time",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 1
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_vsprintf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 737,
+            "source": "src\\root\\m171C.c",
+            "target": "_vsprintf",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_vsprintf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1C62",
+            "object_segment": "U088_TEXT",
+            "offset": 37,
+            "source": "src\\root\\m1C62.c",
+            "target": "_vsprintf",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_vsprintf",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1CE2",
+            "object_segment": "U089_TEXT",
+            "offset": 377,
+            "source": "src\\root\\m1CE2.c",
+            "target": "_vsprintf",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_vsprintf",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec5756c6060a",
+          "library": "llibcr.lib",
+          "member": "vsprintf.c",
+          "member_module_index": 118,
+          "member_sha256": "3af32017687ba0a50fe6c81b964f5b504f8bb505ea8b225706c0211becf6b48f",
+          "member_size": 379,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 106
+        },
+        "reference_module_count": 6,
+        "reference_patterns": [
+          {
+            "count": 12,
+            "frame": "_vsprintf",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 12
+      },
+      {
+        "examples": [
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_write",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "S09:35F5",
+            "object_segment": "U017_TEXT",
+            "offset": 795,
+            "source": "src\\S09\\m35F5.c",
+            "target": "_write",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_write",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:171C",
+            "object_segment": "U074_TEXT",
+            "offset": 769,
+            "source": "src\\root\\m171C.c",
+            "target": "_write",
+            "target_kind": "external"
+          },
+          {
+            "displacement": 0,
+            "encoded_addend": "00000000",
+            "frame": "_write",
+            "frame_kind": "target",
+            "loc": "pointer32",
+            "module": "root:1A28",
+            "object_segment": "U081_TEXT",
+            "offset": 389,
+            "source": "src\\root\\m1A28.c",
+            "target": "_write",
+            "target_kind": "external"
+          }
+        ],
+        "name": "_write",
+        "owner": {
+          "group": null,
+          "initialized_bytes_at_public": "558bec83ec088b5e",
+          "library": "llibcr.lib",
+          "member": "write.asm",
+          "member_module_index": 44,
+          "member_sha256": "97baec6766a6fad70e675ab360bb07eeaa848e0c737a173be48bc8678b7f2707",
+          "member_size": 680,
+          "public_offset": 0,
+          "segment": "_TEXT",
+          "segment_class": "CODE",
+          "segment_length": 351
+        },
+        "reference_module_count": 3,
+        "reference_patterns": [
+          {
+            "count": 3,
+            "frame": "_write",
+            "frame_kind": "target",
+            "loc": "pointer32"
+          }
+        ],
+        "references": 3
+      }
+    ],
+    "unique_import_names": 62
+  },
+  "schema": "dos-runtime-frame-graph-v29",
+  "scope": "Resolve the current 62 object-import names absent from the 178-object/report registries against exact pinned stock MSC runtime library members; verify OMF frame metadata and ground __psp ownership/layout/initialization.",
+  "tool_use": {
+    "compiler_rerun": false,
+    "linker_rerun": false,
+    "original_executable_read": false,
+    "runtime_execution": false,
+    "static_disassembler": {
+      "path": "C:\\msys64\\usr\\bin\\ndisasm.exe",
+      "role": "static 16-bit decoding aid; not a linker/runtime",
+      "sha256": "5789e415cc0a62b2211dd11c2bbd87225ce300ac45afb8e899f6dc8557bdcbbb",
+      "size": 1094991
+    }
+  },
+  "v28_freshness_comparison": {
+    "added_module_references_to_the_62_names": {
+      "__aFNalmul": 0,
+      "__aFchkstk": 0,
+      "__aFldiv": 0,
+      "__aFlmul": 0,
+      "__aFlshl": 0,
+      "__aFlshr": 0,
+      "__aFuldiv": 0,
+      "__aFulmul": 0,
+      "__ctype": 0,
+      "__disable": 0,
+      "__dos_allocmem": 0,
+      "__dos_findfirst": 0,
+      "__dos_findnext": 0,
+      "__dos_freemem": 0,
+      "__enable": 0,
+      "__fmemchr": 0,
+      "__fmemcmp": 0,
+      "__fmemcpy": 0,
+      "__fmemmove": 0,
+      "__fmemset": 0,
+      "__fstrcat": 0,
+      "__fstrchr": 0,
+      "__fstrcmp": 0,
+      "__fstrcpy": 0,
+      "__fstrlen": 0,
+      "__fstrncmp": 0,
+      "__fstrncpy": 0,
+      "__fstrrchr": 0,
+      "__harderr": 0,
+      "__psp": 0,
+      "_access": 0,
+      "_asctime": 0,
+      "_atexit": 0,
+      "_chdir": 0,
+      "_close": 0,
+      "_errno": 0,
+      "_exit": 0,
+      "_fclose": 0,
+      "_fopen": 0,
+      "_fread": 0,
+      "_getcwd": 0,
+      "_getenv": 0,
+      "_isdigit": 0,
+      "_isspace": 0,
+      "_localtime": 0,
+      "_lseek": 0,
+      "_open": 0,
+      "_printf": 0,
+      "_puts": 0,
+      "_rand": 0,
+      "_read": 0,
+      "_remove": 0,
+      "_signal": 0,
+      "_sprintf": 0,
+      "_srand": 0,
+      "_stricmp": 0,
+      "_strlen": 0,
+      "_sys_errlist": 0,
+      "_sys_nerr": 0,
+      "_time": 0,
+      "_vsprintf": 0,
+      "_write": 0
+    },
+    "common_module_object_hash_mismatch_count": 0,
+    "current_added_modules": [
+      "source-owned:balloon-buffer-tables",
+      "source-owned:remaining-scalar-tail",
+      "source-owned:remaining-ui-state",
+      "source-owned:remaining-window-state"
+    ],
+    "current_object_count": 182,
+    "current_recomputed_references": 1195,
+    "current_recomputed_unique_names": 62,
+    "current_report_sha256": "a38e79bd9fe910190170720fabb8096c89bbcb52149f6ca51df75a591f06fc59",
+    "interpretation": "The report changed: the current set has four additional provider objects and a changed unresolved-symbol registry. All 178 prior module objects are byte-identical, and a fresh scan of all 182 current objects reproduces the v28 62 names and per-name reference counts exactly; the four added objects contribute no references to those names. The 62 remain absent from object owners and report alias/unresolved registries, rather than being a source preflight unresolved classification.",
+    "name_sets_equal": true,
+    "old_modules_missing_from_current": [],
+    "path": "build/workers/dos_object_frame_graph_v28/omf-frame-graph-v28.json",
+    "report_unresolved_name_intersection": 0,
+    "same_current_report_sha256": false,
+    "v28_object_count": 178,
+    "v28_report_sha256": "56ff060691f127e5d5836394ac126eb91097f07ed57334f6eb279c83f7e5e890",
+    "v28_unclassified_references": 1195,
+    "v28_unclassified_unique_names": 62
+  }
+}
