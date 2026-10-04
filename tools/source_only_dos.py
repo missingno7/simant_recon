@@ -195,6 +195,7 @@ def prepare(out, report):
     providers = []
     report['reviewed_data_aliases'] = []
     report['reviewed_communal_aliases'] = []
+    report['reviewed_initialized_aliases'] = []
     for filename in ('source-bindings-v1.json', 'c-data-bindings-v1.json', 'history-storage-bindings-v1.json',
                      'queue-storage-bindings-v1.json', 'assembly-frame-bindings-v1.json',
                      'world-scalar-bindings-v1.json', 'population-owner-bindings-v1.json',
@@ -255,6 +256,8 @@ def prepare(out, report):
                      'window-ralloc-handles-bindings-v1.json',
                      'remaining-sound-storage-bindings-v1.json',
                      'remaining-misc-storage-bindings-v1.json',
+                     'screen-clip-list-bindings-v1.json',
+                     'remaining-far-state-words-bindings-v1.json',
                      's01-pattern-4220-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
@@ -352,6 +355,7 @@ def prepare(out, report):
             binding_origins.setdefault(binding['module'], []).append(binding_pin['path'].replace('\\', '/'))
         report['reviewed_data_aliases'] += binding_packet.get('aliases', [])
         report['reviewed_communal_aliases'] += binding_packet.get('communal_aliases', [])
+        report['reviewed_initialized_aliases'] += binding_packet.get('initialized_aliases', [])
         providers += binding_packet.get('providers', [])
     contract_raw, contract_pin = pin(ROOT / 'work/source-only-dos/linker-alias-contract-v2.json')
     contract = json.loads(contract_raw)
@@ -747,7 +751,7 @@ def accept_binding_checks(report):
             if dependency['status'] == 'SOURCE_BOUND':
                 dependency['status'] = 'RESOLVED'
         initialized = {r['module'] for r in providers if r['module'] in dos_source_bindings.INITIALIZED_PROVIDER_SPECS}
-        if initialized == set(dos_source_bindings.INITIALIZED_PROVIDER_SPECS) and not report.get('resolved_initialized_data'):
+        if {'source-owned:graphics-formulas', 'source-owned:g2108-color-translation'} <= initialized and not report.get('resolved_initialized_data'):
             # Functional initialization is discharged only after whole-object proof.
             # Keep the historical ownership ledger and the independent copy gate.
             sizes = {s['id']: s['size'] for s in report['unresolved_data']}
@@ -771,6 +775,7 @@ def accept_binding_checks(report):
                 'proof': 'Reviewed source first-write dominance plus real config-producer/CRT tests; original initializer unobserved.',
                 'scope_limit': 'Other shared UI bytes, Rect sentinel and computed-copy layout remain unresolved.'}]
         accept_clip_pointer_data(report)
+        accept_screen_list_data(report)
 
 
 def accept_clip_pointer_data(report):
@@ -807,8 +812,11 @@ def accept_clip_pointer_data(report):
         'scope_limit': 'Only functional pointer storage; historical ledger, Rect/sentinel and computed-copy layout remain unresolved.'}
     previous = [r for r in state if r.get('module') == module]
     if previous:
-        if (previous != [resolution] or shared['size'] != 21 or shared.get('residual_ranges') !=
-                [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}]):
+        screen = [r for r in state if r.get('module') == 'source-owned:screen-clip-list']
+        expected_size, expected_ranges = (5, SCREEN_LIST_RESIDUAL) if screen == [SCREEN_LIST_RESOLUTION] else (
+            21, [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}])
+        if (previous != [resolution] or shared['size'] != expected_size
+                or shared.get('residual_ranges') != expected_ranges):
             raise ValueError('clip-pointer data disposition recorded state changed')
         return
     if (shared['size'] != 25 or shared.get('residual_ranges') !=
@@ -817,6 +825,49 @@ def accept_clip_pointer_data(report):
     shared['size'] = 21
     shared['residual_ranges'] = [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}]
     state.append(resolution)
+
+
+SCREEN_LIST_RESIDUAL = [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 4}]
+SCREEN_LIST_RESOLUTION = {
+    'id': 'dgroup_5a96', 'offset': 6, 'size': 16, 'module': 'source-owned:screen-clip-list',
+    'proof': 'Typed screen Rect plus full sentinel, exact near DATA object, symbolic handle/interior views and both independent RTLink controls.',
+    'contract': 'work/source-only-dos/screen-clip-list-contract-v1.json',
+    'scope_limit': 'Functional initialized object only; historical defining TU/order/placement and unchecked graphics-copy layout remain open.'}
+
+
+def accept_screen_list_data(report):
+    """Discharge only the two proven Rects, after actual whole-object verification."""
+    module = 'source-owned:screen-clip-list'
+    owners = [r for r in report['translation_units'] if r.get('module') == module]
+    recorded = [r for r in report.get('resolved_source_state', []) if r.get('module') == module]
+    if not owners:
+        if recorded:
+            raise ValueError('recorded screen-list disposition has no current owner')
+        return
+    payload = dos_source_bindings.initialized_payload(module)
+    expected = dict(status='PASS', data_only=True, live_initialized_bytes=16, code_bytes=0,
+        communals=[], publics=[dict(name='_g_5A9C', segment='_DATA', offset=0)], fixups=[],
+        recipe='typed_screen_and_sentinel', value_sha256=sha(payload))
+    if len(owners) != 1 or owners[0].get('provider_verification') != expected:
+        if recorded:
+            raise ValueError('recorded screen-list disposition lacks current whole-object proof')
+        return
+    for profile in ('rtlink400', 'rtlink610'):
+        dos_source_bindings.require_v29_storage_contracts(report, profile, compiler.toolchain()['linkers'][profile])
+    state = report.setdefault('resolved_source_state', [])
+    shared = next(r for r in report['unresolved_data'] if r['id'] == 'dgroup_5a96')
+    previous = [r for r in state if r.get('module') == module]
+    if previous:
+        if previous != [SCREEN_LIST_RESOLUTION] or shared['size'] != 5 or shared.get('residual_ranges') != SCREEN_LIST_RESIDUAL:
+            raise ValueError('screen-list recorded data disposition changed')
+        return
+    if (not any(r.get('module') == 'source-owned:clip-pointer' for r in state)
+            or shared['size'] != 21 or shared.get('residual_ranges') !=
+                [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 20}]):
+        raise ValueError('screen-list data disposition residual inventory changed')
+    shared['size'] = 5
+    shared['residual_ranges'] = [dict(r) for r in SCREEN_LIST_RESIDUAL]
+    state.append(dict(SCREEN_LIST_RESOLUTION))
 
 
 def unresolved_symbols(out, report, symbols, manifest):
@@ -876,6 +927,13 @@ def unresolved_symbols(out, report, symbols, manifest):
             raise ValueError('communal alias source owner is missing or duplicated')
         row = next(r for r in report['translation_units'] if r['module'] == spec['module'])
         definitions.append(dos_source_bindings.bind_communal_alias(spec, objects[spec['module']], row, symbols))
+    for spec in report.get('reviewed_initialized_aliases', []):
+        if spec['alias'] in owners or spec['alias'] in {d['alias'] for d in definitions}:
+            raise ValueError('initialized alias already has a different definition')
+        if owners.get(spec['owner']) != [spec['module']]:
+            raise ValueError('initialized alias source owner is missing or duplicated')
+        row = next(r for r in report['translation_units'] if r['module'] == spec['module'])
+        definitions.append(dos_source_bindings.bind_initialized_alias(spec, objects[spec['module']], row, symbols))
     report['symbolic_aliases'] = definitions
     linker_publics.update(d['alias'] for d in definitions)
     missing = sorted(set(uses) - set(owners) - libraries - linker_publics)
@@ -957,6 +1015,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_v25_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v26_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v27_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v29_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
@@ -1075,7 +1134,7 @@ def main():
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
                              ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py', 'dos_alignment_debt.py',
-                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py', 'dos_storage_policies_v27.py')]
+                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py', 'dos_storage_policies_v27.py', 'dos_storage_policies_v29.py')]
         report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)

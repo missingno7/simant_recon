@@ -833,8 +833,13 @@ class SourceOnlyDosTests(unittest.TestCase):
                     return OmfReader(communals=True).read(result.obj)
                 bindings.review_provider_source(text, provider, symbols)
                 self.assertEqual(bindings.verify_provider(compile(text), provider)['status'], 'PASS')
-                wrong_value = text.replace('0x80u', '0x40u') if module.endswith('graphics-formulas') else text.replace('0x00F', '0x00A')
-                for contrast in (wrong_value, text.replace('unsigned char near', 'unsigned char far'),
+                if module == 'source-owned:screen-clip-list':
+                    wrong_value = text.replace('349', '348')
+                    wrong_frame = text.replace('struct Rect near', 'struct Rect far')
+                else:
+                    wrong_value = text.replace('0x80u', '0x40u') if module.endswith('graphics-formulas') else text.replace('0x00F', '0x00A')
+                    wrong_frame = text.replace('unsigned char near', 'unsigned char far')
+                for contrast in (wrong_value, wrong_frame,
                                  text + '\nint near extra_live = 1;\n', text + '\nint extra_code(void) { return 1; }\n'):
                     with self.assertRaises(ValueError):
                         bindings.verify_provider(compile(contrast), provider)
@@ -2019,6 +2024,116 @@ class SourceOnlyDosTests(unittest.TestCase):
                         contract['inputs'].append(dict(original, sha256='0' * 64))
                     with self.assertRaises(ValueError, msg=(module, tamper)):
                         bindings.require_v27_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_v29_screen_data_and_interior_views_compose_without_hiding_layout_debt(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            dos.audit_layout(report)
+            for row in report['translation_units']:
+                if row.get('source_binding'):
+                    row['binding_verification'] = {'status': 'PASS'}
+                if row.get('storage_provider'):
+                    row['provider_verification'] = {'status': 'PASS'}
+                if row['module'] in ('source-owned:screen-clip-list', 'source-owned:clip-pointer'):
+                    source = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                    result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    obj = OmfReader(communals=True).read(result.obj)
+                    row['provider_verification'] = bindings.verify_provider(obj, row['storage_provider'])
+                    if row['module'] == 'source-owned:screen-clip-list':
+                        for spec in bindings.SCREEN_LIST_ALIASES:
+                            alias = bindings.bind_initialized_alias(spec, obj, row, symbols)
+                            self.assertIn(alias['offset'], (4, 6))
+                            wrong = dict(spec, offset=spec['offset'] + 2)
+                            with self.assertRaises(ValueError):
+                                bindings.bind_initialized_alias(wrong, obj, row, symbols)
+            dos.accept_binding_checks(report)
+            shared = next(r for r in report['unresolved_data'] if r['id'] == 'dgroup_5a96')
+            self.assertEqual((shared['size'], shared['residual_ranges']), (5, dos.SCREEN_LIST_RESIDUAL))
+            self.assertEqual(sum(r['size'] for r in report['historical_data_debt']), 113)
+            before = json.loads(json.dumps(report['resolved_source_state']))
+            dos.accept_binding_checks(report)
+            self.assertEqual(report['resolved_source_state'], before)
+            for gate in ('graphics-computed-copy-layout', 'map-viewport-grid-layout', 'menu-table-cross-owner-layout'):
+                self.assertEqual(next(r['status'] for r in report['layout_dependencies'] if r['id'] == gate), 'UNRESOLVED')
+            wrong = json.loads(json.dumps(report))
+            next(r for r in wrong['unresolved_data'] if r['id'] == 'dgroup_5a96')['size'] -= 1
+            with self.assertRaises(ValueError):
+                dos.accept_binding_checks(wrong)
+            wrong = json.loads(json.dumps(report))
+            wrong['translation_units'] = [r for r in wrong['translation_units'] if r['module'] != 'source-owned:screen-clip-list']
+            with self.assertRaises(ValueError):
+                dos.accept_binding_checks(wrong)
+
+    def test_v29_far_words_keep_signed_mutable_source_types_and_reject_extra_storage(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:remaining-far-state-words')
+            provider = row['storage_provider']
+            text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+            bindings.review_provider_source(text, provider, symbols)
+            def compile(source):
+                result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            proof = bindings.verify_provider(compile(text), provider)
+            self.assertEqual(sum(c['length'] for c in proof['communals']), 10)
+            self.assertEqual(proof['live_initialized_bytes'], 0)
+            with self.assertRaises(ValueError):
+                bindings.review_provider_source(text.replace('int far', 'unsigned int far'), provider, symbols)
+            for contrast in (text.replace('int far fd_50F6_04C0;', 'long far fd_50F6_04C0;'),
+                             text.replace('int far fd_50F6_04C0;', 'int far fd_50F6_04C0 = 1;'),
+                             text + 'int far extra_storage;\n'):
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(contrast), provider)
+
+    def test_v29_contracts_reject_incomplete_raw_frame_alias_and_identity_evidence(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            import dos_storage_policies_v29
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_v29_storage_contracts(report, profile, tc['linkers'][profile])
+            for module, (key, _) in dos_storage_policies_v29.CONTRACTS.items():
+                for tamper in ('case', 'omf', 'raw', 'map', 'duplicate_runtime', 'scope'):
+                    wrong = json.loads(json.dumps(report))
+                    contract = wrong[key]
+                    if tamper == 'case':
+                        contract['cases'].pop()
+                    elif tamper == 'omf':
+                        next(iter(contract['compiler_controls'].values()))['segment_lengths']['_DATA'] += 2
+                    elif tamper == 'raw':
+                        contract['cases'][0]['raw']['hex'] += '00'
+                    elif tamper == 'map':
+                        case = contract['cases'][0]
+                        name = next(iter(case['public_address_matrix']['Name']))
+                        case['public_address_matrix']['Name'][name] = 'FFFF:FFFF'
+                    elif tamper == 'duplicate_runtime':
+                        original = next(p for p in contract['inputs'] if p['path'].lower().endswith('llibcr.lib'))
+                        contract['inputs'].append(dict(original, sha256='0' * 64))
+                    else:
+                        contract['historical_producer_or_placement_claimed'] = True
+                    with self.assertRaises(ValueError, msg=(module, tamper)):
+                        bindings.require_v29_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            for tamper in ('view', 'public', 'pointer_frame'):
+                wrong = json.loads(json.dumps(report))
+                if tamper == 'view':
+                    wrong['reviewed_initialized_aliases'][1]['offset'] = 8
+                elif tamper == 'public':
+                    wrong['screen_clip_list_contract']['public_DATA'][0]['extent_bytes'] = 8
+                else:
+                    wrong['screen_clip_list_contract']['compiler_controls']['static_handle_correct']['linker_fixups'][0]['frame'] = '_DATA'
+                with self.assertRaises(ValueError):
+                    bindings.require_v29_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
     def test_water_pair_adds_exact_array_owners_without_changing_population_or_code(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'

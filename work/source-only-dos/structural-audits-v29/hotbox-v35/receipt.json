@@ -1,0 +1,269 @@
+{
+  "schema": "simant-data-debt-structural-research-v1",
+  "record_id": "dos_unused_hotbox_owner_v35",
+  "append_only": true,
+  "review_status": "unresolved_structural_research",
+  "root_reviewed": false,
+  "admitted": false,
+  "target": {
+    "frame": "55B3",
+    "offset": "60B0",
+    "size_bytes": 18,
+    "end_exclusive": "60C2"
+  },
+  "conclusion": {
+    "proposed_semantic_classification": "unregistered_hot_box_event_record_with_callback_relocation",
+    "field_and_callback_understanding_complete": true,
+    "source_functional_provenance": "root:1B73 mouse event and hot-box subsystem",
+    "whole_natural_record_layout_supported": true,
+    "source_instance_owner_established": false,
+    "historical_defining_object_or_tu_established": false,
+    "registration_established": false,
+    "runtime_reachability_established": false,
+    "approved_disposition_changed": false,
+    "interpretation": "A complete semantic type and initializer are supported; no owner path or live registration is established. Preserve as unresolved structural data debt. Do not classify as harmless or dead."
+  },
+  "typed_symbolic_proposal": {
+    "status": "proposal_only",
+    "historical_identifier_recovered": false,
+    "descriptive_type_name": "HotBox",
+    "fields": [
+      {
+        "offset": 0,
+        "width_bytes": 2,
+        "field": "left",
+        "type": "signed 16-bit int",
+        "value": 0
+      },
+      {
+        "offset": 2,
+        "width_bytes": 2,
+        "field": "top",
+        "type": "signed 16-bit int",
+        "value": 0
+      },
+      {
+        "offset": 4,
+        "width_bytes": 2,
+        "field": "right",
+        "type": "signed 16-bit int",
+        "value": 639
+      },
+      {
+        "offset": 6,
+        "width_bytes": 2,
+        "field": "bottom",
+        "type": "signed 16-bit int",
+        "value": 16
+      },
+      {
+        "offset": 8,
+        "width_bytes": 4,
+        "field": "fn",
+        "type": "far pointer to int-returning callback",
+        "value": "1B73:030F",
+        "relocation": {
+          "relative_offset": 10,
+          "site": "55B7:607A",
+          "target": "1B73:030F"
+        }
+      },
+      {
+        "offset": 12,
+        "width_bytes": 2,
+        "field": "code",
+        "type": "16-bit int callback payload and list key",
+        "value": 0
+      },
+      {
+        "offset": 14,
+        "width_bytes": 2,
+        "field": "xE",
+        "type": "16-bit int callback payload",
+        "value": 0
+      },
+      {
+        "offset": 16,
+        "width_bytes": 2,
+        "field": "event_mask",
+        "type": "16-bit unsigned bit mask",
+        "value": "0x0601",
+        "match_rule": "(event_mask & packed_event_word) != 0"
+      }
+    ],
+    "callback_abi": {
+      "return_type": "16-bit int",
+      "parameters": [
+        "int code",
+        "int xE",
+        "int what",
+        "int h",
+        "int v"
+      ],
+      "behavior": "The 1B73:030F callback enqueues code, xE, what, h, and v, then returns zero; zero stops the current record-list scan.",
+      "event_word_packing": "The mouse handler copies incoming AL to AH and incoming BL to AL before the word-mask test."
+    },
+    "rectangle_semantics": "Signed inclusive bounds on left, top, right, and bottom.",
+    "padding": "None; nine 16-bit words are copied and the walker uses an 18-byte stride.",
+    "c_proposal": "struct HotBox { struct Rect r; int (far *fn)(int code, int xE, int what, int h, int v); int code; int xE; unsigned int event_mask; }; static struct HotBox candidate = { { 0, 0, 639, 16 }, f_1B73_030F, 0, 0, 0x0601u };",
+    "proposal_limits": [
+      "HotBox and candidate are descriptive review names, not recovered historical identifiers.",
+      "This declaration does not establish the original defining object, translation unit, object boundary, link order, or registration."
+    ]
+  },
+  "unresolved_links": [
+    {
+      "question": "Was this instance registered or otherwise exposed to a record walker?",
+      "status": "unresolved",
+      "evidence": "The generic 1B73:0AC3 and 1B73:0B00 APIs copy a far-pointer argument into event lists. Current source callers pass named records g_6016, g_6004, or g_603A; no call to this candidate was found.",
+      "remaining_gap": "A complete producer/use chain for the generic record pointer, including computed aliases and unowned callers."
+    },
+    {
+      "question": "Which original data object or translation unit owns 55B3:60B0?",
+      "status": "unresolved",
+      "evidence": "The record lies between S10 m35F5 data ending at 60B0 and S20 m39F1 data beginning at 60C2. Adjacency and size do not identify the defining object or prove it is a standalone global.",
+      "remaining_gap": "Historical _DATA object boundary and owner evidence."
+    },
+    {
+      "question": "Is it an alias of g_603A?",
+      "status": "no_alias_evidenced",
+      "evidence": "g_603A occupies 603A..604B, at a different address; its rectangle and callback match, but its event mask is 0x1F00 rather than 0x0601."
+    },
+    {
+      "question": "Do static references identify 55B3:60B0..60C1?",
+      "status": "none_found_in_bounded_scans",
+      "evidence": "The approved scan reports no direct DGROUP operand or immediate-address candidate across 1,730 game functions; the recorded full-image relocation review reports no inbound relocated far pointer targeting this interval.",
+      "limit": "These scans do not exclude computed pointers or unowned callers."
+    }
+  ],
+  "evidence_pins": {
+    "frozen_markdown_receipt": {
+      "path": "build/workers/dos_unused_hotbox_owner_v35/receipt.md",
+      "sha256": "cb02824c0c799ee60b143a788d047864364eb6dcc0dced215248f42122afd77e"
+    },
+    "current_source_inputs": [
+      {
+        "path": "src/root/m1B73.asm",
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848"
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8"
+      },
+      {
+        "path": "src/S10/m35F5.c",
+        "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5"
+      },
+      {
+        "path": "src/S17/m384C.c",
+        "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351"
+      },
+      {
+        "path": "src/S19/m384C.c",
+        "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b"
+      },
+      {
+        "path": "src/S20/m39F1.c",
+        "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b"
+      },
+      {
+        "path": "src/root/m218D.c",
+        "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e"
+      },
+      {
+        "path": "src/root/m22BF.c",
+        "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0"
+      },
+      {
+        "path": "src/root/m2505.c",
+        "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+      }
+    ],
+    "layout_and_original_metadata": [
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+      },
+      {
+        "path": "work/data/s27_map.json",
+        "sha256": "1567460fb893a26016e7b89feaed5454e505aeca0579635d0945be391e91fa40"
+      },
+      {
+        "path": "work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "sha256": "44ec036b5c7d5f0c98ba03ca8a4b7b96032d3dcabb1c2e6e63459a9ca67240c3"
+      },
+      {
+        "path": "work/takeover/behavioral-oracle/data-debt.json",
+        "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+      },
+      {
+        "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+        "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+      },
+      {
+        "path": "work/takeover/behavioral-oracle/debt-audit/code-span-followup.md",
+        "sha256": "d1ebe2206b6a584e2b0dd3f50d40eeb4ddc11603ea1937f3cf03cb904b107abe"
+      }
+    ],
+    "prior_research": [
+      {
+        "path": "build/workers/behavior_data_audit/REPORT.md",
+        "sha256": "e635df8da70bb5718b3108a58a3fdc4bf53571649b300f2e1f229a1dc754947c"
+      },
+      {
+        "path": "build/workers/behavior_data_audit/code-span-followup.md",
+        "sha256": "d1ebe2206b6a584e2b0dd3f50d40eeb4ddc11603ea1937f3cf03cb904b107abe"
+      },
+      {
+        "path": "build/workers/dos_data_debt_ownership_review_v22/receipt.md",
+        "sha256": "c0bcb6d1e7f8029e10e089d11c99f1193b4a49060197864c6a0a123dfadd8815"
+      },
+      {
+        "path": "build/workers/dos_timer_record_debt_v24/receipt.md",
+        "sha256": "4d6ee3a9b33251dcdf8e1fe610530f52b0a6f05a7b866d5611815b0df88a5eac"
+      },
+      {
+        "path": "build/workers/dos_timer_record_debt_v24/audit_v24.py",
+        "sha256": "eccd4592416ee72b3625a2dbfca07e87672f90f8d5ffed102473dc98fa133418"
+      },
+      {
+        "path": "build/workers/dos_timer_record_debt_v24/audit_v24.json",
+        "sha256": "fdf2cd9187aa181144bb09f5f73372b74d0591b77bf49d5ca5e2fd9891b4fb9f"
+      }
+    ],
+    "repository_instructions": [
+      {
+        "path": "README.md",
+        "sha256": "062dcfd782a5b01d597a381b47f795c1dd065767c94341bb486d82db4cde4887"
+      },
+      {
+        "path": "docs/codegen-rules.md",
+        "sha256": "3ebff671acfb39d8e482163ffb0cc4294e76bcd669fd5099cda5a7a9744840d4"
+      },
+      {
+        "path": "docs/tu-evidence.md",
+        "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26"
+      }
+    ],
+    "tooling_input": {
+      "path": "tools/context.py",
+      "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+      "invocations": [
+        "context.py f_1B73_0B00",
+        "context.py f_1B73_0CEF",
+        "context.py f_1B73_030F",
+        "context.py f_1B73_0B5B"
+      ],
+      "raw_mode": false
+    }
+  },
+  "scope_limits": [
+    "Research only; no source or canonical admission changes.",
+    "No original executable byte arrays, byte capsules, or fallback data were added.",
+    "The symbolic proposal describes field meaning and values; it does not claim historical ownership or registration."
+  ]
+}

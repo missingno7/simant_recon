@@ -113,9 +113,9 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus 59 reviewed data-only
+The current compilation passes all 127 canonical TUs plus 61 reviewed data-only
 providers. Symbol-address joins provide 121
-code aliases and 70 reviewed data aliases without rewriting objects. Reviewed generated
+code aliases and 72 reviewed data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
 dispatch pointer, S02's save-rectangle flag, and the timer countdown word shared
 with root:208F, plus four sample-channel/volume-table views in the recovered audio
@@ -788,7 +788,7 @@ can reach the delay word through 46BC[10] and 46A8[20]; the new seventh layout
 gate preserves that physical dependency. Admission of the signed-word view
 does not freeze an assumed no-clobber or resource-count contract.
 
-Current preflight compiles 186 TUs (127 canonical +59 providers), with 22 missing
+The v27 preflight compiles 186 TUs (127 canonical +59 providers), with 22 missing
 imports (17 FAR_BSS and five DGROUP cases), 62 functional data bytes and seven
 open layout gates. Historical data debt remains 113 bytes; every original-byte
 counter is zero. All 29 effective behavioral implementations retain strict
@@ -819,3 +819,45 @@ far-heap-family importer. Its selection cause and historical 79F0 mapping remain
 open. The read-only archive recheck passes against 186 current object hashes,
 183 readonly receipt pins, six resource identities and saved runtime/map outputs.
 No production or historical debt count changes at this research boundary.
+
+## v29 screen-list and FAR-word ownership
+
+The [root admission](../work/source-only-dos/storage-admission-v29/root-admission.md)
+adds a natural near two-Rect screen clip list. Its initial fields are
+`{0,0,349,639}` followed by four signed `-32768` sentinel fields. Source walkers,
+copies, field reads and mode-setup stores establish the type and logical extent;
+approved semantic observations establish the initial values. Preserving them also
+preserves possible indirect reads before mode setup. The separate static `g_574E`
+handle targets record zero; `g_5AAC` retains its independently proved null startup.
+The `5AA0` and `5AA2` word views bind symbolically at offsets 4 and 6. Fresh whole
+MSC objects and 20 clean RTLink controls reject wrong fields, order, sentinel,
+width, frame, pointer target, active-pointer initializer and alias offsets.
+
+Five separate mutable signed FAR words at `04C0`, `0B20`, `0F38`, `0FB6`, and
+`0FFA` now have natural definitions. Full source/frame and neighboring-array
+reviews support these word views without inferring historical extent from a
+next-public gap. Fresh MSC objects contain exactly five two-byte commons; eight
+independent RTLink controls establish zero startup and typed/raw mutation, with
+unsigned and initialized contrasts. A synthetic bounds guard is only a fixture
+check. No missing setup writer, nonzero intended value or permanent-zero lifetime
+is invented for the map-bound pair.
+
+Current preflight compiles 188 TUs (127 canonical +61 providers), with 15 missing
+imports (12 FAR_BSS and three DGROUP cases), 193 symbolic aliases and 46 functional
+data-debt bytes. The shared `5A96` debt retains only five bytes; historical debt
+stays 113. All 29 effective behavioral implementations remain strictly confirmed.
+All original-byte counters stay zero. The 29 mandatory gates plus alignment pass
+under both RTLinks, while seven independent layout gates remain open and linking
+is refused. No game executable has been independently linked or executed.
+
+The [v29 structural archive](../work/source-only-dos/structural-audits-v29/README.md)
+preserves the full numeric/frame inventory, the typed 18-byte hot-box record whose
+registration remains unknown, and corrected stock-library selection controls.
+Its raw-log reconciliation distinguishes file-byte hashes from earlier
+newline-normalized text hashes. `8ED8` ownership/entry frame, hot-box registration,
+the app-specific fdata selection trigger and historical `79F0` mapping remain open.
+
+The v29 acceptance boundary passes 373 repository tests (two skips), including
+59 source-only tests, historical validation and all 29 mandatory evidence gates
+plus alignment under both RTLinks. The read-only archive check preserves frozen
+observations and reports later intake drift separately.

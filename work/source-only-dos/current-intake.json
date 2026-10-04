@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "bf19d25",
+  "source_only_base_checkpoint": "1f7cbc1276d7ba50f80f9f1a1afbb116d6d8de58",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "b2d1f4056c82f15bf655b73d86f4f6fe2bd22b0c48ed08a64bf06c1962c2ab95",
-    "size": 16321787
+    "sha256": "a06e082ef5d2d4ea8e22d7967a47df3229e61395ddfc10f1560355ee7cd3405f",
+    "size": 19200643
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "22 unresolved source symbols",
+    "15 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 186,
+  "compiled_translation_units": 188,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -38,13 +38,13 @@
   "standalone_dos_executable": false,
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
-  "unresolved_data_disposition_bytes": 62,
-  "unresolved_symbols": 22,
+  "unresolved_data_disposition_bytes": 46,
+  "unresolved_symbols": 15,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 17,
-    "source storage/reachability investigation": 5
+    "reviewed FAR_BSS definition and compatible consumer views": 12,
+    "source storage/reachability investigation": 3
   },
-  "symbolic_aliases": 191,
+  "symbolic_aliases": 193,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -470,6 +470,15 @@
       "proof": "Reviewed typed pointer and +2 segment-word view, whole data-only object and both RTLink/MSC startup controls.",
       "contract": "work/source-only-dos/clip-pointer-contract-v1.json",
       "scope_limit": "Only functional pointer storage; historical ledger, Rect/sentinel and computed-copy layout remain unresolved."
+    },
+    {
+      "id": "dgroup_5a96",
+      "offset": 6,
+      "size": 16,
+      "module": "source-owned:screen-clip-list",
+      "proof": "Typed screen Rect plus full sentinel, exact near DATA object, symbolic handle/interior views and both independent RTLink controls.",
+      "contract": "work/source-only-dos/screen-clip-list-contract-v1.json",
+      "scope_limit": "Functional initialized object only; historical defining TU/order/placement and unchecked graphics-copy layout remain open."
     }
   ],
   "control_resource_terrain_admission": {
@@ -6002,6 +6011,90 @@
       ],
       "publics": [],
       "fixups": []
+    },
+    {
+      "module": "source-owned:screen-clip-list",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\screen-clip-list.c",
+        "sha256": "7933eb61262e3684eb44ee2f5220598e8eb6e4d5f1ff0841837e2831d0264b96",
+        "size": 271
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\SCRLIST.OBJ",
+        "sha256": "3b6d0600819c4c488f0296f22067ca32a178c3022b841a06e1b11f21d0f33ab5",
+        "size": 229
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 16,
+      "code_bytes": 0,
+      "communals": [],
+      "publics": [
+        {
+          "name": "_g_5A9C",
+          "segment": "_DATA",
+          "offset": 0
+        }
+      ],
+      "fixups": [],
+      "recipe": "typed_screen_and_sentinel",
+      "value_sha256": "81d3bd60b87f7d829c304a05f3256592dc9a49b69495399366fca7fd63da8933"
+    },
+    {
+      "module": "source-owned:remaining-far-state-words",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\remaining-far-state-words.c",
+        "sha256": "cc38095d94023d9fe71c8939a7ef3847d51a2d5e4c6392d97e0ed85024b6e082",
+        "size": 110
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\FARW29.OBJ",
+        "sha256": "b4de3f55a4f410e91d50911855157a2f7ea5099c9b37ec43892e70afb72a9ce9",
+        "size": 281
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_04C0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0B20",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0F38",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FB6",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0FFA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
     }
   ],
   "reviewed_data_aliases": [
@@ -6524,6 +6617,22 @@
       "owner_size": 18,
       "view_size": 2,
       "source_anchor": "Existing 18-byte source object spelled Timer, used by the ASM input queue as count/head/tail/flags/callback/buffer views. This binding preserves only its physical offset; +12 is the queue-buffer pointer, not a timer count. The literal 91B0 remains an explicit unresolved layout contract."
+    },
+    {
+      "alias": "_fd_55B3_5AA0",
+      "owner": "_g_5A9C",
+      "offset": 4,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "source-owned:screen-clip-list"
+    },
+    {
+      "alias": "_fd_55B3_5AA2",
+      "owner": "_g_5A9C",
+      "offset": 6,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "source-owned:screen-clip-list"
     }
   ],
   "binding_proofs": [
@@ -10560,8 +10669,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "bb5052e3475343c5ab780a52a8105abcda4a64679e73a2e445bdce4a74c0fc04",
-      "size": 73898
+      "sha256": "d69a91707a0511749e6d5b0f50ebbe8270f0b7e6d8a83ca0ac2727ada14520b9",
+      "size": 77821
     },
     {
       "path": "tools\\compiler.py",
@@ -10604,9 +10713,14 @@
       "size": 49747
     },
     {
+      "path": "tools\\dos_storage_policies_v29.py",
+      "sha256": "975e86f9af3f888a69806baeb13ea23dbe2cbedb82ab0b438773d6835441df67",
+      "size": 79354
+    },
+    {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "9202c990cf513d607601efeec08126c8d8b6ad55fb603c83ca9e3652f28dedcc",
-      "size": 186752
+      "sha256": "4278dc5c7aaa25e188a6c585e0118e731ea9187428f38da30757bf842e826733",
+      "size": 191355
     },
     {
       "path": "tools\\farbss.py",
@@ -10621,17 +10735,17 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v27.log",
-      "sha256": "94ad17f0d9f813823cabc69aa8ee27be76ec97ca7c0a9f0d172922799eb02fca",
-      "size": 6648
+      "path": "build/source-only-dos-run-accepted-v29.log",
+      "sha256": "76fa18ca97faa4655df18126dcb7ee9554ad481672d55b2ce24d7441b0e624f5",
+      "size": 6779
     },
     {
-      "path": "build/source-only-dos-tests-accepted-final-v27.log",
-      "sha256": "95dba3da757df1d665b5063f2cec6c1f93a5378c09864c97710942fc3f2ca158",
-      "size": 32042
+      "path": "build/source-only-dos-tests-accepted-v29-final.log",
+      "sha256": "07ca802036c1bc73f17d2b918790dac57f2817a9993018ca3a607adf24c9604b",
+      "size": 631
     },
     {
-      "path": "build/source-only-dos-validation-v27.log",
+      "path": "build/source-only-dos-validation-v29.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
@@ -10823,6 +10937,72 @@
       "size": 33367
     }
   ],
-  "source_only_tests": "56 targeted tests included in 370 repository tests PASS (2 skips)",
+  "storage_admission_v29": {
+    "path": "work/source-only-dos/storage-admission-v29/root-admission.md",
+    "sha256": "0588d2c68a6cb08920fb7e5e966639c56a7909ee5776516c2e130a539c885069",
+    "size": 3362
+  },
+  "storage_gates_v29": {
+    "path": "build/source-only-dos-gates-accepted-v29.log",
+    "sha256": "75d8838b64e060c149eb747d874f2851008cf0c70141327ece757228a1f6ea8b",
+    "size": 231
+  },
+  "storage_owner_bindings_v29": [
+    {
+      "path": "work/source-only-dos/screen-clip-list-bindings-v1.json",
+      "sha256": "45e9d92859ad229885d2ee422dcd270ee9744d87f40bad49df8f435cf471aafe",
+      "size": 31808
+    },
+    {
+      "path": "work/source-only-dos/remaining-far-state-words-bindings-v1.json",
+      "sha256": "96aebb8b03d6b6f91339a9b6c1a07481935b8a84c4c47732b0ff0bede78b6247",
+      "size": 32901
+    }
+  ],
+  "storage_contracts_v29": [
+    {
+      "path": "work/source-only-dos/screen-clip-list-contract-v1.json",
+      "sha256": "251e00edeabe62363385293a98eaadd05e65f97f640c06b6717e2f5ea48b69d1",
+      "size": 2442075
+    },
+    {
+      "path": "work/source-only-dos/remaining-far-state-words-contract-v1.json",
+      "sha256": "7b68a294487cb0d4db988d9aa4113631d51292f82a70de6dba4ea77daa6eeac2",
+      "size": 221808
+    }
+  ],
+  "storage_root_raw_reviews_v29": [
+    {
+      "path": "work/source-only-dos/storage-admission-v29/screen/root-raw-review.json",
+      "sha256": "b7a3c134cbeb6f1e82d5f864a391446e335f7ae389bb4012caa8cd0dcfd4f065",
+      "size": 174649
+    },
+    {
+      "path": "work/source-only-dos/storage-admission-v29/words/root-raw-review.json",
+      "sha256": "1abb8fde412504d57ca7b14fd44c911ffa7417f9c203079bff9f96c6c78f7723",
+      "size": 89940
+    }
+  ],
+  "storage_root_mechanics_v29": {
+    "path": "work/source-only-dos/storage-admission-v29/root-mechanics/index.json",
+    "sha256": "3748df2826d44b00717a0630d6e274f1175bf34e1bc4dd6f519937a395759492",
+    "size": 6221
+  },
+  "structural_audits_v29": {
+    "path": "work/source-only-dos/structural-audits-v29/archive-index.json",
+    "sha256": "e9c109bb7cc3ba207bb5c4a830b498ee1754ed2ba0fc68e8c516cc29014a60ab",
+    "size": 183838
+  },
+  "storage_focused_tests_v29": {
+    "path": "build/source-only-dos-focused-final-v29.log",
+    "sha256": "05640a7c8143104b707f33760ca6facc70f1be4a221b00674b6f98b42a6418f1",
+    "size": 107
+  },
+  "selector_regression_v29": {
+    "path": "build/source-only-dos-selector-regression-v29.log",
+    "sha256": "b082faba2cd9bc0c23375739f951b93bd6bcbd50f8e57bb2deec5f1e491b9177",
+    "size": 103
+  },
+  "source_only_tests": "59 targeted tests included in 373 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

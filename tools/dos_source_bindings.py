@@ -404,10 +404,15 @@ INITIALIZED_PROVIDER_SPECS = {
     'source-owned:graphics-formulas': ('consumer_mask_formulas',
         [('_g_2100', 0, 8), ('_mono_tail_masks', 8, 8), ('_packed_tail_masks', 16, 2)]),
     'source-owned:g2108-color-translation': ('accepted_source_literal_translation', [('_g_2108', 0, 16)]),
+    'source-owned:screen-clip-list': ('typed_screen_and_sentinel', [('_g_5A9C', 0, 16)]),
 }
 
 
 def initialized_payload(module):
+    if module == 'source-owned:screen-clip-list':
+        from struct import pack
+        # Typed source fields, never a read from original image/debt payloads.
+        return pack('<8h', 0, 0, 349, 639, -32768, -32768, -32768, -32768)
     if module == 'source-owned:graphics-formulas':
         return bytes([0x80 >> phase for phase in range(8)] +
                      [0xFF if r == 0 else (0xFF << (8-r)) & 0xFF for r in range(8)] +
@@ -441,12 +446,17 @@ def review_initialized_provider(provider, symbols=None):
             or provider.get('public_DATA') != initialized_publics(module)):
         raise ValueError('initialized owner recipe/public contract changed')
     if symbols is not None:
-        for name, offset in (('_g_2100', 0x2100), ('_g_2108', 0x2108)):
+        for name, offset in (('_g_2100', 0x2100), ('_g_2108', 0x2108), ('_g_5A9C', 0x5A9C)):
             if name not in {r['name'] for r in provider['public_DATA']}:
                 continue
             anchor = symbols['data'][name[1:]]
             if (anchor['seg'], anchor['off']) != (0x55B3, offset):
                 raise ValueError('initialized source owner registry anchor changed')
+        if module == 'source-owned:screen-clip-list':
+            views = sorted((name, item['off'] - 0x5A9C) for name, item in symbols['data'].items()
+                if item['seg'] == 0x55B3 and 0x5A9C <= item['off'] < 0x5AAC)
+            if views != [('fd_55B3_5AA0', 4), ('fd_55B3_5AA2', 6), ('g_5A9C', 0)]:
+                raise ValueError('screen-list exact owner/interior views changed')
 
 
 def verify_initialized_provider(obj, provider):
@@ -710,6 +720,7 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({name: row[0] for name, row in V25_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V26_STORAGE_ANCHORS.items()})
         addresses.update({name: row[0] for name, row in V27_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V29_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -717,7 +728,7 @@ def review_provider_source(text, provider, symbols=None):
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
             reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS,
-                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS, **V26_STORAGE_ANCHORS, **V27_STORAGE_ANCHORS}
+                                **V18_STORAGE_ANCHORS, **V19_STORAGE_ANCHORS, **V20_STORAGE_ANCHORS, **V21_STORAGE_ANCHORS, **V22_STORAGE_ANCHORS, **V23_STORAGE_ANCHORS, **V24_STORAGE_ANCHORS, **V25_STORAGE_ANCHORS, **V26_STORAGE_ANCHORS, **V27_STORAGE_ANCHORS, **V29_STORAGE_ANCHORS}
             if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
@@ -2387,3 +2398,67 @@ def require_v27_storage_contracts(report, profile, tool):
             raise ValueError('v27 storage contract scope or admission changed')
         dos_storage_contracts.validate(contract,
             dos_storage_policies_v27.policy(module, provider_communals(module)))
+
+
+PROVIDER_SPECS['source-owned:screen-clip-list'] = ('SCRLIST', None, (('_g_5A9C', 16),),
+    'struct Rect { int left; int top; int right; int bottom; }; '
+    '#define RECT_END ((int)0x8000) '
+    'struct Rect near g_5A9C[2] = { { 0, 0, 349, 639 }, '
+    '{ RECT_END, RECT_END, RECT_END, RECT_END } };')
+
+PROVIDER_SPECS['source-owned:remaining-far-state-words'] = ('FARW29', None,
+    tuple(('_fd_50F6_' + suffix, 2) for suffix in ('04C0', '0B20', '0F38', '0FB6', '0FFA')),
+    'int far fd_50F6_04C0; int far fd_50F6_0B20; int far fd_50F6_0F38; '
+    'int far fd_50F6_0FB6; int far fd_50F6_0FFA;')
+FAR_PROVIDER_MODULES.add('source-owned:remaining-far-state-words')
+V29_STORAGE_ANCHORS = {'_fd_50F6_' + suffix: (int(suffix, 16), ('fd_50F6_' + suffix,))
+    for suffix in ('04C0', '0B20', '0F38', '0FB6', '0FFA')}
+
+SCREEN_LIST_ALIASES = [
+    dict(module='source-owned:screen-clip-list', alias='_fd_55B3_5AA0', owner='_g_5A9C', offset=4, width=2),
+    dict(module='source-owned:screen-clip-list', alias='_fd_55B3_5AA2', owner='_g_5A9C', offset=6, width=2),
+]
+
+
+def bind_initialized_alias(spec, obj, row, symbols):
+    """Symbolic word views of the verified near Rect owner."""
+    if spec not in SCREEN_LIST_ALIASES or row.get('module') != spec['module']:
+        raise ValueError('unreviewed initialized interior view')
+    verify_initialized_provider(obj, row['storage_provider'])
+    review_initialized_provider(row['storage_provider'], symbols)
+    return dict(alias=spec['alias'], owner=spec['owner'], offset=spec['offset'],
+        kind='data', reason='reviewed source owner/interior view', module=spec['module'])
+
+
+def require_v29_storage_contracts(report, profile, tool):
+    import dos_storage_contracts
+    import dos_storage_policies_v29
+    contracts = dos_storage_policies_v29.CONTRACTS
+    _require_reviewed_storage_contracts(report, profile, tool, contracts)
+    modules = {row['module'] for row in report['translation_units']}
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(row['path'], row['sha256']) for row in report['runtime_components']]
+    for module, (key, _) in contracts.items():
+        if module not in modules:
+            continue
+        contract = report[key]
+        identities = {}
+        for item in contract['inputs']:
+            identity = runtime_component_path(item['path'])
+            if identity in identities and identities[identity] != item['sha256']:
+                raise ValueError('v29 storage duplicate input identities conflict')
+            identities[identity] = item['sha256']
+        if any(identities.get(runtime_component_path(path)) != digest for path, digest in components):
+            raise ValueError('v29 storage runtime component identities conflict')
+        if (contract.get('admitted') is not True or contract.get('original_game_bytes_used') != 0
+                or contract.get('historical_producer_or_placement_claimed') is not False
+                or contract.get('game_lifecycle_claimed') is not False):
+            raise ValueError('v29 storage contract admission/scope changed')
+        dos_storage_contracts.validate(contract, dos_storage_policies_v29.policy(module))
+        if module == 'source-owned:screen-clip-list':
+            aliases = [a for a in report.get('reviewed_initialized_aliases', []) if a['module'] == module]
+            row = next(r for r in report['translation_units'] if r['module'] == module)
+            if aliases != SCREEN_LIST_ALIASES or contract.get('public_DATA') != initialized_publics(module):
+                raise ValueError('screen-list complete owner/views changed')
+            review_initialized_provider(row['storage_provider'])

@@ -1,0 +1,213 @@
+
+ Start  Stop   Length Name                   Class               Group
+ 00000H 00005H 00006H REFFN_TEXT             CODE
+ 00006H 0087FH 0087AH _TEXT                  CODE
+ 00880H 00881H 00002H EMULATOR_TEXT          CODE
+ 00882H 00885H 00004H CDMEM_TEXT             CODE
+ 00886H 00886H 00000H C_ETEXT                ENDCODE
+ 00890H 00890H 00000H EMULATOR_DATA          FAR_DATA
+ 00890H 008D1H 00042H NULL                   BEGDATA             DGROUP
+ 008D2H 0095FH 0008EH _DATA                  DATA                DGROUP
+ 00960H 00961H 00002H XIQC                   DATA                DGROUP
+ 00962H 0096FH 0000EH DBDATA                 DATA                DGROUP
+ 00970H 0097DH 0000EH CDATA                  DATA                DGROUP
+ 0097EH 0097EH 00000H XIFB                   DATA                DGROUP
+ 0097EH 0097EH 00000H XIF                    DATA                DGROUP
+ 0097EH 0097EH 00000H XIFE                   DATA                DGROUP
+ 0097EH 0097EH 00000H XIB                    DATA                DGROUP
+ 0097EH 0097EH 00000H XI                     DATA                DGROUP
+ 0097EH 0097EH 00000H XIE                    DATA                DGROUP
+ 0097EH 0097EH 00000H XPB                    DATA                DGROUP
+ 0097EH 0097EH 00000H XP                     DATA                DGROUP
+ 0097EH 0097EH 00000H XPE                    DATA                DGROUP
+ 0097EH 0097EH 00000H XCB                    DATA                DGROUP
+ 0097EH 0097EH 00000H XC                     DATA                DGROUP
+ 0097EH 0097EH 00000H XCE                    DATA                DGROUP
+ 0097EH 0097EH 00000H XCFB                   DATA                DGROUP
+ 0097EH 0097EH 00000H XCF                    DATA                DGROUP
+ 0097EH 0097EH 00000H XCFE                   DATA                DGROUP
+ 0097EH 0097EH 00000H CONST                  CONST               DGROUP
+ 0097EH 00985H 00008H HDR                    MSG                 DGROUP
+ 00986H 00A5BH 000D6H MSG                    MSG                 DGROUP
+ 00A5CH 00A5DH 00002H PAD                    MSG                 DGROUP
+ 00A5EH 00A5EH 00001H EPAD                   MSG                 DGROUP
+ 00A60H 00A60H 00000H _BSS                   BSS                 DGROUP
+ 00A60H 00A60H 00000H XOB                    BSS                 DGROUP
+ 00A60H 00A60H 00000H XO                     BSS                 DGROUP
+ 00A60H 00A60H 00000H XOE                    BSS                 DGROUP
+ 00A60H 0125FH 00800H STACK                  STACK               DGROUP
+
+ Section# Fname          Faddr  Maddr  Size   Father   Section Name          Type Special Attributes
+    1H    TEST.EXE       00200H 00000H 01260H    0H                             R
+
+ Origin   Group
+ 0089:0   DGROUP
+
+  Load size: 5K
+
+
+  Address         Publics by Name                                                            local? Defining Module
+
+ 0000:0016       $$MAIN                                                                           Y N/A
+ 0089:01D0       _edata                                                                           Y N/A
+ 0089:01D0       _end                                                                             Y N/A
+ 0089:00A5       _environ                                                                         Y dos\crt0dat.asm
+ 0089:007C       _errno                                                                           Y dos\crt0dat.asm
+ 0000:01DB       _exit                                                                            Y dos\crt0dat.asm
+ 0000:0000       _main                                                                            Y REFFN.C
+ 0000:05C0       _malloc                                                                          Y malloc.asm
+ 0089:00CE       _probe_cd_data                                                                   Y CDMEM.C
+ 0088:0002       _probe_cd_fn                                                                     Y CDMEM.C
+ 0089:0060       __acfinfo                                                                        Y dos\crt0dat.asm
+ 0000:9876  Abs  __acrtmsg                                                                        Y dos\crt0msg.asm
+ 0000:9876  Abs  __acrtused                                                                       Y dos\crt0.asm
+ 0000:D6D6  Abs  __aDBdoswp                                                                       Y dos\crt0.asm
+ 0089:00B6       __adbgmsg                                                                        Y dos\crt0msg.asm
+ 0089:0044       __aexit_rtn                                                                      Y dos\crt0.asm
+ 0089:006E       __aintdiv                                                                        Y dos\crt0dat.asm
+ 0089:00CC       __amblksiz                                                                       Y growseg.asm
+ 0000:00F1       __amsg_exit                                                                      Y dos\crt0.asm
+ 0089:0042       __anullsize                                                                      Y chksum.asm
+ 0089:005C       __aseghi                                                                         Y dos\crt0.asm
+ 0089:005E       __aseglo                                                                         Y dos\crt0.asm
+ 0089:0046       __asizds                                                                         Y dos\crt0.asm
+ 0000:0016       __astart                                                                         Y dos\crt0.asm
+ 0089:0042       __atopsp                                                                         Y dos\crt0.asm
+ 0000:01EA       __cexit                                                                          Y dos\crt0dat.asm
+ 0089:00AE       __child                                                                          Y dos\crt0dat.asm
+ 0000:0116       __cinit                                                                          Y dos\crt0dat.asm
+ 0000:00E1       __cintDIV                                                                        Y dos\crt0.asm
+ 0000:025E       __ctermsub                                                                       Y dos\crt0dat.asm
+ 0000:01F4       __c_exit                                                                         Y dos\crt0dat.asm
+ 0000:0113       __dataseg                                                                        Y dos\crt0.asm
+ 0089:0087       __doserrno                                                                       Y dos\crt0dat.asm
+ 0089:0084       __dosvermajor                                                                    Y dos\crt0dat.asm
+ 0089:0085       __dosverminor                                                                    Y dos\crt0dat.asm
+ 0088:0000       __EmDataSeg                                                                      Y dos\crt0dat.asm
+ 0000:01E2       __exit                                                                           Y dos\crt0dat.asm
+ 0089:0072       __fac                                                                            Y dos\crt0dat.asm
+ 0000:05C6       __ffree                                                                          Y fmalloc.asm
+ 0000:029E       __FF_MSGBANNER                                                                   Y dos\crt0msg.asm
+ 0089:00BE       __fheap                                                                          Y fdata.asm
+ 0000:081C       __findlast                                                                       Y growseg.asm
+ 0000:05D9       __fmalloc                                                                        Y fmalloc.asm
+ 0089:00E2       __fpinit                                                                         Y dos\crt0dat.asm
+ 0000:02C0       __fptrap                                                                         Y crt0fp.asm
+ 0000:073C       __growseg                                                                        Y growseg.asm
+ 0000:07CB       __incseg                                                                         Y growseg.asm
+ 0000:0656       __initseg                                                                        Y initseg.asm
+ 0089:00B1       __intno                                                                          Y dos\crt0dat.asm
+ 0000:068A       __linkseg                                                                        Y linkseg.asm
+ 0000:059A       __myalloc                                                                        Y dos\stdalloc.asm
+ 0000:083C       __newseg                                                                         Y newseg.asm
+ 0089:0089       __nfile                                                                          Y dos\crt0dat.asm
+ 0089:0048       __nheap_desc                                                                     Y dos\crt0.asm
+ 0000:0538       __NMSG_TEXT                                                                      Y dos\nmsghdr.asm
+ 0000:0563       __NMSG_WRITE                                                                     Y dos\nmsghdr.asm
+ 0000:02C6       __nullcheck                                                                      Y chksum.asm
+ 0089:0087       __oserr                                                                          Y dos\crt0dat.asm
+ 0089:008B       __osfile                                                                         Y dos\crt0dat.asm
+ 0089:0084       __osmajor                                                                        Y dos\crt0dat.asm
+ 0089:0085       __osminor                                                                        Y dos\crt0dat.asm
+ 0089:0086       __osmode                                                                         Y dos\crt0dat.asm
+ 0089:0084       __osversion                                                                      Y dos\crt0dat.asm
+ 0089:00B0       __ovlflag                                                                        Y dos\crt0dat.asm
+ 0089:00B2       __ovlvec                                                                         Y dos\crt0dat.asm
+ 0089:00A9       __pgmptr                                                                         Y dos\crt0dat.asm
+ 0089:0082       __psp                                                                            Y dos\crt0dat.asm
+ 0089:0080       __pspadr                                                                         Y dos\crt0dat.asm
+ 0000:06C0       __searchseg                                                                      Y searchsg.asm
+ 0000:02EA       __setargv                                                                        Y dos\stdargv.asm
+ 0000:0498       __setenvp                                                                        Y dos\stdenvp.asm
+ 0089:007E       __umaskval                                                                       Y dos\crt0dat.asm
+ 0089:00D8       ___aDBexit                                                                       Y dos\crt0.asm
+ 0089:00DE       ___aDBptrchk                                                                     Y dos\crt0.asm
+ 0089:00D6       ___aDBrterr                                                                      Y dos\crt0.asm
+ 0089:00D4       ___aDBswpchk                                                                     Y dos\crt0.asm
+ 0089:00D2       ___aDBswpflg                                                                     Y dos\crt0.asm
+ 0089:009F       ___argc                                                                          Y dos\crt0dat.asm
+ 0089:00A1       ___argv                                                                          Y dos\crt0dat.asm
+ 0089:00D0       ___qczrinit                                                                      Y dos\crt0dat.asm
+
+  Address         Publics by Value                                                           local? Defining Module
+
+ 0000:0000       _main                                                                            Y REFFN.C
+ 0000:9876  Abs  __acrtmsg                                                                        Y dos\crt0msg.asm
+ 0000:9876  Abs  __acrtused                                                                       Y dos\crt0.asm
+ 0000:D6D6  Abs  __aDBdoswp                                                                       Y dos\crt0.asm
+ 0000:0016       $$MAIN                                                                           Y N/A
+ 0000:0016       __astart                                                                         Y dos\crt0.asm
+ 0000:00E1       __cintDIV                                                                        Y dos\crt0.asm
+ 0000:00F1       __amsg_exit                                                                      Y dos\crt0.asm
+ 0000:0113       __dataseg                                                                        Y dos\crt0.asm
+ 0000:0116       __cinit                                                                          Y dos\crt0dat.asm
+ 0000:01DB       _exit                                                                            Y dos\crt0dat.asm
+ 0000:01E2       __exit                                                                           Y dos\crt0dat.asm
+ 0000:01EA       __cexit                                                                          Y dos\crt0dat.asm
+ 0000:01F4       __c_exit                                                                         Y dos\crt0dat.asm
+ 0000:025E       __ctermsub                                                                       Y dos\crt0dat.asm
+ 0000:029E       __FF_MSGBANNER                                                                   Y dos\crt0msg.asm
+ 0000:02C0       __fptrap                                                                         Y crt0fp.asm
+ 0000:02C6       __nullcheck                                                                      Y chksum.asm
+ 0000:02EA       __setargv                                                                        Y dos\stdargv.asm
+ 0000:0498       __setenvp                                                                        Y dos\stdenvp.asm
+ 0000:0538       __NMSG_TEXT                                                                      Y dos\nmsghdr.asm
+ 0000:0563       __NMSG_WRITE                                                                     Y dos\nmsghdr.asm
+ 0000:059A       __myalloc                                                                        Y dos\stdalloc.asm
+ 0000:05C0       _malloc                                                                          Y malloc.asm
+ 0000:05C6       __ffree                                                                          Y fmalloc.asm
+ 0000:05D9       __fmalloc                                                                        Y fmalloc.asm
+ 0000:0656       __initseg                                                                        Y initseg.asm
+ 0000:068A       __linkseg                                                                        Y linkseg.asm
+ 0000:06C0       __searchseg                                                                      Y searchsg.asm
+ 0000:073C       __growseg                                                                        Y growseg.asm
+ 0000:07CB       __incseg                                                                         Y growseg.asm
+ 0000:081C       __findlast                                                                       Y growseg.asm
+ 0000:083C       __newseg                                                                         Y newseg.asm
+ 0088:0000       __EmDataSeg                                                                      Y dos\crt0dat.asm
+ 0088:0002       _probe_cd_fn                                                                     Y CDMEM.C
+ 0089:0042       __anullsize                                                                      Y chksum.asm
+ 0089:0042       __atopsp                                                                         Y dos\crt0.asm
+ 0089:0044       __aexit_rtn                                                                      Y dos\crt0.asm
+ 0089:0046       __asizds                                                                         Y dos\crt0.asm
+ 0089:0048       __nheap_desc                                                                     Y dos\crt0.asm
+ 0089:005C       __aseghi                                                                         Y dos\crt0.asm
+ 0089:005E       __aseglo                                                                         Y dos\crt0.asm
+ 0089:0060       __acfinfo                                                                        Y dos\crt0dat.asm
+ 0089:006E       __aintdiv                                                                        Y dos\crt0dat.asm
+ 0089:0072       __fac                                                                            Y dos\crt0dat.asm
+ 0089:007C       _errno                                                                           Y dos\crt0dat.asm
+ 0089:007E       __umaskval                                                                       Y dos\crt0dat.asm
+ 0089:0080       __pspadr                                                                         Y dos\crt0dat.asm
+ 0089:0082       __psp                                                                            Y dos\crt0dat.asm
+ 0089:0084       __dosvermajor                                                                    Y dos\crt0dat.asm
+ 0089:0084       __osmajor                                                                        Y dos\crt0dat.asm
+ 0089:0084       __osversion                                                                      Y dos\crt0dat.asm
+ 0089:0085       __dosverminor                                                                    Y dos\crt0dat.asm
+ 0089:0085       __osminor                                                                        Y dos\crt0dat.asm
+ 0089:0086       __osmode                                                                         Y dos\crt0dat.asm
+ 0089:0087       __doserrno                                                                       Y dos\crt0dat.asm
+ 0089:0087       __oserr                                                                          Y dos\crt0dat.asm
+ 0089:0089       __nfile                                                                          Y dos\crt0dat.asm
+ 0089:008B       __osfile                                                                         Y dos\crt0dat.asm
+ 0089:009F       ___argc                                                                          Y dos\crt0dat.asm
+ 0089:00A1       ___argv                                                                          Y dos\crt0dat.asm
+ 0089:00A5       _environ                                                                         Y dos\crt0dat.asm
+ 0089:00A9       __pgmptr                                                                         Y dos\crt0dat.asm
+ 0089:00AE       __child                                                                          Y dos\crt0dat.asm
+ 0089:00B0       __ovlflag                                                                        Y dos\crt0dat.asm
+ 0089:00B1       __intno                                                                          Y dos\crt0dat.asm
+ 0089:00B2       __ovlvec                                                                         Y dos\crt0dat.asm
+ 0089:00B6       __adbgmsg                                                                        Y dos\crt0msg.asm
+ 0089:00BE       __fheap                                                                          Y fdata.asm
+ 0089:00CC       __amblksiz                                                                       Y growseg.asm
+ 0089:00CE       _probe_cd_data                                                                   Y CDMEM.C
+ 0089:00D0       ___qczrinit                                                                      Y dos\crt0dat.asm
+ 0089:00D2       ___aDBswpflg                                                                     Y dos\crt0.asm
+ 0089:00D4       ___aDBswpchk                                                                     Y dos\crt0.asm
+ 0089:00D6       ___aDBrterr                                                                      Y dos\crt0.asm
+ 0089:00D8       ___aDBexit                                                                       Y dos\crt0.asm
+ 0089:00DE       ___aDBptrchk                                                                     Y dos\crt0.asm
+ 0089:00E2       __fpinit                                                                         Y dos\crt0dat.asm
+ 0089:01D0       _edata                                                                           Y N/A
+ 0089:01D0       _end                                                                             Y N/A

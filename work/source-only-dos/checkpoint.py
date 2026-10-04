@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 186 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 188 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v27.log',
-        'build/source-only-dos-tests-accepted-final-v27.log', 'build/source-only-dos-validation-v27.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-accepted-v29.log',
+        'build/source-only-dos-tests-accepted-v29-final.log', 'build/source-only-dos-validation-v29.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not re.search(r'(?m)^OK(?: \(skipped=2\))?$', test_log):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [370] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
+    if test_counts != [373] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
         raise ValueError('repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': 'bf19d25',
+        'source_only_base_checkpoint': '1f7cbc1276d7ba50f80f9f1a1afbb116d6d8de58',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -224,7 +224,19 @@ def main():
         'structural_audits_v27': pin(OUT / 'structural-audits-v27/archive-index.json'),
         'storage_owner_bindings_v27': [pin(OUT / (name + '-bindings-v1.json')) for name in
             ('remaining-sound-storage', 'remaining-misc-storage', 'window-ralloc-handles', 'render-delay-word')],
-        'source_only_tests': f'56 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'storage_admission_v29': pin(OUT / 'storage-admission-v29/root-admission.md'),
+        'storage_gates_v29': pin(ROOT / 'build/source-only-dos-gates-accepted-v29.log'),
+        'storage_owner_bindings_v29': [pin(OUT / (name + '-bindings-v1.json')) for name in
+            ('screen-clip-list', 'remaining-far-state-words')],
+        'storage_contracts_v29': [pin(OUT / (name + '-contract-v1.json')) for name in
+            ('screen-clip-list', 'remaining-far-state-words')],
+        'storage_root_raw_reviews_v29': [pin(OUT / ('storage-admission-v29/' + name + '/root-raw-review.json'))
+            for name in ('screen', 'words')],
+        'storage_root_mechanics_v29': pin(OUT / 'storage-admission-v29/root-mechanics/index.json'),
+        'structural_audits_v29': pin(OUT / 'structural-audits-v29/archive-index.json'),
+        'storage_focused_tests_v29': pin(ROOT / 'build/source-only-dos-focused-final-v29.log'),
+        'selector_regression_v29': pin(ROOT / 'build/source-only-dos-selector-regression-v29.log'),
+        'source_only_tests': f'59 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

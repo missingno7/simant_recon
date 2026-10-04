@@ -1,0 +1,1382 @@
+{
+  "schema": "simant-far-bss-normalized-storage-candidate-v35",
+  "status": "ROOT_FALSE_CANDIDATE_FOR_REVIEW",
+  "root_reviewed": false,
+  "root_claimed": false,
+  "module": "source-owned:remaining-far-state-words",
+  "module_identity_scope": "Normalized source-owned family label only; it does not identify the historical defining translation unit.",
+  "storage_region": "FAR_BSS",
+  "original_segment": "50F6",
+  "proposed_source_declaration": "signed int far <symbol>;",
+  "candidate_object_extent_bytes": 2,
+  "extent_basis": "Natural target-typed C scalar plus actual MSC 6.00AX FAR COMDEF byte length; no inferred gap/neighbor size.",
+  "candidate_initializer": "none (tentative definition)",
+  "original_image_initial_value": 0,
+  "original_initial_value_evidence": "v33 locked-image measurement: complete FAR_BSS region is zero; v34 target receipts repeat 0000 per word.",
+  "isolated_candidate_startup_value": 0,
+  "isolated_startup_controls": [
+    "rtlink400/typed_raw_startup0",
+    "rtlink610/typed_raw_startup0"
+  ],
+  "mutable": true,
+  "permanent_zero_claim": false,
+  "read_only_claim": false,
+  "full_game_alias_clobber_closure": "OPEN under existing source-only and layout gates",
+  "full_game_first_use_lifetime_order": "OPEN under existing source-only and layout gates",
+  "historical_defining_translation_unit_and_COMDEF_extent": "OPEN",
+  "scope_blocker_beyond_historical_TU": "No additional typed-representation or concrete-neighbor/index extent blocker was identified in the pinned source and v34 frontiers. The map-bound runtime value/setup behavior remains unresolved because no setup writer was found; this blocks a map-dimension behavior claim, not the proposed two-byte source representation.",
+  "synthetic_boundary_control_limit": "The runtime guard tests its own offset-plus-length policy. It is not evidence of a historical source object extent.",
+  "aliases": {
+    "fd_50F6_04C0": [],
+    "fd_50F6_0B20": [],
+    "fd_50F6_0F38": [],
+    "fd_50F6_0FB6": [],
+    "fd_50F6_0FFA": []
+  },
+  "alias_closure_basis": "No current reviewed data alias is in segment 50F6; v34 provider/view/save overlaps are empty for each target and its named concrete frontiers are closed.",
+  "save_rec_pointer_fixups": [],
+  "save_rec_target_payload_overlaps": [],
+  "historical_layout_gate": "Unchanged. Any later placement must satisfy the existing exact source/layout ownership gates; this candidate neither edits nor bypasses them.",
+  "targets": [
+    {
+      "symbol": "fd_50F6_04C0",
+      "address": "50F6:04C0",
+      "candidate_type": "signed int far",
+      "candidate_extent": "[0x04C0,0x04C2)",
+      "observed_original_direct_reads": 1,
+      "observed_original_direct_stores": 0,
+      "functional_role": "main compares to zero before toggling balloon/window indicator",
+      "concrete_alias_or_index_frontier": "AddMsgBalloon array candidates: 04A6 pointer-array index 6 crosses target; indices -2/-19/-27 in bases 04C8/04E6/04F6 would touch target",
+      "frontier_result": "fd_1092 is zero-start with only reset-to-zero and guarded increments; AddMsgBalloon returns for count >= 6, so only indices 0..5 occur. The negative-index routes are excluded by the same invariant.",
+      "historical_extent": "OPEN; do not promote the candidate COMDEF byte size to an original historical extent."
+    },
+    {
+      "symbol": "fd_50F6_0B20",
+      "address": "50F6:0B20",
+      "candidate_type": "signed int far",
+      "candidate_extent": "[0x0B20,0x0B22)",
+      "observed_original_direct_reads": 2,
+      "observed_original_direct_stores": 0,
+      "functional_role": "two equality tests against 0xA8 and 0x8D",
+      "concrete_alias_or_index_frontier": "TallyModePop writes six words at 0B12..0B1C; ResetYellowVars writes the separate 0B1E word",
+      "frontier_result": "The six-word provider ends at 0B1E; the exact source-owned fd_50F6_0B1E and SaveRec span is [0B1E,0B20). Reaching 0B20 through the array requires index 7, absent from the unrolled stores and bounded readers.",
+      "historical_extent": "OPEN; do not promote the candidate COMDEF byte size to an original historical extent."
+    },
+    {
+      "symbol": "fd_50F6_0F38",
+      "address": "50F6:0F38",
+      "candidate_type": "signed int far",
+      "candidate_extent": "[0x0F38,0x0F3A)",
+      "observed_original_direct_reads": 3,
+      "observed_original_direct_stores": 0,
+      "functional_role": "upper vertical scroll clamp",
+      "concrete_alias_or_index_frontier": "DrawSwarm indexes registered byte buffer 0F46 from BX=si+0F46",
+      "frontier_result": "si is initialized to zero and bounded by si < 16; it cannot index backward from 0F46 to 0F38.",
+      "historical_extent": "OPEN; do not promote the candidate COMDEF byte size to an original historical extent."
+    },
+    {
+      "symbol": "fd_50F6_0FB6",
+      "address": "50F6:0FB6",
+      "candidate_type": "signed int far",
+      "candidate_extent": "[0x0FB6,0x0FB8)",
+      "observed_original_direct_reads": 12,
+      "observed_original_direct_stores": 0,
+      "functional_role": "right endpoint to InvalEuMap; also used in map centering and scroll-limit arithmetic",
+      "concrete_alias_or_index_frontier": "DrawSwarm byte buffer fd_50F6_0F84, accessed as BX=si+0F84",
+      "frontier_result": "Provider extent [0F84,0FB6); DrawSwarm si is 0..15, while target is byte index 50. No current provider, reviewed alias, SaveRec span, or target-address escape contains the word.",
+      "historical_extent": "OPEN; do not promote the candidate COMDEF byte size to an original historical extent."
+    },
+    {
+      "symbol": "fd_50F6_0FFA",
+      "address": "50F6:0FFA",
+      "candidate_type": "signed int far",
+      "candidate_extent": "[0x0FFA,0x0FFC)",
+      "observed_original_direct_reads": 10,
+      "observed_original_direct_stores": 0,
+      "functional_role": "bottom endpoint to InvalEuMap; also used for vertical map centering",
+      "concrete_alias_or_index_frontier": "DrawSwarm byte buffer fd_50F6_0FC6, accessed as BX=si+0FC6",
+      "frontier_result": "Provider extent [0FC6,0FF8); DrawSwarm si is 0..15, while target is byte index 52. fd_50F6_0FF8 is a separate two-byte object ending at 0FFA. No current provider, reviewed alias, SaveRec span, or target-address escape contains the word.",
+      "historical_extent": "OPEN; do not promote the candidate COMDEF byte size to an original historical extent."
+    }
+  ],
+  "map_endpoint_state": {
+    "fd_50F6_0FB6": {
+      "role": "InvalEuMap right endpoint, clamped by consumer to 127 and iterated inclusively",
+      "setup_writer": "none found",
+      "intended_or_runtime_value": "unknown"
+    },
+    "fd_50F6_0FFA": {
+      "role": "InvalEuMap bottom endpoint, clamped by consumer to 63 and iterated inclusively",
+      "setup_writer": "none found",
+      "intended_or_runtime_value": "unknown"
+    }
+  },
+  "evidence": {
+    "source_pins": {
+      "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/source-pins.json",
+      "sha256": "8273f7b962c39e6471fd5fb69b4d17b2f9bd2066819cb3a078b4d8facb12046a",
+      "size": 43574
+    },
+    "source_scan": {
+      "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/source-scan.json",
+      "sha256": "9b1d8bea86f7545150b3284a11fe159aa1777ef3a3971bc0b62dc5d520c976a6",
+      "size": 11135
+    },
+    "natural_provider_object": {
+      "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/OWNV35.OBJ",
+      "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+      "size": 281
+    },
+    "all_provider_control_OMF_and_raw_compiler_logs": {
+      "OWNV35": {
+        "source": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/OWNV35.C",
+          "sha256": "aa1a69cdef729273690d958b267dec1cd24cb5084cda2fb5e9d2d7d5f9cdb975",
+          "size": 189
+        },
+        "object": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/OWNV35.OBJ",
+          "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+          "size": 281
+        },
+        "compiler_log": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/OWNV35.LOG",
+          "sha256": "5f1183ef0ddd4edabfa6e8ebf451f9860c1c0b663d278392a75e4d1ee2c4784c",
+          "size": 9
+        },
+        "COMDEFs": [
+          {
+            "name": "_fd_50F6_04C0",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0B20",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0F38",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FB6",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FFA",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          }
+        ],
+        "segment_lengths": {
+          "OWNV35_TEXT": 0,
+          "_DATA": 0,
+          "CONST": 0,
+          "_BSS": 0
+        },
+        "raw_COMDEF_records": [
+          {
+            "object_offset": 175,
+            "record_type": "B0",
+            "record_length_including_checksum": 94,
+            "record_hex": "B05B000D5F66645F353046365F30344330006102010D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F304646410061020161",
+            "body_hex": "0D5F66645F353046365F30344330006102010D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F3046464100610201"
+          }
+        ]
+      },
+      "WIDV35": {
+        "source": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/WIDV35.C",
+          "sha256": "91bf43a379ca15a74f9e2446bda224422a7a2907bc3511b9c7dbb8a037621802",
+          "size": 190
+        },
+        "object": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/WIDV35.OBJ",
+          "sha256": "c9731f689ae226ea81c8c8d5a75cfe1e826356a9300d3a58f1145bf984e5feb1",
+          "size": 281
+        },
+        "compiler_log": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/WIDV35.LOG",
+          "sha256": "5db77b6d25a6ede9308d4c3622d6f4159c2c9da3ede7b4d85dc2103558e4784f",
+          "size": 9
+        },
+        "COMDEFs": [
+          {
+            "name": "_fd_50F6_04C0",
+            "kind": "far",
+            "count": 4,
+            "element_size": 1,
+            "length": 4
+          },
+          {
+            "name": "_fd_50F6_0B20",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0F38",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FB6",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FFA",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          }
+        ],
+        "segment_lengths": {
+          "WIDV35_TEXT": 0,
+          "_DATA": 0,
+          "CONST": 0,
+          "_BSS": 0
+        },
+        "raw_COMDEF_records": [
+          {
+            "object_offset": 175,
+            "record_type": "B0",
+            "record_length_including_checksum": 94,
+            "record_hex": "B05B000D5F66645F353046365F30344330006104010D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F30464641006102015F",
+            "body_hex": "0D5F66645F353046365F30344330006104010D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F3046464100610201"
+          }
+        ]
+      },
+      "SIGV35": {
+        "source": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/SIGV35.C",
+          "sha256": "8fcf5a8b991d7eea8ddd1acff48972161e022c5c53e012aa963ece4517115a6a",
+          "size": 198
+        },
+        "object": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/SIGV35.OBJ",
+          "sha256": "05e0b3dfeba07f650dd3680f160b139f34bea9e1b04d29f58d8acc3e7bbfdb5d",
+          "size": 281
+        },
+        "compiler_log": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/SIGV35.LOG",
+          "sha256": "f5d6b2372be82b8dff7294cc0c1440267415053600b3ae19bb0ba8a84daf1b5c",
+          "size": 9
+        },
+        "COMDEFs": [
+          {
+            "name": "_fd_50F6_04C0",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0B20",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0F38",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FB6",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FFA",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          }
+        ],
+        "segment_lengths": {
+          "SIGV35_TEXT": 0,
+          "_DATA": 0,
+          "CONST": 0,
+          "_BSS": 0
+        },
+        "raw_COMDEF_records": [
+          {
+            "object_offset": 175,
+            "record_type": "B0",
+            "record_length_including_checksum": 94,
+            "record_hex": "B05B000D5F66645F353046365F30344330006102010D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F304646410061020161",
+            "body_hex": "0D5F66645F353046365F30344330006102010D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F3046464100610201"
+          }
+        ]
+      },
+      "INITV35": {
+        "source": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/INITV35.C",
+          "sha256": "5d677a321606284185b01f3f8aa1f1c6908ea238a2f7df5a686c2efe3275c18b",
+          "size": 193
+        },
+        "object": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/INITV35.OBJ",
+          "sha256": "5292f1ac70c0e52b83eea63cf415b32412a587d908c93cad2dca0b57b41a4414",
+          "size": 330
+        },
+        "compiler_log": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/compile-artifacts/INITV35.LOG",
+          "sha256": "2373cb66766a78186fc288e3580de8c01a45ab3fe9d4a7e885d6503f1dbd61a6",
+          "size": 10
+        },
+        "COMDEFs": [
+          {
+            "name": "_fd_50F6_0B20",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0F38",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FB6",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0FFA",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          }
+        ],
+        "segment_lengths": {
+          "INITV35_TEXT": 0,
+          "_DATA": 0,
+          "CONST": 0,
+          "_BSS": 0,
+          "INITV355_DATA": 2
+        },
+        "raw_COMDEF_records": [
+          {
+            "object_offset": 210,
+            "record_type": "B0",
+            "record_length_including_checksum": 76,
+            "record_hex": "B049000D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F304646410061020183",
+            "body_hex": "0D5F66645F353046365F30423230006102010D5F66645F353046365F30463338006102010D5F66645F353046365F30464236006102010D5F66645F353046365F3046464100610201"
+          }
+        ]
+      }
+    },
+    "all_RTLink_MAP_sections_and_complete_raw_logs": [
+      {
+        "linker": "rtlink400",
+        "case": "typed_raw_startup0",
+        "expected_run_log": "PASS",
+        "actual_run_log": "PASS",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "01F70H 01F70H 00000H EMULATOR_DATA          FAR_DATA",
+            "01F70H 01F79H 0000AH FAR_BSS                FAR_BSS",
+            "01FC2H 02263H 002A2H _DATA                  DATA                DGROUP",
+            "02372H 02372H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "01F70H 01F70H 00000H EMULATOR_DATA          FAR_DATA",
+            "01F70H 01F79H 0000AH FAR_BSS                FAR_BSS",
+            "01FC2H 02263H 002A2H _DATA                  DATA                DGROUP",
+            "02372H 02372H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "01F7:0008",
+            "_fd_50f6_0b20": "01F7:0006",
+            "_fd_50f6_0f38": "01F7:0004",
+            "_fd_50f6_0fb6": "01F7:0002",
+            "_fd_50f6_0ffa": "01F7:0000"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "01F7:0008",
+            "_fd_50f6_0b20": "01F7:0006",
+            "_fd_50f6_0f38": "01F7:0004",
+            "_fd_50f6_0fb6": "01F7:0002",
+            "_fd_50f6_0ffa": "01F7:0000"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/PROBE.MAP",
+          "sha256": "c6ed7bfeeaf79f7c8027fe2f465aa4d8e4be114436d5e4f3b1651ec26ef65220",
+          "size": 11743
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/LINK.LOG",
+          "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+          "size": 494
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/TEST.OBJ",
+            "sha256": "504851439ff8ad26fadf432156d52710e71eadadc5637f8960061a273bd2b040",
+            "size": 869
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/OWNER.OBJ",
+            "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+            "size": 281
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/RUN.BAT",
+            "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+            "size": 75
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/dosbox.conf",
+            "sha256": "8c4c193bf8f8fdfc32d6e55d27acabf2dd97512d3efb67dce6f83549fc0fb350",
+            "size": 501
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/PROBE.EXE",
+            "sha256": "75be934f0819d9ef1eca5b87141f6b5c63195b1d392451da5b3ce4b2b36cb04e",
+            "size": 9633
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/PROBE.MAP",
+            "sha256": "c6ed7bfeeaf79f7c8027fe2f465aa4d8e4be114436d5e4f3b1651ec26ef65220",
+            "size": 11743
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/LINK.LOG",
+            "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+            "size": 494
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_startup0/RUN.LOG",
+            "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+            "size": 6
+          }
+        ]
+      },
+      {
+        "linker": "rtlink400",
+        "case": "typed_raw_boundary_guard",
+        "expected_run_log": "PASS",
+        "actual_run_log": "PASS",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "01F40H 01F40H 00000H EMULATOR_DATA          FAR_DATA",
+            "01F40H 01F49H 0000AH FAR_BSS                FAR_BSS",
+            "01F92H 02233H 002A2H _DATA                  DATA                DGROUP",
+            "02342H 02342H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "01F40H 01F40H 00000H EMULATOR_DATA          FAR_DATA",
+            "01F40H 01F49H 0000AH FAR_BSS                FAR_BSS",
+            "01F92H 02233H 002A2H _DATA                  DATA                DGROUP",
+            "02342H 02342H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "01F4:0008",
+            "_fd_50f6_0b20": "01F4:0006",
+            "_fd_50f6_0f38": "01F4:0004",
+            "_fd_50f6_0fb6": "01F4:0002",
+            "_fd_50f6_0ffa": "01F4:0000"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "01F4:0008",
+            "_fd_50f6_0b20": "01F4:0006",
+            "_fd_50f6_0f38": "01F4:0004",
+            "_fd_50f6_0fb6": "01F4:0002",
+            "_fd_50f6_0ffa": "01F4:0000"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/PROBE.MAP",
+          "sha256": "149a78894e79558ae454808f300dcded15ed6aca7e88df54c67c6241047c1402",
+          "size": 11809
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/LINK.LOG",
+          "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+          "size": 494
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/TEST.OBJ",
+            "sha256": "d005b4f174b1e905c6ac8565a058762d17c45fd91f71373adcb10aee5d9ed8e3",
+            "size": 773
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/OWNER.OBJ",
+            "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+            "size": 281
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/RUN.BAT",
+            "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+            "size": 75
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/dosbox.conf",
+            "sha256": "9af7d085a6a52c0773d432068105eaee01812f2395d3ebb96a0aaa0076acbfd8",
+            "size": 507
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/PROBE.EXE",
+            "sha256": "ce2504761e0e2a7ad4d67b4fe2b3b00d18a8fa32072dd1a8306cff4f950ca59e",
+            "size": 9585
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/PROBE.MAP",
+            "sha256": "149a78894e79558ae454808f300dcded15ed6aca7e88df54c67c6241047c1402",
+            "size": 11809
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/LINK.LOG",
+            "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+            "size": 494
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/typed_raw_boundary_guard/RUN.LOG",
+            "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+            "size": 6
+          }
+        ]
+      },
+      {
+        "linker": "rtlink400",
+        "case": "unsigned_signedness_contrast",
+        "expected_run_log": "FAIL",
+        "actual_run_log": "FAIL",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "01E40H 01E40H 00000H EMULATOR_DATA          FAR_DATA",
+            "01E40H 01E49H 0000AH FAR_BSS                FAR_BSS",
+            "01E92H 02133H 002A2H _DATA                  DATA                DGROUP",
+            "0223AH 0223AH 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "01E40H 01E40H 00000H EMULATOR_DATA          FAR_DATA",
+            "01E40H 01E49H 0000AH FAR_BSS                FAR_BSS",
+            "01E92H 02133H 002A2H _DATA                  DATA                DGROUP",
+            "0223AH 0223AH 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "01E4:0000",
+            "_fd_50f6_0b20": "01E4:0002",
+            "_fd_50f6_0f38": "01E4:0004",
+            "_fd_50f6_0fb6": "01E4:0006",
+            "_fd_50f6_0ffa": "01E4:0008"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "01E4:0000",
+            "_fd_50f6_0b20": "01E4:0002",
+            "_fd_50f6_0f38": "01E4:0004",
+            "_fd_50f6_0fb6": "01E4:0006",
+            "_fd_50f6_0ffa": "01E4:0008"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/PROBE.MAP",
+          "sha256": "259c29627e3e84531ac91bf573e0f3798c2835f03542877e1c0403afa4ae7a68",
+          "size": 11743
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/LINK.LOG",
+          "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+          "size": 494
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/TEST.OBJ",
+            "sha256": "81381ec874f4a5da428c638cce674c9515033555f24ce6620b1045218f8832f4",
+            "size": 333
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/OWNER.OBJ",
+            "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+            "size": 281
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/RUN.BAT",
+            "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+            "size": 75
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/dosbox.conf",
+            "sha256": "3b48dda422b2d413a84a231d35510f9afd52c22d4d94e3822ee87a9f9f210509",
+            "size": 511
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/PROBE.EXE",
+            "sha256": "f98bb60576b16fd6c609a0df3d5fd0adfcbe524aac65b945b0a88004c2a901a2",
+            "size": 9305
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/PROBE.MAP",
+            "sha256": "259c29627e3e84531ac91bf573e0f3798c2835f03542877e1c0403afa4ae7a68",
+            "size": 11743
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/LINK.LOG",
+            "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+            "size": 494
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/unsigned_signedness_contrast/RUN.LOG",
+            "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+            "size": 6
+          }
+        ]
+      },
+      {
+        "linker": "rtlink400",
+        "case": "initialized_owner_startup_contrast",
+        "expected_run_log": "FAIL",
+        "actual_run_log": "FAIL",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "01F70H 01F71H 00002H INITV355_DATA          FAR_DATA",
+            "01F80H 01F80H 00000H EMULATOR_DATA          FAR_DATA",
+            "01F80H 01F87H 00008H FAR_BSS                FAR_BSS",
+            "01FD2H 02273H 002A2H _DATA                  DATA                DGROUP",
+            "02382H 02382H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "01F70H 01F71H 00002H INITV355_DATA          FAR_DATA",
+            "01F80H 01F80H 00000H EMULATOR_DATA          FAR_DATA",
+            "01F80H 01F87H 00008H FAR_BSS                FAR_BSS",
+            "01FD2H 02273H 002A2H _DATA                  DATA                DGROUP",
+            "02382H 02382H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "01F7:0000",
+            "_fd_50f6_0b20": "01F8:0006",
+            "_fd_50f6_0f38": "01F8:0004",
+            "_fd_50f6_0fb6": "01F8:0002",
+            "_fd_50f6_0ffa": "01F8:0000"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "01F7:0000",
+            "_fd_50f6_0b20": "01F8:0006",
+            "_fd_50f6_0f38": "01F8:0004",
+            "_fd_50f6_0fb6": "01F8:0002",
+            "_fd_50f6_0ffa": "01F8:0000"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/PROBE.MAP",
+          "sha256": "f3b2443bd058b8b258bfc1f3811335580a12724355a2fc7c6e13ea6e7e667937",
+          "size": 11798
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/LINK.LOG",
+          "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+          "size": 494
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/TEST.OBJ",
+            "sha256": "504851439ff8ad26fadf432156d52710e71eadadc5637f8960061a273bd2b040",
+            "size": 869
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/OWNER.OBJ",
+            "sha256": "5292f1ac70c0e52b83eea63cf415b32412a587d908c93cad2dca0b57b41a4414",
+            "size": 330
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/RUN.BAT",
+            "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+            "size": 75
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/dosbox.conf",
+            "sha256": "52427805b2843c2325c2aeaa5c1aa56ffa92e623811506ece7614371e04ff54c",
+            "size": 517
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/PROBE.EXE",
+            "sha256": "6a07e56a8271b73745f07e5b99e15ccbbcd0314f663f0d528da9dacaa4c06fc5",
+            "size": 9649
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/PROBE.MAP",
+            "sha256": "f3b2443bd058b8b258bfc1f3811335580a12724355a2fc7c6e13ea6e7e667937",
+            "size": 11798
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/LINK.LOG",
+            "sha256": "b1ccbb09ec07c0a10f69b98cbf22f58d1895aa0a56cce9f8a01af1fdde5f877e",
+            "size": 494
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink400/initialized_owner_startup_contrast/RUN.LOG",
+            "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+            "size": 6
+          }
+        ]
+      },
+      {
+        "linker": "rtlink610",
+        "case": "typed_raw_startup0",
+        "expected_run_log": "PASS",
+        "actual_run_log": "PASS",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "02380H 02380H 00000H EMULATOR_DATA          FAR_DATA",
+            "02380H 02389H 0000AH FAR_BSS                FAR_BSS",
+            "023D2H 02673H 002A2H _DATA                  DATA                DGROUP",
+            "02782H 02782H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "02380H 02380H 00000H EMULATOR_DATA          FAR_DATA",
+            "02380H 02389H 0000AH FAR_BSS                FAR_BSS",
+            "023D2H 02673H 002A2H _DATA                  DATA                DGROUP",
+            "02782H 02782H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "0238:0008",
+            "_fd_50f6_0b20": "0238:0006",
+            "_fd_50f6_0f38": "0238:0004",
+            "_fd_50f6_0fb6": "0238:0002",
+            "_fd_50f6_0ffa": "0238:0000"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "0238:0008",
+            "_fd_50f6_0b20": "0238:0006",
+            "_fd_50f6_0f38": "0238:0004",
+            "_fd_50f6_0fb6": "0238:0002",
+            "_fd_50f6_0ffa": "0238:0000"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/PROBE.MAP",
+          "sha256": "16ae2c26406f393aa35e2c559108abc8c8ecbad387bcfbb3da65081eee7a7078",
+          "size": 12926
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/LINK.LOG",
+          "sha256": "73bcf49a7c7303981ae2ab4613c0852074cbe576778e151550aaa0d46807c11d",
+          "size": 1186
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/TEST.OBJ",
+            "sha256": "504851439ff8ad26fadf432156d52710e71eadadc5637f8960061a273bd2b040",
+            "size": 869
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/OWNER.OBJ",
+            "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+            "size": 281
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/RUN.BAT",
+            "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+            "size": 77
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/dosbox.conf",
+            "sha256": "b0af67121b4a20cc5af0ee1aed4e5efe827473ac27e408cfa42615e93750f7da",
+            "size": 501
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/PROBE.EXE",
+            "sha256": "b5658f4a5513ee441582ba5e792da8f8de1e1355922f6db513ea09790c656bf3",
+            "size": 10673
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/PROBE.MAP",
+            "sha256": "16ae2c26406f393aa35e2c559108abc8c8ecbad387bcfbb3da65081eee7a7078",
+            "size": 12926
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/LINK.LOG",
+            "sha256": "73bcf49a7c7303981ae2ab4613c0852074cbe576778e151550aaa0d46807c11d",
+            "size": 1186
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_startup0/RUN.LOG",
+            "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+            "size": 6
+          }
+        ]
+      },
+      {
+        "linker": "rtlink610",
+        "case": "typed_raw_boundary_guard",
+        "expected_run_log": "PASS",
+        "actual_run_log": "PASS",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "02350H 02350H 00000H EMULATOR_DATA          FAR_DATA",
+            "02350H 02359H 0000AH FAR_BSS                FAR_BSS",
+            "023A2H 02643H 002A2H _DATA                  DATA                DGROUP",
+            "02752H 02752H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "02350H 02350H 00000H EMULATOR_DATA          FAR_DATA",
+            "02350H 02359H 0000AH FAR_BSS                FAR_BSS",
+            "023A2H 02643H 002A2H _DATA                  DATA                DGROUP",
+            "02752H 02752H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "0235:0008",
+            "_fd_50f6_0b20": "0235:0006",
+            "_fd_50f6_0f38": "0235:0004",
+            "_fd_50f6_0fb6": "0235:0002",
+            "_fd_50f6_0ffa": "0235:0000"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "0235:0008",
+            "_fd_50f6_0b20": "0235:0006",
+            "_fd_50f6_0f38": "0235:0004",
+            "_fd_50f6_0fb6": "0235:0002",
+            "_fd_50f6_0ffa": "0235:0000"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/PROBE.MAP",
+          "sha256": "bf6dea2e23472fe1790c94c2c2170d8d556fe165b46b4098a0056a2b7e143426",
+          "size": 12992
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/LINK.LOG",
+          "sha256": "5d00eeee994202b5c64354b804478e22a1fedebaacca8d0476fc85f0134747f7",
+          "size": 1186
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/TEST.OBJ",
+            "sha256": "d005b4f174b1e905c6ac8565a058762d17c45fd91f71373adcb10aee5d9ed8e3",
+            "size": 773
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/OWNER.OBJ",
+            "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+            "size": 281
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/RUN.BAT",
+            "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+            "size": 77
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/dosbox.conf",
+            "sha256": "b411b08473565bc5ea3b3618d8821cd3b04b866496aefaf4994650fe14c4862e",
+            "size": 507
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/PROBE.EXE",
+            "sha256": "84ce6114135d7f393fd51e389a20ede82556fbeb6bab2c61e843a775d9a87192",
+            "size": 10625
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/PROBE.MAP",
+            "sha256": "bf6dea2e23472fe1790c94c2c2170d8d556fe165b46b4098a0056a2b7e143426",
+            "size": 12992
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/LINK.LOG",
+            "sha256": "5d00eeee994202b5c64354b804478e22a1fedebaacca8d0476fc85f0134747f7",
+            "size": 1186
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/typed_raw_boundary_guard/RUN.LOG",
+            "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+            "size": 6
+          }
+        ]
+      },
+      {
+        "linker": "rtlink610",
+        "case": "unsigned_signedness_contrast",
+        "expected_run_log": "FAIL",
+        "actual_run_log": "FAIL",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "02250H 02250H 00000H EMULATOR_DATA          FAR_DATA",
+            "02250H 02259H 0000AH FAR_BSS                FAR_BSS",
+            "022A2H 02543H 002A2H _DATA                  DATA                DGROUP",
+            "0264AH 0264AH 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "02250H 02250H 00000H EMULATOR_DATA          FAR_DATA",
+            "02250H 02259H 0000AH FAR_BSS                FAR_BSS",
+            "022A2H 02543H 002A2H _DATA                  DATA                DGROUP",
+            "0264AH 0264AH 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "0225:0000",
+            "_fd_50f6_0b20": "0225:0002",
+            "_fd_50f6_0f38": "0225:0004",
+            "_fd_50f6_0fb6": "0225:0006",
+            "_fd_50f6_0ffa": "0225:0008"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "0225:0000",
+            "_fd_50f6_0b20": "0225:0002",
+            "_fd_50f6_0f38": "0225:0004",
+            "_fd_50f6_0fb6": "0225:0006",
+            "_fd_50f6_0ffa": "0225:0008"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/PROBE.MAP",
+          "sha256": "f8583c073bf2c6400462e111ab1ab2fc1f81a1246eb9dc80f5b8f426ca27b864",
+          "size": 12926
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/LINK.LOG",
+          "sha256": "0885ffa276e9ed12e42e768025a953d81abaa7f4a6a36f1ed7fea6d72a864430",
+          "size": 1185
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/TEST.OBJ",
+            "sha256": "81381ec874f4a5da428c638cce674c9515033555f24ce6620b1045218f8832f4",
+            "size": 333
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/OWNER.OBJ",
+            "sha256": "650ece9d34fc86b7cf368b91f64ca8480c130ccfe26fc0bec982fcfd1ff80d63",
+            "size": 281
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/RUN.BAT",
+            "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+            "size": 77
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/dosbox.conf",
+            "sha256": "71fc00d7e4a840611a2471d21a9d0ed7f81a56af5c3030b8af8b8e9bd4016ff9",
+            "size": 511
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/PROBE.EXE",
+            "sha256": "2d986d5d4a6fa2aa33158f71960f291b71f8931a39271aacba192eb2eca6ba03",
+            "size": 10345
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/PROBE.MAP",
+            "sha256": "f8583c073bf2c6400462e111ab1ab2fc1f81a1246eb9dc80f5b8f426ca27b864",
+            "size": 12926
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/LINK.LOG",
+            "sha256": "0885ffa276e9ed12e42e768025a953d81abaa7f4a6a36f1ed7fea6d72a864430",
+            "size": 1185
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/unsigned_signedness_contrast/RUN.LOG",
+            "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+            "size": 6
+          }
+        ]
+      },
+      {
+        "linker": "rtlink610",
+        "case": "initialized_owner_startup_contrast",
+        "expected_run_log": "FAIL",
+        "actual_run_log": "FAIL",
+        "passed": true,
+        "map_sections": {
+          "resident_data_section_rows": [],
+          "overlay_data_section_rows": [
+            "02380H 02381H 00002H INITV355_DATA          FAR_DATA",
+            "02390H 02390H 00000H EMULATOR_DATA          FAR_DATA",
+            "02390H 02397H 00008H FAR_BSS                FAR_BSS",
+            "023E2H 02683H 002A2H _DATA                  DATA                DGROUP",
+            "02792H 02792H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "all_data_section_rows": [
+            "02380H 02381H 00002H INITV355_DATA          FAR_DATA",
+            "02390H 02390H 00000H EMULATOR_DATA          FAR_DATA",
+            "02390H 02397H 00008H FAR_BSS                FAR_BSS",
+            "023E2H 02683H 002A2H _DATA                  DATA                DGROUP",
+            "02792H 02792H 00000H _BSS                   BSS                 DGROUP"
+          ],
+          "target_publics_by_name": {
+            "_fd_50f6_04c0": "0238:0000",
+            "_fd_50f6_0b20": "0239:0006",
+            "_fd_50f6_0f38": "0239:0004",
+            "_fd_50f6_0fb6": "0239:0002",
+            "_fd_50f6_0ffa": "0239:0000"
+          },
+          "target_publics_by_value": {
+            "_fd_50f6_04c0": "0238:0000",
+            "_fd_50f6_0b20": "0239:0006",
+            "_fd_50f6_0f38": "0239:0004",
+            "_fd_50f6_0fb6": "0239:0002",
+            "_fd_50f6_0ffa": "0239:0000"
+          },
+          "both_public_sections_exact": true
+        },
+        "raw_MAP": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/PROBE.MAP",
+          "sha256": "fd8102208b3fdfa36feab93099efa34082a8b49d87961f491124e886bda6aab4",
+          "size": 12981
+        },
+        "raw_LINK_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/LINK.LOG",
+          "sha256": "b3b82627902832a3bfcb3eef8a9c2ce43d0dcb503ba4b96db09148b3ebba9729",
+          "size": 1186
+        },
+        "raw_RUN_LOG": {
+          "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        "staged_objects_and_link_inputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/TEST.OBJ",
+            "sha256": "504851439ff8ad26fadf432156d52710e71eadadc5637f8960061a273bd2b040",
+            "size": 869
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/OWNER.OBJ",
+            "sha256": "5292f1ac70c0e52b83eea63cf415b32412a587d908c93cad2dca0b57b41a4414",
+            "size": 330
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/PROBE.LNK",
+            "sha256": "861d70c85ef82df7fb09fa691e571ddb063ba91a9bdee890bfdb7c5aeb65fe53",
+            "size": 118
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size": 21
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/RUN.BAT",
+            "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+            "size": 77
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/dosbox.conf",
+            "sha256": "91c7a2a79b040ca156033ff6f1b8e860fb825dcef2293b09835a35e8249ed0b1",
+            "size": 517
+          }
+        ],
+        "staged_runtime_libraries": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size": 148711
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size": 21033
+          }
+        ],
+        "raw_outputs": [
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/PROBE.EXE",
+            "sha256": "bd97353e17d7bab06d8d1acee575b654bec6372a8ffd9e89f32ecfc86a5d3a00",
+            "size": 10689
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/PROBE.MAP",
+            "sha256": "fd8102208b3fdfa36feab93099efa34082a8b49d87961f491124e886bda6aab4",
+            "size": 12981
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/LINK.LOG",
+            "sha256": "b3b82627902832a3bfcb3eef8a9c2ce43d0dcb503ba4b96db09148b3ebba9729",
+            "size": 1186
+          },
+          {
+            "path": "build/workers/dos_readonly_word_owners_v35/runs/20261004T111916Z_f8ef4adc/link-runs/rtlink610/initialized_owner_startup_contrast/RUN.LOG",
+            "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+            "size": 6
+          }
+        ]
+      }
+    ],
+    "v34_review_pins": [
+      {
+        "path": "build/workers/dos_readonly_word_closure_v34/review-v34.md",
+        "sha256": "d4e1eff95201023ab09a52ef4b15990b39ef702b5c130d9bd573c790acd23ffe",
+        "size": 7952
+      },
+      {
+        "path": "build/workers/dos_readonly_word_closure_v34/receipt-v34.json",
+        "sha256": "1519d501b55df996c401cc2e11f0da4cb0550689d8735c19b3b51cd960d27673",
+        "size": 10497
+      },
+      {
+        "path": "build/workers/dos_readonly_word_closure_v34/frame-sweep-v34.json",
+        "sha256": "91a31a1642a4e16957deb9c81f48c715c582204e3e68b7b402915ba2bbe02e57",
+        "size": 15111
+      }
+    ],
+    "v33_initial_value_pins": [
+      {
+        "path": "build/workers/dos_readonly_bss_semantics_v33/review-v33.md",
+        "sha256": "b0b9fa2babb0f3f103df748e1d859dedafa865f3e9177e1eb98506791bfadee0",
+        "size": 6754
+      },
+      {
+        "path": "build/workers/dos_readonly_bss_semantics_v33/receipt-v33.json",
+        "sha256": "e284f8eb69ed3ee630f6b371c2d51cc0d695b123e7ad3acd99e50b477e67b3e1",
+        "size": 33627
+      }
+    ]
+  }
+}
