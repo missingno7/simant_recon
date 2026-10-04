@@ -258,7 +258,7 @@ def prepare(out, report):
                      'remaining-misc-storage-bindings-v1.json',
                      'screen-clip-list-bindings-v1.json',
                      'remaining-far-state-words-bindings-v1.json',
-                     's01-pattern-4220-bindings-v1.json'):
+                     's01-pattern-4220-bindings-v1.json', 'mono-base-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -606,7 +606,15 @@ def audit_layout(report):
         'reason': 'Source reset/copy and four driver tables prove 25 far-pointer slots. One typed near communal owns the slots; 23 registered names are bounded aliases. The existing symbolic _g_3DF8 pointer is verified under shifted DGROUP on both linkers. Historical COMDEF TU/order and wider driver frame integration remain separate.'}, {
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
-                  'Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates.'}, {
+                  'The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates.'}, {
+        'id': 'monochrome-table-symbolic-base',
+        'status': 'SOURCE_BOUND' if any(r['module'] == 'S01:328E' and
+            (r.get('source_binding') or {}).get('mono_base_operands') for r in report['translation_units']) else 'UNRESOLVED',
+        'operand_count': 4, 'owner': '_g_8ED8',
+        'reason': 'Four ADD immediates now bind to the unresolved symbol with explicit DGROUP OFFSET16 frames. '
+                  'Static entry-SS provenance, whole-TU isolation and eight shifted-layout controls prove this reference change.',
+        'scope_limit': 'No source storage owner, size, index bounds or game execution is established; '
+                       'the import and remaining assembly gate stay open.'}, {
         'id': 'sound-selector-out-of-range-layout', 'status': 'UNRESOLVED',
         'sources': ['src/S20/m39F1.c', 'src/S15/m384C.c', 'src/root/m15F8.c', 'src/root/m00DF.c', 'src/root/m277E.c',
                     'src/root/m293A.c', 'src/root/m2815.c'],
@@ -739,6 +747,8 @@ def accept_binding_checks(report):
     providers = [r for r in report['translation_units'] if r.get('storage_provider')]
     if (bound and all(r.get('binding_verification', {}).get('status') == 'PASS' for r in bound)
             and all(r.get('provider_verification', {}).get('status') == 'PASS' for r in providers)):
+        for profile in ('rtlink400', 'rtlink610'):
+            dos_source_bindings.require_mono_base_contract(report, profile, compiler.toolchain()['linkers'][profile])
         if (not report.get('resolved_segment_alignment') and any(
                 r.get('module') == 'root:1F80' and 'object' in r for r in report['translation_units'])):
             proof = dos_alignment_debt.verify_source_object(ROOT, report)
@@ -1026,6 +1036,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_s01_pattern_view_contract(report, profile, tool)
     dos_source_bindings.require_local_frame_contract(report, profile, tool)
     dos_source_bindings.require_initialized_and_indexed_contracts(report, profile, tool)
+    dos_source_bindings.require_mono_base_contract(report, profile, tool)
     contract = report.get('linker_alias_contract', {})
     if any(row.get('offset') for row in report.get('symbolic_aliases', [])):
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
@@ -1134,7 +1145,7 @@ def main():
     try:
         report['inputs'] += [pin(ROOT / 'tools' / name)[1] for name in
                              ('source_only_dos.py', 'compiler.py', 'csrc.py', 'omf.py', 'dos_alignment_debt.py',
-                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py', 'dos_storage_policies_v27.py', 'dos_storage_policies_v29.py')]
+                              'dos_storage_contracts.py', 'dos_storage_policies_v25.py', 'dos_storage_policies_v26.py', 'dos_storage_policies_v27.py', 'dos_storage_policies_v29.py', 'dos_mono_base.py')]
         report['inputs'].append(pin(ROOT / 'tools/dos_source_bindings.py')[1])
         manifest, symbols = prepare(out, report)
         audit_layout(report)

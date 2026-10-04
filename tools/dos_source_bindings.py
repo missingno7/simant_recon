@@ -9,6 +9,7 @@ import hashlib
 import json
 import ntpath
 import re
+import dos_mono_base
 
 
 # Each family was reviewed against the complete owner and every direct consumer,
@@ -545,6 +546,7 @@ def apply_binding(text, binding):
 
 def review_addresses(binding, module, symbols):
     """Join source-owned relative locations to already reviewed symbol anchors."""
+    dos_mono_base.review(binding, module, symbols)
     review_pattern_binding(binding)
     review_local_frame_sites(binding)
     review_code_offset_frames(binding, module)
@@ -1235,6 +1237,12 @@ def bind_data_alias(spec, obj, row, module, symbols):
 
 
 def verify_objects(original, generated, binding):
+    dos_mono_base.review(binding)
+    if binding.get('mono_base_operands'):
+        if (original.externals or original.communals
+                or generated.externals != ['_g_8ED8']
+                or generated.external_scopes != ['external'] or generated.communals):
+            raise ValueError('monochrome symbolic base changed external/storage scope')
     review_frame_sites(binding)
     review_pattern_binding(binding)
     review_local_frame_sites(binding)
@@ -1331,7 +1339,7 @@ def verify_objects(original, generated, binding):
         if spec.get('pattern_operand') and sorted((f['segment'], f['offset']) for f in matches) != [
                 (spec['segment'], offset) for offset in PATTERN_BANK_SITES]:
             raise ValueError('pattern bank relocation location set changed')
-        if (spec.get('indexed_operand') or spec.get('graphics_mask_operand') or spec.get('s01_pattern_view_operand')) and sorted(
+        if (spec.get('indexed_operand') or spec.get('graphics_mask_operand') or spec.get('s01_pattern_view_operand') or spec.get('mono_base_operand')) and sorted(
                 (f['segment'], f['offset']) for f in matches) != [
                 (spec['segment'], offset) for offset in spec['offsets']]:
             raise ValueError('indexed relocation location set changed')
@@ -1380,6 +1388,10 @@ def verify_objects(original, generated, binding):
             'reviewed_debug_contributions': debug, 'added_exports': binding.get('exports', []),
             'added_communals': binding.get('communals', []),
             'symbolic_operand_checks': checks}
+
+
+def require_mono_base_contract(report, profile, tool):
+    dos_mono_base.require_contract(report, profile, tool)
 
 
 # Closed initialized owners: source recipes, not an executable-byte provider.

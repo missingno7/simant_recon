@@ -1,0 +1,1256 @@
+{
+  "schema": "simant-dos-mono-8ed8-probe-prior-diagnostics-v1",
+  "v33": {
+    "version": "v33",
+    "status": "FAILED_DIAGNOSTIC_ONLY",
+    "declared_failure": {
+      "linker": "rtlink400",
+      "variant": "DATA",
+      "expected_byte": "C7",
+      "observed_hex": "00",
+      "reason": "DATA-frame OFFSET16 selected the _DATA-relative target; _DATA group start was 0x8EDA, leaving +0xA skew from the intended literal-frame byte at 0x8FD8."
+    },
+    "cases_with_raw_observations": [
+      {
+        "linker": "rtlink400",
+        "variant": "DATA",
+        "expected_byte": "C7",
+        "observed_hex": "00",
+        "run_log": "EXECUTED",
+        "link_diagnostics_clean": true,
+        "map_sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+        "map_excerpt": [
+          "00900H 00900H 00000H EMULATOR_DATA          FAR_DATA",
+          "098DAH 09A71H 00198H _DATA                  DATA                DGROUP",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:90DE       _g_8EC0",
+          "0090:8FDA       _g_8ED8",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:8FDA       _g_8ED8",
+          "0090:90DE       _g_8EC0"
+        ],
+        "runtime_result": "FAIL",
+        "raw_artifacts": [
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/CHECK.OBJ",
+            "sha256": "3bd6d17b27d97620c00f4287cd38f352670ba78fc4688896908f85d59db93885",
+            "size_bytes": 230
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/CRT.OBJ",
+            "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+            "size_bytes": 472
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/dosbox.conf",
+            "sha256": "82ebfaa588a1679fa306d0854250464f9af0e8d8af31f4cf596b14c4e55e2c81",
+            "size_bytes": 414
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/DOSBOX.LOG",
+            "sha256": "761b000b2929e84c615ebf17c9005c3c45c5b7e761f192a3cbcabe1818728506",
+            "size_bytes": 4286
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size_bytes": 21033
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LINK.LOG",
+            "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+            "size_bytes": 474
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size_bytes": 148711
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LOCAL.EXE",
+            "sha256": "1280436f1d2bdc35d836945bb5f0786742cbc5a62f9d4026c94e0d88e097c189",
+            "size_bytes": 40305
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LOCAL.LNK",
+            "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+            "size_bytes": 101
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LOCAL.MAP",
+            "sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+            "size_bytes": 7740
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/OBS.BIN",
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "size_bytes": 1
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/OWNER.OBJ",
+            "sha256": "e8daf2f53a16b9f12f328b014c118d0f368dd3d267a66cacdcb5fdbd52c1f06b",
+            "size_bytes": 219
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size_bytes": 21
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/RUN.BAT",
+            "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+            "size_bytes": 183
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/RUN.LOG",
+            "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+            "size_bytes": 10
+          }
+        ]
+      },
+      {
+        "linker": "rtlink400",
+        "variant": "DGROUP",
+        "expected_byte": "35",
+        "observed_hex": "35",
+        "run_log": "EXECUTED",
+        "link_diagnostics_clean": true,
+        "map_sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+        "map_excerpt": [
+          "00900H 00900H 00000H EMULATOR_DATA          FAR_DATA",
+          "098DAH 09A71H 00198H _DATA                  DATA                DGROUP",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:90DE       _g_8EC0",
+          "0090:8FDA       _g_8ED8",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:8FDA       _g_8ED8",
+          "0090:90DE       _g_8EC0"
+        ],
+        "runtime_result": "PASS",
+        "raw_artifacts": [
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/CHECK.OBJ",
+            "sha256": "4b2007252aa5130f224270569bcbe3c740eb559cb2f44fc71320ae26f886cd56",
+            "size_bytes": 230
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/CRT.OBJ",
+            "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+            "size_bytes": 472
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/dosbox.conf",
+            "sha256": "7825c8b24f1fe58746234631ef14eb6b4ee9772d2aaba41ce3823fee32ba2c22",
+            "size_bytes": 416
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/DOSBOX.LOG",
+            "sha256": "bbeacb1652d24eecaec0fd6452b228585d8da2346799d4dd08e3ad00be0d29ef",
+            "size_bytes": 4288
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size_bytes": 21033
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LINK.LOG",
+            "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+            "size_bytes": 474
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size_bytes": 148711
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LOCAL.EXE",
+            "sha256": "51092ba3eadd0e756c046dac4c6c14cac9e1b4b1949c25ca102b6762717e0aec",
+            "size_bytes": 40305
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LOCAL.LNK",
+            "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+            "size_bytes": 101
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LOCAL.MAP",
+            "sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+            "size_bytes": 7740
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/OBS.BIN",
+            "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+            "size_bytes": 1
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/OWNER.OBJ",
+            "sha256": "e8daf2f53a16b9f12f328b014c118d0f368dd3d267a66cacdcb5fdbd52c1f06b",
+            "size_bytes": 219
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size_bytes": 21
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/RUN.BAT",
+            "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+            "size_bytes": 183
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/RUN.LOG",
+            "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+            "size_bytes": 10
+          }
+        ]
+      },
+      {
+        "linker": "rtlink400",
+        "variant": "LITERAL",
+        "expected_byte": "A5",
+        "observed_hex": "a5",
+        "run_log": "EXECUTED",
+        "link_diagnostics_clean": true,
+        "map_sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+        "map_excerpt": [
+          "00900H 00900H 00000H EMULATOR_DATA          FAR_DATA",
+          "098DAH 09A71H 00198H _DATA                  DATA                DGROUP",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:90DE       _g_8EC0",
+          "0090:8FDA       _g_8ED8",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:8FDA       _g_8ED8",
+          "0090:90DE       _g_8EC0"
+        ],
+        "runtime_result": "PASS",
+        "raw_artifacts": [
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/CHECK.OBJ",
+            "sha256": "23d760cee3646aa8b3cdc415cfbf0a0765a061651b3702b791ff04e46d0319ed",
+            "size_bytes": 225
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/CRT.OBJ",
+            "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+            "size_bytes": 472
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/dosbox.conf",
+            "sha256": "34c5fa21a6de711c498a2b9e5f2fd851496e7f1ddc34fa8cd5b51a5a92e0f472",
+            "size_bytes": 417
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/DOSBOX.LOG",
+            "sha256": "913cff3641c5481aa34c70134395f16bcdd9ab8103cd694c9daecb13a010a183",
+            "size_bytes": 4289
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size_bytes": 21033
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LINK.LOG",
+            "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+            "size_bytes": 474
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size_bytes": 148711
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LOCAL.EXE",
+            "sha256": "da97ca28f7f62a90037b0fa4444c2f12dcded6162cfe731ba91ff8e55c727deb",
+            "size_bytes": 40305
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LOCAL.LNK",
+            "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+            "size_bytes": 101
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LOCAL.MAP",
+            "sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+            "size_bytes": 7740
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/OBS.BIN",
+            "sha256": "6922e93e3827642ce4b883c756b31abf80036649d3614bf5fcb3adda43b8ea32",
+            "size_bytes": 1
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/OWNER.OBJ",
+            "sha256": "e8daf2f53a16b9f12f328b014c118d0f368dd3d267a66cacdcb5fdbd52c1f06b",
+            "size_bytes": 219
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size_bytes": 21
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/RUN.BAT",
+            "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+            "size_bytes": 183
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/RUN.LOG",
+            "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+            "size_bytes": 10
+          }
+        ]
+      }
+    ],
+    "cases_not_observed": [
+      {
+        "linker": "rtlink400",
+        "variant": "TARGET",
+        "expected_byte": "D3",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "DGROUP",
+        "expected_byte": "35",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "LITERAL",
+        "expected_byte": "A5",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "DATA",
+        "expected_byte": "C7",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "TARGET",
+        "expected_byte": "D3",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      }
+    ],
+    "raw_artifact_pins": [
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/BASE_S01_328E.ASM",
+        "sha256": "14ee1a574d0e03bb8a65e434458410a9d56182921fe4142c982747d7625b5000",
+        "size_bytes": 4906
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/BASE_S01_328E.compiler.log",
+        "sha256": "ff15d82e21aad6482521065c14c3991fc996c8190c4c2801f775a948b842d48c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/BASE_S01_328E.LST",
+        "sha256": "618b49e206bac9e2e1da338a00b663c62e0d7dd695a66716bdd330da79cea6b5",
+        "size_bytes": 11729
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_DATA.ASM",
+        "sha256": "2fc192a74314c672960a89022f076b85ca24daa2373f22c8e554c0a981c33891",
+        "size_bytes": 668
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_DATA.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_DATA.LST",
+        "sha256": "3bcf845e1fc6c599f411f566c7206734f0ef2bccd36bb3e661aa5cd9581a9e52",
+        "size_bytes": 2522
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_DGROUP.ASM",
+        "sha256": "1fd05ef969a6e547e95fe7ee5689059507333cad9b4f858bc6ff388faee150b4",
+        "size_bytes": 669
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_DGROUP.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_DGROUP.LST",
+        "sha256": "4dd8286815a6ac1a4044031d5928d61a649fb79bf88c8fb59ca4671d0251ba03",
+        "size_bytes": 2523
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_LITERAL.ASM",
+        "sha256": "a4406ff5ad2e4b51dda0c8c4b54179d51e8bc6e6c28054d09f78f9c5a350363b",
+        "size_bytes": 653
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_LITERAL.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_LITERAL.LST",
+        "sha256": "041273f8e711aa6c3cc7666e74b155871d09bb5c902c0e9bfa7e1f61c4311992",
+        "size_bytes": 2505
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_TARGET.ASM",
+        "sha256": "96307cdd93feb593a0f919ba403861f15b92e2701b8ca30d765441fc9390ab9d",
+        "size_bytes": 669
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_TARGET.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/CHECK_TARGET.LST",
+        "sha256": "8985ef529112295842ddef2c09df53b4e92de77d8edb443f14fd34dc71e07a10",
+        "size_bytes": 2523
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_DATA_328E.ASM",
+        "sha256": "ca0035bcd39e95351345c8241df917dbd969eae6bb119b96b9b16fe9a20f4208",
+        "size_bytes": 4987
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_DATA_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_DATA_328E.LST",
+        "sha256": "d0b58feba27543a53795a8144739adb4fc6745a97803ad75d16c40971cbe331e",
+        "size_bytes": 11885
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_TARGET_328E.ASM",
+        "sha256": "1b4a5350b735cc376a820a1dacb88332f0b6f616a6fb8fabb59d1b296c2e1093",
+        "size_bytes": 4991
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_TARGET_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_TARGET_328E.LST",
+        "sha256": "a136bd1361d43c71cfb267ff15a95168e11817bb2d8afeca32968d8f78fa2ffe",
+        "size_bytes": 11889
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_UNQUAL_328E.ASM",
+        "sha256": "6f3801a1d2764e388eb9f6398af663b0eeac57d6a7670f071c413f4f8f600316",
+        "size_bytes": 4963
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_UNQUAL_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/NEG_UNQUAL_328E.LST",
+        "sha256": "61013de972ee169e9fd435f6021d83e36aff25f41ad991a40062ba3517f3c7b9",
+        "size_bytes": 11861
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/POS_DGROUP_328E.ASM",
+        "sha256": "fb56e8327f895c8373c17f1b02bd1890b4df647b33cdba78bb3f28151eba36fc",
+        "size_bytes": 4991
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/POS_DGROUP_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/POS_DGROUP_328E.LST",
+        "sha256": "12e1d1b7cb1ec731cf10462a507c89a59fc91351a32e0d87ff6a15e8ff3ab95a",
+        "size_bytes": 11889
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/RUNTIME_CRT.C",
+        "sha256": "24f7fbc9741cbd6472f5bde2ab72590e7f1c9781edcbd8b1428f0e87e0f8508e",
+        "size_bytes": 79
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/RUNTIME_CRT.compiler.log",
+        "sha256": "d6dc14b5eb999129025865a7b98e14debb2e845736b64b123d813fc68f8ce831",
+        "size_bytes": 12
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/RUNTIME_OWNER.ASM",
+        "sha256": "8517535deb4b325fc72cd34e08be873b8de57bffe7109b2e12701ff27046f0bf",
+        "size_bytes": 413
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/RUNTIME_OWNER.compiler.log",
+        "sha256": "dae02190d348d36f2867a2737e1967cf0e2196e2da22e9288a24494ac8171ac9",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/sources/RUNTIME_OWNER.LST",
+        "sha256": "be3df765c7c843b8430e5b9dc22e105509e6607a8eda8366cc459c5afd104cee",
+        "size_bytes": 1982
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/BASE_S01_328E.OBJ",
+        "sha256": "9d69abe7d5563c2ce25b980ba84a1cfd47581eb8fda01defd103163535a7b854",
+        "size_bytes": 825
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/CHECK_DATA.OBJ",
+        "sha256": "3bd6d17b27d97620c00f4287cd38f352670ba78fc4688896908f85d59db93885",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/CHECK_DGROUP.OBJ",
+        "sha256": "4b2007252aa5130f224270569bcbe3c740eb559cb2f44fc71320ae26f886cd56",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/CHECK_LITERAL.OBJ",
+        "sha256": "23d760cee3646aa8b3cdc415cfbf0a0765a061651b3702b791ff04e46d0319ed",
+        "size_bytes": 225
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/CHECK_TARGET.OBJ",
+        "sha256": "49d491dab1575e796577c2bb1ff935e61d39e8fb3e9e252936beba147ff8083c",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/NEG_DATA_328E.OBJ",
+        "sha256": "9a48c6fc1164fe2c96e25f999ba0d53387b52ebce37a8717dda9b4e875afdce4",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/NEG_TARGET_328E.OBJ",
+        "sha256": "3f47810ecfb9a3c4a1079c7d96014b8c18a0a746855f48ccddcaaa713ec1cc22",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/NEG_UNQUAL_328E.OBJ",
+        "sha256": "c9a2a97fbe32968575c771a3cb81724491bd2463840e7f9d7dc4d174128d5424",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/POS_DGROUP_328E.OBJ",
+        "sha256": "43ecbf83246db1799614907dd4f996e7054015ba543b8e16b204deacbdba54cf",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/RUNTIME_CRT.OBJ",
+        "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+        "size_bytes": 472
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/objects/RUNTIME_OWNER.OBJ",
+        "sha256": "e8daf2f53a16b9f12f328b014c118d0f368dd3d267a66cacdcb5fdbd52c1f06b",
+        "size_bytes": 219
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/CHECK.OBJ",
+        "sha256": "3bd6d17b27d97620c00f4287cd38f352670ba78fc4688896908f85d59db93885",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/CRT.OBJ",
+        "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+        "size_bytes": 472
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/dosbox.conf",
+        "sha256": "82ebfaa588a1679fa306d0854250464f9af0e8d8af31f4cf596b14c4e55e2c81",
+        "size_bytes": 414
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/DOSBOX.LOG",
+        "sha256": "761b000b2929e84c615ebf17c9005c3c45c5b7e761f192a3cbcabe1818728506",
+        "size_bytes": 4286
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LIBH.LIB",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "size_bytes": 21033
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LINK.LOG",
+        "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+        "size_bytes": 474
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LLIBCR.LIB",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "size_bytes": 148711
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LOCAL.EXE",
+        "sha256": "1280436f1d2bdc35d836945bb5f0786742cbc5a62f9d4026c94e0d88e097c189",
+        "size_bytes": 40305
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LOCAL.LNK",
+        "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+        "size_bytes": 101
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/LOCAL.MAP",
+        "sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+        "size_bytes": 7740
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/OBS.BIN",
+        "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "size_bytes": 1
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/OWNER.OBJ",
+        "sha256": "e8daf2f53a16b9f12f328b014c118d0f368dd3d267a66cacdcb5fdbd52c1f06b",
+        "size_bytes": 219
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/RTLINK.CFG",
+        "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+        "size_bytes": 21
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/RUN.BAT",
+        "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+        "size_bytes": 183
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DATA/RUN.LOG",
+        "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+        "size_bytes": 10
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/CHECK.OBJ",
+        "sha256": "4b2007252aa5130f224270569bcbe3c740eb559cb2f44fc71320ae26f886cd56",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/CRT.OBJ",
+        "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+        "size_bytes": 472
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/dosbox.conf",
+        "sha256": "7825c8b24f1fe58746234631ef14eb6b4ee9772d2aaba41ce3823fee32ba2c22",
+        "size_bytes": 416
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/DOSBOX.LOG",
+        "sha256": "bbeacb1652d24eecaec0fd6452b228585d8da2346799d4dd08e3ad00be0d29ef",
+        "size_bytes": 4288
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LIBH.LIB",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "size_bytes": 21033
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LINK.LOG",
+        "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+        "size_bytes": 474
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LLIBCR.LIB",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "size_bytes": 148711
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LOCAL.EXE",
+        "sha256": "51092ba3eadd0e756c046dac4c6c14cac9e1b4b1949c25ca102b6762717e0aec",
+        "size_bytes": 40305
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LOCAL.LNK",
+        "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+        "size_bytes": 101
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/LOCAL.MAP",
+        "sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+        "size_bytes": 7740
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/OBS.BIN",
+        "sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+        "size_bytes": 1
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/OWNER.OBJ",
+        "sha256": "e8daf2f53a16b9f12f328b014c118d0f368dd3d267a66cacdcb5fdbd52c1f06b",
+        "size_bytes": 219
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/RTLINK.CFG",
+        "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+        "size_bytes": 21
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/RUN.BAT",
+        "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+        "size_bytes": 183
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/DGROUP/RUN.LOG",
+        "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+        "size_bytes": 10
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/CHECK.OBJ",
+        "sha256": "23d760cee3646aa8b3cdc415cfbf0a0765a061651b3702b791ff04e46d0319ed",
+        "size_bytes": 225
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/CRT.OBJ",
+        "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+        "size_bytes": 472
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/dosbox.conf",
+        "sha256": "34c5fa21a6de711c498a2b9e5f2fd851496e7f1ddc34fa8cd5b51a5a92e0f472",
+        "size_bytes": 417
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/DOSBOX.LOG",
+        "sha256": "913cff3641c5481aa34c70134395f16bcdd9ab8103cd694c9daecb13a010a183",
+        "size_bytes": 4289
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LIBH.LIB",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "size_bytes": 21033
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LINK.LOG",
+        "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+        "size_bytes": 474
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LLIBCR.LIB",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "size_bytes": 148711
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LOCAL.EXE",
+        "sha256": "da97ca28f7f62a90037b0fa4444c2f12dcded6162cfe731ba91ff8e55c727deb",
+        "size_bytes": 40305
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LOCAL.LNK",
+        "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+        "size_bytes": 101
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/LOCAL.MAP",
+        "sha256": "5eacb9650f7ea40cb91a1f85233e679bf31fd9a8bdb7d36ceecf3ac3cd768642",
+        "size_bytes": 7740
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/OBS.BIN",
+        "sha256": "6922e93e3827642ce4b883c756b31abf80036649d3614bf5fcb3adda43b8ea32",
+        "size_bytes": 1
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/OWNER.OBJ",
+        "sha256": "e8daf2f53a16b9f12f328b014c118d0f368dd3d267a66cacdcb5fdbd52c1f06b",
+        "size_bytes": 219
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/RTLINK.CFG",
+        "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+        "size_bytes": 21
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/RUN.BAT",
+        "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+        "size_bytes": 183
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/runtime/rtlink400/LITERAL/RUN.LOG",
+        "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+        "size_bytes": 10
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v33/relocation-probe.py",
+        "sha256": "3bb58b9ffab01f94a02100c2cb34ff9f9761701a05702cc75ff44f39d18f40e2",
+        "size_bytes": 26066
+      }
+    ]
+  },
+  "v34": {
+    "version": "v34",
+    "status": "FAILED_DIAGNOSTIC_ONLY",
+    "declared_failure": {
+      "linker": "rtlink400",
+      "variant": "DGROUP",
+      "expected_byte": "35",
+      "observed_hex": "00",
+      "reason": "paragraph-aligned _DATA moved the owner target, but the positive marker was placed at _DATA+0xFF rather than _DATA+0x100; this is a failed fixture prediction."
+    },
+    "cases_with_raw_observations": [
+      {
+        "linker": "rtlink400",
+        "variant": "DGROUP",
+        "expected_byte": "35",
+        "observed_hex": "00",
+        "run_log": "EXECUTED",
+        "link_diagnostics_clean": true,
+        "map_sha256": "918c4c62cd05cd32d0ddf0200d475c5e01c0115a44b5d3f4989aba47b8d558fc",
+        "map_excerpt": [
+          "00900H 00900H 00000H EMULATOR_DATA          FAR_DATA",
+          "098E0H 09A75H 00196H _DATA                  DATA                DGROUP",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:8FE4       _g_8EC0",
+          "0090:8FE0       _g_8ED8",
+          "0090:0100       FrameMarker",
+          "0090:8FD8       LiteralMarker",
+          "0090:8FE0       _g_8ED8",
+          "0090:8FE4       _g_8EC0"
+        ],
+        "runtime_result": "FAIL",
+        "raw_artifacts": [
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/CHECK.OBJ",
+            "sha256": "f9e9f5a4072b8fd95e89104bd598b95776479a08205c5d4dffc1e0576badb3c9",
+            "size_bytes": 230
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/CRT.OBJ",
+            "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+            "size_bytes": 472
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/dosbox.conf",
+            "sha256": "8cee27ae9c76674852593734474b3dc91f8f4e87d84f1d3823a0d7c82b4acd86",
+            "size_bytes": 416
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/DOSBOX.LOG",
+            "sha256": "fcbcbc809607cbeb2d23f75f8ce879588280639500dbf8b4c0e4c5f421f88800",
+            "size_bytes": 4288
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LIBH.LIB",
+            "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+            "size_bytes": 21033
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LINK.LOG",
+            "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+            "size_bytes": 474
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LLIBCR.LIB",
+            "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+            "size_bytes": 148711
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LOCAL.EXE",
+            "sha256": "5beb6f2d79fa696afd207eb4f363b0e2779e6571fbcb20bd63037efcd5fbcc02",
+            "size_bytes": 40309
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LOCAL.LNK",
+            "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+            "size_bytes": 101
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LOCAL.MAP",
+            "sha256": "918c4c62cd05cd32d0ddf0200d475c5e01c0115a44b5d3f4989aba47b8d558fc",
+            "size_bytes": 7740
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/OBS.BIN",
+            "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "size_bytes": 1
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/OWNER.OBJ",
+            "sha256": "1494cbf30bc8334fba8d4331533407985917fcf0d55c7da8b08a2ca9829bca31",
+            "size_bytes": 219
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/RTLINK.CFG",
+            "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+            "size_bytes": 21
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/RUN.BAT",
+            "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+            "size_bytes": 183
+          },
+          {
+            "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/RUN.LOG",
+            "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+            "size_bytes": 10
+          }
+        ]
+      }
+    ],
+    "cases_not_observed": [
+      {
+        "linker": "rtlink400",
+        "variant": "LITERAL",
+        "expected_byte": "A5",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink400",
+        "variant": "DATA",
+        "expected_byte": "C7",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink400",
+        "variant": "TARGET",
+        "expected_byte": "D3",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "DGROUP",
+        "expected_byte": "35",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "LITERAL",
+        "expected_byte": "A5",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "DATA",
+        "expected_byte": "C7",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      },
+      {
+        "linker": "rtlink610",
+        "variant": "TARGET",
+        "expected_byte": "D3",
+        "status": "NOT_RUN_OR_NO_OBSERVED_OUTPUT"
+      }
+    ],
+    "raw_artifact_pins": [
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/BASE_S01_328E.ASM",
+        "sha256": "14ee1a574d0e03bb8a65e434458410a9d56182921fe4142c982747d7625b5000",
+        "size_bytes": 4906
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/BASE_S01_328E.compiler.log",
+        "sha256": "ff15d82e21aad6482521065c14c3991fc996c8190c4c2801f775a948b842d48c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/BASE_S01_328E.LST",
+        "sha256": "40f093625f23cba7c273da9011f5f2180b71be76a7a78e05b1da49cdd013249f",
+        "size_bytes": 11729
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_DATA.ASM",
+        "sha256": "cbda873c85743b334a8c7e89880b2d9fda230468b9d86ab3dfab5df466542f20",
+        "size_bytes": 668
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_DATA.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_DATA.LST",
+        "sha256": "1f714ad53ef322de68ca1b6a3a42483d506ca5634769e585da584ec5443e787a",
+        "size_bytes": 2522
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_DGROUP.ASM",
+        "sha256": "c42ebcf953a650c36c973257924e79b763c60f9ff0d3dc9533fb197c8176f728",
+        "size_bytes": 669
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_DGROUP.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_DGROUP.LST",
+        "sha256": "80c9cd1c23e3bfc4ce611aef3fcf25965d9f8e6d8583755eeb577efb386f1c88",
+        "size_bytes": 2523
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_LITERAL.ASM",
+        "sha256": "b95d4ad5012afff26264a6ede30ae08099a32e76ef538c9cb03b7502517874a8",
+        "size_bytes": 653
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_LITERAL.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_LITERAL.LST",
+        "sha256": "584e260c309829884ed5eb4757a9e39d24bbccc234e9698bbe398c5709dfe3dc",
+        "size_bytes": 2505
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_TARGET.ASM",
+        "sha256": "17cf0e349b48c0a193edf8460522c831e7a10386fdd286521a804151844f983d",
+        "size_bytes": 669
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_TARGET.compiler.log",
+        "sha256": "e03e12eac8a61b7de7628265d51945bb9e7f7bf2bac3196fcc2a95db260b2f0c",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/CHECK_TARGET.LST",
+        "sha256": "8211c6961746830bdd829d69d6ab592616821905656f2c50557008adbd96457e",
+        "size_bytes": 2523
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_DATA_328E.ASM",
+        "sha256": "ca0035bcd39e95351345c8241df917dbd969eae6bb119b96b9b16fe9a20f4208",
+        "size_bytes": 4987
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_DATA_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_DATA_328E.LST",
+        "sha256": "231a8544abc1bcacbdbe1104087b200eacfe7512fa94765c7be9d59262b60cc2",
+        "size_bytes": 11885
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_TARGET_328E.ASM",
+        "sha256": "1b4a5350b735cc376a820a1dacb88332f0b6f616a6fb8fabb59d1b296c2e1093",
+        "size_bytes": 4991
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_TARGET_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_TARGET_328E.LST",
+        "sha256": "b2117c889d133d346608d3f4e251b0e6d83880faf20b4044510940f5e0b0188e",
+        "size_bytes": 11889
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_UNQUAL_328E.ASM",
+        "sha256": "6f3801a1d2764e388eb9f6398af663b0eeac57d6a7670f071c413f4f8f600316",
+        "size_bytes": 4963
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_UNQUAL_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/NEG_UNQUAL_328E.LST",
+        "sha256": "7ba073e6498a47cb4ce60d13e459a77a6c78fbc11fb393563ec35d55a52da4e7",
+        "size_bytes": 11861
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/POS_DGROUP_328E.ASM",
+        "sha256": "fb56e8327f895c8373c17f1b02bd1890b4df647b33cdba78bb3f28151eba36fc",
+        "size_bytes": 4991
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/POS_DGROUP_328E.compiler.log",
+        "sha256": "8839daf0ffbf71895d83715c33264c8be746aa33abee52ad8ed2116a06dfe1c7",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/POS_DGROUP_328E.LST",
+        "sha256": "822d90c349d86f76d3893cdce29b03a6876376cc04991fc67897a9df19dea521",
+        "size_bytes": 11889
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/RUNTIME_CRT.C",
+        "sha256": "24f7fbc9741cbd6472f5bde2ab72590e7f1c9781edcbd8b1428f0e87e0f8508e",
+        "size_bytes": 79
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/RUNTIME_CRT.compiler.log",
+        "sha256": "d6dc14b5eb999129025865a7b98e14debb2e845736b64b123d813fc68f8ce831",
+        "size_bytes": 12
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/RUNTIME_OWNER.ASM",
+        "sha256": "5d9f153cf60b2c665eb4378cf609af62c568afc46e658368150b407a1c85ca1d",
+        "size_bytes": 427
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/RUNTIME_OWNER.compiler.log",
+        "sha256": "dae02190d348d36f2867a2737e1967cf0e2196e2da22e9288a24494ac8171ac9",
+        "size_bytes": 204
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/sources/RUNTIME_OWNER.LST",
+        "sha256": "c1b4552cc064d915461dd7f5388cad06c621243fd736d773cbdc1277499a6391",
+        "size_bytes": 2036
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/BASE_S01_328E.OBJ",
+        "sha256": "9d69abe7d5563c2ce25b980ba84a1cfd47581eb8fda01defd103163535a7b854",
+        "size_bytes": 825
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/CHECK_DATA.OBJ",
+        "sha256": "e5e86e1e67e9fb8c7a99160b15d8b0196b709d6293196b13229c683cb3799411",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/CHECK_DGROUP.OBJ",
+        "sha256": "f9e9f5a4072b8fd95e89104bd598b95776479a08205c5d4dffc1e0576badb3c9",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/CHECK_LITERAL.OBJ",
+        "sha256": "26672099302df50dd1b2bf58bccda35aa538dae6ed3f0f0bd57faa706dd7d097",
+        "size_bytes": 225
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/CHECK_TARGET.OBJ",
+        "sha256": "0ca0a0bb37105cf848d2fc03705759033b6e843cbe49b56fc14dfa03a0ae8fb5",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/NEG_DATA_328E.OBJ",
+        "sha256": "9a48c6fc1164fe2c96e25f999ba0d53387b52ebce37a8717dda9b4e875afdce4",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/NEG_TARGET_328E.OBJ",
+        "sha256": "3f47810ecfb9a3c4a1079c7d96014b8c18a0a746855f48ccddcaaa713ec1cc22",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/NEG_UNQUAL_328E.OBJ",
+        "sha256": "c9a2a97fbe32968575c771a3cb81724491bd2463840e7f9d7dc4d174128d5424",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/POS_DGROUP_328E.OBJ",
+        "sha256": "43ecbf83246db1799614907dd4f996e7054015ba543b8e16b204deacbdba54cf",
+        "size_bytes": 858
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/RUNTIME_CRT.OBJ",
+        "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+        "size_bytes": 472
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/objects/RUNTIME_OWNER.OBJ",
+        "sha256": "1494cbf30bc8334fba8d4331533407985917fcf0d55c7da8b08a2ca9829bca31",
+        "size_bytes": 219
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/CHECK.OBJ",
+        "sha256": "f9e9f5a4072b8fd95e89104bd598b95776479a08205c5d4dffc1e0576badb3c9",
+        "size_bytes": 230
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/CRT.OBJ",
+        "sha256": "60cc9aac6c4b31d38ea30a6a7ac51efefe255ed0731718bae72249b2bf09f560",
+        "size_bytes": 472
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/dosbox.conf",
+        "sha256": "8cee27ae9c76674852593734474b3dc91f8f4e87d84f1d3823a0d7c82b4acd86",
+        "size_bytes": 416
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/DOSBOX.LOG",
+        "sha256": "fcbcbc809607cbeb2d23f75f8ce879588280639500dbf8b4c0e4c5f421f88800",
+        "size_bytes": 4288
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LIBH.LIB",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "size_bytes": 21033
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LINK.LOG",
+        "sha256": "729b1767786ec30a2fb7e815785f5c303e404801989bb1845810e45ae846e48c",
+        "size_bytes": 474
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LLIBCR.LIB",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "size_bytes": 148711
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LOCAL.EXE",
+        "sha256": "5beb6f2d79fa696afd207eb4f363b0e2779e6571fbcb20bd63037efcd5fbcc02",
+        "size_bytes": 40309
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LOCAL.LNK",
+        "sha256": "21067fef99df66b911fb5a7e3ae5876c0cd7d2e73e4c324f81f7cd27748737e7",
+        "size_bytes": 101
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/LOCAL.MAP",
+        "sha256": "918c4c62cd05cd32d0ddf0200d475c5e01c0115a44b5d3f4989aba47b8d558fc",
+        "size_bytes": 7740
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/OBS.BIN",
+        "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+        "size_bytes": 1
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/OWNER.OBJ",
+        "sha256": "1494cbf30bc8334fba8d4331533407985917fcf0d55c7da8b08a2ca9829bca31",
+        "size_bytes": 219
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/RTLINK.CFG",
+        "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+        "size_bytes": 21
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/RUN.BAT",
+        "sha256": "f536ffe5e5cc6878394352ad438fecc771024f418064cd528c21e3e59a9fdeb1",
+        "size_bytes": 183
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/runtime/rtlink400/DGROUP/RUN.LOG",
+        "sha256": "3950f48ab7f620cbc147044aa02b31b826ba22967224907a32ef17ebddba6bc9",
+        "size_bytes": 10
+      },
+      {
+        "path": "build/workers/dos_mono_8ed8_owner_v34/relocation-probe.py",
+        "sha256": "05796955940fe95b4acf7a5797320f930b2ab7f199d8a04ed864deefe4ccc71e",
+        "size_bytes": 26878
+      }
+    ]
+  },
+  "v35_initial_receipt_assembly": {
+    "status": "RECEIPT_ASSEMBLY_FAILURE_AFTER_EIGHT_PASSING_RUNTIME_CASES",
+    "expected_path": "build/workers/dos_mono_8ed8_owner_v35/sources/CHECK_DGROUP.LOG",
+    "actual_compiler_log_path": "build/workers/dos_mono_8ed8_owner_v35/sources/CHECK_DGROUP.compiler.log",
+    "cause": "The original builder's pin loop used the suffix LOG as a filename; save_assembly writes compiler logs with the .compiler.log suffix. It stopped after all eight runtime checks had printed PASS. This was not a runtime failure.",
+    "builder_pin": {
+      "path": "build/workers/dos_mono_8ed8_owner_v35/relocation-probe.py",
+      "sha256": "89c9aa4e3f64f064a5b68388011a22d6bdb0c0f81c794e33b59503d7e753a750",
+      "size_bytes": 28530
+    }
+  }
+}

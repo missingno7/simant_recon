@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "f932bb22583a757d4bc357a94faf5d9a70b77147",
+  "source_only_base_checkpoint": "499564a443d4f186d689a778690a3796fbf01dd1",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,8 +8,8 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "a06e082ef5d2d4ea8e22d7967a47df3229e61395ddfc10f1560355ee7cd3405f",
-    "size": 19200643
+    "sha256": "0edcb3285074975704645520158975bd20a32a7cae542127812b54a9e78cffbf",
+    "size": 19342027
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
@@ -68,7 +68,15 @@
     {
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
-      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates."
+      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates."
+    },
+    {
+      "id": "monochrome-table-symbolic-base",
+      "status": "RESOLVED",
+      "operand_count": 4,
+      "owner": "_g_8ED8",
+      "reason": "Four ADD immediates now bind to the unresolved symbol with explicit DGROUP OFFSET16 frames. Static entry-SS provenance, whole-TU isolation and eight shifted-layout controls prove this reference change.",
+      "scope_limit": "No source storage owner, size, index bounds or game execution is established; the import and remaining assembly gate stay open."
     },
     {
       "id": "sound-selector-out-of-range-layout",
@@ -8143,6 +8151,77 @@
       }
     },
     {
+      "module": "S01:328E",
+      "source": {
+        "path": "src\\S01\\m328E.asm",
+        "sha256": "610b108145bbf912a6c1b11b454eaf54a7c6053624db8b7de8f2c672dce34351",
+        "size": 4615
+      },
+      "control_source": {
+        "path": "src\\S01\\m328E.asm",
+        "sha256": "610b108145bbf912a6c1b11b454eaf54a7c6053624db8b7de8f2c672dce34351",
+        "size": 4615
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U005.OBJ",
+        "sha256": "4187e18554a2173e27704bcc4efecfc15197fb40294e8116edfe612cc4c1058a",
+        "size": 854
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S01B_TEXT",
+          "offset": 14,
+          "old_operand": 36568,
+          "target": "_g_8ED8",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01B_TEXT",
+          "offset": 161,
+          "old_operand": 36568,
+          "target": "_g_8ED8",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01B_TEXT",
+          "offset": 304,
+          "old_operand": 36568,
+          "target": "_g_8ED8",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        },
+        {
+          "segment": "S01B_TEXT",
+          "offset": 473,
+          "old_operand": 36568,
+          "target": "_g_8ED8",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U005.OBJ",
+        "sha256": "bfc48f536a19b32abdc64438880c5cbdf1614bb6ec8d5fa1113020a57024166d",
+        "size": 821
+      }
+    },
+    {
       "module": "S01:32B5",
       "source": {
         "path": "src\\S01\\m32B5.asm",
@@ -10669,8 +10748,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "d69a91707a0511749e6d5b0f50ebbe8270f0b7e6d8a83ca0ac2727ada14520b9",
-      "size": 77821
+      "sha256": "e718138b9b356868dfe18293c52aa3773952f5212cb00df3da88e628f63b0449",
+      "size": 78816
     },
     {
       "path": "tools\\compiler.py",
@@ -10718,9 +10797,14 @@
       "size": 79354
     },
     {
+      "path": "tools\\dos_mono_base.py",
+      "sha256": "d733a51bcdbd33136740210539ced59e2c741f7b9a8d5bf4d65f6b9293ce6c69",
+      "size": 11972
+    },
+    {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "4278dc5c7aaa25e188a6c585e0118e731ea9187428f38da30757bf842e826733",
-      "size": 191355
+      "sha256": "697e9905af11ebaee3f389bb782094ceaae51b03fabf8c4d44a7587303db65f2",
+      "size": 191932
     },
     {
       "path": "tools\\farbss.py",
@@ -10735,14 +10819,14 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-accepted-v29.log",
-      "sha256": "76fa18ca97faa4655df18126dcb7ee9554ad481672d55b2ce24d7441b0e624f5",
+      "path": "build/source-only-dos-run-accepted-v31-final.log",
+      "sha256": "5956a9d810a49bc24c679b5b3181c14206e6b6406d291e8f4560b2020e8d8070",
       "size": 6779
     },
     {
-      "path": "build/source-only-dos-tests-accepted-v29-final.log",
-      "sha256": "07ca802036c1bc73f17d2b918790dac57f2817a9993018ca3a607adf24c9604b",
-      "size": 631
+      "path": "build/source-only-dos-tests-accepted-v31-final.log",
+      "sha256": "acb3f624102ee913c7aae80620c5eb77a86a1ab3ab1d2497ebddad219eb9b8d6",
+      "size": 633
     },
     {
       "path": "build/source-only-dos-validation-v29.log",
@@ -11023,6 +11107,57 @@
     "sha256": "bf409ae9a8b2c8c45ef4b3d332ce715c80ee2f92df9133adfe1d031dea6934da",
     "size": 198
   },
-  "source_only_tests": "59 targeted tests included in 373 repository tests PASS (2 skips)",
+  "mono_base_bindings_v31": {
+    "path": "work/source-only-dos/mono-base-bindings-v1.json",
+    "sha256": "c2d81def21bc6813f10b8fa6e65a2fe9e94ecfbc6560e4ad5b2c5a4c717f5af2",
+    "size": 59067
+  },
+  "mono_base_contract_v31": {
+    "path": "work/source-only-dos/mono-base-contract-v1.json",
+    "sha256": "79a0cda54daa4b0da87a35142c6896cf384f821a44dfd9c557b350ef62a18afb",
+    "size": 75561
+  },
+  "mono_base_policy_v31": {
+    "path": "tools/dos_mono_base.py",
+    "sha256": "d733a51bcdbd33136740210539ced59e2c741f7b9a8d5bf4d65f6b9293ce6c69",
+    "size": 11972
+  },
+  "mono_base_root_review_v31": {
+    "path": "work/source-only-dos/mono-base-admission-v31/root-review.json",
+    "sha256": "7e1949f2e735339b4d80daf3dc7553c74699609dbdbe036c2767b5d525919593",
+    "size": 125824
+  },
+  "mono_boundary_preservation_v31": {
+    "path": "work/source-only-dos/mono-base-admission-v31/root-validation/index.json",
+    "sha256": "6965eca074f750121604d1bb3d91608d545c4271c9c105e489fca07292b5b52e",
+    "size": 5729
+  },
+  "dgroup_5a28_root_review_v32": {
+    "path": "work/source-only-dos/mono-base-admission-v31/dgroup-5a28-v32/root-review.json",
+    "sha256": "e51dc6ca967fca6d6681a76cbe24250cc77dd11c3566b8c54de15cf6ba02e0c6",
+    "size": 4275
+  },
+  "mono_current_entry_scan_v31": {
+    "path": "work/source-only-dos/mono-base-admission-v31/current-entry-state-supplement.json",
+    "sha256": "ecfa68099186fedeb87b289ecd622b2be838608fa4c91110257c661101ee7e18",
+    "size": 50199
+  },
+  "mono_focused_tests_v31": {
+    "path": "build/source-only-dos-focused-mono-v31-final.log",
+    "sha256": "f27f547f126fd38bc907e09ae098c6d653931245edb83d58b19911b217d54ed8",
+    "size": 107
+  },
+  "mono_recheck_v31": {
+    "path": "build/source-only-dos-mono-recheck-v31.log",
+    "sha256": "4a68e1058a9425819242e786d530f12e3c69404dd20578698c39d908874b732c",
+    "size": 92
+  },
+  "evidence_gates_v31": {
+    "path": "build/source-only-dos-gates-accepted-v31.log",
+    "sha256": "3454c6a460767709355d289976dd55b7256a7b8a7617242446fc285a0674b69a",
+    "size": 232
+  },
+  "validation_scope_v31": "Historical validation v29 retained: canonical sources/manifest/lock unchanged. v31 changes only generated source bindings and their proof tooling.",
+  "source_only_tests": "61 targeted tests included in 375 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

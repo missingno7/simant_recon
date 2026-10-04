@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-accepted-v29.log',
-        'build/source-only-dos-tests-accepted-v29-final.log', 'build/source-only-dos-validation-v29.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-accepted-v31-final.log',
+        'build/source-only-dos-tests-accepted-v31-final.log', 'build/source-only-dos-validation-v29.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not re.search(r'(?m)^OK(?: \(skipped=2\))?$', test_log):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [373] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
+    if test_counts != [375] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 1:
         raise ValueError('repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': 'f932bb22583a757d4bc357a94faf5d9a70b77147',
+        'source_only_base_checkpoint': '499564a443d4f186d689a778690a3796fbf01dd1',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -240,7 +240,19 @@ def main():
         'static_frontier_root_review_v30': pin(OUT / 'structural-audits-v30/root-frontier-review.json'),
         'hotbox_semantic_root_review_v30': pin(OUT / 'structural-audits-v30/hotbox/root-semantic-review.json'),
         'static_frontier_recheck_v30': pin(ROOT / 'build/source-only-dos-static-frontier-recheck-v30.log'),
-        'source_only_tests': f'59 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'mono_base_bindings_v31': pin(OUT / 'mono-base-bindings-v1.json'),
+        'mono_base_contract_v31': pin(OUT / 'mono-base-contract-v1.json'),
+        'mono_base_policy_v31': pin(ROOT / 'tools/dos_mono_base.py'),
+        'mono_base_root_review_v31': pin(OUT / 'mono-base-admission-v31/root-review.json'),
+        'mono_boundary_preservation_v31': pin(OUT / 'mono-base-admission-v31/root-validation/index.json'),
+        'dgroup_5a28_root_review_v32': pin(OUT / 'mono-base-admission-v31/dgroup-5a28-v32/root-review.json'),
+        'mono_current_entry_scan_v31': pin(OUT / 'mono-base-admission-v31/current-entry-state-supplement.json'),
+        'mono_focused_tests_v31': pin(ROOT / 'build/source-only-dos-focused-mono-v31-final.log'),
+        'mono_recheck_v31': pin(ROOT / 'build/source-only-dos-mono-recheck-v31.log'),
+        'evidence_gates_v31': pin(ROOT / 'build/source-only-dos-gates-accepted-v31.log'),
+        'validation_scope_v31': 'Historical validation v29 retained: canonical sources/manifest/lock unchanged. '
+                                'v31 changes only generated source bindings and their proof tooling.',
+        'source_only_tests': f'61 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

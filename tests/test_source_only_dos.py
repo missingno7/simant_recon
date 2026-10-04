@@ -2208,5 +2208,82 @@ class SourceOnlyDosTests(unittest.TestCase):
                     bindings.require_local_frame_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
 
+    def test_monochrome_symbolic_base_preserves_the_whole_module_and_open_owner(self):
+        import copy
+        import dos_mono_base
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            manifest, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'S01:328E')
+            binding = row['source_binding']
+            before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
+            after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+            def assemble(text):
+                run = compiler.assemble(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(run.ok, run.log)
+                return OmfReader(communals=True).read(run.obj)
+            control, generated = assemble(before), assemble(after)
+            proof = bindings.verify_objects(control, generated, binding)
+            self.assertEqual([r['offset'] for r in proof['symbolic_operand_checks']], dos_mono_base.SITES)
+            self.assertEqual(generated.externals, ['_g_8ED8'])
+            self.assertEqual(generated.communals, [])
+            self.assertEqual(proof['added_exports'], [])
+            for change in ('site', 'frame', 'target', 'missing', 'extra-edit', 'storage'):
+                wrong = copy.deepcopy(binding)
+                spec = wrong['relocations'][0]
+                if change == 'site': spec['offsets'][0] += 1
+                elif change == 'frame': spec['frame'] = '_DATA'
+                elif change == 'target': spec['target'] = '_g_8EC0'
+                elif change == 'missing': spec['count'] = 3
+                elif change == 'extra-edit': wrong['edits'].append({'before': '40h', 'after': '20h', 'count': 1})
+                else: wrong['communals'] = [{'name': '_g_8ED8', 'kind': 'near', 'length': 584}]
+                with self.assertRaisesRegex(ValueError, 'monochrome'):
+                    bindings.review_addresses(wrong, manifest['modules'][row['module']], symbols)
+            for source in (after.replace('offset DGROUP:', 'offset _DATA:'),
+                           after.replace('_g_8ED8', '_g_8EC0'),
+                           after.replace('add bx, offset DGROUP:_g_8ED8', 'add bx, 8ED8h', 1),
+                           after.replace('mov cx, 40h', 'mov cx, 20h', 1),
+                           after.replace('_DATA\tends', '\t_extra dw 1\n_DATA\tends')):
+                with self.assertRaises(ValueError): bindings.verify_objects(control, assemble(source), binding)
+            dos.audit_layout(report)
+            self.assertEqual(next(r for r in report['layout_dependencies'] if
+                                 r['id'] == 'remaining-assembly-address-audit')['status'], 'UNRESOLVED')
+            self.assertFalse(any(r.get('module') == 'source-owned:mono-table' for r in report['translation_units']))
+
+    def test_monochrome_runtime_gate_rejects_incomplete_static_raw_and_frame_evidence(self):
+        import copy
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_mono_base_contract(report, profile, tc['linkers'][profile])
+            for change in ('case', 'byte', 'map', 'model', 'guard-source', 'storage', 'whole-tuple',
+                           'missing-frame-control', 'runtime', 'conflicting-identity', 'raw-reuse', 'missing-binding', 'entry-ss'):
+                wrong = copy.deepcopy(report)
+                c = wrong['mono_base_contract']
+                if change == 'case': c['cases'].pop()
+                elif change == 'byte': c['cases'][0]['actual'] = '00'
+                elif change == 'map': c['cases'][0]['root_map']['data_group_offset'] -= 10
+                elif change == 'model': c['fixture_models'].pop('DATA')
+                elif change == 'guard-source': c['fixture_sources']['DGROUP'] = c['fixture_sources']['LITERAL']
+                elif change == 'storage': c['owner_extent'] = 584
+                elif change == 'whole-tuple': c['whole_tu_proof']['symbolic_operand_checks'][0]['frame'] = '_DATA'
+                elif change == 'missing-frame-control': c['negative_object_controls'].remove('wrong_frame')
+                elif change == 'runtime': wrong['runtime_components'][0]['sha256'] = '0' * 64
+                elif change == 'conflicting-identity':
+                    p = dict(c['inputs'][0]); p['sha256'] = '0' * 64; c['inputs'].append(p)
+                elif change == 'raw-reuse': c['cases'][0]['raw']['observation'] = c['cases'][1]['raw']['observation']
+                elif change == 'entry-ss':
+                    c['inputs'] = [p for p in c['inputs'] if 'correction-addendum-v1.json' not in p['path']]
+                else: next(r for r in wrong['translation_units'] if r['module'] == 'S01:328E').pop('source_binding')
+                with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'monochrome'):
+                    bindings.require_mono_base_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+
 if __name__ == '__main__':
     unittest.main()

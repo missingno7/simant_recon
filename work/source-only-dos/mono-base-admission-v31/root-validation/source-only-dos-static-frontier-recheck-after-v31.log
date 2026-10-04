@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\Prog\simant_recon\work\source-only-dos\structural-audits-v30\recheck.py", line 71, in <module>
+    main()
+  File "D:\Prog\simant_recon\work\source-only-dos\structural-audits-v30\recheck.py", line 56, in main
+    walk(correction)
+  File "D:\Prog\simant_recon\work\source-only-dos\structural-audits-v30\recheck.py", line 51, in walk
+    walk(child)
+  File "D:\Prog\simant_recon\work\source-only-dos\structural-audits-v30\recheck.py", line 54, in walk
+    walk(child)
+  File "D:\Prog\simant_recon\work\source-only-dos\structural-audits-v30\recheck.py", line 49, in walk
+    check(value)
+  File "D:\Prog\simant_recon\work\source-only-dos\structural-audits-v30\recheck.py", line 12, in check
+    assert actual == row['sha256'], row['path']
+AssertionError: tools/source_only_dos.py

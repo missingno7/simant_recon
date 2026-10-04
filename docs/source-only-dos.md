@@ -880,3 +880,33 @@ four bytes. The root review also confirms the 60B0 record's event-region fields
 while keeping its source instance and registration unknown. The read-only recheck
 passes 397 input identities. This research discharges no debt and changes no
 provider, function disposition or open-gate count.
+
+## v31 symbolic monochrome base
+
+The [bounded admission](../work/source-only-dos/mono-base-admission-v31/README.md)
+replaces four fixed `8ED8h` operands in the generated S01:328E TU with
+`OFFSET DGROUP:_g_8ED8`. Canonical assembly stays unchanged. The v32 entry-SS
+proof and its caller-arrow correction are mandatory inputs. Whole-object checks
+preserve all contributions, publics and existing ordered fixups outside the four
+immediates; wrong frame, target, missing site, changed loop and extra storage fail.
+
+The root reopened 334 artifact identities and independently rebuilt all six
+fixture objects. Eight stock-CRT executions under the two RTLinks produce the
+declared `35/A5/C7/D3` observations for DGROUP/literal/DATA/wrong-target operands.
+Each checks SS and DS before reading; both map public tables must agree. The
+earlier paragraph-skew and off-by-one fixture failures remain preserved diagnostics.
+
+The new mandatory gate verifies raw observations, maps, logs, source recipes,
+complete object models and entry-state receipts. All 30 mandatory gates plus
+alignment pass under both linkers. Preflight still reports 188 compiled TUs,
+15 imports, 193 aliases, 46 functional data bytes and seven open layout gates.
+`_g_8ED8` now has a symbolic S01 consumer alongside its S15 producer, but no owner
+extent or index bound is admitted. The game link and execution remain blocked;
+all original-byte counters remain zero.
+
+The v31 acceptance boundary passes 375 repository tests (two skips), including
+61 source-only tests. The separate `5A28` review reopens nine pinned inputs and
+the actual adjacent eight-byte object. Its four labels are private; no PUBDEF or
+source contribution identifies the preceding two bytes. No direct operand,
+address immediate or relocation in the bounded game scan proves an owner, and
+computed aliases remain outside that scan. Those two bytes remain explicit debt.

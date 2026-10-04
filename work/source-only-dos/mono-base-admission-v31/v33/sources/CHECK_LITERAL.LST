@@ -1,0 +1,84 @@
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:38:37
+                                                             Page     1-1
+
+
+ 0000				_DATA segment word public 'DATA'
+				extrn _g_8ED8:byte
+				extrn _g_8EC0:byte
+ 0000				_DATA ends
+				DGROUP group _DATA
+ 0000				CHECK_TEXT segment word public 'CODE'
+				assume cs:CHECK_TEXT, ds:DGROUP
+				public _FrameProbe
+ 0000				_FrameProbe proc far
+ 0000  53			push bx
+ 0001  1E			push ds
+ 0002  B8 ---- R		mov ax, seg DGROUP
+ 0005  8C D2			mov dx, ss
+ 0007  3B C2			cmp ax, dx
+ 0009  75 13			jne BadStack
+ 000B  8C DA			mov dx, ds
+ 000D  3B C2			cmp ax, dx
+ 000F  75 0D			jne BadStack
+ 0011  BB 0100			mov bx, 100h
+ 0014  81 C3 8ED8		add bx, 8ED8h
+ 0018  36: 8A 07		mov al, byte ptr ss:[bx]
+ 001B  EB 03 90			jmp HaveResult
+ 001E				BadStack:
+ 001E  B0 EE			mov al, 0EEh
+ 0020				HaveResult:
+ 0020  2E: A2 0038 R		mov byte ptr cs:Observed, al
+ 0024  1E			push ds
+ 0025  0E			push cs
+ 0026  1F			pop ds
+ 0027  BA 0038 R		mov dx, offset Observed
+ 002A  B9 0001			mov cx, 1
+ 002D  BB 0001			mov bx, 1
+ 0030  B4 40			mov ah, 40h
+ 0032  CD 21			int 21h
+ 0034  1F			pop ds
+ 0035  1F			pop ds
+ 0036  5B			pop bx
+ 0037  CB			retf
+ 0038				_FrameProbe endp
+ 0038  00			Observed db 0
+ 0039				CHECK_TEXT ends
+				end
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:38:37
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CHECK_TEXT . . . . . . . . . . .  	0039	WORD	PUBLIC	'CODE'
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	0000	WORD	PUBLIC	'DATA'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BADSTACK . . . . . . . . . . . .  	L NEAR	001E	CHECK_TEXT
+
+HAVERESULT . . . . . . . . . . .  	L NEAR	0020	CHECK_TEXT
+
+OBSERVED . . . . . . . . . . . .  	L BYTE	0038	CHECK_TEXT
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  CHECK_LI		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+_FrameProbe  . . . . . . . . . .  	F PROC	0000	CHECK_TEXT	Global	Length = 0038
+_g_8EC0  . . . . . . . . . . . .  	V BYTE	0000	_DATA	External
+_g_8ED8  . . . . . . . . . . . .  	V BYTE	0000	_DATA	External
+
+
+     42 Source  Lines
+     42 Total   Lines
+     16 Symbols
+
+  47132 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

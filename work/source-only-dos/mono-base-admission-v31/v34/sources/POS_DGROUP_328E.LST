@@ -1,0 +1,359 @@
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:43:10
+                                                             Page     1-1
+
+
+				; Display driver S01, module 2: mini-map tables
+				.
+				; Overlay section S01, code frame 328E, linear 
+				328EA-32B5E.
+				
+ 0000				_DATA	segment word public 'DATA'
+					extrn	_g_8ED8:byte
+ 0000				_DATA	ends
+				DGROUP	group	_DATA
+				
+ 0000				S01B_TEXT	segment word public 'CODE'
+					assume	cs:S01B_TEXT, ds:DGROUP
+				
+					public	_o01_328E_000A
+					public	_o01_328E_009D
+					public	_o01_328E_012C
+					public	_o01_328E_01D5
+				
+ 0000				_o01_328E_000A	proc	far
+ 0000  55				push bp
+ 0001  8B EC				mov bp, sp
+ 0003  56				push si
+ 0004  57				push di
+ 0005  1E				push ds
+ 0006  8B 5E 0E				mov bx, word ptr [bp+0Eh]
+ 0009  83 E3 07				and bx, 7
+ 000C  81 C3 0000 E			add bx, OFFSET DGROUP:_g_8ED8
+ 0010  C5 76 06				lds si, dword ptr [bp+6]
+ 0013  C4 7E 0A				les di, dword ptr [bp+0Ah]
+ 0016  B9 0040				mov cx, 40h
+ 0019				L0023:
+ 0019  32 E4				xor ah, ah
+ 001B  AC				lodsb
+ 001C  D1 E0				shl ax, 1
+ 001E  D1 E0				shl ax, 1
+ 0020  D1 E0				shl ax, 1
+ 0022  03 D8				add bx, ax
+ 0024  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 0027  80 E2 F0				and dl, 0F0h
+ 002A  26: 88 15			mov byte ptr es:[di], dl
+ 002D  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 0031  80 E2 F0				and dl, 0F0h
+ 0034  26: 88 55 40			mov byte ptr es:[di+40h], dl
+ 0038  36: 8A 57 02			mov dl, byte ptr ss:[bx+2]
+ 003C  80 E2 F0				and dl, 0F0h
+ 003F  26: 88 95 0080			mov byte ptr es:[di+80h], dl
+ 0044  36: 8A 57 03			mov dl, byte ptr ss:[bx+3]
+ 0048  80 E2 F0				and dl, 0F0h
+ 004B  26: 88 95 00C0			mov byte ptr es:[di+0C0h], dl
+ 0050  2B D8				sub bx, ax
+ 0052  32 E4				xor ah, ah
+ 0054  AC				lodsb
+ 0055  D1 E0				shl ax, 1
+ 0057  D1 E0				shl ax, 1
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:43:10
+                                                             Page     1-2
+
+
+ 0059  D1 E0				shl ax, 1
+ 005B  03 D8				add bx, ax
+ 005D  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 0060  80 E2 0F				and dl, 0Fh
+ 0063  26: 08 15			or byte ptr es:[di], dl
+ 0066  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 006A  80 E2 0F				and dl, 0Fh
+ 006D  26: 08 55 40			or byte ptr es:[di+40h], dl
+ 0071  36: 8A 57 02			mov dl, byte ptr ss:[bx+2]
+ 0075  80 E2 0F				and dl, 0Fh
+ 0078  26: 08 95 0080			or byte ptr es:[di+80h], dl
+ 007D  36: 8A 57 03			mov dl, byte ptr ss:[bx+3]
+ 0081  80 E2 0F				and dl, 0Fh
+ 0084  26: 08 95 00C0			or byte ptr es:[di+0C0h], dl
+ 0089  2B D8				sub bx, ax
+ 008B  47				inc di
+ 008C  E2 8B				loop L0023
+ 008E  1F				pop ds
+ 008F  5F				pop di
+ 0090  5E				pop si
+ 0091  5D				pop bp
+ 0092  CB				retf
+ 0093				_o01_328E_000A	endp
+				
+ 0093				_o01_328E_009D	proc	far
+ 0093  55				push bp
+ 0094  8B EC				mov bp, sp
+ 0096  56				push si
+ 0097  57				push di
+ 0098  1E				push ds
+ 0099  8B 5E 10				mov bx, word ptr [bp+10h]
+ 009C  83 E3 07				and bx, 7
+ 009F  81 C3 0000 E			add bx, OFFSET DGROUP:_g_8ED8
+ 00A3  C5 76 06				lds si, dword ptr [bp+6]
+ 00A6  C4 7E 0A				les di, dword ptr [bp+0Ah]
+ 00A9  B9 0020				mov cx, 20h
+ 00AC				L00B6:
+ 00AC  32 E4				xor ah, ah
+ 00AE  AC				lodsb
+ 00AF  D1 E0				shl ax, 1
+ 00B1  D1 E0				shl ax, 1
+ 00B3  D1 E0				shl ax, 1
+ 00B5  03 D8				add bx, ax
+ 00B7  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 00BA  80 E2 F0				and dl, 0F0h
+ 00BD  26: 88 15			mov byte ptr es:[di], dl
+ 00C0  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 00C4  80 E2 F0				and dl, 0F0h
+ 00C7  26: 88 55 20			mov byte ptr es:[di+20h], dl
+ 00CB  36: 8A 57 02			mov dl, byte ptr ss:[bx+2]
+ 00CF  80 E2 F0				and dl, 0F0h
+ 00D2  26: 88 55 40			mov byte ptr es:[di+40h], dl
+ 00D6  36: 8A 57 03			mov dl, byte ptr ss:[bx+3]
+ 00DA  80 E2 F0				and dl, 0F0h
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:43:10
+                                                             Page     1-3
+
+
+ 00DD  26: 88 55 60			mov byte ptr es:[di+60h], dl
+ 00E1  2B D8				sub bx, ax
+ 00E3  32 E4				xor ah, ah
+ 00E5  AC				lodsb
+ 00E6  D1 E0				shl ax, 1
+ 00E8  D1 E0				shl ax, 1
+ 00EA  D1 E0				shl ax, 1
+ 00EC  03 D8				add bx, ax
+ 00EE  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 00F1  80 E2 0F				and dl, 0Fh
+ 00F4  26: 08 15			or byte ptr es:[di], dl
+ 00F7  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 00FB  80 E2 0F				and dl, 0Fh
+ 00FE  26: 08 55 20			or byte ptr es:[di+20h], dl
+ 0102  36: 8A 57 02			mov dl, byte ptr ss:[bx+2]
+ 0106  80 E2 0F				and dl, 0Fh
+ 0109  26: 08 55 40			or byte ptr es:[di+40h], dl
+ 010D  36: 8A 57 03			mov dl, byte ptr ss:[bx+3]
+ 0111  80 E2 0F				and dl, 0Fh
+ 0114  26: 08 55 60			or byte ptr es:[di+60h], dl
+ 0118  2B D8				sub bx, ax
+ 011A  47				inc di
+ 011B  E2 8F				loop L00B6
+ 011D  1F				pop ds
+ 011E  5F				pop di
+ 011F  5E				pop si
+ 0120  5D				pop bp
+ 0121  CB				retf
+ 0122				_o01_328E_009D	endp
+				
+ 0122				_o01_328E_012C	proc	far
+ 0122  55				push bp
+ 0123  8B EC				mov bp, sp
+ 0125  56				push si
+ 0126  57				push di
+ 0127  1E				push ds
+ 0128  8B 5E 0E				mov bx, word ptr [bp+0Eh]
+ 012B  83 E3 07				and bx, 7
+ 012E  81 C3 0000 E			add bx, OFFSET DGROUP:_g_8ED8
+ 0132  C5 76 06				lds si, dword ptr [bp+6]
+ 0135  C4 7E 0A				les di, dword ptr [bp+0Ah]
+ 0138  B9 0020				mov cx, 20h
+ 013B				L0145:
+ 013B  32 E4				xor ah, ah
+ 013D  AC				lodsb
+ 013E  D1 E0				shl ax, 1
+ 0140  D1 E0				shl ax, 1
+ 0142  D1 E0				shl ax, 1
+ 0144  03 D8				add bx, ax
+ 0146  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 0149  80 E2 C0				and dl, 0C0h
+ 014C  26: 88 15			mov byte ptr es:[di], dl
+ 014F  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 0153  80 E2 C0				and dl, 0C0h
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:43:10
+                                                             Page     1-4
+
+
+ 0156  26: 88 55 20			mov byte ptr es:[di+20h], dl
+ 015A  2B D8				sub bx, ax
+ 015C  32 E4				xor ah, ah
+ 015E  AC				lodsb
+ 015F  D1 E0				shl ax, 1
+ 0161  D1 E0				shl ax, 1
+ 0163  D1 E0				shl ax, 1
+ 0165  03 D8				add bx, ax
+ 0167  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 016A  80 E2 30				and dl, 30h
+ 016D  26: 08 15			or byte ptr es:[di], dl
+ 0170  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 0174  80 E2 30				and dl, 30h
+ 0177  26: 08 55 20			or byte ptr es:[di+20h], dl
+ 017B  2B D8				sub bx, ax
+ 017D  32 E4				xor ah, ah
+ 017F  AC				lodsb
+ 0180  D1 E0				shl ax, 1
+ 0182  D1 E0				shl ax, 1
+ 0184  D1 E0				shl ax, 1
+ 0186  03 D8				add bx, ax
+ 0188  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 018B  80 E2 0C				and dl, 0Ch
+ 018E  26: 08 15			or byte ptr es:[di], dl
+ 0191  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 0195  80 E2 0C				and dl, 0Ch
+ 0198  26: 08 55 20			or byte ptr es:[di+20h], dl
+ 019C  2B D8				sub bx, ax
+ 019E  32 E4				xor ah, ah
+ 01A0  AC				lodsb
+ 01A1  D1 E0				shl ax, 1
+ 01A3  D1 E0				shl ax, 1
+ 01A5  D1 E0				shl ax, 1
+ 01A7  03 D8				add bx, ax
+ 01A9  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 01AC  80 E2 03				and dl, 3
+ 01AF  26: 08 15			or byte ptr es:[di], dl
+ 01B2  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 01B6  80 E2 03				and dl, 3
+ 01B9  26: 08 55 20			or byte ptr es:[di+20h], dl
+ 01BD  2B D8				sub bx, ax
+ 01BF  47				inc di
+ 01C0  49				dec cx
+ 01C1  74 03				je L01D0
+ 01C3  E9 013B R			jmp L0145
+ 01C6				L01D0:
+ 01C6  1F				pop ds
+ 01C7  5F				pop di
+ 01C8  5E				pop si
+ 01C9  5D				pop bp
+ 01CA  CB				retf
+ 01CB				_o01_328E_012C	endp
+				
+ 01CB				_o01_328E_01D5	proc	far
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:43:10
+                                                             Page     1-5
+
+
+ 01CB  55				push bp
+ 01CC  8B EC				mov bp, sp
+ 01CE  56				push si
+ 01CF  57				push di
+ 01D0  1E				push ds
+ 01D1  8B 5E 0E				mov bx, word ptr [bp+0Eh]
+ 01D4  83 E3 07				and bx, 7
+ 01D7  81 C3 0000 E			add bx, OFFSET DGROUP:_g_8ED8
+ 01DB  C5 76 06				lds si, dword ptr [bp+6]
+ 01DE  C4 7E 0A				les di, dword ptr [bp+0Ah]
+ 01E1  B9 0010				mov cx, 10h
+ 01E4				L01EE:
+ 01E4  32 E4				xor ah, ah
+ 01E6  AC				lodsb
+ 01E7  D1 E0				shl ax, 1
+ 01E9  D1 E0				shl ax, 1
+ 01EB  D1 E0				shl ax, 1
+ 01ED  03 D8				add bx, ax
+ 01EF  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 01F2  80 E2 C0				and dl, 0C0h
+ 01F5  26: 88 15			mov byte ptr es:[di], dl
+ 01F8  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 01FC  80 E2 C0				and dl, 0C0h
+ 01FF  26: 88 55 10			mov byte ptr es:[di+10h], dl
+ 0203  2B D8				sub bx, ax
+ 0205  32 E4				xor ah, ah
+ 0207  AC				lodsb
+ 0208  D1 E0				shl ax, 1
+ 020A  D1 E0				shl ax, 1
+ 020C  D1 E0				shl ax, 1
+ 020E  03 D8				add bx, ax
+ 0210  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 0213  80 E2 30				and dl, 30h
+ 0216  26: 08 15			or byte ptr es:[di], dl
+ 0219  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 021D  80 E2 30				and dl, 30h
+ 0220  26: 08 55 10			or byte ptr es:[di+10h], dl
+ 0224  2B D8				sub bx, ax
+ 0226  32 E4				xor ah, ah
+ 0228  AC				lodsb
+ 0229  D1 E0				shl ax, 1
+ 022B  D1 E0				shl ax, 1
+ 022D  D1 E0				shl ax, 1
+ 022F  03 D8				add bx, ax
+ 0231  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 0234  80 E2 0C				and dl, 0Ch
+ 0237  26: 08 15			or byte ptr es:[di], dl
+ 023A  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 023E  80 E2 0C				and dl, 0Ch
+ 0241  26: 08 55 10			or byte ptr es:[di+10h], dl
+ 0245  2B D8				sub bx, ax
+ 0247  32 E4				xor ah, ah
+ 0249  AC				lodsb
+ 024A  D1 E0				shl ax, 1
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:43:10
+                                                             Page     1-6
+
+
+ 024C  D1 E0				shl ax, 1
+ 024E  D1 E0				shl ax, 1
+ 0250  03 D8				add bx, ax
+ 0252  36: 8A 17			mov dl, byte ptr ss:[bx]
+ 0255  80 E2 03				and dl, 3
+ 0258  26: 08 15			or byte ptr es:[di], dl
+ 025B  36: 8A 57 01			mov dl, byte ptr ss:[bx+1]
+ 025F  80 E2 03				and dl, 3
+ 0262  26: 08 55 10			or byte ptr es:[di+10h], dl
+ 0266  2B D8				sub bx, ax
+ 0268  47				inc di
+ 0269  49				dec cx
+ 026A  74 03				je L0279
+ 026C  E9 01E4 R			jmp L01EE
+ 026F				L0279:
+ 026F  1F				pop ds
+ 0270  5F				pop di
+ 0271  5E				pop si
+ 0272  5D				pop bp
+ 0273  CB				retf
+ 0274				_o01_328E_01D5	endp
+				
+ 0274				S01B_TEXT	ends
+					end
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:43:10
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  _DATA  . . . . . . . . . . . .  	0000	WORD	PUBLIC	'DATA'
+S01B_TEXT  . . . . . . . . . . .  	0274	WORD	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+L0023  . . . . . . . . . . . . .  	L NEAR	0019	S01B_TEXT
+L00B6  . . . . . . . . . . . . .  	L NEAR	00AC	S01B_TEXT
+L0145  . . . . . . . . . . . . .  	L NEAR	013B	S01B_TEXT
+L01D0  . . . . . . . . . . . . .  	L NEAR	01C6	S01B_TEXT
+L01EE  . . . . . . . . . . . . .  	L NEAR	01E4	S01B_TEXT
+L0279  . . . . . . . . . . . . .  	L NEAR	026F	S01B_TEXT
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  POS_DGRO		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+_g_8ED8  . . . . . . . . . . . .  	V BYTE	0000	_DATA	External
+_o01_328E_000A . . . . . . . . .  	F PROC	0000	S01B_TEXT	Global	Length = 0093
+_o01_328E_009D . . . . . . . . .  	F PROC	0093	S01B_TEXT	Global	Length = 008F
+_o01_328E_012C . . . . . . . . .  	F PROC	0122	S01B_TEXT	Global	Length = 00A9
+_o01_328E_01D5 . . . . . . . . .  	F PROC	01CB	S01B_TEXT	Global	Length = 00A9
+
+
+    292 Source  Lines
+    292 Total   Lines
+     21 Symbols
+
+  47004 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

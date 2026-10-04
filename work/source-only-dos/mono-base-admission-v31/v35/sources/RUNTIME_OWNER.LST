@@ -1,0 +1,77 @@
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:47:09
+                                                             Page     1-1
+
+
+ 0000				NULL segment word public 'BEGDATA'
+ 0000  00			db 0
+ 0001				NULL ends
+ 0000				PREFIX segment word public 'DATA'
+				public FrameMarker, LiteralMarker
+ 0000  00AE[			db 0AEh dup (?)
+	   ??			
+			 ]	
+				
+ 00AE  C7			FrameMarker db 0C7h
+ 00AF  8ED7[			db 8ED7h dup (?)
+	   ??			
+			 ]	
+				
+ 8F86  A5			LiteralMarker db 0A5h
+ 8F87				PREFIX ends
+ 0000				_DATA segment para public 'DATA'
+				public _g_8ED8, _g_8EC0
+ 0000				_g_8ED8 label byte
+ 0000  0004[			db 4 dup (?)
+	   ??			
+			 ]	
+				
+ 0004				_g_8EC0 label byte
+ 0004  00FC[			db 0FCh dup (?)
+	   ??			
+			 ]	
+				
+ 0100  35			db 35h
+ 0101  0003[			db 3 dup (?)
+	   ??			
+			 ]	
+				
+ 0104  D3			db 0D3h
+ 0105				_DATA ends
+				DGROUP group NULL, PREFIX, _DATA
+				end
+Microsoft (R) Macro Assembler Version 5.10                  10/4/26 14:47:09
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+DGROUP . . . . . . . . . . . . .  	GROUP
+  NULL . . . . . . . . . . . . .  	0001	WORD	PUBLIC	'BEGDATA'
+  PREFIX . . . . . . . . . . . .  	8F87	WORD	PUBLIC	'DATA'
+  _DATA  . . . . . . . . . . . .  	0105	PARA	PUBLIC	'DATA'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+FrameMarker  . . . . . . . . . .  	L BYTE	00AE	PREFIX	Global
+
+LiteralMarker  . . . . . . . . .  	L BYTE	8F86	PREFIX	Global
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  RUNTIME_		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+_g_8EC0  . . . . . . . . . . . .  	L BYTE	0004	_DATA	Global
+_g_8ED8  . . . . . . . . . . . .  	L BYTE	0000	_DATA	Global
+
+
+     22 Source  Lines
+     22 Total   Lines
+     15 Symbols
+
+  47340 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

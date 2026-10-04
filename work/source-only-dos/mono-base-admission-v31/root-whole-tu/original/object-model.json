@@ -1,0 +1,123 @@
+{
+  "object": {
+    "path": "build/workers/dos_mono_base_root_v30/original/module.obj",
+    "sha256": "0142c97a2449858847329a52b254d76820e329f1d5c5d85c294fdf8f9a308ad7",
+    "size": 821
+  },
+  "actual_model": {
+    "segment_defs": [
+      {
+        "index": 1,
+        "name": "_DATA",
+        "class": "DATA",
+        "length": 0,
+        "alignment_code": 2,
+        "alignment": "word",
+        "combine_code": 2,
+        "combine": "public",
+        "big": false,
+        "use_32bit_offset": false,
+        "frame": null,
+        "offset": null,
+        "overlay_index": 1,
+        "acbp": 72
+      },
+      {
+        "index": 2,
+        "name": "S01B_TEXT",
+        "class": "CODE",
+        "length": 628,
+        "alignment_code": 2,
+        "alignment": "word",
+        "combine_code": 2,
+        "combine": "public",
+        "big": false,
+        "use_32bit_offset": false,
+        "frame": null,
+        "offset": null,
+        "overlay_index": 1,
+        "acbp": 72
+      }
+    ],
+    "segment_lengths": {
+      "_DATA": 0,
+      "S01B_TEXT": 628
+    },
+    "groups": [
+      {
+        "index": 1,
+        "name": "DGROUP",
+        "segment_indices": [
+          1
+        ],
+        "segments": [
+          "_DATA"
+        ]
+      }
+    ],
+    "externals": [],
+    "external_scopes": [],
+    "publics": [
+      {
+        "name": "_o01_328E_01D5",
+        "segment": "S01B_TEXT",
+        "offset": 459
+      },
+      {
+        "name": "_o01_328E_009D",
+        "segment": "S01B_TEXT",
+        "offset": 147
+      },
+      {
+        "name": "_o01_328E_000A",
+        "segment": "S01B_TEXT",
+        "offset": 0
+      },
+      {
+        "name": "_o01_328E_012C",
+        "segment": "S01B_TEXT",
+        "offset": 290
+      }
+    ],
+    "communals": [],
+    "fixups": [
+      {
+        "segment": "S01B_TEXT",
+        "offset": 452,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": true,
+        "target_kind": "segment",
+        "target": "S01B_TEXT",
+        "displacement": 315,
+        "frame_method": 0,
+        "frame_index": 2,
+        "target_method": 0,
+        "target_index": 2,
+        "frame_kind": "segment",
+        "frame": "S01B_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "S01B_TEXT",
+        "offset": 621,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": true,
+        "target_kind": "segment",
+        "target": "S01B_TEXT",
+        "displacement": 484,
+        "frame_method": 0,
+        "frame_index": 2,
+        "target_method": 0,
+        "target_index": 2,
+        "frame_kind": "segment",
+        "frame": "S01B_TEXT",
+        "encoded_addend": "0000"
+      }
+    ],
+    "segment_bytes": {
+      "S01B_TEXT": "558bec56571e8b5e0e83e30781c3d88ec57606c47e0ab9400032e4acd1e0d1e0d1e003d8368a1780e2f0268815368a570180e2f026885540368a570280e2f02688958000368a570380e2f0268895c0002bd832e4acd1e0d1e0d1e003d8368a1780e20f260815368a570180e20f26085540368a570280e20f2608958000368a570380e20f260895c0002bd847e28b1f5f5e5dcb558bec56571e8b5e1083e30781c3d88ec57606c47e0ab9200032e4acd1e0d1e0d1e003d8368a1780e2f0268815368a570180e2f026885520368a570280e2f026885540368a570380e2f0268855602bd832e4acd1e0d1e0d1e003d8368a1780e20f260815368a570180e20f26085520368a570280e20f26085540368a570380e20f260855602bd847e28f1f5f5e5dcb558bec56571e8b5e0e83e30781c3d88ec57606c47e0ab9200032e4acd1e0d1e0d1e003d8368a1780e2c0268815368a570180e2c0268855202bd832e4acd1e0d1e0d1e003d8368a1780e230260815368a570180e230260855202bd832e4acd1e0d1e0d1e003d8368a1780e20c260815368a570180e20c260855202bd832e4acd1e0d1e0d1e003d8368a1780e203260815368a570180e203260855202bd847497403e900001f5f5e5dcb558bec56571e8b5e0e83e30781c3d88ec57606c47e0ab9100032e4acd1e0d1e0d1e003d8368a1780e2c0268815368a570180e2c0268855102bd832e4acd1e0d1e0d1e003d8368a1780e230260815368a570180e230260855102bd832e4acd1e0d1e0d1e003d8368a1780e20c260815368a570180e20c260855102bd832e4acd1e0d1e0d1e003d8368a1780e203260815368a570180e203260855102bd847497403e900001f5f5e5dcb"
+    }
+  }
+}

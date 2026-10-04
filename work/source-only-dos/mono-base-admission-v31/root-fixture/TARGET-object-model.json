@@ -1,0 +1,158 @@
+{
+  "actual_model": {
+    "segment_defs": [
+      {
+        "index": 1,
+        "name": "_DATA",
+        "class": "DATA",
+        "length": 0,
+        "alignment_code": 3,
+        "alignment": "paragraph",
+        "combine_code": 2,
+        "combine": "public",
+        "big": false,
+        "use_32bit_offset": false,
+        "frame": null,
+        "offset": null,
+        "overlay_index": 1,
+        "acbp": 104
+      },
+      {
+        "index": 2,
+        "name": "CHECK_TEXT",
+        "class": "CODE",
+        "length": 57,
+        "alignment_code": 2,
+        "alignment": "word",
+        "combine_code": 2,
+        "combine": "public",
+        "big": false,
+        "use_32bit_offset": false,
+        "frame": null,
+        "offset": null,
+        "overlay_index": 1,
+        "acbp": 72
+      }
+    ],
+    "segment_lengths": {
+      "_DATA": 0,
+      "CHECK_TEXT": 57
+    },
+    "groups": [
+      {
+        "index": 1,
+        "name": "DGROUP",
+        "segment_indices": [
+          1
+        ],
+        "segments": [
+          "_DATA"
+        ]
+      }
+    ],
+    "externals": [
+      "_g_8EC0",
+      "_g_8ED8"
+    ],
+    "external_scopes": [
+      "external",
+      "external"
+    ],
+    "publics": [
+      {
+        "name": "_FrameProbe",
+        "segment": "CHECK_TEXT",
+        "offset": 0
+      }
+    ],
+    "communals": [],
+    "fixups": [
+      {
+        "segment": "CHECK_TEXT",
+        "offset": 3,
+        "width": 2,
+        "loc": "base16",
+        "self_relative": false,
+        "target_kind": "group",
+        "target": "DGROUP",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 1,
+        "target_index": 1,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "CHECK_TEXT",
+        "offset": 22,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "external",
+        "target": "_g_8EC0",
+        "displacement": 0,
+        "frame_method": 1,
+        "frame_index": 1,
+        "target_method": 2,
+        "target_index": 1,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "CHECK_TEXT",
+        "offset": 34,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "CHECK_TEXT",
+        "displacement": 56,
+        "frame_method": 0,
+        "frame_index": 2,
+        "target_method": 0,
+        "target_index": 2,
+        "frame_kind": "segment",
+        "frame": "CHECK_TEXT",
+        "encoded_addend": "0000"
+      },
+      {
+        "segment": "CHECK_TEXT",
+        "offset": 40,
+        "width": 2,
+        "loc": "offset16",
+        "self_relative": false,
+        "target_kind": "segment",
+        "target": "CHECK_TEXT",
+        "displacement": 56,
+        "frame_method": 0,
+        "frame_index": 2,
+        "target_method": 0,
+        "target_index": 2,
+        "frame_kind": "segment",
+        "frame": "CHECK_TEXT",
+        "encoded_addend": "0000"
+      }
+    ],
+    "segment_bytes": {
+      "CHECK_TEXT": "531eb800008cd23bc275138cda3bc2750dbb000181c30000368a07eb0390b0ee2ea200001e0e1fba0000b90100bb0100b440cd211f1f5bcb00"
+    }
+  },
+  "independently_recompiled_equal": true,
+  "worker_object": {
+    "path": "build/workers/dos_mono_8ed8_owner_v35/objects/CHECK_TARGET.OBJ",
+    "sha256": "0ca0a0bb37105cf848d2fc03705759033b6e843cbe49b56fc14dfa03a0ae8fb5",
+    "size": 230
+  },
+  "root_object": {
+    "sha256": "0ca0a0bb37105cf848d2fc03705759033b6e843cbe49b56fc14dfa03a0ae8fb5",
+    "size": 230
+  },
+  "source": {
+    "path": "work/source-only-dos/mono-base-admission-v31/v35/sources/CHECK_TARGET.ASM",
+    "sha256": "17cf0e349b48c0a193edf8460522c831e7a10386fdd286521a804151844f983d",
+    "size": 669
+  }
+}
