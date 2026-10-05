@@ -56,6 +56,12 @@ allocator entry at signed 16-bit boundaries and rejects the unsigned variant.
 The consolidation run passed 11,702 primary paired cases, all 29 mutation
 controls, and four allocator boundary observations with two unsigned contrasts.
 
+The current allocator-fixture repair run passes 12,130 paired cases across all
+29 domains and their source mutation controls. The previous allocator history
+used an invalid master-base/discard-template premise and continued an unfinished
+raw allocation. Its finite persistent-history claim is superseded; the four
+strict static receipts are unchanged. See [the accepted fixture review](../evidence/canonical/allocator-fixtures/README.md).
+
 These tests corroborate the static conclusion within recorded caller domains.
 They do not establish complete driver/backend integration, an independent DOS
 link, or full-game runtime acceptance. Historical validation, storage/link

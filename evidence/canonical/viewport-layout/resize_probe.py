@@ -82,7 +82,7 @@ def prepare(target="o26_39C7_0671",key="S26:39C7",active=("o26_39C7_0671","o26_3
 DG=match.DGROUP_SEG*16
 WINDOW=0xA102*16
 HEAPSEG=0xA100
-HANDLESEG=0xA000
+HANDLESEG=0x90FF
 
 def noop(m,args): return None
 def warp(m,args):
@@ -106,16 +106,9 @@ def make_case(label,root_height,screen_height,cursor,*,top=22,width=404,icon_sta
     # Pointers are repointed by the real first lock; Win rect initially agrees.
     count=struct.unpack_from("<H",raw,0xc)[0]
     raw[0x2c:0x2c+count*4]=bytes(count*4)
-    old=(heap.HEAP_SEG,heap.HEAP_PARAS,heap.HANDLE_SEG,heap.MASTER_FIRST,heap.MASTER_ONE_PAST,
-         heap.DISCARD_HEADER_SEG,heap.DISCARD_DATA_SEG)
-    heap.HEAP_SEG,heap.HEAP_PARAS=HEAPSEG,0x500
-    heap.HANDLE_SEG,heap.MASTER_FIRST,heap.MASTER_ONE_PAST=HANDLESEG,0x100,0x104
-    heap.DISCARD_HEADER_SEG,heap.DISCARD_DATA_SEG=0xA900,0xA902
-    try:
-        arena=heap.heap_case(label,[(128,1,{"size":len(raw),"lock":0,"name":b"viewport"}),(0x500-128,0x80)],handles=[0])
-    finally:
-        (heap.HEAP_SEG,heap.HEAP_PARAS,heap.HANDLE_SEG,heap.MASTER_FIRST,heap.MASTER_ONE_PAST,
-         heap.DISCARD_HEADER_SEG,heap.DISCARD_DATA_SEG)=old
+    arena=heap.heap_case(label,[(128,1,{"size":len(raw),"lock":0,"name":b"viewport"}),(0x500-128,0x80)],
+        handles=[0],heap_seg=HEAPSEG,heap_paras=0x500,handle_seg=HANDLESEG,
+        discard_header_seg=0xA900,discard_data_seg=0xA902)
     # Fresh lower-right resize control produced by f_2505_06B9:
     # border 2, bitmap 16x16, centre = root right/bottom minus 10.
     right,bottom=14+width,top+root_height
@@ -123,7 +116,7 @@ def make_case(label,root_height,screen_height,cursor,*,top=22,width=404,icon_sta
     hot=b.symbol_address("fd_5071_03C4")
     cb=b.symbol("f_00BA_01C3")
     writes=list(arena.writes)+[(WINDOW,bytes(raw)),(DG+0x644c,b.words(1,0)),
-        (DG+0x8cf2,bytes(45*4+45)),(b.symbol_address("win_handles"),far(0x100,HANDLESEG)),
+        (DG+0x8cf2,bytes(45*4+45)),(b.symbol_address("win_handles"),far(0xfffc,HANDLESEG)),
         (b.symbol_address("win_numOfWindows"),b.words(45)),(b.symbol_address("g_6300"),b.words(0)),
         (b.symbol_address("g_5702"),b.words(0,0x8000)),
         (b.symbol_address("g_3DB2"),b.words(640)),(b.symbol_address("g_3DB4"),b.words(screen_height)),

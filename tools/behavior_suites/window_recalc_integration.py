@@ -26,8 +26,8 @@ SUITE = "window_recalc_integration_v1"
 TARGET = "f_20E8_0903"
 WIN_ID = 0x0100
 HEAP_SEG = 0xA100
-MASTER_SEG = 0xA000
-MASTER_TOP = 0x0100
+MASTER_SEG = 0x90FF
+MASTER_TOP = 0xFFFC
 HEAP_PARAS = 0x700
 RECT_SEG = 0xB000
 RECT_OFF = 0x0100
@@ -64,25 +64,13 @@ def live_case(label, seed, *, count=None, target_index=None, forced_modes=None,
     # original lock path does when this window is first locked.
     block_paras = 64
     free_paras = HEAP_PARAS - block_paras
-    old = (memory_suite.HEAP_SEG, memory_suite.HEAP_PARAS,
-           memory_suite.HANDLE_SEG, memory_suite.MASTER_FIRST,
-           memory_suite.MASTER_ONE_PAST)
-    memory_suite.HEAP_SEG, memory_suite.HEAP_PARAS = HEAP_SEG, HEAP_PARAS
-    memory_suite.HANDLE_SEG = MASTER_SEG
-    memory_suite.MASTER_FIRST = MASTER_TOP
-    memory_suite.MASTER_ONE_PAST = MASTER_TOP + 4
-    try:
-        arena = memory_suite.heap_case(
-            f"{label}/ralloc-window",
-            [(block_paras, 1, {"size": block_paras * 16 - 32, "lock": 0,
-                               "name": b"recalc-window"}),
-             (free_paras, 0x80)],
-            handles=[0],
-            contract="one valid firm Ralloc window handle with linked free tail and packed DOS object records")
-    finally:
-        (memory_suite.HEAP_SEG, memory_suite.HEAP_PARAS,
-         memory_suite.HANDLE_SEG, memory_suite.MASTER_FIRST,
-         memory_suite.MASTER_ONE_PAST) = old
+    arena = memory_suite.heap_case(
+        f"{label}/ralloc-window",
+        [(block_paras, 1, {"size": block_paras * 16 - 32, "lock": 0,
+                           "name": b"recalc-window"}),
+         (free_paras, 0x80)],
+        handles=[0], heap_seg=HEAP_SEG, heap_paras=HEAP_PARAS, handle_seg=MASTER_SEG,
+        contract="one valid firm Ralloc window handle with linked free tail and packed DOS object records")
 
     data_seg = HEAP_SEG + 2
     object_table_off = 0x2C
@@ -145,7 +133,8 @@ def live_case(label, seed, *, count=None, target_index=None, forced_modes=None,
     objid = WIN_ID + target_index
     effect_ranges = [r for r in arena.observe if r.name not in ("heap", "handle_table")] + [
         behavior.Range("recalc_window_heap", HEAP_SEG * 16, (HEAP_PARAS + 2) * 16),
-        behavior.Range("recalc_master_slots", MASTER_SEG * 16, MASTER_TOP),
+        behavior.Range("recalc_master_slots", MASTER_SEG * 16 + memory_suite.MASTER_START,
+                       memory_suite.MASTER_CAPACITY * 4),
         behavior.Range("window_lock_helpers", dg + 0x644C, 4),
         behavior.Range("window_lock_state", dg + 0x8CF2, 45 * 4 + 45),
         behavior.Range("window_handles", behavior.symbol_address("win_handles"), 45 * 4),
@@ -179,7 +168,7 @@ def live_case(label, seed, *, count=None, target_index=None, forced_modes=None,
                 "object_count": count,
                 "target_object_index": target_index,
                 "rect": list(window_rect),
-                "ralloc": "firm type-1 header, master slot A000:0100, one-past A000:0104, payload A102:0000, linked free tail",
+                "ralloc": "firm type-1 header, master slot 90FF:FFFC, offset-zero base 90FF:0000, payload A102:0000, linked free tail",
                 "object_records": "packed 0x28-byte type-0 records; original win_LockWin calls RepointObjects",
                 "reference_graph": "modes 0..4 use absolute/bounded edges and backward-only object dependencies; mode 5 reads four initialized window-relative fields",
                 "geometry_domain": "normalized signed 16-bit logical-screen rectangles with coordinates within 0..640 by 0..400",

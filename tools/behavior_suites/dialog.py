@@ -177,17 +177,12 @@ def _actual_window_state(fixture,text,previous_window=0x0200):
     win_paras=(len(payload)+47)//16
     free_paras=0x100-text_paras-win_paras
     if free_paras<16: raise RuntimeError('dialog/window fixture heap has no valid free tail')
-    old=(memory_fixture.HEAP_SEG,memory_fixture.HEAP_PARAS)
-    memory_fixture.HEAP_SEG=lists.DATA[1]-2
-    memory_fixture.HEAP_PARAS=0x100
-    try:
-        arena=memory_fixture.heap_case(fixture.label+'/real-2100-window',[
-            (text_paras,0,{'size':len(text),'name':b'dialog-text'}),
-            (win_paras,1,{'size':len(payload),'name':b'window-2100'}),
-            (free_paras,0x80,{'name':b'dialog-window-tail'})],handles=[0,1],
-            contract='text handle plus actual uncompressed HCEGANT window 0x21 kind0 and linked free tail')
-    finally:
-        memory_fixture.HEAP_SEG,memory_fixture.HEAP_PARAS=old
+    arena=memory_fixture.heap_case(fixture.label+'/real-2100-window',[
+        (text_paras,0,{'size':len(text),'name':b'dialog-text'}),
+        (win_paras,1,{'size':len(payload),'name':b'window-2100'}),
+        (free_paras,0x80,{'name':b'dialog-window-tail'})],handles=[0,1],
+        heap_seg=lists.DATA[1]-2,heap_paras=0x100,handle_seg=lists.HANDLE[1],
+        contract='text handle plus actual uncompressed HCEGANT window 0x21 kind0 and linked free tail')
     # The first block's data starts at A100. The second paragraph header starts
     # after the first block, so its payload segment is A100 + text_paras.
     window_data_seg=lists.DATA[1]+text_paras
@@ -247,15 +242,11 @@ def case(label,which,width,mono,keys,events,rect,volatile,text=b'Dialog text',re
     fixture=lists.make_case(label,[text],0,1,0)
     dg=b.match.DGROUP_SEG*16
     paras=(len(text)+47)//16
-    old_heap_seg=memory_fixture.HEAP_SEG
-    memory_fixture.HEAP_SEG=lists.DATA[1]-2
-    try:
-        arena=memory_fixture.heap_case(label+'/ralloc',
-            [(paras,0,{'size':len(text),'name':b'dialog-text'}),
-             (16,0x80,{'name':b'dialog-tail'})], handles=[0],
-            contract='valid type-0 resource handle and linked free tail; consistent Ralloc counters')
-    finally:
-        memory_fixture.HEAP_SEG=old_heap_seg
+    arena=memory_fixture.heap_case(label+'/ralloc',
+        [(paras,0,{'size':len(text),'name':b'dialog-text'}),
+         (16,0x80,{'name':b'dialog-tail'})], handles=[0],
+        heap_seg=lists.DATA[1]-2,handle_seg=lists.HANDLE[1],
+        contract='valid type-0 resource handle and linked free tail; consistent Ralloc counters')
     empty=b.symbol('f_1B4E_000C'); zero=b.symbol('f_171C_001E')
     fixture.args=[which&65535]; fixture.registers={};fixture.callee_pop=0;fixture.return_kind='s16'
     fixture.state={'keys':list(keys),'events':list(events),

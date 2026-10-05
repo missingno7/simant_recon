@@ -34,14 +34,15 @@ validation separately retains its `UNIT` compiler context.
 
 The current preflight compiles all 191 units and validates all 64 storage
 contracts. It refuses an independent link on eleven unproved storage imports
-and twelve semantic address/layout gates. Forty-four functional data bytes remain
+and eleven semantic address/layout gates. Forty-four functional data bytes remain
 unresolved and independently prevent linking. These are SEMANTIC / PORT-BLOCKING; a source-only runnable DOS game
 has not been established.
 
-Source-owned linebuf/xlat_tabs references in two complete S03 assembly TUs now
-use ordinary linker offsets. Their historical exactness and moved-placement
-controls are verified separately. The [source follow-up](source-followup.md)
-records this partial address audit and the current mechanical native word pass.
+Source-owned code/data references use symbolic linker operands. The bounded
+direct numeric/named-frame audit covers all 29 current assembly TUs, including
+fourteen corrected LZSS stack-segment operands. Historical exactness and
+moved-placement controls are verified separately. The [source follow-up](source-followup.md)
+records this audit's scope and the current mechanical native word pass.
 
 Nine historically exact C bodies remain unchanged except registered identifier
 aliases, but improved whole-TU declaration context changes their compiler

@@ -13,12 +13,15 @@ ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/function
 import behavior, match
 from behavior_ledger import CaseLedger
 
-SUITE = "ralloc_memory_v2_stateful"
+SUITE = "ralloc_memory_v3_startup_handles"
 DG = match.DGROUP_SEG
-# Keep the actual heap and master handle table in the same disjoint arenas used
-# by the neighboring DOS windows suite. The reserved stack remains in DGROUP.
+# Original startup stores an offset-zero s_2F46; four-byte master slots wrap
+# below it in the same segment. These 64 slots end one paragraph before the
+# heap, matching f_171C_07BE's master reservation plus its extra paragraph.
+# The reserved stack remains in DGROUP.
 HEAP_SEG, HEAP_PARAS = 0xA100, 0x100
-HANDLE_SEG, MASTER_FIRST, MASTER_ONE_PAST = 0xA000, 0x0100, 0x0104
+HANDLE_SEG, MASTER_FIRST, MASTER_ONE_PAST = 0x90FF, 0xFFFC, 0
+MASTER_CAPACITY, MASTER_START = 64, 0xFF00
 DISCARD_HEADER_SEG, DISCARD_DATA_SEG = 0xA200, 0xA202
 
 def w(v): return struct.pack("<H", v & 0xffff)
@@ -32,8 +35,10 @@ def memory_globals_writes(*, heap_start, heap_end, free_head, master_off, master
     """Return the shared DOS Ralloc DGROUP/BSS setup writes.
 
     `master_off:master_seg` is s_2F46, the far one-past handle pointer. Callers
-    place the actual four-byte handle slots themselves and set each block's
-    signed `handle` offset relative to this pointer.
+    place the actual four-byte handle slots themselves. Original startup gives
+    this pointer offset zero, and allocation stores raw OFF(h) in Block.handle;
+    pointer recovery and movement add that signed word to this offset-zero base.
+    A nonzero master_off is useful only for explicit invalid-premise controls.
     """
     type_paras = type_paras or {0: 0, 1: 0, 3: 0}
     values = {0x2f36:type_paras.get(0,0), 0x2f38:type_paras.get(3,0),
@@ -53,24 +58,45 @@ def header(paras, kind, *, handle=0, size=0, lock=0, age=0, nxt=0, prev=0, attr=
                        kind & 255, lock & 255, age & 0xffffffff, nxt & 0xffff,
                        prev & 0xffff, attr & 255) + name
 
-def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contract="", content_seed=0):
+def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contract="", content_seed=0,
+              heap_seg=None, heap_paras=None, handle_seg=None,
+              discard_header_seg=None, discard_data_seg=None):
     """rows=(paras,type,options), in physical address order."""
-    starts, seg = [], HEAP_SEG
+    heap_seg = HEAP_SEG if heap_seg is None else heap_seg
+    heap_paras = HEAP_PARAS if heap_paras is None else heap_paras
+    handle_seg = HANDLE_SEG if handle_seg is None else handle_seg
+    discard_header_seg = DISCARD_HEADER_SEG if discard_header_seg is None else discard_header_seg
+    discard_data_seg = DISCARD_DATA_SEG if discard_data_seg is None else discard_data_seg
+    if discard_data_seg != discard_header_seg + 2:
+        raise ValueError("discarded pointer must resolve to the seeded template header")
+    starts, seg = [], heap_seg
     for row in rows:
         paras, kind = row[:2]
         opts = dict(row[2]) if len(row) > 2 else {}
         starts.append((seg, paras, kind, opts)); seg += paras
     end = seg
-    if not starts or end > HEAP_SEG + HEAP_PARAS: raise ValueError("heap fixture out of bounds")
+    if not starts or end > heap_seg + heap_paras: raise ValueError("heap fixture out of bounds")
     free = [b for b in starts if b[2] == 0x80]
     occupied = [b for b in starts if b[2] not in (0x80, 2)]
-    # Real master tables grow down from s_2F46 (f_171C_0A5C starts at
-    # s_2F46-1). Initialize only the slots used by this case.
-    writes = [(HANDLE_SEG*16+0x00c0,b"\0"*(MASTER_ONE_PAST-0x00c0))]
+    if MASTER_ONE_PAST != 0 or MASTER_FIRST != 0xFFFC:
+        raise ValueError("heap fixture requires the original offset-zero master base")
+    if len(handles) != len(occupied):
+        raise ValueError("each live heap block requires one master handle")
+    if (len(set(handles)) != len(handles) or
+            any(not isinstance(i, int) or not 0 <= i < MASTER_CAPACITY - 1 for i in handles)):
+        raise ValueError("master handle indices must be unique and below the allocator capacity")
+    if any(p < 2 for _, p, _, _ in starts):
+        raise ValueError("physical heap blocks must contain their two-paragraph header")
+    table_start = handle_seg * 16 + MASTER_START
+    table_end = table_start + MASTER_CAPACITY * 4
+    if table_start < end * 16 and table_end > heap_seg * 16:
+        raise ValueError("master handle table overlaps the physical heap")
+    # f_171C_0A5C starts at s_2F46-1. Clear every reserved descending slot.
+    writes = [(handle_seg*16+MASTER_START,b"\0"*(MASTER_CAPACITY*4))]
     for i, (hidx, block) in enumerate(zip(handles, occupied)):
         slot = MASTER_FIRST - 4 * hidx
-        block[3]["handle"] = (slot - MASTER_ONE_PAST) & 0xffff
-        writes.append((HANDLE_SEG * 16 + slot, far(0, block[0] + 2)))
+        block[3]["handle"] = slot & 0xffff
+        writes.append((handle_seg * 16 + slot, far(0, block[0] + 2)))
     counters = {0x2f36: 0, 0x2f38: 0, 0x2f3a: 0}
     for _, paras, kind, _ in starts:
         if kind in (0, 1, 3): counters[{0:0x2f36,1:0x2f3a,3:0x2f38}[kind]] += paras
@@ -86,28 +112,30 @@ def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contr
                       attr=opts.get("attr",0), name=opts.get("name",f"B{i}".encode()))
         body += bytes((content_seed + i*43 + j*29 + kind) & 255 for j in range(paras*16-32))
         writes.append((s*16, body))
-    writes += memory_globals_writes(heap_start=HEAP_SEG,heap_end=end,
-        free_head=free[0][0] if free else 0,master_off=MASTER_ONE_PAST,master_seg=HANDLE_SEG,
-        allocated_handles=len(handles),live_handles=len(handles),free_paras=total_free,
+    writes += memory_globals_writes(heap_start=heap_seg,heap_end=end,
+        free_head=free[0][0] if free else 0,master_off=MASTER_ONE_PAST,master_seg=handle_seg,
+        allocated_handles=max(handles,default=-1)+1,live_handles=len(handles),free_paras=total_free,
         used_paras=total_used,type_paras={0:counters[0x2f36],1:counters[0x2f3a],3:counters[0x2f38]})
-    # A real discarded-handle target: a type-5 block with the same 32-byte
-    # header shape as the allocator's permanent DiscardEntry allocation.
-    discard = header(4, 5, size=32, name=b"DiscardEntry")
-    writes += [(DISCARD_HEADER_SEG*16, discard),
-               (behavior.symbol_address("fd_50F6_3948"), far(0, DISCARD_DATA_SEG)),
+    # Startup copies s_2F4E {0,0L,0,5} into its 32-byte DiscardEntry payload.
+    # fd_3948 points at that copied template; reclaim adds two paragraphs so
+    # HDR(discarded handle) subtracts them again and reads this type-5 header.
+    # The enclosing permanent allocation remains a bounded fixture proxy.
+    discard = header(0, 5, size=0, name=b"")
+    writes += [(discard_header_seg*16, discard),
+               (behavior.symbol_address("fd_50F6_3948"), far(0, discard_header_seg)),
                (behavior.symbol_address("fd_50F6_3950"), w(end))]
     writes += list(extra)
-    observe = [behavior.Range("heap",HEAP_SEG*16,(end-HEAP_SEG)*16),
-               behavior.Range("handle_table",HANDLE_SEG*16+0xf00,0x100),
+    observe = [behavior.Range("heap",heap_seg*16,(end-heap_seg)*16),
+               behavior.Range("handle_table",handle_seg*16+MASTER_START,MASTER_CAPACITY*4),
                behavior.Range("allocator_globals",dga(0x2f2a),0x28),
                behavior.Range("free_list_head",dga(0x91ac),4),
                behavior.Range("heap_bounds",dga(0x91a4),12),
                behavior.Range("ems_limit",dga(0x8c70),2),
                behavior.Range("discard_entry_pointer",behavior.symbol_address("fd_50F6_3948"),4),
-               behavior.Range("discard_entry_header",DISCARD_HEADER_SEG*16,32)]
+               behavior.Range("discard_entry_header",discard_header_seg*16,32)]
     return behavior.Case(label=label,args=list(args),writes=writes,observe=observe,return_kind=result,
         registers={"ds":DG,"ss":DG},
-        metadata={"suite":SUITE,"contract":contract,"heap_start":HEAP_SEG,"heap_end":end,
+        metadata={"suite":SUITE,"contract":contract,"heap_start":heap_seg,"heap_end":end,
                   "blocks":[{"seg":s,"paras":p,"type":k,**o} for s,p,k,o in starts]})
 
 
@@ -172,8 +200,10 @@ def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
         ("f_171C_0BE2", None, "reclaim the oldest unlocked soft handle into DiscardEntry"),
         ("f_171C_13E4", None, "free the relocated firm handle through original manager helper"),
         ("f_171C_0FBC", None, "allocate from the updated free list after reclaim/free"),
-        ("f_171C_0CF4", None, "compact the resulting live arena a second time"),
     ]
+    # 0FBC returns a raw Block*, before its f_171C_1D40 caller copies a live
+    # header/payload and installs the handle. That intermediate helper state
+    # cannot be fed to another compaction as a completed live allocation.
     plan = [op[0] for op in operations]
     plan_meta = {"sequence_id":sequence_id,"ordered_operation_plan":plan,
                  "fixture_seed":seed,"hole_paras":hole,"soft_paras":soft,
@@ -186,7 +216,8 @@ def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
                  "soft_pinned_initial":pinned,
                  "initial_master_slots":{"soft":MASTER_FIRST,"firm":MASTER_FIRST-4},
                  "heap_segment":HEAP_SEG,"master_table_end":MASTER_ONE_PAST,
-                 "fixture_validity":"paragraph aligned; ordered free chain; matching counters; live handles point to payload; discard block initialized"}
+                 "fixture_validity":"paragraph aligned; ordered free chain; matching counters; offset-zero master base; live Block.handle stores raw OFF(h); discard block initialized",
+                 "terminal_boundary":"0FBC raw Block* return; caller handle installation has not executed"}
     steps=[]
     for index,(target,case,contract) in enumerate(operations):
         if case is None:
@@ -226,6 +257,37 @@ def operation_plan(sequence_id, *, seed=None, random_case=False):
             allocation_type=rng.choice((0,1,3)),firm_type=rng.choice((0,1)),
             content_seed=rng.randrange(256),soft_age=soft_age,firm_age=firm_age)
     return make_sequence(sequence_id,seed=seed)
+
+
+def completed_allocation_sequence(sequence_id="directed/completed-allocation"):
+    """Real public allocations establish raw handle offsets before a live move.
+
+    Only the first call seeds a free arena. Original 125C/13E4/2136 helpers execute
+    in both machines; the reviewed 0CF4 candidate compacts their actual state.
+    """
+    initial = heap_case(sequence_id + "/00-allocate-first", [(HEAP_PARAS,0x80)],
+        args=[160,0,1,0,0xB200], result="farptr", extra=[(0xB2000,b"public-live\0")],
+        contract="free arena for two completed original public allocations")
+    plan = [
+        ("f_171C_125C", initial, "farptr"),
+        ("f_171C_125C", [32,0,1,0,0xB200], "farptr"),
+        ("f_171C_13E4", [MASTER_FIRST,HANDLE_SEG], "void"),
+        ("f_171C_0CF4", [0], "s16"),
+        ("f_171C_2136", [0,HEAP_SEG+2], "farptr"),
+        ("f_171C_13E4", [MASTER_FIRST-4,HANDLE_SEG], "void"),
+        ("f_171C_0CF4", [0], "s16"),
+    ]
+    steps = []
+    for index,(target,args,result) in enumerate(plan):
+        case = args if index == 0 else behavior.Case(
+            label=f"{sequence_id}/{index:02d}-{target}", args=args,
+            observe=initial.observe, return_kind=result, registers={"ds":DG,"ss":DG})
+        case.metadata = {"suite":SUITE,"operation_index":index,
+            "contract":"completed public allocation/free/compact/pointer-recovery history",
+            "helpers":"original 125C/13E4/2136 execute; 0CF4 is the active reviewed candidate",
+            "expected_second_handle":(HANDLE_SEG<<16)|(MASTER_FIRST-4)}
+        steps.append((target,case))
+    return steps
 
 
 class _StepIdentity:

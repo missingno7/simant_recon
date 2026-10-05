@@ -225,26 +225,16 @@ def unlock_case(label, lock_depth, flags, count=0):
 
 def unlock_live_case(label, object_types=(0,), window_flags=0x800, redraw_pending=0):
     """Final-release unlock over a real Ralloc tree and supported object slots."""
-    arena_seg, master_seg, master_top, heap_paras = 0xA100, 0xA000, 0x0100, 0x700
+    arena_seg, master_seg, master_top, heap_paras = 0xA100, 0x90FF, 0xFFFC, 0x700
     rows = [(16, 1, {"size": 224, "lock": 1, "name": b"window"})]
     rows.extend((4, 1, {"size": 32, "lock": 0, "name": f"child{i}".encode()})
                 for i in range(len(object_types)))
     rows.append((heap_paras - 16 - 4 * len(object_types), 0x80))
     handle_ids = list(range(1 + len(object_types)))
-    old = (memory_suite.HEAP_SEG, memory_suite.HANDLE_SEG,
-           memory_suite.MASTER_FIRST, memory_suite.MASTER_ONE_PAST,
-           memory_suite.HEAP_PARAS)
-    memory_suite.HEAP_SEG, memory_suite.HANDLE_SEG = arena_seg, master_seg
-    memory_suite.MASTER_FIRST, memory_suite.MASTER_ONE_PAST = master_top, master_top + 4
-    memory_suite.HEAP_PARAS = heap_paras
-    try:
-        arena = memory_suite.heap_case(
-            f"{label}/real-ralloc-tree", rows, handles=handle_ids,
-            contract="valid window handle, optional nested object handles, and linked free-list tail")
-    finally:
-        (memory_suite.HEAP_SEG, memory_suite.HANDLE_SEG,
-         memory_suite.MASTER_FIRST, memory_suite.MASTER_ONE_PAST,
-         memory_suite.HEAP_PARAS) = old
+    arena = memory_suite.heap_case(
+        f"{label}/real-ralloc-tree", rows, handles=handle_ids,
+        heap_seg=arena_seg, heap_paras=heap_paras, handle_seg=master_seg,
+        contract="valid window handle, optional nested object handles, and linked free-list tail")
     dg = behavior.match.DGROUP_SEG * 16
     handle_entry = dg + 0x9230 + 4  # win_handles[1]
     lock_entry = dg + 0x8DA6 + 1   # window 1 lock depth
@@ -255,8 +245,8 @@ def unlock_live_case(label, object_types=(0,), window_flags=0x800, redraw_pendin
     # The DOS field is a word at +1C; the release branch tests its high byte
     # at +1D for flags 0x0200/0x0800.
     window_data[0x1C:0x1E] = w(window_flags)
-    # The first live handle is the master-table slot at MASTER_FIRST (0100);
-    # subsequent object handles descend through 00FC, 00F8, ... .
+    # The first live handle is at FFFC below the offset-zero master base;
+    # subsequent object handles descend through FFF8, FFF4, ... .
     window_handle = farptr(master_top, master_seg)
     object_map = bytearray(0x100)
     object_writes = []
@@ -288,7 +278,7 @@ def unlock_live_case(label, object_types=(0,), window_flags=0x800, redraw_pendin
     ] + object_writes
     return behavior.Case(
         label=label, args=[], writes=writes,
-        observe=[r for r in arena.observe if r.name not in ("heap", "handle_table")] + [
+        observe=[r for r in arena.observe if r.name != "heap"] + [
             behavior.Range("win_unlock_globals", dg + 0x644C, 4),
             behavior.Range("window_lock_counts", dg + 0x8DA6, 45),
             behavior.Range("window_handles", dg + 0x9230, 180),
@@ -302,11 +292,11 @@ def unlock_live_case(label, object_types=(0,), window_flags=0x800, redraw_pendin
                   "contract": "final-release win_UnlockWin branch with original Ralloc type lookup, lock decrement, free, unlock, type update, globals, and map copy",
                   "abi": "fastcall AX=window; target retf with no immediate stack pop",
                   "helper_policy": "f_171C_1686, f_171C_13E4, f_171C_2086 and f_171C_20E2 execute actual DOS code; no mocked allocator callbacks",
-                  "validity": {"handle": "real master slot pointer A000:00FC",
+                  "validity": {"handle": f"real master slot pointer {master_seg:04X}:{master_top:04X}",
                                "block_data": f"{block_data_seg:04x}:0000", "window": 1,
                                "Ralloc_block": "firm type 1, lock count 1, valid linked free tail",
                                "object_types": list(object_types), "window_flags": window_flags,
-                               "redraw_pending": redraw_pending, "window_map_source": "A000:3000"}})
+                               "redraw_pending": redraw_pending, "window_map_source": f"{master_seg:04X}:3000"}})
 
 
 def randomized_unlock_cases(count=200, seed=0x23AE01DB):
@@ -360,10 +350,7 @@ def clip_live_case(label, rects, seed=0x1E57038E, win_ids=None, cache_pressure=F
     # in linear memory (60000..65B30), which made stack locals appear as heap
     # mutations and could corrupt allocator fixtures.
     dga = memory_suite.dga
-    arena_seg, master_seg, master_top, heap_paras = 0xA100, 0xA000, 0x0100, 0x700
-    old = (memory_suite.HEAP_SEG, memory_suite.HANDLE_SEG,
-           memory_suite.MASTER_FIRST, memory_suite.MASTER_ONE_PAST,
-           memory_suite.HEAP_PARAS)
+    arena_seg, master_seg, master_top, heap_paras = 0xA100, 0x90FF, 0xFFFC, 0x700
     if cache_pressure:
         rows = [(3, 1, {"size": 16, "name": f"oldclip{i}".encode()}) for i in range(45)]
         rows.append((heap_paras - 45 * 3, 0x80))
@@ -371,18 +358,11 @@ def clip_live_case(label, rects, seed=0x1E57038E, win_ids=None, cache_pressure=F
     else:
         rows = [(heap_paras, 0x80)]
         existing_handles = []
-    memory_suite.HEAP_SEG, memory_suite.HANDLE_SEG = arena_seg, master_seg
-    memory_suite.MASTER_FIRST, memory_suite.MASTER_ONE_PAST = master_top, master_top + 4
-    memory_suite.HEAP_PARAS = heap_paras
-    try:
-        arena = memory_suite.heap_case(
-            f"{label}/ralloc-arena", rows, handles=existing_handles,
-            contract=("45 allocated unlocked firm Ralloc blocks plus a valid free tail" if cache_pressure
-                      else "one large valid free Ralloc block for the clip routine's real allocations"))
-    finally:
-        (memory_suite.HEAP_SEG, memory_suite.HANDLE_SEG,
-         memory_suite.MASTER_FIRST, memory_suite.MASTER_ONE_PAST,
-         memory_suite.HEAP_PARAS) = old
+    arena = memory_suite.heap_case(
+        f"{label}/ralloc-arena", rows, handles=existing_handles,
+        heap_seg=arena_seg, heap_paras=heap_paras, handle_seg=master_seg,
+        contract=("45 allocated unlocked firm Ralloc blocks plus a valid free tail" if cache_pressure
+                  else "one large valid free Ralloc block for the clip routine's real allocations"))
 
     screen = (0, 0, 640, 400)
     for r in rects:
@@ -435,7 +415,8 @@ def clip_live_case(label, rects, seed=0x1E57038E, win_ids=None, cache_pressure=F
             behavior.Range("clip_handles_45", clip_handles, 45 * 4),
             behavior.Range("clip_globals", g5742, 12),
             behavior.Range("active_clip_pointer", g5aac, 4),
-            behavior.Range("master_handle_slots", master_seg * 16, master_top),
+            behavior.Range("master_handle_slots", master_seg * 16 + memory_suite.MASTER_START,
+                           memory_suite.MASTER_CAPACITY * 4),
         ],
         callbacks={"win_GetObjRect": cb}, return_kind="void",
         registers=_registers(), state={"rect_provider_calls": []}, observe_at_calls=False,

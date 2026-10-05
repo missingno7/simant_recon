@@ -1,24 +1,24 @@
 {
   "schema": "simant-current-canonical-behavior-v1",
-  "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+  "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
   "seed": 12639785,
-  "random_count": 1,
+  "random_count": 16,
   "full": false,
   "live_tools": {
     "tools\\behavior.py": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
-    "tools\\canonical_behavior.py": "ea67fd6b96d191886ed4a6313902e1a425a195fba062edff40d14c0d2b10f38e",
+    "tools\\canonical_behavior.py": "eb1cfb5e25e5c67420f6647a74541893aef1b9501f363ce7fde901b4e90275f8",
     "tools\\behavior_suites\\adlib.py": "7fca84e4e13a886ce9ddf6c9781d329d7a6801107d0ddbb28e08ac4ae6fb33ed",
-    "tools\\behavior_suites\\dialog.py": "75962c2bcaa3aed13c7f008bf070da5a6d314f58bc6336329396518372e5b36a",
-    "tools\\behavior_suites\\lists.py": "2f78e9b47014535da15c411f831a9b904d5d5abefba5c9a2180a7d486c23fb1b",
-    "tools\\behavior_suites\\memory.py": "43a8b16c07e07184ba9d7bf0d45fae36efe3c0977732ff9b82b39f85df9fe8ac",
+    "tools\\behavior_suites\\dialog.py": "be1604686fa04ffa2fb18cb354e8e752f7bb949c29ee8b8c4a167e09f140baef",
+    "tools\\behavior_suites\\lists.py": "d9fa857a4118da8c89116009aee04697a7497c71ac4342aaef87ce48d86226eb",
+    "tools\\behavior_suites\\memory.py": "088e05926bd532ce35083e118798cbba4c8587c348183bbc7f022b5dd979b58c",
     "tools\\behavior_suites\\randdirs.py": "2ac5a90df0eccdbb66fcbc7f38a24f89a7f32fc678bd415d44181cfc8626c140",
-    "tools\\behavior_suites\\render_small.py": "fc73b59ac00374b4f8f565da74e534df89d00e56394710a4cca5115fa3c27064",
+    "tools\\behavior_suites\\render_small.py": "bbb11b81e901d1d753ead57070ac7792abb7dda1170a291212564d2d7e419a3c",
     "tools\\behavior_suites\\small_contracts.py": "95b68ed31b0efa847de8d72cd21f3353ce3e7abc86917eae2d5ff5d3a87c127d",
     "tools\\behavior_suites\\spider_nest.py": "0b8d13a228fca94022e7eab3edee7e43d7d1ebc1cbf337fe6295fa2706f485b6",
     "tools\\behavior_suites\\text_card.py": "36024719f64c0c73009d03ac366207c852e5d209187a27c46e60c8d531d350ae",
     "tools\\behavior_suites\\tutorial_menu.py": "06866e65dea531a42bfcd036764f395fa54efaba34ea525465290f463df85a9f",
-    "tools\\behavior_suites\\window_recalc_integration.py": "8eeb6bd54c300a281d39256db70af2dcdf9a3317472da03f1bdcb17172c9f534",
-    "tools\\behavior_suites\\windows.py": "5d550e9fddb13f6949b832ddb24fd6f2dd404d8ecdcfd697e1e7843c4e523dce"
+    "tools\\behavior_suites\\window_recalc_integration.py": "f075f2e6be394ab4974db409fb2b9a3fd651ae86ccf40646b4ae64a27466df45",
+    "tools\\behavior_suites\\windows.py": "71381e17ddcfa7304033492926d5370092674fff2799321e81976dae4306b863"
   },
   "scope": "Finite current caller contracts; same-module non-target entries and actual helpers execute original DOS code. Named modeled boundaries, graphics intent and reviewed CRT cursor projection are explicit. Backend/storage integration remains separate.",
   "targets": {
@@ -47,9 +47,13 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0FBC": {
             "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
             "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -61,10 +65,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
           }
         },
         "sequence_targets": [
@@ -74,18 +74,18 @@
           "f_171C_0FBC"
         ]
       },
-      "cases": 10,
+      "cases": 25,
       "errors": 0,
       "mismatches": 0,
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/memory/f_171C_09CC-cases.jsonl.gz",
-        "sha256": "17345ce96bde536e2854c0c11ce27903d182162e361741e951f0cff52c3021a2",
-        "row_count": 10,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/memory/f_171C_09CC-cases.jsonl.gz",
+        "sha256": "28bbd305d042e1bd38716c1e505c74c76bc24c3ce3aa609dcf7f83191f5ecb51",
+        "row_count": 25,
         "lane_counts": {
           "directed": 9,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -105,11 +105,11 @@
           "function": "f_171C_09CC",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
@@ -174,9 +174,13 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0FBC": {
               "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
               "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -188,10 +192,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
             }
           },
           "mutation": {
@@ -234,9 +234,13 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0FBC": {
             "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
             "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -248,10 +252,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
           }
         },
         "sequence_targets": [
@@ -261,18 +261,18 @@
           "f_171C_0FBC"
         ]
       },
-      "cases": 8,
+      "cases": 18,
       "errors": 0,
       "mismatches": 0,
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/memory/f_171C_0ADC-cases.jsonl.gz",
-        "sha256": "ac2d95f787ca52ceeca9be184a3809076d4b058b50e6fa5142c3152973806648",
-        "row_count": 8,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/memory/f_171C_0ADC-cases.jsonl.gz",
+        "sha256": "5f8504fe8d2cb54155b517b0562c156682028e6adff320a6dc34cacfb85c5f68",
+        "row_count": 18,
         "lane_counts": {
           "directed": 7,
-          "randomized": 1
+          "randomized": 11
         },
         "identity": {
           "address": {
@@ -292,11 +292,11 @@
           "function": "f_171C_0ADC",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
@@ -330,10 +330,11 @@
       "pass": true,
       "negative": {
         "detected": {
-          "case": "directed/basic/00-f_171C_0ADC",
-          "called": "f_171C_0ADC",
+          "case": "directed/completed-allocation/03-f_171C_0CF4",
+          "called": "f_171C_0CF4",
           "categories": [
-            "nonstack_memory"
+            "nonstack_memory",
+            "ranges"
           ]
         },
         "identity": {
@@ -360,9 +361,13 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0FBC": {
               "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
               "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -374,10 +379,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
             }
           },
           "mutation": {
@@ -420,9 +421,13 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0FBC": {
             "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
             "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -434,10 +439,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
           }
         },
         "sequence_targets": [
@@ -447,18 +448,18 @@
           "f_171C_0FBC"
         ]
       },
-      "cases": 22,
+      "cases": 34,
       "errors": 0,
       "mismatches": 0,
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/memory/f_171C_0CF4-cases.jsonl.gz",
-        "sha256": "deb90fc1dfd4f7df457d292b2f27e443d9c1019e3f4ba1169310fac7a36c30d1",
-        "row_count": 22,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/memory/f_171C_0CF4-cases.jsonl.gz",
+        "sha256": "07064f8bb6d7a09ac5e02c4cad38869f9d2ffc3e790bddfaca06d12aa7abb756",
+        "row_count": 34,
         "lane_counts": {
-          "directed": 20,
-          "randomized": 2
+          "directed": 13,
+          "randomized": 21
         },
         "identity": {
           "address": {
@@ -478,11 +479,11 @@
           "function": "f_171C_0CF4",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
@@ -546,9 +547,13 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0FBC": {
               "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
               "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -560,10 +565,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
             }
           },
           "mutation": {
@@ -606,9 +607,13 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0FBC": {
             "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
             "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -620,10 +625,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
           }
         },
         "sequence_targets": [
@@ -633,18 +634,18 @@
           "f_171C_0FBC"
         ]
       },
-      "cases": 10,
+      "cases": 25,
       "errors": 0,
       "mismatches": 0,
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/memory/f_171C_0FBC-cases.jsonl.gz",
-        "sha256": "81aa8d169d897542fe5822e2adda238f1173d5629a752d933d33c9197c9f0703",
-        "row_count": 10,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/memory/f_171C_0FBC-cases.jsonl.gz",
+        "sha256": "8bcd60abbbe8096739da2c9d62e1b8fabd610bfaf2901f17768ed56526642a91",
+        "row_count": 25,
         "lane_counts": {
           "directed": 9,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -664,11 +665,11 @@
           "function": "f_171C_0FBC",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
@@ -732,9 +733,13 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0FBC": {
               "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
               "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
@@ -746,10 +751,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
             }
           },
           "mutation": {
@@ -793,8 +794,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_0250_1018": {
             "definition_sha256": "a6314a3ff31b9c24a69932e55fbf592f0b17fb68e02207de0e73e10cedd509f1",
@@ -802,7 +803,7 @@
           }
         }
       },
-      "cases": 228,
+      "cases": 243,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
@@ -810,12 +811,12 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_0250_1018/cases.jsonl.gz",
-        "sha256": "8db365ff14011043ea703d1360f7d3600d20086069dc3ab51333033a0c3ff6ea",
-        "row_count": 228,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_0250_1018/cases.jsonl.gz",
+        "sha256": "2b8cf803ae2adda94626125b4dc2a1d5b2d184dc3fb451618d48de83fca3fde7",
+        "row_count": 243,
         "lane_counts": {
           "directed": 227,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -836,11 +837,11 @@
           "function": "f_0250_1018",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "c0948f9bec884194023df949a40310ea9ed1b7198b848623cd713e1093947c32",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "12675e0cfa17dbe0989fc3d67b2a48816fc0767c7ebd7009fb84492b0e64db25",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_0250_1018": {
               "definition_sha256": "a6314a3ff31b9c24a69932e55fbf592f0b17fb68e02207de0e73e10cedd509f1",
@@ -888,8 +889,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_0250_1018": {
               "definition_sha256": "a6314a3ff31b9c24a69932e55fbf592f0b17fb68e02207de0e73e10cedd509f1",
@@ -904,7 +905,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_0250_1018/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_0250_1018/negative-cases.jsonl.gz",
           "sha256": "d0934804e2fa94650c0b99b6f6207b919c5cba3fb21497490cef33d9d38bf002",
           "row_count": 226,
           "lane_counts": {
@@ -930,7 +931,7 @@
             "function": "f_0250_1018",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "f6eaf6290fa5a9658c8d0cbc317b1f2970c9c3547d9f63c6af33b70c136e67e1",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "if (v >= 0x10)",
               "old": "if (v > 0x10)",
@@ -939,7 +940,7 @@
             "object_sha256": "21ec9d5457878e5f5145c32c29b4c3b9616b4e9af137f5f9e7b96c2f6baf3e6a",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_0250_1018": {
                 "definition_sha256": "a6314a3ff31b9c24a69932e55fbf592f0b17fb68e02207de0e73e10cedd509f1",
@@ -954,7 +955,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 20.188,
+      "elapsed_seconds": 27.406,
       "pass": true
     },
     "f_0250_129E": {
@@ -983,8 +984,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_0250_129E": {
             "definition_sha256": "6c2c42d7639aec90b0211ef08fcd89409cd37ce566bb4f6b68dba8529c016883",
@@ -992,23 +993,23 @@
           }
         }
       },
-      "cases": 232,
+      "cases": 247,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_0250_0ADB": 28,
-        "f_0250_0721": 169
+        "f_0250_0ADB": 29,
+        "f_0250_0721": 179
       },
       "modeled_boundaries": {},
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_0250_129E/cases.jsonl.gz",
-        "sha256": "b18a1c172db739dea2d9403d20ebb382db756c2ebd2caadfe46710108ba188ea",
-        "row_count": 232,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_0250_129E/cases.jsonl.gz",
+        "sha256": "c40d0090892b025fe645cc0f2ea5a6565a131479b0a8be40dee422ba62bb61a2",
+        "row_count": 247,
         "lane_counts": {
           "directed": 231,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -1029,11 +1030,11 @@
           "function": "f_0250_129E",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "c0948f9bec884194023df949a40310ea9ed1b7198b848623cd713e1093947c32",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "12675e0cfa17dbe0989fc3d67b2a48816fc0767c7ebd7009fb84492b0e64db25",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_0250_129E": {
               "definition_sha256": "6c2c42d7639aec90b0211ef08fcd89409cd37ce566bb4f6b68dba8529c016883",
@@ -1082,8 +1083,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_0250_129E": {
               "definition_sha256": "6c2c42d7639aec90b0211ef08fcd89409cd37ce566bb4f6b68dba8529c016883",
@@ -1098,7 +1099,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_0250_129E/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_0250_129E/negative-cases.jsonl.gz",
           "sha256": "423a474b90f4e1855e295737bba6ed4d89dbebb9a482dd1236e9cb4a0b479bc0",
           "row_count": 1,
           "lane_counts": {
@@ -1124,7 +1125,7 @@
             "function": "f_0250_129E",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "7e973ecf4666c275c7859320071591a3cb239654b26be7cd5e92120a2d4cbe96",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "if (!g_9126)\n            f_0250_0721",
               "old": "if (g_9126)\n            f_0250_0721",
@@ -1133,7 +1134,7 @@
             "object_sha256": "7d9870707ab4bb83dae905b0f3dcde2761f17a4eb387a5d3e347c29ba61e8426",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_0250_129E": {
                 "definition_sha256": "6c2c42d7639aec90b0211ef08fcd89409cd37ce566bb4f6b68dba8529c016883",
@@ -1148,7 +1149,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 20.094,
+      "elapsed_seconds": 22.391,
       "pass": true
     },
     "DrawBalloons": {
@@ -1177,8 +1178,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "DrawBalloons": {
             "definition_sha256": "9bb70e19208e8e77f87ea3d47e442ad3e9867a2034e0632987012fab4fd0e9da",
@@ -1186,38 +1187,38 @@
           }
         }
       },
-      "cases": 16,
+      "cases": 31,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_171C_1B84": 28,
-        "f_171C_1A9E": 14,
-        "f_0250_0643": 14,
-        "f_0250_062A": 14,
-        "f_171C_1BBA": 14,
-        "f_171C_1C0A": 14
+        "f_171C_1B84": 58,
+        "f_171C_1A9E": 29,
+        "f_0250_0643": 29,
+        "f_0250_062A": 29,
+        "f_171C_1BBA": 29,
+        "f_171C_1C0A": 29
       },
       "modeled_boundaries": {
-        "f_24AB_02AD": 32,
-        "f_0250_5058": 15,
-        "WinPrintf": 28,
-        "f_1629_000C": 14,
-        "f_1A53_00BA": 14,
-        "f_0250_0B86": 16,
-        "f_0250_0ADB": 17,
-        "f_0250_0721": 14,
-        "f_0250_0D10": 2,
-        "f_0250_0915": 1
+        "f_24AB_02AD": 62,
+        "f_0250_5058": 23,
+        "WinPrintf": 58,
+        "f_1629_000C": 29,
+        "f_1A53_00BA": 29,
+        "f_0250_0B86": 38,
+        "f_0250_0ADB": 45,
+        "f_0250_0721": 29,
+        "f_0250_0D10": 16,
+        "f_0250_0915": 7
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/DrawBalloons/cases.jsonl.gz",
-        "sha256": "ec2fde3554d3b2f3714fbfdd7a8d07990e30c4c0f5866d2026299c051a6eeb6a",
-        "row_count": 16,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/DrawBalloons/cases.jsonl.gz",
+        "sha256": "5954d62b0ccc9caf3a2ecae5222f3c0845a2acc2818c65414c77023bc6a126be",
+        "row_count": 31,
         "lane_counts": {
           "directed": 15,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -1238,11 +1239,11 @@
           "function": "DrawBalloons",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "c0948f9bec884194023df949a40310ea9ed1b7198b848623cd713e1093947c32",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "12675e0cfa17dbe0989fc3d67b2a48816fc0767c7ebd7009fb84492b0e64db25",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DrawBalloons": {
               "definition_sha256": "9bb70e19208e8e77f87ea3d47e442ad3e9867a2034e0632987012fab4fd0e9da",
@@ -1290,8 +1291,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DrawBalloons": {
               "definition_sha256": "9bb70e19208e8e77f87ea3d47e442ad3e9867a2034e0632987012fab4fd0e9da",
@@ -1306,8 +1307,8 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/DrawBalloons/negative-cases.jsonl.gz",
-          "sha256": "6a370538d414c3fac0c69d29e80811286f0bbc61e0384759e3ee9f0b2a03e5bd",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/DrawBalloons/negative-cases.jsonl.gz",
+          "sha256": "d1af377d4bcec17a7c1ac51593edbd31c08984759e224b2c0c216f9ffe8b85e8",
           "row_count": 1,
           "lane_counts": {
             "directed": 1,
@@ -1332,7 +1333,7 @@
             "function": "DrawBalloons",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "eba487a1e04ca81cc06069ca1d084813b6eb4315cc1f07fdd78805fdfad09185",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "wpix = g_19BE * wt + 1;",
               "old": "wpix = g_19BE * wt;",
@@ -1341,7 +1342,7 @@
             "object_sha256": "53384035b8748bfd6596149f92c1149aca5314764d11da0979b63782b1a81dcc",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "DrawBalloons": {
                 "definition_sha256": "9bb70e19208e8e77f87ea3d47e442ad3e9867a2034e0632987012fab4fd0e9da",
@@ -1383,8 +1384,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DrawBalloons": {
               "definition_sha256": "9bb70e19208e8e77f87ea3d47e442ad3e9867a2034e0632987012fab4fd0e9da",
@@ -1417,8 +1418,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DrawBalloons": {
               "definition_sha256": "9bb70e19208e8e77f87ea3d47e442ad3e9867a2034e0632987012fab4fd0e9da",
@@ -1659,7 +1660,7 @@
         ],
         "execution_errors": 0
       },
-      "elapsed_seconds": 39.062,
+      "elapsed_seconds": 43.062,
       "pass": true
     },
     "SpiderScan": {
@@ -1688,8 +1689,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "SpiderScan": {
             "definition_sha256": "1b6b35205b75649246f40c0f2fefd6e9df77708931e1d2e2052ad883e226f42e",
@@ -1697,29 +1698,29 @@
           }
         }
       },
-      "cases": 147,
+      "cases": 162,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "SRand1": 12253,
-        "fracCOS": 12253,
-        "fracSIN": 24506,
-        "FindAntIndex": 392,
-        "SRand4": 73,
-        "DeadAntHere": 20
+        "SRand1": 13940,
+        "fracCOS": 13940,
+        "fracSIN": 27880,
+        "FindAntIndex": 394,
+        "SRand4": 77,
+        "DeadAntHere": 22
       },
       "modeled_boundaries": {
-        "DoLaserFire": 53
+        "DoLaserFire": 55
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/SpiderScan/cases.jsonl.gz",
-        "sha256": "1f2996b8d59210a8a01dceff3bac6006e64143886aba3a76a27ebb0278ef506a",
-        "row_count": 147,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/SpiderScan/cases.jsonl.gz",
+        "sha256": "4596a0472cc6bfbf32973efc6aee7926e05a9f80bee3306980172a5014fde2eb",
+        "row_count": 162,
         "lane_counts": {
           "directed": 146,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -1740,11 +1741,11 @@
           "function": "SpiderScan",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "e338aeeff434e6def6a1d4bc2297100dc9317b231bbee028fb087ec4ad449112",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "9cc70aa387403c45b55bc8e28604a422f231fb6f425b519da7b78a7d1092ecf3",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "SpiderScan": {
               "definition_sha256": "1b6b35205b75649246f40c0f2fefd6e9df77708931e1d2e2052ad883e226f42e",
@@ -1793,8 +1794,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "SpiderScan": {
               "definition_sha256": "1b6b35205b75649246f40c0f2fefd6e9df77708931e1d2e2052ad883e226f42e",
@@ -1809,7 +1810,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/SpiderScan/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/SpiderScan/negative-cases.jsonl.gz",
           "sha256": "29f4fbe9e18073efc3618781d569e1c584f51af0e32f0e9595dadf2ce368478d",
           "row_count": 59,
           "lane_counts": {
@@ -1835,7 +1836,7 @@
             "function": "SpiderScan",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "364178bf3a53132627074033579b85408ff6793369a0072bdb7f7c52a799809f",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "/* negative control: omit corpse */;",
               "old": "DeadAntHere(x, y, life & 0x80);",
@@ -1844,7 +1845,7 @@
             "object_sha256": "74b58975bff4985f4ebac30d002611abf15db61cd7bd23136e29a653e1680cf1",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "SpiderScan": {
                 "definition_sha256": "1b6b35205b75649246f40c0f2fefd6e9df77708931e1d2e2052ad883e226f42e",
@@ -1859,7 +1860,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 29.094,
+      "elapsed_seconds": 39.657,
       "pass": true
     },
     "LessonDone": {
@@ -1888,8 +1889,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "LessonDone": {
             "definition_sha256": "aa58052333c982c1596214605b5d375098295c6540b43673d963a3aab60bc558",
@@ -1897,11 +1898,11 @@
           }
         }
       },
-      "cases": 1729,
+      "cases": 1744,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_22BF_0A22": 189
+        "f_22BF_0A22": 190
       },
       "modeled_boundaries": {
         "TickCount": 30,
@@ -1911,12 +1912,12 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/LessonDone/cases.jsonl.gz",
-        "sha256": "c16ba01f90a8387d8beaa394228e514187f6aa981494cd8afa4439dc56a1c4a3",
-        "row_count": 1729,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/LessonDone/cases.jsonl.gz",
+        "sha256": "dc5b907d537783d10517aa49a5bc42ec7b2a0d71f7bf28d903a234322d0e90b9",
+        "row_count": 1744,
         "lane_counts": {
           "directed": 1728,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -1937,11 +1938,11 @@
           "function": "LessonDone",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "26e576dab40169c9828223ab40b2540f479e54c83224cca23e0b3bd58f49cb95",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "51eeef6f92bb1fb4684a280d12a49afe2ea4d2d7d91e76d655eb0ccfa1aba535",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "LessonDone": {
               "definition_sha256": "aa58052333c982c1596214605b5d375098295c6540b43673d963a3aab60bc558",
@@ -1988,8 +1989,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "LessonDone": {
               "definition_sha256": "aa58052333c982c1596214605b5d375098295c6540b43673d963a3aab60bc558",
@@ -2004,7 +2005,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/LessonDone/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/LessonDone/negative-cases.jsonl.gz",
           "sha256": "c75b52573f608fdb3804aa5073560e09e12f5fb4959d29a19bf7f866473dd038",
           "row_count": 144,
           "lane_counts": {
@@ -2030,7 +2031,7 @@
             "function": "LessonDone",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "467b5fa1f8414e7f151fce1b7676da27d6ede193a306b18df420804fd6448711",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "case 3:\n        if (fd_50F6_0224 >= fd_50F6_0204 && fd_50F6_0AA0 == 0)",
               "old": "case 3:\n        if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
@@ -2039,7 +2040,7 @@
             "object_sha256": "bbfc5478ab694225fbe233305cd3b5da4edd1ccdc9a85207301f281cfc9c1f8e",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "LessonDone": {
                 "definition_sha256": "aa58052333c982c1596214605b5d375098295c6540b43673d963a3aab60bc558",
@@ -2054,7 +2055,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 10.641,
+      "elapsed_seconds": 13.968,
       "pass": true
     },
     "FindIndex": {
@@ -2083,8 +2084,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "FindIndex": {
             "definition_sha256": "936da62b5975decee976771ba4d45606c613202428b1331fbc34d43c23a1546a",
@@ -2092,7 +2093,7 @@
           }
         }
       },
-      "cases": 319,
+      "cases": 334,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
@@ -2100,12 +2101,12 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/FindIndex/cases.jsonl.gz",
-        "sha256": "8d8993607d6eb9fd77cfb64d94ad289b66c9cd3e5abe74347820510c3ca1bb68",
-        "row_count": 319,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/FindIndex/cases.jsonl.gz",
+        "sha256": "a6cac610fff358296309c52d67565235b048013c874535ec82fe1ddf40ab4d8a",
+        "row_count": 334,
         "lane_counts": {
           "directed": 318,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -2126,11 +2127,11 @@
           "function": "FindIndex",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "b920ab6144d1a7da1656f6ea4e3a07909b511adbe6bea418f9796223b1a2435f",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "5fcdd8fd5970ac6bcee75ee3fe7fb9577932f403e6404237354133d479c461d8",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "FindIndex": {
               "definition_sha256": "936da62b5975decee976771ba4d45606c613202428b1331fbc34d43c23a1546a",
@@ -2177,8 +2178,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "FindIndex": {
               "definition_sha256": "936da62b5975decee976771ba4d45606c613202428b1331fbc34d43c23a1546a",
@@ -2193,7 +2194,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/FindIndex/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/FindIndex/negative-cases.jsonl.gz",
           "sha256": "ddb8bd19fa7bcb36d68737e7a9a88cbbc42b3609119292c8d33d7517a788078e",
           "row_count": 3,
           "lane_counts": {
@@ -2219,7 +2220,7 @@
             "function": "FindIndex",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "7dfdde21a20be47be019675df7172ccd43f782852da240015cc1789437c06842",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "return 0L;",
               "old": "return fd_50F6_3952;",
@@ -2228,7 +2229,7 @@
             "object_sha256": "d09fad8e5f877acc6a36ed425b2283ba3f8b4b63555427b116974fac6a74ac6b",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "FindIndex": {
                 "definition_sha256": "936da62b5975decee976771ba4d45606c613202428b1331fbc34d43c23a1546a",
@@ -2243,7 +2244,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 5.172,
+      "elapsed_seconds": 6.485,
       "pass": true
     },
     "f_1C62_0415": {
@@ -2273,8 +2274,8 @@
           "/Gs",
           "/Zd"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_1C62_0415": {
             "definition_sha256": "6cd5c6dab7579f167f2f04a0fcee8d33d2d186cfc7c939dd9c7e39ff131e6e91",
@@ -2282,33 +2283,33 @@
           }
         }
       },
-      "cases": 57,
+      "cases": 72,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_1FD2_02FF": 57
+        "f_1FD2_02FF": 72
       },
       "modeled_boundaries": {
-        "f_1F58_0038": 127,
-        "GSaveRect": 57,
-        "f_1FD2_02B1": 781,
-        "f_1FBD_0000": 194,
-        "f_1F58_0090": 57,
-        "f_1FD2_031A": 57,
-        "f_1CE2_056C": 57,
-        "f_1B73_032A": 24,
-        "f_1B73_032E": 24,
-        "f_1F58_005A": 13
+        "f_1F58_0038": 179,
+        "GSaveRect": 72,
+        "f_1FD2_02B1": 986,
+        "f_1FBD_0000": 244,
+        "f_1F58_0090": 72,
+        "f_1FD2_031A": 72,
+        "f_1CE2_056C": 72,
+        "f_1B73_032A": 31,
+        "f_1B73_032E": 31,
+        "f_1F58_005A": 35
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_1C62_0415/cases.jsonl.gz",
-        "sha256": "f27cc2b7e4f7f339ff5c2b4328171259141f1765b864bcc02afa09477bbf9f45",
-        "row_count": 57,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_1C62_0415/cases.jsonl.gz",
+        "sha256": "4b4db7bf60a95f4b213a243afa9ec9ce9bcfb9c27c0e78e8c927663687a09d19",
+        "row_count": 72,
         "lane_counts": {
           "directed": 56,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -2330,11 +2331,11 @@
           "function": "f_1C62_0415",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "955e89dc02fa123b654bae0edf77c811ae24a1c21dbb4f5cb6f3683ed64c5f1a",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "d05efc1bec20de1710053e28a5158d23a9276e99a659eda5377d6c2d8f1c9eed",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_1C62_0415": {
               "definition_sha256": "6cd5c6dab7579f167f2f04a0fcee8d33d2d186cfc7c939dd9c7e39ff131e6e91",
@@ -2384,8 +2385,8 @@
             "/Gs",
             "/Zd"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_1C62_0415": {
               "definition_sha256": "6cd5c6dab7579f167f2f04a0fcee8d33d2d186cfc7c939dd9c7e39ff131e6e91",
@@ -2400,7 +2401,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_1C62_0415/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_1C62_0415/negative-cases.jsonl.gz",
           "sha256": "6ea0de48dc5d37f03d0f9c2e45f48d2fce42601d970062f47d28595fba8dd3fe",
           "row_count": 1,
           "lane_counts": {
@@ -2427,7 +2428,7 @@
             "function": "f_1C62_0415",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "99a3a0a2315cb41538f79c16d03c5efa1a6730236c9dca7cf7025cea18e0cacd",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "labels[i][0] == c",
               "old": "labels[i][0] == c || labels[i][1] == c",
@@ -2436,7 +2437,7 @@
             "object_sha256": "3db29a69860c932ae2fded88960430f42ff168f3a006267c57e21fff08d755fd",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_1C62_0415": {
                 "definition_sha256": "6cd5c6dab7579f167f2f04a0fcee8d33d2d186cfc7c939dd9c7e39ff131e6e91",
@@ -2451,7 +2452,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 5.672,
+      "elapsed_seconds": 7.031,
       "pass": true
     },
     "f_1E57_038E": {
@@ -2481,8 +2482,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_1E57_038E": {
             "definition_sha256": "7288223cf1851ca5b1eef0ff0ed310b11fe042ffd3f3236c259913d99f31cd51",
@@ -2490,22 +2491,22 @@
           }
         }
       },
-      "cases": 10,
+      "cases": 25,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
       "modeled_boundaries": {
-        "win_GetObjRect": 104
+        "win_GetObjRect": 518
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_1E57_038E/cases.jsonl.gz",
-        "sha256": "3c2c97b62d4e5bfedd527ea24df6b440add357c726c605a2dd10c38a634c5223",
-        "row_count": 10,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_1E57_038E/cases.jsonl.gz",
+        "sha256": "240544841f14f0b40bae871166dbb354e50a0f60159ffc3d60f1722c7daaeeb7",
+        "row_count": 25,
         "lane_counts": {
           "directed": 9,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -2527,11 +2528,11 @@
           "function": "f_1E57_038E",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "157ce6942475d1a593520d2fab70a8210c23b9b73f3f712422724a70bc7dc662",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "476cef55acc341d339d27fd09d920a0cb13505b86c5c11b4808a440c16f9b22a",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_1E57_038E": {
               "definition_sha256": "7288223cf1851ca5b1eef0ff0ed310b11fe042ffd3f3236c259913d99f31cd51",
@@ -2581,8 +2582,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_1E57_038E": {
               "definition_sha256": "7288223cf1851ca5b1eef0ff0ed310b11fe042ffd3f3236c259913d99f31cd51",
@@ -2597,8 +2598,8 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_1E57_038E/negative-cases.jsonl.gz",
-          "sha256": "4eb5ef1d4d564eebc66c6085628b29f6af0cd3b42277088c2ab8867a3766962c",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_1E57_038E/negative-cases.jsonl.gz",
+          "sha256": "da86558f95e8bd2dc698d216bf3162466c877320098936e946383fb81e40f1b9",
           "row_count": 3,
           "lane_counts": {
             "directed": 3,
@@ -2624,7 +2625,7 @@
             "function": "f_1E57_038E",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "c41f23ee6cd48988e4a576b75e0919acb35a601c0fbbd971704f1a2fc7cb8fcc",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "win_GetObjRect(win, &r);\n    r.right++;\n    fd_50F6_3B60[win >> 8]",
               "old": "win_GetObjRect(win, &r);\n    fd_50F6_3B60[win >> 8]",
@@ -2633,7 +2634,7 @@
             "object_sha256": "a371e9e112e41d3dfde059efabeb14141cd53c0da7285d8896263d0641d00300",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_1E57_038E": {
                 "definition_sha256": "7288223cf1851ca5b1eef0ff0ed310b11fe042ffd3f3236c259913d99f31cd51",
@@ -2648,7 +2649,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 7.047,
+      "elapsed_seconds": 13.438,
       "pass": true
     },
     "f_20E8_0903": {
@@ -2678,8 +2679,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_20E8_0903": {
             "definition_sha256": "88772ef844ef03e90d4072a3e1c39618b8ffa036924592d22bd123a80c4dfee4",
@@ -2687,31 +2688,31 @@
           }
         }
       },
-      "cases": 334,
+      "cases": 357,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "win_LockWin": 116,
-        "f_2505_0006": 150,
-        "f_2505_02D7": 8,
-        "win_Recalc": 24,
-        "win_UnlockWin": 116
+        "win_LockWin": 334,
+        "f_2505_0006": 438,
+        "f_2505_02D7": 16,
+        "win_Recalc": 48,
+        "win_UnlockWin": 334
       },
       "modeled_boundaries": {
-        "win_LockWin": 326,
-        "win_ObjAddr": 326,
-        "win_Recalc": 978,
-        "win_UnlockWin": 326
+        "win_LockWin": 341,
+        "win_ObjAddr": 341,
+        "win_Recalc": 1023,
+        "win_UnlockWin": 341
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_20E8_0903/cases.jsonl.gz",
-        "sha256": "21ec47efdb60f951893f94d6ea80ab976a13781c8bcf1d1ddf02fdf6cce48423",
-        "row_count": 334,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_20E8_0903/cases.jsonl.gz",
+        "sha256": "864ffc5425f3acc627de4b27f574077e2c8cbc26e46fd701e514336aa1ec45a6",
+        "row_count": 357,
         "lane_counts": {
           "directed": 326,
-          "randomized": 8
+          "randomized": 31
         },
         "identity": {
           "address": {
@@ -2733,11 +2734,11 @@
           "function": "f_20E8_0903",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "d37c5910034e50e188656bd50bc8ca1f568448ec42afd507aa87c7e06b58b3c6",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "17a3c22cb871ab61f9b560cffb9dc797301430034a00eb028f8f4624c23485ed",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_20E8_0903": {
               "definition_sha256": "88772ef844ef03e90d4072a3e1c39618b8ffa036924592d22bd123a80c4dfee4",
@@ -2787,8 +2788,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_20E8_0903": {
               "definition_sha256": "88772ef844ef03e90d4072a3e1c39618b8ffa036924592d22bd123a80c4dfee4",
@@ -2803,7 +2804,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_20E8_0903/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_20E8_0903/negative-cases.jsonl.gz",
           "sha256": "f8aeed3759eb30e7baf00354defc4059e0e9ba8f816f4e3eaa802e4d3df0bfb6",
           "row_count": 1,
           "lane_counts": {
@@ -2830,7 +2831,7 @@
             "function": "f_20E8_0903",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "91122833120bea284221e46e64945f8a9a7fff998687dde1d0f448c9ad552ad9",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "else\n            origin[i] = rect[(i + 1) & 3] - o[i];",
               "old": "else\n            origin[i] = rect[i] - o[i];",
@@ -2839,7 +2840,7 @@
             "object_sha256": "0a5c4096dcfabd7a5a50c922b9db319bbbd9a101ae0c20aa8b5c8f7e3d308dfa",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_20E8_0903": {
                 "definition_sha256": "88772ef844ef03e90d4072a3e1c39618b8ffa036924592d22bd123a80c4dfee4",
@@ -2854,7 +2855,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 5.766,
+      "elapsed_seconds": 8.218,
       "pass": true
     },
     "win_UnlockWin": {
@@ -2884,8 +2885,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "win_UnlockWin": {
             "definition_sha256": "f0144aabcbe44748b4e97bb666d4d50097f101c1e357d1545fef12951035ef9e",
@@ -2893,25 +2894,25 @@
           }
         }
       },
-      "cases": 9,
+      "cases": 24,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_171C_1686": 9,
-        "f_171C_13E4": 5,
-        "f_171C_2086": 6,
-        "f_171C_20E2": 2
+        "f_171C_1686": 24,
+        "f_171C_13E4": 20,
+        "f_171C_2086": 21,
+        "f_171C_20E2": 6
       },
       "modeled_boundaries": {},
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/win_UnlockWin/cases.jsonl.gz",
-        "sha256": "3dcbc8401c66ae01924048d8622d33abcd5abb302858296b536e47c048e98273",
-        "row_count": 9,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/win_UnlockWin/cases.jsonl.gz",
+        "sha256": "e20406286fb1e56a0226e108100a0aec32474d1369e357e39eb7d3dc24223e27",
+        "row_count": 24,
         "lane_counts": {
           "directed": 8,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -2933,11 +2934,11 @@
           "function": "win_UnlockWin",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "34f75bf68f068086050b805b39a88d6f9ba5a276e3018a584c0b9f73cd3706bd",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cd339c9838e7ef48eebd38a9e94463c45976b6b444bdbef8be421520be4f974c",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "win_UnlockWin": {
               "definition_sha256": "f0144aabcbe44748b4e97bb666d4d50097f101c1e357d1545fef12951035ef9e",
@@ -2987,8 +2988,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "win_UnlockWin": {
               "definition_sha256": "f0144aabcbe44748b4e97bb666d4d50097f101c1e357d1545fef12951035ef9e",
@@ -3003,8 +3004,8 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/win_UnlockWin/negative-cases.jsonl.gz",
-          "sha256": "ae06a092c47f38e7ea15828600cdfb3c178d9f8d45b45967d2ded1199946a648",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/win_UnlockWin/negative-cases.jsonl.gz",
+          "sha256": "51f08b800bd5f27fba1c0360d25843b64a31a3c7d244464eefaf60e0c9a1e5c7",
           "row_count": 1,
           "lane_counts": {
             "directed": 1,
@@ -3030,7 +3031,7 @@
             "function": "win_UnlockWin",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "716646faf1a6069954a6bd141d508298d5b7ab87f2939d5128280bfed3e31827",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "if (--g_8DA6[n] == 1) {",
               "old": "if (--g_8DA6[n] == 0) {",
@@ -3039,7 +3040,7 @@
             "object_sha256": "04f09cbf742e6ab9f7774e789d941c605c76572c7deeb26ae8c270085387b29d",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "win_UnlockWin": {
                 "definition_sha256": "f0144aabcbe44748b4e97bb666d4d50097f101c1e357d1545fef12951035ef9e",
@@ -3054,7 +3055,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 3.5,
+      "elapsed_seconds": 3.969,
       "pass": true
     },
     "f_23E6_0000": {
@@ -3084,8 +3085,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_23E6_0000": {
             "definition_sha256": "bc65c4b44fbc62b0d50041b65401aab15bf2660f5b55a4a73519318af2363ab8",
@@ -3093,24 +3094,24 @@
           }
         }
       },
-      "cases": 601,
+      "cases": 616,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_171C_1B84": 601,
-        "f_171C_1BBA": 601,
-        "_fstrlen": 451
+        "f_171C_1B84": 616,
+        "f_171C_1BBA": 616,
+        "_fstrlen": 516
       },
       "modeled_boundaries": {},
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_23E6_0000/cases.jsonl.gz",
-        "sha256": "355b4da77f3a1daffff68619b7730dff2c674cb38f4d66a79ff0362591cdbeac",
-        "row_count": 601,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_23E6_0000/cases.jsonl.gz",
+        "sha256": "1cf0552bf5148f45ee883b1118df7fc9abc5a7e12fb814277242b35c7de4e808",
+        "row_count": 616,
         "lane_counts": {
           "directed": 600,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -3132,11 +3133,11 @@
           "function": "f_23E6_0000",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "21d8850fdf5ffae9016636669b91456f79304b0a48ff6aff215b1c74da345527",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "bf4c9346c93cc6413aaa67d4d44bde4a3388b40cb67cada0ceac89b61dc25f44",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_23E6_0000": {
               "definition_sha256": "bc65c4b44fbc62b0d50041b65401aab15bf2660f5b55a4a73519318af2363ab8",
@@ -3185,8 +3186,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_23E6_0000": {
               "definition_sha256": "bc65c4b44fbc62b0d50041b65401aab15bf2660f5b55a4a73519318af2363ab8",
@@ -3201,8 +3202,8 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_23E6_0000/negative-cases.jsonl.gz",
-          "sha256": "bc7a48e690f1a7c027a5c83dbf21e7fe54d39fb6ed6f696e3a4e188fb193f1ea",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_23E6_0000/negative-cases.jsonl.gz",
+          "sha256": "8a6369e1a8a0081a7f34ec0f44c3f81894b717d3c4eaf9827bfc1ff38f26fb42",
           "row_count": 143,
           "lane_counts": {
             "directed": 143,
@@ -3228,7 +3229,7 @@
             "function": "f_23E6_0000",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "a96f1cab3894940f542ced2aa74acf81c81696d7f83717f9d59ed8d47be6db6b",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "s++;\n        n += 2;",
               "old": "s++;\n        n++;",
@@ -3237,7 +3238,7 @@
             "object_sha256": "cc98465ac9d4c8f7782b7476dd9e77b714b376244f6dcd3b6e79672f46e8c6db",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_23E6_0000": {
                 "definition_sha256": "bc65c4b44fbc62b0d50041b65401aab15bf2660f5b55a4a73519318af2363ab8",
@@ -3252,7 +3253,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 6.109,
+      "elapsed_seconds": 7.016,
       "pass": true
     },
     "f_2505_0453": {
@@ -3282,8 +3283,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_2505_0453": {
             "definition_sha256": "874d51be00c92adc78543c34b4b6d23fbf30b480cfd2d7bd9205eef0feb6ca74",
@@ -3291,28 +3292,28 @@
           }
         }
       },
-      "cases": 129,
+      "cases": 152,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "win_LockWin": 8,
-        "f_2505_0006": 16,
-        "win_UnlockWin": 8
+        "win_LockWin": 16,
+        "f_2505_0006": 32,
+        "win_UnlockWin": 16
       },
       "modeled_boundaries": {
-        "win_LockWin": 121,
-        "f_2505_0006": 121,
-        "win_UnlockWin": 121
+        "win_LockWin": 136,
+        "f_2505_0006": 136,
+        "win_UnlockWin": 136
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_2505_0453/cases.jsonl.gz",
-        "sha256": "d0d06200f07226e34a4bf7fced34f3d36b8168da656f1243c2c769d91919e22a",
-        "row_count": 129,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_2505_0453/cases.jsonl.gz",
+        "sha256": "1ec9636e491fc85d6840b88bb09bf1e3a4982f389252caba208e8c9684af0e8e",
+        "row_count": 152,
         "lane_counts": {
           "directed": 121,
-          "randomized": 8
+          "randomized": 31
         },
         "identity": {
           "address": {
@@ -3334,11 +3335,11 @@
           "function": "f_2505_0453",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "a337f759c09df3e8c63af9ce9eef0d816382caaf128901d16b78dd1be8f2773d",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "3cea33717f2147f8ac4757247b17b6831b5e2425728af0db443ccabb6b7bdd57",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_2505_0453": {
               "definition_sha256": "874d51be00c92adc78543c34b4b6d23fbf30b480cfd2d7bd9205eef0feb6ca74",
@@ -3386,8 +3387,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_2505_0453": {
               "definition_sha256": "874d51be00c92adc78543c34b4b6d23fbf30b480cfd2d7bd9205eef0feb6ca74",
@@ -3402,7 +3403,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_2505_0453/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_2505_0453/negative-cases.jsonl.gz",
           "sha256": "37d0d20d00466f6a0c057bb8d1de8dee2a0d9687fb486b97ccd653a7368a64e4",
           "row_count": 25,
           "lane_counts": {
@@ -3429,7 +3430,7 @@
             "function": "f_2505_0453",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "53d853ffd9efd40a9695de152b37b219908100eb5f846d5fed8cc1ea61d9b188",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "return r[kind] ^ 1;",
               "old": "return r[kind];",
@@ -3438,7 +3439,7 @@
             "object_sha256": "6720e8bc45f6eee146bfa8e85bb66975e8ee443c9ffe6a251511457f4e08a28d",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_2505_0453": {
                 "definition_sha256": "874d51be00c92adc78543c34b4b6d23fbf30b480cfd2d7bd9205eef0feb6ca74",
@@ -3453,7 +3454,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 4.953,
+      "elapsed_seconds": 5.547,
       "pass": true
     },
     "win_DrawBitMap": {
@@ -3483,8 +3484,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "win_DrawBitMap": {
             "definition_sha256": "1230852c4800d47b403f7d091cdb0421618089578f37a2652741cd8a22fc8eb8",
@@ -3492,35 +3493,35 @@
           }
         }
       },
-      "cases": 16,
+      "cases": 31,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "o03_3258_040D": 3,
-        "o01_32B5_000F": 2,
-        "o00_35A6_0007": 2
+        "o03_3258_040D": 4,
+        "o01_32B5_000F": 4,
+        "o00_35A6_0007": 3
       },
       "modeled_boundaries": {
-        "db_LoadObject": 16,
+        "db_LoadObject": 31,
         "GPutPacked": 2,
-        "db_ReleaseObject": 14,
-        "f_1B4E_003B": 10,
-        "f_1B4E_005E": 2,
-        "f_0250_0721": 7,
-        "malloc": 7,
-        "f_0250_0D10": 7,
-        "free": 7,
-        "WinPrintf": 12
+        "db_ReleaseObject": 29,
+        "f_1B4E_003B": 21,
+        "f_1B4E_005E": 6,
+        "f_0250_0721": 11,
+        "malloc": 11,
+        "f_0250_0D10": 11,
+        "free": 11,
+        "WinPrintf": 21
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/win_DrawBitMap/cases.jsonl.gz",
-        "sha256": "730a369b94864ff108b7faf7a409c3eee6e04393f23965f2205a616a12391dc4",
-        "row_count": 16,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/win_DrawBitMap/cases.jsonl.gz",
+        "sha256": "ddf4c0a58e2ee7c44170988a3211c2b55a1644089ef293d82a78120145c83344",
+        "row_count": 31,
         "lane_counts": {
           "directed": 15,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -3542,11 +3543,11 @@
           "function": "win_DrawBitMap",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "104171d30407ed59bbdb1e85f5bd8733c2f77c861b1e096b0102f1cef97349a3",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "4b72c009077fa453fca2f008e370b3bdd95ab91073c1a0553e4ee5c828e2809c",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "win_DrawBitMap": {
               "definition_sha256": "1230852c4800d47b403f7d091cdb0421618089578f37a2652741cd8a22fc8eb8",
@@ -3594,8 +3595,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "win_DrawBitMap": {
               "definition_sha256": "1230852c4800d47b403f7d091cdb0421618089578f37a2652741cd8a22fc8eb8",
@@ -3610,8 +3611,8 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/win_DrawBitMap/negative-cases.jsonl.gz",
-          "sha256": "6c8a89ff77886e4a405451cdc91260ccb1e67477b757fb9e11f8b8942cb2e476",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/win_DrawBitMap/negative-cases.jsonl.gz",
+          "sha256": "b0f0524e1161fdb385fcf45ff7aefbe7f8691ca2182ded30f32222f6cd1d036e",
           "row_count": 4,
           "lane_counts": {
             "directed": 4,
@@ -3637,7 +3638,7 @@
             "function": "win_DrawBitMap",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "3ead19224ac83d6d50f840067db6595302249653831bbdc0b2c3c82412161de7",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "f_1B4E_003B(x, y, (char far *)pic + 9);",
               "old": "f_1B4E_003B(x, y, (char far *)pic + 8);",
@@ -3646,7 +3647,7 @@
             "object_sha256": "2fa6152ff155bd5e2838bea6bc7eb3b2e50d8609a91db09110a2530087c3ffe7",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "win_DrawBitMap": {
                 "definition_sha256": "1230852c4800d47b403f7d091cdb0421618089578f37a2652741cd8a22fc8eb8",
@@ -3661,7 +3662,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 11.188,
+      "elapsed_seconds": 12.031,
       "pass": true
     },
     "f_2815_0165": {
@@ -3691,8 +3692,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_2815_0165": {
             "definition_sha256": "59f25aa7a75f57cb012080460d815f7ae3d42a817c36de4045157ab061be8915",
@@ -3700,22 +3701,22 @@
           }
         }
       },
-      "cases": 4852,
+      "cases": 4867,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_283E_000A": 13486
+        "f_283E_000A": 13527
       },
       "modeled_boundaries": {},
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_2815_0165/cases.jsonl.gz",
-        "sha256": "a3569ab7abcc99c46c40c21db83df0c18c4c85a168d62a9017a359ee0fac13da",
-        "row_count": 4852,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_2815_0165/cases.jsonl.gz",
+        "sha256": "dd074816f2291aa2297254d70b57371c847ab37d1d727aa7963f999b4be05413",
+        "row_count": 4867,
         "lane_counts": {
           "directed": 4851,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -3737,11 +3738,11 @@
           "function": "f_2815_0165",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "d841d69830373870896d837ee0035f2edabc79deb090afdd0bcf2a538a6e9714",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "8eee22a8d5f97c0d68cf07aac90e62bfb8939ebf8b5297bbce411e3fc6f7e179",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_2815_0165": {
               "definition_sha256": "59f25aa7a75f57cb012080460d815f7ae3d42a817c36de4045157ab061be8915",
@@ -3790,8 +3791,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_2815_0165": {
               "definition_sha256": "59f25aa7a75f57cb012080460d815f7ae3d42a817c36de4045157ab061be8915",
@@ -3806,7 +3807,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_2815_0165/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_2815_0165/negative-cases.jsonl.gz",
           "sha256": "acb937c7137c25d7223564818583300e7947c7cf5c8771fc1d2f2436ee605836",
           "row_count": 3,
           "lane_counts": {
@@ -3833,7 +3834,7 @@
             "function": "f_2815_0165",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "01695814ce0b239e168370ddd85bc1eb69d155dd89b823d2ce3b067288bc759a",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "f_283E_000A(voice + 0xa1, g_6924[note % 12]);",
               "old": "f_283E_000A(voice + 0xa0, g_6924[note % 12]);",
@@ -3842,7 +3843,7 @@
             "object_sha256": "17f57db1c3b13259f7bd91d3ce85b99b04ae7ac8730357d03e39997aa082cd9d",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_2815_0165": {
                 "definition_sha256": "59f25aa7a75f57cb012080460d815f7ae3d42a817c36de4045157ab061be8915",
@@ -3857,7 +3858,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 9.218,
+      "elapsed_seconds": 12.64,
       "pass": true
     },
     "f_284A_0138": {
@@ -3887,8 +3888,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_284A_0138": {
             "definition_sha256": "699917966ff3dfbb84f7bc5feb3a49634056544cf07391e228d3c5b178e6b906",
@@ -3896,7 +3897,7 @@
           }
         }
       },
-      "cases": 539,
+      "cases": 554,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
@@ -3904,12 +3905,12 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_284A_0138/cases.jsonl.gz",
-        "sha256": "ffb45c7a61d0bc0a1dcd6f4deb6bbbcf281a956974cd3011c58813e13bd2b85d",
-        "row_count": 539,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_284A_0138/cases.jsonl.gz",
+        "sha256": "0f54d4ad5e0a1f220380dfb8aa4a59963b3f961e8e8bf5f9cb4148dab165d07b",
+        "row_count": 554,
         "lane_counts": {
           "directed": 538,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -3931,11 +3932,11 @@
           "function": "f_284A_0138",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "6dca175e5e9734ca06b4af296d6d84775ec2d7e1a9802f1e23eab80d175445ad",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "226539c9bcff37c333ac6ab9cd5c469fee4fa837df8575f2097effc22649cdf3",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_284A_0138": {
               "definition_sha256": "699917966ff3dfbb84f7bc5feb3a49634056544cf07391e228d3c5b178e6b906",
@@ -3983,8 +3984,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_284A_0138": {
               "definition_sha256": "699917966ff3dfbb84f7bc5feb3a49634056544cf07391e228d3c5b178e6b906",
@@ -3999,7 +4000,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_284A_0138/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_284A_0138/negative-cases.jsonl.gz",
           "sha256": "db702781a0f314a4deb343ab75853537b7bc6448686955ecb4afa8a254720e9c",
           "row_count": 1,
           "lane_counts": {
@@ -4026,7 +4027,7 @@
             "function": "f_284A_0138",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "dc4e5115d2bcac78fe613ee180d35ad39c391383719b84f3319cc0b0bd50de61",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "return SONG(off + 1) << 8 | SONG(off);",
               "old": "return SONG(off) << 8 | SONG(off + 1);",
@@ -4035,7 +4036,7 @@
             "object_sha256": "9782eedf7cc1ac189adc3a2993f9f11c2c65c4623624e66e7821d9762165cb45",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_284A_0138": {
                 "definition_sha256": "699917966ff3dfbb84f7bc5feb3a49634056544cf07391e228d3c5b178e6b906",
@@ -4050,7 +4051,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 4.11,
+      "elapsed_seconds": 4.422,
       "pass": true
     },
     "f_29D6_000A": {
@@ -4080,8 +4081,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "f_29D6_000A": {
             "definition_sha256": "71f92d7e66d305e1ef35ffc1372bd8ef36b3b43fb2aff0c57d3ebd73eee5873b",
@@ -4099,7 +4100,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/f_29D6_000A/cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_29D6_000A/cases.jsonl.gz",
         "sha256": "69f964c9a24f42ffd2c5134ffab22527c313953a515a8292601fcc8fc6512e5d",
         "row_count": 240,
         "lane_counts": {
@@ -4126,11 +4127,11 @@
           "function": "f_29D6_000A",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "fd36413a27c7dfbb00f7da194fd05b1af1bb0841391e37bb68c7192f45a21764",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "3193cec8a054eb838eee07fa5d6e602b0f5ca01e7a0f30079b213218871182fa",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_29D6_000A": {
               "definition_sha256": "71f92d7e66d305e1ef35ffc1372bd8ef36b3b43fb2aff0c57d3ebd73eee5873b",
@@ -4179,8 +4180,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "f_29D6_000A": {
               "definition_sha256": "71f92d7e66d305e1ef35ffc1372bd8ef36b3b43fb2aff0c57d3ebd73eee5873b",
@@ -4195,7 +4196,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/f_29D6_000A/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/f_29D6_000A/negative-cases.jsonl.gz",
           "sha256": "3329458e83eb2fc7928e83b9b0fdbd42ea2bb497dc6a570c4b08cfcfd1887bef",
           "row_count": 1,
           "lane_counts": {
@@ -4222,7 +4223,7 @@
             "function": "f_29D6_000A",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "1df4d4ab742d7800ff7054e836a117fe665fe4413f0db374e4303189cf2e4c57",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "f_29F0_002A(0x205, (f >> 4) ^ 1);",
               "old": "f_29F0_002A(0x205, f >> 4);",
@@ -4231,7 +4232,7 @@
             "object_sha256": "b312c243dbf393a1c186afab33c338eb7b245638f591d7cdb705bd0fb912bea9",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "f_29D6_000A": {
                 "definition_sha256": "71f92d7e66d305e1ef35ffc1372bd8ef36b3b43fb2aff0c57d3ebd73eee5873b",
@@ -4246,7 +4247,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 2.953,
+      "elapsed_seconds": 3.187,
       "pass": true
     },
     "o10_35F5_0384": {
@@ -4276,8 +4277,8 @@
           "/Gs",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "o10_35F5_0384": {
             "definition_sha256": "e38777a2845ecb17c3bd0df8419ebe8029649b1993f8d3f3ace70dd59dc0c4ce",
@@ -4285,28 +4286,28 @@
           }
         }
       },
-      "cases": 54,
+      "cases": 69,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "f_1FD2_02FF": 53
+        "f_1FD2_02FF": 68
       },
       "modeled_boundaries": {
-        "malloc": 53,
-        "f_1F80_0081": 53,
-        "f_1B73_0A40": 53,
-        "f_1FD2_04D0": 54,
-        "GSaveRect": 53,
-        "f_1FD2_02B1": 365,
-        "f_1FBD_0000": 182,
-        "f_1FD2_0542": 187,
-        "f_1B73_032A": 80,
-        "f_1F58_0038": 78,
-        "f_1F58_0090": 78,
-        "f_1FD2_031A": 53,
-        "f_1B73_0A6C": 53,
-        "f_1CE2_056C": 53,
-        "free": 53,
+        "malloc": 68,
+        "f_1F80_0081": 68,
+        "f_1B73_0A40": 68,
+        "f_1FD2_04D0": 69,
+        "GSaveRect": 68,
+        "f_1FD2_02B1": 468,
+        "f_1FBD_0000": 240,
+        "f_1FD2_0542": 232,
+        "f_1B73_032A": 95,
+        "f_1F58_0038": 93,
+        "f_1F58_0090": 93,
+        "f_1FD2_031A": 68,
+        "f_1B73_0A6C": 68,
+        "f_1CE2_056C": 68,
+        "free": 68,
         "f_1B73_09E9": 24,
         "f_1F58_007F": 6,
         "f_1B73_030F": 17,
@@ -4315,12 +4316,12 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/o10_35F5_0384/cases.jsonl.gz",
-        "sha256": "d06ee6714187db7158edec00cfb8a5ffa92043ab78f7ff8eebe652d4cd68320f",
-        "row_count": 54,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o10_35F5_0384/cases.jsonl.gz",
+        "sha256": "559eccfd487d34a6c23d38e42d270c33fdfa4634f0abf53fe1e2d3eae6ab32ab",
+        "row_count": 69,
         "lane_counts": {
           "directed": 53,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -4342,11 +4343,11 @@
           "function": "o10_35F5_0384",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "c6cace84ca007eb589d3c3fec777a6923a0ed72daa597d0d35acc75237689d7c",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "e85d10942c0944290ffb285c01465edc8c5feb8c9ac68637dad883dbb41f44f3",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o10_35F5_0384": {
               "definition_sha256": "e38777a2845ecb17c3bd0df8419ebe8029649b1993f8d3f3ace70dd59dc0c4ce",
@@ -4397,8 +4398,8 @@
             "/Gs",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o10_35F5_0384": {
               "definition_sha256": "e38777a2845ecb17c3bd0df8419ebe8029649b1993f8d3f3ace70dd59dc0c4ce",
@@ -4413,8 +4414,8 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/o10_35F5_0384/negative-cases.jsonl.gz",
-          "sha256": "d67fe6a55105181eb50a07744987cce26affe02a65d55601211b1ec994f56528",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o10_35F5_0384/negative-cases.jsonl.gz",
+          "sha256": "67f682e8ae4b96eb1a412024725edc9dc416ef636e4cd72a0c51f8a07c37125d",
           "row_count": 7,
           "lane_counts": {
             "directed": 7,
@@ -4440,7 +4441,7 @@
             "function": "o10_35F5_0384",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "fe74096c8c6af3ae1f030dc8c7f74172510437892c67b09daebb8df96a376986",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "k = (k + 2) % nItems;",
               "old": "k = (k + 1) % nItems;",
@@ -4449,7 +4450,7 @@
             "object_sha256": "0282fc2a36cff5d593b54f8fe5a607335997d6f2fd09a97ab1313edd6462ba40",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "o10_35F5_0384": {
                 "definition_sha256": "e38777a2845ecb17c3bd0df8419ebe8029649b1993f8d3f3ace70dd59dc0c4ce",
@@ -4464,7 +4465,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 28.469,
+      "elapsed_seconds": 44.375,
       "pass": true
     },
     "DrawMapCursor": {
@@ -4493,8 +4494,8 @@
           "/Oe",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "DrawMapCursor": {
             "definition_sha256": "d504c8f483373a6ac9b0f6dac36a2ed9cfa80b3a9e0d72efe656258a1156790a",
@@ -4502,26 +4503,26 @@
           }
         }
       },
-      "cases": 9,
+      "cases": 24,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
       "modeled_boundaries": {
-        "f_22BF_09B0": 9,
-        "clip_Push": 4,
-        "clip_SetWin": 4,
-        "f_1CE2_0410": 4,
-        "clip_Pop": 4
+        "f_22BF_09B0": 24,
+        "clip_Push": 11,
+        "clip_SetWin": 11,
+        "f_1CE2_0410": 11,
+        "clip_Pop": 11
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/DrawMapCursor/cases.jsonl.gz",
-        "sha256": "7a6aa70911496d57d3d1799906f8e0a50cc3bcbb4edc4918fa23c659f16ca659",
-        "row_count": 9,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/DrawMapCursor/cases.jsonl.gz",
+        "sha256": "f6afb44d524d1b7bf2b1f3b6c5f7f96a98dbeffe5697f66af946e55c07571958",
+        "row_count": 24,
         "lane_counts": {
           "directed": 8,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -4542,11 +4543,11 @@
           "function": "DrawMapCursor",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "cb9dd901198d515c1f37f1e60aaa2956b5ccad475592ea2c313c5bd0e398f100",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "b47d695ffa5afb5c8ec59282ca297af48cc4bff3a53bf417cafacbab3329e9b8",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DrawMapCursor": {
               "definition_sha256": "d504c8f483373a6ac9b0f6dac36a2ed9cfa80b3a9e0d72efe656258a1156790a",
@@ -4595,8 +4596,8 @@
             "/Oe",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DrawMapCursor": {
               "definition_sha256": "d504c8f483373a6ac9b0f6dac36a2ed9cfa80b3a9e0d72efe656258a1156790a",
@@ -4611,7 +4612,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/DrawMapCursor/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/DrawMapCursor/negative-cases.jsonl.gz",
           "sha256": "7e11d2d087c5161f0a523953da6a6c912773f1ad43093e5546ae165478d8659a",
           "row_count": 6,
           "lane_counts": {
@@ -4637,7 +4638,7 @@
             "function": "DrawMapCursor",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "cfe1411831ff0e77853741be4965b2e87a30e8869d353c560024bccb729e8cb8",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "fd_50F6_3856 * fd_50F6_0508[1]",
               "old": "fd_50F6_3856 * fd_50F6_0508[0]",
@@ -4646,7 +4647,7 @@
             "object_sha256": "fd18815cf36c2eaef7e472240d74c9fe098f99f2d8ee93469acdfd4f25c6c332",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "DrawMapCursor": {
                 "definition_sha256": "d504c8f483373a6ac9b0f6dac36a2ed9cfa80b3a9e0d72efe656258a1156790a",
@@ -4661,7 +4662,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 6.984,
+      "elapsed_seconds": 7.141,
       "pass": true
     },
     "InvertPatch": {
@@ -4690,8 +4691,8 @@
           "/Oe",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "InvertPatch": {
             "definition_sha256": "49a8998c71eef83548d151cf91cc30887b6a33070018e566d6445207677e4998",
@@ -4699,25 +4700,25 @@
           }
         }
       },
-      "cases": 85,
+      "cases": 100,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
       "modeled_boundaries": {
-        "clip_Push": 85,
-        "clip_SetWin": 85,
-        "f_1FAA_0006": 85,
-        "clip_Pop": 85
+        "clip_Push": 100,
+        "clip_SetWin": 100,
+        "f_1FAA_0006": 100,
+        "clip_Pop": 100
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/InvertPatch/cases.jsonl.gz",
-        "sha256": "2b694dc3a3befaf91420144cfcf72920b9d0c711ef1a7cced6f28b602f07f47e",
-        "row_count": 85,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/InvertPatch/cases.jsonl.gz",
+        "sha256": "f80bb017417755174ac301fee6de6584b62c55b4f2e5b2ee583a3dc30767e09b",
+        "row_count": 100,
         "lane_counts": {
           "directed": 84,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -4738,11 +4739,11 @@
           "function": "InvertPatch",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "0079b5b4ff340e1ac0c46a9114f11730e794586585f9d23a78d5ee1dc8361df0",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "ba18bd484494f5be2de98716ccd0c5b56713652efc3b97d547f7987be0591343",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "InvertPatch": {
               "definition_sha256": "49a8998c71eef83548d151cf91cc30887b6a33070018e566d6445207677e4998",
@@ -4789,8 +4790,8 @@
             "/Oe",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "InvertPatch": {
               "definition_sha256": "49a8998c71eef83548d151cf91cc30887b6a33070018e566d6445207677e4998",
@@ -4805,7 +4806,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/InvertPatch/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/InvertPatch/negative-cases.jsonl.gz",
           "sha256": "1c6e7280550e4ba252e5022a0ac9e5dd028c247095e04c39778779645f322fc5",
           "row_count": 1,
           "lane_counts": {
@@ -4831,7 +4832,7 @@
             "function": "InvertPatch",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "d95473239c6a97968f427a2bae9441ed88839bf021ec0123c22818872c68bcb1",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "h = (h >> 1) + fd_50F6_10D2.left + 5;",
               "old": "h = (h >> 1) + fd_50F6_10D2.left + 4;",
@@ -4840,7 +4841,7 @@
             "object_sha256": "ad1334dc59c7cc5633546ca148d989ac3f3dcefd5ec7d92428b9fa1324370278",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "InvertPatch": {
                 "definition_sha256": "49a8998c71eef83548d151cf91cc30887b6a33070018e566d6445207677e4998",
@@ -4855,7 +4856,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 7.437,
+      "elapsed_seconds": 7.781,
       "pass": true
     },
     "o15_384C_0239": {
@@ -4884,8 +4885,8 @@
           "/Oe",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "o15_384C_0239": {
             "definition_sha256": "060430a4662d3480ce6a0f59ee2e29981e8ec216e79afdad70f5a10d8ee9e7ba",
@@ -4908,46 +4909,46 @@
           ]
         }
       },
-      "cases": 243,
+      "cases": 258,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "win_Open": 243,
-        "f_171C_1B84": 1351,
-        "f_171C_1BBA": 486,
-        "f_24AB_02AD": 486,
-        "win_GetObjRect": 379,
-        "db_ReleaseHandle": 243,
-        "win_Close": 243,
-        "clip_KillWin": 243,
-        "f_1B4E_000C": 136
+        "win_Open": 258,
+        "f_171C_1B84": 1433,
+        "f_171C_1BBA": 516,
+        "f_24AB_02AD": 516,
+        "win_GetObjRect": 401,
+        "db_ReleaseHandle": 258,
+        "win_Close": 258,
+        "clip_KillWin": 258,
+        "f_1B4E_000C": 143
       },
       "modeled_boundaries": {
-        "f_2505_08EA": 486,
-        "f_1E57_038E": 486,
-        "f_2505_0831": 486,
-        "clip_SetWin": 243,
-        "win_DrawWindow": 243,
-        "clip_Off": 486,
-        "win_FlushEvents": 243,
-        "f_1A53_00F0": 243,
-        "win_SetColorFromObjNum": 243,
-        "win_PrintTextInRect": 243,
-        "f_1F58_0038": 251,
-        "f_1F58_0090": 189,
-        "f_21FA_0B4B": 243,
-        "win_GetEvent": 70,
-        "f_1CE2_044D": 136
+        "f_2505_08EA": 516,
+        "f_1E57_038E": 516,
+        "f_2505_0831": 516,
+        "clip_SetWin": 258,
+        "win_DrawWindow": 258,
+        "clip_Off": 516,
+        "win_FlushEvents": 258,
+        "f_1A53_00F0": 258,
+        "win_SetColorFromObjNum": 258,
+        "win_PrintTextInRect": 258,
+        "f_1F58_0038": 366,
+        "f_1F58_0090": 299,
+        "f_21FA_0B4B": 258,
+        "win_GetEvent": 175,
+        "f_1CE2_044D": 143
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/o15_384C_0239/cases.jsonl.gz",
-        "sha256": "8e1b8ebd06d7d73c0864f1e11fc779960ab9fb2d3b19e750668f7006b65d44dc",
-        "row_count": 243,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o15_384C_0239/cases.jsonl.gz",
+        "sha256": "65b2cd94de29b898fa299a758a154ca05c9c1845923496f4cf7edb065f9baa4b",
+        "row_count": 258,
         "lane_counts": {
           "directed": 242,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -4968,11 +4969,11 @@
           "function": "o15_384C_0239",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "256a556ed87d8babbc1be2cea3e6df7ae53d3089568de9e1cb300cc5729c4b72",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "a0cff9fdb48919d0bcaa732b483266745b2374d13fa34df9014f71f06bb1c86f",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o15_384C_0239": {
               "definition_sha256": "060430a4662d3480ce6a0f59ee2e29981e8ec216e79afdad70f5a10d8ee9e7ba",
@@ -5019,8 +5020,8 @@
             "/Oe",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o15_384C_0239": {
               "definition_sha256": "060430a4662d3480ce6a0f59ee2e29981e8ec216e79afdad70f5a10d8ee9e7ba",
@@ -5041,8 +5042,8 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/o15_384C_0239/negative-cases.jsonl.gz",
-          "sha256": "13a18e29c037d49e56b4cf2425fab75b5de7d5726d9d3c889dc15915c03fcfdd",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o15_384C_0239/negative-cases.jsonl.gz",
+          "sha256": "2a0ddbe284c739776d50cc175587d58b91b841ef32f75b2e15e4ab748d1efebd",
           "row_count": 5,
           "lane_counts": {
             "directed": 5,
@@ -5067,7 +5068,7 @@
             "function": "o15_384C_0239",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "28fb0888924618f6614f8adc41f029180acfc07b055f5df444bd522fb35f68ca",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "case 's':\n                result = 2;",
               "old": "case 's':\n                result = 1;",
@@ -5076,7 +5077,7 @@
             "object_sha256": "1155e1cbe2f8257e424991cfd57d816afddea9ed68d0e8d03104893a57ee759a",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "o15_384C_0239": {
                 "definition_sha256": "060430a4662d3480ce6a0f59ee2e29981e8ec216e79afdad70f5a10d8ee9e7ba",
@@ -5091,7 +5092,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 20.594,
+      "elapsed_seconds": 30.422,
       "pass": true
     },
     "win_PrintStyleTextInRect": {
@@ -5120,8 +5121,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "win_PrintStyleTextInRect": {
             "definition_sha256": "fa9b1b94e0590bee7fd08c8716cad5ddb78c680c21aae218d25bf18581a89fa5",
@@ -5129,22 +5130,22 @@
           }
         }
       },
-      "cases": 361,
+      "cases": 376,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
       "modeled_boundaries": {
-        "f_24AB_038D": 411
+        "f_24AB_038D": 420
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/win_PrintStyleTextInRect/cases.jsonl.gz",
-        "sha256": "113e0600cf1b9be21261d492da07a2e590dd31a6edb0b01b7c7122190c8c77fc",
-        "row_count": 361,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/win_PrintStyleTextInRect/cases.jsonl.gz",
+        "sha256": "e8896e42604111f02e33e954a5f868ca664410b386bd76794350d4113837bfe5",
+        "row_count": 376,
         "lane_counts": {
           "directed": 360,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -5165,11 +5166,11 @@
           "function": "win_PrintStyleTextInRect",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "cedaf31a6986b7ed20e6255a16d323d053fc81551b295f198dd3aabfa8decd90",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "a3d8555df45e30bc062be150788ede6aba6f53545c2fceef3c94b146ab2405f5",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "win_PrintStyleTextInRect": {
               "definition_sha256": "fa9b1b94e0590bee7fd08c8716cad5ddb78c680c21aae218d25bf18581a89fa5",
@@ -5217,8 +5218,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "win_PrintStyleTextInRect": {
               "definition_sha256": "fa9b1b94e0590bee7fd08c8716cad5ddb78c680c21aae218d25bf18581a89fa5",
@@ -5233,7 +5234,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/win_PrintStyleTextInRect/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/win_PrintStyleTextInRect/negative-cases.jsonl.gz",
           "sha256": "03f6669070678510891e4d922dd9aea308b82992cd75495d7054a187287d0673",
           "row_count": 61,
           "lane_counts": {
@@ -5259,7 +5260,7 @@
             "function": "win_PrintStyleTextInRect",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "48cf0bf10f1c5afc9a48cfa355a8a091a214f73836061fde3249bc3a69f77c6c",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "x = rect->left + 2;",
               "old": "x = rect->left + 1;",
@@ -5268,7 +5269,7 @@
             "object_sha256": "061fd1e990ba3467e2a42692cb069decad9cb8cc5011be62fc771dd968480bfc",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "win_PrintStyleTextInRect": {
                 "definition_sha256": "fa9b1b94e0590bee7fd08c8716cad5ddb78c680c21aae218d25bf18581a89fa5",
@@ -5283,7 +5284,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 9.468,
+      "elapsed_seconds": 11.094,
       "pass": true
     },
     "DisplayCard": {
@@ -5312,8 +5313,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "DisplayCard": {
             "definition_sha256": "42890d67c5c96925cfbf4b299bd7555f460be4c5d55a800f492106de9f06d502",
@@ -5321,33 +5322,33 @@
           }
         }
       },
-      "cases": 6,
+      "cases": 21,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
       "modeled_boundaries": {
-        "WinPrintf": 14,
-        "f_1A53_00F0": 15,
-        "win_GetObjRect": 5,
-        "clip_SetWin": 5,
-        "clip_SubInclude": 5,
-        "f_171C_1C1C": 8,
-        "f_171C_1B84": 8,
-        "win_SetColorFromObjNum": 7,
-        "f_171C_1BBA": 8,
-        "db_PurgeObject": 8,
-        "win_DrawBitMap": 2,
-        "f_24AB_038D": 5
+        "WinPrintf": 77,
+        "f_1A53_00F0": 81,
+        "win_GetObjRect": 20,
+        "clip_SetWin": 20,
+        "clip_SubInclude": 20,
+        "f_171C_1C1C": 41,
+        "f_171C_1B84": 41,
+        "win_SetColorFromObjNum": 32,
+        "f_171C_1BBA": 41,
+        "db_PurgeObject": 41,
+        "win_DrawBitMap": 12,
+        "f_24AB_038D": 48
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/DisplayCard/cases.jsonl.gz",
-        "sha256": "feb7e2bfc5a397ff445461a1f5ce40609c3c47764c3d344dc578dd586e794415",
-        "row_count": 6,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/DisplayCard/cases.jsonl.gz",
+        "sha256": "a7745ec9c53007e95dad73ba65a8e99ef7633e5c66705cefe9ed44faecca0aac",
+        "row_count": 21,
         "lane_counts": {
           "directed": 5,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -5368,11 +5369,11 @@
           "function": "DisplayCard",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "cedaf31a6986b7ed20e6255a16d323d053fc81551b295f198dd3aabfa8decd90",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "a3d8555df45e30bc062be150788ede6aba6f53545c2fceef3c94b146ab2405f5",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DisplayCard": {
               "definition_sha256": "42890d67c5c96925cfbf4b299bd7555f460be4c5d55a800f492106de9f06d502",
@@ -5420,8 +5421,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "DisplayCard": {
               "definition_sha256": "42890d67c5c96925cfbf4b299bd7555f460be4c5d55a800f492106de9f06d502",
@@ -5436,7 +5437,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/DisplayCard/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/DisplayCard/negative-cases.jsonl.gz",
           "sha256": "ee1372fcb67172275a5231be5b255e4b763c502c29e169e757cc652c18b3a5fd",
           "row_count": 3,
           "lane_counts": {
@@ -5462,7 +5463,7 @@
             "function": "DisplayCard",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "05e4df7e78ab38a18111901bf93b5ab1a24b2cda7a94a3d3ef586bb422cff21c",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "win_DrawBitMap(pic.left + r.left + 1, pic.top + r.top, pic.id);",
               "old": "win_DrawBitMap(pic.left + r.left, pic.top + r.top, pic.id);",
@@ -5471,7 +5472,7 @@
             "object_sha256": "ec29cb1f16a2b2f5f56345113fd1d62ef50ce7b77dbdd8cc6a2b10c87f09aaec",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "DisplayCard": {
                 "definition_sha256": "42890d67c5c96925cfbf4b299bd7555f460be4c5d55a800f492106de9f06d502",
@@ -5486,7 +5487,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 7.234,
+      "elapsed_seconds": 7.797,
       "pass": true
     },
     "drawHistGraph": {
@@ -5515,8 +5516,8 @@
           "/Oe",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "drawHistGraph": {
             "definition_sha256": "cbabab99b3e0572aac87502073c3e42f2593975ba56da06b05d68167c829ce06",
@@ -5524,26 +5525,26 @@
           }
         }
       },
-      "cases": 49,
+      "cases": 64,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {},
       "modeled_boundaries": {
-        "win_GetObjRect": 49,
-        "win_DrawBitMap": 3087,
-        "win_SetColorFromObjNum": 49,
-        "f_24AB_038D": 49,
-        "f_1CE2_01F8": 49
+        "win_GetObjRect": 64,
+        "win_DrawBitMap": 4032,
+        "win_SetColorFromObjNum": 64,
+        "f_24AB_038D": 64,
+        "f_1CE2_01F8": 64
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/drawHistGraph/cases.jsonl.gz",
-        "sha256": "627ebc12650ac773aa66613eed5968f3ec4ea91c5683d0841d24f6912bd35a11",
-        "row_count": 49,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/drawHistGraph/cases.jsonl.gz",
+        "sha256": "88b50e00a268a77d2ace571fcb9dc3ab21884e6d75f3c07736fe905b586ddbd8",
+        "row_count": 64,
         "lane_counts": {
           "directed": 48,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -5564,11 +5565,11 @@
           "function": "drawHistGraph",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "32daba59bfda3f1c17d67bf4c9a7b3dbe052f8b703ac013a5c3924eb18f3cdd4",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "6a67b1fa84eec7d9eaebfb1a0a0e5ea0cbfbbf78cd8141b0a52155f7baaf06af",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "drawHistGraph": {
               "definition_sha256": "cbabab99b3e0572aac87502073c3e42f2593975ba56da06b05d68167c829ce06",
@@ -5616,8 +5617,8 @@
             "/Oe",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "drawHistGraph": {
               "definition_sha256": "cbabab99b3e0572aac87502073c3e42f2593975ba56da06b05d68167c829ce06",
@@ -5632,7 +5633,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/drawHistGraph/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/drawHistGraph/negative-cases.jsonl.gz",
           "sha256": "214b802ea7a3f460ea9c1b6cc056d9a2ebb18901ae7b1c875a581c3b16af81f1",
           "row_count": 1,
           "lane_counts": {
@@ -5658,7 +5659,7 @@
             "function": "drawHistGraph",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "d1fa94894488d588e9331bf18a76f5e899072f0f48eac888a4c00a02a0422722",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "x = n * width / 64 + slot + r.left + 1;",
               "old": "x = n * width / 64 + slot + r.left;",
@@ -5667,7 +5668,7 @@
             "object_sha256": "96dfef3372efb4648c9dd5e5c86aac36a15145fe14ca085a8b339b01d1bf8deb",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "drawHistGraph": {
                 "definition_sha256": "cbabab99b3e0572aac87502073c3e42f2593975ba56da06b05d68167c829ce06",
@@ -5682,7 +5683,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 4.703,
+      "elapsed_seconds": 5.579,
       "pass": true
     },
     "o25_3BA4_1035": {
@@ -5711,8 +5712,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "o25_3BA4_1035": {
             "definition_sha256": "642596e92055b628c82be2eb15de449c43ee23fbc49fd4ef4b95e602251fcb66",
@@ -5720,30 +5721,30 @@
           }
         }
       },
-      "cases": 810,
+      "cases": 825,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "TryAntTheme": 810,
-        "SetAlarmDropState": 490,
-        "ClearMyLife": 810,
-        "DigMyTile": 810,
-        "SetMyLife": 810
+        "TryAntTheme": 825,
+        "SetAlarmDropState": 501,
+        "ClearMyLife": 825,
+        "DigMyTile": 825,
+        "SetMyLife": 825
       },
       "modeled_boundaries": {
-        "TickCount": 810,
-        "win_SetObjSelectedState": 490,
-        "InvalEuMap": 490
+        "TickCount": 825,
+        "win_SetObjSelectedState": 501,
+        "InvalEuMap": 501
       },
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/o25_3BA4_1035/cases.jsonl.gz",
-        "sha256": "ea6eb11aed4aca33960f4e927b91f5b26119dc3fa5349f5d3b4b19e0e9e1fd8c",
-        "row_count": 810,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o25_3BA4_1035/cases.jsonl.gz",
+        "sha256": "f6f8cec7b442aec5fe0321c429cdb432847aeec2a32cd8a05da233f09e84707e",
+        "row_count": 825,
         "lane_counts": {
           "directed": 809,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -5764,11 +5765,11 @@
           "function": "o25_3BA4_1035",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "2783b02baf8f4f36f0367eb4edce59210cd32d4ffad4f7c17acb62f3aca0879f",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "35a2755d2670c15316c2ca30c2f78e3587f2067cb75f3eb8f6f18724646bb1b2",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o25_3BA4_1035": {
               "definition_sha256": "642596e92055b628c82be2eb15de449c43ee23fbc49fd4ef4b95e602251fcb66",
@@ -5817,8 +5818,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o25_3BA4_1035": {
               "definition_sha256": "642596e92055b628c82be2eb15de449c43ee23fbc49fd4ef4b95e602251fcb66",
@@ -5833,7 +5834,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/o25_3BA4_1035/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o25_3BA4_1035/negative-cases.jsonl.gz",
           "sha256": "4103ec2ca46d5eec4169e09e98582491ce50daeb834f345687c1a50db4ef141d",
           "row_count": 57,
           "lane_counts": {
@@ -5859,7 +5860,7 @@
             "function": "o25_3BA4_1035",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "e153491fca5436310487d200fc929437b092997c92212ef85ebe90ca67455a01",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "if (MeLocX >= 0x40)",
               "old": "if (MeLocX > 0x40)",
@@ -5868,7 +5869,7 @@
             "object_sha256": "ec54a4d253c3f449d32cfd9e884946387dc488cb866e86b5f797461516455773",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "o25_3BA4_1035": {
                 "definition_sha256": "642596e92055b628c82be2eb15de449c43ee23fbc49fd4ef4b95e602251fcb66",
@@ -5883,7 +5884,7 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 19.672,
+      "elapsed_seconds": 26.5,
       "pass": true
     },
     "o25_3BA4_1686": {
@@ -5912,8 +5913,8 @@
           "/Og",
           "/Zi"
         ],
-        "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-        "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+        "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+        "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
           "o25_3BA4_1686": {
             "definition_sha256": "55ba082ecb8858a4f8eba289e9313ac21e22c182eca25237f84f07e1293a7b96",
@@ -5921,22 +5922,22 @@
           }
         }
       },
-      "cases": 577,
+      "cases": 592,
       "errors": 0,
       "mismatches": 0,
       "actual_helpers": {
-        "TileCanBeMovedOn": 3072
+        "TileCanBeMovedOn": 3150
       },
       "modeled_boundaries": {},
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/behavior/clean/o25_3BA4_1686/cases.jsonl.gz",
-        "sha256": "649409d599a9a604e14c0ffc33436ba54f1f2b1689687e1864fef7af22728bbd",
-        "row_count": 577,
+        "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o25_3BA4_1686/cases.jsonl.gz",
+        "sha256": "7a250832b9c55a70622b890db166f22b031d8a817947be4c7925723f818c9b2d",
+        "row_count": 592,
         "lane_counts": {
           "directed": 576,
-          "randomized": 1
+          "randomized": 16
         },
         "identity": {
           "address": {
@@ -5957,11 +5958,11 @@
           "function": "o25_3BA4_1686",
           "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
           "linked_code_sha256": "2783b02baf8f4f36f0367eb4edce59210cd32d4ffad4f7c17acb62f3aca0879f",
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "35a2755d2670c15316c2ca30c2f78e3587f2067cb75f3eb8f6f18724646bb1b2",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "profile": "msc600ax",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o25_3BA4_1686": {
               "definition_sha256": "55ba082ecb8858a4f8eba289e9313ac21e22c182eca25237f84f07e1293a7b96",
@@ -6009,8 +6010,8 @@
             "/Og",
             "/Zi"
           ],
-          "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
-          "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+          "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+          "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
             "o25_3BA4_1686": {
               "definition_sha256": "55ba082ecb8858a4f8eba289e9313ac21e22c182eca25237f84f07e1293a7b96",
@@ -6025,7 +6026,7 @@
         },
         "ledger": {
           "schema": "behavior-case-ledger-v1",
-          "path": "D:/Prog/simant_recon/build/behavior/clean/o25_3BA4_1686/negative-cases.jsonl.gz",
+          "path": "D:/Prog/simant_recon/build/behavior/allocator-fixtures-final/o25_3BA4_1686/negative-cases.jsonl.gz",
           "sha256": "0dd9594016a442abad84a4e44c18f0abac273b5ba2554b064558c29b4f475fca",
           "row_count": 130,
           "lane_counts": {
@@ -6051,7 +6052,7 @@
             "function": "o25_3BA4_1686",
             "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
             "linked_code_sha256": "75181975e77efa3e3db5357faafd6f61ec43ab8aff28889f6612374f31abdac9",
-            "manifest_sha256": "3ee48e3ba019fb6b23af07c9ca96b91bd4d1109c8a2058179027bb1ebdceebfc",
+            "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
             "mutation": {
               "new": "*rot = -1;",
               "old": "*rot = 1;",
@@ -6060,7 +6061,7 @@
             "object_sha256": "8c235860e7bd4451136f29456161cdc5d34a355ad812c9caeca1ee7177e8f37c",
             "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
             "profile": "msc600ax",
-            "program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+            "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
             "semantic_reviews": {
               "o25_3BA4_1686": {
                 "definition_sha256": "55ba082ecb8858a4f8eba289e9313ac21e22c182eca25237f84f07e1293a7b96",
@@ -6075,10 +6076,10 @@
         },
         "execution_errors": 0
       },
-      "elapsed_seconds": 10.64,
+      "elapsed_seconds": 11.5,
       "pass": true
     }
   },
   "pass": true,
-  "cases": 11702
+  "cases": 12130
 }

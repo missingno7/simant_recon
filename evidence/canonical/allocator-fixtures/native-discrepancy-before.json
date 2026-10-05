@@ -1,0 +1,95 @@
+{
+  "schema": "simant-native-discard-contrast-v1",
+  "passed": true,
+  "checks": {
+    "run_completed": true,
+    "discarded_metadata_retained": true,
+    "discarded_resize_refused": true,
+    "inputs_unchanged": true
+  },
+  "observed_rows": [
+    "discarded,5,5,160,32",
+    "resize,0,1,6,5"
+  ],
+  "input_pins": {
+    "D:\\Prog\\simant_recon\\build\\portable-allocator-current-verified\\report.json": "523e38776e670d60a815855448102ca3026defb4acafa8f59bcbdafabf979616",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.c": "195719cce93e9b912da6682f10a16316dd0b1ae32c438b3a78c91591c5661815",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.h": "96cebce16f05c2e08bb60b1a958ce9aad0a2895d2f61889eeeb45210615b2308",
+    "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.c": "8cdd1f6a8f1f41cf6e6486b9e5d7224bb86390d6b584f3d146088eaf53c0e529",
+    "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.py": "3e5156f158fdb62647363ab96cb9224e994478e4575bf25e13060226ec4bfc58",
+    "C:\\msys64\\mingw64\\bin\\gcc.exe": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+  },
+  "build_input_count": 420,
+  "commands": [
+    {
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "-std=c11",
+        "-g",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-fno-strict-aliasing",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\portable-allocator-current-verified\\include",
+        "-I",
+        "D:\\Prog\\simant_recon",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\portable-allocator-current-verified",
+        "-I",
+        "D:\\Prog\\simant_recon\\portable\\whole_program",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+        "-c",
+        "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\native-discard-verified\\provider.o"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "-std=c11",
+        "-g",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-fno-strict-aliasing",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\portable-allocator-current-verified\\include",
+        "-I",
+        "D:\\Prog\\simant_recon",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\portable-allocator-current-verified",
+        "-I",
+        "D:\\Prog\\simant_recon\\portable\\whole_program",
+        "-I",
+        "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+        "-c",
+        "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\native-discard-verified\\fixture.o"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "D:\\Prog\\simant_recon\\build\\native-discard-verified\\provider.o",
+        "D:\\Prog\\simant_recon\\build\\native-discard-verified\\fixture.o",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\native-discard-verified\\native-discard.exe"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "provider_object_sha256": "5e772af4515055a2e885ba82323abe102fa47c586629dbce07c0c404f311e959",
+  "executable_sha256": "b9cbc0bec8a2b6485a11c29e768ad9f049f7069759738168fa93bb1526da2bc2",
+  "classification": "SEMANTIC / PORT-BLOCKING",
+  "scope": "Current whole native provider retains discarded sizes and refuses resize. Compare original bounded allocator history in the adjacent review. Passing this discrepancy replay does not establish native equivalence or ordinary gameplay reachability."
+}

@@ -1,0 +1,213 @@
+{
+  "schema": "simant-hotbox-ownership-contrasts-v1",
+  "passed": true,
+  "checks": {
+    "canonical_peers_and_data": true,
+    "trailing_peers_and_complete_data": true,
+    "trailing_full_code_and_ordered_fixups": true,
+    "semantic_body_unchanged": true,
+    "separate_contribution_also_matches": true,
+    "front_definition_distinguished": true,
+    "inputs_unchanged": true
+  },
+  "input_pins": {
+    "src/program.json": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
+    "layout/manifest.json": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "layout/toolchain.json": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+    "src/S10/m35F5.c": "e68eeb865aedf6ff9e2f72ec9fa3f3ab620ed0dd788ec967c59cf6f8f92fdf99",
+    "src/S20/m39F1.c": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+    "src/root/m1B73.asm": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+    "src/root/m1FD2.c": "c751c5267a0f73137dcc5a93b1e354ccd7352b24c8f95f5db7db607695352099",
+    "tools/modules.py": "d4d7bcb5b680a37473d4cd46862aafd6163d3494c15ad1e618d132c953a449cc",
+    "tools/compiler.py": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "evidence/canonical/hotbox-owner/replay.py": "785cd1e4b05efe7f5021d4e6b8be49d96dfcaee4cf7be9c412d486d41e7b8b8a"
+  },
+  "results": {
+    "canonical": {
+      "source_sha256": "e68eeb865aedf6ff9e2f72ec9fa3f3ab620ed0dd788ec967c59cf6f8f92fdf99",
+      "object_sha256": "e85d10942c0944290ffb285c01465edc8c5feb8c9ac68637dad883dbb41f44f3",
+      "accepted_peers": 4,
+      "exact_peers_and_registered_data": true,
+      "data": {
+        "_DATA": {
+          "exact": true,
+          "reasons": [],
+          "size": 38,
+          "reloc_order": "EXACT",
+          "start": 375738,
+          "class": "DATA",
+          "align": "word",
+          "far": false
+        },
+        "CONST": {
+          "exact": true,
+          "reasons": [],
+          "size": 10,
+          "reloc_order": "GROUPED",
+          "start": 386316,
+          "class": "CONST",
+          "align": "word",
+          "far": false
+        }
+      },
+      "module_reasons": null,
+      "code_projection_sha256": "84533b4107c8ceb6914ad646b188c409210814fbe44f5a1cf1e52efa075e4d64",
+      "complete_code_projection_equals_canonical": true,
+      "semantic_definition_unchanged": true,
+      "data_fixups": []
+    },
+    "s10_trailing": {
+      "source_sha256": "9f44eb7d7bd5f05aec1e37f1d86aa6e7fb8134350c5431235fbd857164720f1e",
+      "object_sha256": "5c15d8422b5fb33d9b0d76e6d17cc2952b69c6b54c5303cf0a25911900286605",
+      "accepted_peers": 4,
+      "exact_peers_and_registered_data": true,
+      "data": {
+        "_DATA": {
+          "exact": true,
+          "reasons": [],
+          "size": 56,
+          "reloc_order": "EXACT",
+          "start": 375738,
+          "class": "DATA",
+          "align": "word",
+          "far": false
+        },
+        "CONST": {
+          "exact": true,
+          "reasons": [],
+          "size": 10,
+          "reloc_order": "GROUPED",
+          "start": 386316,
+          "class": "CONST",
+          "align": "word",
+          "far": false
+        }
+      },
+      "module_reasons": null,
+      "code_projection_sha256": "84533b4107c8ceb6914ad646b188c409210814fbe44f5a1cf1e52efa075e4d64",
+      "complete_code_projection_equals_canonical": true,
+      "semantic_definition_unchanged": true,
+      "data_fixups": [
+        {
+          "segment": "_DATA",
+          "offset": 46,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_f_1B73_030F",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 36,
+          "frame_kind": "target",
+          "frame": "_f_1B73_030F",
+          "encoded_addend": "00000000"
+        }
+      ]
+    },
+    "standalone": {
+      "source_sha256": "968b5cac40f0e29ccf2087ca8dd9caed0ec1d0d3e5f01018efac991b8ab3ed68",
+      "object_sha256": "a074b5db855899dd738a08fd69a0df0a89cf8344f48038ed010da05fe618d0c3",
+      "accepted_peers": 0,
+      "exact_peers_and_registered_data": true,
+      "data": {
+        "_DATA": {
+          "exact": true,
+          "reasons": [],
+          "size": 18,
+          "reloc_order": "EXACT",
+          "start": 375776,
+          "class": "DATA",
+          "align": "word",
+          "far": false
+        }
+      },
+      "module_reasons": null,
+      "code_projection_sha256": "504e76e65db69cf5f1ab160b0ac37c6a2b2386e5ab1b61bdcf03283013da5965",
+      "complete_code_projection_equals_canonical": null,
+      "semantic_definition_unchanged": null,
+      "data_fixups": [
+        {
+          "segment": "_DATA",
+          "offset": 8,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_f_1B73_030F",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 1,
+          "frame_kind": "target",
+          "frame": "_f_1B73_030F",
+          "encoded_addend": "00000000"
+        }
+      ]
+    },
+    "s20_front": {
+      "source_sha256": "b2e6f48f36ffb811253a942e04a3491eab5ac10057344e6defbe4f32f4188c36",
+      "object_sha256": "d1e212dd91c5727642ad9b38d52b49a1082d8e9ccf8cc727e4bbf9a4cb681c58",
+      "accepted_peers": 4,
+      "exact_peers_and_registered_data": false,
+      "data": {
+        "_DATA": {
+          "exact": false,
+          "reasons": [
+            "data bytes differ",
+            "data relocation set differs 1 vs 1"
+          ],
+          "size": 151,
+          "reloc_order": "EXACT",
+          "start": 375776,
+          "class": "DATA",
+          "align": "word",
+          "far": false
+        },
+        "CONST": {
+          "exact": true,
+          "reasons": [],
+          "size": 16,
+          "reloc_order": "GROUPED",
+          "start": 386342,
+          "class": "CONST",
+          "align": "word",
+          "far": false
+        }
+      },
+      "module_reasons": null,
+      "code_projection_sha256": "c87fe21b2fb78ce735934e67888cd7e16a13ca711304c5d58c87d41c1b82474f",
+      "complete_code_projection_equals_canonical": null,
+      "semantic_definition_unchanged": null,
+      "data_fixups": [
+        {
+          "segment": "_DATA",
+          "offset": 78,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_f_1B73_030F",
+          "displacement": 0,
+          "frame_method": 5,
+          "frame_index": 0,
+          "target_method": 2,
+          "target_index": 30,
+          "frame_kind": "target",
+          "frame": "_f_1B73_030F",
+          "encoded_addend": "00000000"
+        }
+      ]
+    }
+  },
+  "admitted": false,
+  "functional_bytes_retained": 18,
+  "missing_fact": "Positive designation of this particular range: registration/copy, declaration anchor or independent initializer provenance.",
+  "scope": "Whole-source compatibility controls, not storage or activation acceptance."
+}

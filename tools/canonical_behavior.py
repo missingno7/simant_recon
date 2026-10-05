@@ -333,6 +333,7 @@ def run_target(target, make_cases, out, do_negative):
 
 
 def sequences(count, seed):
+    yield memory.completed_allocation_sequence()
     yield memory.operation_plan('directed/basic', seed=seed)
     for label, kwargs in (
         ('locked', {'soft_lock': 1}), ('pinned', {'pinned': True}),
