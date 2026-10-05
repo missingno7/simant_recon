@@ -22,7 +22,7 @@ static int16_t read_record_word(const uint8_t *record, uint8_t offset)
 }
 
 int16_t f_1B73_0C42(int16_t id, PortableM1B73Queue *slot,
-                    PortableM1B73Rect *out_rect)
+                    struct Rect *out_rect)
 {
     uint16_t i;
 
@@ -34,7 +34,7 @@ int16_t f_1B73_0C42(int16_t id, PortableM1B73Queue *slot,
     for (i = 0; i < (*slot->count); ++i) {
         const uint8_t *record = slot->records[i];
         if (read_record_word(record, 12) == id) {
-            PortableM1B73Rect result;
+            struct Rect result;
             result.left = read_record_word(record, 0);
             result.top = read_record_word(record, 2);
             result.right = read_record_word(record, 4);

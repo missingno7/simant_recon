@@ -234,13 +234,6 @@
       "status": "OPEN"
     },
     {
-      "id": "native-queue-result-abi",
-      "status": "OPEN",
-      "gate": "SEMANTIC/PORT-BLOCKING",
-      "module": "root:1FD2/S26 queue result contract",
-      "detail": "The native adapter expresses inherited ASM AX lookup success as a C int result while the exact canonical wrapper is void with split pointer words. Review the original wrapper/call-site ABI and whole-TU promotion before treating this source declaration conversion as a closed portable contract."
-    },
-    {
       "id": "native-event-omitted-word",
       "status": "OPEN",
       "gate": "SEMANTIC/PORT-BLOCKING",

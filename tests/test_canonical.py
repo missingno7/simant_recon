@@ -2,6 +2,7 @@
 import copy
 import hashlib
 import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -10,12 +11,33 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 sys.path.insert(0, str(ROOT))
 import canonical
+import csrc
 import modules
 from dos import build as dos_build
 from omf import OmfReader
 
 
 class CanonicalProgram(unittest.TestCase):
+    def test_queue_result_abi_agrees_across_source_translation_units(self):
+        # Byte equality alone cannot reject the old void/split-pointer declaration.
+        # The ASM returns AX=0/1 and writes through one far Rect pointer; S26
+        # observes that result. Compare source types, ignoring parameter names.
+        def signature(text, name):
+            fn = csrc.Source(text).function(name)
+            header = canonical.tokens(text[fn.head_s:fn.params_s]).split()
+            result = tuple(t for t in header[:-1] if t != 'extern')
+            params = tuple(canonical.tokens(kind) for kind, _ in fn.params)
+            return result, params
+
+        expected = signature('int far lookup(int id, struct Rect far *out) { return 0; }', 'lookup')
+        owner = (ROOT / 'src/root/m1FD2.c').read_text()
+        self.assertEqual(signature(owner, 'f_1FD2_04B3'), expected)
+        caller = (ROOT / 'src/S26/m39C7.c').read_text()
+        prototype = re.search(r'extern int far f_1FD2_04B3\([^;]+\);', caller).group(0)
+        self.assertEqual(signature(prototype[:-1] + ' { return 0; }', 'f_1FD2_04B3'), expected)
+        old = 'void far lookup(int id, int offset, int segment) { }'
+        self.assertNotEqual(signature(old, 'lookup'), expected)
+
     def test_one_inventory_owns_all_live_sources(self):
         program = canonical.load()
         listed = {m['source'] for m in program['modules']} | {'src/program.json'}

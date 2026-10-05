@@ -81,13 +81,16 @@ live contract IDs and removal conditions. Four previously implicit domains are n
 explicit: queue result ABI, omitted event word, menu allocation/failure policy and
 physical drive/device remapping. Documented native contracts increased from eight
 to twelve without changing runtime behavior or claiming those domains closed.
+Subsequent DOS reconstruction closed the queue result/output ABI through an exact
+whole-TU canonical promotion. Its native body/signature substitution is removed;
+eleven contracts and ten temporary modules remain. See the
+[queue ABI review](../evidence/canonical/queue-result-abi/review.md).
 
 | Temporary module | Owning contracts | Removal proof |
 | --- | --- | --- |
 | `file_select_host` | `native-drive-device-policy` | Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering. |
 | `findindex_native_guard` | `native-index-adjacency` | Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering. |
 | `m1b73_event_source` | `native-event-omitted-word` | Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering. |
-| `m1b73_queue_source` | `native-queue-result-abi` | Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering. |
 | `pointer_globals` | `native-storage-ownership` | Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering. |
 | `s26_window_object_views_v1` | `native-window-object-domain` | Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering. |
 | `source_runtime_globals` | `native-menu-allocation-policy`, `native-storage-ownership` | Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering. |

@@ -262,11 +262,11 @@ void far f_1FD2_049C(int ticks)
     f_1B73_0B5B(ticks, fd_5071_0060);
 }
 
-extern void far f_1B73_0C42(int a, char far *slot, int b, int c);
+extern int far f_1B73_0C42(int id, char far *slot, struct Rect far *out);
 
-void far f_1FD2_04B3(int a, int b, int c)
+int far f_1FD2_04B3(int id, struct Rect far *out)
 {
-    f_1B73_0C42(a, fd_5071_03C4, b, c);
+    return f_1B73_0C42(id, fd_5071_03C4, out);
 }
 
 extern int near g_9122;

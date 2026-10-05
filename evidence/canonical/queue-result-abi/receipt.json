@@ -1,0 +1,60 @@
+{
+  "schema": "simant-canonical-queue-result-abi-v1",
+  "status": "EXACT",
+  "function": "f_1FD2_04B3",
+  "module": "root:1FD2",
+  "previous_source_sha256": "c751c5267a0f73137dcc5a93b1e354ccd7352b24c8f95f5db7db607695352099",
+  "source_sha256": "fd800b1dd5270dab48c61ea53b3fbfbb1d38b4c593542852a2d212993be1841c",
+  "historical_source_revision": "59968c1",
+  "original_executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "static_contract": {
+    "lookup": "id, far queue, far Rect output",
+    "success": "copy four words and return AX=1",
+    "miss": "leave output unchanged and return AX=0",
+    "caller": "o26_39C7_0671 passes far Rect pointer and tests returned AX",
+    "canonical_wrapper": "return f_1B73_0C42(id, fd_5071_03C4, out)",
+    "complete_result_output_paths_reviewed": true
+  },
+  "root_review": {
+    "reviewer": "root",
+    "independent_whole_TU_verification": true,
+    "admission": "tools/promote.py --verify-only, then tools/promote.py"
+  },
+  "historical_checks": {
+    "exact_functions": 33,
+    "wrapper_bytes": 29,
+    "private_data_bytes": {
+      "CONST": 6,
+      "_DATA": 163,
+      "_BSS": 8
+    },
+    "complete_extent": "EXACT",
+    "relocation_order_gate": "PASS (GROUPED)"
+  },
+  "retired_native_contract": "native-queue-result-abi",
+  "native_body_signature_substitution_removed": true,
+  "validation": {
+    "historical_validator": "PASS: all registered claims, runtime members/data and 49 codegen probes",
+    "canonical_regression_tests": "PASS: 6 tests, including cross-TU result/output ABI contrast",
+    "native_build": "PASS: 161 C TUs, 29 ASM translations, 78 services, core/application links with zero undefined symbols",
+    "DOS_source_build": "PASS: 191 TUs and 64 storage providers",
+    "DOS_link": "REFUSED: 11 unresolved imports, 11 semantic gates and 44 bytes in 6 data ranges",
+    "standalone_DOS_game_execution": "NOT_AVAILABLE"
+  },
+  "remaining_adapter": "Generic native pointer/queue descriptor representation",
+  "scope_exclusions": [
+    "Event.v omitted word",
+    "invalid queue inputs",
+    "standalone DOS execution",
+    "whole-game native correctness",
+    "causal attribution for manual logo-click hang"
+  ],
+  "inputs": {
+    "src/root/m1FD2.c": "fd800b1dd5270dab48c61ea53b3fbfbb1d38b4c593542852a2d212993be1841c",
+    "src/root/m1B73.asm": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+    "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+    "portable/canonical_native_abi/m1b73_queue_source.py": "1bfd3c30443183313c520b87a14de57004e442dd338932f32d7806a7df05fed7",
+    "portable/whole_program/platform/m1b73_queue_source.c": "065c2b712f7a3bb76a16bd395421597d442efadb7ba9449f6db36ab51fae3b22",
+    "portable/whole_program/platform/m1b73_queue_source.h": "c3e1290c48d26326d206e9cb7feb970661657cc1715a263b2c1520a497abc784"
+  }
+}

@@ -6,13 +6,6 @@
 
 #include <stdint.h>
 
-typedef struct PortableM1B73Rect {
-    int16_t left;
-    int16_t top;
-    int16_t right;
-    int16_t bottom;
-} PortableM1B73Rect;
-
 /* Source C's fd_5071_* symbols are converted to these borrowed typed views;
  * they are selectors into the one ASM queue owner, not copied records. */
 PortableM1B73Queue *portable_m1b73_queue_slot(uint8_t source_slot);
@@ -29,6 +22,6 @@ void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot);
 void f_1B73_0AC3(struct Timer *timer, PortableM1B73Queue *slot);
 void f_1B73_0BC5(int16_t ticks, PortableM1B73Queue *slot);
 int16_t f_1B73_0C42(int16_t id, PortableM1B73Queue *slot,
-                    PortableM1B73Rect *out_rect);
+                    struct Rect *out_rect);
 
 #endif

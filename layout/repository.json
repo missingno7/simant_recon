@@ -191,12 +191,10 @@
     },
     {
       "module": "m1b73_queue_source",
-      "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Lifts Rect/Timer declarations to shared native types, widens the pointer-bearing descriptor, and maps historical queue aliases to selectors over the native representation.",
-      "blocker_ids": [
-        "native-queue-result-abi"
-      ],
-      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+      "classification": "GENERIC_LOWERING",
+      "reason": "Widens pointer-bearing queue descriptors and maps source queue aliases to borrowed native views; canonical Rect output and int return semantics are preserved without a body or signature replacement.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep only mechanically required pointer/descriptor views; result and output ABI are canonical. See evidence/canonical/queue-result-abi/receipt.json."
     },
     {
       "module": "main_preflight",
