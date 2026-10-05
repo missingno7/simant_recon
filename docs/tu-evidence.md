@@ -73,10 +73,12 @@ segment with bytes must be placed and byte-exact with its data relocations, it m
 code, every public must lie at its registered address, and `link_after` records its link-order
 position (the module whose far data precedes it; FIRST = section 27's start), checked with the
 paragraph fill in between.  Far segments of one object must be placed in SEGDEF order and
-contiguous up to paragraph fill (FARSEG-1).  Ownership evidence: the defining file references its
-own far variables through its *segment* (one relocation group), other files through external
-symbols (per-symbol groups); for 3D57 and 3E1D every referencing module is of the second kind
-(work/data/exclude.py), so the definitions are in files without code.  Any module with
+contiguous up to paragraph fill (FARSEG-1). For segment-backed far definitions, the defining
+file references its own variables through their *segment* (one relocation group); other
+files use external symbols (per-symbol groups). For initialized FAR_DATA at 3D57 and 3E1D,
+every referencing module is of the second kind (work/data/exclude.py), so their definitions
+belong to files without code. This test does not locate tentative FAR_BSS definitions:
+COMDEFs retain external-symbol fixups even in the allocating TU (FARSEG-2).  Any module with
 zero claims is reported as `modules_data_only` by validate.py and never counted as recovered code.
 
 A data-only file with **DGROUP data only** has no far frame: its key is `data:55B3@OFF` (OFF = the

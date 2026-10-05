@@ -14,6 +14,8 @@ SPEC:
         "SEGNAME": {"class": "FAR_DATA", "align": "paragraph", "length": 20, "combine": "public"},
         "OTHER_SEG": null,                      # the object must not define this segment
         "communals": {"_ga": 8} or ["_ga"]}}}   # far/near COMDEF names (and sizes)
+   # expect_bindings uses the same variant@profileindex keys. Fields are exact
+   # live fixup-target counts, ordered CONST fixups, external scopes or data publics.
 
 Each variant is compiled freshly under each pinned profile; the code segment is
 disassembled with fixup fields left as emitted.  Segment expectations compare the
@@ -25,6 +27,7 @@ by validate.py.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import hashlib
 import json
 import sys
@@ -66,6 +69,7 @@ def run(spec: dict) -> dict:
                 row["disasm"] = "; ".join(f"{i.mnemonic} {i.op_str}".strip() for i in md.disasm(code, 0))
                 row["segments"] = segment_summary(obj)
                 row["communals"] = {c["name"]: c["length"] for c in getattr(obj, "communals", [])}
+                row["bindings"] = binding_summary(obj)
             out["results"].append(row)
     checks = []
     for key, needle in spec.get("expect", {}).items():
@@ -79,9 +83,44 @@ def run(spec: dict) -> dict:
         v, pi = key.split("@")
         row = next(r for r in out["results"] if r["variant"] == v and r["profile_index"] == int(pi))
         checks += segment_checks(key, row, want)
+    for key, want in spec.get("expect_bindings", {}).items():
+        v, pi = key.split("@")
+        row = next(r for r in out["results"] if r["variant"] == v and r["profile_index"] == int(pi))
+        checks += binding_checks(key, row, want)
     out["checks"] = checks
     out["all_checks_pass"] = all(c["ok"] for c in checks)
     return out
+
+
+def binding_summary(obj) -> dict:
+    """Keep allocation scope separate from the fixup's target spelling.
+
+    Tentative far definitions still target external names. COMDEF and the
+    parsed external scope, rather than a segment-target assumption, identify
+    their allocation contribution. Debug fixups are outside this live view.
+    """
+    live = {sd['name'] for sd in obj.segment_defs
+            if str(sd.get('class', '')).upper() not in ('DEBSYM', 'DEBTYP')}
+    fixes = [f for f in obj.linker_fixups if f['segment'] in live]
+    fields = ('offset', 'width', 'loc', 'target_kind', 'target', 'target_method',
+              'frame_kind', 'frame', 'frame_method', 'encoded_addend')
+    return {
+        'fixup_target_counts': dict(Counter('|'.join((f['segment'], f['loc'],
+                                                     f['target_kind'], f['target'])) for f in fixes)),
+        'ordered_const_fixups': [{k: f[k] for k in fields} for f in fixes if f['segment'] == 'CONST'],
+        'external_scopes': dict(zip(obj.externals, obj.external_scopes)),
+        'data_publics': [p for p in obj.publics if p['segment'] in live
+                         and not p['segment'].endswith('_TEXT')],
+    }
+
+
+def binding_checks(key: str, row: dict, want: dict) -> list[dict]:
+    allowed = {'fixup_target_counts', 'ordered_const_fixups', 'external_scopes', 'data_publics'}
+    if set(want) - allowed:
+        raise ValueError('unsupported binding expectation: ' + str(sorted(set(want) - allowed)))
+    actual = row.get('bindings', {})
+    return [{'check': key, 'needle': 'bindings.' + field,
+             'ok': actual.get(field) == expected} for field, expected in want.items()]
 
 
 def segdef_length(sd: dict) -> int:

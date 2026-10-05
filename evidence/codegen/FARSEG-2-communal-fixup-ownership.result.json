@@ -1,0 +1,450 @@
+{
+ "id": "FARSEG-2",
+ "question": "Can external-symbol far fixups exclude a same-TU tentative communal definition?",
+ "results": [
+  {
+   "variant": "extern",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "2de327afa224b0062376474e3aae667248df747af5cc4df77e988bcf988df271",
+   "bytes": "558bec8e0600008b5e0626c68700002f8b46088b560a8e060200d1e3d1e3260187000026119702005dcb558bec83ec0857568b5e068e0602008b7608d1e6d1e6268b840000268b9402008946fc8956fe8bf3d1e6d1e6268b8c0000268bbc0200894ef8897efa3bd77f067c083bc172048bc18bd75e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; mov es, word ptr [2]; shl bx, 1; shl bx, 1; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [2]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si]; mov di, word ptr es:[si + 2]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x70; jl 0x74; cmp ax, cx; jb 0x74; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 122,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 4,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {
+     "CONST|base16|external|_ticks": 1,
+     "CONST|base16|external|_status": 1,
+     "UNIT_TEXT|offset16|external|_ticks": 6,
+     "UNIT_TEXT|offset16|segment|CONST": 3,
+     "UNIT_TEXT|offset16|external|_status": 1
+    },
+    "ordered_const_fixups": [
+     {
+      "offset": 2,
+      "width": 2,
+      "loc": "base16",
+      "target_kind": "external",
+      "target": "_ticks",
+      "target_method": 2,
+      "frame_kind": "target",
+      "frame": "_ticks",
+      "frame_method": 5,
+      "encoded_addend": "0000"
+     },
+     {
+      "offset": 0,
+      "width": 2,
+      "loc": "base16",
+      "target_kind": "external",
+      "target": "_status",
+      "target_method": 2,
+      "frame_kind": "target",
+      "frame": "_status",
+      "frame_method": 5,
+      "encoded_addend": "0000"
+     }
+    ],
+    "external_scopes": {
+     "_status": "external",
+     "_ticks": "external",
+     "_step": "external",
+     "_pick": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "communal",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "d78f21a0815c5d76d9b54b2b2760c19a32034c94e89b2622212a13e9fd868f9d",
+   "bytes": "558bec8e0600008b5e0626c68700002f8b46088b560a8e060200d1e3d1e3260187000026119702005dcb558bec83ec0857568b5e068e0602008b7608d1e6d1e6268b840000268b9402008946fc8956fe8bf3d1e6d1e6268b8c0000268bbc0200894ef8897efa3bd77f067c083bc172048bc18bd75e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; mov es, word ptr [2]; shl bx, 1; shl bx, 1; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [2]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si]; mov di, word ptr es:[si + 2]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x70; jl 0x74; cmp ax, cx; jb 0x74; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 122,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 4,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {
+    "_status": 3,
+    "_ticks": 12
+   },
+   "bindings": {
+    "fixup_target_counts": {
+     "CONST|base16|external|_ticks": 1,
+     "CONST|base16|external|_status": 1,
+     "UNIT_TEXT|offset16|external|_ticks": 6,
+     "UNIT_TEXT|offset16|segment|CONST": 3,
+     "UNIT_TEXT|offset16|external|_status": 1
+    },
+    "ordered_const_fixups": [
+     {
+      "offset": 2,
+      "width": 2,
+      "loc": "base16",
+      "target_kind": "external",
+      "target": "_ticks",
+      "target_method": 2,
+      "frame_kind": "target",
+      "frame": "_ticks",
+      "frame_method": 5,
+      "encoded_addend": "0000"
+     },
+     {
+      "offset": 0,
+      "width": 2,
+      "loc": "base16",
+      "target_kind": "external",
+      "target": "_status",
+      "target_method": 2,
+      "frame_kind": "target",
+      "frame": "_status",
+      "frame_method": 5,
+      "encoded_addend": "0000"
+     }
+    ],
+    "external_scopes": {
+     "_status": "communal",
+     "_ticks": "communal",
+     "_step": "external",
+     "_pick": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "initialized",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "5f3f84f041bf02eade4419bd3d6e29d0e16b13997504f847afe7ae81f90f922c",
+   "bytes": "558bec8e0600008b5e0626c68700002f8b46088b560ad1e3d1e3260187030026119705005dcb558bec83ec0857568b5e068e0600008b7608d1e6d1e6268b840300268b9405008946fc8956fe8bf3d1e6d1e6268b8c0300268bbc0500894ef8897efa3bd77f067c083bc172048bc18bd75e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; shl bx, 1; shl bx, 1; add word ptr es:[bx + 3], ax; adc word ptr es:[bx + 5], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [0]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si + 3]; mov dx, word ptr es:[si + 5]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si + 3]; mov di, word ptr es:[si + 5]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x6c; jl 0x70; cmp ax, cx; jb 0x70; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 118,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 6,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "UNIT7_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 15,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {
+     "CONST|base16|segment|UNIT7_DATA": 3,
+     "UNIT_TEXT|offset16|segment|UNIT7_DATA": 7,
+     "UNIT_TEXT|offset16|segment|CONST": 2
+    },
+    "ordered_const_fixups": [
+     {
+      "offset": 2,
+      "width": 2,
+      "loc": "base16",
+      "target_kind": "segment",
+      "target": "UNIT7_DATA",
+      "target_method": 0,
+      "frame_kind": "target",
+      "frame": "UNIT7_DATA",
+      "frame_method": 5,
+      "encoded_addend": "0000"
+     },
+     {
+      "offset": 0,
+      "width": 2,
+      "loc": "base16",
+      "target_kind": "segment",
+      "target": "UNIT7_DATA",
+      "target_method": 0,
+      "frame_kind": "target",
+      "frame": "UNIT7_DATA",
+      "frame_method": 5,
+      "encoded_addend": "0000"
+     },
+     {
+      "offset": 4,
+      "width": 2,
+      "loc": "base16",
+      "target_kind": "segment",
+      "target": "UNIT7_DATA",
+      "target_method": 0,
+      "frame_kind": "target",
+      "frame": "UNIT7_DATA",
+      "frame_method": 5,
+      "encoded_addend": "0000"
+     }
+    ],
+    "external_scopes": {
+     "_step": "external",
+     "_pick": "external"
+    },
+    "data_publics": [
+     {
+      "name": "_status",
+      "segment": "UNIT7_DATA",
+      "offset": 0
+     },
+     {
+      "name": "_ticks",
+      "segment": "UNIT7_DATA",
+      "offset": 3
+     }
+    ]
+   }
+  }
+ ],
+ "checks": [
+  {
+   "check": "extern@0",
+   "needle": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; mov es, word ptr [2]; shl bx, 1; shl bx, 1; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [2]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si]; mov di, word ptr es:[si + 2]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x70; jl 0x74; cmp ax, cx; jb 0x74; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; mov es, word ptr [2]; shl bx, 1; shl bx, 1; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [2]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si]; mov di, word ptr es:[si + 2]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x70; jl 0x74; cmp ax, cx; jb 0x74; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; shl bx, 1; shl bx, 1; add word ptr es:[bx + 3], ax; adc word ptr es:[bx + 5], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [0]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si + 3]; mov dx, word ptr es:[si + 5]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si + 3]; mov di, word ptr es:[si + 5]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x6c; jl 0x70; cmp ax, cx; jb 0x70; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+   "ok": true
+  },
+  {
+   "check": "extern@0",
+   "needle": "UNIT_TEXT.length=122",
+   "ok": true
+  },
+  {
+   "check": "extern@0",
+   "needle": "CONST.length=4",
+   "ok": true
+  },
+  {
+   "check": "extern@0",
+   "needle": "no segment UNIT7_DATA",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "UNIT_TEXT.length=122",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "CONST.length=4",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "no segment UNIT7_DATA",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "communal _status 3",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "communal _ticks 12",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "UNIT_TEXT.length=118",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "CONST.length=6",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "UNIT7_DATA.length=15",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "UNIT7_DATA.class=FAR_DATA",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "UNIT7_DATA.align=paragraph",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "UNIT7_DATA.combine=public",
+   "ok": true
+  },
+  {
+   "check": "extern@0",
+   "needle": "bindings.fixup_target_counts",
+   "ok": true
+  },
+  {
+   "check": "extern@0",
+   "needle": "bindings.ordered_const_fixups",
+   "ok": true
+  },
+  {
+   "check": "extern@0",
+   "needle": "bindings.external_scopes",
+   "ok": true
+  },
+  {
+   "check": "extern@0",
+   "needle": "bindings.data_publics",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "bindings.fixup_target_counts",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "bindings.ordered_const_fixups",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "bindings.external_scopes",
+   "ok": true
+  },
+  {
+   "check": "communal@0",
+   "needle": "bindings.data_publics",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "bindings.fixup_target_counts",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "bindings.ordered_const_fixups",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "bindings.external_scopes",
+   "ok": true
+  },
+  {
+   "check": "initialized@0",
+   "needle": "bindings.data_publics",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

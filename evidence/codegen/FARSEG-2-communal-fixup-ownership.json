@@ -1,0 +1,229 @@
+{
+ "id": "FARSEG-2",
+ "status": "VERIFIED",
+ "question": "Can external-symbol far fixups exclude a same-TU tentative communal definition?",
+ "findings": [
+  "Extern and same-TU tentative far arrays have the same complete live code/data/public/fixup projection in the generic controls and all18 current m284A exact claims.",
+  "Only COMDEF allocation records and parsed external scopes distinguish extern from tentative ownership; tested bounds1,18,19 do not affect the game live contributions.",
+  "Initialized far definitions use segment-backed storage and segment targets, with different codegen. No game array bound or allocator TU is admitted."
+ ],
+ "positive_control": "Extern versus same-TU tentative three-element status/ticks fixtures; corroborated by full current root:284A controls.",
+ "negative_contrast": "Explicit zero-initialized definitions create UNIT7_DATA and segment-backed references; preserved game scheduler extent314 changes to302.",
+ "header": "",
+ "variants": {
+  "extern": "extern unsigned char far status[3];\nextern long far ticks[3];\n\nvoid far step(int index, long delta)\n{\n    status[index] = 0x2f;\n    ticks[index] += delta;\n}\n\nlong far pick(int left, int right)\n{\n    if (ticks[left] > ticks[right])\n        return ticks[right];\n    return ticks[left];\n}\n",
+  "communal": "unsigned char far status[3];\nlong far ticks[3];\n\nvoid far step(int index, long delta)\n{\n    status[index] = 0x2f;\n    ticks[index] += delta;\n}\n\nlong far pick(int left, int right)\n{\n    if (ticks[left] > ticks[right])\n        return ticks[right];\n    return ticks[left];\n}\n",
+  "initialized": "unsigned char far status[3] = {0};\nlong far ticks[3] = {0};\n\nvoid far step(int index, long delta)\n{\n    status[index] = 0x2f;\n    ticks[index] += delta;\n}\n\nlong far pick(int left, int right)\n{\n    if (ticks[left] > ticks[right])\n        return ticks[right];\n    return ticks[left];\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect_segments": {
+  "extern@0": {
+   "UNIT_TEXT": {
+    "length": 122
+   },
+   "CONST": {
+    "length": 4
+   },
+   "UNIT7_DATA": null,
+   "communals": []
+  },
+  "communal@0": {
+   "UNIT_TEXT": {
+    "length": 122
+   },
+   "CONST": {
+    "length": 4
+   },
+   "UNIT7_DATA": null,
+   "communals": {
+    "_status": 3,
+    "_ticks": 12
+   }
+  },
+  "initialized@0": {
+   "UNIT_TEXT": {
+    "length": 118
+   },
+   "CONST": {
+    "length": 6
+   },
+   "UNIT7_DATA": {
+    "length": 15,
+    "class": "FAR_DATA",
+    "align": "paragraph",
+    "combine": "public"
+   },
+   "communals": []
+  }
+ },
+ "expect_bindings": {
+  "extern@0": {
+   "fixup_target_counts": {
+    "CONST|base16|external|_ticks": 1,
+    "CONST|base16|external|_status": 1,
+    "UNIT_TEXT|offset16|external|_ticks": 6,
+    "UNIT_TEXT|offset16|external|_status": 1,
+    "UNIT_TEXT|offset16|segment|CONST": 3
+   },
+   "ordered_const_fixups": [
+    {
+     "offset": 2,
+     "width": 2,
+     "loc": "base16",
+     "target_kind": "external",
+     "target": "_ticks",
+     "target_method": 2,
+     "frame_kind": "target",
+     "frame": "_ticks",
+     "frame_method": 5,
+     "encoded_addend": "0000"
+    },
+    {
+     "offset": 0,
+     "width": 2,
+     "loc": "base16",
+     "target_kind": "external",
+     "target": "_status",
+     "target_method": 2,
+     "frame_kind": "target",
+     "frame": "_status",
+     "frame_method": 5,
+     "encoded_addend": "0000"
+    }
+   ],
+   "external_scopes": {
+    "_status": "external",
+    "_ticks": "external",
+    "_step": "external",
+    "_pick": "external"
+   },
+   "data_publics": []
+  },
+  "communal@0": {
+   "fixup_target_counts": {
+    "CONST|base16|external|_ticks": 1,
+    "CONST|base16|external|_status": 1,
+    "UNIT_TEXT|offset16|external|_ticks": 6,
+    "UNIT_TEXT|offset16|external|_status": 1,
+    "UNIT_TEXT|offset16|segment|CONST": 3
+   },
+   "ordered_const_fixups": [
+    {
+     "offset": 2,
+     "width": 2,
+     "loc": "base16",
+     "target_kind": "external",
+     "target": "_ticks",
+     "target_method": 2,
+     "frame_kind": "target",
+     "frame": "_ticks",
+     "frame_method": 5,
+     "encoded_addend": "0000"
+    },
+    {
+     "offset": 0,
+     "width": 2,
+     "loc": "base16",
+     "target_kind": "external",
+     "target": "_status",
+     "target_method": 2,
+     "frame_kind": "target",
+     "frame": "_status",
+     "frame_method": 5,
+     "encoded_addend": "0000"
+    }
+   ],
+   "external_scopes": {
+    "_status": "communal",
+    "_ticks": "communal",
+    "_step": "external",
+    "_pick": "external"
+   },
+   "data_publics": []
+  },
+  "initialized@0": {
+   "fixup_target_counts": {
+    "CONST|base16|segment|UNIT7_DATA": 3,
+    "UNIT_TEXT|offset16|segment|UNIT7_DATA": 7,
+    "UNIT_TEXT|offset16|segment|CONST": 2
+   },
+   "ordered_const_fixups": [
+    {
+     "offset": 2,
+     "width": 2,
+     "loc": "base16",
+     "target_kind": "segment",
+     "target": "UNIT7_DATA",
+     "target_method": 0,
+     "frame_kind": "target",
+     "frame": "UNIT7_DATA",
+     "frame_method": 5,
+     "encoded_addend": "0000"
+    },
+    {
+     "offset": 0,
+     "width": 2,
+     "loc": "base16",
+     "target_kind": "segment",
+     "target": "UNIT7_DATA",
+     "target_method": 0,
+     "frame_kind": "target",
+     "frame": "UNIT7_DATA",
+     "frame_method": 5,
+     "encoded_addend": "0000"
+    },
+    {
+     "offset": 4,
+     "width": 2,
+     "loc": "base16",
+     "target_kind": "segment",
+     "target": "UNIT7_DATA",
+     "target_method": 0,
+     "frame_kind": "target",
+     "frame": "UNIT7_DATA",
+     "frame_method": 5,
+     "encoded_addend": "0000"
+    }
+   ],
+   "external_scopes": {
+    "_step": "external",
+    "_pick": "external"
+   },
+   "data_publics": [
+    {
+     "name": "_status",
+     "segment": "UNIT7_DATA",
+     "offset": 0
+    },
+    {
+     "name": "_ticks",
+     "segment": "UNIT7_DATA",
+     "offset": 3
+    }
+   ]
+  }
+ },
+ "expect": {
+  "extern@0": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; mov es, word ptr [2]; shl bx, 1; shl bx, 1; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [2]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si]; mov di, word ptr es:[si + 2]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x70; jl 0x74; cmp ax, cx; jb 0x74; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+  "communal@0": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; mov es, word ptr [2]; shl bx, 1; shl bx, 1; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [2]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si]; mov di, word ptr es:[si + 2]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x70; jl 0x74; cmp ax, cx; jb 0x74; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf",
+  "initialized@0": "push bp; mov bp, sp; mov es, word ptr [0]; mov bx, word ptr [bp + 6]; mov byte ptr es:[bx], 0x2f; mov ax, word ptr [bp + 8]; mov dx, word ptr [bp + 0xa]; shl bx, 1; shl bx, 1; add word ptr es:[bx + 3], ax; adc word ptr es:[bx + 5], dx; pop bp; retf; push bp; mov bp, sp; sub sp, 8; push di; push si; mov bx, word ptr [bp + 6]; mov es, word ptr [0]; mov si, word ptr [bp + 8]; shl si, 1; shl si, 1; mov ax, word ptr es:[si + 3]; mov dx, word ptr es:[si + 5]; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], dx; mov si, bx; shl si, 1; shl si, 1; mov cx, word ptr es:[si + 3]; mov di, word ptr es:[si + 5]; mov word ptr [bp - 8], cx; mov word ptr [bp - 6], di; cmp dx, di; jg 0x6c; jl 0x70; cmp ax, cx; jb 0x70; mov ax, cx; mov dx, di; pop si; pop di; mov sp, bp; pop bp; retf"
+ },
+ "game_corroboration": {
+  "replay": "evidence/canonical/audio-track-owner/replay.py",
+  "review": "evidence/canonical/audio-track-owner/review.md",
+  "receipt": "evidence/canonical/audio-track-owner/receipt.json",
+  "scope": "Current complete TU and eighteen accepted historical peers; no array owner/capacity or whole historical TU byte-exact claim."
+ }
+}
