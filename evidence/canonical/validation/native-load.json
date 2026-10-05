@@ -23,13 +23,13 @@
     "debugger_unchanged": true,
     "only_expected_disposable_changes": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\report.json",
-  "build_report_sha256": "56475307be1cec49a27cb8dc5f85f797bba6364aa693137e75fa2ce1e1efe0c7",
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-callback-current\\report.json",
+  "build_report_sha256": "ed7cd151fbc236daacf1a7b3afcd151790c74c53fac3e2cd76a9b99ec146d6f6",
   "verified_build_input_count": 419,
   "verified_native_service_count": 78,
-  "current_program_sha256": "7d0b445914de8c2ed828f738d941d8679768c96ffd8a49521f5bddb0ed49975d",
+  "current_program_sha256": "ad252c0231ea5e2e04403fddf52406a7c911edc37878c56b029242f8c891d585",
   "platform_manifest_sha256": "0e5443fd1e385d25d82535b10700808ff2bde96b06a0814814e75bc0889aace0",
-  "executable_sha256": "786ec1a52b8e31e1498d8cc12e067cfd7269b87a6c375848fa3ffd8438a175dc",
+  "executable_sha256": "3e057d0993d2df7b634973adf8eb082dc817809fdab2cb4f5e40c99a336f9511",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -67,16 +67,16 @@
     "--batch",
     "-q",
     "-x",
-    "D:\\Prog\\simant_recon\\build\\nl3\\gdb.txt",
+    "D:\\Prog\\simant_recon\\build\\nl4\\gdb.txt",
     "--args",
-    "D:\\Prog\\simant_recon\\build\\portable-continued-final\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\portable-callback-current\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "35000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\nl3\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\nl4\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\nl3\\a",
+    "D:\\Prog\\simant_recon\\build\\nl4\\a",
     "--seed",
     "1",
     "--input-script",
@@ -87,18 +87,18 @@
   "timed_out": false,
   "fixture_event_count": 45,
   "injected_event_count": 45,
-  "outer_loops": 60736,
+  "outer_loops": 61376,
   "source_returns": [
     {
       "call": 1,
       "event": "o09_35F5_0188-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\nl4\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 27592,
+      "trace_elapsed_ms": 27672,
       "use_last": 1
     },
     {
@@ -106,9 +106,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 1,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\nl4\\a\\a.ant",
       "title": "Save Game",
-      "trace_elapsed_ms": 24078,
+      "trace_elapsed_ms": 24172,
       "verb": "SAVE"
     },
     {
@@ -116,9 +116,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 0,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\nl4\\a\\a.ant",
       "title": "Load Game",
-      "trace_elapsed_ms": 34187,
+      "trace_elapsed_ms": 34265,
       "verb": "LOAD"
     },
     {
@@ -126,18 +126,18 @@
       "event": "LoadGame-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\nl4\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 34703
+      "trace_elapsed_ms": 34797
     }
   ],
   "load_read_calls": 307,
   "load_requested_bytes": 48386,
   "load_returned_bytes": 48386,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\nl3\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\nl4\\frame.bmp",
     "size": 1228938,
     "sha256": "5f3b0080fb07c24c43d25ec3cf0b6c3de316c87911a77346187b845b807ad659",
     "width": 640,
@@ -147,7 +147,7 @@
     "valid": true
   },
   "saved_file": {
-    "path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
+    "path": "D:\\Prog\\simant_recon\\build\\nl4\\a\\a.ant",
     "size": 48386,
     "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
   },
@@ -157,7 +157,7 @@
       "after": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
     }
   },
-  "events_sha256": "a6c27593ab50397d0ea969c0bc48469a6335058570ad9c084c51b94c8d48e597",
+  "events_sha256": "5b54b1ddb41f2b465bf30d7ccb6ec1f07914552a7ff65b9b687ff2d7310e1ace",
   "scope": "Current original main and ordinary SDL UI create then load a disposable SaveRec file. Read-only debugger observations establish successful source returns and complete reads. No after-load state equivalence, DOS save compatibility, resave, fixed terrain-seed or whole-game correctness claim.",
   "build_preview_limitations": [
     {

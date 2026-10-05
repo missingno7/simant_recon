@@ -4,8 +4,8 @@
   "inputs": [
     {
       "path": "src/program.json",
-      "sha256": "7d0b445914de8c2ed828f738d941d8679768c96ffd8a49521f5bddb0ed49975d",
-      "size": 244044
+      "sha256": "ad252c0231ea5e2e04403fddf52406a7c911edc37878c56b029242f8c891d585",
+      "size": 249977
     },
     {
       "path": "layout/toolchain.json",
@@ -241,15 +241,16 @@
       "basename": "U001",
       "source_identity": {
         "path": "src/S00/m31AD.asm",
-        "sha256": "8ffce643519fc5d6fdb3d1d688b1e1e738857b9d04a50544b91bb5076cdaef7f",
-        "size": 84042
+        "sha256": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
+        "size": 84117
       },
       "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U001.OBJ",
-        "sha256": "f44df0165e7ab30e4a31d98ee73cc9af066de4850a5122e9c568a120cdc07858",
-        "size": 14776
-      }
+        "sha256": "40696aaa8603ba4eb94f828eeea31d616634ae217a18938c71079efe1920b36b",
+        "size": 14811
+      },
+      "owned_code_reference_count": 5
     },
     {
       "key": "S00:31AD@2AB4",
@@ -307,15 +308,16 @@
       "basename": "U004",
       "source_identity": {
         "path": "src/S01/m3126.asm",
-        "sha256": "5cfa946e9ec5da99b70726c0d30550721c25103bbcfd9e9a3d665ca68831fc2b",
-        "size": 46169
+        "sha256": "6136f2dab5aa8a2b2f9608f5ef2ae4287d04ceeaf5510ed6bd7310fb54fdeaba",
+        "size": 46177
       },
       "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U004.OBJ",
-        "sha256": "332fe6254b30c5bc3f739a024c16fb6e786b954bc0e2709e5547564daec2dfa8",
-        "size": 10056
-      }
+        "sha256": "1b970bc4e300ff33c993ee624fc34028af76a10752bfc3f86498dd7f66105e21",
+        "size": 10063
+      },
+      "owned_code_reference_count": 1
     },
     {
       "key": "S01:328E",
@@ -373,15 +375,16 @@
       "basename": "U007",
       "source_identity": {
         "path": "src/S02/m3126.asm",
-        "sha256": "fcc39ce40a7355fc18024397e9be8666a398609fca720b18e77a41b694996292",
-        "size": 20525
+        "sha256": "5393ee21872be740e8386676db36bff54a9539e89a61bcbe47fdc0b80755fe8d",
+        "size": 20567
       },
       "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U007.OBJ",
-        "sha256": "53ddfdfc7369a32ec227c6716af11410b976ec1b955a78dd698a1da98bcb2746",
-        "size": 5000
-      }
+        "sha256": "93bc3ce57ee6e19cc82b6478674cdde482144953370356e5c4c02d370f11dac8",
+        "size": 5021
+      },
+      "owned_code_reference_count": 3
     },
     {
       "key": "S03:3126",
@@ -395,21 +398,16 @@
       "basename": "U008",
       "source_identity": {
         "path": "src/S03/m3126.asm",
-        "sha256": "33c47fd0113e14c015a9a0b43625d87d00afb46fb2f915b928f3a982130e72d8",
-        "size": 37090
+        "sha256": "7c5bacf108c4dd5f747cee0905cd3e119818cf4f854600f4b21153ed03b716ea",
+        "size": 37132
       },
-      "compiler_log": {
-        "path": "build/dos/U008.log",
-        "sha256": "2a4a5dda4661bacd8765df912bef52af295f789686f9edd6b43b4aa2f24a87f2",
-        "size": 204
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U008.OBJ",
-        "sha256": "0079ce43ff1d3988c35b059915301bac1e982103e6f1bfdfad414c70254cf142",
-        "size": 8328
+        "sha256": "5d8a8daab1fdc7ca6859f0ca0db619fcb1632a8d61800629487fd14be11a10ee",
+        "size": 8349
       },
-      "owned_code_reference_count": 4
+      "owned_code_reference_count": 7
     },
     {
       "key": "S03:3253",
@@ -448,12 +446,7 @@
         "sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
         "size": 40733
       },
-      "compiler_log": {
-        "path": "build/dos/U010.log",
-        "sha256": "7fb287451c27de312390a5728af98301a597444064d339ac97d5dbea2316e9f6",
-        "size": 204
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U010.OBJ",
         "sha256": "3858f88ebd4bb31c9cb1b7bfd6c731873fd92e453bae4e17dc208f0a74b7ea10",
@@ -3439,12 +3432,7 @@
         "sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
         "size": 190
       },
-      "compiler_log": {
-        "path": "build/dos/U127.log",
-        "sha256": "b13f8b930a87b38873d2269d511df2291e52db2e194761364a51d89048db3681",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U127.OBJ",
         "sha256": "7ed8defceeca616cb3c452f65cc1ecce0855e8b54d9c840ae5dc841203521ee9",
@@ -3487,12 +3475,7 @@
         "sha256": "ca5eb0d24c723abf646adcb03a1afacfc0d5000e13136ec7807a764c8e567a5f",
         "size": 65
       },
-      "compiler_log": {
-        "path": "build/dos/U128.log",
-        "sha256": "383bb787250a3aa93ef710be0a6cdf44b96077ac62771483eafdb002b4854d5c",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U128.OBJ",
         "sha256": "0ccc9707564d946d03b9a4e913125851f0dedd0de1fb9ff9cbeef2144637efe2",
@@ -3549,12 +3532,7 @@
         "sha256": "e65f8b8d0261630932074bcedcbaf6ffed9ade4772bd96e3ebe74af6a2790d25",
         "size": 142
       },
-      "compiler_log": {
-        "path": "build/dos/U129.log",
-        "sha256": "e400f56e5cec6b868ebb125d8e486aa7ca0482a881174ec2bde783d7c11a48bc",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U129.OBJ",
         "sha256": "9902a7eaa6b2384976460f10f51d15a1afb668fb84c733c0cc8f162b9a9544f9",
@@ -3611,12 +3589,7 @@
         "sha256": "ae6d7471d89259d5ba656d7d3ac2be12a141d13812bf724c204aad6e8bc841dd",
         "size": 352
       },
-      "compiler_log": {
-        "path": "build/dos/U130.log",
-        "sha256": "fc14366a48cbdc5c549c0fd01c4b28b8d6ad104b2ea13735bd1e972742389216",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U130.OBJ",
         "sha256": "8e27cde0384962cfaf6015c19b889a5dbbeb12d41e24f273f122730549a63c7e",
@@ -3764,12 +3737,7 @@
         "sha256": "df1e92794d57c8fa0a602102b4d18fa8d42c2d1d9be1c87b3047de5fa8da7006",
         "size": 196
       },
-      "compiler_log": {
-        "path": "build/dos/U131.log",
-        "sha256": "06046522ead3cb70df8227837a14dcdea060aa222dfb79b138d0194a0e3ed494",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U131.OBJ",
         "sha256": "0bf79a3b16bcbe98d5d619bf3f1ca0c985bf35b55ba50186ea4f8f12ba5913c4",
@@ -3847,12 +3815,7 @@
         "sha256": "c9457e4a6c711c889e9be3bc57bf38f86aea710f78297caf4b998f208e5a6c20",
         "size": 1034
       },
-      "compiler_log": {
-        "path": "build/dos/U132.log",
-        "sha256": "70e935d53419c2a8ce314a49aa1271d92f4325282c0dbb4fd1af2739349c45fc",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U132.OBJ",
         "sha256": "2343c4545c1c7155501603cb5a1db5062ae5cdcbcd82b8a44f764eaba80c26cd",
@@ -3972,12 +3935,7 @@
         "sha256": "81ba70b1b41be95b198a1b27332e22a713b27089540c4757f6b417950fa2a6fd",
         "size": 149
       },
-      "compiler_log": {
-        "path": "build/dos/U133.log",
-        "sha256": "9bef81983182db94cb83150ea8d9ea2521f1e60e5a34bc8dc05a7c9e53b6981a",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U133.OBJ",
         "sha256": "c55d9a633fbb87ce3039084b16e3332c2d352184fa911335be520fc8cee9ab14",
@@ -4041,12 +3999,7 @@
         "sha256": "e9b3d73a57ce9442bc51ab3b839bd960ea00a6f65f837d4bd7c769ef532599f7",
         "size": 92
       },
-      "compiler_log": {
-        "path": "build/dos/U134.log",
-        "sha256": "075db040fd583ad32e346e7bbb5de72e21de7b465a3428c2de144f246df34884",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U134.OBJ",
         "sha256": "f255324f17d516a70f369f06df669173c7de25da6ca1986551def3bf99c2c24c",
@@ -4110,12 +4063,7 @@
         "sha256": "fa8ff59a015c5078ce7b0d9c80a7a6c1d79539caac12a13b5b726069557fe48d",
         "size": 90
       },
-      "compiler_log": {
-        "path": "build/dos/U135.log",
-        "sha256": "140b17afc205ee0e5e5fa1951c8b4ebc5610475e106e7913824bc4ccd566cbd1",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U135.OBJ",
         "sha256": "a9a249451a869ff03b3a4811b47607396dd01561ee048edd4e0d145ab49dafd7",
@@ -4156,12 +4104,7 @@
         "sha256": "8b1b0eb6cee06eaf04490d4ca6e4199238116ebb1eb3efbf51ee05f2dc404c52",
         "size": 424
       },
-      "compiler_log": {
-        "path": "build/dos/U136.log",
-        "sha256": "117c6d303d86b1e27eb004ac585d3f046e1d1ecbf6d302f77d06d60fec2b0c11",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U136.OBJ",
         "sha256": "2de015075dc308ec5d0e9c801070c24299b6ad56218f900cfe9acb4cfd05303e",
@@ -4253,12 +4196,7 @@
         "sha256": "8918adcd4f2cd79e5ef4bb511b314991ebf3f5ad823a498b6094a433e152c5e5",
         "size": 145
       },
-      "compiler_log": {
-        "path": "build/dos/U137.log",
-        "sha256": "2d6d44ab136eea89cac5c9d1af15aa2614145b25362d7a4136312f4fb5d00526",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U137.OBJ",
         "sha256": "58fa6df1d7a0ab9e5ee9933cf1c68815044b53cacb81e116c084bdc3e95d991a",
@@ -4315,12 +4253,7 @@
         "sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
         "size": 205
       },
-      "compiler_log": {
-        "path": "build/dos/U138.log",
-        "sha256": "7c4ffa4479810d8ff0ac3f60a87d2aa647d7a181a38543c86348f0d2275f8bd3",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U138.OBJ",
         "sha256": "7dfed71bad466c6a4ec80dcd5903433a11831dd2aad1ae1e3e849f81734dcdea",
@@ -4363,12 +4296,7 @@
         "sha256": "78e5070a594461df8ffa0eaaa8a6d69302652c0f57b9f61c8be79f5112f4646d",
         "size": 92
       },
-      "compiler_log": {
-        "path": "build/dos/U139.log",
-        "sha256": "f6ab34487998371665377990deb514975282a58eaa31d83bf32237b29dffec51",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U139.OBJ",
         "sha256": "03c0fd45afbe5284da9dde103229f65e97d4ff5c212a8e923ab533214ce6914c",
@@ -4409,12 +4337,7 @@
         "sha256": "a052b1148cf3dca2ee2157bffeee5e2b92b3f51ef78235e37c8e5fe5d8b4f4d8",
         "size": 458
       },
-      "compiler_log": {
-        "path": "build/dos/U140.log",
-        "sha256": "21a063edce70f0558da10b5269d41a11de5783707eef23b4bc58f1384a599f12",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U140.OBJ",
         "sha256": "b9c1ef7ce120185ddd02ab4b3b9e11929528aa0205d2d7e122cbe226d7cf7e2c",
@@ -4464,12 +4387,7 @@
         "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
         "size": 1295
       },
-      "compiler_log": {
-        "path": "build/dos/U141.log",
-        "sha256": "edaf777edad1b6e5f17ebc5b339b66e432552f2244d49978bd3d8cf1401ed125",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U141.OBJ",
         "sha256": "3de08725a65f18a2ef2b6cb9be8fba0ae1c4760176616d533a11629a2429f878",
@@ -4519,12 +4437,7 @@
         "sha256": "f32a379106e4aecef2c37e9da2ba8f8e97ce7f8934e389ca8a2c31cfec27d1b3",
         "size": 74
       },
-      "compiler_log": {
-        "path": "build/dos/U142.log",
-        "sha256": "f63b548a5ed903d3fe0df4e64156629a1d6a964729def10ed5fc045760a9a097",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U142.OBJ",
         "sha256": "f801349f90cfb1fa52b431446f185df5ba4aaad8658c10d3adbc1ac6ad6a43b0",
@@ -4574,12 +4487,7 @@
         "sha256": "f5c1287217cc9863e38a636036a62b1c47ba72d073e557b5c6289bdd5647605f",
         "size": 18
       },
-      "compiler_log": {
-        "path": "build/dos/U143.log",
-        "sha256": "9c1c814b3af3dc8af144384942964e2a7fdf7af52ea23f4c29a49543b23092d4",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U143.OBJ",
         "sha256": "84b9cc6f798092ea8472b4c7e8965c10ddc58fdcf87c46ae155dc1ac2f30e86b",
@@ -4620,12 +4528,7 @@
         "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
         "size": 47
       },
-      "compiler_log": {
-        "path": "build/dos/U144.log",
-        "sha256": "58e7533ad2157c745cdc10211eb37df75c6a5dc4663beef653ee7f5225d4ea37",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U144.OBJ",
         "sha256": "6e4c70ecf49c5f952be4482997987e6f843448e2c97087ab0e6cd8f2bb0dd768",
@@ -4666,12 +4569,7 @@
         "sha256": "0dcaae2b70a71ba380a4434ab04e5fd93c908fafa16e27927619eb3e337dff4c",
         "size": 190
       },
-      "compiler_log": {
-        "path": "build/dos/U145.log",
-        "sha256": "b03ed96c8f248b1912d094165dc561d55057c184674a9c7ba6fbbe0153ac8fa9",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U145.OBJ",
         "sha256": "63989f57f31f6efd0aa6b9051246fd538decf17062ee15a31283801daaf71d81",
@@ -4721,12 +4619,7 @@
         "sha256": "b9d65fc35f1cd8d069f4b57b2f44771ff08fa10c403ee4dc9ed7e2097e99e35d",
         "size": 190
       },
-      "compiler_log": {
-        "path": "build/dos/U146.log",
-        "sha256": "f2822c9bf71ff87575d0513ef5304675d5c9f6d132a5467f883803fe24d77af8",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U146.OBJ",
         "sha256": "bd155ad612ee5de479dc8f876bcbf9b799d9b90b2b12756ccbec624fecaa2b0a",
@@ -4769,12 +4662,7 @@
         "sha256": "83824c6ff01de286edd65e26c55105c3a50958b0f581d889963031234349e89b",
         "size": 33
       },
-      "compiler_log": {
-        "path": "build/dos/U147.log",
-        "sha256": "49210e14b1ae39ddd2a381c15537fbf3e9a07afadd8ed654a3ec9ced7ab27648",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U147.OBJ",
         "sha256": "85e4324e46798bc37f9bb6695f815b492103eb386badf801cb1eb7cefa0fe2ed",
@@ -4824,12 +4712,7 @@
         "sha256": "2ce3aad21f7d625d7bd1be0a5832b4512918a91d17257172b6171a515ac1f2cf",
         "size": 181
       },
-      "compiler_log": {
-        "path": "build/dos/U148.log",
-        "sha256": "9d25923907c37f6c5eeb1f392f34565baf11349c1038805f942510a5672f777f",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U148.OBJ",
         "sha256": "5a480aa7d11b29014001631710c5869d52e19e568c3e1aacf569628441c552dd",
@@ -4879,12 +4762,7 @@
         "sha256": "27c6dd4d4f5781765b866824b125470b66a3c1b2aae463f2a270d59717100e40",
         "size": 1526
       },
-      "compiler_log": {
-        "path": "build/dos/U149.log",
-        "sha256": "6cbbea58621146a7f91e682a56b28a5cf6f19134e32bbeb4062236380f13b79b",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U149.OBJ",
         "sha256": "53e92395788ee35dc6d205c863779e0acffff71ff2b830adbfdeb06fbac5b1bc",
@@ -4944,12 +4822,7 @@
         "sha256": "33ea85f0b46e55cbe52ca7d758abbc9bf0e991b0117070841e870b4519b937c2",
         "size": 350
       },
-      "compiler_log": {
-        "path": "build/dos/U150.log",
-        "sha256": "73de5208920e6ebea6c5ce4c7b404ef01ccd7693b60067812655f9cc89536b57",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U150.OBJ",
         "sha256": "bd3d6d56f438d0ef0ea9e0e957d1d33d6aca950e6a1d35fedf4c8bd1494bc899",
@@ -5069,12 +4942,7 @@
         "sha256": "1b91495ff2aae0ba84633e99863fdc1900648b33452d7f48397193b840e36a1b",
         "size": 161
       },
-      "compiler_log": {
-        "path": "build/dos/U151.log",
-        "sha256": "91ec1d384b4168b34e8e6dd2b94ef3c3ec30d7fe7e2ea8d2c95202e5184049ce",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U151.OBJ",
         "sha256": "bdcd0070b78071c405bb9acfc42823574516fe443f36f4ae4aa10a7400a583d7",
@@ -5145,12 +5013,7 @@
         "sha256": "bc537f033398e20d239796c7873a2b0a8efc82449c50219a2822918af398c66c",
         "size": 296
       },
-      "compiler_log": {
-        "path": "build/dos/U152.log",
-        "sha256": "719ab514c87c9706f3337245117da69339194d97e17b7ac5eb5d2857d91a3458",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U152.OBJ",
         "sha256": "fca711262ecef57bee08c3a9faee1089731ce079510106c1f45a6c14d143184f",
@@ -5270,12 +5133,7 @@
         "sha256": "c5d934e134049e4c7e50a65aca8dc2327633b83523a3a9853e4842a31e999e41",
         "size": 305
       },
-      "compiler_log": {
-        "path": "build/dos/U153.log",
-        "sha256": "0944eb6a3c9c436bd868b4ac8d63dc3c44b514e2a4c1541f02115e2ace6a82a1",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U153.OBJ",
         "sha256": "129e00a97879bf41dd131b295ec92022ba50d3946a3f38d57485f9ca6125fa4f",
@@ -5346,12 +5204,7 @@
         "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
         "size": 658
       },
-      "compiler_log": {
-        "path": "build/dos/U154.log",
-        "sha256": "80f668be0cc1a50a57f8de7c6f118bd8dc57cf3efa348b323c3a8727ad0dc590",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U154.OBJ",
         "sha256": "830da27f8c135dc1678aea534d30c4592abcfaa7b3cdf015372158c2a007d638",
@@ -5412,12 +5265,7 @@
         "sha256": "67be68b136c4d6cbf8ee7d82fc5dcfa7e505682f326b02a560b93c6313325ea4",
         "size": 102
       },
-      "compiler_log": {
-        "path": "build/dos/U155.log",
-        "sha256": "07399ce67561b679aac2e0fb5df3d33314a0c03b6cd8058f6c5aed3ec98b05b8",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U155.OBJ",
         "sha256": "5b3bc3f51a21ac6827fc2468cf490a3ff45e37be4dd4ebb62926e0c55029a8b0",
@@ -5481,12 +5329,7 @@
         "sha256": "c5f5990f70682274b9b1191be403dd84b04d24bca3aee657d51be83e3af1015a",
         "size": 31
       },
-      "compiler_log": {
-        "path": "build/dos/U156.log",
-        "sha256": "0ee59fb2fc0298c500cbfb3c85301e6569dc4e299170717fdfe26007d9a08c74",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U156.OBJ",
         "sha256": "2870913ce8489653735cd9ea6620b0a6cdd6cc2a1d3cc818a6f3ef0e3bc5c367",
@@ -5527,12 +5370,7 @@
         "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
         "size": 280
       },
-      "compiler_log": {
-        "path": "build/dos/U157.log",
-        "sha256": "ca49ec80b42402b446ee1346a5c8e68d62f6483f0cac3fe8ad342c1ad6404f23",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U157.OBJ",
         "sha256": "f3ff50fea4e6c4557e4cc24bdcee02b33541b3f8a8936c92ab4546a284cb5050",
@@ -5583,12 +5421,7 @@
         "sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244",
         "size": 178
       },
-      "compiler_log": {
-        "path": "build/dos/U158.log",
-        "sha256": "c18b6d2f9ac34ac7a853b87ec14400ad78d48e0f95e214ccdd61f70677fbad20",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U158.OBJ",
         "sha256": "f78ccaf3be5e2c16992df5b7c3d27ee5be8a5541f87787e4c991b2a33505feaf",
@@ -5666,12 +5499,7 @@
         "sha256": "94fd7ae1a436fe595f4ad987e24f21773633c95af9f121f03581002e54a3ce48",
         "size": 463
       },
-      "compiler_log": {
-        "path": "build/dos/U159.log",
-        "sha256": "04c0941724708d41bac282b76cb34423672701bd87376c9b434f1577586cb69b",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U159.OBJ",
         "sha256": "831d334b43c33c2362f6d1f94eef85c66b0ef3b63ed50f0ecfa82c8750b27b02",
@@ -5742,12 +5570,7 @@
         "sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
         "size": 207
       },
-      "compiler_log": {
-        "path": "build/dos/U160.log",
-        "sha256": "84bd22524cab24205fc76d37b742b39dc5ba5aa4546d6fe413d3453adbcaef0c",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U160.OBJ",
         "sha256": "ac85b9e3364722e44073e2bd07e0f5c078340778aa7b3a54a5316aadef70a972",
@@ -5797,12 +5620,7 @@
         "sha256": "53d30a8315c50882c50f857755719eb8c15d9b93c6ecd18d76c69753dc5d9c56",
         "size": 611
       },
-      "compiler_log": {
-        "path": "build/dos/U161.log",
-        "sha256": "841120fd16fb7a3e2f05d34c92c0edccb71c54eac32c00781e510e4cfab69aa7",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U161.OBJ",
         "sha256": "b00223967a2f2f786239570982d3593ecceed0d4cebf34e2eb85628dc00f77c4",
@@ -5964,12 +5782,7 @@
         "sha256": "cc38095d94023d9fe71c8939a7ef3847d51a2d5e4c6392d97e0ed85024b6e082",
         "size": 110
       },
-      "compiler_log": {
-        "path": "build/dos/U162.log",
-        "sha256": "d834f9d81b2e88a9d0aa1e3a2c9ea3ee272f3c2ea888f43f22f26759cda4610a",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U162.OBJ",
         "sha256": "f9abf444abca8fad188dc7c297c0a939a690c50fde85578829ee268500685ab3",
@@ -6040,12 +5853,7 @@
         "sha256": "485e77ca6410fd0a2f1cefd6c6e8a8ae60bd018b150ec73436629a05c498092c",
         "size": 484
       },
-      "compiler_log": {
-        "path": "build/dos/U163.log",
-        "sha256": "5c7c3f7cbff009a9728ef6ff3c8200c0ad98328dc24204a6dea45c066d347663",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U163.OBJ",
         "sha256": "ec0536cc0a4812f788e0c0a4f8d11f49257a6c52e1c934c6c4f1e3742b53c50e",
@@ -6207,12 +6015,7 @@
         "sha256": "14e4a1dee10178208042f2959b670aad9051dfe3dcdcad11d1d3019709b1147a",
         "size": 298
       },
-      "compiler_log": {
-        "path": "build/dos/U164.log",
-        "sha256": "1f23b20c78eec57a164da86f222cf68802221bb43d0ff885740ec4b094818054",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U164.OBJ",
         "sha256": "f1da42f0d2f9a62f2394b9c6b4b4f203dc504db7d20330ded1c4f8d2754eb05e",
@@ -6311,12 +6114,7 @@
         "sha256": "5e57ca8ffae57d5c31840b96eb452a2b732a58be065119a1c89c057c1a4f4ac7",
         "size": 371
       },
-      "compiler_log": {
-        "path": "build/dos/U165.log",
-        "sha256": "dbf9a810af368d19764b43cb1f381e94faf46d501328d00bc885ec3d8725d66c",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U165.OBJ",
         "sha256": "daaf8efcec2d6db889ffb25f6a664c21c9db84868d25fa279abfa6f55b1af604",
@@ -6443,12 +6241,7 @@
         "sha256": "f9746dc82fdfa8f532920e1aeb7d4a75c7ef1cc40ceaae6aae23ecb5f0c7b428",
         "size": 419
       },
-      "compiler_log": {
-        "path": "build/dos/U166.log",
-        "sha256": "f4a1b1dfbf2605274a3add75e5382ef13c69ffa73bc009eb768e7f31e1a13b96",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U166.OBJ",
         "sha256": "6003ae077d9a89e1bf3476301efc22bd6b72708c5888b84b2d3cbe2522b8d55b",
@@ -6617,12 +6410,7 @@
         "sha256": "984e0db28de921d9d4ccd1e0be9f73e40a2880d1786f6222cc1718d2f4e90aec",
         "size": 298
       },
-      "compiler_log": {
-        "path": "build/dos/U167.log",
-        "sha256": "4229f91f3cf2f7d55b64f095e3d977ac896665f5e06891d935257899f27eb41a",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U167.OBJ",
         "sha256": "582550feb1694226a075309ef45bdee8fb11b5b99e8bcc79f393baaf5364cd07",
@@ -6721,12 +6509,7 @@
         "sha256": "26e147cfe361cd74f3baf9c8696c735364d9e5dec663fbd310895cbfaabc8b7f",
         "size": 510
       },
-      "compiler_log": {
-        "path": "build/dos/U168.log",
-        "sha256": "1e594fd351251b5ab3e93d9b272583060a4a45861b136850a48fdbc9f508faa6",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U168.OBJ",
         "sha256": "8a8af5ec87b6c3cd55ad6d3f9dd195834db6aee69cac0cee97bfa01f171acaaa",
@@ -6902,12 +6685,7 @@
         "sha256": "fd2f545af87160b49456eeb534f9400d256d7e0ffe0ec07da21b6d3c86e1bfaf",
         "size": 851
       },
-      "compiler_log": {
-        "path": "build/dos/U169.log",
-        "sha256": "2569da8e1ca6bd1c752a1edafae7b7a8a09eae4f1c9be8595c84d4f39eda5e5c",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U169.OBJ",
         "sha256": "0d6202a8e0910e9582b1d76c7d058060205e7f4e4af86b69e118b2618a718102",
@@ -7146,12 +6924,7 @@
         "sha256": "57ed89be36dac0695106d3ffcf7d89cbf8b9ada0d35c85d9938b14507694edbf",
         "size": 376
       },
-      "compiler_log": {
-        "path": "build/dos/U170.log",
-        "sha256": "117e8b9e14b58f2e4d18892a1e352136126395bd6c5c0d12390d7701f598cc80",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U170.OBJ",
         "sha256": "17a8801bb63781c50ca929187b995ea49179406a65c497dce117429a8ea7d6e9",
@@ -7306,12 +7079,7 @@
         "sha256": "576e0fc638e0274cc5f95b7fde9d78f0a4786ddbad64d8366ac9867fb0387ad5",
         "size": 22
       },
-      "compiler_log": {
-        "path": "build/dos/U171.log",
-        "sha256": "bd035a5b88fe9ae646a4c786af05eaed4876687ab75a0b15ec188607c321d738",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U171.OBJ",
         "sha256": "89aff20d33b8879bb4a769e3c9da66f82449017cc5dcaff84b61e66aa504c4a4",
@@ -7354,12 +7122,7 @@
         "sha256": "3cf7dddcf9188d13f36e25115ac566169adceb938c0f5493a3d9a7faa70d0d7f",
         "size": 83
       },
-      "compiler_log": {
-        "path": "build/dos/U172.log",
-        "sha256": "d269dafb5267bc8cb3562fbe227d0d834e85fbb56c60b7f46bb3e0cc980a7e2a",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U172.OBJ",
         "sha256": "8465d90cf99343bfbad25cc789da04279c04d9aa6e3eaf87629d6faba99f3f12",
@@ -7415,12 +7178,7 @@
         "sha256": "9241c7b8ace381c4226a38f5f109a0d518ef42e7b4de99ed6425aa7346e10602",
         "size": 181
       },
-      "compiler_log": {
-        "path": "build/dos/U173.log",
-        "sha256": "0b022a3a434118eb85baf8f74dc1c59d3b1557d68a8cde6694b028ffc2fac68f",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U173.OBJ",
         "sha256": "6536f2877e65c8a02e78a3362afda2af5ff9485e2ffd9178bba7ea1b17e388b8",
@@ -7463,12 +7221,7 @@
         "sha256": "7933eb61262e3684eb44ee2f5220598e8eb6e4d5f1ff0841837e2831d0264b96",
         "size": 271
       },
-      "compiler_log": {
-        "path": "build/dos/U174.log",
-        "sha256": "eee836df9848b74e0a21c39a17f98a62720460b25fd770feb1e77b7f5edba720",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U174.OBJ",
         "sha256": "c3677b8f48205489a27f4afd483583e7262ca56738823e21b31ce65cf3ceb8b8",
@@ -7518,12 +7271,7 @@
         "sha256": "43432778e132096f7fe228f01d08a510a1b8ad52dd4fb1fd96098f87f2b05fb0",
         "size": 217
       },
-      "compiler_log": {
-        "path": "build/dos/U175.log",
-        "sha256": "d72e7502cf9aed99ca830444cdf832e854efb3109cc9a558d33d3d012d51e85e",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U175.OBJ",
         "sha256": "87e2c69155f82169aefa62708c7435d1f26f816420f384e83ed9cee853a0d437",
@@ -7601,12 +7349,7 @@
         "sha256": "e5895a3a0bfce456576cbd8e2f4174a672c0bade47e4e2bf4883950453adfbbb",
         "size": 297
       },
-      "compiler_log": {
-        "path": "build/dos/U176.log",
-        "sha256": "e09ff5a48350913b726a0af6e3670e53a2686030a39bacb2ba60ef44a6f811cf",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U176.OBJ",
         "sha256": "54fce5d898a55fe76e3a7a268f9122babe81d07b6c9acc47e4bc423a4b616cb9",
@@ -7656,12 +7399,7 @@
         "sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
         "size": 181
       },
-      "compiler_log": {
-        "path": "build/dos/U177.log",
-        "sha256": "6811ac0c07a708f2d131eae9c5a38d1531655fa4d2e2010a8cba1edf0ae3e3cd",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U177.OBJ",
         "sha256": "1f036ccbb76dfa84e0ad393c037b8cf78d852b4f3c764fdfbad49f4d0b803f7b",
@@ -7739,12 +7477,7 @@
         "sha256": "5ffb18cd1256b1d6e42586386a573cd1c62d2bf9c2d6eaaab96d333e9a642f64",
         "size": 212
       },
-      "compiler_log": {
-        "path": "build/dos/U178.log",
-        "sha256": "04c591de97ff46b106d8beb153a5d6a38c0ac6d161762c5f6ef2649e35c28bee",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U178.OBJ",
         "sha256": "d0d8a98125a923af66b2b7ffd965854b896a8b9846a5cd280b69f1329ecb9e1b",
@@ -7829,12 +7562,7 @@
         "sha256": "6d93cb66e2b7badaf17f1258a7d4143bc1f20e5bacceaafba72e47c3e7c00ed4",
         "size": 227
       },
-      "compiler_log": {
-        "path": "build/dos/U179.log",
-        "sha256": "eefc4fa09955682b68ed4b5f857d60d213754c5edc3e176d01b18093d79a8232",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U179.OBJ",
         "sha256": "f237599874ac648d32699075d7868ce53f25f383d7f214893c4f251d70af7d46",
@@ -7898,12 +7626,7 @@
         "sha256": "f132ac4e22801d8576c9bb556fa7b23cd70efe54455b37b1666eeebe173855b4",
         "size": 199
       },
-      "compiler_log": {
-        "path": "build/dos/U180.log",
-        "sha256": "e431fc6a561c9189e8d2dd127dea4137577e0463a21a9fbae3f7358a90310448",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U180.OBJ",
         "sha256": "e54b37583265a8530b1bb4c87c93795f87651d75022ac8c4aeb4572fb46c9f0a",
@@ -7953,12 +7676,7 @@
         "sha256": "283176f1769968d7db9a0e1d002d54fd566e523120285778bdf1b137e106a85e",
         "size": 422
       },
-      "compiler_log": {
-        "path": "build/dos/U181.log",
-        "sha256": "c68efc4e12f10edd7549785cf9b796d9e067e5580f4cd1d3502e4b87fe47abab",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U181.OBJ",
         "sha256": "d04f5aee8d28e979d3b5ddd16c54cb6e3293c4e6ed5de924c5aefc7410d1222f",
@@ -8022,12 +7740,7 @@
         "sha256": "936c6fd4cfe5d394a699374e321287720f7872ea158ec6e2c745e225ed69e619",
         "size": 478
       },
-      "compiler_log": {
-        "path": "build/dos/U182.log",
-        "sha256": "7b24560123854fda62da4a4c6fed8496c010a6f1e77066c2d7b4cd615e16d30a",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U182.OBJ",
         "sha256": "4afbddaab9d3f8cd41b07bc29d6de68ea3118f09fdac2688156781ef8cba6ac6",
@@ -8105,12 +7818,7 @@
         "sha256": "bd868a6383dffecd1999b5facbca9d7be9b961e5b5cd8777552e57e9e08c9d74",
         "size": 105
       },
-      "compiler_log": {
-        "path": "build/dos/U183.log",
-        "sha256": "825f99e9d3048601a0f8d67ff0c1eb00d2d590dcd12e58dc373e1c07bcf9ea48",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U183.OBJ",
         "sha256": "6de71c75651e1f7af5360297688132c308e352bdb45069307f594f6fc9f2aada",
@@ -8153,12 +7861,7 @@
         "sha256": "b93b7067493e084a7a506b711846d6e51a3f76fd966336984e6ad99fbdc670dc",
         "size": 124
       },
-      "compiler_log": {
-        "path": "build/dos/U184.log",
-        "sha256": "5afee1b1cc6b6dd9821c02c2275f22bcf45560f4a607fd0abd9fd844d71585d3",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U184.OBJ",
         "sha256": "91dc6760572cf7669551eaaaa18f866bb5bf9297161a698b25cd2819472ee377",
@@ -8208,12 +7911,7 @@
         "sha256": "6a8afe2038120da5e55ecc3dd4f31fa498fd785d9353d1dd4360d04ac1e885e7",
         "size": 82
       },
-      "compiler_log": {
-        "path": "build/dos/U185.log",
-        "sha256": "f97b7792d275b86771fcd386409ba0e38778f45bde5431e3816e74c73d20b033",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U185.OBJ",
         "sha256": "c9390ee3f1f727f91d5511a08d86fa6644fdfe49b9e7634846197c8c83cd08ff",
@@ -8263,12 +7961,7 @@
         "sha256": "15deda16456dbf034f43c277a6af0c546ee08a5df8a64de536141886c4318e5b",
         "size": 534
       },
-      "compiler_log": {
-        "path": "build/dos/U186.log",
-        "sha256": "f199b1e3babaacc74a69f7df26ecff3eaf58f92c6f84fbf157fea1b1ffe0cb7c",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U186.OBJ",
         "sha256": "460a244358996110697658d38472d14888d7ba99fa8edc3f0abec581b3c1fba8",
@@ -8416,12 +8109,7 @@
         "sha256": "43bf01f2b11fa24353a86aa277aba03f066dcff8265222bdb7542397706eaeed",
         "size": 104
       },
-      "compiler_log": {
-        "path": "build/dos/U187.log",
-        "sha256": "957f62c3ec17a79001dd271cabc148e18276328d36b639a34202e5c18283196b",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U187.OBJ",
         "sha256": "5ff5edd26175bc8883c355ad8fc91ee4b9b50a48df20dfa8ca160945ed25eb79",
@@ -8485,12 +8173,7 @@
         "sha256": "29c746ecf94781180639e6d2f20bc9dc00207c263838ddc5a2888eb6f5d37fab",
         "size": 625
       },
-      "compiler_log": {
-        "path": "build/dos/U188.log",
-        "sha256": "c0e108fe2ee2bd098ffd0e5ea398c000de0fbd03efb2c5d47b11cb9ba6605b46",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U188.OBJ",
         "sha256": "921f2b9daa8877f00115002e4f1e2cfed439d1f671ea95a072f56a353582bc6d",
@@ -8701,12 +8384,7 @@
         "sha256": "d94320b53cd0f3c8843df20c10c305c1a1022dafb4d8318803d7acbd0feb6602",
         "size": 255
       },
-      "compiler_log": {
-        "path": "build/dos/U189.log",
-        "sha256": "6acf202d1a4b5394872f5fadeff55ce4d783fb91b01f711364c1636e33bba9de",
-        "size": 8
-      },
-      "status": "COMPILED",
+      "status": "COMPILED_REUSED",
       "object": {
         "path": "build/dos/objects/U189.OBJ",
         "sha256": "4fc699ec0629828da82b4b57567535455716b4142100ce23349cbbb1a53f9e60",
@@ -10057,7 +9735,7 @@
     {
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
-      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates."
+      "reason": "Twenty-four source-owned code references now have symbolic offsets and mandatory OMF guards, including twelve rectangle-clip callback pairs. Both RTLink versions preserve their owner identities under moved placement. The broader numeric/segment-frame audit remains open; monochrome 8ED8 ownership/extent and unchecked error-path addresses are separate unresolved relationships."
     },
     {
       "id": "ctype-out-of-range-index-layout",
@@ -10167,7 +9845,7 @@
     {
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
-      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates."
+      "reason": "Twenty-four source-owned code references now have symbolic offsets and mandatory OMF guards, including twelve rectangle-clip callback pairs. Both RTLink versions preserve their owner identities under moved placement. The broader numeric/segment-frame audit remains open; monochrome 8ED8 ownership/extent and unchecked error-path addresses are separate unresolved relationships."
     },
     {
       "id": "ctype-out-of-range-index-layout",

@@ -1,23 +1,31 @@
 # Source and portability follow-up
 
-The canonical-source architecture remains intact. This follow-up removes twelve
+The canonical-source architecture remains intact. This follow-up removes twenty-four
 proven historical-layout dependencies and closes a bounded native integer
 conversion gap. It adds no ordinary state owner, semantic overlay or runtime
 body replacement. Published checkpoints are unchanged.
 
 ## Source-owned code addresses
 
-Complete S03 modules now refer symbolically to their own linebuf and xlat_tabs.
-Four old zero offsets and eight table offsets previously incorporated historical
-link placement. All 39 functions and complete code/private-data extents remain
-historically exact. Promotion, validation and DOS compilation now require the
-twelve own-code OMF references, preventing literal-address regressions which
-would otherwise pass historical byte matching.
+The complete S03 modules refer symbolically to their own linebuf and xlat_tabs.
+Twelve drawing wrappers across S00 through S03 now also pass symbolic code offsets to the
+rectangle clipper. Their existing conditional branches independently identify
+the callback body. All 144 claims in the four newly promoted whole TUs remain
+historically exact, including private data and complete extents. S00's existing
+cross-function relocation-order debt remains explicit.
 
-Both real RTLink versions pass the current-source references at historical and
-moved placements. The old-literal negative copies fail eight or twelve operands
-at the alternate placements. The DOSBox checker reads actual linked operands;
-no game procedure runs. See [the source-address proof](../evidence/canonical/s03-owned-addresses/review.md).
+Promotion, validation and DOS compilation require all 24 own-code offsets.
+Callback guards additionally require the target's existing public anchor and
+paired own-segment relocation. No storage, label, procedure, source overlay or
+runtime replacement was added.
+
+Both real RTLink versions pass the current references at historical, zero and
+moved origins. Historical literal negatives fail thirteen references at zero
+origins and all 24 after movement. The DOSBox checker reads actual linked operands
+and verifies both words of every callback. Maps preserve S00's second complete
+contribution and its single alignment byte. No game procedure runs. The combined
+[owned-code proof](../evidence/canonical/owned-code-addresses/review.md) replaces
+the retired S03-only runner and packet.
 
 ## Mechanical native integer conversion
 
@@ -69,9 +77,9 @@ does not block the SDL3 preview.
 | Check | Result |
 |---|---|
 | Historical validator | Pass; 48 compiler probes, exact extents/fixups/runtime proofs |
-| Repository tests | 262 tests, two intentional skips; all others pass |
-| S03 real-linker placement controls | Twelve expected outcomes pass across RTLink 4.00/6.10 |
-| DOS preflight | 190 TUs, 63 storage contracts, twelve owned-code references verified; link correctly refused |
+| Repository tests | 264 tests, two intentional skips; all others pass |
+| Owned-code placement controls | All 24 symbolic references pass in twelve expected outcomes across RTLink 4.00/6.10 |
+| DOS preflight | 190 TUs, 63 storage contracts, twenty-four owned-code references verified; link correctly refused |
 | Native build | 160 canonical C TUs, 78 services, three ASM-data units; both links pass |
 | Native word controls | 113 DOS pairs; 21 distinguished negatives; generic O0/O2 controls pass |
 | RNG | 3,096 trace rows, zero mismatches, negative domain control passes |
@@ -80,7 +88,7 @@ does not block the SDL3 preview.
 | VGA / Save / Load | Pass; 48,386-byte save and 307 complete reads; bounded UI/file flow |
 
 The current local SDL3 executable is
-`build/portable-continued-final/simant-canonical.exe`, with 419 current input
+`build/portable-callback-current/simant-canonical.exe`, with 419 current input
 pins. Current validation receipts live in `evidence/canonical/validation/`.
 The full static semantic reviews still cover all 29 canonical behavioral
 definitions; these follow-up changes do not modify them.
