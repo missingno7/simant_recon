@@ -1,6 +1,6 @@
 {
   "schema": "simant-canonical-storage-contracts-v1",
-  "scope": "Admitted DOS63 shape/type/initial-state contracts; source-owned functional definitions do not claim original producer TU, communal order or historical placement.",
+  "scope": "Admitted DOS shape/type/initial-state contracts for 64 canonical storage TUs; source-owned functional definitions do not claim original producer TU, communal order or historical placement.",
   "active_validation": "Compile current canonical_source with DOS_compile options and compare parsed OMF to expected_object_shape. Historical source receipts are informational; do not compare active source hashes to old receipts.",
   "providers": [
     {
@@ -7462,6 +7462,50 @@
         "work/source-only-dos/selector-minimum-view-bindings-v36.json",
         "work/source-only-dos/selector-minimum-view-contract-v36.json"
       ]
+    },
+    {
+      "module": "source-owned:icon-handle-cell-view",
+      "canonical_source": "src/state/icon-handle-cell-view.c",
+      "DOS_compile": {
+        "basename": "ICONV4",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "data_only": true,
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_46D2",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      },
+      "owners": [
+        {
+          "name": "fd_50F6_46D2",
+          "DOS_public": "_fd_50F6_46D2",
+          "C_declaration": "char far * far * far fd_50F6_46D2;",
+          "DOS_extent_bytes": 4,
+          "initialization": "MSC_startup_zero_common_storage",
+          "extent_scope": "Minimum mutable slot view; not recovered historical maximal extent or defining-TU identity.",
+          "referent_ownership_claimed": false
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/icon-handle-view/review.md",
+        "evidence/canonical/icon-handle-view/receipt.json"
+      ]
     }
   ],
   "in_module_binding_commons": [
@@ -8809,8 +8853,8 @@
     }
   ],
   "counts": {
-    "providers": 63,
-    "provider_objects": 399,
+    "providers": 64,
+    "provider_objects": 400,
     "initialized_providers": 3,
     "initialized_bytes": 50,
     "binding_commons": 34

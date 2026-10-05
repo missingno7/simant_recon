@@ -1,0 +1,1336 @@
+{
+  "schema": "post-reset-graphics-index-failure-v1",
+  "status": "PASS",
+  "scope": "Actual driver reset followed by direct OpenIndex failure prefix through first glyph row loop.",
+  "static_order": {
+    "order": [
+      "real callback reset",
+      "database open",
+      "cursor setup",
+      "video driver setup",
+      "font callback"
+    ],
+    "scope": "Static current complete-TU order only; full f_205F_0004 is not executed."
+  },
+  "cases": [
+    {
+      "height": 0,
+      "real_reset": {
+        "slots": 25,
+        "callback": "1B4E:000C"
+      },
+      "entries": [
+        "OpenIndex",
+        "sprintf",
+        "DosPunt",
+        "Punt",
+        "vsprintf",
+        "sprintf",
+        "f_1B4E_000C",
+        "f_1CE2_01C3",
+        "vsprintf",
+        "f_24AB_038D",
+        "f_1FBD_0000"
+      ],
+      "boundaries": {
+        "open": {
+          "name": "hcegant.ndx",
+          "flags": 32770,
+          "return": -1,
+          "errno": 2
+        },
+        "stdout": "\n\n\n\n",
+        "fatal_text": "FATAL ERROR: PROGRAM ABORTED\nIndex file missing\nDos error: 2: No such file or directory"
+      },
+      "row_entry": {
+        "cx": 0,
+        "dx": 78,
+        "di": 23230,
+        "si": 0,
+        "ds": 0,
+        "es": 21939,
+        "ss": 21939,
+        "sp": 41354,
+        "eflags": 70
+      },
+      "state_before_rows": {
+        "fatal_guard": "0100",
+        "callback_table": "0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b",
+        "font_pointer": "00000000",
+        "font_height": "0000"
+      },
+      "state_after_rows": {
+        "fatal_guard": "c7f1",
+        "callback_table": "8e2bc08e80062622876292462b8b0df7079850c0b82907468a1bff5087088e00ffc72b0801f88a465467c7de06fa1089a5870481c99a005e260a5ee800848ed40000008b26800780c4885046e574830646750600e8f68202030c0846ec01100bc4b87401",
+        "font_pointer": "0698000e",
+        "font_height": "260b"
+      },
+      "fixture_selector": "g_5A97=0 (supported EGA selector); hardware detection is not executed",
+      "stop": "1FBD:0098 before MOV DI,AX",
+      "row_stores": 65536,
+      "distinct_offsets": 65536,
+      "address_trace_sha256": "bb8a1752ec322f4765f11344a43cd38e9a5a508b135bd816b7d24de6ef61c816",
+      "first_offsets": [
+        23230,
+        23309,
+        23388,
+        23467,
+        23546,
+        23625,
+        23704,
+        23783,
+        23862,
+        23941,
+        24020,
+        24099,
+        24178,
+        24257,
+        24336,
+        24415,
+        24494,
+        24573
+      ],
+      "last_offsets": [
+        22993,
+        23072,
+        23151
+      ],
+      "entire_DGROUP_offset_space_visited": true
+    },
+    {
+      "height": 1,
+      "real_reset": {
+        "slots": 25,
+        "callback": "1B4E:000C"
+      },
+      "entries": [
+        "OpenIndex",
+        "sprintf",
+        "DosPunt",
+        "Punt",
+        "vsprintf",
+        "sprintf",
+        "f_1B4E_000C",
+        "f_1CE2_01C3",
+        "vsprintf",
+        "f_24AB_038D",
+        "f_1FBD_0000"
+      ],
+      "boundaries": {
+        "open": {
+          "name": "hcegant.ndx",
+          "flags": 32770,
+          "return": -1,
+          "errno": 2
+        },
+        "stdout": "\n\n\n\n",
+        "fatal_text": "FATAL ERROR: PROGRAM ABORTED\nIndex file missing\nDos error: 2: No such file or directory"
+      },
+      "row_entry": {
+        "cx": 1,
+        "dx": 78,
+        "di": 23230,
+        "si": 70,
+        "ds": 0,
+        "es": 21939,
+        "ss": 21939,
+        "sp": 41354,
+        "eflags": 2
+      },
+      "state_before_rows": {
+        "fatal_guard": "0100",
+        "callback_table": "0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b",
+        "font_pointer": "00000000",
+        "font_height": "0100"
+      },
+      "state_after_rows": {
+        "fatal_guard": "0100",
+        "callback_table": "0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b",
+        "font_pointer": "00000000",
+        "font_height": "0100"
+      },
+      "fixture_selector": "g_5A97=0 (supported EGA selector); hardware detection is not executed",
+      "stop": "1FBD:0098 before MOV DI,AX",
+      "row_stores": 1,
+      "distinct_offsets": 1,
+      "address_trace_sha256": "041fccb602f6350697ecdccebb54ae4a917f72aac49d0262cdfb9d04224553d2",
+      "first_offsets": [
+        23230
+      ],
+      "last_offsets": [
+        23230
+      ],
+      "entire_DGROUP_offset_space_visited": false
+    },
+    {
+      "height": 8,
+      "real_reset": {
+        "slots": 25,
+        "callback": "1B4E:000C"
+      },
+      "entries": [
+        "OpenIndex",
+        "sprintf",
+        "DosPunt",
+        "Punt",
+        "vsprintf",
+        "sprintf",
+        "f_1B4E_000C",
+        "f_1CE2_01C3",
+        "vsprintf",
+        "f_24AB_038D",
+        "f_1FBD_0000"
+      ],
+      "boundaries": {
+        "open": {
+          "name": "hcegant.ndx",
+          "flags": 32770,
+          "return": -1,
+          "errno": 2
+        },
+        "stdout": "\n\n\n\n",
+        "fatal_text": "FATAL ERROR: PROGRAM ABORTED\nIndex file missing\nDos error: 2: No such file or directory"
+      },
+      "row_entry": {
+        "cx": 8,
+        "dx": 78,
+        "di": 23230,
+        "si": 560,
+        "ds": 0,
+        "es": 21939,
+        "ss": 21939,
+        "sp": 41354,
+        "eflags": 6
+      },
+      "state_before_rows": {
+        "fatal_guard": "0100",
+        "callback_table": "0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b",
+        "font_pointer": "00000000",
+        "font_height": "0800"
+      },
+      "state_after_rows": {
+        "fatal_guard": "0100",
+        "callback_table": "0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b",
+        "font_pointer": "00000000",
+        "font_height": "0800"
+      },
+      "fixture_selector": "g_5A97=0 (supported EGA selector); hardware detection is not executed",
+      "stop": "1FBD:0098 before MOV DI,AX",
+      "row_stores": 8,
+      "distinct_offsets": 8,
+      "address_trace_sha256": "a4c8dbded1200759e53d0075b5fe86a4c636d2729049ca508b32e291a5e3b3d9",
+      "first_offsets": [
+        23230,
+        23309,
+        23388,
+        23467,
+        23546,
+        23625,
+        23704,
+        23783
+      ],
+      "last_offsets": [
+        23625,
+        23704,
+        23783
+      ],
+      "entire_DGROUP_offset_space_visited": false
+    },
+    {
+      "height": 13,
+      "real_reset": {
+        "slots": 25,
+        "callback": "1B4E:000C"
+      },
+      "entries": [
+        "OpenIndex",
+        "sprintf",
+        "DosPunt",
+        "Punt",
+        "vsprintf",
+        "sprintf",
+        "f_1B4E_000C",
+        "f_1CE2_01C3",
+        "vsprintf",
+        "f_24AB_038D",
+        "f_1FBD_0000"
+      ],
+      "boundaries": {
+        "open": {
+          "name": "hcegant.ndx",
+          "flags": 32770,
+          "return": -1,
+          "errno": 2
+        },
+        "stdout": "\n\n\n\n",
+        "fatal_text": "FATAL ERROR: PROGRAM ABORTED\nIndex file missing\nDos error: 2: No such file or directory"
+      },
+      "row_entry": {
+        "cx": 13,
+        "dx": 78,
+        "di": 23230,
+        "si": 910,
+        "ds": 0,
+        "es": 21939,
+        "ss": 21939,
+        "sp": 41354,
+        "eflags": 6
+      },
+      "state_before_rows": {
+        "fatal_guard": "0100",
+        "callback_table": "0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b",
+        "font_pointer": "00000000",
+        "font_height": "0d00"
+      },
+      "state_after_rows": {
+        "fatal_guard": "0100",
+        "callback_table": "0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b0c004e1b",
+        "font_pointer": "00000000",
+        "font_height": "0d00"
+      },
+      "fixture_selector": "g_5A97=0 (supported EGA selector); hardware detection is not executed",
+      "stop": "1FBD:0098 before MOV DI,AX",
+      "row_stores": 13,
+      "distinct_offsets": 13,
+      "address_trace_sha256": "9869d8229be3cd70a79471efd95016b8c89836708e2b28fe70ff28fa3164458f",
+      "first_offsets": [
+        23230,
+        23309,
+        23388,
+        23467,
+        23546,
+        23625,
+        23704,
+        23783,
+        23862,
+        23941,
+        24020,
+        24099,
+        24178
+      ],
+      "last_offsets": [
+        24020,
+        24099,
+        24178
+      ],
+      "entire_DGROUP_offset_space_visited": false
+    }
+  ],
+  "whole_TU_comparisons": [
+    {
+      "key": "root:1B4E",
+      "object_sha256": "35af8d75555859c90fd42af4d22bf43e5cd2dc7cb2f2a642f21781baff7969d5",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "f_1B4E_000C": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_000D": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0025": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_003B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_005E": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0081": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 8,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_00CE": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0110": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_015B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0165": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0177": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_01A1": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_01AE": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0228": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0235": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1B4E_0240": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "cd_root_1B4E_00E8": {
+            "exact": true,
+            "reasons": [],
+            "kind": "DATA_IN_CODE",
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          }
+        },
+        "exact": true,
+        "opaque_data": [
+          {
+            "line": 66,
+            "bytes": 160,
+            "marked": false,
+            "what": "_g_4220"
+          }
+        ],
+        "opaque_unmarked_bytes": 160,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 1545,
+            "reloc_order": "GROUPED",
+            "start": 366672,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "extent": {
+          "exact": true,
+          "reasons": [],
+          "reloc_order": "EXACT",
+          "order_reasons": []
+        },
+        "scaffold": [],
+        "inplace_drafts": []
+      }
+    },
+    {
+      "key": "root:205F",
+      "object_sha256": "361f874c8816be008361d54db2df6b4441305f30b7f28692b3b61ea763a3255a",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "f_205F_0004": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 130,
+            "relocations": 47,
+            "reloc_order": "GROUPED"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 374,
+            "reloc_order": "EXACT",
+            "start": 375928,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 10,
+            "reloc_order": "GROUPED",
+            "start": 386358,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "extent": {
+          "exact": true,
+          "reasons": [],
+          "reloc_order": "GROUPED",
+          "order_reasons": []
+        },
+        "scaffold": [],
+        "inplace_drafts": []
+      }
+    },
+    {
+      "key": "root:1986",
+      "object_sha256": "5fcdd8fd5970ac6bcee75ee3fe7fb9577932f403e6404237354133d479c461d8",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "OpenIndex": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 19,
+            "relocations": 9,
+            "reloc_order": "GROUPED"
+          },
+          "CreateIndex": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "CloseIndex": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1986_0235": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1986_0236": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1986_0237": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 67,
+            "reloc_order": "EXACT",
+            "start": 364878,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 6,
+            "reloc_order": "GROUPED",
+            "start": 386272,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "scaffold": [],
+        "inplace_drafts": [
+          "FindIndex"
+        ]
+      }
+    },
+    {
+      "key": "root:1A28",
+      "object_sha256": "99915ceabd1cff1fcb47662873b8e749bbec3fad9a8ae456c7d5412e2d512e82",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "OpenDB": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 33,
+            "relocations": 10,
+            "reloc_order": "GROUPED"
+          },
+          "f_1A28_0148": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "CloseDB": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 5,
+            "reloc_order": "GROUPED"
+          },
+          "CopyRootName": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "GetFreeHandle": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "DosPunt": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 9,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 205,
+            "reloc_order": "EXACT",
+            "start": 365646,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 2,
+            "reloc_order": "EXACT",
+            "start": 386290,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "extent": {
+          "exact": true,
+          "reasons": [],
+          "reloc_order": "GROUPED",
+          "order_reasons": []
+        },
+        "scaffold": [],
+        "inplace_drafts": []
+      }
+    },
+    {
+      "key": "root:1C62",
+      "object_sha256": "d05efc1bec20de1710053e28a5158d23a9276e99a659eda5377d6c2d8f1c9eed",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "Punt": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 10,
+            "relocations": 5,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_0090": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_00A1": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_00AC": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_00C0": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_0306": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 8,
+            "relocations": 8,
+            "reloc_order": "GROUPED"
+          },
+          "f_1C62_03DA": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_06A6": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "WaitedEnough": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 3,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_0737": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "f_1C62_074E": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 14,
+            "relocations": 5,
+            "reloc_order": "GROUPED"
+          },
+          "f_1C62_00D5": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 45,
+            "relocations": 25,
+            "reloc_order": "GROUPED"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 482,
+            "reloc_order": "EXACT",
+            "start": 372738,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 2,
+            "reloc_order": "EXACT",
+            "start": 386296,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          },
+          "_BSS": {
+            "exact": true,
+            "reasons": [],
+            "size": 4,
+            "kind": "BSS",
+            "start": 387054,
+            "align": "word"
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "scaffold": [],
+        "inplace_drafts": [
+          "f_1C62_0415"
+        ]
+      }
+    },
+    {
+      "key": "root:1CE2",
+      "object_sha256": "97af283e02830c6d2c8930625826547b22379a015043c823837ce97164af8564",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "f_1CE2_000C": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0013": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0043": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0077": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_00D5": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0104": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0124": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_014B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_016C": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "f_1CE2_01C3": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "f_1CE2_01F8": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 8,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0278": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_032B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_039B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "GRectInvOutline": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0430": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_044D": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_046D": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_048D": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "GSaveRect": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0552": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_056C": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0587": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 5,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "f_1CE2_05DF": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_0951": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_099C": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_1CE2_09E2": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "GPutPacked": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 38,
+            "relocations": 15,
+            "reloc_order": "GROUPED"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 74,
+            "reloc_order": "EXACT",
+            "start": 373220,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "_BSS": {
+            "exact": true,
+            "reasons": [],
+            "size": 8,
+            "kind": "BSS",
+            "start": 387068,
+            "align": "word"
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 2,
+            "reloc_order": "EXACT",
+            "start": 386298,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "extent": {
+          "exact": true,
+          "reasons": [],
+          "reloc_order": "GROUPED",
+          "order_reasons": []
+        },
+        "scaffold": [],
+        "inplace_drafts": []
+      }
+    },
+    {
+      "key": "root:24AB",
+      "object_sha256": "321c164858dc9aa15bfa80f274b08f4fe375d3848b2d08fcebe505858a305cd1",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "f_24AB_0002": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 54,
+            "relocations": 16,
+            "reloc_order": "GROUPED"
+          },
+          "f_24AB_02AD": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_24AB_030B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_24AB_0329": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "f_24AB_0367": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_24AB_038D": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 17,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "f_24AB_040C": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_24AB_042B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "font_InitFonts": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 25,
+            "relocations": 5,
+            "reloc_order": "GROUPED"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 52,
+            "reloc_order": "EXACT",
+            "start": 377020,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 6,
+            "reloc_order": "EXACT",
+            "start": 386414,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "extent": {
+          "exact": true,
+          "reasons": [],
+          "reloc_order": "GROUPED",
+          "order_reasons": []
+        },
+        "scaffold": [],
+        "inplace_drafts": []
+      }
+    },
+    {
+      "key": "root:1FBD",
+      "object_sha256": "46992a4ac97fc3b7942280de929ed0481c4bcf50eb3a71c6be80f4b5e40f4297",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "f_1FBD_0000": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 31,
+            "relocations": 3,
+            "reloc_order": "EXACT"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 1324,
+            "reloc_order": "EXACT",
+            "start": 374250,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "extent": {
+          "exact": true,
+          "reasons": [],
+          "reloc_order": "EXACT",
+          "order_reasons": []
+        },
+        "scaffold": [],
+        "inplace_drafts": []
+      }
+    }
+  ],
+  "input_pins": [
+    {
+      "path": "src/program.json",
+      "size": 259348,
+      "sha256": "83fa298ac14594d4cdd4c61481cfd08fc161a0f43bbdf37d1fe6cbb078cc20f6"
+    },
+    {
+      "path": "layout/manifest.json",
+      "size": 622503,
+      "sha256": "02d1e67ccbfeb4b088fd4593ca5e0607d2ce91ff0121102dc5a9042393197fb5"
+    },
+    {
+      "path": "layout/toolchain.json",
+      "size": 39241,
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+    },
+    {
+      "path": "tools/behavior.py",
+      "size": 33696,
+      "sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c"
+    },
+    {
+      "path": "tools/exe.py",
+      "size": 7645,
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+    },
+    {
+      "path": "tools/modules.py",
+      "size": 62933,
+      "sha256": "877f0f5aa2127a3a36fca6aaaedfced536e345196eda5bddb2dc8d62100e5f24"
+    },
+    {
+      "path": "tools/canonical.py",
+      "size": 23080,
+      "sha256": "c55bd97ea71d275afe56c76839be9c2b514fdf64ec051bfe02e6a54febee91a4"
+    },
+    {
+      "path": "tools/omf.py",
+      "size": 29112,
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+    },
+    {
+      "path": "tools/compiler.py",
+      "size": 11765,
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "size": 8479,
+      "sha256": "9f18195ddfa42822f0e54c8a3edf016a751dd7c23b67620c647c75de02c12714"
+    },
+    {
+      "path": "src/root/m205F.c",
+      "size": 6015,
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+    },
+    {
+      "path": "src/root/m1986.c",
+      "size": 2874,
+      "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff"
+    },
+    {
+      "path": "src/root/m1A28.c",
+      "size": 3200,
+      "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+    },
+    {
+      "path": "src/root/m1C62.c",
+      "size": 9762,
+      "sha256": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36"
+    },
+    {
+      "path": "src/root/m1CE2.c",
+      "size": 10210,
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+    },
+    {
+      "path": "src/root/m24AB.c",
+      "size": 5171,
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+    },
+    {
+      "path": "src/root/m1FBD.asm",
+      "size": 3414,
+      "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417"
+    }
+  ],
+  "implementation": {
+    "path": "evidence/canonical/graphics-index-failure/replay.py",
+    "size": 11787,
+    "sha256": "d5152c5bf3503047edd2351cd9a0c893f3fab28d3ac1a0994c9131a1f30f11db"
+  },
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "size": 506509,
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "unicorn_version": "2.1.4",
+  "python_version": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+  "nonclaims": [
+    "No independent DOS game executable",
+    "No full graphics/IBMInitStuff execution",
+    "No eventual continuation, fatal helper, cleanup or exit claim",
+    "No fifth database access witness",
+    "No allocated font bitmap or new storage",
+    "No code patch, linked original bytes or production fallback"
+  ]
+}

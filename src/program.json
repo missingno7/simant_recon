@@ -3281,6 +3281,36 @@
       }
     },
     {
+      "key": "source-owned:icon-handle-cell-view",
+      "source": "src/state/icon-handle-cell-view.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "cc7a5a6d1e24eb1633b87db2130eaaa32de8f95f869fb06d04a4c1d7a01ee981",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_46D2",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
       "key": "source-owned:language-string-list-pointers",
       "source": "src/state/language-string-list-pointers.c",
       "lang": "c",
@@ -8931,9 +8961,33 @@
             "array": "fd_50F6_46A8",
             "index": 20,
             "target": "fd_50F6_46D0"
+          },
+          {
+            "array": "fd_50F6_46BC",
+            "index": 11,
+            "target": "fd_50F6_46D2",
+            "target_word": 0
+          },
+          {
+            "array": "fd_50F6_46BC",
+            "index": 12,
+            "target": "fd_50F6_46D2",
+            "target_word": 1
+          },
+          {
+            "array": "fd_50F6_46A8",
+            "index": 21,
+            "target": "fd_50F6_46D2",
+            "target_word": 0
+          },
+          {
+            "array": "fd_50F6_46A8",
+            "index": 22,
+            "target": "fd_50F6_46D2",
+            "target_word": 1
           }
         ],
-        "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout."
+        "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout. Minimum Handle slot ownership likewise does not resolve widths[11..12] or xpos[21..22] writes into its low/high words."
       },
       {
         "id": "database-open-minus-one-record",
@@ -8941,7 +8995,8 @@
         "source": "src/root/m1A28.c",
         "normal_owner": "fd_50F6_3958[4]",
         "historical_failure_address": "50F6:38DC",
-        "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A conditional returning zero-target fatal callback reaches the uninitialized raster path, whose zero-height LOOP traverses every DGROUP byte before cleanup; callback/guard invariance cannot be inferred from explicit C assignments alone."
+        "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A bounded graphics-index failure executes the real 25-slot callback reset and the genuine empty callback, then reaches the uninitialized zero-height raster loop; its first glyph visits all 65536 DGROUP offsets before cleanup. This removes the hypothetical null-callback-return premise for that failure prefix, but proves neither eventual continuation nor an actual minus-one/fifth-record access. No global fatal-state invariance or noreturn waiver follows.",
+        "evidence": "evidence/canonical/graphics-index-failure/review.md"
       },
       {
         "id": "database-handle-plus-four",
@@ -8965,6 +9020,117 @@
         "status": "UNRESOLVED",
         "owner": "g_8CCB signed mutable byte",
         "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner."
+      },
+      {
+        "id": "icon-handle-computed-alias-and-activation",
+        "status": "UNRESOLVED",
+        "sources": [
+          "src/root/m208F.c"
+        ],
+        "owner": "fd_50F6_46D2 minimum four-byte mutable Handle slot",
+        "reason": "Original pointer-chain reads, unchanged complete consumer TU and real RTLink/CRT controls authorize only the slot view and initial null representation. There is no known nominal game producer or observed ordinary incoming consumer edge. Computed writers/readers, indirect or control-corrupted activation and original physical aliases are not globally excluded. Independent placement does not preserve them. No deadness, permanent zero or safe null dereference follows from slot ownership."
+      },
+      {
+        "id": "icon-handle-cell-and-payload-lifetime",
+        "status": "UNRESOLVED",
+        "sources": [
+          "src/root/m208F.c"
+        ],
+        "mandatory_if": "Either icon helper reaches its pointer-load branch",
+        "reason": "The slot must designate a live four-byte far-pointer cell with a live byte payload covering the selected n and all renderer row accesses, or the corresponding activation must be independently excluded. The minimum slot provider creates neither referent. Producer/resource/allocator/lock/unhook identity, n bounds and payload capacity remain unproved."
+      }
+    ],
+    "unresolved_data": [
+      {
+        "id": "dgroup_56fe",
+        "bytes": 4,
+        "classification": "SEMANTIC / PORT-BLOCKING",
+        "evidence_class": "UNKNOWN_FIELD_SEMANTICS",
+        "reason": "Four zero bytes lie before g_5702; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance.",
+        "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+        "proof_refs": [
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+        ]
+      },
+      {
+        "id": "dgroup_5a28",
+        "bytes": 2,
+        "classification": "SEMANTIC / PORT-BLOCKING",
+        "evidence_class": "PARTLY_ANCHORED_STATE_UNKNOWN_LEADING_WORD",
+        "reason": "Two leading zero bytes begin a root:1F58 state range followed by identified keyboard/interrupt fields; no read/write is identified for this word.",
+        "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+        "proof_refs": [
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+        ]
+      },
+      {
+        "id": "dgroup_5a96",
+        "bytes": 5,
+        "classification": "SEMANTIC / PORT-BLOCKING",
+        "evidence_class": "PARTLY_TYPED_SHARED_UI_STATE",
+        "reason": "A 26-byte portion of a shared 1,360-byte UI region includes named/used fields (display selector, far pointer, saved cursor pointers) and other incompletely typed bytes.",
+        "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+        "proof_refs": [
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+        ],
+        "residual_ranges": [
+          {
+            "offset": 0,
+            "size": 1
+          },
+          {
+            "offset": 2,
+            "size": 4
+          }
+        ]
+      },
+      {
+        "id": "dgroup_60b0",
+        "bytes": 18,
+        "classification": "SEMANTIC / PORT-BLOCKING",
+        "evidence_class": "UNREFERENCED_INPUT_DESCRIPTOR_COMPATIBLE_RECORD_WITH_REAL_RELOCATION",
+        "reason": "18-byte record uses the registered hot-box ABI shape: rectangle, callback, event code, extra event word and input mask. Its callback relocation is real, but the bounded scan supplies no inbound registration or allocation owner. Timer spelling is not a timing contract; computed or unowned access remains unexcluded.",
+        "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+        "proof_refs": [
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+        ]
+      },
+      {
+        "id": "dgroup_79f0",
+        "bytes": 14,
+        "classification": "SEMANTIC / PORT-BLOCKING",
+        "evidence_class": "RUNTIME_MEMBER_SELECTION_AND_ORDER_UNRESOLVED",
+        "reason": "Heap-shaped __fheap data overlaps signed (_ctype+1)[char] prefix reads D1..DE at 79F0..79FD. Six relocated CMISC pointers and startup heap mutation affect the prefix; moving crt0fp code changes twelve predicates. App heap-state equivalence remains unproved.",
+        "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+        "proof_refs": [
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
+        ]
+      },
+      {
+        "id": "common_tail_overlap_3",
+        "bytes": 1,
+        "classification": "SEMANTIC / PORT-BLOCKING",
+        "evidence_class": "LINKER_FILE_BOUNDARY_UNRESOLVED",
+        "reason": "One residual boundary byte has no accepted erasure/irrelevance proof. Two other prior file values were erased in the reviewed ordinary manager/CRT/DOS control; actual linked-game startup clear dominance remains required.",
+        "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+        "proof_refs": [
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/startup-tail-erasure-contract-v36.json",
+          "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v36/README.md"
+        ],
+        "residual_ranges": [
+          {
+            "offset": 0,
+            "size": 1
+          }
+        ]
       }
     ]
   },

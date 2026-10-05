@@ -65,8 +65,18 @@ class CanonicalProgram(unittest.TestCase):
         report = {'errors': [], 'unresolved_symbols': [{'name': '_unproved_owner'}],
                   'duplicate_publics': {}, 'duplicate_communals': {}, 'mixed_storage_owners': {},
                   'unresolved_semantic_gates': [{'id': 'live-layout-assumption', 'status': 'UNRESOLVED'}],
+                  'unresolved_data': [],
                   'translation_units': [{'status': 'COMPILED', 'object': {}}]}
         self.assertTrue(dos_build.preflight_blockers(report))
+
+    def test_data_debt_alone_prevents_a_link(self):
+        report = {'errors': [], 'translation_units': [{'status': 'COMPILED', 'object': {}}],
+                  'unresolved_data': []}
+        self.assertEqual(dos_build.preflight_blockers(report), [])
+        report['unresolved_data'] = [{'id': 'unowned_field', 'bytes': 1}]
+        self.assertIn('1 unresolved data ranges (1 bytes)', dos_build.preflight_blockers(report))
+        del report['unresolved_data']
+        self.assertIn('missing functional initialized-data audit', dos_build.preflight_blockers(report))
 
 
 if __name__ == '__main__':

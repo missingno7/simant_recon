@@ -118,24 +118,6 @@
       ]
     },
     {
-      "name": "_fd_50F6_46D2",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:208F"
-      ],
-      "consumer_declarations": [
-        "extern char far * far * far fd_50F6_46D2;"
-      ],
-      "grounding": "f_208F_027F: mov es,[8A12] (CONST 50F6); les bx,es:[46D2]; far pointer to a far pointer (small-icon bitmap base), + n*32",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
       "name": "_fd_50F6_4B30",
       "kind": "data",
       "classification": "SEMANTIC / PORT-BLOCKING",
@@ -147,10 +129,13 @@
       ],
       "grounding": "f_284A_0256: mov es,[8AB6]; mov es:[si+4B30],al (far byte array, running status per track)",
       "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "reason": "The uncapped signed MIDI track count supplies no capacity. Current whole-TU extern and tentative far bounds 1/18/19 preserve the same live contributions and eighteen accepted peers; external-symbol fixups therefore locate neither the historical allocator nor the extent. Initialization changes the scheduler and is excluded in this context. Slot-zero use, adjacent-symbol gaps and shipped resource counts do not admit the full owner, alias or lifetime contract.",
       "proof_refs": [
         "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
+        "evidence/codegen/FARSEG-2-communal-fixup-ownership.json",
+        "evidence/canonical/audio-track-owner/review.md",
+        "evidence/canonical/audio-track-owner/receipt.json"
       ]
     },
     {
@@ -165,10 +150,13 @@
       ],
       "grounding": "f_284A_0256: mov es,[8AB4]; mov es:[bx+4B42],ax; es:[bx+4B44],dx (far long array, next event time per track)",
       "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
+      "reason": "The uncapped signed MIDI track count supplies no capacity. Current whole-TU extern and tentative far bounds 1/18/19 preserve the same live contributions and eighteen accepted peers; external-symbol fixups therefore locate neither the historical allocator nor the extent. Initialization changes the scheduler and is excluded in this context. Slot-zero use, adjacent-symbol gaps and shipped resource counts do not admit the full owner, alias or lifetime contract.",
       "proof_refs": [
         "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
+        "evidence/codegen/FARSEG-2-communal-fixup-ownership.json",
+        "evidence/canonical/audio-track-owner/review.md",
+        "evidence/canonical/audio-track-owner/receipt.json"
       ]
     },
     {
@@ -283,8 +271,8 @@
       "id": "dgroup_60b0",
       "bytes": 18,
       "classification": "SEMANTIC / PORT-BLOCKING",
-      "evidence_class": "UNREFERENCED_TIMER_COMPATIBLE_RECORD_WITH_REAL_RELOCATION",
-      "reason": "18-byte Timer-shaped record includes a relocated callback pointer; exhaustive bounded scan found no static inbound reference/registration, but computed or unowned accesses are not excluded.",
+      "evidence_class": "UNREFERENCED_INPUT_DESCRIPTOR_COMPATIBLE_RECORD_WITH_REAL_RELOCATION",
+      "reason": "18-byte record uses the registered hot-box ABI shape: rectangle, callback, event code, extra event word and input mask. Its callback relocation is real, but the bounded scan supplies no inbound registration or allocation owner. Timer spelling is not a timing contract; computed or unowned access remains unexcluded.",
       "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
       "proof_refs": [
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
@@ -328,33 +316,32 @@
   "semantic_gates": [
     {
       "id": "remaining-assembly-address-audit",
-      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates.",
       "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "reason": "Twenty-four source-owned code references now have symbolic offsets and mandatory OMF guards, including twelve rectangle-clip callback pairs. Both RTLink versions preserve their owner identities under moved placement. The broader numeric/segment-frame audit remains open; monochrome 8ED8 ownership/extent and unchecked error-path addresses are separate unresolved relationships."
     },
     {
       "id": "ctype-out-of-range-index-layout",
-      "reason": "Styled text and menu item classification sign-extend character bytes before indexing the near CRT table. Bytes D1..DE can read original DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. The stock runtime table owns its 257 bytes, not the preceding memory. The styled-text predicate can change the copied buffer and its text-resource match. Other dialog/menu sites also read outside the table; result relevance is assessed separately. No source guard or accepted input-domain proof excludes these prefix reads, and independent linkage does not preserve the original prefix. Keep the heap-shaped data debt; do not substitute unsigned indexing or add an invented table prefix/suffix. Whole-member controls on both linkers realize __fheap at _ctype-46, but identical data order still leaves six relocated CMISC pointers in the signed prefix: moving only crt0fp code changes twelve predicate results. Stock startup also changes heap descriptor pointers before main; original __myalloc binds the game allocator 171C:2208. App heap-state equivalence remains unproved, so relative owner attribution alone discharges no bytes.",
+      "status": "UNRESOLVED",
       "sources": [
         "src/S23/m39C7.c",
         "src/S10/m35F5.c",
         "src/root/m1C62.c"
       ],
       "consumer": "(_ctype + 1)[signed character or keyboard code]",
-      "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "original_ctype_offset": 31262,
+      "signed_char_prefix_range": [
+        31135,
+        31261
+      ],
+      "overlapping_data_debt": "dgroup_79f0",
+      "relocated_prefix_far_pointers": 6,
+      "heap_state_equivalence": "UNRESOLVED",
+      "reason": "Styled text and menu item classification sign-extend character bytes before indexing the near CRT table. Bytes D1..DE can read original DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. The stock runtime table owns its 257 bytes, not the preceding memory. The styled-text predicate can change the copied buffer and its text-resource match. Other dialog/menu sites also read outside the table; result relevance is assessed separately. No source guard or accepted input-domain proof excludes these prefix reads, and independent linkage does not preserve the original prefix. Keep the heap-shaped data debt; do not substitute unsigned indexing or add an invented table prefix/suffix. Whole-member controls on both linkers realize __fheap at _ctype-46, but identical data order still leaves six relocated CMISC pointers in the signed prefix: moving only crt0fp code changes twelve predicate results. Stock startup also changes heap descriptor pointers before main; original __myalloc binds the game allocator 171C:2208. App heap-state equivalence remains unproved, so relative owner attribution alone discharges no bytes.",
+      "scope_limit": "Conditional input path, not a shipped-resource execution witness. The reconstructed algorithms and strict static registrations remain unchanged."
     },
     {
       "id": "sound-selector-out-of-range-layout",
-      "reason": "The command-line parser accepts /s9, but detector/setup/cleanup tables have only nine entries (0..8). If the sound DB open returns, detector index 9 reads the adjacent same-TU saved-state pointer and calls its source-owned data as code. Return and effects are unproved. Conditional later setup/cleanup overreads include cross-TU data adjacency. Complete saved-state storage does not resolve this executable/layout dependency; no clamp, extra slot or padding is introduced.",
+      "status": "UNRESOLVED",
       "sources": [
         "src/S20/m39F1.c",
         "src/S15/m384C.c",
@@ -364,112 +351,126 @@
         "src/root/m293A.c",
         "src/root/m2815.c"
       ],
-      "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "reason": "The command-line parser accepts /s9, but detector/setup/cleanup tables have only nine entries (0..8). If the sound DB open returns, detector index 9 reads the adjacent same-TU saved-state pointer and calls its source-owned data as code. Return and effects are unproved. Conditional later setup/cleanup overreads include cross-TU data adjacency. Complete saved-state storage does not resolve this executable/layout dependency; no clamp, extra slot or padding is introduced."
     },
     {
       "id": "graphics-computed-copy-layout",
-      "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved.",
-      "source": "src/root/m1E57.c",
       "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "source": "src/root/m1E57.c",
+      "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved."
     },
     {
       "id": "map-viewport-grid-layout",
-      "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout.",
+      "status": "UNRESOLVED",
       "sources": [
         "src/root/m0250.c",
         "src/S26/m39C7.c"
       ],
-      "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "declared_grid": "fd_50F6_15C4[30][40]",
+      "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout."
     },
     {
       "id": "menu-table-cross-owner-layout",
-      "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout.",
+      "status": "UNRESOLVED",
       "sources": [
         "src/root/m1FD2.c",
         "src/S10/m35F5.c",
         "src/S17/m384C.c"
       ],
-      "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "historical_intersections": [
+        {
+          "array": "fd_50F6_46BC",
+          "index": 10,
+          "target": "fd_50F6_46D0"
+        },
+        {
+          "array": "fd_50F6_46A8",
+          "index": 20,
+          "target": "fd_50F6_46D0"
+        },
+        {
+          "array": "fd_50F6_46BC",
+          "index": 11,
+          "target": "fd_50F6_46D2",
+          "target_word": 0
+        },
+        {
+          "array": "fd_50F6_46BC",
+          "index": 12,
+          "target": "fd_50F6_46D2",
+          "target_word": 1
+        },
+        {
+          "array": "fd_50F6_46A8",
+          "index": 21,
+          "target": "fd_50F6_46D2",
+          "target_word": 0
+        },
+        {
+          "array": "fd_50F6_46A8",
+          "index": 22,
+          "target": "fd_50F6_46D2",
+          "target_word": 1
+        }
+      ],
+      "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout. Minimum Handle slot ownership likewise does not resolve widths[11..12] or xpos[21..22] writes into its low/high words."
     },
     {
       "id": "database-open-minus-one-record",
-      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A conditional returning zero-target fatal callback reaches the uninitialized raster path, whose zero-height LOOP traverses every DGROUP byte before cleanup; callback/guard invariance cannot be inferred from explicit C assignments alone.",
+      "status": "UNRESOLVED",
       "source": "src/root/m1A28.c",
       "normal_owner": "fd_50F6_3958[4]",
       "historical_failure_address": "50F6:38DC",
-      "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A bounded graphics-index failure executes the real 25-slot callback reset and the genuine empty callback, then reaches the uninitialized zero-height raster loop; its first glyph visits all 65536 DGROUP offsets before cleanup. This removes the hypothetical null-callback-return premise for that failure prefix, but proves neither eventual continuation nor an actual minus-one/fifth-record access. No global fatal-state invariance or noreturn waiver follows.",
+      "evidence": "evidence/canonical/graphics-index-failure/review.md"
     },
     {
       "id": "database-handle-plus-four",
-      "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate.",
+      "status": "UNRESOLVED",
       "source": "src/root/m1A53.c",
       "normal_owner": "db_handles[4]",
       "historical_failure_address": "50F6:3B58",
-      "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+      "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate."
     },
     {
       "id": "window-index-resource-cross-owner-layout",
-      "reason": "Unconditional reset spans prove 45 callbacks and 45 Rects. They do not bound every window ID or resource count. Negative and >=45 indices, returning Punt, pre-lock handle writes, signed palette-copy lengths, and purge-list counts remain open. Historical palette row 63 reads hook31/hook32 words; its shipped control lacks the ordinary selection gate, but no complete selection/redraw or cross-owner exclusion exists. Callback45 intersects Rect0 and Rect45 intersects Event fields. No padding, invented palette rows, clamp or maximum historical capacity is supplied by the minimum owners.",
+      "status": "UNRESOLVED",
       "owners": [
         "win_drawHooks[45]",
         "win_offsets[45]"
       ],
-      "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v36/README.md"
-      ]
+      "reason": "Unconditional reset spans prove 45 callbacks and 45 Rects. They do not bound every window ID or resource count. Negative and >=45 indices, returning Punt, pre-lock handle writes, signed palette-copy lengths, and purge-list counts remain open. Historical palette row 63 reads hook31/hook32 words; its shipped control lacks the ordinary selection gate, but no complete selection/redraw or cross-owner exclusion exists. Callback45 intersects Rect0 and Rect45 intersects Event fields. No padding, invented palette rows, clamp or maximum historical capacity is supplied by the minimum owners."
     },
     {
       "id": "critical-selector-computed-alias-layout",
-      "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner.",
-      "owner": "g_8CCB signed mutable byte",
       "status": "UNRESOLVED",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v36/README.md"
-      ]
+      "owner": "g_8CCB signed mutable byte",
+      "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner."
+    },
+    {
+      "id": "icon-handle-computed-alias-and-activation",
+      "status": "UNRESOLVED",
+      "sources": [
+        "src/root/m208F.c"
+      ],
+      "owner": "fd_50F6_46D2 minimum four-byte mutable Handle slot",
+      "reason": "Original pointer-chain reads, unchanged complete consumer TU and real RTLink/CRT controls authorize only the slot view and initial null representation. There is no known nominal game producer or observed ordinary incoming consumer edge. Computed writers/readers, indirect or control-corrupted activation and original physical aliases are not globally excluded. Independent placement does not preserve them. No deadness, permanent zero or safe null dereference follows from slot ownership."
+    },
+    {
+      "id": "icon-handle-cell-and-payload-lifetime",
+      "status": "UNRESOLVED",
+      "sources": [
+        "src/root/m208F.c"
+      ],
+      "mandatory_if": "Either icon helper reaches its pointer-load branch",
+      "reason": "The slot must designate a live four-byte far-pointer cell with a live byte payload covering the selected n and all renderer row accesses, or the corresponding activation must be independently excluded. The minimum slot provider creates neither referent. Producer/resource/allocator/lock/unhook identity, n bounds and payload capacity remain unproved."
     }
   ],
   "counts": {
-    "imports": 12,
+    "imports": 11,
     "data_ranges": 6,
     "data_bytes": 44,
-    "semantic_gates": 10
+    "semantic_gates": 12
   },
   "historical_binary_only_outside_current_44": [
     {
@@ -538,5 +539,6 @@
         "sha256_scope": "admitted_worktree_bytes"
       }
     ]
-  }
+  },
+  "active_authority": "src/program.json dos.unresolved_data and dos.semantic_gates; this packet is a readable evidence projection, not a parallel build inventory."
 }

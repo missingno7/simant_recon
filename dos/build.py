@@ -270,12 +270,19 @@ def audit_program(program, report):
                                     for n in sorted(set(uses) - available)]
     report['semantic_gates'] = program['dos']['semantic_gates']
     report['unresolved_semantic_gates'] = [g for g in report['semantic_gates'] if g.get('status') != 'RESOLVED']
+    debt = program['dos']['unresolved_data']
+    if (len({r['id'] for r in debt}) != len(debt) or
+            any(isinstance(r['bytes'], bool) or not isinstance(r['bytes'], int) or r['bytes'] <= 0 or
+                r['classification'] != 'SEMANTIC / PORT-BLOCKING' for r in debt)):
+        raise ValueError('invalid canonical unresolved functional data inventory')
+    report['unresolved_data'] = debt
     report['audit_totals'] = {'translation_units': len(report['translation_units']),
         'storage_providers_verified': sum(r.get('storage_verification', {}).get('status') == 'PASS' for r in report['translation_units']),
         'public_symbols': sum(d['definition_kind'] == 'public' for defs in owners.values() for d in defs),
         'communal_symbols': sum(d['definition_kind'] == 'communal' for defs in owners.values() for d in defs),
         'symbolic_aliases': len(aliases), 'unresolved_imports': len(report['unresolved_symbols']),
-        'unresolved_semantic_gates': len(report['unresolved_semantic_gates'])}
+        'unresolved_semantic_gates': len(report['unresolved_semantic_gates']),
+        'unresolved_data_ranges': len(debt), 'unresolved_data_bytes': sum(r['bytes'] for r in debt)}
 
 
 def preflight_blockers(report):
@@ -284,6 +291,11 @@ def preflight_blockers(report):
                   'unresolved_symbols', 'unresolved_semantic_gates'):
         if report.get(field):
             blockers.append(f"{len(report[field])} {field.replace('_', ' ')}")
+    if 'unresolved_data' not in report:
+        blockers.append('missing functional initialized-data audit')
+    elif report['unresolved_data']:
+        blockers.append(f"{len(report['unresolved_data'])} unresolved data ranges "
+                        f"({sum(r['bytes'] for r in report['unresolved_data'])} bytes)")
     if any(r['status'] == 'FAILED' or 'object' not in r for r in report['translation_units']):
         blockers.append('incomplete source compilation/storage verification')
     return blockers

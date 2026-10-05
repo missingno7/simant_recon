@@ -186,7 +186,7 @@
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
-      "detail": "Twelve unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof."
+      "detail": "Eleven unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof."
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
@@ -206,6 +206,11 @@
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "Native scalar expression lowering",
       "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:208F",
+      "detail": "Canonical source now owns the mutable four-byte icon Handle slot. No game master-cell/payload producer, extent, lifetime, activation or computed/menu alias closure is admitted; the native conversion only widens its pointer representation."
     }
   ],
   "source_inventory": "src/program.json",

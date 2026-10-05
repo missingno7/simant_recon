@@ -15,7 +15,6 @@ extern SimSourceHandle fd_50F6_3B60[45];
 SimSourceRect *fd_50F6_3C14;
 int16_t *fd_50F6_46A8;
 int16_t *fd_50F6_46BC;
-char **fd_50F6_46D2;
 extern SimSourceEvent fd_50F6_49FA;
 extern SimSourceEvent fd_50F6_4A0A;
 extern uint8_t g_8EC0[24];
