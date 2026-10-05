@@ -8,6 +8,10 @@ Validation: **PASS** (2026-10-05)
 | known_game_functions | 1,640 |
 | exact_c_functions | 1,235 |
 | exact_c_bytes | 232,114 |
+| historical_exact_source_rebuilt_function_count | 9 |
+| behavior_exact_confirmed_functions | 29 |
+| canonical_translation_units | 190 |
+| canonical_storage_units | 63 |
 | exact_asm_bytes | 50,441 |
 | exact_code_segment_data_bytes | 1,481 |
 | historical_runtime_bytes_accepted | 12,339 |
@@ -54,6 +58,6 @@ Complete TUs with cross-function relocation order pending (record breaks between
 
 Modules with data placements only (never counted as recovered code): data:3D57, data:3E1D, data:55B3@0042, data:55B3@0064, data:55B3@00B8
 
-Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
+Whole executable: NOT_BUILT (canonical DOS link has open semantic gates; see docs/canonical-source.md)
 
 Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2432/2464, S05 2508/2512, S06 9583/9584, S07 1174/1184, S08 5053/5056, S09 5225/5232, S10 972/2736, S11 870/880, S12 4773/4992, S13 5790/6064, S14 4653/4656, S15 1025/1360, S16 1763/1776, S17 443/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 1142/4368, S24 1071/1808, S25 13780/14592, S26 2236/2240

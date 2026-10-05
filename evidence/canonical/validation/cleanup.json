@@ -1,0 +1,57 @@
+{
+  "schema": "simant-canonical-consolidation-retirement-v1",
+  "historical_recovery_revision": "a1938e61452a63581718aee6659829528c3b8635",
+  "additional_recovery_revision": "c11a29baa56ca65d3c617a1f2d08647e12f9222f",
+  "baseline": {
+    "git_files": 10280,
+    "git_blob_bytes": 507761301
+  },
+  "retirement": {
+    "source_only_dos_tracked_files": 2068,
+    "old_work_and_behavior_tracked_files": 3515,
+    "old_work_and_behavior_head_blob_bytes": 213623352,
+    "old_work_and_behavior_ignored_cache_files": 37,
+    "portable_obsolete_tracked_files": 3981,
+    "portable_obsolete_ignored_or_untracked_files": 165,
+    "final_platform_unused_files": 23
+  },
+  "unique_local_research_preserved": {
+    "source_only_files": 150,
+    "source_only_bytes": 3576124,
+    "portable_files": 124,
+    "portable_bytes": 51933349,
+    "destination": "Ignored build/local-research-before-consolidation; no production role"
+  },
+  "review_receipts": {
+    "pre_retirement_sha256": "b4eed417f14cd130a9d682c74cf6025fe733e7e9094d4854916f3ba4613759a1",
+    "post_retirement_sha256": "8f343a8409af057d50bbda39482bc1f335f3f3f26f969bcf3434f99e0cd172f2",
+    "portable_retirement_sha256": "457ead2cc53be9ef9e8a31fac06d6209ac5360d4b166d15f9d28933057950b8a",
+    "native_cleanup_delta_sha256": "035a1a865b1e1cc263b946d946be0d09009299c2c0153cc1eb200ac7c8be0905"
+  },
+  "scope": "Git recovery plus current source/compiler/input closure justifies removing superseded production and proof trees. Receipts under build are passive parent audit artifacts, not runtime inputs.",
+  "current_native_closure": {
+    "compiler_scans": 242,
+    "dependencies": 400,
+    "retired_production_inputs": [],
+    "canonical_input": "src/program.json",
+    "platform_input": "portable/platform.json"
+  },
+  "old_roots_absent": [
+    "work",
+    "evidence/behavior",
+    "portable/tools",
+    "portable/game",
+    "portable/ui_model",
+    "portable/evidence",
+    "portable/research"
+  ],
+  "new_checkpoint": "canonical-semantic-oracle-v2",
+  "standalone_DOS_executable": false,
+  "human_acceptance": "PENDING",
+  "full_native_DOS_equivalence": false,
+  "final_tree": {
+    "tracked_files": 749,
+    "git_blob_bytes": 13725164,
+    "size_scope": "Current staged Git blobs before this count record update; count remains exact, byte total changes by the small metadata delta."
+  }
+}

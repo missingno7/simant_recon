@@ -28,6 +28,12 @@ fallback. Independent linking remains blocked by twelve unproved storage imports
 and ten semantic address/layout gates. Forty-four functional data bytes remain
 unresolved. This is not yet a runnable standalone DOS reconstruction.
 
+The current SDL3 executable runs the converted original main and passes bounded
+database, RNG, simulation, VGA, Save and Load checks. It remains a preview with
+explicit storage and adjacent-memory contracts in `portable/platform.json`.
+See the [consolidation report](docs/consolidation.md) for the changes, evidence,
+retirements and limits.
+
 Current historical validation distinguishes 1,235 byte-exact C functions,
 367 genuine assembly functions, 29 strict semantic reconstructions, and nine
 historically exact bodies whose rebuilt declaration context has reviewed
@@ -47,12 +53,18 @@ assets remain local and ignored in `assets/`, with identities in
 python tools/validate.py
 python tools/canonical_behavior.py --count 16 --out build/behavior/current
 python dos/build.py --jobs 8 --link
+python portable/build.py --out build/portable-sdl3
+build/portable-sdl3/simant-canonical.exe
 ```
 
 The behavior runner compiles current canonical whole TUs and compares them with
 original DOS execution in isolated VMs. It corroborates full static semantic
 reviews; finite passing cases alone cannot establish semantic completeness.
 See [behavioral validation](docs/behavioral-proof.md) for dependencies and scope.
+
+Native build outputs must be fresh. See [portable commands and prerequisites](portable/README.md)
+and the current suites under `portable/tests/`. The verified local executable for
+this consolidation is `build/portable-current/simant-canonical.exe`.
 
 ## Reconstruction work
 

@@ -1,0 +1,114 @@
+{
+  "schema": "canonical-native-runtime-replay-v2",
+  "passed": true,
+  "flow": "vga",
+  "checks": {
+    "process_completed": true,
+    "entered_original_main_vga": true,
+    "all_fixture_events_injected": true,
+    "source_main_frame_and_positive_loops": true,
+    "meaningful_vga_frame": true,
+    "current_build_inputs_unchanged": true,
+    "build_report_unchanged": true,
+    "executable_unchanged": true,
+    "fixture_unchanged": true,
+    "build_resources_unchanged": true,
+    "runtime_support_unchanged": true,
+    "original_assets_unchanged": true,
+    "only_expected_disposable_changes": true,
+    "save_record_wire_size": true
+  },
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-current\\report.json",
+  "build_report_sha256": "64625fb26b105be4e32272eaba6b76859a53459a4fb769fbf1757ddc0a0f7734",
+  "verified_build_input_count": 418,
+  "verified_native_service_count": 78,
+  "current_program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+  "platform_manifest_sha256": "2791e1dbf5ebee9b6c1db255fc3ff237bb09b35209c050b1365aef367a128f09",
+  "executable_sha256": "fb49be46f51f585eaf543fe4d104fb1a31d410648e923c5c8b755d78d32d0514",
+  "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
+  "resource_pins": {
+    "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+    "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+    "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+    "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15",
+    "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+    "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "INSTALL.EXE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+    "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+    "SIMANT.CFG": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+    "SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+    "SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+  },
+  "font_pins": {
+    "DOSBox-Staging-LICENSE": "17f1201299b4984dafadcdc62ce70167ac41b6f4ac9e8d3ba1bcc05eea2982e3",
+    "font-8x14.bin": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+    "font-8x8.bin": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
+    "int10_memory.cpp": "8044424619405c51b0f6a31e676e9d4b931aac5746d844d0a6fb2e955328a14e",
+    "manifest.json": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
+  },
+  "command": [
+    "D:\\Prog\\simant_recon\\build\\portable-current\\simant-canonical.exe",
+    "--headless",
+    "--smoke-ms",
+    "20000",
+    "--frame",
+    "D:\\Prog\\simant_recon\\build\\vga-current\\frame.bmp",
+    "--assets",
+    "D:\\Prog\\simant_recon\\build\\vga-current\\a",
+    "--seed",
+    "1",
+    "--input-script",
+    "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt",
+    "/dV"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "input_script_sha256": "76cb0aa0dd78fe3ec01c2af74790df2f4b4b1cfb9e24b22e064396fe20f088fd",
+  "fixture_event_count": 7,
+  "injected_event_count": 7,
+  "outer_loops": 54,
+  "frame": {
+    "path": "D:\\Prog\\simant_recon\\build\\vga-current\\frame.bmp",
+    "size": 1228938,
+    "sha256": "328725910ca856c4817b5468b05e819098452f446b615d48b441ac33b7d05edf",
+    "width": 640,
+    "height": 480,
+    "bits_per_pixel": 32,
+    "distinct_rgb_colors": 16,
+    "valid": true
+  },
+  "saved_file": null,
+  "changes": {},
+  "scope": "Bounded current original main, ordinary SDL setup/menu input, VGA frame and SaveRec wire output. Event injection alone is not menu behavior proof; save creation corroborates the Save path. No DOS equality, fixed terrain-seed, simulation completeness or Load roundtrip claim.",
+  "build_preview_limitations": [
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:1986",
+      "detail": "FindIndex native one-past guard returns null before canonical index[count] predicate. Real song lookup10010 can miss past HCEGANT271 rows before SOUND succeeds. DOS heap rounds paragraphs with uncleared tail bytes, or an adjacent Block header for even counts; that adjacent-memory predicate is unproved. Native preview semantic exception, no equivalence claim."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "detail": "Twelve unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "detail": "Font bitmap native group is source-owned1280 bytes; larger output remains unsupported without source storage proof."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:20E8/win_Open+win_Swap",
+      "detail": "Omitted DOS argument slots are native zero normalizations. win_Swap stores four caller stack-residue words in DOS; native stores zero, so raw state differs. Current callsites, 34 shipped window resources and the reviewed source observer closure do not observe those differing fields. Custom resource/caller domains remain unsupported; no mechanical raw-state equivalence claim."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "S26/native window object views and allocation",
+      "detail": "Valid registry-backed object views preserve the source layout relationship. Invalid NULL views remain faultable because callers dereference the returned pointer. Native OOM guard policy and zoom savedRect behavior remain unresolved outside the reviewed valid shipped-resource domain."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "Native scalar expression lowering",
+      "detail": "Scalar conversion fixes declared storage/parameter/cast widths but leaves arithmetic operators and unsuffixed literal types unchanged. GCC promotes int16_t/uint16_t to32bit int, unlike DOS16bit signed/unsigned rules. Intermediate wrap, product/division, shifts and mixed comparisons need source-driven mechanical lowering/domain proof. Bounded validated adapters/fixtures do not establish global expression equivalence. See evidence/canonical/native-integer-promotions/."
+    }
+  ]
+}

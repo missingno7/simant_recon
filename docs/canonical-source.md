@@ -60,3 +60,17 @@ physical DOS memory, host resource handles, files, timing, input, video and
 audio. A native sidecar may hold host resources; it cannot own another copy of
 ordinary game state. The remaining unproved native storage representations
 must stay explicit until their source ownership and lifetime are established.
+
+`portable/build.py` is the only native build entry. It uses normal ABI converter
+imports and `portable/platform.json`; it compiles current service files directly.
+The inventory converts 161 canonical C TUs and compiles 160. The DOS physical heap
+TU is an explicit native allocation boundary. Three data units are emitted from
+actual symbolic assembly declarations; ordinary palette, graphics pattern,
+input/mouse queues and four audio records have canonical owners. Small readable
+native assembly projections remain where host compilers cannot assemble DOS
+code. There is no selected-source game, parallel ownership plan or body-picker.
+
+The [consolidation report](consolidation.md) records current native validation,
+deleted architecture and unresolved preview contracts. The semantic checkpoint
+is `canonical-semantic-oracle-v2`; it does not claim the independently linked,
+runtime-compared and human-accepted `functional-source-oracle-v1` milestone.

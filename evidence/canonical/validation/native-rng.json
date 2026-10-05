@@ -1,0 +1,203 @@
+{
+  "schema": "canonical-native-rng-original-dos-v1",
+  "passed": true,
+  "claim": "Bounded execution of actual current canonical game RNG and CRT objects against original DOS helpers; no world/frame equivalence claim.",
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-current\\report.json",
+  "build_report_sha256": "64625fb26b105be4e32272eaba6b76859a53459a4fb769fbf1757ddc0a0f7734",
+  "canonical_source": "src/root/m0093.c",
+  "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+  "runner_sha256": "86295567b3410290f78d5932ef731d61b87e519a2cfe7981b1553823123a8461",
+  "fixture_sha256": "f14fb628d27b570ba8962d391538084bd93aa5eb93baf15622503997393aee9f",
+  "oracle": {
+    "EXE_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "VM_source_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c"
+  },
+  "native_objects": [
+    {
+      "source": "src/root/m0093.c",
+      "object": "D:\\Prog\\simant_recon\\build\\portable-current\\objects\\build\\portable-current\\root_0093.o",
+      "object_sha256": "40d237c988b26bcf8eaf51436899cdfb3654eb6c20202a389c511220c8ec74aa",
+      "generated": "D:\\Prog\\simant_recon\\build\\portable-current\\root_0093.c",
+      "generated_sha256": "2e18205e38d3b0a4aa52583cbdc6a52917668f6c910f884e40a3261f0e18ecbc"
+    },
+    {
+      "source": "portable/whole_program/platform/crt_rng.c",
+      "object": "D:\\Prog\\simant_recon\\build\\portable-current\\objects\\portable\\whole_program\\platform\\crt_rng.o",
+      "object_sha256": "5fc4e24047e57a20e629b5df51fce063154c49bbf0074593489609d36945640b",
+      "generated": "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\crt_rng.c",
+      "generated_sha256": "7d2e81145cb6cd3ff84f3e3cbe9167db7dce544050261e1140746f753be14696"
+    },
+    {
+      "source": "portable/whole_program/platform/seed_source.c",
+      "object": "D:\\Prog\\simant_recon\\build\\portable-current\\objects\\portable\\whole_program\\platform\\seed_source.o",
+      "object_sha256": "30b8965d39d6c0ff573ffdec68238b155c8c07be652dd32b6ace1f90c78de5e0",
+      "generated": "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\seed_source.c",
+      "generated_sha256": "3108f7d9ad500026accae6a10cc0214c489b70acf6251d57bbf1b9c6f7184b76"
+    },
+    {
+      "source": "native RNG fixture",
+      "object": "D:\\Prog\\simant_recon\\build\\rng-current\\fixture.o",
+      "object_sha256": "e28f22afd3bcce16b2a36b1fa5cb8e7bb4f8feabf7df703527594c8dcd58ae4f",
+      "generated": null,
+      "generated_sha256": "f14fb628d27b570ba8962d391538084bd93aa5eb93baf15622503997393aee9f"
+    }
+  ],
+  "scenarios": [
+    {
+      "mode": 0,
+      "seed": 0,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 0,
+      "seed": 1,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 0,
+      "seed": 7,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 0,
+      "seed": 14161,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 0,
+      "seed": 32767,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 0,
+      "seed": 32768,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 0,
+      "seed": 65535,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 0,
+      "seed": 44257,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 1,
+      "seed": 7,
+      "tick1": 0,
+      "tick2": 0
+    },
+    {
+      "mode": 1,
+      "seed": 7,
+      "tick1": 1,
+      "tick2": 1
+    },
+    {
+      "mode": 1,
+      "seed": 7,
+      "tick1": 65535,
+      "tick2": 65536
+    },
+    {
+      "mode": 1,
+      "seed": 305419896,
+      "tick1": 305419896,
+      "tick2": 305419897
+    }
+  ],
+  "operations": [
+    [
+      "SRand1",
+      1
+    ],
+    [
+      "SRand4",
+      0
+    ],
+    [
+      "SRand256",
+      0
+    ],
+    [
+      "SRand1",
+      17
+    ],
+    [
+      "SRand2",
+      0
+    ],
+    [
+      "SRand128",
+      0
+    ],
+    [
+      "SRand1",
+      65535
+    ],
+    [
+      "SRand1",
+      32768
+    ],
+    [
+      "SGIRand",
+      127
+    ],
+    [
+      "SGRand",
+      127
+    ],
+    [
+      "SGSRand",
+      31
+    ],
+    [
+      "RRand",
+      32767
+    ],
+    [
+      "SRand8",
+      0
+    ],
+    [
+      "SRand16",
+      0
+    ],
+    [
+      "SRand32",
+      0
+    ],
+    [
+      "SRand64",
+      0
+    ]
+  ],
+  "repeats_per_scenario": 16,
+  "trace_rows": 3096,
+  "original_trace_rows": 3096,
+  "mismatches": [],
+  "existing_negative_domain_control": {
+    "native_exit_code": 3,
+    "native_successful_zero_divisor_return_rejected": true,
+    "original_fault": "SRand1 zero oracle at 0093:015B: unmodeled interrupt 00",
+    "original_private_seed_after_fault": 20801,
+    "original_divide_fault_observed": true,
+    "origin": "SRand1 zero-divisor domain control retained in this current native/DOS fixture"
+  },
+  "controlled_boundaries": [
+    "TickCount specified32-bit values",
+    "physical seed reader specified32-bit values"
+  ],
+  "archived_build_dependencies": [],
+  "selected_model_RNG_functions_execute": false
+}

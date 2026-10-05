@@ -1,0 +1,11 @@
+{
+  "schema": "canonical-native-font-manifest-byte-identity-control-v1",
+  "detected": true,
+  "mutation": "CRLF-to-LF normalization of immutable BIOS hardware resource manifest",
+  "expected_manifest_sha256": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9",
+  "rejected_manifest_sha256": "eae8d0cf54a8e4cc9f0581188e4fc47b462e3da2f0bac844c0aa7d00bca91c5f",
+  "exit_code": 70,
+  "diagnostic": "Native video driver: dummy\nreference manifest does not match the pinned identity\nSimAnt native boundary failed: verified font and pattern resources\n",
+  "restored_exact_resource": true,
+  "git_policy": "portable/runtime/bios-reference/** -text"
+}

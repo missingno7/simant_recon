@@ -1,0 +1,423 @@
+{
+  "schema": "simant-native-dos-file-services-v1",
+  "status": "PASS_DIAGNOSTIC_NO_DOS_COMPARISON",
+  "test_output": "DOS I/O native contract tests: PASS",
+  "test_matrix": [
+    "DOS positive descriptors distinct from 0/1/2; close and stale-handle error",
+    "binary read/write preserves CR, LF and Ctrl-Z bytes",
+    "MSC text read translates CRLF and Ctrl-Z on the pinned Windows CRT",
+    "DOS flags 0x8002 and 0x8102 are read/write binary, with create-only not truncating",
+    "0x8302 create+truncate and 0x109 append with mode 0x180",
+    "32-bit lseek origins, read/write after seek, invalid-origin error",
+    "access/open/remove errors update MSC-numbered dos_errno",
+    "case-insensitive file and directory lookup on the Windows filesystem",
+    "chdir/getcwd caller buffer and allocated-buffer forms",
+    "ASCII stricmp sign/equality contract",
+    "FONT1..FONT4 opaque DosFileStream open; DOS-word fread size/count and EOF item counts"
+  ],
+  "evidence": {
+    "msc_header_root": "C:\\tools\\msc-6.00a-simantw\\INCLUDE",
+    "headers": {
+      "FCNTL.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\FCNTL.H",
+        "size": 1126,
+        "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7"
+      },
+      "IO.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\IO.H",
+        "size": 1512,
+        "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+      },
+      "ERRNO.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\ERRNO.H",
+        "size": 1428,
+        "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91"
+      },
+      "DIRECT.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\DIRECT.H",
+        "size": 892,
+        "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2"
+      },
+      "STRING.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STRING.H",
+        "size": 4975,
+        "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e"
+      },
+      "STDLIB.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STDLIB.H",
+        "size": 6539,
+        "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476"
+      },
+      "SYS/STAT.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\SYS\\STAT.H",
+        "size": 1330,
+        "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051"
+      }
+    },
+    "interpretation": {
+      "fcntl": "MSC 6.00A FCNTL.H defines O_RDONLY=0, O_WRONLY=1, O_RDWR=2, O_APPEND=8, O_CREAT=0x100, O_TRUNC=0x200, O_EXCL=0x400, O_TEXT=0x4000, O_BINARY=0x8000, O_NOINHERIT=0x80.",
+      "permissions": "MSC SYS/STAT.H defines S_IREAD=0400 and S_IWRITE=0200, so source mode 0x180 requests read/write owner permissions.",
+      "io_abi": "MSC IO.H declares int read/write/close/open and long lseek; DOS int is 16-bit and long is 32-bit. Host descriptors and FILE* remain native behind wrappers.",
+      "fread_abi": "Root m25E7 declares unsigned fread(buf,unsigned size,unsigned count,FILE*), with FILE only forward-declared as _iobuf; DosFileStream hides native FILE and returns a 16-bit item count.",
+      "errno": "MSC ERRNO.H confirms ENOENT=2, EBADF=9, EINVAL=22, ENFILE=23 and EMFILE=24. Adapter maps corresponding host errno values; unlisted host failures map to MSC EIO=5.",
+      "text_default": "MSC STDLIB.H exposes _fmode as the default translation mode and FCNTL.H specifies O_TEXT translation. This adapter initializes dos_fmode to O_TEXT; exact linked CRT startup initialization of _fmode has not been established here. Explicit binary source calls are pinned independently."
+    }
+  },
+  "source_runtime_tool_pins_before_after": {
+    "before": {
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.h": {
+        "path": "portable/whole_program/platform/dos_io.h",
+        "size": 1487,
+        "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.c": {
+        "path": "portable/whole_program/platform/dos_io.c",
+        "size": 10148,
+        "sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\README.md": {
+        "path": "portable/whole_program/platform/README.md",
+        "size": 3595,
+        "sha256": "a3f8dad5a8543fc88604e271f060209436fcea6406d0ef8af06d01783d4f152e"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_files.h": {
+        "path": "portable/whole_program/platform/dos_files.h",
+        "size": 835,
+        "sha256": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\dos_io_test.c": {
+        "path": "portable/whole_program/platform/tests/dos_io_test.c",
+        "size": 6033,
+        "sha256": "6c7bd64b57553c945541c1e9a90622cbd877479d7a60cf997509ee7350e0f6b7"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\run_dos_io_tests.py": {
+        "path": "portable/whole_program/platform/tests/run_dos_io_tests.py",
+        "size": 9487,
+        "sha256": "46d7350e2c08cf9f28f6d7bd31e71aa719845bc1fd33b418de20d9c0f6702a1e"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m00BA.c": {
+        "path": "src/root/m00BA.c",
+        "size": 3562,
+        "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m15F8.c": {
+        "path": "src/root/m15F8.c",
+        "size": 4897,
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m171C.c": {
+        "path": "src/root/m171C.c",
+        "size": 25820,
+        "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m1986.c": {
+        "path": "src/root/m1986.c",
+        "size": 2874,
+        "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m19DC.c": {
+        "path": "src/root/m19DC.c",
+        "size": 4995,
+        "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m1A28.c": {
+        "path": "src/root/m1A28.c",
+        "size": 3200,
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m1A53.c": {
+        "path": "src/root/m1A53.c",
+        "size": 5159,
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m25E7.c": {
+        "path": "src/root/m25E7.c",
+        "size": 5610,
+        "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530"
+      },
+      "D:\\Prog\\simant_recon\\src\\S09\\m35F5.c": {
+        "path": "src/S09/m35F5.c",
+        "size": 42150,
+        "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+      },
+      "D:\\Prog\\simant_recon\\src\\S20\\m39F1.c": {
+        "path": "src/S20/m39F1.c",
+        "size": 6620,
+        "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3"
+      },
+      "D:\\Prog\\simant_recon\\layout\\toolchain.json": {
+        "path": "layout/toolchain.json",
+        "size": 39241,
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+      },
+      "D:\\Prog\\simant_recon\\evidence\\toolchain\\runtime-location.json": {
+        "path": "evidence/toolchain/runtime-location.json",
+        "size": 19154,
+        "sha256": "7a74606866f9645afdfe7181723a61771d4345a7be95f71dcc1fcde002405675"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT1": {
+        "path": "assets/FONT1",
+        "size": 2950,
+        "sha256": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT2": {
+        "path": "assets/FONT2",
+        "size": 2930,
+        "sha256": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT3": {
+        "path": "assets/FONT3",
+        "size": 3198,
+        "sha256": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT4": {
+        "path": "assets/FONT4",
+        "size": 3326,
+        "sha256": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\FCNTL.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\FCNTL.H",
+        "size": 1126,
+        "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\IO.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\IO.H",
+        "size": 1512,
+        "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\ERRNO.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\ERRNO.H",
+        "size": 1428,
+        "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\DIRECT.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\DIRECT.H",
+        "size": 892,
+        "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STRING.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STRING.H",
+        "size": 4975,
+        "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STDLIB.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STDLIB.H",
+        "size": 6539,
+        "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\SYS\\STAT.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\SYS\\STAT.H",
+        "size": 1330,
+        "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051"
+      },
+      "gcc": {
+        "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "size": 2350907,
+        "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+      }
+    },
+    "after": {
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.h": {
+        "path": "portable/whole_program/platform/dos_io.h",
+        "size": 1487,
+        "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.c": {
+        "path": "portable/whole_program/platform/dos_io.c",
+        "size": 10148,
+        "sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\README.md": {
+        "path": "portable/whole_program/platform/README.md",
+        "size": 3595,
+        "sha256": "a3f8dad5a8543fc88604e271f060209436fcea6406d0ef8af06d01783d4f152e"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_files.h": {
+        "path": "portable/whole_program/platform/dos_files.h",
+        "size": 835,
+        "sha256": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\dos_io_test.c": {
+        "path": "portable/whole_program/platform/tests/dos_io_test.c",
+        "size": 6033,
+        "sha256": "6c7bd64b57553c945541c1e9a90622cbd877479d7a60cf997509ee7350e0f6b7"
+      },
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\run_dos_io_tests.py": {
+        "path": "portable/whole_program/platform/tests/run_dos_io_tests.py",
+        "size": 9487,
+        "sha256": "46d7350e2c08cf9f28f6d7bd31e71aa719845bc1fd33b418de20d9c0f6702a1e"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m00BA.c": {
+        "path": "src/root/m00BA.c",
+        "size": 3562,
+        "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m15F8.c": {
+        "path": "src/root/m15F8.c",
+        "size": 4897,
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m171C.c": {
+        "path": "src/root/m171C.c",
+        "size": 25820,
+        "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m1986.c": {
+        "path": "src/root/m1986.c",
+        "size": 2874,
+        "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m19DC.c": {
+        "path": "src/root/m19DC.c",
+        "size": 4995,
+        "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m1A28.c": {
+        "path": "src/root/m1A28.c",
+        "size": 3200,
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m1A53.c": {
+        "path": "src/root/m1A53.c",
+        "size": 5159,
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+      },
+      "D:\\Prog\\simant_recon\\src\\root\\m25E7.c": {
+        "path": "src/root/m25E7.c",
+        "size": 5610,
+        "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530"
+      },
+      "D:\\Prog\\simant_recon\\src\\S09\\m35F5.c": {
+        "path": "src/S09/m35F5.c",
+        "size": 42150,
+        "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+      },
+      "D:\\Prog\\simant_recon\\src\\S20\\m39F1.c": {
+        "path": "src/S20/m39F1.c",
+        "size": 6620,
+        "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3"
+      },
+      "D:\\Prog\\simant_recon\\layout\\toolchain.json": {
+        "path": "layout/toolchain.json",
+        "size": 39241,
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+      },
+      "D:\\Prog\\simant_recon\\evidence\\toolchain\\runtime-location.json": {
+        "path": "evidence/toolchain/runtime-location.json",
+        "size": 19154,
+        "sha256": "7a74606866f9645afdfe7181723a61771d4345a7be95f71dcc1fcde002405675"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT1": {
+        "path": "assets/FONT1",
+        "size": 2950,
+        "sha256": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT2": {
+        "path": "assets/FONT2",
+        "size": 2930,
+        "sha256": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT3": {
+        "path": "assets/FONT3",
+        "size": 3198,
+        "sha256": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff"
+      },
+      "D:\\Prog\\simant_recon\\assets\\FONT4": {
+        "path": "assets/FONT4",
+        "size": 3326,
+        "sha256": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\FCNTL.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\FCNTL.H",
+        "size": 1126,
+        "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\IO.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\IO.H",
+        "size": 1512,
+        "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\ERRNO.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\ERRNO.H",
+        "size": 1428,
+        "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\DIRECT.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\DIRECT.H",
+        "size": 892,
+        "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STRING.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STRING.H",
+        "size": 4975,
+        "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STDLIB.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\STDLIB.H",
+        "size": 6539,
+        "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476"
+      },
+      "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\SYS\\STAT.H": {
+        "path": "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\SYS\\STAT.H",
+        "size": 1330,
+        "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051"
+      },
+      "gcc": {
+        "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+        "size": 2350907,
+        "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+      }
+    }
+  },
+  "tools": {
+    "gcc_version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "python": {
+      "version": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+      "platform": "win32"
+    }
+  },
+  "build": {
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O0",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\dos_io_test.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\final-dos-io\\dos-io-tests.exe"
+    ],
+    "returncode": 0,
+    "exe_sha256": "d320247ac26ac2b70e7c08dfc1404b7436e90521feecb4d3fe4184c85ef719ee",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "run": {
+    "returncode": 0,
+    "stdout_sha256": "c7f2816b91dafbb163aa022cf4836c0a0c3fc051239f4b7d5fe400be3792eee6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source_call_audit": {
+    "root/m00BA": "read(fd,*,word_count), lseek(fd,long_offset,origin); fd acquired outside this segment.",
+    "root/m15F8": "open(install.exe,0), close; runtime files error 24 is tested.",
+    "root/m171C": "write dump text; open ralloc.dmp with 0x109 plus mode 0x180; close/remove on error.",
+    "root/m1986": "open index with 0x8002, read 20-byte header and count*8 rows, close.",
+    "root/m19DC": "lseek to page<<14 and read 0x4000-byte blocks; raw file handles originate in DB setup.",
+    "root/m1A28": "open data 0x8002, fallback create 0x8102/0x180, read/write 14-byte header, lseek to zero, close.",
+    "root/m1A53": "access(path,0) existence check.",
+    "root/m25E7": "fopen(name,rb), fread 16-bit size/count records, fclose; FILE is converted to opaque DosFileStream.",
+    "S09/m35F5": "open/read/write/remove and chdir across saved/current directories; explicit O_BINARY on game-file paths.",
+    "S20/m39F1": "stricmp BUG value, getcwd(NULL,0), open/read config in mode 0 (default text mode), close."
+  },
+  "unresolved": [
+    "No original-DOS invocation was executed by this package; the tested outcomes are native CRT controls only.",
+    "MSC _fmode startup initial value is not directly tied to the executable here; adapter default is explicit O_TEXT and caller-configurable.",
+    "Path sandboxing is provided by the isolated test working directory, not enforced by production dos_chdir/dos_open.",
+    "DOS wildcard enumeration (_dos_findfirst/_dos_findnext) is a separate existing dos_files.h API and is not changed by this task."
+  ],
+  "scratch_root": "D:\\Prog\\simant_recon\\build\\workers\\final-dos-io\\fs"
+}
