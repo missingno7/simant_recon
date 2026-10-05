@@ -1,0 +1,413 @@
+{
+  "schema": "simant-findindex-native-boundary-investigation-v1",
+  "status": "UNRESOLVED_SEMANTIC_PORT_BLOCKER",
+  "scope": "Original DOS allocator/index ownership and reads with modeled file/format service boundaries; no native/original equivalence or full-game heap-reachability acceptance.",
+  "actual_original_calls": 18,
+  "unicorn_version": "2.1.4",
+  "inputs": [
+    {
+      "path": "evidence/canonical/native-findindex-boundary/probe.py",
+      "sha256": "7da92837167586a7b5cb0a54334e2c2518b46e1814ff282e5e48fdcb2d7a9f7f",
+      "size": 9311
+    },
+    {
+      "path": "tools/behavior.py",
+      "sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+      "size": 33696
+    },
+    {
+      "path": "tools/behavior_suites/memory.py",
+      "sha256": "43a8b16c07e07184ba9d7bf0d45fae36efe3c0977732ff9b82b39f85df9fe8ac",
+      "size": 14180
+    },
+    {
+      "path": "assets/SIMANT.EXE",
+      "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "size": 506509
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+      "size": 356104
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "faf038047fbed7ef219666d90c5b1acaa4c7b9b5452992031932d02dc4d43836",
+      "size": 801944
+    },
+    {
+      "path": "src/root/m1986.c",
+      "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+      "size": 2874
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "size": 25820
+    },
+    {
+      "path": "src/root/m19A9.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "size": 4870
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "size": 5159
+    },
+    {
+      "path": "src/root/m0000.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "size": 5066
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+      "size": 6620
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+      "size": 9120
+    },
+    {
+      "path": "assets/HCEGANT.NDX",
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "size": 2444
+    },
+    {
+      "path": "assets/SHARED.NDX",
+      "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+      "size": 3868
+    },
+    {
+      "path": "assets/SOUND.NDX",
+      "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+      "size": 1236
+    }
+  ],
+  "results": [
+    {
+      "database": "HCEGANT",
+      "fill": 167,
+      "count": 271,
+      "requested_bytes": 2168,
+      "physical_payload_bytes": 2176,
+      "payload_pointer": 2701262848,
+      "query": {
+        "id": 10010,
+        "kind": 18
+      },
+      "original_return": 0,
+      "cursor": 271,
+      "global_candidate": 2701265016,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 2168,
+          "returned": 2168
+        }
+      ],
+      "onepast_8_bytes": "a7a7a7a7a7a7a7a7",
+      "tail_owner": "allocated paragraph padding",
+      "next_header_relative_to_end": 8,
+      "next_header": "0000000000007603800000000000000000000066726565000000000000000000",
+      "onepast_reads": [
+        {
+          "address": 661660,
+          "relative_to_end": 4,
+          "length": 2
+        }
+      ],
+      "master_base": {
+        "segment": 37119,
+        "offset": 0
+      },
+      "original_pointer_to_handle_recovery": 2432696316,
+      "allocator_trace_callbacks": [
+        "close",
+        "open",
+        "read",
+        "sprintf"
+      ]
+    },
+    {
+      "database": "HCEGANT",
+      "fill": 185,
+      "count": 271,
+      "requested_bytes": 2168,
+      "physical_payload_bytes": 2176,
+      "payload_pointer": 2701262848,
+      "query": {
+        "id": 10010,
+        "kind": 18
+      },
+      "original_return": 0,
+      "cursor": 271,
+      "global_candidate": 2701265016,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 2168,
+          "returned": 2168
+        }
+      ],
+      "onepast_8_bytes": "b9b9b9b9b9b9b9b9",
+      "tail_owner": "allocated paragraph padding",
+      "next_header_relative_to_end": 8,
+      "next_header": "0000000000007603800000000000000000000066726565000000000000000000",
+      "onepast_reads": [
+        {
+          "address": 661660,
+          "relative_to_end": 4,
+          "length": 2
+        }
+      ],
+      "master_base": {
+        "segment": 37119,
+        "offset": 0
+      },
+      "original_pointer_to_handle_recovery": 2432696316,
+      "allocator_trace_callbacks": [
+        "close",
+        "open",
+        "read",
+        "sprintf"
+      ]
+    },
+    {
+      "database": "SHARED",
+      "fill": 167,
+      "count": 449,
+      "requested_bytes": 3592,
+      "physical_payload_bytes": 3600,
+      "payload_pointer": 2701262848,
+      "query": {
+        "id": 10000,
+        "kind": 22
+      },
+      "original_return": 0,
+      "cursor": 449,
+      "global_candidate": 2701266440,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 3592,
+          "returned": 3592
+        }
+      ],
+      "onepast_8_bytes": "a7a7a7a7a7a7a7a7",
+      "tail_owner": "allocated paragraph padding",
+      "next_header_relative_to_end": 8,
+      "next_header": "0000000000001d03800000000000000000000066726565000000000000000000",
+      "onepast_reads": [
+        {
+          "address": 663084,
+          "relative_to_end": 4,
+          "length": 2
+        }
+      ],
+      "master_base": {
+        "segment": 37119,
+        "offset": 0
+      },
+      "original_pointer_to_handle_recovery": 2432696316,
+      "allocator_trace_callbacks": [
+        "close",
+        "open",
+        "read",
+        "sprintf"
+      ]
+    },
+    {
+      "database": "SHARED",
+      "fill": 185,
+      "count": 449,
+      "requested_bytes": 3592,
+      "physical_payload_bytes": 3600,
+      "payload_pointer": 2701262848,
+      "query": {
+        "id": 10000,
+        "kind": 22
+      },
+      "original_return": 0,
+      "cursor": 449,
+      "global_candidate": 2701266440,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 3592,
+          "returned": 3592
+        }
+      ],
+      "onepast_8_bytes": "b9b9b9b9b9b9b9b9",
+      "tail_owner": "allocated paragraph padding",
+      "next_header_relative_to_end": 8,
+      "next_header": "0000000000001d03800000000000000000000066726565000000000000000000",
+      "onepast_reads": [
+        {
+          "address": 663084,
+          "relative_to_end": 4,
+          "length": 2
+        }
+      ],
+      "master_base": {
+        "segment": 37119,
+        "offset": 0
+      },
+      "original_pointer_to_handle_recovery": 2432696316,
+      "allocator_trace_callbacks": [
+        "close",
+        "open",
+        "read",
+        "sprintf"
+      ]
+    },
+    {
+      "database": "SOUND",
+      "fill": 167,
+      "count": 120,
+      "requested_bytes": 960,
+      "physical_payload_bytes": 960,
+      "payload_pointer": 2701262848,
+      "query": {
+        "id": 10000,
+        "kind": 22
+      },
+      "original_return": 0,
+      "cursor": 120,
+      "global_candidate": 2701263808,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 960,
+          "returned": 960
+        }
+      ],
+      "onepast_8_bytes": "000000000000c203",
+      "tail_owner": "next free Block header",
+      "next_header_relative_to_end": 0,
+      "next_header": "000000000000c203800000000000000000000066726565000000000000000000",
+      "onepast_reads": [
+        {
+          "address": 660452,
+          "relative_to_end": 4,
+          "length": 2
+        }
+      ],
+      "master_base": {
+        "segment": 37119,
+        "offset": 0
+      },
+      "original_pointer_to_handle_recovery": 2432696316,
+      "allocator_trace_callbacks": [
+        "close",
+        "open",
+        "read",
+        "sprintf"
+      ]
+    },
+    {
+      "database": "SOUND",
+      "fill": 185,
+      "count": 120,
+      "requested_bytes": 960,
+      "physical_payload_bytes": 960,
+      "payload_pointer": 2701262848,
+      "query": {
+        "id": 10000,
+        "kind": 22
+      },
+      "original_return": 0,
+      "cursor": 120,
+      "global_candidate": 2701263808,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 960,
+          "returned": 960
+        }
+      ],
+      "onepast_8_bytes": "000000000000c203",
+      "tail_owner": "next free Block header",
+      "next_header_relative_to_end": 0,
+      "next_header": "000000000000c203800000000000000000000066726565000000000000000000",
+      "onepast_reads": [
+        {
+          "address": 660452,
+          "relative_to_end": 4,
+          "length": 2
+        }
+      ],
+      "master_base": {
+        "segment": 37119,
+        "offset": 0
+      },
+      "original_pointer_to_handle_recovery": 2432696316,
+      "allocator_trace_callbacks": [
+        "close",
+        "open",
+        "read",
+        "sprintf"
+      ]
+    }
+  ],
+  "dependencies": {
+    "active_tools": [
+      "tools/behavior.py",
+      "tools/behavior_suites/memory.py",
+      "tools/functions.py",
+      "tools/exe.py",
+      "tools/match.py"
+    ],
+    "historical_or_archived_sources_read": [],
+    "prepared_pair_or_candidate_compiler_used": false,
+    "runtime": "Pinned Unicorn available through tools/behavior.py; current layout registry and original hash-locked assets."
+  },
+  "limits": [
+    "Heap starts in a valid initialized free-list fixture; original _dos_allocmem startup and full game allocation history were not executed.",
+    "The nonzero fill varies preexisting free payload contents and does not create a sentinel. No reserved NDX row is loaded.",
+    "The query arguments use ordinary source caller kinds; a passing NULL result under two fills cannot establish NULL under all reachable original histories.",
+    "Original FindIndex and original allocator helpers execute directly. There is no newly compiled candidate or promoted claim."
+  ]
+}

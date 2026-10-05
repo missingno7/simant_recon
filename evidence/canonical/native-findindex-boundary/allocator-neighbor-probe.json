@@ -1,0 +1,2077 @@
+{
+  "schema": "simant-findindex-original-allocator-neighbor-v1",
+  "status": "ORIGINAL_HEADER_FALSE_HIT_WITNESS_BOUNDED",
+  "scope": "Original instruction execution after a valid initialized free-heap fixture. No full-game reachability, original allocator startup, or native allocator-equivalence claim.",
+  "actual_top_level_original_calls": 41,
+  "unicorn_version": "2.1.4",
+  "asset": {
+    "count": 120,
+    "loaded_bytes": 960,
+    "max_kind": 20,
+    "last_key": {
+      "id": 20011,
+      "kind": 20
+    },
+    "kind_counts": {
+      "5": 57,
+      "18": 33,
+      "20": 30
+    }
+  },
+  "results": [
+    {
+      "fill": 167,
+      "allocated_neighbor_bytes": 320,
+      "released_neighbor": false,
+      "count": 120,
+      "loaded_bytes": 960,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 960,
+          "returned": 960
+        }
+      ],
+      "index_payload": {
+        "raw": 2701262848,
+        "hex": "A102:0000",
+        "linear": 659488
+      },
+      "master_base": {
+        "raw": 2432630784,
+        "hex": "90FF:0000",
+        "linear": 593904
+      },
+      "master_table_start_linear": 659184,
+      "index_end_linear": 660448,
+      "sequence": [
+        {
+          "name": "OpenIndex",
+          "args": [
+            0,
+            42496,
+            0
+          ],
+          "return": null,
+          "actual_entries": [
+            {
+              "name": "OpenIndex",
+              "at": "1986:0004"
+            },
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [
+            {
+              "name": "sprintf",
+              "args": [
+                41872,
+                21939,
+                13854,
+                21939,
+                0,
+                42496,
+                22136,
+                26505
+              ]
+            },
+            {
+              "name": "open",
+              "args": [
+                41872,
+                21939,
+                32770
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                14764,
+                20726,
+                20
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                0,
+                41218,
+                960
+              ]
+            },
+            {
+              "name": "close",
+              "args": [
+                3
+              ]
+            }
+          ],
+          "index_pointer": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "index_header": {
+            "linear": 659456,
+            "bytes": "fcffc00300003e0000006400000000000000006f776e6572736869702e6e6400",
+            "master_slot_offset": -4,
+            "requested_bytes": 960,
+            "paras": 62,
+            "type": 0,
+            "lock": 0,
+            "age": 100,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "ownership.nd",
+            "as_index_id": 0,
+            "as_index_kind": 62,
+            "as_index_flags": 0
+          },
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "000000000000c203800000000000000000000066726565000000000000000000",
+            "master_slot_offset": 0,
+            "requested_bytes": 0,
+            "paras": 962,
+            "type": 128,
+            "lock": 0,
+            "age": 0,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "free",
+            "as_index_id": 0,
+            "as_index_kind": 194,
+            "as_index_flags": 3
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "return_handle": {
+            "raw": 2432696316,
+            "hex": "90FF:FFFC",
+            "linear": 659436
+          }
+        },
+        {
+          "name": "f_171C_13CA",
+          "args": {
+            "size": 320,
+            "flags": 0,
+            "name": "neighbor"
+          },
+          "actual_stack_words": [
+            320,
+            0,
+            0,
+            64,
+            42496
+          ],
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          },
+          "payload_pointer": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "actual_entries": [
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [],
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "f8ff40010000160000006500000000000000006e65696768626f720000000000",
+            "master_slot_offset": -8,
+            "requested_bytes": 320,
+            "paras": 22,
+            "type": 0,
+            "lock": 0,
+            "age": 101,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "neighbor",
+            "as_index_id": 0,
+            "as_index_kind": 22,
+            "as_index_flags": 0
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          }
+        }
+      ],
+      "queries": [
+        {
+          "id": 0,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "16"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 23,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "16"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10000,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10010,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 5,
+          "cursor": 0,
+          "original_return": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "global_candidate": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "onepast_reads": [],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fill": 185,
+      "allocated_neighbor_bytes": 320,
+      "released_neighbor": false,
+      "count": 120,
+      "loaded_bytes": 960,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 960,
+          "returned": 960
+        }
+      ],
+      "index_payload": {
+        "raw": 2701262848,
+        "hex": "A102:0000",
+        "linear": 659488
+      },
+      "master_base": {
+        "raw": 2432630784,
+        "hex": "90FF:0000",
+        "linear": 593904
+      },
+      "master_table_start_linear": 659184,
+      "index_end_linear": 660448,
+      "sequence": [
+        {
+          "name": "OpenIndex",
+          "args": [
+            0,
+            42496,
+            0
+          ],
+          "return": null,
+          "actual_entries": [
+            {
+              "name": "OpenIndex",
+              "at": "1986:0004"
+            },
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [
+            {
+              "name": "sprintf",
+              "args": [
+                41872,
+                21939,
+                13854,
+                21939,
+                0,
+                42496,
+                22136,
+                26505
+              ]
+            },
+            {
+              "name": "open",
+              "args": [
+                41872,
+                21939,
+                32770
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                14764,
+                20726,
+                20
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                0,
+                41218,
+                960
+              ]
+            },
+            {
+              "name": "close",
+              "args": [
+                3
+              ]
+            }
+          ],
+          "index_pointer": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "index_header": {
+            "linear": 659456,
+            "bytes": "fcffc00300003e0000006400000000000000006f776e6572736869702e6e6400",
+            "master_slot_offset": -4,
+            "requested_bytes": 960,
+            "paras": 62,
+            "type": 0,
+            "lock": 0,
+            "age": 100,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "ownership.nd",
+            "as_index_id": 0,
+            "as_index_kind": 62,
+            "as_index_flags": 0
+          },
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "000000000000c203800000000000000000000066726565000000000000000000",
+            "master_slot_offset": 0,
+            "requested_bytes": 0,
+            "paras": 962,
+            "type": 128,
+            "lock": 0,
+            "age": 0,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "free",
+            "as_index_id": 0,
+            "as_index_kind": 194,
+            "as_index_flags": 3
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "return_handle": {
+            "raw": 2432696316,
+            "hex": "90FF:FFFC",
+            "linear": 659436
+          }
+        },
+        {
+          "name": "f_171C_13CA",
+          "args": {
+            "size": 320,
+            "flags": 0,
+            "name": "neighbor"
+          },
+          "actual_stack_words": [
+            320,
+            0,
+            0,
+            64,
+            42496
+          ],
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          },
+          "payload_pointer": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "actual_entries": [
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [],
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "f8ff40010000160000006500000000000000006e65696768626f720000000000",
+            "master_slot_offset": -8,
+            "requested_bytes": 320,
+            "paras": 22,
+            "type": 0,
+            "lock": 0,
+            "age": 101,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "neighbor",
+            "as_index_id": 0,
+            "as_index_kind": 22,
+            "as_index_flags": 0
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          }
+        }
+      ],
+      "queries": [
+        {
+          "id": 0,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "16"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 23,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "16"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10000,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10010,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 5,
+          "cursor": 0,
+          "original_return": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "global_candidate": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "onepast_reads": [],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fill": 167,
+      "allocated_neighbor_bytes": 304,
+      "released_neighbor": false,
+      "count": 120,
+      "loaded_bytes": 960,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 960,
+          "returned": 960
+        }
+      ],
+      "index_payload": {
+        "raw": 2701262848,
+        "hex": "A102:0000",
+        "linear": 659488
+      },
+      "master_base": {
+        "raw": 2432630784,
+        "hex": "90FF:0000",
+        "linear": 593904
+      },
+      "master_table_start_linear": 659184,
+      "index_end_linear": 660448,
+      "sequence": [
+        {
+          "name": "OpenIndex",
+          "args": [
+            0,
+            42496,
+            0
+          ],
+          "return": null,
+          "actual_entries": [
+            {
+              "name": "OpenIndex",
+              "at": "1986:0004"
+            },
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [
+            {
+              "name": "sprintf",
+              "args": [
+                41872,
+                21939,
+                13854,
+                21939,
+                0,
+                42496,
+                22136,
+                26505
+              ]
+            },
+            {
+              "name": "open",
+              "args": [
+                41872,
+                21939,
+                32770
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                14764,
+                20726,
+                20
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                0,
+                41218,
+                960
+              ]
+            },
+            {
+              "name": "close",
+              "args": [
+                3
+              ]
+            }
+          ],
+          "index_pointer": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "index_header": {
+            "linear": 659456,
+            "bytes": "fcffc00300003e0000006400000000000000006f776e6572736869702e6e6400",
+            "master_slot_offset": -4,
+            "requested_bytes": 960,
+            "paras": 62,
+            "type": 0,
+            "lock": 0,
+            "age": 100,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "ownership.nd",
+            "as_index_id": 0,
+            "as_index_kind": 62,
+            "as_index_flags": 0
+          },
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "000000000000c203800000000000000000000066726565000000000000000000",
+            "master_slot_offset": 0,
+            "requested_bytes": 0,
+            "paras": 962,
+            "type": 128,
+            "lock": 0,
+            "age": 0,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "free",
+            "as_index_id": 0,
+            "as_index_kind": 194,
+            "as_index_flags": 3
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "return_handle": {
+            "raw": 2432696316,
+            "hex": "90FF:FFFC",
+            "linear": 659436
+          }
+        },
+        {
+          "name": "f_171C_13CA",
+          "args": {
+            "size": 304,
+            "flags": 0,
+            "name": "neighbor"
+          },
+          "actual_stack_words": [
+            304,
+            0,
+            0,
+            64,
+            42496
+          ],
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          },
+          "payload_pointer": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "actual_entries": [
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [],
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "f8ff30010000150000006500000000000000006e65696768626f720000000000",
+            "master_slot_offset": -8,
+            "requested_bytes": 304,
+            "paras": 21,
+            "type": 0,
+            "lock": 0,
+            "age": 101,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "neighbor",
+            "as_index_id": 0,
+            "as_index_kind": 21,
+            "as_index_flags": 0
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          }
+        }
+      ],
+      "queries": [
+        {
+          "id": 0,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "15"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 23,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "15"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10000,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10010,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 5,
+          "cursor": 0,
+          "original_return": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "global_candidate": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "onepast_reads": [],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fill": 167,
+      "allocated_neighbor_bytes": 320,
+      "released_neighbor": true,
+      "count": 120,
+      "loaded_bytes": 960,
+      "file_reads": [
+        {
+          "cursor": 0,
+          "requested": 20,
+          "returned": 20
+        },
+        {
+          "cursor": 20,
+          "requested": 960,
+          "returned": 960
+        }
+      ],
+      "index_payload": {
+        "raw": 2701262848,
+        "hex": "A102:0000",
+        "linear": 659488
+      },
+      "master_base": {
+        "raw": 2432630784,
+        "hex": "90FF:0000",
+        "linear": 593904
+      },
+      "master_table_start_linear": 659184,
+      "index_end_linear": 660448,
+      "sequence": [
+        {
+          "name": "OpenIndex",
+          "args": [
+            0,
+            42496,
+            0
+          ],
+          "return": null,
+          "actual_entries": [
+            {
+              "name": "OpenIndex",
+              "at": "1986:0004"
+            },
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [
+            {
+              "name": "sprintf",
+              "args": [
+                41872,
+                21939,
+                13854,
+                21939,
+                0,
+                42496,
+                22136,
+                26505
+              ]
+            },
+            {
+              "name": "open",
+              "args": [
+                41872,
+                21939,
+                32770
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                14764,
+                20726,
+                20
+              ]
+            },
+            {
+              "name": "read",
+              "args": [
+                3,
+                0,
+                41218,
+                960
+              ]
+            },
+            {
+              "name": "close",
+              "args": [
+                3
+              ]
+            }
+          ],
+          "index_pointer": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "index_header": {
+            "linear": 659456,
+            "bytes": "fcffc00300003e0000006400000000000000006f776e6572736869702e6e6400",
+            "master_slot_offset": -4,
+            "requested_bytes": 960,
+            "paras": 62,
+            "type": 0,
+            "lock": 0,
+            "age": 100,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "ownership.nd",
+            "as_index_id": 0,
+            "as_index_kind": 62,
+            "as_index_flags": 0
+          },
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "000000000000c203800000000000000000000066726565000000000000000000",
+            "master_slot_offset": 0,
+            "requested_bytes": 0,
+            "paras": 962,
+            "type": 128,
+            "lock": 0,
+            "age": 0,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "free",
+            "as_index_id": 0,
+            "as_index_kind": 194,
+            "as_index_flags": 3
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "return_handle": {
+            "raw": 2432696316,
+            "hex": "90FF:FFFC",
+            "linear": 659436
+          }
+        },
+        {
+          "name": "f_171C_13CA",
+          "args": {
+            "size": 320,
+            "flags": 0,
+            "name": "neighbor"
+          },
+          "actual_stack_words": [
+            320,
+            0,
+            0,
+            64,
+            42496
+          ],
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          },
+          "payload_pointer": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "actual_entries": [
+            {
+              "name": "f_171C_13CA",
+              "at": "171C:13CA"
+            },
+            {
+              "name": "f_171C_125C",
+              "at": "171C:125C"
+            },
+            {
+              "name": "f_171C_0EEA",
+              "at": "171C:0EEA"
+            },
+            {
+              "name": "f_171C_0A5C",
+              "at": "171C:0A5C"
+            },
+            {
+              "name": "f_171C_068C",
+              "at": "171C:068C"
+            }
+          ],
+          "modeled_callbacks": [],
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "f8ff40010000160000006500000000000000006e65696768626f720000000000",
+            "master_slot_offset": -8,
+            "requested_bytes": 320,
+            "paras": 22,
+            "type": 0,
+            "lock": 0,
+            "age": 101,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "neighbor",
+            "as_index_id": 0,
+            "as_index_kind": 22,
+            "as_index_flags": 0
+          }
+        },
+        {
+          "name": "f_171C_2136",
+          "payload": {
+            "raw": 2705326080,
+            "hex": "A140:0000",
+            "linear": 660480
+          },
+          "return_handle": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          }
+        },
+        {
+          "name": "f_171C_13E4",
+          "args": {
+            "raw": 2432696312,
+            "hex": "90FF:FFF8",
+            "linear": 659432
+          },
+          "return": null,
+          "actual_entries": [
+            {
+              "name": "f_171C_13E4",
+              "at": "171C:13E4"
+            },
+            {
+              "name": "f_171C_0160",
+              "at": "171C:0160"
+            },
+            {
+              "name": "f_171C_1246",
+              "at": "171C:1246"
+            }
+          ],
+          "modeled_callbacks": [],
+          "tail_owner_after": {
+            "linear": 660448,
+            "bytes": "f8ff40010000c20380006500000000000000006e65696768626f720000000000",
+            "master_slot_offset": -8,
+            "requested_bytes": 320,
+            "paras": 962,
+            "type": 128,
+            "lock": 0,
+            "age": 101,
+            "next_segment": 0,
+            "prev_segment": 0,
+            "attributes": 0,
+            "name": "neighbor",
+            "as_index_id": 0,
+            "as_index_kind": 194,
+            "as_index_flags": 3
+          }
+        }
+      ],
+      "queries": [
+        {
+          "id": 0,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "c2"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 23,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            },
+            {
+              "at": "1986:0215",
+              "address": 660454,
+              "relative_to_index_end": 6,
+              "length": 1,
+              "bytes": "c2"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10000,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 10010,
+          "kind": 22,
+          "cursor": 120,
+          "original_return": {
+            "raw": 0,
+            "hex": "0000:0000",
+            "linear": 0
+          },
+          "global_candidate": {
+            "raw": 2701263808,
+            "hex": "A102:03C0",
+            "linear": 660448
+          },
+          "onepast_reads": [
+            {
+              "at": "1986:0209",
+              "address": 660452,
+              "relative_to_index_end": 4,
+              "length": 2,
+              "bytes": "0000"
+            }
+          ],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "kind": 5,
+          "cursor": 0,
+          "original_return": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "global_candidate": {
+            "raw": 2701262848,
+            "hex": "A102:0000",
+            "linear": 659488
+          },
+          "onepast_reads": [],
+          "actual_entries": [
+            {
+              "name": "FindIndex",
+              "at": "1986:012A"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "native_guard_negative": {
+    "status": "EXECUTED_CURRENT_WHOLE_TU_GUARD_NEGATIVE",
+    "guard": "if (fd_50F6_3956 == fd_50F6_3958[db].indexHeader.count) return 0L;",
+    "index_capacity_rows": 120,
+    "loaded_rows": 120,
+    "neighbor_headers_installed": false,
+    "reserved_rows_installed": false,
+    "columns": [
+      "id",
+      "kind",
+      "cursor",
+      "returned_rank_or_minus_one",
+      "global_candidate_rank"
+    ],
+    "observations": [
+      [
+        0,
+        22,
+        120,
+        -1,
+        120
+      ],
+      [
+        1,
+        22,
+        120,
+        -1,
+        120
+      ],
+      [
+        0,
+        23,
+        120,
+        -1,
+        120
+      ],
+      [
+        10000,
+        22,
+        120,
+        -1,
+        120
+      ],
+      [
+        10010,
+        22,
+        120,
+        -1,
+        120
+      ],
+      [
+        0,
+        5,
+        0,
+        0,
+        0
+      ]
+    ],
+    "inputs": [
+      {
+        "path": "build/portable-asm-audit-current/report.json",
+        "sha256": "6ab2147f826b45b50097c61acd767df399bf520256943b1aeaaffe67efea03de",
+        "size": 541182
+      },
+      {
+        "path": "src/root/m1986.c",
+        "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+        "size": 2874
+      },
+      {
+        "path": "build/portable-asm-audit-current/root_1986.c",
+        "sha256": "eb62b4411cbcf2818a07f4047dfdb97ccf44a76250df44a7306a82873e535059",
+        "size": 2834
+      },
+      {
+        "path": "src/state/database-record-state.c",
+        "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
+        "size": 1295
+      },
+      {
+        "path": "build/portable-asm-audit-current/source-owned_database-record-state.c",
+        "sha256": "cc2a6024a48dbf8b958a72e31cd7756a30444ae528f42016c25b1b7d6b5f5a3b",
+        "size": 283
+      },
+      {
+        "path": "src/state/database-index-state.c",
+        "sha256": "a052b1148cf3dca2ee2157bffeee5e2b92b3f51ef78235e37c8e5fe5d8b4f4d8",
+        "size": 458
+      },
+      {
+        "path": "build/portable-asm-audit-current/source-owned_database-index-state.c",
+        "sha256": "37362e1718e89cab3cb3579befafdc476b497d606aee4f926524ae8629232e98",
+        "size": 283
+      },
+      {
+        "path": "build/findindex-neighbor-asm-final/native_guard_driver.c",
+        "sha256": "60cfacf55c245f6528ee8dd77925421db3bfd506123f9fc93cbda42facaeb72f",
+        "size": 1750
+      }
+    ],
+    "compiler": {
+      "path": "C:/msys64/mingw64/bin/gcc.exe",
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+    },
+    "commands": "native-guard-commands.json",
+    "limit": "This verifies the existing guard result with the same loaded rows/query. Native platform handles do not preserve the original DOS adjacency; no native allocator equivalence is claimed."
+  },
+  "constraints": [
+    "SOUND maxkind20 makes query0/kind22 lower-bound rank120, regardless of its id.",
+    "320-byte original allocation has paras22 including its 32-byte header. Header+4 is the high size word0; header+6 is low paras byte22.",
+    "FindIndex returns the retained-index-segment far pointer A102:03C0, physically identical to neighbor Block A13E:0000, rather than neighbor payload A140:0000.",
+    "Direct production FindIndex caller DBRecall forwards object/type without a local range restriction, and db_LoadObject forwards its int object/kind on cache misses.",
+    "Known original kind22 LoadMonoPats calls use IDs10000 and10010, so neither matches this small-allocation header ID0. Both original negative queries execute rank120 id reads and return NULL.",
+    "No observed source call requesting ID0/kind22 has been established. Generic wrappers accepting caller-supplied object/kind do not prove that pair reachable.",
+    "A large long allocation can store a nonzero high size word while paragraph arithmetic uses low16; this probe does not supply such unsupported capacity histories."
+  ],
+  "handling_assessment": {
+    "remove_native_guard": false,
+    "add_reserved_or_sentinel_row": false,
+    "mechanical_canonical_source_correction_supported": false,
+    "reason": "The index bytes do not own the candidate. Returning a Block header is a real DOS arena alias depending on allocator history; host malloc blocks and widened runtime pointers cannot reconstruct it from index rows.",
+    "supported_direction_only": "A source-driven DOS arena preserving original Block fields, allocator state/history and paragraph addresses could expose an explicit address view at a platform boundary. It must retain canonical allocator algorithms and represent cross-object dereference/DBRecall offset interpretation. This witness alone does not prove such a design or initial heap contents."
+  },
+  "limits": [
+    "Master base has original startup offset zero;64descending slots end one paragraph before heap. Both original pointer-to-handle recoveries pass in every history. Free heap/header/counters remain test-owned; full original _dos_allocmem startup is not executed.",
+    "Neighbor size320 and synthetic query0/kind22 are deliberately controlled API inputs, not an asserted game allocation/query sequence.",
+    "No table padding, reserved row or fake sentinel is installed; original allocation/split/free instructions produce every header observed after initialization.",
+    "Negative native guarded whole-TU execution uses exactly count rows and no modeled neighbor. Its NULL result demonstrates the guard semantic contrast, not equality of native/DOS heaps.",
+    "Original instructions execute unchanged from the hash-locked EXE. No canonical or production source was edited, and no claim was promoted."
+  ],
+  "contexts": [
+    {
+      "path": "build/findindex-neighbor-asm-final/OpenIndex.disasm.txt",
+      "sha256": "f0f6a96797cee8cc8fb3873f268c38f280458e5ddc98b774905f306870f721c8",
+      "size": 3185
+    },
+    {
+      "path": "build/findindex-neighbor-asm-final/FindIndex.disasm.txt",
+      "sha256": "03c32e1113cff60f7977a53882f64f203f2d67553a89b0fd0dbf3d2cbcaddab2",
+      "size": 3403
+    },
+    {
+      "path": "build/findindex-neighbor-asm-final/f_171C_13CA.disasm.txt",
+      "sha256": "093dbe5bf50cf60dc99e60043a9780b3a3112ba178c33f4a7a3e5aded960a51a",
+      "size": 633
+    },
+    {
+      "path": "build/findindex-neighbor-asm-final/f_171C_125C.disasm.txt",
+      "sha256": "b62c97061becf1692e6e682889572c97a446978a0472b2be436a4fcfe10d5056",
+      "size": 4467
+    },
+    {
+      "path": "build/findindex-neighbor-asm-final/f_171C_068C.disasm.txt",
+      "sha256": "d4d0a2132f5c4aa283626d4a935eb841a0e61276313478c6c247ba56fb742e9f",
+      "size": 3848
+    },
+    {
+      "path": "build/findindex-neighbor-asm-final/f_171C_13E4.disasm.txt",
+      "sha256": "8142ad8a9e9ded254e9a07ec479151af3d43379747ad32474a3c0ce3f77c31be",
+      "size": 2760
+    },
+    {
+      "path": "build/findindex-neighbor-asm-final/f_171C_0160.disasm.txt",
+      "sha256": "149fe6b44809307c94c8a251f9c2960e7f28ab2ef463d22d2fc0832a9951e65e",
+      "size": 4397
+    },
+    {
+      "path": "build/findindex-neighbor-asm-final/f_171C_2136.disasm.txt",
+      "sha256": "30d804d2d622dc5759df46965a98807a1571ddfeb3292f2cb60c11400bea61ea",
+      "size": 1357
+    }
+  ],
+  "inputs": [
+    {
+      "path": "evidence/canonical/native-findindex-boundary/neighbor_probe.py",
+      "sha256": "38d7476ef8275c407a7d04f4c3de8533ba57bf946b7448aba790af25b3f98c41",
+      "size": 21227
+    },
+    {
+      "path": "evidence/canonical/native-findindex-boundary/probe.py",
+      "sha256": "7da92837167586a7b5cb0a54334e2c2518b46e1814ff282e5e48fdcb2d7a9f7f",
+      "size": 9311
+    },
+    {
+      "path": "tools/behavior.py",
+      "sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+      "size": 33696
+    },
+    {
+      "path": "tools/behavior_suites/memory.py",
+      "sha256": "43a8b16c07e07184ba9d7bf0d45fae36efe3c0977732ff9b82b39f85df9fe8ac",
+      "size": 14180
+    },
+    {
+      "path": "tools/functions.py",
+      "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+      "size": 13467
+    },
+    {
+      "path": "tools/exe.py",
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+      "size": 7645
+    },
+    {
+      "path": "tools/match.py",
+      "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+      "size": 18033
+    },
+    {
+      "path": "assets/SIMANT.EXE",
+      "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "size": 506509
+    },
+    {
+      "path": "assets/SOUND.NDX",
+      "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+      "size": 1236
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+      "size": 356104
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "faf038047fbed7ef219666d90c5b1acaa4c7b9b5452992031932d02dc4d43836",
+      "size": 801944
+    },
+    {
+      "path": "src/root/m1986.c",
+      "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+      "size": 2874
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "size": 25820
+    },
+    {
+      "path": "src/root/m19A9.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "size": 4870
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "size": 5159
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+      "size": 9120
+    },
+    {
+      "path": "portable/whole_program/platform/handles.c",
+      "sha256": "195719cce93e9b912da6682f10a16316dd0b1ae32c438b3a78c91591c5661815",
+      "size": 25822
+    },
+    {
+      "path": "portable/canonical_native_abi/findindex_native_guard.py",
+      "sha256": "d82784f15ed6d9ca259794e8aad445a78e8d639787f71809453d2bd51d68b166",
+      "size": 2020
+    },
+    {
+      "path": "portable/whole_program/types/database.h",
+      "sha256": "8722c3fceb9f0af92bbe4129020d648ee69c8ee00c6f4614b89794fa815481a6",
+      "size": 2018
+    }
+  ],
+  "parent_review_required": true,
+  "production_edits": 0
+}

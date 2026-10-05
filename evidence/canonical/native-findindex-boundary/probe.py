@@ -73,7 +73,10 @@ def probe(stem, fill, ident, kind):
     raw = (ROOT / f'assets/{stem}.NDX').read_bytes()
     count = struct.unpack_from('<h', raw)[0]
     size = count * 8
-    heap_seg, heap_paras, master_seg, master_end = 0xA100, 0x400, 0xA000, 0x800
+    heap_seg, heap_paras, master_seg, master_end = 0xA100, 0x400, 0x90FF, 0
+    # Original startup uses an offset-zero master base. Slots wrap below it
+    # in the same segment; 64 slots end one paragraph before this heap.
+    master_start = master_seg * 16 + 0x10000 - 64 * 4
     pair = SimpleNamespace(function=entry('OpenIndex'),
         vectors={exe.MANAGER_SEG * 16 + v.offset: v for v in exe.load().vectors},
         candidate_entries={})
@@ -83,7 +86,7 @@ def probe(stem, fill, ident, kind):
         master_off=master_end, master_seg=master_seg, free_paras=heap_paras)
     writes += [(heap_seg * 16, memory.header(heap_paras, 0x80, size=0, name=b'free') +
                 bytes([fill]) * (heap_paras * 16 - 32)),
-               (master_seg * 16, bytes(master_end)),
+               (master_start, bytes(64 * 4)),
                (0xA6000, stem.encode() + b'\0')]
     opened = machine.run(b.Case(label=f'{stem}/fill{fill:02x}/OpenIndex',
         args=[0, 0xA600, 0], writes=writes, callbacks=callbacks,
@@ -96,6 +99,12 @@ def probe(stem, fill, ident, kind):
     block_paras = machine.word(block + 6)
     tail = start + size
     boundary = block + block_paras * 16
+    recovered = machine.run(b.Case(label=f'{stem}/recover index handle',
+        args=[pointer & 65535, pointer >> 16], return_kind='farptr'),
+        preserve=True, original_entry=entry('f_171C_2136'))
+    slot = machine.word(block)
+    assert recovered['return'] == (master_seg << 16) | slot
+    assert int.from_bytes(machine.read(far_linear(recovered['return']), 4), 'little') == pointer
     reads = []
 
     def observe_read(cpu, access, address, length, value, user):
@@ -128,6 +137,8 @@ def probe(stem, fill, ident, kind):
         'next_header_relative_to_end': boundary - tail,
         'next_header': machine.read(boundary, 32).hex(),
         'onepast_reads': reads,
+        'master_base': {'segment': master_seg, 'offset': master_end},
+        'original_pointer_to_handle_recovery': recovered['return'],
         'allocator_trace_callbacks': sorted({r['name'] for r in opened['raw_trace']})}
 
 
@@ -151,7 +162,7 @@ def main():
     report = {'schema': 'simant-findindex-native-boundary-investigation-v1',
         'status': 'UNRESOLVED_SEMANTIC_PORT_BLOCKER',
         'scope': 'Original DOS allocator/index ownership and reads with modeled file/format service boundaries; no native/original equivalence or full-game heap-reachability acceptance.',
-        'actual_original_calls': len(results) * 2,
+        'actual_original_calls': len(results) * 3,
         'unicorn_version': b.uc.__version__,
         'inputs': [pin(rel) for rel in [SOURCE.relative_to(ROOT).as_posix(),
             'tools/behavior.py', 'tools/behavior_suites/memory.py', 'assets/SIMANT.EXE',
