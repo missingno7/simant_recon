@@ -1,57 +1,448 @@
 {
-  "schema": "simant-canonical-consolidation-retirement-v1",
-  "historical_recovery_revision": "a1938e61452a63581718aee6659829528c3b8635",
-  "additional_recovery_revision": "c11a29baa56ca65d3c617a1f2d08647e12f9222f",
-  "baseline": {
-    "git_files": 10280,
-    "git_blob_bytes": 507761301
+  "schema": "simant-current-consolidation-v2",
+  "baseline_revision": "0eab5e5",
+  "prior_consolidation_history": "0eab5e5:evidence/canonical/validation/cleanup.json",
+  "scope": "Architecture/lifecycle cleanup; no new semantic source admission, standalone DOS game or human acceptance claim.",
+  "before": {
+    "tracked_files": 821,
+    "tracked_bytes": 15996509,
+    "portable_files": 244,
+    "evidence_files": 264,
+    "lowering_modules": 35,
+    "build": {
+      "root_entries": 506,
+      "directories_at_root": 194,
+      "files_at_root": 312,
+      "regular_files_recursive": 172529,
+      "nested_directories_recursive": 20179,
+      "reparse_points_skipped": 5,
+      "bytes_recursive": 6949971500,
+      "bytes_gib": 6.473
+    },
+    "native_contracts": 8,
+    "DOS_storage_imports": 11,
+    "DOS_semantic_gates": 11,
+    "functional_data_bytes": 44
   },
-  "retirement": {
-    "source_only_dos_tracked_files": 2068,
-    "old_work_and_behavior_tracked_files": 3515,
-    "old_work_and_behavior_head_blob_bytes": 213623352,
-    "old_work_and_behavior_ignored_cache_files": 37,
-    "portable_obsolete_tracked_files": 3981,
-    "portable_obsolete_ignored_or_untracked_files": 165,
-    "final_platform_unused_files": 23
+  "canonical_identity": {
+    "src/program.json": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
+    "layout/manifest.json": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242"
   },
-  "unique_local_research_preserved": {
-    "source_only_files": 150,
-    "source_only_bytes": 3576124,
-    "portable_files": 124,
-    "portable_bytes": 51933349,
-    "destination": "Ignored build/local-research-before-consolidation; no production role"
+  "generated_C_projection": {
+    "baseline_revision": "0eab5e5",
+    "TUs": 162,
+    "differing": [],
+    "method": "Direct whole-file byte equality against retained accepted baseline projection, including excluded physical DOS heap TU.",
+    "per_file_sha256": {
+      "S04_35F5.c": "806e4d76988c2b56853bf694085c67322a20da72d6604406cac5ce619aa57890",
+      "S05_35F5.c": "2f881644899d88914f1e7b3e20840299f808f523889461f44536872ef07a9685",
+      "S05_3663.c": "db51a667c211619444df8b8c2b1f465a4e2c529756b1e9638aa5f6f151d9924a",
+      "S06_35F5.c": "6bb7945ea25f3880803e049c8146a7fcffe312be04d27a1584a1f8a9d9a03e98",
+      "S07_35F5.c": "70c316c59fcf4c53c8b2455a5007b4307566f53dafc737feac521bd2c4c4e418",
+      "S08_35F5.c": "f61cedcce1185bd56cd60d6a07eb276339c3c20e52dea1f8faf3722bcc6069dc",
+      "S09_35F5.c": "e6d6920cc68dde265bc143691618c998f279f806b57071504322073c42e0a5da",
+      "S09_36EE.c": "de8bffad0e31b747dcae225908cd5d84f9297d0e9c8baf12b09a6b73296a99b4",
+      "S10_35F5.c": "28679b570e477bea724390f1808e7c948653cfc8c0c22948021554005d43ce97",
+      "S11_35F5.c": "96b3db1092f43b45fb6781d6c6a64440a8f6cb89041c1ff07e9f25ff2fe67605",
+      "S12_384C.c": "0c1911537228930dbbf265991f390a93825cf3a04d67126c89496469e96265d0",
+      "S13_384C.c": "aa6f8ebe1b34613b0fbe872f6b38db3b2608c791bf4d958386022b8e8a34eaea",
+      "S14_384C.c": "a17bc140ed33e6dff646eb239076cee7dec8604f68df35b43bf3163152c8afe2",
+      "S15_384C.c": "bd87ce5c3c980763c6e30fb426c85f61589e59f86dad5a9144dbab16a5ab2a77",
+      "S16_384C.c": "33817bed648f62ef9610d8942056f5f5407bff96b7ac5e469ec345784b5d9b10",
+      "S17_384C.c": "55e49519ac70890485aa004c7a1e0778e365dfd42f855b8e2765cb8754bbc906",
+      "S18_384C.c": "b2c21e775dd3a5cf186b2eeaf52da2062bbaffae0be46db0b63f7fbf7f5c25f6",
+      "S19_384C.c": "c7179927fd7bd84e027e59b66acf10e85a538067e0cfa9e9cf87da09a4b4bcf0",
+      "S20_39C7.c": "8d408215d2ffd73d50d7b5dabe0c18a799213c8ef70a9e1113d8ff26b499d35b",
+      "S20_39F1.c": "06632599aca720315477f7efb38ade249414d0f9e8e5df25969cfe6fdafc8653",
+      "S22_39C7.c": "1603ab32f82a6c9a4f6bcbde5bb43e4f237b28a42e230e4d843e0ce821129143",
+      "S22_3BBD.c": "5ae1d323146e1e7f920af5df51334d2f7b2675ba20d098fab85aa33f7a3d712b",
+      "S23_39C7.c": "8f865cad8ba545c7c632ac9d7f7d0b70374c578bfa1c57899baa5c23bf955fad",
+      "S24_39C7.c": "a5b3cf3d97e71132392d7545ae6ae98cb84ef9542b417e3d92e806838dd22fc3",
+      "S25_39C7.c": "f900f788a597f01243df9fbf3f14e92ab10e0ced65739cbd8a42fe6bfb8bedf5",
+      "S25_3BA4.c": "a4c412a35d94795afd41e64e357c0154747f6b149f1f7122357188c0ccc74e65",
+      "S26_39C7.c": "593fb8d07c501e7695ca102c3f6fb0d1ec078bbac8a57a0ab5eeac5571a0ea31",
+      "data_3D57.c": "1633f9bc500dad693ff2ea3d38b5bfc90724ddbc2a1a931de35983fd0fe69c89",
+      "data_3E1D.c": "ebe844adacf6f2396a64bbb3cace2bb294b37a9ccfe018f338de1e909502321d",
+      "data_55B3_0042.c": "1e424748f1b80dd09589d1271a36a976ad670d01a858c86f7bc79444f0f59fd7",
+      "data_55B3_0064.c": "b1e0ce86559d14f6015af4ce704c42994d0f8ea3cf6bf0d03ffcd6aea0c43049",
+      "data_55B3_00B8.c": "027adbc501c32562c83cca2afc51ec3fa28d52a273fef92b4b02dac564e3b151",
+      "root_0000.c": "6d5d38e4a7fc3aa0fb25caea54c8efae7e63c1e652c305c9b4fda04db8bd848c",
+      "root_004A.c": "5b8f088084697d53af45f4ceb5ec82fe693879e88b752c224ad4cc37b262e47b",
+      "root_0093.c": "2e18205e38d3b0a4aa52583cbdc6a52917668f6c910f884e40a3261f0e18ecbc",
+      "root_00BA.c": "7125558faa086e90883fe67c6ad7e8ffadbd78a984a409a69267181492ac8b0a",
+      "root_00DE.c": "6852ce92b4b842a39b328a8ce877cb653404d835292b2b5ba75f604a5dca0caa",
+      "root_00DF.c": "348357b0391670e32dc559574f532ee0e97cfc1de9b495a39c87681a0a028f45",
+      "root_00F8.c": "214244dd17cbbab85878eb4cbf3b13b3e23148fad2635c7d9b305625397be342",
+      "root_015B.c": "01d550cf485e49d1ee536c6726ba3215e14881bc1ddbb7613b0c799680dff0de",
+      "root_0244.c": "9a422e1cadc84fac08072ad0c15cff446b6a1bdeaa7abfd73b8e71559beafa5b",
+      "root_0250.c": "467c38fdf11e3911be7aa14a8c170aa3c75145d7dd6fdb8dca86db72f127fdc2",
+      "root_075B.c": "e2c09ae8969af8d0879034ba0d6d0198611f48a20cf2a45045e75df43e949cf7",
+      "root_078E.c": "4d942fc1971b2d627b6c2160ba75636192f8dcdbc81edb9fbd89433319d5dcc6",
+      "root_0798.c": "bbc5651fd72cb9b30618f9515a9ac4b0c6fbeed239c1e671fec175544cccc2a4",
+      "root_0894.c": "3319c6b0c5c3534825fb1ae041b9dc0f29b0be15d4f7a5c3ae3d40b128ed515e",
+      "root_0AD9.c": "ace25e4ee77c20e40a42c754a419c96f2bcb29755bb197e9745cc6360adc1bb0",
+      "root_0BE8.c": "4014447e64875675ff01ed979ca6c42916cd3f30be65a476bc19d686678ec5b1",
+      "root_0CDB.c": "34e8f7e96a77cd4494ef4401b8653e5c2fff9b8fa8805aa57a9ca8b2a8e64e6d",
+      "root_0DEF.c": "07f00ac913b1fb142817ba39c10ececdf16c83b6104eb0d3182fa8f41084391f",
+      "root_0E2E.c": "edd0ca58626feac7897570688624ad92a41871e3325166db797882cabe606498",
+      "root_0EC1.c": "f39f5c4e81ddf8b6efbc81aea0434d6ab9f2a4aea00c7a9b6b96a1aaba30e7ed",
+      "root_0F3F.c": "fad3af3ef03774377df8512f7519104063c7de7d289045c45dfaf7c349dfe450",
+      "root_10F7.c": "d3e3fe8faf90a82f11c5ecd2ed7acd0570f29eff14588a449d7a65cbd4e77660",
+      "root_1383.c": "1dfc3bee547fea0e9f5ca7f6096852f9c68ebc2c99081745fa4ad38ababc824b",
+      "root_1496.c": "63b467b4f7f733d5150b82b9287da48cf4d43865e04c243c2cec272adae76f79",
+      "root_14EE.c": "bb9d597127d86db207c83f5d137bd3bc177adac985bff269a54fced3d95328b6",
+      "root_15D9.c": "78bc8051066f799f8262b347092dd278db6252d32cb1f4179a9fe25579d1ca21",
+      "root_15F8.c": "d2ca00d44ab4bf576a39b1ec9f360bf0938c80f42fe4eaff0f640cffdae970b5",
+      "root_1629.c": "f0c565e64d69be83e608ec03c979fbc281d2526832b8db50c64a6c2fe0d027dc",
+      "root_171C.c": "3eebd0358849bca34be9c3079f912a56c81decc8d10f3b358c0973a6b85d22c5",
+      "root_1986.c": "eb62b4411cbcf2818a07f4047dfdb97ccf44a76250df44a7306a82873e535059",
+      "root_19A9.c": "3498e99201c0eef36b963c516f62eb56d5ae24f51c4cffdd1e9c25dd388bfe59",
+      "root_19DC.c": "6b89e6b40a10bf68679ea6cc513c5b4d36f6902817e6b2883948330e1fb78d90",
+      "root_1A28.c": "e47405af18505c8dd05b7ecc2c69a6ea974c52512985a976045516ea79a523dd",
+      "root_1A53.c": "da63b85f10ba5bfc65bc8650915499719feb31c3eeb8f139c7916b93915e2dcd",
+      "root_1A96.c": "a95d84ab7162f9e19ec10de6bc3b6be75483f776c66c8e41d4b8f3d767cfde89",
+      "root_1B28.c": "212fe2f81b9108677c67b21b15835e6f5d13032fd13d52669e4051317a463142",
+      "root_1C62.c": "60ecfe7614106dd09993c0dcff0ba2f342593da13e3a11742289b040a09c5c3a",
+      "root_1CE2.c": "eaec110647f9e6caf78e285ef27b39b1786da27a38174a2a245ccc9587896b4e",
+      "root_1D8E.c": "4ccecb43b1f7f61da32cf26e2fed7943d35522ef53ec304ec839e4edeca1ffde",
+      "root_1E57.c": "11ea0572c98db4aaef06531ba79ba2c4c2643546031f4597885d64eefe058fef",
+      "root_1F80.c": "821493dce27c85aaff370061efbead70d130e08f035555d405fc88d2370127b0",
+      "root_1FAA.c": "4f9ca8e6ef8fb492f8cff4f07722a269d0630353ac932e1c05de5584823701de",
+      "root_1FD2.c": "f2b43561341b600cd69e3d2d5302db22af6a688d395c312d2bf4c13d1d6526df",
+      "root_205F.c": "fd5f9c18ca325c78372bc0c8ac8655b97084143b9bd96e16d22ff2016141c876",
+      "root_208F.c": "b421bd0e4b262beb337183ad2e383e52ff0f00c65f6fd42b1cfdd4789857d7cb",
+      "root_20E8.c": "14741e327f88f1e7609fd7982a4a22233ae742ad14f561eb94d01aceb96f9256",
+      "root_218D.c": "c18a5d21815e65ee64d75aa1ea0314d9878a74b417f1f8a7608ad3feccabe90a",
+      "root_21FA.c": "e21dd11d30488c9fb4cb006a2f07897e396d212ff3e6bacce107d470ad785a4c",
+      "root_22BF.c": "006e506dbeec460470e1ee64089c30b6dbf99238f5f50437c5fadd36a27531ad",
+      "root_23AE.c": "fe4893b5651e5cb212d0640d2a0bb9c27a9bd809b8227df5d77447c453fb8553",
+      "root_23E6.c": "ef2537671e143edc32ef1d47c455394c6ed115e6d2be348db7862ea5fe48ffc2",
+      "root_24AB.c": "43ca5447fb6491469087d4a84b9119cfa9c93c3c0537950e97520a4d3e8ae2b6",
+      "root_2505.c": "979271e4beb3db1a0b1b9d6ade54644f79a4ad90c04fe78e4396dec6aed7101b",
+      "root_259D.c": "796245ac7cce46a0dc5c4f31dda46b743cf4d3d2522225c338f99f0fb1c12d07",
+      "root_25E7.c": "7acb4ca3c2ffcc0fa7f1bcd5f67cc382b5d47b382e1c02f86654ab198a939c39",
+      "root_2662.c": "66aa04cdb6b71122af25ce031cd0e192d6735d5b2ffd2cb63bc347cd08a5b7a9",
+      "root_277D.c": "af43450bcb9b685dabe942e54324b98330402c60f0b867674e6ab29808d45a82",
+      "root_277E.c": "61057875c2cb500addec8532e3ec1c60fc3e02a9c9611aa4998b639a0d09ec13",
+      "root_2815.c": "def26671d7068662bd394ba75310654d0d9a080a4bcf60330c821983856a85fd",
+      "root_284A.c": "f45028d06074bc33406cba55c08c355d6a01c785986fcc1e87a2e6ebdff2ba55",
+      "root_290D.c": "2b331e61637c98f4729a0ef3f2951ac26798f82f3c869be442737cb8092da280",
+      "root_293A.c": "7c82d012112943c7ea1aeaae55731d1531fae902aac74fcf77cb3d9b66bff15d",
+      "root_295C.c": "c7dffe2831345aa2a10fb1407829f47bf98280a391adf93365386be3e4081964",
+      "root_29B8.c": "a04b7d85f5f0952ec89856e42300eefc0e63b67a9f9a442603ba47a78e02234e",
+      "root_29D6.c": "9a282a4746da10b9b3939ed79dd3ee34e84529029ea6c4f84f60751532f07e67",
+      "root_29F0.c": "2b7bf2afc1e4f4405f6c9d91bbc2750a8c3e1a6d0682472957b172c37f366a6c",
+      "source-owned_ant-class-histogram.c": "91ff0c22f1d568afe320ac8ee2db3c69c2cec7dc7999310162e8953fa90cd666",
+      "source-owned_ant-counters-timer.c": "8a3dde2030cdda93c15db631b3a25ac42a0049a1238e4d969b6f790a077b8364",
+      "source-owned_ant-list-counts.c": "0289b9ae9c5f62129aabd0830c2de39a99a9d0a4363cdfbdb97eebe7082ede1f",
+      "source-owned_ant-movement-words.c": "31aece2c3116107b420efb5fe26cbe45d213253c1edcc28e8a4db23299f2b87a",
+      "source-owned_ant-player-state.c": "69f85476610889ad71d170066ba122f5e43237c97a804c36f5dfcc3185efe4e2",
+      "source-owned_ant-ui-control-state.c": "5028c408e0032f8f692c52248c3471be30febb5bde22dcc8db879908a19a8911",
+      "source-owned_balloon-buffer-tables.c": "efcc615c6b2312ca6284c16f1911037eccf52b38d877009c377e70dcc57ec53f",
+      "source-owned_balloon-deadline-timers.c": "dc8d6f739599994ffce9b240a1a40f08313127ca7826c62153c2260323888f36",
+      "source-owned_clip-pointer.c": "6124c5471395daf63eaeb62af43e1de7056d77c11aefd4cb49137549c81498bf",
+      "source-owned_colony-simulation-words.c": "08beae28cb52348fd934c86d9b33fc0012562b0e1615eac6a9e6cb7b0880743f",
+      "source-owned_control-flag-words.c": "a4b75f8c78bb04be53f09a0dc5d1203ec437b6750b50c71bcd5aa215f18d898a",
+      "source-owned_count-ants-transition-word.c": "263999611340ba193a1c3fe95bb434e2d57e7ddef2cbb9f4c124e4891008ef52",
+      "source-owned_critical-selector-byte.c": "fa70fe3b0fae7f32531453364fe316b37c6bd997825d7a3414b7abedde01c3f5",
+      "source-owned_database-index-state.c": "37362e1718e89cab3cb3579befafdc476b497d606aee4f926524ae8629232e98",
+      "source-owned_database-record-state.c": "cc2a6024a48dbf8b958a72e31cd7756a30444ae528f42016c25b1b7d6b5f5a3b",
+      "source-owned_dead-ant-coordinate-rings.c": "b665d589f138a54db67b787fc6f755b6e3125000da5134daf1ea75e80c336b0a",
+      "source-owned_display-mode-selector.c": "6096e2fa70219180cd16d78d995e2576af00381cda79f638e4fe2f7cc86adb96",
+      "source-owned_driver-callback-table.c": "15264cc1b328758642995540e130e3f07cf4327ae413df1e5d2e3db97ca2e913",
+      "source-owned_event-records.c": "88d7433d2e8a51a5a7b75616b45a85b2dbc521d4b14c28f9bad2d882711ebd4b",
+      "source-owned_experiment-anchor.c": "b96b7790a7cc9565cbe0f7301d29134cceeaf6b6a35e144255fdec8222286e9f",
+      "source-owned_floor-task-words.c": "27aaac17cf2cdfad832cecaef44f1deb148e140e44304c1c09f765c8a8f405a1",
+      "source-owned_g2108-color-translation.c": "c8b0a643794a728e836e2abf35239f91ab0c0b4549988128bb3c852a5fefb578",
+      "source-owned_graphics-formulas.c": "72114f9f8aff62b61012d10420a5311dc105926af416535a607386cb87b3bc29",
+      "source-owned_history-scalar-state.c": "f87803e5530388b0ed4197cad92dbc6c2d2b02da8436154026e766c0cf6750b3",
+      "source-owned_icon-handle-cell-view.c": "ae0348097d2fc9a0a9aed9f0a6f7f388a4f15f18f264e7ff946fef87568c0cbf",
+      "source-owned_language-string-list-pointers.c": "c9365f45be0b1e48e07023e1e2b0c464db011dd296019de4b12e280749bd53a5",
+      "source-owned_lion-sow-pillar.c": "138fc6a0ba8b509695dd4ec2b027456679d3b3b99e07666435a5d43c2a0da450",
+      "source-owned_memory-far-state.c": "bdfa262a4111813e5e1666d9a8dffea09bc3622ad61406ae3ed3ac71ed82d5fe",
+      "source-owned_memory-state.c": "28c40b69a5dca9c5ffcee87844a0acb1f83c96ba509d35c75fe25a589118aa4c",
+      "source-owned_mode-population-vectors.c": "6e5c883458a8fbdd612570df4419a3c1a0d4c27d6e8061b5e210c68c984bc8c5",
+      "source-owned_mono-pattern-prefix.c": "9afcf479985796e91a8819380dc376881e7d204d84cbc7e7a211e5df143a406e",
+      "source-owned_mouse-words.c": "95d4674eb05067b45a4126311e551e12e1c36c0de18cdee4a5b6394c503876b2",
+      "source-owned_player-locations.c": "f9e47db250ec4a0d292ec49b3444c27d232c95eb663cd7b6454680c5af1b5a00",
+      "source-owned_point-state.c": "d1a984bcf5217845a8385bc43294296f45bdfdf952d18b78ab15bdb1ebbbc885",
+      "source-owned_population-work-arrays.c": "7810d6f972175378729bd890ca4dbfa523f6a690d60be161325a030238525cea",
+      "source-owned_remaining-ant-state.c": "a5fc5c71c7d27d5e8b8155a1fdfc2d0704b17384204df41ca0ca17a4f5dcfe52",
+      "source-owned_remaining-far-state-words.c": "660c5f58ffec860cdc970fe08888df7141cdb68a3f91fbda142969f3a4f8df9f",
+      "source-owned_remaining-history-words.c": "5d10c0f1dfc0a7487520d0cce74889ff4a9bc27c8237d0e0d4e966465a67d91d",
+      "source-owned_remaining-misc-storage.c": "e358c20159d20a13b161e09d034d4f96c34f324484384d81b1b18edb72f082b6",
+      "source-owned_remaining-preparestrings-string-pointers.c": "d2322a884ed542e5505e877e05b1845806251f451c287d334fa759591a0d41bf",
+      "source-owned_remaining-scalar-tail.c": "e9d432a0f30d2d64338fcb8962368984b9f6fded830674ef92ee1341c267847d",
+      "source-owned_remaining-sound-storage.c": "8d259a5924ffd9b93c47191be281506d3928777f88e7bbbc3c7b4ce5d8930cf9",
+      "source-owned_remaining-ui-state.c": "de76419677ede183412315b84d474447c10d506fe38aae1645bd7f38ad368d58",
+      "source-owned_remaining-window-state.c": "e4d79ea4bbd34a1383886a1a01f5c0fc91075b05d4e6bb10309c838275930bfc",
+      "source-owned_remaining-world-state.c": "74cfd9b7207d8a8b9b0893b93827ca0b6780e0bfe39a8e6cd624370c89b04173",
+      "source-owned_render-delay-word.c": "10956f26f9c1c561557337d9457126f0bbdb9048f6c47ffc0b95f6af889f8f91",
+      "source-owned_render-scalars.c": "23d93f239e3c3595e1f80dd531bc3c03850c3dd35bbd67674120561cd81e79d1",
+      "source-owned_saved-sound-state.c": "1fa3a1287185d0634916fa755972986cc8c6fa0d7b5077a9ed57f6058659e987",
+      "source-owned_screen-clip-list.c": "82d1d349dbe105cd23bfc663c7797afbef5efa915279b77d5c8a69895ebcc2c2",
+      "source-owned_sound-control-words.c": "0f67520027d8d6682fbc6c65d227b3bf7ba67e99c412092fbd3aaf183b896f21",
+      "source-owned_sound-record-arrays.c": "e4fe4b97b11ebe69e1101cb4757f601e0feea083cc6dedbc315c2b2e8b8963c4",
+      "source-owned_spider-controls.c": "3c3a17a341d48c66d608a86315d38e9154b389ae963c1213dc228f382aa906cb",
+      "source-owned_spider-counters.c": "646564b2aebe327e70e03e4945baf1cad5c77c6d31e61eab92d46e7abc7fbf69",
+      "source-owned_swarm-serialized-buffers.c": "b7f483a47fb5445c743e44bc22ef92cda18d2a2eb8ae537d42d4fa93bdc9e93e",
+      "source-owned_terrain-state-words.c": "2d4fe450084358bb44de29bc0c0b31948e021cefb6d974410bc59e18a10b8d95",
+      "source-owned_ui-geometry-state.c": "35e6b87549203c2094e7ec2d2c3feedd92648a911115e095d0f2a884685c51ae",
+      "source-owned_ui-resource-scalars.c": "7df784e945fb6f78bd412165ce77e924d649f13e1a38e50e46c843ebee1364c1",
+      "source-owned_window-clip-handles.c": "4af262ecfca276b40e0130310692f0688367423ed852fcbe8f325c4f1d864b17",
+      "source-owned_window-initialized-views.c": "6e9e1e9e82fefc944096c33128efd3698917fdd4a216b83a12713530c84c4660",
+      "source-owned_window-ralloc-handles.c": "8dc74d90d17fb80800e754709b9a5dba0a4116bbde80216dd89bbfc78c37bdc8",
+      "source-owned_world-output-state.c": "b67b0ada7ddf8f2f1cc2368ca3dee10d65216b617eaa0e528a3e0337a288661f",
+      "source-owned_yard-animation-arrays.c": "7362845b03d5aed2a3c9e11d6c15198c258600b7235ee898915659c0f89b6dae",
+      "source-owned_yard-init-state.c": "bf51547f6a558fe5a5e17186ad290bf5fb087015f15c41106d35d851229dec88",
+      "source-owned_yard-scalars.c": "20ddcf30fd3cd338e56bc23515581ec2371ca9445e4a0ee92daf84a79efc282e"
+    }
   },
-  "review_receipts": {
-    "pre_retirement_sha256": "b4eed417f14cd130a9d682c74cf6025fe733e7e9094d4854916f3ba4613759a1",
-    "post_retirement_sha256": "8f343a8409af057d50bbda39482bc1f335f3f3f26f969bcf3434f99e0cd172f2",
-    "portable_retirement_sha256": "457ead2cc53be9ef9e8a31fac06d6209ac5360d4b166d15f9d28933057950b8a",
-    "native_cleanup_delta_sha256": "035a1a865b1e1cc263b946d946be0d09009299c2c0153cc1eb200ac7c8be0905"
-  },
-  "scope": "Git recovery plus current source/compiler/input closure justifies removing superseded production and proof trees. Receipts under build are passive parent audit artifacts, not runtime inputs.",
-  "current_native_closure": {
-    "compiler_scans": 242,
-    "dependencies": 400,
-    "retired_production_inputs": [],
-    "canonical_input": "src/program.json",
-    "platform_input": "portable/platform.json"
-  },
-  "old_roots_absent": [
-    "work",
-    "evidence/behavior",
-    "portable/tools",
-    "portable/game",
-    "portable/ui_model",
-    "portable/evidence",
-    "portable/research"
+  "disposition": [
+    {
+      "paths": [
+        "src/**",
+        "layout/**",
+        "dos/**"
+      ],
+      "disposition": "KEEP",
+      "reason": "Single current semantic inventory, exact historical authority and independent DOS build."
+    },
+    {
+      "paths": [
+        "portable/**"
+      ],
+      "disposition": "PLATFORM_BOUNDARY",
+      "reason": "Current whole-source lowering and native services; exceptions remain explicit."
+    },
+    {
+      "paths": [
+        "tests/**",
+        "portable/tests/**",
+        "evidence/codegen/**",
+        "evidence/canonical/semantic/**"
+      ],
+      "disposition": "KEEP",
+      "reason": "Permanent regressions and accepted full static/byte proof gates."
+    },
+    {
+      "paths": [
+        "build/deps/**"
+      ],
+      "disposition": "KEEP",
+      "reason": "Reusable local pinned SDK, VM wheel and period compiler copies."
+    },
+    {
+      "paths": [
+        "build/current/**"
+      ],
+      "disposition": "GENERATE_IN_BUILD_ONLY",
+      "reason": "Single replaceable output per build/test category."
+    },
+    {
+      "paths": [
+        "build/workers/cleanup_*"
+      ],
+      "disposition": "KEEP",
+      "reason": "Disposable scratch for the current consolidation until completion."
+    },
+    {
+      "paths": [
+        "build/* (old generations)",
+        "build/workers/* (closed tasks)"
+      ],
+      "disposition": "MOVE_TO_DELETE",
+      "reason": "Reproducible stale outputs and superseded research; independent proof is published."
+    },
+    {
+      "paths": [
+        "docs/consolidation.md",
+        "docs/source-followup.md",
+        "docs/canonical-semantic-oracle-v2.md",
+        "docs/dos-semantic-oracle-v1.md"
+      ],
+      "disposition": "MERGE",
+      "reason": "Current architecture/status replace duplicated histories; immutable checkpoints live in Git."
+    },
+    {
+      "paths": [
+        "tools/rename.py",
+        "tools/runtime.py accept branch"
+      ],
+      "disposition": "MOVE_TO_DELETE",
+      "reason": "Obsolete canonical mutators bypass the single current inventory writer."
+    },
+    {
+      "paths": [
+        "portable/canonical_native_abi/window_parameter_abi_v1.py",
+        "portable/canonical_native_abi/window_swap_parameter_abi_v2.py"
+      ],
+      "disposition": "MERGE",
+      "reason": "One optional-word lowering pass shares the actual lexical/call machinery."
+    },
+    {
+      "paths": [
+        "evidence/canonical/viewport-layout/receipt.json",
+        "evidence/canonical/native-window-boundary/installed-correspondence.json"
+      ],
+      "disposition": "REPLACE",
+      "reason": "Superseded replay and migration correspondence replaced by current direct regression/projection proof."
+    },
+    {
+      "paths": [
+        "evidence/canonical/blockers.json",
+        "portable/platform.json preview_limitations"
+      ],
+      "disposition": "UNRESOLVED_BLOCKER",
+      "reason": "Current uncertainty must remain explicit; no cleanup admits guessed semantics."
+    }
   ],
-  "new_checkpoint": "canonical-semantic-oracle-v2",
-  "standalone_DOS_executable": false,
-  "human_acceptance": "PENDING",
-  "full_native_DOS_equivalence": false,
-  "final_tree": {
-    "tracked_files": 749,
-    "git_blob_bytes": 13725164,
-    "size_scope": "Current staged Git blobs before this count record update; count remains exact, byte total changes by the small metadata delta."
+  "retired_repository_paths": [
+    "tools/rename.py",
+    "portable/canonical_native_abi/window_parameter_abi_v1.py",
+    "portable/canonical_native_abi/window_swap_parameter_abi_v2.py",
+    "docs/consolidation.md",
+    "docs/source-followup.md",
+    "docs/dos-semantic-oracle-v1.md",
+    "docs/canonical-semantic-oracle-v2.md",
+    "evidence/canonical/viewport-layout/receipt.json",
+    "evidence/canonical/native-window-boundary/installed-correspondence.json",
+    "evidence/canonical/native-window-boundary/manifest-statement.json",
+    "evidence/canonical/validation/behavior-dependencies.json"
+  ],
+  "relocated_dependencies": [
+    "sdl3-sdk",
+    "unicorn",
+    "wheels",
+    "dos-tools"
+  ],
+  "move_ledger": "to_delete/moves.jsonl",
+  "retired_path_policy": "Actual candidates moved into ignored to_delete with original relative paths. Partial obsolete branches/helpers also have full baseline versions preserved. Manual deletion remains user-owned.",
+  "validation": {
+    "historical": {
+      "pass": true,
+      "compiler_probes": 49,
+      "exact_C_functions": 1235,
+      "genuine_ASM_functions": 367,
+      "reviewed_rebuilt_context_functions": 9,
+      "permanent_tests": 296,
+      "intentional_skips": 2
+    },
+    "behavior": {
+      "pass": true,
+      "domains": 29,
+      "paired_cases": 12130
+    },
+    "native_build": {
+      "passed": true,
+      "canonical_C_emitted": 162,
+      "canonical_C_compiled": 161,
+      "native_services": 78,
+      "ASM_data_TUs": 3,
+      "core_link": true,
+      "application_link": true,
+      "undefined_symbols": 0
+    },
+    "native_dependency_scans": 242,
+    "project_dependencies": 399,
+    "resource_queries": 1483,
+    "RNG_observations": 3096,
+    "simulation_pairs": 194,
+    "runtime_flows": [
+      "VGA",
+      "Save",
+      "Save-Load"
+    ],
+    "SaveRec_reads": 307,
+    "SaveRec_bytes": 48386,
+    "window_resources": 34,
+    "allocator_fixture_pairs": 102,
+    "allocator_provider_controls": 37,
+    "viewport_resize_pairs": 10,
+    "viewport_cache_pairs": 2,
+    "real_linker_controls": [
+      "owned code references",
+      "LZSS SS frame",
+      "icon Handle views"
+    ],
+    "repository_controls": 17,
+    "final_repository_audit": {
+      "schema": "simant-repository-guard-report-v1",
+      "passed": true,
+      "issues": [],
+      "summary": {
+        "issue_count": 0,
+        "live_blockers": 29,
+        "retained_file_roles": {
+          "inventory/workflow": 414,
+          "Reviewed proof, toolchain facts or explicit unresolved investigation": 243,
+          "Locked historical metadata/current proof and architecture policy": 6,
+          "Pinned native BIOS font resources": 5,
+          "Current native differential/runtime fixtures": 13,
+          "Permanent filesystem/handle service controls": 6,
+          "Permanent acceptance/negative controls": 43,
+          "Reconstruction workflow and diagnostics (CLI or imported helper)": 49
+        }
+      }
+    },
+    "staged_native_input_identities": {
+      "verified": true,
+      "tracked_inputs": 409,
+      "scope": "Current native input pins match git cat-file --filters :PATH checkout bytes. Existing eol=crlf toolchain policy explains its LF Git blob/CRLF working-file distinction. Ignored assets/external dependencies are separately pinned by the build."
+    }
+  },
+  "remaining": {
+    "DOS_storage_imports": 11,
+    "DOS_semantic_gates": 11,
+    "functional_data_ranges": 6,
+    "functional_data_bytes": 44,
+    "native_contracts": 12,
+    "standalone_DOS": false,
+    "SDL3": "RUNNABLE_BOUNDED_PREVIEW",
+    "human_acceptance": "PENDING"
+  },
+  "immutable_tags": {
+    "dos-semantic-oracle-v1": "66e85041ee54f59774ae0fd5a08b37ffbcf77172",
+    "canonical-semantic-oracle-v2": "23f386222cf803c388aecf4f637d632fe7175a2a",
+    "portable-sdl3-v17-paused-20261003": "c850830006e0b7d456bb500bf101dd432bbe8ee3"
+  },
+  "architecture_guard_scope": "Static Python path/import/role policy plus current compiler dependency scans; no universal dynamic/data-flow proof.",
+  "after": {
+    "tracked_files": 817,
+    "portable_files": 243,
+    "evidence_files": 260,
+    "lowering_modules": 34,
+    "native_contracts": 12,
+    "DOS_storage_imports": 11,
+    "DOS_semantic_gates": 11,
+    "functional_data_bytes": 44,
+    "build": {
+      "regular_files": 2562,
+      "directories": 292,
+      "logical_bytes": 164386132,
+      "reparse_points_skipped": 0,
+      "root_directories": 5,
+      "root_files": 0
+    },
+    "workers_and_scratch_children": 0,
+    "tracked_logical_bytes": 15982790,
+    "size_scope": "Current tracked-or-untracked-nonignored retained files, measured after publication; logical disk bytes, excluding ignored assets/build/to_delete and .git."
+  },
+  "retired_payload": {
+    "regular_files": 175008,
+    "directories": 20609,
+    "logical_bytes": 6938176097,
+    "reparse_points_skipped": 5
+  },
+  "move_records": 1289,
+  "dependency_payload": {
+    "regular_files": 322,
+    "directories": 49,
+    "logical_bytes": 108983201,
+    "reparse_points_skipped": 0
+  },
+  "commits": {
+    "architecture": "ee7211b",
+    "validation": "This receipt publication commit (resolve HEAD in Git; no self-referential commit hash)."
   }
 }

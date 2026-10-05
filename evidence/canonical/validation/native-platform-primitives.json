@@ -4,7 +4,7 @@
   "input_pins": {
     "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
     "assets/SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
-    "build/portable-final/runtime-assets/INSTALL.EXE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/current/portable/runtime-assets/INSTALL.EXE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "portable/whole_program/platform/dos_io.c": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
     "portable/whole_program/platform/drive_directory.c": "3efeaa4a45f1ab3a21a61116e30cb57c81609bd0ba29b884d1a2a06dd1d9de0a",
     "portable/whole_program/platform/startup_preflight.c": "dcf4eca4d1036cfdcc076d4243ab42afdb1952f667eae182259cb4207f713d79",
@@ -25,10 +25,10 @@
         "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\drive_directory.c",
         "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\drive_directory_test.c",
         "-o",
-        "D:\\Prog\\simant_recon\\build\\workers\\final-platform-primitives\\drive.exe"
+        "D:\\Prog\\simant_recon\\build\\current\\tests\\primitives\\drive.exe"
       ],
       "run_command": [
-        "D:\\Prog\\simant_recon\\build\\workers\\final-platform-primitives\\drive.exe"
+        "D:\\Prog\\simant_recon\\build\\current\\tests\\primitives\\drive.exe"
       ],
       "passed": true,
       "stdout": "PASS: current-drive and available-drive Win32 CWD paths (6 drives, 8 successful checks); bounds and invalid-input controls passed\n"
@@ -46,11 +46,11 @@
         "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.c",
         "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\startup_preflight_retained_slot_test.c",
         "-o",
-        "D:\\Prog\\simant_recon\\build\\workers\\final-platform-primitives\\startup-slot.exe"
+        "D:\\Prog\\simant_recon\\build\\current\\tests\\primitives\\startup-slot.exe"
       ],
       "run_command": [
-        "D:\\Prog\\simant_recon\\build\\workers\\final-platform-primitives\\startup-slot.exe",
-        "D:\\Prog\\simant_recon\\build\\portable-final\\runtime-assets\\INSTALL.EXE",
+        "D:\\Prog\\simant_recon\\build\\current\\tests\\primitives\\startup-slot.exe",
+        "D:\\Prog\\simant_recon\\build\\current\\portable\\runtime-assets\\INSTALL.EXE",
         "D:\\Prog\\simant_recon\\assets\\SHARED.DAT"
       ],
       "passed": true,

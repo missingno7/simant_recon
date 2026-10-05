@@ -8,11 +8,11 @@
     "inputs_unchanged": true
   },
   "input_pins": {
-    "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\report.json": "dbe97461efe285562b96c88099f7a94790e5ce2672a03caa34a3d735dafd8ae3",
+    "D:\\Prog\\simant_recon\\build\\current\\portable\\report.json": "9c303e7fd3236b0f6e6364dea830bf40dcb5dd5d4e5aa8664a8b4893b690569f",
     "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.c": "2f69e15b2668d82ddec3f18bdca95fa94c6304be4c3ff92fd118f61439fc8b33",
     "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.h": "96cebce16f05c2e08bb60b1a958ce9aad0a2895d2f61889eeeb45210615b2308",
     "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.c": "dd3e32f93b6c53e831549af0c2ec0810f9f0e093a29aedd038d76767cb93a92f",
-    "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\receipt.json": "53c9839fcc52efe6c70fecd80d8d8d4386ff6b1ccf24bafdb86b093d7f43b932",
+    "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\receipt.json": "563b6ecc3dcac804808964560b458067786b36fe6dbe2d8a5b5748b243dbfd40",
     "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.py": "2ee61dbb1df68f2d4ef492d6b9ccd0e01726ed6a206f0260d95b3a0a74995d56",
     "C:\\msys64\\mingw64\\bin\\gcc.exe": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
   },
@@ -98,21 +98,21 @@
             "-Werror=implicit-function-declaration",
             "-Werror=implicit-int",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\include",
+            "D:\\Prog\\simant_recon\\build\\current\\portable\\include",
             "-I",
             "D:\\Prog\\simant_recon",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted",
+            "D:\\Prog\\simant_recon\\build\\current\\portable",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+            "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
             "-c",
             "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.c",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\current-provider.o"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\current-provider.o"
           ],
           "exit_code": 0
         },
@@ -128,38 +128,38 @@
             "-Werror=implicit-function-declaration",
             "-Werror=implicit-int",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\include",
+            "D:\\Prog\\simant_recon\\build\\current\\portable\\include",
             "-I",
             "D:\\Prog\\simant_recon",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted",
+            "D:\\Prog\\simant_recon\\build\\current\\portable",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+            "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
             "-c",
             "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.c",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\current-fixture.o"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\current-fixture.o"
           ],
           "exit_code": 0
         },
         {
           "command": [
             "C:\\msys64\\mingw64\\bin\\gcc.exe",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\current-provider.o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\current-fixture.o",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\current-provider.o",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\current-fixture.o",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\current.exe"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\current.exe"
           ],
           "exit_code": 0
         }
       ],
       "provider_sha256": "2f69e15b2668d82ddec3f18bdca95fa94c6304be4c3ff92fd118f61439fc8b33",
       "provider_object_sha256": "c8c2b7b55169cee19e1afaa66ef8b28ac6af91008f5d3b71331eb422646ba281",
-      "executable_sha256": "faa7761aaa0591998f643517a2f2ebc380eed9e5ace1773c4963537af26398bf"
+      "executable_sha256": "a648ee1579c8e81cf27ad6f431305dd94bca79b083f68e4d768feb7036ab3a9c"
     },
     "retained_size": {
       "exit_code": 1,
@@ -216,21 +216,21 @@
             "-Werror=implicit-function-declaration",
             "-Werror=implicit-int",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\include",
+            "D:\\Prog\\simant_recon\\build\\current\\portable\\include",
             "-I",
             "D:\\Prog\\simant_recon",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted",
+            "D:\\Prog\\simant_recon\\build\\current\\portable",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+            "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
             "-c",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\retained_size.c",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\retained_size.c",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\retained_size-provider.o"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\retained_size-provider.o"
           ],
           "exit_code": 0
         },
@@ -246,38 +246,38 @@
             "-Werror=implicit-function-declaration",
             "-Werror=implicit-int",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\include",
+            "D:\\Prog\\simant_recon\\build\\current\\portable\\include",
             "-I",
             "D:\\Prog\\simant_recon",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted",
+            "D:\\Prog\\simant_recon\\build\\current\\portable",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+            "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
             "-c",
             "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.c",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\retained_size-fixture.o"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\retained_size-fixture.o"
           ],
           "exit_code": 0
         },
         {
           "command": [
             "C:\\msys64\\mingw64\\bin\\gcc.exe",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\retained_size-provider.o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\retained_size-fixture.o",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\retained_size-provider.o",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\retained_size-fixture.o",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\retained_size.exe"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\retained_size.exe"
           ],
           "exit_code": 0
         }
       ],
       "provider_sha256": "7d4588cfd71ff9457a3dcafdf8b8987db733e60e3206484ccec49bc31a67a22a",
-      "provider_object_sha256": "f56db51ea90be395e1b91c5f1ae284532b17fb7ff23e4cafb886578fb83ce38f",
-      "executable_sha256": "ad1df3c5d681110519e342d560867940c201bc3e630a8b0413488feffc915607"
+      "provider_object_sha256": "b07619e7ef252d97a926423607ef6514e26e955a82f82e839f7752007630dd15",
+      "executable_sha256": "c5b02ba93ca1021db70a1b6cc9679b026ddfd89026db05b618fdc1873ae6b6f0"
     },
     "resize_rejected": {
       "exit_code": 1,
@@ -334,21 +334,21 @@
             "-Werror=implicit-function-declaration",
             "-Werror=implicit-int",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\include",
+            "D:\\Prog\\simant_recon\\build\\current\\portable\\include",
             "-I",
             "D:\\Prog\\simant_recon",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted",
+            "D:\\Prog\\simant_recon\\build\\current\\portable",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+            "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
             "-c",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\resize_rejected.c",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\resize_rejected.c",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\resize_rejected-provider.o"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\resize_rejected-provider.o"
           ],
           "exit_code": 0
         },
@@ -364,38 +364,38 @@
             "-Werror=implicit-function-declaration",
             "-Werror=implicit-int",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\include",
+            "D:\\Prog\\simant_recon\\build\\current\\portable\\include",
             "-I",
             "D:\\Prog\\simant_recon",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\portable-discard-accepted",
+            "D:\\Prog\\simant_recon\\build\\current\\portable",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program",
             "-I",
-            "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+            "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
             "-I",
             "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
             "-c",
             "D:\\Prog\\simant_recon\\evidence\\canonical\\allocator-fixtures\\native_discard.c",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\resize_rejected-fixture.o"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\resize_rejected-fixture.o"
           ],
           "exit_code": 0
         },
         {
           "command": [
             "C:\\msys64\\mingw64\\bin\\gcc.exe",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\resize_rejected-provider.o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\resize_rejected-fixture.o",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\resize_rejected-provider.o",
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\resize_rejected-fixture.o",
             "-o",
-            "D:\\Prog\\simant_recon\\build\\native-discard-published\\resize_rejected.exe"
+            "D:\\Prog\\simant_recon\\build\\current\\tests\\handles\\resize_rejected.exe"
           ],
           "exit_code": 0
         }
       ],
       "provider_sha256": "2addc8937b445604722b7ab1a773acad0c390e3cc6ac84828017208373e9f2cd",
-      "provider_object_sha256": "9d044a8eac820c0410bedd19d0c3268e324eb645ebc103fac199f1d92cacb786",
-      "executable_sha256": "4b16de91a27be3ed7882d2180ab8f755e93729b07a2d5a89eef21c73c732d486"
+      "provider_object_sha256": "6a0c6ac7419e13e723e1b34caff4b8f89ccff74797d74cd7eab58be74af4f612",
+      "executable_sha256": "3bd1246d61371ecbd86c6b012dfc0bef35fc5826a05712644321f511f935068f"
     }
   },
   "scope": "Zero public discarded size and same-slot restoration are corroborated. Host budget/failure and existing live-resize controls are native regression checks. No full heap-history, shared metadata, flags, paragraph-copy, DOS failure-policy or ordinary gameplay reachability equivalence claim."

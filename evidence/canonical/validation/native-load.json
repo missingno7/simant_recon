@@ -23,13 +23,13 @@
     "debugger_unchanged": true,
     "only_expected_disposable_changes": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\report.json",
-  "build_report_sha256": "dbe97461efe285562b96c88099f7a94790e5ce2672a03caa34a3d735dafd8ae3",
+  "build_report": "D:\\Prog\\simant_recon\\build\\current\\portable\\report.json",
+  "build_report_sha256": "9c303e7fd3236b0f6e6364dea830bf40dcb5dd5d4e5aa8664a8b4893b690569f",
   "verified_build_input_count": 420,
   "verified_native_service_count": 78,
   "current_program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
-  "platform_manifest_sha256": "b027516ae3b74edea7d005827ed889f06b7362d54b7537160e3fafa91af5d0eb",
-  "executable_sha256": "3e5adf9bb5d5123ca08ac7676fea739e04e0ad9163a6680a139bebec4cb36553",
+  "platform_manifest_sha256": "7a51e43910d1228912b118e708342417ece9e9c1608739e579f093bd3bc5f863",
+  "executable_sha256": "e2538947b702278bfff2e422d2b16eb7e4b13cb36203074edf974b31652d13a2",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -55,8 +55,8 @@
   "fixture_and_driver_pins": {
     "save-load-game.txt": "61675067d7b8dd7e8263091650337834abfb344edd4ea0d04f97fb8050c27e61",
     "load_trace.py": "79ad3ffa4e80d1f3ed35b05283b62959e488ffca5225e6fd34bc19ae8583a7a8",
-    "run_load.py": "7e9cd8543b334b9a1597f5769e2c7c8c10edc5be98aca73afd8a3f6dfdaf3af5",
-    "run.py": "82316478bb12c9353df924556e22c934586b94fdad35aec158c9676e79cb9f5f"
+    "run_load.py": "3047ec5075b47d5f299291e9849bad41a036a4996163617912307d1df1d51f9c",
+    "run.py": "647f287a00b42d37d8c8cbcc143bdc692d662db2817daa7b21bb29a37a592dfe"
   },
   "GDB": {
     "path": "C:\\msys64\\mingw64\\bin\\gdb.exe",
@@ -67,16 +67,16 @@
     "--batch",
     "-q",
     "-x",
-    "D:\\Prog\\simant_recon\\build\\lda\\gdb.txt",
+    "D:\\Prog\\simant_recon\\build\\current\\load\\gdb.txt",
     "--args",
-    "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\current\\portable\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "35000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\lda\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\current\\load\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\lda\\a",
+    "D:\\Prog\\simant_recon\\build\\current\\load\\a",
     "--seed",
     "1",
     "--input-script",
@@ -87,18 +87,18 @@
   "timed_out": false,
   "fixture_event_count": 45,
   "injected_event_count": 45,
-  "outer_loops": 61193,
+  "outer_loops": 52512,
   "source_returns": [
     {
       "call": 1,
       "event": "o09_35F5_0188-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\current\\load\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 27687,
+      "trace_elapsed_ms": 28360,
       "use_last": 1
     },
     {
@@ -106,9 +106,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 1,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\current\\load\\a\\a.ant",
       "title": "Save Game",
-      "trace_elapsed_ms": 24187,
+      "trace_elapsed_ms": 24860,
       "verb": "SAVE"
     },
     {
@@ -116,9 +116,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 0,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\current\\load\\a\\a.ant",
       "title": "Load Game",
-      "trace_elapsed_ms": 34280,
+      "trace_elapsed_ms": 34954,
       "verb": "LOAD"
     },
     {
@@ -126,18 +126,18 @@
       "event": "LoadGame-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\current\\load\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 34812
+      "trace_elapsed_ms": 35594
     }
   ],
   "load_read_calls": 307,
   "load_requested_bytes": 48386,
   "load_returned_bytes": 48386,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\lda\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\current\\load\\frame.bmp",
     "size": 1228938,
     "sha256": "5f3b0080fb07c24c43d25ec3cf0b6c3de316c87911a77346187b845b807ad659",
     "width": 640,
@@ -147,7 +147,7 @@
     "valid": true
   },
   "saved_file": {
-    "path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
+    "path": "D:\\Prog\\simant_recon\\build\\current\\load\\a\\a.ant",
     "size": 48386,
     "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
   },
@@ -157,46 +157,90 @@
       "after": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
     }
   },
-  "events_sha256": "45db72d7465058ddde57b14f2d58d74fd574dd77172b4f411b48e7c9de400d70",
+  "events_sha256": "74a6b0647b091995c11f6b75c8698c34ed09b0f5cc4200aa7f1c74cf2b8da53a",
   "scope": "Current original main and ordinary SDL UI create then load a disposable SaveRec file. Read-only debugger observations establish successful source returns and complete reads. No after-load state equivalence, DOS save compatibility, resave, fixed terrain-seed or whole-game correctness claim.",
   "build_preview_limitations": [
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:171C native heap boundary",
-      "detail": "The discarded size/resize discrepancy is repaired: original and current native public APIs report size zero after discard and restore a 100-byte firm allocation into the same handle while leaving another handle discarded. See evidence/canonical/allocator-fixtures/. Full native/DOS heap-history equivalence remains unproved: discarded name/age/attributes retain per-slot metadata instead of the shared DOS template; paragraph copying, flags/counters, 16-bit limits, physical/EMS layout and failure policy remain outside this bounded repair. Canonical algorithms are unchanged."
+      "detail": "The discarded size/resize discrepancy is repaired: original and current native public APIs report size zero after discard and restore a 100-byte firm allocation into the same handle while leaving another handle discarded. See evidence/canonical/allocator-fixtures/. Full native/DOS heap-history equivalence remains unproved: discarded name/age/attributes retain per-slot metadata instead of the shared DOS template; paragraph copying, flags/counters, 16-bit limits, physical/EMS layout and failure policy remain outside this bounded repair. Canonical algorithms are unchanged.",
+      "id": "native-heap-history",
+      "status": "OPEN"
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:1986",
-      "detail": "FindIndex native one-past guard returns null before canonical index[count] predicate. Real song lookup10010 can miss past HCEGANT271 rows before SOUND succeeds. Original SOUND allocation followed by original Ralloc320 makes a neighboring Block header match synthetic ID0/kind22 and return as an index row; allocation304/free controls and known mono IDs10000/10010 return null. Natural game false-hit reachability and native/DOS heap-history equivalence remain unproved. Native preview semantic exception; bounded observable difference confirmed in evidence/canonical/native-findindex-boundary/."
+      "detail": "FindIndex native one-past guard returns null before canonical index[count] predicate. Real song lookup10010 can miss past HCEGANT271 rows before SOUND succeeds. Original SOUND allocation followed by original Ralloc320 makes a neighboring Block header match synthetic ID0/kind22 and return as an index row; allocation304/free controls and known mono IDs10000/10010 return null. Natural game false-hit reachability and native/DOS heap-history equivalence remain unproved. Native preview semantic exception; bounded observable difference confirmed in evidence/canonical/native-findindex-boundary/.",
+      "id": "native-index-adjacency",
+      "status": "OPEN"
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
-      "detail": "Eleven unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof."
+      "detail": "Eleven unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof.",
+      "id": "native-storage-ownership",
+      "status": "OPEN"
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
-      "detail": "Font bitmap native group is source-owned1280 bytes; larger output remains unsupported without source storage proof."
+      "detail": "Font bitmap native group is source-owned1280 bytes; larger output remains unsupported without source storage proof.",
+      "id": "native-font-output-domain",
+      "status": "OPEN"
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:20E8/win_Open+win_Swap",
-      "detail": "Omitted DOS argument slots are native zero normalizations. win_Swap stores four caller stack-residue words in DOS; native stores zero, so raw state differs. Current callsites, 34 shipped window resources and the reviewed source observer closure do not observe those differing fields. Custom resource/caller domains remain unsupported; no mechanical raw-state equivalence claim."
+      "detail": "Omitted DOS argument slots are native zero normalizations. win_Swap stores four caller stack-residue words in DOS; native stores zero, so raw state differs. Current callsites, 34 shipped window resources and the reviewed source observer closure do not observe those differing fields. Custom resource/caller domains remain unsupported; no mechanical raw-state equivalence claim.",
+      "id": "native-window-optional-words",
+      "status": "OPEN"
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "S26/native window object views and allocation",
-      "detail": "Valid registry-backed object views preserve the source layout relationship. Invalid NULL views remain faultable because callers dereference the returned pointer. Native OOM guard policy and zoom savedRect behavior remain unresolved outside the reviewed valid shipped-resource domain."
+      "detail": "Valid registry-backed object views preserve the source layout relationship. Invalid NULL views remain faultable because callers dereference the returned pointer. Native OOM guard policy and zoom savedRect behavior remain unresolved outside the reviewed valid shipped-resource domain.",
+      "id": "native-window-object-domain",
+      "status": "OPEN"
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "Native scalar expression lowering",
-      "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/."
+      "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/.",
+      "id": "native-integer-expressions",
+      "status": "OPEN"
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:208F",
-      "detail": "Canonical source now owns the mutable four-byte icon Handle slot. No game master-cell/payload producer, extent, lifetime, activation or computed/menu alias closure is admitted; the native conversion only widens its pointer representation."
+      "detail": "Canonical source now owns the mutable four-byte icon Handle slot. No game master-cell/payload producer, extent, lifetime, activation or computed/menu alias closure is admitted; the native conversion only widens its pointer representation.",
+      "id": "native-icon-lifetime",
+      "status": "OPEN"
+    },
+    {
+      "id": "native-queue-result-abi",
+      "status": "OPEN",
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:1FD2/S26 queue result contract",
+      "detail": "The native adapter expresses inherited ASM AX lookup success as a C int result while the exact canonical wrapper is void with split pointer words. Review the original wrapper/call-site ABI and whole-TU promotion before treating this source declaration conversion as a closed portable contract."
+    },
+    {
+      "id": "native-event-omitted-word",
+      "status": "OPEN",
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "S10/S19 event enqueue",
+      "detail": "Four-word DOS enqueue calls inherit an unprovided fifth Event.v word; native supplies zero. Full observer closure for this normalized state remains required."
+    },
+    {
+      "id": "native-menu-allocation-policy",
+      "status": "OPEN",
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "Menu/clip native reservations",
+      "detail": "Menu title pointer storage and clip/mono reservations introduce host allocation and failure paths around unresolved ordinary storage. Establish extents/lifetimes and failure correspondence, then remove source-flow workarounds in favor of necessary platform services."
+    },
+    {
+      "id": "native-drive-device-policy",
+      "status": "OPEN",
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "S09 FileSelect",
+      "detail": "Native removes physical BIOS one-floppy B-to-A remapping and uses host drive resolution. Current Windows drive tests validate path services, but no DOS/native physical device-domain comparison or complete caller policy has been accepted."
     }
   ]
 }

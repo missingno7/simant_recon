@@ -1,7 +1,7 @@
 {
   "schema": "simant-icon-handle-minimum-slot-current-source-replay-v1",
   "scope": "Current whole root:208F source and extent, a natural four-byte mutable far Handle slot, and stock-CRT startup/pointer controls. This proves the minimum slot view and initial zero representation only. It leaves computed aliases, activation, historical maximal extent, defining TU, physical aliases, and game cell/payload lifetime unresolved.",
-  "output_directory": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final",
+  "output_directory": "D:\\Prog\\simant_recon\\build\\current\\tests\\icon-handle",
   "original_executable_run": false,
   "original_immutable_image_read": true,
   "original_image_read_purpose": "Current context.py and modules.verify_module historical validation only; the game executable is never run by this replay.",
@@ -182,12 +182,12 @@
     },
     "context_packets": {
       "f_208F_027F": {
-        "path": "build/icon-handle-view-final/context/f_208F_027F.txt",
+        "path": "build/current/tests/icon-handle/context/f_208F_027F.txt",
         "size": 1493,
         "sha256": "d2c6bec4eee3ee77fbefc47d010f56c2f6fd84498eaf5e645cdffc329f7dcb5e"
       },
       "f_208F_02F0": {
-        "path": "build/icon-handle-view-final/context/f_208F_02F0.txt",
+        "path": "build/current/tests/icon-handle/context/f_208F_02F0.txt",
         "size": 1412,
         "sha256": "f05680de4d80f6bdfab7690eeb5b5bebff35f23038305c4f8b4ea8d8f2262355"
       }
@@ -197,12 +197,12 @@
     "manifest": {
       "path": "layout/manifest.json",
       "size": 622503,
-      "sha256": "02d1e67ccbfeb4b088fd4593ca5e0607d2ce91ff0121102dc5a9042393197fb5"
+      "sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242"
     },
     "program": {
       "path": "src/program.json",
-      "size": 259348,
-      "sha256": "83fa298ac14594d4cdd4c61481cfd08fc161a0f43bbdf37d1fe6cbb078cc20f6"
+      "size": 260787,
+      "sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e"
     },
     "m208F": {
       "path": "src/root/m208F.c",
@@ -216,8 +216,8 @@
     },
     "runner": {
       "path": "evidence/canonical/icon-handle-view/replay.py",
-      "size": 46152,
-      "sha256": "f72332325a263f6a57e796af0f8e8f675dc07cd1baf8c41bd66d6be489ee7576"
+      "size": 46204,
+      "sha256": "eee8db02e3c891c50cf6f248c0ec91835848dad08b6a40a00db0e698954bed1c"
     },
     "fixture_sources": [
       {
@@ -249,23 +249,23 @@
     "repository_tools": [
       {
         "path": "tools/context.py",
-        "size": 8661,
-        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be"
+        "size": 8685,
+        "sha256": "8b6062e4f4f0b10d83397ee473b1472dca16e9ad804bcfc48ebecc579fa5fa5e"
       },
       {
         "path": "tools/search.py",
-        "size": 8557,
-        "sha256": "90b1f5795024012467103f51a50c036187f15342f1fb3703ae6ceefdd067623a"
+        "size": 8569,
+        "sha256": "e21b6da01d4c949accff6f1e5b7b604e950f2f1a2d5469b60dcd468ddd19bd30"
       },
       {
         "path": "tools/modules.py",
-        "size": 62933,
-        "sha256": "877f0f5aa2127a3a36fca6aaaedfced536e345196eda5bddb2dc8d62100e5f24"
+        "size": 63358,
+        "sha256": "293499dd581966658f48d468ebbc98ec076ddb58f8c8191ef77a3c99495c198c"
       },
       {
         "path": "tools/compiler.py",
-        "size": 11765,
-        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+        "size": 11812,
+        "sha256": "27a750d509e7d2d114a69514294150af66b88aaa0ff68cd42abda970febd0634"
       },
       {
         "path": "tools/omf.py",
@@ -284,18 +284,18 @@
       },
       {
         "path": "tools/functions.py",
-        "size": 13467,
-        "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+        "size": 13475,
+        "sha256": "11235c789930389992de54cbae8b6fd3f7a963d10c51c68e76f8de72c3976c2a"
       },
       {
         "path": "tools/symbols.py",
-        "size": 15472,
-        "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+        "size": 15488,
+        "sha256": "28f646323d30e67407f02ddcc223318639a3555d9344a65f728f6d6966b91397"
       },
       {
         "path": "dos/build.py",
-        "size": 22814,
-        "sha256": "97c026cd980cabe80f42e722a479feb11cd671e6bbb00ebc803060ff92c5eb4f"
+        "size": 23198,
+        "sha256": "3af0e96fbe11ee3c3bbd9b4a3c25992bb509b3d221f49e2eb3954e276f1a4840"
       }
     ],
     "historical_validation_inputs": [
@@ -333,8 +333,8 @@
       },
       {
         "path": "tools/compiler.py",
-        "size": 11765,
-        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+        "size": 11812,
+        "sha256": "27a750d509e7d2d114a69514294150af66b88aaa0ff68cd42abda970febd0634"
       },
       {
         "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
@@ -387,7 +387,7 @@
         "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/b3924e2c4aa624d1/RTLINK.EXE",
+        "path": "build/deps/dos-tools/b3924e2c4aa624d1/RTLINK.EXE",
         "size": 449497,
         "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74"
       },
@@ -397,7 +397,7 @@
         "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/b3924e2c4aa624d1/RTLINK.DAT",
+        "path": "build/deps/dos-tools/b3924e2c4aa624d1/RTLINK.DAT",
         "size": 63824,
         "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea"
       },
@@ -407,7 +407,7 @@
         "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/b3924e2c4aa624d1/RTLUTILS.LIB",
+        "path": "build/deps/dos-tools/b3924e2c4aa624d1/RTLUTILS.LIB",
         "size": 266625,
         "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162"
       },
@@ -417,7 +417,7 @@
         "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/b3924e2c4aa624d1/RTLINKST.COM",
+        "path": "build/deps/dos-tools/b3924e2c4aa624d1/RTLINKST.COM",
         "size": 7184,
         "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2"
       },
@@ -432,7 +432,7 @@
         "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/c95b3f9794e8fe01/RTL-REAL.EXE",
+        "path": "build/deps/dos-tools/c95b3f9794e8fe01/RTL-REAL.EXE",
         "size": 717922,
         "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773"
       },
@@ -442,7 +442,7 @@
         "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/c95b3f9794e8fe01/RTL-SWAP.EXE",
+        "path": "build/deps/dos-tools/c95b3f9794e8fe01/RTL-SWAP.EXE",
         "size": 692123,
         "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3"
       },
@@ -452,7 +452,7 @@
         "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/c95b3f9794e8fe01/RTLINK.DAT",
+        "path": "build/deps/dos-tools/c95b3f9794e8fe01/RTLINK.DAT",
         "size": 100100,
         "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b"
       },
@@ -462,7 +462,7 @@
         "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/c95b3f9794e8fe01/RTLUTILS.LIB",
+        "path": "build/deps/dos-tools/c95b3f9794e8fe01/RTLUTILS.LIB",
         "size": 423823,
         "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb"
       },
@@ -472,7 +472,7 @@
         "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/c95b3f9794e8fe01/RTLINKST.COM",
+        "path": "build/deps/dos-tools/c95b3f9794e8fe01/RTLINKST.COM",
         "size": 11031,
         "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f"
       },
@@ -482,7 +482,7 @@
         "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/c95b3f9794e8fe01/RTLINK.EXE",
+        "path": "build/deps/dos-tools/c95b3f9794e8fe01/RTLINK.EXE",
         "size": 687531,
         "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb"
       },
@@ -492,7 +492,7 @@
         "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c"
       },
       {
-        "path": "build/icon-handle-view-final/cc/pinned/c95b3f9794e8fe01/DOS4GW.EXE",
+        "path": "build/deps/dos-tools/c95b3f9794e8fe01/DOS4GW.EXE",
         "size": 231179,
         "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c"
       },
@@ -515,15 +515,15 @@
       }
     ],
     "staged_m208F_source": {
-      "path": "build/icon-handle-view-final/sources/current/m208F.c",
+      "path": "build/current/tests/icon-handle/sources/current/m208F.c",
       "size": 6853,
       "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e"
     }
   },
   "input_pin_file": {
-    "path": "build/icon-handle-view-final/input-pins.json",
-    "size": 11371,
-    "sha256": "045f022a65b502704df3f27294162c6a3ade93503d74f7e05fdd17b94406dbdf"
+    "path": "build/current/tests/icon-handle/input-pins.json",
+    "size": 11176,
+    "sha256": "465b21bc93cb46b0eff1daa12317a761ff34c44aa051aa0fb7c957816dc2a4f7"
   },
   "original_slot_view": {
     "segment": "50F6",
@@ -776,12 +776,12 @@
         "passed": true
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/consumers/positive.c",
+        "path": "build/current/tests/icon-handle/sources/consumers/positive.c",
         "size": 6853,
         "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/consumers/positive.OBJ",
+        "path": "build/current/tests/icon-handle/objects/consumers/positive.OBJ",
         "size": 3282,
         "sha256": "71af35ba7efd78f9e98a7f06af5a1a65e3bcbba069157b0eaafd93f18693bbc2"
       },
@@ -789,12 +789,12 @@
         "f_208F_027F": {
           "status": "EXACT",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/positive/f_208F_027F.json",
-            "size": 690,
-            "sha256": "61094c1591264e107c4c4806f955f80529126e190253b87f6847b8540588adeb"
+            "path": "build/current/tests/icon-handle/search-results/positive/f_208F_027F.json",
+            "size": 695,
+            "sha256": "c40f14f4194110cf492a6516d833432cc8c004d267ee7d2763ffde1c9bfc1bf3"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/positive/f_208F_027F.txt",
+            "path": "build/current/tests/icon-handle/search-results/positive/f_208F_027F.txt",
             "size": 111,
             "sha256": "bffa55f4e5527521901a72c65eb93c8305bbea4bcf56ebb4f455b80c221475b2"
           }
@@ -802,19 +802,19 @@
         "f_208F_02F0": {
           "status": "EXACT",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/positive/f_208F_02F0.json",
-            "size": 690,
-            "sha256": "61094c1591264e107c4c4806f955f80529126e190253b87f6847b8540588adeb"
+            "path": "build/current/tests/icon-handle/search-results/positive/f_208F_02F0.json",
+            "size": 695,
+            "sha256": "c40f14f4194110cf492a6516d833432cc8c004d267ee7d2763ffde1c9bfc1bf3"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/positive/f_208F_02F0.txt",
+            "path": "build/current/tests/icon-handle/search-results/positive/f_208F_02F0.txt",
             "size": 111,
             "sha256": "9a138bb18131abdd7df7a81f55ed7404b4e93cfe5dc7972dfbb0886ef336ccde"
           }
         }
       },
       "module_result": {
-        "path": "build/icon-handle-view-final/module-results/positive.json",
+        "path": "build/current/tests/icon-handle/module-results/positive.json",
         "size": 4523,
         "sha256": "2bfcfe5252315904a28aa75952b43314a61ae99f43955183b68f7624f1a50272"
       }
@@ -1069,12 +1069,12 @@
         "passed": true
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/consumers/rawfar.c",
+        "path": "build/current/tests/icon-handle/sources/consumers/rawfar.c",
         "size": 6842,
         "sha256": "49a1efebfc0fff9bde55d9e9cf2e6a729f18328da8853d97446afdb25cd5c17c"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/consumers/rawfar.OBJ",
+        "path": "build/current/tests/icon-handle/objects/consumers/rawfar.OBJ",
         "size": 3284,
         "sha256": "f9dbf31c5c07b935b5bc02dd942f490133c06465b169d7ca03a6ec25db60ea09"
       },
@@ -1082,12 +1082,12 @@
         "f_208F_027F": {
           "status": "MISMATCH",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/rawfar/f_208F_027F.json",
-            "size": 783,
-            "sha256": "812b623b1f39e9fd1e1aec627ffe46c3bf92ef1653fdccab0d33e39c515b0880"
+            "path": "build/current/tests/icon-handle/search-results/rawfar/f_208F_027F.json",
+            "size": 788,
+            "sha256": "05342847ff57da17ed5a5ad2ac231c814da831f0241b0e4530fe6ae896fc8956"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/rawfar/f_208F_027F.txt",
+            "path": "build/current/tests/icon-handle/search-results/rawfar/f_208F_027F.txt",
             "size": 134,
             "sha256": "aed1bcccaaec8e54def169695c8c2514b087f4fdce45476a13f19676cdf351d5"
           }
@@ -1095,19 +1095,19 @@
         "f_208F_02F0": {
           "status": "MISMATCH",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/rawfar/f_208F_02F0.json",
-            "size": 782,
-            "sha256": "c93f6a6be809d502d6652c6b1ee7ba41ed6d6866f29b787fba3bee57b5f64cb3"
+            "path": "build/current/tests/icon-handle/search-results/rawfar/f_208F_02F0.json",
+            "size": 787,
+            "sha256": "5a2788f637c53915065a4b2aaeb16a6799de6cbb22c7c39cc1a27ade554209cc"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/rawfar/f_208F_02F0.txt",
+            "path": "build/current/tests/icon-handle/search-results/rawfar/f_208F_02F0.txt",
             "size": 134,
             "sha256": "2ffa2d1d5e3f53f0b6c54a2897e8e6f1f3a0457c2e82ee31e02baaf62326e324"
           }
         }
       },
       "module_result": {
-        "path": "build/icon-handle-view-final/module-results/rawfar.json",
+        "path": "build/current/tests/icon-handle/module-results/rawfar.json",
         "size": 5052,
         "sha256": "d0c70019078b1cdb2e4a231e1788f211b89df723df7b188240de843a9937172a"
       }
@@ -1362,12 +1362,12 @@
         "passed": true
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/consumers/nearcell.c",
+        "path": "build/current/tests/icon-handle/sources/consumers/nearcell.c",
         "size": 6854,
         "sha256": "b5158d37c3a0890b392a8c598e2646ef6d42f63f4a8390d5f335a9a67cb94ad8"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/consumers/nearcell.OBJ",
+        "path": "build/current/tests/icon-handle/objects/consumers/nearcell.OBJ",
         "size": 3278,
         "sha256": "8537871797e8fb1d83465b9b319a739a511edcaedf6c021975f8088c879207ef"
       },
@@ -1375,12 +1375,12 @@
         "f_208F_027F": {
           "status": "MISMATCH",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/nearcell/f_208F_027F.json",
-            "size": 785,
-            "sha256": "9ca8c3ac90c71ec10a3a79e71f9197dc74719b01b5305dffff256c8d674de525"
+            "path": "build/current/tests/icon-handle/search-results/nearcell/f_208F_027F.json",
+            "size": 790,
+            "sha256": "fa2b86875340d80c520b6d372fd45bf940537030c2ed748e892ca70aed438e8d"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/nearcell/f_208F_027F.txt",
+            "path": "build/current/tests/icon-handle/search-results/nearcell/f_208F_027F.txt",
             "size": 136,
             "sha256": "3a9a15557ace994545c7e7bf7f25916d0c89c9d46baf3572cb55f9ec7e3e1e4e"
           }
@@ -1388,19 +1388,19 @@
         "f_208F_02F0": {
           "status": "MISMATCH",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/nearcell/f_208F_02F0.json",
-            "size": 785,
-            "sha256": "0e71f9012b290d35217a9ec9ff05109b3820ab3d07e10636cb26fb8d27de7abd"
+            "path": "build/current/tests/icon-handle/search-results/nearcell/f_208F_02F0.json",
+            "size": 790,
+            "sha256": "b5394454a1c7dec73b8fd966eb0c2f80f34b72a62e1943b603b258d88481e86b"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/nearcell/f_208F_02F0.txt",
+            "path": "build/current/tests/icon-handle/search-results/nearcell/f_208F_02F0.txt",
             "size": 136,
             "sha256": "34d066048124a649f5c152990b6f285fbaa72e5c6572ef158a77d558cd4a11c1"
           }
         }
       },
       "module_result": {
-        "path": "build/icon-handle-view-final/module-results/nearcell.json",
+        "path": "build/current/tests/icon-handle/module-results/nearcell.json",
         "size": 5050,
         "sha256": "d30d62a93887d8db67e4ce88d53211c04c524e1f06eac0ca87028724da0a8b44"
       }
@@ -1663,12 +1663,12 @@
         "passed": true
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/consumers/wordpayload.c",
+        "path": "build/current/tests/icon-handle/sources/consumers/wordpayload.c",
         "size": 6852,
         "sha256": "584329c4d64acf40ec2b0b95ebfe166d815379fd3044ca40fcf19a49b5560324"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/consumers/wordpayload.OBJ",
+        "path": "build/current/tests/icon-handle/objects/consumers/wordpayload.OBJ",
         "size": 3282,
         "sha256": "5ddc930587be9ca4f625b87ac488eb23ab3a2a8aa3314b458e562d2f32c84b2a"
       },
@@ -1676,12 +1676,12 @@
         "f_208F_027F": {
           "status": "MISMATCH",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/wordpayload/f_208F_027F.json",
-            "size": 750,
-            "sha256": "0067c249418c44fa01d3c5960dd145cfb1a2bede8069fba793bdedfb567075a4"
+            "path": "build/current/tests/icon-handle/search-results/wordpayload/f_208F_027F.json",
+            "size": 755,
+            "sha256": "a888aff5de90fc720cdfb0383bfbc67285f2f4db5556059b120276853492ca74"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/wordpayload/f_208F_027F.txt",
+            "path": "build/current/tests/icon-handle/search-results/wordpayload/f_208F_027F.txt",
             "size": 112,
             "sha256": "69381824410582d036b176de7f0553c4cf3b800feac3730a85e819114b339ab9"
           }
@@ -1689,19 +1689,19 @@
         "f_208F_02F0": {
           "status": "MISMATCH",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/wordpayload/f_208F_02F0.json",
-            "size": 750,
-            "sha256": "1c13bfeecf8e481d0966b0477c666e8d751d462ec0d3363e97ef582401077ff0"
+            "path": "build/current/tests/icon-handle/search-results/wordpayload/f_208F_02F0.json",
+            "size": 755,
+            "sha256": "7825990bc4f0e33c5d4c7fc73bcc18c866201c56a500979e21ac2b8c27747763"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/wordpayload/f_208F_02F0.txt",
+            "path": "build/current/tests/icon-handle/search-results/wordpayload/f_208F_02F0.txt",
             "size": 112,
             "sha256": "a99f10f71bccbab630adff7d646536a1a5db64e4c14327f7ca58a1ffb38a4690"
           }
         }
       },
       "module_result": {
-        "path": "build/icon-handle-view-final/module-results/wordpayload.json",
+        "path": "build/current/tests/icon-handle/module-results/wordpayload.json",
         "size": 4746,
         "sha256": "9393cff00b2dbd36297413f327c1ad4a7ba00da7dfe52948369a8b7a859027ea"
       }
@@ -1947,12 +1947,12 @@
         "passed": true
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/consumers/array1.c",
+        "path": "build/current/tests/icon-handle/sources/consumers/array1.c",
         "size": 6871,
         "sha256": "438f0a1edec6ec735f153134ff3806d3e51c6cc39890d7c4bd3a1e0e345bb6e8"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/consumers/array1.OBJ",
+        "path": "build/current/tests/icon-handle/objects/consumers/array1.OBJ",
         "size": 3282,
         "sha256": "71af35ba7efd78f9e98a7f06af5a1a65e3bcbba069157b0eaafd93f18693bbc2"
       },
@@ -1960,12 +1960,12 @@
         "f_208F_027F": {
           "status": "EXACT",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/array1/f_208F_027F.json",
-            "size": 688,
-            "sha256": "736bb60a52fab4c2a719f764eaaaf47a3f8a8d7e2c007eb816d68c377f9392ed"
+            "path": "build/current/tests/icon-handle/search-results/array1/f_208F_027F.json",
+            "size": 693,
+            "sha256": "c33171f326cdfecc0a7f61caeb339107dfe84a81fa60d42650a7afc6cf43df85"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/array1/f_208F_027F.txt",
+            "path": "build/current/tests/icon-handle/search-results/array1/f_208F_027F.txt",
             "size": 109,
             "sha256": "0e7cb05e67e5e18ec31b363266216fca91735470bcbb07ed444f35e0fcb93c65"
           }
@@ -1973,19 +1973,19 @@
         "f_208F_02F0": {
           "status": "EXACT",
           "result": {
-            "path": "build/icon-handle-view-final/search-results/array1/f_208F_02F0.json",
-            "size": 688,
-            "sha256": "736bb60a52fab4c2a719f764eaaaf47a3f8a8d7e2c007eb816d68c377f9392ed"
+            "path": "build/current/tests/icon-handle/search-results/array1/f_208F_02F0.json",
+            "size": 693,
+            "sha256": "c33171f326cdfecc0a7f61caeb339107dfe84a81fa60d42650a7afc6cf43df85"
           },
           "log": {
-            "path": "build/icon-handle-view-final/search-results/array1/f_208F_02F0.txt",
+            "path": "build/current/tests/icon-handle/search-results/array1/f_208F_02F0.txt",
             "size": 109,
             "sha256": "2e9f139a6e6f6f01a2a83e85d6808a965fdd10fe020773afde9d74401659c9ed"
           }
         }
       },
       "module_result": {
-        "path": "build/icon-handle-view-final/module-results/array1.json",
+        "path": "build/current/tests/icon-handle/module-results/array1.json",
         "size": 4523,
         "sha256": "2bfcfe5252315904a28aa75952b43314a61ae99f43955183b68f7624f1a50272"
       }
@@ -2019,12 +2019,12 @@
         "sha256": "cc7a5a6d1e24eb1633b87db2130eaaa32de8f95f869fb06d04a4c1d7a01ee981"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/providers/typedroot.OBJ",
+        "path": "build/current/tests/icon-handle/objects/providers/typedroot.OBJ",
         "size": 209,
         "sha256": "3d20e8e7aa25fb700f32d9ced9df31e9b2b19f7fe6e4c533518c8099c6813196"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/providers/typedroot.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/providers/typedroot.txt",
         "size": 9,
         "sha256": "85e9d7b74861c19851d207e2905ea13867ca0bead0c14e710bc9d6b1945ef85e"
       },
@@ -2056,17 +2056,17 @@
         "live_segments": []
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/providers/rawfar.c",
+        "path": "build/current/tests/icon-handle/sources/providers/rawfar.c",
         "size": 111,
         "sha256": "df873b57a6e17d44379f47068132239c00a348922bc581cbcbf5d089d5b2e7c7"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/providers/rawfar.OBJ",
+        "path": "build/current/tests/icon-handle/objects/providers/rawfar.OBJ",
         "size": 209,
         "sha256": "3d20e8e7aa25fb700f32d9ced9df31e9b2b19f7fe6e4c533518c8099c6813196"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/providers/rawfar.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/providers/rawfar.txt",
         "size": 9,
         "sha256": "85e9d7b74861c19851d207e2905ea13867ca0bead0c14e710bc9d6b1945ef85e"
       },
@@ -2098,17 +2098,17 @@
         "live_segments": []
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/providers/nearcell.c",
+        "path": "build/current/tests/icon-handle/sources/providers/nearcell.c",
         "size": 118,
         "sha256": "1a058c2bf366339a0cffc42d1edf9c5c9032a1e2dd4470e20fcb7128ee29aa45"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/providers/nearcell.OBJ",
+        "path": "build/current/tests/icon-handle/objects/providers/nearcell.OBJ",
         "size": 209,
         "sha256": "d07ff4d357c68ebdaee678c2cffe4803c32b06b9552ce19901f58988a48dc8da"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/providers/nearcell.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/providers/nearcell.txt",
         "size": 9,
         "sha256": "85e9d7b74861c19851d207e2905ea13867ca0bead0c14e710bc9d6b1945ef85e"
       },
@@ -2140,17 +2140,17 @@
         "live_segments": []
       },
       "source": {
-        "path": "build/icon-handle-view-final/sources/providers/array2.c",
+        "path": "build/current/tests/icon-handle/sources/providers/array2.c",
         "size": 120,
         "sha256": "f77e367cd0327bf64caec969616458b05b4b35a781a8c97120f0cfb36fdfc6c0"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/providers/array2.OBJ",
+        "path": "build/current/tests/icon-handle/objects/providers/array2.OBJ",
         "size": 209,
         "sha256": "303533b323e4ade5cfbf9533b416074ab8b4eaad2c59003f44f48894fd6c11be"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/providers/array2.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/providers/array2.txt",
         "size": 9,
         "sha256": "85e9d7b74861c19851d207e2905ea13867ca0bead0c14e710bc9d6b1945ef85e"
       },
@@ -2170,12 +2170,12 @@
         "sha256": "04a15a8d3a9b0a2d90d09c87032b201496d54cad8de36f4e1f284f12f448037b"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/fixtures/MAIN.OBJ",
+        "path": "build/current/tests/icon-handle/objects/fixtures/MAIN.OBJ",
         "size": 1678,
         "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/fixtures/MAIN.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/fixtures/MAIN.txt",
         "size": 7,
         "sha256": "922661638721e8a0c74e2e5f8d09435a5d05b2e672f2bca6b817bbf722669cf9"
       },
@@ -2193,12 +2193,12 @@
         "sha256": "cc7a5a6d1e24eb1633b87db2130eaaa32de8f95f869fb06d04a4c1d7a01ee981"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/fixtures/OWN.OBJ",
+        "path": "build/current/tests/icon-handle/objects/fixtures/OWN.OBJ",
         "size": 203,
         "sha256": "66e6c8b9d9ea7f8e9b606d3e0464cda06627fe3957519b51212ffab42cd50a88"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/fixtures/OWN.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/fixtures/OWN.txt",
         "size": 6,
         "sha256": "433fa9cf9086ecbb81301515fe45975320d2b8d4fc523025491a2ff3c703471b"
       },
@@ -2216,12 +2216,12 @@
         "sha256": "41d5d9b5aefe66c3741405c130de29e8cb27f40c043228f1b2281ea59a06f033"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/fixtures/SHIFT.OBJ",
+        "path": "build/current/tests/icon-handle/objects/fixtures/SHIFT.OBJ",
         "size": 261,
         "sha256": "4f2eb938954ddce9763c890aa9874733e92e23d5fed7a697d21a92b3c083fc1f"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/fixtures/SHIFT.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/fixtures/SHIFT.txt",
         "size": 8,
         "sha256": "20ccaf8444b00febda358a50ab08a179fed73da743fc2389943731891752e695"
       },
@@ -2239,12 +2239,12 @@
         "sha256": "640241d59b51d096f398a822446218aaaa746c15d3a5c26760f0c2c9a2440aa6"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/fixtures/RAWMAIN.OBJ",
+        "path": "build/current/tests/icon-handle/objects/fixtures/RAWMAIN.OBJ",
         "size": 1713,
         "sha256": "d0ccb78b9aabb5f68ca44a4a476245e692b0664f690f834df05f4d785d2cb682"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/fixtures/RAWMAIN.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/fixtures/RAWMAIN.txt",
         "size": 10,
         "sha256": "097ccccb18096096be5a26911743e4d3f3612f9664ab2702737990cb57ccc254"
       },
@@ -2262,12 +2262,12 @@
         "sha256": "900ce3314b8158d2f4f8b722ab8f0c8a456f1d74e343e0a275b50d53f99f9a74"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/fixtures/RAWOWN.OBJ",
+        "path": "build/current/tests/icon-handle/objects/fixtures/RAWOWN.OBJ",
         "size": 209,
         "sha256": "fbdb2657cc6235a9499476e22c405a0ad8a4b4cbde5629fae113e03fd90b7908"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/fixtures/RAWOWN.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/fixtures/RAWOWN.txt",
         "size": 9,
         "sha256": "5aace37bdee73874f0ea64e558c851da8152cc4b9e96266309b768a3dc17d796"
       },
@@ -2285,12 +2285,12 @@
         "sha256": "08f4a1e13d04098d6d931f9bb7ab749ea9b43b3c830cc84c3679e4b0ade9bdaf"
       },
       "object": {
-        "path": "build/icon-handle-view-final/objects/fixtures/INIT.OBJ",
+        "path": "build/current/tests/icon-handle/objects/fixtures/INIT.OBJ",
         "size": 275,
         "sha256": "4b86353aab17aa73bb812c015aab2ddb82963ba7b559caf7911f7c4fc2f2cfab"
       },
       "compiler_log": {
-        "path": "build/icon-handle-view-final/compiler-logs/fixtures/INIT.txt",
+        "path": "build/current/tests/icon-handle/compiler-logs/fixtures/INIT.txt",
         "size": 7,
         "sha256": "4eec502f4973c92bcbafe6e55ead486a4ccd6d1df25b49a426dda03ca701cf56"
       },
@@ -2645,72 +2645,72 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/PROBE.LNK",
           "size": 91,
           "sha256": "7848889a0de538664bf99bc2331fac0080fe73217656d148b4e519181482d711"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/RUN.BAT",
           "size": 158,
           "sha256": "0e0cc8a5cb261ad29d35a1ab013e1f9db9b107af1c15f9965c92132321f4a370"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/dosbox.conf",
-          "size": 382,
-          "sha256": "a1ff7fab7ae7ebcac17b9a99230e5aa1a31f1d0b201e3c88b4f677fdcc741ab6"
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/dosbox.conf",
+          "size": 367,
+          "sha256": "302b477d43fa8bb11d6ccf1e90ae8fd74d0d2d592fe240b2e2b259c2edfc5386"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/LINK.LOG",
           "size": 457,
           "sha256": "6dc2dc75f9b7122ec2205076717a902576fe636490f8fabee44c8e5af68c6bcb"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/RUN.LOG",
           "size": 101,
           "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/PROBE.MAP",
           "size": 9233,
           "sha256": "7f0300bcfc5686021b752d28d7f803f7a99b1d104b9dfd9c0e1411ccf7883a57"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/PROBE.EXE",
           "size": 6889,
           "sha256": "a8863150af9c64744bd10061e19d826802c53b67012abf94035208d30679285d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/DOSBOX.LOG",
-          "size": 4241,
-          "sha256": "f6de729583dba88072e597cb2868dc205dbcd160fad62091479bcb86d04b9a6d"
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/DOSBOX.LOG",
+          "size": 4244,
+          "sha256": "ece00232583c46db686b88802cbb5f14ce37ba58b315c01f66d09491e71da9b6"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/MAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/MAIN.OBJ",
           "size": 1678,
           "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/OWN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/OWN.OBJ",
           "size": 203,
           "sha256": "66e6c8b9d9ea7f8e9b606d3e0464cda06627fe3957519b51212ffab42cd50a88"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/typedroot/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/typedroot/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\b3924e2c4aa624d1",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\b3924e2c4aa624d1",
       "passed": true
     },
     {
@@ -3013,77 +3013,77 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/PROBE.LNK",
           "size": 102,
           "sha256": "a1a0a5c6a48ca60d7cbd39416a28b807bac7d16f7ea02cbd61cca514963e2d1e"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/RUN.BAT",
           "size": 158,
           "sha256": "0e0cc8a5cb261ad29d35a1ab013e1f9db9b107af1c15f9965c92132321f4a370"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/dosbox.conf",
-          "size": 387,
-          "sha256": "441cdcc220eb473ae211c0f70f3fadb698e4e91960d201662f8d88f7541d0021"
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/dosbox.conf",
+          "size": 372,
+          "sha256": "6371e8e8d4d069f2e2fe291dbad95cbce10161e2e04e60cee085cd63891f9dc8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/LINK.LOG",
           "size": 468,
           "sha256": "a7e5f7c194d1713385314025a4e2b6ffb8190e445f04ab4c072644424f39e3cb"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/RUN.LOG",
           "size": 101,
           "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/PROBE.MAP",
           "size": 9403,
           "sha256": "c6ea209b00a7009f26893e63e5407c8b82a5925d9e7d7bd50965afbf6d7f37bd"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/PROBE.EXE",
           "size": 7161,
           "sha256": "78e0842952d7b7fa94536173627c5396afba4d0b626209b506d4b1d9c890692a"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/DOSBOX.LOG",
-          "size": 4246,
-          "sha256": "422be2d1964d20bf3ee7c15dd027b439affd9492db315cf50b4ee24e27951455"
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/DOSBOX.LOG",
+          "size": 4249,
+          "sha256": "851a0125df9dae5edc871a31420a97aadff47771a9ea73e9c5b6bcf9a7deab70"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/SHIFT.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/SHIFT.OBJ",
           "size": 261,
           "sha256": "4f2eb938954ddce9763c890aa9874733e92e23d5fed7a697d21a92b3c083fc1f"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/MAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/MAIN.OBJ",
           "size": 1678,
           "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/OWN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/OWN.OBJ",
           "size": 203,
           "sha256": "66e6c8b9d9ea7f8e9b606d3e0464cda06627fe3957519b51212ffab42cd50a88"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/movedtypedroot/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/movedtypedroot/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\b3924e2c4aa624d1",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\b3924e2c4aa624d1",
       "passed": true
     },
     {
@@ -3382,72 +3382,72 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/PROBE.LNK",
           "size": 97,
           "sha256": "a7092315013b334c1f0d3b6d4785868f89fd96e816b808a20e94922699e009a8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/RUN.BAT",
           "size": 158,
           "sha256": "0e0cc8a5cb261ad29d35a1ab013e1f9db9b107af1c15f9965c92132321f4a370"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/dosbox.conf",
-          "size": 379,
-          "sha256": "e76c0368aba715cfb18ad21f0135a7129bcf59c69047e45e8f1ea38aebf2fa06"
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/dosbox.conf",
+          "size": 364,
+          "sha256": "88b07540bf73311f2713c7d580170df87679896ae8407aaa19c751609bf38819"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/LINK.LOG",
           "size": 463,
           "sha256": "abbdcfa6020b611dab03ee21d633caf5dacde046068d90d121551423fb9da2b2"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/RUN.LOG",
           "size": 65,
           "sha256": "2758a7eac0755984d045377021c6041ac8976b9a4ea82497c56dcab4293cb79d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/PROBE.MAP",
           "size": 9229,
           "sha256": "eb59fb04f620aab3e9a39d1cd4eb7fc54ea38aac8ad6d971c34f30488c08d34e"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/PROBE.EXE",
           "size": 7017,
           "sha256": "03b69e425129aa864618cac3de9d1cb83ec6f52ca116633f7112913f6cdeba8d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/DOSBOX.LOG",
-          "size": 4238,
-          "sha256": "d70966c9d428b4d576fd873ce88c95b45e098bd32534a0902bc3f5d4ca03199a"
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/DOSBOX.LOG",
+          "size": 4241,
+          "sha256": "c966de44c52138573c164a9a11b6111e16e4277ccd921c5bc314efaa9e712b70"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/RAWMAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/RAWMAIN.OBJ",
           "size": 1713,
           "sha256": "d0ccb78b9aabb5f68ca44a4a476245e692b0664f690f834df05f4d785d2cb682"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/RAWOWN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/RAWOWN.OBJ",
           "size": 209,
           "sha256": "fbdb2657cc6235a9499476e22c405a0ad8a4b4cbde5629fae113e03fd90b7908"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/rawfar/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/rawfar/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\b3924e2c4aa624d1",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\b3924e2c4aa624d1",
       "passed": true
     },
     {
@@ -3760,72 +3760,72 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/PROBE.LNK",
           "size": 92,
           "sha256": "9c25e52f8b752f592e6ed6f45ca5bfb0619db65c1c216864518f256e3aea7368"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/RUN.BAT",
           "size": 158,
           "sha256": "0e0cc8a5cb261ad29d35a1ab013e1f9db9b107af1c15f9965c92132321f4a370"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/dosbox.conf",
-          "size": 384,
-          "sha256": "6c52afa76c6aea8d60124e235bc4085e7a5df48b9a5bb75db3eed4bdca6059ed"
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/dosbox.conf",
+          "size": 369,
+          "sha256": "18cc66e3a067394821dfa553b5f98737a31d1fba993e362bd73ef9e154ed4a35"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/LINK.LOG",
           "size": 458,
           "sha256": "edfe65eb708b4ace1051b3968d03b4c585a80ee5086685cb7642b8e10f176537"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/RUN.LOG",
           "size": 19,
           "sha256": "69ecd521ac3eed5a0401f1185d1c883bebc79f1e7272e563fe443672cc1b09cb"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/PROBE.MAP",
           "size": 9234,
           "sha256": "ea57e6506ca1b59ee684ca76f191d5330e0f2d53dbf803137cba4d00bda988b3"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/PROBE.EXE",
           "size": 6889,
           "sha256": "fb9333eb094720e98873f71d54bfc75a757f6fc04c1cdd104f58327a07ebff3d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/DOSBOX.LOG",
-          "size": 4243,
-          "sha256": "f9efe29f329ee89988a7a21e07882312d32d6f862c70060534ff7ad34e3cb78e"
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/DOSBOX.LOG",
+          "size": 4246,
+          "sha256": "cb5f9312c62f884a619d0302b7a217f41ce49b756fe7770a0024d33b29d5ae55"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/MAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/MAIN.OBJ",
           "size": 1678,
           "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/INIT.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/INIT.OBJ",
           "size": 275,
           "sha256": "4b86353aab17aa73bb812c015aab2ddb82963ba7b559caf7911f7c4fc2f2cfab"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink400/nonzeroinit/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink400/nonzeroinit/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\b3924e2c4aa624d1",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\b3924e2c4aa624d1",
       "passed": true
     },
     {
@@ -4127,72 +4127,72 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/PROBE.LNK",
           "size": 91,
           "sha256": "7848889a0de538664bf99bc2331fac0080fe73217656d148b4e519181482d711"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/RUN.BAT",
           "size": 160,
           "sha256": "1c23c835155ae8dc9db456abe15ea397c97590b991d79adef0886752c940b11d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/dosbox.conf",
-          "size": 382,
-          "sha256": "3be616179b92967f2243d528c246fe1401414e8cf465a3ff237ad45f34c1522e"
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/dosbox.conf",
+          "size": 367,
+          "sha256": "e20fc1292579e8f503d2ee3bd51535150e648a4c4d27602dfb52173ad6f829f2"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/LINK.LOG",
           "size": 988,
           "sha256": "39f94ac40b52e0196a0c26e11c84a6791bdc15a62207ba0c9098d1942a2dd591"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/RUN.LOG",
           "size": 101,
           "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/PROBE.MAP",
           "size": 9333,
           "sha256": "fe7650cb77ba0c3943f78e91358c5d09c696ebd2773ee6b763925b9cbea888e7"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/PROBE.EXE",
           "size": 6889,
           "sha256": "94b71e16d61f777d78d67ed01fc734d60add3e9c767fdf583eb1a6a029eab84b"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/DOSBOX.LOG",
-          "size": 4351,
-          "sha256": "85d1ea9c56d94aac692d43aa132008047752e8f000bcc3396a04f40c742940c7"
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/DOSBOX.LOG",
+          "size": 4354,
+          "sha256": "bff6989cb2b1b3569bafb2f322724a8e92123f1747192e60d64ca7944e3c58dc"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/MAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/MAIN.OBJ",
           "size": 1678,
           "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/OWN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/OWN.OBJ",
           "size": 203,
           "sha256": "66e6c8b9d9ea7f8e9b606d3e0464cda06627fe3957519b51212ffab42cd50a88"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/typedroot/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/typedroot/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\c95b3f9794e8fe01",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\c95b3f9794e8fe01",
       "passed": true
     },
     {
@@ -4495,77 +4495,77 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/PROBE.LNK",
           "size": 102,
           "sha256": "a1a0a5c6a48ca60d7cbd39416a28b807bac7d16f7ea02cbd61cca514963e2d1e"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/RUN.BAT",
           "size": 160,
           "sha256": "1c23c835155ae8dc9db456abe15ea397c97590b991d79adef0886752c940b11d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/dosbox.conf",
-          "size": 387,
-          "sha256": "d766dc775d600bff49e13a2f28822c04679df00b8fd67e0fdbee394763169897"
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/dosbox.conf",
+          "size": 372,
+          "sha256": "e6ca754f0cf25e961f6b816f038d2fa0ab00b5ad0ff7009c4dab224e62d22383"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/LINK.LOG",
           "size": 998,
           "sha256": "20e1ce65bbc6283a8207a4116afbc0f1098d14786d37c808736dcdf0614d02fe"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/RUN.LOG",
           "size": 101,
           "sha256": "f1511fc2c574ed366e1b03a31cecfcbc9ea5a91f64081af33581f2110ad112fe"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/PROBE.MAP",
           "size": 9503,
           "sha256": "7ce599f84241a9a877c3bd4ada1e30b72cbb8d0efef3ab697acf6a2ceee92f54"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/PROBE.EXE",
           "size": 7161,
           "sha256": "8827ce73976338de1a91f70b0f9eb959dbf9a458fbfabf4afc9201f9e3b0b980"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/DOSBOX.LOG",
-          "size": 4356,
-          "sha256": "c7437771d9e90f21ed498d73d3efdbcd7e77bc14a3e6e006a9debbf60e9c8b28"
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/DOSBOX.LOG",
+          "size": 4359,
+          "sha256": "838cf4b6d42220d7a1772fd6200bfbab4aaa24436af2e82b3d7d883394b868bd"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/SHIFT.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/SHIFT.OBJ",
           "size": 261,
           "sha256": "4f2eb938954ddce9763c890aa9874733e92e23d5fed7a697d21a92b3c083fc1f"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/MAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/MAIN.OBJ",
           "size": 1678,
           "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/OWN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/OWN.OBJ",
           "size": 203,
           "sha256": "66e6c8b9d9ea7f8e9b606d3e0464cda06627fe3957519b51212ffab42cd50a88"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/movedtypedroot/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/movedtypedroot/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\c95b3f9794e8fe01",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\c95b3f9794e8fe01",
       "passed": true
     },
     {
@@ -4864,72 +4864,72 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/PROBE.LNK",
           "size": 97,
           "sha256": "a7092315013b334c1f0d3b6d4785868f89fd96e816b808a20e94922699e009a8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/RUN.BAT",
           "size": 160,
           "sha256": "1c23c835155ae8dc9db456abe15ea397c97590b991d79adef0886752c940b11d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/dosbox.conf",
-          "size": 379,
-          "sha256": "adaaeacfee142afb18568eed974db6259ba67576582b92795c956492d95adbe6"
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/dosbox.conf",
+          "size": 364,
+          "sha256": "1c1049ef49fd6718ec6dc8761036ea25c29761c22cf065d9e26bf3e8820ddf03"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/LINK.LOG",
           "size": 994,
           "sha256": "4382e578c223cf516ba8cde7ce077aff4d9425c3288e5e940172880e724cb1a1"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/RUN.LOG",
           "size": 65,
           "sha256": "2758a7eac0755984d045377021c6041ac8976b9a4ea82497c56dcab4293cb79d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/PROBE.MAP",
           "size": 9329,
           "sha256": "ebcbb2e5bc2d7f66e6db272d0cae482b22fd772f2c5ee732f47045eb06da14ba"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/PROBE.EXE",
           "size": 7017,
           "sha256": "8a617eb614437aa49147989bc2c3c5067cf9e4cbf8622056652393106ef4b808"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/DOSBOX.LOG",
-          "size": 4348,
-          "sha256": "4b4273f9be14b4825b8c0d85221093cb30db93421a03b320c977a43c0092a6bd"
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/DOSBOX.LOG",
+          "size": 4351,
+          "sha256": "f3b90b1e8e16086ff01a897aacb7f00edc1c9b93955ea59f355b29e8004b3a05"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/RAWMAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/RAWMAIN.OBJ",
           "size": 1713,
           "sha256": "d0ccb78b9aabb5f68ca44a4a476245e692b0664f690f834df05f4d785d2cb682"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/RAWOWN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/RAWOWN.OBJ",
           "size": 209,
           "sha256": "fbdb2657cc6235a9499476e22c405a0ad8a4b4cbde5629fae113e03fd90b7908"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/rawfar/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/rawfar/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\c95b3f9794e8fe01",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\c95b3f9794e8fe01",
       "passed": true
     },
     {
@@ -5242,72 +5242,72 @@
       ],
       "files": [
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/PROBE.LNK",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/PROBE.LNK",
           "size": 92,
           "sha256": "9c25e52f8b752f592e6ed6f45ca5bfb0619db65c1c216864518f256e3aea7368"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/RTLINK.CFG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/RTLINK.CFG",
           "size": 21,
           "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/RUN.BAT",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/RUN.BAT",
           "size": 160,
           "sha256": "1c23c835155ae8dc9db456abe15ea397c97590b991d79adef0886752c940b11d"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/dosbox.conf",
-          "size": 384,
-          "sha256": "b1f8d349e0698df96c04d8f0175776273c85205afb8e2547f32c22d49b22bd1e"
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/dosbox.conf",
+          "size": 369,
+          "sha256": "574fe5499efa10b244ea2e19ed5398a3906100ff6ac7d8984828da88e179d849"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/LINK.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/LINK.LOG",
           "size": 989,
           "sha256": "69df81a806a96078eeff9430608adfc1af4bbb7150b51af5ecd9bf5fb50d92c2"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/RUN.LOG",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/RUN.LOG",
           "size": 19,
           "sha256": "69ecd521ac3eed5a0401f1185d1c883bebc79f1e7272e563fe443672cc1b09cb"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/PROBE.MAP",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/PROBE.MAP",
           "size": 9334,
           "sha256": "2714ee10224124e6aacfeb83e7f443f55d10c06d794f5e0534d804debb870f48"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/PROBE.EXE",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/PROBE.EXE",
           "size": 6889,
           "sha256": "cbd847719056090a2bb466494ad8d2412a7fa686c3dc56e817ffaf2592f775bb"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/DOSBOX.LOG",
-          "size": 4353,
-          "sha256": "9c018559013c153260b8f70f99c23d949f98b14e42b5b2b5b8d2df4c55bfb758"
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/DOSBOX.LOG",
+          "size": 4356,
+          "sha256": "7ca9cca6ffba6ed880344dfe9783d57146e5958559a661165d94511bc5a45e1a"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/MAIN.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/MAIN.OBJ",
           "size": 1678,
           "sha256": "925de9a6ed9f4950ee4c0ba04ae0a537a678c9c0afc068b028aacadacd1032ad"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/INIT.OBJ",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/INIT.OBJ",
           "size": 275,
           "sha256": "4b86353aab17aa73bb812c015aab2ddb82963ba7b559caf7911f7c4fc2f2cfab"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/LLIBCR.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/LLIBCR.LIB",
           "size": 148711,
           "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
         },
         {
-          "path": "build/icon-handle-view-final/links/rtlink610/nonzeroinit/LIBH.LIB",
+          "path": "build/current/tests/icon-handle/links/rtlink610/nonzeroinit/LIBH.LIB",
           "size": 21033,
           "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
         }
       ],
-      "tool_tree": "D:\\Prog\\simant_recon\\build\\icon-handle-view-final\\cc\\pinned\\c95b3f9794e8fe01",
+      "tool_tree": "D:\\Prog\\simant_recon\\build\\deps\\dos-tools\\c95b3f9794e8fe01",
       "passed": true
     }
   ],
