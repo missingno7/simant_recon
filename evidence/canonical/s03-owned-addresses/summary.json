@@ -1,0 +1,315 @@
+{
+  "schema": "simant-s03-owned-address-current-proof-summary-v1",
+  "scope": "Only complete source-owned S03:3126 and S03:3258 objects. Real-linker fixtures inspect their actual linked LEA displacement fields at runtime; no original game function executes. Test providers satisfy unexecuted boundaries only. This is not a full DOS game link, standalone execution, new assembly admission, or storage proof.",
+  "reproduce": "python evidence/canonical/s03-owned-addresses/replay.py --out build/s03-address-proof-fresh",
+  "full_receipt": {
+    "path": "build/s03-owned-addresses-current/receipt.json",
+    "sha256": "5ac789fe78a523772afba2ad52d42b4c8527635ccaf537f0dd6b94fb89029652",
+    "size": 103225
+  },
+  "reproducer": {
+    "path": "evidence/canonical/s03-owned-addresses/replay.py",
+    "sha256": "fad665c5e26c5c26827db54318ec5b7f52dee338d7a56e1eddab07fa86563d54",
+    "size": 21263
+  },
+  "canonical_source_inputs_and_negative_recipes": [
+    {
+      "module": "S03:3126",
+      "canonical_source": {
+        "path": "src/S03/m3126.asm",
+        "sha256": "33c47fd0113e14c015a9a0b43625d87d00afb46fb2f915b928f3a982130e72d8",
+        "size": 37090
+      },
+      "positive_source": {
+        "path": "build/s03-owned-addresses-current/sources/NEWA.asm",
+        "sha256": "af8d51127364622fc4f51262fa7ab2090f1639e8bf8a5f775cadd0b5b9bf681a",
+        "size": 39353
+      },
+      "negative_source": {
+        "path": "build/s03-owned-addresses-current/sources/OLDA.asm",
+        "sha256": "e4775542695d014376762dee198f584b21706d0ba6a0a2f3edc6677af0264890",
+        "size": 39442
+      },
+      "negative_recipe": [
+        {
+          "register": "di",
+          "canonical_operand": "linebuf",
+          "negative_operand": "ds:[0]",
+          "count": 2
+        },
+        {
+          "register": "si",
+          "canonical_operand": "linebuf",
+          "negative_operand": "ds:[0]",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "module": "S03:3258",
+      "canonical_source": {
+        "path": "src/S03/m3258.asm",
+        "sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
+        "size": 40733
+      },
+      "positive_source": {
+        "path": "build/s03-owned-addresses-current/sources/NEWC.asm",
+        "sha256": "fda25fe9bc10bc8c28b33075e0493ee120c855655ad80a97c1cef11842b3beb6",
+        "size": 43428
+      },
+      "negative_source": {
+        "path": "build/s03-owned-addresses-current/sources/OLDC.asm",
+        "sha256": "6df1999473caa583afc505bee907b9603512b448f66ac59177ac7b027b928635",
+        "size": 43495
+      },
+      "negative_recipe": [
+        {
+          "register": "dx",
+          "canonical_operand": "xlat_tabs",
+          "negative_operand": "ds:[0Ch]",
+          "count": 2
+        },
+        {
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+512",
+          "negative_operand": "ds:[20Ch]",
+          "count": 2
+        },
+        {
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+256",
+          "negative_operand": "ds:[10Ch]",
+          "count": 2
+        },
+        {
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+768",
+          "negative_operand": "ds:[30Ch]",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "whole_object_review": {
+    "S03:3126": {
+      "code_and_data_lengths": {
+        "_DATA": 250,
+        "S03A_TEXT": 4824
+      },
+      "public_count": 32,
+      "old_fixup_count": 407,
+      "new_fixup_count": 411,
+      "retained_fixups_identical_in_order": true,
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    },
+    "S03:3258": {
+      "code_and_data_lengths": {
+        "_DATA": 0,
+        "S03C_TEXT": 6055
+      },
+      "public_count": 7,
+      "old_fixup_count": 8,
+      "new_fixup_count": 16,
+      "retained_fixups_identical_in_order": true,
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    }
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 8,
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 12,
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 8,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 12,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "passed": true
+    }
+  ],
+  "negative_controls_derived_from_current_canonical_sources": true,
+  "all_required_checks_pass": true
+}

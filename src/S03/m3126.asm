@@ -146,6 +146,8 @@ S03A_TEXT	segment word public 'CODE'
 	public	_o03_3126_1189
 	public	_o03_3126_1192
 
+; Address the source-owned buffer symbolically so a same-segment contribution
+; prefix cannot redirect its four CS-relative fill/copy accesses.
 linebuf	db	320 dup (0)
 _o03_3126_0140	proc	far
 	push ds
@@ -1610,7 +1612,7 @@ L0DDC:
 	assume ss:DGROUP
 	mov cx, word ptr ss:_g_222A
 	assume ss:nothing
-	lea di, ds:[0]
+	lea di, linebuf
 L0DE7:
 	mov bh, byte ptr [si]
 	inc si
@@ -1661,7 +1663,7 @@ L0DE7:
 	pop di
 	pop bx
 	push si
-	lea si, ds:[0]
+	lea si, linebuf
 	assume ss:DGROUP
 	add si, word ptr ss:_g_222C
 	assume ss:nothing
@@ -1753,7 +1755,7 @@ L0EEF:
 	assume ss:DGROUP
 	mov cx, word ptr ss:_g_222A
 	assume ss:nothing
-	lea di, ds:[0]
+	lea di, linebuf
 L0EFA:
 	mov bh, byte ptr [si]
 	inc si
@@ -1804,7 +1806,7 @@ L0EFA:
 	pop di
 	pop bx
 	push si
-	lea si, ds:[0]
+	lea si, linebuf
 	assume ss:DGROUP
 	add si, word ptr ss:_g_222C
 	assume ss:nothing

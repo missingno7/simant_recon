@@ -467,7 +467,9 @@ def main() -> int:
             module["extent"] = {"start": s0, "end": s1}
         elif mod and mod.get("extent") and dropped is None:
             module["extent"] = mod["extent"]
-        res = modmod.verify_module(text, module, claims, man=man)
+        item = next((m for m in program['modules'] if m['key'] == key), {})
+        res = modmod.verify_module(text, module, claims, man=man,
+                                  code_references=item.get('owned_code_references'))
         # manifest-level data rules: link position, and no two modules place the same bytes
         man_after = {**man, "modules": {**man["modules"], key: module}}
         mreasons = modmod.link_after_reasons(man_after, key, module,

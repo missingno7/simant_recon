@@ -98,8 +98,40 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "a549082547bc78147264d0ddd745f01416034cd9a2adf126405439ae64ebfbf9",
-      "unit": "S03"
+      "source_sha256": "33c47fd0113e14c015a9a0b43625d87d00afb46fb2f915b928f3a982130e72d8",
+      "unit": "S03",
+      "owned_code_references": {
+        "owners": [
+          {
+            "label": "linebuf",
+            "segment": "S03A_TEXT",
+            "start": 0,
+            "size": 320,
+            "references": [
+              {
+                "public": "_o03_3126_0C1E",
+                "operand_offset": 455,
+                "owner_offset": 0
+              },
+              {
+                "public": "_o03_3126_0C1E",
+                "operand_offset": 549,
+                "owner_offset": 0
+              },
+              {
+                "public": "_o03_3126_0C1E",
+                "operand_offset": 730,
+                "owner_offset": 0
+              },
+              {
+                "public": "_o03_3126_0C1E",
+                "operand_offset": 824,
+                "owner_offset": 0
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "key": "S03:3253",
@@ -120,8 +152,60 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "d8ff15b40f04cd28560e31a4940b65585bdb2cae7f12b0a5b30a4bb21a0f3552",
-      "unit": "S03"
+      "source_sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
+      "unit": "S03",
+      "owned_code_references": {
+        "owners": [
+          {
+            "label": "xlat_tabs",
+            "segment": "S03C_TEXT",
+            "start": 0,
+            "size": 1024,
+            "references": [
+              {
+                "public": "_o03_3258_0690",
+                "operand_offset": 14,
+                "owner_offset": 0
+              },
+              {
+                "public": "_o03_3258_0690",
+                "operand_offset": 18,
+                "owner_offset": 512
+              },
+              {
+                "public": "_o03_3258_0690",
+                "operand_offset": 28,
+                "owner_offset": 256
+              },
+              {
+                "public": "_o03_3258_0690",
+                "operand_offset": 38,
+                "owner_offset": 768
+              },
+              {
+                "public": "_o03_3258_0F04",
+                "operand_offset": 14,
+                "owner_offset": 0
+              },
+              {
+                "public": "_o03_3258_0F04",
+                "operand_offset": 18,
+                "owner_offset": 512
+              },
+              {
+                "public": "_o03_3258_0F04",
+                "operand_offset": 28,
+                "owner_offset": 256
+              },
+              {
+                "public": "_o03_3258_0F04",
+                "operand_offset": 38,
+                "owner_offset": 768
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "key": "S04:35F5",
@@ -1809,8 +1893,8 @@
       "unit": "root"
     },
     {
-      "key": "source-owned:driver-callback-table",
-      "source": "src/state/driver-callback-table.c",
+      "key": "source-owned:ant-class-histogram",
+      "source": "src/state/ant-class-histogram.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1818,7 +1902,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "source_sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -1827,965 +1911,11 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_driver_callback_table",
-            "kind": "near",
-            "length": 100
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:mouse-words",
-      "source": "src/state/mouse-words.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_g_9120",
-            "kind": "near",
-            "length": 2
-          },
-          {
-            "name": "_g_9122",
-            "kind": "near",
-            "length": 2
-          },
-          {
-            "name": "_g_9124",
-            "kind": "near",
-            "length": 2
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:memory-state",
-      "source": "src/state/memory-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_g_91A0",
-            "kind": "near",
-            "length": 2
-          },
-          {
-            "name": "_g_91A2",
-            "kind": "near",
-            "length": 2
-          },
-          {
-            "name": "_g_91A4",
-            "kind": "near",
-            "length": 4
-          },
-          {
-            "name": "_g_91A8",
-            "kind": "near",
-            "length": 4
-          },
-          {
-            "name": "_g_91AC",
-            "kind": "near",
-            "length": 4
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:render-scalars",
-      "source": "src/state/render-scalars.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "3cf7dddcf9188d13f36e25115ac566169adceb938c0f5493a3d9a7faa70d0d7f",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_g_8BD2",
-            "kind": "near",
-            "length": 2
-          },
-          {
-            "name": "_g_8BD4",
-            "kind": "near",
-            "length": 2
-          },
-          {
-            "name": "_g_9126",
-            "kind": "near",
-            "length": 2
-          },
-          {
-            "name": "_g_94E4",
-            "kind": "near",
-            "length": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:memory-far-state",
-      "source": "src/state/memory-far-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "c5d934e134049e4c7e50a65aca8dc2327633b83523a3a9853e4842a31e999e41",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_394C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_394E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3950",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3948",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3B48",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:mono-pattern-prefix",
-      "source": "src/state/mono-pattern-prefix.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "c5f5990f70682274b9b1191be403dd84b04d24bca3aee657d51be83e3af1015a",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_g_8EC0",
-            "kind": "near",
-            "length": 24
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:clip-pointer",
-      "source": "src/state/clip-pointer.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "fa8ff59a015c5078ce7b0d9c80a7a6c1d79539caac12a13b5b726069557fe48d",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_g_5AAC",
-            "kind": "near",
-            "length": 4
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:yard-scalars",
-      "source": "src/state/yard-scalars.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "d94320b53cd0f3c8843df20c10c305c1a1022dafb4d8318803d7acbd0feb6602",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_105E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0478",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0504",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0228",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_MapPlane",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_YardMode",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0366",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0376",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:database-index-state",
-      "source": "src/state/database-index-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "a052b1148cf3dca2ee2157bffeee5e2b92b3f51ef78235e37c8e5fe5d8b4f4d8",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_3952",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3956",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:spider-counters",
-      "source": "src/state/spider-counters.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "5ffb18cd1256b1d6e42586386a573cd1c62d2bf9c2d6eaaab96d333e9a642f64",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_DeathCnt",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_EatCnt",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_SCorpseBase",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_Scycle",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_Scycle2",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_SpidBurpCnt",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_SpidRevenge",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:lion-sow-pillar",
-      "source": "src/state/lion-sow-pillar.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "bc537f033398e20d239796c7873a2b0a8efc82449c50219a2822918af398c66c",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_LionListM",
-            "kind": "far",
-            "length": 10,
-            "count": 10,
-            "element_size": 1
-          },
-          {
-            "name": "_LionListS",
-            "kind": "far",
-            "length": 10,
-            "count": 10,
-            "element_size": 1
-          },
-          {
-            "name": "_LionListT",
-            "kind": "far",
-            "length": 10,
-            "count": 10,
-            "element_size": 1
-          },
-          {
-            "name": "_LionListX",
-            "kind": "far",
-            "length": 10,
-            "count": 10,
-            "element_size": 1
-          },
-          {
-            "name": "_LionListY",
-            "kind": "far",
-            "length": 10,
-            "count": 10,
-            "element_size": 1
-          },
-          {
-            "name": "_PillDir",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_PillarSeg",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_PillarMap",
-            "kind": "far",
-            "length": 12,
-            "count": 6,
-            "element_size": 2
-          },
-          {
-            "name": "_SowDir",
-            "kind": "far",
-            "length": 6,
-            "count": 3,
-            "element_size": 2
-          },
-          {
-            "name": "_SowSave",
-            "kind": "far",
-            "length": 6,
-            "count": 3,
-            "element_size": 2
-          },
-          {
-            "name": "_SowX",
-            "kind": "far",
-            "length": 6,
-            "count": 3,
-            "element_size": 2
-          },
-          {
-            "name": "_SowY",
-            "kind": "far",
-            "length": 6,
-            "count": 3,
-            "element_size": 2
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:spider-controls",
-      "source": "src/state/spider-controls.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_ChaseSpid",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_SMode",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_SuserX",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_SuserY",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_Starg",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_StargLife",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:point-state",
-      "source": "src/state/point-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "94fd7ae1a436fe595f4ad987e24f21773633c95af9f121f03581002e54a3ce48",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0508",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0596",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_06A6",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_072E",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_07BC",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:database-record-state",
-      "source": "src/state/database-record-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_3958",
-            "kind": "far",
-            "length": 496,
-            "count": 4,
-            "element_size": 124
-          },
-          {
-            "name": "_db_handles",
-            "kind": "far",
-            "length": 8,
-            "count": 4,
-            "element_size": 2
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:graphics-formulas",
-      "source": "src/state/graphics-formulas.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "27c6dd4d4f5781765b866824b125470b66a3c1b2aae463f2a270d59717100e40",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 18,
-        "code_bytes": 0,
-        "communals": [],
-        "publics": [
-          {
-            "name": "_g_2100",
-            "segment": "_DATA",
-            "offset": 0
-          },
-          {
-            "name": "_mono_tail_masks",
-            "segment": "_DATA",
-            "offset": 8
-          },
-          {
-            "name": "_packed_tail_masks",
-            "segment": "_DATA",
-            "offset": 16
-          }
-        ],
-        "fixups": [],
-        "recipe": "consumer_mask_formulas",
-        "value_sha256": "668dab22ec9888a6a28e152b2f0512abd6fada7e457bab9b464d019ba07df86f"
-      }
-    },
-    {
-      "key": "source-owned:g2108-color-translation",
-      "source": "src/state/g2108-color-translation.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "2ce3aad21f7d625d7bd1be0a5832b4512918a91d17257172b6171a515ac1f2cf",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 16,
-        "code_bytes": 0,
-        "communals": [],
-        "publics": [
-          {
-            "name": "_g_2108",
-            "segment": "_DATA",
-            "offset": 0
-          }
-        ],
-        "fixups": [],
-        "recipe": "accepted_source_literal_translation",
-        "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2"
-      }
-    },
-    {
-      "key": "source-owned:ant-list-counts",
-      "source": "src/state/ant-list-counts.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "e65f8b8d0261630932074bcedcbaf6ffed9ade4772bd96e3ebe74af6a2790d25",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_ListIndexA",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_ListIndexB",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_ListIndexR",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:colony-simulation-words",
-      "source": "src/state/colony-simulation-words.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "8b1b0eb6cee06eaf04490d4ca6e4199238116ebb1eb3efbf51ee05f2dc404c52",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0254",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_02BE",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_032C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0352",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0356",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_03E0",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_03E2",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0400",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:player-locations",
-      "source": "src/state/player-locations.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_MeLocX",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_MeLocY",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_MePlane",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_RedLocX",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_RedLocY",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_RedPlane",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
+            "name": "_fd_50F6_0EB6",
+            "kind": "far",
+            "count": 32,
+            "element_size": 2,
+            "length": 64
           }
         ],
         "publics": [],
@@ -2837,8 +1967,8 @@
       }
     },
     {
-      "key": "source-owned:language-string-list-pointers",
-      "source": "src/state/language-string-list-pointers.c",
+      "key": "source-owned:ant-list-counts",
+      "source": "src/state/ant-list-counts.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2846,7 +1976,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "1b91495ff2aae0ba84633e99863fdc1900648b33452d7f48397193b840e36a1b",
+      "source_sha256": "e65f8b8d0261630932074bcedcbaf6ffed9ade4772bd96e3ebe74af6a2790d25",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -2855,672 +1985,25 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_AdviceStrs",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_02BA",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0324",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0328",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0368",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:dead-ant-coordinate-rings",
-      "source": "src/state/dead-ant-coordinate-rings.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "f32a379106e4aecef2c37e9da2ba8f8e97ce7f8934e389ca8a2c31cfec27d1b3",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_037C",
-            "kind": "far",
-            "length": 100,
-            "count": 100,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0404",
-            "kind": "far",
-            "length": 100,
-            "count": 100,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:ant-player-state",
-      "source": "src/state/ant-player-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "df1e92794d57c8fa0a602102b4d18fa8d42c2d1d9be1c87b3047de5fa8da7006",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_FuzLocX",
+            "name": "_ListIndexA",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_FuzLocY",
+            "name": "_ListIndexB",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_MeHealth",
+            "name": "_ListIndexR",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
-          },
-          {
-            "name": "_ModeAuto",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_StrategicModeB",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_TilesDugR",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:display-mode-selector",
-      "source": "src/state/display-mode-selector.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "f5c1287217cc9863e38a636036a62b1c47ba72d073e557b5c6289bdd5647605f",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_g_5A97",
-            "kind": "near",
-            "length": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:ant-ui-control-state",
-      "source": "src/state/ant-ui-control-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "c9457e4a6c711c889e9be3bc57bf38f86aea710f78297caf4b998f208e5a6c20",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_casteLevels",
-            "kind": "far",
-            "length": 6,
-            "count": 6,
-            "element_size": 1
-          },
-          {
-            "name": "_modeLevels",
-            "kind": "far",
-            "length": 6,
-            "count": 6,
-            "element_size": 1
-          },
-          {
-            "name": "_knobSize",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_triHeight",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_triWidth",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_triWidthL",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_triWidthR",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3816",
-            "kind": "far",
-            "length": 12,
-            "count": 12,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3822",
-            "kind": "far",
-            "length": 12,
-            "count": 12,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_382E",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0358",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_022E",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:ui-resource-scalars",
-      "source": "src/state/ui-resource-scalars.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "936c6fd4cfe5d394a699374e321287720f7872ea158ec6e2c745e225ed69e619",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_win_numOfWindows",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_win_numOfColors",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_win_numOfGroups",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3B4C",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3B58",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_3B5C",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:terrain-state-words",
-      "source": "src/state/terrain-state-words.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "f132ac4e22801d8576c9bb556fa7b23cd70efe54455b37b1666eeebe173855b4",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_Barrier",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_TERRAINset",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:swarm-serialized-buffers",
-      "source": "src/state/swarm-serialized-buffers.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "6d93cb66e2b7badaf17f1258a7d4143bc1f20e5bacceaafba72e47c3e7c00ed4",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0F46",
-            "kind": "far",
-            "length": 50,
-            "count": 50,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0F84",
-            "kind": "far",
-            "length": 50,
-            "count": 50,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0FC6",
-            "kind": "far",
-            "length": 50,
-            "count": 50,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_1008",
-            "kind": "far",
-            "length": 50,
-            "count": 50,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:population-work-arrays",
-      "source": "src/state/population-work-arrays.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0AEC",
-            "kind": "far",
-            "length": 12,
-            "count": 6,
-            "element_size": 2
-          },
-          {
-            "name": "_fd_50F6_0AFA",
-            "kind": "far",
-            "length": 12,
-            "count": 6,
-            "element_size": 2
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:saved-sound-state",
-      "source": "src/state/saved-sound-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "9241c7b8ace381c4226a38f5f109a0d518ef42e7b4de99ed6425aa7346e10602",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_01F0",
-            "kind": "far",
-            "length": 14,
-            "count": 7,
-            "element_size": 2
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:control-flag-words",
-      "source": "src/state/control-flag-words.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "8918adcd4f2cd79e5ef4bb511b314991ebf3f5ad823a498b6094a433e152c5e5",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0468",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0370",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_024E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:count-ants-transition-word",
-      "source": "src/state/count-ants-transition-word.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0354",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:sound-control-words",
-      "source": "src/state/sound-control-words.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "43432778e132096f7fe228f01d08a510a1b8ad52dd4fb1fd96098f87f2b05fb0",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_4A46",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4A48",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4A4A",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4A4C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4B14",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4B16",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:sound-record-arrays",
-      "source": "src/state/sound-record-arrays.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "e5895a3a0bfce456576cbd8e2f4174a672c0bade47e4e2bf4883950453adfbbb",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "count": 56,
-            "element_size": 6,
-            "kind": "far",
-            "length": 336,
-            "name": "_fd_50F6_0000"
-          },
-          {
-            "count": 33,
-            "element_size": 6,
-            "kind": "far",
-            "length": 198,
-            "name": "_fd_50F6_4A4E"
           }
         ],
         "publics": [],
@@ -3663,8 +2146,8 @@
       }
     },
     {
-      "key": "source-owned:world-output-state",
-      "source": "src/state/world-output-state.c",
+      "key": "source-owned:ant-player-state",
+      "source": "src/state/ant-player-state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3672,7 +2155,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "15deda16456dbf034f43c277a6af0c546ee08a5df8a64de536141886c4318e5b",
+      "source_sha256": "df1e92794d57c8fa0a602102b4d18fa8d42c2d1d9be1c87b3047de5fa8da7006",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -3681,120 +2164,809 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_0200",
+            "name": "_FuzLocX",
             "kind": "far",
+            "length": 2,
             "count": 2,
-            "element_size": 1,
-            "length": 2
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_020E",
+            "name": "_FuzLocY",
             "kind": "far",
+            "length": 2,
             "count": 2,
-            "element_size": 1,
-            "length": 2
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_0224",
+            "name": "_MeHealth",
             "kind": "far",
+            "length": 2,
             "count": 2,
-            "element_size": 1,
-            "length": 2
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_0242",
+            "name": "_ModeAuto",
             "kind": "far",
+            "length": 2,
             "count": 2,
-            "element_size": 1,
-            "length": 2
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_035E",
+            "name": "_StrategicModeB",
             "kind": "far",
+            "length": 2,
             "count": 2,
-            "element_size": 1,
-            "length": 2
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_036C",
+            "name": "_TilesDugR",
             "kind": "far",
+            "length": 2,
             "count": 2,
-            "element_size": 1,
-            "length": 2
-          },
-          {
-            "name": "_fd_50F6_0472",
-            "kind": "far",
-            "count": 4,
-            "element_size": 1,
-            "length": 4
-          },
-          {
-            "name": "_fd_50F6_09FA",
-            "kind": "far",
-            "count": 2,
-            "element_size": 1,
-            "length": 2
-          },
-          {
-            "name": "_fd_50F6_0A00",
-            "kind": "far",
-            "count": 2,
-            "element_size": 1,
-            "length": 2
-          },
-          {
-            "name": "_fd_50F6_1040",
-            "kind": "far",
-            "count": 2,
-            "element_size": 1,
-            "length": 2
-          },
-          {
-            "name": "_fd_50F6_1068",
-            "kind": "far",
-            "count": 4,
-            "element_size": 1,
-            "length": 4
-          },
-          {
-            "name": "_fd_50F6_1082",
-            "kind": "far",
-            "count": 4,
-            "element_size": 1,
-            "length": 4
-          },
-          {
-            "name": "_fd_50F6_108E",
-            "kind": "far",
-            "count": 4,
-            "element_size": 1,
-            "length": 4
-          },
-          {
-            "name": "_fd_50F6_10A2",
-            "kind": "far",
-            "count": 4,
-            "element_size": 1,
-            "length": 4
-          },
-          {
-            "name": "_fd_50F6_10B2",
-            "kind": "far",
-            "count": 2,
-            "element_size": 1,
-            "length": 2
-          },
-          {
-            "name": "_fd_50F6_10C0",
-            "kind": "far",
-            "count": 2,
-            "element_size": 1,
-            "length": 2
+            "element_size": 1
           }
         ],
         "publics": [],
         "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:ant-ui-control-state",
+      "source": "src/state/ant-ui-control-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "c9457e4a6c711c889e9be3bc57bf38f86aea710f78297caf4b998f208e5a6c20",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_casteLevels",
+            "kind": "far",
+            "length": 6,
+            "count": 6,
+            "element_size": 1
+          },
+          {
+            "name": "_modeLevels",
+            "kind": "far",
+            "length": 6,
+            "count": 6,
+            "element_size": 1
+          },
+          {
+            "name": "_knobSize",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_triHeight",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_triWidth",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_triWidthL",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_triWidthR",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3816",
+            "kind": "far",
+            "length": 12,
+            "count": 12,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3822",
+            "kind": "far",
+            "length": 12,
+            "count": 12,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_382E",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0358",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_022E",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:balloon-buffer-tables",
+      "source": "src/state/balloon-buffer-tables.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "81ba70b1b41be95b198a1b27332e22a713b27089540c4757f6b417950fa2a6fd",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_04A6",
+            "kind": "far",
+            "length": 24,
+            "count": 6,
+            "element_size": 4
+          },
+          {
+            "name": "_fd_50F6_04C8",
+            "kind": "far",
+            "length": 24,
+            "count": 6,
+            "element_size": 4
+          },
+          {
+            "name": "_fd_50F6_04E6",
+            "kind": "far",
+            "length": 12,
+            "count": 6,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_04F6",
+            "kind": "far",
+            "length": 12,
+            "count": 6,
+            "element_size": 2
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:balloon-deadline-timers",
+      "source": "src/state/balloon-deadline-timers.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "e9b3d73a57ce9442bc51ab3b839bd960ea00a6f65f837d4bd7c769ef532599f7",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_050C",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_059A",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0732",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_07C4",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:clip-pointer",
+      "source": "src/state/clip-pointer.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "fa8ff59a015c5078ce7b0d9c80a7a6c1d79539caac12a13b5b726069557fe48d",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_g_5AAC",
+            "kind": "near",
+            "length": 4
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:colony-simulation-words",
+      "source": "src/state/colony-simulation-words.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "8b1b0eb6cee06eaf04490d4ca6e4199238116ebb1eb3efbf51ee05f2dc404c52",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0254",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_02BE",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_032C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0352",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0356",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_03E0",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_03E2",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0400",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:control-flag-words",
+      "source": "src/state/control-flag-words.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "8918adcd4f2cd79e5ef4bb511b314991ebf3f5ad823a498b6094a433e152c5e5",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0468",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0370",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_024E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:count-ants-transition-word",
+      "source": "src/state/count-ants-transition-word.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "c37e3f4a3f446c24c1e1ec8b98b679398d9bbb012ccee76d2382b9e8cd077ec5",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0354",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:critical-selector-byte",
+      "source": "src/state/critical-selector-byte.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "78e5070a594461df8ffa0eaaa8a6d69302652c0f57b9f61c8be79f5112f4646d",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_g_8CCB",
+            "kind": "near",
+            "length": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:database-index-state",
+      "source": "src/state/database-index-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "a052b1148cf3dca2ee2157bffeee5e2b92b3f51ef78235e37c8e5fe5d8b4f4d8",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_3952",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3956",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:database-record-state",
+      "source": "src/state/database-record-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_3958",
+            "kind": "far",
+            "length": 496,
+            "count": 4,
+            "element_size": 124
+          },
+          {
+            "name": "_db_handles",
+            "kind": "far",
+            "length": 8,
+            "count": 4,
+            "element_size": 2
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:dead-ant-coordinate-rings",
+      "source": "src/state/dead-ant-coordinate-rings.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "f32a379106e4aecef2c37e9da2ba8f8e97ce7f8934e389ca8a2c31cfec27d1b3",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_037C",
+            "kind": "far",
+            "length": 100,
+            "count": 100,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0404",
+            "kind": "far",
+            "length": 100,
+            "count": 100,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:display-mode-selector",
+      "source": "src/state/display-mode-selector.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "f5c1287217cc9863e38a636036a62b1c47ba72d073e557b5c6289bdd5647605f",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_g_5A97",
+            "kind": "near",
+            "length": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:driver-callback-table",
+      "source": "src/state/driver-callback-table.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_driver_callback_table",
+            "kind": "near",
+            "length": 100
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:event-records",
+      "source": "src/state/event-records.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "0dcaae2b70a71ba380a4434ab04e5fd93c908fafa16e27927619eb3e337dff4c",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_49FA",
+            "kind": "far",
+            "length": 16,
+            "count": 16,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_4A0A",
+            "kind": "far",
+            "length": 16,
+            "count": 16,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:experiment-anchor",
+      "source": "src/state/experiment-anchor.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "b9d65fc35f1cd8d069f4b57b2f44771ff08fa10c403ee4dc9ed7e2097e99e35d",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_09FC",
+            "kind": "far",
+            "length": 4,
+            "count": 2,
+            "element_size": 2
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:floor-task-words",
+      "source": "src/state/floor-task-words.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "83824c6ff01de286edd65e26c55105c3a50958b0f581d889963031234349e89b",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_DROPdir",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_Tindex",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:g2108-color-translation",
+      "source": "src/state/g2108-color-translation.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "2ce3aad21f7d625d7bd1be0a5832b4512918a91d17257172b6171a515ac1f2cf",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 16,
+        "code_bytes": 0,
+        "communals": [],
+        "publics": [
+          {
+            "name": "_g_2108",
+            "segment": "_DATA",
+            "offset": 0
+          }
+        ],
+        "fixups": [],
+        "recipe": "accepted_source_literal_translation",
+        "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2"
+      }
+    },
+    {
+      "key": "source-owned:graphics-formulas",
+      "source": "src/state/graphics-formulas.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "27c6dd4d4f5781765b866824b125470b66a3c1b2aae463f2a270d59717100e40",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 18,
+        "code_bytes": 0,
+        "communals": [],
+        "publics": [
+          {
+            "name": "_g_2100",
+            "segment": "_DATA",
+            "offset": 0
+          },
+          {
+            "name": "_mono_tail_masks",
+            "segment": "_DATA",
+            "offset": 8
+          },
+          {
+            "name": "_packed_tail_masks",
+            "segment": "_DATA",
+            "offset": 16
+          }
+        ],
+        "fixups": [],
+        "recipe": "consumer_mask_formulas",
+        "value_sha256": "668dab22ec9888a6a28e152b2f0512abd6fada7e457bab9b464d019ba07df86f"
       }
     },
     {
@@ -3905,8 +3077,8 @@
       }
     },
     {
-      "key": "source-owned:ant-class-histogram",
-      "source": "src/state/ant-class-histogram.c",
+      "key": "source-owned:language-string-list-pointers",
+      "source": "src/state/language-string-list-pointers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3914,7 +3086,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "1fe8a9507c0454b8bf9a20cb1de0eb1f64f31cfe0160ecefbfc0584e34d93672",
+      "source_sha256": "1b91495ff2aae0ba84633e99863fdc1900648b33452d7f48397193b840e36a1b",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -3923,158 +3095,35 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_0EB6",
-            "kind": "far",
-            "count": 32,
-            "element_size": 2,
-            "length": 64
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:event-records",
-      "source": "src/state/event-records.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "0dcaae2b70a71ba380a4434ab04e5fd93c908fafa16e27927619eb3e337dff4c",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_49FA",
-            "kind": "far",
-            "length": 16,
-            "count": 16,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4A0A",
-            "kind": "far",
-            "length": 16,
-            "count": 16,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:remaining-preparestrings-string-pointers",
-      "source": "src/state/remaining-preparestrings-string-pointers.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "5e57ca8ffae57d5c31840b96eb452a2b732a58be065119a1c89c057c1a4f4ac7",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_020A",
+            "name": "_AdviceStrs",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0218",
+            "name": "_fd_50F6_02BA",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_021C",
+            "name": "_fd_50F6_0324",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0234",
+            "name": "_fd_50F6_0328",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_023A",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_034C",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_046C",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_106E",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_1078",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_1086",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_1096",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_10A8",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_10B4",
+            "name": "_fd_50F6_0368",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -4086,8 +3135,8 @@
       }
     },
     {
-      "key": "source-owned:yard-init-state",
-      "source": "src/state/yard-init-state.c",
+      "key": "source-owned:lion-sow-pillar",
+      "source": "src/state/lion-sow-pillar.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4095,7 +3144,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "29c746ecf94781180639e6d2f20bc9dc00207c263838ddc5a2888eb6f5d37fab",
+      "source_sha256": "bc537f033398e20d239796c7873a2b0a8efc82449c50219a2822918af398c66c",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -4104,229 +3153,87 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_0220",
+            "name": "_LionListM",
             "kind": "far",
-            "length": 4,
-            "count": 4,
+            "length": 10,
+            "count": 10,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_107E",
+            "name": "_LionListS",
             "kind": "far",
-            "length": 4,
-            "count": 4,
+            "length": 10,
+            "count": 10,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_109C",
+            "name": "_LionListT",
             "kind": "far",
-            "length": 4,
-            "count": 4,
+            "length": 10,
+            "count": 10,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0202",
+            "name": "_LionListX",
+            "kind": "far",
+            "length": 10,
+            "count": 10,
+            "element_size": 1
+          },
+          {
+            "name": "_LionListY",
+            "kind": "far",
+            "length": 10,
+            "count": 10,
+            "element_size": 1
+          },
+          {
+            "name": "_PillDir",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_022C",
+            "name": "_PillarSeg",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_023E",
+            "name": "_PillarMap",
             "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0244",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0246",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0364",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_036E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_046A",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0470",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_047A",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_04BE",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_04C6",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_04E4",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0506",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0624",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_07C2",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_105C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_1066",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_108C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_10A0",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_10B0",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_10BC",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:yard-animation-arrays",
-      "source": "src/state/yard-animation-arrays.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "43bf01f2b11fa24353a86aa277aba03f066dcff8265222bdb7542397706eaeed",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0334",
-            "kind": "far",
-            "length": 24,
-            "count": 12,
+            "length": 12,
+            "count": 6,
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_38CA",
+            "name": "_SowDir",
             "kind": "far",
-            "length": 30,
-            "count": 15,
+            "length": 6,
+            "count": 3,
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_38E8",
+            "name": "_SowSave",
             "kind": "far",
-            "length": 34,
-            "count": 17,
+            "length": 6,
+            "count": 3,
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_390A",
+            "name": "_SowX",
             "kind": "far",
-            "length": 34,
-            "count": 17,
+            "length": 6,
+            "count": 3,
+            "element_size": 2
+          },
+          {
+            "name": "_SowY",
+            "kind": "far",
+            "length": 6,
+            "count": 3,
             "element_size": 2
           }
         ],
@@ -4335,8 +3242,8 @@
       }
     },
     {
-      "key": "source-owned:balloon-deadline-timers",
-      "source": "src/state/balloon-deadline-timers.c",
+      "key": "source-owned:memory-far-state",
+      "source": "src/state/memory-far-state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4344,7 +3251,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "e9b3d73a57ce9442bc51ab3b839bd960ea00a6f65f837d4bd7c769ef532599f7",
+      "source_sha256": "c5d934e134049e4c7e50a65aca8dc2327633b83523a3a9853e4842a31e999e41",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -4353,28 +3260,35 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_050C",
+            "name": "_fd_50F6_394C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_394E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3950",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3948",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_059A",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0732",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_07C4",
+            "name": "_fd_50F6_3B48",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -4386,8 +3300,8 @@
       }
     },
     {
-      "key": "source-owned:experiment-anchor",
-      "source": "src/state/experiment-anchor.c",
+      "key": "source-owned:memory-state",
+      "source": "src/state/memory-state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4395,7 +3309,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "b9d65fc35f1cd8d069f4b57b2f44771ff08fa10c403ee4dc9ed7e2097e99e35d",
+      "source_sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -4404,10 +3318,79 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_09FC",
+            "name": "_g_91A0",
+            "kind": "near",
+            "length": 2
+          },
+          {
+            "name": "_g_91A2",
+            "kind": "near",
+            "length": 2
+          },
+          {
+            "name": "_g_91A4",
+            "kind": "near",
+            "length": 4
+          },
+          {
+            "name": "_g_91A8",
+            "kind": "near",
+            "length": 4
+          },
+          {
+            "name": "_g_91AC",
+            "kind": "near",
+            "length": 4
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:mode-population-vectors",
+      "source": "src/state/mode-population-vectors.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "67be68b136c4d6cbf8ee7d82fc5dcfa7e505682f326b02a560b93c6313325ea4",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0B12",
             "kind": "far",
-            "length": 4,
-            "count": 2,
+            "length": 12,
+            "count": 6,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_0C2A",
+            "kind": "far",
+            "length": 12,
+            "count": 6,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_0D40",
+            "kind": "far",
+            "length": 40,
+            "count": 20,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_0D72",
+            "kind": "far",
+            "length": 40,
+            "count": 20,
             "element_size": 2
           }
         ],
@@ -4416,8 +3399,8 @@
       }
     },
     {
-      "key": "source-owned:window-clip-handles",
-      "source": "src/state/window-clip-handles.c",
+      "key": "source-owned:mono-pattern-prefix",
+      "source": "src/state/mono-pattern-prefix.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4425,7 +3408,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "bd868a6383dffecd1999b5facbca9d7be9b961e5b5cd8777552e57e9e08c9d74",
+      "source_sha256": "c5f5990f70682274b9b1191be403dd84b04d24bca3aee657d51be83e3af1015a",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -4434,11 +3417,414 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_3B60",
+            "name": "_g_8EC0",
+            "kind": "near",
+            "length": 24
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:mouse-words",
+      "source": "src/state/mouse-words.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_g_9120",
+            "kind": "near",
+            "length": 2
+          },
+          {
+            "name": "_g_9122",
+            "kind": "near",
+            "length": 2
+          },
+          {
+            "name": "_g_9124",
+            "kind": "near",
+            "length": 2
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:player-locations",
+      "source": "src/state/player-locations.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_MeLocX",
             "kind": "far",
-            "length": 180,
-            "count": 45,
-            "element_size": 4
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_MeLocY",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_MePlane",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_RedLocX",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_RedLocY",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_RedPlane",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:point-state",
+      "source": "src/state/point-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "94fd7ae1a436fe595f4ad987e24f21773633c95af9f121f03581002e54a3ce48",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0508",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0596",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_06A6",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_072E",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_07BC",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:population-work-arrays",
+      "source": "src/state/population-work-arrays.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "415649497b9bbc17cf75c905364e2309637e09c39985d293dd5ac160eda86d68",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0AEC",
+            "kind": "far",
+            "length": 12,
+            "count": 6,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_0AFA",
+            "kind": "far",
+            "length": 12,
+            "count": 6,
+            "element_size": 2
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:remaining-ant-state",
+      "source": "src/state/remaining-ant-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "53d30a8315c50882c50f857755719eb8c15d9b93c6ecd18d76c69753dc5d9c56",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0A02",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0A8A",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0AA2",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0AB2",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0A06",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0A9C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0AA6",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0ACA",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0AD8",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0AEA",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0B06",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0B08",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0C3A",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0D68",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0D6C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0D6E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0D70",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0C26",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:remaining-far-state-words",
+      "source": "src/state/remaining-far-state-words.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "cc38095d94023d9fe71c8939a7ef3847d51a2d5e4c6392d97e0ed85024b6e082",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_04C0",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0B20",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0F38",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0FB6",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0FFA",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
           }
         ],
         "publics": [],
@@ -4595,8 +3981,8 @@
       }
     },
     {
-      "key": "source-owned:mode-population-vectors",
-      "source": "src/state/mode-population-vectors.c",
+      "key": "source-owned:remaining-misc-storage",
+      "source": "src/state/remaining-misc-storage.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4604,7 +3990,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "67be68b136c4d6cbf8ee7d82fc5dcfa7e505682f326b02a560b93c6313325ea4",
+      "source_sha256": "14e4a1dee10178208042f2959b670aad9051dfe3dcdcad11d1d3019709b1147a",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -4613,31 +3999,66 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_0B12",
+            "name": "_fd_50F6_07CA",
             "kind": "far",
-            "length": 12,
-            "count": 6,
-            "element_size": 2
+            "length": 4,
+            "count": 4,
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_0C2A",
+            "name": "_fd_50F6_0852",
             "kind": "far",
-            "length": 12,
-            "count": 6,
-            "element_size": 2
+            "length": 4,
+            "count": 4,
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_0D40",
+            "name": "_fd_50F6_08DE",
             "kind": "far",
-            "length": 40,
-            "count": 20,
-            "element_size": 2
+            "length": 4,
+            "count": 4,
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_0D72",
+            "name": "_fd_50F6_08EC",
             "kind": "far",
-            "length": 40,
-            "count": 20,
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_09F2",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0B0A",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0B22",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1114",
+            "kind": "far",
+            "length": 1200,
+            "count": 1200,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_15C4",
+            "kind": "far",
+            "length": 2400,
+            "count": 1200,
             "element_size": 2
           }
         ],
@@ -4646,8 +4067,8 @@
       }
     },
     {
-      "key": "source-owned:floor-task-words",
-      "source": "src/state/floor-task-words.c",
+      "key": "source-owned:remaining-preparestrings-string-pointers",
+      "source": "src/state/remaining-preparestrings-string-pointers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4655,7 +4076,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "83824c6ff01de286edd65e26c55105c3a50958b0f581d889963031234349e89b",
+      "source_sha256": "5e57ca8ffae57d5c31840b96eb452a2b732a58be065119a1c89c057c1a4f4ac7",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -4664,14 +4085,247 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_DROPdir",
+            "name": "_fd_50F6_020A",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0218",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_021C",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0234",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_023A",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_034C",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_046C",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_106E",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1078",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1086",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1096",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_10A8",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_10B4",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:remaining-scalar-tail",
+      "source": "src/state/remaining-scalar-tail.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "f9746dc82fdfa8f532920e1aeb7d4a75c7ef1cc40ceaae6aae23ecb5f0c7b428",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_04E0",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_Tindex",
+            "name": "_fd_50F6_04F2",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0502",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0510",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_059E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_06AC",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0736",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_08DC",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_08E8",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0D9A",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0FF8",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1004",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1006",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_103A",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_103C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1044",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1046",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1048",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_104A",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -4683,8 +4337,8 @@
       }
     },
     {
-      "key": "source-owned:ui-geometry-state",
-      "source": "src/state/ui-geometry-state.c",
+      "key": "source-owned:remaining-sound-storage",
+      "source": "src/state/remaining-sound-storage.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4692,7 +4346,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "283176f1769968d7db9a0e1d002d54fd566e523120285778bdf1b137e106a85e",
+      "source_sha256": "984e0db28de921d9d4ccd1e0be9f73e40a2880d1786f6222cc1718d2f4e90aec",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -4701,323 +4355,67 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_10D2",
-            "kind": "far",
-            "length": 8,
-            "count": 8,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_110C",
-            "kind": "far",
-            "length": 8,
-            "count": 8,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_1104",
-            "kind": "far",
-            "length": 8,
-            "count": 8,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_392C",
-            "kind": "far",
-            "length": 8,
-            "count": 8,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:remaining-world-state",
-      "source": "src/state/remaining-world-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "57ed89be36dac0695106d3ffcf7d89cbf8b9ada0d35c85d9938b14507694edbf",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0204",
+            "name": "_fd_50F6_47DA",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0208",
+            "name": "_fd_50F6_4A1A",
             "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
+            "length": 16,
+            "count": 4,
+            "element_size": 4
           },
           {
-            "name": "_fd_50F6_0210",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0212",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0214",
+            "name": "_fd_50F6_4A42",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0226",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0240",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0332",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_037A",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0402",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0476",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_047E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0488",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_048E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0492",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_049A",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_04A4",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:remaining-ant-state",
-      "source": "src/state/remaining-ant-state.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "53d30a8315c50882c50f857755719eb8c15d9b93c6ecd18d76c69753dc5d9c56",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_0A02",
+            "name": "_fd_50F6_4B28",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0A8A",
+            "name": "_fd_50F6_4B2C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_4B2E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_4B8A",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0AA2",
+            "name": "_fd_50F6_4B8E",
             "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
+            "length": 28,
+            "count": 14,
+            "element_size": 2
           },
           {
-            "name": "_fd_50F6_0AB2",
+            "name": "_fd_50F6_4BAA",
             "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0A06",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0A9C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0AA6",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0ACA",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0AD8",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0AEA",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0B06",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0B08",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0C3A",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0D68",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0D6C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0D6E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0D70",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0C26",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
+            "length": 28,
+            "count": 14,
+            "element_size": 2
           }
         ],
         "publics": [],
@@ -5414,8 +4812,8 @@
       }
     },
     {
-      "key": "source-owned:remaining-scalar-tail",
-      "source": "src/state/remaining-scalar-tail.c",
+      "key": "source-owned:remaining-world-state",
+      "source": "src/state/remaining-world-state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5423,7 +4821,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "f9746dc82fdfa8f532920e1aeb7d4a75c7ef1cc40ceaae6aae23ecb5f0c7b428",
+      "source_sha256": "57ed89be36dac0695106d3ffcf7d89cbf8b9ada0d35c85d9938b14507694edbf",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -5432,188 +4830,123 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_04E0",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_04F2",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0502",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0510",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_059E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_06AC",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0736",
+            "name": "_fd_50F6_0204",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_08DC",
+            "name": "_fd_50F6_0208",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_08E8",
+            "name": "_fd_50F6_0210",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0D9A",
+            "name": "_fd_50F6_0212",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0FF8",
+            "name": "_fd_50F6_0214",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0226",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1004",
+            "name": "_fd_50F6_0240",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1006",
+            "name": "_fd_50F6_0332",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_103A",
+            "name": "_fd_50F6_037A",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_103C",
+            "name": "_fd_50F6_0402",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1044",
+            "name": "_fd_50F6_0476",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1046",
+            "name": "_fd_50F6_047E",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1048",
+            "name": "_fd_50F6_0488",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_104A",
+            "name": "_fd_50F6_048E",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:balloon-buffer-tables",
-      "source": "src/state/balloon-buffer-tables.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "81ba70b1b41be95b198a1b27332e22a713b27089540c4757f6b417950fa2a6fd",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_04A6",
-            "kind": "far",
-            "length": 24,
-            "count": 6,
-            "element_size": 4
           },
           {
-            "name": "_fd_50F6_04C8",
+            "name": "_fd_50F6_0492",
             "kind": "far",
-            "length": 24,
-            "count": 6,
-            "element_size": 4
+            "length": 2,
+            "count": 2,
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_04E6",
+            "name": "_fd_50F6_049A",
             "kind": "far",
-            "length": 12,
-            "count": 6,
-            "element_size": 2
+            "length": 2,
+            "count": 2,
+            "element_size": 1
           },
           {
-            "name": "_fd_50F6_04F6",
+            "name": "_fd_50F6_04A4",
             "kind": "far",
-            "length": 12,
-            "count": 6,
-            "element_size": 2
+            "length": 2,
+            "count": 2,
+            "element_size": 1
           }
         ],
         "publics": [],
@@ -5651,8 +4984,8 @@
       }
     },
     {
-      "key": "source-owned:window-ralloc-handles",
-      "source": "src/state/window-ralloc-handles.c",
+      "key": "source-owned:render-scalars",
+      "source": "src/state/render-scalars.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5660,7 +4993,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "6a8afe2038120da5e55ecc3dd4f31fa498fd785d9353d1dd4360d04ac1e885e7",
+      "source_sha256": "3cf7dddcf9188d13f36e25115ac566169adceb938c0f5493a3d9a7faa70d0d7f",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -5669,18 +5002,24 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_385A",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
+            "name": "_g_8BD2",
+            "kind": "near",
+            "length": 2
           },
           {
-            "name": "_fd_50F6_385E",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
+            "name": "_g_8BD4",
+            "kind": "near",
+            "length": 2
+          },
+          {
+            "name": "_g_9126",
+            "kind": "near",
+            "length": 2
+          },
+          {
+            "name": "_g_94E4",
+            "kind": "near",
+            "length": 1
           }
         ],
         "publics": [],
@@ -5688,8 +5027,8 @@
       }
     },
     {
-      "key": "source-owned:remaining-sound-storage",
-      "source": "src/state/remaining-sound-storage.c",
+      "key": "source-owned:saved-sound-state",
+      "source": "src/state/saved-sound-state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5697,7 +5036,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "984e0db28de921d9d4ccd1e0be9f73e40a2880d1786f6222cc1718d2f4e90aec",
+      "source_sha256": "9241c7b8ace381c4226a38f5f109a0d518ef42e7b4de99ed6425aa7346e10602",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -5706,152 +5045,10 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_47DA",
+            "name": "_fd_50F6_01F0",
             "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4A1A",
-            "kind": "far",
-            "length": 16,
-            "count": 4,
-            "element_size": 4
-          },
-          {
-            "name": "_fd_50F6_4A42",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4B28",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4B2C",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4B2E",
-            "kind": "far",
-            "length": 2,
-            "count": 2,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4B8A",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_4B8E",
-            "kind": "far",
-            "length": 28,
-            "count": 14,
-            "element_size": 2
-          },
-          {
-            "name": "_fd_50F6_4BAA",
-            "kind": "far",
-            "length": 28,
-            "count": 14,
-            "element_size": 2
-          }
-        ],
-        "publics": [],
-        "fixups": []
-      }
-    },
-    {
-      "key": "source-owned:remaining-misc-storage",
-      "source": "src/state/remaining-misc-storage.c",
-      "lang": "c",
-      "profile": "msc600ax",
-      "flags": [
-        "/AL",
-        "/Os",
-        "/Gs"
-      ],
-      "source_sha256": "14e4a1dee10178208042f2959b670aad9051dfe3dcdcad11d1d3019709b1147a",
-      "unit": "root",
-      "storage_contract": {
-        "status": "PASS",
-        "data_only": true,
-        "live_initialized_bytes": 0,
-        "code_bytes": 0,
-        "communals": [
-          {
-            "name": "_fd_50F6_07CA",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0852",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_08DE",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_08EC",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_09F2",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0B0A",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_0B22",
-            "kind": "far",
-            "length": 4,
-            "count": 4,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_1114",
-            "kind": "far",
-            "length": 1200,
-            "count": 1200,
-            "element_size": 1
-          },
-          {
-            "name": "_fd_50F6_15C4",
-            "kind": "far",
-            "length": 2400,
-            "count": 1200,
+            "length": 14,
+            "count": 7,
             "element_size": 2
           }
         ],
@@ -5890,8 +5087,8 @@
       }
     },
     {
-      "key": "source-owned:remaining-far-state-words",
-      "source": "src/state/remaining-far-state-words.c",
+      "key": "source-owned:sound-control-words",
+      "source": "src/state/sound-control-words.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5899,7 +5096,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "cc38095d94023d9fe71c8939a7ef3847d51a2d5e4c6392d97e0ed85024b6e082",
+      "source_sha256": "43432778e132096f7fe228f01d08a510a1b8ad52dd4fb1fd96098f87f2b05fb0",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -5908,39 +5105,454 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_04C0",
+            "name": "_fd_50F6_4A46",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0B20",
+            "name": "_fd_50F6_4A48",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0F38",
+            "name": "_fd_50F6_4A4A",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0FB6",
+            "name": "_fd_50F6_4A4C",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0FFA",
+            "name": "_fd_50F6_4B14",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_4B16",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:sound-record-arrays",
+      "source": "src/state/sound-record-arrays.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "e5895a3a0bfce456576cbd8e2f4174a672c0bade47e4e2bf4883950453adfbbb",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "count": 56,
+            "element_size": 6,
+            "kind": "far",
+            "length": 336,
+            "name": "_fd_50F6_0000"
+          },
+          {
+            "count": 33,
+            "element_size": 6,
+            "kind": "far",
+            "length": 198,
+            "name": "_fd_50F6_4A4E"
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:spider-controls",
+      "source": "src/state/spider-controls.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_ChaseSpid",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_SMode",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_SuserX",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_SuserY",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_Starg",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_StargLife",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:spider-counters",
+      "source": "src/state/spider-counters.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "5ffb18cd1256b1d6e42586386a573cd1c62d2bf9c2d6eaaab96d333e9a642f64",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_DeathCnt",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_EatCnt",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_SCorpseBase",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_Scycle",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_Scycle2",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_SpidBurpCnt",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_SpidRevenge",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:swarm-serialized-buffers",
+      "source": "src/state/swarm-serialized-buffers.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "6d93cb66e2b7badaf17f1258a7d4143bc1f20e5bacceaafba72e47c3e7c00ed4",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0F46",
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0F84",
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0FC6",
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1008",
+            "kind": "far",
+            "length": 50,
+            "count": 50,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:terrain-state-words",
+      "source": "src/state/terrain-state-words.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "f132ac4e22801d8576c9bb556fa7b23cd70efe54455b37b1666eeebe173855b4",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_Barrier",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_TERRAINset",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:ui-geometry-state",
+      "source": "src/state/ui-geometry-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "283176f1769968d7db9a0e1d002d54fd566e523120285778bdf1b137e106a85e",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_10D2",
+            "kind": "far",
+            "length": 8,
+            "count": 8,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_110C",
+            "kind": "far",
+            "length": 8,
+            "count": 8,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1104",
+            "kind": "far",
+            "length": 8,
+            "count": 8,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_392C",
+            "kind": "far",
+            "length": 8,
+            "count": 8,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:ui-resource-scalars",
+      "source": "src/state/ui-resource-scalars.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "936c6fd4cfe5d394a699374e321287720f7872ea158ec6e2c745e225ed69e619",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_win_numOfWindows",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_win_numOfColors",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_win_numOfGroups",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3B4C",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3B58",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_3B5C",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:window-clip-handles",
+      "source": "src/state/window-clip-handles.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "bd868a6383dffecd1999b5facbca9d7be9b961e5b5cd8777552e57e9e08c9d74",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_3B60",
+            "kind": "far",
+            "length": 180,
+            "count": 45,
+            "element_size": 4
           }
         ],
         "publics": [],
@@ -5985,8 +5597,8 @@
       }
     },
     {
-      "key": "source-owned:critical-selector-byte",
-      "source": "src/state/critical-selector-byte.c",
+      "key": "source-owned:window-ralloc-handles",
+      "source": "src/state/window-ralloc-handles.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5994,7 +5606,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "78e5070a594461df8ffa0eaaa8a6d69302652c0f57b9f61c8be79f5112f4646d",
+      "source_sha256": "6a8afe2038120da5e55ecc3dd4f31fa498fd785d9353d1dd4360d04ac1e885e7",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -6003,9 +5615,481 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_g_8CCB",
-            "kind": "near",
-            "length": 1
+            "name": "_fd_50F6_385A",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_385E",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:world-output-state",
+      "source": "src/state/world-output-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "15deda16456dbf034f43c277a6af0c546ee08a5df8a64de536141886c4318e5b",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0200",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_020E",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0224",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0242",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_035E",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_036C",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0472",
+            "kind": "far",
+            "count": 4,
+            "element_size": 1,
+            "length": 4
+          },
+          {
+            "name": "_fd_50F6_09FA",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_0A00",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_1040",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_1068",
+            "kind": "far",
+            "count": 4,
+            "element_size": 1,
+            "length": 4
+          },
+          {
+            "name": "_fd_50F6_1082",
+            "kind": "far",
+            "count": 4,
+            "element_size": 1,
+            "length": 4
+          },
+          {
+            "name": "_fd_50F6_108E",
+            "kind": "far",
+            "count": 4,
+            "element_size": 1,
+            "length": 4
+          },
+          {
+            "name": "_fd_50F6_10A2",
+            "kind": "far",
+            "count": 4,
+            "element_size": 1,
+            "length": 4
+          },
+          {
+            "name": "_fd_50F6_10B2",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          },
+          {
+            "name": "_fd_50F6_10C0",
+            "kind": "far",
+            "count": 2,
+            "element_size": 1,
+            "length": 2
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:yard-animation-arrays",
+      "source": "src/state/yard-animation-arrays.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "43bf01f2b11fa24353a86aa277aba03f066dcff8265222bdb7542397706eaeed",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0334",
+            "kind": "far",
+            "length": 24,
+            "count": 12,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_38CA",
+            "kind": "far",
+            "length": 30,
+            "count": 15,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_38E8",
+            "kind": "far",
+            "length": 34,
+            "count": 17,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_390A",
+            "kind": "far",
+            "length": 34,
+            "count": 17,
+            "element_size": 2
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:yard-init-state",
+      "source": "src/state/yard-init-state.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "29c746ecf94781180639e6d2f20bc9dc00207c263838ddc5a2888eb6f5d37fab",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_0220",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_107E",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_109C",
+            "kind": "far",
+            "length": 4,
+            "count": 4,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0202",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_022C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_023E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0244",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0246",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0364",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_036E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_046A",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0470",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_047A",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_04BE",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_04C6",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_04E4",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0506",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0624",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_07C2",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_105C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_1066",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_108C",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_10A0",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_10B0",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_10BC",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": []
+      }
+    },
+    {
+      "key": "source-owned:yard-scalars",
+      "source": "src/state/yard-scalars.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "d94320b53cd0f3c8843df20c10c305c1a1022dafb4d8318803d7acbd0feb6602",
+      "unit": "root",
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "code_bytes": 0,
+        "communals": [
+          {
+            "name": "_fd_50F6_105E",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0478",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0504",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0228",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_MapPlane",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_YardMode",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0366",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_0376",
+            "kind": "far",
+            "length": 2,
+            "count": 2,
+            "element_size": 1
           }
         ],
         "publics": [],

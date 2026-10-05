@@ -198,6 +198,10 @@ def compile_program(program, out, report, jobs=4, reuse=False):
             obj = OmfReader(communals=True).read(obj_raw, record['key'])
             if record.get('storage_contract') is not None:
                 row['storage_verification'] = verify_storage(obj, record['storage_contract'])
+            if record.get('owned_code_references') is not None:
+                import canonical
+                row['owned_code_reference_count'] = canonical.check_owned_code_references(
+                    record['owned_code_references'], obj)
             row['cache'] = {'key': fingerprint, 'sha256': row['object']['sha256']}
         except (ValueError, OSError, compiler.CompileError, subprocess.SubprocessError) as error:
             row['status'] = 'FAILED'

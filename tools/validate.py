@@ -136,7 +136,9 @@ def main() -> int:
             failures.append(f"{key}: claims outside the object's frame offsets {lo:04X}-{hi - 1:04X}")
         if sha(text.encode("latin1")) != m["source_sha256"]:
             failures.append(f"{key}: source hash differs from manifest (unpublished edit)")
-        res = modmod.verify_module(text, m, m["claims"], man=man)
+        item = next((item for item in program['modules'] if item['key'] == key), {}) if program else {}
+        res = modmod.verify_module(text, m, m["claims"], man=man,
+                                  code_references=item.get('owned_code_references'))
         bad = [n for n, c in res["claims"].items() if not c["exact"]]
         dbad = [n for n, d in res.get("data", {}).items() if not d["exact"]]
         mreasons = list(res.get("module_reasons", [])) + modmod.link_after_reasons(

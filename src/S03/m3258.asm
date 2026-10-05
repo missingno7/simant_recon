@@ -20,6 +20,8 @@ S03C_TEXT	segment word public 'CODE'
 	public	_o03_3258_0F04
 	public	_o03_3258_175F
 
+; LEA uses linker-owned table offsets; the historical contribution started at
+; frame offset 0Ch, while an independent link may give it a different origin.
 xlat_tabs	label	byte
 ; Four 256-byte colour translation tables indexed by a byte of two 4-bit pixels.
 ; Table 0 is the transparency mask: colour 0Dh gives a 0 nibble, every other colour 0Fh.
@@ -409,14 +411,14 @@ _o03_3258_0690	proc	far
 	push ds
 	les di, dword ptr [bp+0Eh]
 	lds si, dword ptr [bp+0Ah]
-	lea dx, ds:[0Ch]
-	lea bx, ds:[20Ch]
+	lea dx, xlat_tabs
+	lea bx, xlat_tabs+512
 	cmp byte ptr [bp+12h], 0
 	je L06B8
-	lea bx, ds:[10Ch]
+	lea bx, xlat_tabs+256
 	cmp byte ptr [bp+12h], 3
 	je L06B8
-	lea bx, ds:[30Ch]
+	lea bx, xlat_tabs+768
 L06B8:
 	push bp
 	lea bp, _g_3D20
@@ -1526,14 +1528,14 @@ _o03_3258_0F04	proc	far
 	push ds
 	les di, dword ptr [bp+0Ah]
 	lds si, dword ptr [bp+6]
-	lea dx, ds:[0Ch]
-	lea bx, ds:[20Ch]
+	lea dx, xlat_tabs
+	lea bx, xlat_tabs+512
 	cmp byte ptr [bp+0Eh], 0
 	je L0F2C
-	lea bx, ds:[10Ch]
+	lea bx, xlat_tabs+256
 	cmp byte ptr [bp+0Eh], 3
 	je L0F2C
-	lea bx, ds:[30Ch]
+	lea bx, xlat_tabs+768
 L0F2C:
 	push bp
 	lea bp, _g_3D20

@@ -1,0 +1,3098 @@
+{
+  "schema": "simant-s03-owned-address-current-proof-v1",
+  "scope": "Only complete source-owned S03:3126 and S03:3258 objects. Real-linker fixtures inspect their actual linked LEA displacement fields at runtime; no original game function executes. Test providers satisfy unexecuted boundaries only. This is not a full DOS game link, standalone execution, new assembly admission, or storage proof.",
+  "original_image_read": false,
+  "canonical_sources_written": false,
+  "output_directory": "D:\\Prog\\simant_recon\\build\\s03-owned-addresses-current",
+  "reproduce": "python evidence/canonical/s03-owned-addresses/replay.py --out build/s03-address-proof-fresh",
+  "canonical_source_inputs_and_negative_recipes": [
+    {
+      "module": "S03:3126",
+      "canonical_source": {
+        "path": "src/S03/m3126.asm",
+        "sha256": "33c47fd0113e14c015a9a0b43625d87d00afb46fb2f915b928f3a982130e72d8",
+        "size": 37090
+      },
+      "positive_source": {
+        "path": "build/s03-owned-addresses-current/sources/NEWA.asm",
+        "sha256": "af8d51127364622fc4f51262fa7ab2090f1639e8bf8a5f775cadd0b5b9bf681a",
+        "size": 39353
+      },
+      "negative_source": {
+        "path": "build/s03-owned-addresses-current/sources/OLDA.asm",
+        "sha256": "e4775542695d014376762dee198f584b21706d0ba6a0a2f3edc6677af0264890",
+        "size": 39442
+      },
+      "negative_recipe": [
+        {
+          "register": "di",
+          "canonical_operand": "linebuf",
+          "negative_operand": "ds:[0]",
+          "count": 2
+        },
+        {
+          "register": "si",
+          "canonical_operand": "linebuf",
+          "negative_operand": "ds:[0]",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "module": "S03:3258",
+      "canonical_source": {
+        "path": "src/S03/m3258.asm",
+        "sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
+        "size": 40733
+      },
+      "positive_source": {
+        "path": "build/s03-owned-addresses-current/sources/NEWC.asm",
+        "sha256": "fda25fe9bc10bc8c28b33075e0493ee120c855655ad80a97c1cef11842b3beb6",
+        "size": 43428
+      },
+      "negative_source": {
+        "path": "build/s03-owned-addresses-current/sources/OLDC.asm",
+        "sha256": "6df1999473caa583afc505bee907b9603512b448f66ac59177ac7b027b928635",
+        "size": 43495
+      },
+      "negative_recipe": [
+        {
+          "register": "dx",
+          "canonical_operand": "xlat_tabs",
+          "negative_operand": "ds:[0Ch]",
+          "count": 2
+        },
+        {
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+512",
+          "negative_operand": "ds:[20Ch]",
+          "count": 2
+        },
+        {
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+256",
+          "negative_operand": "ds:[10Ch]",
+          "count": 2
+        },
+        {
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+768",
+          "negative_operand": "ds:[30Ch]",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "whole_object_review": {
+    "S03:3126": {
+      "structure": {
+        "segment_lengths": true,
+        "segment_defs": true,
+        "publics": true,
+        "groups": true,
+        "externals": true,
+        "local_publics": true,
+        "local_externals": true,
+        "communals": true
+      },
+      "code_and_data_lengths": {
+        "_DATA": 250,
+        "S03A_TEXT": 4824
+      },
+      "public_count": 32,
+      "old_fixup_count": 407,
+      "new_fixup_count": 411,
+      "added_self_offset_fixups": [
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3557,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03A_TEXT",
+          "displacement": 0,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03A_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3651,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03A_TEXT",
+          "displacement": 0,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03A_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3832,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03A_TEXT",
+          "displacement": 0,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03A_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3926,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03A_TEXT",
+          "displacement": 0,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03A_TEXT",
+          "encoded_addend": "0000"
+        }
+      ],
+      "retained_fixups_identical_in_order": true,
+      "raw_byte_changes": [],
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    },
+    "S03:3258": {
+      "structure": {
+        "segment_lengths": true,
+        "segment_defs": true,
+        "publics": true,
+        "groups": true,
+        "externals": true,
+        "local_publics": true,
+        "local_externals": true,
+        "communals": true
+      },
+      "code_and_data_lengths": {
+        "_DATA": 0,
+        "S03C_TEXT": 6055
+      },
+      "public_count": 7,
+      "old_fixup_count": 8,
+      "new_fixup_count": 16,
+      "added_self_offset_fixups": [
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1682,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 0,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1686,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 512,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1696,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 256,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1706,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 768,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3846,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 0,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3850,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 512,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3860,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 256,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3870,
+          "width": 2,
+          "loc": "offset16",
+          "self_relative": false,
+          "target_kind": "segment",
+          "target": "S03C_TEXT",
+          "displacement": 768,
+          "frame_method": 0,
+          "frame_index": 2,
+          "target_method": 0,
+          "target_index": 2,
+          "frame_kind": "segment",
+          "frame": "S03C_TEXT",
+          "encoded_addend": "0000"
+        }
+      ],
+      "retained_fixups_identical_in_order": true,
+      "raw_byte_changes": [
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1682,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1686,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1687,
+          "before": 2,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1696,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1697,
+          "before": 1,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1706,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1707,
+          "before": 3,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3846,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3850,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3851,
+          "before": 2,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3860,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3861,
+          "before": 1,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3870,
+          "before": 12,
+          "after": 0
+        },
+        {
+          "segment": "S03C_TEXT",
+          "offset": 3871,
+          "before": 3,
+          "after": 0
+        }
+      ],
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    }
+  },
+  "linker_status": {
+    "rtlink400": "experimental instrument for level (c) trials; exact historical version unconfirmed",
+    "rtlink610": "experimental instrument for level (c) trials; NOT the historical SIMANT.EXE linker (exact version/manager still missing)"
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10880,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "FAIL",
+      "expected_runtime_result": "FAIL",
+      "mismatching_operands": 8,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 8,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 520,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 264,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 776,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 8,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 520,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 264,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 776,
+          "matches": false
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_OLD/PROBE.LNK",
+          "sha256": "0abc8737678d4dcd8d4349fe9493d4c57759622f01e23055bef91b0b39ea55a3",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_OLD/RUN.BAT",
+          "sha256": "8d0cb3c93d57280ed325fc5d49f6b15c728b910ad8cdc5935d8791ca81844c5a",
+          "size": 235
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_OLD/dosbox.conf",
+          "sha256": "0870c1df2778414377a8c2aed4d4e924428e65616070929a02c4daa93e6e74da",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_OLD/PROBE.EXE",
+          "sha256": "6f093a721ab6d5c6420bc789d0e13cbd4e8a89912badddeeb7612d57da7ea57f",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_OLD/PROBE.MAP",
+          "sha256": "cfb11e708f69159a8d8963dcfeadb01981bbe45c9d6e524389d274a922e8e89d",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_OLD/LINK.LOG",
+          "sha256": "bc9e0760d48232e8d6787a3516fb48d9683f7e2b7b401884857adc62231a6253",
+          "size": 446
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_OLD/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10880,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 8,
+          "expected_own_label_offset": 8,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 520,
+          "expected_own_label_offset": 520,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 264,
+          "expected_own_label_offset": 264,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 776,
+          "expected_own_label_offset": 776,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 8,
+          "expected_own_label_offset": 8,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 520,
+          "expected_own_label_offset": 520,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 264,
+          "expected_own_label_offset": 264,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 776,
+          "expected_own_label_offset": 776,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_NEW/PROBE.LNK",
+          "sha256": "421c89037c40b0ee223267fe6cf44bdf8775f8d245085f20b8e0becbcc1a287b",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_NEW/RUN.BAT",
+          "sha256": "8d0cb3c93d57280ed325fc5d49f6b15c728b910ad8cdc5935d8791ca81844c5a",
+          "size": 235
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_NEW/dosbox.conf",
+          "sha256": "d473e166460230e127cbee5359327ae1ac0152e630b56505aa7a559e6fe40256",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_NEW/PROBE.EXE",
+          "sha256": "7813c38aa85375d7351ccc4145627b7b2ea10782d85bc0890cf3eed79e211e8c",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_NEW/PROBE.MAP",
+          "sha256": "cfb11e708f69159a8d8963dcfeadb01981bbe45c9d6e524389d274a922e8e89d",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_NEW/LINK.LOG",
+          "sha256": "cb6feb4f495a3d33d4c372094793c6b1f94c629f45492a36ffec4b91144dc21c",
+          "size": 446
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/ZERO_NEW/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10884,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_OLD/PROBE.LNK",
+          "sha256": "fe57fe50e951a87ef11a996b761a480cad2b5a575ca702a0bddb6d3e1f9c6179",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_OLD/RUN.BAT",
+          "sha256": "8d0cb3c93d57280ed325fc5d49f6b15c728b910ad8cdc5935d8791ca81844c5a",
+          "size": 235
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_OLD/dosbox.conf",
+          "sha256": "6bd69b5c0b6c360bfd808ddd66b1fc2ce8f2f5eb8e4fb056c7c000c7383edaf6",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_OLD/PROBE.EXE",
+          "sha256": "7a8d1062e3991a27720375917b42eb776510ba310f3582db4043ca74f805de6a",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_OLD/PROBE.MAP",
+          "sha256": "ab5afc1c92445eb5808e8ebd415f5b0d6691af3d57c4b47829c6e86ca6d113a2",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_OLD/LINK.LOG",
+          "sha256": "6401691a7009a501d165032d0ff66e66a918cfc166381d089ea30e37571185a8",
+          "size": 446
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_OLD/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10884,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_NEW/PROBE.LNK",
+          "sha256": "8397a2f74c827d0aa9aad3e59e818a987841e32ef94e66be7b42a3a53c49ed5a",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_NEW/RUN.BAT",
+          "sha256": "8d0cb3c93d57280ed325fc5d49f6b15c728b910ad8cdc5935d8791ca81844c5a",
+          "size": 235
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_NEW/dosbox.conf",
+          "sha256": "ea28eb119198818bb188cc1bd647dbb5bc5af917d3ab1adf59e97815c27c73e3",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_NEW/PROBE.EXE",
+          "sha256": "7a8d1062e3991a27720375917b42eb776510ba310f3582db4043ca74f805de6a",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_NEW/PROBE.MAP",
+          "sha256": "ab5afc1c92445eb5808e8ebd415f5b0d6691af3d57c4b47829c6e86ca6d113a2",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_NEW/LINK.LOG",
+          "sha256": "8c51c21c3bbe2546e768925cf8f6a8fdb5abde494f1b923749411c6dd8a47f85",
+          "size": 446
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/HIST_NEW/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4856,
+        "BOUND_TEXT": 10944,
+        "CHECK_TEXT": 10960
+      },
+      "runtime_result": "FAIL",
+      "expected_runtime_result": "FAIL",
+      "mismatching_operands": 12,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 40,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 552,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 296,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 808,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 40,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 552,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 296,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 808,
+          "matches": false
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_OLD/PROBE.LNK",
+          "sha256": "22cf1eb0e01d4d63d269f23b4b4e4997b363f7f3e933a01b4d27db2667ab17f4",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_OLD/RUN.BAT",
+          "sha256": "8d0cb3c93d57280ed325fc5d49f6b15c728b910ad8cdc5935d8791ca81844c5a",
+          "size": 235
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_OLD/dosbox.conf",
+          "sha256": "5d78d6a15695d992a4ab78f2a3936ec6d249f093435ea6d6987a4e198cfdc3cf",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_OLD/PROBE.EXE",
+          "sha256": "0371d9108ecbc69ddb0d40c3fe6b92288dd191fce04eb3eb614b9497307b9a5c",
+          "size": 12640
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_OLD/PROBE.MAP",
+          "sha256": "21a6cf4dda3338eb1d218ff3a54e0318f84f3b15bf853a9c95c459d1518c0ee0",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_OLD/LINK.LOG",
+          "sha256": "d7ca90e186f88d214c946dc404d68be92c9d04f4f87a45a4899a9cb9528b55b7",
+          "size": 446
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_OLD/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4856,
+        "BOUND_TEXT": 10944,
+        "CHECK_TEXT": 10960
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 40,
+          "expected_own_label_offset": 40,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 552,
+          "expected_own_label_offset": 552,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 296,
+          "expected_own_label_offset": 296,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 808,
+          "expected_own_label_offset": 808,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 40,
+          "expected_own_label_offset": 40,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 552,
+          "expected_own_label_offset": 552,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 296,
+          "expected_own_label_offset": 296,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 808,
+          "expected_own_label_offset": 808,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_NEW/PROBE.LNK",
+          "sha256": "963e8b352a2ba4da0b34161a8398155ec4fc536bb83fc02150631c62acd7eabf",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_NEW/RUN.BAT",
+          "sha256": "8d0cb3c93d57280ed325fc5d49f6b15c728b910ad8cdc5935d8791ca81844c5a",
+          "size": 235
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_NEW/dosbox.conf",
+          "sha256": "11f35a99e1bc8bee9fd8a6bc68c84e89341ce06ff6550442877d4e890728f3cb",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_NEW/PROBE.EXE",
+          "sha256": "6ad2026f9bb4a504068de388b86e04b20d9dcab4bca445653847641743deb972",
+          "size": 12640
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_NEW/PROBE.MAP",
+          "sha256": "21a6cf4dda3338eb1d218ff3a54e0318f84f3b15bf853a9c95c459d1518c0ee0",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_NEW/LINK.LOG",
+          "sha256": "60a50fdb7faa4834607c5cde7731d09d0329f06106763677a9f4f128e7c4eff6",
+          "size": 446
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink400/MOVE_NEW/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10880,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "FAIL",
+      "expected_runtime_result": "FAIL",
+      "mismatching_operands": 8,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 8,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 520,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 264,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 776,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 8,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 520,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 264,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 776,
+          "matches": false
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_OLD/PROBE.LNK",
+          "sha256": "0abc8737678d4dcd8d4349fe9493d4c57759622f01e23055bef91b0b39ea55a3",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_OLD/RUN.BAT",
+          "sha256": "fd4041843cf5c81925c14cf17c09dfc3cab5aaf335384dbd75a3906cbf524830",
+          "size": 237
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_OLD/dosbox.conf",
+          "sha256": "838fa67f72e49a670e25ee5c71b35b4ffd375e8ae67a88c284e6fe6c9db9afe1",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_OLD/PROBE.EXE",
+          "sha256": "6a92b9fd337d24199a6d484898bdba2403b75088275cb4ca40e301b7e4a3a153",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_OLD/PROBE.MAP",
+          "sha256": "cfb11e708f69159a8d8963dcfeadb01981bbe45c9d6e524389d274a922e8e89d",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_OLD/LINK.LOG",
+          "sha256": "e1cc53e772893f4af4cb31dbd5c86534099a37805f5daa5982b3db3eb978ddbd",
+          "size": 976
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_OLD/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 8
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10880,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 8,
+          "expected_own_label_offset": 8,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 520,
+          "expected_own_label_offset": 520,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 264,
+          "expected_own_label_offset": 264,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 776,
+          "expected_own_label_offset": 776,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 8,
+          "expected_own_label_offset": 8,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 520,
+          "expected_own_label_offset": 520,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 264,
+          "expected_own_label_offset": 264,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 776,
+          "expected_own_label_offset": 776,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_NEW/PROBE.LNK",
+          "sha256": "421c89037c40b0ee223267fe6cf44bdf8775f8d245085f20b8e0becbcc1a287b",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_NEW/RUN.BAT",
+          "sha256": "fd4041843cf5c81925c14cf17c09dfc3cab5aaf335384dbd75a3906cbf524830",
+          "size": 237
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_NEW/dosbox.conf",
+          "sha256": "6ea0e255b2784f44a05d30653090dd13b0a4173ed9832a1a258adc418c0e1538",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_NEW/PROBE.EXE",
+          "sha256": "331b766e0d26b295b83317c029f16b0d0018c37ebe5ea1f2a4ee726583545c8e",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_NEW/PROBE.MAP",
+          "sha256": "cfb11e708f69159a8d8963dcfeadb01981bbe45c9d6e524389d274a922e8e89d",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_NEW/LINK.LOG",
+          "sha256": "3cf739c18f49a8b7538b69fca7633bcaa993cb0a477d2e502a7b6252e7cf5853",
+          "size": 976
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/ZERO_NEW/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10884,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_OLD/PROBE.LNK",
+          "sha256": "fe57fe50e951a87ef11a996b761a480cad2b5a575ca702a0bddb6d3e1f9c6179",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_OLD/RUN.BAT",
+          "sha256": "fd4041843cf5c81925c14cf17c09dfc3cab5aaf335384dbd75a3906cbf524830",
+          "size": 237
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_OLD/dosbox.conf",
+          "sha256": "6b7260859ed1ac164e149f9779870c62847e8df523b464c185bb37c23be53cb0",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_OLD/PROBE.EXE",
+          "sha256": "5b8b4aeb7f2aa5d5c6309114864223dda95e43a615b6be98e2ac7300cac7e110",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_OLD/PROBE.MAP",
+          "sha256": "ab5afc1c92445eb5808e8ebd415f5b0d6691af3d57c4b47829c6e86ca6d113a2",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_OLD/LINK.LOG",
+          "sha256": "59101c6773a59ebddf76441c2e15510bfa87a5951bb2b7c55010fe05f173b256",
+          "size": 976
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_OLD/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4824,
+        "BOUND_TEXT": 10884,
+        "CHECK_TEXT": 10896
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 0,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 12,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 524,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 268,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 780,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_NEW/PROBE.LNK",
+          "sha256": "8397a2f74c827d0aa9aad3e59e818a987841e32ef94e66be7b42a3a53c49ed5a",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_NEW/RUN.BAT",
+          "sha256": "fd4041843cf5c81925c14cf17c09dfc3cab5aaf335384dbd75a3906cbf524830",
+          "size": 237
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_NEW/dosbox.conf",
+          "sha256": "656116b1a6531a99d02dd851912ce8aead7b257e392b425085e27f0b14743b68",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_NEW/PROBE.EXE",
+          "sha256": "5b8b4aeb7f2aa5d5c6309114864223dda95e43a615b6be98e2ac7300cac7e110",
+          "size": 12576
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_NEW/PROBE.MAP",
+          "sha256": "ab5afc1c92445eb5808e8ebd415f5b0d6691af3d57c4b47829c6e86ca6d113a2",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_NEW/LINK.LOG",
+          "sha256": "54287cc3602b892a6f87a2d2ce0261ac9c2d09f75f4910cf2af53fe2b1f086e1",
+          "size": 976
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/HIST_NEW/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4856,
+        "BOUND_TEXT": 10944,
+        "CHECK_TEXT": 10960
+      },
+      "runtime_result": "FAIL",
+      "expected_runtime_result": "FAIL",
+      "mismatching_operands": 12,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 0,
+          "expected_own_label_offset": 32,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 40,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 552,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 296,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 808,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 12,
+          "expected_own_label_offset": 40,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 524,
+          "expected_own_label_offset": 552,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 268,
+          "expected_own_label_offset": 296,
+          "matches": false
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 780,
+          "expected_own_label_offset": 808,
+          "matches": false
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_OLD/PROBE.LNK",
+          "sha256": "22cf1eb0e01d4d63d269f23b4b4e4997b363f7f3e933a01b4d27db2667ab17f4",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_OLD/RUN.BAT",
+          "sha256": "fd4041843cf5c81925c14cf17c09dfc3cab5aaf335384dbd75a3906cbf524830",
+          "size": 237
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_OLD/dosbox.conf",
+          "sha256": "3abe0712a45c89f1b6dbea955478b16743d53a62aff529feeb7a6e6e9eb603a7",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_OLD/PROBE.EXE",
+          "sha256": "1c15ea8126f15a33d33b6b65d7fbb3002baf7ecc0b45cc006670606185570e78",
+          "size": 12640
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_OLD/PROBE.MAP",
+          "sha256": "21a6cf4dda3338eb1d218ff3a54e0318f84f3b15bf853a9c95c459d1518c0ee0",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_OLD/LINK.LOG",
+          "sha256": "044f962f30b7612fd2271ce691a8d49781e51f05332924325230eb3989644ec3",
+          "size": 976
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_OLD/RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S03:3126": 32,
+        "S03:3258": 40
+      },
+      "test_prefix_bytes": {
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 32
+      },
+      "linked_segment_starts": {
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 4856,
+        "BOUND_TEXT": 10944,
+        "CHECK_TEXT": 10960
+      },
+      "runtime_result": "PASS",
+      "expected_runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "actual_linked_operands": [
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3557,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 455,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3651,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 549,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3832,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 730,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3126",
+          "object_operand_offset": 3926,
+          "function": "_o03_3126_0C1E",
+          "function_delta": 824,
+          "origin_public": "_o03_3126_0140",
+          "origin_public_offset": 320,
+          "table_offset": 0,
+          "linked_operand": 32,
+          "expected_own_label_offset": 32,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1682,
+          "function": "_o03_3258_0690",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 40,
+          "expected_own_label_offset": 40,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1686,
+          "function": "_o03_3258_0690",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 552,
+          "expected_own_label_offset": 552,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1696,
+          "function": "_o03_3258_0690",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 296,
+          "expected_own_label_offset": 296,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 1706,
+          "function": "_o03_3258_0690",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 808,
+          "expected_own_label_offset": 808,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3846,
+          "function": "_o03_3258_0F04",
+          "function_delta": 14,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 0,
+          "linked_operand": 40,
+          "expected_own_label_offset": 40,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3850,
+          "function": "_o03_3258_0F04",
+          "function_delta": 18,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 512,
+          "linked_operand": 552,
+          "expected_own_label_offset": 552,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3860,
+          "function": "_o03_3258_0F04",
+          "function_delta": 28,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 256,
+          "linked_operand": 296,
+          "expected_own_label_offset": 296,
+          "matches": true
+        },
+        {
+          "module": "S03:3258",
+          "object_operand_offset": 3870,
+          "function": "_o03_3258_0F04",
+          "function_delta": 38,
+          "origin_public": "_o03_3258_040C",
+          "origin_public_offset": 1024,
+          "table_offset": 768,
+          "linked_operand": 808,
+          "expected_own_label_offset": 808,
+          "matches": true
+        }
+      ],
+      "passed": true,
+      "files": [
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_NEW/PROBE.LNK",
+          "sha256": "963e8b352a2ba4da0b34161a8398155ec4fc536bb83fc02150631c62acd7eabf",
+          "size": 82
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_NEW/RUN.BAT",
+          "sha256": "fd4041843cf5c81925c14cf17c09dfc3cab5aaf335384dbd75a3906cbf524830",
+          "size": 237
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_NEW/dosbox.conf",
+          "sha256": "8f54630d88ded0cb086f6ab0382bbf424d83f1818010af719f49ae2690382187",
+          "size": 413
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_NEW/PROBE.EXE",
+          "sha256": "5c18792696792876a7808d99969a25af6d1f1f6d3548fd31dad91211b51f09b6",
+          "size": 12640
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_NEW/PROBE.MAP",
+          "sha256": "21a6cf4dda3338eb1d218ff3a54e0318f84f3b15bf853a9c95c459d1518c0ee0",
+          "size": 5801
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_NEW/LINK.LOG",
+          "sha256": "31c08369f0ad401d31f92aea3b2694c3b6ee717704b9cd940484a7f4ff141717",
+          "size": 976
+        },
+        {
+          "path": "build/s03-owned-addresses-current/links/rtlink610/MOVE_NEW/RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    }
+  ],
+  "all_required_checks_pass": true,
+  "input_and_output_pins": [
+    {
+      "path": "evidence/canonical/s03-owned-addresses/replay.py",
+      "sha256": "fad665c5e26c5c26827db54318ec5b7f52dee338d7a56e1eddab07fa86563d54",
+      "size": 21263
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "build/s03-owned-addresses-current/source_inputs.json",
+      "sha256": "f2e33e458eac43470cc0f59fb4a6a919371ec415420833ab61261dfca4c44bb9",
+      "size": 2242
+    },
+    {
+      "path": "C:\\tools\\masm-5.10\\files\\MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/BOUND.asm",
+      "sha256": "b43f2b0c0fa463760c7b549e20100cb9c436edb43e467db203b6e84f41f90765",
+      "size": 2266
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/CHECK.asm",
+      "sha256": "2ad252ac1dc1780e42f84e2419d80bb9019db3d2d1abf00c290a9a4b50e80fd8",
+      "size": 2937
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/HIST.asm",
+      "sha256": "1a0359c96f490f6ff11eca345de859f85712fa9fb991c04db5584cf6f8ce5b5f",
+      "size": 200
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/MOVE.asm",
+      "sha256": "cdc3a65ce3abc5fae074aafc47e781ec6de8fd4bfbee48c424373ecfad9ff14b",
+      "size": 216
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/NEWA.asm",
+      "sha256": "af8d51127364622fc4f51262fa7ab2090f1639e8bf8a5f775cadd0b5b9bf681a",
+      "size": 39353
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/NEWC.asm",
+      "sha256": "fda25fe9bc10bc8c28b33075e0493ee120c855655ad80a97c1cef11842b3beb6",
+      "size": 43428
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/OLDA.asm",
+      "sha256": "e4775542695d014376762dee198f584b21706d0ba6a0a2f3edc6677af0264890",
+      "size": 39442
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/OLDC.asm",
+      "sha256": "6df1999473caa583afc505bee907b9603512b448f66ac59177ac7b027b928635",
+      "size": 43495
+    },
+    {
+      "path": "build/s03-owned-addresses-current/sources/ZERO.asm",
+      "sha256": "039bc6d5df04496262d9a885e45db5bd83ff6c2f8933492101a48f772adcb566",
+      "size": 186
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/BOUND.OBJ",
+      "sha256": "27789d33ca7180099a2fa40fc9342626766b589738c219d775a7a59b5f66d71f",
+      "size": 1301
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/CHECK.OBJ",
+      "sha256": "35ba3a25bdb130a52a406261d88f9a9d03bdb27e77c8702a76ea28b965121fb3",
+      "size": 727
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/HIST.OBJ",
+      "sha256": "99824a8fac2a8bd53b40e2510c110c3254b34d772d0099f412daf4142feadece",
+      "size": 93
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/MOVE.OBJ",
+      "sha256": "653c30156d3a5cbabf4e6b7cb05e6636c31430ebe067b7ec63188587ad17cb4f",
+      "size": 111
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/NEWA.OBJ",
+      "sha256": "5adafa4fa80273cf9919b67cda03b1fe992b07145e7ccecfc2fe9502c284c8b9",
+      "size": 8328
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/NEWC.OBJ",
+      "sha256": "1074750024f25bb7bfbb9f809accbf918b90c0e5e01800031c9c8888780d50ee",
+      "size": 6472
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/OLDA.OBJ",
+      "sha256": "0742141bb61a9f8ce6d01d210254c1c6b4b537014402477bc333d53e147f8327",
+      "size": 8308
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/OLDC.OBJ",
+      "sha256": "a8d7296e761626e3d9ab45793b09e158737db844ab59cda036caf5314e145ec6",
+      "size": 6420
+    },
+    {
+      "path": "build/s03-owned-addresses-current/objects/ZERO.OBJ",
+      "sha256": "b3162394f422094ce7b1f7670f33a398273e64a40b0b88e2980c2495e990b6c2",
+      "size": 75
+    }
+  ]
+}

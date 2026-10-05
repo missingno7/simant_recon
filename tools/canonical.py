@@ -32,6 +32,40 @@ def load() -> dict:
     return program
 
 
+def check_owned_code_references(contract: dict, obj) -> int:
+    """Require linker-owned offsets, even when an old literal matches history.
+
+    This checks ordinary OMF references to an already reconstructed code-data
+    object. It creates no storage and changes neither bytes nor fixups.
+    """
+    count = 0
+    for owner in contract['owners']:
+        segment, start, size = owner['segment'], owner['start'], owner['size']
+        if not (isinstance(start, int) and isinstance(size, int) and
+                0 <= start < start + size <= obj.segment_lengths.get(segment, 0)):
+            raise ValueError('owned code-data extent is outside its segment')
+        for site in owner['references']:
+            publics = [p for p in obj.publics if p['name'] == site['public']]
+            if len(publics) != 1 or publics[0]['segment'] != segment:
+                raise ValueError('owned code reference has no unique same-segment public')
+            offset = publics[0]['offset'] + site['operand_offset']
+            target_offset = site['owner_offset']
+            if not 0 <= target_offset < size:
+                raise ValueError('owned code reference exceeds its object')
+            fixups = [f for f in obj.linker_fixups
+                      if f['segment'] == segment and f['offset'] == offset]
+            expected = {'width': 2, 'loc': 'offset16', 'self_relative': False,
+                        'target_kind': 'segment', 'target': segment,
+                        'frame_kind': 'segment', 'frame': segment,
+                        'displacement': start + target_offset,
+                        'encoded_addend': '0000'}
+            if len(fixups) != 1 or any(fixups[0].get(k) != v for k, v in expected.items()):
+                raise ValueError(f'owned code reference at {segment}:{offset:04X} '
+                                 'is missing or has the wrong frame/target')
+            count += 1
+    return count
+
+
 def tokens(text: str) -> str:
     import csrc
     return ' '.join(t.text for t in csrc.tokenize(text)
@@ -281,7 +315,8 @@ def publish(plan_path: Path, verify_only: bool) -> int:
             if item['key'] in man['modules']:
                 module = {**man['modules'][item['key']],
                           'lang': item['lang'], 'profile': item['profile'], 'flags': item['flags']}
-                return modules.verify_module(text, module, module['claims'], man=man)
+                return modules.verify_module(text, module, module['claims'], man=man,
+                    code_references=item.get('owned_code_references'))
             return compiler.compile_c(text, item['profile'], item['flags'])
         with ThreadPoolExecutor(max_workers=8) as pool:
             results = list(pool.map(compile_item, plan['program']['modules']))
