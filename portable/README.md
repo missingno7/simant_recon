@@ -44,7 +44,8 @@ that a native C compiler cannot assemble; they are not an alternative C game
 model. Header views and native registries borrow canonical ordinary owners.
 
 Current native execution is a preview with explicit unresolved contracts.
-Twelve storage representations still lack complete DOS owner/lifetime proof;
+Eleven storage imports still lack complete DOS ownership proof; the canonical
+icon Handle slot also has unresolved activation and referent lifetime/extent.
 FindIndex's one-past guard is a semantic exception. Window omitted-slot zeroing
 has a reviewed shipped-resource/observer domain but differs in raw state.
 Unsupported font extents, malformed window bindings and zoom/allocation domains

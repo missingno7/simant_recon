@@ -10,8 +10,8 @@ Validation: **PASS** (2026-10-05)
 | exact_c_bytes | 232,114 |
 | historical_exact_source_rebuilt_function_count | 9 |
 | behavior_exact_confirmed_functions | 29 |
-| canonical_translation_units | 190 |
-| canonical_storage_units | 63 |
+| canonical_translation_units | 191 |
+| canonical_storage_units | 64 |
 | exact_asm_bytes | 50,441 |
 | exact_code_segment_data_bytes | 1,481 |
 | historical_runtime_bytes_accepted | 12,339 |
@@ -52,7 +52,7 @@ Validation: **PASS** (2026-10-05)
 | data_bytes_opaque_unmarked | 6,333 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `df42f9d8ee8decb33f91552b8b0ca5fe5f230aafd184702fa6e96b24c661a48a`
+Manifest: `02d1e67ccbfeb4b088fd4593ca5e0607d2ce91ff0121102dc5a9042393197fb5`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 

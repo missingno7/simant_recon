@@ -1,5 +1,11 @@
-Current repository suite: 264 tests.
-Execution: tools/validate.py invokes python -m unittest discover -s tests -q.
-Validator reported: OK (skipped=2), VALIDATION PASS.
-Count independently obtained from current unittest discovery; the validator logs only the final test status.
-See historical-validation.txt for the full acceptance run.
+source-owned:g2108-color-translation STORAGE
+----------------------------------------------------------------------
+Ran 267 tests in 96.652s
+
+OK (skipped=2)
+  helper: EXACT (reloc order EXACT)
+PROMOTED 0 new claim(s) into src\root\m0001.c
+  helper: EXACT (reloc order EXACT)
+registered runtime data __iob = S27:55B3:779C (_file.c)
+registered runtime data __bufin = S27:55B3:92E4 (_file.c)
+added 2 runtime names

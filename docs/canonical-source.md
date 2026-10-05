@@ -4,18 +4,20 @@ Published oracle checkpoints are immutable. Active reconstruction is corrigible.
 `dos-semantic-oracle-v1` remains at its original Git commit; the current sources
 contain the best reviewed reconstruction, including later corrections.
 
-`src/program.json` is the single program inventory. Its 190 translation units
-comprise 127 historical modules and 63 source-owned storage units. The original
+`src/program.json` is the single program inventory. Its 191 translation units
+comprise 127 historical modules and 64 source-owned storage units. The original
 module paths and function order remain intact. Storage definitions live in
 `src/state/`; a view never creates another allocation.
 
 The canonical publication includes 29 strictly reviewed semantic definitions,
-23 module binding corrections, 399 storage objects in the new storage units,
+23 module binding corrections, 400 storage objects in the new storage units,
 and 34 additional commons in corrected historical modules. DrawBalloons now
 contains the reviewed signed 16-bit addition before long allocation arithmetic.
 There is no need for a later correction body to supersede this implementation.
 The detailed admissions are in `evidence/canonical/publication.json`, with
-storage, view, static review and remaining-blocker records beside it.
+storage, view, static review and remaining-blocker records beside it. The later
+minimum icon Handle view is recorded under `evidence/canonical/icon-handle-view/`;
+it does not establish the master cell, bitmap or safe activation.
 
 The DOS build compiles this inventory directly:
 
@@ -30,10 +32,10 @@ patch objects or borrow original executable bytes. Unique compilation basenames
 keep independent large-model code segments distinct. Historical contribution
 validation separately retains its `UNIT` compiler context.
 
-The current preflight compiles all 190 units and validates all 63 storage
-contracts. It refuses an independent link on twelve unproved storage imports
-and ten semantic address/layout gates. Forty-four functional data bytes remain
-unresolved. These are SEMANTIC / PORT-BLOCKING; a source-only runnable DOS game
+The current preflight compiles all 191 units and validates all 64 storage
+contracts. It refuses an independent link on eleven unproved storage imports
+and twelve semantic address/layout gates. Forty-four functional data bytes remain
+unresolved and independently prevent linking. These are SEMANTIC / PORT-BLOCKING; a source-only runnable DOS game
 has not been established.
 
 Source-owned linebuf/xlat_tabs references in two complete S03 assembly TUs now
@@ -52,7 +54,7 @@ These compiler/layout differences are HISTORICAL-BINARY-ONLY. The immutable
 historical proofs are recoverable from Git.
 
 `python tools/validate.py` retains strict historical comparisons, fixups,
-relocations, private data, source lint, 48 compiler probes and runtime proofs.
+relocations, private data, source lint, 49 compiler probes and runtime proofs.
 Reviewed context differences pin every live object contribution, full extent,
 public, import and fixup without masking code or data. CodeView metadata has no
 runtime role and is recorded separately. `tests/test_canonical.py` verifies the
@@ -68,7 +70,7 @@ must stay explicit until their source ownership and lifetime are established.
 
 `portable/build.py` is the only native build entry. It uses normal ABI converter
 imports and `portable/platform.json`; it compiles current service files directly.
-The inventory converts 161 canonical C TUs and compiles 160. The DOS physical heap
+The inventory converts 162 canonical C TUs and compiles 161. The DOS physical heap
 TU is an explicit native allocation boundary. Three data units are emitted from
 actual symbolic assembly declarations; ordinary palette, graphics pattern,
 input/mouse queues and four audio records have canonical owners. Small readable

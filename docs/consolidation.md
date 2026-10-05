@@ -26,14 +26,14 @@ semantic exceptions, not a full DOS/native equivalence claim.
             independent DOS                 SDL3
 ```
 
-There are 190 canonical TUs: 127 historical modules and 63 typed storage units.
+There are now 191 canonical TUs: 127 historical modules and 64 typed storage units.
 `tools/promote.py` is their sole writer; it updates historical acceptance metadata
 and the shared inventory together. Evidence records why current source is
 accepted and is never a source substitution mechanism. Normal exact promotions
 must preserve current strict definitions and their declaration context; reviewed
 revisions retain static completeness and predecessor identity checks.
 
-The native build converts all 161 canonical C TUs and compiles 160. Physical
+The native build converts all 162 canonical C TUs and compiles 161. Physical
 DOS segment:offset heap code is an explicit platform boundary. Three native data
 units read actual symbolic ASM declarations and initializers. Current files are
 compiled directly as 78 platform services. The builder checks current source
@@ -96,6 +96,12 @@ in six historical TUs. Definitions, extents, initial values, null pointer state,
 typed views and symbolic references are current source facts. Their producer TU
 or original communal order is not inferred where only functional ownership is
 proved.
+
+The later minimum icon Handle admission adds one mutable four-byte slot, bringing
+the storage-unit object count to 400. Both builds consume its canonical definition;
+the duplicate native definition is removed. Its referents, activation and physical
+aliases remain unresolved, as recorded in the
+[current source follow-up](source-followup.md).
 
 The 193 symbolic identities comprise 121 code and 72 data aliases; 38 nonzero
 views borrow proven owner interiors. They are source identities, not deprecated
@@ -166,16 +172,18 @@ it does not synchronize a parallel simulation or ordinary game-state model.
 Only **SEMANTIC / PORT-BLOCKING** and **HISTORICAL-BINARY-ONLY** are used for
 unresolved questions. Passing native preview flows does not waive the former.
 
-The DOS frontier contains twelve imports: sample cleanup pointers, spider bitmap,
-last filename, temporary clip buffer, overlapping menu x/width arrays, menu icon
-handle, two audio cleanup vectors, mono pattern tail, window colors and window
-handles. Forty-four functional data bytes remain. Ten address/layout gates cover
+The current DOS frontier contains eleven imports: sample cleanup pointers, spider bitmap,
+last filename, temporary clip buffer, overlapping menu x/width arrays,
+two audio track-state arrays, mono pattern tail, window colors and window
+handles. Forty-four functional data bytes remain. Twelve address/layout gates cover
 assembly computed addresses, out-of-range ctype/audio selectors, graphics copies,
 viewport grids, menu overlaps, database `[-1]`/handle `+4`, window resource/index
-cross-owner accesses and critical-selector computed aliases. The precise reasons
+cross-owner accesses, critical-selector computed aliases and icon activation/
+referent lifetime. The four-byte icon Handle slot now has a minimum canonical
+owner; its former native duplicate is removed. No referent ownership follows. The precise reasons
 and scopes are in [the blocker ledger](../evidence/canonical/blockers.json).
 
-Native preview has explicit representations for those twelve symbols, including
+Native preview has explicit representations for those eleven symbols, including
 unproved static capacities/lifetimes. They do not establish canonical ownership.
 FindIndex's guard returns NULL before the original one-past ID predicate. Real
 song lookup can reach that read; original allocator padding/next-header content
@@ -208,7 +216,11 @@ questions do not gate native integration.
 
 ## Validation and runnable status
 
-| Check | Current result and scope |
+The table records the initial consolidation boundary. Current follow-up results
+are recorded in [the source follow-up](source-followup.md), including the new
+Handle view and initialized-data link guard.
+
+| Check | Initial consolidation result and scope |
 | --- | --- |
 | Historical/full validator | PASS on physically cleaned tree: 127 modules, 48 compiler probes, 90 runtime members, 38 DGROUP records and 259 tests (2 skipped) |
 | Strict canonical execution | PASS on physically cleaned tree: 11,702 paired cases, 29 source mutation controls, four signed balloon observations and two unsigned contrasts |
@@ -228,7 +240,7 @@ questions do not gate native integration.
 Current proof reports are under `evidence/canonical/validation/`; runnable
 commands and prerequisites are in [the root README](../README.md) and
 [portable README](../portable/README.md). The verified local native executable
-is `build/portable-current/simant-canonical.exe`.
+is `build/portable-owner-current/simant-canonical.exe`.
 
 Save/Load passing does not prove after-load state equality, DOS save compatibility
 or resave equivalence. Simulation covers its declared functions/observer boundary,
@@ -241,7 +253,7 @@ Outer-loop counts are never presented as simulation-step counts.
 ## Repository size and commits
 
 Baseline `a1938e61452a63581718aee6659829528c3b8635` has 10,280 tracked files and
-507,761,301 Git-blob bytes. The cleaned source/proof tree has 749 files and
+507,761,301 Git-blob bytes. The initial cleaned source/proof tree had 749 files and
 about 14 MB of Git-blob content: about 93% fewer files and 97% fewer bytes. Final
 exact counts and boundary receipts are in the cleanup record. Build output,
 original assets, compilers and preserved local research are excluded.

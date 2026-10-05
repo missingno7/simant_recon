@@ -6,7 +6,7 @@ corrigible: corrected behavior, declarations and storage belong in canonical
 source, rather than in later source overlays.
 
 `src/program.json` is the single program inventory. It lists 127 historical
-modules and 63 typed storage units. Both the DOS build and native conversion
+modules and 64 typed storage units. Both the DOS build and native conversion
 consume these whole sources. [The source architecture](docs/canonical-source.md)
 explains the admissions, views and remaining blockers.
 
@@ -23,9 +23,9 @@ explains the admissions, views and remaining blockers.
        DOS EXE              SDL3
 ```
 
-The DOS preflight compiles all 190 translation units without original executable
-fallback. Independent linking remains blocked by twelve unproved storage imports
-and ten semantic address/layout gates. Forty-four functional data bytes remain
+The DOS preflight compiles all 191 translation units without original executable
+fallback. Independent linking remains blocked by eleven unproved storage imports
+and twelve semantic address/layout gates. Forty-four functional data bytes remain
 unresolved. This is not yet a runnable standalone DOS reconstruction.
 
 The current SDL3 executable runs the converted original main and passes bounded
@@ -66,7 +66,7 @@ See [behavioral validation](docs/behavioral-proof.md) for dependencies and scope
 
 Native build outputs must be fresh. See [portable commands and prerequisites](portable/README.md)
 and the current suites under `portable/tests/`. The verified local executable for
-the current source is `build/portable-callback-current/simant-canonical.exe`.
+the current source is `build/portable-owner-current/simant-canonical.exe`.
 
 ## Reconstruction work
 

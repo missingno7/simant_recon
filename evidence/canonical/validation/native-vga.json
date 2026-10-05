@@ -18,13 +18,13 @@
     "only_expected_disposable_changes": true,
     "save_record_wire_size": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-callback-current\\report.json",
-  "build_report_sha256": "ed7cd151fbc236daacf1a7b3afcd151790c74c53fac3e2cd76a9b99ec146d6f6",
-  "verified_build_input_count": 419,
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-owner-current\\report.json",
+  "build_report_sha256": "4581b5b3bb0808490e68c5048b2bbea6ac36ea3e79b4e25b8d505d7abd10ca5d",
+  "verified_build_input_count": 420,
   "verified_native_service_count": 78,
-  "current_program_sha256": "ad252c0231ea5e2e04403fddf52406a7c911edc37878c56b029242f8c891d585",
-  "platform_manifest_sha256": "0e5443fd1e385d25d82535b10700808ff2bde96b06a0814814e75bc0889aace0",
-  "executable_sha256": "3e057d0993d2df7b634973adf8eb082dc817809fdab2cb4f5e40c99a336f9511",
+  "current_program_sha256": "83fa298ac14594d4cdd4c61481cfd08fc161a0f43bbdf37d1fe6cbb078cc20f6",
+  "platform_manifest_sha256": "94f5c69c188dda87b7e083fb0cf06235750c35b59a261bc45f38bdecc4bd733a",
+  "executable_sha256": "4527ce58a7200db59b5d65b7fc49b3aebfd4e5911353d261ff6fd684de94efc3",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -48,14 +48,14 @@
     "manifest.json": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
   },
   "command": [
-    "D:\\Prog\\simant_recon\\build\\portable-callback-current\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\portable-owner-current\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "20000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\nv4\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\nv6\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\nv4\\a",
+    "D:\\Prog\\simant_recon\\build\\nv6\\a",
     "--seed",
     "1",
     "--input-script",
@@ -69,7 +69,7 @@
   "injected_event_count": 7,
   "outer_loops": 54,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\nv4\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\nv6\\frame.bmp",
     "size": 1228938,
     "sha256": "328725910ca856c4817b5468b05e819098452f446b615d48b441ac33b7d05edf",
     "width": 640,
@@ -89,7 +89,7 @@
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
-      "detail": "Twelve unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof."
+      "detail": "Eleven unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof."
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
@@ -109,6 +109,11 @@
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "Native scalar expression lowering",
       "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:208F",
+      "detail": "Canonical source now owns the mutable four-byte icon Handle slot. No game master-cell/payload producer, extent, lifetime, activation or computed/menu alias closure is admitted; the native conversion only widens its pointer representation."
     }
   ]
 }
