@@ -274,16 +274,30 @@ def main():
     stable_before_link=current_inputs()==input_pins
     required_passed=not errors and all(r['compile']['passed'] for r in compile_rows) and stable_before_link
     if required_passed:
-        linked=OUT/'canonical_core.o';command=[CC,'-r',*objects,'-o',str(linked)]
-        run=subprocess.run(command,capture_output=True,text=True);(OUT/'core-link.txt').write_text(run.stdout+run.stderr)
-        link={'passed':run.returncode==0,'command':command,'exit_code':run.returncode}
+        linked=OUT/'canonical_core.o'
+        # Keep collect2's Windows command below the process argument limit.
+        # GCC expands its own @files before spawning collect2; pass the remaining
+        # objects directly to the linker in original order instead.
+        response=OUT/'core-objects.rsp'
+        response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects[1:])+'\n',encoding='utf-8')
+        command=[CC,'-r',objects[0],'-Wl,@core-objects.rsp','-o',str(linked)]
+        run=subprocess.run(command,cwd=OUT,capture_output=True,text=True);(OUT/'core-link.txt').write_text(run.stdout+run.stderr)
+        link={'passed':run.returncode==0,'command':command,'exit_code':run.returncode,
+              'working_directory':str(OUT),'object_inputs':objects,
+              'response_file':str(response),'response_file_sha256':sha(response)}
         if link['passed']:
             application=PROJECT/'portable/whole_program/application.c'
+            # Link original objects directly so DWARF locations survive. A
+            # relocatable aggregate can invalidate the debugger's argument views.
+            app_response=OUT/'application-objects.rsp'
+            app_response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects)+'\n',encoding='utf-8')
             application_command=[CC,'-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
-                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),*objects,str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
-            app_run=subprocess.run(application_command,capture_output=True,text=True)
+                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
+            app_run=subprocess.run(application_command,cwd=OUT,capture_output=True,text=True)
             (OUT/'application-link.txt').write_text(app_run.stdout+app_run.stderr)
             app_link={'passed':app_run.returncode==0,'command':application_command,'exit_code':app_run.returncode,
+                      'working_directory':str(OUT),'object_inputs':objects,
+                      'response_file':str(app_response),'response_file_sha256':sha(app_response),
                       'undefined':sorted(set(re.findall(r"undefined reference to [`']([^'`]+)['`]",app_run.stderr)))}
             if app_link['passed']:
                 shutil.copyfile(SDK/'bin/SDL3.dll',OUT/'SDL3.dll')

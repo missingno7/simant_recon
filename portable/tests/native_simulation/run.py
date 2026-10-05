@@ -129,9 +129,13 @@ def build_native(build,out,mutation=None):
     for name,expected in report.get('input_pins',{}).items():
         path=input_path(name)
         if sha(path)!=expected:raise ValueError('current native build input changed: '+name)
-    objects=report['core_link']['command'][2:-2]
+    objects=report['core_link']['object_inputs']
     if not objects or any(Path(p).suffix!='.o' for p in objects):
         raise ValueError('native report core object list changed')
+    response=Path(report['core_link']['response_file'])
+    expected_response='\n'.join('"'+Path(p).as_posix()+'"' for p in objects[1:])+'\n'
+    if sha(response)!=report['core_link']['response_file_sha256'] or response.read_text(encoding='utf-8')!=expected_response:
+        raise ValueError('native core linker response differs from its object inventory')
     native_rows=[r for r in report['canonical_TUs'] if r.get('compile',{}).get('passed')]
     if not any(r['source']=='src/S25/m3BA4.c' for r in native_rows):
         raise ValueError('whole canonical S25 target TU missing from native build')
@@ -167,11 +171,14 @@ def build_native(build,out,mutation=None):
         control={'target':mutation_target,'change':[old,new],'current_whole_source_sha256':sha(path),
             'mutant_whole_source_sha256':sha(mutant_source),'compile_command':compile_command,
             'mutant_object_sha256':sha(mutant_object)}
+    response=out/'fixture-objects.rsp'
+    response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects)+'\n',encoding='utf-8')
+    pins[str(response)]=sha(response)
     command=[report['core_link']['command'][0],'-shared','-Wl,--export-all-symbols',
         *['-Wl,--wrap='+n for n in BOUNDARIES],str(HERE/'native_callbacks.c'),
-        *objects,str(ROOT/'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/lib/libSDL3.dll.a'),
+        '-Wl,@fixture-objects.rsp',str(ROOT/'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/lib/libSDL3.dll.a'),
         '-o',str(out/'native.dll')]
-    run=subprocess.run(command,capture_output=True,text=True)
+    run=subprocess.run(command,cwd=out,capture_output=True,text=True)
     (out/'link.txt').write_text(run.stdout+run.stderr)
     if run.returncode:raise RuntimeError('native fixture link failed: '+run.stderr[:2000])
     dll_dir=os.add_dll_directory(str(ROOT/'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/bin'))

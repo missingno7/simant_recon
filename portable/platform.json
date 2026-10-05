@@ -181,6 +181,11 @@
   "preview_limitations": [
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:171C native heap boundary",
+      "detail": "The discarded size/resize discrepancy is repaired: original and current native public APIs report size zero after discard and restore a 100-byte firm allocation into the same handle while leaving another handle discarded. See evidence/canonical/allocator-fixtures/. Full native/DOS heap-history equivalence remains unproved: discarded name/age/attributes retain per-slot metadata instead of the shared DOS template; paragraph copying, flags/counters, 16-bit limits, physical/EMS layout and failure policy remain outside this bounded repair. Canonical algorithms are unchanged."
+    },
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:1986",
       "detail": "FindIndex native one-past guard returns null before canonical index[count] predicate. Real song lookup10010 can miss past HCEGANT271 rows before SOUND succeeds. Original SOUND allocation followed by original Ralloc320 makes a neighboring Block header match synthetic ID0/kind22 and return as an index row; allocation304/free controls and known mono IDs10000/10010 return null. Natural game false-hit reachability and native/DOS heap-history equivalence remain unproved. Native preview semantic exception; bounded observable difference confirmed in evidence/canonical/native-findindex-boundary/."
     },

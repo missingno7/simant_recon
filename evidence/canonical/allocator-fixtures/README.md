@@ -2,8 +2,8 @@
 
 The parent accepts the fixture repair and its finite corroboration. Canonical
 allocator definitions, strict static receipts, inventory, manifest and published
-checkpoints remain unchanged. The replay's original pending-parent status is
-preserved in `receipt.json`; this review records the subsequent acceptance.
+checkpoints remain unchanged. The published replay reports FIXTURE_CONTRACT_VERIFIED. The earlier worker
+receipt and parent acceptance remain recoverable through Git.
 
 ## Three corrected premises
 
@@ -70,3 +70,44 @@ witness proves a discrepancy, not equivalence. Any provider repair must separate
 validate size, identity, allocation/free accounting and isolation from other
 handles against the source contract. Whole heap-history equivalence and ordinary
 gameplay reachability remain open.
+
+## Accepted native boundary repair
+
+The current whole provider clears size and charged bytes in both explicit discard
+and budget-reclaim paths. Resize can allocate fresh bytes into a discarded slot,
+skips its old payload copy, and preserves the master slot. The shared DOS source
+is unchanged; this repairs the existing native physical-memory replacement.
+
+Run the current provider and source mutation controls with:
+
+```powershell
+python evidence/canonical/allocator-fixtures/native_discard.py --conversion build/portable-sdl3 --out build/native-discard-current
+```
+
+`native-repair.json` records the parent independent replay using the current
+complete build's flags and all current input pins: 37 positive controls pass.
+Both full-TU negatives are distinguished: retaining old sizes fails explicit and
+budget-discard checks; rejecting discarded resize fails stable-handle restoration.
+Other controls verify index/master identity, no spare slot requirement, isolation
+of another discarded handle, charging 112 bytes for the 100-byte host allocation,
+failed host-budget restoration without changing the target, retry after freeing
+a hard allocation, and preservation of existing live lock/resize behavior.
+
+Only the zero-size and successful discarded restoration observations are DOS
+semantic corroboration. Host budget/failure checks are native regressions, and the
+live resize controls preserve existing native behavior rather than establish DOS
+equality. Original live resize uses paragraph counts: same-paragraph changes can
+retain the old requested size, and small shrink can retain the old type. That
+broader discrepancy is not repaired here.
+
+Discarded name, age and attributes still use per-slot native fields instead of
+the shared DOS template; the original can also mutate shared age. Paragraph
+copying, header-inclusive DOS accounting, raw flags and 16-bit arithmetic,
+reclaim ordering/EMS layout, and Punt versus host-return failures remain outside
+this bounded repair. These remain SEMANTIC / PORT-BLOCKING. No complete native
+allocator, standalone DOS link or functional-source milestone is claimed.
+
+The native manager token-identity control is a host API regression. Original
+f_171C_18A6 rejects the DOS index-handle form; public native wrappers currently
+accept that form. This ABI difference remains outside the repaired real-master
+handle domain and is SEMANTIC / PORT-BLOCKING.

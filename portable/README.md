@@ -48,6 +48,9 @@ Eleven storage imports still lack complete DOS ownership proof; the canonical
 icon Handle slot also has unresolved activation and referent lifetime/extent.
 FindIndex's one-past guard is a semantic exception. Window omitted-slot zeroing
 has a reviewed shipped-resource/observer domain but differs in raw state.
+The native heap provider now reports zero discarded sizes and restores an
+allocation through the same handle, corroborated against bounded original
+execution. Shared metadata and wider heap histories remain unproved. See the [allocator proof](../evidence/canonical/allocator-fixtures/README.md).
 Unsupported font extents, malformed window bindings and zoom/allocation domains
 remain explicit in `platform.json`. Passing build and bounded tests do not close
 those issues or establish complete DOS/native equality.

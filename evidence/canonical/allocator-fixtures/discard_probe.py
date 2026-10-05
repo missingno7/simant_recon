@@ -89,5 +89,3 @@ def original_discard_resize():
         'other_handle_type_after':other_type,'other_handle_discard_status_after':other_discarded,
         'template_type_at_actual_0EEA_entry':entry_types[0],'template_type_restored_after':5,
         'public_live_handle_count':vm.word(m.dga(0x2F44))}
-
-

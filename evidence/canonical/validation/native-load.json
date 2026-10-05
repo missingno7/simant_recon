@@ -23,13 +23,13 @@
     "debugger_unchanged": true,
     "only_expected_disposable_changes": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-asm-audit-current\\report.json",
-  "build_report_sha256": "6ab2147f826b45b50097c61acd767df399bf520256943b1aeaaffe67efea03de",
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\report.json",
+  "build_report_sha256": "dbe97461efe285562b96c88099f7a94790e5ce2672a03caa34a3d735dafd8ae3",
   "verified_build_input_count": 420,
   "verified_native_service_count": 78,
   "current_program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
-  "platform_manifest_sha256": "687c01585b7fba2714c2e5300b51e12baea46c424a8d9e14f6d81032bedc1518",
-  "executable_sha256": "5fa48d07d32b42335154b2c88ffdb3127833732c3a5424901e0db85e488ccc42",
+  "platform_manifest_sha256": "b027516ae3b74edea7d005827ed889f06b7362d54b7537160e3fafa91af5d0eb",
+  "executable_sha256": "3e5adf9bb5d5123ca08ac7676fea739e04e0ad9163a6680a139bebec4cb36553",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -67,16 +67,16 @@
     "--batch",
     "-q",
     "-x",
-    "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\gdb.txt",
+    "D:\\Prog\\simant_recon\\build\\lda\\gdb.txt",
     "--args",
-    "D:\\Prog\\simant_recon\\build\\portable-asm-audit-current\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "35000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\lda\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a",
+    "D:\\Prog\\simant_recon\\build\\lda\\a",
     "--seed",
     "1",
     "--input-script",
@@ -87,18 +87,18 @@
   "timed_out": false,
   "fixture_event_count": 45,
   "injected_event_count": 45,
-  "outer_loops": 81668,
+  "outer_loops": 61193,
   "source_returns": [
     {
       "call": 1,
       "event": "o09_35F5_0188-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 27750,
+      "trace_elapsed_ms": 27687,
       "use_last": 1
     },
     {
@@ -106,9 +106,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 1,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
       "title": "Save Game",
-      "trace_elapsed_ms": 24234,
+      "trace_elapsed_ms": 24187,
       "verb": "SAVE"
     },
     {
@@ -116,9 +116,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 0,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
       "title": "Load Game",
-      "trace_elapsed_ms": 34344,
+      "trace_elapsed_ms": 34280,
       "verb": "LOAD"
     },
     {
@@ -126,20 +126,20 @@
       "event": "LoadGame-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 34859
+      "trace_elapsed_ms": 34812
     }
   ],
   "load_read_calls": 307,
   "load_requested_bytes": 48386,
   "load_returned_bytes": 48386,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\lda\\frame.bmp",
     "size": 1228938,
-    "sha256": "dea5057cdbc623504e98ef28f31f7c3d12f489600ee341707b04d5b21660ce1d",
+    "sha256": "5f3b0080fb07c24c43d25ec3cf0b6c3de316c87911a77346187b845b807ad659",
     "width": 640,
     "height": 480,
     "bits_per_pixel": 32,
@@ -147,7 +147,7 @@
     "valid": true
   },
   "saved_file": {
-    "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
+    "path": "D:\\Prog\\simant_recon\\build\\lda\\a\\a.ant",
     "size": 48386,
     "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
   },
@@ -157,9 +157,14 @@
       "after": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
     }
   },
-  "events_sha256": "618ac4238c688e56700b104adacf97d40fa90dd64333102b3caa8a22897ff8ae",
+  "events_sha256": "45db72d7465058ddde57b14f2d58d74fd574dd77172b4f411b48e7c9de400d70",
   "scope": "Current original main and ordinary SDL UI create then load a disposable SaveRec file. Read-only debugger observations establish successful source returns and complete reads. No after-load state equivalence, DOS save compatibility, resave, fixed terrain-seed or whole-game correctness claim.",
   "build_preview_limitations": [
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:171C native heap boundary",
+      "detail": "The discarded size/resize discrepancy is repaired: original and current native public APIs report size zero after discard and restore a 100-byte firm allocation into the same handle while leaving another handle discarded. See evidence/canonical/allocator-fixtures/. Full native/DOS heap-history equivalence remains unproved: discarded name/age/attributes retain per-slot metadata instead of the shared DOS template; paragraph copying, flags/counters, 16-bit limits, physical/EMS layout and failure policy remain outside this bounded repair. Canonical algorithms are unchanged."
+    },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:1986",

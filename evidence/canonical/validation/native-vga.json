@@ -18,13 +18,13 @@
     "only_expected_disposable_changes": true,
     "save_record_wire_size": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-asm-audit-current\\report.json",
-  "build_report_sha256": "6ab2147f826b45b50097c61acd767df399bf520256943b1aeaaffe67efea03de",
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\report.json",
+  "build_report_sha256": "dbe97461efe285562b96c88099f7a94790e5ce2672a03caa34a3d735dafd8ae3",
   "verified_build_input_count": 420,
   "verified_native_service_count": 78,
   "current_program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
-  "platform_manifest_sha256": "687c01585b7fba2714c2e5300b51e12baea46c424a8d9e14f6d81032bedc1518",
-  "executable_sha256": "5fa48d07d32b42335154b2c88ffdb3127833732c3a5424901e0db85e488ccc42",
+  "platform_manifest_sha256": "b027516ae3b74edea7d005827ed889f06b7362d54b7537160e3fafa91af5d0eb",
+  "executable_sha256": "3e5adf9bb5d5123ca08ac7676fea739e04e0ad9163a6680a139bebec4cb36553",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -48,14 +48,14 @@
     "manifest.json": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
   },
   "command": [
-    "D:\\Prog\\simant_recon\\build\\portable-asm-audit-current\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\portable-discard-accepted\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "20000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\runtime-asm-vga-final\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\vda\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\runtime-asm-vga-final\\a",
+    "D:\\Prog\\simant_recon\\build\\vda\\a",
     "--seed",
     "1",
     "--input-script",
@@ -69,7 +69,7 @@
   "injected_event_count": 7,
   "outer_loops": 54,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-vga-final\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\vda\\frame.bmp",
     "size": 1228938,
     "sha256": "328725910ca856c4817b5468b05e819098452f446b615d48b441ac33b7d05edf",
     "width": 640,
@@ -82,6 +82,11 @@
   "changes": {},
   "scope": "Bounded current original main, ordinary SDL setup/menu input, VGA frame and SaveRec wire output. Event injection alone is not menu behavior proof; save creation corroborates the Save path. No DOS equality, fixed terrain-seed, simulation completeness or Load roundtrip claim.",
   "build_preview_limitations": [
+    {
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:171C native heap boundary",
+      "detail": "The discarded size/resize discrepancy is repaired: original and current native public APIs report size zero after discard and restore a 100-byte firm allocation into the same handle while leaving another handle discarded. See evidence/canonical/allocator-fixtures/. Full native/DOS heap-history equivalence remains unproved: discarded name/age/attributes retain per-slot metadata instead of the shared DOS template; paragraph copying, flags/counters, 16-bit limits, physical/EMS layout and failure policy remain outside this bounded repair. Canonical algorithms are unchanged."
+    },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:1986",

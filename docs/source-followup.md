@@ -106,6 +106,33 @@ result and confirm the native bounds guard's bounded semantic difference.
 Ordinary game reachability remains unproved; no source algorithm is changed.
 See [the boundary evidence](../evidence/canonical/native-findindex-boundary/README.md).
 
+## Allocator fixture and native boundary repair
+
+Three original heap-fixture premises are corrected: offset-zero master handles,
+the unfinished raw allocation boundary, and the copied zero/type5 discarded
+header template. Shared UI/viewport callers consume the repaired single fixture.
+All 29 semantic domains still pass 12,130 paired cases and their mutations; no
+canonical algorithm or static receipt changed. See [the allocator review](../evidence/canonical/allocator-fixtures/README.md).
+
+Original allocation/reclaim/resize execution exposes zero public discarded sizes
+and successful fresh storage through the existing master handle. The native
+physical-memory provider now follows those bounded observations. Thirty-seven
+native controls pass; retaining sizes and refusing restoration are distinguished
+negative controls. Shared discarded metadata, paragraph-copy/size/type behavior,
+flags, 16-bit arithmetic, physical/EMS history and failure policy remain unproved.
+
+The missing 18-byte descriptor at DGROUP:60B0 has a grounded generic hot-box shape
+and symbolic callback, but both trailing S10 storage and a separate contribution
+fit current evidence. No defining owner or initializer provenance is admitted;
+all 18 bytes remain debt. See [the parent-reviewed investigation](../evidence/canonical/hotbox-owner/review.md).
+
+The native linker now reads ordered object inventories through linker-owned
+response files, avoiding the Windows process argument limit. The executable
+links original objects directly; a trial relocatable aggregate corrupted the
+GDB argument views and is not used for the final application. The corrected
+Load trace verifies real source arguments and all 307 reads again. Simulation
+validation consumes the explicit object inventory rather than parsing a command.
+
 ## Remaining HISTORICAL-BINARY-ONLY work
 
 Reviewed declaration-context compiler residue and private historical data/link
@@ -118,7 +145,7 @@ does not block the SDL3 preview.
 | Check | Result |
 |---|---|
 | Historical validator | Pass; 49 compiler probes, exact extents/fixups/runtime proofs |
-| Repository tests | 271 tests, two intentional skips; all others pass |
+| Repository tests | 279 tests, two intentional skips; all others pass |
 | Owned-code placement controls | All 24 symbolic references pass in twelve expected outcomes across RTLink 4.00/6.10 |
 | DOS preflight | 191 TUs, 64 storage contracts, twenty-four owned-code and fourteen data-frame references verified; link correctly refused |
 | Native build | 161 canonical C TUs, 78 services, three ASM-data units; both links pass |
@@ -126,21 +153,23 @@ does not block the SDL3 preview.
 | LZSS frames | Four positives and four distinguished negatives across both RTLinks;14mandatory bindings |
 | Graphics failure prefix | Real reset and four original-instruction controls; no eventual termination claim |
 | Native word controls | 113 DOS pairs; 21 distinguished negatives; generic O0/O2 controls pass |
+| Behavioral oracle | All 29 domains, 12,130 paired cases and source mutation controls pass |
+| Discarded native handles | 37 controls and two full-provider source negatives pass; wider heap contract remains open |
 | RNG | 3,096 trace rows, zero mismatches, negative domain control passes |
 | Simulation | 194 pairs, zero mismatches; three mutation controls pass |
 | Database | 840 records, 205 LZSS records, 1,483 queries; existing guard exception explicit |
 | VGA / Save / Load | Pass; 48,386-byte save and 307 complete reads; bounded UI/file flow |
 
 The current local SDL3 executable is
-`build/portable-asm-audit-current/simant-canonical.exe`, with 420 current input
+`build/portable-discard-accepted/simant-canonical.exe`, with 420 current input
 pins. Current validation receipts live in `evidence/canonical/validation/`.
-Historical validation passed after all source/tool changes. The later metadata-only
-ASM gate retirement preserved those sources and compiler contexts; the final DOS
-and SDL3 receipts pin the resulting inventory.
+Historical validation passes the current inventory and repaired DOS fixtures.
+The current SDL3 receipts additionally pin the native provider and response-file
+build mechanics; standalone DOS imports/data/gates remain unresolved.
 The full static semantic reviews still cover all 29 canonical behavioral
 definitions; these follow-up changes do not modify them.
 
-The active tree has 808 tracked files, compared with 10,280 before consolidation.
+The active tree has 821 tracked files, compared with 10,280 before consolidation.
 The initial cleanup count and byte totals remain historical receipts; the small
 increase since then consists of current ownership, conversion and validation proof.
 

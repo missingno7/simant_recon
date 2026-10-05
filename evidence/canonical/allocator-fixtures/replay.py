@@ -171,7 +171,7 @@ def main():
     contexts()
     receipt = {
         'schema':'simant-allocator-fixture-premise-replay-v1',
-        'status':'FIXTURE_REPAIR_VERIFIED_PENDING_PARENT_ACCEPTANCE',
+        'status':'FIXTURE_CONTRACT_VERIFIED',
         'suite':m.SUITE,'inputs':inputs,
         'static_premise':[
             {'entry':'171C:0830','fact':'Original startup writes zero to s_2F46.offset; segment is separately calculated.'},

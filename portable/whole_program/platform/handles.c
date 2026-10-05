@@ -198,7 +198,7 @@ static size_t discard_oldest_soft(SimHandleManager *m, const SimHandleSlot *excl
     m->used_bytes -= oldest->charged;
     {
  size_t reclaimed = oldest->charged;
- oldest->charged = 0;
+ oldest->size = oldest->charged = 0;
  oldest->type = SIM_HANDLE_DISCARDED;
  return reclaimed;
  }
@@ -311,19 +311,20 @@ SimHandleStatus sim_handles_free(SimHandleManager *m, SimHandle h){
 SimHandleStatus sim_handles_resize(SimHandleManager *m, SimHandle h, int32_t size, int16_t flags){
     SimHandleSlot *s;
     size_t new_size, new_charge, old_charge, copy_n;
-    int base_type;
+    int base_type, was_discarded;
     char *new_data;
     if (!m || size <= 0) return set_status(m, SIM_HANDLE_INVALID_ARGUMENT);
     if (require_slot(m, h, &s) != SIM_HANDLE_OK) return m->last_status;
     if (s->lock_count) return set_status(m, SIM_HANDLE_LOCKED);
-    if (s->type == SIM_HANDLE_DISCARDED || !s->data) return set_status(m, SIM_HANDLE_DISCARDED_DATA);
+    was_discarded = s->type == SIM_HANDLE_DISCARDED;
+    if (!was_discarded && !s->data) return set_status(m, SIM_HANDLE_DISCARDED_DATA);
     base_type = (flags & ~8) & ~0x70;
     if (!valid_type((uint8_t)base_type)) return set_status(m, SIM_HANDLE_BAD_TYPE);
     new_size = (size_t)size;
  new_charge = charged_size(new_size);
  old_charge = s->charged;
     if (new_charge == SIZE_MAX) return set_status(m, SIM_HANDLE_NO_MEMORY);
-    if (new_size == s->size) {
+    if (!was_discarded && new_size == s->size) {
         s->attributes = (uint8_t)(flags & 0x70);
  s->no_ems_hint = (uint8_t)((flags & 8) != 0);
         s->age = ++m->age;
@@ -336,7 +337,9 @@ SimHandleStatus sim_handles_resize(SimHandleManager *m, SimHandle h, int32_t siz
         while (!new_data && discard_oldest_soft(m, s)) new_data = (char *)malloc(new_size);
         if (!new_data) return set_status(m, SIM_HANDLE_NO_MEMORY);
     }
-    copy_n = s->size < new_size ? s->size : new_size;
+    /* The original type-5 resize allocates into the same master slot and
+     * skips copying the discarded payload (m171C:18A6). */
+    copy_n = was_discarded ? 0 : (s->size < new_size ? s->size : new_size);
     if (copy_n) memcpy(new_data, s->data, copy_n);
     free(s->data);
  s->data = new_data;
@@ -359,7 +362,7 @@ SimHandleStatus sim_handles_discard(SimHandleManager *m, SimHandle h){
     free(s->data);
  s->data = NULL;
     if (s->charged <= m->used_bytes) m->used_bytes -= s->charged;
-    s->charged = 0;
+    s->size = s->charged = 0;
  s->type = SIM_HANDLE_DISCARDED;
     return set_status(m, SIM_HANDLE_OK);
 }

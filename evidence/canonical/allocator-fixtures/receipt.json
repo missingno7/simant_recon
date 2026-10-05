@@ -1,6 +1,6 @@
 {
   "schema": "simant-allocator-fixture-premise-replay-v1",
-  "status": "FIXTURE_REPAIR_VERIFIED_PENDING_PARENT_ACCEPTANCE",
+  "status": "FIXTURE_CONTRACT_VERIFIED",
   "suite": "ralloc_memory_v3_startup_handles",
   "inputs": [
     {
@@ -69,11 +69,11 @@
     },
     {
       "path": "evidence/canonical/allocator-fixtures/replay.py",
-      "sha256": "a3db372126b7aa7c916383a697ef2868862374f1a6c8e768e0e767ef4b7048b9"
+      "sha256": "8e9dbac12d0110f9ab77701b3d4e0cf87fa2e7954ae251bd5a35d970e3abdbef"
     },
     {
       "path": "evidence/canonical/allocator-fixtures/discard_probe.py",
-      "sha256": "8ddfd9635f398d7702e5d9f0506846852d87ddbf634323f436f0949d1475d596"
+      "sha256": "e46c58254b3924a356432f739cbf1be313d54a11355cc65c1374cdf79095219e"
     }
   ],
   "static_premise": [
@@ -368,21 +368,21 @@
       "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
       "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
       "semantic_reviews": {
+        "f_171C_09CC": {
+          "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+          "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+        },
         "f_171C_0CF4": {
           "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
           "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-        },
-        "f_171C_0FBC": {
-          "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-          "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
         },
         "f_171C_0ADC": {
           "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
           "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
         },
-        "f_171C_09CC": {
-          "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-          "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+        "f_171C_0FBC": {
+          "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+          "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
         }
       },
       "sequence_targets": [
@@ -624,21 +624,21 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0CF4": {
             "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
             "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           },
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
           },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -654,7 +654,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-fixtures-proof-final/differential/f_171C_09CC-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_09CC-cases.jsonl.gz",
         "sha256": "28bbd305d042e1bd38716c1e505c74c76bc24c3ce3aa609dcf7f83191f5ecb51",
         "row_count": 25,
         "lane_counts": {
@@ -751,21 +751,21 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0CF4": {
               "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
               "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             },
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
             },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {
@@ -811,21 +811,21 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0CF4": {
             "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
             "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           },
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
           },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -841,7 +841,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-fixtures-proof-final/differential/f_171C_0ADC-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_0ADC-cases.jsonl.gz",
         "sha256": "5f8504fe8d2cb54155b517b0562c156682028e6adff320a6dc34cacfb85c5f68",
         "row_count": 18,
         "lane_counts": {
@@ -938,21 +938,21 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0CF4": {
               "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
               "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             },
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
             },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {
@@ -998,21 +998,21 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0CF4": {
             "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
             "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           },
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
           },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -1028,7 +1028,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-fixtures-proof-final/differential/f_171C_0CF4-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_0CF4-cases.jsonl.gz",
         "sha256": "07064f8bb6d7a09ac5e02c4cad38869f9d2ffc3e790bddfaca06d12aa7abb756",
         "row_count": 34,
         "lane_counts": {
@@ -1124,21 +1124,21 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0CF4": {
               "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
               "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             },
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
             },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {
@@ -1184,21 +1184,21 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_09CC": {
+            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          },
           "f_171C_0CF4": {
             "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
             "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           },
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
           },
-          "f_171C_09CC": {
-            "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-            "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -1214,7 +1214,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-fixtures-proof-final/differential/f_171C_0FBC-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_0FBC-cases.jsonl.gz",
         "sha256": "8bcd60abbbe8096739da2c9d62e1b8fabd610bfaf2901f17768ed56526642a91",
         "row_count": 25,
         "lane_counts": {
@@ -1310,21 +1310,21 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_09CC": {
+              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            },
             "f_171C_0CF4": {
               "definition_sha256": "34484678ddafe6914d415db0be61c978ebb5388499b6a91460816840dc087142",
               "receipt_sha256": "d6e7564cb4b68fe44cbc00063162a27e95fca27c1f888477356b80b392d1e49a"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             },
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
             },
-            "f_171C_09CC": {
-              "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
-              "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {

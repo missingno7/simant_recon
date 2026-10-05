@@ -66,7 +66,7 @@ See [behavioral validation](docs/behavioral-proof.md) for dependencies and scope
 
 Native build outputs must be fresh. See [portable commands and prerequisites](portable/README.md)
 and the current suites under `portable/tests/`. The verified local executable for
-the current source is `build/portable-asm-audit-current/simant-canonical.exe`.
+the current source is `build/portable-discard-accepted/simant-canonical.exe`.
 
 ## Reconstruction work
 
