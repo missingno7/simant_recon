@@ -1,0 +1,367 @@
+{
+  "schema": "mono-owner-retained-resource-facts-v1",
+  "status": "STATIC_OBSERVATIONS_NO_ALLOCATION_ADMISSION",
+  "scope": "Compact facts copied from the completed read-only resource census; no runner, live re-census, allocation or gameplay reachability claim",
+  "observed_on": "2026-10-05",
+  "observation_receipt_sha256": "c289f238fe87ed99c8f0217259afc105979b6391df8a244b71eb932cfa999322",
+  "decoder_provenance": [
+    {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\native_database\\index_fixture_logic.py",
+      "size": 2497,
+      "sha256": "41111c2f1acebac254711fe5f8d4c7d62ad03041c8334f6e2ea1216624a480e8"
+    },
+    {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\native_database\\resource_fixture_logic.py",
+      "size": 3879,
+      "sha256": "b4b3bee8b7a3fddb081951877e530b090493e940075a8c79762bb248980780d6"
+    }
+  ],
+  "win16_evidence_inputs": [
+    {
+      "path": "D:\\Prog\\simantw_recon\\assets\\SIMANTW.EXE",
+      "size": 516096,
+      "sha256": "538fed3f0fd60a6528a5e5b20990361ac4d274c58266a81e71c24f751612589d"
+    },
+    {
+      "path": "D:\\Prog\\simantw_recon\\assets\\SIMANTW.SYM",
+      "size": 37060,
+      "sha256": "9d27f4d0872e483ddbf460bda8a2e34b7180f153c6d7c1a74d692720476c9a7f"
+    },
+    {
+      "path": "D:\\Prog\\simantw_recon\\evidence\\symbols\\inventory.json",
+      "size": 1050350,
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759"
+    },
+    {
+      "path": "D:\\Prog\\simantw_recon\\evidence\\disassembly\\cards.jsonl",
+      "size": 18325030,
+      "sha256": "fc2f742d2c0f9a2d6e4eddc814f56e0ddc53ab51af25103237cdd146bfa697d8"
+    },
+    {
+      "path": "D:\\Prog\\simantw_recon\\src\\recovered\\data_yard_patterns-16844f3436.c",
+      "size": 140,
+      "sha256": "16844f3436a715f8105c79c99947537bd93602242a0c7de211d60178d1a4f888"
+    },
+    {
+      "path": "D:\\Prog\\simantw_recon\\evidence\\recovery\\promotions\\data_yard_patterns-16844f3436.json",
+      "size": 8697,
+      "sha256": "1e164362d8c624ee3e8457e84c0a47780f0330e979592f7c84dffbcafbb02015"
+    }
+  ],
+  "dos_databases": [
+    {
+      "index": {
+        "path": "D:\\Prog\\simant_recon\\assets\\HCEGANT.NDX",
+        "size": 2444,
+        "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+      },
+      "data": {
+        "path": "D:\\Prog\\simant_recon\\assets\\HCEGANT.DAT",
+        "size": 629438,
+        "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+      },
+      "record_count": 271,
+      "kind22_count": 0
+    },
+    {
+      "index": {
+        "path": "D:\\Prog\\simant_recon\\assets\\SHARED.NDX",
+        "size": 3868,
+        "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477"
+      },
+      "data": {
+        "path": "D:\\Prog\\simant_recon\\assets\\SHARED.DAT",
+        "size": 96117,
+        "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+      },
+      "record_count": 449,
+      "kind22_count": 0
+    },
+    {
+      "index": {
+        "path": "D:\\Prog\\simant_recon\\assets\\SOUND.NDX",
+        "size": 1236,
+        "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+      },
+      "data": {
+        "path": "D:\\Prog\\simant_recon\\assets\\SOUND.DAT",
+        "size": 111470,
+        "sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629"
+      },
+      "record_count": 120,
+      "kind22_count": 0
+    }
+  ],
+  "win16_MWINNT": {
+    "index": {
+      "path": "D:\\Prog\\simantw_recon\\assets\\MWINNT.NDX",
+      "size": 3236,
+      "sha256": "7d6294f9ceaf54fa7b4f983c3e75e1a8ca679a5b5d523ac0edf492bbc1254e7b"
+    },
+    "data": {
+      "path": "D:\\Prog\\simantw_recon\\assets\\MWINNT.DAT",
+      "size": 211484,
+      "sha256": "e01ff152f2287a9c28edaad5e18b988b16ee95baf14972066299f7595833bffb"
+    },
+    "kind22_records": [
+      {
+        "id": 10000,
+        "kind": 22,
+        "flags": 1,
+        "offset": 211052,
+        "stored_size": 21,
+        "payload_size": 26,
+        "payload_header": "0003",
+        "payload_sha256": "517d7083fc36b1b35addaf01f82674a5649193b0bc4ebc5ea040544a0d43c6b2"
+      },
+      {
+        "id": 10010,
+        "kind": 22,
+        "flags": 1,
+        "offset": 211083,
+        "stored_size": 377,
+        "payload_size": 586,
+        "payload_header": "0049",
+        "payload_sha256": "92005188f068fd2c7c6e01dbd0540ce664bddf922fa50611f4623464d841a830"
+      }
+    ],
+    "window20": {
+      "id": 20,
+      "kind": 0,
+      "flags": 8,
+      "offset": 8918,
+      "stored_size": 133,
+      "payload_size": 133,
+      "payload_header": "1800",
+      "payload_sha256": "f85e121244fe5409920138b9bb381657c1c799692abc84b348587859d46c9ded",
+      "window": {
+        "count": 2,
+        "flags": 6208,
+        "grid": [
+          0,
+          0
+        ],
+        "first_two_objects": [
+          {
+            "index": 0,
+            "offset": 52,
+            "size": 41,
+            "rect": [
+              24,
+              20,
+              284,
+              152
+            ],
+            "xywh": [
+              4,
+              0,
+              260,
+              132
+            ],
+            "refs": [
+              0,
+              1,
+              5120,
+              5120
+            ],
+            "relations": [
+              5,
+              5,
+              1,
+              2
+            ],
+            "type": 15
+          },
+          {
+            "index": 1,
+            "offset": 93,
+            "size": 40,
+            "rect": [
+              26,
+              22,
+              282,
+              150
+            ],
+            "xywh": [
+              2,
+              2,
+              256,
+              128
+            ],
+            "refs": [
+              5120,
+              5120,
+              5121,
+              5121
+            ],
+            "relations": [
+              1,
+              2,
+              1,
+              2
+            ],
+            "type": 1
+          }
+        ]
+      }
+    }
+  },
+  "dos_HCEGANT_window20_contrast": {
+    "id": 20,
+    "kind": 0,
+    "flags": 8,
+    "offset": 8799,
+    "stored_size": 133,
+    "payload_size": 133,
+    "payload_header": "4000",
+    "payload_sha256": "7183c618680d62ba5137d193176c6144fceaaad455531d9a6e2f6927dfd3d654",
+    "window": {
+      "count": 2,
+      "flags": 6209,
+      "grid": [
+        0,
+        0
+      ],
+      "first_two_objects": [
+        {
+          "index": 0,
+          "offset": 52,
+          "size": 41,
+          "rect": [
+            64,
+            44,
+            196,
+            112
+          ],
+          "xywh": [
+            4,
+            0,
+            132,
+            68
+          ],
+          "refs": [
+            5,
+            5,
+            5120,
+            5120
+          ],
+          "relations": [
+            3,
+            2,
+            1,
+            2
+          ],
+          "type": 15
+        },
+        {
+          "index": 1,
+          "offset": 93,
+          "size": 40,
+          "rect": [
+            66,
+            46,
+            194,
+            110
+          ],
+          "xywh": [
+            2,
+            2,
+            128,
+            64
+          ],
+          "refs": [
+            5120,
+            5120,
+            5121,
+            5121
+          ],
+          "relations": [
+            1,
+            2,
+            1,
+            2
+          ],
+          "type": 1
+        }
+      ]
+    }
+  },
+  "win16_MAPSYM_role_anchors": [
+    {
+      "name": "_YardPats",
+      "offset": 9864,
+      "next_public_upper_bound": 9888
+    },
+    {
+      "name": "_DMPat",
+      "offset": 9888,
+      "next_public_upper_bound": 10472
+    },
+    {
+      "name": "_MapA",
+      "offset": 10472,
+      "next_public_upper_bound": 18664
+    }
+  ],
+  "win16_producer_consumer_base_references": [
+    {
+      "symbol": "_LoadMonoPats",
+      "segment": 1,
+      "hits": [
+        {
+          "offset": 54600,
+          "text": "mov ax, 0x2688"
+        },
+        {
+          "offset": 54736,
+          "text": "mov word ptr [bp - 4], 0x26a0"
+        }
+      ]
+    },
+    {
+      "symbol": "_WindowsMono_MakeTable4x4a",
+      "segment": 4,
+      "hits": [
+        {
+          "offset": 17464,
+          "text": "add bx, 0x26a0"
+        }
+      ]
+    },
+    {
+      "symbol": "_WindowsMono_MakeTable4x4b",
+      "segment": 4,
+      "hits": [
+        {
+          "offset": 17605,
+          "text": "add bx, 0x26a0"
+        }
+      ]
+    },
+    {
+      "symbol": "_WindowsMono_MakeTable2x2a",
+      "segment": 4,
+      "hits": [
+        {
+          "offset": 17742,
+          "text": "add bx, 0x26a0"
+        }
+      ]
+    },
+    {
+      "symbol": "_WindowsMono_MakeTable2x2b",
+      "segment": 4,
+      "hits": [
+        {
+          "offset": 17895,
+          "text": "add bx, 0x26a0"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "_DMPat reconstructed584 extent is MAPSYM next-public span, not independent DOS allocation authority.",
+    "MWINNT is Win16 corroboration; missing DOS MONONT producer/window/mode-offset resources remain unknown.",
+    "Stored resource rect.top and grid alone do not constrain final runtime miniature-map y parity."
+  ]
+}

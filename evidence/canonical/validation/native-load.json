@@ -23,13 +23,13 @@
     "debugger_unchanged": true,
     "only_expected_disposable_changes": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-current\\report.json",
-  "build_report_sha256": "64625fb26b105be4e32272eaba6b76859a53459a4fb769fbf1757ddc0a0f7734",
-  "verified_build_input_count": 418,
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\report.json",
+  "build_report_sha256": "56475307be1cec49a27cb8dc5f85f797bba6364aa693137e75fa2ce1e1efe0c7",
+  "verified_build_input_count": 419,
   "verified_native_service_count": 78,
-  "current_program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
-  "platform_manifest_sha256": "2791e1dbf5ebee9b6c1db255fc3ff237bb09b35209c050b1365aef367a128f09",
-  "executable_sha256": "fb49be46f51f585eaf543fe4d104fb1a31d410648e923c5c8b755d78d32d0514",
+  "current_program_sha256": "7d0b445914de8c2ed828f738d941d8679768c96ffd8a49521f5bddb0ed49975d",
+  "platform_manifest_sha256": "0e5443fd1e385d25d82535b10700808ff2bde96b06a0814814e75bc0889aace0",
+  "executable_sha256": "786ec1a52b8e31e1498d8cc12e067cfd7269b87a6c375848fa3ffd8438a175dc",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -67,16 +67,16 @@
     "--batch",
     "-q",
     "-x",
-    "D:\\Prog\\simant_recon\\build\\load-current\\gdb.txt",
+    "D:\\Prog\\simant_recon\\build\\nl3\\gdb.txt",
     "--args",
-    "D:\\Prog\\simant_recon\\build\\portable-current\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\portable-continued-final\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "35000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\load-current\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\nl3\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\load-current\\a",
+    "D:\\Prog\\simant_recon\\build\\nl3\\a",
     "--seed",
     "1",
     "--input-script",
@@ -87,18 +87,18 @@
   "timed_out": false,
   "fixture_event_count": 45,
   "injected_event_count": 45,
-  "outer_loops": 79356,
+  "outer_loops": 60736,
   "source_returns": [
     {
       "call": 1,
       "event": "o09_35F5_0188-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\load-current\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 27625,
+      "trace_elapsed_ms": 27592,
       "use_last": 1
     },
     {
@@ -106,9 +106,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 1,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\load-current\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
       "title": "Save Game",
-      "trace_elapsed_ms": 24125,
+      "trace_elapsed_ms": 24078,
       "verb": "SAVE"
     },
     {
@@ -116,9 +116,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 0,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\load-current\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
       "title": "Load Game",
-      "trace_elapsed_ms": 34219,
+      "trace_elapsed_ms": 34187,
       "verb": "LOAD"
     },
     {
@@ -126,18 +126,18 @@
       "event": "LoadGame-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\load-current\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 34750
+      "trace_elapsed_ms": 34703
     }
   ],
   "load_read_calls": 307,
   "load_requested_bytes": 48386,
   "load_returned_bytes": 48386,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\load-current\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\nl3\\frame.bmp",
     "size": 1228938,
     "sha256": "5f3b0080fb07c24c43d25ec3cf0b6c3de316c87911a77346187b845b807ad659",
     "width": 640,
@@ -147,7 +147,7 @@
     "valid": true
   },
   "saved_file": {
-    "path": "D:\\Prog\\simant_recon\\build\\load-current\\a\\a.ant",
+    "path": "D:\\Prog\\simant_recon\\build\\nl3\\a\\a.ant",
     "size": 48386,
     "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
   },
@@ -157,7 +157,7 @@
       "after": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
     }
   },
-  "events_sha256": "d8cefcf05c2ee86bf9c477498d73dd4812021e4c71664c8a091800bb0af6a262",
+  "events_sha256": "a6c27593ab50397d0ea969c0bc48469a6335058570ad9c084c51b94c8d48e597",
   "scope": "Current original main and ordinary SDL UI create then load a disposable SaveRec file. Read-only debugger observations establish successful source returns and complete reads. No after-load state equivalence, DOS save compatibility, resave, fixed terrain-seed or whole-game correctness claim.",
   "build_preview_limitations": [
     {
@@ -186,7 +186,7 @@
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "Native scalar expression lowering",
-      "detail": "Scalar conversion fixes declared storage/parameter/cast widths but leaves arithmetic operators and unsuffixed literal types unchanged. GCC promotes int16_t/uint16_t to32bit int, unlike DOS16bit signed/unsigned rules. Intermediate wrap, product/division, shifts and mixed comparisons need source-driven mechanical lowering/domain proof. Bounded validated adapters/fixtures do not establish global expression equivalence. See evidence/canonical/native-integer-promotions/."
+      "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/."
     }
   ]
 }

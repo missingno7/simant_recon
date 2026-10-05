@@ -1,0 +1,212 @@
+{
+  "schema": "viewport-layout-resource-observation-v1",
+  "scope": "Current HCEGANT and SHARED root, profile-0/profile-8 offsets and control bitmap geometry; selected plain records only.",
+  "assets": {
+    "HCEGANT.DAT": {
+      "size": 629438,
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+    },
+    "HCEGANT.NDX": {
+      "size": 2444,
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+    },
+    "SHARED.DAT": {
+      "size": 96117,
+      "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+    },
+    "SHARED.NDX": {
+      "size": 3868,
+      "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477"
+    }
+  },
+  "resource_matches": {
+    "HCEGANT:0:0": {
+      "record_offset": 0,
+      "flags": 8,
+      "size": 1074,
+      "window_flags": 1294,
+      "min_size": [
+        252,
+        280
+      ],
+      "grid": [
+        16,
+        16
+      ],
+      "objects": {
+        "0": {
+          "offset": 136,
+          "rect": [
+            14,
+            22,
+            418,
+            379
+          ],
+          "origin": [
+            14,
+            22,
+            404,
+            357
+          ],
+          "refs": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "modes": [
+            0,
+            0,
+            1,
+            2
+          ],
+          "type": 15,
+          "flags": 3,
+          "border_byte28": 2
+        },
+        "1": {
+          "offset": 177,
+          "rect": [
+            16,
+            24,
+            416,
+            42
+          ],
+          "origin": [
+            2,
+            2,
+            -2,
+            18
+          ],
+          "refs": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "modes": [
+            1,
+            2,
+            3,
+            2
+          ],
+          "type": 18,
+          "flags": 3,
+          "border_byte28": 0
+        },
+        "3": {
+          "offset": 270,
+          "rect": [
+            16,
+            41,
+            64,
+            376
+          ],
+          "origin": [
+            0,
+            17,
+            48,
+            -3
+          ],
+          "refs": [
+            1,
+            1,
+            3,
+            0
+          ],
+          "modes": [
+            1,
+            2,
+            1,
+            4
+          ],
+          "type": 6,
+          "flags": 513,
+          "border_byte28": 152
+        },
+        "4": {
+          "offset": 312,
+          "rect": [
+            64,
+            41,
+            416,
+            362
+          ],
+          "origin": [
+            48,
+            0,
+            -2,
+            -17
+          ],
+          "refs": [
+            3,
+            3,
+            0,
+            0
+          ],
+          "modes": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": 1,
+          "flags": 3,
+          "border_byte28": 19
+        }
+      }
+    },
+    "HCEGANT:111:2": {
+      "record_offset": 16660,
+      "flags": 8,
+      "size": 116,
+      "first_words": [
+        0,
+        2052,
+        116,
+        0,
+        15,
+        13,
+        0,
+        0
+      ]
+    },
+    "HCEGANT:112:2": {
+      "record_offset": 16786,
+      "flags": 8,
+      "size": 140,
+      "first_words": [
+        0,
+        2052,
+        140,
+        0,
+        16,
+        16,
+        0,
+        0
+      ]
+    },
+    "HCEGANT:0:9": {
+      "record_offset": 391079,
+      "flags": 8,
+      "size": 320,
+      "root_origin": [
+        14,
+        22,
+        404,
+        325
+      ],
+      "signed_fields": [
+        14,
+        22,
+        404,
+        325
+      ]
+    }
+  },
+  "record_counts": {
+    "HCEGANT": 271,
+    "SHARED": 449
+  },
+  "probe_sha256": "2574e6e6597de477b67a5864f7d4e8877f56414f587a2edcc99e78f5060d8f82"
+}

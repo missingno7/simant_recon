@@ -18,13 +18,13 @@
     "only_expected_disposable_changes": true,
     "save_record_wire_size": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-current\\report.json",
-  "build_report_sha256": "64625fb26b105be4e32272eaba6b76859a53459a4fb769fbf1757ddc0a0f7734",
-  "verified_build_input_count": 418,
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\report.json",
+  "build_report_sha256": "56475307be1cec49a27cb8dc5f85f797bba6364aa693137e75fa2ce1e1efe0c7",
+  "verified_build_input_count": 419,
   "verified_native_service_count": 78,
-  "current_program_sha256": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
-  "platform_manifest_sha256": "2791e1dbf5ebee9b6c1db255fc3ff237bb09b35209c050b1365aef367a128f09",
-  "executable_sha256": "fb49be46f51f585eaf543fe4d104fb1a31d410648e923c5c8b755d78d32d0514",
+  "current_program_sha256": "7d0b445914de8c2ed828f738d941d8679768c96ffd8a49521f5bddb0ed49975d",
+  "platform_manifest_sha256": "0e5443fd1e385d25d82535b10700808ff2bde96b06a0814814e75bc0889aace0",
+  "executable_sha256": "786ec1a52b8e31e1498d8cc12e067cfd7269b87a6c375848fa3ffd8438a175dc",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -48,14 +48,14 @@
     "manifest.json": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
   },
   "command": [
-    "D:\\Prog\\simant_recon\\build\\portable-current\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\portable-continued-final\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "20000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\vga-current\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\nv3\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\vga-current\\a",
+    "D:\\Prog\\simant_recon\\build\\nv3\\a",
     "--seed",
     "1",
     "--input-script",
@@ -69,7 +69,7 @@
   "injected_event_count": 7,
   "outer_loops": 54,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\vga-current\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\nv3\\frame.bmp",
     "size": 1228938,
     "sha256": "328725910ca856c4817b5468b05e819098452f446b615d48b441ac33b7d05edf",
     "width": 640,
@@ -108,7 +108,7 @@
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "Native scalar expression lowering",
-      "detail": "Scalar conversion fixes declared storage/parameter/cast widths but leaves arithmetic operators and unsuffixed literal types unchanged. GCC promotes int16_t/uint16_t to32bit int, unlike DOS16bit signed/unsigned rules. Intermediate wrap, product/division, shifts and mixed comparisons need source-driven mechanical lowering/domain proof. Bounded validated adapters/fixtures do not establish global expression equivalence. See evidence/canonical/native-integer-promotions/."
+      "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/."
     }
   ]
 }

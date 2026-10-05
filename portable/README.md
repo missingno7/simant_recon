@@ -35,6 +35,9 @@ copies and the Save/Load trace requirements.
 
 `canonical_native_abi/` contains bounded type/ABI conversions: fixed-width words,
 near/far pointer spelling, owner views, callbacks and packed wire/native layouts.
+Its word-expression pass narrows closed explicitly typed unsigned-word results
+before consumers and preserves mixed word comparisons; unknown types and general
+integer expressions remain outside that class. Per-TU build receipts record edits.
 `whole_program/platform/` implements DOS/BIOS services. The small
 `whole_program/algorithms/` files project genuine canonical assembly algorithms
 that a native C compiler cannot assemble; they are not an alternative C game

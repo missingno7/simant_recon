@@ -1,0 +1,642 @@
+{
+  "schema": "mono-owner-original-asm-access-witness-v2",
+  "status": "NO_ALLOCATION_ADMISSION",
+  "scope": "Four original S01 bodies through their authentic RETF boundaries in test-owned memory; no return-ABI claim, no code patching",
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "size": 506509,
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "oracle_hash_check": {
+    "expected_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "actual_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "original_S01": {
+    "load_linear": 201312,
+    "size": 7056,
+    "sha256": "7e155135e0948e2c48164357566aa2301ff1447fc51411514f3bda78a7e5c97d"
+  },
+  "canonical_input_pins": [
+    {
+      "path": "src/program.json",
+      "size": 244044,
+      "sha256": "7d0b445914de8c2ed828f738d941d8679768c96ffd8a49521f5bddb0ed49975d"
+    },
+    {
+      "path": "src/S01/m328E.asm",
+      "size": 4699,
+      "sha256": "af31ebb956e1d89743a66647fa8ea8beb5f1d6c57a9eab476fa39103df88c521"
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "size": 9120,
+      "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172"
+    },
+    {
+      "path": "src/S12/m384C.c",
+      "size": 22042,
+      "sha256": "9d4b6840fb8aeb4f51235011d10ebed108a523783ab1a2ec075c656dea5d84e1"
+    },
+    {
+      "path": "src/S04/m35F5.c",
+      "size": 11387,
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406"
+    },
+    {
+      "path": "src/data/d3D57.c",
+      "size": 22927,
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5"
+    },
+    {
+      "path": "src/root/m205F.c",
+      "size": 6015,
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "size": 4897,
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "size": 6620,
+      "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3"
+    },
+    {
+      "path": "src/root/m20E8.c",
+      "size": 11180,
+      "sha256": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821"
+    },
+    {
+      "path": "src/root/m2505.c",
+      "size": 10580,
+      "sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234"
+    }
+  ],
+  "implementation_pins": [
+    {
+      "path": "evidence/canonical/monochrome-owner/asm_witness.py",
+      "size": 7631,
+      "sha256": "7e06b114be31870542982fde958d8e025f741df479f858ef0127f19432283841"
+    },
+    {
+      "path": "tools/exe.py",
+      "size": 7645,
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+    },
+    {
+      "path": "build/behavior/deps/unicorn/__init__.py",
+      "size": 305,
+      "sha256": "0e8ac7115c755994a968fa865bd1b2f2075edea715c17e91d62af2cc52c13392"
+    },
+    {
+      "path": "build/behavior/deps/unicorn/x86_const.py",
+      "size": 41605,
+      "sha256": "d7663db6425f52838f3e79e45a8fe22b6c02be7edb44367ea2118aec04ee5728"
+    }
+  ],
+  "unicorn_version": "2.1.4",
+  "python_version": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+  "fixture": {
+    "memory_owner": "test harness only; no candidate source allocation",
+    "source": "Uniform128-byte row72 (row255 for generic-width control)",
+    "pattern_prefix": "584 zero test bytes",
+    "adjacent_marker": "Test byte at displacement584, either00 orff",
+    "frame": "SS=DS=55B3; two far pointer args; width,y for000A/009D and y only for012C/01D5",
+    "initialization": "Unicorn zeroed mapped memory plus explicitly written fixture state"
+  },
+  "nonclaims": [
+    "No DOS tail owner/type/extent",
+    "No actual gameplay reachability",
+    "No whole-program initialization/lifetime proof",
+    "No return-ABI verification"
+  ],
+  "tests": [
+    {
+      "entry": "328e:000a",
+      "width_arg": 128,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 512,
+      "min_displacement": 576,
+      "max_displacement": 579,
+      "distinct_displacements": [
+        576,
+        577,
+        578,
+        579
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 64,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:000a",
+      "width_arg": 128,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 512,
+      "min_displacement": 576,
+      "max_displacement": 579,
+      "distinct_displacements": [
+        576,
+        577,
+        578,
+        579
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 64,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:000a",
+      "width_arg": 128,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 512,
+      "min_displacement": 576,
+      "max_displacement": 579,
+      "distinct_displacements": [
+        576,
+        577,
+        578,
+        579
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 64,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:000a",
+      "width_arg": 128,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 512,
+      "min_displacement": 576,
+      "max_displacement": 579,
+      "distinct_displacements": [
+        576,
+        577,
+        578,
+        579
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 64,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:009d",
+      "width_arg": 64,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 256,
+      "min_displacement": 582,
+      "max_displacement": 585,
+      "distinct_displacements": [
+        582,
+        583,
+        584,
+        585
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:009d",
+      "width_arg": 64,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 256,
+      "min_displacement": 582,
+      "max_displacement": 585,
+      "distinct_displacements": [
+        582,
+        583,
+        584,
+        585
+      ],
+      "output_sha256": "3122e13f9a83207d500556497ba481f2c9cc6cebd666e7c1e60a3a05d70c79e2",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:009d",
+      "width_arg": 64,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 256,
+      "min_displacement": 583,
+      "max_displacement": 586,
+      "distinct_displacements": [
+        583,
+        584,
+        585,
+        586
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:009d",
+      "width_arg": 64,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 256,
+      "min_displacement": 583,
+      "max_displacement": 586,
+      "distinct_displacements": [
+        583,
+        584,
+        585,
+        586
+      ],
+      "output_sha256": "241e2686b82799031993f5dab1d06199b8102d803d3e730197a31e72b116675c",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "entry": "328e:012c",
+      "width_arg": null,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 256,
+      "min_displacement": 582,
+      "max_displacement": 583,
+      "distinct_displacements": [
+        582,
+        583
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:012c",
+      "width_arg": null,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 256,
+      "min_displacement": 582,
+      "max_displacement": 583,
+      "distinct_displacements": [
+        582,
+        583
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:012c",
+      "width_arg": null,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 256,
+      "min_displacement": 583,
+      "max_displacement": 584,
+      "distinct_displacements": [
+        583,
+        584
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:012c",
+      "width_arg": null,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 256,
+      "min_displacement": 583,
+      "max_displacement": 584,
+      "distinct_displacements": [
+        583,
+        584
+      ],
+      "output_sha256": "241e2686b82799031993f5dab1d06199b8102d803d3e730197a31e72b116675c",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "entry": "328e:01d5",
+      "width_arg": null,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 128,
+      "min_displacement": 582,
+      "max_displacement": 583,
+      "distinct_displacements": [
+        582,
+        583
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 16,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:01d5",
+      "width_arg": null,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 128,
+      "min_displacement": 582,
+      "max_displacement": 583,
+      "distinct_displacements": [
+        582,
+        583
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 16,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:01d5",
+      "width_arg": null,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 0,
+      "pattern_read_count": 128,
+      "min_displacement": 583,
+      "max_displacement": 584,
+      "distinct_displacements": [
+        583,
+        584
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 16,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "entry": "328e:01d5",
+      "width_arg": null,
+      "y_arg": 7,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 128,
+      "min_displacement": 583,
+      "max_displacement": 584,
+      "distinct_displacements": [
+        583,
+        584
+      ],
+      "output_sha256": "086028e85f4503f264db6cfded8fdeb3011306a8534f69c2f332cb503ebf0bbc",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 16,
+      "second_output_plane_bytes": [
+        255,
+        255,
+        255,
+        255
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "entry": "328e:000a",
+      "width_arg": 7,
+      "y_arg": 6,
+      "row_byte": 72,
+      "adjacent_marker": 255,
+      "pattern_read_count": 512,
+      "min_displacement": 583,
+      "max_displacement": 586,
+      "distinct_displacements": [
+        583,
+        584,
+        585,
+        586
+      ],
+      "output_sha256": "df24942792146f0073e2ed1dd64ad5917dbe5b5f9af8316ba05613ad1b913c24",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 64,
+      "second_output_plane_bytes": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "entry": "328e:009d",
+      "width_arg": 64,
+      "y_arg": 6,
+      "row_byte": 255,
+      "adjacent_marker": 0,
+      "pattern_read_count": 256,
+      "min_displacement": 2046,
+      "max_displacement": 2049,
+      "distinct_displacements": [
+        2046,
+        2047,
+        2048,
+        2049
+      ],
+      "output_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+      "first_output_bytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "second_plane_offset": 32,
+      "second_output_plane_bytes": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

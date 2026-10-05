@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
-from canonical_native_abi import scalar, tokenizer as csrc
+from canonical_native_abi import scalar, tokenizer as csrc, word_islands
 from canonical_native_abi.source_views import (
     GRAPHICS_SCALARS,
     audio_overlap_views,
@@ -175,6 +175,10 @@ def main():
         text=apply('varargs','adapt',text,text,rel)
         text=re.sub(r'\*\s*\(\s*(?:(unsigned)\s+)?char\s+far\s*\*\s*\)\s*0x0*417L',lambda m:'dos_keyboard_modifiers()',text,flags=re.I)
         text=rename(text,function_aliases)
+        try:
+            text,row['word_expressions']=word_islands.convert(text)
+        except word_islands.Unsupported as exc:
+            errors.append({'source':rel,'stage':'word expressions','error':str(exc)})
         text=scalar.convert(text)
         if rel=='src/root/m075B.c':text=apply('load_string_ant','adapt',text,text)
         text=centralize(text)

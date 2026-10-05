@@ -205,7 +205,7 @@
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "Native scalar expression lowering",
-      "detail": "Scalar conversion fixes declared storage/parameter/cast widths but leaves arithmetic operators and unsuffixed literal types unchanged. GCC promotes int16_t/uint16_t to32bit int, unlike DOS16bit signed/unsigned rules. Intermediate wrap, product/division, shifts and mixed comparisons need source-driven mechanical lowering/domain proof. Bounded validated adapters/fixtures do not establish global expression equivalence. See evidence/canonical/native-integer-promotions/."
+      "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/."
     }
   ],
   "source_inventory": "src/program.json",

@@ -32,7 +32,9 @@ The current SDL3 executable runs the converted original main and passes bounded
 database, RNG, simulation, VGA, Save and Load checks. It remains a preview with
 explicit storage and adjacent-memory contracts in `portable/platform.json`.
 See the [consolidation report](docs/consolidation.md) for the changes, evidence,
-retirements and limits.
+retirements and limits. The [current source follow-up](docs/source-followup.md)
+records proven symbolic DOS addresses, mechanical word-expression conversion
+and the narrowed remaining ownership/layout premises.
 
 Current historical validation distinguishes 1,235 byte-exact C functions,
 367 genuine assembly functions, 29 strict semantic reconstructions, and nine
@@ -64,7 +66,7 @@ See [behavioral validation](docs/behavioral-proof.md) for dependencies and scope
 
 Native build outputs must be fresh. See [portable commands and prerequisites](portable/README.md)
 and the current suites under `portable/tests/`. The verified local executable for
-this consolidation is `build/portable-current/simant-canonical.exe`.
+the current source is `build/portable-continued-final/simant-canonical.exe`.
 
 ## Reconstruction work
 

@@ -2,8 +2,8 @@
   "schema": "canonical-native-rng-original-dos-v1",
   "passed": true,
   "claim": "Bounded execution of actual current canonical game RNG and CRT objects against original DOS helpers; no world/frame equivalence claim.",
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-current\\report.json",
-  "build_report_sha256": "64625fb26b105be4e32272eaba6b76859a53459a4fb769fbf1757ddc0a0f7734",
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\report.json",
+  "build_report_sha256": "56475307be1cec49a27cb8dc5f85f797bba6364aa693137e75fa2ce1e1efe0c7",
   "canonical_source": "src/root/m0093.c",
   "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
   "runner_sha256": "86295567b3410290f78d5932ef731d61b87e519a2cfe7981b1553823123a8461",
@@ -14,32 +14,32 @@
   },
   "native_objects": [
     {
+      "source": "native RNG fixture",
+      "object": "D:\\Prog\\simant_recon\\build\\native-rng-continued-final\\fixture.o",
+      "object_sha256": "e28f22afd3bcce16b2a36b1fa5cb8e7bb4f8feabf7df703527594c8dcd58ae4f",
+      "generated": null,
+      "generated_sha256": "f14fb628d27b570ba8962d391538084bd93aa5eb93baf15622503997393aee9f"
+    },
+    {
       "source": "src/root/m0093.c",
-      "object": "D:\\Prog\\simant_recon\\build\\portable-current\\objects\\build\\portable-current\\root_0093.o",
-      "object_sha256": "40d237c988b26bcf8eaf51436899cdfb3654eb6c20202a389c511220c8ec74aa",
-      "generated": "D:\\Prog\\simant_recon\\build\\portable-current\\root_0093.c",
+      "object": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\objects\\build\\portable-continued-final\\root_0093.o",
+      "object_sha256": "3e8b91bf38bb487bb531755b5611f6d8fc0289d9d9e937103e502fa2923a6091",
+      "generated": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\root_0093.c",
       "generated_sha256": "2e18205e38d3b0a4aa52583cbdc6a52917668f6c910f884e40a3261f0e18ecbc"
     },
     {
       "source": "portable/whole_program/platform/crt_rng.c",
-      "object": "D:\\Prog\\simant_recon\\build\\portable-current\\objects\\portable\\whole_program\\platform\\crt_rng.o",
+      "object": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\objects\\portable\\whole_program\\platform\\crt_rng.o",
       "object_sha256": "5fc4e24047e57a20e629b5df51fce063154c49bbf0074593489609d36945640b",
       "generated": "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\crt_rng.c",
       "generated_sha256": "7d2e81145cb6cd3ff84f3e3cbe9167db7dce544050261e1140746f753be14696"
     },
     {
       "source": "portable/whole_program/platform/seed_source.c",
-      "object": "D:\\Prog\\simant_recon\\build\\portable-current\\objects\\portable\\whole_program\\platform\\seed_source.o",
+      "object": "D:\\Prog\\simant_recon\\build\\portable-continued-final\\objects\\portable\\whole_program\\platform\\seed_source.o",
       "object_sha256": "30b8965d39d6c0ff573ffdec68238b155c8c07be652dd32b6ace1f90c78de5e0",
       "generated": "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\seed_source.c",
       "generated_sha256": "3108f7d9ad500026accae6a10cc0214c489b70acf6251d57bbf1b9c6f7184b76"
-    },
-    {
-      "source": "native RNG fixture",
-      "object": "D:\\Prog\\simant_recon\\build\\rng-current\\fixture.o",
-      "object_sha256": "e28f22afd3bcce16b2a36b1fa5cb8e7bb4f8feabf7df703527594c8dcd58ae4f",
-      "generated": null,
-      "generated_sha256": "f14fb628d27b570ba8962d391538084bd93aa5eb93baf15622503997393aee9f"
     }
   ],
   "scenarios": [

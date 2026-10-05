@@ -36,6 +36,11 @@ and ten semantic address/layout gates. Forty-four functional data bytes remain
 unresolved. These are SEMANTIC / PORT-BLOCKING; a source-only runnable DOS game
 has not been established.
 
+Source-owned linebuf/xlat_tabs references in two complete S03 assembly TUs now
+use ordinary linker offsets. Their historical exactness and moved-placement
+controls are verified separately. The [source follow-up](source-followup.md)
+records this partial address audit and the current mechanical native word pass.
+
 Nine historically exact C bodies remain unchanged except registered identifier
 aliases, but improved whole-TU declaration context changes their compiler
 output. Their full static instruction relations have zero unexplained
