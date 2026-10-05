@@ -29,6 +29,25 @@ Run the result from the repository:
 build/current/portable/simant-canonical.exe
 ```
 
+For a Windows 64-bit drop-in playtest package:
+
+```powershell
+python portable/package.py
+```
+
+Extract `build/current/playtest/simant-sdl3-playtest-win64.zip` into a copy of
+the DOS game folder, retaining its `simant-sdl3-fonts/` directory. Launch
+`Play-SimAnt-SDL3.cmd`. It selects VGA and records `simant-sdl3.log`; no Python,
+compiler, DOSBox or separate SDL installation is required. The package contains
+the current executable, SDL3 DLL and licensed font support, but no original game
+data, configuration or saves. The original startup needs an `INSTALL.EXE` file
+to open; the launcher creates an empty probe only when absent and preserves any
+existing installer. Prefer a short folder path for the original file dialogs.
+
+This is a playable preview, with PC-speaker audio and unresolved native contracts.
+Human testing of actual display/input/audio hardware and longer gameplay is useful;
+passing scripted Save/Load does not establish complete gameplay or save compatibility.
+
 The application locates the adjacent resources and runs the converted original
 main. The platform application owns SDL lifecycle, presentation, input injection
 for tests and host resources; startup dialogs and the simulation remain in game

@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "package_sha256": "033e74a0b2a59fa5e39983600bcd16fcd91d53d3d083d609bddd177a51935bc8",
+  "scope": "Extracted drop-in package launcher without Python/compiler/DOSBox/runtime resource paths; original game data supplied from isolated copy. Uses SDL dummy drivers and fixture injection for bounded startup/full-game flow; physical desktop/audio hardware remains human testing.",
+  "checks": [
+    {
+      "name": "missing_installer",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:\\WINDOWS\\system32\\cmd.exe",
+        "/d",
+        "/c",
+        "Play-SimAnt-SDL3.cmd",
+        "--headless",
+        "--smoke-ms",
+        "20000",
+        "--seed",
+        "1",
+        "--frame",
+        "D:\\Prog\\simant_recon\\build\\current\\tests\\playtest-package\\game\\frame.bmp",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt"
+      ],
+      "generated_probe_when_missing": true,
+      "existing_installer_preserved": false,
+      "stdout": ""
+    },
+    {
+      "name": "preserve_installer",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:\\WINDOWS\\system32\\cmd.exe",
+        "/d",
+        "/c",
+        "Play-SimAnt-SDL3.cmd",
+        "--headless",
+        "--smoke-ms",
+        "1000",
+        "--seed",
+        "1",
+        "--frame",
+        "D:\\Prog\\simant_recon\\build\\current\\tests\\playtest-package\\game\\frame.bmp"
+      ],
+      "generated_probe_when_missing": false,
+      "existing_installer_preserved": true,
+      "stdout": ""
+    }
+  ]
+}
