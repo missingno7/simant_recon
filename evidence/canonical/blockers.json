@@ -15,7 +15,7 @@
       "consumer_declarations": [
         "extern struct Sample far * far fd_50F6_0150[];"
       ],
-      "grounding": "f_0000_0149: mov es,[7DD4] (CONST 50F6); mov es:[bx+150h],ax / es:[bx+152h],dx with bx = 4*[181C] -> far array of far pointers (sample free list, limit 38) (worker rootF)",
+      "grounding": "f_0000_0149 stores far Sample pointers at4*g_181C. Signed check permits incoming count38; returning nested Punt also permits later stores. The diagnostic is not capacity or defining-TU authority.",
       "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
       "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
       "proof_refs": [
@@ -315,11 +315,6 @@
   ],
   "semantic_gates": [
     {
-      "id": "remaining-assembly-address-audit",
-      "status": "UNRESOLVED",
-      "reason": "Twenty-four source-owned code references now have symbolic offsets and mandatory OMF guards, including twelve rectangle-clip callback pairs. Both RTLink versions preserve their owner identities under moved placement. The broader numeric/segment-frame audit remains open; monochrome 8ED8 ownership/extent and unchecked error-path addresses are separate unresolved relationships."
-    },
-    {
       "id": "ctype-out-of-range-index-layout",
       "status": "UNRESOLVED",
       "sources": [
@@ -470,7 +465,7 @@
     "imports": 11,
     "data_ranges": 6,
     "data_bytes": 44,
-    "semantic_gates": 12
+    "semantic_gates": 11
   },
   "historical_binary_only_outside_current_44": [
     {

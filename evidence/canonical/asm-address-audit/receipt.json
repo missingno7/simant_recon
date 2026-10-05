@@ -1,0 +1,521 @@
+{
+  "schema": "remaining-asm-literal-frame-bounded-review-v1",
+  "git_head": "27a00052c625a85b0f2be26b7c49b2ea2a9ecd0e",
+  "working_inventory": {
+    "path": "src/program.json",
+    "size": 261318,
+    "sha256": "e441198b87a7e7d805f00a3702b7409125c6b861d42887036e8e8ce188907f1f"
+  },
+  "recommended_gate_disposition": "Discharge remaining-assembly-address-audit for current 29 ASM direct numeric/named frame relationships under accepted DOS/ISA/ABI contracts. No additional distinct unresolved binding identified. Parent owns admission.",
+  "whole_program_integer_memory_input_domains_settled": false,
+  "negative_census_used_as_completeness_proof": false,
+  "worker_canonical_tool_evidence_git_writes": false,
+  "all_current_program_source_hashes_match_inventory": true,
+  "current_asm_module_count": 29,
+  "current_asm_source_pins": [
+    {
+      "path": "src/S00/m3126.asm",
+      "size": 18509,
+      "sha256": "596d463f05bbb39c78f11a1e9a85a6c72e3e467cf2567e2db9cb3ad227d5c4c3",
+      "key": "S00:3126",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "size": 84117,
+      "sha256": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
+      "key": "S00:31AD",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S00/m31AD_2AB4.asm",
+      "size": 40338,
+      "sha256": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
+      "key": "S00:31AD@2AB4",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S00/m35A6.asm",
+      "size": 10184,
+      "sha256": "62a8b50548f6f2e39d3620f2e9063a6d4b817266e950655b6a22f54abc55dac1",
+      "key": "S00:35A6",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "size": 46177,
+      "sha256": "6136f2dab5aa8a2b2f9608f5ef2ae4287d04ceeaf5510ed6bd7310fb54fdeaba",
+      "key": "S01:3126",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S01/m328E.asm",
+      "size": 4699,
+      "sha256": "af31ebb956e1d89743a66647fa8ea8beb5f1d6c57a9eab476fa39103df88c521",
+      "key": "S01:328E",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S01/m32B5.asm",
+      "size": 5336,
+      "sha256": "446836eb5562f7ceee6f9d5e862d2cccd7c59b327421cf9e06ad3e420590b22d",
+      "key": "S01:32B5",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S02/m3126.asm",
+      "size": 20567,
+      "sha256": "5393ee21872be740e8386676db36bff54a9539e89a61bcbe47fdc0b80755fe8d",
+      "key": "S02:3126",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "size": 37132,
+      "sha256": "7c5bacf108c4dd5f747cee0905cd3e119818cf4f854600f4b21153ed03b716ea",
+      "key": "S03:3126",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S03/m3253.asm",
+      "size": 1544,
+      "sha256": "5f67726c1477bfb28285078c835fef3b8e1b9a7e1ad19ce34e225b76366b8165",
+      "key": "S03:3253",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S03/m3258.asm",
+      "size": 40733,
+      "sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
+      "key": "S03:3258",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/S21/m39C7.asm",
+      "size": 9847,
+      "sha256": "537d7b811340a7615c2d49e8eb5253953937bd1b037344ecbaba246c27f338bd",
+      "key": "S21:39C7",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1699.asm",
+      "size": 3920,
+      "sha256": "26d9a76b86a8854105e905a11b59b83f84cac821edec495900bd296b2914a5fb",
+      "key": "root:1699",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m16B5.asm",
+      "size": 12680,
+      "sha256": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
+      "key": "root:16B5",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m194D.asm",
+      "size": 2109,
+      "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+      "key": "root:194D",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1959.asm",
+      "size": 1271,
+      "sha256": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+      "key": "root:1959",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m195A.asm",
+      "size": 7693,
+      "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+      "key": "root:195A",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1B05.asm",
+      "size": 5658,
+      "sha256": "32660094ed04cbf4939cb345c153dcc6d3cbbd4aab8024cdd0781bbbeb871fcf",
+      "key": "root:1B05",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "size": 8479,
+      "sha256": "9f18195ddfa42822f0e54c8a3edf016a751dd7c23b67620c647c75de02c12714",
+      "key": "root:1B4E",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "size": 35074,
+      "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+      "key": "root:1B73",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1F58.asm",
+      "size": 2852,
+      "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+      "key": "root:1F58",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1F66.asm",
+      "size": 3748,
+      "sha256": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+      "key": "root:1F66",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m1FBD.asm",
+      "size": 3414,
+      "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+      "key": "root:1FBD",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m24FA.asm",
+      "size": 2095,
+      "sha256": "e538d0a8df93c3bd7ba3aabccc9a48faa6f643b7f8489c3c379c0d23ad9ac412",
+      "key": "root:24FA",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m2650.asm",
+      "size": 2973,
+      "sha256": "bc33db1cc3b47590b79e091fd070708cfbdfbc525c82796a38d44533fb4ad621",
+      "key": "root:2650",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m283E.asm",
+      "size": 3638,
+      "sha256": "c7fc07dbb9830dfad40597e5fe377c4a62bc9d3551a80aef602dad3925daa0c5",
+      "key": "root:283E",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m28BC.asm",
+      "size": 38516,
+      "sha256": "e1b3d7a49330d3e7f817da331c3142ce0db64bd03de8c75ad3c7e6cddf4b82cf",
+      "key": "root:28BC",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m29BF.asm",
+      "size": 8357,
+      "sha256": "bb40cbd77f380b56c0ab0c27d41f08b40f63deb3b8c14f53b15e3d526fa753ac",
+      "key": "root:29BF",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    },
+    {
+      "path": "src/root/m2CFB.asm",
+      "size": 1755,
+      "sha256": "d12d1eedb44a03197c55abf8701ee5f6dfc71a4472ab66d610ae68a3da79d981",
+      "key": "root:2CFB",
+      "lang": "asm",
+      "inventory_hash_matches": true
+    }
+  ],
+  "source_setter_inventory_scope": {
+    "program_module_count": 191,
+    "SS_writes": [
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 755,
+        "instruction": "mov ss, bx"
+      },
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 779,
+        "instruction": "mov ss, word ptr _g_53B4"
+      },
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 876,
+        "instruction": "mov ss, bx"
+      },
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 969,
+        "instruction": "mov ss, word ptr _g_53B8"
+      },
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 1004,
+        "instruction": "mov ss, dx"
+      },
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 1011,
+        "instruction": "mov ss, word ptr _g_53B2"
+      },
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 1058,
+        "instruction": "mov ss, dx"
+      },
+      {
+        "source": "src/root/m1B73.asm",
+        "line": 1062,
+        "instruction": "mov ss, word ptr _g_53B2"
+      },
+      {
+        "source": "src/root/m28BC.asm",
+        "line": 340,
+        "instruction": "mov     ss, word ptr cs:isr_ss"
+      },
+      {
+        "source": "src/root/m28BC.asm",
+        "line": 354,
+        "instruction": "mov     ss, word ptr cs:save_ss"
+      },
+      {
+        "source": "src/root/m28BC.asm",
+        "line": 657,
+        "instruction": "mov     ss, word ptr cs:isr_ss"
+      },
+      {
+        "source": "src/root/m28BC.asm",
+        "line": 679,
+        "instruction": "mov     ss, word ptr cs:save_ss"
+      }
+    ],
+    "authority": "Accepted CRT SS=DGROUP; preserving mouse/timer restore paths and DGROUP-dominated dispatch private-stack paths. ASSUME alone is never runtime authority."
+  },
+  "bounded_OMF_classes": {
+    "ordered_fixup_count": 2680,
+    "segment_framed_DATA_or_group_framed_own_CODE_candidates": 0,
+    "scope_limit": "Supplementary two-class frame parse, not an all-pointer semantic completeness proof."
+  },
+  "LZSS": {
+    "whole_TU_peers": 6,
+    "ordered_fixups": 61,
+    "corrected_private_SS_operand_frames": 14,
+    "segment_lengths": {
+      "LZSS_TEXT": 557,
+      "_DATA": 288,
+      "LZSS_DATA": 4113
+    },
+    "all_raw_segments_other_structure_and_order_equal": true,
+    "search_and_promote_verify_only_pass": true,
+    "runtime_shift_cases": [
+      {
+        "linker": "rtlink400",
+        "test_prefix_length": 16,
+        "variant": "POS",
+        "runtime_result": "PASS",
+        "observations": "00 00 41 41 41 41 41"
+      },
+      {
+        "linker": "rtlink400",
+        "test_prefix_length": 16,
+        "variant": "NEG",
+        "runtime_result": "FAIL",
+        "observations": "01 00 00 00 00 00 00"
+      },
+      {
+        "linker": "rtlink400",
+        "test_prefix_length": 80,
+        "variant": "POS",
+        "runtime_result": "PASS",
+        "observations": "00 00 41 41 41 41 41"
+      },
+      {
+        "linker": "rtlink400",
+        "test_prefix_length": 80,
+        "variant": "NEG",
+        "runtime_result": "FAIL",
+        "observations": "01 00 00 00 00 00 00"
+      },
+      {
+        "linker": "rtlink610",
+        "test_prefix_length": 16,
+        "variant": "POS",
+        "runtime_result": "PASS",
+        "observations": "00 00 41 41 41 41 41"
+      },
+      {
+        "linker": "rtlink610",
+        "test_prefix_length": 16,
+        "variant": "NEG",
+        "runtime_result": "FAIL",
+        "observations": "01 00 00 00 00 00 00"
+      },
+      {
+        "linker": "rtlink610",
+        "test_prefix_length": 80,
+        "variant": "POS",
+        "runtime_result": "PASS",
+        "observations": "00 00 41 41 41 41 41"
+      },
+      {
+        "linker": "rtlink610",
+        "test_prefix_length": 80,
+        "variant": "NEG",
+        "runtime_result": "FAIL",
+        "observations": "01 00 00 00 00 00 00"
+      }
+    ],
+    "all_required_checks_pass": true,
+    "parent_admitted_natural_two_directive_scope": true,
+    "parent_retained_canonical_replay": "evidence/canonical/lzss-data-frame/replay.py"
+  },
+  "root_1F66_register_test": {
+    "original": "A3A5",
+    "ROR1_to_ROR7": [
+      "D1D2",
+      "68E9",
+      "B474",
+      "5A3A",
+      "2D1D",
+      "968E",
+      "4B47"
+    ],
+    "ordinary_ISA_preserving_interrupt_ABI_path": "All comparisons unequal, stack-counter loops terminate, saved registers restored.",
+    "conditional_error_branch": "ES=B000; [40]=21; INT23; returning handler would bypass saved register restores. No default-handler termination authority admitted; no ordinary source trigger established.",
+    "new_unresolved_gate_recommended": false,
+    "inbound_scan_is_activation_exclusion": false
+  },
+  "separate_open_relationships": [
+    "S01:328E g_8ED8 defining owner/indexed extent",
+    "ctype-out-of-range-index-layout",
+    "sound-selector-out-of-range-layout",
+    "graphics-computed-copy-layout",
+    "window-index-resource-cross-owner-layout",
+    "menu/critical/icon computed alias gates",
+    "source-triggered returning-Punt database/graphics/window relationships"
+  ],
+  "outside_ASM_scope": [
+    "root:0093 C GetRRandSeed 046C:0000 RAM read"
+  ],
+  "archived_positive_authority_pins": [
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/numeric-address-audit-v1.md",
+      "size": 9628,
+      "sha256": "666608a6cb8a59327906fcc40278e00f13d646c7e47bb1e8cebb820d53797cec"
+    },
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/driver-ss-frame-contract-v1.json",
+      "size": 303238,
+      "sha256": "d7187b30f6c474e69ec38594a71727e4dab34e18afa81406162a94135e1c5fda"
+    },
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/driver-local-frame-contract-v1.json",
+      "size": 142557,
+      "sha256": "30cea043a58a41d7082b640e3078b1ed720488b46da04d78d98cc366cb6a8f5a"
+    },
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/driver-ss-frame-bindings-v1.json",
+      "size": 69890,
+      "sha256": "c3820edb19a3b0ad5981b4b929fb5dc756b6f5614894014eedfeaaf9a3a46f24"
+    },
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/driver-local-frame-bindings-v1.json",
+      "size": 10170,
+      "sha256": "09e833bfcc02d28e9611ba5b4f9808b7f1abd61b736ef56f415d860d8ad1cd4d"
+    },
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/mouse-code-offset-frame-bindings-v1.json",
+      "size": 6002,
+      "sha256": "412cf1c3dd275187630e8f277d33ab459765617a397cc43daa85e4ddab56f95b"
+    },
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/assembly-frame-bindings-v1.json",
+      "size": 2362,
+      "sha256": "3aec6a05ee17e0e3ed972a5ae193c38524651095d9847b030970283734e7d8e5"
+    },
+    {
+      "git_ref": "a1938e6",
+      "path": "work/source-only-dos/structural-audits-v35/README.md",
+      "size": 5639,
+      "sha256": "5a7d0e7186685fbe4c0227ae73e9062dd7ebab41436085b2c298d775ce6784c1"
+    }
+  ],
+  "proof_artifact_pins": [
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/review.md",
+      "size": 13044,
+      "sha256": "06c48205567911517ec6de279963e96d20f5556341a327326dc884ac6c9297b7"
+    },
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/classified-census.json",
+      "size": 67906,
+      "sha256": "4fddcfe5f87afe72c6da4493d37b373182440fac7e25869a1a3dc62c98247c61"
+    },
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/current29_omf_frame_receipt.json",
+      "size": 11249,
+      "sha256": "b912b515e1876ad6e5e029227aaad7225752872ee3781e51fd8c525f7ae6c5ea"
+    },
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/lzss_whole_tu_receipt.json",
+      "size": 18601,
+      "sha256": "7b3c433e7f1d62be99e0f05fc641a8b5d7a8ea66dd33a9347a9a1734a7a9efdb"
+    },
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/guard-proposal.json",
+      "size": 22489,
+      "sha256": "9ff47a0f2e8070fc6bba3029ff100c1f20eabf76463d2191f94f3586b3b032c3"
+    },
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/lzss_link_receipt.json",
+      "size": 58344,
+      "sha256": "9246f97244fe4e9e6c94b5160df1159ff831aa5242aa161764cf8f29ae239bf7"
+    },
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/lzss_link_replay.py",
+      "size": 12975,
+      "sha256": "90936d98618597737b7dcd4aaeab4e6a56cf237a3139a200d80cd9d59865b931"
+    },
+    {
+      "path": "build/workers/remaining_asm_frame_gate_current/finalize_report.py",
+      "size": 11459,
+      "sha256": "88aece295f43bcf0198c41d20d2d9c8d712a6ffd9d225e23b17c89ab1c1d92fd"
+    }
+  ],
+  "root_review": {
+    "reviewer": "root",
+    "accepted": true,
+    "discharged_gate": "remaining-assembly-address-audit",
+    "scope": "Current29ASM direct numeric and named frames under standard DOS/ISA/ABI; positive source/callee/runtime-frame authority plus moved-link controls. Computed owners/extents, C-address relationships, integer/input/global-memory domains and existing returning-Punt gates remain unaccepted.",
+    "prior_program_sha256": "e441198b87a7e7d805f00a3702b7409125c6b861d42887036e8e8ce188907f1f",
+    "negative_census_is_completeness_proof": false
+  }
+}

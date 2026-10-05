@@ -80,6 +80,46 @@ def check_owned_code_references(contract: dict, obj) -> int:
     return count
 
 
+def check_data_frame_references(contract: dict, obj) -> int:
+    """Require reviewed group-relative offsets to a module's private data.
+
+    Historical placement can hide a segment-relative frame error. These sites
+    are anchored to existing procedure publics and checked before any link.
+    """
+    segment, group = contract['target_segment'], contract['frame_group']
+    if not any(g['name'] == group and segment in g['segments'] for g in obj.groups):
+        raise ValueError('data frame target is outside its group')
+    sites = contract['sites']
+    if not sites:
+        raise ValueError('data frame contract has no references')
+    seen = set()
+    for site in sites:
+        publics = [p for p in obj.publics if p['name'] == site['public']]
+        if len(publics) != 1:
+            raise ValueError('data frame reference has no unique procedure public')
+        public = publics[0]
+        offset = public['offset'] + site['operand_offset']
+        target = site['displacement']
+        if not (isinstance(site['operand_offset'], int) and site['operand_offset'] >= 0
+                and isinstance(target, int) and
+                0 <= target < obj.segment_lengths.get(segment, 0)):
+            raise ValueError('data frame reference is outside its source or target')
+        location = (public['segment'], offset)
+        if location in seen:
+            raise ValueError('duplicate data frame reference')
+        seen.add(location)
+        fixups = [f for f in obj.linker_fixups
+                  if (f['segment'], f['offset']) == location]
+        expected = {'width': 2, 'loc': 'offset16', 'self_relative': False,
+                    'target_kind': 'segment', 'target': segment,
+                    'frame_kind': 'group', 'frame': group,
+                    'displacement': target, 'encoded_addend': '0000'}
+        if len(fixups) != 1 or any(fixups[0].get(k) != v for k, v in expected.items()):
+            raise ValueError(f'data frame reference at {location[0]}:{offset:04X} '
+                             'is missing or has the wrong frame/target')
+    return len(seen)
+
+
 def tokens(text: str) -> str:
     import csrc
     return ' '.join(t.text for t in csrc.tokenize(text)
@@ -330,7 +370,8 @@ def publish(plan_path: Path, verify_only: bool) -> int:
                 module = {**man['modules'][item['key']],
                           'lang': item['lang'], 'profile': item['profile'], 'flags': item['flags']}
                 return modules.verify_module(text, module, module['claims'], man=man,
-                    code_references=item.get('owned_code_references'))
+                    code_references=item.get('owned_code_references'),
+                    data_frame_references=item.get('data_frame_references'))
             return compiler.compile_c(text, item['profile'], item['flags'])
         with ThreadPoolExecutor(max_workers=8) as pool:
             results = list(pool.map(compile_item, plan['program']['modules']))

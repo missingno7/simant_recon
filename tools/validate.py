@@ -138,7 +138,8 @@ def main() -> int:
             failures.append(f"{key}: source hash differs from manifest (unpublished edit)")
         item = next((item for item in program['modules'] if item['key'] == key), {}) if program else {}
         res = modmod.verify_module(text, m, m["claims"], man=man,
-                                  code_references=item.get('owned_code_references'))
+                                  code_references=item.get('owned_code_references'),
+                                  data_frame_references=item.get('data_frame_references'))
         bad = [n for n, c in res["claims"].items() if not c["exact"]]
         dbad = [n for n, d in res.get("data", {}).items() if not d["exact"]]
         mreasons = list(res.get("module_reasons", [])) + modmod.link_after_reasons(

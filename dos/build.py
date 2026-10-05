@@ -202,6 +202,10 @@ def compile_program(program, out, report, jobs=4, reuse=False):
                 import canonical
                 row['owned_code_reference_count'] = canonical.check_owned_code_references(
                     record['owned_code_references'], obj)
+            if record.get('data_frame_references') is not None:
+                import canonical
+                row['data_frame_reference_count'] = canonical.check_data_frame_references(
+                    record['data_frame_references'], obj)
             row['cache'] = {'key': fingerprint, 'sha256': row['object']['sha256']}
         except (ValueError, OSError, compiler.CompileError, subprocess.SubprocessError) as error:
             row['status'] = 'FAILED'

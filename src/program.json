@@ -1487,8 +1487,84 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "3124ef4a45c572a54529bd5a57cd9225b40fdcafadd63c6b06cb748683cacca4",
-      "unit": "root"
+      "source_sha256": "32660094ed04cbf4939cb345c153dcc6d3cbbd4aab8024cdd0781bbbeb871fcf",
+      "unit": "root",
+      "data_frame_references": {
+        "target_segment": "_DATA",
+        "frame_group": "DGROUP",
+        "sites": [
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 45,
+            "displacement": 22
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 53,
+            "displacement": 22
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 60,
+            "displacement": 22
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 67,
+            "displacement": 22
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 74,
+            "displacement": 22
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 106,
+            "displacement": 10
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 120,
+            "displacement": 10
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 141,
+            "displacement": 8
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 161,
+            "displacement": 10
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 171,
+            "displacement": 10
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 194,
+            "displacement": 4
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 201,
+            "displacement": 20
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 243,
+            "displacement": 20
+          },
+          {
+            "public": "_f_1B05_0046",
+            "operand_offset": 250,
+            "displacement": 8
+          }
+        ]
+      }
     },
     {
       "key": "root:1B28",
@@ -8888,11 +8964,6 @@
       }
     ],
     "semantic_gates": [
-      {
-        "id": "remaining-assembly-address-audit",
-        "status": "UNRESOLVED",
-        "reason": "Twenty-four source-owned code references now have symbolic offsets and mandatory OMF guards, including twelve rectangle-clip callback pairs. Both RTLink versions preserve their owner identities under moved placement. The broader numeric/segment-frame audit remains open; monochrome 8ED8 ownership/extent and unchecked error-path addresses are separate unresolved relationships."
-      },
       {
         "id": "ctype-out-of-range-index-layout",
         "status": "UNRESOLVED",

@@ -86,6 +86,7 @@ _f_1B05_0046	proc	far
 	les di, dword ptr [bp+6]
 	lds si, dword ptr SrcPtr
 	assume	ds:nothing		; DS = input or ring buffer until pop ds
+	assume	ss:DGROUP		; decoder state remains in the caller's DGROUP stack frame
 	cmp word ptr ss:State, 0
 	je L00A6
 	dec word ptr ss:State
@@ -184,7 +185,7 @@ L0154:
 	mov di, 0
 L0157:
 	pop ds
-	assume	ds:DGROUP
+	assume	ds:DGROUP, ss:nothing
 	mov word ptr State, di
 	mov word ptr Flags, ax
 	mov word ptr RingPos, bx

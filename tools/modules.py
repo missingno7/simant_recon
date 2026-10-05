@@ -436,7 +436,8 @@ def evidence_path_reasons(text: str | None) -> list[str]:
 
 
 def verify_module(text: str, module: dict, claims: list[dict], collect: dict | None = None,
-                  man: dict | None = None, code_references: dict | None = None) -> dict:
+                  man: dict | None = None, code_references: dict | None = None,
+                  data_frame_references: dict | None = None) -> dict:
     """Compile ``text`` under the module profile and verify every claim strictly.
 
     ``collect`` (compiler diagnostics): when a dict is given, the bound bytes and
@@ -638,6 +639,12 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
             out['owned_code_reference_count'] = canonical.check_owned_code_references(code_references, obj)
         except (ValueError, KeyError, TypeError) as error:
             mreasons.append('canonical owned code references: ' + str(error))
+    if data_frame_references is not None:
+        import canonical
+        try:
+            out['data_frame_reference_count'] = canonical.check_data_frame_references(data_frame_references, obj)
+        except (ValueError, KeyError, TypeError) as error:
+            mreasons.append('canonical data frame references: ' + str(error))
     out["communals"] = [{"name": c["name"], "kind": c["kind"], "length": c["length"]}
                         for c in getattr(obj, "communals", [])]
     if mreasons:

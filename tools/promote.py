@@ -469,7 +469,8 @@ def main() -> int:
             module["extent"] = mod["extent"]
         item = next((m for m in program['modules'] if m['key'] == key), {})
         res = modmod.verify_module(text, module, claims, man=man,
-                                  code_references=item.get('owned_code_references'))
+                                  code_references=item.get('owned_code_references'),
+                                  data_frame_references=item.get('data_frame_references'))
         # manifest-level data rules: link position, and no two modules place the same bytes
         man_after = {**man, "modules": {**man["modules"], key: module}}
         mreasons = modmod.link_after_reasons(man_after, key, module,

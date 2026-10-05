@@ -1,0 +1,147 @@
+{
+  "root_reviewer": "root",
+  "source": "src/root/m1B05.asm",
+  "source_sha256": "32660094ed04cbf4939cb345c153dcc6d3cbbd4aab8024cdd0781bbbeb871fcf",
+  "legacy_negative_sha256": "3124ef4a45c572a54529bd5a57cd9225b40fdcafadd63c6b06cb748683cacca4",
+  "both_complete_historical_comparisons_exact": true,
+  "claims": [
+    "f_1B05_0008",
+    "f_1B05_0046",
+    "f_1B05_0178",
+    "f_1B05_018E",
+    "f_1B05_01C7",
+    "f_1B05_022A"
+  ],
+  "whole_extent": {
+    "exact": true,
+    "reasons": [],
+    "reloc_order": "GROUPED",
+    "order_reasons": []
+  },
+  "segment_lengths": {
+    "LZSS_DATA": 4113,
+    "_DATA": 288,
+    "LZSS_TEXT": 557
+  },
+  "all_raw_segments_and_structures_equal": true,
+  "ordered_fixups": 61,
+  "only_changed_frame_indexes": [
+    15,
+    16,
+    17,
+    18,
+    19,
+    23,
+    24,
+    26,
+    27,
+    28,
+    29,
+    30,
+    33,
+    34
+  ],
+  "guarded_references": 14,
+  "contract": {
+    "target_segment": "_DATA",
+    "frame_group": "DGROUP",
+    "sites": [
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 45,
+        "displacement": 22
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 53,
+        "displacement": 22
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 60,
+        "displacement": 22
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 67,
+        "displacement": 22
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 74,
+        "displacement": 22
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 106,
+        "displacement": 10
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 120,
+        "displacement": 10
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 141,
+        "displacement": 8
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 161,
+        "displacement": 10
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 171,
+        "displacement": 10
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 194,
+        "displacement": 4
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 201,
+        "displacement": 20
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 243,
+        "displacement": 20
+      },
+      {
+        "public": "_f_1B05_0046",
+        "operand_offset": 250,
+        "displacement": 8
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "path": "src/program.json",
+      "sha256": "e441198b87a7e7d805f00a3702b7409125c6b861d42887036e8e8ce188907f1f"
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242"
+    },
+    {
+      "path": "tools/modules.py",
+      "sha256": "d4d7bcb5b680a37473d4cd46862aafd6163d3494c15ad1e618d132c953a449cc"
+    },
+    {
+      "path": "tools/canonical.py",
+      "sha256": "7916097b4b41a082b474790b058f877fb3524f20af4ff2037f6b6919b4eef342"
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+    }
+  ]
+}
