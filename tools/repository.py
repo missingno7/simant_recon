@@ -407,8 +407,11 @@ def write_status():
         f'Independent DOS linking remains blocked by {len(evidence["imports"])} storage imports, '
         f'{len(gates)} semantic gates and {sum(r["bytes"] for r in debt)} functional bytes '
         f'in {len(debt)} ranges. No standalone DOS game or human acceptance is established.', '',
-        'SDL3 runs the converted original main as a bounded preview. Its passing flows',
-        'do not close the native exceptions below. `functional-source-oracle-v1` is pending.', '',
+        'Manual SDL3 playtesting found broken sound, a logo-click hang and a discrepancy',
+        'in the intended 640x480 VGA path. [Playtest report](../evidence/canonical/validation/manual-playtest.json).',
+        'Standalone reconstructed DOS closure takes priority over native symptom fixes.',
+        'Bounded native passing flows do not close the exceptions below.',
+        '`functional-source-oracle-v1` is pending.', '',
         '## SEMANTIC / PORT-BLOCKING', '', '### Source storage imports', '',
         '| Symbol | Required resolution |', '| --- | --- |',
     ]

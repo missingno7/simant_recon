@@ -8,8 +8,11 @@ another inventory. Validation results and cleanup metrics are in [cleanup.md](cl
 The shared program has 191 whole source TUs and 29 strict semantic registrations.
 Independent DOS linking remains blocked by 11 storage imports, 11 semantic gates and 44 functional bytes in 6 ranges. No standalone DOS game or human acceptance is established.
 
-SDL3 runs the converted original main as a bounded preview. Its passing flows
-do not close the native exceptions below. `functional-source-oracle-v1` is pending.
+Manual SDL3 playtesting found broken sound, a logo-click hang and a discrepancy
+in the intended 640x480 VGA path. [Playtest report](../evidence/canonical/validation/manual-playtest.json).
+Standalone reconstructed DOS closure takes priority over native symptom fixes.
+Bounded native passing flows do not close the exceptions below.
+`functional-source-oracle-v1` is pending.
 
 ## SEMANTIC / PORT-BLOCKING
 

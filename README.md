@@ -5,7 +5,9 @@ The best reviewed reconstruction of the 1991 DOS game lives in `src/`.
 SDL3. Published checkpoints remain immutable; active reconstruction is corrigible.
 
 The SDL3 executable runs the converted original main as a bounded preview.
-Independent DOS linking remains blocked. See [current status](docs/status.md),
+Manual playtesting found broken sound, a logo-click hang and a discrepancy in
+the intended VGA display. Standalone reconstructed DOS closure now takes priority
+over native fixes. Independent DOS linking remains blocked. See [current status](docs/status.md),
 [architecture](docs/canonical-source.md), and [cleanup results](docs/cleanup.md).
 
 ## Build and validation

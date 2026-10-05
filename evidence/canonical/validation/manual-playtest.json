@@ -1,0 +1,20 @@
+{
+  "schema": "simant-human-playtest-observation-v1",
+  "date": "2026-10-05",
+  "reported_by": "user",
+  "build_context": "Current SDL3 build following the drop-in Windows playtest package at ad86584; exact tested executable identity was not supplied.",
+  "normal_interactive_use": "FAILED",
+  "observations": [
+    "The intended VGA mode should be the original 640x480 path.",
+    "Sound is not working correctly.",
+    "After the SimAnt logo appears, clicking it can leave the whole application/window unresponsive."
+  ],
+  "cause": "UNDETERMINED",
+  "scope": "Human observations of ordinary interactive use; no attribution to a specific source blocker or native service is established.",
+  "priority": "Finish standalone canonical source-built DOS, execute and compare it with the original before treating SDL3 correctness as the primary task.",
+  "constraints": [
+    "Do not patch these native symptoms or add semantic workarounds.",
+    "Retire existing temporary native exceptions as their source contracts close.",
+    "Keep one canonical source and zero original game byte fallback."
+  ]
+}

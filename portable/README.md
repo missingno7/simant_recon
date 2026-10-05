@@ -44,9 +44,12 @@ data, configuration or saves. The original startup needs an `INSTALL.EXE` file
 to open; the launcher creates an empty probe only when absent and preserves any
 existing installer. Prefer a short folder path for the original file dialogs.
 
-This is a playable preview, with PC-speaker audio and unresolved native contracts.
-Human testing of actual display/input/audio hardware and longer gameplay is useful;
-passing scripted Save/Load does not establish complete gameplay or save compatibility.
+Manual playtesting found broken sound, a logo-click hang and a discrepancy in the
+intended 640x480 VGA path. This package is not established as normally playable.
+See the [playtest report](../evidence/canonical/validation/manual-playtest.json).
+Passing scripted Save/Load does not establish complete gameplay or save compatibility.
+Standalone reconstructed DOS closure takes priority; source contracts must be
+recovered before adding native fixes for these symptoms.
 
 The application locates the adjacent resources and runs the converted original
 main. The platform application owns SDL lifecycle, presentation, input injection
