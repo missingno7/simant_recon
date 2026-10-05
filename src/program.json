@@ -21,8 +21,92 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "8ffce643519fc5d6fdb3d1d688b1e1e738857b9d04a50544b91bb5076cdaef7f",
-      "unit": "S00"
+      "source_sha256": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
+      "unit": "S00",
+      "owned_code_references": {
+        "owners": [
+          {
+            "label": "_o00_31AD_001C",
+            "segment": "S00B_TEXT",
+            "start": 24,
+            "size": 1,
+            "anchor_public": "_o00_31AD_001C",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o00_31AD_0004",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "_o00_31AD_013A",
+            "segment": "S00B_TEXT",
+            "start": 310,
+            "size": 1,
+            "anchor_public": "_o00_31AD_013A",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o00_31AD_0122",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "_o00_31AD_0394",
+            "segment": "S00B_TEXT",
+            "start": 912,
+            "size": 1,
+            "anchor_public": "_o00_31AD_0394",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o00_31AD_037C",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "L16C1",
+            "segment": "S00B_TEXT",
+            "start": 5821,
+            "size": 1,
+            "anchor_public": "_o00_31AD_16A9",
+            "anchor_delta": 24,
+            "references": [
+              {
+                "public": "_o00_31AD_16A9",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "_o00_31AD_16FC",
+            "segment": "S00B_TEXT",
+            "start": 5880,
+            "size": 1,
+            "anchor_public": "_o00_31AD_16FC",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o00_31AD_16E4",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "key": "S00:31AD@2AB4",
@@ -54,8 +138,28 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "5cfa946e9ec5da99b70726c0d30550721c25103bbcfd9e9a3d665ca68831fc2b",
-      "unit": "S01"
+      "source_sha256": "6136f2dab5aa8a2b2f9608f5ef2ae4287d04ceeaf5510ed6bd7310fb54fdeaba",
+      "unit": "S01",
+      "owned_code_references": {
+        "owners": [
+          {
+            "label": "L0264",
+            "segment": "S01A_TEXT",
+            "start": 612,
+            "size": 1,
+            "anchor_public": "_o01_3126_024C",
+            "anchor_delta": 24,
+            "references": [
+              {
+                "public": "_o01_3126_024C",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "key": "S01:328E",
@@ -87,8 +191,60 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "fcc39ce40a7355fc18024397e9be8666a398609fca720b18e77a41b694996292",
-      "unit": "S02"
+      "source_sha256": "5393ee21872be740e8386676db36bff54a9539e89a61bcbe47fdc0b80755fe8d",
+      "unit": "S02",
+      "owned_code_references": {
+        "owners": [
+          {
+            "label": "_o02_3126_00AE",
+            "segment": "S02A_TEXT",
+            "start": 174,
+            "size": 1,
+            "anchor_public": "_o02_3126_00AE",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o02_3126_0096",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "_o02_3126_019D",
+            "segment": "S02A_TEXT",
+            "start": 413,
+            "size": 1,
+            "anchor_public": "_o02_3126_019D",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o02_3126_0185",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "L0294",
+            "segment": "S02A_TEXT",
+            "start": 660,
+            "size": 1,
+            "anchor_public": "_o02_3126_027C",
+            "anchor_delta": 24,
+            "references": [
+              {
+                "public": "_o02_3126_027C",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "key": "S03:3126",
@@ -98,7 +254,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "33c47fd0113e14c015a9a0b43625d87d00afb46fb2f915b928f3a982130e72d8",
+      "source_sha256": "7c5bacf108c4dd5f747cee0905cd3e119818cf4f854600f4b21153ed03b716ea",
       "unit": "S03",
       "owned_code_references": {
         "owners": [
@@ -127,6 +283,54 @@
                 "public": "_o03_3126_0C1E",
                 "operand_offset": 824,
                 "owner_offset": 0
+              }
+            ]
+          },
+          {
+            "label": "_o03_3126_0210",
+            "segment": "S03A_TEXT",
+            "start": 528,
+            "size": 1,
+            "anchor_public": "_o03_3126_0210",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o03_3126_01F8",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "_o03_3126_03DA",
+            "segment": "S03A_TEXT",
+            "start": 986,
+            "size": 1,
+            "anchor_public": "_o03_3126_03DA",
+            "anchor_delta": 0,
+            "references": [
+              {
+                "public": "_o03_3126_03C2",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
+              }
+            ]
+          },
+          {
+            "label": "L05B4",
+            "segment": "S03A_TEXT",
+            "start": 1460,
+            "size": 1,
+            "anchor_public": "_o03_3126_059C",
+            "anchor_delta": 24,
+            "references": [
+              {
+                "public": "_o03_3126_059C",
+                "operand_offset": 12,
+                "owner_offset": 0,
+                "segment_operand_offset": 8
               }
             ]
           }
@@ -8657,7 +8861,7 @@
       {
         "id": "remaining-assembly-address-audit",
         "status": "UNRESOLVED",
-        "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The monochrome 8ED8 owner/extent and unchecked error-path addresses remain separate gates."
+        "reason": "Twenty-four source-owned code references now have symbolic offsets and mandatory OMF guards, including twelve rectangle-clip callback pairs. Both RTLink versions preserve their owner identities under moved placement. The broader numeric/segment-frame audit remains open; monochrome 8ED8 ownership/extent and unchecked error-path addresses are separate unresolved relationships."
       },
       {
         "id": "ctype-out-of-range-index-layout",

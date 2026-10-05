@@ -236,7 +236,7 @@ _o03_3126_01F8	proc	far
 	je _o03_3126_0210
 	mov ax, S03A_TEXT
 	push ax
-	mov ax, 210h
+	mov ax, OFFSET _o03_3126_0210
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
@@ -440,7 +440,7 @@ _o03_3126_03C2	proc	far
 	je _o03_3126_03DA
 	mov ax, S03A_TEXT
 	push ax
-	mov ax, 3DAh
+	mov ax, OFFSET _o03_3126_03DA
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
@@ -649,7 +649,7 @@ _o03_3126_059C	proc	far
 	je L05B4
 	mov ax, S03A_TEXT
 	push ax
-	mov ax, 5B4h
+	mov ax, OFFSET L05B4
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4

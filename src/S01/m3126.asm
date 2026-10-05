@@ -409,7 +409,7 @@ _o01_3126_024C	proc	far
 	je L0264
 	mov ax, S01A_TEXT
 	push ax
-	mov ax, 264h
+	mov ax, OFFSET L0264
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4

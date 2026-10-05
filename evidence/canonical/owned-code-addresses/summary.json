@@ -1,0 +1,1070 @@
+{
+  "schema": "simant-owned-code-address-current-proof-summary-v1",
+  "scope": "Twenty-four owned-code offsets in five complete primary assembly TUs, linked with the unchanged same-name second S00 TU: twelve code-data LEAs and twelve far callbacks passed to the synchronous rectangle clipper. Real-linker fixtures inspect actual linked operands at runtime; callback SEG/OFFSET identity is checked against existing PUBDEFs plus reviewed deltas and each SEG retains its MZ relocation. No game procedure or provider stub executes. This is not a full DOS game link, standalone game execution, assembly admission, storage proof, or historical-linker-version claim.",
+  "reproduce": "python evidence/canonical/owned-code-addresses/replay.py --out build/owned-code-address-proof-fresh",
+  "full_receipt": {
+    "path": "build/owned-code-addresses-current/receipt.json",
+    "sha256": "06b4d7259d46155fba5bad8cae8223cf618d7162727edb6150bad090526c955a",
+    "size": 711280
+  },
+  "reproducer": {
+    "path": "evidence/canonical/owned-code-addresses/replay.py",
+    "sha256": "4fd79fe2e5664c3a13cc31bead02b061f00e0d54278104c1e6c95d03cb0042e5",
+    "size": 31824
+  },
+  "canonical_source_inputs_and_negative_recipes": [
+    {
+      "module": "S00:31AD",
+      "canonical_source": {
+        "path": "src/S00/m31AD.asm",
+        "sha256": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
+        "size": 84117
+      },
+      "positive_source": {
+        "path": "build/owned-code-addresses-current/sources/NEWM00.asm",
+        "sha256": "2606a5ceef78c21dcec078415f93a0602678decd7314db0461ad6251fd985678",
+        "size": 90153
+      },
+      "negative_source": {
+        "path": "build/owned-code-addresses-current/sources/OLDM00.asm",
+        "sha256": "557a9da53aa789f5d22ae22ffa6509567c1993564ceba6228d8b7ab327f870cb",
+        "size": 90160
+      },
+      "negative_recipe": [
+        {
+          "type": "far_callback",
+          "wrapper": "o00_31AD_0004",
+          "target_label": "_o00_31AD_001C",
+          "canonical_operand": "OFFSET _o00_31AD_001C",
+          "negative_operand": "1Ch",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o00_31AD_0122",
+          "target_label": "_o00_31AD_013A",
+          "canonical_operand": "OFFSET _o00_31AD_013A",
+          "negative_operand": "13Ah",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o00_31AD_037C",
+          "target_label": "_o00_31AD_0394",
+          "canonical_operand": "OFFSET _o00_31AD_0394",
+          "negative_operand": "394h",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o00_31AD_16A9",
+          "target_label": "L16C1",
+          "canonical_operand": "OFFSET L16C1",
+          "negative_operand": "16C1h",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o00_31AD_16E4",
+          "target_label": "_o00_31AD_16FC",
+          "canonical_operand": "OFFSET _o00_31AD_16FC",
+          "negative_operand": "16FCh",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "module": "S01:3126",
+      "canonical_source": {
+        "path": "src/S01/m3126.asm",
+        "sha256": "6136f2dab5aa8a2b2f9608f5ef2ae4287d04ceeaf5510ed6bd7310fb54fdeaba",
+        "size": 46177
+      },
+      "positive_source": {
+        "path": "build/owned-code-addresses-current/sources/NEWM01.asm",
+        "sha256": "6dff6b56ddbdbefff662c9447ce7af6e4cfd1e4e17228c3270dd790df344fbb1",
+        "size": 49014
+      },
+      "negative_source": {
+        "path": "build/owned-code-addresses-current/sources/OLDM01.asm",
+        "sha256": "ff43088f205f4edfea68a78f5f6e64c017be11956757324ff4ab6e8a4f04023e",
+        "size": 49088
+      },
+      "negative_recipe": [
+        {
+          "type": "far_callback",
+          "wrapper": "o01_3126_024C",
+          "target_label": "L0264",
+          "canonical_operand": "OFFSET L0264",
+          "negative_operand": "264h",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "module": "S02:3126",
+      "canonical_source": {
+        "path": "src/S02/m3126.asm",
+        "sha256": "5393ee21872be740e8386676db36bff54a9539e89a61bcbe47fdc0b80755fe8d",
+        "size": 20567
+      },
+      "positive_source": {
+        "path": "build/owned-code-addresses-current/sources/NEWM02.asm",
+        "sha256": "b0486b9cccd4aa0da5b520b6f61fb2e752798a1e5137c4f0abfe7cef62844cf5",
+        "size": 21778
+      },
+      "negative_source": {
+        "path": "build/owned-code-addresses-current/sources/OLDM02.asm",
+        "sha256": "4440ba0ea77e536056476adc776e3988fd42e742c086cc6b97a7407108a73b18",
+        "size": 21818
+      },
+      "negative_recipe": [
+        {
+          "type": "far_callback",
+          "wrapper": "o02_3126_0096",
+          "target_label": "_o02_3126_00AE",
+          "canonical_operand": "OFFSET _o02_3126_00AE",
+          "negative_operand": "0AEh",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o02_3126_0185",
+          "target_label": "_o02_3126_019D",
+          "canonical_operand": "OFFSET _o02_3126_019D",
+          "negative_operand": "19Dh",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o02_3126_027C",
+          "target_label": "L0294",
+          "canonical_operand": "OFFSET L0294",
+          "negative_operand": "294h",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "module": "S03:3126",
+      "canonical_source": {
+        "path": "src/S03/m3126.asm",
+        "sha256": "7c5bacf108c4dd5f747cee0905cd3e119818cf4f854600f4b21153ed03b716ea",
+        "size": 37132
+      },
+      "positive_source": {
+        "path": "build/owned-code-addresses-current/sources/NEWM03.asm",
+        "sha256": "3eb72e15259264ca6e5955020733b35625d73fd91fb566998d0e785efd2a7281",
+        "size": 39395
+      },
+      "negative_source": {
+        "path": "build/owned-code-addresses-current/sources/OLDM03.asm",
+        "sha256": "8e5c59b9854cbf248f1696a997ed158e3de708496e2d0e8d4658e857d0732e65",
+        "size": 39431
+      },
+      "negative_recipe": [
+        {
+          "type": "LEA",
+          "register": "di",
+          "canonical_operand": "linebuf",
+          "negative_operand": "ds:[0]",
+          "count": 2
+        },
+        {
+          "type": "LEA",
+          "register": "si",
+          "canonical_operand": "linebuf",
+          "negative_operand": "ds:[0]",
+          "count": 2
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o03_3126_01F8",
+          "target_label": "_o03_3126_0210",
+          "canonical_operand": "OFFSET _o03_3126_0210",
+          "negative_operand": "210h",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o03_3126_03C2",
+          "target_label": "_o03_3126_03DA",
+          "canonical_operand": "OFFSET _o03_3126_03DA",
+          "negative_operand": "3DAh",
+          "count": 1
+        },
+        {
+          "type": "far_callback",
+          "wrapper": "o03_3126_059C",
+          "target_label": "L05B4",
+          "canonical_operand": "OFFSET L05B4",
+          "negative_operand": "5B4h",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "module": "S03:3258",
+      "canonical_source": {
+        "path": "src/S03/m3258.asm",
+        "sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
+        "size": 40733
+      },
+      "positive_source": {
+        "path": "build/owned-code-addresses-current/sources/NEWM3C.asm",
+        "sha256": "fda25fe9bc10bc8c28b33075e0493ee120c855655ad80a97c1cef11842b3beb6",
+        "size": 43428
+      },
+      "negative_source": {
+        "path": "build/owned-code-addresses-current/sources/OLDM3C.asm",
+        "sha256": "6518ec2ad31964476196539ac3e753a054a89d8b4cf701ad60910d6893a559cb",
+        "size": 43484
+      },
+      "negative_recipe": [
+        {
+          "type": "LEA",
+          "register": "dx",
+          "canonical_operand": "xlat_tabs",
+          "negative_operand": "ds:[0Ch]",
+          "count": 2
+        },
+        {
+          "type": "LEA",
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+512",
+          "negative_operand": "ds:[20Ch]",
+          "count": 2
+        },
+        {
+          "type": "LEA",
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+256",
+          "negative_operand": "ds:[10Ch]",
+          "count": 2
+        },
+        {
+          "type": "LEA",
+          "register": "bx",
+          "canonical_operand": "xlat_tabs+768",
+          "negative_operand": "ds:[30Ch]",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "unchanged_concatenated_peer": {
+    "module": "S00:31AD@2AB4",
+    "canonical_source": {
+      "path": "src/S00/m31AD_2AB4.asm",
+      "sha256": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
+      "size": 40338
+    },
+    "unchanged_peer_source": {
+      "path": "build/owned-code-addresses-current/sources/PEER.asm",
+      "sha256": "6d931dfdbe6b4e092084295af50a67a097bc08059fdfc00ea16160de9bc3f190",
+      "size": 43466
+    }
+  },
+  "whole_object_review": {
+    "S00:31AD": {
+      "code_and_data_lengths": {
+        "_DATA": 0,
+        "S00B_TEXT": 10927
+      },
+      "public_count": 44,
+      "old_fixup_count": 430,
+      "new_fixup_count": 435,
+      "retained_fixups_identical_in_order": true,
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    },
+    "S01:3126": {
+      "code_and_data_lengths": {
+        "_DATA": 132,
+        "S01A_TEXT": 5770
+      },
+      "public_count": 40,
+      "old_fixup_count": 476,
+      "new_fixup_count": 477,
+      "retained_fixups_identical_in_order": true,
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    },
+    "S02:3126": {
+      "code_and_data_lengths": {
+        "_DATA": 114,
+        "S02A_TEXT": 2409
+      },
+      "public_count": 28,
+      "old_fixup_count": 260,
+      "new_fixup_count": 263,
+      "retained_fixups_identical_in_order": true,
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    },
+    "S03:3126": {
+      "code_and_data_lengths": {
+        "_DATA": 250,
+        "S03A_TEXT": 4824
+      },
+      "public_count": 32,
+      "old_fixup_count": 407,
+      "new_fixup_count": 414,
+      "retained_fixups_identical_in_order": true,
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    },
+    "S03:3258": {
+      "code_and_data_lengths": {
+        "_DATA": 0,
+        "S03C_TEXT": 6055
+      },
+      "public_count": 7,
+      "old_fixup_count": 8,
+      "new_fixup_count": 16,
+      "retained_fixups_identical_in_order": true,
+      "all_other_code_and_data_bytes_identical": true,
+      "passed": true
+    }
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S00:31AD": 0,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 0
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 0,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 13,
+      "mismatching_by_type": {
+        "LEA": 8,
+        "far_callback": 5
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S00:31AD": 0,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 0
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 0,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S00:31AD": 4,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 4,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 12
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S00:31AD": 4,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 4,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 12
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S00:31AD": 36,
+        "S01:3126": 32,
+        "S02:3126": 32,
+        "S03:3126": 32,
+        "S03:3258": 44
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 36,
+        "S01A_TEXT": 32,
+        "S02A_TEXT": 32,
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 44
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 24,
+      "mismatching_by_type": {
+        "LEA": 12,
+        "far_callback": 12
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S00:31AD": 36,
+        "S01:3126": 32,
+        "S02:3126": 32,
+        "S03:3126": 32,
+        "S03:3258": 44
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 36,
+        "S01A_TEXT": 32,
+        "S02A_TEXT": 32,
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 44
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S00:31AD": 0,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 0
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 0,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 13,
+      "mismatching_by_type": {
+        "LEA": 8,
+        "far_callback": 5
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S00:31AD": 0,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 0
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 0,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 0
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S00:31AD": 4,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 4,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 12
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S00:31AD": 4,
+        "S01:3126": 0,
+        "S02:3126": 0,
+        "S03:3126": 0,
+        "S03:3258": 12
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 4,
+        "S01A_TEXT": 0,
+        "S02A_TEXT": 0,
+        "S03A_TEXT": 0,
+        "S03C_TEXT": 12
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "OLD",
+      "contribution_origins": {
+        "S00:31AD": 36,
+        "S01:3126": 32,
+        "S02:3126": 32,
+        "S03:3126": 32,
+        "S03:3258": 44
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 36,
+        "S01A_TEXT": 32,
+        "S02A_TEXT": 32,
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 44
+      },
+      "runtime_result": "FAIL",
+      "mismatching_operands": 24,
+      "mismatching_by_type": {
+        "LEA": 12,
+        "far_callback": 12
+      },
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "NEW",
+      "contribution_origins": {
+        "S00:31AD": 36,
+        "S01:3126": 32,
+        "S02:3126": 32,
+        "S03:3126": 32,
+        "S03:3258": 44
+      },
+      "test_prefix_bytes": {
+        "S00B_TEXT": 36,
+        "S01A_TEXT": 32,
+        "S02A_TEXT": 32,
+        "S03A_TEXT": 32,
+        "S03C_TEXT": 44
+      },
+      "runtime_result": "PASS",
+      "mismatching_operands": 0,
+      "mismatching_by_type": {
+        "LEA": 0,
+        "far_callback": 0
+      },
+      "passed": true
+    }
+  ],
+  "S00_same_name_concatenation": [
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "OLD",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 0
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10928
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10928,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "variant": "NEW",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 0
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10928
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10928,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "OLD",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 4
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10932
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10932,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "variant": "NEW",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 4
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10932
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10932,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "OLD",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 36
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10964
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10964,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "variant": "NEW",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 36
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10964
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10964,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "OLD",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 0
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10928
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10928,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "variant": "NEW",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 0
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10928
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10928,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "OLD",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 4
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10932
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10932,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "variant": "NEW",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 4
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10932
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10932,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "OLD",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 36
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10964
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10964,
+        "passed": true
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "variant": "NEW",
+      "S00_same_name_concatenation": {
+        "first_module": "S00:31AD",
+        "first_address": {
+          "segment": 0,
+          "offset": 36
+        },
+        "first_code_size": 10927,
+        "peer_module": "S00:31AD@2AB4",
+        "peer_address": {
+          "segment": 0,
+          "offset": 10964
+        },
+        "peer_code_size": 5345,
+        "same_linked_frame": true,
+        "link_fill_bytes": 1,
+        "link_fill_zero": true,
+        "expected_peer_offset": 10964,
+        "passed": true
+      }
+    }
+  ],
+  "fixture_pair_comparisons": [
+    {
+      "linker": "rtlink400",
+      "case": "ZERO",
+      "entire_MZ_relocation_set_and_order_identical": true,
+      "all_other_linked_code_and_data_bytes_identical": true,
+      "changed_OFFSET_operand_bytes": [
+        12,
+        298,
+        900,
+        5809,
+        5868,
+        30994,
+        30998,
+        31008,
+        31018,
+        33158,
+        33162,
+        33172,
+        33182
+      ],
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "HIST",
+      "entire_MZ_relocation_set_and_order_identical": true,
+      "all_other_linked_code_and_data_bytes_identical": true,
+      "changed_OFFSET_operand_bytes": [],
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "MOVE",
+      "entire_MZ_relocation_set_and_order_identical": true,
+      "all_other_linked_code_and_data_bytes_identical": true,
+      "changed_OFFSET_operand_bytes": [
+        48,
+        334,
+        936,
+        5845,
+        5904,
+        5905,
+        16952,
+        22322,
+        22561,
+        22808,
+        25124,
+        25582,
+        26056,
+        28165,
+        28259,
+        28440,
+        28534,
+        31166,
+        31170,
+        31180,
+        31190,
+        33330,
+        33334,
+        33344,
+        33354
+      ],
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "ZERO",
+      "entire_MZ_relocation_set_and_order_identical": true,
+      "all_other_linked_code_and_data_bytes_identical": true,
+      "changed_OFFSET_operand_bytes": [
+        12,
+        298,
+        900,
+        5809,
+        5868,
+        30994,
+        30998,
+        31008,
+        31018,
+        33158,
+        33162,
+        33172,
+        33182
+      ],
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "HIST",
+      "entire_MZ_relocation_set_and_order_identical": true,
+      "all_other_linked_code_and_data_bytes_identical": true,
+      "changed_OFFSET_operand_bytes": [],
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "MOVE",
+      "entire_MZ_relocation_set_and_order_identical": true,
+      "all_other_linked_code_and_data_bytes_identical": true,
+      "changed_OFFSET_operand_bytes": [
+        48,
+        334,
+        936,
+        5845,
+        5904,
+        5905,
+        16952,
+        22322,
+        22561,
+        22808,
+        25124,
+        25582,
+        26056,
+        28165,
+        28259,
+        28440,
+        28534,
+        31166,
+        31170,
+        31180,
+        31190,
+        33330,
+        33334,
+        33344,
+        33354
+      ],
+      "passed": true
+    }
+  ],
+  "site_counts": {
+    "LEA": 12,
+    "far_callback": 12
+  },
+  "negative_controls_derived_from_current_canonical_sources": true,
+  "all_required_checks_pass": true
+}

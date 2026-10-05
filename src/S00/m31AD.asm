@@ -123,7 +123,7 @@ _o00_31AD_0004	proc	far
 	je _o00_31AD_001C
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, 1Ch
+	mov ax, OFFSET _o00_31AD_001C
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
@@ -250,7 +250,7 @@ _o00_31AD_0122	proc	far
 	je _o00_31AD_013A
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, 13Ah
+	mov ax, OFFSET _o00_31AD_013A
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
@@ -549,7 +549,7 @@ _o00_31AD_037C	proc	far
 	je _o00_31AD_0394
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, 394h
+	mov ax, OFFSET _o00_31AD_0394
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
@@ -3176,7 +3176,7 @@ _o00_31AD_16A9	proc	far
 	je L16C1
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, 16C1h
+	mov ax, OFFSET L16C1
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
@@ -3207,7 +3207,7 @@ _o00_31AD_16E4	proc	far
 	je _o00_31AD_16FC
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, 16FCh
+	mov ax, OFFSET _o00_31AD_16FC
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4

@@ -35,8 +35,8 @@ def load() -> dict:
 def check_owned_code_references(contract: dict, obj) -> int:
     """Require linker-owned offsets, even when an old literal matches history.
 
-    This checks ordinary OMF references to an already reconstructed code-data
-    object. It creates no storage and changes neither bytes nor fixups.
+    This checks ordinary OMF references to reconstructed code-data objects
+    and callback entries anchored by existing publics. It creates no storage and changes neither bytes nor fixups.
     """
     count = 0
     for owner in contract['owners']:
@@ -44,6 +44,11 @@ def check_owned_code_references(contract: dict, obj) -> int:
         if not (isinstance(start, int) and isinstance(size, int) and
                 0 <= start < start + size <= obj.segment_lengths.get(segment, 0)):
             raise ValueError('owned code-data extent is outside its segment')
+        if 'anchor_public' in owner:
+            anchors = [p for p in obj.publics if p['name'] == owner['anchor_public']]
+            if (len(anchors) != 1 or anchors[0]['segment'] != segment or
+                    anchors[0]['offset'] + owner['anchor_delta'] != start):
+                raise ValueError('owned callback entry differs from its public anchor')
         for site in owner['references']:
             publics = [p for p in obj.publics if p['name'] == site['public']]
             if len(publics) != 1 or publics[0]['segment'] != segment:
@@ -62,6 +67,15 @@ def check_owned_code_references(contract: dict, obj) -> int:
             if len(fixups) != 1 or any(fixups[0].get(k) != v for k, v in expected.items()):
                 raise ValueError(f'owned code reference at {segment}:{offset:04X} '
                                  'is missing or has the wrong frame/target')
+            if 'segment_operand_offset' in site:
+                segment_offset = publics[0]['offset'] + site['segment_operand_offset']
+                segment_fixups = [f for f in obj.linker_fixups
+                                  if f['segment'] == segment and f['offset'] == segment_offset]
+                segment_expected = dict(expected, loc='base16', displacement=0)
+                if (len(segment_fixups) != 1 or
+                        any(segment_fixups[0].get(k) != v for k, v in segment_expected.items())):
+                    raise ValueError(f'owned code reference at {segment}:{offset:04X} '
+                                     'has the wrong paired segment word')
             count += 1
     return count
 
