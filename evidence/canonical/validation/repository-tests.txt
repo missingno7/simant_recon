@@ -1,11 +1,10 @@
-source-owned:g2108-color-translation STORAGE
-----------------------------------------------------------------------
-Ran 267 tests in 96.652s
-
+python -m unittest discover -s tests
+Ran 271 tests in 101.779s
 OK (skipped=2)
-  helper: EXACT (reloc order EXACT)
-PROMOTED 0 new claim(s) into src\root\m0001.c
-  helper: EXACT (reloc order EXACT)
-registered runtime data __iob = S27:55B3:779C (_file.c)
-registered runtime data __bufin = S27:55B3:92E4 (_file.c)
-added 2 runtime names
+
+After metadata-only ASM gate closure:
+python -m unittest discover -s tests -p test_canonical.py
+Ran 5 tests in 1.672s
+OK
+
+No canonical source or tooling changed after the full run.

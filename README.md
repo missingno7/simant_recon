@@ -25,7 +25,7 @@ explains the admissions, views and remaining blockers.
 
 The DOS preflight compiles all 191 translation units without original executable
 fallback. Independent linking remains blocked by eleven unproved storage imports
-and twelve semantic address/layout gates. Forty-four functional data bytes remain
+and eleven semantic address/layout gates. Forty-four functional data bytes remain
 unresolved. This is not yet a runnable standalone DOS reconstruction.
 
 The current SDL3 executable runs the converted original main and passes bounded
@@ -66,7 +66,7 @@ See [behavioral validation](docs/behavioral-proof.md) for dependencies and scope
 
 Native build outputs must be fresh. See [portable commands and prerequisites](portable/README.md)
 and the current suites under `portable/tests/`. The verified local executable for
-the current source is `build/portable-owner-current/simant-canonical.exe`.
+the current source is `build/portable-asm-audit-current/simant-canonical.exe`.
 
 ## Reconstruction work
 

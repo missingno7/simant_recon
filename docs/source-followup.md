@@ -72,7 +72,7 @@ See [the conversion and scope](../evidence/canonical/native-word-expressions/REA
 
 ## Remaining SEMANTIC / PORT-BLOCKING work
 
-DOS preflight still has eleven unresolved imports, twelve semantic address/layout
+DOS preflight still has eleven unresolved imports, eleven semantic address/layout
 gates and 44 functional data bytes. The independent DOS game link and execution
 remain unavailable. No new functional-source checkpoint is justified.
 
@@ -91,8 +91,20 @@ corroborate the relationships. All-path cursor bounds, control freshness and
 resource/menu domains remain unproved; the actual mickey Y-underflow XOR uses BX.
 No larger cache or guessed clamp is admitted. See [the viewport proof](../evidence/canonical/viewport-layout/review.md).
 
-The broader numeric-address/frame audit and general native integer semantics
-remain open. The new proofs discharge only their expressly stated relationships.
+The direct numeric/named-frame audit is closed for the 29 current ASM TUs under
+the documented DOS/ISA/ABI scope. Fourteen private LZSS SS operands now use
+DGROUP frames, preserving all 6 peers, complete extents and raw data. Both real
+linkers distinguish the correction after placement changes and the positive
+fixture decodes `AAAAA`. Mandatory OMF guards prevent historical equality from
+hiding the old frames. See [the frame proof](../evidence/canonical/lzss-data-frame/review.md)
+and [the bounded ASM review](../evidence/canonical/asm-address-audit/review.md).
+Computed owners/extents, C-address relationships and general native integer
+semantics remain open under their separate scopes.
+
+The corrected index allocator fixtures reproduce an original neighboring-header
+result and confirm the native bounds guard's bounded semantic difference.
+Ordinary game reachability remains unproved; no source algorithm is changed.
+See [the boundary evidence](../evidence/canonical/native-findindex-boundary/README.md).
 
 ## Remaining HISTORICAL-BINARY-ONLY work
 
@@ -106,11 +118,12 @@ does not block the SDL3 preview.
 | Check | Result |
 |---|---|
 | Historical validator | Pass; 49 compiler probes, exact extents/fixups/runtime proofs |
-| Repository tests | 267 tests, two intentional skips; all others pass |
+| Repository tests | 271 tests, two intentional skips; all others pass |
 | Owned-code placement controls | All 24 symbolic references pass in twelve expected outcomes across RTLink 4.00/6.10 |
-| DOS preflight | 191 TUs, 64 storage contracts, twenty-four owned-code references verified; link correctly refused |
+| DOS preflight | 191 TUs, 64 storage contracts, twenty-four owned-code and fourteen data-frame references verified; link correctly refused |
 | Native build | 161 canonical C TUs, 78 services, three ASM-data units; both links pass |
 | Icon Handle controls | Complete consumer/type/storage and stock-CRT placement controls; integration gates retained |
+| LZSS frames | Four positives and four distinguished negatives across both RTLinks;14mandatory bindings |
 | Graphics failure prefix | Real reset and four original-instruction controls; no eventual termination claim |
 | Native word controls | 113 DOS pairs; 21 distinguished negatives; generic O0/O2 controls pass |
 | RNG | 3,096 trace rows, zero mismatches, negative domain control passes |
@@ -119,12 +132,15 @@ does not block the SDL3 preview.
 | VGA / Save / Load | Pass; 48,386-byte save and 307 complete reads; bounded UI/file flow |
 
 The current local SDL3 executable is
-`build/portable-owner-current/simant-canonical.exe`, with 420 current input
+`build/portable-asm-audit-current/simant-canonical.exe`, with 420 current input
 pins. Current validation receipts live in `evidence/canonical/validation/`.
+Historical validation passed after all source/tool changes. The later metadata-only
+ASM gate retirement preserved those sources and compiler contexts; the final DOS
+and SDL3 receipts pin the resulting inventory.
 The full static semantic reviews still cover all 29 canonical behavioral
 definitions; these follow-up changes do not modify them.
 
-The active tree has 795 tracked files, compared with 10,280 before consolidation.
+The active tree has 808 tracked files, compared with 10,280 before consolidation.
 The initial cleanup count and byte totals remain historical receipts; the small
 increase since then consists of current ownership, conversion and validation proof.
 

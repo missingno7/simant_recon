@@ -23,13 +23,13 @@
     "debugger_unchanged": true,
     "only_expected_disposable_changes": true
   },
-  "build_report": "D:\\Prog\\simant_recon\\build\\portable-owner-current\\report.json",
-  "build_report_sha256": "4581b5b3bb0808490e68c5048b2bbea6ac36ea3e79b4e25b8d505d7abd10ca5d",
+  "build_report": "D:\\Prog\\simant_recon\\build\\portable-asm-audit-current\\report.json",
+  "build_report_sha256": "6ab2147f826b45b50097c61acd767df399bf520256943b1aeaaffe67efea03de",
   "verified_build_input_count": 420,
   "verified_native_service_count": 78,
-  "current_program_sha256": "83fa298ac14594d4cdd4c61481cfd08fc161a0f43bbdf37d1fe6cbb078cc20f6",
-  "platform_manifest_sha256": "94f5c69c188dda87b7e083fb0cf06235750c35b59a261bc45f38bdecc4bd733a",
-  "executable_sha256": "4527ce58a7200db59b5d65b7fc49b3aebfd4e5911353d261ff6fd684de94efc3",
+  "current_program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
+  "platform_manifest_sha256": "687c01585b7fba2714c2e5300b51e12baea46c424a8d9e14f6d81032bedc1518",
+  "executable_sha256": "5fa48d07d32b42335154b2c88ffdb3127833732c3a5424901e0db85e488ccc42",
   "SDL3_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
   "resource_pins": {
     "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
@@ -67,16 +67,16 @@
     "--batch",
     "-q",
     "-x",
-    "D:\\Prog\\simant_recon\\build\\nl6\\gdb.txt",
+    "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\gdb.txt",
     "--args",
-    "D:\\Prog\\simant_recon\\build\\portable-owner-current\\simant-canonical.exe",
+    "D:\\Prog\\simant_recon\\build\\portable-asm-audit-current\\simant-canonical.exe",
     "--headless",
     "--smoke-ms",
     "35000",
     "--frame",
-    "D:\\Prog\\simant_recon\\build\\nl6\\frame.bmp",
+    "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\frame.bmp",
     "--assets",
-    "D:\\Prog\\simant_recon\\build\\nl6\\a",
+    "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a",
     "--seed",
     "1",
     "--input-script",
@@ -87,18 +87,18 @@
   "timed_out": false,
   "fixture_event_count": 45,
   "injected_event_count": 45,
-  "outer_loops": 61479,
+  "outer_loops": 81668,
   "source_returns": [
     {
       "call": 1,
       "event": "o09_35F5_0188-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\nl6\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 27656,
+      "trace_elapsed_ms": 27750,
       "use_last": 1
     },
     {
@@ -106,9 +106,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 1,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\nl6\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
       "title": "Save Game",
-      "trace_elapsed_ms": 24156,
+      "trace_elapsed_ms": 24234,
       "verb": "SAVE"
     },
     {
@@ -116,9 +116,9 @@
       "event": "o09_35F5_03C6-return",
       "result": 1,
       "save": 0,
-      "selected_path": "D:\\Prog\\simant_recon\\build\\nl6\\a\\a.ant",
+      "selected_path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
       "title": "Load Game",
-      "trace_elapsed_ms": 34250,
+      "trace_elapsed_ms": 34344,
       "verb": "LOAD"
     },
     {
@@ -126,20 +126,20 @@
       "event": "LoadGame-return",
       "result": 1,
       "saved_file": {
-        "path": "D:\\Prog\\simant_recon\\build\\nl6\\a\\a.ant",
+        "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
         "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e",
         "size": 48386
       },
-      "trace_elapsed_ms": 34765
+      "trace_elapsed_ms": 34859
     }
   ],
   "load_read_calls": 307,
   "load_requested_bytes": 48386,
   "load_returned_bytes": 48386,
   "frame": {
-    "path": "D:\\Prog\\simant_recon\\build\\nl6\\frame.bmp",
+    "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\frame.bmp",
     "size": 1228938,
-    "sha256": "5f3b0080fb07c24c43d25ec3cf0b6c3de316c87911a77346187b845b807ad659",
+    "sha256": "dea5057cdbc623504e98ef28f31f7c3d12f489600ee341707b04d5b21660ce1d",
     "width": 640,
     "height": 480,
     "bits_per_pixel": 32,
@@ -147,7 +147,7 @@
     "valid": true
   },
   "saved_file": {
-    "path": "D:\\Prog\\simant_recon\\build\\nl6\\a\\a.ant",
+    "path": "D:\\Prog\\simant_recon\\build\\runtime-asm-load-final\\a\\a.ant",
     "size": 48386,
     "sha256": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
   },
@@ -157,13 +157,13 @@
       "after": "ee7227eeb362b5605ced2be71975f5a7ab7ca738611983d52e06e6355ec0377e"
     }
   },
-  "events_sha256": "0654621fe913c1f88bf2f5575524e0ffe9d370f6d20945091bcf8c3443ddba05",
+  "events_sha256": "618ac4238c688e56700b104adacf97d40fa90dd64333102b3caa8a22897ff8ae",
   "scope": "Current original main and ordinary SDL UI create then load a disposable SaveRec file. Read-only debugger observations establish successful source returns and complete reads. No after-load state equivalence, DOS save compatibility, resave, fixed terrain-seed or whole-game correctness claim.",
   "build_preview_limitations": [
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "root:1986",
-      "detail": "FindIndex native one-past guard returns null before canonical index[count] predicate. Real song lookup10010 can miss past HCEGANT271 rows before SOUND succeeds. DOS heap rounds paragraphs with uncleared tail bytes, or an adjacent Block header for even counts; that adjacent-memory predicate is unproved. Native preview semantic exception, no equivalence claim."
+      "detail": "FindIndex native one-past guard returns null before canonical index[count] predicate. Real song lookup10010 can miss past HCEGANT271 rows before SOUND succeeds. Original SOUND allocation followed by original Ralloc320 makes a neighboring Block header match synthetic ID0/kind22 and return as an index row; allocation304/free controls and known mono IDs10000/10010 return null. Natural game false-hit reachability and native/DOS heap-history equivalence remain unproved. Native preview semantic exception; bounded observable difference confirmed in evidence/canonical/native-findindex-boundary/."
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
