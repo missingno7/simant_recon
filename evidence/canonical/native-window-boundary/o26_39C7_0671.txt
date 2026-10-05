@@ -1,0 +1,232 @@
+o26_39C7_0671  S26:39C7:0671  linear 3A2E1  size 587  extent DESCENT  region game_or_library
+  entry evidence: vector
+  module frame 39C7: function 4/4; neighbours: o26_39C7_022F, o26_39C7_040F
+  frame: {'frame': 'bp', 'locals': 62, 'stack_check': False}
+  0671  push bp
+  0672  mov bp, sp
+  0674  sub sp, 0x3e
+  0677  push di
+  0678  push si
+  0679  mov es, word ptr [0x8a4e]          DS:8A4E
+  067D  mov ax, word ptr es:[0x5702]
+  0681  mov word ptr [bp - 0x16], ax
+  0684  cmp ax, 0x8000
+  0687  jne 0x68c
+  0689  jmp 0x8b4
+  068C  lcall 0x23ae, 0x377                -> win_LockWin
+  0691  mov ax, word ptr [bp - 0x16]
+  0694  lcall 0x2505, 0x345                -> win_WinAddr
+  0699  mov es, dx
+  069B  mov bx, ax
+  069D  mov word ptr [bp - 0x22], bx
+  06A0  mov word ptr [bp - 0x20], es
+  06A3  test byte ptr es:[bx + 0x1c], 8
+  06A8  jne 0x6b5
+  06AA  mov ax, word ptr [bp - 0x16]
+  06AD  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  06B2  jmp 0x8b4
+  06B5  and byte ptr es:[bx + 0x1c], 0x7f
+  06BA  lea ax, [bp - 0x36]
+  06BD  mov cx, es
+  06BF  push cx
+  06C0  push es
+  06C1  push ds
+  06C2  mov di, ax
+  06C4  mov si, bx
+  06C6  push ss
+  06C7  pop es
+  06C8  mov ds, cx
+  06CA  movsw word ptr es:[di], word ptr [si]
+  06CB  movsw word ptr es:[di], word ptr [si]
+  06CC  movsw word ptr es:[di], word ptr [si]
+  06CD  movsw word ptr es:[di], word ptr [si]
+  06CE  pop ds
+  06CF  pop es
+  06D0  pop cx
+  06D1  mov ax, word ptr es:[bx + 0x18]
+  06D5  mov dx, word ptr es:[bx + 0x1a]
+  06D9  mov word ptr [bp - 0x1a], ax
+  06DC  mov word ptr [bp - 0x18], dx
+  06DF  or ax, ax
+  06E1  jne 0x6e8
+  06E3  mov word ptr [bp - 0x1a], 0x30
+  06E8  or dx, dx
+  06EA  jne 0x6f1
+  06EC  mov word ptr [bp - 0x18], 0x30
+  06F1  lea ax, [bp - 0x3e]
+  06F4  push ss
+  06F5  push ax
+  06F6  mov ax, 0xf084
+  06F9  push ax
+  06FA  lcall 0x1fd2, 0x4b3                -> f_1FD2_04B3
+  06FF  add sp, 6
+  0702  or ax, ax
+  0704  jne 0x712
+  0706  mov ax, 0x6722                     "Couldn't find resize icoN!!"
+  0709  push ds
+  070A  push ax
+  070B  lcall 0x1c62, 0xc                  -> Punt
+  0710  pop bx
+  0711  pop bx
+  0712  lcall 0x1e57, 0x351                -> f_1E57_0351
+  0717  mov ax, word ptr [bp + 8]
+  071A  or ax, word ptr [bp + 6]
+  071D  jne 0x73d
+  071F  lea ax, [bp - 0x1e]
+  0722  push ss
+  0723  push ax
+  0724  lea cx, [bp - 0x3e]
+  0727  push ss
+  0728  push cx
+  0729  lcall 0x2505, 0x382                -> f_2505_0382
+  072E  push word ptr [bp - 0x1c]
+  0731  push word ptr [bp - 0x1e]
+  0734  lcall 0x1b73, 0x9e9                -> f_1B73_09E9
+  0739  pop bx
+  073A  pop bx
+  073B  jmp 0x74e
+  073D  les bx, ptr [bp + 6]
+  0740  mov ax, word ptr es:[bx + 8]
+  0744  mov word ptr [bp - 0x1e], ax
+  0747  mov ax, word ptr es:[bx + 0xa]
+  074B  mov word ptr [bp - 0x1c], ax
+  074E  lea ax, [bp - 0x2e]
+  0751  mov di, ax
+  0753  lea si, [bp - 0x36]
+  0756  push ss
+  0757  pop es
+  0758  movsw word ptr es:[di], word ptr [si]
+  0759  movsw word ptr es:[di], word ptr [si]
+  075A  movsw word ptr es:[di], word ptr [si]
+  075B  movsw word ptr es:[di], word ptr [si]
+  075C  mov cx, 2
+  075F  push cx
+  0760  push ss
+  0761  push ax
+  0762  lcall 0x1ce2, 0x410                -> GRectInvOutline
+  0767  add sp, 6
+  076A  mov ax, word ptr [bp - 0x1e]
+  076D  mov dx, word ptr [bp - 0x1c]
+  0770  mov word ptr [bp - 0x26], ax
+  0773  mov word ptr [bp - 0x24], dx
+  0776  lcall 0x1fd2, 0x57f                -> ButtonHeldInit
+  077B  jmp 0x803
+  077E  mov ax, word ptr [0x9122]          DS:9122 g_9122
+  0781  cmp word ptr [bp - 0x26], ax
+  0784  jne 0x78e
+  0786  mov ax, word ptr [0x9124]          DS:9124 g_9124
+  0789  cmp word ptr [bp - 0x24], ax
+  078C  je 0x803
+  078E  mov ax, 2
+  0791  push ax
+  0792  lea ax, [bp - 0x2e]
+  0795  push ss
+  0796  push ax
+  0797  lcall 0x1ce2, 0x410                -> GRectInvOutline
+  079C  add sp, 6
+  079F  lea ax, [bp - 0x26]
+  07A2  push ss
+  07A3  push ax
+  07A4  lcall 0x1fd2, 0x4d0                -> f_1FD2_04D0
+  07A9  pop bx
+  07AA  pop bx
+  07AB  lea ax, [bp - 0x2e]
+  07AE  push ss
+  07AF  push ax
+  07B0  lea ax, [bp - 0x36]
+  07B3  push ss
+  07B4  push ax
+  07B5  mov ax, word ptr [bp - 0x24]
+  07B8  sub ax, word ptr [bp - 0x1c]
+  07BB  push ax
+  07BC  mov bx, word ptr [bp - 0x26]
+  07BF  sub bx, word ptr [bp - 0x1e]
+  07C2  sub ax, ax
+  07C4  cdq
+  07C5  lcall 0x22bf, 0xb5b                -> f_22BF_0B5B
+  07CA  mov ax, word ptr [bp - 0x2a]
+  07CD  sub ax, word ptr [bp - 0x2e]
+  07D0  cmp ax, word ptr [bp - 0x1a]
+  07D3  jge 0x7de
+  07D5  mov ax, word ptr [bp - 0x1a]
+  07D8  add ax, word ptr [bp - 0x2e]
+  07DB  mov word ptr [bp - 0x2a], ax
+  07DE  mov ax, word ptr [bp - 0x28]
+  07E1  sub ax, word ptr [bp - 0x2c]
+  07E4  cmp ax, word ptr [bp - 0x18]
+  07E7  jge 0x7f2
+  07E9  mov ax, word ptr [bp - 0x18]
+  07EC  add ax, word ptr [bp - 0x2c]
+  07EF  mov word ptr [bp - 0x28], ax
+  07F2  mov ax, 2
+  07F5  push ax
+  07F6  lea ax, [bp - 0x2e]
+  07F9  push ss
+  07FA  push ax
+  07FB  lcall 0x1ce2, 0x410                -> GRectInvOutline
+  0800  add sp, 6
+  0803  lcall 0x1fd2, 0x598                -> ButtonHeld
+  0808  or ax, ax
+  080A  je 0x80f
+  080C  jmp 0x77e
+  080F  mov ax, 2
+  0812  push ax
+  0813  lea ax, [bp - 0x2e]
+  0816  push ss
+  0817  push ax
+  0818  lcall 0x1ce2, 0x410                -> GRectInvOutline
+  081D  add sp, 6
+  0820  lea ax, [bp - 0x2e]
+  0823  push ss
+  0824  push ax
+  0825  mov ax, word ptr [bp - 0x16]
+  0828  mov dx, 1
+  082B  push cs
+  082C  call 0x22f                         -> o26_39C7_022F
+  082F  les bx, ptr [bp - 0x22]
+  0832  mov ax, word ptr es:[bx + 0x2c]
+  0836  mov dx, word ptr es:[bx + 0x2e]
+  083A  mov word ptr [bp - 0xc], ax
+  083D  mov word ptr [bp - 0xa], dx
+  0840  mov es, dx
+  0842  mov bx, ax
+  0844  mov ax, word ptr [bp - 0x2a]
+  0847  sub ax, word ptr [bp - 0x32]
+  084A  add word ptr es:[bx + 0xc], ax
+  084E  mov ax, word ptr [bp - 0x28]
+  0851  sub ax, word ptr [bp - 0x30]
+  0854  les bx, ptr [bp - 0xc]
+  0857  add word ptr es:[bx + 0xe], ax
+  085B  mov ax, word ptr [bp - 0x16]
+  085E  lcall 0x2505, 0x25f                -> win_WinRectAddr
+  0863  mov word ptr [bp - 0x10], ax
+  0866  mov word ptr [bp - 0xe], dx
+  0869  lea si, [bp - 0x2e]
+  086C  les di, ptr [bp - 0x10]
+  086F  movsw word ptr es:[di], word ptr [si]
+  0870  movsw word ptr es:[di], word ptr [si]
+  0871  movsw word ptr es:[di], word ptr [si]
+  0872  movsw word ptr es:[di], word ptr [si]
+  0873  mov ax, word ptr [bp - 0x16]
+  0876  lcall 0x2505, 0x545                -> win_Recalc
+  087B  mov ax, word ptr [bp - 0x16]
+  087E  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  0883  lcall 0x1e57, 0x38e                -> f_1E57_038E
+  0888  push word ptr [bp - 0x16]
+  088B  mov es, word ptr [0x8a4c]          DS:8A4C
+  088F  lcall es:[0x62ec]
+  0894  pop bx
+  0895  lea ax, [bp - 0x36]
+  0898  push ss
+  0899  push ax
+  089A  lcall 0x21fa, 0xb4b                -> f_21FA_0B4B
+  089F  mov ax, word ptr [bp - 0x16]
+  08A2  lcall 0x2505, 0x8ea                -> f_2505_08EA
+  08A7  mov ax, word ptr [bp - 0x16]
+  08AA  lcall 0x2505, 0x831                -> f_2505_0831
+  08AF  lcall 0x218d, 0x42b                -> win_FlushEvents
+  08B4  pop si
+  08B5  pop di
+  08B6  mov sp, bp
+  08B8  pop bp
+  08B9  retf 4

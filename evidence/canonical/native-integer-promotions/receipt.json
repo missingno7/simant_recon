@@ -1,0 +1,135 @@
+{
+  "schema": "canonical-native-integer-promotion-boundary-v1",
+  "classification": "SEMANTIC/PORT-BLOCKING",
+  "status": "OPEN_STATIC_CONVERSION_LIMIT_NO_RUNTIME_WITNESS",
+  "method": "Bounded read-only inspection of scalar.py and two current canonical/generated function expressions. No global audit, compiler experiment, runtime execution or production/source mutation.",
+  "current_input_pins": {
+    "src/program.json": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
+    "src/root/m1986.c": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+    "src/root/m0798.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+    "portable/canonical_native_abi/scalar.py": "4ea12beb5431f577fa7d7e7a82a0a093dfa6465bb46b8af1d73195e127815d78",
+    "portable/build.py": "f447ff36a0ca7c8353e2fce33f29260c9d2d1452f9060434424f656c20ab2256"
+  },
+  "checkpoint_build": {
+    "path": "build/portable-checkpoint/report.json",
+    "sha256": "87e4325f8d2c03bdda0056b99182572629cb0bbf2c0c3cbb42a1546f72340144",
+    "passed": true,
+    "relevant_input_pins_match": {
+      "src/program.json": true,
+      "src/root/m1986.c": true,
+      "src/root/m0798.c": true,
+      "portable/canonical_native_abi/scalar.py": true,
+      "portable/build.py": false
+    }
+  },
+  "scalar_converter": {
+    "path": "portable/canonical_native_abi/scalar.py",
+    "sha256": "4ea12beb5431f577fa7d7e7a82a0a093dfa6465bb46b8af1d73195e127815d78",
+    "scope": "Lexical type lowering: declarations, parameter/return types and explicit casts use int16_t/uint16_t, int32_t/uint32_t and byte types; qualifiers are removed. Numeric literals and arithmetic/comparison operators are retained.",
+    "guarantee": "Fixed-width scalar object/type spelling and preservation of existing explicit casts; actual target signed char is requested by -fsigned-char.",
+    "not_guaranteed": [
+      "DOS 16-bit intermediate integer promotion and usual arithmetic conversion rules",
+      "Word-width multiply/add/subtract before subsequent division or comparison",
+      "All overflow, shift and mixed signed/unsigned domains",
+      "DOS type selection of unsuffixed hexadecimal constants such as 0x8000"
+    ],
+    "literal_example": "Unsuffixed 0x8000 fits unsigned int on the 16-bit DOS target but signed int on current GCC with 32-bit int. The converter does not rewrite that literal or globally reproduce conversions around it.",
+    "narrowing_limit": "Narrowing on a later assignment/return does not generally reproduce a DOS intermediate narrowing that affects a later division, branch or comparison."
+  },
+  "examples": [
+    {
+      "id": "index-midpoint",
+      "canonical": {
+        "path": "src/root/m1986.c",
+        "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+        "function": "FindIndex",
+        "definition_line": 77,
+        "expression_line": 87,
+        "expression": "mid = (fd_50F6_3956 + top) / 2;"
+      },
+      "generated": {
+        "path": "build/portable-checkpoint/root_1986.c",
+        "sha256": "eb62b4411cbcf2818a07f4047dfdb97ccf44a76250df44a7306a82873e535059",
+        "function": "FindIndex",
+        "definition_line": 65,
+        "expression_line": 75,
+        "expression": "mid = (fd_50F6_3956 + top) / 2;"
+      },
+      "DOS": "Both operands are signed 16-bit int; the addition is an int expression before division by 2.",
+      "native": "Both int16_t operands promote to the current GCC 32-bit int; the sum and division occur at that width, with narrowing only on assignment to mid.",
+      "limit": "Existing shipped index counts are 120,271,449 and do not establish a sum-overflow witness. This anchor proves the converter does not insert an intermediate word operation. Signed overflow is undefined in ISO C; no general DOS wrap guarantee or runtime divergence is claimed."
+    },
+    {
+      "id": "unsigned-triangle-comparison",
+      "canonical": {
+        "path": "src/root/m0798.c",
+        "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+        "function": "GetTriLatDist",
+        "definition_line": 468,
+        "expression_line": 477,
+        "expression": "if ((unsigned)dy > triHeight - 2)"
+      },
+      "generated": {
+        "path": "build/portable-checkpoint/root_0798.c",
+        "sha256": "bbc5651fd72cb9b30618f9515a9ac4b0c6fbeed239c1e671fec175544cccc2a4",
+        "function": "GetTriLatDist",
+        "definition_line": 472,
+        "expression_line": 481,
+        "expression": "if ((uint16_t)dy > triHeight - 2)"
+      },
+      "declaration": {
+        "canonical": "src/root/m0798.c:50 extern unsigned far triHeight;",
+        "generated": "build/portable-checkpoint/root_0798.c:55 extern uint16_t triHeight;"
+      },
+      "DOS": "dy is explicitly converted to unsigned 16-bit int. triHeight is also unsigned 16-bit int; the literal 2 converts to that unsigned type, so triHeight-2 is unsigned 16-bit subtraction before the unsigned comparison.",
+      "native": "Both uint16_t values promote to signed 32-bit int, which represents their entire range. triHeight-2 and the comparison therefore use signed 32-bit int.",
+      "limit": "When triHeight is at least 2, this comparison agrees over the representable dy cast domain. For triHeight below 2 the conversion/subtraction rules differ. No reachability proof, shipped-resource witness or new execution was obtained for that boundary."
+    }
+  ],
+  "explicit_bounded_controls": [
+    {
+      "path": "build/portable-checkpoint/root_0093.c",
+      "sha256": "2e18205e38d3b0a4aa52583cbdc6a52917668f6c910f884e40a3261f0e18ecbc",
+      "function": "rng_advance_seed",
+      "expression_line": 40,
+      "expression": "ax = (uint16_t)(ax << 1);",
+      "meaning": "The dedicated RNG ASM translation explicitly narrows the shifted word before the state update; its existing differential test validates its stated domain."
+    },
+    {
+      "path": "build/portable-checkpoint/root_1E57.c",
+      "sha256": "11ea0572c98db4aaef06531ba79ba2c4c2643546031f4597885d64eefe058fef",
+      "function": "f_1E57_0052",
+      "expression_line": 62,
+      "expression": "if (g_5702[i] == (int16_t)0x8000)",
+      "canonical_anchor": "src/root/m1E57.c:61 if (g_5702[i] == (int)0x8000)",
+      "meaning": "This is an already explicit canonical int cast preserved by scalar lowering, not a global literal rewrite or a new adapter intervention."
+    }
+  ],
+  "existing_tested_domains": [
+    {
+      "path": "evidence/canonical/validation/native-rng.json",
+      "sha256": "8a109e0688950aa2606ce6f9cdfd1a5b660ac192dbee42f7e2e2f2b88fa6de55",
+      "scope": "3096 bounded original-DOS/current native RNG rows; explicit seed transitions and CRT recurrence. No full-program arithmetic claim.",
+      "action": "Existing receipt read only; no tests rerun for this finding."
+    },
+    {
+      "path": "evidence/canonical/validation/native-simulation.json",
+      "sha256": "de8c6790740b239ef4ed9c3abe302bee27d7e0a9d623f37b5464c69425049e05",
+      "scope": "194 bounded DoAntMoveY/DoAntSimY cases and mutation controls; no universal state/input-domain proof.",
+      "action": "Existing receipt read only; no tests rerun for this finding."
+    },
+    {
+      "path": "evidence/canonical/validation/native-database.json",
+      "sha256": "aa7cb35d6aba0059d193369800690813d0839a23dfdabe5f3aefbae940dbee97",
+      "scope": "840 actual DBRecall payloads and bounded current integration/index queries; existing FindIndex guard exception remains separate. No boundary witness for the two expressions above.",
+      "action": "Existing receipt read only; no tests rerun for this finding."
+    }
+  ],
+  "non_claims": [
+    "No observed failure at either cited expression.",
+    "No proof that the differing boundary domains are reached by shipped resources/callers.",
+    "No implication that successful whole-TU compilation or fixed-width typedefs close all DOS integer semantics.",
+    "No source change, guessed range restriction, global arithmetic rewrite or acceptance closure."
+  ],
+  "checkpoint_wording": "Fixed scalar storage/cast widths plus bounded validated adapters; global DOS 16-bit intermediate expression semantics remain unproved."
+}

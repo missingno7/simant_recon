@@ -100,17 +100,15 @@ def assert_packed_time(result: FindT, expected_local: datetime) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--work", required=True,
+    parser.add_argument("--out", required=True,
                         help="new fixture/build directory under build/workers")
-    parser.add_argument("--receipt", default=
-                        "portable/whole_program/platform/evidence/directory-provider-windows-v8.json")
     parser.add_argument("--gcc", default=str(GCC_DEFAULT))
     args = parser.parse_args()
-    work = (ROOT / args.work).resolve()
+    work = (ROOT / args.out).resolve()
     workers = (ROOT / "build/workers").resolve()
-    receipt = ROOT / args.receipt
+    receipt = work / "receipt.json"
     if workers not in work.parents:
-        raise SystemExit("--work must be a child directory under build/workers")
+        raise SystemExit("--out must be a child directory under build/workers")
     if work.exists():
         raise SystemExit(f"refusing to overwrite work directory: {work}")
     if receipt.exists():

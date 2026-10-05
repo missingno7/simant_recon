@@ -1,0 +1,32 @@
+f_2505_04D7  root:2505:04D7  linear 25527  size 58  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call
+  module frame 2505: function 15/20; neighbours: f_2505_03B9, f_2505_0453, f_2505_0511, win_Recalc
+  frame: {'frame': 'bp', 'stack_check': False}
+  04D7  push bp
+  04D8  mov bp, sp
+  04DA  push dx
+  04DB  push si
+  04DC  mov si, ax
+  04DE  mov al, ah
+  04E0  cwde
+  04E1  mov es, word ptr [0x8a48]          DS:8A48
+  04E5  cmp word ptr es:[0x47d8], ax
+  04EA  jg 0x4f7
+  04EC  cmp si, 0x2800
+  04F0  jge 0x4f7
+  04F2  mov ax, 0x8000
+  04F5  jmp 0x50c
+  04F7  push si
+  04F8  push cs
+  04F9  call 6                             -> f_2505_0006
+  04FC  pop bx
+  04FD  mov es, dx
+  04FF  mov bx, ax
+  0501  add bx, 0x10
+  0504  mov si, word ptr [bp - 2]
+  0507  shl si, 1
+  0509  mov ax, word ptr es:[bx + si]
+  050C  pop si
+  050D  mov sp, bp
+  050F  pop bp
+  0510  retf

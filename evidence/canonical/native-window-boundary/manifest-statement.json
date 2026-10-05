@@ -1,0 +1,5 @@
+{
+  "gate": "SEMANTIC_NORMALIZATION/BOUNDED_DOMAIN",
+  "module": "root:20E8/window ABI",
+  "detail": "Canonical win_Open and win_Swap write physical caller-stack words into window+0x10..0x16 when optional words were not supplied. Native conversion zeroes omitted slots. Raw state therefore differs. Static source-observer and all 34 shipped window-resource review supports game-observable equivalence of those omitted slots for the current canonical callers/immutable shipped resources: mode-5 geometry is the only parameter-vector reader, and every consumed slot has a supplied argument. Swap targets windows 1/25 consume none. New malformed/stale/missing-argument failures and arbitrary externally assembled window stacks/resources remain unsupported; no universal DOS/native or raw-state equivalence is claimed. See evidence/canonical/native-window-boundary/review.md and installed-correspondence.json."
+}

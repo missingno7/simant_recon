@@ -1,8 +1,0 @@
-o10_35F5_0384 in S10:35F5 (msc600ax /AL /Os /Og /Oe /Gs /Zi), rules: REL-SWAP,COMM-SWAP,TERN-SWAP,NOT-CMP,CONST-U,COMPOUND,CHAIN-ORDER,CHAIN-SPLIT,EMBED,OR-DUP,AND-NEST,IF-NEG,ELSE-WRAP,RET-MERGE,TERN-IF,FOR-WHILE,CSE-INLINE,CSE-REUSE,LOCAL-MERGE,LOCAL-SPLIT,PARAM-COPY,RESULT-LOCAL,DECL-SWAP,DECL-INIT,PROTO-NAMES,PROTO-TYPE,EXTERN-SWAP,TEMP-INTRO,CASE-SWAP,STMT-SWAP,STORE-LOCAL,SYM-NAMES
-base: insn 321 bytes 1587 len +13  length 1746 != target 1759; bytes differ (first at +0x5, 1574 differing); relocation set differs (42 vs 42)
-level 1: 300 variants from 1 state(s)
-  better: insn 235 bytes 1696 len +5  via PARAM-COPY[items]
-level 2: 300 variants from 12 state(s)
-  better: insn 235 bytes 1695 len +5  via PARAM-COPY[items] + STMT-SWAP[r.right -= g_3DDE; <> r.top += 3;]
-  better: insn 235 bytes 1692 len +5  via PARAM-COPY[items] + STMT-SWAP[j = 0; <> k = cur;]
-best: insn 235 bytes 1692 len +5 (base insn 321 bytes 1587 len +13) after 600 variants: PARAM-COPY[items] + STMT-SWAP[j = 0; <> k = cur;]

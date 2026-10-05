@@ -1,0 +1,106 @@
+FindIndex  root:1986:012A  linear 1998A  size 267  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 1986: function 4/7; neighbours: CreateIndex, CloseIndex, f_1986_0235, f_1986_0236
+  frame: {'frame': 'bp', 'locals': 10, 'stack_check': False, 'arg_bytes_min': 6}
+  best draft: build/search/FindIndex/best.c  MISMATCH ratio 0.9898
+  012A  push bp
+  012B  mov bp, sp
+  012D  sub sp, 0xa
+  0130  push di
+  0131  push si
+  0132  mov bx, 0x3956                     "ny files open.  You need a statement 'FILES=12' in
+your conf"
+  0135  mov es, word ptr [0x89b2]          DS:89B2
+  0139  mov word ptr [bp - 4], bx
+  013C  mov word ptr [bp - 2], es
+  013F  mov word ptr es:[bx], 0
+  0144  mov ax, 0x7c
+  0147  imul word ptr [bp + 6]
+  014A  mov bx, ax
+  014C  mov word ptr [bp - 6], bx
+  014F  mov es, word ptr [0x89b0]          DS:89B0
+  0153  mov di, word ptr es:[bx + 0x39ac]
+  0158  dec di
+  0159  mov ax, di
+  015B  inc ax
+  015C  jne 0x1d1
+  015E  jmp 0x22c
+  0161  mov ax, word ptr es:[bx]
+  0164  add ax, di
+  0166  cdq
+  0167  sub ax, dx
+  0169  sar ax, 1
+  016B  mov si, ax
+  016D  mov cl, 3
+  016F  shl ax, cl
+  0171  mov es, word ptr [0x89b0]          DS:89B0
+  0175  mov bx, word ptr [bp - 6]
+  0178  add ax, word ptr es:[bx + 0x39a8]
+  017D  mov dx, word ptr es:[bx + 0x39aa]
+  0182  mov bx, 0x3952                     "o many files open.  You need a statement 'FILES=12' in
+your "
+  0185  mov es, word ptr [0x89b4]          DS:89B4
+  0189  mov word ptr [bp - 0xa], bx
+  018C  mov word ptr [bp - 8], es
+  018F  mov word ptr es:[bx], ax
+  0192  mov word ptr es:[bx + 2], dx
+  0196  mov es, dx
+  0198  mov bx, ax
+  019A  mov al, byte ptr es:[bx + 6]
+  019E  sub ah, ah
+  01A0  cmp ax, word ptr [bp + 0xa]
+  01A3  jg 0x1c3
+  01A5  les bx, ptr [bp - 0xa]
+  01A8  les bx, ptr es:[bx]
+  01AB  mov al, byte ptr es:[bx + 6]
+  01AF  cmp ax, word ptr [bp + 0xa]
+  01B2  jne 0x1c8
+  01B4  mov ax, word ptr [bp + 8]
+  01B7  les bx, ptr [bp - 0xa]
+  01BA  les bx, ptr es:[bx]
+  01BD  cmp word ptr es:[bx + 4], ax
+  01C1  jl 0x1c8
+  01C3  lea di, [si - 1]
+  01C6  jmp 0x1d1
+  01C8  lea ax, [si + 1]
+  01CB  les bx, ptr [bp - 4]
+  01CE  mov word ptr es:[bx], ax
+  01D1  les bx, ptr [bp - 4]
+  01D4  cmp word ptr es:[bx], di
+  01D7  jle 0x161
+  01D9  mov cl, 3
+  01DB  mov ax, word ptr es:[bx]
+  01DE  shl ax, cl
+  01E0  mov es, word ptr [0x89b0]          DS:89B0
+  01E4  mov bx, word ptr [bp - 6]
+  01E7  les bx, ptr es:[bx + 0x39a8]
+  01EC  add bx, ax
+  01EE  mov si, 0x3952                     "o many files open.  You need a statement 'FILES=12' in
+your "
+  01F1  mov ax, es
+  01F3  mov es, word ptr [0x89b4]          DS:89B4
+  01F7  mov word ptr [bp - 0xa], si
+  01FA  mov word ptr [bp - 8], es
+  01FD  mov word ptr es:[si], bx
+  0200  mov word ptr es:[si + 2], ax
+  0204  mov es, ax
+  0206  mov ax, word ptr [bp + 8]
+  0209  cmp word ptr es:[bx + 4], ax
+  020D  jne 0x22c
+  020F  les bx, ptr [bp - 0xa]
+  0212  les bx, ptr es:[bx]
+  0215  mov al, byte ptr es:[bx + 6]
+  0219  sub ah, ah
+  021B  cmp ax, word ptr [bp + 0xa]
+  021E  jne 0x22c
+  0220  les bx, ptr [bp - 0xa]
+  0223  mov ax, word ptr es:[bx]
+  0226  mov dx, word ptr es:[bx + 2]
+  022A  jmp 0x22f
+  022C  sub ax, ax
+  022E  cdq
+  022F  pop si
+  0230  pop di
+  0231  mov sp, bp
+  0233  pop bp
+  0234  retf

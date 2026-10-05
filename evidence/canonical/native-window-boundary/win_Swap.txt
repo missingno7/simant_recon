@@ -1,0 +1,158 @@
+win_Swap  root:20E8:032F  linear 211AF  size 391  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 20E8: function 4/17; neighbours: win_LoadWindow, win_LoadAllWindows, win_Open, win_Close
+  frame: {'frame': 'bp', 'locals': 28, 'stack_check': False, 'arg_bytes_min': 14}
+  032F  push bp
+  0330  mov bp, sp
+  0332  sub sp, 0x1c
+  0335  push di
+  0336  push si
+  0337  mov ax, word ptr [bp + 6]
+  033A  lcall 0x23ae, 0x377                -> win_LockWin
+  033F  push word ptr [bp + 6]
+  0342  lcall 0x2505, 6                    -> f_2505_0006
+  0347  pop bx
+  0348  mov word ptr [bp - 8], ax
+  034B  mov word ptr [bp - 6], dx
+  034E  les bx, ptr [bp - 8]
+  0351  mov ax, word ptr es:[bx + 0x2c]
+  0355  mov dx, word ptr es:[bx + 0x2e]
+  0359  add ax, 8
+  035C  push es
+  035D  push ds
+  035E  lea di, [bp - 0x10]
+  0361  mov si, ax
+  0363  push ss
+  0364  pop es
+  0365  mov ds, dx
+  0367  movsw word ptr es:[di], word ptr [si]
+  0368  movsw word ptr es:[di], word ptr [si]
+  0369  movsw word ptr es:[di], word ptr [si]
+  036A  movsw word ptr es:[di], word ptr [si]
+  036B  pop ds
+  036C  pop es
+  036D  lea ax, [bp - 0x18]
+  0370  mov cx, es
+  0372  push ds
+  0373  mov di, ax
+  0375  mov si, bx
+  0377  push ss
+  0378  pop es
+  0379  mov ds, cx
+  037B  movsw word ptr es:[di], word ptr [si]
+  037C  movsw word ptr es:[di], word ptr [si]
+  037D  movsw word ptr es:[di], word ptr [si]
+  037E  movsw word ptr es:[di], word ptr [si]
+  037F  pop ds
+  0380  mov bx, 0x5702
+  0383  mov es, word ptr [0x8a20]          DS:8A20
+  0387  mov word ptr [bp - 0x1c], bx
+  038A  mov word ptr [bp - 0x1a], es
+  038D  cmp word ptr es:[bx], 0
+  0391  je 0x39b
+  0393  mov ax, word ptr es:[bx]
+  0396  lcall 0x2505, 0x8ea                -> f_2505_08EA
+  039B  les bx, ptr [bp - 8]
+  039E  test byte ptr es:[bx + 0x1d], 2
+  03A3  je 0x3ca
+  03A5  lcall [0x62e4]                     DS:62E4
+  03A9  push word ptr [bp + 6]
+  03AC  lcall [0x62f4]                     DS:62F4
+  03B0  pop bx
+  03B1  push word ptr [bp + 6]
+  03B4  lcall 0x1e57, 0x115                -> clip_KillWin
+  03B9  pop bx
+  03BA  les bx, ptr [bp - 8]
+  03BD  and byte ptr es:[bx + 0x1d], 0xfd
+  03C2  push word ptr [bp + 6]
+  03C5  lcall [0x62e0]                     DS:62E0 g_62E0
+  03C9  pop bx
+  03CA  mov ax, word ptr [bp + 6]
+  03CD  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  03D2  mov ax, word ptr [bp + 8]
+  03D5  lcall 0x23ae, 0x377                -> win_LockWin
+  03DA  push word ptr [bp + 8]
+  03DD  lcall 0x2505, 6                    -> f_2505_0006
+  03E2  pop bx
+  03E3  mov es, dx
+  03E5  mov bx, ax
+  03E7  mov ax, word ptr es:[bx + 0x2c]
+  03EB  mov dx, word ptr es:[bx + 0x2e]
+  03EF  mov word ptr [bp - 8], ax
+  03F2  mov word ptr [bp - 6], dx
+  03F5  mov cx, es
+  03F7  mov es, dx
+  03F9  mov si, ax
+  03FB  mov ax, word ptr [bp - 0x10]
+  03FE  mov word ptr es:[si + 8], ax
+  0402  mov ax, word ptr [bp - 0xe]
+  0405  les si, ptr [bp - 8]
+  0408  mov word ptr es:[si + 0xa], ax
+  040C  push cx
+  040D  push si
+  040E  push es
+  040F  mov di, bx
+  0411  lea si, [bp - 0x18]
+  0414  mov es, cx
+  0416  movsw word ptr es:[di], word ptr [si]
+  0417  movsw word ptr es:[di], word ptr [si]
+  0418  movsw word ptr es:[di], word ptr [si]
+  0419  movsw word ptr es:[di], word ptr [si]
+  041A  pop es
+  041B  pop si
+  041C  pop cx
+  041D  push cx
+  041E  push ds
+  041F  mov di, si
+  0421  mov si, bx
+  0423  mov ds, cx
+  0425  movsw word ptr es:[di], word ptr [si]
+  0426  movsw word ptr es:[di], word ptr [si]
+  0427  movsw word ptr es:[di], word ptr [si]
+  0428  movsw word ptr es:[di], word ptr [si]
+  0429  pop ds
+  042A  pop cx
+  042B  mov es, cx
+  042D  mov ax, word ptr [bp + 0xc]
+  0430  mov word ptr es:[bx + 0x10], ax
+  0434  mov ax, word ptr [bp + 0xe]
+  0437  mov word ptr es:[bx + 0x12], ax
+  043B  mov ax, word ptr [bp + 0x10]
+  043E  mov word ptr es:[bx + 0x14], ax
+  0442  mov ax, word ptr [bp + 0x12]
+  0445  mov word ptr es:[bx + 0x16], ax
+  0449  mov ax, word ptr [bp + 8]
+  044C  lcall 0x2505, 0x545                -> win_Recalc
+  0451  push word ptr [bp + 8]
+  0454  lcall [0x62e0]                     DS:62E0 g_62E0
+  0458  pop bx
+  0459  push word ptr [bp + 8]
+  045C  lcall 0x2505, 6                    -> f_2505_0006
+  0461  pop bx
+  0462  mov es, dx
+  0464  mov bx, ax
+  0466  or byte ptr es:[bx + 0x1d], 2
+  046B  les bx, ptr [bp - 0x1c]
+  046E  cmp word ptr es:[bx], 0x8000
+  0473  je 0x47d
+  0475  mov ax, word ptr es:[bx]
+  0478  lcall 0x2505, 0x8ea                -> f_2505_08EA
+  047D  push word ptr [bp + 8]
+  0480  lcall 0x1e57, 0xb1                 -> f_1E57_00B1
+  0485  pop bx
+  0486  mov ax, word ptr [bp + 8]
+  0489  lcall 0x2505, 0x831                -> f_2505_0831
+  048E  push word ptr [bp + 8]
+  0491  lcall 0x1e57, 0x174                -> clip_SetWin
+  0496  pop bx
+  0497  mov ax, word ptr [bp + 8]
+  049A  lcall 0x21fa, 0x8e2                -> win_DrawWindow
+  049F  lcall [0x62e8]                     DS:62E8
+  04A3  mov ax, word ptr [bp + 8]
+  04A6  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  04AB  lcall 0x1e57, 0x362                -> clip_Off
+  04B0  pop si
+  04B1  pop di
+  04B2  mov sp, bp
+  04B4  pop bp
+  04B5  retf

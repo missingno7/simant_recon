@@ -8,6 +8,8 @@ include/** text eol=lf
 .gitignore text eol=lf
 portable/**/*.c text eol=lf
 portable/**/*.h text eol=lf
+portable/runtime/bios-reference/** -text
+portable/tests/runtime/*.txt text eol=lf
 
 # Current validator and proof identities retain their exact recorded bytes.
 tools/** -text

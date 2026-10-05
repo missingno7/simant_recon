@@ -9,9 +9,6 @@ extern "C" {
 
 /* Source driver table callbacks for S00 g914C/g9150. g914C dispatches through
  * the actual generated root f_1D8E_07F6 clipping body when g5AAC is non-null. */
-extern SimGraphicsBitmapCallback g_914C;
-extern SimGraphicsBitmapCallback g_9150;
-
 SimGraphicsStatus sim_graphics_source_bitmap_bind(SimGraphicsDriver *graphics);
 void sim_graphics_source_bitmap_unbind(void);
 

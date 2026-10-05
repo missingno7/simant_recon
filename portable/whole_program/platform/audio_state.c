@@ -22,19 +22,18 @@ _Static_assert(offsetof(PortableWholeAudioSample, data) == 0 &&
  * scalar symbols (including 4A48/4A4C/4B2C/4B2E/4B8A). Generated code uses
  * this one canonical object for shared pointer-bearing table views.
  */
-PortableWholeAudioInstrumentEntry fd_50F6_0000[56];
+extern PortableWholeAudioInstrumentEntry fd_50F6_0000[56];
 PortableWholeAudioSample *fd_50F6_0150[39];
-int16_t fd_50F6_01F0[7];
+extern int16_t fd_50F6_01F0[7];
 
-PortableWholeAudioRuntimeChannel fd_50F6_4A4E[33];
+extern PortableWholeAudioRuntimeChannel fd_50F6_4A4E[33];
 
-char **fd_50F6_4B28;
+extern char **fd_50F6_4B28;
 uint8_t fd_50F6_4B30[18];
 int32_t fd_50F6_4B42[18];
-int16_t fd_50F6_4B8E[14];
-int16_t fd_50F6_4BAA[14];
+extern int16_t fd_50F6_4B8E[14];
+extern int16_t fd_50F6_4BAA[14];
 
-int16_t fd_55B3_6B42;
-PortableWholeAudioRuntimeSample fd_55B3_6B4C[4];
-PortableWholeAudioVoiceSlot fd_55B3_6B4E[33];
-uint16_t fd_55B3_6B9E;
+extern int16_t fd_55B3_6B42;
+extern PortableWholeAudioRuntimeSample fd_55B3_6B4C[4];
+extern uint16_t fd_55B3_6B9E;

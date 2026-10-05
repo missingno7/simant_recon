@@ -20,7 +20,7 @@ typedef struct PortableSpiderLineBuffer {
     uint8_t pixels[PORTABLE_LINE16B5_MAX_INLINE_BYTES];
 } PortableSpiderLineBuffer;
 
-extern PortableSpiderLineBuffer portable_line16b5_source_buffer;
+extern PortableSpiderLineBuffer fd_50F6_1F26;
 
 #if defined(__cplusplus)
 static_assert(offsetof(PortableSpiderLineBuffer, pixels) == 4,

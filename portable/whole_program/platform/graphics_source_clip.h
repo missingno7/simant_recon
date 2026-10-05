@@ -12,8 +12,7 @@ extern "C" {
  * 55B3:5AAC. g_5AAE is the pointer's segment word, not another global. */
 /* Original 5A9C..5AAB is a full-screen rectangle followed by a sentinel
  * rectangle. Source clip_Off and clip_SubExclude walk it as a list. */
-extern struct Rect sim_source_screen_clip_list[2];
-#define g_5A9C (sim_source_screen_clip_list[0])
+extern struct Rect g_5A9C[2];
 extern struct Rect *g_5AAC;
 extern int16_t fd_55B3_3DE6;
 extern int16_t fd_55B3_3DE8;

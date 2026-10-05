@@ -1,4 +1,6 @@
+#include "canonical_graphics_data.h"
 #include "m1b73_application_input.h"
+#include "canonical_mouse_input_data.h"
 
 #include "../graphics_cursor_source.h"
 #include "../m1b73_mouse_state.h"
@@ -13,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern struct Timer g_5FF2;
+#include "portable/whole_program/types/input_queue.h"
 static PortableM1B73SdlApplicationInput *active_application_input;
 
 static uint16_t read_u16(const uint8_t *bytes)
@@ -216,7 +218,7 @@ static int dimensions_match(Host *host, const SimGraphicsDriver *graphics)
     return host_get_logical_size(host, &width, &height) &&
         width == graphics->framebuffer.width &&
         height == graphics->framebuffer.height &&
-        width == graphics->g_3DB2 && height == graphics->g_3DB4 &&
+        width == g_3DB2 && height == g_3DB4 &&
         width > 0 && height > 0 && width <= INT16_MAX && height <= INT16_MAX;
 }
 
@@ -268,8 +270,8 @@ PortableM1B73ApplicationInputStatus portable_m1b73_sdl_application_input_bind(
         goto event_fail;
     }
     if (!portable_m1b73_bind_source_main_input(&binding->events,
-            &binding->input_host, game_clock, &binding->shift_state,
-            binding->event_records, PORTABLE_M1B73_EVENT_SLOTS)) {
+            &binding->input_host, game_clock, &shift_state,
+            queue_view.records, queue_view.record_slots)) {
         status = PORTABLE_M1B73_APP_INPUT_EVENT_BIND_FAILED;
         goto event_fail;
     }
@@ -283,8 +285,8 @@ PortableM1B73ApplicationInputStatus portable_m1b73_sdl_application_input_bind(
     mouse_services.hit_test = hotbox_hit_test;
     mouse_services.render_cursor = render_source_cursor;
     if (portable_m1b73_mouse_bind(&binding->mouse, host, &binding->input_host,
-            &portable_m1b73_mouse_asm_state, &graphics->g_3DB2,
-            &graphics->g_3DB4, &mouse_services) != PORTABLE_M1B73_MOUSE_OK)
+            &portable_m1b73_mouse_asm_state, &g_3DB2,
+            &g_3DB4, &mouse_services) != PORTABLE_M1B73_MOUSE_OK)
     {
         status = PORTABLE_M1B73_APP_INPUT_MOUSE_BIND_FAILED;
         goto mouse_fail;
@@ -296,7 +298,7 @@ PortableM1B73ApplicationInputStatus portable_m1b73_sdl_application_input_bind(
 
     graphics_bindings = *cursor_bindings;
     graphics_bindings.graphics = graphics;
-    graphics_bindings.source_shift_state = &binding->shift_state;
+    graphics_bindings.source_shift_state = &shift_state;
     graphics_bindings.hide_rectangle_active = &g_4334;
     graphics_bindings.hide_rectangle = g_4336;
     cursor_status = sim_graphics_source_cursor_bind(&binding->graphics_cursor,
@@ -314,7 +316,6 @@ PortableM1B73ApplicationInputStatus portable_m1b73_sdl_application_input_bind(
     }
     binding->queues_bound = 1;
     binding->bound = 1;
-    binding->source_countdown = 0; /* original tmr_countdown DATA initializer */
     binding->countdown_last_tick = sim_timing_tick_count(bios_clock);
     binding->countdown_initialized = 1;
     active_application_input = binding;
@@ -434,7 +435,7 @@ PortableM1B73ApplicationInputStatus portable_m1b73_source_countdown_set(
         PORTABLE_INPUT_TIME_OK)
         return PORTABLE_M1B73_APP_INPUT_PROVIDER_FAILED;
     now = sim_timing_tick_count(binding->bios_clock);
-    binding->source_countdown = (uint16_t)source_ticks;
+    tmr_countdown = (uint16_t)source_ticks;
     binding->countdown_last_tick = now;
     binding->countdown_initialized = 1;
     return PORTABLE_M1B73_APP_INPUT_OK;
@@ -461,9 +462,9 @@ PortableM1B73ApplicationInputStatus portable_m1b73_source_countdown_get(
     elapsed = now - binding->countdown_last_tick;
     binding->countdown_last_tick = now;
     dec = (uint64_t)elapsed * 5u;
-    binding->source_countdown = dec >= binding->source_countdown ? 0 :
-        (uint16_t)(binding->source_countdown - (uint16_t)dec);
-    *remaining = binding->source_countdown;
+    tmr_countdown = dec >= tmr_countdown ? 0 :
+        (uint16_t)(tmr_countdown - (uint16_t)dec);
+    *remaining = tmr_countdown;
     return PORTABLE_M1B73_APP_INPUT_OK;
 }
 

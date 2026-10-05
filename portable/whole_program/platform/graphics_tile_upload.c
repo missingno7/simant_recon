@@ -1,3 +1,4 @@
+extern void (*driver_callback_table[25])();
 #include "graphics_tile_upload.h"
 
 #include "graphics_bitmap_source.h"
@@ -19,10 +20,7 @@ static uint8_t s_planes[SIM_GRAPHICS_PLANAR_PLANE_COUNT]
                        [SIM_GRAPHICS_PLANAR_APERTURE_BYTES];
 static SimGraphicsDriver *s_graphics_owner;
 static SimGraphicsTileUploadStatus s_status = SIM_GRAPHICS_TILE_UPLOAD_NOT_BOUND;
-uint16_t g_3DD4;
-SimGraphicsTileBlitCallback g_917C;
-SimGraphicsTileMapUploadCallback g_9180;
-
+extern uint16_t g_3DD4;
 typedef enum TileCompositorKind {
     TILE_COMPOSITOR_2B1A,
     TILE_COMPOSITOR_1B7D,
@@ -68,8 +66,8 @@ SimGraphicsTileUploadStatus sim_graphics_tile_upload_bind(SimGraphicsDriver *gra
     }
     s_graphics_owner = graphics_owner;
     memset(s_planes, 0, sizeof(s_planes));
-    g_917C = o00_31AD_0647;
-    g_9180 = o00_31AD_18BA;
+    (*( SimGraphicsTileBlitCallback *)(void *)&driver_callback_table[21]) = o00_31AD_0647;
+    (*( SimGraphicsTileMapUploadCallback *)(void *)&driver_callback_table[22]) = o00_31AD_18BA;
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }
 
@@ -77,8 +75,8 @@ void sim_graphics_tile_upload_unbind(void)
 {
     s_graphics_owner = NULL;
     s_status = SIM_GRAPHICS_TILE_UPLOAD_NOT_BOUND;
-    g_917C = NULL;
-    g_9180 = NULL;
+    (*( SimGraphicsTileBlitCallback *)(void *)&driver_callback_table[21]) = NULL;
+    (*( SimGraphicsTileMapUploadCallback *)(void *)&driver_callback_table[22]) = NULL;
 }
 
 SimGraphicsCursorHooksStatus sim_graphics_tile_cursor_bind(
@@ -242,7 +240,7 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     /* The source's first branch sends every unaligned x through 0CF9,
      * even when there is no active clipping list. */
     clipped = sim_graphics_source_clip_active() || (((uint16_t)x & 7u) != 0);
-    if ((clipped ? g_914C : g_9150) == NULL)
+    if ((clipped ? (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) : (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[10])) == NULL)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_UNBOUND;
     if (!sim_graphics_cursor_hooks_is_bound())
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_CURSOR_SERVICE_UNBOUND;
@@ -276,7 +274,7 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     /* Only the direct aperture path shifts x to a byte address. 0CF9
      * receives the original coordinate, including its low three bits. */
     draw_x = clipped ? x : (int32_t)((uint16_t)x >> 3) * 8;
-    callback = clipped ? g_914C : g_9150;
+    callback = clipped ? (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) : (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[10]);
     s_graphics_owner->last_status = SIM_GRAPHICS_OK;
     callback((int16_t)draw_x, y, (char *)tile, 16, 16);
     if (s_graphics_owner->last_status != SIM_GRAPHICS_OK) {
@@ -368,8 +366,8 @@ static SimGraphicsTileUploadStatus compose_record(
             }
             if (apply_prefix)
                 result ^= prefix;
-            sim_asm_g3d20.bytes[row * 8u + word * 2u] = (uint8_t)result;
-            sim_asm_g3d20.bytes[row * 8u + word * 2u + 1u] =
+            g_3D20[row * 8u + word * 2u] = (uint8_t)result;
+            g_3D20[row * 8u + word * 2u + 1u] =
                 (uint8_t)(result >> 8);
         }
     }
@@ -385,10 +383,10 @@ static SimGraphicsTileUploadStatus draw_composed_record(
         cache_offset, plane, record, mask_mode, kind);
     if (status != SIM_GRAPHICS_TILE_UPLOAD_OK)
         return status;
-    if (g_914C == NULL)
+    if ((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) == NULL)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_UNBOUND;
     s_graphics_owner->last_status = SIM_GRAPHICS_OK;
-    g_914C(x, y, (char *)sim_asm_g3d20.bytes, 16, 16);
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9])(x, y, (char *)g_3D20, 16, 16);
     if (s_graphics_owner->last_status != SIM_GRAPHICS_OK)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_FAILED;
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;

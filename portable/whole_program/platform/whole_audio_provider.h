@@ -2,7 +2,7 @@
 #define SIMANT_WHOLE_PROGRAM_PLATFORM_WHOLE_AUDIO_PROVIDER_H
 
 #include "audio_events.h"
-#include "../../research/audio_voice_scheduler.h"
+#include "audio_mixer_service.h"
 
 typedef enum PortableWholeAudioProviderStatus {
     PORTABLE_WHOLE_AUDIO_PROVIDER_OK = 0,

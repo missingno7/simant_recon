@@ -1,379 +1,310 @@
-#!/usr/bin/env python3
-"""Project-local MinGW/SDL3 build. Historical inputs are read-only."""
-from __future__ import annotations
+"""Build SDL3 from the sole current canonical program inventory.
 
+All ordinary owners originate in canonical C/ASM; platform files provide native
+representations and services. Open historical/native contracts are listed in
+the platform manifest and do not acquire an acceptance claim by compiling.
+"""
+from pathlib import Path
 import argparse
 import hashlib
 import json
-import os
-from pathlib import Path
+import re
 import shutil
-import shlex
 import subprocess
 import sys
-import tempfile
-import urllib.request
-import zipfile
+from concurrent.futures import ThreadPoolExecutor
+from canonical_native_abi import scalar, tokenizer as csrc
+from canonical_native_abi.source_views import (
+    GRAPHICS_SCALARS,
+    audio_overlap_views,
+    callback_views,
+    canonical_interior_views,
+    centralize,
+    edit_cache_view,
+    graphics_canonical_views,
+    menu_native_memory,
+    rename,
+    screen_clip_canonical_views,
+    translate_29d6_port_block,
+    unused_cache_release_argument,
+)
+from canonical_native_abi import rng
+from canonical_native_abi import audio
+from canonical_native_abi import audio_shared_state_preword
+from canonical_native_abi import fonts
+from canonical_native_abi import pointer_globals
+from canonical_native_abi import varargs
+from canonical_native_abi import windows
+from canonical_native_abi import window_loader
+from canonical_native_abi import timer
+from canonical_native_abi import startup_bundle
+from canonical_native_abi import main_preflight
+from canonical_native_abi import findindex_native_guard
+from canonical_native_abi import crt_abi
+from canonical_native_abi import spider_inline_source
+from canonical_native_abi import m1b73_queue_source
+from canonical_native_abi import m1b73_event_source
+from canonical_native_abi import event_word_switch
+from canonical_native_abi import file_select_host
+from canonical_native_abi import menu_s17_preword
+from canonical_native_abi import list_text_handle
+from canonical_native_abi import clip_stack_native
+from canonical_native_abi import cache_table_native
+from canonical_native_abi import countdown_host
+from canonical_native_abi import window_parameter_abi_v1
+from canonical_native_abi import window_swap_parameter_abi_v2
+from canonical_native_abi import newgame_zoom_window_v1
+from canonical_native_abi import s26_window_object_views_v1
+from canonical_native_abi import load_string_ant
+from canonical_native_abi import source_runtime_globals
+PROJECT=Path(__file__).resolve().parents[1]
+ROOT=PROJECT
+OUT=None
+SDK=None
+CC=None
+PLATFORM=json.loads((Path(__file__).parent/'platform.json').read_text())
+ABI_MODULES={'rng':rng,'audio':audio,'audio_shared_state_preword':audio_shared_state_preword,'fonts':fonts,'pointer_globals':pointer_globals,'varargs':varargs,'windows':windows,'window_loader':window_loader,'timer':timer,'startup_bundle':startup_bundle,'main_preflight':main_preflight,'findindex_native_guard':findindex_native_guard,'crt_abi':crt_abi,'spider_inline_source':spider_inline_source,'m1b73_queue_source':m1b73_queue_source,'m1b73_event_source':m1b73_event_source,'event_word_switch':event_word_switch,'file_select_host':file_select_host,'menu_s17_preword':menu_s17_preword,'list_text_handle':list_text_handle,'clip_stack_native':clip_stack_native,'cache_table_native':cache_table_native,'countdown_host':countdown_host,'window_parameter_abi_v1':window_parameter_abi_v1,'window_swap_parameter_abi_v2':window_swap_parameter_abi_v2,'newgame_zoom_window_v1':newgame_zoom_window_v1,'s26_window_object_views_v1':s26_window_object_views_v1,'load_string_ant':load_string_ant,'source_runtime_globals':source_runtime_globals}
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-from portable.tools.profile_next9 import validate_next9
-from portable.tools.profile_next10 import validate_next10
-from portable.tools.convert_control_events import verify as verify_control_conversion
-
-VERSION = "3.4.16"
-SDK_SHA = "9828bb735cf8a007bcf0ac5aa9f01f3fcb54b7ca67c932e775c905c5d5053a60"
-SDK_URL = f"https://github.com/libsdl-org/SDL/releases/download/release-{VERSION}/SDL3-devel-{VERSION}-mingw.zip"
-
-# Standalone research models have their own differential build commands.
-# Link them into the SDL host after their contracts and callers are reviewed.
-UNINTEGRATED_MODELS = {
-    "portable/ui_model/windows/zoom.c",
-    "portable/ui_model/windows/history_render.c",
-    "portable/ui_model/windows/decorations.c",
-    "portable/ui_model/dialogs/menu_quit.c",
-}
-
-
-def sdk_path() -> Path:
-    return ROOT / "build" / "sdl3-sdk" / f"SDL3-{VERSION}" / "x86_64-w64-mingw32"
-
-
-def install_sdk() -> None:
-    archive = ROOT / "build" / "sdl3-sdk" / f"SDL3-devel-{VERSION}-mingw.zip"
-    archive.parent.mkdir(parents=True, exist_ok=True)
-    if not archive.exists():
-        urllib.request.urlretrieve(SDK_URL, archive)
-    actual = hashlib.sha256(archive.read_bytes()).hexdigest()
-    if actual != SDK_SHA:
-        raise SystemExit(f"SDL3 SDK checksum mismatch: {actual}")
-    with zipfile.ZipFile(archive) as z:
-        for entry in z.infolist():
-            target = (archive.parent / entry.filename).resolve()
-            if not target.is_relative_to(archive.parent.resolve()):
-                raise SystemExit("Unsafe SDK archive entry")
-        z.extractall(archive.parent)
-    print(f"Verified SDL3 {VERSION}: {actual}")
-
-
-def build(main: Path, output: Path, sources: list[Path],
-          profile: Path | None = None) -> None:
-    sdk = sdk_path()
-    if not (sdk / "include" / "SDL3" / "SDL.h").exists():
-        raise SystemExit("SDL3 SDK missing; run python portable/build.py --setup-sdk")
-    compiler = os.environ.get("SIMANT_CC") or shutil.which("gcc")
-    if not compiler:
-        candidate = Path("C:/msys64/mingw64/bin/gcc.exe")
-        compiler = str(candidate) if candidate.exists() else None
-    if not compiler:
-        raise SystemExit("MinGW-w64 GCC required; set SIMANT_CC")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    frozen_check = output.parent / "frozen-oracle-check.json"
-    subprocess.run([sys.executable, str(ROOT / "tools/oracle_checkpoint.py"),
-                    "--output", str(frozen_check)], cwd=ROOT, check=True)
-    if not json.loads(frozen_check.read_text())["ready"]:
-        raise SystemExit("Frozen historical input identity check failed")
-    core_objects=[]
-    core_hashes={}
-    extra_flags=[]
-    if profile is not None:
-        profile=profile.resolve()
-        if not profile.is_relative_to(ROOT):
-            raise SystemExit("Source profile must be in the workspace")
-        provenance=json.loads((profile / "provenance.json").read_text())
-        if not all(row.get("compile", {}).get("passed")
-                   for row in provenance["modules"]) or not (
-                provenance.get("support_compile", {}).get("passed") and
-                provenance.get("native_adapter_compile", {}).get("passed")):
-            raise SystemExit("Source profile has not passed its complete compile gate")
-        selected_provenance = provenance
-        next10_input_pins = {}
-        if "versioned_profile_extension_next10" in provenance:
-            # Validate the complete unchanged parent through every existing
-            # gate; separately admit all actual Next10 generated inputs.
-            provenance, next10_input_pins = validate_next10(provenance)
-        state=provenance["recovered_state"]
-        if state["binding_status"] != "COMPLETE" or state["source_data_initializer_mismatches"]:
-            raise SystemExit("Incomplete recovered source profile")
-        expected={state["path"]:state["header_sha256"],
-                  state["source_path"]:state["source_sha256"],
-                  provenance["native_adapter_compile"]["path"]:
-                      provenance["native_adapter_compile"]["source_sha256"]}
-        expected["portable/tools/recover_source.py"] = provenance["generator_sha256"]
-        extension = provenance.get("versioned_profile_extension")
-        next5 = provenance.get("versioned_profile_extension_next5")
-        next6 = provenance.get("versioned_profile_extension_next6")
-        next7 = provenance.get("versioned_profile_extension_next7")
-        next8 = provenance.get("versioned_profile_extension_next8")
-        next9 = provenance.get("versioned_profile_extension_next9")
-        if any(key.startswith("versioned_profile_extension_") and
-               key not in ("versioned_profile_extension_next5",
-                           "versioned_profile_extension_next6",
-                           "versioned_profile_extension_next7",
-                           "versioned_profile_extension_next8",
-                           "versioned_profile_extension_next9") for key in provenance):
-            raise SystemExit("Unreviewed recovered profile generation")
-        inherited_state = {"recovered_state.h": state["header_sha256"],
-                           "recovered_state.c": state["source_sha256"]}
-        if next9 is not None:
-            extra_expected, inherited_state = validate_next9(provenance)
-            expected.update(extra_expected)
-        if next8 is not None:
-            lowering8 = next8.get("lowering", {})
-            if (next7 is None or next5 is None or
-                    next8.get("schema") != "simant-recovered-source-profile-extension-v1" or
-                    next8.get("id") != "s24-event-code-width-next8-v1" or
-                    next8.get("status") != "DIAGNOSTIC_ONLY_NOT_PRODUCTION" or
-                    next8.get("selected_functions") != ["ProcHistoryEvent"] or
-                    next8.get("parent_wrapper") != next7.get("wrapper_path") or
-                    next8.get("parent_wrapper_sha256") != next7.get("wrapper_sha256") or
-                    lowering8.get("changed_function") != "ProcHistoryEvent" or
-                    lowering8.get("source_member_type") != "unsigned (16-bit under MSC large model)" or
-                    lowering8.get("host_member_type") != "uint16_t (fixed 16-bit)" or
-                    lowering8.get("before_generated_sha256") !=
-                        next5.get("parent_module_hashes", {}).get("S24_m39C7")):
-                raise SystemExit("Unreviewed history-event word ABI")
-            row8 = next((row for row in provenance["modules"]
-                         if row["name"] == "S24_m39C7"), {})
-            parent8 = next8.get("parent_profile", {})
-            if (row8.get("generated") != lowering8.get("path") or
-                    row8.get("generated_sha256") != lowering8.get("after_generated_sha256") or
-                    parent8.get("changed_modules") != ["S24_m39C7"] or
-                    parent8.get("module_count") != 25 or
-                    parent8.get("state_hashes") != inherited_state):
-                raise SystemExit("History-event lowering changed its profile boundary")
-            expected[next8["wrapper_path"]] = next8["wrapper_sha256"]
-            for anchor in next8["selected_source"]["function_anchors"].values():
-                expected[anchor["source_path"]] = anchor["source_sha256"]
-        if next7 is not None:
-            lowering7 = next7.get("lowering", {})
-            if (next6 is None or next5 is None or
-                    next7.get("schema") != "simant-recovered-source-profile-extension-v1" or
-                    next7.get("id") != "explicit-yellow-rng-order-next7-v1" or
-                    next7.get("status") != "DIAGNOSTIC_ONLY_NOT_PRODUCTION" or
-                    next7.get("selected_functions") != ["InitYelloAnt"] or
-                    next7.get("parent_wrapper") != next6.get("wrapper_path") or
-                    next7.get("parent_wrapper_sha256") != next6.get("wrapper_sha256") or
-                    lowering7.get("changed_function") != "InitYelloAnt" or
-                    lowering7.get("targeted_call_order") != [
-                        "SRand16:right", "SRand16:left", "SRand8:right", "SRand8:left"] or
-                    lowering7.get("before_generated_sha256") !=
-                        next5.get("parent_module_hashes", {}).get("S08_m35F5")):
-                raise SystemExit("Unreviewed yellow-ant RNG sequencing")
-            row7 = next((row for row in provenance["modules"]
-                         if row["name"] == "S08_m35F5"), {})
-            if (row7.get("generated") != lowering7.get("path") or
-                    row7.get("generated_sha256") != lowering7.get("after_generated_sha256")):
-                raise SystemExit("Yellow-ant lowering identity mismatch")
-            state_hashes = next7.get("parent_module_hashes_unchanged_except_target", {}).get("state_hashes", {})
-            if state_hashes != inherited_state:
-                raise SystemExit("RNG lowering changed the parent state profile")
-            expected[next7["wrapper_path"]] = next7["wrapper_sha256"]
-            for anchor in next7["selected_source"]["function_anchors"].values():
-                expected[anchor["source_path"]] = anchor["source_sha256"]
-        if next6 is not None:
-            lowering = next6.get("lowering", {})
-            if (next5 is None or
-                    next6.get("schema") != "simant-recovered-source-profile-extension-v1" or
-                    next6.get("id") != "explicit-antlion-rng-order-next6-v1" or
-                    next6.get("status") != "DIAGNOSTIC_ONLY_NOT_PRODUCTION" or
-                    next6.get("selected_functions") != ["AddRandAntLion"] or
-                    next6.get("parent_wrapper") != next5.get("wrapper_path") or
-                    next6.get("parent_wrapper_sha256") != next5.get("wrapper_sha256") or
-                    lowering.get("changed_function") != "AddRandAntLion" or
-                    lowering.get("targeted_call_order") != [65, 64, 33, 32] or
-                    lowering.get("before_generated_sha256") !=
-                        next5.get("parent_module_hashes", {}).get("root_m0AD9")):
-                raise SystemExit("Unreviewed ant-lion RNG sequencing")
-            modules = {row["name"]: row for row in provenance["modules"]}
-            row = modules.get("root_m0AD9", {})
-            if (row.get("generated") != lowering.get("path") or
-                    row.get("generated_sha256") != lowering.get("after_generated_sha256") or
-                    any(modules.get(name, {}).get("generated_sha256") != digest
-                        for name, digest in next5["parent_module_hashes"].items()
-                        if name != "root_m0AD9" and
-                        not (next7 is not None and name == "S08_m35F5") and
-                        not (next8 is not None and name == "S24_m39C7"))):
-                raise SystemExit("RNG lowering changed an unrelated parent module")
-            expected[next6["wrapper_path"]] = next6["wrapper_sha256"]
-            for anchor in next6["selected_source"]["function_anchors"].values():
-                expected[anchor["source_path"]] = anchor["source_sha256"]
-        if next5 is not None:
-            if (next5.get("schema") != "simant-recovered-source-profile-extension-v1" or
-                    next5.get("id") != "selected-S15-newgame-source-next5-v1" or
-                    next5.get("status") != "DIAGNOSTIC_ONLY_NOT_PRODUCTION" or
-                    next5.get("selected_functions") != ["SetDefaultWindows", "NewGame"] or
-                    extension is None or
-                    extension.get("id") != "selected-control-init-source-next4-v1" or
-                    next5.get("parent_wrapper") != extension.get("wrapper_path") or
-                    next5.get("parent_wrapper_sha256") != extension.get("wrapper_sha256")):
-                raise SystemExit("Unreviewed selected new-game source")
-            expected[next5["wrapper_path"]] = next5["wrapper_sha256"]
-            for anchor in next5["selected_source"]["function_anchors"].values():
-                expected[anchor["source_path"]] = anchor["source_sha256"]
-        if extension is not None:
-            chain = [extension]
-            if extension.get("id") == "selected-control-init-source-next4-v1":
-                parent = provenance.get("parent_profile_extension", {})
-                if (parent.get("id") != "balloon-source-state-next3-v1" or
-                        extension.get("parent_extension_id") != parent.get("id") or
-                        extension.get("parent_extension_wrapper_sha256") != parent.get("wrapper_sha256")):
-                    raise SystemExit("Recovered profile parent identity mismatch")
-                if extension.get("selected_functions") != [
-                        "InitTriVars", "SetTriLatPoint", "cvtLevels2IdealCaste",
-                        "win_ModeControlClosed", "win_CasteControlClosed",
-                        "win_ModeControlChanged", "win_CasteControlChanged", "initControls"]:
-                    raise SystemExit("Unreviewed selected controls source")
-                chain.append(parent)
-            for item in chain:
-                if (item.get("schema") != "simant-recovered-source-profile-extension-v1" or
-                        item.get("id") not in ("balloon-source-state-next3-v1",
-                                               "selected-control-init-source-next4-v1") or
-                        item.get("status") != "DIAGNOSTIC_ONLY_NOT_PRODUCTION"):
-                    raise SystemExit("Unreviewed recovered profile extension")
-                expected[item["base_generator_path"]] = item["base_generator_sha256"]
-                expected[item["wrapper_path"]] = item["wrapper_sha256"]
-                for field in item.get("added_fields", {}).values():
-                    expected[field["source_path"]] = field["source_sha256"]
-                    expected[field["layout_path"]] = field["layout_sha256"]
-                for anchor in item.get("selected_source", {}).get("function_anchors", {}).values():
-                    expected[anchor["source_path"]] = anchor["source_sha256"]
-        for row in provenance["modules"]:
-            expected[row["source"]]=row["source_sha256"]
-            expected[row["generated"]]=row["generated_sha256"]
-        expected.update(next10_input_pins)
-        provenance = selected_provenance
-        for name,digest in expected.items():
-            input_path = (ROOT / name).resolve()
-            if not input_path.is_relative_to(ROOT):
-                raise SystemExit(f"Recovered source input outside workspace: {name}")
-            if hashlib.sha256(input_path.read_bytes()).hexdigest()!=digest:
-                raise SystemExit(f"Recovered source profile identity mismatch: {name}")
-        core_hashes={**expected, (profile / "provenance.json").relative_to(ROOT).as_posix():
-                     hashlib.sha256((profile / "provenance.json").read_bytes()).hexdigest()}
-        for row in provenance["modules"]:
-            obj=output.parent / "core-objects" / (row["name"]+".o")
-            obj.parent.mkdir(parents=True,exist_ok=True)
-            # Preserve the profile's recorded warning policy for historical
-            # bodies. Native adapters and host code keep the strict gate.
-            flags=[flag for flag in row["compile"]["command"]
-                   if flag.startswith("-W") or flag.startswith("-std=")]
-            subprocess.run([compiler,*flags,"-I",str(ROOT),"-I",str(profile),
-                            "-c",str(ROOT / row["generated"]),"-o",str(obj)],
-                           cwd=ROOT,check=True)
-            core_objects.append(obj)
-        sources=[*sources,profile / "recovered_state.c",
-                 profile / "recovered_native_adapters.c",
-                 *(ROOT / "portable/game/recovered" / name for name in
-                   ("engine.c","session_bridge.c","audio_adapter.c","nest_adapter.c",
-                    "memory_adapter.c", "menu_adapter.c", "control_adapter.c"))]
-        extra_flags=["-DSIMANT_ENABLE_RECOVERED_CORE=1","-I",str(profile),"-I",str(ROOT)]
-        if next9 is not None:
-            # Backing admission is separate from a reviewed save codec and
-            # filesystem lifecycle. Standalone codec probes stay unlinked.
-            extra_flags.append("-DSIMANT_ENABLE_SAVE_STATE_NEXT9=1")
-        if next10_input_pins:
-            sources.extend((ROOT / "portable/game/recovered/history_adapter.c",
-                            ROOT / "portable/ui_model/windows/history_render.c"))
-            extra_flags.append("-DSIMANT_ENABLE_HISTORY_UI_NEXT10=1")
-        if extension is not None:
-            # This reviewed extension supplies all twelve omitted source cue
-            # fields. Cue submission does not imply a completed frame renderer.
-            sources.append(ROOT / "portable/game/recovered/balloon_adapter.c")
-            extra_flags.append("-DSIMANT_ENABLE_BALLOON_STATE_NEXT3=1")
-            if extension["id"] == "selected-control-init-source-next4-v1":
-                core_hashes.update(verify_control_conversion())
-                extra_flags.append("-DSIMANT_ENABLE_CONTROL_INIT_NEXT4=1")
-            if next5 is not None:
-                extra_flags.append("-DSIMANT_ENABLE_NEW_GAME_NEXT5=1")
-    # Link beside the destination, retaining the last successful executable
-    # when compilation or the source-stability check fails.
-    fd, temporary_name = tempfile.mkstemp(prefix=output.stem + "-link-",
-                                          suffix=".exe", dir=output.parent)
-    os.close(fd)
-    linked_output = Path(temporary_name)
-    command = [compiler, "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
-               "-D__USE_MINGW_SETJMP_NON_SEH",
-               "-I", str(ROOT / "portable"), "-I", str(sdk / "include"),
-               *extra_flags,str(main), *(str(p) for p in sources),*(str(p) for p in core_objects),
-               "-L", str(sdk / "lib"), "-lSDL3", "-o", str(linked_output)]
-    dependencies = subprocess.check_output(
-        [compiler, "-std=c11", "-I", "portable", "-I", str(sdk / "include"),*extra_flags,
-         "-MM", "-MT", "SIMANT_DEP",
-         *(p.relative_to(ROOT).as_posix() for p in [main, *sources])],
-        text=True, cwd=ROOT)
-    dependencies = dependencies.replace("\\\n", " ")
-    inputs = {main, *sources, Path(__file__).resolve(),
-              ROOT / "portable/tools/profile_next9.py",
-              ROOT / "portable/tools/profile_next10.py"}
-    for block in dependencies.split("SIMANT_DEP:")[1:]:
-        for token in shlex.split(block):
-            dependency = (ROOT / token).resolve()
-            if dependency.is_relative_to(ROOT / "portable"):
-                inputs.add(dependency)
-    input_hashes = {p.relative_to(ROOT).as_posix(): hashlib.sha256(
-        p.read_bytes()).hexdigest() for p in sorted(inputs)}
-    input_hashes.update(core_hashes)
+def main():
+    global ROOT, OUT, SDK, CC
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--out',type=Path,default=PROJECT/'build/portable-sdl3')
+    parser.add_argument('--sdk',type=Path,default=PROJECT/'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32')
+    parser.add_argument('--cc',default='C:/msys64/mingw64/bin/gcc.exe')
+    parser.add_argument('--jobs',type=int,default=6)
+    args=parser.parse_args();ROOT=PROJECT;OUT=args.out.resolve();SDK=args.sdk.resolve();CC=args.cc
+    if OUT.exists():raise ValueError('fresh native build output required')
+    OUT.mkdir(parents=True);copyroot=PROJECT
+    canonical=json.loads((ROOT/'src/program.json').read_text())
+    mismatched=[u['source'] for u in canonical['modules'] if sha(ROOT/u['source'])!=u['source_sha256']]
+    if mismatched:raise ValueError('active canonical program/source inventory differs: '+str(mismatched))
+    def current_inputs():
+        paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',Path(__file__)}
+        paths.update(ROOT/u['source'] for u in canonical['modules'])
+        paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
+        paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
+        paths.add(PROJECT/'portable/whole_program/application.c')
+        paths.update((PROJECT/'portable/runtime/bios-reference').rglob('*'))
+        paths.update(ROOT/'assets'/name for name in PLATFORM['runtime_assets'])
+        paths.update(ROOT/rel for rel in ['tools/compiler.py','tools/omf.py','layout/toolchain.json','layout/manifest.json'])
+        return {p.relative_to(PROJECT).as_posix():sha(p) for p in sorted(paths) if p.is_file()}
+    input_pins=current_inputs()
+    inventory={'translation_units':[dict(module=u['key'],source=u['source'],canonical_destination=u['source'],lang=u['lang']) for u in canonical['modules']]}
+    aliases=[dict(alias=x['alias'],owner=x.get('target',x.get('owner')),offset=x.get('offset',0),kind=x['kind']) for x in canonical['aliases']]
+    # One canonical program inventory and whole canonical source files.
+    function_aliases={x['alias'].lstrip('_@'):x['owner'].lstrip('_@') for x in aliases if x['kind']=='code'}
+    thunk_text=(ROOT/'src/root/m2CFB.asm').read_text(encoding='latin1')
+    function_aliases.update({a.lstrip('_@'):b.lstrip('_@') for a,b in re.findall(r'(?m)^\s*(\w+):\s+jmp\s+(\w+)\s*$',thunk_text)})
+    for alias,target in list(function_aliases.items()):
+        seen=set()
+        while target in function_aliases and target not in seen:
+            seen.add(target);target=function_aliases[target]
+        function_aliases[alias]=target
+    object_identities={x['alias'].lstrip('_@'):x['owner'].lstrip('_@') for x in aliases
+                       if x['kind']!='code' and not x.get('offset',0) and x['owner'].lstrip('_@')!='driver_callback_table'}
+    alias_specs={x['alias'].lstrip('_@'):x for x in aliases if x['kind']!='code'}
+    callback_slots={n:x['offset']//4 for n,x in alias_specs.items() if x['owner'].lstrip('_@')=='driver_callback_table'}
+    abis=ABI_MODULES;rows=[];errors=[]
+    native_scalar_names={name for counts in abis['audio_shared_state_preword']._SHARED_EXTERN_COUNTS.values() for name in counts}
+    source_texts={u['canonical_destination']:(ROOT/u['source']).read_text(encoding='latin1')
+                  for u in inventory['translation_units'] if u['lang']=='c'}
+    event_definition=re.search(r'struct Event\s*\{[^{}]*\};',source_texts['src/root/m1FD2.c'],re.S).group(0)
+    queue_header=OUT/'include/portable/whole_program/types/input_queue.h'
+    queue_header.parent.mkdir(parents=True,exist_ok=True)
+    queue_header.write_text('#ifndef SIMANT_CANONICAL_INPUT_QUEUE_NATIVE_ABI_H\n#define SIMANT_CANONICAL_INPUT_QUEUE_NATIVE_ABI_H\n#include "portable/whole_program/types/timer.h"\n'+scalar.convert(event_definition)+'\n#pragma pack(push,2)\nstruct InputQueueDescriptor { struct Rect r; void (*fn)(void); uint16_t callback_segment_word; struct Event *records; char a,b,c,d; };\n#pragma pack(pop)\nextern struct InputQueueDescriptor g_5FF2;\nextern struct Event input_queue[7];\n#endif\n')
+    scalar_header=OUT/'dos_types.h';scalar_header.write_text('#include <stdint.h>\n#include <stddef.h>\nuint8_t dos_keyboard_modifiers(void);\nvoid *dos_malloc(uint16_t);\nvoid dos_free(void *);\nvoid *dos_realloc(void *,uint16_t);\nstruct Event; struct Point; struct Rect;\n')
+    (OUT/'canonical_data_views.h').write_text('#ifndef SIMANT_CANONICAL_DATA_VIEWS_H\n#define SIMANT_CANONICAL_DATA_VIEWS_H\n#include <stdint.h>\nunion CanonicalWordBytes14 { uint8_t bytes[14]; int16_t words[7]; };\nunion CanonicalWordBytes4 { uint8_t bytes[4]; int16_t words[2]; };\nextern union CanonicalWordBytes14 fd_3D57_07CC;\nextern union CanonicalWordBytes4 fd_3D57_0C1A;\nextern void *fd_3D57_082A[20];\nextern char *fd_55B3_1CD4[5];\n#endif\n')
+    (OUT/'canonical_graphics_data.h').write_text('#ifndef SIMANT_CANONICAL_GRAPHICS_DATA_H\n#define SIMANT_CANONICAL_GRAPHICS_DATA_H\n#include <stdint.h>\ntypedef struct CanonicalAsmPoint { int16_t x,y; } CanonicalAsmPoint;\nextern CanonicalAsmPoint g_3DA0;\n'+'\n'.join('extern int16_t '+n+';' for n in GRAPHICS_SCALARS)+'\nextern uint8_t g_41C0[16];\nextern char g_3D20[128];\n#endif\n')
+    (OUT/'canonical_edit_cache.h').write_text('#ifndef SIMANT_CANONICAL_EDIT_CACHE_H\n#define SIMANT_CANONICAL_EDIT_CACHE_H\n#include <stdint.h>\nunion CanonicalEditCache { int16_t rows[30][40]; int16_t linear[1200]; };\nextern union CanonicalEditCache fd_50F6_15C4;\n#endif\n')
+    native_startups={}
     try:
-        subprocess.run(command, check=True, cwd=ROOT)
-        changed = [name for name,expected in input_hashes.items()
-                   if hashlib.sha256((ROOT / name).read_bytes()).hexdigest()!=expected]
-        if changed:
-            raise SystemExit(f"Sources changed during compilation; rebuild required: {changed}")
-        linked_output.replace(output)
-    finally:
-        linked_output.unlink(missing_ok=True)
-    shutil.copy2(sdk / "bin" / "SDL3.dll", output.parent / "SDL3.dll")
-    receipt = {"sdl_version": VERSION, "sdl_sdk_sha256": SDK_SHA,
-               "sdl_sdk_url": SDK_URL, "compiler": subprocess.check_output(
-                   [compiler, "--version"], text=True).splitlines()[0],
-               "oracle": subprocess.check_output(["git", "-c",
-                   f"safe.directory={ROOT.as_posix()}", "rev-parse",
-                   "dos-semantic-oracle-v1^{commit}"], text=True, cwd=ROOT).strip(),
-               "frozen_oracle_inputs": {"status": "PASS", "receipt_sha256":
-                   hashlib.sha256(frozen_check.read_bytes()).hexdigest()},
-               "command": command,
-               "installed_output": output.relative_to(ROOT).as_posix(),
-               "inputs": input_hashes,
-               "sources_stable_during_build": True,
-               "compiler_sha256":hashlib.sha256(Path(compiler).read_bytes()).hexdigest(),
-               "sdl_library_sha256": hashlib.sha256((sdk / "bin/SDL3.dll").read_bytes()).hexdigest(),
-               "executable_sha256": hashlib.sha256(output.read_bytes()).hexdigest()}
-    if profile is not None:
-        receipt["recovered_core"]={"status":"DIAGNOSTIC_INTEGRATION",
-             "profile":profile.relative_to(ROOT).as_posix(),
-             "objects":{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
-                        for p in core_objects}}
-    output.with_suffix(".build.json").write_text(json.dumps(receipt, indent=2)+"\n")
-    print(output)
+        native_startups,_=abis['startup_bundle'].convert_startup_sources(source_texts['src/root/m15F8.c'],source_texts['src/S15/m384C.c'])
+    except Exception as exc:errors.append({'source':'startup pair','stage':'ABI conversion','error':str(exc)})
+    def apply(name,function,text,*args,**kwargs):
+        try:
+            value=getattr(abis[name],function)(*args,**kwargs)
+            return value[0] if isinstance(value,tuple) else value.text if hasattr(value,'text') else value
+        except Exception as exc:
+            errors.append({'source':rel,'stage':name+'.'+function,'error':str(exc)})
+            return text
+    for unit in inventory['translation_units']:
+        rel=unit['canonical_destination'];row={'source':rel,'module':unit['module'],'lang':unit['lang']}
+        if unit['lang']=='asm':
+            row['status']='NEEDS_SYMBOLIC_ASM_TRANSLATION_OR_PLATFORM_REPLACEMENT';rows.append(row);continue
+        original=source_texts[rel];text=original
+        if rel in native_startups:text=native_startups[rel]
+        if rel=='src/root/m0093.c':text=apply('rng','adapt',text,text)
+        if rel=='src/root/m0250.c':
+            result=apply('spider_inline_source','adapt',text,text.encode('latin1'),rel)
+            text=result.decode('latin1') if isinstance(result,bytes) else result
+        if rel=='src/root/m1FD2.c':
+            text=apply('timer','adapt',text,text)
+            text=apply('m1b73_queue_source','adapt',text,text,rel)
+            text=re.sub(r'struct Event\s*\{[^{}]*\};','',text,count=1,flags=re.S)
+            initializer=r'struct Timer g_5FF2\s*=\s*\{\s*\{\s*0,\s*0,\s*0,\s*0xff\s*\},\s*0,\s*\(int\)\(struct Event\s+near\s*\*\)input_queue,\s*5,\s*0,\s*10,\s*0\s*\};'
+            text,count=re.subn(initializer,'struct InputQueueDescriptor g_5FF2 = { {0,0,0,0xff},0,0,input_queue,5,0,10,0 };',text)
+            if count!=1:errors.append({'source':rel,'stage':'canonical input queue native pointer','error':'initializer shape differs'})
+            text='#include "portable/whole_program/types/input_queue.h"\n'+text
+        if rel in {'src/root/m1E57.c','src/S15/m384C.c'}:
+            text=apply('source_runtime_globals','adapt_transformed',text,text,rel,original)
+        if rel in abis['audio_shared_state_preword'].SOURCE_MODULES:
+            if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m284A.c','m29F0.c','m277E.c','m29D6.c','m293A.c','m290D.c'}:
+                text=translate_29d6_port_block(text) if rel=='src/root/m29D6.c' else apply('audio','adapt',text,rel,text)
+            shared=abis['audio_shared_state_preword']._SHARED_EXTERN_COUNTS.get(rel,{})
+            deferred=set(shared)&native_scalar_names
+            text=apply('audio_shared_state_preword','adapt',text,rel,text,original,deferred_scalar_externs=deferred)
+        if rel in {'src/S10/m35F5.c','src/S19/m384C.c'}:text=apply('m1b73_event_source','adapt',text,text,rel)
+        text=apply('event_word_switch','adapt',text,text,rel)
+        if rel in {'src/S10/m35F5.c','src/S17/m384C.c'}:
+            text=apply('menu_s17_preword','adapt_s17_source' if '/S17/' in rel else 'adapt_s10_source',text,text)
+        if rel=='src/S09/m35F5.c':
+            result=apply('file_select_host','adapt',text,text.encode('latin1'),rel)
+            text=result.decode('latin1') if isinstance(result,bytes) else result
+        if rel=='src/root/m23E6.c':text=apply('list_text_handle','adapt',text,text)
+        if rel=='src/root/m1A96.c':text=apply('cache_table_native','adapt_reviewed',text,text,rel)
+        if rel=='src/S26/m39C7.c':text=apply('s26_window_object_views_v1','adapt',text,text,rel)
+        text=apply('clip_stack_native','adapt',text,text,rel)
+        if rel in abis['crt_abi'].SUPPORTED:text=apply('crt_abi','adapt',text,text,rel)
+        if rel=='src/root/m1986.c':text=apply('findindex_native_guard','adapt_whole_source',text,text,rel)
+        text=apply('fonts','adapt',text,rel,text)
+        text=apply('pointer_globals','adapt',text,rel,text)
+        if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m2505.c','m20E8.c','m23AE.c','m22BF.c','m21FA.c','m218D.c'}:
+            text=apply('windows','convert_window_source',text,text)
+        text=apply('window_loader','adapt',text,text,rel)
+        text=apply('varargs','adapt',text,text,rel)
+        text=re.sub(r'\*\s*\(\s*(?:(unsigned)\s+)?char\s+far\s*\*\s*\)\s*0x0*417L',lambda m:'dos_keyboard_modifiers()',text,flags=re.I)
+        text=rename(text,function_aliases)
+        text=scalar.convert(text)
+        if rel=='src/root/m075B.c':text=apply('load_string_ant','adapt',text,text)
+        text=centralize(text)
+        text=rename(text,object_identities)
+        text=canonical_interior_views(text)
+        text=audio_overlap_views(text,rel)
+        text=graphics_canonical_views(text,rel)
+        text=menu_native_memory(text,rel)
+        text=screen_clip_canonical_views(text,rel)
+        text=re.sub(r'(?m)^\s*extern\s+(?:PortableWholeAudioVoiceSlot\s+fd_55B3_6B4E\[33\]|int16_t\s+fd_55B3_6BA4\[128\])\s*;\s*\n','',text)
+        text=edit_cache_view(text)
+        text=callback_views(text,callback_slots)
+        text=apply('countdown_host','adapt',text,text,rel)
+        text=unused_cache_release_argument(text) if rel=='src/root/m00F8.c' else text
+        text=apply('window_parameter_abi_v1','adapt',text,text,rel)
+        text=apply('window_swap_parameter_abi_v2','adapt',text,text,rel)
+        if rel=='src/S15/m384C.c':text=apply('newgame_zoom_window_v1','adapt_postword',text,text,rel,original_source=original)
+        # Database record bytes retain their wire sizes; only runtime index
+        # pointers widen. The native type adapter is intentionally explicit.
+        db_family=rel in {'src/root/m1986.c','src/root/m19A9.c','src/root/m1A28.c'}
+        if db_family:
+            text=re.sub(r'\btypedef\s+struct\s*\{[^{}]*\}\s*(?:IndexEntry|IndexHeader|DBHeader|DBRecordHeader|OpenDBRec)\s*;','',text,flags=re.S)
+            text='#include "portable/whole_program/types/database.h"\n'+text
+        if unit['module']=='source-owned:database-record-state':
+            # Its canonical definition names/counts are retained verbatim;
+            # the shared runtime/wire ABI supplies only the type spelling.
+            ts=csrc.tokenize(text);last_typedef=max((t.e for t in ts if t.text==';'),default=0)
+            owned=re.search(r'(?m)^OpenDBRec\s+fd_50F6_3958\s*\[4\]\s*;',text)
+            if owned:text='#include "portable/whole_program/types/database.h"\n'+text[owned.start():]
+        if unit['module']=='source-owned:database-index-state':
+            owned=re.search(r'(?m)^IndexEntry\s+\*\s+fd_50F6_3952\s*;',text)
+            if not owned:raise ValueError('canonical database index cursor owner differs')
+            text='#include "portable/whole_program/types/database.h"\n'+text[owned.start():]
+        native_headers=re.findall(r'(?m)^\s*#include\s+"(portable/[^"\n]+)"\s*$',text)
+        for h in native_headers:text=re.sub(r'(?m)^\s*#include\s+"'+re.escape(h)+r'"\s*\n','',text)
+        prefix='#include "dos_types.h"\n#include "portable/whole_program/platform/dos_memory.h"\n#include "portable/whole_program/platform/dos_io.h"\n'
+        prefix+=''.join('#include "'+h+'"\n' for h in dict.fromkeys(native_headers))
+        if rel.startswith('src/S09/'):prefix+='#include "portable/whole_program/platform/dos_files.h"\n'
+        if rel.startswith('src/S20/'):prefix+='#include <ctype.h>\n'
+        if rel=='src/S17/m384C.c':prefix+='#include "portable/whole_program/menu_globals.h"\n'
+        if rel=='src/S19/m384C.c':prefix+='extern void ProcHistoryEvent(struct Event *);\nextern void ProcYardEvent(struct Event *);\n'
+        dest=OUT/(unit['module'].replace(':','_').replace('@','_')+'.c')
+        dest.write_text(prefix+'#pragma pack(push,2)\n'+text+'\n#pragma pack(pop)\n',encoding='latin1')
+        row.update(generated=str(dest),status='WHOLE_CANONICAL_TU_CONVERTED');
+        if rel=='src/root/m171C.c':
+            row.update(status='PLATFORM_BOUNDARY',platform_boundary='Native malloc/free/realloc service replaces DOS segment:offset heap representation; canonical DOS heap TU is excluded from native compilation.')
+        rows.append(row)
+    native_rows=[{'source':rel,'generated':str(PROJECT/rel)}
+                 for rel in PLATFORM['services']]
+    # Assemble the current symbolic audio source only to resolve its explicit
+    # OFFSET relocations. It supplies no code, capacities or original image bytes.
+    sys.path.insert(0,str(ROOT/'tools'))
+    import compiler
+    from canonical_native_abi import asm_data
+    compiler.WORK=OUT/'assembler'
+    audio_source=ROOT/'src/root/m28BC.asm'
+    assembled=compiler.assemble(audio_source.read_text(encoding='latin1'),'masm510')
+    (OUT/'assembler.log').write_text(assembled.log)
+    if not assembled.ok:raise ValueError('current canonical audio ASM did not assemble')
+    object_path=OUT/'audio-offsets.obj';object_path.write_bytes(assembled.obj)
+    source_path=OUT/'audio-offsets.asm';source_path.write_bytes(audio_source.read_bytes())
+    asm_data.ROOT=ROOT;asm_data.WORK=OUT;asm_data.AUDIO_OBJECT=object_path;asm_data.AUDIO_SOURCE=source_path
+    paths=['src/root/m1B73.asm','src/root/m1B4E.asm','src/root/m28BC.asm','src/S02/m3126.asm','src/root/m195A.asm','src/root/m2650.asm','src/root/m1FBD.asm']
+    facts=[asm_data.data_facts(ROOT/p) for p in paths]
+    asm_receipt={'modules':facts,'mouse':asm_data.emit_mouse(facts[0]),'queues':asm_data.emit_mouse_queues(facts[0]),'numeric':asm_data.emit_numeric(facts),'audio':asm_data.emit_audio(facts)}
+    (OUT/'asm-data-facts.json').write_text(json.dumps(asm_receipt,indent=2)+'\n')
+    patterns=next(r for r in asm_receipt['numeric'] if r['name']=='g_41D0')
+    graphics_header=OUT/'canonical_graphics_data.h'
+    graphics_header.write_text(graphics_header.read_text().replace('#endif\n',
+        'extern uint8_t g_41D0['+str(patterns['native_count'])+'];\n#endif\n'))
+    asm_rows=[{'source':'canonical symbolic ASM data: '+name,'generated':str(OUT/name),
+               'status':'DATA_FROM_SYMBOLIC_ASM_DIRECTIVES'} for name in PLATFORM['ASM_data_recipes']]
+    def compile_row(row):
+        source=Path(row['generated'])
+        relative=source.relative_to(PROJECT) if source.is_relative_to(PROJECT) else Path('generated')/source.name
+        obj=(OUT/'objects'/relative).with_suffix('.o');obj.parent.mkdir(parents=True,exist_ok=True)
+        row['object']=str(obj)
+        command=[CC,'-std=c11','-g','-fsigned-char','-fno-builtin','-fno-strict-aliasing',
+                 '-DSIMANT_NATIVE_LITTLE_ENDIAN=1','-Werror=implicit-function-declaration','-Werror=implicit-int',
+                 '-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),'-I',str(copyroot/'portable/whole_program'),
+                 '-I',str(SDK/'include'),'-c',str(source),'-o',str(obj)]
+        if row['source']=='src/root/m25E7.c':command.insert(1,'-Dfont_MakeImage=sim_font_make_image_source')
+        run=subprocess.run(command,capture_output=True,text=True)
+        obj.with_suffix('.compile.txt').write_text(run.stdout+run.stderr)
+        row['compile']={'passed':run.returncode==0,'exit_code':run.returncode,'command':command,
+                        'errors':re.findall(r'^.*(?:error:|fatal error:).*$',run.stderr,re.M)}
+        return str(obj) if run.returncode==0 else None
+    compile_rows=[r for r in rows+native_rows+asm_rows if 'generated' in r and r.get('source')!='src/root/m171C.c']
+    with ThreadPoolExecutor(max_workers=args.jobs) as pool:
+        objects=[obj for obj in pool.map(compile_row,compile_rows) if obj]
+    link={'passed':False,'status':'SKIPPED_REQUIRED_INPUT_FAILURE'}
+    app_link={'passed':False,'status':'SKIPPED_REQUIRED_INPUT_FAILURE','undefined':[]}
+    stable_before_link=current_inputs()==input_pins
+    required_passed=not errors and all(r['compile']['passed'] for r in compile_rows) and stable_before_link
+    if required_passed:
+        linked=OUT/'canonical_core.o';command=[CC,'-r',*objects,'-o',str(linked)]
+        run=subprocess.run(command,capture_output=True,text=True);(OUT/'core-link.txt').write_text(run.stdout+run.stderr)
+        link={'passed':run.returncode==0,'command':command,'exit_code':run.returncode}
+        if link['passed']:
+            application=PROJECT/'portable/whole_program/application.c'
+            application_command=[CC,'-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
+                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),*objects,str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
+            app_run=subprocess.run(application_command,capture_output=True,text=True)
+            (OUT/'application-link.txt').write_text(app_run.stdout+app_run.stderr)
+            app_link={'passed':app_run.returncode==0,'command':application_command,'exit_code':app_run.returncode,
+                      'undefined':sorted(set(re.findall(r"undefined reference to [`']([^'`]+)['`]",app_run.stderr)))}
+            if app_link['passed']:
+                shutil.copyfile(SDK/'bin/SDL3.dll',OUT/'SDL3.dll')
+                shutil.copytree(PROJECT/'portable/runtime/bios-reference',OUT/'runtime-bios-fonts')
+                (OUT/'runtime-assets').mkdir()
+                for name in PLATFORM['runtime_assets']:
+                    shutil.copyfile(ROOT/'assets'/name,OUT/'runtime-assets'/name)
+                for resource in PLATFORM['generated_runtime_resources']:
+                    if resource['bytes']!=0:raise ValueError('unsupported generated platform resource')
+                    (OUT/'runtime-assets'/resource['path']).write_bytes(b'')
+    stable_at_end=current_inputs()==input_pins
+    passed=required_passed and link['passed'] and app_link['passed'] and stable_at_end
+    executable=OUT/'simant-canonical.exe'
+    if executable.is_file() and not passed:executable.unlink()
+    report={'schema':'canonical-native-complete-attempt-v1','passed':passed,'input_pins':input_pins,
+        'input_stability':{'before_link':stable_before_link,'at_end':stable_at_end},
+        'runtime_resources':{'shipped':{name:sha(ROOT/'assets'/name) for name in PLATFORM['runtime_assets']},'generated':PLATFORM['generated_runtime_resources']},
+        'executable':{'path':str(executable),'sha256':sha(executable)} if passed else None,'claim':'One canonical source program plus explicit ABI/platform services. Preview limitations are explicit; no DOS equality claim.',
+        'canonical_TUs':rows,'native_services':native_rows,'canonical_ASM_data_translations':asm_rows,'preview_limitations':PLATFORM['preview_limitations'],'conversion_failures':errors,'core_link':link,'application_link':app_link,
+        'counts':{'canonical_C_count':sum(r['lang']=='c' for r in rows),'canonical_C_compile_pass':sum(r.get('compile',{}).get('passed',False) for r in rows),
+             'ASM_TUs_requiring_translation_or_platform_boundary':sum(r['lang']=='asm' for r in rows),
+             'native_services':len(native_rows),'native_services_compile_pass':sum(r['compile']['passed'] for r in native_rows),
+             'conversion_failures':len(errors)}}
+    (OUT/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report['counts'],indent=2))
+    print(json.dumps({'core_link':link['passed'],'application_link':app_link['passed'],'undefined_count':len(app_link['undefined'])}))
+    return int(not passed)
 
-
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--setup-sdk", action="store_true")
-    parser.add_argument("--host-test", action="store_true")
-    parser.add_argument("--core-profile",type=Path,
-                        help="explicit diagnostic source-reuse profile; no default")
-    args = parser.parse_args()
-    if args.setup_sdk:
-        install_sdk()
-        return
-    if args.host_test:
-        build(ROOT / "portable/tests/host/smoke.c",
-              ROOT / "build/portable/host-smoke.exe",
-              [ROOT / "portable/platform/sdl3/host.c"])
-        return
-    main_file = ROOT / "portable/main.c"
-    if not main_file.exists():
-        raise SystemExit("Native startup is still being integrated; --host-test builds the host boundary")
-    sources = sorted(p for folder in ("game", "render", "ui_model", "audio", "platform")
-                     for p in (ROOT / "portable" / folder).rglob("*.c")
-                     if not p.is_relative_to(ROOT / "portable/game/recovered") and
-                     not p.is_relative_to(ROOT / "portable/game/save") and
-                     p.relative_to(ROOT).as_posix() not in UNINTEGRATED_MODELS)
-    build(main_file, ROOT / "build/portable/simant-sdl3.exe", sources,args.core_profile)
-
-
-if __name__ == "__main__":
-    main()
+if __name__=='__main__':raise SystemExit(main())

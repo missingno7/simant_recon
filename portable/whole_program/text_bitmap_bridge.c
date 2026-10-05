@@ -1,3 +1,5 @@
+#include "canonical_graphics_data.h"
+extern void (*driver_callback_table[25])();
 #include "text_bitmap_bridge.h"
 
 #include "platform/graphics.h"
@@ -104,9 +106,9 @@ void f_1FBD_0000(int16_t x, int16_t y, char *text)
 
     memset(&input, 0, sizeof(input));
     input.hardware_profile = source_bridge.hardware_profile;
-    input.character_width = (uint8_t)graphics->g_3DDE;
-    input.cell_height = (uint8_t)graphics->g_3DDC;
-    input.glyph_height = (uint16_t)graphics->g_3DDA;
+    input.character_width = (uint8_t)g_3DDE;
+    input.cell_height = (uint8_t)g_3DDC;
+    input.glyph_height = (uint16_t)g_3DDA;
     input.glyph_rows = graphics->glyph_source;
     input.glyph_rows_size = graphics->glyph_source_size;
     input.fold_lookup_window = source_bridge.fold_window;
@@ -131,7 +133,7 @@ void f_1FBD_0000(int16_t x, int16_t y, char *text)
         return;
     }
 
-    if (g_9154 == NULL) {
+    if ((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11]) == NULL) {
         source_bridge.status = PORTABLE_TEXT_BITMAP_UNSUPPORTED_FONT;
         return;
     }
@@ -143,14 +145,14 @@ void f_1FBD_0000(int16_t x, int16_t y, char *text)
      * header, then advances the far pointer by four bytes before calling
      * g_9154(x, y, pixels, width, height).  This bridge already passes the
      * dimensions explicitly, so g_9154 must receive the pixel payload. */
-    g_9154(x, y, (char *)(source_bridge.bitmap + 4),
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11])(x, y, (char *)(source_bridge.bitmap + 4),
            (int16_t)result.drawn_width, (int16_t)result.drawn_height);
     graphics_status = sim_graphics_source_last_status();
     if (graphics_status != SIM_GRAPHICS_OK) {
         source_bridge.status = convert_graphics_status(graphics_status);
         return;
     }
-    graphics->g_3DA0 = (int16_t)source_bridge.state.pen_x;
-    graphics->g_3DA2 = (int16_t)source_bridge.state.pen_y;
+    g_3DA0.x = (int16_t)source_bridge.state.pen_x;
+    g_3DA0.y = (int16_t)source_bridge.state.pen_y;
     source_bridge.status = PORTABLE_TEXT_BITMAP_OK;
 }

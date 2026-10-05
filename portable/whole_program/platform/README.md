@@ -1,4 +1,26 @@
-# Whole-program DOS file services
+# Native DOS services
+
+These files implement the physical DOS/BIOS boundary for the converted canonical
+program: host memory and handles, file/directory operations, timing, input,
+graphics presentation, and audio hardware. Ordinary game state definitions come
+from `src/program.json`; native registries store pointers and host resources.
+`portable/platform.json` is the explicit service/header inventory and records
+unresolved preview contracts. The builder compiles these current files directly.
+
+Retained isolated checks:
+
+```powershell
+python portable/whole_program/platform/tests/run_directory_tests.py --out build/workers/current-directory
+python portable/whole_program/platform/tests/run_dos_io_tests.py --out build/workers/current-dos-io
+```
+
+The adjacent `drive_directory_test.c` and
+`startup_preflight_retained_slot_test.c` additionally test current Windows drive
+resolution and reuse of the closed startup descriptor. Their exact compile/run
+commands are recorded by the consolidation validation. Full current main-loop,
+Save and Load flows are checked under `portable/tests/runtime/`.
+
+## File semantics
 
 `dos_io.h`/`dos_io.c` isolate MSC-width file APIs from host CRT types. DOS file
 handles are positive signed-16-bit tokens mapped to native descriptor integers.

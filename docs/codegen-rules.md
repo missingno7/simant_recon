@@ -6,6 +6,11 @@ that exhibits it. `python tools/probe.py SPEC.json` reruns one; `validate.py` re
 Do not import rules from Stunts (MSC 5.10) or SimAntW (MSC 7.00) without re-testing:
 REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 
+Research paths beginning with `work/` are historical provenance, recoverable at
+[the pre-consolidation commit](https://github.com/missingno7/simant_recon/tree/a1938e61452a63581718aee6659829528c3b8635/work).
+Current runnable probes embed their inputs under `evidence/codegen/`; they do
+not depend on that retired research tree.
+
 | ID | Status | Rule | Positive control | Negative contrast |
 |---|---|---|---|---|
 | FRAME-1 | VERIFIED | MSC 6.00/6.00A always emit `mov sp,bp` before `pop bp` in a stack-checked BP frame, even without locals. | `f_0093_008F` (SetSRandSeed) | MSC 5.10 and QuickC 2.50 omit it → excluded as compilers |

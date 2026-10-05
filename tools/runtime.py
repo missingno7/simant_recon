@@ -171,13 +171,9 @@ def code_segments(obj) -> list[str]:
     return out
 
 
-def verify_all(collect: dict | None = None):
-    """``collect`` (whole-build harness, tools/link.py): when a dict is given, it receives per
-    returned member ``(member, linear)`` its bound code segments with relocation sites and the
-    fixup fields whose value is a link placement derived from the original operand.  It never
-    changes a verdict."""
+def verify_all():
+    """Compare pinned runtime members, bound fixups and relocation ordering."""
     x = exemod.load()
-    bound_of = {}
     members = load_members()
     idx = library_index()
     abs_bad = [f"{n}={v:#x} but {d[0]} {d[1]} defines {d[4]:#x}" for n, v in ABSOLUTE.items()
@@ -210,12 +206,10 @@ def verify_all(collect: dict | None = None):
         placed = {seg0: m["linear"], **{k: v for k, v in extra.items() if k != seg0}}
         frame_of = {sn: (RUNTIME_FRAME if sn == seg0 else lin >> 4) for sn, lin in placed.items()}
         seg_rows = []
-        bound = []
         for seg, start in placed.items():
           body = bytearray(obj.segments.get(seg, b""))
           cand_relocs = []
           rkey = {}
-          derived_fields = []           # (site, width, key): value derived from the original operand
           for f in obj.linker_fixups:
               if f["segment"] != seg:
                   continue
@@ -274,12 +268,10 @@ def verify_all(collect: dict | None = None):
                       key = f"{'seg' if tk == 'segment' else 'ext'}:{m['member'] if tk == 'segment' else ''}:{tn}:{f['frame']}"
                       derived[key][base].append((m["member"], site))
                       struct.pack_into("<H", body, f["offset"], ov)
-                      derived_fields.append((site, 2, key))
                   if loc == "pointer32":
                       fr = frame if frame is not None else oracle_word(site + 2)
                       if frame is None:
                           derived[f"frame:{tn}"][fr].append((m["member"], site))
-                          derived_fields.append((site + 2, 2, f"frame:{tn}"))
                       struct.pack_into("<H", body, f["offset"] + 2, fr)
                       cand_relocs.append(site + 2)
                       rkey[site + 2] = f"{tk}:{tn}"
@@ -287,7 +279,6 @@ def verify_all(collect: dict | None = None):
                   fr = frame if frame is not None else oracle_word(site)
                   if frame is None:
                       derived[f"frame:{tn}"][fr].append((m["member"], site))
-                      derived_fields.append((site, 2, f"frame:{tn}"))
                   struct.pack_into("<H", body, f["offset"], fr)
                   cand_relocs.append(site)
                   rkey[site] = f"{tk}:{tn}"
@@ -306,9 +297,6 @@ def verify_all(collect: dict | None = None):
                   if [a for a in exp_ordered if rkey.get(a) == g] != [a for a in cand_relocs if rkey.get(a) == g]:
                       reasons.append(f"relocation order inside target group {g} differs from the object")
           seg_rows.append((seg, start, len(body)))
-          bound.append({"segment": seg, "start": start, "frame": frame_of[seg], "bytes": bytes(body),
-                        "relocs": [(a, rkey.get(a), i) for i, a in enumerate(cand_relocs)],
-                        "derived": derived_fields})
         row = {"library": m["library"], "member": m["member"], "module_index": m["module_index"],
                "linear": m["linear"], "size": seg_rows[0][2], "segment": seg0,
                "extra_segments": [{"segment": sg, "linear": st, "size": n} for sg, st, n in seg_rows[1:]],
@@ -318,7 +306,6 @@ def verify_all(collect: dict | None = None):
                                                 placed[p["segment"]] - frame_of[p["segment"]] * 16 + p["offset"]]
                                     for p in obj.publics if p["segment"] in placed},
                "alternatives": len(cands)}
-        bound_of[id(row)] = bound
         if not reasons:
             if best is None or best["reasons"]:
                 best = row
@@ -346,8 +333,6 @@ def verify_all(collect: dict | None = None):
         if r["member"] in bad_members:
             r["reasons"].append("inconsistent derived placement")
         r["exact"] = not r["reasons"]
-        if collect is not None:
-            collect[(r["member"], r["linear"])] = bound_of.get(id(r), [])
     return results, derived, conflicts, anchors
 
 
@@ -571,7 +556,7 @@ def communal_placements(members, place, x=None) -> dict:
     return out
 
 
-def verify_data(results=None, derived=None, collect: list | None = None, communals: dict | None = None) -> list[dict]:
+def verify_data(results=None, derived=None, communals: dict | None = None) -> list[dict]:
     """Place and verify the runtime members' DGROUP data segments (module docstring).
     ``communals`` (dict), when given, receives communal_placements."""
     x = exemod.load()
@@ -606,7 +591,7 @@ def verify_data(results=None, derived=None, collect: list | None = None, communa
                 continue
             start, rule = place[(mem, sn)]
             row.update(linear=start, rule=rule)
-            row.update(bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27, collect,
+            row.update(bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27,
                                          commons=commons))
             if row["exact"]:
                 row["public_addresses"] = {p["name"]: [DGROUP, start - dgbase + p["offset"]]
@@ -615,22 +600,18 @@ def verify_data(results=None, derived=None, collect: list | None = None, communa
     return rows
 
 
-def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27, collect=None,
+def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27,
                       commons: dict | None = None) -> dict:
-    """Bind one runtime data segment at ``start`` and compare bytes and relocations with S27.
-    ``collect`` (list, tools/link.py) receives the bound bytes, relocation sites and the fixup
-    fields bound through a placement derived from original operands."""
+    """Bind one runtime data segment and compare bytes and relocations with S27."""
     dgbase = DGROUP * 16
     reasons = []
     body = bytearray(obj.segments.get(sn, b""))
     body += bytes(n - len(body))
     relocs_c, rkey = [], {}
-    derived_fields = []
     for f in obj.linker_fixups:
         if f["segment"] != sn:
             continue
         tk, tn, loc = f["target_kind"], f["target"], f["loc"]
-        via_derived = False
         addend = int.from_bytes(bytes.fromhex(f["encoded_addend"]), "little")
         disp = f.get("displacement") or 0
         if f["self_relative"]:
@@ -644,12 +625,10 @@ def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27
             frame, off = DGROUP, 0
         elif tk == "segment" and (mem, tn) in place:
             frame, off = DGROUP, place[(mem, tn)][0] - dgbase
-            via_derived = place[(mem, tn)][1] != "DOSSEG_BEGDATA"
         elif tk == "segment" and tn in code_place:
             frame, off = code_place[tn]
         elif tk == "segment" and _single(derived, f"seg:{mem}:{tn}:DGROUP") is not None:
             frame, off = DGROUP, _single(derived, f"seg:{mem}:{tn}:DGROUP")   # e.g. a BSS segment
-            via_derived = True
         elif tk == "segment" and str((segment_def_of(obj, tn) or {}).get("class", "")).upper() == "ENDCODE":
             lin, why = endcode_linear(x)                  # rule ENDCODE (layout model)
             if why:
@@ -658,7 +637,6 @@ def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27
             frame, off = lin >> 4, lin & 15
         elif tk == "external" and tn in (commons or {}) and match.obj_name_lookup(tn) is None:
             frame, off = DGROUP, commons[tn]              # rule COMDEF_ANCHORS
-            via_derived = True
         elif tk == "external":
             s = match.obj_name_lookup(tn)
             if s is not None:
@@ -668,13 +646,10 @@ def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27
                 w = w if w is not None else _single(derived, f"ext::{tn}:{tn}")
                 if w is not None:
                     frame, off = DGROUP, w
-                    via_derived = True
         if frame is None:
             reasons.append(f"unbound data fixup {loc} {tk}:{tn}")
             continue
         grp = f["frame_kind"] == "group" and f["frame"] == "DGROUP"
-        if via_derived and loc in ("offset16", "pointer32"):
-            derived_fields.append((start + f["offset"], 2, f"{tk}:{tn}"))
         if loc in ("offset16", "pointer32"):
             v = frame * 16 + off - dgbase if grp else off
             struct.pack_into("<H", body, f["offset"], (v + addend + disp) & 0xFFFF)
@@ -690,10 +665,6 @@ def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27
             reasons.append(f"unsupported data fixup {loc}")
     if not (s27.load_linear <= start and start + n <= s27.load_linear + len(s27.data)):
         return {"exact": False, "reasons": reasons + ["placement outside section 27's file data"]}
-    if collect is not None:
-        collect.append({"member": mem, "segment": sn, "start": start, "bytes": bytes(body),
-                        "relocs": [(a, rkey.get(a), i) for i, a in enumerate(relocs_c)],
-                        "derived": derived_fields})
     orig = x.read("S27", start, n)
     if bytes(body) != orig:
         i = next(i for i in range(n) if body[i] != orig[i])

@@ -4,12 +4,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-char g_5A97;
-int16_t win_numOfWindows;
-int16_t win_numOfColors;
-int16_t win_numOfGroups;
-SimWindowSourceDrawHook win_drawHooks[SIM_WINDOW_SOURCE_SLOT_COUNT];
-struct Rect win_offsets[SIM_WINDOW_SOURCE_SLOT_COUNT];
+extern char g_5A97;
+extern int16_t win_numOfWindows;
+extern int16_t win_numOfColors;
+extern int16_t win_numOfGroups;
+extern SimWindowSourceDrawHook win_drawHooks[SIM_WINDOW_SOURCE_SLOT_COUNT];
+extern struct Rect win_offsets[SIM_WINDOW_SOURCE_SLOT_COUNT];
 int8_t (*win_colors)[SIM_WINDOW_SOURCE_COLOR_BYTES];
 
 static size_t color_storage_bytes;

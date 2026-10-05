@@ -1,0 +1,149 @@
+f_171C_125C  root:171C:125C  linear 1841C  size 366  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call
+  module frame 171C: function 24/61; neighbours: f_171C_11F2, f_171C_1246, f_171C_13CA, f_171C_13E4
+  frame: {'frame': 'bp', 'locals': 18, 'stack_check': False, 'arg_bytes_min': 10}
+  125C  push bp
+  125D  mov bp, sp
+  125F  sub sp, 0x12
+  1262  push di
+  1263  push si
+  1264  mov di, word ptr [bp + 0xa]
+  1267  mov ax, di
+  1269  and ax, 8
+  126C  mov word ptr [bp - 2], ax
+  126F  and di, 0xfff7
+  1272  mov ax, word ptr [bp + 8]
+  1275  or ax, word ptr [bp + 6]
+  1278  jne 0x1287
+  127A  mov ax, 0x3211                     "ALLOC 0 BYTES"
+  127D  push ds
+  127E  push ax
+  127F  lcall 0x1c62, 0xc                  -> Punt
+  1284  add sp, 4
+  1287  cmp word ptr [0x2f34], 0           DS:2F34
+  128C  jne 0x1292
+  128E  push cs
+  128F  call 0x7be                         -> f_171C_07BE
+  1292  mov ax, 0xd
+  1295  push ax
+  1296  push word ptr [bp + 0xe]
+  1299  push word ptr [bp + 0xc]
+  129C  mov ax, 0x8c62
+  129F  push ds
+  12A0  push ax
+  12A1  lcall 0x29f4, 0x1c4e               -> __fstrncpy
+  12A6  add sp, 0xa
+  12A9  mov byte ptr [0x8c6f], 0           DS:8C6F
+  12AE  mov cl, 4
+  12B0  mov ax, word ptr [bp + 6]
+  12B3  add ax, 0xf
+  12B6  shr ax, cl
+  12B8  mov word ptr [bp - 0xa], ax
+  12BB  push word ptr [bp - 2]
+  12BE  push word ptr [bp + 0xe]
+  12C1  push word ptr [bp + 0xc]
+  12C4  mov cx, di
+  12C6  and cl, 0x87
+  12C9  push cx
+  12CA  inc ax
+  12CB  inc ax
+  12CC  push ax
+  12CD  push cs
+  12CE  call 0xeea                         -> f_171C_0EEA
+  12D1  add sp, 0xa
+  12D4  mov si, ax
+  12D6  mov word ptr [bp - 0xc], dx
+  12D9  cmp word ptr [bp - 2], 0
+  12DD  je 0x12ee
+  12DF  push dx
+  12E0  push si
+  12E1  mov ax, 0x321f                     "
+NOEMS - memPtr=%p"
+  12E4  push ds
+  12E5  push ax
+  12E6  lcall 0x277d, 0xa                  -> WinPrintf
+  12EB  add sp, 8
+  12EE  push cs
+  12EF  call 0xa5c                         -> f_171C_0A5C
+  12F2  mov word ptr [bp - 8], ax
+  12F5  mov word ptr [bp - 6], dx
+  12F8  or dx, ax
+  12FA  jne 0x1309
+  12FC  mov ax, 0x3232                     "Could not allocate handle"
+  12FF  push ds
+  1300  push ax
+  1301  lcall 0x1c62, 0xc                  -> Punt
+  1306  add sp, 4
+  1309  mov cx, word ptr [bp - 0xc]
+  130C  mov word ptr [bp - 0x12], si
+  130F  mov word ptr [bp - 0x10], cx
+  1312  add si, 0
+  1315  adc cx, 2
+  1318  les bx, ptr [bp - 8]
+  131B  mov word ptr es:[bx], si
+  131E  mov word ptr es:[bx + 2], cx
+  1322  mov ax, di
+  1324  and di, 0xff87
+  1327  push di
+  1328  mov cx, word ptr [bp - 0xa]
+  132B  inc cx
+  132C  inc cx
+  132D  push cx
+  132E  push word ptr [bp - 0x10]
+  1331  push word ptr [bp - 0x12]
+  1334  mov si, ax
+  1336  push cs
+  1337  call 0x68c                         -> f_171C_068C
+  133A  add sp, 8
+  133D  mov ax, word ptr [bp - 8]
+  1340  les bx, ptr [bp - 0x12]
+  1343  mov word ptr es:[bx], ax
+  1346  mov byte ptr es:[bx + 9], 0
+  134B  mov ax, 0xc
+  134E  push ax
+  134F  push word ptr [bp + 0xe]
+  1352  push word ptr [bp + 0xc]
+  1355  lea ax, [bx + 0x13]
+  1358  push es
+  1359  push ax
+  135A  lcall 0x29f4, 0x1c4e               -> __fstrncpy
+  135F  add sp, 0xa
+  1362  les bx, ptr [bp - 0x12]
+  1365  mov byte ptr es:[bx + 0x1f], 0
+  136A  mov ax, word ptr [bp + 6]
+  136D  mov dx, word ptr [bp + 8]
+  1370  les bx, ptr [bp - 8]
+  1373  mov cx, word ptr es:[bx + 2]
+  1377  dec cx
+  1378  dec cx
+  1379  sub di, di
+  137B  mov es, cx
+  137D  mov word ptr es:[di + 2], ax
+  1381  mov word ptr es:[di + 4], dx
+  1385  mov ax, word ptr [0x2f30]          DS:2F30
+  1388  mov dx, word ptr [0x2f32]          DS:2F32
+  138C  les bx, ptr [bp - 8]
+  138F  mov cx, word ptr es:[bx + 2]
+  1393  dec cx
+  1394  dec cx
+  1395  mov es, cx
+  1397  mov word ptr es:[di + 0xa], ax
+  139B  mov word ptr es:[di + 0xc], dx
+  139F  add word ptr [0x2f30], 1           DS:2F30
+  13A4  adc word ptr [0x2f32], 0           DS:2F32
+  13A9  mov ax, si
+  13AB  and al, 0x78
+  13AD  les bx, ptr [bp - 8]
+  13B0  mov cx, word ptr es:[bx + 2]
+  13B4  dec cx
+  13B5  dec cx
+  13B6  sub si, si
+  13B8  mov es, cx
+  13BA  mov byte ptr es:[si + 0x12], al
+  13BE  mov ax, word ptr [bp - 8]
+  13C1  mov dx, word ptr [bp - 6]
+  13C4  pop si
+  13C5  pop di
+  13C6  mov sp, bp
+  13C8  pop bp
+  13C9  retf

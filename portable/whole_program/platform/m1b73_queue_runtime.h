@@ -11,16 +11,13 @@ typedef int (*PortableM1B73GraphicsCursorMode)(
     void *context, uint8_t mode, int16_t *source_ax);
 
 /* One application-lifetime adapter joining the real input/event, mouse, and
- * graphics owners. Its scan bytes are the native owner for the ASM g_53CD
- * table; the host key cache remains the single owner of physical key state. */
+ * graphics owners. Canonical ASM cells own the scan table, hook flag and
+ * cursor counter; this object owns provider bindings only. */
 typedef struct PortableM1B73QueueRuntime {
     PortableM1B73Events *events;          /* borrowed shared event/timing owner */
     PortableM1B73MouseProvider *mouse;    /* borrowed active SDL mouse owner */
     void *graphics_context;
     PortableM1B73GraphicsCursorMode graphics_cursor_mode;
-    uint8_t scan_state[128];              /* source g_53CD, initialized 0x80 */
-    uint32_t cursor_change_counter;        /* source g_434E */
-    uint8_t keyboard_hook_enabled;        /* source kbd_hook_on */
     uint8_t bound;
 } PortableM1B73QueueRuntime;
 

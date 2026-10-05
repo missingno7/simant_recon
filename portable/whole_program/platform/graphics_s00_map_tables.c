@@ -1,3 +1,5 @@
+#include "canonical_graphics_data.h"
+extern void (*driver_callback_table[25])();
 #include "graphics_s00_map_tables.h"
 
 #include "graphics.h"
@@ -280,9 +282,9 @@ SimS00MapTableStatus sim_s00_map_transform_draw(
 
     if (graphics == NULL || source == NULL)
         return SIM_S00_MAP_TABLE_BAD_ARGUMENT;
-    if (g_914C == NULL || sim_graphics_source_owner() != graphics)
+    if ((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) == NULL || sim_graphics_source_owner() != graphics)
         return SIM_S00_MAP_TABLE_RENDERER_UNBOUND;
-    profile = graphics->g_3DB2 == 320 ? SIM_S00_MAP_TABLE_320 :
+    profile = g_3DB2 == 320 ? SIM_S00_MAP_TABLE_320 :
                                         SIM_S00_MAP_TABLE_640;
     switch (transform) {
     case SIM_S00_TRANSFORM_0000:
@@ -316,7 +318,7 @@ SimS00MapTableStatus sim_s00_map_transform_draw(
     }
     if (status != SIM_S00_MAP_TABLE_OK)
         return status;
-    g_914C(x, y, (char *)planar, width, height);
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9])(x, y, (char *)planar, width, height);
     return graphics->last_status == SIM_GRAPHICS_OK ? SIM_S00_MAP_TABLE_OK :
         SIM_S00_MAP_TABLE_RENDERER_FAILED;
 }
@@ -364,7 +366,7 @@ static SimS00MapTableProfile active_profile(void)
     SimGraphicsDriver *graphics = sim_graphics_source_owner();
     if (graphics == NULL)
         abort();
-    return graphics->g_3DB2 == 320 ? SIM_S00_MAP_TABLE_320 :
+    return g_3DB2 == 320 ? SIM_S00_MAP_TABLE_320 :
                                      SIM_S00_MAP_TABLE_640;
 }
 

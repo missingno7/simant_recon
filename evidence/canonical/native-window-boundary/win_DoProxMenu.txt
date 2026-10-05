@@ -1,0 +1,62 @@
+win_DoProxMenu  root:22BF:0BAB  linear 2379B  size 141  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 22BF: function 41/47; neighbours: f_22BF_0B25, f_22BF_0B5B, f_22BF_0C38, f_22BF_0CDD
+  frame: {'frame': 'bp', 'locals': 18, 'stack_check': False, 'arg_bytes_min': 8}
+  0BAB  push bp
+  0BAC  mov bp, sp
+  0BAE  sub sp, 0x12
+  0BB1  push di
+  0BB2  push si
+  0BB3  mov si, word ptr [bp + 6]
+  0BB6  mov di, 0xffff
+  0BB9  push word ptr [bp + 0xc]
+  0BBC  push word ptr [bp + 0xa]
+  0BBF  push si
+  0BC0  lcall 0x20e8, 0x4b6                -> win_Open
+  0BC5  add sp, 6
+  0BC8  cmp word ptr [bp + 8], di
+  0BCB  je 0xbd9
+  0BCD  mov ax, word ptr [bp + 8]
+  0BD0  add ax, si
+  0BD2  inc ax
+  0BD3  inc ax
+  0BD4  lcall 0x218d, 0x1f6                -> _win_SetProxItem
+  0BD9  lcall 0x1fd2, 0x57f                -> ButtonHeldInit
+  0BDE  mov word ptr [bp - 2], di
+  0BE1  mov ax, si
+  0BE3  push cs
+  0BE4  call 0x9b0                         -> win_IsWinOpen
+  0BE7  or ax, ax
+  0BE9  je 0xc29
+  0BEB  lcall 0x1fd2, 0x598                -> ButtonHeld
+  0BF0  or ax, ax
+  0BF2  jne 0xbfe
+  0BF4  lcall 0x218d, 0x1f2                -> win_GetProxEvent
+  0BF9  mov word ptr [bp - 6], ax
+  0BFC  jmp 0xc0c
+  0BFE  lea ax, [bp - 0x12]
+  0C01  push ss
+  0C02  push ax
+  0C03  lcall 0x218d, 0x3f1                -> win_GetEvent
+  0C08  or ax, ax
+  0C0A  je 0xbe1
+  0C0C  cmp word ptr [bp - 6], si
+  0C0F  jb 0xbe1
+  0C11  lea ax, [si + 0x100]
+  0C15  cmp ax, word ptr [bp - 6]
+  0C18  jbe 0xbe1
+  0C1A  lea ax, [si + 2]
+  0C1D  cmp ax, word ptr [bp - 6]
+  0C20  ja 0xc29
+  0C22  mov di, word ptr [bp - 6]
+  0C25  sub di, si
+  0C27  dec di
+  0C28  dec di
+  0C29  mov ax, si
+  0C2B  lcall 0x20e8, 0x635                -> win_Close
+  0C30  mov ax, di
+  0C32  pop si
+  0C33  pop di
+  0C34  mov sp, bp
+  0C36  pop bp
+  0C37  retf

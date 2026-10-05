@@ -4,7 +4,7 @@
 
 #include "ems_host.h"
 
-char *fd_55B3_360E = NULL;
+extern char *fd_55B3_360E ;
 
 int16_t f_195A_0260(void)
 {

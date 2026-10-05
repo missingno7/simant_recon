@@ -1,7 +1,0 @@
-[000_base.c] MISMATCH: bytes differ (first at +0xd7, 2 differing)  (opcode similarity 1.000, 92 vs 92 insns)
-      ... 68 equal instructions ...
-  ! 110B les bx, ptr [bp - 0x10]             | 110B les si, ptr [bp - 0x10]
-  ! 110E push word ptr es:[bx]               | 110E push word ptr es:[si]
-      ... 22 equal instructions ...
-  relocations expected ['0x3cb5a', '0x3caf3', '0x3ca7e', '0x3ca9c', '0x3ca84', '0x3cb84']
-  relocations candidate ['0x3cb84', '0x3cb5a', '0x3caf3', '0x3ca9c', '0x3ca84', '0x3ca7e']

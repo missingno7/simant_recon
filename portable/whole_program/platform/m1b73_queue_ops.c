@@ -1,4 +1,5 @@
 #include "m1b73_queue_ops.h"
+#include "canonical_mouse_input_data.h"
 #include "m1b73_mouse_state.h"
 
 #include "input_time.h"
@@ -17,13 +18,12 @@ static PortableM1B73CallbackSidecar callback_sidecars[
     PORTABLE_M1B73_QUEUE_COUNT][PORTABLE_M1B73_QUEUE_MAX_RECORDS];
 static PortableM1B73QueueOpsServices active_ops;
 static uint8_t ops_bound;
-static uint8_t cursor_mode = UINT8_C(0xff); /* ASM code-segment initializer */
 
 /* Source ASM globals consumed by the keyboard/cursor navigation paths. */
-uint8_t g_4362;
-uint8_t g_4363;
-uint8_t g_4368;
-uint8_t g_4369;
+extern uint8_t g_4362;
+extern uint8_t g_4363;
+extern uint8_t g_4368;
+extern uint8_t g_4369;
 
 static void require_ops(void)
 {
@@ -48,10 +48,10 @@ static uint8_t queue_index(const PortableM1B73Queue *queue)
 
 static void validate_queue(const PortableM1B73Queue *queue, uint8_t index)
 {
-    if (queue->records == NULL || queue->capacity == 0 ||
-        queue->capacity > queue->allocated_record_count ||
+    if (queue->records == NULL || (*queue->capacity) == 0 ||
+        (*queue->capacity) > queue->allocated_record_count ||
         queue->allocated_record_count > PORTABLE_M1B73_QUEUE_MAX_RECORDS ||
-        queue->count > queue->capacity ||
+        (*queue->count) > (*queue->capacity) ||
         queue->records != portable_m1b73_queue_set.queues[index].records)
         abort();
 }
@@ -146,7 +146,6 @@ void portable_m1b73_queue_ops_unbind(void)
 void portable_m1b73_queue_ops_clear_sidecars(void)
 {
     memset(callback_sidecars, 0, sizeof(callback_sidecars));
-    cursor_mode = UINT8_C(0xff);
 }
 
 int portable_m1b73_queue_ops_dispatch_record(
@@ -178,7 +177,7 @@ int portable_m1b73_queue_ops_hit_test(
     if (hotbox_token == NULL)
         return -1;
     *hotbox_token = 0;
-    for (i = 0; i < queue->count; ++i) {
+    for (i = 0; i < (*queue->count); ++i) {
         const uint8_t *record = queue->records[i];
         if ((read_u16(record + 16) & query) != 0 &&
             contains_inclusive(record, x, y)) {
@@ -194,12 +193,12 @@ void f_1B73_0AC3(struct Timer *timer, PortableM1B73Queue *slot)
     PortableM1B73CallbackSidecar sidecar = { 0 };
     uint8_t index = queue_index(slot);
     validate_queue(slot, index);
-    if (slot->count >= slot->capacity || slot->count >= slot->allocated_record_count)
+    if ((*slot->count) >= (*slot->capacity) || (*slot->count) >= slot->allocated_record_count)
         abort(); /* original capacity overflow calls Punt */
     require_timer_sidecar(timer, &sidecar);
-    write_timer_record(slot->records[slot->count], timer);
-    callback_sidecars[index][slot->count] = sidecar;
-    ++slot->count;
+    write_timer_record(slot->records[(*slot->count)], timer);
+    callback_sidecars[index][(*slot->count)] = sidecar;
+    ++(*slot->count);
 }
 
 void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot)
@@ -213,10 +212,10 @@ void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot)
             !active_ops.prepare_cursor_change(active_ops.context))
             abort();
     }
-    if (slot->count >= slot->capacity || slot->count >= slot->allocated_record_count)
+    if ((*slot->count) >= (*slot->capacity) || (*slot->count) >= slot->allocated_record_count)
         abort();
     require_timer_sidecar(timer, &sidecar);
-    old_count = slot->count;
+    old_count = (*slot->count);
     if (old_count != 0) {
         uint16_t row;
         for (row = old_count; row != 0; --row)
@@ -228,7 +227,7 @@ void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot)
     }
     write_timer_record(slot->records[0], timer);
     callback_sidecars[index][0] = sidecar;
-    slot->count = (uint16_t)(old_count + 1u);
+    (*slot->count) = (uint16_t)(old_count + 1u);
     if (index == 3 && (active_ops.refresh_cursor == NULL ||
         !active_ops.refresh_cursor(active_ops.context)))
         abort();
@@ -248,9 +247,9 @@ void f_1B73_0B5B(int16_t id, PortableM1B73Queue *slot)
             abort();
         restore_cursor = 1;
     }
-    for (i = 0; i < slot->count; ++i) {
+    for (i = 0; i < (*slot->count); ++i) {
         if (read_i16(slot->records[i] + 12) == id) {
-            uint16_t new_count = (uint16_t)(slot->count - 1u);
+            uint16_t new_count = (uint16_t)((*slot->count) - 1u);
             uint16_t rows_after = (uint16_t)(new_count - i);
             uint16_t row;
             for (row = 0; row < rows_after; ++row)
@@ -263,7 +262,7 @@ void f_1B73_0B5B(int16_t id, PortableM1B73Queue *slot)
             }
             memset(&callback_sidecars[index][new_count], 0,
                    sizeof(callback_sidecars[index][new_count]));
-            slot->count = new_count;
+            (*slot->count) = new_count;
             break;
         }
     }
@@ -277,7 +276,7 @@ int16_t f_1B73_0BC5(int16_t id, PortableM1B73Queue *slot)
     uint16_t i;
     uint8_t index = queue_index(slot);
     validate_queue(slot, index);
-    for (i = 0; i < slot->count; ++i) {
+    for (i = 0; i < (*slot->count); ++i) {
         const uint8_t *record = slot->records[i];
         if (read_i16(record + 12) == id &&
             g_9122 >= read_i16(record + 0) &&
@@ -295,7 +294,7 @@ int16_t f_1B73_0BFF(void)
     PortableM1B73Queue *queue = &portable_m1b73_queue_set.queues[3];
     uint8_t i;
     validate_queue(queue, 3);
-    for (i = 0; i < queue->count; ++i) {
+    for (i = 0; i < (*queue->count); ++i) {
         const uint8_t *record = queue->records[i];
         if (g_9122 >= read_i16(record + 0) &&
             g_9122 <= read_i16(record + 4) &&
@@ -311,7 +310,7 @@ void f_1B73_0C80(int16_t id)
     PortableM1B73Queue *queue = &portable_m1b73_queue_set.queues[3];
     uint8_t i;
     validate_queue(queue, 3);
-    for (i = 0; i < queue->count; ++i) {
+    for (i = 0; i < (*queue->count); ++i) {
         const uint8_t *record = queue->records[i];
         if (read_i16(record + 12) == id) {
             uint16_t xsum = (uint16_t)((uint16_t)read_i16(record + 0) +

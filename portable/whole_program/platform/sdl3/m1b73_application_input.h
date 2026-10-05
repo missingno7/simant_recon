@@ -34,7 +34,7 @@ typedef void (*PortableM1B73ApplicationQuitHook)(void *context);
 
 /* One application-lifetime composition of existing canonical owners. Host,
  * graphics, palette and clocks are borrowed; this object owns only their
- * provider bindings plus the source m1B73 event records and shift-state byte. */
+ * provider bindings. Canonical C/ASM definitions own event and input state. */
 typedef struct PortableM1B73SdlApplicationInput {
     Host *host;
     SimGraphicsDriver *graphics;
@@ -47,8 +47,6 @@ typedef struct PortableM1B73SdlApplicationInput {
     PortableM1B73QueueRuntime queues;
     SimGraphicsCursorSource graphics_cursor;
     SimGraphicsCursorSourceBindings cursor_bindings;
-    PortableM1B73Event event_records[PORTABLE_M1B73_EVENT_SLOTS];
-    uint8_t shift_state; /* the single native owner for ASM code-segment state */
     uint8_t event_bound;
     uint8_t mouse_bound;
     uint8_t graphics_cursor_bound;
@@ -64,7 +62,6 @@ typedef struct PortableM1B73SdlApplicationInput {
     PortableM1B73ApplicationQuitHook quit_hook;
     void *quit_hook_context;
     uint32_t countdown_last_tick; /* always-on BIOS/INT08 logical ticks */
-    uint16_t source_countdown; /* typed owner for ASM tmr_countdown word */
     uint8_t countdown_initialized;
 } PortableM1B73SdlApplicationInput;
 

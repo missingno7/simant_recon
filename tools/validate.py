@@ -358,7 +358,7 @@ def main() -> int:
     root_game_span = 0x29F4 * 16 + 0x1C - 0     # game code precedes the MSC runtime _TEXT
     # frame 2CFB (0x2CFB0-0x2CFF0) is not the RTLink manager: crt0dat EMULATOR_TEXT (runtime),
     # the game's memory-hook jump table root:2CFB (0x2CFB2-0x2CFE4, 50 bytes) and paragraph fill;
-    # the manager starts at 2CFF0 (whole-build harness, worker link)
+    # The original RTLink manager starts at 2CFF0 (docs/exe-format.md).
     root_game_span += 0x2CFE4 - 0x2CFB2
     MANAGER_START = 0x2CFF0
     overlay_code = sum(len(s.data) for s in x.sections[:27])

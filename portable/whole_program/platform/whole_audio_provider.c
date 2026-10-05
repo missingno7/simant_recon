@@ -33,7 +33,6 @@ PortableWholeAudioProviderStatus portable_whole_audio_provider_apply(
     PortableWholeAudioProvider *provider, PortableWholeAudioEvent *event)
 {
     PortableDacLiveVoice *voice;
-    PortableDacVoiceChannel *channel;
     unsigned index;
     if (provider == NULL || event == NULL)
         return PORTABLE_WHOLE_AUDIO_PROVIDER_INVALID_ARGUMENT;
@@ -43,15 +42,10 @@ PortableWholeAudioProviderStatus portable_whole_audio_provider_apply(
         return PORTABLE_WHOLE_AUDIO_PROVIDER_INVALID_ARGUMENT;
     index = event->channel;
     voice = &provider->scheduler.voices[index];
-    channel = &provider->scheduler.allocator.channels[index];
 
     if (event->kind == PORTABLE_WHOLE_AUDIO_EVENT_SAMPLE_STOP) {
         portable_dac_free_pcm(voice->pcm);
         memset(voice, 0, sizeof(*voice));
-        channel->active = 0;
-        channel->owner_loaded = 0;
-        channel->sound_id = -1;
-        channel->sample_object_id = -1;
     } else if (event->kind == PORTABLE_WHOLE_AUDIO_EVENT_SAMPLE_START) {
         if (event->sample_pcm == NULL || event->sample_size < 2 ||
             event->step_8_8 == 0 || event->volume_row > 7 ||
@@ -72,8 +66,7 @@ PortableWholeAudioProviderStatus portable_whole_audio_provider_apply(
         voice->step_8_8 = event->step_8_8;
         voice->volume_row = event->volume_row;
         voice->looped = event->looped;
-        channel->active = 1;
-        channel->owner_loaded = 1;
+        voice->active = 1;
     } else {
         return PORTABLE_WHOLE_AUDIO_PROVIDER_UNSUPPORTED_EVENT;
     }

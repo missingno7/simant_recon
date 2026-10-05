@@ -36,7 +36,15 @@ the window (module 23AE: LockWin 0377 / UnlockWin 01DB / IsWinLocked 0051).
 * `_fastcall` is used throughout module 2505 (AX, DX, BX register arguments; stack
   arguments pushed left to right; struct return through a hidden near pointer).
 
-## Open
-2505:0453 (anchor resolution, 6 bytes short), 2505:06B9 (record break), 259D:000E
-(win_DrawBitMap), 259D:032A (word-wrapped text), 21FA:0413 / 08E2 (bytes exact; LEDATA record
-breaks differ).
+## Current reconstruction
+
+Anchor resolution (`f_2505_0453`) and styled word wrapping
+(`win_PrintStyleTextInRect`) are canonical semantic reconstructions with full
+static completeness receipts in `evidence/canonical/semantic/`. Their remaining
+historical codegen differences are explicit. Current exact-function and whole-TU
+results are in `docs/progress.md`.
+
+Native pointer-bearing window and object records require explicit wire/runtime
+views. Handle sidecars hold host pointers; canonical window counts, stacks,
+callbacks and algorithms remain the source authority. Unproved cross-owner
+index/resource cases remain a semantic gate in `src/program.json`.

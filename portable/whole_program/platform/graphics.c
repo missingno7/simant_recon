@@ -1,3 +1,5 @@
+#include "canonical_graphics_data.h"
+extern void (*driver_callback_table[25])();
 #include "graphics.h"
 #include "graphics_line_1499.h"
 #include "graphics_source_clip.h"
@@ -6,18 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
-
-
-SimGraphicsAttrCallback g_9128;
-SimGraphicsFontCallback g_912C;
-SimGraphicsFontCallback g_9130;
-SimGraphicsRectCallback g_9134;
-SimGraphicsPatternRectCallback g_9138;
-SimGraphicsRectOperationCallback g_913C;
-SimGraphicsBitmapCallback g_9154;
-SimGraphicsBitmapCallback g_9158;
-SimGraphicsLineCallback g_9170;
-
 static SimGraphicsDriver *s_source_owner;
 static struct Rect *const *s_source_g_5AAC;
 
@@ -83,16 +73,12 @@ static int16_t wrap16(int32_t value)
 
 SimGraphicsStatus sim_graphics_init(SimGraphicsDriver *graphics)
 {
-    size_t i;
     if (graphics == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     memset(graphics, 0, sizeof(*graphics));
     if (sim_graphics_set_mode(graphics, SIM_GRAPHICS_MODE_EGA_640X350) != SIM_GRAPHICS_OK)
         return graphics->last_status;
-    graphics->g_3DDE = 8;
-    graphics->g_3DE0 = 15;
-    for (i = 0; i < 16; ++i)
-        graphics->color_map[i] = (uint8_t)i;
+    /* Canonical ASM definitions supply font advance, pen and palette initializers. */
     return SIM_GRAPHICS_OK;
 }
 
@@ -133,9 +119,9 @@ SimGraphicsStatus sim_graphics_set_mode(SimGraphicsDriver *graphics, int16_t mod
     graphics->pixel_storage_size = size;
     graphics->framebuffer = next_framebuffer;
     graphics->video_mode = (SimGraphicsVideoMode)mode;
-    graphics->g_3DB2 = (int16_t)width;
-    graphics->g_3DB4 = (int16_t)height;
-    graphics->g_3DB6 = 80; /* DOS planar stride for both supported 640-wide modes */
+    g_3DB2 = (int16_t)width;
+    g_3DB4 = (int16_t)height;
+    g_3DB6 = 80; /* DOS planar stride for both supported 640-wide modes */
     return graphics->last_status = SIM_GRAPHICS_OK;
 }
 
@@ -201,7 +187,7 @@ int16_t sim_graphics_f_1B4E_000D(SimGraphicsDriver *graphics, int16_t color)
     uint16_t mapped;
     if (graphics == NULL)
         return color;
-    mapped = (uint16_t)((bits & 0xfff0u) | graphics->color_map[bits & 0x0fu]);
+    mapped = (uint16_t)((bits & 0xfff0u) | g_41C0[bits & 0x0fu]);
     return wrap16(mapped);
 }
 
@@ -213,8 +199,8 @@ SimGraphicsStatus sim_graphics_g9128(SimGraphicsDriver *graphics,
     (void)source_pattern_word; /* target o00_31AD_1659 never reads [bp+10]. */
     if (graphics == NULL || graphics->pixel_storage == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    graphics->g_3DE0 = (uint8_t)foreground;
-    graphics->g_3DE2 = (uint8_t)background;
+    g_3DE0 = (uint8_t)foreground;
+    g_3DE2 = (uint8_t)background;
     return SIM_GRAPHICS_OK;
 }
 
@@ -237,7 +223,7 @@ SimGraphicsStatus sim_graphics_g9134(SimGraphicsDriver *graphics,
     if (rect.top > rect.bottom) { int32_t t = rect.top; rect.top = rect.bottom; rect.bottom = t; }
     /* f_1B4E_000D owns source palette remapping; S00 consumes these bits as-is. */
     pixel_color = (uint8_t)((uint16_t)color & 0x0fu);
-    operation = (uint8_t)graphics->g_3DD2;
+    operation = (uint8_t)g_3DD2;
     if (operation == 0) {
         portable_fill_rect(&graphics->framebuffer, rect, pixel_color);
         return SIM_GRAPHICS_OK;
@@ -302,8 +288,8 @@ SimGraphicsStatus sim_graphics_g9138_pattern_rect(SimGraphicsDriver *graphics,
             uint8_t bits = graphics->pattern_source[row + byte_in_row];
             uint8_t bit = (uint8_t)((bits >> (7u - ((uint32_t)x & 7u))) & 1u);
             portable_put_pixel(&graphics->framebuffer, x, y,
-                               bit ? (uint8_t)(graphics->g_3DE0 & 0x0fu) :
-                                     (uint8_t)(graphics->g_3DE2 & 0x0fu));
+                               bit ? (uint8_t)(g_3DE0 & 0x0fu) :
+                                     (uint8_t)(g_3DE2 & 0x0fu));
         }
     }
     return SIM_GRAPHICS_OK;
@@ -365,9 +351,9 @@ static void select_font_view(SimGraphicsDriver *graphics, const uint8_t *bytes,
     graphics->glyph_bytes_per_character = glyph_stride;
     graphics->glyph_width = glyph_width;
     graphics->glyph_height = glyph_height;
-    graphics->g_3DDA = wrap16(glyph_stride);
-    graphics->g_3DDC = glyph_height;
-    graphics->g_3DDE = advance;
+    g_3DDA = wrap16(glyph_stride);
+    g_3DDC = glyph_height;
+    g_3DDE = advance;
     graphics->font_is_bound = bytes != NULL && size != 0;
 }
 
@@ -398,7 +384,7 @@ SimGraphicsStatus sim_graphics_g9130_select_bios_8x14(SimGraphicsDriver *graphic
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     select_font_view(graphics, graphics->bios_8x14_source,
                      graphics->bios_8x14_source_size, 14, 8, 14,
-                     (uint8_t)graphics->g_3DDE);
+                     (uint8_t)g_3DDE);
     return graphics->font_is_bound ? SIM_GRAPHICS_OK : SIM_GRAPHICS_FONT_UNBOUND;
 }
 
@@ -441,13 +427,13 @@ SimGraphicsStatus sim_graphics_g9170_line(SimGraphicsDriver *graphics,
     int written;
     if (graphics == NULL || graphics->pixel_storage == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    if (graphics->g_3DD2 != 0 && graphics->g_3DD2 != 0x08 &&
-        graphics->g_3DD2 != 0x10 && graphics->g_3DD2 != 0x18)
+    if (g_3DD2 != 0 && g_3DD2 != 0x08 &&
+        g_3DD2 != 0x10 && g_3DD2 != 0x18)
         return SIM_GRAPHICS_UNSUPPORTED_MODE;
     /* S00 receives an already mapped source color and does not read g_41C0. */
     raster.graphics = graphics;
     raster.color = (uint8_t)((uint16_t)color & 0x0fu);
-    raster.operation = (uint8_t)graphics->g_3DD2;
+    raster.operation = (uint8_t)g_3DD2;
     written = sim_graphics_line_1499_pixels(x0, y0, x1, y1,
                                              sim_graphics_1499_put_pixel,
                                              &raster);
@@ -468,11 +454,11 @@ SimGraphicsStatus sim_graphics_set_glyph_source(SimGraphicsDriver *graphics,
     graphics->glyph_source = bytes;
     graphics->glyph_source_size = size;
     graphics->glyph_bytes_per_character = glyph_bytes_per_character;
-    graphics->g_3DDA = (int16_t)glyph_bytes_per_character;
+    g_3DDA = (int16_t)glyph_bytes_per_character;
     graphics->glyph_width = width;
     graphics->glyph_height = height;
-    graphics->g_3DDE = width;
-    graphics->g_3DDC = height;
+    g_3DDE = width;
+    g_3DDC = height;
     graphics->font_is_bound = 1;
     return SIM_GRAPHICS_OK;
 }
@@ -490,7 +476,7 @@ SimGraphicsStatus sim_graphics_g9154(SimGraphicsDriver *graphics,
     if (graphics == NULL || graphics->pixel_storage == NULL || bitmap == NULL ||
         width == 0 || height == 0 || row_bytes > SIZE_MAX / height)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    operation = (uint8_t)graphics->g_3DD2;
+    operation = (uint8_t)g_3DD2;
     if (operation != 0 && operation != 0x08u && operation != 0x10u &&
         operation != 0x18u)
         return SIM_GRAPHICS_UNSUPPORTED_MODE;
@@ -507,7 +493,7 @@ SimGraphicsStatus sim_graphics_g9154(SimGraphicsDriver *graphics,
             uint8_t bit = (uint8_t)((row >> (7u - (px & 7u))) & 1u);
             int32_t dx = (int32_t)x + (int32_t)px;
             int32_t dy = (int32_t)y + (int32_t)py;
-            uint8_t color = bit ? graphics->g_3DE0 : graphics->g_3DE2;
+            uint8_t color = bit ? g_3DE0 : g_3DE2;
             if (operation != 0 &&
                 dx >= graphics->framebuffer.clip.left &&
                 dx < graphics->framebuffer.clip.right &&
@@ -706,15 +692,15 @@ SimGraphicsStatus sim_graphics_bind_source_abi(SimGraphicsDriver *graphics,
         s_source_owner = NULL;
         s_source_g_5AAC = NULL;
         sim_graphics_source_clip_unbind();
-        g_9128 = NULL;
-        g_912C = NULL;
-        g_9130 = NULL;
-        g_9134 = NULL;
-        g_9138 = NULL;
-        g_913C = NULL;
-        g_9154 = NULL;
-        g_9158 = NULL;
-        g_9170 = NULL;
+        (*( SimGraphicsAttrCallback *)(void *)&driver_callback_table[0]) = NULL;
+        (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[1]) = NULL;
+        (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[2]) = NULL;
+        (*( SimGraphicsRectCallback *)(void *)&driver_callback_table[3]) = NULL;
+        (*( SimGraphicsPatternRectCallback *)(void *)&driver_callback_table[4]) = NULL;
+        (*( SimGraphicsRectOperationCallback *)(void *)&driver_callback_table[5]) = NULL;
+        (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11]) = NULL;
+        (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[12]) = NULL;
+        (*( SimGraphicsLineCallback *)(void *)&driver_callback_table[18]) = NULL;
         return SIM_GRAPHICS_OK;
     }
     if (graphics->pixel_storage == NULL || source_g_5AAC == NULL)
@@ -723,16 +709,16 @@ SimGraphicsStatus sim_graphics_bind_source_abi(SimGraphicsDriver *graphics,
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     s_source_owner = graphics;
     s_source_g_5AAC = source_g_5AAC;
-    g_9128 = source_g9128_callback;
+    (*( SimGraphicsAttrCallback *)(void *)&driver_callback_table[0]) = source_g9128_callback;
     /* Initial S00 table copy: slots 1/2 are BIOS 8x8/8x14. */
-    g_912C = source_g9130_8x8_font_callback;
-    g_9130 = source_g9130_8x14_font_callback;
-    g_9134 = source_g9134_callback;
-    g_9138 = source_g9138_callback;
-    g_913C = source_g913C_callback;
-    g_9154 = source_g9154_callback;
-    g_9158 = source_g9158_callback;
-    g_9170 = source_g9170_callback;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[1]) = source_g9130_8x8_font_callback;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[2]) = source_g9130_8x14_font_callback;
+    (*( SimGraphicsRectCallback *)(void *)&driver_callback_table[3]) = source_g9134_callback;
+    (*( SimGraphicsPatternRectCallback *)(void *)&driver_callback_table[4]) = source_g9138_callback;
+    (*( SimGraphicsRectOperationCallback *)(void *)&driver_callback_table[5]) = source_g913C_callback;
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11]) = source_g9154_callback;
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[12]) = source_g9158_callback;
+    (*( SimGraphicsLineCallback *)(void *)&driver_callback_table[18]) = source_g9170_callback;
     graphics->last_status = SIM_GRAPHICS_OK;
     return SIM_GRAPHICS_OK;
 }
@@ -742,8 +728,8 @@ SimGraphicsStatus sim_graphics_s00_apply_cga_font_overrides(SimGraphicsDriver *g
     if (graphics == NULL || graphics != s_source_owner)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     /* S00 o00_31AD_1AE7 writes slot1=1AC4 and slot2=166A. */
-    g_912C = source_g912C_custom_font_callback;
-    g_9130 = source_g9130_8x8_font_callback;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[1]) = source_g912C_custom_font_callback;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[2]) = source_g9130_8x8_font_callback;
     return SIM_GRAPHICS_OK;
 }
 
@@ -788,7 +774,7 @@ SimGraphicsStatus sim_graphics_f_1B4E_0110(SimGraphicsDriver *graphics,
     if (graphics->glyph_source == NULL)
         return SIM_GRAPHICS_FONT_UNBOUND;
     ch = (uint8_t)character;
-    if (graphics->g_3DDA == 6 && (ch & 0x80u) != 0)
+    if (g_3DDA == 6 && (ch & 0x80u) != 0)
         return SIM_GRAPHICS_UNSUPPORTED_GLYPH_FOLD;
     offset = (size_t)ch * graphics->glyph_bytes_per_character;
     if (offset > graphics->glyph_source_size ||
@@ -807,24 +793,24 @@ SimGraphicsStatus sim_graphics_f_1B4E_0081(SimGraphicsDriver *graphics,
     size_t i;
     if (graphics == NULL || text == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    pen = wrap16((int32_t)x - graphics->g_3DDE);
+    pen = wrap16((int32_t)x - g_3DDE);
     for (i = 0; i < 65535u && text[i] != '\0'; ++i) {
         int8_t signed_character = (int8_t)(uint8_t)text[i];
         SimGraphicsStatus status;
-        pen = wrap16((int32_t)pen + graphics->g_3DDE);
+        pen = wrap16((int32_t)pen + g_3DDE);
         if (signed_character < 0 || pen < 0)
             continue;
         status = sim_graphics_f_1B4E_0110(graphics, pen, y,
                                          (uint8_t)signed_character);
         if (status != SIM_GRAPHICS_OK)
             return status;
-        if (pen >= graphics->g_3DB2)
+        if (pen >= g_3DB2)
             break;
     }
     if (i == 65535u && text[i] != '\0')
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    graphics->g_3DA0 = wrap16((int32_t)pen + graphics->g_3DDE);
-    graphics->g_3DA2 = y;
+    g_3DA0.x = wrap16((int32_t)pen + g_3DDE);
+    g_3DA0.y = y;
     return SIM_GRAPHICS_OK;
 }
 

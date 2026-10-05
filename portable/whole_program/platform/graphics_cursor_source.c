@@ -1,3 +1,5 @@
+#include "canonical_graphics_data.h"
+extern void (*driver_callback_table[25])();
 #include "graphics_cursor_source.h"
 
 #include "graphics_bitmap_source.h"
@@ -17,7 +19,7 @@ extern char **g_3D14;
 extern char **g_3D18;
 extern char **g_3D1C;
 
-uint8_t portable_m1b73_cursor_save_under[
+extern uint8_t SaveUnder[
     SIM_GRAPHICS_SOURCE_CURSOR_SAVE_UNDER_BYTES];
 
 static SimGraphicsCursorSource *active_cursor;
@@ -92,9 +94,9 @@ SimGraphicsStatus sim_graphics_source_cursor_bind(
         bindings->hide_rectangle == NULL ||
         bindings->resolve_handle == NULL ||
         bindings->measure_active_resource == NULL ||
-        g_9140 == NULL || g_9148 == NULL ||
-        g_914C == NULL || g_9154 == NULL || g_9128 == NULL || g_9160 == NULL ||
-        g_9164 == NULL || g_9168 == NULL || g_9184 == NULL ||
+        (*( SimGraphicsCaptureSizeCallback *)(void *)&driver_callback_table[6]) == NULL || (*( SimGraphicsCaptureCallback *)(void *)&driver_callback_table[8]) == NULL ||
+        (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) == NULL || (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11]) == NULL || (*( SimGraphicsAttrCallback *)(void *)&driver_callback_table[0]) == NULL || (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[14]) == NULL ||
+        (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[15]) == NULL || (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[16]) == NULL || (*( SimGraphicsLogicOperationCallback *)(void *)&driver_callback_table[23]) == NULL ||
         sim_graphics_source_clip_owner() != bindings->graphics)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     memset(cursor, 0, sizeof(*cursor));
@@ -166,7 +168,7 @@ static int draw_saved_cursor(SimGraphicsCursorSource *cursor)
     uint8_t old_display_lock = (uint8_t)g_21A4;
     g_21A4 = 1;
     f_1B4E_003B((int16_t)mouse->cursor_x[0], (int16_t)mouse->cursor_y[0],
-                (char *)portable_m1b73_cursor_save_under);
+                (char *)SaveUnder);
     g_21A4 = (char)old_display_lock;
     return source_status_ok(cursor);
 }
@@ -200,33 +202,33 @@ static int draw_active_cursor(SimGraphicsCursorSource *cursor)
     old_display_lock = (uint8_t)g_21A4;
     g_21A4 = 1;
     if (sim_graphics_source_capture_cursor_buffer(
-            portable_m1b73_cursor_save_under,
-            sizeof(portable_m1b73_cursor_save_under)) != SIM_GRAPHICS_OK) {
+            SaveUnder,
+            sizeof(SaveUnder)) != SIM_GRAPHICS_OK) {
         g_21A4 = (char)old_display_lock;
         cursor->bindings.graphics->last_status = SIM_GRAPHICS_INVALID_ARGUMENT;
         return 0;
     }
-    g_9148(x, y, right, bottom,
-           (char *)portable_m1b73_cursor_save_under);
+    (*( SimGraphicsCaptureCallback *)(void *)&driver_callback_table[8])(x, y, right, bottom,
+           (char *)SaveUnder);
     sim_graphics_source_capture_cursor_buffer_clear(
-        portable_m1b73_cursor_save_under);
+        SaveUnder);
     if (!source_status_ok(cursor)) {
         g_21A4 = (char)old_display_lock;
         return 0;
     }
-    g_9128((int16_t)UINT16_C(0xff0f), 0, 0);
+    (*( SimGraphicsAttrCallback *)(void *)&driver_callback_table[0])((int16_t)UINT16_C(0xff0f), 0, 0);
     if (!source_status_ok(cursor)) {
         g_21A4 = (char)old_display_lock;
         return 0;
     }
-    g_9164();
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[15])();
     g_21A4 = 0;
     f_1B4E_005E(x, y, (char *)first);
     if (!source_status_ok(cursor)) {
         g_21A4 = (char)old_display_lock;
         return 0;
     }
-    g_9160();
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[14])();
     f_1B4E_003B(x, y, (char *)second);
     g_21A4 = (char)old_display_lock;
     return source_status_ok(cursor);
@@ -251,22 +253,22 @@ int portable_m1b73_graphics_cursor_mode(void *context, uint8_t mode,
     old_clip = *clip_slot;
     old_left_cut = fd_55B3_3DE6;
     old_right_cut = fd_55B3_3DE8;
-    old_logic = graphics->g_3DD2;
-    old_foreground = graphics->g_3DE0;
-    old_background = graphics->g_3DE2;
-    old_pattern = graphics->g_3DE4;
+    old_logic = g_3DD2;
+    old_foreground = g_3DE0;
+    old_background = g_3DE2;
+    old_pattern = g_3DE4;
 
     /* `_0122` temporarily makes g5A9C the active full-screen clip entry.
      * Its native owner is one Rect, while m1D8E walks a sentinel-terminated
      * list, so adapt that single source entry to a one-entry call-local list. */
-    full_screen_clip_list[0] = g_5A9C;
+    full_screen_clip_list[0] = g_5A9C[0];
     full_screen_clip_list[1] = (struct Rect){ 0, INT16_MIN, 0, 0 };
     *clip_slot = full_screen_clip_list;
-    g_9168();
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[16])();
     ok = mode == 1 ? draw_active_cursor(cursor) : draw_saved_cursor(cursor);
-    g_9128((int16_t)old_foreground, (int16_t)old_background,
+    (*( SimGraphicsAttrCallback *)(void *)&driver_callback_table[0])((int16_t)old_foreground, (int16_t)old_background,
            (int16_t)old_pattern);
-    g_9184(old_logic);
+    (*( SimGraphicsLogicOperationCallback *)(void *)&driver_callback_table[23])(old_logic);
     *clip_slot = old_clip;
     fd_55B3_3DE6 = old_left_cut;
     fd_55B3_3DE8 = old_right_cut;

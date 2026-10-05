@@ -3,7 +3,7 @@
 
 #include "../input_time.h"
 #include "../../../platform/host.h"
-#include "../../../game/timing.h"
+#include "../pit_clock.h"
 
 #include <stdint.h>
 

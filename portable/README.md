@@ -1,171 +1,53 @@
-# Native SDL3 port
+# Canonical SDL3 build
 
-This branch starts from `dos-semantic-oracle-v1` (`66e85041ee54f59774ae0fd5a08b37ffbcf77172`).
-The historical `src/`, layout, validation tools and proof packets remain read-only.
-Native work lives here. The DOS checkpoint preserves 1,611 EXACT functions and
-29 separately registered BEHAVIOR_EXACT contracts; it is not a 100% matching
-decompilation.
-
-The current runnable preview uses the [whole-source application](docs/whole-application-assembly.md)
-and original main loop. See the [current handover](docs/handover-2026-10-03.md)
-for drop-in packages, build commands, verified flows, and open defects.
-The [whole-program mechanical migration](docs/whole-program-migration.md) converts
-the original C translation units and connects shared native platform services.
-The selected-module executable described below is an older, separate prototype.
-
-The [source conversion policy](docs/source-porting-rules.md) keeps recovered
-game bodies and shared state as the authority. Mechanical type/pointer
-conversion and explicit platform services follow the Stunts/Empires port
-workflow. Mode/Caste events now use
-[mechanically converted original handlers](tests/setup/source_control_bridge/README.md).
-Movement and several rendering providers still use manually translated
-implementations with bounded DOS evidence. The
-[source-route inventory](docs/source-port-inventory.md) distinguishes those
-routes from generated source bodies. Replacing these exceptions with
-reproducible source conversions is active work; a passing independent model
-does not by itself establish a mechanical conversion.
-
-An isolated extracted movement body also passes
-[322,720 fresh DOS comparisons](tests/movement/source_conversion/source-conversion-dos-diff-v3.json).
-That conversion has not replaced the production movement adapter yet; its tile
-predicate dependency remains a separately tested native implementation.
-
-## Current integration state
-
-The SDL3 executable renders the original scenario-selection resource inside a
-resizable 640×350 logical window with nearest-neighbor scaling. Its geometry,
-packed bitmap decoding, transparency merge and font metrics have direct DOS
-comparison evidence. Scenario selection reaches the original logical event
-codes and starts actual resource-backed native world initialization. The
-`--newgame-view` mode opens that world directly in the original edit viewport.
-An explicit recovered-core build runs the original colony update loop through
-the native SDL host. The interactive game UI is still being integrated; this
-build does not yet provide a complete playable game.
-The native movement implementation has passed 322,720 direction-selection and
-18,440 tile-predicate comparisons against fresh original DOS executions.
-Database decoding loads all 840 shipped records, including 205 compressed records.
-World generation, ant initialization, water, spider behavior and the original
-scenario/window model execute natively. [Proof boundaries](docs/proof-boundaries.md) distinguish
-original-DOS comparisons from unit checks and list known corrections in progress.
-Missing required services return an explicit failure; they must
-not be replaced with no-op hooks to make startup appear complete.
-
-The explicitly selected source-reuse profile has passed three 256-tick
-consecutive differentials against DOS (768 ticks total). Every tick compares
-370 nonpointer globals, both RNG states, and ordered host callback arguments.
-The current [next7 tick proof](research/core-proof/original-256-tick-summary-next7-captured370-20261002.json)
-records the exact profile and finite domains. It excludes the 41 next7 fields
-absent from those preserved captures. A separate resource-backed
-NewGame comparison covers 146 source ranges and both RNG output streams,
-without hydrating the native session from a DOS memory snapshot. These checks
-do not certify the remaining interactive host services; the live integration
-build is still explicitly diagnostic.
-
-## Build prerequisites
-
-Use MinGW-w64 GCC (this workstation has GCC 12.2.0) and Python 3.10 or newer.
-`SIMANT_CC` can select the compiler. SDL3 is a project-local dependency downloaded
-from the [official 3.4.16 release](https://github.com/libsdl-org/SDL/releases/tag/release-3.4.16).
-The SDK archive is pinned by SHA-256:
-`9828bb735cf8a007bcf0ac5aa9f01f3fcb54b7ca67c932e775c905c5d5053a60`.
-It is extracted under ignored `build/sdl3-sdk/`; no SDK binaries are committed.
-
-From the repository root:
+`build.py` consumes the complete current `src/program.json` inventory. It
+converts whole canonical C translation units and symbolic assembly data, then
+compiles the explicit platform services in `platform.json`. It does not select
+historical candidate bodies or apply source correction/storage overlays.
 
 ```powershell
-python portable/build.py --setup-sdk
-python portable/tests/windows/render/evidence/fetch_bios_reference.py
-python portable/build.py
-build/portable/simant-sdl3.exe --scenario-screen
-build/portable/simant-sdl3.exe --newgame-view
-python portable/tests/run.py --host
-python portable/tools/verify_evidence.py
+python portable/build.py --out build/portable-sdl3
+python portable/tests/native_database/run.py --conversion build/portable-sdl3 --out build/native-database
+python portable/tests/native_rng/run.py --report build/portable-sdl3/report.json --out build/native-rng
+python portable/tests/native_simulation/run.py --native-build build/portable-sdl3 --out build/native-simulation --random-count 128
+python portable/tests/runtime/run.py --report build/portable-sdl3/report.json --flow vga
+python portable/tests/runtime/run.py --report build/portable-sdl3/report.json --flow save
+python portable/tests/runtime/run_load.py --report build/portable-sdl3/report.json
 ```
 
-An explicit generated profile may be linked with
-`python portable/build.py --core-profile build/workers/recovered_source_next10/generated`.
-First follow the [profile recipe](docs/recovered-source-next10-recipe.md) to
-recreate the reviewed generated inputs. The build checks the frozen historical
-checkpoint and recorded source/profile identities, and keeps the generated
-modules' warning policy separate from strict native host compilation. It does
-not promote a diagnostic profile into a behavioral acceptance claim.
+Build output must be fresh. Defaults use MinGW GCC under `C:/msys64/mingw64`
+and the local SDL3 SDK under `build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32`;
+`--cc`, `--sdk` and `--out` override these locations. Game databases/fonts/CFG
+are local prerequisites. The SDL3 runtime and hardware BIOS fonts are copied to
+the result; historical executable bytes are not native runtime resources.
+
+Run the result from the repository:
 
 ```powershell
-build/portable/simant-sdl3.exe --live-game
-build/portable/simant-sdl3.exe --live-newgame --ticks 32
+build/portable-sdl3/simant-canonical.exe
 ```
 
-The first command starts at scenario selection; the second runs a bounded live
-NewGame. Simulation uses the source logical tick schedule independently of
-presentation refresh. Unsupported host services stop with the source service
-name. The audio driver remains disabled while its complete native backend is
-being reconstructed.
+The application locates the adjacent resources and runs the converted original
+main. The platform application owns SDL lifecycle, presentation, input injection
+for tests and host resources; startup dialogs and the simulation remain in game
+source. See [runtime checks](tests/runtime/README.md) for fresh writable resource
+copies and the Save/Load trace requirements.
 
-The selected Next10 build opens the source History window through Window →
-History. Graph buttons retain the source four-slot selection/eviction order;
-holding the graph area highlights the selected series until mouse release.
-The renderer uses the shipped labels, font and window resources. A bounded
-[physical test](tests/live_history/README.md) checks nine History actions while
-paused, then runs 32 simulation ticks. Frame/close dispatch and DOS framebuffer
-equality remain separate work.
+`canonical_native_abi/` contains bounded type/ABI conversions: fixed-width words,
+near/far pointer spelling, owner views, callbacks and packed wire/native layouts.
+`whole_program/platform/` implements DOS/BIOS services. The small
+`whole_program/algorithms/` files project genuine canonical assembly algorithms
+that a native C compiler cannot assemble; they are not an alternative C game
+model. Header views and native registries borrow canonical ordinary owners.
 
-The live prototype supports quick left clicks in the Edit map area and the
-source double-click command. Shift+0 (`)`) toggles pause; Shift+1 through
-Shift+4 (`!`, `@`, `#`, `$`) select speed. Ctrl+numeric-keypad directions move
-the camera one cell on each new key press; held-key repeat cadence is still
-unverified. Menu text/state and its BIOS-font bar are rendered from the actual
-SHARED resource. Physical menu selection follows the source drag-and-release
-interaction and dispatches the original S11 `ProcMenu` through its own 14-byte
-event ABI. Source speed, pause, options and NewGame commands share the guarded
-engine boundary. Unimplemented command services still fail by name. The nest
-overview uses the DOS selector-to-pixel conversion
-and draws behind the front Edit window. The source yellow-ant key handler is
-connected; supported and unhandled keys retain its logical result. Other
-interactive UI routes remain unfinished. A bounded SDL test enters the source
-game-over flow, dismisses its window, selects scenario 0x0202, and returns
-through source NewGame to a simulation tick. Tutorial/load/save/quit routes
-still need integration. Mode and caste control
-contents now use source-derived rendering plans, current populations, active
-resource providers, and each window's position in the scene order. Physical
-control clicks support Auto, manual presets, percentage display, and triangle
-dragging through the guarded source-state boundary. A bounded SDL test checks
-both windows against the separately DOS-compared model and completes 32 ticks.
-Control frame/close dispatch and direct DOS framebuffer comparison remain
-separate work. A
-separate natural-trigger host test reaches game
-over at completed tick 2,879 after physical Shift+4 selects the source's fastest
-speed. It dismisses EndGame, restarts scenario 0x0202, and continues to tick
-3,798 before a test-only Quit event. This is a finite live-host check. The
-retained SDL event tests and DOS/native click
-comparison state their exact coverage in [proof boundaries](docs/proof-boundaries.md).
+Current native execution is a preview with explicit unresolved contracts.
+Twelve storage representations still lack complete DOS owner/lifetime proof;
+FindIndex's one-past guard is a semantic exception. Window omitted-slot zeroing
+has a reviewed shipped-resource/observer domain but differs in raw state.
+Unsupported font extents, malformed window bindings and zoom/allocation domains
+remain explicit in `platform.json`. Passing build and bounded tests do not close
+those issues or establish complete DOS/native equality.
 
-Original resources remain in ignored `assets/`. Their identities are recorded in
-`tests/resources/ASSET_SHA256.md`. No original executable or asset archive is
-redistributed with the port. A native build receipt records its compiler, SDK,
-source inputs, frozen oracle commit and executable hash under `build/portable/`.
-The development modes use fixed startup TickCount samples for reproducibility.
-`--scenario-screen` and `--newgame-view` are static presentation modes;
-`--live-game` and `--live-newgame` require the explicit recovered-core build.
-BIOS font IDs use the pinned DOSBox reference-host tables generated under
-`build/`; their source/license identity is retained there. They are a presentation
-choice, with separate controlled glyph-provider tests, not an original BIOS claim.
-An optional CMake project is provided for systems with an installed SDL3
-development package; this workstation uses the verified MinGW build script.
-
-## Boundaries
-
-- `game/state` stores typed logical state, preserving the original x-major grids.
-- `game/simulation` owns 16-bit arithmetic, RNG consumption and game rules.
-- `game/resources` decodes resource indexes/storage into owned ordinary bytes.
-- `ui_model/windows` owns resource geometry and logical window/object actions.
-- `render` draws into an indexed framebuffer without SDL dependencies.
-- `platform/host.h` defines host input/presentation/time services.
-- `platform/sdl3` implements those services; SDL events do not advance simulation.
-
-The original loop and outstanding native subsystems are tracked in
-`docs/simulation-dependencies.md`. In particular, `MacTickCount` is three times the
-original logical tick; presentation refresh must not become the simulation clock.
-Simulation tests invoke the frozen DOS oracle directly rather than using a second
-native implementation as expected output for differential evidence. Unit tests
-are labeled separately and do not establish DOS equivalence. Native proof records remain separate
-from the frozen historical acceptance registry.
+Published historical checkpoints live in Git. Current sources and validations
+are described in [the canonical architecture](../docs/canonical-source.md) and
+[the consolidation report](../docs/consolidation.md).

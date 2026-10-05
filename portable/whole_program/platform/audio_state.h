@@ -114,7 +114,7 @@ extern int16_t fd_55B3_74B9;
 extern int16_t fd_55B3_74C0;
 extern uint16_t fd_55B3_7564;
 extern int16_t (*fd_55B3_74DA[9])(void);
-extern int16_t fd_55B3_6BA4[];
+extern uint8_t fd_55B3_6BA4[255];
 
 static inline PortableWholeAudioSample *portable_whole_audio_sample(
     const PortableWholeAudioInstrumentEntry *entry)
@@ -137,7 +137,7 @@ static inline int16_t *portable_whole_audio_driver_info(
 /* Source m28BC/m290D timer and sampled-channel state. */
 extern int16_t fd_55B3_6B42;
 extern PortableWholeAudioRuntimeSample fd_55B3_6B4C[4];
-extern PortableWholeAudioVoiceSlot fd_55B3_6B4E[33];
+
 extern uint16_t fd_55B3_6B9E;
 
 #endif

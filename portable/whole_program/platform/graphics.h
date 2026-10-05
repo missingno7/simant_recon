@@ -1,3 +1,4 @@
+#include "canonical_graphics_data.h"
 #ifndef SIMANT_WHOLE_PROGRAM_PLATFORM_GRAPHICS_H
 #define SIMANT_WHOLE_PROGRAM_PLATFORM_GRAPHICS_H
 
@@ -87,19 +88,6 @@ typedef struct SimGraphicsDriver {
     SimGraphicsStatus last_status; /* result of void source ABI callbacks */
 
     /* Native owners corresponding to m1B4E source DATA, in DOS widths. */
-    int16_t g_3DA0; /* text pen x */
-    int16_t g_3DA2; /* text pen y */
-    int16_t g_3DB2; /* logical screen width; source default 640 */
-    int16_t g_3DB4; /* logical screen height; source default 350 */
-    int16_t g_3DB6; /* DOS planar bytes per scanline; source default 80 */
-    int16_t g_3DD2; /* source VGA logic-operation word; only zero mode admitted */
-    int16_t g_3DDA; /* source glyph-index stride, used by 6-pixel fold branch */
-    int16_t g_3DDC; /* active glyph cell height */
-    int16_t g_3DDE; /* text advance/glyph width; source default 8 */
-    uint8_t g_3DE0; /* source pen/foreground */
-    uint8_t g_3DE2; /* source background/fill */
-    uint8_t g_3DE4; /* source pattern selection, retained but not inferred by g9128 */
-    uint8_t color_map[16]; /* m1B4E g_41C0 */
 
     const uint8_t *glyph_source;
     size_t glyph_source_size;
@@ -167,16 +155,6 @@ typedef void (*SimGraphicsPatternRectCallback)(int16_t left, int16_t top,
                                                int16_t pattern_word);
 typedef void (*SimGraphicsRectOperationCallback)(int16_t left, int16_t top,
                                                  int16_t right, int16_t bottom);
-extern SimGraphicsAttrCallback g_9128;
-extern SimGraphicsFontCallback g_912C;
-extern SimGraphicsFontCallback g_9130;
-extern SimGraphicsRectCallback g_9134;
-extern SimGraphicsPatternRectCallback g_9138;
-extern SimGraphicsRectOperationCallback g_913C;
-extern SimGraphicsBitmapCallback g_9154;
-extern SimGraphicsBitmapCallback g_9158;
-extern SimGraphicsLineCallback g_9170;
-
 /* Window clipping is host framebuffer state, not a second copy of window/UI state. */
 SimGraphicsStatus sim_graphics_clip_push(SimGraphicsDriver *graphics);
 SimGraphicsStatus sim_graphics_clip_set(SimGraphicsDriver *graphics, PortableRect clip);

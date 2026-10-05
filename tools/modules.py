@@ -439,7 +439,7 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
                   man: dict | None = None) -> dict:
     """Compile ``text`` under the module profile and verify every claim strictly.
 
-    ``collect`` (whole-build harness, tools/link.py): when a dict is given, the bound bytes and
+    ``collect`` (compiler diagnostics): when a dict is given, the bound bytes and
     relocation sites of every claim and data placement, the unbound code segment of a complete TU
     and the object bytes are recorded in it.  It never changes a verdict.  ``man`` is the
     manifest the module belongs to (other objects of its frame; default: layout/manifest.json)."""
@@ -671,7 +671,7 @@ def row_overlaps(unit: str, lin: int, size: int) -> list[str]:
 
 
 def _collected(c: dict, t, res, ok: bool) -> dict:
-    """What the whole-build harness needs from one bound claim (verify_module ``collect``)."""
+    """Bound claim observations for compiler diagnostics; never alter acceptance."""
     return {"name": c["name"], "kind": c.get("kind", "C"), "unit": c["unit"], "seg": c["seg"],
             "linear": t.linear, "bytes": res.candidate, "exact": ok, "reloc_order": res.reloc_order,
             "relocs": [(a, res.reloc_key.get(a), res.reloc_index.get(a)) for a in res.relocs_candidate],

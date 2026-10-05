@@ -22,12 +22,6 @@ typedef struct SimGraphicsPaletteServices {
 
 /* Cursor renderer logic slots from S00 DispatchS00. Their writes target the
  * source driver's one g_3DD2 word through its existing graphics owner. */
-extern SimGraphicsFontCallback g_915C;
-extern SimGraphicsFontCallback g_9160;
-extern SimGraphicsFontCallback g_9164;
-extern SimGraphicsFontCallback g_9168;
-extern SimGraphicsLogicOperationCallback g_9184;
-
 SimGraphicsStatus sim_graphics_source_entry_bind(SimGraphicsDriver *graphics);
 void sim_graphics_source_entry_unbind(void);
 SimGraphicsStatus sim_graphics_source_palette_bind(

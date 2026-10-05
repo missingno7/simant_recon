@@ -1,3 +1,5 @@
+#include "canonical_graphics_data.h"
+extern void (*driver_callback_table[25])();
 #include "graphics_bitmap_source.h"
 
 #include "graphics_source_clip.h"
@@ -5,10 +7,6 @@
 
 #include <stdint.h>
 #include <stdlib.h>
-
-SimGraphicsBitmapCallback g_914C;
-SimGraphicsBitmapCallback g_9150;
-
 extern void f_1D8E_07F6(char *port, int16_t x, int16_t y, char *bits,
                        int16_t width, int16_t height);
 
@@ -30,7 +28,7 @@ static SimGraphicsStatus draw_planar4(SimGraphicsDriver *graphics,
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     /* The admitted S00 planar source supports replace plus the three DOS
      * logic operations selected by f_1B4E's driver-entry callbacks. */
-    operation = (uint8_t)graphics->g_3DD2;
+    operation = (uint8_t)g_3DD2;
     if ((((uint8_t)g_5A97) & 1u) != 0 ||
         (operation != 0 && operation != 0x08u && operation != 0x10u &&
          operation != 0x18u))
@@ -120,8 +118,8 @@ SimGraphicsStatus sim_graphics_source_bitmap_bind(SimGraphicsDriver *graphics)
     SimGraphicsStatus status = sim_graphics_source_clip_bind(graphics);
     if (status != SIM_GRAPHICS_OK)
         return status;
-    g_914C = source_g914C_callback;
-    g_9150 = source_g9150_callback;
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) = source_g914C_callback;
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[10]) = source_g9150_callback;
     return SIM_GRAPHICS_OK;
 }
 
@@ -129,6 +127,6 @@ void sim_graphics_source_bitmap_unbind(void)
 {
     if (sim_graphics_source_clip_owner() != NULL)
         sim_graphics_source_clip_unbind();
-    g_914C = NULL;
-    g_9150 = NULL;
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) = NULL;
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[10]) = NULL;
 }

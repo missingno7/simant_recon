@@ -1,15 +1,10 @@
+#include "canonical_graphics_data.h"
+extern void (*driver_callback_table[25])();
 #include "graphics_entry_source.h"
 
 #include "graphics_bitmap_source.h"
 
 #include <string.h>
-
-SimGraphicsFontCallback g_915C;
-SimGraphicsFontCallback g_9160;
-SimGraphicsFontCallback g_9164;
-SimGraphicsFontCallback g_9168;
-SimGraphicsLogicOperationCallback g_9184;
-
 static SimGraphicsPaletteServices s_palette_services;
 static uint8_t s_palette_bound;
 
@@ -17,9 +12,9 @@ static void set_operation_low_byte(uint8_t value)
 {
     SimGraphicsDriver *graphics = sim_graphics_source_owner();
     uint16_t bits;
-    memcpy(&bits, &graphics->g_3DD2, sizeof(bits));
+    memcpy(&bits, &g_3DD2, sizeof(bits));
     bits = (uint16_t)((bits & 0xff00u) | value);
-    memcpy(&graphics->g_3DD2, &bits, sizeof(bits));
+    memcpy(&g_3DD2, &bits, sizeof(bits));
     graphics->last_status = SIM_GRAPHICS_OK;
 }
 
@@ -37,21 +32,21 @@ SimGraphicsStatus sim_graphics_source_entry_bind(SimGraphicsDriver *graphics)
     if (graphics == NULL || graphics != sim_graphics_source_owner() ||
         graphics->pixel_storage == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    g_915C = source_g915c_or;
-    g_9160 = source_g9160_xor;
-    g_9164 = source_g9164_and;
-    g_9168 = source_g9168_replace;
-    g_9184 = source_g9184_restore;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[13]) = source_g915c_or;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[14]) = source_g9160_xor;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[15]) = source_g9164_and;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[16]) = source_g9168_replace;
+    (*( SimGraphicsLogicOperationCallback *)(void *)&driver_callback_table[23]) = source_g9184_restore;
     return SIM_GRAPHICS_OK;
 }
 
 void sim_graphics_source_entry_unbind(void)
 {
-    g_915C = NULL;
-    g_9160 = NULL;
-    g_9164 = NULL;
-    g_9168 = NULL;
-    g_9184 = NULL;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[13]) = NULL;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[14]) = NULL;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[15]) = NULL;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[16]) = NULL;
+    (*( SimGraphicsLogicOperationCallback *)(void *)&driver_callback_table[23]) = NULL;
 }
 
 SimGraphicsStatus sim_graphics_source_palette_bind(
@@ -91,12 +86,12 @@ static void bitmap_call(SimGraphicsBitmapCallback callback, int16_t x,
 
 void f_1B4E_003B(int16_t x, int16_t y, char *image)
 {
-    bitmap_call(g_914C, x, y, image);
+    bitmap_call((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]), x, y, image);
 }
 
 void f_1B4E_005E(int16_t x, int16_t y, char *image)
 {
-    bitmap_call(g_9154, x, y, image);
+    bitmap_call((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11]), x, y, image);
 }
 
 void f_1B4E_0110(int16_t x, int16_t y, int16_t character)

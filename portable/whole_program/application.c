@@ -13,7 +13,7 @@
 #include "platform/seed_source.h"
 #include "platform/sdl3/m1b73_application_input.h"
 #include "platform/sdl3/host_modes.h"
-#include "portable/game/resources/source_graphics_resources.h"
+#include "portable/whole_program/platform/graphics_resources.h"
 #include "portable/platform/sdl3/whole_audio_provider.h"
 #include "portable/platform/sdl3/whole_audio_startup.h"
 #include "platform/audio_native_mode1.h"

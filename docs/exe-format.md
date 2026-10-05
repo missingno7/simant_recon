@@ -108,7 +108,11 @@ The gate therefore requires the exact relocation set and the exact within-group 
 The final 256 bytes are identical in SIMANT.EXE, INFO.EXE and INSTALL.EXE and contain a
 PC BIOS fragment (`EA 5B E0 00 F0` reset vector, date `06/13/90`, model byte `FC`).
 They are a mastering artefact, not linker output. Section 27's declared final paragraph
-reads 3 bytes into it; those bytes lie inside BSS at run time.
+reads three bytes into it, mapping to DGROUP `8B9D..8B9F`. The accepted normal
+CRT startup clear interval is `[8B9E,94F0)`: it overwrites the last two values,
+while the first is outside that loop. This does not establish the first byte's
+source owner or independently linked game-entry dominance. See
+[the startup interval proof](exe-format-tail-v32.md).
 
 ## Alignment
 

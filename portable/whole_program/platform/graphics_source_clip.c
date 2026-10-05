@@ -2,13 +2,10 @@
 
 /* This is observed raw resident DGROUP state, not a claim that these are
  * initialized screen bounds. f_205F_0004 is the source writer for right/bottom. */
-struct Rect sim_source_screen_clip_list[2] = {
-    { 0, 0, 349, 639 },
-    { INT16_MIN, INT16_MIN, INT16_MIN, INT16_MIN }
-};
-struct Rect *g_5AAC;
-int16_t fd_55B3_3DE6;
-int16_t fd_55B3_3DE8;
+extern struct Rect g_5A9C[2] ;
+extern struct Rect *g_5AAC;
+extern int16_t fd_55B3_3DE6;
+extern int16_t fd_55B3_3DE8;
 
 static SimGraphicsDriver *s_clip_graphics;
 

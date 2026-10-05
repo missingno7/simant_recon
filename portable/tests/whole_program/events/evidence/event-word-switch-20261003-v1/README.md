@@ -1,7 +1,0 @@
-# Event word switch finite proof v1
-
-The archived native harness compiles the exact generated `o19_384C_0383` function body and executes all 65,536 16-bit event codes under message classes 0, 4, and 8 (196,608 runs); it also compiles the unadapted signed-switch negative control. The archive retains both extracted source TUs, exact generated and canonical source modules, native harness/runner, and the DOS PreparedPair report/producer.
-
-The 84 original-DOS cases use `behavior.PreparedPair` with the canonical MSC source module and callbacks captured as host boundaries. They do **not** execute the generated native body in DOS and do not establish whole event-pump equivalence. Scope is routing and callback/enqueue payload only; game callbacks, input timing, and production event pump are outside it.
-
-Reproduce native from repository root: `python build/workers/event_word_switch/native_event_word_runner.py --out build/workers/event_word_switch/replay-new`. Reproduce the DOS source controls with `python build/workers/event_word_switch/dos_event_word_probe.py` only into a fresh worker output path (the original producer defaults to its original pinned report directory; do not overwrite). Original `SIMANT.EXE` remains an external prerequisite pinned by SHA-256 in the DOS report and is not copied. The 16-bit compiler/Unicorn identity and paired object metadata are in the DOS report/identity; no compiled objects or binaries are included.

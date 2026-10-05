@@ -1,0 +1,141 @@
+SetYardMode  root:015B:0273  linear 01823  size 339  extent DESCENT  region game_or_library
+  entry evidence: far_call, push_cs_call
+  module frame 015B: function 6/20; neighbours: SetEditMode, SetMapModeAnt, SetMapPlaneLocation, GotoMapPoint
+  frame: {'frame': 'bp', 'locals': 4, 'stack_check': True}
+  0273  push bp
+  0274  mov bp, sp
+  0276  mov ax, 4
+  0279  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  027E  push si
+  027F  mov si, word ptr [bp + 6]
+  0282  cmp si, 4
+  0285  jne 0x298
+  0287  mov es, word ptr [0x7e30]          DS:7E30
+  028B  push word ptr es:[0x332]
+  0290  push cs
+  0291  call 0x53c                         -> SetMapPlane
+  0294  pop bx
+  0295  jmp 0x3bc
+  0298  push si
+  0299  mov bx, 0x35c
+  029C  mov es, word ptr [0x7e2c]          DS:7E2C
+  02A0  mov word ptr [bp - 4], bx
+  02A3  mov word ptr [bp - 2], es
+  02A6  push word ptr es:[bx]
+  02A9  mov ax, 0x196a                     "
+Yardmode=%d, newMode=%d"
+  02AC  push ds
+  02AD  push ax
+  02AE  lcall 0x277d, 0xa                  -> WinPrintf
+  02B3  add sp, 8
+  02B6  or si, si
+  02B8  je 0x2f4
+  02BA  cmp si, 1
+  02BD  je 0x2f4
+  02BF  les bx, ptr [bp - 4]
+  02C2  mov word ptr es:[bx], si
+  02C5  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  02C8  lcall 0x23ae, 0x377                -> win_LockWin
+  02CD  mov ax, 0x1903                     "SG channels
+and %d MIDI channels
+"
+  02D0  lcall 0x22bf, 0x4a0                -> win_MakeObjInvisible
+  02D5  cmp word ptr [0x3db2], 0x140       DS:3DB2 g_3DB2
+  02DB  je 0x2e5
+  02DD  mov ax, 0x190f                     "and %d MIDI channels
+"
+  02E0  lcall 0x22bf, 0x4a0                -> win_MakeObjInvisible
+  02E5  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  02E8  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  02ED  lcall 0xf8, 2                      -> win_YardClosed
+  02F2  jmp 0x36b
+  02F4  les bx, ptr [bp - 4]
+  02F7  mov word ptr es:[bx], si
+  02FA  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  02FD  lcall 0x23ae, 0x377                -> win_LockWin
+  0302  mov ax, 0x1903                     "SG channels
+and %d MIDI channels
+"
+  0305  lcall 0x22bf, 0x498                -> win_MakeObjVisible
+  030A  cmp word ptr [0x3db2], 0x140       DS:3DB2 g_3DB2
+  0310  je 0x31a
+  0312  mov ax, 0x190f                     "and %d MIDI channels
+"
+  0315  lcall 0x22bf, 0x498                -> win_MakeObjVisible
+  031A  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  031D  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  0322  lcall 0xf8, 2                      -> win_YardClosed
+  0327  lea dx, [si + 0x1b58]
+  032B  mov ax, 0x1903                     "SG channels
+and %d MIDI channels
+"
+  032E  lcall 0x22bf, 0x967                -> win_SetObjBitmap
+  0333  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  0336  lcall 0x22bf, 0x9b0                -> win_IsWinOpen
+  033B  or ax, ax
+  033D  je 0x36b
+  033F  lcall 0x1e57, 0xdaa                -> clip_Push
+  0344  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  0347  push ax
+  0348  lcall 0x1e57, 0x174                -> clip_SetWin
+  034D  pop bx
+  034E  mov ax, 0x1903                     "SG channels
+and %d MIDI channels
+"
+  0351  lcall 0x21fa, 0x75a                -> win_DrawObjectNum
+  0356  cmp word ptr [0x3db2], 0x140       DS:3DB2 g_3DB2
+  035C  je 0x366
+  035E  mov ax, 0x190f                     "and %d MIDI channels
+"
+  0361  lcall 0x21fa, 0x75a                -> win_DrawObjectNum
+  0366  lcall 0x1e57, 0xeb9                -> clip_Pop
+  036B  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  036E  lcall 0x22bf, 0x9b0                -> win_IsWinOpen
+  0373  or ax, ax
+  0375  jne 0x392
+  0377  mov ax, 0x100
+  037A  lcall 0x22bf, 0x9b0                -> win_IsWinOpen
+  037F  or ax, ax
+  0381  je 0x392
+  0383  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  0386  push ax
+  0387  mov ax, 0x100
+  038A  push ax
+  038B  lcall 0x20e8, 0x32f                -> win_Swap
+  0390  pop bx
+  0391  pop bx
+  0392  lcall 0x1e57, 0xdaa                -> clip_Push
+  0397  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  039A  push ax
+  039B  lcall 0x1e57, 0x174                -> clip_SetWin
+  03A0  pop bx
+  03A1  les bx, ptr [bp - 4]
+  03A4  mov bx, word ptr es:[bx]
+  03A7  shl bx, 1
+  03A9  mov ax, word ptr [bx + 0x1984]
+  03AD  lcall 0x22bf, 0x3be                -> win_MakeObjSelected
+  03B2  lcall 0x1e57, 0xeb9                -> clip_Pop
+  03B7  lcall 0x2cff, 0x26e6               -> DrawYard (vector 26E6)
+  03BC  lcall 0xf8, 0xd8                   -> SetMapTitle
+  03C1  pop si
+  03C2  mov sp, bp
+  03C4  pop bp
+  03C5  retf

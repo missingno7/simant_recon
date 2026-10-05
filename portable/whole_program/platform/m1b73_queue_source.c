@@ -27,11 +27,11 @@ int16_t f_1B73_0C42(int16_t id, PortableM1B73Queue *slot,
     uint16_t i;
 
     if (slot == NULL || out_rect == NULL || slot->records == NULL ||
-        slot->capacity == 0 || slot->capacity > slot->allocated_record_count ||
-        slot->count > slot->capacity)
+        (*slot->capacity) == 0 || (*slot->capacity) > slot->allocated_record_count ||
+        (*slot->count) > (*slot->capacity))
         abort();
 
-    for (i = 0; i < slot->count; ++i) {
+    for (i = 0; i < (*slot->count); ++i) {
         const uint8_t *record = slot->records[i];
         if (read_record_word(record, 12) == id) {
             PortableM1B73Rect result;

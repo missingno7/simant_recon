@@ -1,0 +1,262 @@
+{
+  "schema": "simant-findindex-static-reachability-ownership-receipt-v1",
+  "status": "UNRESOLVED_SEMANTIC_PORT_BLOCKER",
+  "conclusion": "The count guard changes source-observable behavior and cannot be justified as unreachable or a mechanical wire/native conversion. Real caller kinds can reach count. Loaded file rows do not determine the compared tail bytes.",
+  "original_instructions": [
+    {
+      "function": "OpenIndex",
+      "at": "1986:008A-0096",
+      "fact": "Count is shifted left three and passed as a zero-extended 16-bit size to f_171C_13CA."
+    },
+    {
+      "function": "OpenIndex",
+      "at": "1986:00D5-00DF",
+      "fact": "The second read receives precisely that count*8 size, then the NDX handle closes."
+    },
+    {
+      "function": "FindIndex",
+      "at": "1986:01D9-020D",
+      "fact": "After lower-bound search, cursor*8 is added to the retained index pointer, global candidate is written, and id at candidate+4 is read without a cursor<count branch."
+    },
+    {
+      "function": "FindIndex",
+      "at": "1986:020F-021E",
+      "fact": "Only after id equality, kind at candidate+6 is read and compared. Successful equality returns the candidate pointer."
+    },
+    {
+      "function": "f_171C_125C",
+      "at": "171C:12AE-12CC",
+      "fact": "Payload paragraph request is ((unsigned16 size+15)>>4), plus two header paragraphs."
+    },
+    {
+      "function": "f_171C_125C",
+      "at": "171C:1312-1320",
+      "fact": "Master pointer receives header segment+2: payload begins at header+32."
+    },
+    {
+      "function": "f_171C_068C",
+      "at": "171C:06AB-0724",
+      "fact": "Split path copies the current 32-byte header to header+requested_paras*16 and changes next block type/paras; it never clears payload/slack."
+    },
+    {
+      "function": "f_171C_068C",
+      "at": "171C:0726-075C",
+      "fact": "If free_block.paras-2<=requested_paras, the allocator consumes the whole free block and retains its larger physical paragraph size."
+    }
+  ],
+  "source_anchors": [
+    {
+      "path": "src/root/m1986.c",
+      "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+      "line": 58,
+      "source": "size = fd_50F6_3958[db].indexHeader.count << 3;"
+    },
+    {
+      "path": "src/root/m1986.c",
+      "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+      "line": 62,
+      "source": "read(fd, index, size);"
+    },
+    {
+      "path": "src/root/m1986.c",
+      "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+      "line": 95,
+      "source": "if (fd_50F6_3952->id == id && fd_50F6_3952->kind == kind)"
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "line": 682,
+      "source": "paras = ((unsigned)size + 15) >> 4;"
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "line": 321,
+      "source": "if (b->paras - 2 > paras) {"
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "line": 24,
+      "source": "long size;                  /* +02 requested size in bytes */"
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "line": 25,
+      "source": "unsigned paras;             /* +06 size in paragraphs incl. header */"
+    },
+    {
+      "path": "src/root/m19A9.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "line": 84,
+      "source": "entry = FindIndex(db, object, type);"
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "line": 91,
+      "source": "for (i = 0; i < db_numOfHandles; i++) {"
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "line": 92,
+      "source": "if ((handle = DBRecall(db_handles[i], object, kind, &size)) != 0L) {"
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+      "line": 140,
+      "source": "db_SetDataBase(\"shared\");"
+    },
+    {
+      "path": "src/root/m205F.c",
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+      "line": 154,
+      "source": "db_SetDataBase(path);"
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "line": 93,
+      "source": "db_SetDataBase(\"sound\");"
+    },
+    {
+      "path": "src/S14/m384C.c",
+      "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "line": 521,
+      "source": "f_00DF_00B1(0x271a, 0x7e);"
+    },
+    {
+      "path": "src/root/m00DF.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "line": 46,
+      "source": "f_284A_0013(song);"
+    },
+    {
+      "path": "src/root/m284A.c",
+      "sha256": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100",
+      "line": 52,
+      "source": "if (f_0000_0193(fd_55B3_00B4, number) == -1) {"
+    },
+    {
+      "path": "src/root/m0000.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "line": 129,
+      "source": "h = f_1A53_00BA(number, 0x12);"
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+      "line": 46,
+      "source": "h = db_LoadObject(0x2710, 0x16);"
+    },
+    {
+      "path": "portable/whole_program/platform/handles.c",
+      "sha256": "5874ee755c5ca8541bea7456d91d050a755524581975d7a6332d0671eb68f970",
+      "line": 234,
+      "source": "data = (char *)malloc(bytes);"
+    }
+  ],
+  "assets": [
+    {
+      "database": "SHARED",
+      "count": 449,
+      "loaded_row_bytes": 3592,
+      "minimum_payload_allocation_bytes": 3600,
+      "minimum_slack_bytes": 8,
+      "last_key": {
+        "id": 967,
+        "kind": 21
+      },
+      "song_10010_kind_18_rank": 308,
+      "song_10010_kind_18_hit": false,
+      "pattern_10000_kind_22_rank": 449,
+      "asset_sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477"
+    },
+    {
+      "database": "HCEGANT",
+      "count": 271,
+      "loaded_row_bytes": 2168,
+      "minimum_payload_allocation_bytes": 2176,
+      "minimum_slack_bytes": 8,
+      "last_key": {
+        "id": 1,
+        "kind": 15
+      },
+      "song_10010_kind_18_rank": 271,
+      "song_10010_kind_18_hit": false,
+      "pattern_10000_kind_22_rank": 271,
+      "asset_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+    },
+    {
+      "database": "SOUND",
+      "count": 120,
+      "loaded_row_bytes": 960,
+      "minimum_payload_allocation_bytes": 960,
+      "minimum_slack_bytes": 0,
+      "last_key": {
+        "id": 20011,
+        "kind": 20
+      },
+      "song_10010_kind_18_rank": 64,
+      "song_10010_kind_18_hit": true,
+      "pattern_10000_kind_22_rank": 120,
+      "asset_sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+    }
+  ],
+  "ownership": [
+    {
+      "case": "Odd count",
+      "tail": "At least eight bytes of the index block's paragraph padding.",
+      "fields_read": "id and kind reside entirely in that padding.",
+      "initialization": "Neither original Ralloc nor OpenIndex writes these bytes. Source initialization does not establish them as zero or a sentinel. Free-list reuse can retain previous payload contents."
+    },
+    {
+      "case": "Even count with split block",
+      "tail": "The next physical Block header.",
+      "fields_read": "candidate.id overlays the high 16 bits of next.size (+4); candidate.kind overlays the low byte of next.paras (+6).",
+      "initialization": "Next header contents depend on original free/allocated block history. There is no table-owned sentinel."
+    },
+    {
+      "case": "Whole block absorption",
+      "tail": "Additional retained slack may precede the next header.",
+      "fields_read": "One-past bytes can remain stale payload instead of next header.",
+      "initialization": "Occurs when original free_block.paras differs from request by at most two. No zeroing occurs."
+    }
+  ],
+  "caller_reachability": {
+    "music_witness": "Under enabled music, EndGameDialog selects song10010 (0x271a); myBeginSong -> f_284A_0013 -> f_0000_0193 -> f_1A53_00BA -> db_LoadObject -> DBRecall -> FindIndex.",
+    "normal_vga_database_prefix": "Without optional language.dat, IBMInitStuff opens SHARED, then graphics selection opens HCEGANT; main later opens SOUND. db_LoadObject tries that source handle order on a cache miss.",
+    "search_ranks": "For song10010/kind18: SHARED449 returns interior rank308 miss; HCEGANT271 reaches one-past rank271; SOUND120 has the actual hit at rank64. Thus the one-past read is not excluded by successful final resource lookup.",
+    "pattern_witness": "LoadMonoPats requests kind22 ids10000 and10010. Each provided asset has max kind<22, so every such individual lookup reaches count. This is a source query witness; these three VGA asset files do not themselves prove a successful monochrome run.",
+    "boundaries": "Cache hits can avoid the DB search. Optional language/other graphics resources alter the searched prefix. These facts do not prove which bytes a complete DOS game run finds at the HCEGANT tail."
+  },
+  "minimal_experiment": {
+    "report": "build/workers/consolidation_findindex_boundary/ownership-probe.json",
+    "replay": "python build/workers/consolidation_findindex_boundary/probe.py",
+    "actual_original_calls": 12,
+    "observation": "Six OpenIndex/FindIndex pairs execute original allocation helpers with initialized valid free heaps. Two nonzero fills remain unchanged in HCEGANT/SHARED padding. SOUND split allocation exposes a next free header. Original FindIndex reads the one-past id word; source read extent is exactly20+count*8.",
+    "limitation": "This probes raw ownership with modeled external file/format services; it is not a natural shipped-game false-hit witness or a new semantic acceptance. There is no native candidate comparison."
+  },
+  "native_resolution": {
+    "guard_removal_safe": false,
+    "caller_invariant_excludes_count": false,
+    "paragraph_rounding_alone_sufficient": false,
+    "reason": "Current native handle data uses malloc(requested_bytes); charged paragraph size only accounts capacity. Rounding native allocation could make odd tail storage addressable but cannot recover source tail contents. It also cannot account for even-count header reads or absorbed-block slack.",
+    "rejected_shortcuts": [
+      "Copy reserved NDX row",
+      "Invent a sentinel",
+      "Zero-extension storage",
+      "Assume matching tail cannot occur",
+      "Use successful existing-record recalls as a general miss proof"
+    ],
+    "honest_state": "Keep the guard explicitly SEMANTIC/PORT-BLOCKING and the general native equivalence gate closed. No production edit is recommended from this investigation.",
+    "possible_future_work": "A source-driven DOS heap representation preserving original block headers, padding, addressable arena, and actual allocation/reuse state could retain the predicate as a platform memory boundary; allocator algorithms must remain canonical. Initial/reused tail contents and real false-hit reachability still require evidence. A partial synthetic adjacency view is insufficient."
+  },
+  "parent_review_required": true,
+  "composition_limit": "Caller reachability above is a fully static source/asset argument, separately corroborated by standalone original OpenIndex/FindIndex pairs. A composed original db_LoadObject experiment was attempted but failed at unmodeled continuation execution and is excluded from positive evidence; no full-game changed-return witness is established.",
+  "production_edits": 0
+}

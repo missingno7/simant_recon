@@ -1,0 +1,132 @@
+f_171C_068C  root:171C:068C  linear 1784C  size 306  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call
+  module frame 171C: function 12/61; neighbours: f_171C_0676, f_171C_0678, f_171C_07BE, f_171C_09CC
+  frame: {'frame': 'bp', 'locals': 10, 'stack_check': False, 'arg_bytes_min': 8}
+  068C  push bp
+  068D  mov bp, sp
+  068F  sub sp, 0xa
+  0692  push di
+  0693  push si
+  0694  les si, ptr [bp + 6]
+  0697  mov ax, word ptr es:[si + 0xe]
+  069B  sub cx, cx
+  069D  mov bx, cx
+  069F  mov word ptr [bp - 4], ax
+  06A2  mov ax, word ptr es:[si + 0x10]
+  06A6  mov di, cx
+  06A8  mov word ptr [bp - 8], ax
+  06AB  mov ax, word ptr es:[si + 6]
+  06AF  dec ax
+  06B0  dec ax
+  06B1  cmp ax, word ptr [bp + 0xa]
+  06B4  jbe 0x726
+  06B6  mov ax, es
+  06B8  add ax, word ptr [bp + 0xa]
+  06BB  mov word ptr [bp - 2], ax
+  06BE  mov ax, word ptr [bp - 8]
+  06C1  or ax, di
+  06C3  je 0x6d2
+  06C5  mov ax, word ptr [bp - 2]
+  06C8  mov es, word ptr [bp - 8]
+  06CB  mov word ptr es:[di + 0xe], ax
+  06CF  jmp 0x6dc
+  06D1  nop
+  06D2  mov ax, word ptr [bp - 2]
+  06D5  mov word ptr [0x91ac], cx          DS:91AC g_91AC
+  06D9  mov word ptr [0x91ae], ax          DS:91AE
+  06DC  mov ax, word ptr [bp - 4]
+  06DF  or ax, bx
+  06E1  je 0x6ed
+  06E3  mov ax, word ptr [bp - 2]
+  06E6  mov es, word ptr [bp - 4]
+  06E9  mov word ptr es:[bx + 0x10], ax
+  06ED  mov ax, word ptr [bp - 2]
+  06F0  sub dx, dx
+  06F2  mov cx, word ptr [bp + 6]
+  06F5  mov bx, word ptr [bp + 8]
+  06F8  push cx
+  06F9  push ds
+  06FA  mov si, cx
+  06FC  mov es, ax
+  06FE  mov ds, bx
+  0700  mov cx, 0x10
+  0703  rep movsw word ptr es:[di], word ptr [si]
+  0705  pop ds
+  0706  pop cx
+  0707  mov si, dx
+  0709  mov byte ptr es:[si + 8], 0x80
+  070E  mov di, es
+  0710  mov es, bx
+  0712  mov bx, cx
+  0714  mov cx, word ptr es:[bx + 6]
+  0718  sub cx, word ptr [bp + 0xa]
+  071B  mov es, ax
+  071D  mov word ptr es:[si + 6], cx
+  0721  mov cx, word ptr [bp + 0xa]
+  0724  jmp 0x75c
+  0726  mov ax, word ptr [bp - 8]
+  0729  or ax, di
+  072B  je 0x73a
+  072D  mov ax, word ptr [bp - 4]
+  0730  mov es, word ptr [bp - 8]
+  0733  mov word ptr es:[di + 0xe], ax
+  0737  jmp 0x744
+  0739  nop
+  073A  mov ax, word ptr [bp - 4]
+  073D  mov word ptr [0x91ac], bx          DS:91AC g_91AC
+  0741  mov word ptr [0x91ae], ax          DS:91AE
+  0744  mov ax, word ptr [bp - 4]
+  0747  or ax, bx
+  0749  je 0x755
+  074B  mov ax, word ptr [bp - 8]
+  074E  mov es, word ptr [bp - 4]
+  0751  mov word ptr es:[bx + 0x10], ax
+  0755  les bx, ptr [bp + 6]
+  0758  mov cx, word ptr es:[bx + 6]
+  075C  mov al, byte ptr [bp + 0xc]
+  075F  les bx, ptr [bp + 6]
+  0762  mov byte ptr es:[bx + 8], al
+  0766  mov word ptr es:[bx + 6], cx
+  076A  sub ax, ax
+  076C  mov word ptr es:[bx + 0xc], ax
+  0770  mov word ptr es:[bx + 0xa], ax
+  0774  sub word ptr [0x2f3e], cx          DS:2F3E
+  0778  add word ptr [0x2f3c], cx          DS:2F3C
+  077C  mov ax, word ptr [bp + 0xc]
+  077F  or ax, ax
+  0781  je 0x7a0
+  0783  dec ax
+  0784  je 0x7aa
+  0786  dec ax
+  0787  je 0x7b8
+  0789  dec ax
+  078A  je 0x7b4
+  078C  mov ax, 0x3107                     "RallocSetSpace to illegal type"
+  078F  push ds
+  0790  push ax
+  0791  lcall 0x1c62, 0xc                  -> Punt
+  0796  add sp, 4
+  0799  pop si
+  079A  pop di
+  079B  mov sp, bp
+  079D  pop bp
+  079E  retf
+  079F  nop
+  07A0  add word ptr [0x2f36], cx          DS:2F36
+  07A4  pop si
+  07A5  pop di
+  07A6  mov sp, bp
+  07A8  pop bp
+  07A9  retf
+  07AA  add word ptr [0x2f3a], cx          DS:2F3A
+  07AE  pop si
+  07AF  pop di
+  07B0  mov sp, bp
+  07B2  pop bp
+  07B3  retf
+  07B4  add word ptr [0x2f38], cx          DS:2F38
+  07B8  pop si
+  07B9  pop di
+  07BA  mov sp, bp
+  07BC  pop bp
+  07BD  retf

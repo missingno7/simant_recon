@@ -181,29 +181,27 @@ int16_t f_29BF_0139(void)
 void f_29BF_00E6(int16_t reg, int16_t value)
 { (void)reg; (void)value; unavailable("legacy serial/MIDI output"); }
 
-/* Exact initialized DOS offsets from src/root/m28BC.asm and SIMANT.EXE's
- * 28BC:0164..020D output dispatcher. These are preserved as source words;
+/* Current canonical ASM OFFSET expressions, resolved by the source assembler,
+ * remain source selector words;
  * they are not host function pointers. The native SDL provider routes through
  * its explicit mode-1 binding and never indirects through these DOS offsets.
  * Every other output backend remains fail-closed above rather than guessing a
  * native translation for a real-mode code pointer.
  */
-int16_t g_693C = 0x03bc;
-int16_t fd_55B3_6B4A = 0x0010;
-int16_t fd_55B3_6B9C = 0x01c2; /* initial out_speaker near-code offset */
-int16_t fd_55B3_6BA0;
-int16_t fd_55B3_74AD = 0x0164; /* out_lpt */
-int16_t fd_55B3_74AF = 0x017a; /* out_222 */
-int16_t fd_55B3_74B1 = 0x0180; /* out_6B4A */
-int16_t fd_55B3_74B3 = 0x0188; /* out_200 */
-int16_t fd_55B3_74B5 = 0x018e; /* out_sb */
-int16_t fd_55B3_74B7 = 0x01a8; /* out_adlib */
-int16_t fd_55B3_74B9 = 0x01c2; /* out_speaker */
+extern int16_t g_693C ;
+extern int16_t fd_55B3_6B4A ;
+extern int16_t fd_55B3_6B9C ; /* initial out_speaker near-code offset */
+extern int16_t fd_55B3_6BA0;
+extern int16_t fd_55B3_74AD ; /* out_speaker */
+extern int16_t fd_55B3_74AF ; /* out_adlib */
+extern int16_t fd_55B3_74B1 ; /* out_lpt */
+extern int16_t fd_55B3_74B3 ; /* out_200 */
+extern int16_t fd_55B3_74B5 ; /* out_sb */
+extern int16_t fd_55B3_74B7 ; /* out_222 */
+extern int16_t fd_55B3_74B9 ; /* out_6B4A */
 /* The original offset is an AdLib-only volume correction field; mode 1 uses
  * the DAC's distinct fd_55B3_74C0 base instead. */
-int16_t fd_50F6_4B16;
+extern int16_t fd_50F6_4B16;
 /* OPL-only table storage is deliberately opaque. Any actual OPL path reaches
  * an unavailable register-write boundary and aborts; this does not implement
  * or approximate the source table's values. */
-int16_t fd_55B3_6BA4[128];
-

@@ -1,0 +1,104 @@
+OpenIndex  root:1986:0004  linear 19864  size 240  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 1986: function 1/7; neighbours: CreateIndex, CloseIndex
+  frame: {'frame': 'bp', 'locals': 116, 'stack_check': False, 'arg_bytes_min': 6}
+  win16: _OpenIndex [CONFIRMED] '%s.ndx' format plus unique 'index file missing'; sprintf runtime call in both; runtime sprintf
+  0004  push bp
+  0005  mov bp, sp
+  0007  sub sp, 0x74
+  000A  push di
+  000B  push si
+  000C  push word ptr [bp + 8]
+  000F  push word ptr [bp + 6]
+  0012  mov ax, 0x361e                     "%s.ndx"
+  0015  push ds
+  0016  push ax
+  0017  lea ax, [bp - 0x6e]
+  001A  push ss
+  001B  push ax
+  001C  lcall 0x29f4, 0x1e6e               -> _sprintf
+  0021  add sp, 0xc
+  0024  mov ax, 0x8002
+  0027  push ax
+  0028  lea ax, [bp - 0x6e]
+  002B  push ss
+  002C  push ax
+  002D  lcall 0x29f4, 0x1542               -> _open
+  0032  add sp, 6
+  0035  mov cx, ax
+  0037  mov ax, 0x7c
+  003A  imul word ptr [bp + 0xa]
+  003D  mov bx, ax
+  003F  mov word ptr [bp - 0x70], bx
+  0042  mov es, word ptr [0x89b0]          DS:89B0
+  0046  mov word ptr es:[bx + 0x39ce], cx
+  004B  mov di, cx
+  004D  or di, di
+  004F  jg 0x5d
+  0051  mov ax, 0x3625                     "Index file missing"
+  0054  push ds
+  0055  push ax
+  0056  lcall 0x1a28, 0x277                -> DosPunt
+  005B  pop bx
+  005C  pop bx
+  005D  mov ax, 0x14
+  0060  push ax
+  0061  mov ax, word ptr [bp - 0x70]
+  0064  add ax, 0x39ac
+  0067  mov cx, 0x50f6                     [seg 50F6]
+  006A  push cx
+  006B  push ax
+  006C  push di
+  006D  mov si, ax
+  006F  mov word ptr [bp - 0x74], si
+  0072  mov word ptr [bp - 0x72], cx
+  0075  lcall 0x29f4, 0x16f4               -> _read
+  007A  add sp, 8
+  007D  lea ax, [bp - 0x6e]
+  0080  push ss
+  0081  push ax
+  0082  sub ax, ax
+  0084  push ax
+  0085  mov cl, 3
+  0087  les bx, ptr [bp - 0x74]
+  008A  mov ax, word ptr es:[bx]
+  008D  shl ax, cl
+  008F  mov word ptr [bp - 6], ax
+  0092  sub dx, dx
+  0094  push dx
+  0095  push ax
+  0096  lcall 0x171c, 0x13ca               -> f_171C_13CA
+  009B  add sp, 0xa
+  009E  mov es, dx
+  00A0  mov bx, ax
+  00A2  mov ax, word ptr es:[bx]
+  00A5  mov dx, word ptr es:[bx + 2]
+  00A9  mov es, word ptr [0x89b0]          DS:89B0
+  00AD  mov bx, word ptr [bp - 0x70]
+  00B0  mov word ptr es:[bx + 0x39a8], ax
+  00B5  mov word ptr es:[bx + 0x39aa], dx
+  00BA  mov ax, word ptr es:[bx + 0x39a8]
+  00BF  mov word ptr [bp - 0xa], ax
+  00C2  mov word ptr [bp - 8], dx
+  00C5  or dx, ax
+  00C7  jne 0xd5
+  00C9  mov ax, 0x3638                     "Not enough memory to read index file in."
+  00CC  push ds
+  00CD  push ax
+  00CE  lcall 0x1c62, 0xc                  -> Punt
+  00D3  pop bx
+  00D4  pop bx
+  00D5  push word ptr [bp - 6]
+  00D8  push word ptr [bp - 8]
+  00DB  push word ptr [bp - 0xa]
+  00DE  push di
+  00DF  lcall 0x29f4, 0x16f4               -> _read
+  00E4  add sp, 8
+  00E7  push di
+  00E8  lcall 0x29f4, 0x148e               -> _close
+  00ED  pop bx
+  00EE  pop si
+  00EF  pop di
+  00F0  mov sp, bp
+  00F2  pop bp
+  00F3  retf

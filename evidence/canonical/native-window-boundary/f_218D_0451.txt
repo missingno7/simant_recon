@@ -1,0 +1,89 @@
+f_218D_0451  root:218D:0451  linear 21D21  size 222  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call
+  module frame 218D: function 10/12; neighbours: win_GetEvent, win_FlushEvents, f_218D_052F, f_218D_0656
+  frame: {'frame': 'bp', 'locals': 10, 'stack_check': False}
+  0451  push bp
+  0452  mov bp, sp
+  0454  sub sp, 0xa
+  0457  push di
+  0458  push si
+  0459  mov es, word ptr [0x8a2a]          DS:8A2A
+  045D  mov si, word ptr es:[0x5702]
+  0462  cmp si, 0x8000
+  0466  jne 0x46b
+  0468  jmp 0x527
+  046B  lea ax, [bp - 8]
+  046E  push ss
+  046F  push ax
+  0470  mov ax, si
+  0472  lcall 0x2505, 0x288                -> win_GetObjRect
+  0477  mov ax, si
+  0479  lcall 0x23ae, 0x377                -> win_LockWin
+  047E  mov ax, si
+  0480  lcall 0x2505, 0x345                -> win_WinAddr
+  0485  mov es, dx
+  0487  mov bx, ax
+  0489  mov di, word ptr es:[bx + 0x1c]
+  048D  and di, 0x40
+  0490  mov cl, 6
+  0492  shr di, cl
+  0494  lea ax, [bp - 8]
+  0497  push ss
+  0498  push ax
+  0499  mov ax, word ptr [bp + 6]
+  049C  mov dx, word ptr [bp + 8]
+  049F  add ax, 8
+  04A2  push dx
+  04A3  push ax
+  04A4  lcall 0x1fd2, 0x4e5                -> f_1FD2_04E5
+  04A9  add sp, 8
+  04AC  or ax, ax
+  04AE  jne 0x4c9
+  04B0  mov ax, si
+  04B2  lcall 0x2505, 0x345                -> win_WinAddr
+  04B7  mov es, dx
+  04B9  mov bx, ax
+  04BB  test byte ptr es:[bx + 0x1c], 1
+  04C0  je 0x4c9
+  04C2  mov ax, si
+  04C4  lcall 0x20e8, 0x635                -> win_Close
+  04C9  mov ax, si
+  04CB  lcall 0x23ae, 0x1db                -> win_UnlockWin
+  04D0  or di, di
+  04D2  jne 0x527
+  04D4  sub si, si
+  04D6  mov es, word ptr [0x8a2a]          DS:8A2A
+  04DA  mov bx, si
+  04DC  shl bx, 1
+  04DE  mov ax, word ptr es:[bx + 0x5702]
+  04E3  mov word ptr [bp - 0xa], ax
+  04E6  cmp ax, 0x8000
+  04E9  je 0x527
+  04EB  lea ax, [bp - 8]
+  04EE  push ss
+  04EF  push ax
+  04F0  mov ax, word ptr [bp - 0xa]
+  04F3  lcall 0x2505, 0x288                -> win_GetObjRect
+  04F8  lea ax, [bp - 8]
+  04FB  push ss
+  04FC  push ax
+  04FD  mov ax, word ptr [bp + 6]
+  0500  mov dx, word ptr [bp + 8]
+  0503  add ax, 8
+  0506  push dx
+  0507  push ax
+  0508  lcall 0x1fd2, 0x4e5                -> f_1FD2_04E5
+  050D  add sp, 8
+  0510  or ax, ax
+  0512  jne 0x517
+  0514  inc si
+  0515  jmp 0x4d6
+  0517  mov es, word ptr [0x8a2a]          DS:8A2A
+  051B  shl si, 1
+  051D  mov ax, word ptr es:[si + 0x5702]
+  0522  lcall 0x20e8, 0x725                -> f_20E8_0725
+  0527  pop si
+  0528  pop di
+  0529  mov sp, bp
+  052B  pop bp
+  052C  retf 4

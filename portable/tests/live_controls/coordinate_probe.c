@@ -1,3 +1,0 @@
-#include <SDL3/SDL.h>
-#include <stdio.h>
-int main(void){SDL_Window*w=0;SDL_Renderer*r=0;SDL_Event e;if(!SDL_Init(SDL_INIT_VIDEO|SDL_INIT_EVENTS))return 2;if(!SDL_CreateWindowAndRenderer("probe",640,350,SDL_WINDOW_RESIZABLE,&w,&r))return 3;SDL_SetRenderLogicalPresentation(r,640,350,SDL_LOGICAL_PRESENTATION_LETTERBOX);int xs[]={191,446};for(int i=0;i<2;i++){SDL_zero(e);e.type=SDL_EVENT_MOUSE_MOTION;e.motion.x=(float)xs[i];e.motion.y=309;if(!SDL_ConvertEventToRenderCoordinates(r,&e))return 4;printf("%d -> %.4f %.4f\n",xs[i],e.motion.x,e.motion.y);}SDL_DestroyRenderer(r);SDL_DestroyWindow(w);SDL_Quit();return 0;}

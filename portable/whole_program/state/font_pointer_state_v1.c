@@ -7,8 +7,8 @@
 /* Source ASM DATA writes four zero bytes at each adjacent font pointer slot.
  * Native pointers have host width; only their null initial logical value is
  * preserved here. The generated S20 source owns later assignments. */
-char *g_3DA4 = NULL;
-char *g_3DA8 = NULL;
+extern char *g_3DA4 ;
+extern char *g_3DA8 ;
 
 SimGraphicsStatus sim_source_font_bind_driver_view_v1(SimGraphicsDriver *graphics)
 {

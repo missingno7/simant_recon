@@ -5,11 +5,6 @@
 typedef void (*SimGraphicsScreenCopyCallback)(int16_t, int16_t, int16_t,
                                               int16_t, int16_t, int16_t);
 typedef void (*SimGraphicsRetireDisplay)(void *context);
-extern SimGraphicsLineCallback g_916C;
-extern SimGraphicsPatternRectCallback g_9174;
-extern SimGraphicsFontCallback g_9178;
-extern SimGraphicsScreenCopyCallback g_9188;
-
 /* Retirement replaces the original switch to BIOS text mode 3. */
 SimGraphicsStatus sim_graphics_source_misc_bind(SimGraphicsDriver *graphics,
     SimGraphicsRetireDisplay retire_display, void *context);

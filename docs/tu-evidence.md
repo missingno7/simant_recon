@@ -1,5 +1,9 @@
 # Translation-unit structure: evidence and method
 
+Historical `work/` citations refer to
+[Git evidence before consolidation](https://github.com/missingno7/simant_recon/tree/a1938e61452a63581718aee6659829528c3b8635/work).
+Current sources and accepted ownership facts are inventoried in `src/program.json`.
+
 In the MSC large model every `.C` file emits its own code segment `NAME_TEXT`, and LINK
 gives each segment its own frame. The DOS image therefore exposes module boundaries
 directly, which is much stronger evidence than in small/medium-model or grouped builds:
@@ -108,7 +112,11 @@ sizes are verified by COMDEFs of accepted objects, *pinned* when the byte-exact 
 module depends on the declared size (a compile-only probe enlarges the declaration's first dimension
 and the object changes), or consistent with extern declarations (sizes measured by the compiler,
 `sizeof` probes of the canonical sources) or S09's save table; the rest is reported as unverified.
-Declarations are never turned into definitions.
+Historical zero-byte accounting alone does not establish a source definition.
+Independently proven owners, extents, initializers and views now live in canonical
+`src/state/` or their owning historical TU. `dos/build.py` checks their full
+storage contracts. The historical FAR_BSS accounting remains a comparison with
+the original linked frame, rather than an alternative runtime ownership model.
 
 ## Partial modules
 

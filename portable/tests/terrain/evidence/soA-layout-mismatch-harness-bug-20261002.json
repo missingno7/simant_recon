@@ -1,8 +1,0 @@
-{
-  "schema": "portable-terrain-diagnostic-v1",
-  "classification": "HARNESS_BUG_NOT_NATIVE_BEHAVIORAL_MISMATCH",
-  "description": "The preserved preliminary diff serialized original LionListX/Y/M/S/T as five separate arrays while native_probe serialized five-byte SimAntLion records interleaved. Its reported mismatch offsets compared different fields and are invalid as behavior evidence. The preliminary runner also stopped after ten failures and its passed count overstated executed cases.",
-  "preserved_report": "terrain-dos-diff-harness-bug-soa-layout-20261002.json",
-  "corrected_report": "terrain-dos-diff-176-20261002.json",
-  "correction": "Pack original structure-of-arrays lion fields into native record order before byte comparison; count only actually executed cases."
-}

@@ -1,0 +1,36 @@
+MapToYard  root:00F8:04C7  linear 01447  size 67  extent DESCENT  region game_or_library
+  entry evidence: far_call
+  module frame 00F8: function 33/40; neighbours: f_00F8_0477, YardToMap, OpenMapYard, f_00F8_0543
+  frame: {'frame': 'none'}
+  04C7  xor ax, ax
+  04C9  lcall 0x29f4, 0x2cc                -> __aFchkstk
+  04CE  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  04D1  lcall 0x22bf, 0x9b0                -> win_IsWinOpen
+  04D6  or ax, ax
+  04D8  jne 0x509
+  04DA  mov ax, 0x100
+  04DD  lcall 0x22bf, 0x9b0                -> win_IsWinOpen
+  04E2  or ax, ax
+  04E4  je 0x4ff
+  04E6  sub ax, ax
+  04E8  push ax
+  04E9  lcall 0x15b, 0x53c                 -> SetMapPlane
+  04EE  pop bx
+  04EF  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  04F2  push ax
+  04F3  mov ax, 0x100
+  04F6  push ax
+  04F7  lcall 0x20e8, 0x32f                -> win_Swap
+  04FC  pop bx
+  04FD  jmp 0x508
+  04FF  mov ax, 0x1900                     "X PSG channels
+and %d MIDI channels
+"
+  0502  push ax
+  0503  lcall 0x20e8, 0x4b6                -> win_Open
+  0508  pop bx
+  0509  retf

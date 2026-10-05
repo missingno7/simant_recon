@@ -1,12 +1,9 @@
+#include "canonical_graphics_data.h"
+extern void (*driver_callback_table[25])();
 #include "graphics_misc_source.h"
 #include "graphics_source_clip.h"
 #include <stdlib.h>
 #include <string.h>
-
-SimGraphicsLineCallback g_916C;
-SimGraphicsPatternRectCallback g_9174;
-SimGraphicsFontCallback g_9178;
-SimGraphicsScreenCopyCallback g_9188;
 static SimGraphicsDriver *owner;
 static SimGraphicsRetireDisplay retire;
 static void *retire_context;
@@ -23,7 +20,7 @@ SimGraphicsStatus sim_graphics_s00_masked_rect(SimGraphicsDriver *g,
     if (!g || !g->pixel_storage) return SIM_GRAPHICS_INVALID_ARGUMENT;
     if (!g->pattern_source || g->pattern_source_size < 256)
         return SIM_GRAPHICS_PATTERN_SOURCE_UNBOUND;
-    operation = (uint16_t)g->g_3DD2;
+    operation = (uint16_t)g_3DD2;
     if (operation != 0 && operation != 8 && operation != 16 && operation != 24)
         return SIM_GRAPHICS_UNSUPPORTED_MODE;
     if (l > r) { x = l; l = r; r = x; }
@@ -39,7 +36,7 @@ SimGraphicsStatus sim_graphics_s00_masked_rect(SimGraphicsDriver *g,
                                          ((uint32_t)y & 3u) * 2u];
         for (x = l; x < r; ++x) {
             uint8_t *p;
-            uint8_t color = (uint8_t)g->g_3DE0 & 15u;
+            uint8_t color = (uint8_t)g_3DE0 & 15u;
             if (!(mask & (0x80u >> ((uint32_t)x & 7u)))) continue;
             p = &g->pixel_storage[(size_t)y * g->framebuffer.stride + (size_t)x];
             if (operation == 8) *p &= color;
@@ -66,8 +63,8 @@ SimGraphicsStatus sim_graphics_s00_screen_copy(SimGraphicsDriver *g,
     /* Preserve the original _1950 reverse-copy starting rows, including its
      * bottom/destination+height convention. Do not rewrite as generic blit. */
     if (top < destination_y) { sy = bottom; dy += rows; step = -1; }
-    if (source_byte + bytes > g->g_3DB6 ||
-        destination_byte + bytes > g->g_3DB6 ||
+    if (source_byte + bytes > g_3DB6 ||
+        destination_byte + bytes > g_3DB6 ||
         sy < 0 || dy < 0 || sy >= g->framebuffer.height || dy >= g->framebuffer.height ||
         sy + (rows - 1) * step < 0 || dy + (rows - 1) * step < 0 ||
         sy + (rows - 1) * step >= g->framebuffer.height ||
@@ -120,12 +117,12 @@ SimGraphicsStatus sim_graphics_source_misc_bind(SimGraphicsDriver *g,
     if (!g || g != sim_graphics_source_owner() || !retirement)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     owner = g; retire = retirement; retire_context = context;
-    g_916C = clipped_line; g_9174 = clipped_mask;
-    g_9178 = retire_display; g_9188 = copy_screen;
+    (*( SimGraphicsLineCallback *)(void *)&driver_callback_table[17]) = clipped_line; (*( SimGraphicsPatternRectCallback *)(void *)&driver_callback_table[19]) = clipped_mask;
+    (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[20]) = retire_display; (*( SimGraphicsScreenCopyCallback *)(void *)&driver_callback_table[24]) = copy_screen;
     return SIM_GRAPHICS_OK;
 }
 void sim_graphics_source_misc_unbind(void)
 {
     owner = NULL; retire = NULL; retire_context = NULL;
-    g_916C = NULL; g_9174 = NULL; g_9178 = NULL; g_9188 = NULL;
+    (*( SimGraphicsLineCallback *)(void *)&driver_callback_table[17]) = NULL; (*( SimGraphicsPatternRectCallback *)(void *)&driver_callback_table[19]) = NULL; (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[20]) = NULL; (*( SimGraphicsScreenCopyCallback *)(void *)&driver_callback_table[24]) = NULL;
 }

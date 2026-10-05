@@ -5,17 +5,17 @@
 #include <string.h>
 #include <stdlib.h>
 
-extern struct Timer g_5FF2;
+#include "portable/whole_program/types/input_queue.h"
 extern uint16_t g_9120;
 extern int16_t g_9122;
 extern int16_t g_9124;
 
 PortableM1B73QueueSet portable_m1b73_queue_set = {
     .queues = {
-        { 4, 0, portable_m1b73_queue_set.queue0_records, 5 },
-        { 47, 0, portable_m1b73_queue_set.queue1_records, 48 },
-        { 47, 0, portable_m1b73_queue_set.queue2_records, 48 },
-        { 9, 0, portable_m1b73_queue_set.queue3_records, 10 }
+        { &canonical_mouse_queue0.capacity, &canonical_mouse_queue0.count, canonical_mouse_queue0.records, 5 },
+        { &canonical_mouse_queue1.capacity, &canonical_mouse_queue1.count, canonical_mouse_queue1.records, 48 },
+        { &canonical_mouse_queue2.capacity, &canonical_mouse_queue2.count, canonical_mouse_queue2.records, 48 },
+        { &canonical_mouse_queue3.capacity, &canonical_mouse_queue3.count, canonical_mouse_queue3.records, 10 }
     }
 };
 
@@ -78,10 +78,10 @@ PortableM1B73QueueStatus portable_m1b73_queue_dispatch(void)
         if ((descriptor_event_masks[queue_index] &
              (uint8_t)(event.status >> 8)) == 0)
             continue;
-        if (queue->count > queue->capacity ||
-            queue->count >= queue->allocated_record_count)
+        if ((*queue->count) > (*queue->capacity) ||
+            (*queue->count) >= queue->allocated_record_count)
             return PORTABLE_M1B73_QUEUE_BAD_COUNT;
-        for (record_index = 0; record_index < queue->count; ++record_index) {
+        for (record_index = 0; record_index < (*queue->count); ++record_index) {
             const uint8_t *record = queue->records[record_index];
             int keep_scanning;
             if ((record_condition(record) & event.status) == 0 ||
@@ -111,8 +111,8 @@ void f_1B73_0CB3(void)
 
 void f_1B73_0AA3(void)
 {
-    portable_m1b73_queue_set.queues[0].count = 0;
-    portable_m1b73_queue_set.queues[1].count = 0;
+    (*portable_m1b73_queue_set.queues[0].count) = 0;
+    (*portable_m1b73_queue_set.queues[1].count) = 0;
     g_5FF2.r.bottom = (int16_t)0x1f00;
     g_5FF2.fn = f_1B73_0CB3;
 }

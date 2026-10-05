@@ -8,13 +8,13 @@
 struct Bitmap *sim_font_make_image_source(uint8_t *s, int16_t x, struct Font *font);
 int16_t _font_StringWidth(uint8_t *s, struct Font *font);
 
-char g_5ABE[SIM_FONT_BITMAP_CAPACITY];
-int16_t fd_55B3_6770;
-int16_t fd_55B3_6772;
+extern char g_5ABE[SIM_FONT_BITMAP_CAPACITY];
+extern int16_t fd_55B3_6770;
+extern int16_t fd_55B3_6772;
 static int g_blit_status;
 static const uint8_t *g_source_begin;
 static size_t g_source_size;
-struct Bitmap fd_50F6_392C = {0, 0, g_5ABE};
+extern struct Bitmap fd_50F6_392C ;
 
 struct Bitmap *sim_font_bitmap_bind(void)
 {

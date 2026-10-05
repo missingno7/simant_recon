@@ -1,4 +1,5 @@
 #include "m1b73_queue_runtime.h"
+#include "canonical_mouse_input_data.h"
 
 #include "m1b73_mouse_state.h"
 #include "m1b73_queues.h"
@@ -10,7 +11,7 @@
 extern void f_1B73_030F(int16_t bx, int16_t es, int16_t ax,
                         int16_t cx, int16_t dx);
 extern int16_t f_1B73_0D4B(int16_t mode);
-extern struct Timer g_5FF2;
+#include "portable/whole_program/types/input_queue.h"
 
 static PortableM1B73QueueRuntime *active_runtime;
 
@@ -138,7 +139,7 @@ static int prepare_cursor_change(void *context)
     /* ASM's `jg` admits 1..127. Negative signed byte values reach Punt. */
     if (level >= UINT8_C(0x80))
         return 0;
-    ++runtime->cursor_change_counter;
+    ++g_434E;
     if (!render_cursor(runtime, PORTABLE_M1B73_CURSOR_HIDE))
         return 0;
     *state->cursor_show_level = (uint8_t)(level - 1u);
@@ -228,7 +229,7 @@ static int read_mouse_buttons(void *context, uint16_t *buttons)
 static int set_keyboard_hook(void *context, int enabled)
 {
     PortableM1B73QueueRuntime *runtime = require_runtime(context);
-    runtime->keyboard_hook_enabled = (uint8_t)(enabled != 0);
+    kbd_hook_on = (uint8_t)(enabled != 0);
     return 1;
 }
 
@@ -264,8 +265,6 @@ int portable_m1b73_queue_runtime_bind(
     runtime->mouse = mouse;
     runtime->graphics_context = graphics_context;
     runtime->graphics_cursor_mode = graphics_cursor_mode;
-    runtime->keyboard_hook_enabled = 1; /* ASM kbd_hook_on initialized true */
-    memset(runtime->scan_state, 0x80, sizeof(runtime->scan_state));
     memset(&operations, 0, sizeof(operations));
     operations.context = runtime;
     operations.resolve_timer_callback = portable_m1b73_queue_runtime_resolve_timer;
@@ -275,7 +274,7 @@ int portable_m1b73_queue_runtime_bind(
     operations.read_mouse_buttons = read_mouse_buttons;
     operations.set_keyboard_hook = set_keyboard_hook;
     operations.set_cursor_mode = set_cursor_mode;
-    operations.scan_state_table = runtime->scan_state;
+    operations.scan_state_table = g_53CD;
     operations.events = events;
     active_runtime = runtime;
     runtime->bound = 1;
@@ -307,15 +306,15 @@ int portable_m1b73_queue_runtime_scan_transition(
         return -1;
     if (event->kind != HOST_EVENT_KEY_DOWN && event->kind != HOST_EVENT_KEY_UP)
         return 0;
-    if (!runtime->keyboard_hook_enabled)
+    if (!kbd_hook_on)
         return 0;
     scan = (uint8_t)(event->key >> 8);
-    if (scan >= sizeof(runtime->scan_state))
+    if (scan >= sizeof(g_53CD))
         return -1;
     value = event->kind == HOST_EVENT_KEY_DOWN ? 0 : UINT8_C(0x80);
-    if (runtime->scan_state[scan] == value)
+    if (g_53CD[scan] == value)
         return 0;
-    runtime->scan_state[scan] = value;
+    g_53CD[scan] = value;
     return 1;
 }
 

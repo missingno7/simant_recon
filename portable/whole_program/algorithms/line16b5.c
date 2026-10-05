@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-PortableSpiderLineBuffer portable_line16b5_source_buffer;
+PortableSpiderLineBuffer fd_50F6_1F26;
 
 typedef struct LinePoint {
     int32_t x;

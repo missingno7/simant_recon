@@ -1,3 +1,4 @@
+#include "canonical_mouse_queue_data.h"
 #ifndef SIMANT_WHOLE_PROGRAM_PLATFORM_M1B73_QUEUES_H
 #define SIMANT_WHOLE_PROGRAM_PLATFORM_M1B73_QUEUES_H
 
@@ -22,27 +23,19 @@ typedef enum PortableM1B73QueueStatus {
  * are the inclusive hot-box rectangle and word at +16 is the event mask.
  * Callback far pointers at +8 are never cast to native function pointers. */
 typedef struct PortableM1B73Queue {
-    uint16_t capacity; /* word immediately before source count */
-    uint16_t count;
+    const uint16_t *capacity; /* word immediately before source count */
+    uint16_t *count;
     uint8_t (*records)[PORTABLE_M1B73_QUEUE_RECORD_BYTES];
     uint8_t allocated_record_count;
 } PortableM1B73Queue;
 
 typedef struct PortableM1B73QueueSet {
     PortableM1B73Queue queues[PORTABLE_M1B73_QUEUE_COUNT];
-    uint8_t queue0_records[5][PORTABLE_M1B73_QUEUE_RECORD_BYTES];
-    uint8_t queue1_records[48][PORTABLE_M1B73_QUEUE_RECORD_BYTES];
-    uint8_t queue2_records[48][PORTABLE_M1B73_QUEUE_RECORD_BYTES];
-    uint8_t queue3_records[10][PORTABLE_M1B73_QUEUE_RECORD_BYTES];
 } PortableM1B73QueueSet;
 
-_Static_assert(sizeof(((PortableM1B73QueueSet *)0)->queue0_records) == 90,
-               "Queue0 has five 18-byte rows");
-_Static_assert(sizeof(((PortableM1B73QueueSet *)0)->queue1_records) == 864 &&
-               sizeof(((PortableM1B73QueueSet *)0)->queue2_records) == 864,
-               "middle queues each have forty-eight 18-byte rows");
-_Static_assert(sizeof(((PortableM1B73QueueSet *)0)->queue3_records) == 180,
-               "cursor hot-box queue has ten 18-byte rows");
+
+
+
 
 typedef struct PortableM1B73QueueEvent {
     uint16_t status;

@@ -11,17 +11,8 @@ enum {
 };
 
 /* Eight consecutive 16-bit source Event words (16-byte DOS record). */
-typedef struct PortableM1B73Event {
-    int16_t what;
-    int16_t message;
-    int16_t x4;
-    uint8_t modLo;
-    uint8_t modHi;
-    int16_t h;
-    int16_t v;
-    int16_t code;
-    int16_t xE;
-} PortableM1B73Event;
+#include "portable/whole_program/types/input_queue.h"
+typedef struct Event PortableM1B73Event;
 
 typedef struct PortableM1B73Events {
     PortableInputTimeHost *input_host; /* borrowed shared event-queue owner */
