@@ -49,7 +49,7 @@ and removes the former duplicate definition from the platform layer.
 Reproduce with a fresh output directory strictly below repository `build/`:
 
 ```powershell
-python evidence/canonical/icon-handle-view/replay.py --out build/icon-handle-view
+python evidence/canonical/icon-handle-view/replay.py --out build/scratch/icon-handle-view
 ```
 
 The runner pins its current canonical sources, inventory, manifest, validation

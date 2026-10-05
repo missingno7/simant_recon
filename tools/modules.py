@@ -1123,7 +1123,7 @@ def near_link_after_reasons(man: dict, module: dict, aligns: dict | None = None)
     if la == "":
         end, what = begdata_end(man), "the BEGDATA class (runtime NULL segment)"
         if end is None:
-            return ["link_after FIRST (DGROUP): the runtime BEGDATA segment is not accepted (tools/runtime.py accept)"]
+            return ["link_after FIRST (DGROUP): the runtime BEGDATA segment is not accepted (reviewed runtime publication belongs in tools/promote.py)"]
     else:
         prev = man["modules"].get(la)
         if prev is None:

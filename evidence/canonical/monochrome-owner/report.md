@@ -46,7 +46,7 @@ Allocation admission still requires an authoritative DOS source object/type/exte
 After installation, from any working directory:
 
 ```text
-python <repository>/evidence/canonical/monochrome-owner/asm_witness.py --out build/workers/mono-retained-run-001
+python <repository>/evidence/canonical/monochrome-owner/asm_witness.py --out build/workers/monochrome-owner/asm-witness-run-001
 ```
 
 The runner locates the repository from its own ancestors. `--out` is mandatory, repository-relative unless absolute, must resolve strictly beneath `build/`, and must not exist. It writes only `asm-witness.json` there after the bounded assertions pass. Receipts pin the current program/source inputs, immutable original EXE and S01 contribution, current `tools/exe.py`, runner and Unicorn module inputs. Unicorn must be installed or available in the current `build/behavior/deps` dependency directory. No output is written into evidence or an existing receipt directory.

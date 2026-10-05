@@ -10,7 +10,7 @@ directly, which is much stronger evidence than in small/medium-model or grouped 
 
 1. **Frames.** Every relocated far call and every MZ relocation entry names the frame of
    its segment. 79 root game frames and 38 overlay frames are observed
-   (`build/inventory/functions.json`, `python tools/context.py FUNC` shows the frame).
+   (`build/current/inventory/functions.json`, `python tools/context.py FUNC` shows the frame).
 2. **Relocation segment field.** Each MZ relocation entry's segment field is the frame of
    the *containing* module, and entries appear in link order (`docs/exe-format.md`).
 3. **Same-TU calls (rule TU-1).** `push cs; call near` proves caller and callee were

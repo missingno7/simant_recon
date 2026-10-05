@@ -1,6 +1,12 @@
+"""Explicit DOS optional word arguments for Open, ProxMenu and Swap.
+
+One lowering pass shares lexical call handling. Omitted-slot normalization and
+unsupported-domain guards remain explicit native exceptions, not DOS equality.
+"""
 from __future__ import annotations
 import hashlib
 import re
+from .lexical import mask_literals
 from pathlib import Path
 from typing import Any
 PARAMETER_HEADER = 'portable/whole_program/window_parameters.h'
@@ -11,55 +17,6 @@ PROX_DECL = 'int16_t win_DoProxMenu(int16_t win, int16_t item, int16_t supplied_
 def _sha(text: str) -> str:
     return hashlib.sha256(text.encode('latin1')).hexdigest()
 
-def _mask_c(text: str) -> str:
-    """Replace comments/string/char literals with spaces, preserving offsets."""
-    out = list(text)
-    i = 0
-    state = 'code'
-    quote = ''
-    while i < len(text):
-        ch = text[i]
-        nxt = text[i + 1] if i + 1 < len(text) else ''
-        if state == 'code':
-            if ch == '/' and nxt == '/':
-                out[i] = out[i + 1] = ' '
-                state = 'line'
-                i += 2
-                continue
-            if ch == '/' and nxt == '*':
-                out[i] = out[i + 1] = ' '
-                state = 'block'
-                i += 2
-                continue
-            if ch in ('"', "'"):
-                quote = ch
-                out[i] = ' '
-                state = 'quote'
-        elif state == 'line':
-            if ch == '\n':
-                state = 'code'
-            else:
-                out[i] = ' '
-        elif state == 'block':
-            if ch == '*' and nxt == '/':
-                out[i] = out[i + 1] = ' '
-                state = 'code'
-                i += 2
-                continue
-            if ch != '\n':
-                out[i] = ' '
-        elif ch == '\\':
-            out[i] = ' '
-            if i + 1 < len(text) and text[i + 1] != '\n':
-                out[i + 1] = ' '
-                i += 1
-        elif ch == quote:
-            out[i] = ' '
-            state = 'code'
-        elif ch != '\n':
-            out[i] = ' '
-        i += 1
-    return ''.join(out)
 
 def _split_args(text: str, masked: str, open_at: int) -> tuple[list[str], int]:
     depth = 1
@@ -88,7 +45,7 @@ def _is_declaration(masked: str, name_start: int) -> bool:
     return bool(re.search('\\b(?:void|int16_t)\\s+$', before))
 
 def _rewrite_calls(text: str, name: str, arities: dict[int, Any], fixed_arity: int) -> tuple[str, list[dict[str, Any]]]:
-    masked = _mask_c(text)
+    masked = mask_literals(text)
     token = re.compile(f'\\b{re.escape(name)}\\b\\s*\\(')
     edits: list[tuple[int, int, str, dict[str, Any]]] = []
     for match in token.finditer(masked):
@@ -161,11 +118,11 @@ def _adapt_prox_body(text: str) -> tuple[str, dict[str, Any]]:
         raise ValueError(f'win_DoProxMenu stack-forwarding block duplicated: {count}')
     return (out, {'unsafe_optional_forwarders_removed': count})
 
-def adapt(source: str | bytes, rel: str) -> tuple[str | bytes, dict[str, Any] | None]:
+def _adapt_open_prox(source: str | bytes, rel: str) -> tuple[str | bytes, dict[str, Any] | None]:
     rel = Path(rel).as_posix()
     is_bytes = isinstance(source, bytes)
     text = source.decode('latin1') if is_bytes else source
-    code = _mask_c(text)
+    code = mask_literals(text)
     if not re.search('\\b(?:win_Open|win_DoProxMenu)\\b', code):
         return (source, None)
     if f'#include "{PARAMETER_HEADER}"' in text:
@@ -181,18 +138,78 @@ def adapt(source: str | bytes, rel: str) -> tuple[str | bytes, dict[str, Any] | 
         (out, prox_body) = _adapt_prox_body(out)
     (out, open_calls) = _rewrite_calls(out, 'win_Open', {1: _open_call, 3: _open_call, 5: _open_call}, 6)
     (out, prox_calls) = _rewrite_calls(out, 'win_DoProxMenu', {2: _prox_call, 4: _prox_call}, 5)
-    if rel == 'src/root/m22BF.c':
-        pass
     if rel == 'src/root/m20E8.c' and open_body is None:
         raise ValueError('root m20E8 adapter did not rewrite the source stack-copy body')
     if rel == 'src/root/m22BF.c' and prox_body is None:
         raise ValueError('root m22BF adapter did not inspect the prox-menu TU')
     if rel == 'src/root/m20E8.c' and f'#include "{PARAMETER_HEADER}"' not in out:
         out = f'#include "{PARAMETER_HEADER}"\n' + out
-    remainder = _mask_c(out)
+    remainder = mask_literals(out)
     if rel == 'src/root/m20E8.c' and re.search('\\(&\\s*win\\s*\\)\\s*\\[\\s*[1-9]', remainder):
         raise ValueError('unsafe win_Open argument-stack access remains')
     if rel == 'src/root/m22BF.c' and re.search('\\(&\\s*item\\s*\\)\\s*\\[\\s*[1-9]', remainder):
         raise ValueError('unsafe win_DoProxMenu argument-stack access remains')
-    ledger = {'kind': 'WINDOW_PARAMETER_ABI_V1', 'source': rel, 'input_sha256': before, 'output_sha256': _sha(out), 'fixed_signatures': {'win_Open': OPEN_DECL, 'win_DoProxMenu': PROX_DECL}, 'declarations': declarations, 'win_Open_calls': open_calls, 'win_DoProxMenu_calls': prox_calls, 'open_body': open_body, 'prox_body': prox_body, 'helper_header': PARAMETER_HEADER, 'claim': 'No converted win_Open or win_DoProxMenu call relies on unprovided caller-stack words. Supplied source parameter count is explicit; mode-5 resource references must be present before the window parameter vector is changed or recalculated.'}
+    ledger = {'kind': 'WINDOW_PARAMETERS', 'source': rel, 'input_sha256': before, 'output_sha256': _sha(out), 'fixed_signatures': {'win_Open': OPEN_DECL, 'win_DoProxMenu': PROX_DECL}, 'declarations': declarations, 'win_Open_calls': open_calls, 'win_DoProxMenu_calls': prox_calls, 'open_body': open_body, 'prox_body': prox_body, 'helper_header': PARAMETER_HEADER, 'claim': 'No converted win_Open or win_DoProxMenu call relies on unprovided caller-stack words. Supplied source parameter count is explicit; mode-5 resource references must be present before the window parameter vector is changed or recalculated.'}
     return (out.encode('latin1') if is_bytes else out, ledger)
+
+SWAP_DECL = 'void win_Swap(int16_t from, int16_t to, int16_t supplied_count, int16_t p0, int16_t p1, int16_t p2, int16_t p3)'
+
+def _replace_swap_declarations(text: str) -> tuple[str, dict[str, int]]:
+    counts = {'swap_declarations': 0, 'swap_definitions': 0}
+    pattern = re.compile('(?m)^(?P<indent>\\s*)(?P<extern>extern\\s+)?void\\s+win_Swap\\s*\\([^;{}\\n]*\\)\\s*(?P<end>[;{])')
+
+    def sub(match: re.Match[str]) -> str:
+        key = 'swap_definitions' if match.group('end') == '{' else 'swap_declarations'
+        counts[key] += 1
+        return match.group('indent') + (match.group('extern') or '') + SWAP_DECL + ' ' + match.group('end')
+    return (pattern.sub(sub, text), counts)
+
+def _swap_call(args: list[str]) -> tuple[list[str], dict[str, Any]]:
+    if len(args) != 2:
+        raise ValueError(f'win_Swap expects its two observed source arguments, got {len(args)}')
+    return ([args[0], args[1], '0', '0', '0', '0', '0'], {'source_optional_word_count': 0, 'explicit_zero_slots': 4})
+
+def _adapt_body(text: str) -> tuple[str, dict[str, Any]]:
+    assignment = re.compile('(?m)^[ \\t]*\\(\\(int16_t\\s+\\*\\)\\(w\\s*\\+\\s*0x10\\)\\)\\[0\\]\\s*=\\s*p0;\\s*\\n[ \\t]*\\(\\(int16_t\\s+\\*\\)\\(w\\s*\\+\\s*0x10\\)\\)\\[1\\]\\s*=\\s*p1;\\s*\\n[ \\t]*\\(\\(int16_t\\s+\\*\\)\\(w\\s*\\+\\s*0x10\\)\\)\\[2\\]\\s*=\\s*p2;\\s*\\n[ \\t]*\\(\\(int16_t\\s+\\*\\)\\(w\\s*\\+\\s*0x10\\)\\)\\[3\\]\\s*=\\s*p3;')
+    replacement = '    parameter_status = sim_window_parameters_store_open(&sim_window_ref_registry, to, w, supplied_count, p0, p1, p2, p3);\n    if (parameter_status != SIM_WINDOW_PARAMETERS_OK) {\n        Punt("win_Swap parameter contract: %s", sim_window_parameters_status_string(parameter_status));\n        win_UnlockWin(to);\n        return;\n    }'
+    (out, count) = assignment.subn(replacement, text)
+    if count != 1:
+        raise ValueError(f'win_Swap parameter stores: expected one four-word block, found {count}')
+    definition = re.compile('(?s)(void\\s+win_Swap\\([^)]*\\)\\s*\\{)')
+    (out, decls) = definition.subn('\\1\\n    SimWindowParameterStatus parameter_status;', out, count=1)
+    if decls != 1:
+        raise ValueError(f'win_Swap status local: expected one definition, found {decls}')
+    return (out, {'parameter_store_blocks_replaced': count, 'failure_behavior': 'source-named Punt with status, unlock/return fallback'})
+
+def _adapt_swap(source: str | bytes, rel: str) -> tuple[str | bytes, dict[str, Any] | None]:
+    rel = Path(rel).as_posix()
+    is_bytes = isinstance(source, bytes)
+    text = source.decode('latin1') if is_bytes else source
+    code = mask_literals(text)
+    if not re.search('\\bwin_Swap\\b', code):
+        return (source, None)
+    if 'SIMANT_WINDOW_SWAP_PARAMETERS' in text:
+        raise ValueError(f'{rel}: window swap adapter was applied twice')
+    before = _sha(text)
+    (out, declarations) = _replace_swap_declarations(text)
+    body = None
+    if rel == 'src/root/m20E8.c':
+        if f'#include "{PARAMETER_HEADER}"' not in out:
+            raise ValueError('root m20E8 must lower Open parameters first (parameter helper header absent)')
+        (out, body) = _adapt_body(out)
+    (out, calls) = _rewrite_calls(out, 'win_Swap', {2: _swap_call}, 7)
+    if rel == 'src/root/m20E8.c' and body is None:
+        raise ValueError('root m20E8 win_Swap definition was not converted')
+    masked = mask_literals(out)
+    if rel == 'src/root/m20E8.c' and re.search('\\(\\(int16_t\\s*\\*\\)\\(w\\s*\\+\\s*0x10\\)\\)\\[\\d+\\]\\s*=\\s*p[0-3]', masked):
+        raise ValueError('root win_Swap retains direct optional-slot stores')
+    if '(&from)[' in masked or '(&to)[' in masked:
+        raise ValueError(f'{rel}: unsafe win_Swap stack read remains')
+    ledger = {'kind': 'WINDOW_SWAP_PARAMETERS', 'source': rel, 'input_sha256': before, 'output_sha256': _sha(out), 'fixed_signature': SWAP_DECL, 'declarations': declarations, 'calls': calls, 'body': body, 'helper': 'sim_window_parameters_store_open', 'claim': 'The shipped two-argument win_Swap callers carry supplied_count=0 and four explicit zero words. The actual destination resource view must validate before its parameter slots are written or recalculated.'}
+    return (out.encode('latin1') if is_bytes else out, ledger)
+
+
+def adapt(source: str | bytes, rel: str):
+    output, open_prox = _adapt_open_prox(source, rel)
+    output, swap = _adapt_swap(output, rel)
+    return output, {'open_prox': open_prox, 'swap': swap}

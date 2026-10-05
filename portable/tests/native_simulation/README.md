@@ -3,7 +3,7 @@
 Build the current canonical native program first, then run:
 
 ```powershell
-python portable/tests/native_simulation/run.py --native-build build/portable-sdl3 --out build/native-simulation --random-count 128
+python portable/tests/native_simulation/run.py --native-build build/current/portable --out build/current/tests/simulation --random-count 128
 ```
 
 The native lane links the complete object list from the current build receipt.

@@ -35,7 +35,7 @@ if OUT.exists():
     parser.error("--out already exists; choose a fresh directory")
 
 sys.path.insert(0, str(ROOT / "tools"))
-sys.path.insert(0, str(ROOT / "build/behavior/deps"))
+sys.path.insert(0, str(ROOT / "build/deps/unicorn"))
 import exe
 import unicorn as uc
 from unicorn import x86_const as xr

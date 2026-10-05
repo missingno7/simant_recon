@@ -29,3 +29,35 @@ Read README.md, docs/codegen-rules.md and docs/tu-evidence.md first.
 * Published oracle checkpoints are immutable. Active reconstruction is corrigible.
   Portable changes must remain mechanical ABI/type conversion or actual platform
   boundaries; ordinary game algorithms and state belong in canonical source.
+
+
+# Consolidation and lifecycle rules
+
+* Discover → prove → integrate → generalize → retire residue. A superseding change
+  must identify and remove its replaced mechanisms in the same change; no internal
+  compatibility wrappers or old-source modes.
+* During the current manual-review policy, retire files with `tools/workspace.py`
+  into ignored `to_delete/`, preserving relative paths. Never consume that tree
+  from production, tests, source discovery or evidence indexing. The user deletes it.
+* Closing a blocker updates canonical implementation and its authoritative ledger,
+  keeps meaningful permanent regression coverage, and retires temporary adapters,
+  owners, exploratory harnesses and superseded receipts. Closure must reduce or
+  preserve architectural complexity.
+* Use `build/current/` for one default DOS/native/behavior/test result per category;
+  `build/deps/` is reusable dependency/cache space. Default reruns rotate old results
+  into `to_delete/`; explicit experiment paths must be fresh.
+* Workers use `build/workers/<worker>/<task>/`; unrelated scratch belongs under
+  `build/scratch/`. Retire completed/stale task generations. Do not invent
+  current/final/verified/version suffix ladders.
+* Exploratory proof stays ignored. Publish only the minimal durable conclusion,
+  scope and strong regression/negative controls needed by an active claim.
+* `src/program.json` owns semantic inventory and DOS gate/data membership;
+  `portable/platform.json` owns native contracts. `docs/status.md` is generated
+  with `python tools/repository.py --write-status`, never independently edited.
+* Register every portable lowering module in `layout/repository.json`. Temporary
+  exceptions need a reason, live blocker IDs and deletion conditions. Architecture
+  validation fails when retired paths return, a converter loses its live contract,
+  a transform is unreferenced, or production consumes research/scratch.
+* Run `tools/repository.py` during cleanup and `tools/validate.py` at acceptance
+  boundaries. Preserve exact/strict-semantic gates; cleanup never admits guessed
+  owners, padding, initializers, deadness or expanded semantic domains.

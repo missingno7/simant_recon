@@ -23,11 +23,11 @@ from canonical_native_abi.source_views import (
     edit_cache_view,
     graphics_canonical_views,
     menu_native_memory,
-    rename,
     screen_clip_canonical_views,
     translate_29d6_port_block,
     unused_cache_release_argument,
 )
+from canonical_native_abi.lexical import rename
 from canonical_native_abi import rng
 from canonical_native_abi import audio
 from canonical_native_abi import audio_shared_state_preword
@@ -51,31 +51,32 @@ from canonical_native_abi import list_text_handle
 from canonical_native_abi import clip_stack_native
 from canonical_native_abi import cache_table_native
 from canonical_native_abi import countdown_host
-from canonical_native_abi import window_parameter_abi_v1
-from canonical_native_abi import window_swap_parameter_abi_v2
+from canonical_native_abi import window_parameters
 from canonical_native_abi import newgame_zoom_window_v1
 from canonical_native_abi import s26_window_object_views_v1
 from canonical_native_abi import load_string_ant
 from canonical_native_abi import source_runtime_globals
 PROJECT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT / 'tools'))
+from workspace import prepare_output, retire
 ROOT=PROJECT
 OUT=None
 SDK=None
 CC=None
 PLATFORM=json.loads((Path(__file__).parent/'platform.json').read_text())
-ABI_MODULES={'rng':rng,'audio':audio,'audio_shared_state_preword':audio_shared_state_preword,'fonts':fonts,'pointer_globals':pointer_globals,'varargs':varargs,'windows':windows,'window_loader':window_loader,'timer':timer,'startup_bundle':startup_bundle,'main_preflight':main_preflight,'findindex_native_guard':findindex_native_guard,'crt_abi':crt_abi,'spider_inline_source':spider_inline_source,'m1b73_queue_source':m1b73_queue_source,'m1b73_event_source':m1b73_event_source,'event_word_switch':event_word_switch,'file_select_host':file_select_host,'menu_s17_preword':menu_s17_preword,'list_text_handle':list_text_handle,'clip_stack_native':clip_stack_native,'cache_table_native':cache_table_native,'countdown_host':countdown_host,'window_parameter_abi_v1':window_parameter_abi_v1,'window_swap_parameter_abi_v2':window_swap_parameter_abi_v2,'newgame_zoom_window_v1':newgame_zoom_window_v1,'s26_window_object_views_v1':s26_window_object_views_v1,'load_string_ant':load_string_ant,'source_runtime_globals':source_runtime_globals}
+ABI_MODULES={'rng':rng,'audio':audio,'audio_shared_state_preword':audio_shared_state_preword,'fonts':fonts,'pointer_globals':pointer_globals,'varargs':varargs,'windows':windows,'window_loader':window_loader,'timer':timer,'startup_bundle':startup_bundle,'main_preflight':main_preflight,'findindex_native_guard':findindex_native_guard,'crt_abi':crt_abi,'spider_inline_source':spider_inline_source,'m1b73_queue_source':m1b73_queue_source,'m1b73_event_source':m1b73_event_source,'event_word_switch':event_word_switch,'file_select_host':file_select_host,'menu_s17_preword':menu_s17_preword,'list_text_handle':list_text_handle,'clip_stack_native':clip_stack_native,'cache_table_native':cache_table_native,'countdown_host':countdown_host,'window_parameters':window_parameters,'newgame_zoom_window_v1':newgame_zoom_window_v1,'s26_window_object_views_v1':s26_window_object_views_v1,'load_string_ant':load_string_ant,'source_runtime_globals':source_runtime_globals}
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
 def main():
     global ROOT, OUT, SDK, CC
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--out',type=Path,default=PROJECT/'build/portable-sdl3')
-    parser.add_argument('--sdk',type=Path,default=PROJECT/'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32')
+    parser.add_argument('--out',type=Path,default=PROJECT/'build/current/portable')
+    parser.add_argument('--sdk',type=Path,default=PROJECT/'build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32')
     parser.add_argument('--cc',default='C:/msys64/mingw64/bin/gcc.exe')
     parser.add_argument('--jobs',type=int,default=6)
-    args=parser.parse_args();ROOT=PROJECT;OUT=args.out.resolve();SDK=args.sdk.resolve();CC=args.cc
-    if OUT.exists():raise ValueError('fresh native build output required')
-    OUT.mkdir(parents=True);copyroot=PROJECT
+    args=parser.parse_args();ROOT=PROJECT;OUT=args.out.absolute();SDK=args.sdk.resolve();CC=args.cc
+    prepare_output(OUT, PROJECT/'build/current/portable')
+    copyroot=PROJECT
     canonical=json.loads((ROOT/'src/program.json').read_text())
     mismatched=[u['source'] for u in canonical['modules'] if sha(ROOT/u['source'])!=u['source_sha256']]
     if mismatched:raise ValueError('active canonical program/source inventory differs: '+str(mismatched))
@@ -87,7 +88,7 @@ def main():
         paths.add(PROJECT/'portable/whole_program/application.c')
         paths.update((PROJECT/'portable/runtime/bios-reference').rglob('*'))
         paths.update(ROOT/'assets'/name for name in PLATFORM['runtime_assets'])
-        paths.update(ROOT/rel for rel in ['tools/compiler.py','tools/omf.py','layout/toolchain.json','layout/manifest.json'])
+        paths.update(ROOT/rel for rel in ['tools/compiler.py','tools/omf.py','tools/workspace.py','layout/toolchain.json','layout/manifest.json'])
         return {p.relative_to(PROJECT).as_posix():sha(p) for p in sorted(paths) if p.is_file()}
     input_pins=current_inputs()
     inventory={'translation_units':[dict(module=u['key'],source=u['source'],canonical_destination=u['source'],lang=u['lang']) for u in canonical['modules']]}
@@ -193,8 +194,7 @@ def main():
         text=callback_views(text,callback_slots)
         text=apply('countdown_host','adapt',text,text,rel)
         text=unused_cache_release_argument(text) if rel=='src/root/m00F8.c' else text
-        text=apply('window_parameter_abi_v1','adapt',text,text,rel)
-        text=apply('window_swap_parameter_abi_v2','adapt',text,text,rel)
+        text=apply('window_parameters','adapt',text,text,rel)
         if rel=='src/S15/m384C.c':text=apply('newgame_zoom_window_v1','adapt_postword',text,text,rel,original_source=original)
         # Database record bytes retain their wire sizes; only runtime index
         # pointers widen. The native type adapter is intentionally explicit.
@@ -311,8 +311,9 @@ def main():
     stable_at_end=current_inputs()==input_pins
     passed=required_passed and link['passed'] and app_link['passed'] and stable_at_end
     executable=OUT/'simant-canonical.exe'
-    if executable.is_file() and not passed:executable.unlink()
+    if executable.is_file() and not passed:retire(executable)
     report={'schema':'canonical-native-complete-attempt-v1','passed':passed,'input_pins':input_pins,
+        'sdk':{'path':str(SDK),'import_library_sha256':sha(SDK/'lib/libSDL3.dll.a'),'runtime_sha256':sha(SDK/'bin/SDL3.dll')},
         'input_stability':{'before_link':stable_before_link,'at_end':stable_at_end},
         'runtime_resources':{'shipped':{name:sha(ROOT/'assets'/name) for name in PLATFORM['runtime_assets']},'generated':PLATFORM['generated_runtime_resources']},
         'executable':{'path':str(executable),'sha256':sha(executable)} if passed else None,'claim':'One canonical source program plus explicit ABI/platform services. Preview limitations are explicit; no DOS equality claim.',

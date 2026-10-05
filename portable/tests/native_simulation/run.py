@@ -176,12 +176,12 @@ def build_native(build,out,mutation=None):
     pins[str(response)]=sha(response)
     command=[report['core_link']['command'][0],'-shared','-Wl,--export-all-symbols',
         *['-Wl,--wrap='+n for n in BOUNDARIES],str(HERE/'native_callbacks.c'),
-        '-Wl,@fixture-objects.rsp',str(ROOT/'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/lib/libSDL3.dll.a'),
+        '-Wl,@fixture-objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),
         '-o',str(out/'native.dll')]
     run=subprocess.run(command,cwd=out,capture_output=True,text=True)
     (out/'link.txt').write_text(run.stdout+run.stderr)
     if run.returncode:raise RuntimeError('native fixture link failed: '+run.stderr[:2000])
-    dll_dir=os.add_dll_directory(str(ROOT/'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/bin'))
+    dll_dir=os.add_dll_directory(str(Path(report['sdk']['path'])/'bin'))
     lib=ct.CDLL(str(out/'native.dll'))
     lib.DoAntMoveY.argtypes=[];lib.DoAntMoveY.restype=None
     lib.DoAntSimY.argtypes=[];lib.DoAntSimY.restype=None
@@ -238,10 +238,12 @@ def native_run(lib,case,storage):
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--native-build',type=Path,required=True)
-    ap.add_argument('--out',type=Path,required=True)
+    ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/simulation')
     ap.add_argument('--random-count',type=int,default=128)
     ap.add_argument('--seed',type=lambda v:int(v,0),default=0xC0DE25)
-    args=ap.parse_args();out=b.modctx.under_build(args.out);out.mkdir(parents=True,exist_ok=True)
+    args=ap.parse_args();out=args.out.absolute()
+    from workspace import prepare_output
+    prepare_output(out,ROOT/'build/current/tests/simulation',ROOT)
     build=args.native_build.resolve();start=time.monotonic()
     program=canonical.load();cases=list(corpus(args.random_count,args.seed))+list(callback_cases())+list(tick_cases())
     lib,pins,command,dll_dir,_=build_native(build,out)

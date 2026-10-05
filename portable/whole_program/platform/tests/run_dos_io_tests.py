@@ -32,16 +32,13 @@ def identity(path: Path) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out", required=True, help="new output directory below build/workers")
+    parser.add_argument("--out", default="build/current/tests/dos-io", help="disposable output or fresh experiment path")
     parser.add_argument("--gcc", default=str(GCC_DEFAULT))
     args = parser.parse_args()
-    out = (ROOT / args.out).resolve()
-    workers = (ROOT / "build/workers").resolve()
-    if workers not in out.parents:
-        raise SystemExit("--out must be a new directory below build/workers")
-    if out.exists():
-        raise SystemExit(f"refusing to overwrite {out}")
-    out.mkdir(parents=True)
+    out = (ROOT / args.out).absolute()
+    sys.path.insert(0,str(ROOT/'tools'))
+    from workspace import prepare_output
+    prepare_output(out,ROOT/'build/current/tests/dos-io',ROOT)
     case_root = out / "fs"
     (case_root / "SubDir").mkdir(parents=True)
 

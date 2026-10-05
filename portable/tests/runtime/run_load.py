@@ -71,8 +71,8 @@ def main():
         raise ValueError('GDB with Python support is required; pass --gdb')
     gdb_path = Path(gdb_found).resolve()
     gdb_hash = runtime.sha(gdb_path)
-    out = (args.out or project / 'build/native-runtime-load').resolve()
-    if out.exists() or out in (project, project / 'build', build, FIXTURES):
+    out = (args.out or project / 'build/current/load').absolute()
+    if out in (project, project / 'build', build, FIXTURES):
         raise ValueError('fresh disposable output directory required')
     assets = out / 'a'
     if len(str(assets / 'a.ant')) > 67:
@@ -81,7 +81,10 @@ def main():
     fixture_pins = {path.name: runtime.sha(path) for path in
                     (script, trace, Path(__file__), FIXTURES / 'run.py')}
     expected_events = runtime.expected_replay(script)
-    out.mkdir(parents=True)
+    import sys
+    sys.path.insert(0,str(PROJECT/'tools'))
+    from workspace import prepare_output
+    prepare_output(out,project/'build/current/load',project)
     shutil.copytree(build / 'runtime-assets', assets)
     before = runtime.files(assets)
     commands = out / 'gdb.txt'

@@ -12,14 +12,14 @@ this static conclusion. Byte-exact claims retain their stricter historical gates
 
 ## Reproduction
 
-The runner requires pinned Unicorn 2.1.4 in ignored `build/behavior/deps`. On the
+The runner requires pinned Unicorn 2.1.4 in ignored `build/deps/unicorn`. On the
 Windows x64 Python runtime used here:
 
 ```powershell
-python -m pip download unicorn==2.1.4 --only-binary=:all: --platform win_amd64 --python-version 310 --no-deps --dest build/behavior/dependencies
-python -m zipfile -e build/behavior/dependencies/unicorn-2.1.4-cp37-abi3-win_amd64.whl build/behavior/deps
+python -m pip download unicorn==2.1.4 --only-binary=:all: --platform win_amd64 --python-version 310 --no-deps --dest build/deps/wheels
+python -m zipfile -e build/deps/wheels/unicorn-2.1.4-cp37-abi3-win_amd64.whl build/deps/unicorn
 python -m unittest tests.test_behavior tests.test_canonical_behavior
-python tools/canonical_behavior.py --count 16 --out build/behavior/current
+python tools/canonical_behavior.py --count 16 --out build/current/behavior
 ```
 
 Wheel SHA-256:

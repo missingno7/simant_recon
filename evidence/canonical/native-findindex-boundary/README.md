@@ -31,8 +31,8 @@ or complete heap-history equivalence is proved. Removing the guard or fabricatin
 an extra row would not resolve those premises.
 
 ```powershell
-python evidence/canonical/native-findindex-boundary/probe.py --out build/findindex-ownership
-python evidence/canonical/native-findindex-boundary/neighbor_probe.py --out build/findindex-neighbor --conversion build/portable-asm-audit-current
+python evidence/canonical/native-findindex-boundary/probe.py --out build/workers/native-findindex-boundary/ownership-run-001
+python evidence/canonical/native-findindex-boundary/neighbor_probe.py --out build/workers/native-findindex-boundary/neighbor-run-001 --conversion build/current
 ```
 
 The replay uses only current active validation tools and hash-locked local original

@@ -1,15 +1,10 @@
 import re
 from . import tokenizer as csrc
-from . import scalar
+from . import scalar, lexical
 RUNTIME_NAMES = {n: 'dos_' + n for n in ('open', 'read', 'write', 'lseek', 'close', 'access', 'chdir', 'getcwd', 'remove', 'stricmp', 'fopen', 'fread', 'fclose')}
 RUNTIME_NAMES.update({'errno': 'dos_errno', 'malloc': 'dos_malloc', 'free': 'dos_free', '_ffree': 'dos_free', '_frealloc': 'dos_realloc', 'FILE': 'DosFileStream'})
 TRIVIA = {'ws', 'nl', 'cmt', 'pp', 'asm'}
 
-def rename(text, mapping):
-    edits = [(t.s, t.e, mapping[t.text]) for t in csrc.tokenize(text) if t.kind == 'id' and t.text in mapping]
-    for (lo, hi, new) in reversed(edits):
-        text = text[:lo] + new + text[hi:]
-    return text
 
 def top_level_statements(text):
     """Whole declaration spans, excluding function definitions."""
@@ -102,7 +97,7 @@ def callback_views(text, slots, types=None):
             return_types[name] = declaration.group(1)
     text = discard_callback_declarations(text, set(slots))
     mappings = {name: f'(*( {types[name]} *)(void *)&driver_callback_table[{slot}])' if types and name in types else f'(({return_types[name]} (*)())driver_callback_table[{slot}])' if name in return_types else f'driver_callback_table[{slot}]' for (name, slot) in slots.items()}
-    text = rename(text, mappings)
+    text = lexical.rename(text, mappings)
     if any((name in text for name in ('driver_callback_table[', '&driver_callback_table['))):
         text = 'extern void (*driver_callback_table[25])();\n' + text
     return text
@@ -141,7 +136,7 @@ def canonical_interior_views(text):
             pattern = '(?m)^\\s*extern\\s+char\\s*\\*\\s*fd_55B3_1CD4\\s*;\\s*\\n'
             (text, n) = re.subn(pattern, '', text)
             if n:
-                text = rename(text, {owner: owner + '[0]'})
+                text = lexical.rename(text, {owner: owner + '[0]'})
                 used = True
         else:
             (text, n) = re.subn('(?m)^\\s*extern\\s+int16_t\\s*\\*\\s*fd_3D57_082A\\[\\s*\\]\\s*;\\s*\\n', '', text)
@@ -153,26 +148,26 @@ def canonical_interior_views(text):
         scalar_decl = '(?m)^\\s*extern\\s+int16_t\\s+' + owner + '\\s*;\\s*\\n'
         (text, n) = re.subn(scalar_decl, '', text)
         if n:
-            text = rename(text, {owner: owner + '.words[0]'})
+            text = lexical.rename(text, {owner: owner + '.words[0]'})
             used = True
         byte_decl = '(?m)^\\s*extern\\s+uint8_t\\s+' + owner + '\\[\\s*\\]\\s*;\\s*\\n'
         (text, n) = re.subn(byte_decl, '', text)
         if n:
-            text = rename(text, {owner: owner + '.bytes'})
+            text = lexical.rename(text, {owner: owner + '.bytes'})
             used = True
     aliases = {'fd_3D57_07CE': '(&fd_3D57_07CC.words[1])', 'fd_3D57_0852': '(&fd_3D57_082A[10])', 'fd_55B3_1CD8': 'fd_55B3_1CD4[1]', 'fd_55B3_1CDC': 'fd_55B3_1CD4[2]', 'fd_55B3_1CE0': 'fd_55B3_1CD4[3]', 'fd_55B3_1CE4': 'fd_55B3_1CD4[4]'}
     for (name, expr) in aliases.items():
         (text, n) = re.subn('(?m)^\\s*extern\\s+[^;\\n]*\\b' + name + '\\b[^;\\n]*;\\s*\\n', '', text)
         if n:
-            text = rename(text, {name: expr})
+            text = lexical.rename(text, {name: expr})
             used = True
     (text, n) = re.subn('(?m)^\\s*extern\\s+int16_t\\s+fd_3D57_0C1C\\s*;\\s*\\n', '', text)
     if n:
-        text = rename(text, {'fd_3D57_0C1C': 'fd_3D57_0C1A.words[1]'})
+        text = lexical.rename(text, {'fd_3D57_0C1C': 'fd_3D57_0C1A.words[1]'})
         used = True
     (text, n) = re.subn('(?m)^\\s*extern\\s+uint8_t\\s+fd_3D57_0C1C\\[\\s*\\]\\s*;\\s*\\n', '', text)
     if n:
-        text = rename(text, {'fd_3D57_0C1C': 'fd_3D57_0C1A.bytes[2]'})
+        text = lexical.rename(text, {'fd_3D57_0C1C': 'fd_3D57_0C1A.bytes[2]'})
         used = True
     screen = '(?m)^\\s*extern\\s+int16_t\\s+fd_55B3_5AA0\\[2\\]\\s*;\\s*\\n'
     (text, n) = re.subn(screen, 'extern struct Rect g_5A9C[2];\n', text)
@@ -203,7 +198,7 @@ def graphics_canonical_views(text, rel):
     scalar = '(?m)^\\s*extern\\s+int16_t\\s+g_3DA0\\s*;\\s*\\n'
     (text, n) = re.subn(scalar, '', text)
     if n:
-        text = rename(text, {'g_3DA0': 'g_3DA0.x'})
+        text = lexical.rename(text, {'g_3DA0': 'g_3DA0.x'})
         changed = True
     point = '(?m)^\\s*extern\\s+(?:struct\\s+\\w+|Point|Pnt)\\s+g_3DA0\\s*;\\s*\\n'
     (text, n) = re.subn(point, '', text)
@@ -212,7 +207,7 @@ def graphics_canonical_views(text, rel):
         low_byte = '(?m)^\\s*extern\\s+char\\s+' + word + '\\s*;\\s*\\n'
         (text, n) = re.subn(low_byte, '', text)
         if n:
-            text = rename(text, {word: '((int8_t)(uint8_t)' + word + ')'})
+            text = lexical.rename(text, {word: '((int8_t)(uint8_t)' + word + ')'})
             changed = True
     if changed:
         text = '#include "canonical_graphics_data.h"\n' + text
@@ -225,12 +220,12 @@ def edit_cache_view(text):
         (text, n) = re.subn('(?m)^\\s*extern\\s+int16_t\\s+fd_50F6_15C4\\[30\\]\\[40\\]\\s*;\\s*\\n', '', text)
         if not n:
             return text
-        text = rename(text, {'fd_50F6_15C4': 'fd_50F6_15C4.rows'})
+        text = lexical.rename(text, {'fd_50F6_15C4': 'fd_50F6_15C4.rows'})
         text = re.sub('fd_50F6_15C4\\.rows\\[0\\]\\[([^]]+)\\]', 'fd_50F6_15C4.linear[\\1]', text)
     return '#include "canonical_edit_cache.h"\n' + text
 
 def centralize(text):
-    text = rename(text, RUNTIME_NAMES)
+    text = lexical.rename(text, RUNTIME_NAMES)
     io = '|'.join(RUNTIME_NAMES.values())
     text = re.sub('(?m)^\\s*extern\\s+[^;]*\\b(?:' + io + '|_f(?:mem\\w+|str\\w+))\\s*\\([^;]*;', '', text)
     text = re.sub('\\btypedef\\s+struct\\s+_iobuf\\s+DosFileStream\\s*;', '', text)

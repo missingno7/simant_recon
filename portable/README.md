@@ -2,21 +2,23 @@
 
 `build.py` consumes the complete current `src/program.json` inventory. It
 converts whole canonical C translation units and symbolic assembly data, then
-compiles the explicit platform services in `platform.json`. It does not select
+compiles the explicit platform services in `platform.json`. Lowering classifications and exception deletion conditions
+are in `layout/repository.json`. It does not select
 historical candidate bodies or apply source correction/storage overlays.
 
 ```powershell
-python portable/build.py --out build/portable-sdl3
-python portable/tests/native_database/run.py --conversion build/portable-sdl3 --out build/native-database
-python portable/tests/native_rng/run.py --report build/portable-sdl3/report.json --out build/native-rng
-python portable/tests/native_simulation/run.py --native-build build/portable-sdl3 --out build/native-simulation --random-count 128
-python portable/tests/runtime/run.py --report build/portable-sdl3/report.json --flow vga
-python portable/tests/runtime/run.py --report build/portable-sdl3/report.json --flow save
-python portable/tests/runtime/run_load.py --report build/portable-sdl3/report.json
+python portable/build.py --out build/current/portable
+python portable/tests/native_database/run.py --conversion build/current/portable --out build/current/tests/database
+python portable/tests/native_rng/run.py --report build/current/portable/report.json --out build/current/tests/rng
+python portable/tests/native_simulation/run.py --native-build build/current/portable --out build/current/tests/simulation --random-count 128
+python portable/tests/runtime/run.py --report build/current/portable/report.json --flow vga
+python portable/tests/runtime/run.py --report build/current/portable/report.json --flow save
+python portable/tests/runtime/run_load.py --report build/current/portable/report.json
 ```
 
-Build output must be fresh. Defaults use MinGW GCC under `C:/msys64/mingw64`
-and the local SDL3 SDK under `build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32`;
+Default output is recreated after moving the previous result to ignored `to_delete/`.
+Explicit experiment output must be fresh. Defaults use MinGW GCC under `C:/msys64/mingw64`
+and the local SDL3 SDK under `build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32`;
 `--cc`, `--sdk` and `--out` override these locations. Game databases/fonts/CFG
 are local prerequisites. The SDL3 runtime and hardware BIOS fonts are copied to
 the result; historical executable bytes are not native runtime resources.
@@ -24,7 +26,7 @@ the result; historical executable bytes are not native runtime resources.
 Run the result from the repository:
 
 ```powershell
-build/portable-sdl3/simant-canonical.exe
+build/current/portable/simant-canonical.exe
 ```
 
 The application locates the adjacent resources and runs the converted original
@@ -52,9 +54,10 @@ The native heap provider now reports zero discarded sizes and restores an
 allocation through the same handle, corroborated against bounded original
 execution. Shared metadata and wider heap histories remain unproved. See the [allocator proof](../evidence/canonical/allocator-fixtures/README.md).
 Unsupported font extents, malformed window bindings and zoom/allocation domains
-remain explicit in `platform.json`. Passing build and bounded tests do not close
+remain explicit in `platform.json`. Lowering classifications and exception deletion conditions
+are in `layout/repository.json`. Passing build and bounded tests do not close
 those issues or establish complete DOS/native equality.
 
 Published historical checkpoints live in Git. Current sources and validations
 are described in [the canonical architecture](../docs/canonical-source.md) and
-[the consolidation report](../docs/consolidation.md).
+[the consolidation report](../docs/cleanup.md).

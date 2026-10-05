@@ -1,16 +1,13 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import re
+from .lexical import mask_literals
 HEADER = '#include "portable/whole_program/window_source_globals.h"\n'
 RECT_HEADER = '#include "portable/whole_program/window_source_rects.h"\n'
 
-def _code_mask(source: str) -> str:
-    """Return same-length text with comments and C literals blanked."""
-    pattern = re.compile('//[^\\r\\n]*|/\\*.*?\\*/|\\"(?:\\\\.|[^\\"\\\\])*\\"|\'(?:\\\\.|[^\'\\\\])*\'', re.S)
-    return pattern.sub(lambda m: ''.join(('\n' if c == '\n' else ' ' for c in m.group())), source)
 
 def _rewrite_code_identifier(source: str, name: str, replacement: str) -> str:
-    mask = _code_mask(source)
+    mask = mask_literals(source)
     matches = list(re.finditer('\\b' + re.escape(name) + '\\b', mask))
     for match in reversed(matches):
         source = source[:match.start()] + replacement + source[match.end():]
@@ -30,7 +27,7 @@ def convert_window_global_declarations(source: str) -> ConversionResult:
     (text, counts['signed_profile_declaration']) = re.subn('extern\\s+char\\s+(?:(?:far|near)\\s+)?g_5A97\\s*;', '', text)
     (text, counts['unsigned_profile_declaration']) = re.subn('extern\\s+(?:unsigned\\s+char|uint8_t)\\s+(?:(?:far|near)\\s+)?g_5A97\\s*;', '', text)
     if counts['unsigned_profile_declaration']:
-        code = _code_mask(text)
+        code = mask_literals(text)
         if re.search('(?:&\\s*g_5A97|\\bg_5A97\\s*(?:\\+\\+|--|[+\\-*/%&|^]=|=(?!=))|(?:\\+\\+|--)\\s*g_5A97)', code):
             unresolved.append('unsigned g_5A97 consumer has a non-read use')
         else:

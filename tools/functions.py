@@ -84,7 +84,7 @@ def freeze() -> int:
     if TABLE.exists():
         print("layout/functions.json exists; refusing to overwrite")
         return 1
-    inv = json.loads((ROOT / "build/inventory/functions.json").read_text())
+    inv = json.loads((ROOT / "build/current/inventory/functions.json").read_text())
     rows = []
     for f in inv["functions"]:
         rows.append({"unit": f["unit"], "seg": f["seg"], "off": f["off"], "size": f["size"],

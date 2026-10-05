@@ -2,7 +2,7 @@
 
 Run from any working directory with:
   python evidence/canonical/icon-handle-view/replay.py
-  python evidence/canonical/icon-handle-view/replay.py --out build/proofs/icon-handle-view-run
+  python evidence/canonical/icon-handle-view/replay.py --out build/scratch/proofs/icon-handle-view-run
 
 Every generated file goes to a new directory below repository build/. The runner
 reads current canonical sources and inventories, compiles complete source variants,
@@ -114,7 +114,7 @@ def select_output(argument: str | None) -> Path:
     if not build.is_relative_to(ROOT.resolve()):
         raise ValueError("repository build/ must remain inside the repository")
     if argument is None:
-        parent = build / "proofs"
+        parent = build / "scratch" / "proofs"
         parent.mkdir(parents=True, exist_ok=True)
         return Path(tempfile.mkdtemp(prefix="icon-handle-view-", dir=parent))
     raw = Path(argument)
@@ -739,9 +739,9 @@ def main(argv=None) -> int:
         "historical_validation_inputs": [pin(path) for path in (
             ROOT / "assets" / "SIMANT.EXE", ROOT / "layout" / "oracle.lock.json",
             ROOT / "layout" / "symbols.json", ROOT / "layout" / "functions.json",
-            ROOT / "build" / "inventory" / "functions.json",
+            ROOT / "build" / "current" / "inventory" / "functions.json",
             ROOT / "evidence" / "cross_version" / "simantw_correspondence.json",
-            *(ROOT / "build" / "search" / name / "best.json" for name in HELPERS),
+            *(ROOT / "build" / "scratch" / "search" / name / "best.json" for name in HELPERS),
         ) if path.is_file()],
         "toolchain_pins": tool_pins, "runtime_libraries": library_pins,
         "staged_m208F_source": pin(source_path),
@@ -817,7 +817,7 @@ def main(argv=None) -> int:
     summary = {
         "schema": "simant-icon-handle-minimum-slot-current-source-replay-summary-v1",
         "all_required_checks_pass": True,
-        "reproduce": "python evidence/canonical/icon-handle-view/replay.py --out build/proofs/icon-handle-view-run",
+        "reproduce": "python evidence/canonical/icon-handle-view/replay.py --out build/scratch/proofs/icon-handle-view-run",
         "full_receipt": pin(receipt),
         "module_cases": {case: {"exact": row["verification"]["exact"],
                                  "extent_exact": row["verification"].get("extent", {}).get("exact"),

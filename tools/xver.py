@@ -53,7 +53,7 @@ ROOT = exemod.ROOT
 W16 = Path("D:/Prog/simantw_recon")
 OUT = ROOT / "evidence" / "cross_version" / "simantw_correspondence.json"
 DECISIONS = ROOT / "evidence" / "cross_version" / "decisions.json"
-FEATURES = ROOT / "build" / "xver"
+FEATURES = ROOT / "build" / "current" / "xver"
 DGROUP = 0x55B3
 md = Cs(CS_ARCH_X86, CS_MODE_16)
 
@@ -100,7 +100,7 @@ def dos_features() -> dict:
     x = exemod.load()
     s27 = x.sections[27]
     dgroup = s27.data[DGROUP * 16 - s27.load_linear:]
-    inv = json.loads((ROOT / "build" / "inventory" / "functions.json").read_text())
+    inv = json.loads((ROOT / "build" / "current" / "inventory" / "functions.json").read_text())
     syms = symmod.load()
     rt_by_addr = {(r["unit"], r["seg"], r["off"]): n for n, r in syms["runtime"].items()}
     code_by_lin = {}

@@ -2,7 +2,7 @@
 
 Profiles live in layout/toolchain.json.  Every run re-verifies the SHA-256 of the
 runner and of each pinned tool file, stages the source as ``UNIT.C`` (CRLF,
-ASCII) in a fresh directory under build/cc/, and returns the object bytes.
+ASCII) in a fresh directory under build/scratch/cc/, and returns the object bytes.
 
 The physical tool directory is part of the profile: MSC passes receive their
 own directory in the environment block and near-heap pressure can make code
@@ -17,7 +17,7 @@ the INCLUDE directory, lower case with ``/``, or ``repo:include/<name>`` for a t
 header), and names with ``..``, a drive or a leading slash are refused.
 
 DOSBox-X profiles mount a scratch copy that holds only the profile's pinned files
-(build/cc/pinned/), never the whole tool directory.
+(build/deps/dos-tools/), never the whole tool directory.
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOLCHAIN = ROOT / "layout" / "toolchain.json"
-WORK = ROOT / "build" / "cc"
+WORK = ROOT / "build" / "scratch" / "cc"
 
 
 class CompileError(RuntimeError):
@@ -185,7 +185,7 @@ def pinned_tree(prof: dict) -> Path:
     import hashlib as _h
     files = prof["files"]
     tag = _h.sha256(json.dumps(sorted(files.items())).encode()).hexdigest()[:16]
-    dest = WORK / "pinned" / tag
+    dest = ROOT / "build" / "deps" / "dos-tools" / tag
     if str(dest) in _pinned_ok:
         return dest
     if not dest.exists():

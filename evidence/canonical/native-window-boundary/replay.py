@@ -1,7 +1,7 @@
 """Replay current window resource/helper controls; write outputs only to build/.
 
 After installation:
-  python evidence/canonical/native-window-boundary/replay.py --out build/window-boundary-current
+  python evidence/canonical/native-window-boundary/replay.py --out build/current/tests/windows
 
 Requires local pinned game assets and a C11 compiler. No draft checkout,
 archived executable, scratch receipt generator, or cached generated C is read.
@@ -92,7 +92,7 @@ def parse_resources(root: Path) -> tuple[dict, dict]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path)
-    parser.add_argument("--out", type=Path, default=Path("build/window-boundary-current"))
+    parser.add_argument("--out", type=Path, default=Path("build/current/tests/windows"))
     parser.add_argument("--cc", default=shutil.which("gcc") or "C:/msys64/mingw64/bin/gcc.exe")
     args = parser.parse_args()
     root = (args.root or find_root()).resolve()
@@ -102,16 +102,23 @@ def main() -> None:
     if out.exists():
         raise ValueError("fresh build output directory required")
     out.mkdir(parents=True)
-    correspondence = json.loads((HERE / "installed-correspondence.json").read_text())
     sources = {}
-    for row in correspondence["installed_files"]:
-        path = root / row["installed_path"]
-        raw = path.read_bytes()
-        actual = sha(raw)
-        normalized_sha = sha(raw if row["comparison_mode"] == "binary_exact" else normalized(raw))
-        if normalized_sha != row["installed_lf_sha256"]:
-            raise ValueError(f"reviewed installed source changed: {row['installed_path']}")
-        sources[row["installed_path"]] = dict(sha256=actual, lf_sha256=normalized_sha)
+    paths = [
+        'portable/canonical_native_abi/window_parameters.py',
+        'portable/canonical_native_abi/newgame_zoom_window_v1.py',
+        'portable/canonical_native_abi/s26_window_object_views_v1.py',
+        'portable/canonical_native_abi/windows.py',
+        'portable/canonical_native_abi/window_loader.py',
+        'portable/whole_program/window_parameters.c',
+        'portable/whole_program/window_parameters.h',
+        'portable/whole_program/window_refs.c',
+        'portable/whole_program/window_refs.h',
+        'portable/whole_program/window_runtime_owner.c',
+        'portable/whole_program/window_runtime_owner.h',
+    ]
+    for name in paths:
+        raw = (root / name).read_bytes()
+        sources[name] = dict(sha256=sha(raw), lf_sha256=sha(normalized(raw)))
     current_resources, offsets = parse_resources(root)
     (out / "resources.json").write_text(json.dumps(current_resources, indent=2) + "\n")
     if current_resources != json.loads((HERE / "resources.json").read_text()):

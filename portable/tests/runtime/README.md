@@ -3,9 +3,9 @@ unchanged build report. They copy its pinned resources into a fresh output
 directory and send ordinary SDL keyboard and mouse events to the original main.
 
 ```powershell
-python portable/tests/runtime/run.py --report build/portable-sdl3/report.json --flow vga
-python portable/tests/runtime/run.py --report build/portable-sdl3/report.json --flow save
-python portable/tests/runtime/run_load.py --report build/portable-sdl3/report.json
+python portable/tests/runtime/run.py --report build/current/portable/report.json --flow vga
+python portable/tests/runtime/run.py --report build/current/portable/report.json --flow save
+python portable/tests/runtime/run_load.py --report build/current/portable/report.json
 ```
 
 The Save check dismisses the source success dialog with Return. The Save→Load

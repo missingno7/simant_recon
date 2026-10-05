@@ -25,7 +25,7 @@ Position (default: before the first line that starts with ``extern``):
   --before FUNC    before the line that starts FUNC's definition
 
 Output: one row per N (status characters as in variants.py), then per function the N values
-at which it is exact.  Variant sources and results.json go to build/helpers/idscan/<run>/.
+at which it is exact.  Variant sources and results.json go to build/scratch/helpers/idscan/<run>/.
 
 Examples (Git Bash: ``export MSYS_NO_PATHCONV=1``):
 

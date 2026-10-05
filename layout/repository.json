@@ -1,0 +1,1169 @@
+{
+  "schema": "simant-current-repository-v1",
+  "retired_paths": [
+    "tools/rename.py",
+    "portable/canonical_native_abi/window_parameter_abi_v1.py",
+    "portable/canonical_native_abi/window_swap_parameter_abi_v2.py",
+    "docs/consolidation.md",
+    "docs/source-followup.md",
+    "docs/dos-semantic-oracle-v1.md",
+    "docs/canonical-semantic-oracle-v2.md",
+    "evidence/canonical/viewport-layout/receipt.json",
+    "evidence/canonical/native-window-boundary/installed-correspondence.json",
+    "portable/tools",
+    "portable/game",
+    "portable/source_conversion",
+    "work/source-only-dos",
+    "tools/source_only_dos.py",
+    "tools/dos_source_bindings.py",
+    "evidence/canonical/native-window-boundary/manifest-statement.json",
+    "evidence/canonical/validation/behavior-dependencies.json"
+  ],
+  "entry_points": [
+    {
+      "path": "dos/build.py",
+      "role": "Independent canonical DOS preflight/link"
+    },
+    {
+      "path": "portable/build.py",
+      "role": "Canonical SDL3 conversion/build"
+    },
+    {
+      "path": "tools/validate.py",
+      "role": "Historical acceptance and permanent tests"
+    },
+    {
+      "path": "tools/context.py",
+      "role": "Reconstruction context"
+    },
+    {
+      "path": "tools/search.py",
+      "role": "Whole-TU hypothesis verification"
+    },
+    {
+      "path": "tools/promote.py",
+      "role": "Sole canonical publication"
+    },
+    {
+      "path": "tools/canonical_behavior.py",
+      "role": "Strict semantic differential corroboration"
+    },
+    {
+      "path": "tools/repository.py",
+      "role": "Repository architecture/lifecycle guard"
+    },
+    {
+      "path": "portable/tests/native_database/run.py",
+      "role": "Native database integration"
+    },
+    {
+      "path": "portable/tests/native_rng/run.py",
+      "role": "Original/native RNG differential"
+    },
+    {
+      "path": "portable/tests/native_simulation/run.py",
+      "role": "Original/native simulation differential"
+    },
+    {
+      "path": "portable/tests/runtime/run.py",
+      "role": "Original-main VGA/Save smoke"
+    },
+    {
+      "path": "portable/tests/runtime/run_load.py",
+      "role": "Original-main Save/Load trace"
+    }
+  ],
+  "lowering": [
+    {
+      "module": "asm_data",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "Extracts values/fixup facts only from symbolic canonical ASM directives and emits native data/algorithm projections where the host compiler cannot assemble DOS instructions.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep the ASM translation boundary; absorb a projection into canonical C only through reviewed source correction and codegen/evidence consequences, never by hiding it in a host layer."
+    },
+    {
+      "module": "audio",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "Replaces BIOS/port/interrupt/physical-memory access and DAC start/stop effects with explicit audio host/event services. m29D6 also translates hardware-register writes while retaining register arithmetic and write order.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep at the hardware boundary. Any arithmetic moved out of the adapter must stay sourced from the canonical ASM/C algorithm and preserve operation order."
+    },
+    {
+      "module": "audio_shared_state_preword",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Projects shared native audio record/pointer types over canonical C/ASM storage and removes repeated incompatible extern/struct spellings; it introduces no owner allocation.",
+      "blocker_ids": [],
+      "deletion_condition": "Consolidate only with the hardware adapters after a per-source projection comparison; keep the central audio_state.h as a native view, not a second state owner."
+    },
+    {
+      "module": "cache_table_native",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Changes allocation/clear extents from hard-coded DOS pointer slots to offsetof/sizeof of the native CacheEntry layout; lookup/eviction code stays canonical.",
+      "blocker_ids": [],
+      "deletion_condition": "Can be folded into pointer-width allocation lowering once that lowering proves both native allocation and initialized/cleared byte extents."
+    },
+    {
+      "module": "clip_stack_native",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Sizes two native Handle slots with sizeof instead of an 8-byte DOS constant while leaving clip Push/Pop order intact.",
+      "blocker_ids": [],
+      "deletion_condition": "Fold into generic pointer-width allocation lowering only after the canonical clip node header type is shared."
+    },
+    {
+      "module": "countdown_host",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "Redirects the canonical ASM countdown word to a native BIOS-clock-backed countdown service; tick decrement and wait behavior are documented in the adapter.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep while the DOS timer/interrupt implementation is unavailable to the native host."
+    },
+    {
+      "module": "crt_abi",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "Routes DOS CRT tables/error strings/hard-error registration through explicit native CRT policy and preserves source-width declarations.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep as a CRT boundary unless the native DOS CRT provider directly exports the complete DOS names and policies."
+    },
+    {
+      "module": "event_word_switch",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Adds unsigned-word casts so 16-bit event-code bit patterns survive native integer promotions; labels and branch bodies are unchanged.",
+      "blocker_ids": [],
+      "deletion_condition": "Fold into the proven generic word-expression converter only if generated output and switch control flow remain identical."
+    },
+    {
+      "module": "file_select_host",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Deletes the BIOS equipment-byte read and the DOS rule that maps drive B to A on a one-floppy system.",
+      "blocker_ids": [
+        "native-drive-device-policy"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "findindex_native_guard",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Adds a native early return before canonical index[count] predicate access.",
+      "blocker_ids": [
+        "native-index-adjacency"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "fonts",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Shares the native Font/Bitmap type, widens pointer fields, and sizes the runtime FontHeader allocation from the converted type.",
+      "blocker_ids": [],
+      "deletion_condition": "Retain native layout conversion. Expand capacities only after canonical source ownership and extent are proven."
+    },
+    {
+      "module": "lexical",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Shared lexical/type utility reached by the current whole-source converter.",
+      "blocker_ids": [],
+      "deletion_condition": "Retain while called by the current converter; retire with all callers when superseded."
+    },
+    {
+      "module": "list_text_handle",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Maps 20 source text Handle field accesses to a typed native sidecar accessor; ordinary list algorithms remain in the canonical TU.",
+      "blocker_ids": [],
+      "deletion_condition": "Retire after source and host types share a pointer-width-aware declared view with equal generated output."
+    },
+    {
+      "module": "load_string_ant",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Changes one DOS 4-byte far-pointer-table allocation formula to sizeof the native pointer element; data parsing/order is unchanged.",
+      "blocker_ids": [],
+      "deletion_condition": "Absorb into generic pointer-width layout lowering only with a proof that the converted element count/extent stays the same."
+    },
+    {
+      "module": "m1b73_event_source",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Four-word calls are renamed to a helper that supplies zero for the fifth Event.v field, which the adapter says current consumers do not observe; five-word calls pass every value.",
+      "blocker_ids": [
+        "native-event-omitted-word"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "m1b73_queue_source",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Lifts Rect/Timer declarations to shared native types, widens the pointer-bearing descriptor, and maps historical queue aliases to selectors over the native representation.",
+      "blocker_ids": [
+        "native-queue-result-abi"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "main_preflight",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "Adapts signals and five real INSTALL.EXE opens to native DOS I/O while preserving the closed descriptor slot; retires the physical INT 13h reset loop through a host policy.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep while canonical startup uses DOS signal/file APIs or the S15 physical BIOS reset routine."
+    },
+    {
+      "module": "menu_s17_preword",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "Replaces the serialized far-pointer table with a native Handle/table view and removes the DOS offset-relocation traversal because host pointers are already relocated.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep at the pointer representation boundary; remove added failure policy only after a complete native resource/owner domain is proven."
+    },
+    {
+      "module": "newgame_zoom_window_v1",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Makes the two source-proven AX=0 fastcall window arguments explicit at the native callsites after the word lowering pass.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep until a general source-derived fastcall/register-argument lowering preserves these values; do not broaden to other no-argument calls from analogy."
+    },
+    {
+      "module": "pointer_globals",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Binds compatible pointer aliases and tables, but also removes unsized DOS win_handles/db_handles/font externs in favor of native fixed tables.",
+      "blocker_ids": [
+        "native-storage-ownership"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "rng",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "The source seed recurrence/order stays in the canonical TU; DOS CRT rand/srand, BIOS tick and physical 0x46c0 access become platform calls.",
+      "blocker_ids": [],
+      "deletion_condition": "Only remove after equivalent native CRT/tick/physical-memory services are supplied or source authority is moved into a shared platform implementation without duplicating the recurrence."
+    },
+    {
+      "module": "s26_window_object_views_v1",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Redirects four object-table reads through a native registry and adds NULL/range guards before obtaining the object pointer.",
+      "blocker_ids": [
+        "native-window-object-domain"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "scalar",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Converts declared DOS scalar widths and removes memory-model/calling-convention keywords while preserving 16-bit packing pragmas.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep the narrow type pass; pair with word_islands only as one ordered orchestration API, retaining distinct fail-closed behavior and receipts."
+    },
+    {
+      "module": "source_runtime_globals",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Injects runtime reserve calls, failure returns/Punt behavior, and pointer-width storage for clipping and mono-pattern buffers into otherwise canonical source bodies.",
+      "blocker_ids": [
+        "native-menu-allocation-policy",
+        "native-storage-ownership"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "source_views",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Shared lexical/type utility reached by the current whole-source converter.",
+      "blocker_ids": [
+        "native-menu-allocation-policy",
+        "native-storage-ownership",
+        "native-icon-lifetime"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "spider_inline_source",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Maps a same-address Pnt/data alias to the canonical pixel owner and adjusts pointer prototypes/casts for the byte-oriented native algorithm projection.",
+      "blocker_ids": [],
+      "deletion_condition": "Can be absorbed into a shared typed alias/view conversion only with byte-identical generated TU projection and unchanged line16b5 inputs."
+    },
+    {
+      "module": "startup_bundle",
+      "classification": "TRUE_PLATFORM_BOUNDARY",
+      "reason": "Adapts signals and five real INSTALL.EXE opens to native DOS I/O while preserving the closed descriptor slot; retires the physical INT 13h reset loop through a host policy.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep while canonical startup uses DOS signal/file APIs or the S15 physical BIOS reset routine."
+    },
+    {
+      "module": "timer",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Lifts Rect/Timer declarations to shared native types, widens the pointer-bearing descriptor, and maps historical queue aliases to selectors over the native representation.",
+      "blocker_ids": [],
+      "deletion_condition": "Retire only after one source-derived native descriptor/queue representation supplies the same typed views; preserve the canonical input_queue owner and generated Event fields."
+    },
+    {
+      "module": "tokenizer",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Converts declared DOS scalar widths and removes memory-model/calling-convention keywords while preserving 16-bit packing pragmas.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep the narrow type pass; pair with word_islands only as one ordered orchestration API, retaining distinct fail-closed behavior and receipts."
+    },
+    {
+      "module": "varargs",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Replaces DOS parameter-stack address cursors with native va_list handling and fixed-width DOS formatting services, rejecting unsupported source forms.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep until the native DOS formatting ABI supports all canonical callers without stack-cursor rewriting."
+    },
+    {
+      "module": "windows",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Maps DOS wire offsets and far-pointer tables into native sidecar registries; loader conversion adds fixed-capacity/color reservation checks and Punt/return behavior.",
+      "blocker_ids": [
+        "native-window-object-domain",
+        "native-window-optional-words",
+        "native-storage-ownership"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "window_loader",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "Maps DOS wire offsets and far-pointer tables into native sidecar registries; loader conversion adds fixed-capacity/color reservation checks and Punt/return behavior.",
+      "blocker_ids": [
+        "native-window-object-domain",
+        "native-storage-ownership"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "window_parameters",
+      "classification": "TEMPORARY_EXCEPTION",
+      "reason": "One combined pass now owns win_Open, win_DoProxMenu, and win_Swap rewriting. It replaces unsafe reads from caller stack words with explicit supplied counts/slots and native registry validation.",
+      "blocker_ids": [
+        "native-window-optional-words",
+        "native-window-object-domain"
+      ],
+      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+    },
+    {
+      "module": "word_islands",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Wraps closed, explicitly typed DOS unsigned-word additions/comparisons where native integer promotion changes the result; unknown expression forms remain unchanged.",
+      "blocker_ids": [],
+      "deletion_condition": "Expand only with positive controls and negative contrasts for each new type/operator class; do not treat the current bounded converter as global 16-bit C semantics."
+    }
+  ],
+  "passes": [
+    {
+      "id": "startup_bundle",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/startup_bundle.py",
+        "portable/canonical_native_abi/main_preflight.py",
+        "portable/whole_program/platform/startup_host.c",
+        "portable/whole_program/platform/startup_preflight.c"
+      ],
+      "builder_site": "portable/build.py:137",
+      "consumers": [
+        "src/root/m15F8.c",
+        "src/S15/m384C.c"
+      ],
+      "reason": "Adapts signals and five real INSTALL.EXE opens to native DOS I/O while preserving the closed descriptor slot; retires the physical INT 13h reset loop through a host policy.",
+      "blocker": "No separate startup blocker is recorded. The BIOS reset operation is intentionally retired and must remain an explicit host policy.",
+      "deletion_condition": "Keep while canonical startup uses DOS signal/file APIs or the S15 physical BIOS reset routine."
+    },
+    {
+      "id": "rng_adapter",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/rng.py",
+        "portable/whole_program/platform/crt_rng.c",
+        "portable/whole_program/platform/seed_source.c"
+      ],
+      "builder_site": "portable/build.py:138",
+      "consumers": [
+        "src/root/m0093.c"
+      ],
+      "reason": "The source seed recurrence/order stays in the canonical TU; DOS CRT rand/srand, BIOS tick and physical 0x46c0 access become platform calls.",
+      "blocker": "Seed/tick provider remains a physical platform dependency; verify behavior through the existing bounded RNG receipts before any provider change.",
+      "deletion_condition": "Only remove after equivalent native CRT/tick/physical-memory services are supplied or source authority is moved into a shared platform implementation without duplicating the recurrence."
+    },
+    {
+      "id": "spider_inline_owner_view",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/spider_inline_source.py",
+        "portable/whole_program/algorithms/line16b5.c"
+      ],
+      "builder_site": "portable/build.py:139-142",
+      "consumers": [
+        "src/root/m0250.c"
+      ],
+      "reason": "Maps a same-address Pnt/data alias to the canonical pixel owner and adjusts pointer prototypes/casts for the byte-oriented native algorithm projection.",
+      "blocker": "Owner extent remains a canonical source fact; no new state allocation is created by the adapter.",
+      "deletion_condition": "Can be absorbed into a shared typed alias/view conversion only with byte-identical generated TU projection and unchanged line16b5 inputs."
+    },
+    {
+      "id": "timer_event_queue_owner_view",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/timer.py",
+        "portable/canonical_native_abi/m1b73_queue_source.py",
+        "portable/whole_program/types/timer.h",
+        "portable/whole_program/platform/m1b73_queue_source.c"
+      ],
+      "builder_site": "portable/build.py:143-149",
+      "consumers": [
+        "src/root/m1FD2.c"
+      ],
+      "reason": "Lifts Rect/Timer declarations to shared native types, widens the pointer-bearing descriptor, and maps historical queue aliases to selectors over the native representation.",
+      "blocker": "The actual queue capacities/owners remain governed by canonical state and current native preview limits.",
+      "deletion_condition": "Retire only after one source-derived native descriptor/queue representation supplies the same typed views; preserve the canonical input_queue owner and generated Event fields."
+    },
+    {
+      "id": "input_queue_header_generation",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/build.py:113-116",
+        "portable/whole_program/types/timer.h"
+      ],
+      "builder_site": "portable/build.py:113-116",
+      "consumers": [
+        "src/root/m1FD2.c"
+      ],
+      "reason": "Derives the native Event field widths from the canonical declaration and emits a pointer-widened Timer descriptor view.",
+      "blocker": "The header is generated from a brittle Event regex and fixed descriptor shape; keep fail-closed checks until a source-backed type parser or checked-in generated projection is proven equivalent.",
+      "deletion_condition": "Replace generation only after the generated header is byte-identical for the current canonical source and changes in Event shape fail explicitly."
+    },
+    {
+      "id": "runtime_storage_reservations",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/source_runtime_globals.py",
+        "portable/whole_program/platform/source_memory.c"
+      ],
+      "builder_site": "portable/build.py:150-151",
+      "consumers": [
+        "src/root/m1E57.c",
+        "src/S15/m384C.c"
+      ],
+      "reason": "Injects runtime reserve calls, failure returns/Punt behavior, and pointer-width storage for clipping and mono-pattern buffers into otherwise canonical source bodies.",
+      "blocker": "The temp clip buffer and mono pattern tail are among the unresolved source storage/capacity contracts; current reservations do not establish DOS ownership or extent.",
+      "deletion_condition": "Resolve canonical owner, extent, and lifetime first; then move allocation policy behind a narrowly typed service while retaining the source operation order."
+    },
+    {
+      "id": "audio_hardware_source_adapters",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/audio.py",
+        "portable/canonical_native_abi/source_views.py:translate_29d6_port_block",
+        "portable/whole_program/platform/audio*.c",
+        "portable/whole_program/platform/audio*.h"
+      ],
+      "builder_site": "portable/build.py:152-156",
+      "consumers": [
+        "src/root/m284A.c",
+        "src/root/m29F0.c",
+        "src/root/m277E.c",
+        "src/root/m29D6.c",
+        "src/root/m293A.c",
+        "src/root/m290D.c"
+      ],
+      "reason": "Replaces BIOS/port/interrupt/physical-memory access and DAC start/stop effects with explicit audio host/event services. m29D6 also translates hardware-register writes while retaining register arithmetic and write order.",
+      "blocker": "Several provider leaves are deliberately unprovided and audio mode/backend support remains a platform contract; do not replace them with success-shaped stubs.",
+      "deletion_condition": "Keep at the hardware boundary. Any arithmetic moved out of the adapter must stay sourced from the canonical ASM/C algorithm and preserve operation order."
+    },
+    {
+      "id": "audio_shared_state_views",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/audio_shared_state_preword.py",
+        "portable/whole_program/platform/audio_state.h"
+      ],
+      "builder_site": "portable/build.py:152-157",
+      "consumers": [
+        "src/root/m0000.c",
+        "src/root/m277E.c",
+        "src/root/m2815.c",
+        "src/root/m284A.c",
+        "src/root/m290D.c",
+        "src/root/m293A.c",
+        "src/root/m295C.c",
+        "src/root/m29D6.c",
+        "src/root/m29F0.c",
+        "src/data/d55B3_00B8.c"
+      ],
+      "reason": "Projects shared native audio record/pointer types over canonical C/ASM storage and removes repeated incompatible extern/struct spellings; it introduces no owner allocation.",
+      "blocker": "The two audio track-state arrays remain unproved storage imports; deferred scalar extern handling is intentional.",
+      "deletion_condition": "Consolidate only with the hardware adapters after a per-source projection comparison; keep the central audio_state.h as a native view, not a second state owner."
+    },
+    {
+      "id": "event_enqueue_arity_normalization",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/m1b73_event_source.py",
+        "portable/whole_program/platform/m1b73_event_enqueue.h"
+      ],
+      "builder_site": "portable/build.py:158",
+      "consumers": [
+        "src/S10/m35F5.c",
+        "src/S19/m384C.c"
+      ],
+      "reason": "Four-word calls are renamed to a helper that supplies zero for the fifth Event.v field, which the adapter says current consumers do not observe; five-word calls pass every value.",
+      "blocker": "This value normalization is not listed as its own portable preview limitation. The raw Event.v state can differ if another observer/caller reads it.",
+      "deletion_condition": "Prove full observer/caller closure for the supported runtime, or give Event.v an explicit canonical value at the source callsites; otherwise add a specific SEMANTIC/PORT-BLOCKING entry."
+    },
+    {
+      "id": "event_word_switch_casts",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/event_word_switch.py"
+      ],
+      "builder_site": "portable/build.py:159",
+      "consumers": [
+        "src/S19/m384C.c",
+        "src/root/m218D.c"
+      ],
+      "reason": "Adds unsigned-word casts so 16-bit event-code bit patterns survive native integer promotions; labels and branch bodies are unchanged.",
+      "blocker": "Covered by the native scalar expression-lowering scope limit; this local pass does not close the general integer-promotion blocker.",
+      "deletion_condition": "Fold into the proven generic word-expression converter only if generated output and switch control flow remain identical."
+    },
+    {
+      "id": "menu_handle_view_and_relocation",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/menu_s17_preword.py",
+        "portable/whole_program/platform/resource_menu_view.c",
+        "portable/whole_program/platform/handles.c"
+      ],
+      "builder_site": "portable/build.py:160-161",
+      "consumers": [
+        "src/S10/m35F5.c",
+        "src/S17/m384C.c"
+      ],
+      "reason": "Replaces the serialized far-pointer table with a native Handle/table view and removes the DOS offset-relocation traversal because host pointers are already relocated.",
+      "blocker": "Invalid native object views, OOM policy, zoom savedRect behavior, and unsupported resource domains remain open under the S26/window preview limitation; pointer owners also depend on unresolved storage.",
+      "deletion_condition": "Keep at the pointer representation boundary; remove added failure policy only after a complete native resource/owner domain is proven."
+    },
+    {
+      "id": "file_select_bios_one_floppy_policy_removal",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/file_select_host.py",
+        "portable/whole_program/platform/drive_directory.c"
+      ],
+      "builder_site": "portable/build.py:162-164",
+      "consumers": [
+        "src/S09/m35F5.c"
+      ],
+      "reason": "Deletes the BIOS equipment-byte read and the DOS rule that maps drive B to A on a one-floppy system.",
+      "blocker": "No matching preview limitation or evidence-backed native drive policy was found in portable/platform.json; current drive tests cover Windows path resolution, not physical one-floppy behavior.",
+      "deletion_condition": "Implement equivalent drive selection in the host drive service or record the unsupported physical-drive domain and evidence that the native UI cannot expose a mismatched B drive."
+    },
+    {
+      "id": "list_text_handle_view",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/list_text_handle.py",
+        "portable/whole_program/window_list_refs.c"
+      ],
+      "builder_site": "portable/build.py:165",
+      "consumers": [
+        "src/root/m23E6.c"
+      ],
+      "reason": "Maps 20 source text Handle field accesses to a typed native sidecar accessor; ordinary list algorithms remain in the canonical TU.",
+      "blocker": "Window resource/object-domain limits remain covered by the platform.json window exception.",
+      "deletion_condition": "Retire after source and host types share a pointer-width-aware declared view with equal generated output."
+    },
+    {
+      "id": "cache_table_native_width",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/cache_table_native.py"
+      ],
+      "builder_site": "portable/build.py:166",
+      "consumers": [
+        "src/root/m1A96.c"
+      ],
+      "reason": "Changes allocation/clear extents from hard-coded DOS pointer slots to offsetof/sizeof of the native CacheEntry layout; lookup/eviction code stays canonical.",
+      "blocker": "Only the reviewed two-bank layout is admitted; keep the exact anchor until the shared type owns both source and native sizes.",
+      "deletion_condition": "Can be folded into pointer-width allocation lowering once that lowering proves both native allocation and initialized/cleared byte extents."
+    },
+    {
+      "id": "s26_window_sidecar_lookup",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/s26_window_object_views_v1.py",
+        "portable/whole_program/window_refs.c"
+      ],
+      "builder_site": "portable/build.py:167",
+      "consumers": [
+        "src/S26/m39C7.c"
+      ],
+      "reason": "Redirects four object-table reads through a native registry and adds NULL/range guards before obtaining the object pointer.",
+      "blocker": "portable/platform.json explicitly states invalid NULL views remain faultable and native OOM/zoom savedRect policies are unresolved outside the reviewed shipped-resource domain.",
+      "deletion_condition": "Resolve registry owner, object extent, allocation failure, and caller behavior first; the guard is not evidence of DOS/native equivalence."
+    },
+    {
+      "id": "clip_stack_header_width",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/clip_stack_native.py"
+      ],
+      "builder_site": "portable/build.py:168",
+      "consumers": [
+        "src/root/m1E57.c"
+      ],
+      "reason": "Sizes two native Handle slots with sizeof instead of an 8-byte DOS constant while leaving clip Push/Pop order intact.",
+      "blocker": "The clip payload buffer itself remains an unproved storage import and is dynamically reserved by a separate temporary exception.",
+      "deletion_condition": "Fold into generic pointer-width allocation lowering only after the canonical clip node header type is shared."
+    },
+    {
+      "id": "crt_abi_names_and_ctype",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/crt_abi.py",
+        "portable/whole_program/platform/crt_abi.c",
+        "portable/whole_program/platform/dos_format.c"
+      ],
+      "builder_site": "portable/build.py:169",
+      "consumers": [
+        "src/root/m15F8.c",
+        "src/root/m1A28.c",
+        "src/root/m1C62.c",
+        "src/S09/m35F5.c",
+        "src/S20/m39F1.c",
+        "src/S23/m39C7.c"
+      ],
+      "reason": "Routes DOS CRT tables/error strings/hard-error registration through explicit native CRT policy and preserves source-width declarations.",
+      "blocker": "The adapter describes ASCII lowercase semantics and retired INT 24 delivery; confirm supported character/error domains before claiming full CRT equivalence.",
+      "deletion_condition": "Keep as a CRT boundary unless the native DOS CRT provider directly exports the complete DOS names and policies."
+    },
+    {
+      "id": "findindex_native_one_past_guard",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/findindex_native_guard.py"
+      ],
+      "builder_site": "portable/build.py:170",
+      "consumers": [
+        "src/root/m1986.c"
+      ],
+      "reason": "Adds a native early return before canonical index[count] predicate access.",
+      "blocker": "This is explicitly documented in portable/platform.json and evidence/canonical/native-findindex-boundary/: a neighboring allocation header can satisfy the original predicate in a bounded original execution. Natural reachability and heap-history equivalence remain unproved.",
+      "deletion_condition": "Keep blocker until ownership proves a safe sentinel/extent or the source contract is reviewed and the native/DOS domain is closed; do not promote the guard as canonical behavior."
+    },
+    {
+      "id": "font_native_layout",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/fonts.py",
+        "portable/canonical_native_abi/pointer_globals.py",
+        "portable/whole_program/types/fonts.h"
+      ],
+      "builder_site": "portable/build.py:171-172",
+      "consumers": [
+        "src/root/m25E7.c",
+        "src/root/m24AB.c",
+        "src/S13/m384C.c",
+        "src/root/m1629.c"
+      ],
+      "reason": "Shares the native Font/Bitmap type, widens pointer fields, and sizes the runtime FontHeader allocation from the converted type.",
+      "blocker": "portable/platform.json caps the admitted bitmap group at 1280 source-owned bytes; larger output is unsupported without source storage proof.",
+      "deletion_condition": "Retain native layout conversion. Expand capacities only after canonical source ownership and extent are proven."
+    },
+    {
+      "id": "shared_pointer_global_views",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/pointer_globals.py",
+        "portable/whole_program/conversions/pointer_globals.c"
+      ],
+      "builder_site": "portable/build.py:172",
+      "consumers": [
+        "src/root/m20E8.c",
+        "src/root/m23AE.c",
+        "src/root/m22BF.c",
+        "src/root/m2505.c",
+        "src/root/m1A53.c",
+        "src/root/m24AB.c",
+        "src/root/m1629.c"
+      ],
+      "reason": "Binds compatible pointer aliases and tables, but also removes unsized DOS win_handles/db_handles/font externs in favor of native fixed tables.",
+      "blocker": "The 45-entry window handle capacity and the eleven unproved source storage imports remain explicit preview limits; the four database handle slots and four font slots have narrower source anchors.",
+      "deletion_condition": "Keep only typed views backed by canonical owners; remove fixed capacities after complete source extent/lifetime proof."
+    },
+    {
+      "id": "window_source_and_loader_views",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/windows.py",
+        "portable/canonical_native_abi/window_loader.py",
+        "portable/whole_program/window_refs.c",
+        "portable/whole_program/window_source_globals.c"
+      ],
+      "builder_site": "portable/build.py:173-175",
+      "consumers": [
+        "src/root/m2505.c",
+        "src/root/m20E8.c",
+        "src/root/m23AE.c",
+        "src/root/m22BF.c",
+        "src/root/m21FA.c",
+        "src/root/m218D.c",
+        "all canonical C TUs with shared window globals"
+      ],
+      "reason": "Maps DOS wire offsets and far-pointer tables into native sidecar registries; loader conversion adds fixed-capacity/color reservation checks and Punt/return behavior.",
+      "blocker": "portable/platform.json documents win_Swap raw stack-residue normalization, custom resource domains, invalid S26 view faults, OOM policy, and unproved window handle/color storage. Some added error paths therefore remain preview behavior.",
+      "deletion_condition": "Keep ABI views; do not remove or generalize capacity/failure behavior until source owners, resource-domain coverage and failure semantics are proved."
+    },
+    {
+      "id": "varargs_lowering",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/varargs.py",
+        "portable/whole_program/platform/dos_format.c"
+      ],
+      "builder_site": "portable/build.py:176",
+      "consumers": [
+        "canonical C TUs containing DOS stack-cursor formatting calls; notably window formatting sources"
+      ],
+      "reason": "Replaces DOS parameter-stack address cursors with native va_list handling and fixed-width DOS formatting services, rejecting unsupported source forms.",
+      "blocker": "Keep the 16-bit formatting provider contract and source parameter-width handling explicit; no DOS variadic behavior claim is made outside supported forms.",
+      "deletion_condition": "Keep until the native DOS formatting ABI supports all canonical callers without stack-cursor rewriting."
+    },
+    {
+      "id": "keyboard_bios_read",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/build.py:177",
+        "portable/whole_program/platform/m1b73_mouse.c",
+        "portable/whole_program/platform/sdl3/m1b73_application_input.c"
+      ],
+      "builder_site": "portable/build.py:177",
+      "consumers": [
+        "any canonical C TU reading physical address 0x417"
+      ],
+      "reason": "Maps the BIOS keyboard modifier byte to the native input service.",
+      "blocker": "Physical keyboard state is intentionally supplied by SDL/native input; verify modifier bit mapping at that service boundary.",
+      "deletion_condition": "Keep at the keyboard hardware boundary."
+    },
+    {
+      "id": "code_alias_and_thunk_folding",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/build.py:99-105",
+        "portable/build.py:178",
+        "src/program.json",
+        "src/root/m2CFB.asm"
+      ],
+      "builder_site": "portable/build.py:99-105,178",
+      "consumers": [
+        "all canonical C TUs referencing registered code aliases or ASM tail thunks"
+      ],
+      "reason": "Resolves registered code aliases and simple canonical ASM jump thunks to the single native function owner.",
+      "blocker": "Alias closure must continue to derive only from src/program.json and symbolic canonical ASM; no hand-selected body/source owner.",
+      "deletion_condition": "Keep unless the native link layer gains source-derived linker aliases with the same ownership map."
+    },
+    {
+      "id": "word_expression_islands",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/word_islands.py"
+      ],
+      "builder_site": "portable/build.py:179-182",
+      "consumers": [
+        "every canonical C TU"
+      ],
+      "reason": "Wraps closed, explicitly typed DOS unsigned-word additions/comparisons where native integer promotion changes the result; unknown expression forms remain unchanged.",
+      "blocker": "portable/platform.json explicitly leaves declaration-driven wrapping, products/division, shifts, macro expressions, and general literal typing open.",
+      "deletion_condition": "Expand only with positive controls and negative contrasts for each new type/operator class; do not treat the current bounded converter as global 16-bit C semantics."
+    },
+    {
+      "id": "scalar_type_lowering",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/scalar.py",
+        "portable/canonical_native_abi/tokenizer.py"
+      ],
+      "builder_site": "portable/build.py:183",
+      "consumers": [
+        "every canonical C TU"
+      ],
+      "reason": "Converts declared DOS scalar widths and removes memory-model/calling-convention keywords while preserving 16-bit packing pragmas.",
+      "blocker": "Storage/parameter/cast widths are mechanical; this does not establish C expression promotion equivalence, which remains in the platform blocker.",
+      "deletion_condition": "Keep the narrow type pass; pair with word_islands only as one ordered orchestration API, retaining distinct fail-closed behavior and receipts."
+    },
+    {
+      "id": "load_string_pointer_allocation_width",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/load_string_ant.py"
+      ],
+      "builder_site": "portable/build.py:184",
+      "consumers": [
+        "src/root/m075B.c"
+      ],
+      "reason": "Changes one DOS 4-byte far-pointer-table allocation formula to sizeof the native pointer element; data parsing/order is unchanged.",
+      "blocker": "One shape-pinned case only; no generic allocation-size pass is established.",
+      "deletion_condition": "Absorb into generic pointer-width layout lowering only with a proof that the converted element count/extent stays the same."
+    },
+    {
+      "id": "dos_runtime_symbol_centralization",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/source_views.py:centralize",
+        "portable/whole_program/platform/dos_io.c",
+        "portable/whole_program/platform/dos_memory.c",
+        "portable/whole_program/platform/dos_format.c"
+      ],
+      "builder_site": "portable/build.py:185",
+      "consumers": [
+        "every canonical C TU"
+      ],
+      "reason": "Renames DOS CRT/file/memory entry points into explicit native DOS service symbols and removes incompatible old prototypes.",
+      "blocker": "I/O mode, errno, word-sized result, allocator and CRT contracts remain bounded as documented by the respective providers.",
+      "deletion_condition": "Keep until the native service layer directly exposes the canonical DOS ABI without a shadow name mapping."
+    },
+    {
+      "id": "data_alias_identity_views",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/build.py:108-110,186",
+        "src/program.json"
+      ],
+      "builder_site": "portable/build.py:108-110,186",
+      "consumers": [
+        "all canonical C TUs referencing registered data aliases"
+      ],
+      "reason": "Maps data aliases to registered source owners; aliases with nonzero interior offsets are handled by explicit typed interior views instead.",
+      "blocker": "All owner/alias facts must remain sourced from src/program.json and canonical storage definitions.",
+      "deletion_condition": "Keep unless source-derived native symbols can represent aliases and interior offsets directly."
+    },
+    {
+      "id": "canonical_owner_typed_views",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/source_views.py:canonical_interior_views",
+        "portable/canonical_native_abi/source_views.py:audio_overlap_views",
+        "portable/canonical_native_abi/source_views.py:graphics_canonical_views",
+        "portable/canonical_native_abi/source_views.py:screen_clip_canonical_views",
+        "portable/canonical_native_abi/source_views.py:edit_cache_view",
+        "portable/canonical_native_abi/source_views.py:callback_views",
+        "portable/whole_program/canonical views and platform headers"
+      ],
+      "builder_site": "portable/build.py:187-194",
+      "consumers": [
+        "canonical C TUs that reference registered aliases, shared graphics/audio/menu/window owners, callback slots, or packed edit-cache state"
+      ],
+      "reason": "Projects field/array/pointer views over canonical owners and native-width callback/resource tables; it does not create a second ordinary game-state owner.",
+      "blocker": "Some backing storage capacities and overlapping source imports remain open in platform.json. The views must not be used to infer unproved extents.",
+      "deletion_condition": "Potentially consolidate into a declarative alias/view table, but only after generated-source parity and explicit offset/extent checks; preserve each current view's ownership evidence."
+    },
+    {
+      "id": "menu_title_runtime_reservation",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/source_views.py:menu_native_memory",
+        "portable/whole_program/platform/source_memory.c"
+      ],
+      "builder_site": "portable/build.py:190",
+      "consumers": [
+        "src/root/m1FD2.c",
+        "src/S17/m384C.c"
+      ],
+      "reason": "Inserts a title-count walk and native reserve call into the canonical source path, then adds a new early return on allocation failure.",
+      "blocker": "The original menu title owner/capacity and overlapping x/width storage are not fully proven; this changes failure behavior in the source path.",
+      "deletion_condition": "Resolve canonical title storage/extent and move only host allocation policy behind an explicit service without adding unreviewed game control flow."
+    },
+    {
+      "id": "audio_extern_cleanup",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/build.py:191-193",
+        "portable/canonical_native_abi/source_views.py:edit_cache_view"
+      ],
+      "builder_site": "portable/build.py:191-193",
+      "consumers": [
+        "canonical C TUs referencing audio state and fd_50F6_15C4"
+      ],
+      "reason": "Drops duplicate extern spellings after canonical audio owner views are applied and turns the edit cache into a byte/word union over the same 1200-word owner.",
+      "blocker": "Audio arrays and edit-cache extents remain controlled by canonical storage records; no capacity expansion is justified here.",
+      "deletion_condition": "Keep only as long as the historical source declarations conflict with native shared view types."
+    },
+    {
+      "id": "countdown_host_service",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/countdown_host.py",
+        "portable/whole_program/platform/m1b73_countdown.c",
+        "portable/whole_program/platform/pit_clock.c"
+      ],
+      "builder_site": "portable/build.py:195",
+      "consumers": [
+        "src/root/m208F.c"
+      ],
+      "reason": "Redirects the canonical ASM countdown word to a native BIOS-clock-backed countdown service; tick decrement and wait behavior are documented in the adapter.",
+      "blocker": "The clock service defines the native tick and wait policy; preserve it as a platform boundary and test its supported event/presentation behavior separately.",
+      "deletion_condition": "Keep while the DOS timer/interrupt implementation is unavailable to the native host."
+    },
+    {
+      "id": "cache_release_callback_normalization",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/source_views.py:unused_cache_release_argument",
+        "portable/whole_program/platform/handles.c"
+      ],
+      "builder_site": "portable/build.py:196",
+      "consumers": [
+        "src/root/m00F8.c"
+      ],
+      "reason": "Adapts a one-callback DOS cache hook API to the native two-callback prototype by supplying a null release callback; removes an unused entry argument from a native call.",
+      "blocker": "This assumes the null release callback is the correct native policy for the original one-callback callsite.",
+      "deletion_condition": "Use a native wrapper that exposes the source one-callback contract, or keep the adapter with an explicit null-release contract."
+    },
+    {
+      "id": "window_optional_parameter_abi",
+      "class": "TEMPORARY_EXCEPTION",
+      "paths": [
+        "portable/canonical_native_abi/window_parameters.py",
+        "portable/whole_program/window_parameters.c",
+        "portable/whole_program/window_parameters.h"
+      ],
+      "builder_site": "portable/build.py:197",
+      "consumers": [
+        "src/root/m20E8.c",
+        "src/root/m22BF.c",
+        "all canonical C TUs calling win_Open, win_DoProxMenu, or win_Swap"
+      ],
+      "reason": "One combined pass now owns win_Open, win_DoProxMenu, and win_Swap rewriting. It replaces unsafe reads from caller stack words with explicit supplied counts/slots and native registry validation.",
+      "blocker": "The current platform limitation records native zero normalization for omitted parameters; win_Swap stores four caller stack-residue words in DOS. Custom caller/resource domains remain unsupported. The source-named Punt/unlock/return paths also impose native failure behavior.",
+      "deletion_condition": "Keep the one-pass consolidation. Retire zero normalization or added failure policy only when canonical call contracts and full resource/caller domains establish equivalent values and failure behavior."
+    },
+    {
+      "id": "newgame_fastcall_argument_recovery",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/canonical_native_abi/newgame_zoom_window_v1.py"
+      ],
+      "builder_site": "portable/build.py:198",
+      "consumers": [
+        "src/S15/m384C.c",
+        "src/root/m20E8.c",
+        "src/root/m22BF.c",
+        "src/S26/m39C7.c"
+      ],
+      "reason": "Makes the two source-proven AX=0 fastcall window arguments explicit at the native callsites after the word lowering pass.",
+      "blocker": "The evidence is callsite/resource-context specific; platform.json still leaves zoom savedRect behavior unsupported outside the reviewed shipped-resource domain.",
+      "deletion_condition": "Keep until a general source-derived fastcall/register-argument lowering preserves these values; do not broaden to other no-argument calls from analogy."
+    },
+    {
+      "id": "database_native_wire_types",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/build.py:201-214",
+        "portable/whole_program/types/database.h",
+        "portable/canonical_native_abi/pointer_globals.py"
+      ],
+      "builder_site": "portable/build.py:201-214",
+      "consumers": [
+        "src/root/m1986.c",
+        "src/root/m19A9.c",
+        "src/root/m1A28.c",
+        "src/state/database-record-state.c",
+        "src/state/database-index-state.c"
+      ],
+      "reason": "Uses native runtime pointer-bearing structures while retaining wire record byte widths; database owner pointers are widened only in native views.",
+      "blocker": "Do not infer record extents, unproved storage imports, or whole database runtime equivalence from the type header alone.",
+      "deletion_condition": "Keep the native/wire distinction until the canonical type system has an explicit shared wire/runtime declaration that works under DOS and native compilers."
+    },
+    {
+      "id": "database_state_tu_truncation",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/build.py:205-214",
+        "src/state/database-record-state.c",
+        "src/state/database-index-state.c"
+      ],
+      "builder_site": "portable/build.py:205-214",
+      "consumers": [
+        "source-owned:database-record-state",
+        "source-owned:database-index-state"
+      ],
+      "reason": "Drops the canonical typedef prefix from two storage TUs and keeps the owner declaration after injecting portable/whole_program/types/database.h. It is a type/view adaptation, but it makes the native compiled projection depend on duplicate portable type definitions.",
+      "blocker": "The generated native view changes pointer widths by design; byte-for-byte DOS/native layout identity is not the target for these pointer-bearing runtime records.",
+      "deletion_condition": "Consider moving shared canonical wire/runtime type facts to an explicit source-derived type definition only after DOS whole-TU compilation and native projection both retain current extents and owner declarations."
+    },
+    {
+      "id": "native_include_and_pack_injection",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/build.py:216-224",
+        "portable/build.py:120-123"
+      ],
+      "builder_site": "portable/build.py:216-224",
+      "consumers": [
+        "every converted canonical C TU"
+      ],
+      "reason": "Extracts converted portable includes, supplies the common DOS service/type headers, adds selected platform prototypes, and wraps converted sources in 2-byte packing.",
+      "blocker": "Header selection contains module-specific clauses; preserve those declarations and packing assumptions when consolidating the build pipeline.",
+      "deletion_condition": "A manifest-driven include table is safe if the generated source projection is identical and every source-level include remains attributable to a declared service/type view."
+    },
+    {
+      "id": "physical_heap_tu_exclusion",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/build.py:226",
+        "portable/whole_program/platform/dos_memory.c",
+        "portable/whole_program/platform/ems_host.c"
+      ],
+      "builder_site": "portable/build.py:226-228,252",
+      "consumers": [
+        "src/root/m171C.c"
+      ],
+      "reason": "The native build does not compile the canonical physical DOS heap TU; native allocation/EMS providers implement the platform boundary while canonical source remains DOS authority.",
+      "blocker": "portable/platform.json explicitly leaves full heap-history equivalence, shared metadata, paragraph copying, flags/counters, 16-bit limits, physical/EMS layout and failure policy open.",
+      "deletion_condition": "Keep as a named platform boundary until those heap contracts are closed; do not recast native allocator code as ordinary canonical game logic."
+    },
+    {
+      "id": "symbolic_asm_data_translation",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/canonical_native_abi/asm_data.py",
+        "portable/whole_program/algorithms/**",
+        "portable/whole_program/platform/graphics_s00_*.c",
+        "portable/whole_program/platform/graphics_line_1499.c",
+        "portable/whole_program/platform/bios_fonts.c"
+      ],
+      "builder_site": "portable/build.py:232-249",
+      "consumers": [
+        "src/root/m1B73.asm",
+        "src/root/m1B4E.asm",
+        "src/root/m28BC.asm",
+        "src/S02/m3126.asm",
+        "src/root/m195A.asm",
+        "src/root/m2650.asm",
+        "src/root/m1FBD.asm",
+        "other canonical ASM TUs represented by readable algorithm/platform projections"
+      ],
+      "reason": "Extracts values/fixup facts only from symbolic canonical ASM directives and emits native data/algorithm projections where the host compiler cannot assemble DOS instructions.",
+      "blocker": "Keep projections readable and source-derived; no original object bytes, image bytes, hidden capacities, or alternate C game model may enter this path.",
+      "deletion_condition": "Keep the ASM translation boundary; absorb a projection into canonical C only through reviewed source correction and codegen/evidence consequences, never by hiding it in a host layer."
+    },
+    {
+      "id": "platform_services_and_application",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/platform.json",
+        "portable/whole_program/application.c",
+        "portable/whole_program/platform/**",
+        "portable/platform/**",
+        "portable/render/**",
+        "portable/audio/**"
+      ],
+      "builder_site": "portable/build.py:228-304",
+      "consumers": [
+        "all canonical native objects and the SDL3 application"
+      ],
+      "reason": "The 78 listed providers implement host memory/handles, files/directories, time/input, fonts, video and audio. application.c owns SDL setup, host event transport, presentation and the bounded replay hooks.",
+      "blocker": "Service inventory is broad and explicit; preview limitations in portable/platform.json remain the acceptance boundary. No second ordinary game-state owner/model was found in the inspected architecture.",
+      "deletion_condition": "Keep the manifest as the service inventory. Remove a provider only after proving no generated canonical TU, service object, application link, or isolated test consumes it."
+    }
+  ],
+  "dispositions": [
+    {
+      "paths": [
+        "src/**",
+        "layout/**",
+        "dos/**"
+      ],
+      "disposition": "KEEP",
+      "reason": "Single current semantic inventory, exact historical authority and independent DOS build."
+    },
+    {
+      "paths": [
+        "portable/**"
+      ],
+      "disposition": "PLATFORM_BOUNDARY",
+      "reason": "Current whole-source lowering and native services; exceptions remain explicit."
+    },
+    {
+      "paths": [
+        "tests/**",
+        "portable/tests/**",
+        "evidence/codegen/**",
+        "evidence/canonical/semantic/**"
+      ],
+      "disposition": "KEEP",
+      "reason": "Permanent regressions and accepted full static/byte proof gates."
+    },
+    {
+      "paths": [
+        "build/deps/**"
+      ],
+      "disposition": "KEEP",
+      "reason": "Reusable local pinned SDK, VM wheel and period compiler copies."
+    },
+    {
+      "paths": [
+        "build/current/**"
+      ],
+      "disposition": "GENERATE_IN_BUILD_ONLY",
+      "reason": "Single replaceable output per build/test category."
+    },
+    {
+      "paths": [
+        "build/workers/cleanup_*"
+      ],
+      "disposition": "KEEP",
+      "reason": "Disposable scratch for the current consolidation until completion."
+    },
+    {
+      "paths": [
+        "build/* (old generations)",
+        "build/workers/* (closed tasks)"
+      ],
+      "disposition": "MOVE_TO_DELETE",
+      "reason": "Reproducible stale outputs and superseded research; independent proof is published."
+    },
+    {
+      "paths": [
+        "docs/consolidation.md",
+        "docs/source-followup.md",
+        "docs/canonical-semantic-oracle-v2.md",
+        "docs/dos-semantic-oracle-v1.md"
+      ],
+      "disposition": "MERGE",
+      "reason": "Current architecture/status replace duplicated histories; immutable checkpoints live in Git."
+    },
+    {
+      "paths": [
+        "tools/rename.py",
+        "tools/runtime.py accept branch"
+      ],
+      "disposition": "MOVE_TO_DELETE",
+      "reason": "Obsolete canonical mutators bypass the single current inventory writer."
+    },
+    {
+      "paths": [
+        "portable/canonical_native_abi/window_parameter_abi_v1.py",
+        "portable/canonical_native_abi/window_swap_parameter_abi_v2.py"
+      ],
+      "disposition": "MERGE",
+      "reason": "One optional-word lowering pass shares the actual lexical/call machinery."
+    },
+    {
+      "paths": [
+        "evidence/canonical/viewport-layout/receipt.json",
+        "evidence/canonical/native-window-boundary/installed-correspondence.json"
+      ],
+      "disposition": "REPLACE",
+      "reason": "Superseded replay and migration correspondence replaced by current direct regression/projection proof."
+    },
+    {
+      "paths": [
+        "evidence/canonical/blockers.json",
+        "portable/platform.json preview_limitations"
+      ],
+      "disposition": "UNRESOLVED_BLOCKER",
+      "reason": "Current uncertainty must remain explicit; no cleanup admits guessed semantics."
+    }
+  ],
+  "role_roots": {
+    "tools/": "Reconstruction workflow and diagnostics (CLI or imported helper)",
+    "tests/": "Permanent acceptance/negative controls",
+    "evidence/": "Reviewed proof, toolchain facts or explicit unresolved investigation",
+    "layout/": "Locked historical metadata/current proof and architecture policy",
+    "portable/tests/": "Current native differential/runtime fixtures",
+    "portable/runtime/": "Pinned native BIOS font resources",
+    "portable/whole_program/platform/tests/": "Permanent filesystem/handle service controls"
+  }
+}

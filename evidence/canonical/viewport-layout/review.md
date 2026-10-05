@@ -10,7 +10,7 @@ authorize a source correction.
 The runner uses current whole module files and the current support tools, verifies
 each source against src/program.json, compiles with the pinned period compiler,
 and differentially executes the bodies against the original hash-locked DOS
-executable. receipt.json pins sources, both compiled objects and linked code,
+executable. resize-receipt-current.json pins sources, both compiled objects and linked code,
 program/manifest read-time hashes, assets, packet files and imported tool files.
 resource-observation.json contains decoded metadata only. The receipt grants no
 acceptance and records the tested boundaries explicitly.
@@ -20,11 +20,11 @@ They locate the repository dynamically, disable import bytecode writes and do
 not write evidence or canonical files. The resize runner also observes resources;
 the resource runner is available for an independent metadata-only check. Runtime
 requirements are the current tools/behavior.py dependencies, its pinned Unicorn
-environment under build/behavior/deps, and the current pinned compiler profile.
+environment under build/deps/unicorn, and the current pinned compiler profile.
 
 ```
-python evidence/canonical/viewport-layout/resize_probe.py --out build/viewport-layout-current-001
-python evidence/canonical/viewport-layout/resources_probe.py --out build/viewport-layout-resources-001
+python evidence/canonical/viewport-layout/resize_probe.py --out build/current/tests/viewport
+python evidence/canonical/viewport-layout/resources_probe.py --out build/workers/viewport-proof/resources
 ```
 
 ## Conditional cursor/control invariant

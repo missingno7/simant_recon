@@ -33,7 +33,7 @@ No canonical file, inventory, manifest, oracle lock or promotion journal was cha
 
 ## Fresh experiments
 
-Run `python evidence/canonical/hotbox-owner/replay.py --out build/hotbox-owner-current`.
+Run `python evidence/canonical/hotbox-owner/replay.py --out build/scratch/hotbox-owner-current`.
 The parent independently reran the canonical, trailing typed definition, separate
 contribution and front-definition contrast. All seven checks passed. The current
 `receipt.json` pins those inputs and records complete code/fixup/public projection

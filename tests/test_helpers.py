@@ -19,7 +19,7 @@ import records  # noqa: E402
 import slots  # noqa: E402
 import variants  # noqa: E402
 
-TMP = ROOT / "build" / "helpers" / "tests"
+TMP = ROOT / "build" / "scratch" / "helpers" / "tests"
 
 
 def run_main(fn, argv):

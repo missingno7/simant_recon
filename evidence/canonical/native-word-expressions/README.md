@@ -47,9 +47,9 @@ The target is untouched and never extracted. Separate unmodified complete-TU
 compiles provide the peer/storage control. No object or executable is patched.
 
 ```powershell
-python evidence/canonical/native-word-expressions/generic_controls.py --out build/word-controls-fresh
-python portable/build.py --out build/native-word-build-fresh
-python evidence/canonical/native-word-expressions/replay.py --build build/native-word-build-fresh --out build/word-probe-fresh
+python evidence/canonical/native-word-expressions/generic_controls.py --out build/scratch/word-controls-fresh
+python portable/build.py --out build/scratch/native-word-build-fresh
+python evidence/canonical/native-word-expressions/replay.py --build build/scratch/native-word-build-fresh --out build/scratch/word-probe-fresh
 ```
 
 Outputs must be fresh beneath build/. Receipts retain the parent's actual runs.

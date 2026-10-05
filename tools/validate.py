@@ -57,6 +57,10 @@ def main() -> int:
                     help="skip the compile-only FAR_BSS declaration probes (tools/farbss.py probe_declarations)")
     a = ap.parse_args()
     failures = []
+    import repository
+    architecture = repository.audit(ROOT / 'layout/repository.json')
+    print('repository architecture:', 'PASS' if architecture['passed'] else 'FAIL')
+    failures.extend('architecture: ' + str(issue) for issue in architecture['issues'])
 
     r = subprocess.run([sys.executable, str(ROOT / "tools" / "oracle.py")], capture_output=True, text=True)
     print(r.stdout.strip())
@@ -299,7 +303,7 @@ def main() -> int:
                 accepted_spans |= {(mrow["linear"], mrow["size"])} | {(e["linear"], e["size"]) for e in extra}
             elif r is not None:
                 failures.append(f"runtime member {mrow['member']} binds with other segments than accepted "
-                                f"(re-run tools/runtime.py accept)")
+                                f"(re-prove runtime binding; reviewed publication belongs in tools/promote.py)")
             else:
                 failures.append(f"runtime member {mrow['member']} no longer binds")
         for lib, info in man["runtime"]["libraries"].items():

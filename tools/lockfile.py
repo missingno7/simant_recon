@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-LOCK = ROOT / "build" / "canonical.lock"
+LOCK = ROOT / "build" / "locks" / "canonical.lock"
 
 
 def _alive(pid: int) -> bool:

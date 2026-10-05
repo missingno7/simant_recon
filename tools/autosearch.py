@@ -43,7 +43,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
-SCRATCH = ROOT / "build" / "helpers" / "autosearch"
+SCRATCH = ROOT / "build" / "scratch" / "helpers" / "autosearch"
 
 try:
     import capstone  # noqa: F401

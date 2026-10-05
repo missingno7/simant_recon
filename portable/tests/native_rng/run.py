@@ -156,13 +156,14 @@ def oracle(root, out):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report',type=Path,required=True,help='Completed current native build report.json')
-    parser.add_argument('--out',type=Path,required=True)
+    parser.add_argument('--out',type=Path,default=HERE.parents[2]/'build/current/tests/rng')
     parser.add_argument('--nm',help='nm compatible with the report compiler')
     args=parser.parse_args()
     root=next(p for p in HERE.parents if (p/'src/program.json').is_file())
-    report_path=args.report.resolve();out=args.out.resolve()
-    if out.exists():raise ValueError('fresh output directory required')
-    out.mkdir(parents=True)
+    report_path=args.report.resolve();out=args.out.absolute()
+    sys.path.insert(0,str(root/'tools'))
+    from workspace import prepare_output
+    prepare_output(out,root/'build/current/tests/rng',root)
     report=json.loads(report_path.read_text())
     if report.get('schema')!='canonical-native-complete-attempt-v1':raise ValueError('unsupported current native build report')
     if not report.get('passed') or not report['input_stability']['at_end']:

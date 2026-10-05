@@ -4,8 +4,8 @@ Replay with a current complete native conversion report in a fresh result folder
 
 ```powershell
 python portable/tests/native_database/run.py `
-  --conversion build/portable-sdl3 `
-  --out build/native-database
+  --conversion build/current/portable `
+  --out build/current/tests/database
 ```
 
 The adjacent fixtures are self-contained test logic. The current build report

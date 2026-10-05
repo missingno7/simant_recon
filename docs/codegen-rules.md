@@ -45,7 +45,7 @@ not depend on that retired research tree.
 ## Observations not yet promoted to rules
 
 * **NAME-1 RETRACTED (2026-09-30).** A supposed "identifier spelling changes codegen" effect was
-  a bug in tools/rename.py (new names were not registered before re-proving). Worker "names"
+  a bug in the retired renamer (Git 0eab5e5:tools/rename.py) (new names were not registered before re-proving). Worker "names"
   showed the object code of root:0F3F is byte-identical under original names and under random
   respellings of all 142 identifiers; what moves code is the identifier *count* (below).
 * **Inline `_asm` without C return value** (SRand2..SRand256): the original bodies leave
@@ -199,7 +199,7 @@ not depend on that retired research tree.
   partial source placed f_295C_0391 last, so it could not settle the whole-file debug option.
 * **Identifier spelling can change code in the `_fastcall` module 2505**: renaming
   win_WinRectAddr (2505:025F) to its address name changes the code of win_WinAddr and win_ObjAddr,
-  so rename.py keeps the old name (supervisor, 2026-09-30). This is a third instance of
+  so the historical renamer kept the old name (supervisor, 2026-09-30). This is a third instance of
   name-dependent code generation, after NAME-3 (/Od) and NAME-4 (`_asm`).
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).

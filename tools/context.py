@@ -136,7 +136,7 @@ def frame_info(f: dict) -> dict:
 
 
 def inventory_edges():
-    p = ROOT / "build" / "inventory" / "functions.json"
+    p = ROOT / "build" / "current" / "inventory" / "functions.json"
     if not p.exists():
         return {}
     return {f"{r['unit']}:{r['linear']:05X}": r for r in json.loads(p.read_text())["functions"]}
@@ -175,7 +175,7 @@ def show(func: str, raw: bool, no_asm: bool):
                  f"{f['unit']}:{f['seg']:04X}:{f['off']:04X}"]
         for p in pairs[:5]:
             print(f"  win16: {p['win16']} [{p['confidence']}] {'; '.join(p.get('evidence', [])[:3])}")
-    best = ROOT / "build" / "search" / f["name"] / "best.json"
+    best = ROOT / "build" / "scratch" / "search" / f["name"] / "best.json"
     if best.exists():
         b = json.loads(best.read_text())
         print(f"  best draft: build/search/{f['name']}/best.c  {b['status']} ratio {b.get('opcode_ratio')}")

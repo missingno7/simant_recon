@@ -1,7 +1,6 @@
-"""Accept authentic historical runtime library members (HISTORICAL_RUNTIME ownership).
+"""Verify authentic historical runtime library members (HISTORICAL_RUNTIME ownership).
 
-    python tools/runtime.py verify            # bind every located member, report
-    python tools/runtime.py accept            # verify and record accepted members in layout/manifest.json
+    python tools/runtime.py                   # verify pinned historical members; never publishes
 
 A member is the complete OMF module from a pinned library file (hash in
 layout/toolchain.json "libraries").  Its code segment is compared at the location
@@ -688,7 +687,7 @@ def accepted_data_segments(man: dict) -> list[dict]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["verify", "accept"])
+
     a = ap.parse_args()
     results, derived, conflicts, anchors = verify_all()
     ok = [r for r in results if r["exact"]]
@@ -702,7 +701,7 @@ def main() -> int:
         print("placement conflicts:", json.dumps(conflicts)[:600])
     single = [k for k, n in anchors.items() if n == 1]
     print(f"derived placements {len(derived)}, single-anchor {len(single)}")
-    out = ROOT / "build" / "runtime" / "verify.json"
+    out = ROOT / "build" / "current" / "runtime" / "verify.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"results": results, "conflicts": conflicts, "data": verify_data(results, derived),
                                "placements": {k: {hex(v): [f"{m}@{s:05X}" for m, s in u] for v, u in vals.items()}
@@ -719,37 +718,6 @@ def main() -> int:
         print(f"  near communal {n} ({c['member']}, {c['size']} bytes) at DGROUP:{c['linear'] - DGROUP * 16:04X}: "
               f"{'derived from ' + str(len(c['anchors'])) + ' agreeing anchors' if c['exact'] else 'NOT PLACED'} "
               f"({', '.join(c['anchors'][:4])}){'; ' + '; '.join(c['reasons']) if c['reasons'] else ''}")
-    if a.cmd == "accept":
-        from lockfile import CanonicalLock
-        import modules as modmod
-        with CanonicalLock():
-            man = modmod.load_manifest()
-            lost = {(m["member"], m["linear"]) for m in man.get("runtime", {}).get("members", [])} - \
-                {(r["member"], r["linear"]) for r in ok}
-            if lost:
-                raise SystemExit(f"refusing to drop accepted members that no longer bind: {sorted(lost)}")
-            data_ok = [d for d in data_rows if d["exact"]]
-            lost_d = {(d["member"], d["segment"], d["linear"]) for d in accepted_data_segments(man)} - \
-                {(d["member"], d["segment"], d["linear"]) for d in data_ok}
-            if lost_d:
-                raise SystemExit(f"refusing to drop accepted runtime data segments that no longer verify: {sorted(lost_d)}")
-
-            def dsegs(member):
-                return [{"segment": d["segment"], "linear": d["linear"], "size": d["size"], "rule": d["rule"]}
-                        for d in data_ok if d["member"] == member]
-            man["runtime"] = {"libraries": {k: {"path": p, "sha256": sha(Path(p).read_bytes())} for k, p in LIBS.items()},
-                              "members": [{**{k: r[k] for k in ("library", "member", "module_index", "linear", "size",
-                                                                "segment", "member_sha256")},
-                                           **({"extra_segments": r["extra_segments"]} if r["extra_segments"] else {}),
-                                           **({"data_segments": dsegs(r["member"])} if dsegs(r["member"]) else {})}
-                                          for r in ok],
-                              "data_members": [{"library": d["library"], "member": d["member"],
-                                                "module_index": d["module_index"], "member_sha256": d["member_sha256"],
-                                                "data_segments": dsegs(d["member"])}
-                                               for d in {d["member"]: d for d in data_ok if not d["code_member"]}.values()]}
-            modmod.write_manifest(man)
-        print(f"accepted {len(ok)} runtime members into layout/manifest.json")
-        return 0
     return 0 if len(ok) == len(results) else 1
 
 

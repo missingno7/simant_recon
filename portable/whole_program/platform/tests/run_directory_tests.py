@@ -100,22 +100,17 @@ def assert_packed_time(result: FindT, expected_local: datetime) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out", required=True,
-                        help="new fixture/build directory under build/workers")
+    parser.add_argument("--out", default="build/current/tests/directory",
+                        help="disposable current output or fresh experiment path")
     parser.add_argument("--gcc", default=str(GCC_DEFAULT))
     args = parser.parse_args()
-    work = (ROOT / args.out).resolve()
-    workers = (ROOT / "build/workers").resolve()
+    work = (ROOT / args.out).absolute()
     receipt = work / "receipt.json"
-    if workers not in work.parents:
-        raise SystemExit("--out must be a child directory under build/workers")
-    if work.exists():
-        raise SystemExit(f"refusing to overwrite work directory: {work}")
-    if receipt.exists():
-        raise SystemExit(f"refusing to overwrite receipt: {receipt}")
     if os.name != "nt":
         raise SystemExit("Win32 native FindFirstFile provider is unsupported on this host")
-    work.mkdir(parents=True)
+    sys.path.insert(0,str(ROOT/'tools'))
+    from workspace import prepare_output
+    prepare_output(work,ROOT/'build/current/tests/directory',ROOT)
     files_dir = work / "fixture"
     files_dir.mkdir()
 

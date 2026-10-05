@@ -2,8 +2,9 @@
 
 The parent accepts the fixture repair and its finite corroboration. Canonical
 allocator definitions, strict static receipts, inventory, manifest and published
-checkpoints remain unchanged. The published replay reports FIXTURE_CONTRACT_VERIFIED. The earlier worker
-receipt and parent acceptance remain recoverable through Git.
+checkpoints remain unchanged. The accepted replay reports
+`FIXTURE_CONTRACT_VERIFIED`; its receipt and parent acceptance remain recoverable
+through Git.
 
 ## Three corrected premises
 
@@ -31,25 +32,24 @@ physical header sizes, nonzero bases and overlapping arenas fail explicitly.
 ## Evidence and validation
 
 ```powershell
-python evidence/canonical/allocator-fixtures/replay.py --out build/allocator-proof
+python evidence/canonical/allocator-fixtures/replay.py --out build/workers/allocator-fixtures/replay-run-001
 python -m unittest tests.test_memory_fixture_contract
-python tools/canonical_behavior.py --count 16 --out build/behavior/allocator-current
 ```
 
-Fresh outputs belong strictly below build/. The replay executes original allocation,
+Use a fresh output directory under build/workers/ for each replay. The replay executes original allocation,
 header/handle recovery, movement and resize instructions relevant to
 these claims; it does not execute complete DOS allocation/EMS startup or game
 reachability. Template placement remains a test-owned proxy.
 
-The parent replay passes 102 comparisons across all four reviewed memory targets,
-with four distinguished source mutations, actual allocation/recovery controls,
-invalid-premise negatives and completed persistent history. Eight repository
-regressions cover the corrected premises, original reclaim/type/free behavior and
-discarded-lock Punt. All 29 current behavioral domains pass 12,130 paired cases
-and their source negative controls. Repository validation passes 279 tests with
-two intentional skips; historical validation passes all 49 compiler probes and
-existing exact/runtime gates. Ten resize and two cache-invalidation pairs still
-agree under the existing viewport premises.
+The accepted replay receipt records scoped comparisons, source mutations, actual
+allocation/recovery controls, invalid-premise negatives and completed persistent
+history across the reviewed memory targets in [`receipt.json`](receipt.json).
+Focused regressions cover the corrected premises, original reclaim/type/free
+behavior and discarded-lock Punt.
+
+Current repository validation is generated in
+[`docs/progress.md`](../../../docs/progress.md); current DOS blocker status and
+evidence are in [`blockers.json`](../blockers.json).
 
 The prior ralloc_memory_v2_stateful nine-step success is superseded as evidence
 of valid persistent heap history. Its historical receipts remain in Git. Strict
@@ -81,13 +81,13 @@ is unchanged; this repairs the existing native physical-memory replacement.
 Run the current provider and source mutation controls with:
 
 ```powershell
-python evidence/canonical/allocator-fixtures/native_discard.py --conversion build/portable-sdl3 --out build/native-discard-current
+python evidence/canonical/allocator-fixtures/native_discard.py --conversion build/current/portable --out build/workers/allocator-fixtures/native-discard-run-001
 ```
 
 `native-repair.json` records the parent independent replay using the current
-complete build's flags and all current input pins: 37 positive controls pass.
-Both full-TU negatives are distinguished: retaining old sizes fails explicit and
-budget-discard checks; rejecting discarded resize fails stable-handle restoration.
+complete build's flags and all current input pins. Its full-TU negatives distinguish
+retaining old sizes, which fails explicit and budget-discard checks, from rejecting
+discarded resize, which fails stable-handle restoration.
 Other controls verify index/master identity, no spare slot requirement, isolation
 of another discarded handle, charging 112 bytes for the 100-byte host allocation,
 failed host-budget restoration without changing the target, retry after freeing

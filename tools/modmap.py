@@ -115,7 +115,7 @@ def build() -> list[dict]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("module", nargs="?")
-    ap.add_argument("--json", type=Path, default=ROOT / "build" / "modmap.json")
+    ap.add_argument("--json", type=Path, default=ROOT / "build" / "current" / "modmap.json")
     a = ap.parse_args()
     rows = build()
     a.json.parent.mkdir(parents=True, exist_ok=True)

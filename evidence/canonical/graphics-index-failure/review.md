@@ -30,7 +30,7 @@ instructions are validation inputs only; this constructs no game executable.
 Run from any directory with a fresh repository-relative output path:
 
 ```powershell
-python evidence/canonical/graphics-index-failure/replay.py --out build/graphics-index-failure
+python evidence/canonical/graphics-index-failure/replay.py --out build/scratch/graphics-index-failure
 ```
 
 The database/error-path layout gates remain **SEMANTIC / PORT-BLOCKING**. This

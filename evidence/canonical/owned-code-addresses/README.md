@@ -3,12 +3,12 @@
 Run the self-contained current proof after canonical promotion:
 
 ```powershell
-python evidence/canonical/owned-code-addresses/replay.py --out build/owned-code-address-proof-fresh
+python evidence/canonical/owned-code-addresses/replay.py --out build/scratch/owned-code-address-proof-fresh
 ```
 
 The runner finds the repository root through `layout/toolchain.json`. Relative
 `--out` paths resolve against that root and must name an absent or empty directory
-beneath `build/`; omitting the option creates a fresh `build/proofs/` directory.
+beneath `build/`; omitting the option creates a fresh `build/scratch/proofs/` directory.
 Canonical sources, inventory, layout and evidence are read-only. All source,
 object, linker and runtime outputs stay beneath the selected output directory.
 

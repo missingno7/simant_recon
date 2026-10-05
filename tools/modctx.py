@@ -80,7 +80,7 @@ def under_build(path: Path) -> Path:
 
 
 def scratch(tool: str, *parts: str) -> Path:
-    d = BUILD / "helpers" / tool
+    d = BUILD / "scratch" / "helpers" / tool
     for part in parts:
         d = d / part
     d.mkdir(parents=True, exist_ok=True)

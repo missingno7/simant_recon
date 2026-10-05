@@ -5,7 +5,7 @@ This replay corroborates the published generic compiler rule using the complete 
 Run from any working directory:
 
 ```powershell
-python evidence/canonical/audio-track-owner/replay.py --out build/audio-track-owner/current
+python evidence/canonical/audio-track-owner/replay.py --out build/scratch/audio-track-owner/current
 ```
 
 The runner locates the repository from its own ancestors and requires a fresh output directory strictly below an in-repository resolved `build/`. All control sources, objects, logs and compiler staging stay there. It checks raw source against both inventory and manifest hashes; pins that source, inventory, manifest, strict semantic receipt, replay, actual DOS executable, comparison/compiler tools and selected compiler/runner files; and rechecks them afterward. The receipt retains hashes and checks rather than repeated source, byte, disassembly or full OMF dumps. Generic fixtures remain in `evidence/codegen/FARSEG-2-communal-fixup-ownership.json`.

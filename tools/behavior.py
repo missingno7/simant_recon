@@ -18,12 +18,12 @@ from pathlib import Path
 from typing import Callable
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/functions.json').is_file())
-sys.path.insert(0, str(ROOT / 'build/behavior/deps'))
+sys.path.insert(0, str(ROOT / 'build/deps/unicorn'))
 try:
     import unicorn as uc
     from unicorn import x86_const as xr
 except ImportError as exc:
-    raise RuntimeError('Install pinned Unicorn 2.1.4 into build/behavior/deps; see docs/behavioral-proof.md') from exc
+    raise RuntimeError('Install pinned Unicorn 2.1.4 into build/deps/unicorn; see docs/behavioral-proof.md') from exc
 import exe
 import functions
 import match

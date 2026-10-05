@@ -1,7 +1,7 @@
 Run after a successful current native build:
 
 ```powershell
-python portable/tests/native_rng/run.py --report build/portable-sdl3/report.json --out build/native-rng
+python portable/tests/native_rng/run.py --report build/current/portable/report.json --out build/current/tests/rng
 ```
 
 The fixture links the report's actual canonical root:m0093 object and installed

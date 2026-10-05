@@ -12,7 +12,7 @@ same strict check promote.py runs -- against *all* claims of the module (manifes
 the module's functions that the variant defines outside its SCAFFOLD block (in-place drafts)
 and ``--funcs``.  Private data placements and, for a complete TU, the extent (with its
 cross-function relocation order) are checked too.  Nothing is promoted or written outside
-the output directory (default ``build/helpers/variants/<run>/``), which receives every
+the output directory (default ``build/scratch/helpers/variants/<run>/``), which receives every
 variant source as ``NNN_<name>.c`` (the index keeps names unique on case-insensitive
 Windows) and ``results.json``.
 

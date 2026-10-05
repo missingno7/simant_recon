@@ -1,6 +1,6 @@
 """Rerun the 29 reviewed DOS contracts against the current canonical program.
 
-python tools/canonical_behavior.py --count 16 --out build/behavior/current
+python tools/canonical_behavior.py --count 16 --out build/current/behavior
 
 Finite caller domains corroborate the static receipts. Original helpers remain
 explicit parametric boundaries; these runs do not prove driver/backend integration.
@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import behavior as b
 import canonical
+from workspace import prepare_output
 from behavior_ledger import CaseLedger
 from behavior_suites import (adlib, dialog, lists, memory, randdirs, render_small,
     small_contracts, spider_nest, text_card, tutorial_menu,
@@ -406,10 +407,10 @@ def main():
     ap.add_argument('--full', action='store_true', help='include complete retained finite enumerations')
     ap.add_argument('--no-negative-controls', action='store_true')
     ap.add_argument('--targets', nargs='+')
-    ap.add_argument('--out', type=Path, default=ROOT / 'build/behavior/current')
+    ap.add_argument('--out', type=Path, default=ROOT / 'build/current/behavior')
     args = ap.parse_args()
-    out = b.modctx.under_build(args.out)
-    out.mkdir(parents=True, exist_ok=True)
+    out = args.out.absolute()
+    prepare_output(out, ROOT / 'build/current/behavior')
     requested = set(args.targets or [r['function'] for r in canonical.load()['semantics']])
     available = domains(args.count, args.seed, args.full)
     if requested - (set(available) | set(MEMORY_TARGETS)):

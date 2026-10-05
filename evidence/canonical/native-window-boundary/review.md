@@ -1,20 +1,20 @@
 # Bounded window ABI audit
 
-The static audit first reviewed the consolidation draft and its generated C.
-`installed-correspondence.json` now proves identical audited installed text
-under CRLF-to-LF conversion only and records actual installed file hashes.
-Original review pins in `receipt.json` remain immutable historical provenance;
-its scratch paths are not replay dependencies. Fresh annotated DOS disassemblies,
-full shipped resource parse, and native controls are retained alongside this review.
-`replay.py` verifies the current audited source/resource domain and compiles
-current window helpers, writing only into a fresh `build/` output directory.
+The original static audit and DOS observations are retained in `receipt.json`
+and the annotated disassemblies. Canonical observer bodies are unchanged.
+The current Open/ProxMenu/Swap lowering shares one optional-word pass and the
+common literal masker. Complete generated-TU equality is checked at the cleanup
+boundary; migration-era installed-file correspondence is retired.
+`replay.py` compiles current helpers directly against all shipped resources and
+pins its actual inputs. It corroborates that bounded domain and does not claim
+arbitrary caller/resource or raw-state equality.
 
 ## Classification
 
 | Adapter/helper | Finding |
 |---|---|
-| window_parameter_abi_v1 | Explicit supplied values/count and 16-bit types are ABI conversion; zeroing unprovided slots is semantic normalization of DOS caller-stack residue. Validated game observers do not consume those slots for known shipped callers/resources. Guards are native unsupported-domain failures. |
-| window_swap_parameter_abi_v2 | Same normalization, with concrete nonzero DOS state-write correspondence below. Not literally mechanical state equivalence. The 3 shipped calls target windows 1 or 25, whose parameter vector is unobserved by canonical game behavior. |
+| window_parameters: Open/ProxMenu | Explicit supplied values/count and 16-bit types are ABI conversion; zeroing unprovided slots is semantic normalization of DOS caller-stack residue. Validated game observers do not consume those slots for known shipped callers/resources. Guards are native unsupported-domain failures. |
+| window_parameters: Swap | Same normalization, with concrete nonzero DOS state-write correspondence below. Not literally mechanical state equivalence. The 3 shipped calls target windows 1 or 25, whose parameter vector is unobserved by canonical game behavior. |
 | newgame_zoom_window_v1 | Mechanical recovery of actual AX fastcall argument at exactly two NewGame calls. Branch and ordinary state/call order unchanged. Does not prove downstream zoom completeness. |
 | s26_window_object_views_v1 | Mechanical far-pointer table representation conversion for four lookups, valid only for currently bound live windows. Source branches, writes and call order preserved. Null guard does not implement graceful failure at its immediately dereferencing callers. |
 | window_parameters/window_refs | Width-preserving writes and sequential resource-to-host pointer correspondence on valid owner records. Adds malformed/stale/missing-argument/allocation failure policies. The helper is an ABI resource boundary, not proof of arbitrary records. |

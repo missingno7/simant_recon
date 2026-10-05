@@ -125,20 +125,21 @@ def main():
         raise ValueError('built application SDL3 runtime is missing')
     dll_hash = sha(dll)
     original_assets = files(project / 'assets')
-    out = (args.out or project / ('build/native-runtime-' + args.flow)).resolve()
+    out = (args.out or project / ('build/current/' + args.flow)).absolute()
     assets = (args.assets_copy or out / 'a').resolve()
     if assets == out or not assets.is_relative_to(out):
         raise ValueError('disposable resource copy must be inside the fresh output directory')
     if out in (project, project / 'build', build, FIXTURES):
         raise ValueError('runtime output must be a fresh disposable directory')
-    if out.exists() or assets.exists():
-        raise ValueError('fresh output and disposable resource directory required')
     if args.flow == 'save' and len(str(assets / 'a.ant')) > 67:
         raise ValueError('asset path exceeds original FileSelect domain; use a shorter --out')
     script = FIXTURES / ('full-game-vga.txt' if args.flow == 'vga' else 'save-game.txt')
     input_hash = sha(script)
     expected_events = expected_replay(script)
-    out.mkdir(parents=True)
+    import sys
+    sys.path.insert(0,str(PROJECT/'tools'))
+    from workspace import prepare_output
+    prepare_output(out,project/('build/current/'+args.flow),project)
     shutil.copytree(build / 'runtime-assets', assets)
     before = files(assets)
     command = [str(executable), '--headless', '--smoke-ms',

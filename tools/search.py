@@ -118,7 +118,7 @@ def run(func: str, sources: list[Path], profile: str | None, flags, public: str 
     f = fnmod.get(func)
     target = match.Target(f["unit"], f["seg"], f["off"], f["size"])
     pub = "_" + (public or f["name"])
-    outdir = ROOT / "build" / "search" / f["name"]
+    outdir = ROOT / "build" / "scratch" / "search" / f["name"]
     outdir.mkdir(parents=True, exist_ok=True)
     results = []
     for src in sources:

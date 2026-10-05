@@ -29,7 +29,7 @@ other linked byte remain equal. No original game executable or resource is a
 fixture build input. This is a bounded decoder/frame proof, not full game startup.
 
 ```powershell
-python evidence/canonical/lzss-data-frame/replay.py --out build/lzss-frame-proof
+python evidence/canonical/lzss-data-frame/replay.py --out build/scratch/lzss-frame-proof
 ```
 
 `receipt.json` records the current canonical replay. `root-independent.json`

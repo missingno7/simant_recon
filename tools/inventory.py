@@ -12,7 +12,7 @@ Addresses are load-relative *linear* addresses inside a *unit* (``root``,
 ``S00``..``S26``).  Overlay sections share linear ranges, so the unit is
 part of every function identity:  ``UNIT:SEG:OFF``.
 
-Writes build/inventory/functions.json (derived) and prints a summary.
+Writes build/current/inventory/functions.json (derived) and prints a summary.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import exe as exemod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "build" / "inventory"
+OUT = ROOT / "build" / "current" / "inventory"
 
 # Root layout facts (see docs/exe-format.md).
 ROOT_CODE_END_SEG = 0x2CFB          # RTLink manager starts here (third-party runtime)

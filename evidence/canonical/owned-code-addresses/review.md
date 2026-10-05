@@ -43,7 +43,7 @@ promotion does not close it.
 ## Independent placement and negative controls
 
 The installed runner was independently replayed by the parent from current
-canonical source into `build/owned-code-addresses-current/`. It assembles all five
+canonical source into `build/scratch/owned-code-addresses-current/`. It assembles all five
 primary whole TUs and S00's unchanged second object. The twelve previous linebuf
 and xlat_tabs LEAs share this proof with the twelve new callback offsets.
 Both real RTLink versions and DOSBox-X pass all twelve expected fixture outcomes:

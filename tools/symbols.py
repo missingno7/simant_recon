@@ -57,7 +57,7 @@ def bootstrap() -> int:
     if SYMBOLS.exists():
         print("symbols.json exists; refusing to overwrite")
         return 1
-    inv = json.loads((ROOT / "build/inventory/functions.json").read_text())
+    inv = json.loads((ROOT / "build/current/inventory/functions.json").read_text())
     code = {}
     for f in inv["functions"]:
         if f["region"] != "game_or_library":
@@ -66,7 +66,7 @@ def bootstrap() -> int:
         code[n] = {"unit": f["unit"], "seg": f["seg"], "off": f["off"],
                    "grounding": "inventory:" + ",".join(sorted(f["evidence"]))}
     runtime = {}
-    lm = json.loads((ROOT / "build/libmatch/msc600-large.json").read_text())
+    lm = json.loads((ROOT / "build/current/libmatch/msc600-large.json").read_text())
     for lib, rep in lm.items():
         for r in rep["rows"]:
             hits = r.get("hits") or []

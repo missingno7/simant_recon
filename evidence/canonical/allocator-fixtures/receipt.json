@@ -29,7 +29,7 @@
     },
     {
       "path": "tools/canonical_behavior.py",
-      "sha256": "eb1cfb5e25e5c67420f6647a74541893aef1b9501f363ce7fde901b4e90275f8"
+      "sha256": "6679860f2d0dd916f84eb111baa17545edc020fffc3dbb223fc0d7e99e69abc1"
     },
     {
       "path": "tests/test_memory_fixture_contract.py",
@@ -61,7 +61,7 @@
     },
     {
       "path": "tools/behavior.py",
-      "sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c"
+      "sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155"
     },
     {
       "path": "tools/behavior_ledger.py",
@@ -357,7 +357,7 @@
       "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
       "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
       "unicorn_version": "2.1.4",
-      "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+      "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
       "profile": "msc600ax",
       "flags": [
         "/AL",
@@ -368,6 +368,10 @@
       "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
       "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
       "semantic_reviews": {
+        "f_171C_0FBC": {
+          "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+          "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+        },
         "f_171C_09CC": {
           "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
           "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -379,10 +383,6 @@
         "f_171C_0ADC": {
           "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
           "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-        },
-        "f_171C_0FBC": {
-          "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-          "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
         }
       },
       "sequence_targets": [
@@ -613,7 +613,7 @@
         "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
         "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
         "unicorn_version": "2.1.4",
-        "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+        "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
         "profile": "msc600ax",
         "flags": [
           "/AL",
@@ -624,6 +624,10 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+          },
           "f_171C_09CC": {
             "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
             "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -635,10 +639,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -654,7 +654,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_09CC-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/current/tests/allocator-final/differential/f_171C_09CC-cases.jsonl.gz",
         "sha256": "28bbd305d042e1bd38716c1e505c74c76bc24c3ce3aa609dcf7f83191f5ecb51",
         "row_count": 25,
         "lane_counts": {
@@ -677,7 +677,7 @@
             "/Zi"
           ],
           "function": "f_171C_09CC",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
@@ -740,7 +740,7 @@
           "linked_code_sha256": "f528252b1a711bb04494564425b5735c4ea116ff52b71052c10a80dc6e0e2583",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "unicorn_version": "2.1.4",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "profile": "msc600ax",
           "flags": [
             "/AL",
@@ -751,6 +751,10 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+            },
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
               "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -762,10 +766,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {
@@ -800,7 +800,7 @@
         "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
         "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
         "unicorn_version": "2.1.4",
-        "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+        "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
         "profile": "msc600ax",
         "flags": [
           "/AL",
@@ -811,6 +811,10 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+          },
           "f_171C_09CC": {
             "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
             "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -822,10 +826,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -841,7 +841,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_0ADC-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/current/tests/allocator-final/differential/f_171C_0ADC-cases.jsonl.gz",
         "sha256": "5f8504fe8d2cb54155b517b0562c156682028e6adff320a6dc34cacfb85c5f68",
         "row_count": 18,
         "lane_counts": {
@@ -864,7 +864,7 @@
             "/Zi"
           ],
           "function": "f_171C_0ADC",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
@@ -927,7 +927,7 @@
           "linked_code_sha256": "ef80bf8fade4b0dbe35710fa72bfae2406980ec85f2ab31d9774e20722d47cb2",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "unicorn_version": "2.1.4",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "profile": "msc600ax",
           "flags": [
             "/AL",
@@ -938,6 +938,10 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+            },
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
               "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -949,10 +953,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {
@@ -987,7 +987,7 @@
         "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
         "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
         "unicorn_version": "2.1.4",
-        "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+        "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
         "profile": "msc600ax",
         "flags": [
           "/AL",
@@ -998,6 +998,10 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+          },
           "f_171C_09CC": {
             "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
             "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -1009,10 +1013,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -1028,7 +1028,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_0CF4-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/current/tests/allocator-final/differential/f_171C_0CF4-cases.jsonl.gz",
         "sha256": "07064f8bb6d7a09ac5e02c4cad38869f9d2ffc3e790bddfaca06d12aa7abb756",
         "row_count": 34,
         "lane_counts": {
@@ -1051,7 +1051,7 @@
             "/Zi"
           ],
           "function": "f_171C_0CF4",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
@@ -1113,7 +1113,7 @@
           "linked_code_sha256": "053b2268d4d2b5b86d6050c0ee65943adf5efc1bdb13f412e45e3c301374a972",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "unicorn_version": "2.1.4",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "profile": "msc600ax",
           "flags": [
             "/AL",
@@ -1124,6 +1124,10 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+            },
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
               "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -1135,10 +1139,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {
@@ -1173,7 +1173,7 @@
         "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
         "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
         "unicorn_version": "2.1.4",
-        "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+        "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
         "profile": "msc600ax",
         "flags": [
           "/AL",
@@ -1184,6 +1184,10 @@
         "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
         "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
         "semantic_reviews": {
+          "f_171C_0FBC": {
+            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+          },
           "f_171C_09CC": {
             "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
             "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -1195,10 +1199,6 @@
           "f_171C_0ADC": {
             "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
             "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-          },
-          "f_171C_0FBC": {
-            "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-            "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
           }
         },
         "sequence_targets": [
@@ -1214,7 +1214,7 @@
       "failures": [],
       "ledger": {
         "schema": "behavior-case-ledger-v1",
-        "path": "D:/Prog/simant_recon/build/allocator-proof-accepted/differential/f_171C_0FBC-cases.jsonl.gz",
+        "path": "D:/Prog/simant_recon/build/current/tests/allocator-final/differential/f_171C_0FBC-cases.jsonl.gz",
         "sha256": "8bcd60abbbe8096739da2c9d62e1b8fabd610bfaf2901f17768ed56526642a91",
         "row_count": 25,
         "lane_counts": {
@@ -1237,7 +1237,7 @@
             "/Zi"
           ],
           "function": "f_171C_0FBC",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160",
@@ -1299,7 +1299,7 @@
           "linked_code_sha256": "c1567becbf9ca3b027e13a660593365195d834e6c0db75de97b8a9c6b0979049",
           "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
           "unicorn_version": "2.1.4",
-          "harness_sha256": "6c06405fee567c3e69322f0d68f6983099c19231e30cbd546fa7f21a940fc85c",
+          "harness_sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
           "profile": "msc600ax",
           "flags": [
             "/AL",
@@ -1310,6 +1310,10 @@
           "manifest_sha256": "3e45f75ae39260bcee75b77e2fd01980f2dea5e290c95d9b1dc287d7412fe242",
           "program_sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
           "semantic_reviews": {
+            "f_171C_0FBC": {
+              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
+              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
+            },
             "f_171C_09CC": {
               "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
               "receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
@@ -1321,10 +1325,6 @@
             "f_171C_0ADC": {
               "definition_sha256": "ca41faef012032c71c6285e674b942b1bded0839f03b9475e6e7b245bd5837df",
               "receipt_sha256": "739dcc24cc17fdd59a04461585683ed08a22de1b80e5bde8a7803ead328308f0"
-            },
-            "f_171C_0FBC": {
-              "definition_sha256": "8f31fbe67f34b16a86152cf769bbfca46f596640b50ab46f92d5533b968e5db4",
-              "receipt_sha256": "c858159f49bf0bee5ff8001c349c421ffdf5811e946a05ae8e82633e2eeb99ec"
             }
           },
           "mutation": {

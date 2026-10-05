@@ -29,13 +29,13 @@ def pin(path):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--conversion', type=Path, required=True)
-    ap.add_argument('--out', type=Path, required=True)
+    ap.add_argument('--out', type=Path, default=ROOT/'build/current/tests/database')
     args = ap.parse_args()
     conversion = (ROOT / args.conversion).resolve()
-    out = (ROOT / args.out).resolve()
-    if out.exists():
-        raise ValueError('refusing to overwrite result directory')
-    out.mkdir(parents=True)
+    out = (ROOT / args.out).absolute()
+    sys.path.insert(0,str(ROOT/'tools'))
+    from workspace import prepare_output
+    prepare_output(out,ROOT/'build/current/tests/database',ROOT)
     report_path = conversion / 'report.json'
     conversion_report = json.loads(report_path.read_text())
     if (not conversion_report.get('passed') or

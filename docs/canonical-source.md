@@ -1,84 +1,97 @@
-# Canonical reconstructed source
+# Canonical reconstructed program
 
-Published oracle checkpoints are immutable. Active reconstruction is corrigible.
-`dos-semantic-oracle-v1` remains at its original Git commit; the current sources
-contain the best reviewed reconstruction, including later corrections.
-
-`src/program.json` is the single program inventory. Its 191 translation units
-comprise 127 historical modules and 64 source-owned storage units. The original
-module paths and function order remain intact. Storage definitions live in
-`src/state/`; a view never creates another allocation.
-
-The canonical publication includes 29 strictly reviewed semantic definitions,
-23 module binding corrections, 400 storage objects in the new storage units,
-and 34 additional commons in corrected historical modules. DrawBalloons now
-contains the reviewed signed 16-bit addition before long allocation arithmetic.
-There is no need for a later correction body to supersede this implementation.
-The detailed admissions are in `evidence/canonical/publication.json`, with
-storage, view, static review and remaining-blocker records beside it. The later
-minimum icon Handle view is recorded under `evidence/canonical/icon-handle-view/`;
-it does not establish the master cell, bitmap or safe activation.
-
-The DOS build compiles this inventory directly:
+`src/program.json` is the single semantic inventory. Historical whole translation
+units retain their module boundaries and function order. Proven ordinary state
+owners live in `src/state/` or their historical TU; aliases are views of those
+owners and never create another allocation.
 
 ```
-python dos/build.py --jobs 8 --link
+                    src/
+       canonical reconstructed game and state
+                     |
+           +---------+---------+
+           |                   |
+       dos/build.py       portable/build.py
+           |                   |
+    historical ABI/link     mechanical lowering
+    period CRT/DOS          native platform services
+           |                   |
+         DOS EXE              SDL3
 ```
 
-It reads canonical sources, period compiler profiles, pinned third-party
-runtime libraries and DOS linkage metadata. It does not import historical
-behavior candidates, apply source binding edits, read correction overlays,
-patch objects or borrow original executable bytes. Unique compilation basenames
-keep independent large-model code segments distinct. Historical contribution
-validation separately retains its `UNIT` compiler context.
+## Source authority and acceptance
 
-The current preflight compiles all 191 units and validates all 64 storage
-contracts. It refuses an independent link on eleven unproved storage imports
-and eleven semantic address/layout gates. Forty-four functional data bytes remain
-unresolved and independently prevent linking. These are SEMANTIC / PORT-BLOCKING; a source-only runnable DOS game
-has not been established.
+Reviewed corrections, including DrawBalloons' signed word arithmetic, accepted
+behavior bodies, declarations, extents, initializers and source-owned storage,
+are already canonical. Their admissions are in `evidence/canonical/publication.json`,
+`storage.json`, `views.json` and the semantic receipts. DOS and SDL3 consume the
+same whole source files. No correction overlays, source-only improved universe,
+selected-source generator or portable shadow simulation state remains.
 
-Source-owned code/data references use symbolic linker operands. The bounded
-direct numeric/named-frame audit covers all 29 current assembly TUs, including
-fourteen corrected LZSS stack-segment operands. Historical exactness and
-moved-placement controls are verified separately. The [source follow-up](source-followup.md)
-records this audit's scope and the current mechanical native word pass.
+Byte-exact historical C/ASM is preserved as source authority. The historical
+validator independently rebuilds extents, peers, private data and relocations.
+Strict `BEHAVIOR_EXACT_CONFIRMED` requires static completeness of every path,
+constant, width, state access, call and observable effect; differential execution
+and negative controls corroborate that conclusion. Reviewed rebuilt declaration
+context residue is recorded separately and never counted as a current byte match.
 
-Nine historically exact C bodies remain unchanged except registered identifier
-aliases, but improved whole-TU declaration context changes their compiler
-output. Their full static instruction relations have zero unexplained
-differences; rectangle and window recalculation corroboration covers 526 paired
-cases. They remain historical exact source authority, with current rebuilt
-contributions separately identified. They are never counted as current byte
-matches. The corrected LessonDone also changes one private CONST segment word.
-These compiler/layout differences are HISTORICAL-BINARY-ONLY. The immutable
-historical proofs are recoverable from Git.
+`promote.py` owns canonical publication. The old independent renamer and runtime
+bootstrap mutator are retired. `runtime.py` verifies pinned historical members;
+current runtime-data admissions pass through `promote.py --runtime-data`.
+Published tags, including `dos-semantic-oracle-v1` and
+`canonical-semantic-oracle-v2`, remain unchanged in Git. They are semantic
+checkpoints, not standalone DOS/runtime/human-acceptance claims.
 
-`python tools/validate.py` retains strict historical comparisons, fixups,
-relocations, private data, source lint, 49 compiler probes and runtime proofs.
-Reviewed context differences pin every live object contribution, full extent,
-public, import and fixup without masking code or data. CodeView metadata has no
-runtime role and is recorded separately. `tests/test_canonical.py` verifies the
-single source inventory, current semantic definitions, storage value/import
-guards and incomplete-link refusal.
+## DOS build
 
-The SDL3 consolidation consumes this same inventory. Ordinary state ownership
-belongs to canonical source. Native services adapt pointer and wire layouts,
-physical DOS memory, host resource handles, files, timing, input, video and
-audio. A native sidecar may hold host resources; it cannot own another copy of
-ordinary game state. The remaining unproved native storage representations
-must stay explicit until their source ownership and lifetime are established.
+`dos/build.py` compiles the current inventory directly with pinned period tools.
+It checks typed storage contracts, imports, symbolic aliases, semantic layout
+gates and initialized-data debt before invoking RTLink. It does not read
+original executable fragments or patch objects/images. Compiler scratch and
+hash-checked staging copies are separate from semantic source.
 
-`portable/build.py` is the only native build entry. It uses normal ABI converter
-imports and `portable/platform.json`; it compiles current service files directly.
-The inventory converts 162 canonical C TUs and compiles 161. The DOS physical heap
-TU is an explicit native allocation boundary. Three data units are emitted from
-actual symbolic assembly declarations; ordinary palette, graphics pattern,
-input/mouse queues and four audio records have canonical owners. Small readable
-native assembly projections remain where host compilers cannot assemble DOS
-code. There is no selected-source game, parallel ownership plan or body-picker.
+Real linker placement, segment ordering, overlay selection, paragraph alignment
+and period runtime/archive mechanics belong in this build/evidence path.
+Symbolic code/data operands belong in source. The bounded ASM frame/address
+audit and moved-placement controls are retained under
+`evidence/canonical/{asm-address-audit,owned-code-addresses,lzss-data-frame}/`.
 
-The [consolidation report](consolidation.md) records current native validation,
-deleted architecture and unresolved preview contracts. The semantic checkpoint
-is `canonical-semantic-oracle-v2`; it does not claim the independently linked,
-runtime-compared and human-accepted `functional-source-oracle-v1` milestone.
+## Native lowering and platform services
+
+`portable/build.py` is the native entry point. It lowers whole canonical C TUs,
+projects symbolic ASM data and compiles the explicit files in `portable/platform.json`.
+The original physical DOS heap is the native allocation boundary. Small readable
+ASM algorithm projections remain where a host C compiler cannot assemble DOS ISA.
+
+`portable/canonical_native_abi/` handles DOS word types, pointer representations,
+wire/native layouts, callbacks and calling conventions. Shared lexical primitives
+replace duplicated comment/string scanners. Open, ProxMenu and Swap share one
+optional-word pass. The ordered word-expression and scalar passes preserve their
+supported 16-bit domains; unsupported expression classes remain explicit.
+All generated canonical TUs retain byte-identical C text across this cleanup.
+
+`portable/whole_program/platform/` and SDL3 services own physical memory/handles,
+files, timing, keyboard/mouse, video and audio boundaries. Native sidecars hold
+host pointers and resources that cannot fit the historical representation. They
+borrow ordinary canonical state rather than maintain another game model.
+
+Some source-shaped rewrites remain because ownership, ABI or failure domains are
+not yet proved. They are classified in `layout/repository.json`, tied to named
+open contracts in `portable/platform.json`, and cannot silently survive closure.
+The current game build is a preview; passing bounded flows does not establish
+universal DOS/native equality. [Current status](status.md) is the generated view
+of remaining SEMANTIC / PORT-BLOCKING and HISTORICAL-BINARY-ONLY work.
+
+## Workspace and evidence lifecycle
+
+`build/current/` holds one replaceable result per meaningful category;
+`build/deps/` holds reusable local dependencies. Workers and experiments use
+isolated disposable scopes. Default reruns move prior outputs into ignored
+`to_delete/`, preserving paths for manual review. Git preserves historical code.
+
+Only current claims, permanent regression coverage, unresolved investigations and
+minimal durable proof belong in `evidence/`. Closed research generations and
+migration correspondence leave the active tree. `tools/repository.py` checks
+source/ledger consistency, transform reachability, explicit exception ownership,
+retired paths, production input paths and build-root hygiene. `tools/validate.py`
+runs that guard as part of the historical acceptance boundary.

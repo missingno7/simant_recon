@@ -11,14 +11,14 @@ def rename(text, mapping):
     return text
 
 
-def _identifier_rewrite(text, mapping):
-    return rename(text, mapping)
 
 
-def replace_identifier_tokens(text, mapping):
-    counts = {n: sum(t.kind == 'id' and t.text == n for t in csrc.tokenize(text))
-              for n in mapping}
-    return rename(text, mapping), counts
+
+
+def mask_literals(source: str) -> str:
+    """Return same-length text with comments and C literals blanked."""
+    pattern = re.compile('//[^\\r\\n]*|/\\*.*?\\*/|\\"(?:\\\\.|[^\\"\\\\])*\\"|\'(?:\\\\.|[^\'\\\\])*\'', re.S)
+    return pattern.sub(lambda m: ''.join(('\n' if c == '\n' else ' ' for c in m.group())), source)
 
 
 def masked(source):

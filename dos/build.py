@@ -21,6 +21,7 @@ import sys
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/toolchain.json').is_file())
 sys.path.insert(0, str(ROOT / 'tools'))
 import compiler
+from workspace import prepare_output, _target
 from omf import OmfReader
 
 ORIGINAL_SHA = 'aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11'
@@ -381,7 +382,7 @@ def link_program(program, out, report, profile):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--inventory', type=Path, default=ROOT / 'src/program.json')
-    ap.add_argument('--out', type=Path, default=ROOT / 'build/dos')
+    ap.add_argument('--out', type=Path, default=ROOT / 'build/current/dos')
     ap.add_argument('--jobs', type=int, default=4)
     ap.add_argument('--reuse', action='store_true')
     ap.add_argument('--link', action='store_true')
@@ -389,9 +390,12 @@ def main(argv=None):
     args = ap.parse_args(argv)
     if not 1 <= args.jobs <= 32:
         ap.error('--jobs must be between 1 and 32')
-    out = args.out.resolve()
+    out, _ = _target(args.out, ROOT)
     out.relative_to(ROOT / 'build')
-    out.mkdir(parents=True, exist_ok=True)
+    if not args.reuse:
+        prepare_output(out, ROOT / 'build/current/dos')
+    else:
+        out.mkdir(parents=True, exist_ok=True)
     denied = install_input_guard()
     report = {'schema': 'simant-canonical-dos-build-v1', 'target': 'CANONICAL_DOS',
         'inputs': [], 'build_tools': [], 'translation_units': [], 'errors': [],

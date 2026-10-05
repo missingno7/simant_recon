@@ -1,7 +1,7 @@
 """Replay the current canonical source-owned code-address proof.
 
 Run after installing at evidence/canonical/owned-code-addresses/replay.py:
-  python evidence/canonical/owned-code-addresses/replay.py --out build/owned-code-address-proof
+  python evidence/canonical/owned-code-addresses/replay.py --out build/scratch/owned-code-address-proof
 
 This runner reads current canonical sources, derives literal-address negatives
 only in whole test-owned copies, and uses pinned MASM/RTLink/DOSBox tools.
@@ -77,7 +77,7 @@ def select_output(argument):
     except ValueError:
         raise ValueError('Repository build directory resolves outside the repository')
     if argument is None:
-        parent = (build / 'proofs').resolve()
+        parent = (build / 'scratch' / 'proofs').resolve()
         try:
             parent.relative_to(build)
         except ValueError:
@@ -416,7 +416,7 @@ def main(argv=None):
     global OUT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path,
-                        help='Absent or empty output directory beneath build/ (default: fresh build/proofs directory)')
+                        help='Absent or empty output directory beneath build/ (default: fresh build/scratch/proofs directory)')
     args = parser.parse_args(argv)
     if not __debug__:
         raise RuntimeError('Proof replay requires ordinary Python assertion checks; do not use -O')
@@ -491,7 +491,7 @@ def main(argv=None):
               'scope': 'Twenty-four owned-code offsets in five complete primary assembly TUs, linked with the unchanged same-name second S00 TU: twelve code-data LEAs and twelve far callbacks passed to the synchronous rectangle clipper. Real-linker fixtures inspect actual linked operands at runtime; callback SEG/OFFSET identity is checked against existing PUBDEFs plus reviewed deltas and each SEG retains its MZ relocation. No game procedure or provider stub executes. This is not a full DOS game link, standalone game execution, assembly admission, storage proof, or historical-linker-version claim.',
               'original_image_read': False, 'canonical_sources_written': False,
               'output_directory': str(OUT),
-              'reproduce': 'python evidence/canonical/owned-code-addresses/replay.py --out build/owned-code-address-proof-fresh',
+              'reproduce': 'python evidence/canonical/owned-code-addresses/replay.py --out build/scratch/owned-code-address-proof-fresh',
               'canonical_source_inputs_and_negative_recipes': inputs, 'unchanged_concatenated_peer': peer_input,
               'whole_object_review': reviews,
               'linker_status': {name: tc['linkers'][name]['status'] for name in tool_dirs},

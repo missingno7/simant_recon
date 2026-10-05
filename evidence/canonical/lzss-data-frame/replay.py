@@ -198,7 +198,7 @@ def main():
     global OUT
     build=(ROOT/'build').resolve()
     if args.out is None:
-        parent=build/'proofs'
+        parent=build/'scratch'/'proofs'
         parent.mkdir(parents=True,exist_ok=True)
         OUT=Path(tempfile.mkdtemp(prefix='lzss-data-frame-',dir=parent))
     else:
