@@ -6,7 +6,7 @@ native exceptions come from `portable/platform.json`. This page is a view, not
 another inventory. Validation results and cleanup metrics are in [cleanup.md](cleanup.md).
 
 The shared program has 200 whole source TUs and 29 strict semantic registrations.
-Independent DOS linking remains blocked by 0 storage imports, 0 semantic gates and 30 functional bytes in 5 ranges. No standalone DOS game or human acceptance is established.
+The canonical DOS link has no storage imports, semantic gates or unresolved functional data. 30 bytes in 5 ranges remain documented historical layout debt; physical DGROUP layout equivalence is not claimed. Human gameplay acceptance of the DOS closure candidate is pending.
 
 Manual SDL3 playtesting found broken sound, a logo-click hang and a discrepancy
 in the intended 640x480 VGA path. [Playtest report](../evidence/canonical/validation/manual-playtest.json).
@@ -63,8 +63,8 @@ graph TD
 | `icon-activation`: Can supported display mode reach either icon-slot load? | gates: ; native:  | Locked configuration sets mode 8; complete startup/writer/alias/save census preserves it. Both icon helpers bypass the slot load for every selector and slot value, independently of activation. Next: Resolved for mode 8; preserve startup/state/save census and original mode-2 pointer-load contrasts. Other display modes require independent evidence. |
 | `allocator-runtime`: Which source/runtime owners and heap histories does the real link select? | native: `native-heap-history`; gates:  | RTLink NOEXTDICTIONARY resolves CRT/canonical _ffree collision with unchanged objects and libraries; all warnings remain fatal. Positive and duplicate-producing negative controls pin canonical call binding. The captured S06 has 119 distinct sites at twice the load base while every other byte matches disk. Original direct display callbacks were instead vectored by the diagnostic link; timer cursor callbacks can re-enter the non-reentrant loader. Explicit symbolic vector selection restores direct dispatch and required canonical/alias loading calls, with real-link positive and negative controls. All admitted ordinary storage owners, including the 256-record clip rectangle destination, compile directly into the native projection; no native storage reservation or inserted allocation-failure branch remains. Next: Exercise longer original/source gameplay and Save/Load under the corrected explicit vector policy; compare heap and failed-index histories. Keep the original unsnapshotted failures distinct from the proven callback-binding defect. |
 | `ctype-prefix`: Do supported text inputs observe the CRT prefix and changing far-heap pointers? | gates: ; data:  | All signed-prefix sites are unreachable or functionally unobservable in the supported domain; the 14 historical bytes need no canonical owner. Next: Resolved in the supported domain; replacement resources, other command tails, alternate runtimes and the native port remain outside this proof. |
-| `input-abi`: Which event words and input records are actually observed? | data: `dgroup_60b0`, `dgroup_5a28`; native: `native-event-omitted-word`; gates:  | Trace queue producers/consumers and interleavings; distinguish preserved opaque descriptor shape from activation. |
-| `residual-state`: Which unattributed bytes need preserved state, an opaque owner, or startup erasure? | data: `dgroup_56fe`, `dgroup_5a96`, `common_tail_overlap_3`; gates:  | Derive neighboring contribution/relocation and startup-write evidence; admit bounded opaque typed state only with an independent owner bridge. |
+| `input-abi`: Which event words and input records are actually observed? | data: ; native: `native-event-omitted-word`; gates:  | Residual ranges accepted as documented historical layout debt (evidence/canonical/historical-layout/review.md); no physical DGROUP layout equivalence is claimed. Next: Trace queue producers/consumers and interleavings; distinguish preserved opaque descriptor shape from activation. |
+| `residual-state`: Which unattributed bytes need preserved state, an opaque owner, or startup erasure? | data: ; gates:  | Residual ranges accepted as documented historical layout debt (evidence/canonical/historical-layout/review.md); no physical DGROUP layout equivalence is claimed. Next: Accepted as historical layout debt; reopen an entry only on a concrete behavioral difference traced to it. |
 | `integer-lowering`: Which DOS integer expressions still differ under host promotion rules? | native: `native-integer-expressions`; gates:  | Extend mechanical width conversion only with a source-grounded expression domain and negative controls. |
 
 ### Source storage imports
@@ -105,15 +105,20 @@ This is the common domain of admitted functional owners and resolved adjacency c
 | `filename-selector-local-capacity` | [Under the FileSelect premises every write fits its buffer (tightest: initial path+name 80/80 bytes; retry 79/80; path/lastDir 34/67; list 3185/3200; returned name 46/100). Longer incoming residue, deeper directories, larger listings and the resulting stack/heap corruption are outside the functional domain; 47-byte, 33- and 66-character, 200-entry and DOSBox-X deep-path controls are retained. No source change.](../evidence/canonical/filename-domain/residue-review.md) |
 | `dgroup_79f0` (14 bytes) | [No canonical storage required: the independent link selects no fdata.asm/__fheap member, and the only location-based observers of these historical bytes are the signed _ctype prefix reads, which are unreachable or unobservable in the supported domain. Historical ownership remains unrecovered.](../evidence/canonical/ctype-domain/review.md) |
 
+### Historical layout debt (does not block linking)
+
+| ID | Bytes | Caveat |
+| --- | ---: | --- |
+| `dgroup_56fe` | 4 | [Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference.](../evidence/canonical/historical-layout/review.md) |
+| `dgroup_5a28` | 2 | [Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference.](../evidence/canonical/historical-layout/review.md) |
+| `dgroup_5a96` | 5 | [Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference.](../evidence/canonical/historical-layout/review.md) |
+| `dgroup_60b0` | 18 | [Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference.](../evidence/canonical/historical-layout/review.md) |
+| `common_tail_overlap_3` | 1 | [Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference.](../evidence/canonical/historical-layout/review.md) |
+
 ### Unowned functional data
 
 | ID | Class | Bytes | Reason |
 | --- | --- | ---: | --- |
-| `dgroup_56fe` | UNATTRIBUTED_STATE | 4 | Four zero bytes lie before g_5702; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance. |
-| `dgroup_5a28` | UNATTRIBUTED_STATE | 2 | Two leading zero bytes begin a root:1F58 state range followed by identified keyboard/interrupt fields; no read/write is identified for this word. |
-| `dgroup_5a96` | UNATTRIBUTED_STATE | 5 | A 26-byte portion of a shared 1,360-byte UI region includes named/used fields (display selector, far pointer, saved cursor pointers) and other incompletely typed bytes. |
-| `dgroup_60b0` | UNATTRIBUTED_STATE | 18 | 18-byte record uses the registered hot-box ABI shape: rectangle, callback, event code, extra event word and input mask. Its callback relocation is real, but the bounded scan supplies no inbound registration or allocation owner. Timer spelling is not a timing contract; computed or unowned access remains unexcluded. |
-| `common_tail_overlap_3` | UNATTRIBUTED_STATE | 1 | One residual boundary byte has no accepted erasure/irrelevance proof. Two other prior file values were erased in the reviewed ordinary manager/CRT/DOS control; actual linked-game startup clear dominance remains required. |
 
 ### Native exceptions
 

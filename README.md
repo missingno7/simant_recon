@@ -27,11 +27,14 @@ python portable/build.py
 build/current/portable/simant-canonical.exe
 ```
 
-The canonical DOS command currently reports an explicit link refusal for 30
-bytes of unattributed data debt in five ranges; all semantic gates are resolved
-within the documented supported domain. Every storage symbol now has a canonical
-owner, so the isolated diagnostic links canonical objects alone, without warnings
-or provisional storage, and reaches Full Game under a recorded keyboard replay.
+The canonical DOS command links `build/current/dos/link/SOURCE.EXE` from canonical
+source alone: no storage imports, no open semantic gates, no provisional storage
+and no original executable bytes. 30 bytes in five ranges remain documented
+[historical layout debt](evidence/canonical/historical-layout/review.md); physical
+DGROUP layout equivalence is not claimed. The build is a Phase 1 closure
+candidate pending human gameplay acceptance; its
+[deterministic acceptance](evidence/canonical/validation/canonical-dos-acceptance.json)
+matches the original in three scenarios including sound port traffic.
 Both build paths use zero original executable fallback. [Portable validation commands](portable/README.md) cover
 resources, RNG, simulation, VGA and Save/Load with their supported scopes.
 Bounded DOS checks now save all 307 records in both executables and load the same

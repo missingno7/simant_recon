@@ -5,102 +5,14 @@
   "standalone_DOS_executable": false,
   "human_acceptance": "PENDING",
   "imports": [],
-  "data_debt": [
-    {
-      "id": "dgroup_56fe",
-      "bytes": 4,
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "evidence_class": "UNKNOWN_FIELD_SEMANTICS",
-      "reason": "Four zero bytes lie before g_5702; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance.",
-      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ],
-      "closure_class": "UNATTRIBUTED_STATE",
-      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
-    },
-    {
-      "id": "dgroup_5a28",
-      "bytes": 2,
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "evidence_class": "PARTLY_ANCHORED_STATE_UNKNOWN_LEADING_WORD",
-      "reason": "Two leading zero bytes begin a root:1F58 state range followed by identified keyboard/interrupt fields; no read/write is identified for this word.",
-      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ],
-      "closure_class": "UNATTRIBUTED_STATE",
-      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
-    },
-    {
-      "id": "dgroup_5a96",
-      "bytes": 5,
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "evidence_class": "PARTLY_TYPED_SHARED_UI_STATE",
-      "reason": "A 26-byte portion of a shared 1,360-byte UI region includes named/used fields (display selector, far pointer, saved cursor pointers) and other incompletely typed bytes.",
-      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ],
-      "residual_ranges": [
-        {
-          "offset": 0,
-          "size": 1
-        },
-        {
-          "offset": 2,
-          "size": 4
-        }
-      ],
-      "closure_class": "UNATTRIBUTED_STATE",
-      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
-    },
-    {
-      "id": "dgroup_60b0",
-      "bytes": 18,
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "evidence_class": "UNREFERENCED_INPUT_DESCRIPTOR_COMPATIBLE_RECORD_WITH_REAL_RELOCATION",
-      "reason": "18-byte record uses the registered hot-box ABI shape: rectangle, callback, event code, extra event word and input mask. Its callback relocation is real, but the bounded scan supplies no inbound registration or allocation owner. Timer spelling is not a timing contract; computed or unowned access remains unexcluded.",
-      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ],
-      "closure_class": "UNATTRIBUTED_STATE",
-      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
-    },
-    {
-      "id": "common_tail_overlap_3",
-      "bytes": 1,
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "evidence_class": "LINKER_FILE_BOUNDARY_UNRESOLVED",
-      "reason": "One residual boundary byte has no accepted erasure/irrelevance proof. Two other prior file values were erased in the reviewed ordinary manager/CRT/DOS control; actual linked-game startup clear dominance remains required.",
-      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
-      "proof_refs": [
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/startup-tail-erasure-contract-v36.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v36/README.md"
-      ],
-      "residual_ranges": [
-        {
-          "offset": 0,
-          "size": 1
-        }
-      ],
-      "closure_class": "UNATTRIBUTED_STATE",
-      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
-    }
-  ],
+  "data_debt": [],
   "semantic_gates": [],
   "counts": {
     "imports": 0,
-    "data_ranges": 5,
-    "data_bytes": 30,
-    "semantic_gates": 0
+    "data_ranges": 0,
+    "data_bytes": 0,
+    "semantic_gates": 0,
+    "historical_layout_bytes": 30
   },
   "historical_binary_only_outside_current_44": [
     {
@@ -443,6 +355,116 @@
       "domain": "shipped-default-vga-successful-lifetime",
       "resolution_evidence": "evidence/canonical/ctype-domain/review.md",
       "resolution": "No canonical storage required: the independent link selects no fdata.asm/__fheap member, and the only location-based observers of these historical bytes are the signed _ctype prefix reads, which are unreachable or unobservable in the supported domain. Historical ownership remains unrecovered."
+    }
+  ],
+  "historical_layout_debt": [
+    {
+      "id": "dgroup_56fe",
+      "bytes": 4,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "UNKNOWN_FIELD_SEMANTICS",
+      "reason": "Four zero bytes lie before g_5702; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely.",
+      "status": "HISTORICAL_LAYOUT_DEBT",
+      "decision": "project-owner 2026-10-06",
+      "decision_evidence": "evidence/canonical/historical-layout/review.md",
+      "caveat": "Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference."
+    },
+    {
+      "id": "dgroup_5a28",
+      "bytes": 2,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "PARTLY_ANCHORED_STATE_UNKNOWN_LEADING_WORD",
+      "reason": "Two leading zero bytes begin a root:1F58 state range followed by identified keyboard/interrupt fields; no read/write is identified for this word.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely.",
+      "status": "HISTORICAL_LAYOUT_DEBT",
+      "decision": "project-owner 2026-10-06",
+      "decision_evidence": "evidence/canonical/historical-layout/review.md",
+      "caveat": "Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference."
+    },
+    {
+      "id": "dgroup_5a96",
+      "bytes": 5,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "PARTLY_TYPED_SHARED_UI_STATE",
+      "reason": "A 26-byte portion of a shared 1,360-byte UI region includes named/used fields (display selector, far pointer, saved cursor pointers) and other incompletely typed bytes.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+      ],
+      "residual_ranges": [
+        {
+          "offset": 0,
+          "size": 1
+        },
+        {
+          "offset": 2,
+          "size": 4
+        }
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely.",
+      "status": "HISTORICAL_LAYOUT_DEBT",
+      "decision": "project-owner 2026-10-06",
+      "decision_evidence": "evidence/canonical/historical-layout/review.md",
+      "caveat": "Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference."
+    },
+    {
+      "id": "dgroup_60b0",
+      "bytes": 18,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "UNREFERENCED_INPUT_DESCRIPTOR_COMPATIBLE_RECORD_WITH_REAL_RELOCATION",
+      "reason": "18-byte record uses the registered hot-box ABI shape: rectangle, callback, event code, extra event word and input mask. Its callback relocation is real, but the bounded scan supplies no inbound registration or allocation owner. Timer spelling is not a timing contract; computed or unowned access remains unexcluded.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely.",
+      "status": "HISTORICAL_LAYOUT_DEBT",
+      "decision": "project-owner 2026-10-06",
+      "decision_evidence": "evidence/canonical/historical-layout/review.md",
+      "caveat": "Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference."
+    },
+    {
+      "id": "common_tail_overlap_3",
+      "bytes": 1,
+      "classification": "SEMANTIC / PORT-BLOCKING",
+      "evidence_class": "LINKER_FILE_BOUNDARY_UNRESOLVED",
+      "reason": "One residual boundary byte has no accepted erasure/irrelevance proof. Two other prior file values were erased in the reviewed ordinary manager/CRT/DOS control; actual linked-game startup clear dominance remains required.",
+      "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
+      "proof_refs": [
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/startup-tail-erasure-contract-v36.json",
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v36/README.md"
+      ],
+      "residual_ranges": [
+        {
+          "offset": 0,
+          "size": 1
+        }
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely.",
+      "status": "HISTORICAL_LAYOUT_DEBT",
+      "decision": "project-owner 2026-10-06",
+      "decision_evidence": "evidence/canonical/historical-layout/review.md",
+      "caveat": "Accepted by project-owner decision as historical layout debt: no owner, padding, initializer or original byte is added; physical DGROUP layout equivalence is not claimed; complete computed-pointer exclusion is unproved. Reopen on a concrete behavioral difference."
     }
   ]
 }

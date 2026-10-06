@@ -260,7 +260,7 @@ SDL comparison to choose between canonical reconstruction and platform fixes.
 The [canonical-only diagnostic](../evidence/canonical/diagnostic-link/canonical-only.json)
 links all 200 canonical TUs with an empty provider manifest: no provisional
 storage remains. Its 40-second replay reaches SimAnt - Full Game with zero
-reported guest faults. The 30 data-debt bytes still refuse the canonical link;
+reported guest faults. The canonical link now produces the same executable;
 this bounded observation is not itself gameplay or sound acceptance.
 
 The [clip-generation control](../evidence/canonical/clip-domain/review.md) rejects
@@ -278,17 +278,21 @@ and repeated-producer bounds before emission remain the next clipping obligation
 deterministic DOSBox-X observation runner (fixed cycles, fixed clock, scripted
 emulated-time input) and compares full simulation-state dumps at checkpoints,
 assembled saves and, with `"sound": true`, every guest `OUT` to the Sound Blaster
-DSP (220-22F) and OPL (388-38B) ports. On the canonical-only diagnostic link the
-three scenarios pass at Slow/Normal speed: new game + save, a sustained 645 s
-game with two saves, and loading an original-written save; DSP and OPL port/value
-sequences are identical (the game plays digitized samples through OPL level
-modulation), with sub-10 µs timing deltas. Fast/Ultra speed is CPU-bound and not
-time-comparable. Final acceptance must be repeated on the canonical
-`dos/build.py --link` receipt once it links.
+DSP (220-22F) and OPL (388-38B) ports. On the canonical `dos/build.py --link`
+executable the three scenarios pass at Slow/Normal speed with zero runtime faults
+([receipt](../evidence/canonical/validation/canonical-dos-acceptance.json)): new
+game + save, a sustained 645 s game with two saves and seven state checkpoints,
+and loading an original-written save; DSP and OPL port/value sequences are
+identical; write timing differs by at most 12 µs in the short scenarios and
+up to 6.7 ms (OPL) / 0.9 ms (DSP) over the 645 s run. Fast/Ultra speed is CPU-bound and not
+time-comparable. Human gameplay acceptance is pending.
 
-## Residual data ranges (open)
+## Historical layout debt
 
-The 30 residual bytes remain explicit: 4 at 56FE, 2 at 5A28, 5 at 5A96/5A98,
+By project-owner decision the residual ranges are
+[historical layout debt](../evidence/canonical/historical-layout/review.md): they
+no longer block the canonical link, receive no owner, padding or original bytes,
+and stay listed in every build receipt. The 30 residual bytes remain explicit: 4 at 56FE, 2 at 5A28, 5 at 5A96/5A98,
 18 at 60B0 and the loaded mastering-tail byte 8B9D (value 72h, not zero fill;
 CRT clearing starts at 8B9E). The CRT 14-byte range at 79F0 is resolved in the
 supported domain. The reconstruction does not preserve the original DGROUP

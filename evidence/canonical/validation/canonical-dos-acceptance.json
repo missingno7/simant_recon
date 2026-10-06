@@ -1,0 +1,141 @@
+{
+  "schema": "simant-canonical-dos-acceptance-v1",
+  "scope": "Bounded deterministic original-vs-canonical observation within the supported execution domain; not a proof and not physical DGROUP layout equivalence.",
+  "canonical_build": {
+    "status": "LINKED_NOT_EXECUTED",
+    "blockers": [],
+    "executable": {
+      "path": "build/current/dos/link/SOURCE.EXE",
+      "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+      "size": 499341
+    },
+    "audit_totals": {
+      "translation_units": 200,
+      "storage_providers_verified": 73,
+      "public_symbols": 2091,
+      "communal_symbols": 443,
+      "symbolic_aliases": 193,
+      "unresolved_imports": 0,
+      "unresolved_semantic_gates": 0,
+      "unresolved_data_ranges": 0,
+      "unresolved_data_bytes": 0,
+      "historical_layout_debt_ranges": 5,
+      "historical_layout_debt_bytes": 30
+    },
+    "original_exe_bytes_used": {
+      "game_code": 0,
+      "game_data": 0,
+      "fallback_debt": 0,
+      "executable_fragments": 0
+    },
+    "historical_layout_debt": "evidence/canonical/historical-layout/review.md"
+  },
+  "runner": {
+    "path": "C:\\tools\\dosbox-x-2026.08.31-simant-acceptance\\dosbox-x-v3.exe",
+    "sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+    "size": 21082112
+  },
+  "scenarios": {
+    "new-game-save": {
+      "status": "PASS",
+      "scenario_sha256": "68f5103632cdf77587ee6471bba1d682df19a2281233c72f86cd61abf2c760d0",
+      "script_sha256": "81bd44c5dd211ff6ca00dbeb22c1ff812e4b2e16db14c4cd45c944619e734a5d",
+      "runtime_faults": {
+        "original": 0,
+        "reconstructed": 0
+      },
+      "states": {
+        "A.ANT": "EQUAL"
+      },
+      "sound": {
+        "sb_dsp": {
+          "status": "EQUAL",
+          "writes": [
+            5,
+            5
+          ],
+          "max_timing_delta_ms": 0.002415
+        },
+        "opl": {
+          "status": "EQUAL",
+          "writes": [
+            13476,
+            13476
+          ],
+          "max_timing_delta_ms": 0.00848
+        }
+      }
+    },
+    "sustained-full-game": {
+      "status": "PASS",
+      "scenario_sha256": "bc0c700fb61542b93bd5cb10fd4c78b403f05b28027a17de943265f87ce691d6",
+      "script_sha256": "18248b600247045a6754b52fe3b88c96dc49f0b4cc4140c1706217788f818a7e",
+      "runtime_faults": {
+        "original": 0,
+        "reconstructed": 0
+      },
+      "states": {
+        "A.ANT": "EQUAL",
+        "B.ANT": "EQUAL",
+        "cp109000": "EQUAL",
+        "cp200000": "EQUAL",
+        "cp300000": "EQUAL",
+        "cp400000": "EQUAL",
+        "cp500000": "EQUAL",
+        "cp600000": "EQUAL",
+        "cp645000": "EQUAL"
+      },
+      "sound": {
+        "sb_dsp": {
+          "status": "EQUAL",
+          "writes": [
+            214003,
+            214003
+          ],
+          "max_timing_delta_ms": 0.937075
+        },
+        "opl": {
+          "status": "EQUAL",
+          "writes": [
+            60130,
+            60130
+          ],
+          "max_timing_delta_ms": 6.681515
+        }
+      }
+    },
+    "load-original-resume": {
+      "status": "PASS",
+      "scenario_sha256": "c8fd42d5d4df2c8023521fdc4c4a62211bd935cb0b25c8eeffa7b5df225c63b7",
+      "script_sha256": "04a0d1b7f822aeb276e634095f6a918669b8af656108b477778f0f948e3d0641",
+      "runtime_faults": {
+        "original": 0,
+        "reconstructed": 0
+      },
+      "states": {
+        "cp30000": "EQUAL",
+        "cp50000": "EQUAL",
+        "cp70000": "EQUAL",
+        "cp88000": "EQUAL"
+      },
+      "sound": {
+        "sb_dsp": {
+          "status": "EQUAL",
+          "writes": [
+            5,
+            5
+          ],
+          "max_timing_delta_ms": 0.00244
+        },
+        "opl": {
+          "status": "EQUAL",
+          "writes": [
+            30758,
+            30758
+          ],
+          "max_timing_delta_ms": 0.011215
+        }
+      }
+    }
+  }
+}

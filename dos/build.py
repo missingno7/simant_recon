@@ -307,13 +307,24 @@ def audit_program(program, report):
                 r['classification'] != 'SEMANTIC / PORT-BLOCKING' for r in debt)):
         raise ValueError('invalid canonical unresolved functional data inventory')
     report['unresolved_data'] = debt
+    historical = program['dos'].get('historical_layout_debt', [])
+    if (len({r['id'] for r in historical} | {r['id'] for r in debt}) != len(historical) + len(debt) or
+            any(isinstance(r['bytes'], bool) or not isinstance(r['bytes'], int) or r['bytes'] <= 0 or
+                r.get('status') != 'HISTORICAL_LAYOUT_DEBT' or not r.get('decision_evidence') or
+                not r.get('caveat') for r in historical)):
+        raise ValueError('invalid historical layout debt inventory')
+    # Documented, owner-accepted residue: reported in every receipt, never given storage,
+    # and not a claim of physical DGROUP layout equivalence.
+    report['historical_layout_debt'] = historical
     report['audit_totals'] = {'translation_units': len(report['translation_units']),
         'storage_providers_verified': sum(r.get('storage_verification', {}).get('status') == 'PASS' for r in report['translation_units']),
         'public_symbols': sum(d['definition_kind'] == 'public' for defs in owners.values() for d in defs),
         'communal_symbols': sum(d['definition_kind'] == 'communal' for defs in owners.values() for d in defs),
         'symbolic_aliases': len(aliases), 'unresolved_imports': len(report['unresolved_symbols']),
         'unresolved_semantic_gates': len(report['unresolved_semantic_gates']),
-        'unresolved_data_ranges': len(debt), 'unresolved_data_bytes': sum(r['bytes'] for r in debt)}
+        'unresolved_data_ranges': len(debt), 'unresolved_data_bytes': sum(r['bytes'] for r in debt),
+        'historical_layout_debt_ranges': len(historical),
+        'historical_layout_debt_bytes': sum(r['bytes'] for r in historical)}
 
 
 def preflight_blockers(report):

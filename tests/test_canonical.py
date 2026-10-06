@@ -100,6 +100,27 @@ class CanonicalProgram(unittest.TestCase):
         del report['unresolved_data']
         self.assertIn('missing functional initialized-data audit', dos_build.preflight_blockers(report))
 
+    def test_historical_layout_debt_is_reported_not_owned(self):
+        program = json.loads((ROOT / 'src/program.json').read_text())
+        historical = program['dos']['historical_layout_debt']
+        self.assertEqual(sum(r['bytes'] for r in historical), 30)
+        self.assertEqual(program['dos']['unresolved_data'], [])
+        for row in historical:
+            self.assertEqual(row['status'], 'HISTORICAL_LAYOUT_DEBT')
+            self.assertIn('physical DGROUP layout equivalence is not claimed', row['caveat'])
+            self.assertTrue((ROOT / row['decision_evidence']).is_file())
+        # Historical debt never relaxes the blocker for genuinely unresolved data.
+        report = {'errors': [], 'translation_units': [{'status': 'COMPILED', 'object': {}}],
+                  'unresolved_data': [{'id': 'unowned_field', 'bytes': 1}],
+                  'historical_layout_debt': historical}
+        self.assertIn('1 unresolved data ranges (1 bytes)', dos_build.preflight_blockers(report))
+        # No canonical source may define storage for the historical addresses.
+        names = {'g_' + r['id'].split('_')[1].upper() for r in historical if r['id'].startswith('dgroup_')}
+        for path in (ROOT / 'src').rglob('*.[cC]'):
+            text = path.read_text(errors='replace')
+            for name in names:
+                self.assertNotRegex(text, r'\b_?' + name + r'\b', f'{name} in {path}')
+
 
 if __name__ == '__main__':
     unittest.main()
