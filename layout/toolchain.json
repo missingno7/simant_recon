@@ -571,6 +571,33 @@
      "output": "surface"
     }
    }
+  },
+  "dosbox-x-acceptance": {
+   "path": "C:/tools/dosbox-x-2026.08.31-simant-acceptance/dosbox-x.exe",
+   "sha256": "c127a9a578fbc90231701f369e087f896a3d953ce1c2f653cec88e9476cb40c3",
+   "note": "DOSBox-X 2026.08.31 built from the pinned release source with the provenance-recorded acceptance patch (C:/tools/CATALOG.md): emulated-time scripted input and guest memory dumps. Used only by dos/run.py --input-script for deterministic original-vs-reconstructed comparisons.",
+   "conf": {
+    "dosbox": {
+     "memsize": "16",
+     "quit warning": "false"
+    },
+    "cpu": {
+     "cycles": "fixed 200000",
+     "core": "normal",
+     "cputype": "386"
+    },
+    "dos": {
+     "xms": "true",
+     "ems": "false",
+     "umb": "false"
+    },
+    "mixer": {
+     "nosound": "true"
+    },
+    "sdl": {
+     "output": "surface"
+    }
+   }
   }
  },
  "linkers": {

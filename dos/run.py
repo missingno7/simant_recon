@@ -42,6 +42,49 @@ def keyboard_command(keys, delay, pace):
     return f'AUTOTYPE -w {delay:g} -p {pace:g} ' + ' '.join(keys) + ' > INPUT.LOG'
 
 
+SCRIPT_COMMANDS = {'key', 'keydown', 'keyup', 'mouse_move', 'mouse_button', 'dump', 'exit'}
+
+
+def input_script(path, out):
+    """Validate an emulated-time input/observation script for the acceptance runner.
+
+    Lines are `<emulated_ms> <command> ...`. Dump destinations are bare names
+    rewritten into the fresh output directory; no other host path is allowed.
+    """
+    path = Path(path).resolve()
+    if not path.is_relative_to(ROOT / 'dos/scenarios'):
+        path = diagnostic.experimental_path(path)
+    lines, last = [], -1
+    for number, raw in enumerate(Path(path).read_text().splitlines(), 1):
+        line = raw.split('#', 1)[0].strip()
+        if not line:
+            continue
+        parts = line.split()
+        if len(parts) < 2 or not parts[0].isdigit() or parts[1] not in SCRIPT_COMMANDS:
+            raise ValueError(f'input script line {number}: expected <ms> <command>')
+        ms = int(parts[0])
+        if ms < last:
+            raise ValueError(f'input script line {number}: times must not decrease')
+        last = ms
+        if parts[1] in ('key', 'keydown', 'keyup') and (len(parts) != 3 or parts[2] not in KEYS - {','}):
+            raise ValueError(f'input script line {number}: unknown key')
+        if parts[1] == 'mouse_move' and (len(parts) != 4 or not all(re.fullmatch(r'-?\d{1,4}', v) for v in parts[2:])):
+            raise ValueError(f'input script line {number}: mouse_move <dx> <dy>')
+        if parts[1] == 'mouse_button' and (len(parts) != 4 or parts[2] not in '012' or parts[3] not in ('down', 'up')):
+            raise ValueError(f'input script line {number}: mouse_button <0|1|2> down|up')
+        if parts[1] == 'dump':
+            if len(parts) != 5 or not re.fullmatch(r'[0-9A-Fa-f]{1,6}', parts[2]) or \
+                    not re.fullmatch(r'[0-9A-Fa-f]{1,6}', parts[3]) or not re.fullmatch(r'[A-Za-z0-9_.-]{1,40}', parts[4]):
+                raise ValueError(f'input script line {number}: dump <lin_hex> <len_hex> <name>')
+            parts[4] = str(out / ('dump-' + parts[4]))
+        if parts[1] == 'exit' and len(parts) != 2:
+            raise ValueError(f'input script line {number}: exit takes no arguments')
+        lines.append(' '.join(parts))
+    if not lines:
+        raise ValueError('input script is empty')
+    return lines
+
+
 def diagnostic_image(receipt):
     receipt = diagnostic.experimental_path(receipt)
     raw, identity = build.read_pin(receipt)
@@ -129,10 +172,16 @@ def main(argv=None):
     parser.add_argument('--key-delay', type=float, default=5, help='seconds before scheduled keys begin (0..30)')
     parser.add_argument('--key-pace', type=float, default=2, help='seconds between scheduled keys (0..10)')
     parser.add_argument('--capture-video', action='store_true', help='record guest video through DOSBox-X DX-CAPTURE')
+    parser.add_argument('--cycles', type=int, help='fixed emulated CPU cycles per ms (default: pinned runner value)')
+    parser.add_argument('--input-script', type=Path,
+                        help='emulated-time input/dump script for the pinned acceptance runner (exclusive with --key)')
+    parser.add_argument('--fixed-clock', action='store_true', help='set guest DOS date/time to a fixed value before launch')
     parser.add_argument('--saved-game', type=Path, help='copy an explicit worker/scratch .ANT save into the guest drive')
     args = parser.parse_args(argv)
-    if not 1 <= args.seconds <= 60:
-        parser.error('--seconds must be between 1 and 60')
+    # Scripted acceptance runs end with their own emulated-time `exit`; the
+    # host limit is only a safety net there.
+    if not 1 <= args.seconds <= (7200 if args.input_script else 60):
+        parser.error('--seconds must be between 1 and 60 (7200 with --input-script)')
     if any(not re.fullmatch(r'[A-Za-z0-9_./:=+-]+', a) for a in args.argument):
         parser.error('DOS arguments must be single safe tokens')
     try:
@@ -173,9 +222,19 @@ def main(argv=None):
                 'scope': 'Unmodified runtime user data. Staging does not establish successful Load or restored state equality.'}
         report['inert_runtime_file'] = {'path': 'INSTALL.EXE',
             'role': 'main opens this file five times to check DOS file-handle availability; never executed by the runner'}
-        runner = build.compiler.toolchain()['runners']['dosbox-x']
+        if args.input_script and args.key:
+            raise ValueError('--input-script and --key are exclusive')
+        runner = build.compiler.toolchain()['runners']['dosbox-x-acceptance' if args.input_script else 'dosbox-x']
         report['runner'] = build.read_pin(runner['path'], runner['sha256'])[1]
+        if args.input_script:
+            script = input_script(args.input_script, out)
+            (out / 'INPUT.SCR').write_text('\n'.join(script) + '\n')
+            report['input_script'] = {'source': str(args.input_script), 'events': len(script),
+                'scope': 'Emulated-time scheduled input and memory dumps; deterministic for fixed cycles and guest clock.'}
         batch = ['@echo off']
+        if args.fixed_clock:
+            batch += ['date 01-01-1992', 'time 12:00:00']
+            report['guest_clock'] = 'DATE 01-01-1992, TIME 12:00:00 set by the batch before input scheduling and launch'
         if input_command:
             batch.append(input_command)
             report['scheduled_keyboard'] = {'keys': args.key, 'delay_seconds': args.key_delay,
@@ -195,7 +254,14 @@ def main(argv=None):
         (out / 'RUN.BAT').write_bytes(('\r\n'.join(batch) + '\r\n').encode('ascii'))
         conf = []
         for section, settings in runner['conf'].items():
+            if section == 'cpu' and args.cycles is not None:
+                if not 100 <= args.cycles <= 1000000:
+                    raise ValueError('--cycles must be 100..1000000')
+                settings = {**settings, 'cycles': f'fixed {args.cycles}'}
+                report['cpu_cycles'] = settings['cycles']
             conf += ['[' + section + ']'] + [f'{k}={v}' for k, v in settings.items()]
+            if section == 'dosbox' and args.input_script:
+                conf += ['acceptance script=' + str(out / 'INPUT.SCR'), 'acceptance log=' + str(out / 'INPUT.LOG')]
             if section == 'dosbox' and args.capture_video:
                 conf += ['captures=' + str(out / 'capture'), 'show recorded filename=false']
         if args.trace_runtime:

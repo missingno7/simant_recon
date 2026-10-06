@@ -174,3 +174,22 @@ SaveRec preserves yard seeds and world data but omits both live RNG states, so
 loading the same save does not guarantee identical subsequent random outcomes.
 The bounded original-instruction controls and existing RNG regression scope are
 recorded in `evidence/canonical/diagnostic-link/rng-domain.json`.
+
+## Deterministic acceptance
+
+AUTOTYPE schedules keys on a host thread, so the recipes above are wall-timed.
+`dos/run.py --input-script` instead uses the pinned `dosbox-x-acceptance`
+runner (`layout/toolchain.json`): DOSBox-X 2026.08.31 rebuilt from the release
+source with a provenance-recorded patch that schedules keys, mouse motion,
+buttons, memory dumps and `exit` in emulated milliseconds. With fixed cycles
+and `--fixed-clock` (guest `DATE`/`TIME` set before launch) the game's tick
+counter, RNG seeds and input arrival are reproducible: repeated original runs
+produce byte-identical saves.
+
+```powershell
+python dos/acceptance.py dos/scenarios/new-game-save.json --build-report <receipt> --out build/workers/<w>/<task>
+```
+
+runs a scenario for the original and a reconstructed executable and requires
+byte-identical saves; differing SaveRec records are named in
+`acceptance.json`. A pass is a bounded observation of that scenario only.

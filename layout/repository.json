@@ -33,6 +33,10 @@
       "role": "Pinned DOSBox-X execution with separate original/diagnostic provenance"
     },
     {
+      "path": "dos/acceptance.py",
+      "role": "Deterministic original-vs-reconstructed DOS acceptance at saved-game boundaries"
+    },
+    {
       "path": "dos/build.py",
       "role": "Independent canonical DOS preflight/link"
     },
@@ -1122,6 +1126,7 @@
     "layout/": "Locked historical metadata/current proof and architecture policy",
     "portable/tests/": "Current native differential/runtime fixtures",
     "portable/runtime/": "Pinned native BIOS font resources",
-    "portable/whole_program/platform/tests/": "Permanent filesystem/handle service controls"
+    "portable/whole_program/platform/tests/": "Permanent filesystem/handle service controls",
+    "dos/scenarios/": "Pinned DOS acceptance scenarios and emulated-time input scripts"
   }
 }
