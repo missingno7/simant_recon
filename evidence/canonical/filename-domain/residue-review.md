@@ -1,8 +1,28 @@
-# FileSelect capacity: filesystem premises and the uninitialized name
+# FileSelect capacity: resolved in the supported domain
 
-Result: **the gate stays open.** The filesystem part can be scoped by explicit
-directory premises; the incoming uninitialized `name` cannot be bounded by any
-admitted proof or premise. No source change is justified or made.
+Result: **resolved as a supported-domain contract** (approved policy). No
+source change, initialization, clamp or resize is made; the original
+algorithm and its out-of-domain behaviour stay as they are.
+
+Supported FileSelect domain (recorded in `src/program.json`):
+
+* the incoming uninitialized `name[100]` holds a NUL within its first 47
+  bytes (`strlen <= 46`);
+* every selected DOS directory string, including `X:\`, has at most 32
+  characters;
+* file and directory names are valid DOS 8.3 names;
+* each listed directory yields fewer than 200 entries (subdirectories plus
+  `*.ant` files). This last premise is added by this review: at 200 entries the
+  list terminator lands one byte past the 3,200-byte heap list.
+
+`domain_probe.py` pins every FileSelect write and computes its worst case under
+these premises (`domain-facts.json`): the tightest is the initial
+`path + name` concatenation at exactly 80 of 80 bytes; the declined-overwrite
+retry needs 79. Out-of-domain contrasts are retained: a 47-byte incoming
+string or a 33-character directory needs 81 bytes, an inherited 66-character
+directory overruns `path[67]`, and 200 listed entries overrun the list.
+Longer stack residue, deeper directories, retries beyond these capacities and
+any resulting stack corruption are outside the functional oracle domain.
 
 ## Filesystem part (SUPPORTED_DOMAIN sub-obligation)
 
@@ -57,7 +77,7 @@ LoadGame's `ok`, so a cancelled Load would report success. This is derived from
 the original instructions, not an observed ordinary execution; no ordinary
 long-string history has been demonstrated either.
 
-## Residual claim
+## Residual claim (history; now scoped by the premises above)
 
 For ordinary initial FileSelect calls from LoadGame and SaveGame(0), no
 admitted proof or execution-domain premise guarantees a readable terminator

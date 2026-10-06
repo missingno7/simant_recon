@@ -1,0 +1,157 @@
+{
+  "schema": "simant-fileselect-domain-v1",
+  "premises": {
+    "incoming_name_max_strlen": 46,
+    "max_directory_chars": 32,
+    "max_leaf_chars": 12,
+    "max_listed_entries": 199
+  },
+  "function_definition_sha256": {
+    "LoadGame": "a7601b3b78f30779f26e356c33029386ba5a3bb91a3c0e7749e94b80d92e0cfa",
+    "o09_35F5_0188": "db94ef438f0781c284f66999eef4c9d31a9ebcabdadbc369d4a9ef38b7c1a387",
+    "o09_35F5_03C6": "4a67acaa0daf754a3dd91ecf639793e78a0669bffb9886f1c48707c657b4a350",
+    "o09_35F5_0D2B": "d9f090c4b80d1d23aecba38f9ee144aa59cc571b77c642972c1dc8571f8acca2"
+  },
+  "supported_capacities": [
+    {
+      "write": "path after drive helper and separator append",
+      "bytes": 34,
+      "capacity": 67,
+      "fits": true
+    },
+    {
+      "write": "lastDir copy of path",
+      "bytes": 34,
+      "capacity": 67,
+      "fits": true
+    },
+    {
+      "write": "initial path+incoming name into buf",
+      "bytes": 80,
+      "capacity": 80,
+      "fits": true
+    },
+    {
+      "write": "copy-back of buf into name",
+      "bytes": 80,
+      "capacity": 100,
+      "fits": true
+    },
+    {
+      "write": "listing filespec path*.* in buf",
+      "bytes": 37,
+      "capacity": 80,
+      "fits": true
+    },
+    {
+      "write": "directory entry \\1name> at list+1",
+      "bytes": 16,
+      "capacity": 16,
+      "fits": true
+    },
+    {
+      "write": "file entry '0' + %-12s",
+      "bytes": 14,
+      "capacity": 16,
+      "fits": true
+    },
+    {
+      "write": "list terminator after N entries",
+      "bytes": 3185,
+      "capacity": 3200,
+      "fits": true
+    },
+    {
+      "write": "drive-relative chdir argument in buf",
+      "bytes": 16,
+      "capacity": 80,
+      "fits": true
+    },
+    {
+      "write": "leaf copy into buf",
+      "bytes": 13,
+      "capacity": 80,
+      "fits": true
+    },
+    {
+      "write": "returned path+leaf into name",
+      "bytes": 46,
+      "capacity": 100,
+      "fits": true
+    },
+    {
+      "write": "declined-overwrite retry: path + previous full path",
+      "bytes": 79,
+      "capacity": 80,
+      "fits": true
+    }
+  ],
+  "negative_contrasts": {
+    "incoming_name_strlen_47": [
+      {
+        "write": "initial path+incoming name into buf",
+        "bytes": 81,
+        "capacity": 80,
+        "fits": false
+      }
+    ],
+    "directory_33_chars": [
+      {
+        "write": "initial path+incoming name into buf",
+        "bytes": 81,
+        "capacity": 80,
+        "fits": false
+      },
+      {
+        "write": "declined-overwrite retry: path + previous full path",
+        "bytes": 81,
+        "capacity": 80,
+        "fits": false
+      }
+    ],
+    "directory_66_chars_inherited": [
+      {
+        "write": "path after drive helper and separator append",
+        "bytes": 68,
+        "capacity": 67,
+        "fits": false
+      },
+      {
+        "write": "lastDir copy of path",
+        "bytes": 68,
+        "capacity": 67,
+        "fits": false
+      },
+      {
+        "write": "initial path+incoming name into buf",
+        "bytes": 114,
+        "capacity": 80,
+        "fits": false
+      },
+      {
+        "write": "copy-back of buf into name",
+        "bytes": 114,
+        "capacity": 100,
+        "fits": false
+      },
+      {
+        "write": "declined-overwrite retry: path + previous full path",
+        "bytes": 147,
+        "capacity": 80,
+        "fits": false
+      }
+    ],
+    "listed_entries_200": [
+      {
+        "write": "list terminator after N entries",
+        "bytes": 3201,
+        "capacity": 3200,
+        "fits": false
+      }
+    ]
+  },
+  "observed_residue": "residue-receipt.json (0..15 bytes on every ordinary chain, both builds)",
+  "dosbox_deep_path_control": {
+    "receipt_sha256": "dc26122282d56b01f02564bf943883f493efcd9a0fd2da64d546a9504fc05d0d"
+  }
+}

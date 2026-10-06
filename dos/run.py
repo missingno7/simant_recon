@@ -43,7 +43,7 @@ def keyboard_command(keys, delay, pace):
 
 
 SCRIPT_COMMANDS = {'key', 'keydown', 'keyup', 'mouse_move', 'mouse_button', 'dump', 'exit',
-                   'watch', 'watch_summary', 'on_exec'}
+                   'watch', 'watch_summary', 'on_exec', 'io_watch'}
 HEX = r'[0-9A-Fa-f]{1,8}'
 NAME = r'[A-Za-z0-9_.-]{1,40}'
 DUMP_EXPR = r'(?:[0-9A-Fa-f]{1,8}|ds:[0-9A-Fa-f]{1,4}|ss:sp\+[0-9A-Fa-f]{1,4}|farptr\(ss:sp\+[0-9A-Fa-f]{1,4}\))'
@@ -86,6 +86,11 @@ def input_script(path, out):
                     and re.fullmatch(NAME, parts[4]) and (len(parts) == 5 or parts[5] in ('r', 'w', 'rw'))):
                 raise ValueError(f'input script line {number}: {parts[1]} <lin_hex> <len_hex> <name> [r|w|rw]')
             parts[4] = str(out / ('watch-' + parts[4]))
+        if parts[1] == 'io_watch':
+            if not (5 <= len(parts) <= 6 and re.fullmatch(r'[0-9A-Fa-f]{1,4}', parts[2]) and re.fullmatch(r'[0-9A-Fa-f]{1,4}', parts[3])
+                    and re.fullmatch(NAME, parts[4]) and (len(parts) == 5 or parts[5] in ('in', 'out', 'inout'))):
+                raise ValueError(f'input script line {number}: io_watch <port_lo> <port_hi> <name> [in|out|inout]')
+            parts[4] = str(out / ('io-' + parts[4]))
         if parts[1] == 'on_exec':
             target = parts[2:4] if len(parts) > 3 and parts[2] == 'lin' else parts[2:3]
             rest = parts[2 + len(target):]
@@ -202,6 +207,8 @@ def main(argv=None):
     parser.add_argument('--key-delay', type=float, default=5, help='seconds before scheduled keys begin (0..30)')
     parser.add_argument('--key-pace', type=float, default=2, help='seconds between scheduled keys (0..10)')
     parser.add_argument('--capture-video', action='store_true', help='record guest video through DOSBox-X DX-CAPTURE')
+    parser.add_argument('--capture-sound', action='store_true',
+                        help='record OPL register writes (DROv2) and mixed audio (WAV) through DX-CAPTURE')
     parser.add_argument('--cycles', type=int, help='fixed emulated CPU cycles per ms (default: pinned runner value)')
     parser.add_argument('--input-script', type=Path,
                         help='emulated-time input/dump script for the pinned acceptance runner (exclusive with --key)')
@@ -256,7 +263,7 @@ def main(argv=None):
         if args.input_script and args.key:
             raise ValueError('--input-script and --key are exclusive')
         observing = args.input_script and any(
-            line.split()[1:2] and line.split()[1] in ('watch', 'watch_summary', 'on_exec')
+            line.split()[1:2] and line.split()[1] in ('watch', 'watch_summary', 'on_exec', 'io_watch')
             for line in Path(args.input_script).read_text().splitlines() if not line.lstrip().startswith('#'))
         runner = build.compiler.toolchain()['runners'][
             'dosbox-x-observation' if observing else 'dosbox-x-acceptance' if args.input_script else 'dosbox-x']
@@ -276,8 +283,9 @@ def main(argv=None):
                 'pace_seconds': args.key_pace, 'command': input_command,
                 'scope': 'Scheduled emulator key events; scheduling alone does not prove game delivery or handling. Timing is not a state synchronization barrier.'}
         launch = name + ' ' + ' '.join(args.argument)
-        if args.capture_video:
-            launch = 'DX-CAPTURE /V /-A /-M ' + launch
+        if args.capture_video or args.capture_sound:
+            launch = ('DX-CAPTURE ' + ('/V ' if args.capture_video else '/-V ') +
+                      ('/A /O ' if args.capture_sound else '/-A ') + '/-M ' + launch)
             (out / 'capture').mkdir()
         batch += ['echo STARTED>STARTED.TXT', launch + ' > GAME.LOG']
         # DOSBox-X's COMMAND.COM does not expand %ERRORLEVEL%; IF ERRORLEVEL
@@ -297,7 +305,7 @@ def main(argv=None):
             conf += ['[' + section + ']'] + [f'{k}={v}' for k, v in settings.items()]
             if section == 'dosbox' and args.input_script:
                 conf += ['acceptance script=' + str(out / 'INPUT.SCR'), 'acceptance log=' + str(out / 'INPUT.LOG')]
-            if section == 'dosbox' and args.capture_video:
+            if section == 'dosbox' and (args.capture_video or args.capture_sound):
                 conf += ['captures=' + str(out / 'capture'), 'show recorded filename=false']
         if args.trace_runtime:
             conf += ['[log]', 'logfile=' + str(out / 'dosbox-runtime.log'),
@@ -332,6 +340,9 @@ def main(argv=None):
                 report['keyboard_log'] = input_log.read_text(encoding='latin1') if input_log.is_file() else None
             if args.capture_video:
                 report['video_captures'] = [build.read_pin(p)[1] for p in sorted((out / 'capture').glob('*.avi'))]
+            if args.capture_sound:
+                report['sound_captures'] = [build.read_pin(p)[1] for p in sorted((out / 'capture').glob('*'))
+                                            if p.suffix.lower() in ('.dro', '.wav')]
                 report['video_scope'] = 'Guest video only; no audio recording. A time-limited emulator kill may leave an unfinalized AVI. Inspect decoded screen states; elapsed time is not gameplay equivalence.'
             trace = out / 'dosbox-runtime.log'
             raw = b''

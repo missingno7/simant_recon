@@ -48,7 +48,8 @@ class ClosureGraph(unittest.TestCase):
     def test_classification_cannot_waive_preflight(self):
         sys.path.insert(0, str(ROOT))
         from dos.build import preflight_blockers
-        gates = copy.deepcopy(self.program['dos']['semantic_gates'])
+        gates = copy.deepcopy(self.program['dos']['semantic_gates']) or [
+            dict(copy.deepcopy(self.program['dos']['resolved_domain_contracts'][0]), status='UNRESOLVED')]
         for row in gates:
             row['closure_class'] = 'HISTORICAL_LAYOUT'
         report = dict(errors=[], unresolved_semantic_gates=gates,

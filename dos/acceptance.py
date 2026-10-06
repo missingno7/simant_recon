@@ -56,6 +56,28 @@ def compare_saves(a: bytes, b: bytes) -> dict:
             "records": len(schema), "differences": differences}
 
 
+# Sound Mode 6 hardware: Sound Blaster DSP ports and the AdLib/OPL ports (the game
+# also plays digitized samples by modulating OPL output levels).
+SOUND_PORTS = {"sb_dsp": ("220", "22F"), "opl": ("388", "38B")}
+
+
+def port_writes(path: Path) -> list[tuple[float, str, str]]:
+    """(emulated ms, port, value) for every logged OUT."""
+    rows = []
+    for line in path.read_text().splitlines():
+        parts = line.split()
+        if len(parts) >= 5 and parts[1] == "out":
+            rows.append((float(parts[0]), parts[2], parts[4]))
+    return rows
+
+
+def compare_ports(a: list, b: list) -> dict:
+    equal = [r[1:] for r in a] == [r[1:] for r in b]
+    deltas = [abs(y[0] - x[0]) for x, y in zip(a, b)]
+    return {"status": "EQUAL" if equal else "DIFFERS", "writes": [len(a), len(b)],
+            "max_timing_delta_ms": round(max(deltas), 6) if deltas else 0.0}
+
+
 SCREEN_CLIP_PATTERN = bytes.fromhex("000000008002e0010080008000800080")  # g_5A9C at runtime (VGA)
 DUMP_BYTES = 0xA0000
 
@@ -65,6 +87,8 @@ def scripted_input(scenario: dict, out: Path) -> Path:
     lines = [line for line in (ROOT / scenario["script"]).read_text().splitlines()
              if line.strip() and not line.lstrip().startswith("#")]
     lines += [f"{ms} dump 0 {DUMP_BYTES:X} cp{ms}" for ms in scenario.get("checkpoints", [])]
+    if scenario.get("sound"):
+        lines += [f"0 io_watch {lo} {hi} {name} out" for name, (lo, hi) in SOUND_PORTS.items()]
     lines.sort(key=lambda line: int(line.split()[0]))
     path = out.parent / (out.name + ".scr")
     path.write_text("\n".join(lines) + "\n")
@@ -121,7 +145,9 @@ def run_once(scenario: dict, out: Path, build_report: Path | None) -> dict:
         checkpoints[f"cp{ms}"] = virtual_save(dump.read_bytes(), addresses) if dump.is_file() else None
         if dump.is_file():
             dump.unlink()  # 640 KiB per checkpoint; only the virtual save is retained in memory
-    return {"report": report, "map": map_path,
+    sound = {name: port_writes(out / f"io-{name}") for name in SOUND_PORTS
+             if scenario.get("sound") and (out / f"io-{name}").is_file()}
+    return {"report": report, "map": map_path, "sound": sound,
             "saves": {name: (out / name).read_bytes() if (out / name).is_file() else None
                       for name in scenario["saves"]},
             "checkpoints": checkpoints}
@@ -159,6 +185,13 @@ def main(argv=None) -> int:
                     for name in runs["original"]["checkpoints"]]
     if runs["reconstructed"]["map"] is not None:
         result["reconstructed_map_sha256"] = build.digest(runs["reconstructed"]["map"].read_bytes())
+    if scenario.get("sound"):
+        result["sound"] = {}
+        for name in SOUND_PORTS:
+            a, b = runs["original"]["sound"].get(name), runs["reconstructed"]["sound"].get(name)
+            row = compare_ports(a, b) if a is not None and b is not None else {"status": "MISSING"}
+            result["sound"][name] = row
+            passed &= row["status"] == "EQUAL"
     for name, x, y in comparisons:
         if x is None or y is None:
             result["saves"][name] = {"status": "MISSING", "present": [x is not None, y is not None]}
@@ -171,6 +204,7 @@ def main(argv=None) -> int:
     result["status"] = "PASS" if passed else "FAIL"
     (out / "acceptance.json").write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps({"status": result["status"], "out": str(out / "acceptance.json"),
+                      "sound": result.get("sound"),
                       "saves": {k: (v["status"], [d["name"] for d in v.get("differences", [])][:10])
                                 for k, v in result["saves"].items()}}, indent=1))
     return 0 if passed else 1
