@@ -1,5 +1,10 @@
 # Current viewport layout: conditional bound and unresolved gate
 
+> **Superseded conclusion (gate resolved):** `domain-review.md` closes
+> `map-viewport-grid-layout` in the narrowed supported domain (absolute-callback
+> mouse mode, BUG/driver premises recorded in `src/program.json`). The premises
+> and controls below remain the foundation of that closure.
+
 Result: **no correction, no admission; the global map-viewport-grid-layout gate remains unresolved**.
 This current packet concerns canonical S26:m39C7 viewport setup and root:m0250
 cache invalidation, shipped HCEGANT geometry for profiles 0 and 8, and the direct

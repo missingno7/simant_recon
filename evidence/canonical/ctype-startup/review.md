@@ -28,7 +28,9 @@ stock far-heap helpers executes. This separates original startup evidence from
 the independently linked stock-runtime fixtures that mutate far-heap pointers.
 It proves no all-environment or later-game no-write invariant.
 
-The ctype gate remains open. Signed out-of-table indexing, six relocated CMISC
+The ctype gate is now resolved in the supported domain by
+`evidence/canonical/ctype-domain/review.md`; the facts below remain corroboration only.
+The original open-gate assessment was: Signed out-of-table indexing, six relocated CMISC
 pointer words, later aliases, external input domains and independent-link prefix
 equivalence remain unresolved. Neither an invented table prefix nor unsigned
 indexing is justified. No runtime member, initializer or data debt is admitted.

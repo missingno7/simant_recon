@@ -42,7 +42,11 @@ def keyboard_command(keys, delay, pace):
     return f'AUTOTYPE -w {delay:g} -p {pace:g} ' + ' '.join(keys) + ' > INPUT.LOG'
 
 
-SCRIPT_COMMANDS = {'key', 'keydown', 'keyup', 'mouse_move', 'mouse_button', 'dump', 'exit'}
+SCRIPT_COMMANDS = {'key', 'keydown', 'keyup', 'mouse_move', 'mouse_button', 'dump', 'exit',
+                   'watch', 'watch_summary', 'on_exec'}
+HEX = r'[0-9A-Fa-f]{1,8}'
+NAME = r'[A-Za-z0-9_.-]{1,40}'
+DUMP_EXPR = r'(?:[0-9A-Fa-f]{1,8}|ds:[0-9A-Fa-f]{1,4}|ss:sp\+[0-9A-Fa-f]{1,4}|farptr\(ss:sp\+[0-9A-Fa-f]{1,4}\))'
 
 
 def input_script(path, out):
@@ -77,6 +81,20 @@ def input_script(path, out):
                     not re.fullmatch(r'[0-9A-Fa-f]{1,6}', parts[3]) or not re.fullmatch(r'[A-Za-z0-9_.-]{1,40}', parts[4]):
                 raise ValueError(f'input script line {number}: dump <lin_hex> <len_hex> <name>')
             parts[4] = str(out / ('dump-' + parts[4]))
+        if parts[1] in ('watch', 'watch_summary'):
+            if not (5 <= len(parts) <= 6 and re.fullmatch(HEX, parts[2]) and re.fullmatch(HEX, parts[3])
+                    and re.fullmatch(NAME, parts[4]) and (len(parts) == 5 or parts[5] in ('r', 'w', 'rw'))):
+                raise ValueError(f'input script line {number}: {parts[1]} <lin_hex> <len_hex> <name> [r|w|rw]')
+            parts[4] = str(out / ('watch-' + parts[4]))
+        if parts[1] == 'on_exec':
+            target = parts[2:4] if len(parts) > 3 and parts[2] == 'lin' else parts[2:3]
+            rest = parts[2 + len(target):]
+            ok = ((len(target) == 2 and re.fullmatch(HEX, target[1])) or
+                  (len(target) == 1 and re.fullmatch(HEX + ':' + HEX, target[0])))
+            if not (ok and len(rest) == 5 and rest[0].isdigit() and rest[1] == 'dump'
+                    and re.fullmatch(DUMP_EXPR, rest[2]) and re.fullmatch(HEX, rest[3]) and re.fullmatch(NAME, rest[4])):
+                raise ValueError(f'input script line {number}: on_exec <seg:off|lin hex> <hits> dump <expr> <len_hex> <name>')
+            parts[-1] = str(out / ('exec-' + parts[-1]))
         if parts[1] == 'exit' and len(parts) != 2:
             raise ValueError(f'input script line {number}: exit takes no arguments')
         lines.append(' '.join(parts))

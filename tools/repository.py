@@ -448,7 +448,7 @@ def audit(spec_path: Path) -> dict[str, Any]:
     evidence = _load_json(ROOT / 'evidence/canonical/blockers.json', issues, 'blocker_projection')
     if evidence.get('semantic_gates') != program.get('dos', {}).get('semantic_gates'):
         issues.append(_issue('blocker_projection_drift','evidence/canonical/blockers.json','Semantic gates must match the canonical inventory.'))
-    for field in ('supported_execution_domain', 'resolved_domain_contracts'):
+    for field in ('supported_execution_domain', 'resolved_domain_contracts', 'resolved_data'):
         if evidence.get(field) != program.get('dos', {}).get(field):
             issues.append(_issue('blocker_projection_drift', 'evidence/canonical/blockers.json', field + ' must match the canonical inventory.'))
     debt = program.get('dos', {}).get('unresolved_data', [])
@@ -528,6 +528,8 @@ def write_status():
         lines += ['', domain['limits'], '', '| Contract | Reviewed resolution |', '| --- | --- |']
         lines += [f'| `{row["id"]}` | [{cell(row["resolution"])}](../{row["resolution_evidence"]}) |'
                   for row in program['dos']['resolved_domain_contracts']]
+        lines += [f'| `{row["id"]}` ({row["bytes"]} bytes) | [{cell(row["resolution"])}](../{row["resolution_evidence"]}) |'
+                  for row in program['dos'].get('resolved_data', [])]
     lines += ['', '### Unowned functional data', '', '| ID | Class | Bytes | Reason |', '| --- | --- | ---: | --- |']
     lines += [f'| `{row["id"]}` | {row["closure_class"]} | {row["bytes"]} | {cell(row["reason"])} |' for row in debt]
     lines += ['', '### Native exceptions', '', '| ID | Scope |', '| --- | --- |']

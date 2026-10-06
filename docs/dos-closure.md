@@ -103,9 +103,19 @@ save/load and sustained play; neither a successful link nor a timeout proves it.
   [window callback/rectangle adjacency](../evidence/canonical/window-domain/array-gate-review.md),
   and the [critical selector aliases](../evidence/canonical/error-continuation/selector-review.md).
   Complete producer, alias and save audits compose the existing bounds; original
-  out-of-domain stores remain regression controls. Four semantic gates remain:
-  ctype prefix reads, clip generation, viewport dimensions and the FileSelect
-  local path. 44 unattributed bytes remain unresolved.
+  out-of-domain stores remain regression controls.
+* The [ctype domain proof](../evidence/canonical/ctype-domain/review.md) closes the
+  signed `_ctype` prefix gate and retires `dgroup_79f0`: nine of eleven sites cannot
+  receive a negative byte from shipped resources, config or guarded keys; the `/s`
+  site needs a launch argument; the save-alert read cannot change its switch. The
+  canonical link selects no `fdata.asm` member, so the 14 bytes need no owner.
+* The [viewport domain proof](../evidence/canonical/viewport-layout/domain-review.md)
+  closes the map-cache gate for absolute-callback mouse mode: at most 29x36 cells
+  of the 30x40 cache. The supported domain now also excludes `BUG=MSMOUSE`, a
+  driver reporting version 7.00 and drivers that ignore their requested ranges;
+  the mickey-mode 2046-row witness is retained.
+  Two semantic gates remain: clip generation (animation exclusions) and the
+  FileSelect path/name capacities. 30 unattributed bytes remain.
 * Every storage import now has a canonical owner. The last one, the
   [clip rectangle destination](../evidence/canonical/clip-owner/review.md), is
   256 records: each writer copies one sentinel-terminated list after a

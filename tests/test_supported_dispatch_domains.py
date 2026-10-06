@@ -94,7 +94,8 @@ class SupportedDispatchDomains(unittest.TestCase):
         for name in ['sound-selector-out-of-range-layout','window-index-resource-cross-owner-layout','critical-selector-computed-alias-layout']:
             self.assertNotIn(name,active)
             self.assertEqual(resolved[name]['domain'],dos['supported_execution_domain']['id'])
-        self.assertTrue({'graphics-computed-copy-layout','map-viewport-grid-layout'}<=active)
+        self.assertIn('graphics-computed-copy-layout',active)
+        self.assertEqual(resolved['map-viewport-grid-layout']['domain'],dos['supported_execution_domain']['id'])
         platform=json.loads((ROOT/'portable/platform.json').read_text())
         self.assertTrue({'native-window-object-domain','native-window-optional-words'}<={g['id'] for g in platform['preview_limitations']})
 
