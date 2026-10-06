@@ -28,6 +28,23 @@ class SaveComparisonTests(unittest.TestCase):
         self.assertEqual(result["status"], "DIFFERS")
         self.assertEqual(result["differences"][0]["name"], "MapA")
 
+    def test_virtual_save_reads_records_relative_to_runtime_base(self):
+        addresses = {row[4]: 0x2000 + 0x40 * i for i, row in enumerate(self.schema)}
+        addresses["g_5A9C"] = 0x100
+        for row in self.schema:
+            if row[4].startswith("("):
+                addresses[row[4][1:].split(" ")[0]] = addresses[row[4]] - int(row[4].split("+")[1].rstrip(") "))
+        base = 0x8240
+        memory = bytearray(0x40000)
+        memory[base + 0x100:base + 0x110] = acceptance.SCREEN_CLIP_PATTERN
+        memory[base + addresses["MapA"]] = 0x5A
+        save = acceptance.virtual_save(bytes(memory), addresses)
+        self.assertEqual(len(save), self.size)
+        self.assertEqual(save[0], 0x5A)
+        memory[0x30000:0x30010] = acceptance.SCREEN_CLIP_PATTERN
+        with self.assertRaisesRegex(ValueError, "not unique"):
+            acceptance.virtual_save(bytes(memory), addresses)
+
     def test_truncated_save_is_rejected(self):
         result = acceptance.compare_saves(bytes(self.size), bytes(self.size - 1))
         self.assertEqual(result["status"], "SIZE_MISMATCH")

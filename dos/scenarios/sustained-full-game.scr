@@ -74,7 +74,7 @@
 41200 mouse_button 0 down
 41400 mouse_move 160 100
 41600 mouse_button 0 up
-# Select Fast, interact with map again
+# Select Slow (see header), interact with map again
 42000 mouse_move -348 -834
 42200 mouse_button 0 down
 42250 mouse_button 0 up
@@ -103,7 +103,7 @@
 64000 key enter
 66000 key enter
 70000 key enter
-# Return to Normal after a short Fast interval
+# Return to Normal after a short Slow interval
 80000 mouse_move -640 -480
 80050 mouse_move 640 16
 80200 mouse_button 0 down
@@ -128,14 +128,15 @@
 306000 key 4
 308000 key 0
 310000 key 0
-# Save As C.ANT after more than ten emulated minutes from Full Game start
+# Save As C.ANT after more than ten emulated minutes (keyboard path, as for A.ANT)
 610000 key f2
-610500 mouse_move -640 -480
-611000 mouse_move 72 188
-611200 mouse_button 0 down
-611250 mouse_button 0 up
-613000 key c
-615000 key enter
-617000 key enter
-621000 key enter
-640000 exit
+612000 key down
+614000 key down
+616000 key down
+618000 key down
+620000 key enter
+622000 key c
+624000 key enter
+626000 key enter
+630000 key enter
+648000 exit

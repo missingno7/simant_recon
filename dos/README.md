@@ -193,3 +193,18 @@ python dos/acceptance.py dos/scenarios/new-game-save.json --build-report <receip
 runs a scenario for the original and a reconstructed executable and requires
 byte-identical saves; differing SaveRec records are named in
 `acceptance.json`. A pass is a bounded observation of that scenario only.
+
+Scenarios may also list `checkpoints` (emulated ms). The harness dumps
+conventional memory there and assembles a *virtual save*: every SaveRec
+record read from the original's symbol addresses or the reconstructed link
+map, relative to the runtime load base. A virtual save taken inside the modal
+"Saved correctly" alert equals the written file byte for byte, so checkpoints
+compare full simulation state at any time without driving the save UI.
+
+Speed > Fast and Ultra have no tick delay: the main loop runs as many steps as
+the CPU allows, so their step counts depend on instruction timing and are not
+comparable by emulated time between independently linked executables. Slow and
+Normal are tick-throttled. Current results: `new-game-save`,
+`sustained-full-game` (saves A/B plus checkpoints to 645 s) and
+`load-original-resume` (original-written save, resumed play to 88 s) are
+identical between the original and the canonical-only diagnostic link.

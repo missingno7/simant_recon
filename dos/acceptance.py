@@ -56,19 +56,75 @@ def compare_saves(a: bytes, b: bytes) -> dict:
             "records": len(schema), "differences": differences}
 
 
+SCREEN_CLIP_PATTERN = bytes.fromhex("000000008002e0010080008000800080")  # g_5A9C at runtime (VGA)
+DUMP_BYTES = 0xA0000
+
+
+def scripted_input(scenario: dict, out: Path) -> Path:
+    """The scenario script, plus a conventional-memory dump at each checkpoint."""
+    lines = [line for line in (ROOT / scenario["script"]).read_text().splitlines()
+             if line.strip() and not line.lstrip().startswith("#")]
+    lines += [f"{ms} dump 0 {DUMP_BYTES:X} cp{ms}" for ms in scenario.get("checkpoints", [])]
+    lines.sort(key=lambda line: int(line.split()[0]))
+    path = out.parent / (out.name + ".scr")
+    path.write_text("\n".join(lines) + "\n")
+    return path
+
+
+def record_addresses(map_path: Path | None) -> dict:
+    """Image-relative linear address of every SaveRec owner symbol."""
+    if map_path is None:
+        data = json.loads((ROOT / "layout/symbols.json").read_text())["data"]
+        return {name: row["seg"] * 16 + row["off"] for name, row in data.items()}
+    out = {}
+    for line in map_path.read_text(encoding="latin1").splitlines():
+        m = re.match(r"\s*([0-9A-F]{4}):([0-9A-F]{4})\s+Res\s+_(\w+)", line)
+        if m:
+            out.setdefault(m.group(3), int(m.group(1), 16) * 16 + int(m.group(2), 16))
+    return out
+
+
+def virtual_save(memory: bytes, addresses: dict) -> bytes:
+    """Assemble the 307 SaveRec records from a memory image, as SaveGame would write them."""
+    hits = [m.start() for m in re.finditer(re.escape(SCREEN_CLIP_PATTERN), memory)]
+    bases = {h - addresses["g_5A9C"] for h in hits}
+    if len(bases) != 1:
+        raise ValueError(f"runtime load base not unique: {sorted(bases)}")
+    base = bases.pop()
+    parts = []
+    for _, _, size, _, name in save_schema():
+        m = re.fullmatch(r"\((\w+) \+ (\d+)\)", name)
+        symbol, extra = (m.group(1), int(m.group(2))) if m else (name, 0)
+        start = base + addresses[symbol] + extra
+        parts.append(memory[start:start + size])
+    return b"".join(parts)
+
+
 def run_once(scenario: dict, out: Path, build_report: Path | None) -> dict:
     command = [sys.executable, str(ROOT / "dos/run.py"), "--out", str(out),
                "--seconds", str(scenario["host_seconds"]), "--fixed-clock",
-               "--input-script", str(ROOT / scenario["script"])]
+               "--input-script", str(scripted_input(scenario, out))]
     command += ["--original"] if build_report is None else ["--build-report", str(build_report)]
     if scenario.get("saved_game"):
         command += ["--saved-game", str(ROOT / scenario["saved_game"])]
     subprocess.run(command, cwd=ROOT, check=True, stdout=subprocess.DEVNULL,
                    timeout=scenario["host_seconds"] + 180)
     report = json.loads((out / "execution-report.json").read_text())
-    return {"report": report,
+    map_path = None
+    if build_report is not None:
+        receipt = json.loads(Path(build_report).read_text())
+        map_path = (ROOT / receipt["link"]["candidate_executable"]["path"]).with_name("SOURCE.MAP")
+    addresses = record_addresses(map_path)
+    checkpoints = {}
+    for ms in scenario.get("checkpoints", []):
+        dump = out / f"dump-cp{ms}"
+        checkpoints[f"cp{ms}"] = virtual_save(dump.read_bytes(), addresses) if dump.is_file() else None
+        if dump.is_file():
+            dump.unlink()  # 640 KiB per checkpoint; only the virtual save is retained in memory
+    return {"report": report, "map": map_path,
             "saves": {name: (out / name).read_bytes() if (out / name).is_file() else None
-                      for name in scenario["saves"]}}
+                      for name in scenario["saves"]},
+            "checkpoints": checkpoints}
 
 
 def main(argv=None) -> int:
@@ -97,8 +153,13 @@ def main(argv=None) -> int:
                                                      if str(p.get("path", "")).upper().endswith(".EXE")
                                                      and "INSTALL" not in str(p.get("path", "")).upper()), None)}
         passed &= report.get("status") == "EMULATOR_EXITED" and not faults
-    for name in scenario["saves"]:
-        x, y = runs["original"]["saves"][name], runs["reconstructed"]["saves"][name]
+    comparisons = [(name, runs["original"]["saves"][name], runs["reconstructed"]["saves"][name])
+                   for name in scenario["saves"]]
+    comparisons += [(name, runs["original"]["checkpoints"][name], runs["reconstructed"]["checkpoints"][name])
+                    for name in runs["original"]["checkpoints"]]
+    if runs["reconstructed"]["map"] is not None:
+        result["reconstructed_map_sha256"] = build.digest(runs["reconstructed"]["map"].read_bytes())
+    for name, x, y in comparisons:
         if x is None or y is None:
             result["saves"][name] = {"status": "MISSING", "present": [x is not None, y is not None]}
             passed = False
