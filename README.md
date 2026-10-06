@@ -27,8 +27,9 @@ python portable/build.py
 build/current/portable/simant-canonical.exe
 ```
 
-The canonical DOS command currently reports an explicit link refusal for four
-semantic gates and 44 bytes of data debt. Every storage symbol now has a canonical
+The canonical DOS command currently reports an explicit link refusal for 30
+bytes of unattributed data debt in five ranges; all semantic gates are resolved
+within the documented supported domain. Every storage symbol now has a canonical
 owner, so the isolated diagnostic links canonical objects alone, without warnings
 or provisional storage, and reaches Full Game under a recorded keyboard replay.
 Both build paths use zero original executable fallback. [Portable validation commands](portable/README.md) cover

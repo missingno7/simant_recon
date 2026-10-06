@@ -121,9 +121,14 @@ save/load and sustained play; neither a successful link nor a timeout proves it.
   capacity exhaustion. Yard animation can plausibly reach `CL074` in the original
   (unwitnessed fixtures reach 256..292 records); that fatal path and its effects
   beyond the temporary are excluded rather than reproduced.
-  One semantic gate remains: the FileSelect path/name capacities, including an
-  uninitialized `name` whose stack contents contain layout-dependent pointer
-  values. 30 unattributed bytes remain.
+* The [FileSelect domain probe](../evidence/canonical/filename-domain/residue-review.md)
+  resolves the last semantic gate in the supported domain: the uninitialized
+  incoming `name[100]` holds a NUL within its first 47 bytes, every selected DOS
+  directory string (including `X:\`) has at most 32 characters, names are valid
+  8.3 names and each listed directory yields fewer than 200 entries. Canonical
+  source is unchanged; `tests/test_fileselect_domain.py` keeps the 47-byte name,
+  33/66-character directory and 200-entry negative contrasts. 30 unattributed
+  bytes remain.
 * Every storage import now has a canonical owner. The last one, the
   [clip rectangle destination](../evidence/canonical/clip-owner/review.md), is
   256 records: each writer copies one sentinel-terminated list after a
@@ -255,8 +260,8 @@ SDL comparison to choose between canonical reconstruction and platform fixes.
 The [canonical-only diagnostic](../evidence/canonical/diagnostic-link/canonical-only.json)
 links all 200 canonical TUs with an empty provider manifest: no provisional
 storage remains. Its 40-second replay reaches SimAnt - Full Game with zero
-reported guest faults. The four gates and 44 data-debt bytes still refuse the
-canonical link; this bounded observation is not gameplay or sound acceptance.
+reported guest faults. The 30 data-debt bytes still refuse the canonical link;
+this bounded observation is not itself gameplay or sound acceptance.
 
 The [clip-generation control](../evidence/canonical/clip-domain/review.md) rejects
 the window-count capacity argument. Synthetic 31-window geometry produces 256
@@ -267,10 +272,46 @@ without crossing either scratch guard. These controls do not prove shipped UI
 reachability or admit the separate fixed clip destination. Complete geometry
 and repeated-producer bounds before emission remain the next clipping obligation.
 
-The 44 residual bytes remain explicit: 4 at 56FE, 2 at 5A28, 5 at 5A96,
-18 at 60B0, 14 at 79F0 and one common-tail boundary byte. The hot-box-shaped
-18-byte range has a real symbolic callback but no independent declaration/use
-bridge; the CRT 14-byte range has observable conditional signed-prefix reads;
-the other ranges need bounded ownership or startup/observer evidence. Naming
-every byte is unnecessary, but zero contents or an absent literal reference
-cannot supply the missing proof. None is silently erased by this phase.
+## Deterministic acceptance and sound
+
+`dos/acceptance.py` runs the original and a reconstructed build under the pinned
+deterministic DOSBox-X observation runner (fixed cycles, fixed clock, scripted
+emulated-time input) and compares full simulation-state dumps at checkpoints,
+assembled saves and, with `"sound": true`, every guest `OUT` to the Sound Blaster
+DSP (220-22F) and OPL (388-38B) ports. On the canonical-only diagnostic link the
+three scenarios pass at Slow/Normal speed: new game + save, a sustained 645 s
+game with two saves, and loading an original-written save; DSP and OPL port/value
+sequences are identical (the game plays digitized samples through OPL level
+modulation), with sub-10 µs timing deltas. Fast/Ultra speed is CPU-bound and not
+time-comparable. Final acceptance must be repeated on the canonical
+`dos/build.py --link` receipt once it links.
+
+## Residual data ranges (open)
+
+The 30 residual bytes remain explicit: 4 at 56FE, 2 at 5A28, 5 at 5A96/5A98,
+18 at 60B0 and the loaded mastering-tail byte 8B9D (value 72h, not zero fill;
+CRT clearing starts at 8B9E). The CRT 14-byte range at 79F0 is resolved in the
+supported domain. The reconstruction does not preserve the original DGROUP
+layout (TU contributions keep internal offsets, but order differs and
+uninitialized globals move to BSS), so these addresses have no counterpart: the
+obligation is to show that no supported-domain execution of the original
+observes them, or to ground an owner independently.
+
+Established so far: no relocation or immediate addresses any residual; the only
+symbol-indexed site overlapping [60B0,60BE) is the small-font fold table
+(`[bx+_g_5FBE]`, `src/root/m1FBD.asm`), and display mode 8 never installs the
+small font, so it is out of domain (kept as a control for other modes); the
+`g_610C[g_5A97]` selector alias is excluded in mode 8; hot-box queue insertions
+come only from `g_6004`/`g_6016`/`g_603A`; the 17 indirect dispatch edges are
+safe; 500 direct neighbour accesses are classified with no residual witness.
+Runtime watches over a 640 s game record zero game accesses (corroboration only).
+
+Not established: a complete computed-pointer exclusion. A whole-program pointer
+root analysis over the original code converges, but a single unresolved store
+keeps 3,266 of 3,310 undecided instructions at unknown root; a global stack
+floor above 8B9E is blocked by window-lock recursion depth and chained BIOS/DOS
+interrupt stack use. Independent ownership is not grounded for any range.
+Moved-layout aliasing is a separate obligation: any supported cross-contribution
+over-read or over-write would read different neighbours in the reconstruction.
+Zero contents, an absent literal reference or passing runtime checkpoints do
+not supply the missing proof, and no byte is waived or given an invented owner.
