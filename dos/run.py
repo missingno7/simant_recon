@@ -242,7 +242,11 @@ def main(argv=None):
             'role': 'main opens this file five times to check DOS file-handle availability; never executed by the runner'}
         if args.input_script and args.key:
             raise ValueError('--input-script and --key are exclusive')
-        runner = build.compiler.toolchain()['runners']['dosbox-x-acceptance' if args.input_script else 'dosbox-x']
+        observing = args.input_script and any(
+            line.split()[1:2] and line.split()[1] in ('watch', 'watch_summary', 'on_exec')
+            for line in Path(args.input_script).read_text().splitlines() if not line.lstrip().startswith('#'))
+        runner = build.compiler.toolchain()['runners'][
+            'dosbox-x-observation' if observing else 'dosbox-x-acceptance' if args.input_script else 'dosbox-x']
         report['runner'] = build.read_pin(runner['path'], runner['sha256'])[1]
         if args.input_script:
             script = input_script(args.input_script, out)

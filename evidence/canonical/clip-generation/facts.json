@@ -1,0 +1,415 @@
+{
+  "schema": "simant-clip-generation-package-v1",
+  "verdict": "SUPPORTED_DOMAIN_OVERFLOW_CALL_SELECTION_ONLY",
+  "contract": "same overflow diagnostic call selected; counts, generated rectangles and heap state after capacity exhaustion are not claimed equivalent",
+  "window_bound": {
+    "maximum_window_stack": 9,
+    "C097_records_before_sentinel": 137,
+    "C098_records_before_sentinel": 137,
+    "C099_records_before_sentinel": 172,
+    "maximum_records_plus_sentinel": 173,
+    "window_resource_count": 34,
+    "supported_window_geometry_count": 32,
+    "decoded_asset_sha256": {
+      "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+      "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+      "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+    },
+    "decoded_font_sha256": {
+      "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+      "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+      "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+      "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15"
+    },
+    "recomputed_bound_sha256": "0c0c9aee09aede10800e91c243386f505168fbdde1f71cc3e30403cc2ad2d107",
+    "source_pins": {
+      "src/root/m1D8E.c": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "src/root/m1E57.c": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+      "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+      "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "src/root/m2662.c": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+      "src/S05/m3663.c": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+      "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4"
+    }
+  },
+  "lifetime_and_coopen_census": {
+    "function_count": 1264,
+    "open_call_count": 48,
+    "open_census_sha256": "85a8e6977c8f4702874ff5fb187713d75a7fa5504e73f9bbc1c4becf6cc1c2f5",
+    "opener_descendant_paths_sha256": "5459791a27fb4d4c8921748a6af720f6c793c21d9696a262d8498ced58ef4e36",
+    "hook_open_paths_sha256": "0bfdf490186f94d40ad1eabe6e1be380db6028acc651702356dd116e26f102cd",
+    "indirect_call_count": 106,
+    "indirect_calls_sha256": "fa2392bf319007d509e3d3ea10983a61aab04cb8a8984a02f704a5d2a4d28ca9",
+    "window_catalog": {
+      "persistent": [
+        0,
+        1,
+        5,
+        18,
+        19,
+        21,
+        25
+      ],
+      "transient": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        20,
+        22,
+        23,
+        24,
+        26,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "transient_pairs": [
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          9,
+          16
+        ],
+        [
+          9,
+          17
+        ],
+        [
+          26,
+          30
+        ]
+      ]
+    },
+    "max_simultaneous_windows": 9,
+    "bound_premises": [
+      "successful pinned VGA8 resource acquisition",
+      "reviewed nominal supported window/event/save domain",
+      "lifetime catalog is a conservative super-set",
+      "nonempty normalized window rectangles",
+      "no returning-Punt arbitrary-state continuation"
+    ],
+    "inherited_bound_scope": [
+      "existing window-domain supported source/event/ordinary-save domain",
+      "pinned HCEGANT/SHARED resources and successful relevant services",
+      "locked VGA profile 8",
+      "ordinary first-fatal Punt behavior",
+      "exclude arbitrary helper entry, fabricated events, corrupt/replacement resources or saves, and returning-Punt continuation"
+    ],
+    "decoded_nonempty_resource_guards_passed": true,
+    "root_extent_residues_mod16": [
+      4,
+      5
+    ]
+  },
+  "producer_and_allocator_proof": {
+    "clip_owner_M": 255,
+    "clip_owner_induction": {
+      "records": 256,
+      "record_bytes": 8,
+      "extent_bytes": 2048,
+      "maximum_live_records": 255,
+      "sentinel_records": 1,
+      "initialization": "MSC far communal zero initialization; every reader is preceded by a whole-list write",
+      "destination_census_sha256": "5b063c9c77ba5b0c29daaf011d5ad68a7c2da0610c6654609514a4caa76996a4",
+      "destination_writers": [
+        "clip_Pop",
+        "clip_SetWin",
+        "clip_SubExclude",
+        "clip_SubInclude",
+        "f_1E57_0296",
+        "f_1E57_08F5",
+        "f_1E57_0C2D",
+        "f_1E57_0FDC"
+      ]
+    },
+    "producer_precheck_bounds": [
+      {
+        "producer": "clip_SubInclude",
+        "formula": "M",
+        "max_records": 255,
+        "diagnostic": "CL074:Temp clip overflow in SubInclude"
+      },
+      {
+        "producer": "f_1E57_08F5",
+        "formula": "2M",
+        "max_records": 510,
+        "diagnostic": "CL074:Temp clip overflow in SubInclude"
+      },
+      {
+        "producer": "clip_SubExclude",
+        "formula": "4M",
+        "max_records": 1020,
+        "diagnostic": "CL074:Temp clip overflow in SubExclude"
+      },
+      {
+        "producer": "f_1E57_0C2D",
+        "formula": "5M",
+        "max_records": 1275,
+        "diagnostic": "CL174:Temp clip overflow in SubExclude"
+      }
+    ],
+    "unchecked_08f5": {
+      "branch": "g_5AAC == NULL",
+      "caller": "f_0250_5058",
+      "caller_records_including_sentinel": 3,
+      "rectangles": 2,
+      "arbitrary_larger_direct_entry": "EXCLUDED"
+    },
+    "traversal_and_offsets": {
+      "current_list_max_records": 255,
+      "maximum_output_records": 1275,
+      "sentinel_top_word_start_offset": 10202,
+      "last_written_byte_offset": 10203,
+      "write_end_exclusive": 10204,
+      "largest_record_pointer_difference": 1275,
+      "record_payload_byte_span": 10200,
+      "signed_int_record_difference_wrap": false,
+      "far_offset_wrap": false,
+      "pointer_retreat": false,
+      "premise": "current-list sentinel controls finite iteration independently of rectangle values; f_1D8E_003F writes at most four outside records and never retreats p"
+    },
+    "allocator": {
+      "conventional_arena": "_dos_allocmem in f_171C_07BE",
+      "payload": "offset zero at paragraph-normalized block segment + 2 (32-byte header)",
+      "handle_table": "placed before first block arena via s_8C72 / g_91A2 split",
+      "ems_frame_max_assumption": "F000",
+      "ems_managed_endpoint_paragraph": 64505,
+      "ems_managed_endpoint_byte": 1032080,
+      "ems_envelope_end_byte": 1042284,
+      "below_1MiB": true
+    },
+    "range_separation": {
+      "protected_generation_reads": [
+        "current list: fd_50F6_3C14 or screen rectangle g_5A9C",
+        "08F5 caller stack rectangles and local stack/control state",
+        "executing clip/helper/caller code and return addresses",
+        "Punt guard in DGROUP"
+      ],
+      "conventional_premise": "ordinary _dos_allocmem payload follows loaded DOS image; a forward write of at most 10204 bytes cannot reach lower image, DGROUP, stack or code",
+      "alternate_placement": "if the arena can be below/within the loaded image, independently prove the same protected-range separation; historical read ranges are not assumed away",
+      "heap_neighbors": "NOT PROTECTED; physical corruption is excluded from the claim",
+      "original_loaded_process_range": [
+        0,
+        393769
+      ],
+      "original_protected_read_addresses": {
+        "clip_destination": 346996,
+        "screen_rectangle": 374220,
+        "clip_generator": 125182,
+        "outside_producer": 127007,
+        "outside_helper": 121119,
+        "unchecked_caller": 30040,
+        "Punt": 116268,
+        "Punt_guard": 372776
+      },
+      "original_initial_stack_segment_base": 389152,
+      "original_initial_stack_top": 393248,
+      "protected_addresses_within_loaded_process": true
+    },
+    "allocator_source_token_sha256": {
+      "src/root/m171C.c": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052"
+    }
+  },
+  "overflow_call_sites": [
+    {
+      "producer": "clip_SubInclude",
+      "diagnostic": "CL074:Temp clip overflow in SubInclude",
+      "count_argument": false
+    },
+    {
+      "producer": "f_1E57_08F5",
+      "diagnostic": "CL074:Temp clip overflow in SubInclude",
+      "count_argument": false
+    },
+    {
+      "producer": "clip_SubExclude",
+      "diagnostic": "CL074:Temp clip overflow in SubExclude",
+      "count_argument": false
+    },
+    {
+      "producer": "f_1E57_0C2D",
+      "diagnostic": "CL174:Temp clip overflow in SubExclude",
+      "count_argument": false
+    }
+  ],
+  "original_instruction_controls": {
+    "original_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "clip_domain_29_31_window_controls": [
+      {
+        "bars_per_axis": 14,
+        "windows": 29,
+        "completed": true,
+        "visible_rectangles": 225,
+        "pairwise_nonoverlap": true,
+        "scratch_allocations": [
+          {
+            "tag": "tmprects",
+            "bytes": 2048
+          },
+          {
+            "tag": "clipout",
+            "bytes": 2048
+          }
+        ],
+        "boundary_events": [],
+        "tmp_tail": "7a7a7a7a7a7a7a7a"
+      },
+      {
+        "bars_per_axis": 15,
+        "windows": 31,
+        "completed": false,
+        "visible_rectangles": 256,
+        "pairwise_nonoverlap": true,
+        "scratch_allocations": [
+          {
+            "tag": "tmprects",
+            "bytes": 2048
+          },
+          {
+            "tag": "clipout",
+            "bytes": 2048
+          }
+        ],
+        "boundary_events": [
+          {
+            "event": "scratch-overrun",
+            "tag": "tmprects",
+            "displacement": 2050,
+            "bytes": 2,
+            "value": 32768,
+            "pc": "1D8E:02AD"
+          },
+          {
+            "event": "Punt-entry",
+            "message": "C097: Clip overflow %d",
+            "count": 256
+          }
+        ],
+        "tmp_tail": "7a7a00807a7a7a7a"
+      }
+    ],
+    "animation_same_anchor_control": {
+      "fixture": "clip-subexclude-255-list-one-cutter",
+      "original_boundary_case": "single_same_anchor-original-boundary",
+      "pre_state_records": 255,
+      "pre_state_sha256": "bc6204bea1f597edd9ca4da60a9f2da09f8ef43d8079eeeeb56b2e45b4b66e38",
+      "loop": 2,
+      "role": "swarm-old-1-1",
+      "rect": [
+        296,
+        154,
+        312,
+        155
+      ],
+      "generated_count_including_overflow_record": 256,
+      "Punt_message": "CL074:Temp clip overflow in SubExclude",
+      "original_bodies": [
+        "clip_SubExclude",
+        "f_1E57_0009",
+        "f_1D8E_003F",
+        "f_1D8E_0002"
+      ],
+      "modeled_services": [
+        "heap allocation/resize/lock/unlock/free",
+        "far memcpy"
+      ],
+      "scope": "Synthetic same-anchor loop-2 rectangle fixture; one capacity-crossing clip_SubExclude call runs from original instructions. Heap services and far memcpy are explicit models."
+    },
+    "clip_owner_255_256_controls": [
+      {
+        "input_records": 255,
+        "incoming_guard": 0,
+        "completed": true,
+        "destination_sentinel_record": 255,
+        "stopped_at_first_fatal_entry": false,
+        "Punt_entries": [],
+        "destination_bytes_written": 2048,
+        "beyond_owner_bytes": 0,
+        "owner_tail_unchanged": true,
+        "temporary_overrun_before_fatal": false
+      },
+      {
+        "input_records": 256,
+        "incoming_guard": 0,
+        "completed": false,
+        "destination_sentinel_record": null,
+        "stopped_at_first_fatal_entry": true,
+        "Punt_entries": [
+          {
+            "guard": 0,
+            "message": "CL074:Temp clip overflow in SubExclude"
+          }
+        ],
+        "destination_bytes_written": 0,
+        "beyond_owner_bytes": 0,
+        "owner_tail_unchanged": true,
+        "temporary_overrun_before_fatal": true
+      },
+      {
+        "input_records": 256,
+        "incoming_guard": 1,
+        "completed": true,
+        "destination_sentinel_record": 256,
+        "stopped_at_first_fatal_entry": false,
+        "Punt_entries": [
+          {
+            "guard": 1,
+            "message": "CL074:Temp clip overflow in SubExclude"
+          }
+        ],
+        "destination_bytes_written": 2056,
+        "beyond_owner_bytes": 8,
+        "owner_tail_unchanged": false,
+        "temporary_overrun_before_fatal": true
+      }
+    ],
+    "replay_results_recomputed": true
+  },
+  "input_sha256": {
+    "evidence/canonical/clip-generation/probe.py": "1746fa1f8ccf13d92ec6a7cc658762b75a51bafe114e9c50827a41bf376ce68c",
+    "evidence/canonical/clip-generation/bound.py": "8b1de5075183a05e5961fa64567fd0c039c4ca93ff9363b35f5a057a193ebb96",
+    "evidence/canonical/clip-generation/census.py": "339b630bf3d325fc69b33ce84c012c72c58a2a06b1bf24d8935199c0f42d8125",
+    "evidence/canonical/clip-generation/anim_boundary.py": "dbab61bfde63370cec5207fffaab6d183395894904e8cef8376a647ffdb47467",
+    "evidence/canonical/clip-generation/animation-fixture.json": "b8e6064cc4acc8dcbe947b1f28de5a9ee1f88e16e5e8fe5a78a349d6760457cc",
+    "evidence/canonical/clip-generation/bound-proof.md": "e7e295e5087dd0184203e7a9db51239c835369701ce754fdda1e9b66f96d0cf5",
+    "evidence/canonical/clip-generation/review.md": "250d2f670781c5bbdbdf15e58ec3f63f54483ff49b4066c204ddef4f3fa92f19",
+    "evidence/canonical/clip-domain/replay.py": "b62c618829f6732045ba407d9401e69a1eab06de1ea68c564e9a927f13a5c34a",
+    "evidence/canonical/clip-domain/review.md": "da01d5612ed6c22137dda97365a05507a1daf17b4ab3ee0fc25ddd138dac24e7",
+    "evidence/canonical/clip-owner/replay.py": "a861b8221851d012c2c8a40c3573a89b0ccf3647fea4dfb75f95b6c36d2a5ab8",
+    "evidence/canonical/clip-owner/review.md": "45e79f46442892cc762ccb08486f775076aeadf789d1ce7366781209ccafc157",
+    "evidence/canonical/audio-track-owner/shipped_domain.py": "c1c96b54d1530812a6d1c771f56348ff4138d5dbf4abbc8bd891737da823b9ab",
+    "tools/resource_domains.py": "708d5aba9a69075d559e46c5c26eb2f3c25217b505838a561f8fd6e6809e1e93"
+  }
+}

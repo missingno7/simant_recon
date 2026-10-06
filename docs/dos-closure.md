@@ -114,8 +114,16 @@ save/load and sustained play; neither a successful link nor a timeout proves it.
   of the 30x40 cache. The supported domain now also excludes `BUG=MSMOUSE`, a
   driver reporting version 7.00 and drivers that ignore their requested ranges;
   the mickey-mode 2046-row witness is retained.
-  Two semantic gates remain: clip generation (animation exclusions) and the
-  FileSelect path/name capacities. 30 unattributed bytes remain.
+* The [clip generation proof](../evidence/canonical/clip-generation/review.md)
+  bounds window-stack generation at 172 records (at most nine co-open windows).
+  The other producers generate before their capacity check; their contract is
+  the same overflow diagnostic call, not equal counts or heap state after
+  capacity exhaustion. Yard animation can plausibly reach `CL074` in the original
+  (unwitnessed fixtures reach 256..292 records); that fatal path and its effects
+  beyond the temporary are excluded rather than reproduced.
+  One semantic gate remains: the FileSelect path/name capacities, including an
+  uninitialized `name` whose stack contents contain layout-dependent pointer
+  values. 30 unattributed bytes remain.
 * Every storage import now has a canonical owner. The last one, the
   [clip rectangle destination](../evidence/canonical/clip-owner/review.md), is
   256 records: each writer copies one sentinel-terminated list after a

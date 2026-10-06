@@ -97,17 +97,6 @@
   ],
   "semantic_gates": [
     {
-      "id": "graphics-computed-copy-layout",
-      "status": "UNRESOLVED",
-      "source": "src/root/m1E57.c",
-      "reason": "Clip list generation writes a 2048-byte heap temporary before each overflow check, so counts of 256 or more overrun that temporary before the Punt diagnostic. Original synthetic 31-window geometry generates 256 disjoint rectangles and writes the sentinel at displacement 2050 before C097; the adjacent 29-window control completes with 225 rectangles. The fixed destination 50F6:3C14 is now source-owned for every pre-Punt prefix; only a returning Punt copies beyond it (original guard-1 control: 2056 bytes). Shipped geometry reachability of such counts, the heap-adjacency effect of the pre-check overrun and returning-Punt continuation remain unresolved.",
-      "closure_class": "SUPPORTED_DOMAIN",
-      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
-      "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
-      "capacity_evidence": "evidence/canonical/clip-domain/review.md",
-      "owner_evidence": "evidence/canonical/clip-owner/review.md"
-    },
-    {
       "id": "filename-selector-local-capacity",
       "status": "UNRESOLVED",
       "source": "src/S09/m35F5.c",
@@ -122,7 +111,7 @@
     "imports": 0,
     "data_ranges": 5,
     "data_bytes": 30,
-    "semantic_gates": 2
+    "semantic_gates": 1
   },
   "historical_binary_only_outside_current_44": [
     {
@@ -392,6 +381,20 @@
       "domain": "shipped-default-vga-successful-lifetime",
       "resolution_evidence": "evidence/canonical/ctype-domain/review.md",
       "resolution": "Complete 11-site census: nine sites cannot receive a negative byte in the pinned resource/config/keyboard domain (guards, ASCII menu/config text, rewind-expanded card style spans); the /s launch site is outside empty launch arguments; the successful-save alert read at m1C62:170 is functionally unobservable for every negative byte. Ordinary nonfaulting DOS RAM reads; no unsigned rewrite, table prefix or owner is introduced."
+    },
+    {
+      "id": "graphics-computed-copy-layout",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "source": "src/root/m1E57.c",
+      "reason": "Clip list generation writes a 2048-byte heap temporary before each overflow check, so counts of 256 or more overrun that temporary before the Punt diagnostic. Original synthetic 31-window geometry generates 256 disjoint rectangles and writes the sentinel at displacement 2050 before C097; the adjacent 29-window control completes with 225 rectangles. The fixed destination 50F6:3C14 is now source-owned for every pre-Punt prefix; only a returning Punt copies beyond it (original guard-1 control: 2056 bytes). Shipped geometry reachability of such counts, the heap-adjacency effect of the pre-check overrun and returning-Punt continuation remain unresolved.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
+      "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
+      "capacity_evidence": "evidence/canonical/clip-domain/review.md",
+      "owner_evidence": "evidence/canonical/clip-owner/review.md",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/clip-generation/review.md",
+      "resolution": "Window-stack generation is bounded below capacity (at most 9 co-open windows: C097/C098 <=137, C099 <=172 records). The fixed destination is source-owned through the first Punt entry. For the other checked producers the contract is: same overflow diagnostic call selected; counts, generated rectangles and heap state after capacity exhaustion are not claimed equivalent. Physical effects of out-of-temporary stores (from the first capacity-exceeding store, including before Punt entry), diagnostic rendering, heap dumping, exit completion and any continuation are excluded. Synthetic 29/31-window, animation CL074 and 255/256 destination controls are retained; ordinary-play animation overflow reachability remains unknown."
     }
   ],
   "supported_execution_domain": {

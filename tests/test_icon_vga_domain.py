@@ -101,7 +101,9 @@ class IconVgaDomain(unittest.TestCase):
         for name in ids:
             self.assertEqual(resolved[name]['domain'],dos['supported_execution_domain']['id'])
             self.assertEqual(resolved[name]['status'],'RESOLVED_SUPPORTED_DOMAIN')
-        self.assertIn('graphics-computed-copy-layout',{g['id'] for g in dos['semantic_gates']})
+        # The graphics-copy gate is resolved only by its own clip-generation evidence.
+        self.assertEqual(resolved['graphics-computed-copy-layout']['resolution_evidence'],
+                         'evidence/canonical/clip-generation/review.md')
         self.assertTrue(any(m['source']=='src/state/icon-handle-cell-view.c' for m in self.program['modules']))
         platform=json.loads((ROOT/'portable/platform.json').read_text())
         self.assertNotIn('native-icon-lifetime',{g['id'] for g in platform['preview_limitations']})
