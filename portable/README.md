@@ -68,8 +68,9 @@ that a native C compiler cannot assemble; they are not an alternative C game
 model. Header views and native registries borrow canonical ordinary owners.
 
 Current native execution is a preview with explicit unresolved contracts.
-Five storage imports still lack complete DOS ownership proof; the canonical
-icon Handle slot also has unresolved activation and referent lifetime/extent.
+All ordinary storage, including the clip rectangle destination, now compiles
+from canonical owners without native reservations; the canonical icon Handle
+slot is resolved only for the locked VGA mode.
 FindIndex's one-past guard is a semantic exception. Window omitted-slot zeroing
 has a reviewed shipped-resource/observer domain but differs in raw state.
 The native heap provider now reports zero discarded sizes and restores an

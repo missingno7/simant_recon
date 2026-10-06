@@ -4,29 +4,7 @@
   "runnable": false,
   "standalone_DOS_executable": false,
   "human_acceptance": "PENDING",
-  "imports": [
-    {
-      "name": "_fd_50F6_3C14",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:1E57"
-      ],
-      "consumer_declarations": [
-        "extern struct Rect far fd_50F6_3C14[];"
-      ],
-      "grounding": "f_1E57_0174 (root:1E57 clip unit): far address 50F6:3C14 temporary clip rect buffer (memcpy target, stored into g_5AAC). Original synthetic 31-window control generates 256 rectangles and overruns the separate 2048-byte heap temporary before Punt. Neither the stack bound nor that temporary proves this destination's complete supported extent.",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "evidence/canonical/clip-domain/review.md"
-      ],
-      "closure_class": "SOURCE_REQUIRED",
-      "closure_basis": "A live undefined symbol needs one admitted source owner and complete supported extent/lifetime. Original defining TU and communal order are separate historical questions."
-    }
-  ],
+  "imports": [],
   "data_debt": [
     {
       "id": "dgroup_56fe",
@@ -162,11 +140,12 @@
       "id": "graphics-computed-copy-layout",
       "status": "UNRESOLVED",
       "source": "src/root/m1E57.c",
-      "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved. Original synthetic 31-window geometry generates 256 disjoint rectangles; the 2048-byte heap temporary receives its sentinel at displacement 2050 before the C097 diagnostic. The adjacent 29-window control completes with 225 rectangles. This rejects the window-count capacity premise without proving shipped-state reachability or the fixed destination extent.",
+      "reason": "Clip list generation writes a 2048-byte heap temporary before each overflow check, so counts of 256 or more overrun that temporary before the Punt diagnostic. Original synthetic 31-window geometry generates 256 disjoint rectangles and writes the sentinel at displacement 2050 before C097; the adjacent 29-window control completes with 225 rectangles. The fixed destination 50F6:3C14 is now source-owned for every pre-Punt prefix; only a returning Punt copies beyond it (original guard-1 control: 2056 bytes). Shipped geometry reachability of such counts, the heap-adjacency effect of the pre-check overrun and returning-Punt continuation remain unresolved.",
       "closure_class": "SUPPORTED_DOMAIN",
       "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
       "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
-      "capacity_evidence": "evidence/canonical/clip-domain/review.md"
+      "capacity_evidence": "evidence/canonical/clip-domain/review.md",
+      "owner_evidence": "evidence/canonical/clip-owner/review.md"
     },
     {
       "id": "map-viewport-grid-layout",
@@ -192,7 +171,7 @@
     }
   ],
   "counts": {
-    "imports": 1,
+    "imports": 0,
     "data_ranges": 6,
     "data_bytes": 44,
     "semantic_gates": 4

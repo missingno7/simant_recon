@@ -103,9 +103,16 @@ save/load and sustained play; neither a successful link nor a timeout proves it.
   [window callback/rectangle adjacency](../evidence/canonical/window-domain/array-gate-review.md),
   and the [critical selector aliases](../evidence/canonical/error-continuation/selector-review.md).
   Complete producer, alias and save audits compose the existing bounds; original
-  out-of-domain stores remain regression controls. Three semantic gates remain:
-  ctype prefix reads, clipping copies and viewport dimensions. Five storage
-  imports and 44 unattributed bytes remain unresolved.
+  out-of-domain stores remain regression controls. Four semantic gates remain:
+  ctype prefix reads, clip generation, viewport dimensions and the FileSelect
+  local path. 44 unattributed bytes remain unresolved.
+* Every storage import now has a canonical owner. The last one, the
+  [clip rectangle destination](../evidence/canonical/clip-owner/review.md), is
+  256 records: each writer copies one sentinel-terminated list after a
+  256-record overflow check, or from a list already bounded by one. Original
+  255/256 controls and a returning-`Punt` 2,056-byte contrast are retained;
+  generation before the check can still overrun its heap temporary, so the
+  clip gate stays open. The native reservation rewrite is retired.
 * `Punt` returns for a nonzero reentrancy guard. The permanent original-instruction
   witness reaches the real database `record[-1]` copy with four occupied slots
   and that guard. This globally rejects the tempting `noreturn` shortcut; it does
@@ -219,13 +226,19 @@ Saves preserve yard seeds and world data but omit both live RNG states. Differen
 fresh worlds or subsequent random outcomes are therefore not evidence of a
 defect without controlled seeds, state and call history.
 
-Next, extend restored-state and longer gameplay checks with the corrected linker contract,
-and close the remaining window/event and clipping/spider lifetimes, then remove
-each provisional provider through source promotion. Preserve the
+Next, extend restored-state and longer gameplay checks with the corrected linker
+contract on the canonical-only link, and close the clip generation, viewport and
+FileSelect domains and the residual data ranges. Preserve the
 CRT signed-prefix question until observed or statically excluded in that domain.
 Icon loads are now excluded in the existing default VGA domain; other display
 modes remain outside that proof. Only then use the three-way DOS-original/DOS-source/
 SDL comparison to choose between canonical reconstruction and platform fixes.
+
+The [canonical-only diagnostic](../evidence/canonical/diagnostic-link/canonical-only.json)
+links all 200 canonical TUs with an empty provider manifest: no provisional
+storage remains. Its 40-second replay reaches SimAnt - Full Game with zero
+reported guest faults. The four gates and 44 data-debt bytes still refuse the
+canonical link; this bounded observation is not gameplay or sound acceptance.
 
 The [clip-generation control](../evidence/canonical/clip-domain/review.md) rejects
 the window-count capacity argument. Synthetic 31-window geometry produces 256

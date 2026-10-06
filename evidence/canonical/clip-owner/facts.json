@@ -1,0 +1,214 @@
+{
+  "schema": "simant-clip-rect-owner-v1",
+  "scope": "Every execution prefix before the first Punt entry. Overflow diagnostics, returning-Punt continuation, generation reachability, the heap-temporary pre-check overrun, original producer TU and historical placement are excluded.",
+  "program_sha256": "a094c74a0e385f33cfeb82ace6102877236f4a00d506fd7d502c9ef12851eb33",
+  "function_definition_sha256": {
+    "clip_SetWin": "b68e9575c351b56404f2bd7e6401060d0813d663dac0ab74ba6a2945bb502290",
+    "f_1E57_0296": "652b643faefb80c7ed734f0251f09abf5f6ca2fa3ebe93029c9f1a856427f428",
+    "clip_SubInclude": "3705598cb1f852269f5ba887b74167e58770c5c84b1fc7913af1e37dafbd2eaf",
+    "f_1E57_08F5": "3cca8a9e276ac6a14d2038a54bd9a9ed6d1577e333580c8caba5a3c081fd1b15",
+    "clip_SubExclude": "fe670b12ddd64e899695fe0435397e6a8fbabccbd94efdd45c4f1d42561b8ca9",
+    "f_1E57_0C2D": "05a509fd3d4d26b802f703c8b9fdddba3b8fbfc9c098bf0b698e7e3afec94451",
+    "clip_Pop": "a99cdeb173fa8057f33d2aea5710809d62e9ebcc1b61fb1f447aa3174c2d304f",
+    "f_1E57_0FDC": "08bf05d6f9a702c1d422e158f1e564d5c866e52e60b0139e3f071a91fc3af12b",
+    "f_1E57_038E": "7288223cf1851ca5b1eef0ff0ed310b11fe042ffd3f3236c259913d99f31cd51",
+    "clip_Push": "859ee1b52d3a6173fed8fc40093b0ca36629e5bffe1beabe6a14f28f2c84e4bf",
+    "f_1D8E_02BD": "0cc3c58730615984011dc968ef6a245c52f4fd46e59077575d0ab0f6c838dfdf",
+    "f_1D8E_003F": "12057c81ebffe2481df71ea7b0aaa76f6097d464bc833e63cd1de4fecae7bf16",
+    "f_0250_5058": "bcaf2e9cf8611846388d457e5876cd147d71adc9d4d6c97d21ab7a329f3183ee",
+    "Punt": "72b872a74eb9d7ac8f434ce967cd1635593622738331a4305880e36310cc8d08"
+  },
+  "destination_census": {
+    "rows": [
+      [
+        "src/root/m1E57.c",
+        117,
+        "<file scope>",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        135,
+        "clip_SetWin",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        137,
+        "clip_SetWin",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        175,
+        "f_1E57_0296",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        176,
+        "f_1E57_0296",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        323,
+        "clip_SubInclude",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        359,
+        "f_1E57_08F5",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        395,
+        "clip_SubExclude",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        433,
+        "f_1E57_0C2D",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        491,
+        "clip_Pop",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        492,
+        "clip_Pop",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        512,
+        "f_1E57_0FDC",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/root/m1E57.c",
+        513,
+        "f_1E57_0FDC",
+        "fd_50F6_3C14"
+      ],
+      [
+        "src/state/clip-rect-buffer.c",
+        3,
+        "<file scope>",
+        "fd_50F6_3C14"
+      ]
+    ],
+    "sha256": "5b063c9c77ba5b0c29daaf011d5ad68a7c2da0610c6654609514a4caa76996a4"
+  },
+  "destination_writers": [
+    "clip_Pop",
+    "clip_SetWin",
+    "clip_SubExclude",
+    "clip_SubInclude",
+    "f_1E57_0296",
+    "f_1E57_08F5",
+    "f_1E57_0C2D",
+    "f_1E57_0FDC"
+  ],
+  "source_list_owners": {
+    "window_clip_handles": [
+      "clip_SetWin",
+      "f_1E57_0239",
+      "f_1E57_038E"
+    ],
+    "clip_stack": [
+      "clip_Pop",
+      "clip_Push"
+    ],
+    "active_clip_output": [
+      "src/root/m1E57.c"
+    ]
+  },
+  "foreign_clip_pointer_writers": {
+    "src/S10/m35F5.c": [
+      "saved = g_5AAC ;",
+      "g_5AAC = 0 ;",
+      "g_5AAC = saved ;"
+    ],
+    "src/root/m1B73.asm": [
+      "lea di, _g_5AAC",
+      "pop word ptr _g_5AAE",
+      "pop word ptr _g_5AAC"
+    ],
+    "src/root/m1C62.c": [
+      "g_5AAC = 0 ;",
+      "g_5AAC = 0 ;"
+    ]
+  },
+  "include_list_callers": [
+    [
+      "src/root/m0250.c",
+      "f_0250_5058",
+      2
+    ]
+  ],
+  "owner": {
+    "records": 256,
+    "record_bytes": 8,
+    "extent_bytes": 2048,
+    "maximum_live_records": 255,
+    "sentinel_records": 1,
+    "initialization": "MSC far communal zero initialization; every reader is preceded by a whole-list write"
+  },
+  "historical_extent": "UNCLAIMED",
+  "original_boundary_controls": [
+    {
+      "input_records": 255,
+      "incoming_guard": 0,
+      "completed": true,
+      "destination_sentinel_record": 255,
+      "stopped_at_first_fatal_entry": false,
+      "Punt_entries": [],
+      "destination_bytes_written": 2048,
+      "beyond_owner_bytes": 0,
+      "owner_tail_unchanged": true,
+      "temporary_overrun_before_fatal": false
+    },
+    {
+      "input_records": 256,
+      "incoming_guard": 0,
+      "completed": false,
+      "destination_sentinel_record": null,
+      "stopped_at_first_fatal_entry": true,
+      "Punt_entries": [
+        {
+          "guard": 0,
+          "message": "CL074:Temp clip overflow in SubExclude"
+        }
+      ],
+      "destination_bytes_written": 0,
+      "beyond_owner_bytes": 0,
+      "owner_tail_unchanged": true,
+      "temporary_overrun_before_fatal": true
+    },
+    {
+      "input_records": 256,
+      "incoming_guard": 1,
+      "completed": true,
+      "destination_sentinel_record": 256,
+      "stopped_at_first_fatal_entry": false,
+      "Punt_entries": [
+        {
+          "guard": 1,
+          "message": "CL074:Temp clip overflow in SubExclude"
+        }
+      ],
+      "destination_bytes_written": 2056,
+      "beyond_owner_bytes": 8,
+      "owner_tail_unchanged": false,
+      "temporary_overrun_before_fatal": true
+    }
+  ]
+}

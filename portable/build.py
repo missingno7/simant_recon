@@ -55,7 +55,6 @@ from canonical_native_abi import window_parameters
 from canonical_native_abi import newgame_zoom_window_v1
 from canonical_native_abi import s26_window_object_views_v1
 from canonical_native_abi import load_string_ant
-from canonical_native_abi import source_runtime_globals
 PROJECT=Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT / 'tools'))
 from workspace import prepare_output, retire
@@ -64,7 +63,7 @@ OUT=None
 SDK=None
 CC=None
 PLATFORM=json.loads((Path(__file__).parent/'platform.json').read_text())
-ABI_MODULES={'rng':rng,'audio':audio,'audio_shared_state_preword':audio_shared_state_preword,'fonts':fonts,'pointer_globals':pointer_globals,'varargs':varargs,'windows':windows,'window_loader':window_loader,'timer':timer,'startup_bundle':startup_bundle,'main_preflight':main_preflight,'findindex_native_guard':findindex_native_guard,'crt_abi':crt_abi,'spider_inline_source':spider_inline_source,'m1b73_queue_source':m1b73_queue_source,'m1b73_event_source':m1b73_event_source,'event_word_switch':event_word_switch,'file_select_host':file_select_host,'menu_s17_preword':menu_s17_preword,'list_text_handle':list_text_handle,'clip_stack_native':clip_stack_native,'cache_table_native':cache_table_native,'countdown_host':countdown_host,'window_parameters':window_parameters,'newgame_zoom_window_v1':newgame_zoom_window_v1,'s26_window_object_views_v1':s26_window_object_views_v1,'load_string_ant':load_string_ant,'source_runtime_globals':source_runtime_globals}
+ABI_MODULES={'rng':rng,'audio':audio,'audio_shared_state_preword':audio_shared_state_preword,'fonts':fonts,'pointer_globals':pointer_globals,'varargs':varargs,'windows':windows,'window_loader':window_loader,'timer':timer,'startup_bundle':startup_bundle,'main_preflight':main_preflight,'findindex_native_guard':findindex_native_guard,'crt_abi':crt_abi,'spider_inline_source':spider_inline_source,'m1b73_queue_source':m1b73_queue_source,'m1b73_event_source':m1b73_event_source,'event_word_switch':event_word_switch,'file_select_host':file_select_host,'menu_s17_preword':menu_s17_preword,'list_text_handle':list_text_handle,'clip_stack_native':clip_stack_native,'cache_table_native':cache_table_native,'countdown_host':countdown_host,'window_parameters':window_parameters,'newgame_zoom_window_v1':newgame_zoom_window_v1,'s26_window_object_views_v1':s26_window_object_views_v1,'load_string_ant':load_string_ant}
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
 def main():
@@ -147,8 +146,6 @@ def main():
             text,count=re.subn(initializer,'struct InputQueueDescriptor g_5FF2 = { {0,0,0,0xff},0,0,input_queue,5,0,10,0 };',text)
             if count!=1:errors.append({'source':rel,'stage':'canonical input queue native pointer','error':'initializer shape differs'})
             text='#include "portable/whole_program/types/input_queue.h"\n'+text
-        if rel == 'src/root/m1E57.c':
-            text=apply('source_runtime_globals','adapt_transformed',text,text,rel,original)
         if rel in abis['audio_shared_state_preword'].SOURCE_MODULES:
             if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m284A.c','m29F0.c','m277E.c','m29D6.c','m293A.c','m290D.c'}:
                 text=translate_29d6_port_block(text) if rel=='src/root/m29D6.c' else apply('audio','adapt',text,rel,text)

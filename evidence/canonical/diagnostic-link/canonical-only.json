@@ -1,0 +1,77 @@
+{
+ "schema": "simant-canonical-only-diagnostic-observation-v1",
+ "status": "BOUNDED_FULL_GAME_OBSERVED",
+ "canonical_closure": false,
+ "program": {
+  "path": "src/program.json",
+  "sha256": "a094c74a0e385f33cfeb82ace6102877236f4a00d506fd7d502c9ef12851eb33",
+  "bytes": 313422
+ },
+ "canonical_translation_units": 200,
+ "storage_providers_verified": 73,
+ "remaining_provisional_owners": 0,
+ "providers_manifest": {
+  "path": "build/workers/claude/clip-owner/link/providers.json",
+  "sha256": "c6cf9c5f9cdc3e7df5e46023add3508a11241e1086e235b4f8413dcb7ff9a1ae",
+  "bytes": 68
+ },
+ "link_status": "LINKED_NOT_EXECUTED",
+ "linked_executable": {
+  "path": "build/workers/claude/clip-owner/link-trial/link/SOURCE.EXE",
+  "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+  "size": 499341
+ },
+ "faults": {
+  "count": 0,
+  "first_lines": [],
+  "kind_counts": {
+   "unhandled_interrupt": 0,
+   "segment_limit": 0,
+   "game_abort": 0
+  }
+ },
+ "milestones_verified_by_runner": [
+  {
+   "id": "VGA_640X480_ENTRY",
+   "scope": "Observed BIOS mode 12h followed by VGA 640x480; rendering, input and gameplay are unverified."
+  }
+ ],
+ "observation": "Decoded capture frames show the Maxis logo, registration dialog, Select a Game, then SimAnt - Full Game with terrain, yellow ant, map and colony status windows from about 21 seconds through the end of the 40-second replay. Zero guest faults were reported.",
+ "keyboard": {
+  "keys": [
+   "enter",
+   "enter",
+   "enter",
+   ",",
+   ",",
+   "kp_5",
+   "space"
+  ],
+  "delay_seconds": 5.0,
+  "pace_seconds": 2.0,
+  "scope": "Scheduled emulator key events; timing is not a state synchronization barrier."
+ },
+ "scope": "First diagnostic link with no provisional storage: every storage symbol has a canonical owner. Four semantic gates and 44 bytes of data debt remain and still refuse canonical linking. No full gameplay, sound, exact terrain/RNG replay or standalone acceptance claim.",
+ "pins": [
+  {
+   "path": "build/workers/claude/clip-owner/link-trial/build-report.json",
+   "sha256": "29e4eb550cef9deec0b598f61bba1f86a916ca32cdbeb26b27fcd9d3d475b52d",
+   "bytes": 334889
+  },
+  {
+   "path": "build/workers/claude/clip-owner/runtime/execution-report.json",
+   "sha256": "dc59a96e69d8abfaabfec7bbe4a652bf2d2d0632b621e66285c852a2237d839a",
+   "bytes": 46944
+  },
+  {
+   "path": "build/workers/claude/clip-owner/runtime/dosbox-runtime.log",
+   "sha256": "157ec66a8f9442a035f9732c099562f5c4d7fac7869b2f4bb748a0fa25cf0405",
+   "bytes": 266998
+  },
+  {
+   "path": "build/workers/claude/clip-owner/runtime/t11.png",
+   "sha256": "48ea2c9b9cf497779d5188f5dd8630b48926949a4910c417348a0cc60b08533e",
+   "bytes": 34635
+  }
+ ]
+}

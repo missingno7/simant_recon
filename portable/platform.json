@@ -48,7 +48,6 @@
     "portable/whole_program/platform/graphics_s00_map_tables.c",
     "portable/whole_program/state/font_pointer_state_v1.c",
     "portable/whole_program/window_parameters.c",
-    "portable/whole_program/platform/source_memory.c",
     "portable/whole_program/platform/graphics_source_clip.c",
     "portable/whole_program/platform/graphics_bitmap_source.c",
     "portable/whole_program/platform/graphics_capture_source.c",
@@ -84,7 +83,6 @@
     "portable/whole_program/platform/bios_fonts.h",
     "portable/whole_program/types/resource_wire.h",
     "portable/whole_program/platform/graphics_resources.h",
-    "portable/whole_program/platform/source_memory.h",
     "portable/whole_program/platform/pit_clock.h",
     "portable/platform/host.h",
     "portable/platform/memory.h",
@@ -225,13 +223,6 @@
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "S10/S19 event enqueue",
       "detail": "Four-word DOS enqueue calls inherit an unprovided fifth Event.v word; native supplies zero. Original-instruction controls prove differing queued v under caller-stack contrast, while explicit fifth-zero controls remain equal. Coordinate observers exist; full interleaving/observer closure remains required. See evidence/canonical/event-omitted-word/."
-    },
-    {
-      "id": "native-clip-allocation-policy",
-      "status": "OPEN",
-      "gate": "SEMANTIC/PORT-BLOCKING",
-      "module": "Clip native reservation",
-      "detail": "The unresolved fixed clip storage is represented by a host pointer and dynamic reservation. Its owner, extent and lifetime remain unproved, and the reservation introduces native allocation and failure paths. This one contract supersedes the broader native-storage-ownership contract now that all other formerly duplicated ordinary storage comes directly from canonical owners."
     },
     {
       "id": "native-drive-device-policy",

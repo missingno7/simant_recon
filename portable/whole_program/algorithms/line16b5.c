@@ -2,8 +2,6 @@
 
 #include <string.h>
 
-PortableSpiderLineBuffer fd_50F6_1F26;
-
 typedef struct LinePoint {
     int32_t x;
     int32_t y;

@@ -18,7 +18,10 @@
     "tools/dos_source_bindings.py",
     "evidence/canonical/native-window-boundary/manifest-statement.json",
     "evidence/canonical/validation/behavior-dependencies.json",
-    "portable/whole_program/conversions/pointer_globals.c"
+    "portable/whole_program/conversions/pointer_globals.c",
+    "portable/canonical_native_abi/source_runtime_globals.py",
+    "portable/whole_program/platform/source_memory.c",
+    "portable/whole_program/platform/source_memory.h"
   ],
   "entry_points": [
     {
@@ -257,15 +260,6 @@
       "deletion_condition": "Keep the narrow type pass; pair with word_islands only as one ordered orchestration API, retaining distinct fail-closed behavior and receipts."
     },
     {
-      "module": "source_runtime_globals",
-      "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Injects the remaining runtime reserve calls, failure behavior and pointer-width storage for the unresolved clip rectangle buffer. The superseded monochrome rewrite is retired.",
-      "blocker_ids": [
-        "native-clip-allocation-policy"
-      ],
-      "deletion_condition": "Remove the exceptional rewrite after the clip owner/extent/lifetime contracts close; preserve only necessary native pointer/platform lowering."
-    },
-    {
       "module": "source_views",
       "classification": "GENERIC_LOWERING",
       "reason": "Mechanical declarations, canonical owner/alias views, callback and resource-pointer representation, scalar/port conversion. The menu allocation/count walk/failure branch has been removed after canonical owner admission.",
@@ -422,21 +416,6 @@
       "reason": "Derives the native Event field widths from the canonical declaration and emits a pointer-widened Timer descriptor view.",
       "blocker": "The header is generated from a brittle Event regex and fixed descriptor shape; keep fail-closed checks until a source-backed type parser or checked-in generated projection is proven equivalent.",
       "deletion_condition": "Replace generation only after the generated header is byte-identical for the current canonical source and changes in Event shape fail explicitly."
-    },
-    {
-      "id": "runtime_storage_reservations",
-      "class": "TEMPORARY_EXCEPTION",
-      "paths": [
-        "portable/canonical_native_abi/source_runtime_globals.py",
-        "portable/whole_program/platform/source_memory.c"
-      ],
-      "builder_site": "portable/build.py:150-151",
-      "consumers": [
-        "src/root/m1E57.c"
-      ],
-      "reason": "Injects runtime reserve calls, failure behavior and pointer-width storage for the unresolved clip rectangle buffer. The monochrome source now uses its canonical owner without transformation.",
-      "blocker": "native-clip-allocation-policy: clip capacity and lifetime remain unproved; monochrome and menu reservations are retired.",
-      "deletion_condition": "Resolve the canonical clip owner, extent and lifetime, then retire this exceptional allocation policy while preserving source operation order."
     },
     {
       "id": "audio_hardware_source_adapters",

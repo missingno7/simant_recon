@@ -2773,6 +2773,44 @@
       }
     },
     {
+      "key": "source-owned:clip-rect-buffer",
+      "source": "src/state/clip-rect-buffer.c",
+      "lang": "c",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source_sha256": "02f5eada66676494f43296b253ff3e3eed5eaa418c6ee2f3daae703b519a4003",
+      "unit": "root",
+      "storage_contract": {
+        "communals": [
+          {
+            "name": "_fd_50F6_3C14",
+            "kind": "far",
+            "length": 2048,
+            "count": 256,
+            "element_size": 8
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "supported_domain": {
+        "receipt": "evidence/canonical/clip-owner/review.md",
+        "facts": "evidence/canonical/clip-owner/facts.json",
+        "scope": "Every execution prefix before the first Punt entry: 255 rectangles plus sentinel. Returning-Punt continuation, overflow reachability, original producer TU and historical placement are excluded."
+      }
+    },
+    {
       "key": "source-owned:colony-simulation-words",
       "source": "src/state/colony-simulation-words.c",
       "lang": "c",
@@ -9305,11 +9343,12 @@
         "id": "graphics-computed-copy-layout",
         "status": "UNRESOLVED",
         "source": "src/root/m1E57.c",
-        "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved. Original synthetic 31-window geometry generates 256 disjoint rectangles; the 2048-byte heap temporary receives its sentinel at displacement 2050 before the C097 diagnostic. The adjacent 29-window control completes with 225 rectangles. This rejects the window-count capacity premise without proving shipped-state reachability or the fixed destination extent.",
+        "reason": "Clip list generation writes a 2048-byte heap temporary before each overflow check, so counts of 256 or more overrun that temporary before the Punt diagnostic. Original synthetic 31-window geometry generates 256 disjoint rectangles and writes the sentinel at displacement 2050 before C097; the adjacent 29-window control completes with 225 rectangles. The fixed destination 50F6:3C14 is now source-owned for every pre-Punt prefix; only a returning Punt copies beyond it (original guard-1 control: 2056 bytes). Shipped geometry reachability of such counts, the heap-adjacency effect of the pre-check overrun and returning-Punt continuation remain unresolved.",
         "closure_class": "SUPPORTED_DOMAIN",
         "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
         "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
-        "capacity_evidence": "evidence/canonical/clip-domain/review.md"
+        "capacity_evidence": "evidence/canonical/clip-domain/review.md",
+        "owner_evidence": "evidence/canonical/clip-owner/review.md"
       },
       {
         "id": "map-viewport-grid-layout",
@@ -9555,34 +9594,33 @@
           "id": "graphics-domain",
           "question": "Which viewport, clip, spider and mono footprints occur in supported display modes?",
           "scope": "HCEGANT VGA evidence is conditional; missing MONONT/L256NT cannot be inferred from Win16.",
-          "next_experiment": "Resolve complete clip geometry/copy ownership and viewport resize/input bounds; odd display modes still require independent monochrome resources and allocation evidence.",
+          "next_experiment": "Bound shipped clip geometry before each emission and resolve viewport resize/input bounds; odd display modes still require independent monochrome resources and allocation evidence.",
           "depends_on": [
             "window-domain",
             "error-continuation"
           ],
           "members": {
-            "imports": [
-              "_fd_50F6_3C14"
-            ],
+            "imports": [],
             "gates": [
               "graphics-computed-copy-layout",
               "map-viewport-grid-layout"
             ],
             "native": [
-              "native-font-output-domain",
-              "native-clip-allocation-policy"
+              "native-font-output-domain"
             ]
           },
           "resolved_premises": [
             "Separate original and provisional source DOSBox-X traces both observe mode12h and VGA640x480; this is mode entry, not rendering/input/gameplay equivalence.",
             "Original synthetic 31-window clipping control writes beyond the 256-record temporary before Punt; the 29-window positive completes. Window count alone does not prove capacity. Shipped geometry reachability remains unproved.",
             "The VGA8/HCEGANT spider image has one 6,276-byte zero-initialized process-lifetime owner. Resource, raster, overlap, first-use zero-header and valid source-produced index domains bound all supported accesses; alternate display resources remain excluded.",
-            "Locked configuration and the complete startup/writer/alias/save census preserve mode8. Startup skips LoadMonoPats, map dispatch selects S00 color converters and Mini_MakeTable bypasses every S01 pattern consumer. A one-byte near linkage owner supplies the unresolved symbol with zero supported accesses; odd-mode reads remain negative controls and historical capacity is unclaimed."
+            "Locked configuration and the complete startup/writer/alias/save census preserve mode8. Startup skips LoadMonoPats, map dispatch selects S00 color converters and Mini_MakeTable bypasses every S01 pattern consumer. A one-byte near linkage owner supplies the unresolved symbol with zero supported accesses; odd-mode reads remain negative controls and historical capacity is unclaimed.",
+            "Every fd_50F6_3C14 writer copies one sentinel-terminated list after its 256-record overflow check or from a list already bounded by such a check. A 256-record far owner covers every pre-Punt prefix; original 255/256 controls and a returning-Punt 2056-byte contrast are retained. Native code now uses that canonical owner directly."
           ],
           "evidence": "evidence/canonical/diagnostic-link/receipt.json",
           "clip_capacity_evidence": "evidence/canonical/clip-domain/review.md",
           "spider_storage_evidence": "evidence/canonical/spider-storage/review.md",
-          "mono_storage_evidence": "evidence/canonical/monochrome-owner/vga-review.md"
+          "mono_storage_evidence": "evidence/canonical/monochrome-owner/vga-review.md",
+          "clip_owner_evidence": "evidence/canonical/clip-owner/review.md"
         },
         {
           "id": "icon-activation",
@@ -9616,7 +9654,7 @@
           "resolved_premises": [
             "RTLink NOEXTDICTIONARY resolves CRT/canonical _ffree collision with unchanged objects and libraries; all warnings remain fatal. Positive and duplicate-producing negative controls pin canonical call binding.",
             "The captured S06 has 119 distinct sites at twice the load base while every other byte matches disk. Original direct display callbacks were instead vectored by the diagnostic link; timer cursor callbacks can re-enter the non-reentrant loader. Explicit symbolic vector selection restores direct dispatch and required canonical/alias loading calls, with real-link positive and negative controls.",
-            "All admitted ordinary storage owners except the clip rectangle destination now compile directly into the native projection. The remaining pointer, capacity, lifetime and allocation-failure differences are owned solely by native-clip-allocation-policy."
+            "All admitted ordinary storage owners, including the 256-record clip rectangle destination, compile directly into the native projection; no native storage reservation or inserted allocation-failure branch remains."
           ],
           "evidence": "evidence/canonical/diagnostic-link/overlay-vectors.json"
         },

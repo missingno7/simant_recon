@@ -9,11 +9,10 @@
 #define PORTABLE_LINE16B5_MAX_INLINE_HEIGHT 112u
 #define PORTABLE_LINE16B5_MAX_INLINE_BYTES 6272u
 
-/* Single native backing for the source root:m0250 DrawSpider scratch image.
- * The recovered DOS object had a two-word Pnt prefix followed by inline
- * pixel bytes. Its full historical allocation is unknown; the 6272-byte
- * payload is the maximum extent required by the source-proved 112x112,
- * mode-1/mode-2 use. */
+/* Native typed view of the canonical DrawSpider image owner
+ * (src/state/spider-image.c): a two-word Pnt prefix followed by the
+ * 6272-byte inline payload required by the source-proved 112x112,
+ * mode-1/mode-2 use. This header declares no storage. */
 typedef struct PortableSpiderLineBuffer {
     int16_t x;
     int16_t y;

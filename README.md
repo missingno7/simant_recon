@@ -27,9 +27,10 @@ python portable/build.py
 build/current/portable/simant-canonical.exe
 ```
 
-The canonical DOS command currently reports an explicit link refusal. The isolated
-diagnostic links without warnings and reaches Full Game under a recorded keyboard
-replay matching original DOS screen states; five storage assumptions remain.
+The canonical DOS command currently reports an explicit link refusal for four
+semantic gates and 44 bytes of data debt. Every storage symbol now has a canonical
+owner, so the isolated diagnostic links canonical objects alone, without warnings
+or provisional storage, and reaches Full Game under a recorded keyboard replay.
 Both build paths use zero original executable fallback. [Portable validation commands](portable/README.md) cover
 resources, RNG, simulation, VGA and Save/Load with their supported scopes.
 Bounded DOS checks now save all 307 records in both executables and load the same

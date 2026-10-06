@@ -1,8 +1,56 @@
 {
   "schema": "simant-canonical-storage-contracts-v1",
-  "scope": "Admitted DOS shape/type/initial-state contracts for 70 canonical storage TUs; source-owned functional definitions do not claim original producer TU, communal order or historical placement.",
+  "scope": "Admitted DOS shape/type/initial-state contracts for 73 canonical storage TUs; source-owned functional definitions do not claim original producer TU, communal order or historical placement.",
   "active_validation": "Compile current canonical_source with DOS_compile options and compare parsed OMF to expected_object_shape. Historical source receipts are informational; do not compare active source hashes to old receipts.",
   "providers": [
+    {
+      "module": "source-owned:clip-rect-buffer",
+      "canonical_source": "src/state/clip-rect-buffer.c",
+      "DOS_compile": {
+        "basename": "CLIPRECT",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_fd_50F6_3C14",
+            "kind": "far",
+            "length": 2048,
+            "count": 256,
+            "element_size": 8
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "fd_50F6_3C14",
+          "DOS_public": "_fd_50F6_3C14",
+          "C_declaration": "struct Rect far fd_50F6_3C14[256];",
+          "DOS_extent_bytes": 2048,
+          "initialization": "MSC startup zero-initialized far communal; read only after a whole-list write",
+          "views": "The active clip rectangle list: at most 255 rectangles plus sentinel in every execution prefix before the first Punt entry. A returning Punt can copy 2056 bytes and is outside the admitted domain."
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/clip-owner/review.md",
+        "evidence/canonical/clip-owner/facts.json",
+        "evidence/canonical/clip-owner/publication.json"
+      ]
+    },
     {
       "module": "source-owned:last-filename",
       "canonical_source": "src/state/last-filename.c",
@@ -9239,8 +9287,8 @@
     }
   ],
   "counts": {
-    "providers": 72,
-    "provider_objects": 410,
+    "providers": 73,
+    "provider_objects": 411,
     "initialized_providers": 3,
     "initialized_bytes": 50,
     "binding_commons": 34
