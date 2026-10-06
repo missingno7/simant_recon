@@ -104,29 +104,41 @@ def input_script(path, out):
 
 
 def diagnostic_image(receipt):
-    receipt = diagnostic.experimental_path(receipt)
+    """Image from a successful diagnostic receipt or the canonical dos/build.py link."""
+    receipt = Path(receipt).resolve()
+    canonical = receipt == (ROOT / 'build/current/dos/build-report.json').resolve()
+    if not canonical:
+        receipt = diagnostic.experimental_path(receipt)
     raw, identity = build.read_pin(receipt)
     report = json.loads(raw)
-    if (report.get('schema') != 'simant-diagnostic-dos-build-v1' or
-        report.get('target') != 'DIAGNOSTIC_DOS' or report.get('status') != 'DIAGNOSTIC_LINKED' or
-        report.get('closure_eligible') is not False or report.get('errors') or
-        any(report.get('original_exe_bytes_used', {}).values()) or
-        set(report.get('original_exe_bytes_used', {})) != {'game_code', 'game_data', 'fallback_debt', 'executable_fragments'}):
-        raise ValueError('execution requires a successful diagnostic build receipt with zero original bytes')
+    bytes_used = report.get('original_exe_bytes_used', {})
+    shape_ok = (not report.get('errors') and not any(bytes_used.values()) and
+                set(bytes_used) == {'game_code', 'game_data', 'fallback_debt', 'executable_fragments'})
+    if canonical:
+        shape_ok &= (report.get('schema') == 'simant-canonical-dos-build-v1' and
+                     report.get('target') == 'CANONICAL_DOS' and
+                     report.get('status') == 'LINKED_NOT_EXECUTED' and not report.get('blockers'))
+    else:
+        shape_ok &= (report.get('schema') == 'simant-diagnostic-dos-build-v1' and
+                     report.get('target') == 'DIAGNOSTIC_DOS' and report.get('status') == 'DIAGNOSTIC_LINKED' and
+                     report.get('closure_eligible') is False)
+    if not shape_ok:
+        raise ValueError('execution requires a successful canonical or diagnostic build receipt with zero original bytes')
     log_pin = report['link']['log']
-    log_path = diagnostic.experimental_path(ROOT / log_pin['path'])
+    log_path = (ROOT / log_pin['path']).resolve() if canonical else diagnostic.experimental_path(ROOT / log_pin['path'])
     log_path.relative_to(receipt.parent / 'link')
     log_raw, log_identity = build.read_pin(log_path, log_pin['sha256'])
     if not log_raw.strip() or build.linker_diagnostics(log_raw.decode('latin1')):
         raise ValueError('execution requires a diagnostic link with no linker warnings or errors')
     candidate = report['link']['candidate_executable']
-    path = diagnostic.experimental_path(ROOT / candidate['path'])
+    path = (ROOT / candidate['path']).resolve() if canonical else diagnostic.experimental_path(ROOT / candidate['path'])
     path.relative_to(receipt.parent / 'link')
     raw, pin = build.read_pin(path, candidate['sha256'])
     if raw[:2] != b'MZ':
         raise ValueError('diagnostic image is not MZ')
-    provenance = {field: report[field] for field in ('provisional_assumptions', 'canonical_blockers',
+    provenance = {field: report.get(field) for field in ('provisional_assumptions', 'canonical_blockers',
         'unproved_execution_contracts', 'unproved_initialized_data')}
+    provenance['build_target'] = report['target']
     provenance['supported_execution_domain'] = report.get('supported_execution_domain')
     provenance['resolved_domain_contracts'] = report.get('resolved_domain_contracts', [])
     return path.name, raw, [identity, log_identity, pin], provenance
@@ -223,6 +235,7 @@ def main(argv=None):
             name, raw, pins, provenance = diagnostic_image(args.build_report)
             report['inputs'] += pins
             report.update(provenance)
+            report['target'] = provenance['build_target']
         domain = report.get('supported_execution_domain')
         if domain:
             report['domain_launch_matches'] = args.argument == domain['launch_arguments']

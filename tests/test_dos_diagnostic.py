@@ -121,7 +121,8 @@ class DiagnosticPolicy(unittest.TestCase):
         with patch.object(run.diagnostic, 'experimental_path', side_effect=lambda p: Path(p)):
             for receipt in ({'target': 'CANONICAL_DOS'}, {'target': 'DIAGNOSTIC_DOS', 'closure_eligible': True}):
                 with patch.object(build, 'read_pin', return_value=(json.dumps(receipt).encode(), {})):
-                    with self.assertRaisesRegex(ValueError, 'successful diagnostic build receipt'):
+                    # Canonical receipts are accepted only from build/current/dos with a clean link.
+                    with self.assertRaisesRegex(ValueError, 'successful canonical or diagnostic build receipt'):
                         run.diagnostic_image(ROOT / 'build/workers/example/build-report.json')
 
     def test_unknown_link_diagnostics_remain_fatal(self):

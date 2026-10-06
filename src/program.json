@@ -9319,11 +9319,12 @@
         "id": "filename-selector-local-capacity",
         "status": "UNRESOLVED",
         "source": "src/S09/m35F5.c",
-        "reason": "FileSelect uses path[67] and lastDir[67]. A real DOSBox-X contrast reaches a valid deep path needing 69 bytes after separator append, before the result is copied into the 100-byte last-filename owner. The admitted owner therefore closes the global storage import but does not repair or exclude this earlier local overflow.",
-        "closure_class": "SUPPORTED_DOMAIN",
-        "closure_basis": "Prove the supported filesystem/current-directory domain or preserve the observed behavior; do not invent a clamp or resize.",
+        "reason": "LoadGame and SaveGame(0) pass an uninitialized char name[100]; FileSelect concatenates path + name into buf[80] and copies it back before clearing it. No admitted proof or premise guarantees a terminator with P+len(S)+1 <= 80: intact caller frames give zeros only at name+103/104. Observed strings are 0..15 bytes on every ordinary chain and differ between builds (pointer values, different last writers) with matching visible behaviour. Longer residue would overrun buf[80] and the copy-back would reach the caller's fd/ok/saved BP/return address. Separately, the inherited L=66 separator append exceeds path[67]/lastDir[67] and the declined-overwrite retry exceeds buf[80] from L=33; directory lengths <= 32 and valid 8.3 names bound those filesystem parts.",
+        "closure_class": "LAYOUT_SENSITIVE",
+        "closure_basis": "Prove an all-history terminator bound for the incoming uninitialized name (both builds, including interrupt, driver and overlay-manager writers) or preserve the observed behaviour; filesystem parts additionally need explicit directory-length/8.3 premises. No clamp, initialization or resize.",
         "capacity_evidence": "evidence/canonical/filename-domain/review.md",
-        "owner_evidence": "evidence/canonical/last-filename/review.md"
+        "owner_evidence": "evidence/canonical/last-filename/review.md",
+        "residue_evidence": "evidence/canonical/filename-domain/residue-review.md"
       }
     ],
     "unresolved_data": [
@@ -9505,7 +9506,7 @@
           "id": "database-lifetime",
           "question": "Can successful resource/save/load paths exhaust four DB slots or exceed the filename selector's local path capacity?",
           "scope": "Resource identities do not prove balanced open/close or allocation success.",
-          "next_experiment": "Prove the selector filesystem/current-directory domain; independently investigate FindIndex/cache/heap behavior and excluded failure or external-resource configurations.",
+          "next_experiment": "FileSelect incoming-name residue: find an all-history terminator proof or keep the gate open; independently investigate FindIndex/cache/heap behaviour and excluded failure configurations.",
           "depends_on": [
             "error-continuation",
             "allocator-runtime"

@@ -1,0 +1,118 @@
+{
+ "schema": "simant-fileselect-residue-observation-v1",
+ "closure_eligible": false,
+ "scope": "Deterministic DOSBox-X observation runner (fixed cycles, fixed guest clock, emulated-time input); on_exec dump of the incoming name far pointer at FileSelect entry. Bounded observations only.",
+ "fileselect_entry_linear": {
+  "original": "3E556",
+  "reconstructed_canonical_only_diagnostic": "3D1E6"
+ },
+ "prologue": "55 8B EC B8 2E 01 9A",
+ "runner": {
+  "path": "C:/tools/dosbox-x-2026.08.31-simant-acceptance/dosbox-x-v2.exe",
+  "sha256": "fda010c8465e96262f2b578b9e3e0b852f1c0ebd47deeea701a6b645b59dff9d"
+ },
+ "original_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+ "reconstructed_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+ "chains": [
+  {
+   "chain": "Save As by keys",
+   "original": {
+    "bytes_with_nul": "02 72 14 A4 F0 02 CF 2C 26 00",
+    "length": 9
+   },
+   "reconstructed": {
+    "bytes_with_nul": "9A 38 02 72 16 99 F2 02 CD 2C F0 00",
+    "length": 11
+   }
+  },
+  {
+   "chain": "Save As by mouse menu",
+   "original": {
+    "bytes_with_nul": "02 72 14 A4 F0 02 CF 2C 53 00",
+    "length": 9
+   },
+   "reconstructed": {
+    "bytes_with_nul": "9A 38 02 72 16 99 F2 02 CD 2C F0 00",
+    "length": 11
+   }
+  },
+  {
+   "chain": "File menu Load; prompt answered \u00e2\u20ac\u015bDon\u00e2\u20ac\u2122t Save\u00e2\u20ac\u0165",
+   "original": {
+    "bytes_with_nul": "94 16 D1 39 02 72 14 A4 F0 02 CF 2C 26 00",
+    "length": 13
+   },
+   "reconstructed": {
+    "bytes_with_nul": "6A 01 94 16 9A 38 02 72 16 99 F2 02 CD 2C F0 00",
+    "length": 15
+   }
+  },
+  {
+   "chain": "Select-a-Game Load",
+   "original": {
+    "bytes_with_nul": "7B 26 9C FE 23 5E 66 03 7B 26 51 0C 1E 2A 08 00",
+    "length": 15
+   },
+   "reconstructed": {
+    "bytes_with_nul": "7B 26 9C FE 79 5C 5F 03 7B 26 53 0C 1C 2A 08 00",
+    "length": 15
+   }
+  },
+  {
+   "chain": "Dirty-game Load \u00e2\u2020\u2019 Save prompt, first Save selector",
+   "original": {
+    "bytes_with_nul": "00",
+    "length": 0
+   },
+   "reconstructed": {
+    "bytes_with_nul": "0F 00",
+    "length": 1
+   }
+  },
+  {
+   "chain": "Same chain, declined-overwrite retry selector",
+   "original": {
+    "bytes_with_nul": "43 3A 5C 61 2E 61 6E 74 00",
+    "length": 8
+   },
+   "reconstructed": {
+    "bytes_with_nul": "43 3A 5C 61 2E 61 6E 74 00",
+    "length": 8
+   }
+  },
+  {
+   "chain": "Same chain, subsequent LoadGame selector after the save",
+   "original": {
+    "bytes_with_nul": "43 3A 5C 61 2E 61 6E 74 00",
+    "length": 8
+   },
+   "reconstructed": null
+  },
+  {
+   "chain": "Quit \u00e2\u2020\u2019 Save prompt selector",
+   "original": {
+    "bytes_with_nul": "00",
+    "length": 0
+   },
+   "reconstructed": {
+    "bytes_with_nul": "0F 00",
+    "length": 1
+   }
+  }
+ ],
+ "frame_facts": {
+  "fileselect_frame_bytes": 302,
+  "buf": "BP-12Eh..BP-DFh",
+  "list": "BP-DEh",
+  "path": "BP-DAh",
+  "early_initialized_locals": {
+   "oldDrive": "BP-26h",
+   "sel": "BP-24h",
+   "ok": "BP-1"
+  },
+  "first_guaranteed_zero_in_caller_frame": {
+   "LoadGame": "name+103 (ok)",
+   "SaveGame": "name+104 (stack home)"
+  }
+ }
+}
