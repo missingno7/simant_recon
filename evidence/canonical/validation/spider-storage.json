@@ -1,0 +1,44 @@
+{
+  "schema": "simant-spider-storage-validation-v1",
+  "scope": "Supported shipped VGA8 spider image owner publication; historical capacity, defining TU and placement remain unclaimed.",
+  "canonical_closure": false,
+  "historical_validation": {
+    "status": "PASS",
+    "command": "python tools/validate.py",
+    "codegen_probes": 49,
+    "unit_tests": "PASS; 2 intentional skips",
+    "runtime_members": 90,
+    "runtime_bytes": 12339,
+    "runtime_data_segments": 38,
+    "runtime_data_bytes": 2021,
+    "far_bss_modules_measured": 74
+  },
+  "canonical_dos": {
+    "status": "EXPECTED_REFUSAL",
+    "translation_units": 196,
+    "storage_providers": 69,
+    "compile_errors": 0,
+    "unresolved_imports": 4,
+    "semantic_gates": 3,
+    "unresolved_data_ranges": 6,
+    "unattributed_bytes": 44,
+    "original_game_byte_fallback": 0
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "command": "python -m unittest tests.test_supported_dispatch_domains tests.test_window_handle_domain tests.test_spider_storage",
+    "tests": 16
+  },
+  "repository_guard": "PASS",
+  "program_sha256": "f3f5d81668c69c3265751627fc168398c2ab4bea8ca6de41b093fe3aef5aa778",
+  "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f",
+  "pins": {
+    "src/state/spider-image.c": "eaf37467a31bcf31395410a84e7995a87de5942d9d5430721f5f2f593101707f",
+    "evidence/canonical/spider-storage/probe.py": "5d9fcccc5536a10a92824ca5a24f6e3ada78a2e447c5fd89b9193f402756fe55",
+    "evidence/canonical/spider-storage/review.md": "f42e424904d0a593aa182e7adfcc809e5f2aea9bc6cee4ba1688d34a7090e2ca",
+    "evidence/canonical/spider-storage/publication.json": "c6f163a518b1d73028aaa08e73db0deff1c2c4ef80e645e6d5712762f81fbf57",
+    "evidence/canonical/storage.json": "3408c870322e165c7b647c7f86dc9e962a9b951240b44b631c3c1c3c26c05341",
+    "evidence/canonical/blockers.json": "8ad1a8c4cbbc0936833b760cd174deb39a036e159f547f033d6c7a7cdb3b0594",
+    "tests/test_spider_storage.py": "852a984bfc8b1ddcb5ba57a8f1d4b0a84fe001cbfcab43d5023f078114595bba"
+  }
+}

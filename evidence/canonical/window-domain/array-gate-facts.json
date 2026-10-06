@@ -1,0 +1,147 @@
+{
+  "schema": "simant-window-array-domain-v1",
+  "scope": "Specified hook/Rect/palette cross-owner accesses in the existing supported domain; no general object-index, graphics-copy, heap or native-window acceptance.",
+  "inventory": {
+    "source_count": 199,
+    "all_source_sha256": "163aa58fa814381105e7ae4570782a5fee8842d826d3b923a4391c0c7046d58b",
+    "modules_sha256": "2897605ac308a3365e1c1ebce758f14f43148b1dde03f6e92f5ad9c4d663ea4d",
+    "aliases_sha256": "d99f574d9b2f2d90db7a820b81b5e664b60c46332a74aec1f305abc3bd5c8846",
+    "registry_sha256": "6c6a51a0948a7af7722163a0901c752e57b3a2775fc4c520c395a35e3420a938"
+  },
+  "census": {
+    "aliases": {
+      "win_drawHooks": "win_drawHooks",
+      "win_numOfColors": "win_numOfColors",
+      "win_numOfWindows": "win_numOfWindows",
+      "win_offsets": "win_offsets",
+      "fd_50F6_47D6": "win_numOfColors",
+      "fd_50F6_47D8": "win_numOfWindows",
+      "fd_50F6_47DE": "win_drawHooks",
+      "fd_50F6_4892": "win_offsets"
+    },
+    "occurrences": 33,
+    "occurrence_sha256": "d3e77887414cea48d8ed3396bb40748c1c20599f0bf3d68f5f1f80215fa6ffcf",
+    "source_sha256": {
+      "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+      "src/root/m21FA.c": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "src/root/m23AE.c": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+      "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "src/state/ui-resource-scalars.c": "936c6fd4cfe5d394a699374e321287720f7872ea158ec6e2c745e225ed69e619",
+      "src/state/window-initialized-views.c": "b93b7067493e084a7a506b711846d6e51a3f76fd966336984e6ad99fbdc670dc"
+    }
+  },
+  "save_ranges": {
+    "records": 307,
+    "descriptor_sha256": "2db64b61fedf3d590a67246e080d7d8ae477202dd0c17ccf96c65a7bb1810958",
+    "protected": {
+      "win_drawHooks": 180,
+      "win_offsets": 360,
+      "win_numOfWindows": 2,
+      "win_numOfColors": 2
+    },
+    "intersections": 0
+  },
+  "original_hook_stores": [
+    {
+      "index": 0,
+      "writes": [
+        [
+          0,
+          2,
+          4660
+        ],
+        [
+          2,
+          2,
+          22136
+        ]
+      ],
+      "within_45": true
+    },
+    {
+      "index": 33,
+      "writes": [
+        [
+          132,
+          2,
+          4660
+        ],
+        [
+          134,
+          2,
+          22136
+        ]
+      ],
+      "within_45": true
+    },
+    {
+      "index": 45,
+      "writes": [
+        [
+          180,
+          2,
+          4660
+        ],
+        [
+          182,
+          2,
+          22136
+        ]
+      ],
+      "within_45": false
+    },
+    {
+      "index": -1,
+      "writes": [
+        [
+          -4,
+          2,
+          4660
+        ],
+        [
+          -2,
+          2,
+          22136
+        ]
+      ],
+      "within_45": false
+    }
+  ],
+  "premises": {
+    "handle_ids": {
+      "pass": true,
+      "base_matches_spec": true,
+      "function_count": 217,
+      "call_edge_count": 1033,
+      "call_edge_sha256": "8a38e3dcb4f4b2a8b2dcc55dfdb5f2160c653ece0d6fbc61cedcf6e962be58a1",
+      "pinned_source_file_count": 35,
+      "pinned_source_hash_count": 35,
+      "bare_reference_count": 7,
+      "callback_reference_count": 7,
+      "asm_reference_count": 0,
+      "dormant_formal_count": 18,
+      "abi_obligation_count": 2,
+      "negative_controls": {
+        "new_dormant_bare_address": true,
+        "uppercase_asm_reference": true,
+        "new_direct_call": true,
+        "pinned_source_body_mutation": true,
+        "new_alias_to_existing_target": true
+      },
+      "parse_errors": []
+    },
+    "palette_status": "PASS",
+    "window_indices": [
+      0,
+      33
+    ],
+    "hook_entries": 45,
+    "rect_entries": 45,
+    "hook_reset_bytes": 180,
+    "rect_copy_bytes": 320,
+    "rect_owner_bytes": 360,
+    "palette_bytes": 96,
+    "preload_and_purge_count": 34
+  }
+}

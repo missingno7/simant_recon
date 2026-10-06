@@ -1,0 +1,288 @@
+{
+  "schema": "simant-monochrome-vga-exclusion-v1",
+  "scope": "Locked shipped VGA8 successful lifetime only; no odd-mode pattern allocation, resource, caller-state or behavior claim.",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "vga_facts_sha256": "d50bb91f00eebb2c948f4f3b1bc618d0a457023b7978894f54df4b6c7c4aac3b",
+  "program_sha256": "ba642b6ef911e86996635ca0060ec32e08e6aa6541a131d82966f7f5a8291bea",
+  "function_definition_sha256": {
+    "main": "af658194875ee220851ec4d7d824064b00e85a16a06fd1cd820eaacd76153569",
+    "InitMapFunctions": "d1452fef6773bba45779e944cf43ad7ef082d03c892fcb54b9351434ce4169b1",
+    "Mini_MakeTable": "c1de238c90ba7507b7a16fea9276e8c58a44e34e22f28859d8d124c5028adfc2"
+  },
+  "original_callers": {
+    "LoadMonoPats": [
+      "main"
+    ],
+    "o01_328E_012C": [
+      "Mini_MakeTable"
+    ],
+    "o01_328E_01D5": [
+      "Mini_MakeTable"
+    ]
+  },
+  "source_census": {
+    "rows": [
+      [
+        "src/S01/m328E.asm",
+        5,
+        "_g_8ED8",
+        "extrn\t_g_8ED8:byte"
+      ],
+      [
+        "src/S01/m328E.asm",
+        12,
+        "_o01_328E_000A",
+        "public\t_o01_328E_000A"
+      ],
+      [
+        "src/S01/m328E.asm",
+        13,
+        "_o01_328E_009D",
+        "public\t_o01_328E_009D"
+      ],
+      [
+        "src/S01/m328E.asm",
+        14,
+        "_o01_328E_012C",
+        "public\t_o01_328E_012C"
+      ],
+      [
+        "src/S01/m328E.asm",
+        15,
+        "_o01_328E_01D5",
+        "public\t_o01_328E_01D5"
+      ],
+      [
+        "src/S01/m328E.asm",
+        17,
+        "_o01_328E_000A",
+        "_o01_328E_000A\tproc\tfar"
+      ],
+      [
+        "src/S01/m328E.asm",
+        25,
+        "_g_8ED8",
+        "add bx, offset DGROUP:_g_8ED8"
+      ],
+      [
+        "src/S01/m328E.asm",
+        75,
+        "_o01_328E_000A",
+        "_o01_328E_000A\tendp"
+      ],
+      [
+        "src/S01/m328E.asm",
+        77,
+        "_o01_328E_009D",
+        "_o01_328E_009D\tproc\tfar"
+      ],
+      [
+        "src/S01/m328E.asm",
+        85,
+        "_g_8ED8",
+        "add bx, offset DGROUP:_g_8ED8"
+      ],
+      [
+        "src/S01/m328E.asm",
+        135,
+        "_o01_328E_009D",
+        "_o01_328E_009D\tendp"
+      ],
+      [
+        "src/S01/m328E.asm",
+        137,
+        "_o01_328E_012C",
+        "_o01_328E_012C\tproc\tfar"
+      ],
+      [
+        "src/S01/m328E.asm",
+        145,
+        "_g_8ED8",
+        "add bx, offset DGROUP:_g_8ED8"
+      ],
+      [
+        "src/S01/m328E.asm",
+        212,
+        "_o01_328E_012C",
+        "_o01_328E_012C\tendp"
+      ],
+      [
+        "src/S01/m328E.asm",
+        214,
+        "_o01_328E_01D5",
+        "_o01_328E_01D5\tproc\tfar"
+      ],
+      [
+        "src/S01/m328E.asm",
+        222,
+        "_g_8ED8",
+        "add bx, offset DGROUP:_g_8ED8"
+      ],
+      [
+        "src/S01/m328E.asm",
+        289,
+        "_o01_328E_01D5",
+        "_o01_328E_01D5\tendp"
+      ],
+      [
+        "src/S04/m35F5.c",
+        79,
+        "o01_328E_01D5"
+      ],
+      [
+        "src/S04/m35F5.c",
+        80,
+        "o01_328E_012C"
+      ],
+      [
+        "src/S04/m35F5.c",
+        241,
+        "o01_328E_01D5"
+      ],
+      [
+        "src/S04/m35F5.c",
+        243,
+        "o01_328E_012C"
+      ],
+      [
+        "src/S12/m384C.c",
+        46,
+        "fd_50F6_38B8"
+      ],
+      [
+        "src/S12/m384C.c",
+        47,
+        "fd_50F6_38BC"
+      ],
+      [
+        "src/S12/m384C.c",
+        51,
+        "o01_328E_000A"
+      ],
+      [
+        "src/S12/m384C.c",
+        52,
+        "o01_328E_009D"
+      ],
+      [
+        "src/S12/m384C.c",
+        65,
+        "fd_50F6_38B8"
+      ],
+      [
+        "src/S12/m384C.c",
+        66,
+        "fd_50F6_38BC"
+      ],
+      [
+        "src/S12/m384C.c",
+        71,
+        "fd_50F6_38B8"
+      ],
+      [
+        "src/S12/m384C.c",
+        72,
+        "fd_50F6_38BC"
+      ],
+      [
+        "src/S12/m384C.c",
+        79,
+        "fd_50F6_38B8"
+      ],
+      [
+        "src/S12/m384C.c",
+        79,
+        "o01_328E_000A"
+      ],
+      [
+        "src/S12/m384C.c",
+        80,
+        "fd_50F6_38BC"
+      ],
+      [
+        "src/S12/m384C.c",
+        80,
+        "o01_328E_009D"
+      ],
+      [
+        "src/S12/m384C.c",
+        85,
+        "fd_50F6_38B8"
+      ],
+      [
+        "src/S12/m384C.c",
+        86,
+        "fd_50F6_38BC"
+      ],
+      [
+        "src/S12/m384C.c",
+        264,
+        "fd_50F6_38BC"
+      ],
+      [
+        "src/S12/m384C.c",
+        266,
+        "fd_50F6_38B8"
+      ],
+      [
+        "src/S15/m384C.c",
+        36,
+        "g_8ED8"
+      ],
+      [
+        "src/S15/m384C.c",
+        38,
+        "LoadMonoPats"
+      ],
+      [
+        "src/S15/m384C.c",
+        60,
+        "g_8ED8"
+      ],
+      [
+        "src/S16/m384C.c",
+        26,
+        "LoadMonoPats"
+      ],
+      [
+        "src/root/m15F8.c",
+        33,
+        "LoadMonoPats"
+      ],
+      [
+        "src/root/m15F8.c",
+        96,
+        "LoadMonoPats"
+      ],
+      [
+        "src/state/mono-pattern-vga-linkage.c",
+        2,
+        "g_8ED8"
+      ],
+      [
+        "src/state/remaining-window-state.c",
+        24,
+        "fd_50F6_38B8"
+      ],
+      [
+        "src/state/remaining-window-state.c",
+        25,
+        "fd_50F6_38BC"
+      ]
+    ],
+    "sha256": "95e002741cce986eafd41c2dfcbc569b6bfb0cd91ea6a8330a027737fbc29760"
+  },
+  "original_mini_controls": [
+    {
+      "mode": 8,
+      "selected": "o00_3126_06A3"
+    },
+    {
+      "mode": 7,
+      "selected": "o01_328E_01D5"
+    }
+  ],
+  "supported_access_bytes": 0,
+  "linkage_owner_bytes": 1,
+  "historical_extent": "UNCLAIMED"
+}

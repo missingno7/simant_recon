@@ -1,0 +1,138 @@
+{
+  "schema": "simant-symbolic-overlay-vector-policy-v1",
+  "closure_eligible": false,
+  "conclusion": "Default automatic vectors violate the established direct display dispatch contract. VECTOROFF plus the136 explicit canonical vector symbols preserves required loading entries and direct display callbacks; naming aliases require16 additional loading vectors.",
+  "authority": {
+    "contract": "docs/exe-format.md DATAPTR-1 and VEC-1",
+    "policy_inventory": "src/program.json dos.overlay_vectors",
+    "policy_symbol_count": 136,
+    "linker_documentation": {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/READ.ME",
+      "sha256": "3f881bea3a2a5f3919567f6e2de749bc38e17b0ad845f4e660cda0d7d79bb2c6",
+      "size": 121501
+    },
+    "documented_controls": {
+      "VECTOROFF": "Suppress default overlay vectors for subsequently declared objects/libraries.",
+      "ALWAYS": "Override vector suppression for selected symbols."
+    }
+  },
+  "source_policy_provenance": "Original vector targets are resolved through layout/symbols.json registered names to a unique public in accepted canonical objects; the production builder reads only symbol/module policy and validates code ownership. It never discovers vectors from original bytes.",
+  "static_reentry_path": {
+    "canonical_source": {
+      "path": "src/root/m1B73.asm",
+      "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+      "size": 35074
+    },
+    "irq": "INT08 f_1B73_051F enables interrupts on its own stack and calls cursor redraw through f_1B73_04BB or f_1B73_00D9. f_1B73_0122 invokes g_9168, g_9128 and g_9184.",
+    "captured_fault_driver_pointers": {
+      "g_9128": "3525:2932",
+      "g_9168": "3525:29D2",
+      "g_9184": "3525:2A0E"
+    },
+    "captured_runtime_manager_segment": "3525",
+    "manager_source": {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/OVLMGR.ASM",
+      "sha256": "2e67a43975963ef665bfc09a558765b6ae0769d5833ecba07ca2c1707b73a741",
+      "size": 68296
+    },
+    "manager_behavior": "OVLLOADIL pushes requested S00 on the shared reload stack. RELOAD_GUTS pops it and reloads the preceding stack entry S06 unconditionally. Outer S06 is not marked IN_MEMORY until its relocation finishes. An IRQ callback after the outer payload read can therefore nest an S06 load before the outer relocation pass. Loader has no busy guard or interrupt exclusion around payload/relocation reads.",
+    "classification": "Concrete static path consistent with the saved double-relocation witness; no captured instruction trace identifies the actual interrupt nesting instant.",
+    "fault_witness": "evidence/canonical/diagnostic-link/overlay-relocation.json"
+  },
+  "binding_experiment": {
+    "build_report": {
+      "path": "build/workers/diagnostic_link/overlay-relocation/selective/build-report.json",
+      "sha256": "4cb168adc10487f40b49f64c213febfc47bbc54b2238880b60174b3bb738a9a6",
+      "size": 349486
+    },
+    "image": {
+      "path": "build/workers/diagnostic_link/overlay-relocation/selective/link/SOURCE.EXE",
+      "sha256": "68802fc6bb49a20c13ec65c1d41973e971fcd9642e00e3868ef04fb384b017f5",
+      "size": 499629
+    },
+    "map": {
+      "path": "build/workers/diagnostic_link/overlay-relocation/selective/link/SOURCE.MAP",
+      "sha256": "1532a53fc29e8900f9c24d17c964283b6b4c980af1fc37f1d58aad9157f64fb9",
+      "size": 1000450
+    },
+    "log": {
+      "path": "build/workers/diagnostic_link/overlay-relocation/selective/link/LINK.LOG",
+      "sha256": "1b79a31e80dcf7ffd00e77d69a76503398558006409714cb09c51a85ae96cda0",
+      "size": 21523
+    },
+    "same_objects_and_libraries_as": "build/workers/diagnostic_link/seven/baseline/build-report.json",
+    "warnings": 0,
+    "actual_vectors": 152,
+    "required_vectors": 136,
+    "alias_vectors": [
+      "_o11_35F5_0000",
+      "_o11_35F5_0088",
+      "_o14_384C_0ACD",
+      "_o14_384C_0B6A",
+      "_o14_384C_0DE5",
+      "_o15_384C_01EE",
+      "_o15_384C_037F",
+      "_o15_384C_03C6",
+      "_o18_384C_0000",
+      "_o22_39C7_07FD",
+      "_o22_39C7_0D21",
+      "_o22_39C7_188D",
+      "_o22_39C7_19E5",
+      "_o24_39C7_01B8",
+      "_o24_39C7_0608",
+      "_o26_39C7_0000"
+    ],
+    "driver_dispatch": {
+      "count": 25,
+      "original_frame": "31AD",
+      "linked_frame": "3076",
+      "offsets_identical": true,
+      "all_targets_direct_code": true,
+      "manager_frame": "2D02",
+      "offsets_hex": [
+        "1659",
+        "166A",
+        "168C",
+        "16A9",
+        "0122",
+        "037C",
+        "0522",
+        "11FB",
+        "0550",
+        "0CF9",
+        "0D06",
+        "1206",
+        "1213",
+        "062A",
+        "062E",
+        "0632",
+        "0636",
+        "148C",
+        "1499",
+        "0004",
+        "1481",
+        "0647",
+        "18BA",
+        "063C",
+        "1950"
+      ]
+    },
+    "historical_layout_limit": "16 extra naming-alias loading vectors preserve required calls but do not reproduce historical136-entry vector layout/order."
+  },
+  "regression": {
+    "path": "tests/test_dos_linker.py",
+    "test": "OverlayVectors.test_selective_driver_pointer_and_both_entry_names",
+    "result": "PASS",
+    "positive": "Real MSC6.00AX root initialized callback pointer plus overlaid callback/entry. Selective policy binds callback directly; calls through entry and oldentry alias each bind a loading vector that jumps to entry. Objects and LLIBCR.LIB remain byte-identical across trials.",
+    "negative": "Only remove VECTOROFF from same response: callback points into manager, unexpected callback vector causes strict postlink policy refusal.",
+    "source_sha256": "45ca591257bca8a820e0917a38d578c11e5d38eeebfca0b2a415ca0355a3165c",
+    "nonvacuity": "Both canonical and alias call fixup targets must be observed.",
+    "inventory_control": "Every canonical symbolic vector target resolves through the registry to exactly the recovered original vector target set; the production builder never reads the original image."
+  },
+  "scope": "Direct dispatch admission follows established default VGA successful lifetime and driver entry selection; seven provisional storage providers and other independent semantic/data gates remain. No game algorithm, source bytes, object, library or executable patch; no canonical closure or timing-independent gameplay equality claim.",
+  "retired_exploration_limits": [
+    "DEBUG manager enlarges layout and changes timing/file I/O; its nonfault run does not prove a fix.",
+    "Documented DOSBox int21 log flag produced no INT21 register/result trace in the pinned runner. Exact failing image with DX-CAPTURE had199 resource reads and no CPU fault; it supplies no returned-read or nesting evidence.",
+    "NEVER for naming aliases achieved136vectors but can bypass required loading semantics; rejected, not integrated."
+  ]
+}

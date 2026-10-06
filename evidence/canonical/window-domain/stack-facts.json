@@ -1,0 +1,879 @@
+{
+  "schema": "simant-window-stack-nominal-v1",
+  "scope": "Shipped/default nominal windows, reviewed canonical call and registration inventory, successful services and ordinary save state. No arbitrary invocation, custom resources, returning first-fatal continuation or historical table capacity claim.",
+  "original_image_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "resource_pins": [
+    {
+      "path": "assets/HCEGANT.NDX",
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+    },
+    {
+      "path": "assets/HCEGANT.DAT",
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+    }
+  ],
+  "possible_open_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    29,
+    30,
+    31,
+    32,
+    33
+  ],
+  "noncoexisting_pair": [
+    3,
+    33
+  ],
+  "facts": {
+    "open_roots": "All Open/old-alias, Swap targets, win_DoProxMenu and0725 calls appear in coverage. Dynamic Open destinations are guarded DoExpMenu subMenus12..17, literal proxy6/7/8/10/11/32, or an existing stack value; Swap both arguments1/25. Unused front wrapper0043 has no caller or canonical address-taking use.",
+    "lifetime_exclusion": "Window3 only ShowIntro, called once by main before CustomerIDDialog/NewGame and application event loop. ShowIntro returns only when3 is closed, then flushes. Window33 only0239, called by LoadGame/MenuQuit. Pre-intro initialization, local event polling and registered hooks do not dispatch those application handlers. Hence at most31 distinct destinations can be open.",
+    "callback_closure": "Only application registrations: E0=00BA0228 and F4=00BA0211 ignore passed IDs; EC=00BA01C3 forwards only literal1/25, and fixed edit/map/yard/caste/mode IDs. E4/E8/F0 stay no-op. Draw callbacks receive phase, with fixed registrations0/1/21/18/19/25/5. Timer draws cursor, not application commands.",
+    "stack_preservation": "Only1E57 writers. Front inserts unique masked IDs with sentinel<=31; kill removes while preserving sentinel. Back helper0052 requires existing top with >=2 entries; sole event caller supplies exactly that state and intervening E4 is no-op. No nominal front truncation under31destination bound, so open flag entails nonempty stack at Swap first!=0 test.",
+    "sentinel_readers": "Clipping/redraw stop before8000; event/click/focus check nonempty; hover signedcharhigh(top)==uchar(eventcode) excludes negative sentinel;20E8:A21 tests036E nonempty; S26 move/resize return onempty. Full reader/writer source footprint is pinned.",
+    "hidden_AX": "NewGame no-argument A65 consumes implicitAX. SetMapPlane ends UpdateEdit; closed returns IsWinOpen0, open ends clip_Off SUBAX,AX. Epilogues and POPBX/ORSI preserveAX0 before A65. Its zero-result zoom call likewise supplies0.",
+    "storage_lifetime": "Static32word stack initialized8000;307SaveRec intervals exclude it. Handle table cells contain allocator master handles, never an escaped table base. LoadWindow stores; IsWinOpen clears discarded; UnlockWin clears discarded closed windows; root2505 getwinptr andRecalc both read incoming high index. Capacity still needs incoming-root ownership proof."
+  },
+  "control_scope": "Actual unmodified original mutation bodies, with clip rebuild and diagnostic boundaries no-op and far memcpy exact-copy model. 26 nominal-precondition and10 excluded-precondition mutation rows, plus two UpdateEdit AX controls. Full31/new front insertion drops the last entry: the lifetime theorem must exclude it. Drawing/initial clip callbacks deliberately returnFFFF; actual clip_Off executes. Pinned34 shipped headers initially closed. No full UI/game replay or repair claim.",
+  "coverage": {
+    "source_pins": [
+      {
+        "path": "src/S04/m35F5.c",
+        "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406"
+      },
+      {
+        "path": "src/S05/m35F5.c",
+        "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87"
+      },
+      {
+        "path": "src/S05/m3663.c",
+        "sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c"
+      },
+      {
+        "path": "src/S08/m35F5.c",
+        "sha256": "f950e7c22b112adef492d745164e80755669e2e9218052d4b9b48e5c8a22adc6"
+      },
+      {
+        "path": "src/S09/m35F5.c",
+        "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+      },
+      {
+        "path": "src/S09/m36EE.c",
+        "sha256": "e48ce08404481d1fa8921b14f24b5e1c6ea8a5afc06f8854b903c9225e91ca53"
+      },
+      {
+        "path": "src/S11/m35F5.c",
+        "sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8"
+      },
+      {
+        "path": "src/S12/m384C.c",
+        "sha256": "9d4b6840fb8aeb4f51235011d10ebed108a523783ab1a2ec075c656dea5d84e1"
+      },
+      {
+        "path": "src/S13/m384C.c",
+        "sha256": "333908e9217239d66c34f8ad9e4d277da330576fab74d912a13b2e91633b52e1"
+      },
+      {
+        "path": "src/S14/m384C.c",
+        "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020"
+      },
+      {
+        "path": "src/S15/m384C.c",
+        "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172"
+      },
+      {
+        "path": "src/S16/m384C.c",
+        "sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540"
+      },
+      {
+        "path": "src/S19/m384C.c",
+        "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b"
+      },
+      {
+        "path": "src/S20/m39F1.c",
+        "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3"
+      },
+      {
+        "path": "src/S22/m39C7.c",
+        "sha256": "58f8a4a7ae524fae65d8abca7972253e6f0e83cf384cfcb356bc5a580ac738c6"
+      },
+      {
+        "path": "src/S22/m3BBD.c",
+        "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2"
+      },
+      {
+        "path": "src/S23/m39C7.c",
+        "sha256": "c9a26f97557c8a1b9cd4db2c17eb910787e7719aec0499041dcfd2c69eee1301"
+      },
+      {
+        "path": "src/S24/m39C7.c",
+        "sha256": "1eb5a0000fccff4615c0ed490460fa997569b38d95201cb0f472f5c1bdd8f98b"
+      },
+      {
+        "path": "src/S26/m39C7.c",
+        "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4"
+      },
+      {
+        "path": "src/root/m004A.c",
+        "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a"
+      },
+      {
+        "path": "src/root/m00BA.c",
+        "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc"
+      },
+      {
+        "path": "src/root/m00F8.c",
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a"
+      },
+      {
+        "path": "src/root/m015B.c",
+        "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f"
+      },
+      {
+        "path": "src/root/m0250.c",
+        "sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a"
+      },
+      {
+        "path": "src/root/m075B.c",
+        "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56"
+      },
+      {
+        "path": "src/root/m0798.c",
+        "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8"
+      },
+      {
+        "path": "src/root/m15F8.c",
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      {
+        "path": "src/root/m1B73.asm",
+        "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3"
+      },
+      {
+        "path": "src/root/m1E57.c",
+        "sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084"
+      },
+      {
+        "path": "src/root/m20E8.c",
+        "sha256": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821"
+      },
+      {
+        "path": "src/root/m218D.c",
+        "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e"
+      },
+      {
+        "path": "src/root/m21FA.c",
+        "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f"
+      },
+      {
+        "path": "src/root/m22BF.c",
+        "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0"
+      },
+      {
+        "path": "src/root/m23AE.c",
+        "sha256": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1"
+      },
+      {
+        "path": "src/root/m2505.c",
+        "sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234"
+      },
+      {
+        "path": "src/state/window-handles.c",
+        "sha256": "3636e59fb11f98258f28f0a289fc8492550debb3f79310a315b85151af560bd9"
+      }
+    ],
+    "code_alias_subset": {
+      "IBMInitStuff": {
+        "unit": "S20",
+        "seg": 14833,
+        "off": 10
+      },
+      "LoadGame": {
+        "unit": "S09",
+        "seg": 13813,
+        "off": 0
+      },
+      "MenuQuit": {
+        "unit": "S15",
+        "seg": 14412,
+        "off": 494
+      },
+      "NewGame": {
+        "unit": "S15",
+        "seg": 14412,
+        "off": 966
+      },
+      "ProcMenu": {
+        "unit": "S11",
+        "seg": 13813,
+        "off": 397
+      },
+      "SetMapPlane": {
+        "unit": "root",
+        "seg": 347,
+        "off": 1340
+      },
+      "ShowIntro": {
+        "unit": "S16",
+        "seg": 14412,
+        "off": 1138
+      },
+      "UpdateEdit": {
+        "unit": "root",
+        "seg": 592,
+        "off": 3741
+      },
+      "clip_KillWin": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 277
+      },
+      "clip_Off": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 866
+      },
+      "f_00F8_017D": {
+        "unit": "root",
+        "seg": 248,
+        "off": 381
+      },
+      "f_00F8_01BE": {
+        "unit": "root",
+        "seg": 248,
+        "off": 446
+      },
+      "f_00F8_02AC": {
+        "unit": "root",
+        "seg": 248,
+        "off": 684,
+        "alias_of": "myButton"
+      },
+      "f_015B_053C": {
+        "unit": "root",
+        "seg": 347,
+        "off": 1340,
+        "alias_of": "SetMapPlane"
+      },
+      "f_0250_0E9D": {
+        "unit": "root",
+        "seg": 592,
+        "off": 3741,
+        "alias_of": "UpdateEdit"
+      },
+      "f_075B_0000": {
+        "unit": "root",
+        "seg": 1883,
+        "off": 0,
+        "alias_of": "initStuff"
+      },
+      "f_1E57_0043": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 67
+      },
+      "f_1E57_0052": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 82
+      },
+      "f_1E57_00B1": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 177
+      },
+      "f_1E57_0115": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 277,
+        "alias_of": "clip_KillWin"
+      },
+      "f_1E57_0362": {
+        "unit": "root",
+        "seg": 7767,
+        "off": 866,
+        "alias_of": "clip_Off"
+      },
+      "f_20E8_0001": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1,
+        "alias_of": "win_LoadWindow"
+      },
+      "f_20E8_0141": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 321,
+        "alias_of": "win_LoadAllWindows"
+      },
+      "f_20E8_032F": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 815,
+        "alias_of": "win_Swap"
+      },
+      "f_20E8_04B6": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1206,
+        "alias_of": "win_Open"
+      },
+      "f_20E8_0635": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1589,
+        "alias_of": "win_Close"
+      },
+      "f_20E8_0725": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1829
+      },
+      "f_20E8_0776": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1910
+      },
+      "f_20E8_0862": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2146,
+        "alias_of": "win_SetWinDrawHook"
+      },
+      "f_20E8_088B": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2187
+      },
+      "f_20E8_089F": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2207
+      },
+      "f_20E8_08B3": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2227
+      },
+      "f_20E8_08C7": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2247
+      },
+      "f_20E8_08DB": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2267
+      },
+      "f_20E8_08EF": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2287
+      },
+      "f_22BF_09B0": {
+        "unit": "root",
+        "seg": 8895,
+        "off": 2480,
+        "alias_of": "win_IsWinOpen"
+      },
+      "f_22BF_0A65": {
+        "unit": "root",
+        "seg": 8895,
+        "off": 2661
+      },
+      "f_22BF_0BAB": {
+        "unit": "root",
+        "seg": 8895,
+        "off": 2987,
+        "alias_of": "win_DoProxMenu"
+      },
+      "f_2505_0006": {
+        "unit": "root",
+        "seg": 9477,
+        "off": 6
+      },
+      "f_2505_0545": {
+        "unit": "root",
+        "seg": 9477,
+        "off": 1349,
+        "alias_of": "win_Recalc"
+      },
+      "initStuff": {
+        "unit": "root",
+        "seg": 1883,
+        "off": 0
+      },
+      "myButton": {
+        "unit": "root",
+        "seg": 248,
+        "off": 684
+      },
+      "o09_35F5_0000": {
+        "unit": "S09",
+        "seg": 13813,
+        "off": 0,
+        "alias_of": "LoadGame"
+      },
+      "o11_35F5_018D": {
+        "unit": "S11",
+        "seg": 13813,
+        "off": 397,
+        "alias_of": "ProcMenu"
+      },
+      "o15_384C_01EE": {
+        "unit": "S15",
+        "seg": 14412,
+        "off": 494,
+        "alias_of": "MenuQuit"
+      },
+      "o15_384C_0239": {
+        "unit": "S15",
+        "seg": 14412,
+        "off": 569
+      },
+      "o15_384C_03C6": {
+        "unit": "S15",
+        "seg": 14412,
+        "off": 966,
+        "alias_of": "NewGame"
+      },
+      "o16_384C_0472": {
+        "unit": "S16",
+        "seg": 14412,
+        "off": 1138,
+        "alias_of": "ShowIntro"
+      },
+      "o19_384C_0000": {
+        "unit": "S19",
+        "seg": 14412,
+        "off": 0
+      },
+      "o20_39F1_000A": {
+        "unit": "S20",
+        "seg": 14833,
+        "off": 10,
+        "alias_of": "IBMInitStuff"
+      },
+      "o26_39C7_0000": {
+        "unit": "S26",
+        "seg": 14791,
+        "off": 0
+      },
+      "win_Close": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1589
+      },
+      "win_DoProxMenu": {
+        "unit": "root",
+        "seg": 8895,
+        "off": 2987
+      },
+      "win_IsWinOpen": {
+        "unit": "root",
+        "seg": 8895,
+        "off": 2480
+      },
+      "win_LoadAllWindows": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 321
+      },
+      "win_LoadWindow": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1
+      },
+      "win_Open": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 1206
+      },
+      "win_Recalc": {
+        "unit": "root",
+        "seg": 9477,
+        "off": 1349
+      },
+      "win_SetWinDrawHook": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 2146
+      },
+      "win_Swap": {
+        "unit": "root",
+        "seg": 8424,
+        "off": 815
+      }
+    },
+    "program_alias_subset": [
+      {
+        "alias": "@f_20E8_0635",
+        "target": "@win_Close",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "@f_22BF_09B0",
+        "target": "@win_IsWinOpen",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_f_00F8_02AC",
+        "target": "_myButton",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_f_015B_053C",
+        "target": "_SetMapPlane",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_f_0250_0E9D",
+        "target": "_UpdateEdit",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_f_1E57_0362",
+        "target": "_clip_Off",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_f_20E8_04B6",
+        "target": "_win_Open",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_f_22BF_0A65",
+        "target": "@f_22BF_0A65",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_o15_384C_01EE",
+        "target": "_MenuQuit",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_o15_384C_03C6",
+        "target": "_NewGame",
+        "offset": 0,
+        "kind": "code"
+      },
+      {
+        "alias": "_o26_39C7_0000",
+        "target": "@o26_39C7_0000",
+        "offset": 0,
+        "kind": "code"
+      }
+    ],
+    "open_root_calls": [
+      [
+        "src/S04/m35F5.c",
+        320,
+        "win_Open",
+        "0x1400"
+      ],
+      [
+        "src/S05/m35F5.c",
+        36,
+        "win_DoProxMenu",
+        "0x600"
+      ],
+      [
+        "src/S05/m35F5.c",
+        80,
+        "win_DoProxMenu",
+        "0xa00"
+      ],
+      [
+        "src/S05/m35F5.c",
+        91,
+        "win_DoProxMenu",
+        "0xb00"
+      ],
+      [
+        "src/S05/m35F5.c",
+        181,
+        "win_Open",
+        "0x1d00"
+      ],
+      [
+        "src/S05/m35F5.c",
+        246,
+        "win_DoProxMenu",
+        "0x800"
+      ],
+      [
+        "src/S05/m35F5.c",
+        248,
+        "win_DoProxMenu",
+        "0x700"
+      ],
+      [
+        "src/S05/m35F5.c",
+        250,
+        "win_DoProxMenu",
+        "0x2000"
+      ],
+      [
+        "src/S05/m3663.c",
+        64,
+        "win_Open",
+        "0x900"
+      ],
+      [
+        "src/S05/m3663.c",
+        133,
+        "win_Open",
+        "i"
+      ],
+      [
+        "src/S05/m3663.c",
+        135,
+        "win_Open",
+        "i"
+      ],
+      [
+        "src/S09/m35F5.c",
+        325,
+        "win_Open",
+        "0x1600"
+      ],
+      [
+        "src/S12/m384C.c",
+        116,
+        "f_20E8_0725",
+        "0x100"
+      ],
+      [
+        "src/S12/m384C.c",
+        117,
+        "f_20E8_0725",
+        "0x100"
+      ],
+      [
+        "src/S12/m384C.c",
+        140,
+        "win_Open",
+        "0x100"
+      ],
+      [
+        "src/S14/m384C.c",
+        191,
+        "f_20E8_04B6",
+        "0x200"
+      ],
+      [
+        "src/S14/m384C.c",
+        279,
+        "f_20E8_04B6",
+        "0x1800"
+      ],
+      [
+        "src/S14/m384C.c",
+        337,
+        "f_20E8_04B6",
+        "0x1700"
+      ],
+      [
+        "src/S14/m384C.c",
+        477,
+        "f_20E8_04B6",
+        "0x1e00"
+      ],
+      [
+        "src/S14/m384C.c",
+        541,
+        "f_20E8_04B6",
+        "0x400"
+      ],
+      [
+        "src/S14/m384C.c",
+        580,
+        "f_20E8_04B6",
+        "0x1a00"
+      ],
+      [
+        "src/S15/m384C.c",
+        196,
+        "win_Open",
+        "0x2100"
+      ],
+      [
+        "src/S15/m384C.c",
+        337,
+        "win_Open",
+        "0"
+      ],
+      [
+        "src/S16/m384C.c",
+        87,
+        "win_Open",
+        "0x1a00"
+      ],
+      [
+        "src/S16/m384C.c",
+        159,
+        "win_Open",
+        "0x1f00"
+      ],
+      [
+        "src/S16/m384C.c",
+        249,
+        "win_Open",
+        "0x300"
+      ],
+      [
+        "src/S22/m39C7.c",
+        704,
+        "f_20E8_0725",
+        "0x1900"
+      ],
+      [
+        "src/S22/m39C7.c",
+        718,
+        "f_20E8_0725",
+        "0x1900"
+      ],
+      [
+        "src/S22/m39C7.c",
+        769,
+        "win_Open",
+        "0x1a00"
+      ],
+      [
+        "src/S22/m39C7.c",
+        819,
+        "win_Open",
+        "0x1a00"
+      ],
+      [
+        "src/S22/m39C7.c",
+        1060,
+        "win_Open",
+        "0x1a00"
+      ],
+      [
+        "src/S23/m39C7.c",
+        565,
+        "win_Open",
+        "0x500"
+      ],
+      [
+        "src/S24/m39C7.c",
+        25,
+        "win_Open",
+        "0x1500"
+      ],
+      [
+        "src/root/m00F8.c",
+        294,
+        "win_Swap",
+        "0x1900"
+      ],
+      [
+        "src/root/m00F8.c",
+        296,
+        "win_Open",
+        "0x100"
+      ],
+      [
+        "src/root/m00F8.c",
+        306,
+        "win_Swap",
+        "0x100"
+      ],
+      [
+        "src/root/m00F8.c",
+        308,
+        "win_Open",
+        "0x1900"
+      ],
+      [
+        "src/root/m00F8.c",
+        318,
+        "f_20E8_0725",
+        "0x100"
+      ],
+      [
+        "src/root/m00F8.c",
+        320,
+        "f_20E8_0725",
+        "0x1900"
+      ],
+      [
+        "src/root/m015B.c",
+        185,
+        "win_Swap",
+        "0x100"
+      ],
+      [
+        "src/root/m0250.c",
+        608,
+        "win_Open",
+        "0"
+      ],
+      [
+        "src/root/m0798.c",
+        102,
+        "win_Open",
+        "0x1300"
+      ],
+      [
+        "src/root/m0798.c",
+        108,
+        "win_Open",
+        "0x1200"
+      ],
+      [
+        "src/root/m20E8.c",
+        307,
+        "win_Open",
+        "win"
+      ],
+      [
+        "src/root/m218D.c",
+        253,
+        "f_20E8_0725",
+        "g_5702[i]"
+      ]
+    ]
+  },
+  "integration_limits": [
+    "This packet supplies the stack/forwarding subgraph; combine with complete incoming ID roots before admitting a handle owner.",
+    "31 active-window theorem depends on reviewed lifecycle exclusion and registration contracts, not only an observed passing run.",
+    "Excluded full31/absent back-insertion writes sentinel32; excluded last-entry removal consumes tail. These are strong negative controls, not nominal histories."
+  ]
+}

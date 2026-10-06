@@ -1,0 +1,171 @@
+{
+  "schema": "simant-rng-world-save-domain-v1",
+  "closure_eligible": false,
+  "conclusion": "Fresh games are intentionally randomized. Identical host replay keys/timestamps do not establish matching game-clock samples, live RNG state or generated worlds. Equal explicit per-yard seeds support a controlled world comparison only with equal generation parameters, resources and relevant prestate; arbitrary screenshots need not match.",
+  "source_pins": [
+    {
+      "path": "src/root/m0093.c",
+      "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af"
+    },
+    {
+      "path": "src/root/m075B.c",
+      "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56"
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3"
+    },
+    {
+      "path": "src/S08/m35F5.c",
+      "sha256": "f950e7c22b112adef492d745164e80755669e2e9218052d4b9b48e5c8a22adc6"
+    },
+    {
+      "path": "src/S18/m384C.c",
+      "sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3"
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+    },
+    {
+      "path": "src/root/m015B.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f"
+    }
+  ],
+  "seeding_chain": [
+    "initStuff calls SeedSRand, then SeedRRand. SeedRRand again seeds private16-bit S state from low16(TickCount) XOR3751h, consumes one SRand128 draw, seeds MSC CRT rand with a second low16(TickCount) sample, then discards that many (0..127) CRT draws.",
+    "TickCount is the game INT08 counter (starts0, tick_count_on starts1), not a host wall-time value. Its actual samples in the earlier DOS comparison runs were not captured.",
+    "NewGame initializes the selected game mode and invokes RandYard. RandYard draws192 values from the current CRT RRand stream into the16x12 per-yard seed table and selects table[y8][x11] for RandWorld.",
+    "RandWorld first SetSRandSeed(selected_seed), then builds MapA terrain and resets/builds MapB/MapR, ExitMapB/ExitMapR and Life maps, clears pheromone maps and initializes colonies. Output also depends on black/red sizes, patchcoordinates, TERRAINset, mode/resources and relevant helper prestate. No complete RandWorld world-array differential corpus is claimed here.",
+    "XferPatch reuses the stored seed table entry for the selected yard, together with that yard's saved colony sizes/coordinates. Simulation thereafter consumes both RNG streams; input/tick history can change call order/count."
+  ],
+  "save_load": {
+    "original_schema_records": 307,
+    "yard_seed_table_record": {
+      "index_zero_based": 29,
+      "size": 2,
+      "count": 192,
+      "bytes": 384
+    },
+    "live_rng_ranges_excluded_from_all_records": [
+      {
+        "name": "private S LFSR",
+        "original_address": "55B3:8BA2",
+        "bytes": 2
+      },
+      {
+        "name": "MSC CRT rand state",
+        "original_address": "55B3:7BBE",
+        "bytes": 4
+      }
+    ],
+    "CRT_state_authority": "Actual original srand writes7BBE/7BC0, rand reads/updates the same four bytes. All307 original SaveRec intervals checked for overlap; none covers either RNG range.",
+    "load_order": "Before reading records, LoadGame calls o09_35F5_0D7A\u2192RandYard, advancing live RNG streams and generating temporary state. Loaded records overwrite stored maps/lists/yard seeds; o09_35F5_0DBB rebuilds LifeA/B/R from loaded lists and the player. No explicit private-S or CRT RNG restore/reseed follows the record read.",
+    "implication": "Saving/restoring world data and per-yard generation seeds does not restore the exact ongoing RNG sequence. Equal loaded terrain does not imply identical future simulation or future new-game seeds.",
+    "GetRRandSeed": "Unused helper reads physical046C:0000; it is not the CRT rand internal state. SetRRandSeed is empty. Neither supplies a save/load RNG restore."
+  },
+  "bounded_original_seed_table_control": {
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "VM": {
+      "path": "tools/behavior.py",
+      "sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155"
+    },
+    "observations": [
+      {
+        "label": "same-A",
+        "clock_samples": [
+          123,
+          124
+        ],
+        "prior_RRand_draws": 0,
+        "CRT_state_before": 606477520,
+        "table_sha256": "8bc08b421154c89169c043d34740ff9d31ef13dacad16a2fed0ab827c722b6b9",
+        "selected_RandWorld_arguments": [
+          [
+            23017,
+            1,
+            1,
+            11,
+            8
+          ]
+        ],
+        "RRand_calls": 192
+      },
+      {
+        "label": "same-B",
+        "clock_samples": [
+          123,
+          124
+        ],
+        "prior_RRand_draws": 0,
+        "CRT_state_before": 606477520,
+        "table_sha256": "8bc08b421154c89169c043d34740ff9d31ef13dacad16a2fed0ab827c722b6b9",
+        "selected_RandWorld_arguments": [
+          [
+            23017,
+            1,
+            1,
+            11,
+            8
+          ]
+        ],
+        "RRand_calls": 192
+      },
+      {
+        "label": "changed-clock",
+        "clock_samples": [
+          124,
+          125
+        ],
+        "prior_RRand_draws": 0,
+        "CRT_state_before": 530034327,
+        "table_sha256": "1a6e026eb5d84d947186b69aeb1ca5faba22ee5e3f0c63368e73b1a190012ac9",
+        "selected_RandWorld_arguments": [
+          [
+            30528,
+            1,
+            1,
+            11,
+            8
+          ]
+        ],
+        "RRand_calls": 192
+      },
+      {
+        "label": "advanced-stream",
+        "clock_samples": [
+          123,
+          124
+        ],
+        "prior_RRand_draws": 1,
+        "CRT_state_before": 164333651,
+        "table_sha256": "070245bd2e20cb80114088920a9d173b1685a870200a01c63fee53d6878ef46f",
+        "selected_RandWorld_arguments": [
+          [
+            22168,
+            1,
+            1,
+            11,
+            8
+          ]
+        ],
+        "RRand_calls": 192
+      }
+    ],
+    "positive": "Same two clock samples and same CRT history produce identical384-byte table and selectedyardseed.",
+    "negative": "Changing clock samples or consuming one prior RRand draw changes the table and selected seed.",
+    "scope": "Actual original SeedRRand/RRand/ClrArrays/InitSimYard/ClearHistory/RandYard. initControls is an explicit no-op UI boundary; RandWorld intercepted at entry. No world-generation or DOS source-image seed comparison claim."
+  },
+  "retained_regression": {
+    "receipt": "evidence/canonical/validation/native-rng.json",
+    "runner": "portable/tests/native_rng/run.py",
+    "fixture": "portable/tests/native_rng/fixture.c",
+    "observations": 3096,
+    "scope": "Actual canonical root0093 plus CRT/seed services vs original helpers, controlled clocks and physical seed reader; zero-divisor negative. Source, fixture, service and VM hashes still match that receipt. No new duplicate model or game seed override introduced."
+  },
+  "limits": [
+    "Randomness does not excuse a differing implementation under equal controlled state/seed/input contracts.",
+    "No RNG cause assigned to prior differing DOS frames without actual seed/call-history traces.",
+    "Save/Load interoperability and semantic replay belong to the separate live DOS receipt; this finding alone does not prove them."
+  ]
+}

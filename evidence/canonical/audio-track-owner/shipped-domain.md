@@ -1,8 +1,9 @@
 # Shipped MIDI domain
 
-This closes a resource-count question, not the scheduler storage owners.
-`_fd_50F6_4B30` and `_fd_50F6_4B42` remain unresolved. A resource maximum must
-not become a guessed historical array capacity.
+This supplies the resource-count premise for the admitted functional scheduler
+owners. The complete consumer/lifetime proof is in
+`evidence/canonical/shipped-resource-domain/review.md`; canonical storage uses
+ten slots. A resource maximum does not recover the historical array capacity.
 
 ```
 python evidence/canonical/audio-track-owner/shipped_domain.py --out build/workers/audio-proof/run-001

@@ -1,0 +1,253 @@
+{
+  "schema": "simant-diagnostic-dos-experiment-v2",
+  "closure_eligible": false,
+  "canonical_translation_units": 193,
+  "provisional_storage_providers": 7,
+  "canonical_blockers": {
+    "unresolved_imports": 7,
+    "semantic_gates": 8,
+    "unattributed_bytes": 44,
+    "ranges": 6
+  },
+  "current_link_contracts": [
+    "evidence/canonical/diagnostic-link/runtime-dictionary.json",
+    "evidence/canonical/diagnostic-link/overlay-vectors.json"
+  ],
+  "canonical_object_sequence_sha256": "949ea42429b1dd2b2579ee01878edee2ca51ceac1e44b43b4c2d67a82a6f99ec",
+  "canonical_object_sequence_encoding": "SHA256 of compact JSON [module key, object SHA256] pairs in inventory order; both layouts identical.",
+  "providers": {
+    "communal": {
+      "path": "build/workers/diagnostic_link/providers/split-seven.json",
+      "sha256": "ec689a1f4864b38ef3d3380b282e4a06c6f7fc35cf17c81c36634a86df589656",
+      "size": 2892
+    },
+    "initialized": {
+      "path": "build/workers/diagnostic_link/providers/initialized-seven.json",
+      "sha256": "41956f83c2aacf26ba59b32fc2b1c399e4e44e6ead38567773a450587e411366",
+      "size": 3169
+    },
+    "spider_bytes": 6276,
+    "extent_limit": "Measured access lower bound only; complete owner, capacity and lifetime unproved."
+  },
+  "builds": {
+    "baseline": {
+      "receipt": {
+        "path": "build/workers/lead/overlay-policy/baseline/build-report.json",
+        "sha256": "4f2e512a5e3de8eab188371506ea891d7719c5e801bffe402d28bf8aebab7970",
+        "size": 351391
+      },
+      "image": {
+        "path": "build/workers/lead/overlay-policy/baseline/link/SOURCE.EXE",
+        "sha256": "cf9b4e1e78424c1546684d6f9438ddbe1c85148027f0d6662f20a5c6985d0753",
+        "size": 501805
+      },
+      "map": {
+        "path": "build/workers/lead/overlay-policy/baseline/link/SOURCE.MAP",
+        "sha256": "7bc91831ff9966dc408a15c3499abdf3d73f75c2f9de973e71b68147172ce7f1",
+        "size": 1000450
+      },
+      "log": {
+        "path": "build/workers/lead/overlay-policy/baseline/link/LINK.LOG",
+        "sha256": "377fc24760daa773f44beb813a44bff2ac057b71e18f441f290ae13882e251dc",
+        "size": 21523
+      },
+      "vector_check": {
+        "policy": "EXPLICIT_SYMBOLS",
+        "required_symbols": 136,
+        "alias_vectors": [
+          "_o11_35F5_0000",
+          "_o11_35F5_0088",
+          "_o14_384C_0ACD",
+          "_o14_384C_0B6A",
+          "_o14_384C_0DE5",
+          "_o15_384C_01EE",
+          "_o15_384C_037F",
+          "_o15_384C_03C6",
+          "_o18_384C_0000",
+          "_o22_39C7_07FD",
+          "_o22_39C7_0D21",
+          "_o22_39C7_188D",
+          "_o22_39C7_19E5",
+          "_o24_39C7_01B8",
+          "_o24_39C7_0608",
+          "_o26_39C7_0000"
+        ],
+        "actual_count": 152,
+        "missing": [],
+        "unexpected": [],
+        "map": {
+          "path": "build/workers/lead/overlay-policy/baseline/link/SOURCE.MAP",
+          "sha256": "7bc91831ff9966dc408a15c3499abdf3d73f75c2f9de973e71b68147172ce7f1",
+          "size": 1000450
+        }
+      }
+    },
+    "initialized": {
+      "receipt": {
+        "path": "build/workers/lead/overlay-policy/initialized/build-report.json",
+        "sha256": "d8ef3c2725b71bc17f9b5eda40a8182e31099c6f494986ee88f4ba4a4c3974f6",
+        "size": 353878
+      },
+      "image": {
+        "path": "build/workers/lead/overlay-policy/initialized/link/SOURCE.EXE",
+        "sha256": "50f0b11abd642b93dcc8e1ed37e37c20cd851e021557fcac571bdbbf6c8cbe44",
+        "size": 506941
+      },
+      "map": {
+        "path": "build/workers/lead/overlay-policy/initialized/link/SOURCE.MAP",
+        "sha256": "b4b18b114763e5cf647a4bf36f7c8315a60f32ce91501f7e6a742b8d0ee066b1",
+        "size": 1000725
+      },
+      "log": {
+        "path": "build/workers/lead/overlay-policy/initialized/link/LINK.LOG",
+        "sha256": "377fc24760daa773f44beb813a44bff2ac057b71e18f441f290ae13882e251dc",
+        "size": 21523
+      },
+      "vector_check": {
+        "policy": "EXPLICIT_SYMBOLS",
+        "required_symbols": 136,
+        "alias_vectors": [
+          "_o11_35F5_0000",
+          "_o11_35F5_0088",
+          "_o14_384C_0ACD",
+          "_o14_384C_0B6A",
+          "_o14_384C_0DE5",
+          "_o15_384C_01EE",
+          "_o15_384C_037F",
+          "_o15_384C_03C6",
+          "_o18_384C_0000",
+          "_o22_39C7_07FD",
+          "_o22_39C7_0D21",
+          "_o22_39C7_188D",
+          "_o22_39C7_19E5",
+          "_o24_39C7_01B8",
+          "_o24_39C7_0608",
+          "_o26_39C7_0000"
+        ],
+        "actual_count": 152,
+        "missing": [],
+        "unexpected": [],
+        "map": {
+          "path": "build/workers/lead/overlay-policy/initialized/link/SOURCE.MAP",
+          "sha256": "b4b18b114763e5cf647a4bf36f7c8315a60f32ce91501f7e6a742b8d0ee066b1",
+          "size": 1000725
+        }
+      }
+    }
+  },
+  "runtimes": {
+    "baseline": {
+      "receipt": {
+        "path": "build/workers/lead/overlay-policy/runtime-baseline/execution-report.json",
+        "sha256": "cab207338383f27b22416a7a8c4cbb44f61af8cc0ecc63c26bdf0d6b12b76854",
+        "size": 49194
+      },
+      "log": {
+        "path": "build/workers/lead/overlay-policy/runtime-baseline/dosbox-runtime.log",
+        "sha256": "63fc6bb680c892f1adfb65a200a5a7e269aefa645e4f30ffaaeb985d3e3e3438",
+        "size": 268961
+      },
+      "status": "TIME_LIMIT",
+      "bound_seconds": 40,
+      "runtime_faults": {
+        "count": 0,
+        "first_lines": [],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "resource_read_count": 199,
+      "resource_sequence_sha256": "afd9fcf26be9dec53d5e19baff733691a43c1ce0f9c4fdb38c47856fc8d5ae25",
+      "reviewed_frame": {
+        "path": "build/workers/lead/overlay-policy/runtime-baseline/frame35.png",
+        "sha256": "c051ce33d01a2e9661356bc6953871fc689a8312ed665487db29721689dad665",
+        "size": 33801
+      },
+      "observation": "Decoded frame shows Full Game in VGA after scheduled keyboard input. No synchronized state, sound, Save/Load or sustained-play proof."
+    },
+    "initialized": {
+      "receipt": {
+        "path": "build/workers/lead/overlay-policy/runtime-initialized/execution-report.json",
+        "sha256": "ac53920318e5068bd7db3defd12c6ea4ab75648fe7af7d27c6b173b2c9d38c95",
+        "size": 51153
+      },
+      "log": {
+        "path": "build/workers/lead/overlay-policy/runtime-initialized/dosbox-runtime.log",
+        "sha256": "f694432bf112e1152588abc953077967eb89fcc209f92d8b825731847a77821f",
+        "size": 269551
+      },
+      "status": "TIME_LIMIT",
+      "bound_seconds": 40,
+      "runtime_faults": {
+        "count": 0,
+        "first_lines": [],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "resource_read_count": 201,
+      "resource_sequence_sha256": "9677a24fb63f70ed4c0ca9674e129a71434a27746b6177efedc9beec34fa2a18",
+      "reviewed_frame": {
+        "path": "build/workers/lead/overlay-policy/runtime-initialized/frame35.png",
+        "sha256": "e14dd0ad57bf0cc8ed437e9fa0adc5fee870da6759fab4d3d16e0ae2d774b107",
+        "size": 34174
+      },
+      "observation": "Decoded frame shows Full Game in VGA after scheduled keyboard input. No synchronized state, sound, Save/Load or sustained-play proof."
+    }
+  },
+  "original_reference": {
+    "path": "build/workers/lead/dos-input/original-fullgame/execution-report.json",
+    "sha256": "123104138f873611d421a8cf93a7f9c6ba9d3f307ee59f7970b98ca9d6707d07",
+    "size": 17556
+  },
+  "corrected_4100_control": {
+    "build": "evidence/canonical/diagnostic-link/overlay-vectors.json",
+    "runtime": {
+      "path": "build/workers/lead/selective-overlay-runtime/execution-report.json",
+      "sha256": "5f03f20b285045bec83efc6e960ccb9bdcb4a1abb33b9c85d3603e7632b164a1",
+      "size": 48778
+    },
+    "status": "TIME_LIMIT",
+    "runtime_faults": {
+      "count": 0,
+      "first_lines": [],
+      "kind_counts": {
+        "unhandled_interrupt": 0,
+        "segment_limit": 0,
+        "game_abort": 0
+      }
+    },
+    "bound_seconds": 40,
+    "scope": "Same seven provisional definitions and canonical objects as the failing small-buffer image; only linker vector policy changes. Runtime nonrecurrence alone is not causal proof."
+  },
+  "captured_fault": "evidence/canonical/diagnostic-link/overlay-relocation.json",
+  "earlier_unsnapshotted_fault": {
+    "image": {
+      "path": "build/workers/diagnostic_link/seven/baseline/link/SOURCE.EXE",
+      "sha256": "be472a738d280879c56b6fc9af5500e16d05b0c1d8a7a5091428b71f48b40eac",
+      "size": 500653
+    },
+    "log": {
+      "path": "build/workers/lead/dos-input/source-menu-owner/dosbox-runtime.log",
+      "sha256": "ebb99624a6ad3bb078b8c44826200b676029d6631ecbc867aeb9ad7b63931364",
+      "size": 6409136
+    },
+    "status": "GUEST_FAULT_OBSERVED",
+    "scope": "Retained historical INT6 without RAM; not automatically assigned the captured failure mechanism."
+  },
+  "placement_scope": "All seven publics move under initialized storage; reversing COMDEF input order alone previously moved none. Current policy fixes callback binding independent of storage admission.",
+  "limits": [
+    "No source owner or complete extent admitted by diagnostic linking.",
+    "Zero original executable fallback, object/image patches or warning waivers.",
+    "Wall-timed input and tick-seeded RNG do not synchronize simulation state. The two current frames show different spatial views; no layout-invariant gameplay theorem follows.",
+    "The initial 40-second Full Game screen checks do not prove sound, save/load or longer play; later bounded Save/Load observations are recorded separately.",
+    "16 additional naming-alias vectors preserve required loading calls; exact historical manager version/vector layout is not claimed."
+  ],
+  "reproduction": "dos/README.md",
+  "save_load_observation": "evidence/canonical/diagnostic-link/save-load.json",
+  "rng_domain": "evidence/canonical/diagnostic-link/rng-domain.json"
+}

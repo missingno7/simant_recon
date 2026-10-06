@@ -6,60 +6,6 @@
   "human_acceptance": "PENDING",
   "imports": [
     {
-      "name": "_fd_50F6_0150",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:0000"
-      ],
-      "consumer_declarations": [
-        "extern struct Sample far * far fd_50F6_0150[];"
-      ],
-      "grounding": "f_0000_0149 stores far Sample pointers at4*g_181C. Signed check permits incoming count38; returning nested Punt also permits later stores. The diagnostic is not capacity or defining-TU authority.",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
-      "name": "_fd_50F6_1F26",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:0250"
-      ],
-      "consumer_declarations": [
-        "extern Pnt far fd_50F6_1F26;"
-      ],
-      "grounding": "PreDrawSpider (0250:179F): mov es,[7EEA]; es:[1F26]=7*tileW, es:[1F28]=7*tileH (Win16 spiderBuf.x/.y); f_0250_13A6 passes 50F6:1F26 as far pointer",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
-      "name": "_fd_50F6_3862",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "S09:35F5"
-      ],
-      "consumer_declarations": [
-        "extern char far fd_50F6_3862[];"
-      ],
-      "grounding": "o09_35F5_0000 (LoadGame): _fstrcpy(MK_FP(50F6,3862), name) after FileSelect (last file name)",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
       "name": "_fd_50F6_3C14",
       "kind": "data",
       "classification": "SEMANTIC / PORT-BLOCKING",
@@ -69,155 +15,16 @@
       "consumer_declarations": [
         "extern struct Rect far fd_50F6_3C14[];"
       ],
-      "grounding": "f_1E57_0174 (root:1E57 clip unit): far address 50F6:3C14 temporary clip rect buffer (memcpy target, stored into g_5AAC)",
+      "grounding": "f_1E57_0174 (root:1E57 clip unit): far address 50F6:3C14 temporary clip rect buffer (memcpy target, stored into g_5AAC). Original synthetic 31-window control generates 256 rectangles and overruns the separate 2048-byte heap temporary before Punt. Neither the stack bound nor that temporary proves this destination's complete supported extent.",
       "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
       "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
-      "name": "_fd_50F6_46A8",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "S10:35F5",
-        "S17:384C",
-        "root:1FD2"
-      ],
-      "consumer_declarations": [
-        "extern int far fd_50F6_46A8[];"
-      ],
-      "grounding": "o10_35F5_01C3/0384: mov es,[CONST 89DE = 50F6]; push es:[bx+46A8] with bx=menu*2 -> x position of menu title (int array)",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
-      "name": "_fd_50F6_46BC",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "S10:35F5",
-        "S17:384C",
-        "root:1FD2"
-      ],
-      "consumer_declarations": [
-        "extern int far fd_50F6_46BC[];"
-      ],
-      "grounding": "o10_35F5_0384: mov es,[CONST 89E2 = 50F6]; mov ax,es:[bx+46BC] with bx=menu*2; sub ax,maxLen; sar ax,1 -> width of menu title (int array)",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
-      "name": "_fd_50F6_4B30",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:284A"
-      ],
-      "consumer_declarations": [
-        "extern unsigned char far fd_50F6_4B30[];"
-      ],
-      "grounding": "f_284A_0256: mov es,[8AB6]; mov es:[si+4B30],al (far byte array, running status per track)",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "The uncapped signed MIDI track count supplies no capacity. Current whole-TU extern and tentative far bounds 1/18/19 preserve the same live contributions and eighteen accepted peers; external-symbol fixups therefore locate neither the historical allocator nor the extent. Initialization changes the scheduler and is excluded in this context. Slot-zero use, adjacent-symbol gaps and shipped resource counts do not admit the full owner, alias or lifetime contract.",
       "proof_refs": [
         "layout/symbols.json",
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "evidence/codegen/FARSEG-2-communal-fixup-ownership.json",
-        "evidence/canonical/audio-track-owner/review.md",
-        "evidence/canonical/audio-track-owner/receipt.json"
-      ]
-    },
-    {
-      "name": "_fd_50F6_4B42",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:284A"
+        "evidence/canonical/clip-domain/review.md"
       ],
-      "consumer_declarations": [
-        "extern long far fd_50F6_4B42[];"
-      ],
-      "grounding": "f_284A_0256: mov es,[8AB4]; mov es:[bx+4B42],ax; es:[bx+4B44],dx (far long array, next event time per track)",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "The uncapped signed MIDI track count supplies no capacity. Current whole-TU extern and tentative far bounds 1/18/19 preserve the same live contributions and eighteen accepted peers; external-symbol fixups therefore locate neither the historical allocator nor the extent. Initialization changes the scheduler and is excluded in this context. Slot-zero use, adjacent-symbol gaps and shipped resource counts do not admit the full owner, alias or lifetime contract.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "evidence/codegen/FARSEG-2-communal-fixup-ownership.json",
-        "evidence/canonical/audio-track-owner/review.md",
-        "evidence/canonical/audio-track-owner/receipt.json"
-      ]
-    },
-    {
-      "name": "_g_8ED8",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "S01:328E",
-        "S15:384C"
-      ],
-      "consumer_declarations": [
-        "extern unsigned char near g_8ED8[];"
-      ],
-      "grounding": "LoadMonoPats: far pointer 8ED8:DS destination of inverted pattern bytes (second object 0x271a)",
-      "required_resolution": "source storage/reachability investigation",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
-      "name": "_win_colors",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:20E8",
-        "root:21FA",
-        "root:22BF"
-      ],
-      "consumer_declarations": [
-        "extern char far win_colors[][6];"
-      ],
-      "grounding": "f_21FA_00EE/0144/0315: 6*index + 46E2, seg 50F6 -> colour table entries (6 bytes each)",
-      "required_resolution": "reviewed FAR_BSS definition and compatible consumer views",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
-    },
-    {
-      "name": "_win_handles",
-      "kind": "data",
-      "classification": "SEMANTIC / PORT-BLOCKING",
-      "consumers": [
-        "root:20E8",
-        "root:22BF",
-        "root:23AE",
-        "root:2505"
-      ],
-      "consumer_declarations": [
-        "extern char far * far * near win_handles[];"
-      ],
-      "grounding": "f_2505_0006/0545: les bx,[bx+9230] indexed by win>>8 (window handle table, 4-byte entries)",
-      "required_resolution": "source storage/reachability investigation",
-      "reason": "Live imports have no admitted complete owner/type/extent and escaped-view proof. A declaration, neighboring address or unadmitted later proposal is not allocation authority.",
-      "proof_refs": [
-        "layout/symbols.json",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
+      "closure_class": "SOURCE_REQUIRED",
+      "closure_basis": "A live undefined symbol needs one admitted source owner and complete supported extent/lifetime. Original defining TU and communal order are separate historical questions."
     }
   ],
   "data_debt": [
@@ -231,7 +38,9 @@
       "proof_refs": [
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
     },
     {
       "id": "dgroup_5a28",
@@ -243,7 +52,9 @@
       "proof_refs": [
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
     },
     {
       "id": "dgroup_5a96",
@@ -265,7 +76,9 @@
           "offset": 2,
           "size": 4
         }
-      ]
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
     },
     {
       "id": "dgroup_60b0",
@@ -277,20 +90,25 @@
       "proof_refs": [
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py"
-      ]
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
     },
     {
       "id": "dgroup_79f0",
       "bytes": 14,
       "classification": "SEMANTIC / PORT-BLOCKING",
       "evidence_class": "RUNTIME_MEMBER_SELECTION_AND_ORDER_UNRESOLVED",
-      "reason": "Heap-shaped __fheap data overlaps signed (_ctype+1)[char] prefix reads D1..DE at 79F0..79FD. Six relocated CMISC pointers and startup heap mutation affect the prefix; moving crt0fp code changes twelve predicates. App heap-state equivalence remains unproved.",
+      "reason": "The unique pinned fdata.asm initialized-member candidate overlaps signed (_ctype+1)[char] prefix reads D1..DE at 79F0..79FD, but original symbolic selection/placement is unadmitted. Six relocated CMISC pointers change prefix predicates under moved linkage. Two modeled original no-EMS CRT-to-main traces leave the candidate unchanged; independently linked stock far-heap mutation is not original lifetime proof. Later aliases, input domains and app heap-state equivalence remain unproved.",
       "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
       "proof_refs": [
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",
         "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/tools/source_only_dos.py",
-        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md"
-      ]
+        "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/source-only-dos/structural-audits-v35/README.md",
+        "evidence/canonical/ctype-startup/review.md"
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
     },
     {
       "id": "common_tail_overlap_3",
@@ -310,7 +128,9 @@
           "offset": 0,
           "size": 1
         }
-      ]
+      ],
+      "closure_class": "UNATTRIBUTED_STATE",
+      "closure_basis": "No requirement for a semantic field name; require a bounded owner/initializer, runtime attribution, or supported-path erasure/exclusion. Current evidence grants none of those completely."
     }
   ],
   "semantic_gates": [
@@ -331,28 +151,22 @@
       "overlapping_data_debt": "dgroup_79f0",
       "relocated_prefix_far_pointers": 6,
       "heap_state_equivalence": "UNRESOLVED",
-      "reason": "Styled text and menu item classification sign-extend character bytes before indexing the near CRT table. Bytes D1..DE can read original DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. The stock runtime table owns its 257 bytes, not the preceding memory. The styled-text predicate can change the copied buffer and its text-resource match. Other dialog/menu sites also read outside the table; result relevance is assessed separately. No source guard or accepted input-domain proof excludes these prefix reads, and independent linkage does not preserve the original prefix. Keep the heap-shaped data debt; do not substitute unsigned indexing or add an invented table prefix/suffix. Whole-member controls on both linkers realize __fheap at _ctype-46, but identical data order still leaves six relocated CMISC pointers in the signed prefix: moving only crt0fp code changes twelve predicate results. Stock startup also changes heap descriptor pointers before main; original __myalloc binds the game allocator 171C:2208. App heap-state equivalence remains unproved, so relative owner attribution alone discharges no bytes.",
-      "scope_limit": "Conditional input path, not a shipped-resource execution witness. The reconstructed algorithms and strict static registrations remain unchanged."
-    },
-    {
-      "id": "sound-selector-out-of-range-layout",
-      "status": "UNRESOLVED",
-      "sources": [
-        "src/S20/m39F1.c",
-        "src/S15/m384C.c",
-        "src/root/m15F8.c",
-        "src/root/m00DF.c",
-        "src/root/m277E.c",
-        "src/root/m293A.c",
-        "src/root/m2815.c"
-      ],
-      "reason": "The command-line parser accepts /s9, but detector/setup/cleanup tables have only nine entries (0..8). If the sound DB open returns, detector index 9 reads the adjacent same-TU saved-state pointer and calls its source-owned data as code. Return and effects are unproved. Conditional later setup/cleanup overreads include cross-TU data adjacency. Complete saved-state storage does not resolve this executable/layout dependency; no clamp, extra slot or padding is introduced."
+      "reason": "Styled text and menu item classification sign-extend character bytes before indexing the near CRT table. Bytes D1..DE can read original DGROUP:79F0..79FD through _ctype+1 without any literal 79F0 operand. The stock runtime table owns its 257 bytes, not the preceding memory. The styled-text predicate can change the copied buffer and its text-resource match. Other dialog/menu sites also read outside the table; result relevance is assessed separately. No source guard or accepted input-domain proof excludes these prefix reads, and independent linkage does not preserve the original prefix. Keep the heap-shaped data debt; do not substitute unsigned indexing or add an invented table prefix/suffix. Whole-member controls on both linkers realize __fheap at _ctype-46, but identical data order still leaves six relocated CMISC pointers in the signed prefix: moving only crt0fp code changes twelve predicate results. Independent stock-runtime fixtures mutate far-heap pointers; this is not proven original behavior. Two bounded original CRT-to-main no-EMS traces leave 79F0..79FD unchanged while observing the actual game allocator 171C:2208 and positive writes to near-heap 7706 and __amblksiz 79FE. The latter owns 79FE..79FF, not alignment fill. Later-game and other-environment equivalence remain unproved. App heap-state equivalence remains unproved, so relative owner attribution alone discharges no bytes.",
+      "scope_limit": "Conditional input path, not a shipped-resource execution witness. The reconstructed algorithms and strict static registrations remain unchanged.",
+      "startup_evidence": "evidence/canonical/ctype-startup/review.md",
+      "closure_class": "LAYOUT_SENSITIVE",
+      "closure_basis": "A conditional physical alias exists, but supported reachability/observability is unresolved. It cannot yet be called historical-only or waived.",
+      "resource_domain_evidence": "evidence/canonical/shipped-resource-domain/review.md"
     },
     {
       "id": "graphics-computed-copy-layout",
       "status": "UNRESOLVED",
       "source": "src/root/m1E57.c",
-      "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved."
+      "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved. Original synthetic 31-window geometry generates 256 disjoint rectangles; the 2048-byte heap temporary receives its sentinel at displacement 2050 before the C097 diagnostic. The adjacent 29-window control completes with 225 rectangles. This rejects the window-count capacity premise without proving shipped-state reachability or the fixed destination extent.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
+      "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
+      "capacity_evidence": "evidence/canonical/clip-domain/review.md"
     },
     {
       "id": "map-viewport-grid-layout",
@@ -362,110 +176,26 @@
         "src/S26/m39C7.c"
       ],
       "declared_grid": "fd_50F6_15C4[30][40]",
-      "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout."
+      "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement."
     },
     {
-      "id": "menu-table-cross-owner-layout",
+      "id": "filename-selector-local-capacity",
       "status": "UNRESOLVED",
-      "sources": [
-        "src/root/m1FD2.c",
-        "src/S10/m35F5.c",
-        "src/S17/m384C.c"
-      ],
-      "historical_intersections": [
-        {
-          "array": "fd_50F6_46BC",
-          "index": 10,
-          "target": "fd_50F6_46D0"
-        },
-        {
-          "array": "fd_50F6_46A8",
-          "index": 20,
-          "target": "fd_50F6_46D0"
-        },
-        {
-          "array": "fd_50F6_46BC",
-          "index": 11,
-          "target": "fd_50F6_46D2",
-          "target_word": 0
-        },
-        {
-          "array": "fd_50F6_46BC",
-          "index": 12,
-          "target": "fd_50F6_46D2",
-          "target_word": 1
-        },
-        {
-          "array": "fd_50F6_46A8",
-          "index": 21,
-          "target": "fd_50F6_46D2",
-          "target_word": 0
-        },
-        {
-          "array": "fd_50F6_46A8",
-          "index": 22,
-          "target": "fd_50F6_46D2",
-          "target_word": 1
-        }
-      ],
-      "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout. Minimum Handle slot ownership likewise does not resolve widths[11..12] or xpos[21..22] writes into its low/high words."
-    },
-    {
-      "id": "database-open-minus-one-record",
-      "status": "UNRESOLVED",
-      "source": "src/root/m1A28.c",
-      "normal_owner": "fd_50F6_3958[4]",
-      "historical_failure_address": "50F6:38DC",
-      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A bounded graphics-index failure executes the real 25-slot callback reset and the genuine empty callback, then reaches the uninitialized zero-height raster loop; its first glyph visits all 65536 DGROUP offsets before cleanup. This removes the hypothetical null-callback-return premise for that failure prefix, but proves neither eventual continuation nor an actual minus-one/fifth-record access. No global fatal-state invariance or noreturn waiver follows.",
-      "evidence": "evidence/canonical/graphics-index-failure/review.md"
-    },
-    {
-      "id": "database-handle-plus-four",
-      "status": "UNRESOLVED",
-      "source": "src/root/m1A53.c",
-      "normal_owner": "db_handles[4]",
-      "historical_failure_address": "50F6:3B58",
-      "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate."
-    },
-    {
-      "id": "window-index-resource-cross-owner-layout",
-      "status": "UNRESOLVED",
-      "owners": [
-        "win_drawHooks[45]",
-        "win_offsets[45]"
-      ],
-      "reason": "Unconditional reset spans prove 45 callbacks and 45 Rects. They do not bound every window ID or resource count. Negative and >=45 indices, returning Punt, pre-lock handle writes, signed palette-copy lengths, and purge-list counts remain open. Historical palette row 63 reads hook31/hook32 words; its shipped control lacks the ordinary selection gate, but no complete selection/redraw or cross-owner exclusion exists. Callback45 intersects Rect0 and Rect45 intersects Event fields. No padding, invented palette rows, clamp or maximum historical capacity is supplied by the minimum owners."
-    },
-    {
-      "id": "critical-selector-computed-alias-layout",
-      "status": "UNRESOLVED",
-      "owner": "g_8CCB signed mutable byte",
-      "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner."
-    },
-    {
-      "id": "icon-handle-computed-alias-and-activation",
-      "status": "UNRESOLVED",
-      "sources": [
-        "src/root/m208F.c"
-      ],
-      "owner": "fd_50F6_46D2 minimum four-byte mutable Handle slot",
-      "reason": "Original pointer-chain reads, unchanged complete consumer TU and real RTLink/CRT controls authorize only the slot view and initial null representation. There is no known nominal game producer or observed ordinary incoming consumer edge. Computed writers/readers, indirect or control-corrupted activation and original physical aliases are not globally excluded. Independent placement does not preserve them. No deadness, permanent zero or safe null dereference follows from slot ownership."
-    },
-    {
-      "id": "icon-handle-cell-and-payload-lifetime",
-      "status": "UNRESOLVED",
-      "sources": [
-        "src/root/m208F.c"
-      ],
-      "mandatory_if": "Either icon helper reaches its pointer-load branch",
-      "reason": "The slot must designate a live four-byte far-pointer cell with a live byte payload covering the selected n and all renderer row accesses, or the corresponding activation must be independently excluded. The minimum slot provider creates neither referent. Producer/resource/allocator/lock/unhook identity, n bounds and payload capacity remain unproved."
+      "source": "src/S09/m35F5.c",
+      "reason": "FileSelect uses path[67] and lastDir[67]. A real DOSBox-X contrast reaches a valid deep path needing 69 bytes after separator append, before the result is copied into the 100-byte last-filename owner. The admitted owner therefore closes the global storage import but does not repair or exclude this earlier local overflow.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the supported filesystem/current-directory domain or preserve the observed behavior; do not invent a clamp or resize.",
+      "capacity_evidence": "evidence/canonical/filename-domain/review.md",
+      "owner_evidence": "evidence/canonical/last-filename/review.md"
     }
   ],
   "counts": {
-    "imports": 11,
+    "imports": 1,
     "data_ranges": 6,
     "data_bytes": 44,
-    "semantic_gates": 11
+    "semantic_gates": 4
   },
   "historical_binary_only_outside_current_44": [
     {
@@ -535,5 +265,184 @@
       }
     ]
   },
-  "active_authority": "src/program.json dos.unresolved_data and dos.semantic_gates; this packet is a readable evidence projection, not a parallel build inventory."
+  "active_authority": "src/program.json dos.unresolved_data and dos.semantic_gates; this packet is a readable evidence projection, not a parallel build inventory.",
+  "resolved_domain_contracts": [
+    {
+      "id": "menu-table-cross-owner-layout",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "sources": [
+        "src/root/m1FD2.c",
+        "src/S10/m35F5.c",
+        "src/S17/m384C.c"
+      ],
+      "historical_intersections": [
+        {
+          "array": "fd_50F6_46BC",
+          "index": 10,
+          "target": "fd_50F6_46D0"
+        },
+        {
+          "array": "fd_50F6_46A8",
+          "index": 20,
+          "target": "fd_50F6_46D0"
+        },
+        {
+          "array": "fd_50F6_46BC",
+          "index": 11,
+          "target": "fd_50F6_46D2",
+          "target_word": 0
+        },
+        {
+          "array": "fd_50F6_46BC",
+          "index": 12,
+          "target": "fd_50F6_46D2",
+          "target_word": 1
+        },
+        {
+          "array": "fd_50F6_46A8",
+          "index": 21,
+          "target": "fd_50F6_46D2",
+          "target_word": 0
+        },
+        {
+          "array": "fd_50F6_46A8",
+          "index": 22,
+          "target": "fd_50F6_46D2",
+          "target_word": 1
+        }
+      ],
+      "reason": "Menu title-length and x-position arrays are written until a resource title sentinel, with no established capacity or title-count cap. Original word indices 10 and 20 respectively reach the separately owned render-delay word. Further words reach the bitmap Handle slot. The scalar owner does not prove those writes unreachable or preserve their cross-object effects under an independent layout. Minimum Handle slot ownership likewise does not resolve widths[11..12] or xpos[21..22] writes into its low/high words.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
+      "resource_domain_evidence": "evidence/canonical/shipped-resource-domain/review.md",
+      "bounded_resolution": "All pinned shipped sentinel writers use indices0..4. Nominal valid-ID readers also fit; delivered-event validity/indirect activation and allocation admission remain open.",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/menu-title-owner/review.md",
+      "resolution": "Supported-domain accesses exclude the recorded historical adjacency; original algorithms and out-of-domain counterexamples remain unchanged."
+    },
+    {
+      "id": "database-open-minus-one-record",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "source": "src/root/m1A28.c",
+      "normal_owner": "fd_50F6_3958[4]",
+      "historical_failure_address": "50F6:38DC",
+      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A bounded graphics-index failure executes the real 25-slot callback reset and the genuine empty callback, then reaches the uninitialized zero-height raster loop; its first glyph visits all 65536 DGROUP offsets before cleanup. This removes the hypothetical null-callback-return premise for that failure prefix, but proves neither eventual continuation nor an actual minus-one/fifth-record access. No global fatal-state invariance or noreturn waiver follows. An isolated unchanged-original guard1/four-occupied witness now reaches the real minus-one record copy before any DOS call. This confirms the conditional contract, not ordinary-game reachability.",
+      "evidence": "evidence/canonical/graphics-index-failure/review.md",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
+      "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/database-domain/review.md",
+      "resolution": "Supported-domain accesses exclude the recorded historical adjacency; original algorithms and out-of-domain counterexamples remain unchanged."
+    },
+    {
+      "id": "database-handle-plus-four",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "source": "src/root/m1A53.c",
+      "normal_owner": "db_handles[4]",
+      "historical_failure_address": "50F6:3B58",
+      "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
+      "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/database-domain/review.md",
+      "resolution": "Supported-domain accesses exclude the recorded historical adjacency; original algorithms and out-of-domain counterexamples remain unchanged."
+    },
+    {
+      "id": "icon-handle-computed-alias-and-activation",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "sources": [
+        "src/root/m208F.c"
+      ],
+      "owner": "fd_50F6_46D2 minimum four-byte mutable Handle slot",
+      "reason": "Original pointer-chain reads, unchanged complete consumer TU and real RTLink/CRT controls authorize only the slot view and initial null representation. There is no known nominal game producer or observed ordinary incoming consumer edge. Computed writers/readers, indirect or control-corrupted activation and original physical aliases are not globally excluded. Independent placement does not preserve them. No deadness, permanent zero or safe null dereference follows from slot ownership.",
+      "closure_class": "LAYOUT_SENSITIVE",
+      "closure_basis": "A conditional physical alias exists, but supported reachability/observability is unresolved. It cannot yet be called historical-only or waived.",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/icon-handle-view/vga-review.md",
+      "resolution": "Locked configuration and complete startup/state/save census preserve mode 8. Both helpers bypass the icon-slot pointer loads for every selector and slot value, even if activated. Original mode-2 counterexamples and canonical slot ownership remain; no other-mode payload, renderer or whole-game acceptance."
+    },
+    {
+      "id": "icon-handle-cell-and-payload-lifetime",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "sources": [
+        "src/root/m208F.c"
+      ],
+      "mandatory_if": "Either icon helper reaches its pointer-load branch",
+      "reason": "The slot must designate a live four-byte far-pointer cell with a live byte payload covering the selected n and all renderer row accesses, or the corresponding activation must be independently excluded. The minimum slot provider creates neither referent. Producer/resource/allocator/lock/unhook identity, n bounds and payload capacity remain unproved.",
+      "closure_class": "SOURCE_REQUIRED",
+      "closure_basis": "Activation requires real live referents and a bounded payload, or an independent activation exclusion; a slot alone is insufficient.",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/icon-handle-view/vga-review.md",
+      "resolution": "Locked configuration and complete startup/state/save census preserve mode 8. Both helpers bypass the icon-slot pointer loads for every selector and slot value, even if activated. Original mode-2 counterexamples and canonical slot ownership remain; no other-mode payload, renderer or whole-game acceptance."
+    },
+    {
+      "id": "sound-selector-out-of-range-layout",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "sources": [
+        "src/S20/m39F1.c",
+        "src/S15/m384C.c",
+        "src/root/m15F8.c",
+        "src/root/m00DF.c",
+        "src/root/m277E.c",
+        "src/root/m293A.c",
+        "src/root/m2815.c"
+      ],
+      "reason": "The command-line parser accepts /s9, but detector/setup/cleanup tables have only nine entries (0..8). If the sound DB open returns, detector index 9 reads the adjacent same-TU saved-state pointer and calls its source-owned data as code. Return and effects are unproved. Conditional later setup/cleanup overreads include cross-TU data adjacency. Complete saved-state storage does not resolve this executable/layout dependency; no clamp, extra slot or padding is introduced.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/audio-track-owner/selector-review.md",
+      "resolution": "Locked Sound Mode 6 and the complete startup/writer/save audit bound setup selection to 1 or 6 and pre-setup cleanup to CRT-zero selector 0. All three nine-entry tables are valid for these indices. Original /s9 indirect-call and returning-failure counterexamples remain outside this existing domain."
+    },
+    {
+      "id": "window-index-resource-cross-owner-layout",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "owners": [
+        "win_drawHooks[45]",
+        "win_offsets[45]"
+      ],
+      "reason": "Unconditional reset spans prove 45 callbacks and 45 Rects. They do not bound every window ID or resource count. Negative and >=45 indices, returning Punt, pre-lock handle writes, signed palette-copy lengths, and purge-list counts remain open. Historical palette row63 would read hook31/hook32 words. The reviewed nominal selection/caller proof excludes that activation for valid shipped objects and ordinary saves; arbitrary/dynamic invalid IDs and returning failures are not excluded. Callback45 intersects Rect0 and Rect45 intersects Event fields. No padding, invented palette rows, clamp or maximum historical capacity is supplied by the minimum owners.",
+      "closure_class": "SUPPORTED_DOMAIN",
+      "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
+      "resource_domain_evidence": "evidence/canonical/shipped-resource-domain/review.md",
+      "bounded_resolution": "Pinned preload IDs 0..33, palette copy 96 bytes and purge loop 0..33 are closed. The nominal selected-color audit excludes palette row 63 for valid shipped objects and ordinary saves. Successful K: startup selects object 21 beyond the 21-object window 22 and reaches the original bounds diagnostic. Actual first-fatal Punt exits; the returning-Punt overread is a separate model. This object-index error retains valid handle slot 22 and does not independently disprove handle or palette ownership. Complete alias-aware dynamic ID, pointer provenance and lifetime proofs remain open. See evidence/canonical/window-domain/review.md. The independent 34-cell Handle owner now has a complete supported high-byte provenance and lifetime proof. Object indices, unchecked proxy/graphics effects and exceptional continuations remain open.",
+      "handle_ownership_evidence": "evidence/canonical/window-domain/handle-review.md",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/window-domain/array-gate-review.md",
+      "resolution": "The admitted complete high-byte domain 0..33, 34-cell Handle owner, sixteen-row palette and 45-entry hook/Rect arrays cover the specified array accesses, reset and copy lengths. Original hook indices -1/45 and K: low-object21 counterexamples remain. General object, optional-word, heap and graphics-copy effects remain independently unresolved."
+    },
+    {
+      "id": "critical-selector-computed-alias-layout",
+      "status": "RESOLVED_SUPPORTED_DOMAIN",
+      "owner": "g_8CCB signed mutable byte",
+      "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner.",
+      "closure_class": "LAYOUT_SENSITIVE",
+      "closure_basis": "The two reviewed cache/song aliases are excluded in the supported domain. Other physical writes, including indirect effects of the open graphics-copy and viewport contracts, remain unresolved under those gates.",
+      "domain": "shipped-default-vga-successful-lifetime",
+      "resolution_evidence": "evidence/canonical/error-continuation/selector-review.md",
+      "resolution": "The complete window ID domain 0..33 excludes cache[-10]; the complete shipped song domain 2..10 excludes the first wrapped selector word store at track index32633. The source/alias and save audits bind these premises. Only those two known alias contracts are discharged; other physical writes remain under the open graphics-copy and viewport gates. The mutable owner and reader remain unchanged; no deadness, global preservation or arbitrary-state equivalence is claimed."
+    }
+  ],
+  "supported_execution_domain": {
+    "id": "shipped-default-vga-successful-lifetime",
+    "resources": [
+      "SHARED.DAT",
+      "SHARED.NDX",
+      "HCEGANT.DAT",
+      "HCEGANT.NDX",
+      "SOUND.DAT",
+      "SOUND.NDX",
+      "SIMANT.CFG"
+    ],
+    "resource_identity": "layout/oracle.lock.json",
+    "launch_arguments": [],
+    "premises": [
+      "One ordinary main lifetime with pinned default VGA configuration and resources.",
+      "Successful resource file/header/index/allocation operations and valid nominal game/save state.",
+      "No external language/lrshare package, display override, alternate setup, /s9 or replacement resources."
+    ],
+    "limits": "This is the common domain of admitted functional owners and resolved adjacency contracts; it does not establish whole-game acceptance or correctness on excluded failures/inputs."
+  }
 }

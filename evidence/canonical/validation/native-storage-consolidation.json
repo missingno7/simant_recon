@@ -1,0 +1,49 @@
+{
+  "schema": "simant-native-storage-consolidation-validation-v1",
+  "scope": "Retire native-storage-ownership after canonical owners replaced every non-clip duplicate. Preserve unresolved clip pointer, extent, lifetime, native allocation and failure behavior under native-clip-allocation-policy.",
+  "canonical_closure": false,
+  "behavior_change": false,
+  "historical_validation": {
+    "status": "PASS",
+    "command": "python tools/validate.py",
+    "codegen_probes": 49,
+    "unit_tests": "PASS; 2 intentional skips",
+    "runtime_members": 90,
+    "runtime_bytes": 12339,
+    "runtime_data_segments": 38,
+    "runtime_data_bytes": 2021,
+    "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f"
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "command": "python -m unittest tests.test_repository tests.test_last_filename_domain tests.test_clip_domain",
+    "tests": 23
+  },
+  "native_build": {
+    "status": "PASS",
+    "canonical_sources": 170,
+    "canonical_compile_pass": 169,
+    "expected_platform_boundaries": 1,
+    "native_services_pass": 77,
+    "conversion_failures": 0,
+    "undefined_symbols": 0
+  },
+  "repository_guard": {
+    "status": "PASS",
+    "issues": 0,
+    "live_blockers_before": 20,
+    "live_blockers_after": 19
+  },
+  "retired_contract": "native-storage-ownership",
+  "superseding_contract": "native-clip-allocation-policy",
+  "pins": {
+    "src/program.json": "ba642b6ef911e86996635ca0060ec32e08e6aa6541a131d82966f7f5a8291bea",
+    "portable/platform.json": "fef4fe43d7149de74566cdeea887dc1c48852126490dfeed01e9332e185655e1",
+    "layout/repository.json": "9a35dadf9bf633b4ce6f28e01799027221c2e9d2bbb6ea28cce2573532e0722d",
+    "docs/status.md": "f4ff3ef8167b6ea3832c67702e42f0ae969e8b98ef224a9f2eb7af52f74df1a1",
+    "evidence/canonical/last-filename/native-storage-consolidation.json": "a563eb81880fda2f43b6183551d10dae531bce8a6a7f7da4f8da9a767610d435",
+    "evidence/canonical/last-filename/review.md": "8d02c735b8698074da37bf90344b1cd26ac9484f5ccb03ef457f29187b71921b",
+    "portable/whole_program/platform/source_memory.c": "b56ea443c2f774ff0b25aaaa4b6ad281dae5ef6660f459422983b5141161df75",
+    "src/state/last-filename.c": "e7c6763c556754de3a8127ec0e57bae0cb4ae6bdfbbff13358b22bdef96b2d36"
+  }
+}

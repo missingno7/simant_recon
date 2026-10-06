@@ -1,0 +1,63 @@
+{
+  "schema": "simant-monochrome-vga-validation-v1",
+  "scope": "Default shipped VGA8 monochrome access exclusion and minimal linkage owner; no odd-mode allocation or historical extent claim.",
+  "canonical_closure": false,
+  "historical_validation": {
+    "status": "PASS",
+    "command": "python tools/validate.py",
+    "codegen_probes": 49,
+    "unit_tests": "PASS; 2 intentional skips",
+    "runtime_members": 90,
+    "runtime_bytes": 12339,
+    "runtime_data_segments": 38,
+    "runtime_data_bytes": 2021,
+    "far_bss_modules_measured": 74,
+    "far_bss_bytes": 19408,
+    "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f"
+  },
+  "canonical_dos": {
+    "status": "EXPECTED_REFUSAL",
+    "translation_units": 197,
+    "storage_providers": 70,
+    "compile_errors": 0,
+    "unresolved_imports": 3,
+    "semantic_gates": 3,
+    "unresolved_data_ranges": 6,
+    "unattributed_bytes": 44,
+    "original_game_byte_fallback": 0
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "command": "python -m unittest tests.test_supported_dispatch_domains tests.test_window_handle_domain tests.test_icon_vga_domain tests.test_monochrome_vga_domain",
+    "tests": 24
+  },
+  "native_cleanup": {
+    "status": "PASS",
+    "retired": [
+      "native g_8ED8 pointer owner",
+      "sim_source_runtime_reserve_mono_patterns",
+      "mono_capacity_bytes",
+      "S15 allocation/failure injection"
+    ],
+    "remaining_exception": "native-clip-allocation-policy"
+  },
+  "repository_guard": "PASS",
+  "pins": {
+    "src/state/mono-pattern-vga-linkage.c": "ee79e4e7732388d4ef9a1c2926209db52d553901aedbde224ca69f0de2ade70a",
+    "src/program.json": "fc873dde1c73169f65ceca306c3b271e8acd8ee494b8a9a473d44e4b2a206306",
+    "evidence/canonical/monochrome-owner/mode_probe.py": "b7c303575cb4e72a640432c1d780583e8583f0316a4f3a0df84e396f1499330f",
+    "evidence/canonical/monochrome-owner/mode-facts.json": "671f08f0e6ff27cd80f25dfd3fea88987f66b0621e899f71b7acad67634041c7",
+    "evidence/canonical/monochrome-owner/vga-review.md": "ee326735216ccede353651c2dd2f8aa87995cb083a49a5dc551008867ced86e9",
+    "evidence/canonical/monochrome-owner/vga-publication.json": "7aa85171686ebd23974455166b6cb3b54c30e2b4ce434e72f7980a6ecbd5b609",
+    "evidence/canonical/monochrome-owner/native-cleanup-publication.json": "826a804839d52df6c58bd5f3da15d1e4f11f00e9aa58fee6d2e1e2901ce1c333",
+    "evidence/canonical/storage.json": "67c1ccb3a6174b5bf3e0fc13bb757a26c738f31bce89640b8b140d0d366fcf1e",
+    "evidence/canonical/blockers.json": "42b1502a89eedc52c4a67b7bbd8984e7ad81b08aca91094a5800d903a3789e5d",
+    "tests/test_monochrome_vga_domain.py": "05df5e727e5642273b91dca5666847cb54f319575ffd1cf9a137aef92c8096b6",
+    "portable/canonical_native_abi/source_runtime_globals.py": "1f45dc788c7d5078ca88358cdb69583177a2aae2894d21fd781f49a5123397e7",
+    "portable/whole_program/platform/source_memory.c": "36f293408768ce5dcc4e33bcdacbf4f61c8c4d75516e9864d68911b57ef41fac",
+    "portable/whole_program/platform/source_memory.h": "b0f14bc47521d0635aafe7b442093558e02eb3820b355759ef1f8398a5d51fba",
+    "portable/build.py": "25de4513887093aa8e2e5b009ad7119a1a13b6b7c2655a15500580c9ed8106fb",
+    "portable/platform.json": "dbf032863335b95a9e76e57a9f87d269de6e55aa4b5dd60563fe50b076ad0c61",
+    "layout/repository.json": "8b93bb9ab8af71972717b14c67216db386319f2aa2940fd069ce26cb172e6487"
+  }
+}

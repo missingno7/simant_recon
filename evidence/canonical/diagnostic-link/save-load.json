@@ -1,0 +1,172 @@
+{
+  "schema": "simant-dos-save-load-observation-v1",
+  "closure_eligible": false,
+  "source_schema": {
+    "path": "src/S09/m35F5.c",
+    "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "size": 42150
+  },
+  "runner": {
+    "path": "dos/run.py",
+    "sha256": "f5d51b6c03ec10f67b66914c92d4a0a9690112fd1a8464d09c6d71b20f2ee7c3",
+    "size": 14737
+  },
+  "save": {
+    "original": {
+      "execution": {
+        "path": "build/workers/lead/dos-save/original/execution-report.json",
+        "sha256": "3d271f17627fcf1359837b1455803900a78038b63cea8a10786ae85fd2f9d56a",
+        "size": 17940
+      },
+      "runtime_log": {
+        "path": "build/workers/lead/dos-save/original/dosbox-runtime.log",
+        "sha256": "80759fa47014e2191460272d259a15e3d50bf4c6cc617a4f399efc72de94b6c8",
+        "size": 282409
+      },
+      "saved_game": {
+        "path": "build/workers/lead/dos-save/original/A.ANT",
+        "sha256": "87cd3be20fc2e02c349a7a5034a2b30621282b6ab0b5758330855004c8354825",
+        "size": 48386
+      },
+      "reviewed_frame": {
+        "path": "build/workers/lead/dos-save/original/frame50.png",
+        "sha256": "9fd746fccaf15a4287ab8ba5e4dea52c97b53d8668433785e8773380b96f6134",
+        "size": 33276
+      },
+      "requested_records": 307,
+      "requested_bytes": 48386,
+      "request_sequence_matches_canonical_schema": true,
+      "runtime_faults": {
+        "count": 0,
+        "first_lines": [],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "status": "TIME_LIMIT",
+      "seconds": 55
+    },
+    "source": {
+      "execution": {
+        "path": "build/workers/lead/dos-save/source/execution-report.json",
+        "sha256": "f428c206888df61d972717ad34813c6b428ea141fe5cd4493ca941dd2424bddc",
+        "size": 49630
+      },
+      "runtime_log": {
+        "path": "build/workers/lead/dos-save/source/dosbox-runtime.log",
+        "sha256": "7b2ba5daa1a415885cd38bad63aaac8fb734307ed54e90533107471c9594dfa6",
+        "size": 287238
+      },
+      "saved_game": {
+        "path": "build/workers/lead/dos-save/source/A.ANT",
+        "sha256": "550145c1e2b5a34a53be0d409e00d4858ffa44f795e09751dbbe5dba0baab1dd",
+        "size": 48386
+      },
+      "reviewed_frame": {
+        "path": "build/workers/lead/dos-save/source/frame50.png",
+        "sha256": "164e646abb619004acda1f12e6e1622d0a34c85aa98f0800ee48b1aa810fc07e",
+        "size": 32625
+      },
+      "requested_records": 307,
+      "requested_bytes": 48386,
+      "request_sequence_matches_canonical_schema": true,
+      "runtime_faults": {
+        "count": 0,
+        "first_lines": [],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "status": "TIME_LIMIT",
+      "seconds": 55
+    }
+  },
+  "load_original_save": {
+    "original": {
+      "execution": {
+        "path": "build/workers/lead/dos-load/single-original/execution-report.json",
+        "sha256": "1010ed279eb8727cb00276d2b2a75bccbcdbf22dba3cacbc43817af2c8351915",
+        "size": 20355
+      },
+      "runtime_log": {
+        "path": "build/workers/lead/dos-load/single-original/dosbox-runtime.log",
+        "sha256": "368c4beac047ce74f98051399ea778446e240d4e0398e1370e449df4bf54eec2",
+        "size": 295295
+      },
+      "saved_game": {
+        "path": "build/workers/lead/dos-load/single-original/A.ANT",
+        "sha256": "87cd3be20fc2e02c349a7a5034a2b30621282b6ab0b5758330855004c8354825",
+        "size": 48386
+      },
+      "reviewed_frame": {
+        "path": "build/workers/lead/dos-load/single-original/frame50.png",
+        "sha256": "c1ffaddc3464f4c16a7c8bfee2bf532b42c499e8073ac69ab142bc671273c5c1",
+        "size": 34377
+      },
+      "requested_records": 307,
+      "requested_bytes": 48386,
+      "request_sequence_matches_canonical_schema": true,
+      "runtime_faults": {
+        "count": 0,
+        "first_lines": [],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "status": "TIME_LIMIT",
+      "seconds": 60
+    },
+    "source": {
+      "execution": {
+        "path": "build/workers/lead/dos-load/row-source/execution-report.json",
+        "sha256": "656514b397da8b947324599adfa7afb573921f00510a7295ff189abb56fee587",
+        "size": 51501
+      },
+      "runtime_log": {
+        "path": "build/workers/lead/dos-load/row-source/dosbox-runtime.log",
+        "sha256": "3d2bd9ba5e46bfda3984d42d4e72eba1d85f3634e9cec5e241c85eb8900e44c8",
+        "size": 301030
+      },
+      "saved_game": {
+        "path": "build/workers/lead/dos-load/row-source/A.ANT",
+        "sha256": "87cd3be20fc2e02c349a7a5034a2b30621282b6ab0b5758330855004c8354825",
+        "size": 48386
+      },
+      "reviewed_frame": {
+        "path": "build/workers/lead/dos-load/row-source/frame50.png",
+        "sha256": "62128e85ff9955e7e5c07c9e6e6321ebb6c922401aae5b8fb8a4e073df9f3672",
+        "size": 34393
+      },
+      "requested_records": 307,
+      "requested_bytes": 48386,
+      "request_sequence_matches_canonical_schema": true,
+      "runtime_faults": {
+        "count": 0,
+        "first_lines": [],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "status": "TIME_LIMIT",
+      "seconds": 60
+    }
+  },
+  "observations": [
+    "Both Save runs show Saved correctly and create 48,386-byte A.ANT files with all 307 expected write requests, then close the file.",
+    "Both Load controls stage the identical original A.ANT without modification. The game selects it through its ordinary file dialog, reads all 307 expected records, closes it and returns to a paused Full Game screen.",
+    "Reviewed loaded screens show the same visible terrain. No equality of every restored byte, future RNG stream, sound or sustained gameplay is claimed.",
+    "Save outputs come from independently seeded sessions and are not expected to be byte-identical. The source-produced save was not loaded by the original in this pass."
+  ],
+  "input_scope": "Guest AUTOTYPE keys invoke the game keyboard mouse controls. The successful original uses 27 up taps and source 26 to reach the file row; 50 ms key holds and timer-driven motion make wall-timed cursor positioning variable. Exact successful recipes are pinned in execution reports. No game, save or executable bytes were patched.",
+  "negative_control": "evidence/canonical/diagnostic-link/load-lock.json",
+  "RNG_scope": "evidence/canonical/diagnostic-link/rng-domain.json",
+  "diagnostic_scope": "Source runs use the corrected overlay-policy baseline with seven provisional owners. No owner, extent or canonical closure is admitted by these runs."
+}

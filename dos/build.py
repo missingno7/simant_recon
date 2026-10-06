@@ -69,6 +69,8 @@ def install_input_guard():
 def load_inventory(path):
     raw, identity = read_pin(path)
     program = json.loads(raw)
+    if program.get('schema') != 'simant-canonical-program-v1':
+        raise ValueError('DOS build requires the canonical program schema')
     rows = program.get('modules')
     if not isinstance(rows, list) or not rows:
         raise ValueError('program inventory requires a nonempty modules list')
@@ -81,7 +83,8 @@ def load_inventory(path):
             raise ValueError('duplicate canonical module/source')
         keys.add(row['key']); paths.add(row['source'])
         source = (ROOT / row['source']).resolve()
-        source.relative_to(ROOT)
+        if not source.is_relative_to(ROOT / 'src') or row['key'].startswith('diagnostic:'):
+            raise ValueError('canonical DOS source must be under src and cannot be provisional')
         if row['key'].startswith('source-owned:') and row.get('storage_contract') is None:
             raise ValueError('source-owned storage lacks its accepted contract')
         if row['lang'] not in ('c', 'asm') or source.suffix != ('.c' if row['lang'] == 'c' else '.asm'):
@@ -95,7 +98,25 @@ def load_inventory(path):
         raise ValueError('canonical program requires DOS semantic gate dispositions')
     if not isinstance(dos.get('runtime_libraries'), list) or not dos['runtime_libraries']:
         raise ValueError('canonical program requires pinned DOS runtime libraries')
+    if 'overlay_vectors' not in dos:
+        raise ValueError('canonical program requires an explicit overlay vector policy')
+    for vector in overlay_vectors(program):
+        if vector['module'] not in keys:
+            raise ValueError('overlay vector has no canonical module: ' + vector['symbol'])
     return program, identity
+
+
+def overlay_vectors(program):
+    policy = program.get('dos', {}).get('overlay_vectors')
+    if policy is None:
+        return []  # Resident-only period-tool fixtures have no overlay policy.
+    rows = policy.get('vectors') if isinstance(policy, dict) else None
+    if (not isinstance(rows, list) or policy.get('policy') != 'EXPLICIT_SYMBOLS' or
+            any(not isinstance(r, dict) or not isinstance(r.get('symbol'), str) or
+                not SYMBOL.fullmatch(r['symbol']) or not isinstance(r.get('module'), str)
+                for r in rows) or len({r['symbol'] for r in rows}) != len(rows)):
+        raise ValueError('invalid explicit overlay vector policy')
+    return rows
 
 
 def storage_snapshot(obj):
@@ -148,7 +169,9 @@ def verify_storage(obj, contract):
     return {'status': 'PASS', **actual}
 
 
-def compile_program(program, out, report, jobs=4, reuse=False):
+def compile_program(program, out, report, jobs=4, reuse=False, basename_prefix='U'):
+    if basename_prefix not in ('U', 'P'):
+        raise ValueError('invalid DOS object basename namespace')
     obj_dir = out / 'objects'
     obj_dir.mkdir(parents=True, exist_ok=True)
     compiler.WORK = out / 'cc'
@@ -167,7 +190,7 @@ def compile_program(program, out, report, jobs=4, reuse=False):
         row = {'key': record['key'], 'source': record['source'], 'lang': record['lang'],
                'profile': record['profile'], 'flags': record['flags'],
                'unit': record.get('unit', record['key'].split(':', 1)[0]),
-               'basename': f'U{number:03d}'}
+               'basename': f'{basename_prefix}{number:03d}'}
         try:
             raw, source_pin = read_pin(ROOT / record['source'], record['source_sha256'])
             text = raw.decode('latin1')
@@ -268,12 +291,15 @@ def audit_program(program, report):
                 limit = min(later, default=obj.segment_lengths[owner['segment']]) - owner['offset']
             if offset >= limit:
                 raise ValueError('alias exceeds its canonical storage owner: ' + name)
-        aliases[name] = {'alias': name, 'target': target, 'offset': offset, 'owner': owner['module']}
+        aliases[name] = {'alias': name, 'target': target, 'offset': offset, 'owner': owner['module'],
+                         'referenced': name in uses}
     report['symbolic_aliases'] = list(aliases.values())
     available = set(owners) | library_symbols | set(aliases) | {'_edata', '_end'}
     report['unresolved_symbols'] = [{'name': n, 'consumers': sorted(uses[n])}
                                     for n in sorted(set(uses) - available)]
     report['semantic_gates'] = program['dos']['semantic_gates']
+    report['supported_execution_domain'] = program['dos'].get('supported_execution_domain')
+    report['resolved_domain_contracts'] = program['dos'].get('resolved_domain_contracts', [])
     report['unresolved_semantic_gates'] = [g for g in report['semantic_gates'] if g.get('status') != 'RESOLVED']
     debt = program['dos']['unresolved_data']
     if (len({r['id'] for r in debt}) != len(debt) or
@@ -315,6 +341,11 @@ def link_program(program, out, report, profile):
     if blockers:
         report['link'] = {'status': 'REFUSED', 'blockers': blockers}
         return
+    _link_program(program, out, report, profile)
+
+
+def _link_program(program, out, report, profile):
+    """One real linker invocation; callers own strict or diagnostic admission."""
     tc = compiler.toolchain()
     tool = tc['linkers'][profile]
     runner = tc['runners'][tool['runner']]
@@ -325,16 +356,34 @@ def link_program(program, out, report, profile):
     tools_dir = compiler.pinned_tree(tool)
     link_dir = out / 'link'
     link_dir.mkdir()
+    vectors = overlay_vectors(program)
+    has_policy = 'overlay_vectors' in program.get('dos', {})
+    if not has_policy and any(re.fullmatch(r'S\d\d', r['unit']) for r in report['translation_units']):
+        raise ValueError('overlay link requires an explicit vector policy')
+    found_vectors = set()
     for row in report['translation_units']:
         raw, _ = read_pin(ROOT / row['object']['path'], row['object']['sha256'])
+        required = {v['symbol'] for v in vectors if v['module'] == row.get('key')}
+        if required:
+            obj = OmfReader(communals=True).read(raw)
+            code = {s['name'] for s in obj.segment_defs if s.get('class', '').upper() == 'CODE'}
+            publics = {p['name'] for p in obj.publics if p['segment'] in code}
+            if not required <= publics:
+                raise ValueError('overlay vector is not code in its declared module: ' + ', '.join(sorted(required - publics)))
+            found_vectors.update(required)
         (link_dir / (row['basename'] + '.OBJ')).write_bytes(raw)
+    if found_vectors != {v['symbol'] for v in vectors}:
+        raise ValueError('overlay vector module was not linked')
     libraries = []
     for lib in report['runtime_components']:
         raw, _ = read_pin(lib['path'], lib['sha256'])
         name = Path(lib['name']).name.upper()
         (link_dir / name).write_bytes(raw)
         libraries.append(Path(name).stem)
-    lines = ['OUTPUT SOURCE', 'MAP = SOURCE S,N,A,L,V,X', 'NODEFLIB',
+    # Extended library dependency dictionaries can pull CRT allocation members
+    # despite source overrides. Search the original library's ordinary public
+    # dictionary instead; no object/library alteration or warning suppression.
+    lines = ['OUTPUT SOURCE', 'MAP = SOURCE S,N,A,L,V,X', 'NODEFLIB', 'NOEXTDICTIONARY',
              'LIBRARY ' + ', '.join(libraries), 'RELOAD FAR 400', 'VERBOSE']
     rows = report['translation_units']
     roots = [r for r in rows if not re.fullmatch(r'S\d\d', r['unit'])]
@@ -348,9 +397,17 @@ def link_program(program, out, report, profile):
                 lines.append('SECTION FILE ' + ', '.join(names) + (' PRELOAD' if section == 0 else ''))
         lines.append('ENDAREA')
     quote = lambda n: '"' + n + '"' if n.startswith('@') else n
+    if has_policy:
+        # Display dispatch pointers must stay direct: IRQ cursor calls cannot
+        # re-enter RTLink's non-reentrant loader during another overlay load.
+        lines.insert(4, 'VECTOROFF')
     for row in report['symbolic_aliases']:
+        if not row['referenced']:
+            continue
         delta = f" + 0{row['offset']:X}h" if row['offset'] else ''
         lines.append(f"DEFINE {quote(row['alias'])} = {quote(row['target'])}{delta}")
+    if has_policy:
+        lines.extend('ALWAYS ' + quote(v['symbol']) for v in vectors)
     (link_dir / 'SOURCE.LNK').write_bytes(('\r\n'.join(lines) + '\r\n').encode('ascii'))
     (link_dir / 'RTLINK.CFG').write_bytes(b'SYNTAX = FREEFORMAT\r\n')
     (link_dir / 'RUN.BAT').write_bytes(f'@echo off\r\nD:\\{tool["executable"]} @SOURCE.LNK < NUL > LINK.LOG\r\n'.encode('ascii'))
@@ -375,8 +432,26 @@ def link_program(program, out, report, profile):
     raw, image_pin = read_pin(image)
     if raw[:2] != b'MZ':
         raise ValueError('independent link output is not MZ')
+    vector_check = None
+    if has_policy:
+        mapping = link_dir / 'SOURCE.MAP'
+        actual = set(re.findall(r'(\S+)_@@@_RTLOVL_VECTOR\s', mapping.read_text(encoding='latin1')))
+        forced = {v['symbol'] for v in vectors}
+        aliases = {r['alias'] for r in report['symbolic_aliases']
+                   if r['referenced'] and not r['offset'] and r['target'] in forced}
+        expected = forced | aliases
+        vector_check = {'policy': 'EXPLICIT_SYMBOLS', 'required_symbols': len(forced),
+                        'alias_vectors': sorted(aliases), 'actual_count': len(actual),
+                        'missing': sorted(expected - actual), 'unexpected': sorted(actual - expected),
+                        'map': read_pin(mapping)[1]}
+        if actual != expected:
+            report['link'] = {'status': 'FAILED', 'reason': 'overlay vector policy mismatch',
+                              'vectors': vector_check, 'log': read_pin(log)[1]}
+            return
     report['link'] = {'status': 'LINKED_NOT_EXECUTED', 'candidate_executable': image_pin,
                       'linker': profile, 'log': read_pin(log)[1]}
+    if vector_check is not None:
+        report['link']['vectors'] = vector_check
 
 
 def main(argv=None):
@@ -390,6 +465,8 @@ def main(argv=None):
     args = ap.parse_args(argv)
     if not 1 <= args.jobs <= 32:
         ap.error('--jobs must be between 1 and 32')
+    if args.inventory.resolve() != (ROOT / 'src/program.json').resolve():
+        ap.error('canonical DOS builds consume only src/program.json; use dos/diagnostic.py for experiments')
     out, _ = _target(args.out, ROOT)
     out.relative_to(ROOT / 'build')
     if not args.reuse:

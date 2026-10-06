@@ -1,0 +1,541 @@
+{
+  "scope": "Default shipped-resource successful lifetime; config and setup/cleanup selector writes, no /s9 or arbitrary damaged-resource claim.",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "inventory": {
+    "source_count": 199,
+    "all_source_sha256": "163aa58fa814381105e7ae4570782a5fee8842d826d3b923a4391c0c7046d58b",
+    "modules_sha256": "2897605ac308a3365e1c1ebce758f14f43148b1dde03f6e92f5ad9c4d663ea4d",
+    "aliases_sha256": "d99f574d9b2f2d90db7a820b81b5e664b60c46332a74aec1f305abc3bd5c8846",
+    "registry_sha256": "6c6a51a0948a7af7722163a0901c752e57b3a2775fc4c520c395a35e3420a938"
+  },
+  "selector_census": {
+    "aliases": {
+      "IBMInitStuff": "IBMInitStuff",
+      "ReadConfig": "ReadConfig",
+      "f_00DF_0004": "f_00DF_0004",
+      "f_277E_0000": "f_277E_0000",
+      "f_277E_0154": "f_277E_0154",
+      "f_284A_0013": "f_284A_0013",
+      "f_293A_0006": "f_293A_0006",
+      "f_293A_0121": "f_293A_0121",
+      "fd_50F6_01F0": "fd_50F6_01F0",
+      "fd_55B3_610A": "fd_55B3_610A",
+      "fd_55B3_74DA": "fd_55B3_74DA",
+      "fd_55B3_74FE": "fd_55B3_74FE",
+      "g_1926": "g_1926",
+      "g_610A": "g_610A",
+      "g_68B6": "g_68B6",
+      "g_68DA": "g_68DA",
+      "main": "main",
+      "myBeginSong": "myBeginSong",
+      "o15_384C_0152": "o15_384C_0152",
+      "WINMAIN": "main",
+      "f_00DF_00B1": "myBeginSong",
+      "f_15F8_0004": "main",
+      "o20_39F1_000A": "IBMInitStuff",
+      "o20_39F1_0474": "ReadConfig"
+    },
+    "occurrences": 150,
+    "occurrence_sha256": "bde9dcac38720369340116c608fb3c49b7f8c41111cdf3d88bfa2c136523fd11",
+    "source_sha256": {
+      "src/S04/m35F5.c": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "src/S05/m35F5.c": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+      "src/S06/m35F5.c": "35bc42f86a81bda325536562963f862f938188e657a800ccade1db99f2d22a53",
+      "src/S11/m35F5.c": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "src/S15/m384C.c": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+      "src/S16/m384C.c": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "src/S20/m39F1.c": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+      "src/S22/m39C7.c": "58f8a4a7ae524fae65d8abca7972253e6f0e83cf384cfcb356bc5a580ac738c6",
+      "src/root/m0000.c": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "src/root/m00DF.c": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "src/root/m015B.c": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "src/root/m075B.c": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+      "src/root/m0BE8.c": "3649d25a2024ce0474db430ccb1db8355270d9def303a01e009081b5751764e1",
+      "src/root/m10F7.c": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "src/root/m1383.c": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+      "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "src/root/m1C62.c": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36",
+      "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "src/root/m284A.c": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100",
+      "src/root/m293A.c": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "src/state/saved-sound-state.c": "9241c7b8ace381c4226a38f5f109a0d518ef42e7b4de99ed6425aa7346e10602"
+    }
+  },
+  "selector_refs": [
+    [
+      "src/S15/m384C.c",
+      89,
+      "extern int far fd_55B3_610A;"
+    ],
+    [
+      "src/S15/m384C.c",
+      110,
+      "if (fd_55B3_610A)"
+    ],
+    [
+      "src/S20/m39F1.c",
+      9,
+      "int g_610A = -1;"
+    ],
+    [
+      "src/S20/m39F1.c",
+      68,
+      "g_610A = -1;"
+    ],
+    [
+      "src/S20/m39F1.c",
+      118,
+      "g_610A = v - '0';"
+    ],
+    [
+      "src/S20/m39F1.c",
+      256,
+      "g_610A = lang - '0';"
+    ],
+    [
+      "src/root/m0000.c",
+      199,
+      "extern int far fd_50F6_01F0[];"
+    ],
+    [
+      "src/root/m0000.c",
+      206,
+      "if (fd_50F6_01F0[0] != 0) {"
+    ],
+    [
+      "src/root/m00DF.c",
+      5,
+      "extern int far fd_55B3_610A;"
+    ],
+    [
+      "src/root/m00DF.c",
+      9,
+      "extern int far * far fd_55B3_74FE;"
+    ],
+    [
+      "src/root/m00DF.c",
+      15,
+      "if (fd_55B3_610A == -1)"
+    ],
+    [
+      "src/root/m00DF.c",
+      17,
+      "else if (fd_55B3_610A == 0)"
+    ],
+    [
+      "src/root/m00DF.c",
+      20,
+      "f_277E_0000(fd_55B3_610A, 0);"
+    ],
+    [
+      "src/root/m00DF.c",
+      23,
+      "fd_55B3_74FE[0], fd_55B3_74FE[1], fd_55B3_74FE[2], fd_55B3_74FE[4],"
+    ],
+    [
+      "src/root/m00DF.c",
+      24,
+      "fd_55B3_74FE[3], fd_55B3_74FE[5], fd_55B3_74FE[6]);"
+    ],
+    [
+      "src/root/m277E.c",
+      57,
+      "extern int far fd_50F6_01F0[];"
+    ],
+    [
+      "src/root/m277E.c",
+      80,
+      "fd_50F6_01F0[0] = mode;"
+    ],
+    [
+      "src/root/m277E.c",
+      99,
+      "fd_50F6_01F0[1] = 0;"
+    ],
+    [
+      "src/root/m277E.c",
+      100,
+      "fd_50F6_01F0[2] = 0;"
+    ],
+    [
+      "src/root/m277E.c",
+      101,
+      "fd_50F6_01F0[3] = 0;"
+    ],
+    [
+      "src/root/m277E.c",
+      102,
+      "fd_50F6_01F0[4] = 0;"
+    ],
+    [
+      "src/root/m277E.c",
+      103,
+      "fd_50F6_01F0[5] = 0;"
+    ],
+    [
+      "src/root/m277E.c",
+      104,
+      "fd_50F6_01F0[6] = 0;"
+    ],
+    [
+      "src/root/m277E.c",
+      127,
+      "g_68DA[fd_50F6_01F0[0]]();"
+    ],
+    [
+      "src/root/m277E.c",
+      145,
+      "fd_50F6_01F0[1] = fd_50F6_4A48;"
+    ],
+    [
+      "src/root/m277E.c",
+      170,
+      "fd_50F6_01F0[1] = fd_50F6_4A48;"
+    ],
+    [
+      "src/root/m277E.c",
+      191,
+      "fd_50F6_01F0[4] = 3;"
+    ],
+    [
+      "src/root/m277E.c",
+      213,
+      "fd_50F6_01F0[1] = fd_50F6_4A48;"
+    ],
+    [
+      "src/root/m277E.c",
+      222,
+      "fd_50F6_01F0[3] = 3;"
+    ],
+    [
+      "src/root/m277E.c",
+      239,
+      "fd_50F6_01F0[1] = fd_50F6_4A48;"
+    ],
+    [
+      "src/root/m277E.c",
+      249,
+      "fd_50F6_01F0[2] = 7;"
+    ],
+    [
+      "src/root/m277E.c",
+      269,
+      "fd_50F6_01F0[1] = fd_50F6_4A48;"
+    ],
+    [
+      "src/root/m277E.c",
+      279,
+      "fd_50F6_01F0[2] = 8;"
+    ],
+    [
+      "src/root/m277E.c",
+      305,
+      "fd_50F6_01F0[1] = fd_50F6_4A48;"
+    ],
+    [
+      "src/root/m277E.c",
+      314,
+      "fd_50F6_01F0[5] = 3;"
+    ],
+    [
+      "src/root/m277E.c",
+      327,
+      "fd_50F6_01F0[2] = 8;"
+    ],
+    [
+      "src/root/m277E.c",
+      343,
+      "fd_50F6_01F0[1] = fd_50F6_4A48;"
+    ],
+    [
+      "src/root/m277E.c",
+      375,
+      "fd_50F6_01F0[6] = 8;"
+    ],
+    [
+      "src/root/m293A.c",
+      12,
+      "extern int far fd_50F6_01F0[];"
+    ],
+    [
+      "src/root/m293A.c",
+      18,
+      "int far *fd_55B3_74FE = fd_50F6_01F0;"
+    ],
+    [
+      "src/state/saved-sound-state.c",
+      5,
+      "int far fd_50F6_01F0[7];"
+    ]
+  ],
+  "resource_domain": {
+    "oracle_lock": {
+      "path": "layout/oracle.lock.json",
+      "size": 18807,
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    "asset_directory_equals_all_locked_inputs": true,
+    "resource_pairs_match_lock_and_structure": {
+      "SHARED.DAT": {
+        "size": 96117,
+        "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+        "matches_oracle_lock": true
+      },
+      "SHARED.NDX": {
+        "size": 3868,
+        "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+        "matches_oracle_lock": true
+      },
+      "HCEGANT.DAT": {
+        "size": 629438,
+        "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+        "matches_oracle_lock": true
+      },
+      "HCEGANT.NDX": {
+        "size": 2444,
+        "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+        "matches_oracle_lock": true
+      },
+      "SOUND.DAT": {
+        "size": 111470,
+        "sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+        "matches_oracle_lock": true
+      },
+      "SOUND.NDX": {
+        "size": 1236,
+        "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+        "matches_oracle_lock": true
+      }
+    },
+    "resource_index_census": {
+      "SHARED": {
+        "ndx_rows": 449,
+        "ndx_bytes": 3868,
+        "unread_trailer_bytes": 256,
+        "dat_bytes": 96117,
+        "magic": "0x12345678",
+        "keys_sorted_kind_then_id": true
+      },
+      "HCEGANT": {
+        "ndx_rows": 271,
+        "ndx_bytes": 2444,
+        "unread_trailer_bytes": 256,
+        "dat_bytes": 629438,
+        "magic": "0x12345678",
+        "keys_sorted_kind_then_id": true
+      },
+      "SOUND": {
+        "ndx_rows": 120,
+        "ndx_bytes": 1236,
+        "unread_trailer_bytes": 256,
+        "dat_bytes": 111470,
+        "magic": "0x12345678",
+        "keys_sorted_kind_then_id": true
+      }
+    },
+    "foreign_language_or_lrshare_members_in_pinned_assets": [],
+    "config": {
+      "bytes": "Display Mode: V\r\nSound Mode: 6\r\n",
+      "mode_letter": "V",
+      "ReadConfig_g_5A97": 8,
+      "sound_mode": "6"
+    },
+    "external_cwd_or_supplied_resource_precondition": "No unmanifested language.dat or lrshare resource is present in the game's working/resource directory."
+  },
+  "save_overlap": {
+    "records": 307,
+    "protected_ranges": {
+      "fd_50F6_01F0": {
+        "linear": 332112,
+        "bytes": 14
+      },
+      "fd_55B3_610A": {
+        "linear": 375866,
+        "bytes": 2
+      },
+      "g_1926": {
+        "linear": 357462,
+        "bytes": 2
+      },
+      "fd_55B3_74FE": {
+        "linear": 380974,
+        "bytes": 4
+      },
+      "fd_55B3_74DA": {
+        "linear": 380938,
+        "bytes": 36
+      },
+      "g_68B6": {
+        "linear": 377830,
+        "bytes": 36
+      },
+      "g_68DA": {
+        "linear": 377866,
+        "bytes": 36
+      }
+    },
+    "overlap_count": 0,
+    "descriptor_sha256": "2db64b61fedf3d590a67246e080d7d8ae477202dd0c17ccf96c65a7bb1810958"
+  },
+  "dispatch_tables": {
+    "fd_55B3_74DA": {
+      "bytes": 36,
+      "entries": [
+        "f_293A_0029",
+        "f_293A_0029",
+        "f_293A_002D",
+        "f_293A_0059",
+        "f_293A_0087",
+        "f_293A_015E",
+        "f_293A_0121",
+        "f_293A_017C",
+        "f_293A_017F"
+      ],
+      "original_far_pointer_targets_match": true
+    },
+    "g_68B6": {
+      "bytes": 36,
+      "entries": [
+        "f_277E_0179",
+        "f_277E_017D",
+        "f_277E_01FA",
+        "f_277E_034F",
+        "f_277E_040E",
+        "f_277E_0606",
+        "f_277E_04E8",
+        "f_277E_0760",
+        "f_277E_07FF"
+      ],
+      "original_far_pointer_targets_match": true
+    },
+    "g_68DA": {
+      "bytes": 36,
+      "entries": [
+        "f_277E_0938",
+        "f_277E_0958",
+        "f_277E_0938",
+        "f_277E_0938",
+        "f_277E_0938",
+        "f_277E_0965",
+        "f_277E_0939",
+        "f_277E_0952",
+        "f_277E_0938"
+      ],
+      "original_far_pointer_targets_match": true
+    }
+  },
+  "sound_mode_proof": {
+    "cfg_sound_mode": "6",
+    "readconfig_digit": "stores numeric digit when isdigit(lang)",
+    "startup": "IBMInitStuff resets g_610A=-1 then ReadConfig; empty argv preserves6",
+    "main_order": "main calls f_00DF_0004 once after IBMInitStuff and db_SetDataBase(sound)"
+  },
+  "selector_transitions": {
+    "entry": 0,
+    "setup_request": 6,
+    "detector_result_false_fallback": 1,
+    "detector_result_true": 6,
+    "pre_setup_cleanup_guard_values": [
+      -1,
+      6
+    ],
+    "pre_setup_cleanup_selector": 0,
+    "setup_write_position": "f_277E_0000 stores selected local mode into fd_50F6_01F0[0] only after setup, framebuffer and helper calls",
+    "detector_candidates": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "original_controls": {
+    "default_setup_original_prefixes": [
+      {
+        "entry_mode": 6,
+        "detector_result": 0,
+        "local_and_stored_mode": 1,
+        "setup_entry": "f_277E_017D",
+        "callbacks": [
+          "f_293A_0121",
+          "f_29F0_001A",
+          "f_277E_017D",
+          "f_28BC_0488",
+          "f_28BC_03CC",
+          "f_29F0_0022",
+          "f_19A9_000B"
+        ]
+      },
+      {
+        "entry_mode": 6,
+        "detector_result": 1,
+        "local_and_stored_mode": 6,
+        "setup_entry": "f_277E_04E8",
+        "callbacks": [
+          "f_293A_0121",
+          "f_29F0_001A",
+          "f_277E_04E8",
+          "f_28BC_0488",
+          "f_28BC_03CC",
+          "f_29F0_0022",
+          "f_19A9_000B"
+        ]
+      }
+    ],
+    "startup_cleanup_original_prefixes": [
+      {
+        "g_610A": -1,
+        "CRT_selector_before_cleanup": 0,
+        "selector_at_cleanup": 0,
+        "guard_took_cleanup": true
+      },
+      {
+        "g_610A": 6,
+        "CRT_selector_before_cleanup": 0,
+        "selector_at_cleanup": 0,
+        "guard_took_cleanup": true
+      },
+      {
+        "selector": 0,
+        "cleanup_returned": true,
+        "calls": [
+          "f_295C_0391",
+          "f_0000_0429",
+          "f_28BC_04E0"
+        ]
+      },
+      {
+        "selector": 1,
+        "cleanup_returned": true,
+        "calls": [
+          "f_295C_0391",
+          "f_0000_0429",
+          "f_28BC_04E0"
+        ]
+      },
+      {
+        "selector": 6,
+        "cleanup_returned": true,
+        "calls": [
+          "f_295C_0391",
+          "f_0000_0429",
+          "f_29F0_002A",
+          "f_2815_0118",
+          "f_28BC_04E0"
+        ]
+      }
+    ],
+    "s9_negative_control": {
+      "index": 9,
+      "table_address": 380974,
+      "target_offset": 496,
+      "target_segment": 20726
+    },
+    "scope": "Original instructions through setup selection and cleanup selector dispatch; hardware detector/setup internals are explicit callback boundaries; s9 stops before executing the out-of-range pointer."
+  }
+}

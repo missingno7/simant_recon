@@ -18,6 +18,7 @@ REQUIRED_ENTRY_POINTS = {
     "tools/context.py", "tools/search.py", "tools/promote.py",
 }
 CLOSED_STATUSES = {"RESOLVED", "CLOSED", "RETIRED", "COMPLETE"}
+CLOSURE_CLASSES = {"SOURCE_REQUIRED", "SUPPORTED_DOMAIN", "LAYOUT_SENSITIVE", "UNATTRIBUTED_STATE"}
 
 
 def _issue(code: str, path: str, detail: str) -> dict[str, str]:
@@ -116,6 +117,21 @@ def _check_program(program: dict[str, Any], issues: list[dict[str, str]]) -> set
                 active_ids.add(blocker_id)
             if field == "unresolved_data" and (not isinstance(row.get("bytes"), int) or row["bytes"] <= 0):
                 issues.append(_issue("dos_data_debt", "src/program.json:dos.unresolved_data", blocker_id + " must retain a positive byte count."))
+    resolved = dos.get('resolved_domain_contracts', [])
+    if resolved:
+        domain = dos.get('supported_execution_domain', {})
+        if not domain.get('id') or not domain.get('premises') or domain.get('launch_arguments') != []:
+            issues.append(_issue('supported_execution_domain', 'src/program.json', 'Resolved domain contracts require the reviewed default-launch scope.'))
+        seen = set()
+        for row in resolved:
+            identity = row.get('id')
+            proof = _repo_path(row.get('resolution_evidence', ''), issues, 'resolved domain proof')
+            if (not identity or identity in seen or identity in active_ids or
+                    row.get('status') != 'RESOLVED_SUPPORTED_DOMAIN' or
+                    row.get('domain') != domain.get('id') or not row.get('resolution') or
+                    proof is None or not proof.is_file()):
+                issues.append(_issue('resolved_domain_contract', str(identity), 'Missing, duplicate or conflicting reviewed domain resolution.'))
+            seen.add(identity)
     return active_ids
 
 
@@ -127,6 +143,67 @@ def _module_name(value: Any) -> str | None:
     if normalized.startswith(prefix):
         normalized = normalized[len(prefix):]
     return Path(normalized).stem
+
+
+def _check_closure_graph(program, evidence, platform, issues):
+    """Check the root-question view without granting any acceptance authority.
+
+    Edges mean prerequisite evidence, not that closing a parent closes a leaf.
+    Inventory membership and the existing DOS preflight remain authoritative.
+    """
+    graph = program.get('dos', {}).get('closure_graph', {})
+    roots = graph.get('roots', [])
+    if graph.get('schema') != 'simant-closure-graph-v1' or not roots:
+        issues.append(_issue('closure_graph', 'src/program.json', 'Missing root-question graph.'))
+        return
+    inventories = {
+        'imports': {r['name'] for r in evidence.get('imports', [])},
+        'gates': {r['id'] for r in program['dos']['semantic_gates']},
+        'data': {r['id'] for r in program['dos']['unresolved_data']},
+        'native': {r['id'] for r in platform.get('preview_limitations', [])},
+    }
+    ids = [r.get('id') for r in roots]
+    if any(not isinstance(x, str) or not re.fullmatch('[a-z][a-z0-9_-]*', x) for x in ids) or len(set(ids)) != len(ids):
+        issues.append(_issue('closure_graph_ids', 'src/program.json', 'Invalid/duplicate root IDs.'))
+        return
+    by_id = {r['id']: r for r in roots}
+    covered = {kind: set() for kind in inventories}
+    for row in roots:
+        for field in ('question', 'next_experiment', 'scope'):
+            if not isinstance(row.get(field), str) or not row[field].strip():
+                issues.append(_issue('closure_graph_question', row['id'], 'Missing ' + field))
+        for dependency in row.get('depends_on', []):
+            if dependency not in by_id:
+                issues.append(_issue('closure_graph_edge', row['id'], str(dependency)))
+        for kind, members in row.get('members', {}).items():
+            if kind not in inventories or not isinstance(members, list):
+                issues.append(_issue('closure_graph_members', row['id'], str(kind)))
+                continue
+            unknown = set(members) - inventories[kind]
+            if unknown:
+                issues.append(_issue('closure_graph_stale_leaf', row['id'], str(sorted(unknown))))
+            covered[kind].update(members)
+    visiting, visited = set(), set()
+    def visit(key):
+        if key in visiting:
+            issues.append(_issue('closure_graph_cycle', key, 'Evidence prerequisites must form a DAG.'))
+            return
+        if key in visited or key not in by_id:
+            return
+        visiting.add(key)
+        for parent in by_id[key].get('depends_on', []):
+            visit(parent)
+        visiting.remove(key)
+        visited.add(key)
+    for key in by_id:
+        visit(key)
+    for kind, members in inventories.items():
+        if members - covered[kind]:
+            issues.append(_issue('closure_graph_unmapped', kind, str(sorted(members - covered[kind]))))
+    for rows in (evidence.get('imports', []), program['dos']['semantic_gates'], program['dos']['unresolved_data']):
+        for row in rows:
+            if row.get('closure_class') not in CLOSURE_CLASSES or not row.get('closure_basis'):
+                issues.append(_issue('closure_class', row.get('id', row.get('name', '?')), 'Missing reviewed class/basis.'))
 
 
 def _imported_abi_modules(path: Path) -> set[str]:
@@ -371,12 +448,16 @@ def audit(spec_path: Path) -> dict[str, Any]:
     evidence = _load_json(ROOT / 'evidence/canonical/blockers.json', issues, 'blocker_projection')
     if evidence.get('semantic_gates') != program.get('dos', {}).get('semantic_gates'):
         issues.append(_issue('blocker_projection_drift','evidence/canonical/blockers.json','Semantic gates must match the canonical inventory.'))
+    for field in ('supported_execution_domain', 'resolved_domain_contracts'):
+        if evidence.get(field) != program.get('dos', {}).get(field):
+            issues.append(_issue('blocker_projection_drift', 'evidence/canonical/blockers.json', field + ' must match the canonical inventory.'))
     debt = program.get('dos', {}).get('unresolved_data', [])
     if [(r.get('id'),r.get('bytes')) for r in evidence.get('data_debt',[])] != [(r.get('id'),r.get('bytes')) for r in debt]:
         issues.append(_issue('data_projection_drift','evidence/canonical/blockers.json','Functional data membership/bytes must match the canonical inventory.'))
     _check_spec(spec, issues)
     live_ids = _check_program(program, issues)
     live_ids.update(_check_platform(platform, live_ids, issues))
+    _check_closure_graph(program, evidence, platform, issues)
     _check_lowering(spec, live_ids, issues)
     _check_build_root(issues)
     _check_production_literals(issues)
@@ -412,16 +493,43 @@ def write_status():
         'Standalone reconstructed DOS closure takes priority over native symptom fixes.',
         'Bounded native passing flows do not close the exceptions below.',
         '`functional-source-oracle-v1` is pending.', '',
-        '## SEMANTIC / PORT-BLOCKING', '', '### Source storage imports', '',
-        '| Symbol | Required resolution |', '| --- | --- |',
+        '## Closure classes and root questions', '',
+        '`SOURCE_REQUIRED` needs an executable source contract. `SUPPORTED_DOMAIN` needs',
+        'a complete bound on supported callers/resources. `LAYOUT_SENSITIVE` has a real',
+        'conditional adjacency but unresolved ordinary observability. `UNATTRIBUTED_STATE`',
+        'needs ownership or exclusion, not necessarily a semantic field name.',
+        'These classes organize proof; all open entries still block canonical preflight.',
+        'Historical-only facts are listed separately. See [closure strategy](dos-closure.md).', '',
+        'Edges below point from prerequisite evidence to the dependent root question.', '',
+        '```mermaid', 'graph TD',
     ]
+    roots = program['dos']['closure_graph']['roots']
+    lines += [f'  {row["id"].replace("-", "_")}["{row["id"]}"]' for row in roots]
+    lines += [f'  {parent.replace("-", "_")} --> {row["id"].replace("-", "_")}'
+              for row in roots for parent in row['depends_on']]
+    lines += ['```', '', '| Root question | Affected entries | Proven premises and next experiment |', '| --- | --- | --- |']
     def cell(value):
         return str(value).replace('|', '\\|').replace('\n', ' ')
-    lines += [f'| `{row["name"]}` | {cell(row["grounding"])} |' for row in evidence['imports']]
-    lines += ['', '### DOS address and ownership gates', '', '| ID | Reason |', '| --- | --- |']
-    lines += [f'| `{row["id"]}` | {cell(row["reason"])} |' for row in gates]
-    lines += ['', '### Unowned functional data', '', '| ID | Bytes | Reason |', '| --- | ---: | --- |']
-    lines += [f'| `{row["id"]}` | {row["bytes"]} | {cell(row["reason"])} |' for row in debt]
+    for row in roots:
+        members = '; '.join(kind + ': ' + ', '.join('`' + name + '`' for name in names)
+                            for kind, names in row['members'].items())
+        resolved = ' '.join(row.get('resolved_premises', []))
+        next_step = (resolved + ' Next: ' if resolved else '') + row['next_experiment']
+        lines.append(f'| `{row["id"]}`: {cell(row["question"])} | {cell(members)} | {cell(next_step)} |')
+    lines += ['', '### Source storage imports', '', '| Symbol | Class | Required resolution |', '| --- | --- | --- |']
+    lines += [f'| `{row["name"]}` | {row["closure_class"]} | {cell(row["grounding"])} |' for row in evidence['imports']]
+    lines += ['', '### DOS address and ownership gates', '', '| ID | Class | Reason |', '| --- | --- | --- |']
+    lines += [f'| `{row["id"]}` | {row["closure_class"]} | {cell(row["reason"])} |' for row in gates]
+    if program['dos'].get('resolved_domain_contracts'):
+        domain = program['dos']['supported_execution_domain']
+        lines += ['', '### Resolved within the supported execution domain', '',
+                  '`' + domain['id'] + '`:', '']
+        lines += ['* ' + premise for premise in domain['premises']]
+        lines += ['', domain['limits'], '', '| Contract | Reviewed resolution |', '| --- | --- |']
+        lines += [f'| `{row["id"]}` | [{cell(row["resolution"])}](../{row["resolution_evidence"]}) |'
+                  for row in program['dos']['resolved_domain_contracts']]
+    lines += ['', '### Unowned functional data', '', '| ID | Class | Bytes | Reason |', '| --- | --- | ---: | --- |']
+    lines += [f'| `{row["id"]}` | {row["closure_class"]} | {row["bytes"]} | {cell(row["reason"])} |' for row in debt]
     lines += ['', '### Native exceptions', '', '| ID | Scope |', '| --- | --- |']
     lines += [f'| `{row["id"]}` | {cell(row["detail"])} |' for row in platform['preview_limitations']]
     lines += [

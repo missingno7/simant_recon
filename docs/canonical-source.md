@@ -56,6 +56,11 @@ Symbolic code/data operands belong in source. The bounded ASM frame/address
 audit and moved-placement controls are retained under
 `evidence/canonical/{asm-address-audit,owned-code-addresses,lzss-data-frame}/`.
 
+`dos/diagnostic.py` shares the real linker but requires explicitly provisional
+storage from ignored experiment directories and cannot grant canonical closure.
+`dos/run.py` keeps original and diagnostic DOSBox-X executions separate. See the
+[closure strategy](dos-closure.md) and [runner contract](../dos/README.md).
+
 ## Native lowering and platform services
 
 `portable/build.py` is the native entry point. It lowers whole canonical C TUs,
@@ -79,8 +84,9 @@ Some source-shaped rewrites remain because ownership, ABI or failure domains are
 not yet proved. They are classified in `layout/repository.json`, tied to named
 open contracts in `portable/platform.json`, and cannot silently survive closure.
 The current game build is a preview; passing bounded flows does not establish
-universal DOS/native equality. [Current status](status.md) is the generated view
-of remaining SEMANTIC / PORT-BLOCKING and HISTORICAL-BINARY-ONLY work.
+universal DOS/native equality. [Current status](status.md) generates the root
+dependency graph and distinguishes required source contracts, supported domains,
+conditional layout sensitivity, unattributed state and historical-only work.
 
 ## Workspace and evidence lifecycle
 

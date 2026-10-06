@@ -23,14 +23,12 @@ _Static_assert(offsetof(PortableWholeAudioSample, data) == 0 &&
  * this one canonical object for shared pointer-bearing table views.
  */
 extern PortableWholeAudioInstrumentEntry fd_50F6_0000[56];
-PortableWholeAudioSample *fd_50F6_0150[39];
 extern int16_t fd_50F6_01F0[7];
 
 extern PortableWholeAudioRuntimeChannel fd_50F6_4A4E[33];
 
 extern char **fd_50F6_4B28;
-uint8_t fd_50F6_4B30[18];
-int32_t fd_50F6_4B42[18];
+/* Track status/time are owned by canonical src/state/audio-track-state.c. */
 extern int16_t fd_50F6_4B8E[14];
 extern int16_t fd_50F6_4BAA[14];
 

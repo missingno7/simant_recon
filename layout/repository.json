@@ -17,9 +17,18 @@
     "tools/source_only_dos.py",
     "tools/dos_source_bindings.py",
     "evidence/canonical/native-window-boundary/manifest-statement.json",
-    "evidence/canonical/validation/behavior-dependencies.json"
+    "evidence/canonical/validation/behavior-dependencies.json",
+    "portable/whole_program/conversions/pointer_globals.c"
   ],
   "entry_points": [
+    {
+      "path": "dos/diagnostic.py",
+      "role": "Isolated provisional real-link experiments; never canonical acceptance"
+    },
+    {
+      "path": "dos/run.py",
+      "role": "Pinned DOSBox-X execution with separate original/diagnostic provenance"
+    },
     {
       "path": "dos/build.py",
       "role": "Independent canonical DOS preflight/link"
@@ -219,12 +228,10 @@
     },
     {
       "module": "pointer_globals",
-      "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Binds compatible pointer aliases and tables, but also removes unsized DOS win_handles/db_handles/font externs in favor of native fixed tables.",
-      "blocker_ids": [
-        "native-storage-ownership"
-      ],
-      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+      "classification": "GENERIC_LOWERING",
+      "reason": "Shares canonical database/font declarations and widens font pointer views. Window handles use ordinary canonical declarations; no native table owner remains.",
+      "blocker_ids": [],
+      "deletion_condition": "Retain only necessary shared pointer/type views of admitted canonical owners."
     },
     {
       "module": "rng",
@@ -252,23 +259,18 @@
     {
       "module": "source_runtime_globals",
       "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Injects runtime reserve calls, failure returns/Punt behavior, and pointer-width storage for clipping and mono-pattern buffers into otherwise canonical source bodies.",
+      "reason": "Injects the remaining runtime reserve calls, failure behavior and pointer-width storage for the unresolved clip rectangle buffer. The superseded monochrome rewrite is retired.",
       "blocker_ids": [
-        "native-menu-allocation-policy",
-        "native-storage-ownership"
+        "native-clip-allocation-policy"
       ],
-      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+      "deletion_condition": "Remove the exceptional rewrite after the clip owner/extent/lifetime contracts close; preserve only necessary native pointer/platform lowering."
     },
     {
       "module": "source_views",
-      "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Shared lexical/type utility reached by the current whole-source converter.",
-      "blocker_ids": [
-        "native-menu-allocation-policy",
-        "native-storage-ownership",
-        "native-icon-lifetime"
-      ],
-      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+      "classification": "GENERIC_LOWERING",
+      "reason": "Mechanical declarations, canonical owner/alias views, callback and resource-pointer representation, scalar/port conversion. The menu allocation/count walk/failure branch has been removed after canonical owner admission.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep only mechanical ABI/type and symbolic owner views; no ordinary game allocation or control-flow replacement."
     },
     {
       "module": "spider_inline_source",
@@ -308,23 +310,18 @@
     {
       "module": "windows",
       "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Maps DOS wire offsets and far-pointer tables into native sidecar registries; loader conversion adds fixed-capacity/color reservation checks and Punt/return behavior.",
+      "reason": "Maps DOS wire offsets and far-pointer tables into native registries; fixed-capacity validation and added failure behavior remain explicit exceptions.",
       "blocker_ids": [
         "native-window-object-domain",
-        "native-window-optional-words",
-        "native-storage-ownership"
+        "native-window-optional-words"
       ],
       "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
     },
     {
       "module": "window_loader",
-      "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Maps DOS wire offsets and far-pointer tables into native sidecar registries; loader conversion adds fixed-capacity/color reservation checks and Punt/return behavior.",
-      "blocker_ids": [
-        "native-window-object-domain",
-        "native-storage-ownership"
-      ],
-      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+      "classification": "GENERIC_LOWERING",
+      "reason": "Binds shared scalar, callback and Rect declarations; adapts pointer-sized hook clearing and retains DOS palette-copy width. Palette storage and lifetime come directly from canonical source.",
+      "deletion_condition": "Retain while native pointer widths and DOS scalar ABI differ; palette ownership needs no exceptional conversion."
     },
     {
       "module": "window_parameters",
@@ -435,12 +432,11 @@
       ],
       "builder_site": "portable/build.py:150-151",
       "consumers": [
-        "src/root/m1E57.c",
-        "src/S15/m384C.c"
+        "src/root/m1E57.c"
       ],
-      "reason": "Injects runtime reserve calls, failure returns/Punt behavior, and pointer-width storage for clipping and mono-pattern buffers into otherwise canonical source bodies.",
-      "blocker": "The temp clip buffer and mono pattern tail are among the unresolved source storage/capacity contracts; current reservations do not establish DOS ownership or extent.",
-      "deletion_condition": "Resolve canonical owner, extent, and lifetime first; then move allocation policy behind a narrowly typed service while retaining the source operation order."
+      "reason": "Injects runtime reserve calls, failure behavior and pointer-width storage for the unresolved clip rectangle buffer. The monochrome source now uses its canonical owner without transformation.",
+      "blocker": "native-clip-allocation-policy: clip capacity and lifetime remain unproved; monochrome and menu reservations are retired.",
+      "deletion_condition": "Resolve the canonical clip owner, extent and lifetime, then retire this exceptional allocation policy while preserving source operation order."
     },
     {
       "id": "audio_hardware_source_adapters",
@@ -485,7 +481,7 @@
         "src/data/d55B3_00B8.c"
       ],
       "reason": "Projects shared native audio record/pointer types over canonical C/ASM storage and removes repeated incompatible extern/struct spellings; it introduces no owner allocation.",
-      "blocker": "The two audio track-state arrays remain unproved storage imports; deferred scalar extern handling is intentional.",
+      "blocker": "Shared pointer-width record projections remain required for the native ABI; deferred scalar extern handling is intentional.",
       "deletion_condition": "Consolidate only with the hardware adapters after a per-source projection comparison; keep the central audio_state.h as a native view, not a second state owner."
     },
     {
@@ -665,24 +661,20 @@
     },
     {
       "id": "shared_pointer_global_views",
-      "class": "TEMPORARY_EXCEPTION",
+      "class": "GENERIC_LOWERING",
       "paths": [
         "portable/canonical_native_abi/pointer_globals.py",
-        "portable/whole_program/conversions/pointer_globals.c"
+        "portable/whole_program/conversions/pointer_globals.h"
       ],
       "builder_site": "portable/build.py:172",
       "consumers": [
-        "src/root/m20E8.c",
-        "src/root/m23AE.c",
-        "src/root/m22BF.c",
-        "src/root/m2505.c",
         "src/root/m1A53.c",
         "src/root/m24AB.c",
         "src/root/m1629.c"
       ],
-      "reason": "Binds compatible pointer aliases and tables, but also removes unsized DOS win_handles/db_handles/font externs in favor of native fixed tables.",
-      "blocker": "The 45-entry window handle capacity and the eleven unproved source storage imports remain explicit preview limits; the four database handle slots and four font slots have narrower source anchors.",
-      "deletion_condition": "Keep only typed views backed by canonical owners; remove fixed capacities after complete source extent/lifetime proof."
+      "reason": "Shares canonical database/font declarations and widens font pointer views. Window handles use ordinary canonical declarations; no native table owner remains.",
+      "blocker": "No independent storage capacity or lifetime is supplied by this declaration conversion.",
+      "deletion_condition": "Retain only necessary shared pointer/type views of admitted canonical owners."
     },
     {
       "id": "window_source_and_loader_views",
@@ -703,8 +695,8 @@
         "src/root/m218D.c",
         "all canonical C TUs with shared window globals"
       ],
-      "reason": "Maps DOS wire offsets and far-pointer tables into native sidecar registries; loader conversion adds fixed-capacity/color reservation checks and Punt/return behavior.",
-      "blocker": "portable/platform.json documents win_Swap raw stack-residue normalization, custom resource domains, invalid S26 view faults, OOM policy, and unproved window handle/color storage. Some added error paths therefore remain preview behavior.",
+      "reason": "Window registry conversion retains fixed-capacity validation and added failure behavior. Shared globals and loader width/callback/Rect conversions are mechanical; the palette uses canonical storage directly.",
+      "blocker": "portable/platform.json retains raw optional-word normalization, custom resource/object domains, S26 view faults, OOM policy and unproved handle ownership. Palette allocation/reservation and its synthetic failure path are retired.",
       "deletion_condition": "Keep ABI views; do not remove or generalize capacity/failure behavior until source owners, resource-domain coverage and failure semantics are proved."
     },
     {
@@ -840,7 +832,8 @@
         "portable/canonical_native_abi/source_views.py:screen_clip_canonical_views",
         "portable/canonical_native_abi/source_views.py:edit_cache_view",
         "portable/canonical_native_abi/source_views.py:callback_views",
-        "portable/whole_program/canonical views and platform headers"
+        "portable/whole_program/canonical views and platform headers",
+        "portable/canonical_native_abi/source_views.py:menu_resource_view"
       ],
       "builder_site": "portable/build.py:187-194",
       "consumers": [
@@ -849,22 +842,6 @@
       "reason": "Projects field/array/pointer views over canonical owners and native-width callback/resource tables; it does not create a second ordinary game-state owner.",
       "blocker": "Some backing storage capacities and overlapping source imports remain open in platform.json. The views must not be used to infer unproved extents.",
       "deletion_condition": "Potentially consolidate into a declarative alias/view table, but only after generated-source parity and explicit offset/extent checks; preserve each current view's ownership evidence."
-    },
-    {
-      "id": "menu_title_runtime_reservation",
-      "class": "TEMPORARY_EXCEPTION",
-      "paths": [
-        "portable/canonical_native_abi/source_views.py:menu_native_memory",
-        "portable/whole_program/platform/source_memory.c"
-      ],
-      "builder_site": "portable/build.py:190",
-      "consumers": [
-        "src/root/m1FD2.c",
-        "src/S17/m384C.c"
-      ],
-      "reason": "Inserts a title-count walk and native reserve call into the canonical source path, then adds a new early return on allocation failure.",
-      "blocker": "The original menu title owner/capacity and overlapping x/width storage are not fully proven; this changes failure behavior in the source path.",
-      "deletion_condition": "Resolve canonical title storage/extent and move only host allocation policy behind an explicit service without adding unreviewed game control flow."
     },
     {
       "id": "audio_extern_cleanup",

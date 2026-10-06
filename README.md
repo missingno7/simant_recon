@@ -8,7 +8,8 @@ The SDL3 executable runs the converted original main as a bounded preview.
 Manual playtesting found broken sound, a logo-click hang and a discrepancy in
 the intended VGA display. Standalone reconstructed DOS closure now takes priority
 over native fixes. Independent DOS linking remains blocked. See [current status](docs/status.md),
-[architecture](docs/canonical-source.md), and [cleanup results](docs/cleanup.md).
+[architecture](docs/canonical-source.md), [DOS closure strategy](docs/dos-closure.md),
+and [cleanup results](docs/cleanup.md).
 
 ## Build and validation
 
@@ -26,9 +27,14 @@ python portable/build.py
 build/current/portable/simant-canonical.exe
 ```
 
-The DOS command currently reports an explicit link refusal. It uses zero original
-executable fallback. [Portable validation commands](portable/README.md) cover
+The canonical DOS command currently reports an explicit link refusal. The isolated
+diagnostic links without warnings and reaches Full Game under a recorded keyboard
+replay matching original DOS screen states; five storage assumptions remain.
+Both build paths use zero original executable fallback. [Portable validation commands](portable/README.md) cover
 resources, RNG, simulation, VGA and Save/Load with their supported scopes.
+Bounded DOS checks now save all 307 records in both executables and load the same
+original save back into paused Full Game. [Evidence and limits](docs/dos-closure.md)
+separate these observations from complete state equivalence and closure.
 
 Default runners rotate replaced outputs into ignored `to_delete/` and recreate
 one deterministic `build/current/` target. Explicit experiment outputs must be

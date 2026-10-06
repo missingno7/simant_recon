@@ -1,0 +1,76 @@
+{
+  "schema": "simant-last-filename-validation-v1",
+  "scope": "Defined successful filename copies through the 100-byte global object. The earlier FileSelect path[67]/lastDir[67] capacity remains an explicit semantic gate with a 69-byte negative contrast.",
+  "canonical_closure": false,
+  "historical_validation": {
+    "status": "PASS",
+    "command": "python tools/validate.py",
+    "codegen_probes": 49,
+    "unit_tests": "PASS; 2 intentional skips",
+    "runtime_members": 90,
+    "runtime_bytes": 12339,
+    "runtime_data_segments": 38,
+    "runtime_data_bytes": 2021,
+    "far_bss_modules_measured": 74,
+    "far_bss_bytes": 19408,
+    "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f"
+  },
+  "canonical_dos": {
+    "status": "EXPECTED_REFUSAL",
+    "translation_units": 199,
+    "storage_providers": 72,
+    "compile_errors": 0,
+    "unresolved_imports": 1,
+    "semantic_gates": 4,
+    "unresolved_data_ranges": 6,
+    "unattributed_bytes": 44,
+    "original_game_byte_fallback": 0
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "commands": [
+      "python -m unittest tests.test_last_filename_domain tests.test_database_domain tests.test_resource_domains",
+      "python -m unittest tests.test_supported_dispatch_domains"
+    ],
+    "tests": 20
+  },
+  "native_build": {
+    "status": "PASS",
+    "canonical_sources": 170,
+    "canonical_compile_pass": 169,
+    "expected_platform_boundaries": 1,
+    "native_services_pass": 77,
+    "conversion_failures": 0,
+    "undefined_symbols": 0
+  },
+  "native_cleanup": {
+    "status": "PASS",
+    "retired": [
+      "native fd_50F6_3862 storage owner"
+    ]
+  },
+  "repository_guard": "PASS",
+  "pins": {
+    "src/state/last-filename.c": "e7c6763c556754de3a8127ec0e57bae0cb4ae6bdfbbff13358b22bdef96b2d36",
+    "src/program.json": "3557522f3ea380ada4413b9d385a06ee6133d19b62e587e005c105d7d1d3b4e7",
+    "evidence/canonical/last-filename/replay.py": "92e95d4281473433c0b1f3cb8751e29ceac3ce02255260fa8fbd118d088db10f",
+    "evidence/canonical/last-filename/facts.json": "e2bf2d726d987740ff26acac4bf08112abb062f6a9bb8573d721784842a62e97",
+    "evidence/canonical/last-filename/review.md": "8d02c735b8698074da37bf90344b1cd26ac9484f5ccb03ef457f29187b71921b",
+    "evidence/canonical/last-filename/publication.json": "bbb81dd6643d1c7a444b3543b4775495c214ebe618399dfc8860ee3bf42abf00",
+    "evidence/canonical/last-filename/metadata-publication.json": "623eed2f6f2387414a91284c43acd7b4527a3a8ca3b1e25a0b9c74a0fad81110",
+    "evidence/canonical/filename-domain/review.md": "f7016233ee38f5cca319031965cd262dbd710cebcfb4ab68644e6ddd6789bb59",
+    "evidence/canonical/storage.json": "461d388c6fd893682b257ad718a0eb1d497d20ef52ffc354343ce0d19177b845",
+    "evidence/canonical/blockers.json": "304d8844c4b9e8735ca83c5ad37038c1597699698051304ffb6271a49cf3f527",
+    "tests/test_last_filename_domain.py": "19ce1621f1455835ce1ae3a8fbb1cfaa91c4dd704a845e4ebe923d219c31d75e",
+    "portable/whole_program/platform/source_memory.c": "b56ea443c2f774ff0b25aaaa4b6ad281dae5ef6660f459422983b5141161df75",
+    "portable/whole_program/platform/source_memory.h": "8b21158657280176c9bdf7ad8acff7ae5e5a39e6ae17c6ffd2149a31ce98540f",
+    "portable/platform.json": "251a21e0b4d6a1d07e8006c75371929e7b4f8c222c63a602f11dd586d77afaf0",
+    "layout/repository.json": "ef046478b9012853cd6a19c1d30593ae90c0e801a449247a46ff7856b2aec1d8",
+    "evidence/canonical/icon-handle-view/vga-facts.json": "9fb2613fdc4c0d952a23ce64dac174d3f2d0d476fd66231ded3b1f998f736e30",
+    "evidence/canonical/audio-track-owner/selector-facts.json": "e65c722b8a9c502622f00ec00fd9aed6e1398d16cd6c30267a383622d7c99484",
+    "evidence/canonical/error-continuation/selector-facts.json": "c2d12b79741f3b51db7758e89403e9491cef22eb5d2a95ca881fd7672a425421",
+    "evidence/canonical/window-domain/array-gate-facts.json": "4f57ae6e4b2aa6556170f7027981d9e307f6dc2e30bc62628a3291ffedd99092",
+    "evidence/canonical/monochrome-owner/mode-facts.json": "8b8e444f52663c6d540be53854c22fde639e748384ebc78b3994aa14768ca975",
+    "evidence/canonical/sample-free-list/facts.json": "64b6aa13a37e94369a9685c690752e7b15827120a2881e619ce0dcb3f2e5cc5b"
+  }
+}

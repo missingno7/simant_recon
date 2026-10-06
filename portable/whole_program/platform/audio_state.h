@@ -65,10 +65,11 @@ typedef struct PortableWholeAudioVoiceSlot {
 #pragma pack(pop)
 
 /* Source bounds: fd_50F6_0000 has 56 table entries (the nine DATA instrument
- * tables each contain 56 entries); fd_50F6_0150 is the 39-entry sample free
- * list used by f_0000_0149; fd_50F6_01F0's seven words are addressed directly
- * by f_277E_00AF/0000. Native views are independent symbols because pointer
- * widening makes original DOS byte offsets unsuitable as host offsets.
+ * tables each contain 56 entries); canonical source owns fd_50F6_0150 as the
+ * 39-entry sample free list used by f_0000_0149; fd_50F6_01F0's seven words
+ * are addressed directly by f_277E_00AF/0000. Native views are independent
+ * symbols because pointer widening makes original DOS byte offsets unsuitable
+ * as host offsets.
  */
 extern PortableWholeAudioInstrumentEntry fd_50F6_0000[56];
 extern PortableWholeAudioSample *fd_50F6_0150[39];
@@ -92,8 +93,8 @@ extern int16_t fd_50F6_4B16;
 extern char **fd_50F6_4B28;
 extern int16_t fd_50F6_4B2C;
 extern int16_t fd_50F6_4B2E;
-extern uint8_t fd_50F6_4B30[18];
-extern int32_t fd_50F6_4B42[18];
+extern uint8_t fd_50F6_4B30[];
+extern int32_t fd_50F6_4B42[];
 extern int32_t fd_50F6_4B8A;
 extern int16_t fd_50F6_4B8E[14];
 extern int16_t fd_50F6_4BAA[14];

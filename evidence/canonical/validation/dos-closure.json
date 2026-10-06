@@ -1,0 +1,69 @@
+{
+  "schema": "simant-dos-closure-phase-validation-v1",
+  "canonical_closure": false,
+  "historical_validation": {
+    "status": "PASS",
+    "codegen_probes": 49,
+    "unit_tests": "PASS; 2 intentional skips",
+    "snapshot_program_sha256": "246f824aa0f8d777e9b244b089cdd00e8e072fe61e5e4f9aa128bbf56620e489",
+    "scope": "Fresh full validation after three supported-domain gate closures: 49 probes, the complete unit suite (2 intentional skips), historical runtime and 74 compiler-measured FAR_BSS modules pass. A concurrent scope-wording-only amendment changed no source, context, domain or gate membership; final canonical promotion reverified all 195 TUs and the membership regression passed afterward."
+  },
+  "behavior": {
+    "status": "PASS",
+    "domains": 29,
+    "paired_cases": 12130,
+    "scope": "Retained earlier phase run; all29 registered function bodies/compiler contexts remain unchanged. DOS vector policy changes historical linking only."
+  },
+  "canonical_dos": {
+    "status": "EXPECTED_REFUSAL",
+    "translation_units": 195,
+    "storage_providers": 68,
+    "compile_errors": 0,
+    "unresolved_imports": 5,
+    "semantic_gates": 3,
+    "unattributed_bytes": 44,
+    "original_game_byte_fallback": 0
+  },
+  "native": {
+    "status": "PASS",
+    "compiled_canonical_C": 165,
+    "native_services": 77,
+    "undefined_symbols": 0,
+    "vga_runtime_smoke": "PASS",
+    "scope": "Fresh canonical native build and VGA smoke against the final program inventory: 165 canonical C units and 77 services compile, with zero conversion failures or undefined symbols. Game sources and native contracts are unchanged."
+  },
+  "new_focused_controls": {
+    "status": "PASS",
+    "dispatch_domain_tests": 9,
+    "icon_regression_tests": 8,
+    "final_membership_test": 1,
+    "original_dispatch_cases": 15,
+    "scope": "Complete inventory/registry, startup/config, writer/alias, save-range and producer-domain controls. Original sound setup/cleanup and s9, hook indices 0/33/45/-1, and MIDI counts 10/32633/32634 preserve explicit model boundaries and out-of-domain effects. Original icon prefix controls remain intact."
+  },
+  "final_repository_guard": "PASS",
+  "diagnostic_runtime": "evidence/canonical/diagnostic-link/receipt.json",
+  "source_metadata_note": "Three adjacency gates resolved through promote.py in the unchanged default-VGA successful-lifetime domain. Critical-selector wording discharges only the two reviewed cache/song aliases; other physical writes remain with graphics/viewport gates. No canonical game source, storage extent, compiler context or native contract changed. All 29 strict-semantic registrations remain unchanged.",
+  "final_program_sha256": "d7db04a041b2bb9cf54b7fe3b25c3a04d45e0c2d62b3d8f9083f2b1a44722a80",
+  "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f",
+  "logs": {
+    "build/current/tests/dos-closure/behavior.log": "9162a55d114fb03f5e85f6c2dc38237c7ee747125570ec0566a87b356036dd2b",
+    "build/current/tests/dispatch-domain/validate.log": "ee542e67f32737785cb874032776a87dde1ceb2c9d41f84b4f503f0285de5484",
+    "build/current/tests/dispatch-domain/focused.log": "749a0c8b1fc40d27e6a31551113e1f7b10f7acd622e7959a2510434d7bd305e6",
+    "build/current/tests/dispatch-domain/icon-regression.log": "b6f07a2ec06cad7819f19e1031d132c0b49585ec49a7614d5b1499f94d0be12f",
+    "build/current/tests/dispatch-domain/membership.log": "aea766a9facb33f1cd44a5548084c419c7b65c5ee57f1edbe4b3e1e08deb47ff",
+    "build/current/tests/dispatch-domain/promotion-verify.log": "55e52ffd33aabc85a82a15f9a31db003ebee6623fd205a5abd9fde6d2eb8b03c",
+    "build/current/tests/dispatch-domain/promotion.log": "985386894d7a33256001279c148af38a87f1f3b274b87dcf86bd054032154cde",
+    "build/current/tests/dispatch-domain/dos-build.log": "83209b9561a1472082b18f906bc74d4630ee0b745ebec079cc310b709c374253",
+    "build/current/tests/dispatch-domain/native-build.log": "93c481c45a345e094c4464772e847bd9e9e82e44b5bb12b86b728e192d465403",
+    "build/current/tests/dispatch-domain/native-vga.log": "52fb350900e8d2ee22b92b6ae1486db74c0fdb98df4c74e96a0238e649edb60f",
+    "build/current/tests/dispatch-domain/repository.json": "28291270a688cca4b4a08bc3b79919b2b6caf83882ea0452ecf85d4b128910a0"
+  },
+  "overlay_runtime_observation": "evidence/canonical/diagnostic-link/overlay-relocation.json",
+  "overlay_link_policy": "evidence/canonical/diagnostic-link/overlay-vectors.json",
+  "save_load_observation": "evidence/canonical/diagnostic-link/save-load.json",
+  "rng_domain": "evidence/canonical/diagnostic-link/rng-domain.json",
+  "palette_dos_observation": "evidence/canonical/diagnostic-link/window-palette.json",
+  "handle_dos_observation": "evidence/canonical/diagnostic-link/window-handles.json",
+  "icon_vga_domain": "evidence/canonical/icon-handle-view/vga-review.md",
+  "dispatch_domain_publication": "evidence/canonical/error-continuation/dispatch-publication.json"
+}

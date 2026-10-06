@@ -1,0 +1,190 @@
+{
+  "schema": "simant-runtime-dictionary-proof-v1",
+  "status": "RESOLVED_LINKER_POLICY",
+  "canonical_closure_eligible": false,
+  "policy": "NOEXTDICTIONARY in the shared RTLink response; all warnings/errors fatal, no waiver.",
+  "documentation": {
+    "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.HLP",
+    "sha256": "4d2ed6cb6fc261a0330920389abdd76b97ef80714dc4ebacf033bb51d17b3252",
+    "size": 12171,
+    "anchor": "MISCELLANEOUS COMMANDS: EXTD[ICTIONARY], NOE[XTDICTIONARY]"
+  },
+  "toolchain": {
+    "path": "layout/toolchain.json",
+    "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+    "size": 39241
+  },
+  "rtlink400": {
+    "directory": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest",
+    "runner": "dosbox-x",
+    "executable": "RTLINK.EXE",
+    "note": "RTLink/Plus 4.00 (Sept 1990), installed from the pinned six-part DiscMaster archive with all installer checksums passing. Experimental candidate; no SimAnt exact-version claim. Provenance: work/takeover/rtlink400/README.md.",
+    "files": {
+      "RTLINK.EXE": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "RTLINK.DAT": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "RTLUTILS.LIB": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "RTLINKST.COM": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2"
+    },
+    "status": "experimental instrument for level (c) trials; exact historical version unconfirmed"
+  },
+  "runtime_libraries": [
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711,
+      "name": "llibcr.lib"
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033,
+      "name": "libh.lib"
+    }
+  ],
+  "grounded_source": {
+    "key": "root:171C",
+    "object": {
+      "path": "build/workers/diagnostic_link/collision/runtime_candidate/objects/U074.OBJ",
+      "sha256": "84767f7d939c38cb19b2d8b0e59e861183375109b5a43fa333a98b8bc238a961",
+      "size": 30288
+    },
+    "public_and_external": "__ffree",
+    "self_code_fixup": "U074_TEXT offset 0x2281; CodeView also has two references",
+    "no_canonical_import": "__fmalloc",
+    "name_policy": "Grounded DOS _ffree name retained; no canonical source changed."
+  },
+  "unchanged_inputs": "201 object files and two original libraries identical across full-link controls; natural C fixture object and LLIBCR identical across minimal controls.",
+  "minimal_natural_c_controls": {
+    "regression": "python -m unittest tests.test_dos_linker -v",
+    "default_extended": {
+      "image_sha256": "fbe652d9fa085b167b21a65239bd8130a648289ec5c15e919112c32ab8a998e1",
+      "image_bytes": 3197,
+      "duplicate_ffree": true,
+      "fmalloc_member_loaded": true,
+      "log_sha256": "df4e8861cffcd176b9d8c41d219a5d32045fbc7feb0ab901eb83889f8ffc539e"
+    },
+    "ordinary_dictionary": {
+      "image_sha256": "7af48d9a342a8adaa66fb60a870085443f2756c0f31c10a98d43b35f88483150",
+      "image_bytes": 2735,
+      "duplicate_ffree": false,
+      "fmalloc_member_loaded": false,
+      "log_sha256": "071a351a58ea756b2fc8896a481e016348b772b384a821e10312bf11aa35b936"
+    },
+    "assertions": "compiler public plus self EXTDEF and real code fixup; positive zero warnings/map source ownership/call target; negative exact duplicate and refusal; object/archive byte identity."
+  },
+  "full_program_controls": {
+    "EXTDICTIONARY_rtlink400": {
+      "image_sha256": "f8cfbced1c164f32ca550b390188c3f450332ab2ffd34a88446ae5196a0664c0",
+      "image_bytes": 502107,
+      "duplicate_ffree": true,
+      "fmalloc_member_loaded": true,
+      "log_sha256": "70a51f8175c17f32565137e321ccd702ea0e266a8df22d8ac64d7d05d41ed60c"
+    },
+    "NOEXTDICTIONARY_rtlink400": {
+      "image_sha256": "d8beda23755dfbc0f3af3f465f01d31df8badaa3f5a7a01a611897a4272f489b",
+      "image_bytes": 501661,
+      "duplicate_ffree": false,
+      "fmalloc_member_loaded": false,
+      "log_sha256": "72f73afe39cbb656dd8eb20d0af2d7f922be467e4723ec1b475ac21f022d4f22"
+    },
+    "NORESCAN_rtlink400": {
+      "image_sha256": "f8cfbced1c164f32ca550b390188c3f450332ab2ffd34a88446ae5196a0664c0",
+      "image_bytes": 502107,
+      "duplicate_ffree": true,
+      "fmalloc_member_loaded": true,
+      "log_sha256": "5fb7a9f7ad55e26d7f69c6392c5fc15f776b190a5a8b65983947216608262790"
+    },
+    "baseline_rtlink610": {
+      "image_sha256": "b44617fd116fc3562b5afe4633822b5ef2a1ee44e5c34ea9f0dc5b2c102df077",
+      "image_bytes": 503211,
+      "duplicate_ffree": false,
+      "fmalloc_member_loaded": false,
+      "log_sha256": "a70aa64485370dd4426e8a5eeed66a86b670ce1a6eb30c5a2a4825c840f57977"
+    },
+    "NOEXTDICTIONARY_rtlink610": {
+      "image_sha256": "92591b7477ac6d05266f00adf75133909dabcd09b8393c7c97b181ab7c2917be",
+      "image_bytes": 502909,
+      "duplicate_ffree": false,
+      "fmalloc_member_loaded": false,
+      "log_sha256": "ea536284f4adb108e5c898b2749cd262f01af210615dc9b6077b891f2de5817a"
+    }
+  },
+  "removed_rtlink400_members": [
+    "fdata.asm",
+    "fmalloc.asm",
+    "initseg.asm",
+    "linkseg.asm",
+    "newseg.asm",
+    "searchsg.asm"
+  ],
+  "actual_shared_recipe": {
+    "build": {
+      "path": "build/workers/diagnostic_link/collision/runtime_candidate/build-report.json",
+      "sha256": "29535239bd6506b6e8a4aa66166731d0ff27032448dba6384215667bdd95233d",
+      "size": 362403
+    },
+    "image": {
+      "path": "build/workers/diagnostic_link/collision/runtime_candidate/link/SOURCE.EXE",
+      "sha256": "d8beda23755dfbc0f3af3f465f01d31df8badaa3f5a7a01a611897a4272f489b",
+      "size": 501661
+    },
+    "map": {
+      "path": "build/workers/diagnostic_link/collision/runtime_candidate/link/SOURCE.MAP",
+      "sha256": "22eb3d5e4b46f9f2d28be38ff88dfe9c6f95470bb275a73378aa06c5c43a63cc",
+      "size": 1014281
+    },
+    "log": {
+      "path": "build/workers/diagnostic_link/collision/runtime_candidate/link/LINK.LOG",
+      "sha256": "72f73afe39cbb656dd8eb20d0af2d7f922be467e4723ec1b475ac21f022d4f22",
+      "size": 18087
+    },
+    "publics": {
+      "_free": {
+        "map_line": "171C:2278  Res  _free                                                                            Y U074.C",
+        "linear": 103480
+      },
+      "__ffree": {
+        "map_line": "171C:2218  Res  __ffree                                                                          Y U074.C",
+        "linear": 103384
+      }
+    },
+    "free_calls_canonical_ffree": {
+      "call_instruction": "push CS; near CALL",
+      "resolved_target_linear": 103384,
+      "not_copied_into_source": true
+    }
+  },
+  "runtime_observation": {
+    "receipt": {
+      "path": "build/workers/diagnostic_link/collision/runtime/execution-report.json",
+      "sha256": "08abbc8a43b7116366b3fd56006d8530f6f278b19ffb354b00ad5d3f88af06e3",
+      "size": 44602
+    },
+    "video_lines": [
+      "         3       INT10:Set Video Mode 3",
+      "         8       INT10:Set Video Mode 3",
+      "    729654       INT10:Set Video Mode 12",
+      "    730362       VGA:640x480, 59.94Hz, 32bpp, screen 1.333",
+      "Aspect ratio: 640 x 480  xToY=1.333 yToX=0.750",
+      "surface consider=640x480 final=640x480"
+    ],
+    "bounded_resource_events": 161,
+    "equal_original_resource_names_and_lengths": true
+  },
+  "retired_mechanisms": [
+    "diagnostic --acknowledge-runtime-ffree",
+    "warning-whitelist/map-winner admission helper",
+    "runtime_link_assumptions provenance field"
+  ],
+  "scope_limits": [
+    "Linker selection policy resolved; historical exact linker/version/layout remains unproved.",
+    "Provisional storage, semantic gates and initialized-data debt remain diagnostic blockers.",
+    "VGA mode and bounded file activity do not establish rendering, input, save/load or state equality.",
+    "Original bytes enter separate oracle execution only, never compilation or linking."
+  ],
+  "validation": {
+    "minimal_real_link_test": "PASS",
+    "dos_policy_tests": "PASS 12",
+    "repository_guard": "PASS zero issues"
+  }
+}

@@ -1,7 +1,6 @@
 {
   "schema": "canonical-native-platform-files-v1",
   "services": [
-    "portable/whole_program/conversions/pointer_globals.c",
     "portable/whole_program/platform/font_blit.c",
     "portable/whole_program/window_refs.c",
     "portable/whole_program/window_runtime_owner.c",
@@ -195,12 +194,6 @@
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
-      "detail": "Eleven unproved canonical ordinary storage symbols use explicit native memory representations; current capacities/lifetimes do not close DOS storage proof.",
-      "id": "native-storage-ownership",
-      "status": "OPEN"
-    },
-    {
-      "gate": "SEMANTIC/PORT-BLOCKING",
       "detail": "Font bitmap native group is source-owned1280 bytes; larger output remains unsupported without source storage proof.",
       "id": "native-font-output-domain",
       "status": "OPEN"
@@ -227,13 +220,6 @@
       "status": "OPEN"
     },
     {
-      "gate": "SEMANTIC/PORT-BLOCKING",
-      "module": "root:208F",
-      "detail": "Canonical source now owns the mutable four-byte icon Handle slot. No game master-cell/payload producer, extent, lifetime, activation or computed/menu alias closure is admitted; the native conversion only widens its pointer representation.",
-      "id": "native-icon-lifetime",
-      "status": "OPEN"
-    },
-    {
       "id": "native-event-omitted-word",
       "status": "OPEN",
       "gate": "SEMANTIC/PORT-BLOCKING",
@@ -241,11 +227,11 @@
       "detail": "Four-word DOS enqueue calls inherit an unprovided fifth Event.v word; native supplies zero. Original-instruction controls prove differing queued v under caller-stack contrast, while explicit fifth-zero controls remain equal. Coordinate observers exist; full interleaving/observer closure remains required. See evidence/canonical/event-omitted-word/."
     },
     {
-      "id": "native-menu-allocation-policy",
+      "id": "native-clip-allocation-policy",
       "status": "OPEN",
       "gate": "SEMANTIC/PORT-BLOCKING",
-      "module": "Menu/clip native reservations",
-      "detail": "Menu title pointer storage and clip/mono reservations introduce host allocation and failure paths around unresolved ordinary storage. Establish extents/lifetimes and failure correspondence, then remove source-flow workarounds in favor of necessary platform services."
+      "module": "Clip native reservation",
+      "detail": "The unresolved fixed clip storage is represented by a host pointer and dynamic reservation. Its owner, extent and lifetime remain unproved, and the reservation introduces native allocation and failure paths. This one contract supersedes the broader native-storage-ownership contract now that all other formerly duplicated ordinary storage comes directly from canonical owners."
     },
     {
       "id": "native-drive-device-policy",

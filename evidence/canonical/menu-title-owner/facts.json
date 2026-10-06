@@ -1,0 +1,648 @@
+{
+  "schema": "simant-menu-title-supported-owner-v1",
+  "scope": "Successful pinned shipped normal game; functional footprint, not historical extent or arbitrary API/event IDs.",
+  "providers": [
+    {
+      "name": "fd_50F6_46A8",
+      "C_type": "int far",
+      "count": 5,
+      "element_size": 2,
+      "length": 10,
+      "lifetime": "static"
+    },
+    {
+      "name": "fd_50F6_46BC",
+      "C_type": "int far",
+      "count": 5,
+      "element_size": 2,
+      "length": 10,
+      "lifetime": "static"
+    }
+  ],
+  "expected_object_shape": {
+    "communals": [
+      {
+        "name": "_fd_50F6_46A8",
+        "kind": "far",
+        "length": 10,
+        "count": 5,
+        "element_size": 2
+      },
+      {
+        "name": "_fd_50F6_46BC",
+        "kind": "far",
+        "length": 10,
+        "count": 5,
+        "element_size": 2
+      }
+    ],
+    "publics": [],
+    "fixups": [],
+    "code_bytes": 0,
+    "live_initialized_bytes": 0,
+    "local_publics": [],
+    "imports": [],
+    "live_segments": []
+  },
+  "menu_payload_sha256": "4b8b92a60651c809455189afff58c547eb34593f427aa35e1c8a855f51f732e4",
+  "source_sha256": {
+    "src/root/m1FD2.c": "fd800b1dd5270dab48c61ea53b3fbfbb1d38b4c593542852a2d212993be1841c",
+    "src/root/m1B73.asm": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+    "src/S10/m35F5.c": "e68eeb865aedf6ff9e2f72ec9fa3f3ab620ed0dd788ec967c59cf6f8f92fdf99",
+    "src/S17/m384C.c": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+    "src/S19/m384C.c": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+    "src/S11/m35F5.c": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+    "src/S20/m39F1.c": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+    "src/root/m1C62.c": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36",
+    "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+    "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+    "src/root/m19A9.c": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+    "src/root/m2CFB.asm": "d12d1eedb44a03197c55abf8701ee5f6dfc71a4472ab66d610ae68a3da79d981",
+    "src/root/m1A53.c": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+    "src/root/m1A96.c": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+    "src/root/m171C.c": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052"
+  },
+  "complete_symbolic_consumer_files": {
+    "fd_50F6_46A8": [
+      "src/root/m1FD2.c",
+      "src/S10/m35F5.c",
+      "src/S17/m384C.c"
+    ],
+    "fd_50F6_46BC": [
+      "src/root/m1FD2.c",
+      "src/S10/m35F5.c",
+      "src/S17/m384C.c"
+    ],
+    "g_6054": [
+      "src/root/m1FD2.c"
+    ],
+    "fd_55B3_6054": [
+      "src/S10/m35F5.c",
+      "src/S17/m384C.c"
+    ],
+    "g_604C": [
+      "src/root/m1FD2.c"
+    ],
+    "fd_55B3_604C": [
+      "src/S10/m35F5.c"
+    ],
+    "g_2CBE": [
+      "src/S19/m384C.c"
+    ],
+    "f_1FD2_07CB": [
+      "src/root/m1FD2.c"
+    ],
+    "f_1FD2_0059": [
+      "src/root/m1FD2.c"
+    ],
+    "f_19A9_000B": [
+      "src/root/m19A9.c",
+      "src/root/m277E.c"
+    ]
+  },
+  "complete_direct_calls": [
+    {
+      "source": "src/root/m1C62.c",
+      "caller": "f_1C62_00D5",
+      "callee": "o10_35F5_0000",
+      "arguments": [
+        "x",
+        "y",
+        "\"Continue\"",
+        "0x900"
+      ]
+    },
+    {
+      "source": "src/root/m1C62.c",
+      "caller": "f_1C62_0415",
+      "callee": "o10_35F5_0000",
+      "arguments": [
+        "h",
+        "v",
+        "labels [ j ] + 1",
+        "j + 0x900"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_0059",
+      "callee": "f_1FD2_0198",
+      "arguments": [
+        "id"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_0059",
+      "callee": "f_1FD2_021B",
+      "arguments": [
+        "id"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_02FF",
+      "callee": "f_1FD2_032F",
+      "arguments": [
+        "f_1CE2_000C ( )",
+        "f_1B73_0D4B",
+        "100"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_032F",
+      "callee": "f_1B73_0B00",
+      "arguments": [
+        "& g_6016",
+        "fd_5071_0728"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_0390",
+      "callee": "f_1B73_0AC3",
+      "arguments": [
+        "& g_6016",
+        "fd_5071_0728"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_03EB",
+      "callee": "f_1B73_0B00",
+      "arguments": [
+        "& g_6004",
+        "fd_5071_03C4"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_044F",
+      "callee": "f_1B73_0B00",
+      "arguments": [
+        "& g_603A",
+        "fd_5071_0060"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_05FD",
+      "callee": "f_1FD2_0663",
+      "arguments": [
+        "1"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_07CB",
+      "callee": "o10_35F5_01C3",
+      "arguments": [
+        "& ev"
+      ]
+    },
+    {
+      "source": "src/root/m1FD2.c",
+      "caller": "f_1FD2_0883",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "& r",
+        "ticks"
+      ]
+    },
+    {
+      "source": "src/root/m22BF.c",
+      "caller": "win_SetObjSelectableState",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "( char far * ) o",
+        "obj"
+      ]
+    },
+    {
+      "source": "src/root/m22BF.c",
+      "caller": "win_SetGroupSelectableState",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "( char far * ) o",
+        "objNum"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_06B9",
+      "callee": "f_1FD2_0883",
+      "arguments": [
+        "rect . left",
+        "rect . top",
+        "0x64",
+        "0xf083",
+        "flag"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_06B9",
+      "callee": "f_1FD2_0883",
+      "arguments": [
+        "rect . right - size . x",
+        "rect . bottom - size . y",
+        "0x70",
+        "0xf084",
+        "flag"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_06B9",
+      "callee": "f_1FD2_0883",
+      "arguments": [
+        "rect . right -= size . x",
+        "rect . top",
+        "0x66",
+        "0xf085",
+        "flag"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_06B9",
+      "callee": "f_1FD2_0883",
+      "arguments": [
+        "rect . right -= size . x",
+        "rect . top",
+        "0x67",
+        "0xf085",
+        "flag"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_06B9",
+      "callee": "f_1FD2_0883",
+      "arguments": [
+        "rect . left",
+        "rect . top",
+        "0x65",
+        "0xf088",
+        "flag"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_06B9",
+      "callee": "f_1FD2_0883",
+      "arguments": [
+        "rect . right -= size . x",
+        "rect . top",
+        "0x69",
+        "0xf082",
+        "flag"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_0831",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "obj",
+        "win + i"
+      ]
+    },
+    {
+      "source": "src/root/m2505.c",
+      "caller": "f_2505_0831",
+      "callee": "f_1FD2_044F",
+      "arguments": [
+        "( char far * ) w",
+        "( win >> 8 ) - 0x500"
+      ]
+    },
+    {
+      "source": "src/root/m277E.c",
+      "caller": "f_277E_0000",
+      "callee": "f_19A9_000B",
+      "arguments": [
+        "f_0000_0000"
+      ]
+    },
+    {
+      "source": "src/S10/m35F5.c",
+      "caller": "o10_35F5_0000",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "& r",
+        "v"
+      ]
+    },
+    {
+      "source": "src/S10/m35F5.c",
+      "caller": "o10_35F5_00D7",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "& r",
+        "v"
+      ]
+    },
+    {
+      "source": "src/S10/m35F5.c",
+      "caller": "o10_35F5_01C3",
+      "callee": "o10_35F5_0384",
+      "arguments": [
+        "& sel",
+        "fd_55B3_6054 [ m + 1 ]"
+      ]
+    },
+    {
+      "source": "src/S10/m35F5.c",
+      "caller": "o10_35F5_0384",
+      "callee": "f_1B73_030F",
+      "arguments": [
+        "( curMenu << 4 ) + cur - 0x2ff",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "source": "src/S10/m35F5.c",
+      "caller": "o10_35F5_0384",
+      "callee": "f_1B73_030F",
+      "arguments": [
+        "ev . code",
+        "ev . xE",
+        "ev . h",
+        "ev . v",
+        "0"
+      ]
+    },
+    {
+      "source": "src/S10/m35F5.c",
+      "caller": "o10_35F5_0384",
+      "callee": "f_1B73_030F",
+      "arguments": [
+        "( curMenu - 0x30 ) << 4",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "source": "src/S11/m35F5.c",
+      "caller": "SetMenuEntries",
+      "callee": "SetMenuItemState",
+      "arguments": [
+        "item - 1",
+        "( fd_3D57_07CC == item - 0x43 ) ? 0x10 : 0x20"
+      ]
+    },
+    {
+      "source": "src/S11/m35F5.c",
+      "caller": "SetMenuEntries",
+      "callee": "f_1FD2_0135",
+      "arguments": [
+        "0x41",
+        "fd_50F6_047E ? \" Unpause\" : \" Pause\""
+      ]
+    },
+    {
+      "source": "src/S11/m35F5.c",
+      "caller": "SetMenuEntries",
+      "callee": "SetMenuItemState",
+      "arguments": [
+        "item - 1",
+        "fd_3D57_07A8 [ i ] ? 0x10 : 0x20"
+      ]
+    },
+    {
+      "source": "src/S17/m384C.c",
+      "caller": "o17_384C_0000",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "& g_5A9C",
+        "0xff00"
+      ]
+    },
+    {
+      "source": "src/S17/m384C.c",
+      "caller": "o17_384C_0039",
+      "callee": "f_1FD2_0663",
+      "arguments": [
+        "draw"
+      ]
+    },
+    {
+      "source": "src/S17/m384C.c",
+      "caller": "o17_384C_0039",
+      "callee": "o17_384C_0184",
+      "arguments": [
+        "fd_50F6_46A8 [ i ]",
+        "fd_50F6_46BC [ i ]",
+        "i - 0x200"
+      ]
+    },
+    {
+      "source": "src/S17/m384C.c",
+      "caller": "o17_384C_0184",
+      "callee": "f_1FD2_03EB",
+      "arguments": [
+        "& r",
+        "id"
+      ]
+    },
+    {
+      "source": "src/S19/m384C.c",
+      "caller": "o19_384C_0000",
+      "callee": "o10_35F5_01C3",
+      "arguments": [
+        "& ev"
+      ]
+    },
+    {
+      "source": "src/S19/m384C.c",
+      "caller": "o19_384C_0246",
+      "callee": "f_1B73_030F",
+      "arguments": [
+        "g_2CBE [ i ] . cmd",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "source": "src/S19/m384C.c",
+      "caller": "o19_384C_0383",
+      "callee": "f_1B73_030F",
+      "arguments": [
+        "cmd",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "source": "src/S20/m39F1.c",
+      "caller": "IBMInitStuff",
+      "callee": "o17_384C_0039",
+      "arguments": [
+        "1"
+      ]
+    },
+    {
+      "source": "src/S20/m39F1.c",
+      "caller": "IBMInitStuff",
+      "callee": "o17_384C_0039",
+      "arguments": [
+        "0"
+      ]
+    }
+  ],
+  "key_command_pairs": [
+    [
+      2081,
+      65024
+    ],
+    [
+      2065,
+      65025
+    ],
+    [
+      2095,
+      65026
+    ],
+    [
+      2072,
+      65027
+    ],
+    [
+      2079,
+      65028
+    ],
+    [
+      2108,
+      65024
+    ],
+    [
+      2109,
+      65025
+    ],
+    [
+      2110,
+      65026
+    ],
+    [
+      2111,
+      65027
+    ],
+    [
+      2112,
+      65028
+    ],
+    [
+      41,
+      64833
+    ],
+    [
+      33,
+      64835
+    ],
+    [
+      64,
+      64836
+    ],
+    [
+      35,
+      64837
+    ],
+    [
+      36,
+      64838
+    ],
+    [
+      14,
+      64771
+    ],
+    [
+      19,
+      64773
+    ],
+    [
+      1,
+      64774
+    ],
+    [
+      12,
+      64772
+    ],
+    [
+      5,
+      64785
+    ],
+    [
+      13,
+      64786
+    ],
+    [
+      2,
+      64787
+    ],
+    [
+      3,
+      64788
+    ],
+    [
+      20,
+      64791
+    ],
+    [
+      7,
+      64817
+    ],
+    [
+      10,
+      64818
+    ],
+    [
+      11,
+      64819
+    ],
+    [
+      24,
+      64776
+    ],
+    [
+      17,
+      64776
+    ],
+    [
+      25,
+      64801
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "geometry_writer_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "delivered_FE_low_bytes": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "historical_capacity": "not claimed",
+  "historical_allocation_TU": "not claimed",
+  "proof": "evidence/canonical/menu-title-owner/review.md",
+  "regression": "tests/test_resource_domains.py",
+  "oracle_probe": "evidence/canonical/shipped-resource-domain/menu_probe.py"
+}

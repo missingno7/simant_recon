@@ -66,13 +66,6 @@ def _adapt_s17_body(body: str) -> str:
         raise ValueError('S17 source operation order changed')
     return body
 
-def _geometry_pointer_views(source: str) -> str:
-    for name in ('fd_50F6_46A8', 'fd_50F6_46BC'):
-        (source, count) = re.subn('(?m)^extern\\s+int\\s+far\\s+' + name + '\\[\\];$', 'extern int far *' + name + ';', source)
-        if count != 1:
-            raise ValueError(f'menu geometry source declaration changed: {name}')
-    return source
-
 def adapt_s17_source(source: str) -> str:
     """Adapt canonical S17 TU while preserving all unrelated source text."""
     (source, count) = re.subn('(?m)^extern\\s+long\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+db_LoadObject\\(int\\s+object,\\s*int\\s+kind\\);$', 'extern SimHandle db_LoadObject(int object, int kind);', source, count=1)
@@ -84,11 +77,11 @@ def adapt_s17_source(source: str) -> str:
     (start, end) = _body_span(source, 'o17_384C_0039')
     source = source[:start] + _adapt_s17_body(source[start:end]) + source[end:]
     headers = '#include "portable/whole_program/platform/handles.h"\n#include "portable/whole_program/platform/resource_menu_view.h"\nextern int32_t f_171C_1C1C(SimHandle handle);\n'
-    return headers + _geometry_pointer_views(source)
+    return headers + source
 
 def adapt_s10_source(source: str) -> str:
     """Map S10's over-wide source view to the same native char*** owner."""
     (source, count) = re.subn('(?m)^extern\\s+char\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+fd_55B3_6054;$', 'extern char ***fd_55B3_6054;', source, count=1)
     if count != 1:
         raise ValueError('S10 fd_55B3_6054 source declaration changed')
-    return _geometry_pointer_views(source)
+    return source

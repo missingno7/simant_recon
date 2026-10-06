@@ -1,0 +1,250 @@
+{
+  "status": "PASS",
+  "schema": "simant-window-palette-domain-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "inputs": {
+    "assets/HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "assets/HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+    "assets/SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+    "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+    "assets/SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+    "assets/SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "resource_domain": {
+    "windows": 34,
+    "objects": 285,
+    "palette_rows": 16,
+    "row_bytes": 6,
+    "anomalies": [
+      [
+        18,
+        3,
+        1,
+        40963,
+        0,
+        63
+      ]
+    ],
+    "slider_links": [
+      [
+        22,
+        8,
+        5641
+      ]
+    ],
+    "default_databases_kind0_ids_0_to_40": [
+      [
+        "HCEGANT",
+        0
+      ],
+      [
+        "HCEGANT",
+        1
+      ],
+      [
+        "HCEGANT",
+        2
+      ],
+      [
+        "HCEGANT",
+        3
+      ],
+      [
+        "HCEGANT",
+        4
+      ],
+      [
+        "HCEGANT",
+        5
+      ],
+      [
+        "HCEGANT",
+        6
+      ],
+      [
+        "HCEGANT",
+        7
+      ],
+      [
+        "HCEGANT",
+        8
+      ],
+      [
+        "HCEGANT",
+        9
+      ],
+      [
+        "HCEGANT",
+        10
+      ],
+      [
+        "HCEGANT",
+        11
+      ],
+      [
+        "HCEGANT",
+        12
+      ],
+      [
+        "HCEGANT",
+        13
+      ],
+      [
+        "HCEGANT",
+        14
+      ],
+      [
+        "HCEGANT",
+        15
+      ],
+      [
+        "HCEGANT",
+        16
+      ],
+      [
+        "HCEGANT",
+        17
+      ],
+      [
+        "HCEGANT",
+        18
+      ],
+      [
+        "HCEGANT",
+        19
+      ],
+      [
+        "HCEGANT",
+        20
+      ],
+      [
+        "HCEGANT",
+        21
+      ],
+      [
+        "HCEGANT",
+        22
+      ],
+      [
+        "HCEGANT",
+        23
+      ],
+      [
+        "HCEGANT",
+        24
+      ],
+      [
+        "HCEGANT",
+        25
+      ],
+      [
+        "HCEGANT",
+        26
+      ],
+      [
+        "HCEGANT",
+        27
+      ],
+      [
+        "HCEGANT",
+        28
+      ],
+      [
+        "HCEGANT",
+        29
+      ],
+      [
+        "HCEGANT",
+        30
+      ],
+      [
+        "HCEGANT",
+        31
+      ],
+      [
+        "HCEGANT",
+        32
+      ],
+      [
+        "HCEGANT",
+        33
+      ]
+    ]
+  },
+  "source_review_sha256": "46c1f62042d34eb7a2fa4c3066c877e48ce578c0fcf550e25cf862113684bc07",
+  "source_inventory_count": 194,
+  "original_controls": {
+    "original_checked_objects": 285,
+    "original_setter_cases": 1138,
+    "original_border_cases": 52,
+    "selected63_contrast_pointer_offset": 378,
+    "numeric_valid_rows_checked": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "numeric16_contrast_pointer_offset": 96,
+    "models": [
+      "successful locked window resource lookup",
+      "graphics sink calls"
+    ],
+    "scope": "Bounded original instruction corroboration; no full DOSBox-X runtime acceptance"
+  },
+  "save_load": {
+    "original_descriptors": 307,
+    "protected_ranges_intersected": 0,
+    "protected": {
+      "palette": {
+        "linear": 349762,
+        "bytes": 96
+      },
+      "palette pointer": {
+        "linear": 387102,
+        "bytes": 4
+      },
+      "window master handles": {
+        "linear": 388448,
+        "bytes": 180
+      },
+      "cached window pointers": {
+        "linear": 387106,
+        "bytes": 180
+      }
+    },
+    "scope": "Successful valid-state saves; all descriptors point into static image, not heap object blocks"
+  },
+  "negative_controls": [
+    "direct_foreign_pointer",
+    "address_taken_setter",
+    "color_writer",
+    "raw_window_pointer",
+    "legacy_alias_setter",
+    "legacy_alias_address_taken",
+    "legacy_data_writer",
+    "mangled_asm_reference",
+    "uppercase_asm_reference",
+    "selected_field_writer",
+    "rogue_state_owner_function",
+    "input_mutation:assets/HCEGANT.NDX",
+    "input_mutation:assets/HCEGANT.DAT",
+    "input_mutation:assets/SHARED.NDX",
+    "input_mutation:assets/SHARED.DAT",
+    "input_mutation:assets/SOUND.NDX",
+    "input_mutation:assets/SOUND.DAT",
+    "input_mutation:assets/SIMANT.EXE"
+  ]
+}

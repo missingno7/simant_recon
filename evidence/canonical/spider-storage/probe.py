@@ -210,6 +210,38 @@ def sentinel_controls():
     return result
 
 
+def startup_raw_controls():
+    """Check the raw VGA leaf reached by the zeroed first-use header."""
+    result = []
+    for x in (0, 1):
+        m, touched = machine('o00_31AD_0D06')
+        error = None
+        try:
+            m.run(b.Case(f'zero-width-raw-x{x}', args=[x, 0, 4, 0x7000, 0, 480],
+                return_kind='void', writes=[
+                    (BUF, words(0, 0) + bytes([0xA6]) * 6272),
+                    (b.symbol_address('g_4333'), b'\x01'),
+                    (b.symbol_address('g_3DB0'), words(0xA000)),
+                    (b.symbol_address('g_3DB6'), words(80)),
+                    (b.symbol_address('fd_55B3_3DE6'), words(0)),
+                    (b.symbol_address('fd_55B3_3DE8'), words(0)),
+                    (b.symbol_address('g_3DFC'), b''.join(words(i * 80) for i in range(480)))],
+                max_instructions=2_000_000))
+        except b.ExecutionError as exc:
+            error = str(exc)
+        reads = sorted(touched['reads'])
+        if x == 0:
+            assert error is None and not reads and not touched['writes']
+        else:
+            assert error is not None and any(value >= 4 for value in reads)
+        result.append({'x': x, 'width': 0, 'height': 480,
+            'reads': span(touched['reads']), 'writes': span(touched['writes']),
+            'completed': error is None,
+            'scope': ('Actual zero-initialized first-use alignment.' if x == 0 else
+                'Synthetic nonzero-alignment negative contrast; excluded by first-use zero initialization.')})
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', required=True, help='Fresh output directory beneath build/')
@@ -236,7 +268,8 @@ def main():
         'missing_resource_bound_negative_control': resource_bound_negative_control(),
         'last_pixel_line_controls': line_controls(),
         'screen_blit_controls': blit_controls(),
-        'sentinel_clip_controls': sentinel_controls()}
+        'sentinel_clip_controls': sentinel_controls(),
+        'startup_zero_width_raw_controls': startup_raw_controls()}
     OUT.write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({'receipt': str(OUT), 'resources': len(receipt['hcegant_sprite_controls']),
         'lines': len(receipt['last_pixel_line_controls']), 'blits': len(receipt['screen_blit_controls'])}))

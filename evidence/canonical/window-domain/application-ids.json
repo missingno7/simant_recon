@@ -1,0 +1,467 @@
+{
+  "schema": "simant-application-proxy-id-roots-v1",
+  "status": "REVIEWED_APPLICATION_HIGH_BYTE_ARITHMETIC",
+  "object_validity_claimed": false,
+  "handle_provider_proposed": false,
+  "source_sha256": {
+    "src/S04/m35F5.c": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+    "src/S05/m35F5.c": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+    "src/S05/m3663.c": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+    "src/S08/m35F5.c": "f950e7c22b112adef492d745164e80755669e2e9218052d4b9b48e5c8a22adc6",
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "src/S22/m39C7.c": "58f8a4a7ae524fae65d8abca7972253e6f0e83cf384cfcb356bc5a580ac738c6",
+    "src/S22/m3BBD.c": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+    "src/data/d3D57.c": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+    "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+    "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+    "src/root/m00BA.c": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+    "src/root/m1FD2.c": "fd800b1dd5270dab48c61ea53b3fbfbb1d38b4c593542852a2d212993be1841c",
+    "src/root/m1B73.asm": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+    "src/root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020"
+  },
+  "census": {
+    "data_aliases": [
+      {
+        "alias": "_fd_50F6_104C",
+        "target": "_CurExpTool",
+        "offset": 0,
+        "kind": "data"
+      },
+      {
+        "alias": "_fd_3D57_07B6",
+        "target": "_ExpSubStates",
+        "offset": 0,
+        "kind": "data"
+      }
+    ],
+    "writers": [
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "EditScentMenu",
+        "root": "scent_state",
+        "expression": "fd_3D57_07BE = r - 1"
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "SetExpTool",
+        "root": "CurExpTool",
+        "expression": "fd_50F6_104C = tool"
+      },
+      {
+        "source": "src/S05/m3663.c",
+        "function": "DoExpMenu",
+        "root": "ExpSubStates",
+        "expression": "fd_3D57_07B6[cur] = n - 2"
+      },
+      {
+        "source": "src/S08/m35F5.c",
+        "function": "InitSimVars",
+        "root": "CurExpTool",
+        "expression": "CurExpTool = 0"
+      },
+      {
+        "source": "src/S08/m35F5.c",
+        "function": "InitYelloAnt",
+        "root": "scent_state",
+        "expression": "fd_3D57_07BE = -1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "function": "SetAlarmDropState",
+        "root": "scent_state",
+        "expression": "fd_3D57_07BE = 0"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "function": "SetAlarmDropState",
+        "root": "scent_state",
+        "expression": "fd_3D57_07BE = -1"
+      }
+    ],
+    "calls": [
+      {
+        "source": "src/root/m218D.c",
+        "function": "f_218D_023A",
+        "callee": "_win_SetProxItem",
+        "arguments": [
+          "obj"
+        ]
+      },
+      {
+        "source": "src/root/m218D.c",
+        "function": "f_218D_023A",
+        "callee": "_win_SetProxItem",
+        "arguments": [
+          "-1"
+        ]
+      },
+      {
+        "source": "src/root/m22BF.c",
+        "function": "win_DoProxMenu",
+        "callee": "_win_SetProxItem",
+        "arguments": [
+          "win + item + 2"
+        ]
+      },
+      {
+        "source": "src/S04/m35F5.c",
+        "function": "MapToolsMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0xa00",
+          "-1",
+          "(r.right - size.x + r.left) / 2",
+          "r.top - size.y - 4"
+        ]
+      },
+      {
+        "source": "src/S04/m35F5.c",
+        "function": "MapToolsMenu",
+        "callee": "SetExpTool",
+        "arguments": [
+          "fd_50F6_104C"
+        ]
+      },
+      {
+        "source": "src/S04/m35F5.c",
+        "function": "MapToolsMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0xb00",
+          "-1",
+          "(r.right - size.x + r.left) / 2",
+          "r.top - size.y - 4"
+        ]
+      },
+      {
+        "source": "src/S04/m35F5.c",
+        "function": "MapToolsMenu",
+        "callee": "DoExpMenu",
+        "arguments": [
+          "(r.right - size.x + r.left) / 2",
+          "r.top - size.y - 4"
+        ]
+      },
+      {
+        "source": "src/S04/m35F5.c",
+        "function": "MapToolsMenu",
+        "callee": "SetExpTool",
+        "arguments": [
+          "item"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "EditScentMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0x600",
+          "fd_3D57_07BE + 1"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "EditToolsMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0xa00",
+          "-1",
+          "r.right + 2",
+          "r.top"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "EditToolsMenu",
+        "callee": "SetExpTool",
+        "arguments": [
+          "fd_50F6_104C"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "EditToolsMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0xb00",
+          "-1",
+          "r.right + 2",
+          "r.top"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "EditToolsMenu",
+        "callee": "DoExpMenu",
+        "arguments": [
+          "r.right + 2",
+          "r.top"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "EditToolsMenu",
+        "callee": "SetExpTool",
+        "arguments": [
+          "item"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "AntMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0x800",
+          "-1",
+          "ev->h",
+          "ev->v"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "AntMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0x700",
+          "-1",
+          "ev->h",
+          "ev->v"
+        ]
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "function": "AntMenu",
+        "callee": "win_DoProxMenu",
+        "arguments": [
+          "0x2000",
+          "-1",
+          "ev->h",
+          "ev->v"
+        ]
+      },
+      {
+        "source": "src/S05/m3663.c",
+        "function": "DoExpMenu",
+        "callee": "_win_SetProxItem",
+        "arguments": [
+          "fd_50F6_104C + 0x902"
+        ]
+      },
+      {
+        "source": "src/S05/m3663.c",
+        "function": "DoExpMenu",
+        "callee": "_win_SetProxItem",
+        "arguments": [
+          "i"
+        ]
+      },
+      {
+        "source": "src/S05/m3663.c",
+        "function": "DoExpMenu",
+        "callee": "_win_SetProxItem",
+        "arguments": [
+          "fd_3D57_07B6[cur] + openSub + 2"
+        ]
+      }
+    ],
+    "save_record_count": 307,
+    "save_coverage": {
+      "CurExpTool": [
+        {
+          "size": 2,
+          "count": 1,
+          "expression": "&CurExpTool",
+          "bytes": 2
+        }
+      ],
+      "ExpSubStates": [],
+      "fd_3D57_07BE": []
+    }
+  },
+  "controls": {
+    "expansion": {
+      "all_history_bytes": 256,
+      "minimum_proxy_id": 2946,
+      "maximum_proxy_id": 3201,
+      "output_sha256": "7e5c623a460902cb39f7169a2deae823e0cb81711f372ebf5760b4324aed2a6b",
+      "positive": {
+        "history_byte": 0,
+        "proxy_ids": [
+          2307,
+          3074
+        ],
+        "result": 1,
+        "blocks": 63
+      },
+      "signed_byte_contrast": {
+        "history_byte": 128,
+        "proxy_ids": [
+          2307,
+          2946
+        ],
+        "result": 1,
+        "blocks": 63
+      },
+      "minus_one_skip": {
+        "history_byte": 255,
+        "proxy_ids": [
+          2307
+        ],
+        "result": 1,
+        "blocks": 61
+      }
+    },
+    "cleared_proxy_contrast": {
+      "history_byte": 0,
+      "proxy_ids": [
+        2307,
+        3074
+      ],
+      "result": 253,
+      "blocks": 109
+    },
+    "scent": [
+      {
+        "item": 0,
+        "proxy_id": 1538,
+        "result": 0,
+        "event_reads": 1,
+        "blocks": 22
+      },
+      {
+        "item": 253,
+        "proxy_id": 1791,
+        "result": 253,
+        "event_reads": 1,
+        "blocks": 22
+      },
+      {
+        "item": 0,
+        "proxy_id": 1538,
+        "result": 0,
+        "event_reads": 2,
+        "blocks": 33
+      }
+    ],
+    "scent_state_transitions": [
+      {
+        "menu_result": -1,
+        "scent_state": 0,
+        "blocks": 8
+      },
+      {
+        "menu_result": 0,
+        "scent_state": -1,
+        "blocks": 15
+      },
+      {
+        "menu_result": 253,
+        "scent_state": 252,
+        "blocks": 16
+      }
+    ],
+    "scope": "Unchanged DoExpMenu, EditScentMenu and win_DoProxMenu instruction bodies; UI/event/drawing/lock consumers are explicit boundary models, no full-game ID provenance admission."
+  },
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "object_graphics_effects_remaining_open": true,
+  "nominal_253_reachability_proven": false,
+  "conditional_history_write": {
+    "oracle_segment": 15703,
+    "oracle_offset": 2227,
+    "source_object": "fd_3D57_087A",
+    "byte_index": 57,
+    "source_extent_bytes": 72,
+    "ordinary_reachability_proven": false,
+    "disposition": "Existing object/history memory-effects gate; no placement/deadness waiver."
+  },
+  "popup_resources": [
+    {
+      "id": 6,
+      "flags": 6209,
+      "object_count": 8,
+      "proxy_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": 9,
+      "flags": 6209,
+      "object_count": 10,
+      "proxy_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "id": 12,
+      "flags": 6209,
+      "object_count": 4,
+      "proxy_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 13,
+      "flags": 6209,
+      "object_count": 7,
+      "proxy_indices": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": 14,
+      "flags": 6209,
+      "object_count": 4,
+      "proxy_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 15,
+      "flags": 6209,
+      "object_count": 4,
+      "proxy_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 16,
+      "flags": 6209,
+      "object_count": 4,
+      "proxy_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 17,
+      "flags": 6209,
+      "object_count": 4,
+      "proxy_indices": [
+        2,
+        3
+      ]
+    }
+  ]
+}

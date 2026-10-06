@@ -4,13 +4,7 @@
 #include <stdint.h>
 #include "../types/fonts.h"
 
-/* Native pointer table for source window numbers 0..44. The original table is
- * far pointers in DGROUP:55B3:9230; these entries are host-width pointers and
- * do not preserve DOS byte offsets. */
-enum { SIM_SOURCE_WINDOW_COUNT = 45, SIM_SOURCE_DATABASE_COUNT = 4,
-       SIM_SOURCE_FONT_COUNT = 4 };
-typedef char **SimSourceWindowHandle;
-extern SimSourceWindowHandle win_handles[SIM_SOURCE_WINDOW_COUNT];
+enum { SIM_SOURCE_DATABASE_COUNT = 4, SIM_SOURCE_FONT_COUNT = 4 };
 
 /* GetFreeHandle and the adjacent 3B58 symbol bound the DOS int table to four
  * entries (3B50..3B57). */

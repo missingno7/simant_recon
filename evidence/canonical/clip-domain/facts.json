@@ -1,0 +1,91 @@
+{
+  "schema": "simant-clip-precheck-control-v1",
+  "admitted": false,
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "inputs": {
+    "src/root/m1E57.c": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+    "src/root/m1D8E.c": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+    "src/program.json": "04443612a7905b0872812232c614356998824a5fad47ad1c3899ea82c9aa7377",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "faf038047fbed7ef219666d90c5b1acaa4c7b9b5452992031932d02dc4d43836",
+    "tools/behavior.py": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "11235c789930389992de54cbae8b6fd3f7a963d10c51c68e76f8de72c3976c2a",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/workspace.py": "ae007fdbc19be71071b45f5a9bb8d15e844c8f1ed7354a44fead2b2fae33afdc",
+    "evidence/canonical/clip-domain/replay.py": "b62c618829f6732045ba407d9401e69a1eab06de1ea68c564e9a927f13a5c34a",
+    "evidence/canonical/clip-domain/review.md": "da01d5612ed6c22137dda97365a05507a1daf17b4ab3ee0fc25ddd138dac24e7"
+  },
+  "unicorn_version": "2.1.4",
+  "cases": [
+    {
+      "bars_per_axis": 14,
+      "windows": 29,
+      "completed": true,
+      "visible_rectangles": 225,
+      "pairwise_nonoverlap": true,
+      "scratch_allocations": [
+        {
+          "tag": "tmprects",
+          "bytes": 2048
+        },
+        {
+          "tag": "clipout",
+          "bytes": 2048
+        }
+      ],
+      "boundary_events": [],
+      "tmp_tail": "7a7a7a7a7a7a7a7a"
+    },
+    {
+      "bars_per_axis": 15,
+      "windows": 31,
+      "completed": false,
+      "visible_rectangles": 256,
+      "pairwise_nonoverlap": true,
+      "scratch_allocations": [
+        {
+          "tag": "tmprects",
+          "bytes": 2048
+        },
+        {
+          "tag": "clipout",
+          "bytes": 2048
+        }
+      ],
+      "boundary_events": [
+        {
+          "event": "scratch-overrun",
+          "tag": "tmprects",
+          "displacement": 2050,
+          "bytes": 2,
+          "value": 32768,
+          "pc": "1D8E:02AD"
+        },
+        {
+          "event": "Punt-entry",
+          "message": "C097: Clip overflow %d",
+          "count": 256
+        }
+      ],
+      "tmp_tail": "7a7a00807a7a7a7a"
+    }
+  ],
+  "executed_original_bodies": [
+    "f_1E57_038E",
+    "f_1E57_0009",
+    "f_1E57_0006",
+    "f_1E57_0007",
+    "f_1D8E_02BD",
+    "f_1D8E_003F",
+    "f_1D8E_0002"
+  ],
+  "modeled_boundaries": [
+    "heap allocation/lock/unlock/reallocation/free",
+    "window rectangle lookup",
+    "far memcpy"
+  ],
+  "stop": "Immediately before entering Punt; no fatal continuation or physical heap corruption claim.",
+  "limits": "Synthetic window geometry and stack order. No shipped-resource reachability, fd_50F6_3C14 capacity, original allocation extent or standalone closure."
+}

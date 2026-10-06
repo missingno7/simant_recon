@@ -1,0 +1,65 @@
+{
+  "schema": "simant-sample-free-list-validation-v1",
+  "scope": "Supported successful lifetime through the first sample free-list fatal boundary: 39 far pointers. Returning-Punt continuation and historical placement remain excluded.",
+  "canonical_closure": false,
+  "historical_validation": {
+    "status": "PASS",
+    "command": "python tools/validate.py",
+    "codegen_probes": 49,
+    "unit_tests": "PASS; 2 intentional skips",
+    "runtime_members": 90,
+    "runtime_bytes": 12339,
+    "runtime_data_segments": 38,
+    "runtime_data_bytes": 2021,
+    "far_bss_modules_measured": 74,
+    "far_bss_bytes": 19408,
+    "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f"
+  },
+  "canonical_dos": {
+    "status": "EXPECTED_REFUSAL",
+    "translation_units": 198,
+    "storage_providers": 71,
+    "compile_errors": 0,
+    "unresolved_imports": 2,
+    "semantic_gates": 3,
+    "unresolved_data_ranges": 6,
+    "unattributed_bytes": 44,
+    "original_game_byte_fallback": 0
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "command": "python -m unittest tests.test_sample_free_list_domain tests.test_supported_dispatch_domains tests.test_monochrome_vga_domain",
+    "tests": 13
+  },
+  "native_build": {
+    "status": "PASS",
+    "canonical_sources": 169,
+    "canonical_compile_pass": 168,
+    "expected_platform_boundaries": 1,
+    "native_services_pass": 77,
+    "conversion_failures": 0,
+    "undefined_symbols": 0
+  },
+  "native_cleanup": {
+    "status": "PASS",
+    "retired": [
+      "native fd_50F6_0150 storage owner"
+    ]
+  },
+  "repository_guard": "PASS",
+  "pins": {
+    "src/state/sample-free-list.c": "40aa22a5e6e8f85dfc305ea2a08942b53e2a11435dca7f1c330825f5da47d455",
+    "src/program.json": "fa37ff146ce0d8cc9cd3aa822df0500e8fd3638bbc3f97403eae7748612f2644",
+    "evidence/canonical/sample-free-list/replay.py": "030c6ff557cc53f23beee169cd288799514b6c12bddab972ccc7bd5800089171",
+    "evidence/canonical/sample-free-list/facts.json": "1a1523f34de1a539ca3ed3b4b70ec9f7cff46df1e4f529c7b6ef22746b82f655",
+    "evidence/canonical/sample-free-list/review.md": "7ea83b06b7693ee5b5d0bbd4a0eeafc9abd344fdf835e8d796cad3cfd46bed13",
+    "evidence/canonical/sample-free-list/publication.json": "968a63804efdc8279e9fbc188bb765789071e285c0e58b0092d41b7c741e0b38",
+    "evidence/canonical/storage.json": "88540bcee11759375dd44d420f4a106c023dadf2a50cc8ef5b0852ac9ea287e8",
+    "evidence/canonical/blockers.json": "20c31390d4f97aa5be48d37072578ee46919474b540f7fa776236cb157a1f3fe",
+    "tests/test_sample_free_list_domain.py": "90559849c79cf5450e8ebfef96fdb9cfd8074999d5f4ca31110581eb7edb6c86",
+    "portable/whole_program/platform/audio_state.c": "1acaebf5dfb9f168e7edbeb31abc1d49f71b96f0c74c280dbea4706af4b9e318",
+    "portable/whole_program/platform/audio_state.h": "e0501eb0ff8c546a136982a288b79b33965d54863fd84aafc7000f4b2f2506b4",
+    "portable/platform.json": "61d1f12d3305e777e6390dc48ed8740642b0b13ee42812830b5e099fdc4cc53f",
+    "layout/repository.json": "ef046478b9012853cd6a19c1d30593ae90c0e801a449247a46ff7856b2aec1d8"
+  }
+}

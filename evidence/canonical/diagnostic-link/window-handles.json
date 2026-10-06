@@ -1,0 +1,76 @@
+{
+  "schema": "simant-source-handles-diagnostic-observation-v1",
+  "status": "BOUNDED_FULL_GAME_OBSERVED",
+  "canonical_closure": false,
+  "program": {
+    "path": "src/program.json",
+    "sha256": "27260bb3ee3501805e4f613fd0f2d69d41d4d91f5e6d5867a7ca4abcc9144abf",
+    "bytes": 300198
+  },
+  "canonical_translation_units": 195,
+  "remaining_provisional_owners": 5,
+  "handle_owner": "src/state/window-handles.c",
+  "handle_cells": 34,
+  "handle_bytes": 136,
+  "prior_diagnostic_handle_cells": 256,
+  "link_status": "LINKED_NOT_EXECUTED",
+  "faults": {
+    "count": 0,
+    "first_lines": [],
+    "kind_counts": {
+      "unhandled_interrupt": 0,
+      "segment_limit": 0,
+      "game_abort": 0
+    }
+  },
+  "runtime_status": "TIME_LIMIT",
+  "observation": "Decoded VGA frame at 30 seconds shows SimAnt - Full Game, terrain, yellow ant, map and colony status windows. The 40-second replay has zero reported guest faults.",
+  "scope": "Diagnostic DOS retains five explicit storage assumptions, eight semantic gates and 44 bytes of data debt. No full gameplay, sound, exact terrain/RNG replay, or canonical standalone acceptance claim.",
+  "keyboard": {
+    "keys": [
+      "enter",
+      "enter",
+      "enter",
+      ",",
+      ",",
+      "kp_5",
+      "space"
+    ],
+    "delay_seconds": 5.0,
+    "pace_seconds": 2.0,
+    "command": "AUTOTYPE -w 5 -p 2 enter enter enter , , kp_5 space > INPUT.LOG",
+    "scope": "Scheduled emulator key events; scheduling alone does not prove game delivery or handling. Timing is not a state synchronization barrier."
+  },
+  "pins": [
+    {
+      "path": "build/workers/lead/window-handles-dos/build/build-report.json",
+      "sha256": "5b9b7bbdcc7157be5c8614f68d62b4ca4a9d759f8e31b05a3cee0e2d78419235",
+      "bytes": 350864
+    },
+    {
+      "path": "build/workers/lead/window-handles-dos/providers.json",
+      "sha256": "6ae521fc8fa1cc7d73628cb68b4698d594e5dd113ea051b92bd4110ee9342e5c",
+      "bytes": 2125
+    },
+    {
+      "path": "build/workers/lead/window-handles-dos/runtime/execution-report.json",
+      "sha256": "9bac381cb647901bd1c1cf3476f508588cdbec3ae47a54b0be758606e7817a4d",
+      "bytes": 47778
+    },
+    {
+      "path": "build/workers/lead/window-handles-dos/runtime/dosbox-runtime.log",
+      "sha256": "dc01f2034fe079bbbbdd626ac1953125929024d6076df9dd012e4557f1c5d1b2",
+      "bytes": 268295
+    },
+    {
+      "path": "build/workers/lead/window-handles-dos/runtime/frame30.png",
+      "sha256": "6e71dc8cedc8595c65e3bb7837f6bb6d8a45ea3a5db6a4b3e1cf8d85d9c6984c",
+      "bytes": 34172
+    }
+  ],
+  "linked_executable": {
+    "path": "build/workers/lead/window-handles-dos/build/link/SOURCE.EXE",
+    "sha256": "86881dabf7a15583dc4685a488b8bda1bad9ac7bb664c1c27188a1851b629b75",
+    "size": 500365
+  }
+}

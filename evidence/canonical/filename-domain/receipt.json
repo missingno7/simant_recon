@@ -1,0 +1,34 @@
+{
+  "schema": "simant-filename-domain-boundary-v1",
+  "scope": "DOSBox-X AH47 in isolated linked canonical assembly helper; no game execution",
+  "status": "POSITIVE_AND_NEGATIVE_CONFIRMED",
+  "owner_admitted": false,
+  "replay_sha256": "71e532a6f256ad5e7a620d8e21de9f90e3186edc69b2d399829f7b07ae919161",
+  "inputs": {
+    "evidence\\canonical\\filename-domain\\fixture.c": "591f01a19d055b114162cc39f8eb52ce8a0647abcf078aec371463edccee90aa",
+    "src\\root\\m1F66.asm": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+    "C:\\tools\\msc-6.00\\LIB\\llibcr.lib": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+    "C:\\tools\\msc-6.00\\LIB\\libh.lib": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+  },
+  "profiles": {
+    "helper": "msc600ax /AL /Os /Gs",
+    "goldman": "masm510 /Mx",
+    "linker": "rtlink400"
+  },
+  "dosbox_sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+  "linker_files": {
+    "RTLINK.EXE": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+    "RTLINK.DAT": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+    "RTLUTILS.LIB": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+    "RTLINKST.COM": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2"
+  },
+  "output_identities": {
+    "PROBE.OBJ": "677cc487ce72d74b5451ad4ea4e755cc8e90c755764b75a5e65339e86dd097db",
+    "GOLDMAN.OBJ": "c97658b81b4aaa1474bb2eba4627a9fd8de3ae293ef9f7b4ffc19050101bcf25",
+    "PROBE.EXE": "128e554b66d42034cfe8f404f225769d9fd13c16aeb63250a03209e4bb7b2ef6",
+    "PROBE.MAP": "b29e297abf32bd652272ae44267edee503a6f7dbfa5f90ba1ed331596185678f",
+    "LINK.LOG": "e45ecacd06ecd691b0fa372cb53bdf69655dd6832f01c3ddb17622c903a0163a",
+    "RUN.LOG": "9b4556b02aa43191cb17caea2891dba5f109ee4ab7ea2194d6898252eb45d7f8"
+  },
+  "run_log": "depth=0 length=3 nul=3 path=C:\\\ndepth=1 length=11 nul=11 path=C:\\AAAAAAAA\nafter-slash=12 requires=13 fits67=1\ndepth=2 length=20 nul=20 path=C:\\AAAAAAAA\\AAAAAAAA\nafter-slash=21 requires=22 fits67=1\ndepth=3 length=29 nul=29 path=C:\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\nafter-slash=30 requires=31 fits67=1\ndepth=4 length=38 nul=38 path=C:\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\nafter-slash=39 requires=40 fits67=1\ndepth=5 length=47 nul=47 path=C:\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\nafter-slash=48 requires=49 fits67=1\ndepth=6 length=56 nul=56 path=C:\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\nafter-slash=57 requires=58 fits67=1\ndepth=7 length=65 nul=65 path=C:\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\nafter-slash=66 requires=67 fits67=1\ndepth=8 length=67 nul=67 path=C:\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\AAAAAAAA\\A\nafter-slash=68 requires=69 fits67=0\n"
+}

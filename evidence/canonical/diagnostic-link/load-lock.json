@@ -1,0 +1,210 @@
+{
+  "schema": "simant-shared-load-lock-observation-v1",
+  "closure_eligible": false,
+  "conclusion": "Repeated selection produced the same original and source fatal after loading all records. A single original selection succeeds. The displayed 61 is not a window identity; an original conditional list helper lock leak is a candidate, not an observed cause of these runs.",
+  "inputs": [
+    {
+      "path": "assets/SIMANT.EXE",
+      "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "size": 506509
+    },
+    {
+      "path": "src/root/m23AE.c",
+      "sha256": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+      "size": 4888
+    },
+    {
+      "path": "src/root/m23E6.c",
+      "sha256": "d0a490f75ee880984374da56620d49d146da879e50895c81802b537cff7d2bc3",
+      "size": 12604
+    },
+    {
+      "path": "src/root/m218D.c",
+      "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "size": 8739
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src/S19/m384C.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+      "size": 7190
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "tools/behavior.py",
+      "sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155",
+      "size": 33694
+    }
+  ],
+  "runtime_observations": [
+    {
+      "case": "select-original",
+      "report": {
+        "path": "build/workers/lead/dos-load/select-original/execution-report.json",
+        "sha256": "82578f8e9af238c7fc5ff9052da25837285de6b848ed1af97848601b6a04ebf9",
+        "size": 21068
+      },
+      "game_log": {
+        "path": "build/workers/lead/dos-load/select-original/GAME.LOG",
+        "sha256": "7b456767e716b113527b06a681166f71a46b3317f4bca92a61950b8374f901b1",
+        "size": 79
+      },
+      "observation": "307 reads totaling 48386 bytes, then Window 61 locked when it should not be!"
+    },
+    {
+      "case": "select-source",
+      "report": {
+        "path": "build/workers/lead/dos-load/select-source/execution-report.json",
+        "sha256": "73524ddb5c56073a37a4640aa6ce75b71188480c2f51169bf21167e4e9e756b7",
+        "size": 52498
+      },
+      "game_log": {
+        "path": "build/workers/lead/dos-load/select-source/GAME.LOG",
+        "sha256": "7b456767e716b113527b06a681166f71a46b3317f4bca92a61950b8374f901b1",
+        "size": 79
+      },
+      "observation": "307 reads totaling 48386 bytes, then the same fatal"
+    },
+    {
+      "case": "single-original",
+      "report": {
+        "path": "build/workers/lead/dos-load/single-original/execution-report.json",
+        "sha256": "1010ed279eb8727cb00276d2b2a75bccbcdbf22dba3cacbc43817af2c8351915",
+        "size": 20355
+      },
+      "game_log": {
+        "path": "build/workers/lead/dos-load/single-original/GAME.LOG",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "observation": "One selection; all 307 reads; no guest fault observed over 60 seconds. Lead reviewed frame50 as paused restored original terrain."
+    }
+  ],
+  "assertion": {
+    "function": "win_NoWindowsShouldBeLocked",
+    "original_location": "root:23AE:0000",
+    "finding": "Scans 45 one-byte lock counters but calls Punt with only the format far pointer, omitting the loop index. The next variadic word is the saved caller SI. Decimal 61 is unrelated to which slot is locked.",
+    "controls": [
+      {
+        "actual_nonzero_lock_index": 22,
+        "caller_saved_SI": 61,
+        "events": [
+          {
+            "SI_loop_index": 22,
+            "observed_variadic_word": 61
+          }
+        ]
+      },
+      {
+        "actual_nonzero_lock_index": 1,
+        "caller_saved_SI": 61,
+        "events": [
+          {
+            "SI_loop_index": 1,
+            "observed_variadic_word": 61
+          }
+        ]
+      },
+      {
+        "actual_nonzero_lock_index": 1,
+        "caller_saved_SI": 77,
+        "events": [
+          {
+            "SI_loop_index": 1,
+            "observed_variadic_word": 77
+          }
+        ]
+      }
+    ],
+    "method": "Execute actual original instructions in tools/behavior.py with one nonzero count and chosen caller SI; observe Punt arguments with modeled Punt rather than aborting."
+  },
+  "save_schema": {
+    "original_location": "4E4B:0000",
+    "records": 307,
+    "method": "Decode original SaveRec records as size,count,offset,segment (four uint16 words), stop at zero count; test each physical interval against transient lock ranges.",
+    "excluded_ranges": [
+      {
+        "name": "lock_counts",
+        "original_segment": "55B3",
+        "offset": "8DA6",
+        "size": 45
+      },
+      {
+        "name": "window_pointer_cache",
+        "original_segment": "55B3",
+        "offset": "8CF2",
+        "size": 180
+      },
+      {
+        "name": "lock_enabled",
+        "original_segment": "55B3",
+        "offset": "644C",
+        "size": 2
+      },
+      {
+        "name": "lock_recursion",
+        "original_segment": "55B3",
+        "offset": "644E",
+        "size": 2
+      }
+    ],
+    "any_overlap": false,
+    "scope": "No direct save record restores these lock counters or cache/control fields. This does not exclude loaded state influencing later UI events."
+  },
+  "conditional_leak": {
+    "function": "f_23E6_01DC",
+    "original_location": "root:23E6:01DC",
+    "finding": "win_LockWin executes unconditionally; win_UnlockWin executes only when list text exists and signed list count is greater than requested line. The original count<=line branch at 0226 jumps to 024E, bypassing unlock at 0249; null text jumps to 0260.",
+    "controls": [
+      {
+        "line": 0,
+        "list_count": 1,
+        "text_handle_present": true,
+        "events": [
+          "lock",
+          "unlock",
+          "heap unlock"
+        ],
+        "unbalanced_window_lock": 0
+      },
+      {
+        "line": 1,
+        "list_count": 1,
+        "text_handle_present": true,
+        "events": [
+          "lock",
+          "heap unlock"
+        ],
+        "unbalanced_window_lock": 1
+      },
+      {
+        "line": 0,
+        "list_count": 1,
+        "text_handle_present": false,
+        "events": [
+          "lock"
+        ],
+        "unbalanced_window_lock": 1
+      }
+    ],
+    "modeled_boundaries": "Actual original helper executed; object/heap pointer access, lock/unlock calls and text-line lookup are callbacks. Observed lock call balance proves these conditional exits, not a complete original UI replay.",
+    "candidate_path": "File selector o09_35F5_03C6 holds window0x1600 across win_GetEvent. Root218D event dispatch calls f_23E6_0A53 for type4 list objects. That computes a row from event v, object top, font height and list top, then calls f_23E6_01DC without an explicit list-count bound when selection is zero. Selector exit removes its own lock only.",
+    "postload_assertion": "No assertion is inside LoadGame. Assertions are at main loop entry and o19_384C_0000 event-pump entry; LoadGame returns through the latter after postload windows/pause rebuild.",
+    "next_control": "Inspect the original lock-count vector just before the fatal, and the event/row passed to f_23E6_01DC. A nonzero slot22 plus out-of-range file-list row would support this candidate. Any other slot or exclusively valid rows would require a different path."
+  },
+  "limits": [
+    "Actual failing lock slot, row and leaking call have not been captured.",
+    "Repeated selection is an input/timing counterexample, not proof that ordinary Load always fails.",
+    "No source, save, object or executable patch; no RNG cause or storage-owner closure.",
+    "Helper behavior is an original quirk retained in canonical source; no proposed repair."
+  ],
+  "lifecycle": "Exploratory harness retired with tools/workspace.py after recording these bounded controls; runtime witnesses are retained and owned by lead."
+}

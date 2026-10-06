@@ -40,11 +40,12 @@ intersect the slot's low/high words. Menu capacity and these physical effects
 remain unresolved under independent placement. The cursor Handles are separate
 objects and supply no icon referent.
 
-`src/program.json` keeps two mandatory **SEMANTIC / PORT-BLOCKING** gates for
-computed aliases/activation and cell/payload lifetime, alongside the menu-overlap
-gate. The provider creates neither referent. No deadness, safe-null, padding or
-activation exclusion is claimed. Native conversion widens this canonical pointer
-and removes the former duplicate definition from the platform layer.
+The provider creates neither referent. The subsequent
+[default VGA lifetime proof](vga-review.md) resolves the two icon gates in the
+existing supported domain: mode 8 bypasses both pointer loads even if either
+helper is activated. It does not admit deadness, safe-null, padding or a bitmap
+lifetime in other modes. Native conversion widens this canonical pointer and
+removes the former duplicate definition from the platform layer.
 
 Reproduce with a fresh output directory strictly below repository `build/`:
 

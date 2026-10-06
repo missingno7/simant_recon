@@ -1,0 +1,558 @@
+{
+  "schema": "simant-critical-selector-domain-v1",
+  "scope": "Known window-cache and MIDI-offset aliases only; no global deadness, constant substitution or corruption-immunity claim.",
+  "inventory": {
+    "source_count": 199,
+    "all_source_sha256": "163aa58fa814381105e7ae4570782a5fee8842d826d3b923a4391c0c7046d58b",
+    "modules_sha256": "2897605ac308a3365e1c1ebce758f14f43148b1dde03f6e92f5ad9c4d663ea4d",
+    "aliases_sha256": "d99f574d9b2f2d90db7a820b81b5e664b60c46332a74aec1f305abc3bd5c8846",
+    "registry_sha256": "6c6a51a0948a7af7722163a0901c752e57b3a2775fc4c520c395a35e3420a938"
+  },
+  "census": {
+    "aliases": {
+      "f_1C62_06A6": "f_1C62_06A6",
+      "f_208F_058B": "f_208F_058B",
+      "f_23AE_0069": "f_23AE_0069",
+      "f_284A_0199": "f_284A_0199",
+      "f_284A_0256": "f_284A_0256",
+      "g_7566": "g_7566",
+      "g_8CCB": "g_8CCB",
+      "g_8CF2": "g_8CF2",
+      "g_8DD8": "g_8DD8",
+      "g_8DFE": "g_8DFE",
+      "win_UnlockWin": "win_UnlockWin",
+      "f_23AE_01DB": "win_UnlockWin"
+    },
+    "occurrences": 144,
+    "occurrence_sha256": "58df30b27508e6ce58e137c062951bd79742f929cd8b3198a787cdc8917b2d6d",
+    "source_sha256": {
+      "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "src/S16/m384C.c": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "src/S20/m39F1.c": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+      "src/S22/m39C7.c": "58f8a4a7ae524fae65d8abca7972253e6f0e83cf384cfcb356bc5a580ac738c6",
+      "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "src/root/m015B.c": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "src/root/m1C62.c": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36",
+      "src/root/m208F.c": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+      "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "src/root/m21FA.c": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "src/root/m23AE.c": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+      "src/root/m23E6.c": "d0a490f75ee880984374da56620d49d146da879e50895c81802b537cff7d2bc3",
+      "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "src/root/m259D.c": "43968368c6b26af3635aac9ab5160771a8e104d8160ca1e9be7749b26d7a466a",
+      "src/root/m284A.c": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100",
+      "src/state/critical-selector-byte.c": "78e5070a594461df8ffa0eaaa8a6d69302652c0f57b9f61c8be79f5112f4646d"
+    }
+  },
+  "save_ranges": {
+    "records": 307,
+    "descriptor_sha256": "2db64b61fedf3d590a67246e080d7d8ae477202dd0c17ccf96c65a7bb1810958",
+    "protected": {
+      "g_8CCB": 1,
+      "g_8CF2": 180,
+      "g_8DD8": 36,
+      "g_7566": 2,
+      "g_8DFC": 2,
+      "g_8DFE": 4
+    },
+    "intersections": 0
+  },
+  "window_ids": {
+    "pass": true,
+    "base_matches_spec": true,
+    "function_count": 217,
+    "call_edge_count": 1033,
+    "call_edge_sha256": "8a38e3dcb4f4b2a8b2dcc55dfdb5f2160c653ece0d6fbc61cedcf6e962be58a1",
+    "pinned_source_file_count": 35,
+    "pinned_source_hash_count": 35,
+    "bare_reference_count": 7,
+    "callback_reference_count": 7,
+    "asm_reference_count": 0,
+    "dormant_formal_count": 18,
+    "abi_obligation_count": 2,
+    "negative_controls": {
+      "new_dormant_bare_address": true,
+      "uppercase_asm_reference": true,
+      "new_direct_call": true,
+      "pinned_source_body_mutation": true,
+      "new_alias_to_existing_target": true
+    },
+    "parse_errors": []
+  },
+  "songs": {
+    "corpus": {
+      "records": 840,
+      "compressed": 205,
+      "fnv1a64": "2cd5f2c76ee8a96e"
+    },
+    "metadata": 33,
+    "streams": 30,
+    "track_counts": {
+      "10001": 10,
+      "10003": 6,
+      "10004": 5,
+      "10005": 6,
+      "10006": 7,
+      "10007": 8,
+      "10008": 8,
+      "10010": 7,
+      "11002": 3,
+      "11003": 2,
+      "11004": 5,
+      "11005": 3,
+      "11006": 2,
+      "11007": 2,
+      "11013": 2,
+      "11016": 2,
+      "11018": 2,
+      "11020": 3,
+      "11021": 2,
+      "20000": 3,
+      "20001": 2,
+      "20002": 3,
+      "20003": 3,
+      "20004": 3,
+      "20005": 3,
+      "20007": 3,
+      "20008": 3,
+      "20009": 2,
+      "20010": 3,
+      "20011": 3
+    },
+    "calls": [
+      {
+        "source": "src/root/m015B.c",
+        "line": 415,
+        "function": "myBeginSong",
+        "argument": "0x2afa",
+        "resolved_song_ids": [
+          11002
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/root/m015B.c",
+        "line": 554,
+        "function": "myBeginSong",
+        "argument": "0x2afb",
+        "resolved_song_ids": [
+          11003
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 122,
+        "function": "myBeginSong",
+        "argument": "0x2b0c",
+        "resolved_song_ids": [
+          11020
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 137,
+        "function": "myBeginSong",
+        "argument": "0x2b0d",
+        "resolved_song_ids": [
+          11021
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/root/m0BE8.c",
+        "line": 627,
+        "function": "myBeginSong",
+        "argument": "fd_50F6_0228 + 0x2713",
+        "resolved_song_ids": [
+          10003,
+          10004,
+          10005
+        ],
+        "resolution_basis": "src/S08/m35F5.c:RandYard resets state to 0; src/root/m0BE8.c:TryAntTheme increments and wraps values >2 to 0"
+      },
+      {
+        "source": "src/root/m10F7.c",
+        "line": 568,
+        "function": "myBeginSong",
+        "argument": "0x2afe",
+        "resolved_song_ids": [
+          11006
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/root/m1383.c",
+        "line": 240,
+        "function": "myBeginSong",
+        "argument": "0x2b0a",
+        "resolved_song_ids": [
+          11018
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S04/m35F5.c",
+        "line": 157,
+        "function": "f_00DF_00B1",
+        "argument": "0x2afb",
+        "resolved_song_ids": [
+          11003
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S05/m35F5.c",
+        "line": 103,
+        "function": "f_00DF_00B1",
+        "argument": "0x2afb",
+        "resolved_song_ids": [
+          11003
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 1208,
+        "function": "myBeginSong",
+        "argument": "0x4e22",
+        "resolved_song_ids": [
+          20002
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 1220,
+        "function": "myBeginSong",
+        "argument": "0x4e23",
+        "resolved_song_ids": [
+          20003
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S06/m35F5.c",
+        "line": 1226,
+        "function": "myBeginSong",
+        "argument": "0x4e25",
+        "resolved_song_ids": [
+          20005
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S11/m35F5.c",
+        "line": 101,
+        "function": "myBeginSong",
+        "argument": "0x2711",
+        "resolved_song_ids": [
+          10001
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S14/m384C.c",
+        "line": 521,
+        "function": "f_00DF_00B1",
+        "argument": "0x271a",
+        "resolved_song_ids": [
+          10010
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S14/m384C.c",
+        "line": 523,
+        "function": "f_00DF_00B1",
+        "argument": "0x2718",
+        "resolved_song_ids": [
+          10008
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S14/m384C.c",
+        "line": 525,
+        "function": "f_00DF_00B1",
+        "argument": "0x2718",
+        "resolved_song_ids": [
+          10008
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S14/m384C.c",
+        "line": 557,
+        "function": "f_00DF_00B1",
+        "argument": "SRand2() + 0x2713",
+        "resolved_song_ids": [
+          10003,
+          10004
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand2 masks the generated word with 1"
+      },
+      {
+        "source": "src/S16/m384C.c",
+        "line": 99,
+        "function": "myBeginSong",
+        "argument": "song",
+        "resolved_song_ids": [
+          20003,
+          20004
+        ],
+        "resolution_basis": "src/S16/m384C.c:DrawSimPayoff initializes 0x4e23 and increments only while <0x4e25"
+      },
+      {
+        "source": "src/S16/m384C.c",
+        "line": 250,
+        "function": "myBeginSong",
+        "argument": "0x2711",
+        "resolved_song_ids": [
+          10001
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 386,
+        "function": "myBeginSong",
+        "argument": "0x4e20",
+        "resolved_song_ids": [
+          20000
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 447,
+        "function": "myBeginSong",
+        "argument": "0x4e21",
+        "resolved_song_ids": [
+          20001
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 449,
+        "function": "myBeginSong",
+        "argument": "0x2afd",
+        "resolved_song_ids": [
+          11005
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 517,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 524,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 530,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 546,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 552,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 558,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 564,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 570,
+        "function": "myBeginSong",
+        "argument": "SRand1(5) + 0x4e27",
+        "resolved_song_ids": [
+          20007,
+          20008,
+          20009,
+          20010,
+          20011
+        ],
+        "resolution_basis": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 730,
+        "function": "myBeginSong",
+        "argument": "0x2afb",
+        "resolved_song_ids": [
+          11003
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 985,
+        "function": "myBeginSong",
+        "argument": "0x2b05",
+        "resolved_song_ids": [
+          11013
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 989,
+        "function": "myBeginSong",
+        "argument": "0x2b06",
+        "resolved_song_ids": [
+          11014
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 993,
+        "function": "myBeginSong",
+        "argument": "0x2b07",
+        "resolved_song_ids": [
+          11015
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 997,
+        "function": "myBeginSong",
+        "argument": "0x2b08",
+        "resolved_song_ids": [
+          11016
+        ],
+        "resolution_basis": "literal call argument"
+      },
+      {
+        "source": "src/S22/m39C7.c",
+        "line": 1001,
+        "function": "myBeginSong",
+        "argument": "0x2b09",
+        "resolved_song_ids": [
+          11017
+        ],
+        "resolution_basis": "literal call argument"
+      }
+    ]
+  },
+  "original_song_store_controls": [
+    {
+      "count": 10,
+      "track_offsets_base": "5E908",
+      "selector_address": "5E7FB",
+      "selector_initial": "5A",
+      "selector_after": "5A",
+      "original_instructions_changed_selector": false,
+      "blocks": 513
+    },
+    {
+      "count": 32633,
+      "track_offsets_base": "5E908",
+      "selector_address": "5E7FB",
+      "selector_initial": "5A",
+      "selector_after": "5A",
+      "original_instructions_changed_selector": false,
+      "blocks": 1664286
+    },
+    {
+      "count": 32634,
+      "track_offsets_base": "5E908",
+      "selector_address": "5E7FB",
+      "selector_initial": "5A",
+      "selector_after": "6C",
+      "original_instructions_changed_selector": true,
+      "blocks": 1664337
+    }
+  ],
+  "alias_arithmetic": {
+    "window_index": -10,
+    "first_song_index": 32633,
+    "minimum_song_count": 32634
+  }
+}

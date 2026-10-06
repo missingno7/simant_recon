@@ -1,0 +1,27 @@
+{
+  "schema": "simant-clip-domain-validation-v1",
+  "scope": "Clipping capacity counterexample and metadata publication; canonical source, compiler contexts, storage extents and supported domain unchanged.",
+  "canonical_closure": false,
+  "program_sha256": "04443612a7905b0872812232c614356998824a5fad47ad1c3899ea82c9aa7377",
+  "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f",
+  "control_facts_sha256": "43c3d8ff39269ed8ac688383138427665ce44a817085539871bb5804eb2f3016",
+  "validation": {
+    "result": "PASS",
+    "codegen_probes": 49,
+    "unit_suite": "PASS; 2 intentional skips",
+    "focused_tests": 4,
+    "repository_audit": "PASS"
+  },
+  "canonical_state": {
+    "translation_units": 195,
+    "storage_providers": 68,
+    "strict_semantic_registrations": 29,
+    "imports": 5,
+    "gates": 3,
+    "unattributed_bytes": 44
+  },
+  "logs": {
+    "build/current/tests/clip-domain-validation/validate.log": "ee542e67f32737785cb874032776a87dde1ceb2c9d41f84b4f503f0285de5484",
+    "build/current/tests/clip-domain-validation/repository.json": "c1a2ad2e71dfd92f362c4cd96e533b8c2d95137b215bd45527afad42be3ff14c"
+  }
+}

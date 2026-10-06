@@ -165,6 +165,12 @@ mouse initializer requests width/height-minus-four ranges. Keyboard repeat has
 explicit lower and upper bounds. Mickey mode has an upper cap, but its Y
 underflow branch uses `XOR DX,BX`, not `XOR DX,DX`; it does not prove nonnegative
 Y. Do not substitute the intended cursor behavior for that actual instruction.
+An upper bound alone is insufficient: the signed 16-bit subtraction of a
+positive resize origin from a sufficiently negative cursor coordinate wraps to
+a positive delta. This is an arithmetic counterexample, not an observed ordinary
+resize trace. The common supported domain excludes command-line overrides but
+does not exclude `BUG=MSMOUSE` or bind the mouse driver version, so a particular
+emulator's absolute-coordinate behavior cannot close the general input premise.
 The absolute handler 0445 itself writes
 CX/DX directly, and programmatic 09E9 warps also store raw positions, so an
 all-path bound cannot be substituted for their external/platform contracts.

@@ -1,0 +1,878 @@
+{
+  "schema": "simant-database-supported-domain-v1",
+  "status": "PASS",
+  "classification": "SUPPORTED_DOMAIN",
+  "domain_id": "shipped-default-vga-successful-db-lifetime",
+  "domain": [
+    "Locked SHARED/HCEGANT/SOUND DAT/NDX and default SIMANT.CFG in the lookup directory",
+    "No external language.dat/lrshare, display override, alternate display setup, or /s9",
+    "Successful original file/header/index allocation/read and ordinary valid nominal state",
+    "Ordinary boot, menus, object release/reload, valid save/load and shutdown"
+  ],
+  "invariant": {
+    "acquisitions_in_order": [
+      "shared",
+      "hcegant",
+      "sound"
+    ],
+    "maximum_acquisitions_per_main_lifetime": 3,
+    "db_numOfHandles_after_boot": 3,
+    "record_and_frontend_slots": [
+      0,
+      1,
+      2
+    ],
+    "database_slot_release_or_reacquisition_callers": [],
+    "minus_one_and_fifth_slot_accesses": "Excluded within the explicit successful domain"
+  },
+  "canonical_inventory": {
+    "program_json": {
+      "path": "src/program.json",
+      "size": 279510,
+      "sha256": "bc7a86b752608b143466d3bc8c5f75688a28bb175d09cb33fda87ed3e6ac62f2"
+    },
+    "module_count": 192,
+    "all_module_source_hashes_match_inventory": true,
+    "discovered_c_asm_files_equal_program_inventory": true,
+    "identifier_scan_source_count": 192,
+    "all_canonical_source_pin_index_sha256": "69e4140432b521773b8f08473cee18de758b0bc1af8f8c8e8bd864c28e18a2cc",
+    "reviewed_source_pins": [
+      {
+        "path": "src/S09/m35F5.c",
+        "size": 42150,
+        "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+      },
+      {
+        "path": "src/S15/m384C.c",
+        "size": 9120,
+        "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172"
+      },
+      {
+        "path": "src/S20/m39F1.c",
+        "size": 6620,
+        "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3"
+      },
+      {
+        "path": "src/root/m00F8.c",
+        "size": 7304,
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a"
+      },
+      {
+        "path": "src/root/m15F8.c",
+        "size": 4897,
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
+      },
+      {
+        "path": "src/root/m1986.c",
+        "size": 2874,
+        "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff"
+      },
+      {
+        "path": "src/root/m19A9.c",
+        "size": 4870,
+        "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523"
+      },
+      {
+        "path": "src/root/m1A28.c",
+        "size": 3200,
+        "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "size": 5159,
+        "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+      },
+      {
+        "path": "src/root/m1A96.c",
+        "size": 6836,
+        "sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa"
+      },
+      {
+        "path": "src/root/m1B28.c",
+        "size": 2422,
+        "sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343"
+      },
+      {
+        "path": "src/root/m205F.c",
+        "size": 6015,
+        "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
+      },
+      {
+        "path": "src/state/database-record-state.c",
+        "size": 1295,
+        "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a"
+      }
+    ],
+    "identifier_scan": {
+      "uses": {
+        "main": [
+          {
+            "path": "src/root/m15F8.c",
+            "line": 64,
+            "column": 6,
+            "kind": "definition"
+          }
+        ],
+        "db_SetDataBase": [
+          {
+            "path": "src/S20/m39F1.c",
+            "line": 32,
+            "column": 16,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/S20/m39F1.c",
+            "line": 138,
+            "column": 9,
+            "caller": "IBMInitStuff",
+            "kind": "direct-call"
+          },
+          {
+            "path": "src/S20/m39F1.c",
+            "line": 140,
+            "column": 5,
+            "caller": "IBMInitStuff",
+            "kind": "direct-call"
+          },
+          {
+            "path": "src/S20/m39F1.c",
+            "line": 144,
+            "column": 9,
+            "caller": "IBMInitStuff",
+            "kind": "direct-call"
+          },
+          {
+            "path": "src/root/m15F8.c",
+            "line": 30,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m15F8.c",
+            "line": 93,
+            "column": 5,
+            "caller": "main",
+            "kind": "direct-call"
+          },
+          {
+            "path": "src/root/m1A53.c",
+            "line": 42,
+            "column": 9,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m205F.c",
+            "line": 33,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m205F.c",
+            "line": 154,
+            "column": 5,
+            "caller": "f_205F_0004",
+            "kind": "direct-call"
+          }
+        ],
+        "IBMInitStuff": [
+          {
+            "path": "src/S20/m39F1.c",
+            "line": 61,
+            "column": 10,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m15F8.c",
+            "line": 29,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m15F8.c",
+            "line": 92,
+            "column": 5,
+            "caller": "main",
+            "kind": "direct-call"
+          }
+        ],
+        "f_205F_0004": [
+          {
+            "path": "src/S20/m39F1.c",
+            "line": 34,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/S20/m39F1.c",
+            "line": 146,
+            "column": 5,
+            "caller": "IBMInitStuff",
+            "kind": "direct-call"
+          },
+          {
+            "path": "src/root/m205F.c",
+            "line": 83,
+            "column": 10,
+            "kind": "definition"
+          }
+        ],
+        "OpenDB": [
+          {
+            "path": "src/root/m1A28.c",
+            "line": 45,
+            "column": 9,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m1A53.c",
+            "line": 11,
+            "column": 16,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m1A53.c",
+            "line": 51,
+            "column": 35,
+            "caller": "db_SetDataBase",
+            "kind": "direct-call"
+          }
+        ],
+        "GetFreeHandle": [
+          {
+            "path": "src/root/m1A28.c",
+            "line": 41,
+            "column": 9,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 50,
+            "column": 10,
+            "caller": "OpenDB",
+            "kind": "direct-call"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 100,
+            "column": 9,
+            "kind": "definition"
+          }
+        ],
+        "db_CloseDataBase": [
+          {
+            "path": "src/root/m1A53.c",
+            "line": 159,
+            "column": 10,
+            "kind": "definition"
+          }
+        ],
+        "CloseDB": [
+          {
+            "path": "src/root/m1A28.c",
+            "line": 74,
+            "column": 10,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m1A53.c",
+            "line": 23,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m1A53.c",
+            "line": 163,
+            "column": 9,
+            "caller": "db_CloseDataBase",
+            "kind": "direct-call"
+          }
+        ],
+        "OpenIndex": [
+          {
+            "path": "src/root/m1986.c",
+            "line": 46,
+            "column": 10,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 35,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 64,
+            "column": 9,
+            "caller": "OpenDB",
+            "kind": "direct-call"
+          }
+        ],
+        "CreateIndex": [
+          {
+            "path": "src/root/m1986.c",
+            "line": 66,
+            "column": 10,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 36,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 60,
+            "column": 9,
+            "caller": "OpenDB",
+            "kind": "direct-call"
+          }
+        ],
+        "CloseIndex": [
+          {
+            "path": "src/root/m1986.c",
+            "line": 70,
+            "column": 10,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 37,
+            "column": 17,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m1A28.c",
+            "line": 84,
+            "column": 5,
+            "caller": "CloseDB",
+            "kind": "direct-call"
+          }
+        ],
+        "DBRecall": [
+          {
+            "path": "src/root/m19A9.c",
+            "line": 71,
+            "column": 16,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m1A53.c",
+            "line": 16,
+            "column": 23,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m1A53.c",
+            "line": 92,
+            "column": 27,
+            "caller": "db_LoadObject",
+            "kind": "direct-call"
+          }
+        ],
+        "FindIndex": [
+          {
+            "path": "src/root/m1986.c",
+            "line": 77,
+            "column": 22,
+            "kind": "definition"
+          },
+          {
+            "path": "src/root/m19A9.c",
+            "line": 40,
+            "column": 29,
+            "kind": "prototype"
+          },
+          {
+            "path": "src/root/m19A9.c",
+            "line": 84,
+            "column": 13,
+            "caller": "DBRecall",
+            "kind": "direct-call"
+          }
+        ]
+      },
+      "callers": {
+        "main": {},
+        "db_SetDataBase": {
+          "IBMInitStuff": 3,
+          "main": 1,
+          "f_205F_0004": 1
+        },
+        "IBMInitStuff": {
+          "main": 1
+        },
+        "f_205F_0004": {
+          "IBMInitStuff": 1
+        },
+        "OpenDB": {
+          "db_SetDataBase": 1
+        },
+        "GetFreeHandle": {
+          "OpenDB": 1
+        },
+        "db_CloseDataBase": {},
+        "CloseDB": {
+          "db_CloseDataBase": 1
+        },
+        "OpenIndex": {
+          "OpenDB": 1
+        },
+        "CreateIndex": {
+          "OpenDB": 1
+        },
+        "CloseIndex": {
+          "CloseDB": 1
+        },
+        "DBRecall": {
+          "db_LoadObject": 1
+        },
+        "FindIndex": {
+          "DBRecall": 1
+        }
+      },
+      "database_chain_calls_in_loops": [
+        {
+          "path": "src/root/m1A53.c",
+          "function": "db_LoadObject",
+          "target": "DBRecall"
+        },
+        {
+          "path": "src/root/m1A53.c",
+          "function": "db_CloseDataBase",
+          "target": "CloseDB"
+        }
+      ]
+    }
+  },
+  "counter_and_owner": {
+    "counter_source_initializer": "db_numOfHandles = 0",
+    "all_canonical_db_numOfHandles_uses": [
+      {
+        "path": "src/root/m1A53.c",
+        "line": 28,
+        "column": 5
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 47,
+        "column": 9
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 51,
+        "column": 16
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 52,
+        "column": 25
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 86,
+        "column": 9
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 91,
+        "column": 25
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 109,
+        "column": 9
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 123,
+        "column": 9
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 142,
+        "column": 13
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 154,
+        "column": 9
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 161,
+        "column": 12
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 162,
+        "column": 11
+      },
+      {
+        "path": "src/root/m1A53.c",
+        "line": 163,
+        "column": 28
+      }
+    ],
+    "counter_writes": [
+      {
+        "function": "db_SetDataBase",
+        "kind": "post++",
+        "line": 52
+      },
+      {
+        "function": "db_CloseDataBase",
+        "kind": "pre--",
+        "line": 162
+      }
+    ],
+    "db_CloseDataBase_direct_callers": [],
+    "source_owner": {
+      "records": "OpenDBRec far fd_50F6_3958[4]",
+      "handles": "int far db_handles[4]",
+      "explicit_initializers": 0,
+      "storage_contract": {
+        "status": "PASS",
+        "data_only": true,
+        "live_initialized_bytes": 0,
+        "record_elements": 4,
+        "handle_elements": 4
+      },
+      "C_static_storage_zero_initialization": true,
+      "free_marker_first_use_clear": "GetFreeHandle sets name[0]=0 for each of four slots when s_394E is initially zero"
+    }
+  },
+  "first_use_flag_contract": {
+    "initializer": 0,
+    "sole_write": {
+      "function": "GetFreeHandle",
+      "value": 1
+    },
+    "owner": "src/root/m1A28.c",
+    "source_reference_lines": [
+      39,
+      104,
+      105
+    ],
+    "address_taken": false
+  },
+  "original_first_use_clear": {
+    "original_counter_and_first_flag_initializers_zero": true,
+    "cases": [
+      {
+        "incoming_flag": 0,
+        "returned_slot": 0,
+        "name_markers_after": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "all_other_record_bytes_preserved": true
+      },
+      {
+        "incoming_flag": 1,
+        "returned_slot": -1,
+        "name_markers_after": [
+          65,
+          66,
+          67,
+          68
+        ],
+        "all_other_record_bytes_preserved": true
+      }
+    ]
+  },
+  "storage_consumer_census": {
+    "db_handles": [
+      "src/root/m1A53.c",
+      "src/state/database-record-state.c"
+    ],
+    "fd_50F6_3958": [
+      "src/root/m1986.c",
+      "src/root/m19A9.c",
+      "src/root/m1A28.c",
+      "src/state/database-record-state.c"
+    ]
+  },
+  "save_load_destinations": {
+    "descriptors": 307,
+    "source_original_symbolic_descriptors_match": true,
+    "protected_ranges": {
+      "database counter/cache/closed state": {
+        "linear": 365860,
+        "bytes": 8
+      },
+      "GetFreeHandle first-use flag": {
+        "linear": 365694,
+        "bytes": 2
+      },
+      "open records": {
+        "linear": 346296,
+        "bytes": 496
+      },
+      "database handles": {
+        "linear": 346800,
+        "bytes": 8
+      }
+    },
+    "protected_ranges_intersected": 0,
+    "descriptor_bytes_sha256": "2db64b61fedf3d590a67246e080d7d8ae477202dd0c17ccf96c65a7bb1810958",
+    "scope": "All successful S09 LoadGame read destinations and SaveGame read sources; no arbitrary corrupt save file/pointer-table claim."
+  },
+  "resource_domain": {
+    "oracle_lock": {
+      "path": "layout/oracle.lock.json",
+      "size": 18807,
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    "asset_directory_equals_all_locked_inputs": true,
+    "resource_pairs_match_lock_and_structure": {
+      "SHARED.DAT": {
+        "size": 96117,
+        "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+        "matches_oracle_lock": true
+      },
+      "SHARED.NDX": {
+        "size": 3868,
+        "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+        "matches_oracle_lock": true
+      },
+      "HCEGANT.DAT": {
+        "size": 629438,
+        "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+        "matches_oracle_lock": true
+      },
+      "HCEGANT.NDX": {
+        "size": 2444,
+        "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+        "matches_oracle_lock": true
+      },
+      "SOUND.DAT": {
+        "size": 111470,
+        "sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+        "matches_oracle_lock": true
+      },
+      "SOUND.NDX": {
+        "size": 1236,
+        "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+        "matches_oracle_lock": true
+      }
+    },
+    "resource_index_census": {
+      "SHARED": {
+        "ndx_rows": 449,
+        "ndx_bytes": 3868,
+        "unread_trailer_bytes": 256,
+        "dat_bytes": 96117,
+        "magic": "0x12345678",
+        "keys_sorted_kind_then_id": true
+      },
+      "HCEGANT": {
+        "ndx_rows": 271,
+        "ndx_bytes": 2444,
+        "unread_trailer_bytes": 256,
+        "dat_bytes": 629438,
+        "magic": "0x12345678",
+        "keys_sorted_kind_then_id": true
+      },
+      "SOUND": {
+        "ndx_rows": 120,
+        "ndx_bytes": 1236,
+        "unread_trailer_bytes": 256,
+        "dat_bytes": 111470,
+        "magic": "0x12345678",
+        "keys_sorted_kind_then_id": true
+      }
+    },
+    "foreign_language_or_lrshare_members_in_pinned_assets": [],
+    "config": {
+      "bytes": "Display Mode: V\r\nSound Mode: 6\r\n",
+      "mode_letter": "V",
+      "ReadConfig_g_5A97": 8,
+      "sound_mode": "6"
+    },
+    "external_cwd_or_supplied_resource_precondition": "No unmanifested language.dat or lrshare resource is present in the game's working/resource directory."
+  },
+  "original_frontend": {
+    "scope": "Original db_SetDataBase and genuine empty f_1B28_0068/Punt guard; OpenDB output is an explicit boundary, not an actual DOS open.",
+    "cache_fixture": "Existing nonnull cache table; its creation/lifetime is outside this caller-store check.",
+    "supported_steps": [
+      {
+        "acquisition": 1,
+        "counter_after": 1,
+        "slot_written": 0,
+        "returned_db_handle": 0,
+        "within_four_slot_owner": true,
+        "store_address": "50F6:3B50"
+      },
+      {
+        "acquisition": 2,
+        "counter_after": 2,
+        "slot_written": 1,
+        "returned_db_handle": 1,
+        "within_four_slot_owner": true,
+        "store_address": "50F6:3B52"
+      },
+      {
+        "acquisition": 3,
+        "counter_after": 3,
+        "slot_written": 2,
+        "returned_db_handle": 2,
+        "within_four_slot_owner": true,
+        "store_address": "50F6:3B54"
+      }
+    ],
+    "fourth_capacity_control": {
+      "acquisition": 4,
+      "counter_after": 4,
+      "slot_written": 3,
+      "returned_db_handle": 3,
+      "within_four_slot_owner": true,
+      "store_address": "50F6:3B56"
+    },
+    "fifth_returning_failure_negative": {
+      "acquisition": 5,
+      "counter_after": 5,
+      "slot_written": 4,
+      "returned_db_handle": -1,
+      "within_four_slot_owner": false,
+      "store_address": "50F6:3B58"
+    }
+  },
+  "original_lookup_iteration": {
+    "original_db_LoadObject_recall_handles": [
+      0,
+      1,
+      2
+    ],
+    "unused_slot3_canary": "7777",
+    "unused_slot3_recalled": false,
+    "scope": "Real iteration with explicit cache-miss, DBRecall-miss, and diagnostic boundaries; no FindIndex correctness claim."
+  },
+  "original_OpenDB_prefixes": [
+    {
+      "occupied_records": 0,
+      "incoming_guard": 1,
+      "GetFreeHandle_result": 0,
+      "Punt_calls": 0,
+      "original_name_copy_completed": true,
+      "name_destination": "50F6:3958",
+      "out_of_record_owner": false,
+      "stop": "1A28:0049 immediately after original CopyRootName returns"
+    },
+    {
+      "occupied_records": 1,
+      "incoming_guard": 1,
+      "GetFreeHandle_result": 1,
+      "Punt_calls": 0,
+      "original_name_copy_completed": true,
+      "name_destination": "50F6:39D4",
+      "out_of_record_owner": false,
+      "stop": "1A28:0049 immediately after original CopyRootName returns"
+    },
+    {
+      "occupied_records": 2,
+      "incoming_guard": 1,
+      "GetFreeHandle_result": 2,
+      "Punt_calls": 0,
+      "original_name_copy_completed": true,
+      "name_destination": "50F6:3A50",
+      "out_of_record_owner": false,
+      "stop": "1A28:0049 immediately after original CopyRootName returns"
+    },
+    {
+      "occupied_records": 3,
+      "incoming_guard": 1,
+      "GetFreeHandle_result": 3,
+      "Punt_calls": 0,
+      "original_name_copy_completed": true,
+      "name_destination": "50F6:3ACC",
+      "out_of_record_owner": false,
+      "stop": "1A28:0049 immediately after original CopyRootName returns"
+    },
+    {
+      "occupied_records": 4,
+      "incoming_guard": 1,
+      "GetFreeHandle_result": -1,
+      "Punt_calls": 1,
+      "original_name_copy_completed": true,
+      "name_destination": "50F6:38DC",
+      "out_of_record_owner": true,
+      "stop": "1A28:0049 immediately after original CopyRootName returns"
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "generated_invalid5calls_source_variant",
+      "expected": "reject",
+      "observed": "rejected",
+      "reason": "caller set for db_SetDataBase: got {'IBMInitStuff': 3, 'main': 3, 'f_205F_0004': 1}, expected {'IBMInitStuff': 3, 'main': 1, 'f_205F_0004': 1}"
+    },
+    {
+      "control": "generated_external_language_plus_mode2_domain",
+      "expected": "reject-outside-supported-scope",
+      "observed": "rejected",
+      "mode": 2,
+      "foreign_language_resource_assumed_valid": true,
+      "foreign_lrshare_resource_assumed_valid": true,
+      "syntactic_open_count": 5,
+      "reason": "External language package plus a mode-2/4 override is outside the exact corpus gate and permits db_handles[4] if all prior opens return."
+    },
+    {
+      "control": "generated_extra_caller",
+      "expected": "reject",
+      "observed": "rejected",
+      "reason": "caller set for db_SetDataBase: got {'external_resource_owner': 1, 'IBMInitStuff': 3, 'main': 1, 'f_205F_0004': 1}, expected {'IBMInitStuff': 3, 'main': 1, 'f_205F_0004': 1}"
+    },
+    {
+      "control": "address_taken_acquisition",
+      "observed": "rejected"
+    },
+    {
+      "control": "mangled_asm_acquisition",
+      "observed": "rejected"
+    },
+    {
+      "control": "additional_record_consumer",
+      "observed": "rejected"
+    },
+    {
+      "control": "main_reentry",
+      "observed": "rejected"
+    },
+    {
+      "control": "loop_repeated_acquisition",
+      "observed": "rejected"
+    },
+    {
+      "control": "counter_reset_reacquisition",
+      "observed": "rejected"
+    },
+    {
+      "control": "first_flag_reset",
+      "observed": "rejected"
+    },
+    {
+      "control": "first_flag_escape",
+      "observed": "rejected"
+    },
+    {
+      "control": "save_load_destination_mutation",
+      "observed": "rejected"
+    }
+  ],
+  "implementation": {
+    "path": "evidence/canonical/database-domain/replay.py",
+    "size": 41227,
+    "sha256": "35f165b9aa5a98d7893aecd0e57c644bde2a6441adab943c7eed14c9422d0346"
+  },
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "nonclaims": [
+    "No whole-game DOSBox-X execution acceptance",
+    "No Punt noreturn, new slots, clamps, padding, or failure-path layout waiver",
+    "No discharge of FindIndex/heap/ctype/sound resource or other independent blockers",
+    "Optional language plus mode2/4 can produce five opens outside this domain; failures remain source-required"
+  ]
+}

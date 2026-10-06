@@ -1,0 +1,105 @@
+{
+  "schema": "simant-last-filename-domain-v1",
+  "scope": "Defined successful S09 filename copies through 100-byte automatic objects; selector local overflow remains an explicit semantic gate.",
+  "program_sha256": "ba642b6ef911e86996635ca0060ec32e08e6aa6541a131d82966f7f5a8291bea",
+  "function_definition_sha256": {
+    "LoadGame": "a7601b3b78f30779f26e356c33029386ba5a3bb91a3c0e7749e94b80d92e0cfa",
+    "o09_35F5_0188": "db94ef438f0781c284f66999eef4c9d31a9ebcabdadbc369d4a9ef38b7c1a387",
+    "o09_35F5_03C6": "4a67acaa0daf754a3dd91ecf639793e78a0669bffb9886f1c48707c657b4a350",
+    "o09_35F5_0D2B": "d9f090c4b80d1d23aecba38f9ee144aa59cc571b77c642972c1dc8571f8acca2"
+  },
+  "source_census": {
+    "rows": [
+      [
+        "src/S09/m35F5.c",
+        23,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        107,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        151,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        151,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        152,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        158,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        159,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        172,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        184,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        195,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        365,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/S09/m35F5.c",
+        366,
+        "fd_50F6_3862"
+      ],
+      [
+        "src/state/last-filename.c",
+        1,
+        "fd_50F6_3862"
+      ]
+    ],
+    "sha256": "c3d21931e664c44b5f4c6d22357528d10fd83dff291575ad421d5b0beee61744"
+  },
+  "owner": {
+    "characters": 99,
+    "terminator_bytes": 1,
+    "extent_bytes": 100,
+    "initialization": "MSC far communal zero initialization"
+  },
+  "fixed_objects": {
+    "caller_name_bytes": 100,
+    "selector_path_bytes": 67,
+    "selector_lastDir_bytes": 67,
+    "selector_buf_bytes": 80
+  },
+  "safe_selector_result": {
+    "path_with_separator_bytes": 67,
+    "maximum_leaf_characters": 12,
+    "returned_name_bytes": 79
+  },
+  "path_contrast": {
+    "positive_required_bytes": 67,
+    "negative_required_bytes": 69,
+    "negative_gate": "filename-selector-local-capacity",
+    "receipt_sha256": "dc26122282d56b01f02564bf943883f493efcd9a0fd2da64d546a9504fc05d0d"
+  },
+  "historical_extent": "UNCLAIMED"
+}

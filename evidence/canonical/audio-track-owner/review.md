@@ -1,6 +1,6 @@
 # FARSEG-2: current audio-module corroboration
 
-This replay corroborates the published generic compiler rule using the complete current canonical `root:284A` source. It grants no array owner or capacity, whole historical TU exactness, new semantic status, game execution or link acceptance. The unknown running-status and track-time owners remain unresolved.
+This replay corroborates the published generic compiler rule using the complete current canonical `root:284A` source. It grants no array owner or capacity, whole historical TU exactness, new semantic status, game execution or link acceptance. Functional running-status and track-time owners are now admitted separately through `evidence/canonical/shipped-resource-domain/review.md`; original capacities and allocating TU remain unknown.
 
 Run from any working directory:
 

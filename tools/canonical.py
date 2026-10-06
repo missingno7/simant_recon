@@ -332,6 +332,21 @@ def publish(plan_path: Path, verify_only: bool) -> int:
         item['sha256'] = sha(payloads[item['key']])
         next(m for m in plan['program']['modules'] if m['key'] == item['key'])['source_sha256'] = item['sha256']
 
+    # A storage admission need not republish every unchanged game TU. Still
+    # verify the entire program, loading omitted TUs only from the pinned
+    # current authority; omission cannot smuggle a source/context change.
+    changed_keys = set(payloads)
+    for item in plan['program']['modules']:
+        if item['key'] in payloads:
+            continue
+        old = old_modules.get(item['key']) if previous else None
+        if old != item:
+            raise ValueError('omitted module differs from current canonical inventory: ' + item['key'])
+        raw = (ROOT / item['source']).read_bytes()
+        if sha(raw) != item['source_sha256']:
+            raise ValueError('omitted canonical source pin differs: ' + item['key'])
+        payloads[item['key']] = raw
+
     check_semantic_publication(plan['program'], payloads, previous, prior_program_sha256)
     review_paths = {row['receipt'] for data in (previous or {}, plan['program'])
                     for row in data.get('semantics', [])}
@@ -393,10 +408,11 @@ def publish(plan_path: Path, verify_only: bool) -> int:
                     dbad = sorted(n for n, c in result.get('data', {}).items() if not c['exact'])
                     if bad != sorted(expected['claims']) or dbad != sorted(expected['data']) or result.get('module_reasons'):
                         failures.append(f'{key}: unexpected reviewed differences: {bad}, {dbad}, {result.get("module_reasons")}')
-                receipt['historical_comparisons'][key] = {
-                    'object_sha256': result.get('object_sha256'),
-                    'contribution_sha256': result.get('contribution_sha256'),
-                    'comparison': observed(result)}
+                if key in changed_keys:
+                    receipt['historical_comparisons'][key] = {
+                        'object_sha256': result.get('object_sha256'),
+                        'contribution_sha256': result.get('contribution_sha256'),
+                        'comparison': observed(result)}
             else:
                 compiled = result
                 if not compiled.ok:
@@ -424,6 +440,9 @@ def publish(plan_path: Path, verify_only: bool) -> int:
                 raise ValueError('semantic review changed during publication: ' + path)
         if sha(modules.MANIFEST.read_bytes()) != plan['prior_manifest_sha256']:
             raise ValueError('manifest changed during publication')
+        for item in plan['program']['modules']:
+            if item['key'] not in changed_keys and sha((ROOT / item['source']).read_bytes()) != item['source_sha256']:
+                raise ValueError('omitted canonical source changed during publication: ' + item['key'])
         for file in plan['files']:
             dest = ROOT / file['source']
             if file.get('prior_sha256') and sha(dest.read_bytes()) != file['prior_sha256']:
@@ -462,6 +481,6 @@ def publish(plan_path: Path, verify_only: bool) -> int:
         journal = ROOT / 'evidence/promotions.jsonl'
         with journal.open('a') as stream:
             stream.write(json.dumps({'canonical_publication': plan['receipt_path'],
-                'sources': len(payloads), 'prior_manifest_sha256': plan['prior_manifest_sha256']}) + '\n')
-    print(f'PROMOTED {len(payloads)} canonical translation units')
+                'sources': len(changed_keys), 'prior_manifest_sha256': plan['prior_manifest_sha256']}) + '\n')
+    print(f'PROMOTED {len(changed_keys)} canonical translation units; verified {len(payloads)}')
     return 0

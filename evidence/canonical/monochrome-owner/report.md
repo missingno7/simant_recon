@@ -1,6 +1,6 @@
-# Monochrome pattern tail: unresolved owner and conditional escaped read
+# Monochrome pattern tail: retained alternate-mode evidence
 
-`_g_8ED8` remains an unresolved source-storage import consumed by S15 `LoadMonoPats` and the four S01 monochrome assembly routines. The admitted 24-byte `g_8EC0` prefix supplies no tail allocation authority. This evidence does not admit an owner, rename storage, or establish that a running game reaches the fixture input.
+The default VGA8 contract now supplies a minimal one-byte linkage owner because its complete producer/consumer routes perform zero accesses; see `vga-review.md`. That contract does not allocate a monochrome table. The admitted 24-byte `g_8EC0` prefix still supplies no tail allocation authority, and the odd-mode evidence below remains a required negative control.
 
 ## Current source and access domain
 
@@ -39,7 +39,7 @@ DOS startup concatenates stem `mono` and suffix `nt` in the relevant modes. The 
 
 `OpenMiniMapWin` sets row step2 in odd display modes; `Mini_DrawMapI` starts at `win_GetObjRect(1401).top` and draws64 rows. Step2 preserves starting parity. Win16 MWINNT window20 x/y relation5 references `win_Open` parameters, so its stored top22 does not prove final caller parity. DOS HCEGANT differs and cannot substitute for MONONT. `win_LoadAllWindows`, `win_LoadWindow`, and `win_Open` can supply/restore/recalculate origins and move the window.
 
-Allocation admission still requires an authoritative DOS source object/type/extent, producer bounds, complete caller row/selector closure, and initialization/lifetime/escaped-view proof. A minimum write, adjacency gap, resource length, guessed capacity/sentinel, or compiler owner-size experiment is insufficient. Existing symbolic DGROUP/SS base admission can be reused; this report makes no new base or owner claim.
+Odd-mode allocation admission still requires an authoritative DOS source object/type/extent, producer bounds, complete caller row/selector closure, and initialization/lifetime/escaped-view proof. A minimum write, adjacency gap, resource length, guessed capacity/sentinel, or compiler owner-size experiment is insufficient. Existing symbolic DGROUP/SS base admission can be reused; this report makes no odd-mode allocation claim.
 
 ## Reproduction
 

@@ -10,7 +10,7 @@ def _once(text, pattern, replacement, label):
     return text
 
 def adapt_transformed(source, rel, original_source=None):
-    if rel not in {'src/root/m1E57.c', 'src/S15/m384C.c'}:
+    if rel != 'src/root/m1E57.c':
         raise ValueError('unregistered source memory module: ' + rel)
     text = _text(source)
     if rel == 'src/root/m1E57.c':
@@ -34,12 +34,4 @@ def adapt_transformed(source, rel, original_source=None):
         if text.count(old) != 1:
             raise ValueError('clip output producer anchor changed')
         text = text.replace(old, '        if (!sim_source_runtime_reserve_clip_rects(5u * sizeof(struct Rect)))\n            Punt("Cannot allocate clip rectangle output");\n' + old)
-    elif rel == 'src/S15/m384C.c':
-        text = _once(text, '^extern unsigned char(?:\\s+near)?\\s+g_8ED8\\[\\];$', 'extern unsigned char *g_8ED8;\nextern int sim_source_runtime_reserve_mono_patterns(size_t bytes);', 'mono pattern declaration')
-        if '#include <stddef.h>' not in text:
-            text = '#include <stddef.h>\n' + text
-        old = '    n = (*h)[1] << 3;\n'
-        if text.count(old) != 1:
-            raise ValueError('mono resource extent anchor changed')
-        text = text.replace(old, old + '    if (n < 0 || !sim_source_runtime_reserve_mono_patterns((size_t)n))\n        Punt("Cannot allocate monochrome patterns.");\n')
     return text

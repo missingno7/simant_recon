@@ -1,0 +1,161 @@
+{
+  "schema": "punt-guard-database-prefix-v1",
+  "status": "PASS",
+  "scope": "Isolated unchanged-original instructions with explicit incoming guard/occupancy fixtures; no DOS calls or callbacks modeled.",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "unicorn_version": "2.1.4",
+  "input_pins": [
+    {
+      "path": "assets/SIMANT.EXE",
+      "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+    },
+    {
+      "path": "src/root/m1C62.c",
+      "sha256": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36"
+    },
+    {
+      "path": "src/root/m1A28.c",
+      "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
+    },
+    {
+      "path": "tools/behavior.py",
+      "sha256": "c53d53191343bd92c62153c1a258f677d72bad20af15ad6840d1bba910b5d155"
+    },
+    {
+      "path": "tools/exe.py",
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+    },
+    {
+      "path": "tools/functions.py",
+      "sha256": "11235c789930389992de54cbae8b6fd3f7a963d10c51c68e76f8de72c3976c2a"
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "faf038047fbed7ef219666d90c5b1acaa4c7b9b5452992031932d02dc4d43836"
+    },
+    {
+      "path": "layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    {
+      "path": "src/program.json",
+      "sha256": "f43fa4769f087a40008cd6b1021ed4663028bf8289d83c413691406b24971bf5"
+    }
+  ],
+  "implementation": {
+    "path": "evidence/canonical/error-continuation/replay.py",
+    "sha256": "667e500966103622d80d0c1484f31a398a8052f6694a4a70e6df18e1e7b6ebe1"
+  },
+  "cases": {
+    "Punt_guard": [
+      {
+        "incoming_guard": 0,
+        "returns": "UNPROVED",
+        "dependency_entries": [
+          "vsprintf"
+        ],
+        "stop": "vsprintf",
+        "guard_after": 1
+      },
+      {
+        "incoming_guard": 1,
+        "returns": true,
+        "dependency_entries": [],
+        "blocks": 2,
+        "guard_after": 1
+      },
+      {
+        "incoming_guard": 2,
+        "returns": true,
+        "dependency_entries": [],
+        "blocks": 2,
+        "guard_after": 2
+      },
+      {
+        "incoming_guard": 65535,
+        "returns": true,
+        "dependency_entries": [],
+        "blocks": 2,
+        "guard_after": 65535
+      }
+    ],
+    "DosPunt_guard": [
+      {
+        "incoming_guard": 1,
+        "errno": 2,
+        "Punt_calls": 1,
+        "returns": true,
+        "blocks": 5
+      },
+      {
+        "incoming_guard": 1,
+        "errno": 24,
+        "Punt_calls": 2,
+        "returns": true,
+        "blocks": 8
+      }
+    ],
+    "OpenDB_copy_prefix": [
+      {
+        "occupied_records": 0,
+        "incoming_guard": 1,
+        "GetFreeHandle_result": 0,
+        "Punt_calls": 0,
+        "original_name_copy_completed": true,
+        "name_destination": "50F6:3958",
+        "out_of_record_owner": false,
+        "stop": "1A28:0049 immediately after original CopyRootName returns"
+      },
+      {
+        "occupied_records": 1,
+        "incoming_guard": 1,
+        "GetFreeHandle_result": 1,
+        "Punt_calls": 0,
+        "original_name_copy_completed": true,
+        "name_destination": "50F6:39D4",
+        "out_of_record_owner": false,
+        "stop": "1A28:0049 immediately after original CopyRootName returns"
+      },
+      {
+        "occupied_records": 2,
+        "incoming_guard": 1,
+        "GetFreeHandle_result": 2,
+        "Punt_calls": 0,
+        "original_name_copy_completed": true,
+        "name_destination": "50F6:3A50",
+        "out_of_record_owner": false,
+        "stop": "1A28:0049 immediately after original CopyRootName returns"
+      },
+      {
+        "occupied_records": 3,
+        "incoming_guard": 1,
+        "GetFreeHandle_result": 3,
+        "Punt_calls": 0,
+        "original_name_copy_completed": true,
+        "name_destination": "50F6:3ACC",
+        "out_of_record_owner": false,
+        "stop": "1A28:0049 immediately after original CopyRootName returns"
+      },
+      {
+        "occupied_records": 4,
+        "incoming_guard": 1,
+        "GetFreeHandle_result": -1,
+        "Punt_calls": 1,
+        "original_name_copy_completed": true,
+        "name_destination": "50F6:38DC",
+        "out_of_record_owner": true,
+        "stop": "1A28:0049 immediately after original CopyRootName returns"
+      }
+    ]
+  },
+  "nonclaims": [
+    "No original full-game runtime acceptance (DOSBox-X is authoritative).",
+    "No proof ordinary startup/game reaches incoming nonzero guard with four occupied records.",
+    "No proof first Punt reaches fatal overlay, returns, exits, or preserves fatal state.",
+    "No semantic waiver for relocation of preceding storage; no extra record/slot is admitted."
+  ]
+}

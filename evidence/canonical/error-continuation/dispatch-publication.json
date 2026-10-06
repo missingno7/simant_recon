@@ -1,0 +1,70 @@
+{
+  "schema": "simant-canonical-publication-v1",
+  "prior_commit": "53fb55770724ded6c79998c99e6dd294ddc9519b",
+  "scope": "Three dispatch/array adjacency gates resolved in the existing shipped-default-VGA successful lifetime. No canonical sources, source contexts, owner capacities or execution-domain changes. Scope wording reviewed independently: only the two named critical-selector aliases are discharged; all other physical writes retain their existing gates.",
+  "reviews": {
+    "evidence/canonical/audio-track-owner/selector-review.md": "6122c5361b1d04b68ade0ae9a4b7608072789053798c762361e10703c9fc1c10",
+    "evidence/canonical/window-domain/array-gate-review.md": "75098cc1eecb0ec9d49924dfecdb2888e69590028400006472cddfb8720b3e38",
+    "evidence/canonical/error-continuation/selector-review.md": "c84d4fb5a02b588c8fbda9c5dec0375eba29a0e17ab51e03f551a6cba8748e54"
+  },
+  "prior_program_sha256": "246f824aa0f8d777e9b244b089cdd00e8e072fe61e5e4f9aa128bbf56620e489",
+  "preserved_context_changes": {
+    "S23:39C7": {
+      "claims": [
+        "PopUpInfoWindow"
+      ],
+      "data": [],
+      "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
+    },
+    "root:0250": {
+      "claims": [
+        "DrawCurBalloons",
+        "DrawSpider"
+      ],
+      "data": [],
+      "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
+    },
+    "root:0E2E": {
+      "claims": [],
+      "data": [
+        "CONST"
+      ],
+      "reason": "Corrected LessonDone case41 refers to existing fd_3D57_049E; CONST+40 now binds its actual owner segment."
+    },
+    "root:1E57": {
+      "claims": [
+        "f_1E57_0F8E"
+      ],
+      "data": [],
+      "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
+    },
+    "root:23E6": {
+      "claims": [
+        "f_23E6_0392",
+        "PrevListLine"
+      ],
+      "data": [],
+      "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
+    },
+    "root:2505": {
+      "claims": [
+        "win_Recalc",
+        "f_2505_0831",
+        "f_2505_08EA"
+      ],
+      "data": [],
+      "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
+    }
+  },
+  "proof_inputs": {
+    "evidence/canonical/audio-track-owner/selector_probe.py": "853f259f8606d3e69c57ab6076c83ed13797b34f482585818f5de14c9f13ddcd",
+    "evidence/canonical/audio-track-owner/selector-facts.json": "220f59ff28a00226fb79a1ee389635fc04cbb215c53b5fb39edb5458e85b90c7",
+    "evidence/canonical/window-domain/array_gate_probe.py": "8c95ac3a9b7d15d53dc6f04c9f123e0fa374d194d629431790f1193fa2b95d68",
+    "evidence/canonical/window-domain/array-gate-facts.json": "f4f32e53bf0668c69d552e509cb963747bd61578b214760c1a1d5d003e385926",
+    "evidence/canonical/error-continuation/selector_probe.py": "abec8bfda9229d25cf92c85f98a793b0e5f54128d1583d10dfaae78b71081d62",
+    "evidence/canonical/error-continuation/selector-facts.json": "036ec0fbf8877693cd3bafb4a1f0173a048d03a394dcaa66d1a4b7fb6bee1139",
+    "tests/test_supported_dispatch_domains.py": "7072a2354393350cad884c1ce7a8658f8ac1fe6cab458f11b2fe50aafa0a30e5",
+    "tests/test_icon_vga_domain.py": "2c164e40f04d7d26dce8957de720e142cbc7c49cd9959e508966ab46f10fdb59"
+  },
+  "historical_comparisons": {}
+}

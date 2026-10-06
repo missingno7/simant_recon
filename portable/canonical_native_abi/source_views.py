@@ -50,20 +50,9 @@ def discard_callback_declarations(text, names):
         text = text[:lo] + part[:first.s] + text[hi:]
     return text
 
-def menu_native_memory(text, rel):
+def menu_resource_view(text, rel):
     if rel == 'src/S17/m384C.c':
         text = text.replace('g_6054 = portable_menu_source_record_tables(&g_menu_view);', 'g_6054 = (char ***)&g_menu_view.titles;')
-    if rel == 'src/root/m1FD2.c':
-        for name in ('fd_50F6_46A8', 'fd_50F6_46BC'):
-            (text, n) = re.subn('extern\\s+int16_t\\s+' + name + '\\s*\\[\\s*\\]\\s*;', 'extern int16_t *' + name + ';', text)
-            if n != 1:
-                raise ValueError('canonical root menu view declaration differs: ' + name)
-        marker = '    i = 0;\n    total = 0;\n'
-        reserve = '    /* Host memory service for the live title count. The original owner\n     * capacity remains unproved; both views borrow one overlapping arena. */\n    {\n        size_t native_title_count = 0;\n        for (t = g_6054->titles; *t; ++t) ++native_title_count;\n        if (!sim_source_runtime_reserve_menu_titles(native_title_count))\n            return 0;\n    }\n'
-        if text.count(marker) != 1:
-            raise ValueError('menu title traversal shape differs')
-        text = text.replace(marker, reserve + marker)
-        text = 'extern int16_t sim_source_runtime_reserve_menu_titles(size_t);\n' + text
     return text
 
 

@@ -1,8 +1,197 @@
 {
   "schema": "simant-canonical-storage-contracts-v1",
-  "scope": "Admitted DOS shape/type/initial-state contracts for 64 canonical storage TUs; source-owned functional definitions do not claim original producer TU, communal order or historical placement.",
+  "scope": "Admitted DOS shape/type/initial-state contracts for 70 canonical storage TUs; source-owned functional definitions do not claim original producer TU, communal order or historical placement.",
   "active_validation": "Compile current canonical_source with DOS_compile options and compare parsed OMF to expected_object_shape. Historical source receipts are informational; do not compare active source hashes to old receipts.",
   "providers": [
+    {
+      "module": "source-owned:last-filename",
+      "canonical_source": "src/state/last-filename.c",
+      "DOS_compile": {
+        "basename": "LASTFILE",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_fd_50F6_3862",
+            "kind": "far",
+            "length": 100,
+            "count": 100,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "fd_50F6_3862",
+          "DOS_public": "_fd_50F6_3862",
+          "C_declaration": "char far fd_50F6_3862[100];",
+          "DOS_extent_bytes": 100,
+          "initialization": "MSC startup zero-initialized far communal",
+          "views": "One 100-byte last-filename object. Defined whole-string stores originate in 100-byte automatic filename objects; the selector's earlier 67-byte local path capacity remains a separate gate."
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/last-filename/review.md",
+        "evidence/canonical/last-filename/facts.json",
+        "evidence/canonical/last-filename/publication.json"
+      ]
+    },
+    {
+      "module": "source-owned:sample-free-list",
+      "canonical_source": "src/state/sample-free-list.c",
+      "DOS_compile": {
+        "basename": "SAMPLEFR",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_fd_50F6_0150",
+            "kind": "far",
+            "length": 156,
+            "count": 39,
+            "element_size": 4
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "fd_50F6_0150",
+          "DOS_public": "_fd_50F6_0150",
+          "C_declaration": "struct Sample far * far fd_50F6_0150[39];",
+          "DOS_extent_bytes": 156,
+          "initialization": "MSC startup zero-initialized far communal; g_181C starts at zero",
+          "views": "Thirty-nine far Sample pointers consumed only by root:0000 release/enqueue code in the supported lifetime through the first free-list fatal boundary"
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/sample-free-list/review.md",
+        "evidence/canonical/sample-free-list/facts.json",
+        "evidence/canonical/sample-free-list/publication.json"
+      ]
+    },
+    {
+      "module": "source-owned:mono-pattern-vga-linkage",
+      "canonical_source": "src/state/mono-pattern-vga-linkage.c",
+      "DOS_compile": {
+        "basename": "MONOVGA",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_g_8ED8",
+            "kind": "near",
+            "length": 1
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "g_8ED8",
+          "DOS_public": "_g_8ED8",
+          "C_declaration": "unsigned char near g_8ED8[1];",
+          "DOS_extent_bytes": 1,
+          "initialization": "MSC startup zero-initialized near common; value is unobserved in the supported VGA8 lifetime",
+          "views": "External linkage only in the supported VGA8 domain; zero data accesses. Odd-mode producer/consumers and historical capacity remain outside the contract."
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/monochrome-owner/vga-review.md",
+        "evidence/canonical/monochrome-owner/mode-facts.json",
+        "evidence/canonical/monochrome-owner/vga-publication.json"
+      ]
+    },
+    {
+      "module": "source-owned:spider-image",
+      "canonical_source": "src/state/spider-image.c",
+      "DOS_compile": {
+        "basename": "SPIDERIM",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_fd_50F6_1F26",
+            "kind": "far",
+            "length": 6276,
+            "count": 6276,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "fd_50F6_1F26",
+          "DOS_public": "_fd_50F6_1F26",
+          "C_declaration": "SpiderImage far fd_50F6_1F26;",
+          "DOS_extent_bytes": 6276,
+          "initialization": "MSC startup zero-initialized FAR_BSS; first-use zero header/left composition is reviewed for the supported VGA8 lifetime",
+          "views": "Pnt dimension prefix; 6272-byte planar pixel payload; synchronous raster, screen blit and rectangle-overlap views"
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/spider-storage/review.md",
+        "evidence/canonical/spider-storage/publication.json"
+      ]
+    },
     {
       "module": "source-owned:driver-callback-table",
       "canonical_source": "src/state/driver-callback-table.c",
@@ -7506,6 +7695,203 @@
         "evidence/canonical/icon-handle-view/review.md",
         "evidence/canonical/icon-handle-view/receipt.json"
       ]
+    },
+    {
+      "module": "source-owned:audio-track-state",
+      "canonical_source": "src/state/audio-track-state.c",
+      "DOS_compile": {
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_fd_50F6_4B30",
+            "kind": "far",
+            "length": 10,
+            "count": 10,
+            "element_size": 1
+          },
+          {
+            "name": "_fd_50F6_4B42",
+            "kind": "far",
+            "length": 40,
+            "count": 10,
+            "element_size": 4
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "scope": "Pinned shipped SOUND corpus, nominal scheduler initialization and ISR/stop control; ten live tracks maximum. Not a historical extent or arbitrary resource guarantee.",
+      "proof_refs": [
+        "evidence/canonical/shipped-resource-domain/review.md",
+        "evidence/canonical/shipped-resource-domain/publication.json"
+      ]
+    },
+    {
+      "module": "source-owned:menu-title-state",
+      "canonical_source": "src/state/menu-title-state.c",
+      "DOS_compile": {
+        "basename": "MTITLE",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_fd_50F6_46A8",
+            "kind": "far",
+            "length": 10,
+            "count": 5,
+            "element_size": 2
+          },
+          {
+            "name": "_fd_50F6_46BC",
+            "kind": "far",
+            "length": 10,
+            "count": 5,
+            "element_size": 2
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "fd_50F6_46A8",
+          "DOS_public": "_fd_50F6_46A8",
+          "C_declaration": "int far fd_50F6_46A8[5];",
+          "DOS_extent_bytes": 10,
+          "initialization": "MSC_startup_zero_common_storage; all supported cells overwritten before menu event readers"
+        },
+        {
+          "name": "fd_50F6_46BC",
+          "DOS_public": "_fd_50F6_46BC",
+          "C_declaration": "int far fd_50F6_46BC[5];",
+          "DOS_extent_bytes": 10,
+          "initialization": "MSC_startup_zero_common_storage; all supported cells overwritten before menu event readers"
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/menu-title-owner/review.md",
+        "evidence/canonical/menu-title-owner/facts.json",
+        "evidence/canonical/menu-title-owner/publication.json"
+      ]
+    },
+    {
+      "module": "source-owned:window-palette",
+      "canonical_source": "src/state/window-palette.c",
+      "DOS_compile": {
+        "basename": "WPALET",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_win_colors",
+            "kind": "far",
+            "length": 96,
+            "count": 96,
+            "element_size": 1
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "win_colors",
+          "DOS_public": "_win_colors",
+          "C_declaration": "char far win_colors[16][6];",
+          "DOS_extent_bytes": 96,
+          "initialization": "MSC_startup_zero_common_storage; all rows loaded from pinned palette before use"
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/window-domain/palette-review.md",
+        "evidence/canonical/window-domain/palette-facts.json",
+        "evidence/canonical/window-domain/palette-publication.json"
+      ]
+    },
+    {
+      "module": "source-owned:window-handles",
+      "canonical_source": "src/state/window-handles.c",
+      "DOS_compile": {
+        "basename": "WHANDLE",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Gs"
+        ]
+      },
+      "expected_object_shape": {
+        "communals": [
+          {
+            "name": "_win_handles",
+            "kind": "near",
+            "length": 136
+          }
+        ],
+        "publics": [],
+        "fixups": [],
+        "code_bytes": 0,
+        "live_initialized_bytes": 0,
+        "local_publics": [],
+        "imports": [],
+        "live_segments": [],
+        "status": "PASS",
+        "data_only": true
+      },
+      "owners": [
+        {
+          "name": "win_handles",
+          "DOS_public": "_win_handles",
+          "C_declaration": "char far * far * near win_handles[34];",
+          "DOS_extent_bytes": 136,
+          "initialization": "MSC_startup_zero_common_storage; original CRT clear independently exercised"
+        }
+      ],
+      "proof_refs": [
+        "evidence/canonical/window-domain/handle-review.md",
+        "evidence/canonical/window-domain/handle-owner-facts.json",
+        "evidence/canonical/window-domain/handle-publication.json"
+      ]
     }
   ],
   "in_module_binding_commons": [
@@ -8853,8 +9239,8 @@
     }
   ],
   "counts": {
-    "providers": 64,
-    "provider_objects": 400,
+    "providers": 72,
+    "provider_objects": 410,
     "initialized_providers": 3,
     "initialized_bytes": 50,
     "binding_commons": 34

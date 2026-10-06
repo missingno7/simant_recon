@@ -1,0 +1,299 @@
+{
+  "schema": "simant-overlay-runtime-relocation-observation-v1",
+  "closure_eligible": false,
+  "runner": {
+    "path": "C:/tools/dosbox-x/dosbox-x.exe",
+    "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+    "note": "headless DOSBox-X (SDL dummy drivers); XMS host for the 6.00AX DOS extender. Worker ax: objects identical for cputype 286/386/auto and memsize 4/16/64.",
+    "conf": {
+      "dosbox": {
+        "memsize": "16",
+        "quit warning": "false"
+      },
+      "cpu": {
+        "cycles": "max",
+        "core": "normal",
+        "cputype": "386"
+      },
+      "dos": {
+        "xms": "true",
+        "ems": "false",
+        "umb": "false"
+      },
+      "mixer": {
+        "nosound": "true"
+      },
+      "sdl": {
+        "output": "surface"
+      }
+    }
+  },
+  "image": {
+    "path": "build/workers/diagnostic_link/seven/baseline/link/SOURCE.EXE",
+    "sha256": "be472a738d280879c56b6fc9af5500e16d05b0c1d8a7a5091428b71f48b40eac",
+    "size": 500653
+  },
+  "map": {
+    "path": "build/workers/diagnostic_link/seven/baseline/link/SOURCE.MAP",
+    "sha256": "f5f1c582369d6832160a50d923515f038e31519ed25646a97bc677ecc2887254",
+    "size": 1014230
+  },
+  "control": {
+    "snapshot": {
+      "path": "build/workers/lead/fault-snapshot/control-fixed/latest.sav",
+      "sha256": "ea2615989e58f195ffc525015a912e6ac56ca6452dd5b25b3437af6dbd22a9ef",
+      "size": 48100
+    },
+    "register_and_instruction_and_PSP_checks": "PASS",
+    "fixture_source": {
+      "path": "build/workers/state_extent/fault-context/INVALID.ASM",
+      "sha256": "5375e95583bafe453e722361f4d6dd2e9805a4518d894824b77191d6c26e5d9d",
+      "size": 308
+    }
+  },
+  "decoder_scope": "Measured layout for the exact pinned2022.09.0 Windows64 runner, checked against the deliberate invalid-opcode fixture and segment/physical-base consistency. No general saved-state parser claim.",
+  "observations": {
+    "fault": {
+      "snapshot": {
+        "path": "build/workers/lead/fault-snapshot/capture-state/latest.sav",
+        "sha256": "a1786d8ee29e498609ef4a927095792b75e8e560f5d81b579e93740ccf2762d8",
+        "size": 301983
+      },
+      "registers": {
+        "ax": 44288,
+        "cx": 2739,
+        "dx": 2,
+        "bx": 2742,
+        "sp": 44285,
+        "bp": 44294,
+        "si": 63999,
+        "di": 65532,
+        "ip": 51808
+      },
+      "segments": {
+        "es": 15617,
+        "cs": 61440,
+        "ss": 23646,
+        "ds": 23646,
+        "fs": 0,
+        "gs": 0,
+        "unused0": 0,
+        "unused1": 0
+      },
+      "load_segment": 2083,
+      "section": "S06",
+      "relocation_count": 119,
+      "unique_relocation_count": 119,
+      "relocation_delta": 4166,
+      "nonrelocation_differences": 0,
+      "stack_checker": {
+        "offset": 664,
+        "expected_segment": 12826,
+        "observed_segment": 14909
+      },
+      "spider_nonzero_bytes": 0,
+      "saved_interrupt_frame": {
+        "ip": 2,
+        "cs": 44291,
+        "flags": 29186
+      },
+      "bad_target_bytes": "ffffffffffffffff",
+      "configuration": {
+        "path": "build/workers/lead/fault-snapshot/capture-state/dosbox.conf",
+        "sha256": "1ee075e006388314215ae3a40286f69a60ac11d75db4b7fbc520a5b9edd1dc50",
+        "size": 720
+      },
+      "keyboard_batch": {
+        "path": "build/workers/lead/fault-snapshot/capture-state/RUN.BAT",
+        "sha256": "bb743a5a703f4ba9903ab997fff75936499b22d5d6825223e00cddae0eea4cfd",
+        "size": 16895
+      }
+    },
+    "correct": {
+      "snapshot": {
+        "path": "build/workers/lead/fault-snapshot/history/save/22.sav",
+        "sha256": "18fb0f58e3c9c1510d89ca82a7f7505ff6df21407fa00aac7ccfec4392c1b107",
+        "size": 370103
+      },
+      "registers": {
+        "ax": 0,
+        "cx": 0,
+        "dx": 0,
+        "bx": 20,
+        "sp": 44268,
+        "bp": 44282,
+        "si": 16714,
+        "di": 0,
+        "ip": 74
+      },
+      "segments": {
+        "es": 23646,
+        "cs": 12670,
+        "ss": 23646,
+        "ds": 23646,
+        "fs": 0,
+        "gs": 0,
+        "unused0": 0,
+        "unused1": 0
+      },
+      "load_segment": 2083,
+      "section": "S06",
+      "relocation_count": 119,
+      "unique_relocation_count": 119,
+      "relocation_delta": 2083,
+      "nonrelocation_differences": 0,
+      "stack_checker": {
+        "offset": 664,
+        "expected_segment": 12826,
+        "observed_segment": 12826
+      },
+      "spider_nonzero_bytes": 0,
+      "configuration": {
+        "path": "build/workers/lead/fault-snapshot/history/dosbox.conf",
+        "sha256": "c93e24a484bd13a24b578253c3a772075fa3f5e89282f4a3fd48e0f58f4b1fce",
+        "size": 612
+      },
+      "keyboard_batch": {
+        "path": "build/workers/lead/fault-snapshot/history/RUN.BAT",
+        "sha256": "bb743a5a703f4ba9903ab997fff75936499b22d5d6825223e00cddae0eea4cfd",
+        "size": 16895
+      }
+    }
+  },
+  "replays": {
+    "repeat-a": {
+      "log": {
+        "path": "build/workers/lead/fault-snapshot/repeat-a/dosbox-runtime.log",
+        "sha256": "48613a580a3d5c3361c981f44323741ccc810ba4d2f5330fe6a4dabc738f02c5",
+        "size": 5940313
+      },
+      "game_log": {
+        "path": "build/workers/lead/fault-snapshot/repeat-a/GAME.LOG",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "runtime_faults": {
+        "count": 83466,
+        "first_lines": [
+          "Segment limit violation",
+          "Segment limit violation",
+          "Segment limit violation",
+          "Segment limit violation",
+          "Segment limit violation",
+          "Segment limit violation",
+          "Segment limit violation",
+          "Segment limit violation"
+        ],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 83466,
+          "game_abort": 0
+        }
+      },
+      "resource_read_count": 171,
+      "derived_status": "GUEST_FAULT_OBSERVED"
+    },
+    "repeat-b": {
+      "log": {
+        "path": "build/workers/lead/fault-snapshot/repeat-b/dosbox-runtime.log",
+        "sha256": "a5f8af75383a117cdbaf715ec0e73774e18a2026c7a19ba88f5d58cd683c99a9",
+        "size": 2062992
+      },
+      "game_log": {
+        "path": "build/workers/lead/fault-snapshot/repeat-b/GAME.LOG",
+        "sha256": "46cc198c55fb81591abe525147960bceb11cf2b0a08ea65b29ab9bad2f68c214",
+        "size": 69
+      },
+      "runtime_faults": {
+        "count": 1,
+        "first_lines": [
+          "FATAL ERROR: PROGRAM ABORTED"
+        ],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 1
+        }
+      },
+      "resource_read_count": 171,
+      "derived_status": "GUEST_FAULT_OBSERVED"
+    },
+    "capture-state": {
+      "log": {
+        "path": "build/workers/lead/fault-snapshot/capture-state/dosbox-runtime.log",
+        "sha256": "04b8d10300c5a93d8f89474482f018f4caab49a1f4d83ff5dd64dbcd7ea209aa",
+        "size": 6471944
+      },
+      "game_log": {
+        "path": "build/workers/lead/fault-snapshot/capture-state/GAME.LOG",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "runtime_faults": {
+        "count": 104646,
+        "first_lines": [
+          "1267574784 ERROR CPU:Illegal Unhandled Interrupt Called 6",
+          "1267574787 ERROR CPU:Illegal Unhandled Interrupt Called 6",
+          "1267574790 ERROR CPU:Illegal Unhandled Interrupt Called 6",
+          "1267574793 ERROR CPU:Illegal Unhandled Interrupt Called 6",
+          "1267574796 ERROR CPU:Illegal Unhandled Interrupt Called 6",
+          "1267574799 ERROR CPU:Illegal Unhandled Interrupt Called 6",
+          "1267574802 ERROR CPU:Illegal Unhandled Interrupt Called 6",
+          "1267574805 ERROR CPU:Illegal Unhandled Interrupt Called 6"
+        ],
+        "kind_counts": {
+          "unhandled_interrupt": 104646,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "resource_read_count": 173,
+      "derived_status": "GUEST_FAULT_OBSERVED"
+    },
+    "capture-repeat": {
+      "log": {
+        "path": "build/workers/lead/fault-snapshot/capture-repeat/dosbox-runtime.log",
+        "sha256": "ba9723ce06ab3bd9950688d1f5958ed326e42f9de48795c3874cdf170cde4b0c",
+        "size": 271670
+      },
+      "game_log": {
+        "path": "build/workers/lead/fault-snapshot/capture-repeat/GAME.LOG",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "runtime_faults": {
+        "count": 0,
+        "first_lines": [],
+        "kind_counts": {
+          "unhandled_interrupt": 0,
+          "segment_limit": 0,
+          "game_abort": 0
+        }
+      },
+      "resource_read_count": 199,
+      "derived_status": "NO_FAULT_MESSAGE_OBSERVED"
+    }
+  },
+  "decoder": {
+    "path": "build/workers/lead/fault-snapshot/read_snapshot.py",
+    "sha256": "0f3afd8c7040abc12f60edd95ddcb08ce6474e885e5a35854d8353f2382c398c",
+    "size": 4633
+  },
+  "conclusion": "Captured failed S06 has exactly two load-base additions at each unique relocation site; the same-image correct control has one. The proven display callback vector-binding defect admits a nested-load path matching this shape; explicit vector selection corrects that defect. No instruction trace pins the nesting instant or assigns all earlier failures this cause.",
+  "limits": [
+    "No source owner, buffer extent or full-game equivalence is admitted.",
+    "The fault snapshot contains zero in every provisional spider byte; buffer growth is not a causal fix for this witness.",
+    "Wall-time keyboard replay is not deterministic. Host autosave/video/logging can affect timing; the snapshot control changes no guest image or resident allocation.",
+    "The earlier no-autosave INT6 has no captured RAM. Its mechanism is not automatically identified by this later witness."
+  ],
+  "static_overlay": {
+    "record_offset": 258816,
+    "image_offset": 259296,
+    "linked_segment": 13534,
+    "image_bytes": 9584,
+    "relocation_words": 119,
+    "distinct_sites": 119,
+    "unchanged_nonrelocation_bytes": 9346
+  },
+  "resolution": "evidence/canonical/diagnostic-link/overlay-vectors.json"
+}

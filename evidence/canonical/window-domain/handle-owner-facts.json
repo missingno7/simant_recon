@@ -1,0 +1,155 @@
+{
+  "status": "PASS",
+  "schema": "simant-proposed-window-handle-owner-review-v1",
+  "capacity_claim": "SUPPORTED_ROOT_PROOF_COMPOSED_IN_HANDLE_REVIEW",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "initialization": [
+    {
+      "entry": {
+        "seg": 10740,
+        "off": 156
+      },
+      "original_clear_start": 35742,
+      "original_clear_end": 38128,
+      "incoming_cx": null,
+      "proposed_table_zero": true,
+      "entire_BSS_interval_zero": true,
+      "scope": "Original CRT instructions execute after stack setup and before C init/main; no DOS service or allocator model in this prefix"
+    },
+    {
+      "entry": {
+        "seg": 10740,
+        "off": 167
+      },
+      "original_clear_start": 35742,
+      "original_clear_end": 38128,
+      "incoming_cx": 0,
+      "proposed_table_zero": false,
+      "entire_BSS_interval_zero": false,
+      "scope": "Original CRT instructions execute after stack setup and before C init/main; no DOS service or allocator model in this prefix"
+    }
+  ],
+  "original_read_controls": [
+    {
+      "index": 33,
+      "table_nonzero": false,
+      "reporting_guard": 0,
+      "events": [
+        {
+          "event": "table-word-read-at-original-00AB",
+          "index": 33,
+          "offset": 134,
+          "within_proposed_136_bytes": true
+        },
+        {
+          "event": "resource-lookup",
+          "arguments": [
+            33,
+            0,
+            1
+          ]
+        },
+        {
+          "event": "Punt",
+          "guard": 0
+        }
+      ],
+      "models": "Resource lookup explicitly returns null; guard0 Punt is a bounded diagnostic stop, guard1 Punt executes actual returning original; allocator stops at first Handle consumer"
+    },
+    {
+      "index": 34,
+      "table_nonzero": false,
+      "reporting_guard": 0,
+      "events": [
+        {
+          "event": "table-word-read-at-original-00AB",
+          "index": 34,
+          "offset": 138,
+          "within_proposed_136_bytes": false
+        },
+        {
+          "event": "resource-lookup",
+          "arguments": [
+            34,
+            0,
+            1
+          ]
+        },
+        {
+          "event": "Punt",
+          "guard": 0
+        }
+      ],
+      "models": "Resource lookup explicitly returns null; guard0 Punt is a bounded diagnostic stop, guard1 Punt executes actual returning original; allocator stops at first Handle consumer"
+    },
+    {
+      "index": 34,
+      "table_nonzero": true,
+      "reporting_guard": 0,
+      "events": [
+        {
+          "event": "table-word-read-at-original-00AB",
+          "index": 34,
+          "offset": 138,
+          "within_proposed_136_bytes": false
+        },
+        {
+          "event": "allocator-Handle-consumer",
+          "arguments": [
+            4660,
+            41472
+          ]
+        }
+      ],
+      "models": "Resource lookup explicitly returns null; guard0 Punt is a bounded diagnostic stop, guard1 Punt executes actual returning original; allocator stops at first Handle consumer"
+    },
+    {
+      "index": 41,
+      "table_nonzero": false,
+      "reporting_guard": 0,
+      "events": [
+        {
+          "event": "Punt",
+          "guard": 0
+        }
+      ],
+      "models": "Resource lookup explicitly returns null; guard0 Punt is a bounded diagnostic stop, guard1 Punt executes actual returning original; allocator stops at first Handle consumer"
+    },
+    {
+      "index": 41,
+      "table_nonzero": true,
+      "reporting_guard": 1,
+      "events": [
+        {
+          "event": "table-word-read-at-original-00AB",
+          "index": 41,
+          "offset": 166,
+          "within_proposed_136_bytes": false
+        },
+        {
+          "event": "allocator-Handle-consumer",
+          "arguments": [
+            4660,
+            41472
+          ]
+        }
+      ],
+      "models": "Resource lookup explicitly returns null; guard0 Punt is a bounded diagnostic stop, guard1 Punt executes actual returning original; allocator stops at first Handle consumer"
+    }
+  ],
+  "save_load": {
+    "original_descriptors": 307,
+    "table_bytes": 136,
+    "intersections": 0
+  },
+  "negative_controls": [
+    "new_reader",
+    "new_writer",
+    "base_escape",
+    "address_escape",
+    "registry_alias",
+    "uppercase_ASM",
+    "rogue_state",
+    "program_interior_alias"
+  ]
+}

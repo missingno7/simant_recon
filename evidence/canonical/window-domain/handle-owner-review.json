@@ -1,0 +1,99 @@
+{
+  "aliases": {
+    "win_handles": 0,
+    "g_9230": 0
+  },
+  "occurrences": [
+    [
+      "src/root/m20E8.c",
+      "win_handles",
+      0,
+      "extern char far * far * near win_handles [ ] ;"
+    ],
+    [
+      "src/root/m20E8.c",
+      "win_handles",
+      0,
+      "win_handles [ ( char ) ( win >> 8 ) ] = h ;"
+    ],
+    [
+      "src/root/m22BF.c",
+      "win_handles",
+      0,
+      "extern char far * far * near win_handles [ ] ;"
+    ],
+    [
+      "src/root/m22BF.c",
+      "win_handles",
+      0,
+      "if ( ( h = win_handles [ win >> 8 ] ) != 0 ) {"
+    ],
+    [
+      "src/root/m22BF.c",
+      "win_handles",
+      0,
+      "win_handles [ win >> 8 ] = 0 ;"
+    ],
+    [
+      "src/root/m23AE.c",
+      "win_handles",
+      0,
+      "extern char far * far * near win_handles [ ] ;"
+    ],
+    [
+      "src/root/m23AE.c",
+      "win_handles",
+      0,
+      "if ( win_handles [ n ] == 0 ) {"
+    ],
+    [
+      "src/root/m23AE.c",
+      "win_handles",
+      0,
+      "h = win_handles [ n ] ;"
+    ],
+    [
+      "src/root/m23AE.c",
+      "win_handles",
+      0,
+      "h = win_handles [ n ] ;"
+    ],
+    [
+      "src/root/m23AE.c",
+      "win_handles",
+      0,
+      "h = ( struct Win far * far * ) win_handles [ n ] ;"
+    ],
+    [
+      "src/root/m23AE.c",
+      "win_handles",
+      0,
+      "win_handles [ n ] = 0 ;"
+    ],
+    [
+      "src/root/m2505.c",
+      "win_handles",
+      0,
+      "extern char far * far * near win_handles [ ] ;"
+    ],
+    [
+      "src/root/m2505.c",
+      "win_handles",
+      0,
+      "return * win_handles [ win >> 8 ] ;"
+    ],
+    [
+      "src/root/m2505.c",
+      "win_handles",
+      0,
+      "handle = ( char far * far * ) win_handles [ win >> 8 ] ;"
+    ]
+  ],
+  "source_sha256": {
+    "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+    "src/root/m23AE.c": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+  }
+}

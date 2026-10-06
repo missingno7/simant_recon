@@ -1,0 +1,113 @@
+{
+  "schema": "simant-window-drive-domain-counterexample-v1",
+  "status": "OPEN_COUNTEREXAMPLE",
+  "scope": "Original instruction bounded controls with explicit services; no full-game/environment witness or ownership admission.",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "source_sha256": {
+    "src/S20/m39F1.c": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "src/root/m1F66.asm": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+    "src/root/m1C62.c": "3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36",
+    "src/S15/m384C.c": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+    "src/root/m00DE.c": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c",
+    "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+    "src/root/m21FA.c": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+    "src/root/m23AE.c": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+    "src/state/window-initialized-views.c": "b93b7067493e084a7a506b711846d6e51a3f76fd966336984e6ad99fbdc670dc"
+  },
+  "asset_sha256": {
+    "assets/HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+    "assets/HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+  },
+  "window": {
+    "database": "HCEGANT",
+    "id": 22,
+    "kind": 0,
+    "objects": 21,
+    "payload_sha256": "adcbade7c2623be5bfc775a4df5c3e7e8b3d6fdc09a3c38d40a7ea26df78a4b5"
+  },
+  "results": [
+    {
+      "drive": "C",
+      "successful_directory_calls": [
+        3
+      ],
+      "selected_argument": 5645,
+      "window": 22,
+      "object": 13,
+      "blocks": 38,
+      "stop": "first win_MakeObjSelected consumer; no object body executed",
+      "consumer": {
+        "argument": 5645,
+        "count": 21,
+        "diagnostics": [],
+        "pointer_is_shipped_object": true,
+        "failure_model": "Punt explicitly returns for this separate continuation control"
+      }
+    },
+    {
+      "drive": "K",
+      "successful_directory_calls": [
+        11
+      ],
+      "selected_argument": 5653,
+      "window": 22,
+      "object": 21,
+      "blocks": 38,
+      "stop": "first win_MakeObjSelected consumer; no object body executed",
+      "consumer": {
+        "argument": 5653,
+        "count": 21,
+        "diagnostics": [
+          "Attempt to get obj address outsize window"
+        ],
+        "pointer_is_shipped_object": false,
+        "failure_model": "Punt explicitly returns for this separate continuation control"
+      }
+    }
+  ],
+  "missing_producer_premise": "Startup getcwd drive letter is unconstrained by the common default VGA domain; K: triggers the original object-index diagnostic. Independent handle/color ownership requires separate complete ID/pointer closure, not an A..H restriction.",
+  "provider_proposed": false,
+  "review": "evidence/canonical/window-domain/review.md",
+  "replay": "python evidence/canonical/window-domain/drive_selection_probe.py",
+  "fatal_results": [
+    {
+      "initial_reporting_guard": 0,
+      "reaches_CRT_exit": true,
+      "exit_code": 0,
+      "blocks": 36,
+      "executes_original_shutdown": true,
+      "models": "formatters, drawing, stack check and shutdown cleanup; CRT exit is a terminal boundary"
+    },
+    {
+      "initial_reporting_guard": 1,
+      "reaches_CRT_exit": false,
+      "exit_code": null,
+      "blocks": 2,
+      "executes_original_shutdown": false,
+      "models": "formatters, drawing, stack check and shutdown cleanup; CRT exit is a terminal boundary"
+    }
+  ],
+  "ownership_question": {
+    "handle_status": "ADMITTED_SUPPORTED_DOMAIN",
+    "color_status": "ADMITTED_SUPPORTED_DOMAIN",
+    "drive_counterexample_prevents_independent_owner": false,
+    "handle_consumers": [
+      "src/root/m20E8.c",
+      "src/root/m22BF.c",
+      "src/root/m23AE.c",
+      "src/root/m2505.c"
+    ],
+    "color_consumers": [
+      "src/root/m20E8.c",
+      "src/root/m21FA.c",
+      "src/root/m22BF.c"
+    ],
+    "K_drive_handle_slot": 22,
+    "first_fatal_exit_policy": "Punt -> original S15 shutdown -> empty Pascal stub -> CRT exit(0); returning-Punt overread is a separate model",
+    "color_evidence": "evidence/canonical/window-domain/palette-review.md",
+    "handle_evidence": "evidence/canonical/window-domain/handle-review.md"
+  }
+}

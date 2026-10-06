@@ -22,7 +22,7 @@ from canonical_native_abi.source_views import (
     centralize,
     edit_cache_view,
     graphics_canonical_views,
-    menu_native_memory,
+    menu_resource_view,
     screen_clip_canonical_views,
     translate_29d6_port_block,
     unused_cache_release_argument,
@@ -147,7 +147,7 @@ def main():
             text,count=re.subn(initializer,'struct InputQueueDescriptor g_5FF2 = { {0,0,0,0xff},0,0,input_queue,5,0,10,0 };',text)
             if count!=1:errors.append({'source':rel,'stage':'canonical input queue native pointer','error':'initializer shape differs'})
             text='#include "portable/whole_program/types/input_queue.h"\n'+text
-        if rel in {'src/root/m1E57.c','src/S15/m384C.c'}:
+        if rel == 'src/root/m1E57.c':
             text=apply('source_runtime_globals','adapt_transformed',text,text,rel,original)
         if rel in abis['audio_shared_state_preword'].SOURCE_MODULES:
             if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m284A.c','m29F0.c','m277E.c','m29D6.c','m293A.c','m290D.c'}:
@@ -187,7 +187,7 @@ def main():
         text=canonical_interior_views(text)
         text=audio_overlap_views(text,rel)
         text=graphics_canonical_views(text,rel)
-        text=menu_native_memory(text,rel)
+        text=menu_resource_view(text,rel)
         text=screen_clip_canonical_views(text,rel)
         text=re.sub(r'(?m)^\s*extern\s+(?:PortableWholeAudioVoiceSlot\s+fd_55B3_6B4E\[33\]|int16_t\s+fd_55B3_6BA4\[128\])\s*;\s*\n','',text)
         text=edit_cache_view(text)

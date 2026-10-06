@@ -1,0 +1,31 @@
+{
+  "schema": "simant-canonical-publication-v1",
+  "prior_commit": "53fb55770724ded6c79998c99e6dd294ddc9519b",
+  "scope": "Sixteen six-byte palette rows for pinned shipped resources, reviewed palette callers, object provenance and first-fatal error boundary. No historical allocation/placement or general object-domain claim.",
+  "prior_program_sha256": "da97020441354a2864e921b0cdfd226980bd03eb3dfc15467c39442fcfe6f63b",
+  "root_review": {
+    "source_correction_reviewed": true,
+    "proof": "evidence/canonical/window-domain/palette-review.md"
+  },
+  "storage_contract": {
+    "communals": [
+      {
+        "name": "_win_colors",
+        "kind": "far",
+        "length": 96,
+        "count": 96,
+        "element_size": 1
+      }
+    ],
+    "publics": [],
+    "fixups": [],
+    "code_bytes": 0,
+    "live_initialized_bytes": 0,
+    "local_publics": [],
+    "imports": [],
+    "live_segments": [],
+    "status": "PASS",
+    "data_only": true
+  },
+  "historical_comparisons": {}
+}
