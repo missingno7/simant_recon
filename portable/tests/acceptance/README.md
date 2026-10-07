@@ -8,12 +8,13 @@ subset exits 2. It never grants acceptance or closes a game/platform blocker.
 
 Build the native program with `portable/build.py`. Run DOS acceptance with
 `dos/acceptance.py`; its scenario output now retains `dump-cp<ms>` memory files.
-Use the reconstructed output directory, containing `execution-report.json` and
-`INPUT.SCR`, as `--dos`. Ignored assets, linked DOS inputs and a GDB installation
+Use the acceptance parent (with `original/` and `reconstructed/`), or its
+reconstructed output directory, as `--dos`. The sibling original run is discovered
+automatically; `--original-dos` supplies a separate original run. Ignored assets, linked DOS inputs and a GDB installation
 must be available. Example (use a fresh explicit output directory):
 
 ```powershell
-python portable/tests/acceptance/native_acceptance.py dos/scenarios/new-game-save.json --dos build/current/acceptance/new-game-save/reconstructed --out build/workers/user/new-game --gdb C:/msys64/mingw64/bin/gdb.exe
+python portable/tests/acceptance/native_acceptance.py dos/scenarios/new-game-save.json --dos build/current/acceptance/new-game-save --out build/workers/user/new-game --gdb C:/msys64/mingw64/bin/gdb.exe
 ```
 
 `--oracle-root` selects a checkout containing the linked canonical DOS inputs;
@@ -22,6 +23,37 @@ checkout. Its SHA must match DOS staging. `--compare-only` reuses captured nativ
 observations. Canonical executable, program inventory, object layout and original
 input operations are checked; observation commands do not alter the input history.
 Extra DOS directories are explicitly auxiliary, with executable identity checked.
+
+## Three-way attribution
+
+When both DOS checkpoint dumps exist, each comparable named view reports a
+`verdict`, and `three_way.symbols` retains all three pairwise byte differences:
+
+| Verdict | Observed condition |
+| --- | --- |
+| `ORIGINAL_EQUAL_ALL` | Original = canonical DOS = native |
+| `PORT_INTRODUCED` | Original = canonical DOS; native differs |
+| `RECONSTRUCTION_INTRODUCED` | Original differs from canonical DOS; native may match either or neither |
+| `ORIGINAL_DOS_NONDETERMINISTIC` | A repeat of the **same DOS executable** differs at this checkpoint |
+
+Supply `--original-repeat <original-run>` and/or `--dos-repeat <canonical-run>`
+for repeat controls. Cross-executable disagreement alone cannot establish
+nondeterminism. Reconstruction disagreement takes precedence over a simultaneous
+native disagreement; pairwise details retain both. These are exact observation
+verdicts: equal-time checkpoint alignment remains diagnostic, so they do not
+automatically promote a causal claim into the
+[behavior ledger](../../../evidence/canonical/behavior-attribution/README.md).
+
+Original executable identity is checked against `layout/oracle.lock.json`;
+original view addresses come independently from `layout/symbols.json`, with a
+separate runtime load base. Canonical addresses remain MAP/OMF-derived. Missing
+original names, dumps or native views remain unavailable/`UNATTRIBUTED`, including
+private names without reviewed original anchors. No original address is inferred
+from canonical placement. Named stack-tail exclusions require a shared sentinel
+position across all compared runs; raw verdicts remain visible. Step observations
+remain explicitly two-way canonical/native; the current step tool does not capture
+original steps. View extents are the canonical observed extents; a mapped original
+raw view does not prove historical ownership/capacity of every byte it spans.
 
 ## Clock and step alignment
 
@@ -99,7 +131,9 @@ python portable/tests/acceptance/run_virtual_audio_tests.py --sdk build/deps/sdl
 python portable/whole_program/platform/tests/run_virtual_clock_tests.py --sdk build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32
 ```
 
-Controls cover canonical identity/order rejection, input-history mismatch,
+Controls cover independently relocated synthetic dumps for every three-way
+verdict, same-executable repeat requirements, original identity/directory discovery,
+canonical identity/order rejection, input-history mismatch,
 byte/record localization, retained dumps, live-prefix and moved-sentinel failures,
 raw-state behavior, SaveRec owner gaps/conflicts, and wall-delay/pump-chunking
 independence of the Sound Mode 6 IRQ and ISA clocks. The root test discovery bridge

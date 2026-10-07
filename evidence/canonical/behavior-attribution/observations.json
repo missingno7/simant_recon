@@ -1,0 +1,3069 @@
+{
+  "schema": "simant-behavior-attribution-observations-v1",
+  "base_commit": "671f8eb",
+  "original_executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "canonical_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+  "native_executable_sha256": "d414225cbb2df00ff2c1142bfdcb0a9bacad6ec23c3a9c132dfb058af45b2e80",
+  "scope": "Read-only extra14/22/40/49s observations on unchanged new-game-save inputs; diagnostic equal time, not universal common simulation phase.",
+  "paired_acceptance": {
+    "path": "build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/acceptance.json",
+    "sha256": "25c9225165233b3351b47ae4326c717270c77f931934c53a1d07a796ed9184e4",
+    "status": "PASS",
+    "scenario_sha256": "df5cacbb4494795ff5b00b355aaad9257225b039a886300bbb28008e9c48972e",
+    "script_sha256": "81bd44c5dd211ff6ca00dbeb22c1ff812e4b2e16db14c4cd45c944619e734a5d",
+    "runs": {
+      "original": {
+        "status": "EMULATOR_EXITED",
+        "runner": {
+          "path": "C:/tools/dosbox-x-2026.08.31-simant-acceptance/dosbox-x-v3.exe",
+          "sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+          "size": 21082112
+        },
+        "runtime_faults": 0,
+        "executable": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "size": 506509
+        }
+      },
+      "reconstructed": {
+        "status": "EMULATOR_EXITED",
+        "runner": {
+          "path": "C:/tools/dosbox-x-2026.08.31-simant-acceptance/dosbox-x-v3.exe",
+          "sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+          "size": 21082112
+        },
+        "runtime_faults": 0,
+        "executable": {
+          "path": "build/current/dos/link/SOURCE.EXE",
+          "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+          "size": 499341
+        }
+      }
+    },
+    "sound": {
+      "sb_dsp": {
+        "status": "EQUAL",
+        "writes": [
+          5,
+          5
+        ],
+        "max_timing_delta_ms": 0.002465
+      },
+      "opl": {
+        "status": "EQUAL",
+        "writes": [
+          13476,
+          13476
+        ],
+        "max_timing_delta_ms": 0.00853
+      }
+    },
+    "saves": {
+      "A.ANT": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": [],
+        "sha256": [
+          "079355a8355d1579107863d5ebc8caa84b42b1027eaed39c604f51d1b51460bc",
+          "079355a8355d1579107863d5ebc8caa84b42b1027eaed39c604f51d1b51460bc"
+        ]
+      },
+      "cp14000": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": [],
+        "sha256": [
+          "52cd14cff8752f5ee1c573367332c4b10bc67ee6be1c695640ad7aaec9d60475",
+          "52cd14cff8752f5ee1c573367332c4b10bc67ee6be1c695640ad7aaec9d60475"
+        ]
+      },
+      "cp22000": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": [],
+        "sha256": [
+          "a367da965d295db69475d2b4b43766352280689c0b644413e3f776438700af0b",
+          "a367da965d295db69475d2b4b43766352280689c0b644413e3f776438700af0b"
+        ]
+      },
+      "cp40000": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": [],
+        "sha256": [
+          "079355a8355d1579107863d5ebc8caa84b42b1027eaed39c604f51d1b51460bc",
+          "079355a8355d1579107863d5ebc8caa84b42b1027eaed39c604f51d1b51460bc"
+        ]
+      },
+      "cp49000": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": [],
+        "sha256": [
+          "4a3f4839163b28e34700f19c7961d9e0abdbc52a38749ffa35cad6460b5583ba",
+          "4a3f4839163b28e34700f19c7961d9e0abdbc52a38749ffa35cad6460b5583ba"
+        ]
+      }
+    }
+  },
+  "three_way_provenance": {
+    "original": {
+      "execution_report_sha256": "2c0ecb2f368f44f89b91abf01defa911f58f639407de1989cde4e99281e4fe5e",
+      "executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "observation_script_sha256": "9728ce4de234c034423d34a062c16da45f3211343dc2e217d9f06773bc8e8914",
+      "original_input_operations_verified": true,
+      "observation_environment": {
+        "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+        "guest_clock": "DATE 01-01-1992, TIME 12:00:00 set by the batch before input scheduling and launch",
+        "resources": {
+          "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+          "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+          "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+          "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15",
+          "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+          "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+          "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+          "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+          "SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+          "SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+          "SIMANT.CFG": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+          "INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486"
+        },
+        "emulator_settings": {
+          "dosbox": {
+            "memsize": "16",
+            "quit warning": "false"
+          },
+          "cpu": {
+            "cycles": "fixed 200000",
+            "core": "normal",
+            "cputype": "386"
+          },
+          "dos": {
+            "xms": "true",
+            "ems": "false",
+            "umb": "false"
+          },
+          "mixer": {
+            "nosound": "true"
+          },
+          "sdl": {
+            "output": "surface"
+          }
+        },
+        "source_arguments": ""
+      },
+      "saved_game_sha256": null
+    },
+    "canonical": {
+      "execution_report_sha256": "d92e1dd954c28020f6eaa258ed2dc81553dd9c1336b840a5a84f82a44a9e7941",
+      "executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+      "observation_script_sha256": "1889275d1a49f139ab1eefc565bb9ee8204ac93d30c357316258e3de1caa4181",
+      "original_input_operations_verified": true,
+      "observation_environment": {
+        "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+        "guest_clock": "DATE 01-01-1992, TIME 12:00:00 set by the batch before input scheduling and launch",
+        "resources": {
+          "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+          "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+          "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+          "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15",
+          "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+          "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+          "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+          "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+          "SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+          "SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+          "SIMANT.CFG": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+          "INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486"
+        },
+        "emulator_settings": {
+          "dosbox": {
+            "memsize": "16",
+            "quit warning": "false"
+          },
+          "cpu": {
+            "cycles": "fixed 200000",
+            "core": "normal",
+            "cputype": "386"
+          },
+          "dos": {
+            "xms": "true",
+            "ems": "false",
+            "umb": "false"
+          },
+          "mixer": {
+            "nosound": "true"
+          },
+          "sdl": {
+            "output": "surface"
+          }
+        },
+        "source_arguments": ""
+      },
+      "saved_game_sha256": null
+    }
+  },
+  "checkpoints": {
+    "14000": {
+      "dumps": {
+        "original": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/original/dump-cp14000",
+          "sha256": "2fc420a1b526e8ac136f85fe968a6461dbd5ec82a4378d8ae7622f91c17e534e"
+        },
+        "canonical_dos": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/reconstructed/dump-cp14000",
+          "sha256": "20687d3528665f302f17d945ee030fd4df7b85057a71404525005f6f1b051208"
+        }
+      },
+      "verdict_counts": {
+        "ORIGINAL_EQUAL_ALL": 684,
+        "PORT_INTRODUCED": 14,
+        "RECONSTRUCTION_INTRODUCED": 16,
+        "ORIGINAL_DOS_NONDETERMINISTIC": 0
+      },
+      "compared_symbols": 714,
+      "unavailable_views": 476,
+      "original_vs_canonical_save": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": []
+      }
+    },
+    "22000": {
+      "dumps": {
+        "original": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/original/dump-cp22000",
+          "sha256": "711813e2c5dae0571f69f6e35f77e0bb4f5f875d93788a00026404de19ccf6e8"
+        },
+        "canonical_dos": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/reconstructed/dump-cp22000",
+          "sha256": "9f53bed53f2e57a7059a001058b84fdafe92c1f38b6ff6c18e7f639195bb9df2"
+        }
+      },
+      "verdict_counts": {
+        "ORIGINAL_EQUAL_ALL": 587,
+        "PORT_INTRODUCED": 110,
+        "RECONSTRUCTION_INTRODUCED": 17,
+        "ORIGINAL_DOS_NONDETERMINISTIC": 0
+      },
+      "compared_symbols": 714,
+      "unavailable_views": 476,
+      "original_vs_canonical_save": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": []
+      }
+    },
+    "40000": {
+      "dumps": {
+        "original": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/original/dump-cp40000",
+          "sha256": "29518eeb9da1d43ed1e9684448cc8df520dbeebc60c8c8e0331c451a601e8142"
+        },
+        "canonical_dos": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/reconstructed/dump-cp40000",
+          "sha256": "199e365efb86883119052206be1264c2c8ec09349a9c429effcce015fb92432f"
+        }
+      },
+      "verdict_counts": {
+        "ORIGINAL_EQUAL_ALL": 594,
+        "PORT_INTRODUCED": 99,
+        "RECONSTRUCTION_INTRODUCED": 21,
+        "ORIGINAL_DOS_NONDETERMINISTIC": 0
+      },
+      "compared_symbols": 714,
+      "unavailable_views": 476,
+      "original_vs_canonical_save": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": []
+      }
+    },
+    "49000": {
+      "dumps": {
+        "original": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/original/dump-cp49000",
+          "sha256": "08481c0eb5091feba6ccf7958fe3d6fff9b251af87530cb41f372ffdb842f60c"
+        },
+        "canonical_dos": {
+          "path": "D:/Prog/simant_recon/build/workers/p2-attrib/wt/build/workers/p2-attrib/new-game-pair/reconstructed/dump-cp49000",
+          "sha256": "87b2fa062be2fb4fbb2b7e11a266cf746d40eb9bb198e4158cd489b29b1b76a6"
+        }
+      },
+      "verdict_counts": {
+        "ORIGINAL_EQUAL_ALL": 560,
+        "PORT_INTRODUCED": 132,
+        "RECONSTRUCTION_INTRODUCED": 22,
+        "ORIGINAL_DOS_NONDETERMINISTIC": 0
+      },
+      "compared_symbols": 714,
+      "unavailable_views": 476,
+      "original_vs_canonical_save": {
+        "status": "EQUAL",
+        "records": 307,
+        "differences": []
+      }
+    }
+  },
+  "first_checkpoint_differences": {
+    "fd_50F6_0FBA": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      }
+    },
+    "fd_50F6_0FFE": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      }
+    },
+    "fd_50F6_3862": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 100,
+        "differing_bytes": 9,
+        "first_offset": 82,
+        "dos_byte": 57,
+        "native_byte": 0,
+        "max_byte_delta": 110,
+        "examples": [
+          {
+            "offset": 82,
+            "dos": 57,
+            "native": 0
+          },
+          {
+            "offset": 83,
+            "dos": 110,
+            "native": 0
+          },
+          {
+            "offset": 84,
+            "dos": 67,
+            "native": 0
+          },
+          {
+            "offset": 88,
+            "dos": 74,
+            "native": 0
+          },
+          {
+            "offset": 89,
+            "dos": 57,
+            "native": 0
+          },
+          {
+            "offset": 90,
+            "dos": 55,
+            "native": 0
+          },
+          {
+            "offset": 91,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 92,
+            "dos": 74,
+            "native": 0
+          }
+        ]
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 100,
+        "differing_bytes": 9,
+        "first_offset": 82,
+        "dos_byte": 57,
+        "native_byte": 0,
+        "max_byte_delta": 110,
+        "examples": [
+          {
+            "offset": 82,
+            "dos": 57,
+            "native": 0
+          },
+          {
+            "offset": 83,
+            "dos": 110,
+            "native": 0
+          },
+          {
+            "offset": 84,
+            "dos": 67,
+            "native": 0
+          },
+          {
+            "offset": 88,
+            "dos": 74,
+            "native": 0
+          },
+          {
+            "offset": 89,
+            "dos": 57,
+            "native": 0
+          },
+          {
+            "offset": 90,
+            "dos": 55,
+            "native": 0
+          },
+          {
+            "offset": 91,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 92,
+            "dos": 74,
+            "native": 0
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "EQUAL",
+        "bytes": 100
+      }
+    },
+    "fd_50F6_38B6": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 67,
+        "native_byte": 68,
+        "max_byte_delta": 1,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 67,
+            "native": 68
+          }
+        ],
+        "dos_unsigned": 67,
+        "native_unsigned": 68,
+        "unsigned_delta": 1
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 67,
+        "native_byte": 68,
+        "max_byte_delta": 1,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 67,
+            "native": 68
+          }
+        ],
+        "dos_unsigned": 67,
+        "native_unsigned": 68,
+        "unsigned_delta": 1
+      }
+    },
+    "fd_50F6_3944": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 3,
+        "first_offset": 0,
+        "dos_byte": 112,
+        "native_byte": 32,
+        "max_byte_delta": 80,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 112,
+            "native": 32
+          },
+          {
+            "offset": 1,
+            "dos": 66,
+            "native": 53
+          },
+          {
+            "offset": 2,
+            "dos": 2,
+            "native": 3
+          }
+        ],
+        "dos_unsigned": 148080,
+        "native_unsigned": 210208,
+        "unsigned_delta": 62128
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 4,
+        "first_offset": 0,
+        "dos_byte": 112,
+        "native_byte": 0,
+        "max_byte_delta": 112,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 112,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 66,
+            "native": 0
+          },
+          {
+            "offset": 2,
+            "dos": 2,
+            "native": 0
+          },
+          {
+            "offset": 3,
+            "dos": 0,
+            "native": 4
+          }
+        ],
+        "dos_unsigned": 148080,
+        "native_unsigned": 67108864,
+        "unsigned_delta": 66960784
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 4,
+        "first_offset": 0,
+        "dos_byte": 32,
+        "native_byte": 0,
+        "max_byte_delta": 53,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 32,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 53,
+            "native": 0
+          },
+          {
+            "offset": 2,
+            "dos": 3,
+            "native": 0
+          },
+          {
+            "offset": 3,
+            "dos": 0,
+            "native": 4
+          }
+        ],
+        "dos_unsigned": 210208,
+        "native_unsigned": 67108864,
+        "unsigned_delta": 66898656
+      }
+    },
+    "fd_50F6_3950": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 94,
+        "native_byte": 223,
+        "max_byte_delta": 129,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 94,
+            "native": 223
+          },
+          {
+            "offset": 1,
+            "dos": 146,
+            "native": 159
+          }
+        ],
+        "dos_unsigned": 37470,
+        "native_unsigned": 40927,
+        "unsigned_delta": 3457
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 94,
+        "native_byte": 0,
+        "max_byte_delta": 146,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 94,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 146,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 37470,
+        "native_unsigned": 0,
+        "unsigned_delta": -37470
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 223,
+        "native_byte": 0,
+        "max_byte_delta": 223,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 223,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 159,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 40927,
+        "native_unsigned": 0,
+        "unsigned_delta": -40927
+      }
+    },
+    "fd_50F6_3C14": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2048
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2048,
+        "differing_bytes": 6,
+        "first_offset": 8,
+        "dos_byte": 0,
+        "native_byte": 13,
+        "max_byte_delta": 240,
+        "examples": [
+          {
+            "offset": 8,
+            "dos": 0,
+            "native": 13
+          },
+          {
+            "offset": 9,
+            "dos": 0,
+            "native": 240
+          },
+          {
+            "offset": 12,
+            "dos": 128,
+            "native": 13
+          },
+          {
+            "offset": 13,
+            "dos": 2,
+            "native": 240
+          },
+          {
+            "offset": 14,
+            "dos": 224,
+            "native": 173
+          },
+          {
+            "offset": 15,
+            "dos": 1,
+            "native": 186
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2048,
+        "differing_bytes": 6,
+        "first_offset": 8,
+        "dos_byte": 0,
+        "native_byte": 13,
+        "max_byte_delta": 240,
+        "examples": [
+          {
+            "offset": 8,
+            "dos": 0,
+            "native": 13
+          },
+          {
+            "offset": 9,
+            "dos": 0,
+            "native": 240
+          },
+          {
+            "offset": 12,
+            "dos": 128,
+            "native": 13
+          },
+          {
+            "offset": 13,
+            "dos": 2,
+            "native": 240
+          },
+          {
+            "offset": 14,
+            "dos": 224,
+            "native": 173
+          },
+          {
+            "offset": 15,
+            "dos": 1,
+            "native": 186
+          }
+        ]
+      }
+    },
+    "fd_50F6_49FA": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 16,
+        "differing_bytes": 3,
+        "first_offset": 9,
+        "dos_byte": 0,
+        "native_byte": 3,
+        "max_byte_delta": 170,
+        "examples": [
+          {
+            "offset": 9,
+            "dos": 0,
+            "native": 3
+          },
+          {
+            "offset": 10,
+            "dos": 215,
+            "native": 45
+          },
+          {
+            "offset": 11,
+            "dos": 93,
+            "native": 92
+          }
+        ]
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 16,
+        "differing_bytes": 3,
+        "first_offset": 4,
+        "dos_byte": 236,
+        "native_byte": 252,
+        "max_byte_delta": 215,
+        "examples": [
+          {
+            "offset": 4,
+            "dos": 236,
+            "native": 252
+          },
+          {
+            "offset": 10,
+            "dos": 215,
+            "native": 0
+          },
+          {
+            "offset": 11,
+            "dos": 93,
+            "native": 0
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 16,
+        "differing_bytes": 4,
+        "first_offset": 4,
+        "dos_byte": 236,
+        "native_byte": 252,
+        "max_byte_delta": 92,
+        "examples": [
+          {
+            "offset": 4,
+            "dos": 236,
+            "native": 252
+          },
+          {
+            "offset": 9,
+            "dos": 3,
+            "native": 0
+          },
+          {
+            "offset": 10,
+            "dos": 45,
+            "native": 0
+          },
+          {
+            "offset": 11,
+            "dos": 92,
+            "native": 0
+          }
+        ]
+      }
+    },
+    "fd_50F6_4A4E": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 198
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 198,
+        "differing_bytes": 24,
+        "first_offset": 5,
+        "dos_byte": 64,
+        "native_byte": 74,
+        "max_byte_delta": 77,
+        "examples": [
+          {
+            "offset": 5,
+            "dos": 64,
+            "native": 74
+          },
+          {
+            "offset": 11,
+            "dos": 64,
+            "native": 74
+          },
+          {
+            "offset": 14,
+            "dos": 0,
+            "native": 5
+          },
+          {
+            "offset": 16,
+            "dos": 0,
+            "native": 77
+          },
+          {
+            "offset": 17,
+            "dos": 17,
+            "native": 1
+          },
+          {
+            "offset": 20,
+            "dos": 0,
+            "native": 7
+          },
+          {
+            "offset": 21,
+            "dos": 35,
+            "native": 25
+          },
+          {
+            "offset": 22,
+            "dos": 0,
+            "native": 58
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 198,
+        "differing_bytes": 24,
+        "first_offset": 5,
+        "dos_byte": 64,
+        "native_byte": 74,
+        "max_byte_delta": 77,
+        "examples": [
+          {
+            "offset": 5,
+            "dos": 64,
+            "native": 74
+          },
+          {
+            "offset": 11,
+            "dos": 64,
+            "native": 74
+          },
+          {
+            "offset": 14,
+            "dos": 0,
+            "native": 5
+          },
+          {
+            "offset": 16,
+            "dos": 0,
+            "native": 77
+          },
+          {
+            "offset": 17,
+            "dos": 17,
+            "native": 1
+          },
+          {
+            "offset": 20,
+            "dos": 0,
+            "native": 7
+          },
+          {
+            "offset": 21,
+            "dos": 35,
+            "native": 25
+          },
+          {
+            "offset": 22,
+            "dos": 0,
+            "native": 58
+          }
+        ]
+      }
+    },
+    "fd_50F6_4B42": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 40
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 40,
+        "differing_bytes": 10,
+        "first_offset": 4,
+        "dos_byte": 219,
+        "native_byte": 81,
+        "max_byte_delta": 162,
+        "examples": [
+          {
+            "offset": 4,
+            "dos": 219,
+            "native": 81
+          },
+          {
+            "offset": 5,
+            "dos": 31,
+            "native": 33
+          },
+          {
+            "offset": 8,
+            "dos": 0,
+            "native": 162
+          },
+          {
+            "offset": 9,
+            "dos": 30,
+            "native": 33
+          },
+          {
+            "offset": 20,
+            "dos": 0,
+            "native": 94
+          },
+          {
+            "offset": 21,
+            "dos": 30,
+            "native": 33
+          },
+          {
+            "offset": 24,
+            "dos": 244,
+            "native": 254
+          },
+          {
+            "offset": 25,
+            "dos": 29,
+            "native": 33
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 40,
+        "differing_bytes": 10,
+        "first_offset": 4,
+        "dos_byte": 219,
+        "native_byte": 81,
+        "max_byte_delta": 162,
+        "examples": [
+          {
+            "offset": 4,
+            "dos": 219,
+            "native": 81
+          },
+          {
+            "offset": 5,
+            "dos": 31,
+            "native": 33
+          },
+          {
+            "offset": 8,
+            "dos": 0,
+            "native": 162
+          },
+          {
+            "offset": 9,
+            "dos": 30,
+            "native": 33
+          },
+          {
+            "offset": 20,
+            "dos": 0,
+            "native": 94
+          },
+          {
+            "offset": 21,
+            "dos": 30,
+            "native": 33
+          },
+          {
+            "offset": 24,
+            "dos": 244,
+            "native": 254
+          },
+          {
+            "offset": 25,
+            "dos": 29,
+            "native": 33
+          }
+        ]
+      }
+    },
+    "fd_55B3_6B42": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 14,
+        "native_byte": 13,
+        "max_byte_delta": 1,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 14,
+            "native": 13
+          }
+        ],
+        "dos_unsigned": 14,
+        "native_unsigned": 13,
+        "unsigned_delta": -1
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 14,
+        "native_byte": 13,
+        "max_byte_delta": 1,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 14,
+            "native": 13
+          }
+        ],
+        "dos_unsigned": 14,
+        "native_unsigned": 13,
+        "unsigned_delta": -1
+      }
+    },
+    "fd_55B3_6B9C": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 142,
+        "native_byte": 146,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 142,
+            "native": 146
+          }
+        ],
+        "dos_unsigned": 398,
+        "native_unsigned": 402,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 146,
+        "native_byte": 142,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 146,
+            "native": 142
+          }
+        ],
+        "dos_unsigned": 402,
+        "native_unsigned": 398,
+        "unsigned_delta": -4
+      }
+    },
+    "fd_55B3_6B9E": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 163,
+        "native_byte": 225,
+        "max_byte_delta": 62,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 163,
+            "native": 225
+          },
+          {
+            "offset": 1,
+            "dos": 108,
+            "native": 91
+          }
+        ],
+        "dos_unsigned": 27811,
+        "native_unsigned": 23521,
+        "unsigned_delta": -4290
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 225,
+        "native_byte": 163,
+        "max_byte_delta": 62,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 225,
+            "native": 163
+          },
+          {
+            "offset": 1,
+            "dos": 91,
+            "native": 108
+          }
+        ],
+        "dos_unsigned": 23521,
+        "native_unsigned": 27811,
+        "unsigned_delta": 4290
+      }
+    },
+    "fd_55B3_74AD": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 194,
+        "native_byte": 198,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 194,
+            "native": 198
+          }
+        ],
+        "dos_unsigned": 450,
+        "native_unsigned": 454,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 198,
+        "native_byte": 194,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 198,
+            "native": 194
+          }
+        ],
+        "dos_unsigned": 454,
+        "native_unsigned": 450,
+        "unsigned_delta": -4
+      }
+    },
+    "fd_55B3_74AF": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 168,
+        "native_byte": 172,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 168,
+            "native": 172
+          }
+        ],
+        "dos_unsigned": 424,
+        "native_unsigned": 428,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 172,
+        "native_byte": 168,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 172,
+            "native": 168
+          }
+        ],
+        "dos_unsigned": 428,
+        "native_unsigned": 424,
+        "unsigned_delta": -4
+      }
+    },
+    "fd_55B3_74B1": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 100,
+        "native_byte": 104,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 100,
+            "native": 104
+          }
+        ],
+        "dos_unsigned": 356,
+        "native_unsigned": 360,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 104,
+        "native_byte": 100,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 104,
+            "native": 100
+          }
+        ],
+        "dos_unsigned": 360,
+        "native_unsigned": 356,
+        "unsigned_delta": -4
+      }
+    },
+    "fd_55B3_74B3": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 136,
+        "native_byte": 140,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 136,
+            "native": 140
+          }
+        ],
+        "dos_unsigned": 392,
+        "native_unsigned": 396,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 140,
+        "native_byte": 136,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 140,
+            "native": 136
+          }
+        ],
+        "dos_unsigned": 396,
+        "native_unsigned": 392,
+        "unsigned_delta": -4
+      }
+    },
+    "fd_55B3_74B5": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 142,
+        "native_byte": 146,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 142,
+            "native": 146
+          }
+        ],
+        "dos_unsigned": 398,
+        "native_unsigned": 402,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 146,
+        "native_byte": 142,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 146,
+            "native": 142
+          }
+        ],
+        "dos_unsigned": 402,
+        "native_unsigned": 398,
+        "unsigned_delta": -4
+      }
+    },
+    "fd_55B3_74B7": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 122,
+        "native_byte": 126,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 122,
+            "native": 126
+          }
+        ],
+        "dos_unsigned": 378,
+        "native_unsigned": 382,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 126,
+        "native_byte": 122,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 126,
+            "native": 122
+          }
+        ],
+        "dos_unsigned": 382,
+        "native_unsigned": 378,
+        "unsigned_delta": -4
+      }
+    },
+    "fd_55B3_74B9": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 128,
+        "native_byte": 132,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 128,
+            "native": 132
+          }
+        ],
+        "dos_unsigned": 384,
+        "native_unsigned": 388,
+        "unsigned_delta": 4
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 132,
+        "native_byte": 128,
+        "max_byte_delta": 4,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 132,
+            "native": 128
+          }
+        ],
+        "dos_unsigned": 388,
+        "native_unsigned": 384,
+        "unsigned_delta": -4
+      }
+    },
+    "g_433E": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 1
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 1,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 32,
+        "native_byte": 0,
+        "max_byte_delta": 32,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 32,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 32,
+        "native_unsigned": 0,
+        "unsigned_delta": -32
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 1,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 32,
+        "native_byte": 0,
+        "max_byte_delta": 32,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 32,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 32,
+        "native_unsigned": 0,
+        "unsigned_delta": -32
+      }
+    },
+    "g_434E": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 4
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 12,
+        "native_byte": 0,
+        "max_byte_delta": 12,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 12,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 12,
+        "native_unsigned": 0,
+        "unsigned_delta": -12
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 12,
+        "native_byte": 0,
+        "max_byte_delta": 12,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 12,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 12,
+        "native_unsigned": 0,
+        "unsigned_delta": -12
+      }
+    },
+    "g_4352": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 4
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 27,
+        "native_byte": 1,
+        "max_byte_delta": 26,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 27,
+            "native": 1
+          }
+        ],
+        "dos_unsigned": 27,
+        "native_unsigned": 1,
+        "unsigned_delta": -26
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 27,
+        "native_byte": 1,
+        "max_byte_delta": 26,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 27,
+            "native": 1
+          }
+        ],
+        "dos_unsigned": 27,
+        "native_unsigned": 1,
+        "unsigned_delta": -26
+      }
+    },
+    "g_4DA4": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 1
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 1,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 4,
+        "native_byte": 2,
+        "max_byte_delta": 2,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 4,
+            "native": 2
+          }
+        ],
+        "dos_unsigned": 4,
+        "native_unsigned": 2,
+        "unsigned_delta": -2
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 1,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 4,
+        "native_byte": 2,
+        "max_byte_delta": 2,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 4,
+            "native": 2
+          }
+        ],
+        "dos_unsigned": 4,
+        "native_unsigned": 2,
+        "unsigned_delta": -2
+      }
+    },
+    "g_5ABE": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 1280
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 1280,
+        "differing_bytes": 86,
+        "first_offset": 16,
+        "dos_byte": 0,
+        "native_byte": 60,
+        "max_byte_delta": 248,
+        "examples": [
+          {
+            "offset": 16,
+            "dos": 0,
+            "native": 60
+          },
+          {
+            "offset": 17,
+            "dos": 0,
+            "native": 126
+          },
+          {
+            "offset": 18,
+            "dos": 0,
+            "native": 60
+          },
+          {
+            "offset": 19,
+            "dos": 124,
+            "native": 126
+          },
+          {
+            "offset": 20,
+            "dos": 0,
+            "native": 126
+          },
+          {
+            "offset": 21,
+            "dos": 0,
+            "native": 60
+          },
+          {
+            "offset": 22,
+            "dos": 0,
+            "native": 126
+          },
+          {
+            "offset": 24,
+            "dos": 0,
+            "native": 102
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 1280,
+        "differing_bytes": 86,
+        "first_offset": 16,
+        "dos_byte": 0,
+        "native_byte": 60,
+        "max_byte_delta": 248,
+        "examples": [
+          {
+            "offset": 16,
+            "dos": 0,
+            "native": 60
+          },
+          {
+            "offset": 17,
+            "dos": 0,
+            "native": 126
+          },
+          {
+            "offset": 18,
+            "dos": 0,
+            "native": 60
+          },
+          {
+            "offset": 19,
+            "dos": 124,
+            "native": 126
+          },
+          {
+            "offset": 20,
+            "dos": 0,
+            "native": 126
+          },
+          {
+            "offset": 21,
+            "dos": 0,
+            "native": 60
+          },
+          {
+            "offset": 22,
+            "dos": 0,
+            "native": 126
+          },
+          {
+            "offset": 24,
+            "dos": 0,
+            "native": 102
+          }
+        ]
+      }
+    },
+    "g_7568": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 4
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 244,
+        "native_byte": 81,
+        "max_byte_delta": 163,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 244,
+            "native": 81
+          },
+          {
+            "offset": 1,
+            "dos": 29,
+            "native": 33
+          }
+        ],
+        "dos_unsigned": 7668,
+        "native_unsigned": 8529,
+        "unsigned_delta": 861
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 4,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 244,
+        "native_byte": 81,
+        "max_byte_delta": 163,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 244,
+            "native": 81
+          },
+          {
+            "offset": 1,
+            "dos": 29,
+            "native": 33
+          }
+        ],
+        "dos_unsigned": 7668,
+        "native_unsigned": 8529,
+        "unsigned_delta": 861
+      }
+    },
+    "g_756C": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 6,
+        "native_byte": 1,
+        "max_byte_delta": 5,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 6,
+            "native": 1
+          }
+        ],
+        "dos_unsigned": 6,
+        "native_unsigned": 1,
+        "unsigned_delta": -5
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 6,
+        "native_byte": 1,
+        "max_byte_delta": 5,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 6,
+            "native": 1
+          }
+        ],
+        "dos_unsigned": 6,
+        "native_unsigned": 1,
+        "unsigned_delta": -5
+      }
+    },
+    "g_91A0": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 58,
+        "native_byte": 101,
+        "max_byte_delta": 43,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 58,
+            "native": 101
+          },
+          {
+            "offset": 1,
+            "dos": 36,
+            "native": 51
+          }
+        ],
+        "dos_unsigned": 9274,
+        "native_unsigned": 13157,
+        "unsigned_delta": 3883
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 58,
+        "native_byte": 0,
+        "max_byte_delta": 58,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 58,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 36,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 9274,
+        "native_unsigned": 0,
+        "unsigned_delta": -9274
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 101,
+        "native_byte": 0,
+        "max_byte_delta": 101,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 101,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 51,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 13157,
+        "native_unsigned": 0,
+        "unsigned_delta": -13157
+      }
+    },
+    "g_91A2": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 36,
+        "native_byte": 122,
+        "max_byte_delta": 86,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 36,
+            "native": 122
+          },
+          {
+            "offset": 1,
+            "dos": 110,
+            "native": 108
+          }
+        ],
+        "dos_unsigned": 28196,
+        "native_unsigned": 27770,
+        "unsigned_delta": -426
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 36,
+        "native_byte": 0,
+        "max_byte_delta": 110,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 36,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 110,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 28196,
+        "native_unsigned": 0,
+        "unsigned_delta": -28196
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 2,
+        "first_offset": 0,
+        "dos_byte": 122,
+        "native_byte": 0,
+        "max_byte_delta": 122,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 122,
+            "native": 0
+          },
+          {
+            "offset": 1,
+            "dos": 108,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 27770,
+        "native_unsigned": 0,
+        "unsigned_delta": -27770
+      }
+    },
+    "input_queue": {
+      "verdict": "RECONSTRUCTION_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "DIFFERS",
+        "bytes": 112,
+        "differing_bytes": 9,
+        "first_offset": 9,
+        "dos_byte": 146,
+        "native_byte": 254,
+        "max_byte_delta": 254,
+        "examples": [
+          {
+            "offset": 9,
+            "dos": 146,
+            "native": 254
+          },
+          {
+            "offset": 10,
+            "dos": 215,
+            "native": 45
+          },
+          {
+            "offset": 11,
+            "dos": 93,
+            "native": 92
+          },
+          {
+            "offset": 25,
+            "dos": 254,
+            "native": 0
+          },
+          {
+            "offset": 26,
+            "dos": 215,
+            "native": 45
+          },
+          {
+            "offset": 27,
+            "dos": 93,
+            "native": 92
+          },
+          {
+            "offset": 41,
+            "dos": 0,
+            "native": 3
+          },
+          {
+            "offset": 42,
+            "dos": 215,
+            "native": 45
+          }
+        ]
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 112,
+        "differing_bytes": 11,
+        "first_offset": 4,
+        "dos_byte": 162,
+        "native_byte": 180,
+        "max_byte_delta": 254,
+        "examples": [
+          {
+            "offset": 4,
+            "dos": 162,
+            "native": 180
+          },
+          {
+            "offset": 9,
+            "dos": 146,
+            "native": 0
+          },
+          {
+            "offset": 10,
+            "dos": 215,
+            "native": 0
+          },
+          {
+            "offset": 11,
+            "dos": 93,
+            "native": 0
+          },
+          {
+            "offset": 20,
+            "dos": 199,
+            "native": 216
+          },
+          {
+            "offset": 25,
+            "dos": 254,
+            "native": 0
+          },
+          {
+            "offset": 26,
+            "dos": 215,
+            "native": 0
+          },
+          {
+            "offset": 27,
+            "dos": 93,
+            "native": 0
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 112,
+        "differing_bytes": 11,
+        "first_offset": 4,
+        "dos_byte": 162,
+        "native_byte": 180,
+        "max_byte_delta": 254,
+        "examples": [
+          {
+            "offset": 4,
+            "dos": 162,
+            "native": 180
+          },
+          {
+            "offset": 9,
+            "dos": 254,
+            "native": 0
+          },
+          {
+            "offset": 10,
+            "dos": 45,
+            "native": 0
+          },
+          {
+            "offset": 11,
+            "dos": 92,
+            "native": 0
+          },
+          {
+            "offset": 20,
+            "dos": 199,
+            "native": 216
+          },
+          {
+            "offset": 26,
+            "dos": 45,
+            "native": 0
+          },
+          {
+            "offset": 27,
+            "dos": 92,
+            "native": 0
+          },
+          {
+            "offset": 36,
+            "dos": 236,
+            "native": 252
+          }
+        ]
+      }
+    }
+  },
+  "scalar_initialization": {
+    "fd_50F6_0FBA": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      }
+    },
+    "fd_50F6_0FFE": {
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 2
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 2,
+        "differing_bytes": 1,
+        "first_offset": 0,
+        "dos_byte": 30,
+        "native_byte": 0,
+        "max_byte_delta": 30,
+        "examples": [
+          {
+            "offset": 0,
+            "dos": 30,
+            "native": 0
+          }
+        ],
+        "dos_unsigned": 30,
+        "native_unsigned": 0,
+        "unsigned_delta": -30
+      }
+    }
+  },
+  "record100": {
+    "projected": {
+      "name": "fd_3D57_07A8",
+      "verdict": "ORIGINAL_EQUAL_ALL",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 12
+      },
+      "original_vs_native": {
+        "status": "EQUAL",
+        "bytes": 12
+      },
+      "canonical_vs_native": {
+        "status": "EQUAL",
+        "bytes": 12
+      }
+    },
+    "raw": {
+      "name": "fd_3D57_07A8",
+      "verdict": "PORT_INTRODUCED",
+      "nondeterministic_runs": [],
+      "repeat_samples": {
+        "original": 0,
+        "canonical_dos": 0
+      },
+      "original_vs_canonical": {
+        "status": "EQUAL",
+        "bytes": 12
+      },
+      "original_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 12,
+        "differing_bytes": 4,
+        "first_offset": 2,
+        "dos_byte": 1,
+        "native_byte": 0,
+        "max_byte_delta": 1,
+        "examples": [
+          {
+            "offset": 2,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 4,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 6,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 8,
+            "dos": 1,
+            "native": 0
+          }
+        ]
+      },
+      "canonical_vs_native": {
+        "status": "DIFFERS",
+        "bytes": 12,
+        "differing_bytes": 4,
+        "first_offset": 2,
+        "dos_byte": 1,
+        "native_byte": 0,
+        "max_byte_delta": 1,
+        "examples": [
+          {
+            "offset": 2,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 4,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 6,
+            "dos": 1,
+            "native": 0
+          },
+          {
+            "offset": 8,
+            "dos": 1,
+            "native": 0
+          }
+        ]
+      }
+    }
+  },
+  "actual_short_save": {
+    "path": "build/workers/p2-diff/short-new/assets/a.ant",
+    "sha256": "aab25ed83eba5b2c16a16d8342d40078295cb8058d57c3e23d8c574c3e30ca67",
+    "bytes": 48386,
+    "replay_input_operations_equal": true,
+    "run_receipt_sha256": "629ae0c6c228b4b4401da1d4772e3fbd9e07a9545489732d6f1b40b959e64aaa",
+    "difference": {
+      "status": "DIFFERS",
+      "records": 307,
+      "differences": [
+        {
+          "record": 0,
+          "name": "MapA",
+          "bytes": 8192,
+          "differing_bytes": 7720
+        },
+        {
+          "record": 1,
+          "name": "MapB",
+          "bytes": 4096,
+          "differing_bytes": 54
+        },
+        {
+          "record": 2,
+          "name": "MapR",
+          "bytes": 4096,
+          "differing_bytes": 102
+        },
+        {
+          "record": 4,
+          "name": "ExitMapR",
+          "bytes": 4096,
+          "differing_bytes": 15
+        },
+        {
+          "record": 5,
+          "name": "AlistX",
+          "bytes": 1000,
+          "differing_bytes": 1
+        },
+        {
+          "record": 6,
+          "name": "AlistY",
+          "bytes": 1000,
+          "differing_bytes": 1
+        },
+        {
+          "record": 8,
+          "name": "AlistT",
+          "bytes": 1000,
+          "differing_bytes": 1
+        },
+        {
+          "record": 15,
+          "name": "RlistX",
+          "bytes": 500,
+          "differing_bytes": 3
+        },
+        {
+          "record": 16,
+          "name": "RlistY",
+          "bytes": 500,
+          "differing_bytes": 4
+        },
+        {
+          "record": 17,
+          "name": "RlistM",
+          "bytes": 500,
+          "differing_bytes": 1
+        },
+        {
+          "record": 18,
+          "name": "RlistT",
+          "bytes": 500,
+          "differing_bytes": 3
+        },
+        {
+          "record": 26,
+          "name": "HoleMapR",
+          "bytes": 64,
+          "differing_bytes": 1
+        },
+        {
+          "record": 29,
+          "name": "fd_3E1D_0000",
+          "bytes": 384,
+          "differing_bytes": 382
+        },
+        {
+          "record": 34,
+          "name": "fd_50F6_109C",
+          "bytes": 4,
+          "differing_bytes": 2
+        },
+        {
+          "record": 35,
+          "name": "fd_50F6_0220",
+          "bytes": 4,
+          "differing_bytes": 2
+        },
+        {
+          "record": 43,
+          "name": "fd_50F6_108E",
+          "bytes": 4,
+          "differing_bytes": 1
+        },
+        {
+          "record": 45,
+          "name": "fd_50F6_10A2",
+          "bytes": 4,
+          "differing_bytes": 1
+        },
+        {
+          "record": 48,
+          "name": "fd_50F6_0596",
+          "bytes": 4,
+          "differing_bytes": 2
+        },
+        {
+          "record": 52,
+          "name": "fd_3D57_02BC",
+          "bytes": 4,
+          "differing_bytes": 1
+        },
+        {
+          "record": 56,
+          "name": "fd_3D57_02B0",
+          "bytes": 4,
+          "differing_bytes": 1
+        },
+        {
+          "record": 57,
+          "name": "fd_3D57_02B8",
+          "bytes": 4,
+          "differing_bytes": 2
+        },
+        {
+          "record": 58,
+          "name": "fd_50F6_0508",
+          "bytes": 4,
+          "differing_bytes": 2
+        },
+        {
+          "record": 70,
+          "name": "LionListX",
+          "bytes": 10,
+          "differing_bytes": 4
+        },
+        {
+          "record": 71,
+          "name": "LionListY",
+          "bytes": 10,
+          "differing_bytes": 4
+        },
+        {
+          "record": 93,
+          "name": "fd_50F6_0C2A",
+          "bytes": 12,
+          "differing_bytes": 1
+        },
+        {
+          "record": 94,
+          "name": "PillarMap",
+          "bytes": 12,
+          "differing_bytes": 6
+        },
+        {
+          "record": 95,
+          "name": "SowDir",
+          "bytes": 6,
+          "differing_bytes": 3
+        },
+        {
+          "record": 96,
+          "name": "SowSave",
+          "bytes": 6,
+          "differing_bytes": 2
+        },
+        {
+          "record": 97,
+          "name": "SowX",
+          "bytes": 6,
+          "differing_bytes": 1
+        },
+        {
+          "record": 98,
+          "name": "SowY",
+          "bytes": 6,
+          "differing_bytes": 2
+        },
+        {
+          "record": 100,
+          "name": "fd_3D57_07A8",
+          "bytes": 12,
+          "differing_bytes": 4
+        },
+        {
+          "record": 113,
+          "name": "fd_50F6_0FFE",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 117,
+          "name": "fd_50F6_10B0",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 118,
+          "name": "fd_50F6_10BC",
+          "bytes": 2,
+          "differing_bytes": 2
+        },
+        {
+          "record": 122,
+          "name": "fd_3D57_0C34",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 124,
+          "name": "fd_3D57_0C2C",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 127,
+          "name": "fd_50F6_022C",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 128,
+          "name": "fd_50F6_0240",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 129,
+          "name": "fd_50F6_0244",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 130,
+          "name": "fd_50F6_0254",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 131,
+          "name": "fd_50F6_02BE",
+          "bytes": 2,
+          "differing_bytes": 2
+        },
+        {
+          "record": 132,
+          "name": "fd_50F6_032C",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 145,
+          "name": "fd_50F6_0506",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 146,
+          "name": "fd_50F6_04E4",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 147,
+          "name": "fd_50F6_0510",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 148,
+          "name": "fd_50F6_059E",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 150,
+          "name": "fd_50F6_04BE",
+          "bytes": 2,
+          "differing_bytes": 2
+        },
+        {
+          "record": 151,
+          "name": "fd_50F6_04C6",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 157,
+          "name": "fd_50F6_1040",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 163,
+          "name": "FuzLocX",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 164,
+          "name": "FuzLocY",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 168,
+          "name": "HealthR",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 172,
+          "name": "InitialLions",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 179,
+          "name": "LionIndex",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 182,
+          "name": "ListIndexR",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 198,
+          "name": "fd_50F6_0AD6",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 199,
+          "name": "fd_50F6_0AE8",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 202,
+          "name": "fd_50F6_0AB6",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 203,
+          "name": "fd_50F6_0AC6",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 204,
+          "name": "MeLocX",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 205,
+          "name": "MeLocY",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 220,
+          "name": "fd_50F6_0FBA",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 228,
+          "name": "PillDir",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 231,
+          "name": "PillarX",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 232,
+          "name": "PillarY",
+          "bytes": 2,
+          "differing_bytes": 1
+        },
+        {
+          "record": 274,
+          "name": "fd_50F6_0200",
+          "bytes": 2,
+          "differing_bytes": 1
+        }
+      ]
+    }
+  },
+  "bios_font_8x14": {
+    "physical_address": "C09E9",
+    "width": 8,
+    "height": 14,
+    "bytes": 3584,
+    "original_sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d",
+    "canonical_sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d",
+    "native_sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+    "differing_bytes": 1806,
+    "original_equals_canonical": true,
+    "paired_acceptance_sha256": "ea4381d191c2acc6e7f0793009fb574c7c0b181b89fd957977e25ba9f368b852",
+    "script_sha256": "dc5bcffbd84f8e6959b8c744624bc7ce9d05d68c4cb26ca4e45636d5d161a7d0",
+    "scope": "same pinned DOS runner and unchanged new-game input prefix through14s; read-only BIOS bank capture"
+  },
+  "original_void_return": {
+    "location": "root:00F8:02EF",
+    "instructions": [
+      "xor ax,ax",
+      "call far __aFchkstk",
+      "retf"
+    ],
+    "stack_check_success_location": "root:29F4:02CC..02DE",
+    "stack_check_success_effect": "popCX/DX; BX=SP-AX; compare stack floor; SP=BX; pushDX/CX; retf; AX unchanged",
+    "premise": "successful ordinary stack check; failure trap excluded"
+  },
+  "limits": [
+    "No original step-ordinal capture; no complete state equality.",
+    "714 views have reviewed original address anchors; unavailable native/private views remain explicit.",
+    "16 first-checkpoint raw DOS view differences include code-address words, heap totals and register/stack residue; they do not automatically establish a game defect.",
+    "No same-executable DOS repeats were run here, so no DOS nondeterminism asserted."
+  ]
+}

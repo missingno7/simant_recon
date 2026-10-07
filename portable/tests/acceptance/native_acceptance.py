@@ -4,7 +4,7 @@ The original scenario inputs are retained. Equal-time snapshots are diagnostics;
 step-aligned snapshots require an observed common simulation boundary.
 """
 from __future__ import annotations
-import argparse, hashlib, json, os, re, shutil, subprocess, sys
+import argparse, configparser, hashlib, json, os, re, shutil, subprocess, sys
 from pathlib import Path
 
 TOOL_DIR = Path(__file__).resolve().parent
@@ -26,19 +26,156 @@ def input_operations(path):
             if (p:=line.split('#',1)[0].split()) and p[1] in
             ('key','keydown','keyup','mouse_move','mouse_button','exit')]
 
-def oracle_provenance(directory,exe_sha,original_script=None):
+def oracle_provenance(directory,exe_sha,original_script=None,executable_name='SOURCE.EXE'):
     receipt_path=directory/'execution-report.json'
     receipt=json.loads(receipt_path.read_text())
-    if not any(i.get('sha256')==exe_sha and i.get('path','').upper().endswith('SOURCE.EXE')
+    if not any(i.get('sha256')==exe_sha and i.get('path','').upper().endswith(executable_name)
                for i in receipt.get('inputs',[])):
         raise ValueError('DOS observation executable identity differs: '+str(directory))
     script=directory/'INPUT.SCR'
     if original_script and input_operations(script)!=input_operations(original_script):
         raise ValueError('DOS/native scenario input operations differ: '+str(directory))
+    environment=dict(runner_sha256=receipt.get('runner',{}).get('sha256'),guest_clock=receipt.get('guest_clock'),
+        resources={Path(i.get('path','')).name.upper():i.get('sha256') for i in receipt.get('inputs',[])
+                   if Path(i.get('path','')).name.upper() in
+                   ('FONT1','FONT2','FONT3','FONT4','HCEGANT.DAT','HCEGANT.NDX','SHARED.DAT','SHARED.NDX',
+                    'SOUND.DAT','SOUND.NDX','SIMANT.CFG','INSTALL.EXE')})
+    conf=directory/'dosbox.conf'
+    if conf.is_file():
+        config=configparser.ConfigParser(interpolation=None,allow_no_value=True);config.read(conf)
+        environment['emulator_settings']={section:dict(config[section]) for section in config.sections()
+            if section not in ('autoexec','log')}
+        # Observation/mount output paths vary per run; CPU/hardware options do not.
+        for key in ('acceptance script','acceptance log','captures'):
+            environment['emulator_settings'].get('dosbox',{}).pop(key,None)
+    batch=directory/'RUN.BAT'
+    if batch.is_file():
+        launch=next((line for line in batch.read_text().splitlines() if
+                     line.upper().startswith(executable_name)),None)
+        environment['source_arguments']=launch[len(executable_name):].split('>',1)[0].strip() if launch else None
     return dict(execution_report_sha256=sha(receipt_path),executable_sha256=exe_sha,
                 observation_script_sha256=sha(script),
                 original_input_operations_verified=bool(original_script),
+                observation_environment=environment,
                 saved_game_sha256=receipt.get('staged_saved_game',{}).get('source',{}).get('sha256'))
+
+
+def dos_directories(directory,original=None):
+    """Accept a DOS acceptance parent or the historical reconstructed run path."""
+    if (directory/'reconstructed').is_dir():
+        directory=directory/'reconstructed'
+    sibling=directory.parent/'original'
+    if original is None and sibling.is_dir(): original=sibling
+    return directory,original
+
+
+def original_layout(root=ROOT):
+    # These are original-image symbol anchors, never canonical MAP placements.
+    return {name:dict(dos_address=spec['seg']*16+spec['off'],
+                      address_evidence='layout/symbols.json:data:'+name)
+            for name,spec in json.loads((root/'layout/symbols.json').read_text())['data'].items()}
+
+
+def three_way_verdict(original,canonical,native,original_repeats=(),canonical_repeats=()):
+    """Attribute exact observed bytes. Nondeterminism requires same-EXE repeats.
+
+    A disagreement between two different DOS executables cannot by itself prove
+    nondeterminism. Reconstruction differences take precedence if native also
+    differs; the pairwise details retain that possible additional port difference.
+    """
+    unstable=[]
+    if any(sample!=original for sample in original_repeats): unstable.append('original')
+    if any(sample!=canonical for sample in canonical_repeats): unstable.append('canonical_dos')
+    if unstable: verdict='ORIGINAL_DOS_NONDETERMINISTIC'
+    elif original!=canonical: verdict='RECONSTRUCTION_INTRODUCED'
+    elif native!=original: verdict='PORT_INTRODUCED'
+    else: verdict='ORIGINAL_EQUAL_ALL'
+    return dict(verdict=verdict,nondeterministic_runs=unstable,
+                repeat_samples=dict(original=len(original_repeats),canonical_dos=len(canonical_repeats)),
+                original_vs_canonical=differences(original,canonical),
+                original_vs_native=differences(original,native),
+                canonical_vs_native=differences(canonical,native))
+
+
+def three_way_checkpoint(native,original_dump,canonical_dump,addresses,specs,raw_state=False,
+                         original_specs=None,original_repeats=(),canonical_repeats=()):
+    """Read independently relocated original/canonical dumps; never guess a view."""
+    paths=[native,original_dump,canonical_dump]
+    if not all(p.is_file() for p in paths):
+        return dict(status='MISSING',present=[p.is_file() for p in paths],symbols={},unavailable={})
+    original_specs=original_specs if original_specs is not None else original_layout()
+    oa={name:item['dos_address'] for name,item in original_specs.items()}
+    om=original_dump.read_bytes();cm=canonical_dump.read_bytes()
+    ob=memory_base(om,oa);cb=memory_base(cm,addresses)
+    repeats=[]
+    for label,repeat_paths,addrs,views in [('original',original_repeats,oa,original_specs),
+                                         ('canonical_dos',canonical_repeats,addresses,specs)]:
+        for path in repeat_paths:
+            if path.is_file():
+                memory=path.read_bytes()
+                repeats.append((label,memory,memory_base(memory,addrs),views))
+    row=dict(status='COMPARED_DIAGNOSTIC',symbols={},unavailable={},partial_exclusions={},
+             dumps={label:dict(path=str(path.resolve()),sha256=sha(path))
+                    for label,path in [('original',original_dump),('canonical_dos',canonical_dump)]},
+             repeat_dumps=[dict(path=str(p.resolve()),sha256=sha(p)) for p in
+                           (*original_repeats,*canonical_repeats) if p.is_file()],
+             missing_repeat_dumps=[str(p.resolve()) for p in
+                                   (*original_repeats,*canonical_repeats) if not p.is_file()],
+             alignment='EQUAL_TIME_DIAGNOSTIC_ONLY',closure_eligible=False)
+    for name,observed in json.loads(native.read_text())['symbols'].items():
+        if name not in specs or specs[name].get('owner',name) in DESCRIPTOR_OWNERS or observed['status'].startswith('EXCLUDED_'):
+            continue
+        if observed['status']!='OK':
+            row['unavailable'][name]=observed;continue
+        if name not in original_specs:
+            row['unavailable'][name]=dict(status='ORIGINAL_MAP_MISSING');continue
+        length=observed['bytes'];oat=ob+original_specs[name]['dos_address'];cat=cb+specs[name]['dos_address']
+        if oat<0 or oat+length>len(om) or cat<0 or cat+length>len(cm):
+            row['unavailable'][name]=dict(status='DOS_EXTENT_OUTSIDE_DUMP');continue
+        samples=[om[oat:oat+length],cm[cat:cat+length],bytes.fromhex(observed['data'])]
+        sample_labels=[]
+        for label,memory,base,views in repeats:
+            if name not in views: continue
+            at=base+views[name]['dos_address']
+            if 0<=at and at+length<=len(memory):
+                samples.append(memory[at:at+length]);sample_labels.append(label)
+        raw_samples=samples[:]
+        policies=[state_prefix(name,samples[0],sample,raw_state)[2] for sample in samples[1:]]
+        # A partial exclusion is valid only with the same scope across ALL runs.
+        if policies and all(p and p.get('applied') for p in policies) and \
+                len({tuple(p['excluded_range']) for p in policies})==1:
+            end=policies[0]['excluded_range'][0]
+            samples=[sample[:end] for sample in samples]
+            row['partial_exclusions'][name]=dict(policy=policies[0],raw_verdict=three_way_verdict(
+                *raw_samples[:3],
+                [s for label,s in zip(sample_labels,raw_samples[3:]) if label=='original'],
+                [s for label,s in zip(sample_labels,raw_samples[3:]) if label=='canonical_dos']))
+        row['symbols'][name]=three_way_verdict(*samples[:3],
+            [s for label,s in zip(sample_labels,samples[3:]) if label=='original'],
+            [s for label,s in zip(sample_labels,samples[3:]) if label=='canonical_dos'])
+    row['verdict_counts']={verdict:sum(r['verdict']==verdict for r in row['symbols'].values())
+                          for verdict in ('ORIGINAL_EQUAL_ALL','PORT_INTRODUCED',
+                                          'RECONSTRUCTION_INTRODUCED','ORIGINAL_DOS_NONDETERMINISTIC')}
+    save_path=native.with_suffix('.sav')
+    if save_path.is_file():
+        osave=acceptance.virtual_save(om,oa);csave=acceptance.virtual_save(cm,addresses);nsave=save_path.read_bytes()
+        row['save']=dict(original_vs_canonical=acceptance.compare_saves(osave,csave),
+                         original_vs_native=acceptance.compare_saves(osave,nsave),records={})
+        total=sum(record[2] for record in acceptance.save_schema())
+        if len(osave)==len(csave)==len(nsave)==total:
+            for index,offset,length,_,name in acceptance.save_schema():
+                row['save']['records'][str(index)]=dict(name=name,**three_way_verdict(
+                    osave[offset:offset+length],csave[offset:offset+length],nsave[offset:offset+length]))
+        raw_path=native.with_suffix('.raw-save.sav')
+        if raw_path.is_file():
+            raw_save=raw_path.read_bytes()
+            row['raw_save']=dict(original_vs_canonical=acceptance.compare_saves(osave,csave),
+                original_vs_native=acceptance.compare_saves(osave,raw_save),records={})
+            if len(osave)==len(csave)==len(raw_save)==total:
+                for index,offset,length,_,name in acceptance.save_schema():
+                    row['raw_save']['records'][str(index)]=dict(name=name,**three_way_verdict(
+                        osave[offset:offset+length],csave[offset:offset+length],raw_save[offset:offset+length]))
+    return row
 
 def inventory(project=ROOT, oracle_root=ROOT, dos_report=None):
     if len({sha(p/'src/program.json') for p in (project,oracle_root,ROOT)})!=1:
@@ -148,7 +285,7 @@ def compare_checkpoint(native,dump,addresses,specs,raw_state):
              dos_bios_ticks=int.from_bytes(memory[0x46c:0x470],'little'),
              dos_dump=dict(path=str(dump.resolve()),sha256=sha(dump)))
     for name,observed in snapshot['symbols'].items():
-        if specs[name].get('owner',name) in DESCRIPTOR_OWNERS:
+        if specs.get(name,{}).get('owner',name) in DESCRIPTOR_OWNERS:
             exclusions[name]=dict(status='EXCLUDED_HANDLE',owner=specs[name].get('owner',name),
                 reason='Canonical database and startup resource file descriptors identify platform-owned slots.')
             continue
@@ -215,9 +352,11 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha):
                 status='FAIL' if any(r['status']!='EQUAL_SUBSET' or r['alignment']['status']!='COMMON_BOUNDARY' for r in rows.values()) else 'INCOMPLETE_EQUAL_SUBSET')
 
 
-def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=False,dos_steps=None,exe_sha=None):
+def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=False,dos_steps=None,exe_sha=None,
+            original_dos=None,original_root=ROOT,original_repeats=(),dos_repeats=()):
+    dos,original_dos=dos_directories(dos,original_dos)
     addresses=acceptance.record_addresses(map_path)
-    result=dict(schema='simant-native-dos-differential-v1',scenario=scenario['id'],
+    result=dict(schema='simant-native-dos-differential-v2',scenario=scenario['id'],
                 clock_mapping='1 ms per guarded outer platform poll; DOS computation cost unmodelled',
                 closure_eligible=False,checkpoints={},saves={},exclusions={},unavailable={},
                 state_exclusion_policy=[] if raw_state else [G5702_STACK_RESIDUE_TAIL])
@@ -227,6 +366,24 @@ def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=F
         result['clock_mapping']=str(result['run']['poll_ns'])+' ns per guarded outer platform poll; DOS computation cost unmodelled'
     result['dos_provenance']=oracle_provenance(dos,exe_sha,ROOT/scenario['script'])
     result['extra_dos_provenance']=[oracle_provenance(p,exe_sha) for p in extra_dos]
+    original_sha=json.loads((original_root/'layout/oracle.lock.json').read_text())['inputs']['SIMANT.EXE']['sha256']
+    result['original_provenance']=oracle_provenance(original_dos,original_sha,ROOT/scenario['script'],
+        'SIMANT.EXE') if original_dos is not None else None
+    result['repeat_provenance']={
+        'original':[oracle_provenance(p,original_sha,ROOT/scenario['script'],'SIMANT.EXE') for p in original_repeats],
+        'canonical_dos':[oracle_provenance(p,exe_sha,ROOT/scenario['script']) for p in dos_repeats]}
+    if result['original_provenance'] and result['original_provenance']['saved_game_sha256']!=result['dos_provenance']['saved_game_sha256']:
+        raise ValueError('original/canonical DOS saved-game identities differ')
+    if result['original_provenance'] and result['original_provenance'].get('observation_environment')!=result['dos_provenance'].get('observation_environment'):
+        raise ValueError('original/canonical DOS observation environments differ')
+    for label,provenance in result['repeat_provenance'].items():
+        expected=result['original_provenance'] if label=='original' else result['dos_provenance']
+        if expected and any(p['saved_game_sha256']!=expected['saved_game_sha256'] for p in provenance):
+            raise ValueError(label+' repeat saved-game identities differ')
+        if expected and any(p.get('observation_environment')!=expected.get('observation_environment') for p in provenance):
+            raise ValueError(label+' repeat observation environments differ')
+    result['attribution_scope']='Exact per-symbol observation; equal-time checkpoints are diagnostic, not causal or closure evidence. Same-EXE repeats are required to assert DOS nondeterminism.'
+    original_specs=original_layout(original_root)
     saved_input=out/'save-input.json'
     if scenario.get('saved_game') and (not saved_input.exists() or
             json.loads(saved_input.read_text())['sha256']!=result['dos_provenance']['saved_game_sha256']):
@@ -237,6 +394,15 @@ def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=F
         if not dump.is_file():
             dump=next((p/f'dump-cp{ms}' for p in extra_dos if (p/f'dump-cp{ms}').is_file()),dump)
         row,excluded,unavailable=compare_checkpoint(native,dump,addresses,specs,raw_state)
+        row['three_way']=three_way_checkpoint(native,original_dos/f'dump-cp{ms}',dump,addresses,specs,
+            raw_state,original_specs,[p/f'dump-cp{ms}' for p in original_repeats],
+            [p/f'dump-cp{ms}' for p in dos_repeats]) if original_dos is not None else dict(
+                status='UNAVAILABLE',reason='No original DOS run supplied or discovered; two-way difference is unattributed.')
+        for name,detail in row.get('symbols',{}).items():
+            three_way=row['three_way'].get('symbols',{}).get(name)
+            detail['verdict']=three_way['verdict'] if three_way else 'UNATTRIBUTED'
+        if any(r['verdict']!='ORIGINAL_EQUAL_ALL' for r in row['three_way'].get('symbols',{}).values()):
+            row['status']='DIFFERS'
         result['exclusions'].update(excluded);result['unavailable'].update(unavailable)
         if first is None and row['status']=='DIFFERS': first=ms
         if missing is None and row['status']=='MISSING': missing=ms
@@ -269,7 +435,10 @@ def main():
     ap.add_argument('--build',type=Path,default=ROOT/'build/current/portable')
     ap.add_argument('--oracle-root',type=Path,default=ROOT,help='Project containing the linked canonical DOS inputs')
     ap.add_argument('--dos-build-report',type=Path)
-    ap.add_argument('--dos',type=Path,required=True,help='Retained canonical DOS scenario output directory')
+    ap.add_argument('--dos',type=Path,required=True,help='DOS acceptance parent or retained reconstructed run; sibling original/ is discovered')
+    ap.add_argument('--original-dos',type=Path,help='Explicit original DOS run when not paired with --dos')
+    ap.add_argument('--original-repeat',type=Path,action='append',default=[],help='Same-EXE original repeat for nondeterminism controls')
+    ap.add_argument('--dos-repeat',type=Path,action='append',default=[],help='Same-EXE canonical repeat for nondeterminism controls')
     ap.add_argument('--dos-steps',type=Path,help='Execution-triggered observations from capture_dos_steps.py')
     ap.add_argument('--saved-game',type=Path,help='Explicit copy of the scenario original save, for isolated checkouts')
     ap.add_argument('--extra-dos',type=Path,action='append',default=[])
@@ -288,7 +457,7 @@ def main():
     receipt=json.loads(dos_report.read_text())
     map_path=(oracle_root/receipt['link']['candidate_executable']['path']).with_name('SOURCE.MAP')
     out=args.out.resolve(); project=args.project.resolve();build=args.build.resolve()
-    dos=args.dos.resolve()
+    dos,original_dos=dos_directories(args.dos.resolve(),args.original_dos.resolve() if args.original_dos else None)
     checkpoints=scenario.get('checkpoints',[]) or [14000,22000,40000,49000]
     specs=inventory(project,oracle_root,dos_report)
     if not args.compare_only:
@@ -323,6 +492,7 @@ def main():
                                                   source_arguments=scenario.get('arguments',[]),dos_executable_sha256=receipt['link']['candidate_executable']['sha256'],
                                                   poll_ns=args.poll_ns,scenario_sha256=sha(args.scenario),script_sha256=sha(project/scenario['script'])),indent=2))
     status=compare(scenario,out,dos,map_path,specs,checkpoints,args.extra_dos,args.raw_state,args.dos_steps,
-                   receipt['link']['candidate_executable']['sha256'])['status']
+                   receipt['link']['candidate_executable']['sha256'],original_dos,oracle_root,
+                   args.original_repeat,args.dos_repeat)['status']
     return 1 if status=='FAIL' else 2 # A matching incomplete subset is never acceptance.
 if __name__=='__main__': raise SystemExit(main())

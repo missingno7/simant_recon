@@ -131,6 +131,43 @@ class ArchitectureControls(unittest.TestCase):
         result = repository.audit(ROOT / 'layout/repository.json')
         self.assertTrue(result['passed'], result['issues'])
 
+    def behavior_issues(self,mutate):
+        ledger_path=ROOT/self.spec['behavior_attribution_ledger']
+        ledger=json.loads(ledger_path.read_text())
+        mutate(ledger)
+        real_load=repository._load_json;issues=[]
+        with patch.object(repository,'_load_json',side_effect=lambda path,*args:
+                          ledger if path==ledger_path else real_load(path,*args)):
+            repository._check_behavior_attribution(self.spec,
+                json.loads((ROOT/'portable/platform.json').read_text()),issues)
+        return issues
+
+    def test_original_attribution_rejects_canonical_only_or_wrong_original_evidence(self):
+        for field in ('method','sha256','relation_to_original'):
+            def mutate(ledger):
+                row=next(r for r in ledger['items'] if r['classification']=='ORIGINAL')
+                side='canonical_dos' if field=='relation_to_original' else 'original_exe'
+                row['evidence'][side].pop(field)
+            issues=self.behavior_issues(mutate)
+            self.assertTrue(any(i['code']=='behavior_attribution_original_evidence' for i in issues),field)
+
+    def test_unattributed_requires_deciding_experiment(self):
+        def mutate(ledger):
+            next(r for r in ledger['items'] if r['classification']=='UNATTRIBUTED').pop('decisive_experiment')
+        self.assertTrue(any(i['code']=='behavior_attribution_experiment' for i in self.behavior_issues(mutate)))
+
+    def test_ledger_covers_all_native_exceptions_and_exact_counts(self):
+        def mutate(ledger):
+            ledger['items']=[r for r in ledger['items'] if r['id']!='native-event-omitted-word']
+        codes={i['code'] for i in self.behavior_issues(mutate)}
+        self.assertIn('behavior_attribution_missing_exception',codes)
+        self.assertIn('behavior_attribution_counts',codes)
+
+    def test_documented_native_deviation_requires_observability(self):
+        def mutate(ledger):
+            next(r for r in ledger['items'] if r['classification']=='PORT_DEVIATION_DOCUMENTED').pop('observability')
+        self.assertTrue(any(i['code']=='behavior_attribution_exception' for i in self.behavior_issues(mutate)))
+
     def test_closed_contract_cannot_retain_temporary_adapter(self):
         issues = []
         repository._check_lowering(self.spec, self.live - {'native-index-adjacency'}, issues)

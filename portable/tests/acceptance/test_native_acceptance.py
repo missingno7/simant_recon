@@ -14,6 +14,125 @@ else:
     from save_projection import project_save
 
 class Controls(unittest.TestCase):
+    def three_way_dump_control(self,original,canonical,native,original_repeat=None,canonical_repeat=None,
+                               raw_state=False,name='state',native_save=None,raw_save=None):
+        from portable.tests.acceptance.native_acceptance import three_way_checkpoint
+        with tempfile.TemporaryDirectory() as scratch:
+            out=Path(scratch)
+            # Different image bases AND symbol offsets defeat accidental reuse of
+            # canonical addresses when reading the original executable.
+            oa={'g_5A9C':dict(dos_address=8),name:dict(dos_address=32)}
+            ca={'g_5A9C':12,name:64};specs={name:dict(dos_address=64)}
+            def dump(filename,data,base,clip_at,state_at):
+                memory=bytearray(256);memory[base+clip_at:base+clip_at+16]=acceptance.SCREEN_CLIP_PATTERN
+                memory[base+state_at:base+state_at+len(data)]=data
+                path=out/filename;path.write_bytes(memory);return path
+            op=dump('original.bin',original,4,8,32)
+            cp=dump('canonical.bin',canonical,20,12,64)
+            np=out/'native.json';np.write_text(json.dumps(dict(symbols={name:dict(
+                status='OK',bytes=len(native),data=native.hex())})))
+            if native_save is not None: np.with_suffix('.sav').write_bytes(native_save)
+            if raw_save is not None: np.with_suffix('.raw-save.sav').write_bytes(raw_save)
+            orepeat=[dump('original-repeat.bin',original_repeat,10,8,32)] if original_repeat is not None else []
+            crepeat=[dump('canonical-repeat.bin',canonical_repeat,24,12,64)] if canonical_repeat is not None else []
+            return three_way_checkpoint(np,op,cp,ca,specs,raw_state,oa,orepeat,crepeat)
+
+    def test_three_way_original_equal_all(self):
+        row=self.three_way_dump_control(b'abc',b'abc',b'abc')
+        self.assertEqual(row['symbols']['state']['verdict'],'ORIGINAL_EQUAL_ALL')
+        self.assertEqual(row['verdict_counts']['ORIGINAL_EQUAL_ALL'],1)
+
+    def test_three_way_port_introduced(self):
+        row=self.three_way_dump_control(b'abc',b'abc',b'aZc')
+        detail=row['symbols']['state']
+        self.assertEqual(detail['verdict'],'PORT_INTRODUCED')
+        self.assertEqual(detail['original_vs_canonical']['status'],'EQUAL')
+        self.assertEqual(detail['original_vs_native']['first_offset'],1)
+
+    def test_three_way_save_projection_does_not_hide_raw_serialization_difference(self):
+        with patch.object(acceptance,'save_schema',return_value=[(0,0,3,1,'state')]):
+            row=self.three_way_dump_control(b'abc',b'abc',b'abc',native_save=b'abc',raw_save=b'aZc')
+        self.assertEqual(row['save']['records']['0']['verdict'],'ORIGINAL_EQUAL_ALL')
+        self.assertEqual(row['raw_save']['records']['0']['verdict'],'PORT_INTRODUCED')
+        self.assertEqual(row['raw_save']['original_vs_canonical']['status'],'EQUAL')
+
+    def test_three_way_reconstruction_introduced(self):
+        for native in [b'aZc',b'abc',b'aQc']:
+            row=self.three_way_dump_control(b'abc',b'aZc',native)
+            self.assertEqual(row['symbols']['state']['verdict'],'RECONSTRUCTION_INTRODUCED')
+            self.assertEqual(row['symbols']['state']['nondeterministic_runs'],[])
+
+    def test_three_way_dos_nondeterministic_requires_same_exe_repeat(self):
+        row=self.three_way_dump_control(b'abc',b'abc',b'aZc',original_repeat=b'aQc')
+        self.assertEqual(row['symbols']['state']['verdict'],'ORIGINAL_DOS_NONDETERMINISTIC')
+        self.assertEqual(row['symbols']['state']['nondeterministic_runs'],['original'])
+        row=self.three_way_dump_control(b'abc',b'abc',b'aZc',canonical_repeat=b'aQc')
+        self.assertEqual(row['symbols']['state']['nondeterministic_runs'],['canonical_dos'])
+        row=self.three_way_dump_control(b'abc',b'abc',b'abc',original_repeat=b'abc')
+        self.assertEqual(row['symbols']['state']['verdict'],'ORIGINAL_EQUAL_ALL')
+
+    def test_three_way_stack_policy_requires_shared_scope(self):
+        a=b'\x00\x01\x00\x80'+bytes(60)
+        b=a[:4]+bytes([17])*60
+        row=self.three_way_dump_control(a,b,a,name='g_5702')
+        self.assertEqual(row['symbols']['g_5702']['verdict'],'ORIGINAL_EQUAL_ALL')
+        self.assertEqual(row['partial_exclusions']['g_5702']['raw_verdict']['verdict'],'RECONSTRUCTION_INTRODUCED')
+        row=self.three_way_dump_control(a,b,a,name='g_5702',raw_state=True)
+        self.assertEqual(row['symbols']['g_5702']['verdict'],'RECONSTRUCTION_INTRODUCED')
+        moved=b'\x00\x01\x00\x02\x00\x80'+bytes(58)
+        row=self.three_way_dump_control(a,a,moved,name='g_5702')
+        self.assertFalse(row['partial_exclusions'])
+        self.assertEqual(row['symbols']['g_5702']['verdict'],'PORT_INTRODUCED')
+
+    def test_paired_acceptance_directory_and_original_identity(self):
+        from portable.tests.acceptance.native_acceptance import dos_directories
+        with tempfile.TemporaryDirectory() as scratch:
+            parent=Path(scratch);original=parent/'original';canonical=parent/'reconstructed'
+            original.mkdir();canonical.mkdir()
+            self.assertEqual(dos_directories(parent),(canonical,original))
+            self.assertEqual(dos_directories(canonical),(canonical,original))
+            (original/'execution-report.json').write_text(json.dumps(dict(
+                inputs=[dict(path='assets/SIMANT.EXE',sha256='original-control')])) )
+            (original/'INPUT.SCR').write_text('100 key enter\n200 exit\n')
+            oracle_provenance(original,'original-control',executable_name='SIMANT.EXE')
+            with self.assertRaisesRegex(ValueError,'executable identity differs'):
+                oracle_provenance(original,'canonical-control',executable_name='SIMANT.EXE')
+
+    def test_original_map_missing_never_falls_back_to_canonical(self):
+        from portable.tests.acceptance.native_acceptance import three_way_checkpoint
+        with tempfile.TemporaryDirectory() as scratch:
+            out=Path(scratch);native=out/'native.json'
+            native.write_text(json.dumps(dict(symbols={'unknown':dict(status='OK',bytes=1,data='00')})))
+            memory=acceptance.SCREEN_CLIP_PATTERN+bytes(16)
+            original=out/'original.bin';original.write_bytes(memory)
+            canonical=out/'canonical.bin';canonical.write_bytes(memory)
+            result=three_way_checkpoint(native,original,canonical,{'g_5A9C':0},
+                {'unknown':dict(dos_address=20)},original_specs={'g_5A9C':dict(dos_address=0)})
+            self.assertFalse(result['symbols'])
+            self.assertEqual(result['unavailable']['unknown']['status'],'ORIGINAL_MAP_MISSING')
+            original.unlink()
+            result=three_way_checkpoint(native,original,canonical,{}, {})
+            self.assertEqual(result['status'],'MISSING')
+            self.assertEqual(result['present'],[True,False,True])
+
+    def test_original_canonical_difference_fails_even_when_native_matches_canonical(self):
+        from portable.tests.acceptance.native_acceptance import compare
+        with tempfile.TemporaryDirectory() as scratch:
+            out=Path(scratch);(out/'checkpoints').mkdir()
+            (out/'checkpoints/exit.json').write_text(json.dumps(dict(exit_code=0)))
+            row=dict(status='EQUAL_SUBSET',symbols={'state':dict(status='EQUAL')})
+            three_way=dict(status='COMPARED_DIAGNOSTIC',symbols={'state':dict(verdict='RECONSTRUCTION_INTRODUCED')})
+            module=compare.__module__
+            with patch.object(acceptance,'record_addresses',return_value={}), \
+                 patch(module+'.oracle_provenance',return_value=dict(saved_game_sha256=None)), \
+                 patch(module+'.compare_checkpoint',return_value=(row,{},{})), \
+                 patch(module+'.three_way_checkpoint',return_value=three_way):
+                result=compare(dict(id='control',script='dos/scenarios/new-game-save.scr',saves=[]),
+                    out,out/'reconstructed',out/'SOURCE.MAP',{},[123],exe_sha='control',original_dos=out/'original')
+            self.assertEqual(result['status'],'FAIL')
+            self.assertEqual(result['first_diverging_checkpoint'],123)
+            self.assertEqual(result['checkpoints']['123']['symbols']['state']['verdict'],'RECONSTRUCTION_INTRODUCED')
+
     def test_step_alignment_requires_phase_and_input_prefix(self):
         with tempfile.TemporaryDirectory() as scratch:
             out=Path(scratch);(out/'checkpoints').mkdir()
@@ -111,11 +230,15 @@ class Controls(unittest.TestCase):
             (out/'execution-report.json').write_text('{}')
             dump=out/'dump-cp123';dump.write_bytes(b'observation control')
             scenario=dict(id='control',host_seconds=1,checkpoints=[123],saves=[])
-            with patch.object(acceptance,'scripted_input',return_value=out/'control.scr'), \
-                 patch.object(acceptance.subprocess,'run'), \
-                 patch.object(acceptance,'record_addresses',return_value={}), \
-                 patch.object(acceptance,'virtual_save',return_value=b'save control'):
-                result=acceptance.run_once(scenario,out,None)
+            report=out/'build-report.json'
+            report.write_text(json.dumps(dict(link=dict(candidate_executable=dict(path='SOURCE.EXE')))))
+            for build_report in (None,report):
+                with patch.object(acceptance,'scripted_input',return_value=out/'control.scr'), \
+                     patch.object(acceptance.subprocess,'run'), \
+                     patch.object(acceptance,'record_addresses',return_value={}), \
+                     patch.object(acceptance,'virtual_save',return_value=b'save control'):
+                    result=acceptance.run_once(scenario,out,build_report)
+                self.assertEqual(dump.read_bytes(),b'observation control')
             self.assertEqual(dump.read_bytes(),b'observation control')
             self.assertEqual(result['checkpoints']['cp123'],b'save control')
 

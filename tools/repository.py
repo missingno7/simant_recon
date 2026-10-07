@@ -377,6 +377,54 @@ def _check_build_root(issues: list[dict[str, str]]) -> None:
         issues.append(_issue("build_root_layout", "build/", "Unexpected active roots: " + ", ".join(unexpected)))
 
 
+def _check_behavior_attribution(spec, platform, issues):
+    """Validate ledger bookkeeping/evidence requirements, never infer a verdict."""
+    label='layout/repository.json:behavior_attribution_ledger'
+    path=_repo_path(spec.get('behavior_attribution_ledger'),issues,label)
+    if path is None: return
+    ledger=_load_json(path,issues,'behavior_attribution_ledger')
+    if ledger.get('schema')!='simant-behavior-attribution-v1' or not isinstance(ledger.get('items'),list):
+        issues.append(_issue('behavior_attribution_schema',label,'Expected v1 ledger with items.'));return
+    oracle=_load_json(ROOT/'layout/oracle.lock.json',issues,'behavior_attribution_oracle')
+    original_sha=oracle.get('inputs',{}).get('SIMANT.EXE',{}).get('sha256')
+    categories={'ORIGINAL','RECONSTRUCTION_INTRODUCED','PORT_INTRODUCED','PORT_DEVIATION_DOCUMENTED','UNATTRIBUTED'}
+    counts={};ids=set()
+    for row in ledger['items']:
+        if not isinstance(row,dict):
+            issues.append(_issue('behavior_attribution_row',label,'Expected object row.'));continue
+        item=row.get('id');where=path.relative_to(ROOT).as_posix()+':'+str(item)
+        if not isinstance(item,str) or not item or item in ids:
+            issues.append(_issue('behavior_attribution_id',where,'Expected unique nonempty id.'))
+        else: ids.add(item)
+        classification=row.get('classification')
+        if not isinstance(classification,str) or classification not in categories:
+            issues.append(_issue('behavior_attribution_classification',where,str(classification)))
+        else: counts[classification]=counts.get(classification,0)+1
+        if row.get('status') not in {'fixed','preserved','open'} or not row.get('description') or not row.get('scope'):
+            issues.append(_issue('behavior_attribution_scope',where,'Status, description and scoped claim required.'))
+        evidence=row.get('evidence',{})
+        if not isinstance(evidence,dict):
+            issues.append(_issue('behavior_attribution_evidence',where,'Expected evidence object.'));continue
+        original=evidence.get('original_exe',{});canonical=evidence.get('canonical_dos',{})
+        if classification=='ORIGINAL' and (not isinstance(original,dict) or
+                original.get('path')!='assets/SIMANT.EXE' or original.get('sha256')!=original_sha or
+                not original.get('observation') or original.get('method') not in
+                {'STATIC_INSTRUCTION_PROOF','RUNTIME_OBSERVATION'} or not evidence.get('paths') or
+                not isinstance(canonical,dict) or not canonical.get('observation') or
+                canonical.get('relation_to_original') not in {'STATIC_CONTRACT_EQUAL','OBSERVED_EQUAL'}):
+            issues.append(_issue('behavior_attribution_original_evidence',where,
+                                 'ORIGINAL needs pinned original-EXE proof and explicit canonical equality evidence.'))
+        if classification=='UNATTRIBUTED' and not row.get('decisive_experiment'):
+            issues.append(_issue('behavior_attribution_experiment',where,'Unattributed rows need a decisive experiment.'))
+        if classification=='PORT_DEVIATION_DOCUMENTED' and (not row.get('exception_reason') or not row.get('observability')):
+            issues.append(_issue('behavior_attribution_exception',where,'Document why the native exception exists and its observability.'))
+    if ledger.get('counts')!=counts:
+        issues.append(_issue('behavior_attribution_counts',label,'Counts differ from classified rows.'))
+    for limitation in platform.get('preview_limitations',[]):
+        if limitation['id'] not in ids:
+            issues.append(_issue('behavior_attribution_missing_exception',label,limitation['id']))
+
+
 def _check_production_literals(issues: list[dict[str, str]]) -> None:
     paths = [ROOT / "dos/build.py", ROOT / "portable/build.py"]
     paths.extend(p for p in ABI.glob("*.py") if p.name != "__init__.py")
@@ -465,6 +513,7 @@ def audit(spec_path: Path) -> dict[str, Any]:
     _check_closure_graph(program, evidence, platform, issues)
     _check_lowering(spec, live_ids, issues)
     _check_build_root(issues)
+    _check_behavior_attribution(spec, platform, issues)
     _check_production_literals(issues)
     roles = _check_file_roles(spec, program, platform, issues)
     return {
