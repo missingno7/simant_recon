@@ -2,6 +2,15 @@
 #define SIMANT_WHOLE_SDL3_HOST_MODES_H
 
 #include "../../../platform/host.h"
+#include <SDL3/SDL.h>
+
+/* Presentation observers never advance game state. Returning nonzero reserves
+ * an SDL event for a platform action (debug F12); ordinary runs leave it alone. */
+void host_set_event_observer(int (*observer)(void *, const SDL_Event *), void *context);
+int host_presented_palette(const Host *host, HostPalette *palette);
+/* SDL timestamps do not feed the source clock. This impossible uptime tags
+ * injected replay events without colliding with SDL's touch/pen mouse IDs. */
+#define HOST_REPLAY_EVENT_TIMESTAMP UINT64_MAX
 
 /* Whole-program provider: original EGA (640x350) or VGA (640x480), with one
  * host window and aspect-preserving/integer presentation. The existing

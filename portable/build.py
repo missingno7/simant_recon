@@ -141,6 +141,10 @@ def main():
             paths.update(ROOT/dependency[k] for k in ('license','provenance'))
         return {p.relative_to(PROJECT).as_posix():sha(p) for p in sorted(paths) if p.is_file()}
     input_pins=current_inputs()
+    revision=subprocess.check_output(['git','-c','safe.directory='+PROJECT.as_posix(),
+        'rev-parse','HEAD'],cwd=PROJECT,text=True).strip()
+    build_identity={'source_revision':revision,
+        'build_inputs_sha256':hashlib.sha256(json.dumps(input_pins,sort_keys=True).encode()).hexdigest()}
     inventory={'translation_units':[dict(module=u['key'],source=u['source'],canonical_destination=u['source'],lang=u['lang']) for u in canonical['modules']]}
     aliases=[dict(alias=x['alias'],owner=x.get('target',x.get('owner')),offset=x.get('offset',0),kind=x['kind']) for x in canonical['aliases']]
     # One canonical program inventory and whole canonical source files.
@@ -355,6 +359,8 @@ def main():
                  '-I',str(SDK/'include'),'-c',str(source),'-o',str(obj)]
         if source.suffix == '.cpp':
             command=[x for x in command if not x.startswith('-Werror=implicit-')]
+        if row['source']=='portable/whole_program/platform/sdl3/diagnostics.c':
+            command.insert(1,'-DSIMANT_BUILD_REVISION="'+revision+'"')
         if row['source']=='src/root/m25E7.c':command.insert(1,'-Dfont_MakeImage=sim_font_make_image_source')
         run=subprocess.run(command,capture_output=True,text=True)
         obj.with_suffix('.compile.txt').write_text(run.stdout+run.stderr)
@@ -397,8 +403,10 @@ def main():
             # relocatable aggregate can invalidate the debugger's argument views.
             app_response=OUT/'application-objects.rsp'
             app_response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects)+'\n',encoding='utf-8')
+            # System DbgHelp cannot read MinGW DWARF; exports provide native
+            # function names. Keep -g for offline source-line analysis as well.
             application_command=[CC,'-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
-                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp','-static','-lstdc++',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
+                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp','-Wl,--wrap=exit','-Wl,--export-all-symbols','-static','-lstdc++',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
             app_run=subprocess.run(application_command,cwd=OUT,capture_output=True,text=True)
             (OUT/'application-link.txt').write_text(app_run.stdout+app_run.stderr)
             app_link={'passed':app_run.returncode==0,'command':application_command,'exit_code':app_run.returncode,
@@ -406,6 +414,8 @@ def main():
                       'response_file':str(app_response),'response_file_sha256':sha(app_response),
                       'undefined':sorted(set(re.findall(r"undefined reference to [`']([^'`]+)['`]",app_run.stderr)))}
             if app_link['passed']:
+                build_identity['executable_sha256']=sha(OUT/'simant-canonical.exe')
+                (OUT/'simant-build-id.txt').write_text(''.join(f'{key}={value}\n' for key,value in build_identity.items()),encoding='ascii')
                 shutil.copyfile(SDK/'bin/SDL3.dll',OUT/'SDL3.dll')
                 shutil.copytree(PROJECT/'portable/runtime/bios-reference',OUT/'runtime-bios-fonts')
                 (OUT/'runtime-assets').mkdir()
@@ -419,6 +429,7 @@ def main():
     executable=OUT/'simant-canonical.exe'
     if executable.is_file() and not passed:retire(executable)
     report={'schema':'canonical-native-complete-attempt-v1','passed':passed,'input_pins':input_pins,
+        'build_identity':build_identity,
         'sdk':{'path':str(SDK),'import_library_sha256':sha(SDK/'lib/libSDL3.dll.a'),'runtime_sha256':sha(SDK/'bin/SDL3.dll')},
         'input_stability':{'before_link':stable_before_link,'at_end':stable_at_end},
         'runtime_resources':{'shipped':{name:sha(ROOT/'assets'/name) for name in PLATFORM['runtime_assets']},'generated':PLATFORM['generated_runtime_resources']},

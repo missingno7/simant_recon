@@ -41,10 +41,46 @@ the DOS game folder, retaining its `simant-sdl3-fonts/` directory. Launch
 `Play-SimAnt-SDL3.cmd`. It leaves display and sound selection to the original
 `SIMANT.CFG` and source command-line rules, then records `simant-sdl3.log`; no Python,
 compiler, DOSBox or separate SDL installation is required. The package contains
-the current executable, SDL3 DLL and licensed font support, but no original game
+the current executable, SDL3 DLL, build identity receipt and licensed font support, but no original game
 data, configuration or saves. The original startup needs an `INSTALL.EXE` file
 to open; the launcher creates an empty probe only when absent and preserves any
 existing installer. Prefer a short folder path for the original file dialogs.
+
+Every Windows launch creates `diagnostics/simant-YYYYMMDD-HHMMSS-PID/` beside
+the executable, falling back to `SDL_GetPrefPath("SimAnt", "SDL3")` for an
+unwritable installation. `--diagnostics-dir=PATH` chooses another root.
+`session.log` includes the build revision and final executable SHA from the
+build-time `simant-build-id.txt` receipt, command line, asset directory,
+`SIMANT.CFG`, seed and exit status/reason. Keep the receipt beside the executable.
+
+Launch `Play-SimAnt-SDL3-debug.cmd` or pass `--debug` to save stderr and SDL log
+output in `debug.log`, and real keyboard/mouse input in `input.txt`. The input
+observer runs after SDL logical-coordinate conversion and before DOS key
+filtering. Scripted events are tagged and excluded from recording; all launches
+keep a bounded 200-event crash tail. Wheel and unsupported extra mouse-button
+events are comments because the game ignores them. Press **F12** in debug mode
+to save `capture-NNNN/screenshot.bmp`, its exact presented RGB8 palette and the
+outer game-loop counter. Repeats do not create extra captures. Ordinary launches
+retain the existing F12 behavior. The snapshot uses the last completed
+presentation, not a framebuffer still being drawn.
+
+Unhandled Windows exceptions and CRT aborts produce `crash.txt`, a best-effort
+`crash.dmp` with the faulting thread's exception/context, and the exact executable
+as `simant-crashed.exe`. DbgHelp is loaded from the Windows system directory and
+initialized before gameplay. A prestarted writer thread dumps the copied context
+without entering SDL or game cleanup. Stack names use DbgHelp; source lines are
+best effort (system DbgHelp may not read MinGW DWARF). The preserved `-g` executable
+also supports offline GDB/addr2line analysis. Forced termination cannot write a dump.
+
+After a crash or problem, ZIP the newest diagnostics folder. To approximately
+reproduce a debug session with the same game data and configuration, use the seed
+in `session.log`: `simant-canonical.exe --seed N --input-script input.txt`.
+Host scheduling/audio can differ; this records input rather than a full machine
+snapshot. Debug logs grow during play and can include local paths and config.
+
+```powershell
+python portable/tests/diagnostics/run.py --report build/current/portable/report.json
+```
 
 The first manual playtest ([report](../evidence/canonical/validation/manual-playtest.json))
 found broken sound, a logo-click hang and a non-640x480 display. All three had

@@ -1,6 +1,7 @@
 {
   "schema": "canonical-native-platform-files-v1",
   "services": [
+    "portable/whole_program/platform/sdl3/diagnostics.c",
     "portable/whole_program/platform/font_blit.c",
     "portable/whole_program/window_refs.c",
     "portable/whole_program/window_runtime_owner.c",
@@ -79,6 +80,7 @@
     "portable/audio/ymfm/ymfm_pcm.cpp"
   ],
   "headers": [
+    "portable/whole_program/platform/sdl3/diagnostics.h",
     "portable/whole_program/platform/bios_fonts.h",
     "portable/whole_program/types/resource_wire.h",
     "portable/whole_program/platform/graphics_resources.h",

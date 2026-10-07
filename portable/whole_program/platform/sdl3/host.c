@@ -12,7 +12,22 @@ struct Host {
     int logical_width, logical_height;
     int integer_scaling;
     HostInputState replay_state;
+    HostPalette presented_palette;
+    int frame_presented;
 };
+static int (*event_observer)(void *, const SDL_Event *);
+static void *event_observer_context;
+void host_set_event_observer(int (*observer)(void *, const SDL_Event *), void *context)
+{
+    event_observer = observer;
+    event_observer_context = context;
+}
+int host_presented_palette(const Host *host, HostPalette *palette)
+{
+    if (!host || !palette || !host->frame_presented) return 0;
+    *palette = host->presented_palette;
+    return 1;
+}
 static uint64_t virtual_ns, virtual_quantum;
 void host_virtual_clock_configure(uint64_t quantum_ns)
 {
@@ -81,6 +96,7 @@ int host_set_logical_size(Host *host, int width, int height)
     host->rgba = rgba;
     host->logical_width = width;
     host->logical_height = height;
+    host->frame_presented = 0;
     return 1;
 }
 
@@ -271,6 +287,7 @@ int host_push_pointer_event(Host *host, const HostEvent *event)
     if (event->kind == HOST_EVENT_MOUSE_MOVE) {
         raw.type = SDL_EVENT_MOUSE_MOTION;
         raw.motion.windowID = SDL_GetWindowID(host->window);
+        raw.motion.timestamp = HOST_REPLAY_EVENT_TIMESTAMP;
         raw.motion.x = x;
         raw.motion.y = y;
     } else if ((event->kind == HOST_EVENT_MOUSE_DOWN ||
@@ -279,6 +296,7 @@ int host_push_pointer_event(Host *host, const HostEvent *event)
         raw.type = event->kind == HOST_EVENT_MOUSE_DOWN ?
                    SDL_EVENT_MOUSE_BUTTON_DOWN : SDL_EVENT_MOUSE_BUTTON_UP;
         raw.button.windowID = SDL_GetWindowID(host->window);
+        raw.button.timestamp = HOST_REPLAY_EVENT_TIMESTAMP;
         raw.button.button = event->button;
         raw.button.down = event->kind == HOST_EVENT_MOUSE_DOWN;
         raw.button.clicks = 1;
@@ -295,6 +313,7 @@ int host_poll_event(Host *host, HostEvent *event)
     while (SDL_PollEvent(&raw)) {
         memset(event, 0, sizeof(*event));
         if (!SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
+        if (event_observer && event_observer(event_observer_context, &raw)) continue;
         switch (raw.type) {
             case SDL_EVENT_QUIT: event->kind=HOST_EVENT_QUIT; break;
             case SDL_EVENT_MOUSE_MOTION:
@@ -352,12 +371,15 @@ int host_present(Host *host, const uint8_t *pixels, size_t stride,
         if (index >= 16) { SDL_SetError("Palette index exceeds EGA domain"); return 0; }
         memcpy(out, palette->rgb[index], 3); out[3]=255;
     }
-    return SDL_UpdateTexture(host->texture, NULL, host->rgba,
+    if (!(SDL_UpdateTexture(host->texture, NULL, host->rgba,
                 host->logical_width*4) &&
            SDL_SetRenderDrawColor(host->renderer,0,0,0,255) &&
            SDL_RenderClear(host->renderer) &&
            SDL_RenderTexture(host->renderer,host->texture,NULL,NULL) &&
-           SDL_RenderPresent(host->renderer);
+           SDL_RenderPresent(host->renderer))) return 0;
+    host->presented_palette = *palette;
+    host->frame_presented = 1;
+    return 1;
 }
 
 int host_save_frame(Host *host, const char *path)

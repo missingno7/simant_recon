@@ -1124,6 +1124,24 @@
       "deletion_condition": "Keep the manifest as the service inventory. Remove a provider only after proving no generated canonical TU, service object, application link, or isolated test consumes it."
     },
     {
+      "id": "sdl3_playtest_diagnostics",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/whole_program/platform/sdl3/diagnostics.c",
+        "portable/whole_program/platform/sdl3/diagnostics.h",
+        "portable/tests/diagnostics/run.py"
+      ],
+      "builder_site": "portable/build.py:platform service inventory and application exit wrapping",
+      "consumers": [
+        "portable/whole_program/application.c",
+        "portable/whole_program/platform/sdl3/host.c event observer",
+        "portable/package.py build identity receipt and debug launcher"
+      ],
+      "reason": "Host-only session/crash reports, input observations and last-presented-frame captures. Canonical exits are observed by the linker wrapper without changing decisions or statuses.",
+      "blocker": "No game behavior claim. DbgHelp source lines and dumps are best effort; timing-based input replay is approximate and forced termination cannot produce a crash report.",
+      "deletion_condition": "Keep as a platform service. If replaced, retire the service, observer consumers, exit wrapping and package identity contract together while preserving crash/replay regression coverage."
+    },
+    {
       "id": "canonical_semantic_span_storage",
       "class": "GENERIC_LOWERING",
       "paths": [

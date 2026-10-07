@@ -49,7 +49,11 @@ def main() -> None:
     out = prepare_output(ROOT / 'build/current/playtest', ROOT / 'build/current/playtest')
     payload = out / 'files'
     payload.mkdir()
-    for source in (exe, dll):
+    identity = build / 'simant-build-id.txt'
+    expected_identity = ''.join(f'{key}={value}\n' for key, value in report['build_identity'].items())
+    if identity.read_text(encoding='ascii') != expected_identity:
+        raise ValueError('Build identity receipt differs from build report')
+    for source in (exe, dll, identity):
         shutil.copyfile(source, payload / source.name)
     (payload / 'simant-sdl3-fonts').mkdir()
     for name in font_files:
@@ -74,17 +78,34 @@ if not exist "INSTALL.EXE" type nul > "INSTALL.EXE"
 set "result=%errorlevel%"
 if not "%result%"=="0" (
   echo SimAnt SDL3 exited with code %result%.
-  echo Please include simant-sdl3.log with your report.
+  echo Please ZIP the newest folder in diagnostics with your report.
   pause
 )
 exit /b %result%
 '''
     (payload / 'Play-SimAnt-SDL3.cmd').write_text(launcher, encoding='ascii', newline='\r\n')
+    debug_launcher = launcher.replace('"simant-canonical.exe" %*', '"simant-canonical.exe" --debug %*')
+    (payload / 'Play-SimAnt-SDL3-debug.cmd').write_text(debug_launcher, encoding='ascii', newline='\r\n')
     readme = '''SIMANT SDL3 - WINDOWS 64-BIT PLAYTEST PREVIEW
 
 Extract all files beside your original DOS SimAnt game data, keeping the
 simant-sdl3-fonts directory. Double-click Play-SimAnt-SDL3.cmd.
 No Python, compiler, DOSBox or separate SDL installation is needed.
+
+For bug reports, launch Play-SimAnt-SDL3-debug.cmd. Every launch creates a unique
+diagnostics/simant-DATE-TIME-PID folder beside the executable (or under local
+application data if the game folder is not writable). After a crash or problem,
+ZIP the newest diagnostics folder and include it with your report. Debug sessions
+save stderr/SDL output and input.txt; F12 saves the last presented frame and its
+palette in capture-NNNN. Without debug, F12 retains its ordinary behavior.
+Crash reports preserve crash.txt, a best-effort crash.dmp and simant-crashed.exe.
+Logs include paths, command line and SIMANT.CFG; input recording grows as you play.
+
+To approximately replay a debug session from the same assets/configuration:
+simant-canonical.exe --seed N --input-script "diagnostics\\SESSION\\input.txt"
+Use the seed shown in session.log. Host timing and asynchronous audio may differ;
+input recordings are not full simulation snapshots. --diagnostics-dir=PATH
+chooses another diagnostics destination. Forced termination cannot write a dump.
 
 Use a copy of your game folder, preferably a short path such as C:\\Games\\SimAnt.
 Original file dialogs still have a 67-character path domain. The package contains

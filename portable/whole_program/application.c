@@ -12,6 +12,7 @@
 #include "platform/seed_source.h"
 #include "platform/sdl3/m1b73_application_input.h"
 #include "platform/sdl3/host_modes.h"
+#include "platform/sdl3/diagnostics.h"
 #include "portable/whole_program/platform/graphics_resources.h"
 #include "portable/platform/sdl3/whole_audio_provider.h"
 #include "portable/platform/sdl3/whole_audio_startup.h"
@@ -51,10 +52,24 @@ typedef struct Application {
     char capture_path[MAX_PATH];
     int display_active;
     int cleaned;
-    ReplayKey replay[512];
-    size_t replay_count, replay_next;
+    ReplayKey *replay;
+    size_t replay_count, replay_next, replay_capacity;
+    SDL_Keymod replay_modifiers;
+    int test_input;
 } Application;
 static Application app;
+static int exit_status;
+static const char *exit_reason = "source main returned";
+extern void __real_exit(int status) __attribute__((noreturn));
+/* Observe all CRT exit calls, including canonical Punt paths, before atexit.
+ * Linker wrapping changes no game decision or status. */
+void __wrap_exit(int status)
+{
+    exit_status = status;
+    if (!strcmp(exit_reason, "source main returned")) exit_reason = "source/platform exit";
+    __real_exit(status);
+}
+static void close_diagnostics(void) { simant_diagnostics_close(exit_status, exit_reason); }
 static void idle(void *context);
 static void request_quit(void *context);
 static void fail(const char *where);
@@ -81,6 +96,7 @@ __attribute__((noinline)) void portable_native_checkpoint(uint64_t milliseconds)
 
 static void fail(const char *where)
 {
+    exit_reason = where;
     fprintf(stderr, "SimAnt native boundary failed: %s\n", where);
     exit(70);
 }
@@ -113,12 +129,21 @@ static void load_replay(const char *path)
         ReplayKey *entry;
         ++number;
         if (line[0] == '#' || line[0] == '\n' || line[0] == '\r') continue;
-        if (app.replay_count == sizeof(app.replay) / sizeof(app.replay[0]) ||
-            sscanf(line, "%llu %15s", &milliseconds, operation) != 2) {
+        if (sscanf(line, "%llu %15s", &milliseconds, operation) != 2) {
             fprintf(stderr, "Invalid keyboard replay line %zu\n", number);
             fail("keyboard replay syntax");
         }
+        if (app.replay_count == app.replay_capacity) {
+            size_t capacity = app.replay_capacity ? app.replay_capacity * 2 : 512;
+            ReplayKey *grown;
+            if (capacity < app.replay_capacity || capacity > SIZE_MAX / sizeof(*grown)) fail("replay size");
+            grown = realloc(app.replay, capacity * sizeof(*grown));
+            if (!grown) fail("replay storage");
+            app.replay = grown;
+            app.replay_capacity = capacity;
+        }
         entry = &app.replay[app.replay_count];
+        memset(entry, 0, sizeof(*entry));
         entry->milliseconds = milliseconds;
         if (!strcmp(operation, "down") || !strcmp(operation, "up")) {
             size_t length;
@@ -172,6 +197,7 @@ static void load_replay(const char *path)
 }
 static void replay_input(uint64_t now)
 {
+    simant_diagnostics_progress("replay_input", app.replay_next, (long)fd_50F6_383A);
     uint64_t elapsed = (now - app.started_ns) / 1000000u;
     while (app.replay_next < app.replay_count &&
             app.replay[app.replay_next].milliseconds <= elapsed) {
@@ -185,7 +211,7 @@ static void replay_input(uint64_t now)
             ++app.replay_next;
             continue;
         }
-        if (entry->quit) exit(0);
+        if (entry->quit) { exit_reason = "input replay exit"; exit(0); }
         if (entry->pointer.kind) {
             if (entry->relative || entry->current_pointer) {
                 HostInputState state;
@@ -214,6 +240,17 @@ static void replay_input(uint64_t now)
         event.type = entry->down ? SDL_EVENT_KEY_DOWN : SDL_EVENT_KEY_UP;
         event.key.key = entry->key;
         event.key.scancode = SDL_GetScancodeFromKey(entry->key, &event.key.mod);
+        {
+            SDL_Keymod modifier = entry->key == SDLK_LSHIFT ? SDL_KMOD_LSHIFT :
+                entry->key == SDLK_RSHIFT ? SDL_KMOD_RSHIFT : entry->key == SDLK_LCTRL ? SDL_KMOD_LCTRL :
+                entry->key == SDLK_RCTRL ? SDL_KMOD_RCTRL : entry->key == SDLK_LALT ? SDL_KMOD_LALT :
+                entry->key == SDLK_RALT ? SDL_KMOD_RALT : SDL_KMOD_NONE;
+            if (entry->down) app.replay_modifiers |= modifier;
+            else app.replay_modifiers &= ~modifier;
+            if (entry->down && entry->key == SDLK_CAPSLOCK) app.replay_modifiers ^= SDL_KMOD_CAPS;
+            event.key.mod |= app.replay_modifiers;
+        }
+        event.key.timestamp = HOST_REPLAY_EVENT_TIMESTAMP;
         event.key.down = entry->down != 0;
         if (!event.key.scancode || !SDL_PushEvent(&event))
             fail("SDL keyboard replay enqueue");
@@ -338,6 +375,8 @@ static void cleanup(void)
 {
     if (app.cleaned) return;
     app.cleaned = 1;
+    host_set_event_observer(NULL, NULL);
+    free(app.replay);
     portable_m1b73_sdl_application_input_unbind(&app.input);
     if (portable_whole_audio_timer_armed()) f_28BC_04E0(0);
     portable_sdl3_whole_audio_unbind_source_services();
@@ -353,6 +392,7 @@ static void cleanup(void)
 static void request_quit(void *context)
 {
     (void)context;
+    exit_reason = "window closed";
     exit(0); /* Native window close; atexit releases borrowed bindings first. */
 }
 static void source_timer_changed(void *context, uint16_t divisor, uint16_t reload)
@@ -380,6 +420,42 @@ static void idle(void *context)
 {
     Application *a = context;
     uint64_t now = host_time_ns();
+    simant_diagnostics_progress("application.idle", a->replay_next, (long)fd_50F6_383A);
+    if (a->test_input > 0 && a->last_present) {
+        /* Hidden regression hook: untagged SDL input exercises the same
+         * recording boundary as a keyboard/mouse, without OS focus races. */
+        SDL_Event event = {0};
+        int down, count = a->test_input == 2 ? 240 : 1, n;
+        a->test_input = a->test_input == 2 ? -1 : 0;
+        SDL_Log("SimAnt diagnostics SDL log regression");
+        event.type = SDL_EVENT_MOUSE_MOTION;
+        event.motion.which = SDL_TOUCH_MOUSEID; /* A real SDL mouse ID, not a replay tag. */
+        event.motion.x = 120; event.motion.y = 140;
+        for (n = 0; n < count; ++n) SDL_PushEvent(&event);
+        for (down = 1; down >= 0; --down) {
+            memset(&event, 0, sizeof(event));
+            event.type = down ? SDL_EVENT_MOUSE_BUTTON_DOWN : SDL_EVENT_MOUSE_BUTTON_UP;
+            event.button.button = SDL_BUTTON_RIGHT;
+            event.button.x = 120; event.button.y = 140;
+            event.button.down = down != 0;
+            SDL_PushEvent(&event);
+        }
+        for (down = 1; down >= 0; --down) {
+            memset(&event, 0, sizeof(event));
+            event.type = down ? SDL_EVENT_KEY_DOWN : SDL_EVENT_KEY_UP;
+            event.key.key = SDLK_LSHIFT; event.key.scancode = SDL_SCANCODE_LSHIFT;
+            event.key.mod = down ? SDL_KMOD_LSHIFT : SDL_KMOD_NONE;
+            event.key.down = down != 0;
+            SDL_PushEvent(&event);
+        }
+        for (down = 1; down >= 0; --down) {
+            memset(&event, 0, sizeof(event));
+            event.type = down ? SDL_EVENT_KEY_DOWN : SDL_EVENT_KEY_UP;
+            event.key.key = SDLK_F12; event.key.scancode = SDL_SCANCODE_F12;
+            event.key.down = down != 0;
+            SDL_PushEvent(&event);
+        }
+    }
     if (host_virtual_clock_enabled() && a->audio.active &&
         portable_sdl3_whole_audio_pump(&a->audio) != PORTABLE_SDL3_WHOLE_AUDIO_OK)
         fail("virtual PIT audio work");
@@ -387,6 +463,8 @@ static void idle(void *context)
     /* Events were routed at ingestion. Release the retained host observations;
      * source BIOS keys and hotbox records have their own canonical queues. */
     drain_host_observations();
+    simant_diagnostics_capture(a->host, (long)fd_50F6_383A);
+    if (a->test_input == -1) simant_diagnostics_test_crash();
     if (!host_virtual_clock_enabled() && a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
             PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
     /* Polling yields after a draw, including held-input tracking. g_5AAC is
@@ -405,6 +483,7 @@ static void idle(void *context)
             fail("smoke frame capture");
         fprintf(stderr, "Source-main smoke frame captured; outer game loop count=%ld; full gameplay remains a separate check\n",
             (long)fd_50F6_383A);
+        exit_reason = "smoke deadline";
         exit(0);
     }
 }
@@ -421,8 +500,17 @@ int main(int argc, char **argv)
     uint64_t smoke_ms = 0;
     uint64_t virtual_quantum_ns = 0;
     char **source_argv;
+    int debug = 0, test_crash = 0, test_abort = 0;
+    const char *diagnostics_root = NULL;
     setvbuf(stderr, NULL, _IONBF, 0);
     SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);
+    /* Establish crash capture before resource paths, SDL startup or game code. */
+    for (i = 1; i < argc; ++i) {
+        if (!strcmp(argv[i], "--debug")) debug = 1;
+        else if (!strncmp(argv[i], "--diagnostics-dir=", 18)) diagnostics_root = argv[i] + 18;
+    }
+    simant_diagnostics_init(debug, diagnostics_root);
+    atexit(close_diagnostics);
     {
         /* This MinGW import library omits an export present in the loaded
          * Windows CRT. Resolve that same CRT's diagnostic policy directly. */
@@ -459,7 +547,13 @@ int main(int argc, char **argv)
     if (!source_argv) fail("argument storage");
     source_argv[0] = argv[0];
     for (i = 1; i < argc; ++i) {
-        if (!strcmp(argv[i], "--headless")) headless = 1;
+        if (!strcmp(argv[i], "--debug") || !strncmp(argv[i], "--diagnostics-dir=", 18)) continue;
+        else if (!strcmp(argv[i], "--test-crash")) test_crash = 1;
+        else if (!strcmp(argv[i], "--test-crash-thread")) test_crash = 2;
+        else if (!strcmp(argv[i], "--test-abort")) test_abort = 1;
+        else if (!strcmp(argv[i], "--test-input")) app.test_input = 1;
+        else if (!strcmp(argv[i], "--test-input-crash")) app.test_input = 2;
+        else if (!strcmp(argv[i], "--headless")) headless = 1;
         else if (!strcmp(argv[i], "--deterministic")) virtual_quantum_ns = 1000000u;
         else if (!strcmp(argv[i], "--poll-ns") && i + 1 < argc) {
             virtual_quantum_ns = strtoull(argv[++i], NULL, 0);
@@ -490,13 +584,18 @@ int main(int argc, char **argv)
         host_virtual_clock_configure(virtual_quantum_ns);
         if (!explicit_seed) app.seed = 0; /* 046C:0000 RAM policy, not BIOS time. */
     }
+    simant_diagnostics_launch(assets, app.seed);
+    if (test_crash == 1) simant_diagnostics_test_crash();
+    if (test_crash == 2) simant_diagnostics_test_thread_crash();
+    if (test_abort) abort();
     if (headless &&
         (!SDL_SetHintWithPriority(SDL_HINT_VIDEO_DRIVER, "dummy", SDL_HINT_OVERRIDE) ||
          !SDL_SetHintWithPriority(SDL_HINT_AUDIO_DRIVER, "dummy", SDL_HINT_OVERRIDE)))
         fail("headless SDL driver selection");
     atexit(cleanup);
     app.host = host_create("SimAnt", 1);
-    if (!app.host) { fprintf(stderr, "%s\n", host_error()); return 70; }
+    if (!app.host) { fprintf(stderr, "%s\n", host_error()); exit_status = 70; exit_reason = "SDL host startup"; return 70; }
+    host_set_event_observer(simant_diagnostics_event, NULL);
     fprintf(stderr, "Native video driver: %s\n", SDL_GetCurrentVideoDriver());
     if (replay_path[0]) load_replay(replay_path);
     if (sim_graphics_init(&app.graphics) != SIM_GRAPHICS_OK) fail("framebuffer");
@@ -526,8 +625,10 @@ int main(int argc, char **argv)
         fail("source audio services");
     if (dos_files_set_root(assets) < 0) fail("asset directory");
     app.started_ns = host_time_ns();
+    simant_diagnostics_start(app.started_ns);
     if (smoke_ms) app.smoke_deadline_ns = app.started_ns + smoke_ms * 1000000u;
     fprintf(stderr, "Entering reconstructed DOS main, seed=%u\n", app.seed);
+    simant_diagnostics_progress("dos_game_main", app.replay_next, (long)fd_50F6_383A);
     dos_game_main((int16_t)source_argc, source_argv);
     free(source_argv);
     return 0;
