@@ -64,9 +64,13 @@ copies and the Save/Load trace requirements.
 
 `canonical_native_abi/` contains bounded type/ABI conversions: fixed-width words,
 near/far pointer spelling, owner views, callbacks and packed wire/native layouts.
-Its word-expression pass narrows closed explicitly typed unsigned-word results
-before consumers and preserves mixed word comparisons; unknown types and general
-integer expressions remain outside that class. Per-TU build receipts record edits.
+Its final expression pass uses GCC preprocessing and pycparser to resolve
+declarations, fields, calls and expanded macros under MSC16/native integer rules.
+Unsigned operations and proved bounded signed expressions retain word semantics
+before consumers. Signed overflow, invalid shifts and pointer/layout effects remain
+explicit debt; per-TU receipts include every expression and its mechanical reason.
+Install the parser once with `python -m pip install --target build/deps/pycparser -r
+portable/tests/integer_semantics/requirements.txt`. The fake libc headers are parse-only.
 `whole_program/platform/` implements DOS/BIOS services. The small
 `whole_program/algorithms/` files project genuine canonical assembly algorithms
 that a native C compiler cannot assemble; they are not an alternative C game

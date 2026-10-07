@@ -161,11 +161,11 @@ def main():
     # Compare the same complete converted TU without the native guard. Both
     # runners use a fixture-owned reserved row; no out-of-allocation read occurs.
     index_body = index_sources[0].read_text()
-    guard = '    if (fd_50F6_3956 == fd_50F6_3958[db].indexHeader.count) return 0L;\n'
-    if index_body.count(guard) != 1:
+    guard = re.compile(r'if\s*\(\s*fd_50F6_3956\s*==\s*fd_50F6_3958\s*\[\s*db\s*\]\s*\.\s*indexHeader\s*\.\s*count\s*\)\s*return\s+0L\s*;')
+    if len(list(guard.finditer(index_body))) != 1:
         raise ValueError('native FindIndex guard anchor not unique')
     unguarded = out / 'root_1986-without-native-guard.c'
-    unguarded.write_text(index_body.replace(guard, ''))
+    unguarded.write_text(guard.sub('',index_body))
     old_obj = compile_sources([unguarded], 'unguarded')[0]
     objects = [old_obj, *index_objects[1:]]
     unguarded_exe = link(objects, 'unguarded')

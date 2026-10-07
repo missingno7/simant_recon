@@ -156,8 +156,13 @@ def build_native(build,out,mutation=None):
         path=Path(row['generated']);text=path.read_text(encoding='latin1')
         body_start,body_end=native_function_body(text,mutation_target)
         body=text[body_start:body_end]
-        if body.count(old)!=1:raise ValueError('unique current-body mutation anchor changed')
-        modified=text[:body_start]+body.replace(old,new)+text[body_end:]
+        tokens=[t for t in b.csrc.tokenize(body) if t.kind not in ('ws','nl','cmt')]
+        needle=[t.text for t in b.csrc.tokenize(old) if t.kind not in ('ws','nl','cmt')]
+        matches=[i for i in range(len(tokens)-len(needle)+1)
+                 if [t.text for t in tokens[i:i+len(needle)]]==needle]
+        if len(matches)!=1:raise ValueError('unique current-body mutation anchor changed')
+        start=tokens[matches[0]].s;end=tokens[matches[0]+len(needle)-1].e
+        modified=text[:body_start]+body[:start]+new+body[end:]+text[body_end:]
         mutant_source=out/'S25-mutant.c';mutant_source.write_text(modified,encoding='latin1')
         compile_command=list(row['compile']['command'])
         original_object=compile_command[compile_command.index('-o')+1]
@@ -176,7 +181,7 @@ def build_native(build,out,mutation=None):
     pins[str(response)]=sha(response)
     command=[report['core_link']['command'][0],'-shared','-Wl,--export-all-symbols',
         *['-Wl,--wrap='+n for n in BOUNDARIES],str(HERE/'native_callbacks.c'),
-        '-Wl,@fixture-objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),
+        '-Wl,@fixture-objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),'-static','-lstdc++',
         '-o',str(out/'native.dll')]
     run=subprocess.run(command,cwd=out,capture_output=True,text=True)
     (out/'link.txt').write_text(run.stdout+run.stderr)

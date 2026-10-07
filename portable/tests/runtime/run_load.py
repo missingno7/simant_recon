@@ -36,6 +36,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report', type=Path, required=True)
     parser.add_argument('--out', type=Path)
+    parser.add_argument('--output-root', type=Path,
+                        help='artifact workspace root for short FileSelect paths from a deep worktree')
     parser.add_argument('--project', type=Path, default=PROJECT)
     parser.add_argument('--silent', action='store_true',
                         help='pass /s0 to the reconstructed DOS main as a timing contrast')
@@ -43,6 +45,7 @@ def main():
                         if Path('C:/msys64/mingw64/bin/gdb.exe').is_file() else 'gdb')
     args = parser.parse_args()
     project, report_path = args.project.resolve(), args.report.resolve()
+    output_root = (args.output_root or project).resolve()
     report_hash = runtime.sha(report_path)
     build = report_path.parent
     build_report = json.loads(report_path.read_text())
@@ -101,7 +104,7 @@ def main():
     import sys
     sys.path.insert(0,str(PROJECT/'tools'))
     from workspace import prepare_output
-    prepare_output(out,project/'build/current/load',project)
+    prepare_output(out,project/'build/current/load',output_root)
     shutil.copytree(build / 'runtime-assets', assets)
     before = runtime.files(assets)
     commands = out / 'gdb.txt'

@@ -1,0 +1,62 @@
+{
+  "id": "INT16-1",
+  "question": "Does MSC 6.00A/AX contract (a*9)/3 across signed or unsigned word wrapping, including /Od?",
+  "notes": [
+    "Negative control against a universal source-AST signed-word wrapping rule. Overflow inputs are undefined C; this records actual compiler behavior, not a new canonical game algorithm.",
+    "The explicit word store is a positive barrier control. Native lowering must retain signed-overflow domains until a source bound or compiler-specific proof excludes this contrast.",
+    "The unsigned variant contracts too: a=32768 yields 32768, while ISO C16 multiplication then division yields 10922. Unsigned C90 type rules alone therefore do not prove equivalence to this compiler."
+  ],
+  "variants": {
+    "contracted": "long far probe(int a) { return (a * 9) / 3; }",
+    "store_barrier": "long far probe(int a) { volatile int product; product = a * 9; return product / 3; }",
+    "unsigned_defined": "long far probe(unsigned a) { return (a * 9) / 3; }"
+  },
+  "profiles": [
+    {
+      "profile": "msc600a",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Od"
+      ]
+    },
+    {
+      "profile": "msc600a",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Oeg"
+      ]
+    },
+    {
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Os"
+      ]
+    },
+    {
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Oeg"
+      ]
+    }
+  ],
+  "expect": {
+    "contracted@0": "!idiv",
+    "contracted@1": "!idiv",
+    "contracted@2": "!idiv",
+    "contracted@3": "!idiv",
+    "store_barrier@0": "idiv cx",
+    "store_barrier@1": "idiv cx",
+    "store_barrier@2": "idiv cx",
+    "store_barrier@3": "idiv cx",
+    "unsigned_defined@0": "!div",
+    "unsigned_defined@1": "!div",
+    "unsigned_defined@2": "!div",
+    "unsigned_defined@3": "!div"
+  }
+}

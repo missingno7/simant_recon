@@ -23,6 +23,10 @@ current input pins, unchanged original/build resources and all scripted events.
 The Load check additionally requires successful source returns and 307 complete
 SaveRec reads totaling 48,386 bytes. A short
 fresh `--out` path may be required by the original FileSelect path domain.
+For a deeply nested worktree, Save and Load accept `--output-root <checkout>`
+with an explicit fresh `--out` under that checkout's `build/`. This changes
+disposable output placement only; executable and input pins still use the
+worktree supplied by `--project` (or the script's own project by default).
 
 The logo regression requires GDB with Python support. It exercises clicks during
 and after animation, center/corner positions, held right-click and Space, and

@@ -214,7 +214,7 @@
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "Native scalar expression lowering",
-      "detail": "Declared storage/parameter/cast widths and closed explicitly typed unsigned-word additive/comparison expressions are converted mechanically. Declaration-driven intermediate wrap, products/division, shifts, macro expressions and general unsuffixed literal typing still need lowering/domain proof because native integer promotions differ from DOS16bit rules. The bounded closed-expression proof does not establish global expression equivalence. See evidence/canonical/native-word-expressions/ and evidence/canonical/native-integer-promotions/.",
+      "detail": "The final GCC-preprocessed pycparser pass types every converted canonical expression in MSC16 and native models. Declaration-driven unsigned wrap, products/division/modulo, valid unsigned shifts, mixed comparisons, conditional conversion and macro/literal types are lowered mechanically; local interval/guard/loop proofs preserve bounded signed arithmetic. Compiler-dependent signed overflow remains open: MSC contracts (a*9)/3 even under /Od, disproving universal per-node signed wrapping. Invalid shift counts/negative left shifts, division overflow/trap identity, high character constants, sizeof and pointer/layout effects remain explicit per-TU debt. See evidence/canonical/native-integer-expressions/. MSC unsigned constant algebra can also violate C16 modulo semantics; those containing expressions and affected children are withheld (INT16-1).",
       "id": "native-integer-expressions",
       "status": "OPEN"
     },

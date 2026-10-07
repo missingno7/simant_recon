@@ -33,3 +33,8 @@ expression or every reachable input domain across the program.
 report and existing test receipts. No canonical or platform files were changed.
 Checkpoint claim: **fixed scalar storage/cast widths plus bounded validated
 adapters; global DOS 16-bit intermediate expression semantics remain unproved.**
+
+
+The active conversion is now the declaration-driven frontend documented in
+[../native-integer-expressions/README.md](../native-integer-expressions/README.md).
+This older packet is historical context, not a receipt for the current pass.

@@ -1,0 +1,693 @@
+{
+ "id": "INT16-1",
+ "question": "Does MSC 6.00A/AX contract (a*9)/3 across signed or unsigned word wrapping, including /Od?",
+ "results": [
+  {
+   "variant": "contracted",
+   "profile_index": 0,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Od"
+   ],
+   "source_sha256": "30b5c849e7869158d783d07677bc5f9ffcb00233ccfe56440493b8810c262260",
+   "bytes": "558bec81ec000057568b46068bc8d1e003c199e900005e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 0; push di; push si; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; cdq; jmp 0x16; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 28,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "store_barrier",
+   "profile_index": 0,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Od"
+   ],
+   "source_sha256": "7dfe67c5dcb95bae5f7f9f9c933b07aa9aeb192a195ce14792b9c7329de4262c",
+   "bytes": "558bec81ec020057568b46068bc8d1e0d1e0d1e003c18946fe8b46feb9030099f7f999e900005e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push di; push si; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; shl ax, 1; shl ax, 1; add ax, cx; mov word ptr [bp - 2], ax; mov ax, word ptr [bp - 2]; mov cx, 3; cdq; idiv cx; cdq; jmp 0x26; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 44,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "unsigned_defined",
+   "profile_index": 0,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Od"
+   ],
+   "source_sha256": "218701ce388d8c18e00e0031057605473d90f6b94674972b13b5a13fa17c8b3b",
+   "bytes": "558bec81ec000057568b46068bc8d1e003c12bd2e900005e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 0; push di; push si; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; sub dx, dx; jmp 0x17; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 29,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "contracted",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Oeg"
+   ],
+   "source_sha256": "30b5c849e7869158d783d07677bc5f9ffcb00233ccfe56440493b8810c262260",
+   "bytes": "558bec8b46068bc8d1e003c1995dcb90",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; cdq; pop bp; retf; nop",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "store_barrier",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Oeg"
+   ],
+   "source_sha256": "7dfe67c5dcb95bae5f7f9f9c933b07aa9aeb192a195ce14792b9c7329de4262c",
+   "bytes": "558bec83ec028b46068bc8d1e0d1e0d1e003c18946fe8b46feb9030099f7f9998be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; shl ax, 1; shl ax, 1; add ax, cx; mov word ptr [bp - 2], ax; mov ax, word ptr [bp - 2]; mov cx, 3; cdq; idiv cx; cdq; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 36,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "unsigned_defined",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Oeg"
+   ],
+   "source_sha256": "218701ce388d8c18e00e0031057605473d90f6b94674972b13b5a13fa17c8b3b",
+   "bytes": "558bec8b46068bc8d1e003c12bd25dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; sub dx, dx; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "contracted",
+   "profile_index": 2,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Os"
+   ],
+   "source_sha256": "30b5c849e7869158d783d07677bc5f9ffcb00233ccfe56440493b8810c262260",
+   "bytes": "558bec8b46068bc8d1e003c1995dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; cdq; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 15,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "store_barrier",
+   "profile_index": 2,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Os"
+   ],
+   "source_sha256": "7dfe67c5dcb95bae5f7f9f9c933b07aa9aeb192a195ce14792b9c7329de4262c",
+   "bytes": "558bec83ec02b80900f76e068946fe8b46feb9030099f7f9998be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; mov ax, 9; imul word ptr [bp + 6]; mov word ptr [bp - 2], ax; mov ax, word ptr [bp - 2]; mov cx, 3; cdq; idiv cx; cdq; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 29,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "unsigned_defined",
+   "profile_index": 2,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Os"
+   ],
+   "source_sha256": "218701ce388d8c18e00e0031057605473d90f6b94674972b13b5a13fa17c8b3b",
+   "bytes": "558bec8b46068bc8d1e003c12bd25dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; sub dx, dx; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "contracted",
+   "profile_index": 3,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Oeg"
+   ],
+   "source_sha256": "30b5c849e7869158d783d07677bc5f9ffcb00233ccfe56440493b8810c262260",
+   "bytes": "558bec8b46068bc8d1e003c1995dcb90",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; cdq; pop bp; retf; nop",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "store_barrier",
+   "profile_index": 3,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Oeg"
+   ],
+   "source_sha256": "7dfe67c5dcb95bae5f7f9f9c933b07aa9aeb192a195ce14792b9c7329de4262c",
+   "bytes": "558bec83ec028b46068bc8d1e0d1e0d1e003c18946fe8b46feb9030099f7f9998be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; shl ax, 1; shl ax, 1; add ax, cx; mov word ptr [bp - 2], ax; mov ax, word ptr [bp - 2]; mov cx, 3; cdq; idiv cx; cdq; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 36,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  },
+  {
+   "variant": "unsigned_defined",
+   "profile_index": 3,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Gs",
+    "/Oeg"
+   ],
+   "source_sha256": "218701ce388d8c18e00e0031057605473d90f6b94674972b13b5a13fa17c8b3b",
+   "bytes": "558bec8b46068bc8d1e003c12bd25dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov cx, ax; shl ax, 1; add ax, cx; sub dx, dx; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {},
+   "bindings": {
+    "fixup_target_counts": {},
+    "ordered_const_fixups": [],
+    "external_scopes": {
+     "_probe": "external"
+    },
+    "data_publics": []
+   }
+  }
+ ],
+ "checks": [
+  {
+   "check": "contracted@0",
+   "needle": "!idiv",
+   "ok": true
+  },
+  {
+   "check": "contracted@1",
+   "needle": "!idiv",
+   "ok": true
+  },
+  {
+   "check": "contracted@2",
+   "needle": "!idiv",
+   "ok": true
+  },
+  {
+   "check": "contracted@3",
+   "needle": "!idiv",
+   "ok": true
+  },
+  {
+   "check": "store_barrier@0",
+   "needle": "idiv cx",
+   "ok": true
+  },
+  {
+   "check": "store_barrier@1",
+   "needle": "idiv cx",
+   "ok": true
+  },
+  {
+   "check": "store_barrier@2",
+   "needle": "idiv cx",
+   "ok": true
+  },
+  {
+   "check": "store_barrier@3",
+   "needle": "idiv cx",
+   "ok": true
+  },
+  {
+   "check": "unsigned_defined@0",
+   "needle": "!div",
+   "ok": true
+  },
+  {
+   "check": "unsigned_defined@1",
+   "needle": "!div",
+   "ok": true
+  },
+  {
+   "check": "unsigned_defined@2",
+   "needle": "!div",
+   "ok": true
+  },
+  {
+   "check": "unsigned_defined@3",
+   "needle": "!div",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

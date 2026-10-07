@@ -11,6 +11,14 @@ Research paths beginning with `work/` are historical provenance, recoverable at
 Current runnable probes embed their inputs under `evidence/codegen/`; they do
 not depend on that retired research tree.
 
+Native ABI counterexample probes are also rerun by validation. They constrain
+conversion claims and do not establish an original-function source spelling.
+`INT16-1-signed-contraction.json` shows signed and unsigned `(word*9)/3`
+contracting across word wrap under 6.00A/AX, including `/Od`; a volatile word
+store is the positive barrier contrast. See
+`evidence/canonical/native-integer-expressions/` for the expression domains
+that remain open and the freshly compiled execution controls.
+
 | ID | Status | Rule | Positive control | Negative contrast |
 |---|---|---|---|---|
 | FRAME-1 | VERIFIED | MSC 6.00/6.00A always emit `mov sp,bp` before `pop bp` in a stack-checked BP frame, even without locals. | `f_0093_008F` (SetSRandSeed) | MSC 5.10 and QuickC 2.50 omit it → excluded as compilers |

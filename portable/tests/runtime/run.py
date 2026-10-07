@@ -77,12 +77,15 @@ def main():
     parser.add_argument('--report', type=Path, required=True)
     parser.add_argument('--flow', choices=['vga', 'save'], required=True)
     parser.add_argument('--out', type=Path)
+    parser.add_argument('--output-root', type=Path,
+                        help='artifact workspace root, useful for short FileSelect paths from a deep worktree')
     parser.add_argument('--project', type=Path, default=PROJECT,
                         help='current source root; defaults to this runner\'s project')
     parser.add_argument('--assets-copy', type=Path,
                         help='optional fresh resource copy inside --out')
     args = parser.parse_args()
     project = args.project.resolve()
+    output_root = (args.output_root or project).resolve()
     report_path = args.report.resolve()
     build = report_path.parent
     report_hash = sha(report_path)
@@ -139,7 +142,7 @@ def main():
     import sys
     sys.path.insert(0,str(PROJECT/'tools'))
     from workspace import prepare_output
-    prepare_output(out,project/('build/current/'+args.flow),project)
+    prepare_output(out,project/('build/current/'+args.flow),output_root)
     shutil.copytree(build / 'runtime-assets', assets)
     before = files(assets)
     # The canonical ReadConfig must select the pinned Display Mode: V and Sound

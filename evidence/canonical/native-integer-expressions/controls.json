@@ -1,0 +1,909 @@
+{
+  "schema": "msc16-expression-controls-v1",
+  "passed": true,
+  "scope": "Real MSC 6.00A/AX compiler-output execution on stated domains; partial conversion closure only.",
+  "input_pins": {
+    "portable/tests/integer_semantics/controls.py": "f561a6d60b68ff683a8850b4287635bd41bfdc2150dbf930400ff36fbc93311f",
+    "portable/tests/integer_semantics/single_evaluation.c": "977e67a08b68c3c2ca3f62a511212d996c173b82c951f5cf1c3d2d153ae1282e",
+    "portable/canonical_native_abi/integer_frontend.py": "cbdb765d52cd58c9af77140c49d8828faf890063cb6e1108c5adb4649d661cc7",
+    "portable/canonical_native_abi/scalar.py": "4ea12beb5431f577fa7d7e7a82a0a093dfa6465bb46b8af1d73195e127815d78",
+    "portable/tests/integer_semantics/requirements.txt": "177d1ec815e8a98bcc67446cc28c1425d2305eb934a2a7d12f8de0a332056daa",
+    "tools/compiler.py": "27a750d509e7d2d114a69514294150af66b88aaa0ff68cd42abda970febd0634",
+    "layout/toolchain.json": "ad3ca6ae2989d833d0893d937b8a52b951257bc55aea27a98780fd00758d83f1",
+    "portable/canonical_native_abi/integer_fake_libc/ctype.h": "d6798978700be8a15f399212c20dafa3b675d83d14663e4442f5ab0672ad359c",
+    "portable/canonical_native_abi/integer_fake_libc/direct.h": "522635a68d7db574e43565e7315f3b0a7882f8d869ad27dd019d7ecb18da8423",
+    "portable/canonical_native_abi/integer_fake_libc/dos.h": "b3a6f68a5d0b06a7429a8986a96cf0e3ee78ea4ddb34fe36beb3b5d3ea518941",
+    "portable/canonical_native_abi/integer_fake_libc/fcntl.h": "6d5e548df5668b475608735592af54293fb66a6a16cc22e8d6c50d02697fa951",
+    "portable/canonical_native_abi/integer_fake_libc/io.h": "2ad0e20846c1c21ea5a18d3b8683f1ca963c6c24640e218460856f2a55f322ac",
+    "portable/canonical_native_abi/integer_fake_libc/stdarg.h": "1d8d2dd5098de730b3d1bf0e1b5b0f45fdc3392c523f584b20c8131fd7afa46e",
+    "portable/canonical_native_abi/integer_fake_libc/stddef.h": "1a4ae575af9029ed232260acd3cb8fd21ef791878d930c084d5d08bc9e3de8b4",
+    "portable/canonical_native_abi/integer_fake_libc/stdint.h": "2e003a983f1fe4e141ddb312a8533f2758092a32e4886fb76d5173e73c975f77",
+    "portable/canonical_native_abi/integer_fake_libc/stdio.h": "3fde95d23a8c11c15cae566023581e094589f12c6c249a0d05d585cd9d0d4ec6",
+    "portable/canonical_native_abi/integer_fake_libc/stdlib.h": "5a0ca997343d3335481a65c65e3fc6c3d1533c65dcc3d311f4067ebb924f5ef7",
+    "portable/canonical_native_abi/integer_fake_libc/string.h": "91739af83b58b993f072c4362e5fec7606679ad3ee43da0affb078b714d05fca",
+    "portable/canonical_native_abi/integer_fake_libc/time.h": "85be1332ac0437885eb0a00769a57d71cc595983652c8908a126e504aaeaed87",
+    "portable/canonical_native_abi/integer_fake_libc/sys/stat.h": "d5bc7d2ddf24786c7f7343d681d6dc453e280e9b55913394c7b448ceddc45a55",
+    "portable/canonical_native_abi/integer_fake_libc/sys/types.h": "749a74833fe5f602a09b7377aea8ac5362ce83dd6b237a5148a3c1579c259302"
+  },
+  "expressions": {
+    "unsigned_add_before_div": "(b + 3) / 2",
+    "signed_add_before_div": "(a + 7) / 2",
+    "unsigned_product_before_div": "(b * 257) / 3",
+    "unsigned_contraction_counterexample": "(b * 9) / 3",
+    "unsigned_repeated_add_contraction": "(b + b) / 2",
+    "unsigned_shift_division": "(b << 1) / 2",
+    "unsigned_product_modulo": "(b * 6) % 3",
+    "signed_product_before_div": "(a * 9) / 3",
+    "unsigned_subtract_compare": "b - 2 > 100",
+    "mixed_comparison": "a < b",
+    "hexadecimal_type": "a < 0xFFFF",
+    "decimal_type_contrast": "a < 40000",
+    "large_decimal_unsigned_msc": "a < 4000000000",
+    "large_decimal_long_unsigned_msc": "a < 4000000000L",
+    "unsigned_division": "a / b",
+    "unsigned_modulo": "a % b",
+    "signed_division": "a / (int)(c | 1)",
+    "signed_modulo": "a % (int)(c | 1)",
+    "signed_right_shift": "a >> 3",
+    "unsigned_left_shift": "b << 7",
+    "signed_left_shift": "a << 2",
+    "byte_product": "c * c",
+    "bitwise_not": "~b",
+    "unary_unsigned_minus": "-b",
+    "conditional_type": "c ? a : b",
+    "macro_add_before_div": "ADD(b) / 2",
+    "long_peer_contrast": "b + 40000",
+    "sizeof_expression": "sizeof(a + 1)",
+    "sizeof_far_pointer_difference": "sizeof((char far *)0 - (char far *)0)",
+    "sizeof_near_pointer_difference": "sizeof((char near *)0 - (char near *)0)",
+    "char_sign": "(char)c < 0",
+    "nested_modulo": "((b + c) * 17) % 29"
+  },
+  "runs": [
+    {
+      "profile": "msc600a",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Od"
+      ],
+      "object_sha256": "fea26c46aa58dfef1a2d7928326d05b0ac8831759ee4c6a7352fc6488105a7aa",
+      "cases": 40320,
+      "mismatches": {},
+      "negative_mismatches": {
+        "unsigned_add_before_div": 270,
+        "unsigned_product_before_div": 810,
+        "unsigned_repeated_add_contraction": 450,
+        "unsigned_shift_division": 450,
+        "unsigned_subtract_compare": 90,
+        "mixed_comparison": 385,
+        "hexadecimal_type": 70,
+        "large_decimal_long_unsigned_msc": 490,
+        "unsigned_division": 385,
+        "unsigned_modulo": 430,
+        "unsigned_left_shift": 720,
+        "bitwise_not": 1260,
+        "unary_unsigned_minus": 1260,
+        "conditional_type": 392,
+        "macro_add_before_div": 270,
+        "sizeof_expression": 1260,
+        "sizeof_far_pointer_difference": 1260,
+        "sizeof_near_pointer_difference": 1260,
+        "nested_modulo": 630
+      },
+      "excluded_contract_cases": {
+        "signed_add_before_div": 70,
+        "unsigned_contraction_counterexample": 630,
+        "unsigned_product_modulo": 630,
+        "signed_product_before_div": 490,
+        "large_decimal_unsigned_msc": 1260,
+        "signed_left_shift": 770,
+        "byte_product": 252
+      },
+      "excluded_witnesses": [
+        {
+          "expression": "signed_add_before_div",
+          "input": [
+            32767,
+            1,
+            0
+          ],
+          "msc": -16381,
+          "lowered": 16387,
+          "unlowered": 16387,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "unsigned_contraction_counterexample",
+          "input": [
+            -32768,
+            32767,
+            0
+          ],
+          "msc": 32765,
+          "lowered": 98301,
+          "unlowered": 98301,
+          "classification": "MSC_UNSIGNED_CONTRACTION"
+        },
+        {
+          "expression": "unsigned_product_modulo",
+          "input": [
+            -32768,
+            16384,
+            0
+          ],
+          "msc": 2,
+          "lowered": 0,
+          "unlowered": 0,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_product_before_div",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": -32768,
+          "lowered": -98304,
+          "unlowered": -98304,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "large_decimal_unsigned_msc",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": 1,
+          "unlowered": 1,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_left_shift",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": -131072,
+          "unlowered": -131072,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "byte_product",
+          "input": [
+            -32768,
+            1,
+            255
+          ],
+          "msc": -511,
+          "lowered": 65025,
+          "unlowered": 65025,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        }
+      ],
+      "unsigned_language_counterexample": {
+        "expression": "(b * 9) / 3",
+        "b": 32768,
+        "msc": 32768,
+        "C16": 10922,
+        "native_without_target_rule": 98304
+      },
+      "unsuffixed_decimal_counterexample": {
+        "expression": "a < 4000000000",
+        "a": 0,
+        "msc": 0,
+        "C90_C16": 1,
+        "native": 1,
+        "long_suffix_positive": 1
+      }
+    },
+    {
+      "profile": "msc600a",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Oeg"
+      ],
+      "object_sha256": "14b0837e14b2352e711671084d146f64e7739a720e9a7de14780785846bbbdcc",
+      "cases": 40320,
+      "mismatches": {},
+      "negative_mismatches": {
+        "unsigned_add_before_div": 270,
+        "unsigned_product_before_div": 810,
+        "unsigned_repeated_add_contraction": 450,
+        "unsigned_shift_division": 450,
+        "unsigned_subtract_compare": 90,
+        "mixed_comparison": 385,
+        "hexadecimal_type": 70,
+        "large_decimal_long_unsigned_msc": 490,
+        "unsigned_division": 385,
+        "unsigned_modulo": 430,
+        "unsigned_left_shift": 720,
+        "bitwise_not": 1260,
+        "unary_unsigned_minus": 1260,
+        "conditional_type": 392,
+        "macro_add_before_div": 270,
+        "sizeof_expression": 1260,
+        "sizeof_far_pointer_difference": 1260,
+        "sizeof_near_pointer_difference": 1260,
+        "nested_modulo": 630
+      },
+      "excluded_contract_cases": {
+        "signed_add_before_div": 70,
+        "unsigned_contraction_counterexample": 630,
+        "unsigned_product_modulo": 630,
+        "signed_product_before_div": 490,
+        "large_decimal_unsigned_msc": 1260,
+        "signed_left_shift": 770,
+        "byte_product": 252
+      },
+      "excluded_witnesses": [
+        {
+          "expression": "signed_add_before_div",
+          "input": [
+            32767,
+            1,
+            0
+          ],
+          "msc": -16381,
+          "lowered": 16387,
+          "unlowered": 16387,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "unsigned_contraction_counterexample",
+          "input": [
+            -32768,
+            32767,
+            0
+          ],
+          "msc": 32765,
+          "lowered": 98301,
+          "unlowered": 98301,
+          "classification": "MSC_UNSIGNED_CONTRACTION"
+        },
+        {
+          "expression": "unsigned_product_modulo",
+          "input": [
+            -32768,
+            16384,
+            0
+          ],
+          "msc": 2,
+          "lowered": 0,
+          "unlowered": 0,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_product_before_div",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": -32768,
+          "lowered": -98304,
+          "unlowered": -98304,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "large_decimal_unsigned_msc",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": 1,
+          "unlowered": 1,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_left_shift",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": -131072,
+          "unlowered": -131072,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "byte_product",
+          "input": [
+            -32768,
+            1,
+            255
+          ],
+          "msc": -511,
+          "lowered": 65025,
+          "unlowered": 65025,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        }
+      ],
+      "unsigned_language_counterexample": {
+        "expression": "(b * 9) / 3",
+        "b": 32768,
+        "msc": 32768,
+        "C16": 10922,
+        "native_without_target_rule": 98304
+      },
+      "unsuffixed_decimal_counterexample": {
+        "expression": "a < 4000000000",
+        "a": 0,
+        "msc": 0,
+        "C90_C16": 1,
+        "native": 1,
+        "long_suffix_positive": 1
+      }
+    },
+    {
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Os"
+      ],
+      "object_sha256": "d0e9ffbc0bbf66d4e93b250b31cf7f034c459a37f7cac64a1731300f50b0e054",
+      "cases": 40320,
+      "mismatches": {},
+      "negative_mismatches": {
+        "unsigned_add_before_div": 270,
+        "unsigned_product_before_div": 810,
+        "unsigned_repeated_add_contraction": 450,
+        "unsigned_shift_division": 450,
+        "unsigned_subtract_compare": 90,
+        "mixed_comparison": 385,
+        "hexadecimal_type": 70,
+        "large_decimal_long_unsigned_msc": 490,
+        "unsigned_division": 385,
+        "unsigned_modulo": 430,
+        "unsigned_left_shift": 720,
+        "bitwise_not": 1260,
+        "unary_unsigned_minus": 1260,
+        "conditional_type": 392,
+        "macro_add_before_div": 270,
+        "sizeof_expression": 1260,
+        "sizeof_far_pointer_difference": 1260,
+        "sizeof_near_pointer_difference": 1260,
+        "nested_modulo": 630
+      },
+      "excluded_contract_cases": {
+        "signed_add_before_div": 70,
+        "unsigned_contraction_counterexample": 630,
+        "unsigned_product_modulo": 630,
+        "signed_product_before_div": 490,
+        "large_decimal_unsigned_msc": 1260,
+        "signed_left_shift": 770,
+        "byte_product": 252
+      },
+      "excluded_witnesses": [
+        {
+          "expression": "signed_add_before_div",
+          "input": [
+            32767,
+            1,
+            0
+          ],
+          "msc": -16381,
+          "lowered": 16387,
+          "unlowered": 16387,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "unsigned_contraction_counterexample",
+          "input": [
+            -32768,
+            32767,
+            0
+          ],
+          "msc": 32765,
+          "lowered": 98301,
+          "unlowered": 98301,
+          "classification": "MSC_UNSIGNED_CONTRACTION"
+        },
+        {
+          "expression": "unsigned_product_modulo",
+          "input": [
+            -32768,
+            16384,
+            0
+          ],
+          "msc": 2,
+          "lowered": 0,
+          "unlowered": 0,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_product_before_div",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": -32768,
+          "lowered": -98304,
+          "unlowered": -98304,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "large_decimal_unsigned_msc",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": 1,
+          "unlowered": 1,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_left_shift",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": -131072,
+          "unlowered": -131072,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "byte_product",
+          "input": [
+            -32768,
+            1,
+            255
+          ],
+          "msc": -511,
+          "lowered": 65025,
+          "unlowered": 65025,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        }
+      ],
+      "unsigned_language_counterexample": {
+        "expression": "(b * 9) / 3",
+        "b": 32768,
+        "msc": 32768,
+        "C16": 10922,
+        "native_without_target_rule": 98304
+      },
+      "unsuffixed_decimal_counterexample": {
+        "expression": "a < 4000000000",
+        "a": 0,
+        "msc": 0,
+        "C90_C16": 1,
+        "native": 1,
+        "long_suffix_positive": 1
+      }
+    },
+    {
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Gs",
+        "/Oeg"
+      ],
+      "object_sha256": "14b0837e14b2352e711671084d146f64e7739a720e9a7de14780785846bbbdcc",
+      "cases": 40320,
+      "mismatches": {},
+      "negative_mismatches": {
+        "unsigned_add_before_div": 270,
+        "unsigned_product_before_div": 810,
+        "unsigned_repeated_add_contraction": 450,
+        "unsigned_shift_division": 450,
+        "unsigned_subtract_compare": 90,
+        "mixed_comparison": 385,
+        "hexadecimal_type": 70,
+        "large_decimal_long_unsigned_msc": 490,
+        "unsigned_division": 385,
+        "unsigned_modulo": 430,
+        "unsigned_left_shift": 720,
+        "bitwise_not": 1260,
+        "unary_unsigned_minus": 1260,
+        "conditional_type": 392,
+        "macro_add_before_div": 270,
+        "sizeof_expression": 1260,
+        "sizeof_far_pointer_difference": 1260,
+        "sizeof_near_pointer_difference": 1260,
+        "nested_modulo": 630
+      },
+      "excluded_contract_cases": {
+        "signed_add_before_div": 70,
+        "unsigned_contraction_counterexample": 630,
+        "unsigned_product_modulo": 630,
+        "signed_product_before_div": 490,
+        "large_decimal_unsigned_msc": 1260,
+        "signed_left_shift": 770,
+        "byte_product": 252
+      },
+      "excluded_witnesses": [
+        {
+          "expression": "signed_add_before_div",
+          "input": [
+            32767,
+            1,
+            0
+          ],
+          "msc": -16381,
+          "lowered": 16387,
+          "unlowered": 16387,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "unsigned_contraction_counterexample",
+          "input": [
+            -32768,
+            32767,
+            0
+          ],
+          "msc": 32765,
+          "lowered": 98301,
+          "unlowered": 98301,
+          "classification": "MSC_UNSIGNED_CONTRACTION"
+        },
+        {
+          "expression": "unsigned_product_modulo",
+          "input": [
+            -32768,
+            16384,
+            0
+          ],
+          "msc": 2,
+          "lowered": 0,
+          "unlowered": 0,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_product_before_div",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": -32768,
+          "lowered": -98304,
+          "unlowered": -98304,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "large_decimal_unsigned_msc",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": 1,
+          "unlowered": 1,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "signed_left_shift",
+          "input": [
+            -32768,
+            1,
+            0
+          ],
+          "msc": 0,
+          "lowered": -131072,
+          "unlowered": -131072,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        },
+        {
+          "expression": "byte_product",
+          "input": [
+            -32768,
+            1,
+            255
+          ],
+          "msc": -511,
+          "lowered": 65025,
+          "unlowered": 65025,
+          "classification": "UNRESOLVED_COMPILER_DEPENDENT"
+        }
+      ],
+      "unsigned_language_counterexample": {
+        "expression": "(b * 9) / 3",
+        "b": 32768,
+        "msc": 32768,
+        "C16": 10922,
+        "native_without_target_rule": 98304
+      },
+      "unsuffixed_decimal_counterexample": {
+        "expression": "a < 4000000000",
+        "a": 0,
+        "msc": 0,
+        "C90_C16": 1,
+        "native": 1,
+        "long_suffix_positive": 1
+      }
+    }
+  ],
+  "negative_witnesses": [
+    {
+      "expression": "unsigned_add_before_div",
+      "input": [
+        -32768,
+        65533,
+        0
+      ],
+      "msc": 0,
+      "unlowered": 32768,
+      "lowered": 0
+    },
+    {
+      "expression": "unsigned_product_before_div",
+      "input": [
+        -32768,
+        256,
+        0
+      ],
+      "msc": 85,
+      "unlowered": 21930,
+      "lowered": 85
+    },
+    {
+      "expression": "unsigned_repeated_add_contraction",
+      "input": [
+        -32768,
+        32768,
+        0
+      ],
+      "msc": 0,
+      "unlowered": 32768,
+      "lowered": 0
+    },
+    {
+      "expression": "unsigned_shift_division",
+      "input": [
+        -32768,
+        32768,
+        0
+      ],
+      "msc": 0,
+      "unlowered": 32768,
+      "lowered": 0
+    },
+    {
+      "expression": "unsigned_subtract_compare",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 1,
+      "unlowered": 0,
+      "lowered": 1
+    },
+    {
+      "expression": "mixed_comparison",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 0,
+      "unlowered": 1,
+      "lowered": 0
+    },
+    {
+      "expression": "hexadecimal_type",
+      "input": [
+        -1,
+        1,
+        0
+      ],
+      "msc": 0,
+      "unlowered": 1,
+      "lowered": 0
+    },
+    {
+      "expression": "large_decimal_long_unsigned_msc",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 0,
+      "unlowered": 1,
+      "lowered": 0
+    },
+    {
+      "expression": "unsigned_division",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 32768,
+      "unlowered": -32768,
+      "lowered": 32768
+    },
+    {
+      "expression": "unsigned_modulo",
+      "input": [
+        -32768,
+        3,
+        0
+      ],
+      "msc": 2,
+      "unlowered": -2,
+      "lowered": 2
+    },
+    {
+      "expression": "unsigned_left_shift",
+      "input": [
+        -32768,
+        1023,
+        0
+      ],
+      "msc": 65408,
+      "unlowered": 130944,
+      "lowered": 65408
+    },
+    {
+      "expression": "bitwise_not",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 65534,
+      "unlowered": -2,
+      "lowered": 65534
+    },
+    {
+      "expression": "unary_unsigned_minus",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 65535,
+      "unlowered": -1,
+      "lowered": 65535
+    },
+    {
+      "expression": "conditional_type",
+      "input": [
+        -32768,
+        1,
+        1
+      ],
+      "msc": 32768,
+      "unlowered": -32768,
+      "lowered": 32768
+    },
+    {
+      "expression": "macro_add_before_div",
+      "input": [
+        -32768,
+        65533,
+        0
+      ],
+      "msc": 0,
+      "unlowered": 32768,
+      "lowered": 0
+    },
+    {
+      "expression": "sizeof_expression",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 2,
+      "unlowered": 4,
+      "lowered": 2
+    },
+    {
+      "expression": "sizeof_far_pointer_difference",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 2,
+      "unlowered": 8,
+      "lowered": 2
+    },
+    {
+      "expression": "sizeof_near_pointer_difference",
+      "input": [
+        -32768,
+        1,
+        0
+      ],
+      "msc": 2,
+      "unlowered": 8,
+      "lowered": 2
+    },
+    {
+      "expression": "nested_modulo",
+      "input": [
+        -32768,
+        16384,
+        0
+      ],
+      "msc": 28,
+      "unlowered": 12,
+      "lowered": 28
+    }
+  ],
+  "single_evaluation": [
+    {
+      "optimization": "-O0",
+      "passed": true
+    },
+    {
+      "optimization": "-O2",
+      "passed": true
+    }
+  ],
+  "census_summary": {
+    "TUs": 171,
+    "parse_errors": [],
+    "all_TUs": {
+      "PROVEN_EQUAL": 91495,
+      "LOWERED": 2363,
+      "UNRESOLVED": 7490
+    },
+    "compiled_TUs": {
+      "PROVEN_EQUAL": 89069,
+      "LOWERED": 2258,
+      "UNRESOLVED": 6594
+    },
+    "categories": {
+      "literal-typing": 22219,
+      "unary-promotion": 505,
+      "intermediate-subtract": 970,
+      "signed-overflow-domain": 3736,
+      "intermediate-add": 1608,
+      "unresolved-child": 3460,
+      "division-modulo": 327,
+      "comparison-conversion": 3867,
+      "bitwise-promotion": 938,
+      "division-zero-domain": 99,
+      "division-overflow-domain": 82,
+      "intermediate-product": 307,
+      "compound-arithmetic": 512,
+      "shift-promotion": 676,
+      "shift-negative-domain": 95,
+      "pointer-arithmetic": 495,
+      "arithmetic-right-shift": 222,
+      "signed-unsigned-comparison": 87,
+      "shift-count-domain": 8,
+      "conditional-conversion": 76,
+      "pointer-comparison": 108,
+      "call-return-width": 22,
+      "pointer-integer-cast": 248,
+      "sizeof-layout": 24,
+      "unknown-type": 14,
+      "offsetof-layout": 2
+    },
+    "census_sha256": "261e802d1e57146e3bee6a2dcb269b93585daa4606d9b17af23b5dcfdf31ec8d"
+  },
+  "native_build": {
+    "passed": true,
+    "counts": {
+      "canonical_C_count": 171,
+      "canonical_C_compile_pass": 170,
+      "ASM_TUs_requiring_translation_or_platform_boundary": 29,
+      "native_services": 75,
+      "native_services_compile_pass": 75,
+      "conversion_failures": 0
+    },
+    "report_sha256": "574091adbe606929b96cbf33b8782105dc9961d0c6963491386d1892ce87ccc7",
+    "executable_sha256": "674155320018eb507cfd791a1f9e4eea89b9e40071148558590f8e505d5c3ee0"
+  }
+}

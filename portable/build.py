@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
-from canonical_native_abi import scalar, tokenizer as csrc, word_islands
+from canonical_native_abi import scalar, tokenizer as csrc, integer_frontend
 from canonical_native_abi.source_views import (
     GRAPHICS_SCALARS,
     audio_overlap_views,
@@ -90,6 +90,9 @@ def main():
         paths.update(ROOT/u['source'] for u in canonical['modules'])
         paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
         paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
+        paths.update((PROJECT/'portable/canonical_native_abi/integer_fake_libc').rglob('*.h'))
+        paths.add(PROJECT/'portable/tests/integer_semantics/requirements.txt')
+        paths.update(Path(integer_frontend.pycparser.__file__).parent.glob('*.py'))
         paths.add(PROJECT/'portable/whole_program/application.c')
         paths.update((PROJECT/'portable/runtime/bios-reference').rglob('*'))
         paths.update(ROOT/'assets'/name for name in PLATFORM['runtime_assets'])
@@ -183,10 +186,6 @@ def main():
         text=apply('varargs','adapt',text,text,rel)
         text=re.sub(r'\*\s*\(\s*(?:(unsigned)\s+)?char\s+far\s*\*\s*\)\s*0x0*417L',lambda m:'dos_keyboard_modifiers()',text,flags=re.I)
         text=rename(text,function_aliases)
-        try:
-            text,row['word_expressions']=word_islands.convert(text)
-        except word_islands.Unsupported as exc:
-            errors.append({'source':rel,'stage':'word expressions','error':str(exc)})
         text=scalar.convert(text)
         if rel=='src/root/m075B.c':text=apply('load_string_ant','adapt',text,text)
         text=centralize(text)
@@ -228,7 +227,8 @@ def main():
         if rel=='src/S17/m384C.c':prefix+='#include "portable/whole_program/menu_globals.h"\n'
         if rel=='src/S19/m384C.c':prefix+='extern void ProcHistoryEvent(struct Event *);\nextern void ProcYardEvent(struct Event *);\n'
         dest=OUT/(unit['module'].replace(':','_').replace('@','_')+'.c')
-        dest.write_text(prefix+'#pragma pack(push,2)\n'+text+'\n#pragma pack(pop)\n',encoding='latin1')
+        text=prefix+'#pragma pack(push,2)\n'+text+'\n#pragma pack(pop)\n'
+        dest.write_text(text,encoding='latin1')
         row.update(generated=str(dest),status='WHOLE_CANONICAL_TU_CONVERTED');
         if rel=='src/root/m171C.c':
             row.update(status='PLATFORM_BOUNDARY',platform_boundary='Native malloc/free/realloc service replaces DOS segment:offset heap representation; canonical DOS heap TU is excluded from native compilation.')
@@ -256,6 +256,17 @@ def main():
     graphics_header=OUT/'canonical_graphics_data.h'
     graphics_header.write_text(graphics_header.read_text().replace('#endif\n',
         'extern uint8_t g_41D0['+str(patterns['native_count'])+'];\n#endif\n'))
+    # Source-derived ASM declarations must exist before preprocessing the
+    # complete canonical C TUs. The expression pass is the final C lowering.
+    for row in rows:
+        if row['lang']!='c':continue
+        dest=Path(row['generated'])
+        try:
+            text,row['integer_expressions']=integer_frontend.convert(dest.read_text(encoding='latin1'),dest.as_posix(),CC,
+                [OUT/'include',PROJECT,OUT,PROJECT/'portable/whole_program'])
+            dest.write_text(text,encoding='latin1')
+        except Exception as exc:
+            errors.append({'source':row['source'],'stage':'integer frontend','error':str(exc)})
     asm_rows=[{'source':'canonical symbolic ASM data: '+name,'generated':str(OUT/name),
                'status':'DATA_FROM_SYMBOLIC_ASM_DIRECTIVES'} for name in PLATFORM['ASM_data_recipes']]
     def compile_row(row):
