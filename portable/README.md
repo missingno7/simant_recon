@@ -46,15 +46,16 @@ data, configuration or saves. The original startup needs an `INSTALL.EXE` file
 to open; the launcher creates an empty probe only when absent and preserves any
 existing installer. Prefer a short folder path for the original file dialogs.
 
-Manual playtesting found broken sound, a logo-click hang and a discrepancy in the
-intended 640x480 VGA path. This package is not established as normally playable.
-See the [playtest report](../evidence/canonical/validation/manual-playtest.json).
-The logo-click hang is repaired at the native held-input polling boundary;
-[DOS observations and release regression](../evidence/canonical/native-logo-release/README.md)
-cover this bounded startup path.
-Passing scripted Save/Load does not establish complete gameplay or save compatibility.
-Standalone reconstructed DOS closure takes priority; source contracts must be
-recovered before adding native fixes for these symptoms.
+The first manual playtest ([report](../evidence/canonical/validation/manual-playtest.json))
+found broken sound, a logo-click hang and a non-640x480 display. All three had
+platform-boundary root causes and are fixed: the host forced `/s1` and `/dE`
+instead of letting the canonical config select VGA and Sound Blaster mode 6, the
+native audio had no SB/OPL device emulation, and held-input polling did not deliver
+host input. Later fixes cover register-return contracts, the virtual DOS drive,
+oracle BIOS fonts, canonical text and cursor owners, DOS adjacency spans,
+cross-TU pointer widths and five 16-bit word intermediates (see git history and
+`evidence/canonical/behavior-attribution/`). The build is a candidate for a second
+manual playtest; full DOS/native behavior equivalence is not claimed.
 
 The application locates the adjacent resources and runs the converted original
 main. The platform application owns SDL lifecycle, presentation, input injection

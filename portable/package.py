@@ -53,6 +53,7 @@ def main() -> None:
         shutil.copyfile(source, payload / source.name)
     (payload / 'simant-sdl3-fonts').mkdir()
     for name in font_files:
+        (payload / 'simant-sdl3-fonts' / name).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(fonts / name, payload / 'simant-sdl3-fonts' / name)
     license_file = Path(report['sdk']['path']).parent / 'LICENSE.txt'
     shutil.copyfile(license_file, payload / 'SDL3-LICENSE.txt')
