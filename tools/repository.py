@@ -499,12 +499,13 @@ def write_status():
          'The canonical DOS link has no storage imports, semantic gates or unresolved functional '
          f'data. {sum(r["bytes"] for r in historical)} bytes in {len(historical)} ranges remain '
          'documented historical layout debt; physical DGROUP layout equivalence is not claimed. '
-         'Human gameplay acceptance of the DOS closure candidate is pending.'), '',
+         'The canonical DOS build passed human gameplay acceptance '
+         '([playtest](../evidence/canonical/validation/dos-human-playtest.json)); '
+         '`functional-source-oracle-v1` tags the closed DOS oracle.'), '',
         'Manual SDL3 playtesting found broken sound, a logo-click hang and a discrepancy',
         'in the intended 640x480 VGA path. [Playtest report](../evidence/canonical/validation/manual-playtest.json).',
-        'Standalone reconstructed DOS closure takes priority over native symptom fixes.',
-        'Bounded native passing flows do not close the exceptions below.',
-        '`functional-source-oracle-v1` is pending.', '',
+        'SDL3 correctness is now measured against the closed DOS oracle (Phase 2).',
+        'Bounded native passing flows do not close the exceptions below.', '',
         '## Closure classes and root questions', '',
         '`SOURCE_REQUIRED` needs an executable source contract. `SUPPORTED_DOMAIN` needs',
         'a complete bound on supported callers/resources. `LAYOUT_SENSITIVE` has a real',

@@ -31,8 +31,8 @@ The canonical DOS command links `build/current/dos/link/SOURCE.EXE` from canonic
 source alone: no storage imports, no open semantic gates, no provisional storage
 and no original executable bytes. 30 bytes in five ranges remain documented
 [historical layout debt](evidence/canonical/historical-layout/review.md); physical
-DGROUP layout equivalence is not claimed. The build is a Phase 1 closure
-candidate pending human gameplay acceptance; its
+DGROUP layout equivalence is not claimed. The build passed human gameplay
+acceptance and is tagged `functional-source-oracle-v1`; its
 [deterministic acceptance](evidence/canonical/validation/canonical-dos-acceptance.json)
 matches the original in three scenarios including sound port traffic.
 Both build paths use zero original executable fallback. [Portable validation commands](portable/README.md) cover

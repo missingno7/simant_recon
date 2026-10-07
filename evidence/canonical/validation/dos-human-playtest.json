@@ -1,0 +1,12 @@
+{
+  "schema": "simant-human-playtest-observation-v1",
+  "date": "2026-10-07",
+  "reported_by": "user",
+  "build_context": "Canonical DOS closure candidate at 3d6bbfe: python dos/build.py --jobs 8 --link, SOURCE.EXE sha256 a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e, staged with the locked runtime files and run in DOSBox-X (VGA, Sound Blaster, default launch).",
+  "normal_interactive_use": "PASSED",
+  "observations": [
+    "Manual gameplay playtest of the canonical DOS build: all looks good."
+  ],
+  "scope": "Human acceptance of ordinary interactive use within the documented supported execution domain. Physical DGROUP layout equivalence and the 30-byte historical layout debt remain as documented in evidence/canonical/historical-layout/review.md.",
+  "automated_evidence": "evidence/canonical/validation/canonical-dos-acceptance.json"
+}

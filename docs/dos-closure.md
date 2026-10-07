@@ -285,7 +285,8 @@ game + save, a sustained 645 s game with two saves and seven state checkpoints,
 and loading an original-written save; DSP and OPL port/value sequences are
 identical; write timing differs by at most 12 µs in the short scenarios and
 up to 6.7 ms (OPL) / 0.9 ms (DSP) over the 645 s run. Fast/Ultra speed is CPU-bound and not
-time-comparable. Human gameplay acceptance is pending.
+time-comparable. The canonical build passed human gameplay acceptance
+([playtest](../evidence/canonical/validation/dos-human-playtest.json)).
 
 ## Historical layout debt
 
