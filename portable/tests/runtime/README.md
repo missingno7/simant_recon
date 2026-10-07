@@ -6,6 +6,7 @@ directory and send ordinary SDL keyboard and mouse events to the original main.
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow vga
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow save
 python portable/tests/runtime/run_load.py --report build/current/portable/report.json
+python portable/tests/runtime/run_logo.py --report build/current/portable/report.json --repeat 2
 ```
 
 The Save check dismisses the source success dialog with Return. The Save→Load
@@ -22,6 +23,14 @@ current input pins, unchanged original/build resources and all scripted events.
 The Load check additionally requires successful source returns and 307 complete
 SaveRec reads totaling 48,386 bytes. A short
 fresh `--out` path may be required by the original FileSelect path domain.
+
+The logo regression requires GDB with Python support. It exercises clicks during
+and after animation, center/corner positions, held right-click and Space, and
+repeated clicks. Read-only startup traces require every `DialogWaitInit` to
+return after release and both `ShowIntro` and `CustomerIDDialog` to return.
+All replay events, a meaningful frame and the bounded smoke exit are required;
+the cached scan-query implementation fails the `center-after` negative control.
+Use `--case center-after`, `--repeat 2`, or `--visible` for focused reruns.
 
 Passing confirms this bounded current UI/file path. It does not establish
 after-load state equivalence, DOS save compatibility, resave equivalence, fixed

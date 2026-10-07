@@ -233,6 +233,13 @@
     }
   ],
   "source_inventory": "src/program.json",
+  "held_input_polling": {
+    "service": "portable/whole_program/platform/m1b73_main_input.c:f_1B73_0A30",
+    "contract": "Refresh the shared SDL input/time owner before scan-state queries so INT09/INT33 transitions remain observable in source held-input busy waits.",
+    "evidence": "evidence/canonical/native-logo-release/README.md",
+    "regression": "portable/tests/runtime/run_logo.py",
+    "scope": "Bounded logo/customer-dialog mouse and key release; no global event-interleaving equivalence claim."
+  },
   "native_heap_boundary": "src/root/m171C.c",
   "assembly_profile": "masm510",
   "assembly_metadata": "Current source assembler OFFSET fixups plus admitted DOS DATA placement; never original image bytes.",

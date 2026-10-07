@@ -52,7 +52,11 @@ int16_t f_1B73_0A30(uint16_t scan_code)
 {
     int down;
     PortableInputTimeHost *host = require_source_input_host();
+    /* DOS INT09/INT33 callbacks update held input while the source polls
+     * its scan table. SDL needs the shared refresh boundary to deliver
+     * those transitions, including mouse release in StillDown loops. */
     if (scan_code > UINT8_C(0x7f) ||
+        portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK ||
         !portable_input_time_host_is_scan_down(host, (uint8_t)scan_code, &down))
         abort();
     return (int16_t)(down != 0);

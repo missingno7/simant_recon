@@ -47,6 +47,9 @@ existing installer. Prefer a short folder path for the original file dialogs.
 Manual playtesting found broken sound, a logo-click hang and a discrepancy in the
 intended 640x480 VGA path. This package is not established as normally playable.
 See the [playtest report](../evidence/canonical/validation/manual-playtest.json).
+The logo-click hang is repaired at the native held-input polling boundary;
+[DOS observations and release regression](../evidence/canonical/native-logo-release/README.md)
+cover this bounded startup path.
 Passing scripted Save/Load does not establish complete gameplay or save compatibility.
 Standalone reconstructed DOS closure takes priority; source contracts must be
 recovered before adding native fixes for these symptoms.

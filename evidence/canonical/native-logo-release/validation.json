@@ -1,0 +1,86 @@
+{
+  "schema": "simant-native-logo-release-conclusion-v1",
+  "date": "2026-10-07",
+  "classification": "TRUE_PLATFORM_BOUNDARY",
+  "source_baseline_commit": "9915760",
+  "cause": "Cached native scan-state polling never serviced SDL during canonical DialogWaitInit/StillDown mouse-release waits.",
+  "repair": "f_1B73_0A30 refreshes the existing shared input/time owner before querying scan state.",
+  "canonical_game_source_changed": false,
+  "DOS": {
+    "executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+    "launch": [
+      "/dV",
+      "/s1"
+    ],
+    "fixed_cycles": 200000,
+    "fixed_clock": "1992-01-01 12:00",
+    "down_ms": 5550,
+    "up_ms": 5750,
+    "callback_stores": [
+      {
+        "ms": 5550.002515,
+        "status": "0x0201"
+      },
+      {
+        "ms": 5750.002515,
+        "status": "0x0400"
+      }
+    ],
+    "customer_DialogWaitInit_entry_ms": 5554.31417,
+    "StillDown_poll_ms": 5700.00023,
+    "DialogWaitInit_post_loop_ms": 5750.58289,
+    "post_loop_status": "0x0400",
+    "window_checkpoints": [
+      {
+        "ms": 5400,
+        "window": "0x0300"
+      },
+      {
+        "ms": 6000,
+        "window": "0x1E00"
+      },
+      {
+        "ms": 10000,
+        "window": "0x0200"
+      }
+    ]
+  },
+  "native_negative": {
+    "executable_sha256": "865ee88d78b51319107909da9b477732482a26899f6f6a9b13ea80e6064cd96b",
+    "case": "center-after",
+    "timed_out": true,
+    "host_timeout_seconds": 45,
+    "replay_events_injected": 2,
+    "replay_events_expected": 7,
+    "customer_wait_returned": false,
+    "unchanged_input_resource_fixture_checks": true,
+    "receipt_sha256": "1b6ee4ec729722c22a5eea2748ee15150758021c4f15641f34917acb1c0924a8"
+  },
+  "native_positive": {
+    "executable_sha256": "59888eef96ce2d3035299ae09ea55c8f1f1c594343a218ba3384a542d37d0d3e",
+    "build_report_sha256": "866450a19bae30f9e971f1292b67c305685b6f208ffd39002f280982bb529549",
+    "cases": [
+      "center-after",
+      "center-during",
+      "center-late",
+      "corner",
+      "repeated",
+      "right-held",
+      "space-held"
+    ],
+    "repetitions": 2,
+    "passed_runs": 14,
+    "all_waits_return_after_release": true,
+    "visible_Windows_center_after_passed": true,
+    "existing_VGA_flow_passed": true,
+    "VGA_outer_source_loops": 54,
+    "regression_receipt_sha256": "f66c0112393f71e4c54b771b534754dc5056fbe6a7ab68a06d50256e1bd7475b"
+  },
+  "pins": {
+    "portable/whole_program/platform/m1b73_main_input.c": "cf6892845a2ac673c4fc40d9cbf050fbd3909ccdf21bf30e2088f7135d405cd0",
+    "portable/tests/runtime/logo-click.txt": "202b830f78697916de9e785116fe6b6c9816b6a34563c84e71bac6b9b4657d48",
+    "portable/tests/runtime/logo_trace.py": "30449a851890b47a0f7e765ad4cf4f3c1f4842ecce0a8c7bfcbdefdd83a60f8e",
+    "portable/tests/runtime/run_logo.py": "ca743862286f49f48ae63dd5fc3465d82c0615c0fa9d20ef808097586ced4881"
+  },
+  "scope": "Nominal shipped startup resources and specified logo/customer-dialog held-input domain; no full-game or global DOS/native event-interleaving equivalence claim."
+}
