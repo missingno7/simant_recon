@@ -14,4 +14,16 @@ int host_get_logical_size(const Host *host, int *width, int *height);
  * coordinates are logical; the provider applies the active presentation. */
 int host_push_pointer_event(Host *host, const HostEvent *event);
 
+/* Opt-in replay clock. Reads never advance time; the guarded application
+ * poll advances one explicit quantum, independently of SDL/CPU wall time. */
+void host_virtual_clock_configure(uint64_t quantum_ns);
+int host_virtual_clock_enabled(void);
+void host_virtual_clock_poll(void);
+/* DOS local civil epoch: 1992-01-01 12:00:00, plus elapsed virtual time. */
+uint64_t host_virtual_dos_elapsed_ms(void);
+typedef struct HostDosDateTime {
+    unsigned year, month, day, weekday, hour, minute, second, hundredth;
+} HostDosDateTime;
+int host_virtual_dos_datetime(HostDosDateTime *value);
+
 #endif

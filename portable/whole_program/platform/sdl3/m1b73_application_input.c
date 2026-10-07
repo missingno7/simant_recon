@@ -188,6 +188,9 @@ static int refresh_application(void *context, SimTimingClock *clock)
     if (binding->refreshing)
         return 1;
     binding->refreshing = 1;
+    /* One quantum per outer platform poll; nested ingestion/presentation
+     * and the idle hook must not consume additional virtual time. */
+    if (!binding->suppress_idle_hook) host_virtual_clock_poll();
     if (!portable_input_time_host_refresh_from_sdl_monotonic(
             &binding->input_host.monotonic_refresh, clock)) {
         binding->refreshing = 0;

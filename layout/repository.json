@@ -89,6 +89,10 @@
       "role": "Original/native RNG differential"
     },
     {
+      "path": "portable/whole_program/platform/tests/run_virtual_clock_tests.py",
+      "role": "Deterministic platform clock, civil time and replay state controls"
+    },
+    {
       "path": "portable/tests/native_simulation/run.py",
       "role": "Original/native simulation differential"
     },
@@ -107,6 +111,22 @@
     {
       "path": "portable/package.py",
       "role": "Current Windows drop-in human playtest package"
+    },
+    {
+      "path": "portable/tests/acceptance/native_acceptance.py",
+      "role": "Deterministic native/canonical DOS differential observations"
+    },
+    {
+      "path": "portable/tests/acceptance/capture_dos_steps.py",
+      "role": "Measured canonical DOS simulation-entry observations"
+    },
+    {
+      "path": "portable/tests/acceptance/test_native_acceptance.py",
+      "role": "Canonical placement, SaveRec projection and named exclusion negative controls"
+    },
+    {
+      "path": "portable/tests/acceptance/run_virtual_audio_tests.py",
+      "role": "Virtual Sound Mode 6 PIT/IRQ and ISA clock controls"
     }
   ],
   "lowering": [

@@ -34,6 +34,8 @@ typedef struct ReplayKey {
     SDL_Keycode key;
     int down;
     HostEvent pointer;
+    int checkpoint, quit;
+    int relative, current_pointer;
 } ReplayKey;
 
 typedef struct Application {
@@ -56,6 +58,27 @@ typedef struct Application {
 static Application app;
 static void idle(void *context);
 static void request_quit(void *context);
+static void fail(const char *where);
+
+static void drain_host_observations(void)
+{
+    HostEvent event;
+    int had_event;
+    do {
+        if (portable_m1b73_sdl_application_input_service_one(&app.input,
+                &event, &had_event) != PORTABLE_M1B73_APP_INPUT_OK)
+            fail("retained input queue");
+    } while (had_event);
+}
+
+/* Read-only debugger observation boundary. Break here to dump canonical
+ * symbols and SaveRec payloads; no simulation callback/state writes. */
+__attribute__((noinline)) void portable_native_checkpoint(uint64_t milliseconds)
+{
+    fprintf(stderr, "Native checkpoint %llu ms game_ticks=%u bios_ticks=%u outer_loops=%ld\n",
+        (unsigned long long)milliseconds, sim_timing_tick_count(&app.game_clock),
+        sim_timing_tick_count(&app.bios_clock), (long)fd_50F6_383A);
+}
 
 static void fail(const char *where)
 {
@@ -99,15 +122,30 @@ static void load_replay(const char *path)
         entry = &app.replay[app.replay_count];
         entry->milliseconds = milliseconds;
         if (!strcmp(operation, "down") || !strcmp(operation, "up")) {
-            if (sscanf(line, "%llu %15s %63s %c", &milliseconds, operation,
-                       key_name, &extra) != 3) fail("keyboard replay syntax");
+            size_t length;
+            if (sscanf(line, "%llu %15s %63[^\r\n]", &milliseconds, operation,
+                       key_name) != 3) fail("keyboard replay syntax");
+            length = strlen(key_name);
+            while (length && key_name[length - 1] == ' ') key_name[--length] = 0;
             entry->down = !strcmp(operation, "down");
             entry->key = SDL_GetKeyFromName(key_name);
             if (!entry->key) fail("keyboard replay key");
-        } else if (!strcmp(operation, "move")) {
+        } else if (!strcmp(operation, "move") || !strcmp(operation, "relative")) {
             if (sscanf(line, "%llu %15s %d %d %c", &milliseconds, operation,
                        &x, &y, &extra) != 4) fail("pointer replay syntax");
             entry->pointer.kind = HOST_EVENT_MOUSE_MOVE;
+            entry->relative = !strcmp(operation, "relative");
+        } else if (!strcmp(operation, "button-down") || !strcmp(operation, "button-up")) {
+            if (sscanf(line, "%llu %15s %63s %c", &milliseconds, operation,
+                       key_name, &extra) != 3) fail("pointer replay syntax");
+            entry->pointer.kind = !strcmp(operation, "button-down") ?
+                                  HOST_EVENT_MOUSE_DOWN : HOST_EVENT_MOUSE_UP;
+            entry->pointer.button = !strcmp(key_name, "Left") ? SDL_BUTTON_LEFT :
+                !strcmp(key_name, "Right") ? SDL_BUTTON_RIGHT :
+                !strcmp(key_name, "Middle") ? SDL_BUTTON_MIDDLE : 0;
+            if (!entry->pointer.button) fail("pointer replay button");
+            entry->current_pointer = 1;
+            x = y = 0;
         } else if (!strcmp(operation, "mouse-down") || !strcmp(operation, "mouse-up")) {
             if (sscanf(line, "%llu %15s %63s %d %d %c", &milliseconds, operation,
                        key_name, &x, &y, &extra) != 5) fail("pointer replay syntax");
@@ -117,7 +155,9 @@ static void load_replay(const char *path)
                 !strcmp(key_name, "Right") ? SDL_BUTTON_RIGHT :
                 !strcmp(key_name, "Middle") ? SDL_BUTTON_MIDDLE : 0;
             if (!entry->pointer.button) fail("pointer replay button");
-        } else fail("input replay operation");
+        } else if (!strcmp(operation, "checkpoint")) entry->checkpoint = 1;
+        else if (!strcmp(operation, "exit")) entry->quit = 1;
+        else fail("input replay operation");
         if (entry->pointer.kind) {
             if (x < INT16_MIN || x > INT16_MAX || y < INT16_MIN || y > INT16_MAX)
                 fail("pointer replay coordinate range");
@@ -138,7 +178,31 @@ static void replay_input(uint64_t now)
             app.replay[app.replay_next].milliseconds <= elapsed) {
         ReplayKey *entry = &app.replay[app.replay_next];
         SDL_Event event = {0};
+        /* Preserve script order for equal-time input/checkpoint commands.
+         * Ingestion is reentrancy-guarded and consumes no additional time. */
+        if (host_virtual_clock_enabled()) drain_host_observations();
+        if (entry->checkpoint) {
+            portable_native_checkpoint(entry->milliseconds);
+            ++app.replay_next;
+            continue;
+        }
+        if (entry->quit) exit(0);
         if (entry->pointer.kind) {
+            if (entry->relative || entry->current_pointer) {
+                HostInputState state;
+                int px, py;
+                if (!host_get_input_state(app.host, &state)) fail("replay pointer state");
+                /* Source S17 sets both INT33 mickey ratios to 16. The pinned
+                 * DOSBox hook bypasses sensitivity: 8/16 pixels per mickey. */
+                px = state.x + (entry->relative ? entry->pointer.x / 2 : 0);
+                py = state.y + (entry->relative ? entry->pointer.y / 2 : 0);
+                if (px < 0) px = 0;
+                if (py < 0) py = 0;
+                if (px > g_3DB2 - 4) px = g_3DB2 - 4;
+                if (py > g_3DB4 - 4) py = g_3DB4 - 4;
+                entry->pointer.x = (int16_t)px;
+                entry->pointer.y = (int16_t)py;
+            }
             if (!host_push_pointer_event(app.host, &entry->pointer))
                 fail("SDL pointer replay enqueue");
             fprintf(stderr, "Replay SDL pointer %zu: %llu ms kind=%d button=%u (%d,%d)\n",
@@ -316,18 +380,15 @@ static void source_timer_changed(void *context, uint16_t divisor, uint16_t reloa
 static void idle(void *context)
 {
     Application *a = context;
-    HostEvent event;
-    int had_event;
     uint64_t now = host_time_ns();
+    if (host_virtual_clock_enabled() && a->audio.active &&
+        portable_sdl3_whole_audio_pump(&a->audio) != PORTABLE_SDL3_WHOLE_AUDIO_OK)
+        fail("virtual PIT audio work");
     replay_input(now);
     /* Events were routed at ingestion. Release the retained host observations;
      * source BIOS keys and hotbox records have their own canonical queues. */
-    do {
-        if (portable_m1b73_sdl_application_input_service_one(&a->input,
-                &event, &had_event) != PORTABLE_M1B73_APP_INPUT_OK)
-            fail("retained input queue");
-    } while (had_event);
-    if (a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
+    drain_host_observations();
+    if (!host_virtual_clock_enabled() && a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
             PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
     if (a->display_active && !g_5AAC && (g_3DD4 & 255u) == 0 &&
         sim_sdl_palette_view(&a->palette) && now - a->last_present >= 16666667) {
@@ -353,8 +414,10 @@ int main(int argc, char **argv)
     const char *assets = runtime_assets, *fonts = runtime_fonts;
     int source_argc = 1, i;
     int headless = 0;
+    int explicit_seed = 0;
     char replay_path[MAX_PATH] = {0};
     uint64_t smoke_ms = 0;
+    uint64_t virtual_quantum_ns = 0;
     char **source_argv;
     setvbuf(stderr, NULL, _IONBF, 0);
     SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);
@@ -395,14 +458,22 @@ int main(int argc, char **argv)
     source_argv[0] = argv[0];
     for (i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--headless")) headless = 1;
+        else if (!strcmp(argv[i], "--deterministic")) virtual_quantum_ns = 1000000u;
+        else if (!strcmp(argv[i], "--poll-ns") && i + 1 < argc) {
+            virtual_quantum_ns = strtoull(argv[++i], NULL, 0);
+            if (!virtual_quantum_ns || virtual_quantum_ns > 1000000u)
+                fail("virtual poll quantum range 1..1000000 ns");
+        }
         else if (!strcmp(argv[i], "--input-script") && i + 1 < argc) {
             if (!_fullpath(replay_path, argv[++i], sizeof(replay_path)))
                 fail("input replay path");
         }
         else if (!strcmp(argv[i], "--assets") && i + 1 < argc) assets = argv[++i];
         else if (!strcmp(argv[i], "--bios-fonts") && i + 1 < argc) fonts = argv[++i];
-        else if (!strcmp(argv[i], "--seed") && i + 1 < argc)
+        else if (!strcmp(argv[i], "--seed") && i + 1 < argc) {
             app.seed = (uint32_t)strtoul(argv[++i], NULL, 0);
+            explicit_seed = 1;
+        }
         else if (!strcmp(argv[i], "--smoke-ms") && i + 1 < argc)
             smoke_ms = strtoul(argv[++i], NULL, 0);
         else if (!strcmp(argv[i], "--frame") && i + 1 < argc) {
@@ -413,6 +484,10 @@ int main(int argc, char **argv)
     }
     if (source_argc > INT16_MAX) fail("source argument count");
     source_argv[source_argc] = NULL;
+    if (virtual_quantum_ns) {
+        host_virtual_clock_configure(virtual_quantum_ns);
+        if (!explicit_seed) app.seed = 0; /* 046C:0000 RAM policy, not BIOS time. */
+    }
     if (headless &&
         (!SDL_SetHintWithPriority(SDL_HINT_VIDEO_DRIVER, "dummy", SDL_HINT_OVERRIDE) ||
          !SDL_SetHintWithPriority(SDL_HINT_AUDIO_DRIVER, "dummy", SDL_HINT_OVERRIDE)))
@@ -440,6 +515,7 @@ int main(int argc, char **argv)
     if (sim_timing_clock_init_bios(&app.game_clock, 14318180, 12) != SIM_TIMING_OK ||
         sim_timing_clock_init_bios(&app.bios_clock, 14318180, 12) != SIM_TIMING_OK ||
         !portable_seed_source_bind(read_seed, &app)) fail("source clocks and seed");
+    if (virtual_quantum_ns) app.bios_clock.tick_count = 0x1800b0u / 2u;
     if (!portable_sdl3_whole_audio_open(&app.audio))
         fail("ISA audio startup binding");
     portable_sdl3_whole_audio_set_source_timer_observer(&app.audio,

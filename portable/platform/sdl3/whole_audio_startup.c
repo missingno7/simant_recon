@@ -1,14 +1,14 @@
 #include "whole_audio_startup.h"
 #include "../../whole_program/platform/audio_native.h"
 #include "../../audio/isa_devices.h"
-#include <SDL3/SDL.h>
+#include "../../whole_program/platform/sdl3/host_modes.h"
 #include <stdio.h>
 #include <stdlib.h>
 static uint64_t bus_time(PortableSdl3WholeAudio *a) {
     if(!a->provider.in_render && portable_sdl3_whole_audio_pump(a)!=PORTABLE_SDL3_WHOLE_AUDIO_OK) {
         fprintf(stderr,"Audio synchronization failed\n");exit(72);
     }
-    uint64_t now=a->provider.in_render ? a->provider.time_ns : SDL_GetTicksNS()-a->clock_origin_ns;
+    uint64_t now=a->provider.in_render ? a->provider.time_ns : host_time_ns()-a->clock_origin_ns;
     if(a->bus_ns<now) a->bus_ns=now;
     return a->bus_ns;
 }

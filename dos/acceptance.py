@@ -143,8 +143,8 @@ def run_once(scenario: dict, out: Path, build_report: Path | None) -> dict:
     for ms in scenario.get("checkpoints", []):
         dump = out / f"dump-cp{ms}"
         checkpoints[f"cp{ms}"] = virtual_save(dump.read_bytes(), addresses) if dump.is_file() else None
-        if dump.is_file():
-            dump.unlink()  # 640 KiB per checkpoint; only the virtual save is retained in memory
+        # Retain the raw checkpoint for named-state DOS/native comparison.
+        # The virtual save remains the original DOS acceptance gate.
     sound = {name: port_writes(out / f"io-{name}") for name in SOUND_PORTS
              if scenario.get("sound") and (out / f"io-{name}").is_file()}
     return {"report": report, "map": map_path, "sound": sound,

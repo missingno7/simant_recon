@@ -12,7 +12,40 @@ struct Host {
     uint8_t dos_scan_down[256];
     int logical_width, logical_height;
     int integer_scaling;
+    HostInputState replay_state;
 };
+static uint64_t virtual_ns, virtual_quantum;
+void host_virtual_clock_configure(uint64_t quantum_ns)
+{
+    virtual_ns = 0;
+    virtual_quantum = quantum_ns;
+}
+int host_virtual_clock_enabled(void) { return virtual_quantum != 0; }
+void host_virtual_clock_poll(void) { virtual_ns += virtual_quantum; }
+uint64_t host_virtual_dos_elapsed_ms(void) { return virtual_ns / 1000000u; }
+int host_virtual_dos_datetime(HostDosDateTime *value)
+{
+    static const unsigned month_days[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    uint64_t ms, days;
+    unsigned year = 1992, month = 1, count;
+    if (!value || !virtual_quantum) return 0;
+    ms = virtual_ns / 1000000u + UINT64_C(43200000);
+    days = ms / UINT64_C(86400000);
+    value->weekday = (unsigned)((3u + days) % 7u);
+    value->hundredth = (unsigned)(ms / 10u % 100u);
+    value->second = (unsigned)(ms / 1000u % 60u);
+    value->minute = (unsigned)(ms / 60000u % 60u);
+    value->hour = (unsigned)(ms / 3600000u % 24u);
+    for (;;) {
+        int leap = year % 4u == 0 && (year % 100u != 0 || year % 400u == 0);
+        count = month_days[month - 1] + (month == 2 && leap);
+        if (days < count) break;
+        days -= count;
+        if (++month == 13) { month = 1; ++year; }
+    }
+    value->year = year; value->month = month; value->day = (unsigned)days + 1u;
+    return 1;
+}
 
 /* Derived from the existing SDL presentation/input provider. This target
  * adds the original VGA geometry; the selected-module prototype is unchanged. */
@@ -100,8 +133,11 @@ void host_destroy(Host *host)
 }
 
 const char *host_error(void) { return SDL_GetError(); }
-uint64_t host_time_ns(void) { return SDL_GetTicksNS(); }
-void host_wait_ms(uint32_t milliseconds) { SDL_Delay(milliseconds); }
+uint64_t host_time_ns(void) { return virtual_quantum ? virtual_ns : SDL_GetTicksNS(); }
+void host_wait_ms(uint32_t milliseconds)
+{
+    if (!virtual_quantum) SDL_Delay(milliseconds);
+}
 
 /* Only keys with a direct source DOS representation are emitted. SDL text
  * composition is deliberately separate from this physical game-key boundary. */
@@ -191,6 +227,7 @@ int host_get_input_state(Host *host, HostInputState *state)
     float window_x, window_y, logical_x, logical_y;
     SDL_MouseButtonFlags buttons;
     if (host == NULL || state == NULL) return 0;
+    if (virtual_quantum) { *state = host->replay_state; return 1; }
     buttons = SDL_GetMouseState(&window_x, &window_y);
     if (!SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
                                          &logical_x, &logical_y) ||
@@ -207,6 +244,11 @@ int host_get_input_state(Host *host, HostInputState *state)
 int host_warp_pointer(Host *host, int16_t logical_x, int16_t logical_y)
 {
     float window_x, window_y;
+    if (host && virtual_quantum) {
+        host->replay_state.x = logical_x;
+        host->replay_state.y = logical_y;
+        return 1;
+    }
     if (host == NULL || !SDL_RenderCoordinatesToWindow(host->renderer,
             (float)logical_x, (float)logical_y, &window_x, &window_y))
         return 0;
@@ -285,6 +327,17 @@ int host_poll_event(Host *host, HostEvent *event)
         }
         /* Caller attaches its source-derived logical clock. SDL timestamps
          * never advance game state or introduce a presentation-rate tick. */
+        if (virtual_quantum) {
+            if (event->kind == HOST_EVENT_MOUSE_MOVE ||
+                event->kind == HOST_EVENT_MOUSE_DOWN || event->kind == HOST_EVENT_MOUSE_UP) {
+                host->replay_state.x = event->x;
+                host->replay_state.y = event->y;
+                if (event->button == SDL_BUTTON_LEFT)
+                    host->replay_state.left_button_down = event->kind == HOST_EVENT_MOUSE_DOWN;
+            }
+            if (event->kind == HOST_EVENT_KEY_DOWN || event->kind == HOST_EVENT_KEY_UP)
+                host->replay_state.dos_modifiers = event->modifiers;
+        }
         return 1;
     }
     return 0;

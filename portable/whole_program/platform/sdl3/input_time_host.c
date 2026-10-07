@@ -1,4 +1,5 @@
 #include "input_time_host.h"
+#include "host_modes.h"
 
 #include <stdlib.h>
 #include <stddef.h>
@@ -348,6 +349,9 @@ int portable_input_time_host_poll_event(PortableInputTimeHost *binding,
 int portable_input_time_host_get_input_state(PortableInputTimeHost *binding,
                                              HostInputState *state)
 {
+    if (host_virtual_clock_enabled() && binding != NULL &&
+        portable_input_time_host_refresh_clock(binding) != PORTABLE_INPUT_TIME_OK)
+        return 0;
     return binding != NULL && binding->host != NULL && state != NULL
         ? host_get_input_state(binding->host, state) : 0;
 }
@@ -355,6 +359,11 @@ int portable_input_time_host_get_input_state(PortableInputTimeHost *binding,
 int portable_input_time_host_is_scan_down(PortableInputTimeHost *binding,
                                           uint8_t scan, int *down)
 {
+    /* Source held-input waits rely on asynchronous hardware interrupts.
+     * In virtual mode this physical-input poll is also a yield boundary. */
+    if (host_virtual_clock_enabled() && binding != NULL &&
+        portable_input_time_host_refresh_clock(binding) != PORTABLE_INPUT_TIME_OK)
+        return 0;
     return binding != NULL && binding->host != NULL
         ? host_is_dos_scan_down(binding->host, scan, down) : 0;
 }
@@ -402,4 +411,3 @@ void portable_input_time_host_set_keyboard_flags(
     if (binding != NULL)
         binding->bios_keyboard_flags = flags;
 }
-
