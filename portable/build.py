@@ -55,6 +55,7 @@ from canonical_native_abi import window_parameters
 from canonical_native_abi import newgame_zoom_window_v1
 from canonical_native_abi import s26_window_object_views_v1
 from canonical_native_abi import load_string_ant
+from canonical_native_abi import cross_tu_pointer_widths
 PROJECT=Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT / 'tools'))
 from workspace import prepare_output, retire
@@ -65,6 +66,43 @@ CC=None
 PLATFORM=json.loads((Path(__file__).parent/'platform.json').read_text())
 ABI_MODULES={'rng':rng,'audio':audio,'audio_shared_state_preword':audio_shared_state_preword,'fonts':fonts,'pointer_globals':pointer_globals,'varargs':varargs,'windows':windows,'window_loader':window_loader,'timer':timer,'startup_bundle':startup_bundle,'main_preflight':main_preflight,'findindex_native_guard':findindex_native_guard,'crt_abi':crt_abi,'spider_inline_source':spider_inline_source,'m1b73_queue_source':m1b73_queue_source,'m1b73_event_source':m1b73_event_source,'event_word_switch':event_word_switch,'file_select_host':file_select_host,'menu_s17_preword':menu_s17_preword,'list_text_handle':list_text_handle,'clip_stack_native':clip_stack_native,'cache_table_native':cache_table_native,'countdown_host':countdown_host,'window_parameters':window_parameters,'newgame_zoom_window_v1':newgame_zoom_window_v1,'s26_window_object_views_v1':s26_window_object_views_v1,'load_string_ant':load_string_ant}
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+
+LTO_BASELINE=PROJECT/'portable/canonical_native_abi/lto-type-mismatch-baseline.json'
+LTO_DIAGNOSTIC=re.compile(
+    r"^(?P<path>.*?):\d+:\d+: (?:warning|error): (?P<message>.*) "
+    r"\[-W(?:error=)?(?:lto-type-mismatch|odr)\]$")
+LTO_NOTE=re.compile(r'^(.*?):\d+:\d+: note: (?P<message>.*)$')
+LTO_SYMBOL=re.compile(r"type of ['\u2018](.*?)['\u2019] does not match original declaration")
+
+def lto_mismatch_signatures(text):
+    found=[];active=None
+    for line in text.splitlines():
+        diagnostic=LTO_DIAGNOSTIC.match(line)
+        if diagnostic:
+            if active:found.append(active)
+            symbol=LTO_SYMBOL.search(diagnostic.group('message'))
+            active=({'symbol':symbol.group(1),'at':Path(diagnostic.group('path')).name,
+                     'previous':'','details':[]} if symbol else None)
+            continue
+        if not active:continue
+        note=LTO_NOTE.match(line)
+        if not note:continue
+        message=note.group('message').strip()
+        if message.endswith('was previously declared here'):
+            active['previous']=Path(note.group(1)).name
+        elif message and not message.startswith('code may be misoptimized') and message not in active['details']:
+            active['details'].append(message)
+    if active:found.append(active)
+    return sorted({json.dumps(item,sort_keys=True,separators=(',',':')) for item in found})
+
+def check_lto_declarations(text):
+    observed=set(lto_mismatch_signatures(text))
+    baseline=set(json.loads(LTO_BASELINE.read_text(encoding='utf-8')))
+    unexpected=sorted(observed-baseline)
+    return {'passed':not unexpected,'observed_mismatches':len(observed),
+            'known_mismatches':len(observed&baseline),
+            'unexpected':[json.loads(item) for item in unexpected],
+            'baseline':str(LTO_BASELINE)}
 
 def main():
     global ROOT, OUT, SDK, CC
@@ -93,6 +131,7 @@ def main():
         paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
         paths.update((PROJECT/'portable/canonical_native_abi/integer_fake_libc').rglob('*.h'))
         paths.add(PROJECT/'portable/tests/integer_semantics/requirements.txt')
+        paths.add(LTO_BASELINE)
         paths.update(Path(integer_frontend.pycparser.__file__).parent.glob('*.py'))
         paths.add(PROJECT/'portable/whole_program/application.c')
         paths.update((PROJECT/'portable/runtime/bios-reference').rglob('*'))
@@ -121,6 +160,7 @@ def main():
     native_scalar_names={name for counts in abis['audio_shared_state_preword']._SHARED_EXTERN_COUNTS.values() for name in counts}
     source_texts={u['canonical_destination']:(ROOT/u['source']).read_text(encoding='latin1')
                   for u in inventory['translation_units'] if u['lang']=='c'}
+    native_source_texts,cross_tu_pointer_receipt=cross_tu_pointer_widths.adapt(source_texts,object_identities)
     spans=semantic_spans.Contracts(ROOT,source_texts)
     event_definition=re.search(r'struct Event\s*\{[^{}]*\};',source_texts['src/root/m1FD2.c'],re.S).group(0)
     queue_header=OUT/'include/portable/whole_program/types/input_queue.h'
@@ -145,7 +185,7 @@ def main():
         rel=unit['canonical_destination'];row={'source':rel,'module':unit['module'],'lang':unit['lang']}
         if unit['lang']=='asm':
             row['status']='NEEDS_SYMBOLIC_ASM_TRANSLATION_OR_PLATFORM_REPLACEMENT';rows.append(row);continue
-        original=source_texts[rel];text=original
+        original=source_texts[rel];text=native_source_texts[rel]
         if rel in native_startups:text=native_startups[rel]
         if rel=='src/root/m0093.c':text=apply('rng','adapt',text,text)
         if rel=='src/root/m0250.c':
@@ -309,7 +349,7 @@ def main():
         obj=(OUT/'objects'/relative).with_suffix('.o');obj.parent.mkdir(parents=True,exist_ok=True)
         row['object']=str(obj)
         standard = '-std=c++17' if source.suffix == '.cpp' else '-std=c11'
-        command=[CC,standard,'-g','-fsigned-char','-fno-builtin','-fno-strict-aliasing',
+        command=[CC,standard,'-flto','-ffat-lto-objects','-g','-fsigned-char','-fno-builtin','-fno-strict-aliasing',
                  '-DSIMANT_NATIVE_LITTLE_ENDIAN=1','-Werror=implicit-function-declaration','-Werror=implicit-int',
                  '-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),'-I',str(copyroot/'portable/whole_program'),
                  '-I',str(SDK/'include'),'-c',str(source),'-o',str(obj)]
@@ -325,6 +365,7 @@ def main():
     with ThreadPoolExecutor(max_workers=args.jobs) as pool:
         objects=[obj for obj in pool.map(compile_row,compile_rows) if obj]
     link={'passed':False,'status':'SKIPPED_REQUIRED_INPUT_FAILURE'}
+    declaration_check={'passed':False,'status':'SKIPPED_REQUIRED_INPUT_FAILURE'}
     app_link={'passed':False,'status':'SKIPPED_REQUIRED_INPUT_FAILURE','undefined':[]}
     stable_before_link=current_inputs()==input_pins
     required_passed=not errors and all(r['compile']['passed'] for r in compile_rows) and stable_before_link
@@ -335,7 +376,17 @@ def main():
         # objects directly to the linker in original order instead.
         response=OUT/'core-objects.rsp'
         response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects[1:])+'\n',encoding='utf-8')
-        command=[CC,'-r',objects[0],'-Wl,@core-objects.rsp','-o',str(linked)]
+        declaration_output=OUT/'declaration-check.o'
+        declaration_command=[CC,'-flto','-Wlto-type-mismatch','-Wodr','-r',objects[0],'-Wl,@core-objects.rsp','-o',str(declaration_output)]
+        declaration_run=subprocess.run(declaration_command,cwd=OUT,capture_output=True,text=True)
+        declaration_text=declaration_run.stdout+declaration_run.stderr
+        (OUT/'declaration-check.txt').write_text(declaration_text)
+        declaration_check=check_lto_declarations(declaration_text)
+        declaration_check.update({'exit_code':declaration_run.returncode,'command':declaration_command})
+        if declaration_run.returncode!=0:
+            declaration_check['passed']=False
+            declaration_check.setdefault('unexpected',[]).append('GCC LTO declaration link failed')
+        command=[CC,'-Wlto-type-mismatch','-Wodr','-r',objects[0],'-Wl,@core-objects.rsp','-o',str(linked)]
         run=subprocess.run(command,cwd=OUT,capture_output=True,text=True);(OUT/'core-link.txt').write_text(run.stdout+run.stderr)
         link={'passed':run.returncode==0,'command':command,'exit_code':run.returncode,
               'working_directory':str(OUT),'object_inputs':objects,
@@ -364,7 +415,7 @@ def main():
                     if resource['bytes']!=0:raise ValueError('unsupported generated platform resource')
                     (OUT/'runtime-assets'/resource['path']).write_bytes(b'')
     stable_at_end=current_inputs()==input_pins
-    passed=required_passed and link['passed'] and app_link['passed'] and stable_at_end
+    passed=required_passed and declaration_check['passed'] and link['passed'] and app_link['passed'] and stable_at_end
     executable=OUT/'simant-canonical.exe'
     if executable.is_file() and not passed:retire(executable)
     report={'schema':'canonical-native-complete-attempt-v1','passed':passed,'input_pins':input_pins,
@@ -372,7 +423,7 @@ def main():
         'input_stability':{'before_link':stable_before_link,'at_end':stable_at_end},
         'runtime_resources':{'shipped':{name:sha(ROOT/'assets'/name) for name in PLATFORM['runtime_assets']},'generated':PLATFORM['generated_runtime_resources']},
         'executable':{'path':str(executable),'sha256':sha(executable)} if passed else None,'claim':'One canonical source program plus explicit ABI/platform services. Preview limitations are explicit; no DOS equality claim.',
-        'canonical_TUs':rows,'native_services':native_rows,'canonical_ASM_data_translations':asm_rows,'semantic_spans':span_receipt,'semantic_span_storage':span_rows,'preview_limitations':PLATFORM['preview_limitations'],'conversion_failures':errors,'core_link':link,'application_link':app_link,
+        'canonical_TUs':rows,'native_services':native_rows,'canonical_ASM_data_translations':asm_rows,'semantic_spans':span_receipt,'semantic_span_storage':span_rows,'cross_tu_pointer_widths':cross_tu_pointer_receipt,'declaration_check':declaration_check,'preview_limitations':PLATFORM['preview_limitations'],'conversion_failures':errors,'core_link':link,'application_link':app_link,
         'counts':{'canonical_C_count':sum(r['lang']=='c' for r in rows),'canonical_C_compile_pass':sum(r.get('compile',{}).get('passed',False) for r in rows),
              'ASM_TUs_requiring_translation_or_platform_boundary':sum(r['lang']=='asm' for r in rows),
              'native_services':len(native_rows),'native_services_compile_pass':sum(r['compile']['passed'] for r in native_rows),

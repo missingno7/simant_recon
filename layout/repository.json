@@ -224,6 +224,13 @@
       "deletion_condition": "Retain native layout conversion. Expand capacities only after canonical source ownership and extent are proven."
     },
     {
+      "module": "cross_tu_pointer_widths",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Projects DOS-four-byte long/far-pointer cross-TU views onto pointer-capable native declarations and storage; canonical DOS source remains unchanged.",
+      "blocker_ids": [],
+      "deletion_condition": "Retire only after converted translation units share a native pointer-capable declaration contract and the LTO declaration gate confirms no pointer-width views remain."
+    },
+    {
       "module": "lexical",
       "classification": "GENERIC_LOWERING",
       "reason": "Shared lexical/type utility reached by the current whole-source converter.",
@@ -1239,6 +1246,7 @@
     "portable/whole_program/platform/tests/": "Permanent filesystem/handle service controls",
     "dos/scenarios/": "Pinned DOS acceptance scenarios and emulated-time input scripts",
     "portable/canonical_native_abi/integer_fake_libc/": "Parse-only C frontend declarations; never native runtime includes",
+    "portable/canonical_native_abi/lto-type-mismatch-baseline.json": "Pinned GCC LTO pre-existing declaration mismatch signatures consumed by portable/build.py",
     "portable/semantic-spans.json": "Reviewed canonical DOS cross-owner storage contracts consumed by portable/build.py"
   }
 }
