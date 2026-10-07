@@ -53,7 +53,7 @@ def run_case(args, executable, build, out, case, gdb):
     command = [str(gdb), '--batch', '-q', '-x', str(commands), '--args',
                str(executable), *([] if args.visible else ['--headless']),
                '--smoke-ms', '12500', '--frame', str(target / 'frame.bmp'),
-               '--assets', str(assets), '--seed', '1', '--input-script', str(script), '/dV']
+               '--assets', str(assets), '--seed', '1', '--input-script', str(script)]
     env = dict(os.environ, SIMANT_TRACE_OUT=str(target / 'events.jsonl'))
     process = subprocess.Popen(command, cwd=args.project, env=env,
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)

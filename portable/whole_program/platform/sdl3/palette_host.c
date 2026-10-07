@@ -24,10 +24,11 @@ static void project(SimSdlPaletteHost *palette)
                 continue;
             }
             for (channel = 0; channel < 3; ++channel)
-                /* Host output format: scale the source's 0..63 DAC voltage
-                 * range to 0..255, nearest integer. No source state changes. */
+                /* Match VGA's six-to-eight-bit DAC expansion used by the
+                 * DOS scanout: replicate the two high bits into the low bits. */
                 palette->presentation.rgb[i][channel] =
-                    (uint8_t)((palette->dac6[index][channel] * 255u + 31u) / 63u);
+                    (uint8_t)((palette->dac6[index][channel] << 2) |
+                              (palette->dac6[index][channel] >> 4));
         }
     }
 }

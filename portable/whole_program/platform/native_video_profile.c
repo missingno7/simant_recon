@@ -4,7 +4,6 @@
 #include <stdlib.h>
 
 typedef struct SimNativeVideoBinding {
-    SimNativeVideoProfileInfo info;
     SimGraphicsDriver *graphics;
     SimNativeVideoStatus status;
     uint8_t bound;
@@ -38,36 +37,8 @@ static void uninstall_services(void)
     }
 }
 
-SimNativeVideoStatus sim_native_video_profile_info(int16_t source_profile,
-                                                    SimNativeVideoProfileInfo *out)
+SimNativeVideoStatus sim_native_video_startup_bind(SimGraphicsDriver *graphics)
 {
-    SimNativeVideoProfileInfo info;
-    if (out == NULL)
-        return SIM_NATIVE_VIDEO_INVALID_ARGUMENT;
-    if (source_profile == SIM_NATIVE_VIDEO_EGA_PROFILE_0) {
-        info.profile = SIM_NATIVE_VIDEO_EGA_PROFILE_0;
-        /* Adapter 3, display 3 makes the source switch select profile 0. */
-        info.source_bios_descriptor = 0x0303;
-        info.source_mode = 0x10;
-        info.database_prefix = "hcega";
-    } else if (source_profile == SIM_NATIVE_VIDEO_VGA_PROFILE_8) {
-        info.profile = SIM_NATIVE_VIDEO_VGA_PROFILE_8;
-        /* Adapter 5, display 3 makes the source switch select profile 8. */
-        info.source_bios_descriptor = 0x0305;
-        info.source_mode = 0x12;
-        info.database_prefix = "hcega";
-    } else {
-        return SIM_NATIVE_VIDEO_UNSUPPORTED_PROFILE;
-    }
-    *out = info;
-    return SIM_NATIVE_VIDEO_OK;
-}
-
-SimNativeVideoStatus sim_native_video_startup_bind(int16_t source_profile,
-                                                    SimGraphicsDriver *graphics)
-{
-    SimNativeVideoProfileInfo info;
-    SimNativeVideoStatus status;
     uninstall_services();
     s_binding.bound = 0;
     s_binding.graphics = NULL;
@@ -75,16 +46,12 @@ SimNativeVideoStatus sim_native_video_startup_bind(int16_t source_profile,
     s_binding.clip_bound = 0;
     s_binding.status = SIM_NATIVE_VIDEO_NOT_BOUND;
 
-    status = sim_native_video_profile_info(source_profile, &info);
-    if (status != SIM_NATIVE_VIDEO_OK)
-        return s_binding.status = status;
     if (graphics == NULL || graphics->pixel_storage == NULL ||
         graphics->bios_8x14_source == NULL || graphics->bios_8x14_source_size < 256u * 14u)
         return s_binding.status = SIM_NATIVE_VIDEO_GRAPHICS_NOT_READY;
     if (sim_graphics_source_clip_bind(graphics) != SIM_GRAPHICS_OK)
         return s_binding.status = SIM_NATIVE_VIDEO_GRAPHICS_NOT_READY;
 
-    s_binding.info = info;
     s_binding.graphics = graphics;
     s_binding.clip_bound = 1;
     s_binding.status = SIM_NATIVE_VIDEO_OK;
@@ -125,7 +92,11 @@ static SimNativeVideoBinding *require_binding(void)
 
 int16_t o21_39C7_0000(void)
 {
-    return (int16_t)require_binding()->info.source_bios_descriptor;
+    (void)require_binding();
+    /* The virtual adapter can provide VGA. f_205F uses this descriptor only
+     * when canonical ReadConfig/argv leave g_5A97 in autodetect mode. A
+     * configured or command-line source mode remains authoritative. */
+    return (int16_t)0x0305;
 }
 
 int16_t o21_39C7_016D(void)
@@ -156,8 +127,13 @@ void f_1B4E_0025(void)
 static void install_source_mode(int16_t mode)
 {
     SimNativeVideoBinding *binding = require_binding();
+    SimNativeVideoProfile profile;
     SimGraphicsStatus graphics_status;
-    if (binding->info.source_mode != mode) {
+    if (mode == 0x10)
+        profile = SIM_NATIVE_VIDEO_EGA_PROFILE_0;
+    else if (mode == 0x12)
+        profile = SIM_NATIVE_VIDEO_VGA_PROFILE_8;
+    else {
         s_binding.status = SIM_NATIVE_VIDEO_UNSUPPORTED_PROFILE;
         abort();
     }
@@ -175,7 +151,7 @@ static void install_source_mode(int16_t mode)
         abort();
     }
     if (s_install_services != NULL) {
-        if (!s_install_services(s_services_context, binding->graphics)) {
+        if (!s_install_services(s_services_context, binding->graphics, profile)) {
             s_binding.status = SIM_NATIVE_VIDEO_GRAPHICS_FAILURE;
             abort();
         }

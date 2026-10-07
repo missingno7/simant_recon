@@ -227,7 +227,8 @@ static void uninstall_video(void *context)
     sim_graphics_source_entry_unbind();
     sim_graphics_source_palette_unbind();
 }
-static int install_video(void *context, SimGraphicsDriver *graphics)
+static int install_video(void *context, SimGraphicsDriver *graphics,
+                         SimNativeVideoProfile profile)
 {
     Application *a = context;
     const SimGraphicsCursorHooks cursor_hooks = {
@@ -236,6 +237,7 @@ static int install_video(void *context, SimGraphicsDriver *graphics)
     SimGraphicsCursorSourceBindings cursor = {0};
     PortableM1B73ApplicationInputStatus input_status;
     if (graphics != &a->graphics ||
+        !sim_sdl_palette_init(&a->palette, profile) ||
         sim_graphics_cursor_hooks_bind(&cursor_hooks) != SIM_GRAPHICS_CURSOR_HOOKS_OK ||
         sim_graphics_source_entry_bind(graphics) != SIM_GRAPHICS_OK ||
         sim_graphics_source_capture_bind(graphics) != SIM_GRAPHICS_OK ||
@@ -248,6 +250,10 @@ static int install_video(void *context, SimGraphicsDriver *graphics)
         uninstall_video(a);
         return 0;
     }
+    fprintf(stderr,
+        "Source-selected video profile=%d mode=%02Xh logical=%dx%d\n",
+        (int)profile, (unsigned)graphics->video_mode,
+        graphics->framebuffer.width, graphics->framebuffer.height);
     /* Cursor binding requires the callbacks selected by original IBMInitStuff.
      * Bind at that source mode boundary, before it initializes the mouse. */
     if (!a->input.bound) {
@@ -345,7 +351,7 @@ int main(int argc, char **argv)
     char runtime_assets[MAX_PATH];
     char runtime_fonts[MAX_PATH];
     const char *assets = runtime_assets, *fonts = runtime_fonts;
-    int profile = 0, count = 2, i;
+    int source_argc = 1, i;
     int headless = 0;
     char replay_path[MAX_PATH] = {0};
     uint64_t smoke_ms = 0;
@@ -387,7 +393,6 @@ int main(int argc, char **argv)
     source_argv = calloc((size_t)argc + 4, sizeof(*source_argv));
     if (!source_argv) fail("argument storage");
     source_argv[0] = argv[0];
-    source_argv[1] = "/dE";
     for (i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--headless")) headless = 1;
         else if (!strcmp(argv[i], "--input-script") && i + 1 < argc) {
@@ -404,16 +409,10 @@ int main(int argc, char **argv)
             if (!_fullpath(app.capture_path, argv[++i], sizeof(app.capture_path)))
                 fail("capture path");
         }
-        else {
-            if (!strcmp(argv[i], "/dV")) profile = 8;
-            else if (!strcmp(argv[i], "/dE")) profile = 0;
-            else if (!strncmp(argv[i], "/d", 2) ||
-                     (!strncmp(argv[i], "/s", 2) && strcmp(argv[i], "/s6") && strcmp(argv[i], "/s0")))
-                fail("supported source switches: /dE, /dV, /s6 and /s0");
-            source_argv[count++] = argv[i];
-        }
+        else source_argv[source_argc++] = argv[i];
     }
-    if (count > INT16_MAX) fail("source argument count");
+    if (source_argc > INT16_MAX) fail("source argument count");
+    source_argv[source_argc] = NULL;
     if (headless &&
         (!SDL_SetHintWithPriority(SDL_HINT_VIDEO_DRIVER, "dummy", SDL_HINT_OVERRIDE) ||
          !SDL_SetHintWithPriority(SDL_HINT_AUDIO_DRIVER, "dummy", SDL_HINT_OVERRIDE)))
@@ -431,11 +430,10 @@ int main(int argc, char **argv)
         fprintf(stderr, "%s\n", portable_source_graphics_resources_error(&app.resources));
         fail("verified font and pattern resources");
     }
-    if (!sim_sdl_palette_init(&app.palette, (SimNativeVideoProfile)profile) ||
-        sim_graphics_source_clip_bind(&app.graphics) != SIM_GRAPHICS_OK ||
+    if (sim_graphics_source_clip_bind(&app.graphics) != SIM_GRAPHICS_OK ||
         sim_graphics_bind_source_abi(&app.graphics, &g_5AAC) != SIM_GRAPHICS_OK ||
         sim_native_video_set_mode_services(install_video, uninstall_video, &app) != SIM_NATIVE_VIDEO_OK ||
-        sim_native_video_startup_bind((int16_t)profile, &app.graphics) != SIM_NATIVE_VIDEO_OK)
+        sim_native_video_startup_bind(&app.graphics) != SIM_NATIVE_VIDEO_OK)
         fail("source video startup binding");
     if (sim_handles_global_configure(64u * 1024u * 1024u, 65535) != SIM_HANDLE_OK)
         fail("native resource handles");
@@ -451,8 +449,8 @@ int main(int argc, char **argv)
     if (dos_files_set_root(assets) < 0) fail("asset directory");
     app.started_ns = host_time_ns();
     if (smoke_ms) app.smoke_deadline_ns = app.started_ns + smoke_ms * 1000000u;
-    fprintf(stderr, "Entering reconstructed DOS main, seed=%u, video=%d\n", app.seed, profile);
-    dos_game_main((int16_t)count, source_argv);
+    fprintf(stderr, "Entering reconstructed DOS main, seed=%u\n", app.seed);
+    dos_game_main((int16_t)source_argc, source_argv);
     free(source_argv);
     return 0;
 }

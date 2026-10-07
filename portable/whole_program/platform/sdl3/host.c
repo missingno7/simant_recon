@@ -35,6 +35,7 @@ int host_set_logical_size(Host *host, int width, int height)
     texture = SDL_CreateTexture(host->renderer, SDL_PIXELFORMAT_RGBA32,
         SDL_TEXTUREACCESS_STREAMING, width, height);
     if (!texture || !SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST) ||
+        !SDL_SetWindowSize(host->window, width, height) ||
         !SDL_SetRenderLogicalPresentation(host->renderer, width, height,
             host->integer_scaling ? SDL_LOGICAL_PRESENTATION_INTEGER_SCALE :
             SDL_LOGICAL_PRESENTATION_LETTERBOX)) {

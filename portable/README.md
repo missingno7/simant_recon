@@ -38,7 +38,8 @@ python portable/package.py
 
 Extract `build/current/playtest/simant-sdl3-playtest-win64.zip` into a copy of
 the DOS game folder, retaining its `simant-sdl3-fonts/` directory. Launch
-`Play-SimAnt-SDL3.cmd`. It selects VGA and records `simant-sdl3.log`; no Python,
+`Play-SimAnt-SDL3.cmd`. It leaves display and sound selection to the original
+`SIMANT.CFG` and source command-line rules, then records `simant-sdl3.log`; no Python,
 compiler, DOSBox or separate SDL installation is required. The package contains
 the current executable, SDL3 DLL and licensed font support, but no original game
 data, configuration or saves. The original startup needs an `INSTALL.EXE` file

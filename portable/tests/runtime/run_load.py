@@ -91,9 +91,10 @@ def main():
     trace_literal = repr(str(trace))
     commands.write_text('set pagination off\nset confirm off\npython exec(compile(open('
                         + trace_literal + ').read(), ' + trace_literal + ", 'exec'))\nrun\n")
+    # No source switches: the pinned SIMANT.CFG selects VGA and Sound Mode 6.
     application_command = [str(executable), '--headless', '--smoke-ms', '35000',
                            '--frame', str(out / 'frame.bmp'), '--assets', str(assets),
-                           '--seed', '1', '--input-script', str(script), '/dV']
+                           '--seed', '1', '--input-script', str(script)]
     command = [str(gdb_path), '--batch', '-q', '-x', str(commands), '--args', *application_command]
     env = dict(os.environ, SIMANT_TRACE_OUT=str(out / 'events.jsonl'),
                SIMANT_TRACE_ASSETS=str(assets))
@@ -133,7 +134,8 @@ def main():
                           for event in reads))
     checks = {
         'process_completed': exit_code == 0 and not timed_out and len(exits) == 1 and exits[0]['exit_code'] == 0,
-        'entered_original_main_vga': 'Entering reconstructed DOS main, seed=1, video=8' in log,
+        'source_selected_vga_mode':
+            'Source-selected video profile=8 mode=12h logical=640x480' in log,
         'all_fixture_events_injected': actual_events == expected_events and bool(expected_events),
         'source_main_frame_and_positive_loops': bool(loops) and int(loops[-1]) > 0,
         'meaningful_vga_frame': bool(frame and frame['valid']),

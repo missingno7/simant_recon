@@ -69,7 +69,7 @@ for %%F in ({required}) do if not exist "%%F" (
 )
 rem Original startup only opens this file; its bytes are never read or executed.
 if not exist "INSTALL.EXE" type nul > "INSTALL.EXE"
-"simant-canonical.exe" /dV %* > "simant-sdl3.log" 2>&1
+"simant-canonical.exe" %* > "simant-sdl3.log" 2>&1
 set "result=%errorlevel%"
 if not "%result%"=="0" (
   echo SimAnt SDL3 exited with code %result%.
@@ -91,8 +91,9 @@ no original game databases, configuration, saves or FONT1-4 files and does not
 replace them. The launcher creates an empty INSTALL.EXE only when absent, for
 the source startup's file-availability probe; an existing installer is preserved.
 
-The launcher selects VGA and Sound Blaster mode 6. Audio renders the guest OPL
-and direct DSP DAC commands through ymfm and SDL3. Startup dialogs and game menus are
+The launcher leaves display and sound selection to the original SIMANT.CFG and
+source command-line rules (shipped: VGA and Sound Blaster mode 6). Audio renders the
+guest OPL and direct DSP DAC commands through ymfm and SDL3. Startup dialogs and game menus are
 the reconstructed game. This preview has passed scripted startup, VGA/input,
 Save/Load, resource, RNG and bounded simulation checks. Complete gameplay,
 long-run stability and full DOS/native behavior equivalence are not established.

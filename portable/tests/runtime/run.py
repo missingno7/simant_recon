@@ -142,9 +142,11 @@ def main():
     prepare_output(out,project/('build/current/'+args.flow),project)
     shutil.copytree(build / 'runtime-assets', assets)
     before = files(assets)
+    # The canonical ReadConfig must select the pinned Display Mode: V and Sound
+    # Mode 6. Pass no source switch: /dV or /s would mask a config regression.
     command = [str(executable), '--headless', '--smoke-ms',
                '20000' if args.flow == 'vga' else '25000', '--frame', str(out / 'frame.bmp'),
-               '--assets', str(assets), '--seed', '1', '--input-script', str(script), '/dV']
+               '--assets', str(assets), '--seed', '1', '--input-script', str(script)]
     timed_out = False
     try:
         run = subprocess.run(command, cwd=project, capture_output=True, timeout=40)
@@ -170,7 +172,8 @@ def main():
     originals_unchanged = original_assets == files(project / 'assets')
     checks = {
         'process_completed': exit_code == 0 and not timed_out,
-        'entered_original_main_vga': 'Entering reconstructed DOS main, seed=1, video=8' in log,
+        'source_selected_vga_mode':
+            'Source-selected video profile=8 mode=12h logical=640x480' in log,
         'all_fixture_events_injected': actual_events == expected_events and bool(expected_events),
         'source_main_frame_and_positive_loops': bool(loops) and int(loops[-1]) > 0,
         'meaningful_vga_frame': bool(frame and frame['valid']),
