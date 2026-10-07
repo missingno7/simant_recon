@@ -17,8 +17,7 @@ typedef struct Rect SimS00SourceRect;
 typedef enum SimS00RasterStatus {
     SIM_S00_RASTER_OK = 0,
     SIM_S00_RASTER_INVALID_ARGUMENT,
-    SIM_S00_RASTER_UNSUPPORTED_DOMAIN,
-    SIM_S00_RASTER_BUFFER_TOO_SMALL
+    SIM_S00_RASTER_BUFFER_TOO_SMALL = 3
 } SimS00RasterStatus;
 
 SimS00RasterStatus sim_s00_raster_copy_rect(
@@ -28,11 +27,11 @@ SimS00RasterStatus sim_s00_raster_copy_rect(
 
 SimS00RasterStatus sim_s00_raster_masked_blit(
     const uint8_t *image, size_t image_size, uint8_t *buffer,
-    size_t buffer_size, int16_t shift, int16_t flag);
+    size_t buffer_size, int16_t shift, int16_t row_offset);
 
 SimS00RasterStatus sim_s00_raster_opaque_blit(
     const uint8_t *image, size_t image_size, uint8_t *buffer,
-    size_t buffer_size, int16_t shift, int16_t flag);
+    size_t buffer_size, int16_t shift, int16_t row_offset);
 
 SimS00RasterStatus sim_s00_raster_pattern_transfer(
     const uint8_t pattern[128], uint8_t *destination,
@@ -42,8 +41,8 @@ SimS00RasterStatus sim_s00_raster_pattern_transfer(
  * graphics state and source g_3D20 pattern owner; none owns a framebuffer. */
 void o00_35A6_02FD(void *source_rect, void *source,
                     void *clip_rect, void *destination);
-void o00_35A6_0007(void *image, void *buffer, int16_t shift, int16_t flag);
-void o00_35A6_0177(void *image, void *buffer, int16_t shift, int16_t flag);
+void o00_35A6_0007(void *image, void *buffer, int16_t shift, int16_t row_offset);
+void o00_35A6_0177(void *image, void *buffer, int16_t shift, int16_t row_offset);
 void o00_35A6_0406(void *destination, int16_t width);
 
 #ifdef __cplusplus

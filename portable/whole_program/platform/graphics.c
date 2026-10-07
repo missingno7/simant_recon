@@ -137,6 +137,7 @@ SimGraphicsStatus sim_graphics_set_mode(SimGraphicsDriver *graphics, int16_t mod
     graphics->pixel_storage_size = size;
     graphics->framebuffer = next_framebuffer;
     graphics->video_mode = (SimGraphicsVideoMode)mode;
+    sim_vga_reset(&graphics->vga);
     g_3DB2 = (int16_t)width;
     g_3DB4 = (int16_t)height;
     g_3DB6 = 80; /* DOS planar stride for both supported 640-wide modes */
@@ -167,7 +168,33 @@ uint8_t *sim_graphics_pixels(SimGraphicsDriver *graphics, size_t *size_out)
 {
     if (size_out != NULL)
         *size_out = graphics != NULL ? graphics->pixel_storage_size : 0;
+    if (graphics != NULL) sim_graphics_vga_sync(graphics);
     return graphics != NULL ? graphics->pixel_storage : NULL;
+}
+
+/* Pixel projections address the CPU aperture, including nonvisible rows and
+ * horizontal spill. Canonical m1D8E owns clipping before these raw entries. */
+uint8_t sim_graphics_vga_get(const SimGraphicsDriver *g, int32_t x, int32_t y)
+{
+    return sim_vga_color(&g->vga, sim_vga_pixel_offset((int16_t)x, (int16_t)y,
+                         (uint16_t)g_3DB6), (unsigned)x);
+}
+
+void sim_graphics_vga_put(SimGraphicsDriver *g, int32_t x, int32_t y, uint8_t color)
+{
+    uint16_t offset = sim_vga_pixel_offset((int16_t)x, (int16_t)y, (uint16_t)g_3DB6);
+    sim_vga_store_color(&g->vga, offset, (unsigned)x, color);
+    /* Keep the presentation view current for read-only debugger observers. */
+    if ((unsigned)offset < (unsigned)g->framebuffer.height * 80u) {
+        unsigned px = (unsigned)offset * 8u + ((unsigned)x & 7u);
+        g->pixel_storage[px] = color & 15u;
+    }
+}
+
+void sim_graphics_vga_sync(SimGraphicsDriver *g)
+{
+    sim_vga_present(&g->vga, g->pixel_storage, g->framebuffer.stride,
+                    (unsigned)g->framebuffer.height);
 }
 
 SimGraphicsStatus sim_graphics_clip_push(SimGraphicsDriver *graphics)
@@ -227,42 +254,15 @@ SimGraphicsStatus sim_graphics_g9134(SimGraphicsDriver *graphics,
                                      int16_t right, int16_t bottom,
                                      int16_t color)
 {
-    PortableRect rect;
-    uint8_t pixel_color;
-    uint8_t operation;
-    int32_t x, y;
-    if (graphics == NULL || graphics->pixel_storage == NULL)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    rect.left = left;
-    rect.top = top;
-    rect.right = right;
-    rect.bottom = bottom;
-    if (rect.left > rect.right) { int32_t t = rect.left; rect.left = rect.right; rect.right = t; }
-    if (rect.top > rect.bottom) { int32_t t = rect.top; rect.top = rect.bottom; rect.bottom = t; }
-    /* f_1B4E_000D owns source palette remapping; S00 consumes these bits as-is. */
-    pixel_color = (uint8_t)((uint16_t)color & 0x0fu);
-    operation = (uint8_t)g_3DD2;
-    if (operation == 0) {
-        portable_fill_rect(&graphics->framebuffer, rect, pixel_color);
-        return SIM_GRAPHICS_OK;
-    }
-    if (operation == 0x18u) {
-        portable_xor_rect(&graphics->framebuffer, rect, pixel_color);
-        return SIM_GRAPHICS_OK;
-    }
-    if (operation != 0x08u && operation != 0x10u)
-        return SIM_GRAPHICS_UNSUPPORTED_MODE;
-    if (rect.left < graphics->framebuffer.clip.left) rect.left = graphics->framebuffer.clip.left;
-    if (rect.top < graphics->framebuffer.clip.top) rect.top = graphics->framebuffer.clip.top;
-    if (rect.right > graphics->framebuffer.clip.right) rect.right = graphics->framebuffer.clip.right;
-    if (rect.bottom > graphics->framebuffer.clip.bottom) rect.bottom = graphics->framebuffer.clip.bottom;
-    for (y = rect.top; y < rect.bottom; ++y) {
-        for (x = rect.left; x < rect.right; ++x) {
-            uint8_t *dst = &graphics->pixel_storage[(size_t)y * graphics->framebuffer.stride + (size_t)x];
-            uint8_t result = operation == 0x08u ? (uint8_t)(*dst & pixel_color) :
-                                                   (uint8_t)(*dst | pixel_color);
-            portable_put_pixel(&graphics->framebuffer, x, y, result);
-        }
+    int32_t x, y, l = left, r = right, top_y = top, b = bottom;
+    uint8_t op = (uint8_t)g_3DD2, c = (uint8_t)color & 15u;
+    if (!graphics || !graphics->pixel_storage) return SIM_GRAPHICS_INVALID_ARGUMENT;
+    if (l > r) { x = l; l = r; r = x; }
+    if (top_y > b) { y = top_y; top_y = b; b = y; }
+    for (y = top_y; y < b; ++y) for (x = l; x < r; ++x) {
+        uint8_t old = sim_graphics_vga_get(graphics, x, y);
+        uint8_t next = op == 8 ? (old & c) : op == 16 ? (old | c) : op == 24 ? (old ^ c) : c;
+        sim_graphics_vga_put(graphics, x, y, next);
     }
     return SIM_GRAPHICS_OK;
 }
@@ -294,10 +294,6 @@ SimGraphicsStatus sim_graphics_g9138_pattern_rect(SimGraphicsDriver *graphics,
     x1 = left < right ? right : left;
     y0 = top < bottom ? top : bottom;
     y1 = top < bottom ? bottom : top;
-    if (x0 < graphics->framebuffer.clip.left) x0 = graphics->framebuffer.clip.left;
-    if (y0 < graphics->framebuffer.clip.top) y0 = graphics->framebuffer.clip.top;
-    if (x1 > graphics->framebuffer.clip.right) x1 = graphics->framebuffer.clip.right;
-    if (y1 > graphics->framebuffer.clip.bottom) y1 = graphics->framebuffer.clip.bottom;
     pattern = (uint16_t)pattern_word & 0x0fu;
     for (y = y0; y < y1; ++y) {
         size_t row = (size_t)pattern * 16u + (size_t)(y & 7) * 2u;
@@ -305,7 +301,7 @@ SimGraphicsStatus sim_graphics_g9138_pattern_rect(SimGraphicsDriver *graphics,
             size_t byte_in_row = (size_t)(((uint32_t)x >> 3) & 1u);
             uint8_t bits = graphics->pattern_source[row + byte_in_row];
             uint8_t bit = (uint8_t)((bits >> (7u - ((uint32_t)x & 7u))) & 1u);
-            portable_put_pixel(&graphics->framebuffer, x, y,
+            sim_graphics_vga_put(graphics, x, y,
                                bit ? (uint8_t)(g_3DE0 & 0x0fu) :
                                      (uint8_t)(g_3DE2 & 0x0fu));
         }
@@ -317,18 +313,12 @@ SimGraphicsStatus sim_graphics_g913C_xor_rect(SimGraphicsDriver *graphics,
                                                int16_t left, int16_t top,
                                                int16_t right, int16_t bottom)
 {
-    PortableRect rect;
-    if (graphics == NULL || graphics->pixel_storage == NULL)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    rect.left = left;
-    rect.top = top;
-    rect.right = right;
-    rect.bottom = bottom;
-    if (rect.left > rect.right) { int32_t t = rect.left; rect.left = rect.right; rect.right = t; }
-    if (rect.top > rect.bottom) { int32_t t = rect.top; rect.top = rect.bottom; rect.bottom = t; }
-    /* `_0394` selects GFX Set/Reset=0x0f, then data-rotate XOR (0x18). */
-    portable_xor_rect(&graphics->framebuffer, rect, 0x0fu);
-    return SIM_GRAPHICS_OK;
+    int16_t old = g_3DD2;
+    SimGraphicsStatus result;
+    g_3DD2 = 24;
+    result = sim_graphics_g9134(graphics, left, top, right, bottom, 15);
+    g_3DD2 = old;
+    return result;
 }
 
 SimGraphicsStatus sim_graphics_set_custom_font_source(SimGraphicsDriver *graphics,
@@ -415,25 +405,13 @@ typedef struct SimGraphics1499RasterContext {
 static void sim_graphics_1499_put_pixel(void *context, int16_t x, int16_t y)
 {
     SimGraphics1499RasterContext *raster = (SimGraphics1499RasterContext *)context;
-    SimGraphicsDriver *graphics = raster->graphics;
-    uint8_t *destination;
-    uint8_t result;
-
-    /* Keep source iteration complete; clip only the bounded native storage
-     * write, matching the host framebuffer's half-open clip rectangle. */
-    if (x < graphics->framebuffer.clip.left || x >= graphics->framebuffer.clip.right ||
-        y < graphics->framebuffer.clip.top || y >= graphics->framebuffer.clip.bottom)
-        return;
-    destination = &graphics->pixel_storage[(size_t)y * graphics->framebuffer.stride +
-                                           (size_t)x];
-    result = raster->color;
-    if (raster->operation == 0x08u)
-        result = (uint8_t)(*destination & raster->color);
-    else if (raster->operation == 0x10u)
-        result = (uint8_t)(*destination | raster->color);
-    else if (raster->operation == 0x18u)
-        result = (uint8_t)(*destination ^ raster->color);
-    portable_put_pixel(&graphics->framebuffer, x, y, result);
+    /* L15E9/L1620/L1641 skip negative byte columns before aperture access. */
+    if (x < 0) return;
+    uint8_t old = sim_graphics_vga_get(raster->graphics, x, y);
+    uint8_t c = raster->color;
+    uint8_t op = raster->operation;
+    uint8_t next = op == 8 ? (old & c) : op == 16 ? (old | c) : op == 24 ? (old ^ c) : c;
+    sim_graphics_vga_put(raster->graphics, x, y, next);
 }
 
 SimGraphicsStatus sim_graphics_g9170_line(SimGraphicsDriver *graphics,
@@ -512,21 +490,11 @@ SimGraphicsStatus sim_graphics_g9154(SimGraphicsDriver *graphics,
             int32_t dx = (int32_t)x + (int32_t)px;
             int32_t dy = (int32_t)y + (int32_t)py;
             uint8_t color = bit ? g_3DE0 : g_3DE2;
-            if (operation != 0 &&
-                dx >= graphics->framebuffer.clip.left &&
-                dx < graphics->framebuffer.clip.right &&
-                dy >= graphics->framebuffer.clip.top &&
-                dy < graphics->framebuffer.clip.bottom) {
-                uint8_t *destination = &graphics->pixel_storage[
-                    (size_t)dy * graphics->framebuffer.stride + (size_t)dx];
-                if (operation == 0x08u)
-                    color = (uint8_t)(*destination & color);
-                else if (operation == 0x10u)
-                    color = (uint8_t)(*destination | color);
-                else
-                    color = (uint8_t)(*destination ^ color);
+            if (operation != 0) {
+                uint8_t old = sim_graphics_vga_get(graphics, dx, dy);
+                color = operation == 8 ? (old & color) : operation == 16 ? (old | color) : (old ^ color);
             }
-            portable_put_pixel(&graphics->framebuffer, (int32_t)x + (int32_t)px,
+            sim_graphics_vga_put(graphics, (int32_t)x + (int32_t)px,
                                (int32_t)y + (int32_t)py, color);
         }
     }

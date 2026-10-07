@@ -3,6 +3,7 @@
 #define SIMANT_WHOLE_PROGRAM_PLATFORM_GRAPHICS_H
 
 #include "portable/render/primitives.h"
+#include "graphics_vga.h"
 
 #include <stddef.h>
 #include <stdint.h>
@@ -77,7 +78,8 @@ typedef struct SimGraphicsSlotInfo {
 } SimGraphicsSlotInfo;
 
 typedef struct SimGraphicsDriver {
-    /* This is the one indexed framebuffer owner for whole-program rendering. */
+    SimVga vga; /* one aperture for visible rows, save-under and tile caches */
+    /* Indexed presentation of rows 0..349/479 of the aperture. */
     PortableFramebuffer framebuffer;
     uint8_t *pixel_storage;
     size_t pixel_storage_size;
@@ -118,6 +120,9 @@ void sim_graphics_set_mode_changed_callback(SimGraphicsDriver *graphics,
                                             void *context);
 void sim_graphics_destroy(SimGraphicsDriver *graphics);
 uint8_t *sim_graphics_pixels(SimGraphicsDriver *graphics, size_t *size_out);
+uint8_t sim_graphics_vga_get(const SimGraphicsDriver *graphics, int32_t x, int32_t y);
+void sim_graphics_vga_put(SimGraphicsDriver *graphics, int32_t x, int32_t y, uint8_t color);
+void sim_graphics_vga_sync(SimGraphicsDriver *graphics);
 
 /* Bind the single application-owned graphics state and the source pointer slot
  * at g5AAC. The DOS g5AAE word is only its far-pointer segment alias and is not

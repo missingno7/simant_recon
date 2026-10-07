@@ -78,24 +78,10 @@ static SimGraphicsStatus draw_planar4(SimGraphicsDriver *graphics,
                     color |= (uint8_t)(1u << plane);
             }
             if (operation != 0) {
-                int32_t dx = (int32_t)x + px;
-                int32_t dy = (int32_t)y + row;
-                if (dx >= graphics->framebuffer.clip.left &&
-                    dx < graphics->framebuffer.clip.right &&
-                    dy >= graphics->framebuffer.clip.top &&
-                    dy < graphics->framebuffer.clip.bottom) {
-                    uint8_t *destination = &graphics->pixel_storage[
-                        (size_t)dy * graphics->framebuffer.stride +
-                        (size_t)dx];
-                    if (operation == 0x08u)
-                        color = (uint8_t)(*destination & color);
-                    else if (operation == 0x10u)
-                        color = (uint8_t)(*destination | color);
-                    else
-                        color = (uint8_t)(*destination ^ color);
-                }
+                uint8_t old = sim_graphics_vga_get(graphics, (int32_t)x + px, (int32_t)y + row);
+                color = operation == 8 ? (old & color) : operation == 16 ? (old | color) : (old ^ color);
             }
-            portable_put_pixel(&graphics->framebuffer,
+            sim_graphics_vga_put(graphics,
                                (int32_t)x + px, (int32_t)y + row, color);
         }
     }

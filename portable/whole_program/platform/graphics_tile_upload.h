@@ -41,8 +41,8 @@ typedef void (*SimGraphicsTileBlitCallback)(int16_t x, int16_t y,
 typedef void (*SimGraphicsTileMapUploadCallback)(char *source,
                                                  uint16_t destination_offset,
                                                  int16_t row_count);
-/* Bind the four source planes to the current native graphics owner. These are
- * offscreen planar aperture bytes, not another displayed framebuffer. */
+/* Bind cache entries to the graphics owner's single CPU aperture. Visible
+ * rows and off-screen cache/save-under bytes share these same four planes. */
 SimGraphicsTileUploadStatus sim_graphics_tile_upload_bind(SimGraphicsDriver *graphics_owner);
 void sim_graphics_tile_upload_unbind(void);
 SimGraphicsTileUploadStatus sim_graphics_tile_upload_status(void);

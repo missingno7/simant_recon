@@ -47,7 +47,7 @@ def expected_replay(script):
         parts = line.split()
         index, milliseconds, operation = len(expected), int(parts[0]), parts[1]
         if operation in ('down', 'up'):
-            expected.append(f'Replay SDL key {index}: {milliseconds} ms {operation} {parts[2]}')
+            expected.append(f'Replay SDL key {index}: {milliseconds} ms {operation} {" ".join(parts[2:])}')
         else:
             button = 0 if operation == 'move' else buttons[parts[2]]
             x, y = parts[-2:]

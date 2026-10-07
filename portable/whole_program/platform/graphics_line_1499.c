@@ -2,10 +2,8 @@
 
 #include <limits.h>
 
-/* Keep this source-ASM port deliberately within the original 640x480 raster
- * domain. The assembly uses signed 16-bit SUB/ADD/Jcc and its write loop has
- * no general coordinate clipping; the public portable caller must keep both
- * endpoints on-screen. */
+/* m31AD:L1539/L15D8/L160A. Iteration is independent of display geometry;
+ * the sink projects source writes onto the VGA CPU aperture. */
 int sim_graphics_line_1499_pixels(int16_t x0, int16_t y0,
                                   int16_t x1, int16_t y1,
                                   SimGraphicsLine1499PixelSink sink,
@@ -36,10 +34,8 @@ int sim_graphics_line_1499_pixels(int16_t x0, int16_t y0,
     dy = dy_signed < 0 ? -dy_signed : dy_signed;
     step_y = dy_signed < 0 ? -1 : 1;
 
-    /* The source stores major/minor deltas and its error terms in words.
-     * This API admits the original screen domain only, which avoids signed
-     * overflow and all off-screen linear-memory behavior. */
-    if (dx < 0 || dx > 639 || dy > 479 || dx > INT16_MAX || dy > INT16_MAX)
+    /* Retain the word delta domain; screen dimensions are not a predicate. */
+    if (dx < 0 || dx > INT16_MAX || dy > INT16_MAX)
         return -1;
 
     if (dx >= dy) {

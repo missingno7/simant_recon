@@ -143,6 +143,14 @@
     {
       "path": "portable/tests/return_abi/census.py",
       "role": "C front-end census of consumed return declarations, missing result paths and canonical ASM calls."
+    },
+    {
+      "path": "portable/tests/runtime/run_edges.py",
+      "role": "Ordinary-input exterior window/map drawing regressions"
+    },
+    {
+      "path": "portable/whole_program/platform/tests/run_graphics_vga_tests.py",
+      "role": "VGA hardware controls and locked original-instruction S00 RAM/aperture comparisons"
     }
   ],
   "lowering": [
@@ -1156,6 +1164,21 @@
       "reason": "Canonical MAP positions and declaration/COMDEF extents define complete storage groups; canonical owner names are exported offset aliases. Every member has offset/size assertions; undeclared SaveRec/literal crossings and stale consumer censuses fail the build.",
       "blocker": "No guessed gaps, host-pointer serialization, arbitrary heap adjacency or unproved dynamic range extension is covered.",
       "deletion_condition": "Keep as DOS adjacency ABI; remove a span only when the independent canonical consumer/SaveRec census no longer requires it."
+    },
+    {
+      "id": "vga_cpu_aperture",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/whole_program/platform/graphics_vga.c",
+        "portable/whole_program/platform/graphics_vga.h"
+      ],
+      "builder_site": "portable/platform.json services and native_vga_boundary",
+      "consumers": [
+        "S00 graphics, tile uploads, bitmap capture and SDL presentation"
+      ],
+      "reason": "Models the VGA CPU aperture and register/latch operations targeted by canonical S00 ASM; screen geometry is presentation, not an input-domain guard.",
+      "blocker": "No whole-machine CPU/IRQ context equivalence claim.",
+      "deletion_condition": "Keep at the hardware boundary; any replacement must preserve all four planes and canonical aperture addressing."
     }
   ],
   "dispositions": [

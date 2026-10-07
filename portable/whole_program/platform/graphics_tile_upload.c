@@ -5,19 +5,16 @@ extern void (*driver_callback_table[25])();
 #include "graphics_cursor_hooks.h"
 #include "graphics_source_clip.h"
 #include "graphics.h"
+#include "portable/whole_program/window_source_rects.h"
+#include "portable/whole_program/window_source_globals.h"
 #include "m1b73_mouse_state.h"
 #include "portable/whole_program/state/asm_display_data_v1.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-/* S00 reads and writes a 64 KiB planar aperture at source segment g_3DB0=A000h.
- * It uses A000h..BFFFh for four 8 KiB tile-map planes and C000h..DFFFh for four
- * 8 KiB tile pages. Keeping the full per-plane aperture makes those source
- * offsets ordinary bounded native indices; the displayed framebuffer remains
- * the one owned by SimGraphicsDriver. */
-static uint8_t s_planes[SIM_GRAPHICS_PLANAR_PLANE_COUNT]
-                       [SIM_GRAPHICS_PLANAR_APERTURE_BYTES];
+/* The screen and cache addresses are views of the same VGA CPU aperture. */
+#define s_planes (s_graphics_owner->vga.planes)
 static SimGraphicsDriver *s_graphics_owner;
 static SimGraphicsTileUploadStatus s_status = SIM_GRAPHICS_TILE_UPLOAD_NOT_BOUND;
 extern uint16_t g_3DD4;
@@ -65,7 +62,6 @@ SimGraphicsTileUploadStatus sim_graphics_tile_upload_bind(SimGraphicsDriver *gra
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_WRONG_VIDEO_OWNER;
     }
     s_graphics_owner = graphics_owner;
-    memset(s_planes, 0, sizeof(s_planes));
     (*( SimGraphicsTileBlitCallback *)(void *)&driver_callback_table[21]) = o00_31AD_0647;
     (*( SimGraphicsTileMapUploadCallback *)(void *)&driver_callback_table[22]) = o00_31AD_18BA;
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
@@ -113,13 +109,16 @@ SimGraphicsTileUploadStatus sim_graphics_tile_upload_read_plane(
 {
     if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
         return s_status;
-    if (plane >= SIM_GRAPHICS_PLANAR_PLANE_COUNT ||
-        (destination == NULL && byte_count != 0))
+    if (destination == NULL && byte_count != 0)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_ARGUMENT;
-    if (byte_count > SIM_GRAPHICS_PLANAR_APERTURE_BYTES - (size_t)offset)
+    if (byte_count > SIM_GRAPHICS_PLANAR_APERTURE_BYTES)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
-    if (byte_count != 0)
-        memcpy(destination, &s_planes[plane][offset], byte_count);
+    /* Read-map selection masks to two bits in the hardware; REP MOVSW
+     * advances a word-sized SI through the entire CPU aperture. */
+    sim_vga_out(&s_graphics_owner->vga,0x3ce,4);
+    sim_vga_out(&s_graphics_owner->vga,0x3cf,(uint8_t)plane);
+    for (size_t byte=0;byte<byte_count;++byte)
+        destination[byte]=sim_vga_read(&s_graphics_owner->vga,(uint16_t)(offset+byte));
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }
 
@@ -165,37 +164,30 @@ static SimGraphicsTileUploadStatus upload_interleaved_rows(
     const uint8_t *source, size_t source_size, uint16_t destination_offset,
     uint16_t row_count)
 {
-    size_t needed;
-    size_t row;
-    unsigned plane;
-    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
-        return s_status;
-    if (source == NULL || row_count == 0)
+    unsigned row, plane, byte;
+    SimVga *vga;
+    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK) return s_status;
+    if (!source || source_size < (size_t)row_count*128u)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_ARGUMENT;
-    if (destination_offset != SIM_GRAPHICS_TILE_MAP_OFFSET ||
-        row_count != 0x100u)
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
-    needed = (size_t)row_count * 128u;
-    if (source_size != needed ||
-        (size_t)destination_offset + (size_t)row_count * 32u >
-            SIM_GRAPHICS_PLANAR_APERTURE_BYTES)
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
-
+    vga = &s_graphics_owner->vga;
     screen_lock_enter();
-    for (row = 0; row < row_count; ++row) {
-        const uint8_t *row_source = source + row * 128u;
-        size_t out_byte;
-        for (plane = 0; plane < SIM_GRAPHICS_PLANAR_PLANE_COUNT; ++plane) {
-            uint8_t *row_destination =
-                &s_planes[plane][destination_offset + row * 32u];
-            for (out_byte = 0; out_byte < 32u; ++out_byte) {
-                /* S00 18BA selects planes 0..3 and copies one word from
-                 * each 8-byte source group into consecutive aperture bytes. */
-                row_destination[out_byte] = row_source[
-                    (out_byte / 2u) * 8u + plane * 2u + (out_byte & 1u)];
-            }
+    /* m31AD:18BA selects each map-mask plane, then copies one source word
+     * per 8-byte group. Both SI and DI are 16-bit offsets. */
+    /* Its 142B prologue selects mode 0 and clears logical rotation; 18BA
+     * then disables set/reset before transferring the CPU color bytes. */
+    sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,0);
+    sim_vga_out(vga,0x3ce,1); sim_vga_out(vga,0x3cf,0);
+    sim_vga_out(vga,0x3ce,3); sim_vga_out(vga,0x3cf,0);
+    sim_vga_out(vga,0x3ce,8); sim_vga_out(vga,0x3cf,255);
+    for (plane = 0; plane < 4; ++plane) {
+        sim_vga_out(vga,0x3c4,2); sim_vga_out(vga,0x3c5,(uint8_t)(1u<<plane));
+        for (row = 0; row < row_count; ++row) for (byte = 0; byte < 32; ++byte) {
+            uint16_t di = (uint16_t)(destination_offset+row*32u+byte);
+            uint16_t si = (uint16_t)(row*128u+(byte/2u)*8u+plane*2u+(byte&1u));
+            sim_vga_write(vga,di,source[si]);
         }
     }
+    sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,0);
     screen_lock_leave();
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }
@@ -204,17 +196,22 @@ static SimGraphicsTileUploadStatus upload_plane_bytes(
     const uint8_t *source, size_t source_size, uint16_t destination_offset,
     unsigned plane, size_t byte_count)
 {
-    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
-        return s_status;
-    if (source == NULL || plane >= SIM_GRAPHICS_PLANAR_PLANE_COUNT)
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_ARGUMENT;
-    if (destination_offset != SIM_GRAPHICS_TILE_PAGE_OFFSET ||
-        byte_count != SIM_GRAPHICS_TILE_UPLOAD_BYTES || source_size != byte_count ||
-        (size_t)destination_offset + byte_count > SIM_GRAPHICS_PLANAR_APERTURE_BYTES)
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
-
+    size_t byte;
+    SimVga *vga;
+    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK) return s_status;
+    if (!source || source_size < byte_count) return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_ARGUMENT;
+    vga = &s_graphics_owner->vga;
     screen_lock_enter();
-    memcpy(&s_planes[plane][destination_offset], source, byte_count);
+    /* m31AD:186A: SHL AL,CL produces a map mask, not a plane-range test. */
+    sim_vga_out(vga,0x3ce,8); sim_vga_out(vga,0x3cf,255);
+    sim_vga_out(vga,0x3c4,2);
+    sim_vga_out(vga,0x3c5, (plane & 31u) < 8u ? (uint8_t)(1u << (plane & 31u)) : 0);
+    /* L18A8's JCXZ after SHR intentionally drops the remaining lone byte.
+     * Preserve that historical small-count case instead of a generic memcpy. */
+    if ((destination_offset & 1u) && byte_count == 2u) byte_count = 1u;
+    else if (!(destination_offset & 1u) && byte_count == 1u) byte_count = 0;
+    for (byte = 0; byte < byte_count; ++byte)
+        sim_vga_write(vga,(uint16_t)(destination_offset+byte),source[(uint16_t)byte]);
     screen_lock_leave();
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }
@@ -222,82 +219,64 @@ static SimGraphicsTileUploadStatus upload_plane_bytes(
 SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     int16_t x, int16_t y, uint16_t offset)
 {
-    uint8_t tile[SIM_GRAPHICS_CACHED_TILE_BYTES * 4u];
-    uint16_t source_offset;
-    int32_t draw_x;
+    SimVga *vga;
+    uint16_t si = offset, di;
+    uint8_t tile[128];
     unsigned row, plane, byte;
-    SimGraphicsBitmapCallback callback;
-    int clipped;
+    int clipped = ((uint16_t)x & 7u) != 0;
     SimGraphicsTileUploadStatus cursor_status;
-    uint8_t *display_busy = (uint8_t *)&g_3DD4;
-
-    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
-        return s_status;
-    if ((size_t)offset + SIM_GRAPHICS_CACHED_TILE_BYTES >
-                      SIM_GRAPHICS_PLANAR_APERTURE_BYTES ||
-        (offset % SIM_GRAPHICS_CACHED_TILE_BYTES) != 0 ||
-        y < 0 || y >= s_graphics_owner->framebuffer.height)
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
-    /* The source's first branch sends every unaligned x through 0CF9,
-     * even when there is no active clipping list. */
-    clipped = sim_graphics_source_clip_active() || (((uint16_t)x & 7u) != 0);
-    if ((clipped ? (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) : (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[10])) == NULL)
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_UNBOUND;
-    if (!sim_graphics_cursor_hooks_is_bound())
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_CURSOR_SERVICE_UNBOUND;
-
-    /* Both source 0647 paths load SI directly from the third argument.
-     * root:m0250 supplies A000h + tile*32 via 16-bit arithmetic; root:m208F
-     * likewise supplies its absolute g_62BE cache address. VGA read
-     * latches expose two bytes from each of the four planes per row; its
-     * clipped path copies those same bytes into a 128-byte row-interleaved
-     * planar bitmap before dispatching g914C/o00_31AD_0CF9. */
-    source_offset = offset;
-    if (clipped)
-        ++*display_busy;
-    screen_lock_enter();
-    for (row = 0; row < 16u; ++row) {
-        for (plane = 0; plane < SIM_GRAPHICS_PLANAR_PLANE_COUNT; ++plane) {
-            const uint8_t *source = &s_planes[plane][source_offset + row * 2u];
-            size_t output = row * 8u + plane * 2u;
-            for (byte = 0; byte < 2u; ++byte)
-                tile[output + byte] = source[byte];
+    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK) return s_status;
+    vga = &s_graphics_owner->vga;
+    /* m31AD:L066F..L0707. No intersecting clip returns without reading the
+     * aperture. A containing clip uses the direct latch-copy path. */
+    if (!clipped && sim_graphics_source_clip_active()) {
+        const struct Rect *r = g_5AAC;
+        int16_t right = add_word_15(x), bottom = add_word_15(y);
+        while (r->top != INT16_MIN) {
+            if (r->bottom >= y && r->right >= x && r->left <= right && r->top <= bottom) break;
+            ++r;
         }
+        if (r->top == INT16_MIN) return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
+        clipped = r->bottom < bottom || r->top > y || r->left > x || r->right <= right;
     }
     if (clipped) {
-        --*display_busy;
-        screen_lock_leave();
-    } else {
-        ++*display_busy;
-        cursor_status = source_cursor_before_tile(x, y);
-        if (cursor_status != SIM_GRAPHICS_TILE_UPLOAD_OK) {
-            --*display_busy;
-            screen_lock_leave();
-            return s_status = cursor_status;
+        SimGraphicsBitmapCallback callback = (*(SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]);
+        if (!callback) return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_UNBOUND;
+        screen_lock_enter();
+        /* L06C8/L06CB: read-map selection and MOVSW from each of four planes. */
+        for (row = 0; row < 16; ++row) {
+            for (plane = 0; plane < 4; ++plane) {
+                sim_vga_out(vga,0x3ce,4); sim_vga_out(vga,0x3cf,(uint8_t)plane);
+                for (byte = 0; byte < 2; ++byte)
+                    tile[row*8u+plane*2u+byte] = sim_vga_read(vga,(uint16_t)(si+byte));
+            }
+            si = (uint16_t)(si+2u);
         }
-    }
-
-    /* Only the direct aperture path shifts x to a byte address. 0CF9
-     * receives the original coordinate, including its low three bits. */
-    draw_x = clipped ? x : (int32_t)((uint16_t)x >> 3) * 8;
-    callback = clipped ? (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) : (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[10]);
-    s_graphics_owner->last_status = SIM_GRAPHICS_OK;
-    callback((int16_t)draw_x, y, (char *)tile, 16, 16);
-    if (s_graphics_owner->last_status != SIM_GRAPHICS_OK) {
-        if (!clipped) {
-            --*display_busy;
-            screen_lock_leave();
-        }
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_FAILED;
-    }
-    if (!clipped) {
-        cursor_status = source_cursor_after_tile();
-        --*display_busy;
         screen_lock_leave();
-        if (cursor_status != SIM_GRAPHICS_TILE_UPLOAD_OK)
-            return s_status = cursor_status;
+        s_graphics_owner->last_status = SIM_GRAPHICS_OK;
+        callback(x,y,(char *)tile,16,16);
+        return s_status = s_graphics_owner->last_status == SIM_GRAPHICS_OK ?
+            SIM_GRAPHICS_TILE_UPLOAD_OK : SIM_GRAPHICS_TILE_UPLOAD_DRAW_FAILED;
     }
-    return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
+    screen_lock_enter();
+    cursor_status = source_cursor_before_tile(x,y);
+    if (cursor_status != SIM_GRAPHICS_TILE_UPLOAD_OK) { screen_lock_leave(); return s_status = cursor_status; }
+    /* L0740..L0800: map-mask=0F, write-mode=1, two MOVSB per scanline.
+     * The CPU byte is ignored in mode 1; every plane copies its read latch. */
+    sim_vga_out(vga,0x3c4,2); sim_vga_out(vga,0x3c5,15);
+    sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,1);
+    di = (uint16_t)((uint16_t)y*(uint16_t)g_3DB6+((uint16_t)x>>3));
+    for (row = 0; row < 16; ++row) {
+        for (byte = 0; byte < 2; ++byte) {
+            uint8_t cpu = sim_vga_read(vga,si++);
+            sim_vga_write(vga,di++,cpu);
+        }
+        di = (uint16_t)(di+(uint16_t)g_3DB6-2u);
+    }
+    sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,0);
+    cursor_status = source_cursor_after_tile();
+    screen_lock_leave();
+    return s_status = cursor_status;
 }
 
 void o00_31AD_18BA(char *source, uint16_t destination_offset, int16_t row_count)
@@ -342,10 +321,7 @@ static SimGraphicsTileUploadStatus compose_record(
 
     if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
         return s_status;
-    if (source == NULL || plane < 0 || plane >= SIM_GRAPHICS_PLANAR_PLANE_COUNT ||
-        (kind != TILE_COMPOSITOR_2B1A &&
-         mask_mode != 0 && mask_mode != 1 && mask_mode != 3) ||
-        (size_t)cache_base + 0x80u > SIM_GRAPHICS_PLANAR_APERTURE_BYTES)
+    if (source == NULL)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
 
     /* The assembly selects one source plane in the EGA read-map register,
@@ -359,8 +335,9 @@ static SimGraphicsTileUploadStatus compose_record(
         uint16_t prefix = kind == TILE_COMPOSITOR_2B1A ? 0 :
                           read_le_word(record_row + 2u);
         for (word = 0; word < 4u; ++word) {
-            uint16_t background = read_le_word(
-                &s_planes[(unsigned)plane][cache_base + row * 8u + word * 2u]);
+            uint16_t address = (uint16_t)(cache_base + row * 8u + word * 2u);
+            uint16_t background = (uint16_t)(s_planes[(unsigned)plane & 3u][address] |
+                ((uint16_t)s_planes[(unsigned)plane & 3u][(uint16_t)(address+1u)] << 8));
             uint16_t foreground = read_le_word(
                 record_row + color_offset + word * 2u);
             uint16_t result = (uint16_t)(background ^

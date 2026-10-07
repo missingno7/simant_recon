@@ -24,7 +24,7 @@
     "UNATTRIBUTED"
   ],
   "counts": {
-    "PORT_INTRODUCED": 99,
+    "PORT_INTRODUCED": 101,
     "ORIGINAL": 14,
     "UNATTRIBUTED": 286,
     "RECONSTRUCTION_INTRODUCED": 1,
@@ -18333,6 +18333,88 @@
         }
       },
       "regression": "portable/tests/word_intermediates/run.py"
+    },
+    {
+      "id": "port-s00-ram-blit-shape",
+      "description": "Ordinary DrawSpider aborts because a RAM bitmap wrapper mistakes vertical row offset for a Boolean and restricts horizontal displacement.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Observed ordinary Full Game crash stacks; bounded original-instruction and native input regressions. No whole-game frame equivalence claim.",
+      "origin_function": "o00_35A6_0007/o00_35A6_0177",
+      "root_cause": {
+        "mechanism": "Canonical byte MUL, whole-byte displacement, word rotation and plane-row word writes were narrowed by hand-written supported-shape predicates.",
+        "level": "PROVEN canonical/original S00 instruction sequence"
+      },
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-vga-aperture/README.md",
+          "evidence/canonical/native-vga-aperture/inventory.json",
+          "portable/whole_program/platform/tests/run_graphics_vga_tests.py",
+          "portable/tests/runtime/run_edges.py"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "127 bounded locked original-instruction cases compare complete destination RAM, four-plane tile memory, fallback/capture/readback data and relevant register/busy state."
+        },
+        "canonical_dos": {
+          "observation": "Canonical S00 ASM is unchanged. Acceptance validation retains its historical exact gates; no new live whole-game DOS capture comparison is claimed."
+        },
+        "native": {
+          "baseline_executable_sha256": "b56c5a383ac3b78263191a26448c9275508edb934144ebf444a6603ece9dded2",
+          "observation": "Fresh base build reproduced both human crash chains via SDL keyboard/mouse replays. Shared VGA aperture and instruction projections pass independent exterior window/map replays, with observed negative/right/bottom window rectangles and sprite offsets."
+        }
+      },
+      "regression": [
+        "portable/tests/runtime/run_edges.py",
+        "portable/whole_program/platform/tests/run_graphics_vga_tests.py"
+      ],
+      "related_items": [
+        "port-s00-436-byte-extent",
+        "port-cursor-S00-bookkeeping"
+      ]
+    },
+    {
+      "id": "port-s00-exterior-aperture",
+      "description": "Ordinary window edge dragging aborts because cached-tile drawing rejects coordinates before canonical clipping and treats visible memory and cache memory as separate owners.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Observed ordinary Full Game crash stacks; bounded original-instruction and native input regressions. No whole-game frame equivalence claim.",
+      "origin_function": "o00_31AD_0647",
+      "root_cause": {
+        "mechanism": "A 640x480 host buffer domain replaced the VGA CPU aperture and canonical clip-first decision; capture and readback had related viewport/end-of-aperture restrictions.",
+        "level": "PROVEN canonical/original S00 instruction sequence"
+      },
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-vga-aperture/README.md",
+          "evidence/canonical/native-vga-aperture/inventory.json",
+          "portable/whole_program/platform/tests/run_graphics_vga_tests.py",
+          "portable/tests/runtime/run_edges.py"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "127 bounded locked original-instruction cases compare complete destination RAM, four-plane tile memory, fallback/capture/readback data and relevant register/busy state."
+        },
+        "canonical_dos": {
+          "observation": "Canonical S00 ASM is unchanged. Acceptance validation retains its historical exact gates; no new live whole-game DOS capture comparison is claimed."
+        },
+        "native": {
+          "baseline_executable_sha256": "b56c5a383ac3b78263191a26448c9275508edb934144ebf444a6603ece9dded2",
+          "observation": "Fresh base build reproduced both human crash chains via SDL keyboard/mouse replays. Shared VGA aperture and instruction projections pass independent exterior window/map replays, with observed negative/right/bottom window rectangles and sprite offsets."
+        }
+      },
+      "regression": [
+        "portable/tests/runtime/run_edges.py",
+        "portable/whole_program/platform/tests/run_graphics_vga_tests.py"
+      ],
+      "related_items": [
+        "port-s00-436-byte-extent",
+        "port-cursor-S00-bookkeeping"
+      ]
     }
   ]
 }

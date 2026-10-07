@@ -44,24 +44,19 @@ SimGraphicsStatus sim_graphics_s00_masked_rect(SimGraphicsDriver *g,
         return SIM_GRAPHICS_UNSUPPORTED_MODE;
     if (l > r) { x = l; l = r; r = x; }
     if (t > b) { y = t; t = b; b = y; }
-    if (l < g->framebuffer.clip.left) l = g->framebuffer.clip.left;
-    if (t < g->framebuffer.clip.top) t = g->framebuffer.clip.top;
-    if (r > g->framebuffer.clip.right) r = g->framebuffer.clip.right;
-    if (b > g->framebuffer.clip.bottom) b = g->framebuffer.clip.bottom;
     for (y = t; y < b; ++y) {
         /* _001C starts at (pattern&15)*16 + (top&3)*2 and cycles
          * SI with AND F7h. Each screen byte uses that same even table byte. */
         uint8_t mask = g->pattern_source[((uint16_t)pattern & 15u) * 16u +
                                          ((uint32_t)y & 3u) * 2u];
         for (x = l; x < r; ++x) {
-            uint8_t *p;
+            uint8_t old, next;
             uint8_t color = (uint8_t)g_3DE0 & 15u;
             if (!(mask & (0x80u >> ((uint32_t)x & 7u)))) continue;
-            p = &g->pixel_storage[(size_t)y * g->framebuffer.stride + (size_t)x];
-            if (operation == 8) *p &= color;
-            else if (operation == 16) *p |= color;
-            else if (operation == 24) *p ^= color;
-            else *p = color;
+            old = sim_graphics_vga_get(g,x,y);
+            next = operation == 8 ? (old & color) : operation == 16 ? (old | color) :
+                   operation == 24 ? (old ^ color) : color;
+            sim_graphics_vga_put(g,x,y,next);
         }
     }
     return SIM_GRAPHICS_OK;
@@ -71,28 +66,35 @@ SimGraphicsStatus sim_graphics_s00_screen_copy(SimGraphicsDriver *g,
     int16_t left, int16_t top, int16_t right, int16_t bottom,
     int16_t destination_x, int16_t destination_y)
 {
-    int32_t source_byte = (uint16_t)left >> 3;
-    int32_t destination_byte = (uint16_t)destination_x >> 3;
-    int32_t bytes = ((uint16_t)right >> 3) - source_byte;
-    int32_t rows = (int32_t)bottom - top;
-    int32_t sy = top, dy = destination_y, step = 1, row;
-    if (!g || !g->pixel_storage || bytes < 0 || rows < 0)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    if (!bytes || !rows) return SIM_GRAPHICS_OK;
-    /* Preserve the original _1950 reverse-copy starting rows, including its
-     * bottom/destination+height convention. Do not rewrite as generic blit. */
-    if (top < destination_y) { sy = bottom; dy += rows; step = -1; }
-    if (source_byte + bytes > g_3DB6 ||
-        destination_byte + bytes > g_3DB6 ||
-        sy < 0 || dy < 0 || sy >= g->framebuffer.height || dy >= g->framebuffer.height ||
-        sy + (rows - 1) * step < 0 || dy + (rows - 1) * step < 0 ||
-        sy + (rows - 1) * step >= g->framebuffer.height ||
-        dy + (rows - 1) * step >= g->framebuffer.height)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    for (row = 0; row < rows; ++row, sy += step, dy += step)
-        memmove(g->pixel_storage + (size_t)dy * g->framebuffer.stride + destination_byte * 8,
-                g->pixel_storage + (size_t)sy * g->framebuffer.stride + source_byte * 8,
-                (size_t)bytes * 8u);
+    SimVga *vga;
+    uint16_t si, di, rows = (uint16_t)(bottom-top);
+    uint16_t width = (uint16_t)(((uint16_t)right>>3)-((uint16_t)left>>3));
+    int16_t source_y = top, target_y = destination_y, stride;
+    int direction;
+    unsigned row, byte;
+    if (!g || !g->pixel_storage) return SIM_GRAPHICS_INVALID_ARGUMENT;
+    vga = &g->vga;
+    stride = g_3DB6;
+    /* m31AD:L19F6/L1A38/L1A48: reverse rows and/or bytes independently.
+     * Preserve the historical bottom/destination+height start convention. */
+    if (top < destination_y) {
+        source_y = bottom; target_y = (int16_t)((uint16_t)destination_y+rows); stride = (int16_t)-stride;
+    }
+    direction = ((uint16_t)left>>3) < ((uint16_t)destination_x>>3) ? -1 : 1;
+    si = (uint16_t)((uint16_t)source_y*(uint16_t)g_3DB6+((uint16_t)left>>3));
+    di = (uint16_t)((uint16_t)target_y*(uint16_t)g_3DB6+((uint16_t)destination_x>>3));
+    if (direction < 0) { si = (uint16_t)(si+width-1u); di = (uint16_t)(di+width-1u); }
+    sim_vga_out(vga,0x3ce,8); sim_vga_out(vga,0x3cf,255);
+    sim_vga_out(vga,0x3c4,2); sim_vga_out(vga,0x3c5,15);
+    sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,1);
+    for (row = 0; row < rows; ++row) {
+        for (byte = 0; byte < width; ++byte) {
+            uint8_t cpu = sim_vga_read(vga,(uint16_t)(si+direction*(int)byte));
+            sim_vga_write(vga,(uint16_t)(di+direction*(int)byte),cpu);
+        }
+        si = (uint16_t)(si+stride); di = (uint16_t)(di+stride);
+    }
+    sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,0);
     return SIM_GRAPHICS_OK;
 }
 

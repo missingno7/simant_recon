@@ -61,22 +61,12 @@ static SimGraphicsStatus checked_shape(const SimGraphicsDriver *graphics,
                                        int16_t left, int16_t top,
                                        int16_t right, int16_t bottom,
                                        uint16_t *columns, uint16_t *height,
-                                       size_t *size, int allow_exterior)
+                                       size_t *size)
 {
-    if (graphics == NULL || graphics->pixel_storage == NULL ||
-        left < 0 || top < 0 || right <= left || bottom <= top ||
-        (!allow_exterior && (right > g_3DB2 ||
-                             bottom > g_3DB4)) ||
-        (allow_exterior && (left >= g_3DB2 ||
-                            top >= g_3DB4)))
+    if (!graphics || !graphics->pixel_storage || right <= left || bottom <= top)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    s00_source_dimensions(left, top, right, bottom, columns, height);
-    if (*columns == 0 || *height == 0)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    *size = 4u + (size_t)*columns * (size_t)*height * 4u;
-    if (*size > UINT16_MAX || *size != sim_graphics_s00_capture_size_word(
-            left, top, right, bottom))
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
+    s00_source_dimensions(left,top,right,bottom,columns,height);
+    *size = 4u+(size_t)*columns*(size_t)*height*4u;
     return SIM_GRAPHICS_OK;
 }
 
@@ -90,7 +80,7 @@ SimGraphicsStatus sim_graphics_s00_capture_size_checked(
     if (size_out == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     status = checked_shape(graphics, left, top, right, bottom,
-                           &columns, &height, &size, 0);
+                           &columns, &height, &size);
     (void)columns;
     (void)height;
     if (status == SIM_GRAPHICS_OK)
@@ -100,52 +90,30 @@ SimGraphicsStatus sim_graphics_s00_capture_size_checked(
 
 static SimGraphicsStatus capture_rect_impl(
     const SimGraphicsDriver *graphics, int16_t left, int16_t top,
-    int16_t right, int16_t bottom, uint8_t *buffer, size_t buffer_size,
-    int allow_exterior)
+    int16_t right, int16_t bottom, uint8_t *buffer, size_t buffer_size)
 {
-    uint16_t columns, height;
-    size_t required, row_bytes;
-    int32_t aligned_left;
-    unsigned y, plane, byte_x;
+    uint16_t columns, height, si;
+    size_t required;
+    unsigned row, plane, byte;
+    SimVga *vga;
     SimGraphicsStatus status;
-    if (buffer == NULL)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    status = checked_shape(graphics, left, top, right, bottom,
-                           &columns, &height, &required, allow_exterior);
-    if (status != SIM_GRAPHICS_OK)
-        return status;
-    if (buffer_size < required)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-
-    row_bytes = columns;
-    aligned_left = ((int32_t)left >> 3) * 8;
-    buffer[0] = (uint8_t)(columns * 8u);
-    buffer[1] = (uint8_t)((columns * 8u) >> 8);
-    buffer[2] = (uint8_t)height;
-    buffer[3] = (uint8_t)(height >> 8);
-    for (y = 0; y < height; ++y) {
-        for (plane = 0; plane < 4; ++plane) {
-            for (byte_x = 0; byte_x < columns; ++byte_x) {
-                uint8_t packed = 0;
-                unsigned bit;
-                for (bit = 0; bit < 8; ++bit) {
-                    size_t pixel_index = (size_t)(top + (int32_t)y) *
-                                         graphics->framebuffer.stride +
-                                         (size_t)(aligned_left +
-                                                  (int32_t)(byte_x * 8u + bit));
-                    int32_t pixel_x = aligned_left +
-                                      (int32_t)(byte_x * 8u + bit);
-                    int32_t pixel_y = (int32_t)top + (int32_t)y;
-                    if (pixel_x >= 0 && pixel_x < g_3DB2 &&
-                        pixel_y >= 0 && pixel_y < g_3DB4 &&
-                        (graphics->pixel_storage[pixel_index] &
-                         (1u << plane)) != 0)
-                        packed |= (uint8_t)(0x80u >> bit);
-                }
-                buffer[4u + (size_t)y * row_bytes * 4u +
-                       (size_t)plane * row_bytes + byte_x] = packed;
-            }
+    if (!buffer) return SIM_GRAPHICS_INVALID_ARGUMENT;
+    status=checked_shape(graphics,left,top,right,bottom,&columns,&height,&required);
+    if (status != SIM_GRAPHICS_OK) return status;
+    if (buffer_size < required) return SIM_GRAPHICS_INVALID_ARGUMENT;
+    vga = (SimVga *)&graphics->vga;
+    /* m31AD:L058A/L05C7/L05CA: MUL row stride, SAR left, header STOSW,
+     * then four read-map selections and forward byte copies per scanline. */
+    si=sim_vga_pixel_offset(left,top,(uint16_t)g_3DB6);
+    buffer[0]=(uint8_t)(columns*8u); buffer[1]=(uint8_t)((columns*8u)>>8);
+    buffer[2]=(uint8_t)height; buffer[3]=(uint8_t)(height>>8);
+    for (row=0;row<height;++row) {
+        for (plane=0;plane<4;++plane) {
+            sim_vga_out(vga,0x3ce,4); sim_vga_out(vga,0x3cf,(uint8_t)plane);
+            for (byte=0;byte<columns;++byte)
+                buffer[4u+row*columns*4u+plane*columns+byte]=sim_vga_read(vga,(uint16_t)(si+byte));
         }
+        si=(uint16_t)(si+(uint16_t)g_3DB6);
     }
     return SIM_GRAPHICS_OK;
 }
@@ -155,103 +123,7 @@ SimGraphicsStatus sim_graphics_s00_capture_rect(
     int16_t right, int16_t bottom, uint8_t *buffer, size_t buffer_size)
 {
     return capture_rect_impl(graphics, left, top, right, bottom,
-                             buffer, buffer_size, 0);
-}
-
-SimGraphicsStatus sim_graphics_s00_capture_rect_source_aperture(
-    const SimGraphicsDriver *graphics, int16_t left, int16_t top,
-    int16_t right, int16_t bottom, uint8_t *buffer, size_t buffer_size)
-{
-    uint16_t columns, height;
-    uint32_t first_column, last_column;
-    size_t required;
-    int32_t aligned_left;
-    const uint8_t *planes[4];
-    unsigned y, plane, byte_x;
-
-    if (graphics == NULL || graphics != sim_graphics_source_owner() ||
-        graphics->pixel_storage == NULL || buffer == NULL ||
-        left < 0 || top < 0 || right <= left || bottom <= top ||
-        right > g_3DB2 || g_3DB6 <= 0 ||
-        g_3DB2 <= 0 || g_3DB4 <= 0 ||
-        (graphics->video_mode != SIM_GRAPHICS_MODE_EGA_640X350 &&
-         graphics->video_mode != SIM_GRAPHICS_MODE_VGA_640X480))
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-
-    s00_source_dimensions(left, top, right, bottom, &columns, &height);
-    if (columns == 0 || height == 0)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    required = 4u + (size_t)columns * (size_t)height * 4u;
-    if (required > UINT16_MAX || required !=
-        sim_graphics_s00_capture_size_word(left, top, right, bottom) ||
-        buffer_size < required)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-
-    aligned_left = ((int32_t)left / 8) * 8;
-    first_column = (uint32_t)aligned_left / 8u;
-    last_column = first_column + columns;
-    if (last_column > (uint32_t)g_3DB6)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-    if (graphics->framebuffer.stride < (size_t)g_3DB2 ||
-        graphics->pixel_storage_size <
-            graphics->framebuffer.stride * (size_t)g_3DB4)
-        return SIM_GRAPHICS_INVALID_ARGUMENT;
-
-    /* S00 addresses each row as y*g3DB6 + (left>>3). Bound the final byte
-     * against the same 64 KiB aperture exposed by the existing tile owner. */
-    {
-        uint64_t end = ((uint64_t)(uint16_t)(bottom - 1) *
-                        (uint16_t)g_3DB6) + last_column;
-        if (end > SIM_GRAPHICS_PLANAR_APERTURE_BYTES)
-            return SIM_GRAPHICS_INVALID_ARGUMENT;
-    }
-    for (plane = 0; plane < 4; ++plane) {
-        size_t plane_size = 0;
-        planes[plane] = sim_graphics_tile_upload_plane(plane, &plane_size);
-        if (planes[plane] == NULL ||
-            plane_size != SIM_GRAPHICS_PLANAR_APERTURE_BYTES)
-            return SIM_GRAPHICS_UNSUPPORTED_MODE;
-    }
-
-    buffer[0] = (uint8_t)(columns * 8u);
-    buffer[1] = (uint8_t)((columns * 8u) >> 8);
-    buffer[2] = (uint8_t)height;
-    buffer[3] = (uint8_t)(height >> 8);
-    for (y = 0; y < height; ++y) {
-        const int32_t pixel_y = (int32_t)top + (int32_t)y;
-        for (plane = 0; plane < 4; ++plane) {
-            for (byte_x = 0; byte_x < columns; ++byte_x) {
-                uint8_t packed = 0;
-                unsigned bit;
-                for (bit = 0; bit < 8; ++bit) {
-                    const int32_t pixel_x = aligned_left +
-                        (int32_t)(byte_x * 8u + bit);
-                    int set;
-                    if (pixel_y < g_3DB4) {
-                        const size_t pixel_index =
-                            (size_t)pixel_y * graphics->framebuffer.stride +
-                            (size_t)pixel_x;
-                        if (pixel_x < 0 || pixel_x >= g_3DB2 ||
-                            pixel_index >= graphics->pixel_storage_size)
-                            return SIM_GRAPHICS_INVALID_ARGUMENT;
-                        set = (graphics->pixel_storage[pixel_index] &
-                               (1u << plane)) != 0;
-                    } else {
-                        const size_t source_offset =
-                            (size_t)pixel_y * (size_t)g_3DB6 +
-                            (size_t)pixel_x / 8u;
-                        set = (planes[plane][source_offset] &
-                               (uint8_t)(0x80u >> (pixel_x & 7))) != 0;
-                    }
-                    if (set)
-                        packed |= (uint8_t)(0x80u >> bit);
-                }
-                buffer[4u + (size_t)y * (size_t)columns * 4u +
-                       (size_t)plane * columns + byte_x] = packed;
-            }
-        }
-    }
-    return SIM_GRAPHICS_OK;
+                             buffer, buffer_size);
 }
 
 static SimGraphicsStatus capture_cursor_rect(
@@ -262,7 +134,7 @@ static SimGraphicsStatus capture_cursor_rect(
         buffer_size != s_cursor_capture_capacity)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     return capture_rect_impl(graphics, left, top, right, bottom,
-                             buffer, buffer_size, 1);
+                             buffer, buffer_size);
 }
 
 static SimGraphicsDriver *capture_owner(void)
@@ -320,28 +192,14 @@ static void source_g9148_capture(int16_t left, int16_t top,
                                      (uint8_t *)buffer,
                                      s_cursor_capture_capacity);
     } else {
-        if (bottom <= g_3DB4) {
-            status = sim_graphics_s00_capture_size_checked(graphics, left, top,
-                                                           right, bottom,
-                                                           &required);
-            if (status == SIM_GRAPHICS_OK)
-                status = sim_graphics_s00_capture_rect(graphics, left, top,
-                                                       right, bottom,
-                                                       (uint8_t *)buffer,
-                                                       required);
-        } else {
-            size_t remaining = 0;
-            if (!sim_handles_global_measure_payload(buffer, &remaining))
-                status = SIM_GRAPHICS_INVALID_ARGUMENT;
-            else
-                status = sim_graphics_s00_capture_rect_source_aperture(
-                    graphics, left, top, right, bottom,
-                    (uint8_t *)buffer, remaining);
-        }
+        status = sim_graphics_s00_capture_size_checked(graphics,left,top,right,bottom,&required);
+        if (status == SIM_GRAPHICS_OK)
+            status = sim_graphics_s00_capture_rect(graphics,left,top,right,bottom,
+                                                  (uint8_t *)buffer,required);
     }
     graphics->last_status = status;
     if (status != SIM_GRAPHICS_OK) {
-        fprintf(stderr, "S00 source capture outside the supported framebuffer contract\n");
+        fprintf(stderr, "S00 source capture received invalid RAM storage\n");
         exit(70);
     }
 

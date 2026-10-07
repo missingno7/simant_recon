@@ -77,7 +77,8 @@
     "portable/audio/isa_devices.cpp",
     "portable/audio/ymfm/ymfm_opl.cpp",
     "portable/audio/ymfm/ymfm_adpcm.cpp",
-    "portable/audio/ymfm/ymfm_pcm.cpp"
+    "portable/audio/ymfm/ymfm_pcm.cpp",
+    "portable/whole_program/platform/graphics_vga.c"
   ],
   "headers": [
     "portable/whole_program/platform/sdl3/diagnostics.h",
@@ -173,7 +174,8 @@
     "portable/audio/ymfm/ymfm_fm.ipp",
     "portable/audio/ymfm/ymfm_opl.h",
     "portable/audio/ymfm/ymfm_adpcm.h",
-    "portable/audio/ymfm/ymfm_pcm.h"
+    "portable/audio/ymfm/ymfm_pcm.h",
+    "portable/whole_program/platform/graphics_vga.h"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",
@@ -322,5 +324,19 @@
     "source_selection": "Canonical CFG selection retained; platform no longer forces /s1. Explicit /s6 or /s0 accepted.",
     "validation_and_limits": "Sound Blaster mode 6 uses canonical C and a readable m28BC ISR projection, existing channel owners and source volume-table directives. OPL3/OPL2-compatibility synthesis is ymfm BSD-3-Clause; SB direct U8 DAC/reset/mute and IRQ0 cadence are hosted. A bounded fresh sound-duration window matches all 5 DSP and 13476 OPL port/value writes from the original new-game-save oracle. First-musical-command-relative OPL timing is within 2 ms; absolute startup differs by about one second. Generic SB DMA/device IRQs, other device profiles, complete BIOS INT08 chain phase/reentry, and menu/save option cross-owner ABI views remain unproved/unsupported. Static music/effect reads in m00DF map mechanically to canonical 07AA owner words; no ordinary owner or game branch is introduced.",
     "classification": "TRUE_PLATFORM_BOUNDARY; unsupported hardware profiles fail explicitly, no semantic exception or ordinary source modification"
+  },
+  "native_vga_boundary": {
+    "memory": "One four-plane 64 KiB CPU aperture owned by SimGraphicsDriver; presentation decodes visible rows only.",
+    "registers": "Map mask, set/reset, enable set/reset, data rotate/logic, read map, read/write modes, bit mask and latches.",
+    "source": [
+      "src/S00/m31AD.asm",
+      "src/S00/m35A6.asm"
+    ],
+    "regression": [
+      "portable/tests/runtime/run_edges.py",
+      "portable/whole_program/platform/tests/run_graphics_vga_tests.py"
+    ],
+    "scope": "Ordinary shipped VGA inputs. Tested RAM blends, tile clip/copy, capture, uploads and plane readback retain original effects. Whole-game frame identity, complete raw-entry register epilogues, arbitrary register preconditions, row-table adjacency outside normal clipped inputs, CPU/IRQ residue and malformed resources are not claimed.",
+    "evidence": "evidence/canonical/native-vga-aperture/README.md"
   }
 }
