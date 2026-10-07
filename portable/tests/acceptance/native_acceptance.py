@@ -457,6 +457,7 @@ def main():
     ap.add_argument('--saved-game',type=Path,help='Explicit copy of the scenario original save, for isolated checkouts')
     ap.add_argument('--extra-dos',type=Path,action='append',default=[])
     ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/native-acceptance')
+    ap.add_argument('--output-root',type=Path,default=ROOT,help='Artifact root for short source FileSelect paths in an isolated checkout')
     ap.add_argument('--gdb',default='C:/msys64/mingw64/bin/gdb.exe')
     ap.add_argument('--poll-ns',type=int,default=1000000)
     ap.add_argument('--timeout',type=int,default=600)
@@ -477,14 +478,16 @@ def main():
     if not args.compare_only:
         sys.path.insert(0,str(ROOT/'tools'))
         from workspace import prepare_output
-        prepare_output(out,ROOT/'build/current/tests/native-acceptance',ROOT)
+        prepare_output(out,args.output_root.resolve()/'build/current/tests/native-acceptance',args.output_root.resolve())
         shutil.copytree(build/'runtime-assets',out/'assets')
         if scenario.get('saved_game'):
             source_save=(args.saved_game or oracle_root/scenario['saved_game']).resolve()
             shutil.copyfile(source_save,out/'assets/A.ANT')
             (out/'save-input.json').write_text(json.dumps(dict(path=str(source_save),sha256=sha(source_save)),indent=2))
         script=replay(scenario,project,out,checkpoints)
-        cfg=out/'observe.json';cfg.write_text(json.dumps(dict(out=str(out/'checkpoints'),symbols=specs,save_schema=acceptance.save_schema(),step_count=args.step_count)))
+        span_path=build/'semantic-spans.json'
+        span_bindings=json.loads(span_path.read_text())['bindings'] if span_path.is_file() else {}
+        cfg=out/'observe.json';cfg.write_text(json.dumps(dict(out=str(out/'checkpoints'),symbols=specs,save_schema=acceptance.save_schema(),step_count=args.step_count,span_bindings=span_bindings)))
         (out/'symbol-inventory.json').write_text(json.dumps(specs,indent=2)+'\n')
         gdbscript=out/'observe.gdb'
         gdbscript.write_text('python\nimport sys\nsys.path.insert(0,'+repr(str(TOOL_DIR))+')\nCONFIG_PATH='+repr(str(cfg))+'\nexec(compile(open('+repr(str(TOOL_DIR/'observe_gdb.py'))+').read(), "observe_gdb.py", "exec"))\nend\n')

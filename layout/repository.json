@@ -394,6 +394,13 @@
       "reason": "Instruction-proven DOS AX return values consumed across canonical declarations must have explicit native C results.",
       "blocker_ids": [],
       "deletion_condition": "Retain while native ABI differs from DOS register-return conventions."
+    },
+    {
+      "module": "semantic_spans",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Realizes explicit canonical DOS cross-owner spans as packed native owner groups and symbol aliases, preserving all original access expressions and initializers.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep as the mechanical DOS storage ABI; no ordinary game algorithm or guessed padding is admitted."
     }
   ],
   "passes": [
@@ -496,10 +503,9 @@
         "src/root/m277E.c",
         "src/root/m29D6.c",
         "src/root/m293A.c",
-        "src/root/m290D.c",
-        "src/root/m00DF.c"
+        "src/root/m290D.c"
       ],
-      "reason": "ISA device services and readable canonical ASM ISR projection; original C sound algorithms and sampled-channel commits remain canonical. Source m00DF sound option word reads bind directly to the existing canonical 07AA owner.",
+      "reason": "ISA device services and readable canonical ASM ISR projection; original C sound algorithms and sampled-channel commits remain canonical. Option adjacency is realized by the generic semantic span storage pass.",
       "blocker": "Several provider leaves are deliberately unprovided and audio mode/backend support remains a platform contract; do not replace them with success-shaped stubs.",
       "deletion_condition": "Keep at the hardware boundary. Any arithmetic moved out of the adapter must stay sourced from the canonical ASM/C algorithm and preserve operation order."
     },
@@ -1104,6 +1110,22 @@
       "reason": "The listed providers implement host memory/handles, files/directories, time/input, fonts, video and audio. application.c owns SDL setup, host event transport, presentation and the bounded replay hooks.",
       "blocker": "Service inventory is broad and explicit; preview limitations in portable/platform.json remain the acceptance boundary. No second ordinary game-state owner/model was found in the inspected architecture.",
       "deletion_condition": "Keep the manifest as the service inventory. Remove a provider only after proving no generated canonical TU, service object, application link, or isolated test consumes it."
+    },
+    {
+      "id": "canonical_semantic_span_storage",
+      "class": "GENERIC_LOWERING",
+      "paths": [
+        "portable/semantic-spans.json",
+        "portable/canonical_native_abi/semantic_spans.py"
+      ],
+      "builder_site": "portable/build.py:semantic_spans.Contracts/extract/emit",
+      "consumers": [
+        "src/S09/m35F5.c SaveRec block reads/writes",
+        "all canonical consumers declared in portable/semantic-spans.json"
+      ],
+      "reason": "Canonical MAP positions and declaration/COMDEF extents define complete storage groups; canonical owner names are exported offset aliases. Every member has offset/size assertions; undeclared SaveRec/literal crossings and stale consumer censuses fail the build.",
+      "blocker": "No guessed gaps, host-pointer serialization, arbitrary heap adjacency or unproved dynamic range extension is covered.",
+      "deletion_condition": "Keep as DOS adjacency ABI; remove a span only when the independent canonical consumer/SaveRec census no longer requires it."
     }
   ],
   "dispositions": [
@@ -1215,6 +1237,7 @@
     "portable/audio/ymfm/": "Pinned BSD-licensed OPL emulator and redistribution provenance",
     "portable/whole_program/platform/tests/": "Permanent filesystem/handle service controls",
     "dos/scenarios/": "Pinned DOS acceptance scenarios and emulated-time input scripts",
-    "portable/canonical_native_abi/integer_fake_libc/": "Parse-only C frontend declarations; never native runtime includes"
+    "portable/canonical_native_abi/integer_fake_libc/": "Parse-only C frontend declarations; never native runtime includes",
+    "portable/semantic-spans.json": "Reviewed canonical DOS cross-owner storage contracts consumed by portable/build.py"
   }
 }

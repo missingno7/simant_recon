@@ -11,11 +11,12 @@ and exploratory captures remain ignored. Baseline is `671f8eb`.
 | --- | ---: |
 | `ORIGINAL` | 14 |
 | `RECONSTRUCTION_INTRODUCED` | 1 |
-| `PORT_INTRODUCED` | 92 |
+| `PORT_INTRODUCED` | 93 |
 | `PORT_DEVIATION_DOCUMENTED` | 6 |
 | `UNATTRIBUTED` | 286 |
 
 399 items: known mechanisms, all nine `preview_limitations`, every unique
+398 items: known mechanisms, all nine `preview_limitations`, every unique
 differing named view and projected SaveRec at the first current round-3 checkpoint
 in each scenario. Multiple scenarios share a row for the same view/record; the
 `observations` fields retain each boundary separately. This is an inventory of
@@ -204,3 +205,9 @@ python tools/validate.py
 non-sibling original run. Repeat directories must use the same pinned executable,
 scenario input operations, resources, clock and emulator/launch settings.
 This inventory adds no source overlays or alternative game algorithm.
+
+The p2-span review closes SaveRec 100 and all 33 option literal crossings through
+[canonical storage spans](../native-semantic-spans/review.md), including the 29
+non-audio siblings. The diagnostic message pointer owner width is a newly recorded
+open port defect; native gameplay and the remaining 65 differing actual-save records
+are not accepted by this scoped closure.

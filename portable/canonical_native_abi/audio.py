@@ -89,29 +89,11 @@ def _convert_290d(source: str) -> tuple[str, dict[str, Any]]:
     return (source, {'status': 'UNCHANGED_SOURCE_CHANNEL_COMMITS',
                      'consumer': 'portable/whole_program/platform/whole_audio_provider.c'})
 
-def _convert_00df(source: str) -> tuple[str, dict[str, Any]]:
-    # Canonical d3D57 owns 07A8 as TWO bytes and the next two option words as
-    # 07AA[4]. DOS word indices 1/2 address that next owner. Host alignment
-    # cannot preserve this relationship by indexing the first native object.
-    output = _replace_once(source, 'extern int far fd_3D57_07A8[];',
-                           'extern unsigned char far fd_3D57_07AA[4];',
-                           'sound flags canonical owner declaration')
-    if output.count('fd_3D57_07A8[1]') != 3 or output.count('fd_3D57_07A8[2]') != 1:
-        raise ValueError('m00DF sound option word views changed')
-    output = output.replace('fd_3D57_07A8[1]', '(*(int far *)(fd_3D57_07AA + 0))')
-    output = output.replace('fd_3D57_07A8[2]', '(*(int far *)(fd_3D57_07AA + 2))')
-    return output, {'status': 'SOURCE_OWNER_WORD_VIEWS',
-                    'owner': 'src/data/d3D57.c:fd_3D57_07AA[4]',
-                    'DOS_relationship': '07A8 + 2/4 equals 07AA + 0/2',
-                    'native_relationship': 'explicit little-endian word views of existing canonical owner'}
-
 def adapt(path: str, source: str) -> tuple[str, dict[str, Any]]:
     """Convert one canonical audio source using explicit ABI shape checks."""
     normalized = path.replace('\\', '/')
     source_sha = _sha(source)
-    if normalized == 'src/root/m00DF.c':
-        (output, change) = _convert_00df(source)
-    elif normalized == 'src/root/m29F0.c':
+    if normalized == 'src/root/m29F0.c':
         (output, change) = _convert_29f0(source)
     elif normalized == 'src/root/m284A.c':
         (output, change) = _convert_284a(source)

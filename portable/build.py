@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
-from canonical_native_abi import scalar, tokenizer as csrc, integer_frontend, register_returns
+from canonical_native_abi import scalar, tokenizer as csrc, integer_frontend, register_returns, semantic_spans
 from canonical_native_abi.source_views import (
     GRAPHICS_SCALARS,
     audio_overlap_views,
@@ -86,7 +86,7 @@ def main():
             if sha(provenance.parent/name)!=expected:
                 raise ValueError('third-party source differs from provenance: '+name)
     def current_inputs():
-        paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',Path(__file__),register_returns.CONTRACT_PATH}
+        paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',PROJECT/'portable/semantic-spans.json',Path(__file__),register_returns.CONTRACT_PATH}
         paths.update(ROOT/u['source'] for u in canonical['modules'])
         paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
         paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
@@ -120,6 +120,7 @@ def main():
     native_scalar_names={name for counts in abis['audio_shared_state_preword']._SHARED_EXTERN_COUNTS.values() for name in counts}
     source_texts={u['canonical_destination']:(ROOT/u['source']).read_text(encoding='latin1')
                   for u in inventory['translation_units'] if u['lang']=='c'}
+    spans=semantic_spans.Contracts(ROOT,source_texts)
     event_definition=re.search(r'struct Event\s*\{[^{}]*\};',source_texts['src/root/m1FD2.c'],re.S).group(0)
     queue_header=OUT/'include/portable/whole_program/types/input_queue.h'
     queue_header.parent.mkdir(parents=True,exist_ok=True)
@@ -157,8 +158,6 @@ def main():
             text,count=re.subn(initializer,'struct InputQueueDescriptor g_5FF2 = { {0,0,0,0xff},0,0,input_queue,5,0,10,0 };',text)
             if count!=1:errors.append({'source':rel,'stage':'canonical input queue native pointer','error':'initializer shape differs'})
             text='#include "portable/whole_program/types/input_queue.h"\n'+text
-        if rel == 'src/root/m00DF.c':
-            text=apply('audio','adapt',text,rel,text)
         if rel in abis['audio_shared_state_preword'].SOURCE_MODULES:
             if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m284A.c','m29F0.c','m277E.c','m29D6.c','m293A.c','m290D.c'}:
                 text=translate_29d6_port_block(text) if rel=='src/root/m29D6.c' else apply('audio','adapt',text,rel,text)
@@ -218,6 +217,7 @@ def main():
             owned=re.search(r'(?m)^IndexEntry\s+\*\s+fd_50F6_3952\s*;',text)
             if not owned:raise ValueError('canonical database index cursor owner differs')
             text='#include "portable/whole_program/types/database.h"\n'+text[owned.start():]
+        text=spans.extract(rel,text)
         native_headers=re.findall(r'(?m)^\s*#include\s+"(portable/[^"\n]+)"\s*$',text)
         for h in native_headers:text=re.sub(r'(?m)^\s*#include\s+"'+re.escape(h)+r'"\s*\n','',text)
         prefix='#include "dos_types.h"\n#include "portable/whole_program/platform/dos_memory.h"\n#include "portable/whole_program/platform/dos_io.h"\n'
@@ -239,6 +239,8 @@ def main():
         rows.append(row)
     native_rows=[{'source':rel,'generated':str(PROJECT/rel)}
                  for rel in PLATFORM['services']]
+    span_source,span_receipt=spans.emit(OUT)
+    span_rows=[{'source':'canonical semantic span storage','generated':str(span_source)}]
     # Assemble the current symbolic audio source only to resolve its explicit
     # OFFSET relocations. It supplies no code, capacities or original image bytes.
     sys.path.insert(0,str(ROOT/'tools'))
@@ -318,7 +320,7 @@ def main():
         row['compile']={'passed':run.returncode==0,'exit_code':run.returncode,'command':command,
                         'errors':re.findall(r'^.*(?:error:|fatal error:).*$',run.stderr,re.M)}
         return str(obj) if run.returncode==0 else None
-    compile_rows=[r for r in rows+native_rows+asm_rows if 'generated' in r and r.get('source')!='src/root/m171C.c']
+    compile_rows=[r for r in rows+native_rows+asm_rows+span_rows if 'generated' in r and r.get('source')!='src/root/m171C.c']
     with ThreadPoolExecutor(max_workers=args.jobs) as pool:
         objects=[obj for obj in pool.map(compile_row,compile_rows) if obj]
     link={'passed':False,'status':'SKIPPED_REQUIRED_INPUT_FAILURE'}
@@ -369,7 +371,7 @@ def main():
         'input_stability':{'before_link':stable_before_link,'at_end':stable_at_end},
         'runtime_resources':{'shipped':{name:sha(ROOT/'assets'/name) for name in PLATFORM['runtime_assets']},'generated':PLATFORM['generated_runtime_resources']},
         'executable':{'path':str(executable),'sha256':sha(executable)} if passed else None,'claim':'One canonical source program plus explicit ABI/platform services. Preview limitations are explicit; no DOS equality claim.',
-        'canonical_TUs':rows,'native_services':native_rows,'canonical_ASM_data_translations':asm_rows,'preview_limitations':PLATFORM['preview_limitations'],'conversion_failures':errors,'core_link':link,'application_link':app_link,
+        'canonical_TUs':rows,'native_services':native_rows,'canonical_ASM_data_translations':asm_rows,'semantic_spans':span_receipt,'semantic_span_storage':span_rows,'preview_limitations':PLATFORM['preview_limitations'],'conversion_failures':errors,'core_link':link,'application_link':app_link,
         'counts':{'canonical_C_count':sum(r['lang']=='c' for r in rows),'canonical_C_compile_pass':sum(r.get('compile',{}).get('passed',False) for r in rows),
              'ASM_TUs_requiring_translation_or_platform_boundary':sum(r['lang']=='asm' for r in rows),
              'native_services':len(native_rows),'native_services_compile_pass':sum(r['compile']['passed'] for r in native_rows),

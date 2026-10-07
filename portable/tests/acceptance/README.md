@@ -20,7 +20,9 @@ python portable/tests/acceptance/native_acceptance.py dos/scenarios/new-game-sav
 `--oracle-root` selects a checkout containing the linked canonical DOS inputs;
 `--saved-game` explicitly supplies the scenario's original save in an isolated
 checkout. Its SHA must match DOS staging. `--compare-only` reuses captured native
-observations. Canonical executable, program inventory, object layout and original
+observations. `--output-root` selects the artifact workspace when an isolated
+checkout needs shorter paths inside the original FileSelect domain.
+Canonical executable, program inventory, object layout and original
 input operations are checked; observation commands do not alter the input history.
 Extra DOS directories are explicitly auxiliary, with executable identity checked.
 

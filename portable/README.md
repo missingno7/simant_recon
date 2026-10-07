@@ -64,7 +64,15 @@ copies and the Save/Load trace requirements.
 
 `canonical_native_abi/` contains bounded type/ABI conversions: fixed-width words,
 near/far pointer spelling, owner views, callbacks and packed wire/native layouts.
-Its final expression pass uses GCC preprocessing and pycparser to resolve
+`semantic-spans.json` records proven cross-owner DOS storage requirements. The
+builder extracts the participating definitions into packed native groups, exports
+their original names as offset aliases, and asserts every full member's size and
+position. Initializers remain canonical; access expressions remain unchanged.
+Independent SaveRec and literal-index censuses reject missing spans and undeclared
+consumers. Record 28 and the six-word options/record 100 block use this mechanism.
+`python tests/test_semantic_spans.py` exercises option read/write views, block I/O,
+and missing-span, missing-owner, wrong-size and split-storage negative controls.
+The final expression pass uses GCC preprocessing and pycparser to resolve
 declarations, fields, calls and expanded macros under MSC16/native integer rules.
 Unsigned operations and proved bounded signed expressions retain word semantics
 before consumers. Signed overflow, invalid shifts and pointer/layout effects remain

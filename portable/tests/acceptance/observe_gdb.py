@@ -36,6 +36,8 @@ def pointers(t, prefix='', seen=None):
     return []
 
 def value(name, filename=None):
+    binding=config.get('span_bindings',{}).get(name)
+    if binding:return gdb.parse_and_eval(binding['expression'])
     if filename: return gdb.parse_and_eval("'"+filename+"'::"+name)
     if name in definitions:
         return gdb.parse_and_eval("'"+definitions[name]+"'::"+name)

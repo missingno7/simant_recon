@@ -1,0 +1,189 @@
+{
+  "schema": "simant-native-semantic-span-proof-v1",
+  "classification": "PORT_INTRODUCED",
+  "scope": "Proven cross-owner canonical option accesses and SaveRec blocks; no whole-game/native equivalence claim.",
+  "original": {
+    "executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "loaded_option_words": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ]
+  },
+  "canonical_dos": {
+    "executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+    "loaded_option_words": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ]
+  },
+  "native": {
+    "executable_sha256": "e34b939aa40dca38a77ad81e6b1c0e31e34e3e37665bf4dfc075721b0758df52",
+    "build_passed": true,
+    "loaded_option_words": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "option_literal_accesses": 33,
+    "non_audio_literal_siblings": 29,
+    "dynamic_option_uses": 3,
+    "build_report_sha256": "9e4152cef9edeb7f7da1275f30c0b0b536fc1297c3ddcda8565e339e3ed67bdb",
+    "input_stability": {
+      "before_link": true,
+      "at_end": true
+    }
+  },
+  "layout_check": {
+    "schema": "simant-semantic-span-dos-layout-check-v1",
+    "passed": true,
+    "named_placements": 1344,
+    "checked_owner_addresses": 739,
+    "cross_owner_save_records": [
+      {
+        "record": 28,
+        "owner": "fd_3D57_0164",
+        "extra": 0,
+        "bytes": 192,
+        "span": "save-record-28",
+        "owners": [
+          "fd_3D57_0164",
+          "fd_3D57_0184"
+        ]
+      },
+      {
+        "record": 100,
+        "owner": "fd_3D57_07A8",
+        "extra": 0,
+        "bytes": 12,
+        "span": "options",
+        "owners": [
+          "fd_3D57_07A8",
+          "fd_3D57_07AA",
+          "fd_3D57_07AE",
+          "fd_3D57_07B0",
+          "fd_3D57_07B2"
+        ]
+      }
+    ],
+    "literal_crossings": 33,
+    "contract_sha256": "b3110e1d939d4a2441e3398a8c675f08b4e874b509757ffa9222d6369114ae00",
+    "dos_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+    "scope": "All catalog owner addresses and available COMDEF extents independently re-resolved from canonical MAP/OMF; initialized member extents are canonical declarations enforced by native sizeof assertions."
+  },
+  "actual_save": {
+    "files": {
+      "original": {
+        "path": "build/workers/claude/canon/new-game-save/original/A.ANT",
+        "sha256": "079355a8355d1579107863d5ebc8caa84b42b1027eaed39c604f51d1b51460bc",
+        "bytes": 48386
+      },
+      "canonical_dos": {
+        "path": "build/workers/claude/canon/new-game-save/reconstructed/A.ANT",
+        "sha256": "079355a8355d1579107863d5ebc8caa84b42b1027eaed39c604f51d1b51460bc",
+        "bytes": 48386
+      },
+      "native": {
+        "path": "build/workers/p2-span/new-game/assets/a.ant",
+        "sha256": "4338ba90b3301e7d504b2bcfbab2191b0356cc7515cb4a63065988074154f879",
+        "bytes": 48386
+      }
+    },
+    "original_canonical_equal": true,
+    "record100": {
+      "original": "000001000100010001000000",
+      "canonical_dos": "000001000100010001000000",
+      "native": "000001000100010001000000"
+    },
+    "record28_equal": true,
+    "old_native_vs_new_native": {
+      "differing_records": [
+        100
+      ],
+      "differing_bytes": 4
+    },
+    "remaining_native_vs_dos": {
+      "differing_records": 65,
+      "differing_bytes": 8363
+    }
+  },
+  "checkpoints": {
+    "14000": {
+      "compared_views": 980,
+      "differing_views": 34,
+      "record28_and100_raw_equal": true
+    },
+    "22000": {
+      "compared_views": 980,
+      "differing_views": 134,
+      "record28_and100_raw_equal": true
+    },
+    "40000": {
+      "compared_views": 980,
+      "differing_views": 122,
+      "record28_and100_raw_equal": true
+    },
+    "49000": {
+      "compared_views": 980,
+      "differing_views": 144,
+      "record28_and100_raw_equal": true
+    }
+  },
+  "regression": {
+    "test": "tests/test_semantic_spans.py",
+    "tests": 8,
+    "passed": true,
+    "controls": [
+      "independent 307-record census",
+      "remove either required contract",
+      "missing member/gap",
+      "undeclared consumer",
+      "missing native storage",
+      "wrong extent static assertions",
+      "removed group cannot satisfy member assertions",
+      "33 option literal reads, six dynamic write aliases, SaveRec28/100 file round-trip; split-owner negative fails DOS bytes; unconsumed final-owner bytes survive the 12-byte record100 transfer"
+    ]
+  },
+  "runtime": {
+    "save_load_passed": true,
+    "complete_saverec_reads": 307,
+    "mouse_driven_vga_passed": false,
+    "mouse_driven_save_passed": false,
+    "residual": "Native fd_55B3_299A owner is int32_t while root15D9 writes a native char* (eight bytes); S12/S13 read only the low 32 bits and pass them as a pointer. Late attach observes SIGSEGV in _font_StringWidth, source call chain through o12_384C_0B76. Startup-GDB runs pass; debugger-dependent address placement/timing remains an explanatory hypothesis. This unspanned pointer-width defect is not repaired by DOS byte adjacency.",
+    "logo_release_passed": true,
+    "logo_release_cases": 7
+  },
+  "evidence_receipts": {
+    "build/workers/p2-span/actual-save-differential.json": "7dbd10c17e5bf229d5265bfa4b47c98d13c8e3e3496b7c830606acd067f9b31a",
+    "build/workers/p2-span/span-layout-check.json": "85b38961ea11177dd43aff6ddc07941a0268c58627470d8ff12450b4463b6719",
+    "build/workers/p2-span/option-load-gdb.txt": "74355d3f25fe7c699e0eac667eb866d1be0fc46285bc6d92297ffd4d86a04573",
+    "build/workers/p2-span/attach-flow-gdb.txt": "f8114758b675b1dd3f7d93ad2feb0784b3d591b4e5a8c01220f400b9be668a62",
+    "build/workers/p2-span/load/report.json": "f76e013024891c68fc09187636d7e363bbdd4f5a50720ad0059e388745a1251a",
+    "build/workers/p2-span/vga/report.json": "204d9d85cbddc3f2145e9422f90ffb9af760843ba91e22f758f1be9d5f5e0d60",
+    "build/workers/p2-span/save/report.json": "29dee8e3e23242319be07d1df33492ea40220101531789af5d0ad5d8a0e9265a",
+    "build/workers/p2-span/new-game/acceptance.json": "f01916112468111fe8684df5e75b5fa76e2ad8f6922b2b4b021972bfb939c2bf",
+    "build/workers/p2-span/wt/build/workers/p2-span/logo/report.json": "02bda015cd2c5d10e75463a6e785ebc86fbc95b60f0a4e64ac378e1e2c52d422"
+  },
+  "implementation_commit": "fedcc4a7c888b97ee9056107df700fecc6492c6e",
+  "fault_trace_executable_sha256": "16d12110dd86432ec3ed283485e21e656eedc4500fa5361f66f1434991417121",
+  "validation": {
+    "command": "python tools/validate.py",
+    "status": "PASS",
+    "failures": [],
+    "unit_tests": "PASS; two existing skips",
+    "codegen_rules_reproduced": 50,
+    "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f",
+    "repository_guard": "PASS; zero issues",
+    "canonical_source_and_DOS_layout_unchanged": true
+  }
+}

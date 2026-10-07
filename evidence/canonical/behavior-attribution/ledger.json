@@ -24,7 +24,7 @@
     "UNATTRIBUTED"
   ],
   "counts": {
-    "PORT_INTRODUCED": 92,
+    "PORT_INTRODUCED": 93,
     "ORIGINAL": 14,
     "UNATTRIBUTED": 286,
     "RECONSTRUCTION_INTRODUCED": 1,
@@ -163,38 +163,61 @@
     },
     {
       "id": "port-audio-07A8-view",
-      "description": "Native music/effect enable reads crossed a two-byte owner instead of the reviewed 07AA owner view.",
+      "description": "Native music/effect enable reads crossed a two-byte owner instead of the reviewed07AA owner view.",
       "classification": "PORT_INTRODUCED",
       "status": "fixed",
-      "scope": "bounded contract",
+      "scope": "All 33 known canonical option literal crossings plus three dynamic menu uses and SaveRec 100, realized through canonical storage aliases.",
       "evidence": {
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/native-audio-device/review.md",
           "src/data/d3D57.c",
           "portable/canonical_native_abi/audio_shared_state_preword.py",
-          "evidence/canonical/validation/canonical-dos-acceptance.json"
+          "evidence/canonical/validation/canonical-dos-acceptance.json",
+          "evidence/canonical/native-semantic-spans/review.md"
         ],
         "commits": [
-          "ecf0be4"
+          "ecf0be4",
+          "fedcc4a7c888b97ee9056107df700fecc6492c6e"
         ],
         "original_exe": {
           "path": "assets/SIMANT.EXE",
           "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
-          "observation": "STATIC: original far frame 3D57 places 07AA immediately after 07A8, so word indices 1/2 read the music/effect owner; original audio trace confirms its bounded output."
+          "observation": "STATIC: original far frame3D57 places07AA immediately after07A8, so word indices1/2 read the music/effect owner; original audio trace confirms its bounded output."
         },
         "canonical_dos": {
           "path": "build/current/dos/link/SOURCE.EXE",
           "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
-          "observation": "Reviewed canonical aliases and original/canonical Sound Mode 6 port sequences preserve these flag reads."
+          "observation": "Reviewed canonical aliases and original/canonical Sound Mode6 port sequences preserve these flag reads."
         },
         "native": {
-          "observation": "ecf0be4 maps these two reads mechanically to fd_3D57_07AA at offsets 0/2; no added owner or initializer."
+          "observation": "New native actual SaveRec 100 matches both DOS saves in all 12 bytes; old/new native actual files differ only at record 100/four bytes. Initial option view and all 33 compiled literal access controls now match the DOS vector; six dynamic write aliases and block round trips pass.",
+          "executable_sha256": "e34b939aa40dca38a77ad81e6b1c0e31e34e3e37665bf4dfc075721b0758df52"
         }
       },
       "related_items": [
         "save-record-100-raw-layout"
-      ]
+      ],
+      "defect_class": "NATIVE_LAYOUT_ADJACENCY",
+      "resolution": {
+        "mechanism": "Declarative complete-owner DOS spans, packed native storage groups and exported canonical offset aliases; no per-access rewrites.",
+        "contract": "portable/semantic-spans.json",
+        "proof": "evidence/canonical/native-semantic-spans/proof.json",
+        "source_proof": "BYTE_EXACT canonical C/data; S14 layout-inferred declaration context is separately tagged.",
+        "regression": "tests/test_semantic_spans.py",
+        "sibling_census": {
+          "literal_crossings": 33,
+          "non_audio_siblings": 29,
+          "dynamic_option_uses": 3,
+          "cross_owner_SaveRec": [
+            28,
+            100
+          ]
+        },
+        "supersedes": "m00DF per-site audio.py word views; function and builder call removed",
+        "limitation": "Only the scoped layout mechanism is closed; broader saved-state differences and native pointer-owner width fault remain open.",
+        "fix_commit": "fedcc4a7c888b97ee9056107df700fecc6492c6e"
+      }
     },
     {
       "id": "port-s00-436-byte-extent",
@@ -1788,9 +1811,9 @@
     },
     {
       "id": "save-record-100-raw-layout",
-      "description": "Raw native SaveRec100 reads12 bytes contiguously across nonadjacent host flag owners.",
+      "description": "Raw native SaveRec 100 reads12 bytes contiguously across nonadjacent host flag owners.",
       "classification": "PORT_INTRODUCED",
-      "status": "open",
+      "status": "fixed",
       "scope": "actual native file serialization, not only a raw observer candidate",
       "evidence": {
         "level": "PROVEN",
@@ -1800,9 +1823,12 @@
           "src/S09/m35F5.c",
           "src/data/d3D57.c",
           "evidence/canonical/behavior-attribution/observations.json",
-          "evidence/canonical/behavior-attribution/observations.json"
+          "evidence/canonical/behavior-attribution/observations.json",
+          "evidence/canonical/native-semantic-spans/review.md"
         ],
-        "commits": [],
+        "commits": [
+          "fedcc4a7c888b97ee9056107df700fecc6492c6e"
+        ],
         "original_exe": {
           "path": "assets/SIMANT.EXE",
           "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
@@ -1814,20 +1840,41 @@
           "observation": "Both DOS saved files have identical307-record bytes. Native replay input operations match; short-path native SaveGame succeeds but serializes different state/bytes."
         },
         "native": {
-          "observation": "Actual short-path native a.ant confirms record100 differences at offsets2/4/6/8. Named initialized flags remain1 but07AA is not07A8+2; SaveGame writes12 consecutive bytes from07A8."
+          "observation": "New native actual SaveRec 100 matches both DOS saves in all 12 bytes; old/new native actual files differ only at record 100/four bytes. Initial option view and all 33 compiled literal access controls now match the DOS vector; six dynamic write aliases and block round trips pass.",
+          "executable_sha256": "e34b939aa40dca38a77ad81e6b1c0e31e34e3e37665bf4dfc075721b0758df52"
         }
       },
       "related_items": [
         "port-audio-07A8-view"
       ],
-      "next_experiment": "Compare original/canonical virtual record100 in paired14s dumps and the native raw/projected candidates; then obtain an actual native SaveGame file using valid short DOS paths and compare all12 serialized bytes.",
       "actual_save_observation": {
         "record": 100,
         "name": "fd_3D57_07A8",
         "bytes": 12,
-        "differing_bytes": 4
+        "differing_bytes": 0,
+        "resolved_previous_differing_bytes": 4
       },
-      "attributed_observation_scope": "actual new-game short-path SaveGame file; later equal-time projected checkpoints remain independently diagnostic"
+      "attributed_observation_scope": "actual new-game short-path SaveGame file; later equal-time projected checkpoints remain independently diagnostic",
+      "defect_class": "NATIVE_LAYOUT_ADJACENCY",
+      "resolution": {
+        "mechanism": "Declarative complete-owner DOS spans, packed native storage groups and exported canonical offset aliases; no per-access rewrites.",
+        "contract": "portable/semantic-spans.json",
+        "proof": "evidence/canonical/native-semantic-spans/proof.json",
+        "source_proof": "BYTE_EXACT canonical C/data; S14 layout-inferred declaration context is separately tagged.",
+        "regression": "tests/test_semantic_spans.py",
+        "sibling_census": {
+          "literal_crossings": 33,
+          "non_audio_siblings": 29,
+          "dynamic_option_uses": 3,
+          "cross_owner_SaveRec": [
+            28,
+            100
+          ]
+        },
+        "supersedes": "m00DF per-site audio.py word views; function and builder call removed",
+        "limitation": "Only the scoped layout mechanism is closed; broader saved-state differences and native pointer-owner width fault remain open.",
+        "fix_commit": "fedcc4a7c888b97ee9056107df700fecc6492c6e"
+      }
     },
     {
       "id": "save-record-113",
@@ -17997,6 +18044,49 @@
         "startup-consumed-void-return"
       ],
       "decisive_experiment": "Locate every S13 long handle store/use for MakeBalloon and f_24AB_0002 with the front-end call census; run matching original/canonical/native balloon activation and cleanup with pointer/storage watches, including native allocation above4GiB. Compare the first dereference or observer before choosing mechanical pointer-handle lowering."
+    },
+    {
+      "id": "port-diagnostic-message-pointer-width",
+      "description": "Native diagnostic string owner is four bytes while its pointer writer uses eight; S12/S13 then pass a truncated address to font text measurement.",
+      "classification": "PORT_INTRODUCED",
+      "status": "open",
+      "defect_class": "NATIVE_POINTER_OWNER_WIDTH",
+      "scope": "PROVEN static 32-bit DOS views versus incompatible 64/32-bit native views; OBSERVED bounded native wall-clock SIGSEGV. No complete original/canonical same-step mouse replay claim.",
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "src/root/m15D9.c",
+          "src/S12/m384C.c",
+          "src/S13/m384C.c",
+          "evidence/canonical/native-semantic-spans/review.md"
+        ],
+        "commits": [],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "The byte-exact root15D9 pointer writer and S12 long owner/reader use equal 32-bit DOS representations; original instructions are independently constrained by their byte-exact claims."
+        },
+        "canonical_dos": {
+          "path": "build/current/dos/link/SOURCE.EXE",
+          "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+          "observation": "Same unchanged byte-exact scopes; canonical long and far pointer widths are both four bytes. The closed DOS oracle remains unchanged."
+        },
+        "native": {
+          "executable_sha256": "16d12110dd86432ec3ed283485e21e656eedc4500fa5361f66f1434991417121",
+          "observation": "Generated S12 owner int32_t versus root15D9 char* writer (eight bytes). Repeated plain mouse VGA/Save access violations; late attach observes bad string 0xa7196054 at _font_StringWidth through o12_384C_0B76. Startup GDB VGA and bounded Save/Load can pass."
+        }
+      },
+      "origin": {
+        "owner": "fd_55B3_299A",
+        "definition": "src/S12/m384C.c:29",
+        "writer": "src/root/m15D9.c:65",
+        "consumer": "src/S12/m384C.c:564",
+        "proof": "BYTE_EXACT"
+      },
+      "related_items": [
+        "native-integer-expressions"
+      ],
+      "next_experiment": "Reconcile pointer-valued defining owners with every native declaration/writer class; include source-grounded type/domain evidence and a native address-above 4 GiB negative control. Rerun mouse-driven VGA/Save and actual DOS/native replay without startup debugger masking."
     }
   ]
 }
