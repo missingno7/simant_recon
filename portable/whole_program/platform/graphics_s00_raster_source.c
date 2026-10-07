@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define S00_PATTERN_TRANSFER_ROWS 64u
+#define S00_PATTERN_TRANSFER_ROW_BYTES 2u
+
 extern char g_3D20[128];
 
 static uint16_t read_u16(const uint8_t *p)
@@ -232,10 +235,15 @@ SimS00RasterStatus sim_s00_raster_pattern_transfer(
         (width & 7u) != 0)
         return SIM_S00_RASTER_UNSUPPORTED_DOMAIN;
     stride = width >> 3;
-    if (!checked_extent(0, 63u * stride + 2u, &last) || last > destination_size)
+    if (!checked_extent(0,
+                        (S00_PATTERN_TRANSFER_ROWS - 1u) * stride +
+                            S00_PATTERN_TRANSFER_ROW_BYTES,
+                        &last) || last > destination_size)
         return SIM_S00_RASTER_BUFFER_TOO_SMALL;
-    for (row = 0; row < 64u; ++row)
-        memcpy(destination + (size_t)row * stride, pattern + row * 2u, 2u);
+    for (row = 0; row < S00_PATTERN_TRANSFER_ROWS; ++row)
+        memcpy(destination + (size_t)row * stride,
+               pattern + row * S00_PATTERN_TRANSFER_ROW_BYTES,
+               S00_PATTERN_TRANSFER_ROW_BYTES);
     return SIM_S00_RASTER_OK;
 }
 
@@ -312,7 +320,8 @@ void o00_35A6_0406(void *destination_arg, int16_t width)
     if (destination == NULL || width <= 0)
         abort();
     stride = ((size_t)(uint16_t)width) >> 3;
-    destination_size = 31u * stride + 2u;
+    destination_size = (S00_PATTERN_TRANSFER_ROWS - 1u) * stride +
+                       S00_PATTERN_TRANSFER_ROW_BYTES;
     status = sim_s00_raster_pattern_transfer((const uint8_t *)g_3D20,
                                              destination,
                                              destination_size,
