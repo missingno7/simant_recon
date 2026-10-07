@@ -4,12 +4,12 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "../types/fonts.h"
+#include "canonical_graphics_data.h"
 
 /* Native safe owner for the shared glyph bitmap. The frozen source declares
  * g_5ABE as 1040 bytes while font_MakeImage clears 1280; the native span keeps
  * the required clear and bounded supported glyph rows inside owned storage. */
 #define SIM_FONT_BITMAP_CAPACITY 1280u
-extern char g_5ABE[SIM_FONT_BITMAP_CAPACITY];
 extern struct Bitmap fd_50F6_392C;
 extern int16_t fd_55B3_6770; /* source bytes per glyph row */
 extern int16_t fd_55B3_6772; /* destination bytes per bitmap row */

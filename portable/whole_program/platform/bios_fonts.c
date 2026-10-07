@@ -25,13 +25,13 @@ PortableBiosFontsStatus portable_bios_font_provider_init(
 
 #define BIOS_FONT8_BYTES 2048u
 #define BIOS_FONT14_BYTES 3584u
-#define BIOS_PROVIDER_ID "DOSBox Staging/v0.83.0/7b40053b7ac580843d0461eba8c36a47a990e66c"
-#define BIOS_MANIFEST_SHA256 "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
-#define BIOS_FONT8_SHA256 "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319"
-#define BIOS_FONT14_SHA256 "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1"
+#define BIOS_PROVIDER_ID "DOSBox-X/v2026.08.31/C0000-capture-0e5c2f9"
+#define BIOS_MANIFEST_SHA256 "1089b9535b8f053739e6ace4111dee062b385b67444cac559adbd8717c2cf20d"
+#define BIOS_FONT8_SHA256 "637bb841600ab50977197f81e27092037bc88e7a1a601cffaec286fcd18d9619"
+#define BIOS_FONT14_SHA256 "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d"
 
 static const char default_directory[] =
-    "build/bios-reference/dosbox-staging-v0.83.0";
+    "build/bios-reference/dosbox-x-v2026.08.31";
 
 static void set_error(PortableBiosFonts *fonts, const char *message)
 {

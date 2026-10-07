@@ -177,7 +177,7 @@ def three_way_checkpoint(native,original_dump,canonical_dump,addresses,specs,raw
                         osave[offset:offset+length],csave[offset:offset+length],raw_save[offset:offset+length]))
     return row
 
-def inventory(project=ROOT, oracle_root=ROOT, dos_report=None):
+def inventory(project=ROOT, oracle_root=ROOT, dos_report=None, native_build=None):
     if len({sha(p/'src/program.json') for p in (project,oracle_root,ROOT)})!=1:
         raise ValueError('canonical program inventories differ; no cross-generation observation')
     program = json.loads((project/'src/program.json').read_text())
@@ -207,6 +207,20 @@ def inventory(project=ROOT, oracle_root=ROOT, dos_report=None):
             if alias.get('view',{}).get('DOS_view_extent_bytes') is not None:
                 item['bytes']=alias['view']['DOS_view_extent_bytes']
             result[name]=item
+    if native_build is not None:
+        facts_path=Path(native_build)/'asm-data-facts.json'
+        if facts_path.is_file():
+            facts=json.loads(facts_path.read_text())
+            text_owner=next((row for row in facts['numeric']
+                             if row.get('name')=='g_5ABE'),None)
+            if text_owner is not None:
+                for alias,view in (('g_5ECE','string'),('g_5F1D','terminator')):
+                    if alias in result and view in text_owner['alias_layout']:
+                        source_view=text_owner['alias_layout'][view]
+                        result[alias].update(owner='g_5ABE',offset=source_view['offset'],
+                                             bytes=source_view['count'],
+                                             native_file='canonical_asm_numeric_data.c',
+                                             address_evidence='canonical ASM g_5ABE generated interior view + typed native owner')
     return result
 
 KEYS = {'enter':'Return','space':'Space','esc':'Escape','backspace':'Backspace',
@@ -459,7 +473,7 @@ def main():
     out=args.out.resolve(); project=args.project.resolve();build=args.build.resolve()
     dos,original_dos=dos_directories(args.dos.resolve(),args.original_dos.resolve() if args.original_dos else None)
     checkpoints=scenario.get('checkpoints',[]) or [14000,22000,40000,49000]
-    specs=inventory(project,oracle_root,dos_report)
+    specs=inventory(project,oracle_root,dos_report,build)
     if not args.compare_only:
         sys.path.insert(0,str(ROOT/'tools'))
         from workspace import prepare_output

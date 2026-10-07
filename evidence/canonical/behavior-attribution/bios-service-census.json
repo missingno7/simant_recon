@@ -1,0 +1,217 @@
+{
+  "schema": "simant-bios-service-census-v1",
+  "scope": "BIOS/hardware-provided inputs read or queried by the current canonical source, compared against the pinned DOSBox-X acceptance machine and native SDL3 service boundary.",
+  "oracle": {
+    "runner": "C:/tools/dosbox-x-2026.08.31-simant-acceptance/dosbox-x-v3.exe",
+    "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+    "release": "DOSBox-X v2026.08.31",
+    "acceptance_build_commit": "0e5c2f9",
+    "canonical_dos_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+    "guest_memory": "16 MiB",
+    "keyboard_layout": "CZ / cz243",
+    "capture_event": "on_exec lin 27DF8, emulated time 4944.143 ms",
+    "rom_capture": {
+      "path": "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/c000-rom-capture.bin",
+      "sha256": "a3744eaf25671eed3c2526d53afa4451c552c795c78b8be96e2495bb3bf70b79",
+      "range": "C0000-C7FFF, 32768 bytes"
+    },
+    "bda_capture": {
+      "source": "build/workers/p2-r4/bios-service-census/dos-fonts-confirmed/exec-bda-confirmed.1.bin",
+      "sha256": "f9fd36886890aa9115ff2b1bc03aac2cc55c1fe511c17848e80ef6982073fffb",
+      "range": "0040:0000-00FF, 256 bytes"
+    }
+  },
+  "items": [
+    {
+      "id": "int10-font-8x8",
+      "source": "src/S00/m31AD.asm:_o00_31AD_166A; INT 10h AX=1130h BH=03",
+      "oracle": {
+        "pointer": "C000:01E9 (physical C01E9)",
+        "dimensions": "256 glyphs x 8 rows",
+        "sha256": "637bb841600ab50977197f81e27092037bc88e7a1a601cffaec286fcd18d9619"
+      },
+      "native": {
+        "provider": "portable/runtime/bios-reference/font-8x8.bin",
+        "sha256": "637bb841600ab50977197f81e27092037bc88e7a1a601cffaec286fcd18d9619"
+      },
+      "status": "MATCHED"
+    },
+    {
+      "id": "int10-font-8x14",
+      "source": "src/S00/m31AD.asm:_o00_31AD_168C; INT 10h AX=1130h BH=02",
+      "oracle": {
+        "pointer": "C000:09E9 (physical C09E9)",
+        "dimensions": "8x14, 256 glyphs, 3584 bytes",
+        "sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d"
+      },
+      "native": {
+        "provider": "portable/runtime/bios-reference/font-8x14.bin",
+        "sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d"
+      },
+      "status": "MATCHED",
+      "note": "The active DOSBox-X table includes the configured keyboard codepage overlay and differs from the static int10_font_14 array."
+    },
+    {
+      "id": "int10-font-8x16",
+      "source": "Possible INT 10h AX=1130h BH=06 query",
+      "oracle": "DOSBox-X VGA BIOS has an upstream 8x16 initializer; no canonical source call requests this pointer.",
+      "native": "No runtime provider table.",
+      "status": "NOT_CONSUMED",
+      "evidence": "Source-wide INT10 search finds only BH=02 and BH=03 in src/S00/m31AD.asm."
+    },
+    {
+      "id": "bda-lpt1-base",
+      "source": "src/root/m277E.c BIOS sound-device probe; 0040:0008",
+      "oracle": {
+        "value": "0x0378",
+        "meaning": "LPT1 base I/O port"
+      },
+      "native": {
+        "value": "No BDA mapping; portable/whole_program/platform/audio_native.c fails closed for physical far-memory reads.",
+        "scope": "The legacy probe is outside the supported Sound Mode 6 path; other device modes are unsupported."
+      },
+      "status": "UNOBSERVABLE_IN_SUPPORTED_PROFILE"
+    },
+    {
+      "id": "bda-equipment-word",
+      "source": "src/S09/m35F5.c:o09_35F5_03C6; byte read at 0040:0410",
+      "oracle": {
+        "word": "0x4467",
+        "read_byte": "0x67",
+        "one_floppy_test": "(0x67 & 0xC0) == 0 is false"
+      },
+      "native": {
+        "value": "The native FileSelect conversion removes this physical BDA policy. On the pinned oracle profile the one-floppy result is false, so the source's B-to-A rewrite does not occur; the native path has the same branch outcome."
+      },
+      "status": "SAME_EFFECT_FOR_PINNED_PROFILE",
+      "limits": "No raw native equipment-word view is exposed. Other DOS equipment profiles and physical drive behavior remain outside this comparison."
+    },
+    {
+      "id": "bda-conventional-memory",
+      "source": "BDA 0040:0413 / INT 12h",
+      "oracle": {
+        "value": "0x0280 paragraphs (640 KiB)"
+      },
+      "native": "No BDA or INT 12h memory-size service.",
+      "status": "NOT_CONSUMED",
+      "evidence": "No canonical INT 12h call or source read of 0040:0413."
+    },
+    {
+      "id": "bda-keyboard-flags",
+      "source": "src/root/m1B73.asm; src/root/m1F58.asm; src/root/m015B.c; src/S12/m384C.c; 0040:0417",
+      "oracle": {
+        "startup_value": "0x20 (NumLock set)"
+      },
+      "native": {
+        "startup_value": "0x20",
+        "implementation": "portable/whole_program/platform/sdl3/input_time_host.c initializes the logical BDA flag byte from PORTABLE_INPUT_TIME_HOST_NUMLOCK_MASK."
+      },
+      "status": "MATCHED_AT_STARTUP"
+    },
+    {
+      "id": "bda-keyboard-flags-2",
+      "source": "BDA 0040:0418",
+      "oracle": {
+        "startup_value": "0x00"
+      },
+      "native": {
+        "startup_value": "0x00",
+        "implementation": "input_time_host_init_common zeroes bios_keyboard_flags_hi."
+      },
+      "status": "MATCHED_AT_STARTUP",
+      "limits": "Subsequent SDL key events update the logical modifier/lock view; no full physical BIOS keyboard model is claimed."
+    },
+    {
+      "id": "bda-video-mode-and-columns",
+      "source": "src/root/m1B4E.asm; src/S01/m3126.asm; BDA 0040:0449 and 0040:044A",
+      "oracle": {
+        "mode": "0x12",
+        "columns": "80",
+        "last_row_index_0040_0484": "29 (30 rows)"
+      },
+      "native": {
+        "mode": "0x12 through the supported VGA profile",
+        "profile": "640x480 pixels, 80 columns x 30 rows",
+        "implementation": "portable/whole_program/platform/native_video_profile.c and graphics mode binding; no physical BDA page is exported."
+      },
+      "status": "MATCHED_FOR_SUPPORTED_VGA_PROFILE"
+    },
+    {
+      "id": "bda-midnight-rollover",
+      "source": "BDA 0040:0470",
+      "oracle": {
+        "sample_value": "0x00"
+      },
+      "native": "No physical BDA rollover byte; no canonical source read found.",
+      "status": "NOT_CONSUMED"
+    },
+    {
+      "id": "bda-bios-ticks",
+      "source": "src/root/m0093.c; src/root/m1F58.asm; src/root/m1B73.asm; BDA 0040:046C and INT 1Ah",
+      "oracle": {
+        "at_4944_143_ms": "0x000C00A1 (786593)",
+        "at_14_s": "786759"
+      },
+      "native": {
+        "base": "same PIT cadence (1,193,182 input clocks / 65,536 per BIOS tick)",
+        "at_14_s": "786776"
+      },
+      "status": "TIMING_PHASE_DIFFERENCE_RECORDED",
+      "note": "R7 observations show a +17-tick native phase delta at 14 seconds because DOS and native startup epochs differ. Do not treat it as a static BIOS table mismatch or apply a fitted offset."
+    },
+    {
+      "id": "bda-memory-equipment-unused-fields",
+      "source": "BDA 0040:0410, 0040:0413, 0040:0417-0418, 0040:0449-044A, 0040:046C, 0040:0470, 0040:0484",
+      "oracle": "Raw snapshot values are recorded above from the 256-byte BDA dump.",
+      "native": "Only consumed values are represented through existing platform service fields; other bytes are not exposed as a full BDA image.",
+      "status": "CENSUSED"
+    },
+    {
+      "id": "vga-dac-defaults",
+      "source": "src/root/m1B4E.asm uses INT 10h AX=1002h and AX=1012h palette writes; source scan found no DAC readback at ports 3C6h-3C9h",
+      "oracle": "DOSBox-X mode-set BIOS initializes its DAC; the source subsequently writes its palette entries.",
+      "native": "SDL palette host applies the canonical palette writes to the VGA logical palette; no DAC register-read service is exposed.",
+      "status": "DEFAULTS_NOT_READ_BY_SOURCE"
+    },
+    {
+      "id": "tandy-and-vendor-rom-probes",
+      "source": "src/root/m194D.asm; src/root/m277E.c; src/root/m293A.c",
+      "oracle": "DOSBox-X source includes the Tandy/BIOS signature, INT 1Ah/15h and CMOS probe services; these are outside the selected VGA/Sound Mode 6 path.",
+      "native": "The VGA adapter service returns descriptor 0x0305; unsupported Tandy and legacy BIOS probes fail closed in platform services.",
+      "status": "UNOBSERVABLE_IN_SUPPORTED_PROFILE",
+      "limits": "Legacy video/audio profiles remain unsupported; no whole-machine emulation claim follows."
+    },
+    {
+      "id": "mouse-driver-type-version",
+      "source": "src/root/m1B73.asm:_f_1B73_0046; INT 33h AX=24h",
+      "oracle": {
+        "bx_version": "0x0700",
+        "ch_type": "4"
+      },
+      "native": {
+        "type": "4 in g_4DA4 via portable/whole_program/platform/m1b73_mouse.c",
+        "version": "No INT 33h register response; SDL adapter consumes absolute coordinates rather than Mickey-mode deltas."
+      },
+      "status": "TYPE_MATCHED_VERSION_BEHAVIOR_REMAINS_PLATFORM_LIMIT",
+      "limits": "The existing native-input-hardware-context blocker retains Mickey-mode, driver-sensitivity and asynchronous interleaving work."
+    },
+    {
+      "id": "dos-version",
+      "source": "INT 21h AH=30h",
+      "oracle": {
+        "default": "DOSBox-X source defaults to DOS 5.0 when [dos] ver is unset; the pinned runner leaves it unset."
+      },
+      "native": "No DOS kernel version service.",
+      "status": "NOT_CONSUMED",
+      "evidence": "No canonical INT 21h AH=30h version query."
+    }
+  ],
+  "font_regression": {
+    "test": "portable/tests/runtime/bios_font_regression.py",
+    "fixed_text": " File",
+    "dos_output_capture": "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/font-MakeImage-File.dos.bin",
+    "native_core": "portable/whole_program/text_bitmap.c",
+    "negative_control": "portable/tests/runtime/fixtures/bios-fonts/dosbox-staging-v0.83.0/font-8x14.bin",
+    "negative_control_different_bytes": 26
+  }
+}

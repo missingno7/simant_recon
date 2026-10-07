@@ -1,0 +1,34 @@
+{
+  "schema": "bios-font-reference-source-v1",
+  "source_identity": {
+    "project": "DOSBox Staging",
+    "repository": "https://github.com/dosbox-staging/dosbox-staging",
+    "release_tag": "v0.83.0",
+    "immutable_commit": "7b40053b7ac580843d0461eba8c36a47a990e66c",
+    "license": "GPL-2.0-or-later",
+    "license_url": "https://raw.githubusercontent.com/dosbox-staging/dosbox-staging/7b40053b7ac580843d0461eba8c36a47a990e66c/LICENSE"
+  },
+  "extraction": {
+    "source_path": "src/ints/int10_memory.cpp",
+    "source_url": "https://raw.githubusercontent.com/dosbox-staging/dosbox-staging/7b40053b7ac580843d0461eba8c36a47a990e66c/src/ints/int10_memory.cpp",
+    "arrays": {
+      "int10_font_08": {
+        "dimensions": "256 glyphs x 8 rows",
+        "bytes": 2048,
+        "sha256": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
+        "generated_path": "font-8x8.bin"
+      },
+      "int10_font_14": {
+        "dimensions": "256 glyphs x 14 rows",
+        "bytes": 3584,
+        "sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+        "generated_path": "font-8x14.bin"
+      }
+    },
+    "interpretation": "Upstream DOSBox Staging reference-host BIOS tables. Not a SIMANT asset or claim about a user's physical BIOS ROM."
+  },
+  "download_sha256": {
+    "source": "8044424619405c51b0f6a31e676e9d4b931aac5746d844d0a6fb2e955328a14e",
+    "license": "17f1201299b4984dafadcdc62ce70167ac41b6f4ac9e8d3ba1bcc05eea2982e3"
+  }
+}

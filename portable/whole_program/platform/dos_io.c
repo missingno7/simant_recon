@@ -1,4 +1,5 @@
 #include "dos_io.h"
+#include "drive_directory.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -18,8 +19,6 @@
 #define host_write _write
 #define host_close _close
 #define host_access _access
-#define host_chdir _chdir
-#define host_getcwd _getcwd
 #define host_unlink _unlink
 #define host_lseek64 _lseeki64
 #define HOST_BINARY _O_BINARY
@@ -46,8 +45,6 @@
 #define host_write write
 #define host_close close
 #define host_access access
-#define host_chdir chdir
-#define host_getcwd getcwd
 #define host_unlink unlink
 #define host_lseek64 lseek
 #define HOST_BINARY 0
@@ -91,6 +88,9 @@ static int16_t map_errno(int e)
     case EAGAIN: return 11;
     case ENOMEM: return 12;
     case EACCES: return 13;
+#ifdef ENODEV
+    case ENODEV: return 19;
+#endif
 #ifdef EFAULT
     case EFAULT: return 14;
 #endif
@@ -118,6 +118,17 @@ static int16_t map_errno(int e)
 static int16_t record_error(void)
 {
     dos_errno = map_errno(errno);
+    return -1;
+}
+
+static int resolve_source_path(const char *source_path, char *host_path,
+                               size_t capacity)
+{
+    uint16_t dos_error;
+    if (sim_drive_resolve_path(source_path, host_path, capacity, 0,
+                               &dos_error))
+        return 0;
+    errno = sim_drive_error_to_errno(dos_error);
     return -1;
 }
 
@@ -177,8 +188,11 @@ int16_t dos_open(char *path, int16_t flags, ...)
 {
     int host_flags, hfd, dfd, mode = HOST_IREAD | HOST_IWRITE;
     unsigned f = (uint16_t)flags;
+    char host_path[32768];
     if (!path) { errno = EFAULT; return record_error(); }
     if (flags_to_host(flags, &host_flags) < 0)
+        return record_error();
+    if (resolve_source_path(path, host_path, sizeof host_path) < 0)
         return record_error();
     if (f & DOS_O_CREAT) {
         int dos_mode;
@@ -195,7 +209,7 @@ int16_t dos_open(char *path, int16_t flags, ...)
             return record_error();
         }
     }
-    hfd = host_open(path, host_flags, mode);
+    hfd = host_open(host_path, host_flags, mode);
     if (hfd < 0) return record_error();
     dfd = allocate_dos_fd(hfd);
     if (dfd < 0) {
@@ -257,17 +271,25 @@ int16_t dos_close(int16_t fd)
 
 int16_t dos_access(char *path, int16_t mode)
 {
+    char host_path[32768];
     if (!path) { errno = EFAULT; return record_error(); }
     if (mode & ~7) { errno = EINVAL; return record_error(); }
-    if (host_access(path, mode) < 0) return record_error();
+    if (resolve_source_path(path, host_path, sizeof host_path) < 0)
+        return record_error();
+    if (host_access(host_path, mode) < 0) return record_error();
     dos_errno = 0;
     return 0;
 }
 
 int16_t dos_chdir(char *path)
 {
+    uint16_t dos_error;
     if (!path) { errno = EFAULT; return record_error(); }
-    if (host_chdir(path) < 0) return record_error();
+    dos_error = sim_drive_chdir(path);
+    if (dos_error) {
+        errno = sim_drive_error_to_errno(dos_error);
+        return record_error();
+    }
     dos_errno = 0;
     return 0;
 }
@@ -275,18 +297,35 @@ int16_t dos_chdir(char *path)
 char *dos_getcwd(char *buffer, int16_t size)
 {
     size_t n = size > 0 ? (size_t)(uint16_t)size : 0;
-    char *result;
+    char local[65];
+    char *result = buffer;
     if (size < 0) { errno = EINVAL; record_error(); return NULL; }
-    result = host_getcwd(buffer, n);
-    if (!result) { record_error(); return NULL; }
+    if (buffer == NULL) {
+        if (size == 0) n = sizeof local;
+        result = (char *)malloc(n);
+        if (!result) { errno = ENOMEM; record_error(); return NULL; }
+    } else if (n == 0) {
+        errno = EINVAL;
+        record_error();
+        return NULL;
+    }
+    if (!sim_drive_getcwd(0, result, n)) {
+        if (buffer == NULL) free(result);
+        errno = ERANGE;
+        record_error();
+        return NULL;
+    }
     dos_errno = 0;
     return result;
 }
 
 int16_t dos_remove(char *path)
 {
+    char host_path[32768];
     if (!path) { errno = EFAULT; return record_error(); }
-    if (host_unlink(path) < 0) return record_error();
+    if (resolve_source_path(path, host_path, sizeof host_path) < 0)
+        return record_error();
+    if (host_unlink(host_path) < 0) return record_error();
     dos_errno = 0;
     return 0;
 }
@@ -310,10 +349,15 @@ int16_t dos_stricmp(char *a, char *b)
 DosFileStream *dos_fopen(char *path, char *mode)
 {
     DosFileStream *stream;
+    char host_path[32768];
     if (!path || !mode) { errno = EFAULT; record_error(); return NULL; }
+    if (resolve_source_path(path, host_path, sizeof host_path) < 0) {
+        record_error();
+        return NULL;
+    }
     stream = (DosFileStream *)malloc(sizeof *stream);
     if (!stream) { errno = ENOMEM; record_error(); return NULL; }
-    stream->native = fopen(path, mode);
+    stream->native = fopen(host_path, mode);
     if (!stream->native) {
         int saved = errno;
         free(stream);
@@ -356,7 +400,7 @@ int16_t dos_fclose(DosFileStream *stream)
 
 int16_t dos_files_set_root(const char *path)
 {
-    if (!path || host_chdir(path) < 0) return record_error();
+    if (!sim_drive_set_root(path)) { errno = ENOENT; return record_error(); }
     dos_files_close_all();
     dos_errno = 0;
     return 0;

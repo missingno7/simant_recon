@@ -2,8 +2,10 @@
 #include <windows.h>
 
 #include "directory.h"
+#include "drive_directory.h"
 
 #include <limits.h>
+#include <stdlib.h>
 #include <string.h>
 
 #ifndef _WIN32
@@ -22,6 +24,7 @@
 #define DOS_E_TOO_MANY_FILES 4u
 #define DOS_E_ACCESS_DENIED  5u
 #define DOS_E_INVALID_HANDLE 6u
+#define DOS_E_INVALID_DRIVE  15u
 #define DOS_E_NO_MORE_FILES 18u
 #define DOS_E_FILENAME_RANGE 206u
 #define DOS_E_FILE_TOO_LARGE 223u
@@ -38,11 +41,11 @@
 #define COOKIE_BYTES 12u
 
 typedef struct SearchSlot {
-    HANDLE handle;
-    WIN32_FIND_DATAA current;
+    struct find_t *entries;
+    size_t count;
+    size_t next;
     DWORD generation;
     uint16_t attribute_mask;
-    int wildcard_pattern;
     int active;
 } SearchSlot;
 
@@ -146,6 +149,7 @@ static int msc_errno_from_dos(unsigned error)
     case DOS_E_INVALID_HANDLE: return MSC_EBADF;
     case DOS_E_FILENAME_RANGE: return MSC_EINVAL;
     case DOS_E_FILE_TOO_LARGE: return MSC_EFBIG;
+    case DOS_E_INVALID_DRIVE: return 19;
     case 87u: return MSC_EINVAL;
     default: return MSC_EIO;
     }
@@ -217,9 +221,15 @@ static int fill_result(const WIN32_FIND_DATAA *data, struct find_t *result)
 {
     DWORD attr = data->dwFileAttributes;
     uint64_t size = ((uint64_t)data->nFileSizeHigh << 32) | data->nFileSizeLow;
+    const char *visible_name = data->cFileName;
+    size_t name_length;
     uint16_t date, time;
     unsigned char dos_attr = 0;
-    if (!valid_dos_83_name(data->cFileName)) return 0;
+    if (!valid_dos_83_name(visible_name)) {
+        if (!data->cAlternateFileName[0] ||
+            !valid_dos_83_name(data->cAlternateFileName)) return 0;
+        visible_name = data->cAlternateFileName;
+    }
     if (size > INT32_MAX) return -1;
     if (!pack_timestamp(&data->ftLastWriteTime, &date, &time)) return -2;
     if (attr & FILE_ATTRIBUTE_READONLY) dos_attr |= DOS_A_RDONLY;
@@ -231,37 +241,72 @@ static int fill_result(const WIN32_FIND_DATAA *data, struct find_t *result)
     result->wr_time = time;
     result->wr_date = date;
     result->size = (int32_t)size;
-    memcpy(result->name, data->cFileName, strlen(data->cFileName) + 1);
+    name_length = strlen(visible_name);
+    if (name_length >= sizeof result->name) return 0;
+    for (size_t i = 0; i <= name_length; ++i) {
+        char ch = visible_name[i];
+        result->name[i] = ch >= 'a' && ch <= 'z' ?
+                          (char)(ch - ('a' - 'A')) : ch;
+    }
+    memset(result->reserved, 0, sizeof result->reserved);
+    if (strcmp(result->name, ".") == 0 || strcmp(result->name, "..") == 0) {
+        result->attrib = (char)DOS_A_SUBDIR;
+        result->wr_time = 0;
+        result->wr_date = 0;
+        result->size = 0;
+    }
+    return 1;
+}
+
+static int compare_results(const void *left, const void *right)
+{
+    const struct find_t *a = (const struct find_t *)left;
+    const struct find_t *b = (const struct find_t *)right;
+    int a_directory = ((unsigned char)a->attrib & DOS_A_SUBDIR) != 0;
+    int b_directory = ((unsigned char)b->attrib & DOS_A_SUBDIR) != 0;
+    if (a_directory != b_directory) return b_directory - a_directory;
+    return strcmp(a->name, b->name);
+}
+
+static int append_result(SearchSlot *slot, const WIN32_FIND_DATAA *data,
+                         int wildcard_pattern)
+{
+    struct find_t converted;
+    struct find_t *grown;
+    int status = fill_result(data, &converted);
+    if (status == 0 && wildcard_pattern) return 1;
+    if (status <= 0) return status;
+    if (slot->count == SIZE_MAX / sizeof *slot->entries) return -1;
+    grown = (struct find_t *)realloc(slot->entries,
+                         (slot->count + 1u) * sizeof *slot->entries);
+    if (!grown) return -3;
+    slot->entries = grown;
+    slot->entries[slot->count++] = converted;
     return 1;
 }
 
 static int find_next_acceptable(SearchSlot *slot, uint16_t mask,
-                                struct find_t *result, int first)
+                                struct find_t *result)
 {
-    for (;;) {
-        int converted;
-        if (!first && !FindNextFileA(slot->handle, &slot->current)) return 0;
-        first = 0;
-        if (!attributes_match(&slot->current, mask)) continue;
-        converted = fill_result(&slot->current, result);
-        if (converted < 0) {
-            SetLastError(converted == -1 ? ERROR_FILE_TOO_LARGE : ERROR_INVALID_DATA);
-            return -1;
-        }
-        if (converted == 0) {
-            if (slot->wildcard_pattern) continue;
-            SetLastError(ERROR_FILENAME_EXCED_RANGE);
-            return -1;
-        }
+    while (slot->next < slot->count) {
+        const struct find_t *candidate = &slot->entries[slot->next++];
+        if (((unsigned char)candidate->attrib &
+             (DOS_A_HIDDEN | DOS_A_SYSTEM | DOS_A_SUBDIR)) &
+            (uint16_t)~mask)
+            continue;
+        *result = *candidate;
         return 1;
     }
+    return 0;
 }
 
 static void release_slot(unsigned index)
 {
     if (slots[index].active) {
-        FindClose(slots[index].handle);
-        slots[index].handle = INVALID_HANDLE_VALUE;
+        free(slots[index].entries);
+        slots[index].entries = NULL;
+        slots[index].count = 0;
+        slots[index].next = 0;
         slots[index].active = 0;
     }
 }
@@ -281,13 +326,19 @@ uint16_t _dos_findfirst(const char *pattern, uint16_t attributes,
 {
     WIN32_FIND_DATAA data;
     HANDLE handle;
+    char host_pattern[32768];
+    uint16_t path_error;
     unsigned index;
-    int found;
+    int found = 0;
+    int wildcard_pattern;
     if (result == NULL || pattern == NULL || *pattern == 0)
         return (uint16_t)set_error(87u);
     dos_findclose(result);
     clear_cookie(result);
-    handle = FindFirstFileA(pattern, &data);
+    if (!sim_drive_resolve_path(pattern, host_pattern, sizeof host_pattern,
+                                1, &path_error))
+        return (uint16_t)set_error(path_error);
+    handle = FindFirstFileA(host_pattern, &data);
     if (handle == INVALID_HANDLE_VALUE)
         return (uint16_t)set_error(dos_error_from_win32(GetLastError()));
     for (index = 0; index < SEARCH_SLOTS; ++index)
@@ -296,21 +347,46 @@ uint16_t _dos_findfirst(const char *pattern, uint16_t attributes,
         FindClose(handle);
         return (uint16_t)set_error(DOS_E_TOO_MANY_FILES);
     }
-    slots[index].handle = handle;
-    slots[index].current = data;
+    memset(&slots[index], 0, sizeof slots[index]);
+    wildcard_pattern = (strchr(pattern, '*') != NULL ||
+                        strchr(pattern, '?') != NULL);
+    do {
+        if (attributes_match(&data, attributes)) {
+            int appended = append_result(&slots[index], &data, wildcard_pattern);
+            if (appended <= 0) {
+                FindClose(handle);
+                free(slots[index].entries);
+                memset(&slots[index], 0, sizeof slots[index]);
+                return (uint16_t)set_error(appended == -3 ? 8u :
+                    appended == -1 ? DOS_E_FILE_TOO_LARGE : DOS_E_FILENAME_RANGE);
+            }
+        }
+    } while (FindNextFileA(handle, &data));
+    {
+        DWORD enumeration_error = GetLastError();
+        FindClose(handle);
+        if (enumeration_error != ERROR_NO_MORE_FILES) {
+            free(slots[index].entries);
+            memset(&slots[index], 0, sizeof slots[index]);
+            return (uint16_t)set_error(dos_error_from_win32(enumeration_error));
+        }
+    }
+    if (slots[index].count == 0) {
+        free(slots[index].entries);
+        memset(&slots[index], 0, sizeof slots[index]);
+        return (uint16_t)set_error(DOS_E_FILE_NOT_FOUND);
+    }
+    qsort(slots[index].entries, slots[index].count,
+          sizeof *slots[index].entries, compare_results);
     slots[index].attribute_mask = attributes;
-    slots[index].wildcard_pattern = (strchr(pattern, '*') != NULL ||
-                                     strchr(pattern, '?') != NULL);
     slots[index].active = 1;
     slots[index].generation = next_generation++;
     if (slots[index].generation == 0) slots[index].generation = next_generation++;
-    found = find_next_acceptable(&slots[index], attributes, result, 1);
+    found = find_next_acceptable(&slots[index], attributes, result);
     if (found <= 0) {
-        DWORD win_error = GetLastError();
         release_slot(index);
         clear_cookie(result);
-        return (uint16_t)set_error(found == 0 ? DOS_E_FILE_NOT_FOUND :
-                                    dos_error_from_win32(win_error));
+        return (uint16_t)set_error(DOS_E_FILE_NOT_FOUND);
     }
     write_cookie(result, index, slots[index].generation);
     dos_errno = 0;
@@ -327,16 +403,15 @@ uint16_t _dos_findnext(struct find_t *result)
         return (uint16_t)set_error(DOS_E_INVALID_HANDLE);
     }
     found = find_next_acceptable(&slots[index], slots[index].attribute_mask,
-                                 result, 0);
+                                 result);
     if (found > 0) {
+        write_cookie(result, index, generation);
         dos_errno = 0;
         return 0;
     }
     {
-        DWORD error = GetLastError();
         release_slot(index);
         clear_cookie(result);
-        return (uint16_t)set_error(found == 0 ? DOS_E_NO_MORE_FILES :
-                                    dos_error_from_win32(error));
+        return (uint16_t)set_error(DOS_E_NO_MORE_FILES);
     }
 }

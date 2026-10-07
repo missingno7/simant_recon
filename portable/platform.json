@@ -237,7 +237,7 @@
       "status": "OPEN",
       "gate": "SEMANTIC/PORT-BLOCKING",
       "module": "S09 FileSelect",
-      "detail": "Native removes physical BIOS one-floppy B-to-A remapping and uses host drive resolution. Current Windows drive tests validate path services, but no DOS/native physical device-domain comparison or complete caller policy has been accepted."
+      "detail": "The host assets directory is now private behind virtual DOS C:. Guest drive/CWD, 8.3 path, separator, directory-name and DOS error views no longer expose host namespace values. The SDL3 provider has no physical BIOS floppy topology, so the original one-floppy B-to-A remapping remains outside its supported C-only drive domain."
     }
   ],
   "source_inventory": "src/program.json",

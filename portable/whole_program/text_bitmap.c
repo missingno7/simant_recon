@@ -2,11 +2,6 @@
 
 #include <string.h>
 
-static uint16_t wrap_add_i16(uint16_t left, uint16_t right)
-{
-    return (uint16_t)(left + right);
-}
-
 static size_t text_length_at_most_80(const uint8_t *text, size_t size,
                                      int *terminated)
 {
@@ -33,7 +28,7 @@ static uint8_t fold_character(const PortableTextBitmapInput *input,
 
 PortableTextBitmapStatus portable_text_bitmap_prepare(
     const PortableTextBitmapInput *input,
-    PortableTextBitmapState *state,
+    PortableTextBitmapOwnerView *owners,
     PortableTextBitmapResult *result)
 {
     size_t source_length;
@@ -45,8 +40,14 @@ PortableTextBitmapStatus portable_text_bitmap_prepare(
     uint8_t character_width;
     int terminated;
 
-    if (input == NULL || state == NULL || result == NULL ||
+    if (input == NULL || owners == NULL || result == NULL ||
         input->text == NULL || input->text_size == 0)
+        return PORTABLE_TEXT_BITMAP_INVALID_ARGUMENT;
+    if (owners->width == NULL || owners->height == NULL ||
+        owners->pixels == NULL || owners->copied_text == NULL ||
+        owners->copied_text_terminator == NULL ||
+        owners->pixels_capacity < PORTABLE_TEXT_BITMAP_CAPACITY ||
+        owners->copied_text_capacity < 79u)
         return PORTABLE_TEXT_BITMAP_INVALID_ARGUMENT;
 
     memset(result, 0, sizeof(*result));
@@ -58,14 +59,14 @@ PortableTextBitmapStatus portable_text_bitmap_prepare(
     }
 
     /* Source assigns g5ABC before checking for an empty string. */
-    state->height = input->cell_height;
+    *owners->height = input->cell_height;
     source_length = text_length_at_most_80(input->text, input->text_size,
                                            &terminated);
     if (!terminated && source_length < PORTABLE_TEXT_BITMAP_TEXT_CAPACITY)
         return PORTABLE_TEXT_BITMAP_UNTERMINATED_TEXT;
     copy_length = source_length < 79u ? source_length : 79u;
     if (source_length == 0) {
-        state->copied_text[0] = 0;
+        owners->copied_text[0] = 0;
         result->draw_kind = PORTABLE_TEXT_BITMAP_NO_DRAW;
         result->copied_characters = 0;
         return PORTABLE_TEXT_BITMAP_OK;
@@ -92,14 +93,14 @@ PortableTextBitmapStatus portable_text_bitmap_prepare(
     width = (uint16_t)((uint16_t)character_width * (uint16_t)copy_length);
     stride = ((size_t)width + 7u) >> 3;
     required = stride * input->glyph_height;
-    if (required > PORTABLE_TEXT_BITMAP_CAPACITY)
+    if (required > owners->pixels_capacity)
         return PORTABLE_TEXT_BITMAP_BUFFER_TOO_SMALL;
 
-    state->width = width;
-    memcpy(state->copied_text, input->text, copy_length);
-    if (copy_length < 79u) state->copied_text[copy_length] = 0;
+    *owners->width = width;
+    memcpy(owners->copied_text, input->text, copy_length);
+    if (copy_length < 79u) owners->copied_text[copy_length] = 0;
     /* The DOS copy terminator at byte 79 is also the separate g5F1D byte. */
-    state->copied_text_terminator = 0;
+    *owners->copied_text_terminator = 0;
     result->draw_kind = PORTABLE_TEXT_BITMAP_DRAW_BITMAP;
     result->copied_characters = copy_length;
     result->drawn_width = width;
@@ -112,7 +113,7 @@ PortableTextBitmapStatus portable_text_bitmap_prepare(
             size_t glyph_offset = (size_t)character * input->glyph_height;
             size_t row;
             for (row = 0; row < input->glyph_height; ++row)
-                state->pixels[row * stride + i] =
+                owners->pixels[row * stride + i] =
                     input->glyph_rows[glyph_offset + row];
         }
     } else {
@@ -125,7 +126,7 @@ PortableTextBitmapStatus portable_text_bitmap_prepare(
             size_t row;
             for (row = 0; row < input->glyph_height; ++row) {
                 size_t pixel = row * stride + pair;
-                state->pixels[pixel] =
+                owners->pixels[pixel] =
                     (uint8_t)(input->glyph_rows[left_offset + row] & 0xf0u);
             }
             if (first + 1u < copy_length) {
@@ -133,14 +134,12 @@ PortableTextBitmapStatus portable_text_bitmap_prepare(
                 size_t right_offset = (size_t)right * input->glyph_height;
                 for (row = 0; row < input->glyph_height; ++row) {
                     size_t pixel = row * stride + pair;
-                    state->pixels[pixel] |= (uint8_t)(
+                owners->pixels[pixel] |= (uint8_t)(
                         input->glyph_rows[right_offset + row] >> 4);
                 }
             }
         }
     }
 
-    state->pen_x = wrap_add_i16((uint16_t)input->x, width);
-    state->pen_y = (uint16_t)input->y;
     return PORTABLE_TEXT_BITMAP_OK;
 }

@@ -12,15 +12,7 @@ static struct {
     const uint8_t *fold_window;
     size_t fold_window_size;
     PortableTextBitmapStatus status;
-    PortableTextBitmapState state;
-    uint8_t bitmap[4u + PORTABLE_TEXT_BITMAP_CAPACITY];
 } source_bridge;
-
-static void write_word(uint8_t *destination, uint16_t value)
-{
-    destination[0] = (uint8_t)value;
-    destination[1] = (uint8_t)(value >> 8);
-}
 
 static PortableTextBitmapStatus convert_graphics_status(SimGraphicsStatus status)
 {
@@ -70,17 +62,13 @@ PortableTextBitmapStatus portable_text_bitmap_source_status(void)
     return source_bridge.status;
 }
 
-const PortableTextBitmapState *portable_text_bitmap_source_state(void)
-{
-    return &source_bridge.state;
-}
-
 void f_1FBD_0000(int16_t x, int16_t y, char *text)
 {
     SimGraphicsDriver *graphics;
     uint8_t bounded_text[PORTABLE_TEXT_BITMAP_TEXT_CAPACITY];
     size_t text_size = 0;
     PortableTextBitmapInput input;
+    PortableTextBitmapOwnerView owners;
     PortableTextBitmapResult result;
     PortableTextBitmapStatus status;
     SimGraphicsStatus graphics_status;
@@ -117,7 +105,14 @@ void f_1FBD_0000(int16_t x, int16_t y, char *text)
     input.text_size = text_size;
     input.x = x;
     input.y = y;
-    status = portable_text_bitmap_prepare(&input, &source_bridge.state, &result);
+    owners.width = &g_5ABA;
+    owners.height = &g_5ABC;
+    owners.pixels = CANONICAL_TEXT_BITMAP_PIXELS;
+    owners.pixels_capacity = sizeof(CANONICAL_TEXT_BITMAP_PIXELS);
+    owners.copied_text = CANONICAL_TEXT_BITMAP_STRING;
+    owners.copied_text_capacity = sizeof(CANONICAL_TEXT_BITMAP_STRING);
+    owners.copied_text_terminator = CANONICAL_TEXT_BITMAP_TERMINATOR;
+    status = portable_text_bitmap_prepare(&input, &owners, &result);
     if (status != PORTABLE_TEXT_BITMAP_OK) {
         source_bridge.status = status;
         return;
@@ -137,22 +132,18 @@ void f_1FBD_0000(int16_t x, int16_t y, char *text)
         source_bridge.status = PORTABLE_TEXT_BITMAP_UNSUPPORTED_FONT;
         return;
     }
-    write_word(source_bridge.bitmap, result.drawn_width);
-    write_word(source_bridge.bitmap + 2, result.drawn_height);
-    memcpy(source_bridge.bitmap + 4, source_bridge.state.pixels,
-           sizeof(source_bridge.state.pixels));
     /* Match the source f_1B4E_005E boundary: it reads the two-word bitmap
      * header, then advances the far pointer by four bytes before calling
-     * g_9154(x, y, pixels, width, height).  This bridge already passes the
-     * dimensions explicitly, so g_9154 must receive the pixel payload. */
-    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11])(x, y, (char *)(source_bridge.bitmap + 4),
+     * g_9154(x, y, pixels, width, height). Dimensions are explicit here, and
+     * the payload pointer is the canonical g_5ABE owner itself. */
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11])(x, y, (char *)owners.pixels,
            (int16_t)result.drawn_width, (int16_t)result.drawn_height);
     graphics_status = sim_graphics_source_last_status();
     if (graphics_status != SIM_GRAPHICS_OK) {
         source_bridge.status = convert_graphics_status(graphics_status);
         return;
     }
-    g_3DA0.x = (int16_t)source_bridge.state.pen_x;
-    g_3DA0.y = (int16_t)source_bridge.state.pen_y;
+    g_3DA0.x = (int16_t)(uint16_t)((uint16_t)x + result.drawn_width);
+    g_3DA0.y = y;
     source_bridge.status = PORTABLE_TEXT_BITMAP_OK;
 }

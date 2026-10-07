@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 
@@ -41,11 +42,15 @@ def main() -> int:
     prepare_output(out,ROOT/'build/current/tests/dos-io',ROOT)
     case_root = out / "fs"
     (case_root / "SubDir").mkdir(parents=True)
+    for index in range(1, 5):
+        shutil.copy2(ROOT / f"assets/FONT{index}", case_root / f"FONT{index}")
 
     gcc = Path(args.gcc).resolve()
     sources = [
         "portable/whole_program/platform/dos_io.h",
         "portable/whole_program/platform/dos_io.c",
+        "portable/whole_program/platform/drive_directory.h",
+        "portable/whole_program/platform/drive_directory.c",
         "portable/whole_program/platform/README.md",
         "portable/whole_program/platform/dos_files.h",
         "portable/whole_program/platform/tests/dos_io_test.c",
@@ -72,6 +77,7 @@ def main() -> int:
     command = [str(gcc), "-std=c11", "-Wall", "-Wextra", "-Werror", "-O0",
                "-I", str(ROOT / "portable/whole_program/platform"),
                str(ROOT / "portable/whole_program/platform/dos_io.c"),
+               str(ROOT / "portable/whole_program/platform/drive_directory.c"),
                str(ROOT / "portable/whole_program/platform/tests/dos_io_test.c"),
                "-o", str(exe)]
     compiled = subprocess.run(command, capture_output=True, text=True)
@@ -80,9 +86,9 @@ def main() -> int:
     if compiled.returncode:
         raise SystemExit(f"native wrapper test compile failed ({compiled.returncode})")
     asset_args = []
-    for item in assets:
+    for index, item in enumerate(assets, 1):
         path = ROOT / item
-        asset_args.extend([str(path), str(path.stat().st_size)])
+        asset_args.extend([f"C:\\FONT{index}", str(path.stat().st_size)])
     run = subprocess.run([str(exe), str(case_root), *asset_args], capture_output=True,
                          text=True)
     (out / "run.stdout.txt").write_text(run.stdout, encoding="utf-8")

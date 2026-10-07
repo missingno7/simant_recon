@@ -273,7 +273,7 @@ def emit_numeric(facts):
     by_source = {f['source']:f for f in facts}
     result = ['/* Generated from accepted canonical symbolic ASM declarations. */',
               '#include <stdint.h>', '#include <stddef.h>',
-              'typedef struct CanonicalAsmPoint { int16_t x, y; } CanonicalAsmPoint;', '']
+              '#include "canonical_graphics_data.h"', '']
     receipt = []
     def emit(source, name, ctype, count=1, initializer=None, source_width=None):
         f = by_source[source]; label = '_' + name
@@ -322,10 +322,41 @@ def emit_numeric(facts):
     emit(ems,'fd_55B3_3612','int16_t'); emit(ems,'fd_55B3_3614','int16_t')
     for name in ['fd_55B3_6770','fd_55B3_6772']:emit('src/root/m2650.asm',name,'int16_t')
     emit('src/S02/m3126.asm','g_21A4','uint16_t')
-    bitmap, lines=byte_range(by_source['src/root/m1FBD.asm'],'_DATA','_g_5ABE',1280)
+    text_source='src/root/m1FBD.asm'
+    text_facts=by_source[text_source]
+    text_data=text_facts['segments']['_DATA']
+    text_labels=text_data['labels']
+    text_start=text_labels['_g_5ABE']['offset']
+    text_end=text_start+1280
+    pixel_count=text_labels['_g_5ECE']['offset']-text_start
+    string_count=text_labels['_g_5F1D']['offset']-text_labels['_g_5ECE']['offset']
+    terminator=next(d for d in text_data['directives']
+                    if d['offset']==text_labels['_g_5F1D']['offset'])
+    if terminator['width']!=1 or len(terminator['values'])!=1:
+        raise ValueError('g_5F1D source terminator shape differs')
+    tail_count=text_end-(terminator['offset']+terminator['width'])
+    if (text_labels['_g_5ABC']['offset']!=text_labels['_g_5ABA']['offset']+2 or
+        text_start!=text_labels['_g_5ABA']['offset']+4 or
+        pixel_count!=1040 or string_count!=79 or tail_count!=160):
+        raise ValueError('canonical text owner/alias layout differs from the reviewed ASM span')
+    bitmap, lines=byte_range(text_facts,'_DATA','_g_5ABE',text_end-text_start)
     if any(bitmap):raise ValueError('bitmap source group has nonzero initializer')
-    result.append('char g_5ABE[1280] = {0}; /* actual 1040 + 79 + 1 + 160 contiguous zero-byte directives */')
-    receipt.append({'name':'g_5ABE','source':'src/root/m1FBD.asm','source_lines':lines,'count':1280,'view':'whole clear/write span groups g_5ABE[1040],g_5ECE[79],g_5F1D[1],anonymous[160]; no storage guessed'})
+    width_values,width_lines=words(text_facts,'_DATA','_g_5ABA',1,2)
+    height_values,height_lines=words(text_facts,'_DATA','_g_5ABC',1,2)
+    result.append(f'uint16_t g_5ABA = {hex(width_values[0])}; /* canonical source line {width_lines[0]} */')
+    result.append(f'uint16_t g_5ABC = {hex(height_values[0])}; /* canonical source line {height_lines[0]} */')
+    result.append('CanonicalTextBitmapStorage g_5ABE = {0}; /* one 1280-byte clear span with exact ASM interior views */')
+    result.append(f'__asm__(".globl g_5ECE; .set g_5ECE, g_5ABE+{pixel_count}");')
+    result.append(f'__asm__(".globl g_5F1D; .set g_5F1D, g_5ABE+{pixel_count+string_count}");')
+    result.append('_Static_assert(sizeof(g_5ABE) == 1280u, "source text clear extent");')
+    result.append(f'_Static_assert(offsetof(CanonicalTextBitmapAliases, g_5ECE) == {pixel_count}u, "source text string alias offset");')
+    result.append(f'_Static_assert(offsetof(CanonicalTextBitmapAliases, g_5F1D) == {pixel_count+string_count}u, "source text terminator alias offset");')
+    result.append(f'_Static_assert(offsetof(CanonicalTextBitmapAliases, anonymous) == {pixel_count+string_count+1}u, "source text trailing extent");')
+    receipt.append({'name':'g_5ABE','source':text_source,'source_lines':lines,'count':1280,'native_type':'CanonicalTextBitmapStorage','view':'g_5ABE.clear_span covers the exact 1040 + 79 + 1 + 160 source span','alias_layout':{'width':'g_5ABA','height':'g_5ABC','pixels':{'field':'aliases.g_5ABE','offset':0,'count':pixel_count},'string':{'field':'aliases.g_5ECE','offset':pixel_count,'count':string_count},'terminator':{'field':'aliases.g_5F1D','offset':pixel_count+string_count,'count':1},'anonymous':{'field':'aliases.anonymous','offset':pixel_count+string_count+1,'count':tail_count}}})
+    receipt.append({'name':'g_5ABA','source':text_source,'source_lines':width_lines,'count':1,'native_type':'uint16_t','owner':'canonical ASM text width cell'})
+    receipt.append({'name':'g_5ABC','source':text_source,'source_lines':height_lines,'count':1,'native_type':'uint16_t','owner':'canonical ASM text height cell'})
+    receipt.append({'name':'g_5ECE','source':text_source,'source_lines':[text_labels['_g_5ECE']['line']],'count':string_count,'native_view':'g_5ABE.aliases.g_5ECE','native_symbol':'g_5ECE','native_symbol_offset':pixel_count,'owner':'g_5ABE'})
+    receipt.append({'name':'g_5F1D','source':text_source,'source_lines':[text_labels['_g_5F1D']['line']],'count':1,'native_view':'g_5ABE.aliases.g_5F1D','native_symbol':'g_5F1D','native_symbol_offset':pixel_count+string_count,'owner':'g_5ABE'})
     (WORK/'canonical_asm_numeric_data.c').write_text('\n'.join(result)+'\n')
     return receipt
 

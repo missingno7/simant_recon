@@ -184,6 +184,11 @@ GRAPHICS_SCALARS = ('g_3DB2', 'g_3DB4', 'g_3DB6', 'g_3DD2', 'g_3DDA', 'g_3DDC', 
 def graphics_canonical_views(text, rel):
     """Convert canonical TU declarations to typed views of canonical ASM data."""
     changed = False
+    bitmap = '(?m)^\\s*extern\\s+char(?:\\s+far)?\\s+g_5ABE\\[\\]\\s*;\\s*\\n'
+    (text, n) = re.subn(bitmap, '', text)
+    if n:
+        text = lexical.rename(text, {'g_5ABE': 'CANONICAL_TEXT_BITMAP_BITS'})
+        changed = True
     scalar = '(?m)^\\s*extern\\s+int16_t\\s+g_3DA0\\s*;\\s*\\n'
     (text, n) = re.subn(scalar, '', text)
     if n:

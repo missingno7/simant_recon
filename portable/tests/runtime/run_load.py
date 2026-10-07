@@ -23,6 +23,12 @@ def normalized_file_path(path):
     return os.path.normcase(os.path.abspath(str(path))).replace('\\', '/')
 
 
+def normalized_dos_path(path):
+    if not path:
+        return None
+    return str(path).replace('/', '\\').upper()
+
+
 def file_receipt_key(receipt):
     if not isinstance(receipt, dict):
         return None
@@ -38,6 +44,8 @@ def main():
     parser.add_argument('--out', type=Path)
     parser.add_argument('--output-root', type=Path,
                         help='artifact workspace root for short FileSelect paths from a deep worktree')
+    parser.add_argument('--assets-copy', type=Path,
+                        help='optional short alias for the game asset directory inside --out')
     parser.add_argument('--project', type=Path, default=PROJECT)
     parser.add_argument('--silent', action='store_true',
                         help='pass /s0 to the reconstructed DOS main as a timing contrast')
@@ -94,7 +102,9 @@ def main():
     out = (args.out or project / 'build/current/load').absolute()
     if out in (project, project / 'build', build, FIXTURES):
         raise ValueError('fresh disposable output directory required')
-    assets = out / 'a'
+    assets = (args.assets_copy or out / 'a').absolute()
+    if assets.resolve() == out.resolve() or not assets.resolve().is_relative_to(out.resolve()):
+        raise ValueError('disposable resource copy must be inside the fresh output directory')
     if len(str(assets / 'a.ant')) > 67:
         raise ValueError('asset path exceeds original FileSelect domain; use a shorter --out')
     script, trace = FIXTURES / 'save-load-game.txt', FIXTURES / 'load_trace.py'
@@ -165,8 +175,8 @@ def main():
         'source_LoadGame_returned_success': load_return_ok,
         'both_source_FileSelect_paths_accepted': len(selectors) == 2
             and [(event['save'], event['result']) for event in selectors] == [(1, 1), (0, 1)]
-            and all(normalized_file_path(event.get('selected_path'))
-                    == normalized_file_path(saved_path) for event in selectors),
+            and all(normalized_dos_path(event.get('selected_path'))
+                    == 'C:\\' + saved_path.name.upper() for event in selectors),
         'all_307_SaveRec_reads_complete': full_reads,
         'saved_file_unchanged_during_load': save_return_ok and load_return_ok and bool(saved)
             and len({file_receipt_key(receipt) for receipt in
@@ -183,7 +193,7 @@ def main():
             and runtime.sha(dll) == dll_hash,
         'original_assets_unchanged': original_assets == runtime.files(project / 'assets'),
         'debugger_unchanged': runtime.sha(gdb_path) == gdb_hash,
-        'only_expected_disposable_changes': set(changes) == {'a.ant'},
+        'only_expected_disposable_changes': set(name.upper() for name in changes) == {'A.ANT'},
     }
     receipt = {
         'schema': 'canonical-native-save-load-replay-v1', 'passed': all(checks.values()),

@@ -17,7 +17,6 @@ PortableTextBitmapStatus portable_text_bitmap_bind_source(
     size_t fold_lookup_window_size);
 void portable_text_bitmap_unbind_source(void);
 PortableTextBitmapStatus portable_text_bitmap_source_status(void);
-const PortableTextBitmapState *portable_text_bitmap_source_state(void);
 
 /* Native implementation of the original far source ABI. Native C callers use
  * the ordinary C stack ABI; x/y/text widths and side effects retain the source

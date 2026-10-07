@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 
@@ -59,6 +60,8 @@ def bind(dll: Path):
     lib.dos_findclose.argtypes = [ctypes.POINTER(FindT)]
     lib.dos_findclose.restype = None
     lib.dos_errno = ctypes.c_int16.in_dll(lib, "dos_errno")
+    lib.sim_drive_set_root.argtypes = [ctypes.c_char_p]
+    lib.sim_drive_set_root.restype = ctypes.c_int16
     return lib
 
 
@@ -66,9 +69,9 @@ def result_name(result: FindT) -> str:
     return bytes(result.name).split(b"\0", 1)[0].decode("ascii")
 
 
-def enumerate_names(lib, pattern: Path, attrs: int) -> tuple[list[FindT], int]:
+def enumerate_names(lib, pattern: str, attrs: int) -> tuple[list[FindT], int]:
     first = FindT()
-    status = int(lib._dos_findfirst(os.fsencode(str(pattern)), attrs, ctypes.byref(first)))
+    status = int(lib._dos_findfirst(pattern.encode("ascii"), attrs, ctypes.byref(first)))
     if status:
         return [], status
     cursor = first
@@ -120,12 +123,16 @@ def main() -> int:
     system = files_dir / "system.SAV"
     extensionless = files_dir / "README"
     folder = files_dir / "FOLDER"
+    zfolder = files_dir / "ZDIR"
+    a_ant = files_dir / "A.ANT"
     longname = files_dir / "this-name-is-too-long.txt"
     for path, content in ((visible, b"visible\x00save"), (readonly, b"ro"),
                           (hidden, b"hidden"), (system, b"system"),
-                          (extensionless, b"readme"), (longname, b"long")):
+                          (extensionless, b"readme"), (a_ant, b"ant-save"),
+                          (longname, b"long")):
         path.write_bytes(content)
     folder.mkdir()
+    zfolder.mkdir()
     set_attributes(readonly, FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_ARCHIVE)
     set_attributes(hidden, FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_ARCHIVE)
     set_attributes(system, FILE_ATTRIBUTE_SYSTEM | FILE_ATTRIBUTE_ARCHIVE)
@@ -136,11 +143,15 @@ def main() -> int:
 
     gcc = Path(args.gcc).resolve()
     native_c = ROOT / "portable/whole_program/platform/directory.c"
+    drive_c = ROOT / "portable/whole_program/platform/drive_directory.c"
     native_h = ROOT / "portable/whole_program/platform/directory.h"
+    drive_h = ROOT / "portable/whole_program/platform/drive_directory.h"
     files_h = ROOT / "portable/whole_program/platform/dos_files.h"
     support_c = ROOT / "portable/whole_program/platform/tests/directory_support.c"
+    drive_test = ROOT / "portable/whole_program/platform/tests/drive_directory_test.c"
     runner = Path(__file__).resolve()
-    pinned = [native_c, native_h, files_h, support_c, runner, MSC_DOS_H, MSC_ERRNO_H]
+    pinned = [native_c, drive_c, native_h, drive_h, files_h, support_c,
+              drive_test, runner, MSC_DOS_H, MSC_ERRNO_H]
     before = {str(p): identity(p) for p in pinned}
     errno_text = MSC_ERRNO_H.read_text(encoding="latin-1")
     errno_values = {}
@@ -165,7 +176,7 @@ def main() -> int:
                                  capture_output=True, text=True).stdout.splitlines()[0]
     dll = work / "directory-provider.dll"
     command = [str(gcc), "-std=c11", "-Wall", "-Wextra", "-Werror", "-O0",
-               "-shared", "-I", str(native_c.parent), str(native_c), str(support_c),
+               "-shared", "-I", str(native_c.parent), str(native_c), str(drive_c), str(support_c),
                "-o", str(dll)]
     proc = subprocess.run(command, capture_output=True, text=True)
     (work / "compile.stdout.txt").write_text(proc.stdout, encoding="utf-8")
@@ -173,64 +184,95 @@ def main() -> int:
     if proc.returncode:
         raise SystemExit(f"directory provider compile failed:\n{proc.stderr}")
     lib = bind(dll)
+    host_cwd = os.getcwd()
+    if lib.sim_drive_set_root(os.fsencode(str(files_dir))) != 1:
+        raise AssertionError("could not mount fixture as virtual C:\\")
+    if os.getcwd() != host_cwd:
+        raise AssertionError("mounting virtual C:\\ changed host process CWD")
 
-    # *.SAV yields normal and read-only files, while hidden/system entries are
-    # excluded until explicitly requested. Sorting prevents host enumeration
-    # order from becoming part of the contract.
-    rows, status = enumerate_names(lib, files_dir / "*.SAV", FILE_ATTRIBUTE_DIRECTORY)
+    deep_root = work / ("host-root-" + "D" * 48) / ("asset-root-" + "E" * 48)
+    deep_root.mkdir(parents=True)
+    shutil.copytree(files_dir, deep_root, dirs_exist_ok=True)
+    set_attributes(deep_root / "readOnly.SAV", FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_ARCHIVE)
+    set_attributes(deep_root / "hidden.SAV", FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_ARCHIVE)
+    set_attributes(deep_root / "system.SAV", FILE_ATTRIBUTE_SYSTEM | FILE_ATTRIBUTE_ARCHIVE)
+    if len(str(deep_root)) <= 67:
+        raise AssertionError("deep-host-root control did not exceed legacy cwd capacity")
+    drive_exe = work / "drive-directory-test.exe"
+    drive_command = [str(gcc), "-std=c11", "-Wall", "-Wextra", "-Werror", "-O0",
+                     "-I", str(native_c.parent), str(drive_test), str(native_c),
+                     str(drive_c), str(support_c), "-o", str(drive_exe)]
+    drive_compile = subprocess.run(drive_command, capture_output=True, text=True)
+    if drive_compile.returncode:
+        raise SystemExit(f"drive namespace test compile failed:\n{drive_compile.stderr}")
+    drive_run = subprocess.run([str(drive_exe), str(files_dir), str(deep_root)],
+                               capture_output=True, text=True)
+    (work / "drive-test.stdout.txt").write_text(drive_run.stdout, encoding="utf-8")
+    (work / "drive-test.stderr.txt").write_text(drive_run.stderr, encoding="utf-8")
+    if drive_run.returncode:
+        raise SystemExit(f"drive namespace/deep-root test failed:\n{drive_run.stderr}")
+
+    # C:\\ is the only mounted drive. The provider sorts DOS-visible uppercase
+    # names so host enumeration order cannot change the returned sequence.
+    rows, status = enumerate_names(lib, "C:\\*.SAV", FILE_ATTRIBUTE_DIRECTORY)
     sav_end_status = status
-    sav_names = sorted(result_name(r) for r in rows)
-    if status != DOS_NO_MORE_FILES or sav_names != ["readOnly.SAV", "visible.SAV"]:
+    sav_names = [result_name(r) for r in rows]
+    if status != DOS_NO_MORE_FILES or sav_names != ["READONLY.SAV", "VISIBLE.SAV"]:
         raise AssertionError({"test": "sav-default-attributes", "names": sav_names,
                               "end_status": status})
     row_by_name = {result_name(r): r for r in rows}
-    if not (row_by_name["readOnly.SAV"].attrib & FILE_ATTRIBUTE_READONLY):
+    if not (row_by_name["READONLY.SAV"].attrib & FILE_ATTRIBUTE_READONLY):
         raise AssertionError("read-only attribute was not preserved")
-    if row_by_name["visible.SAV"].size != len(visible.read_bytes()):
+    if row_by_name["VISIBLE.SAV"].size != len(visible.read_bytes()):
         raise AssertionError("file size differs")
-    assert_packed_time(row_by_name["visible.SAV"], chosen_local)
+    assert_packed_time(row_by_name["VISIBLE.SAV"], chosen_local)
 
     rows_with_hidden, status = enumerate_names(
-        lib, files_dir / "*.SAV", FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_HIDDEN)
+        lib, "C:\\*.SAV", FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_HIDDEN)
     hidden_end_status = status
-    hidden_names = sorted(result_name(r) for r in rows_with_hidden)
-    if status != DOS_NO_MORE_FILES or "hidden.SAV" not in hidden_names or "system.SAV" in hidden_names:
+    hidden_names = [result_name(r) for r in rows_with_hidden]
+    if status != DOS_NO_MORE_FILES or "HIDDEN.SAV" not in hidden_names or "SYSTEM.SAV" in hidden_names:
         raise AssertionError({"test": "hidden-mask", "names": hidden_names, "end_status": status})
-    hidden_row = next(r for r in rows_with_hidden if result_name(r) == "hidden.SAV")
+    hidden_row = next(r for r in rows_with_hidden if result_name(r) == "HIDDEN.SAV")
     if not (hidden_row.attrib & FILE_ATTRIBUTE_HIDDEN):
         raise AssertionError("hidden attribute was not preserved")
     rows_with_system, status = enumerate_names(
-        lib, files_dir / "*.SAV", FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_SYSTEM)
+        lib, "C:\\*.SAV", FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_SYSTEM)
     system_end_status = status
-    system_names = sorted(result_name(r) for r in rows_with_system)
-    if status != DOS_NO_MORE_FILES or "system.SAV" not in system_names or "hidden.SAV" in system_names:
+    system_names = [result_name(r) for r in rows_with_system]
+    if status != DOS_NO_MORE_FILES or "SYSTEM.SAV" not in system_names or "HIDDEN.SAV" in system_names:
         raise AssertionError({"test": "system-mask", "names": system_names, "end_status": status})
-    system_row = next(r for r in rows_with_system if result_name(r) == "system.SAV")
+    system_row = next(r for r in rows_with_system if result_name(r) == "SYSTEM.SAV")
     if not (system_row.attrib & FILE_ATTRIBUTE_SYSTEM):
         raise AssertionError("system attribute was not preserved")
 
-    rows_all, status = enumerate_names(lib, files_dir / "*.*", FILE_ATTRIBUTE_DIRECTORY)
+    rows_all, status = enumerate_names(lib, "C:\\*.*", FILE_ATTRIBUTE_DIRECTORY)
     all_end_status = status
-    all_names = sorted(result_name(r) for r in rows_all)
-    if status != DOS_NO_MORE_FILES or "FOLDER" not in all_names or ".." not in all_names:
-        raise AssertionError({"test": "directory-and-parent", "names": all_names,
+    all_names = [result_name(r) for r in rows_all]
+    expected_all_names = [".", "..", "FOLDER", "ZDIR", "A.ANT", "README",
+                          "READONLY.SAV", "VISIBLE.SAV"]
+    if status != DOS_NO_MORE_FILES or all_names != expected_all_names:
+        raise AssertionError({"test": "DOSBox-X directory-first name ordering",
+                              "names": all_names, "expected": expected_all_names,
                               "end_status": status})
     folder_row = next(r for r in rows_all if result_name(r) == "FOLDER")
+    zfolder_row = next(r for r in rows_all if result_name(r) == "ZDIR")
     parent_row = next(r for r in rows_all if result_name(r) == "..")
     if not (folder_row.attrib & FILE_ATTRIBUTE_DIRECTORY and
+            zfolder_row.attrib & FILE_ATTRIBUTE_DIRECTORY and
             parent_row.attrib & FILE_ATTRIBUTE_DIRECTORY):
         raise AssertionError("directory attribute was not preserved")
     if longname.name in all_names:
         raise AssertionError("wildcard enumeration exposed an unrepresentable long host name")
-    rows_no_dirs, status = enumerate_names(lib, files_dir / "*.*", 0)
+    rows_no_dirs, status = enumerate_names(lib, "C:\\*.*", 0)
     no_dir_end_status = status
-    no_dir_names = sorted(result_name(r) for r in rows_no_dirs)
+    no_dir_names = [result_name(r) for r in rows_no_dirs]
     if status != DOS_NO_MORE_FILES or "FOLDER" in no_dir_names or ".." in no_dir_names:
         raise AssertionError({"test": "directory-mask-exclusion", "names": no_dir_names,
                               "end_status": status})
 
     missing = FindT()
-    missing_status = int(lib._dos_findfirst(os.fsencode(str(files_dir / "MISSING.XYZ")),
+    missing_status = int(lib._dos_findfirst(b"C:\\MISSING.XYZ",
                                             0, ctypes.byref(missing)))
     missing_errno = int(lib.dos_errno.value)
     if missing_status != DOS_FILE_NOT_FOUND or missing_errno != MSC_ENOENT:
@@ -238,17 +280,16 @@ def main() -> int:
                               "dos_errno": missing_errno})
 
     too_long = FindT()
-    long_status = int(lib._dos_findfirst(os.fsencode(str(longname)), 0,
+    long_status = int(lib._dos_findfirst(b"C:\\THIS-NAME-IS-TOO-LONG.TXT", 0,
                                          ctypes.byref(too_long)))
     long_errno = int(lib.dos_errno.value)
     if long_status != DOS_FILENAME_RANGE or long_errno != MSC_EINVAL:
         raise AssertionError({"test": "long-name-rejection", "status": long_status,
                               "dos_errno": long_errno})
 
-    # Two copied records share one search cookie and advance the same Win32
-    # iterator. Distinct simultaneous searches keep distinct native handles.
+    # Copied records share one search cookie; independent slots stay isolated.
     shared = FindT()
-    status = int(lib._dos_findfirst(os.fsencode(str(files_dir / "*.SAV")),
+    status = int(lib._dos_findfirst(b"C:\\*.SAV",
                                     FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_HIDDEN,
                                     ctypes.byref(shared)))
     if status:
@@ -269,10 +310,10 @@ def main() -> int:
 
     first_search = FindT()
     second_search = FindT()
-    if lib._dos_findfirst(os.fsencode(str(files_dir / "*.SAV")), 0,
+    if lib._dos_findfirst(b"C:\\*.SAV", 0,
                           ctypes.byref(first_search)) != 0:
         raise AssertionError("first interleaved search failed")
-    if lib._dos_findfirst(os.fsencode(str(files_dir / "R*.*")), 0,
+    if lib._dos_findfirst(b"C:\\R*.*", 0,
                           ctypes.byref(second_search)) != 0:
         raise AssertionError("second interleaved search failed")
     first_name, second_name = result_name(first_search), result_name(second_search)
@@ -294,7 +335,7 @@ def main() -> int:
     # same-record starts and explicit close must not exhaust the 32-slot table.
     reused = FindT()
     for _ in range(80):
-        if lib._dos_findfirst(os.fsencode(str(files_dir / "*.*")),
+        if lib._dos_findfirst(b"C:\\*.*",
                               FILE_ATTRIBUTE_DIRECTORY, ctypes.byref(reused)) != 0:
             raise AssertionError("same-record findfirst failed during lifecycle loop")
     lib.dos_findclose(ctypes.byref(reused))
@@ -305,13 +346,13 @@ def main() -> int:
     opened = []
     for _ in range(32):
         item = FindT()
-        rc = int(lib._dos_findfirst(os.fsencode(str(files_dir / "*.*")),
+        rc = int(lib._dos_findfirst(b"C:\\*.*",
                                     FILE_ATTRIBUTE_DIRECTORY, ctypes.byref(item)))
         if rc:
             raise AssertionError({"test": "slot-capacity", "opened": len(opened), "error": rc})
         opened.append(item)
     overflow = FindT()
-    overflow_status = int(lib._dos_findfirst(os.fsencode(str(files_dir / "*.*")),
+    overflow_status = int(lib._dos_findfirst(b"C:\\*.*",
                                              FILE_ATTRIBUTE_DIRECTORY,
                                              ctypes.byref(overflow)))
     overflow_errno = int(lib.dos_errno.value)
@@ -321,7 +362,7 @@ def main() -> int:
     for item in opened:
         lib.dos_findclose(ctypes.byref(item))
     after_close = FindT()
-    final_open = int(lib._dos_findfirst(os.fsencode(str(files_dir / "*.*")),
+    final_open = int(lib._dos_findfirst(b"C:\\*.*",
                                         FILE_ATTRIBUTE_DIRECTORY, ctypes.byref(after_close)))
     lib.dos_findclose(ctypes.byref(after_close))
     if final_open:
@@ -350,9 +391,9 @@ def main() -> int:
             "sav_default_attributes": {"names": sav_names, "end_status": sav_end_status,
                                         "readonly_bit": True, "size_exact": True,
             "dos_local_datetime_packed_exact": True,
-            "visible_wr_date": row_by_name["visible.SAV"].wr_date,
-            "visible_wr_time": row_by_name["visible.SAV"].wr_time,
-            "visible_size": row_by_name["visible.SAV"].size},
+            "visible_wr_date": row_by_name["VISIBLE.SAV"].wr_date,
+            "visible_wr_time": row_by_name["VISIBLE.SAV"].wr_time,
+            "visible_size": row_by_name["VISIBLE.SAV"].size},
             "hidden_mask": {"names": hidden_names, "end_status": hidden_end_status},
             "system_mask": {"names": system_names, "end_status": system_end_status},
             "wildcard_star_dot_star_with_subdirs": all_names,
@@ -363,7 +404,15 @@ def main() -> int:
                                                "dos_errno": missing_errno},
             "unrepresentable_long_name": {"dos_status": long_status,
                                            "dos_errno": long_errno,
-            "policy": "exact unrepresentable match fails with DOS filename-range status; wildcard searches skip unrepresentable host names and never truncate into 13-byte field"},
+                                           "policy": "DOS paths reject components outside 8.3; wildcard results contain uppercase DOS-visible names only"},
+            "deep_host_root_negative_control": {
+                "host_root_chars": len(str(deep_root)),
+                "dos_drive": 3,
+                "dos_cwd": "C:\\",
+                "enumeration_names": all_names,
+                "source_visible_rows_equal": True,
+                "host_process_cwd_unchanged": True,
+                "runner_stdout": drive_run.stdout.strip()},
             "copied_cookie_shared_iteration_and_close": {
                 "cookie_identical_after_copy": cookie_equal,
                 "first_next_name": name1, "second_copy_next_name": name2,
@@ -379,9 +428,9 @@ def main() -> int:
         "contract_notes": {
             "source_callsite": "S09 m35F5 o09_35F5_03C6 searches *.* with _A_SUBDIR and then filters file entries using *.ant; directories including .. are presented by the selector.",
             "attribute_rules": "Normal/read-only/archive entries are included by default. Hidden, system, and directory entries require their respective mask bits. Returned attributes preserve read-only/hidden/system/subdir/archive bits.",
-            "cookie": "The reserved 21-byte MSC field carries only a versioned slot/generation/checksum token; native HANDLE and pointers remain private in the provider table. Copying find_t shares one iterator. End-of-search closes its native handle; dos_findclose supports early cleanup.",
+            "cookie": "The reserved 21-byte MSC field carries only a versioned slot/generation/checksum token; host pointers and enumeration buffers remain private in the provider table. Copying find_t shares one iterator. End-of-search frees its snapshot; dos_findclose supports early cleanup.",
             "error_contract": "Successful calls return 0; no initial match returns DOS 2, exhausted iteration DOS 18, invalid/stale cookie DOS 6, full provider table DOS 4, and non-8.3 or >2GB result DOS 206/223. dos_errno carries the matching MSC errno interpretation (or zero on success).",
-            "limits": "Win32 ANSI FindFirstFileA only. Host names must be representable as ASCII DOS 8.3; exact non-8.3 matches fail explicitly and wildcard searches skip them. No POSIX implementation or Unicode/long-name emulation is claimed. No DOS binary invocation was part of this provider test.",
+            "limits": "Win32 ANSI FindFirstFileA backs the private host side. Returned names are uppercase ASCII 8.3 names (using the host short-name alias when available); unrepresentable wildcard entries are skipped. DOSBox-X directory listings put directories before files; this provider does the same and sorts uppercase DOS-visible names within each group. S09 FileSelect applies its own row sort after enumeration.",
         },
     }
     receipt.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

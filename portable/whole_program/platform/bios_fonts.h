@@ -48,8 +48,8 @@ typedef struct PortableBiosFonts {
 
 /* Call once before first load/free, or initialize the structure with {0}. */
 void portable_bios_fonts_init(PortableBiosFonts *fonts);
-/* directory may be NULL, selecting build/bios-reference/dosbox-staging-v0.83.0.
- * The loader accepts only the pinned manifest and the exact extracted tables. */
+/* directory may be NULL, selecting build/bios-reference/dosbox-x-v2026.08.31.
+ * The loader accepts only the pinned manifest and the exact oracle-captured tables. */
 PortableBiosFontsStatus portable_bios_fonts_load(PortableBiosFonts *fonts,
                                                  const char *directory);
 void portable_bios_fonts_free(PortableBiosFonts *fonts);

@@ -65,7 +65,7 @@ A successful shallow-path native SaveGame independently emits 66 differing
 records/8367 bytes against the identical DOS files. Record 100 confirms the
 contiguous native serialization defect despite equal initialized logical flags.
 The original/canonical BIOS 8x14 banks are identical; native differs in 1806/3584
-bytes. Text sidecar and cursor bookkeeping omissions are separately attributed.
+bytes. The text sidecar is fixed by writing into canonical g_5ABE and exporting its string/terminator aliases; the residual g_5ABE pixel mismatch remains open and is tracked separately from the R4 BIOS-font provider mismatch. Cursor bookkeeping omissions remain separately attributed.
 No game algorithm, canonical inventory/manifest or original checkpoint changed.
 
 Equal virtual milliseconds do not prove equal DOS CPU phase. The R1 rerun uses

@@ -258,8 +258,35 @@ def main():
     (OUT/'asm-data-facts.json').write_text(json.dumps(asm_receipt,indent=2)+'\n')
     patterns=next(r for r in asm_receipt['numeric'] if r['name']=='g_41D0')
     graphics_header=OUT/'canonical_graphics_data.h'
-    graphics_header.write_text(graphics_header.read_text().replace('#endif\n',
-        'extern uint8_t g_41D0['+str(patterns['native_count'])+'];\n#endif\n'))
+    text_owner=next(r for r in asm_receipt['numeric'] if r['name']=='g_5ABE')
+    aliases=text_owner['alias_layout']
+    pixel_count=aliases['pixels']['count']
+    string_count=aliases['string']['count']
+    tail_count=aliases['anonymous']['count']
+    text_header=(
+        'extern uint8_t g_41D0['+str(patterns['native_count'])+'];\n'
+        'typedef struct CanonicalTextBitmapAliases {\n'
+        '    uint8_t g_5ABE['+str(pixel_count)+'];\n'
+        '    uint8_t g_5ECE['+str(string_count)+'];\n'
+        '    uint8_t g_5F1D;\n'
+        '    uint8_t anonymous['+str(tail_count)+'];\n'
+        '} CanonicalTextBitmapAliases;\n'
+        'typedef union CanonicalTextBitmapStorage {\n'
+        '    CanonicalTextBitmapAliases aliases;\n'
+        '    uint8_t clear_span['+str(text_owner['count'])+'];\n'
+        '} CanonicalTextBitmapStorage;\n'
+        'extern uint16_t g_5ABA, g_5ABC;\n'
+        'extern CanonicalTextBitmapStorage g_5ABE;\n'
+        'extern uint8_t g_5ECE['+str(string_count)+'];\n'
+        'extern uint8_t g_5F1D;\n'
+        '#define CANONICAL_TEXT_BITMAP_PIXELS (g_5ABE.aliases.g_5ABE)\n'
+        '#define CANONICAL_TEXT_BITMAP_STRING (g_5ABE.aliases.g_5ECE)\n'
+        '#define CANONICAL_TEXT_BITMAP_TERMINATOR (&g_5ABE.aliases.g_5F1D)\n'
+        '#define CANONICAL_TEXT_BITMAP_CLEAR_SPAN (g_5ABE.clear_span)\n'
+        '#define CANONICAL_TEXT_BITMAP_BITS ((char *)CANONICAL_TEXT_BITMAP_CLEAR_SPAN)\n'
+    )
+    graphics_header.write_text(graphics_header.read_text().replace(
+        '#endif\n',text_header+'#endif\n'))
     # Source-derived ASM declarations must exist before preprocessing the
     # complete canonical C TUs. The expression pass is the final C lowering.
     for row in rows:

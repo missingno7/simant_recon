@@ -36,7 +36,8 @@ uint16_t dos_fread(void *buffer, uint16_t size, uint16_t count,
                    DosFileStream *stream);
 int16_t dos_fclose(DosFileStream *stream);
 
-/* Test/host lifecycle hooks. The root changes process CWD for relative paths. */
+/* Test/host lifecycle hooks. The asset directory is mounted as virtual C:\\;
+ * source paths are resolved there without changing process CWD. */
 int16_t dos_files_set_root(const char *path);
 void dos_files_close_all(void);
 

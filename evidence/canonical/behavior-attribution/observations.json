@@ -3042,12 +3042,13 @@
     "bytes": 3584,
     "original_sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d",
     "canonical_sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d",
-    "native_sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
-    "differing_bytes": 1806,
+    "native_sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d",
+    "differing_bytes": 0,
     "original_equals_canonical": true,
     "paired_acceptance_sha256": "ea4381d191c2acc6e7f0793009fb574c7c0b181b89fd957977e25ba9f368b852",
     "script_sha256": "dc5bcffbd84f8e6959b8c744624bc7ce9d05d68c4cb26ca4e45636d5d161a7d0",
-    "scope": "same pinned DOS runner and unchanged new-game input prefix through14s; read-only BIOS bank capture"
+    "scope": "same pinned DOSBox-X runner, canonical DOS build SHA, and Czech keyboard layout; active ROM bank captured read-only at f_1FBD_0000 entry",
+    "canonical_equals_native": true
   },
   "original_void_return": {
     "location": "root:00F8:02EF",
@@ -3065,5 +3066,36 @@
     "714 views have reviewed original address anchors; unavailable native/private views remain explicit.",
     "16 first-checkpoint raw DOS view differences include code-address words, heap totals and register/stack residue; they do not automatically establish a game defect.",
     "No same-executable DOS repeats were run here, so no DOS nondeterminism asserted."
-  ]
+  ],
+  "bios_font_8x8": {
+    "physical_address": "C01E9",
+    "width": 8,
+    "height": 8,
+    "bytes": 2048,
+    "canonical_dos_sha256": "637bb841600ab50977197f81e27092037bc88e7a1a601cffaec286fcd18d9619",
+    "native_sha256": "637bb841600ab50977197f81e27092037bc88e7a1a601cffaec286fcd18d9619",
+    "legacy_staging_sha256": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
+    "legacy_staging_differing_bytes": 1311,
+    "canonical_equals_native": true,
+    "capture_path": "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/c000-rom-capture.bin",
+    "capture_sha256": "a3744eaf25671eed3c2526d53afa4451c552c795c78b8be96e2495bb3bf70b79",
+    "scope": "pinned DOSBox-X C000 BIOS ROM slice C000:01E9; native uses the captured provider table"
+  },
+  "bios_font_makeimage_file": {
+    "text": " File",
+    "width": 40,
+    "height": 14,
+    "bytes": 70,
+    "dos_capture_path": "build/workers/p2-diff/round3/dos-boundaries/exec-text-return-2.1.bin",
+    "dos_capture_sha256": "67dc574df99753e861d8934d91d73b02504078b7eeec92313afc024e01881fa5",
+    "output_fixture": "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/font-MakeImage-File.dos.bin",
+    "output_sha256": "142599c2e4b1abdba867acc3eff9398a077b1d0d9c5af94e252ccb106f1ce5ea",
+    "native_matches_dos_capture": true,
+    "legacy_staging_negative_control_different_bytes": 26,
+    "scope": "direct DOS bitmap capture at function return; pixel fixture independently cross-checked against captured C09E9 active font bank and source movsb/stride order"
+  },
+  "bios_service_census": {
+    "path": "evidence/canonical/behavior-attribution/bios-service-census.json",
+    "scope": "pinned DOSBox-X v2026.08.31 runner and supported native SDL3 VGA/Sound Mode 6 profile"
+  }
 }

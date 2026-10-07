@@ -284,7 +284,7 @@ void f_1B73_0046(void)
             source_x, source_y, &host_x, &host_y) ||
         !host_warp_pointer(provider->host, host_x, host_y))
         abort();
-    *s->mouse_mode = 2; /* active native logical pointer service */
+    *s->mouse_mode = 4; /* DOSBox-X INT 33h AX=24h reports type CH=4. */
     /* 0046 calls 09F7/09FF even before vector installation. The same 0445
      * callback publishes movement status and deferred redraw, not just x/y. */
     if (portable_m1b73_mouse_callback(provider, 1, (uint8_t)*s->button_state,

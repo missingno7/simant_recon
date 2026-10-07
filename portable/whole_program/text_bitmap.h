@@ -39,16 +39,17 @@ typedef struct PortableTextBitmapInput {
     int16_t y;
 } PortableTextBitmapInput;
 
-/* Mutable source globals g5ABA/g5ABC/g5ABE/g5ECE/g5F1D/g3DA0/g3DA2. */
-typedef struct PortableTextBitmapState {
-    uint16_t width;
-    uint16_t height;
-    uint8_t pixels[PORTABLE_TEXT_BITMAP_CAPACITY];
-    uint8_t copied_text[PORTABLE_TEXT_BITMAP_TEXT_CAPACITY];
-    uint8_t copied_text_terminator;
-    uint16_t pen_x;
-    uint16_t pen_y;
-} PortableTextBitmapState;
+/* Borrowed writable views of the canonical source owners. This descriptor
+ * carries addresses and extents only; it never owns a shadow bitmap/string. */
+typedef struct PortableTextBitmapOwnerView {
+    uint16_t *width;
+    uint16_t *height;
+    uint8_t *pixels;
+    size_t pixels_capacity;
+    uint8_t *copied_text;
+    size_t copied_text_capacity;
+    uint8_t *copied_text_terminator;
+} PortableTextBitmapOwnerView;
 
 typedef struct PortableTextBitmapResult {
     PortableTextBitmapDrawKind draw_kind;
@@ -63,7 +64,7 @@ typedef struct PortableTextBitmapResult {
 
 PortableTextBitmapStatus portable_text_bitmap_prepare(
     const PortableTextBitmapInput *input,
-    PortableTextBitmapState *state,
+    PortableTextBitmapOwnerView *owners,
     PortableTextBitmapResult *result);
 
 #endif

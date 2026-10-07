@@ -36,6 +36,16 @@ All replay events, a meaningful frame and the bounded smoke exit are required;
 the cached scan-query implementation fails the `center-after` negative control.
 Use `--case center-after`, `--repeat 2`, or `--visible` for focused reruns.
 
+The BIOS font regression compiles the production text-bitmap projection and
+compares the fixed ` File` output with the direct DOSBox-X return-state capture.
+It cross-checks that capture against the pinned 8x14 ROM bank and requires the
+prior DOSBox Staging table to fail as a negative control. Give every run a fresh
+output directory:
+
+```powershell
+python portable/tests/runtime/bios_font_regression.py --out build/workers/p2-r4/font-regression
+```
+
 Passing confirms this bounded current UI/file path. It does not establish
 after-load state equivalence, DOS save compatibility, resave equivalence, fixed
 terrain-seed behavior or whole-game correctness. Current build limitations remain

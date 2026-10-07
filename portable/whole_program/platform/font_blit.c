@@ -8,7 +8,6 @@
 struct Bitmap *sim_font_make_image_source(uint8_t *s, int16_t x, struct Font *font);
 int16_t _font_StringWidth(uint8_t *s, struct Font *font);
 
-extern char g_5ABE[SIM_FONT_BITMAP_CAPACITY];
 extern int16_t fd_55B3_6770;
 extern int16_t fd_55B3_6772;
 static int g_blit_status;
@@ -18,7 +17,7 @@ extern struct Bitmap fd_50F6_392C ;
 
 struct Bitmap *sim_font_bitmap_bind(void)
 {
-    fd_50F6_392C.bits = g_5ABE;
+    fd_50F6_392C.bits = (char *)CANONICAL_TEXT_BITMAP_CLEAR_SPAN;
     return &fd_50F6_392C;
 }
 
@@ -53,7 +52,8 @@ struct Bitmap *sim_font_make_image(uint8_t *text, int16_t x, struct Font *font)
         stride = 1;
     output_extent = (size_t)stride * (size_t)(font->fRectHeight - 1);
     /* font_MakeImage clears the source-defined 80x16 canvas (1280 bytes). */
-    if (output_extent > sizeof(g_5ABE) || 1280u > sizeof(g_5ABE)) {
+    if (output_extent > sizeof(CANONICAL_TEXT_BITMAP_CLEAR_SPAN) ||
+        1280u > sizeof(CANONICAL_TEXT_BITMAP_CLEAR_SPAN)) {
         g_blit_status = 1;
         return NULL;
     }
@@ -111,10 +111,10 @@ static int validate_rows(const char *source, const char *destination,
             required > g_source_size - (size_t)(source_address - source_begin))
             return 0;
     }
-    if (destination == g_5ABE) {
+    if (destination == (const char *)CANONICAL_TEXT_BITMAP_CLEAR_SPAN) {
         row_bytes = (dx + (uint16_t)width + 7u) / 8u;
         final_offset = (size_t)((uint16_t)height - 1u) * destination_stride + row_bytes;
-        if (final_offset > sizeof(g_5ABE))
+        if (final_offset > sizeof(CANONICAL_TEXT_BITMAP_CLEAR_SPAN))
             return 0;
     }
     return 1;

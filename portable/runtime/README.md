@@ -1,11 +1,12 @@
 The BIOS font files are native hardware resources used by the BIOS font adapter.
-They originate in DOSBox Staging v0.83.0, commit
-7b40053b7ac580843d0461eba8c36a47a990e66c, src/ints/int10_memory.cpp.
-The adjacent bios-reference/manifest.json records the extraction, exact byte
-lengths, SHA256 identities and GPL-2.0-or-later license. They are not recovered
-SimAnt game state. The native builder copies these explicit platform resources
-to its output, and copies only the eleven resource files listed in platform.json
-from the historical assets directory. Historical executables are not runtime inputs.
+They are captured from the pinned DOSBox-X v2026.08.31 BIOS ROM while the
+canonical DOS build is running with the configured Czech keyboard layout. The
+adjacent bios-reference/manifest.json records the source files, runtime capture,
+byte lengths, SHA256 identities and GPL-2.0-or-later license. They are emulator
+service data, not recovered SimAnt game state. The native builder copies these
+explicit platform resources to its output, and copies only the eleven resource
+files listed in platform.json from the historical assets directory. Historical
+executables are not runtime inputs.
 
 INSTALL.EXE in the build runtime directory is an explicitly generated empty
 filesystem probe, SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.

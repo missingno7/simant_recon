@@ -1,6 +1,6 @@
 /* Native provider lifecycle hook for the packed MSC _dos_findfirst API.
- * Representable results use ASCII DOS 8.3 names; wildcard searches skip host
- * long names, while an exact unrepresentable name returns DOS error 206. */
+ * Search paths resolve under virtual DOS C:. Results use uppercase DOS 8.3
+ * names, DOS attributes/errors, and DOSBox-X directory-first name ordering. */
 #ifndef SIMANT_WHOLE_DIRECTORY_H
 #define SIMANT_WHOLE_DIRECTORY_H
 

@@ -201,11 +201,11 @@
     {
       "module": "file_select_host",
       "classification": "TEMPORARY_EXCEPTION",
-      "reason": "Deletes the BIOS equipment-byte read and the DOS rule that maps drive B to A on a one-floppy system.",
+      "reason": "Removes the physical BIOS equipment-byte read and one-floppy B-to-A source branch from native S09; virtual DOS C: supplies supported drive/CWD and path behavior.",
       "blocker_ids": [
         "native-drive-device-policy"
       ],
-      "deletion_condition": "Remove the exceptional rewrite after the named contracts close; preserve only necessary native pointer/platform lowering."
+      "deletion_condition": "Retire the source adaptation when S09's physical BIOS one-floppy policy is represented and covered at the native boundary, or when reviewed scope evidence retires physical-drive selection from this host UI. Keep virtual C: path resolution in the platform provider."
     },
     {
       "module": "findindex_native_guard",
@@ -586,9 +586,12 @@
       "consumers": [
         "src/S09/m35F5.c"
       ],
-      "reason": "Deletes the BIOS equipment-byte read and the DOS rule that maps drive B to A on a one-floppy system.",
-      "blocker": "No matching preview limitation or evidence-backed native drive policy was found in portable/platform.json; current drive tests cover Windows path resolution, not physical one-floppy behavior.",
-      "deletion_condition": "Implement equivalent drive selection in the host drive service or record the unsupported physical-drive domain and evidence that the native UI cannot expose a mismatched B drive."
+      "reason": "Deletes the BIOS equipment-byte read and original rule that maps drive B to A on a one-floppy system. This exception covers physical BIOS drive policy only; host path/drive resolution is handled by virtual C:.",
+      "blocker": "Virtual C: closes host drive/path leakage. SDL3 has no physical BIOS floppy equipment byte or floppy topology; callers that choose physical B remain outside the supported native domain. The live limitation is native-drive-device-policy in portable/platform.json.",
+      "deletion_condition": "Retire this rewrite after the physical one-floppy rule is implemented and tested at the native boundary, or after reviewed scope evidence explicitly closes physical-drive selection for the native UI. Do not remove the virtual C: namespace provider as part of that retirement.",
+      "blocker_ids": [
+        "native-drive-device-policy"
+      ]
     },
     {
       "id": "list_text_handle_view",

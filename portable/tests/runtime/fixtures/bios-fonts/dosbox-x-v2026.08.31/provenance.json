@@ -1,0 +1,27 @@
+{
+  "schema": "bios-font-oracle-capture-fixture-v1",
+  "source": "DOSBox-X v2026.08.31 pinned acceptance runner",
+  "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+  "canonical_dos_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+  "layout": "CZ / cz243",
+  "rom_capture": {
+    "path": "c000-rom-capture.bin",
+    "physical_range": "C0000-C7FFF",
+    "bytes": 32768,
+    "sha256": "a3744eaf25671eed3c2526d53afa4451c552c795c78b8be96e2495bb3bf70b79",
+    "captured_at": "CS:IP 27DF:0008, emulated time 4944.143 ms"
+  },
+  "render_fixture": {
+    "path": "font-MakeImage-File.dos.bin",
+    "text_bytes": [32, 70, 105, 108, 101],
+    "bytes": 70,
+    "sha256": "142599c2e4b1abdba867acc3eff9398a077b1d0d9c5af94e252ccb106f1ce5ea",
+    "captured_from": "build/workers/p2-diff/round3/dos-boundaries/exec-text-return-2.1.bin",
+    "capture_sha256": "67dc574df99753e861d8934d91d73b02504078b7eeec92313afc024e01881fa5",
+    "capture_physical_range": "00000-A0000",
+    "bitmap_offset": "0x60D60 (40x14 header, then 70 pixels)",
+    "capture_registers": "emulated time 4944.231880 ms, CS:IP 27DF:015E",
+    "cross_check": "Captured 70 pixels are byte-equal to the expected rendering computed from the captured C000:09E9 active BIOS font rows and src/root/m1FBD.asm L007F-L0093's movsb/stride order."
+  },
+  "license": "GPL-2.0-or-later; upstream source and COPYING are preserved under portable/runtime/bios-reference/dosbox-x-v2026.08.31/"
+}

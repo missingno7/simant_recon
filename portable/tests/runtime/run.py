@@ -129,8 +129,8 @@ def main():
     dll_hash = sha(dll)
     original_assets = files(project / 'assets')
     out = (args.out or project / ('build/current/' + args.flow)).absolute()
-    assets = (args.assets_copy or out / 'a').resolve()
-    if assets == out or not assets.is_relative_to(out):
+    assets = (args.assets_copy or out / 'a').absolute()
+    if assets.resolve() == out.resolve() or not assets.resolve().is_relative_to(out.resolve()):
         raise ValueError('disposable resource copy must be inside the fresh output directory')
     if out in (project, project / 'build', build, FIXTURES):
         raise ValueError('runtime output must be a fresh disposable directory')
@@ -187,7 +187,8 @@ def main():
         'build_resources_unchanged': resources_unchanged,
         'runtime_support_unchanged': support_unchanged,
         'original_assets_unchanged': originals_unchanged,
-        'only_expected_disposable_changes': set(changes) == ({'a.ant'} if args.flow == 'save' else set()),
+        'only_expected_disposable_changes': set(name.upper() for name in changes) ==
+            ({'A.ANT'} if args.flow == 'save' else set()),
         'save_record_wire_size': args.flow != 'save' or bool(saved and saved['size'] == 48386),
     }
     result = {

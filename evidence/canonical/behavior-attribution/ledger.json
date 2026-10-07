@@ -10982,7 +10982,7 @@
     },
     {
       "id": "diff-symbol-g_5ABE",
-      "description": "Native/canonical checkpoint view g_5ABE differs in the recorded scenario(s).",
+      "description": "Native g_5ABE backing now receives text pixels directly, while residual pixel bytes differ from DOS at the recorded boundaries.",
       "classification": "PORT_INTRODUCED",
       "status": "open",
       "scope": "named view g_5ABE",
@@ -10993,7 +10993,11 @@
           "build/workers/p2-diff/round3/new-game-save/acceptance.json",
           "build/workers/p2-diff/round3/sustained-full-game/acceptance.json",
           "build/workers/p2-diff/RESULT.md",
-          "evidence/canonical/behavior-attribution/observations.json"
+          "evidence/canonical/behavior-attribution/observations.json",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/accept-new-game-4/acceptance.json",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/accept-load/acceptance.json",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/accept-sustained/acceptance.json",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/RESULT.md"
         ],
         "commits": [],
         "original_exe": {
@@ -11007,7 +11011,7 @@
           "observation": "Equal to original in the fresh paired14s capture; exact byte deltas are recorded in observations.json."
         },
         "native": {
-          "observation": "Exact snapshot difference; equal virtual milliseconds do not prove equal source phase. "
+          "observation": "The fixed build writes the canonical 1280-byte owner. At the first 14 s new-game boundary, 48 differing bytes are confined to the 1040-byte pixel plane (first offset 13); the 79-byte g_5ECE string alias and one-byte g_5F1D terminator alias are equal. Load and sustained equal-time diagnostic checkpoints also differ, but are not aligned source phases. Remaining pixel content is consistent with the separately tracked R4 BIOS font-bank mismatch; exact per-call causal allocation has not been established."
         }
       },
       "related_items": [],
@@ -11016,21 +11020,21 @@
         {
           "scenario": "new-game-save",
           "milliseconds": 14000,
-          "report": "build/workers/p2-diff/round3/new-game-save/acceptance.json",
+          "report": "build/workers/p2-r5/wt/build/workers/p2-r5/accept-new-game-4/acceptance.json",
           "status": "DIFFERS",
-          "first_offset": 16,
-          "differing_bytes": 86,
-          "max_byte_delta": 248,
+          "first_offset": 13,
+          "differing_bytes": 48,
+          "max_byte_delta": 240,
           "dos_unsigned": null,
           "native_unsigned": null
         },
         {
           "scenario": "load-original-resume",
           "milliseconds": 30000,
-          "report": "build/workers/p2-diff/round3/load-original-resume/acceptance.json",
+          "report": "build/workers/p2-r5/wt/build/workers/p2-r5/accept-load/acceptance.json",
           "status": "DIFFERS",
           "first_offset": 12,
-          "differing_bytes": 104,
+          "differing_bytes": 143,
           "max_byte_delta": 254,
           "dos_unsigned": null,
           "native_unsigned": null
@@ -11038,17 +11042,17 @@
         {
           "scenario": "sustained-full-game",
           "milliseconds": 109000,
-          "report": "build/workers/p2-diff/round3/sustained-full-game/acceptance.json",
+          "report": "build/workers/p2-r5/wt/build/workers/p2-r5/accept-sustained/acceptance.json",
           "status": "DIFFERS",
-          "first_offset": 1,
-          "differing_bytes": 149,
-          "max_byte_delta": 254,
+          "first_offset": 16,
+          "differing_bytes": 144,
+          "max_byte_delta": 248,
           "dos_unsigned": null,
           "native_unsigned": null
         }
       ],
-      "attributed_observation_scope": "new-game-save:14000; diagnostic equal-time view only, not a proved cause of later gameplay",
-      "next_experiment": "Capture original/canonical/native g_5ABE at the same source boundary and input prefix for each listed scenario; use independent symbol anchors and same-EXE repeats. For code-address/descriptor/residue views compare the actual handler/observer effect before calling the raw numeric difference a game defect."
+      "attributed_observation_scope": "new-game-save:14000; direct-owner fix verified; remaining pixel bytes are diagnostic only pending aligned BIOS-font comparison",
+      "next_experiment": "After the R4 BIOS font provider fix, compare original/canonical/native at the same f_1FBD text-render call with identical input, font bank and source phase; retain per-call output and a contrasting string control."
     },
     {
       "id": "diff-symbol-g_6364",
@@ -17758,9 +17762,9 @@
     },
     {
       "id": "port-text-bitmap-sidecar",
-      "description": "Native text writes a sidecar bitmap instead of canonical g_5ABE backing storage.",
+      "description": "Native text pixel, string and terminator writes now use the canonical g_5ABE owner and its source-derived aliases.",
       "classification": "PORT_INTRODUCED",
-      "status": "open",
+      "status": "fixed",
       "scope": "text backing-store ABI/platform projection",
       "evidence": {
         "level": "PROVEN",
@@ -17769,7 +17773,19 @@
           "portable/whole_program/text_bitmap_bridge.c",
           "portable/whole_program/text_bitmap.c",
           "src/root/m1FBD.asm",
-          "evidence/canonical/behavior-attribution/observations.json"
+          "evidence/canonical/behavior-attribution/observations.json",
+          "portable/canonical_native_abi/asm_data.py",
+          "portable/build.py",
+          "portable/whole_program/text_bitmap_bridge.c",
+          "portable/whole_program/text_bitmap.c",
+          "portable/whole_program/platform/font_blit.c",
+          "portable/tests/acceptance/native_acceptance.py",
+          "portable/whole_program/platform/tests/text_bitmap_owner_test.c",
+          "portable/whole_program/platform/tests/run_text_bitmap_owner_tests.py",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/build-4/report.json",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/text-owner-tests-7/report.json",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/accept-new-game-4/acceptance.json",
+          "build/workers/p2-r5/wt/build/workers/p2-r5/RESULT.md"
         ],
         "commits": [],
         "original_exe": {
@@ -17783,7 +17799,7 @@
           "observation": "Source-DOS first File caption return writes g_5ABE; source/owner contract matches original and paired14s output bytes agree."
         },
         "native": {
-          "observation": "Native f_1FBD_0000 updates source_bridge.state.pixels while g_5ABE remainszero. Bitmap algorithm and backing-store correspondence are independent issues."
+          "observation": "Historical baseline: first f_1FBD return wrote the private bridge buffer while g_5ABE remained zero. Current build4 removes that state and computes into g_5ABE directly; font_MakeImage is guarded by a regression checking canonical g_5ABE[0]. The negative-control run points the bitmap at sidecar storage and the same canonical-owner check fails with exit 2. Generated exports make g_5ECE at +1040 and g_5F1D at +1119 observable interior aliases. New-game 14 s confirms those string/terminator aliases match DOS while only 48 pixel-plane bytes remain different."
         }
       },
       "related_items": [
@@ -17894,16 +17910,26 @@
     },
     {
       "id": "port-bios-font-8x14-provider",
-      "description": "Native BIOS 8x14 glyph provider differs from the bank observed in both DOS builds.",
+      "description": "Native BIOS font resources used DOSBox Staging static arrays instead of the active DOSBox-X BIOS tables; 8x14 text output differed.",
       "classification": "PORT_INTRODUCED",
-      "status": "open",
-      "scope": "BIOS service data correspondence, separate from text backing-store projection",
+      "status": "fixed",
+      "scope": "Pinned DOSBox-X BIOS font data consumed by the supported VGA text-bitmap path; other profile and timing limits are itemized in the service census.",
       "evidence": {
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
+          "evidence/canonical/behavior-attribution/observations.json",
+          "evidence/canonical/behavior-attribution/bios-service-census.json",
+          "portable/runtime/bios-reference/manifest.json",
+          "portable/runtime/bios-reference/font-8x8.bin",
           "portable/runtime/bios-reference/font-8x14.bin",
-          "evidence/canonical/behavior-attribution/observations.json"
+          "portable/whole_program/platform/bios_fonts.c",
+          "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/provenance.json",
+          "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/font-MakeImage-File.dos.bin",
+          "portable/tests/runtime/bios_font_regression.py",
+          "portable/tests/runtime/bios_font_compare.c",
+          "portable/whole_program/platform/sdl3/input_time_host.c",
+          "portable/whole_program/platform/m1b73_mouse.c"
         ],
         "commits": [],
         "original_exe": {
@@ -17917,7 +17943,7 @@
           "observation": "Paired14s read-only font captures retain equal complete banks and pointer/metrics; their SHA is recorded in observations.json."
         },
         "native": {
-          "observation": "Native provider differs in1806 of3584 bytes, including shifted F rows. The glyph algorithm itself need not change."
+          "observation": "Fixed in the p2-r4 worktree: native 8x8/8x14 files now hash-match the active DOSBox-X C000 BIOS capture. The production text-bitmap core matches the direct DOS return-state capture for \" File\" (70 bytes); the prior Staging font differs in 26 output bytes. Startup BDA NumLock and mouse type are also aligned; residual machine-profile limits are explicit in bios-service-census.json."
         }
       },
       "related_items": []

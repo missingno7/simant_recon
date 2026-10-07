@@ -203,6 +203,8 @@ static PortableInputTimeStatus input_time_host_init_common(
     binding->host = host;
     binding->clock = game_clock;
     binding->bios_clock = bios_clock;
+    /* The pinned DOSBox-X BIOS starts with BDA NumLock set (40:17 bit 5). */
+    binding->bios_keyboard_flags = PORTABLE_INPUT_TIME_HOST_NUMLOCK_MASK;
     binding->dual_clock_binding = (uint8_t)(dual_clock_binding != 0);
     portable_input_time_init(&binding->input_time, &services);
     return PORTABLE_INPUT_TIME_OK;

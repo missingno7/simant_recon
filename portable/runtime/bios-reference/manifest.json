@@ -1,34 +1,71 @@
 {
-  "schema": "bios-font-reference-source-v1",
+  "schema": "bios-font-reference-source-v2",
   "source_identity": {
-    "project": "DOSBox Staging",
-    "repository": "https://github.com/dosbox-staging/dosbox-staging",
-    "release_tag": "v0.83.0",
-    "immutable_commit": "7b40053b7ac580843d0461eba8c36a47a990e66c",
+    "project": "DOSBox-X",
+    "repository": "https://github.com/joncampbell123/dosbox-x",
+    "release_tag": "dosbox-x-v2026.08.31",
+    "acceptance_build_commit": "0e5c2f9",
     "license": "GPL-2.0-or-later",
-    "license_url": "https://raw.githubusercontent.com/dosbox-staging/dosbox-staging/7b40053b7ac580843d0461eba8c36a47a990e66c/LICENSE"
+    "license_file": "dosbox-x-v2026.08.31/COPYING",
+    "license_sha256": "93c59ba0fd92fef7746f0e0809cb49a0c27ab21376da0ac6a583688401afd441"
   },
-  "extraction": {
-    "source_path": "src/ints/int10_memory.cpp",
-    "source_url": "https://raw.githubusercontent.com/dosbox-staging/dosbox-staging/7b40053b7ac580843d0461eba8c36a47a990e66c/src/ints/int10_memory.cpp",
-    "arrays": {
-      "int10_font_08": {
-        "dimensions": "256 glyphs x 8 rows",
-        "bytes": 2048,
-        "sha256": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
-        "generated_path": "font-8x8.bin"
-      },
-      "int10_font_14": {
-        "dimensions": "256 glyphs x 14 rows",
-        "bytes": 3584,
-        "sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
-        "generated_path": "font-8x14.bin"
-      }
+  "upstream_sources": {
+    "int10_memory.cpp": {
+      "path": "src/ints/int10_memory.cpp",
+      "url": "https://github.com/joncampbell123/dosbox-x/blob/dosbox-x-v2026.08.31/src/ints/int10_memory.cpp",
+      "sha256": "aefb117deafef68a4998db972ca9f44c8f7d2bc47fd1bc3d40938465879eff0e"
     },
-    "interpretation": "Upstream DOSBox Staging reference-host BIOS tables. Not a SIMANT asset or claim about a user's physical BIOS ROM."
+    "dos_codepages.h": {
+      "path": "src/dos/dos_codepages.h",
+      "url": "https://github.com/joncampbell123/dosbox-x/blob/dosbox-x-v2026.08.31/src/dos/dos_codepages.h",
+      "sha256": "9f5deac35c523afabb389c7524a48dc938a66965fc04d74fa5fd25aa5c9e39ca"
+    },
+    "dos_keyboard_layout.cpp": {
+      "path": "src/dos/dos_keyboard_layout.cpp",
+      "url": "https://github.com/joncampbell123/dosbox-x/blob/dosbox-x-v2026.08.31/src/dos/dos_keyboard_layout.cpp",
+      "sha256": "0560867ee6aa2e56cff000b56fbea0cdd060bb49e601a027e00f75a539d0ed20"
+    }
   },
-  "download_sha256": {
-    "source": "8044424619405c51b0f6a31e676e9d4b931aac5746d844d0a6fb2e955328a14e",
-    "license": "17f1201299b4984dafadcdc62ce70167ac41b6f4ac9e8d3ba1bcc05eea2982e3"
-  }
+  "runtime_capture": {
+    "runner": "C:/tools/dosbox-x-2026.08.31-simant-acceptance/dosbox-x-v3.exe",
+    "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+    "acceptance_patch_sha256": "3943cad5039d8e8fe70f82b93a522bcf92191d0bd41e86a9c17ef3006ceda460",
+    "canonical_dos_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+    "keyboard_layout": "CZ / cz243",
+    "capture_event": "on_exec at CS:IP 27DF:0008, emulated time 4944.143 ms",
+    "capture_path": "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/c000-rom-capture.bin",
+    "capture_sha256": "a3744eaf25671eed3c2526d53afa4451c552c795c78b8be96e2495bb3bf70b79",
+    "capture_range": "physical C0000-C7FFF (32768 bytes)",
+    "interpretation": "The ROM contains DOSBox-X's active font banks. The active 8x14 bank is identical to the canonical DOS INT 10h AX=1130h BH=02 pointer C000:09E9 capture. DOSBox-X's Czech keyboard layout initialization applies a runtime codepage overlay, so the active bank differs from the static int10_font_14 initializer."
+  },
+  "render_capture": {
+    "observation_script": "build/workers/p2-diff/round3/dos-boundaries.scr",
+    "capture_path": "build/workers/p2-diff/round3/dos-boundaries/exec-text-return-2.1.bin",
+    "capture_sha256": "67dc574df99753e861d8934d91d73b02504078b7eeec92313afc024e01881fa5",
+    "capture_range": "physical 00000-A0000 (655360 bytes)",
+    "capture_event": "emulated time 4944.231880 ms, CS:IP 27DF:015E after the text bitmap draw",
+    "captured_bitmap": "The 40x14 header and following 70 pixel bytes were extracted at physical 60D60. The captured 70 bytes equal the fixed-string fixture and the output reconstructed from the captured C09E9 font rows."
+  },
+  "arrays": {
+    "font_8x8": {
+      "dimensions": "256 glyphs x 8 rows",
+      "bytes": 2048,
+      "physical_address": "C01E9",
+      "sha256": "637bb841600ab50977197f81e27092037bc88e7a1a601cffaec286fcd18d9619",
+      "generated_path": "font-8x8.bin",
+      "extraction": "slice of the pinned DOSBox-X C0000-C7FFF runtime BIOS ROM capture"
+    },
+    "font_8x14": {
+      "dimensions": "256 glyphs x 14 rows",
+      "bytes": 3584,
+      "physical_address": "C09E9",
+      "sha256": "bc20c247736ab20ef8b536a7fd51830cec78b4fa5779064df7349e14803b613d",
+      "generated_path": "font-8x14.bin",
+      "extraction": "slice of the active INT 10h AX=1130h BH=02 pointer C000:09E9 from the pinned DOSBox-X runtime BIOS ROM capture"
+    }
+  },
+  "unprovided_tables": {
+    "font_8x16": "The canonical source has no INT 10h AX=1130h BH=06 request. It is not consumed by this native port and is therefore not a runtime provider input. The upstream static initializer remains in int10_memory.cpp."
+  },
+  "scope": "BIOS service data for the pinned DOSBox-X acceptance machine; not a SIMANT game asset and not a claim about a physical PC BIOS."
 }
