@@ -228,8 +228,8 @@ void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot)
     write_timer_record(slot->records[0], timer);
     callback_sidecars[index][0] = sidecar;
     (*slot->count) = (uint16_t)(old_count + 1u);
-    if (index == 3 && (active_ops.refresh_cursor == NULL ||
-        !active_ops.refresh_cursor(active_ops.context)))
+    if (active_ops.refresh_cursor == NULL ||
+        !active_ops.refresh_cursor(active_ops.context))
         abort();
 }
 

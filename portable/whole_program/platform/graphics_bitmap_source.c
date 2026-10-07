@@ -3,12 +3,30 @@ extern void (*driver_callback_table[25])();
 #include "graphics_bitmap_source.h"
 
 #include "graphics_source_clip.h"
+#include "graphics_source_cursor_effects.h"
 #include "portable/whole_program/window_source_globals.h"
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 extern void f_1D8E_07F6(char *port, int16_t x, int16_t y, char *bits,
                        int16_t width, int16_t height);
+
+static int16_t source_word_add(int16_t left, int16_t right)
+{
+    uint16_t bits = (uint16_t)((uint16_t)left + (uint16_t)right);
+    int16_t result;
+    memcpy(&result, &bits, sizeof(result));
+    return result;
+}
+
+static int16_t source_word_sub(int16_t left, int16_t right)
+{
+    uint16_t bits = (uint16_t)((uint16_t)left - (uint16_t)right);
+    int16_t result;
+    memcpy(&result, &bits, sizeof(result));
+    return result;
+}
 
 static SimGraphicsStatus draw_planar4(SimGraphicsDriver *graphics,
                                       int16_t x, int16_t y,
@@ -41,6 +59,11 @@ static SimGraphicsStatus draw_planar4(SimGraphicsDriver *graphics,
     source_row_bytes = plane_row_bytes * 4u;
     sx0 = cut_left;
     sx1 = (int32_t)width - cut_right;
+    if (!sim_graphics_source_cursor_effects_begin(
+            source_word_add(x, cut_left), y,
+            source_word_sub(source_word_add(x, width), cut_right),
+            source_word_add(y, height)))
+        return SIM_GRAPHICS_UNSUPPORTED_MODE;
     for (row = 0; row < height; ++row) {
         for (px = sx0; px < sx1; ++px) {
             size_t byte_in_plane = (size_t)px >> 3;
@@ -76,6 +99,8 @@ static SimGraphicsStatus draw_planar4(SimGraphicsDriver *graphics,
                                (int32_t)x + px, (int32_t)y + row, color);
         }
     }
+    if (!sim_graphics_source_cursor_effects_end())
+        return SIM_GRAPHICS_UNSUPPORTED_MODE;
     return SIM_GRAPHICS_OK;
 }
 

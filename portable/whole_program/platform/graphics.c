@@ -3,6 +3,7 @@ extern void (*driver_callback_table[25])();
 #include "graphics.h"
 #include "graphics_line_1499.h"
 #include "graphics_source_clip.h"
+#include "graphics_source_cursor_effects.h"
 #include "portable/whole_program/state/font_pointer_state_v1.h"
 
 #include <stdlib.h>
@@ -10,6 +11,23 @@ extern void (*driver_callback_table[25])();
 #include <limits.h>
 static SimGraphicsDriver *s_source_owner;
 static struct Rect *const *s_source_g_5AAC;
+
+static int16_t source_word_from_u16(uint16_t value)
+{
+    int16_t result;
+    memcpy(&result, &value, sizeof(result));
+    return result;
+}
+
+static int16_t source_word_add(int16_t left, int16_t right)
+{
+    return source_word_from_u16((uint16_t)((uint16_t)left + (uint16_t)right));
+}
+
+static int16_t source_word_sub(int16_t left, int16_t right)
+{
+    return source_word_from_u16((uint16_t)((uint16_t)left - (uint16_t)right));
+}
 
 extern void f_1D8E_0384(SimGraphicsPatternRectCallback callback,
                         int16_t unused1, int16_t unused2,
@@ -557,8 +575,14 @@ static void source_g9134_callback_raw(int16_t left, int16_t top,
                                      int16_t color)
 {
     (void)require_source_owner();
+    if (!sim_graphics_source_cursor_effects_begin(left, top, right, bottom)) {
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
+        return;
+    }
     s_source_owner->last_status = sim_graphics_g9134(s_source_owner, left, top,
                                                     right, bottom, color);
+    if (!sim_graphics_source_cursor_effects_end())
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
 }
 
 static void source_g9138_callback_raw(int16_t left, int16_t top,
@@ -566,9 +590,17 @@ static void source_g9138_callback_raw(int16_t left, int16_t top,
                                      int16_t pattern_word)
 {
     (void)require_source_owner();
+    if (!sim_graphics_source_cursor_effects_begin(
+            left < right ? left : right, top < bottom ? top : bottom,
+            left < right ? right : left, top < bottom ? bottom : top)) {
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
+        return;
+    }
     s_source_owner->last_status =
         sim_graphics_g9138_pattern_rect(s_source_owner, left, top,
                                         right, bottom, pattern_word);
+    if (!sim_graphics_source_cursor_effects_end())
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
 }
 
 static void source_g913C_callback_raw(int16_t left, int16_t top,
@@ -577,8 +609,14 @@ static void source_g913C_callback_raw(int16_t left, int16_t top,
 {
     (void)ignored; /* f_1D8E_0384's fifth word is ignored by g913C. */
     (void)require_source_owner();
+    if (!sim_graphics_source_cursor_effects_begin(left, top, right, bottom)) {
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
+        return;
+    }
     s_source_owner->last_status =
         sim_graphics_g913C_xor_rect(s_source_owner, left, top, right, bottom);
+    if (!sim_graphics_source_cursor_effects_end())
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
 }
 
 static void source_g9134_callback(int16_t left, int16_t top,
@@ -634,9 +672,17 @@ static void source_g9170_callback(int16_t x0, int16_t y0,
                                   int16_t color)
 {
     (void)require_source_owner();
+    if (!sim_graphics_source_cursor_effects_begin(
+            x0 < x1 ? x0 : x1, y0 < y1 ? y0 : y1,
+            x0 < x1 ? x1 : x0, y0 < y1 ? y1 : y0)) {
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
+        return;
+    }
     s_source_owner->last_status = sim_graphics_g9170_line(s_source_owner,
                                                            x0, y0, x1, y1,
                                                            color);
+    if (!sim_graphics_source_cursor_effects_end())
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
 }
 
 static void source_g9154_common(int16_t x, int16_t y, char *source_bitmap,
@@ -656,10 +702,19 @@ static void source_g9154_common(int16_t x, int16_t y, char *source_bitmap,
         return;
     }
     span = row_bytes * (size_t)(uint16_t)height;
+    if (!sim_graphics_source_cursor_effects_begin(
+            source_word_add(x, fd_55B3_3DE6), y,
+            source_word_sub(source_word_add(x, width), fd_55B3_3DE8),
+            source_word_add(y, height))) {
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
+        return;
+    }
     s_source_owner->last_status = sim_graphics_g9154(s_source_owner, x, y,
                                                       bitmap, span,
                                                       (uint16_t)width,
                                                       (uint16_t)height);
+    if (!sim_graphics_source_cursor_effects_end())
+        s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
 }
 
 static void source_g9154_callback(int16_t x, int16_t y, char *bitmap,

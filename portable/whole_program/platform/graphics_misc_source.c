@@ -2,11 +2,30 @@
 extern void (*driver_callback_table[25])();
 #include "graphics_misc_source.h"
 #include "graphics_source_clip.h"
+#include "graphics_source_cursor_effects.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 static SimGraphicsDriver *owner;
 static SimGraphicsRetireDisplay retire;
 static void *retire_context;
+
+static int16_t source_word_from_u16(uint16_t value)
+{
+    int16_t result;
+    memcpy(&result, &value, sizeof(result));
+    return result;
+}
+
+static int16_t source_word_add(int16_t left, int16_t right)
+{
+    return source_word_from_u16((uint16_t)((uint16_t)left + (uint16_t)right));
+}
+
+static int16_t source_word_sub(int16_t left, int16_t right)
+{
+    return source_word_from_u16((uint16_t)((uint16_t)left - (uint16_t)right));
+}
 
 extern void f_1D8E_0435(char *, int16_t, int16_t, int16_t, int16_t, int16_t);
 extern void f_1D8E_0384(SimGraphicsPatternRectCallback, int16_t, int16_t,
@@ -85,7 +104,13 @@ static SimGraphicsDriver *required(void)
 static void raw_mask(int16_t l, int16_t t, int16_t r, int16_t b, int16_t p)
 {
     SimGraphicsDriver *g = required();
+    if (!sim_graphics_source_cursor_effects_begin(l, t, r, b)) {
+        g->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
+        return;
+    }
     g->last_status = sim_graphics_s00_masked_rect(g, l, t, r, b, p);
+    if (!sim_graphics_source_cursor_effects_end())
+        g->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
 }
 static void clipped_mask(int16_t l, int16_t t, int16_t r, int16_t b, int16_t p)
 {
@@ -102,7 +127,15 @@ static void clipped_line(int16_t x, int16_t y, int16_t x1, int16_t y1, int16_t c
 static void copy_screen(int16_t l, int16_t t, int16_t r, int16_t b, int16_t x, int16_t y)
 {
     SimGraphicsDriver *g = required();
+    if (!sim_graphics_source_cursor_effects_begin_pair(
+            l, t, r, b, x, y, source_word_sub(source_word_add(x, r), l),
+            source_word_sub(source_word_add(y, b), t))) {
+        g->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
+        return;
+    }
     g->last_status = sim_graphics_s00_screen_copy(g, l, t, r, b, x, y);
+    if (!sim_graphics_source_cursor_effects_end())
+        g->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
     if (g->last_status != SIM_GRAPHICS_OK) abort();
 }
 static void retire_display(void)

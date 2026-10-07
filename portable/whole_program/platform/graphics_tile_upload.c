@@ -229,6 +229,7 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     SimGraphicsBitmapCallback callback;
     int clipped;
     SimGraphicsTileUploadStatus cursor_status;
+    uint8_t *display_busy = (uint8_t *)&g_3DD4;
 
     if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
         return s_status;
@@ -252,6 +253,8 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
      * clipped path copies those same bytes into a 128-byte row-interleaved
      * planar bitmap before dispatching g914C/o00_31AD_0CF9. */
     source_offset = offset;
+    if (clipped)
+        ++*display_busy;
     screen_lock_enter();
     for (row = 0; row < 16u; ++row) {
         for (plane = 0; plane < SIM_GRAPHICS_PLANAR_PLANE_COUNT; ++plane) {
@@ -261,11 +264,14 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
                 tile[output + byte] = source[byte];
         }
     }
-    if (clipped)
+    if (clipped) {
+        --*display_busy;
         screen_lock_leave();
-    else {
+    } else {
+        ++*display_busy;
         cursor_status = source_cursor_before_tile(x, y);
         if (cursor_status != SIM_GRAPHICS_TILE_UPLOAD_OK) {
+            --*display_busy;
             screen_lock_leave();
             return s_status = cursor_status;
         }
@@ -278,12 +284,15 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     s_graphics_owner->last_status = SIM_GRAPHICS_OK;
     callback((int16_t)draw_x, y, (char *)tile, 16, 16);
     if (s_graphics_owner->last_status != SIM_GRAPHICS_OK) {
-        if (!clipped)
+        if (!clipped) {
+            --*display_busy;
             screen_lock_leave();
+        }
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_FAILED;
     }
     if (!clipped) {
         cursor_status = source_cursor_after_tile();
+        --*display_busy;
         screen_lock_leave();
         if (cursor_status != SIM_GRAPHICS_TILE_UPLOAD_OK)
             return s_status = cursor_status;
