@@ -79,6 +79,12 @@ def main():
     canonical=json.loads((ROOT/'src/program.json').read_text())
     mismatched=[u['source'] for u in canonical['modules'] if sha(ROOT/u['source'])!=u['source_sha256']]
     if mismatched:raise ValueError('active canonical program/source inventory differs: '+str(mismatched))
+    for dependency in PLATFORM.get('third_party_dependencies', []):
+        provenance=ROOT/dependency['provenance']
+        pins=json.loads(provenance.read_text())['sha256']
+        for name,expected in pins.items():
+            if sha(provenance.parent/name)!=expected:
+                raise ValueError('third-party source differs from provenance: '+name)
     def current_inputs():
         paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',Path(__file__)}
         paths.update(ROOT/u['source'] for u in canonical['modules'])
@@ -88,6 +94,8 @@ def main():
         paths.update((PROJECT/'portable/runtime/bios-reference').rglob('*'))
         paths.update(ROOT/'assets'/name for name in PLATFORM['runtime_assets'])
         paths.update(ROOT/rel for rel in ['tools/compiler.py','tools/omf.py','tools/workspace.py','layout/toolchain.json','layout/manifest.json'])
+        for dependency in PLATFORM.get('third_party_dependencies', []):
+            paths.update(ROOT/dependency[k] for k in ('license','provenance'))
         return {p.relative_to(PROJECT).as_posix():sha(p) for p in sorted(paths) if p.is_file()}
     input_pins=current_inputs()
     inventory={'translation_units':[dict(module=u['key'],source=u['source'],canonical_destination=u['source'],lang=u['lang']) for u in canonical['modules']]}
@@ -146,6 +154,8 @@ def main():
             text,count=re.subn(initializer,'struct InputQueueDescriptor g_5FF2 = { {0,0,0,0xff},0,0,input_queue,5,0,10,0 };',text)
             if count!=1:errors.append({'source':rel,'stage':'canonical input queue native pointer','error':'initializer shape differs'})
             text='#include "portable/whole_program/types/input_queue.h"\n'+text
+        if rel == 'src/root/m00DF.c':
+            text=apply('audio','adapt',text,rel,text)
         if rel in abis['audio_shared_state_preword'].SOURCE_MODULES:
             if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m284A.c','m29F0.c','m277E.c','m29D6.c','m293A.c','m290D.c'}:
                 text=translate_29d6_port_block(text) if rel=='src/root/m29D6.c' else apply('audio','adapt',text,rel,text)
@@ -253,10 +263,13 @@ def main():
         relative=source.relative_to(PROJECT) if source.is_relative_to(PROJECT) else Path('generated')/source.name
         obj=(OUT/'objects'/relative).with_suffix('.o');obj.parent.mkdir(parents=True,exist_ok=True)
         row['object']=str(obj)
-        command=[CC,'-std=c11','-g','-fsigned-char','-fno-builtin','-fno-strict-aliasing',
+        standard = '-std=c++17' if source.suffix == '.cpp' else '-std=c11'
+        command=[CC,standard,'-g','-fsigned-char','-fno-builtin','-fno-strict-aliasing',
                  '-DSIMANT_NATIVE_LITTLE_ENDIAN=1','-Werror=implicit-function-declaration','-Werror=implicit-int',
                  '-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),'-I',str(copyroot/'portable/whole_program'),
                  '-I',str(SDK/'include'),'-c',str(source),'-o',str(obj)]
+        if source.suffix == '.cpp':
+            command=[x for x in command if not x.startswith('-Werror=implicit-')]
         if row['source']=='src/root/m25E7.c':command.insert(1,'-Dfont_MakeImage=sim_font_make_image_source')
         run=subprocess.run(command,capture_output=True,text=True)
         obj.with_suffix('.compile.txt').write_text(run.stdout+run.stderr)
@@ -289,7 +302,7 @@ def main():
             app_response=OUT/'application-objects.rsp'
             app_response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects)+'\n',encoding='utf-8')
             application_command=[CC,'-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
-                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
+                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp','-static','-lstdc++',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
             app_run=subprocess.run(application_command,cwd=OUT,capture_output=True,text=True)
             (OUT/'application-link.txt').write_text(app_run.stdout+app_run.stderr)
             app_link={'passed':app_run.returncode==0,'command':application_command,'exit_code':app_run.returncode,

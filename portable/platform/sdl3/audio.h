@@ -10,14 +10,10 @@ typedef struct PortableSdl3Audio {
     int owns_subsystem;
 } PortableSdl3Audio;
 
-/* Open a mono unsigned-8-bit stream. `sample_rate` is the decoded stream rate;
- * the DOS sample table does not establish one portable hardware rate. */
+/* Device mix: signed 16-bit stereo at the presentation sample rate. */
 int portable_sdl3_audio_open(PortableSdl3Audio *audio, int sample_rate);
 void portable_sdl3_audio_close(PortableSdl3Audio *audio);
-int portable_sdl3_audio_queue_u8(PortableSdl3Audio *audio,
-                                 const uint8_t *pcm, size_t pcm_size);
-int portable_sdl3_audio_queued_bytes(const PortableSdl3Audio *audio);
-int portable_sdl3_audio_done(const PortableSdl3Audio *audio);
-const char *portable_sdl3_audio_error(void);
+int portable_sdl3_audio_queue_frames(PortableSdl3Audio *audio,
+                                    const int16_t *pcm, size_t frames);
 
 #endif

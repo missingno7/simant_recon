@@ -388,6 +388,12 @@ def emit_audio(facts):
     for i in range(0,len(levels),16):result.append('    '+', '.join(hex(v) for v in levels[i:i+16])+',')
     result.append('};')
     receipt.append({'name':'fd_55B3_6BA4','source_lines':lines,'source_byte_extent':len(levels),'native_type':'uint8_t[255]','consumer_view':'m2815 low byte of int16 element vol => fd_55B3_6BA4[2*vol]','header_change_required':'extern uint8_t fd_55B3_6BA4[255];'})
+    volume, volume_lines = byte_range(f, '_DATA', 'vol_tab', 2048)
+    result.append('uint8_t portable_canonical_volume_tables[2048] = {')
+    for i in range(0, len(volume), 16):
+        result.append('    ' + ', '.join(hex(v) for v in volume[i:i+16]) + ',')
+    result.append('};')
+    receipt.append({'name': 'portable_canonical_volume_tables', 'source_lines': volume_lines,
+                    'source_byte_extent': 2048, 'native_type': 'uint8_t[2048]'})
     (WORK/'canonical_audio_data.c').write_text('\n'.join(result)+'\n')
     return {'source_sha256':f['sha256'],'assembler_offset_witness':{'source':str(object_source),'source_sha256':sha(object_source),'object':str(object_path),'object_sha256':sha(object_path)},'emission':receipt}
-

@@ -56,6 +56,7 @@ def main() -> None:
         shutil.copyfile(fonts / name, payload / 'simant-sdl3-fonts' / name)
     license_file = Path(report['sdk']['path']).parent / 'LICENSE.txt'
     shutil.copyfile(license_file, payload / 'SDL3-LICENSE.txt')
+    shutil.copyfile(ROOT / 'portable/audio/ymfm/LICENSE', payload / 'ymfm-LICENSE.txt')
     required = ' '.join(platform['runtime_assets'])
     launcher = f'''@echo off
 setlocal
@@ -90,8 +91,8 @@ no original game databases, configuration, saves or FONT1-4 files and does not
 replace them. The launcher creates an empty INSTALL.EXE only when absent, for
 the source startup's file-availability probe; an existing installer is preserved.
 
-The launcher selects VGA. Current audio uses the PC-speaker/mode-1 path; other
-historical sound-card modes are unsupported. Startup dialogs and game menus are
+The launcher selects VGA and Sound Blaster mode 6. Audio renders the guest OPL
+and direct DSP DAC commands through ymfm and SDL3. Startup dialogs and game menus are
 the reconstructed game. This preview has passed scripted startup, VGA/input,
 Save/Load, resource, RNG and bounded simulation checks. Complete gameplay,
 long-run stability and full DOS/native behavior equivalence are not established.

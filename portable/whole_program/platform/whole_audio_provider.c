@@ -1,181 +1,95 @@
+/* Readable hardware ISR projection of src/root/m28BC.asm. No private voice
+ * copy: completion clears the same snd field consumed by canonical m295C. */
 #include "whole_audio_provider.h"
-
-#include <stdlib.h>
+#include "audio_native.h"
+#include "audio_state.h"
+#include "audio.h"
+#include "portable/audio/isa_devices.h"
 #include <string.h>
-
-void portable_whole_audio_provider_init(PortableWholeAudioProvider *provider)
-{
-    if (provider == NULL) return;
-    memset(provider, 0, sizeof(*provider));
-    portable_dac_live_scheduler_init(&provider->scheduler);
+#include <stdio.h>
+#include <stdlib.h>
+extern uint8_t portable_canonical_volume_tables[2048];
+extern int16_t f_284A_067F(void);
+int portable_whole_audio_provider_init(PortableWholeAudioProvider *p) {
+    memset(p,0,sizeof(*p));p->mix_divider=16;p->devices=sim_isa_audio_create();
+    return p->devices!=NULL;
 }
-
-void portable_whole_audio_provider_close(PortableWholeAudioProvider *provider)
-{
-    size_t i;
-    if (provider == NULL) return;
-    for (i = 0; i < provider->pending_count; ++i)
-        portable_whole_audio_event_free(&provider->pending[i]);
-    portable_dac_live_scheduler_close(&provider->scheduler);
-    memset(provider, 0, sizeof(*provider));
+void portable_whole_audio_provider_close(PortableWholeAudioProvider *p) {
+    sim_isa_audio_destroy(p->devices);memset(p,0,sizeof(*p));
 }
-
-void portable_whole_audio_provider_set_sequencer(
-    PortableWholeAudioProvider *provider, int16_t *source_divider,
-    int16_t (*tick)(void))
-{
-    if (provider == NULL) return;
-    provider->sequencer_tick = tick;
-    provider->sequencer_divider = tick != NULL ? source_divider : NULL;
+void portable_whole_audio_provider_configure(PortableWholeAudioProvider *p,uint16_t divisor,uint16_t chain,unsigned channels) {
+    p->divisor=divisor;p->chain=chain;p->channels=channels;
 }
-
-PortableWholeAudioProviderStatus portable_whole_audio_provider_apply(
-    PortableWholeAudioProvider *provider, PortableWholeAudioEvent *event)
-{
-    PortableDacLiveVoice *voice;
-    unsigned index;
-    if (provider == NULL || event == NULL)
-        return PORTABLE_WHOLE_AUDIO_PROVIDER_INVALID_ARGUMENT;
-    if (provider->has_sequence != 0 && event->sequence <= provider->last_sequence)
-        return PORTABLE_WHOLE_AUDIO_PROVIDER_BAD_EVENT_ORDER;
-    if (event->channel >= PORTABLE_WHOLE_AUDIO_DAC_CHANNELS)
-        return PORTABLE_WHOLE_AUDIO_PROVIDER_INVALID_ARGUMENT;
-    index = event->channel;
-    voice = &provider->scheduler.voices[index];
-
-    if (event->kind == PORTABLE_WHOLE_AUDIO_EVENT_SAMPLE_STOP) {
-        portable_dac_free_pcm(voice->pcm);
-        memset(voice, 0, sizeof(*voice));
-    } else if (event->kind == PORTABLE_WHOLE_AUDIO_EVENT_SAMPLE_START) {
-        if (event->sample_pcm == NULL || event->sample_size < 2 ||
-            event->step_8_8 == 0 || event->volume_row > 7 ||
-            event->looped > 1 || event->sample_loop > UINT16_MAX - 2u ||
-            (event->looped != 0 && event->sample_loop + 2u >= event->sample_size))
-            return PORTABLE_WHOLE_AUDIO_PROVIDER_RESOURCE_ERROR;
-
-        /* Source f_295C_01EC stops the selected channel before starting a new
-         * sample there. The event already records that selected source slot.
-         */
-        portable_dac_free_pcm(voice->pcm);
-        memset(voice, 0, sizeof(*voice));
-        voice->pcm = event->sample_pcm;
-        event->sample_pcm = NULL;
-        voice->pcm_size = event->sample_size;
-        voice->end = (uint16_t)(event->sample_size - 2u);
-        voice->loop_start = (uint16_t)(event->sample_loop + 2u);
-        voice->step_8_8 = event->step_8_8;
-        voice->volume_row = event->volume_row;
-        voice->looped = event->looped;
-        voice->active = 1;
-    } else {
-        return PORTABLE_WHOLE_AUDIO_PROVIDER_UNSUPPORTED_EVENT;
-    }
-    provider->last_sequence = event->sequence;
-    provider->has_sequence = 1;
-    portable_whole_audio_event_free(event);
-    return PORTABLE_WHOLE_AUDIO_PROVIDER_OK;
+static void next_interrupt(PortableWholeAudioProvider *p,unsigned factor) {
+    uint64_t numerator=p->irq_fraction+(uint64_t)p->divisor*factor*12*UINT64_C(1000000000);
+    p->irq_ns+=numerator/UINT64_C(14318180);
+    p->irq_fraction=numerator%UINT64_C(14318180);
 }
-
-static PortableWholeAudioProviderStatus collect_events(
-    PortableWholeAudioProvider *provider, PortableWholeAudioEventQueue *queue)
-{
-    PortableWholeAudioEvent event;
-    uint64_t prior_deadline = 0;
-    size_t i;
-    if (provider->pending_count != 0 &&
-        provider->pending[provider->pending_count - 1].timestamped != 0)
-        prior_deadline = provider->pending[provider->pending_count - 1].sample_deadline;
-    while (provider->pending_count < PORTABLE_WHOLE_AUDIO_EVENT_CAPACITY &&
-           portable_whole_audio_event_next(queue, &event)) {
-        if (event.timestamped != 0) {
-            if (provider->pending_count != 0 &&
-                provider->pending[provider->pending_count - 1].timestamped != 0 &&
-                event.sample_deadline < prior_deadline) {
-                portable_whole_audio_event_free(&event);
-                return PORTABLE_WHOLE_AUDIO_PROVIDER_BAD_EVENT_ORDER;
+void portable_whole_audio_provider_start(PortableWholeAudioProvider *p) {
+    /* m03CC reloads PIT0 and reinstalls the fast ISR on every sample start. */
+    p->fast=1;p->armed=1;
+    ++p->timer_generation;
+    p->irq_ns=p->time_ns;p->irq_fraction=0;next_interrupt(p,1);
+}
+void portable_whole_audio_provider_stop(PortableWholeAudioProvider *p) { p->armed=0;p->pending_irq=0; }
+static void sequencer(void) {
+    fd_55B3_6B42=(int16_t)((uint16_t)fd_55B3_6B42-1);
+    if(fd_55B3_6B42==0) fd_55B3_6B42=f_284A_067F();
+}
+static void interrupt(PortableWholeAudioProvider *p) {
+    unsigned ch,sum=0;int active=0,skip=0;
+    if(!p->fast) { sequencer();return; }
+    for(ch=0;ch<p->channels;++ch) {
+        PortableWholeAudioRuntimeSample *c=&fd_55B3_6B4C[ch];
+        unsigned sample=128;
+        if(c->snd && c->snd->data && *c->snd->data) {
+            uint16_t phase=(uint16_t)(c->frac+c->step);
+            active=1;c->frac=(uint8_t)phase;
+            c->pos=(uint16_t)(c->pos+(phase>>8));
+            if(c->pos>c->end) {
+                if(c->flags&0x80) c->pos=c->start;
+                else c->snd=NULL;
+                skip=1;break; // L00C5 skips output and later channels only
             }
-            prior_deadline = event.sample_deadline;
+            unsigned row=(uint16_t)(c->voltab-fd_55B3_6B9E)>>8;
+            if(row>7) { fprintf(stderr,"Unsupported canonical volume table row %u\n",row);abort(); }
+            sample=portable_canonical_volume_tables[row*256+((uint8_t *)*c->snd->data)[c->pos]];
         }
-        provider->pending[provider->pending_count++] = event;
+        sum+=sample;
     }
-    for (i = 1; i < provider->pending_count; ++i) {
-        if (provider->pending[i - 1].sequence >= provider->pending[i].sequence)
-            return PORTABLE_WHOLE_AUDIO_PROVIDER_BAD_EVENT_ORDER;
+    if(!skip) {
+        uint8_t mixed=(uint8_t)(sum/p->channels);
+        if(fd_55B3_6B9C==fd_55B3_74B5) {
+            while(dos_audio_host_in8((uint16_t)fd_55B3_6BA0)&0x80) {}
+            dos_audio_host_out8((uint16_t)fd_55B3_6BA0,0x10);
+            while(dos_audio_host_in8((uint16_t)fd_55B3_6BA0)&0x80) {}
+            dos_audio_host_out8((uint16_t)fd_55B3_6BA0,mixed);
+        } else { fprintf(stderr,"Unsupported canonical audio output selector (native device profile is Sound Blaster)\n");exit(70); }
     }
-    return PORTABLE_WHOLE_AUDIO_PROVIDER_OK;
+    if(--p->mix_divider==0) { p->mix_divider=16;sequencer(); }
+    /* STD marks at least one live sample. Original L0148 switches to slow
+     * PIT/ISR only when DF remains clear and the divider did not hit zero. */
+    else if(!active) p->fast=0;
 }
-
-PortableWholeAudioProviderStatus portable_whole_audio_provider_render(
-    PortableWholeAudioProvider *provider, PortableWholeAudioEventQueue *queue,
-    uint8_t *samples, size_t count)
-{
-    PortableWholeAudioProviderStatus status;
-    size_t frame;
-    if (provider == NULL || queue == NULL || (samples == NULL && count != 0))
-        return PORTABLE_WHOLE_AUDIO_PROVIDER_INVALID_ARGUMENT;
-    status = collect_events(provider, queue);
-    if (status != PORTABLE_WHOLE_AUDIO_PROVIDER_OK) return status;
-    provider->in_render = 1;
-    for (frame = 0; frame < count; ++frame) {
-        while (provider->pending_count != 0) {
-            PortableWholeAudioEvent *event = &provider->pending[0];
-            if (event->timestamped != 0 &&
-                event->sample_deadline > provider->sample_cursor)
-                break;
-            status = portable_whole_audio_provider_apply(provider, event);
-            if (status != PORTABLE_WHOLE_AUDIO_PROVIDER_OK) {
-                provider->in_render = 0;
-                return status;
-            }
-            if (provider->pending_count > 1)
-                memmove(provider->pending, provider->pending + 1,
-                        (provider->pending_count - 1) * sizeof(provider->pending[0]));
-            --provider->pending_count;
-            memset(&provider->pending[provider->pending_count], 0,
-                   sizeof(provider->pending[0]));
-        }
-        status = portable_whole_audio_provider_render_tick(provider, &samples[frame]);
-        if (status != PORTABLE_WHOLE_AUDIO_PROVIDER_OK) {
-            provider->in_render = 0;
-            return status;
-        }
-        /* The original sequencer callback can enqueue a note from this very
-         * PIT frame. Capture it now so it commits at the following boundary,
-         * rather than waiting for another host pump and losing timing.
-         */
-        status = collect_events(provider, queue);
-        if (status != PORTABLE_WHOLE_AUDIO_PROVIDER_OK) {
-            provider->in_render = 0;
-            return status;
-        }
-        ++provider->sample_cursor;
+void portable_whole_audio_provider_enable_interrupts(PortableWholeAudioProvider *p) {
+    /* PIC IRQ0 coalesces edges while IF is clear. Source callbacks cannot
+     * reenter the private sequencer stack in this single-thread projection. */
+    if(p->armed && p->pending_irq && !p->in_render) {
+        p->pending_irq=0;p->in_render=1;interrupt(p);p->in_render=0;
     }
-    provider->in_render = 0;
-    return PORTABLE_WHOLE_AUDIO_PROVIDER_OK;
 }
-
-PortableWholeAudioProviderStatus portable_whole_audio_provider_render_tick(
-    PortableWholeAudioProvider *provider, uint8_t *sample)
-{
-    PortableDacLiveTick tick;
-    PortableDacSchedulerStatus status;
-    if (provider == NULL || sample == NULL)
-        return PORTABLE_WHOLE_AUDIO_PROVIDER_INVALID_ARGUMENT;
-    status = portable_dac_live_scheduler_tick(&provider->scheduler, &tick);
-    if (status != PORTABLE_DAC_SCHEDULER_OK)
-        return PORTABLE_WHOLE_AUDIO_PROVIDER_RESOURCE_ERROR;
-    if (tick.output_generated != 0)
-        provider->speaker_level = tick.speaker_enabled != 0 ? 0xff : 0x00;
-    *sample = provider->speaker_level;
-    if (tick.output_generated != 0 && provider->sequencer_tick != NULL &&
-        provider->sequencer_divider != NULL) {
-        uint16_t countdown = (uint16_t)*provider->sequencer_divider;
-        countdown = (uint16_t)(countdown - 1u);
-        memcpy(provider->sequencer_divider, &countdown, sizeof(countdown));
-        if (countdown == 0) {
-            int16_t delay = provider->sequencer_tick();
-            memcpy(provider->sequencer_divider, &delay, sizeof(delay));
-        }
+void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,int16_t stereo[2]) {
+    if(portable_whole_audio_interrupts_enabled()) portable_whole_audio_provider_enable_interrupts(p);
+    ++p->frame_cursor;
+    uint64_t target=(p->frame_cursor/48000)*UINT64_C(1000000000)+
+                    (p->frame_cursor%48000)*UINT64_C(1000000000)/48000;
+    p->in_render=1;
+    while(p->armed && p->irq_ns<=target) {
+        unsigned generation=p->timer_generation;
+        p->time_ns=p->irq_ns;
+        if(portable_whole_audio_interrupts_enabled()) interrupt(p);
+        else p->pending_irq=1;
+        if(generation==p->timer_generation) next_interrupt(p,p->fast?1:16);
     }
-    return PORTABLE_WHOLE_AUDIO_PROVIDER_OK;
+    p->time_ns=target;sim_isa_audio_render(p->devices,stereo,target);p->in_render=0;
 }

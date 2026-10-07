@@ -1,7 +1,7 @@
 from __future__ import annotations
 import hashlib
 from typing import Any
-DEPENDENCY_ANCHORS = {'src/root/m284A.c': [{'path': 'src/root/m0000.c', 'role': 'f_0000_0193 obtains the song resource, locks its handle, and stores the handle in Song.data before m284A reads it'}, {'path': 'src/root/m171C.c', 'role': "f_171C_1C1C returns the handle size as long; m284A's own int declaration/store retain the low 16-bit source-visible bound"}], 'src/root/m277E.c': [{'path': 'src/data/d55B3_00B8.c', 'role': 'struct Instr declares void *p and the referenced 56-entry voice tables use that native pointer member'}], 'src/root/m290D.c': [{'path': 'src/root/m0000.c', 'role': 'f_0000_0090 stores the kind-5 decoded sample Handle in Sample.data; the native sample event dereferences that handle exactly once to borrow decoded PCM before copying it'}, {'path': 'src/data/d55B3_00B8.c', 'role': 'fd_55B3_0C42 and mode-specific sibling tables bind type-1 instrument entries to source Sample records consumed by f_290D_0193'}]}
+DEPENDENCY_ANCHORS = {'src/root/m284A.c': [{'path': 'src/root/m0000.c', 'role': 'f_0000_0193 obtains the song resource, locks its handle, and stores the handle in Song.data before m284A reads it'}, {'path': 'src/root/m171C.c', 'role': "f_171C_1C1C returns the handle size as long; m284A's own int declaration/store retain the low 16-bit source-visible bound"}], 'src/root/m277E.c': [{'path': 'src/data/d55B3_00B8.c', 'role': 'struct Instr declares void *p and the referenced 56-entry voice tables use that native pointer member'}], 'src/root/m290D.c': [{'path': 'src/root/m0000.c', 'role': 'f_0000_0090 stores the kind-5 decoded sample Handle in Sample.data; the native hardware ISR dereferences that canonical handle without copied voice state'}, {'path': 'src/data/d55B3_00B8.c', 'role': 'fd_55B3_0C42 and mode-specific sibling tables bind type-1 instrument entries to source Sample records consumed by f_290D_0193'}]}
 
 def _sha(text: str) -> str:
     return hashlib.sha256(text.encode('utf-8')).hexdigest()
@@ -84,16 +84,34 @@ def _convert_293a(source: str) -> tuple[str, dict[str, Any]]:
     return (output, {'transformed_assembly': ['f_293A_002D INT 1A BIOS base and far signature read', 'f_293A_0059 INT 15 descriptor plus CMOS register 2F read'], 'result_policy': 'device predicates are returned only from the original BIOS/signature/CMOS host service results; no provider means unresolved service, never assumed success', 'host_services_unprovided': ['dos_audio_host_bios_int1a_8100', 'dos_audio_host_bios_int15_c000', 'dos_audio_host_read_far_u8', 'dos_audio_host_read_far_u16', 'dos_audio_host_interrupt_disable', 'dos_audio_host_interrupt_enable', 'dos_audio_host_out8', 'dos_audio_host_in8']})
 
 def _convert_290d(source: str) -> tuple[str, dict[str, Any]]:
-    output = _replace_once(source, '    f_29F0_0012();\n    f_28BC_03CC();\n}', '    {\n        const uint8_t *sample_pcm =\n            (const uint8_t *)(*(char far * far *)s->data);\n        PortableWholeAudioEventStatus event_status = portable_whole_audio_sample_start(\n            (unsigned)ch, sample_pcm, (uint16_t)s->len, (uint16_t)s->loop,\n            (uint16_t)step, (unsigned)vol, s->looped != 0);\n        if (event_status != PORTABLE_WHOLE_AUDIO_EVENT_OK)\n            portable_whole_audio_event_fault(event_status);\n    }\n    f_29F0_0012();\n    f_28BC_03CC();\n}', 'm290D source DAC start event boundary')
-    output = _replace_once(output, '    fd_55B3_6B4C[ch].snd = fd_55B3_6B4C[ch].owner = 0;\n    f_29F0_0012();', '    fd_55B3_6B4C[ch].snd = fd_55B3_6B4C[ch].owner = 0;\n    {\n        PortableWholeAudioEventStatus event_status =\n            portable_whole_audio_sample_stop((unsigned)ch);\n        if (event_status != PORTABLE_WHOLE_AUDIO_EVENT_OK)\n            portable_whole_audio_event_fault(event_status);\n    }\n    f_29F0_0012();', 'm290D source DAC stop event boundary')
-    output = '#include "portable/whole_program/platform/audio_events.h"\n\n' + output
-    return (output, {'transformed_source_boundaries': ['f_290D_0098 successful decoded-sample/channel commit', 'f_290D_026C channel stop/owner clear'], 'event_order': 'The synchronous whole-program sequencer and source voice allocator call these original source functions in order; the event queue assigns one increasing sequence across starts and stops.', 'sample_view': 'f_0000_0090 stores a decoded kind-5 Handle in Sample.data. The callback dereferences that Handle once while its resource remains owned, and the queue copies exactly the low-16-bit Sample.len bytes before returning.', 'source_parameters': 'channel, decoded bytes, Sample.len, Sample.loop, computed 8.8 step, computed volume-table row, and looped flag are passed unchanged at the start commit; stop identifies the source channel.', 'unbound_policy': 'source event queue not bound, exhausted, or given invalid source sample state calls the explicit audio event fault; no silent success is reported', 'leaves_unprovided': ['MIDI/OPL event backends for type-2 and other non-DAC channel families']})
+    # The source ISR projection consumes the canonical channel record directly.
+    # No copied event/voice model or changes to the source start/stop algorithm.
+    return (source, {'status': 'UNCHANGED_SOURCE_CHANNEL_COMMITS',
+                     'consumer': 'portable/whole_program/platform/whole_audio_provider.c'})
+
+def _convert_00df(source: str) -> tuple[str, dict[str, Any]]:
+    # Canonical d3D57 owns 07A8 as TWO bytes and the next two option words as
+    # 07AA[4]. DOS word indices 1/2 address that next owner. Host alignment
+    # cannot preserve this relationship by indexing the first native object.
+    output = _replace_once(source, 'extern int far fd_3D57_07A8[];',
+                           'extern unsigned char far fd_3D57_07AA[4];',
+                           'sound flags canonical owner declaration')
+    if output.count('fd_3D57_07A8[1]') != 3 or output.count('fd_3D57_07A8[2]') != 1:
+        raise ValueError('m00DF sound option word views changed')
+    output = output.replace('fd_3D57_07A8[1]', '(*(int far *)(fd_3D57_07AA + 0))')
+    output = output.replace('fd_3D57_07A8[2]', '(*(int far *)(fd_3D57_07AA + 2))')
+    return output, {'status': 'SOURCE_OWNER_WORD_VIEWS',
+                    'owner': 'src/data/d3D57.c:fd_3D57_07AA[4]',
+                    'DOS_relationship': '07A8 + 2/4 equals 07AA + 0/2',
+                    'native_relationship': 'explicit little-endian word views of existing canonical owner'}
 
 def adapt(path: str, source: str) -> tuple[str, dict[str, Any]]:
     """Convert one canonical audio source using explicit ABI shape checks."""
     normalized = path.replace('\\', '/')
     source_sha = _sha(source)
-    if normalized == 'src/root/m29F0.c':
+    if normalized == 'src/root/m00DF.c':
+        (output, change) = _convert_00df(source)
+    elif normalized == 'src/root/m29F0.c':
         (output, change) = _convert_29f0(source)
     elif normalized == 'src/root/m284A.c':
         (output, change) = _convert_284a(source)

@@ -19,16 +19,10 @@
     "portable/whole_program/platform/ems_dos_abi.c",
     "portable/whole_program/platform/audio.c",
     "portable/whole_program/platform/audio_state.c",
-    "portable/whole_program/platform/audio_events.c",
-    "portable/whole_program/platform/audio_startup.c",
-    "portable/whole_program/platform/audio_native_mode1.c",
-    "portable/whole_program/platform/audio_clock.c",
-    "portable/audio/dac_mixer.c",
     "portable/platform/sdl3/audio.c",
     "portable/platform/sdl3/whole_audio_provider.c",
     "portable/platform/sdl3/whole_audio_startup.c",
     "portable/whole_program/platform/whole_audio_provider.c",
-    "portable/whole_program/platform/audio_mixer_service.c",
     "portable/whole_program/platform/handles.c",
     "portable/whole_program/platform/input_time.c",
     "portable/whole_program/platform/m1b73_events.c",
@@ -76,10 +70,14 @@
     "portable/whole_program/algorithms/asm_utilities.c",
     "portable/whole_program/algorithms/balloon.c",
     "portable/whole_program/algorithms/line16b5.c",
-    "portable/platform/memory.c"
+    "portable/platform/memory.c",
+    "portable/whole_program/platform/audio_native.c",
+    "portable/audio/isa_devices.cpp",
+    "portable/audio/ymfm/ymfm_opl.cpp",
+    "portable/audio/ymfm/ymfm_adpcm.cpp",
+    "portable/audio/ymfm/ymfm_pcm.cpp"
   ],
   "headers": [
-    "portable/audio/dac_mixer.h",
     "portable/whole_program/platform/bios_fonts.h",
     "portable/whole_program/types/resource_wire.h",
     "portable/whole_program/platform/graphics_resources.h",
@@ -90,7 +88,6 @@
     "portable/platform/sdl3/whole_audio_provider.h",
     "portable/platform/sdl3/whole_audio_startup.h",
     "portable/render/primitives.h",
-    "portable/whole_program/platform/audio_mixer_service.h",
     "portable/whole_program/platform/resource_menu_view.h",
     "portable/whole_program/algorithms/asm_utilities.h",
     "portable/whole_program/algorithms/balloon.h",
@@ -100,10 +97,6 @@
     "portable/whole_program/conversions/pointer_globals.h",
     "portable/whole_program/menu_globals.h",
     "portable/whole_program/platform/audio.h",
-    "portable/whole_program/platform/audio_clock.h",
-    "portable/whole_program/platform/audio_events.h",
-    "portable/whole_program/platform/audio_native_mode1.h",
-    "portable/whole_program/platform/audio_startup.h",
     "portable/whole_program/platform/audio_state.h",
     "portable/whole_program/platform/crt_abi.h",
     "portable/whole_program/platform/crt_rng.h",
@@ -168,7 +161,15 @@
     "portable/whole_program/window_refs.h",
     "portable/whole_program/window_runtime_owner.h",
     "portable/whole_program/window_source_globals.h",
-    "portable/whole_program/window_source_rects.h"
+    "portable/whole_program/window_source_rects.h",
+    "portable/whole_program/platform/audio_native.h",
+    "portable/audio/isa_devices.h",
+    "portable/audio/ymfm/ymfm.h",
+    "portable/audio/ymfm/ymfm_fm.h",
+    "portable/audio/ymfm/ymfm_fm.ipp",
+    "portable/audio/ymfm/ymfm_opl.h",
+    "portable/audio/ymfm/ymfm_adpcm.h",
+    "portable/audio/ymfm/ymfm_pcm.h"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",
@@ -274,5 +275,27 @@
       "source": "src/root/m15F8.c:main",
       "observed_contract": "Five open(\"install.exe\",0) calls, five matching close calls; file bytes are never read or executed."
     }
-  ]
+  ],
+  "third_party_dependencies": [
+    {
+      "name": "ymfm",
+      "license": "portable/audio/ymfm/LICENSE",
+      "provenance": "portable/audio/ymfm/provenance.json"
+    }
+  ],
+  "native_audio_boundary": {
+    "source_mode": 6,
+    "source_driver": "src/root/m28BC.asm",
+    "devices": "OPL3 in OPL2 compatibility mode; SB DSP direct unsigned 8-bit DAC",
+    "synthesis": "ymfm BSD-3-Clause, pinned portable/audio/ymfm/provenance.json",
+    "trace": "SIMANT_AUDIO_TRACE existing directory; io-sb_dsp/io-opl DOS OUT format",
+    "limitations": [
+      "Generic SB DMA and device IRQs are unimplemented and fail closed; canonical mode 6 uses PIT IRQ0 and direct DAC command 10h.",
+      "Host monotonic scheduling is not cycle-accurate DOS CPU execution; trace timing requires explicit comparison tolerance.",
+      "Other audio modes are unsupported; source startup time and full timer-chain/menu/save ABI equivalence are not claimed."
+    ],
+    "source_selection": "Canonical CFG selection retained; platform no longer forces /s1. Explicit /s6 or /s0 accepted.",
+    "validation_and_limits": "Sound Blaster mode 6 uses canonical C and a readable m28BC ISR projection, existing channel owners and source volume-table directives. OPL3/OPL2-compatibility synthesis is ymfm BSD-3-Clause; SB direct U8 DAC/reset/mute and IRQ0 cadence are hosted. A bounded fresh sound-duration window matches all 5 DSP and 13476 OPL port/value writes from the original new-game-save oracle. First-musical-command-relative OPL timing is within 2 ms; absolute startup differs by about one second. Generic SB DMA/device IRQs, other device profiles, complete BIOS INT08 chain phase/reentry, and menu/save option cross-owner ABI views remain unproved/unsupported. Static music/effect reads in m00DF map mechanically to canonical 07AA owner words; no ordinary owner or game branch is introduced.",
+    "classification": "TRUE_PLATFORM_BOUNDARY; unsupported hardware profiles fail explicitly, no semantic exception or ordinary source modification"
+  }
 }

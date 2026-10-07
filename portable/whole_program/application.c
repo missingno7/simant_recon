@@ -16,7 +16,7 @@
 #include "portable/whole_program/platform/graphics_resources.h"
 #include "portable/platform/sdl3/whole_audio_provider.h"
 #include "portable/platform/sdl3/whole_audio_startup.h"
-#include "platform/audio_native_mode1.h"
+#include "platform/audio_native.h"
 #include "state/main_loop_counter.h"
 #include "text_bitmap_bridge.h"
 #include "window_source_globals.h"
@@ -43,7 +43,6 @@ typedef struct Application {
     PortableSourceGraphicsResources resources;
     PortableM1B73SdlApplicationInput input;
     SimTimingClock game_clock, bios_clock;
-    PortableWholeAudioEventQueue audio_events;
     PortableSdl3WholeAudio audio;
     uint32_t seed;
     uint64_t last_present;
@@ -271,10 +270,9 @@ static void cleanup(void)
     if (app.cleaned) return;
     app.cleaned = 1;
     portable_m1b73_sdl_application_input_unbind(&app.input);
-    if (portable_whole_audio_mode1_timer_armed()) f_28BC_04E0(0);
+    if (portable_whole_audio_timer_armed()) f_28BC_04E0(0);
     portable_sdl3_whole_audio_unbind_source_services();
     portable_sdl3_whole_audio_close(&app.audio);
-    portable_whole_audio_event_queue_close(&app.audio_events);
     sim_native_video_startup_unbind();
     portable_source_graphics_resources_destroy(&app.resources);
     sim_graphics_destroy(&app.graphics);
@@ -323,8 +321,8 @@ static void idle(void *context)
                 &event, &had_event) != PORTABLE_M1B73_APP_INPUT_OK)
             fail("retained input queue");
     } while (had_event);
-    if (a->audio.active && portable_sdl3_whole_audio_pump(&a->audio, 2048) !=
-            PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("sampled audio output");
+    if (a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
+            PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
     if (a->display_active && !g_5AAC && (g_3DD4 & 255u) == 0 &&
         sim_sdl_palette_view(&a->palette) && now - a->last_present >= 16666667) {
         if (portable_m1b73_sdl_application_input_present(&a->input) !=
@@ -347,7 +345,7 @@ int main(int argc, char **argv)
     char runtime_assets[MAX_PATH];
     char runtime_fonts[MAX_PATH];
     const char *assets = runtime_assets, *fonts = runtime_fonts;
-    int profile = 0, count = 3, i;
+    int profile = 0, count = 2, i;
     int headless = 0;
     char replay_path[MAX_PATH] = {0};
     uint64_t smoke_ms = 0;
@@ -390,7 +388,6 @@ int main(int argc, char **argv)
     if (!source_argv) fail("argument storage");
     source_argv[0] = argv[0];
     source_argv[1] = "/dE";
-    source_argv[2] = "/s1";
     for (i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--headless")) headless = 1;
         else if (!strcmp(argv[i], "--input-script") && i + 1 < argc) {
@@ -411,8 +408,8 @@ int main(int argc, char **argv)
             if (!strcmp(argv[i], "/dV")) profile = 8;
             else if (!strcmp(argv[i], "/dE")) profile = 0;
             else if (!strncmp(argv[i], "/d", 2) ||
-                     (!strncmp(argv[i], "/s", 2) && strcmp(argv[i], "/s1")))
-                fail("supported source switches: /dE, /dV and /s1");
+                     (!strncmp(argv[i], "/s", 2) && strcmp(argv[i], "/s6") && strcmp(argv[i], "/s0")))
+                fail("supported source switches: /dE, /dV, /s6 and /s0");
             source_argv[count++] = argv[i];
         }
     }
@@ -445,10 +442,8 @@ int main(int argc, char **argv)
     if (sim_timing_clock_init_bios(&app.game_clock, 14318180, 12) != SIM_TIMING_OK ||
         sim_timing_clock_init_bios(&app.bios_clock, 14318180, 12) != SIM_TIMING_OK ||
         !portable_seed_source_bind(read_seed, &app)) fail("source clocks and seed");
-    portable_whole_audio_event_queue_init(&app.audio_events);
-    if (!portable_sdl3_whole_audio_open(&app.audio, &app.audio_events,
-            PORTABLE_SDL3_WHOLE_AUDIO_MODE1_SAMPLED_DAC))
-        fail("sampled audio startup binding");
+    if (!portable_sdl3_whole_audio_open(&app.audio))
+        fail("ISA audio startup binding");
     portable_sdl3_whole_audio_set_source_timer_observer(&app.audio,
         source_timer_changed, &app);
     if (!portable_sdl3_whole_audio_bind_source_services(&app.audio))

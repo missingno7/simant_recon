@@ -14,8 +14,8 @@ int portable_sdl3_audio_open(PortableSdl3Audio *audio, int sample_rate)
         if (!SDL_InitSubSystem(SDL_INIT_AUDIO)) return 0;
         audio->owns_subsystem = 1;
     }
-    spec.format = SDL_AUDIO_U8;
-    spec.channels = 1;
+    spec.format = SDL_AUDIO_S16;
+    spec.channels = 2;
     spec.freq = sample_rate;
     stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK,
                                        &spec, NULL, NULL);
@@ -44,30 +44,14 @@ void portable_sdl3_audio_close(PortableSdl3Audio *audio)
     memset(audio, 0, sizeof(*audio));
 }
 
-int portable_sdl3_audio_queue_u8(PortableSdl3Audio *audio,
-                                 const uint8_t *pcm, size_t pcm_size)
+int portable_sdl3_audio_queue_frames(PortableSdl3Audio *audio,
+                                     const int16_t *pcm, size_t frames)
 {
+    size_t pcm_size = frames * 2 * sizeof(int16_t);
     if (audio == NULL || audio->stream == NULL ||
         (pcm == NULL && pcm_size != 0) || pcm_size > INT_MAX)
         return 0;
     if (pcm_size == 0) return 1;
     return SDL_PutAudioStreamData((SDL_AudioStream *)audio->stream,
                                   pcm, (int)pcm_size);
-}
-
-int portable_sdl3_audio_queued_bytes(const PortableSdl3Audio *audio)
-{
-    if (audio == NULL || audio->stream == NULL) return 0;
-    return SDL_GetAudioStreamQueued((SDL_AudioStream *)audio->stream);
-}
-
-int portable_sdl3_audio_done(const PortableSdl3Audio *audio)
-{
-    if (audio == NULL || audio->stream == NULL) return 0;
-    return portable_sdl3_audio_queued_bytes(audio) == 0;
-}
-
-const char *portable_sdl3_audio_error(void)
-{
-    return SDL_GetError();
 }

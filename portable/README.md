@@ -14,6 +14,7 @@ python portable/tests/native_simulation/run.py --native-build build/current/port
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow vga
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow save
 python portable/tests/runtime/run_load.py --report build/current/portable/report.json
+python portable/tests/audio/run.py
 ```
 
 Default output is recreated after moving the previous result to ignored `to_delete/`.
@@ -71,6 +72,11 @@ that a native C compiler cannot assemble; they are not an alternative C game
 model. Header views and native registries borrow canonical ordinary owners.
 
 Current native execution is a preview with explicit unresolved contracts.
+Audio follows CFG Sound Mode 6 through canonical C and a readable translation of
+the canonical timer/mixer ASM. Guest DSP/OPL commands reach the device emulator;
+SDL receives stereo S16 PCM. Set `SIMANT_AUDIO_TRACE` to an existing directory to
+record DOS-format OUT traces. The bounded command comparison and remaining limits
+are documented in [the audio review](../evidence/canonical/native-audio-device/review.md).
 All ordinary storage, including the clip rectangle destination, now compiles
 from canonical owners without native reservations; the canonical icon Handle
 slot is resolved only for the locked VGA mode.

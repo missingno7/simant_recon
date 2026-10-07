@@ -21,7 +21,19 @@
     "portable/whole_program/conversions/pointer_globals.c",
     "portable/canonical_native_abi/source_runtime_globals.py",
     "portable/whole_program/platform/source_memory.c",
-    "portable/whole_program/platform/source_memory.h"
+    "portable/whole_program/platform/source_memory.h",
+    "portable/whole_program/platform/audio_native_mode1.c",
+    "portable/whole_program/platform/audio_native_mode1.h",
+    "portable/whole_program/platform/audio_events.c",
+    "portable/whole_program/platform/audio_events.h",
+    "portable/whole_program/platform/audio_mixer_service.c",
+    "portable/whole_program/platform/audio_mixer_service.h",
+    "portable/whole_program/platform/audio_startup.c",
+    "portable/whole_program/platform/audio_startup.h",
+    "portable/whole_program/platform/audio_clock.c",
+    "portable/whole_program/platform/audio_clock.h",
+    "portable/audio/dac_mixer.c",
+    "portable/audio/dac_mixer.h"
   ],
   "entry_points": [
     {
@@ -108,7 +120,7 @@
     {
       "module": "audio",
       "classification": "TRUE_PLATFORM_BOUNDARY",
-      "reason": "Replaces BIOS/port/interrupt/physical-memory access and DAC start/stop effects with explicit audio host/event services. m29D6 also translates hardware-register writes while retaining register arithmetic and write order.",
+      "reason": "Projects BIOS/ISA/interrupt boundaries while retaining canonical sampled-channel commits; translated ASM ISR reads and updates canonical channel state.",
       "blocker_ids": [],
       "deletion_condition": "Keep at the hardware boundary. Any arithmetic moved out of the adapter must stay sourced from the canonical ASM/C algorithm and preserve operation order."
     },
@@ -432,7 +444,9 @@
         "portable/canonical_native_abi/audio.py",
         "portable/canonical_native_abi/source_views.py:translate_29d6_port_block",
         "portable/whole_program/platform/audio*.c",
-        "portable/whole_program/platform/audio*.h"
+        "portable/whole_program/platform/audio*.h",
+        "portable/whole_program/platform/whole_audio_provider.c",
+        "portable/audio/isa_devices.cpp"
       ],
       "builder_site": "portable/build.py:152-156",
       "consumers": [
@@ -441,9 +455,10 @@
         "src/root/m277E.c",
         "src/root/m29D6.c",
         "src/root/m293A.c",
-        "src/root/m290D.c"
+        "src/root/m290D.c",
+        "src/root/m00DF.c"
       ],
-      "reason": "Replaces BIOS/port/interrupt/physical-memory access and DAC start/stop effects with explicit audio host/event services. m29D6 also translates hardware-register writes while retaining register arithmetic and write order.",
+      "reason": "ISA device services and readable canonical ASM ISR projection; original C sound algorithms and sampled-channel commits remain canonical. Source m00DF sound option word reads bind directly to the existing canonical 07AA owner.",
       "blocker": "Several provider leaves are deliberately unprovided and audio mode/backend support remains a platform contract; do not replace them with success-shaped stubs.",
       "deletion_condition": "Keep at the hardware boundary. Any arithmetic moved out of the adapter must stay sourced from the canonical ASM/C algorithm and preserve operation order."
     },
@@ -1019,7 +1034,7 @@
       "consumers": [
         "all canonical native objects and the SDL3 application"
       ],
-      "reason": "The 78 listed providers implement host memory/handles, files/directories, time/input, fonts, video and audio. application.c owns SDL setup, host event transport, presentation and the bounded replay hooks.",
+      "reason": "The listed providers implement host memory/handles, files/directories, time/input, fonts, video and audio. application.c owns SDL setup, host event transport, presentation and the bounded replay hooks.",
       "blocker": "Service inventory is broad and explicit; preview limitations in portable/platform.json remain the acceptance boundary. No second ordinary game-state owner/model was found in the inspected architecture.",
       "deletion_condition": "Keep the manifest as the service inventory. Remove a provider only after proving no generated canonical TU, service object, application link, or isolated test consumes it."
     }
@@ -1130,6 +1145,7 @@
     "layout/": "Locked historical metadata/current proof and architecture policy",
     "portable/tests/": "Current native differential/runtime fixtures",
     "portable/runtime/": "Pinned native BIOS font resources",
+    "portable/audio/ymfm/": "Pinned BSD-licensed OPL emulator and redistribution provenance",
     "portable/whole_program/platform/tests/": "Permanent filesystem/handle service controls",
     "dos/scenarios/": "Pinned DOS acceptance scenarios and emulated-time input scripts"
   }

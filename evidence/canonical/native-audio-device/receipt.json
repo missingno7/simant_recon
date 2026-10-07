@@ -1,0 +1,282 @@
+{
+  "schema": "native-audio-device-observation-v1",
+  "status": "BOUNDED_COMMAND_EQUALITY; ABSOLUTE_TIMING_NOT_EQUAL",
+  "canonical_sources_unchanged": true,
+  "base_commit": "9915760",
+  "source_dos_positive_control": {
+    "sb_dsp": {
+      "source_dos_equals_original_order_values": true,
+      "writes": [
+        5,
+        5
+      ],
+      "original_sha256": "60cfd627395d22cd22d4ae45960f6db45fc5243a531c81b504f6219e2afa6700",
+      "reconstructed_sha256": "01e697afea5200a7f58a8d458ab1114aab3ce58fc6210b8872f9ae23f119d3b5"
+    },
+    "opl": {
+      "source_dos_equals_original_order_values": true,
+      "writes": [
+        13476,
+        13476
+      ],
+      "original_sha256": "8718c24c19ed5afe9d1dfea0be3a60e40b1872434f6252615597f4fe54d0e530",
+      "reconstructed_sha256": "6c9fb40b43f508286c98ba903f24af38b65e84a181176714cdbae8da336c5800"
+    }
+  },
+  "matched_sound_duration_observation": {
+    "run": "build/workers/p2-sound/command-window",
+    "execution": {
+      "command": [
+        "D:/Prog/simant_recon/build/workers/p2-sound/wt/build/current/portable/simant-canonical.exe",
+        "--headless",
+        "--smoke-ms",
+        "49000",
+        "--assets",
+        "D:/Prog/simant_recon/build/workers/p2-sound/assets/window",
+        "--seed",
+        "1",
+        "--input-script",
+        "D:/Prog/simant_recon/build/workers/p2-sound/new-game-save-mouse.txt",
+        "--frame",
+        "D:/Prog/simant_recon/build/workers/p2-sound/command-window/frame.bmp",
+        "/dV"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "executable_sha256": "5a295c6a906d0ad31f2c577863d9cc925964d1d70fff223001daf6c8647274e6",
+      "build_report_sha256": "8e4daa840f97a1e8531045c6d22cbc4d9663ce2c7ed330d39aa0f56258847084"
+    },
+    "streams": {
+      "sb_dsp": {
+        "order_values": "EQUAL",
+        "writes": [
+          5,
+          5
+        ],
+        "first_difference": null,
+        "absolute_max_delta_ms": 975.2040449999995,
+        "anchor_index": 0,
+        "anchor_offset_ms": -974.44283,
+        "relative_max_delta_ms": 0.7612149999995381,
+        "tolerance_ms": 2,
+        "relative_timing": "WITHIN_TOLERANCE"
+      },
+      "opl": {
+        "order_values": "EQUAL",
+        "writes": [
+          13476,
+          13476
+        ],
+        "first_difference": null,
+        "absolute_max_delta_ms": 996.777266000001,
+        "anchor_index": 24,
+        "anchor_offset_ms": -995.6216099999997,
+        "relative_max_delta_ms": 1.1556560000012723,
+        "tolerance_ms": 2,
+        "relative_timing": "WITHIN_TOLERANCE"
+      },
+      "merged": {
+        "order_values": "EQUAL",
+        "writes": [
+          13481,
+          13481
+        ],
+        "first_difference": null,
+        "absolute_max_delta_ms": 996.777266000001,
+        "anchor_index": 0,
+        "anchor_offset_ms": -974.44283,
+        "relative_max_delta_ms": 22.334436000001006,
+        "tolerance_ms": 2,
+        "relative_timing": "OUTSIDE_TOLERANCE"
+      }
+    },
+    "log_sha256": {
+      "sb_dsp": "7a43cfa4747cf5b09819b5744a31d4c73faf12c28f73b5d65a7d516ed6e71aa2",
+      "opl": "abd177f76691fa8a3c73d791ef4786d21b880757a3575472966740927a1be366"
+    },
+    "stderr_sha256": "55b209f52e2fa7c447f9a5508b9e2fce092b80f4a2fd05b37308f9292442b787"
+  },
+  "same_wall_duration_counterexample": {
+    "run": "build/workers/p2-sound/wall-clock-window",
+    "execution": {
+      "command": [
+        "D:/Prog/simant_recon/build/workers/p2-sound/wt/build/current/portable/simant-canonical.exe",
+        "--headless",
+        "--smoke-ms",
+        "50000",
+        "--assets",
+        "D:/Prog/simant_recon/build/workers/p2-sound/assets/wall2",
+        "--seed",
+        "1",
+        "--input-script",
+        "D:/Prog/simant_recon/build/workers/p2-sound/new-game-save-mouse.txt",
+        "--frame",
+        "D:/Prog/simant_recon/build/workers/p2-sound/wall-clock-window/frame.bmp",
+        "/dV"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "executable_sha256": "5a295c6a906d0ad31f2c577863d9cc925964d1d70fff223001daf6c8647274e6",
+      "build_report_sha256": "8e4daa840f97a1e8531045c6d22cbc4d9663ce2c7ed330d39aa0f56258847084"
+    },
+    "streams": {
+      "sb_dsp": {
+        "order_values": "EQUAL",
+        "writes": [
+          5,
+          5
+        ],
+        "first_difference": null,
+        "absolute_max_delta_ms": 977.6082449999994,
+        "anchor_index": 0,
+        "anchor_offset_ms": -976.8404300000002,
+        "relative_max_delta_ms": 0.7678149999992456,
+        "tolerance_ms": 2,
+        "relative_timing": "WITHIN_TOLERANCE"
+      },
+      "opl": {
+        "order_values": "DIFFERS",
+        "writes": [
+          13476,
+          13864
+        ],
+        "first_difference": {
+          "index": 13476,
+          "oracle": null,
+          "native": {
+            "virtual_time_ms": 49033.690055,
+            "port": "0388",
+            "size": 1,
+            "value": "A1"
+          }
+        },
+        "absolute_max_delta_ms": 999.1730989999996,
+        "anchor_index": 24,
+        "anchor_offset_ms": -998.0174429999997,
+        "relative_max_delta_ms": 1.155655999999908,
+        "tolerance_ms": 2,
+        "relative_timing": "WITHIN_TOLERANCE"
+      },
+      "merged": {
+        "order_values": "DIFFERS",
+        "writes": [
+          13481,
+          13869
+        ],
+        "first_difference": {
+          "index": 13481,
+          "oracle": null,
+          "native": {
+            "virtual_time_ms": 49033.690055,
+            "port": "0388",
+            "size": 1,
+            "value": "A1"
+          }
+        },
+        "absolute_max_delta_ms": 999.1730989999996,
+        "anchor_index": 0,
+        "anchor_offset_ms": -976.8404300000002,
+        "relative_max_delta_ms": 22.33266899999944,
+        "tolerance_ms": 2,
+        "relative_timing": "OUTSIDE_TOLERANCE"
+      }
+    },
+    "log_sha256": {
+      "sb_dsp": "f2ad413f314b3ad47375209f8d8a03a495218c26f25d0f25a578e43a5f142e11",
+      "opl": "cfd06e015aa61a6fe03f178f1ba2b995c8f004f1587950e4da34dcd6bb6b9753"
+    },
+    "stderr_sha256": "414cce39cbc79cf9de9ed5e082a81086792ccfaff37bfe0b09abd4826fa5e665"
+  },
+  "native_build": {
+    "report_sha256": "8e4daa840f97a1e8531045c6d22cbc4d9663ce2c7ed330d39aa0f56258847084",
+    "executable_sha256": "5a295c6a906d0ad31f2c577863d9cc925964d1d70fff223001daf6c8647274e6",
+    "counts": {
+      "canonical_C_count": 171,
+      "canonical_C_compile_pass": 170,
+      "ASM_TUs_requiring_translation_or_platform_boundary": 29,
+      "native_services": 75,
+      "native_services_compile_pass": 75,
+      "conversion_failures": 0
+    },
+    "sdk": {
+      "path": "D:/Prog/simant_recon/build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32",
+      "import_library_sha256": "e2b4776d02b0f7ba9bbdc6db64e0de873e37a4c32afcdf276e63766e864fb15a",
+      "runtime_sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631"
+    },
+    "all_input_pins_sha256": "2ed80d7ec81f3d61d316591d9d0d81b2d9650414a43f7f4242ee9c6782033475",
+    "relevant_input_pins": {
+      "portable/audio/isa_devices.cpp": "1463b954f4baaec0b034bdf8b5a3daed79269351d2e1f91bba28c7a60ee30e75",
+      "portable/audio/isa_devices.h": "25f3286e5452dbc1336a78df2a266b3de4e6334adee16806ff02ecb891592bbe",
+      "portable/audio/ymfm/LICENSE": "2d2e9213c170a9866c616fa85b6da993a6724e10befc61f468ed9bfb84c4691c",
+      "portable/audio/ymfm/provenance.json": "6d836a193f25d0c2b9a9e00a3d827f8f3cdf8255ad5c7a85d07a7e440236bb4d",
+      "portable/audio/ymfm/ymfm.h": "f5ab6fed63c8669abab8403e0e93132e1dad0ae4d8e4954e7836ab9e5b228405",
+      "portable/audio/ymfm/ymfm_adpcm.cpp": "74e5ded129ea7e532112e5b637d0a7bd4e127fd83331f1fac32011723051d4e0",
+      "portable/audio/ymfm/ymfm_adpcm.h": "5933691971493b853a9be443f6e6fd74f63869aa21225f66dd89fc20de20914d",
+      "portable/audio/ymfm/ymfm_fm.h": "1b27bfb7fa4963d7c54cb06fd9bf659450362d8ed496c6af7d487b068cac45c9",
+      "portable/audio/ymfm/ymfm_fm.ipp": "4fb7fe59d4494a19e9f9c7888eb644a63d86e109fdefb27a8117bf6a5f6ab4b9",
+      "portable/audio/ymfm/ymfm_opl.cpp": "e745673678d0de9733488427397e794d42348bb000dd45f6665d6f063963d517",
+      "portable/audio/ymfm/ymfm_opl.h": "b01d13720c61cf040d10a2e68ee3e002e4467b9c795978514d58be6245dcbda5",
+      "portable/audio/ymfm/ymfm_pcm.cpp": "3099d770b876dcdcb8a4c15df48fcc3475f22eca5a144b66581bfa7ebbf499ab",
+      "portable/audio/ymfm/ymfm_pcm.h": "d738b45f9406da413d29334ec062f217c42811af68ffa599ae4a2dc839cc2200",
+      "portable/build.py": "a06f8522906bdc6549f65b00a549758b72798a5e31b3c620c546052bde56108a",
+      "portable/canonical_native_abi/asm_data.py": "3af82f84692b4ddf6da22f1158ac3dd31b9d2bdeae24b607a5d66dd1be5097c2",
+      "portable/canonical_native_abi/audio.py": "ecde2a409f66deb84a84cbb43b64da738b74b4acc469725e96587866443f52a3",
+      "portable/platform/sdl3/audio.c": "901f25d4f325de45243b7993266b899c76726ca46f8024100a715280a02438ce",
+      "portable/platform/sdl3/audio.h": "0505a6edf79021bd49abe7b988399612d815bb58381d205ab0816730bf92a217",
+      "portable/platform/sdl3/whole_audio_provider.c": "8a8283934cea4294a2d51d154e1e1aa79b2f398ee80e4cc6241bd7f33509e618",
+      "portable/platform/sdl3/whole_audio_provider.h": "575479a7a8b7cb3c6eeec574b960eba3ee35473ac2f948e5969c8618ceeb1a85",
+      "portable/platform/sdl3/whole_audio_startup.c": "27b2144ae3c5da353fd40e7bc9a71b28afb61cd3a58e58d158d573edb1262430",
+      "portable/platform/sdl3/whole_audio_startup.h": "6d2de7f1441686324f8504f1d7e66a8dd2a490fa10e18f544c640f1515461633",
+      "portable/platform.json": "b167ffaec0687522ba1b3c89efcc6dcc714942460868773d096b25ebe4d0c974",
+      "portable/whole_program/application.c": "599523301f2cc921b5cb9b755a08fbb5999b8b5a30275b79b8c44c1ba8eec5f2",
+      "portable/whole_program/platform/audio.c": "ba8a9a9ff65f8276c29a5ba5b76a0f6272bc8b0406e2ba6811ffc491503779d8",
+      "portable/whole_program/platform/audio.h": "1b9299a8fc6651b23a2e17afb901f4a37d1d38cc6344c68519d6119941e79e97",
+      "portable/whole_program/platform/audio_native.c": "8793560cf8b5d19e4e9f3230c81dabf97c44c2ee316361f274c97fe0804d845e",
+      "portable/whole_program/platform/audio_native.h": "ae4f584c4d731c81b4cc9b8e6dd893db8b0b7353f7d922f8f96728b8df9341ff",
+      "portable/whole_program/platform/audio_state.c": "1acaebf5dfb9f168e7edbeb31abc1d49f71b96f0c74c280dbea4706af4b9e318",
+      "portable/whole_program/platform/audio_state.h": "e0501eb0ff8c546a136982a288b79b33965d54863fd84aafc7000f4b2f2506b4",
+      "portable/whole_program/platform/whole_audio_provider.c": "2f2733f937ff2b3e939b888ef6cd85d4d836bed63ef50a2c706874c441191126",
+      "src/data/d3D57.c": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "src/data/d55B3_00B8.c": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+      "src/program.json": "252b0c9a78de3799909bc1d9325735649bbda4ad4a12a0f77d6a4f9f559a3ff9",
+      "src/root/m00DF.c": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "src/root/m2815.c": "6d7a3e90d0e6555dc5c1d205f18ad9df9579c743d829ba86011e36c95a2010eb",
+      "src/root/m283E.asm": "c7fc07dbb9830dfad40597e5fe377c4a62bc9d3551a80aef602dad3925daa0c5",
+      "src/root/m284A.c": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100",
+      "src/root/m28BC.asm": "e1b3d7a49330d3e7f817da331c3142ce0db64bd03de8c75ad3c7e6cddf4b82cf",
+      "src/root/m290D.c": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+      "src/root/m293A.c": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "src/root/m295C.c": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+      "src/root/m29B8.c": "630261c9ce29ece91f48e1fa0ec6c4bf1ce6270245f30d4825a66ed2a661878b"
+    }
+  },
+  "controls": {
+    "audio": "PASS: canonical ISR cadence/completion, DSP DAC magnitude/mute, OPL timer/tone/key-off",
+    "unsupported_dma": "Unimplemented SB DSP command 14 (DMA is not used by canonical mode 6)"
+  },
+  "conditions": {
+    "native_duration_ms": 49000,
+    "original_duration_ms": 50000,
+    "save_filename_length": 63,
+    "seed": 1,
+    "video": "/dV",
+    "sound": "CFG Sound Mode 6",
+    "native_input": "new-game-save-mouse.txt; source Full Game selected through existing mouse fixture",
+    "input_sha256": "fb6ed63016ce731ff55f226e5c657d9766c48157e4b42edf2b3c9b65b139a507",
+    "oracle_input": "dos/scenarios/new-game-save.scr; original keyboard selection and keypad 5"
+  },
+  "limitations": [
+    "A single common time anchor fails: merged timing differs by about 22.3 ms after the initial reset.",
+    "Absolute startup timestamps differ by about one second; this is not DOS CPU emulation.",
+    "No full game-state/save or human listening equivalence.",
+    "Generic DMA/device IRQs and other profiles unsupported; BIOS chain phase/reentry and menu/save flag aliases unproved."
+  ],
+  "validation": {
+    "command": "python tools/validate.py --no-farbss-probe",
+    "passed": true,
+    "log_sha256": "4c43a2500ec3f9924453bfb9d3873368c698a6cff6913e7399ed4582e88b6f7b",
+    "unit_suite": "OK (skipped=2); pinned ignored Unicorn and inventory dependencies supplied",
+    "far_bss_probe": "Not rerun; canonical owners unchanged, existing source declaration validation retained"
+  }
+}
