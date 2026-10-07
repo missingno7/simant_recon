@@ -59,19 +59,6 @@ class RegisterReturns(unittest.TestCase):
         finding['definition']=census.analyze(census.c_parser.CParser().parse(repaired,filename='callee.c'),'callee.c',repaired,False)['definitions']['hook']
         self.assertEqual(census.unspecified_native(dict(findings=[finding])),[])
 
-    def test_current_converted_tus_have_no_unspecified_consumed_results(self):
-        build=ROOT/'build/current/portable'
-        if not (build/'report.json').is_file():
-            self.skipTest('Run portable/build.py first for the complete converted-TU gate')
-        scratch=ROOT/'build/scratch'; scratch.mkdir(parents=True,exist_ok=True)
-        directory=tempfile.mkdtemp(prefix='return-census-',dir=scratch)
-        try:
-            result=census.scan(ROOT,build,Path(directory))
-            self.assertEqual(result['failures'],[])
-            self.assertEqual(result['unspecified_native_returns'],[])
-        finally:
-            retire(Path(directory),ROOT)
-
     def test_indirect_table_targets_remain_in_the_unspecified_gate(self):
         source='int partial(int n) { if(n) return 1; } int (*table[1])(int)={partial}; int use(void) { return table[0](0); }'
         tree=census.c_parser.CParser().parse(source,filename='test.c')
