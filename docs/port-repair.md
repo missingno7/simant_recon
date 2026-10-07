@@ -1,45 +1,39 @@
 # SDL3 port repair method
 
-**Architecture (decided 2026-10-07):** readable native canonical C remains the
-shipped source, in the style of the sibling stunts_recon project. No static
-recompilation. Original machine code is used strictly as an oracle: differential
-and symbolic verification against original instructions where it has leverage.
-Remaining hazards (integer semantics, object adjacency, residue, register-state
-returns) close only through mechanical lowering or explicitly proven supported
-domains, never through hand-written behavior.
+**Architecture:** readable native canonical C is the shipped source, in the spirit of
+stunts_recon. No static recompilation. The closed canonical DOS build
+(`functional-source-oracle-v1`) is the oracle; original machine code and the
+differential tools are debugging aids, not a proof obligation.
 
-The closed DOS oracle (`functional-source-oracle-v1`) defines correct behavior.
-Every native defect is handled by the same pipeline; a symptom fix without a root
-cause is not accepted.
+## Closure target: the normal shipped game
 
-1. **Detect.** A divergence comes from the native-vs-DOS differential tool
-   (`portable/tests/acceptance/`), a regression or a human playtest. Record the
-   reproducer (scenario, input timeline, checkpoint/step).
-2. **Attribute.** Compare original `SIMANT.EXE`, the canonical DOS build and native:
-   ORIGINAL (preserve, never "fix"), RECONSTRUCTION_INTRODUCED, PORT_INTRODUCED or
-   UNATTRIBUTED with the deciding experiment.
-3. **Localize.** Find the first canonical function that computes a different value
-   (native GDB vs DOS observation runner) and look up its proof level. A divergence
-   originating in byte-exact canonical code cannot be a reconstruction defect; it
-   is a port or input/timing defect. Reconstruction defects can only originate in
-   non-byte-exact code or data.
-4. **Root cause.** Name the mechanism, not the symptom: which conversion rule,
-   platform contract or hand-written component produced the value, and why the
-   mechanical process allowed it. Assign a defect class.
-5. **Census.** Enumerate every sibling of that class across the whole port with a
-   reproducible tool, not by inspection. Each sibling is fixed, proven
-   non-observable or left open with a named experiment.
-6. **Fix the class.** Fix the generator, conversion rule or platform contract.
-   Prefer a line-traceable projection of canonical source/ASM over a hand-written
-   reimplementation. Never change canonical game algorithms in native code.
-7. **Prove.** Add a regression with a negative control that fails on the old
-   behavior; rerun the differential tool and confirm the divergence moved later or
-   disappeared, with no new earlier divergence.
-8. **Record.** Update the single behavior ledger
-   (`evidence/canonical/behavior-attribution/`): attribution, origin function and
-   proof level, root cause, class, sibling census, fix commit, regression.
+Shipped assets and configuration, normal VGA gameplay, keyboard/mouse input, the
+supported Sound Blaster configuration, menus and dialogs, starting a game and real
+gameplay, sustained simulation, Save/Load, ordinary successful execution on a modern
+host. The SDL3 port is done when it launches normally, plays normally, matches the
+DOS oracle's game/simulation behavior over meaningful scenarios, saves and reloads
+correctly, runs sustained gameplay without divergence or crash, keeps video, input
+and audio working, and has no known observable discrepancy in this domain.
 
-Defect classes found so far: host-injected inputs; hand-written replacement of
-canonical ASM; partial ASM reimplementation omitting side effects; DOS object
-adjacency broken by native layout; hard-coded wrapper extents; interrupt-driven
-updates not delivered inside source wait loops; 16-bit integer semantics.
+## Loop
+
+1. Build and run the real SDL3 executable through the normal game flow into play.
+2. Compare observable behavior with the DOS oracle (`portable/tests/acceptance/`
+   deterministic replay: logical game state, SaveRec, RNG, audio command stream).
+3. Take the first observable divergence; check original vs canonical DOS vs native
+   only as far as needed to know which side is wrong.
+4. Fix it at its root cause, preferring mechanical ABI/type conversion,
+   ASM-to-readable-C projection, platform boundaries and SDL adapters. Canonical
+   game algorithms change only with evidence that the canonical source is wrong.
+   If a general converter fix cleanly covers the bug's class, apply it; otherwise
+   fix what supported gameplay observes and move on.
+5. Add a focused regression; rerun the scenario; repeat.
+
+## Not blockers
+
+A difference does not block SDL3 closure merely because pointer representations,
+heap layout or stack/register residue differ without an observable consumer, a
+DOS BIOS/device quirk is irrelevant to the SDL3 platform, malformed or custom
+resources reach an old out-of-bounds case, or an expression is unproven over its
+full theoretical type range with no supported gameplay difference. Record such
+findings briefly as unsupported-domain notes; do not open proof campaigns for them.
