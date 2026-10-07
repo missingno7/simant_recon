@@ -1,5 +1,13 @@
 # SDL3 port repair method
 
+**Architecture (decided 2026-10-07):** readable native canonical C remains the
+shipped source, in the style of the sibling stunts_recon project. No static
+recompilation. Original machine code is used strictly as an oracle: differential
+and symbolic verification against original instructions where it has leverage.
+Remaining hazards (integer semantics, object adjacency, residue, register-state
+returns) close only through mechanical lowering or explicitly proven supported
+domains, never through hand-written behavior.
+
 The closed DOS oracle (`functional-source-oracle-v1`) defines correct behavior.
 Every native defect is handled by the same pipeline; a symptom fix without a root
 cause is not accepted.
