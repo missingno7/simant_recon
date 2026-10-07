@@ -36,6 +36,7 @@ def main():
     binary = out/'input-irq.exe'
     command = [a.cc, '-std=c11', '-Wall', '-Wextra', '-Werror',
                '-I'+str(ROOT), '-I'+str(build/'include'), '-I'+str(build),
+               '-I'+str(Path(report['sdk']['path'])/'include'),
                *map(str,sources), '-o', str(binary)]
     compile_result = subprocess.run(command, capture_output=True, text=True, timeout=60)
     (out/'compile.txt').write_text(compile_result.stdout+compile_result.stderr)

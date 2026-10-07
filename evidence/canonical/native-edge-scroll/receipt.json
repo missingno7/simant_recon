@@ -1,0 +1,404 @@
+{
+  "schema": "simant-native-edge-scroll-repair-v1",
+  "base": "40e1f2d11a3b7fffdc05e56d79b569f592f0ef00",
+  "baseline": {
+    "executable_sha256": "0dc2e4f710b5b974d99b159e9ed0d18819e8533a54eed753db5595059f9bd213",
+    "fixture_sha256": "608e75369a2356f2886e89fb27200fcab271734842216a5155f472f058a3ddb1",
+    "input_events": 814,
+    "source_mouse": [
+      374,
+      476
+    ],
+    "outer_loops": 4,
+    "samples": [
+      {
+        "sha256": "503553112a1d97527018996253f8f1ba13232e406f0277f9b94933efea2eb80a",
+        "main_chain": [
+          "UpdateEdit",
+          "f_0250_0D10",
+          "f_00F8_01BE",
+          "dos_game_main"
+        ]
+      },
+      {
+        "sha256": "c6280db562bc4a91af94dc91b73e8e648a552de956f958fbb11d309e1c6ae998",
+        "main_chain": [
+          "UpdateEdit",
+          "f_0250_0D10",
+          "f_00F8_01BE",
+          "dos_game_main"
+        ]
+      },
+      {
+        "sha256": "817019fd3964ede3a6273a480d21af5b66514c92511dfcee478de7e6d4623dd2",
+        "main_chain": [
+          "UpdateEdit",
+          "f_0250_0D10",
+          "f_00F8_01BE",
+          "dos_game_main"
+        ]
+      }
+    ],
+    "no_smoke_exit_after_20000_ms": true
+  },
+  "native": {
+    "executable_sha256": "11d9ca06227c793582a9723da3a91b1483252f4d7ceb5d5c049dabfd772ced9e",
+    "build_report_sha256": "759630fbd3f145659038785cda1f2f87f53a46b282638ea11f59828c2bee304f",
+    "source_pins": {
+      "portable/platform.json": "26cc4a44129566c7940e5f1e2b06eaf5beee6839cee3e8241983cac57218c29a",
+      "portable/whole_program/application.c": "f10b85ab165da877a14beb1e7d7e74f871242f8f077e7903d1fbd03dc4f0398f",
+      "portable/whole_program/platform/m1b73_events.c": "f3086d2ef94f6473bea6efe64878fc07b07da3b02b4cf52ad08b86b2659cc57a",
+      "portable/whole_program/platform/m1b73_main_input.c": "dfb43f7b561f9659198cef8d2c236aeb0c8c9b92fb5680cc7480b04ace5f92f4",
+      "portable/whole_program/platform/m1b73_mouse.c": "08022c6aba31ab1de921e9711a284ebd7ff85a425f421f45437cfa61e0554ba6",
+      "portable/whole_program/platform/sdl3/host.c": "b291b01c2237662d418f9e4c06b3bffea8abf02d66ddf5afcab145d1e9ce5eab",
+      "portable/whole_program/platform/sdl3/input_time_host.c": "9ac6b160d3d8b6fd2452c9d738ae3cca32ce489188f84599f62faf7cbd6ce2ab",
+      "portable/whole_program/platform/sdl3/input_time_host.h": "66366693206b7a17e6f62af610e0a9ddb773f8f61a27cd51a529138008579033",
+      "portable/whole_program/platform/sdl3/m1b73_application_input.c": "2fc7f7a1de9e6cc0dde09f648a50bcbd0bd5a48f7cdd899dcbd949c6a2c7f2d4"
+    }
+  },
+  "edge_replays": [
+    {
+      "mode": "real-time",
+      "passed": true,
+      "report_sha256": "429d15ed3039965de5152cf23513c954907ed61d8487d0460bc394b175fe12d4",
+      "runs": [
+        {
+          "case": "user",
+          "passed": true,
+          "checks": {
+            "normal_smoke_exit": true,
+            "all_fixture_events_injected": true,
+            "continued_frames_inside_source_scroll_loop": true,
+            "meaningful_VGA_frame_and_positive_outer_loops": true,
+            "no_fault_or_unsafe_presentation": true,
+            "disposable_assets_unchanged": true,
+            "user_final_move_delivered_with_INT33_bounds": true
+          },
+          "fixture_sha256": "608e75369a2356f2886e89fb27200fcab271734842216a5155f472f058a3ddb1",
+          "events_sha256": "2f045a83ffe00f0310f53136d09a363a3c969a35e9caa4276910dcc5131b2615",
+          "presentations": 1155,
+          "scroll_presentations": 697,
+          "scroll_returns": 0,
+          "outer_loops": 4
+        },
+        {
+          "case": "edges",
+          "passed": true,
+          "checks": {
+            "normal_smoke_exit": true,
+            "all_fixture_events_injected": true,
+            "continued_frames_inside_source_scroll_loop": true,
+            "meaningful_VGA_frame_and_positive_outer_loops": true,
+            "no_fault_or_unsafe_presentation": true,
+            "disposable_assets_unchanged": true,
+            "frames_at_each_held_screen_edge": true,
+            "scroll_returns_after_moving_away": true,
+            "outer_loop_resumes_after_holds": true
+          },
+          "fixture_sha256": "39657325e7795183b8b7c1614bbcbcd5637fdebee6a1c73950470ff776eb6a79",
+          "events_sha256": "bdad2603c30bf4c37ca3e5ffbb8d9af9c87f1fd1c8664b9cf16cd98b3c98e856",
+          "presentations": 2136,
+          "scroll_presentations": 463,
+          "scroll_returns": 4,
+          "outer_loops": 121
+        }
+      ]
+    },
+    {
+      "mode": "deterministic",
+      "passed": true,
+      "report_sha256": "91e68051399f3c64b750d87e3c0a2b5af42973ad620675a1ada0965dfbc93b68",
+      "runs": [
+        {
+          "case": "user",
+          "passed": true,
+          "checks": {
+            "normal_smoke_exit": true,
+            "all_fixture_events_injected": true,
+            "continued_frames_inside_source_scroll_loop": true,
+            "meaningful_VGA_frame_and_positive_outer_loops": true,
+            "no_fault_or_unsafe_presentation": true,
+            "disposable_assets_unchanged": true,
+            "user_final_move_delivered_with_INT33_bounds": true
+          },
+          "fixture_sha256": "608e75369a2356f2886e89fb27200fcab271734842216a5155f472f058a3ddb1",
+          "events_sha256": "1502221b3dd7d87cc76bf2530bdab3b74fd7f4f372b8997b99c199cf04df38c7",
+          "presentations": 1176,
+          "scroll_presentations": 708,
+          "scroll_returns": 0,
+          "outer_loops": 3
+        },
+        {
+          "case": "edges",
+          "passed": true,
+          "checks": {
+            "normal_smoke_exit": true,
+            "all_fixture_events_injected": true,
+            "continued_frames_inside_source_scroll_loop": true,
+            "meaningful_VGA_frame_and_positive_outer_loops": true,
+            "no_fault_or_unsafe_presentation": true,
+            "disposable_assets_unchanged": true,
+            "frames_at_each_held_screen_edge": true,
+            "scroll_returns_after_moving_away": true,
+            "outer_loop_resumes_after_holds": true
+          },
+          "fixture_sha256": "39657325e7795183b8b7c1614bbcbcd5637fdebee6a1c73950470ff776eb6a79",
+          "events_sha256": "11c48973eae43690a5ec0d0ac5680b8d4f2d5edab33cd9f1194ac4bcb944da0a",
+          "presentations": 2175,
+          "scroll_presentations": 469,
+          "scroll_returns": 4,
+          "outer_loops": 120
+        }
+      ]
+    }
+  ],
+  "input_controls": {
+    "passed": true,
+    "canonical_instruction_matrix": {
+      "passed": true,
+      "rows": 2304,
+      "sha256": "433ff116ebe7e8e0362647372d4365d80f7c55ea49397b15746f4ac870946ca2",
+      "expected_sha256": "433ff116ebe7e8e0362647372d4365d80f7c55ea49397b15746f4ac870946ca2"
+    },
+    "report_sha256": "540fb1b85fdfe4189f38221d98e9c2a3c6034a33e88a2f9e537837e9afcc46e5"
+  },
+  "canonical_dos": {
+    "source_exe_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+    "execution_report_sha256": "ec33d5dab3ec2c971fcdb4db7fa96147fe2c5098797ba1155787d2b8a23c8ad2",
+    "script_sha256": "ba946d4b5409600fca0b12341fd7bcd28b77e6f89cd08187a92539e7113d6296",
+    "captures": [
+      {
+        "capture": "before",
+        "runtime_base": 33344,
+        "mouse": [
+          240,
+          200
+        ],
+        "outer_loops": 47,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 786868,
+        "sha256": "6b90919146625649ea763def825ed9a06ef356567e02f6058113b9e7397059d7"
+      },
+      {
+        "capture": "left1",
+        "runtime_base": 33344,
+        "mouse": [
+          0,
+          200
+        ],
+        "outer_loops": 47,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 786886,
+        "sha256": "fab9cf0c7dd1c501014f3dae084fc0cb5ec980fe2a1f81a97758afadad8be7f3"
+      },
+      {
+        "capture": "left2",
+        "runtime_base": 33344,
+        "mouse": [
+          0,
+          200
+        ],
+        "outer_loops": 47,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 786904,
+        "sha256": "9e463a159b562867d997572285ed4a87ab43152c54ad55cdcd2def93486ee431"
+      },
+      {
+        "capture": "left-away",
+        "runtime_base": 33344,
+        "mouse": [
+          240,
+          200
+        ],
+        "outer_loops": 53,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 786923,
+        "sha256": "bea310bf765aa9a8c6668ca8c0a935247123716841445af2889f0e3f739a4baf"
+      },
+      {
+        "capture": "right1",
+        "runtime_base": 33344,
+        "mouse": [
+          636,
+          200
+        ],
+        "outer_loops": 59,
+        "map_origin": [
+          42,
+          0
+        ],
+        "bios_ticks": 786959,
+        "sha256": "e7838f52f70d249c444a55d9703769fa92a947130b098f53996f257abee49505"
+      },
+      {
+        "capture": "right2",
+        "runtime_base": 33344,
+        "mouse": [
+          636,
+          200
+        ],
+        "outer_loops": 59,
+        "map_origin": [
+          42,
+          0
+        ],
+        "bios_ticks": 786978,
+        "sha256": "8c00e7d893c438b48701a24fb59ae219c982e4fb20ea8d0a6caa7cb3f3ee5c3c"
+      },
+      {
+        "capture": "right-away",
+        "runtime_base": 33344,
+        "mouse": [
+          240,
+          200
+        ],
+        "outer_loops": 65,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 786996,
+        "sha256": "c27e5e830de2b3a2e2a5cec8a0a57681957dbb64b7e8d2b1667a4eb921d55680"
+      },
+      {
+        "capture": "top1",
+        "runtime_base": 33344,
+        "mouse": [
+          240,
+          0
+        ],
+        "outer_loops": 71,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 787033,
+        "sha256": "a245ba8cf26fc4f62b583c3b95d9417950e2ddb000d7b8058842981ac2492967"
+      },
+      {
+        "capture": "top2",
+        "runtime_base": 33344,
+        "mouse": [
+          240,
+          0
+        ],
+        "outer_loops": 71,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 787051,
+        "sha256": "289f4f483a57d080c068710557e9b90959e0b4817b098a0806319ba65d4a4c16"
+      },
+      {
+        "capture": "top-away",
+        "runtime_base": 33344,
+        "mouse": [
+          240,
+          200
+        ],
+        "outer_loops": 76,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 787069,
+        "sha256": "71c893a3079d1921d2315011ea5addd3373d735391d636854440423cfd0580ea"
+      },
+      {
+        "capture": "bottom1",
+        "runtime_base": 33344,
+        "mouse": [
+          374,
+          476
+        ],
+        "outer_loops": 83,
+        "map_origin": [
+          0,
+          43
+        ],
+        "bios_ticks": 787106,
+        "sha256": "d4234f96273a85fd86ea0d3a8ba17c766d62bd0daa561031eefb4a69593fbf9f"
+      },
+      {
+        "capture": "bottom2",
+        "runtime_base": 33344,
+        "mouse": [
+          374,
+          476
+        ],
+        "outer_loops": 83,
+        "map_origin": [
+          0,
+          43
+        ],
+        "bios_ticks": 787124,
+        "sha256": "921423b36564bcec062b19e17b061fd93978e3c964392b7335aad3ab8cecb27f"
+      },
+      {
+        "capture": "bottom-away",
+        "runtime_base": 33344,
+        "mouse": [
+          240,
+          200
+        ],
+        "outer_loops": 95,
+        "map_origin": [
+          0,
+          0
+        ],
+        "bios_ticks": 787161,
+        "sha256": "5b0a23904b649a30bccbc8e4e9c12259c5ec0f6f4603d6ca54c7d6f5095705e9"
+      }
+    ]
+  },
+  "runtime_flows": {
+    "vga": {
+      "passed": true,
+      "report_sha256": "d88440ccdfcb49433dd9ef77b6d4ef50cc023e80b9debf06d6d40b98f5517358"
+    },
+    "save": {
+      "passed": true,
+      "report_sha256": "ced1b7a3298b70e509bb01a946bc482128dc42059cb55eff8ead6f4f6b12e490"
+    },
+    "load": {
+      "passed": true,
+      "report_sha256": "e75f2f2bdbecf8fb27bdfb25c432ba3538f95eae9f0ad1b27b5d914680281918"
+    },
+    "logo": {
+      "passed": true,
+      "report_sha256": "27fa8d552f86a55aa44349f8325e8263c9877e31bb2ea1e56f8f43d9b64659eb"
+    },
+    "drag": {
+      "passed": true,
+      "report_sha256": "538dac101492f3b802a1370e7234fec5575526347e3e59d88b1e31f79bc48862"
+    }
+  },
+  "scope": "Observed Quick Game edge starvation and service-boundary input/time delivery. Canonical DOS captures prove IRQ pointer changes, map-origin changes and resumed outer progress after all holds. Its bounded run was TIME_LIMIT, not guest-exit acceptance. Original/canonical ISR equality is the existing exact static contract. No DOS/native pixel, simulation timing, arbitrary pure-memory wait or PIC/CPU interleaving equality claim.",
+  "deterministic_repeat": {
+    "passed": true,
+    "event_ledgers_equal": true,
+    "cases": [
+      {
+        "case": "user",
+        "events_sha256": "1502221b3dd7d87cc76bf2530bdab3b74fd7f4f372b8997b99c199cf04df38c7"
+      },
+      {
+        "case": "edges",
+        "events_sha256": "11c48973eae43690a5ec0d0ac5680b8d4f2d5edab33cd9f1194ac4bcb944da0a"
+      }
+    ]
+  }
+}

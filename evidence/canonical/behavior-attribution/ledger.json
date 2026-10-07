@@ -24,13 +24,48 @@
     "UNATTRIBUTED"
   ],
   "counts": {
-    "PORT_INTRODUCED": 98,
+    "PORT_INTRODUCED": 99,
     "ORIGINAL": 14,
     "UNATTRIBUTED": 286,
     "RECONSTRUCTION_INTRODUCED": 1,
     "PORT_DEVIATION_DOCUMENTED": 6
   },
   "items": [
+    {
+      "id": "port-edge-scroll-input-starvation",
+      "description": "Native Quick Game screen-edge scrolling never delivered pending input/time and suspended replay, smoke exit and outer progress.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Exact seed-0 human freeze replay and four-edge holds/releases; platform service-boundary delivery, not arbitrary instruction interleaving.",
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-edge-scroll/README.md",
+          "evidence/canonical/native-edge-scroll/receipt.json",
+          "src/root/m00F8.c",
+          "src/root/m1B73.asm",
+          "layout/manifest.json"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "method": "STATIC_INSTRUCTION_PROOF",
+          "observation": "Exact historical 00F8:01BE edge loop calls 1B73:0EEE; asynchronous INT33 callback 1B73:0445 writes the source mouse words while foreground code runs. No fresh full original replay claimed."
+        },
+        "canonical_dos": {
+          "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+          "relation_to_original": "STATIC_CONTRACT_EQUAL",
+          "observation": "Unchanged exact C loop and symbolic ISR. Fresh Quick Game captures see all four INT33 edges, away mouse (240,200), BIOS ticks advancing, right/bottom map-origin changes and outer counts resuming to 53/65/76/95. Bounded DOS runner ended TIME_LIMIT; no guest-exit or DOS pixel equivalence claim."
+        },
+        "native": {
+          "observation": "Untouched 40e1f2d freezes with all 814 events injected, mouse (374,476) and outer count 4 in three all-thread GDB samples. Shared guarded/rate-limited refresh fixes both real/virtual edge replays; VGA, Save, Load, logo, drag and input controls pass."
+        }
+      },
+      "related_items": [
+        "port-logo-held-input-hang",
+        "native-input-hardware-context"
+      ]
+    },
     {
       "id": "port-logo-held-input-hang",
       "description": "A held logo click stopped native foreground polling before SDL mouse-up delivery.",

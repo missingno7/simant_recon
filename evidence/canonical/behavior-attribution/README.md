@@ -11,16 +11,22 @@ and exploratory captures remain ignored. Baseline is `671f8eb`.
 | --- | ---: |
 | `ORIGINAL` | 14 |
 | `RECONSTRUCTION_INTRODUCED` | 1 |
-| `PORT_INTRODUCED` | 93 |
+| `PORT_INTRODUCED` | 99 |
 | `PORT_DEVIATION_DOCUMENTED` | 6 |
 | `UNATTRIBUTED` | 286 |
 
-399 items: known mechanisms, all nine `preview_limitations`, every unique
-398 items: known mechanisms, all nine `preview_limitations`, every unique
+406 items: known mechanisms, all nine `preview_limitations`, every unique
 differing named view and projected SaveRec at the first current round-3 checkpoint
 in each scenario. Multiple scenarios share a row for the same view/record; the
 `observations` fields retain each boundary separately. This is an inventory of
 known observations, not a claim to have enumerated every possible game failure.
+
+The [edge-scroll repair](../native-edge-scroll/README.md) closes the observed
+Quick Game input starvation in `port-edge-scroll-input-starvation`. Pending
+input/time now reaches the shared guarded platform refresh from services
+executed inside source waits. The exact human recording, four-edge holds and
+returns, real/virtual clock runs, DOS progress captures and existing runtime
+flows constrain that claim. Full CPU/IRQ interleavings remain open.
 
 `ORIGINAL` means the scoped operation is observed in the original EXE or proved
 from its instructions, with explicit original/canonical equality evidence. Static

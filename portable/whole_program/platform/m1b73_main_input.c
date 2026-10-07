@@ -64,6 +64,8 @@ int16_t f_1B73_0A30(uint16_t scan_code)
 int16_t f_1B73_0EEE(void)
 {
     PortableInputTimeHost *host = require_source_input_host();
+    if (portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK)
+        abort();
     return (int16_t)(portable_input_time_host_keyboard_flags(host) &
                      UINT8_C(0x10));
 }

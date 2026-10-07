@@ -366,6 +366,8 @@ static int install_video(void *context, SimGraphicsDriver *graphics,
             fail("source input binding");
         }
         portable_m1b73_sdl_application_input_set_idle_hook(&a->input, idle, a);
+        portable_input_time_host_set_interrupt_guard(&a->input.input_host,
+            portable_whole_audio_interrupts_enabled);
         portable_m1b73_sdl_application_input_set_quit_hook(&a->input, request_quit, a);
     }
     a->display_active = 1;

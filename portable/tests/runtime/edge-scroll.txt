@@ -1,0 +1,30 @@
+# Select-a-Game > Quick Game, then hold each map-window and screen edge.
+# Source input stays pinned without repeated motion until the next move.
+5000 down Return
+5050 up Return
+7000 down Return
+7050 up Return
+9000 down Return
+9050 up Return
+10000 move 370 165
+10200 mouse-down Left 370 165
+10400 mouse-up Left 370 165
+12000 move 240 200
+# Map window perimeter (these positions need not enter the screen-edge loop).
+13000 move 16 200
+13800 move 240 200
+14600 move 408 200
+15400 move 240 200
+16200 move 240 44
+17000 move 240 200
+17800 move 240 370
+18600 move 240 200
+# Screen edges trigger the historical modal scroll loop.
+20000 move 0 200
+22000 move 240 200
+24000 move 639 200
+26000 move 240 200
+28000 move 240 0
+30000 move 240 200
+32000 move 374 480
+34000 move 240 200

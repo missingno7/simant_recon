@@ -8,6 +8,7 @@ python portable/tests/runtime/run.py --report build/current/portable/report.json
 python portable/tests/runtime/run_load.py --report build/current/portable/report.json
 python portable/tests/runtime/run_logo.py --report build/current/portable/report.json --repeat 2
 python portable/tests/runtime/run_drag.py --report build/current/portable/report.json --repeat 2
+python portable/tests/runtime/run_edge.py --report build/current/portable/report.json
 ```
 
 The Save check dismisses the source success dialog with Return. The Save→Load
@@ -51,6 +52,14 @@ Passing confirms this bounded current UI/file path. It does not establish
 after-load state equivalence, DOS save compatibility, resave equivalence, fixed
 terrain-seed behavior or whole-game correctness. Current build limitations remain
 listed in each report. The outer-loop counter is not a simulation-step counter.
+
+The edge regression replays the exact seed-0 human freeze recording and Quick
+Game holds at the map-window perimeter and all four screen edges. It requires
+frames inside the active source scroll loop, returns after moving away,
+resumed outer progress, every replay event and the smoke exit. Use
+`--deterministic --out build/workers/NAME/edge-clock` for a separate virtual
+clock control. Host observations are clamped to the visible screen before
+recording; the source mouse driver then applies its tighter INT33 limits.
 
 The drag regression observes the real title, resize and caste triangle handlers
 under GDB. Each must return and present multiple distinct frames while the button

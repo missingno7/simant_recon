@@ -7,6 +7,11 @@
 
 static PortableInputTimeHost *active_host_binding;
 
+static int delivery_enabled(const PortableInputTimeHost *binding)
+{
+    return binding->interrupts_enabled == NULL || binding->interrupts_enabled();
+}
+
 static int push_event(PortableInputTimeHost *binding, const HostEvent *event)
 {
     uint16_t tail;
@@ -50,7 +55,7 @@ static int ingest_host_events(PortableInputTimeHost *binding)
 {
     HostEvent event;
     int polled;
-    if (binding->ingesting)
+    if (binding->ingesting || !delivery_enabled(binding))
         return 1;
     binding->ingesting = 1;
     do {
@@ -145,8 +150,6 @@ static int host_key_available(void *context, uint16_t *key)
     if (portable_input_time_host_refresh_clock(binding) !=
         PORTABLE_INPUT_TIME_OK)
         return -1;
-    if (ingest_host_events(binding) < 0)
-        return -1;
     if (binding->key_count == 0)
         return 0;
     *key = binding->key_words[binding->key_head];
@@ -163,8 +166,6 @@ static int host_read_key_blocking(void *context, uint16_t *key)
          * selector waits here while the outer source loop is suspended. */
         if (portable_input_time_host_refresh_clock(binding) !=
             PORTABLE_INPUT_TIME_OK)
-            return -1;
-        if (ingest_host_events(binding) < 0)
             return -1;
         if (pop_key(binding, key))
             return 1;
@@ -307,13 +308,43 @@ PortableInputTimeStatus portable_input_time_host_set_event_observer(
 PortableInputTimeStatus portable_input_time_host_refresh_clock(
     PortableInputTimeHost *binding)
 {
+    uint64_t now;
+    int refreshed;
     if (binding == NULL || binding->clock == NULL)
         return PORTABLE_INPUT_TIME_BAD_ARGUMENT;
-    if (binding->clock_refresh == NULL)
+    /* DOS IRQ input/time can change while a source modal/tracking loop runs.
+     * Every platform query yields here. Never enter a callback recursively or
+     * deliver host interrupts while the existing source IF flag is clear. */
+    if (binding->ingesting || !delivery_enabled(binding))
         return PORTABLE_INPUT_TIME_OK;
-    return binding->clock_refresh(binding->clock_refresh_context,
-                                  binding->clock) == 1
-        ? PORTABLE_INPUT_TIME_OK : PORTABLE_INPUT_TIME_PROVIDER_FAILED;
+    /* The application callback polls retained events after advancing clocks
+     * and injecting due replays. Nested services may drain those events within
+     * this refresh, but never enter the clock/idle callback a second time. */
+    if (binding->refreshing)
+        return ingest_host_events(binding) < 0 ? PORTABLE_INPUT_TIME_PROVIDER_FAILED :
+                                                PORTABLE_INPUT_TIME_OK;
+    now = host_time_ns();
+    /* Cap real-time refresh work at 1 kHz. Virtual mode instead consumes one
+     * configured quantum at each eligible outer refresh, never SDL wall time. */
+    if (!host_virtual_clock_enabled() && binding->refresh_initialized &&
+        now >= binding->last_refresh_ns &&
+        now - binding->last_refresh_ns < UINT64_C(1000000))
+        return PORTABLE_INPUT_TIME_OK;
+    binding->refreshing = 1;
+    binding->last_refresh_ns = now;
+    binding->refresh_initialized = 1;
+    refreshed = binding->clock_refresh == NULL ||
+        binding->clock_refresh(binding->clock_refresh_context, binding->clock) == 1;
+    if (refreshed && ingest_host_events(binding) < 0)
+        refreshed = 0;
+    binding->refreshing = 0;
+    return refreshed ? PORTABLE_INPUT_TIME_OK : PORTABLE_INPUT_TIME_PROVIDER_FAILED;
+}
+
+void portable_input_time_host_set_interrupt_guard(
+    PortableInputTimeHost *binding, int (*enabled)(void))
+{
+    if (binding != NULL) binding->interrupts_enabled = enabled;
 }
 
 int portable_input_time_host_refresh_from_sdl_monotonic(
@@ -380,7 +411,7 @@ int portable_input_time_host_poll_event(PortableInputTimeHost *binding,
 {
     if (binding == NULL || event == NULL)
         return -1;
-    if (binding->event_count == 0 && ingest_host_events(binding) < 0)
+    if (portable_input_time_host_refresh_clock(binding) != PORTABLE_INPUT_TIME_OK)
         return -1;
     if (binding->event_count == 0)
         return 0;
@@ -394,7 +425,7 @@ int portable_input_time_host_poll_event(PortableInputTimeHost *binding,
 int portable_input_time_host_get_input_state(PortableInputTimeHost *binding,
                                              HostInputState *state)
 {
-    if (host_virtual_clock_enabled() && binding != NULL &&
+    if (binding != NULL &&
         portable_input_time_host_refresh_clock(binding) != PORTABLE_INPUT_TIME_OK)
         return 0;
     return binding != NULL && binding->host != NULL && state != NULL
@@ -413,7 +444,8 @@ uint8_t dos_keyboard_modifiers(void)
 {
     PortableInputTimeHost *binding = active_host_binding;
     uint8_t modifiers;
-    if (binding == NULL || !portable_input_time_host_current_modifiers(&modifiers))
+    if (binding == NULL || portable_input_time_host_refresh_clock(binding) !=
+            PORTABLE_INPUT_TIME_OK || !portable_input_time_host_current_modifiers(&modifiers))
         abort();
     return modifiers;
 }

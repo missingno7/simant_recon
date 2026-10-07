@@ -104,7 +104,7 @@ class Mouse(gdb.Breakpoint):
         try:
             event = gdb.parse_and_eval('*event')
             x, y = int(event['x']), int(event['y'])
-            if x < 0 or y < 0 or x > 636 or y > 476:
+            if int(event['kind']) == 2 and (x <= 0 or y <= 0 or x > 636 or y > 476):
                 # Entry at callback: the host coordinate mapping/driver limits
                 # have completed; inspect source args via a finish observer.
                 MouseReturned(x, y)

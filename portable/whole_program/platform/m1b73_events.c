@@ -210,13 +210,20 @@ uint32_t TickCount(void)
 
 int16_t f_1B73_032A(void)
 {
-    return signed_word(portable_m1b73_event_count(require_events()));
+    PortableM1B73Events *events = require_events();
+    if (portable_input_time_host_refresh_clock(events->input_host) !=
+        PORTABLE_INPUT_TIME_OK)
+        abort();
+    return signed_word(portable_m1b73_event_count(events));
 }
 
 int16_t f_1B73_032E(void *event_record)
 {
     PortableM1B73Events *events = require_events();
     if (event_record == NULL)
+        abort();
+    if (portable_input_time_host_refresh_clock(events->input_host) !=
+        PORTABLE_INPUT_TIME_OK)
         abort();
     return portable_m1b73_event_dequeue(events,
         (PortableM1B73Event *)event_record);

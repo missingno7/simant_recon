@@ -38,6 +38,10 @@ typedef struct PortableInputTimeHost {
     uint8_t bios_keyboard_flags_hi; /* BDA 40:18 depressed/left modifier bits */
     uint8_t suppress_bios_key;      /* IRQ09 carry-clear: flush after BIOS */
     uint8_t ingesting;
+    uint8_t refreshing;
+    uint8_t refresh_initialized;
+    uint64_t last_refresh_ns;
+    int (*interrupts_enabled)(void);
     uint8_t host_closed;
     uint8_t bound;
     uint8_t dual_clock_binding;
@@ -73,6 +77,10 @@ PortableInputTimeStatus portable_input_time_host_set_event_observer(
     int (*observe)(void *context, const HostEvent *event), void *context);
 PortableInputTimeStatus portable_input_time_host_refresh_clock(
     PortableInputTimeHost *binding);
+/* Borrow the platform's existing CLI/STI flag. NULL permits delivery (the
+ * default for isolated host-service controls). No new IF owner is introduced. */
+void portable_input_time_host_set_interrupt_guard(
+    PortableInputTimeHost *binding, int (*enabled)(void));
 int portable_input_time_host_refresh_from_sdl_monotonic(
     void *context, SimTimingClock *clock);
 void portable_sdl_monotonic_clock_refresh_init(

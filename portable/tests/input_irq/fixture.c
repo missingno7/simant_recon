@@ -33,10 +33,17 @@ static SimTimingClock game_clock, bios_clock;
 static int16_t width = 640, height = 480;
 static const uint8_t image[4] = { 1, 0, 1, 0 };
 static const uint8_t *cursor_image = image, *cursor_mask = image;
+static uint64_t wall_ns;
+static int virtual_mode;
+static int advancing_wall = 1;
 
-uint64_t host_time_ns(void) { return 0; }
+uint64_t host_time_ns(void)
+{
+    if (advancing_wall) wall_ns += 1000000;
+    return wall_ns;
+}
 /* The fixture drives wall-clock (non-virtual) host mode. */
-int host_virtual_clock_enabled(void) { return 0; }
+int host_virtual_clock_enabled(void) { return virtual_mode; }
 void host_wait_ms(uint32_t ms) { (void)ms; assert(0 && "test unexpectedly blocked"); }
 int host_poll_event(Host *h, HostEvent *e)
 {
@@ -314,6 +321,53 @@ static void test_ring(void)
     assert(shift_state==0 && g_5FF2.r.top==0);
     record(6,0x0201,1,2,3,4,1);
 }
+static int delivery_if, refresh_calls;
+static int interrupt_guard(void) { return delivery_if; }
+static int controlled_refresh(void *context, SimTimingClock *clock)
+{
+    (void)context; (void)clock;
+    ++refresh_calls;
+    /* A service reached from the refresh callback must not recurse. */
+    assert(f_1B73_0EEE() == 0);
+    return 1;
+}
+static void test_service_delivery(void)
+{
+    HostEvent event;
+    uint16_t key = 0;
+    reset();
+    input.clock_refresh = controlled_refresh;
+    advancing_wall = 0;
+    wall_ns = 0;
+    input.refresh_initialized = 0;
+    portable_input_time_host_set_interrupt_guard(&input, interrupt_guard);
+    delivery_if = refresh_calls = 0;
+    add_key(HOST_EVENT_KEY_DOWN, 0x1e61, 0);
+    assert(f_1B73_0EEE() == 0 && pending_head == 0 && refresh_calls == 0);
+    assert(input.input_time.services.key_available(&input, &key) == 0);
+    assert(portable_input_time_host_poll_event(&input, &event) == 0);
+    assert(TickCount() == 0 && pending_head == 0);
+    delivery_if = 1;
+    assert(f_1B73_0EEE() == 0 && pending_head == 1 && refresh_calls == 1);
+    assert(g_53CD[0x1e] == 0); /* The flag query delivered IRQ09 held state. */
+    add_key(HOST_EVENT_KEY_UP, 0x1e61, 0);
+    assert(f_1B73_0EEE() == 0 && pending_head == 1 && refresh_calls == 1);
+    wall_ns = 999999;
+    assert(f_1B73_0EEE() == 0 && pending_head == 1 && refresh_calls == 1);
+    wall_ns = 1000000;
+    assert(f_1B73_0EEE() == 0 && pending_head == 2 && refresh_calls == 2);
+    assert(g_53CD[0x1e] == 0x80);
+    virtual_mode = 1;
+    add_key(HOST_EVENT_KEY_DOWN, 0x1e61, 0);
+    assert(f_1B73_0EEE() == 0 && pending_head == 3 && refresh_calls == 3);
+    add_key(HOST_EVENT_KEY_UP, 0x1e61, 0);
+    assert(f_1B73_0A30(0x1e) == 0 && pending_head == 4 && refresh_calls == 4);
+    assert(!input.refreshing && !input.ingesting);
+    virtual_mode = 0;
+    advancing_wall = 1;
+    input.clock_refresh = NULL;
+    portable_input_time_host_set_interrupt_guard(&input, NULL);
+}
 static void matrix(void)
 {
     static const uint16_t flags[] = {0,1,2,4,8,0x104};
@@ -344,6 +398,9 @@ int main(int argc, char **argv)
     assert(sim_timing_clock_init_bios(&bios_clock,14318180,12)==SIM_TIMING_OK);
     bios_clock.tick_count=0x1234;
     assert(portable_input_time_host_init_clocks(&input,&host,&game_clock,&bios_clock)==PORTABLE_INPUT_TIME_OK);
+    /* IRQ word/matrix controls pin source ticks; host delivery cadence is a
+     * separate monotonic hardware control, exercised below. */
+    assert(portable_input_time_host_set_clock_refresh(&input,NULL,NULL)==PORTABLE_INPUT_TIME_OK);
     assert(portable_input_time_host_set_event_observer(&input,observe,NULL)==PORTABLE_INPUT_TIME_OK);
     assert(portable_input_time_host_bind(&input)==PORTABLE_INPUT_TIME_OK);
     g_5FF2.records=input_queue;
@@ -358,8 +415,8 @@ int main(int argc, char **argv)
     assert(portable_m1b73_queue_runtime_bind(&runtime,&events,&mouse,NULL,cursor_mode_callback));
     if (argc==2 && strcmp(argv[1],"--matrix")==0) matrix();
     else {
-        test_keys(); test_mouse(); test_cursor(); test_bios(); test_ring();
-        puts("PASS input IRQ: make/break, all event words, commands, mouse, cursor, BIOS, ring");
+        test_keys(); test_mouse(); test_cursor(); test_bios(); test_ring(); test_service_delivery();
+        puts("PASS input IRQ: make/break, all event words, commands, mouse, cursor, BIOS, ring, guarded service delivery");
     }
     portable_m1b73_queue_runtime_unbind(&runtime);
     portable_m1b73_mouse_unbind(&mouse);

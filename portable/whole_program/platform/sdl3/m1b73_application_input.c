@@ -396,6 +396,9 @@ portable_m1b73_sdl_application_input_present(
         return PORTABLE_M1B73_APP_INPUT_BAD_ARGUMENT;
     if (!binding->bound)
         return PORTABLE_M1B73_APP_INPUT_UNBOUND;
+    if (portable_input_time_host_refresh_clock(&binding->input_host) !=
+        PORTABLE_INPUT_TIME_OK)
+        return PORTABLE_M1B73_APP_INPUT_PROVIDER_FAILED;
     palette = sim_sdl_palette_view(binding->palette);
     if (palette == NULL)
         return PORTABLE_M1B73_APP_INPUT_PALETTE_NOT_READY;

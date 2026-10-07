@@ -10,6 +10,8 @@ portable/**/*.c text eol=lf
 portable/**/*.h text eol=lf
 portable/runtime/bios-reference/** -text
 portable/tests/runtime/*.txt text eol=lf
+# Preserve the human input recording byte-for-byte for its retained identity.
+portable/tests/runtime/edge-user.txt -text
 portable/audio/ymfm/** text eol=lf
 portable/audio/isa_devices.cpp text eol=lf
 

@@ -287,7 +287,7 @@ void f_1B73_0046(void)
     int16_t host_x, host_y;
     int16_t source_x, source_y;
     if (*provider->screen_width <= 0 || *provider->screen_height <= 0 ||
-        !host_get_input_state(provider->host, &input))
+        !portable_input_time_host_get_input_state(provider->input_host, &input))
         abort();
     /* Preserve the original assignments exactly: source g_9122 receives
      * g_3DB4/2 and g_9124 receives g_3DB2/2. */
@@ -308,7 +308,9 @@ void f_1B73_0046(void)
 
 void f_1B73_00D9(void)
 {
-    if (portable_m1b73_mouse_update_cursor(require_mouse()) !=
+    PortableM1B73MouseProvider *provider = require_mouse();
+    if (portable_input_time_host_refresh_clock(provider->input_host) !=
+        PORTABLE_INPUT_TIME_OK || portable_m1b73_mouse_update_cursor(provider) !=
         PORTABLE_M1B73_MOUSE_OK)
         abort();
 }
@@ -316,6 +318,9 @@ void f_1B73_00D9(void)
 void f_1B73_04BB(void)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
+    if (portable_input_time_host_refresh_clock(provider->input_host) !=
+        PORTABLE_INPUT_TIME_OK)
+        abort();
     if (run_mouse_callback(provider) != PORTABLE_M1B73_MOUSE_OK)
         abort();
 }

@@ -243,6 +243,13 @@ static uint8_t dos_modifiers(SDL_Keymod modifiers)
                      ((modifiers & SDL_KMOD_ALT) ? 8 : 0));
 }
 
+static float pointer_coordinate(float value, int extent)
+{
+    if (value < 0) return 0;
+    if (value > (float)(extent - 1)) return (float)(extent - 1);
+    return value;
+}
+
 int host_get_input_state(Host *host, HostInputState *state)
 {
     float window_x, window_y, logical_x, logical_y;
@@ -251,12 +258,10 @@ int host_get_input_state(Host *host, HostInputState *state)
     if (virtual_quantum) { *state = host->replay_state; return 1; }
     buttons = SDL_GetMouseState(&window_x, &window_y);
     if (!SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
-                                         &logical_x, &logical_y) ||
-        logical_x < (float)INT16_MIN || logical_x > (float)INT16_MAX ||
-        logical_y < (float)INT16_MIN || logical_y > (float)INT16_MAX)
+                                         &logical_x, &logical_y))
         return 0;
-    state->x = (int16_t)logical_x;
-    state->y = (int16_t)logical_y;
+    state->x = (int16_t)pointer_coordinate(logical_x, host->logical_width);
+    state->y = (int16_t)pointer_coordinate(logical_y, host->logical_height);
     state->left_button_down = (uint8_t)((buttons & SDL_BUTTON_LMASK) != 0);
     state->dos_modifiers = dos_modifiers(SDL_GetModState());
     return 1;
@@ -265,6 +270,9 @@ int host_get_input_state(Host *host, HostInputState *state)
 int host_warp_pointer(Host *host, int16_t logical_x, int16_t logical_y)
 {
     float window_x, window_y;
+    if (host == NULL) return 0;
+    logical_x = (int16_t)pointer_coordinate(logical_x, host->logical_width);
+    logical_y = (int16_t)pointer_coordinate(logical_y, host->logical_height);
     if (host && virtual_quantum) {
         host->replay_state.x = logical_x;
         host->replay_state.y = logical_y;
@@ -313,6 +321,18 @@ int host_poll_event(Host *host, HostEvent *event)
     while (SDL_PollEvent(&raw)) {
         memset(event, 0, sizeof(*event));
         if (!SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
+        /* Report the visible logical screen, including captured/letterboxed
+         * motion. The INT33 adapter subsequently applies the source's tighter
+         * width-4/height-4 bounds. Diagnostics and replay state see this same
+         * host boundary (VGA: 0..639 x 0..479), never a one-past coordinate. */
+        if (raw.type == SDL_EVENT_MOUSE_MOTION) {
+            raw.motion.x = pointer_coordinate(raw.motion.x, host->logical_width);
+            raw.motion.y = pointer_coordinate(raw.motion.y, host->logical_height);
+        } else if (raw.type == SDL_EVENT_MOUSE_BUTTON_DOWN ||
+                   raw.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+            raw.button.x = pointer_coordinate(raw.button.x, host->logical_width);
+            raw.button.y = pointer_coordinate(raw.button.y, host->logical_height);
+        }
         if (event_observer && event_observer(event_observer_context, &raw)) continue;
         switch (raw.type) {
             case SDL_EVENT_QUIT: event->kind=HOST_EVENT_QUIT; break;
