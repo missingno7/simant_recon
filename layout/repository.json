@@ -1040,6 +1040,28 @@
       "deletion_condition": "Keep the ASM translation boundary; absorb a projection into canonical C only through reviewed source correction and codegen/evidence consequences, never by hiding it in a host layer."
     },
     {
+      "id": "canonical_input_interrupt_projection",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/whole_program/platform/m1b73_queue_runtime.c",
+        "portable/whole_program/platform/m1b73_events.c",
+        "portable/whole_program/platform/m1b73_queues.c",
+        "portable/whole_program/platform/m1b73_main_input.c",
+        "portable/whole_program/platform/m1b73_mouse.c",
+        "portable/whole_program/platform/sdl3/input_time_host.c",
+        "portable/whole_program/platform/sdl3/host.c",
+        "portable/whole_program/platform/sdl3/m1b73_application_input.c"
+      ],
+      "builder_site": "portable/build.py:platform service inventory",
+      "consumers": [
+        "src/root/m1B73.asm",
+        "canonical input queue and native SDL/BIOS boundary"
+      ],
+      "reason": "Readable projection of canonical 0747 and INT08 cursor instructions and shared 0445 mouse callback over canonical state; retires table-write-only scan handling and the duplicate warp callback path.",
+      "blocker": "native-input-hardware-context in portable/platform.json preserves raw register residue, alternate BIOS/mouse hardware and interrupt-interleaving limits; passing bounded controls does not close them.",
+      "deletion_condition": "Keep while native cannot execute the DOS interrupt handlers; retire a replaced provider in the same change and preserve the canonical scan/queue/cursor state and permanent controls."
+    },
+    {
       "id": "platform_services_and_application",
       "class": "TRUE_PLATFORM_BOUNDARY",
       "paths": [

@@ -1,4 +1,5 @@
 #include "m1b73_main_input.h"
+#include "canonical_mouse_input_data.h"
 
 #include <stdlib.h>
 
@@ -50,16 +51,14 @@ static PortableInputTimeHost *require_source_input_host(void)
 
 int16_t f_1B73_0A30(uint16_t scan_code)
 {
-    int down;
     PortableInputTimeHost *host = require_source_input_host();
     /* DOS INT09/INT33 callbacks update held input while the source polls
      * its scan table. SDL needs the shared refresh boundary to deliver
      * those transitions, including mouse release in StillDown loops. */
     if (scan_code > UINT8_C(0x7f) ||
-        portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK ||
-        !portable_input_time_host_is_scan_down(host, (uint8_t)scan_code, &down))
+        portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK)
         abort();
-    return (int16_t)(down != 0);
+    return (int16_t)(g_53CD[scan_code] ^ UINT8_C(0x80));
 }
 
 int16_t f_1B73_0EEE(void)

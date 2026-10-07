@@ -111,9 +111,10 @@ int portable_m1b73_event_enqueue_registers(PortableM1B73Events *events,
         return 0;
     if (!portable_input_time_host_current_modifiers(&modeled_bios_flags))
         return 0;
-    /* The shared SDL host owns the modeled low BDA keyboard-flag byte; the
-     * adjacent BIOS byte has no source-backed host equivalent here. */
-    keyboard_flags = modeled_bios_flags;
+    /* IRQ scan effects sample both BDA flag bytes before the old BIOS IRQ
+     * updates them for this key. Mouse callbacks sample the current flags. */
+    keyboard_flags = (uint16_t)(modeled_bios_flags |
+        ((uint16_t)events->input_host->bios_keyboard_flags_hi << 8));
     /* f_1B73_036E samples the BIOS data area clock, not m1B73's private
      * TickCount counter. */
     bios_ticks = f_1F58_0006();

@@ -19,6 +19,7 @@ typedef struct PortableM1B73QueueRuntime {
     void *graphics_context;
     PortableM1B73GraphicsCursorMode graphics_cursor_mode;
     uint8_t bound;
+    uint32_t last_cursor_tick;
 } PortableM1B73QueueRuntime;
 
 /* Binds only after the same SDL input owner, source event/timer owner, and
@@ -40,6 +41,14 @@ void portable_m1b73_queue_runtime_unbind(
  * 0 for disabled/non-key events, and -1 for an unsupported scan code. */
 int portable_m1b73_queue_runtime_scan_transition(
     PortableM1B73QueueRuntime *runtime, const HostEvent *event);
+/* 0747 register projection. Returns carry (1 retain BIOS / 0 flush), or -1.
+ * CX/DX are explicit because the ASM enqueues their incoming residue. */
+int portable_m1b73_queue_runtime_scan_byte(
+    PortableM1B73QueueRuntime *runtime, uint8_t raw_scan,
+    uint16_t incoming_cx, uint16_t incoming_dx);
+/* One original INT08 cursor phase, driven by the always-on BIOS clock. */
+int portable_m1b73_queue_runtime_cursor_tick(PortableM1B73QueueRuntime *runtime);
+int portable_m1b73_queue_runtime_refresh_cursor(PortableM1B73QueueRuntime *runtime);
 
 /* Source f_1B73_09E9 coordinate command, exposed to the original source ABI
  * wrapper. Returns failure when its active mouse/hot-box provider fails. */

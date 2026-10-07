@@ -226,6 +226,13 @@
       "detail": "Four-word DOS enqueue calls inherit an unprovided fifth Event.v word; native supplies zero. Original-instruction controls prove differing queued v under caller-stack contrast, while explicit fifth-zero controls remain equal. Coordinate observers exist; full interleaving/observer closure remains required. See evidence/canonical/event-omitted-word/."
     },
     {
+      "id": "native-input-hardware-context",
+      "status": "OPEN",
+      "gate": "SEMANTIC/PORT-BLOCKING",
+      "module": "root:1B73 keyboard/mouse/INT08 platform boundary",
+      "detail": "0747 scan/make/command/button/cursor projection matches 2304 canonical instruction steps under explicit register controls; real DOS key/mouse queue observation and native SDL release regressions corroborate the repair. SDL supplies no interrupted DOS CX/DX/segment context (FA h/v and F0 v retain native zero residue), and full BIOS translation, third-party INT15 chaining, Pause/PrintScreen/Alt-numpad streams, mickey mode/driver sensitivity and asynchronous CPU/IRQ interleavings remain unproved. The observed default BIOS keyboard ring now has fifteen usable slots and full-key drop behavior. See evidence/canonical/native-input-irq/README.md and portable/tests/input_irq/."
+    },
+    {
       "id": "native-drive-device-policy",
       "status": "OPEN",
       "gate": "SEMANTIC/PORT-BLOCKING",
@@ -240,6 +247,15 @@
     "evidence": "evidence/canonical/native-logo-release/README.md",
     "regression": "portable/tests/runtime/run_logo.py",
     "scope": "Bounded logo/customer-dialog mouse and key release; no global event-interleaving equivalence claim."
+  },
+  "native_input_interrupts": {
+    "authority": "src/root/m1B73.asm",
+    "classification": "TRUE_PLATFORM_BOUNDARY",
+    "service": "portable/whole_program/platform/m1b73_queue_runtime.c",
+    "contract": "Project 0747 scan transitions and INT08 cursor movement over canonical ASM cells; deliver make FA records before keypad/cursor/F0 actions; share 0445 mouse callback and original descriptor dispatch; apply carry-clear BIOS FIFO flush after BIOS modifier updates.",
+    "evidence": "evidence/canonical/native-input-irq/README.md",
+    "regression": "portable/tests/input_irq/run.py",
+    "raw_state_limit": "native-input-hardware-context"
   },
   "native_heap_boundary": "src/root/m171C.c",
   "assembly_profile": "masm510",

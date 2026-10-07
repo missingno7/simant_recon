@@ -9,7 +9,9 @@
 
 enum {
     PORTABLE_INPUT_TIME_HOST_EVENT_CAPACITY = 512,
-    PORTABLE_INPUT_TIME_HOST_KEY_CAPACITY = 128,
+    /* Observed canonical BIOS BDA80/82 = 001E/003E: sixteen words, with
+     * one empty ring slot. Matches the pinned DOS BIOS input boundary. */
+    PORTABLE_INPUT_TIME_HOST_KEY_CAPACITY = 16,
     PORTABLE_INPUT_TIME_HOST_NUMLOCK_MASK = 0x20
 };
 
@@ -33,6 +35,9 @@ typedef struct PortableInputTimeHost {
     uint16_t event_head, event_count;
     uint16_t key_head, key_count;
     uint8_t bios_keyboard_flags;    /* adapter-owned logical BDA flags */
+    uint8_t bios_keyboard_flags_hi; /* BDA 40:18 depressed/left modifier bits */
+    uint8_t suppress_bios_key;      /* IRQ09 carry-clear: flush after BIOS */
+    uint8_t ingesting;
     uint8_t host_closed;
     uint8_t bound;
     uint8_t dual_clock_binding;
@@ -82,8 +87,6 @@ int portable_input_time_host_poll_event(PortableInputTimeHost *binding,
                                         HostEvent *event);
 int portable_input_time_host_get_input_state(PortableInputTimeHost *binding,
                                              HostInputState *state);
-int portable_input_time_host_is_scan_down(PortableInputTimeHost *binding,
-                                          uint8_t scan, int *down);
 int portable_input_time_host_dos_modifiers(PortableInputTimeHost *binding,
                                            uint8_t *modifiers);
 int portable_input_time_host_current_modifiers(uint8_t *modifiers);

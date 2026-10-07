@@ -20,9 +20,9 @@ def state():
     return {'mouse_status': int(gdb.parse_and_eval('g_9120')),
             'replay_next': int(gdb.parse_and_eval('app.replay_next')),
             'source_window': int(gdb.parse_and_eval('((short *)&g_5702)[0]')) & 0xffff,
-            'space_down': int(gdb.parse_and_eval('app.host->dos_scan_down[57]')),
-            'insert_down': int(gdb.parse_and_eval('app.host->dos_scan_down[82]')),
-            'delete_down': int(gdb.parse_and_eval('app.host->dos_scan_down[83]'))}
+            'space_down': int(gdb.parse_and_eval('(g_53CD[57] ^ 128) != 0')),
+            'insert_down': int(gdb.parse_and_eval('(g_53CD[82] ^ 128) != 0')),
+            'delete_down': int(gdb.parse_and_eval('(g_53CD[83] ^ 128) != 0'))}
 
 
 class Returned(gdb.FinishBreakpoint):

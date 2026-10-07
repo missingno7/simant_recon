@@ -22,8 +22,10 @@ static int push_event(PortableInputTimeHost *binding, const HostEvent *event)
 static int push_key(PortableInputTimeHost *binding, uint16_t key)
 {
     uint16_t tail;
-    if (binding->key_count >= PORTABLE_INPUT_TIME_HOST_KEY_CAPACITY)
-        return 0;
+    /* A full BIOS ring drops this key; IRQ scan state/event effects already
+     * occurred. It must not turn input into a host-provider failure. */
+    if (binding->key_count >= PORTABLE_INPUT_TIME_HOST_KEY_CAPACITY - 1u)
+        return 1;
     tail = (uint16_t)((binding->key_head + binding->key_count) %
                       PORTABLE_INPUT_TIME_HOST_KEY_CAPACITY);
     binding->key_words[tail] = key;
@@ -48,31 +50,72 @@ static int ingest_host_events(PortableInputTimeHost *binding)
 {
     HostEvent event;
     int polled;
+    if (binding->ingesting)
+        return 1;
+    binding->ingesting = 1;
     do {
         polled = host_poll_event(binding->host, &event);
         if (polled < 0) {
             binding->host_closed = 1;
+            binding->ingesting = 0;
             return -1;
         }
-        if (polled == 0)
+        if (polled == 0) {
+            binding->ingesting = 0;
             return 1;
+        }
         event.tick = sim_timing_tick_count(binding->clock);
         if (!push_event(binding, &event)) {
             binding->host_closed = 1;
+            binding->ingesting = 0;
             return -1;
         }
+        binding->suppress_bios_key = 0;
         if (binding->event_observer != NULL &&
             !binding->event_observer(binding->event_observer_context,
                                      &event)) {
             binding->host_closed = 1;
+            binding->ingesting = 0;
             return -1;
         }
         if (event.kind == HOST_EVENT_QUIT)
             binding->host_closed = 1;
-        if (event.kind == HOST_EVENT_KEY_DOWN &&
-            !push_key(binding, event.key)) {
-            binding->host_closed = 1;
-            return -1;
+        if (event.kind == HOST_EVENT_KEY_DOWN || event.kind == HOST_EVENT_KEY_UP) {
+            uint8_t scan = (uint8_t)(event.key >> 8);
+            uint8_t lock = scan == 0x3a ? 0x40 : scan == 0x45 ? 0x20 :
+                           scan == 0x46 ? 0x10 : scan == 0x52 ? 0x80 : 0;
+            /* The hook samples the BDA before the old BIOS IRQ updates it. */
+            binding->bios_keyboard_flags = (uint8_t)(
+                (binding->bios_keyboard_flags & 0xf0) | (event.modifiers & 0x0f));
+            if (lock != 0) {
+                if (event.kind == HOST_EVENT_KEY_DOWN &&
+                    !(binding->bios_keyboard_flags_hi & lock))
+                    binding->bios_keyboard_flags ^= lock;
+                if (event.kind == HOST_EVENT_KEY_DOWN)
+                    binding->bios_keyboard_flags_hi |= lock;
+                else
+                    binding->bios_keyboard_flags_hi &= (uint8_t)~lock;
+            }
+            if ((scan == 0x1d || scan == 0x38) && !event.extended) {
+                uint8_t bit = scan == 0x1d ? 1 : 2;
+                if (event.kind == HOST_EVENT_KEY_DOWN)
+                    binding->bios_keyboard_flags_hi |= bit;
+                else
+                    binding->bios_keyboard_flags_hi &= (uint8_t)~bit;
+            }
+            /* Shift/Ctrl/Alt/lock transitions are IRQ scans, not BIOS keys. */
+            if (event.kind == HOST_EVENT_KEY_DOWN && scan != 0x2a &&
+                scan != 0x36 && scan != 0x1d && scan != 0x38 &&
+                scan != 0x3a && scan != 0x45 && scan != 0x46 &&
+                !push_key(binding, event.key)) {
+                binding->host_closed = 1;
+                binding->ingesting = 0;
+                return -1;
+            }
+            if (binding->suppress_bios_key) {
+                binding->key_head = 0;
+                binding->key_count = 0;
+            }
         }
     } while (1);
 }
@@ -356,18 +399,6 @@ int portable_input_time_host_get_input_state(PortableInputTimeHost *binding,
         ? host_get_input_state(binding->host, state) : 0;
 }
 
-int portable_input_time_host_is_scan_down(PortableInputTimeHost *binding,
-                                          uint8_t scan, int *down)
-{
-    /* Source held-input waits rely on asynchronous hardware interrupts.
-     * In virtual mode this physical-input poll is also a yield boundary. */
-    if (host_virtual_clock_enabled() && binding != NULL &&
-        portable_input_time_host_refresh_clock(binding) != PORTABLE_INPUT_TIME_OK)
-        return 0;
-    return binding != NULL && binding->host != NULL
-        ? host_is_dos_scan_down(binding->host, scan, down) : 0;
-}
-
 int portable_input_time_host_dos_modifiers(PortableInputTimeHost *binding,
                                            uint8_t *modifiers)
 {
@@ -388,13 +419,8 @@ uint8_t dos_keyboard_modifiers(void)
 int portable_input_time_host_current_modifiers(uint8_t *modifiers)
 {
     PortableInputTimeHost *binding = active_host_binding;
-    HostInputState state;
-    if (binding == NULL || binding->host == NULL || modifiers == NULL ||
-        !host_get_input_state(binding->host, &state))
+    if (binding == NULL || binding->host == NULL || modifiers == NULL)
         return 0;
-    binding->bios_keyboard_flags = (uint8_t)(
-        (binding->bios_keyboard_flags & (uint8_t)~UINT8_C(0x0f)) |
-        (state.dos_modifiers & UINT8_C(0x0f)));
     *modifiers = binding->bios_keyboard_flags;
     return 1;
 }

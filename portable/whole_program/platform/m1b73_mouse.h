@@ -63,6 +63,7 @@ typedef struct PortableM1B73MouseProvider {
     uint8_t event_pump_active; /* replaces installed interrupt callback */
     uint8_t fallback_stub_active; /* always false for SDL; no IVT writes */
     uint8_t bound;
+    uint8_t driver_buttons; /* INT33 BL, independent of keypad emulation */
 } PortableM1B73MouseProvider;
 
 PortableM1B73MouseStatus portable_m1b73_mouse_bind(
@@ -75,6 +76,10 @@ PortableM1B73MouseStatus portable_m1b73_mouse_consume_event(
     PortableM1B73MouseProvider *provider, const HostEvent *event);
 PortableM1B73MouseStatus portable_m1b73_mouse_update_cursor(
     PortableM1B73MouseProvider *provider);
+/* Readable projection of 0445; also used by 09FF and keypad buttons. */
+PortableM1B73MouseStatus portable_m1b73_mouse_callback(
+    PortableM1B73MouseProvider *provider, uint8_t mask, uint8_t buttons,
+    int16_t x, int16_t y);
 
 /* Source public entrypoints consumed by the original whole-program objects. */
 void f_1B73_0025(void);

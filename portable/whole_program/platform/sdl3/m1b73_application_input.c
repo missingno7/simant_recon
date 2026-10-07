@@ -196,6 +196,10 @@ static int refresh_application(void *context, SimTimingClock *clock)
         binding->refreshing = 0;
         return 0;
     }
+    if (!portable_m1b73_queue_runtime_refresh_cursor(&binding->queues)) {
+        binding->refreshing = 0;
+        return 0;
+    }
     /* BIOS key availability is nonconsuming. It ingests SDL events once and
      * the observer routes their mouse/key effects while retaining FIFO order
      * for the source application. */

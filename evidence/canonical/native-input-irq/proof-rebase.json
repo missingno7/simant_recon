@@ -1,0 +1,18 @@
+{
+  "schema": "canonical-inventory-only-proof-rebase-v1",
+  "reviewer": "p2-kbd",
+  "status": "INVENTORY_ONLY_REBASE_CONFIRMED",
+  "prior_commit": "44de644",
+  "prior_program_sha256": "252b0c9a78de3799909bc1d9325735649bbda4ad4a12a0f77d6a4f9f559a3ff9",
+  "program_sha256": "14dac2b588562b6e62dbf17714f393a8eb902b6dd4c11688b592963144217fdb",
+  "reason": "Metadata-only promotion maps native-input-hardware-context to the input-abi closure root. The entire program outside dos.closure_graph is identical to44de644; source ownership, modules, storage contracts, DOS gates and data membership are unchanged. Every dependent collect() was freshly rerun and deeply compared before repinning; only the named inventory hash fields differed. No semantic output, negative control, source census, definition hash or domain was changed or ignored.",
+  "proofs": [
+    {"path": "evidence/canonical/ctype-domain/facts.json", "prior_sha256": "2d7ff850c45b2de4dd055e36f26f486b9b1747191ba1a7f525c24d736c0ed338", "fields": ["inventory.program_projection_sha256", "inventory.canonical_program_projection_sha256"]},
+    {"path": "evidence/canonical/last-filename/facts.json", "prior_sha256": "858ed51a640a5dae6bfb0643920b7f040e1723406238d38b83dc7e96aaf8aba3", "fields": ["program_sha256"]},
+    {"path": "evidence/canonical/monochrome-owner/mode-facts.json", "prior_sha256": "499980c3cf3fe185c69555f48239ee0bfb281a63ab1136145016896471d84247", "fields": ["program_sha256"]},
+    {"path": "evidence/canonical/sample-free-list/facts.json", "prior_sha256": "bc7456f5b5a73d13616a4eb028c5742dff0d08a1cb917678881555679480ca7f", "fields": ["program_sha256"]},
+    {"path": "evidence/canonical/clip-owner/facts.json", "prior_sha256": "d7a1cd746818fcfbfafaadf55f95c204363d8301e1bd8e5e64f2cd5e96739e05", "fields": ["program_sha256"]}
+  ],
+  "publication": "evidence/canonical/native-input-irq/inventory-publication.json",
+  "checks": "Existing strict replay comparisons remain unchanged; full tools/validate.py includes their permanent regressions. Exploratory rebase comparison is retired after review."
+}

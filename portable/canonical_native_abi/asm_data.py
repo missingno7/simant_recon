@@ -134,7 +134,7 @@ def emit_mouse(facts):
     # be justified by actual symbolic ASM declarations, never native owners.
     grouped = {'g_4336': ('int16_t', 4), 'g_53CD': ('uint8_t', 128)}
     selected = ['432A','4331','4332','4333','4334','4336','433E','4340','4342','4344','4346',
-                '4348','434A','434E','4352','4356','435A','4362','4363','4365','4366','4368','4369','4DA4','53BC','53BD','53CD']
+                '4348','434A','434E','4352','4356','435A','4362','4363','4364','4365','4366','4368','4369','4DA4','53BC','53BD','53CD']
     result = ['/* Generated only from src/root/m1B73.asm symbolic data directives. */', '#include <stdint.h>', '']
     receipt = []
     for suffix in selected:
@@ -153,7 +153,12 @@ def emit_mouse(facts):
     code_cells={'shift_state':('uint8_t','db'),
                 'kbd_hook_on':('uint8_t','db'),
                 'tmr_countdown':('uint16_t','dw'),
-                'cursor_mode':('uint8_t','db')}
+                'cursor_mode':('uint8_t','db'),
+                'kbd_last_scan':('uint8_t','db'),
+                'last_shift':('uint8_t','db'),
+                'tick_phase':('uint16_t','dw'),
+                'mouse_busy':('uint8_t','db'),
+                'timer_busy':('uint8_t','db')}
     header=['#ifndef SIMANT_CANONICAL_MOUSE_INPUT_DATA_H',
             '#define SIMANT_CANONICAL_MOUSE_INPUT_DATA_H','#include <stdint.h>',
             'extern uint32_t g_434E;', 'extern uint8_t g_53CD[128];']

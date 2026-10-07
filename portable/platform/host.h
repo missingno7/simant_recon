@@ -18,6 +18,7 @@ typedef struct HostEvent {
     uint16_t key; /* BIOS-style scan code in high byte, ASCII in low byte. */
     uint8_t button;
     uint8_t modifiers;
+    uint8_t extended; /* Set-1 E0 prefix (distinct from BIOS scan/ASCII). */
     uint32_t tick;
 } HostEvent;
 
@@ -37,10 +38,6 @@ int host_poll_event(Host *host, HostEvent *event);
 /* Query current physical pointer/button/modifier state in the renderer's
  * logical coordinates, even after a modal consumed the transition events. */
 int host_get_input_state(Host *host, HostInputState *state);
-/* Query a source-mapped BIOS scan's observed physical down state. This cache
- * is updated for key transitions consumed by host_poll_event, including a
- * modal dialog, so a caller can reconcile its held-key set after the modal. */
-int host_is_dos_scan_down(Host *host, uint8_t scan, int *down);
 /* Warp to renderer logical coordinates; SDL handles the active window's
  * logical presentation, viewport, and scaling transform. */
 int host_warp_pointer(Host *host, int16_t logical_x, int16_t logical_y);

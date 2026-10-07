@@ -1,0 +1,43 @@
+{
+  "schema": "canonical-dos-input-interrupt-observation-v1",
+  "status": "OBSERVED",
+  "source_commit": "44de644",
+  "executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+  "build_report_sha256": "d65976de7ff755721be5d5185db6d99aa9dc2a000c5ec6184fedb1945abaf9fb",
+  "runner": "dos/run.py --build-report build/current/dos/build-report.json --seconds 180 --fixed-clock --argument /dV --argument /s1 --input-script build/workers/p2-kbd/input-map.scr --out build/workers/p2-kbd/dos-map",
+  "runner_controls": "Pinned DOSBox-X observation runner, 200000 fixed cycles, 1992-01-01 12:00 guest clock, unchanged source-built executable.",
+  "linked_addresses": {
+    "load_base_hex": "8240",
+    "DGROUP_hex": "5C2D",
+    "input_queue_linear_hex": "651A5",
+    "event_descriptor_linear_hex": "61296",
+    "g_9120_linear_hex": "651A2",
+    "g_53CD_linear_hex": "606F7"
+  },
+  "record_word_order": ["what_untouched", "BDA_message", "BIOS_tick", "AX", "CX", "DX", "BX", "ES"],
+  "queue_observations_hex": [
+    {"trigger": "A make 13000ms", "enqueue_ms": 13000.302, "words": ["0000", "0000", "015C", "0000", "0302", "5C2D", "FA1E", "0000"]},
+    {"trigger": "Left mouse make at 260,330 14200ms", "enqueue_ms": 14200.853, "words": ["0000", "0000", "0176", "0201", "0104", "014A", "FF00", "0101"]},
+    {"trigger": "Space make 15000ms, first record", "words": ["0000", "0000", "018A", "0000", "0002", "5C2D", "FA39", "0000"]},
+    {"trigger": "Space make 15000ms, following registered mouse record", "words": ["0000", "0000", "018A", "0201", "0104", "014A", "FF00", "0101"]}
+  ],
+  "negative_controls": [
+    "A break creates no new FA event.",
+    "Mouse release updates status to0400, but no matching active row queues a release in this live dialog.",
+    "Space release clears BIOS tail to head0026h.",
+    "E0 Right make preserves interruptedCX0147h, unlike ordinary makeCL=2."
+  ],
+  "second_run": {
+    "script": "build/workers/p2-kbd/control.scr",
+    "receipts": "build/workers/p2-kbd/dos-controls/",
+    "ctrl_p_five_words_hex": ["8081", "0004", "5C2D", "F081", "0000"],
+    "ctrl_p_message_hex": "0104",
+    "ctrl_p_tick_hex": "015E",
+    "shift_a_message_hex": "0002",
+    "normal_shift_scan_write": false,
+    "BDA_keyboard_buffer_start_end_hex": ["001E", "003E"]
+  },
+  "receipts": "Ignored build/workers/p2-kbd/dos-map/ watch-queue, watch-mouse, watch-biosbuffer, dump-a-make, dump-mouse-down/up, dump-space-make and exec-enqueue-stack register/stack observations; exploratory snapshots are not production inputs.",
+  "scope": "Bounded live canonical key/mouse/command observations. All word values are observed records, not a universal initializer or ignored-field policy. Raw SDL interrupted-register residue is separately open.",
+  "review": "evidence/canonical/native-input-irq/README.md"
+}

@@ -9,7 +9,6 @@ struct Host {
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     uint8_t *rgba;
-    uint8_t dos_scan_down[256];
     int logical_width, logical_height;
     int integer_scaling;
     HostInputState replay_state;
@@ -199,6 +198,12 @@ static uint16_t dos_key(const SDL_KeyboardEvent *event)
         case SDLK_KP_3: scan=0x51; break;
         case SDLK_KP_0: scan=0x52; break;
         case SDLK_KP_PERIOD: scan=0x53; break;
+        case SDLK_KP_PLUS: scan=0x4e; ascii='+'; break;
+        case SDLK_KP_MINUS: scan=0x4a; ascii='-'; break;
+        case SDLK_KP_ENTER: scan=0x1c; ascii=13; break;
+        case SDLK_CAPSLOCK: scan=0x3a; break;
+        case SDLK_NUMLOCKCLEAR: scan=0x45; break;
+        case SDLK_SCROLLLOCK: scan=0x46; break;
         /* Modifier transitions update the host held-key model. They are
          * physical events, and do not enter the DOS logical key queue. */
         case SDLK_LCTRL: case SDLK_RCTRL: scan=0x1d; break;
@@ -283,13 +288,6 @@ int host_push_pointer_event(Host *host, const HostEvent *event)
     return SDL_PushEvent(&raw);
 }
 
-int host_is_dos_scan_down(Host *host, uint8_t scan, int *down)
-{
-    if (host == NULL || down == NULL || scan == 0) return 0;
-    *down = host->dos_scan_down[scan] != 0;
-    return 1;
-}
-
 int host_poll_event(Host *host, HostEvent *event)
 {
     SDL_Event raw;
@@ -299,9 +297,6 @@ int host_poll_event(Host *host, HostEvent *event)
         if (!SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
         switch (raw.type) {
             case SDL_EVENT_QUIT: event->kind=HOST_EVENT_QUIT; break;
-            case SDL_EVENT_WINDOW_FOCUS_LOST:
-                memset(host->dos_scan_down, 0, sizeof(host->dos_scan_down));
-                continue;
             case SDL_EVENT_MOUSE_MOTION:
                 event->kind=HOST_EVENT_MOUSE_MOVE;
                 event->x=(int16_t)raw.motion.x; event->y=(int16_t)raw.motion.y; break;
@@ -314,13 +309,16 @@ int host_poll_event(Host *host, HostEvent *event)
             case SDL_EVENT_KEY_DOWN:
             case SDL_EVENT_KEY_UP:
                 event->key=dos_key(&raw.key);
-                if ((event->key >> 8) != 0)
-                    host->dos_scan_down[event->key >> 8] =
-                        (uint8_t)(raw.type == SDL_EVENT_KEY_DOWN);
-                if (raw.key.repeat) continue;
                 event->kind=raw.type == SDL_EVENT_KEY_DOWN ?
                            HOST_EVENT_KEY_DOWN : HOST_EVENT_KEY_UP;
                 event->modifiers=dos_modifiers(raw.key.mod);
+                event->extended = raw.key.key == SDLK_RCTRL ||
+                    raw.key.key == SDLK_RALT || raw.key.key == SDLK_KP_ENTER ||
+                    raw.key.key == SDLK_UP || raw.key.key == SDLK_DOWN ||
+                    raw.key.key == SDLK_LEFT || raw.key.key == SDLK_RIGHT ||
+                    raw.key.key == SDLK_HOME || raw.key.key == SDLK_END ||
+                    raw.key.key == SDLK_PAGEUP || raw.key.key == SDLK_PAGEDOWN ||
+                    raw.key.key == SDLK_INSERT || raw.key.key == SDLK_DELETE;
                 if (!event->key) continue;
                 break;
             default: continue;

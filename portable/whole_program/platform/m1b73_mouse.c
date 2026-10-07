@@ -1,4 +1,5 @@
 #include "m1b73_mouse.h"
+#include "canonical_mouse_input_data.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -195,16 +196,12 @@ static uint8_t event_mask_bit(const HostEvent *event)
 PortableM1B73MouseStatus portable_m1b73_mouse_consume_event(
     PortableM1B73MouseProvider *provider, const HostEvent *event)
 {
-    PortableM1B73MouseAsmState *s;
-    PortableM1B73MouseStatus status;
     int16_t source_x, source_y;
-    uint16_t buttons, mask;
+    uint8_t buttons;
     uint8_t event_mask;
     int bit;
     if (!state_ready(provider) || event == NULL)
         return PORTABLE_M1B73_MOUSE_BAD_ARGUMENT;
-    if (!provider->event_pump_active)
-        return PORTABLE_M1B73_MOUSE_INACTIVE;
     if (event->kind != HOST_EVENT_MOUSE_MOVE &&
         event->kind != HOST_EVENT_MOUSE_DOWN &&
         event->kind != HOST_EVENT_MOUSE_UP)
@@ -212,34 +209,53 @@ PortableM1B73MouseStatus portable_m1b73_mouse_consume_event(
     if (!provider->services.host_to_source(provider->services.context,
             event->x, event->y, &source_x, &source_y))
         return PORTABLE_M1B73_MOUSE_PROVIDER_FAILED;
-    s = provider->state;
-    buttons = (uint16_t)(*s->button_state & UINT16_C(0x00ff));
+    buttons = provider->driver_buttons;
     bit = button_bit(event->button);
     if (event->kind == HOST_EVENT_MOUSE_DOWN)
         buttons = (uint16_t)(buttons | (uint16_t)bit);
     else if (event->kind == HOST_EVENT_MOUSE_UP)
         buttons = (uint16_t)(buttons & (uint16_t)~(uint16_t)bit);
+    provider->driver_buttons = buttons;
     event_mask = event_mask_bit(event);
-    mask = (uint16_t)((uint16_t)event_mask << 8);
-    *s->button_state = (uint16_t)(mask | buttons);
-    *s->x = source_x;
-    *s->y = source_y;
+    if (!provider->event_pump_active || !(event_mask & provider->event_mask))
+        return PORTABLE_M1B73_MOUSE_INACTIVE;
+    return portable_m1b73_mouse_callback(provider, event_mask, buttons,
+                                         source_x, source_y);
+}
+
+PortableM1B73MouseStatus portable_m1b73_mouse_callback(
+    PortableM1B73MouseProvider *provider, uint8_t mask, uint8_t buttons,
+    int16_t x, int16_t y)
+{
+    PortableM1B73MouseAsmState *s;
+    PortableM1B73MouseStatus status;
+    if (!state_ready(provider))
+        return PORTABLE_M1B73_MOUSE_BAD_ARGUMENT;
+    if (mouse_busy)
+        return PORTABLE_M1B73_MOUSE_OK;
+    ++mouse_busy;
+    s = provider->state;
+    *s->button_state = (uint16_t)(((uint16_t)mask << 8) | buttons);
+    *s->x = x;
+    *s->y = y;
     if ((int8_t)*s->cursor_show_level <= 0) {
         *s->cursor_drawn = 1;
-        return dispatch_selected_event(provider, *s->button_state);
+    } else if (*s->cursor_update_lock != 0 || timer_busy ||
+        (provider->display_busy != NULL && *provider->display_busy != 0)) {
+        /* 0445 defers redraw under any of the three busy guards, while
+         * preserving the callback dispatch below. */
+        *s->cursor_drawn = 1;
+    } else {
+        status = run_mouse_callback(provider);
+        if (status != PORTABLE_M1B73_MOUSE_OK) {
+            --mouse_busy;
+            return status;
+        }
     }
-    /* Source 0445 skips cursor/hot-box work while the display renderer,
-     * timer handler, or cursor update is busy, but still dispatches the
-     * selected event below. The native owner has no asynchronous timer ISR;
-     * the source display and cursor guards remain observable here. */
-    if (*s->cursor_update_lock != 0 ||
-        (provider->display_busy != NULL && *provider->display_busy != 0))
-        return dispatch_selected_event(provider, *s->button_state);
-    status = run_mouse_callback(provider);
-    if (status != PORTABLE_M1B73_MOUSE_OK)
-        return status;
     /* 0445 invokes g_5FFA after 04BB has shown the cursor. */
-    return dispatch_selected_event(provider, *s->button_state);
+    status = dispatch_selected_event(provider, *s->button_state);
+    --mouse_busy;
+    return status;
 }
 
 void f_1B73_0025(void)
@@ -268,9 +284,12 @@ void f_1B73_0046(void)
             source_x, source_y, &host_x, &host_y) ||
         !host_warp_pointer(provider->host, host_x, host_y))
         abort();
-    *s->x = source_x;
-    *s->y = source_y;
     *s->mouse_mode = 2; /* active native logical pointer service */
+    /* 0046 calls 09F7/09FF even before vector installation. The same 0445
+     * callback publishes movement status and deferred redraw, not just x/y. */
+    if (portable_m1b73_mouse_callback(provider, 1, (uint8_t)*s->button_state,
+            source_x, source_y) != PORTABLE_M1B73_MOUSE_OK)
+        abort();
     *s->cursor_initialized = 1;
 }
 
@@ -325,8 +344,8 @@ void f_1B73_0235(void)
     *s->hook_depth = (uint8_t)(*s->hook_depth + 1u);
     provider->event_mask = UINT16_C(0x007f);
     provider->event_pump_active = 1;
-    /* DOS INT 33h/08h/09h/15h vectors are retired. SDL is polled once by the
-     * input owner and routed through portable_m1b73_mouse_consume_event. */
+    /* SDL event ingestion replaces the installed interrupt vectors; the
+     * source scan and cursor projections run at that shared boundary. */
 }
 
 void f_1B73_02A9(void)

@@ -9512,13 +9512,14 @@
         {
           "id": "input-abi",
           "question": "Which event words and input records are actually observed?",
-          "scope": "Explicit queue ABI is closed; omitted fifth word and descriptor activation are separate questions.",
-          "next_experiment": "Trace queue producers/consumers and interleavings; distinguish preserved opaque descriptor shape from activation.",
+          "scope": "Explicit queue ABI and controlled 0747 projection are closed; omitted fifth word, interrupted register/hardware context and descriptor activation remain separate questions.",
+          "next_experiment": "Trace queue producers/consumers and interleavings; establish native interrupted-register observer closure and alternate BIOS/mouse driver domains independently.",
           "depends_on": [],
           "members": {
             "data": [],
             "native": [
-              "native-event-omitted-word"
+              "native-event-omitted-word",
+              "native-input-hardware-context"
             ],
             "gates": []
           },
