@@ -1,0 +1,1141 @@
+{
+  "passed": true,
+  "controls": [
+    {
+      "control": "census-final",
+      "exit_code": 0,
+      "expected": 0,
+      "passed": true,
+      "counts": {
+        "units": 342,
+        "parsed": 342,
+        "consumed_direct_calls": 4272,
+        "findings": 392,
+        "asm_consumed_calls": 304,
+        "indirect_calls": 21
+      },
+      "unspecified": [],
+      "parse_failures": []
+    },
+    {
+      "control": "census-negative",
+      "exit_code": 1,
+      "expected": 1,
+      "passed": true,
+      "counts": {
+        "units": 342,
+        "parsed": 342,
+        "consumed_direct_calls": 4270,
+        "findings": 401,
+        "asm_consumed_calls": 304,
+        "indirect_calls": 21
+      },
+      "unspecified": [
+        {
+          "callee": "myButton",
+          "source": "src/S04/m35F5.c",
+          "line": 223
+        },
+        {
+          "callee": "myButton",
+          "source": "src/S04/m35F5.c",
+          "line": 327
+        },
+        {
+          "callee": "myButton",
+          "source": "src/S04/m35F5.c",
+          "line": 328
+        },
+        {
+          "callee": "myButton",
+          "source": "src/S04/m35F5.c",
+          "line": 359
+        },
+        {
+          "callee": "myButton",
+          "source": "src/S22/m39C7.c",
+          "line": 115
+        },
+        {
+          "callee": "myButton",
+          "source": "src/S22/m39C7.c",
+          "line": 122
+        },
+        {
+          "callee": "myButton",
+          "source": "src/S22/m3BBD.c",
+          "line": 56
+        },
+        {
+          "callee": "o25_3BA4_19AD",
+          "source": "src/S25/m3BA4.c",
+          "line": 794
+        },
+        {
+          "callee": "f_00F8_02EF",
+          "source": "src/root/m075B.c",
+          "line": 42
+        }
+      ],
+      "parse_failures": []
+    },
+    {
+      "control": "permanent-conversion-controls",
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "startup_gdb": [
+    {
+      "function": "f_00F8_02EF",
+      "phase": "entry",
+      "return_value": null,
+      "ax": 65088,
+      "tick": 0,
+      "flag_0FBA": 0,
+      "flag_0FFE": 0,
+      "virtual_ns": 1000000,
+      "crt_state": 1
+    },
+    {
+      "function": "f_00F8_02EF",
+      "phase": "return",
+      "return_value": 0,
+      "ax": 0,
+      "tick": 0,
+      "flag_0FBA": 0,
+      "flag_0FFE": 0,
+      "virtual_ns": 1000000,
+      "crt_state": 1
+    },
+    {
+      "function": "InitSimVars",
+      "phase": "entry",
+      "return_value": null,
+      "ax": 0,
+      "tick": 0,
+      "flag_0FBA": 0,
+      "flag_0FFE": 0,
+      "virtual_ns": 1000000,
+      "crt_state": 1
+    },
+    {
+      "function": "InitSimVars",
+      "phase": "return",
+      "return_value": null,
+      "ax": 49096,
+      "tick": 0,
+      "flag_0FBA": 30,
+      "flag_0FFE": 30,
+      "virtual_ns": 1000000,
+      "crt_state": 1
+    },
+    {
+      "function": "SeedSRand",
+      "phase": "entry",
+      "return_value": null,
+      "ax": 49096,
+      "tick": 0,
+      "flag_0FBA": 30,
+      "flag_0FFE": 30,
+      "virtual_ns": 1000000,
+      "crt_state": 1
+    },
+    {
+      "function": "SeedSRand",
+      "phase": "return",
+      "return_value": null,
+      "ax": 14161,
+      "tick": 0,
+      "flag_0FBA": 30,
+      "flag_0FFE": 30,
+      "virtual_ns": 2000000,
+      "crt_state": 1
+    },
+    {
+      "function": "SeedRRand",
+      "phase": "entry",
+      "return_value": null,
+      "ax": 14161,
+      "tick": 0,
+      "flag_0FBA": 30,
+      "flag_0FFE": 30,
+      "virtual_ns": 2000000,
+      "crt_state": 1
+    },
+    {
+      "function": "SeedSRand",
+      "phase": "entry",
+      "return_value": null,
+      "ax": 14161,
+      "tick": 0,
+      "flag_0FBA": 30,
+      "flag_0FFE": 30,
+      "virtual_ns": 2000000,
+      "crt_state": 1
+    },
+    {
+      "function": "SeedSRand",
+      "phase": "return",
+      "return_value": null,
+      "ax": 14161,
+      "tick": 0,
+      "flag_0FBA": 30,
+      "flag_0FFE": 30,
+      "virtual_ns": 3000000,
+      "crt_state": 1
+    },
+    {
+      "function": "SeedRRand",
+      "phase": "return",
+      "return_value": null,
+      "ax": 34,
+      "tick": 0,
+      "flag_0FBA": 30,
+      "flag_0FFE": 30,
+      "virtual_ns": 4000000,
+      "crt_state": 1218146458
+    }
+  ],
+  "startup_identity": {
+    "returncode": 0,
+    "timed_out": false,
+    "executable_sha256": "24afdde0a5879c1da054dcb4771eaede11ecb3b61e5b64ccae9d217275ef0346"
+  },
+  "build": {
+    "passed": true,
+    "report_sha256": "09f2e7ae1de88eceb2e8db296e14af0ffdeaf284221b66809b47bddfe837aef9",
+    "counts": {
+      "canonical_C_count": 171,
+      "canonical_C_compile_pass": 170,
+      "ASM_TUs_requiring_translation_or_platform_boundary": 29,
+      "native_services": 75,
+      "native_services_compile_pass": 75,
+      "conversion_failures": 0
+    },
+    "input_stability": {
+      "before_link": true,
+      "at_end": true
+    },
+    "core_link_passed": true,
+    "application_undefined": [],
+    "executable_sha256": "24afdde0a5879c1da054dcb4771eaede11ecb3b61e5b64ccae9d217275ef0346"
+  },
+  "identities": {
+    "run": {
+      "returncode": 0,
+      "timed_out": false,
+      "executable_sha256": "24afdde0a5879c1da054dcb4771eaede11ecb3b61e5b64ccae9d217275ef0346",
+      "source_arguments": [],
+      "dos_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+      "poll_ns": 1000000,
+      "scenario_sha256": "68f5103632cdf77587ee6471bba1d682df19a2281233c72f86cd61abf2c760d0",
+      "script_sha256": "81bd44c5dd211ff6ca00dbeb22c1ff812e4b2e16db14c4cd45c944619e734a5d"
+    },
+    "dos_provenance": {
+      "execution_report_sha256": "d92e1dd954c28020f6eaa258ed2dc81553dd9c1336b840a5a84f82a44a9e7941",
+      "executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+      "observation_script_sha256": "1889275d1a49f139ab1eefc565bb9ee8204ac93d30c357316258e3de1caa4181",
+      "original_input_operations_verified": true,
+      "observation_environment": {
+        "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+        "guest_clock": "DATE 01-01-1992, TIME 12:00:00 set by the batch before input scheduling and launch",
+        "resources": {
+          "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+          "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+          "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+          "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15",
+          "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+          "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+          "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+          "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+          "SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+          "SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+          "SIMANT.CFG": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+          "INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486"
+        },
+        "emulator_settings": {
+          "dosbox": {
+            "memsize": "16",
+            "quit warning": "false"
+          },
+          "cpu": {
+            "cycles": "fixed 200000",
+            "core": "normal",
+            "cputype": "386"
+          },
+          "dos": {
+            "xms": "true",
+            "ems": "false",
+            "umb": "false"
+          },
+          "mixer": {
+            "nosound": "true"
+          },
+          "sdl": {
+            "output": "surface"
+          }
+        },
+        "source_arguments": ""
+      },
+      "saved_game_sha256": null
+    },
+    "original_provenance": {
+      "execution_report_sha256": "2c0ecb2f368f44f89b91abf01defa911f58f639407de1989cde4e99281e4fe5e",
+      "executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "observation_script_sha256": "9728ce4de234c034423d34a062c16da45f3211343dc2e217d9f06773bc8e8914",
+      "original_input_operations_verified": true,
+      "observation_environment": {
+        "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
+        "guest_clock": "DATE 01-01-1992, TIME 12:00:00 set by the batch before input scheduling and launch",
+        "resources": {
+          "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+          "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+          "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+          "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15",
+          "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+          "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+          "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+          "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+          "SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+          "SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80",
+          "SIMANT.CFG": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+          "INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486"
+        },
+        "emulator_settings": {
+          "dosbox": {
+            "memsize": "16",
+            "quit warning": "false"
+          },
+          "cpu": {
+            "cycles": "fixed 200000",
+            "core": "normal",
+            "cputype": "386"
+          },
+          "dos": {
+            "xms": "true",
+            "ems": "false",
+            "umb": "false"
+          },
+          "mixer": {
+            "nosound": "true"
+          },
+          "sdl": {
+            "output": "surface"
+          }
+        },
+        "source_arguments": ""
+      },
+      "saved_game_sha256": null
+    }
+  },
+  "raw_receipt": "build/workers/p2-r1/wt/build/workers/p2-r1/new-game-save/acceptance.json",
+  "checkpoints": {
+    "14000": {
+      "projected_save_status": "EQUAL",
+      "records": 307,
+      "differing_records": 0,
+      "differing_bytes": 0,
+      "first_projected_difference": [],
+      "first_raw_difference": [
+        {
+          "record": 100,
+          "name": "fd_3D57_07A8",
+          "bytes": 12,
+          "differing_bytes": 4,
+          "detail": {
+            "status": "DIFFERS",
+            "bytes": 12,
+            "differing_bytes": 4,
+            "first_offset": 2,
+            "dos_byte": 1,
+            "native_byte": 0,
+            "max_byte_delta": 1,
+            "examples": [
+              {
+                "offset": 2,
+                "dos": 1,
+                "native": 0
+              },
+              {
+                "offset": 4,
+                "dos": 1,
+                "native": 0
+              },
+              {
+                "offset": 6,
+                "dos": 1,
+                "native": 0
+              },
+              {
+                "offset": 8,
+                "dos": 1,
+                "native": 0
+              }
+            ]
+          }
+        }
+      ],
+      "differing_named_views": 31,
+      "flags": {
+        "fd_50F6_0FFE": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        },
+        "fd_50F6_0FBA": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        }
+      }
+    },
+    "22000": {
+      "projected_save_status": "DIFFERS",
+      "records": 307,
+      "differing_records": 75,
+      "differing_bytes": 8402,
+      "first_projected_difference": [
+        {
+          "record": 0,
+          "name": "MapA",
+          "bytes": 8192,
+          "differing_bytes": 7748,
+          "detail": {
+            "status": "DIFFERS",
+            "bytes": 8192,
+            "differing_bytes": 7748,
+            "first_offset": 3,
+            "dos_byte": 14,
+            "native_byte": 11,
+            "max_byte_delta": 113,
+            "examples": [
+              {
+                "offset": 3,
+                "dos": 14,
+                "native": 11
+              },
+              {
+                "offset": 4,
+                "dos": 9,
+                "native": 6
+              },
+              {
+                "offset": 5,
+                "dos": 2,
+                "native": 12
+              },
+              {
+                "offset": 6,
+                "dos": 4,
+                "native": 13
+              },
+              {
+                "offset": 7,
+                "dos": 13,
+                "native": 10
+              },
+              {
+                "offset": 8,
+                "dos": 10,
+                "native": 1
+              },
+              {
+                "offset": 9,
+                "dos": 4,
+                "native": 7
+              },
+              {
+                "offset": 10,
+                "dos": 8,
+                "native": 14
+              }
+            ]
+          }
+        }
+      ],
+      "first_raw_difference": [
+        {
+          "record": 0,
+          "name": "MapA",
+          "bytes": 8192,
+          "differing_bytes": 7748,
+          "detail": {
+            "status": "DIFFERS",
+            "bytes": 8192,
+            "differing_bytes": 7748,
+            "first_offset": 3,
+            "dos_byte": 14,
+            "native_byte": 11,
+            "max_byte_delta": 113,
+            "examples": [
+              {
+                "offset": 3,
+                "dos": 14,
+                "native": 11
+              },
+              {
+                "offset": 4,
+                "dos": 9,
+                "native": 6
+              },
+              {
+                "offset": 5,
+                "dos": 2,
+                "native": 12
+              },
+              {
+                "offset": 6,
+                "dos": 4,
+                "native": 13
+              },
+              {
+                "offset": 7,
+                "dos": 13,
+                "native": 10
+              },
+              {
+                "offset": 8,
+                "dos": 10,
+                "native": 1
+              },
+              {
+                "offset": 9,
+                "dos": 4,
+                "native": 7
+              },
+              {
+                "offset": 10,
+                "dos": 8,
+                "native": 14
+              }
+            ]
+          }
+        }
+      ],
+      "differing_named_views": 133,
+      "flags": {
+        "fd_50F6_0FFE": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        },
+        "fd_50F6_0FBA": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        }
+      }
+    },
+    "40000": {
+      "projected_save_status": "DIFFERS",
+      "records": 307,
+      "differing_records": 69,
+      "differing_bytes": 8404,
+      "first_projected_difference": [
+        {
+          "record": 0,
+          "name": "MapA",
+          "bytes": 8192,
+          "differing_bytes": 7750,
+          "detail": {
+            "status": "DIFFERS",
+            "bytes": 8192,
+            "differing_bytes": 7750,
+            "first_offset": 0,
+            "dos_byte": 114,
+            "native_byte": 112,
+            "max_byte_delta": 110,
+            "examples": [
+              {
+                "offset": 0,
+                "dos": 114,
+                "native": 112
+              },
+              {
+                "offset": 3,
+                "dos": 14,
+                "native": 11
+              },
+              {
+                "offset": 4,
+                "dos": 9,
+                "native": 6
+              },
+              {
+                "offset": 5,
+                "dos": 2,
+                "native": 12
+              },
+              {
+                "offset": 6,
+                "dos": 4,
+                "native": 13
+              },
+              {
+                "offset": 7,
+                "dos": 13,
+                "native": 10
+              },
+              {
+                "offset": 8,
+                "dos": 10,
+                "native": 1
+              },
+              {
+                "offset": 9,
+                "dos": 4,
+                "native": 7
+              }
+            ]
+          }
+        }
+      ],
+      "first_raw_difference": [
+        {
+          "record": 0,
+          "name": "MapA",
+          "bytes": 8192,
+          "differing_bytes": 7750,
+          "detail": {
+            "status": "DIFFERS",
+            "bytes": 8192,
+            "differing_bytes": 7750,
+            "first_offset": 0,
+            "dos_byte": 114,
+            "native_byte": 112,
+            "max_byte_delta": 110,
+            "examples": [
+              {
+                "offset": 0,
+                "dos": 114,
+                "native": 112
+              },
+              {
+                "offset": 3,
+                "dos": 14,
+                "native": 11
+              },
+              {
+                "offset": 4,
+                "dos": 9,
+                "native": 6
+              },
+              {
+                "offset": 5,
+                "dos": 2,
+                "native": 12
+              },
+              {
+                "offset": 6,
+                "dos": 4,
+                "native": 13
+              },
+              {
+                "offset": 7,
+                "dos": 13,
+                "native": 10
+              },
+              {
+                "offset": 8,
+                "dos": 10,
+                "native": 1
+              },
+              {
+                "offset": 9,
+                "dos": 4,
+                "native": 7
+              }
+            ]
+          }
+        }
+      ],
+      "differing_named_views": 139,
+      "flags": {
+        "fd_50F6_0FFE": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        },
+        "fd_50F6_0FBA": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        }
+      }
+    },
+    "49000": {
+      "projected_save_status": "DIFFERS",
+      "records": 307,
+      "differing_records": 86,
+      "differing_bytes": 8429,
+      "first_projected_difference": [
+        {
+          "record": 0,
+          "name": "MapA",
+          "bytes": 8192,
+          "differing_bytes": 7748,
+          "detail": {
+            "status": "DIFFERS",
+            "bytes": 8192,
+            "differing_bytes": 7748,
+            "first_offset": 3,
+            "dos_byte": 14,
+            "native_byte": 11,
+            "max_byte_delta": 109,
+            "examples": [
+              {
+                "offset": 3,
+                "dos": 14,
+                "native": 11
+              },
+              {
+                "offset": 4,
+                "dos": 9,
+                "native": 6
+              },
+              {
+                "offset": 5,
+                "dos": 2,
+                "native": 12
+              },
+              {
+                "offset": 6,
+                "dos": 4,
+                "native": 13
+              },
+              {
+                "offset": 7,
+                "dos": 13,
+                "native": 10
+              },
+              {
+                "offset": 8,
+                "dos": 10,
+                "native": 1
+              },
+              {
+                "offset": 9,
+                "dos": 4,
+                "native": 7
+              },
+              {
+                "offset": 10,
+                "dos": 8,
+                "native": 14
+              }
+            ]
+          }
+        }
+      ],
+      "first_raw_difference": [
+        {
+          "record": 0,
+          "name": "MapA",
+          "bytes": 8192,
+          "differing_bytes": 7748,
+          "detail": {
+            "status": "DIFFERS",
+            "bytes": 8192,
+            "differing_bytes": 7748,
+            "first_offset": 3,
+            "dos_byte": 14,
+            "native_byte": 11,
+            "max_byte_delta": 109,
+            "examples": [
+              {
+                "offset": 3,
+                "dos": 14,
+                "native": 11
+              },
+              {
+                "offset": 4,
+                "dos": 9,
+                "native": 6
+              },
+              {
+                "offset": 5,
+                "dos": 2,
+                "native": 12
+              },
+              {
+                "offset": 6,
+                "dos": 4,
+                "native": 13
+              },
+              {
+                "offset": 7,
+                "dos": 13,
+                "native": 10
+              },
+              {
+                "offset": 8,
+                "dos": 10,
+                "native": 1
+              },
+              {
+                "offset": 9,
+                "dos": 4,
+                "native": 7
+              },
+              {
+                "offset": 10,
+                "dos": 8,
+                "native": 14
+              }
+            ]
+          }
+        }
+      ],
+      "differing_named_views": 167,
+      "flags": {
+        "fd_50F6_0FFE": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        },
+        "fd_50F6_0FBA": {
+          "status": "EQUAL",
+          "bytes": 2,
+          "verdict": "ORIGINAL_EQUAL_ALL"
+        }
+      }
+    }
+  },
+  "steps": {
+    "1": {
+      "clocks": {
+        "game_ticks": 311,
+        "bios_ticks": 786831,
+        "outer_loops": 1,
+        "cycle": 0,
+        "simulation_calls": 0,
+        "virtual_ns": 17027000000
+      },
+      "dos_boundary": {
+        "ordinal": 1,
+        "milliseconds": 17139.695495,
+        "cycle": 0,
+        "simulation_calls": 0,
+        "dump_sha256": "ad658c27daf85765a7f21b4dc139fa7bfecf23091f4a02c0ffd6023f2ef63134"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 1,
+        "dos_ms": 17139.695495,
+        "native_ms": 17027,
+        "input_prefix_counts": [
+          10,
+          9
+        ],
+        "cycle": [
+          0,
+          0
+        ],
+        "simulation_calls": [
+          0,
+          0
+        ],
+        "status": "ALIGNMENT_PREMISE_FAILED"
+      },
+      "status": "DIFFERS"
+    },
+    "2": {
+      "clocks": {
+        "game_ticks": 314,
+        "bios_ticks": 786834,
+        "outer_loops": 2,
+        "cycle": 1,
+        "simulation_calls": 1,
+        "virtual_ns": 17188000000
+      },
+      "dos_boundary": {
+        "ordinal": 2,
+        "milliseconds": 17271.903815,
+        "cycle": 1,
+        "simulation_calls": 1,
+        "dump_sha256": "8d8f32dc9f6b03c4d933238dff4843b56903106b356bec370a1fe7194f7497b8"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 2,
+        "dos_ms": 17271.903815,
+        "native_ms": 17188,
+        "input_prefix_counts": [
+          10,
+          10
+        ],
+        "cycle": [
+          1,
+          1
+        ],
+        "simulation_calls": [
+          1,
+          1
+        ],
+        "status": "COMMON_BOUNDARY"
+      },
+      "status": "DIFFERS"
+    },
+    "3": {
+      "clocks": {
+        "game_ticks": 317,
+        "bios_ticks": 786837,
+        "outer_loops": 3,
+        "cycle": 2,
+        "simulation_calls": 2,
+        "virtual_ns": 17354000000
+      },
+      "dos_boundary": {
+        "ordinal": 3,
+        "milliseconds": 17435.473705,
+        "cycle": 2,
+        "simulation_calls": 2,
+        "dump_sha256": "2c0d78359bddb5ab289690a0dcdb3655cab1c4a5ced1fe726fd3854ab962e0ae"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 3,
+        "dos_ms": 17435.473705,
+        "native_ms": 17354,
+        "input_prefix_counts": [
+          10,
+          10
+        ],
+        "cycle": [
+          2,
+          2
+        ],
+        "simulation_calls": [
+          2,
+          2
+        ],
+        "status": "COMMON_BOUNDARY"
+      },
+      "status": "DIFFERS"
+    },
+    "4": {
+      "clocks": {
+        "game_ticks": 320,
+        "bios_ticks": 786840,
+        "outer_loops": 4,
+        "cycle": 3,
+        "simulation_calls": 3,
+        "virtual_ns": 17517000000
+      },
+      "dos_boundary": {
+        "ordinal": 4,
+        "milliseconds": 17599.04272,
+        "cycle": 3,
+        "simulation_calls": 3,
+        "dump_sha256": "d02e57213e141868b66eab6824ea78f65ade680ca93d515d2ff345ac6a6fb3f7"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 4,
+        "dos_ms": 17599.04272,
+        "native_ms": 17517,
+        "input_prefix_counts": [
+          10,
+          10
+        ],
+        "cycle": [
+          3,
+          3
+        ],
+        "simulation_calls": [
+          3,
+          3
+        ],
+        "status": "COMMON_BOUNDARY"
+      },
+      "status": "DIFFERS"
+    },
+    "5": {
+      "clocks": {
+        "game_ticks": 323,
+        "bios_ticks": 786843,
+        "outer_loops": 5,
+        "cycle": 4,
+        "simulation_calls": 4,
+        "virtual_ns": 17683000000
+      },
+      "dos_boundary": {
+        "ordinal": 5,
+        "milliseconds": 17762.61182,
+        "cycle": 4,
+        "simulation_calls": 4,
+        "dump_sha256": "bd4b29111f0244adf6ff20bdd9f8e0da6a435d92edf15f9728c981ccd2827ad8"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 5,
+        "dos_ms": 17762.61182,
+        "native_ms": 17683,
+        "input_prefix_counts": [
+          10,
+          10
+        ],
+        "cycle": [
+          4,
+          4
+        ],
+        "simulation_calls": [
+          4,
+          4
+        ],
+        "status": "COMMON_BOUNDARY"
+      },
+      "status": "DIFFERS"
+    },
+    "6": {
+      "clocks": {
+        "game_ticks": 326,
+        "bios_ticks": 786846,
+        "outer_loops": 6,
+        "cycle": 5,
+        "simulation_calls": 5,
+        "virtual_ns": 17846000000
+      },
+      "dos_boundary": {
+        "ordinal": 6,
+        "milliseconds": 17926.18164,
+        "cycle": 5,
+        "simulation_calls": 5,
+        "dump_sha256": "a8bfc736b1b5475c3cffd5385169d8a8bc9239e7f3f0157561048e2a234aa6ab"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 6,
+        "dos_ms": 17926.18164,
+        "native_ms": 17846,
+        "input_prefix_counts": [
+          10,
+          10
+        ],
+        "cycle": [
+          5,
+          5
+        ],
+        "simulation_calls": [
+          5,
+          5
+        ],
+        "status": "COMMON_BOUNDARY"
+      },
+      "status": "DIFFERS"
+    },
+    "7": {
+      "clocks": {
+        "game_ticks": 329,
+        "bios_ticks": 786849,
+        "outer_loops": 7,
+        "cycle": 6,
+        "simulation_calls": 6,
+        "virtual_ns": 18012000000
+      },
+      "dos_boundary": {
+        "ordinal": 7,
+        "milliseconds": 18089.75184,
+        "cycle": 6,
+        "simulation_calls": 6,
+        "dump_sha256": "c996bf14b6c9cf7b8a4dd848d8355891eee075fd13477304152f45b599730d03"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 7,
+        "dos_ms": 18089.75184,
+        "native_ms": 18012,
+        "input_prefix_counts": [
+          10,
+          10
+        ],
+        "cycle": [
+          6,
+          6
+        ],
+        "simulation_calls": [
+          6,
+          6
+        ],
+        "status": "COMMON_BOUNDARY"
+      },
+      "status": "DIFFERS"
+    },
+    "8": {
+      "clocks": {
+        "game_ticks": 332,
+        "bios_ticks": 786852,
+        "outer_loops": 8,
+        "cycle": 7,
+        "simulation_calls": 7,
+        "virtual_ns": 18175000000
+      },
+      "dos_boundary": {
+        "ordinal": 8,
+        "milliseconds": 18253.320425,
+        "cycle": 7,
+        "simulation_calls": 7,
+        "dump_sha256": "384662489084894645dca001922712124c2b549b1db21250edbbb99706daf4b2"
+      },
+      "alignment": {
+        "boundary": "DoAntSim:entry",
+        "ordinal": 8,
+        "dos_ms": 18253.320425,
+        "native_ms": 18175,
+        "input_prefix_counts": [
+          10,
+          10
+        ],
+        "cycle": [
+          7,
+          7
+        ],
+        "simulation_calls": [
+          7,
+          7
+        ],
+        "status": "COMMON_BOUNDARY"
+      },
+      "status": "DIFFERS"
+    },
+    "first_valid_divergence": {
+      "entry": 2,
+      "boundary": "DoAntSim:entry",
+      "cycle": 1,
+      "input_prefix": 10,
+      "projected_records": 42,
+      "projected_bytes": 8360,
+      "first_record": "MapA",
+      "dos_first_byte": 2,
+      "native_first_byte": 10
+    }
+  },
+  "step_provenance": {
+    "target": "CANONICAL_DOS",
+    "manifest_sha256": "cb1f75825762212938b33a6fbfa1a5ac9d558369a41d1d49138390969fdac318",
+    "executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+    "scenario_sha256": "68f5103632cdf77587ee6471bba1d682df19a2281233c72f86cd61abf2c760d0",
+    "input_script_sha256": "81bd44c5dd211ff6ca00dbeb22c1ff812e4b2e16db14c4cd45c944619e734a5d",
+    "observation_script_sha256": "713eae8f726144ecc5df1804a94889a62a3f8d95b07897ff5900eb16c021b01f",
+    "scope": "Common ordinal comparison is native/canonical only; fresh timed checkpoints have independent original/canonical/native evidence. No original ordinal equality claim."
+  },
+  "remaining_observations": [
+    "Native startup tick0 versus DOS tick1: SeedSRand 3751h versus3750h; SeedRRand warm34 versus32. Separate timing observation, no caller/RNG patch.",
+    "14s projected all307 records equal, raw record100 flags at2/4/6/8 differ (R6). Drive word DOS C=67/native D=68 (R2); native A.ANT missing.",
+    "DoAntSim entry1 fails input-prefix alignment (10/9), so its mismatch is not a common-boundary attribution; entry2 prefix10/cycle1 is common and differs.",
+    "Full new-game-save remains FAIL; later projected data differs. No claim of saved-file or full gameplay equivalence."
+  ],
+  "validation": {
+    "exit_code": 0,
+    "timed_out": false,
+    "verdict": "PASS",
+    "failures": [],
+    "unit_tests": "PASS (two skips)",
+    "codegen_rules_reproduced": 49,
+    "exact_c_functions": 1235,
+    "exact_c_bytes": 232114,
+    "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f",
+    "log_sha256": "08f1a18676123f30e39eda34bd3bf2822f008e14b24a6138dbd6d8b0528c1f61"
+  }
+}

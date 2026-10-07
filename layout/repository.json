@@ -135,6 +135,10 @@
     {
       "path": "portable/tests/acceptance/run_virtual_audio_tests.py",
       "role": "Virtual Sound Mode 6 PIT/IRQ and ISA clock controls"
+    },
+    {
+      "path": "portable/tests/return_abi/census.py",
+      "role": "C front-end census of consumed return declarations, missing result paths and canonical ASM calls."
     }
   ],
   "lowering": [
@@ -383,6 +387,13 @@
         "native-integer-expressions"
       ],
       "deletion_condition": "Retain while integer models differ. Close signed overflow, invalid-shift and pointer/layout domains only with mechanical bounds or actual MSC compiler evidence; never substitute universal signed wrapping."
+    },
+    {
+      "module": "register_returns",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Instruction-proven DOS AX return values consumed across canonical declarations must have explicit native C results.",
+      "blocker_ids": [],
+      "deletion_condition": "Retain while native ABI differs from DOS register-return conventions."
     }
   ],
   "passes": [

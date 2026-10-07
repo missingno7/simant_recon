@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
-from canonical_native_abi import scalar, tokenizer as csrc, integer_frontend
+from canonical_native_abi import scalar, tokenizer as csrc, integer_frontend, register_returns
 from canonical_native_abi.source_views import (
     GRAPHICS_SCALARS,
     audio_overlap_views,
@@ -86,7 +86,7 @@ def main():
             if sha(provenance.parent/name)!=expected:
                 raise ValueError('third-party source differs from provenance: '+name)
     def current_inputs():
-        paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',Path(__file__)}
+        paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',Path(__file__),register_returns.CONTRACT_PATH}
         paths.update(ROOT/u['source'] for u in canonical['modules'])
         paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
         paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
@@ -226,6 +226,10 @@ def main():
         if rel.startswith('src/S20/'):prefix+='#include <ctype.h>\n'
         if rel=='src/S17/m384C.c':prefix+='#include "portable/whole_program/menu_globals.h"\n'
         if rel=='src/S19/m384C.c':prefix+='extern void ProcHistoryEvent(struct Event *);\nextern void ProcYardEvent(struct Event *);\n'
+        try:
+            text,row['register_returns']=register_returns.adapt(text,rel)
+        except ValueError as exc:
+            errors.append({'source':rel,'stage':'register return ABI','error':str(exc)})
         dest=OUT/(unit['module'].replace(':','_').replace('@','_')+'.c')
         text=prefix+'#pragma pack(push,2)\n'+text+'\n#pragma pack(pop)\n'
         dest.write_text(text,encoding='latin1')

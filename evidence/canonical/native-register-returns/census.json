@@ -1,0 +1,5752 @@
+{
+  "schema": "reviewed-register-return-census-v1",
+  "baseline": "9c5f21a1147327973dadec56ee3b51f63588fdc2",
+  "frontend": "pycparser 3.00 / GCC preprocessing",
+  "frontend_lf_source_sha256": "c459e9aa8b4b9b7bd8b707bf1bc8ea386d8ce7b8bde2c68c884e2eb5c5c98e56",
+  "counts": {
+    "units": 342,
+    "parsed": 342,
+    "consumed_direct_calls": 4272,
+    "findings": 392,
+    "asm_consumed_calls": 304,
+    "indirect_calls": 21
+  },
+  "canonical_finding_calls": 303,
+  "canonical_finding_functions": 31,
+  "compiled_native_unspecified_results": 0,
+  "canonical_asm_consumed_calls": 152,
+  "direct_asm_functions": 20,
+  "indirect_asm_size_helpers": 2,
+  "parse_failures": [],
+  "implicit_int_declarations_or_definitions": [],
+  "c_returns": [
+    {
+      "function": "GetDis",
+      "definition": {
+        "source": "src/root/m0BE8.c",
+        "return_type": "signed int",
+        "line": 465,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX arithmetic distance result; callers differ only in signedness or word-width view.",
+      "canonical_source_sha256": "3649d25a2024ce0474db430ccb1db8355270d9def303a01e009081b5751764e1",
+      "canonical_return_expressions": [
+        "(long)(y2 - y1) * (y2 - y1) + (long)(x2 - x1) * (x2 - x1)"
+      ],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_14CC",
+          "line": 843,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "MoveSpider",
+          "line": 110,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "SFoundAnt",
+          "line": 449,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "SFoundAnt",
+          "line": 451,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "SFoundAnt",
+          "line": 460,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0DEF.c",
+          "caller": "f_0DEF_031F",
+          "line": 159,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0DEF.c",
+          "caller": "f_0DEF_031F",
+          "line": 167,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "caller": "DoLifeExchange",
+          "line": 597,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "caller": "PickupMyFood",
+          "line": 1138,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "caller": "IsItYellow",
+          "line": 1298,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:0BE8:0B83",
+      "instructions": [
+        "  0BB2  lcall 0x29f4, 0x2e9c               -> __aFlmul",
+        "  0BB7  add ax, si",
+        "  0BB9  adc dx, di",
+        "  0BBB  pop si",
+        "  0BBC  pop di",
+        "  0BBD  mov sp, bp",
+        "  0BBF  pop bp",
+        "  0BC0  retf"
+      ]
+    },
+    {
+      "function": "MakeBalloon",
+      "definition": {
+        "source": "src/root/m1629.c",
+        "return_type": "char * *",
+        "line": 50,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_POINTER_RETURN_SEPARATE_REPRESENTATION_DEBT",
+      "dos_return": "DX:AX allocated Handle from BP-22/BP-20; S13 long declaration/storage is separate pointer-width debt.",
+      "canonical_source_sha256": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+      "canonical_return_expressions": [
+        "ConvertMonoMaskToTandy(h)",
+        "ConvertMonoMaskToColor(h)",
+        "h"
+      ],
+      "calls": [
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawSimKid",
+          "line": 321,
+          "declared_return": "signed int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:1629:000C",
+      "instructions": [
+        "  0452  mov byte ptr es:[bx + 2], 1",
+        "  0457  mov ax, word ptr [bp - 0x22]",
+        "  045A  mov dx, word ptr [bp - 0x20]",
+        "  045D  pop si",
+        "  045E  pop di",
+        "  045F  mov sp, bp",
+        "  0461  pop bp",
+        "  0462  retf"
+      ]
+    },
+    {
+      "function": "SRand128",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 137,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0x7f; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "SimKidInside",
+          "line": 702,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "AddFood",
+          "line": 677,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0AB0",
+          "line": 466,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m3BA4.c",
+          "caller": "DoAntSimY",
+          "line": 278,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0093.c",
+          "caller": "SeedRRand",
+          "line": 93,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "SimQueenR",
+          "line": 478,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GstrR",
+          "line": 230,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:022F",
+      "instructions": [
+        "  023F  shl ax, 1",
+        "  0241  jae 0x246",
+        "  0243  xor ax, 0x1bf5",
+        "  0246  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  0249  and ax, 0x7f",
+        "  024C  mov sp, bp",
+        "  024E  pop bp",
+        "  024F  retf"
+      ]
+    },
+    {
+      "function": "SRand16",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 134,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0xf; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_14CC",
+          "line": 814,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_14CC",
+          "line": 836,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_14CC",
+          "line": 867,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 261,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 288,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "InitYelloAnt",
+          "line": 540,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "InitYelloAnt",
+          "line": 540,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawSwarm",
+          "line": 654,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawSwarm",
+          "line": 655,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S18/m384C.c",
+          "caller": "MakeYardPatch",
+          "line": 405,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0746",
+          "line": 312,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoNestingB",
+          "line": 710,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoFoodInB",
+          "line": 796,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m015B.c",
+          "caller": "SubtractFood",
+          "line": 82,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoRepoFly",
+          "line": 486,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoForageAnt",
+          "line": 943,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoFightA",
+          "line": 1143,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DeadAntHere",
+          "line": 1166,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "PickupFoodA",
+          "line": 302,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestFightR",
+          "line": 357,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoFoodInR",
+          "line": 718,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "caller": "PickupMyRock",
+          "line": 967,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:01CC",
+      "instructions": [
+        "  01DC  shl ax, 1",
+        "  01DE  jae 0x1e3",
+        "  01E0  xor ax, 0x1bf5",
+        "  01E3  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  01E6  and ax, 0xf",
+        "  01E9  mov sp, bp",
+        "  01EB  pop bp",
+        "  01EC  retf"
+      ]
+    },
+    {
+      "function": "SRand2",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 131,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0x1; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_11FF",
+          "line": 776,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_11FF",
+          "line": 782,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_1803",
+          "line": 898,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S07/m35F5.c",
+          "caller": "CheatKeys",
+          "line": 158,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 249,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 266,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 276,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 293,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "PlaceBlackQueen",
+          "line": 573,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "caller": "EndGameDialog",
+          "line": 557,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_1C81",
+          "line": 984,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m3BA4.c",
+          "caller": "o25_3BA4_0999",
+          "line": 348,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m3BA4.c",
+          "caller": "o25_3BA4_0999",
+          "line": 352,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0093.c",
+          "caller": "SGSRand",
+          "line": 58,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawSpider",
+          "line": 1367,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1972,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1981,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2044,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoRepoLoit",
+          "line": 438,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "GetExitDirB",
+          "line": 497,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "GetExitDirR",
+          "line": 529,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "GetEnterDirB",
+          "line": 576,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "GetEnterDirR",
+          "line": 612,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "MoveSpider",
+          "line": 170,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "MoveSpider",
+          "line": 333,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "MoveSpider",
+          "line": 339,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "GetOutR",
+          "line": 878,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNestDir",
+          "line": 561,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:0169",
+      "instructions": [
+        "  0179  shl ax, 1",
+        "  017B  jae 0x180",
+        "  017D  xor ax, 0x1bf5",
+        "  0180  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  0183  and ax, 1",
+        "  0186  mov sp, bp",
+        "  0188  pop bp",
+        "  0189  retf"
+      ]
+    },
+    {
+      "function": "SRand256",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 138,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0xff; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "AddFood",
+          "line": 684,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_006D",
+          "line": 85,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoAntSimA",
+          "line": 293,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "MoveSpider",
+          "line": 334,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestAntR",
+          "line": 136,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:0250",
+      "instructions": [
+        "  0260  shl ax, 1",
+        "  0262  jae 0x267",
+        "  0264  xor ax, 0x1bf5",
+        "  0267  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  026A  and ax, 0xff",
+        "  026D  mov sp, bp",
+        "  026F  pop bp",
+        "  0270  retf"
+      ]
+    },
+    {
+      "function": "SRand32",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 135,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0x1f; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_02B9",
+          "line": 350,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_006D",
+          "line": 85,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0677",
+          "line": 281,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawSpider",
+          "line": 1379,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1971,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1980,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2003,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2023,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoAntSimA",
+          "line": 300,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoRepoFly",
+          "line": 477,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoForageAnt",
+          "line": 904,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestAntR",
+          "line": 136,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoRandR",
+          "line": 340,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GstrR",
+          "line": 230,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:01ED",
+      "instructions": [
+        "  01FD  shl ax, 1",
+        "  01FF  jae 0x204",
+        "  0201  xor ax, 0x1bf5",
+        "  0204  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  0207  and ax, 0x1f",
+        "  020A  mov sp, bp",
+        "  020C  pop bp",
+        "  020D  retf"
+      ]
+    },
+    {
+      "function": "SRand4",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 132,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0x3; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "SimKidInside",
+          "line": 714,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_1803",
+          "line": 926,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_1CEA",
+          "line": 1050,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_1CEA",
+          "line": 1054,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_1CEA",
+          "line": 1056,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 220,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 221,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "PlaceBlackQueen",
+          "line": 568,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "PlaceRedQueen",
+          "line": 608,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S18/m384C.c",
+          "caller": "MakeYardPatch",
+          "line": 407,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoDigInB",
+          "line": 886,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2004,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2024,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoRestAnt",
+          "line": 430,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoToAlarm",
+          "line": 804,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DeadAntHere",
+          "line": 1171,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DeadAntHere",
+          "line": 1173,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0AD9.c",
+          "caller": "DoSow",
+          "line": 101,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0AD9.c",
+          "caller": "DoSow",
+          "line": 103,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "MoveSpider",
+          "line": 330,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0CDB.c",
+          "caller": "SpiderScan",
+          "line": 499,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestingR",
+          "line": 617,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestingR",
+          "line": 625,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestingR",
+          "line": 628,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestingR",
+          "line": 641,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoDigInR",
+          "line": 799,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNestDir",
+          "line": 569,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNestDir",
+          "line": 572,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:018A",
+      "instructions": [
+        "  019A  shl ax, 1",
+        "  019C  jae 0x1a1",
+        "  019E  xor ax, 0x1bf5",
+        "  01A1  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  01A4  and ax, 3",
+        "  01A7  mov sp, bp",
+        "  01A9  pop bp",
+        "  01AA  retf"
+      ]
+    },
+    {
+      "function": "SRand64",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 136,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0x3f; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "SimKidInside",
+          "line": 703,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_11FF",
+          "line": 788,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_14CC",
+          "line": 832,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 254,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 281,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "AddFood",
+          "line": 678,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0AB0",
+          "line": 433,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoDigInB",
+          "line": 884,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoDigOutB",
+          "line": 936,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawSpider",
+          "line": 1366,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2043,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "SimQueenR",
+          "line": 447,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoDigInR",
+          "line": 797,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoDigOutR",
+          "line": 854,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:020E",
+      "instructions": [
+        "  021E  shl ax, 1",
+        "  0220  jae 0x225",
+        "  0222  xor ax, 0x1bf5",
+        "  0225  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  0228  and ax, 0x3f",
+        "  022B  mov sp, bp",
+        "  022D  pop bp",
+        "  022E  retf"
+      ]
+    },
+    {
+      "function": "SRand8",
+      "definition": {
+        "source": "src/root/m0093.c",
+        "return_type": "signed short",
+        "line": 133,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "ALREADY_EXPLICIT_ASM_LOWERING",
+      "dos_return": "AX LFSR result AND 0x7; existing canonical_native_abi/rng.py emits explicit return. No RNG change.",
+      "canonical_source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_1E54",
+          "line": 1189,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "caller": "o06_35F5_1E54",
+          "line": 1198,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S07/m35F5.c",
+          "caller": "CheatKeys",
+          "line": 108,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S07/m35F5.c",
+          "caller": "CheatKeys",
+          "line": 108,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S07/m35F5.c",
+          "caller": "CheatKeys",
+          "line": 112,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S07/m35F5.c",
+          "caller": "CheatKeys",
+          "line": 112,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 263,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 265,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 267,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 269,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 290,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 292,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 294,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "RandWorld",
+          "line": 296,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "InitYelloAnt",
+          "line": 541,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "InitYelloAnt",
+          "line": 541,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "AddFood",
+          "line": 682,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "AddBlackAnts",
+          "line": 738,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "caller": "AddRedAnts",
+          "line": 774,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0460",
+          "line": 231,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0460",
+          "line": 235,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0677",
+          "line": 287,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_06E2",
+          "line": 300,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_0DAF",
+          "line": 535,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoNestingB",
+          "line": 687,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoNestingB",
+          "line": 693,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoNestingB",
+          "line": 696,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoNestingB",
+          "line": 717,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoNestingB",
+          "line": 722,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_13EF",
+          "line": 738,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_14A8",
+          "line": 755,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_154F",
+          "line": 771,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "DoDigInB",
+          "line": 846,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_1BBB",
+          "line": 953,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_1C81",
+          "line": 973,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "caller": "o25_39C7_1C81",
+          "line": 991,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m3BA4.c",
+          "caller": "o25_3BA4_0999",
+          "line": 363,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m3BA4.c",
+          "caller": "o25_3BA4_0C01",
+          "line": 416,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/S25/m3BA4.c",
+          "caller": "ExitNest",
+          "line": 560,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoRandAntA",
+          "line": 566,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoDigOutAntA",
+          "line": 665,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoDigOutAntA",
+          "line": 676,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoForageAnt",
+          "line": 921,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "DoRecruitAnt",
+          "line": 1015,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0894.c",
+          "caller": "RandTurn",
+          "line": 1193,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0AD9.c",
+          "caller": "DoAntLions",
+          "line": 200,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0AD9.c",
+          "caller": "DoAntLions",
+          "line": 229,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "PickupFoodB",
+          "line": 390,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "PickupFoodR",
+          "line": 408,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "RaidOutR",
+          "line": 295,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "RaidOutR",
+          "line": 299,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoRandR",
+          "line": 346,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "SimEggR",
+          "line": 428,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "QueenMoveR",
+          "line": 498,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestingR",
+          "line": 626,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestingR",
+          "line": 644,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoNestingR",
+          "line": 648,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "TryEatFoodR",
+          "line": 660,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "EatFoodR",
+          "line": 677,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "StealFoodR",
+          "line": 693,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoDigInR",
+          "line": 761,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoDigInR",
+          "line": 805,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "DoDigInR",
+          "line": 805,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "GetOutR",
+          "line": 867,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "caller": "GetOutR",
+          "line": 885,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "caller": "PickupMyRock",
+          "line": 974,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "caller": "PickupMyFood",
+          "line": 1145,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNewModeB",
+          "line": 444,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNewModeB",
+          "line": 446,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNewModeR",
+          "line": 457,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNewModeR",
+          "line": 459,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetForageDir",
+          "line": 500,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetForageDir",
+          "line": 519,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNestDir",
+          "line": 572,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetNestDir",
+          "line": 575,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetAlarmDir",
+          "line": 602,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m1383.c",
+          "caller": "GetRandDir",
+          "line": 611,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m14EE.c",
+          "caller": "DigTileB",
+          "line": 240,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m14EE.c",
+          "caller": "DigTileR",
+          "line": 264,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m14EE.c",
+          "caller": "DigTileThemB",
+          "line": 292,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m14EE.c",
+          "caller": "DigTileThemR",
+          "line": 326,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m14EE.c",
+          "caller": "SmoothEdgesB",
+          "line": 380,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m14EE.c",
+          "caller": "SmoothEdgesR",
+          "line": 433,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:0093:01AB",
+      "instructions": [
+        "  01BB  shl ax, 1",
+        "  01BD  jae 0x1c2",
+        "  01BF  xor ax, 0x1bf5",
+        "  01C2  mov word ptr [0x8ba2], ax          DS:8BA2 g_8BA2",
+        "  01C5  and ax, 7",
+        "  01C8  mov sp, bp",
+        "  01CA  pop bp",
+        "  01CB  retf"
+      ]
+    },
+    {
+      "function": "ch_CreateTable",
+      "definition": {
+        "source": "src/root/m1A96.c",
+        "return_type": "struct:None * *",
+        "line": 50,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX allocated table pointer from BP-4/BP-2; pointer/Handle view mismatch, explicit native pointer result.",
+      "canonical_source_sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+      "canonical_return_expressions": [
+        "table"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m1A53.c",
+          "caller": "db_SetDataBase",
+          "line": 50,
+          "declared_return": "void *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:1A96:000C",
+      "instructions": [
+        "  007A  mov word ptr es:[si + 2], 0",
+        "  0080  mov ax, word ptr [bp - 4]",
+        "  0083  mov dx, word ptr [bp - 2]",
+        "  0086  pop si",
+        "  0087  pop di",
+        "  0088  mov sp, bp",
+        "  008A  pop bp",
+        "  008B  retf"
+      ]
+    },
+    {
+      "function": "db_LoadObject",
+      "definition": {
+        "source": "src/root/m1A53.c",
+        "return_type": "char *",
+        "line": 80,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX object handle (SI:DI); caller char-pointer versus Handle view; explicit native pointer result.",
+      "canonical_source_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "canonical_return_expressions": [
+        "handle",
+        "0L",
+        "handle"
+      ],
+      "calls": [
+        {
+          "source": "src/S14/m384C.c",
+          "caller": "CustomerIDDialog",
+          "line": 632,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "caller": "CustomerIDDialog",
+          "line": 633,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S15/m384C.c",
+          "caller": "LoadMonoPats",
+          "line": 46,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S15/m384C.c",
+          "caller": "LoadMonoPats",
+          "line": 55,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S17/m384C.c",
+          "caller": "o17_384C_0039",
+          "line": 49,
+          "declared_return": "signed int * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0008",
+          "line": 42,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0008",
+          "line": 43,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0069",
+          "line": 56,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0069",
+          "line": 58,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_00FF",
+          "line": 70,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_00FF",
+          "line": 71,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0160",
+          "line": 78,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0160",
+          "line": 79,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_01C1",
+          "line": 90,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0212",
+          "line": 107,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S20/m39C7.c",
+          "caller": "o20_39C7_0212",
+          "line": 109,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m075B.c",
+          "caller": "initStuff",
+          "line": 28,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m075B.c",
+          "caller": "LoadStringAnt",
+          "line": 105,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1B28.c",
+          "caller": "f_1B28_0006",
+          "line": 27,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1B28.c",
+          "caller": "f_1B28_0006",
+          "line": 28,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1B28.c",
+          "caller": "f_1B28_0129",
+          "line": 85,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1B28.c",
+          "caller": "f_1B28_0129",
+          "line": 86,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1B28.c",
+          "caller": "f_1B28_01CB",
+          "line": 105,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1B28.c",
+          "caller": "f_1B28_01CB",
+          "line": 106,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m20E8.c",
+          "caller": "win_LoadAllWindows",
+          "line": 108,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m20E8.c",
+          "caller": "win_LoadAllWindows",
+          "line": 115,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m20E8.c",
+          "caller": "win_LoadAllWindows",
+          "line": 125,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m20E8.c",
+          "caller": "win_LoadAllWindows",
+          "line": 128,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m22BF.c",
+          "caller": "win_SetPalette",
+          "line": 443,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:1A53:0125",
+      "instructions": [
+        "  01F2  add sp, 6",
+        "  01F5  mov ax, si",
+        "  01F7  mov dx, di",
+        "  01F9  pop si",
+        "  01FA  pop di",
+        "  01FB  mov sp, bp",
+        "  01FD  pop bp",
+        "  01FE  retf"
+      ]
+    },
+    {
+      "function": "f_00F8_02EF",
+      "definition": {
+        "source": "src/root/m00F8.c",
+        "return_type": "void",
+        "line": 176,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "REPAIRED_REGISTER_RETURN",
+      "dos_return": "AX=0",
+      "canonical_source_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/root/m075B.c",
+          "caller": "initStuff",
+          "line": 38,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:00F8:02EF",
+      "instructions": [
+        "  02EF  xor ax, ax",
+        "  02F1  lcall 0x29f4, 0x2cc                -> __aFchkstk",
+        "  02F6  retf"
+      ]
+    },
+    {
+      "function": "f_171C_0A5C",
+      "definition": {
+        "source": "src/root/m171C.c",
+        "return_type": "char * *",
+        "line": 418,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "RESIDUE_EXCLUDED_NATIVE_HEAP_DOMAIN",
+      "dos_return": "Success returns explicit DX:AX pointer. Failure calls Punt then falls through; returning/reentrant Punt leaves register residue. Punt guard g_54F8 can return; no noreturn premise. Native does not compile canonical root:171C.",
+      "canonical_source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "canonical_return_expressions": [
+        "h"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m171C.c",
+          "caller": "f_171C_125C",
+          "line": 679,
+          "declared_return": "char * *",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:171C:0A5C",
+      "instructions": [
+        "  0ACC  mov ax, 0x316c                     \"Handle free - but none found\"",
+        "  0ACF  push ds",
+        "  0AD0  push ax",
+        "  0AD1  lcall 0x1c62, 0xc                  -> Punt",
+        "  0AD6  add sp, 4",
+        "  0AD9  pop si",
+        "  0ADA  retf",
+        "  0ADB  nop"
+      ]
+    },
+    {
+      "function": "f_171C_0EEA",
+      "definition": {
+        "source": "src/root/m171C.c",
+        "return_type": "struct:None *",
+        "line": 555,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "RESIDUE_EXCLUDED_NATIVE_HEAP_DOMAIN",
+      "dos_return": "Success returns explicit DX:AX pointer. Failure calls Punt then falls through; returning/reentrant Punt leaves register residue. Punt guard g_54F8 can return; no noreturn premise. Native does not compile canonical root:171C.",
+      "canonical_source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "canonical_return_expressions": [
+        "b"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m171C.c",
+          "caller": "f_171C_125C",
+          "line": 676,
+          "declared_return": "struct:None *",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        },
+        {
+          "source": "src/root/m171C.c",
+          "caller": "f_171C_18A6",
+          "line": 849,
+          "declared_return": "struct:None *",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "root:171C:0EEA",
+      "instructions": [
+        "  0FAD  lcall 0x1c62, 0xc                  -> Punt",
+        "  0FB2  add sp, 4",
+        "  0FB5  pop si",
+        "  0FB6  pop di",
+        "  0FB7  mov sp, bp",
+        "  0FB9  pop bp",
+        "  0FBA  retf",
+        "  0FBB  nop"
+      ]
+    },
+    {
+      "function": "f_171C_13CA",
+      "definition": {
+        "source": "src/root/m171C.c",
+        "return_type": "char * *",
+        "line": 694,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX final f_171C_125C pointer result; excluded canonical heap TU, explicit native platform owner.",
+      "canonical_source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "canonical_return_expressions": [
+        "f_171C_125C(size, flags, name)"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m1986.c",
+          "caller": "OpenIndex",
+          "line": 59,
+          "declared_return": "void * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m19A9.c",
+          "caller": "DBRecall",
+          "line": 95,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m19A9.c",
+          "caller": "DBRecall",
+          "line": 98,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m19A9.c",
+          "caller": "DBRecall",
+          "line": 108,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m19A9.c",
+          "caller": "DBRecall",
+          "line": 109,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m19A9.c",
+          "caller": "DBRecall",
+          "line": 125,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m19DC.c",
+          "caller": "f_19DC_001A",
+          "line": 69,
+          "declared_return": "struct:None * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1A96.c",
+          "caller": "ch_CreateTable",
+          "line": 58,
+          "declared_return": "void *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:171C:13CA",
+      "instructions": [
+        "  13D3  push word ptr [bp + 0xa]",
+        "  13D6  push word ptr [bp + 8]",
+        "  13D9  push word ptr [bp + 6]",
+        "  13DC  push cs",
+        "  13DD  call 0x125c                        -> f_171C_125C",
+        "  13E0  mov sp, bp",
+        "  13E2  pop bp",
+        "  13E3  retf"
+      ]
+    },
+    {
+      "function": "f_171C_14BE",
+      "definition": {
+        "source": "src/root/m171C.c",
+        "return_type": "signed int",
+        "line": 718,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX subtraction result; signed/unsigned long view, explicit result.",
+      "canonical_source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "canonical_return_expressions": [
+        "HDR(h)->age - s_2F30"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m1A96.c",
+          "caller": "ch_DumpOldest",
+          "line": 235,
+          "declared_return": "unsigned int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:171C:14BE",
+      "instructions": [
+        "  151A  mov dx, word ptr es:[bx + 0xc]",
+        "  151E  sub ax, word ptr [0x2f30]          DS:2F30",
+        "  1522  sbb dx, word ptr [0x2f32]          DS:2F32",
+        "  1526  pop si",
+        "  1527  mov sp, bp",
+        "  1529  pop bp",
+        "  152A  retf",
+        "  152B  nop"
+      ]
+    },
+    {
+      "function": "f_171C_1A9E",
+      "definition": {
+        "source": "src/root/m171C.c",
+        "return_type": "char * *",
+        "line": 864,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX paragraph/size arithmetic; word consumption truncates the defined low word.",
+      "canonical_source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "canonical_return_expressions": [
+        "(Handle)((long)(s_2F46 - h) + 0xF0EFFFFL)"
+      ],
+      "calls": [
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "Mini_DrawMapI",
+          "line": 261,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "Mini_DrawMapI",
+          "line": 262,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:171C:1A9E",
+      "instructions": [
+        "  1AC6  cdq",
+        "  1AC7  add ax, 0xffff",
+        "  1ACA  adc dx, 0xf0e",
+        "  1ACE  pop si",
+        "  1ACF  mov sp, bp",
+        "  1AD1  pop bp",
+        "  1AD2  retf",
+        "  1AD3  nop"
+      ]
+    },
+    {
+      "function": "f_171C_1C1C",
+      "definition": {
+        "source": "src/root/m171C.c",
+        "return_type": "signed int",
+        "line": 905,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX heap metadata dword; explicit result, differing word/long view.",
+      "canonical_source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "canonical_return_expressions": [
+        "HDR(h)->size"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m284A.c",
+          "caller": "f_284A_0013",
+          "line": 61,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:171C:1C1C",
+      "instructions": [
+        "  1C72  mov es, ax",
+        "  1C74  mov ax, word ptr es:[bx + 2]",
+        "  1C78  mov dx, word ptr es:[bx + 4]",
+        "  1C7C  pop si",
+        "  1C7D  mov sp, bp",
+        "  1C7F  pop bp",
+        "  1C80  retf",
+        "  1C81  nop"
+      ]
+    },
+    {
+      "function": "f_1A53_00BA",
+      "definition": {
+        "source": "src/root/m1A53.c",
+        "return_type": "char *",
+        "line": 60,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX object handle SI:BP-2; pointer versus Handle view, explicit result.",
+      "canonical_source_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "canonical_return_expressions": [
+        "handle"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m0000.c",
+          "caller": "f_0000_0090",
+          "line": 64,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0000.c",
+          "caller": "f_0000_0193",
+          "line": 129,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0000.c",
+          "caller": "f_0000_0193",
+          "line": 139,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "f_0250_0256",
+          "line": 151,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "f_0250_0256",
+          "line": 156,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "f_0250_0643",
+          "line": 282,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "f_0250_0643",
+          "line": 289,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:1A53:00BA",
+      "instructions": [
+        "  00DE  lcall 0x171c, 0x15a2               -> f_171C_15A2",
+        "  00E3  add sp, 6",
+        "  00E6  mov ax, si",
+        "  00E8  mov dx, word ptr [bp - 2]",
+        "  00EB  pop si",
+        "  00EC  mov sp, bp",
+        "  00EE  pop bp",
+        "  00EF  retf"
+      ]
+    },
+    {
+      "function": "f_1A53_00F0",
+      "definition": {
+        "source": "src/root/m1A53.c",
+        "return_type": "char *",
+        "line": 70,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX object handle SI:BP-2; pointer versus Handle view, explicit result.",
+      "canonical_source_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "canonical_return_expressions": [
+        "handle"
+      ],
+      "calls": [
+        {
+          "source": "src/S15/m384C.c",
+          "caller": "o15_384C_0239",
+          "line": 197,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "LoadTiles",
+          "line": 211,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m20E8.c",
+          "caller": "win_LoadWindow",
+          "line": 43,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m2662.c",
+          "caller": "hanim_RenderAnimSet",
+          "line": 494,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m2662.c",
+          "caller": "f_2662_1120",
+          "line": 549,
+          "declared_return": "char * *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:1A53:00F0",
+      "instructions": [
+        "  0113  lcall 0x171c, 0x15a2               -> f_171C_15A2",
+        "  0118  add sp, 6",
+        "  011B  mov ax, si",
+        "  011D  mov dx, word ptr [bp - 2]",
+        "  0120  pop si",
+        "  0121  mov sp, bp",
+        "  0123  pop bp",
+        "  0124  retf"
+      ]
+    },
+    {
+      "function": "f_1CE2_000C",
+      "definition": {
+        "source": "src/root/m1CE2.c",
+        "return_type": "char *",
+        "line": 12,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX constant far address 55B3:5A9C; native pointer representation is explicit.",
+      "canonical_source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "canonical_return_expressions": [
+        "g_5A9C"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_02FF",
+          "line": 186,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_05FD",
+          "line": 354,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_0663",
+          "line": 388,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:1CE2:000C",
+      "instructions": [
+        "  000C  mov ax, 0x5a9c",
+        "  000F  mov dx, 0x55b3                     [seg 55B3 DGROUP]",
+        "  0012  retf"
+      ]
+    },
+    {
+      "function": "f_24AB_0002",
+      "definition": {
+        "source": "src/root/m24AB.c",
+        "return_type": "char * *",
+        "line": 37,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_POINTER_RETURN_SEPARATE_REPRESENTATION_DEBT",
+      "dos_return": "DX:AX Handle DI:SI; S13 long declaration/storage is separate pointer-width debt.",
+      "canonical_source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "canonical_return_expressions": [
+        "h"
+      ],
+      "calls": [
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawAnimYardMessage",
+          "line": 599,
+          "declared_return": "signed int",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:24AB:0002",
+      "instructions": [
+        "  02A2  pop bx",
+        "  02A3  mov ax, di",
+        "  02A5  mov dx, si",
+        "  02A7  pop si",
+        "  02A8  pop di",
+        "  02A9  mov sp, bp",
+        "  02AB  pop bp",
+        "  02AC  retf"
+      ]
+    },
+    {
+      "function": "font_MakeImage",
+      "definition": {
+        "source": "src/root/m25E7.c",
+        "return_type": "struct:Bitmap *",
+        "line": 186,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX image Handle, explicit success/error C return; typed pointer view mismatch.",
+      "canonical_source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+      "canonical_return_expressions": [
+        "&fd_50F6_392C"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m1629.c",
+          "caller": "MakeBalloon",
+          "line": 106,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:25E7:04BE",
+      "instructions": [
+        "  0687  mov ax, 0x392c",
+        "  068A  mov dx, es",
+        "  068C  jmp 0x68f",
+        "  068F  pop si",
+        "  0690  pop di",
+        "  0691  mov sp, bp",
+        "  0693  pop bp",
+        "  0694  retf"
+      ]
+    },
+    {
+      "function": "font_ReadFont",
+      "definition": {
+        "source": "src/root/m25E7.c",
+        "return_type": "struct:Font *",
+        "line": 58,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX font Handle, explicit success/error C return; typed pointer view mismatch.",
+      "canonical_source_sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+      "canonical_return_expressions": [
+        "0",
+        "0",
+        "0",
+        "font"
+      ],
+      "calls": [
+        {
+          "source": "src/root/m24AB.c",
+          "caller": "font_InitFonts",
+          "line": 194,
+          "declared_return": "void *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "caller": "font_InitFonts",
+          "line": 195,
+          "declared_return": "void *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "caller": "font_InitFonts",
+          "line": 196,
+          "declared_return": "void *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "caller": "font_InitFonts",
+          "line": 197,
+          "declared_return": "void *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:25E7:007A",
+      "instructions": [
+        "  023D  mov ax, word ptr [bp - 8]",
+        "  0240  mov dx, word ptr [bp - 6]",
+        "  0243  jmp 0x246",
+        "  0246  pop si",
+        "  0247  pop di",
+        "  0248  mov sp, bp",
+        "  024A  pop bp",
+        "  024B  retf"
+      ]
+    },
+    {
+      "function": "malloc",
+      "definition": {
+        "source": "src/root/m171C.c",
+        "return_type": "void *",
+        "line": 1058,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX final f_171C_21CC allocation; canonical heap replaced by native platform allocation boundary.",
+      "canonical_source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+      "canonical_return_expressions": [
+        "f_171C_21CC(size)"
+      ],
+      "calls": [
+        {
+          "source": "src/S10/m35F5.c",
+          "caller": "o10_35F5_0384",
+          "line": 204,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m1629.c",
+          "caller": "MakeBalloon",
+          "line": 67,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m259D.c",
+          "caller": "win_DrawBitMap",
+          "line": 80,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m259D.c",
+          "caller": "win_DrawBitMap",
+          "line": 90,
+          "declared_return": "char *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:171C:2208",
+      "instructions": [
+        "  2208  push bp",
+        "  2209  mov bp, sp",
+        "  220B  push word ptr [bp + 6]",
+        "  220E  push cs",
+        "  220F  call 0x21cc                        -> f_171C_21CC",
+        "  2212  mov sp, bp",
+        "  2214  pop bp",
+        "  2215  retf"
+      ]
+    },
+    {
+      "function": "myButton",
+      "definition": {
+        "source": "src/root/m00F8.c",
+        "return_type": "void",
+        "line": 153,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "REPAIRED_REGISTER_RETURN",
+      "dos_return": "AX=StillDown()",
+      "canonical_source_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "MapAreaEvent",
+          "line": 219,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "OpenMiniMapWin",
+          "line": 323,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "OpenMiniMapWin",
+          "line": 324,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "OpenMiniMapWin",
+          "line": 355,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "processEdit",
+          "line": 109,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "processEdit",
+          "line": 116,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S22/m3BBD.c",
+          "caller": "processExp",
+          "line": 52,
+          "declared_return": "signed short",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:00F8:02AC",
+      "instructions": [
+        "  02AC  xor ax, ax",
+        "  02AE  lcall 0x29f4, 0x2cc                -> __aFchkstk",
+        "  02B3  lcall 0, 0x46f                     -> f_0000_046F",
+        "  02B8  lcall 0x1fd2, 0x542                -> StillDown",
+        "  02BD  retf"
+      ]
+    },
+    {
+      "function": "o25_3BA4_19AD",
+      "definition": {
+        "source": "src/S25/m3BA4.c",
+        "return_type": "signed short",
+        "line": 775,
+        "static": false,
+        "fallthrough": true,
+        "bare_return": false
+      },
+      "disposition": "REPAIRED_REGISTER_RETURN",
+      "dos_return": "AX=o25_3BA4_1686(...)",
+      "canonical_source_sha256": "696985898b539d5795435bbd3d03cf5331cfb334aaffafb84ecea668c00a8e17",
+      "canonical_return_expressions": [],
+      "calls": [
+        {
+          "source": "src/S25/m3BA4.c",
+          "caller": "o25_3BA4_1A0D",
+          "line": 790,
+          "declared_return": "signed short",
+          "categories": [
+            "unspecified-return-path"
+          ]
+        }
+      ],
+      "original_location": "S25:3BA4:19AD",
+      "instructions": [
+        "  1A00  mov ax, 0xefa",
+        "  1A03  push es",
+        "  1A04  push ax",
+        "  1A05  push cs",
+        "  1A06  call 0x1686                        -> o25_3BA4_1686",
+        "  1A09  mov sp, bp",
+        "  1A0B  pop bp",
+        "  1A0C  retf"
+      ]
+    },
+    {
+      "function": "win_ObjAddr",
+      "definition": {
+        "source": "src/root/m2505.c",
+        "return_type": "char *",
+        "line": 168,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX object pointer fields +2C/+2E (and explicit null error return); typed pointer view mismatch.",
+      "canonical_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "canonical_return_expressions": [
+        "((char far * far *)(f_2505_0006(obj) + 0x2c))[obj & 0xff]"
+      ],
+      "calls": [
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_0000",
+          "line": 99,
+          "declared_return": "struct:Obj *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/root/m20E8.c",
+          "caller": "f_20E8_0903",
+          "line": 402,
+          "declared_return": "signed short *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:2505:02D7",
+      "instructions": [
+        "  032B  mov es, dx",
+        "  032D  mov bx, ax",
+        "  032F  mov ax, word ptr es:[bx + si + 0x2c]",
+        "  0333  mov dx, word ptr es:[bx + si + 0x2e]",
+        "  0337  pop si",
+        "  0338  mov sp, bp",
+        "  033A  pop bp",
+        "  033B  retf"
+      ]
+    },
+    {
+      "function": "win_WinAddr",
+      "definition": {
+        "source": "src/root/m2505.c",
+        "return_type": "char *",
+        "line": 182,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX final f_2505_0006 window owner; typed pointer view mismatch.",
+      "canonical_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "canonical_return_expressions": [
+        "f_2505_0006(win)"
+      ],
+      "calls": [
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_0000",
+          "line": 94,
+          "declared_return": "struct:Win *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_022F",
+          "line": 167,
+          "declared_return": "struct:Win *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_040F",
+          "line": 239,
+          "declared_return": "struct:Win *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_040F",
+          "line": 276,
+          "declared_return": "struct:Win *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_0671",
+          "line": 308,
+          "declared_return": "struct:Win *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:2505:0345",
+      "instructions": [
+        "  035F  add sp, 6",
+        "  0362  push word ptr [bp - 2]",
+        "  0365  push cs",
+        "  0366  call 6                             -> f_2505_0006",
+        "  0369  pop bx",
+        "  036A  mov sp, bp",
+        "  036C  pop bp",
+        "  036D  retf"
+      ]
+    },
+    {
+      "function": "win_WinRectAddr",
+      "definition": {
+        "source": "src/root/m2505.c",
+        "return_type": "char *",
+        "line": 151,
+        "static": false,
+        "fallthrough": false,
+        "bare_return": false
+      },
+      "disposition": "EXPLICIT_VALUE_TYPE_VIEW",
+      "dos_return": "DX:AX final f_2505_0006 rectangle owner; typed pointer view mismatch.",
+      "canonical_source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+      "canonical_return_expressions": [
+        "f_2505_0006(win)"
+      ],
+      "calls": [
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_0000",
+          "line": 118,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_022F",
+          "line": 166,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_040F",
+          "line": 237,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_040F",
+          "line": 275,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        },
+        {
+          "source": "src/S26/m39C7.c",
+          "caller": "o26_39C7_0671",
+          "line": 351,
+          "declared_return": "struct:Rect *",
+          "categories": [
+            "return-type-mismatch"
+          ]
+        }
+      ],
+      "original_location": "root:2505:025F",
+      "instructions": [
+        "  0279  add sp, 6",
+        "  027C  push word ptr [bp - 2]",
+        "  027F  push cs",
+        "  0280  call 6                             -> f_2505_0006",
+        "  0283  pop bx",
+        "  0284  mov sp, bp",
+        "  0286  pop bp",
+        "  0287  retf"
+      ]
+    }
+  ],
+  "asm_returns": [
+    {
+      "function": "TickCount",
+      "dos_return": "DX:AX CS-private clock dword; native explicit uint32 result. Signed/unsigned caller declarations consume the same bits.",
+      "calls": [
+        {
+          "source": "src/S09/m36EE.c",
+          "caller": "o09_36EE_0092",
+          "line": 107,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S09/m36EE.c",
+          "caller": "o09_36EE_0092",
+          "line": 108,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "caller": "o12_384C_0B76",
+          "line": 558,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "o13_384C_01E5",
+          "line": 162,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S16/m384C.c",
+          "caller": "AboutDialog",
+          "line": 164,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/S16/m384C.c",
+          "caller": "AboutDialog",
+          "line": 183,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/S20/m39F1.c",
+          "caller": "IBMInitStuff",
+          "line": 168,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "processEdit",
+          "line": 89,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "processEdit",
+          "line": 90,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "YellowBirth",
+          "line": 387,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "YellowBirth",
+          "line": 389,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0093.c",
+          "caller": "SeedSRand",
+          "line": 84,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m0093.c",
+          "caller": "SeedRRand",
+          "line": 94,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "myDelay",
+          "line": 145,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "MacTickCount",
+          "line": 161,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "DialogWaitInit",
+          "line": 188,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "DialogClearWait",
+          "line": 194,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "f_0250_13A6",
+          "line": 1068,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawSpider",
+          "line": 1365,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawSpider",
+          "line": 1366,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawSpider",
+          "line": 1379,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1970,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1971,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1979,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 1980,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2002,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2003,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2022,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2023,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2042,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawCurBalloons",
+          "line": 2043,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "TryAntTheme",
+          "line": 623,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "caller": "TryAntTheme",
+          "line": 624,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m15D9.c",
+          "caller": "EditMessage",
+          "line": 53,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m15D9.c",
+          "caller": "EditMessage",
+          "line": 61,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_00D5",
+          "line": 162,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "WaitedEnough",
+          "line": 365,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "WaitedEnough",
+          "line": 365,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "WaitedEnough",
+          "line": 370,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m1F80.c",
+          "caller": "f_1F80_0081",
+          "line": 60,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m1F80.c",
+          "caller": "f_1F80_0081",
+          "line": 61,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "ButtonHeldInit",
+          "line": 317,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "ButtonHeld",
+          "line": 325,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "ButtonHeld",
+          "line": 327,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "caller": "f_208F_04D0",
+          "line": 253,
+          "declared_return": "unsigned int"
+        },
+        {
+          "source": "src/root/m218D.c",
+          "caller": "f_218D_000C",
+          "line": 68,
+          "declared_return": "signed int"
+        },
+        {
+          "source": "src/root/m218D.c",
+          "caller": "f_218D_000C",
+          "line": 79,
+          "declared_return": "signed int"
+        }
+      ],
+      "original_location": "root:1B73:0504",
+      "instructions": [
+        "  0504  mov ax, word ptr cs:[0x12]",
+        "  0508  mov dx, word ptr cs:[0x14]",
+        "  050D  retf"
+      ]
+    },
+    {
+      "function": "f_1959_0002",
+      "dos_return": "AX argument byte-swap via XCHG AH,AL; native explicit uint16 result.",
+      "calls": [
+        {
+          "source": "src/root/m0000.c",
+          "caller": "f_0000_0193",
+          "line": 133,
+          "declared_return": "unsigned short"
+        },
+        {
+          "source": "src/root/m0000.c",
+          "caller": "f_0000_0193",
+          "line": 135,
+          "declared_return": "unsigned short"
+        }
+      ],
+      "original_location": "root:1959:0002",
+      "instructions": [
+        "  0002  push bp",
+        "  0003  mov bp, sp",
+        "  0005  mov ax, word ptr [bp + 6]",
+        "  0008  xchg ah, al",
+        "  000A  pop bp",
+        "  000B  retf"
+      ]
+    },
+    {
+      "function": "f_195A_004B",
+      "dos_return": "AX=DX EMS handle after INT67; native unsupported EMS allocation aborts, no returning native result in supported no-EMS domain.",
+      "calls": [
+        {
+          "source": "src/root/m0250.c",
+          "caller": "f_0250_012D",
+          "line": 102,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m171C.c",
+          "caller": "f_171C_0034",
+          "line": 137,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m19DC.c",
+          "caller": "f_19DC_001A",
+          "line": 66,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:195A:004B",
+      "instructions": [
+        "  0050  mov bx, word ptr [bp + 6]",
+        "  0053  int 0x67",
+        "  0055  and ah, ah",
+        "  0057  je 0x5e",
+        "  0059  lcall 0x195a, 0x2b7                -> f_195A_02B7",
+        "  005E  mov ax, dx",
+        "  0060  pop bp",
+        "  0061  retf"
+      ]
+    },
+    {
+      "function": "f_195A_0260",
+      "dos_return": "Inactive/no-device branch AX=0 from f_195A_023A. Already-active test branches to epilogue without writing AX: incoming AX residue. Native no-EMS boundary returns 0; enabled/reentry path is explicit excluded-domain debt.",
+      "calls": [
+        {
+          "source": "src/root/m0250.c",
+          "caller": "f_0250_012D",
+          "line": 95,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m171C.c",
+          "caller": "f_171C_0034",
+          "line": 131,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m19DC.c",
+          "caller": "f_19DC_001A",
+          "line": 55,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:195A:0260",
+      "instructions": [
+        "  02A3  and ah, ah",
+        "  02A5  jne 0x2b5",
+        "  02A7  cmp al, 0x32",
+        "  02A9  jl 0x2b5",
+        "  02AB  lcall 0x195a, 0x1d                 -> f_195A_001D",
+        "  02B0  mov byte ptr [0x360d], 1           DS:360D",
+        "  02B5  pop si",
+        "  02B6  retf"
+      ]
+    },
+    {
+      "function": "f_1B05_0046",
+      "dos_return": "AX initialized local emitted-byte count [BP-2]; native explicit count.",
+      "calls": [
+        {
+          "source": "src/root/m19A9.c",
+          "caller": "DBRecall",
+          "line": 113,
+          "declared_return": "unsigned short"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "caller": "GPutPacked",
+          "line": 290,
+          "declared_return": "unsigned short"
+        }
+      ],
+      "original_location": "root:1B05:0046",
+      "instructions": [
+        "  0167  mov word ptr [0x3bf2], dx          DS:3BF2",
+        "  016B  mov word ptr [0x3bf4], cx          DS:3BF4",
+        "  016F  mov ax, word ptr [bp - 2]",
+        "  0172  pop si",
+        "  0173  pop di",
+        "  0174  mov sp, bp",
+        "  0176  pop bp",
+        "  0177  retf"
+      ]
+    },
+    {
+      "function": "f_1B4E_000D",
+      "dos_return": "AX=CX color after low-nibble mapping; native explicit word.",
+      "calls": [
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "Mini_DrawMapI",
+          "line": 289,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "caller": "Mini_DrawMapI",
+          "line": 291,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "caller": "o12_384C_0B76",
+          "line": 553,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "caller": "o12_384C_0B76",
+          "line": 555,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawSimColonies",
+          "line": 797,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawSimColonies",
+          "line": 797,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawColonyBars",
+          "line": 828,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "caller": "DrawColonyBars",
+          "line": 847,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S20/m39F1.c",
+          "caller": "IBMInitStuff",
+          "line": 162,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "DoLaserFire",
+          "line": 217,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "DoLaserFire",
+          "line": 218,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "DoLaserFire",
+          "line": 219,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "DoLaserFire",
+          "line": 230,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "DoLaserFire",
+          "line": 231,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "DoLaserFire",
+          "line": 232,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S24/m39C7.c",
+          "caller": "ProcHistoryEvent",
+          "line": 54,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S24/m39C7.c",
+          "caller": "win_DrawHistoryWindow",
+          "line": 179,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawEditGraphs",
+          "line": 1169,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawPalps",
+          "line": 1468,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawPalps",
+          "line": 1470,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "caller": "DrawLegs",
+          "line": 1580,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0798.c",
+          "caller": "DrawControlLevels",
+          "line": 447,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0798.c",
+          "caller": "DrawControlLevels",
+          "line": 449,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0798.c",
+          "caller": "DrawControlLevels",
+          "line": 449,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m0798.c",
+          "caller": "DrawControlLevels",
+          "line": 455,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1B4E:000D",
+      "instructions": [
+        "  0017  mov al, cl",
+        "  0019  and al, 0xf",
+        "  001B  xlatb",
+        "  001C  and cl, 0xf0",
+        "  001F  or cl, al",
+        "  0021  mov ax, cx",
+        "  0023  pop bp",
+        "  0024  retf"
+      ]
+    },
+    {
+      "function": "f_1B73_032A",
+      "dos_return": "AX queue structure first word; native explicit word.",
+      "calls": [
+        {
+          "source": "src/S10/m35F5.c",
+          "caller": "o10_35F5_0384",
+          "line": 286,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_00D5",
+          "line": 181,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_0415",
+          "line": 316,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_080D",
+          "line": 440,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m218D.c",
+          "caller": "f_218D_02D5",
+          "line": 146,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m218D.c",
+          "caller": "win_FlushEvents",
+          "line": 217,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1B73:032A",
+      "instructions": [
+        "  032A  mov ax, word ptr [0x5ff2]          DS:5FF2 g_5FF2",
+        "  032D  retf"
+      ]
+    },
+    {
+      "function": "f_1B73_0A30",
+      "dos_return": "AX=(scan byte XOR 80h), AH zero; native explicit word.",
+      "calls": [
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 129,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 131,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 133,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 137,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 141,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 145,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 147,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 149,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 151,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0246",
+          "line": 178,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "f_00F8_01BE",
+          "line": 112,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "StillDown",
+          "line": 303,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "StillDown",
+          "line": 303,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "StillDown",
+          "line": 305,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1B73:0A30",
+      "instructions": [
+        "  0A30  push bp",
+        "  0A31  mov bp, sp",
+        "  0A33  mov bx, word ptr [bp + 6]",
+        "  0A36  mov al, byte ptr [bx + 0x53cd]",
+        "  0A3A  xor al, 0x80",
+        "  0A3C  xor ah, ah",
+        "  0A3E  pop bp",
+        "  0A3F  retf"
+      ]
+    },
+    {
+      "function": "f_1B73_0BFF",
+      "dos_return": "AX=0 or hotbox field; native explicit word.",
+      "calls": [
+        {
+          "source": "src/root/m218D.c",
+          "caller": "f_218D_023A",
+          "line": 120,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1B73:0BFF",
+      "instructions": [
+        "  0C34  jne 0xc18",
+        "  0C36  xor ax, ax",
+        "  0C38  jmp 0xc3e",
+        "  0C3A  mov ax, word ptr es:[di + 0xc]",
+        "  0C3E  pop ds",
+        "  0C3F  pop di",
+        "  0C40  pop si",
+        "  0C41  retf"
+      ]
+    },
+    {
+      "function": "f_1B73_0C42",
+      "dos_return": "AX=0/1 lookup status; native explicit word.",
+      "calls": [
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_04B3",
+          "line": 269,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1B73:0C42",
+      "instructions": [
+        "  0C74  mov ax, 1",
+        "  0C77  jmp 0xc7b",
+        "  0C79  xor ax, ax",
+        "  0C7B  pop ds",
+        "  0C7C  pop di",
+        "  0C7D  pop si",
+        "  0C7E  pop bp",
+        "  0C7F  retf"
+      ]
+    },
+    {
+      "function": "f_1B73_0EEE",
+      "dos_return": "AX BIOS modifier flags AND 10h; native explicit word.",
+      "calls": [
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "f_00F8_01BE",
+          "line": 116,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1B73:0EEE",
+      "instructions": [
+        "  0EEE  xor ax, ax",
+        "  0EF0  mov es, ax",
+        "  0EF2  mov al, byte ptr es:[0x417]",
+        "  0EF6  xor ah, ah",
+        "  0EF8  and ax, 0x10",
+        "  0EFB  retf"
+      ]
+    },
+    {
+      "function": "f_1F58_0038",
+      "dos_return": "AX pending/BIOS keyboard word, zero if absent; native explicit word.",
+      "calls": [
+        {
+          "source": "src/S05/m3663.c",
+          "caller": "DoExpMenu",
+          "line": 89,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "caller": "o09_35F5_03C6",
+          "line": 427,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S09/m36EE.c",
+          "caller": "o09_36EE_0092",
+          "line": 101,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "caller": "o10_35F5_01C3",
+          "line": 121,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "caller": "o10_35F5_0384",
+          "line": 303,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "caller": "CustomerIDDialog",
+          "line": 641,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S15/m384C.c",
+          "caller": "o15_384C_0239",
+          "line": 210,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0000",
+          "line": 156,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "caller": "YellowDialog",
+          "line": 842,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "f_00F8_01BE",
+          "line": 112,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "f_00F8_040F",
+          "line": 263,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "DialogAbort",
+          "line": 369,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "DialogAbortOrCont",
+          "line": 381,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_00D5",
+          "line": 167,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_0415",
+          "line": 305,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_0737",
+          "line": 376,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_082E",
+          "line": 449,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_084F",
+          "line": 460,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "caller": "f_208F_04EE",
+          "line": 265,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "caller": "f_208F_056A",
+          "line": 294,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1F58:0038",
+      "instructions": [
+        "  0043  jne 0x47",
+        "  0045  xor ax, ax",
+        "  0047  cmp byte ptr [0x53bd], 0           DS:53BD g_53BD",
+        "  004C  je 0x59",
+        "  004E  xor bx, bx",
+        "  0050  mov es, bx",
+        "  0052  and word ptr es:[0x417], 0xffdf",
+        "  0059  retf"
+      ]
+    },
+    {
+      "function": "f_1F58_005A",
+      "dos_return": "AX sign-extended BIOS character via CBW or zero-extended pending queue byte. Native explicit int16; char-declared callers intentionally consume AL only.",
+      "calls": [
+        {
+          "source": "src/S09/m36EE.c",
+          "caller": "o09_36EE_0092",
+          "line": 121,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S09/m36EE.c",
+          "caller": "o09_36EE_0092",
+          "line": 122,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "caller": "o10_35F5_01C3",
+          "line": 123,
+          "declared_return": "char"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "caller": "o10_35F5_01C3",
+          "line": 125,
+          "declared_return": "char"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_00D5",
+          "line": 168,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1F58:005A",
+      "instructions": [
+        "  006E  xor al, al",
+        "  0070  cwde",
+        "  0071  retf",
+        "  0072  xor ah, ah",
+        "  0074  xor cx, cx",
+        "  0076  xchg word ptr [0x5a2c], cx         DS:5A2C g_5A2C",
+        "  007A  mov word ptr [0x5a2a], cx          DS:5A2A g_5A2A",
+        "  007E  retf"
+      ]
+    },
+    {
+      "function": "f_1F58_0090",
+      "dos_return": "AX first keyboard result, or second result with AH=8 for extended key; native explicit word.",
+      "calls": [
+        {
+          "source": "src/S05/m3663.c",
+          "caller": "DoExpMenu",
+          "line": 90,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "caller": "o09_35F5_03C6",
+          "line": 428,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "caller": "o10_35F5_0384",
+          "line": 304,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S15/m384C.c",
+          "caller": "o15_384C_0239",
+          "line": 211,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "caller": "o19_384C_0246",
+          "line": 176,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "f_00F8_040F",
+          "line": 263,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "DialogAbort",
+          "line": 369,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m00F8.c",
+          "caller": "DialogAbortOrCont",
+          "line": 382,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "caller": "f_1C62_0415",
+          "line": 305,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_082E",
+          "line": 450,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "caller": "f_1FD2_084F",
+          "line": 460,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "caller": "f_208F_04EE",
+          "line": 266,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "caller": "f_208F_056A",
+          "line": 295,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1F58:0090",
+      "instructions": [
+        "  0090  lcall 0x1f58, 0x5a                 -> f_1F58_005A",
+        "  0095  and ax, ax",
+        "  0097  jne 0xa0",
+        "  0099  lcall 0x1f58, 0x5a                 -> f_1F58_005A",
+        "  009E  mov ah, 8",
+        "  00A0  retf"
+      ]
+    },
+    {
+      "function": "f_1F66_002D",
+      "dos_return": "AX near matched-name pointer offset or 0. Only consumed C observer compares ==0 for stack-owned ff.name (13-byte directory field), not arbitrary pointers. Native predicate preserves zero/nonzero in that bounded nonwrapping stack domain; no numerical pointer-word or general-pointer equality claim.",
+      "calls": [
+        {
+          "source": "src/S09/m35F5.c",
+          "caller": "o09_35F5_03C6",
+          "line": 389,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1F66:002D",
+      "instructions": [
+        "  00A3  mov ax, cx",
+        "  00A5  jmp 0xaa",
+        "  00A7  mov ax, 0",
+        "  00AA  pop di",
+        "  00AB  pop si",
+        "  00AC  pop ds",
+        "  00AD  pop bp",
+        "  00AE  retf"
+      ]
+    },
+    {
+      "function": "f_1F66_00AF",
+      "dos_return": "AX carry-derived success 0/1; native explicit word; file/CWD divergence belongs to R2.",
+      "calls": [
+        {
+          "source": "src/S09/m35F5.c",
+          "caller": "o09_35F5_03C6",
+          "line": 302,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "caller": "o09_35F5_03C6",
+          "line": 334,
+          "declared_return": "signed short"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "caller": "o09_35F5_03C6",
+          "line": 339,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:1F66:00AF",
+      "instructions": [
+        "  00CE  int 0x21",
+        "  00D0  mov ax, 0",
+        "  00D3  cmc",
+        "  00D4  adc al, 0",
+        "  00D6  pop si",
+        "  00D7  pop ds",
+        "  00D8  pop bp",
+        "  00D9  retf"
+      ]
+    },
+    {
+      "function": "f_24FA_0004",
+      "dos_return": "DX:AX found far character address or null; native explicit pointer.",
+      "calls": [
+        {
+          "source": "src/root/m23E6.c",
+          "caller": "PrevListLine",
+          "line": 395,
+          "declared_return": "char *"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "caller": "PrevListLine",
+          "line": 406,
+          "declared_return": "char *"
+        }
+      ],
+      "original_location": "root:24FA:0004",
+      "instructions": [
+        "  0019  mov ax, di",
+        "  001B  inc ax",
+        "  001C  jmp 0x22",
+        "  001E  xor dx, dx",
+        "  0020  xor ax, ax",
+        "  0022  pop di",
+        "  0023  pop bp",
+        "  0024  retf"
+      ]
+    },
+    {
+      "function": "f_29BF_0139",
+      "dos_return": "AX final f_29BF_014B chip base or 0, helper assigns AX on each terminal path. Native unavailable alternate sound provider aborts; outside default mode6 domain.",
+      "calls": [
+        {
+          "source": "src/root/m293A.c",
+          "caller": "f_293A_015E",
+          "line": 128,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "root:29BF:0139",
+      "instructions": [
+        "  013C  add bp, 6",
+        "  013F  push ds",
+        "  0140  mov ax, 0x55b3                     [seg 55B3 DGROUP]",
+        "  0143  mov ds, ax",
+        "  0145  call 0x14b                         -> f_29BF_014B",
+        "  0148  pop ds",
+        "  0149  pop bp",
+        "  014A  retf"
+      ]
+    },
+    {
+      "function": "o00_31AD_0522",
+      "dos_return": "AX packed width-byte-count * height +4; low MUL result, word callers ignore DX.",
+      "calls": [],
+      "original_location": "S00:31AD:0522",
+      "instructions": [
+        "  053F  mov bx, word ptr [bp + 6]",
+        "  0542  sar bx, cl",
+        "  0544  sub ax, bx",
+        "  0546  inc ax",
+        "  0547  mov bx, word ptr [bp + 0xc]",
+        "  054A  sub bx, word ptr [bp + 8]",
+        "  054D  mul bx",
+        "  054F  ret"
+      ]
+    },
+    {
+      "function": "o00_31AD_11FB",
+      "dos_return": "AX packed width-byte-count * height +4; low MUL result, word callers ignore DX.",
+      "calls": [],
+      "original_location": "S00:31AD:11FB",
+      "instructions": [
+        "  11FB  push bp",
+        "  11FC  mov bp, sp",
+        "  11FE  call 0x537                         -> 31AD:0537",
+        "  1201  add ax, 4",
+        "  1204  pop bp",
+        "  1205  retf"
+      ]
+    },
+    {
+      "function": "o21_39C7_0000",
+      "dos_return": "AX video descriptor stored [DI]; native configured virtual adapter result 0305h. Adapter selection is platform contract, no residue.",
+      "calls": [
+        {
+          "source": "src/root/m205F.c",
+          "caller": "f_205F_0004",
+          "line": 93,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "S21:39C7:0000",
+      "instructions": [
+        "  0030  pop cx",
+        "  0031  pop si",
+        "  0032  loop 0x26",
+        "  0034  call 0x125                         -> o21_39C7_0125",
+        "  0037  mov ax, word ptr [di]",
+        "  0039  pop di",
+        "  003A  pop si",
+        "  003B  retf"
+      ]
+    },
+    {
+      "function": "o21_39C7_016D",
+      "dos_return": "AX=0/1 Tandy signature; native unsupported adapter aborts, outside configured mode8 domain.",
+      "calls": [
+        {
+          "source": "src/root/m205F.c",
+          "caller": "f_205F_0004",
+          "line": 105,
+          "declared_return": "signed short"
+        }
+      ],
+      "original_location": "S21:39C7:016D",
+      "instructions": [
+        "  01CC  nop",
+        "  01CD  xor ax, ax",
+        "  01CF  jmp 0x1d4",
+        "  01D1  mov ax, 1",
+        "  01D4  pop di",
+        "  01D5  pop si",
+        "  01D6  pop ds",
+        "  01D7  retf"
+      ]
+    }
+  ],
+  "nonvoid_incomplete_definitions": [
+    {
+      "kind": "native",
+      "source": "src/S10/m35F5.c",
+      "name": "o10_35F5_01C3",
+      "return_type": "signed short",
+      "line": 98,
+      "static": false,
+      "fallthrough": false,
+      "bare_return": true
+    },
+    {
+      "kind": "canonical",
+      "source": "src/S10/m35F5.c",
+      "name": "o10_35F5_01C3",
+      "return_type": "signed short",
+      "line": 96,
+      "static": false,
+      "fallthrough": false,
+      "bare_return": true
+    },
+    {
+      "kind": "native",
+      "source": "src/S15/m384C.c",
+      "name": "MenuQuit",
+      "return_type": "signed short",
+      "line": 119,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/S15/m384C.c",
+      "name": "MenuQuit",
+      "return_type": "signed short",
+      "line": 125,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "native",
+      "source": "src/S19/m384C.c",
+      "name": "o19_384C_0000",
+      "return_type": "signed short",
+      "line": 73,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/S19/m384C.c",
+      "name": "o19_384C_0000",
+      "return_type": "signed short",
+      "line": 61,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/S25/m3BA4.c",
+      "name": "o25_3BA4_19AD",
+      "return_type": "signed short",
+      "line": 775,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand2",
+      "return_type": "signed short",
+      "line": 131,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand4",
+      "return_type": "signed short",
+      "line": 132,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand8",
+      "return_type": "signed short",
+      "line": 133,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand16",
+      "return_type": "signed short",
+      "line": 134,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand32",
+      "return_type": "signed short",
+      "line": 135,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand64",
+      "return_type": "signed short",
+      "line": 136,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand128",
+      "return_type": "signed short",
+      "line": 137,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m0093.c",
+      "name": "SRand256",
+      "return_type": "signed short",
+      "line": 138,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m171C.c",
+      "name": "f_171C_0A5C",
+      "return_type": "char * *",
+      "line": 427,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m171C.c",
+      "name": "f_171C_0EEA",
+      "return_type": "struct:None *",
+      "line": 564,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m171C.c",
+      "name": "f_171C_0A5C",
+      "return_type": "char * *",
+      "line": 418,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m171C.c",
+      "name": "f_171C_0EEA",
+      "return_type": "struct:None *",
+      "line": 555,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m19DC.c",
+      "name": "f_19DC_02FB",
+      "return_type": "signed short",
+      "line": 158,
+      "static": false,
+      "fallthrough": false,
+      "bare_return": true
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m19DC.c",
+      "name": "f_19DC_02FB",
+      "return_type": "signed short",
+      "line": 154,
+      "static": false,
+      "fallthrough": false,
+      "bare_return": true
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m22BF.c",
+      "name": "win_SetPalette",
+      "return_type": "signed short",
+      "line": 463,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m22BF.c",
+      "name": "win_SetPalette",
+      "return_type": "signed short",
+      "line": 435,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m23E6.c",
+      "name": "f_23E6_07A2",
+      "return_type": "signed short",
+      "line": 349,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m23E6.c",
+      "name": "PrevListLine",
+      "return_type": "signed short",
+      "line": 378,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m23E6.c",
+      "name": "f_23E6_07A2",
+      "return_type": "signed short",
+      "line": 347,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m23E6.c",
+      "name": "PrevListLine",
+      "return_type": "signed short",
+      "line": 376,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m277D.c",
+      "name": "WinPrintf",
+      "return_type": "signed short",
+      "line": 13,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m277D.c",
+      "name": "WinPrintf",
+      "return_type": "signed short",
+      "line": 9,
+      "static": false,
+      "fallthrough": true,
+      "bare_return": false
+    }
+  ],
+  "indirect_calls": [
+    {
+      "kind": "canonical",
+      "source": "src/S20/m39F1.c",
+      "caller": "IBMInitStuff",
+      "line": 117,
+      "expression": "isdigit(v)",
+      "declared_return": null,
+      "target_kind": "undeclared-direct",
+      "target": "isdigit"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/S20/m39F1.c",
+      "caller": "ReadWord",
+      "line": 189,
+      "expression": "isspace(c)",
+      "declared_return": null,
+      "target_kind": "undeclared-direct",
+      "target": "isspace"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/S20/m39F1.c",
+      "caller": "ReadWord",
+      "line": 193,
+      "expression": "isspace(c)",
+      "declared_return": null,
+      "target_kind": "undeclared-direct",
+      "target": "isspace"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/S20/m39F1.c",
+      "caller": "ReadConfig",
+      "line": 255,
+      "expression": "isdigit(lang)",
+      "declared_return": null,
+      "target_kind": "undeclared-direct",
+      "target": "isdigit"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m00BA.c",
+      "caller": "f_00BA_0002",
+      "line": 67,
+      "expression": "read(fd_50F6_10D0, f_171C_1B84(h), 0x100)",
+      "declared_return": null,
+      "target_kind": "undeclared-direct",
+      "target": "read"
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m1A96.c",
+      "caller": "ch_LookUpId",
+      "line": 127,
+      "expression": "(*g_3B7E)(object, type)",
+      "declared_return": "char *",
+      "target_kind": "function-pointer",
+      "pointer_name": "g_3B7E",
+      "target": "*g_3B7E"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m1A96.c",
+      "caller": "ch_LookUpId",
+      "line": 122,
+      "expression": "(*g_3B7E)(object, type)",
+      "declared_return": "char *",
+      "target_kind": "function-pointer",
+      "pointer_name": "g_3B7E",
+      "target": "*g_3B7E"
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m1CE2.c",
+      "caller": "GSaveRect",
+      "line": 175,
+      "expression": "((int16_t (*)()) driver_callback_table[6])(x, r->top, r->right, r->bottom)",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer-cast",
+      "target": "(int16_t (*)()) driver_callback_table[6]"
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m1CE2.c",
+      "caller": "GPutPacked",
+      "line": 269,
+      "expression": "size(0, 0, hdr.width, 1)",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "size",
+      "target": "size"
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m1CE2.c",
+      "caller": "GPutPacked",
+      "line": 274,
+      "expression": "size(x, 0, right, 1)",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "size",
+      "target": "size"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m1CE2.c",
+      "caller": "GSaveRect",
+      "line": 174,
+      "expression": "g_9140(x, r->top, r->right, r->bottom)",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "g_9140",
+      "target": "g_9140"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m1CE2.c",
+      "caller": "GPutPacked",
+      "line": 272,
+      "expression": "size(0, 0, hdr.width, 1)",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "size",
+      "target": "size"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m1CE2.c",
+      "caller": "GPutPacked",
+      "line": 277,
+      "expression": "size(x, 0, right, 1)",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "size",
+      "target": "size"
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m259D.c",
+      "caller": "win_DrawBitMap",
+      "line": 82,
+      "expression": "(*((uint16_t (*)()) driver_callback_table[6]))(x & (~1), y, x1, y1)",
+      "declared_return": "unsigned short",
+      "target_kind": "function-pointer-cast",
+      "target": "*((uint16_t (*)()) driver_callback_table[6])"
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m259D.c",
+      "caller": "win_DrawBitMap",
+      "line": 90,
+      "expression": "(*((uint16_t (*)()) driver_callback_table[6]))(x & (~7), y, x1, y1)",
+      "declared_return": "unsigned short",
+      "target_kind": "function-pointer-cast",
+      "target": "*((uint16_t (*)()) driver_callback_table[6])"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m259D.c",
+      "caller": "win_DrawBitMap",
+      "line": 80,
+      "expression": "(*g_9140)(x & (~1), y, x1, y1)",
+      "declared_return": "unsigned short",
+      "target_kind": "function-pointer",
+      "pointer_name": "g_9140",
+      "target": "*g_9140"
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m259D.c",
+      "caller": "win_DrawBitMap",
+      "line": 88,
+      "expression": "(*g_9140)(x & (~7), y, x1, y1)",
+      "declared_return": "unsigned short",
+      "target_kind": "function-pointer",
+      "pointer_name": "g_9140",
+      "target": "*g_9140"
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m277E.c",
+      "caller": "f_277E_0000",
+      "line": 59,
+      "expression": "fd_55B3_74DA[mode]()",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "fd_55B3_74DA",
+      "target": "fd_55B3_74DA[mode]",
+      "finite_targets": [
+        "f_293A_0029",
+        "f_293A_0029",
+        "f_293A_002D",
+        "f_293A_0059",
+        "f_293A_0087",
+        "f_293A_015E",
+        "f_293A_0121",
+        "f_293A_017C",
+        "f_293A_017F"
+      ],
+      "target_definitions": {
+        "f_293A_0029": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 41,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_002D": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 46,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0059": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 56,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0087": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 78,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_015E": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 119,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0121": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 101,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017C": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 129,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017F": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 136,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        }
+      }
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m277E.c",
+      "caller": "f_277E_0000",
+      "line": 63,
+      "expression": "fd_55B3_74DA[mode]()",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "fd_55B3_74DA",
+      "target": "fd_55B3_74DA[mode]",
+      "finite_targets": [
+        "f_293A_0029",
+        "f_293A_0029",
+        "f_293A_002D",
+        "f_293A_0059",
+        "f_293A_0087",
+        "f_293A_015E",
+        "f_293A_0121",
+        "f_293A_017C",
+        "f_293A_017F"
+      ],
+      "target_definitions": {
+        "f_293A_0029": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 35,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_002D": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 40,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0059": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 54,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0087": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 83,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_015E": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 124,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0121": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 106,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017C": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 134,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017F": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 141,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        }
+      }
+    },
+    {
+      "kind": "native",
+      "source": "src/root/m293A.c",
+      "caller": "f_293A_0006",
+      "line": 33,
+      "expression": "fd_55B3_74DA[i]()",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "fd_55B3_74DA",
+      "target": "fd_55B3_74DA[i]",
+      "finite_targets": [
+        "f_293A_0029",
+        "f_293A_0029",
+        "f_293A_002D",
+        "f_293A_0059",
+        "f_293A_0087",
+        "f_293A_015E",
+        "f_293A_0121",
+        "f_293A_017C",
+        "f_293A_017F"
+      ],
+      "target_definitions": {
+        "f_293A_0029": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 41,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_002D": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 46,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0059": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 56,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0087": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 78,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_015E": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 119,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0121": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 101,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017C": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 129,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017F": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 136,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        }
+      }
+    },
+    {
+      "kind": "canonical",
+      "source": "src/root/m293A.c",
+      "caller": "f_293A_0006",
+      "line": 27,
+      "expression": "fd_55B3_74DA[i]()",
+      "declared_return": "signed short",
+      "target_kind": "function-pointer",
+      "pointer_name": "fd_55B3_74DA",
+      "target": "fd_55B3_74DA[i]",
+      "finite_targets": [
+        "f_293A_0029",
+        "f_293A_0029",
+        "f_293A_002D",
+        "f_293A_0059",
+        "f_293A_0087",
+        "f_293A_015E",
+        "f_293A_0121",
+        "f_293A_017C",
+        "f_293A_017F"
+      ],
+      "target_definitions": {
+        "f_293A_0029": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 35,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_002D": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 40,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0059": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 54,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0087": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 83,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_015E": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 124,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_0121": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 106,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017C": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 134,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        },
+        "f_293A_017F": {
+          "source": "src/root/m293A.c",
+          "return_type": "signed short",
+          "line": 141,
+          "static": false,
+          "fallthrough": false,
+          "bare_return": false
+        }
+      }
+    }
+  ],
+  "indirect_review": {
+    "g_3B7E": "ch_SetCacheHooks binds f_00F8_0543; explicit pointer/null C returns. Arbitrary external hook rebinding is not claimed.",
+    "driver_callback_table[6],g_9140,size": "Supported mode8 packed-size targets o00_31AD_0522/11FB audited above. Other adapter configurations remain platform exclusions.",
+    "fd_55B3_74DA": "Tool resolves nine initialized entries/eight functions; all definitions have explicit returns, no fallthrough or bare-return path.",
+    "undeclared-direct": "Five canonical calls: isdigit(2),isspace(2),read(1). Already declared explicitly by native CRT/IO boundary; no K&R implicit-int native result remains."
+  },
+  "scope": "All 171 canonical C TUs and their converted TUs; direct calls, initialized function tables and reviewed supported hook/driver bindings. Arbitrary computed callbacks or unsupported EMS/adapter/failed-heap domains are not proved equivalent."
+}

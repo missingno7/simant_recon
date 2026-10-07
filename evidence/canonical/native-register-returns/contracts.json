@@ -1,0 +1,46 @@
+{
+  "schema": "native-register-return-contracts-v1",
+  "classification": "PORT_INTRODUCED",
+  "proof": "original instruction register contract; canonical byte-exact function gates",
+  "repairs": [
+    {
+      "source": "src/root/m00F8.c",
+      "function": "f_00F8_02EF",
+      "contract": "AX=0",
+      "kind": "constant-zero",
+      "canonical_source_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "native_before": "void  f_00F8_02EF(void)\n{\n}",
+      "native_after": "int16_t  f_00F8_02EF(void)\n{\n    return 0;\n}",
+      "instruction_evidence": [
+        "original root:00F8:02EF xor ax,ax; 02F1 lcall __aFchkstk; 02F6 retf",
+        "original runtime root:29F4:02CC..02DE successful stack-check modifies BX/CX/DX/SP, never AX"
+      ]
+    },
+    {
+      "source": "src/root/m00F8.c",
+      "function": "myButton",
+      "contract": "AX=StillDown()",
+      "kind": "tail-result",
+      "canonical_source_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "native_before": "void  myButton(void)\n{\n    f_0000_046F();\n    StillDown();\n}",
+      "native_after": "int16_t  myButton(void)\n{\n    f_0000_046F();\n    return StillDown();\n}",
+      "instruction_evidence": [
+        "original root:00F8:02B8 lcall root:1FD2:0542 StillDown; 02BD retf",
+        "StillDown has explicit word return; no instruction after its call writes AX"
+      ]
+    },
+    {
+      "source": "src/S25/m3BA4.c",
+      "function": "o25_3BA4_19AD",
+      "contract": "AX=o25_3BA4_1686(...)",
+      "kind": "tail-result",
+      "canonical_source_sha256": "696985898b539d5795435bbd3d03cf5331cfb334aaffafb84ecea668c00a8e17",
+      "native_before": "int16_t  o25_3BA4_19AD(int16_t  *rot, int16_t  *dir, int16_t plane, int16_t x, int16_t y, int16_t a, int16_t b)\n{\n    fd_50F6_0EF8 = GetDir(x, y, a, b) - 1;\n    fd_50F6_0D6C = 0x10;\n    fd_50F6_0EFA = 0;\n    o25_3BA4_1686(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);\n}",
+      "native_after": "int16_t  o25_3BA4_19AD(int16_t  *rot, int16_t  *dir, int16_t plane, int16_t x, int16_t y, int16_t a, int16_t b)\n{\n    fd_50F6_0EF8 = GetDir(x, y, a, b) - 1;\n    fd_50F6_0D6C = 0x10;\n    fd_50F6_0EFA = 0;\n    return o25_3BA4_1686(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);\n}",
+      "instruction_evidence": [
+        "original S25:3BA4:1A05 push cs; 1A06 call 1686; 1A09 mov sp,bp; 1A0B pop bp; 1A0C retf",
+        "o25_3BA4_1686 has explicit word returns on all terminating paths; epilogue preserves AX"
+      ]
+    }
+  ]
+}

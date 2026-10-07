@@ -26,7 +26,7 @@
   "counts": {
     "PORT_INTRODUCED": 92,
     "ORIGINAL": 14,
-    "UNATTRIBUTED": 284,
+    "UNATTRIBUTED": 286,
     "RECONSTRUCTION_INTRODUCED": 1,
     "PORT_DEVIATION_DOCUMENTED": 6
   },
@@ -1831,19 +1831,23 @@
     },
     {
       "id": "save-record-113",
-      "description": "First native SaveRec113 fd_50F6_0FFE is0 rather than DOS30.",
+      "description": "Historical native save-record-113 initialization defect is repaired:14s projected original/canonical/native flag30 equality.",
       "classification": "PORT_INTRODUCED",
-      "status": "open",
-      "scope": "bounded contract",
+      "status": "fixed",
+      "scope": "Proven startup return ABI and initialized width flags; native new-game-save projected checkpoint14s only. Actual saved-file and later gameplay parity are not closed.",
       "evidence": {
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
           "build/workers/p2-diff/round3/new-game-save/acceptance.json",
           "evidence/canonical/behavior-attribution/observations.json",
-          "evidence/canonical/behavior-attribution/observations.json"
+          "evidence/canonical/native-register-returns/README.md",
+          "evidence/canonical/native-register-returns/census.json",
+          "evidence/canonical/native-register-returns/regression.json"
         ],
-        "commits": [],
+        "commits": [
+          "9add4828e6cbec60372264358e429bdff4486797"
+        ],
         "original_exe": {
           "path": "assets/SIMANT.EXE",
           "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
@@ -1855,7 +1859,11 @@
           "observation": "Both DOS saved files have identical307-record bytes. Native replay input operations match; short-path native SaveGame succeeds but serializes different state/bytes."
         },
         "native": {
-          "observation": "Round3 native skips InitSimVars/SeedSRand/SeedRRand after consuming the nonzero return of an empty void function."
+          "observation": "Round3 native skips InitSimVars/SeedSRand/SeedRRand after consuming the nonzero return of an empty void function.",
+          "after_repair": {
+            "sha256": "24afdde0a5879c1da054dcb4771eaede11ecb3b61e5b64ccae9d217275ef0346",
+            "observation": "GDB confirms defined return0, initialization/seeding and both flag words30; projected records113/220 equal original/canonical at14s."
+          }
         }
       },
       "related_items": [
@@ -1922,30 +1930,78 @@
           "differing_bytes": 1
         }
       ],
-      "next_experiment": "Compare original/canonical fd_50F6_0FFE at14000 ms and original f_00F8_02EF return/InitSimVars entry. If both DOS values are30 and native0, classify PORT_INTRODUCED at the mechanical return boundary.",
+      "next_experiment": "After independent drive/CWD repair, rerun actual short-path A.ANT and later common-step state; investigate tick phase with equal seed state as a separate controlled boundary.",
       "actual_save_observation": {
         "record": 113,
         "name": "fd_50F6_0FFE",
         "bytes": 2,
         "differing_bytes": 1
       },
-      "attributed_observation_scope": "actual new-game short-path SaveGame file; later equal-time projected checkpoints remain independently diagnostic"
+      "attributed_observation_scope": "Historical actual-save mismatch remains evidence of the before-state; repair verified at initialized14s projected checkpoint, not a new saved-file claim.",
+      "root_cause": {
+        "defect_class": "consumed DOS register return absent from native C definition",
+        "origin_function": "f_00F8_02EF",
+        "origin_source": "src/root/m00F8.c",
+        "consumer": "initStuff in src/root/m075B.c",
+        "proof_level": "EXACT_NATURAL: byte-exact original/canonical root:00F8 and root:075B",
+        "mechanism": "Original XOR AX,AX + successful __aFchkstk + RETF yields0. Native void definition had no specified result, so consumed EAX suppressed InitSimVars and both seed calls."
+      },
+      "class_census": {
+        "path": "evidence/canonical/native-register-returns/census.json",
+        "canonical_and_converted_tus": 342,
+        "parse_failures": 0,
+        "canonical_finding_functions": 31,
+        "asm_direct_functions": 20,
+        "asm_indirect_size_helpers": 2,
+        "repaired_functions": [
+          "f_00F8_02EF",
+          "myButton",
+          "o25_3BA4_19AD"
+        ],
+        "previously_unspecified_native_consumed_sites": 9,
+        "repaired_unspecified_native_consumed_sites": 0,
+        "residue_debt": "register-return-residue-domains",
+        "representation_debt": "pointer-long-return-representation"
+      },
+      "fix": {
+        "generator": "portable/canonical_native_abi/register_returns.py",
+        "contracts": "evidence/canonical/native-register-returns/contracts.json",
+        "mechanism": "Reviewed, drift-checked whole-definition explicit native word returns, no caller or RNG edits.",
+        "commit": "9add4828e6cbec60372264358e429bdff4486797"
+      },
+      "regression": {
+        "path": "evidence/canonical/native-register-returns/regression.json",
+        "test": "tests/test_native_register_returns.py",
+        "controls": "Seven permanent front-end/conversion controls plus actual old-build negative:9 violations, repaired build:0.",
+        "gdb": "f_00F8_02EF return0; InitSimVars enters; SeedSRand and SeedRRand enter; initialized flags30.",
+        "differential": "Fresh native versus pinned original/canonical pair: all307 projected SaveRec equal at14s; records113/220 ORIGINAL_EQUAL_ALL, native exit0.",
+        "limits": "Full acceptance remains FAIL: raw SaveRec100 (R6), drive/CWD (R2), missing A.ANT, later projected state and startup tick0 versus DOS tick1."
+      },
+      "remaining_observations": [
+        "Native seeding tick0/DOS tick1 (3751h/3750h, warm34/32) is separate timing debt.",
+        "The exact-source ABI repair does not attribute all later equal-time or common-step gameplay differences.",
+        "No repaired actual A.ANT comparison is available until independent R2 saving path succeeds."
+      ]
     },
     {
       "id": "save-record-220",
-      "description": "First native SaveRec220 fd_50F6_0FBA is0 rather than DOS30.",
+      "description": "Historical native save-record-220 initialization defect is repaired:14s projected original/canonical/native flag30 equality.",
       "classification": "PORT_INTRODUCED",
-      "status": "open",
-      "scope": "bounded contract",
+      "status": "fixed",
+      "scope": "Proven startup return ABI and initialized width flags; native new-game-save projected checkpoint14s only. Actual saved-file and later gameplay parity are not closed.",
       "evidence": {
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
           "build/workers/p2-diff/round3/new-game-save/acceptance.json",
           "evidence/canonical/behavior-attribution/observations.json",
-          "evidence/canonical/behavior-attribution/observations.json"
+          "evidence/canonical/native-register-returns/README.md",
+          "evidence/canonical/native-register-returns/census.json",
+          "evidence/canonical/native-register-returns/regression.json"
         ],
-        "commits": [],
+        "commits": [
+          "9add4828e6cbec60372264358e429bdff4486797"
+        ],
         "original_exe": {
           "path": "assets/SIMANT.EXE",
           "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
@@ -1957,7 +2013,11 @@
           "observation": "Both DOS saved files have identical307-record bytes. Native replay input operations match; short-path native SaveGame succeeds but serializes different state/bytes."
         },
         "native": {
-          "observation": "Round3 native skips InitSimVars/SeedSRand/SeedRRand after consuming the nonzero return of an empty void function."
+          "observation": "Round3 native skips InitSimVars/SeedSRand/SeedRRand after consuming the nonzero return of an empty void function.",
+          "after_repair": {
+            "sha256": "24afdde0a5879c1da054dcb4771eaede11ecb3b61e5b64ccae9d217275ef0346",
+            "observation": "GDB confirms defined return0, initialization/seeding and both flag words30; projected records113/220 equal original/canonical at14s."
+          }
         }
       },
       "related_items": [
@@ -2024,30 +2084,79 @@
           "differing_bytes": 1
         }
       ],
-      "next_experiment": "Compare original/canonical fd_50F6_0FBA at14000 ms and original f_00F8_02EF return/InitSimVars entry. If both DOS values are30 and native0, classify PORT_INTRODUCED at the mechanical return boundary.",
+      "next_experiment": "After independent drive/CWD repair, rerun actual short-path A.ANT and later common-step state; investigate tick phase with equal seed state as a separate controlled boundary.",
       "actual_save_observation": {
         "record": 220,
         "name": "fd_50F6_0FBA",
         "bytes": 2,
         "differing_bytes": 1
       },
-      "attributed_observation_scope": "actual new-game short-path SaveGame file; later equal-time projected checkpoints remain independently diagnostic"
+      "attributed_observation_scope": "Historical actual-save mismatch remains evidence of the before-state; repair verified at initialized14s projected checkpoint, not a new saved-file claim.",
+      "root_cause": {
+        "defect_class": "consumed DOS register return absent from native C definition",
+        "origin_function": "f_00F8_02EF",
+        "origin_source": "src/root/m00F8.c",
+        "consumer": "initStuff in src/root/m075B.c",
+        "proof_level": "EXACT_NATURAL: byte-exact original/canonical root:00F8 and root:075B",
+        "mechanism": "Original XOR AX,AX + successful __aFchkstk + RETF yields0. Native void definition had no specified result, so consumed EAX suppressed InitSimVars and both seed calls."
+      },
+      "class_census": {
+        "path": "evidence/canonical/native-register-returns/census.json",
+        "canonical_and_converted_tus": 342,
+        "parse_failures": 0,
+        "canonical_finding_functions": 31,
+        "asm_direct_functions": 20,
+        "asm_indirect_size_helpers": 2,
+        "repaired_functions": [
+          "f_00F8_02EF",
+          "myButton",
+          "o25_3BA4_19AD"
+        ],
+        "previously_unspecified_native_consumed_sites": 9,
+        "repaired_unspecified_native_consumed_sites": 0,
+        "residue_debt": "register-return-residue-domains",
+        "representation_debt": "pointer-long-return-representation"
+      },
+      "fix": {
+        "generator": "portable/canonical_native_abi/register_returns.py",
+        "contracts": "evidence/canonical/native-register-returns/contracts.json",
+        "mechanism": "Reviewed, drift-checked whole-definition explicit native word returns, no caller or RNG edits.",
+        "commit": "9add4828e6cbec60372264358e429bdff4486797"
+      },
+      "regression": {
+        "path": "evidence/canonical/native-register-returns/regression.json",
+        "test": "tests/test_native_register_returns.py",
+        "controls": "Seven permanent front-end/conversion controls plus actual old-build negative:9 violations, repaired build:0.",
+        "gdb": "f_00F8_02EF return0; InitSimVars enters; SeedSRand and SeedRRand enter; initialized flags30.",
+        "differential": "Fresh native versus pinned original/canonical pair: all307 projected SaveRec equal at14s; records113/220 ORIGINAL_EQUAL_ALL, native exit0.",
+        "limits": "Full acceptance remains FAIL: raw SaveRec100 (R6), drive/CWD (R2), missing A.ANT, later projected state and startup tick0 versus DOS tick1."
+      },
+      "remaining_observations": [
+        "Native seeding tick0/DOS tick1 (3751h/3750h, warm34/32) is separate timing debt.",
+        "The exact-source ABI repair does not attribute all later equal-time or common-step gameplay differences.",
+        "No repaired actual A.ANT comparison is available until independent R2 saving path succeeds."
+      ]
     },
     {
       "id": "startup-consumed-void-return",
-      "description": "Native initStuff consumes a return from empty void f_00F8_02EF and skips initialization/seeding.",
+      "description": "Defined native return ABI now preserves original zero-return startup initialization; two register-return siblings are also explicitly projected.",
       "classification": "PORT_INTRODUCED",
-      "status": "open",
-      "scope": "bounded contract",
+      "status": "fixed",
+      "scope": "Proven startup return ABI and initialized width flags; native new-game-save projected checkpoint14s only. Actual saved-file and later gameplay parity are not closed.",
       "evidence": {
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
           "src/root/m00F8.c",
           "src/root/m15F8.c",
-          "evidence/canonical/behavior-attribution/observations.json"
+          "evidence/canonical/behavior-attribution/observations.json",
+          "evidence/canonical/native-register-returns/README.md",
+          "evidence/canonical/native-register-returns/census.json",
+          "evidence/canonical/native-register-returns/regression.json"
         ],
-        "commits": [],
+        "commits": [
+          "9add4828e6cbec60372264358e429bdff4486797"
+        ],
         "original_exe": {
           "path": "assets/SIMANT.EXE",
           "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
@@ -2059,11 +2168,64 @@
           "observation": "Same zero-return machine contract, corroborated by source-DOS InitSimVars watch and fresh original/canonical30 scalar equality."
         },
         "native": {
-          "observation": "Native host return keeps a nonzero lowAX from prior pointer work. RandYard first seed16425 versus DOS31155; RandWorld18690 versusDOS27721."
+          "observation": "Native host return keeps a nonzero lowAX from prior pointer work. RandYard first seed16425 versus DOS31155; RandWorld18690 versusDOS27721.",
+          "after_repair": {
+            "sha256": "24afdde0a5879c1da054dcb4771eaede11ecb3b61e5b64ccae9d217275ef0346",
+            "observation": "GDB confirms defined return0, initialization/seeding and both flag words30; projected records113/220 equal original/canonical at14s."
+          }
         }
       },
-      "related_items": [],
-      "next_experiment": "Observe original/canonical full f_00F8_02EF return and initStuff branch under the same startup. Compare resulting initialized scalar/seed table to native; preserve source branch, repair only the proved return ABI."
+      "related_items": [
+        "save-record-113",
+        "save-record-220",
+        "register-return-residue-domains",
+        "pointer-long-return-representation"
+      ],
+      "next_experiment": "After independent drive/CWD repair, rerun actual short-path A.ANT and later common-step state; investigate tick phase with equal seed state as a separate controlled boundary.",
+      "root_cause": {
+        "defect_class": "consumed DOS register return absent from native C definition",
+        "origin_function": "f_00F8_02EF",
+        "origin_source": "src/root/m00F8.c",
+        "consumer": "initStuff in src/root/m075B.c",
+        "proof_level": "EXACT_NATURAL: byte-exact original/canonical root:00F8 and root:075B",
+        "mechanism": "Original XOR AX,AX + successful __aFchkstk + RETF yields0. Native void definition had no specified result, so consumed EAX suppressed InitSimVars and both seed calls."
+      },
+      "class_census": {
+        "path": "evidence/canonical/native-register-returns/census.json",
+        "canonical_and_converted_tus": 342,
+        "parse_failures": 0,
+        "canonical_finding_functions": 31,
+        "asm_direct_functions": 20,
+        "asm_indirect_size_helpers": 2,
+        "repaired_functions": [
+          "f_00F8_02EF",
+          "myButton",
+          "o25_3BA4_19AD"
+        ],
+        "previously_unspecified_native_consumed_sites": 9,
+        "repaired_unspecified_native_consumed_sites": 0,
+        "residue_debt": "register-return-residue-domains",
+        "representation_debt": "pointer-long-return-representation"
+      },
+      "fix": {
+        "generator": "portable/canonical_native_abi/register_returns.py",
+        "contracts": "evidence/canonical/native-register-returns/contracts.json",
+        "mechanism": "Reviewed, drift-checked whole-definition explicit native word returns, no caller or RNG edits.",
+        "commit": "9add4828e6cbec60372264358e429bdff4486797"
+      },
+      "regression": {
+        "path": "evidence/canonical/native-register-returns/regression.json",
+        "test": "tests/test_native_register_returns.py",
+        "controls": "Seven permanent front-end/conversion controls plus actual old-build negative:9 violations, repaired build:0.",
+        "gdb": "f_00F8_02EF return0; InitSimVars enters; SeedSRand and SeedRRand enter; initialized flags30.",
+        "differential": "Fresh native versus pinned original/canonical pair: all307 projected SaveRec equal at14s; records113/220 ORIGINAL_EQUAL_ALL, native exit0.",
+        "limits": "Full acceptance remains FAIL: raw SaveRec100 (R6), drive/CWD (R2), missing A.ANT, later projected state and startup tick0 versus DOS tick1."
+      },
+      "remaining_observations": [
+        "Native seeding tick0/DOS tick1 (3751h/3750h, warm34/32) is separate timing debt.",
+        "The exact-source ABI repair does not attribute all later equal-time or common-step gameplay differences.",
+        "No repaired actual A.ANT comparison is available until independent R2 saving path succeeds."
+      ]
     },
     {
       "id": "native-deep-cwd-save-load",
@@ -17759,6 +17921,56 @@
         }
       },
       "related_items": []
+    },
+    {
+      "id": "register-return-residue-domains",
+      "description": "DOS heap failure/reentrant Punt and already-active EMS paths expose consumed register residue outside the proved native supported domain.",
+      "classification": "UNATTRIBUTED",
+      "status": "open",
+      "scope": "f_171C_0A5C/f_171C_0EEA failure returns and f_195A_0260 already-active return only; no supported-domain observer witness.",
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-register-returns/census.json",
+          "evidence/canonical/native-register-returns/README.md",
+          "src/root/m1C62.c",
+          "src/root/m195A.asm"
+        ],
+        "commits": [
+          "9add4828e6cbec60372264358e429bdff4486797"
+        ],
+        "proven_scope": "Static original register path/type mismatch only; runtime observer effect remains unproved."
+      },
+      "related_items": [
+        "startup-consumed-void-return",
+        "Punt-failure-continuation-effects"
+      ],
+      "supported_domain": "Canonical DOS heap TU is not compiled natively; supported no-EMS mode keeps ems_active0 and receives defined inactive/no-device0. No failure/reentry result is guessed or discarded by annotation.",
+      "decisive_experiment": "Capture matched original/canonical return AX/DX:AX and first consumer branch under failed allocation with returning Punt guard1 and active EMS; then reproduce the same state and observer at native platform boundaries. First prove an ordinary supported prefix reaches either path."
+    },
+    {
+      "id": "pointer-long-return-representation",
+      "description": "S13 stores MakeBalloon/f_24AB_0002 Handle returns through DOS long declarations; native pointer truncation effects are not proved.",
+      "classification": "UNATTRIBUTED",
+      "status": "open",
+      "scope": "Two defined DX:AX pointer returns consumed through long/int32 storage, distinct from unspecified return values.",
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-register-returns/census.json",
+          "src/S13/m384C.c",
+          "src/root/m1629.c",
+          "src/root/m24AB.c"
+        ],
+        "commits": [
+          "9add4828e6cbec60372264358e429bdff4486797"
+        ],
+        "proven_scope": "Static original register path/type mismatch only; runtime observer effect remains unproved."
+      },
+      "related_items": [
+        "startup-consumed-void-return"
+      ],
+      "decisive_experiment": "Locate every S13 long handle store/use for MakeBalloon and f_24AB_0002 with the front-end call census; run matching original/canonical/native balloon activation and cleanup with pointer/storage watches, including native allocation above4GiB. Compare the first dereference or observer before choosing mechanical pointer-handle lowering."
     }
   ]
 }

@@ -13,9 +13,9 @@ and exploratory captures remain ignored. Baseline is `671f8eb`.
 | `RECONSTRUCTION_INTRODUCED` | 1 |
 | `PORT_INTRODUCED` | 92 |
 | `PORT_DEVIATION_DOCUMENTED` | 6 |
-| `UNATTRIBUTED` | 284 |
+| `UNATTRIBUTED` | 286 |
 
-397 items: known mechanisms, all nine `preview_limitations`, every unique
+399 items: known mechanisms, all nine `preview_limitations`, every unique
 differing named view and projected SaveRec at the first current round-3 checkpoint
 in each scenario. Multiple scenarios share a row for the same view/record; the
 `observations` fields retain each boundary separately. This is an inventory of
@@ -50,9 +50,17 @@ or native bindings remain explicit. The latter raw DOS differences include
 code-address words, heap totals and stack/register residue. Historical ownership
 of a complete current-sized raw view is not inferred from an original anchor.
 
-SaveRec 113/220 are conclusively port differences: both DOS values are 30, native
-is 0. Original f_00F8_02EF clears AX and its successful __aFchkstk path preserves
-AX. The native consumed-void-return ABI mismatch skips initialization/seeding.
+Before the R1 repair, SaveRec 113/220 were conclusively port differences:
+both DOS values were 30, native was 0. Original f_00F8_02EF clears AX and its successful __aFchkstk path preserves
+AX. The native consumed-void-return ABI mismatch skipped initialization/seeding.
+
+R1 is now repaired by reviewed native register-return lowering. GDB confirms
+InitSimVars and both seed calls; all 307 projected records, including 113/220,
+match original/canonical at 14s. Actual saving and later gameplay remain open.
+The class census and scoped regression are in [native-register-returns](../native-register-returns/README.md).
+Heap/EMS residue and two pointer-through-long representation risks remain explicit
+unattributed rows; native tick0 versus DOS tick1 is separate timing debt.
+
 A successful shallow-path native SaveGame independently emits 66 differing
 records/8367 bytes against the identical DOS files. Record 100 confirms the
 contiguous native serialization defect despite equal initialized logical flags.
@@ -60,8 +68,11 @@ The original/canonical BIOS 8x14 banks are identical; native differs in 1806/358
 bytes. Text sidecar and cursor bookkeeping omissions are separately attributed.
 No game algorithm, canonical inventory/manifest or original checkpoint changed.
 
-Equal virtual milliseconds do not prove equal DOS CPU phase. Original step-ordinal
-captures are absent; common-step and later gameplay causes remain unattributed.
+Equal virtual milliseconds do not prove equal DOS CPU phase. The R1 rerun uses
+pinned canonical DOS step-ordinal
+captures: entry1 fails input-prefix alignment; entry2 matches prefix10/cycle1
+and differs. Original step-ordinal parity was not captured; later gameplay
+causes remain independently unattributed.
 The three-way tool reports exact byte relations; the ledger scopes any promoted
 behavior attribution. Same-executable repeat observations are required before
 asserting DOS nondeterminism. Raw snapshot bytes and partial-exclusion details
