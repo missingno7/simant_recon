@@ -1,0 +1,19 @@
+{
+  "id": "quick-game",
+  "description": "Dismiss startup, choose Quick Game, let the black and red colonies run with periodic Enter to dismiss event dialogs, Save As A.ANT at ~2 min and B.ANT at ~5 min via File > Save As (mouse). Each step was checked on canonical DOS video. Checkpoints compare full simulation state; the simulation counter must advance between checkpoints.",
+  "script": "dos/scenarios/quick-game.scr",
+  "host_seconds": 7200,
+  "saves": [
+    "A.ANT",
+    "B.ANT"
+  ],
+  "checkpoints": [
+    60000,
+    115000,
+    180000,
+    240000,
+    295000,
+    355000
+  ],
+  "sound": true
+}

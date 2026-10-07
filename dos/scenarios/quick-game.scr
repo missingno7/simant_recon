@@ -1,0 +1,52 @@
+# Startup dialogs (registration, intro), then Select-a-Game > Quick Game (mouse).
+5000 key enter
+7000 key enter
+9000 key enter
+12000 mouse_move -1280 -960
+12100 mouse_move 740 330
+12300 mouse_button 0 down
+12350 mouse_button 0 up
+# Dismiss the Quick Game intro and any event dialog periodically.
+16000 key enter
+20000 key enter
+30000 key enter
+45000 key enter
+60000 key enter
+75000 key enter
+90000 key enter
+105000 key enter
+# Save As A.ANT via File > Save As (mouse), type name, confirm.
+120000 mouse_move -1280 -960
+120100 mouse_move 48 16
+120300 mouse_button 0 down
+120350 mouse_button 0 up
+120800 mouse_move 36 184
+121000 mouse_button 0 down
+121050 mouse_button 0 up
+123000 key a
+125000 key enter
+127000 key enter
+130000 key enter
+# Keep simulating; dismiss event dialogs.
+160000 key enter
+180000 key enter
+200000 key enter
+220000 key enter
+240000 key enter
+260000 key enter
+280000 key enter
+# Save As B.ANT the same way.
+300000 mouse_move -1280 -960
+300100 mouse_move 48 16
+300300 mouse_button 0 down
+300350 mouse_button 0 up
+300800 mouse_move 36 184
+301000 mouse_button 0 down
+301050 mouse_button 0 up
+303000 key b
+305000 key enter
+307000 key enter
+310000 key enter
+320000 key enter
+340000 key enter
+360000 exit

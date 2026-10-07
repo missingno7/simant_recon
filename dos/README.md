@@ -204,7 +204,10 @@ compare full simulation state at any time without driving the save UI.
 Speed > Fast and Ultra have no tick delay: the main loop runs as many steps as
 the CPU allows, so their step counts depend on instruction timing and are not
 comparable by emulated time between independently linked executables. Slow and
-Normal are tick-throttled. Current results: `new-game-save`,
-`sustained-full-game` (saves A/B plus checkpoints to 645 s) and
-`load-original-resume` (original-written save, resumed play to 88 s) are
-identical between the original and the canonical-only diagnostic link.
+Normal are tick-throttled. Current results: `new-game-save` and `quick-game`
+(Quick Game with periodic dialog dismissal, saves A/B and six checkpoints to
+355 s during which the simulation counter advances 292 -> 1989 and both colonies
+grow) are identical between the original and the canonical DOS build, including
+Sound Blaster/OPL port streams. Scripts must dismiss in-game event dialogs (for
+example the lawn-mower death message): an unanswered modal dialog stops the
+simulation while the main loop waits, so a long idle script measures nothing.
