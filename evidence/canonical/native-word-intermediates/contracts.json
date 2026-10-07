@@ -1,0 +1,201 @@
+{
+  "schema": "simant-instruction-word-intermediates-v1",
+  "scope": "Five reviewed routines only; no whole-program signed-wrap claim or divisor trap equivalence.",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "method": "tools/context.py, original 16-bit instructions; byte 99 is CWD (Capstone prints CDQ) and byte 98 is CBW.",
+  "routines": [
+    {
+      "id": "routine-word-CalcScore",
+      "function": "CalcScore",
+      "source": "src/S14/m384C.c",
+      "source_sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "original_address": "S14:384C:0000",
+      "summary": "The word product is narrowed before signed word division; long-cast score products keep both DX:AX words.",
+      "sites": [
+        {
+          "expression": "fd_50F6_09FA * 100",
+          "count": 1,
+          "instructions": [
+            "S14:384C:017D MOV AX,100",
+            "S14:384C:0180 IMUL WORD PTR [BP-14h] (DX:AX)",
+            "S14:384C:0183 CWD (replaces high product with sign of low AX)",
+            "S14:384C:0184 IDIV BX"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "routine-word-GetDis",
+      "function": "GetDis",
+      "source": "src/root/m0BE8.c",
+      "source_sha256": "3649d25a2024ce0474db430ccb1db8355270d9def303a01e009081b5751764e1",
+      "original_address": "root:0BE8:0B83",
+      "summary": "Subtract each coordinate in a word, sign-extend the low word, then multiply as signed long. CSE reuses the same word difference for both source occurrences.",
+      "sites": [
+        {
+          "expression": "y2 - y1",
+          "count": 2,
+          "instructions": [
+            "root:0BE8:0B8F MOV AX,[BP+0Ch]",
+            "root:0BE8:0B92 SUB AX,[BP+8]",
+            "root:0BE8:0B95 CWD",
+            "root:0BE8:0B96-0B9A push signed DX:AX twice; __aFlmul"
+          ]
+        },
+        {
+          "expression": "x2 - x1",
+          "count": 2,
+          "instructions": [
+            "root:0BE8:0BA1 MOV AX,[BP+0Ah]",
+            "root:0BE8:0BA4 SUB AX,[BP+6]",
+            "root:0BE8:0BA9 CWD",
+            "root:0BE8:0BAA-0BB2 push signed DX:AX twice; __aFlmul"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "routine-word-f_0250_0F2C",
+      "function": "f_0250_0F2C",
+      "source": "src/root/m0250.c",
+      "source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+      "original_address": "root:0250:0F2C",
+      "summary": "Signed comparisons consume the low word sums; clamped stores already narrow through int16 storage.",
+      "sites": [
+        {
+          "expression": "fd_50F6_0508.x + fd_50F6_10E0",
+          "count": 1,
+          "instructions": [
+            "root:0250:0F6F MOV AX,ES:[10E0h]",
+            "root:0250:0F79 ADD AX,ES:[SI]",
+            "root:0250:0F7C CMP AX,BX",
+            "root:0250:0F7E JLE 0F86h"
+          ]
+        },
+        {
+          "expression": "fd_50F6_0508.y + fd_50F6_10DE",
+          "count": 1,
+          "instructions": [
+            "root:0250:0FA4 MOV AX,ES:[10DEh]",
+            "root:0250:0FAE ADD AX,ES:[BX]",
+            "root:0250:0FB1 CMP AX,40h",
+            "root:0250:0FB4 JLE 0FBFh"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "routine-word-BalloonIsVisible",
+      "function": "BalloonIsVisible",
+      "source": "src/root/m0250.c",
+      "source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+      "original_address": "root:0250:4225",
+      "summary": "Viewport sums and y-3 are signed low words before comparisons. The published failing witness is an X-sum wrap, not a y-3 wrap.",
+      "sites": [
+        {
+          "expression": "fd_50F6_0508.x + fd_50F6_10E0",
+          "count": 1,
+          "instructions": [
+            "root:0250:4252 ADD AX,ES:[10E0h]",
+            "root:0250:4257 CMP AX,[BP+8]",
+            "root:0250:425A JLE 4284h"
+          ]
+        },
+        {
+          "expression": "y - 3",
+          "count": 1,
+          "instructions": [
+            "root:0250:4267 MOV CX,[BP+0Ah]",
+            "root:0250:426A SUB CX,3",
+            "root:0250:426D CMP AX,CX",
+            "root:0250:426F JG 4284h"
+          ]
+        },
+        {
+          "expression": "fd_50F6_0508.y + fd_50F6_10DE",
+          "count": 1,
+          "instructions": [
+            "root:0250:4275 ADD AX,ES:[10DEh]",
+            "root:0250:427A CMP AX,[BP+0Ah]",
+            "root:0250:427D JLE 4284h"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "routine-word-BoundPointToTri",
+      "function": "BoundPointToTri",
+      "source": "src/root/m0798.c",
+      "source_sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "original_address": "root:0798:0691",
+      "summary": "Midpoint sums and interpolation operands are words; IMUL keeps the full long product, long division follows, then ADD AX,left / ADD DI,mid narrows the stored edge. The failing witness first diverges at the midpoint sum.",
+      "sites": [
+        {
+          "expression": "right + left",
+          "count": 1,
+          "instructions": [
+            "root:0798:06BF MOV AX,CX",
+            "root:0798:06C1 ADD AX,DX",
+            "root:0798:06C3 CWD",
+            "root:0798:06C4 SUB AX,DX",
+            "root:0798:06C6 SAR AX,1 (signed word /2 toward zero)"
+          ]
+        },
+        {
+          "expression": "bottom - top",
+          "count": 1,
+          "instructions": [
+            "root:0798:06EA MOV AX,[BP-8]",
+            "root:0798:06ED SUB AX,[BP-4]",
+            "root:0798:06F0 CWD; push signed long divisor"
+          ]
+        },
+        {
+          "expression": "y - bottom",
+          "count": 1,
+          "instructions": [
+            "root:0798:06F3 MOV AX,SI",
+            "root:0798:06F5 SUB AX,[BP-8]",
+            "root:0798:06FE IMUL CX (full signed DX:AX product)"
+          ]
+        },
+        {
+          "expression": "left - mid",
+          "count": 1,
+          "instructions": [
+            "root:0798:06F8 MOV CX,[BP-6]",
+            "root:0798:06FB SUB CX,[BP-0Ch]",
+            "root:0798:06FE IMUL CX; __aFldiv"
+          ]
+        },
+        {
+          "expression": "top - bottom",
+          "count": 1,
+          "instructions": [
+            "root:0798:0713 MOV AX,[BP-4]",
+            "root:0798:0716 SUB AX,[BP-8]",
+            "root:0798:0719 CWD; push signed long divisor"
+          ]
+        },
+        {
+          "expression": "y - top",
+          "count": 1,
+          "instructions": [
+            "root:0798:071C MOV AX,SI",
+            "root:0798:071E SUB AX,[BP-4]",
+            "root:0798:0727 IMUL CX (full signed DX:AX product)"
+          ]
+        },
+        {
+          "expression": "mid - right",
+          "count": 1,
+          "instructions": [
+            "root:0798:0721 MOV CX,[BP-0Ch]",
+            "root:0798:0724 SUB CX,[BP-10h]",
+            "root:0798:0727 IMUL CX; __aFldiv"
+          ]
+        }
+      ]
+    }
+  ]
+}

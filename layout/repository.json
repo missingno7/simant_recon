@@ -382,7 +382,7 @@
     {
       "module": "integer_frontend",
       "classification": "GENERIC_LOWERING",
-      "reason": "GCC macro expansion and a real C frontend resolve declarations, fields, indexes, calls and MSC/native promotions. Defined unsigned operations and bounded signed expressions are mechanically narrowed before consumers; unproved domains remain explicit.",
+      "reason": "GCC macro expansion and a real C frontend resolve declarations, fields, indexes, calls and MSC/native promotions. Defined unsigned operations and bounded signed expressions are mechanically narrowed before consumers; unproved domains remain explicit. Original-instruction, source-pinned word operations may also narrow signed intermediates; exact expression/count/type guards reject stale contracts.",
       "blocker_ids": [
         "native-integer-expressions"
       ],
@@ -804,13 +804,14 @@
       "class": "GENERIC_LOWERING",
       "paths": [
         "portable/canonical_native_abi/integer_frontend.py",
-        "portable/canonical_native_abi/integer_fake_libc/"
+        "portable/canonical_native_abi/integer_fake_libc/",
+        "evidence/canonical/native-word-intermediates/contracts.json"
       ],
       "builder_site": "portable/build.py: final C lowering after source-derived ASM headers",
       "consumers": [
         "every canonical C TU"
       ],
-      "reason": "Types every canonical expression in the MSC16 and MinGW models after preprocessing; applies only proved integer conversions and records unresolved nodes/domains per TU.",
+      "reason": "Types every canonical expression in the MSC16 and MinGW models after preprocessing; applies only proved integer conversions and records unresolved nodes/domains per TU. Five source-pinned routines additionally consume reviewed original word-register operation evidence.",
       "blocker": "native-integer-expressions remains open for compiler-dependent signed overflow, invalid shifts, division traps and pointer/layout effects.",
       "deletion_condition": "Retain one final declaration-driven expression pass. Extend only with positive/negative controls; no old lexical word-expression mode."
     },

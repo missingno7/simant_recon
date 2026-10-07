@@ -86,7 +86,8 @@ def main():
             if sha(provenance.parent/name)!=expected:
                 raise ValueError('third-party source differs from provenance: '+name)
     def current_inputs():
-        paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',PROJECT/'portable/semantic-spans.json',Path(__file__),register_returns.CONTRACT_PATH}
+        paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',PROJECT/'portable/semantic-spans.json',Path(__file__),register_returns.CONTRACT_PATH,
+               integer_frontend.WORD_CONTRACT_PATH}
         paths.update(ROOT/u['source'] for u in canonical['modules'])
         paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
         paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
@@ -296,7 +297,7 @@ def main():
         dest=Path(row['generated'])
         try:
             text,row['integer_expressions']=integer_frontend.convert(dest.read_text(encoding='latin1'),dest.as_posix(),CC,
-                [OUT/'include',PROJECT,OUT,PROJECT/'portable/whole_program'])
+                [OUT/'include',PROJECT,OUT,PROJECT/'portable/whole_program'],canonical_source=row['source'])
             dest.write_text(text,encoding='latin1')
         except Exception as exc:
             errors.append({'source':row['source'],'stage':'integer frontend','error':str(exc)})

@@ -3,7 +3,8 @@
 GCC expands macros; pycparser parses the resulting C. Only canonical-source
 top-level nodes are regenerated; included native declarations remain includes.
 Unknown types and machine-dependent domains are explicitly reported, never
-silently classified equal. This module contains no game/module selectors.
+silently classified equal. Instruction-backed word operations are supplied as
+data by the builder; source spelling alone never implies signed wrapping.
 """
 from __future__ import annotations
 
@@ -111,8 +112,22 @@ def narrow(value, t):
     return value if t.unsigned or value < (1 << (t.bits-1)) else value - (1 << t.bits)
 
 
+ROOT = Path(__file__).resolve().parents[2]
+WORD_CONTRACT_PATH = ROOT / 'evidence/canonical/native-word-intermediates/contracts.json'
+
+
+def instruction_sites(source):
+    """Only reviewed, source-pinned register operations can override ISO debt."""
+    if source is None:return []
+    contracts=json.loads(WORD_CONTRACT_PATH.read_text())['routines']
+    selected=[r for r in contracts if r['source']==source]
+    if selected and any(hashlib.sha256((ROOT/source).read_bytes()).hexdigest()!=r['source_sha256'] for r in selected):
+        raise ValueError('instruction-backed word source changed: '+source)
+    return [dict(site,function=r['function'],contract=r['id']) for r in selected for site in r['sites']]
+
+
 class Analyzer:
-    def __init__(self, filename):
+    def __init__(self, filename, word_sites=()):
         self.filename = str(filename).replace('\\','/')
         self.scopes = [{}]
         self.ranges = [{}]
@@ -128,6 +143,21 @@ class Analyzer:
         self.record_nodes = {}
         self.unresolved = set()
         self.function = None
+        self.word_sites = list(word_sites)
+        self.word_matches = Counter()
+
+    def word_site(self,n):
+        if not self.word_sites or not self.active(n) or not isinstance(n,C.BinaryOp):return None
+        expression=c_generator.CGenerator().visit(n)
+        matches=[s for s in self.word_sites if s['function']==self.function and s['expression']==expression]
+        if len(matches)>1:raise ValueError('ambiguous instruction-backed word expression: '+expression)
+        return matches[0] if matches else None
+
+    def verify_word_sites(self):
+        for site in self.word_sites:
+            key=(site['function'],site['expression'])
+            if self.word_matches[key]!=site.get('count',1):
+                raise ValueError('instruction-backed word expression drift: '+str(key))
 
     def active(self, node):
         return node.coord is not None and node.coord.file.replace('\\','/') == self.filename
@@ -308,6 +338,16 @@ class Analyzer:
         return UNKNOWN
 
     def remember(self,n,d,nat,bound=None,categories=(),action=None,reason=None,equal=False):
+        site=self.word_site(n)
+        if site:
+            if d!=S16 or n.op not in {'+','-','*'} or any(id(child) in self.unresolved for _,child in n.children()):
+                raise ValueError('instruction-backed word operand/type drift: '+site['expression'])
+            # Compute once in a wider host type, then preserve the signed low
+            # word consumed by the original instruction sequence.
+            categories=[c for c in categories if c!='signed-overflow-domain']+['instruction-backed-word']
+            action=('binary',S16);bound=S16.bounds();equal=False
+            reason='Original word-register operation; narrow its signed low word before the consumer.'
+            self.word_matches[(self.function,site['expression'])]+=1
         self.info[id(n)] = (d,nat,bound)
         categories=list(categories)
         open_domain=any(c.endswith('-domain') and c!='division-zero-domain' for c in categories)
@@ -341,6 +381,9 @@ class Analyzer:
             row['status']='PROVEN_EQUAL'
             row['reason']=reason or 'Fixed-width leaf value or operation has identical value after usual conversions.'
         self.records.append(row)
+        if site:
+            row['instruction_evidence']=site['instructions']
+            row['instruction_contract']=site['contract']
         self.record_nodes[id(n)]=row
         if 'division-zero-domain' in categories:
             row['excluded_domain']='Division by zero is undefined in both models; this operation is lowered only for nonzero divisors. Trap identity is unclaimed.'
@@ -525,7 +568,7 @@ class Analyzer:
                 if bb and bb[0]==bb[1] and bb[0]>1:
                     coefficients=self.polynomial_coefficients(n.left)
                     factor=math.gcd(bb[0],*coefficients)
-                    has_wrap=any(r.get('status')=='LOWERED' or 'signed-overflow-domain' in r['categories']
+                    has_wrap=any((r.get('status')=='LOWERED' or 'signed-overflow-domain' in r['categories']) and not r.get('instruction_evidence')
                                  for node in self.nodes(n.left) if (r:=self.record_nodes.get(id(node))) and isinstance(node,C.BinaryOp) and node.op in {'+','-','*'})
                     if factor>1 and has_wrap:
                         cats.append('msc-constant-algebra-domain')
@@ -736,10 +779,11 @@ def preprocess(source, filename, cc, include_dirs):
     return run.stdout,command
 
 
-def convert(source, filename, cc, include_dirs, lower=True):
+def convert(source, filename, cc, include_dirs, lower=True, canonical_source=None):
     preprocessed,command=preprocess(source,filename,cc,include_dirs)
     tree=c_parser.CParser().parse(preprocessed,filename=str(filename))
-    analysis=Analyzer(filename);analysis.walk(tree)
+    analysis=Analyzer(filename,instruction_sites(canonical_source));analysis.walk(tree)
+    analysis.verify_word_sites()
     analysis.reserved_identifiers=set(re.findall(r'\b[A-Za-z_]\w*\b',source+preprocessed))
     includes='\n'.join(re.findall(r'^\s*#\s*include[^\n]*',source,re.M))+'\n'
     # Macros have already expanded in the AST. Real headers retain their native

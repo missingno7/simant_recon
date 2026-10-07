@@ -24,7 +24,7 @@
     "UNATTRIBUTED"
   ],
   "counts": {
-    "PORT_INTRODUCED": 93,
+    "PORT_INTRODUCED": 98,
     "ORIGINAL": 14,
     "UNATTRIBUTED": 286,
     "RECONSTRUCTION_INTRODUCED": 1,
@@ -18087,6 +18087,217 @@
         "native-integer-expressions"
       ],
       "next_experiment": "Reconcile pointer-valued defining owners with every native declaration/writer class; include source-grounded type/domain evidence and a native address-above 4 GiB negative control. Rerun mouse-driven VGA/Save and actual DOS/native replay without startup debugger masking."
+    },
+    {
+      "id": "routine-word-CalcScore",
+      "description": "CalcScore: native word intermediates now preserve the original register operations.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Five fixed original/canonical DOS witnesses plus instruction-backed projection sites; no whole-program or ordinary-gameplay reachability claim.",
+      "origin_function": "CalcScore",
+      "origin_module": "S14:384C",
+      "proof_level": "historical exact natural C bytes; layout-inferred declarations; GROUPED relocation order; live canonical DOS agreement",
+      "root_cause": {
+        "mechanism": "The word product is narrowed before signed word division; long-cast score products keep both DX:AX words.",
+        "level": "PROVEN original instruction sequence",
+        "class": "signed-word-intermediate"
+      },
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-word-intermediates/contracts.json",
+          "evidence/canonical/native-word-intermediates/README.md",
+          "portable/tests/word_intermediates/witnesses.json",
+          "portable/tests/word_intermediates/run.py"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "Live complete routine execution: CalcScore/8"
+        },
+        "canonical_dos": {
+          "sha256": "cf03656a6f761e2b1bb1b41240a88d4a2bf58c78885bedc9c178cffea8d5edda",
+          "observation": "Fresh source-only RTLink610 SOURCE.EXE executes the same case; all 8 failing native witnesses match original DOS."
+        },
+        "native": {
+          "observation": "Rebuilt production objects pass the fixed DOS-expected witness. Removing CalcScore word-product narrowing is detected by the negative control."
+        },
+        "reproducer": {
+          "seed": 334359,
+          "random_count": 12,
+          "first_case": "CalcScore/8"
+        }
+      },
+      "regression": "portable/tests/word_intermediates/run.py"
+    },
+    {
+      "id": "routine-word-GetDis",
+      "description": "GetDis: native word intermediates now preserve the original register operations.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Five fixed original/canonical DOS witnesses plus instruction-backed projection sites; no whole-program or ordinary-gameplay reachability claim.",
+      "origin_function": "GetDis",
+      "origin_module": "root:0BE8",
+      "proof_level": "historical exact natural C bytes; GROUPED relocation order; live canonical DOS agreement",
+      "root_cause": {
+        "mechanism": "Subtract each coordinate in a word, sign-extend the low word, then multiply as signed long. CSE reuses the same word difference for both source occurrences.",
+        "level": "PROVEN original instruction sequence",
+        "class": "signed-word-intermediate"
+      },
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-word-intermediates/contracts.json",
+          "evidence/canonical/native-word-intermediates/README.md",
+          "portable/tests/word_intermediates/witnesses.json",
+          "portable/tests/word_intermediates/run.py"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "Live complete routine execution: GetDis/8"
+        },
+        "canonical_dos": {
+          "sha256": "cf03656a6f761e2b1bb1b41240a88d4a2bf58c78885bedc9c178cffea8d5edda",
+          "observation": "Fresh source-only RTLink610 SOURCE.EXE executes the same case; all 6 failing native witnesses match original DOS."
+        },
+        "native": {
+          "observation": "Rebuilt production objects pass the fixed DOS-expected witness. Removing CalcScore word-product narrowing is detected by the negative control."
+        },
+        "reproducer": {
+          "seed": 334359,
+          "random_count": 12,
+          "first_case": "GetDis/8"
+        }
+      },
+      "regression": "portable/tests/word_intermediates/run.py"
+    },
+    {
+      "id": "routine-word-f_0250_0F2C",
+      "description": "f_0250_0F2C: native word intermediates now preserve the original register operations.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Five fixed original/canonical DOS witnesses plus instruction-backed projection sites; no whole-program or ordinary-gameplay reachability claim.",
+      "origin_function": "f_0250_0F2C",
+      "origin_module": "root:0250",
+      "proof_level": "canonical_module_not_current_byte_exact; historical function claim; live canonical DOS agreement",
+      "root_cause": {
+        "mechanism": "Signed comparisons consume the low word sums; clamped stores already narrow through int16 storage.",
+        "level": "PROVEN original instruction sequence",
+        "class": "signed-word-intermediate"
+      },
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-word-intermediates/contracts.json",
+          "evidence/canonical/native-word-intermediates/README.md",
+          "portable/tests/word_intermediates/witnesses.json",
+          "portable/tests/word_intermediates/run.py"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "Live complete routine execution: f_0250_0F2C/0"
+        },
+        "canonical_dos": {
+          "sha256": "cf03656a6f761e2b1bb1b41240a88d4a2bf58c78885bedc9c178cffea8d5edda",
+          "observation": "Fresh source-only RTLink610 SOURCE.EXE executes the same case; all 8 failing native witnesses match original DOS."
+        },
+        "native": {
+          "observation": "Rebuilt production objects pass the fixed DOS-expected witness. Removing CalcScore word-product narrowing is detected by the negative control."
+        },
+        "reproducer": {
+          "seed": 334359,
+          "random_count": 12,
+          "first_case": "f_0250_0F2C/0"
+        }
+      },
+      "regression": "portable/tests/word_intermediates/run.py"
+    },
+    {
+      "id": "routine-word-BalloonIsVisible",
+      "description": "BalloonIsVisible: native word intermediates now preserve the original register operations.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Five fixed original/canonical DOS witnesses plus instruction-backed projection sites; no whole-program or ordinary-gameplay reachability claim.",
+      "origin_function": "BalloonIsVisible",
+      "origin_module": "root:0250",
+      "proof_level": "canonical_module_not_current_byte_exact; historical function claim; live canonical DOS agreement",
+      "root_cause": {
+        "mechanism": "Viewport sums and y-3 are signed low words before comparisons. The published failing witness is an X-sum wrap, not a y-3 wrap.",
+        "level": "PROVEN original instruction sequence",
+        "class": "signed-word-intermediate"
+      },
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-word-intermediates/contracts.json",
+          "evidence/canonical/native-word-intermediates/README.md",
+          "portable/tests/word_intermediates/witnesses.json",
+          "portable/tests/word_intermediates/run.py"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "Live complete routine execution: BalloonIsVisible/9"
+        },
+        "canonical_dos": {
+          "sha256": "cf03656a6f761e2b1bb1b41240a88d4a2bf58c78885bedc9c178cffea8d5edda",
+          "observation": "Fresh source-only RTLink610 SOURCE.EXE executes the same case; all 1 failing native witnesses match original DOS."
+        },
+        "native": {
+          "observation": "Rebuilt production objects pass the fixed DOS-expected witness. Removing CalcScore word-product narrowing is detected by the negative control. The additional directed y-3 underflow subcase also returns1, matching both DOS executables."
+        },
+        "reproducer": {
+          "seed": 334359,
+          "random_count": 12,
+          "first_case": "BalloonIsVisible/9",
+          "additional_case": "BalloonIsVisible/word-subtraction: plane/x=0, y=-32768, viewport (0,0), width2/height1; original and canonical DOS return1."
+        }
+      },
+      "regression": "portable/tests/word_intermediates/run.py"
+    },
+    {
+      "id": "routine-word-BoundPointToTri",
+      "description": "BoundPointToTri: native word intermediates now preserve the original register operations.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "Five fixed original/canonical DOS witnesses plus instruction-backed projection sites; no whole-program or ordinary-gameplay reachability claim.",
+      "origin_function": "BoundPointToTri",
+      "origin_module": "root:0798",
+      "proof_level": "historical_byte_exact_C; live canonical DOS agreement",
+      "root_cause": {
+        "mechanism": "Midpoint sums and interpolation operands are words; IMUL keeps the full long product, long division follows, then ADD AX,left / ADD DI,mid narrows the stored edge. The failing witness first diverges at the midpoint sum.",
+        "level": "PROVEN original instruction sequence",
+        "class": "signed-word-intermediate"
+      },
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "evidence/canonical/native-word-intermediates/contracts.json",
+          "evidence/canonical/native-word-intermediates/README.md",
+          "portable/tests/word_intermediates/witnesses.json",
+          "portable/tests/word_intermediates/run.py"
+        ],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "Live complete routine execution: BoundPointToTri/16"
+        },
+        "canonical_dos": {
+          "sha256": "cf03656a6f761e2b1bb1b41240a88d4a2bf58c78885bedc9c178cffea8d5edda",
+          "observation": "Fresh source-only RTLink610 SOURCE.EXE executes the same case; all 1 failing native witnesses match original DOS."
+        },
+        "native": {
+          "observation": "Rebuilt production objects pass the fixed DOS-expected witness. Removing CalcScore word-product narrowing is detected by the negative control."
+        },
+        "reproducer": {
+          "seed": 334359,
+          "random_count": 12,
+          "first_case": "BoundPointToTri/16"
+        }
+      },
+      "regression": "portable/tests/word_intermediates/run.py"
     }
   ]
 }

@@ -75,7 +75,9 @@ and missing-span, missing-owner, wrong-size and split-storage negative controls.
 The final expression pass uses GCC preprocessing and pycparser to resolve
 declarations, fields, calls and expanded macros under MSC16/native integer rules.
 Unsigned operations and proved bounded signed expressions retain word semantics
-before consumers. Signed overflow, invalid shifts and pointer/layout effects remain
+before consumers. Five reviewed routines additionally preserve instruction-proven
+signed word intermediates through a source-pinned [site inventory](../evidence/canonical/native-word-intermediates/README.md).
+Signed overflow elsewhere, invalid shifts and pointer/layout effects remain
 explicit debt; per-TU receipts include every expression and its mechanical reason.
 Install the parser once with `python -m pip install --target build/deps/pycparser -r
 portable/tests/integer_semantics/requirements.txt`. The fake libc headers are parse-only.

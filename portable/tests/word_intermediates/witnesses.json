@@ -1,0 +1,406 @@
+{
+  "schema": "simant-word-witnesses-v1",
+  "provenance": "p2-verify seed 0x51A17, random_count 12; all five witnesses original/canonical DOS PASS. Values are input/output owner state, never executable bytes. Additional BalloonIsVisible/word-subtraction is a directed y=-32768 fixture independently confirmed against both DOS executables.",
+  "cases": [
+    {
+      "name": "CalcScore/8",
+      "routine": "CalcScore",
+      "args": [
+        {
+          "pointer": {
+            "owner": "fd_50F6_0EB6",
+            "size": 64,
+            "offset": 0
+          }
+        }
+      ],
+      "arg_types": [
+        "ptr"
+      ],
+      "return_kind": "s32",
+      "return_value": 17401,
+      "memory": [
+        {
+          "owner": "fd_50F6_0EB6",
+          "size": 64,
+          "offset": 0,
+          "hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+        },
+        {
+          "owner": "fd_50F6_04F4",
+          "size": 2,
+          "offset": 0,
+          "hex": "0800"
+        },
+        {
+          "owner": "fd_3D57_0828",
+          "size": 2,
+          "offset": 0,
+          "hex": "3f00"
+        },
+        {
+          "owner": "MeHealth",
+          "size": 2,
+          "offset": 0,
+          "hex": "6592"
+        },
+        {
+          "owner": "fd_50F6_09FA",
+          "size": 2,
+          "offset": 0,
+          "hex": "7b9a"
+        },
+        {
+          "owner": "fd_50F6_0A00",
+          "size": 2,
+          "offset": 0,
+          "hex": "0f87"
+        },
+        {
+          "owner": "fd_50F6_0A90",
+          "size": 2,
+          "offset": 0,
+          "hex": "544f"
+        },
+        {
+          "owner": "fd_50F6_0AC4",
+          "size": 2,
+          "offset": 0,
+          "hex": "9097"
+        },
+        {
+          "owner": "fd_50F6_0A9E",
+          "size": 2,
+          "offset": 0,
+          "hex": "9ea2"
+        },
+        {
+          "owner": "fd_50F6_0EAC",
+          "size": 2,
+          "offset": 0,
+          "hex": "0000"
+        },
+        {
+          "owner": "fd_50F6_0FC2",
+          "size": 4,
+          "offset": 0,
+          "hex": "18270000"
+        },
+        {
+          "owner": "fd_50F6_1000",
+          "size": 4,
+          "offset": 0,
+          "hex": "a8010000"
+        },
+        {
+          "owner": "fd_50F6_0C26",
+          "size": 4,
+          "offset": 0,
+          "hex": "00000000"
+        },
+        {
+          "owner": "fd_3D57_00A4",
+          "size": 192,
+          "offset": 0,
+          "hex": "c42068af3d41ae921fa01857a76868865dd8a8538ebdaa2e0446e8cbbba4846d288a08e9206f8bd77a3d299722c38964e1069f4bf8ecfd0001edc9dbf2190d7e1936cabe543416af54dc9c791bca9444f2ec70de84b42e8b73ba41e10d7f088187753674425d0aa206b00ea4a351c10c4279418e4b5aa03a90d2197a1991fc8cfb8bc864a41c917b57a742650d2042f29fd2076f210ab44638b515f683f360868f5629923406151d0fa83020925cb0d61d7d1ac2ae64975fa1df3c855648da9c"
+        },
+        {
+          "owner": "fd_50F6_073C",
+          "size": 128,
+          "offset": 0,
+          "hex": "65927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff46"
+        },
+        {
+          "owner": "fd_50F6_0626",
+          "size": 128,
+          "offset": 0,
+          "hex": "7b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff466592"
+        },
+        {
+          "owner": "fd_50F6_06AE",
+          "size": 128,
+          "offset": 0,
+          "hex": "0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a"
+        }
+      ],
+      "expected_memory": [
+        {
+          "owner": "fd_50F6_0EB6",
+          "size": 64,
+          "offset": 0,
+          "hex": "0f0100005f0002000000000000000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+        }
+      ]
+    },
+    {
+      "name": "GetDis/8",
+      "routine": "GetDis",
+      "args": [
+        -31846,
+        2584,
+        20309,
+        18495
+      ],
+      "arg_types": [
+        "s16",
+        "s16",
+        "s16",
+        "s16"
+      ],
+      "return_kind": "s32",
+      "return_value": 432211082,
+      "memory": [],
+      "expected_memory": []
+    },
+    {
+      "name": "f_0250_0F2C/0",
+      "routine": "f_0250_0F2C",
+      "args": [],
+      "arg_types": [],
+      "return_kind": "void",
+      "return_value": null,
+      "memory": [
+        {
+          "owner": "fd_50F6_0508",
+          "size": 4,
+          "offset": 0,
+          "hex": "00000100"
+        },
+        {
+          "owner": "fd_50F6_10E0",
+          "size": 2,
+          "offset": 0,
+          "hex": "ffff"
+        },
+        {
+          "owner": "fd_50F6_10DE",
+          "size": 2,
+          "offset": 0,
+          "hex": "ff7f"
+        },
+        {
+          "owner": "MapPlane",
+          "size": 2,
+          "offset": 0,
+          "hex": "0180"
+        }
+      ],
+      "expected_memory": [
+        {
+          "owner": "fd_50F6_0508",
+          "size": 4,
+          "offset": 0,
+          "hex": "00000100"
+        },
+        {
+          "owner": "MapPlane",
+          "size": 2,
+          "offset": 0,
+          "hex": "0180"
+        },
+        {
+          "owner": "fd_50F6_10E0",
+          "size": 2,
+          "offset": 0,
+          "hex": "ffff"
+        },
+        {
+          "owner": "fd_50F6_10DE",
+          "size": 2,
+          "offset": 0,
+          "hex": "ff7f"
+        }
+      ]
+    },
+    {
+      "name": "BalloonIsVisible/9",
+      "routine": "BalloonIsVisible",
+      "args": [
+        -22990,
+        1987,
+        -1837
+      ],
+      "arg_types": [
+        "s16",
+        "s16",
+        "s16"
+      ],
+      "return_kind": "s16",
+      "return_value": 1,
+      "memory": [
+        {
+          "owner": "fd_50F6_0508",
+          "size": 4,
+          "offset": 0,
+          "hex": "baded790"
+        },
+        {
+          "owner": "fd_50F6_10E0",
+          "size": 2,
+          "offset": 0,
+          "hex": "9083"
+        },
+        {
+          "owner": "fd_50F6_10DE",
+          "size": 2,
+          "offset": 0,
+          "hex": "e168"
+        },
+        {
+          "owner": "MapPlane",
+          "size": 2,
+          "offset": 0,
+          "hex": "32a6"
+        }
+      ],
+      "expected_memory": [
+        {
+          "owner": "fd_50F6_0508",
+          "size": 4,
+          "offset": 0,
+          "hex": "baded790"
+        },
+        {
+          "owner": "MapPlane",
+          "size": 2,
+          "offset": 0,
+          "hex": "32a6"
+        },
+        {
+          "owner": "fd_50F6_10E0",
+          "size": 2,
+          "offset": 0,
+          "hex": "9083"
+        },
+        {
+          "owner": "fd_50F6_10DE",
+          "size": 2,
+          "offset": 0,
+          "hex": "e168"
+        }
+      ]
+    },
+    {
+      "name": "BoundPointToTri/16",
+      "routine": "BoundPointToTri",
+      "args": [
+        {
+          "pointer": {
+            "owner": "fd_50F6_022E",
+            "size": 4,
+            "offset": 0
+          }
+        },
+        {
+          "pointer": {
+            "owner": "g_5A9C",
+            "size": 8,
+            "offset": 0
+          }
+        }
+      ],
+      "arg_types": [
+        "ptr",
+        "ptr"
+      ],
+      "return_kind": "void",
+      "return_value": null,
+      "memory": [
+        {
+          "owner": "fd_50F6_022E",
+          "size": 4,
+          "offset": 0,
+          "hex": "63ee1ad4"
+        },
+        {
+          "owner": "g_5A9C",
+          "size": 8,
+          "offset": 0,
+          "hex": "4d2cb7d49c71d6d5"
+        }
+      ],
+      "expected_memory": [
+        {
+          "owner": "fd_50F6_022E",
+          "size": 4,
+          "offset": 0,
+          "hex": "f5ceb7d4"
+        },
+        {
+          "owner": "g_5A9C",
+          "size": 8,
+          "offset": 0,
+          "hex": "4d2cb7d49c71d6d5"
+        }
+      ]
+    },
+    {
+      "name": "BalloonIsVisible/word-subtraction",
+      "routine": "BalloonIsVisible",
+      "args": [
+        0,
+        0,
+        -32768
+      ],
+      "arg_types": [
+        "s16",
+        "s16",
+        "s16"
+      ],
+      "return_kind": "s16",
+      "return_value": 1,
+      "memory": [
+        {
+          "owner": "fd_50F6_0508",
+          "size": 4,
+          "offset": 0,
+          "hex": "00000000"
+        },
+        {
+          "owner": "fd_50F6_10E0",
+          "size": 2,
+          "offset": 0,
+          "hex": "0200"
+        },
+        {
+          "owner": "fd_50F6_10DE",
+          "size": 2,
+          "offset": 0,
+          "hex": "0100"
+        },
+        {
+          "owner": "MapPlane",
+          "size": 2,
+          "offset": 0,
+          "hex": "0000"
+        }
+      ],
+      "expected_memory": [
+        {
+          "owner": "fd_50F6_0508",
+          "size": 4,
+          "offset": 0,
+          "hex": "00000000"
+        },
+        {
+          "owner": "MapPlane",
+          "size": 2,
+          "offset": 0,
+          "hex": "0000"
+        },
+        {
+          "owner": "fd_50F6_10E0",
+          "size": 2,
+          "offset": 0,
+          "hex": "0200"
+        },
+        {
+          "owner": "fd_50F6_10DE",
+          "size": 2,
+          "offset": 0,
+          "hex": "0100"
+        }
+      ]
+    }
+  ]
+}
