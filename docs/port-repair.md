@@ -5,6 +5,42 @@ stunts_recon. No static recompilation. The closed canonical DOS build
 (`functional-source-oracle-v1`) is the oracle; original machine code and the
 differential tools are debugging aids, not a proof obligation.
 
+## Layers and oracles
+
+```
+original SIMANT.EXE            primary oracle: historical behavior, machine semantics
+  -> matching canonical DOS     secondary oracle: readable source of game logic/state
+  -> mechanical projection      representation only: widths, ABI, pointers, ASM-to-C
+  -> SDL3 platform layer        host services replacing DOS/BIOS/hardware
+  -> native presentation        future native windows/UI over the same game core
+```
+
+* **Ownership.** Canonical source owns game behavior, the projection owns
+  representation conversion, the platform layer owns host services, presentation
+  owns presentation. Higher layers never reimplement game logic; they consume
+  generated projections, thin adapters and explicit interfaces, so a fix below
+  propagates upward by rebuilding, never by repeating it by hand.
+* **Diagnose downward.** From a symptom, compare each layer with the one below:
+  presentation -> platform -> projection -> canonical DOS -> original EXE. Stop at
+  the first layer that differs from the correct output of the layer beneath it,
+  fix it there and rebuild upward. Never patch the visible symptom first and never
+  compensate in a higher layer for a defect below it.
+* **Matched source is historical.** If the original and canonical DOS agree and
+  native differs, the defect is above the matching layer (projection, ABI,
+  compiler-semantic preservation, platform, presentation). Do not modify matched
+  canonical source to suit the native compiler or to clean up awkward, undefined
+  or MSC/x86-dependent behavior; encode the needed preservation (overflow, AX
+  results, adjacency, folding) in the projection. Canonical source changes only on
+  original-binary evidence that the reconstruction is wrong (incomplete or
+  misscoped match, misattributed fixups/data, a disproved source hypothesis, or
+  canonical DOS disagreeing with the original in the supported domain). Historical
+  bugs stay historical; exposing, normalizing or excluding them on the modern
+  platform is a separate, explicit platform decision.
+* **Keep interfaces corrigible.** Contracts expose semantics, not our temporary
+  mistakes; when a lower assumption proves wrong, fix the contract and its
+  consumers instead of keeping a compatibility shim. Each layer stays independently
+  buildable and checkable. Published oracle checkpoints stay immutable.
+
 ## Closure target: the normal shipped game
 
 Shipped assets and configuration, normal VGA gameplay, keyboard/mouse input, the
