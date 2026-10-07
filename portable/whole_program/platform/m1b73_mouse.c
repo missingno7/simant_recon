@@ -209,6 +209,19 @@ PortableM1B73MouseStatus portable_m1b73_mouse_consume_event(
     if (!provider->services.host_to_source(provider->services.context,
             event->x, event->y, &source_x, &source_y))
         return PORTABLE_M1B73_MOUSE_PROVIDER_FAILED;
+    /* f_1B73_0046 installs INT33 functions 7/8 with inclusive limits
+     * 0..g_3DB2-4 and 0..g_3DB4-4. SDL capture/letterboxing can deliver
+     * positions outside the window while dragging. Apply the DOS driver
+     * limits before its callback, not inside the canonical drag algorithm
+     * or rasterizer. Keyboard-generated callbacks keep their own semantics. */
+    if (*provider->screen_width < 4 || *provider->screen_height < 4)
+        return PORTABLE_M1B73_MOUSE_BAD_ARGUMENT;
+    if (source_x < 0) source_x = 0;
+    if (source_y < 0) source_y = 0;
+    if (source_x > *provider->screen_width - 4)
+        source_x = (int16_t)(*provider->screen_width - 4);
+    if (source_y > *provider->screen_height - 4)
+        source_y = (int16_t)(*provider->screen_height - 4);
     buttons = provider->driver_buttons;
     bit = button_bit(event->button);
     if (event->kind == HOST_EVENT_MOUSE_DOWN)

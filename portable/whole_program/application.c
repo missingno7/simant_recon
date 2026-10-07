@@ -1,6 +1,5 @@
 /* Native lifecycle only. Startup, dialogs and simulation remain in dos_game_main. */
 #include "platform/graphics.h"
-#include "platform/graphics_source_clip.h"
 #include "platform/graphics_entry_source.h"
 #include "platform/graphics_capture_source.h"
 #include "platform/graphics_misc_source.h"
@@ -390,7 +389,10 @@ static void idle(void *context)
     drain_host_observations();
     if (!host_virtual_clock_enabled() && a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
             PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
-    if (a->display_active && !g_5AAC && (g_3DD4 & 255u) == 0 &&
+    /* Polling yields after a draw, including held-input tracking. g_5AAC is
+     * the current clip list, which those loops retain until release; it is
+     * not a frame-in-progress flag. Raster/cursor exclusion is g_3DD4. */
+    if (a->display_active && (g_3DD4 & 255u) == 0 &&
         sim_sdl_palette_view(&a->palette) && now - a->last_present >= 16666667) {
         if (portable_m1b73_sdl_application_input_present(&a->input) !=
                 PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");

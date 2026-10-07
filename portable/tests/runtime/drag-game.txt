@@ -1,0 +1,42 @@
+# Enter Full Game, then track an active window title, a triangle and resize.
+6000 down Return
+6050 up Return
+8500 down Return
+8550 up Return
+11000 move 294 234
+11200 mouse-down Left 294 234
+11400 mouse-up Left 294 234
+14000 move 180 32
+14200 mouse-down Left 180 32
+14600 move 200 42
+15000 move 230 52
+15400 move 200 42
+15800 move 180 32
+16200 mouse-up Left 180 32
+# The first click activates the caste window; the second tracks the triangle.
+17000 move 435 438
+17200 mouse-down Left 435 438
+17400 mouse-up Left 435 438
+17500 move 435 438
+17700 mouse-down Left 435 438
+18100 move 440 420
+18500 move 455 410
+18900 move 420 430
+19300 move 435 438
+19700 mouse-up Left 435 438
+# Reactivate the main window before grabbing its resize handle.
+21000 move 180 32
+21200 mouse-down Left 180 32
+21400 mouse-up Left 180 32
+22000 move 408 370
+22200 mouse-down Left 408 370
+22600 move 430 390
+23000 move 408 370
+23400 mouse-up Left 408 370
+# Captured SDL motion can leave the native window. DOS INT33 limits still apply.
+25000 move 180 32
+25200 mouse-down Left 180 32
+25600 move 270 -28
+26000 move 700 520
+26400 move 180 32
+26800 mouse-up Left 180 32
