@@ -17,11 +17,28 @@ PROJECT = Path(__file__).resolve().parents[3]
 FIXTURES = Path(__file__).resolve().parent
 
 
+def normalized_file_path(path):
+    if not path:
+        return None
+    return os.path.normcase(os.path.abspath(str(path))).replace('\\', '/')
+
+
+def file_receipt_key(receipt):
+    if not isinstance(receipt, dict):
+        return None
+    path = normalized_file_path(receipt.get('path'))
+    if not path or not receipt.get('sha256') or receipt.get('size') is None:
+        return None
+    return path, receipt['size'], receipt['sha256']
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report', type=Path, required=True)
     parser.add_argument('--out', type=Path)
     parser.add_argument('--project', type=Path, default=PROJECT)
+    parser.add_argument('--silent', action='store_true',
+                        help='pass /s0 to the reconstructed DOS main as a timing contrast')
     parser.add_argument('--gdb', default='C:/msys64/mingw64/bin/gdb.exe'
                         if Path('C:/msys64/mingw64/bin/gdb.exe').is_file() else 'gdb')
     args = parser.parse_args()
@@ -91,10 +108,12 @@ def main():
     trace_literal = repr(str(trace))
     commands.write_text('set pagination off\nset confirm off\npython exec(compile(open('
                         + trace_literal + ').read(), ' + trace_literal + ", 'exec'))\nrun\n")
-    # No source switches: the pinned SIMANT.CFG selects VGA and Sound Mode 6.
+    # By default, no source switches: the pinned SIMANT.CFG selects VGA and Sound Mode 6.
     application_command = [str(executable), '--headless', '--smoke-ms', '35000',
                            '--frame', str(out / 'frame.bmp'), '--assets', str(assets),
                            '--seed', '1', '--input-script', str(script)]
+    if args.silent:
+        application_command.append('/s0')
     command = [str(gdb_path), '--batch', '-q', '-x', str(commands), '--args', *application_command]
     env = dict(os.environ, SIMANT_TRACE_OUT=str(out / 'events.jsonl'),
                SIMANT_TRACE_ASSETS=str(assets))
@@ -143,10 +162,13 @@ def main():
         'source_LoadGame_returned_success': load_return_ok,
         'both_source_FileSelect_paths_accepted': len(selectors) == 2
             and [(event['save'], event['result']) for event in selectors] == [(1, 1), (0, 1)]
-            and all(event.get('selected_path') == str(saved_path) for event in selectors),
+            and all(normalized_file_path(event.get('selected_path'))
+                    == normalized_file_path(saved_path) for event in selectors),
         'all_307_SaveRec_reads_complete': full_reads,
         'saved_file_unchanged_during_load': save_return_ok and load_return_ok and bool(saved)
-            and saves[0].get('saved_file') == loads[0].get('saved_file') == saved and saved['size'] == 48386,
+            and len({file_receipt_key(receipt) for receipt in
+                     (saves[0].get('saved_file'), loads[0].get('saved_file'), saved)}) == 1
+            and file_receipt_key(saved) is not None and saved['size'] == 48386,
         'no_trace_errors': not any(event['event'] == 'trace-error' for event in events),
         'current_build_inputs_unchanged': not runtime.mismatched_inputs(project, pins),
         'build_report_unchanged': runtime.sha(report_path) == report_hash,
@@ -169,6 +191,7 @@ def main():
         'executable_sha256': executable_hash, 'SDL3_sha256': dll_hash,
         'resource_pins': resources, 'font_pins': fonts, 'fixture_and_driver_pins': fixture_pins,
         'GDB': {'path': str(gdb_path), 'sha256': gdb_hash}, 'command': command,
+        'source_switches': ['/s0'] if args.silent else [],
         'exit_code': exit_code, 'timed_out': timed_out, 'fixture_event_count': len(expected_events),
         'injected_event_count': len(actual_events), 'outer_loops': int(loops[-1]) if loops else None,
         'source_returns': saves + selectors + loads, 'load_read_calls': len(reads),
