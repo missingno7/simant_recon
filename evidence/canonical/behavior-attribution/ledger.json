@@ -24,7 +24,7 @@
     "UNATTRIBUTED"
   ],
   "counts": {
-    "PORT_INTRODUCED": 101,
+    "PORT_INTRODUCED": 103,
     "ORIGINAL": 14,
     "UNATTRIBUTED": 286,
     "RECONSTRUCTION_INTRODUCED": 1,
@@ -18415,6 +18415,65 @@
         "port-s00-436-byte-extent",
         "port-cursor-S00-bookkeeping"
       ]
+    },
+    {
+      "id": "port-cursor-draw-x-aligned",
+      "description": "Native cursor drew its AND/XOR images at the 8-pixel-aligned save-under x, so the pointer moved in 8-pixel steps and stopped 4 pixels short at the right edge.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "root:1B73 _0DA4 cursor draw position; save-under rectangle unchanged",
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "src/root/m1B73.asm",
+          "portable/whole_program/platform/graphics_cursor_source.c"
+        ],
+        "commits": [],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "STATIC: _0DA4 pushes DI=g_9122, aligns DI with AND -8 for g_4340 and the save-under capture, then POP DI restores the unaligned x for f_1B4E_005E and f_1B4E_003B. Original DOS pointer limits are 0..636 x 0..476 (INT 33h functions 7/8 from g_3DB2-4/g_3DB4-4), observed as g_9122=636 at the right edge."
+        },
+        "canonical_dos": {
+          "path": "build/current/dos/link/SOURCE.EXE",
+          "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+          "observation": "Same ASM; the canonical DOS build is the matched instruction stream."
+        },
+        "native": {
+          "observation": "Projection now draws at the unaligned pointer x; native frames with the pointer at x=240/243/247 differ and the cursor starts at that x. INT 33h bounds were already equal."
+        }
+      }
+    },
+    {
+      "id": "port-unpaced-cpu-bound-loops",
+      "description": "Held-edge map scrolling and Fast/Ultra simulation ran at host speed natively: those source loops redraw without a timer wait, so in DOS only the machine bounds them.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "platform presentation boundary: a loop that stored to VGA since the last presented refresh waits for the next 59.94 Hz mode-12h refresh; timer-bound Slow/Normal and all source algorithms unchanged",
+      "evidence": {
+        "level": "OBSERVED",
+        "paths": [
+          "src/root/m00F8.c",
+          "src/root/m15F8.c",
+          "src/data/d3D57.c",
+          "portable/whole_program/application.c",
+          "portable/tests/runtime/run_edge.py"
+        ],
+        "commits": [],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "STATIC: f_00F8_01BE loops f_0250_0D10 (one cell plus UpdateEdit) while g_9122/g_9124 are at an edge, with no timer; the main loop waits fd_3D57_07CE[speed] = 21/7/0/-1 Mac ticks, so Fast/Ultra have no wait and Ultra skips 3 of 4 redraws. RUNTIME (DOSBox-X, fixed clock): edge scroll 30 cells/s at 3000 cycles, >=180 at 20000, >=900 at 200000; simulation steps/s Normal 6/6, Fast 10/67, Ultra 32/100-200 at 3000/20000 cycles."
+        },
+        "canonical_dos": {
+          "path": "build/current/dos/link/SOURCE.EXE",
+          "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+          "observation": "Same source loops; no timer was added or removed."
+        },
+        "native": {
+          "observation": "Before: unbounded host speed. After refresh pacing: edge scroll ~60 cells/s, Normal 6, Fast ~58, Ultra ~240 steps/s, i.e. within the DOS machine range. run_edge.py --case edges checks steps per held second."
+        }
+      }
     }
   ]
 }

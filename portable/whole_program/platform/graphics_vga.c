@@ -51,6 +51,7 @@ void sim_vga_write(SimVga *vga, uint16_t offset, uint8_t value)
 {
     unsigned plane, mode = vga->mode & 3;
     uint8_t rotated = rotate(value, vga->data_rotate);
+    if (vga->map_mask & 15u) vga->written = 1;
     for (plane = 0; plane < 4; ++plane) {
         uint8_t data, mask = vga->bit_mask;
         if (!(vga->map_mask & (1u << plane))) continue;
@@ -92,6 +93,7 @@ void sim_vga_store_color(SimVga *vga, uint16_t offset, unsigned bit, uint8_t col
 {
     unsigned plane;
     uint8_t mask = (uint8_t)(0x80u >> (bit & 7));
+    vga->written = 1;
     for (plane = 0; plane < 4; ++plane) {
         uint8_t *byte = &vga->planes[plane][offset];
         *byte = (uint8_t)((*byte & ~mask) | ((color & (1u << plane)) ? mask : 0));

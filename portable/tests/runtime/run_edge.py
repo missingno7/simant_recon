@@ -75,6 +75,11 @@ def run_case(args, build, executable, gdb, out, case):
         before = [event['outer_loops'] for event in frames if event['elapsed_ns'] < 20000000000]
         after = [event['outer_loops'] for event in frames if event['elapsed_ns'] > 34500000000]
         checks['outer_loop_resumes_after_holds'] = bool(before and after) and max(after) > max(before)
+        # The DOS loop has no timer wait; native presentation paces each
+        # redraw to one 59.94 Hz VGA refresh instead of host speed.
+        held = [event for event in returns if event.get('held_seconds', 0) > 1]
+        checks['scroll_steps_paced_by_VGA_refresh'] = len(held) >= 4 and all(
+            event['steps'] <= 61 * event['held_seconds'] + 2 for event in held)
     else:
         checks['user_final_move_delivered_with_INT33_bounds'] = bool(frames) and frames[-1]['mouse'] == [374, 476]
     result = {'case': case, 'passed': all(checks.values()), 'checks': checks,

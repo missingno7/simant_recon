@@ -179,7 +179,7 @@ static int draw_active_cursor(SimGraphicsCursorSource *cursor)
     const uint8_t *first, *second;
     size_t first_size, second_size;
     uint16_t width, height, second_width, second_height;
-    int16_t x, y, right, bottom;
+    int16_t x, y, right, bottom, draw_x;
     uint8_t old_display_lock;
 
     if (!select_cursor_bitmaps(cursor, &first, &first_size,
@@ -189,9 +189,11 @@ static int draw_active_cursor(SimGraphicsCursorSource *cursor)
         width != second_width || height != second_height)
         return 0;
 
-    /* S00 aligns the cursor left edge down to an 8-pixel byte boundary. The
-     * source rectangles use low-word arithmetic, including their +7 margin. */
-    x = signed_word((uint16_t)mouse->x[0] & UINT16_C(0xfff8));
+    /* _0DA4 pushes the pointer x, aligns DI down to an 8-pixel byte boundary
+     * for the save-under rectangle (low-word arithmetic, +7 margin), then pops
+     * the unaligned x before drawing the AND and XOR images. */
+    draw_x = mouse->x[0];
+    x = signed_word((uint16_t)draw_x & UINT16_C(0xfff8));
     y = mouse->y[0];
     add_source_words(x, width, 7u, &right);
     add_source_words(y, height, 0u, &bottom);
@@ -223,13 +225,13 @@ static int draw_active_cursor(SimGraphicsCursorSource *cursor)
     }
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[15])();
     g_21A4 = 0;
-    f_1B4E_005E(x, y, (char *)first);
+    f_1B4E_005E(draw_x, y, (char *)first);
     if (!source_status_ok(cursor)) {
         g_21A4 = (char)old_display_lock;
         return 0;
     }
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[14])();
-    f_1B4E_003B(x, y, (char *)second);
+    f_1B4E_003B(draw_x, y, (char *)second);
     g_21A4 = (char)old_display_lock;
     return source_status_ok(cursor);
 }

@@ -472,11 +472,30 @@ static void idle(void *context)
     /* Polling yields after a draw, including held-input tracking. g_5AAC is
      * the current clip list, which those loops retain until release; it is
      * not a frame-in-progress flag. Raster/cursor exclusion is g_3DD4. */
-    if (a->display_active && (g_3DD4 & 255u) == 0 &&
-        sim_sdl_palette_view(&a->palette) && now - a->last_present >= 16666667) {
-        if (portable_m1b73_sdl_application_input_present(&a->input) !=
-                PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
-        a->last_present = now;
+    /* DOS speed in held-edge scrolling and Fast/Ultra simulation is bounded
+     * only by the machine: those source loops redraw without a timer wait.
+     * The display shows one refresh of VGA memory at a time (mode 12h:
+     * 25.175 MHz / (800 x 525) = 59.94 Hz), so a loop that has stored to VGA
+     * since the last presented refresh waits for the next one here, at the
+     * platform boundary, instead of producing invisible frames at host speed. */
+    if (a->display_active && (g_3DD4 & 255u) == 0 && sim_sdl_palette_view(&a->palette)) {
+        const uint64_t refresh_ns = 16683217;
+        /* Wait in short slices: audio is rendered only up to host time, so
+         * the device keeps the same feed cadence while the source waits. */
+        while (a->graphics.vga.written && a->last_present && !host_virtual_clock_enabled() &&
+               now - a->last_present < refresh_ns) {
+            uint64_t remaining = refresh_ns - (now - a->last_present);
+            SDL_DelayPrecise(remaining < 1000000u ? remaining : 1000000u);
+            if (a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
+                    PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
+            now = host_time_ns();
+        }
+        if (now - a->last_present >= refresh_ns) {
+            if (portable_m1b73_sdl_application_input_present(&a->input) !=
+                    PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
+            a->graphics.vga.written = 0;
+            a->last_present = now;
+        }
     }
     if (a->smoke_deadline_ns && now >= a->smoke_deadline_ns) {
         if (!a->last_present || !a->display_active)

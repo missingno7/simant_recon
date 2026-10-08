@@ -10,6 +10,7 @@ typedef struct SimVga {
     uint8_t sequencer_index, graphics_index;
     uint8_t map_mask, set_reset, enable_set_reset, color_compare;
     uint8_t data_rotate, read_map, mode, color_dont_care, bit_mask;
+    uint8_t written; /* CPU stores since the last presented refresh */
 } SimVga;
 
 void sim_vga_reset(SimVga *vga);

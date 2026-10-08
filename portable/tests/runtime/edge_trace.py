@@ -3,11 +3,13 @@ import gdb
 import hashlib
 import json
 import os
+import time
 
 output = open(os.environ['SIMANT_TRACE_OUT'], 'w', encoding='utf-8')
 presentations = 0
 scrolls = 0
 active_scrolls = set()
+scroll_steps = {}
 
 
 def emit(event, **fields):
@@ -64,7 +66,9 @@ class ScrollReturned(gdb.FinishBreakpoint):
 
     def stop(self):
         active_scrolls.discard(self.key)
+        steps, started = scroll_steps.pop(self.key, (0, time.monotonic()))
         emit('scroll-return', mouse=[word('g_9122'), word('g_9124')],
+             steps=steps, held_seconds=time.monotonic() - started,
              outer_loops=word('fd_50F6_383A'), replay_next=word('app.replay_next'))
         return False
 
@@ -78,10 +82,13 @@ class Scroll(gdb.Breakpoint):
                 return False
             key = int(frame.read_register('rsp'))
             if key in active_scrolls:
+                steps, started = scroll_steps[key]
+                scroll_steps[key] = (steps + 1, started)
                 return False
             x, y = word('g_9122'), word('g_9124')
             if x <= 1 or x >= 636 or y < 1 or y >= 476:
                 active_scrolls.add(key)
+                scroll_steps[key] = (1, time.monotonic())
                 scrolls += 1
                 emit('scroll-entry', mouse=[x, y], replay_next=word('app.replay_next'))
                 ScrollReturned(frame, key)
