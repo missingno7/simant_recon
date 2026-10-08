@@ -24,7 +24,7 @@
     "UNATTRIBUTED"
   ],
   "counts": {
-    "PORT_INTRODUCED": 103,
+    "PORT_INTRODUCED": 104,
     "ORIGINAL": 14,
     "UNATTRIBUTED": 286,
     "RECONSTRUCTION_INTRODUCED": 1,
@@ -18472,6 +18472,35 @@
         },
         "native": {
           "observation": "Before: unbounded host speed. After refresh pacing: edge scroll ~60 cells/s, Normal 6, Fast ~58, Ultra ~240 steps/s, i.e. within the DOS machine range. run_edge.py --case edges checks steps per held second."
+        }
+      }
+    },
+    {
+      "id": "port-hotbox-object-queue",
+      "description": "Native f_1B73_0BFF (object hot box under the pointer) and f_1B73_0C80 (warp to an object) scanned the cursor hover-box queue (_g_549A) instead of descriptor 2 (_g_5484+12, fd_5071_03C4): prox menus (ant/nest/spider commands, scent menu) never got a hovered item, so hold-move-release could not select.",
+      "classification": "PORT_INTRODUCED",
+      "status": "fixed",
+      "scope": "root:1B73 0BFF/0C80 queue selection; hit-test and dispatch queues unchanged",
+      "evidence": {
+        "level": "PROVEN",
+        "paths": [
+          "src/root/m1B73.asm",
+          "portable/whole_program/platform/m1b73_queue_ops.c",
+          "portable/tests/runtime/run_windows.py"
+        ],
+        "commits": [],
+        "original_exe": {
+          "path": "assets/SIMANT.EXE",
+          "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "observation": "STATIC: _f_1B73_0BFF and _f_1B73_0C80 load `les di, dword ptr _g_5484+12`; _g_5484 is {Queue0 0FFh, fd_5071_0060 0FFh, fd_5071_03C4 1Eh}, so +12 is fd_5071_03C4 (47+1 records); fd_5071_0728 (9+1) is only _g_549A."
+        },
+        "canonical_dos": {
+          "path": "build/current/dos/link/SOURCE.EXE",
+          "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
+          "observation": "Same ASM; canonical source unchanged."
+        },
+        "native": {
+          "observation": "Present since 791aada. After the fix a hold-move-release on win_DoProxMenu(0x700) selects and closes the menu in classic and --windows modes (run_windows.py prox, prox-classic)."
         }
       }
     }

@@ -17,12 +17,14 @@ import run as runtime
 PROJECT = Path(__file__).resolve().parents[3]
 FIXTURES = Path(__file__).resolve().parent
 RED, GREY, DESKTOP = (223, 8, 4), (195, 195, 195), (0, 170, 235)  # RGB
-CASES = (('raise', 'windows-raise.txt', '--windows', 13500),
-         ('caste', 'windows-caste.txt', '--windows', 18500),
-         ('four', 'windows-quick.txt', '--windows=0,100,200,1200,1300', 13500),
-         ('chrome', 'windows-chrome.txt', '--windows', 17500),
-         ('menu', 'windows-menu.txt', '--windows', 13500),
-         ('menucmd', 'windows-menucmd.txt', '--windows', 14000))
+CASES = (('raise', 'windows-raise.txt', '--windows', 17500),
+         ('caste', 'windows-caste.txt', '--windows', 22500),
+         ('four', 'windows-quick.txt', '--windows=0,100,200,1200,1300', 17500),
+         ('chrome', 'windows-chrome.txt', '--windows', 21500),
+         ('menu', 'windows-menu.txt', '--windows', 17500),
+         ('menucmd', 'windows-menucmd.txt', '--windows', 18000),
+         ('prox', 'windows-prox.txt', '--windows', 18500),
+         ('prox-classic', 'windows-prox-classic.txt', '--seed=0', 18500))
 
 
 def pixels(path):
@@ -43,7 +45,7 @@ def run_case(build, executable, out, name, script, option, smoke):
     assets = target / 'a'
     shutil.copytree(build / 'runtime-assets', assets)
     frame = target / 'frame.bmp'
-    command = [str(executable), '--headless', option, '--smoke-ms', str(smoke), '--seed', '0',
+    command = [str(executable), '--headless'] + ([option] if option.startswith('--windows') else []) + ['--smoke-ms', str(smoke), '--seed', '0',
                '--frame', str(frame), '--assets', str(assets), '--input-script', str(FIXTURES / script)]
     try:
         run = subprocess.run(command, capture_output=True, timeout=90)
@@ -119,6 +121,13 @@ def main():
     checks['save_under_box_is_native_popup'] = popup.is_file() and menu_root(322, 60) == DESKTOP
     # Native menu choice -> the game's menu command event -> win_Open(0x1500).
     checks['native_menu_command_reaches_game'] = hosted('menucmd', '1500') is not None
+    # Hold-move-release on a prox menu selects (f_1B73_0BFF scans descriptor 2,
+    # the object hot boxes): the menu window closes after the release.
+    prox_log = (out / 'prox' / 'stderr.txt').read_text()
+    checks['prox_menu_release_selects'] = ('Logical window 0700 opened' in prox_log and
+                                           'Logical window 0700 closed' in prox_log)
+    classic = pixels(runs['prox-classic']['frame'])[2]
+    checks['prox_menu_release_selects_classic'] = classic(300, 250) == (85, 44, 4)
     result = {'passed': all(checks.values()), 'checks': checks,
               'executable_sha256': report['executable']['sha256'],
               'runs': {k: {**v, 'frame': str(v['frame'])} for k, v in runs.items()}}

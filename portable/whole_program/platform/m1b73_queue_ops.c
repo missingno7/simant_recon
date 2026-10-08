@@ -291,9 +291,11 @@ int16_t f_1B73_0BC5(int16_t id, PortableM1B73Queue *slot)
 
 int16_t f_1B73_0BFF(void)
 {
-    PortableM1B73Queue *queue = &portable_m1b73_queue_set.queues[3];
+    /* `les di, _g_5484+12`: descriptor 2, the object hot boxes (fd_5071_03C4),
+     * not the cursor hover boxes of _g_549A (queue 3). */
+    PortableM1B73Queue *queue = &portable_m1b73_queue_set.queues[2];
     uint8_t i;
-    validate_queue(queue, 3);
+    validate_queue(queue, 2);
     for (i = 0; i < (*queue->count); ++i) {
         const uint8_t *record = queue->records[i];
         if (g_9122 >= read_i16(record + 0) &&
@@ -307,9 +309,11 @@ int16_t f_1B73_0BFF(void)
 
 void f_1B73_0C80(int16_t id)
 {
-    PortableM1B73Queue *queue = &portable_m1b73_queue_set.queues[3];
+    /* `les di, _g_5484+12`: descriptor 2, the object hot boxes (fd_5071_03C4),
+     * not the cursor hover boxes of _g_549A (queue 3). */
+    PortableM1B73Queue *queue = &portable_m1b73_queue_set.queues[2];
     uint8_t i;
-    validate_queue(queue, 3);
+    validate_queue(queue, 2);
     for (i = 0; i < (*queue->count); ++i) {
         const uint8_t *record = queue->records[i];
         if (read_i16(record + 12) == id) {

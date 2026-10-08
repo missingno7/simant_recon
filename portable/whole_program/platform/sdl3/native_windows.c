@@ -117,6 +117,11 @@ int native_windows_init(Host *host, SDL_Window *root)
     n.scale = host_window_scale(host);
     n.count = sim_window_hosting_count();
     n.active = 1;
+    /* Showing or raising a game window must not take activation: a prox menu
+     * opens while the button is still held in another window, and activation
+     * would end that drag. Keys reach the game from any SimAnt window. */
+    SDL_SetHint(SDL_HINT_WINDOW_ACTIVATE_WHEN_SHOWN, "0");
+    SDL_SetHint(SDL_HINT_WINDOW_ACTIVATE_WHEN_RAISED, "0");
     sim_window_hosting_set_pump(pump);
     if (!native_menu_init(root))
         fprintf(stderr, "Native menu bar unavailable (no native main window)\n");
