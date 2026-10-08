@@ -41,6 +41,32 @@ original SIMANT.EXE            primary oracle: historical behavior, machine sema
   consumers instead of keeping a compatibility shim. Each layer stays independently
   buildable and checkable. Published oracle checkpoints stay immutable.
 
+## Modern Windows presentation (`--windows`)
+
+The single-window SDL3 build is the accepted baseline (`sdl3-baseline-v1`). The
+modern presentation runs the same executable and game with selected logical
+windows as native SDL windows; without `--windows` nothing changes.
+
+* **Boundary.** DOS composites all logical windows into one VGA screen: m1E57
+  computes each window's visible region from the stack `g_5702`, and
+  `clip_SetWin` selects it. Win16 SimAnt replaces exactly this with native windows
+  (its `clip_SetWin` is empty; each window draws through its own DC). Here
+  `platform/window_hosting.c` observes cross-module calls into the m1E57 clip
+  entry points (`-Wl,--wrap`, bodies unchanged), gives each hosted window its own
+  VGA plane set (`graphics_vga.c` routes each aperture byte per pixel) and an
+  unoccluded clip list; shared windows keep the canonical occlusion, computed by
+  `f_1E57_038E` over their sub-stack. Window records, the stack, hit testing,
+  event dispatch and draw hooks stay canonical.
+* **Hosting** (`platform/sdl3/native_windows.c`, Win16 contracts from
+  simantw_recon `docs/portable-windows-reference.md` §0): created on the first
+  `win_Open`, hidden on `win_Close`, reused; window-local input maps to logical
+  screen space; a click on a window that is not on top raises it and is eaten
+  (Win16 WM_MOUSEACTIVATE, DOS `f_218D_0451` via a visible point); the DOS title
+  object (object 1, type 0x0c/0x12) is the native drag area; the root SDL window
+  stays the desktop (menu bar, dialogs, shared windows).
+* **Tests.** `portable/tests/runtime/run_windows.py`; replay lines `op@ID` address
+  hosted windows in window-local coordinates, and `--debug` records them.
+
 ## Closure target: the normal shipped game
 
 Shipped assets and configuration, normal VGA gameplay, keyboard/mouse input, the

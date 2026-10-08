@@ -45,7 +45,7 @@ def expected_replay(script):
         if not line.strip() or line.startswith('#'):
             continue
         parts = line.split()
-        index, milliseconds, operation = len(expected), int(parts[0]), parts[1]
+        index, milliseconds, operation = len(expected), int(parts[0]), parts[1].split('@')[0]
         if operation in ('down', 'up'):
             expected.append(f'Replay SDL key {index}: {milliseconds} ms {operation} {" ".join(parts[2:])}')
         else:

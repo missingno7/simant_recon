@@ -78,7 +78,9 @@
     "portable/audio/ymfm/ymfm_opl.cpp",
     "portable/audio/ymfm/ymfm_adpcm.cpp",
     "portable/audio/ymfm/ymfm_pcm.cpp",
-    "portable/whole_program/platform/graphics_vga.c"
+    "portable/whole_program/platform/graphics_vga.c",
+    "portable/whole_program/platform/window_hosting.c",
+    "portable/whole_program/platform/sdl3/native_windows.c"
   ],
   "headers": [
     "portable/whole_program/platform/sdl3/diagnostics.h",
@@ -175,7 +177,22 @@
     "portable/audio/ymfm/ymfm_opl.h",
     "portable/audio/ymfm/ymfm_adpcm.h",
     "portable/audio/ymfm/ymfm_pcm.h",
-    "portable/whole_program/platform/graphics_vga.h"
+    "portable/whole_program/platform/graphics_vga.h",
+    "portable/whole_program/platform/window_hosting.h",
+    "portable/whole_program/platform/sdl3/native_windows.h"
+  ],
+  "window_hosting_wraps": [
+    "clip_SetWin",
+    "clip_Off",
+    "f_1E57_0296",
+    "f_1E57_0351",
+    "f_1E57_0FDC",
+    "clip_Push",
+    "clip_Pop",
+    "f_1E57_038E",
+    "f_1E57_0052",
+    "f_1E57_00B1",
+    "clip_KillWin"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",
@@ -265,7 +282,7 @@
     "evidence": "evidence/canonical/native-input-irq/README.md",
     "regression": "portable/tests/input_irq/run.py",
     "raw_state_limit": "native-input-hardware-context",
-      "host_mouse_range": "SDL event recording/delivery, held pointer state and warps are bounded by the visible logical screen (VGA 0..639 x 0..479). f_1B73_0046 installs tighter inclusive INT33 driver bounds 0..g_3DB2-4 and 0..g_3DB4-4. portable_m1b73_mouse_consume_event applies those limits after mapping SDL coordinates, before the canonical callback. Direct source/keypad callback coordinates are unchanged.",
+    "host_mouse_range": "SDL event recording/delivery, held pointer state and warps are bounded by the visible logical screen (VGA 0..639 x 0..479). f_1B73_0046 installs tighter inclusive INT33 driver bounds 0..g_3DB2-4 and 0..g_3DB4-4. portable_m1b73_mouse_consume_event applies those limits after mapping SDL coordinates, before the canonical callback. Direct source/keypad callback coordinates are unchanged.",
     "mouse_range_regression": "portable/tests/runtime/run_drag.py"
   },
   "native_heap_boundary": "src/root/m171C.c",

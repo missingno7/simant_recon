@@ -86,6 +86,10 @@ exit /b %result%
     (payload / 'Play-SimAnt-SDL3.cmd').write_text(launcher, encoding='ascii', newline='\r\n')
     debug_launcher = launcher.replace('"simant-canonical.exe" %*', '"simant-canonical.exe" --debug %*')
     (payload / 'Play-SimAnt-SDL3-debug.cmd').write_text(debug_launcher, encoding='ascii', newline='\r\n')
+    windows_launcher = launcher.replace('"simant-canonical.exe" %*', '"simant-canonical.exe" --windows %*')
+    (payload / 'Play-SimAnt-Windows.cmd').write_text(windows_launcher, encoding='ascii', newline='\r\n')
+    (payload / 'Play-SimAnt-Windows-debug.cmd').write_text(
+        windows_launcher.replace('--windows %*', '--windows --debug %*'), encoding='ascii', newline='\r\n')
     readme = '''SIMANT SDL3 - WINDOWS 64-BIT PLAYTEST PREVIEW
 
 Extract all files beside your original DOS SimAnt game data, keeping the
@@ -119,6 +123,17 @@ guest OPL and direct DSP DAC commands through ymfm and SDL3. Startup dialogs and
 the reconstructed game. This preview has passed scripted startup, VGA/input,
 Save/Load, resource, RNG and bounded simulation checks. Complete gameplay,
 long-run stability and full DOS/native behavior equivalence are not established.
+
+MODERN WINDOWS PROTOTYPE: Play-SimAnt-Windows.cmd (and -debug) runs the same
+game with its main panels (edit view, map, info, behavior, caste, history,
+score, yard, examine) as separate desktop windows. Drag a window by its SimAnt
+title bar; its close box still closes it through the game. The first click on
+a window that is behind another one brings it to the front (as SimAnt for
+Windows did); the next click acts. The original SDL3 window stays as the
+desktop: menu bar, dialogs and remaining windows. --windows=ID,ID... (hex
+logical IDs, e.g. 1200,1300) chooses the hosted windows. Known prototype
+gaps: no native menus or scroll bars; map edge-scrolling works only from the
+desktop window; hosted windows are not resizable.
 
 Useful feedback: exact actions before the issue, game mode, visible symptom,
 screenshot/video, and simant-sdl3.log. For Save/Load problems, include the new

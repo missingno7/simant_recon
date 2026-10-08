@@ -4,6 +4,7 @@
 
 #include "../graphics_cursor_source.h"
 #include "../m1b73_mouse_state.h"
+#include "native_windows.h"
 #include "../m1b73_main_input.h"
 #include "../m1b73_queue_ops.h"
 #include "../m1b73_queues.h"
@@ -409,7 +410,8 @@ portable_m1b73_sdl_application_input_present(
         binding->graphics->framebuffer.stride <
             (size_t)binding->graphics->framebuffer.width ||
         !host_present(binding->host, binding->graphics->framebuffer.pixels,
-                      binding->graphics->framebuffer.stride, palette))
+                      binding->graphics->framebuffer.stride, palette) ||
+        !native_windows_present(palette))
         return PORTABLE_M1B73_APP_INPUT_PROVIDER_FAILED;
     return PORTABLE_M1B73_APP_INPUT_OK;
 }

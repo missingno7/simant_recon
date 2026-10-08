@@ -7,6 +7,7 @@ extern void (*driver_callback_table[25])();
 #include "graphics_entry_source.h"
 #include "graphics_source_clip.h"
 #include "m1b73_mouse_state.h"
+#include "window_hosting.h"
 #include "portable/whole_program/state/asm_display_data_v1.h"
 #include "portable/whole_program/window_source_rects.h"
 
@@ -267,7 +268,9 @@ int portable_m1b73_graphics_cursor_mode(void *context, uint8_t mode,
     full_screen_clip_list[1] = (struct Rect){ 0, INT16_MIN, 0, 0 };
     *clip_slot = full_screen_clip_list;
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[16])();
+    sim_window_hosting_cursor_scope(mode);
     ok = mode == 1 ? draw_active_cursor(cursor) : draw_saved_cursor(cursor);
+    sim_window_hosting_cursor_scope(0);
     (*( SimGraphicsAttrCallback *)(void *)&driver_callback_table[0])((int16_t)old_foreground, (int16_t)old_background,
            (int16_t)old_pattern);
     (*( SimGraphicsLogicOperationCallback *)(void *)&driver_callback_table[23])(old_logic);

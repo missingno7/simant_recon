@@ -13,6 +13,8 @@
 #include "platform/sdl3/m1b73_application_input.h"
 #include "platform/sdl3/host_modes.h"
 #include "platform/sdl3/diagnostics.h"
+#include "platform/sdl3/native_windows.h"
+#include "platform/window_hosting.h"
 #include "portable/whole_program/platform/graphics_resources.h"
 #include "portable/platform/sdl3/whole_audio_provider.h"
 #include "portable/platform/sdl3/whole_audio_startup.h"
@@ -36,6 +38,7 @@ typedef struct ReplayKey {
     HostEvent pointer;
     int checkpoint, quit;
     int relative, current_pointer;
+    int16_t window; /* op@ID: window-local input to a hosted window */
 } ReplayKey;
 
 typedef struct Application {
@@ -145,6 +148,16 @@ static void load_replay(const char *path)
         entry = &app.replay[app.replay_count];
         memset(entry, 0, sizeof(*entry));
         entry->milliseconds = milliseconds;
+        if (strchr(operation, '@')) {
+            /* op@ID: blank the suffix in the line so every parser below sees op. */
+            char *at = strchr(line, '@'), *end;
+            unsigned long id = strtoul(at + 1, &end, 16);
+            if (end == at + 1 || id == 0 || id > 0xffffu || (*end != ' ' && *end != '\t'))
+                fail("replay window target");
+            entry->window = (int16_t)(uint16_t)id;
+            memset(at, ' ', (size_t)(end - at));
+            *strchr(operation, '@') = 0;
+        }
         if (!strcmp(operation, "down") || !strcmp(operation, "up")) {
             size_t length;
             if (sscanf(line, "%llu %15s %63[^\r\n]", &milliseconds, operation,
@@ -228,7 +241,8 @@ static void replay_input(uint64_t now)
                 entry->pointer.x = (int16_t)px;
                 entry->pointer.y = (int16_t)py;
             }
-            if (!host_push_pointer_event(app.host, &entry->pointer))
+            if (entry->window ? !native_windows_push_pointer(entry->window, &entry->pointer) :
+                                !host_push_pointer_event(app.host, &entry->pointer))
                 fail("SDL pointer replay enqueue");
             fprintf(stderr, "Replay SDL pointer %zu: %llu ms kind=%d button=%u (%d,%d)\n",
                 app.replay_next, (unsigned long long)entry->milliseconds,
@@ -500,7 +514,8 @@ static void idle(void *context)
     if (a->smoke_deadline_ns && now >= a->smoke_deadline_ns) {
         if (!a->last_present || !a->display_active)
             fail("smoke deadline reached before a source frame was presented");
-        if (a->capture_path[0] && !host_save_frame(a->host, a->capture_path))
+        if (a->capture_path[0] && (!host_save_frame(a->host, a->capture_path) ||
+                                   !native_windows_save_frames(a->capture_path)))
             fail("smoke frame capture");
         fprintf(stderr, "Source-main smoke frame captured; outer game loop count=%ld; full gameplay remains a separate check\n",
             (long)fd_50F6_383A);
@@ -522,6 +537,9 @@ int main(int argc, char **argv)
     uint64_t virtual_quantum_ns = 0;
     char **source_argv;
     int debug = 0, test_crash = 0, test_abort = 0;
+    /* Modern presentation: these logical windows become native windows. */
+    int16_t hosted_ids[SIM_HOSTING_SLOTS];
+    unsigned hosted_count = 0;
     const char *diagnostics_root = NULL;
     setvbuf(stderr, NULL, _IONBF, 0);
     SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);
@@ -575,6 +593,20 @@ int main(int argc, char **argv)
         else if (!strcmp(argv[i], "--test-input")) app.test_input = 1;
         else if (!strcmp(argv[i], "--test-input-crash")) app.test_input = 2;
         else if (!strcmp(argv[i], "--headless")) headless = 1;
+        else if (!strncmp(argv[i], "--windows", 9) && (argv[i][9] == 0 || argv[i][9] == '=')) {
+            /* --windows[=ID,ID...] (hex logical IDs). Default: the game panels
+             * (edit, map, info, behavior, caste, history, score, yard, examine);
+             * dialogs stay on the desktop window, as Win16 kept them in its frame. */
+            const char *list = argv[i][9] ? argv[i] + 10 : "0,100,500,1200,1300,1500,1800,1900,1D00";
+            char *end;
+            while (*list && hosted_count < SIM_HOSTING_SLOTS) {
+                unsigned long id = strtoul(list, &end, 16);
+                if (end == list || id > 0xffffu || (id & 0xffu) || (id >> 8) >= SIM_HOSTING_SLOTS)
+                    fail("--windows expects hex logical window IDs such as 1200,1300");
+                hosted_ids[hosted_count++] = (int16_t)(uint16_t)id;
+                list = *end == ',' ? end + 1 : end;
+            }
+        }
         else if (!strcmp(argv[i], "--deterministic")) virtual_quantum_ns = 1000000u;
         else if (!strcmp(argv[i], "--poll-ns") && i + 1 < argc) {
             virtual_quantum_ns = strtoull(argv[++i], NULL, 0);
@@ -620,6 +652,10 @@ int main(int argc, char **argv)
     fprintf(stderr, "Native video driver: %s\n", SDL_GetCurrentVideoDriver());
     if (replay_path[0]) load_replay(replay_path);
     if (sim_graphics_init(&app.graphics) != SIM_GRAPHICS_OK) fail("framebuffer");
+    if (hosted_count &&
+        (!sim_window_hosting_enable(&app.graphics.vga, hosted_ids, hosted_count) ||
+         !native_windows_init(app.host, host_sdl_window(app.host))))
+        fail("native window hosting");
     sim_graphics_set_mode_changed_callback(&app.graphics, change_dimensions, &app);
     portable_source_graphics_resources_init(&app.resources);
     if (portable_source_graphics_resources_bind(&app.resources, &app.graphics, fonts) !=

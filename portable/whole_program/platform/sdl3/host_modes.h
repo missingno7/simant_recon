@@ -22,6 +22,8 @@ int host_get_logical_size(const Host *host, int *width, int *height);
 /* Submit a test pointer transition through SDL's ordinary event queue. Input
  * coordinates are logical; the provider applies the active presentation. */
 int host_push_pointer_event(Host *host, const HostEvent *event);
+/* The root (desktop) SDL window; modern mode places hosted windows from it. */
+SDL_Window *host_sdl_window(Host *host);
 
 /* Opt-in replay clock. Reads never advance time; the guarded application
  * poll advances one explicit quantum, independently of SDL/CPU wall time. */

@@ -9,7 +9,12 @@ python portable/tests/runtime/run_load.py --report build/current/portable/report
 python portable/tests/runtime/run_logo.py --report build/current/portable/report.json --repeat 2
 python portable/tests/runtime/run_drag.py --report build/current/portable/report.json --repeat 2
 python portable/tests/runtime/run_edge.py --report build/current/portable/report.json
+python portable/tests/runtime/run_windows.py --report build/current/portable/report.json
 ```
+
+`run_windows.py` exercises the modern `--windows` presentation. Replay lines
+`op@ID` (for example `12000 mouse-down@1300 Left 28 49`) send input to hosted
+logical window ID at window-local coordinates; `--debug` records the same form.
 
 The Save check dismisses the source success dialog with Return. The Save→Load
 check selects the generated `a.ant` through the real Load dialog. It also needs

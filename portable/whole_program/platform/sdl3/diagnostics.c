@@ -1,5 +1,6 @@
 /* Windows crash reporting follows Stunts' prestarted writer-thread design.
  * The fault handler copies context and signals; it never enters SDL or game code. */
+#include "native_windows.h"
 #include "diagnostics.h"
 #include <stdio.h>
 #include <string.h>
@@ -318,6 +319,8 @@ int simant_diagnostics_event(void *unused, const SDL_Event *event)
     LONG sequence;
     int scripted=event->common.timestamp==HOST_REPLAY_EVENT_TIMESTAMP;
     const char *name;
+    char target[8] = "";
+    int16_t window, left = 0, top = 0;
     (void)unused;
     if (event->type==SDL_EVENT_KEY_DOWN || event->type==SDL_EVENT_KEY_UP) {
         name=SDL_GetKeyName(event->key.key);
@@ -325,12 +328,19 @@ int simant_diagnostics_event(void *unused, const SDL_Event *event)
             event->type==SDL_EVENT_KEY_DOWN ? "down":"up",name);
         else snprintf(line,sizeof(line),"# %llu ignored key scancode %u",(unsigned long long)ms,(unsigned)event->key.scancode);
     } else if (event->type==SDL_EVENT_MOUSE_MOTION) {
-        snprintf(line,sizeof(line),"%llu move %d %d",(unsigned long long)ms,(int)event->motion.x,(int)event->motion.y);
+        /* Modern mode: hosted-window input replays as op@ID window-local. */
+        if (native_windows_event_origin(event->motion.windowID,&window,&left,&top))
+            snprintf(target,sizeof(target),"@%04X",(unsigned)(uint16_t)window);
+        snprintf(line,sizeof(line),"%llu move%s %d %d",(unsigned long long)ms,target,
+            (int)event->motion.x-left,(int)event->motion.y-top);
     } else if (event->type==SDL_EVENT_MOUSE_BUTTON_DOWN || event->type==SDL_EVENT_MOUSE_BUTTON_UP) {
         name=event->button.button==SDL_BUTTON_LEFT ? "Left" : event->button.button==SDL_BUTTON_RIGHT ? "Right" :
             event->button.button==SDL_BUTTON_MIDDLE ? "Middle" : NULL;
-        if (name) snprintf(line,sizeof(line),"%llu mouse-%s %s %d %d",(unsigned long long)ms,
-            event->type==SDL_EVENT_MOUSE_BUTTON_DOWN ? "down":"up",name,(int)event->button.x,(int)event->button.y);
+        if (native_windows_event_origin(event->button.windowID,&window,&left,&top))
+            snprintf(target,sizeof(target),"@%04X",(unsigned)(uint16_t)window);
+        if (name) snprintf(line,sizeof(line),"%llu mouse-%s%s %s %d %d",(unsigned long long)ms,
+            event->type==SDL_EVENT_MOUSE_BUTTON_DOWN ? "down":"up",target,name,
+            (int)event->button.x-left,(int)event->button.y-top);
         else snprintf(line,sizeof(line),"# %llu ignored mouse button %u",(unsigned long long)ms,event->button.button);
     } else if (event->type==SDL_EVENT_MOUSE_WHEEL)
         snprintf(line,sizeof(line),"# %llu ignored mouse wheel %.3f %.3f",(unsigned long long)ms,(double)event->wheel.x,(double)event->wheel.y);

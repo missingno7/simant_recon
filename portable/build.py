@@ -345,6 +345,9 @@ def main():
             dest.write_text(text,encoding='latin1')
         except Exception as exc:
             errors.append({'source':row['source'],'stage':'integer frontend','error':str(exc)})
+    # Modern presentation boundary (platform/window_hosting.c): cross-module
+    # calls into m1E57's clip entry points are observed; bodies are canonical.
+    WINDOW_HOSTING_WRAPS=['-Wl,--wrap='+name for name in PLATFORM['window_hosting_wraps']]
     asm_rows=[{'source':'canonical symbolic ASM data: '+name,'generated':str(OUT/name),
                'status':'DATA_FROM_SYMBOLIC_ASM_DIRECTIVES'} for name in PLATFORM['ASM_data_recipes']]
     def compile_row(row):
@@ -405,8 +408,10 @@ def main():
             app_response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects)+'\n',encoding='utf-8')
             # System DbgHelp cannot read MinGW DWARF; exports provide native
             # function names. Keep -g for offline source-line analysis as well.
-            application_command=[CC,'-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
-                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp','-Wl,--wrap=exit','-Wl,--export-all-symbols','-static','-lstdc++',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
+            # -fno-lto: link the fat objects' regular code. The declaration check above
+            # keeps LTO's cross-TU type audit; --wrap only applies outside LTO.
+            application_command=[CC,'-fno-lto','-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
+                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp','-Wl,--wrap=exit',*WINDOW_HOSTING_WRAPS,'-Wl,--export-all-symbols','-static','-lstdc++',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
             app_run=subprocess.run(application_command,cwd=OUT,capture_output=True,text=True)
             (OUT/'application-link.txt').write_text(app_run.stdout+app_run.stderr)
             app_link={'passed':app_run.returncode==0,'command':application_command,'exit_code':app_run.returncode,

@@ -1,0 +1,13 @@
+# Quick Game, then one click on Caste Control's Manual button (window-local
+# coordinates). The edit window is on top, so the click only raises 0x1300.
+5000 down Return
+5050 up Return
+7000 down Return
+7050 up Return
+9000 down Return
+9050 up Return
+10000 move 370 165
+10200 mouse-down Left 370 165
+10400 mouse-up Left 370 165
+12000 mouse-down@1300 Left 28 49
+12100 mouse-up@1300 Left 28 49

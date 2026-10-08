@@ -149,6 +149,10 @@
       "role": "Ordinary-input exterior window/map drawing regressions"
     },
     {
+      "path": "portable/tests/runtime/run_windows.py",
+      "role": "Modern --windows presentation: hosted window mapping, show, raise rule, local input and two windows in one game"
+    },
+    {
       "path": "portable/whole_program/platform/tests/run_graphics_vga_tests.py",
       "role": "VGA hardware controls and locked original-instruction S00 RAM/aperture comparisons"
     }
@@ -1179,6 +1183,23 @@
       "reason": "Models the VGA CPU aperture and register/latch operations targeted by canonical S00 ASM; screen geometry is presentation, not an input-domain guard.",
       "blocker": "No whole-machine CPU/IRQ context equivalence claim.",
       "deletion_condition": "Keep at the hardware boundary; any replacement must preserve all four planes and canonical aperture addressing."
+    },
+    {
+      "id": "native_window_hosting",
+      "class": "TRUE_PLATFORM_BOUNDARY",
+      "paths": [
+        "portable/whole_program/platform/window_hosting.c",
+        "portable/whole_program/platform/window_hosting.h",
+        "portable/whole_program/platform/sdl3/native_windows.c",
+        "portable/whole_program/platform/sdl3/native_windows.h"
+      ],
+      "builder_site": "portable/platform.json services and window_hosting_wraps (application link -Wl,--wrap)",
+      "consumers": [
+        "--windows modern presentation: hosted logical windows as native SDL windows"
+      ],
+      "reason": "Replaces the DOS window system's shared-screen occlusion for hosted windows, as Win16 SimAnt does with native windows (its clip_SetWin is empty). Cross-module calls into m1E57 clip entry points are observed; canonical bodies, window records, stack, hit testing and draw hooks are unchanged. Each hosted window gets its own VGA plane set and an unoccluded clip list; the shared windows keep the canonical m1E57 occlusion over their sub-stack.",
+      "blocker": "Presentation only. Without --windows no window is hosted and every access uses the single shared card.",
+      "deletion_condition": "Keep while the modern presentation hosts logical windows natively; a replacement must keep canonical window/clip algorithms as the only owners of window state."
     }
   ],
   "dispositions": [

@@ -6,6 +6,16 @@
 char g_3D20[128]; /* source RAM scratch required by the isolated raster DLL */
 static SimVga vga;
 static uint8_t pixels[640*480];
+static SimVgaPlanes other;
+/* Presentation routing: the low nibble of byte 200 lives in another plane set. */
+static unsigned split(void *context, uint16_t offset, SimVgaSpan spans[8])
+{
+    (void)context;
+    if (offset != 200) return 0;
+    spans[0].planes = (SimVgaPlanes *)&vga.planes; spans[0].mask = 0xf0;
+    spans[1].planes = &other; spans[1].mask = 0x0f;
+    return 2;
+}
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"VGA check line %d: %s\n",__LINE__,#x); exit(2); } } while (0)
 
 int main(void)
@@ -51,6 +61,27 @@ int main(void)
     CHECK(pixels[640]==6);
     for(i=0;i<640;++i) CHECK(pixels[i]==0);
     CHECK(sim_vga_color(&vga,38400,0)==15); /* retained but not presented */
-    puts("PASS: VGA planes, masks, read latches, mode-1 copy, ALU, aperture wrap and visible presentation");
+    /* A routed byte behaves as one card byte: latches compose both plane sets,
+     * writes split by pixel, and the router survives a mode reset. */
+    sim_vga_reset(&vga);
+    sim_vga_set_router(&vga, split, NULL);
+    sim_vga_reset(&vga);
+    CHECK(vga.route == split);
+    vga.planes[0][200] = 0xa0; other[0][200] = 0x05;
+    CHECK(sim_vga_read(&vga,200) == 0xa5);
+    sim_vga_write(&vga,201,0xff);           /* unrouted neighbour: card planes */
+    CHECK(vga.planes[0][201] == 0xff && other[0][201] == 0);
+    sim_vga_out(&vga,0x3ce,5); sim_vga_out(&vga,0x3cf,1);
+    sim_vga_write(&vga,200,0);              /* mode-1 copy of the composed latch */
+    CHECK(vga.planes[0][200] == 0xa0 && other[0][200] == 0x05);
+    sim_vga_out(&vga,0x3ce,5); sim_vga_out(&vga,0x3cf,0);
+    sim_vga_write(&vga,200,0x3c);
+    CHECK(vga.planes[0][200] == 0x30 && other[0][200] == 0x0c);
+    CHECK(vga.planes[1][200] == 0x30 && other[1][200] == 0x0c);
+    sim_vga_store_color(&vga,200,7,9);      /* rightmost pixel: other set */
+    CHECK(sim_vga_color(&vga,200,7) == 9 && (other[3][200] & 1) && !(vga.planes[3][200] & 1));
+    sim_vga_present(&vga,pixels,640,1);     /* the card view excludes routed pixels */
+    sim_vga_set_router(&vga, NULL, NULL);
+    puts("PASS: VGA planes, masks, read latches, mode-1 copy, ALU, aperture wrap, visible presentation and per-window routing");
     return 0;
 }

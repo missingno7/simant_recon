@@ -1,4 +1,5 @@
 #include "host_modes.h"
+#include "native_windows.h"
 #include <SDL3/SDL.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -148,6 +149,7 @@ void host_destroy(Host *host)
 }
 
 const char *host_error(void) { return SDL_GetError(); }
+SDL_Window *host_sdl_window(Host *host) { return host ? host->window : NULL; }
 uint64_t host_time_ns(void) { return virtual_quantum ? virtual_ns : SDL_GetTicksNS(); }
 void host_wait_ms(uint32_t milliseconds)
 {
@@ -257,7 +259,8 @@ int host_get_input_state(Host *host, HostInputState *state)
     if (host == NULL || state == NULL) return 0;
     if (virtual_quantum) { *state = host->replay_state; return 1; }
     buttons = SDL_GetMouseState(&window_x, &window_y);
-    if (!SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
+    if (!native_windows_pointer(&logical_x, &logical_y) &&
+        !SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
                                          &logical_x, &logical_y))
         return 0;
     state->x = (int16_t)pointer_coordinate(logical_x, host->logical_width);
@@ -317,10 +320,14 @@ int host_push_pointer_event(Host *host, const HostEvent *event)
 int host_poll_event(Host *host, HostEvent *event)
 {
     SDL_Event raw;
+    int hosted;
     if (!host || !event) return 0;
     while (SDL_PollEvent(&raw)) {
         memset(event, 0, sizeof(*event));
-        if (!SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
+        /* Modern mode: hosted windows convert to logical screen space. */
+        hosted = native_windows_translate(&raw);
+        if (hosted < 0) continue;
+        if (!hosted && !SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
         /* Report the visible logical screen, including captured/letterboxed
          * motion. The INT33 adapter subsequently applies the source's tighter
          * width-4/height-4 bounds. Diagnostics and replay state see this same
@@ -333,6 +340,10 @@ int host_poll_event(Host *host, HostEvent *event)
             raw.button.x = pointer_coordinate(raw.button.x, host->logical_width);
             raw.button.y = pointer_coordinate(raw.button.y, host->logical_height);
         }
+        if (!hosted && native_windows_filter_root(&raw) < 0) continue;
+        if (raw.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED &&
+            raw.window.windowID == SDL_GetWindowID(host->window))
+            raw.type = SDL_EVENT_QUIT; /* other visible windows keep SDL from quitting */
         if (event_observer && event_observer(event_observer_context, &raw)) continue;
         switch (raw.type) {
             case SDL_EVENT_QUIT: event->kind=HOST_EVENT_QUIT; break;
