@@ -80,7 +80,8 @@
     "portable/audio/ymfm/ymfm_pcm.cpp",
     "portable/whole_program/platform/graphics_vga.c",
     "portable/whole_program/platform/window_hosting.c",
-    "portable/whole_program/platform/sdl3/native_windows.c"
+    "portable/whole_program/platform/sdl3/native_windows.c",
+    "portable/whole_program/platform/sdl3/native_menu.c"
   ],
   "headers": [
     "portable/whole_program/platform/sdl3/diagnostics.h",
@@ -179,7 +180,8 @@
     "portable/audio/ymfm/ymfm_pcm.h",
     "portable/whole_program/platform/graphics_vga.h",
     "portable/whole_program/platform/window_hosting.h",
-    "portable/whole_program/platform/sdl3/native_windows.h"
+    "portable/whole_program/platform/sdl3/native_windows.h",
+    "portable/whole_program/platform/sdl3/native_menu.h"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -193,7 +195,10 @@
     "f_1E57_0052",
     "f_1E57_00B1",
     "clip_KillWin",
-    "win_DrawTitle"
+    "win_DrawTitle",
+    "f_1B28_0069",
+    "GSaveRect",
+    "f_1CE2_056C"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",

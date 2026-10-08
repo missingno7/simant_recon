@@ -1,89 +1,77 @@
 #include "native_windows.h"
 #include "../window_hosting.h"
 #include "host_modes.h"
+#include "native_menu.h"
 
 #include <stdio.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 
 /* Win16 win_Open builds each logical window as a real window: the record's
- * 18-px title strip becomes the native caption, flag 4 gives the close box
+ * title strip becomes the native caption, flag 4 gives the close box
  * (WM_CLOSE -> win_Close), flag 8 a sizing frame (WM_SIZE -> record rect,
- * win_Recalc). Here every hosted window is an owned top-level SDL window; the
- * close box and the sizing frame act through the game's own chrome objects
- * (close box 0xf083, resize icon 0xf084), so window state stays canonical. */
+ * win_Recalc); a click on a background window raises it (WM_MOUSEACTIVATE)
+ * unless the top window is modal (+0x1C & 0x40); popups are native popup
+ * windows (PopUpInfoWindow). Here every hosted window is an owned top-level
+ * SDL window, every save-under box a native popup, and native actions run in
+ * the game's event pump (window_hosting.h), like Win16 message dispatch. */
 
-enum { SYNTHETIC_CAPACITY = 16 };
+enum { POPUP_DEPTH = 4 };
 
-typedef struct NativeWindow {
-    SimHostedWindowView view;      /* last presented logical state */
+typedef struct Surface {
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     uint8_t *indexed, *rgba;
-    int width, height;             /* logical client size (rect minus title strip) */
+    int width, height;             /* logical size */
+} Surface;
+
+typedef struct NativeWindow {
+    SimHostedWindowView view;      /* last presented logical state */
+    Surface surface;
     int strip;                     /* title strip replaced by the native caption */
     int shown;
     char title[64];
-    Uint8 raise_button;            /* button whose down was turned into a raise */
-    int16_t raise_x, raise_y;
-    int close_pending;
+    Uint8 eaten_button;            /* a background click: raise only */
+    int close_pending, raise_pending;
     int resize_w, resize_h;        /* requested logical client size, 0: none */
 } NativeWindow;
 
-typedef struct Synthetic {
-    uint64_t due_ns;
-    HostEvent event;
-} Synthetic;
+typedef struct NativePopup {
+    SimHostedPopupView view;
+    Surface surface;
+    int x, y;                      /* client position in desktop coordinates */
+} NativePopup;
+
+extern struct Rect { int16_t left, top, right, bottom; } fd_50F6_393C; /* game menu bar */
 
 static struct {
     int active;
     int scale;
+    int crop;                      /* main window starts below the game menu bar */
     Host *host;
     SDL_Window *root;
     NativeWindow windows[SIM_HOSTING_SLOTS];
     unsigned count;
+    NativePopup popups[POPUP_DEPTH];
+    unsigned popup_count, popup_serial;
     Uint8 root_dropped_button;
-    Synthetic synthetic[SYNTHETIC_CAPACITY];
-    unsigned synthetic_count;
 } n;
 
 int native_windows_active(void) { return n.active; }
 int native_windows_scale(void) { return n.scale ? n.scale : 1; }
 
-int native_windows_init(Host *host, SDL_Window *root)
+static void destroy_surface(Surface *s)
 {
-    if (host == NULL || root == NULL || !sim_window_hosting_enabled()) return 0;
-    memset(&n, 0, sizeof(n));
-    n.host = host;
-    n.root = root;
-    n.scale = host_window_scale(host);
-    n.count = sim_window_hosting_count();
-    n.active = 1;
-    return 1;
-}
-
-void native_windows_shutdown(void)
-{
-    unsigned i;
-    for (i = 0; i < n.count; ++i) {
-        NativeWindow *w = &n.windows[i];
-        SDL_DestroyTexture(w->texture);
-        SDL_DestroyRenderer(w->renderer);
-        SDL_DestroyWindow(w->window);
-        free(w->indexed);
-        free(w->rgba);
-    }
-    memset(&n, 0, sizeof(n));
-}
-
-static NativeWindow *by_sdl_id(SDL_WindowID id)
-{
-    unsigned i;
-    for (i = 0; i < n.count; ++i)
-        if (n.windows[i].window && SDL_GetWindowID(n.windows[i].window) == id)
-            return &n.windows[i];
-    return NULL;
+    SDL_DestroyTexture(s->texture);
+    SDL_DestroyRenderer(s->renderer);
+    SDL_DestroyWindow(s->window);
+    free(s->indexed);
+    free(s->rgba);
+    memset(s, 0, sizeof(*s));
 }
 
 static NativeWindow *by_logical_id(int16_t id)
@@ -94,82 +82,54 @@ static NativeWindow *by_logical_id(int16_t id)
     return NULL;
 }
 
-/* ---- synthetic chrome input, delivered through host_poll_event in order ---- */
+/* ---- actions in the game's event pump ---- */
 
-static void synthesize(uint64_t delay_ms, HostEventKind kind, int x, int y)
+static void pump(void)
 {
-    Synthetic *e;
-    uint64_t base = n.synthetic_count ? n.synthetic[n.synthetic_count - 1].due_ns : host_time_ns();
-    if (n.synthetic_count == SYNTHETIC_CAPACITY) return;
-    e = &n.synthetic[n.synthetic_count++];
-    memset(e, 0, sizeof(*e));
-    e->due_ns = base + delay_ms * 1000000u;
-    e->event.kind = kind;
-    e->event.button = kind == HOST_EVENT_MOUSE_MOVE ? 0 : SDL_BUTTON_LEFT;
-    if (x < 0) x = 0;
-    if (y < 0) y = 0;
-    if (x > 636) x = 636;
-    if (y > 476) y = 476;
-    e->event.x = (int16_t)x;
-    e->event.y = (int16_t)y;
+    unsigned i;
+    native_menu_pump();
+    for (i = 0; i < n.count; ++i) {
+        NativeWindow *w = &n.windows[i];
+        if (!w->view.open) continue;
+        if (w->close_pending) {
+            w->close_pending = 0;
+            sim_window_hosting_close(w->view.id);
+            continue;
+        }
+        if (w->raise_pending || w->resize_w) {
+            w->raise_pending = 0;
+            sim_window_hosting_raise(w->view.id);
+        }
+        if (w->resize_w) {
+            int width = w->resize_w, height = w->resize_h + w->strip;
+            w->resize_w = w->resize_h = 0;
+            sim_window_hosting_resize(w->view.id, width, height);
+        }
+    }
 }
 
-int native_windows_next_synthetic(HostEvent *event)
+int native_windows_init(Host *host, SDL_Window *root)
 {
-    if (!n.active || n.synthetic_count == 0 || host_time_ns() < n.synthetic[0].due_ns) return 0;
-    *event = n.synthetic[0].event;
-    memmove(n.synthetic, n.synthetic + 1, (n.synthetic_count - 1) * sizeof(n.synthetic[0]));
-    --n.synthetic_count;
+    if (host == NULL || root == NULL || !sim_window_hosting_enabled()) return 0;
+    memset(&n, 0, sizeof(n));
+    n.host = host;
+    n.root = root;
+    n.scale = host_window_scale(host);
+    n.count = sim_window_hosting_count();
+    n.active = 1;
+    sim_window_hosting_set_pump(pump);
+    if (!native_menu_init(root))
+        fprintf(stderr, "Native menu bar unavailable (no native main window)\n");
     return 1;
 }
 
-static void click(uint64_t delay_ms, int x, int y)
+void native_windows_shutdown(void)
 {
-    synthesize(delay_ms, HOST_EVENT_MOUSE_MOVE, x, y);
-    synthesize(30, HOST_EVENT_MOUSE_DOWN, x, y);
-    synthesize(60, HOST_EVENT_MOUSE_UP, x, y);
-}
-
-/* DOS f_218D_0451 / Win16 WM_MOUSEACTIVATE: a click where the window is on
- * top raises it; the click itself is eaten. */
-static void raise_point(NativeWindow *w, int16_t *x, int16_t *y)
-{
-    if (!sim_window_hosting_visible_point(w->view.id, x, y)) {
-        *x = (int16_t)((w->view.left + w->view.right) / 2);
-        *y = (int16_t)((w->view.top_y + w->view.bottom) / 2);
-    }
-}
-
-static void run_chrome_actions(NativeWindow *w)
-{
-    int16_t x, y;
-    if (n.synthetic_count || (!w->close_pending && !w->resize_w)) return;
-    if (!host_virtual_clock_enabled() && (SDL_GetGlobalMouseState(NULL, NULL) & SDL_BUTTON_LMASK))
-        return; /* the user is still dragging the frame */
-    if (!w->view.top) {
-        raise_point(w, &x, &y);
-        click(0, x, y);
-        return;
-    }
-    if (w->close_pending) {
-        w->close_pending = 0;
-        /* f_2505_06B9: close box 0x64 at the chrome inset of the top-left corner. */
-        click(0, w->view.left + w->view.margin + 4, w->view.top_y + w->view.margin + 4);
-        return;
-    }
-    {
-        /* f_2505_06B9: resize icon 0x70 in the bottom-right inset corner;
-         * o26_39C7_0671 moves the corner with the pointer while held. */
-        int sx = w->view.right - w->view.margin - 4, sy = w->view.bottom - w->view.margin - 4;
-        int dx = w->resize_w - w->width, dy = w->resize_h - w->height;
-        w->resize_w = w->resize_h = 0;
-        if (!dx && !dy) return;
-        synthesize(0, HOST_EVENT_MOUSE_MOVE, sx, sy);
-        synthesize(30, HOST_EVENT_MOUSE_DOWN, sx, sy);
-        synthesize(150, HOST_EVENT_MOUSE_MOVE, sx + dx / 2, sy + dy / 2);
-        synthesize(150, HOST_EVENT_MOUSE_MOVE, sx + dx, sy + dy);
-        synthesize(200, HOST_EVENT_MOUSE_UP, sx + dx, sy + dy);
-    }
+    unsigned i;
+    sim_window_hosting_set_pump(NULL);
+    for (i = 0; i < n.count; ++i) destroy_surface(&n.windows[i].surface);
+    for (i = 0; i < POPUP_DEPTH; ++i) destroy_surface(&n.popups[i].surface);
+    memset(&n, 0, sizeof(n));
 }
 
 /* ---- presentation ---- */
@@ -182,28 +142,73 @@ static int strip_of(const SimHostedWindowView *view)
     return view->drag_bottom - view->top_y;
 }
 
+static int size_surface(Surface *s, int width, int height)
+{
+    if (width == s->width && height == s->height && s->texture) return 1;
+    SDL_DestroyTexture(s->texture);
+    free(s->indexed);
+    free(s->rgba);
+    s->texture = SDL_CreateTexture(s->renderer, SDL_PIXELFORMAT_RGBA32,
+                                   SDL_TEXTUREACCESS_STREAMING, width, height);
+    s->indexed = malloc((size_t)width * (size_t)height);
+    s->rgba = malloc((size_t)width * (size_t)height * 4u);
+    s->width = width;
+    s->height = height;
+    return s->texture && s->indexed && s->rgba &&
+           SDL_SetTextureScaleMode(s->texture, SDL_SCALEMODE_NEAREST);
+}
+
+/* Draw 1:1 at the global scale; a frame larger than the logical size (while
+ * the user is still sizing it) shows the game's background, never a stretch. */
+static int draw_surface(Surface *s, const SimVgaPlanes *planes, int left, int top,
+                        const HostPalette *palette)
+{
+    SDL_FRect target;
+    int x, y;
+    sim_vga_present_planes(planes, s->indexed, (size_t)s->width, left, top, s->width, s->height);
+    for (y = 0; y < s->height; ++y)
+        for (x = 0; x < s->width; ++x) {
+            uint8_t index = s->indexed[y * s->width + x] & 15u;
+            uint8_t *out = s->rgba + ((size_t)y * (size_t)s->width + (size_t)x) * 4u;
+            memcpy(out, palette->rgb[index], 3);
+            out[3] = 255;
+        }
+    target.x = target.y = 0;
+    target.w = (float)(s->width * n.scale);
+    target.h = (float)(s->height * n.scale);
+    return SDL_UpdateTexture(s->texture, NULL, s->rgba, s->width * 4) &&
+           SDL_SetRenderDrawColor(s->renderer, palette->rgb[7][0], palette->rgb[7][1],
+                                  palette->rgb[7][2], 255) &&
+           SDL_RenderClear(s->renderer) &&
+           SDL_RenderTexture(s->renderer, s->texture, NULL, &target) &&
+           SDL_RenderPresent(s->renderer);
+}
+
+static void place(NativeWindow *w, const SimHostedWindowView *view, int strip);
+
 static int ensure_window(NativeWindow *w, const SimHostedWindowView *view)
 {
     int strip = strip_of(view);
     int width = view->right - view->left, height = view->bottom - view->top_y - strip;
     if (width <= 0 || height <= 0) return 1;
-    if (w->window == NULL) {
+    if (w->surface.window == NULL) {
         int rx = 0, ry = 0;
-        SDL_WindowFlags flags = SDL_WINDOW_HIDDEN | ((view->flags & 8) ? SDL_WINDOW_RESIZABLE : 0);
+        SDL_WindowFlags flags = SDL_WINDOW_HIDDEN | ((view->flags & 8) ? SDL_WINDOW_RESIZABLE : 0) |
+                                (strip ? 0 : SDL_WINDOW_BORDERLESS); /* Win16 WS_DLGFRAME */
         if (!SDL_CreateWindowAndRenderer(view->title, width * n.scale, height * n.scale,
-                                         flags, &w->window, &w->renderer)) {
+                                         flags, &w->surface.window, &w->surface.renderer)) {
             fprintf(stderr, "Native window for %04X failed: %s\n",
                     (unsigned)(uint16_t)view->id, SDL_GetError());
             return 0;
         }
         /* Owned by the main window: above it, minimized with it, one taskbar
          * entry. Video drivers without ownership (headless) keep it top-level. */
-        if (!SDL_SetWindowParent(w->window, n.root))
+        if (!SDL_SetWindowParent(w->surface.window, n.root))
             fprintf(stderr, "Native window for %04X is not owned: %s\n",
                     (unsigned)(uint16_t)view->id, SDL_GetError());
-        SDL_GetWindowPosition(n.root, &rx, &ry);
-        SDL_SetWindowPosition(w->window, rx + view->left * n.scale,
-                              ry + (view->top_y + strip) * n.scale);
+        (void)rx; (void)ry;
+        w->strip = strip;
+        place(w, view, strip);
         snprintf(w->title, sizeof(w->title), "%s", view->title);
         fprintf(stderr, "Native window for %04X \"%s\": client %dx%d, scale %d, flags %04X\n",
                 (unsigned)(uint16_t)view->id, view->title, width, height, n.scale,
@@ -211,96 +216,257 @@ static int ensure_window(NativeWindow *w, const SimHostedWindowView *view)
     }
     if (strcmp(w->title, view->title)) {
         snprintf(w->title, sizeof(w->title), "%s", view->title);
-        SDL_SetWindowTitle(w->window, w->title);
+        SDL_SetWindowTitle(w->surface.window, w->title);
     }
-    if (width != w->width || height != w->height || strip != w->strip) {
-        SDL_DestroyTexture(w->texture);
-        free(w->indexed);
-        free(w->rgba);
-        w->texture = SDL_CreateTexture(w->renderer, SDL_PIXELFORMAT_RGBA32,
-                                       SDL_TEXTUREACCESS_STREAMING, width, height);
-        w->indexed = malloc((size_t)width * (size_t)height);
-        w->rgba = malloc((size_t)width * (size_t)height * 4u);
-        if (w->texture == NULL || w->indexed == NULL || w->rgba == NULL ||
-            !SDL_SetTextureScaleMode(w->texture, SDL_SCALEMODE_NEAREST) ||
-            !SDL_SetRenderLogicalPresentation(w->renderer, width, height,
-                                              SDL_LOGICAL_PRESENTATION_STRETCH))
-            return 0;
-        /* The game's result is the size (o26_39C7_022F constraints, grid). */
-        SDL_SetWindowSize(w->window, width * n.scale, height * n.scale);
-        if (view->flags & 8) {
-            SDL_SetWindowMinimumSize(w->window, 48 * n.scale, 48 * n.scale);
-            SDL_SetWindowMaximumSize(w->window, (640 - view->left) * n.scale,
-                                     (480 - view->top_y - strip) * n.scale);
-        }
-        w->width = width;
-        w->height = height;
+    if (width != w->surface.width || height != w->surface.height || strip != w->strip) {
+        if (!size_surface(&w->surface, width, height)) return 0;
+        /* The game's result is the size. */
+        SDL_SetWindowSize(w->surface.window, width * n.scale, height * n.scale);
+        if (view->flags & 8)
+            SDL_SetWindowMinimumSize(w->surface.window, 48 * n.scale, 48 * n.scale);
         w->strip = strip;
     }
+    return 1;
+}
+
+static NativeWindow *parent_at(int x, int y)
+{
+    NativeWindow *w = by_logical_id(sim_window_hosting_owner_at((int16_t)x, (int16_t)y));
+    return w && w->shown && y >= w->view.top_y + w->strip ? w : NULL;
+}
+
+/* Desktop position of a logical point: relative to the shown native window
+ * that logically holds it (another than `self`), else to the main window. */
+static void desktop_point(int lx, int ly, int16_t self, int *dx, int *dy)
+{
+    unsigned i;
+    NativeWindow *best = NULL;
+    int wx = 0, wy = 0;
+    for (i = 0; i < n.count; ++i) {
+        NativeWindow *w = &n.windows[i];
+        if (!w->shown || w->view.id == self || lx < w->view.left || lx >= w->view.right ||
+            ly < w->view.top_y + w->strip || ly >= w->view.bottom)
+            continue;
+        if (best == NULL || w->view.top) best = w;
+    }
+    if (best) {
+        SDL_GetWindowPosition(best->surface.window, &wx, &wy);
+        *dx = wx + (lx - best->view.left) * n.scale;
+        *dy = wy + (ly - best->view.top_y - best->strip) * n.scale;
+    } else {
+        SDL_GetWindowPosition(n.root, &wx, &wy);
+        *dx = wx + lx * n.scale;
+        *dy = wy + (ly - n.crop) * n.scale;
+    }
+}
+
+static void place(NativeWindow *w, const SimHostedWindowView *view, int strip)
+{
+    int x, y;
+    desktop_point(view->left, view->top_y + strip, view->id, &x, &y);
+    SDL_SetWindowPosition(w->surface.window, x, y);
+}
+
+/* Save-under boxes become native popups over the window they appear on. */
+static int sync_popups(void)
+{
+    SimHostedPopupView views[POPUP_DEPTH];
+    unsigned i, count;
+    if (sim_window_hosting_popup_serial() == n.popup_serial) return 1;
+    n.popup_serial = sim_window_hosting_popup_serial();
+    count = sim_window_hosting_popups(views, POPUP_DEPTH);
+    for (i = 0; i < POPUP_DEPTH; ++i) {
+        NativePopup *p = &n.popups[i];
+        int same = i < count && p->surface.window && !memcmp(&p->view, &views[i], sizeof(views[i]));
+        if (same) continue;
+        destroy_surface(&p->surface);
+        memset(&p->view, 0, sizeof(p->view));
+        if (i < count) {
+            const SimHostedPopupView *v = &views[i];
+            int width = v->right - v->left, height = v->bottom - v->top;
+            NativeWindow *owner = parent_at((v->left + v->right) / 2, (v->top + v->bottom) / 2);
+            SDL_Window *parent = owner ? owner->surface.window : n.root;
+            int ox = owner ? v->left - owner->view.left : v->left;
+            int oy = owner ? v->top - (owner->view.top_y + owner->strip) : v->top - n.crop;
+            if (width <= 0 || height <= 0) continue;
+            p->view = *v;
+            if (owner) SDL_GetWindowPosition(owner->surface.window, &p->x, &p->y);
+            else SDL_GetWindowPosition(n.root, &p->x, &p->y);
+            p->x += ox * n.scale;
+            p->y += oy * n.scale;
+            p->surface.window = SDL_CreatePopupWindow(parent, ox * n.scale, oy * n.scale,
+                                                      width * n.scale, height * n.scale,
+                                                      SDL_WINDOW_POPUP_MENU);
+            if (p->surface.window == NULL &&
+                (p->surface.window = SDL_CreateWindow("SimAnt", width * n.scale, height * n.scale,
+                                                      SDL_WINDOW_BORDERLESS)) != NULL) {
+                /* Drivers without popup windows (headless): a raised borderless one. */
+                SDL_SetWindowPosition(p->surface.window, p->x, p->y);
+                SDL_RaiseWindow(p->surface.window);
+            }
+            if (p->surface.window == NULL ||
+                (p->surface.renderer = SDL_CreateRenderer(p->surface.window, NULL)) == NULL ||
+                !size_surface(&p->surface, width, height)) {
+                fprintf(stderr, "Native popup failed: %s\n", SDL_GetError());
+                destroy_surface(&p->surface);
+                continue;
+            }
+        }
+    }
+    n.popup_count = count;
     return 1;
 }
 
 int native_windows_present(const HostPalette *palette)
 {
     unsigned i;
-    int x, y;
     if (!n.active) return 1;
+    /* Win16 InitMenu: the native bar replaces the game-drawn one; the main
+     * window then starts below the game's menu bar rows. */
+    if (native_menu_sync() && !n.crop && fd_50F6_393C.bottom > 0 &&
+        host_set_top_crop(n.host, fd_50F6_393C.bottom))
+        n.crop = fd_50F6_393C.bottom;
     for (i = 0; i < n.count; ++i) {
         NativeWindow *w = &n.windows[i];
         SimHostedWindowView view;
+        int raise;
         if (!sim_window_hosting_view(i, &view)) continue;
         if (!view.open) {
-            if (w->shown) { SDL_HideWindow(w->window); w->shown = 0; }
-            w->close_pending = 0;
+            if (w->shown) { SDL_HideWindow(w->surface.window); w->shown = 0; }
+            w->close_pending = w->raise_pending = 0;
             w->resize_w = w->resize_h = 0;
             w->view = view;
             continue;
         }
+        /* Win16 win_Open: BringWindowToTop; the logical top is the native top. */
+        raise = !w->shown || (view.top && !w->view.top);
+        if (!w->shown && w->surface.window && view.anchored) place(w, &view, w->strip);
         if (!ensure_window(w, &view)) {
-            fprintf(stderr, "Native window %04X: %s" "%c", (unsigned)(uint16_t)view.id, SDL_GetError(), 10);
+            fprintf(stderr, "Native window %04X: %s\n", (unsigned)(uint16_t)view.id, SDL_GetError());
             return 0;
         }
         w->view = view;
-        if (w->width <= 0) continue;
-        sim_vga_present_planes(view.planes, w->indexed, (size_t)w->width,
-                               view.left, view.top_y + w->strip, w->width, w->height);
-        for (y = 0; y < w->height; ++y)
-            for (x = 0; x < w->width; ++x) {
-                uint8_t index = w->indexed[y * w->width + x] & 15u;
-                uint8_t *out = w->rgba + ((size_t)y * (size_t)w->width + (size_t)x) * 4u;
-                memcpy(out, palette->rgb[index], 3);
-                out[3] = 255;
-            }
-        if (!SDL_UpdateTexture(w->texture, NULL, w->rgba, w->width * 4) ||
-            !SDL_RenderClear(w->renderer) ||
-            !SDL_RenderTexture(w->renderer, w->texture, NULL, NULL) ||
-            !SDL_RenderPresent(w->renderer)) {
-            fprintf(stderr, "Native window %04X present: %s%c", (unsigned)(uint16_t)view.id, SDL_GetError(), 10);
+        if (w->surface.width <= 0) continue;
+        if (!draw_surface(&w->surface, view.planes, view.left, view.top_y + w->strip, palette)) {
+            fprintf(stderr, "Native window %04X present: %s\n", (unsigned)(uint16_t)view.id, SDL_GetError());
             return 0;
         }
-        if (!w->shown) { SDL_ShowWindow(w->window); w->shown = 1; }
-        run_chrome_actions(w);
+        if (!w->shown) { SDL_ShowWindow(w->surface.window); w->shown = 1; }
+        if (raise) SDL_RaiseWindow(w->surface.window);
+    }
+    if (!sync_popups()) return 0;
+    for (i = 0; i < n.popup_count; ++i) {
+        NativePopup *p = &n.popups[i];
+        if (p->surface.window == NULL) continue;
+        if (!draw_surface(&p->surface, p->view.planes, p->view.left, p->view.top, palette)) {
+            fprintf(stderr, "Native popup present: %s\n", SDL_GetError());
+            return 0;
+        }
     }
     return 1;
 }
 
 /* ---- input ---- */
 
-static void to_logical(NativeWindow *w, float *x, float *y)
+typedef struct Origin {
+    NativeWindow *window;
+    int left, top, right, bottom;  /* logical client rect */
+} Origin;
+
+static int origin_of(SDL_WindowID id, Origin *o)
 {
-    *x += (float)w->view.left;
-    *y += (float)(w->view.top_y + w->strip);
-    if (*x < w->view.left) *x = w->view.left;
-    if (*y < w->view.top_y + w->strip) *y = (float)(w->view.top_y + w->strip);
-    if (*x > w->view.right - 1) *x = (float)(w->view.right - 1);
-    if (*y > w->view.bottom - 1) *y = (float)(w->view.bottom - 1);
+    unsigned i;
+    memset(o, 0, sizeof(*o));
+    for (i = 0; i < n.popup_count; ++i)
+        if (n.popups[i].surface.window && SDL_GetWindowID(n.popups[i].surface.window) == id) {
+            o->left = n.popups[i].view.left; o->top = n.popups[i].view.top;
+            o->right = n.popups[i].view.right; o->bottom = n.popups[i].view.bottom;
+            return 1;
+        }
+    for (i = 0; i < n.count; ++i)
+        if (n.windows[i].surface.window && SDL_GetWindowID(n.windows[i].surface.window) == id) {
+            NativeWindow *w = &n.windows[i];
+            if (!w->view.open) return -1;
+            o->window = w;
+            o->left = w->view.left; o->top = w->view.top_y + w->strip;
+            o->right = w->view.right; o->bottom = w->view.bottom;
+            return 1;
+        }
+    return id == SDL_GetWindowID(n.root) ? 0 : -1;
+}
+
+static void to_logical(const Origin *o, float *x, float *y)
+{
+    *x = (float)o->left + *x / (float)n.scale;
+    *y = (float)o->top + *y / (float)n.scale;
+    if (*x < 0) *x = 0;
+    if (*y < 0) *y = 0;
+    if (*x > 639) *x = 639;
+    if (*y > 479) *y = 479;
+}
+
+static int window_position(SDL_WindowID id, int *x, int *y)
+{
+    unsigned i;
+    for (i = 0; i < n.popup_count; ++i)
+        if (n.popups[i].surface.window && SDL_GetWindowID(n.popups[i].surface.window) == id) {
+            *x = n.popups[i].x;
+            *y = n.popups[i].y;
+            return 1;
+        }
+    return SDL_GetWindowPosition(SDL_GetWindowFromID(id), x, y);
+}
+
+/* The SDL window under a desktop point: Windows' own answer (z-order, other
+ * applications), else (headless) the logical stack's top-most native window. */
+static SDL_WindowID window_under(int x, int y)
+{
+    unsigned i;
+    NativeWindow *best = NULL;
+#ifdef _WIN32
+    POINT point;
+    HWND hwnd;
+    point.x = x;
+    point.y = y;
+    hwnd = WindowFromPoint(point);
+    if (hwnd) hwnd = GetAncestor(hwnd, GA_ROOT);
+    if (hwnd) {
+        int count = 0;
+        SDL_Window **windows = SDL_GetWindows(&count);
+        SDL_WindowID found = 0;
+        int k;
+        for (k = 0; windows && k < count && !found; ++k)
+            if (SDL_GetPointerProperty(SDL_GetWindowProperties(windows[k]),
+                                       SDL_PROP_WINDOW_WIN32_HWND_POINTER, NULL) == hwnd)
+                found = SDL_GetWindowID(windows[k]);
+        SDL_free(windows);
+        if (found) return found;
+    }
+#endif
+    i = n.popup_count;
+    while (i--) {
+        NativePopup *p = &n.popups[i];
+        if (p->surface.window && x >= p->x && y >= p->y &&
+            x < p->x + p->surface.width * n.scale && y < p->y + p->surface.height * n.scale)
+            return SDL_GetWindowID(p->surface.window);
+    }
+    for (i = 0; i < n.count; ++i) {
+        NativeWindow *w = &n.windows[i];
+        int wx, wy;
+        if (!w->shown || !SDL_GetWindowPosition(w->surface.window, &wx, &wy) ||
+            x < wx || y < wy || x >= wx + w->surface.width * n.scale ||
+            y >= wy + w->surface.height * n.scale)
+            continue;
+        if (best == NULL || w->view.top) best = w;
+    }
+    return best ? SDL_GetWindowID(best->surface.window) : SDL_GetWindowID(n.root);
 }
 
 int native_windows_request_close(int16_t id)
 {
     NativeWindow *w = n.active ? by_logical_id(id) : NULL;
     if (w == NULL || !w->view.open) return 0;
-    /* Win16 WM_CLOSE -> win_Close; DOS reaches it through the close box. */
+    /* Win16: only windows with a system menu (+0x1C & 4) have a close box. */
     if (w->view.flags & 4) w->close_pending = 1;
     return 1;
 }
@@ -314,44 +480,70 @@ int native_windows_request_resize(int16_t id, int width, int height)
     return 1;
 }
 
+static NativeWindow *modal_top(void)
+{
+    NativeWindow *top = by_logical_id(sim_window_hosting_top());
+    return top && top->view.open && (top->view.flags & 0x40) ? top : NULL;
+}
+
 int native_windows_translate(SDL_Event *event)
 {
-    NativeWindow *w;
+    Origin o;
     SDL_WindowID id;
+    int kind;
     if (!n.active) return 0;
     if (event->type == SDL_EVENT_MOUSE_MOTION) id = event->motion.windowID;
     else if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN ||
              event->type == SDL_EVENT_MOUSE_BUTTON_UP) id = event->button.windowID;
-    else if (event->type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
-        w = by_sdl_id(event->window.windowID);
-        if (w == NULL) return 0;
-        native_windows_request_close(w->view.id);
-        return 1;
-    } else if (event->type == SDL_EVENT_WINDOW_RESIZED) {
-        w = by_sdl_id(event->window.windowID);
-        if (w == NULL) return 0;
-        if (event->window.data1 != w->width * n.scale || event->window.data2 != w->height * n.scale)
-            native_windows_request_resize(w->view.id, (event->window.data1 + n.scale / 2) / n.scale,
-                                          (event->window.data2 + n.scale / 2) / n.scale);
+    else if (event->type == SDL_EVENT_WINDOW_CLOSE_REQUESTED ||
+             event->type == SDL_EVENT_WINDOW_RESIZED) {
+        if (origin_of(event->window.windowID, &o) <= 0 || o.window == NULL) return 0;
+        if (event->type == SDL_EVENT_WINDOW_CLOSE_REQUESTED)
+            native_windows_request_close(o.window->view.id);
+        else if (event->window.data1 != o.window->surface.width * n.scale ||
+                 event->window.data2 != o.window->surface.height * n.scale)
+            native_windows_request_resize(o.window->view.id, event->window.data1 / n.scale,
+                                          event->window.data2 / n.scale);
         return 1;
     } else return 0;
-    w = by_sdl_id(id);
-    sim_window_hosting_set_pointer_window(w ? w->view.id : (int16_t)(uint16_t)0x8000);
-    if (w == NULL) return 0;
-    if (!w->view.open || !SDL_ConvertEventToRenderCoordinates(w->renderer, event)) return -1;
+    {
+        /* A held button keeps delivering to the window where it was pressed
+         * (capture); map through the native window actually under the pointer. */
+        float *ex = event->type == SDL_EVENT_MOUSE_MOTION ? &event->motion.x : &event->button.x;
+        float *ey = event->type == SDL_EVENT_MOUSE_MOTION ? &event->motion.y : &event->button.y;
+        int wx, wy;
+        SDL_WindowID under;
+        if (event->type != SDL_EVENT_MOUSE_BUTTON_DOWN && window_position(id, &wx, &wy) &&
+            (under = window_under(wx + (int)*ex, wy + (int)*ey)) != id &&
+            origin_of(under, &o) > 0 && window_position(under, &wx, &wy) == 1) {
+            int gx = 0, gy = 0;
+            window_position(id, &gx, &gy);
+            *ex += (float)(gx - wx);
+            *ey += (float)(gy - wy);
+            id = under;
+        }
+    }
+    kind = origin_of(id, &o);
+    if (kind <= 0) return kind;   /* main window (0) or a window being torn down */
     if (event->type == SDL_EVENT_MOUSE_MOTION) {
-        to_logical(w, &event->motion.x, &event->motion.y);
+        to_logical(&o, &event->motion.x, &event->motion.y);
         return 1;
     }
-    to_logical(w, &event->button.x, &event->button.y);
-    if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN && !w->view.top) {
-        raise_point(w, &w->raise_x, &w->raise_y);
-        w->raise_button = event->button.button;
-    }
-    if (w->raise_button && w->raise_button == event->button.button) {
-        event->button.x = w->raise_x;
-        event->button.y = w->raise_y;
-        if (event->type == SDL_EVENT_MOUSE_BUTTON_UP) w->raise_button = 0;
+    to_logical(&o, &event->button.x, &event->button.y);
+    if (o.window) {
+        NativeWindow *w = o.window, *modal = modal_top();
+        if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN && !w->view.top) {
+            /* Win16 WM_MOUSEACTIVATE: raise and eat; with a modal window on
+             * top the click is ignored and the modal window comes forward. */
+            w->eaten_button = event->button.button;
+            if (modal) SDL_RaiseWindow(modal->surface.window);
+            else w->raise_pending = 1;
+            return -1;
+        }
+        if (event->type == SDL_EVENT_MOUSE_BUTTON_UP && w->eaten_button == event->button.button) {
+            w->eaten_button = 0;
+            return -1;
+        }
     }
     return 1;
 }
@@ -375,16 +567,30 @@ int native_windows_filter_root(SDL_Event *event)
 
 int native_windows_pointer(float *x, float *y)
 {
-    SDL_Window *focus = SDL_GetMouseFocus();
-    NativeWindow *w;
-    float wx, wy;
-    if (!n.active || focus == NULL) return 0;
-    w = by_sdl_id(SDL_GetWindowID(focus));
-    if (w == NULL || !w->view.open) return 0;
-    SDL_GetMouseState(&wx, &wy);
-    if (!SDL_RenderCoordinatesFromWindow(w->renderer, wx, wy, x, y)) return 0;
-    to_logical(w, x, y);
+    Origin o;
+    float gx, gy;
+    int wx, wy;
+    SDL_WindowID under;
+    if (!n.active) return 0;
+    SDL_GetGlobalMouseState(&gx, &gy);
+    under = window_under((int)gx, (int)gy);
+    if (origin_of(under, &o) <= 0 || !window_position(under, &wx, &wy)) return 0;
+    *x = gx - (float)wx;
+    *y = gy - (float)wy;
+    to_logical(&o, x, y);
     return 1;
+}
+
+static int save_surface(const Surface *s, const char *path)
+{
+    SDL_Surface *surface;
+    int okay;
+    if (s->rgba == NULL) return 1;
+    surface = SDL_CreateSurfaceFrom(s->width, s->height, SDL_PIXELFORMAT_RGBA32, s->rgba, s->width * 4);
+    if (surface == NULL) return 0;
+    okay = SDL_SaveBMP(surface, path);
+    SDL_DestroySurface(surface);
+    return okay;
 }
 
 int native_windows_save_frames(const char *base_path)
@@ -393,16 +599,13 @@ int native_windows_save_frames(const char *base_path)
     char path[1024];
     if (!n.active) return 1;
     for (i = 0; i < n.count; ++i) {
-        NativeWindow *w = &n.windows[i];
-        SDL_Surface *surface;
-        int okay;
-        if (!w->shown || w->rgba == NULL) continue;
-        SDL_snprintf(path, sizeof(path), "%s.%04X.bmp", base_path, (unsigned)(uint16_t)w->view.id);
-        surface = SDL_CreateSurfaceFrom(w->width, w->height, SDL_PIXELFORMAT_RGBA32, w->rgba, w->width * 4);
-        if (surface == NULL) return 0;
-        okay = SDL_SaveBMP(surface, path);
-        SDL_DestroySurface(surface);
-        if (!okay) return 0;
+        if (!n.windows[i].shown) continue;
+        SDL_snprintf(path, sizeof(path), "%s.%04X.bmp", base_path, (unsigned)(uint16_t)n.windows[i].view.id);
+        if (!save_surface(&n.windows[i].surface, path)) return 0;
+    }
+    for (i = 0; i < n.popup_count; ++i) {
+        SDL_snprintf(path, sizeof(path), "%s.popup%u.bmp", base_path, i);
+        if (!save_surface(&n.popups[i].surface, path)) return 0;
     }
     return 1;
 }
@@ -414,19 +617,19 @@ int native_windows_push_pointer(int16_t id, const HostEvent *event)
     NativeWindow *w = n.active ? by_logical_id(id) : NULL;
     SDL_Event raw = {0};
     float x, y;
-    if (w == NULL || w->window == NULL || event == NULL ||
-        !SDL_RenderCoordinatesToWindow(w->renderer, (float)event->x, (float)event->y, &x, &y))
-        return 0;
+    if (w == NULL || w->surface.window == NULL || event == NULL) return 0;
+    x = (float)(event->x * n.scale);
+    y = (float)(event->y * n.scale);
     if (event->kind == HOST_EVENT_MOUSE_MOVE) {
         raw.type = SDL_EVENT_MOUSE_MOTION;
-        raw.motion.windowID = SDL_GetWindowID(w->window);
+        raw.motion.windowID = SDL_GetWindowID(w->surface.window);
         raw.motion.timestamp = HOST_REPLAY_EVENT_TIMESTAMP;
         raw.motion.x = x;
         raw.motion.y = y;
     } else if (event->kind == HOST_EVENT_MOUSE_DOWN || event->kind == HOST_EVENT_MOUSE_UP) {
         raw.type = event->kind == HOST_EVENT_MOUSE_DOWN ?
                    SDL_EVENT_MOUSE_BUTTON_DOWN : SDL_EVENT_MOUSE_BUTTON_UP;
-        raw.button.windowID = SDL_GetWindowID(w->window);
+        raw.button.windowID = SDL_GetWindowID(w->surface.window);
         raw.button.timestamp = HOST_REPLAY_EVENT_TIMESTAMP;
         raw.button.button = event->button;
         raw.button.down = event->kind == HOST_EVENT_MOUSE_DOWN;
@@ -439,10 +642,10 @@ int native_windows_push_pointer(int16_t id, const HostEvent *event)
 
 int native_windows_event_origin(SDL_WindowID window, int16_t *id, int16_t *left, int16_t *top)
 {
-    NativeWindow *w = n.active ? by_sdl_id(window) : NULL;
-    if (w == NULL) return 0;
-    *id = w->view.id;
-    *left = w->view.left;
-    *top = (int16_t)(w->view.top_y + w->strip);
+    Origin o;
+    if (!n.active || origin_of(window, &o) <= 0 || o.window == NULL) return 0;
+    *id = o.window->view.id;
+    *left = (int16_t)o.left;
+    *top = (int16_t)o.top;
     return 1;
 }

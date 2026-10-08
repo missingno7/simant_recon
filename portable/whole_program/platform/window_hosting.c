@@ -14,6 +14,8 @@ extern int16_t g_5702[32];
 extern Handle fd_50F6_3B60[45];
 extern int16_t g_3DB4;
 extern int16_t g_3DB6;
+extern struct Rect fd_50F6_393C;           /* menu bar; windows stay below it */
+extern void (*g_62EC)(int16_t win);         /* window geometry changed hook */
 extern Handle f_171C_1A9E(int32_t size, int16_t flags, char *name);
 extern char *f_171C_1B84(Handle h);
 extern Handle f_171C_1BBA(Handle h);
@@ -22,8 +24,16 @@ extern struct Rect *f_1D8E_02BD(struct Rect *c, struct Rect *list,
 extern void win_GetObjRect(int16_t obj, struct Rect *rect);
 extern char *win_WinAddr(int16_t win);
 extern char *win_ObjAddr(int16_t obj);
+extern struct Rect *win_WinRectAddr(int16_t win);
 extern void win_LockWin(int16_t win);
 extern void win_UnlockWin(int16_t win);
+extern void win_Recalc(int16_t win);
+extern void win_Close(int16_t win);
+extern void f_20E8_0725(int16_t win);       /* activate: close auto-close top, open */
+extern void f_1E57_038E(void);
+extern void f_21FA_0B4B(struct Rect *rect);  /* redraw what a rect exposed */
+extern void f_2505_08EA(int16_t win);
+extern void f_2505_0831(int16_t win);
 
 /* The linker routes cross-module calls to these canonical entry points
  * through the wrappers below (-Wl,--wrap); the canonical bodies are unchanged. */
@@ -39,10 +49,14 @@ extern void __real_f_1E57_0052(int16_t win);
 extern void __real_f_1E57_00B1(int16_t win);
 extern void __real_clip_KillWin(int16_t win);
 extern void __real_win_DrawTitle(int16_t win);
+extern void __real_f_1B28_0069(void);
+extern char *__real_GSaveRect(struct Rect *r);
+extern void __real_f_1CE2_056C(struct Rect *r, char *buf);
 
 #define END ((int16_t)(uint16_t)0x8000)
 
 enum ClipContext { CONTEXT_SCREEN, CONTEXT_WINDOW, CONTEXT_DESKTOP };
+enum { POPUP_DEPTH = 4 };
 
 typedef struct Hosted {
     int16_t id;
@@ -66,6 +80,8 @@ static struct {
         struct Rect drag;      /* object 1 when it is the title (0x0c/0x12) */
         uint16_t flags;        /* record +0x1C */
         int16_t margin;        /* object 0 +0x28: frame inset of the chrome */
+        int16_t min_width, min_height;
+        int anchored;          /* object 0 anchors +0x18..+0x1E name another owner */
         char title[64];
     } info[SIM_HOSTING_SLOTS];
     unsigned generation;
@@ -73,9 +89,14 @@ static struct {
     int16_t context_window;
     struct { enum ClipContext context; int16_t window; } saved[32];
     unsigned saved_count;
-    int cursor_depth;
-    int16_t pointer_window;        /* native window under the mouse, or END */
-    SimVgaPlanes *cursor_planes;   /* where the visible cursor was drawn */
+    struct Popup {
+        struct Rect rect;
+        char *buffer;          /* GSaveRect result: pairs the restore */
+        SimVgaPlanes *planes;
+    } popup[POPUP_DEPTH];
+    SimVgaPlanes *popup_planes[POPUP_DEPTH];
+    unsigned popup_count, popup_serial;
+    void (*pump)(void);
 } s;
 
 static SimVgaPlanes *hosted_planes(int16_t id)
@@ -90,6 +111,7 @@ int sim_window_hosting_is_hosted(int16_t id) { return hosted_planes(id) != NULL;
 int sim_window_hosting_enabled(void) { return s.enabled; }
 unsigned sim_window_hosting_generation(void) { return s.generation; }
 unsigned sim_window_hosting_count(void) { return s.hosted_count; }
+void sim_window_hosting_set_pump(void (*pump)(void)) { s.pump = pump; }
 
 static int contains(const struct Rect *r, int x, int y)
 {
@@ -112,35 +134,41 @@ static const StackEntry *stack_entry(int16_t id)
     return NULL;
 }
 
+static SimVgaPlanes *popup_planes_at(int x, int y)
+{
+    unsigned i = s.popup_count;
+    while (i--)
+        if (contains(&s.popup[i].rect, x, y)) return s.popup[i].planes;
+    return NULL;
+}
+
 /* One aperture byte: which plane set holds each of its pixels.
+ *  - a hosted window's clip_SetWin drawing: that window's own planes;
+ *  - inside an open save-under popup (GSaveRect): the popup's planes;
  *  - no clip list (clip_Off, dialogs that clear g_5AAC) or the desktop
- *    list: the shared planes, which present as the root/desktop window;
- *  - a window's clip_SetWin list: that window's pixels go to its planes;
- *  - otherwise (full-screen lists used for top-window object feedback,
- *    outlines and the cursor): the logical topmost window at each pixel. */
+ *    list: the shared planes, which present as the main/desktop window;
+ *  - otherwise (full-screen lists used for top-window object feedback and
+ *    outlines): the logical topmost window at each pixel. */
 static unsigned route(void *context, uint16_t offset, SimVgaSpan spans[8])
 {
     const StackEntry *target = NULL;
     unsigned bit, n = 0, stride = (uint16_t)g_3DB6;
-    int x, y;
+    int x, y, shared;
     (void)context;
-    if (!s.enabled || s.stack_count == 0 || stride == 0) return 0;
+    if (!s.enabled || stride == 0) return 0;
     y = offset / stride;
-    if (s.cursor_depth) {
-        /* The whole cursor (save-under, image, restore) stays on one surface. */
-        if (y >= g_3DB4 || s.cursor_planes == NULL) return 0;
-        spans[0].planes = s.cursor_planes;
-        spans[0].mask = 255;
-        return 1;
-    }
-    if (g_5AAC == NULL || s.context == CONTEXT_DESKTOP) return 0;
-    if (y >= g_3DB4) return 0;
+    if (y >= g_3DB4 || (s.stack_count == 0 && s.popup_count == 0)) return 0;
     x = (int)(offset % stride) * 8;
-    if (s.context == CONTEXT_WINDOW)
+    if (s.context == CONTEXT_WINDOW && g_5AAC != NULL)
         target = stack_entry(s.context_window);
+    shared = g_5AAC == NULL || s.context == CONTEXT_DESKTOP;
     for (bit = 0; bit < 8; ++bit) {
-        SimVgaPlanes *planes = target && contains(&target->rect, x + (int)bit, y) ?
-            target->planes : owner_planes(x + (int)bit, y);
+        int px = x + (int)bit;
+        SimVgaPlanes *planes = NULL;
+        if (target && target->planes && contains(&target->rect, px, y)) planes = target->planes;
+        else if (s.popup_count && (planes = popup_planes_at(px, y)) != NULL) ;
+        else if (target && contains(&target->rect, px, y)) planes = target->planes;
+        else if (!shared) planes = owner_planes(px, y);
         if (planes == NULL) planes = (SimVgaPlanes *)&s.vga->planes;
         if (n && spans[n - 1].planes == planes)
             spans[n - 1].mask |= (uint8_t)(0x80u >> bit);
@@ -163,9 +191,10 @@ int sim_window_hosting_enable(SimVga *vga, const int16_t *ids, unsigned count)
         s.hosted[i].planes = calloc(1, sizeof(SimVgaPlanes));
         if (s.hosted[i].planes == NULL) return 0;
     }
+    for (i = 0; i < POPUP_DEPTH; ++i)
+        if ((s.popup_planes[i] = calloc(1, sizeof(SimVgaPlanes))) == NULL) return 0;
     s.hosted_count = count;
     s.vga = vga;
-    s.pointer_window = END;
     s.enabled = 1;
     sim_vga_set_router(vga, route, NULL);
     return 1;
@@ -199,7 +228,8 @@ static int was_open(int16_t id)
 
 /* Native caption and close box come from the record, as Win16 win_Open
  * builds them: title object 1 (type 0x0C inline text, type 0x12 inline or
- * handle text), flags +0x1C, chrome inset object 0 +0x28. */
+ * handle text), flags +0x1C, minimum size +0x18/+0x1A, chrome inset
+ * object 0 +0x28. */
 static void read_info(int16_t id)
 {
     struct WindowInfo *info = &s.info[(uint16_t)id >> 8];
@@ -208,7 +238,18 @@ static void read_info(int16_t id)
     w = win_WinAddr(id);
     memset(&info->drag, 0, sizeof(info->drag));
     info->flags = *(uint16_t *)(w + 0x1c);
+    info->min_width = *(int16_t *)(w + 0x18);
+    info->min_height = *(int16_t *)(w + 0x1a);
     info->margin = (unsigned char)win_ObjAddr(id)[0x28];
+    {
+        /* Win16 win_Open re-places a hidden window from its record only when
+         * object 0 is anchored to something else (fields +0x18..+0x1E). */
+        const int16_t *mode = (const int16_t *)(win_ObjAddr(id) + 0x18);
+        int k;
+        info->anchored = 0;
+        for (k = 0; k < 4; ++k)
+            if (mode[k] != 0 && mode[k] != (int16_t)(id & 0xff00)) info->anchored = 1;
+    }
     if (*(int16_t *)(w + 0x0c) >= 2) {
         o = win_ObjAddr((int16_t)(id + 1));
         if (o[0x21] == 0x0c || o[0x21] == 0x12) {
@@ -326,22 +367,127 @@ void __wrap_clip_Pop(void)
     }
 }
 
-void sim_window_hosting_cursor_scope(int mode)
+/* Save-under popups (info and choice boxes, popup menus): DOS saves the
+ * screen under the box, draws it, and restores the saved pixels. Win16 shows
+ * these as native popup windows; the saved rect is their lifetime. */
+char *__wrap_GSaveRect(struct Rect *r)
 {
-    if (mode == 0) {
-        if (s.cursor_depth) --s.cursor_depth;
-        return;
-    }
-    /* Show: the surface of the native window the mouse is in (the root for
-     * the desktop). Hide: the surface that received the last show. */
-    if (mode == 1 || s.cursor_planes == NULL)
-        s.cursor_planes = s.pointer_window != END && hosted_planes(s.pointer_window) &&
-                          stack_entry(s.pointer_window) ?
-            hosted_planes(s.pointer_window) : (SimVgaPlanes *)&s.vga->planes;
-    ++s.cursor_depth;
+    struct Popup *p;
+    if (!s.enabled || r == NULL || s.popup_count == POPUP_DEPTH) return __real_GSaveRect(r);
+    p = &s.popup[s.popup_count];
+    p->rect = *r;
+    p->planes = s.popup_planes[s.popup_count];
+    memset(p->planes, 0, sizeof(*p->planes));
+    ++s.popup_count;
+    ++s.popup_serial;
+    p->buffer = __real_GSaveRect(r);
+    return p->buffer;
 }
 
-void sim_window_hosting_set_pointer_window(int16_t id) { s.pointer_window = id; }
+void __wrap_f_1CE2_056C(struct Rect *r, char *buf)
+{
+    __real_f_1CE2_056C(r, buf);
+    if (s.enabled && s.popup_count && s.popup[s.popup_count - 1].buffer == buf) {
+        --s.popup_count;
+        ++s.popup_serial;
+    }
+}
+
+unsigned sim_window_hosting_popups(SimHostedPopupView *views, unsigned capacity)
+{
+    unsigned i;
+    for (i = 0; i < s.popup_count && i < capacity; ++i) {
+        views[i].left = s.popup[i].rect.left;
+        views[i].top = s.popup[i].rect.top;
+        views[i].right = s.popup[i].rect.right;
+        views[i].bottom = s.popup[i].rect.bottom;
+        views[i].planes = s.popup[i].planes;
+    }
+    return s.popup_count;
+}
+
+unsigned sim_window_hosting_popup_serial(void) { return s.popup_serial; }
+
+/* The game's event pump (f_218D_02D5 calls this empty stub first): native
+ * window actions run here, where Win16 dispatched window messages. */
+void __wrap_f_1B28_0069(void)
+{
+    __real_f_1B28_0069();
+    if (s.enabled && s.pump) s.pump();
+}
+
+/* ---- native window actions, called only from the pump ---- */
+
+int sim_window_hosting_close(int16_t id)
+{
+    if (!stack_entry(id)) return 0;
+    win_Close(id);                    /* Win16 WM_CLOSE -> win_Close(INDEX) */
+    return 1;
+}
+
+int sim_window_hosting_raise(int16_t id)
+{
+    if (!stack_entry(id)) return 0;
+    if (s.stack[0].id != (int16_t)(id & 0xff00))
+        f_20E8_0725(id);              /* DOS f_218D_0451's activation */
+    return 1;
+}
+
+/* Win16 WM_SIZE (MAINWNDPROC 2A64): rewrite the record rect and the first
+ * object by the size delta, win_Recalc, then DOS's own geometry-change tail
+ * (o26_39C7_0671: clip lists, hook, exposed redraw, top-window hot boxes).
+ * The logical origin shifts when the size needs room on the 640x480 screen;
+ * the native window does not move. */
+int sim_window_hosting_resize(int16_t id, int width, int height)
+{
+    struct WindowInfo *info = &s.info[(uint16_t)id >> 8];
+    struct Rect orig, r, exposed;
+    char *w, *o;
+    int top_limit = fd_50F6_393C.bottom + 1;
+    if (!stack_entry(id)) return 0;
+    if (width < (info->min_width > 0 ? info->min_width : 48)) width = info->min_width > 0 ? info->min_width : 48;
+    if (height < (info->min_height > 0 ? info->min_height : 48)) height = info->min_height > 0 ? info->min_height : 48;
+    if (width > g_5A9C[0].right) width = g_5A9C[0].right;
+    if (height > g_5A9C[0].bottom - top_limit) height = g_5A9C[0].bottom - top_limit;
+    win_LockWin(id);
+    w = win_WinAddr(id);
+    *(uint16_t *)(w + 0x1c) &= (uint16_t)~0x80u;   /* no longer zoomed */
+    orig = *(struct Rect *)w;
+    r = orig;
+    if (r.left + width > g_5A9C[0].right) r.left = (int16_t)(g_5A9C[0].right - width);
+    if (r.top + height > g_5A9C[0].bottom) r.top = (int16_t)(g_5A9C[0].bottom - height);
+    if (r.top < top_limit) r.top = (int16_t)top_limit;
+    r.right = (int16_t)(r.left + width);
+    r.bottom = (int16_t)(r.top + height);
+    if (!memcmp(&r, &orig, sizeof(r))) {
+        win_UnlockWin(id);
+        return 1;
+    }
+    o = win_ObjAddr(id);
+    *(int16_t *)(o + 0x08) += (int16_t)(r.left - orig.left);
+    *(int16_t *)(o + 0x0a) += (int16_t)(r.top - orig.top);
+    *(int16_t *)(o + 0x0c) += (int16_t)((r.right - r.left) - (orig.right - orig.left));
+    *(int16_t *)(o + 0x0e) += (int16_t)((r.bottom - r.top) - (orig.bottom - orig.top));
+    *win_WinRectAddr(id) = r;
+    if (r.left != orig.left || r.top != orig.top)
+        win_offsets[(uint16_t)id >> 8] = *(struct Rect *)(o + 0x08);
+    win_Recalc(id);
+    win_UnlockWin(id);
+    f_1E57_038E();
+    (*g_62EC)(id);
+    exposed.left = orig.left < r.left ? orig.left : r.left;
+    exposed.top = orig.top < r.top ? orig.top : r.top;
+    exposed.right = orig.right > r.right ? orig.right : r.right;
+    exposed.bottom = orig.bottom > r.bottom ? orig.bottom : r.bottom;
+    f_21FA_0B4B(&exposed);
+    if (s.stack_count && s.stack[0].id == (int16_t)(id & 0xff00)) {
+        f_2505_08EA(id);
+        f_2505_0831(id);
+    }
+    return 1;
+}
+
+/* ---- queries for presentation and input routing ---- */
 
 int16_t sim_window_hosting_owner_at(int16_t x, int16_t y)
 {
@@ -351,20 +497,7 @@ int16_t sim_window_hosting_owner_at(int16_t x, int16_t y)
     return END;
 }
 
-int sim_window_hosting_visible_point(int16_t id, int16_t *x, int16_t *y)
-{
-    const StackEntry *e = stack_entry(id);
-    int px, py;
-    if (e == NULL) return 0;
-    for (py = e->rect.top + 2; py < e->rect.bottom; py += 4)
-        for (px = e->rect.left + 2; px < e->rect.right; px += 4)
-            if (sim_window_hosting_owner_at((int16_t)px, (int16_t)py) == e->id) {
-                *x = (int16_t)px;
-                *y = (int16_t)py;
-                return 1;
-            }
-    return 0;
-}
+int16_t sim_window_hosting_top(void) { return s.stack_count ? s.stack[0].id : END; }
 
 int sim_window_hosting_view(unsigned index, SimHostedWindowView *view)
 {
@@ -385,6 +518,7 @@ int sim_window_hosting_view(unsigned index, SimHostedWindowView *view)
     view->drag_right = info->drag.right; view->drag_bottom = info->drag.bottom;
     view->flags = info->flags;
     view->margin = info->margin;
+    view->anchored = info->anchored;
     memcpy(view->title, info->title, sizeof(view->title));
     return 1;
 }

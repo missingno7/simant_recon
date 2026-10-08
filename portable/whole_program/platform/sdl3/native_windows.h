@@ -5,9 +5,9 @@
 #include <SDL3/SDL.h>
 
 /* Modern presentation: each hosted logical window (window_hosting.h) is an
- * owned, decorated SDL window showing its own planes at the global scale; the
- * main SDL window keeps the desktop, menu bar, dialogs and windows that are
- * not hosted. */
+ * owned, decorated SDL window showing its own planes at the global scale, and
+ * each save-under box a native popup; the main SDL window keeps the desktop,
+ * the menu bar and windows that are not hosted. */
 int native_windows_init(Host *host, SDL_Window *root);
 int native_windows_active(void);
 int native_windows_scale(void);
@@ -23,8 +23,6 @@ int native_windows_translate(SDL_Event *event);
 int native_windows_filter_root(SDL_Event *event);
 /* Logical pointer position when the mouse is over a hosted window. */
 int native_windows_pointer(float *x, float *y);
-/* Game-chrome input queued for native close/resize (logical coordinates). */
-int native_windows_next_synthetic(HostEvent *event);
 /* Native close button / sizing frame of hosted window `id` (also replay). */
 int native_windows_request_close(int16_t id);
 int native_windows_request_resize(int16_t id, int width, int height);

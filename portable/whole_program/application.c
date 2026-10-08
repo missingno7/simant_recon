@@ -14,6 +14,7 @@
 #include "platform/sdl3/host_modes.h"
 #include "platform/sdl3/diagnostics.h"
 #include "platform/sdl3/native_windows.h"
+#include "platform/sdl3/native_menu.h"
 #include "platform/window_hosting.h"
 #include "portable/whole_program/platform/graphics_resources.h"
 #include "portable/platform/sdl3/whole_audio_provider.h"
@@ -38,6 +39,7 @@ typedef struct ReplayKey {
     HostEvent pointer;
     int checkpoint, quit;
     int close, resize_w, resize_h; /* close@ID, resize@ID W H */
+    int menu;                      /* menu FDxx: a native menu choice */
     int relative, current_pointer;
     int16_t window; /* op@ID: window-local input to a hosted window */
     int targeted;
@@ -195,6 +197,9 @@ static void load_replay(const char *path)
                 !strcmp(key_name, "Right") ? SDL_BUTTON_RIGHT :
                 !strcmp(key_name, "Middle") ? SDL_BUTTON_MIDDLE : 0;
             if (!entry->pointer.button) fail("pointer replay button");
+        } else if (!strcmp(operation, "menu")) {
+            if (sscanf(line, "%llu %15s %x %c", &milliseconds, operation, &entry->menu, &extra) != 3 ||
+                (entry->menu & 0xff00) != 0xfd00) fail("menu replay syntax");
         } else if (!strcmp(operation, "close") && entry->targeted) entry->close = 1;
         else if (!strcmp(operation, "resize") && entry->targeted) {
             if (sscanf(line, "%llu %15s %d %d %c", &milliseconds, operation,
@@ -232,6 +237,13 @@ static void replay_input(uint64_t now)
             continue;
         }
         if (entry->quit) { exit_reason = "input replay exit"; exit(0); }
+        if (entry->menu) {
+            if (!native_menu_command(entry->menu)) fail("replay menu command");
+            fprintf(stderr, "Replay menu command %zu: %llu ms %04X\n", app.replay_next,
+                    (unsigned long long)entry->milliseconds, (unsigned)entry->menu);
+            ++app.replay_next;
+            continue;
+        }
         if (entry->close || entry->resize_w) {
             if (entry->close ? !native_windows_request_close(entry->window) :
                 !native_windows_request_resize(entry->window, entry->resize_w, entry->resize_h))
@@ -616,11 +628,13 @@ int main(int argc, char **argv)
             if (window_scale < 1 || window_scale > 8) fail("--scale expects 1..8");
         }
         else if (!strncmp(argv[i], "--windows", 9) && (argv[i][9] == 0 || argv[i][9] == '=')) {
-            /* --windows[=ID,ID...] (hex logical IDs). Default: the game panels
-             * (edit, map, info, behavior, caste, history, score, yard, examine);
-             * dialogs stay on the desktop window, as Win16 kept them in its frame. */
-            const char *list = argv[i][9] ? argv[i] + 10 : "0,100,500,1200,1300,1500,1800,1900,1D00";
+            /* --windows[=ID,ID...] (hex logical IDs). Default: every logical
+             * window, dialogs included, is a native window as in Win16. */
+            const char *list = argv[i][9] ? argv[i] + 10 : "";
             char *end;
+            if (!*list)
+                for (hosted_count = 0; hosted_count < SIM_HOSTING_SLOTS; ++hosted_count)
+                    hosted_ids[hosted_count] = (int16_t)(hosted_count << 8);
             while (*list && hosted_count < SIM_HOSTING_SLOTS) {
                 unsigned long id = strtoul(list, &end, 16);
                 if (end == list || id > 0xffffu || (id & 0xffu) || (id >> 8) >= SIM_HOSTING_SLOTS)

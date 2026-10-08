@@ -125,19 +125,20 @@ Save/Load, resource, RNG and bounded simulation checks. Complete gameplay,
 long-run stability and full DOS/native behavior equivalence are not established.
 
 MODERN WINDOWS PROTOTYPE: Play-SimAnt-Windows.cmd (and -debug) runs the same
-game with its main panels (edit view, map, info, behavior, caste, history,
-score, yard, examine) as separate Windows windows owned by the main window,
-like SimAnt for Windows: native caption with the game's title, normal
-Windows move, close button (closes the game window as its close box does) and
-a sizing frame on the edit view (the game applies its own size rules). The
-first click on a window that is behind another one brings it to the front
-(as SimAnt for Windows did); the next click acts. The normal Windows cursor
-is used. The main window stays as the desktop: menu bar, dialogs and the
-remaining windows. --scale=N (1..8, default 2) sets one scale for every
-window; --windows=ID,ID... (hex logical IDs, e.g. 1200,1300) chooses the
-hosted windows. Known prototype gaps: the menu bar is still the game's own,
-no native scroll bars or tool cursors yet; map edge-scrolling works only from
-the main window.
+game with every game window and dialog as a separate Windows window owned by
+the main window, like SimAnt for Windows: native caption with the game's
+title, normal Windows move, close button (closes it as the game's close box
+does) and a sizing frame on the edit view. Information, choice and command
+boxes open as native popups over the window they belong to; dialogs come to
+the front. The main window has a native Windows menu bar built from the
+game's own menus. The first click on a window that is behind another one
+brings it to the front (as SimAnt for Windows did); the next click acts; while
+a modal dialog is open, other windows bring the dialog forward instead. The
+normal Windows cursor is used. --scale=N (1..8, default 2) sets one scale for
+every window; --windows=ID,ID... (hex logical IDs) hosts only those windows.
+Known prototype gaps: no native scroll bars or tool cursors yet; the edit
+view can grow only up to the game's 640x480 logical screen; map edge-scrolling
+works only from the main window.
 
 Useful feedback: exact actions before the issue, game mode, visible symptom,
 screenshot/video, and simant-sdl3.log. For Save/Load problems, include the new

@@ -1,4 +1,5 @@
-# Select-a-Game (its own window 0200) > Quick Game; the game opens its windows itself.
+# Quick Game, then Window > History through the native menu path (WM_COMMAND
+# 0xFD15 -> the game event the DOS pull-down posts); History opens as its own window.
 5000 down Return
 5050 up Return
 7000 down Return
@@ -8,3 +9,4 @@
 10000 move@0200 207 58
 10200 mouse-down@0200 Left 207 58
 10400 mouse-up@0200 Left 207 58
+12000 menu FD15

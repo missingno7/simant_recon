@@ -13,6 +13,7 @@ struct Host {
     int logical_width, logical_height;
     int integer_scaling;
     int window_scale;              /* global presentation scale (--scale) */
+    int crop_top;                  /* rows above the main window (native menu bar) */
     HostInputState replay_state;
     HostPalette presented_palette;
     int frame_presented;
@@ -84,8 +85,9 @@ int host_set_logical_size(Host *host, int width, int height)
     texture = SDL_CreateTexture(host->renderer, SDL_PIXELFORMAT_RGBA32,
         SDL_TEXTUREACCESS_STREAMING, width, height);
     if (!texture || !SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST) ||
-        !SDL_SetWindowSize(host->window, width * host->window_scale, height * host->window_scale) ||
-        !SDL_SetRenderLogicalPresentation(host->renderer, width, height,
+        !SDL_SetWindowSize(host->window, width * host->window_scale,
+                           (height - host->crop_top) * host->window_scale) ||
+        !SDL_SetRenderLogicalPresentation(host->renderer, width, height - host->crop_top,
             host->integer_scaling ? SDL_LOGICAL_PRESENTATION_INTEGER_SCALE :
             SDL_LOGICAL_PRESENTATION_LETTERBOX)) {
         SDL_DestroyTexture(texture);
@@ -158,7 +160,22 @@ int host_set_window_scale(Host *host, int scale)
     if (!host || scale < 1 || scale > 8) return 0;
     host->window_scale = scale;
     return SDL_SetWindowSize(host->window, host->logical_width * scale,
-                             host->logical_height * scale);
+                             (host->logical_height - host->crop_top) * scale);
+}
+
+/* Modern presentation: the game's own menu bar rows are replaced by a native
+ * menu; the main window shows the logical screen below them. */
+int host_set_top_crop(Host *host, int rows)
+{
+    if (!host || rows < 0 || rows >= host->logical_height) return 0;
+    if (rows == host->crop_top) return 1;
+    host->crop_top = rows;
+    return SDL_SetRenderLogicalPresentation(host->renderer, host->logical_width,
+               host->logical_height - rows,
+               host->integer_scaling ? SDL_LOGICAL_PRESENTATION_INTEGER_SCALE :
+                                       SDL_LOGICAL_PRESENTATION_LETTERBOX) &&
+           SDL_SetWindowSize(host->window, host->logical_width * host->window_scale,
+                             (host->logical_height - rows) * host->window_scale);
 }
 uint64_t host_time_ns(void) { return virtual_quantum ? virtual_ns : SDL_GetTicksNS(); }
 void host_wait_ms(uint32_t milliseconds)
@@ -269,10 +286,12 @@ int host_get_input_state(Host *host, HostInputState *state)
     if (host == NULL || state == NULL) return 0;
     if (virtual_quantum) { *state = host->replay_state; return 1; }
     buttons = SDL_GetMouseState(&window_x, &window_y);
-    if (!native_windows_pointer(&logical_x, &logical_y) &&
-        !SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
-                                         &logical_x, &logical_y))
-        return 0;
+    if (!native_windows_pointer(&logical_x, &logical_y)) {
+        if (!SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
+                                             &logical_x, &logical_y))
+            return 0;
+        logical_y += (float)host->crop_top;
+    }
     state->x = (int16_t)pointer_coordinate(logical_x, host->logical_width);
     state->y = (int16_t)pointer_coordinate(logical_y, host->logical_height);
     state->left_button_down = (uint8_t)((buttons & SDL_BUTTON_LMASK) != 0);
@@ -292,7 +311,7 @@ int host_warp_pointer(Host *host, int16_t logical_x, int16_t logical_y)
         return 1;
     }
     if (host == NULL || !SDL_RenderCoordinatesToWindow(host->renderer,
-            (float)logical_x, (float)logical_y, &window_x, &window_y))
+            (float)logical_x, (float)(logical_y - host->crop_top), &window_x, &window_y))
         return 0;
     SDL_WarpMouseInWindow(host->window, window_x, window_y);
     return 1;
@@ -304,7 +323,7 @@ int host_push_pointer_event(Host *host, const HostEvent *event)
     float x, y;
     if (!host || !event ||
         !SDL_RenderCoordinatesToWindow(host->renderer, (float)event->x,
-                                       (float)event->y, &x, &y)) return 0;
+                                       (float)(event->y - host->crop_top), &x, &y)) return 0;
     if (event->kind == HOST_EVENT_MOUSE_MOVE) {
         raw.type = SDL_EVENT_MOUSE_MOTION;
         raw.motion.windowID = SDL_GetWindowID(host->window);
@@ -332,14 +351,15 @@ int host_poll_event(Host *host, HostEvent *event)
     SDL_Event raw;
     int hosted;
     if (!host || !event) return 0;
-    /* Modern mode: native close/resize replayed through the game's chrome. */
-    if (native_windows_next_synthetic(event)) return 1;
     while (SDL_PollEvent(&raw)) {
         memset(event, 0, sizeof(*event));
         /* Modern mode: hosted windows convert to logical screen space. */
         hosted = native_windows_translate(&raw);
         if (hosted < 0) continue;
         if (!hosted && !SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
+        if (!hosted && raw.type == SDL_EVENT_MOUSE_MOTION) raw.motion.y += (float)host->crop_top;
+        if (!hosted && (raw.type == SDL_EVENT_MOUSE_BUTTON_DOWN || raw.type == SDL_EVENT_MOUSE_BUTTON_UP))
+            raw.button.y += (float)host->crop_top;
         /* Report the visible logical screen, including captured/letterboxed
          * motion. The INT33 adapter subsequently applies the source's tighter
          * width-4/height-4 bounds. Diagnostics and replay state see this same
@@ -407,7 +427,10 @@ int host_present(Host *host, const uint8_t *pixels, size_t stride,
                  const HostPalette *palette)
 {
     int x,y;
+    SDL_FRect crop;
     if (!host || !pixels || !palette || stride < (size_t)host->logical_width) return 0;
+    crop.x = 0; crop.y = (float)host->crop_top;
+    crop.w = (float)host->logical_width; crop.h = (float)(host->logical_height - host->crop_top);
     for (y=0;y<host->logical_height;y++) for (x=0;x<host->logical_width;x++) {
         uint8_t index = pixels[y*stride+x];
         uint8_t *out = host->rgba + (y*host->logical_width+x)*4;
@@ -418,7 +441,7 @@ int host_present(Host *host, const uint8_t *pixels, size_t stride,
                 host->logical_width*4) &&
            SDL_SetRenderDrawColor(host->renderer,0,0,0,255) &&
            SDL_RenderClear(host->renderer) &&
-           SDL_RenderTexture(host->renderer,host->texture,NULL,NULL) &&
+           SDL_RenderTexture(host->renderer,host->texture,&crop,NULL) &&
            SDL_RenderPresent(host->renderer))) return 0;
     host->presented_palette = *palette;
     host->frame_presented = 1;

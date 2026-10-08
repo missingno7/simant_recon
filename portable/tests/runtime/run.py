@@ -46,7 +46,9 @@ def expected_replay(script):
             continue
         parts = line.split()
         index, milliseconds, operation = len(expected), int(parts[0]), parts[1].split('@')[0]
-        if operation in ('close', 'resize'):
+        if operation == 'menu':
+            expected.append(f'Replay menu command {index}: {milliseconds} ms {parts[2].upper()}')
+        elif operation in ('close', 'resize'):
             window = parts[1].split('@')[1].upper().zfill(4)
             expected.append(f'Replay window request {index}: {milliseconds} ms {operation} {window}')
         elif operation in ('down', 'up'):

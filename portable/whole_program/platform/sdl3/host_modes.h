@@ -27,6 +27,8 @@ SDL_Window *host_sdl_window(Host *host);
 /* One presentation scale for every window (--scale, default 2). */
 int host_window_scale(const Host *host);
 int host_set_window_scale(Host *host, int scale);
+/* Rows above the main window's client (native menu bar replaces them). */
+int host_set_top_crop(Host *host, int rows);
 
 /* Opt-in replay clock. Reads never advance time; the guarded application
  * poll advances one explicit quantum, independently of SDL/CPU wall time. */

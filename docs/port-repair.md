@@ -44,8 +44,8 @@ original SIMANT.EXE            primary oracle: historical behavior, machine sema
 ## Modern Windows presentation (`--windows`)
 
 The single-window SDL3 build is the accepted baseline (`sdl3-baseline-v1`). The
-modern presentation runs the same executable and game with selected logical
-windows as native SDL windows; without `--windows` nothing changes.
+modern presentation runs the same executable and game with its logical windows
+as native SDL windows; without `--windows` nothing changes.
 
 * **Boundary.** DOS composites all logical windows into one VGA screen: m1E57
   computes each window's visible region from the stack `g_5702`, and
@@ -58,21 +58,36 @@ windows as native SDL windows; without `--windows` nothing changes.
   `f_1E57_038E` over their sub-stack. Window records, the stack, hit testing,
   event dispatch and draw hooks stay canonical.
 * **Hosting** (`platform/sdl3/native_windows.c`, Win16 contracts from
-  simantw_recon `docs/portable-windows-reference.md` §0): created on the first
-  `win_Open`, hidden on `win_Close`, reused; owned top-level windows (owner: the
-  main window) at one global `--scale`. As in Win16 `win_Open`, the title object
-  (object 1, type 0x0c/0x12) becomes the native caption and its strip leaves the
-  client area; flag 4 gives the close button, flag 8 a sizing frame. Native close
-  and resize act through the game's own chrome hot boxes (close box `0xf083`,
-  resize icon `0xf084` / `o26_39C7_0671`) as timed synthetic input, so window
-  state and size rules stay canonical. Window-local input maps to logical screen
-  space; a click on a window that is not on top raises it and is eaten (Win16
-  WM_MOUSEACTIVATE, DOS `f_218D_0451` via a visible point). The OS cursor replaces
-  the software cursor (Win16 class cursor IDC_ARROW). The main SDL window stays
-  the desktop (menu bar, dialogs, shared windows).
+  simantw_recon `docs/portable-windows-reference.md` §0 and
+  `evidence/port/sections/ANSWERS.md` §1/§3/§7). Every logical window, dialogs
+  included, is an owned top-level window (owner: the main window) at one global
+  `--scale`, created on the first `win_Open`, hidden on `win_Close`, reused, and
+  brought to the front when it opens or becomes the logical top (Win16
+  `BringWindowToTop`). Hidden windows reappear where the user left them unless
+  object 0 is anchored (`+0x18..+0x1E`), as Win16 re-places them. The title object
+  (object 1, type 0x0c/0x12) becomes the native caption and leaves the client
+  area; without one the window has no caption (Win16 `WS_DLGFRAME`). Flag 4 gives
+  the close button, flag 8 a sizing frame.
+* **Native actions in the game's pump.** `f_218D_02D5` (behind `win_Events` and
+  `win_GetEvent`) first calls the empty canonical stub `f_1B28_0069`; its wrapper
+  runs native actions there, where Win16 dispatched window messages: close
+  -> `win_Close` (WM_CLOSE), raise -> `f_20E8_0725` (WM_MOUSEACTIVATE; a background
+  click only raises, and with a modal top window (+0x1C & 0x40) the modal window is
+  brought forward), resize -> the Win16 WM_SIZE record update followed by DOS's own
+  geometry tail (`win_Recalc`, `f_1E57_038E`, `g_62EC`, exposed redraw, hot boxes),
+  menu -> the `0xFDxx` command event the DOS pull-down posts.
+* **Popups.** A save-under box (`GSaveRect` .. `f_1CE2_056C`: information and choice
+  boxes, pull-downs) gets its own planes and is a native popup over the window it
+  appears on (Win16 `PopUpInfoWindow`). A held drag maps through the native window
+  under the pointer (`WindowFromPoint`), so prox menus opened at the mouse work.
+* **Menu bar** (`platform/sdl3/native_menu.c`): a native Windows menu built from the
+  game's menu resource (`g_6054`), states mirrored on `WM_INITMENUPOPUP`, selection
+  posted from the pump; the main window starts below the game-drawn menu bar rows.
+* **Presentation.** Content is drawn 1:1 at the scale, never stretched; the OS
+  cursor replaces the software cursor (Win16 class cursor IDC_ARROW).
 * **Tests.** `portable/tests/runtime/run_windows.py`; replay lines `op@ID` address
-  hosted windows in client-local coordinates, `close@ID` and `resize@ID W H` the
-  native frame, and `--debug` records them.
+  hosted windows in client-local coordinates, `close@ID`, `resize@ID W H` and
+  `menu FDxx` the native frame and menu, and `--debug` records window input.
 
 ## Closure target: the normal shipped game
 

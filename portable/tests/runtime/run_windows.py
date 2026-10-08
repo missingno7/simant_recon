@@ -19,8 +19,10 @@ FIXTURES = Path(__file__).resolve().parent
 RED, GREY, DESKTOP = (223, 8, 4), (195, 195, 195), (0, 170, 235)  # RGB
 CASES = (('raise', 'windows-raise.txt', '--windows', 13500),
          ('caste', 'windows-caste.txt', '--windows', 18500),
-         ('four', 'windows-quick.txt', '--windows=0,100,1200,1300', 13500),
-         ('chrome', 'windows-chrome.txt', '--windows', 17500))
+         ('four', 'windows-quick.txt', '--windows=0,100,200,1200,1300', 13500),
+         ('chrome', 'windows-chrome.txt', '--windows', 17500),
+         ('menu', 'windows-menu.txt', '--windows', 13500),
+         ('menucmd', 'windows-menucmd.txt', '--windows', 14000))
 
 
 def pixels(path):
@@ -50,7 +52,7 @@ def run_case(build, executable, out, name, script, option, smoke):
         run, timed_out = expired, True
     log = (run.stderr or b'').decode(errors='replace')
     (target / 'stderr.txt').write_text(log)
-    actual = [line for line in log.splitlines() if line.startswith(('Replay SDL key ', 'Replay SDL pointer ', 'Replay window request '))]
+    actual = [line for line in log.splitlines() if line.startswith(('Replay SDL key ', 'Replay SDL pointer ', 'Replay window request ', 'Replay menu command '))]
     return {'exit': None if timed_out else run.returncode,
             'smoke': 'Source-main smoke frame captured;' in log,
             'replayed': actual == runtime.expected_replay(FIXTURES / script),
@@ -111,6 +113,12 @@ def main():
     # Native sizing frame -> the game's resize icon (o26_39C7_0671): the logical
     # window and its native client follow the game's result.
     checks['native_resize_resizes_through_game'] = bool(edit) and edit[0] < 404 and edit[1] < 337
+    # Save-under pull-down (GSaveRect .. f_1CE2_056C) -> native popup, not the desktop.
+    popup = Path(str(runs['menu']['frame']) + '.popup0.bmp')
+    menu_root = pixels(runs['menu']['frame'])[2]
+    checks['save_under_box_is_native_popup'] = popup.is_file() and menu_root(322, 60) == DESKTOP
+    # Native menu choice -> the game's menu command event -> win_Open(0x1500).
+    checks['native_menu_command_reaches_game'] = hosted('menucmd', '1500') is not None
     result = {'passed': all(checks.values()), 'checks': checks,
               'executable_sha256': report['executable']['sha256'],
               'runs': {k: {**v, 'frame': str(v['frame'])} for k, v in runs.items()}}
