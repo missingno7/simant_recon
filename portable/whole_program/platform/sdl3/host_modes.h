@@ -24,6 +24,9 @@ int host_get_logical_size(const Host *host, int *width, int *height);
 int host_push_pointer_event(Host *host, const HostEvent *event);
 /* The root (desktop) SDL window; modern mode places hosted windows from it. */
 SDL_Window *host_sdl_window(Host *host);
+/* One presentation scale for every window (--scale, default 2). */
+int host_window_scale(const Host *host);
+int host_set_window_scale(Host *host, int scale);
 
 /* Opt-in replay clock. Reads never advance time; the guarded application
  * poll advances one explicit quantum, independently of SDL/CPU wall time. */

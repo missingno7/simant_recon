@@ -59,13 +59,20 @@ windows as native SDL windows; without `--windows` nothing changes.
   event dispatch and draw hooks stay canonical.
 * **Hosting** (`platform/sdl3/native_windows.c`, Win16 contracts from
   simantw_recon `docs/portable-windows-reference.md` §0): created on the first
-  `win_Open`, hidden on `win_Close`, reused; window-local input maps to logical
-  screen space; a click on a window that is not on top raises it and is eaten
-  (Win16 WM_MOUSEACTIVATE, DOS `f_218D_0451` via a visible point); the DOS title
-  object (object 1, type 0x0c/0x12) is the native drag area; the root SDL window
-  stays the desktop (menu bar, dialogs, shared windows).
+  `win_Open`, hidden on `win_Close`, reused; owned top-level windows (owner: the
+  main window) at one global `--scale`. As in Win16 `win_Open`, the title object
+  (object 1, type 0x0c/0x12) becomes the native caption and its strip leaves the
+  client area; flag 4 gives the close button, flag 8 a sizing frame. Native close
+  and resize act through the game's own chrome hot boxes (close box `0xf083`,
+  resize icon `0xf084` / `o26_39C7_0671`) as timed synthetic input, so window
+  state and size rules stay canonical. Window-local input maps to logical screen
+  space; a click on a window that is not on top raises it and is eaten (Win16
+  WM_MOUSEACTIVATE, DOS `f_218D_0451` via a visible point). The OS cursor replaces
+  the software cursor (Win16 class cursor IDC_ARROW). The main SDL window stays
+  the desktop (menu bar, dialogs, shared windows).
 * **Tests.** `portable/tests/runtime/run_windows.py`; replay lines `op@ID` address
-  hosted windows in window-local coordinates, and `--debug` records them.
+  hosted windows in client-local coordinates, `close@ID` and `resize@ID W H` the
+  native frame, and `--debug` records them.
 
 ## Closure target: the normal shipped game
 

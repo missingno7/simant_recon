@@ -23,7 +23,10 @@ typedef struct SimHostedWindowView {
     int open;              /* in the canonical window stack */
     int top;               /* g_5702[0] */
     int16_t left, top_y, right, bottom;   /* logical screen rect (exclusive) */
-    int16_t drag_left, drag_top, drag_right, drag_bottom; /* object 1: drag bar */
+    int16_t drag_left, drag_top, drag_right, drag_bottom; /* object 1: title strip */
+    uint16_t flags;        /* record +0x1C: 4 close box, 8 resizable, 0x40 modal */
+    int16_t margin;        /* chrome inset; the close box sits at left+margin */
+    char title[64];
     const SimVgaPlanes *planes;
 } SimHostedWindowView;
 

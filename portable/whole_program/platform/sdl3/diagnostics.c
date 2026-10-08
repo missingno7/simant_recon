@@ -344,6 +344,13 @@ int simant_diagnostics_event(void *unused, const SDL_Event *event)
         else snprintf(line,sizeof(line),"# %llu ignored mouse button %u",(unsigned long long)ms,event->button.button);
     } else if (event->type==SDL_EVENT_MOUSE_WHEEL)
         snprintf(line,sizeof(line),"# %llu ignored mouse wheel %.3f %.3f",(unsigned long long)ms,(double)event->wheel.x,(double)event->wheel.y);
+    else if (event->type==SDL_EVENT_WINDOW_CLOSE_REQUESTED &&
+             native_windows_event_origin(event->window.windowID,&window,&left,&top))
+        snprintf(line,sizeof(line),"%llu close@%04X",(unsigned long long)ms,(unsigned)(uint16_t)window);
+    else if (event->type==SDL_EVENT_WINDOW_RESIZED &&
+             native_windows_event_origin(event->window.windowID,&window,&left,&top))
+        snprintf(line,sizeof(line),"%llu resize@%04X %d %d",(unsigned long long)ms,(unsigned)(uint16_t)window,
+            (int)event->window.data1/native_windows_scale(),(int)event->window.data2/native_windows_scale());
     else if (event->type==SDL_EVENT_QUIT)
         snprintf(line,sizeof(line),"%llu exit",(unsigned long long)ms);
     if (line[0]) {

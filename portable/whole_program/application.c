@@ -37,8 +37,10 @@ typedef struct ReplayKey {
     int down;
     HostEvent pointer;
     int checkpoint, quit;
+    int close, resize_w, resize_h; /* close@ID, resize@ID W H */
     int relative, current_pointer;
     int16_t window; /* op@ID: window-local input to a hosted window */
+    int targeted;
 } ReplayKey;
 
 typedef struct Application {
@@ -152,9 +154,10 @@ static void load_replay(const char *path)
             /* op@ID: blank the suffix in the line so every parser below sees op. */
             char *at = strchr(line, '@'), *end;
             unsigned long id = strtoul(at + 1, &end, 16);
-            if (end == at + 1 || id == 0 || id > 0xffffu || (*end != ' ' && *end != '\t'))
+            if (end == at + 1 || id > 0xffffu || (*end && !strchr(" \t\r\n", *end)))
                 fail("replay window target");
             entry->window = (int16_t)(uint16_t)id;
+            entry->targeted = 1;
             memset(at, ' ', (size_t)(end - at));
             *strchr(operation, '@') = 0;
         }
@@ -192,6 +195,10 @@ static void load_replay(const char *path)
                 !strcmp(key_name, "Right") ? SDL_BUTTON_RIGHT :
                 !strcmp(key_name, "Middle") ? SDL_BUTTON_MIDDLE : 0;
             if (!entry->pointer.button) fail("pointer replay button");
+        } else if (!strcmp(operation, "close") && entry->targeted) entry->close = 1;
+        else if (!strcmp(operation, "resize") && entry->targeted) {
+            if (sscanf(line, "%llu %15s %d %d %c", &milliseconds, operation,
+                       &entry->resize_w, &entry->resize_h, &extra) != 4) fail("resize replay syntax");
         } else if (!strcmp(operation, "checkpoint")) entry->checkpoint = 1;
         else if (!strcmp(operation, "exit")) entry->quit = 1;
         else fail("input replay operation");
@@ -225,6 +232,16 @@ static void replay_input(uint64_t now)
             continue;
         }
         if (entry->quit) { exit_reason = "input replay exit"; exit(0); }
+        if (entry->close || entry->resize_w) {
+            if (entry->close ? !native_windows_request_close(entry->window) :
+                !native_windows_request_resize(entry->window, entry->resize_w, entry->resize_h))
+                fail("replay window request");
+            fprintf(stderr, "Replay window request %zu: %llu ms %s %04X\n", app.replay_next,
+                    (unsigned long long)entry->milliseconds, entry->close ? "close" : "resize",
+                    (unsigned)(uint16_t)entry->window);
+            ++app.replay_next;
+            continue;
+        }
         if (entry->pointer.kind) {
             if (entry->relative || entry->current_pointer) {
                 HostInputState state;
@@ -241,7 +258,7 @@ static void replay_input(uint64_t now)
                 entry->pointer.x = (int16_t)px;
                 entry->pointer.y = (int16_t)py;
             }
-            if (entry->window ? !native_windows_push_pointer(entry->window, &entry->pointer) :
+            if (entry->targeted ? !native_windows_push_pointer(entry->window, &entry->pointer) :
                                 !host_push_pointer_event(app.host, &entry->pointer))
                 fail("SDL pointer replay enqueue");
             fprintf(stderr, "Replay SDL pointer %zu: %llu ms kind=%d button=%u (%d,%d)\n",
@@ -540,6 +557,7 @@ int main(int argc, char **argv)
     /* Modern presentation: these logical windows become native windows. */
     int16_t hosted_ids[SIM_HOSTING_SLOTS];
     unsigned hosted_count = 0;
+    int window_scale = 2; /* --scale N: one scale for every window */
     const char *diagnostics_root = NULL;
     setvbuf(stderr, NULL, _IONBF, 0);
     SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);
@@ -593,6 +611,10 @@ int main(int argc, char **argv)
         else if (!strcmp(argv[i], "--test-input")) app.test_input = 1;
         else if (!strcmp(argv[i], "--test-input-crash")) app.test_input = 2;
         else if (!strcmp(argv[i], "--headless")) headless = 1;
+        else if (!strncmp(argv[i], "--scale=", 8)) {
+            window_scale = atoi(argv[i] + 8);
+            if (window_scale < 1 || window_scale > 8) fail("--scale expects 1..8");
+        }
         else if (!strncmp(argv[i], "--windows", 9) && (argv[i][9] == 0 || argv[i][9] == '=')) {
             /* --windows[=ID,ID...] (hex logical IDs). Default: the game panels
              * (edit, map, info, behavior, caste, history, score, yard, examine);
@@ -648,6 +670,7 @@ int main(int argc, char **argv)
     atexit(cleanup);
     app.host = host_create("SimAnt", 1);
     if (!app.host) { fprintf(stderr, "%s\n", host_error()); exit_status = 70; exit_reason = "SDL host startup"; return 70; }
+    if (!host_set_window_scale(app.host, window_scale)) fail("window scale");
     host_set_event_observer(simant_diagnostics_event, NULL);
     fprintf(stderr, "Native video driver: %s\n", SDL_GetCurrentVideoDriver());
     if (replay_path[0]) load_replay(replay_path);

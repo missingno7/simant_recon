@@ -19,7 +19,8 @@ FIXTURES = Path(__file__).resolve().parent
 RED, GREY, DESKTOP = (223, 8, 4), (195, 195, 195), (0, 170, 235)  # RGB
 CASES = (('raise', 'windows-raise.txt', '--windows', 13500),
          ('caste', 'windows-caste.txt', '--windows', 18500),
-         ('four', 'windows-quick.txt', '--windows=0,100,1200,1300', 13500))
+         ('four', 'windows-quick.txt', '--windows=0,100,1200,1300', 13500),
+         ('chrome', 'windows-chrome.txt', '--windows', 17500))
 
 
 def pixels(path):
@@ -49,7 +50,7 @@ def run_case(build, executable, out, name, script, option, smoke):
         run, timed_out = expired, True
     log = (run.stderr or b'').decode(errors='replace')
     (target / 'stderr.txt').write_text(log)
-    actual = [line for line in log.splitlines() if line.startswith(('Replay SDL key ', 'Replay SDL pointer '))]
+    actual = [line for line in log.splitlines() if line.startswith(('Replay SDL key ', 'Replay SDL pointer ', 'Replay window request '))]
     return {'exit': None if timed_out else run.returncode,
             'smoke': 'Source-main smoke frame captured;' in log,
             'replayed': actual == runtime.expected_replay(FIXTURES / script),
@@ -85,14 +86,15 @@ def main():
         return pixels(path) if path.is_file() else None
     raise_caste, caste, behavior = hosted('raise', '1300'), hosted('caste', '1300'), hosted('caste', '1200')
     if raise_caste and caste and behavior:
-        checks['hosted_windows_shown_at_logical_size'] = raise_caste[:2] == caste[:2] == (214, 192)
+        # Client = logical rect minus the 20-px title strip the native caption replaces.
+        checks['hosted_client_is_rect_minus_title_strip'] = raise_caste[:2] == caste[:2] == (214, 172)
         # Win16 WM_MOUSEACTIVATE / DOS f_218D_0451: the first click on a background
         # window raises it; the click does not reach the Manual button.
-        checks['background_click_only_raises'] = raise_caste[2](12, 49) == GREY and raise_caste[2](12, 32) == RED
-        checks['second_click_reaches_game_object'] = caste[2](12, 49) == RED and caste[2](12, 32) == GREY
+        checks['background_click_only_raises'] = raise_caste[2](12, 29) == GREY and raise_caste[2](12, 12) == RED
+        checks['second_click_reaches_game_object'] = caste[2](12, 29) == RED and caste[2](12, 12) == GREY
         checks['triangle_drag_changes_caste_display'] = any(
-            raise_caste[2](x, y) != caste[2](x, y) for x in range(84, 132) for y in range(28, 46))
-        checks['second_native_window_in_same_game'] = behavior[2](12, 49) == RED
+            raise_caste[2](x, y) != caste[2](x, y) for x in range(84, 132) for y in range(8, 26))
+        checks['second_native_window_in_same_game'] = behavior[2](12, 22) == RED
     else:
         checks['hosted_frames_present'] = False
     root = pixels(runs['caste']['frame'])[2]
@@ -102,6 +104,13 @@ def main():
     checks['all_four_hosted_desktop_is_empty'] = all(
         four(x, y) == DESKTOP for x in range(0, 640, 37) for y in range(40, 480, 41))
     checks['four_hosted_frames_present'] = all(hosted('four', w) for w in ('0000', '0100', '1200', '1300'))
+    # Native close button -> the game's close box (win_Close): hidden, not saved.
+    checks['native_close_closes_through_game'] = (hosted('chrome', '1300') is None and
+                                                  hosted('chrome', '1200') is not None)
+    edit = hosted('chrome', '0000')
+    # Native sizing frame -> the game's resize icon (o26_39C7_0671): the logical
+    # window and its native client follow the game's result.
+    checks['native_resize_resizes_through_game'] = bool(edit) and edit[0] < 404 and edit[1] < 337
     result = {'passed': all(checks.values()), 'checks': checks,
               'executable_sha256': report['executable']['sha256'],
               'runs': {k: {**v, 'frame': str(v['frame'])} for k, v in runs.items()}}

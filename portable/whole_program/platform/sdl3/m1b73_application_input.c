@@ -145,6 +145,9 @@ static int render_source_cursor(void *context, PortableM1B73CursorAction action,
         !cursor_header(context, mask, image, &checked_width, &checked_height) ||
         checked_width != width || checked_height != height)
         return 0;
+    /* Modern presentation uses the OS cursor (Win16: class IDC_ARROW); the
+     * canonical cursor and hot-box bookkeeping above still runs. */
+    if (native_windows_active()) return 1;
     mode = action == PORTABLE_M1B73_CURSOR_SHOW ? 1 : 2;
     if (action != PORTABLE_M1B73_CURSOR_SHOW &&
         action != PORTABLE_M1B73_CURSOR_HIDE)

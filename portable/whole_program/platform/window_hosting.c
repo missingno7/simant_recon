@@ -1,5 +1,7 @@
 #include "window_hosting.h"
 #include "graphics_source_clip.h"
+#include "portable/whole_program/window_refs.h"
+#include "portable/whole_program/window_runtime_owner.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,6 +38,7 @@ extern void __real_f_1E57_038E(void);
 extern void __real_f_1E57_0052(int16_t win);
 extern void __real_f_1E57_00B1(int16_t win);
 extern void __real_clip_KillWin(int16_t win);
+extern void __real_win_DrawTitle(int16_t win);
 
 #define END ((int16_t)(uint16_t)0x8000)
 
@@ -59,7 +62,12 @@ static struct {
     unsigned hosted_count;
     StackEntry stack[32];
     unsigned stack_count;
-    struct Rect drag[SIM_HOSTING_SLOTS];
+    struct WindowInfo {
+        struct Rect drag;      /* object 1 when it is the title (0x0c/0x12) */
+        uint16_t flags;        /* record +0x1C */
+        int16_t margin;        /* object 0 +0x28: frame inset of the chrome */
+        char title[64];
+    } info[SIM_HOSTING_SLOTS];
     unsigned generation;
     enum ClipContext context;
     int16_t context_window;
@@ -189,6 +197,35 @@ static int was_open(int16_t id)
     return 0;
 }
 
+/* Native caption and close box come from the record, as Win16 win_Open
+ * builds them: title object 1 (type 0x0C inline text, type 0x12 inline or
+ * handle text), flags +0x1C, chrome inset object 0 +0x28. */
+static void read_info(int16_t id)
+{
+    struct WindowInfo *info = &s.info[(uint16_t)id >> 8];
+    char *w, *o, *text = NULL, **handle = NULL;
+    win_LockWin(id);
+    w = win_WinAddr(id);
+    memset(&info->drag, 0, sizeof(info->drag));
+    info->flags = *(uint16_t *)(w + 0x1c);
+    info->margin = (unsigned char)win_ObjAddr(id)[0x28];
+    if (*(int16_t *)(w + 0x0c) >= 2) {
+        o = win_ObjAddr((int16_t)(id + 1));
+        if (o[0x21] == 0x0c || o[0x21] == 0x12) {
+            win_GetObjRect((int16_t)(id + 1), &info->drag);
+            if (o[0x21] == 0x0c) text = o + 0x2a;
+            else if ((handle = *sim_window_ref_registry_handle_slot_for_object(
+                          &sim_window_ref_registry, o, 0x2a)) == NULL) {
+                text = o + 0x2e;
+                if (strchr(text, '%')) text = NULL;
+            } else text = f_171C_1B84(handle);
+        }
+    }
+    snprintf(info->title, sizeof(info->title), "%s", text && text[0] ? text : "SimAnt");
+    if (handle) f_171C_1BBA(handle);
+    win_UnlockWin(id);
+}
+
 static void cache_stack(void)
 {
     StackEntry previous[32];
@@ -201,19 +238,7 @@ static void cache_stack(void)
         e->id = id;
         win_GetObjRect(id, &e->rect);
         e->planes = hosted_planes(id);
-        if (e->planes) {
-            char *w;
-            struct Rect *drag = &s.drag[(uint16_t)id >> 8];
-            memset(drag, 0, sizeof(*drag));
-            win_LockWin(id);
-            w = win_WinAddr(id);
-            /* o26_39C7_040F drags by object 1 when it is a title (0x0c/0x12). */
-            if (*(int16_t *)(w + 0x0c) >= 2) {
-                char *o = win_ObjAddr((int16_t)(id + 1));
-                if (o[0x21] == 0x0c || o[0x21] == 0x12) win_GetObjRect((int16_t)(id + 1), drag);
-            }
-            win_UnlockWin(id);
-        }
+        if (e->planes) read_info(id);
     }
     /* Window inventory for playtest reports: logical opens and closes. */
     for (i = 0; i < s.stack_count; ++i) {
@@ -266,6 +291,12 @@ void __wrap_f_1E57_038E(void) { __real_f_1E57_038E(); restack(); }
 void __wrap_f_1E57_0052(int16_t win) { __real_f_1E57_0052(win); restack(); }
 void __wrap_f_1E57_00B1(int16_t win) { __real_f_1E57_00B1(win); restack(); }
 void __wrap_clip_KillWin(int16_t win) { __real_clip_KillWin(win); restack(); }
+/* Win16 win_DrawTitle also sets the native caption (SetWindowText). */
+void __wrap_win_DrawTitle(int16_t win)
+{
+    __real_win_DrawTitle(win);
+    if (s.enabled && hosted_planes(win) && stack_entry(win)) { read_info(win); ++s.generation; }
+}
 
 void __wrap_clip_SetWin(int16_t win)
 {
@@ -338,19 +369,22 @@ int sim_window_hosting_visible_point(int16_t id, int16_t *x, int16_t *y)
 int sim_window_hosting_view(unsigned index, SimHostedWindowView *view)
 {
     const StackEntry *e;
-    const struct Rect *drag;
+    const struct WindowInfo *info;
     if (index >= s.hosted_count || view == NULL) return 0;
     memset(view, 0, sizeof(*view));
     view->id = s.hosted[index].id;
     view->planes = s.hosted[index].planes;
     e = stack_entry(view->id);
     if (e == NULL) return 1;
-    drag = &s.drag[(uint16_t)view->id >> 8];
+    info = &s.info[(uint16_t)view->id >> 8];
     view->open = 1;
     view->top = s.stack_count && s.stack[0].id == view->id;
     view->left = e->rect.left; view->top_y = e->rect.top;
     view->right = e->rect.right; view->bottom = e->rect.bottom;
-    view->drag_left = drag->left; view->drag_top = drag->top;
-    view->drag_right = drag->right; view->drag_bottom = drag->bottom;
+    view->drag_left = info->drag.left; view->drag_top = info->drag.top;
+    view->drag_right = info->drag.right; view->drag_bottom = info->drag.bottom;
+    view->flags = info->flags;
+    view->margin = info->margin;
+    memcpy(view->title, info->title, sizeof(view->title));
     return 1;
 }

@@ -12,6 +12,7 @@ struct Host {
     uint8_t *rgba;
     int logical_width, logical_height;
     int integer_scaling;
+    int window_scale;              /* global presentation scale (--scale) */
     HostInputState replay_state;
     HostPalette presented_palette;
     int frame_presented;
@@ -83,7 +84,7 @@ int host_set_logical_size(Host *host, int width, int height)
     texture = SDL_CreateTexture(host->renderer, SDL_PIXELFORMAT_RGBA32,
         SDL_TEXTUREACCESS_STREAMING, width, height);
     if (!texture || !SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST) ||
-        !SDL_SetWindowSize(host->window, width, height) ||
+        !SDL_SetWindowSize(host->window, width * host->window_scale, height * host->window_scale) ||
         !SDL_SetRenderLogicalPresentation(host->renderer, width, height,
             host->integer_scaling ? SDL_LOGICAL_PRESENTATION_INTEGER_SCALE :
             SDL_LOGICAL_PRESENTATION_LETTERBOX)) {
@@ -121,6 +122,7 @@ Host *host_create_dimensions(const char *title, int integer_scaling,
     host = calloc(1, sizeof(*host));
     if (!host) { SDL_Quit(); return NULL; }
     host->integer_scaling = integer_scaling != 0;
+    host->window_scale = 1;
     if (!SDL_CreateWindowAndRenderer(title, width, height, SDL_WINDOW_RESIZABLE,
             &host->window, &host->renderer) ||
         !host_set_logical_size(host, width, height)) {
@@ -150,6 +152,14 @@ void host_destroy(Host *host)
 
 const char *host_error(void) { return SDL_GetError(); }
 SDL_Window *host_sdl_window(Host *host) { return host ? host->window : NULL; }
+int host_window_scale(const Host *host) { return host ? host->window_scale : 1; }
+int host_set_window_scale(Host *host, int scale)
+{
+    if (!host || scale < 1 || scale > 8) return 0;
+    host->window_scale = scale;
+    return SDL_SetWindowSize(host->window, host->logical_width * scale,
+                             host->logical_height * scale);
+}
 uint64_t host_time_ns(void) { return virtual_quantum ? virtual_ns : SDL_GetTicksNS(); }
 void host_wait_ms(uint32_t milliseconds)
 {
@@ -322,6 +332,8 @@ int host_poll_event(Host *host, HostEvent *event)
     SDL_Event raw;
     int hosted;
     if (!host || !event) return 0;
+    /* Modern mode: native close/resize replayed through the game's chrome. */
+    if (native_windows_next_synthetic(event)) return 1;
     while (SDL_PollEvent(&raw)) {
         memset(event, 0, sizeof(*event));
         /* Modern mode: hosted windows convert to logical screen space. */

@@ -46,7 +46,10 @@ def expected_replay(script):
             continue
         parts = line.split()
         index, milliseconds, operation = len(expected), int(parts[0]), parts[1].split('@')[0]
-        if operation in ('down', 'up'):
+        if operation in ('close', 'resize'):
+            window = parts[1].split('@')[1].upper().zfill(4)
+            expected.append(f'Replay window request {index}: {milliseconds} ms {operation} {window}')
+        elif operation in ('down', 'up'):
             expected.append(f'Replay SDL key {index}: {milliseconds} ms {operation} {" ".join(parts[2:])}')
         else:
             button = 0 if operation == 'move' else buttons[parts[2]]
