@@ -1,0 +1,19 @@
+# Quick Game, PAUSE, larger window, zoom out, click a nest tile the canonical
+# edit view does not show: the click waits for the edit view to scroll there.
+5000 down Return
+5050 up Return
+7000 down Return
+7050 up Return
+9000 down Return
+9050 up Return
+10000 move@0200 207 58
+10200 mouse-down@0200 Left 207 58
+10400 mouse-up@0200 Left 207 58
+16000 move@0000 28 133
+16100 mouse-down@0000 Left 28 133
+16200 mouse-up@0000 Left 28 133
+16500 size@0000 700 450
+17000 wheel@0000 400 220 -3
+17500 move@0000 580 300
+17600 mouse-down@0000 Left 580 300
+17700 mouse-up@0000 Left 580 300

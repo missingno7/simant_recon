@@ -47,6 +47,11 @@ unsigned sim_window_hosting_count(void);
 /* Open save-under popups, bottom first; the serial changes on open/close. */
 unsigned sim_window_hosting_popups(SimHostedPopupView *views, unsigned capacity);
 unsigned sim_window_hosting_popup_serial(void);
+/* The map window's indicator of the edit view (mapCursorRect XOR outline):
+ * when owned, its XOR is left to the presentation, which draws the indicator
+ * while the canonical cursor is shown. */
+void sim_window_hosting_own_map_cursor(int owned);
+int sim_window_hosting_map_cursor_shown(void);
 /* Logical stack queries for input routing (point is logical screen space). */
 int16_t sim_window_hosting_owner_at(int16_t x, int16_t y);  /* topmost window or 0x8000 */
 int16_t sim_window_hosting_top(void);

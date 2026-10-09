@@ -39,6 +39,8 @@ typedef struct ReplayKey {
     HostEvent pointer;
     int checkpoint, quit;
     int close, resize_w, resize_h; /* close@ID, resize@ID W H */
+    int native_w, native_h;        /* size@ID W H: the native client, as the user sizes it */
+    int wheel_x, wheel_y, wheel;   /* wheel@ID X Y STEPS */
     int menu;                      /* menu FDxx: a native menu choice */
     int relative, current_pointer;
     int16_t window; /* op@ID: window-local input to a hosted window */
@@ -204,6 +206,14 @@ static void load_replay(const char *path)
         else if (!strcmp(operation, "resize") && entry->targeted) {
             if (sscanf(line, "%llu %15s %d %d %c", &milliseconds, operation,
                        &entry->resize_w, &entry->resize_h, &extra) != 4) fail("resize replay syntax");
+        } else if (!strcmp(operation, "size") && entry->targeted) {
+            if (sscanf(line, "%llu %15s %d %d %c", &milliseconds, operation,
+                       &entry->native_w, &entry->native_h, &extra) != 4 ||
+                entry->native_w <= 0 || entry->native_h <= 0) fail("size replay syntax");
+        } else if (!strcmp(operation, "wheel") && entry->targeted) {
+            if (sscanf(line, "%llu %15s %d %d %d %c", &milliseconds, operation, &entry->wheel_x,
+                       &entry->wheel_y, &entry->wheel, &extra) != 5 || !entry->wheel)
+                fail("wheel replay syntax");
         } else if (!strcmp(operation, "checkpoint")) entry->checkpoint = 1;
         else if (!strcmp(operation, "exit")) entry->quit = 1;
         else fail("input replay operation");
@@ -250,6 +260,16 @@ static void replay_input(uint64_t now)
                 fail("replay window request");
             fprintf(stderr, "Replay window request %zu: %llu ms %s %04X\n", app.replay_next,
                     (unsigned long long)entry->milliseconds, entry->close ? "close" : "resize",
+                    (unsigned)(uint16_t)entry->window);
+            ++app.replay_next;
+            continue;
+        }
+        if (entry->native_w || entry->wheel) {
+            if (entry->native_w ? !native_windows_push_native_size(entry->window, entry->native_w, entry->native_h) :
+                !native_windows_push_wheel(entry->window, entry->wheel_x, entry->wheel_y, (float)entry->wheel))
+                fail("replay window input");
+            fprintf(stderr, "Replay window request %zu: %llu ms %s %04X\n", app.replay_next,
+                    (unsigned long long)entry->milliseconds, entry->native_w ? "size" : "wheel",
                     (unsigned)(uint16_t)entry->window);
             ++app.replay_next;
             continue;
@@ -565,7 +585,7 @@ int main(int argc, char **argv)
     uint64_t smoke_ms = 0;
     uint64_t virtual_quantum_ns = 0;
     char **source_argv;
-    int debug = 0, test_crash = 0, test_abort = 0;
+    int debug = 0, test_crash = 0, test_abort = 0, smooth_zoom = 0;
     /* Modern presentation: these logical windows become native windows. */
     int16_t hosted_ids[SIM_HOSTING_SLOTS];
     unsigned hosted_count = 0;
@@ -643,6 +663,8 @@ int main(int argc, char **argv)
                 list = *end == ',' ? end + 1 : end;
             }
         }
+        /* Modern Game Window: linear filtering of zoomed world pixels. */
+        else if (!strcmp(argv[i], "--smooth-zoom")) smooth_zoom = 1;
         else if (!strcmp(argv[i], "--deterministic")) virtual_quantum_ns = 1000000u;
         else if (!strcmp(argv[i], "--poll-ns") && i + 1 < argc) {
             virtual_quantum_ns = strtoull(argv[++i], NULL, 0);
@@ -693,6 +715,7 @@ int main(int argc, char **argv)
         (!sim_window_hosting_enable(&app.graphics.vga, hosted_ids, hosted_count) ||
          !native_windows_init(app.host, host_sdl_window(app.host))))
         fail("native window hosting");
+    native_windows_set_smooth_zoom(smooth_zoom);
     sim_graphics_set_mode_changed_callback(&app.graphics, change_dimensions, &app);
     portable_source_graphics_resources_init(&app.resources);
     if (portable_source_graphics_resources_bind(&app.resources, &app.graphics, fonts) !=

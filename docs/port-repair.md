@@ -83,8 +83,8 @@ as native SDL windows; without `--windows` nothing changes.
 * **Menu bar** (`platform/sdl3/native_menu.c`): a native Windows menu built from the
   game's menu resource (`g_6054`), states mirrored on `WM_INITMENUPOPUP`, selection
   posted from the pump; the main window starts below the game-drawn menu bar rows.
-* **Presentation.** Content is drawn 1:1 at the scale, never stretched; the OS
-  cursor replaces the software cursor (Win16 class cursor IDC_ARROW).
+* **Presentation.** Hosted content is drawn 1:1 at the scale, never stretched;
+  the OS cursor replaces the software cursor (Win16 class cursor IDC_ARROW).
 * **Drawing without a clip list** (text and animation that dialogs draw after
   clearing `g_5AAC`) goes to the logical window under each pixel, like full-screen
   lists; only the desktop list draws on the main window. A hosted window's planes
@@ -92,11 +92,21 @@ as native SDL windows; without `--windows` nothing changes.
 * **Edge scrolling.** `f_00F8_01BE` scrolls the map while the pointer is at a
   screen edge; the edit view's own window is that screen (its client edges map to
   the logical screen edges), leaving it puts the pointer back inside, and the main
-  window has no edge zone. The edit view cannot exceed the 640x480 logical screen:
-  the S00 drawing projections address VGA with 16-bit offsets at 80 bytes per row.
-* **Tests.** `portable/tests/runtime/run_windows.py`; replay lines `op@ID` address
-  hosted windows in client-local coordinates, `close@ID`, `resize@ID W H` and
-  `menu FDxx` the native frame and menu, and `--debug` records window input.
+  window has no edge zone. The canonical edit view cannot exceed the 640x480
+  logical screen: the S00 drawing projections address VGA with 16-bit offsets at
+  80 bytes per row, and its cell cache is 40x30.
+* **Modern Game Window** (`docs/modern-frontend.md`). Window 0's map area is a
+  world-space renderer (`platform/sdl3/modern_game_view.c`) over read-only views
+  of canonical state (`portable/whole_program/modern/`): any native size, wheel
+  zoom about the cursor, middle-button pan, smooth camera following, optional
+  linear filtering (`--smooth-zoom`). The canonical edit view keeps drawing at
+  game cadence (its draw path consumes the RNG) and remains the game's camera;
+  the overview's indicator shows the modern visible area.
+* **Tests.** `portable/tests/runtime/run_windows.py` and `run_modern.py`; replay
+  lines `op@ID` address hosted windows in client-local coordinates, `close@ID`,
+  `resize@ID W H` and `menu FDxx` the native frame and menu, `size@ID W H` the
+  native client size and `wheel@ID X Y STEPS` the mouse wheel; `--debug` records
+  window input.
 
 ## Closure target: the normal shipped game
 

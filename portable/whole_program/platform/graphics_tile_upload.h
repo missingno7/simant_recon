@@ -56,6 +56,22 @@ void sim_graphics_tile_cursor_unbind(void);
 /* Bounded owner view used by source read-plane providers and tests. The only
  * exposed size is the actual 64 KiB source aperture per plane. */
 const uint8_t *sim_graphics_tile_upload_plane(unsigned plane, size_t *size_out);
+/* Read-only copy of resident terrain tile `tile` (0..255) in the compositors'
+ * 128-byte row-interleaved form (plane tile>>6, C000h+(tile&63)*128); leaves
+ * upload status untouched. Returns 0 before the graphics owner is bound. */
+int sim_graphics_tile_record(unsigned tile, uint8_t record[128]);
+
+/* The S00 terrain/life compositor kinds (see the source entries below). */
+typedef enum SimGraphicsTileComposeKind {
+    SIM_GRAPHICS_TILE_COMPOSE_2B1A,
+    SIM_GRAPHICS_TILE_COMPOSE_1B7D,
+    SIM_GRAPHICS_TILE_COMPOSE_303F
+} SimGraphicsTileComposeKind;
+/* Pure per-row merge of a life record over a terrain record: out =
+ * bg ^ ((fg ^ bg) & mask), then the kind's mask_mode prefix recolouring. */
+void sim_graphics_tile_compose(const uint8_t background_record[128],
+                               const uint8_t *life_record, int16_t mask_mode,
+                               SimGraphicsTileComposeKind kind, uint8_t out[128]);
 SimGraphicsTileUploadStatus sim_graphics_tile_upload_read_plane(
     unsigned plane, uint16_t offset, uint8_t *destination, size_t byte_count);
 

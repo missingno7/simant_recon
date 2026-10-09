@@ -15,9 +15,15 @@ void native_windows_shutdown(void);
 /* Present every open hosted window; show/hide/size follow the logical state. */
 int native_windows_present(const HostPalette *palette);
 /* Converts a hosted window's pointer event to logical screen coordinates and
- * applies the raise rule; consumes close/resize requests. Returns 1 handled,
- * 0 not a hosted window, -1 drop. */
+ * applies the raise rule; consumes close/resize requests and the Game
+ * Window's wheel zoom and middle-button pan. Returns 1 handled, 0 not a
+ * hosted window, -1 drop. */
 int native_windows_translate(SDL_Event *event);
+/* Mouse input held back while the edit view scrolls to a clicked modern map
+ * point, released in order; poll it before SDL's queue. */
+int native_windows_take_deferred(SDL_Event *event);
+/* Linear instead of nearest filtering for the zoomed Game Window map. */
+void native_windows_set_smooth_zoom(int smooth);
 /* Root window pointer filter after render conversion: -1 drops a click whose
  * logical point belongs to a hosted window. */
 int native_windows_filter_root(SDL_Event *event);
@@ -32,6 +38,10 @@ int native_windows_request_resize(int16_t id, int width, int height);
 int native_windows_save_frames(const char *base_path);
 /* Test/replay input at window-local logical client coordinates of window `id`. */
 int native_windows_push_pointer(int16_t id, const HostEvent *event);
+/* Test/replay wheel steps at a client point, and a native client size (both
+ * in logical pixels), as the user's mouse wheel and sizing frame produce. */
+int native_windows_push_wheel(int16_t id, int x, int y, float steps);
+int native_windows_push_native_size(int16_t id, int width, int height);
 /* For input recording: the hosted window an SDL event came from. */
 int native_windows_event_origin(SDL_WindowID window, int16_t *id, int16_t *left, int16_t *top);
 

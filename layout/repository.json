@@ -1193,11 +1193,18 @@
         "portable/whole_program/platform/sdl3/native_windows.c",
         "portable/whole_program/platform/sdl3/native_windows.h",
         "portable/whole_program/platform/sdl3/native_menu.c",
-        "portable/whole_program/platform/sdl3/native_menu.h"
+        "portable/whole_program/platform/sdl3/native_menu.h",
+        "portable/whole_program/modern/world_view.c",
+        "portable/whole_program/modern/camera.c",
+        "portable/whole_program/platform/sdl3/modern_game_view.c",
+        "portable/whole_program/modern/world_view.h",
+        "portable/whole_program/modern/camera.h",
+        "portable/whole_program/platform/sdl3/modern_game_view.h"
       ],
       "builder_site": "portable/platform.json services and window_hosting_wraps (application link -Wl,--wrap)",
       "consumers": [
-        "--windows modern presentation: hosted logical windows as native SDL windows"
+        "--windows modern presentation: hosted logical windows as native SDL windows",
+        "--windows modern Game Window: world-space map renderer over read-only semantic views (portable/whole_program/modern)"
       ],
       "reason": "Replaces the DOS window system's shared-screen occlusion for hosted windows, as Win16 SimAnt does with native windows (its clip_SetWin is empty). Cross-module calls into m1E57 clip entry points are observed; canonical bodies, window records, stack, hit testing and draw hooks are unchanged. Each hosted window gets its own VGA plane set and an unoccluded clip list; the shared windows keep the canonical m1E57 occlusion over their sub-stack.",
       "blocker": "Presentation only. Without --windows no window is hosted and every access uses the single shared card.",

@@ -52,6 +52,8 @@ extern void __real_win_DrawTitle(int16_t win);
 extern void __real_f_1B28_0069(void);
 extern char *__real_GSaveRect(struct Rect *r);
 extern void __real_f_1CE2_056C(struct Rect *r, char *buf);
+extern void __real_GRectInvOutline(struct Rect *r, int16_t width);
+extern struct Rect fd_50F6_38C2;            /* mapCursorRect (S12 DrawMapCursor) */
 
 #define END ((int16_t)(uint16_t)0x8000)
 
@@ -97,6 +99,7 @@ static struct {
     SimVgaPlanes *popup_planes[POPUP_DEPTH];
     unsigned popup_count, popup_serial;
     void (*pump)(void);
+    int map_cursor_owned, map_cursor_shown;
 } s;
 
 static SimVgaPlanes *hosted_planes(int16_t id)
@@ -422,6 +425,22 @@ unsigned sim_window_hosting_popups(SimHostedPopupView *views, unsigned capacity)
 }
 
 unsigned sim_window_hosting_popup_serial(void) { return s.popup_serial; }
+
+/* The overview's indicator of the Game Window's area: S12 DrawMapCursor and
+ * EraseMapCursor each XOR mapCursorRect once (g_298E tracks it). When the
+ * presentation owns the indicator, the XOR is not drawn and the canonical
+ * shown/erased state is mirrored for the presentation to draw. */
+void __wrap_GRectInvOutline(struct Rect *r, int16_t width)
+{
+    if (s.enabled && s.map_cursor_owned && r == &fd_50F6_38C2) {
+        s.map_cursor_shown = !s.map_cursor_shown;
+        return;
+    }
+    __real_GRectInvOutline(r, width);
+}
+
+void sim_window_hosting_own_map_cursor(int owned) { s.map_cursor_owned = owned != 0; }
+int sim_window_hosting_map_cursor_shown(void) { return s.map_cursor_owned && s.map_cursor_shown; }
 
 /* The game's event pump (f_218D_02D5 calls this empty stub first): native
  * window actions run here, where Win16 dispatched window messages. */

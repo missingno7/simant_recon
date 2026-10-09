@@ -81,7 +81,10 @@
     "portable/whole_program/platform/graphics_vga.c",
     "portable/whole_program/platform/window_hosting.c",
     "portable/whole_program/platform/sdl3/native_windows.c",
-    "portable/whole_program/platform/sdl3/native_menu.c"
+    "portable/whole_program/platform/sdl3/native_menu.c",
+    "portable/whole_program/modern/world_view.c",
+    "portable/whole_program/modern/camera.c",
+    "portable/whole_program/platform/sdl3/modern_game_view.c"
   ],
   "headers": [
     "portable/whole_program/platform/sdl3/diagnostics.h",
@@ -181,7 +184,10 @@
     "portable/whole_program/platform/graphics_vga.h",
     "portable/whole_program/platform/window_hosting.h",
     "portable/whole_program/platform/sdl3/native_windows.h",
-    "portable/whole_program/platform/sdl3/native_menu.h"
+    "portable/whole_program/platform/sdl3/native_menu.h",
+    "portable/whole_program/modern/world_view.h",
+    "portable/whole_program/modern/camera.h",
+    "portable/whole_program/platform/sdl3/modern_game_view.h"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -198,7 +204,8 @@
     "win_DrawTitle",
     "f_1B28_0069",
     "GSaveRect",
-    "f_1CE2_056C"
+    "f_1CE2_056C",
+    "GRectInvOutline"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",

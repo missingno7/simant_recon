@@ -18,11 +18,10 @@ extern void (*driver_callback_table[25])();
 static SimGraphicsDriver *s_graphics_owner;
 static SimGraphicsTileUploadStatus s_status = SIM_GRAPHICS_TILE_UPLOAD_NOT_BOUND;
 extern uint16_t g_3DD4;
-typedef enum TileCompositorKind {
-    TILE_COMPOSITOR_2B1A,
-    TILE_COMPOSITOR_1B7D,
-    TILE_COMPOSITOR_303F
-} TileCompositorKind;
+typedef SimGraphicsTileComposeKind TileCompositorKind;
+#define TILE_COMPOSITOR_2B1A SIM_GRAPHICS_TILE_COMPOSE_2B1A
+#define TILE_COMPOSITOR_1B7D SIM_GRAPHICS_TILE_COMPOSE_1B7D
+#define TILE_COMPOSITOR_303F SIM_GRAPHICS_TILE_COMPOSE_303F
 
 static SimGraphicsTileUploadStatus require_owner(void)
 {
@@ -102,6 +101,16 @@ const uint8_t *sim_graphics_tile_upload_plane(unsigned plane, size_t *size_out)
         return NULL;
     }
     return s_planes[plane];
+}
+
+int sim_graphics_tile_record(unsigned tile, uint8_t record[128])
+{
+    unsigned row;
+    if (tile > 0xffu || s_graphics_owner == NULL) return 0;
+    /* f_0250_0721: plane tile>>6, offset ((tile&63)-0x80)<<7 = C000h+(tile&63)*128. */
+    for (row = 0; row < 128u; ++row)
+        record[row] = s_planes[tile >> 6][(uint16_t)(SIM_GRAPHICS_TILE_PAGE_OFFSET + (tile & 63u) * 128u + row)];
+    return 1;
 }
 
 SimGraphicsTileUploadStatus sim_graphics_tile_upload_read_plane(
@@ -309,35 +318,25 @@ static uint16_t read_le_word(const uint8_t *bytes)
     return (uint16_t)(bytes[0] | ((uint16_t)bytes[1] << 8));
 }
 
-static SimGraphicsTileUploadStatus compose_record(
-    int16_t cache_offset, int16_t plane, const char *record,
-    int16_t mask_mode, TileCompositorKind kind)
+/* The assembly selects one source plane in the EGA read-map register, then
+ * consumes four words per scanline. Its source record is 16 rows of either 5
+ * words (2B1A) or 6 words (1B7D/303F); output is a 128-byte row-interleaved
+ * planar bitmap. Pure: the canonical compositors and modern presentation
+ * share it. */
+void sim_graphics_tile_compose(const uint8_t background_record[128],
+                               const uint8_t *source, int16_t mask_mode,
+                               SimGraphicsTileComposeKind kind, uint8_t out[128])
 {
-    const uint8_t *source = (const uint8_t *)record;
     size_t record_stride = kind == TILE_COMPOSITOR_2B1A ? 10u : 12u;
     size_t color_offset = kind == TILE_COMPOSITOR_2B1A ? 2u : 4u;
-    uint16_t cache_base = (uint16_t)cache_offset;
     unsigned row, word;
-
-    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
-        return s_status;
-    if (source == NULL)
-        return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
-
-    /* The assembly selects one source plane in the EGA read-map register,
-     * then consumes four words per scanline. Its source record is 16 rows of
-     * either 5 words (2B1A) or 6 words (1B7D/303F); output is the existing
-     * 128-byte g3D20 row-interleaved planar bitmap. */
-    screen_lock_enter();
     for (row = 0; row < 16u; ++row) {
         const uint8_t *record_row = source + row * record_stride;
         uint16_t transparency = read_le_word(record_row);
         uint16_t prefix = kind == TILE_COMPOSITOR_2B1A ? 0 :
                           read_le_word(record_row + 2u);
         for (word = 0; word < 4u; ++word) {
-            uint16_t address = (uint16_t)(cache_base + row * 8u + word * 2u);
-            uint16_t background = (uint16_t)(s_planes[(unsigned)plane & 3u][address] |
-                ((uint16_t)s_planes[(unsigned)plane & 3u][(uint16_t)(address+1u)] << 8));
+            uint16_t background = read_le_word(background_record + row * 8u + word * 2u);
             uint16_t foreground = read_le_word(
                 record_row + color_offset + word * 2u);
             uint16_t result = (uint16_t)(background ^
@@ -352,11 +351,29 @@ static SimGraphicsTileUploadStatus compose_record(
             }
             if (apply_prefix)
                 result ^= prefix;
-            g_3D20[row * 8u + word * 2u] = (uint8_t)result;
-            g_3D20[row * 8u + word * 2u + 1u] =
-                (uint8_t)(result >> 8);
+            out[row * 8u + word * 2u] = (uint8_t)result;
+            out[row * 8u + word * 2u + 1u] = (uint8_t)(result >> 8);
         }
     }
+}
+
+static SimGraphicsTileUploadStatus compose_record(
+    int16_t cache_offset, int16_t plane, const char *record,
+    int16_t mask_mode, TileCompositorKind kind)
+{
+    uint8_t background[128], composed[128];
+    uint16_t cache_base = (uint16_t)cache_offset;
+    unsigned byte;
+
+    if (require_owner() != SIM_GRAPHICS_TILE_UPLOAD_OK)
+        return s_status;
+    if (record == NULL)
+        return s_status = SIM_GRAPHICS_TILE_UPLOAD_BAD_RANGE;
+    screen_lock_enter();
+    for (byte = 0; byte < 128u; ++byte)
+        background[byte] = s_planes[(unsigned)plane & 3u][(uint16_t)(cache_base + byte)];
+    sim_graphics_tile_compose(background, (const uint8_t *)record, mask_mode, kind, composed);
+    memcpy(g_3D20, composed, sizeof(composed));
     screen_lock_leave();
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }

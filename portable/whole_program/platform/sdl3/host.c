@@ -352,7 +352,7 @@ int host_poll_event(Host *host, HostEvent *event)
     SDL_Event raw;
     int hosted;
     if (!host || !event) return 0;
-    while (SDL_PollEvent(&raw)) {
+    while (native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
         memset(event, 0, sizeof(*event));
         /* Modern mode: hosted windows convert to logical screen space. */
         hosted = native_windows_translate(&raw);
