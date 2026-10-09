@@ -410,6 +410,28 @@ static void to_logical(const Origin *o, float *x, float *y)
     if (*y > 479) *y = 479;
 }
 
+/* f_00F8_01BE scrolls the edit map while the pointer is at a screen edge
+ * (x <= 1, x >= g_3DB2-4, y < 1, y >= g_3DB4-4). The edit view's own window
+ * is that screen here: its client edges are the edge zone. */
+static void edit_edges(const Origin *o, float *x, float *y)
+{
+    if (o->window == NULL || o->window->view.id != 0) return;
+    if (*x <= (float)(o->left + 1)) *x = 0;
+    else if (*x >= (float)(o->right - 2)) *x = 639;
+    if (*y <= (float)o->top) *y = 0;
+    else if (*y >= (float)(o->bottom - 2)) *y = 479;
+}
+
+/* The main window is only the desktop: no edge zone there. */
+void native_windows_root_pointer(float *x, float *y)
+{
+    if (!n.active) return;
+    if (*x < 2) *x = 2;
+    if (*x > 635) *x = 635;
+    if (*y < 1) *y = 1;
+    if (*y > 475) *y = 475;
+}
+
 static int window_position(SDL_WindowID id, int *x, int *y)
 {
     unsigned i;
@@ -510,6 +532,19 @@ int native_windows_translate(SDL_Event *event)
             native_windows_request_resize(o.window->view.id, event->window.data1 / n.scale,
                                           event->window.data2 / n.scale);
         return 1;
+    } else if (event->type == SDL_EVENT_WINDOW_MOUSE_LEAVE) {
+        /* Leaving the edit window ends edge scrolling: the game sees the
+         * pointer back inside, away from every edge. */
+        SDL_WindowID left_window = event->window.windowID;
+        if (origin_of(left_window, &o) <= 0 || o.window == NULL || o.window->view.id != 0 ||
+            (SDL_GetGlobalMouseState(NULL, NULL) & SDL_BUTTON_LMASK))
+            return 0;
+        memset(event, 0, sizeof(*event));
+        event->type = SDL_EVENT_MOUSE_MOTION;
+        event->motion.windowID = left_window;
+        event->motion.x = (float)(o.window->surface.width * n.scale / 2);
+        event->motion.y = (float)(o.window->surface.height * n.scale / 2);
+        id = left_window;
     } else return 0;
     {
         /* A held button keeps delivering to the window where it was pressed
@@ -532,6 +567,7 @@ int native_windows_translate(SDL_Event *event)
     if (kind <= 0) return kind;   /* main window (0) or a window being torn down */
     if (event->type == SDL_EVENT_MOUSE_MOTION) {
         to_logical(&o, &event->motion.x, &event->motion.y);
+        edit_edges(&o, &event->motion.x, &event->motion.y);
         return 1;
     }
     to_logical(&o, &event->button.x, &event->button.y);
@@ -583,6 +619,7 @@ int native_windows_pointer(float *x, float *y)
     *x = gx - (float)wx;
     *y = gy - (float)wy;
     to_logical(&o, x, y);
+    edit_edges(&o, x, y);
     return 1;
 }
 

@@ -24,7 +24,8 @@ CASES = (('raise', 'windows-raise.txt', '--windows', 17500),
          ('menu', 'windows-menu.txt', '--windows', 17500),
          ('menucmd', 'windows-menucmd.txt', '--windows', 18000),
          ('prox', 'windows-prox.txt', '--windows', 18500),
-         ('prox-classic', 'windows-prox-classic.txt', '--seed=0', 18500))
+         ('prox-classic', 'windows-prox-classic.txt', '--seed=0', 18500),
+         ('startup', 'windows-startup.txt', '--windows', 6500))
 
 
 def pixels(path):
@@ -37,6 +38,24 @@ def pixels(path):
         o = offset + (y if height < 0 else abs(height) - 1 - y) * row + x * 4
         return data[o + 2], data[o + 1], data[o]
     return width, abs(height), at
+
+
+def scroll_origin(build, executable, out, name, script, gdb):
+    """Map scroll origin fd_50F6_0508 at exit (GDB reads it; no inferior calls)."""
+    target = out / name
+    target.mkdir()
+    assets = target / 'a'
+    shutil.copytree(build / 'runtime-assets', assets)
+    command = [str(gdb), '--batch', '-q', '-ex', 'break __wrap_exit', '-ex', 'run',
+               '-ex', 'print fd_50F6_0508', '--args', str(executable), '--headless', '--windows',
+               '--smoke-ms', '19000', '--seed', '0', '--assets', str(assets),
+               '--input-script', str(FIXTURES / script)]
+    run = subprocess.run(command, capture_output=True, timeout=120)
+    text = run.stdout.decode(errors='replace')
+    (target / 'gdb.txt').write_text(text + run.stderr.decode(errors='replace'))
+    import re
+    m = re.search(r'^\$1 = \{(-?\d+), (-?\d+)\}', text, re.M)
+    return (int(m.group(1)), int(m.group(2))) if m else None
 
 
 def run_case(build, executable, out, name, script, option, smoke):
@@ -128,6 +147,21 @@ def main():
                                            'Logical window 0700 closed' in prox_log)
     classic = pixels(runs['prox-classic']['frame'])[2]
     checks['prox_menu_release_selects_classic'] = classic(300, 250) == (85, 44, 4)
+    # Dialog text drawn without a clip list belongs to the dialog window
+    # (registration dialog 0x1E00), not to the main window under it.
+    startup = Path(str(runs['startup']['frame']) + '.1E00.bmp')
+    if startup.is_file():
+        sw, sh, sat = pixels(startup)
+        checks['dialog_text_in_dialog_window'] = len({sat(x, y) for x in range(0, sw, 3) for y in range(0, sh, 3)}) > 3
+    else:
+        checks['dialog_text_in_dialog_window'] = False
+    main = pixels(runs['startup']['frame'])[2]
+    checks['no_dialog_text_on_main_window'] = all(main(x, y) == DESKTOP for x in range(190, 450, 7) for y in range(195, 285, 7))
+    # Edge scrolling: the edit window's edge scrolls the map, the main window's does not.
+    gdb = Path(shutil.which('C:/msys64/mingw64/bin/gdb.exe') or 'gdb')
+    edge_edit = scroll_origin(build, executable, out, 'edge-edit', 'windows-edge-edit.txt', gdb)
+    edge_main = scroll_origin(build, executable, out, 'edge-main', 'windows-edge-main.txt', gdb)
+    checks['edit_window_edge_scrolls'] = bool(edge_edit and edge_main) and edge_edit[0] < edge_main[0]
     result = {'passed': all(checks.values()), 'checks': checks,
               'executable_sha256': report['executable']['sha256'],
               'runs': {k: {**v, 'frame': str(v['frame'])} for k, v in runs.items()}}

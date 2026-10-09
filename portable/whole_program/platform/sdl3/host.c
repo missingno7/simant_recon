@@ -291,6 +291,7 @@ int host_get_input_state(Host *host, HostInputState *state)
                                              &logical_x, &logical_y))
             return 0;
         logical_y += (float)host->crop_top;
+        native_windows_root_pointer(&logical_x, &logical_y);
     }
     state->x = (int16_t)pointer_coordinate(logical_x, host->logical_width);
     state->y = (int16_t)pointer_coordinate(logical_y, host->logical_height);
@@ -357,9 +358,14 @@ int host_poll_event(Host *host, HostEvent *event)
         hosted = native_windows_translate(&raw);
         if (hosted < 0) continue;
         if (!hosted && !SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
-        if (!hosted && raw.type == SDL_EVENT_MOUSE_MOTION) raw.motion.y += (float)host->crop_top;
-        if (!hosted && (raw.type == SDL_EVENT_MOUSE_BUTTON_DOWN || raw.type == SDL_EVENT_MOUSE_BUTTON_UP))
+        if (!hosted && raw.type == SDL_EVENT_MOUSE_MOTION) {
+            raw.motion.y += (float)host->crop_top;
+            native_windows_root_pointer(&raw.motion.x, &raw.motion.y);
+        }
+        if (!hosted && (raw.type == SDL_EVENT_MOUSE_BUTTON_DOWN || raw.type == SDL_EVENT_MOUSE_BUTTON_UP)) {
             raw.button.y += (float)host->crop_top;
+            native_windows_root_pointer(&raw.button.x, &raw.button.y);
+        }
         /* Report the visible logical screen, including captured/letterboxed
          * motion. The INT33 adapter subsequently applies the source's tighter
          * width-4/height-4 bounds. Diagnostics and replay state see this same

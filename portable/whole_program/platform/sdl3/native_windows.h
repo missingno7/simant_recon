@@ -23,6 +23,8 @@ int native_windows_translate(SDL_Event *event);
 int native_windows_filter_root(SDL_Event *event);
 /* Logical pointer position when the mouse is over a hosted window. */
 int native_windows_pointer(float *x, float *y);
+/* Main window pointer (logical): kept out of the screen-edge scroll zone. */
+void native_windows_root_pointer(float *x, float *y);
 /* Native close button / sizing frame of hosted window `id` (also replay). */
 int native_windows_request_close(int16_t id);
 int native_windows_request_resize(int16_t id, int width, int height);

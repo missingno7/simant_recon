@@ -1,0 +1,13 @@
+# Quick Game, then hold the pointer at the main window's left edge: the main
+# window is only the desktop and has no edge zone (origin unchanged).
+5000 down Return
+5050 up Return
+7000 down Return
+7050 up Return
+9000 down Return
+9050 up Return
+10000 move@0200 207 58
+10200 mouse-down@0200 Left 207 58
+10400 mouse-up@0200 Left 207 58
+16000 move 0 200
+17500 move 300 200

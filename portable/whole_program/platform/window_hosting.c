@@ -145,15 +145,15 @@ static SimVgaPlanes *popup_planes_at(int x, int y)
 /* One aperture byte: which plane set holds each of its pixels.
  *  - a hosted window's clip_SetWin drawing: that window's own planes;
  *  - inside an open save-under popup (GSaveRect): the popup's planes;
- *  - no clip list (clip_Off, dialogs that clear g_5AAC) or the desktop
- *    list: the shared planes, which present as the main/desktop window;
- *  - otherwise (full-screen lists used for top-window object feedback and
+ *  - the desktop list: the shared planes (the main/desktop window);
+ *  - otherwise, including no clip list (text and animation that dialogs draw
+ *    after clearing g_5AAC) and full-screen lists (top-window object feedback,
  *    outlines): the logical topmost window at each pixel. */
 static unsigned route(void *context, uint16_t offset, SimVgaSpan spans[8])
 {
     const StackEntry *target = NULL;
     unsigned bit, n = 0, stride = (uint16_t)g_3DB6;
-    int x, y, shared;
+    int x, y, desktop;
     (void)context;
     if (!s.enabled || stride == 0) return 0;
     y = offset / stride;
@@ -161,14 +161,14 @@ static unsigned route(void *context, uint16_t offset, SimVgaSpan spans[8])
     x = (int)(offset % stride) * 8;
     if (s.context == CONTEXT_WINDOW && g_5AAC != NULL)
         target = stack_entry(s.context_window);
-    shared = g_5AAC == NULL || s.context == CONTEXT_DESKTOP;
+    desktop = g_5AAC != NULL && s.context == CONTEXT_DESKTOP;
     for (bit = 0; bit < 8; ++bit) {
         int px = x + (int)bit;
         SimVgaPlanes *planes = NULL;
         if (target && target->planes && contains(&target->rect, px, y)) planes = target->planes;
         else if (s.popup_count && (planes = popup_planes_at(px, y)) != NULL) ;
         else if (target && contains(&target->rect, px, y)) planes = target->planes;
-        else if (!shared) planes = owner_planes(px, y);
+        else if (!desktop) planes = owner_planes(px, y);
         if (planes == NULL) planes = (SimVgaPlanes *)&s.vga->planes;
         if (n && spans[n - 1].planes == planes)
             spans[n - 1].mask |= (uint8_t)(0x80u >> bit);
@@ -267,6 +267,20 @@ static void read_info(int16_t id)
     win_UnlockWin(id);
 }
 
+/* Win16 erases a window with its class brush (GenericWindow: COLOR_WINDOW,
+ * white) before WM_PAINT, on win_Open and on WM_SIZE; a hosted window's own
+ * planes start the same way, so never-drawn areas show no stale pixels. */
+static void erase(SimVgaPlanes *planes, const struct Rect *r)
+{
+    int x, y, plane;
+    for (y = r->top < 0 ? 0 : r->top; y < r->bottom && y < g_3DB4; ++y)
+        for (x = r->left < 0 ? 0 : r->left; x < r->right && x < 640; ++x) {
+            uint16_t offset = (uint16_t)(y * 80 + x / 8);
+            for (plane = 0; plane < 4; ++plane)
+                (*planes)[plane][offset] |= (uint8_t)(0x80u >> (x & 7));
+        }
+}
+
 static void cache_stack(void)
 {
     StackEntry previous[32];
@@ -288,6 +302,7 @@ static void cache_stack(void)
         if (j == previous_count) {
             char *w;
             uint16_t flags;
+            if (s.stack[i].planes) erase(s.stack[i].planes, &s.stack[i].rect);
             win_LockWin(s.stack[i].id);
             w = win_WinAddr(s.stack[i].id);
             flags = *(uint16_t *)(w + 0x1c);
@@ -479,6 +494,10 @@ int sim_window_hosting_resize(int16_t id, int width, int height)
     exposed.top = orig.top < r.top ? orig.top : r.top;
     exposed.right = orig.right > r.right ? orig.right : r.right;
     exposed.bottom = orig.bottom > r.bottom ? orig.bottom : r.bottom;
+    {
+        SimVgaPlanes *planes = hosted_planes(id);
+        if (planes) erase(planes, &r);
+    }
     f_21FA_0B4B(&exposed);
     if (s.stack_count && s.stack[0].id == (int16_t)(id & 0xff00)) {
         f_2505_08EA(id);

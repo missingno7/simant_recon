@@ -85,6 +85,15 @@ as native SDL windows; without `--windows` nothing changes.
   posted from the pump; the main window starts below the game-drawn menu bar rows.
 * **Presentation.** Content is drawn 1:1 at the scale, never stretched; the OS
   cursor replaces the software cursor (Win16 class cursor IDC_ARROW).
+* **Drawing without a clip list** (text and animation that dialogs draw after
+  clearing `g_5AAC`) goes to the logical window under each pixel, like full-screen
+  lists; only the desktop list draws on the main window. A hosted window's planes
+  are erased white when it opens or is resized (Win16 class brush, WM_ERASEBKGND).
+* **Edge scrolling.** `f_00F8_01BE` scrolls the map while the pointer is at a
+  screen edge; the edit view's own window is that screen (its client edges map to
+  the logical screen edges), leaving it puts the pointer back inside, and the main
+  window has no edge zone. The edit view cannot exceed the 640x480 logical screen:
+  the S00 drawing projections address VGA with 16-bit offsets at 80 bytes per row.
 * **Tests.** `portable/tests/runtime/run_windows.py`; replay lines `op@ID` address
   hosted windows in client-local coordinates, `close@ID`, `resize@ID W H` and
   `menu FDxx` the native frame and menu, and `--debug` records window input.

@@ -136,9 +136,10 @@ brings it to the front (as SimAnt for Windows did); the next click acts; while
 a modal dialog is open, other windows bring the dialog forward instead. The
 normal Windows cursor is used. --scale=N (1..8, default 2) sets one scale for
 every window; --windows=ID,ID... (hex logical IDs) hosts only those windows.
-Known prototype gaps: no native scroll bars or tool cursors yet; the edit
-view can grow only up to the game's 640x480 logical screen; map edge-scrolling
-works only from the main window.
+The map scrolls while the pointer rests at an edge of the edit view window and
+stops when the pointer leaves it. Known prototype gaps: no native scroll bars
+or tool cursors yet; the edit view can grow only up to the game's 640x480
+logical screen (its 16-bit VGA drawing addresses), 1280x960 at scale 2.
 
 Useful feedback: exact actions before the issue, game mode, visible symptom,
 screenshot/video, and simant-sdl3.log. For Save/Load problems, include the new
