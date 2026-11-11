@@ -24,7 +24,7 @@ typedef CacheTable far * far *CacheHandle;
 
 extern void far * far Ralloc(long size, int flags, char far *name);
 extern void far RallocFree(void far *handle);
-extern unsigned long far f_171C_14BE(char far *handle);
+extern unsigned long far mem_handle_age_delta(char far *handle);
 extern void far RallocFreshen(char far *handle);
 extern int far RallocType(char far *handle);
 extern int far RallocFreed(char far *handle);
@@ -232,7 +232,7 @@ int far ch_DumpOldest(CacheHandle table)
     if (tp->used) {
         while (count--) {
             if (kp->k.id != -1) {
-                age = f_171C_14BE(hp->h);
+                age = mem_handle_age_delta(hp->h);
                 if (age > oldest && RallocType(hp->h) == 3 && !mem_LockLevel(hp->h)) {
                     oldest = age;
                     oldH = hp;

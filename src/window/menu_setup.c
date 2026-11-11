@@ -9,21 +9,21 @@ struct Rect {
 };
 
 extern void far f_1B28_006A(int a);
-extern void far f_1B73_0046(void);
-extern void far f_1B73_0235(void);
-extern void far f_1B73_0AA3(void);
-extern void far f_1B73_0218(int a, int b);
+extern void far mouse_initialize_driver(void);
+extern void far input_install_hooks(void);
+extern void far hotbox_initialize_dispatch(void);
+extern void far mouse_set_mickey_ratio(int a, int b);
 extern struct Rect far g_5A9C;
-extern void far f_1FD2_03EB(struct Rect far *r, int ticks);
+extern void far input_register_object_rect(struct Rect far *r, int ticks);
 
-void far o17_384C_0000(void)
+void far input_init_desktop_region(void)
 {
     f_1B28_006A(0);
-    f_1B73_0046();
-    f_1B73_0235();
-    f_1B73_0AA3();
-    f_1B73_0218(0x10, 0x10);
-    f_1FD2_03EB(&g_5A9C, 0xff00);
+    mouse_initialize_driver();
+    input_install_hooks();
+    hotbox_initialize_dispatch();
+    mouse_set_mickey_ratio(0x10, 0x10);
+    input_register_object_rect(&g_5A9C, 0xff00);
 }
 
 extern long far * far * far db_LoadObject(int object, int kind);
@@ -37,7 +37,7 @@ void far o17_384C_0184(int x, int len, int id);
 /* LIFE-2: draw is a real later call argument. Initializing it before the
  * pointer-fixup loops reproduces the frame and spill homes. Its spelling and
  * original width are unknown; int, unsigned and unsigned char controls match. */
-int far o17_384C_0039(int id)
+int far menu_load_and_register(int id)
 {
     long far * far *h;
     long far *p;
@@ -67,7 +67,7 @@ extern int far g_5FEA;
 extern int far g_5FEC;
 extern int far g_5FEE;
 
-void far o17_384C_0143(int a, int b, int c)
+void far menu_set_state_colours(int a, int b, int c)
 {
     g_5FEA = a;
     g_5FEC = b;
@@ -77,7 +77,7 @@ void far o17_384C_0143(int a, int b, int c)
 extern int far g_5FE6;
 extern int far g_5FE8;
 
-void far o17_384C_0169(int a, int b)
+void far win_set_desktop_colours(int a, int b)
 {
     g_5FE6 = a;
     g_5FE8 = b;
@@ -94,5 +94,5 @@ void far o17_384C_0184(int x, int len, int id)
     r.bottom = g_3DDC + 1;
     r.left = x;
     r.right = fontWidth * len + x;
-    f_1FD2_03EB(&r, id);
+    input_register_object_rect(&r, id);
 }

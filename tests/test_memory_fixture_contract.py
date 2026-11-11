@@ -13,7 +13,7 @@ from behavior_suites import memory as m
 
 
 class HeapFixturePremise(unittest.TestCase):
-    def original_machine(self, target='f_171C_2136'):
+    def original_machine(self, target='mem_handle_from_pointer'):
         return b.Machine(SimpleNamespace(function=functions.get(target),
             vectors={exe.MANAGER_SEG * 16 + v.offset: v for v in exe.load().vectors},
             candidate_entries={}))
@@ -41,7 +41,7 @@ class HeapFixturePremise(unittest.TestCase):
             master_off=0x104, master_seg=0xA000, free_paras=64)
         writes += [(m.HEAP_SEG * 16,m.header(64,0x80) + bytes(64*16-32)),
                    (0xA000 * 16 + 4,bytes(64*4)), (0xB2000,b'new-live\0')]
-        vm = self.original_machine('f_171C_125C')
+        vm = self.original_machine('mem_alloc_handle_block')
         allocated = vm.run(b.Case(label='old-base-actual-allocation',
             args=[160,0,1,0,0xB200], writes=writes, return_kind='farptr'))['return']
         payload = int.from_bytes(vm.read(0xA000 * 16 + 0x100,4),'little')
@@ -54,7 +54,7 @@ class HeapFixturePremise(unittest.TestCase):
         with self.assertRaisesRegex(b.ExecutionError,'bad-handle Punt reached'):
             vm.run(b.Case(label='old-base-pointer-recovery', args=[payload & 65535,payload >> 16],
                 return_kind='farptr', callbacks={'Punt':b.Callback(2,reached_punt)}),
-                preserve=True, original_entry=functions.get('f_171C_2136'))
+                preserve=True, original_entry=functions.get('mem_handle_from_pointer'))
 
     def test_completed_original_allocations_survive_candidate_compaction(self):
         pair = b.PreparedPair('f_171C_0CF4', sequence_targets=m.TARGETS,

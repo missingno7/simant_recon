@@ -171,9 +171,9 @@ class DataPointers(unittest.TestCase):
 
     def test_same_section_overlay_proc(self):
         pl = {"seg": 0x55B3, "off": 0x2098, "size": 4}
-        o = asm_obj(OVERLAY_ASM.format(target="_GSetAttrib"))
+        o = asm_obj(OVERLAY_ASM.format(target="_gfx_planar_gsetattrib"))
         self.assertTrue(modules.verify_data_segment(o, "_DATA", pl, unit="S00")["exact"])
-        wrong = asm_obj(OVERLAY_ASM.format(target="_o00_31AD_166A"))
+        wrong = asm_obj(OVERLAY_ASM.format(target="_gfx_planar_select_small_font"))
         self.assertFalse(modules.verify_data_segment(wrong, "_DATA", pl, unit="S00")["exact"])
 
     def test_vector_for_every_data_pointer(self):

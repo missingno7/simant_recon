@@ -1,9 +1,9 @@
 {
   "schema": "simant-canonical-semantic-review-v1",
-  "function": "f_171C_09CC",
+  "function": "mem_resize_in_place",
   "module": "root:171C",
   "status": "BEHAVIOR_EXACT_CONFIRMED",
-  "definition_sha256": "68fc7378e3f6a51dc6633ef9cd5d18a62ce7a5640473eecfe2f96fe6db54133a",
+  "definition_sha256": "d846d6f5368d1bfc0e95cfc00d30171ff8a30e49e37a9f613c76ce0ef8a19884",
   "historical_review": {
     "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
     "path": "work/source-only-dos/static-completeness/f_171C_09CC.json",
@@ -329,5 +329,715 @@
     "codegen_only_residue": true,
     "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
   },
-  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt.",
+  "renamed": [
+    {
+      "operations": [
+        {
+          "old": "f_0000_039B",
+          "new": "snd_release_song_resources",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/sound/resource_loading.c, f_0000_039B; named callers: StopSong. Release a song data allocation and downgrade/release its loaded instrument samples. Review: build/workers/names-fn/dos-descriptive-2.json#root:0000:039B; StopSong calls it with song state; frees song->data, loops14 banks and changes sample loaded2 to1 before sample-release helper."
+        },
+        {
+          "old": "f_0000_046F",
+          "new": "snd_service_pending",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/sound/resource_loading.c, f_0000_046F; named callers: main, myButton. When pending audio work is enabled, stop playback in state 2, service loaded song data and service sample resources. Review: build/workers/names-fn/dos-descriptive-2.json#root:0000:046F; Checks pending sound state, stops song when playback state2, services song data and sound samples; reached from main,myButton and event pump."
+        },
+        {
+          "old": "f_00DF_0004",
+          "new": "snd_init_driver_once",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/sound/game_interface.c, f_00DF_0004; named callers: main. Initialize the selected DOS sound driver once and print its capabilities. Review: build/workers/names-fn/dos-descriptive-2.json#root:00DF:0004; Selects detected/configured driver, calls driver initialization, prints Sound Driver Shell(c)1991 and DAC/FM/PSG/MIDI channel counts; g_1926 prevents repeat."
+        },
+        {
+          "old": "f_00F8_01BE",
+          "new": "ui_pump_events_edge_scroll",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/view_dialog_helpers.c, f_00F8_01BE; named callers: main. Pump queued input/events and scroll the editor while the mouse is at a screen edge. Review: build/workers/names-fn/dos-descriptive-2.json#root:00F8:01BE; Calls DoEvent if window/keyboard/control/pending-menu input exists; compares mouse with left/top1 and right/bottom screen-4 thresholds, calls editor delta-scroll until blocked."
+        },
+        {
+          "old": "f_00F8_0585",
+          "new": "res_install_cache_hook",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/view_dialog_helpers.c, f_00F8_0585; named callers: main. Install the game resource-cache callback. Review: build/workers/names-fn/dos-descriptive-2.json#root:00F8:0585; Only calls named ch_SetCacheHooks(f_00F8_0543); called by main."
+        },
+        {
+          "old": "f_00F8_05B4",
+          "new": "win_redraw_current_clip",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/view_dialog_helpers.c, f_00F8_05B4; named callers: UpdateEverything. Request redraw of windows intersecting the current clipping rectangle. Review: build/workers/names-fn/dos-descriptive-2.json#root:00F8:05B4; Passes &g_5A9C to f_21FA_0AD2 from UpdateEverything; downstream helper iterates window draw hooks."
+        },
+        {
+          "old": "f_0250_012D",
+          "new": "edit_alloc_tile_ems",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_012D; named callers: LoadTiles. Acquire and name eight EMS pages for tile storage when EMS4.0 has enough space. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:012D; Checks EMSversion>=0x40 and freepages>=8, allocates8, names TILESXXX, registers cleanup with atexit; returns allocation success."
+        },
+        {
+          "old": "f_0250_01E7",
+          "new": "edit_release_life_tiles",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_01E7; named callers: myBeginSong. Release both lazily loaded life-tile resource handles. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:01E7; db_ReleaseHandle on fd_50F6_10EA/10E6, zeroes each; used when terrain/music needs memory."
+        },
+        {
+          "old": "f_0250_0256",
+          "new": "edit_load_terrain_tiles",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_0256; named callers: LoadTiles, OverlayTileSet. Select and load the terrain tile set for the active display format. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:0256; Skips unchanged set, writes TERRAINset, loads resource10-set/type9; packed modes retain a handle, planar mode uploads four0x2000 planes then purges resource."
+        },
+        {
+          "old": "f_0250_05CB",
+          "new": "edit_invalidate_life_cache",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_05CB; named callers: ForceUpdateEdit. Invalidate the fixed editor life-tile cache. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:05CB; memset(fd_50F6_15C4,-1,0x960), reached by ForceUpdateEdit and geometry-change helper; Win ClearEditDeltaTables boundary remains undecided."
+        },
+        {
+          "old": "f_0250_062A",
+          "new": "edit_restore_tile_ems_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_062A; named callers: DrawBalloons, DrawSpider. Restore the EMS mapping saved while drawing tiles. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:062A; If tile EMS handle exists, invokes f_195A_010D(handle); called after tile composition in editor/spider/balloon renderers."
+        },
+        {
+          "old": "f_0250_0643",
+          "new": "edit_prepare_life_tiles",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_0643; named callers: DrawBalloons, DrawSpider. Prepare surface or nest life-tile resources, or map EMS tile pages, for drawing. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:0643; Without EMS releases the opposite life handle and loads resource13(nest) or14(surface), type9; with EMS calls saved-map preparation f0250:05EB."
+        },
+        {
+          "old": "f_0250_0915",
+          "new": "edit_compose_life_tile",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_0915; named callers: DrawBalloons, DrawSpider. Compose a life sprite over its ground tile into the current display-format scratch buffer. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:0915; Own diagnostic Tile>=256 in PutLifeAndTile; normalizes life bases0x100/200/300/380, chooses mask and color/mono/EMS kernels; called inside DrawSpider/DrawBalloons."
+        },
+        {
+          "old": "f_0250_0B86",
+          "new": "edit_copy_ground_tile",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_0B86; named callers: DrawBalloons, DrawSpider. Copy a ground tile into the display-format scratch buffer. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:0B86; Mode1 invokes tile extractor; mode2 copies0x48 bytes and mode3 copies0x20 bytes from tile allocation; paired with life composition in named sprite/balloon callers."
+        },
+        {
+          "old": "f_0250_0CF6",
+          "new": "edit_scroll_delta",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_0CF6; named callers: CenterEdit. Delegate an editor movement delta to the scrolling routine. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:0CF6; Two scalar arguments passed unchanged to f0250:0D10; named CenterEdit caller."
+        },
+        {
+          "old": "f_0250_0D10",
+          "new": "edit_scroll_and_redraw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_0D10; named callers: DoEvent. Move MapPnt by a signed two-axis delta, clamp it and redraw the editor. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:0D10; Zero delta returns0; selects dominant axis and16.16 error fraction, updates x/y, then bounds helper and UpdateEdit; returns1 after movement request."
+        },
+        {
+          "old": "f_0250_13A6",
+          "new": "edit_render_viewport",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_13A6; named callers: UpdateEdit. Render the editor viewport immediately, including cached terrain/life tiles, spider, balloons and timed text. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:13A6; Called from UpdateEdit and draw callback; clip push/pop, timed EditMessage, PreDrawSpider/Balloons, tile loops, composite sprite buffers, unlock/free balloon buffer and clear invalidation flag."
+        },
+        {
+          "old": "f_0250_5058",
+          "new": "edit_set_viewport_clip",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/edit_view.c, f_0250_5058; named callers: DoLaserFire, DrawBalloons. Set the editor drawing clip to the viewport plus object0x15. Review: build/workers/names-fn/dos-descriptive-2.json#root:0250:5058; Builds Rect[3] from editTileRect and win_GetObjRect(0x15), terminates with top0x8000 and sends to clip-list helper1E57:08F5."
+        },
+        {
+          "old": "f_171C_0160",
+          "new": "mem_free_and_coalesce",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_0160; named callers: RallocFree, RallocRealloc. Return an allocation block to the free list and coalesce adjacent blocks. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:0160; Adjusts per-type allocated/free paragraph counters, inserts block by free-list helper, merges predecessor when requested and physically adjacent successor, returns resulting block."
+        },
+        {
+          "old": "f_171C_068C",
+          "new": "mem_carve_free_block",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_068C; named callers: RallocRealloc. Carve a typed allocation from a free block, splitting excess paragraphs and updating counters. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:068C; Leaves a free remainder if b->paras-2>requested, otherwise unlinks full free block; stores type/paras/age and updates free/allocated type totals. Own diagnostic RallocSetSpace to illegal type."
+        },
+        {
+          "old": "f_171C_07BE",
+          "new": "mem_init_movable_heap",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_07BE; named callers: RallocFree, RallocFreed, RallocFreshen, RallocMemoryFree, RallocMemorySoft, RallocRealloc, RallocSetType, RallocSize, RallocType, _ffree, _frealloc, mem_Size, mem_malloc. Initialize the DOS movable heap, free list and master-handle table once. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:07BE; Allocates DOS memory, reserves4-byte handle table entries, accounts for EMS window if present, seeds free block/counters, allocates DiscardEntry and registers allocator cleanup."
+        },
+        {
+          "old": "f_171C_09CC",
+          "new": "mem_resize_in_place",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_09CC; named callers: RallocRealloc. Attempt to resize an existing handle allocation in place. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:09CC; RallocRealloc caller; shrink accepted without split below0x20-paragraph difference, grow only if immediately next free block can cover request; frees/coalesces then carves new extent and returns success."
+        },
+        {
+          "old": "f_171C_0EDE",
+          "new": "mem_compact_any_region",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_0EDE; named callers: IBMInitStuff. Run heap compaction without a no-EMS restriction. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:0EDE; Only returns f171C:0CF4(0), reached during IBMInitStuff; downstream compacts movable blocks."
+        },
+        {
+          "old": "f_171C_0EEA",
+          "new": "mem_find_free_block",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_0EEA; named callers: RallocRealloc. Find a sufficiently large free heap block, compacting or discarding soft allocations if needed. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:0EEA; Scans free list with noems boundary, retries compaction/discard routines; failure diagnostic Cannot find a big enough space! with requested byte count/name."
+        },
+        {
+          "old": "f_171C_1246",
+          "new": "mem_release_handle_slot",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_1246; named callers: RallocFree. Release a master-handle slot. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:1246; RallocFree caller; decrements active-handle count g_2F44 and sets *handle=0."
+        },
+        {
+          "old": "f_171C_125C",
+          "new": "mem_alloc_handle_block",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_125C; named callers: Ralloc, mem_Alloc. Allocate a movable handle block with type, attributes, age, lock count and debug name. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:125C; Ralloc/mem_Alloc wrappers; rejects size0, rounds bytes to paragraphs+2 header, finds block and handle, carves typed space, binds block handle, stores size/name/age and flags."
+        },
+        {
+          "old": "f_171C_14BE",
+          "new": "mem_handle_age_delta",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_14BE; named callers: ch_DumpOldest. Return a handle allocation age relative to the allocator clock. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:14BE; ch_DumpOldest caller; validates handle and returns HDR(h)->age-s_2F30 as long. Direction/type differ from Win RallocAge; avoid an original-name claim."
+        },
+        {
+          "old": "f_171C_1C82",
+          "new": "mem_mark_discardable_1c82",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_1C82; named callers: hanim_RenderAnimSet. Validate an allocation handle and mark it discardable (type 3). This body has the same purpose as the other discardable wrapper; the address suffix distinguishes them. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:1C82; CHECKH then RallocSetType(h,3); separate wrappers used by animation/bitmap rendering or win_UnlockWin, respectively."
+        },
+        {
+          "old": "f_171C_1E9A",
+          "new": "mem_handle_above_ems_boundary",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_1E9A; named callers: LoadTiles. Test whether an allocation lies beyond the conventional/EMS boundary. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:1E9A; Validates handle, returns SEG(*h)>fd_50F6_3950; LoadTiles and music loading use result before copying allocation into restricted memory."
+        },
+        {
+          "old": "f_171C_1EFA",
+          "new": "mem_discard_soft_blocks",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_1EFA; named callers: IBMInitStuff. Discard every active type3 allocation. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:1EFA; Scans master handles backwards for active-handle count; calls f171C:1804 when HDR(h)->type==3, reached by startup/keyboard command."
+        },
+        {
+          "old": "f_171C_1FC2",
+          "new": "mem_lock_handle",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_1FC2; named callers: mem_Lock. Validate and lock an allocation handle, refreshing its age. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:1FC2; mem_Lock wrapper caller; rejects depth>100/discarded type5, stores age=clock++, increments lock, returns handle."
+        },
+        {
+          "old": "f_171C_2086",
+          "new": "mem_unlock_encoded_handle",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_2086; named callers: mem_Unlock, win_UnlockWin. Unlock an allocation and return its encoded public handle value. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:2086; mem_Unlock/win_UnlockWin callers; bounds check master table with RU: Bad handle in unlock, decrements header lock, returns table-distance-based encoded pointer."
+        },
+        {
+          "old": "f_171C_20E2",
+          "new": "mem_mark_discardable_20e2",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_20E2; named callers: win_UnlockWin. Validate an allocation handle and mark it discardable (type 3). This body has the same purpose as the other discardable wrapper; the address suffix distinguishes them. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:20E2; CHECKH then RallocSetType(h,3); separate wrappers used by animation/bitmap rendering or win_UnlockWin, respectively."
+        },
+        {
+          "old": "f_171C_2136",
+          "new": "mem_handle_from_pointer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_2136; named callers: _ffree, _frealloc. Recover the owning master handle from an allocation data pointer. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:2136; _ffree/_frealloc callers; reads header two paragraphs before pointer, uses stored handle offset, checks *handle==pointer; own diagnostic FindMemoryHandle."
+        },
+        {
+          "old": "f_171C_21CC",
+          "new": "mem_malloc_bridge",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/memory/ralloc.c, f_171C_21CC; named callers: _frealloc, malloc. Allocate a raw pointer through the movable heap malloc bridge. Review: build/workers/names-fn/dos-descriptive-2.json#root:171C:21CC; malloc/_frealloc callers; initializes heap, brackets *Ralloc(size,0,\"malloc\") with s_2F2A counter increments/decrements; returns raw data pointer."
+        },
+        {
+          "old": "f_19DC_02D9",
+          "new": "db_read_at_cursor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/resources/database_ems.c, f_19DC_02D9; named callers: DBRecall. Read database bytes at the cached file cursor. Review: build/workers/names-fn/dos-descriptive-2.json#root:19DC:02D9; DBRecall caller; forwards file,s_8C76,buffer,count to offset-aware cached reader02FB."
+        },
+        {
+          "old": "f_19DC_02FB",
+          "new": "db_read_cached_range",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/resources/database_ems.c, f_19DC_02FB; named callers: DBRecall. Read a database byte range using16KiB cached pages, falling back to seek/read. Review: build/workers/names-fn/dos-descriptive-2.json#root:19DC:02FB; Updates file/cursor state; offset>>14 and off&0x3FFF determine page/chunks, copies from page cache; plain path lseek then read. Handles zero count."
+        },
+        {
+          "old": "f_1A53_00F0",
+          "new": "res_load_with_alloc_type",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/resources/database_objects.c, f_1A53_00F0; named callers: DisplayCard, LoadTiles, PopUpInfoWindow, hanim_RenderAnimSet, win_LoadWindow. Load a resource and set its allocator type if loading succeeds. Review: build/workers/names-fn/dos-descriptive-2.json#root:1A53:00F0; Calls named db_LoadObject(object,kind), then RallocSetType(handle,type), returns handle; used by windows/animation/tile/info code. Win merges type argument into db_LoadObject."
+        },
+        {
+          "old": "f_1B28_0129",
+          "new": "mouse_load_cursor_resources",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/platform/cursor_shapes.c, f_1B28_0129; named callers: IBMInitStuff. Load and retain the cursor image/mask resource pair. Review: build/workers/names-fn/dos-descriptive-2.json#root:1B28:0129; IBMInitStuff passes an object; loads kinds8/7, requires both, unhooks both from resource cache, frees previous g_3D10/3D14 and stores new handles."
+        },
+        {
+          "old": "f_1C62_00AC",
+          "new": "ui_message_acknowledge",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/alerts.c, f_1C62_00AC; named callers: FileSelect, LoadGame, SaveGame. Show a modal message that requires acknowledgement. Review: build/workers/names-fn/dos-descriptive-2.json#root:1C62:00AC; FileSelect/LoadGame/SaveGame error callers; passes message,timed=0 to screen-save/framed prompt helper00D5."
+        },
+        {
+          "old": "f_1C62_00C0",
+          "new": "ui_message_transient",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/alerts.c, f_1C62_00C0; named callers: SaveGame. Show a transient modal message that may expire automatically. Review: build/workers/names-fn/dos-descriptive-2.json#root:1C62:00C0; SaveGame success/diagnostic callers; passes message,timed=1 to00D5 (timeout0x21C there). Distinct from acknowledgement wrapper00AC."
+        },
+        {
+          "old": "f_1C62_0415",
+          "new": "ui_choice_prompt",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/alerts.c, f_1C62_0415; named callers: SaveGame. Show a framed modal choice prompt and return the selected button. Review: build/workers/names-fn/dos-descriptive-2.json#root:1C62:0415; Selects labels/count from g_5570/g_5584 by set; saves screen, lays out buttons IDs0x900+, processes hotkeys/mouse queue, restores screen. SaveGame caller supplies overwrite-choice message."
+        },
+        {
+          "old": "f_1CE2_01C3",
+          "new": "gfx_printf_at",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/screen_rects.c, f_1CE2_01C3; named callers: Punt. Format and draw text at specified coordinates. Review: build/workers/names-fn/dos-descriptive-2.json#root:1CE2:01C3; Punt caller; vsprintf into200-byte stack buffer then font_PrintStr(x,y,buf)."
+        },
+        {
+          "old": "f_1CE2_056C",
+          "new": "gfx_restore_and_free_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/screen_rects.c, f_1CE2_056C; named callers: PopUpInfoWindow. Restore a saved screen rectangle and free its saved buffer. Review: build/workers/names-fn/dos-descriptive-2.json#root:1CE2:056C; Delegates to0587(rect,buf,release=1);0587 aligns left to8, blits saved pixels and frees buffer, or redraws intersecting windows if buffer absent."
+        },
+        {
+          "old": "f_1D8E_003F",
+          "new": "clip_split_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/clip_rects.c, f_1D8E_003F; named callers: clip_SubExclude, clip_SubInclude. Split a rectangle into intersection and outside bands against a clip rectangle. Review: build/workers/names-fn/dos-descriptive-2.json#root:1D8E:003F; clip_SubInclude/Exclude callers; classifies opposite corners, emits inside and/or outside Rect lists with top0x8000 sentinel, handles left/right/top/bottom clipping."
+        },
+        {
+          "old": "f_1E57_0009",
+          "new": "clip_reset_temporary_state",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/clip_regions.c, f_1E57_0009; named callers: clip_Off, clip_Pop, clip_SetWin, clip_SubExclude, clip_SubInclude. Free/reset temporary clipping-list state. Review: build/workers/names-fn/dos-descriptive-2.json#root:1E57:0009; Frees g_5742 when present, clears g_5746 and g_5AAC; invoked by clip_Off/Pop/SetWin and include/exclude operations."
+        },
+        {
+          "old": "f_1E57_00B1",
+          "new": "win_raise_and_reclip",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/clip_regions.c, f_1E57_00B1; named callers: win_Open, win_Swap. Move a window to the front of the DOS window stack and rebuild visible clips. Review: build/workers/names-fn/dos-descriptive-2.json#root:1E57:00B1; Masks win to0xFF00, copies stack to local32-entry buffer with requested win first and duplicate removed, preserves0x8000 terminator, calls038E."
+        },
+        {
+          "old": "f_1E57_038E",
+          "new": "win_rebuild_visible_clips",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/clip_regions.c, f_1E57_038E; named callers: clip_KillWin. Rebuild each DOS window visible-region clip list from the stacking order. Review: build/workers/names-fn/dos-descriptive-2.json#root:1E57:038E; Allocates tmprects/clipout/winClipList, intersects/subtracts rectangles and emits C097/C098/C099 overflow diagnostics; called after stack changes. Existing rejected win_EditChanged pair stays rejected."
+        },
+        {
+          "old": "f_1E57_0A9C",
+          "new": "clip_restrict_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/clip_regions.c, f_1E57_0A9C; named callers: _win_SetProxItem. Restrict current clipping to a supplied rectangle. Review: build/workers/names-fn/dos-descriptive-2.json#root:1E57:0A9C; One-argument wrapper clip_SubInclude(rect); used by redraw and proximity highlighting."
+        },
+        {
+          "old": "f_1E57_0FDC",
+          "new": "clip_set_screen_intersection",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/clip_regions.c, f_1E57_0FDC; named callers: AboutDialog. Replace clipping with the intersection of a supplied rectangle and screen bounds. Review: build/workers/names-fn/dos-descriptive-2.json#root:1E57:0FDC; If rect nonnull resets temp clip state, sets fixed clip buffer then f1D8E:003F(rect,&g_5A9C,fixed,0); AboutDialog uses it before scrolling credits."
+        },
+        {
+          "old": "f_1F80_0081",
+          "new": "timer_wait_double_ticks",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/text_layout.c, f_1F80_0081; named callers: win_ProcSliderEvent. Busy-wait for twice the requested number of TickCount changes. Review: build/workers/names-fn/dos-descriptive-2.json#root:1F80:0081; Shifts ticks left1 then waits for TickCount transition for each iteration; used during slider/drag interaction."
+        },
+        {
+          "old": "f_1FD2_02FF",
+          "new": "input_capture_screen",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_helpers.c, f_1FD2_02FF; named callers: DoEvent. Install a whole-screen pointer-event capture entry with identifier100. Review: build/workers/names-fn/dos-descriptive-2.json#root:1FD2:02FF; Builds entry from current screen rect and no-op callback0D4B, passes id100 to032F; low-level0B00 prepends18-byte records to input registry. Not a timer despite reconstructed parameter spelling ticks."
+        },
+        {
+          "old": "f_1FD2_031A",
+          "new": "input_release_screen_capture",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_helpers.c, f_1FD2_031A; named callers: DoEvent. Remove the whole-screen pointer-event capture entry100. Review: build/workers/names-fn/dos-descriptive-2.json#root:1FD2:031A; Calls low-level registry remove0B5B(100,fd5071:0728), paired with02FF in dialogs/DoEvent."
+        },
+        {
+          "old": "f_1FD2_03EB",
+          "new": "input_register_object_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_helpers.c, f_1FD2_03EB; named callers: win_SetGroupSelectableState, win_SetObjSelectableState. Register a selectable rectangle/object identifier for pointer input. Review: build/workers/names-fn/dos-descriptive-2.json#root:1FD2:03EB; Copies rect into g_6004, stores second scalar in entry id field, removes existing matching id then prepends18-byte record in fd5071:03C4 registry. Named object-selectable setters and window activation use it."
+        },
+        {
+          "old": "f_1FD2_0438",
+          "new": "input_remove_object_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_helpers.c, f_1FD2_0438; named callers: win_SetGroupSelectableState, win_SetObjSelectableState. Remove a registered selectable object/rectangle by identifier. Review: build/workers/names-fn/dos-descriptive-2.json#root:1FD2:0438; Calls registry removal0B5B(id,fd5071:03C4), paired with03EB in object/window activation. The source calls it ticks but call sites supply object ids."
+        },
+        {
+          "old": "f_1FD2_05FD",
+          "new": "win_redraw_desktop_menu",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_helpers.c, f_1FD2_05FD; named callers: IBMInitStuff. Redraw the desktop background and menu bar. Review: build/workers/names-fn/dos-descriptive-2.json#root:1FD2:05FD; Fills screen using foreground/background g_5FE6/g_5FE8 via mixed fill0951, then0663(draw=1) lays out and paints menu titles."
+        },
+        {
+          "old": "f_205F_0004",
+          "new": "gfx_select_driver_resources",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/platform/video/driver_select.c, f_205F_0004; named callers: IBMInitStuff. Detect/select DOS display hardware and initialize the matching graphics/resource configuration. Review: build/workers/names-fn/dos-descriptive-2.json#root:205F:0004; IBMInitStuff caller; queries adapter/display, rejects MDA, chooses or overrides g_5A97, constructs display-specific database path; continues display-driver setup."
+        },
+        {
+          "old": "f_208F_005B",
+          "new": "win_print_text_at_obj_offset",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/text_bitmap_helpers.c, f_208F_005B; named callers: FileSelect. Print text at a specified offset within an object rectangle using its colors. Review: build/workers/names-fn/dos-descriptive-2.json#root:208F:005B; FileSelect caller; GetObjRect, SetColorFromObjNum, font_PrintStr(rect.left+dx,rect.top+dy,text)."
+        },
+        {
+          "old": "f_20E8_088B",
+          "new": "win_set_state_change_hook",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lifecycle.c, f_20E8_088B; named callers: InitApplicationWindows. Install the application window-state-change callback. Review: build/workers/names-fn/dos-descriptive-2.json#root:20E8:088B; InitApplicationWindows supplies f00BA:0228; stores g_62E0, invoked by open/close/swap and geometry/state changes with window id."
+        },
+        {
+          "old": "f_20E8_089F",
+          "new": "win_set_before_close_hook",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lifecycle.c, f_20E8_089F; named callers: InitApplicationWindows. Install the application callback invoked before a window closes. Review: build/workers/names-fn/dos-descriptive-2.json#root:20E8:089F; InitApplicationWindows supplies f00BA:0211; stores g_62F4, used in win_Close and from-window swap before clip_KillWin/clear-open-bit."
+        },
+        {
+          "old": "f_20E8_08DB",
+          "new": "win_set_layout_change_hook",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lifecycle.c, f_20E8_08DB; named callers: InitApplicationWindows. Install the callback for application layout changes during window zoom/resize. Review: build/workers/names-fn/dos-descriptive-2.json#root:20E8:08DB; InitApplicationWindows supplies geometry callback f00BA:01C3; stores g_62EC. S26:39C7:0000 invokes it after win_Recalc and clip rebuild during zoom; other geometry handlers also use the slot."
+        },
+        {
+          "old": "f_20E8_0A21",
+          "new": "win_close_auto_dismiss",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lifecycle.c, f_20E8_0A21; named callers: DoEvent. Close the front window when its auto-dismiss flag is set. Review: build/workers/names-fn/dos-descriptive-2.json#root:20E8:0A21; DoEvent calls it before event dispatch; if any window exists, locks front, tests flags at+0x1C bit1, closes, unlocks."
+        },
+        {
+          "old": "f_218D_02D5",
+          "new": "win_translate_pending_event",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/events.c, f_218D_02D5; named callers: win_Events, win_GetEvent. Translate the low-level input queue into a pending window/object event. Review: build/workers/names-fn/dos-descriptive-2.json#root:218D:02D5; win_Events/win_GetEvent callers; services sound, dequeues when none pending, handles click/proximity/system codesF081..F087, dispatches window drag/close/resize and object event logic, sets g_8CEC pending flag."
+        },
+        {
+          "old": "f_21FA_077D",
+          "new": "win_draw_frame_controls",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/drawing.c, f_21FA_077D; named callers: win_DrawTitle, win_DrawWindow. Draw DOS window frame controls/icons according to window flags. Review: build/workers/names-fn/dos-descriptive-2.json#root:21FA:077D; win_DrawWindow/Title callers; draws close/resize/special icons0x64..0x70 positioned within frame using bitmap sizes. Win empty DrawWinIcons remains undecided."
+        },
+        {
+          "old": "f_21FA_0B4B",
+          "new": "win_redraw_exposed_windows",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/drawing.c, f_21FA_0B4B; named callers: win_Close. Redraw the desktop and exposed windows after a window rectangle changes. Review: build/workers/names-fn/dos-descriptive-2.json#root:21FA:0B4B; win_Close/drag/resize callers; limits clip to changed rect, excludes top window, repaints desktop/menu and lower windows then top, resets clipping."
+        },
+        {
+          "old": "f_22BF_00AA",
+          "new": "win_get_obj_layout_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_attributes.c, f_22BF_00AA; named callers: DrawSimPayoff, FileSelect. Read an object layout-parameter rectangle under window lock. Review: build/workers/names-fn/dos-descriptive-2.json#root:22BF:00AA; Copies8 bytes from win_ObjAddr(obj)+8 into caller Rect; DrawSimPayoff/FileSelect use it. This is distinct from computed win_GetObjRect."
+        },
+        {
+          "old": "f_22BF_00DD",
+          "new": "win_set_obj_layout_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_attributes.c, f_22BF_00DD; named callers: DrawSimPayoff, FileSelect. Write an object layout-parameter rectangle under window lock. Review: build/workers/names-fn/dos-descriptive-2.json#root:22BF:00DD; Copies caller Rect into win_ObjAddr(obj)+8; paired with00AA in DrawSimPayoff/FileSelect; does not recalculate itself."
+        },
+        {
+          "old": "f_22BF_0A65",
+          "new": "win_is_zoomed",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_attributes.c, f_22BF_0A65; named callers: NewGame. Query whether a DOS window is maximized/zoomed. Review: build/workers/names-fn/dos-descriptive-2.json#root:22BF:0A65; Reads flag0x80 at window+0x1C under lock. S26:39C7:0000 toggles this flag while saving/restoring zoomRect, and NewGame tests it before requesting zoom."
+        },
+        {
+          "old": "f_22BF_0AEF",
+          "new": "win_set_flag_0040",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_attributes.c, f_22BF_0AEF; named callers: DoWinHelp. Set window flag 0x40 under lock and return its previous boolean state; the flag meaning remains unassigned. Review: build/workers/names-fn/dos-descriptive-2.json#root:22BF:0AEF; DoWinHelp caller; locks window, saves(bit0x40)>>6, ORs0x40, unlocks. Input activation code treats this flag as no-close/focus restriction."
+        },
+        {
+          "old": "f_22BF_0B25",
+          "new": "win_clear_flag_0040",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_attributes.c, f_22BF_0B25; named callers: DoWinHelp. Clear window flag 0x40 under lock and return its previous boolean state; the flag meaning remains unassigned. Review: build/workers/names-fn/dos-descriptive-2.json#root:22BF:0B25; DoWinHelp caller; same getter as0AEF then AND~0x40; use same conservative bit meaning."
+        },
+        {
+          "old": "f_22BF_0E83",
+          "new": "win_copy_obj_layout_origin",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_attributes.c, f_22BF_0E83; named callers: InitApplicationWindows. Copy one window object origin into another and recalculate the destination. Review: build/workers/names-fn/dos-descriptive-2.json#root:22BF:0E83; InitApplicationWindows copies0x1900 to0x100; locks both, reads layout Rect at source+8, writes only left/top at destination+8, win_Recalc(dst)."
+        },
+        {
+          "old": "f_23AE_0069",
+          "new": "win_load_and_lock_resource",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/locking.c, f_23AE_0069; named callers: win_LockWin, win_LockWinHigh. Load if needed and lock a window resource, handling nested locks and moved object pointers. Review: build/workers/names-fn/dos-descriptive-2.json#root:23AE:0069; win_LockWin/High wrappers; checks index0..40, loads/reloads discarded handle, chooses normal/high memory lock, repoints object pointers when moved, recalculates first load, rejects depth>10."
+        },
+        {
+          "old": "f_23E6_009F",
+          "new": "list_is_line_selected",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_009F; named callers: FileSelect. Query the selected bit of a list line. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:009F; FileSelect caller; window lock, line locator into list text, returns first-byte mask0x01, unlocks text/window."
+        },
+        {
+          "old": "f_23E6_0109",
+          "new": "list_line_count",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_0109; named callers: FileSelect. Return the number of lines in a list object. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:0109; FileSelect caller; accesses List.count at object+0x2A under window lock."
+        },
+        {
+          "old": "f_23E6_0132",
+          "new": "list_line_record",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_0132; named callers: FileSelect. Return the text-record pointer for a given list line. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:0132; FileSelect caller; obtains list at object+0x2A and delegates line locator, unlocks window before returning pointer; no copied ownership implied."
+        },
+        {
+          "old": "f_23E6_016B",
+          "new": "list_clear_selection",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_016B; named callers: FileSelect. Clear selected flags on every record in a list object. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:016B; FileSelect caller; locks list text and walks NUL-delimited records, clears mask0x01 in each first byte, unlocks."
+        },
+        {
+          "old": "f_23E6_0266",
+          "new": "list_replace_text",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_0266; named callers: FileSelect. Replace a list object text buffer and reset scrolling/count state. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:0266; FileSelect caller; counts NUL-delimited records to doubleNUL end, allocate/reallocate taglist, copy buffer, set count/top0/topOff0/endOff-1/text handle."
+        },
+        {
+          "old": "f_23E6_0392",
+          "new": "list_draw_visible_rows",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_0392; named callers: win_DrawObjectI. Paint visible list rows and cache the end-text offset. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:0392; win_DrawObjectI caller; uses object font, clips rectangle, locks text, walks visible lines from topOff, selects color using record mask0x01, prints text after flag byte, clears empty rows, records endOff."
+        },
+        {
+          "old": "f_23E6_066C",
+          "new": "win_draw_vertical_slider",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_066C; named callers: win_DrawObjectI. Draw a vertical slider track, arrow bitmaps and elevator. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:066C; win_DrawObjectI caller; only objecttype8, top bitmap0x6D,bottom0x6F, fills track then win_DrawElevator."
+        },
+        {
+          "old": "f_23E6_06F1",
+          "new": "list_scroll_to_line",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_06F1; named callers: win_ProcSliderEvent. Scroll a list to a requested top line and repaint it. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:06F1; win_ProcSliderEvent caller; updates list top/topOff via NUL records, resets scan to beginning when moving backward, invokes0392 and unlocks text."
+        },
+        {
+          "old": "f_23E6_07A2",
+          "new": "list_scroll_forward_line",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/lists_sliders.c, f_23E6_07A2; named callers: win_ProcSliderEvent. Scroll a list forward by one line using a screen copy and one new row. Review: build/workers/names-fn/dos-descriptive-2.json#root:23E6:07A2; win_ProcSliderEvent caller; rejects end-of-list, scrolls pixels upward by font height, increments top/topOff, prints last row from endOff and advances endOff."
+        },
+        {
+          "old": "f_24AB_0002",
+          "new": "font_make_display_bitmap",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/font_output.c, f_24AB_0002; named callers: DrawAnimYardMessage. Create a display-format bitmap containing a rendered text string. Review: build/workers/names-fn/dos-descriptive-2.json#root:24AB:0002; DrawAnimYardMessage caller; font_MakeImage then allocates fontBuf with12-byte bitmap header; converts to Tandy packed pixels or four-plane/mono layout, sets width/height/depth and returns handle."
+        },
+        {
+          "old": "f_24AB_042B",
+          "new": "font_print_and_clear_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/font_output.c, f_24AB_042B; named callers: PrevListLine. Print a list row and clear its remaining horizontal space. Review: build/workers/names-fn/dos-descriptive-2.json#root:24AB:042B; PrevListLine/list renderer callers; font_PrintStr at rectleft,y then fills from resulting text cursor to rectright for one font height."
+        },
+        {
+          "old": "f_2505_0006",
+          "new": "win_locked_resource_ptr",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_geometry.c, f_2505_0006; named callers: RepointObjects, win_Close, win_DrawTitle, win_DrawWindow, win_GetArg, win_GetObjRect, win_GetObjSize, win_GetVal, win_ObjAddr, win_ObjInv, win_Open, win_SetGroupSelectableState, win_SetGroupSelectedState, win_SetGroupVisibleState, win_Swap, win_WinAddr, win_WinRectAddr. Return a locked DOS window resource data pointer. Review: build/workers/names-fn/dos-descriptive-2.json#root:2505:0006; Own diagnostic WINDOW%x NOT LOCKED DURING CALL TO GETWINPTR!!; verifies lock unless override, returns *win_handles[id>>8]. Many named window callers. String token GETWINPTR is uppercase and not a proven mixed-case original spelling."
+        },
+        {
+          "old": "f_2505_0511",
+          "new": "win_sort_rect_coords",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_geometry.c, f_2505_0511; named callers: win_Recalc. Normalize rectangle coordinate order. Review: build/workers/names-fn/dos-descriptive-2.json#root:2505:0511; win_Recalc caller; swaps left/right when reversed and top/bottom when reversed. Existing round1 win_SortRect confirmation remains, active placeholder is alias issue."
+        },
+        {
+          "old": "f_2505_0831",
+          "new": "win_activate_pointer_regions",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_geometry.c, f_2505_0831; named callers: DoWinHelp, win_Close, win_Open, win_Swap. Activate pointer registrations for the front window objects and reset proximity selection. Review: build/workers/names-fn/dos-descriptive-2.json#root:2505:0831; Open/swap/DoWinHelp callers; iterates selectable bit2 objects to add ids, configures window controls, registers proximity when bit0x10 present and calls clear-prox01EB."
+        },
+        {
+          "old": "f_2505_08EA",
+          "new": "win_deactivate_pointer_regions",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/object_geometry.c, f_2505_08EA; named callers: DoWinHelp, win_Close, win_Open, win_Swap. Deactivate pointer registrations for a window and its proximity region. Review: build/workers/names-fn/dos-descriptive-2.json#root:2505:08EA; Close/swap/DoWinHelp callers; removes selectable object ids, turns off frame control registrations, removes proximity entry; paired with0831. Local dirty is uninitialized in reconstructed spelling, no cleanup invented."
+        },
+        {
+          "old": "f_25E7_0008",
+          "new": "font_read_big_endian_words",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/font_resources.c, f_25E7_0008; named callers: font_ReadFont. Read a sequence of big-endian words from a font file into native words. Review: build/workers/names-fn/dos-descriptive-2.json#root:25E7:0008; font_ReadFont caller; fread(p,count,2,fp), then swaps both bytes of each of count words in place."
+        },
+        {
+          "old": "f_2662_0100",
+          "new": "anim_lock_render_buffers",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/anim.c, f_2662_0100; named callers: hanim_RenderAnimSet. Lock an animation set and all its object backing buffers before rendering. Review: build/workers/names-fn/dos-descriptive-2.json#root:2662:0100; hanim_RenderAnimSet caller; locks set and object array, stores each bufp, checks buffer size>=3*objectsize, unlocks object array but leaves set/object buffers locked."
+        },
+        {
+          "old": "f_2662_01B5",
+          "new": "anim_unlock_render_buffers",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/anim.c, f_2662_01B5; named callers: hanim_RenderAnimSet. Release animation-object buffer locks and both set locks after rendering. Review: build/workers/names-fn/dos-descriptive-2.json#root:2662:01B5; hanim_RenderAnimSet caller; locks set/objects to traverse, unlocks each objbuf then objects and set twice, balancing initial/preparation locks."
+        },
+        {
+          "old": "f_2662_023F",
+          "new": "anim_capture_screen_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/anim.c, f_2662_023F; named callers: hanim_RenderAnimSet. Capture a rectangular screen region into a supplied buffer. Review: build/workers/names-fn/dos-descriptive-2.json#root:2662:023F; hanim_RenderAnimSet caller; passes rect edges/buffer to g_9148 screen-capture dispatch."
+        },
+        {
+          "old": "f_2662_0262",
+          "new": "anim_compose_object_range",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/anim.c, f_2662_0262; named callers: hanim_RenderAnimSet. Composite drawn animation objects across an inclusive index range in either order. Review: build/workers/names-fn/dos-descriptive-2.json#root:2662:0262; hanim_RenderAnimSet caller; from/to choose forward/backward iteration, which chooses old/current rect and backing-buffer slice size*which, dispatches rectangle compositing37EE into clip/save buffers."
+        },
+        {
+          "old": "f_2662_1120",
+          "new": "anim_bitmap_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/graphics/anim.c, f_2662_1120; named callers: DrawSpider. Load a sprite bitmap and composite it into a caller buffer through its format-specific kernel. Review: build/workers/names-fn/dos-descriptive-2.json#root:2662:1120; DrawSpider caller; loads resource(pic,2,type1), locks, headerkind3 selects37EA and0 selects3B58, sends payload+8,dest,x/y; unlocks and marks pictures<30000 discardable."
+        },
+        {
+          "old": "f_284A_0004",
+          "new": "snd_service_and_test_stopped",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/sound/midi_player.c, f_284A_0004; named callers: mySongIsDone. Service pending audio then test whether song playback has stopped. Review: build/workers/names-fn/dos-descriptive-2.json#root:284A:0004; mySongIsDone caller; f0000:046F() then returns g_756E==0."
+        },
+        {
+          "old": "f_284A_0013",
+          "new": "snd_load_and_start_song",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/sound/midi_player.c, f_284A_0013; named callers: myBeginSong. Load and start a DOS song, initialize MIDI parsing and channel bank/program state. Review: build/workers/names-fn/dos-descriptive-2.json#root:284A:0013; myBeginSong caller; StopSong, music-load helper0193, save data handle/size, parse header/tracks0256, reset tempo02E4, set playback flag1, copy14 bank/program entries and restart audio service."
+        },
+        {
+          "old": "f_295C_0367",
+          "new": "snd_start_configured_effect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/sound/midi_voices.c, f_295C_0367; named callers: myBeginSound. Start a configured sound effect using its four parameter fields. Review: build/workers/names-fn/dos-descriptive-2.json#root:295C:0367; myBeginSound caller; selects entryn in fd55B3:0A82 and forwards fields b,c,a,d to01EC. Channel/sample interpretation needs deeper sound driver review."
+        },
+        {
+          "old": "f_295C_0391",
+          "new": "snd_stop_assigned_voices",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/sound/midi_voices.c, f_295C_0391; named callers: StopSong. Stop/reset all active sound voices with assigned hardware channels. Review: build/workers/names-fn/dos-descriptive-2.json#root:295C:0391; StopSong caller; traverses voice table until type0, for c3>=0 and c2 nonzero calls02E8(c3,c4)."
+        },
+        {
+          "old": "o09_35F5_0D2B",
+          "new": "save_normalize_basename",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/save_load.c, o09_35F5_0D2B; named callers: FileSelect. Normalize an8-character save basename and force the .ant extension. Review: build/workers/names-fn/dos-descriptive-2.json#S09:35F5:0D2B; FileSelect caller; up to8 chars, spaces/commas=>underscore, stops atdot/NUL then strcpy .ant."
+        },
+        {
+          "old": "o09_36EE_0092",
+          "new": "ui_edit_text_field",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/text_entry.c, o09_36EE_0092; named callers: FileSelect. Edit a single text field with a blinking cursor and keyboard navigation. Review: build/workers/names-fn/dos-descriptive-2.json#S09:36EE:0092; FileSelect caller; local buffer and position/length, existing-text flag, maxLen, mouse/window cancellation, TickCount cursor blinking, editing-key switch."
+        },
+        {
+          "old": "o10_35F5_01C3",
+          "new": "menu_track_bar_selection",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_tracking.c, o10_35F5_01C3; named callers: DoEvent. Process a DOS menu-bar selection and navigate neighboring menus with arrow keys. Review: build/workers/names-fn/dos-descriptive-2.json#S10:35F5:01C3; DoEvent caller; low byte selects title, disabled0x80 check, highlights selected title, invokes popup0384, handles scan4B/4D menu wrap and pointer repositioning."
+        },
+        {
+          "old": "o12_384C_0432",
+          "new": "map_generate_surface_colours",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/map_window.c, o12_384C_0432; named callers: Mini_DrawMapI. Generate surface map colors from terrain and life, preserving unchanged empty cells when fresh. Review: build/workers/names-fn/dos-descriptive-2.json#S12:384C:0432; Mini_DrawMapI caller;128x64 transposed traversal, LifeA>>3 selects LTab, terrain uses CTab/HTab or bw variants, resource cache locks/copies. Win GenOverMap is only the inner loop."
+        },
+        {
+          "old": "o12_384C_0706",
+          "new": "map_expand_scent_colours",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/map_window.c, o12_384C_0706; named callers: Mini_DrawMapI. Expand a scent map into 2x2 map-color cells. Review: build/workers/names-fn/dos-descriptive-2.json#S12:384C:0706; Mini_DrawMapI caller;32x64 input, writes four equal output cells, mono maps v>>4+0x2E and color maps v>>5+0x10 with different zero colors."
+        },
+        {
+          "old": "o12_384C_080E",
+          "new": "map_generate_nest_colours",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/map_window.c, o12_384C_080E; named callers: Mini_DrawMapI. Generate a black or red nest map color buffer from terrain and life. Review: build/workers/names-fn/dos-descriptive-2.json#S12:384C:080E; Mini_DrawMapI caller; MapMode3 selectsR elseB,64x64 transposed traversal, lifeFE/FF special and bit80 distinction, terrain>>2 tables/color-vs-mono. Win GenNestMap is only inner loop."
+        },
+        {
+          "old": "o12_384C_0B76",
+          "new": "map_render_immediate",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/map_window.c, o12_384C_0B76; named callers: DrawMap. Generate, compare and immediately paint the main map with messages, overlays and cursor. Review: build/workers/names-fn/dos-descriptive-2.json#S12:384C:0B76; DrawMap caller; allocates Map window image/Generated map window, dispatches map modes0..8, compares64 cached rows, plots changed rows, spider/foot and cursor. Not Win repaint callback (round2 callback is1035)."
+        },
+        {
+          "old": "o13_384C_01E5",
+          "new": "yard_update_message",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/yard_window.c, o13_384C_01E5; named callers: win_DrawYardWindow. Expire the yard message or draw it above the yard viewport. Review: build/workers/names-fn/dos-descriptive-2.json#S13:384C:01E5; win_DrawYardWindow caller; tests text/deadline, sets redraw flag and clears expired pointer; otherwise color3 and centered text if YardMode>1. Win UpdateYardMessage boundary remains ambiguous."
+        },
+        {
+          "old": "o13_384C_027C",
+          "new": "yard_draw_content_totals",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/yard_window.c, o13_384C_027C; named callers: win_DrawYardWindow. Draw yard simulation content and three colony/queen text values. Review: build/workers/names-fn/dos-descriptive-2.json#S13:384C:027C; win_DrawYardWindow caller; message helper, Draw_SimYard(YardMode,1), formats objects190C/1912/1913 with queen storage and colony totals."
+        },
+        {
+          "old": "o13_384C_03F8",
+          "new": "yard_refresh_message_area",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/yard_window.c, o13_384C_03F8; named callers: main. Refresh the yard message/control area when invalidated in the main loop. Review: build/workers/names-fn/dos-descriptive-2.json#S13:384C:03F8; main caller; requires yardwindow open and redraw flag, clips, erases cursor, updates message and object1914, redraws cursor, clears flag."
+        },
+        {
+          "old": "o15_384C_0125",
+          "new": "bios_probe_reset_disks",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/startup/game_session.c, o15_384C_0125; named callers: main. For BIOS drive numbers 0x80 through 0x8B, query disk status and reset the drive when the status call succeeds. Review: build/workers/names-fn/dos-descriptive-2.json#S15:384C:0125; main caller; loops12 drive numbersOR0x80, INT13 AH1 status, and when carry is clear issues AH0 reset. No assumption that reset occurs only on an error."
+        },
+        {
+          "old": "o15_384C_0152",
+          "new": "app_cleanup_and_exit",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/startup/game_session.c, o15_384C_0152; named callers: MenuQuit, Punt, initStuff, main. Perform guarded fatal/normal cleanup, print the exit message and terminate DOS. Review: build/workers/names-fn/dos-descriptive-2.json#S15:384C:0152; MenuQuit/Punt/initStuff/main callers; reentry counter chooses cleanup stage, sound shutdown, display restore, puts(message), optional diagnostic path then exit0. Win Quit remains undecided due to trivial Windows placeholder."
+        },
+        {
+          "old": "o15_384C_0239",
+          "new": "ui_prompt_save_discard_cancel",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/startup/game_session.c, o15_384C_0239; named callers: LoadGame, MenuQuit. Ask whether to discard, save or cancel before replacing/quitting the current game. Review: build/workers/names-fn/dos-descriptive-2.json#S15:384C:0239; LoadGame/MenuQuit callers; window2100, text resource, keysD/S/C,Enter/Escape and objects2103/04/05 map results0/1/2; releases resources/closes window."
+        },
+        {
+          "old": "o17_384C_0000",
+          "new": "input_init_desktop_region",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_setup.c, o17_384C_0000; named callers: IBMInitStuff. Initialize DOS pointer/input state and register a screen-wide background event region. Review: build/workers/names-fn/dos-descriptive-2.json#S17:384C:0000; IBMInitStuff caller; cursor resource/input initialization, mouse bounds/scale0x10, registers screen rect with idFF00 through03EB."
+        },
+        {
+          "old": "o17_384C_0039",
+          "new": "menu_load_and_register",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_setup.c, o17_384C_0039; named callers: IBMInitStuff. Load a menu resource, relocate its pointer tables and register menu title hit areas. Review: build/workers/names-fn/dos-descriptive-2.json#S17:384C:0039; IBMInitStuff caller; db_LoadObject(id,6), unhook resource, add base to nested offset tables, calculate menu layout without draw then register each title."
+        },
+        {
+          "old": "o17_384C_0143",
+          "new": "menu_set_state_colours",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_setup.c, o17_384C_0143; named callers: IBMInitStuff. Set the three menu-state color values. Review: build/workers/names-fn/dos-descriptive-2.json#S17:384C:0143; IBMInitStuff caller; assigns g_5FEA,g_5FEC,g_5FEE, consumed by menu drawing mode02B1."
+        },
+        {
+          "old": "o17_384C_0169",
+          "new": "win_set_desktop_colours",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/menu_setup.c, o17_384C_0169; named callers: IBMInitStuff. Set the desktop foreground/background color pair. Review: build/workers/names-fn/dos-descriptive-2.json#S17:384C:0169; IBMInitStuff caller; assigns g_5FE6,g_5FE8, consumed by desktop redraw05FD."
+        },
+        {
+          "old": "o19_384C_0246",
+          "new": "input_dispatch_game_key",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/game_events.c, o19_384C_0246; named callers: DoEvent. Dispatch DOS keyboard shortcuts, debug controls and yellow-ant command keys. Review: build/workers/names-fn/dos-descriptive-2.json#S19:384C:0246; DoEvent caller; reads extended key, CheatKeys, Ctrl commands flushheap/report/message, key-command table synthesizes input event; fallback YellowCommandKey."
+        },
+        {
+          "old": "o19_384C_0383",
+          "new": "input_translate_special_key",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/ui/game_events.c, o19_384C_0383; named callers: DoEvent. Translate special keyboard events and modifiers into menu or yellow-ant commands. Review: build/workers/names-fn/dos-descriptive-2.json#S19:384C:0383; DoEvent caseFA00 caller; modifier4 maps FA05.. etc to YardToMap/menuFDxx, modifier8 FA03 YellowCommand3, unmodifiedFA0E/0F command/DoTab."
+        },
+        {
+          "old": "o26_39C7_0000",
+          "new": "win_toggle_zoom",
+          "kind": "descriptive",
+          "why": "Descriptive DOS operation, checked in src/window/move_resize.c, o26_39C7_0000; named callers: NewGame. Toggle a DOS window between saved geometry and maximized geometry, then redraw exposed windows. Review: build/workers/names-fn/dos-descriptive-2.json#S26:39C7:0000; NewGame/system-event caller; requires flags100, flags80 selects zoom-in/out, saves zoomRect, recalculates layout/clips, invokes resize hook, repaints stack, refreshes input registrations."
+        }
+      ],
+      "note": "Lexical identifier rename; semantic review unchanged.",
+      "prior_receipt_sha256": "084f143e3619485cc10a2affa445a8dc08c219fd372dfa893bf80ce422c7c6af"
+    }
+  ]
 }

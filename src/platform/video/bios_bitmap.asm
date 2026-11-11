@@ -52,7 +52,7 @@ _g_3DEF		db	0
 		db	0
 _g_3DF1		db	0
 _g_3DF2		dw	0
-_g_3DF4		dd	_f_1B4E_000C	; empty driver entry
+_g_3DF4		dd	_gfx_empty_driver_callback	; empty driver entry
 _g_3DF8		dd	_g_9128		; driver entry table (25 far pointers)
 _g_3DFC		db	964 dup (0)
 _g_41C0		db	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15	; colour map
@@ -88,26 +88,26 @@ DGROUP	group	_DATA
 VIDEO_TEXT	segment word public 'CODE'
 	assume	cs:VIDEO_TEXT, ds:DGROUP
 
-	public	_f_1B4E_000C
+	public	_gfx_empty_driver_callback
 	public	_ConvColor
-	public	_f_1B4E_0025
+	public	_gfx_reset_driver_callbacks
 	public	_GPutPic
 	public	_GPutImg
-	public	_f_1B4E_0081
-	public	_f_1B4E_00CE
-	public	_f_1B4E_0110
-	public	_f_1B4E_015B
-	public	_f_1B4E_0165
-	public	_f_1B4E_0177
-	public	_f_1B4E_01A1
-	public	_f_1B4E_01AE
-	public	_f_1B4E_0228
-	public	_f_1B4E_0235
-	public	_f_1B4E_0240
+	public	_gfx_put_fixed_font_chars
+	public	_gfx_put_string_at_pen
+	public	_gfx_put_fixed_font_char
+	public	_gfx_video_bios_ax
+	public	_gfx_install_driver_callbacks
+	public	_gfx_set_dac_palette_inplace
+	public	_gfx_set_ega_palette
+	public	_gfx_set_dac_palette
+	public	_gfx_set_border_colour
+	public	_gfx_get_bios_video_mode
+	public	_gfx_set_bios_video_mode
 
-_f_1B4E_000C	proc	far
+_gfx_empty_driver_callback	proc	far
 	retf
-_f_1B4E_000C	endp
+_gfx_empty_driver_callback	endp
 
 _ConvColor	proc	far
 	push bp
@@ -124,7 +124,7 @@ _ConvColor	proc	far
 	retf
 _ConvColor	endp
 
-_f_1B4E_0025	proc	far
+_gfx_reset_driver_callbacks	proc	far
 	push di
 	les bx, dword ptr _g_3DF4
 	mov ax, es
@@ -138,7 +138,7 @@ L0033:
 	loop L0033
 	pop di
 	retf
-_f_1B4E_0025	endp
+_gfx_reset_driver_callbacks	endp
 
 _GPutPic	proc	far
 	push bp
@@ -178,7 +178,7 @@ _GPutImg	proc	far
 	retf
 _GPutImg	endp
 
-_f_1B4E_0081	proc	far
+_gfx_put_fixed_font_chars	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -200,7 +200,7 @@ L0097:
 	push ax
 	push word ptr [bp+8]
 	push di
-	call far ptr _f_1B4E_0110
+	call far ptr _gfx_put_fixed_font_char
 	add sp, 6
 	pop es
 	cmp di, word ptr _g_3DB2
@@ -215,9 +215,9 @@ L00BB:
 	pop si
 	pop bp
 	retf
-_f_1B4E_0081	endp
+_gfx_put_fixed_font_chars	endp
 
-_f_1B4E_00CE	proc	far
+_gfx_put_string_at_pen	proc	far
 	push bp
 	mov bp, sp
 	les bx, dword ptr [bp+6]
@@ -229,12 +229,12 @@ _f_1B4E_00CE	proc	far
 	add sp, 8
 	pop bp
 	retf
-_f_1B4E_00CE	endp
+_gfx_put_string_at_pen	endp
 
 ; characters 80h-A7h folded to plain letters for the 6-pixel font
 FoldTable	db	'cueaaaaceeeiiiAAEaAooouuyoucLYPfaiounNao'
 
-_f_1B4E_0110	proc	far
+_gfx_put_fixed_font_char	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -267,18 +267,18 @@ L0135:
 	pop si
 	pop bp
 	retf
-_f_1B4E_0110	endp
+_gfx_put_fixed_font_char	endp
 
-_f_1B4E_015B	proc	far
+_gfx_video_bios_ax	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
 	int 10h
 	pop bp
 	retf
-_f_1B4E_015B	endp
+_gfx_video_bios_ax	endp
 
-_f_1B4E_0165	proc	far
+_gfx_install_driver_callbacks	proc	far
 	push ds
 	push di
 	mov ax, es
@@ -289,9 +289,9 @@ _f_1B4E_0165	proc	far
 	pop di
 	pop ds
 	retf
-_f_1B4E_0165	endp
+_gfx_install_driver_callbacks	endp
 
-_f_1B4E_0177	proc	far
+_gfx_set_dac_palette_inplace	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -316,9 +316,9 @@ L0186:
 	pop si
 	pop bp
 	retf
-_f_1B4E_0177	endp
+_gfx_set_dac_palette_inplace	endp
 
-_f_1B4E_01A1	proc	far
+_gfx_set_ega_palette	proc	far
 	push bp
 	mov bp, sp
 	les dx, dword ptr [bp+6]
@@ -326,9 +326,9 @@ _f_1B4E_01A1	proc	far
 	int 10h
 	pop bp
 	retf
-_f_1B4E_01A1	endp
+_gfx_set_ega_palette	endp
 
-_f_1B4E_01AE	proc	far
+_gfx_set_dac_palette	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 33h
@@ -391,9 +391,9 @@ L0221:
 	mov sp, bp
 	pop bp
 	retf
-_f_1B4E_01AE	endp
+_gfx_set_dac_palette	endp
 
-_f_1B4E_0228	proc	far
+_gfx_set_border_colour	proc	far
 	push bp
 	mov bp, sp
 	mov ax, 1001h
@@ -401,17 +401,17 @@ _f_1B4E_0228	proc	far
 	int 10h
 	pop bp
 	retf
-_f_1B4E_0228	endp
+_gfx_set_border_colour	endp
 
-_f_1B4E_0235	proc	far
+_gfx_get_bios_video_mode	proc	far
 	xor ax, ax
 	mov es, ax
 	mov al, byte ptr es:[449h]
 	xor ah, ah
 	retf
-_f_1B4E_0235	endp
+_gfx_get_bios_video_mode	endp
 
-_f_1B4E_0240	proc	far
+_gfx_set_bios_video_mode	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
@@ -423,7 +423,7 @@ _f_1B4E_0240	proc	far
 	xor ah, ah
 	pop bp
 	retf
-_f_1B4E_0240	endp
+_gfx_set_bios_video_mode	endp
 
 VIDEO_TEXT	ends
 	end

@@ -161,56 +161,56 @@ MOUSE_TEXT	segment word public 'CODE'
 	assume	cs:MOUSE_TEXT, ds:DGROUP
 
 	public	_TickCount
-	public	_f_1B73_0024
-	public	_f_1B73_0025
-	public	_f_1B73_0046
-	public	_f_1B73_00D9
-	public	_f_1B73_0122
-	public	_f_1B73_0196
-	public	_f_1B73_01CB
-	public	_f_1B73_01D5
-	public	_f_1B73_01E1
-	public	_f_1B73_0218
-	public	_f_1B73_0228
-	public	_f_1B73_0235
-	public	_f_1B73_02A9
-	public	_f_1B73_030F
-	public	_f_1B73_032A
-	public	_f_1B73_032E
-	public	_f_1B73_036E
-	public	_f_1B73_03EE
-	public	_f_1B73_0445
-	public	_f_1B73_04BB
-	public	_f_1B73_050E
-	public	_f_1B73_050F
-	public	_f_1B73_0510
-	public	_f_1B73_0511
-	public	_f_1B73_0518
-	public	_f_1B73_051F
-	public	_f_1B73_065A
-	public	_f_1B73_06E3
-	public	_f_1B73_0747
-	public	_f_1B73_09E9
-	public	_f_1B73_09F7
-	public	_f_1B73_09FF
-	public	_f_1B73_0A1B
-	public	_f_1B73_0A30
-	public	_f_1B73_0A40
-	public	_f_1B73_0A6C
-	public	_f_1B73_0A89
-	public	_f_1B73_0AA3
-	public	_f_1B73_0AC3
-	public	_f_1B73_0B00
-	public	_f_1B73_0B5B
-	public	_f_1B73_0BC5
-	public	_f_1B73_0BFF
-	public	_f_1B73_0C42
-	public	_f_1B73_0C80
-	public	_f_1B73_0CB3
-	public	_f_1B73_0CEF
-	public	_f_1B73_0D4C
-	public	_f_1B73_0DA4
-	public	_f_1B73_0EEE
+	public	_mouse_absent_driver_iret
+	public	_mouse_remove_absent_stub
+	public	_mouse_initialize_driver
+	public	_mouse_show_cursor
+	public	_mouse_cursor_action
+	public	_mouse_hide_cursor
+	public	_mouse_begin_screen_access
+	public	_mouse_end_screen_access
+	public	_mouse_set_cursor_bitmaps
+	public	_mouse_set_mickey_ratio
+	public	_mouse_set_double_speed
+	public	_input_install_hooks
+	public	_input_remove_hooks
+	public	_input_enqueue_event_args
+	public	_input_event_count
+	public	_input_pop_event
+	public	_input_enqueue_event
+	public	_mouse_mickey_callback
+	public	_mouse_event_callback
+	public	_mouse_refresh_cursor
+	public	_input_noop_050e
+	public	_input_noop_050f
+	public	_input_noop_0510
+	public	_timer_disable_tick_count
+	public	_timer_enable_tick_count
+	public	_timer_input_interrupt
+	public	_kbd_int15_scan_hook
+	public	_kbd_int09_hook
+	public	_kbd_process_scan
+	public	_mouse_set_position
+	public	_mouse_refresh_position
+	public	_mouse_update_position_regs
+	public	_kbd_dispatch_pointer_action
+	public	_kbd_scan_state
+	public	_kbd_disable_mouse_emulation
+	public	_kbd_enable_mouse_emulation
+	public	_hotbox_find_id
+	public	_hotbox_initialize_dispatch
+	public	_hotbox_append
+	public	_hotbox_prepend
+	public	_hotbox_remove_id
+	public	_hotbox_contains_pointer
+	public	_hotbox_pointer_hit_id
+	public	_hotbox_get_rect
+	public	_hotbox_center_pointer
+	public	_hotbox_dispatch_event
+	public	_hotbox_hit_and_callback
+	public	_mouse_default_cursor_action
+	public	_mouse_draw_default_cursor
+	public	_kbd_scroll_lock_state
 
 ; code-segment variables (addressed cs:, shared with the interrupt handlers)
 	public _fd_1B73_0006
@@ -233,15 +233,15 @@ old_int09	dd	0
 old_int15	dd	0
 
 ; INT 33h vector target installed when no mouse driver is loaded
-_f_1B73_0024	proc	far
+_mouse_absent_driver_iret	proc	far
 	iret
-_f_1B73_0024	endp
+_mouse_absent_driver_iret	endp
 
 ; remove the INT 33h iret stub from the IVT if it is still installed
-_f_1B73_0025	proc	far
+_mouse_remove_absent_stub	proc	far
 	xor ax, ax
 	mov es, ax
-	cmp word ptr es:[0CCh], offset _f_1B73_0024
+	cmp word ptr es:[0CCh], offset _mouse_absent_driver_iret
 	jne L0045
 	cmp word ptr es:[0CEh], MOUSE_TEXT
 	jne L0045
@@ -250,10 +250,10 @@ _f_1B73_0025	proc	far
 	mov word ptr es:[0CCh], ax
 L0045:
 	retf
-_f_1B73_0025	endp
+_mouse_remove_absent_stub	endp
 
 ; mouse init: detect the INT 33h driver (installing the iret stub if the vector is empty), set range, centre the cursor
-_f_1B73_0046	proc	far
+_mouse_initialize_driver	proc	far
 	mov ax, 24h
 	xor bx, bx
 	int 33h
@@ -274,7 +274,7 @@ L006A:
 	jne L0087
 	mov ax, MOUSE_TEXT
 	mov word ptr es:[0CEh], ax
-	mov ax, offset _f_1B73_0024
+	mov ax, offset _mouse_absent_driver_iret
 	mov word ptr es:[0CCh], ax
 L0087:
 	xor ax, ax
@@ -307,13 +307,13 @@ L00BA:
 	mov ax, word ptr _g_3DB2
 	shr ax, 1
 	mov word ptr _g_9124, ax
-	call near ptr _f_1B73_09F7
+	call near ptr _mouse_refresh_position
 	pop ax
 	mov word ptr _g_435A, 1
 	retf
-_f_1B73_0046	endp
+_mouse_initialize_driver	endp
 
-_f_1B73_00D9	proc	far
+_mouse_show_cursor	proc	far
 	push di
 	inc word ptr _g_4352
 	jne L00E4
@@ -329,7 +329,7 @@ L00E4:
 	lds di, dword ptr _g_549A
 	mov ax, 0FFFFh
 	xor bh, bh
-	call near ptr _f_1B73_0CEF
+	call near ptr _hotbox_hit_and_callback
 	pop ds
 	mov bx, di
 	je L010C
@@ -338,17 +338,17 @@ L010C:
 	mov word ptr _g_4DA5, bx
 	mov al, 1
 	pushf
-	call near ptr _f_1B73_0122
+	call near ptr _mouse_cursor_action
 	inc byte ptr _g_4365
 	popf
 	mov byte ptr _g_4331, 0
 L0120:
 	pop di
 	retf
-_f_1B73_00D9	endp
+_mouse_show_cursor	endp
 
 ; redraw the mouse cursor through the display driver (AL = 1 show / 2 hide)
-_f_1B73_0122	proc	near
+_mouse_cursor_action	proc	near
 	inc byte ptr _g_4333
 	push di
 	lea di, _g_5AAC
@@ -371,7 +371,7 @@ _f_1B73_0122	proc	near
 	and bx, bx
 	jne L0169
 	push ax
-	call far ptr _f_1B73_0D4C
+	call far ptr _mouse_default_cursor_action
 	jmp short L0173
 L0169:
 	mov dx, seg _fd_5071_0728
@@ -391,9 +391,9 @@ L0173:
 	pop di
 	dec byte ptr _g_4333
 	retn
-_f_1B73_0122	endp
+_mouse_cursor_action	endp
 
-_f_1B73_0196	proc	far
+_mouse_hide_cursor	proc	far
 	mov al, 1
 	mov byte ptr _g_4332, al
 	test byte ptr _g_4365, 0FFh
@@ -412,28 +412,28 @@ L01BD:
 	pushf
 	cli
 	mov ax, 2
-	call near ptr _f_1B73_0122
+	call near ptr _mouse_cursor_action
 	dec byte ptr _g_4365
 	popf
 L01CA:
 	retf
-_f_1B73_0196	endp
+_mouse_hide_cursor	endp
 
-_f_1B73_01CB	proc	far
+_mouse_begin_screen_access	proc	far
 	inc byte ptr _g_3DD4
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	retf
-_f_1B73_01CB	endp
+_mouse_begin_screen_access	endp
 
-_f_1B73_01D5	proc	far
+_mouse_end_screen_access	proc	far
 	dec byte ptr _g_3DD4
 	jne L01E0
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L01E0:
 	retf
-_f_1B73_01D5	endp
+_mouse_end_screen_access	endp
 
-_f_1B73_01E1	proc	far
+_mouse_set_cursor_bitmaps	proc	far
 	push bp
 	mov bp, sp
 	pushf
@@ -456,9 +456,9 @@ L0215:
 	popf
 	pop bp
 	retf
-_f_1B73_01E1	endp
+_mouse_set_cursor_bitmaps	endp
 
-_f_1B73_0218	proc	far
+_mouse_set_mickey_ratio	proc	far
 	push bp
 	mov bp, sp
 	mov cx, word ptr [bp+6]
@@ -467,9 +467,9 @@ _f_1B73_0218	proc	far
 	int 33h
 	pop bp
 	retf
-_f_1B73_0218	endp
+_mouse_set_mickey_ratio	endp
 
-_f_1B73_0228	proc	far
+_mouse_set_double_speed	proc	far
 	push bp
 	mov bp, sp
 	mov dx, word ptr [bp+6]
@@ -477,10 +477,10 @@ _f_1B73_0228	proc	far
 	int 33h
 	pop bp
 	retf
-_f_1B73_0228	endp
+_mouse_set_double_speed	endp
 
 ; install the event handler (INT 33h/0Ch) and the INT 15h, INT 09h and INT 08h handlers
-_f_1B73_0235	proc	far
+_input_install_hooks	proc	far
 	xor ax, ax
 	mov es, ax
 	mov al, byte ptr es:[417h]
@@ -493,7 +493,7 @@ _f_1B73_0235	proc	far
 	mov cx, 7Fh
 	push cs
 	pop es
-	lea dx, _f_1B73_03EE
+	lea dx, _mouse_mickey_callback
 	int 33h
 	push ds
 	push cs
@@ -503,29 +503,29 @@ _f_1B73_0235	proc	far
 	mov word ptr cs:old_int15, bx
 	mov word ptr cs:old_int15+2, es
 	mov ax, 2515h
-	lea dx, _f_1B73_065A
+	lea dx, _kbd_int15_scan_hook
 	int 21h
 	mov ax, 3509h
 	int 21h
 	mov word ptr cs:old_int09, bx
 	mov word ptr cs:old_int09+2, es
 	mov ax, 2509h
-	lea dx, _f_1B73_06E3
+	lea dx, _kbd_int09_hook
 	int 21h
 	mov ax, 3508h
 	int 21h
 	mov word ptr cs:old_int08, bx
 	mov word ptr cs:old_int08+2, es
 	mov ax, 2508h
-	lea dx, _f_1B73_051F
+	lea dx, _timer_input_interrupt
 	int 21h
 	pop ds
 	inc byte ptr _g_53BC
 	retf
-_f_1B73_0235	endp
+_input_install_hooks	endp
 
 ; restore the INT 15h/09h/08h vectors and remove the mouse event handler
-_f_1B73_02A9	proc	far
+_input_remove_hooks	proc	far
 	xor ax, ax
 	mov es, ax
 	mov al, byte ptr es:[417h]
@@ -563,9 +563,9 @@ L0301:
 	int 33h
 	mov word ptr _g_435A, 0
 	retf
-_f_1B73_02A9	endp
+_input_remove_hooks	endp
 
-_f_1B73_030F	proc	far
+_input_enqueue_event_args	proc	far
 	push bp
 	mov bp, sp
 	mov es, word ptr [bp+8]
@@ -573,19 +573,19 @@ _f_1B73_030F	proc	far
 	mov ax, word ptr [bp+0Ah]
 	mov cx, word ptr [bp+0Ch]
 	mov dx, word ptr [bp+0Eh]
-	call far ptr _f_1B73_036E
+	call far ptr _input_enqueue_event
 	xor ax, ax
 	pop bp
 	retf
-_f_1B73_030F	endp
+_input_enqueue_event_args	endp
 
-_f_1B73_032A	proc	far
+_input_event_count	proc	far
 	mov ax, word ptr _g_5FF2
 	retf
-_f_1B73_032A	endp
+_input_event_count	endp
 
 ; dequeue one 16-byte input event into *dest; returns the remaining count
-_f_1B73_032E	proc	far
+_input_pop_event	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -620,10 +620,10 @@ L036A:
 	pop si
 	pop bp
 	retf
-_f_1B73_032E	endp
+_input_pop_event	endp
 
 ; enqueue an input event (AX, CX, DX, ES:BX) with shift state and BIOS tick time
-_f_1B73_036E	proc	far
+_input_enqueue_event	proc	far
 	pushf
 	cli
 	push ds
@@ -686,12 +686,12 @@ L03E7:
 L03EC:
 	popf
 	retf
-_f_1B73_036E	endp
+_input_enqueue_event	endp
 
 ; INT 33h user event handler (mickey mode converts relative motion); falls into 0445
-_f_1B73_03EE	proc	far
+_mouse_mickey_callback	proc	far
 	test byte ptr cs:mickey_mode, 0FFh
-	je _f_1B73_0445
+	je _mouse_event_callback
 	push ds
 	push ax
 	push si
@@ -730,10 +730,10 @@ L0441:
 	pop si
 	pop ax
 	pop ds
-_f_1B73_03EE	endp
+_mouse_mickey_callback	endp
 
 ; mouse event: update the button/position state, hot-box tracking and the cursor
-_f_1B73_0445	proc	far
+_mouse_event_callback	proc	far
 	pushf
 	cli
 	test byte ptr cs:mouse_busy, 0FFh
@@ -768,7 +768,7 @@ L0488:
 	or al, byte ptr _g_4333
 	jne L0481
 	push es
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	pop es
 L049D:
 	mov ax, word ptr _g_9120
@@ -783,9 +783,9 @@ L04AA:
 	pop si
 	dec byte ptr cs:mouse_busy
 	retf
-_f_1B73_0445	endp
+_mouse_event_callback	endp
 
-_f_1B73_04BB	proc	far
+_mouse_refresh_cursor	proc	far
 	push di
 	inc word ptr _g_4356
 	jne L04C6
@@ -795,7 +795,7 @@ L04C6:
 	jle L0502
 	mov bx, word ptr _g_4DA5
 	mov al, 2
-	call near ptr _f_1B73_0122
+	call near ptr _mouse_cursor_action
 	push ds
 	push es
 	mov ax, word ptr _g_9120
@@ -803,7 +803,7 @@ L04C6:
 	mov dx, word ptr _g_9124
 	lds di, dword ptr _g_549A
 	xor bh, bh
-	call near ptr _f_1B73_0CEF
+	call near ptr _hotbox_hit_and_callback
 	pop ds
 	pop es
 	mov bx, di
@@ -812,12 +812,12 @@ L04C6:
 L04F4:
 	mov word ptr _g_4DA5, bx
 	mov al, 1
-	call near ptr _f_1B73_0122
+	call near ptr _mouse_cursor_action
 	mov byte ptr _g_4331, 0
 L0502:
 	pop di
 	retf
-_f_1B73_04BB	endp
+_mouse_refresh_cursor	endp
 
 ; long TickCount(void): timer ticks counted by the INT 08h handler
 _TickCount	proc	far
@@ -826,30 +826,30 @@ _TickCount	proc	far
 	retf
 _TickCount	endp
 
-_f_1B73_050E	proc	far
+_input_noop_050e	proc	far
 	retf
-_f_1B73_050E	endp
+_input_noop_050e	endp
 
-_f_1B73_050F	proc	far
+_input_noop_050f	proc	far
 	retf
-_f_1B73_050F	endp
+_input_noop_050f	endp
 
-_f_1B73_0510	proc	far
+_input_noop_0510	proc	far
 	retf
-_f_1B73_0510	endp
+_input_noop_0510	endp
 
-_f_1B73_0511	proc	far
+_timer_disable_tick_count	proc	far
 	mov byte ptr cs:tick_count_on, 0
 	retf
-_f_1B73_0511	endp
+_timer_disable_tick_count	endp
 
-_f_1B73_0518	proc	far
+_timer_enable_tick_count	proc	far
 	mov byte ptr cs:tick_count_on, 1
 	retf
-_f_1B73_0518	endp
+_timer_enable_tick_count	endp
 
 ; INT 08h handler: tick counter, cursor keys repeat and cursor movement, chains to the old vector
-_f_1B73_051F	proc	far
+_timer_input_interrupt	proc	far
 	sub word ptr cs:tmr_countdown, 5
 	jae L052E
 	mov word ptr cs:tmr_countdown, 0
@@ -893,7 +893,7 @@ L057D:
 	jne L05CB
 	shr byte ptr _g_4331, 1
 	jae L05CB
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L05CB
 L059F:
 	shr byte ptr _g_4332, 1
@@ -908,7 +908,7 @@ L05B8:
 	jne L05CB
 	test byte ptr _g_4333, 0FFh
 	jne L05CB
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L05CB:
 	mov bl, byte ptr _g_4362
 	add bl, byte ptr _g_4368
@@ -959,7 +959,7 @@ L062A:
 	dec ax
 L0635:
 	mov word ptr _g_9124, ax
-	call near ptr _f_1B73_09F7
+	call near ptr _mouse_refresh_position
 L063B:
 	pop dx
 	pop cx
@@ -977,10 +977,10 @@ L0654:
 	popf
 L0655:
 	jmp dword ptr cs:old_int15
-_f_1B73_051F	endp
+_timer_input_interrupt	endp
 
 ; INT 15h handler: AH=4Fh keyboard intercept feeds the scan code processor
-_f_1B73_065A	proc	far
+_kbd_int15_scan_hook	proc	far
 	jae L0655
 	pushf
 	cmp ah, 4Fh
@@ -1006,7 +1006,7 @@ _f_1B73_065A	proc	far
 	mov dl, byte ptr _g_432B
 	xor dl, dl
 	jne L06B1
-	call near ptr _f_1B73_0747
+	call near ptr _kbd_process_scan
 L069B:
 	mov ss, word ptr _g_53B2
 	mov sp, word ptr _g_53B0
@@ -1033,10 +1033,10 @@ L06B1:
 L06DD:
 	popf
 	jmp dword ptr cs:old_int09
-_f_1B73_065A	endp
+_kbd_int15_scan_hook	endp
 
 ; INT 09h handler: reads port 60h and feeds the scan code processor, then chains
-_f_1B73_06E3	proc	far
+_kbd_int09_hook	proc	far
 	pushf
 	cli
 	test byte ptr cs:kbd_hook_on, 0FFh
@@ -1058,7 +1058,7 @@ _f_1B73_06E3	proc	far
 	mov ss, dx
 	mov sp, offset DGROUP:_g_53AE
 	mov byte ptr _g_432B, 1
-	call near ptr _f_1B73_0747
+	call near ptr _kbd_process_scan
 	mov ss, word ptr _g_53B2
 	mov sp, word ptr _g_53B0
 	pop ds
@@ -1077,13 +1077,13 @@ L073F:
 	pop ax
 	dec byte ptr cs:kbd_busy
 	iret
-_f_1B73_06E3	endp
+_kbd_int09_hook	endp
 
 kbd_last_scan	db	0		; previous scan code (E0h prefix test)
 
 
 ; scan code processor: shift/E0 tracking, key state table, key events, cursor-key mouse emulation
-_f_1B73_0747	proc	near
+_kbd_process_scan	proc	near
 	push es
 	push di
 	push bx
@@ -1137,7 +1137,7 @@ L07A1:
 	mov bl, al
 	xor ax, ax
 	mov es, ax
-	call far ptr _f_1B73_036E
+	call far ptr _input_enqueue_event
 	pop ax
 	pop es
 L07C0:
@@ -1188,7 +1188,7 @@ L0811:
 	ror ah, 1
 	xor byte ptr cs:shift_state, ah
 L0818:
-	call near ptr _f_1B73_09F7
+	call near ptr _mouse_refresh_position
 	jmp L07F7
 	mov al, 10h
 	jmp short L088A
@@ -1250,13 +1250,13 @@ L088A:
 	or al, ah
 	mov bh, 0F0h
 	mov bl, al
-	call far ptr _f_1B73_036E
+	call far ptr _input_enqueue_event
 	jmp L07F7
 	mov bh, 0FAh
 	ror ah, 1
 	or al, ah
 	mov bl, al
-	call far ptr _f_1B73_036E
+	call far ptr _input_enqueue_event
 	jmp L07F7
 	nop
 L08AB:
@@ -1382,7 +1382,7 @@ L0990:
 	sub ax, 6
 L09A6:
 	mov word ptr _g_9124, ax
-	call near ptr _f_1B73_09F7
+	call near ptr _mouse_refresh_position
 L09AC:
 	jmp L07F3
 L09AF:
@@ -1392,9 +1392,9 @@ L09AF:
 	shl ah, 1
 	mov bl, al
 	and ah, ah
-	jne _f_1B73_0A1B
+	jne _kbd_dispatch_pointer_action
 	mov ah, 4
-	jmp short _f_1B73_0A1B
+	jmp short _kbd_dispatch_pointer_action
 L09C2:
 	mov al, byte ptr _g_9120
 	and al, 0FDh
@@ -1404,35 +1404,35 @@ L09C2:
 	shl ah, 1
 	mov bl, al
 	and ah, ah
-	jne _f_1B73_0A1B
+	jne _kbd_dispatch_pointer_action
 	mov ah, 10h
-	jmp short _f_1B73_0A1B
+	jmp short _kbd_dispatch_pointer_action
 L09D9:
 	xor ax, ax
 	mov word ptr cs:tick_phase, ax
 	mov byte ptr _g_4364, al
 	retn
 L09E3:
-	call near ptr _f_1B73_09F7
+	call near ptr _mouse_refresh_position
 	jmp L07F3
-_f_1B73_0747	endp
+_kbd_process_scan	endp
 
-_f_1B73_09E9	proc	far
+_mouse_set_position	proc	far
 	push bp
 	mov bp, sp
 	mov cx, word ptr [bp+6]
 	mov dx, word ptr [bp+8]
-	call near ptr _f_1B73_09FF
+	call near ptr _mouse_update_position_regs
 	pop bp
 	retf
-_f_1B73_09E9	endp
+_mouse_set_position	endp
 
-_f_1B73_09F7	proc	near
+_mouse_refresh_position	proc	near
 	mov cx, word ptr _g_9122
 	mov dx, word ptr _g_9124
-_f_1B73_09F7	endp
+_mouse_refresh_position	endp
 
-_f_1B73_09FF	proc	near
+_mouse_update_position_regs	proc	near
 	mov bl, byte ptr _g_9120
 	mov al, 1
 	mov ah, byte ptr _g_4DA4
@@ -1446,11 +1446,11 @@ _f_1B73_09FF	proc	near
 	pop ax
 L0A16:
 	push cs
-	call near ptr _f_1B73_0445
+	call near ptr _mouse_event_callback
 	retn
-_f_1B73_09FF	endp
+_mouse_update_position_regs	endp
 
-_f_1B73_0A1B	proc	near
+_kbd_dispatch_pointer_action	proc	near
 	call near ptr L0A21
 	jmp L07F3
 L0A21:
@@ -1458,11 +1458,11 @@ L0A21:
 	mov cx, word ptr _g_9122
 	mov dx, word ptr _g_9124
 	push cs
-	call near ptr _f_1B73_0445
+	call near ptr _mouse_event_callback
 	retn
-_f_1B73_0A1B	endp
+_kbd_dispatch_pointer_action	endp
 
-_f_1B73_0A30	proc	far
+_kbd_scan_state	proc	far
 	push bp
 	mov bp, sp
 	mov bx, word ptr [bp+6]
@@ -1471,10 +1471,10 @@ _f_1B73_0A30	proc	far
 	xor ah, ah
 	pop bp
 	retf
-_f_1B73_0A30	endp
+_kbd_scan_state	endp
 
-_f_1B73_0A40	proc	far
-	call far ptr _f_1B73_0A6C
+_kbd_disable_mouse_emulation	proc	far
+	call far ptr _kbd_enable_mouse_emulation
 	xor bx, bx
 	mov byte ptr cs:kbd_hook_on, bl
 	mov byte ptr _g_53BD, bl
@@ -1488,9 +1488,9 @@ _f_1B73_0A40	proc	far
 	mov byte ptr _g_4368, al
 	mov byte ptr _g_4369, al
 	retf
-_f_1B73_0A40	endp
+_kbd_disable_mouse_emulation	endp
 
-_f_1B73_0A6C	proc	far
+_kbd_enable_mouse_emulation	proc	far
 	push di
 	mov ax, ds
 	mov es, ax
@@ -1502,9 +1502,9 @@ _f_1B73_0A6C	proc	far
 	mov byte ptr _g_53BD, 1
 	pop di
 	retf
-_f_1B73_0A6C	endp
+_kbd_enable_mouse_emulation	endp
 
-_f_1B73_0A89	proc	near
+_hotbox_find_id	proc	near
 	mov cx, word ptr es:[di]
 	add di, 2
 	jmp short L0A9B
@@ -1521,23 +1521,23 @@ L0A9B:
 L0AA1:
 	clc
 	retn
-_f_1B73_0A89	endp
+_hotbox_find_id	endp
 
-_f_1B73_0AA3	proc	far
+_hotbox_initialize_dispatch	proc	far
 	les bx, dword ptr _g_5484
 	xor ax, ax
 	mov word ptr es:[bx], ax
 	les bx, dword ptr _g_5484+6
 	mov word ptr es:[bx], ax
 	mov byte ptr _g_5FF8, al
-	lea ax, _f_1B73_0CB3
+	lea ax, _hotbox_dispatch_event
 	mov word ptr _g_5FFA, ax
 	mov al, 1Fh
 	mov byte ptr _g_5FF9, al
 	retf
-_f_1B73_0AA3	endp
+_hotbox_initialize_dispatch	endp
 
-_f_1B73_0AC3	proc	far
+_hotbox_append	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1569,9 +1569,9 @@ L0AF1:
 	push ax
 	call far ptr _puts
 	call far ptr _Punt
-_f_1B73_0AC3	endp
+_hotbox_append	endp
 
-_f_1B73_0B00	proc	far
+_hotbox_prepend	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1580,7 +1580,7 @@ _f_1B73_0B00	proc	far
 	les di, dword ptr [bp+0Ah]
 	cmp di, offset _fd_5071_0728
 	jne L0B17
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	les di, dword ptr [bp+0Ah]
 L0B17:
 	pushf
@@ -1613,14 +1613,14 @@ L0B46:
 	rep movsw
 	popf
 	pop ds
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 	pop di
 	pop si
 	pop bp
 	retf
-_f_1B73_0B00	endp
+_hotbox_prepend	endp
 
-_f_1B73_0B5B	proc	far
+_hotbox_remove_id	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -1633,7 +1633,7 @@ _f_1B73_0B5B	proc	far
 	jne L0B84
 	test byte ptr _g_4365, 0FFh
 	jle L0B84
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	inc word ptr [bp-2]
 	les di, dword ptr [bp+8]
 L0B84:
@@ -1641,7 +1641,7 @@ L0B84:
 	cli
 	mov ax, word ptr [bp+6]
 	mov si, di
-	call near ptr _f_1B73_0A89
+	call near ptr _hotbox_find_id
 	jb L0BB0
 	mov cx, es
 	mov ds, cx
@@ -1664,16 +1664,16 @@ L0BB0:
 	pop ds
 	test word ptr [bp-2], 0FFh
 	je L0BBF
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0BBF:
 	pop di
 	pop si
 	mov sp, bp
 	pop bp
 	retf
-_f_1B73_0B5B	endp
+_hotbox_remove_id	endp
 
-_f_1B73_0BC5	proc	far
+_hotbox_contains_pointer	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1681,7 +1681,7 @@ _f_1B73_0BC5	proc	far
 	push ds
 	mov ax, word ptr [bp+6]
 	les di, dword ptr [bp+8]
-	call near ptr _f_1B73_0A89
+	call near ptr _hotbox_find_id
 	jb L0BF8
 	mov ax, 1
 	mov bx, word ptr _g_9122
@@ -1702,9 +1702,9 @@ L0BFA:
 	pop si
 	pop bp
 	retf
-_f_1B73_0BC5	endp
+_hotbox_contains_pointer	endp
 
-_f_1B73_0BFF	proc	far
+_hotbox_pointer_hit_id	proc	far
 	push si
 	push di
 	push ds
@@ -1738,9 +1738,9 @@ L0C3E:
 	pop di
 	pop si
 	retf
-_f_1B73_0BFF	endp
+_hotbox_pointer_hit_id	endp
 
-_f_1B73_0C42	proc	far
+_hotbox_get_rect	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1748,7 +1748,7 @@ _f_1B73_0C42	proc	far
 	push ds
 	mov ax, word ptr [bp+6]
 	les di, dword ptr [bp+8]
-	call near ptr _f_1B73_0A89
+	call near ptr _hotbox_find_id
 	jb L0C79
 	mov ax, word ptr es:[di]
 	mov bx, word ptr es:[di+2]
@@ -1769,9 +1769,9 @@ L0C7B:
 	pop si
 	pop bp
 	retf
-_f_1B73_0C42	endp
+_hotbox_get_rect	endp
 
-_f_1B73_0C80	proc	far
+_hotbox_center_pointer	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -1779,7 +1779,7 @@ _f_1B73_0C80	proc	far
 	mov ax, word ptr [bp+6]
 	les di, dword ptr _g_5484+12
 	mov si, di
-	call near ptr _f_1B73_0A89
+	call near ptr _hotbox_find_id
 	jb L0CAF
 	mov ax, word ptr es:[di+2]
 	add ax, word ptr es:[di+6]
@@ -1789,7 +1789,7 @@ _f_1B73_0C80	proc	far
 	add bx, word ptr es:[di+4]
 	shr bx, 1
 	push bx
-	call far ptr _f_1B73_09E9
+	call far ptr _mouse_set_position
 	pop bx
 	pop bx
 L0CAF:
@@ -1797,9 +1797,9 @@ L0CAF:
 	pop di
 	pop bp
 	retf
-_f_1B73_0C80	endp
+_hotbox_center_pointer	endp
 
-_f_1B73_0CB3	proc	near
+_hotbox_dispatch_event	proc	near
 	push es
 	push ds
 	push si
@@ -1819,7 +1819,7 @@ L0CCD:
 	je L0CE1
 	push es
 	mov bh, bl
-	call near ptr _f_1B73_0CEF
+	call near ptr _hotbox_hit_and_callback
 	pop es
 	je L0CEA
 L0CE1:
@@ -1832,9 +1832,9 @@ L0CEA:
 	pop ds
 	pop es
 	retn
-_f_1B73_0CB3	endp
+_hotbox_dispatch_event	endp
 
-_f_1B73_0CEF	proc	near
+_hotbox_hit_and_callback	proc	near
 	mov bl, byte ptr [di]
 	and bl, bl
 	je L0D47
@@ -1880,14 +1880,14 @@ L0D47:
 	inc bl
 L0D49:
 	retn
-_f_1B73_0CEF	endp
+_hotbox_hit_and_callback	endp
 
 cursor_mode	db	0FFh		; current cursor mode (1 or 2)
 
-	public	_f_1B73_0D4B
-_f_1B73_0D4B	label	far
+	public	_mouse_default_cursor_thunk
+_mouse_default_cursor_thunk	label	far
 	even
-_f_1B73_0D4C	proc	far
+_mouse_default_cursor_action	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
@@ -1900,7 +1900,7 @@ L0D58:
 	mov byte ptr cs:cursor_mode, al
 	dec al
 	jne L0D6C
-	call near ptr _f_1B73_0DA4
+	call near ptr _mouse_draw_default_cursor
 	jmp short L0D93
 L0D6C:
 	dec al
@@ -1924,9 +1924,9 @@ L0D95:
 	call far ptr _f_277D_000B
 	add sp, 4
 	jmp L0D93
-_f_1B73_0D4C	endp
+_mouse_default_cursor_action	endp
 
-_f_1B73_0DA4	proc	near
+_mouse_draw_default_cursor	proc	near
 	les bx, dword ptr _g_4D8E
 	mov word ptr _g_4D96, bx
 	mov word ptr _g_4D96+2, es
@@ -2042,16 +2042,16 @@ L0E62:
 	pop word ptr _g_21A4
 	xor ax, ax
 	retn
-_f_1B73_0DA4	endp
+_mouse_draw_default_cursor	endp
 
-_f_1B73_0EEE	proc	far
+_kbd_scroll_lock_state	proc	far
 	xor ax, ax
 	mov es, ax
 	mov al, byte ptr es:[417h]
 	xor ah, ah
 	and ax, 10h
 	retf
-_f_1B73_0EEE	endp
+_kbd_scroll_lock_state	endp
 
 MOUSE_TEXT	ends
 	end

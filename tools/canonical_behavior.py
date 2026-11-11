@@ -95,8 +95,8 @@ def domains(count, seed, full):
         'FindIndex': lambda: (small_contracts.find_cases(count, seed) if full else
             itertools.chain(spread(small_contracts.find_cases(0, seed), 256),
                             [c for c in small_contracts.find_cases(count, seed) if c.label.startswith(('signed-', 'lookahead/', 'random/'))])),
-        'f_1C62_0415': lambda: tutorial_menu.question_cases(count, seed),
-        'f_1E57_038E': lambda: itertools.chain([windows.clip_empty_case('empty')],
+        'ui_choice_prompt': lambda: tutorial_menu.question_cases(count, seed),
+        'win_rebuild_visible_clips': lambda: itertools.chain([windows.clip_empty_case('empty')],
             windows.clip_live_cases(), windows.randomized_clip_cases(count, seed)),
         'f_20E8_0903': lambda: itertools.chain(windows.coordinate_cases(count, seed),
             live_windows.randomized_cases(max(8, count), seed)),
@@ -114,7 +114,7 @@ def domains(count, seed, full):
         'o10_35F5_0384': lambda: tutorial_menu.menu_cases(count, seed),
         'DrawMapCursor': lambda: render_small.map_cursor_cases(count, seed),
         'InvertPatch': lambda: render_small.invert_cases(count, seed),
-        'o15_384C_0239': lambda: cases_only(dialog.cases(count, seed)),
+        'ui_prompt_save_discard_cancel': lambda: cases_only(dialog.cases(count, seed)),
         'win_PrintStyleTextInRect': lambda: cases_only(text_card.cases(count, seed)),
         'DisplayCard': lambda: cases_only(text_card.card_cases(count, seed)),
         'drawHistGraph': lambda: cases_only(text_card.history_cases(count, seed)),
@@ -133,8 +133,8 @@ MUTATIONS = {
     'LessonDone': ('case 3:\n        if (TilesDugB > TimeTemp && MeMoveMe == 0)',
                    'case 3:\n        if (TilesDugB >= TimeTemp && MeMoveMe == 0)'),
     'FindIndex': ('return fd_50F6_3952;', 'return 0L;'),
-    'f_1C62_0415': ('labels[i][0] == c || labels[i][1] == c', 'labels[i][0] == c'),
-    'f_1E57_038E': ('win_GetObjRect(win, &r);\n    fd_50F6_3B60[win >> 8]',
+    'ui_choice_prompt': ('labels[i][0] == c || labels[i][1] == c', 'labels[i][0] == c'),
+    'win_rebuild_visible_clips': ('win_GetObjRect(win, &r);\n    fd_50F6_3B60[win >> 8]',
                    'win_GetObjRect(win, &r);\n    r.right++;\n    fd_50F6_3B60[win >> 8]'),
     'f_20E8_0903': ('else\n            origin[i] = rect[i] - o[i];',
                    'else\n            origin[i] = rect[(i + 1) & 3] - o[i];'),
@@ -142,21 +142,21 @@ MUTATIONS = {
     'f_23E6_0000': ('s++;\n        n++;', 's++;\n        n += 2;'),
     'win_GetVal': ('return r[kind];', 'return r[kind] ^ 1;'),
     'win_DrawBitMap': ('GPutPic(x, y, (char far *)pic + 8);', 'GPutPic(x, y, (char far *)pic + 9);'),
-    'f_2815_0165': ('f_283E_000A(voice + 0xa0, g_6924[note % 12]);',
-                   'f_283E_000A(voice + 0xa1, g_6924[note % 12]);'),
+    'f_2815_0165': ('snd_opl_write(voice + 0xa0, g_6924[note % 12]);',
+                   'snd_opl_write(voice + 0xa1, g_6924[note % 12]);'),
     'f_284A_0138': ('return SONG(off) << 8 | SONG(off + 1);', 'return SONG(off + 1) << 8 | SONG(off);'),
     'f_29D6_000A': ('f_29F0_002A(0x205, f >> 4);', 'f_29F0_002A(0x205, (f >> 4) ^ 1);'),
     'o10_35F5_0384': ('k = (k + 1) % nItems;', 'k = (k + 2) % nItems;'),
     'DrawMapCursor': ('mapXsize * MapPnt[0]', 'mapXsize * MapPnt[1]'),
     'InvertPatch': ('h = (h >> 1) + fd_50F6_10D2.left + 4;', 'h = (h >> 1) + fd_50F6_10D2.left + 5;'),
-    'o15_384C_0239': ("case 's':\n                result = 1;", "case 's':\n                result = 2;"),
+    'ui_prompt_save_discard_cancel': ("case 's':\n                result = 1;", "case 's':\n                result = 2;"),
     'win_PrintStyleTextInRect': ('x = rect->left + 1;', 'x = rect->left + 2;'),
     'DisplayCard': ('win_DrawBitMap(pic.left + r.left, pic.top + r.top, pic.id);',
                     'win_DrawBitMap(pic.left + r.left + 1, pic.top + r.top, pic.id);'),
     'drawHistGraph': ('x = n * width / 64 + slot + r.left;', 'x = n * width / 64 + slot + r.left + 1;'),
     'EnterNest': ('if (MeLocX > 0x40)', 'if (MeLocX >= 0x40)'),
     'GetMyRandDirs': ('*rot = 1;', '*rot = -1;'),
-    'f_171C_09CC': ('if (b->paras < paras + 0x20)', 'if (b->paras <= paras + 0x20)'),
+    'mem_resize_in_place': ('if (b->paras < paras + 0x20)', 'if (b->paras <= paras + 0x20)'),
     'f_171C_0ADC': ('(long)b + 0x20000L', '(long)b + 0x30000L'),
     'f_171C_0CF4': ('return (int)moved;', 'return 0;'),
     'f_171C_0FBC': ('return n;', 'return 0L;'),
@@ -168,7 +168,7 @@ def negative(target, pair, candidates, out):
     ledger = CaseLedger(out / 'negative-cases.jsonl.gz', mutant, EFFECTS)
     detected = None
     tested = 0
-    if target == 'f_1C62_0415':
+    if target == 'ui_choice_prompt':
         # Both versions terminate: the altered hotkey path falls back to a
         # valid queued dialog event, so an execution timeout is not evidence.
         candidates = [tutorial_menu.question_case('negative/second-byte-hotkey',
@@ -205,7 +205,7 @@ def prepare_case(target, pair, case):
             active.candidate_machine._load_overlay(unit)
             pair.driver_pairs[unit] = active
         return pair.driver_pairs[unit]
-    if target == 'o15_384C_0239':
+    if target == 'ui_prompt_save_discard_cancel':
         if not hasattr(pair, 'dialog_setup'):
             pair.dialog_setup, proof = dialog._actual_lock_init_writes(pair, case)
             pair.identity['fixture_initializer'] = proof

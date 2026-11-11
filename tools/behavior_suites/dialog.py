@@ -17,7 +17,7 @@ from behavior_ledger import CaseLedger
 
 from behavior_suites import memory as memory_fixture
 
-FUNCTION='o15_384C_0239'
+FUNCTION='ui_prompt_save_discard_cancel'
 SUITE_SOURCE=Path(__file__).read_bytes()
 EFFECTS=['return','ordered GUI/window/font/resource/input commands','rectangle/text/font contents',
          'resource lock/unlock/release and age','input arbitration and consumption',
@@ -60,7 +60,7 @@ def resource(m,args):
     dg=b.match.DGROUP_SEG*16
     hard=struct.unpack('<H',m.read(dg+0x2f36,2))[0]
     firm=struct.unpack('<H',m.read(dg+0x2f3a,2))[0]
-    # Model f_1A53_00F0's source-level type-0 -> type-1 transition.
+    # Model res_load_with_alloc_type's source-level type-0 -> type-1 transition.
     m.write(dg+0x2f36,b.words(hard-paras))
     m.write(dg+0x2f3a,b.words(firm+paras))
     m.write(header_at+8,b'\x01')
@@ -214,15 +214,15 @@ def _actual_window_state(fixture,text,previous_window=0x0200):
         'win_DrawWindow':b.Callback(0,_capture_window_draw,('ax',)),
         # These helpers are the renderer/cursor presentation boundary. The
         # actual Open/Close and z-order code still execute around them.
-        'f_2505_0831':b.Callback(0,lambda m,a:None,('ax',)),
-        'f_2505_08EA':b.Callback(0,lambda m,a:None,('ax',)),
+        'win_activate_pointer_regions':b.Callback(0,lambda m,a:None,('ax',)),
+        'win_deactivate_pointer_regions':b.Callback(0,lambda m,a:None,('ax',)),
         'clip_SetWin':b.Callback(1,lambda m,a:None),
         'clip_Off':b.Callback(0,lambda m,a:None),
         'win_FlushEvents':b.Callback(0,_flush_stale),
         'clip_KillWin':b.Callback(1),
-        'f_21FA_0B4B':b.Callback(2,_rect_invalidated,pop=4),
+        'win_redraw_exposed_windows':b.Callback(2,_rect_invalidated,pop=4),
         'f_218D_01EB':b.Callback(0,lambda m,a:None),
-        'f_1E57_038E':b.Callback(0,lambda m,a:None),
+        'win_rebuild_visible_clips':b.Callback(0,lambda m,a:None),
     })
     fixture.metadata['actual_window_resource']=proof
     fixture.metadata['window_data_seg']=window_data_seg
@@ -247,7 +247,7 @@ def case(label,which,width,mono,keys,events,rect,volatile,text=b'Dialog text',re
          (16,0x80,{'name':b'dialog-tail'})], handles=[0],
         heap_seg=lists.DATA[1]-2,handle_seg=lists.HANDLE[1],
         contract='valid type-0 resource handle and linked free tail; consistent Ralloc counters')
-    empty=b.symbol('f_1B4E_000C'); zero=b.symbol('f_171C_001E')
+    empty=b.symbol('gfx_empty_driver_callback'); zero=b.symbol('f_171C_001E')
     fixture.args=[which&65535]; fixture.registers={};fixture.callee_pop=0;fixture.return_kind='s16'
     fixture.state={'keys':list(keys),'events':list(events),
         'rects':dict(rects or {'default':rect,0x2100:rect,0x2101:rect}),
@@ -270,7 +270,7 @@ def case(label,which,width,mono,keys,events,rect,volatile,text=b'Dialog text',re
                         b.Range('dialog_manager_state',dg+0x2f2a,0x28)]
     fixture.callbacks={
         'win_Open':b.Callback(1,win_open),
-        'f_1A53_00F0':b.Callback(3,resource),
+        'res_load_with_alloc_type':b.Callback(3,resource),
         'mem_Lock':b.Callback(2),
         'mem_Unlock':b.Callback(2),
         'db_ReleaseHandle':b.Callback(2),
@@ -278,12 +278,12 @@ def case(label,which,width,mono,keys,events,rect,volatile,text=b'Dialog text',re
         'win_GetObjRect':b.Callback(2,rect_result,('ax',),pop=4,
                                       project=lambda m,a:{'object':a[0],
                                         'rect':m.state['rects'].get(a[0],m.state['rects']['default'])}),
-        'f_1B4E_000C':b.Callback(3),
+        'gfx_empty_driver_callback':b.Callback(3),
         'GRectOutline':b.Callback(3,command,project=rect_input),
         'win_SetColorFromObjNum':b.Callback(0,command,('ax',)),
         'win_PrintTextInRect':b.Callback(4,command,('ax',),pop=8,project=text_input),
-        'f_1F58_0038':b.Callback(0,key_ready),
-        'f_1F58_0090':b.Callback(0,key_read),
+        'kbd_poll_bios_key':b.Callback(0,key_ready),
+        'kbd_read_key_code':b.Callback(0,key_read),
         'win_GetEvent':b.Callback(2,event,pop=4,project=lambda m,a:{'destination':'event'}),
         'win_Close':b.Callback(0,win_close,('ax',))}
     # The list structure is fixture support, not the dialog's output contract.

@@ -73,8 +73,8 @@ extern void far GetMousePos(struct Pt far *pt);
 extern int far f_00F8_02AC(void);
 extern void far OpenEditWindow(void);
 extern char near g_5A97;
-extern void far o00_3126_06A3(char far *src, char far *dst);
-extern void far o00_3126_04D8(char far *src, char far *dst);
+extern void far gfx_planar_map64_pack8(char far *src, char far *dst);
+extern void far gfx_planar_map128_pack8(char far *src, char far *dst);
 extern void far Windows_MakeTable1x1(char far *src, char far *dst, int mult);
 extern void far WindowsMono_MakeTable2x2b(char far *src, char far *dst, int y);
 extern void far WindowsMono_MakeTable2x2a(char far *src, char far *dst, int y);
@@ -84,11 +84,11 @@ extern int far fd_55B3_2996;
 extern char far * far mem_Alloc(long size, int flag, char far *name);
 extern char far * far fd_50F6_385E;
 extern char far * far fd_50F6_385A;
-extern void far o12_384C_0432(void);
-extern void far o12_384C_080E(void);
+extern void far map_generate_surface_colours(void);
+extern void far map_generate_nest_colours(void);
 extern int near g_8BD2;
 extern int far MapMode;
-extern void far o12_384C_0706(unsigned char far *map);
+extern void far map_expand_scent_colours(unsigned char far *map);
 extern unsigned char far PherMapBN[];
 extern unsigned char far PherMapBT[];
 extern unsigned char far PherMapRN[];
@@ -227,9 +227,9 @@ void far Mini_MakeTable(char far *src, char far *dst, int y)
     case 4:
     case 8:
         if (multiplier == 0x40)
-            o00_3126_06A3(src, dst);
+            gfx_planar_map64_pack8(src, dst);
         else
-            o00_3126_04D8(src, dst);
+            gfx_planar_map128_pack8(src, dst);
         break;
     case 2:
         Windows_MakeTable1x1(src, dst, multiplier);
@@ -262,27 +262,27 @@ void far Mini_DrawMapI(void)
         fd_50F6_385A = mem_Alloc(0x2000L, 1, "Generated map window");
     }
     if (fd_50F6_032E < 2)
-        o12_384C_0432();
+        map_generate_surface_colours();
     if (fd_50F6_032E > 1 && fd_50F6_032E < 4) {
-        o12_384C_080E();
+        map_generate_nest_colours();
         multiplier = 0x40;
         fd_50F6_3852 = g_8BD2 << 5;
     }
     switch (MapMode) {
     case 4:
-        o12_384C_0706(PherMapBN);
+        map_expand_scent_colours(PherMapBN);
         break;
     case 5:
-        o12_384C_0706(PherMapBT);
+        map_expand_scent_colours(PherMapBT);
         break;
     case 6:
-        o12_384C_0706(PherMapRN);
+        map_expand_scent_colours(PherMapRN);
         break;
     case 7:
-        o12_384C_0706(PherMapRT);
+        map_expand_scent_colours(PherMapRT);
         break;
     case 8:
-        o12_384C_0706(PherMapA);
+        map_expand_scent_colours(PherMapA);
         break;
     }
     (*g_9134)(fd_50F6_3842.left, fd_50F6_3842.top, fd_50F6_3842.left + fd_50F6_3852,

@@ -24,23 +24,23 @@ extern char far * near sys_errlist[];
 extern int far close(int fh);
 extern int far fd_50F6_10D0;
 extern void (far * far signal(int sig, void (far *func)(int)))(int);
-extern void far f_00F8_0585(void);
-extern void far o15_384C_0125(void);
+extern void far res_install_cache_hook(void);
+extern void far bios_probe_reset_disks(void);
 extern void far IBMInitStuff(int argc, char far * far *argv);
 extern void far db_SetDataBase(char far *name);
-extern void far f_00DF_0004(void);
+extern void far snd_init_driver_once(void);
 extern char near g_5A97;
 extern void far LoadMonoPats(void);
 extern void far ShowIntro(void);
 extern void far CustomerIDDialog(void);
 extern int far NewGame(int a);
-extern void far o15_384C_0152(char far *message, int code);
+extern void far app_cleanup_and_exit(char far *message, int code);
 extern int far fd_50F6_0A9C;
 extern int far fd_50F6_0AA6;
 extern long far MacTickCount(void);
 extern int far GameSpeed;
 extern void far win_NoWindowsShouldBeLocked(void);
-extern void far f_0000_046F(void);
+extern void far snd_service_pending(void);
 extern long far fd_50F6_383A;
 void far f_15F8_0313(void);
 extern int far GamePaused;
@@ -55,11 +55,11 @@ extern void far DrawMap(void);
 extern void far MakeDMap(int a);
 extern int far WaitedEnough(long *stamp, int delay);
 extern int far YardMode;
-extern void far o13_384C_03F8(void);
+extern void far yard_refresh_message_area(void);
 extern void far UpdateYard(void);
 extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
-extern void far f_00F8_01BE(void);
+extern void far ui_pump_events_edge_scroll(void);
 
 void main(int argc, char far * far *argv)
 {
@@ -87,17 +87,17 @@ void main(int argc, char far * far *argv)
     fd_50F6_10D0 = fh[0];
     signal(0x15, (void (far *)(int))1L);
     signal(2, (void (far *)(int))1L);
-    f_00F8_0585();
-    o15_384C_0125();
+    res_install_cache_hook();
+    bios_probe_reset_disks();
     IBMInitStuff(argc, argv);
     db_SetDataBase("sound");
-    f_00DF_0004();
+    snd_init_driver_once();
     if (g_5A97 & 1)
         LoadMonoPats();
     ShowIntro();
     CustomerIDDialog();
     if (NewGame(1) < 0)
-        o15_384C_0152("SimAnt cancelled.", 0);
+        app_cleanup_and_exit("SimAnt cancelled.", 0);
     fd_50F6_0A9C = 0;
     fd_50F6_0AA6 = 0;
     frames = 0;
@@ -106,7 +106,7 @@ void main(int argc, char far * far *argv)
     for (;;) {
         win_NoWindowsShouldBeLocked();
         frames++;
-        f_0000_046F();
+        snd_service_pending();
         fd_50F6_383A++;
         f_15F8_0313();
         i = MacTickCount();
@@ -132,7 +132,7 @@ void main(int argc, char far * far *argv)
                 if (WaitedEnough(&stamp, 0x48) || YardMode <= 2)
                     UpdateYard();
                 else if (YardMode > 1)
-                    o13_384C_03F8();
+                    yard_refresh_message_area();
             }
             if (win_IsWinOpen(0)) {
                 UpdateEdit();
@@ -140,10 +140,10 @@ void main(int argc, char far * far *argv)
             }
             last = frames;
             do
-                f_00F8_01BE();
+                ui_pump_events_edge_scroll();
             while (MacTickCount() < i);
         }
-        f_00F8_01BE();
+        ui_pump_events_edge_scroll();
         fd_50F6_0A9C = (fd_50F6_0A9C + 1) & 0x3f;
     }
 }

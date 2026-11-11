@@ -3,7 +3,7 @@
   "function": "win_DrawBitMap",
   "module": "root:259D",
   "status": "BEHAVIOR_EXACT_CONFIRMED",
-  "definition_sha256": "d53741a75762557fb111a9ec45f58fe55302c56c1d446083f7f5def6bd625c54",
+  "definition_sha256": "d9195d29745d9842c40974272efa7dce1786440b4665487eaab9224ca744d9ef",
   "historical_review": {
     "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
     "path": "work/source-only-dos/static-completeness/win_DrawBitMap.json",
@@ -1181,6 +1181,1818 @@
       ],
       "note": "Lexical identifier rename; semantic review unchanged.",
       "prior_receipt_sha256": "947f74e921bba7c8e869d1df3172ef16f7d0a599c52138288288cef074788ba9"
+    },
+    {
+      "operations": [
+        {
+          "old": "o00_3126_0000",
+          "new": "gfx_planar_map128_pack2",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:3126:0000, current source src/platform/video/planar_minimap.asm: Translate 128 colour-index input bytes into four-plane mini-map pattern bytes (2 input samples per output byte). Evidence: build/workers/names-gfx/descriptive.json#S00:3126:0000; historical review citations: src/S00/m3126.asm:99 (o00_3126_0000); original-dos.json#S00:3126:0000 ; XLAT dither table 1F9E; outer CX=64, consumes 2 LODSB per iteration and packs high/low or successive bit fields. Destination offsets encode row/plane duplication; source names do not establish original map geometry. ; src/S12/m384C.c:65-86 binds mode-selected map converters fd_50F6_38B8/38BC; caller consumes their native output through driver bitmap paths."
+        },
+        {
+          "old": "o00_3126_0137",
+          "new": "gfx_planar_map64_pack2",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:3126:0137, current source src/platform/video/planar_minimap.asm: Translate 64 colour-index input bytes into four-plane mini-map pattern bytes (2 input samples per output byte). Evidence: build/workers/names-gfx/descriptive.json#S00:3126:0137; historical review citations: src/S00/m3126.asm:216 (o00_3126_0137); original-dos.json#S00:3126:0137 ; XLAT dither table 1F9E; outer CX=32, consumes 2 LODSB per iteration and packs high/low or successive bit fields. Destination offsets encode row/plane duplication; source names do not establish original map geometry. ; src/S12/m384C.c:65-86 binds mode-selected map converters fd_50F6_38B8/38BC; caller consumes their native output through driver bitmap paths."
+        },
+        {
+          "old": "o00_3126_026A",
+          "new": "gfx_planar_map128_pack4",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:3126:026A, current source src/platform/video/planar_minimap.asm: Translate 128 colour-index input bytes into four-plane mini-map pattern bytes (4 input samples per output byte). Evidence: build/workers/names-gfx/descriptive.json#S00:3126:026A; historical review citations: src/S00/m3126.asm:333 (o00_3126_026A); original-dos.json#S00:3126:026A ; XLAT dither table 2002; outer CX=32, consumes 4 LODSB per iteration and packs high/low or successive bit fields. Destination offsets encode row/plane duplication; source names do not establish original map geometry. ; src/S12/m384C.c:65-86 binds mode-selected map converters fd_50F6_38B8/38BC; caller consumes their native output through driver bitmap paths."
+        },
+        {
+          "old": "o00_3126_03A9",
+          "new": "gfx_planar_map64_pack4",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:3126:03A9, current source src/platform/video/planar_minimap.asm: Translate 64 colour-index input bytes into four-plane mini-map pattern bytes (4 input samples per output byte). Evidence: build/workers/names-gfx/descriptive.json#S00:3126:03A9; historical review citations: src/S00/m3126.asm:468 (o00_3126_03A9); original-dos.json#S00:3126:03A9 ; XLAT dither table 2002; outer CX=16, consumes 4 LODSB per iteration and packs high/low or successive bit fields. Destination offsets encode row/plane duplication; source names do not establish original map geometry. ; src/S12/m384C.c:65-86 binds mode-selected map converters fd_50F6_38B8/38BC; caller consumes their native output through driver bitmap paths."
+        },
+        {
+          "old": "o00_3126_04D8",
+          "new": "gfx_planar_map128_pack8",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:3126:04D8, current source src/platform/video/planar_minimap.asm: Translate 128 colour-index input bytes into four-plane mini-map pattern bytes (8 input samples per output byte). Evidence: build/workers/names-gfx/descriptive.json#S00:3126:04D8; historical review citations: src/S00/m3126.asm:603 (o00_3126_04D8); original-dos.json#S00:3126:04D8 ; XLAT dither table mode-dependent 1F9E/2002; outer CX=16, consumes 8 LODSB per iteration and packs high/low or successive bit fields. Destination offsets encode row/plane duplication; source names do not establish original map geometry. ; src/S04/m35F5.c:230-232 directly selects these converters for map rendering."
+        },
+        {
+          "old": "o00_3126_06A3",
+          "new": "gfx_planar_map64_pack8",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:3126:06A3, current source src/platform/video/planar_minimap.asm: Translate 64 colour-index input bytes into four-plane mini-map pattern bytes (8 input samples per output byte). Evidence: build/workers/names-gfx/descriptive.json#S00:3126:06A3; historical review citations: src/S00/m3126.asm:822 (o00_3126_06A3); original-dos.json#S00:3126:06A3 ; XLAT dither table mode-dependent 1F9E/2002; outer CX=8, consumes 8 LODSB per iteration and packs high/low or successive bit fields. Destination offsets encode row/plane duplication; source names do not establish original map geometry. ; src/S04/m35F5.c:230-232 directly selects these converters for map rendering."
+        },
+        {
+          "old": "o00_3126_086E",
+          "new": "gfx_planar_fatal_display_jump",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:3126:086E, current source src/platform/video/planar_minimap.asm: Tail jump to DOS overlay fatal-display/cleanup entry. Evidence: build/workers/names-gfx/descriptive.json#S00:3126:086E; historical review citations: src/S00/m3126.asm:1041 (o00_3126_086E); original-dos.json#S00:3126:086E ; Far JMP to o15_384C_0000; no local graphics calculation."
+        },
+        {
+          "old": "o00_31AD_0004",
+          "new": "gfx_planar_dither_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0004, current source src/platform/video/planar_raster.asm: Planar: Draw a colour/pattern overlay rectangle; driver-specific implementation, not plain solid fill. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0004; historical review citations: src/S00/m31AD.asm:120 (o00_31AD_0004); original-dos.json#S00:31AD:0004 ; src/S00/m3126.asm DispatchS00[19] -> o00_31AD_0004; src/program.json aliases map DGROUP:9174 to slot 19. ; root:1CE2:0104 forwards Rect fields and mode to g_9174; S00 uses a 16-byte colour dither table, S01 temporarily ORs its pattern fill, S02 ORs an alternating checker, S03 uses g_2236 masks."
+        },
+        {
+          "old": "o00_31AD_001C",
+          "new": "gfx_planar_dither_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:001C, current source src/platform/video/planar_raster.asm: Rasterize colour-selected dither overlay without clip-list dispatch. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:001C; historical review citations: src/S00/m31AD.asm:133 (o00_31AD_001C); original-dos.json#S00:31AD:001C ; Slot19 wrapper0004 chooses it; colour low nibble selects 16-byte g_41D0 pattern, four-row phase, GC masks and fore-colour hardware state."
+        },
+        {
+          "old": "o00_31AD_013A",
+          "new": "gfx_planar_pattern_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:013A, current source src/platform/video/planar_raster.asm: Rasterize patterned foreground/background rectangle without clip-list dispatch. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:013A; historical review citations: src/S00/m31AD.asm:260 (o00_31AD_013A); original-dos.json#S00:31AD:013A ; Slot4 wrapper0122; reads pattern bytes and colour planes, applies left/right edge masks."
+        },
+        {
+          "old": "o00_31AD_0394",
+          "new": "gfx_planar_invert_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0394, current source src/platform/video/planar_raster.asm: Invert planar screen rectangle with edge masks. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0394; historical review citations: src/S00/m31AD.asm:559 (o00_31AD_0394); original-dos.json#S00:31AD:0394 ; Slot5 wrapper037C; GC XOR mode and all-plane painting followed by GC reset142B."
+        },
+        {
+          "old": "o00_31AD_0550",
+          "new": "gfx_planar_capture_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0550, current source src/platform/video/planar_raster.asm: Planar: Copy a screen rectangle to RAM and write width/height header. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0550; historical review citations: src/S00/m31AD.asm:778 (o00_31AD_0550); original-dos.json#S00:31AD:0550 ; src/S00/m3126.asm DispatchS00[8] -> o00_31AD_0550; src/program.json aliases map DGROUP:9148 to slot 8. ; GSaveRect and mouse save-under call g_9148 with rectangle and far buffer; bodies read VRAM and store the two dimensions before payload."
+        },
+        {
+          "old": "o00_31AD_062A",
+          "new": "gfx_planar_set_or",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:062A, current source src/platform/video/planar_raster.asm: Planar: Select OR raster operation (code 0x10). Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:062A; historical review citations: src/S00/m31AD.asm:880 (o00_31AD_062A); original-dos.json#S00:31AD:062A ; src/S00/m3126.asm DispatchS00[13] -> o00_31AD_062A; src/program.json aliases map DGROUP:915C to slot 13. ; Cursor save/draw code and operation selector use these entries; S00 writes GC function code, S01/S02/S03 patch OR instruction templates."
+        },
+        {
+          "old": "o00_31AD_062E",
+          "new": "gfx_planar_set_xor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:062E, current source src/platform/video/planar_raster.asm: Planar: Select XOR raster operation (code 0x18). Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:062E; historical review citations: src/S00/m31AD.asm:885 (o00_31AD_062E); original-dos.json#S00:31AD:062E ; src/S00/m3126.asm DispatchS00[14] -> o00_31AD_062E; src/program.json aliases map DGROUP:9160 to slot 14. ; Operation selector dispatches 0x18 to this entry; templates use XOR and S00 stores graphics-controller function code."
+        },
+        {
+          "old": "o00_31AD_0632",
+          "new": "gfx_planar_set_and",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0632, current source src/platform/video/planar_raster.asm: Planar: Select AND raster operation (code 0x08). Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0632; historical review citations: src/S00/m31AD.asm:890 (o00_31AD_0632); original-dos.json#S00:31AD:0632 ; src/S00/m3126.asm DispatchS00[15] -> o00_31AD_0632; src/program.json aliases map DGROUP:9164 to slot 15. ; Cursor mask composition calls g_9164 before its mask; templates use AND."
+        },
+        {
+          "old": "o00_31AD_0636",
+          "new": "gfx_planar_set_copy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0636, current source src/platform/video/planar_raster.asm: Planar: Select replace/copy raster operation (code 0). Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0636; historical review citations: src/S00/m31AD.asm:895 (o00_31AD_0636); original-dos.json#S00:31AD:0636 ; src/S00/m3126.asm DispatchS00[16] -> o00_31AD_0636; src/program.json aliases map DGROUP:9168 to slot 16. ; Mouse drawing and state restoration call g_9168; S00 stores zero and other drivers patch identity templates."
+        },
+        {
+          "old": "o00_31AD_063C",
+          "new": "gfx_planar_set_raster_op",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:063C, current source src/platform/video/planar_raster.asm: Planar: Select raster operation from argument (0x10 OR, 0x18 XOR, 8 AND, otherwise copy). Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:063C; historical review citations: src/S00/m31AD.asm:902 (o00_31AD_063C); original-dos.json#S00:31AD:063C ; src/S00/m3126.asm DispatchS00[23] -> o00_31AD_063C; src/program.json aliases map DGROUP:9184 to slot 23. ; Mouse redraw trampoline restores saved g_3DD2 through g_9184; entries store mode or dispatch to four self-modifying selectors."
+        },
+        {
+          "old": "o00_31AD_0647",
+          "new": "gfx_planar_put_cached_tile",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0647, current source src/platform/video/planar_raster.asm: Draw fixed 16x16 tile from cached video memory, with clipping when required. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0647; historical review citations: src/S00/m31AD.asm:911 (o00_31AD_0647); original-dos.json#S00:31AD:0647 ; PutTile passes offset(g_94E4-0x300)<<5; tests x&7 and clip list, latch-copy fast path or per-plane fallback."
+        },
+        {
+          "old": "o00_31AD_0839",
+          "new": "gfx_planar_mask_tile_to_screen",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0839, current source src/platform/video/planar_raster.asm: Combine four-plane masked tile with background into g_3D20 and draw16x16 result. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0839; historical review citations: src/S00/m31AD.asm:1192 (o00_31AD_0839); original-dos.json#S00:31AD:0839 ; Reads mask+four plane words and computes bg XOR((bg XOR fg) AND mask); calls0CF9 with scratch bitmap payload."
+        },
+        {
+          "old": "o00_31AD_0D06",
+          "new": "gfx_planar_put_picture_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0D06, current source src/platform/video/planar_raster.asm: Planar: Rasterize native colour bitmap payload with precomputed horizontal clipping; no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0D06; historical review citations: src/S00/m31AD.asm:1916 (o00_31AD_0D06); original-dos.json#S00:31AD:0D06 ; src/S00/m3126.asm DispatchS00[10] -> o00_31AD_0D06; src/program.json aliases map DGROUP:9150 to slot 10. ; g_9150 is called by src/root/m1D8E.c with fd_55B3_3DE6/8 as left/right trims; slot 9 dispatches here when clipping is off."
+        },
+        {
+          "old": "o00_31AD_0F56",
+          "new": "gfx_planar_prepare_bitmap_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:0F56, current source src/platform/video/planar_raster.asm: Compute planar blit edge masks, source skips, shifts and row widths. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:0F56; historical review citations: src/S00/m31AD.asm:2205 (o00_31AD_0F56); original-dos.json#S00:31AD:0F56 ; Called by colour/mono raw blitters, consumes fd_55B3_3DE6/8 trims and x,width; optionally programs GC raster op."
+        },
+        {
+          "old": "o00_31AD_1002",
+          "new": "gfx_planar_blit_row_rop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1002, current source src/platform/video/planar_raster.asm: Blit a planar row with edge masks and selected raster-operation patch. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1002; historical review citations: src/S00/m31AD.asm:2279 (o00_31AD_1002); original-dos.json#S00:31AD:1002 ; Loads destination latch before edge writes, programs GC bit mask, template at1025; used by raw bitmap routines."
+        },
+        {
+          "old": "o00_31AD_1065",
+          "new": "gfx_planar_blit_row_copy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1065, current source src/platform/video/planar_raster.asm: Copy a planar row with edge masks, using MOVSB for full interior. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1065; historical review citations: src/S00/m31AD.asm:2345 (o00_31AD_1065); original-dos.json#S00:31AD:1065 ; Shares single-byte edge exit104E with1002; fast copy path does not apply per-byte raster template."
+        },
+        {
+          "old": "o00_31AD_110C",
+          "new": "gfx_planar_shift_and_blit_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:110C, current source src/platform/video/planar_raster.asm: Shift bitmap bits through a stack row buffer then apply edge/ROP writes. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:110C; historical review citations: src/S00/m31AD.asm:2432 (o00_31AD_110C); original-dos.json#S00:31AD:110C ; Reads g_3DEE/g_3DF2 shift/count; combines spill byte and masks while writing one selected plane."
+        },
+        {
+          "old": "o00_31AD_1213",
+          "new": "gfx_planar_put_image_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1213, current source src/platform/video/planar_raster.asm: Planar: Rasterize monochrome bitmap payload with precomputed trims and foreground/background mapping. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1213; historical review citations: src/S00/m31AD.asm:2596 (o00_31AD_1213); original-dos.json#S00:31AD:1213 ; src/S00/m3126.asm DispatchS00[12] -> o00_31AD_1213; src/program.json aliases map DGROUP:9158 to slot 12. ; src/root/m1D8E.c uses g_9158; S00 expands each mono row to four selected planes, S02 maps bits/bytes via fore/back, S03 expands to nibbles."
+        },
+        {
+          "old": "o00_31AD_142B",
+          "new": "gfx_planar_reset_gc",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:142B, current source src/platform/video/planar_raster.asm: Restore EGA/VGA controller registers for drawing. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:142B; historical review citations: src/S00/m31AD.asm:2849 (o00_31AD_142B); original-dos.json#S00:31AD:142B ; GC5=0,GC1=F,sequencer2=F,GC8=FF,GC3=0,GC0=0."
+        },
+        {
+          "old": "o00_31AD_145E",
+          "new": "gfx_planar_install_dispatch",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:145E, current source src/platform/video/planar_raster.asm: Install planar dispatch table into active callback cells. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:145E; historical review citations: src/S00/m31AD.asm:2883 (o00_31AD_145E); original-dos.json#S00:31AD:145E ; Loads g_20FC into ES:SI then calls resident1B4E:0165."
+        },
+        {
+          "old": "o00_31AD_1468",
+          "new": "gfx_planar_video_capacity",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1468, current source src/platform/video/planar_raster.asm: Return BIOS-feature-selected video-capacity table value. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1468; historical review citations: src/S00/m31AD.asm:2889 (o00_31AD_1468); original-dos.json#S00:31AD:1468 ; Reads BDA0487h bits60h, indexes g_2078 constants0x4000/0x8000/0xC000/0x10000/0x20000 (16/32/48/64/128 KiB). No caller establishes whether the API reports per-plane or total memory."
+        },
+        {
+          "old": "o00_31AD_1481",
+          "new": "gfx_planar_restore_text_mode",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1481, current source src/platform/video/planar_raster.asm: Planar: Restore text video mode. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1481; historical review citations: src/S00/m31AD.asm:2902 (o00_31AD_1481); original-dos.json#S00:31AD:1481 ; src/S00/m3126.asm DispatchS00[20] -> o00_31AD_1481; src/program.json aliases map DGROUP:9178 to slot 20. ; root:1C62:0090 calls g_9178 on shutdown; S00/S02/S03 select BIOS mode 3, S01 uses saved g_3DAC mode."
+        },
+        {
+          "old": "o00_31AD_1499",
+          "new": "gfx_planar_draw_line_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1499, current source src/platform/video/planar_raster.asm: Planar: Rasterize a line into VRAM with no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1499; historical review citations: src/S00/m31AD.asm:2918 (o00_31AD_1499); original-dos.json#S00:31AD:1499 ; src/S00/m3126.asm DispatchS00[18] -> o00_31AD_1499; src/program.json aliases map DGROUP:9170 to slot 18. ; root:1D8E:0435 calls g_9170 after clipping endpoints; bodies step pixels using deltas/error and mode-specific storage."
+        },
+        {
+          "old": "o00_31AD_166A",
+          "new": "gfx_planar_select_small_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:166A, current source src/platform/video/planar_raster.asm: Planar: Select the driver small font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:166A; historical review citations: src/S00/m31AD.asm:3146 (o00_31AD_166A); original-dos.json#S00:31AD:166A ; src/S00/m3126.asm DispatchS00[1] -> o00_31AD_166A; src/program.json aliases map DGROUP:912C to slot 1. ; font_SetFont in src/root/m24AB.c selects g_912C (slot 1) or g_9130 (slot 2); entries change g_3DD6/8 and g_3DDA/DC/DE."
+        },
+        {
+          "old": "o00_31AD_168C",
+          "new": "gfx_planar_select_big_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:168C, current source src/platform/video/planar_raster.asm: Planar: Select the driver large font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:168C; historical review citations: src/S00/m31AD.asm:3160 (o00_31AD_168C); original-dos.json#S00:31AD:168C ; src/S00/m3126.asm DispatchS00[2] -> o00_31AD_168C; src/program.json aliases map DGROUP:9130 to slot 2. ; font_SetFont in src/root/m24AB.c selects g_9130 (slot 2); the cells are height 14 for S00/S01 and 8 for S02/S03."
+        },
+        {
+          "old": "o00_31AD_16E4",
+          "new": "gfx_planar_fill_box_unsorted",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:16E4, current source src/platform/video/planar_raster.asm: Clip and fill a rectangle without the slot3 coordinate-normalization preamble. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:16E4; historical review citations: src/S00/m31AD.asm:3204 (o00_31AD_16E4); original-dos.json#S00:31AD:16E4 ; Calls root1D8E:0384 if clip active, else16FC; slot3 16A9 normalizes endpoints first."
+        },
+        {
+          "old": "o00_31AD_16FC",
+          "new": "gfx_planar_fill_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:16FC, current source src/platform/video/planar_raster.asm: Fill solid-colour planar rectangle using GC set/reset and edge masks. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:16FC; historical review citations: src/S00/m31AD.asm:3217 (o00_31AD_16FC); original-dos.json#S00:31AD:16FC ; Shared L1702 with normalized slot3 entry; maps colour low4 to GC0 and enables all planes."
+        },
+        {
+          "old": "o00_31AD_186A",
+          "new": "gfx_planar_upload_plane",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:186A, current source src/platform/video/planar_raster.asm: Copy source bytes into one selected video plane at supplied destination offset. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:186A; historical review citations: src/S00/m31AD.asm:3395 (o00_31AD_186A); original-dos.json#S00:31AD:186A ; Sequencer plane mask=1<<page, ES=g_3DB0, byte count argument; LoadTiles writes four plane runs at offsetC000."
+        },
+        {
+          "old": "o00_31AD_18BA",
+          "new": "gfx_planar_upload_tiles",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:18BA, current source src/platform/video/planar_raster.asm: Upload interleaved four-plane tile words to planar VRAM. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:18BA; historical review citations: src/S00/m31AD.asm:3442 (o00_31AD_18BA); original-dos.json#S00:31AD:18BA ; LoadTiles root:0250:0256 passes source,A000,256; resets GC, loops sequencer plane masks1/2/4/8 and native tile words. Static callback slot22 points here but has no discovered indirect caller."
+        },
+        {
+          "old": "o00_31AD_1950",
+          "new": "gfx_planar_move_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1950, current source src/platform/video/planar_raster.asm: Planar: Move a screen rectangle to another position with overlap-aware row/copy direction. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1950; historical review citations: src/S00/m31AD.asm:3523 (o00_31AD_1950); original-dos.json#S00:31AD:1950 ; src/S00/m3126.asm DispatchS00[24] -> o00_31AD_1950; src/program.json aliases map DGROUP:9188 to slot 24. ; win_ScrollUp/Down-related root:23E6:054A/0615 source calls g_9188; src/S16/m384C.c credits scroll also passes source rectangle and destination x,y. Initializers can replace the S01 cell."
+        },
+        {
+          "old": "o00_31AD_1A8F",
+          "new": "gfx_planar_read_tile_plane",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1A8F, current source src/platform/video/planar_raster.asm: Read 128 bytes from selected video plane into g_3D20. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1A8F; historical review citations: src/S00/m31AD.asm:3667 (o00_31AD_1A8F); original-dos.json#S00:31AD:1A8F ; GC read-map register4 from first argument; DS=VRAM, SI=offset,REP MOVSW count40h."
+        },
+        {
+          "old": "o00_31AD_1AC4",
+          "new": "gfx_planar_select_tiny_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1AC4, current source src/platform/video/planar_raster.asm: Select optional 4x6 font when its pointer is non-null. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1AC4; historical review citations: src/S00/m31AD.asm:3698 (o00_31AD_1AC4); original-dos.json#S00:31AD:1AC4 ; g_3DA8/AA pointer, g_3DDC=6,g_3DDE=4,g_3DDA=6; 320x200 initializer replaces slot1 with it."
+        },
+        {
+          "old": "o00_31AD_1AE7",
+          "new": "gfx_planar_init_320x200",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1AE7, current source src/platform/video/planar_raster.asm: Install planar320x200 mode, row offsets and adapted font callbacks. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1AE7; historical review citations: src/S00/m31AD.asm:3712 (o00_31AD_1AE7); original-dos.json#S00:31AD:1AE7 ; Sets mode0Dh, width320,pitch40,height200; slot1 becomes1AC4,slot2 becomes166A."
+        },
+        {
+          "old": "o00_31AD_1B49",
+          "new": "gfx_planar_draw_life_320",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1B49, current source src/platform/video/planar_raster.asm: Compose a life sprite and terrain into scratch, then draw a 16x16 tile in the planar 320x200 path. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1B49; historical review citations: src/S00/m31AD.asm:3753 (o00_31AD_1B49); original-dos.json#S00:31AD:1B49 ; root0250:0721 chooses this for g_5A97==4; calls1B7D then colour slot9 via0CF9."
+        },
+        {
+          "old": "o00_31AD_1B7D",
+          "new": "gfx_planar_compose_life_320",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:1B7D, current source src/platform/video/planar_raster.asm: Compose a life sprite and terrain planes into the 128-byte scratch bitmap used by the planar 320x200 path. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:1B7D; historical review citations: src/S00/m31AD.asm:3778 (o00_31AD_1B7D); original-dos.json#S00:31AD:1B7D ; root0250:0915 selects this for g_5A97==4; mask modes0,1,3 choose unrolled bg/fg/mask merges, output g_3D20."
+        },
+        {
+          "old": "o00_31AD_2AB4",
+          "new": "gfx_planar_init_640x350",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:2AB4, current source src/platform/video/planar_mode_blits.asm: Install planar driver and BIOS mode10h with350 row offsets. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:2AB4; historical review citations: src/S00/m31AD_2AB4.asm:34 (o00_31AD_2AB4); original-dos.json#S00:31AD:2AB4 ; 350 STOSW offsets at80 bytes/row; install145E then INT10 via1B4E:015B."
+        },
+        {
+          "old": "o00_31AD_2AE5",
+          "new": "gfx_planar_init_640x480",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:2AE5, current source src/platform/video/planar_mode_blits.asm: Install planar driver and BIOS mode12h with480 row offsets. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:2AE5; historical review citations: src/S00/m31AD_2AB4.asm:61 (o00_31AD_2AE5); original-dos.json#S00:31AD:2AE5 ; Sets g_3DB4=480;480 offsets at80 bytes/row; install145E then mode12h."
+        },
+        {
+          "old": "o00_31AD_2B1A",
+          "new": "gfx_planar_compose_life_ems",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:2B1A, current source src/platform/video/planar_mode_blits.asm: Compose EMS life sprite and cached terrain plane into g_3D20. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:2B1A; historical review citations: src/S00/m31AD_2AB4.asm:89 (o00_31AD_2B1A); original-dos.json#S00:31AD:2B1A ; root0250:0915 passes cached col,row and EMS pointer; GC read-map from row; unrolled mask+four-plane merges."
+        },
+        {
+          "old": "o00_31AD_2FDA",
+          "new": "gfx_planar_draw_life_ems",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:2FDA, current source src/platform/video/planar_mode_blits.asm: Compose EMS life sprite with cached terrain then draw16x16. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:2FDA; historical review citations: src/S00/m31AD_2AB4.asm:805 (o00_31AD_2FDA); original-dos.json#S00:31AD:2FDA ; root0250:0721 passes screen x,y and tile col,row; calls2B1A then0CF9."
+        },
+        {
+          "old": "o00_31AD_300B",
+          "new": "gfx_planar_draw_life_hires",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:300B, current source src/platform/video/planar_mode_blits.asm: Compose a masked life sprite and terrain into scratch, then draw a 16x16 tile in the planar non-EMS high-resolution path. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:300B; historical review citations: src/S00/m31AD_2AB4.asm:829 (o00_31AD_300B); original-dos.json#S00:31AD:300B ; root0250:0721 chooses when g_5A97!=4 and EMS inactive; calls303F then0CF9."
+        },
+        {
+          "old": "o00_31AD_303F",
+          "new": "gfx_planar_compose_life_hires",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:31AD:303F, current source src/platform/video/planar_mode_blits.asm: Compose a masked life sprite and terrain from video memory into scratch in the planar non-EMS high-resolution path. Evidence: build/workers/names-gfx/descriptive.json#S00:31AD:303F; historical review citations: src/S00/m31AD_2AB4.asm:854 (o00_31AD_303F); original-dos.json#S00:31AD:303F ; root0250:0915 chooses it outside mode4; mode flags select colour-plane merges, g_3D20 output."
+        },
+        {
+          "old": "o00_35A6_0006",
+          "new": "gfx_planar_buffer_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:35A6:0006, current source src/platform/video/planar_sprites.asm: No operation; module entry stub. Evidence: build/workers/names-gfx/descriptive.json#S00:35A6:0006; historical review citations: src/S00/m35A6.asm:24 (o00_35A6_0006); original-dos.json#S00:35A6:0006 ; Lone RETF; no platform API identity inferred."
+        },
+        {
+          "old": "o00_35A6_0007",
+          "new": "gfx_planar_mask_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:35A6:0007, current source src/platform/video/planar_sprites.asm: Composite masked bitmap into RAM four interleaved one-bit planes at supplied x,y offset. Evidence: build/workers/names-gfx/descriptive.json#S00:35A6:0007; historical review citations: src/S00/m35A6.asm:29 (o00_35A6_0007); original-dos.json#S00:35A6:0007 ; Source and destination start with width,height; per-pixel mask blend bg XOR((bg XOR fg) AND mask). Caller hanim_RenderAnimSet uses fd_50F6_37EA for type3."
+        },
+        {
+          "old": "o00_35A6_0177",
+          "new": "gfx_planar_copy_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:35A6:0177, current source src/platform/video/planar_sprites.asm: Copy unmasked bitmap into RAM four interleaved one-bit planes, preserving partial-byte edges. Evidence: build/workers/names-gfx/descriptive.json#S00:35A6:0177; historical review citations: src/S00/m35A6.asm:208 (o00_35A6_0177); original-dos.json#S00:35A6:0177 ; Source/destination width,height header; right-edge mask; hanim_RenderAnimSet uses fd_50F6_3B58 for type0."
+        },
+        {
+          "old": "o00_35A6_02FD",
+          "new": "gfx_planar_buffer_intersection",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:35A6:02FD, current source src/platform/video/planar_sprites.asm: Copy overlap of two rectangle-positioned RAM bitmaps in four interleaved one-bit planes. Evidence: build/workers/names-gfx/descriptive.json#S00:35A6:02FD; historical review citations: src/S00/m35A6.asm:398 (o00_35A6_02FD); original-dos.json#S00:35A6:02FD ; Four rectangle bounds checked for overlap, max/min intersection, source/dest+4, row copies. hanim_RenderAnimSet calls fd_50F6_37EE through f_2662_0262."
+        },
+        {
+          "old": "o00_35A6_0406",
+          "new": "gfx_planar_scratch_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S00:35A6:0406, current source src/platform/video/planar_sprites.asm: Copy fixed tile from g_3D20 into RAM four interleaved one-bit planes with caller stride. Evidence: build/workers/names-gfx/descriptive.json#S00:35A6:0406; historical review citations: src/S00/m35A6.asm:525 (o00_35A6_0406); original-dos.json#S00:35A6:0406 ; DrawSpider calls fd_50F6_37E6 after preparing tile scratch; fixed copy dimensions are S00 16x16/four planes, S01 16x16, S03 12x12."
+        },
+        {
+          "old": "o01_3126_0000",
+          "new": "gfx_mono_init_banked_640x400",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0000, current source src/platform/video/mono_raster.asm: Initialize 640x400 one-bit interleaved display at B800 and install matching move callback. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0000; historical review citations: src/S01/m3126.asm:147 (o01_3126_0000); original-dos.json#S01:3126:0000 ; 400 row offsets with bank increments2000h; cell24 patched to11F0; BIOS mode40h. Hardware model not inferred from resolution alone."
+        },
+        {
+          "old": "o01_3126_0068",
+          "new": "gfx_mono_init_ega480_mono",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0068, current source src/platform/video/mono_raster.asm: Select 480-row one-bit EGA/VGA variant and share initialization with007D. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0068; historical review citations: src/S01/m3126.asm:192 (o01_3126_0068); original-dos.json#S01:3126:0068 ; CX=480,g_2182=11h; falls into common row table/install/mode sequence."
+        },
+        {
+          "old": "o01_3126_007D",
+          "new": "gfx_mono_init_ega350_mono",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:007D, current source src/platform/video/mono_raster.asm: Initialize 640x350 one-bit EGA display using BIOS equipment/video data. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:007D; historical review citations: src/S01/m3126.asm:205 (o01_3126_007D); original-dos.json#S01:3126:007D ; BDA0463h chooses g_2182 0Fh/10h;350 row offsets; active screen-copy cell replaced by0F83."
+        },
+        {
+          "old": "o01_3126_010A",
+          "new": "gfx_mono_init_hercules",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:010A, current source src/platform/video/mono_raster.asm: Initialize 720x348 Hercules one-bit display and install bank-aware move callback. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:010A; historical review citations: src/S01/m3126.asm:274 (o01_3126_010A); original-dos.json#S01:3126:010A ; B000 segment,348 rows,90-byte row pitch across four banks; calls1610."
+        },
+        {
+          "old": "o01_3126_019A",
+          "new": "gfx_mono_select_small_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:019A, current source src/platform/video/mono_raster.asm: Mono: Select the driver small font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:019A; historical review citations: src/S01/m3126.asm:341 (o01_3126_019A); original-dos.json#S01:3126:019A ; src/S01/m3126.asm DispatchS01[1] -> o01_3126_019A; src/program.json aliases map DGROUP:912C to slot 1. ; font_SetFont in src/root/m24AB.c selects g_912C (slot 1) or g_9130 (slot 2); entries change g_3DD6/8 and g_3DDA/DC/DE."
+        },
+        {
+          "old": "o01_3126_01B2",
+          "new": "gfx_mono_select_big_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:01B2, current source src/platform/video/mono_raster.asm: Mono: Select the driver large font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:01B2; historical review citations: src/S01/m3126.asm:350 (o01_3126_01B2); original-dos.json#S01:3126:01B2 ; src/S01/m3126.asm DispatchS01[2] -> o01_3126_01B2; src/program.json aliases map DGROUP:9130 to slot 2. ; font_SetFont in src/root/m24AB.c selects g_9130 (slot 2); the cells are height 14 for S00/S01 and 8 for S02/S03."
+        },
+        {
+          "old": "o01_3126_01CA",
+          "new": "gfx_mono_dither_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:01CA, current source src/platform/video/mono_raster.asm: Temporarily select OR pattern operation, draw rectangle and restore copy mode. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:01CA; historical review citations: src/S01/m3126.asm:359 (o01_3126_01CA); original-dos.json#S01:3126:01CA ; Slot19; helperL0BBA changes templates,024C draws, helperL0BCB restores."
+        },
+        {
+          "old": "o01_3126_024C",
+          "new": "gfx_mono_fill_or_pattern_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:024C, current source src/platform/video/mono_raster.asm: Mono: Fill a rectangle from mono colour/pattern state; single entry serves both solid-fill slot3 and pattern-fill slot4. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:024C; historical review citations: src/S01/m3126.asm:406 (o01_3126_024C); original-dos.json#S01:3126:024C ; DispatchS01[3] and[4] alias024C. Named GRectFill/GBoxOutline use slot3, GRectPartialMixedOutline/win_RectFill use slot4; common rasterizer handles attribute/pattern state and clipped VRAM rows."
+        },
+        {
+          "old": "o01_3126_0437",
+          "new": "gfx_mono_picture_size",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0437, current source src/platform/video/mono_raster.asm: Mono: Return native colour capture size, including a 4-byte width/height header. Also implements slot 7. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0437; historical review citations: src/S01/m3126.asm:632 (o01_3126_0437); original-dos.json#S01:3126:0437 ; src/S01/m3126.asm DispatchS01[6] -> o01_3126_0437; src/program.json aliases map DGROUP:9140 to slot 6. ; GSaveRect and GPutPacked call g_9140; byte-count body is independent of copy loops. ; GPutPacked uses g_9144 for mono source depth; S00 omits the colour-size four-plane multiplier."
+        },
+        {
+          "old": "o01_3126_045D",
+          "new": "gfx_mono_capture_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:045D, current source src/platform/video/mono_raster.asm: Mono: Copy a screen rectangle to RAM and write width/height header. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:045D; historical review citations: src/S01/m3126.asm:655 (o01_3126_045D); original-dos.json#S01:3126:045D ; src/S01/m3126.asm DispatchS01[8] -> o01_3126_045D; src/program.json aliases map DGROUP:9148 to slot 8. ; GSaveRect and mouse save-under call g_9148 with rectangle and far buffer; bodies read VRAM and store the two dimensions before payload."
+        },
+        {
+          "old": "o01_3126_0523",
+          "new": "gfx_mono_put_image_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0523, current source src/platform/video/mono_raster.asm: Mono: Rasterize monochrome bitmap payload with precomputed trims and foreground/background mapping. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0523; historical review citations: src/S01/m3126.asm:745 (o01_3126_0523); original-dos.json#S01:3126:0523 ; src/S01/m3126.asm DispatchS01[12] -> o01_3126_0523; src/program.json aliases map DGROUP:9158 to slot 12. ; src/root/m1D8E.c uses g_9158; S00 expands each mono row to four selected planes, S02 maps bits/bytes via fore/back, S03 expands to nibbles."
+        },
+        {
+          "old": "o01_3126_069C",
+          "new": "gfx_mono_shift_mono_image_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:069C, current source src/platform/video/mono_raster.asm: Shift mono source row into stack buffer and expand through current foreground pattern. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:069C; historical review citations: src/S01/m3126.asm:939 (o01_3126_069C); original-dos.json#S01:3126:069C ; Called from mono blitter0523 after083D edge setup; stack buffer5Ch, spill byte and pattern logic."
+        },
+        {
+          "old": "o01_3126_0749",
+          "new": "gfx_mono_put_picture_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0749, current source src/platform/video/mono_raster.asm: Mono: Rasterize native colour bitmap payload with precomputed horizontal clipping; no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0749; historical review citations: src/S01/m3126.asm:1046 (o01_3126_0749); original-dos.json#S01:3126:0749 ; src/S01/m3126.asm DispatchS01[10] -> o01_3126_0749; src/program.json aliases map DGROUP:9150 to slot 10. ; g_9150 is called by src/root/m1D8E.c with fd_55B3_3DE6/8 as left/right trims; slot 9 dispatches here when clipping is off."
+        },
+        {
+          "old": "o01_3126_083D",
+          "new": "gfx_mono_prepare_bitmap_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:083D, current source src/platform/video/mono_raster.asm: Compute one-bit blit edge masks, source skips, shifts and row widths. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:083D; historical review citations: src/S01/m3126.asm:1159 (o01_3126_083D); original-dos.json#S01:3126:083D ; Inputs x,width and fd_55B3_3DE6/8 trims; stores g_3DEA/EC/ED/EE/EF/F2."
+        },
+        {
+          "old": "o01_3126_08E3",
+          "new": "gfx_mono_blit_row_rop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:08E3, current source src/platform/video/mono_raster.asm: Blit one-bit row with left/right masks and patched raster operation. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:08E3; historical review citations: src/S01/m3126.asm:1228 (o01_3126_08E3); original-dos.json#S01:3126:08E3 ; Destination saved in AH; selected template at08FC; combines masked source and destination."
+        },
+        {
+          "old": "o01_3126_093C",
+          "new": "gfx_mono_blit_row_copy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:093C, current source src/platform/video/mono_raster.asm: Copy one-bit row with partial edge preservation and bulk interior. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:093C; historical review citations: src/S01/m3126.asm:1286 (o01_3126_093C); original-dos.json#S01:3126:093C ; Shared edge masks with08E3; full interior REP MOVSB, no raster template."
+        },
+        {
+          "old": "o01_3126_098E",
+          "new": "gfx_mono_shift_bitmap_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:098E, current source src/platform/video/mono_raster.asm: Shift native bitmap row through stack buffer then apply edge and raster operations. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:098E; historical review citations: src/S01/m3126.asm:1338 (o01_3126_098E); original-dos.json#S01:3126:098E ; Uses g_3DEE shift,g_3DF2 count; spill bits, stack5Ch then masked VRAM writes."
+        },
+        {
+          "old": "o01_3126_0A20",
+          "new": "gfx_mono_set_xor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0A20, current source src/platform/video/mono_raster.asm: Mono: Select XOR raster operation (code 0x18). Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0A20; historical review citations: src/S01/m3126.asm:1427 (o01_3126_0A20); original-dos.json#S01:3126:0A20 ; src/S01/m3126.asm DispatchS01[14] -> o01_3126_0A20; src/program.json aliases map DGROUP:9160 to slot 14. ; Operation selector dispatches 0x18 to this entry; templates use XOR and S00 stores graphics-controller function code."
+        },
+        {
+          "old": "o01_3126_0A7A",
+          "new": "gfx_mono_set_copy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0A7A, current source src/platform/video/mono_raster.asm: Mono: Select replace/copy raster operation (code 0). Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0A7A; historical review citations: src/S01/m3126.asm:1453 (o01_3126_0A7A); original-dos.json#S01:3126:0A7A ; src/S01/m3126.asm DispatchS01[16] -> o01_3126_0A7A; src/program.json aliases map DGROUP:9168 to slot 16. ; Mouse drawing and state restoration call g_9168; S00 stores zero and other drivers patch identity templates."
+        },
+        {
+          "old": "o01_3126_0ACC",
+          "new": "gfx_mono_set_and",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0ACC, current source src/platform/video/mono_raster.asm: Mono: Select AND raster operation (code 0x08). Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0ACC; historical review citations: src/S01/m3126.asm:1477 (o01_3126_0ACC); original-dos.json#S01:3126:0ACC ; src/S01/m3126.asm DispatchS01[15] -> o01_3126_0ACC; src/program.json aliases map DGROUP:9164 to slot 15. ; Cursor mask composition calls g_9164 before its mask; templates use AND."
+        },
+        {
+          "old": "o01_3126_0B26",
+          "new": "gfx_mono_set_or",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0B26, current source src/platform/video/mono_raster.asm: Mono: Select OR raster operation (code 0x10). Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0B26; historical review citations: src/S01/m3126.asm:1503 (o01_3126_0B26); original-dos.json#S01:3126:0B26 ; src/S01/m3126.asm DispatchS01[13] -> o01_3126_0B26; src/program.json aliases map DGROUP:915C to slot 13. ; Cursor save/draw code and operation selector use these entries; S00 writes GC function code, S01/S02/S03 patch OR instruction templates."
+        },
+        {
+          "old": "o01_3126_0C53",
+          "new": "gfx_mono_set_raster_op",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0C53, current source src/platform/video/mono_raster.asm: Mono: Select raster operation from argument (0x10 OR, 0x18 XOR, 8 AND, otherwise copy). Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0C53; historical review citations: src/S01/m3126.asm:1633 (o01_3126_0C53); original-dos.json#S01:3126:0C53 ; src/S01/m3126.asm DispatchS01[23] -> o01_3126_0C53; src/program.json aliases map DGROUP:9184 to slot 23. ; Mouse redraw trampoline restores saved g_3DD2 through g_9184; entries store mode or dispatch to four self-modifying selectors."
+        },
+        {
+          "old": "o01_3126_0C87",
+          "new": "gfx_mono_draw_line_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0C87, current source src/platform/video/mono_raster.asm: Mono: Rasterize a line into VRAM with no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0C87; historical review citations: src/S01/m3126.asm:1667 (o01_3126_0C87); original-dos.json#S01:3126:0C87 ; src/S01/m3126.asm DispatchS01[18] -> o01_3126_0C87; src/program.json aliases map DGROUP:9170 to slot 18. ; root:1D8E:0435 calls g_9170 after clipping endpoints; bodies step pixels using deltas/error and mode-specific storage."
+        },
+        {
+          "old": "o01_3126_0F33",
+          "new": "gfx_mono_reset_gc",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0F33, current source src/platform/video/mono_raster.asm: Set EGA/VGA controller registers for one-bit driver operation. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0F33; historical review citations: src/S01/m3126.asm:1976 (o01_3126_0F33); original-dos.json#S01:3126:0F33 ; Same explicit GC/seq programming sequence as S00:142B; invoked by EGA initializer."
+        },
+        {
+          "old": "o01_3126_0F66",
+          "new": "gfx_mono_tile_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0F66, current source src/platform/video/mono_raster.asm: Return without drawing; occupies the cached-tile callback slot in the mono driver. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0F66; historical review citations: src/S01/m3126.asm:2010 (o01_3126_0F66); original-dos.json#S01:3126:0F66 ; src/S01/m3126.asm DispatchS01[21] -> o01_3126_0F66; src/program.json aliases map DGROUP:917C to slot 21. ; PutTile and Mini_PutTile pass x,y,video offset to g_917C; S00 has a fixed tile fast path, other tables point at register-preserving returns."
+        },
+        {
+          "old": "o01_3126_0F6F",
+          "new": "gfx_mono_reserved_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0F6F, current source src/platform/video/mono_raster.asm: Mono: Reserved callback: no table alias or in-tree call found; planar points at its tile-upload routine, other drivers no-op. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0F6F; historical review citations: src/S01/m3126.asm:2021 (o01_3126_0F6F); original-dos.json#S01:3126:0F6F ; src/S01/m3126.asm DispatchS01[22] -> o01_3126_0F6F; src/program.json aliases map DGROUP:9180 to slot 22. ; Cell at DGROUP:9180 is slot 22 despite no alias in program.json. S00 aliases its slot-22 entry with direct tile loader root:0250:0256; no function identity is inferred for the unused slot."
+        },
+        {
+          "old": "o01_3126_0F78",
+          "new": "gfx_mono_restore_text_mode",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0F78, current source src/platform/video/mono_raster.asm: Mono: Restore text video mode. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0F78; historical review citations: src/S01/m3126.asm:2032 (o01_3126_0F78); original-dos.json#S01:3126:0F78 ; src/S01/m3126.asm DispatchS01[20] -> o01_3126_0F78; src/program.json aliases map DGROUP:9178 to slot 20. ; root:1C62:0090 calls g_9178 on shutdown; S00/S02/S03 select BIOS mode 3, S01 uses saved g_3DAC mode."
+        },
+        {
+          "old": "o01_3126_0F83",
+          "new": "gfx_mono_move_linear_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:0F83, current source src/platform/video/mono_raster.asm: Move one-bit screen rectangle for linear EGA layout with overlap-aware copying. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:0F83; historical review citations: src/S01/m3126.asm:2039 (o01_3126_0F83); original-dos.json#S01:3126:0F83 ; 007D initializer overwrites table cell24 with this entry; rectangle args and direction selection in body."
+        },
+        {
+          "old": "o01_3126_109D",
+          "new": "gfx_mono_move_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:109D, current source src/platform/video/mono_raster.asm: Mono: Move a screen rectangle to another position with overlap-aware row/copy direction. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:109D; historical review citations: src/S01/m3126.asm:2161 (o01_3126_109D); original-dos.json#S01:3126:109D ; src/S01/m3126.asm DispatchS01[24] -> o01_3126_109D; src/program.json aliases map DGROUP:9188 to slot 24. ; win_ScrollUp/Down-related root:23E6:054A/0615 source calls g_9188; src/S16/m384C.c credits scroll also passes source rectangle and destination x,y. Initializers can replace the S01 cell."
+        },
+        {
+          "old": "o01_3126_11F0",
+          "new": "gfx_mono_move_box_640x400",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:11F0, current source src/platform/video/mono_raster.asm: Move one-bit screen rectangle in interleaved640x400 layout. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:11F0; historical review citations: src/S01/m3126.asm:2314 (o01_3126_11F0); original-dos.json#S01:3126:11F0 ; 0000 installs this in cell24; row-offset table and bank-aware advance plus overlap directions."
+        },
+        {
+          "old": "o01_3126_1343",
+          "new": "gfx_mono_draw_life_tile",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:1343, current source src/platform/video/mono_raster.asm: Composite 16x16 one-bit life sprite with terrain into scratch and draw it. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:1343; historical review citations: src/S01/m3126.asm:2467 (o01_3126_1343); original-dos.json#S01:3126:1343 ; root0250:0721 passes tile,life,mask-plane offset0x3000/0x2000; calls073C on g_3D20."
+        },
+        {
+          "old": "o01_3126_14B6",
+          "new": "gfx_mono_compose_life_tile",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:14B6, current source src/platform/video/mono_raster.asm: Composite 16x16 one-bit terrain/life into g_3D20. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:14B6; historical review citations: src/S01/m3126.asm:2624 (o01_3126_14B6); original-dos.json#S01:3126:14B6 ; root0250:0915 same tile/life selector;16 unrolled word merges, no screen draw."
+        },
+        {
+          "old": "o01_3126_1610",
+          "new": "gfx_mono_set_hercules_graphics",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:1610, current source src/platform/video/mono_raster.asm: Program Hercules graphics controller registers and clear video memory. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:1610; historical review citations: src/S01/m3126.asm:2771 (o01_3126_1610); original-dos.json#S01:3126:1610 ; Port3BF enable,CRTC table2184 via1658, BDA video mode6 and columns90."
+        },
+        {
+          "old": "o01_3126_1637",
+          "new": "gfx_mono_set_mda_text",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:1637, current source src/platform/video/mono_raster.asm: Program mono controller for text-mode timing. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:1637; historical review citations: src/S01/m3126.asm:2787 (o01_3126_1637); original-dos.json#S01:3126:1637 ; CRTC table2190 via1658; BDA mode7 and columns80."
+        },
+        {
+          "old": "o01_3126_1658",
+          "new": "gfx_mono_program_mono_crtc",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:3126:1658, current source src/platform/video/mono_raster.asm: Write 12 CRTC values and clear B000 video region using register inputs. Evidence: build/workers/names-gfx/descriptive.json#S01:3126:1658; historical review citations: src/S01/m3126.asm:2800 (o01_3126_1658); original-dos.json#S01:3126:1658 ; OUT3B8 mode,3B4/5 indexes/data; tableDS:SI,count fixed12, ES=B000 REP STOSW from caller BX/CX."
+        },
+        {
+          "old": "o01_32B5_000E",
+          "new": "gfx_mono_buffer_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:32B5:000E, current source src/platform/video/mono_sprites.asm: No operation; module entry stub. Evidence: build/workers/names-gfx/descriptive.json#S01:32B5:000E; historical review citations: src/S01/m32B5.asm:19 (o01_32B5_000E); original-dos.json#S01:32B5:000E ; Lone RETF; no platform API identity inferred."
+        },
+        {
+          "old": "o01_32B5_000F",
+          "new": "gfx_mono_mask_bitmap_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:32B5:000F, current source src/platform/video/mono_sprites.asm: Composite masked bitmap into RAM one-bit rows at supplied x,y offset. Evidence: build/workers/names-gfx/descriptive.json#S01:32B5:000F; historical review citations: src/S01/m32B5.asm:23 (o01_32B5_000F); original-dos.json#S01:32B5:000F ; Source and destination start with width,height; per-pixel mask blend bg XOR((bg XOR fg) AND mask). Caller hanim_RenderAnimSet uses fd_50F6_37EA for type3."
+        },
+        {
+          "old": "o01_32B5_00AA",
+          "new": "gfx_mono_copy_bitmap_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:32B5:00AA, current source src/platform/video/mono_sprites.asm: Copy unmasked bitmap into RAM one-bit rows, preserving partial-byte edges. Evidence: build/workers/names-gfx/descriptive.json#S01:32B5:00AA; historical review citations: src/S01/m32B5.asm:104 (o01_32B5_00AA); original-dos.json#S01:32B5:00AA ; Source/destination width,height header; right-edge mask; hanim_RenderAnimSet uses fd_50F6_3B58 for type0."
+        },
+        {
+          "old": "o01_32B5_0152",
+          "new": "gfx_mono_buffer_intersection",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:32B5:0152, current source src/platform/video/mono_sprites.asm: Copy overlap of two rectangle-positioned RAM bitmaps in one-bit rows. Evidence: build/workers/names-gfx/descriptive.json#S01:32B5:0152; historical review citations: src/S01/m32B5.asm:191 (o01_32B5_0152); original-dos.json#S01:32B5:0152 ; Four rectangle bounds checked for overlap, max/min intersection, source/dest+4, row copies. hanim_RenderAnimSet calls fd_50F6_37EE through f_2662_0262."
+        },
+        {
+          "old": "o01_32B5_024F",
+          "new": "gfx_mono_scratch_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S01:32B5:024F, current source src/platform/video/mono_sprites.asm: Copy fixed tile from g_3D20 into RAM one-bit rows with caller stride. Evidence: build/workers/names-gfx/descriptive.json#S01:32B5:024F; historical review citations: src/S01/m32B5.asm:312 (o01_32B5_024F); original-dos.json#S01:32B5:024F ; DrawSpider calls fd_50F6_37E6 after preparing tile scratch; fixed copy dimensions are S00 16x16/four planes, S01 16x16, S03 12x12."
+        },
+        {
+          "old": "o02_3126_0000",
+          "new": "gfx_vga8_init_vga256",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0000, current source src/platform/video/vga8_raster.asm: Initialize VGA320x200 byte-pixel display and row-offset table. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0000; historical review citations: src/S02/m3126.asm:121 (o02_3126_0000); original-dos.json#S02:3126:0000 ; BIOS mode13h, width320,height200,pitch320,VRAM A000, table DispatchS02."
+        },
+        {
+          "old": "o02_3126_0051",
+          "new": "gfx_vga8_restore_text_mode",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0051, current source src/platform/video/vga8_raster.asm: Vga8: Restore text video mode. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0051; historical review citations: src/S02/m3126.asm:162 (o02_3126_0051); original-dos.json#S02:3126:0051 ; src/S02/m3126.asm DispatchS02[20] -> o02_3126_0051; src/program.json aliases map DGROUP:9178 to slot 20. ; root:1C62:0090 calls g_9178 on shutdown; S00/S02/S03 select BIOS mode 3, S01 uses saved g_3DAC mode."
+        },
+        {
+          "old": "o02_3126_005C",
+          "new": "gfx_vga8_select_small_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:005C, current source src/platform/video/vga8_raster.asm: Vga8: Select the driver small font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:005C; historical review citations: src/S02/m3126.asm:170 (o02_3126_005C); original-dos.json#S02:3126:005C ; src/S02/m3126.asm DispatchS02[1] -> o02_3126_005C; src/program.json aliases map DGROUP:912C to slot 1. ; font_SetFont in src/root/m24AB.c selects g_912C (slot 1) or g_9130 (slot 2); entries change g_3DD6/8 and g_3DDA/DC/DE."
+        },
+        {
+          "old": "o02_3126_0079",
+          "new": "gfx_vga8_select_big_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0079, current source src/platform/video/vga8_raster.asm: Vga8: Select the driver large font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0079; historical review citations: src/S02/m3126.asm:180 (o02_3126_0079); original-dos.json#S02:3126:0079 ; src/S02/m3126.asm DispatchS02[2] -> o02_3126_0079; src/program.json aliases map DGROUP:9130 to slot 2. ; font_SetFont in src/root/m24AB.c selects g_9130 (slot 2); the cells are height 14 for S00/S01 and 8 for S02/S03."
+        },
+        {
+          "old": "o02_3126_0096",
+          "new": "gfx_vga8_dither_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0096, current source src/platform/video/vga8_raster.asm: Vga8: Draw a colour/pattern overlay rectangle; driver-specific implementation, not plain solid fill. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0096; historical review citations: src/S02/m3126.asm:190 (o02_3126_0096); original-dos.json#S02:3126:0096 ; src/S02/m3126.asm DispatchS02[19] -> o02_3126_0096; src/program.json aliases map DGROUP:9174 to slot 19. ; root:1CE2:0104 forwards Rect fields and mode to g_9174; S00 uses a 16-byte colour dither table, S01 temporarily ORs its pattern fill, S02 ORs an alternating checker, S03 uses g_2236 masks."
+        },
+        {
+          "old": "o02_3126_00AE",
+          "new": "gfx_vga8_dither_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:00AE, current source src/platform/video/vga8_raster.asm: OR alternating FF/00 checker coverage into byte-pixel screen rectangle. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:00AE; historical review citations: src/S02/m3126.asm:203 (o02_3126_00AE); original-dos.json#S02:3126:00AE ; Slot19 wrapper0096; x+y parity selects alternating DL/DH, OR ES:[DI],DL, pitch320."
+        },
+        {
+          "old": "o02_3126_019D",
+          "new": "gfx_vga8_pattern_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:019D, current source src/platform/video/vga8_raster.asm: Fill checker rectangle alternating two attribute bytes in byte-pixel VRAM. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:019D; historical review citations: src/S02/m3126.asm:307 (o02_3126_019D); original-dos.json#S02:3126:019D ; Slot4 wrapper0185; DL/DH from g_3DE3/3DE1, parity x+y alternates colours, pitch320."
+        },
+        {
+          "old": "o02_3126_03D4",
+          "new": "gfx_vga8_picture_size",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:03D4, current source src/platform/video/vga8_raster.asm: Vga8: Return native colour capture size, including a 4-byte width/height header. Also implements slot 7. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:03D4; historical review citations: src/S02/m3126.asm:559 (o02_3126_03D4); original-dos.json#S02:3126:03D4 ; src/S02/m3126.asm DispatchS02[6] -> o02_3126_03D4; src/program.json aliases map DGROUP:9140 to slot 6. ; GSaveRect and GPutPacked call g_9140; byte-count body is independent of copy loops. ; GPutPacked uses g_9144 for mono source depth; S00 omits the colour-size four-plane multiplier."
+        },
+        {
+          "old": "o02_3126_03EF",
+          "new": "gfx_vga8_capture_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:03EF, current source src/platform/video/vga8_raster.asm: Vga8: Copy a screen rectangle to RAM and write width/height header. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:03EF; historical review citations: src/S02/m3126.asm:574 (o02_3126_03EF); original-dos.json#S02:3126:03EF ; src/S02/m3126.asm DispatchS02[8] -> o02_3126_03EF; src/program.json aliases map DGROUP:9148 to slot 8. ; GSaveRect and mouse save-under call g_9148 with rectangle and far buffer; bodies read VRAM and store the two dimensions before payload."
+        },
+        {
+          "old": "o02_3126_0490",
+          "new": "gfx_vga8_set_xor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0490, current source src/platform/video/vga8_raster.asm: Vga8: Select XOR raster operation (code 0x18). Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0490; historical review citations: src/S02/m3126.asm:640 (o02_3126_0490); original-dos.json#S02:3126:0490 ; src/S02/m3126.asm DispatchS02[14] -> o02_3126_0490; src/program.json aliases map DGROUP:9160 to slot 14. ; Operation selector dispatches 0x18 to this entry; templates use XOR and S00 stores graphics-controller function code."
+        },
+        {
+          "old": "o02_3126_04A2",
+          "new": "gfx_vga8_set_copy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:04A2, current source src/platform/video/vga8_raster.asm: Vga8: Select replace/copy raster operation (code 0). Evidence: build/workers/names-gfx/descriptive.json#S02:3126:04A2; historical review citations: src/S02/m3126.asm:648 (o02_3126_04A2); original-dos.json#S02:3126:04A2 ; src/S02/m3126.asm DispatchS02[16] -> o02_3126_04A2; src/program.json aliases map DGROUP:9168 to slot 16. ; Mouse drawing and state restoration call g_9168; S00 stores zero and other drivers patch identity templates."
+        },
+        {
+          "old": "o02_3126_04B4",
+          "new": "gfx_vga8_set_and",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:04B4, current source src/platform/video/vga8_raster.asm: Vga8: Select AND raster operation (code 0x08). Evidence: build/workers/names-gfx/descriptive.json#S02:3126:04B4; historical review citations: src/S02/m3126.asm:656 (o02_3126_04B4); original-dos.json#S02:3126:04B4 ; src/S02/m3126.asm DispatchS02[15] -> o02_3126_04B4; src/program.json aliases map DGROUP:9164 to slot 15. ; Cursor mask composition calls g_9164 before its mask; templates use AND."
+        },
+        {
+          "old": "o02_3126_04C6",
+          "new": "gfx_vga8_set_or",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:04C6, current source src/platform/video/vga8_raster.asm: Vga8: Select OR raster operation (code 0x10). Evidence: build/workers/names-gfx/descriptive.json#S02:3126:04C6; historical review citations: src/S02/m3126.asm:664 (o02_3126_04C6); original-dos.json#S02:3126:04C6 ; src/S02/m3126.asm DispatchS02[13] -> o02_3126_04C6; src/program.json aliases map DGROUP:915C to slot 13. ; Cursor save/draw code and operation selector use these entries; S00 writes GC function code, S01/S02/S03 patch OR instruction templates."
+        },
+        {
+          "old": "o02_3126_04D8",
+          "new": "gfx_vga8_set_raster_op",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:04D8, current source src/platform/video/vga8_raster.asm: Vga8: Select raster operation from argument (0x10 OR, 0x18 XOR, 8 AND, otherwise copy). Evidence: build/workers/names-gfx/descriptive.json#S02:3126:04D8; historical review citations: src/S02/m3126.asm:672 (o02_3126_04D8); original-dos.json#S02:3126:04D8 ; src/S02/m3126.asm DispatchS02[23] -> o02_3126_04D8; src/program.json aliases map DGROUP:9184 to slot 23. ; Mouse redraw trampoline restores saved g_3DD2 through g_9184; entries store mode or dispatch to four self-modifying selectors."
+        },
+        {
+          "old": "o02_3126_0512",
+          "new": "gfx_vga8_put_picture_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0512, current source src/platform/video/vga8_raster.asm: Vga8: Rasterize native colour bitmap payload with precomputed horizontal clipping; no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0512; historical review citations: src/S02/m3126.asm:712 (o02_3126_0512); original-dos.json#S02:3126:0512 ; src/S02/m3126.asm DispatchS02[10] -> o02_3126_0512; src/program.json aliases map DGROUP:9150 to slot 10. ; g_9150 is called by src/root/m1D8E.c with fd_55B3_3DE6/8 as left/right trims; slot 9 dispatches here when clipping is off."
+        },
+        {
+          "old": "o02_3126_0643",
+          "new": "gfx_vga8_put_image_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0643, current source src/platform/video/vga8_raster.asm: Vga8: Rasterize monochrome bitmap payload with precomputed trims and foreground/background mapping. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0643; historical review citations: src/S02/m3126.asm:843 (o02_3126_0643); original-dos.json#S02:3126:0643 ; src/S02/m3126.asm DispatchS02[12] -> o02_3126_0643; src/program.json aliases map DGROUP:9158 to slot 12. ; src/root/m1D8E.c uses g_9158; S00 expands each mono row to four selected planes, S02 maps bits/bytes via fore/back, S03 expands to nibbles."
+        },
+        {
+          "old": "o02_3126_0747",
+          "new": "gfx_vga8_draw_line_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0747, current source src/platform/video/vga8_raster.asm: Vga8: Rasterize a line into VRAM with no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0747; historical review citations: src/S02/m3126.asm:955 (o02_3126_0747); original-dos.json#S02:3126:0747 ; src/S02/m3126.asm DispatchS02[18] -> o02_3126_0747; src/program.json aliases map DGROUP:9170 to slot 18. ; root:1D8E:0435 calls g_9170 after clipping endpoints; bodies step pixels using deltas/error and mode-specific storage."
+        },
+        {
+          "old": "o02_3126_084E",
+          "new": "gfx_vga8_tile_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:084E, current source src/platform/video/vga8_raster.asm: Return without drawing; occupies the cached-tile callback slot in the VGA byte-pixel driver. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:084E; historical review citations: src/S02/m3126.asm:1074 (o02_3126_084E); original-dos.json#S02:3126:084E ; src/S02/m3126.asm DispatchS02[21] -> o02_3126_084E; src/program.json aliases map DGROUP:917C to slot 21. ; PutTile and Mini_PutTile pass x,y,video offset to g_917C; S00 has a fixed tile fast path, other tables point at register-preserving returns."
+        },
+        {
+          "old": "o02_3126_0857",
+          "new": "gfx_vga8_reserved_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0857, current source src/platform/video/vga8_raster.asm: Vga8: Reserved callback: no table alias or in-tree call found; planar points at its tile-upload routine, other drivers no-op. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0857; historical review citations: src/S02/m3126.asm:1085 (o02_3126_0857); original-dos.json#S02:3126:0857 ; src/S02/m3126.asm DispatchS02[22] -> o02_3126_0857; src/program.json aliases map DGROUP:9180 to slot 22. ; Cell at DGROUP:9180 is slot 22 despite no alias in program.json. S00 aliases its slot-22 entry with direct tile loader root:0250:0256; no function identity is inferred for the unused slot."
+        },
+        {
+          "old": "o02_3126_0860",
+          "new": "gfx_vga8_move_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S02:3126:0860, current source src/platform/video/vga8_raster.asm: Vga8: Move a screen rectangle to another position with overlap-aware row/copy direction. Evidence: build/workers/names-gfx/descriptive.json#S02:3126:0860; historical review citations: src/S02/m3126.asm:1096 (o02_3126_0860); original-dos.json#S02:3126:0860 ; src/S02/m3126.asm DispatchS02[24] -> o02_3126_0860; src/program.json aliases map DGROUP:9188 to slot 24. ; win_ScrollUp/Down-related root:23E6:054A/0615 source calls g_9188; src/S16/m384C.c credits scroll also passes source rectangle and destination x,y. Initializers can replace the S01 cell."
+        },
+        {
+          "old": "o03_3126_0140",
+          "new": "gfx_tandy_init_tandy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0140, current source src/platform/video/tandy_raster.asm: Initialize 320x200 Tandy banked four-bit display and palette mapping. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0140; historical review citations: src/S03/m3126.asm:152 (o03_3126_0140); original-dos.json#S03:3126:0140 ; B800 VRAM, row table four2000h banks with160-byte rows; BIOS mode9 and g_2216 colour map."
+        },
+        {
+          "old": "o03_3126_01B3",
+          "new": "gfx_tandy_restore_text_mode",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:01B3, current source src/platform/video/tandy_raster.asm: Tandy: Restore text video mode. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:01B3; historical review citations: src/S03/m3126.asm:205 (o03_3126_01B3); original-dos.json#S03:3126:01B3 ; src/S03/m3126.asm DispatchS03[20] -> o03_3126_01B3; src/program.json aliases map DGROUP:9178 to slot 20. ; root:1C62:0090 calls g_9178 on shutdown; S00/S02/S03 select BIOS mode 3, S01 uses saved g_3DAC mode."
+        },
+        {
+          "old": "o03_3126_01BE",
+          "new": "gfx_tandy_select_small_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:01BE, current source src/platform/video/tandy_raster.asm: Tandy: Select the driver small font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:01BE; historical review citations: src/S03/m3126.asm:213 (o03_3126_01BE); original-dos.json#S03:3126:01BE ; src/S03/m3126.asm DispatchS03[1] -> o03_3126_01BE; src/program.json aliases map DGROUP:912C to slot 1. ; font_SetFont in src/root/m24AB.c selects g_912C (slot 1) or g_9130 (slot 2); entries change g_3DD6/8 and g_3DDA/DC/DE."
+        },
+        {
+          "old": "o03_3126_01DB",
+          "new": "gfx_tandy_select_big_font",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:01DB, current source src/platform/video/tandy_raster.asm: Tandy: Select the driver large font and its cell dimensions. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:01DB; historical review citations: src/S03/m3126.asm:223 (o03_3126_01DB); original-dos.json#S03:3126:01DB ; src/S03/m3126.asm DispatchS03[2] -> o03_3126_01DB; src/program.json aliases map DGROUP:9130 to slot 2. ; font_SetFont in src/root/m24AB.c selects g_9130 (slot 2); the cells are height 14 for S00/S01 and 8 for S02/S03."
+        },
+        {
+          "old": "o03_3126_01F8",
+          "new": "gfx_tandy_dither_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:01F8, current source src/platform/video/tandy_raster.asm: Tandy: Draw a colour/pattern overlay rectangle; driver-specific implementation, not plain solid fill. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:01F8; historical review citations: src/S03/m3126.asm:233 (o03_3126_01F8); original-dos.json#S03:3126:01F8 ; src/S03/m3126.asm DispatchS03[19] -> o03_3126_01F8; src/program.json aliases map DGROUP:9174 to slot 19. ; root:1CE2:0104 forwards Rect fields and mode to g_9174; S00 uses a 16-byte colour dither table, S01 temporarily ORs its pattern fill, S02 ORs an alternating checker, S03 uses g_2236 masks."
+        },
+        {
+          "old": "o03_3126_0210",
+          "new": "gfx_tandy_dither_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0210, current source src/platform/video/tandy_raster.asm: Apply colour-indexed coverage masks to packed-nibble rectangle. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0210; historical review citations: src/S03/m3126.asm:246 (o03_3126_0210); original-dos.json#S03:3126:0210 ; Slot19 wrapper01F8; g_2236 mask table indexed by colour/row phase, preserves uncovered destination nibbles."
+        },
+        {
+          "old": "o03_3126_03DA",
+          "new": "gfx_tandy_pattern_box_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:03DA, current source src/platform/video/tandy_raster.asm: Fill packed-nibble rectangle with selected foreground/background pattern. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:03DA; historical review citations: src/S03/m3126.asm:450 (o03_3126_03DA); original-dos.json#S03:3126:03DA ; Slot4 wrapper03C2; table2236 and pen colours, banked row offsets, edge nibble masks."
+        },
+        {
+          "old": "o03_3126_072D",
+          "new": "gfx_tandy_picture_size",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:072D, current source src/platform/video/tandy_raster.asm: Tandy: Return native colour capture size, including a 4-byte width/height header. Also implements slot 7. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:072D; historical review citations: src/S03/m3126.asm:833 (o03_3126_072D); original-dos.json#S03:3126:072D ; src/S03/m3126.asm DispatchS03[6] -> o03_3126_072D; src/program.json aliases map DGROUP:9140 to slot 6. ; GSaveRect and GPutPacked call g_9140; byte-count body is independent of copy loops. ; GPutPacked uses g_9144 for mono source depth; S00 omits the colour-size four-plane multiplier."
+        },
+        {
+          "old": "o03_3126_074E",
+          "new": "gfx_tandy_capture_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:074E, current source src/platform/video/tandy_raster.asm: Tandy: Copy a screen rectangle to RAM and write width/height header. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:074E; historical review citations: src/S03/m3126.asm:852 (o03_3126_074E); original-dos.json#S03:3126:074E ; src/S03/m3126.asm DispatchS03[8] -> o03_3126_074E; src/program.json aliases map DGROUP:9148 to slot 8. ; GSaveRect and mouse save-under call g_9148 with rectangle and far buffer; bodies read VRAM and store the two dimensions before payload."
+        },
+        {
+          "old": "o03_3126_080A",
+          "new": "gfx_tandy_set_xor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:080A, current source src/platform/video/tandy_raster.asm: Tandy: Select XOR raster operation (code 0x18). Evidence: build/workers/names-gfx/descriptive.json#S03:3126:080A; historical review citations: src/S03/m3126.asm:934 (o03_3126_080A); original-dos.json#S03:3126:080A ; src/S03/m3126.asm DispatchS03[14] -> o03_3126_080A; src/program.json aliases map DGROUP:9160 to slot 14. ; Operation selector dispatches 0x18 to this entry; templates use XOR and S00 stores graphics-controller function code."
+        },
+        {
+          "old": "o03_3126_0844",
+          "new": "gfx_tandy_set_copy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0844, current source src/platform/video/tandy_raster.asm: Tandy: Select replace/copy raster operation (code 0). Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0844; historical review citations: src/S03/m3126.asm:952 (o03_3126_0844); original-dos.json#S03:3126:0844 ; src/S03/m3126.asm DispatchS03[16] -> o03_3126_0844; src/program.json aliases map DGROUP:9168 to slot 16. ; Mouse drawing and state restoration call g_9168; S00 stores zero and other drivers patch identity templates."
+        },
+        {
+          "old": "o03_3126_087E",
+          "new": "gfx_tandy_set_and",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:087E, current source src/platform/video/tandy_raster.asm: Tandy: Select AND raster operation (code 0x08). Evidence: build/workers/names-gfx/descriptive.json#S03:3126:087E; historical review citations: src/S03/m3126.asm:970 (o03_3126_087E); original-dos.json#S03:3126:087E ; src/S03/m3126.asm DispatchS03[15] -> o03_3126_087E; src/program.json aliases map DGROUP:9164 to slot 15. ; Cursor mask composition calls g_9164 before its mask; templates use AND."
+        },
+        {
+          "old": "o03_3126_08B8",
+          "new": "gfx_tandy_set_or",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:08B8, current source src/platform/video/tandy_raster.asm: Tandy: Select OR raster operation (code 0x10). Evidence: build/workers/names-gfx/descriptive.json#S03:3126:08B8; historical review citations: src/S03/m3126.asm:988 (o03_3126_08B8); original-dos.json#S03:3126:08B8 ; src/S03/m3126.asm DispatchS03[13] -> o03_3126_08B8; src/program.json aliases map DGROUP:915C to slot 13. ; Cursor save/draw code and operation selector use these entries; S00 writes GC function code, S01/S02/S03 patch OR instruction templates."
+        },
+        {
+          "old": "o03_3126_08F2",
+          "new": "gfx_tandy_set_raster_op",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:08F2, current source src/platform/video/tandy_raster.asm: Tandy: Select raster operation from argument (0x10 OR, 0x18 XOR, 8 AND, otherwise copy). Evidence: build/workers/names-gfx/descriptive.json#S03:3126:08F2; historical review citations: src/S03/m3126.asm:1006 (o03_3126_08F2); original-dos.json#S03:3126:08F2 ; src/S03/m3126.asm DispatchS03[23] -> o03_3126_08F2; src/program.json aliases map DGROUP:9184 to slot 23. ; Mouse redraw trampoline restores saved g_3DD2 through g_9184; entries store mode or dispatch to four self-modifying selectors."
+        },
+        {
+          "old": "o03_3126_092C",
+          "new": "gfx_tandy_put_picture_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:092C, current source src/platform/video/tandy_raster.asm: Tandy: Rasterize native colour bitmap payload with precomputed horizontal clipping; no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:092C; historical review citations: src/S03/m3126.asm:1046 (o03_3126_092C); original-dos.json#S03:3126:092C ; src/S03/m3126.asm DispatchS03[10] -> o03_3126_092C; src/program.json aliases map DGROUP:9150 to slot 10. ; g_9150 is called by src/root/m1D8E.c with fd_55B3_3DE6/8 as left/right trims; slot 9 dispatches here when clipping is off."
+        },
+        {
+          "old": "o03_3126_0A4D",
+          "new": "gfx_tandy_prepare_bitmap_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0A4D, current source src/platform/video/tandy_raster.asm: Compute nibble blit edge masks, byte skips and half-byte alignment. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0A4D; historical review citations: src/S03/m3126.asm:1174 (o03_3126_0A4D); original-dos.json#S03:3126:0A4D ; x&1,ceil(width/2), trim words3DE6/8, masks22DF/22E2 and shift4 when odd."
+        },
+        {
+          "old": "o03_3126_0AEF",
+          "new": "gfx_tandy_blit_row_rop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0AEF, current source src/platform/video/tandy_raster.asm: Blit packed-four-bit row with partial-nibble preservation and selected raster operation. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0AEF; historical review citations: src/S03/m3126.asm:1242 (o03_3126_0AEF); original-dos.json#S03:3126:0AEF ; Edge masks3DEC/ED and patched template0B05; saved destinationAH merged with source nibbles."
+        },
+        {
+          "old": "o03_3126_0B3F",
+          "new": "gfx_tandy_blit_row_copy",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0B3F, current source src/platform/video/tandy_raster.asm: Copy packed-four-bit row, preserving leading/trailing half-byte pixels. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0B3F; historical review citations: src/S03/m3126.asm:1294 (o03_3126_0B3F); original-dos.json#S03:3126:0B3F ; Fast byte interiors plus nibble edge masks, sibling of0AEF without ROP instruction."
+        },
+        {
+          "old": "o03_3126_0B88",
+          "new": "gfx_tandy_shift_bitmap_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0B88, current source src/platform/video/tandy_raster.asm: Shift packed pixels by four bits in a stack row buffer then write with raster op. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0B88; historical review citations: src/S03/m3126.asm:1340 (o03_3126_0B88); original-dos.json#S03:3126:0B88 ; Source spill nibble, stack0A2h, trim/edge state from0A4D."
+        },
+        {
+          "old": "o03_3126_0C1E",
+          "new": "gfx_tandy_put_image_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0C1E, current source src/platform/video/tandy_raster.asm: Tandy: Rasterize monochrome bitmap payload with precomputed trims and foreground/background mapping. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0C1E; historical review citations: src/S03/m3126.asm:1427 (o03_3126_0C1E); original-dos.json#S03:3126:0C1E ; src/S03/m3126.asm DispatchS03[12] -> o03_3126_0C1E; src/program.json aliases map DGROUP:9158 to slot 12. ; src/root/m1D8E.c uses g_9158; S00 expands each mono row to four selected planes, S02 maps bits/bytes via fore/back, S03 expands to nibbles."
+        },
+        {
+          "old": "o03_3126_0F5D",
+          "new": "gfx_tandy_shift_mono_row",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:0F5D, current source src/platform/video/tandy_raster.asm: Shift expanded mono pixels read from code-segment line buffer by a nibble and rasterize. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:0F5D; historical review citations: src/S03/m3126.asm:1815 (o03_3126_0F5D); original-dos.json#S03:3126:0F5D ; Reads CS:[SI], four SHR steps and spill byte into stack0A2h; mono blitter0C1E expands original bits into CS line buffer."
+        },
+        {
+          "old": "o03_3126_105A",
+          "new": "gfx_tandy_draw_line_raw",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:105A, current source src/platform/video/tandy_raster.asm: Tandy: Rasterize a line into VRAM with no clip-list wrapper. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:105A; historical review citations: src/S03/m3126.asm:1960 (o03_3126_105A); original-dos.json#S03:3126:105A ; src/S03/m3126.asm DispatchS03[18] -> o03_3126_105A; src/program.json aliases map DGROUP:9170 to slot 18. ; root:1D8E:0435 calls g_9170 after clipping endpoints; bodies step pixels using deltas/error and mode-specific storage."
+        },
+        {
+          "old": "o03_3126_1180",
+          "new": "gfx_tandy_tile_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:1180, current source src/platform/video/tandy_raster.asm: Return without drawing; occupies the cached-tile callback slot in the Tandy driver. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:1180; historical review citations: src/S03/m3126.asm:2093 (o03_3126_1180); original-dos.json#S03:3126:1180 ; src/S03/m3126.asm DispatchS03[21] -> o03_3126_1180; src/program.json aliases map DGROUP:917C to slot 21. ; PutTile and Mini_PutTile pass x,y,video offset to g_917C; S00 has a fixed tile fast path, other tables point at register-preserving returns."
+        },
+        {
+          "old": "o03_3126_1189",
+          "new": "gfx_tandy_reserved_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:1189, current source src/platform/video/tandy_raster.asm: Tandy: Reserved callback: no table alias or in-tree call found; planar points at its tile-upload routine, other drivers no-op. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:1189; historical review citations: src/S03/m3126.asm:2104 (o03_3126_1189); original-dos.json#S03:3126:1189 ; src/S03/m3126.asm DispatchS03[22] -> o03_3126_1189; src/program.json aliases map DGROUP:9180 to slot 22. ; Cell at DGROUP:9180 is slot 22 despite no alias in program.json. S00 aliases its slot-22 entry with direct tile loader root:0250:0256; no function identity is inferred for the unused slot."
+        },
+        {
+          "old": "o03_3126_1192",
+          "new": "gfx_tandy_move_box",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3126:1192, current source src/platform/video/tandy_raster.asm: Tandy: Move a screen rectangle to another position with overlap-aware row/copy direction. Evidence: build/workers/names-gfx/descriptive.json#S03:3126:1192; historical review citations: src/S03/m3126.asm:2115 (o03_3126_1192); original-dos.json#S03:3126:1192 ; src/S03/m3126.asm DispatchS03[24] -> o03_3126_1192; src/program.json aliases map DGROUP:9188 to slot 24. ; win_ScrollUp/Down-related root:23E6:054A/0615 source calls g_9188; src/S16/m384C.c credits scroll also passes source rectangle and destination x,y. Initializers can replace the S01 cell."
+        },
+        {
+          "old": "o03_3253_0008",
+          "new": "gfx_tandy_map_duplicate_rows",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3253:0008, current source src/platform/video/tandy_minimap.asm: Translate count colour indices to Tandy packed-colour bytes and duplicate output row. Evidence: build/workers/names-gfx/descriptive.json#S03:3253:0008; historical review citations: src/S03/m3253.asm:23 (o03_3253_0008); original-dos.json#S03:3253:0008 ; XLAT g_2308; stores output at DI and DI+count; one source byte becomes two horizontal nibbles plus second row copy. ; src/S12/m384C.c:65-86 binds mode-selected map converters fd_50F6_38B8/38BC; caller consumes their native output through driver bitmap paths."
+        },
+        {
+          "old": "o03_3258_040C",
+          "new": "gfx_tandy_buffer_noop",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3258:040C, current source src/platform/video/tandy_sprites.asm: No operation; module entry stub. Evidence: build/workers/names-gfx/descriptive.json#S03:3258:040C; historical review citations: src/S03/m3258.asm:69 (o03_3258_040C); original-dos.json#S03:3258:040C ; Lone RETF; no platform API identity inferred."
+        },
+        {
+          "old": "o03_3258_040D",
+          "new": "gfx_tandy_mask_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3258:040D, current source src/platform/video/tandy_sprites.asm: Composite masked bitmap into RAM packed four-bit nibbles at supplied x,y offset. Evidence: build/workers/names-gfx/descriptive.json#S03:3258:040D; historical review citations: src/S03/m3258.asm:73 (o03_3258_040D); original-dos.json#S03:3258:040D ; Source and destination start with width,height; per-pixel mask blend bg XOR((bg XOR fg) AND mask). Caller hanim_RenderAnimSet uses fd_50F6_37EA for type3."
+        },
+        {
+          "old": "o03_3258_04CE",
+          "new": "gfx_tandy_copy_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3258:04CE, current source src/platform/video/tandy_sprites.asm: Copy unmasked bitmap into RAM packed four-bit nibbles, preserving partial-byte edges. Evidence: build/workers/names-gfx/descriptive.json#S03:3258:04CE; historical review citations: src/S03/m3258.asm:177 (o03_3258_04CE); original-dos.json#S03:3258:04CE ; Source/destination width,height header; right-edge mask; hanim_RenderAnimSet uses fd_50F6_3B58 for type0."
+        },
+        {
+          "old": "o03_3258_05A7",
+          "new": "gfx_tandy_buffer_intersection",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3258:05A7, current source src/platform/video/tandy_sprites.asm: Copy overlap of two rectangle-positioned RAM bitmaps in packed four-bit nibbles. Evidence: build/workers/names-gfx/descriptive.json#S03:3258:05A7; historical review citations: src/S03/m3258.asm:295 (o03_3258_05A7); original-dos.json#S03:3258:05A7 ; Four rectangle bounds checked for overlap, max/min intersection, source/dest+4, row copies. hanim_RenderAnimSet calls fd_50F6_37EE through f_2662_0262."
+        },
+        {
+          "old": "o03_3258_0690",
+          "new": "gfx_tandy_draw_life_tile",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3258:0690, current source src/platform/video/tandy_sprites.asm: Composite 12x12 Tandy life/terrain pixels into scratch and draw it. Evidence: build/workers/names-gfx/descriptive.json#S03:3258:0690; historical review citations: src/S03/m3258.asm:406 (o03_3258_0690); original-dos.json#S03:3258:0690 ; root0250:0721 passes tile,life,mask mode; uses0Dh transparency tables; invokes screen bitmap path."
+        },
+        {
+          "old": "o03_3258_0F04",
+          "new": "gfx_tandy_compose_life_tile",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3258:0F04, current source src/platform/video/tandy_sprites.asm: Composite 12x12 Tandy life/terrain pixels into g_3D20. Evidence: build/workers/names-gfx/descriptive.json#S03:3258:0F04; historical review citations: src/S03/m3258.asm:1523 (o03_3258_0F04); original-dos.json#S03:3258:0F04 ; root0250:0915 same tile/life arguments; mask modes select nibble coverage without drawing."
+        },
+        {
+          "old": "o03_3258_175F",
+          "new": "gfx_tandy_scratch_to_buffer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at S03:3258:175F, current source src/platform/video/tandy_sprites.asm: Copy fixed tile from g_3D20 into RAM packed four-bit nibbles with caller stride. Evidence: build/workers/names-gfx/descriptive.json#S03:3258:175F; historical review citations: src/S03/m3258.asm:2630 (o03_3258_175F); original-dos.json#S03:3258:175F ; DrawSpider calls fd_50F6_37E6 after preparing tile scratch; fixed copy dimensions are S00 16x16/four planes, S01 16x16, S03 12x12."
+        },
+        {
+          "old": "f_16B5_0008",
+          "new": "gfx_buffer_line",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:0008, current source src/graphics/lines.asm: Draw a line using the current bitmap-format near rasterizer. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:0008; historical review citations: src/root/m16B5.asm:47 (f_16B5_0008); original-dos.json#root:16B5:0008 ; Loads x1,y1,x2,y2,colour into registers and calls g_1F96; DrawLegs/DrawPalps use this after DrawSpider installs the destination."
+        },
+        {
+          "old": "f_16B5_0033",
+          "new": "gfx_buffer_line_target",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:0033, current source src/graphics/lines.asm: Install destination width,height,payload and select bitmap-format line implementation. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:0033; historical review citations: src/root/m16B5.asm:74 (f_16B5_0033); original-dos.json#root:16B5:0033 ; DrawSpider passes bitmap plus mode 0 mono,1 Tandy,2 planar; header fields bound clipping and per-mode init/plot tables at 1E00/1F98."
+        },
+        {
+          "old": "f_16B5_007F",
+          "new": "gfx_buffer_line_init_mono",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:007F, current source src/graphics/lines.asm: Build row offsets for a one-bit destination bitmap. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:007F; historical review citations: src/root/m16B5.asm:112 (f_16B5_007F); original-dos.json#root:16B5:007F ; width shifted by 3 before row-offset loop; offsets start after four-byte bitmap header."
+        },
+        {
+          "old": "f_16B5_00A5",
+          "new": "gfx_buffer_line_init_planar",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:00A5, current source src/graphics/lines.asm: Build row offsets for four one-bit planes interleaved by row. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:00A5; historical review citations: src/root/m16B5.asm:133 (f_16B5_00A5); original-dos.json#root:16B5:00A5 ; Mode index 2 in g_1E00; width/2 row pitch and pitch/4 plane distance in g_1DFE used by four plane writes."
+        },
+        {
+          "old": "f_16B5_00AB",
+          "new": "gfx_buffer_line_init_packed4",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:00AB, current source src/graphics/lines.asm: Build row offsets for packed four-bit destination pixels. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:00AB; historical review citations: src/root/m16B5.asm:138 (f_16B5_00AB); original-dos.json#root:16B5:00AB ; Mode index 1 in g_1E00; width/2 pitch, mode-1 plotter updates one nibble per pixel."
+        },
+        {
+          "old": "f_16B5_00B1",
+          "new": "gfx_buffer_line_mono",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:00B1, current source src/graphics/lines.asm: Clip and rasterize a one-bit line into RAM. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:00B1; historical review citations: src/root/m16B5.asm:143 (f_16B5_00B1); original-dos.json#root:16B5:00B1 ; Calls 04D8; uses bit index 7-(x&7), row-offset table and colour&1."
+        },
+        {
+          "old": "f_16B5_01D4",
+          "new": "gfx_buffer_line_planar4",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:01D4, current source src/graphics/lines.asm: Clip and rasterize a colour line into four RAM bit planes. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:01D4; historical review citations: src/root/m16B5.asm:288 (f_16B5_01D4); original-dos.json#root:16B5:01D4 ; Calls 04D8; writes four successive colour bits at g_1DFE plane strides."
+        },
+        {
+          "old": "f_16B5_03B5",
+          "new": "gfx_buffer_line_packed4",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:03B5, current source src/graphics/lines.asm: Clip and rasterize a colour line into RAM nibble pixels. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:03B5; historical review citations: src/root/m16B5.asm:513 (f_16B5_03B5); original-dos.json#root:16B5:03B5 ; Calls 04D8; x/2 byte addressing and 4*(1-(x&1)) nibble rotation."
+        },
+        {
+          "old": "f_16B5_04D8",
+          "new": "gfx_buffer_clip_line",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:16B5:04D8, current source src/graphics/lines.asm: Clip endpoints to installed bitmap bounds; carry set rejects. Evidence: build/workers/names-gfx/descriptive.json#root:16B5:04D8; historical review citations: src/root/m16B5.asm:659 (f_16B5_04D8); original-dos.json#root:16B5:04D8 ; Outcodes test x/y against zero and width-1/height-1; midpoint clipping revises endpoints, preserves their original order, returns CLC or STC."
+        },
+        {
+          "old": "f_194D_0006",
+          "new": "mem_copy_paragraphs",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:194D:0006, current source src/platform/memory_helpers.asm: Copy a far memory range whose count is in 16-byte paragraphs. Evidence: build/workers/names-gfx/descriptive.json#root:194D:0006; historical review citations: src/root/m194D.asm:23 (f_194D_0006); original-dos.json#root:194D:0006 ; Count chunked to 0x1000 paragraphs; REP MOVSW copies chunk*8 words, both segments advanced by chunk."
+        },
+        {
+          "old": "f_194D_003F",
+          "new": "gfx_probe_tandy_video_area",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:194D:003F, current source src/platform/memory_helpers.asm: Probe whether the reserved top-memory Tandy video area survives mode 9. Evidence: build/workers/names-gfx/descriptive.json#root:194D:003F; historical review citations: src/root/m194D.asm:59 (f_194D_003F); original-dos.json#root:194D:003F ; Machine probes o21_39C7_0000/016D gate it; writes 0xAA55 over 0x1000 bytes near memory top, sets BIOS mode 9, scans for changed bytes."
+        },
+        {
+          "old": "f_194D_008F",
+          "new": "mem_block_dword_checksum",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:194D:008F, current source src/platform/memory_helpers.asm: Sum 386 dwords over a block and fold the sum to 16 bits. Evidence: build/workers/names-gfx/descriptive.json#root:194D:008F; historical review citations: src/root/m194D.asm:99 (f_194D_008F); original-dos.json#root:194D:008F ; Finds length at pointer segment-3:+2, divides by four, LODSD/ADD EDX,EAX loop, adds high and low halves."
+        },
+        {
+          "old": "f_195A_000C",
+          "new": "ems_query_version",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:000C, current source src/memory/ems.asm: Query EMS version and cache AL on successful AH status. Evidence: build/workers/names-gfx/descriptive.json#root:195A:000C; historical review citations: src/root/m195A.asm:67 (f_195A_000C); original-dos.json#root:195A:000C ; AH=46h; stores fd_55B3_360C."
+        },
+        {
+          "old": "f_195A_0018",
+          "new": "ems_query_status",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0018, current source src/memory/ems.asm: Return EMS manager status. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0018; historical review citations: src/root/m195A.asm:77 (f_195A_0018); original-dos.json#root:195A:0018 ; AH=40h INT 67h without result adaptation."
+        },
+        {
+          "old": "f_195A_001D",
+          "new": "ems_query_page_frame",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:001D, current source src/memory/ems.asm: Query and cache the EMS page-frame far pointer. Evidence: build/workers/names-gfx/descriptive.json#root:195A:001D; historical review citations: src/root/m195A.asm:83 (f_195A_001D); original-dos.json#root:195A:001D ; AH=41h; stores BX as segment and offset zero at fd_55B3_360E."
+        },
+        {
+          "old": "f_195A_0035",
+          "new": "ems_query_page_counts",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0035, current source src/memory/ems.asm: Query and cache free/total EMS page counts. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0035; historical review citations: src/root/m195A.asm:95 (f_195A_0035); original-dos.json#root:195A:0035 ; AH=42h; stores BX/DX at fd_55B3_3612/14."
+        },
+        {
+          "old": "f_195A_004B",
+          "new": "ems_allocate_pages",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:004B, current source src/memory/ems.asm: Allocate EMS pages and return the handle. Evidence: build/workers/names-gfx/descriptive.json#root:195A:004B; historical review citations: src/root/m195A.asm:107 (f_195A_004B); original-dos.json#root:195A:004B ; AH=43h, BX=page count, DX returned in AX."
+        },
+        {
+          "old": "f_195A_0062",
+          "new": "ems_map_page",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0062, current source src/memory/ems.asm: Map one logical EMS page to a physical page. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0062; historical review citations: src/root/m195A.asm:122 (f_195A_0062); original-dos.json#root:195A:0062 ; AH=44h; DX=handle, BX=logical, AL=physical."
+        },
+        {
+          "old": "f_195A_007D",
+          "new": "ems_free_handle",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:007D, current source src/memory/ems.asm: Release an EMS handle. Evidence: build/workers/names-gfx/descriptive.json#root:195A:007D; historical review citations: src/root/m195A.asm:138 (f_195A_007D); original-dos.json#root:195A:007D ; AH=45h, DX=handle."
+        },
+        {
+          "old": "f_195A_0092",
+          "new": "ems_get_page_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0092, current source src/memory/ems.asm: Copy all EMS page mapping state to a far buffer. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0092; historical review citations: src/root/m195A.asm:152 (f_195A_0092); original-dos.json#root:195A:0092 ; AX=4E00h, ES:DI=buffer."
+        },
+        {
+          "old": "f_195A_00AC",
+          "new": "ems_set_page_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:00AC, current source src/memory/ems.asm: Restore all EMS page mapping state from a far buffer. Evidence: build/workers/names-gfx/descriptive.json#root:195A:00AC; historical review citations: src/root/m195A.asm:169 (f_195A_00AC); original-dos.json#root:195A:00AC ; AX=4E01h, DS:SI=buffer."
+        },
+        {
+          "old": "f_195A_00C8",
+          "new": "ems_exchange_page_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:00C8, current source src/memory/ems.asm: Exchange the current EMS mapping state with buffer state. Evidence: build/workers/names-gfx/descriptive.json#root:195A:00C8; historical review citations: src/root/m195A.asm:188 (f_195A_00C8); original-dos.json#root:195A:00C8 ; AX=4E02h; ES:DI output and DS:SI input."
+        },
+        {
+          "old": "f_195A_00E9",
+          "new": "ems_query_page_map_size",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:00E9, current source src/memory/ems.asm: Query bytes needed to save the EMS page map. Evidence: build/workers/names-gfx/descriptive.json#root:195A:00E9; historical review citations: src/root/m195A.asm:210 (f_195A_00E9); original-dos.json#root:195A:00E9 ; AX=4E03h returns size in AL."
+        },
+        {
+          "old": "f_195A_00F8",
+          "new": "ems_save_handle_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:00F8, current source src/memory/ems.asm: Save EMS mapping context for a handle. Evidence: build/workers/names-gfx/descriptive.json#root:195A:00F8; historical review citations: src/root/m195A.asm:220 (f_195A_00F8); original-dos.json#root:195A:00F8 ; AH=47h, DX=handle; callers bracket temporary tile mappings."
+        },
+        {
+          "old": "f_195A_010D",
+          "new": "ems_restore_handle_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:010D, current source src/memory/ems.asm: Restore EMS mapping context saved for a handle. Evidence: build/workers/names-gfx/descriptive.json#root:195A:010D; historical review citations: src/root/m195A.asm:234 (f_195A_010D); original-dos.json#root:195A:010D ; AH=48h, DX=handle; paired with 00F8 in tile loading."
+        },
+        {
+          "old": "f_195A_0122",
+          "new": "ems_map_multiple_pages",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0122, current source src/memory/ems.asm: Map a list of logical EMS pages by physical page number. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0122; historical review citations: src/root/m195A.asm:248 (f_195A_0122); original-dos.json#root:195A:0122 ; AX=5000h, DX=handle,CX=count,DS:SI=list; LoadTiles passes four entries."
+        },
+        {
+          "old": "f_195A_0144",
+          "new": "ems_map_multiple_segments",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0144, current source src/memory/ems.asm: Map a list of logical EMS pages by physical segment address. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0144; historical review citations: src/root/m195A.asm:269 (f_195A_0144); original-dos.json#root:195A:0144 ; AX=5001h, DX=handle,CX=count,DS:SI=list."
+        },
+        {
+          "old": "f_195A_0166",
+          "new": "ems_move_region",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0166, current source src/memory/ems.asm: Move a memory region through EMS move-region service. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0166; historical review citations: src/root/m195A.asm:290 (f_195A_0166); original-dos.json#root:195A:0166 ; AX=5700h, DS:SI=region descriptor."
+        },
+        {
+          "old": "f_195A_0182",
+          "new": "ems_resize_handle",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0182, current source src/memory/ems.asm: Resize an EMS allocation. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0182; historical review citations: src/root/m195A.asm:309 (f_195A_0182); original-dos.json#root:195A:0182 ; AH=51h, DX=handle,BX=new page count."
+        },
+        {
+          "old": "f_195A_019C",
+          "new": "ems_query_mappable_count",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:019C, current source src/memory/ems.asm: Query physical EMS page mapping count. Evidence: build/workers/names-gfx/descriptive.json#root:195A:019C; historical review citations: src/root/m195A.asm:325 (f_195A_019C); original-dos.json#root:195A:019C ; AX=5801h, CX cached in ems_mappable."
+        },
+        {
+          "old": "f_195A_01AF",
+          "new": "ems_get_mappable_pages",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:01AF, current source src/memory/ems.asm: Fetch physical EMS page/segment mapping array. Evidence: build/workers/names-gfx/descriptive.json#root:195A:01AF; historical review citations: src/root/m195A.asm:336 (f_195A_01AF); original-dos.json#root:195A:01AF ; AX=5800h, ES:DI=array, CX cached."
+        },
+        {
+          "old": "f_195A_01CB",
+          "new": "ems_set_handle_name",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:01CB, current source src/memory/ems.asm: Assign an eight-byte EMS handle name. Evidence: build/workers/names-gfx/descriptive.json#root:195A:01CB; historical review citations: src/root/m195A.asm:353 (f_195A_01CB); original-dos.json#root:195A:01CB ; AX=5301h,DX=handle,DS:SI=name; LoadTiles supplies TILESXXX."
+        },
+        {
+          "old": "f_195A_01DF",
+          "new": "ems_find_named_handle",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:01DF, current source src/memory/ems.asm: Find an EMS handle by its eight-byte name. Evidence: build/workers/names-gfx/descriptive.json#root:195A:01DF; historical review citations: src/root/m195A.asm:368 (f_195A_01DF); original-dos.json#root:195A:01DF ; AX=5401h, DS:SI=name; moves DL into AL after interrupt (not a clean word-handle return)."
+        },
+        {
+          "old": "f_195A_01F2",
+          "new": "ems_set_alternate_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:01F2, current source src/memory/ems.asm: Select/restore alternate EMS map register set. Evidence: build/workers/names-gfx/descriptive.json#root:195A:01F2; historical review citations: src/root/m195A.asm:383 (f_195A_01F2); original-dos.json#root:195A:01F2 ; AX=5B01h,BL=set,ES:DI=save area; clears AL afterward."
+        },
+        {
+          "old": "f_195A_0206",
+          "new": "ems_get_alternate_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0206, current source src/memory/ems.asm: Query active alternate EMS map register set. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0206; historical review citations: src/root/m195A.asm:397 (f_195A_0206); original-dos.json#root:195A:0206 ; AX=5B00h; BL returned in AL."
+        },
+        {
+          "old": "f_195A_0210",
+          "new": "ems_query_alternate_map_size",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0210, current source src/memory/ems.asm: Cache alternate EMS map save-area size. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0210; historical review citations: src/root/m195A.asm:406 (f_195A_0210); original-dos.json#root:195A:0210 ; AX=5B02h; DX stored in ems_altmap."
+        },
+        {
+          "old": "f_195A_021A",
+          "new": "ems_allocate_alternate_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:021A, current source src/memory/ems.asm: Allocate an alternate EMS map register set. Evidence: build/workers/names-gfx/descriptive.json#root:195A:021A; historical review citations: src/root/m195A.asm:413 (f_195A_021A); original-dos.json#root:195A:021A ; AX=5B03h; BL returned in AL."
+        },
+        {
+          "old": "f_195A_0222",
+          "new": "ems_free_alternate_map",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0222, current source src/memory/ems.asm: Release an alternate EMS map register set. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0222; historical review citations: src/root/m195A.asm:420 (f_195A_0222); original-dos.json#root:195A:0222 ; AX=5B04h,BL=set; clears AL afterward."
+        },
+        {
+          "old": "f_195A_023A",
+          "new": "ems_detect_manager",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:023A, current source src/memory/ems.asm: Detect EMS via EMMXXXX0 open and status interrupt. Evidence: build/workers/names-gfx/descriptive.json#root:195A:023A; historical review citations: src/root/m195A.asm:433 (f_195A_023A); original-dos.json#root:195A:023A ; Opens own code-segment EMMXXXX0, closes handle, checks AH from 0018."
+        },
+        {
+          "old": "f_195A_0260",
+          "new": "ems_initialize",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:0260, current source src/memory/ems.asm: Initialize EMS unless command tail contains /E-. Evidence: build/workers/names-gfx/descriptive.json#root:195A:0260; historical review citations: src/root/m195A.asm:457 (f_195A_0260); original-dos.json#root:195A:0260 ; Scans PSP command tail for /E-, detects manager, requires version>=0x32 and caches page frame."
+        },
+        {
+          "old": "f_195A_02B7",
+          "new": "ems_fatal_error",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:195A:02B7, current source src/memory/ems.asm: Break into debugger then tail-call Punt with EMS Error. Evidence: build/workers/names-gfx/descriptive.json#root:195A:02B7; historical review citations: src/root/m195A.asm:498 (f_195A_02B7); original-dos.json#root:195A:02B7 ; Own EMS Error string and INT3 followed by far jump; unreachable RETF retained."
+        },
+        {
+          "old": "f_1B4E_000C",
+          "new": "gfx_empty_driver_callback",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:000C, current source src/platform/video/bios_bitmap.asm: Return without changing drawing state; initial placeholder for driver cells. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:000C; historical review citations: src/root/m1B4E.asm:108 (f_1B4E_000C); original-dos.json#root:1B4E:000C ; g_3DF4 points here and 0025 fills all 25 callback pointers with it."
+        },
+        {
+          "old": "f_1B4E_0025",
+          "new": "gfx_reset_driver_callbacks",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0025, current source src/platform/video/bios_bitmap.asm: Set all 25 driver callback cells to the empty callback. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0025; historical review citations: src/root/m1B4E.asm:127 (f_1B4E_0025); original-dos.json#root:1B4E:0025 ; Reads g_3DF4 and far table g_3DF8, emits 25 offset/segment pairs with STOSW."
+        },
+        {
+          "old": "f_1B4E_0081",
+          "new": "gfx_put_fixed_font_chars",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0081, current source src/platform/video/bios_bitmap.asm: Draw a NUL-terminated string one fixed font cell at a time, updating text pen. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0081; historical review citations: src/root/m1B4E.asm:181 (f_1B4E_0081); original-dos.json#root:1B4E:0081 ; Calls 0110 for each character and clips x to screen width; used by GPutStr for display type 6."
+        },
+        {
+          "old": "f_1B4E_00CE",
+          "new": "gfx_put_string_at_pen",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:00CE, current source src/platform/video/bios_bitmap.asm: Call GPutStr at current text pen position. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:00CE; historical review citations: src/root/m1B4E.asm:220 (f_1B4E_00CE); original-dos.json#root:1B4E:00CE ; Pushes g_3DA2/g_3DA0 and supplied far string to GPutStr."
+        },
+        {
+          "old": "f_1B4E_0110",
+          "new": "gfx_put_fixed_font_char",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0110, current source src/platform/video/bios_bitmap.asm: Find fixed-font glyph and draw it through mono driver blitter; a special high-bit substitution path has an unexplained table-boundary access. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0110; historical review citations: src/root/m1B4E.asm:237 (f_1B4E_0110); original-dos.json#root:1B4E:0110 ; Character*glyph stride g_3DDA added to font pointer g_3DD6. For stride6 and character bit7, original instruction012B reads CS:[0xE8+unsigned character] without subtracting0x80, beyond apparent FoldTable. Do not infer accented-letter folding from the inherited source comment."
+        },
+        {
+          "old": "f_1B4E_015B",
+          "new": "gfx_video_bios_ax",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:015B, current source src/platform/video/bios_bitmap.asm: Invoke INT 10h using the caller-supplied AX value. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:015B; historical review citations: src/root/m1B4E.asm:272 (f_1B4E_015B); original-dos.json#root:1B4E:015B ; Driver mode initializers call with video modes; wrapper preserves BP only."
+        },
+        {
+          "old": "f_1B4E_0165",
+          "new": "gfx_install_driver_callbacks",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0165, current source src/platform/video/bios_bitmap.asm: Copy 25 far driver callbacks from ES:SI into active driver table. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0165; historical review citations: src/root/m1B4E.asm:281 (f_1B4E_0165); original-dos.json#root:1B4E:0165 ; REP MOVSW count 0x32, table destination g_3DF8; each driver initializer supplies its Dispatch table."
+        },
+        {
+          "old": "f_1B4E_0177",
+          "new": "gfx_set_dac_palette_inplace",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0177, current source src/platform/video/bios_bitmap.asm: Divide 768 input RGB bytes by four in place and install 256 DAC entries. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0177; historical review citations: src/root/m1B4E.asm:294 (f_1B4E_0177); original-dos.json#root:1B4E:0177 ; Two SHR per component; INT10 AX=1012h,CX=256,BX=0."
+        },
+        {
+          "old": "f_1B4E_01A1",
+          "new": "gfx_set_ega_palette",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:01A1, current source src/platform/video/bios_bitmap.asm: Load EGA attribute palette and border from a far buffer. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:01A1; historical review citations: src/root/m1B4E.asm:321 (f_1B4E_01A1); original-dos.json#root:1B4E:01A1 ; INT10 AX=1002h, ES:DX points to supplied table."
+        },
+        {
+          "old": "f_1B4E_01AE",
+          "new": "gfx_set_dac_palette",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:01AE, current source src/platform/video/bios_bitmap.asm: Scale RGB palette to six-bit DAC values in 16-entry stack chunks and install it. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:01AE; historical review citations: src/root/m1B4E.asm:331 (f_1B4E_01AE); original-dos.json#root:1B4E:01AE ; Count zero defaults to 256; count 16 resets attribute registers to identity; INT10 AX=1012h for each chunk."
+        },
+        {
+          "old": "f_1B4E_0228",
+          "new": "gfx_set_border_colour",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0228, current source src/platform/video/bios_bitmap.asm: Set BIOS palette border colour. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0228; historical review citations: src/root/m1B4E.asm:396 (f_1B4E_0228); original-dos.json#root:1B4E:0228 ; INT10 AX=1001h,BH=argument byte."
+        },
+        {
+          "old": "f_1B4E_0235",
+          "new": "gfx_get_bios_video_mode",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0235, current source src/platform/video/bios_bitmap.asm: Read current video mode from BIOS data area. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0235; historical review citations: src/root/m1B4E.asm:406 (f_1B4E_0235); original-dos.json#root:1B4E:0235 ; ES=0, byte 0449h zero-extended to AX."
+        },
+        {
+          "old": "f_1B4E_0240",
+          "new": "gfx_set_bios_video_mode",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B4E:0240, current source src/platform/video/bios_bitmap.asm: Set BIOS mode and return the mode byte recorded by BIOS. Evidence: build/workers/names-gfx/descriptive.json#root:1B4E:0240; historical review citations: src/root/m1B4E.asm:414 (f_1B4E_0240); original-dos.json#root:1B4E:0240 ; AH cleared before INT10; returns BDA 0449h."
+        },
+        {
+          "old": "f_1B73_0024",
+          "new": "mouse_absent_driver_iret",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0024, current source src/platform/input_timer.asm: IRET stub used as a temporary INT33 vector when no mouse driver is installed. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0024; historical review citations: src/root/m1B73.asm:236 (f_1B73_0024); original-dos.json#root:1B73:0024 ; 0046 installs this address at IVT 00CC/00CE only when vector is zero; 0025 removes only this exact stub."
+        },
+        {
+          "old": "f_1B73_0025",
+          "new": "mouse_remove_absent_stub",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0025, current source src/platform/input_timer.asm: Clear INT33 vector only if it still points at this module's IRET stub. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0025; historical review citations: src/root/m1B73.asm:241 (f_1B73_0025); original-dos.json#root:1B73:0025 ; Compares both IVT offset and segment before zeroing them."
+        },
+        {
+          "old": "f_1B73_0046",
+          "new": "mouse_initialize_driver",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0046, current source src/platform/input_timer.asm: Initialize INT33 driver, absent-driver stub and absolute/mickey input mode. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0046; historical review citations: src/root/m1B73.asm:256 (f_1B73_0046); original-dos.json#root:1B73:0046 ; INT33 AX=24h version query, AX=0 reset; special 0x700 or g_432A enables mickey mode; stores availability and centers via 09F7."
+        },
+        {
+          "old": "f_1B73_00D9",
+          "new": "mouse_show_cursor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:00D9, current source src/platform/input_timer.asm: Show software cursor when hide level permits; choose applicable hot-box cursor callback. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:00D9; historical review citations: src/root/m1B73.asm:316 (f_1B73_00D9); original-dos.json#root:1B73:00D9 ; Tests g_4365, searches g_549A via 0CEF, invokes cursor action 1 through 0122 and increments level."
+        },
+        {
+          "old": "f_1B73_0122",
+          "new": "mouse_cursor_action",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0122, current source src/platform/input_timer.asm: Run cursor show/hide callback with full-screen clipping and saved drawing attributes. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0122; historical review citations: src/root/m1B73.asm:351 (f_1B73_0122); original-dos.json#root:1B73:0122 ; Saves clip list, trims, raster op, fore/back/pattern; selects copy, calls cursor callback, restores attributes and raster selector."
+        },
+        {
+          "old": "f_1B73_0196",
+          "new": "mouse_hide_cursor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0196, current source src/platform/input_timer.asm: Hide software cursor and decrement show level, diagnosing negative level. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0196; historical review citations: src/root/m1B73.asm:396 (f_1B73_0196); original-dos.json#root:1B73:0196 ; Own MouseHide < 0 string; invokes cursor action 2 while interrupts disabled and decrements g_4365."
+        },
+        {
+          "old": "f_1B73_01CB",
+          "new": "mouse_begin_screen_access",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:01CB, current source src/platform/input_timer.asm: Increment screen-access lock and hide cursor. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:01CB; historical review citations: src/root/m1B73.asm:422 (f_1B73_01CB); original-dos.json#root:1B73:01CB ; INC g_3DD4 then call 0196; display rasterizers use the same lock state."
+        },
+        {
+          "old": "f_1B73_01D5",
+          "new": "mouse_end_screen_access",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:01D5, current source src/platform/input_timer.asm: Decrement screen-access lock and show cursor when it reaches zero. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:01D5; historical review citations: src/root/m1B73.asm:428 (f_1B73_01D5); original-dos.json#root:1B73:01D5 ; DEC g_3DD4; calls 00D9 only on zero."
+        },
+        {
+          "old": "f_1B73_01E1",
+          "new": "mouse_set_cursor_bitmaps",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:01E1, current source src/platform/input_timer.asm: Install cursor picture/mask pointers and read cursor width,height. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:01E1; historical review citations: src/root/m1B73.asm:436 (f_1B73_01E1); original-dos.json#root:1B73:01E1 ; Copies two far input pointers into 4D8E/4D92 and picture header to 4348/434A under CLI."
+        },
+        {
+          "old": "f_1B73_0218",
+          "new": "mouse_set_mickey_ratio",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0218, current source src/platform/input_timer.asm: Set INT33 mickey-to-pixel ratio. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0218; historical review citations: src/root/m1B73.asm:461 (f_1B73_0218); original-dos.json#root:1B73:0218 ; AX=0Fh,CX and DX from two arguments."
+        },
+        {
+          "old": "f_1B73_0228",
+          "new": "mouse_set_double_speed",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0228, current source src/platform/input_timer.asm: Set INT33 double-speed threshold. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0228; historical review citations: src/root/m1B73.asm:472 (f_1B73_0228); original-dos.json#root:1B73:0228 ; AX=13h,DX=argument."
+        },
+        {
+          "old": "f_1B73_0235",
+          "new": "input_install_hooks",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0235, current source src/platform/input_timer.asm: Install mouse event callback, INT15 scan interception and INT09 keyboard hook. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0235; historical review citations: src/root/m1B73.asm:483 (f_1B73_0235); original-dos.json#root:1B73:0235 ; INT33 AX=0Ch,CX=0x7F; DOS get/set vectors 15h and 09h, preserves BIOS NumLock state."
+        },
+        {
+          "old": "f_1B73_02A9",
+          "new": "input_remove_hooks",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:02A9, current source src/platform/input_timer.asm: Restore saved keyboard hooks, BIOS NumLock state and mouse event callback. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:02A9; historical review citations: src/root/m1B73.asm:528 (f_1B73_02A9); original-dos.json#root:1B73:02A9 ; Writes saved NumLock bit, restores vectors using INT21 AX=2515h/2509h; disables installed flags."
+        },
+        {
+          "old": "f_1B73_030F",
+          "new": "input_enqueue_event_args",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:030F, current source src/platform/input_timer.asm: Adapt stack arguments to the register event enqueue operation. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:030F; historical review citations: src/root/m1B73.asm:568 (f_1B73_030F); original-dos.json#root:1B73:030F ; Loads ES:BX,AX,CX,DX then calls 036E; installed as event callback in m1FD2.c timer/hot-box records."
+        },
+        {
+          "old": "f_1B73_032A",
+          "new": "input_event_count",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:032A, current source src/platform/input_timer.asm: Return number of queued input events. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:032A; historical review citations: src/root/m1B73.asm:582 (f_1B73_032A); original-dos.json#root:1B73:032A ; Reads g_5FF2, same count decremented by 032E and incremented by 036E."
+        },
+        {
+          "old": "f_1B73_032E",
+          "new": "input_pop_event",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:032E, current source src/platform/input_timer.asm: Pop one 16-byte event from the circular input queue. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:032E; historical review citations: src/root/m1B73.asm:588 (f_1B73_032E); original-dos.json#root:1B73:032E ; Decrements g_5FF2; advances read index modulo g_5FF0 and copies 8 words to caller buffer under CLI."
+        },
+        {
+          "old": "f_1B73_036E",
+          "new": "input_enqueue_event",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:036E, current source src/platform/input_timer.asm: Append a register-supplied event to the circular queue if space exists. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:036E; historical review citations: src/root/m1B73.asm:626 (f_1B73_036E); original-dos.json#root:1B73:036E ; Advances write index modulo g_5FF0, refuses collision with read index; stores fields and updates count."
+        },
+        {
+          "old": "f_1B73_03EE",
+          "new": "mouse_mickey_callback",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:03EE, current source src/platform/input_timer.asm: Convert mouse mickey deltas into bounded screen coordinates, then fall through to common callback. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:03EE; historical review citations: src/root/m1B73.asm:692 (f_1B73_03EE); original-dos.json#root:1B73:03EE ; SI/DI halved and compared against previous counts 432C/432E; x/y clamped against screen dimensions."
+        },
+        {
+          "old": "f_1B73_0445",
+          "new": "mouse_event_callback",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0445, current source src/platform/input_timer.asm: Receive mouse event registers, update button/position state and dispatch event on a private stack. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0445; historical review citations: src/root/m1B73.asm:736 (f_1B73_0445); original-dos.json#root:1B73:0445 ; Stores g_9120/22/24; reentry guard and SS:SP swap; refreshes cursor then calls near event dispatcher g_5FFA."
+        },
+        {
+          "old": "f_1B73_04BB",
+          "new": "mouse_refresh_cursor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:04BB, current source src/platform/input_timer.asm: Erase/redraw visible cursor after pointer or hot-box change. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:04BB; historical review citations: src/root/m1B73.asm:788 (f_1B73_04BB); original-dos.json#root:1B73:04BB ; Calls 0122 with action 2, selects hot-box, then action 1; used by mouse and timer interrupts and all drawing epilogues."
+        },
+        {
+          "old": "f_1B73_050E",
+          "new": "input_noop_050e",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:050E, current source src/platform/input_timer.asm: No operation; precise intended API role is unknown. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:050E; historical review citations: src/root/m1B73.asm:829 (f_1B73_050E); original-dos.json#root:1B73:050E ; Body is a lone RETF. Call sites in alert/menu flows do not prove a more specific name. Address suffix retained because these adjacent empty bodies have indistinguishable demonstrated purpose; intended API roles are unknown."
+        },
+        {
+          "old": "f_1B73_050F",
+          "new": "input_noop_050f",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:050F, current source src/platform/input_timer.asm: No operation; precise intended API role is unknown. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:050F; historical review citations: src/root/m1B73.asm:833 (f_1B73_050F); original-dos.json#root:1B73:050F ; Body is a lone RETF; no state or effect permits a stronger claim. Address suffix retained because these adjacent empty bodies have indistinguishable demonstrated purpose; intended API roles are unknown."
+        },
+        {
+          "old": "f_1B73_0510",
+          "new": "input_noop_0510",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0510, current source src/platform/input_timer.asm: No operation; precise intended API role is unknown. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0510; historical review citations: src/root/m1B73.asm:837 (f_1B73_0510); original-dos.json#root:1B73:0510 ; Body is a lone RETF. Alert/menu call sites alone do not identify original intent. Address suffix retained because these adjacent empty bodies have indistinguishable demonstrated purpose; intended API roles are unknown."
+        },
+        {
+          "old": "f_1B73_0511",
+          "new": "timer_disable_tick_count",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0511, current source src/platform/input_timer.asm: Disable incrementing this module's software tick counter. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0511; historical review citations: src/root/m1B73.asm:841 (f_1B73_0511); original-dos.json#root:1B73:0511 ; Writes zero to cs:tick_count_on; INT08 handler tests this byte."
+        },
+        {
+          "old": "f_1B73_0518",
+          "new": "timer_enable_tick_count",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0518, current source src/platform/input_timer.asm: Enable incrementing this module's software tick counter. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0518; historical review citations: src/root/m1B73.asm:846 (f_1B73_0518); original-dos.json#root:1B73:0518 ; Writes one to cs:tick_count_on; INT08 handler increments cs:tick_count when enabled."
+        },
+        {
+          "old": "f_1B73_051F",
+          "new": "timer_input_interrupt",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:051F, current source src/platform/input_timer.asm: INT08 service for software ticks, mouse/keypad cursor repeat and old-timer chaining. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:051F; historical review citations: src/root/m1B73.asm:852 (f_1B73_051F); original-dos.json#root:1B73:051F ; Installed/removed via saved INT08 vector in this module; tick_count increment, reentry guard, private stack, IRET/old-vector chain."
+        },
+        {
+          "old": "f_1B73_065A",
+          "new": "kbd_int15_scan_hook",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:065A, current source src/platform/input_timer.asm: Intercept INT15 AH=4F keyboard scans and feed common scan handler. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:065A; historical review citations: src/root/m1B73.asm:983 (f_1B73_065A); original-dos.json#root:1B73:065A ; Tests AH=4Fh and carry, guards reentry, switches private stack, calls 0747, otherwise chains old INT15."
+        },
+        {
+          "old": "f_1B73_06E3",
+          "new": "kbd_int09_hook",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:06E3, current source src/platform/input_timer.asm: Read scan code from port60 and feed common handler before chaining old INT09. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:06E3; historical review citations: src/root/m1B73.asm:1039 (f_1B73_06E3); original-dos.json#root:1B73:06E3 ; IN AL,60h; marks g_432B, private stack, calls 0747 and old_int09."
+        },
+        {
+          "old": "f_1B73_0747",
+          "new": "kbd_process_scan",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0747, current source src/platform/input_timer.asm: Track scan make/break state and turn selected keys into mouse movement/button/events. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0747; historical review citations: src/root/m1B73.asm:1086 (f_1B73_0747); original-dos.json#root:1B73:0747 ; Mask scan 0x7F, g_53CD key-state table, E0/shift handling, g_544D keypad dispatch and queue calls."
+        },
+        {
+          "old": "f_1B73_09E9",
+          "new": "mouse_set_position",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:09E9, current source src/platform/input_timer.asm: Set pointer position from stack x,y arguments through common mouse callback. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:09E9; historical review citations: src/root/m1B73.asm:1420 (f_1B73_09E9); original-dos.json#root:1B73:09E9 ; Loads CX/DX and calls 09FF; hot-box center helper uses it."
+        },
+        {
+          "old": "f_1B73_09F7",
+          "new": "mouse_refresh_position",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:09F7, current source src/platform/input_timer.asm: Feed cached pointer x,y through the position update helper. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:09F7; historical review citations: src/root/m1B73.asm:1430 (f_1B73_09F7); original-dos.json#root:1B73:09F7 ; Loads g_9122/24 and falls into 09FF."
+        },
+        {
+          "old": "f_1B73_09FF",
+          "new": "mouse_update_position_regs",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:09FF, current source src/platform/input_timer.asm: Apply register CX,DX pointer position and dispatch synthetic move event. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:09FF; historical review citations: src/root/m1B73.asm:1435 (f_1B73_09FF); original-dos.json#root:1B73:09FF ; Optional INT33 AX=4 hardware reposition; constructs event AX=...01 and calls 0445."
+        },
+        {
+          "old": "f_1B73_0A1B",
+          "new": "kbd_dispatch_pointer_action",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0A1B, current source src/platform/input_timer.asm: Dispatch keyboard-generated mouse action and return to scan handler. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0A1B; historical review citations: src/root/m1B73.asm:1453 (f_1B73_0A1B); original-dos.json#root:1B73:0A1B ; AH copied to AL, cached x/y loaded, calls common mouse callback 0445 then jumps to scan handler continuation L07F3."
+        },
+        {
+          "old": "f_1B73_0A30",
+          "new": "kbd_scan_state",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0A30, current source src/platform/input_timer.asm: Return a scan-indexed key state with bit7 inverted. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0A30; historical review citations: src/root/m1B73.asm:1465 (f_1B73_0A30); original-dos.json#root:1B73:0A30 ; Loads g_53CD[index], XOR AL,80h, zero-extends. myDelay and menu keyboard paths test scan codes 1Dh/52h/etc."
+        },
+        {
+          "old": "f_1B73_0A40",
+          "new": "kbd_disable_mouse_emulation",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0A40, current source src/platform/input_timer.asm: Disable keyboard mouse emulation and clear its repeat/shift state. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0A40; historical review citations: src/root/m1B73.asm:1476 (f_1B73_0A40); original-dos.json#root:1B73:0A40 ; Calls 0A6C to reset key table, clears kbd_hook_on and g_53BD, reads INT33 buttons and clears repeat bytes."
+        },
+        {
+          "old": "f_1B73_0A6C",
+          "new": "kbd_enable_mouse_emulation",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0A6C, current source src/platform/input_timer.asm: Reset scan state to 0x80 and enable keyboard mouse emulation. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0A6C; historical review citations: src/root/m1B73.asm:1493 (f_1B73_0A6C); original-dos.json#root:1B73:0A6C ; REP STOSW fills 128 bytes; sets kbd_hook_on and g_53BD to 1."
+        },
+        {
+          "old": "f_1B73_0A89",
+          "new": "hotbox_find_id",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0A89, current source src/platform/input_timer.asm: Find an 18-byte hot-box record by its ID; carry set if absent. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0A89; historical review citations: src/root/m1B73.asm:1507 (f_1B73_0A89); original-dos.json#root:1B73:0A89 ; List count word followed by 18-byte records; compares record+0Ch with AX, CLC/STC result."
+        },
+        {
+          "old": "f_1B73_0AA3",
+          "new": "hotbox_initialize_dispatch",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0AA3, current source src/platform/input_timer.asm: Clear first two hot-box lists and install hot-box event dispatcher. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0AA3; historical review citations: src/root/m1B73.asm:1526 (f_1B73_0AA3); original-dos.json#root:1B73:0AA3 ; Zeroes counts through g_5484, sets g_5FFA=0CB3, mask g_5FF9=1Fh."
+        },
+        {
+          "old": "f_1B73_0AC3",
+          "new": "hotbox_append",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0AC3, current source src/platform/input_timer.asm: Append a nine-word record to a bounded hot-box list. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0AC3; historical review citations: src/root/m1B73.asm:1540 (f_1B73_0AC3); original-dos.json#root:1B73:0AC3 ; Capacity at list-2, count at list+0; copies nine words; own HotBox overflow diagnostic."
+        },
+        {
+          "old": "f_1B73_0B00",
+          "new": "hotbox_prepend",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0B00, current source src/platform/input_timer.asm: Insert a hot-box record at the front of a bounded list. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0B00; historical review citations: src/root/m1B73.asm:1574 (f_1B73_0B00); original-dos.json#root:1B73:0B00 ; Shifts count*18 existing bytes right; cursor list 5071:0728 is hidden/redrawn around mutation."
+        },
+        {
+          "old": "f_1B73_0B5B",
+          "new": "hotbox_remove_id",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0B5B, current source src/platform/input_timer.asm: Find and delete hot-box ID, compacting following records. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0B5B; historical review citations: src/root/m1B73.asm:1623 (f_1B73_0B5B); original-dos.json#root:1B73:0B5B ; Uses 0A89; decrements count and REP MOVSW compacts; hides/redraws cursor for cursor list mutation."
+        },
+        {
+          "old": "f_1B73_0BC5",
+          "new": "hotbox_contains_pointer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0BC5, current source src/platform/input_timer.asm: Test whether pointer is inside the hot-box with supplied ID. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0BC5; historical review citations: src/root/m1B73.asm:1676 (f_1B73_0BC5); original-dos.json#root:1B73:0BC5 ; Finds by 0A89 then compares cached g_9122/24 to four record bounds; returns 0/1."
+        },
+        {
+          "old": "f_1B73_0BFF",
+          "new": "hotbox_pointer_hit_id",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0BFF, current source src/platform/input_timer.asm: Find ID of hot-box under pointer in the third hot-box list. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0BFF; historical review citations: src/root/m1B73.asm:1707 (f_1B73_0BFF); original-dos.json#root:1B73:0BFF ; Walks g_5484+12 list and rectangle bounds; returns matching +0Ch ID or zero."
+        },
+        {
+          "old": "f_1B73_0C42",
+          "new": "hotbox_get_rect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0C42, current source src/platform/input_timer.asm: Copy rectangle of a hot-box ID to caller's far buffer. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0C42; historical review citations: src/root/m1B73.asm:1743 (f_1B73_0C42); original-dos.json#root:1B73:0C42 ; Finds ID via 0A89, copies four bound words, returns success."
+        },
+        {
+          "old": "f_1B73_0C80",
+          "new": "hotbox_center_pointer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0C80, current source src/platform/input_timer.asm: Move pointer to midpoint of a hot-box from the third list. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0C80; historical review citations: src/root/m1B73.asm:1774 (f_1B73_0C80); original-dos.json#root:1B73:0C80 ; Finds ID, averages left/right and top/bottom, calls 09E9."
+        },
+        {
+          "old": "f_1B73_0CB3",
+          "new": "hotbox_dispatch_event",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0CB3, current source src/platform/input_timer.asm: Walk hot-box lists whose event mask matches and invoke hit callbacks. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0CB3; historical review citations: src/root/m1B73.asm:1802 (f_1B73_0CB3); original-dos.json#root:1B73:0CB3 ; Six-byte list descriptors g_5484, mask AND AH, 0CEF hit/callback search; stops at null descriptor."
+        },
+        {
+          "old": "f_1B73_0CEF",
+          "new": "hotbox_hit_and_callback",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0CEF, current source src/platform/input_timer.asm: Find first rectangle matching coordinates/event mask; optionally invoke its callback. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0CEF; historical review citations: src/root/m1B73.asm:1837 (f_1B73_0CEF); original-dos.json#root:1B73:0CEF ; 18-byte records: bounds +0..6, far callback+8, ID+0Ch, event mask+10h; BH controls callback."
+        },
+        {
+          "old": "f_1B73_0D4B",
+          "new": "mouse_default_cursor_thunk",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0D4B, current source src/platform/input_timer.asm: NOP-aligned alternate entry to default cursor action. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0D4B; historical review citations: src/root/m1B73.asm:1888 (f_1B73_0D4B); original-dos.json#root:1B73:0D4B ; Public FAR label immediately precedes EVEN and f_1B73_0D4C; timer callback records in m1FD2.c use this address."
+        },
+        {
+          "old": "f_1B73_0D4C",
+          "new": "mouse_default_cursor_action",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0D4C, current source src/platform/input_timer.asm: Show or erase default cursor once for each requested mode transition. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0D4C; historical review citations: src/root/m1B73.asm:1890 (f_1B73_0D4C); original-dos.json#root:1B73:0D4C ; Argument low2 bits selects 0 no-op,1 draw via 0DA4,2 restore saved bitmap; duplicate-mode diagnostic otherwise."
+        },
+        {
+          "old": "f_1B73_0DA4",
+          "new": "mouse_draw_default_cursor",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0DA4, current source src/platform/input_timer.asm: Capture cursor background then compose image and mask using driver AND/OR modes. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0DA4; historical review citations: src/root/m1B73.asm:1929 (f_1B73_0DA4); original-dos.json#root:1B73:0DA4 ; Chooses cursor assets based on hide rectangle/shift; slot8 capture, slot15 AND mono mask, slot13 OR colour picture."
+        },
+        {
+          "old": "f_1B73_0EEE",
+          "new": "kbd_scroll_lock_state",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1B73:0EEE, current source src/platform/input_timer.asm: Return BIOS ScrollLock flag as bit0x10. Evidence: build/workers/names-gfx/descriptive.json#root:1B73:0EEE; historical review citations: src/root/m1B73.asm:2047 (f_1B73_0EEE); original-dos.json#root:1B73:0EEE ; Reads BDA 0417h and AND AX,10h."
+        },
+        {
+          "old": "f_1F58_0006",
+          "new": "timer_bios_tick_count",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:0006, current source src/platform/bios_helpers.asm: Read BIOS 32-bit tick counter. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:0006; historical review citations: src/root/m1F58.asm:30 (f_1F58_0006); original-dos.json#root:1F58:0006 ; ES=0, words 046Ch and 046Eh returned in AX/DX."
+        },
+        {
+          "old": "f_1F58_0014",
+          "new": "input_return_zero",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:0014, current source src/platform/bios_helpers.asm: Return zero; intended API role unknown. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:0014; historical review citations: src/root/m1F58.asm:38 (f_1F58_0014); original-dos.json#root:1F58:0014 ; XOR AX,AX followed by RETF; no input/state use."
+        },
+        {
+          "old": "f_1F58_0017",
+          "new": "mem_exchange_byte_ranges",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:0017, current source src/platform/bios_helpers.asm: Exchange bytes between two far buffers. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:0017; historical review citations: src/root/m1F58.asm:43 (f_1F58_0017); original-dos.json#root:1F58:0017 ; Reads both byte values then writes each to the opposite buffer; CX length zero guard."
+        },
+        {
+          "old": "f_1F58_0038",
+          "new": "kbd_poll_bios_key",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:0038, current source src/platform/bios_helpers.asm: Peek pending/pushed-back key or BIOS key; optionally clear NumLock flag. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:0038; historical review citations: src/root/m1F58.asm:68 (f_1F58_0038); original-dos.json#root:1F58:0038 ; g_5A2A cache or INT16 AH=1; returns zero if no key, uses g_53BD to clear BDA NumLock bit."
+        },
+        {
+          "old": "f_1F58_005A",
+          "new": "kbd_read_bios_char",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:005A, current source src/platform/bios_helpers.asm: Read queued or BIOS character with two-stage extended-key handling. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:005A; historical review citations: src/root/m1F58.asm:86 (f_1F58_005A); original-dos.json#root:1F58:005A ; INT16 AH=0; zero ASCII caches scan byte for next call; pending two-word pushback queue."
+        },
+        {
+          "old": "f_1F58_007F",
+          "new": "kbd_unread_char",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:007F, current source src/platform/bios_helpers.asm: Push a character back ahead of the pending character. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:007F; historical review citations: src/root/m1F58.asm:108 (f_1F58_007F); original-dos.json#root:1F58:007F ; AH=80h marks pushed byte; XCHG g_5A2A and shift old pending value to g_5A2C."
+        },
+        {
+          "old": "f_1F58_0090",
+          "new": "kbd_read_key_code",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:0090, current source src/platform/bios_helpers.asm: Read character or combine extended scan code with high byte 8. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:0090; historical review citations: src/root/m1F58.asm:119 (f_1F58_0090); original-dos.json#root:1F58:0090 ; Calls 005A twice only when first result is zero; MOV AH,8."
+        },
+        {
+          "old": "f_1F58_00A1",
+          "new": "kbd_restore_ctrl_break_vector",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:00A1, current source src/platform/bios_helpers.asm: Restore saved INT23 Ctrl-Break handler. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:00A1; historical review citations: src/root/m1F58.asm:129 (f_1F58_00A1); original-dos.json#root:1F58:00A1 ; CLI; IVT 008Ch/008Eh <- g_5A2E/30; STI."
+        },
+        {
+          "old": "f_1F58_00B8",
+          "new": "kbd_install_ctrl_break_vector",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F58:00B8, current source src/platform/bios_helpers.asm: Replace INT23 handler and register vector restoration at exit. Evidence: build/workers/names-gfx/descriptive.json#root:1F58:00B8; historical review citations: src/root/m1F58.asm:141 (f_1F58_00B8); original-dos.json#root:1F58:00B8 ; XCHG supplied far pointer with IVT 008Ch/008Eh; saves old values and atexit(00A1)."
+        },
+        {
+          "old": "f_1F66_0029",
+          "new": "file_wildcard_search",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F66:0029, current source src/platform/file_helpers.asm: Case-insensitive wildcard search allowing a match inside the candidate string. Evidence: build/workers/names-gfx/descriptive.json#root:1F66:0029; historical review citations: src/root/m1F66.asm:23 (f_1F66_0029); original-dos.json#root:1F66:0029 ; DL=1 entry to common matcher; ?,* handling and ASCII case fold; returned offset is a match pointer component, not a boolean API."
+        },
+        {
+          "old": "f_1F66_002D",
+          "new": "file_wildcard_match",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F66:002D, current source src/platform/file_helpers.asm: Case-insensitive wildcard match initially anchored to the candidate start. Evidence: build/workers/names-gfx/descriptive.json#root:1F66:002D; historical review citations: src/root/m1F66.asm:28 (f_1F66_002D); original-dos.json#root:1F66:002D ; DL=0 entry, same common matcher; * switches into searching state; mismatch returns AX=0."
+        },
+        {
+          "old": "f_1F66_00AF",
+          "new": "file_drive_current_directory",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F66:00AF, current source src/platform/file_helpers.asm: Build drive-letter colon/backslash prefix and query that drive's current directory. Evidence: build/workers/names-gfx/descriptive.json#root:1F66:00AF; historical review citations: src/root/m1F66.asm:110 (f_1F66_00AF); original-dos.json#root:1F66:00AF ; Argument drive number, INT21 AH=47h, caller far output buffer; returns carry-derived success."
+        },
+        {
+          "old": "f_1F66_00DA",
+          "new": "data_rotating_byte_checksum",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F66:00DA, current source src/platform/file_helpers.asm: Sum each input byte into 16-bit checksum and rotate left one bit. Evidence: build/workers/names-gfx/descriptive.json#root:1F66:00DA; historical review citations: src/root/m1F66.asm:138 (f_1F66_00DA); original-dos.json#root:1F66:00DA ; LODSB, ADD BX,AX, ROL BX,1 for supplied count; no zero-count guard."
+        },
+        {
+          "old": "f_1F66_00F6",
+          "new": "file_dos_drive_count",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F66:00F6, current source src/platform/file_helpers.asm: Read DOS internal drive-count byte, returning 8 if zero. Evidence: build/workers/names-gfx/descriptive.json#root:1F66:00F6; historical review citations: src/root/m1F66.asm:159 (f_1F66_00F6); original-dos.json#root:1F66:00F6 ; INT21 AH=52h, ES:BX+20h, fallback AL=8."
+        },
+        {
+          "old": "f_1F66_0107",
+          "new": "system_register_stress",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:1F66:0107, current source src/platform/file_helpers.asm: Load test patterns into CPU registers and spin, trapping on an unexpected comparison. Evidence: build/workers/names-gfx/descriptive.json#root:1F66:0107; historical review citations: src/root/m1F66.asm:171 (f_1F66_0107); original-dos.json#root:1F66:0107 ; Patterns start 0xA3A5 with successive rotations; failure writes ! to B000:0040 then INT23. Exact intended diagnostic scope remains uncertain."
+        },
+        {
+          "old": "f_24FA_00B5",
+          "new": "debug_breakpoint",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:24FA:00B5, current source src/graphics/pixel_helpers.asm: Enter debugger via INT3; no return instruction within its extent. Evidence: build/workers/names-gfx/descriptive.json#root:24FA:00B5; historical review citations: src/root/m24FA.asm:128 (f_24FA_00B5); original-dos.json#root:24FA:00B5 ; Only instruction is INT3, end of module."
+        },
+        {
+          "old": "f_283E_000A",
+          "new": "snd_opl_write",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:283E:000A, current source src/sound/opl2_registers.asm: Write one OPL2 register via C stack arguments. Evidence: build/workers/names-gfx/descriptive.json#root:283E:000A; historical review citations: src/root/m283E.asm:22 (f_283E_000A); original-dos.json#root:283E:000A ; AH=register,AL=value,DX=388h then calls 0020."
+        },
+        {
+          "old": "f_283E_0020",
+          "new": "snd_opl_write_regs",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:283E:0020, current source src/sound/opl2_registers.asm: Write OPL2 register/value in AH/AL to DX/DX+1 with I/O read delays. Evidence: build/workers/names-gfx/descriptive.json#root:283E:0020; historical review citations: src/root/m283E.asm:35 (f_283E_0020); original-dos.json#root:283E:0020 ; Index output,10 status reads,data output,40 status reads."
+        },
+        {
+          "old": "f_283E_0035",
+          "new": "snd_opl_probe_tone",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:283E:0035, current source src/sound/opl2_registers.asm: Program an OPL2 tone, poll PIT elapsed counts, then stop it. Evidence: build/workers/names-gfx/descriptive.json#root:283E:0035; historical review citations: src/root/m283E.asm:53 (f_283E_0035); original-dos.json#root:283E:0035 ; Fixed instrument/key-on register sequence, PIT channel0 latch, wait delta>=0952h, key-off. This is not a complete OPL reset."
+        },
+        {
+          "old": "f_28BC_000E",
+          "new": "snd_timer_reentrant_exit",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:000E, current source src/sound/sample_timer.asm: Restore AX, decrement nesting counter and return from a reentered timer interrupt. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:000E; historical review citations: src/root/m28BC.asm:242 (f_28BC_000E); original-dos.json#root:28BC:000E ; Conditional branch from 0015 after nesting count !=1; POP AX / DEC CS:busy / IRET."
+        },
+        {
+          "old": "f_28BC_0015",
+          "new": "snd_timer_mix_two_channels",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:0015, current source src/sound/sample_timer.asm: Mix two sample channels and output through selected hardware backend; maintain sequencer and BIOS timer cadence. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:0015; historical review citations: src/root/m28BC.asm:246 (f_28BC_0015); original-dos.json#root:28BC:0015 ; Body reads channel records6B4C/60, sums samples and shifts right1; indirect output g_6B9C, private stack for f_284A_067F, IRET or chain old_int8."
+        },
+        {
+          "old": "f_28BC_020E",
+          "new": "snd_timer_mix_four_channels",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:020E, current source src/sound/sample_timer.asm: Mix four sample channels and share the sequencer/output/timer tail. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:020E; historical review citations: src/root/m28BC.asm:487 (f_28BC_020E); original-dos.json#root:28BC:020E ; Body reads records6B4C/60/74/88, keeps first sample in g_6B44, sums four and shifts right2; installed by046B."
+        },
+        {
+          "old": "f_28BC_0354",
+          "new": "snd_slow_timer_interrupt",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:0354, current source src/sound/sample_timer.asm: Service slow/fallback sequencer timer, chaining old BIOS timer periodically. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:0354; historical review citations: src/root/m28BC.asm:630 (f_28BC_0354); original-dos.json#root:28BC:0354 ; Installed by 0422 with divisor g_74AB; decrements timer counters, private-stack call f_284A_067F and old_int8 chain."
+        },
+        {
+          "old": "f_28BC_03CC",
+          "new": "snd_start_sample_timer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:03CC, current source src/sound/sample_timer.asm: Program PIT channel0 and install the selected sample timer vector. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:03CC; historical review citations: src/root/m28BC.asm:682 (f_28BC_03CC); original-dos.json#root:28BC:03CC ; PIT command36h, g_74A9 divisor; writes IVT08 from g_74BC/BE, resets countdown."
+        },
+        {
+          "old": "f_28BC_040C",
+          "new": "snd_slow_sample_timer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:040C, current source src/sound/sample_timer.asm: Invoke timer transition code that installs slow/fallback handler. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:040C; historical review citations: src/root/m28BC.asm:717 (f_28BC_040C); original-dos.json#root:28BC:040C ; CLI, PUSHF, calls 0422 which returns via IRET; STI after transition."
+        },
+        {
+          "old": "f_28BC_0422",
+          "new": "snd_install_slow_timer_regs",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:0422, current source src/sound/sample_timer.asm: Install fallback timer handler with slowed PIT divisor and return via IRET. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:0422; historical review citations: src/root/m28BC.asm:737 (f_28BC_0422); original-dos.json#root:28BC:0422 ; Writes PIT g_74AB and IVT08 -> 0354, scales countdown; also entered from sample ISR L0148."
+        },
+        {
+          "old": "f_28BC_046B",
+          "new": "snd_select_four_channel_timer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:046B, current source src/sound/sample_timer.asm: Select four-channel mixing timer interrupt and configure timing state. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:046B; historical review citations: src/root/m28BC.asm:776 (f_28BC_046B); original-dos.json#root:28BC:046B ; g_74BC/BE <- 020E; shared setup captures old INT08 and derives times16/16 timing values. Entry020E reads channel records6B4C/60/74/88."
+        },
+        {
+          "old": "f_28BC_0488",
+          "new": "snd_select_two_channel_timer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:0488, current source src/sound/sample_timer.asm: Select two-channel mixing timer interrupt and configure timing state. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:0488; historical review citations: src/root/m28BC.asm:791 (f_28BC_0488); original-dos.json#root:28BC:0488 ; g_74BC/BE <- 0015; same common setup captures old INT08 and stores base/countdown divisors. Entry0015 reads channel records6B4C/60, not all four."
+        },
+        {
+          "old": "f_28BC_04E0",
+          "new": "snd_restore_bios_timer",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:28BC:04E0, current source src/sound/sample_timer.asm: Restore prior INT08 vector and program caller-supplied PIT divisor. Evidence: build/workers/names-gfx/descriptive.json#root:28BC:04E0; historical review citations: src/root/m28BC.asm:831 (f_28BC_04E0); original-dos.json#root:28BC:04E0 ; PIT36h sequence around INT21 AX=2508h with cs:old_int8; restores caller registers."
+        },
+        {
+          "old": "f_29BF_0008",
+          "new": "snd_regchip_initialize",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:0008, current source src/sound/chip_registers.asm: Set register-chip base ports and initialize/test registers. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:0008; historical review citations: src/root/m29BF.asm:44 (f_29BF_0008); original-dos.json#root:29BF:0008 ; Base argument ->75B2/75B4, calls003F, writes registers0E/0F and mode0Dh. Chip model is not established here."
+        },
+        {
+          "old": "f_29BF_003F",
+          "new": "snd_regchip_reset_default",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:003F, current source src/sound/chip_registers.asm: Set default register0F shadow to F0 and invoke reset. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:003F; historical review citations: src/root/m29BF.asm:75 (f_29BF_003F); original-dos.json#root:29BF:003F ; Stores75DE=F0 then calls0059."
+        },
+        {
+          "old": "f_29BF_0048",
+          "new": "snd_regchip_init_channels",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:0048, current source src/sound/chip_registers.asm: Unused helper: write value4 to channel registers6,7,8. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:0048; historical review citations: src/root/m29BF.asm:83 (f_29BF_0048); original-dos.json#root:29BF:0048 ; CX=0..2,DL=4, calls00CE three times; code, rather than inherited comment, fixes value4."
+        },
+        {
+          "old": "f_29BF_0059",
+          "new": "snd_regchip_reset",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:0059, current source src/sound/chip_registers.asm: Reset shadow state and register banks, preserving carry failure. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:0059; historical review citations: src/root/m29BF.asm:95 (f_29BF_0059); original-dos.json#root:29BF:0059 ; Clears six shadow bytes, brackets banks by0Dh A0/B0, clears registers and restores7/0F control values."
+        },
+        {
+          "old": "f_29BF_00B7",
+          "new": "snd_regchip_fill_registers",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:00B7, current source src/sound/chip_registers.asm: Write AL to CX successive registers starting at AH; stop on carry. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:00B7; historical review citations: src/root/m29BF.asm:141 (f_29BF_00B7); original-dos.json#root:29BF:00B7 ; Calls0108, incrementsAH and LOOPs."
+        },
+        {
+          "old": "f_29BF_00C1",
+          "new": "snd_regchip_set_mode",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:00C1, current source src/sound/chip_registers.asm: Write mode bits to register0Dh and remember requested mode. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:00C1; historical review citations: src/root/m29BF.asm:150 (f_29BF_00C1); original-dos.json#root:29BF:00C1 ; CachesAL at75D7, ORs75DB, setsAH=0Dh and calls0108."
+        },
+        {
+          "old": "f_29BF_00CE",
+          "new": "snd_regchip_channel_write",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:00CE, current source src/sound/chip_registers.asm: Write DL to register6+CL bracketed by mode B0/A0. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:00CE; historical review citations: src/root/m29BF.asm:159 (f_29BF_00CE); original-dos.json#root:29BF:00CE ; Calls00C1 around0108, preserves register/value in AX."
+        },
+        {
+          "old": "f_29BF_00E6",
+          "new": "snd_regchip_write",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:00E6, current source src/sound/chip_registers.asm: C argument wrapper for register/value write with read-back verification. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:00E6; historical review citations: src/root/m29BF.asm:176 (f_29BF_00E6); original-dos.json#root:29BF:00E6 ; Loads stack register and value into AH/AL then calls0108."
+        },
+        {
+          "old": "f_29BF_0108",
+          "new": "snd_regchip_write_checked",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:0108, current source src/sound/chip_registers.asm: Write register AH,value AL and verify read-back, retrying ten times. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:0108; historical review citations: src/root/m29BF.asm:200 (f_29BF_0108); original-dos.json#root:29BF:0108 ; Index/data ports75B2/75B4, ten retries, STC on failure/CLC on match."
+        },
+        {
+          "old": "f_29BF_0139",
+          "new": "snd_regchip_detect",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:0139, current source src/sound/chip_registers.asm: Probe candidate base ports and return found port or zero. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:0139; historical review citations: src/root/m29BF.asm:233 (f_29BF_0139); original-dos.json#root:29BF:0139 ; C wrapper calls014B with DS=DGROUP."
+        },
+        {
+          "old": "f_29BF_014B",
+          "new": "snd_regchip_probe_ports",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:29BF:014B, current source src/sound/chip_registers.asm: Probe bases220,240,280,2C0 using reset/read-back success. Evidence: build/workers/names-gfx/descriptive.json#root:29BF:014B; historical review citations: src/root/m29BF.asm:246 (f_29BF_014B); original-dos.json#root:29BF:014B ; Loads candidates75DF, constructs port table, invokes003F, returns first successful base."
+        },
+        {
+          "old": "jt_171C_13CA",
+          "new": "mem_hook_ralloc",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:0002, current source src/memory/hook_thunks.asm: Tail jump to Ralloc for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:0002; historical review citations: src/root/m2CFB.asm:35 (jt_171C_13CA); original-dos.json#root:2CFB:0002 ; Own entry is a far JMP to _Ralloc; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_13E4",
+          "new": "mem_hook_rallocfree",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:0007, current source src/memory/hook_thunks.asm: Tail jump to RallocFree for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:0007; historical review citations: src/root/m2CFB.asm:36 (jt_171C_13E4); original-dos.json#root:2CFB:0007 ; Own entry is a far JMP to _RallocFree; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_152C",
+          "new": "mem_hook_rallocfreshen",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:000C, current source src/memory/hook_thunks.asm: Tail jump to RallocFreshen for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:000C; historical review citations: src/root/m2CFB.asm:37 (jt_171C_152C); original-dos.json#root:2CFB:000C ; Own entry is a far JMP to _RallocFreshen; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_14BE",
+          "new": "mem_hook_age_delta",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:0011, current source src/memory/hook_thunks.asm: Tail jump to DOS allocation-age delta accessor for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:0011; historical review citations: src/root/m2CFB.asm:38 (jt_171C_14BE); original-dos.json#root:2CFB:0011 ; JMP f_171C_14BE; src/root/m171C.c returns HDR(handle)->age - s_2F30 and RallocFreshen writes the same header+0Ah field. This does not establish the Windows RallocAge identity."
+        },
+        {
+          "old": "jt_171C_16EA",
+          "new": "mem_hook_rallocsize",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:0016, current source src/memory/hook_thunks.asm: Tail jump to RallocSize for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:0016; historical review citations: src/root/m2CFB.asm:39 (jt_171C_16EA); original-dos.json#root:2CFB:0016 ; Own entry is a far JMP to _RallocSize; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_1794",
+          "new": "mem_hook_rallocfreed",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:001B, current source src/memory/hook_thunks.asm: Tail jump to RallocFreed for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:001B; historical review citations: src/root/m2CFB.asm:40 (jt_171C_1794); original-dos.json#root:2CFB:001B ; Own entry is a far JMP to _RallocFreed; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_1750",
+          "new": "mem_hook_rallocmemoryfree",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:0020, current source src/memory/hook_thunks.asm: Tail jump to RallocMemoryFree for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:0020; historical review citations: src/root/m2CFB.asm:41 (jt_171C_1750); original-dos.json#root:2CFB:0020 ; Own entry is a far JMP to _RallocMemoryFree; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_18A6",
+          "new": "mem_hook_rallocrealloc",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:0025, current source src/memory/hook_thunks.asm: Tail jump to RallocRealloc for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:0025; historical review citations: src/root/m2CFB.asm:42 (jt_171C_18A6); original-dos.json#root:2CFB:0025 ; Own entry is a far JMP to _RallocRealloc; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_1686",
+          "new": "mem_hook_ralloctype",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:002A, current source src/memory/hook_thunks.asm: Tail jump to RallocType for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:002A; historical review citations: src/root/m2CFB.asm:43 (jt_171C_1686); original-dos.json#root:2CFB:002A ; Own entry is a far JMP to _RallocType; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        },
+        {
+          "old": "jt_171C_15A2",
+          "new": "mem_hook_rallocsettype",
+          "kind": "descriptive",
+          "why": "Descriptive DOS purpose at root:2CFB:002F, current source src/memory/hook_thunks.asm: Tail jump to RallocSetType for the database memory-hook interface. Evidence: build/workers/names-gfx/descriptive.json#root:2CFB:002F; historical review citations: src/root/m2CFB.asm:44 (jt_171C_15A2); original-dos.json#root:2CFB:002F ; Own entry is a far JMP to _RallocSetType; src/root/m2CFB.asm external/public binding and callers in m19A9/m19DC establish the hook role."
+        }
+      ],
+      "note": "Lexical identifier rename; semantic review unchanged.",
+      "prior_receipt_sha256": "51110020fff9219ad3af05c1db224aecd2ace5d69931a3a00e6fd2e63d7965ec"
     }
   ]
 }

@@ -29,74 +29,74 @@ D2066	db	0, 1, 010h, 030h, 4, 5, 014h, 7, 038h, 9, 2, 00Bh, 024h, 02Dh, 036h, 03
 	public _g_2078, _g_20FC
 _g_2078	dd	004000h, 008000h, 00C000h, 010000h, 020000h, 020000h, 020000h, 020000h
 DispatchS00	label	dword
-	dd	_GSetAttrib
-	dd	_o00_31AD_166A
-	dd	_o00_31AD_168C
-	dd	_GBoxFill
-	dd	_GPatBox
-	dd	_GInvBox
-	dd	_GPicSize
-	dd	_GImgSize
-	dd	_o00_31AD_0550
-	dd	_GPutPicS
-	dd	_o00_31AD_0D06
-	dd	_GPutImgS
-	dd	_o00_31AD_1213
-	dd	_o00_31AD_062A
-	dd	_o00_31AD_062E
-	dd	_o00_31AD_0632
-	dd	_o00_31AD_0636
-	dd	_GLine
-	dd	_o00_31AD_1499
-	dd	_o00_31AD_0004
-	dd	_o00_31AD_1481
-	dd	_o00_31AD_0647
-	dd	_o00_31AD_18BA
-	dd	_o00_31AD_063C
-	dd	_o00_31AD_1950
+	dd	_gfx_planar_gsetattrib
+	dd	_gfx_planar_select_small_font
+	dd	_gfx_planar_select_big_font
+	dd	_gfx_planar_gboxfill
+	dd	_gfx_planar_gpatbox
+	dd	_gfx_planar_ginvbox
+	dd	_gfx_planar_gpicsize
+	dd	_gfx_planar_gimgsize
+	dd	_gfx_planar_capture_box
+	dd	_gfx_planar_gputpics
+	dd	_gfx_planar_put_picture_raw
+	dd	_gfx_planar_gputimgs
+	dd	_gfx_planar_put_image_raw
+	dd	_gfx_planar_set_or
+	dd	_gfx_planar_set_xor
+	dd	_gfx_planar_set_and
+	dd	_gfx_planar_set_copy
+	dd	_gfx_planar_gline
+	dd	_gfx_planar_draw_line_raw
+	dd	_gfx_planar_dither_box
+	dd	_gfx_planar_restore_text_mode
+	dd	_gfx_planar_put_cached_tile
+	dd	_gfx_planar_upload_tiles
+	dd	_gfx_planar_set_raster_op
+	dd	_gfx_planar_move_box
 _g_20FC	dd	DGROUP:DispatchS00
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_o00_31AD_0004:far
-	extrn	_GPatBox:far
-	extrn	_GInvBox:far
-	extrn	_GPicSize:far
-	extrn	_o00_31AD_0550:far
-	extrn	_o00_31AD_062A:far
-	extrn	_o00_31AD_062E:far
-	extrn	_o00_31AD_0632:far
-	extrn	_o00_31AD_0636:far
-	extrn	_o00_31AD_063C:far
-	extrn	_o00_31AD_0647:far
-	extrn	_GPutPicS:far
-	extrn	_o00_31AD_0D06:far
-	extrn	_GImgSize:far
-	extrn	_GPutImgS:far
-	extrn	_o00_31AD_1213:far
-	extrn	_o00_31AD_1481:far
-	extrn	_GLine:far
-	extrn	_o00_31AD_1499:far
-	extrn	_GSetAttrib:far
-	extrn	_o00_31AD_166A:far
-	extrn	_o00_31AD_168C:far
-	extrn	_GBoxFill:far
-	extrn	_o00_31AD_18BA:far
-	extrn	_o00_31AD_1950:far
+	extrn	_gfx_planar_dither_box:far
+	extrn	_gfx_planar_gpatbox:far
+	extrn	_gfx_planar_ginvbox:far
+	extrn	_gfx_planar_gpicsize:far
+	extrn	_gfx_planar_capture_box:far
+	extrn	_gfx_planar_set_or:far
+	extrn	_gfx_planar_set_xor:far
+	extrn	_gfx_planar_set_and:far
+	extrn	_gfx_planar_set_copy:far
+	extrn	_gfx_planar_set_raster_op:far
+	extrn	_gfx_planar_put_cached_tile:far
+	extrn	_gfx_planar_gputpics:far
+	extrn	_gfx_planar_put_picture_raw:far
+	extrn	_gfx_planar_gimgsize:far
+	extrn	_gfx_planar_gputimgs:far
+	extrn	_gfx_planar_put_image_raw:far
+	extrn	_gfx_planar_restore_text_mode:far
+	extrn	_gfx_planar_gline:far
+	extrn	_gfx_planar_draw_line_raw:far
+	extrn	_gfx_planar_gsetattrib:far
+	extrn	_gfx_planar_select_small_font:far
+	extrn	_gfx_planar_select_big_font:far
+	extrn	_gfx_planar_gboxfill:far
+	extrn	_gfx_planar_upload_tiles:far
+	extrn	_gfx_planar_move_box:far
 	extrn	_o15_384C_0000:far
 
 S00A_TEXT	segment word public 'CODE'
 	assume	cs:S00A_TEXT, ds:DGROUP
 
-	public	_o00_3126_0000
-	public	_o00_3126_0137
-	public	_o00_3126_026A
-	public	_o00_3126_03A9
-	public	_o00_3126_04D8
-	public	_o00_3126_06A3
-	public	_o00_3126_086E
+	public	_gfx_planar_map128_pack2
+	public	_gfx_planar_map64_pack2
+	public	_gfx_planar_map128_pack4
+	public	_gfx_planar_map64_pack4
+	public	_gfx_planar_map128_pack8
+	public	_gfx_planar_map64_pack8
+	public	_gfx_planar_fatal_display_jump
 
-_o00_3126_0000	proc	far
+_gfx_planar_map128_pack2	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -211,9 +211,9 @@ L0132:
 	pop si
 	pop bp
 	retf
-_o00_3126_0000	endp
+_gfx_planar_map128_pack2	endp
 
-_o00_3126_0137	proc	far
+_gfx_planar_map64_pack2	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -328,9 +328,9 @@ L0265:
 	pop si
 	pop bp
 	retf
-_o00_3126_0137	endp
+_gfx_planar_map64_pack2	endp
 
-_o00_3126_026A	proc	far
+_gfx_planar_map128_pack4	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -463,9 +463,9 @@ L03A4:
 	pop si
 	pop bp
 	retf
-_o00_3126_026A	endp
+_gfx_planar_map128_pack4	endp
 
-_o00_3126_03A9	proc	far
+_gfx_planar_map64_pack4	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -598,9 +598,9 @@ L04D3:
 	pop si
 	pop bp
 	retf
-_o00_3126_03A9	endp
+_gfx_planar_map64_pack4	endp
 
-_o00_3126_04D8	proc	far
+_gfx_planar_map128_pack8	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -817,9 +817,9 @@ L069E:
 	pop si
 	pop bp
 	retf
-_o00_3126_04D8	endp
+_gfx_planar_map128_pack8	endp
 
-_o00_3126_06A3	proc	far
+_gfx_planar_map64_pack8	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1036,11 +1036,11 @@ L0869:
 	pop si
 	pop bp
 	retf
-_o00_3126_06A3	endp
+_gfx_planar_map64_pack8	endp
 
-_o00_3126_086E	proc	far
+_gfx_planar_fatal_display_jump	proc	far
 	jmp far ptr _o15_384C_0000
-_o00_3126_086E	endp
+_gfx_planar_fatal_display_jump	endp
 
 S00A_TEXT	ends
 	end

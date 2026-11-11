@@ -63,24 +63,24 @@ extern int near g_3DB4;
 extern int near g_3DB2;
 extern struct Rect far * _fastcall win_WinRectAddr(int win);
 extern void _fastcall win_Recalc(int win);
-extern void far f_1E57_038E(void);
+extern void far win_rebuild_visible_clips(void);
 extern void (far * far g_62EC)(int win);
 extern void far clip_SetWin(int win);
 extern void far f_1E57_0D97(struct Rect far *r);
-extern void far f_1E57_0FDC(struct Rect far *r);
+extern void far clip_set_screen_intersection(struct Rect far *r);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far clip_Push(void);
 extern void far f_1E57_0296(void);
-extern void far f_1FD2_05FD(void);
+extern void far win_redraw_desktop_menu(void);
 extern void far clip_Pop(void);
 extern void far clip_SubExclude(struct Rect far *r);
 extern int far g_5702[];
-extern void far f_1E57_0A9C(struct Rect far *r);
+extern void far clip_restrict_rect(struct Rect far *r);
 extern void _fastcall win_DrawWindow(int win);
-extern void _fastcall f_2505_08EA(int win);
-extern void _fastcall f_2505_0831(int win);
+extern void _fastcall win_deactivate_pointer_regions(int win);
+extern void _fastcall win_activate_pointer_regions(int win);
 
-void _fastcall o26_39C7_0000(int win)
+void _fastcall win_toggle_zoom(int win)
 {
     struct Win far *w;
     struct Obj far *o;
@@ -118,19 +118,19 @@ void _fastcall o26_39C7_0000(int win)
         *win_WinRectAddr(win) = r;
     }
     win_Recalc(win);
-    f_1E57_038E();
+    win_rebuild_visible_clips();
     (*g_62EC)(win);
     if (w->flags & 0x80) {
         clip_SetWin(win);
         f_1E57_0D97(&saved);
     } else {
-        f_1E57_0FDC(&saved);
+        clip_set_screen_intersection(&saved);
         win_GetObjRect(win, &r);
     }
     win_UnlockWin(win);
     clip_Push();
     f_1E57_0296();
-    f_1FD2_05FD();
+    win_redraw_desktop_menu();
     clip_Pop();
     clip_SubExclude(&r);
     for (i = 1; g_5702[i] != (int)0x8000; i++)
@@ -138,14 +138,14 @@ void _fastcall o26_39C7_0000(int win)
     while (--i >= 1) {
         clip_Push();
         win_GetObjRect(g_5702[i], &r);
-        f_1E57_0A9C(&r);
+        clip_restrict_rect(&r);
         win_DrawWindow(g_5702[i]);
         clip_Pop();
     }
     clip_SetWin(win);
     win_DrawWindow(g_5702[0]);
-    f_2505_08EA(win);
-    f_2505_0831(win);
+    win_deactivate_pointer_regions(win);
+    win_activate_pointer_regions(win);
 }
 
 extern void _fastcall f_22BF_0B5B(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b);
@@ -207,7 +207,7 @@ void _fastcall o26_39C7_022F(int win, int mode, struct Rect far *r)
 
 extern void far f_1E57_0351(void);
 extern void _fastcall f_2505_0382(struct Pt far *center, struct Rect far *rect);
-extern void far f_1B73_09E9(int x, int y);
+extern void far mouse_set_position(int x, int y);
 extern void far GRectInvOutline(struct Rect far *r, int width);
 extern void far ButtonHeldInit(void);
 extern int far ButtonHeld(void);
@@ -215,7 +215,7 @@ extern int near g_9122;
 extern int near g_9124;
 extern void far GetMousePos(struct Pt far *pt);
 extern struct Rect far win_offsets[];
-extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
+extern void _fastcall win_redraw_exposed_windows(struct Rect far *rect);
 extern int far StillDown(void);
 extern void far win_FlushEvents(void);
 
@@ -250,7 +250,7 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
     orect = o->rect;
     if (ev == 0) {
         f_2505_0382(&start, &orect);
-        f_1B73_09E9(start.x, start.y);
+        mouse_set_position(start.x, start.y);
     } else {
         start.x = ev->h;
         start.y = ev->v;
@@ -277,11 +277,11 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
     win_offsets[win >> 8] = *(struct Rect far *)&w->objs[0]->x;
     win_Recalc(win);
     win_UnlockWin(win);
-    f_1E57_038E();
+    win_rebuild_visible_clips();
     (*g_62EC)(win);
-    f_21FA_0B4B(&orig);
-    f_2505_08EA(win);
-    f_2505_0831(win);
+    win_redraw_exposed_windows(&orig);
+    win_deactivate_pointer_regions(win);
+    win_activate_pointer_regions(win);
     while (StillDown())
         ;
     win_FlushEvents();
@@ -322,7 +322,7 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
     f_1E57_0351();
     if (ev == 0) {
         f_2505_0382(&start, &icon);
-        f_1B73_09E9(start.x, start.y);
+        mouse_set_position(start.x, start.y);
     } else {
         start.x = ev->h;
         start.y = ev->v;
@@ -351,10 +351,10 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
     *win_WinRectAddr(win) = r;
     win_Recalc(win);
     win_UnlockWin(win);
-    f_1E57_038E();
+    win_rebuild_visible_clips();
     (*g_62EC)(win);
-    f_21FA_0B4B(&orig);
-    f_2505_08EA(win);
-    f_2505_0831(win);
+    win_redraw_exposed_windows(&orig);
+    win_deactivate_pointer_regions(win);
+    win_activate_pointer_regions(win);
     win_FlushEvents();
 }

@@ -48,40 +48,40 @@ _g_21A2	dw	0
 _g_21A4 label byte
 	dw	0
 DispatchS02	label	dword
-	dd	_o02_3126_0040
-	dd	_o02_3126_005C
-	dd	_o02_3126_0079
-	dd	_o02_3126_027C
-	dd	_o02_3126_0185
-	dd	_o02_3126_03B1
-	dd	_o02_3126_03D4
-	dd	_o02_3126_03D4
-	dd	_o02_3126_03EF
-	dd	_o02_3126_0505
-	dd	_o02_3126_0512
-	dd	_o02_3126_0636
-	dd	_o02_3126_0643
-	dd	_o02_3126_04C6
-	dd	_o02_3126_0490
-	dd	_o02_3126_04B4
-	dd	_o02_3126_04A2
-	dd	_o02_3126_073A
-	dd	_o02_3126_0747
-	dd	_o02_3126_0096
-	dd	_o02_3126_0051
-	dd	_o02_3126_084E
-	dd	_o02_3126_0857
-	dd	_o02_3126_04D8
-	dd	_o02_3126_0860
+	dd	_gfx_vga8_gsetattrib
+	dd	_gfx_vga8_select_small_font
+	dd	_gfx_vga8_select_big_font
+	dd	_gfx_vga8_gboxfill
+	dd	_gfx_vga8_gpatbox
+	dd	_gfx_vga8_ginvbox
+	dd	_gfx_vga8_picture_size
+	dd	_gfx_vga8_picture_size
+	dd	_gfx_vga8_capture_box
+	dd	_gfx_vga8_gputpics
+	dd	_gfx_vga8_put_picture_raw
+	dd	_gfx_vga8_gputimgs
+	dd	_gfx_vga8_put_image_raw
+	dd	_gfx_vga8_set_or
+	dd	_gfx_vga8_set_xor
+	dd	_gfx_vga8_set_and
+	dd	_gfx_vga8_set_copy
+	dd	_gfx_vga8_gline
+	dd	_gfx_vga8_draw_line_raw
+	dd	_gfx_vga8_dither_box
+	dd	_gfx_vga8_restore_text_mode
+	dd	_gfx_vga8_tile_noop
+	dd	_gfx_vga8_reserved_noop
+	dd	_gfx_vga8_set_raster_op
+	dd	_gfx_vga8_move_box
 _g_220A	dd	DGROUP:DispatchS02
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_f_1B4E_015B:far
-	extrn	_f_1B4E_0165:far
-	extrn	_f_1B73_00D9:far
-	extrn	_f_1B73_0196:far
-	extrn	_f_1B73_04BB:far
+	extrn	_gfx_video_bios_ax:far
+	extrn	_gfx_install_driver_callbacks:far
+	extrn	_mouse_show_cursor:far
+	extrn	_mouse_hide_cursor:far
+	extrn	_mouse_refresh_cursor:far
 	extrn	_f_1D8E_0384:far
 	extrn	_f_1D8E_0435:far
 	extrn	_f_1D8E_0AC7:far
@@ -90,35 +90,35 @@ DGROUP	group	_DATA
 S02A_TEXT	segment word public 'CODE'
 	assume	cs:S02A_TEXT, ds:DGROUP
 
-	public	_o02_3126_0000
-	public	_o02_3126_0040
-	public	_o02_3126_0051
-	public	_o02_3126_005C
-	public	_o02_3126_0079
-	public	_o02_3126_0096
-	public	_o02_3126_00AE
-	public	_o02_3126_0185
-	public	_o02_3126_019D
-	public	_o02_3126_027C
-	public	_o02_3126_03B1
-	public	_o02_3126_03D4
-	public	_o02_3126_03EF
-	public	_o02_3126_0490
-	public	_o02_3126_04A2
-	public	_o02_3126_04B4
-	public	_o02_3126_04C6
-	public	_o02_3126_04D8
-	public	_o02_3126_0505
-	public	_o02_3126_0512
-	public	_o02_3126_0636
-	public	_o02_3126_0643
-	public	_o02_3126_073A
-	public	_o02_3126_0747
-	public	_o02_3126_084E
-	public	_o02_3126_0857
-	public	_o02_3126_0860
+	public	_gfx_vga8_init_vga256
+	public	_gfx_vga8_gsetattrib
+	public	_gfx_vga8_restore_text_mode
+	public	_gfx_vga8_select_small_font
+	public	_gfx_vga8_select_big_font
+	public	_gfx_vga8_dither_box
+	public	_gfx_vga8_dither_box_raw
+	public	_gfx_vga8_gpatbox
+	public	_gfx_vga8_pattern_box_raw
+	public	_gfx_vga8_gboxfill
+	public	_gfx_vga8_ginvbox
+	public	_gfx_vga8_picture_size
+	public	_gfx_vga8_capture_box
+	public	_gfx_vga8_set_xor
+	public	_gfx_vga8_set_copy
+	public	_gfx_vga8_set_and
+	public	_gfx_vga8_set_or
+	public	_gfx_vga8_set_raster_op
+	public	_gfx_vga8_gputpics
+	public	_gfx_vga8_put_picture_raw
+	public	_gfx_vga8_gputimgs
+	public	_gfx_vga8_put_image_raw
+	public	_gfx_vga8_gline
+	public	_gfx_vga8_draw_line_raw
+	public	_gfx_vga8_tile_noop
+	public	_gfx_vga8_reserved_noop
+	public	_gfx_vga8_move_box
 
-_o02_3126_0000	proc	far
+_gfx_vga8_init_vga256	proc	far
 	push ds
 	push es
 	push si
@@ -135,10 +135,10 @@ L0020:
 	add ax, 140h
 	loop L0020
 	les si, dword ptr _g_220A
-	call far ptr _f_1B4E_0165
+	call far ptr _gfx_install_driver_callbacks
 	mov ax, 13h
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	xor ax, ax
 	pop di
@@ -146,9 +146,9 @@ L0020:
 	pop es
 	pop ds
 	retf
-_o02_3126_0000	endp
+_gfx_vga8_init_vga256	endp
 
-_o02_3126_0040	proc	far
+_gfx_vga8_gsetattrib	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
@@ -157,17 +157,17 @@ _o02_3126_0040	proc	far
 	mov word ptr _g_3DE2, ax
 	pop bp
 	retf
-_o02_3126_0040	endp
+_gfx_vga8_gsetattrib	endp
 
-_o02_3126_0051	proc	far
+_gfx_vga8_restore_text_mode	proc	far
 	mov ax, 3
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	retf
-_o02_3126_0051	endp
+_gfx_vga8_restore_text_mode	endp
 
-_o02_3126_005C	proc	far
+_gfx_vga8_select_small_font	proc	far
 	les bx, dword ptr _g_3DA8
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
@@ -175,9 +175,9 @@ _o02_3126_005C	proc	far
 	mov byte ptr _fontWidth, 4
 	mov word ptr _g_3DDA, 18h
 	retf
-_o02_3126_005C	endp
+_gfx_vga8_select_small_font	endp
 
-_o02_3126_0079	proc	far
+_gfx_vga8_select_big_font	proc	far
 	les bx, dword ptr _g_3DA4
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
@@ -185,22 +185,22 @@ _o02_3126_0079	proc	far
 	mov byte ptr _fontWidth, 8
 	mov word ptr _g_3DDA, 40h
 	retf
-_o02_3126_0079	endp
+_gfx_vga8_select_big_font	endp
 
-_o02_3126_0096	proc	far
+_gfx_vga8_dither_box	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o02_3126_00AE
+	je _gfx_vga8_dither_box_raw
 	mov ax, S02A_TEXT
 	push ax
-	mov ax, OFFSET _o02_3126_00AE
+	mov ax, OFFSET _gfx_vga8_dither_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_o02_3126_0096	endp
+_gfx_vga8_dither_box	endp
 
-_o02_3126_00AE	proc	far
+_gfx_vga8_dither_box_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 6
@@ -221,7 +221,7 @@ _o02_3126_00AE	proc	far
 	jg L00EA
 	cmp dx, word ptr _g_4340
 	jl L00EA
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L00EA:
 	mov ax, word ptr [bp+6]
 	cmp ax, word ptr [bp+0Ah]
@@ -276,12 +276,12 @@ L013F:
 	je L016F
 	test byte ptr _g_4331, 0FFh
 	je L017B
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L017B
 L016F:
 	test byte ptr _g_4366, 0FFh
 	jne L017B
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L017B:
 	dec byte ptr _g_3DD4
 	pop di
@@ -289,22 +289,22 @@ L017B:
 	mov sp, bp
 	pop bp
 	retf
-_o02_3126_00AE	endp
+_gfx_vga8_dither_box_raw	endp
 
-_o02_3126_0185	proc	far
+_gfx_vga8_gpatbox	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o02_3126_019D
+	je _gfx_vga8_pattern_box_raw
 	mov ax, S02A_TEXT
 	push ax
-	mov ax, OFFSET _o02_3126_019D
+	mov ax, OFFSET _gfx_vga8_pattern_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_o02_3126_0185	endp
+_gfx_vga8_gpatbox	endp
 
-_o02_3126_019D	proc	far
+_gfx_vga8_pattern_box_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 6
@@ -325,7 +325,7 @@ _o02_3126_019D	proc	far
 	jg L01D9
 	cmp dx, word ptr _g_4340
 	jl L01D9
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L01D9:
 	mov ax, word ptr [bp+6]
 	cmp ax, word ptr [bp+0Ah]
@@ -383,12 +383,12 @@ L0246:
 	je L0266
 	test byte ptr _g_4331, 0FFh
 	je L0272
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0272
 L0266:
 	test byte ptr _g_4366, 0FFh
 	jne L0272
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0272:
 	dec byte ptr _g_3DD4
 	pop di
@@ -396,9 +396,9 @@ L0272:
 	mov sp, bp
 	pop bp
 	retf
-_o02_3126_019D	endp
+_gfx_vga8_pattern_box_raw	endp
 
-_o02_3126_027C	proc	far
+_gfx_vga8_gboxfill	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je L0294
@@ -444,7 +444,7 @@ L02BE:
 	jg L02F2
 	cmp dx, word ptr _g_4340
 	jl L02F2
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L02F2:
 	mov dx, word ptr [bp+0Eh]
 	mov es, word ptr _g_3DB0
@@ -525,21 +525,21 @@ L0381:
 	je L039D
 	test byte ptr _g_4331, 0FFh
 	je L03A9
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L03A9
 L039D:
 	test byte ptr _g_4366, 0FFh
 	jne L03A9
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L03A9:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o02_3126_027C	endp
+_gfx_vga8_gboxfill	endp
 
-_o02_3126_03B1	proc	far
+_gfx_vga8_ginvbox	proc	far
 	push bp
 	mov bp, sp
 	call near ptr L071B
@@ -549,14 +549,14 @@ _o02_3126_03B1	proc	far
 	push word ptr [bp+0Ah]
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _o02_3126_027C
+	call far ptr _gfx_vga8_gboxfill
 	add sp, 0Ah
 	call near ptr L072D
 	pop bp
 	retf
-_o02_3126_03B1	endp
+_gfx_vga8_ginvbox	endp
 
-_o02_3126_03D4	proc	far
+_gfx_vga8_picture_size	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+0Ah]
@@ -569,9 +569,9 @@ _o02_3126_03D4	proc	far
 	adc dx, 0
 	pop bp
 	retf
-_o02_3126_03D4	endp
+_gfx_vga8_picture_size	endp
 
-_o02_3126_03EF	proc	far
+_gfx_vga8_capture_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -592,7 +592,7 @@ _o02_3126_03EF	proc	far
 	jg L0429
 	cmp dx, word ptr _g_4340
 	jl L0429
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0429:
 	les di, dword ptr [bp+0Eh]
 	mov si, word ptr [bp+8]
@@ -623,73 +623,73 @@ L0450:
 	je L047C
 	test byte ptr _g_4331, 0FFh
 	je L0488
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0488
 L047C:
 	test byte ptr _g_4366, 0FFh
 	jne L0488
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0488:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o02_3126_03EF	endp
+_gfx_vga8_capture_box	endp
 
-_o02_3126_0490	proc	far
+_gfx_vga8_set_xor	proc	far
 	mov ax, word ptr cs:L0501
 	mov word ptr cs:L06D4, ax
 	mov word ptr cs:L05F2, ax
 	mov byte ptr _g_3DD2, 18h
 	retf
-_o02_3126_0490	endp
+_gfx_vga8_set_xor	endp
 
-_o02_3126_04A2	proc	far
+_gfx_vga8_set_copy	proc	far
 	mov ax, word ptr cs:L0736
 	mov word ptr cs:L06D4, ax
 	mov word ptr cs:L05F2, ax
 	mov byte ptr _g_3DD2, 0
 	retf
-_o02_3126_04A2	endp
+_gfx_vga8_set_copy	endp
 
-_o02_3126_04B4	proc	far
+_gfx_vga8_set_and	proc	far
 	mov ax, word ptr cs:L04FF
 	mov word ptr cs:L06D4, ax
 	mov word ptr cs:L05F2, ax
 	mov byte ptr _g_3DD2, 8
 	retf
-_o02_3126_04B4	endp
+_gfx_vga8_set_and	endp
 
-_o02_3126_04C6	proc	far
+_gfx_vga8_set_or	proc	far
 	mov ax, word ptr cs:L0503
 	mov word ptr cs:L06D4, ax
 	mov word ptr cs:L05F2, ax
 	mov byte ptr _g_3DD2, 10h
 	retf
-_o02_3126_04C6	endp
+_gfx_vga8_set_or	endp
 
-_o02_3126_04D8	proc	far
+_gfx_vga8_set_raster_op	proc	far
 	push bp
 	mov bp, sp
 	push cs
 	mov ax, word ptr [bp+6]
 	cmp al, 10h
 	jne L04E8
-	call near ptr _o02_3126_04C6
+	call near ptr _gfx_vga8_set_or
 	jmp short L04FD
 L04E8:
 	cmp al, 18h
 	jne L04F1
-	call near ptr _o02_3126_0490
+	call near ptr _gfx_vga8_set_xor
 	jmp short L04FD
 L04F1:
 	cmp al, 8
 	jne L04FA
-	call near ptr _o02_3126_04B4
+	call near ptr _gfx_vga8_set_and
 	jmp short L04FD
 L04FA:
-	call near ptr _o02_3126_04A2
+	call near ptr _gfx_vga8_set_copy
 L04FD:
 	pop bp
 	retf
@@ -699,17 +699,17 @@ L0501:
 	xor al, ah
 L0503:
 	or al, ah
-_o02_3126_04D8	endp
+_gfx_vga8_set_raster_op	endp
 
-_o02_3126_0505	proc	far
+_gfx_vga8_gputpics	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o02_3126_0512
+	je _gfx_vga8_put_picture_raw
 	call far ptr _f_1D8E_0AC7
 	retf
-_o02_3126_0505	endp
+_gfx_vga8_gputpics	endp
 
-_o02_3126_0512	proc	far
+_gfx_vga8_put_picture_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -735,7 +735,7 @@ _o02_3126_0512	proc	far
 	jg L055B
 	cmp dx, word ptr _g_4340
 	jl L055B
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L055B:
 	mov ax, word ptr [bp+8]
 	mov es, word ptr _g_3DB0
@@ -770,12 +770,12 @@ L0594:
 	je L05BC
 	test byte ptr _g_4331, 0FFh
 	je L05C8
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L05C8
 L05BC:
 	test byte ptr _g_4366, 0FFh
 	jne L05C8
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L05C8:
 	dec byte ptr _g_3DD4
 	pop di
@@ -817,12 +817,12 @@ L05F2:
 	je L0620
 	test byte ptr _g_4331, 0FFh
 	je L062C
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L062C
 L0620:
 	test byte ptr _g_4366, 0FFh
 	jne L062C
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L062C:
 	dec byte ptr _g_3DD4
 	pop di
@@ -830,17 +830,17 @@ L062C:
 	mov sp, bp
 	pop bp
 	retf
-_o02_3126_0512	endp
+_gfx_vga8_put_picture_raw	endp
 
-_o02_3126_0636	proc	far
+_gfx_vga8_gputimgs	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o02_3126_0643
+	je _gfx_vga8_put_image_raw
 	call far ptr _f_1D8E_0BAE
 	retf
-_o02_3126_0636	endp
+_gfx_vga8_gputimgs	endp
 
-_o02_3126_0643	proc	far
+_gfx_vga8_put_image_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -866,7 +866,7 @@ _o02_3126_0643	proc	far
 	jg L068C
 	cmp dx, word ptr _g_4340
 	jl L068C
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L068C:
 	mov di, word ptr [bp+8]
 	add di, di
@@ -915,12 +915,12 @@ L06D4:
 	je L0705
 	test byte ptr _g_4331, 0FFh
 	je L0711
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0711
 L0705:
 	test byte ptr _g_4366, 0FFh
 	jne L0711
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0711:
 	dec byte ptr _g_3DD4
 	pop di
@@ -942,17 +942,17 @@ L072D:
 L0736:
 	and al, al
 	not al
-_o02_3126_0643	endp
+_gfx_vga8_put_image_raw	endp
 
-_o02_3126_073A	proc	far
+_gfx_vga8_gline	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o02_3126_0747
+	je _gfx_vga8_draw_line_raw
 	call far ptr _f_1D8E_0435
 	retf
-_o02_3126_073A	endp
+_gfx_vga8_gline	endp
 
-_o02_3126_0747	proc	far
+_gfx_vga8_draw_line_raw	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -980,7 +980,7 @@ L0779:
 	jg L078A
 	cmp dx, word ptr _g_4340
 	jl L078A
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L078A:
 	mov bx, word ptr [bp+0Eh]
 	mov bl, bh
@@ -1057,21 +1057,21 @@ L081E:
 	je L083A
 	test byte ptr _g_4331, 0FFh
 	je L0846
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0846
 L083A:
 	test byte ptr _g_4366, 0FFh
 	jne L0846
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0846:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o02_3126_0747	endp
+_gfx_vga8_draw_line_raw	endp
 
-_o02_3126_084E	proc	far
+_gfx_vga8_tile_noop	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1080,9 +1080,9 @@ _o02_3126_084E	proc	far
 	pop si
 	pop bp
 	retf
-_o02_3126_084E	endp
+_gfx_vga8_tile_noop	endp
 
-_o02_3126_0857	proc	far
+_gfx_vga8_reserved_noop	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1091,9 +1091,9 @@ _o02_3126_0857	proc	far
 	pop si
 	pop bp
 	retf
-_o02_3126_0857	endp
+_gfx_vga8_reserved_noop	endp
 
-_o02_3126_0860	proc	far
+_gfx_vga8_move_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1114,7 +1114,7 @@ _o02_3126_0860	proc	far
 	jg L089D
 	cmp dx, word ptr _g_4340
 	jl L089D
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	jmp L08D0
 L089D:
 	mov ax, word ptr [bp+0Eh]
@@ -1133,7 +1133,7 @@ L089D:
 	jg L08D0
 	cmp dx, word ptr _g_4342
 	jl L08D0
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L08D0:
 	mov cx, word ptr [bp+10h]
 	mov dx, 140h
@@ -1193,19 +1193,19 @@ L092C:
 	je L0955
 	test byte ptr _g_4331, 0FFh
 	je L0961
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0961
 L0955:
 	test byte ptr _g_4366, 0FFh
 	jne L0961
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0961:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o02_3126_0860	endp
+_gfx_vga8_move_box	endp
 
 S02A_TEXT	ends
 	end

@@ -34,7 +34,7 @@ extern void far invert(char far *bits, int size);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
 extern Handle far mem_Unlock(Handle h);
 
-Handle far f_24AB_0002(char far *text)
+Handle far font_make_display_bitmap(char far *text)
 {
     Handle h;
     char far *p;
@@ -174,7 +174,7 @@ void far f_24AB_040C(char far *text)
 extern int near g_3DE2;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 
-void far f_24AB_042B(struct Rect far *r, int y, char far *text)
+void far font_print_and_clear_row(struct Rect far *r, int y, char far *text)
 {
     int x;
     int right;

@@ -37,7 +37,7 @@ extern int near _foreColor;
 extern int near g_3DE2;
 extern void (far * near g_9128)(int a, int b, int c);
 extern void far GPutStr(int x, int y, char far *s);
-extern void far f_1FD2_03EB(struct Rect far *r, int v);
+extern void far input_register_object_rect(struct Rect far *r, int v);
 
 void far o10_35F5_0000(int x, int y, char far *s, int v)
 {
@@ -54,10 +54,10 @@ void far o10_35F5_0000(int x, int y, char far *s, int v)
     GRectOutline(&r, -2);
     (*g_9128)(g_3DE2, _foreColor, g_3DE4);
     GPutStr(x, y, s);
-    f_1FD2_03EB(&r, v);
+    input_register_object_rect(&r, v);
 }
 
-extern void far f_1B4E_0110(int x, int y, int c);
+extern void far gfx_put_fixed_font_char(int x, int y, int c);
 
 void far o10_35F5_00D7(int x, int y, char far *s, int v)
 {
@@ -74,11 +74,11 @@ void far o10_35F5_00D7(int x, int y, char far *s, int v)
     GRectOutline(&r, -2);
     (*g_9128)(g_3DE2, _foreColor, g_3DE4);
     while (*s) {
-        f_1B4E_0110(x, y, *s);
+        gfx_put_fixed_font_char(x, y, *s);
         s++;
         y += g_3DDC;
     }
-    f_1FD2_03EB(&r, v);
+    input_register_object_rect(&r, v);
 }
 
 extern void (far * near g_9130)(void);
@@ -87,13 +87,13 @@ extern int far StillDown(void);
 extern int far fd_50F6_46A8[];
 extern void far f_1FD2_0008(int x, int y, int mode, char far *s);
 int far o10_35F5_0384(char far *sel, char far * far *items);
-extern int far f_1F58_0038(void);
-extern char far f_1F58_005A(void);
+extern int far kbd_poll_bios_key(void);
+extern char far kbd_read_bios_char(void);
 extern int far fd_55B3_604C;
-extern void far f_1B73_09E9(int x, int y);
-extern void far f_1F58_007F(int c);
+extern void far mouse_set_position(int x, int y);
+extern void far kbd_unread_char(int c);
 
-int far o10_35F5_01C3(struct Event far *ev)
+int far menu_track_bar_selection(struct Event far *ev)
 {
     int m;
     int prev;
@@ -118,11 +118,11 @@ again:
     if (!o10_35F5_0384(&sel, fd_55B3_6054[m + 1]))
         return;
     m = 0xff;
-    if (!f_1F58_0038())
+    if (!kbd_poll_bios_key())
         goto again;
-    if (f_1F58_005A())
+    if (kbd_read_bios_char())
         goto again;
-    c = f_1F58_005A();
+    c = kbd_read_bios_char();
     prev = curMenu;
 next:
     if (c == 0x4b) {
@@ -133,8 +133,8 @@ next:
     } else if (c == 0x4d) {
         m = (prev + 1) % fd_55B3_604C;
     } else {
-        f_1F58_007F(c);
-        f_1F58_007F(0);
+        kbd_unread_char(c);
+        kbd_unread_char(0);
         m = 0xff;
         goto again;
     }
@@ -142,33 +142,33 @@ next:
         prev = m;
         goto next;
     }
-    f_1B73_09E9(fd_50F6_46A8[m] + fontWidth * 3, g_3DDC / 2);
+    mouse_set_position(fd_50F6_46A8[m] + fontWidth * 3, g_3DDC / 2);
     goto again;
 }
 
 extern char far * far malloc(unsigned size);
 extern char far * near g_5AAC;
-extern void far f_1F80_0081(int a);
-extern void far f_1B73_0A40(void);
+extern void far timer_wait_double_ticks(int a);
+extern void far kbd_disable_mouse_emulation(void);
 extern void far GetMousePos(struct Pt far *pt);
 extern int far fd_50F6_46BC[];
 extern int far fd_55B3_5AA0[2];
 extern char far * far GSaveRect(struct Rect far *r);
 extern void far f_1FD2_02B1(int a);
 extern void far Punt(char far *fmt, ...);
-extern void far f_1FD2_02FF(void);
-extern int far f_1B73_032A(void);
-extern void far f_1B73_032E(struct Event far *ev);
+extern void far input_capture_screen(void);
+extern int far input_event_count(void);
+extern void far input_pop_event(struct Event far *ev);
 extern int far PointInRect(struct Pt far *pt, struct Rect far *r);
-extern int far f_1F58_0090(void);
-extern void far f_1B73_030F();
-extern void far f_1FD2_031A(void);
-extern void far f_1B73_0A6C(void);
-extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
+extern int far kbd_read_key_code(void);
+extern void far input_enqueue_event_args();
+extern void far input_release_screen_capture(void);
+extern void far kbd_enable_mouse_emulation(void);
+extern void far gfx_restore_and_free_rect(struct Rect far *r, char far *buf);
 extern void far free(char far *block);
 
 
-extern void far f_1B73_0C80(int item);
+extern void far hotbox_center_pointer(int item);
 int far o10_35F5_0384(char far *sel, char far * far *items)
 {
     int j;
@@ -200,7 +200,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     if (items != 0 && *items != 0) {
     buf = malloc(4000); saved = g_5AAC;
     g_5AAC = 0; last.x = last.y = -1;
-    f_1F80_0081(1); f_1B73_0A40();
+    timer_wait_double_ticks(1); kbd_disable_mouse_emulation();
     mode = curMenu == -1 ? 0 : 1;
     GetMousePos(&pt);
     maxLen = i = 0;
@@ -268,7 +268,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
         if (p > buf + 4000)
             Punt("Menu data too long");
     }
-    f_1FD2_02FF();
+    input_capture_screen();
     if (!StillDown())
         down = 0;
     i = -1;
@@ -277,8 +277,8 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
             goto done;
         if (StillDown() && !down)
             down = 1;
-        if (f_1B73_032A()) {
-            f_1B73_032E(&ev);
+        if (input_event_count()) {
+            input_pop_event(&ev);
             if ((char)(ev.code >> 8) == -2 && (ev.code & 0xff) != curMenu)
                 goto other;
         }
@@ -294,8 +294,8 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
                     goto moved;
             }
             i = -1;
-        } else if (f_1F58_0038()) {
-            key = f_1F58_0090();
+        } else if (kbd_poll_bios_key()) {
+            key = kbd_read_key_code();
             if (!(key & 0x800) && islower(key))
                 key -= 0x20;
             i = cur;
@@ -366,39 +366,39 @@ moved:
 found:
     i = j;
 warp:
-    f_1B73_09E9(fontWidth * 4 + x, g_3DDC / 2 + g_3DDC * i + r.top);
+    mouse_set_position(fontWidth * 4 + x, g_3DDC / 2 + g_3DDC * i + r.top);
     goto moved;
 flush:
-    f_1F58_007F(key & 0xff);
-    f_1F58_007F(0);
+    kbd_unread_char(key & 0xff);
+    kbd_unread_char(0);
 escape:
     cur = -1;
 done:
     if (!StillDown() && curMenu != -1) {
         if (cur != -1)
-            f_1B73_030F((curMenu << 4) + cur - 0x2ff, 0, 0, 0);
+            input_enqueue_event_args((curMenu << 4) + cur - 0x2ff, 0, 0, 0);
         result = 1;
     }
     if (cur != -1)
         *sel = cur + 1;
-    f_1FD2_031A();
-    f_1B73_0A6C();
-    f_1CE2_056C(&saveR, saveBuf);
+    input_release_screen_capture();
+    kbd_enable_mouse_emulation();
+    gfx_restore_and_free_rect(&saveR, saveBuf);
     g_5AAC = saved;
     free(buf);
     return result;
 other:
-    f_1B73_030F(ev.code, ev.xE, ev.h, ev.v, 0);
+    input_enqueue_event_args(ev.code, ev.xE, ev.h, ev.v, 0);
     goto done;
     }
     if (curMenu != -1)
-        f_1B73_030F((curMenu - 0x30) << 4, 0, 0, 0);
+        input_enqueue_event_args((curMenu - 0x30) << 4, 0, 0, 0);
     *sel = 0;
     return 1;
 }
 
 
-extern void far f_1B73_0C80(int item);
+extern void far hotbox_center_pointer(int item);
 
 int far o10_35F5_0A63(int key, int far *sel, int count, int base)
 {
@@ -413,7 +413,7 @@ int far o10_35F5_0A63(int key, int far *sel, int count, int base)
             i = count - 1;
     } else
         return 0;
-    f_1B73_0C80(i + base);
+    hotbox_center_pointer(i + base);
     *sel = i;
     return 1;
 }

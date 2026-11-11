@@ -146,7 +146,7 @@ def live_case(label, seed, *, count=None, target_index=None, forced_modes=None,
         name: behavior.Callback(0, None, ("ax",))
         for name in ("win_LockWin", "win_UnlockWin", "win_Recalc", "f_2505_02D7")
     }
-    actual_helpers["f_2505_0006"] = behavior.Callback(1, None)
+    actual_helpers["win_locked_resource_ptr"] = behavior.Callback(1, None)
     case = behavior.Case(
         label=label,
         args=[RECT_OFF, RECT_SEG],
@@ -162,7 +162,7 @@ def live_case(label, seed, *, count=None, target_index=None, forced_modes=None,
             "contract": "f_20E8_0903 using actual DOS Ralloc window lock, object lookup, iterative win_Recalc, and final unlock",
             "abi": "AX=window-object id; stack far pointer to normalized logical-screen rectangle; target retf 4",
             "actual_original_helpers": ["win_LockWin", "f_2505_02D7", "win_Recalc", "win_UnlockWin",
-                                        "RallocType", "mem_Lock", "mem_Unlock", "f_171C_2086"],
+                                        "RallocType", "mem_Lock", "mem_Unlock", "mem_unlock_encoded_handle"],
             "validity": {
                 "window_id": WIN_ID,
                 "object_count": count,
@@ -215,7 +215,7 @@ def unlock_cases(count=500, seed=0x23AE01DB):
     cases = []
     actual_helpers = {
         name: behavior.Callback(2, None)
-        for name in ("RallocType", "RallocFree", "f_171C_2086", "f_171C_20E2")
+        for name in ("RallocType", "RallocFree", "mem_unlock_encoded_handle", "mem_mark_discardable_20e2")
     }
     for depth in (2, 3, 255):
         case = window_suite.unlock_live_case(f"nested-depth-{depth}", (4, 18))

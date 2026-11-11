@@ -16,11 +16,11 @@ DGROUP	group	_DATA
 HUGE_TEXT	segment word public 'CODE'
 	assume	cs:HUGE_TEXT, ds:DGROUP
 
-	public	_f_194D_0006
-	public	_f_194D_003F
-	public	_f_194D_008F
+	public	_mem_copy_paragraphs
+	public	_gfx_probe_tandy_video_area
+	public	_mem_block_dword_checksum
 
-_f_194D_0006	proc	far
+_mem_copy_paragraphs	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -54,9 +54,9 @@ L001E:
 	pop ds
 	pop bp
 	retf
-_f_194D_0006	endp
+_mem_copy_paragraphs	endp
 
-_f_194D_003F	proc	far
+_gfx_probe_tandy_video_area	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -92,11 +92,11 @@ L008A:
 	mov sp, bp
 	pop bp
 	retf
-_f_194D_003F	endp
+_gfx_probe_tandy_video_area	endp
 
 ; 386 code inside the 16-bit segment (the segment was opened before .386, so it stays USE16)
 	.386
-_f_194D_008F	proc	far
+_mem_block_dword_checksum	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -122,7 +122,7 @@ L00AE:
 	pop si
 	pop bp
 	retf
-_f_194D_008F	endp
+_mem_block_dword_checksum	endp
 
 HUGE_TEXT	ends
 	end

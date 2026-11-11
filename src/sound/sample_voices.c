@@ -64,7 +64,7 @@ extern struct SndChan far fd_55B3_6B4C[];
 extern void far f_0000_0090(struct Sample far *s);
 extern void far f_29F0_0012(void);
 extern unsigned far fd_55B3_6B9E;
-extern void far f_28BC_03CC(void);
+extern void far snd_start_sample_timer(void);
 
 void far f_290D_0098(struct Sample far *s, unsigned step, int vol, int ch)
 {
@@ -93,7 +93,7 @@ void far f_290D_0098(struct Sample far *s, unsigned step, int vol, int ch)
         c->flags |= 0x80;
     c->owner = s;
     f_29F0_0012();
-    f_28BC_03CC();
+    snd_start_sample_timer();
 }
 
 extern void far f_0000_0149(struct Sample far *s);

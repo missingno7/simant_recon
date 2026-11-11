@@ -66,41 +66,41 @@ void far InvalEuMap(int left, int top, int right, int bottom)
     }
 }
 
-extern void far f_195A_007D(int handle);
+extern void far ems_free_handle(int handle);
 
 void far f_0250_0114(void)
 {
     if (g_19D0)
-        f_195A_007D(g_19D0);
+        ems_free_handle(g_19D0);
 }
 
-extern int far f_195A_0260(void);
+extern int far ems_initialize(void);
 extern char far fd_55B3_360C;
 extern int far WinPrintf(char far *format, ...);
-extern void far f_195A_0035(void);
+extern void far ems_query_page_counts(void);
 extern int far fd_55B3_3614;
 extern int far fd_55B3_3612;
-extern void far f_195A_001D(void);
-extern int far f_195A_004B(int pages);
-extern void far f_195A_01CB(int handle, char far *name);
+extern void far ems_query_page_frame(void);
+extern int far ems_allocate_pages(int pages);
+extern void far ems_set_handle_name(int handle, char far *name);
 extern int far atexit(void (far *func)(void));
 
 /*C*/
-int far f_0250_012D(void)
+int far edit_alloc_tile_ems(void)
 {
     int ok;
 
     if (g_19D0 != 0)
         return 1;
-    if (f_195A_0260() && fd_55B3_360C >= 0x40) {
+    if (ems_initialize() && fd_55B3_360C >= 0x40) {
         WinPrintf("\nEMS version: %x", fd_55B3_360C);
-        f_195A_0035();
+        ems_query_page_counts();
         WinPrintf("\ntotal pages: %d", fd_55B3_3614);
         WinPrintf("\nfree  pages: %d", fd_55B3_3612);
         if (fd_55B3_3612 >= 8) {
-            f_195A_001D();
-            g_19D0 = f_195A_004B(8);
-            f_195A_01CB(g_19D0, "TILESXXX");
+            ems_query_page_frame();
+            g_19D0 = ems_allocate_pages(8);
+            ems_set_handle_name(g_19D0, "TILESXXX");
             atexit(f_0250_0114);
             return 1;
         }
@@ -112,7 +112,7 @@ extern Handle far fd_50F6_10EA;
 extern void far db_ReleaseHandle(Handle handle);
 extern Handle far fd_50F6_10E6;
 
-void far f_0250_01E7(void)
+void far edit_release_life_tiles(void)
 {
     if (fd_50F6_10EA) {
         db_ReleaseHandle(fd_50F6_10EA);
@@ -130,14 +130,14 @@ extern int far TERRAINset;
 extern char near g_5A97;
 extern Handle far f_1A53_00BA(int object, int kind);
 extern Handle far fd_50F6_37DE;
-extern void far o00_31AD_18BA(char far *p, unsigned seg, int n);
-extern void far o00_31AD_186A(char far *p, unsigned seg, int page, unsigned n);
+extern void far gfx_planar_upload_tiles(char far *p, unsigned seg, int n);
+extern void far gfx_planar_upload_plane(char far *p, unsigned seg, int page, unsigned n);
 extern void far db_PurgeObject(int object, int kind);
 extern Handle far fd_50F6_10EE;
 extern void far mem_Free(Handle h);
 extern void far db_UnhookObject(int object, int kind);
 
-void far f_0250_0256(int set)
+void far edit_load_terrain_tiles(int set)
 {
     int i;
 
@@ -152,11 +152,11 @@ void far f_0250_0256(int set)
         db_UnhookObject(10 - set, 9);
     } else {
         if (g_19D0 == 0)
-            f_0250_01E7();
+            edit_release_life_tiles();
         fd_50F6_37DE = f_1A53_00BA(10 - set, 9);
-        o00_31AD_18BA(*fd_50F6_37DE, 0xa000, 0x100);
+        gfx_planar_upload_tiles(*fd_50F6_37DE, 0xa000, 0x100);
         for (i = 0; i < 4; i++)
-            o00_31AD_186A(*fd_50F6_37DE + (i << 13), 0xc000, i, 0x2000);
+            gfx_planar_upload_plane(*fd_50F6_37DE + (i << 13), 0xc000, i, 0x2000);
         db_PurgeObject(10 - set, 9);
     }
 }
@@ -167,26 +167,26 @@ void far OverlayTileSet(int type, int id)
 {
     if (type == 0) {
         if (id == 0x3e9) {
-            f_0250_0256(1);
+            edit_load_terrain_tiles(1);
             Barrier = 0x90;
         } else if (id == 0x3e8) {
-            f_0250_0256(0);
+            edit_load_terrain_tiles(0);
             Barrier = 0x50;
         }
     }
 }
 
 extern int far fd_50F6_1102;
-extern Handle far f_1A53_00F0(int object, int kind, int type);
+extern Handle far res_load_with_alloc_type(int object, int kind, int type);
 extern long far mem_Size(Handle h);
-extern int far f_171C_1E9A(Handle h);
+extern int far mem_handle_above_ems_boundary(Handle h);
 extern Handle far Ralloc(long size, int flags, char far *name);
 extern char far * far mem_Lock(Handle h);
 extern void far * far _fmemcpy(void far *dest, void far *src, unsigned n);
-extern void far f_195A_00F8(int handle);
-extern void far f_195A_0122(int handle, int n, int far *map);
+extern void far ems_save_handle_map(int handle);
+extern void far ems_map_multiple_pages(int handle, int n, int far *map);
 extern char far * far fd_55B3_360E;
-extern void far f_195A_010D(int handle);
+extern void far ems_restore_handle_map(int handle);
 extern Handle far mem_Unlock(Handle h);
 
 void far LoadTiles(void)
@@ -199,18 +199,18 @@ void far LoadTiles(void)
     fd_50F6_10EA = 0;
     fd_50F6_10E6 = 0;
     fd_50F6_10EE = 0;
-    f_0250_0256(0);
+    edit_load_terrain_tiles(0);
     switch (g_5A97) {
     case 0:
     case 8:
-        f_0250_012D();
+        edit_alloc_tile_ems();
     case 4:
         fd_50F6_1102 = 1;
         if (g_19D0) {
             for (i = 0; i < 6; i++) {
-                fd_50F6_10E6 = f_1A53_00F0(i + 15, 9, 1);
+                fd_50F6_10E6 = res_load_with_alloc_type(i + 15, 9, 1);
                 n = mem_Size(fd_50F6_10E6);
-                if (f_171C_1E9A(fd_50F6_10E6)) {
+                if (mem_handle_above_ems_boundary(fd_50F6_10E6)) {
                     h = Ralloc((long)n, 9, "emstiles");
                     p = mem_Lock(h);
                     _fmemcpy(p, mem_Lock(fd_50F6_10E6), n);
@@ -218,10 +218,10 @@ void far LoadTiles(void)
                     h = 0;
                     p = mem_Lock(fd_50F6_10E6);
                 }
-                f_195A_00F8(g_19D0);
-                f_195A_0122(g_19D0, 4, i < 3 ? g_19D2 : g_19E2);
+                ems_save_handle_map(g_19D0);
+                ems_map_multiple_pages(g_19D0, 4, i < 3 ? g_19D2 : g_19E2);
                 _fmemcpy(fd_55B3_360E + i % 3 * 0x5000, p, n);
-                f_195A_010D(g_19D0);
+                ems_restore_handle_map(g_19D0);
                 mem_Unlock(fd_50F6_10E6);
                 if (h) {
                     mem_Unlock(h);
@@ -246,7 +246,7 @@ void far LoadTiles(void)
 
 extern void far * far _fmemset(void far *dest, int c, unsigned n);
 
-void far f_0250_05CB(void)
+void far edit_invalidate_life_cache(void)
 {
     _fmemset(fd_50F6_15C4, -1, 0x960);
 }
@@ -256,21 +256,21 @@ extern int far MapPlane;
 void far f_0250_05EB(void)
 {
     if (g_19D0) {
-        f_195A_00F8(g_19D0);
+        ems_save_handle_map(g_19D0);
         if (MapPlane < 2)
-            f_195A_0122(g_19D0, 4, g_19D2);
+            ems_map_multiple_pages(g_19D0, 4, g_19D2);
         else
-            f_195A_0122(g_19D0, 4, g_19E2);
+            ems_map_multiple_pages(g_19D0, 4, g_19E2);
     }
 }
 
-void far f_0250_062A(void)
+void far edit_restore_tile_ems_map(void)
 {
     if (g_19D0)
-        f_195A_010D(g_19D0);
+        ems_restore_handle_map(g_19D0);
 }
 
-void far f_0250_0643(int which)
+void far edit_prepare_life_tiles(int which)
 {
     if (g_19D0 == 0) {
         if (which == 1) {
@@ -295,11 +295,11 @@ void far f_0250_0643(int which)
 extern unsigned char near g_94E4;
 extern void far Punt(char far *format, ...);
 extern unsigned near g_9126;
-extern void far o00_31AD_2FDA(int x, int y, int col, int row, char far *p);
-extern void far o00_31AD_1B49(int x, int y, int col, int row, char far *p, int mask);
-extern void far o00_31AD_300B(int x, int y, int col, int row, char far *p, int mask);
-extern void far o03_3258_0690(int x, int y, char far *tile, char far *life, int mask);
-extern void far o01_3126_1343(int x, int y, char far *tile, char far *life, int n);
+extern void far gfx_planar_draw_life_ems(int x, int y, int col, int row, char far *p);
+extern void far gfx_planar_draw_life_320(int x, int y, int col, int row, char far *p, int mask);
+extern void far gfx_planar_draw_life_hires(int x, int y, int col, int row, char far *p, int mask);
+extern void far gfx_tandy_draw_life_tile(int x, int y, char far *tile, char far *life, int mask);
+extern void far gfx_mono_draw_life_tile(int x, int y, char far *tile, char far *life, int n);
 
 void far f_0250_0721(int x, int y)
 {
@@ -328,7 +328,7 @@ void far f_0250_0721(int x, int y)
         flip = 0;
     }
     if (g_19D0 && fd_50F6_1102 == 1) {
-        o00_31AD_2FDA(x & ~0xf, y, col, row, fd_55B3_360E + g_9126 * 0xa0);
+        gfx_planar_draw_life_ems(x & ~0xf, y, col, row, fd_55B3_360E + g_9126 * 0xa0);
         return;
     }
     base = *(flip == 1 ? fd_50F6_10E6 : fd_50F6_10EA);
@@ -338,22 +338,22 @@ void far f_0250_0721(int x, int y)
         mask = masks[g_9126 >> 7];
     if (fd_50F6_1102 == 1) {
         if (g_5A97 == 4)
-            o00_31AD_1B49(x & ~0xf, y, col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
+            gfx_planar_draw_life_320(x & ~0xf, y, col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
         else
-            o00_31AD_300B(x & ~0xf, y, col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
+            gfx_planar_draw_life_hires(x & ~0xf, y, col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
     } else if (fd_50F6_1102 == 2)
-        o03_3258_0690(x & ~1, y, *fd_50F6_10EE + g_94E4 * 0x48, base + (g_9126 & 0x7f) * 0x48, mask);
+        gfx_tandy_draw_life_tile(x & ~1, y, *fd_50F6_10EE + g_94E4 * 0x48, base + (g_9126 & 0x7f) * 0x48, mask);
     else if (fd_50F6_1102 == 3)
-        o01_3126_1343(x & ~7, y, *fd_50F6_10EE + (g_94E4 << 5), base + (g_9126 << 5), 0x3000 - ((g_9126 >> 7) << 12));
+        gfx_mono_draw_life_tile(x & ~7, y, *fd_50F6_10EE + (g_94E4 << 5), base + (g_9126 << 5), 0x3000 - ((g_9126 >> 7) << 12));
 }
 
-extern void far o00_31AD_2B1A(int col, int row, char far *p);
-extern void far o00_31AD_1B7D(int col, int row, char far *p, int mask);
-extern void far o00_31AD_303F(int col, int row, char far *p, int mask);
-extern void far o03_3258_0F04(char far *tile, char far *life, int mask);
-extern void far o01_3126_14B6(char far *tile, char far *life, int n);
+extern void far gfx_planar_compose_life_ems(int col, int row, char far *p);
+extern void far gfx_planar_compose_life_320(int col, int row, char far *p, int mask);
+extern void far gfx_planar_compose_life_hires(int col, int row, char far *p, int mask);
+extern void far gfx_tandy_compose_life_tile(char far *tile, char far *life, int mask);
+extern void far gfx_mono_compose_life_tile(char far *tile, char far *life, int n);
 
-void far f_0250_0915(void)
+void far edit_compose_life_tile(void)
 {
     static int masks[3] = { 0, 3, 1 };
     int row;
@@ -380,7 +380,7 @@ void far f_0250_0915(void)
         flip = 0;
     }
     if (g_19D0 && fd_50F6_1102 == 1) {
-        o00_31AD_2B1A(col, row, fd_55B3_360E + g_9126 * 0xa0);
+        gfx_planar_compose_life_ems(col, row, fd_55B3_360E + g_9126 * 0xa0);
         return;
     }
     base = *(flip == 1 ? fd_50F6_10E6 : fd_50F6_10EA);
@@ -390,13 +390,13 @@ void far f_0250_0915(void)
         mask = masks[g_9126 >> 7];
     if (fd_50F6_1102 == 1) {
         if (g_5A97 == 4)
-            o00_31AD_1B7D(col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
+            gfx_planar_compose_life_320(col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
         else
-            o00_31AD_303F(col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
+            gfx_planar_compose_life_hires(col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
     } else if (fd_50F6_1102 == 2)
-        o03_3258_0F04(*fd_50F6_10EE + g_94E4 * 0x48, base + (g_9126 & 0x7f) * 0x48, mask);
+        gfx_tandy_compose_life_tile(*fd_50F6_10EE + g_94E4 * 0x48, base + (g_9126 & 0x7f) * 0x48, mask);
     else if (fd_50F6_1102 == 3)
-        o01_3126_14B6(*fd_50F6_10EE + (g_94E4 << 5), base + (g_9126 << 5), 0x3000 - ((g_9126 >> 7) << 12));
+        gfx_mono_compose_life_tile(*fd_50F6_10EE + (g_94E4 << 5), base + (g_9126 << 5), 0x3000 - ((g_9126 >> 7) << 12));
 }
 
 extern void (far * near g_917C)(int x, int y, int offset);
@@ -419,14 +419,14 @@ void far f_0250_0ADB(int x, int y)
     }
 }
 
-extern void far o00_31AD_1A8F(int row, int col);
+extern void far gfx_planar_read_tile_plane(int row, int col);
 extern char near g_3D20[];
 
-void far f_0250_0B86(void)
+void far edit_copy_ground_tile(void)
 {
     switch (fd_50F6_1102) {
     case 1:
-        o00_31AD_1A8F(g_94E4 >> 6, ((g_94E4 & 0x3f) - 0x80) << 7);
+        gfx_planar_read_tile_plane(g_94E4 >> 6, ((g_94E4 & 0x3f) - 0x80) << 7);
         break;
     case 2:
         _fmemcpy(g_3D20, *fd_50F6_10EE + g_94E4 * 0x48, 0x48);
@@ -508,11 +508,11 @@ void far ProcEditEvent(struct Event far *event)
     clip_Off();
 }
 
-int far f_0250_0D10(int a, int b);
+int far edit_scroll_and_redraw(int a, int b);
 
-void far f_0250_0CF6(int a, int b)
+void far edit_scroll_delta(int a, int b)
 {
-    f_0250_0D10(a, b);
+    edit_scroll_and_redraw(a, b);
 }
 
 typedef struct {
@@ -534,7 +534,7 @@ extern struct Rect far editTileRect;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern Pnt far MapPnt;
 
-int far f_0250_0D10(int dx, int dy)
+int far edit_scroll_and_redraw(int dx, int dy)
 {
     unsigned long error;
     int i;
@@ -596,7 +596,7 @@ void far win_EditChanged(void)
     win_GetObjRect(4, &editTileRect);
     fd_50F6_10E0 = (editTileRect.right - editTileRect.left) / g_19BE;
     fd_50F6_10DE = (editTileRect.bottom - editTileRect.top) / g_19C0 + 1;
-    f_0250_05CB();
+    edit_invalidate_life_cache();
     g_19CE = 1;
     BoundEditPosition();
 }
@@ -610,7 +610,7 @@ void far OpenEditWindow(void)
 
 void far ForceUpdateEdit(void)
 {
-    f_0250_05CB();
+    edit_invalidate_life_cache();
     UpdateEdit();
 }
 
@@ -620,16 +620,16 @@ void far DoEditUpdateDraw(void)
 }
 
 extern int _fastcall win_IsWinOpen(int win);
-void far f_0250_13A6(void);
+void far edit_render_viewport(void);
 void far DrawEditGraphs(void);
-void far f_0250_13A6(void);
+void far edit_render_viewport(void);
 void far DrawEditGraphs(void);
 
 void far UpdateEdit(void)
 {
     if (win_IsWinOpen(0)) {
         clip_SetWin(0);
-        f_0250_13A6();
+        edit_render_viewport();
         DrawEditGraphs();
         clip_Off();
     }
@@ -655,7 +655,7 @@ void far win_DrawEditWindow(int flags)
 
     if (flags & 2) {
         win_EditChanged();
-        f_0250_13A6();
+        edit_render_viewport();
         win_EditChanged();
         if (CurGameType == 3)
             id = CurExpTool + 0x13ec;
@@ -702,7 +702,7 @@ void far CenterEdit(int x, int y)
     default:
         width = 0x40;
     }
-    f_0250_0CF6(x - fd_50F6_10E0 / 2 - MapPnt.x, y - fd_50F6_10DE / 2 - MapPnt.y);
+    edit_scroll_delta(x - fd_50F6_10E0 / 2 - MapPnt.x, y - fd_50F6_10DE / 2 - MapPnt.y);
     BoundEditPosition();
 }
 
@@ -874,7 +874,7 @@ void far f_0250_129E(int x, int y)
 
 
 extern void far clip_Push(void);
-void far f_0250_5058(void);
+void far edit_set_viewport_clip(void);
 extern long far TickCount(void);
 extern void _fastcall win_SetColorNum(int color);
 extern void far f_15D9_0006(char far *msg, struct Rect far *rect, int y);
@@ -899,7 +899,7 @@ extern void far clip_Pop(void);
 /* px and py are never read: their stepping keeps the dead loads of editRect.left/top (and of
  * g_19C0) alive.  The px step constant is not decided by the bytes (px += 16 is a hypothesis;
  * px++ compiles identically).  balloon = spider = 0 stores spider first (worker resG). */
-void far f_0250_13A6(void)
+void far edit_render_viewport(void)
 {
     int spider;
     int balloon;
@@ -910,7 +910,7 @@ void far f_0250_13A6(void)
 
     balloon = spider = 0;
     clip_Push();
-    f_0250_5058();
+    edit_set_viewport_clip();
     if (g_19C6) {
         if (TickCount() > g_19CA) {
             if (g_19C6)
@@ -926,7 +926,7 @@ void far f_0250_13A6(void)
     if (fd_50F6_37D2 != 500)
         DrawSpider();
     DrawBalloons();
-    f_0250_0643(MapPlane / 2);
+    edit_prepare_life_tiles(MapPlane / 2);
     py = editTileRect.top;
     for (y = 0; y < fd_50F6_10DE; y++, py += g_19C0) {
         px = editTileRect.left;
@@ -951,7 +951,7 @@ void far f_0250_13A6(void)
             f_0250_129E(x, y);
         }
     }
-    f_0250_062A();
+    edit_restore_tile_ems_map();
     if (balTileRect.left != 500) {
         mem_Unlock(balBufHandle);
         mem_Free(balBufHandle);
@@ -1087,11 +1087,11 @@ void far PreDrawSpider(void)
 }
 
 void far DrawEditGraphs(void);
-extern void far f_2662_1120(int x, int y, Pnt far *buf, int id);
+extern void far anim_bitmap_to_buffer(int x, int y, Pnt far *buf, int id);
 void far DrawLegs(int x, int y, int dir, int frame);
 void far DrawPalps(int x, int y, int dir);
 extern void (far * far fd_50F6_37E6)(char far *p, int stride);
-extern void far f_16B5_0033(Pnt far *buf, int mode);
+extern void far gfx_buffer_line_target(Pnt far *buf, int mode);
 extern int far SMode;
 extern int far Scycle;
 extern char far DBodX[];
@@ -1152,7 +1152,7 @@ void far DrawSpider(void)
     fd_50F6_37D6.top = top;
     fd_50F6_37D6.bottom = top + fd_50F6_1F26.y;
     fd_50F6_37D6.right = left + fd_50F6_1F26.x;
-    f_0250_0643(MapPlane / 2);
+    edit_prepare_life_tiles(MapPlane / 2);
     w = 2;
     switch (fd_50F6_1102) {
     case 2:
@@ -1176,14 +1176,14 @@ void far DrawSpider(void)
             if (idx >= 0 && idx < 1200)
                 fd_50F6_15C4[0][idx] = -1;
             if (g_9126)
-                f_0250_0915();
+                edit_compose_life_tile();
             else
-                f_0250_0B86();
+                edit_copy_ground_tile();
             (*fd_50F6_37E6)(p, fd_50F6_1F26.x);
         }
     }
-    f_0250_062A();
-    (g_5A97 & 1) ? f_16B5_0033(&fd_50F6_1F26, 0) : (g_5A97 == 2 ? f_16B5_0033(&fd_50F6_1F26, 1) : f_16B5_0033(&fd_50F6_1F26, 2));
+    edit_restore_tile_ems_map();
+    (g_5A97 & 1) ? gfx_buffer_line_target(&fd_50F6_1F26, 0) : (g_5A97 == 2 ? gfx_buffer_line_target(&fd_50F6_1F26, 1) : gfx_buffer_line_target(&fd_50F6_1F26, 2));
     if (SMode == 5) {
         lx = DBodX[Scycle] + 0x30;
         ly = DBodY[Scycle] + 0x30;
@@ -1194,16 +1194,16 @@ void far DrawSpider(void)
             lx += modx;
             ly += mody;
         }
-        f_2662_1120(lx, ly, &fd_50F6_1F26, Scycle + 0x41a);
+        anim_bitmap_to_buffer(lx, ly, &fd_50F6_1F26, Scycle + 0x41a);
     } else {
         lx = BodX[SpidDir] + 0x30;
         ly = BodY[SpidDir] + 0x30;
         if (g_5A97 == 2) {
-            f_2662_1120(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &fd_50F6_1F26, SpidDir + 1000);
+            anim_bitmap_to_buffer(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &fd_50F6_1F26, SpidDir + 1000);
             DrawLegs((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir, Scycle & 7);
             DrawPalps((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir);
         } else {
-            f_2662_1120(modx + lx, mody + ly, &fd_50F6_1F26, SpidDir + 1000);
+            anim_bitmap_to_buffer(modx + lx, mody + ly, &fd_50F6_1F26, SpidDir + 1000);
             DrawLegs(modx + 0x30, mody + 0x30, SpidDir, Scycle & 7);
             DrawPalps(modx + 0x30, mody + 0x30, SpidDir);
         }
@@ -1279,7 +1279,7 @@ void far ed_MoveTo(int x, int y)
     edPenPos.y = y;
 }
 
-extern void far f_16B5_0008(int x0, int y0, int x1, int y1, int color);
+extern void far gfx_buffer_line(int x0, int y0, int x1, int y1, int color);
 
 void far ed_LineTo(int x, int y)
 {
@@ -1287,7 +1287,7 @@ void far ed_LineTo(int x, int y)
         x = x * 3 / 4;
         y = y * 3 / 4;
     }
-    f_16B5_0008(edPenPos.x, edPenPos.y, x, y, _foreColor);
+    gfx_buffer_line(edPenPos.x, edPenPos.y, x, y, _foreColor);
     edPenPos.x = x;
     edPenPos.y = y;
 }
@@ -1962,7 +1962,7 @@ void far DrawBalloons(void)
         break;
     }
     if (fd_50F6_37D2 == 500)
-        f_0250_5058();
+        edit_set_viewport_clip();
     balTileRect.left = 500;
     for (i = 0, shown = 0; i < fd_50F6_1092; i++) {
         if (shown >= 1 || fd_50F6_04A6[i] == 0)
@@ -1997,22 +1997,22 @@ void far DrawBalloons(void)
         balloonRect.top = g_19C0 * balTileRect.top + editTileRect.top;
         balloonRect.bottom = balloonRect.top + ((int far *)bufp)[1];
         balloonRect.right = balloonRect.left + ((int far *)bufp)[0];
-        f_0250_0643(MapPlane / 2);
+        edit_prepare_life_tiles(MapPlane / 2);
         saved = i;
         for (row = 0, ty = balTileRect.top; row < ht; row++, ty++, dst += skip) {
             idx = ty * 40 + balTileRect.left;
             for (tx = balTileRect.left, col = 0; col < wt; col++, tx++, dst += bpp, idx++) {
                 DoCalcTile(tx, ty);
                 if (g_9126)
-                    f_0250_0915();
+                    edit_compose_life_tile();
                 else
-                    f_0250_0B86();
+                    edit_copy_ground_tile();
                 (*fd_50F6_37E6)(dst, wpix);
                 if (idx >= 0 && idx < 1200)
                     fd_50F6_15C4[0][idx] = -1;
             }
         }
-        f_0250_062A();
+        edit_restore_tile_ems_map();
         if (fd_50F6_37D2 != 500)
             (*fd_50F6_37EE)(&fd_50F6_37D6, &fd_50F6_1F26, &balloonRect, bufp);
         (*fd_50F6_37EA)((char far *)pic + 8, bufp, bx % g_19BE, by % g_19C0);
@@ -2030,7 +2030,7 @@ void far DrawBalloons(void)
 extern struct Rect far fd_50F6_1104;
 extern void far f_1E57_08F5(struct Rect far *rects);
 
-void far f_0250_5058(void)
+void far edit_set_viewport_clip(void)
 {
     struct Rect rects[3];
 

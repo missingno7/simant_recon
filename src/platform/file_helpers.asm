@@ -11,21 +11,21 @@ DGROUP	group	_DATA
 GOLDMAN_TEXT	segment word public 'CODE'
 	assume	cs:GOLDMAN_TEXT, ds:DGROUP
 
-	public	_f_1F66_0029
-	public	_f_1F66_002D
-	public	_f_1F66_00AF
-	public	_f_1F66_00DA
-	public	_f_1F66_00F6
-	public	_f_1F66_0107
+	public	_file_wildcard_search
+	public	_file_wildcard_match
+	public	_file_drive_current_directory
+	public	_data_rotating_byte_checksum
+	public	_file_dos_drive_count
+	public	_system_register_stress
 
 Copyright	db	'Copyright (C)1990, Daniel Goldman'
 
-_f_1F66_0029	proc	far
+_file_wildcard_search	proc	far
 	mov dl, 1
 	jmp short L0031
-_f_1F66_0029	endp
+_file_wildcard_search	endp
 
-_f_1F66_002D	proc	far
+_file_wildcard_match	proc	far
 	mov dl, 0
 	jmp short L0031
 L0031:
@@ -105,9 +105,9 @@ L00AA:
 	pop ds
 	pop bp
 	retf
-_f_1F66_002D	endp
+_file_wildcard_match	endp
 
-_f_1F66_00AF	proc	far
+_file_drive_current_directory	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -133,9 +133,9 @@ _f_1F66_00AF	proc	far
 	pop ds
 	pop bp
 	retf
-_f_1F66_00AF	endp
+_file_drive_current_directory	endp
 
-_f_1F66_00DA	proc	far
+_data_rotating_byte_checksum	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -154,9 +154,9 @@ L00E9:
 	pop ds
 	pop bp
 	retf
-_f_1F66_00DA	endp
+_data_rotating_byte_checksum	endp
 
-_f_1F66_00F6	proc	far
+_file_dos_drive_count	proc	far
 	mov ah, 52h
 	int 21h
 	mov al, byte ptr es:[bx+20h]
@@ -166,9 +166,9 @@ _f_1F66_00F6	proc	far
 	mov al, 8
 L0106:
 	retf
-_f_1F66_00F6	endp
+_file_dos_drive_count	endp
 
-_f_1F66_0107	proc	far
+_system_register_stress	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 14h
@@ -250,7 +250,7 @@ L019A:
 	mov sp, bp
 	pop bp
 	retf
-_f_1F66_0107	endp
+_system_register_stress	endp
 
 GOLDMAN_TEXT	ends
 	end

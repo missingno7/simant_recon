@@ -47,18 +47,18 @@ class OwnedCodeReferences(unittest.TestCase):
 
     def test_callback_literals_match_history_but_fail_far_pointer_contract(self):
         recipes = {
-            'S00:31AD': [('_o00_31AD_0004', '_o00_31AD_001C', '1Ch'),
-                         ('_GPatBox', '_o00_31AD_013A', '13Ah'),
-                         ('_GInvBox', '_o00_31AD_0394', '394h'),
-                         ('_GBoxFill', 'L16C1', '16C1h'),
-                         ('_o00_31AD_16E4', '_o00_31AD_16FC', '16FCh')],
-            'S01:3126': [('_o01_3126_024C', 'L0264', '264h')],
-            'S02:3126': [('_o02_3126_0096', '_o02_3126_00AE', '0AEh'),
-                         ('_o02_3126_0185', '_o02_3126_019D', '19Dh'),
-                         ('_o02_3126_027C', 'L0294', '294h')],
-            'S03:3126': [('_o03_3126_01F8', '_o03_3126_0210', '210h'),
-                         ('_o03_3126_03C2', '_o03_3126_03DA', '3DAh'),
-                         ('_o03_3126_059C', 'L05B4', '5B4h')],
+            'S00:31AD': [('_gfx_planar_dither_box', '_gfx_planar_dither_box_raw', '1Ch'),
+                         ('_gfx_planar_gpatbox', '_gfx_planar_pattern_box_raw', '13Ah'),
+                         ('_gfx_planar_ginvbox', '_gfx_planar_invert_box_raw', '394h'),
+                         ('_gfx_planar_gboxfill', 'L16C1', '16C1h'),
+                         ('_gfx_planar_fill_box_unsorted', '_gfx_planar_fill_box_raw', '16FCh')],
+            'S01:3126': [('_gfx_mono_fill_or_pattern_box', 'L0264', '264h')],
+            'S02:3126': [('_gfx_vga8_dither_box', '_gfx_vga8_dither_box_raw', '0AEh'),
+                         ('_gfx_vga8_gpatbox', '_gfx_vga8_pattern_box_raw', '19Dh'),
+                         ('_gfx_vga8_gboxfill', 'L0294', '294h')],
+            'S03:3126': [('_gfx_tandy_dither_box', '_gfx_tandy_dither_box_raw', '210h'),
+                         ('_gfx_tandy_gpatbox', '_gfx_tandy_pattern_box_raw', '3DAh'),
+                         ('_gfx_tandy_gboxfill', 'L05B4', '5B4h')],
         }
         program = canonical.load()
         manifest = modules.load_manifest()

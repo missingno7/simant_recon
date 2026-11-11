@@ -25,7 +25,7 @@ void far f_20E8_0000(void)
 {
 }
 
-extern char far * far * far f_1A53_00F0(int object, int kind, int type);
+extern char far * far * far res_load_with_alloc_type(int object, int kind, int type);
 extern void far Punt(char far *format, ...);
 extern char far * far * near win_handles[];
 extern void _fastcall win_LockWin(int win);
@@ -40,7 +40,7 @@ void far win_LoadWindow(int win)
     int i;
     char far *w;
 
-    h = f_1A53_00F0((char)(win >> 8), 0, 1);
+    h = res_load_with_alloc_type((char)(win >> 8), 0, 1);
     if (h == 0)
         Punt("CANNOT LOAD WINDOW %03x", win);
     win_handles[(char)(win >> 8)] = h;
@@ -140,13 +140,13 @@ int far win_LoadAllWindows(void)
     return 1;
 }
 
-extern char far * far f_2505_0006(int win);
+extern char far * far win_locked_resource_ptr(int win);
 extern int g_5702[];
-extern void _fastcall f_2505_08EA(int win);
+extern void _fastcall win_deactivate_pointer_regions(int win);
 extern void far clip_KillWin(int win);
 extern void _fastcall win_Recalc(int win);
-extern void far f_1E57_00B1(int win);
-extern void _fastcall f_2505_0831(int win);
+extern void far win_raise_and_reclip(int win);
+extern void _fastcall win_activate_pointer_regions(int win);
 extern void far clip_SetWin(int win);
 extern void _fastcall win_DrawWindow(int win);
 extern void far clip_Off(void);
@@ -159,11 +159,11 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     char far *obj;
 
     win_LockWin(from);
-    w = f_2505_0006(from);
+    w = win_locked_resource_ptr(from);
     origin = *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8);
     rect = *(struct Rect far *)w;
     if (g_5702[0] != 0)
-        f_2505_08EA(g_5702[0]);
+        win_deactivate_pointer_regions(g_5702[0]);
     if (*(int far *)(w + 0x1c) & 0x200) {
         (*g_62E4)();
         (*g_62F4)(from);
@@ -173,7 +173,7 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     }
     win_UnlockWin(from);
     win_LockWin(to);
-    w = f_2505_0006(to);
+    w = win_locked_resource_ptr(to);
     obj = ((char far * far *)(w + 0x2c))[0];
     *(int far *)(obj + 8) = origin.left;
     *(int far *)(obj + 0xa) = origin.top;
@@ -185,11 +185,11 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     ((int far *)(w + 0x10))[3] = p3;
     win_Recalc(to);
     (*g_62E0)(to);
-    *(int far *)(f_2505_0006(to) + 0x1c) |= 0x200;
+    *(int far *)(win_locked_resource_ptr(to) + 0x1c) |= 0x200;
     if (g_5702[0] != (int)0x8000)
-        f_2505_08EA(g_5702[0]);
-    f_1E57_00B1(to);
-    f_2505_0831(to);
+        win_deactivate_pointer_regions(g_5702[0]);
+    win_raise_and_reclip(to);
+    win_activate_pointer_regions(to);
     clip_SetWin(to);
     win_DrawWindow(to);
     (*g_62E8)();
@@ -215,13 +215,13 @@ void far win_Open(int win, ...)
     if (g_5702[0] != win) {
         win_LockWinHigh(win);
         (*g_62E4)();
-        w = f_2505_0006(win);
+        w = win_locked_resource_ptr(win);
         ((int far *)(w + 0x10))[0] = (&win)[1];
         ((int far *)(w + 0x10))[1] = (&win)[2];
         ((int far *)(w + 0x10))[2] = (&win)[3];
         ((int far *)(w + 0x10))[3] = (&win)[4];
         win_Recalc(win);
-        w = f_2505_0006(win);
+        w = win_locked_resource_ptr(win);
         if (*(int far *)(w + 0x1c) & 0x1000) {
             dx = dy = 0;
             win_GetObjRect(win, &r);
@@ -240,11 +240,11 @@ void far win_Open(int win, ...)
             win_Recalc(win);
         }
         (*g_62E0)(win);
-        *(int far *)(f_2505_0006(win) + 0x1c) |= 0x200;
+        *(int far *)(win_locked_resource_ptr(win) + 0x1c) |= 0x200;
         if (g_5702[0] != (int)0x8000)
-            f_2505_08EA(g_5702[0]);
-        f_1E57_00B1(win);
-        f_2505_0831(win);
+            win_deactivate_pointer_regions(g_5702[0]);
+        win_raise_and_reclip(win);
+        win_activate_pointer_regions(win);
         clip_SetWin(win);
         win_DrawWindow(win);
         (*g_62E8)();
@@ -254,7 +254,7 @@ void far win_Open(int win, ...)
     win_FlushEvents();
 }
 
-extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
+extern void _fastcall win_redraw_exposed_windows(struct Rect far *rect);
 
 void _fastcall win_Close(int win)
 {
@@ -262,15 +262,15 @@ void _fastcall win_Close(int win)
     struct Rect r;
 
     win_LockWin(win);
-    w = f_2505_0006(win);
+    w = win_locked_resource_ptr(win);
     if (*(int far *)(w + 0x1c) & 0x200) {
         (*g_62E4)();
         (*g_62F4)(win);
         if (g_5702[0] == win) {
-            f_2505_08EA(win);
+            win_deactivate_pointer_regions(win);
             clip_KillWin(win);
             if (g_5702[0] != (int)0x8000)
-                f_2505_0831(g_5702[0]);
+                win_activate_pointer_regions(g_5702[0]);
         } else {
             clip_KillWin(win);
         }
@@ -280,7 +280,7 @@ void _fastcall win_Close(int win)
         (*g_62E0)(win);
         r = *(struct Rect far *)w;
         win_UnlockWin(win);
-        f_21FA_0B4B(&r);
+        win_redraw_exposed_windows(&r);
         (*g_62E8)();
         clip_Off();
     } else {
@@ -318,7 +318,7 @@ void _fastcall f_20E8_0776(int win)
     struct Rect r;
 
     win_LockWin(win);
-    f_2505_0006(win);
+    win_locked_resource_ptr(win);
     flag = *(int far *)(win_WinAddr(g_5702[0]) + 0x1c) & 1;
     win_UnlockWin(win);
     (*g_62E4)();
@@ -330,15 +330,15 @@ void _fastcall f_20E8_0776(int win)
             }
             f_1E57_0052(win);
             if (g_5702[0] != win) {
-                f_2505_08EA(win);
-                f_2505_0831(g_5702[0]);
+                win_deactivate_pointer_regions(win);
+                win_activate_pointer_regions(g_5702[0]);
             }
         }
     } else {
         f_1E57_0052(win);
     }
     win_LockWin(win);
-    w = f_2505_0006(win);
+    w = win_locked_resource_ptr(win);
     *(int far *)(w + 0x1c) |= 0x200;
     r = *(struct Rect far *)w;
     win_UnlockWin(win);
@@ -353,12 +353,12 @@ void _fastcall win_SetWinDrawHook(int win, void (far *hook)(int phase))
     win_drawHooks[win >> 8] = hook;
 }
 
-void _fastcall f_20E8_088B(void (far *hook)(int win))
+void _fastcall win_set_state_change_hook(void (far *hook)(int win))
 {
     g_62E0 = hook;
 }
 
-void _fastcall f_20E8_089F(void (far *hook)(int win))
+void _fastcall win_set_before_close_hook(void (far *hook)(int win))
 {
     g_62F4 = hook;
 }
@@ -373,7 +373,7 @@ void _fastcall f_20E8_08C7(void (far *hook)(void))
     g_62E8 = hook;
 }
 
-void _fastcall f_20E8_08DB(void (far *hook)(void))
+void _fastcall win_set_layout_change_hook(void (far *hook)(void))
 {
     g_62EC = hook;
 }
@@ -425,7 +425,7 @@ void _fastcall f_20E8_0903(int obj, int far *rect)
 
 extern int far f_2505_036E(void);
 
-void far f_20E8_0A21(void)
+void far win_close_auto_dismiss(void)
 {
     int top;
 

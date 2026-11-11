@@ -38,8 +38,8 @@ extern int far printf(char far *format, ...);
 extern int far WinPrintf(char far *format, ...);
 extern void far Punt(char far *format, ...);
 extern IndexEntry far * far FindIndex(int db, int id, int kind);
-extern void far f_19DC_02D9(int file, void far *buffer, unsigned long count);
-extern void far f_19DC_02FB(int file, long offset, void far *buffer, long count);
+extern void far db_read_at_cursor(int file, void far *buffer, unsigned long count);
+extern void far db_read_cached_range(int file, long offset, void far *buffer, long count);
 extern char far * far mem_Lock(char far *handle);
 extern void far mem_Unlock(char far *handle);
 extern void far UnpackInit(char far *packed, int length);
@@ -85,7 +85,7 @@ char far * far DBRecall(int db, int object, int type, int far *size)
     if (!entry)
         return 0L;
     file = openDBData[db].file;
-    f_19DC_02FB(file, entry->offset + 14, &header, 10L);
+    db_read_cached_range(file, entry->offset + 14, &header, 10L);
     length = header.size;
     if (type <= 22)
         sprintf(name, "%s,%d", g_36F6[type], object);
@@ -99,16 +99,16 @@ char far * far DBRecall(int db, int object, int type, int far *size)
             p = mem_Lock(handle);
             if (!handle)
                 Punt("Couldn't allocate a buffer for DBRecall");
-            f_19DC_02D9(file, p + 2, (unsigned long)length);
+            db_read_at_cursor(file, p + 2, (unsigned long)length);
             *(int far *)p = -1;
             length += 2;
             mem_Unlock(handle);
         } else {
-            f_19DC_02D9(file, &unpacked, 2L);
+            db_read_at_cursor(file, &unpacked, 2L);
             destHandle = f_2CFB_0002((unsigned long)unpacked, 1, name);
             handle = f_2CFB_0002((unsigned long)length + 2, 0, name);
             dest = mem_Lock(destHandle);
-            f_19DC_02D9(file, p = mem_Lock(handle), (unsigned long)length - 2);
+            db_read_at_cursor(file, p = mem_Lock(handle), (unsigned long)length - 2);
             UnpackInit(p, length - 2);
             if (Unpack(dest, unpacked) != unpacked) {
                 printf("\a\aDBRecall Unpack error!!! - object=%d, type=%d", object, type);
@@ -125,7 +125,7 @@ char far * far DBRecall(int db, int object, int type, int far *size)
         handle = f_2CFB_0002((unsigned long)length, 0, name);
         if (!handle)
             Punt("Couldn't allocate a buffer for DBRecall");
-        f_19DC_02D9(file, mem_Lock(handle), (unsigned long)length);
+        db_read_at_cursor(file, mem_Lock(handle), (unsigned long)length);
         mem_Unlock(handle);
     }
     *size = length;

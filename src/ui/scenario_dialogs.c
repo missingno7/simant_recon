@@ -203,22 +203,22 @@ int far DoScenario(void)
 }
 
 extern void _fastcall f_23AE_0377(int win);
-extern int _fastcall f_22BF_0AEF(int win);
+extern int _fastcall win_set_flag_0040(int win);
 extern void far clip_SetWin(int win);
 extern void _fastcall f_22BF_0498(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void _fastcall win_DrawObjectNum(int objNum);
-extern void _fastcall f_2505_08EA(int win);
+extern void _fastcall win_deactivate_pointer_regions(int win);
 extern void far f_1FD2_057F(void);
 extern int far f_218D_03E8(void);
 extern int _fastcall f_22BF_09B0(int win);
 extern int far f_1FD2_0598(void);
 extern void _fastcall f_22BF_04A0(int obj);
-extern void _fastcall f_2505_0831(int win);
+extern void _fastcall win_activate_pointer_regions(int win);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern void (far * far g_62E0)(int win);
 extern void _fastcall f_21FA_08E2(int win);
-extern int _fastcall f_22BF_0B25(int win);
+extern int _fastcall win_clear_flag_0040(int win);
 extern void far f_1E57_0362(void);
 extern void _fastcall f_23AE_01DB(int win);
 
@@ -228,12 +228,12 @@ void far DoWinHelp(int win)
     struct Rect r;
 
     f_23AE_0377(win);
-    shown = f_22BF_0AEF(win);
+    shown = win_set_flag_0040(win);
     clip_SetWin(win);
     f_22BF_0498(win);
     win_GetObjRect(win, &r);
     win_DrawObjectNum(win);
-    f_2505_08EA(win);
+    win_deactivate_pointer_regions(win);
     f_218D_042B();
     f_1FD2_057F();
     while (!f_218D_03E8()) {
@@ -243,13 +243,13 @@ void far DoWinHelp(int win)
     f_218D_042B();
     f_22BF_04A0(win);
     if (f_22BF_09B0(win)) {
-        f_2505_0831(win);
+        win_activate_pointer_regions(win);
         clip_SubInclude(&r);
         (*g_62E0)(win);
         f_21FA_08E2(win);
     }
     if (!shown)
-        f_22BF_0B25(win);
+        win_clear_flag_0040(win);
     f_1E57_0362();
     f_23AE_01DB(win);
 }
@@ -618,8 +618,8 @@ extern char far * far mem_Lock(char far * far *handle);
 extern char far * far * far fd_50F6_3836;
 extern char far * far * far fd_50F6_3938;
 extern char far * far * far fd_50F6_3934;
-extern int far f_1F58_0038(void);
-extern void far f_1F58_0090(void);
+extern int far kbd_poll_bios_key(void);
+extern void far kbd_read_key_code(void);
 extern void far mem_Unlock(char far * far *handle);
 extern void far db_ReleaseHandle(char far * far *handle);
 
@@ -638,8 +638,8 @@ void far CustomerIDDialog(void)
     strings[4] = mem_Lock(h84);
     strings[5] = mem_Lock(fd_50F6_3934);
     f_218D_042B();
-    while (f_1F58_0038())
-        f_1F58_0090();
+    while (kbd_poll_bios_key())
+        kbd_read_key_code();
     PictureDialog(strings, 6, 0, 1);
     mem_Unlock(h83);
     mem_Unlock(h84);

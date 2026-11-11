@@ -92,14 +92,14 @@ int far win_GetProxEvent(void)
     return g_6368;
 }
 
-extern void far f_1E57_0A9C(char far *p);
+extern void far clip_restrict_rect(char far *p);
 extern char g_5A9C[];
 extern void _fastcall win_ObjInv(int obj);
 
 void _fastcall _win_SetProxItem(int obj)
 {
     clip_Push();
-    f_1E57_0A9C(g_5A9C);
+    clip_restrict_rect(g_5A9C);
     if (g_6368 != -1)
         win_ObjInv(g_6368);
     if (obj != -1)
@@ -109,7 +109,7 @@ void _fastcall _win_SetProxItem(int obj)
 }
 
 extern int g_5702[];
-extern int far f_1B73_0BFF(void);
+extern int far hotbox_pointer_hit_id(void);
 
 void _fastcall f_218D_023A(struct Event far *ev)
 {
@@ -117,7 +117,7 @@ void _fastcall f_218D_023A(struct Event far *ev)
 
     if ((char)(g_5702[0] >> 8) == (unsigned char)ev->code) {
         win_LockWin(g_5702[0]);
-        obj = f_1B73_0BFF();
+        obj = hotbox_pointer_hit_id();
         if (obj != 0 && (obj & 0xff00) == g_5702[0] && g_6368 != obj &&
             (*(int far *)(win_ObjAddr(obj) + 0x24) & 0x10))
             _win_SetProxItem(obj);
@@ -128,24 +128,24 @@ void _fastcall f_218D_023A(struct Event far *ev)
 }
 
 extern void far f_1B28_0069(void);
-extern void far f_0000_046F(void);
-extern int far f_1B73_032A(void);
-extern void far f_1B73_032E(struct Event far *ev);
+extern void far snd_service_pending(void);
+extern int far input_event_count(void);
+extern void far input_pop_event(struct Event far *ev);
 void _fastcall f_218D_0451(struct Event far *ev);
 extern void _fastcall f_20E8_0776(int win);
 void far win_FlushEvents(void);
 extern void _fastcall win_Close(int win);
 extern void _fastcall o26_39C7_0671(struct Event far *ev);
-extern void _fastcall o26_39C7_0000(int win);
+extern void _fastcall win_toggle_zoom(int win);
 void _fastcall f_218D_0656(int dir);
 
-void far f_218D_02D5(void)
+void far win_translate_pending_event(void)
 {
     f_1B28_0069();
-    f_0000_046F();
-    if (g_8CEC != 0 || !f_1B73_032A())
+    snd_service_pending();
+    if (g_8CEC != 0 || !input_event_count())
         return;
-    f_1B73_032E(&fd_50F6_49FA);
+    input_pop_event(&fd_50F6_49FA);
     if (fd_50F6_49FA.code == (int)0xff00) {
         f_218D_0451(&fd_50F6_49FA);
     } else if ((char)(fd_50F6_49FA.code >> 8) == (char)0xfb) {
@@ -168,7 +168,7 @@ void far f_218D_02D5(void)
                 o26_39C7_0671(0L);
                 return;
             case 0xf085:
-                o26_39C7_0000(g_5702[0]);
+                win_toggle_zoom(g_5702[0]);
                 win_FlushEvents();
                 return;
             case 0xf086:
@@ -194,17 +194,17 @@ void far f_218D_02D5(void)
 
 int far win_Events(void)
 {
-    f_218D_02D5();
+    win_translate_pending_event();
     return g_8CEC;
 }
 
 int _fastcall win_GetEvent(struct Event far *ev)
 {
-    f_218D_02D5();
+    win_translate_pending_event();
     if (g_8CEC) {
         g_8CEC = 0;
         *ev = fd_50F6_49FA;
-        f_218D_02D5();
+        win_translate_pending_event();
         return 1;
     }
     return 0;
@@ -214,8 +214,8 @@ void far win_FlushEvents(void)
 {
     struct Event ev;
 
-    while (f_1B73_032A())
-        f_1B73_032E(&ev);
+    while (input_event_count())
+        input_pop_event(&ev);
     g_8CEC = 0;
 }
 
@@ -262,9 +262,9 @@ struct Pt {
     int y;
 };
 
-extern char far * far f_2505_0006(int win);
+extern char far * far win_locked_resource_ptr(int win);
 extern void far GetMousePos(struct Pt far *pt);
-extern void far f_1B73_0C80(int obj);
+extern void far hotbox_center_pointer(int obj);
 
 int far f_218D_052F(void)
 {
@@ -283,7 +283,7 @@ int far f_218D_052F(void)
     top = g_5702[0];
     best = 0xffffffffL;
     win_LockWin(top);
-    w = f_2505_0006(top);
+    w = win_locked_resource_ptr(top);
     GetMousePos(&pt);
     for (i = 1; i < *(int far *)(w + 0xc); i++) {
         obj = ((char far * far *)(w + 0x2c))[i];
@@ -302,7 +302,7 @@ int far f_218D_052F(void)
         }
     }
     if (found != -1)
-        f_1B73_0C80(found);
+        hotbox_center_pointer(found);
     win_UnlockWin(top);
     return -1;
 }
@@ -329,7 +329,7 @@ void _fastcall f_218D_0656(int dir)
         else if (last <= cur)
             cur = g_5702[0] + 1;
         if (f_22BF_0A97(cur)) {
-            f_1B73_0C80(cur);
+            hotbox_center_pointer(cur);
             return;
         }
     } while (start != cur);

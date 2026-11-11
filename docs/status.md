@@ -18,7 +18,7 @@ Last gate result: **PASS** (2026-11-11).
 | 4. Layout assumptions explained | 78 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 19 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 828 C and 47 assembly named; data: 428 named | 429 C and 320 assembly functions and 547 data objects keep address-based identifiers; 66 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 942 C and 357 assembly named; data: 484 named | 315 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -41,15 +41,15 @@ Last gate result: **PASS** (2026-11-11).
 | --- | --- | ---: |
 | `S12:384C` | `DrawMapCursor` | 205 |
 | `S13:384C` | `InvertPatch` | 261 |
-| `S15:384C` | `o15_384C_0239` | 326 |
+| `S15:384C` | `ui_prompt_save_discard_cancel` | 326 |
 | `S23:39C7` | `DisplayCard` | 1457 |
 | `S25:3BA4` | `GetMyRandDirs` | 516 |
 | `root:0250` | `DoCalcTile` | 646 |
 | `root:0250` | `DrawBalloons` | 1060 |
 | `root:0E2E` | `LessonDone` | 723 |
-| `root:171C` | `f_171C_09CC` | 144 |
 | `root:171C` | `f_171C_0CF4` | 490 |
-| `root:1C62` | `f_1C62_0415` | 649 |
+| `root:171C` | `mem_resize_in_place` | 144 |
+| `root:1C62` | `ui_choice_prompt` | 649 |
 | `root:20E8` | `f_20E8_0903` | 286 |
 | `root:23E6` | `f_23E6_0000` | 159 |
 | `root:259D` | `win_DrawBitMap` | 663 |
@@ -66,9 +66,9 @@ They stay here until a natural spelling replaces it.
 | `S06:35F5` | `SimColonies` | 1216 | record order only: the nested 'if (CurGameType == 2) if (x < 2 ...)' test adds one /Zi line entry so the 52-entry LINNUM flush falls in 229F..2309; the cumulative count also depends on the SimKidInside scaffold draft's line count (bytes are natural: r reused for the population clamps, b loaded before r) |
 | `S08:35F5` | `RandWorld` | 1355 | RandWorld=ZERO-1: folded unsigned seed < 0 supplies the original AX-to-DI zero initialization; its eliminated original expression is unknown |
 | `S09:35F5` | `o09_35F5_03C6` | 2405 | USE-2: folded unsigned path/save/index reads; original eliminated expressions unknown. |
-| `S16:384C` | `AboutDialog` | 657 | declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
-| `S16:384C` | `DrawSimPayoff` | 481 | declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
-| `S16:384C` | `ShowIntro` | 625 | declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
+| `S16:384C` | `AboutDialog` | 657 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
+| `S16:384C` | `DrawSimPayoff` | 481 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
+| `S16:384C` | `ShowIntro` | 625 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S24:39C7` | `drawHistGraph` | 732 | drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown |
 | `S25:3BA4` | `AnimYellowFight` | 616 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight (SRand2 sites 0AB8/0AEF in separate records) |
 | `S25:3BA4` | `AnimYellowInsane` | 506 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
@@ -89,7 +89,7 @@ They stay here until a natural spelling replaces it.
 | `root:2505` | `win_GetArg` | 58 | identifier count only: named temporaries windowIndex/result (with the unnamed win_GetVal forward prototype) keep the original code of every later function; the original identifiers are unknown |
 | `root:2662` | `hanim_SetObjectPos` | 598 | named redeclarations of f_2662_0348 and f_2662_059C before f_2662_090D -> identifier count (+7 mod 17) selecting 090D's operand order; 090D's reinsert flag is only read in a constant-folded test (keeps the dead store and frees DI) |
 | `root:293A` | `f_293A_017F` | 171 | LIFE-1: folded unsigned success-flag check retains lifetime through the retry loop; eliminated original expression unknown |
-| `root:295C` | `f_295C_0391` | 75 | CSE-1: folded unsigned-byte c3 >= 0 check retains the byte CSE temporary and index spill; the eliminated original expression is unknown |
+| `root:295C` | `snd_stop_assigned_voices` | 75 | CSE-1: folded unsigned-byte c3 >= 0 check retains the byte CSE temporary and index spill; the eliminated original expression is unknown |
 
 ## Code modules that are not complete translation units
 
@@ -192,7 +192,7 @@ use, not original sizes.
 
 ## Relocation order still unproven
 
-`SimCat`, `SimColonies`, `SimDog`, `SimKidInside`, `RandWorld`, `win_GetStyleTextHeight`, `AnimYellowFight`, `AnimYellowInsane`, `ExitNest`, `GetMyBestDirs`, `GetMyDis`, `DrawCurBalloons`, `DrawEditGraphs`, `RallocSetType`, `f_171C_0A5C`, `f_171C_125C`, `f_171C_1FC2`, `clip_Push`, `clip_SubExclude`
+`SimCat`, `SimColonies`, `SimDog`, `SimKidInside`, `RandWorld`, `win_GetStyleTextHeight`, `AnimYellowFight`, `AnimYellowInsane`, `ExitNest`, `GetMyBestDirs`, `GetMyDis`, `DrawCurBalloons`, `DrawEditGraphs`, `RallocSetType`, `f_171C_0A5C`, `mem_alloc_handle_block`, `mem_lock_handle`, `clip_Push`, `clip_SubExclude`
 
 ## Upper layers
 

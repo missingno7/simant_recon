@@ -77,7 +77,7 @@ none:
     return 0;
 }
 
-extern void far f_283E_000A(char reg, char value);
+extern void far snd_opl_write(char reg, char value);
 extern unsigned char far f_29F0_0038(int port);
 
 int far f_293A_0087(void)
@@ -85,16 +85,16 @@ int far f_293A_0087(void)
     int s1;
     unsigned i;
 
-    f_283E_000A(4, 0x60);
-    f_283E_000A(4, 0x80);
+    snd_opl_write(4, 0x60);
+    snd_opl_write(4, 0x80);
     s1 = f_29F0_0038(0x388);
-    f_283E_000A(2, 0xff);
-    f_283E_000A(4, 0x21);
+    snd_opl_write(2, 0xff);
+    snd_opl_write(4, 0x21);
     for (i = 0; i < 200; i++)
         f_29F0_0038(0x388);
     i = f_29F0_0038(0x388);
-    f_283E_000A(4, 0x60);
-    f_283E_000A(4, 0x80);
+    snd_opl_write(4, 0x60);
+    snd_opl_write(4, 0x80);
     if ((s1 & 0xe0) == 0 && (i & 0xe0) == 0xc0)
         return 1;
     return 0;
@@ -118,14 +118,14 @@ int far f_293A_0121(void)
     return found;
 }
 
-extern int far f_29BF_0139(void);
+extern int far snd_regchip_detect(void);
 extern int far fd_50F6_4B14;
 
 int far f_293A_015E(void)
 {
     int port;
 
-    if ((port = f_29BF_0139()) == 0)
+    if ((port = snd_regchip_detect()) == 0)
         return 0;
     fd_50F6_4B14 = port;
     return 1;

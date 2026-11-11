@@ -24,13 +24,13 @@ void far GBoxFillOutline(int left, int top, int right, int bottom, int width)
     GBoxOutline(left, top, right, bottom, width);
 }
 
-extern void far f_1B4E_0110(int x, int y, int c);
+extern void far gfx_put_fixed_font_char(int x, int y, int c);
 extern char near g_3DDC;
 extern char near fontWidth;
 
 void far f_1CE2_0043(int x, int y, int c, int width)
 {
-    f_1B4E_0110(x, y, c);
+    gfx_put_fixed_font_char(x, y, c);
     GBoxOutline(x, y, fontWidth + x, g_3DDC + y, width);
 }
 
@@ -77,7 +77,7 @@ void far f_1CE2_016C(int x, int y, char far *format, ...)
     font_PrintStr((x & 0xff) << 3, CELLY(y), buf);
 }
 
-void far f_1CE2_01C3(int x, int y, char far *format, ...)
+void far gfx_printf_at(int x, int y, char far *format, ...)
 {
     char buf[200];
 
@@ -188,7 +188,7 @@ void far f_1CE2_0552(struct Rect far *r, char far *buf)
     f_1CE2_0587(r, buf, 0);
 }
 
-void far f_1CE2_056C(struct Rect far *r, char far *buf)
+void far gfx_restore_and_free_rect(struct Rect far *r, char far *buf)
 {
     f_1CE2_0587(r, buf, 1);
 }

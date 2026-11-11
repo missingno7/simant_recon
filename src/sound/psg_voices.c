@@ -25,7 +25,7 @@ unsigned g_7600[] = {
 
 extern void far f_29F0_002A(int port, char value);
 
-extern void far f_29BF_00E6(int reg, int value);
+extern void far snd_regchip_write(int reg, int value);
 extern int far fd_50F6_4B14;
 void far f_29D6_000A(int a, int note, int vol, int chan)
 {
@@ -41,7 +41,7 @@ void far f_29D6_000A(int a, int note, int vol, int chan)
     f_29F0_002A(0x205, vol + (char)chan + 0x10);
 }
 
-extern void far f_29BF_00E6(int reg, int value);
+extern void far snd_regchip_write(int reg, int value);
 
 void far f_29D6_0082(int a, int note, int vol, int ch)
 {
@@ -53,9 +53,9 @@ void far f_29D6_0082(int a, int note, int vol, int ch)
     if (note < 0)
         note = 0;
     f = g_7600[note];
-    f_29BF_00E6(ch * 2, f & 0xff);
-    f_29BF_00E6(ch * 2 + 1, f >> 8);
-    f_29BF_00E6(ch + 8, vol);
+    snd_regchip_write(ch * 2, f & 0xff);
+    snd_regchip_write(ch * 2 + 1, f >> 8);
+    snd_regchip_write(ch + 8, vol);
 }
 
 extern int far fd_50F6_4B14;
@@ -103,9 +103,9 @@ void far f_29D6_0148(int note, int ch)
 
 void far f_29D6_015D(int a, int ch)
 {
-    f_29BF_00E6(ch + 8, 0);
-    f_29BF_00E6(ch * 2, 0);
-    f_29BF_00E6(ch * 2 + 1, 0);
+    snd_regchip_write(ch + 8, 0);
+    snd_regchip_write(ch * 2, 0);
+    snd_regchip_write(ch * 2 + 1, 0);
 }
 
 void far f_29D6_0197(int a, int ch)

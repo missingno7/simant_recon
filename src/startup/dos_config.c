@@ -31,32 +31,32 @@ extern int far open(char far *name, int mode, ...);
 extern int far close(int fd);
 extern int far db_SetDataBase(char far *name);
 extern char far * far fd_55B3_1CD4;
-extern void far f_205F_0004(char far *s);
+extern void far gfx_select_driver_resources(char far *s);
 extern int _fastcall win_SetPalette(int id);
-extern void far f_1B4E_0228(int color);
-extern void far o17_384C_0000(void);
+extern void far gfx_set_border_colour(int color);
+extern void far input_init_desktop_region(void);
 extern int far f_208F_058B();
 extern void far _harderr(int (far *handler)());
 extern int near g_3DB2;
-extern void far o17_384C_0143(int a, int b, int c);
-extern void far o17_384C_0169(int a, int b);
+extern void far menu_set_state_colours(int a, int b, int c);
+extern void far win_set_desktop_colours(int a, int b);
 extern int far ConvColor(int color);
 extern int near g_3DB4;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
-extern void far f_171C_1EFA(void);
-extern void far f_171C_0EDE(void);
+extern void far mem_discard_soft_blocks(void);
+extern void far mem_compact_any_region(void);
 extern long far TickCount(void);
-extern void far f_1B28_0129(int a);
-extern int far o17_384C_0039(int a);
+extern void far mouse_load_cursor_resources(int a);
+extern int far menu_load_and_register(int a);
 extern void far Punt(char far *fmt, ...);
 extern void far SetMenuEntries(void);
 extern void far LoadTiles(void);
 extern void far InitApplicationStuff(void);
 extern void far InitApplicationWindows(void);
 extern int far WaitedEnough(long far *timer, int delay);
-extern void far f_1FD2_05FD(void);
+extern void far win_redraw_desktop_menu(void);
 
 void far IBMInitStuff(int argc, char far * far *argv)
 {
@@ -143,32 +143,32 @@ void far IBMInitStuff(int argc, char far * far *argv)
     case 4:
         db_SetDataBase("lrshare");
     }
-    f_205F_0004(fd_55B3_1CD4);
+    gfx_select_driver_resources(fd_55B3_1CD4);
     if (g_5A97 == 0)
         win_SetPalette(1);
     else if (g_5A97 == 8) {
         win_SetPalette(0);
-        f_1B4E_0228(15);
+        gfx_set_border_colour(15);
     }
-    o17_384C_0000();
+    input_init_desktop_region();
     _harderr(f_208F_058B);
     if (g_3DB2 == 320) {
-        o17_384C_0143(8, 11, 0);
-        o17_384C_0169(0, 0);
+        menu_set_state_colours(8, 11, 0);
+        win_set_desktop_colours(0, 0);
     } else {
-        o17_384C_0143(7, 14, 12);
-        o17_384C_0169(7, 7);
+        menu_set_state_colours(7, 14, 12);
+        win_set_desktop_colours(7, 7);
     }
     (*g_9134)(0, 0, g_3DB2, g_3DB4, ConvColor(15));
     i = g_610C[g_5A97];
     gr_BitMapSize(&size, i);
     win_DrawBitMap((g_3DB2 - size.x) / 2, (g_3DB4 - size.y) / 2, i);
-    f_171C_1EFA();
-    f_171C_0EDE();
+    mem_discard_soft_blocks();
+    mem_compact_any_region();
     t = TickCount();
-    f_1B28_0129(4);
-    if (g_3DB2 != 320 || !o17_384C_0039(1))
-        if (!o17_384C_0039(0))
+    mouse_load_cursor_resources(4);
+    if (g_3DB2 != 320 || !menu_load_and_register(1))
+        if (!menu_load_and_register(0))
             Punt("Cannot load menu");
     SetMenuEntries();
     LoadTiles();
@@ -177,7 +177,7 @@ void far IBMInitStuff(int argc, char far * far *argv)
     SetMenuEntries();
     while (!WaitedEnough(&t, 0x48))
         ;
-    f_1FD2_05FD();
+    win_redraw_desktop_menu();
 }
 
 extern int far read(int fd, char far *buf, unsigned n);

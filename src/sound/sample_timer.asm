@@ -218,16 +218,16 @@ TIMER_TEXT      segment word public 'CODE'
                 assume  cs:TIMER_TEXT, ds:DGROUP
 
                 public  _f_28BC_0000
-                public  _f_28BC_000E
-                public  _f_28BC_0015
-                public  _f_28BC_020E
-                public  _f_28BC_0354
-                public  _f_28BC_03CC
-                public  _f_28BC_040C
-                public  _f_28BC_0422
-                public  _f_28BC_046B
-                public  _f_28BC_0488
-                public  _f_28BC_04E0
+                public  _snd_timer_reentrant_exit
+                public  _snd_timer_mix_two_channels
+                public  _snd_timer_mix_four_channels
+                public  _snd_slow_timer_interrupt
+                public  _snd_start_sample_timer
+                public  _snd_slow_sample_timer
+                public  _snd_install_slow_timer_regs
+                public  _snd_select_four_channel_timer
+                public  _snd_select_two_channel_timer
+                public  _snd_restore_bios_timer
 
 ; data in the code segment (reachable from the handlers without DS)
 _f_28BC_0000    label   byte
@@ -239,17 +239,17 @@ isr_ss          dw      DGROUP
 busy            db      0               ; handler nesting count
                 even
 
-_f_28BC_000E    label   near
+_snd_timer_reentrant_exit    label   near
                 pop     ax
                 dec     byte ptr cs:busy
                 iret
-_f_28BC_0015:
+_snd_timer_mix_two_channels:
                 push    ax
                 mov     al, 20h
                 out     20h, al
                 inc     byte ptr cs:busy
                 cmp     byte ptr cs:busy, 1
-                jne     _f_28BC_000E
+                jne     _snd_timer_reentrant_exit
                 sti
                 push    bx
                 push    dx
@@ -484,7 +484,7 @@ L01F8:
                 and     al, 0FCh
                 out     61h, al
                 jmp     out_done
-_f_28BC_020E:
+_snd_timer_mix_four_channels:
                 push    ax
                 push    bx
                 push    dx
@@ -627,7 +627,7 @@ L033C:
                 shr     ax, 1
                 shr     ax, 1
                 jmp     word ptr _fd_55B3_6B9C
-_f_28BC_0354:
+_snd_slow_timer_interrupt:
                 inc     byte ptr cs:busy
                 push    ax
                 push    ds
@@ -679,7 +679,7 @@ L038A:
                 mov     ss, word ptr cs:save_ss
                 mov     sp, word ptr cs:save_sp
                 jmp     L036A
-_f_28BC_03CC    proc    far
+_snd_start_sample_timer    proc    far
                 push    bp
                 mov     bp, sp
                 add     bp, 6
@@ -712,9 +712,9 @@ _f_28BC_03CC    proc    far
                 pop     es
                 pop     bp
                 ret
-_f_28BC_03CC    endp
+_snd_start_sample_timer    endp
 
-_f_28BC_040C    proc    far
+_snd_slow_sample_timer    proc    far
                 push    bp
                 mov     bp, sp
                 add     bp, 6
@@ -724,7 +724,7 @@ _f_28BC_040C    proc    far
                 push    di
                 cli
                 pushf
-                call    _f_28BC_0422
+                call    _snd_install_slow_timer_regs
                 sti
                 pop     di
                 pop     si
@@ -732,9 +732,9 @@ _f_28BC_040C    proc    far
                 pop     es
                 pop     bp
                 ret
-_f_28BC_040C    endp
+_snd_slow_sample_timer    endp
 
-_f_28BC_0422:
+_snd_install_slow_timer_regs:
                 push    ax
                 push    bx
                 push    dx
@@ -756,7 +756,7 @@ L0428:
                 mov     es, ax
                 mov     ax, TIMER_TEXT
                 mov     word ptr es:[22h], ax
-                mov     dx, offset _f_28BC_0354
+                mov     dx, offset _snd_slow_timer_interrupt
                 mov     word ptr es:[20h], dx
                 mov     dx, cx
                 mov     cl, 4
@@ -773,7 +773,7 @@ L0428:
                 pop     ax
                 dec     byte ptr cs:busy
                 iret
-_f_28BC_046B    proc    far
+_snd_select_four_channel_timer    proc    far
                 push    bp
                 mov     bp, sp
                 add     bp, 6
@@ -784,11 +784,11 @@ _f_28BC_046B    proc    far
                 mov     ax, DGROUP
                 mov     ds, ax
                 mov     word ptr g_74BE, TIMER_TEXT
-                mov     word ptr g_74BC, offset _f_28BC_020E
+                mov     word ptr g_74BC, offset _snd_timer_mix_four_channels
                 jmp     short L04A3
-_f_28BC_046B    endp
+_snd_select_four_channel_timer    endp
 
-_f_28BC_0488    proc    far
+_snd_select_two_channel_timer    proc    far
                 push    bp
                 mov     bp, sp
                 add     bp, 6
@@ -799,13 +799,13 @@ _f_28BC_0488    proc    far
                 mov     ax, DGROUP
                 mov     ds, ax
                 mov     word ptr g_74BE, TIMER_TEXT
-                mov     word ptr g_74BC, offset _f_28BC_0015
+                mov     word ptr g_74BC, offset _snd_timer_mix_two_channels
 L04A3:
                 mov     ax, 3508h
                 int     21h
-                cmp     bx, offset _f_28BC_0015
+                cmp     bx, offset _snd_timer_mix_two_channels
                 je      L04BE
-                cmp     bx, offset _f_28BC_020E
+                cmp     bx, offset _snd_timer_mix_four_channels
                 je      L04BE
                 mov     word ptr cs:old_int8, bx
                 mov     word ptr cs:old_int8+2, es
@@ -826,9 +826,9 @@ L04BE:
                 pop     es
                 pop     bp
                 ret
-_f_28BC_0488    endp
+_snd_select_two_channel_timer    endp
 
-_f_28BC_04E0    proc    far
+_snd_restore_bios_timer    proc    far
                 push    bp
                 mov     bp, sp
                 add     bp, 6
@@ -862,7 +862,7 @@ _f_28BC_04E0    proc    far
                 pop     es
                 pop     bp
                 ret
-_f_28BC_04E0    endp
+_snd_restore_bios_timer    endp
 
 TIMER_TEXT      ends
                 end

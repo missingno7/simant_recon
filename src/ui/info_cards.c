@@ -237,7 +237,7 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
 }
 
 
-extern char far * far f_1A53_00F0(int object, int kind, int type);
+extern char far * far res_load_with_alloc_type(int object, int kind, int type);
 extern char far * far mem_Lock(char far *handle);
 
 int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int font1, int font2)
@@ -378,12 +378,12 @@ void far DisplayCard(int card)
     off = 4;
     g_2E26 = card;
     WinPrintf("DisplayCard(cardRez)(%d)\n", card);
-    h1 = f_1A53_00F0(card, 0x11, 1);
+    h1 = res_load_with_alloc_type(card, 0x11, 1);
     if (h1 == 0) {
         WinPrintf("Card Resource not found.\n");
         return;
     }
-    h2 = f_1A53_00F0(card, 0x13, 1);
+    h2 = res_load_with_alloc_type(card, 0x13, 1);
     if (h2 != 0) {
         p = mem_Lock(h2);
         for (q = p; *q; q++)
@@ -440,10 +440,10 @@ void far DisplayCard(int card)
                 t = tr.r.right;
                 tr.r.right = tr.r.bottom;
                 tr.r.bottom = t;
-                hText = f_1A53_00F0(rez, 10, 1);
+                hText = res_load_with_alloc_type(rez, 10, 1);
                 if (hText == 0)
                     continue;
-                hStyl = f_1A53_00F0(rez, 0x15, 1);
+                hStyl = res_load_with_alloc_type(rez, 0x15, 1);
                 styl = 0;
                 text = mem_Lock(hText);
                 tlen = mem_Size(hText);
@@ -545,7 +545,7 @@ extern int near _foreColor;
 extern void far GBoxFillOutline(int left, int top, int right, int bottom, int width);
 extern int far StillDown(void);
 extern void far win_Events(void);
-extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
+extern void far gfx_restore_and_free_rect(struct Rect far *r, char far *buf);
 extern void far clip_Pop(void);
 
 void far PopUpInfoWindow(int x, int top, int bottom, int rez)
@@ -580,9 +580,9 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
         box.right = wr.right - 4;
         box.left = box.right - halfW;
     }
-    hText = f_1A53_00F0(rez, 10, 1);
+    hText = res_load_with_alloc_type(rez, 10, 1);
     if (hText != 0) {
-        hStyl = f_1A53_00F0(rez, 0x15, 1);
+        hStyl = res_load_with_alloc_type(rez, 0x15, 1);
         styl = 0;
         text = mem_Lock(hText);
         if (hStyl != 0) {
@@ -627,7 +627,7 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
     }
     while (StillDown())
         win_Events();
-    f_1CE2_056C(&frame, bits);
+    gfx_restore_and_free_rect(&frame, bits);
     clip_Pop();
 }
 

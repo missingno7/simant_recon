@@ -39,24 +39,24 @@ extern void far MenuQuit(void);
 extern int far SaveGame(int useLast);
 extern int far win_Events(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
-extern void far f_20E8_0A21(void);
+extern void far win_close_auto_dismiss(void);
 extern int far WinPrintf(char far *format, ...);
 extern void far ProcEditEvent(struct Event far *ev);
 extern void far ProcMapEvent(struct Event far *ev);
 extern void far ProcInfoEvent(struct Event far *ev);
 extern void far ProcModeEvent(struct Event far *ev);
 extern void far ProcCasteEvent(struct Event far *ev);
-void far o19_384C_0383(struct Event far *ev);
+void far input_translate_special_key(struct Event far *ev);
 extern void far ProcMenu(struct Event far *ev);
-extern void far f_1FD2_02FF(void);
+extern void far input_capture_screen(void);
 extern void (far * near g_9130)(void);
-extern int far o10_35F5_01C3(struct Event far *ev);
+extern int far menu_track_bar_selection(struct Event far *ev);
 extern void far font_SetFont(int font);
-extern void far f_1FD2_031A(void);
-extern int far f_1B73_0A30(int key);
-extern int far f_0250_0D10(int dx, int dy);
-extern int far f_1F58_0038(void);
-void far o19_384C_0246(void);
+extern void far input_release_screen_capture(void);
+extern int far kbd_scan_state(int key);
+extern int far edit_scroll_and_redraw(int dx, int dy);
+extern int far kbd_poll_bios_key(void);
+void far input_dispatch_game_key(void);
 
 int far DoEvent(void)
 {
@@ -87,7 +87,7 @@ int far DoEvent(void)
     }
     if (win_Events()) {
         win_GetEvent(&ev);
-        f_20E8_0A21();
+        win_close_auto_dismiss();
         WinPrintf("\nEVENT=%x", ev.code);
         switch (ev.code & 0xff00) {
         case 0:
@@ -112,90 +112,90 @@ int far DoEvent(void)
             ProcYardEvent(&ev);
             break;
         case 0xfa00:
-            o19_384C_0383(&ev);
+            input_translate_special_key(&ev);
             break;
         case 0xfd00:
             ProcMenu(&ev);
             break;
         case 0xfe00:
-            f_1FD2_02FF();
+            input_capture_screen();
             (*g_9130)();
-            o10_35F5_01C3(&ev);
+            menu_track_bar_selection(&ev);
             font_SetFont(0);
-            f_1FD2_031A();
+            input_release_screen_capture();
             break;
         }
     }
-    while (f_1B73_0A30(0x1d)) {
+    while (kbd_scan_state(0x1d)) {
         dx = dy = 0;
-        if (f_1B73_0A30(0x47))
+        if (kbd_scan_state(0x47))
             dy = dx = -1;
-        if (f_1B73_0A30(0x49)) {
+        if (kbd_scan_state(0x49)) {
             dx++;
             dy--;
         }
-        if (f_1B73_0A30(0x4f)) {
+        if (kbd_scan_state(0x4f)) {
             dx--;
             dy++;
         }
-        if (f_1B73_0A30(0x51)) {
+        if (kbd_scan_state(0x51)) {
             dx++;
             dy++;
         }
-        if (f_1B73_0A30(0x4d))
+        if (kbd_scan_state(0x4d))
             dx++;
-        if (f_1B73_0A30(0x4b))
+        if (kbd_scan_state(0x4b))
             dx--;
-        if (f_1B73_0A30(0x48))
+        if (kbd_scan_state(0x48))
             dy--;
-        if (f_1B73_0A30(0x50))
+        if (kbd_scan_state(0x50))
             dy++;
-        if ((dx == 0 && dy == 0) || !f_0250_0D10(dx, dy))
+        if ((dx == 0 && dy == 0) || !edit_scroll_and_redraw(dx, dy))
             break;
     }
-    if (f_1F58_0038())
-        o19_384C_0246();
+    if (kbd_poll_bios_key())
+        input_dispatch_game_key();
     g_2D3A = 0;
 }
 
-extern int far f_1F58_0090(void);
+extern int far kbd_read_key_code(void);
 extern void far CheatKeys(int key);
 void far o19_384C_0320(void);
 extern void far f_171C_030C(char far *where);
-extern void far f_171C_1EFA(void);
+extern void far mem_discard_soft_blocks(void);
 extern char far * far fd_55B3_0064;
-extern void far f_1C62_00C0(char far *msg);
-extern void far f_1B73_030F();
+extern void far ui_message_transient(char far *msg);
+extern void far input_enqueue_event_args();
 extern int far YellowCommandKey(int key);
 
-void far o19_384C_0246(void)
+void far input_dispatch_game_key(void)
 {
     int key;
     int i;
 
-    key = f_1F58_0090();
+    key = kbd_read_key_code();
     CheatKeys(key);
-    if (f_1B73_0A30(0x1d)) {
+    if (kbd_scan_state(0x1d)) {
         switch (key) {
         case 0x817:
             o19_384C_0320();
             return;
         case 0x821:
             WinPrintf("FLUSH");
-            f_171C_1EFA();
+            mem_discard_soft_blocks();
             return;
         case 0x820:
             f_171C_030C("User Request");
             return;
         case 0x82f:
-            f_1C62_00C0(fd_55B3_0064);
+            ui_message_transient(fd_55B3_0064);
             return;
         }
     }
     WinPrintf("\nKeypress=%x", key);
     for (i = 0; g_2CBE[i].key; i++)
         if (g_2CBE[i].key == key) {
-            f_1B73_030F(g_2CBE[i].cmd, 0, 0, 0);
+            input_enqueue_event_args(g_2CBE[i].cmd, 0, 0, 0);
             break;
         }
     if (g_2CBE[i].key == 0) {
@@ -215,14 +215,14 @@ void far o19_384C_0320(void)
 
     sprintf(buf, "%ld bytes @ startup\n %ld bytes free now\n %ld bytes discardable stuff\n %ld AVAILABLE",
             fd_50F6_3944, RallocMemoryFree(), RallocMemorySoft(), RallocMemoryFree() + RallocMemorySoft());
-    f_1C62_00C0(buf);
+    ui_message_transient(buf);
 }
 
 extern void far YardToMap(void);
 extern void far YellowCommand(int cmd);
 extern void far DoTab(void);
 
-void far o19_384C_0383(struct Event far *ev)
+void far input_translate_special_key(struct Event far *ev)
 {
     int cmd;
 
@@ -259,7 +259,7 @@ void far o19_384C_0383(struct Event far *ev)
         default:
             return;
         }
-        f_1B73_030F(cmd, 0, 0, 0, 0);
+        input_enqueue_event_args(cmd, 0, 0, 0, 0);
     } else if (ev->message & 8) {
         switch (ev->code) {
         case 0xfa03:

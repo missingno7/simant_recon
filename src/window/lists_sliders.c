@@ -53,7 +53,7 @@ extern void _fastcall win_LockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
 extern void _fastcall win_UnlockWin(int win);
 
-int _fastcall f_23E6_009F(int obj, int line)
+int _fastcall list_is_line_selected(int obj, int line)
 {
     struct List far *list;
     int sel;
@@ -67,7 +67,7 @@ int _fastcall f_23E6_009F(int obj, int line)
     return sel;
 }
 
-int _fastcall f_23E6_0109(int obj)
+int _fastcall list_line_count(int obj)
 {
     int count;
 
@@ -77,7 +77,7 @@ int _fastcall f_23E6_0109(int obj)
     return count;
 }
 
-char far * _fastcall f_23E6_0132(int obj, int line)
+char far * _fastcall list_line_record(int obj, int line)
 {
     char far *s;
 
@@ -87,7 +87,7 @@ char far * _fastcall f_23E6_0132(int obj, int line)
     return s;
 }
 
-void _fastcall f_23E6_016B(int obj)
+void _fastcall list_clear_selection(int obj)
 {
     char far *o;
     struct List far *list;
@@ -130,7 +130,7 @@ extern char far * far * far Ralloc(long size, int flags, char far *name);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
 extern void far font_SetFont(int font);
 
-void _fastcall f_23E6_0266(int obj, char far *text)
+void _fastcall list_replace_text(int obj, char far *text)
 {
     char far *p;
     int n;
@@ -168,12 +168,12 @@ extern void far clip_Push(void);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern int far font_FontHeight(void);
 extern void _fastcall win_SetColorNum(int color);
-extern void far f_24AB_042B(struct Rect far *rect, int y, char far *text);
+extern void far font_print_and_clear_row(struct Rect far *rect, int y, char far *text);
 extern int near g_3DE2;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 extern void far clip_Pop(void);
 
-void _fastcall f_23E6_0392(char far *o)
+void _fastcall list_draw_visible_rows(char far *o)
 {
     struct List far *list;
     struct Rect far *r;
@@ -209,7 +209,7 @@ void _fastcall f_23E6_0392(char far *o)
                 win_SetColorNum(sel ? color1 : color0);
                 cur = sel;
             }
-            f_24AB_042B(r, y, s + 1);
+            font_print_and_clear_row(r, y, s + 1);
             s += _fstrlen(s) + 1;
         } else {
             if (cur)
@@ -275,7 +275,7 @@ void _fastcall win_DrawElevator(char far *o)
 
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
 
-void _fastcall f_23E6_066C(char far *o)
+void _fastcall win_draw_vertical_slider(char far *o)
 {
     struct Rect r;
 
@@ -288,7 +288,7 @@ void _fastcall f_23E6_066C(char far *o)
     }
 }
 
-void _fastcall f_23E6_06F1(int line, char far *o)
+void _fastcall list_scroll_to_line(int line, char far *o)
 {
     struct List far *list;
     int n;
@@ -316,13 +316,13 @@ void _fastcall f_23E6_06F1(int line, char far *o)
     }
     list->top = n;
     list->topOff = off;
-    f_23E6_0392(o);
+    list_draw_visible_rows(o);
     mem_Unlock(list->text);
 }
 
 extern void (far * near g_9188)(int left, int top, int right, int bottom, int x, int y);
 
-int _fastcall f_23E6_07A2(char far *o)
+int _fastcall list_scroll_forward_line(char far *o)
 {
     struct List far *list;
     struct Rect r;
@@ -343,7 +343,7 @@ int _fastcall f_23E6_07A2(char far *o)
     list->topOff += _fstrlen(base + list->topOff) + 1;
     base += list->endOff;
     win_SetColorNum((*base & 1) ? o[0x27] : o[0x26]);
-    f_24AB_042B(&r, r.bottom - h, base + 1);
+    font_print_and_clear_row(&r, r.bottom - h, base + 1);
     list->endOff += _fstrlen(base) + 1;
     clip_Pop();
     mem_Unlock(list->text);
@@ -380,7 +380,7 @@ int _fastcall PrevListLine(char far *o)
 found:
     list->topOff = s - base;
     win_SetColorNum((*s & 1) ? o[0x27] : o[0x26]);
-    f_24AB_042B(&r, r.top, s + 1);
+    font_print_and_clear_row(&r, r.top, s + 1);
     list->endOff = MemRChr(base + list->endOff - 2, 0, 0xffff) - base + 1;
     clip_Pop();
     mem_Unlock(list->text);
@@ -410,19 +410,19 @@ void _fastcall f_23E6_0A53(struct Event far *ev)
     font_SetFont(o[0x28]);
     h = font_FontHeight();
     line = (ev->v - ((struct Rect far *)o)->top) / h + list->top;
-    sel = f_23E6_009F(ev->code, line);
+    sel = list_is_line_selected(ev->code, line);
     WinPrintf("\nSS=%d, line=%d", sel, line);
     if (*(int far *)(o + 0x24) & 0x20) {
         if ((*(int far *)(o + 0x24) & 0x400) && sel)
             return;
-        f_23E6_016B(ev->code);
+        list_clear_selection(ev->code);
     }
     if (sel == 0)
         f_23E6_01DC(ev->code, line, 1);
-    f_23E6_0392(o);
+    list_draw_visible_rows(o);
 }
 
-extern void far f_1F80_0081(int ticks);
+extern void far timer_wait_double_ticks(int ticks);
 extern int far StillDown(void);
 
 void _fastcall win_ProcSliderEvent(struct Event far *ev)
@@ -446,24 +446,24 @@ void _fastcall win_ProcSliderEvent(struct Event far *ev)
     r = *(struct Rect far *)o;
     if (fd_50F6_47DA.y + r.top > ev->v) {
         if (ev->modifiers & 0x6800) {
-            f_23E6_06F1(0, lo);
+            list_scroll_to_line(0, lo);
             win_DrawElevator(o);
         } else {
             do {
                 PrevListLine(lo);
                 win_DrawElevator(o);
-                f_1F80_0081(1);
+                timer_wait_double_ticks(1);
             } while (StillDown());
         }
     } else if (r.bottom - fd_50F6_47DA.y < ev->v) {
         if (ev->modifiers & 0x6800) {
-            f_23E6_06F1(list->count - list->visible, lo);
+            list_scroll_to_line(list->count - list->visible, lo);
             win_DrawElevator(o);
         } else {
             do {
-                f_23E6_07A2(lo);
+                list_scroll_forward_line(lo);
                 win_DrawElevator(o);
-                f_1F80_0081(1);
+                timer_wait_double_ticks(1);
             } while (StillDown());
         }
     }

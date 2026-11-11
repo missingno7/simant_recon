@@ -10,7 +10,7 @@
                 extrn   _Ralloc:far
                 extrn   _RallocFree:far
                 extrn   _RallocFreshen:far
-                extrn   _f_171C_14BE:far
+                extrn   _mem_handle_age_delta:far
                 extrn   _RallocSize:far
                 extrn   _RallocFreed:far
                 extrn   _RallocMemoryFree:far
@@ -21,27 +21,27 @@
 MEMHOOK_TEXT    segment word public 'CODE'
                 assume  cs:MEMHOOK_TEXT
 
-                public  _jt_171C_13CA
-                public  _jt_171C_13E4
-                public  _jt_171C_152C
-                public  _jt_171C_14BE
-                public  _jt_171C_16EA
-                public  _jt_171C_1794
-                public  _jt_171C_1750
-                public  _jt_171C_18A6
-                public  _jt_171C_1686
-                public  _jt_171C_15A2
+                public  _mem_hook_ralloc
+                public  _mem_hook_rallocfree
+                public  _mem_hook_rallocfreshen
+                public  _mem_hook_age_delta
+                public  _mem_hook_rallocsize
+                public  _mem_hook_rallocfreed
+                public  _mem_hook_rallocmemoryfree
+                public  _mem_hook_rallocrealloc
+                public  _mem_hook_ralloctype
+                public  _mem_hook_rallocsettype
 
-_jt_171C_13CA:  jmp     _Ralloc
-_jt_171C_13E4:  jmp     _RallocFree
-_jt_171C_152C:  jmp     _RallocFreshen
-_jt_171C_14BE:  jmp     _f_171C_14BE
-_jt_171C_16EA:  jmp     _RallocSize
-_jt_171C_1794:  jmp     _RallocFreed
-_jt_171C_1750:  jmp     _RallocMemoryFree
-_jt_171C_18A6:  jmp     _RallocRealloc
-_jt_171C_1686:  jmp     _RallocType
-_jt_171C_15A2:  jmp     _RallocSetType
+_mem_hook_ralloc:  jmp     _Ralloc
+_mem_hook_rallocfree:  jmp     _RallocFree
+_mem_hook_rallocfreshen:  jmp     _RallocFreshen
+_mem_hook_age_delta:  jmp     _mem_handle_age_delta
+_mem_hook_rallocsize:  jmp     _RallocSize
+_mem_hook_rallocfreed:  jmp     _RallocFreed
+_mem_hook_rallocmemoryfree:  jmp     _RallocMemoryFree
+_mem_hook_rallocrealloc:  jmp     _RallocRealloc
+_mem_hook_ralloctype:  jmp     _RallocType
+_mem_hook_rallocsettype:  jmp     _RallocSetType
 
 MEMHOOK_TEXT    ends
                 end

@@ -7,7 +7,7 @@ typedef char far * far *StrList;
 void far PrepareStrings(void);
 extern Handle far db_LoadObject(int object, int kind);
 extern void far WinPrintf(char far *format, ...);
-extern void far o15_384C_0152(char far *message, int code);
+extern void far app_cleanup_and_exit(char far *message, int code);
 extern void far FlipHandleWords(Handle h);
 extern char far * far fd_50F6_0B22;
 void far f_075B_00A6(void);
@@ -28,7 +28,7 @@ void far initStuff(void)
     handle = db_LoadObject(1000, 9);
     if (handle == 0) {
         WinPrintf("Cannot GetResource (HEX, %d), ResErr %d\n", 1000, resourceError);
-        o15_384C_0152("MemDeath", 0);
+        app_cleanup_and_exit("MemDeath", 0);
     }
     FlipHandleWords(handle);
     fd_50F6_0B22 = *handle;

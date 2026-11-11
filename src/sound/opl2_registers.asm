@@ -2,7 +2,7 @@
 ; linear 0x283EA-0x284A4).
 ;
 ; Genuine assembly (sound driver library): a register-called far procedure
-; (f_283E_0020: AH = register, AL = value, DX = index port) with status-port
+; (snd_opl_write_regs: AH = register, AL = value, DX = index port) with status-port
 ; delay loops (in al,dx / loop), C entry points that address their arguments
 ; through "add bp,6" and never restore SP, and a PIT channel-0 polling loop.
 ; MSC 6.00 emits none of these shapes (no register-argument far functions,
@@ -14,25 +14,25 @@ ADLIB_PORT      equ     388h
 ADLIB_TEXT      segment word public 'CODE'
                 assume  cs:ADLIB_TEXT
 
-                public  _f_283E_000A
-                public  _f_283E_0020
-                public  _f_283E_0035
+                public  _snd_opl_write
+                public  _snd_opl_write_regs
+                public  _snd_opl_probe_tone
 
-; void far f_283E_000A(char reg, char value): write one OPL2 register
-_f_283E_000A    proc    far
+; void far snd_opl_write(char reg, char value): write one OPL2 register
+_snd_opl_write    proc    far
                 push    bp
                 mov     bp, sp
                 add     bp, 6
                 mov     dx, ADLIB_PORT
                 mov     ah, [bp]
                 mov     al, [bp+2]
-                call    far ptr _f_283E_0020
+                call    far ptr _snd_opl_write_regs
                 pop     bp
                 ret
-_f_283E_000A    endp
+_snd_opl_write    endp
 
 ; register call: AH = OPL2 register, AL = value, DX = index port
-_f_283E_0020    proc    far
+_snd_opl_write_regs    proc    far
                 push    ax
                 mov     al, ah
                 out     dx, al
@@ -47,10 +47,10 @@ reg_delay:      in      al, dx
 data_delay:     in      al, dx
                 loop    data_delay
                 ret
-_f_283E_0020    endp
+_snd_opl_write_regs    endp
 
-; void far f_283E_0035(void): reset the OPL2 and wait about 2 ms (PIT channel 0)
-_f_283E_0035    proc    far
+; void far snd_opl_probe_tone(void): reset the OPL2 and wait about 2 ms (PIT channel 0)
+_snd_opl_probe_tone    proc    far
                 push    bp
                 mov     bp, sp
                 add     bp, 6
@@ -60,23 +60,23 @@ _f_283E_0035    proc    far
                 push    di
                 mov     dx, ADLIB_PORT
                 mov     ax, 2021h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 60F0h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 80F0h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 0C001h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 0E000h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 433Fh
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 0B001h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 0A08Fh
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 0B02Eh
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 cli
                 mov     al, 0
                 out     43h, al
@@ -95,9 +95,9 @@ wait_pit:       mov     al, 0
                 cmp     cx, 952h
                 jb      wait_pit
                 mov     ax, 0B020h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 mov     ax, 0A000h
-                call    _f_283E_0020
+                call    _snd_opl_write_regs
                 sti
                 pop     di
                 pop     si
@@ -105,7 +105,7 @@ wait_pit:       mov     al, 0
                 pop     es
                 pop     bp
                 ret
-_f_283E_0035    endp
+_snd_opl_probe_tone    endp
 
 ADLIB_TEXT      ends
                 end

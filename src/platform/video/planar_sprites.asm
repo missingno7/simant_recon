@@ -4,7 +4,7 @@
 ; output: every framed proc saves "push si; push di; push ds" and restores in reverse order,
 ; while MSC 6.00/6.00A/6.00AX always saves DI before SI, also around inline _asm (probe
 ; ASM-2, work/ovlA/probe); the ror/rol twin loops after the first retf of
-; o00_35A6_0007 and o00_35A6_0177 are unreachable code, which MSC never emits.
+; gfx_planar_mask_to_buffer and gfx_planar_copy_to_buffer are unreachable code, which MSC never emits.
 
 _DATA	segment word public 'DATA'
 	extrn	_g_3D20:byte
@@ -15,18 +15,18 @@ DGROUP	group	_DATA
 S00C_TEXT	segment word public 'CODE'
 	assume	cs:S00C_TEXT, ds:DGROUP
 
-	public	_o00_35A6_0006
-	public	_o00_35A6_0007
-	public	_o00_35A6_0177
-	public	_o00_35A6_02FD
-	public	_o00_35A6_0406
+	public	_gfx_planar_buffer_noop
+	public	_gfx_planar_mask_to_buffer
+	public	_gfx_planar_copy_to_buffer
+	public	_gfx_planar_buffer_intersection
+	public	_gfx_planar_scratch_to_buffer
 
-_o00_35A6_0006	proc	far
+_gfx_planar_buffer_noop	proc	far
 	retf
-_o00_35A6_0006	endp
+_gfx_planar_buffer_noop	endp
 
 ; blit a 1-bit image into a plane buffer at a bit shift (called from root 259D)
-_o00_35A6_0007	proc	far
+_gfx_planar_mask_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ah
@@ -203,9 +203,9 @@ L0103:
 	mov sp, bp
 	pop bp
 	retf
-_o00_35A6_0007	endp
+_gfx_planar_mask_to_buffer	endp
 
-_o00_35A6_0177	proc	far
+_gfx_planar_copy_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ch
@@ -393,9 +393,9 @@ L028F:
 	mov sp, bp
 	pop bp
 	retf
-_o00_35A6_0177	endp
+_gfx_planar_copy_to_buffer	endp
 
-_o00_35A6_02FD	proc	far
+_gfx_planar_buffer_intersection	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 10h
@@ -520,9 +520,9 @@ L03F3:
 	mov sp, bp
 	pop bp
 	retf
-_o00_35A6_02FD	endp
+_gfx_planar_buffer_intersection	endp
 
-_o00_35A6_0406	proc	far
+_gfx_planar_scratch_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -666,7 +666,7 @@ _o00_35A6_0406	proc	far
 	pop si
 	pop bp
 	retf
-_o00_35A6_0406	endp
+_gfx_planar_scratch_to_buffer	endp
 
 S00C_TEXT	ends
 	end

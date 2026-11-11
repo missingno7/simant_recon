@@ -23,7 +23,7 @@ char *g_629A[9] = {
     "hcega", "mono", "tdyga", "mono", "lcega", "mono", "l256", "mono", "hcega"
 };
 
-extern void far f_1B4E_0025(void);
+extern void far gfx_reset_driver_callbacks(void);
 extern int far o21_39C7_0000(void);
 extern int far o21_39C7_016D(void);
 extern char near g_5A97;
@@ -33,54 +33,54 @@ extern int far sprintf(char far *buf, char far *format, ...);
 extern void far db_SetDataBase(char far *name);
 extern void far f_1B28_0006(void);
 extern void far Punt(char far *message);
-extern void far o00_31AD_2AB4(void);
-extern void far o01_3126_0000(void);
+extern void far gfx_planar_init_640x350(void);
+extern void far gfx_mono_init_banked_640x400(void);
 extern void far o20_39C7_0160(void);
 extern void far o20_39C7_0003(void);
-extern void far o03_3126_0140(void);
+extern void far gfx_tandy_init_tandy(void);
 extern void far o20_39C7_0069(void);
 extern void far o20_39C7_0001(void);
-extern void far o01_3126_010A(void);
+extern void far gfx_mono_init_hercules(void);
 extern void far o20_39C7_0008(void);
 extern void far o20_39C7_0000(void);
-extern void far o00_31AD_1AE7(void);
+extern void far gfx_planar_init_320x200(void);
 extern void far o20_39C7_01C1(void);
 extern void far o20_39C7_0004(void);
-extern void far o01_3126_007D(void);
-extern void far o02_3126_0000(void);
+extern void far gfx_mono_init_ega350_mono(void);
+extern void far gfx_vga8_init_vga256(void);
 extern void far o20_39C7_0212(void);
 extern void far o20_39C7_0006(void);
-extern void far o01_3126_0068(void);
+extern void far gfx_mono_init_ega480_mono(void);
 extern void far o20_39C7_00FF(void);
 extern void far o20_39C7_0002(void);
-extern void far o00_31AD_2AE5(void);
+extern void far gfx_planar_init_640x480(void);
 extern void far o20_39C7_0211(void);
 extern void far o20_39C7_0005(void);
 extern void (far * near g_9130)(void);
 extern int near g_3DB2;
 extern struct Rect far g_5A9C;
 extern int near g_3DB4;
-extern void far o01_32B5_000E(void);
+extern void far gfx_mono_buffer_noop(void);
 extern void (far * far fd_50F6_37EE)();
-extern void far o01_32B5_0152();
+extern void far gfx_mono_buffer_intersection();
 extern void (far * far fd_50F6_37EA)();
-extern void far o01_32B5_000F();
+extern void far gfx_mono_mask_bitmap_to_buffer();
 extern void (far * far fd_50F6_3B58)();
-extern void far o01_32B5_00AA();
+extern void far gfx_mono_copy_bitmap_to_buffer();
 extern void (far * far fd_50F6_37E6)();
-extern void far o01_32B5_024F();
-extern void far o03_3258_040C(void);
-extern void far o03_3258_05A7();
-extern void far o03_3258_040D();
-extern void far o03_3258_04CE();
-extern void far o03_3258_175F();
-extern void far o00_35A6_0006(void);
-extern void far o00_35A6_02FD();
-extern void far o00_35A6_0007();
-extern void far o00_35A6_0177();
-extern void far o00_35A6_0406();
+extern void far gfx_mono_scratch_to_buffer();
+extern void far gfx_tandy_buffer_noop(void);
+extern void far gfx_tandy_buffer_intersection();
+extern void far gfx_tandy_mask_to_buffer();
+extern void far gfx_tandy_copy_to_buffer();
+extern void far gfx_tandy_scratch_to_buffer();
+extern void far gfx_planar_buffer_noop(void);
+extern void far gfx_planar_buffer_intersection();
+extern void far gfx_planar_mask_to_buffer();
+extern void far gfx_planar_copy_to_buffer();
+extern void far gfx_planar_scratch_to_buffer();
 
-void far f_205F_0004(char far *dbname)
+void far gfx_select_driver_resources(char far *dbname)
 {
     char path[100];
     char far *msg;
@@ -89,7 +89,7 @@ void far f_205F_0004(char far *dbname)
     int display;
     int info;
 
-    f_1B4E_0025();
+    gfx_reset_driver_callbacks();
     info = o21_39C7_0000();
     display = (char)(info >> 8);
     adapter = info & 0xff;
@@ -155,50 +155,50 @@ void far f_205F_0004(char far *dbname)
     f_1B28_0006();
     switch (g_5A97) {
     case 0:
-        o00_31AD_2AB4();
+        gfx_planar_init_640x350();
         o20_39C7_0211();
         o20_39C7_0005();
         break;
     case 1:
         if (g_6298) {
-            o01_3126_0000();
+            gfx_mono_init_banked_640x400();
             g_5A97 = 5;
         }
         o20_39C7_0160();
         o20_39C7_0003();
         break;
     case 2:
-        o03_3126_0140();
+        gfx_tandy_init_tandy();
         o20_39C7_0069();
         o20_39C7_0001();
         break;
     case 3:
-        o01_3126_010A();
+        gfx_mono_init_hercules();
         o20_39C7_0008();
         o20_39C7_0000();
         break;
     case 4:
-        o00_31AD_1AE7();
+        gfx_planar_init_320x200();
         o20_39C7_01C1();
         o20_39C7_0004();
         break;
     case 5:
-        o01_3126_007D();
+        gfx_mono_init_ega350_mono();
         o20_39C7_0160();
         o20_39C7_0003();
         break;
     case 6:
-        o02_3126_0000();
+        gfx_vga8_init_vga256();
         o20_39C7_0212();
         o20_39C7_0006();
         break;
     case 7:
-        o01_3126_0068();
+        gfx_mono_init_ega480_mono();
         o20_39C7_00FF();
         o20_39C7_0002();
         break;
     case 8:
-        o00_31AD_2AE5();
+        gfx_planar_init_640x480();
         o20_39C7_0211();
         o20_39C7_0005();
         break;
@@ -211,22 +211,22 @@ void far f_205F_0004(char far *dbname)
     g_5A9C.bottom = g_3DB4;
     fd_55B3_6262 = 1;
     if (g_5A97 & 1) {
-        o01_32B5_000E();
-        fd_50F6_37EE = o01_32B5_0152;
-        fd_50F6_37EA = o01_32B5_000F;
-        fd_50F6_3B58 = o01_32B5_00AA;
-        fd_50F6_37E6 = o01_32B5_024F;
+        gfx_mono_buffer_noop();
+        fd_50F6_37EE = gfx_mono_buffer_intersection;
+        fd_50F6_37EA = gfx_mono_mask_bitmap_to_buffer;
+        fd_50F6_3B58 = gfx_mono_copy_bitmap_to_buffer;
+        fd_50F6_37E6 = gfx_mono_scratch_to_buffer;
     } else if (g_5A97 == 2) {
-        o03_3258_040C();
-        fd_50F6_37EE = o03_3258_05A7;
-        fd_50F6_37EA = o03_3258_040D;
-        fd_50F6_3B58 = o03_3258_04CE;
-        fd_50F6_37E6 = o03_3258_175F;
+        gfx_tandy_buffer_noop();
+        fd_50F6_37EE = gfx_tandy_buffer_intersection;
+        fd_50F6_37EA = gfx_tandy_mask_to_buffer;
+        fd_50F6_3B58 = gfx_tandy_copy_to_buffer;
+        fd_50F6_37E6 = gfx_tandy_scratch_to_buffer;
     } else {
-        o00_35A6_0006();
-        fd_50F6_37EE = o00_35A6_02FD;
-        fd_50F6_37EA = o00_35A6_0007;
-        fd_50F6_3B58 = o00_35A6_0177;
-        fd_50F6_37E6 = o00_35A6_0406;
+        gfx_planar_buffer_noop();
+        fd_50F6_37EE = gfx_planar_buffer_intersection;
+        fd_50F6_37EA = gfx_planar_mask_to_buffer;
+        fd_50F6_3B58 = gfx_planar_copy_to_buffer;
+        fd_50F6_37E6 = gfx_planar_scratch_to_buffer;
     }
 }

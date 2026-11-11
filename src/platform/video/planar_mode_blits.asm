@@ -17,21 +17,21 @@ _DATA	segment word public 'DATA'
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_f_1B4E_015B:far
-	extrn	_GPutPicS:far
-	extrn	_o00_31AD_145E:far
+	extrn	_gfx_video_bios_ax:far
+	extrn	_gfx_planar_gputpics:far
+	extrn	_gfx_planar_install_dispatch:far
 
 S00B_TEXT	segment word public 'CODE'
 	assume	cs:S00B_TEXT, ds:DGROUP
 
-	public	_o00_31AD_2AB4
-	public	_o00_31AD_2AE5
-	public	_o00_31AD_2B1A
-	public	_o00_31AD_2FDA
-	public	_o00_31AD_300B
-	public	_o00_31AD_303F
+	public	_gfx_planar_init_640x350
+	public	_gfx_planar_init_640x480
+	public	_gfx_planar_compose_life_ems
+	public	_gfx_planar_draw_life_ems
+	public	_gfx_planar_draw_life_hires
+	public	_gfx_planar_compose_life_hires
 
-_o00_31AD_2AB4	proc	far
+_gfx_planar_init_640x350	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 8
@@ -45,10 +45,10 @@ L2AC8:
 	stosw
 	add ax, 50h
 	loop L2AC8
-	call far ptr _o00_31AD_145E
+	call far ptr _gfx_planar_install_dispatch
 	mov ax, 10h
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	xor ax, ax
 	pop di
@@ -56,9 +56,9 @@ L2AC8:
 	mov sp, bp
 	pop bp
 	retf
-_o00_31AD_2AB4	endp
+_gfx_planar_init_640x350	endp
 
-_o00_31AD_2AE5	proc	far
+_gfx_planar_init_640x480	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 8
@@ -73,10 +73,10 @@ L2AFD:
 	stosw
 	add ax, 50h
 	loop L2AFD
-	call far ptr _o00_31AD_145E
+	call far ptr _gfx_planar_install_dispatch
 	mov ax, 12h
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	xor ax, ax
 	pop di
@@ -84,9 +84,9 @@ L2AFD:
 	mov sp, bp
 	pop bp
 	retf
-_o00_31AD_2AE5	endp
+_gfx_planar_init_640x480	endp
 
-_o00_31AD_2B1A	proc	far
+_gfx_planar_compose_life_ems	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -800,9 +800,9 @@ _o00_31AD_2B1A	proc	far
 	pop si
 	pop bp
 	retf
-_o00_31AD_2B1A	endp
+_gfx_planar_compose_life_ems	endp
 
-_o00_31AD_2FDA	proc	far
+_gfx_planar_draw_life_ems	proc	far
 	push bp
 	mov bp, sp
 	les bx, dword ptr [bp+0Eh]
@@ -810,7 +810,7 @@ _o00_31AD_2FDA	proc	far
 	push bx
 	push word ptr [bp+0Ch]
 	push word ptr [bp+0Ah]
-	call far ptr _o00_31AD_2B1A
+	call far ptr _gfx_planar_compose_life_ems
 	add sp, 8
 	mov ax, 10h
 	push ax
@@ -820,13 +820,13 @@ _o00_31AD_2FDA	proc	far
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _GPutPicS
+	call far ptr _gfx_planar_gputpics
 	add sp, 0Ch
 	pop bp
 	retf
-_o00_31AD_2FDA	endp
+_gfx_planar_draw_life_ems	endp
 
-_o00_31AD_300B	proc	far
+_gfx_planar_draw_life_hires	proc	far
 	push bp
 	mov bp, sp
 	push word ptr [bp+12h]
@@ -835,7 +835,7 @@ _o00_31AD_300B	proc	far
 	push bx
 	push word ptr [bp+0Ch]
 	push word ptr [bp+0Ah]
-	call far ptr _o00_31AD_303F
+	call far ptr _gfx_planar_compose_life_hires
 	add sp, 0Ah
 	mov ax, 10h
 	push ax
@@ -845,13 +845,13 @@ _o00_31AD_300B	proc	far
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _GPutPicS
+	call far ptr _gfx_planar_gputpics
 	add sp, 0Ch
 	pop bp
 	retf
-_o00_31AD_300B	endp
+_gfx_planar_draw_life_hires	endp
 
-_o00_31AD_303F	proc	far
+_gfx_planar_compose_life_hires	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -3122,7 +3122,7 @@ L3A8B:
 	pop bp
 	pop ds
 	jmp L3519
-_o00_31AD_303F	endp
+_gfx_planar_compose_life_hires	endp
 
 S00B_TEXT	ends
 	end

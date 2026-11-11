@@ -2,6 +2,7 @@
 
     python tools/rename.py OLD=NEW ... --kind descriptive --why "DOS evidence"
     python tools/rename.py --batch renames.json --verify-only
+    python tools/rename.py --headers headers.json --verify-only
     python tools/rename.py --move root:0250=src/render/pixels.c S12:384C=src/map.c --why "inferred"
 
 Batches accept {old,new,kind,why}, {address:"SSSS:OOOO",new,kind,why}, or
@@ -11,6 +12,16 @@ Absent old, an existing address-spelled fd_SSSS_OOOO / g_OOOO is recognized;
 otherwise registration adds only a name, never source storage or a guessed owner.
 Moves preserve file bytes, module order and the compiler's UNIT basename. The
 recorded manifest source is authoritative; source_name_kind labels the filename.
+Header batches contain {module,header,summary,windows_group,kind,why} and optional
+evidence and source_sha256 (an optional predecessor pin). Header is plain
+comment text, already merged with any still-valid old
+header evidence. Only the leading comment region is replaced; no line directives
+or line-count compensation are inserted. Every runtime contribution and ordered
+fixup must remain identical as well as retaining the historical proof result.
+Historical modules receive summary/windows_group/file_header in their manifest
+record. Source-owned storage receives the same metadata in source_annotations,
+outside modules: annotation must not invent a historical module or its owner.
+Both kinds also carry those facts in the canonical program inventory.
 
 Live behavior tools and tests receive whole-identifier substitutions in quoted
 names and fixtures too; behavior_suites/archive is excluded. Only affected unit
@@ -99,9 +110,74 @@ def comparison_after(result, mapping, objmap):
     return out
 
 
+def header_comparison_before(result, before, after):
+    """Translate source-lint locations by the proven leading-comment edit.
+
+    These are source lines in opaque-data diagnostics, not OMF LINNUM entries.
+    No compiled bytes, fixups, relocation verdicts or diagnostic content are
+    removed or normalized. The runtime contribution check is independent.
+    """
+    out = copy.deepcopy(result)
+    delta = after.count(b'\n') - before.count(b'\n')
+    for datum in out.get('opaque_data', []):
+        datum['line'] += delta
+    return out
+
+
 def operation_label(row):
     return (row.get('old', row.get('address', row.get('module', '?'))) + '=' +
-            row.get('new', row.get('path', '?')))
+            row.get('new', row.get('path', 'header' if 'header' in row else '?')))
+
+
+def leading_comments(text, lang='c'):
+    """Return (end, plain text) for adjacent leading comments and whitespace.
+
+    Stop before the first non-comment token. In particular a function comment
+    after an include/declaration is not a file header. Preserve evidence text
+    when preparing a replacement; the writer never guesses which facts to drop.
+    """
+    pos, parts = 0, []
+    while True:
+        start = pos
+        while pos < len(text) and text[pos].isspace():
+            pos += 1
+        if lang == 'c' and text.startswith('/*', pos):
+            end = text.find('*/', pos + 2)
+            if end < 0:
+                raise RenameError('unterminated leading C comment')
+            body = text[pos + 2:end]
+            parts.append('\n'.join(re.sub(r'^\s*\* ?', '', line).rstrip()
+                                   for line in body.splitlines()).strip())
+            pos = end + 2
+        elif text.startswith(';' if lang == 'asm' else '//', pos):
+            end = text.find('\n', pos)
+            end = len(text) if end < 0 else end
+            parts.append(text[pos + (1 if lang == 'asm' else 2):end].strip())
+            pos = end
+        elif lang == 'asm' and (match_ := re.match(r'comment\s+(\S)', text[pos:], re.I)):
+            body_start = pos + match_.end()
+            end = text.find(match_[1], body_start)
+            if end < 0:
+                raise RenameError('unterminated leading MASM COMMENT')
+            parts.append(text[body_start:end].strip())
+            pos = end + 1
+        else:
+            return pos, '\n'.join(parts)
+        if pos == start:
+            raise RenameError('leading comment parser made no progress')
+
+
+def replace_header(text, header, lang='c'):
+    if (not isinstance(header, str) or not header.strip() or
+            any(ord(c) > 126 or (ord(c) < 32 and c not in '\n\r\t') for c in header) or
+            '/*' in header or '*/' in header):
+        raise RenameError('header must be nonempty plain ASCII comment text without delimiters')
+    newline = '\r\n' if '\r\n' in text else '\n'
+    lines = header.replace('\r\n', '\n').splitlines()
+    block = (['/*'] + [(' * ' + line).rstrip() for line in lines] + [' */']
+             if lang == 'c' else [('; ' + line).rstrip() for line in lines])
+    end, _ = leading_comments(text, lang)
+    return newline.join(block) + newline + newline + text[end:]
 
 
 def replace_paths(text, mapping):
@@ -453,6 +529,35 @@ class Session:
         if not isinstance(rows, list) or not rows:
             raise RenameError('a nonempty rename batch is required')
         rows = copy.deepcopy(rows)
+        if any(isinstance(r, dict) and 'header' in r for r in rows):
+            seen = set()
+            required = {'module', 'header', 'summary', 'windows_group', 'kind', 'why'}
+            for row in rows:
+                if (not isinstance(row, dict) or not required <= row.keys() or
+                        set(row) - required - {'evidence', 'source_sha256'} or row['module'] not in self.items or
+                        row['module'] in seen):
+                    raise RenameError('header batch requires unique known modules and header/summary/windows_group/kind/why')
+                if row['kind'] not in ('recovered', 'descriptive') or any(
+                        not isinstance(row[f], str) or not row[f].strip()
+                        for f in ('summary', 'why', 'windows_group')):
+                    raise RenameError('header summary, group and naming evidence must be nonempty text')
+                if row['windows_group'] not in ('SIMANT', 'SIMANT1', 'SIMONE', 'SIMTWO', 'ANTEDIT',
+                                                 'GR', '_TEXT', 'mixed', 'none (DOS only)', 'unknown'):
+                    raise RenameError('invalid Windows group')
+                if 'evidence' in row and not isinstance(row['evidence'], list):
+                    raise RenameError('header evidence must be a list')
+                item = self.items[row['module']]
+                if 'source_sha256' in row and row['source_sha256'] != item['source_sha256']:
+                    raise RenameError('header predecessor source pin differs: ' + row['module'])
+                prior_kind = self.man['modules'].get(row['module'], {}).get('source_name_kind')
+                if prior_kind and prior_kind != row['kind']:
+                    raise RenameError('header cannot change established filename kind')
+                replace_header(self.sources[item['source']][0].decode('latin1'), row['header'], item['lang'])
+                normalized = lambda value: ' '.join(value.split())
+                if normalized(row['summary']) not in normalized(row['header']) or row['windows_group'] not in row['header']:
+                    raise RenameError('header text must contain the recorded summary and Windows group')
+                seen.add(row['module'])
+            return rows
         old_names, new_names, destinations, moved = set(), set(), set(), set()
         c_names = set(self.registry['code']) | set(self.registry['data'])
         obj_names = set(self.object_mapping({n: n for n in c_names})) | set(self.registry.get('runtime', {}))
@@ -572,6 +677,23 @@ class Session:
         return rows
 
     def prepare(self, rows):
+        if rows and 'header' in rows[0]:
+            program, man = copy.deepcopy(self.program), copy.deepcopy(self.man)
+            changed = {}
+            items = {m['key']: m for m in program['modules']}
+            for row in rows:
+                key = row['module']
+                item = items[key]
+                changed[key] = replace_header(self.sources[item['source']][0].decode('latin1'),
+                                              row['header'], item['lang']).encode('latin1')
+                metadata = {'summary': row['summary'], 'windows_group': row['windows_group'],
+                            'file_header': {'text': row['header'], 'name_kind': row['kind'],
+                                            'why': row['why'], 'evidence': row.get('evidence', [])}}
+                item.update(copy.deepcopy(metadata), source_sha256=canonical.sha(changed[key]))
+                target = (man['modules'][key] if key in man['modules'] else
+                          man.setdefault('source_annotations', {}).setdefault(key, {'source': item['source']}))
+                target.update(copy.deepcopy(metadata))
+            return {}, changed, program, man, copy.deepcopy(self.registry)
         mapping = c_mapping(rows)
         objmap = self.object_mapping(mapping)
         changed = {}
@@ -636,7 +758,7 @@ class Session:
         objmap = self.object_mapping(mapping)
         registered = set(self.registry['code']) | set(self.registry['data'])
         references = {**{k: v for k, v in objmap.items() if k not in registered}, **mapping}
-        paths = {self.items[r['module']]['source']: r['path'] for r in rows if 'module' in r}
+        paths = {self.items[r['module']]['source']: r['path'] for r in rows if 'path' in r}
         changes, tests, port = {}, set(), []
         for rel in self.reference_files:
             if rel.startswith('src/') or rel in ('layout/manifest.json', 'layout/symbols.json', 'layout/oracle.lock.json', 'src/program.json', 'evidence/promotions.jsonl'):
@@ -801,7 +923,8 @@ class Session:
                 from dos.build import verify_storage
                 try:
                     verify_storage(OmfReader(communals=True).read(compiled.obj), item['storage_contract'])
-                    result.update(exact=True, object_sha256=canonical.sha(compiled.obj))
+                    result.update(exact=True, object_sha256=canonical.sha(compiled.obj),
+                                  contribution_sha256=modules.contribution_sha256(OmfReader(communals=True).read(compiled.obj)))
                 except ValueError as error:
                     result['module_reasons'] = ['storage: ' + str(error)]
             if lint['refused']:
@@ -840,16 +963,20 @@ class Session:
             return self.cache[cache_key]
         mapping, changed, program, man, registry = self.prepare(rows)
         objmap = self.object_mapping(mapping)
-        print(f'Checking {len(rows)} rename(s) across {len(changed)} module(s)', flush=True)
+        print(f'Checking {len(rows)} operation(s) across {len(changed)} module(s)', flush=True)
         self.establish_baseline(changed)
         results = self.compile_many(changed, program, man, registry)
         failures = {}
         for key, (result, collect) in results.items():
             module = man['modules'].get(key, {})
             reasons = []
+            prior_observed = canonical.observed(self.baseline[key][0])
+            if rows and 'header' in rows[0]:
+                prior_observed = header_comparison_before(prior_observed,
+                    self.sources[self.items[key]['source']][0], changed[key])
             if module.get('canonical_admission'):
                 prior_result, prior_collect = self.baseline[key]
-                if canonical.observed(result) != comparison_after(canonical.observed(prior_result), mapping, objmap):
+                if canonical.observed(result) != comparison_after(prior_observed, mapping, objmap):
                     reasons.append('full historical comparison differs from reviewed context')
                 # Contribution identity includes names. Change only those symbolic
                 # fields in a copy of the predecessor; bytes/indices/order remain.
@@ -865,9 +992,9 @@ class Session:
             elif not result['exact']:
                 reasons.append('not every claim, private datum and complete-unit extent is exact')
             if any(r.get('module') == key for r in rows) and (
-                    canonical.observed(result) != canonical.observed(self.baseline[key][0]) or
+                    canonical.observed(result) != prior_observed or
                     result.get('contribution_sha256') != self.baseline[key][0].get('contribution_sha256')):
-                reasons.append('source move changed the historical comparison or live compiler contributions')
+                reasons.append('header or source move changed the historical comparison or live compiler contributions')
             if reasons:
                 failures[key] = self.diagnostic(key, result, collect, mapping, reasons)
         outcome = {'mapping': mapping, 'changed': changed, 'program': program, 'man': man,
@@ -924,7 +1051,8 @@ class Session:
         program, man = outcome['program'], outcome['man']
         items = {m['key']: m for m in program['modules']}
         changes = dict(outcome.get('external', {}))
-        paths = {self.items[r['module']]['source']: r['path'] for r in rows if 'module' in r}
+        paths = {self.items[r['module']]['source']: r['path'] for r in rows if 'path' in r}
+        headers = bool(rows and 'header' in rows[0])
         for key, raw in outcome['changed'].items():
             changes[items[key]['source']] = raw
             if self.items[key]['source'] != items[key]['source']:
@@ -964,8 +1092,9 @@ class Session:
                 row['definition_sha256'] = pin
                 receipt.update(function=row['function'], definition_sha256=pin)
         for rel, receipt in receipts.items():
-            receipt.setdefault('moved' if paths and not mapping else 'renamed', []).append({'operations': rows,
-                'note': 'Source path move; bytes unchanged.' if paths and not mapping else 'Lexical identifier rename; semantic review unchanged.',
+            receipt.setdefault('annotated' if headers else 'moved' if paths and not mapping else 'renamed', []).append({'operations': rows,
+                'note': 'Leading comments changed; live contributions and semantic review unchanged.' if headers else
+                        'Source path move; bytes unchanged.' if paths and not mapping else 'Lexical identifier rename; semantic review unchanged.',
                 'prior_receipt_sha256': canonical.sha(self.pins[rel])})
             changes[rel] = json_bytes(receipt)
         changes['layout/manifest.json'] = json_bytes(man, 1)
@@ -987,7 +1116,7 @@ class Session:
         if paths:
             self.repin_path_references(changes)
         record = {'time': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'),
-                  'module': 'RENAME', 'renames': rows, 'modules_reproven': sorted(outcome['changed']),
+                  'module': 'ANNOTATE' if headers else 'RENAME', 'renames': rows, 'modules_reproven': sorted(outcome['changed']),
                   'files_changed': sorted(changes), 'port_references_unmodified': outcome.get('port_references', []),
                   'prior_program_sha256': canonical.sha(self.pins['src/program.json']),
                   'program_sha256': canonical.sha(changes['src/program.json']),
@@ -996,6 +1125,17 @@ class Session:
         journal = replace_paths(journal.decode('latin1'), paths).encode('latin1')
         changes['evidence/promotions.jsonl'] = journal + (b'\n' if journal and not journal.endswith(b'\n') else b'') + json_bytes(record, None)
         return changes
+
+    def check_pins(self):
+        for rel, expected in self.pins.items():
+            path = ROOT / rel
+            actual = path.read_bytes() if path.exists() else None
+            if actual != expected:
+                raise RenameError('canonical input changed during rename: ' + rel)
+        current_sources = {p.relative_to(ROOT).as_posix() for p in (ROOT / 'src').rglob('*')
+                           if p.suffix.lower() in SOURCE_SUFFIXES}
+        if current_sources != set(self.sources):
+            raise RenameError('canonical source inventory changed during rename')
 
     def publish(self, changes):
         # No destination is touched until every proof and every optimistic pin
@@ -1012,15 +1152,7 @@ class Session:
                 backups[rel] = stage / f'{i}.old'
                 backups[rel].write_bytes(old)
         with CanonicalLock():
-            for rel, expected in self.pins.items():
-                path = ROOT / rel
-                actual = path.read_bytes() if path.exists() else None
-                if actual != expected:
-                    raise RenameError('canonical input changed during rename: ' + rel)
-            current_sources = {p.relative_to(ROOT).as_posix() for p in (ROOT / 'src').rglob('*')
-                               if p.suffix.lower() in SOURCE_SUFFIXES}
-            if current_sources != set(self.sources):
-                raise RenameError('canonical source inventory changed during rename')
+            self.check_pins()
             written = []
             try:
                 for rel, path in staged.items():
@@ -1071,9 +1203,11 @@ def minimal_failure(rows, fails):
     return current
 
 
-def run(rows, *, verify_only=False, keep_going=False, jobs=4):
+def run(rows, *, verify_only=False, keep_going=False, jobs=4, scratch_parent=None):
     started = time.perf_counter()
-    scratch_root = ROOT / 'build/scratch'
+    scratch_root = (Path(scratch_parent) if scratch_parent is not None else ROOT / 'build/scratch').resolve()
+    if not scratch_root.resolve().is_relative_to((ROOT / 'build').resolve()):
+        raise RenameError('scratch parent must be under build/')
     scratch_root.mkdir(parents=True, exist_ok=True)
     scratch = Path(tempfile.mkdtemp(prefix='rename-', dir=scratch_root))
     print('Scratch:', scratch, flush=True)
@@ -1104,7 +1238,39 @@ def run(rows, *, verify_only=False, keep_going=False, jobs=4):
         rows = session.validate_rows(rows)
         remaining, refused = list(rows), []
         outcome = session.evaluate(remaining)
+        header_observations = {}
+        if rows and 'header' in rows[0]:
+            for key, (after, collect) in outcome['results'].items():
+                before, prior_collect = session.baseline[key]
+                destination = scratch / 'objects' / key.replace(':', '_').replace('@', '_')
+                destination.mkdir(parents=True)
+                for name, pair in (('before', prior_collect), ('after', collect)):
+                    if pair.get('object') is not None:
+                        (destination / (name + '.obj')).write_bytes(pair['object'])
+                (destination / ('draft.' + session.items[key]['lang'])).write_bytes(outcome['changed'][key])
+                header_observations[key] = {
+                    'before_object_sha256': before.get('object_sha256'),
+                    'after_object_sha256': after.get('object_sha256'),
+                    'before_contribution_sha256': before.get('contribution_sha256'),
+                    'after_contribution_sha256': after.get('contribution_sha256'),
+                    'before_comparison': canonical.observed(before),
+                    'after_comparison': canonical.observed(after),
+                    'source_line_delta': outcome['changed'][key].count(b'\n') -
+                                         session.sources[session.items[key]['source']][0].count(b'\n'),
+                    'objects': str(destination.relative_to(scratch)),
+                    'failures': outcome['failures'].get(key, [])}
         while outcome['failures'] and remaining:
+            if all('header' in r for r in remaining) and set(outcome['failures']) <= {r['module'] for r in remaining}:
+                # Header rows are independent: no identifier, interface or path changes.
+                # Keep every failure from the complete run, without quadratic recompilation.
+                for row in remaining:
+                    if row['module'] in outcome['failures']:
+                        diagnosis = {row['module']: outcome['failures'][row['module']]}
+                        refused.append({'renames': [row], 'failing_set': [row], 'failures': diagnosis})
+                        print('REFUSED SET:', operation_label(row), diagnosis, flush=True)
+                remaining = [r for r in remaining if r['module'] not in outcome['failures']]
+                outcome = session.evaluate(remaining) if remaining else None
+                break
             culprit = minimal_failure(remaining, lambda subset: bool(session.evaluate(subset)['failures']))
             diagnosis = session.evaluate(culprit)['failures']
             excluded = culprit[-1:] if keep_going else culprit
@@ -1123,6 +1289,8 @@ def run(rows, *, verify_only=False, keep_going=False, jobs=4):
             # Reuse only this run's already fresh proof for the final complete
             # surviving batch. Never publish independent singleton successes.
             changes = outcome['publication']
+            if verify_only:
+                session.check_pins()
             for rel, raw in changes.items():
                 if raw is None:
                     continue
@@ -1146,6 +1314,10 @@ def run(rows, *, verify_only=False, keep_going=False, jobs=4):
                   'modules_reproven': sorted(outcome['changed']) if outcome else [],
                   'comparisons': {k: canonical.observed(pair[0]) for k, pair in outcome['results'].items()} if outcome else {},
                   'objects': {k: pair[0].get('object_sha256') for k, pair in outcome['results'].items()} if outcome else {},
+                  'live_contributions': {k: {'before': session.baseline[k][0].get('contribution_sha256'),
+                                             'after': pair[0].get('contribution_sha256')}
+                                         for k, pair in outcome['results'].items()} if outcome else {},
+                  'header_observations': header_observations,
                   'files_changed': sorted(outcome.get('publication', {})) if outcome else [],
                   'unit_tests': outcome.get('unit_tests', {}) if outcome else {},
                   'port_references_unmodified': outcome.get('port_references', []) if outcome else [],
@@ -1170,12 +1342,18 @@ def main(argv=None):
     parser.add_argument('--kind', choices=('recovered', 'descriptive'))
     parser.add_argument('--why')
     parser.add_argument('--batch', type=Path)
+    parser.add_argument('--headers', type=Path, help='replace leading comments and stage module annotations')
+    parser.add_argument('--scratch-parent', type=Path)
     parser.add_argument('--move', nargs='+', action='append', default=[], metavar='KEY=NEW_PATH')
     parser.add_argument('--verify-only', action='store_true')
     parser.add_argument('--keep-going', action='store_true')
     parser.add_argument('--jobs', type=int, choices=range(1, 5), default=4)
     args = parser.parse_args(argv)
-    if args.batch:
+    if args.headers:
+        if args.batch or args.pairs or args.move or args.kind or args.why:
+            parser.error('--headers cannot be combined with renames or moves')
+        rows = json.loads(args.headers.read_text(encoding='utf-8-sig'))
+    elif args.batch:
         if args.pairs or args.move or args.kind or args.why:
             parser.error('--batch cannot be combined with pairs, --kind or --why')
         rows = json.loads(args.batch.read_text(encoding='utf-8-sig'))
@@ -1199,7 +1377,8 @@ def main(argv=None):
             old, new = pair.split('=')
             rows.append({'old': old, 'new': new, 'kind': args.kind, 'why': args.why})
     try:
-        return run(rows, verify_only=args.verify_only, keep_going=args.keep_going, jobs=args.jobs)
+        options = {'scratch_parent': args.scratch_parent} if args.scratch_parent is not None else {}
+        return run(rows, verify_only=args.verify_only, keep_going=args.keep_going, jobs=args.jobs, **options)
     except (ValueError, OSError, compiler.CompileError) as error:
         print('REFUSED:', error, file=sys.stderr)
         return 1

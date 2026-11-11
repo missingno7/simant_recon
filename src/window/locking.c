@@ -41,7 +41,7 @@ extern void far f_171C_1E86(char far * far *handle, int flag);
 extern void _fastcall RepointObjects(int win);
 extern void _fastcall win_Recalc(int win);
 
-void _fastcall f_23AE_0069(int win, int high)
+void _fastcall win_load_and_lock_resource(int win, int high)
 {
     int loaded = 0;
     int n;
@@ -121,12 +121,12 @@ struct Win {
 
 extern int far RallocType(struct Win far * far *handle);
 extern void far RallocFree(char far * far *handle);
-extern void far f_171C_2086(struct Win far * far *handle);
-extern void far f_171C_20E2(struct Win far * far *handle);
+extern void far mem_unlock_encoded_handle(struct Win far * far *handle);
+extern void far mem_mark_discardable_20e2(struct Win far * far *handle);
 extern struct Rect far win_offsets[];
 
 extern int far WinPrintf(char far *format, ...);
-extern void far f_24FA_00B5(void);
+extern void far debug_breakpoint(void);
 void _fastcall win_UnlockWin(int win)
 {
     char far * far * far *p;
@@ -168,13 +168,13 @@ void _fastcall win_UnlockWin(int win)
                         break;
                     }
                 }
-                f_171C_2086(h);
-                f_171C_20E2(h);
+                mem_unlock_encoded_handle(h);
+                mem_mark_discardable_20e2(h);
                 win_handles[n] = 0;
                 g_8CF2[n] = 0;
                 win_offsets[n] = *(struct Rect far *)((char far *)w->objs[0] + 8);
             } else {
-                f_171C_2086(h);
+                mem_unlock_encoded_handle(h);
             }
         }
     }
@@ -182,20 +182,20 @@ void _fastcall win_UnlockWin(int win)
 
 
 extern int far WinPrintf(char far *format, ...);
-extern void far f_24FA_00B5(void);
+extern void far debug_breakpoint(void);
 
 void far f_23AE_035D(void)
 {
     WinPrintf("WINLOCKERR!! ALREADY LOCKED!!");
-    f_24FA_00B5();
+    debug_breakpoint();
 }
 
 void _fastcall win_LockWinHigh(int win)
 {
-    f_23AE_0069(win, 1);
+    win_load_and_lock_resource(win, 1);
 }
 
 void _fastcall win_LockWin(int win)
 {
-    f_23AE_0069(win, 0);
+    win_load_and_lock_resource(win, 0);
 }

@@ -22,11 +22,11 @@ struct Rect {
     int bottom;
 };
 
-void far o15_384C_0152(char far *msg, int flag);
+void far app_cleanup_and_exit(char far *msg, int flag);
 
 void far o15_384C_0000(void)
 {
-    o15_384C_0152("SimAnt IBM DEMO version has expired.  Please get an update.", 0);
+    app_cleanup_and_exit("SimAnt IBM DEMO version has expired.  Please get an update.", 0);
 }
 
 extern Handle far db_LoadObject(int object, int kind);
@@ -63,7 +63,7 @@ void far LoadMonoPats(void)
     db_PurgeObject(0x271a, 0x16);
 }
 
-void far o15_384C_0125(void)
+void far bios_probe_reset_disks(void)
 {
     int drive;
 
@@ -94,7 +94,7 @@ extern int far puts(char far *s);
 extern void far pascal f_00DE_000A(int code);
 extern void far exit(int code);
 
-void far o15_384C_0152(char far *msg, int flag)
+void far app_cleanup_and_exit(char far *msg, int flag)
 {
     f_171C_0676(0);
     switch (g_2BD4++) {
@@ -119,7 +119,7 @@ void far o15_384C_0152(char far *msg, int flag)
 }
 
 extern int far gGameNeedsSaving;
-int far o15_384C_0239(int which);
+int far ui_prompt_save_discard_cancel(int which);
 extern int far SaveGame(int flag);
 
 int far MenuQuit(void)
@@ -128,18 +128,18 @@ int far MenuQuit(void)
 
     if (gGameNeedsSaving) {
         do {
-            r = o15_384C_0239(1);
+            r = ui_prompt_save_discard_cancel(1);
             if (r == 2)
                 return 0;
             if (r != 1)
                 break;
         } while (SaveGame(0) == 0);
     }
-    o15_384C_0152("SimAnt was brought to you by the people at MAXIS.  Thank you for playing.", 0);
+    app_cleanup_and_exit("SimAnt was brought to you by the people at MAXIS.  Thank you for playing.", 0);
 }
 
 extern void far win_Open(int win);
-extern Handle far f_1A53_00F0(int object, int kind, int type);
+extern Handle far res_load_with_alloc_type(int object, int kind, int type);
 extern char far * far mem_Lock(Handle h);
 extern int near g_3DB2;
 extern void far font_SetFont(int font);
@@ -149,8 +149,8 @@ extern void (far * near g_9128)(int a, int b, int c);
 extern void far GRectOutline(struct Rect far *rect, int width);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *rect);
-extern int far f_1F58_0038(void);
-extern int far f_1F58_0090(void);
+extern int far kbd_poll_bios_key(void);
+extern int far kbd_read_key_code(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern Handle far mem_Unlock(Handle h);
 extern void far db_ReleaseHandle(Handle handle);
@@ -179,13 +179,13 @@ extern int far MePlane;
 extern int far WinPrintf(char far *format, ...);
 extern int far TutLesson;
 extern int far TutGiven;
-extern int far f_22BF_0A65(void);
-extern void far o26_39C7_0000(void);
+extern int far win_is_zoomed(void);
+extern void far win_toggle_zoom(void);
 extern int far MeLocY;
 extern int far MeLocX;
 extern void far CenterEdit(int x, int y);
 extern void far UpdateEdit(void);
-int far o15_384C_0239(int which)
+int far ui_prompt_save_discard_cancel(int which)
 {
     struct Event ev;
     struct Rect r;
@@ -194,7 +194,7 @@ int far o15_384C_0239(int which)
     int result;
 
     win_Open(0x2100);
-    h = f_1A53_00F0((0x41 - which) * 2, 10, 1);
+    h = res_load_with_alloc_type((0x41 - which) * 2, 10, 1);
     text = mem_Lock(h);
     font_SetFont(g_3DB2 == 0x140 ? 2 : 4);
     if (g_5A97 & 1) {
@@ -207,8 +207,8 @@ int far o15_384C_0239(int which)
     win_PrintTextInRect(0, text, &r);
     font_SetFont(0);
     for (;;) {
-        if (f_1F58_0038()) {
-            switch (f_1F58_0090()) {
+        if (kbd_poll_bios_key()) {
+            switch (kbd_read_key_code()) {
             case 0x0d:
             case 'D':
             case 'd':
@@ -282,8 +282,8 @@ extern int far MePlane;
 extern int far WinPrintf(char far *format, ...);
 extern int far TutLesson;
 extern int far TutGiven;
-extern int far f_22BF_0A65(void);
-extern void far o26_39C7_0000(void);
+extern int far win_is_zoomed(void);
+extern void far win_toggle_zoom(void);
 extern int far MeLocY;
 extern int far MeLocX;
 extern void far CenterEdit(int x, int y);
@@ -342,8 +342,8 @@ int far NewGame(int flag)
     }
     SetDefaultWindows();
     SetMapPlane(MePlane);
-    if (r == 0 && !f_22BF_0A65())
-        o26_39C7_0000();
+    if (r == 0 && !win_is_zoomed())
+        win_toggle_zoom();
     CenterEdit(MeLocX, MeLocY);
     UpdateEdit();
     gGameNeedsSaving = 0;

@@ -45,7 +45,7 @@ struct AnimSet {
 extern char far * far mem_Lock(Handle);
 extern int far WinPrintf(char far *, ...);
 extern int far RallocType(Handle);
-extern void far f_1F58_0090(void);
+extern void far kbd_read_key_code(void);
 extern Handle far mem_Unlock(Handle);
 extern long far mem_Size(Handle);
 extern void far Punt(char far *, ...);
@@ -58,10 +58,10 @@ extern struct AnimObj far * far fd_50F6_4A42;
 extern Handle far mem_Alloc(long, int, char far *);
 extern void far * far _fmemmove(void far *, void far *, unsigned);
 extern void far mem_Free(Handle);
-extern Handle far f_1A53_00F0(int, int, int);
+extern Handle far res_load_with_alloc_type(int, int, int);
 extern void (far * far fd_50F6_3B58)(char far *, char far *, int, int);
 extern void (far * far fd_50F6_37EA)(char far *, char far *, int, int);
-extern void far f_171C_1C82(Handle);
+extern void far mem_mark_discardable_1c82(Handle);
 extern void far clip_Push(void);
 extern void far clip_SubExclude(struct Rect far *);
 extern void far GPutPic(int, int, char far *);
@@ -89,14 +89,14 @@ void far hanim_PrintSet(Handle h, char far *name)
                   obj, obj->id, obj->buf, RallocType(obj->buf), obj->pri, obj->show, obj->remove);
         t = obj->show | obj->remove;
         if ((t != 0 && t != 1) || RallocType(obj->buf) != 1)
-            f_1F58_0090();
+            kbd_read_key_code();
     }
     mem_Unlock(set->objs);
     mem_Unlock(h);
 }
 
 
-struct AnimSet far * far f_2662_0100(Handle h)
+struct AnimSet far * far anim_lock_render_buffers(Handle h)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -113,7 +113,7 @@ struct AnimSet far * far f_2662_0100(Handle h)
     return set;
 }
 
-void far f_2662_01B5(Handle h)
+void far anim_unlock_render_buffers(Handle h)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -129,13 +129,13 @@ void far f_2662_01B5(Handle h)
 }
 
 
-void far f_2662_023F(struct Rect far *r, char far *buf)
+void far anim_capture_screen_rect(struct Rect far *r, char far *buf)
 {
     (*g_9148)(r->left, r->top, r->right, r->bottom, buf);
 }
 
 
-void far f_2662_0262(struct AnimObj far *obj, int from, int to, int which, struct Rect far *clip, char far *save)
+void far anim_compose_object_range(struct AnimObj far *obj, int from, int to, int which, struct Rect far *clip, char far *save)
 {
     struct Rect far *r;
     int back;
@@ -469,7 +469,7 @@ void far hanim_RenderAnimSet(Handle h)
 
     if (g_5A97 & 1)
         mem_Free(mem_Alloc(6000, 1, "to flush"));
-    set = f_2662_0100(h);
+    set = anim_lock_render_buffers(h);
     n = set->count;
     objs = (struct AnimObj far *)mem_Lock(set->objs);
     obj = objs;
@@ -477,8 +477,8 @@ void far hanim_RenderAnimSet(Handle h)
         if (!obj->dirty)
             continue;
         if ((obj->moved && _fmemcmp(&obj->rect, &obj->old, 8)) || (obj->show && !obj->drawn)) {
-            f_2662_023F(&obj->rect, obj->bufp + obj->size * 2);
-            f_2662_0262(objs, n - 1, 0, 0, &obj->rect, obj->bufp + obj->size * 2);
+            anim_capture_screen_rect(&obj->rect, obj->bufp + obj->size * 2);
+            anim_compose_object_range(objs, n - 1, 0, 0, &obj->rect, obj->bufp + obj->size * 2);
         } else
             _fmemcpy(obj->bufp + obj->size * 2, obj->bufp, obj->size);
     }
@@ -490,8 +490,8 @@ void far hanim_RenderAnimSet(Handle h)
                 continue;
         _fmemcpy(obj->bufp + obj->size, obj->bufp + obj->size * 2, obj->size);
         if (i)
-            f_2662_0262(objs, 0, i - 1, 1, &obj->rect, obj->bufp + obj->size);
-        pich = f_1A53_00F0(obj->pic, 2, 1);
+            anim_compose_object_range(objs, 0, i - 1, 1, &obj->rect, obj->bufp + obj->size);
+        pich = res_load_with_alloc_type(obj->pic, 2, 1);
         pic = (int far *)mem_Lock(pich);
         if (*pic != 3 && g_5A97 != 2) {
             if (*pic == 0)
@@ -502,7 +502,7 @@ void far hanim_RenderAnimSet(Handle h)
             (*fd_50F6_37EA)((char far *)pic + 8, obj->bufp + obj->size, obj->x & g_67DC, 0);
         mem_Unlock(pich);
         if (obj->pic < 30000)
-            f_171C_1C82(pich);
+            mem_mark_discardable_1c82(pich);
             obj->drawn = 1;
         } else
             obj->drawn = 0;
@@ -536,17 +536,17 @@ void far hanim_RenderAnimSet(Handle h)
         }
     }
     mem_Unlock(set->objs);
-    f_2662_01B5(h);
+    anim_unlock_render_buffers(h);
     hanim_ActuallyRemoveAnimObjects(h);
     clip_Pop();
 }
 
-void far f_2662_1120(int shift, int flag, char far *dest, int pic)
+void far anim_bitmap_to_buffer(int shift, int flag, char far *dest, int pic)
 {
     Handle h;
     int far *p;
 
-    h = f_1A53_00F0(pic, 2, 1);
+    h = res_load_with_alloc_type(pic, 2, 1);
     p = (int far *)mem_Lock(h);
     if (*p == 3)
         (*fd_50F6_37EA)((char far *)p + 8, dest, shift, flag);
@@ -554,5 +554,5 @@ void far f_2662_1120(int shift, int flag, char far *dest, int pic)
         (*fd_50F6_3B58)((char far *)p + 8, dest, shift, flag);
     mem_Unlock(h);
     if (pic < 30000)
-        f_171C_1C82(h);
+        mem_mark_discardable_1c82(h);
 }

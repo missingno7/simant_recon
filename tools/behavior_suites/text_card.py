@@ -359,7 +359,7 @@ def _resource_case(label, scenario, volatile=0xA55A, seed=0x5A23):
         return 1
 
     callbacks = {
-        "f_1A53_00F0": b.Callback(3, res),
+        "res_load_with_alloc_type": b.Callback(3, res),
         "mem_Lock": b.Callback(2, lock),
         "mem_Size": b.Callback(2, size),
         "mem_Unlock": b.Callback(2, unlock),

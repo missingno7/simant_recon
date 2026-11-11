@@ -50,9 +50,9 @@ void far f_277E_00AF(void);
 extern void far f_29F0_001A(void);
 extern int far fd_50F6_4A48;
 extern int far fd_50F6_4A4C;
-extern void far f_28BC_046B(int a, int b);
-extern void far f_28BC_0488(int a, int b);
-extern void far f_28BC_03CC(void);
+extern void far snd_select_four_channel_timer(int a, int b);
+extern void far snd_select_two_channel_timer(int a, int b);
+extern void far snd_start_sample_timer(void);
 extern void far f_29F0_0022(void);
 extern int far fd_50F6_01F0[];
 extern int far f_0000_0000(char far * far *handle, int far *size, int object, int type);
@@ -72,10 +72,10 @@ int far f_277E_0000(int mode, int flag)
     fd_50F6_4A4C = 0;
     g_68B6[mode]();
     if (flag)
-        f_28BC_046B(0xd6, 0x132);
+        snd_select_four_channel_timer(0xd6, 0x132);
     else
-        f_28BC_0488(0xd6, 0x132);
-    f_28BC_03CC();
+        snd_select_two_channel_timer(0xd6, 0x132);
+    snd_start_sample_timer();
     f_29F0_0022();
     fd_50F6_01F0[0] = mode;
     f_19A9_000B(f_0000_0000);
@@ -116,16 +116,16 @@ void far f_277E_010A(struct Voice far *src)
     }
 }
 
-extern void far f_295C_0391(void);
+extern void far snd_stop_assigned_voices(void);
 extern void far f_0000_0429(void);
-extern void far f_28BC_04E0(int a);
+extern void far snd_restore_bios_timer(int a);
 
 void far f_277E_0154(void)
 {
-    f_295C_0391();
+    snd_stop_assigned_voices();
     f_0000_0429();
     g_68DA[fd_50F6_01F0[0]]();
-    f_28BC_04E0(0);
+    snd_restore_bios_timer(0);
 }
 
 int far f_277E_0179(void)
@@ -227,7 +227,7 @@ int far f_277E_034F(void)
 }
 
 extern void far f_2815_0118(void);
-extern void far f_283E_0035(void);
+extern void far snd_opl_probe_tone(void);
 extern int far fd_55B3_74AF;
 extern int far fd_50F6_4B16;
 
@@ -247,7 +247,7 @@ int far f_277E_040E(void)
     }
     f_2815_0118();
     fd_50F6_01F0[2] = 7;
-    f_283E_0035();
+    snd_opl_probe_tone();
     f_29F0_001A();
     fd_55B3_6B9C = fd_55B3_74AF;
     f_277E_010A(fd_55B3_0D92);
@@ -295,7 +295,7 @@ extern void far f_293A_015E(void);
 extern int far fd_50F6_4A46;
 extern int far f_293A_0087(void);
 extern int far fd_55B3_74B7;
-extern void far f_29BF_0008(int port);
+extern void far snd_regchip_initialize(int port);
 
 extern struct Voice far fd_55B3_1572[];
 int far f_277E_0606(void)
@@ -328,7 +328,7 @@ int far f_277E_0606(void)
     } else
         f_277E_010A(fd_55B3_1572);
     fd_55B3_6B9C = fd_55B3_74B7;
-    f_29BF_0008(fd_50F6_4B14);
+    snd_regchip_initialize(fd_50F6_4B14);
     fd_55B3_74C0 = 0;
     return 1;
 }

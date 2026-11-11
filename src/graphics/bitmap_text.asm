@@ -23,7 +23,7 @@ _DATA	ends
 DGROUP	group	_DATA
 
 	extrn	_GPutImg:far
-	extrn	_f_1B4E_0081:far
+	extrn	_gfx_put_fixed_font_chars:far
 
 TEXTOUT_TEXT	segment word public 'CODE'
 	assume	cs:TEXTOUT_TEXT, ds:DGROUP
@@ -44,7 +44,7 @@ L000E:
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _f_1B4E_0081
+	call far ptr _gfx_put_fixed_font_chars
 	add sp, 8
 	pop di
 	pop si

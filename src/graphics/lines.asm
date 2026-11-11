@@ -24,27 +24,27 @@ _g_1DF9	db	0
 _g_1DFA	dw	0
 _g_1DFC	dw	0
 _g_1DFE	dw	0
-_g_1E00	dw	_f_16B5_007F, _f_16B5_00AB, _f_16B5_00A5
+_g_1E00	dw	_gfx_buffer_line_init_mono, _gfx_buffer_line_init_packed4, _gfx_buffer_line_init_planar
 _g_1E06	dw	200 dup (0)
 _g_1F96	dw	0
-_g_1F98	dw	_f_16B5_00B1, _f_16B5_03B5, _f_16B5_01D4
+_g_1F98	dw	_gfx_buffer_line_mono, _gfx_buffer_line_packed4, _gfx_buffer_line_planar4
 _DATA	ends
 DGROUP	group	_DATA
 
 LINE_TEXT	segment word public 'CODE'
 	assume	cs:LINE_TEXT, ds:DGROUP
 
-	public	_f_16B5_0008
-	public	_f_16B5_0033
-	public	_f_16B5_007F
-	public	_f_16B5_00A5
-	public	_f_16B5_00AB
-	public	_f_16B5_00B1
-	public	_f_16B5_01D4
-	public	_f_16B5_03B5
-	public	_f_16B5_04D8
+	public	_gfx_buffer_line
+	public	_gfx_buffer_line_target
+	public	_gfx_buffer_line_init_mono
+	public	_gfx_buffer_line_init_planar
+	public	_gfx_buffer_line_init_packed4
+	public	_gfx_buffer_line_mono
+	public	_gfx_buffer_line_planar4
+	public	_gfx_buffer_line_packed4
+	public	_gfx_buffer_clip_line
 
-_f_16B5_0008	proc	far
+_gfx_buffer_line	proc	far
 	push bp
 	mov bp, sp
 	add bp, 6
@@ -69,9 +69,9 @@ _f_16B5_0008	proc	far
 	pop es
 	pop bp
 	retf
-_f_16B5_0008	endp
+_gfx_buffer_line	endp
 
-_f_16B5_0033	proc	far
+_gfx_buffer_line_target	proc	far
 	push bp
 	mov bp, sp
 	add bp, 6
@@ -107,9 +107,9 @@ _f_16B5_0033	proc	far
 	pop es
 	pop bp
 	retf
-_f_16B5_0033	endp
+_gfx_buffer_line_target	endp
 
-_f_16B5_007F	proc	near
+_gfx_buffer_line_init_mono	proc	near
 	mov bx, word ptr _g_1DE8
 	shr bx, 1
 	shr bx, 1
@@ -128,20 +128,20 @@ L0097:
 	shr bx, 1
 	mov word ptr _g_1DFE, bx
 	retn
-_f_16B5_007F	endp
+_gfx_buffer_line_init_mono	endp
 
-_f_16B5_00A5	proc	near
+_gfx_buffer_line_init_planar	proc	near
 	mov bx, word ptr _g_1DE8
 	jmp L0087
-_f_16B5_00A5	endp
+_gfx_buffer_line_init_planar	endp
 
-_f_16B5_00AB	proc	near
+_gfx_buffer_line_init_packed4	proc	near
 	mov bx, word ptr _g_1DE8
 	jmp L0087
-_f_16B5_00AB	endp
+_gfx_buffer_line_init_packed4	endp
 
-_f_16B5_00B1	proc	near
-	call near ptr _f_16B5_04D8
+_gfx_buffer_line_mono	proc	near
+	call near ptr _gfx_buffer_clip_line
 	jae L00B7
 	retn
 L00B7:
@@ -283,10 +283,10 @@ L01CF:
 	add di, bp
 	loop L019A
 	retn
-_f_16B5_00B1	endp
+_gfx_buffer_line_mono	endp
 
-_f_16B5_01D4	proc	near
-	call near ptr _f_16B5_04D8
+_gfx_buffer_line_planar4	proc	near
+	call near ptr _gfx_buffer_clip_line
 	jae L01DA
 	retn
 L01DA:
@@ -508,10 +508,10 @@ L03AD:
 	dec cx
 	je L03AC
 	jmp L031A
-_f_16B5_01D4	endp
+_gfx_buffer_line_planar4	endp
 
-_f_16B5_03B5	proc	near
-	call near ptr _f_16B5_04D8
+_gfx_buffer_line_packed4	proc	near
+	call near ptr _gfx_buffer_clip_line
 	jae L03BB
 	retn
 L03BB:
@@ -653,10 +653,10 @@ L04D3:
 	add di, bp
 	loop L049E
 	retn
-_f_16B5_03B5	endp
+_gfx_buffer_line_packed4	endp
 
 ; clip the segment (SI,DI)-(x2,y2) against the bitmap (Cohen-Sutherland outcodes); CF = rejected
-_f_16B5_04D8	proc	near
+_gfx_buffer_clip_line	proc	near
 	push ax
 	mov word ptr _g_1DFA, 0
 L04DF:
@@ -891,7 +891,7 @@ L0667:
 	mov dx, ax
 	mov bx, cx
 	jmp L04DF
-_f_16B5_04D8	endp
+_gfx_buffer_clip_line	endp
 
 LINE_TEXT	ends
 	end

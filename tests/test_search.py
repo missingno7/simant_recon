@@ -76,7 +76,7 @@ class SearchCompilerControls(unittest.TestCase):
         # The same whole module has an accepted peer and an unclaimed six-byte residue.
         source = ROOT / "tests/fixtures/memory-near-repaired.c"
         with contextlib.redirect_stdout(io.StringIO()):
-            peer = search.run("f_171C_2086", [source], None, None, None, {}, quiet=True)[0]
+            peer = search.run("mem_unlock_encoded_handle", [source], None, None, None, {}, quiet=True)[0]
             target = search.run("f_171C_0CF4", [source], None, None, None, {}, quiet=True)[0]
         self.assertEqual(peer["status"], "EXACT", peer)
         self.assertEqual(peer["flags"], ["/AL", "/Oeg", "/Gs", "/Zi"])
@@ -89,7 +89,7 @@ class SearchCompilerControls(unittest.TestCase):
         m = modules.load_manifest()["modules"]["root:171C"]
         p = m["placements"]["_DATA"]
         with contextlib.redirect_stdout(io.StringIO()):
-            row = search.run("f_171C_2086", [source], None, None, None,
+            row = search.run("mem_unlock_encoded_handle", [source], None, None, None,
                              {"_DATA": {"seg": p["seg"], "off": p["off"] + 2}}, quiet=True)[0]
         self.assertEqual(row["status"], "MISMATCH", row)
 

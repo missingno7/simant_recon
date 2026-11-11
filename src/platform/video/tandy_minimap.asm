@@ -17,10 +17,10 @@ DGROUP	group	_DATA
 S03B_TEXT	segment word public 'CODE'
 	assume	cs:S03B_TEXT, ds:DGROUP
 
-	public	_o03_3253_0008
+	public	_gfx_tandy_map_duplicate_rows
 	public	_Windows_MakeTable1x1
 
-_o03_3253_0008	proc	far
+_gfx_tandy_map_duplicate_rows	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -44,7 +44,7 @@ L001D:
 	pop si
 	pop bp
 	retf
-_o03_3253_0008	endp
+_gfx_tandy_map_duplicate_rows	endp
 
 _Windows_MakeTable1x1	proc	far
 	push bp

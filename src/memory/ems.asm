@@ -34,37 +34,37 @@ _DATA		ends
 EMS_TEXT	segment word public 'CODE'
 		assume	cs:EMS_TEXT, ds:DGROUP
 
-	public	_f_195A_000C
-	public	_f_195A_0018
-	public	_f_195A_001D
-	public	_f_195A_0035
-	public	_f_195A_004B
-	public	_f_195A_0062
-	public	_f_195A_007D
-	public	_f_195A_0092
-	public	_f_195A_00AC
-	public	_f_195A_00C8
-	public	_f_195A_00E9
-	public	_f_195A_00F8
-	public	_f_195A_010D
-	public	_f_195A_0122
-	public	_f_195A_0144
-	public	_f_195A_0166
-	public	_f_195A_0182
-	public	_f_195A_019C
-	public	_f_195A_01AF
-	public	_f_195A_01CB
-	public	_f_195A_01DF
-	public	_f_195A_01F2
-	public	_f_195A_0206
-	public	_f_195A_0210
-	public	_f_195A_021A
-	public	_f_195A_0222
-	public	_f_195A_023A
-	public	_f_195A_0260
-	public	_f_195A_02B7
+	public	_ems_query_version
+	public	_ems_query_status
+	public	_ems_query_page_frame
+	public	_ems_query_page_counts
+	public	_ems_allocate_pages
+	public	_ems_map_page
+	public	_ems_free_handle
+	public	_ems_get_page_map
+	public	_ems_set_page_map
+	public	_ems_exchange_page_map
+	public	_ems_query_page_map_size
+	public	_ems_save_handle_map
+	public	_ems_restore_handle_map
+	public	_ems_map_multiple_pages
+	public	_ems_map_multiple_segments
+	public	_ems_move_region
+	public	_ems_resize_handle
+	public	_ems_query_mappable_count
+	public	_ems_get_mappable_pages
+	public	_ems_set_handle_name
+	public	_ems_find_named_handle
+	public	_ems_set_alternate_map
+	public	_ems_get_alternate_map
+	public	_ems_query_alternate_map_size
+	public	_ems_allocate_alternate_map
+	public	_ems_free_alternate_map
+	public	_ems_detect_manager
+	public	_ems_initialize
+	public	_ems_fatal_error
 
-_f_195A_000C	proc	far
+_ems_query_version	proc	far
 	mov ah, 46h
 	int 67h
 	and ah, ah
@@ -72,39 +72,39 @@ _f_195A_000C	proc	far
 	mov _fd_55B3_360C, al
 L0017:
 	retf
-_f_195A_000C	endp
+_ems_query_version	endp
 
-_f_195A_0018	proc	far
+_ems_query_status	proc	far
 	mov ah, 40h
 	int 67h
 	retf
-_f_195A_0018	endp
+_ems_query_status	endp
 
-_f_195A_001D	proc	far
+_ems_query_page_frame	proc	far
 	mov ah, 41h
 	int 67h
 	and ah, ah
 	je L002A
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L002A:
 	mov word ptr _fd_55B3_360E, 0
 	mov word ptr _fd_55B3_360E+2, bx
 	retf
-_f_195A_001D	endp
+_ems_query_page_frame	endp
 
-_f_195A_0035	proc	far
+_ems_query_page_counts	proc	far
 	mov ah, 42h
 	int 67h
 	and ah, ah
 	je L0042
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L0042:
 	mov _fd_55B3_3612, bx
 	mov _fd_55B3_3614, dx
 	retf
-_f_195A_0035	endp
+_ems_query_page_counts	endp
 
-_f_195A_004B	proc	far
+_ems_allocate_pages	proc	far
 	push bp
 	mov bp, sp
 	mov ah, 43h
@@ -112,14 +112,14 @@ _f_195A_004B	proc	far
 	int 67h
 	and ah, ah
 	je L005E
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L005E:
 	mov ax, dx
 	pop bp
 	retf
-_f_195A_004B	endp
+_ems_allocate_pages	endp
 
-_f_195A_0062	proc	far
+_ems_map_page	proc	far
 	push bp
 	mov bp, sp
 	mov dx, word ptr [bp+6]
@@ -129,13 +129,13 @@ _f_195A_0062	proc	far
 	int 67h
 	and ah, ah
 	je L007B
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L007B:
 	pop bp
 	retf
-_f_195A_0062	endp
+_ems_map_page	endp
 
-_f_195A_007D	proc	far
+_ems_free_handle	proc	far
 	push bp
 	mov bp, sp
 	mov dx, word ptr [bp+6]
@@ -143,13 +143,13 @@ _f_195A_007D	proc	far
 	int 67h
 	and ah, ah
 	je L0090
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L0090:
 	pop bp
 	retf
-_f_195A_007D	endp
+_ems_free_handle	endp
 
-_f_195A_0092	proc	far
+_ems_get_page_map	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -158,15 +158,15 @@ _f_195A_0092	proc	far
 	int 67h
 	and ah, ah
 	je L00A7
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L00A7:
 	xor al, al
 	pop di
 	pop bp
 	retf
-_f_195A_0092	endp
+_ems_get_page_map	endp
 
-_f_195A_00AC	proc	far
+_ems_set_page_map	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -176,16 +176,16 @@ _f_195A_00AC	proc	far
 	int 67h
 	and ah, ah
 	je L00C2
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L00C2:
 	xor al, al
 	pop si
 	pop ds
 	pop bp
 	retf
-_f_195A_00AC	endp
+_ems_set_page_map	endp
 
-_f_195A_00C8	proc	far
+_ems_exchange_page_map	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -197,7 +197,7 @@ _f_195A_00C8	proc	far
 	int 67h
 	and ah, ah
 	je L00E2
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L00E2:
 	xor al, al
 	pop ds
@@ -205,19 +205,19 @@ L00E2:
 	pop di
 	pop bp
 	retf
-_f_195A_00C8	endp
+_ems_exchange_page_map	endp
 
-_f_195A_00E9	proc	far
+_ems_query_page_map_size	proc	far
 	mov ax, 4E03h
 	int 67h
 	and ah, ah
 	je L00F7
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L00F7:
 	retf
-_f_195A_00E9	endp
+_ems_query_page_map_size	endp
 
-_f_195A_00F8	proc	far
+_ems_save_handle_map	proc	far
 	push bp
 	mov bp, sp
 	mov ah, 47h
@@ -225,13 +225,13 @@ _f_195A_00F8	proc	far
 	int 67h
 	and ah, ah
 	je L010B
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L010B:
 	pop bp
 	retf
-_f_195A_00F8	endp
+_ems_save_handle_map	endp
 
-_f_195A_010D	proc	far
+_ems_restore_handle_map	proc	far
 	push bp
 	mov bp, sp
 	mov ah, 48h
@@ -239,13 +239,13 @@ _f_195A_010D	proc	far
 	int 67h
 	and ah, ah
 	je L0120
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L0120:
 	pop bp
 	retf
-_f_195A_010D	endp
+_ems_restore_handle_map	endp
 
-_f_195A_0122	proc	far
+_ems_map_multiple_pages	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -257,16 +257,16 @@ _f_195A_0122	proc	far
 	int 67h
 	and ah, ah
 	je L013E
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L013E:
 	xor al, al
 	pop ds
 	pop si
 	pop bp
 	retf
-_f_195A_0122	endp
+_ems_map_multiple_pages	endp
 
-_f_195A_0144	proc	far
+_ems_map_multiple_segments	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -278,16 +278,16 @@ _f_195A_0144	proc	far
 	int 67h
 	and ah, ah
 	je L0160
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L0160:
 	xor al, al
 	pop si
 	pop ds
 	pop bp
 	retf
-_f_195A_0144	endp
+_ems_map_multiple_segments	endp
 
-_f_195A_0166	proc	far
+_ems_move_region	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -297,16 +297,16 @@ _f_195A_0166	proc	far
 	int 67h
 	and ah, ah
 	je L017C
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L017C:
 	xor al, al
 	pop si
 	pop ds
 	pop bp
 	retf
-_f_195A_0166	endp
+_ems_move_region	endp
 
-_f_195A_0182	proc	far
+_ems_resize_handle	proc	far
 	push bp
 	mov bp, sp
 	mov dx, word ptr [bp+6]
@@ -315,25 +315,25 @@ _f_195A_0182	proc	far
 	int 67h
 	and ah, ah
 	je L0198
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L0198:
 	xor al, al
 	pop bp
 	retf
-_f_195A_0182	endp
+_ems_resize_handle	endp
 
-_f_195A_019C	proc	far
+_ems_query_mappable_count	proc	far
 	mov ax, 5801h
 	int 67h
 	and ah, ah
 	je L01AA
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L01AA:
 	mov ems_mappable, cx
 	retf
-_f_195A_019C	endp
+_ems_query_mappable_count	endp
 
-_f_195A_01AF	proc	far
+_ems_get_mappable_pages	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -342,15 +342,15 @@ _f_195A_01AF	proc	far
 	int 67h
 	and ah, ah
 	je L01C4
-	call far ptr _f_195A_02B7
+	call far ptr _ems_fatal_error
 L01C4:
 	mov ems_mappable, cx
 	pop di
 	pop bp
 	retf
-_f_195A_01AF	endp
+_ems_get_mappable_pages	endp
 
-_f_195A_01CB	proc	far
+_ems_set_handle_name	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -363,9 +363,9 @@ _f_195A_01CB	proc	far
 	pop ds
 	pop bp
 	retf
-_f_195A_01CB	endp
+_ems_set_handle_name	endp
 
-_f_195A_01DF	proc	far
+_ems_find_named_handle	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -378,9 +378,9 @@ _f_195A_01DF	proc	far
 	pop ds
 	pop bp
 	retf
-_f_195A_01DF	endp
+_ems_find_named_handle	endp
 
-_f_195A_01F2	proc	far
+_ems_set_alternate_map	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -392,32 +392,32 @@ _f_195A_01F2	proc	far
 	pop di
 	pop bp
 	retf
-_f_195A_01F2	endp
+_ems_set_alternate_map	endp
 
-_f_195A_0206	proc	far
+_ems_get_alternate_map	proc	far
 	push di
 	mov ax, 5B00h
 	int 67h
 	mov al, bl
 	pop di
 	retf
-_f_195A_0206	endp
+_ems_get_alternate_map	endp
 
-_f_195A_0210	proc	far
+_ems_query_alternate_map_size	proc	far
 	mov ax, 5B02h
 	int 67h
 	mov ems_altmap, dx
 	retf
-_f_195A_0210	endp
+_ems_query_alternate_map_size	endp
 
-_f_195A_021A	proc	far
+_ems_allocate_alternate_map	proc	far
 	mov ax, 5B03h
 	int 67h
 	mov al, bl
 	retf
-_f_195A_021A	endp
+_ems_allocate_alternate_map	endp
 
-_f_195A_0222	proc	far
+_ems_free_alternate_map	proc	far
 	push bp
 	mov bp, sp
 	mov bl, byte ptr [bp+6]
@@ -426,11 +426,11 @@ _f_195A_0222	proc	far
 	xor al, al
 	pop bp
 	retf
-_f_195A_0222	endp
+_ems_free_alternate_map	endp
 
 emm_name	db	'EMMXXXX0', 0
 
-_f_195A_023A	proc	far
+_ems_detect_manager	proc	far
 	push ds
 	push cs
 	pop ds
@@ -444,7 +444,7 @@ _f_195A_023A	proc	far
 	mov bx, ax
 	mov ah, 3Eh
 	int 21h
-	call far ptr _f_195A_0018
+	call far ptr _ems_query_status
 	test ah, 0FFh
 	jne L025D
 	mov ax, 1
@@ -452,9 +452,9 @@ _f_195A_023A	proc	far
 L025D:
 	xor ax, ax
 	retf
-_f_195A_023A	endp
+_ems_detect_manager	endp
 
-_f_195A_0260	proc	far
+_ems_initialize	proc	far
 	push si
 	test ems_active, 0FFh
 	jne L02B5
@@ -480,29 +480,29 @@ L028A:
 	je L02B5
 	loop L027C
 L0294:
-	call far ptr _f_195A_023A
+	call far ptr _ems_detect_manager
 	test ax, 0FFh
 	je L02B5
-	call far ptr _f_195A_000C
+	call far ptr _ems_query_version
 	and ah, ah
 	jne L02B5
 	cmp al, 32h
 	jl L02B5
-	call far ptr _f_195A_001D
+	call far ptr _ems_query_page_frame
 	mov ems_active, 1
 L02B5:
 	pop si
 	retf
-_f_195A_0260	endp
+_ems_initialize	endp
 
-_f_195A_02B7	proc	far
+_ems_fatal_error	proc	far
 	int	3
 	push ds
 	mov ax, offset DGROUP:ems_error
 	push ax
 	jmp far ptr _Punt
 	retf				; unreachable
-_f_195A_02B7	endp
+_ems_fatal_error	endp
 
 EMS_TEXT	ends
 	end

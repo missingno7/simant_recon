@@ -10,17 +10,17 @@ DGROUP	group	_DATA
 S01C_TEXT	segment word public 'CODE'
 	assume	cs:S01C_TEXT, ds:DGROUP
 
-	public	_o01_32B5_000E
-	public	_o01_32B5_000F
-	public	_o01_32B5_00AA
-	public	_o01_32B5_0152
-	public	_o01_32B5_024F
+	public	_gfx_mono_buffer_noop
+	public	_gfx_mono_mask_bitmap_to_buffer
+	public	_gfx_mono_copy_bitmap_to_buffer
+	public	_gfx_mono_buffer_intersection
+	public	_gfx_mono_scratch_to_buffer
 
-_o01_32B5_000E	proc	far
+_gfx_mono_buffer_noop	proc	far
 	retf
-_o01_32B5_000E	endp
+_gfx_mono_buffer_noop	endp
 
-_o01_32B5_000F	proc	far
+_gfx_mono_mask_bitmap_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ah
@@ -99,9 +99,9 @@ L0078:
 	mov sp, bp
 	pop bp
 	retf
-_o01_32B5_000F	endp
+_gfx_mono_mask_bitmap_to_buffer	endp
 
-_o01_32B5_00AA	proc	far
+_gfx_mono_copy_bitmap_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ch
@@ -186,9 +186,9 @@ L0128:
 	mov sp, bp
 	pop bp
 	retf
-_o01_32B5_00AA	endp
+_gfx_mono_copy_bitmap_to_buffer	endp
 
-_o01_32B5_0152	proc	far
+_gfx_mono_buffer_intersection	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 10h
@@ -307,9 +307,9 @@ L023C:
 	mov sp, bp
 	pop bp
 	retf
-_o01_32B5_0152	endp
+_gfx_mono_buffer_intersection	endp
 
-_o01_32B5_024F	proc	far
+_gfx_mono_scratch_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -357,7 +357,7 @@ _o01_32B5_024F	proc	far
 	pop si
 	pop bp
 	retf
-_o01_32B5_024F	endp
+_gfx_mono_scratch_to_buffer	endp
 
 S01C_TEXT	ends
 	end

@@ -13,7 +13,7 @@ BITS_TEXT	segment word public 'CODE'
 	public	_MemRChr
 	public	_ConvertMonoToTandy
 	public	_invert
-	public	_f_24FA_00B5
+	public	_debug_breakpoint
 
 _MemRChr	proc	far
 	push bp
@@ -125,9 +125,9 @@ L00AA:
 	retf
 _invert	endp
 
-_f_24FA_00B5	proc	far
+_debug_breakpoint	proc	far
 	int 3
-_f_24FA_00B5	endp
+_debug_breakpoint	endp
 
 BITS_TEXT	ends
 	end

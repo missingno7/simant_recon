@@ -10,7 +10,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-HERE = ROOT / 'build/workers/rename-tool/tests'
+HERE = ROOT / 'build/workers/file-headers/tests'
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(ROOT / 'tools'))
 sys.path.insert(0, str(ROOT))
@@ -28,6 +28,33 @@ def row(old='old', new='fresh', kind='descriptive'):
 
 
 class TokenControls(unittest.TestCase):
+    def test_headers_replace_only_leading_comments_and_preserve_line_endings(self):
+        text = ' /* old evidence */\r\n/* more */\r\n\r\n#include "x.h"\r\n/* function */\r\nint x;\r\n'
+        end, old = r.leading_comments(text)
+        self.assertEqual(old, 'old evidence\nmore')
+        header = 'New summary.\nRetained evidence: old evidence; more.'
+        result = r.replace_header(text, header)
+        self.assertTrue(result.endswith(text[end:]))
+        self.assertIn('/* function */', result)
+        self.assertEqual(result.count('/*'), 2)
+        self.assertNotIn('\n', result.replace('\r\n', ''))
+        self.assertEqual(r.replace_header(result, header), result)
+
+    def test_masm_header_consumes_semicolon_and_comment_blocks_only(self):
+        text = '; old\nCOMMENT !\nretained fact\n!\n\n_TEXT SEGMENT\n; procedure fact\n'
+        end, old = r.leading_comments(text, 'asm')
+        self.assertEqual(old, 'old\nretained fact')
+        result = r.replace_header(text, 'Summary.\nretained fact', 'asm')
+        self.assertEqual(result, '; Summary.\n; retained fact\n\n' + text[end:])
+
+    def test_header_delimiter_injection_and_unterminated_comments_are_refused(self):
+        for value in ('', 'bad */ int x;', '/* nested', 'bad\x00', 'non-ascii: \u00e9'):
+            with self.assertRaises(r.RenameError):
+                r.replace_header('int x;', value)
+        for text, lang in [('/* broken', 'c'), ('COMMENT ! broken', 'asm')]:
+            with self.assertRaises(r.RenameError):
+                r.replace_header(text, 'Summary.', lang)
+
     def test_c_tokens_literals_comments_and_preprocessor(self):
         text = ('int old, old_suffix; char *s = "old \\"old";\n'
                 "int ch = 'o'; /* old prose, `old`, old(), function old */\n"
@@ -153,6 +180,187 @@ class TransactionControls(unittest.TestCase):
         with redirect_stdout(output):
             code = r.run(rows or [row()], **kwargs)
         return code, output.getvalue()
+
+    def header_row(self):
+        return {'module': self.key, 'header': 'Header summary.\nNames and folders are inferred.\nWindows: SIMONE.',
+                'summary': 'Header summary.', 'windows_group': 'SIMONE',
+                'kind': 'descriptive', 'why': 'invented reviewed source evidence',
+                'evidence': [{'path': 'invented/source-evidence.json', 'fact': 'test fixture'}]}
+
+    def test_header_updates_annotations_pins_and_journal_with_fresh_proof(self):
+        operations = [self.header_row()]
+        code, output = self.run_batch(operations)
+        self.assertEqual(code, 0, output)
+        raw = (self.root / self.source).read_bytes()
+        self.assertTrue(raw.startswith(b'/*\n * Header summary.'))
+        self.assertTrue(raw.endswith(self.text.encode()))
+        for record in (self.read('src/program.json')['modules'][0],
+                       self.read('layout/manifest.json')['modules'][self.key]):
+            self.assertEqual(record['summary'], operations[0]['summary'])
+            self.assertEqual(record['windows_group'], 'SIMONE')
+            self.assertEqual(record['file_header']['text'], operations[0]['header'])
+            self.assertEqual(record['file_header']['evidence'], operations[0]['evidence'])
+            self.assertEqual(record['source_sha256'], canonical.sha(raw))
+        self.assertEqual(self.read('layout/symbols.json'), self.syms)
+        journal = self.read('evidence/promotions.jsonl')
+        self.assertEqual(journal['module'], 'ANNOTATE')
+        self.assertEqual(self.verifier.call_count, 2)
+        self.assertNotIn('#line', raw.decode())
+
+    def test_header_verify_only_stages_complete_ledger_without_publication(self):
+        before = self.snapshot()
+        code, output = self.run_batch([self.header_row()], verify_only=True)
+        self.assertEqual(code, 0, output)
+        self.assertEqual(before, self.snapshot())
+        report_path = next((self.root / 'build/scratch').glob('rename-*/result.json'))
+        report = json.loads(report_path.read_bytes())
+        self.assertFalse(report['published'])
+        self.assertEqual(report['modules_reproven'], [self.key])
+        staged = report_path.parent / 'proposed/layout/manifest.json'
+        self.assertEqual(json.loads(staged.read_bytes())['modules'][self.key]['summary'], 'Header summary.')
+
+    def test_header_refuses_live_contribution_change_even_if_claims_are_exact(self):
+        original = self.verify
+        def changed(text, *args, **kwargs):
+            result = original(text, *args, **kwargs)
+            if 'Header summary' in text:
+                result['contribution_sha256'] = 'changed ordered fixups'
+            return result
+        self.verifier.side_effect = changed
+        before = self.snapshot()
+        code, output = self.run_batch([self.header_row()], verify_only=True)
+        self.assertEqual(code, 1)
+        self.assertIn('live compiler contributions', output)
+        self.assertEqual(before, self.snapshot())
+
+    def test_header_failure_keeps_peer_claims_and_all_canonical_files(self):
+        self.fail_when = lambda text: 'Header summary' in text
+        before = self.snapshot()
+        code, output = self.run_batch([self.header_row()], verify_only=True)
+        self.assertEqual(code, 1, output)
+        self.assertIn('first differing bytes', output)
+        self.assertEqual(before, self.snapshot())
+        self.assertEqual([c['name'] for c in self.verifier.call_args_list[1].args[2]], ['old', 'peer'])
+
+    def test_header_source_owned_storage_does_not_invent_historical_module(self):
+        self.man['modules'] = {}
+        self.program['modules'][0]['storage_contract'] = {'data_only': True}
+        self.persist()
+        session = r.Session(self.root / 'unused')
+        rows = session.validate_rows([self.header_row()])
+        mapping, changed, program, man, registry = session.prepare(rows)
+        self.assertFalse(man['modules'])
+        self.assertEqual(man['source_annotations'][self.key]['windows_group'], 'SIMONE')
+        self.assertEqual(program['modules'][0]['summary'], 'Header summary.')
+        self.assertEqual(program['modules'][0]['source_sha256'], canonical.sha(changed[self.key]))
+        self.assertEqual(registry, self.syms)
+        self.assertEqual(mapping, {})
+
+    def test_header_publication_failure_rolls_back_sources_and_metadata(self):
+        before = self.snapshot()
+        original = r.os.replace
+        def failing(source, target):
+            if str(target).endswith('symbols.json'):
+                raise OSError('header publication failure')
+            return original(source, target)
+        with patch.object(r.os, 'replace', side_effect=failing):
+            with self.assertRaisesRegex(OSError, 'header publication failure'):
+                self.run_batch([self.header_row()])
+        self.assertEqual(before, self.snapshot())
+
+    def test_header_batches_reject_duplicates_mixed_operations_and_false_name_kind(self):
+        header = self.header_row()
+        self.module['source_name_kind'] = 'descriptive'
+        self.persist()
+        for operations in ([header, header], [header, row()], [{**header, 'module': 'missing'}],
+                           [{**header, 'kind': 'recovered'}], [{**header, 'windows_group': 'GUESS'}]):
+            with self.assertRaises(r.RenameError):
+                self.run_batch(operations, verify_only=True)
+
+    def test_header_cli_and_scratch_parent(self):
+        batch = self.root / 'headers.json'
+        batch.write_text(json.dumps([self.header_row()]))
+        with patch.object(r, 'run', return_value=0) as run:
+            self.assertEqual(r.main(['--headers', str(batch), '--verify-only', '--scratch-parent',
+                                     str(self.root / 'build/workers/file-headers')]), 0)
+        self.assertEqual(run.call_args.args[0], [self.header_row()])
+        self.assertTrue(run.call_args.kwargs['verify_only'])
+        self.assertEqual(run.call_args.kwargs['scratch_parent'], self.root / 'build/workers/file-headers')
+
+    def test_header_translates_only_opaque_lint_line_locations(self):
+        original = self.verify
+        bad = [False]
+        def lint_location(text, *args, **kwargs):
+            result = original(text, *args, **kwargs)
+            line = 2 + text.count('\n') - self.text.count('\n')
+            result['opaque_data'] = [{'line': line, 'bytes': 64, 'marked': False, 'what': 'table'}]
+            if bad[0] and 'Header summary' in text:
+                result['opaque_data'][0]['bytes'] = 65
+            return result
+        self.verifier.side_effect = lint_location
+        before = self.snapshot()
+        code, output = self.run_batch([self.header_row()], verify_only=True)
+        self.assertEqual(code, 0, output)
+        self.assertEqual(before, self.snapshot())
+        bad[0] = True
+        code, output = self.run_batch([self.header_row()], verify_only=True)
+        self.assertEqual(code, 1, output)
+        self.assertEqual(before, self.snapshot())
+
+    def test_relative_scratch_parent_produces_absolute_dos_tool_mount(self):
+        self.write('fake-tools/BIN/CL.EXE', b'invented compiler')
+        profile = {'directory': str(self.root / 'fake-tools'),
+                   'files': {'BIN/CL.EXE': canonical.sha(b'invented compiler')}}
+        original = self.verify
+        def tool_mount(*args, **kwargs):
+            tree = r.compiler.pinned_tree(profile)
+            self.assertTrue(tree.is_absolute())
+            self.assertEqual((tree / 'BIN/CL.EXE').read_bytes(), b'invented compiler')
+            return original(*args, **kwargs)
+        self.verifier.side_effect = tool_mount
+        previous = Path.cwd()
+        try:
+            r.os.chdir(self.root)
+            code, output = self.run_batch([self.header_row()], verify_only=True,
+                                         scratch_parent=Path('build/workers/file-headers'))
+        finally:
+            r.os.chdir(previous)
+        self.assertEqual(code, 0, output)
+
+    def test_header_refuses_disagreement_between_text_and_ledger(self):
+        for extra in ({'summary': 'Absent summary.'}, {'windows_group': 'GR'}):
+            with self.assertRaisesRegex(r.RenameError, 'recorded summary and Windows group'):
+                self.run_batch([{**self.header_row(), **extra}], verify_only=True)
+
+    def test_header_predecessor_pin_and_verify_only_concurrent_edit_are_protected(self):
+        with self.assertRaisesRegex(r.RenameError, 'header predecessor source pin differs'):
+            self.run_batch([{**self.header_row(), 'source_sha256': 'stale'}], verify_only=True)
+        original = r.Session.stage_metadata
+        def concurrent(session, rows, outcome):
+            result = original(session, rows, outcome)
+            self.write(self.source, self.text + '/* concurrent */')
+            return result
+        with patch.object(r.Session, 'stage_metadata', concurrent):
+            with self.assertRaisesRegex(r.RenameError, 'canonical input changed during rename'):
+                self.run_batch([self.header_row()], verify_only=True)
+        self.assertTrue((self.root / self.source).read_text().endswith('/* concurrent */'))
+
+    def test_header_preserves_existing_semantic_review_without_rewriting_it(self):
+        semantic = {'function': 'peer', 'module': self.key, 'status': 'BEHAVIOR_EXACT_CONFIRMED',
+                    'definition_sha256': canonical.definition_sha(self.text, 'peer'), 'receipt': 'evidence/peer.json'}
+        self.program['semantics'] = [semantic]
+        self.write(semantic['receipt'], json.dumps({
+            'schema': 'simant-canonical-semantic-review-v1', **semantic,
+            'audit': {'status': 'BEHAVIOR_EXACT_CONFIRMED', 'unexplained_semantic_differences': []},
+            'root_review': {'reviewer': 'root', 'complete_cfg': True, 'complete_data_widths': True,
+                            'complete_calls_effects': True, 'codegen_only_residue': True}}))
+        self.persist()
+        before = (self.root / semantic['receipt']).read_bytes()
+        code, output = self.run_batch([self.header_row()])
+        self.assertEqual(code, 0, output)
+        self.assertEqual(self.read('src/program.json')['semantics'], [semantic])
+        self.assertEqual((self.root / semantic['receipt']).read_bytes(), before)
+        canonical.check_semantic_review(semantic, (self.root / self.source).read_text())
 
     def test_success_updates_all_ledgers_and_journal_once(self):
         code, output = self.run_batch([row(kind='recovered')])

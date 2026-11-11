@@ -45,13 +45,13 @@ extern int far mapXsize;
 extern int far mapYsize;
 extern void (far * far fd_50F6_38B8)();
 extern void (far * far fd_50F6_38BC)();
-extern void far o00_3126_0000();
-extern void far o00_3126_0137();
-extern void far o03_3253_0008();
+extern void far gfx_planar_map128_pack2();
+extern void far gfx_planar_map64_pack2();
+extern void far gfx_tandy_map_duplicate_rows();
 extern void far WindowsMono_MakeTable4x4a();
 extern void far WindowsMono_MakeTable4x4b();
-extern void far o00_3126_026A();
-extern void far o00_3126_03A9();
+extern void far gfx_planar_map128_pack4();
+extern void far gfx_planar_map64_pack4();
 
 void far InitMapFunctions(void)
 {
@@ -62,14 +62,14 @@ void far InitMapFunctions(void)
     case 8:
         mapXsize = 4;
         mapYsize = 4;
-        fd_50F6_38B8 = o00_3126_0000;
-        fd_50F6_38BC = o00_3126_0137;
+        fd_50F6_38B8 = gfx_planar_map128_pack2;
+        fd_50F6_38BC = gfx_planar_map64_pack2;
         break;
     case 2:
         mapXsize = 2;
         mapYsize = 2;
-        fd_50F6_38B8 = o03_3253_0008;
-        fd_50F6_38BC = o03_3253_0008;
+        fd_50F6_38B8 = gfx_tandy_map_duplicate_rows;
+        fd_50F6_38BC = gfx_tandy_map_duplicate_rows;
         break;
     case 3:
     case 5:
@@ -82,8 +82,8 @@ void far InitMapFunctions(void)
     case 4:
         mapXsize = 2;
         mapYsize = 2;
-        fd_50F6_38B8 = o00_3126_026A;
-        fd_50F6_38BC = o00_3126_03A9;
+        fd_50F6_38B8 = gfx_planar_map128_pack4;
+        fd_50F6_38BC = gfx_planar_map64_pack4;
         break;
     }
 }
@@ -287,7 +287,7 @@ extern unsigned char far bw_LTab[];
 extern unsigned char far bw_HTab[];
 extern unsigned char far bw_CTab[];
 
-void far o12_384C_0432(void)
+void far map_generate_surface_colours(void)
 {
     int fresh;
     unsigned char far *buf;
@@ -341,7 +341,7 @@ void far o12_384C_0432(void)
 }
 
 
-void far o12_384C_0706(unsigned char far *src)
+void far map_expand_scent_colours(unsigned char far *src)
 {
     unsigned char far *buf;
     int x, y, i;
@@ -380,7 +380,7 @@ extern unsigned char far MapB[64][64];
 extern unsigned char far bw_CTabR[];
 extern unsigned char far CTabR[];
 
-void far o12_384C_080E(void)
+void far map_generate_nest_colours(void)
 {
     int fresh;
     unsigned char far *buf;
@@ -499,7 +499,7 @@ void far DrawMapSpider(int x, int y, int kind);
 void far DrawMapFoot(void);
 extern void far mem_Free(char far * far *handle);
 
-void far o12_384C_0B76(void)
+void far map_render_immediate(void)
 {
     int n, row, off, y, sx, sy;
     char far *img;
@@ -521,28 +521,28 @@ void far o12_384C_0B76(void)
         Punt("Draw map - yard");
         break;
     case 1:
-        o12_384C_0432();
+        map_generate_surface_colours();
         break;
     case 2:
     case 3:
-        o12_384C_080E();
+        map_generate_nest_colours();
         multiplier = 0x40;
         fd_50F6_38C0 = mapXsize << 5;
         break;
     case 4:
-        o12_384C_0706(PherMapBN);
+        map_expand_scent_colours(PherMapBN);
         break;
     case 5:
-        o12_384C_0706(PherMapBT);
+        map_expand_scent_colours(PherMapBT);
         break;
     case 6:
-        o12_384C_0706(PherMapRN);
+        map_expand_scent_colours(PherMapRN);
         break;
     case 7:
-        o12_384C_0706(PherMapRT);
+        map_expand_scent_colours(PherMapRT);
         break;
     case 8:
-        o12_384C_0706(PherMapA);
+        map_expand_scent_colours(PherMapA);
         break;
     }
     n = (fd_50F6_10D2.bottom - fd_50F6_10D2.top) / mapYsize;
@@ -609,7 +609,7 @@ void far DrawMap(void)
 {
     if (win_IsWinOpen(0x100)) {
         clip_SetWin(0x100);
-        o12_384C_0B76();
+        map_render_immediate();
         DrawMapData();
         clip_Off();
     }
@@ -631,7 +631,7 @@ void far win_DrawMapWindow(int flags)
             win_MapChanged();
             clip_SetWin(0x100);
             DrawMapData();
-            o12_384C_0B76();
+            map_render_immediate();
             id = CurGameType == 3 ? CurExpTool + 0x13ec : 0x13f3;
             win_SetColorFromObjNum(0x117);
             win_DrawBitMapAtObjNum(0x117, id);

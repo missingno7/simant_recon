@@ -59,11 +59,11 @@ _DATA	segment word public 'DATA'
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_f_1B4E_015B:far
-	extrn	_f_1B4E_0165:far
-	extrn	_f_1B73_00D9:far
-	extrn	_f_1B73_0196:far
-	extrn	_f_1B73_04BB:far
+	extrn	_gfx_video_bios_ax:far
+	extrn	_gfx_install_driver_callbacks:far
+	extrn	_mouse_show_cursor:far
+	extrn	_mouse_hide_cursor:far
+	extrn	_mouse_refresh_cursor:far
 	extrn	_f_1D8E_0384:far
 	extrn	_f_1D8E_0435:far
 	extrn	_f_1D8E_070E:far
@@ -72,65 +72,65 @@ DGROUP	group	_DATA
 S00B_TEXT	segment word public 'CODE'
 	assume	cs:S00B_TEXT, ds:DGROUP
 
-	public	_o00_31AD_0004
-	public	_o00_31AD_001C
-	public	_GPatBox
-	public	_o00_31AD_013A
-	public	_GInvBox
-	public	_o00_31AD_0394
-	public	_GPicSize
-	public	_o00_31AD_0550
-	public	_o00_31AD_062A
-	public	_o00_31AD_062E
-	public	_o00_31AD_0632
-	public	_o00_31AD_0636
-	public	_o00_31AD_063C
-	public	_o00_31AD_0647
-	public	_o00_31AD_0839
-	public	_GPutPicS
-	public	_o00_31AD_0D06
-	public	_o00_31AD_0F56
-	public	_o00_31AD_1002
-	public	_o00_31AD_1065
-	public	_o00_31AD_110C
-	public	_GImgSize
-	public	_GPutImgS
-	public	_o00_31AD_1213
-	public	_o00_31AD_142B
-	public	_o00_31AD_145E
-	public	_o00_31AD_1468
-	public	_o00_31AD_1481
-	public	_GLine
-	public	_o00_31AD_1499
-	public	_GSetAttrib
-	public	_o00_31AD_166A
-	public	_o00_31AD_168C
-	public	_GBoxFill
-	public	_o00_31AD_16E4
-	public	_o00_31AD_16FC
-	public	_o00_31AD_186A
-	public	_o00_31AD_18BA
-	public	_o00_31AD_1950
-	public	_o00_31AD_1A8F
-	public	_o00_31AD_1AC4
-	public	_o00_31AD_1AE7
-	public	_o00_31AD_1B49
-	public	_o00_31AD_1B7D
+	public	_gfx_planar_dither_box
+	public	_gfx_planar_dither_box_raw
+	public	_gfx_planar_gpatbox
+	public	_gfx_planar_pattern_box_raw
+	public	_gfx_planar_ginvbox
+	public	_gfx_planar_invert_box_raw
+	public	_gfx_planar_gpicsize
+	public	_gfx_planar_capture_box
+	public	_gfx_planar_set_or
+	public	_gfx_planar_set_xor
+	public	_gfx_planar_set_and
+	public	_gfx_planar_set_copy
+	public	_gfx_planar_set_raster_op
+	public	_gfx_planar_put_cached_tile
+	public	_gfx_planar_mask_tile_to_screen
+	public	_gfx_planar_gputpics
+	public	_gfx_planar_put_picture_raw
+	public	_gfx_planar_prepare_bitmap_row
+	public	_gfx_planar_blit_row_rop
+	public	_gfx_planar_blit_row_copy
+	public	_gfx_planar_shift_and_blit_row
+	public	_gfx_planar_gimgsize
+	public	_gfx_planar_gputimgs
+	public	_gfx_planar_put_image_raw
+	public	_gfx_planar_reset_gc
+	public	_gfx_planar_install_dispatch
+	public	_gfx_planar_video_capacity
+	public	_gfx_planar_restore_text_mode
+	public	_gfx_planar_gline
+	public	_gfx_planar_draw_line_raw
+	public	_gfx_planar_gsetattrib
+	public	_gfx_planar_select_small_font
+	public	_gfx_planar_select_big_font
+	public	_gfx_planar_gboxfill
+	public	_gfx_planar_fill_box_unsorted
+	public	_gfx_planar_fill_box_raw
+	public	_gfx_planar_upload_plane
+	public	_gfx_planar_upload_tiles
+	public	_gfx_planar_move_box
+	public	_gfx_planar_read_tile_plane
+	public	_gfx_planar_select_tiny_font
+	public	_gfx_planar_init_320x200
+	public	_gfx_planar_draw_life_320
+	public	_gfx_planar_compose_life_320
 
-_o00_31AD_0004	proc	far
+_gfx_planar_dither_box	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o00_31AD_001C
+	je _gfx_planar_dither_box_raw
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, OFFSET _o00_31AD_001C
+	mov ax, OFFSET _gfx_planar_dither_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_o00_31AD_0004	endp
+_gfx_planar_dither_box	endp
 
-_o00_31AD_001C	proc	far
+_gfx_planar_dither_box_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 4
@@ -151,7 +151,7 @@ _o00_31AD_001C	proc	far
 	jg L0058
 	cmp dx, word ptr _g_4340
 	jl L0058
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0058:
 	mov ax, word ptr [bp+6]
 	cmp ax, word ptr [bp+0Ah]
@@ -229,12 +229,12 @@ L0074:
 	je L010C
 	test byte ptr _g_4331, 0FFh
 	je L0118
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0118
 L010C:
 	test byte ptr _g_4366, 0FFh
 	jne L0118
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0118:
 	dec byte ptr _g_3DD4
 	pop di
@@ -242,22 +242,22 @@ L0118:
 	mov sp, bp
 	pop bp
 	retf
-_o00_31AD_001C	endp
+_gfx_planar_dither_box_raw	endp
 
-_GPatBox	proc	far
+_gfx_planar_gpatbox	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o00_31AD_013A
+	je _gfx_planar_pattern_box_raw
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, OFFSET _o00_31AD_013A
+	mov ax, OFFSET _gfx_planar_pattern_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_GPatBox	endp
+_gfx_planar_gpatbox	endp
 
-_o00_31AD_013A	proc	far
+_gfx_planar_pattern_box_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 4
@@ -290,7 +290,7 @@ L015E:
 	jg L0192
 	cmp dx, word ptr _g_4340
 	jl L0192
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0192:
 	mov al, 0
 	mov dx, 3CEh
@@ -380,12 +380,12 @@ L0192:
 	je L0260
 	test byte ptr _g_4331, 0FFh
 	je L026C
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L026C
 L0260:
 	test byte ptr _g_4366, 0FFh
 	jne L026C
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L026C:
 	dec byte ptr _g_3DD4
 	pop di
@@ -541,22 +541,22 @@ L0378:
 	and bh, bh
 L037A:
 	not bh
-_o00_31AD_013A	endp
+_gfx_planar_pattern_box_raw	endp
 
-_GInvBox	proc	far
+_gfx_planar_ginvbox	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o00_31AD_0394
+	je _gfx_planar_invert_box_raw
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, OFFSET _o00_31AD_0394
+	mov ax, OFFSET _gfx_planar_invert_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_GInvBox	endp
+_gfx_planar_ginvbox	endp
 
-_o00_31AD_0394	proc	far
+_gfx_planar_invert_box_raw	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -576,7 +576,7 @@ _o00_31AD_0394	proc	far
 	jg L03CD
 	cmp dx, word ptr _g_4340
 	jl L03CD
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L03CD:
 	mov ax, word ptr [bp+6]
 	cmp ax, word ptr [bp+0Ah]
@@ -590,7 +590,7 @@ L03DB:
 	xchg word ptr [bp+0Ch], ax
 	xchg word ptr [bp+8], ax
 L03E9:
-	call far ptr _o00_31AD_142B
+	call far ptr _gfx_planar_reset_gc
 	mov al, 3
 	mov dx, 3CEh
 	out dx, al
@@ -734,21 +734,21 @@ L04DE:
 	je L050E
 	test byte ptr _g_4331, 0FFh
 	je L051A
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L051A
 L050E:
 	test byte ptr _g_4366, 0FFh
 	jne L051A
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L051A:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o00_31AD_0394	endp
+_gfx_planar_invert_box_raw	endp
 
-_GPicSize	proc	far
+_gfx_planar_gpicsize	proc	far
 	push bp
 	mov bp, sp
 	call near ptr L0537
@@ -773,9 +773,9 @@ L0537:
 	sub bx, word ptr [bp+8]
 	mul bx
 	retn
-_GPicSize	endp
+_gfx_planar_gpicsize	endp
 
-_o00_31AD_0550	proc	far
+_gfx_planar_capture_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -796,7 +796,7 @@ _o00_31AD_0550	proc	far
 	jg L058A
 	cmp dx, word ptr _g_4340
 	jl L058A
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L058A:
 	les di, dword ptr [bp+0Eh]
 	mov bx, word ptr _g_3DB6
@@ -863,52 +863,52 @@ L05DF:
 	je L0616
 	test byte ptr _g_4331, 0FFh
 	je L0622
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0622
 L0616:
 	test byte ptr _g_4366, 0FFh
 	jne L0622
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0622:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o00_31AD_0550	endp
+_gfx_planar_capture_box	endp
 
-_o00_31AD_062A	proc	far
+_gfx_planar_set_or	proc	far
 	mov al, 10h
 	jmp short L0638
-_o00_31AD_062A	endp
+_gfx_planar_set_or	endp
 
-_o00_31AD_062E	proc	far
+_gfx_planar_set_xor	proc	far
 	mov al, 18h
 	jmp short L0638
-_o00_31AD_062E	endp
+_gfx_planar_set_xor	endp
 
-_o00_31AD_0632	proc	far
+_gfx_planar_set_and	proc	far
 	mov al, 8
 	jmp short L0638
-_o00_31AD_0632	endp
+_gfx_planar_set_and	endp
 
-_o00_31AD_0636	proc	far
+_gfx_planar_set_copy	proc	far
 	xor al, al
 L0638:
 	mov byte ptr _g_3DD2, al
 	retf
-_o00_31AD_0636	endp
+_gfx_planar_set_copy	endp
 
-_o00_31AD_063C	proc	far
+_gfx_planar_set_raster_op	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
 	mov byte ptr _g_3DD2, al
 	pop bp
 	retf
-_o00_31AD_063C	endp
+_gfx_planar_set_raster_op	endp
 
-_o00_31AD_0647	proc	far
+_gfx_planar_put_cached_tile	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 82h
@@ -1002,7 +1002,7 @@ L06CB:
 	push word ptr [bp+8]
 	push word ptr [bp+6]
 	push cs
-	call near ptr _GPutPicS
+	call near ptr _gfx_planar_gputpics
 	add sp, 0Ch
 	push ds
 	jmp L066B
@@ -1026,7 +1026,7 @@ L0708:
 	jg L0740
 	cmp dx, word ptr _g_4340
 	jl L0740
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0740:
 	push ds
 	mov al, 2
@@ -1173,12 +1173,12 @@ L0740:
 	je L0823
 	test byte ptr _g_4331, 0FFh
 	je L082F
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L082F
 L0823:
 	test byte ptr _g_4366, 0FFh
 	jne L082F
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L082F:
 	dec byte ptr _g_3DD4
 L0833:
@@ -1187,9 +1187,9 @@ L0833:
 	mov sp, bp
 	pop bp
 	retf
-_o00_31AD_0647	endp
+_gfx_planar_put_cached_tile	endp
 
-_o00_31AD_0839	proc	far
+_gfx_planar_mask_tile_to_screen	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1897,23 +1897,23 @@ _o00_31AD_0839	proc	far
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _GPutPicS
+	call far ptr _gfx_planar_gputpics
 	add sp, 0Ch
 	pop di
 	pop si
 	pop bp
 	retf
-_o00_31AD_0839	endp
+_gfx_planar_mask_tile_to_screen	endp
 
-_GPutPicS	proc	far
+_gfx_planar_gputpics	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o00_31AD_0D06
+	je _gfx_planar_put_picture_raw
 	call far ptr _f_1D8E_07F6
 	retf
-_GPutPicS	endp
+_gfx_planar_gputpics	endp
 
-_o00_31AD_0D06	proc	far
+_gfx_planar_put_picture_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -1939,7 +1939,7 @@ _o00_31AD_0D06	proc	far
 	jg L0D4F
 	cmp dx, word ptr _g_4340
 	jl L0D4F
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0D4F:
 	mov di, word ptr [bp+8]
 	add di, di
@@ -2099,7 +2099,7 @@ L0E85:
 	mov al, ah
 	out dx, al
 	push di
-	call near ptr _o00_31AD_1002
+	call near ptr _gfx_planar_blit_row_rop
 	pop di
 	shl ah, 1
 	cmp ah, 10h
@@ -2113,7 +2113,7 @@ L0E85:
 L0EA7:
 	sar ax, cl
 	add di, ax
-	call near ptr _o00_31AD_0F56
+	call near ptr _gfx_planar_prepare_bitmap_row
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-2], dx
 	assume ss:DGROUP
@@ -2130,7 +2130,7 @@ L0EBE:
 	mov al, ah
 	out dx, al
 	push di
-	call near ptr _o00_31AD_1065
+	call near ptr _gfx_planar_blit_row_copy
 	pop di
 	shl ah, 1
 	cmp ah, 10h
@@ -2160,12 +2160,12 @@ L0EDE:
 	je L0F0F
 	test byte ptr _g_4331, 0FFh
 	je L0F1B
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0F1B
 L0F0F:
 	test byte ptr _g_4366, 0FFh
 	jne L0F1B
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0F1B:
 	dec byte ptr _g_3DD4
 	pop di
@@ -2176,7 +2176,7 @@ L0F1B:
 L0F25:
 	sar ax, cl
 	add di, ax
-	call near ptr _o00_31AD_0F56
+	call near ptr _gfx_planar_prepare_bitmap_row
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-2], dx
 L0F32:
@@ -2189,7 +2189,7 @@ L0F34:
 	mov al, ah
 	out dx, al
 	push di
-	call near ptr _o00_31AD_110C
+	call near ptr _gfx_planar_shift_and_blit_row
 	pop di
 	shl ah, 1
 	cmp ah, 10h
@@ -2200,9 +2200,9 @@ L0F34:
 	dec word ptr [bp-2]
 	jne L0F32
 	jmp L0EDE
-_o00_31AD_0D06	endp
+_gfx_planar_put_picture_raw	endp
 
-_o00_31AD_0F56	proc	far
+_gfx_planar_prepare_bitmap_row	proc	far
 	assume ss:DGROUP
 	mov ch, byte ptr ss:_g_3DD2
 	assume ss:nothing
@@ -2274,9 +2274,9 @@ L0FF0:
 	assume ss:nothing
 	add si, ax
 	retn
-_o00_31AD_0F56	endp
+_gfx_planar_prepare_bitmap_row	endp
 
-_o00_31AD_1002	proc	far
+_gfx_planar_blit_row_rop	proc	far
 	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
 	assume ss:nothing
@@ -2340,9 +2340,9 @@ L105F:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o00_31AD_1002	endp
+_gfx_planar_blit_row_rop	endp
 
-_o00_31AD_1065	proc	far
+_gfx_planar_blit_row_copy	proc	far
 	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
 	assume ss:nothing
@@ -2427,9 +2427,9 @@ L1108:
 	and al, al
 L110A:
 	not al
-_o00_31AD_1065	endp
+_gfx_planar_blit_row_copy	endp
 
-_o00_31AD_110C	proc	far
+_gfx_planar_shift_and_blit_row	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 52h
@@ -2574,26 +2574,26 @@ L11F5:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o00_31AD_110C	endp
+_gfx_planar_shift_and_blit_row	endp
 
-_GImgSize	proc	far
+_gfx_planar_gimgsize	proc	far
 	push bp
 	mov bp, sp
 	call near ptr L0537
 	add ax, 4
 	pop bp
 	retf
-_GImgSize	endp
+_gfx_planar_gimgsize	endp
 
-_GPutImgS	proc	far
+_gfx_planar_gputimgs	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o00_31AD_1213
+	je _gfx_planar_put_image_raw
 	call far ptr _f_1D8E_070E
 	retf
-_GPutImgS	endp
+_gfx_planar_gputimgs	endp
 
-_o00_31AD_1213	proc	far
+_gfx_planar_put_image_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ah
@@ -2619,7 +2619,7 @@ _o00_31AD_1213	proc	far
 	jg L125C
 	cmp dx, word ptr _g_4340
 	jl L125C
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L125C:
 	mov al, byte ptr __foreColor
 	mov byte ptr [bp-2], al
@@ -2635,7 +2635,7 @@ L125C:
 	add di, ax
 	mov ax, word ptr _g_3DB6
 	mov word ptr [bp-8], ax
-	call near ptr _o00_31AD_0F56
+	call near ptr _gfx_planar_prepare_bitmap_row
 	sub byte ptr [bp-8], bl
 	test word ptr [bp+6], 7
 	je L1295
@@ -2658,7 +2658,7 @@ L1295:
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-6], dx
 L12B6:
-	call near ptr _o00_31AD_1002
+	call near ptr _gfx_planar_blit_row_rop
 	add di, word ptr [bp-8]
 	dec word ptr [bp-6]
 	jne L12B6
@@ -2681,7 +2681,7 @@ L12C3:
 	mov word ptr [bp-6], dx
 	call near ptr L10EB
 L12E4:
-	call near ptr _o00_31AD_1002
+	call near ptr _gfx_planar_blit_row_rop
 	add di, word ptr [bp-8]
 	dec word ptr [bp-6]
 	jne L12E4
@@ -2754,12 +2754,12 @@ L1357:
 	je L137E
 	test byte ptr _g_4331, 0FFh
 	je L138A
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L138A
 L137E:
 	test byte ptr _g_4366, 0FFh
 	jne L138A
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L138A:
 	dec byte ptr _g_3DD4
 	pop di
@@ -2787,7 +2787,7 @@ L1394:
 	mov word ptr [bp-6], dx
 L13B8:
 	mov di, word ptr [bp-0Ah]
-	call near ptr _o00_31AD_110C
+	call near ptr _gfx_planar_shift_and_blit_row
 	assume ss:DGROUP
 	mov cx, word ptr ss:_g_3DB6
 	assume ss:nothing
@@ -2815,7 +2815,7 @@ L13CD:
 	call near ptr L10EB
 L13F1:
 	mov di, word ptr [bp-0Ah]
-	call near ptr _o00_31AD_110C
+	call near ptr _gfx_planar_shift_and_blit_row
 	assume ss:DGROUP
 	mov cx, word ptr ss:_g_3DB6
 	assume ss:nothing
@@ -2837,16 +2837,16 @@ L1408:
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-6], dx
 L141D:
-	call near ptr _o00_31AD_1002
+	call near ptr _gfx_planar_blit_row_rop
 	add di, word ptr [bp-8]
 	dec word ptr [bp-6]
 	jne L141D
 	pop si
 	pop di
 	retn
-_o00_31AD_1213	endp
+_gfx_planar_put_image_raw	endp
 
-_o00_31AD_142B	proc	far
+_gfx_planar_reset_gc	proc	far
 	mov al, 5
 	mov dx, 3CEh
 	out dx, al
@@ -2878,15 +2878,15 @@ _o00_31AD_142B	proc	far
 	mov al, 0
 	out dx, al
 	retf
-_o00_31AD_142B	endp
+_gfx_planar_reset_gc	endp
 
-_o00_31AD_145E	proc	far
+_gfx_planar_install_dispatch	proc	far
 	les si, dword ptr _g_20FC
-	call far ptr _f_1B4E_0165
+	call far ptr _gfx_install_driver_callbacks
 	retf
-_o00_31AD_145E	endp
+_gfx_planar_install_dispatch	endp
 
-_o00_31AD_1468	proc	far
+_gfx_planar_video_capacity	proc	far
 	xor ax, ax
 	mov es, ax
 	mov bl, byte ptr es:[487h]
@@ -2897,25 +2897,25 @@ _o00_31AD_1468	proc	far
 	les ax, dword ptr [bx+_g_2078]
 	mov dx, es
 	retf
-_o00_31AD_1468	endp
+_gfx_planar_video_capacity	endp
 
-_o00_31AD_1481	proc	far
+_gfx_planar_restore_text_mode	proc	far
 	mov ax, 3
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	retf
-_o00_31AD_1481	endp
+_gfx_planar_restore_text_mode	endp
 
-_GLine	proc	far
+_gfx_planar_gline	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o00_31AD_1499
+	je _gfx_planar_draw_line_raw
 	call far ptr _f_1D8E_0435
 	retf
-_GLine	endp
+_gfx_planar_gline	endp
 
-_o00_31AD_1499	proc	far
+_gfx_planar_draw_line_raw	proc	far
 	push bp
 	mov bp, sp
 	inc byte ptr _g_3DD4
@@ -2941,7 +2941,7 @@ L14C9:
 	jg L14DA
 	cmp dx, word ptr _g_4340
 	jl L14DA
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L14DA:
 	mov cx, word ptr [bp+8]
 	cmp cx, word ptr [bp+0Ch]
@@ -3053,12 +3053,12 @@ L1592:
 	je L15C7
 	test byte ptr _g_4331, 0FFh
 	je L15D3
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L15D3
 L15C7:
 	test byte ptr _g_4366, 0FFh
 	jne L15D3
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L15D3:
 	dec byte ptr _g_3DD4
 	retf
@@ -3130,9 +3130,9 @@ L164F:
 	dec cx
 	jge L164F
 	retn
-_o00_31AD_1499	endp
+_gfx_planar_draw_line_raw	endp
 
-_GSetAttrib	proc	far
+_gfx_planar_gsetattrib	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
@@ -3141,9 +3141,9 @@ _GSetAttrib	proc	far
 	mov byte ptr _g_3DE2, al
 	pop bp
 	retf
-_GSetAttrib	endp
+_gfx_planar_gsetattrib	endp
 
-_o00_31AD_166A	proc	far
+_gfx_planar_select_small_font	proc	far
 	push bp
 	mov ax, 1130h
 	mov bh, 3
@@ -3155,9 +3155,9 @@ _o00_31AD_166A	proc	far
 	mov word ptr _g_3DDA, 8
 	pop bp
 	retf
-_o00_31AD_166A	endp
+_gfx_planar_select_small_font	endp
 
-_o00_31AD_168C	proc	far
+_gfx_planar_select_big_font	proc	far
 	push bp
 	mov ax, 1130h
 	mov bh, 2
@@ -3168,9 +3168,9 @@ _o00_31AD_168C	proc	far
 	mov word ptr _g_3DDA, 0Eh
 	pop bp
 	retf
-_o00_31AD_168C	endp
+_gfx_planar_select_big_font	endp
 
-_GBoxFill	proc	far
+_gfx_planar_gboxfill	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je L16C1
@@ -3199,22 +3199,22 @@ L16D4:
 	xchg word ptr [bp+8], ax
 L16E2:
 	jmp short L1702
-_GBoxFill	endp
+_gfx_planar_gboxfill	endp
 
-_o00_31AD_16E4	proc	far
+_gfx_planar_fill_box_unsorted	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o00_31AD_16FC
+	je _gfx_planar_fill_box_raw
 	mov ax, S00B_TEXT
 	push ax
-	mov ax, OFFSET _o00_31AD_16FC
+	mov ax, OFFSET _gfx_planar_fill_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_o00_31AD_16E4	endp
+_gfx_planar_fill_box_unsorted	endp
 
-_o00_31AD_16FC	proc	far
+_gfx_planar_fill_box_raw	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -3236,7 +3236,7 @@ L1702:
 	jg L1736
 	cmp dx, word ptr _g_4340
 	jl L1736
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L1736:
 	mov al, 2
 	mov dx, 3C4h
@@ -3378,21 +3378,21 @@ L1830:
 	je L1856
 	test byte ptr _g_4331, 0FFh
 	je L1862
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L1862
 L1856:
 	test byte ptr _g_4366, 0FFh
 	jne L1862
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L1862:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o00_31AD_16FC	endp
+_gfx_planar_fill_box_raw	endp
 
-_o00_31AD_186A	proc	far
+_gfx_planar_upload_plane	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -3437,16 +3437,16 @@ L18B1:
 	pop di
 	pop bp
 	retf
-_o00_31AD_186A	endp
+_gfx_planar_upload_plane	endp
 
-_o00_31AD_18BA	proc	far
+_gfx_planar_upload_tiles	proc	far
 	push bp
 	mov bp, sp
 	push si
 	push di
 	push ds
 	inc byte ptr _g_3DD4
-	call far ptr _o00_31AD_142B
+	call far ptr _gfx_planar_reset_gc
 	mov al, 1
 	mov dx, 3CEh
 	out dx, al
@@ -3518,9 +3518,9 @@ L18E2:
 	pop si
 	pop bp
 	retf
-_o00_31AD_18BA	endp
+_gfx_planar_upload_tiles	endp
 
-_o00_31AD_1950	proc	far
+_gfx_planar_move_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -3541,7 +3541,7 @@ _o00_31AD_1950	proc	far
 	jg L198D
 	cmp dx, word ptr _g_4340
 	jl L198D
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	jmp L19C0
 L198D:
 	mov ax, word ptr [bp+0Eh]
@@ -3560,7 +3560,7 @@ L198D:
 	jg L19C0
 	cmp dx, word ptr _g_4342
 	jl L19C0
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L19C0:
 	mov al, 8
 	mov dx, 3CEh
@@ -3650,21 +3650,21 @@ L1A48:
 	je L1A7B
 	test byte ptr _g_4331, 0FFh
 	je L1A87
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L1A87
 L1A7B:
 	test byte ptr _g_4366, 0FFh
 	jne L1A87
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L1A87:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o00_31AD_1950	endp
+_gfx_planar_move_box	endp
 
-_o00_31AD_1A8F	proc	far
+_gfx_planar_read_tile_plane	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -3693,9 +3693,9 @@ _o00_31AD_1A8F	proc	far
 	pop di
 	pop bp
 	retf
-_o00_31AD_1A8F	endp
+_gfx_planar_read_tile_plane	endp
 
-_o00_31AD_1AC4	proc	far
+_gfx_planar_select_tiny_font	proc	far
 	mov ax, word ptr _g_3DAA
 	and ax, ax
 	je L1AE6
@@ -3707,20 +3707,20 @@ _o00_31AD_1AC4	proc	far
 	mov word ptr _g_3DDA, 6
 L1AE6:
 	retf
-_o00_31AD_1AC4	endp
+_gfx_planar_select_tiny_font	endp
 
-_o00_31AD_1AE7	proc	far
+_gfx_planar_init_320x200	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 8
 	push si
 	push di
-	call far ptr _o00_31AD_145E
+	call far ptr _gfx_planar_install_dispatch
 	lea bx, _g_9130
-	mov ax, OFFSET _o00_31AD_166A
+	mov ax, OFFSET _gfx_planar_select_small_font
 	mov word ptr [bx], ax
 	lea bx, _g_912C
-	mov ax, OFFSET _o00_31AD_1AC4
+	mov ax, OFFSET _gfx_planar_select_tiny_font
 	mov word ptr [bx], ax
 	mov word ptr _g_3DB6, 28h
 	mov word ptr _g_3DB2, 140h
@@ -3735,7 +3735,7 @@ L1B22:
 	loop L1B22
 	mov ax, 0Dh
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	mov ax, ds
 	mov es, ax
@@ -3748,9 +3748,9 @@ L1B22:
 	mov sp, bp
 	pop bp
 	retf
-_o00_31AD_1AE7	endp
+_gfx_planar_init_320x200	endp
 
-_o00_31AD_1B49	proc	far
+_gfx_planar_draw_life_320	proc	far
 	push bp
 	mov bp, sp
 	push word ptr [bp+12h]
@@ -3759,7 +3759,7 @@ _o00_31AD_1B49	proc	far
 	push bx
 	push word ptr [bp+0Ch]
 	push word ptr [bp+0Ah]
-	call far ptr _o00_31AD_1B7D
+	call far ptr _gfx_planar_compose_life_320
 	add sp, 0Ah
 	mov ax, 10h
 	push ax
@@ -3769,13 +3769,13 @@ _o00_31AD_1B49	proc	far
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _GPutPicS
+	call far ptr _gfx_planar_gputpics
 	add sp, 0Ch
 	pop bp
 	retf
-_o00_31AD_1B49	endp
+_gfx_planar_draw_life_320	endp
 
-_o00_31AD_1B7D	proc	far
+_gfx_planar_compose_life_320	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -6030,7 +6030,7 @@ L2589:
 	pop bp
 	pop ds
 	jmp L2057
-_o00_31AD_1B7D	endp
+_gfx_planar_compose_life_320	endp
 
 S00B_TEXT	ends
 	end

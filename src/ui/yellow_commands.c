@@ -172,7 +172,7 @@ extern void far clip_Push(void);
 extern int _fastcall win_IsWinOpen(int win);
 extern void far clip_SetWin(int win);
 extern int far * near g_5AAC;
-extern void far f_0250_5058(void);
+extern void far edit_set_viewport_clip(void);
 extern int far ConvColor(int color);
 extern void (far * near g_916C)(int x0, int y0, int x1, int y1, int color);
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
@@ -205,7 +205,7 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
         if (win_IsWinOpen(0)) {
             clip_SetWin(0);
             if (g_5AAC[1] != 0x8000) {
-                f_0250_5058();
+                edit_set_viewport_clip();
                 originX = MapPnt.x * tileWidth - editTileRect.left;
                 originX = -originX;
                 originY = tileHeight * MapPnt.y - editTileRect.top;
@@ -802,7 +802,7 @@ void far LionDialog(void)
 
 extern void far win_PrintfAtObj(int obj, char far *fmt, ...);
 extern struct Pt far YellowEatPnt;
-extern int far f_1F58_0038(void);
+extern int far kbd_poll_bios_key(void);
 extern void far DialogWaitInit(int mode);
 extern int far DialogAbortOrCont(void);
 
@@ -839,7 +839,7 @@ void far YellowDialog(int bitmap, int promptIndex)
         myDelay(45L);
         break;
     }
-    if (!win_Events() && f_1F58_0038()) {
+    if (!win_Events() && kbd_poll_bios_key()) {
         DialogWaitInit(3);
         while (!DialogAbortOrCont() && !win_Events())
             ;

@@ -4,7 +4,7 @@
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in
 ; work/ovlA/probe), raster operations are selected by self-modifying code
 ; (instruction templates copied over loop instructions with "mov cs:[...],ax"), and near
-; subroutines return with retn inside far procs.  o01_3126_1637 reprograms the 6845 CRTC
+; subroutines return with retn inside far procs.  gfx_mono_set_mda_text reprograms the 6845 CRTC
 ; from the DGROUP table g_2190 and sets BIOS video mode 7 (Hercules/MDA text) directly.
 ; The far pointers to the 25 entries live in the DGROUP dispatch table at 211A (not reconstructed here).
 
@@ -54,35 +54,35 @@ _DATA	segment word public 'DATA'
 	extrn	_g_9188:byte
 ; S01 private data (DGROUP:2118-219B): raster scratch byte, the dispatch table the game
 ; calls through, a far pointer to it, the text-mode page word and the 6845 CRTC tables
-; (o01_3126_1637 programs the CRTC from _g_2190).
+; (gfx_mono_set_mda_text programs the CRTC from _g_2190).
 _g_2118	db	0
 	db	0
 DispatchS01	label	dword
-	dd	_o01_3126_0167
-	dd	_o01_3126_019A
-	dd	_o01_3126_01B2
-	dd	_o01_3126_024C
-	dd	_o01_3126_024C
-	dd	_o01_3126_0414
-	dd	_o01_3126_0437
-	dd	_o01_3126_0437
-	dd	_o01_3126_045D
-	dd	_o01_3126_073C
-	dd	_o01_3126_0749
-	dd	_o01_3126_0516
-	dd	_o01_3126_0523
-	dd	_o01_3126_0B26
-	dd	_o01_3126_0A20
-	dd	_o01_3126_0ACC
-	dd	_o01_3126_0A7A
-	dd	_o01_3126_0C7A
-	dd	_o01_3126_0C87
-	dd	_o01_3126_01CA
-	dd	_o01_3126_0F78
-	dd	_o01_3126_0F66
-	dd	_o01_3126_0F6F
-	dd	_o01_3126_0C53
-	dd	_o01_3126_109D
+	dd	_gfx_mono_gsetattrib
+	dd	_gfx_mono_select_small_font
+	dd	_gfx_mono_select_big_font
+	dd	_gfx_mono_fill_or_pattern_box
+	dd	_gfx_mono_fill_or_pattern_box
+	dd	_gfx_mono_ginvbox
+	dd	_gfx_mono_picture_size
+	dd	_gfx_mono_picture_size
+	dd	_gfx_mono_capture_box
+	dd	_gfx_mono_gputpics
+	dd	_gfx_mono_put_picture_raw
+	dd	_gfx_mono_gputimgs
+	dd	_gfx_mono_put_image_raw
+	dd	_gfx_mono_set_or
+	dd	_gfx_mono_set_xor
+	dd	_gfx_mono_set_and
+	dd	_gfx_mono_set_copy
+	dd	_gfx_mono_gline
+	dd	_gfx_mono_draw_line_raw
+	dd	_gfx_mono_dither_box
+	dd	_gfx_mono_restore_text_mode
+	dd	_gfx_mono_tile_noop
+	dd	_gfx_mono_reserved_noop
+	dd	_gfx_mono_set_raster_op
+	dd	_gfx_mono_move_box
 _g_217E	dd	DGROUP:DispatchS01
 _g_2182	dw	0010h
 _g_2184	db	035h, 02Dh, 02Eh, 7, 05Bh, 2, 057h, 057h, 2, 3, 0, 0
@@ -90,11 +90,11 @@ _g_2190	db	061h, 050h, 052h, 00Fh, 019h, 6, 019h, 019h, 2, 00Dh, 00Bh, 00Ch
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_f_1B4E_015B:far
-	extrn	_f_1B4E_0165:far
-	extrn	_f_1B73_00D9:far
-	extrn	_f_1B73_0196:far
-	extrn	_f_1B73_04BB:far
+	extrn	_gfx_video_bios_ax:far
+	extrn	_gfx_install_driver_callbacks:far
+	extrn	_mouse_show_cursor:far
+	extrn	_mouse_hide_cursor:far
+	extrn	_mouse_refresh_cursor:far
 	extrn	_f_1D8E_0384:far
 	extrn	_f_1D8E_0435:far
 	extrn	_f_1D8E_070E:far
@@ -103,48 +103,48 @@ DGROUP	group	_DATA
 S01A_TEXT	segment word public 'CODE'
 	assume	cs:S01A_TEXT, ds:DGROUP
 
-	public	_o01_3126_0000
-	public	_o01_3126_0068
-	public	_o01_3126_007D
-	public	_o01_3126_010A
-	public	_o01_3126_0167
-	public	_o01_3126_019A
-	public	_o01_3126_01B2
-	public	_o01_3126_01CA
-	public	_o01_3126_024C
-	public	_o01_3126_0414
-	public	_o01_3126_0437
-	public	_o01_3126_045D
-	public	_o01_3126_0516
-	public	_o01_3126_0523
-	public	_o01_3126_069C
-	public	_o01_3126_073C
-	public	_o01_3126_0749
-	public	_o01_3126_083D
-	public	_o01_3126_08E3
-	public	_o01_3126_093C
-	public	_o01_3126_098E
-	public	_o01_3126_0A20
-	public	_o01_3126_0A7A
-	public	_o01_3126_0ACC
-	public	_o01_3126_0B26
-	public	_o01_3126_0C53
-	public	_o01_3126_0C7A
-	public	_o01_3126_0C87
-	public	_o01_3126_0F33
-	public	_o01_3126_0F66
-	public	_o01_3126_0F6F
-	public	_o01_3126_0F78
-	public	_o01_3126_0F83
-	public	_o01_3126_109D
-	public	_o01_3126_11F0
-	public	_o01_3126_1343
-	public	_o01_3126_14B6
-	public	_o01_3126_1610
-	public	_o01_3126_1637
-	public	_o01_3126_1658
+	public	_gfx_mono_init_banked_640x400
+	public	_gfx_mono_init_ega480_mono
+	public	_gfx_mono_init_ega350_mono
+	public	_gfx_mono_init_hercules
+	public	_gfx_mono_gsetattrib
+	public	_gfx_mono_select_small_font
+	public	_gfx_mono_select_big_font
+	public	_gfx_mono_dither_box
+	public	_gfx_mono_fill_or_pattern_box
+	public	_gfx_mono_ginvbox
+	public	_gfx_mono_picture_size
+	public	_gfx_mono_capture_box
+	public	_gfx_mono_gputimgs
+	public	_gfx_mono_put_image_raw
+	public	_gfx_mono_shift_mono_image_row
+	public	_gfx_mono_gputpics
+	public	_gfx_mono_put_picture_raw
+	public	_gfx_mono_prepare_bitmap_row
+	public	_gfx_mono_blit_row_rop
+	public	_gfx_mono_blit_row_copy
+	public	_gfx_mono_shift_bitmap_row
+	public	_gfx_mono_set_xor
+	public	_gfx_mono_set_copy
+	public	_gfx_mono_set_and
+	public	_gfx_mono_set_or
+	public	_gfx_mono_set_raster_op
+	public	_gfx_mono_gline
+	public	_gfx_mono_draw_line_raw
+	public	_gfx_mono_reset_gc
+	public	_gfx_mono_tile_noop
+	public	_gfx_mono_reserved_noop
+	public	_gfx_mono_restore_text_mode
+	public	_gfx_mono_move_linear_box
+	public	_gfx_mono_move_box
+	public	_gfx_mono_move_box_640x400
+	public	_gfx_mono_draw_life_tile
+	public	_gfx_mono_compose_life_tile
+	public	_gfx_mono_set_hercules_graphics
+	public	_gfx_mono_set_mda_text
+	public	_gfx_mono_program_mono_crtc
 
-_o01_3126_0000	proc	far
+_gfx_mono_init_banked_640x400	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -167,7 +167,7 @@ L0026:
 L002F:
 	loop L0026
 	les si, dword ptr _g_217E
-	call far ptr _f_1B4E_0165
+	call far ptr _gfx_install_driver_callbacks
 	lea bx, _g_9188
 	mov ax, 11F0h
 	mov word ptr [bx], ax
@@ -177,7 +177,7 @@ L002F:
 	mov word ptr _g_3DAC, ax
 	mov word ptr _g_2182, 40h
 	push word ptr _g_2182
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	xor ax, ax
 	pop di
@@ -187,9 +187,9 @@ L002F:
 	mov sp, bp
 	pop bp
 	retf
-_o01_3126_0000	endp
+_gfx_mono_init_banked_640x400	endp
 
-_o01_3126_0068	proc	far
+_gfx_mono_init_ega480_mono	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 6
@@ -200,9 +200,9 @@ _o01_3126_0068	proc	far
 	mov cx, 1E0h
 	mov word ptr _g_2182, 11h
 	jmp short L00A1
-_o01_3126_0068	endp
+_gfx_mono_init_ega480_mono	endp
 
-_o01_3126_007D	proc	far
+_gfx_mono_init_ega350_mono	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 6
@@ -232,7 +232,7 @@ L00B4:
 	add ax, 50h
 	loop L00B4
 	les si, dword ptr _g_217E
-	call far ptr _f_1B4E_0165
+	call far ptr _gfx_install_driver_callbacks
 	lea bx, _g_9188
 	mov ax, 0F83h
 	mov word ptr [bx], ax
@@ -241,9 +241,9 @@ L00B4:
 	mov al, byte ptr es:[449h]
 	mov word ptr _g_3DAC, ax
 	push word ptr _g_2182
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
-	call near ptr _o01_3126_0F33
+	call near ptr _gfx_mono_reset_gc
 	mov al, 1
 	mov dx, 3CEh
 	out dx, al
@@ -269,9 +269,9 @@ L00B4:
 	mov sp, bp
 	pop bp
 	retf
-_o01_3126_007D	endp
+_gfx_mono_init_ega350_mono	endp
 
-_o01_3126_010A	proc	far
+_gfx_mono_init_hercules	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -294,7 +294,7 @@ L0130:
 L0139:
 	loop L0130
 	les si, dword ptr _g_217E
-	call far ptr _f_1B4E_0165
+	call far ptr _gfx_install_driver_callbacks
 	lea bx, _g_9188
 	mov ax, 109Dh
 	mov word ptr [bx], ax
@@ -302,7 +302,7 @@ L0139:
 	mov es, ax
 	mov al, byte ptr es:[449h]
 	mov word ptr _g_3DAC, ax
-	call far ptr _o01_3126_1610
+	call far ptr _gfx_mono_set_hercules_graphics
 	xor ax, ax
 	pop di
 	pop si
@@ -311,9 +311,9 @@ L0139:
 	mov sp, bp
 	pop bp
 	retf
-_o01_3126_010A	endp
+_gfx_mono_init_hercules	endp
 
-_o01_3126_0167	proc	far
+_gfx_mono_gsetattrib	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+0Ah]
@@ -336,27 +336,27 @@ L0195:
 L0198:
 	pop bp
 	retf
-_o01_3126_0167	endp
+_gfx_mono_gsetattrib	endp
 
-_o01_3126_019A	proc	far
+_gfx_mono_select_small_font	proc	far
 	mov byte ptr _g_3DDC, 8
 	les bx, dword ptr _g_3DA8
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
 	mov word ptr _g_3DDA, 8
 	retf
-_o01_3126_019A	endp
+_gfx_mono_select_small_font	endp
 
-_o01_3126_01B2	proc	far
+_gfx_mono_select_big_font	proc	far
 	mov byte ptr _g_3DDC, 0Eh
 	les bx, dword ptr _g_3DA4
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
 	mov word ptr _g_3DDA, 0Eh
 	retf
-_o01_3126_01B2	endp
+_gfx_mono_select_big_font	endp
 
-_o01_3126_01CA	proc	far
+_gfx_mono_dither_box	proc	far
 	push bp
 	mov bp, sp
 	inc byte ptr _g_3DD4
@@ -374,7 +374,7 @@ _o01_3126_01CA	proc	far
 	jg L0201
 	cmp dx, word ptr _g_4340
 	jl L0201
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0201:
 	call near ptr L0BBA
 	push word ptr [bp+0Eh]
@@ -382,7 +382,7 @@ L0201:
 	push word ptr [bp+0Ah]
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _o01_3126_024C
+	call far ptr _gfx_mono_fill_or_pattern_box
 	add sp, 0Ah
 	call near ptr L0BCB
 	test byte ptr _g_4333, 0FFh
@@ -391,19 +391,19 @@ L0201:
 	je L023A
 	test byte ptr _g_4331, 0FFh
 	je L0246
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0246
 L023A:
 	test byte ptr _g_4366, 0FFh
 	jne L0246
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0246:
 	dec byte ptr _g_3DD4
 	pop bp
 	retf
-_o01_3126_01CA	endp
+_gfx_mono_dither_box	endp
 
-_o01_3126_024C	proc	far
+_gfx_mono_fill_or_pattern_box	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je L0264
@@ -435,7 +435,7 @@ L0264:
 	jg L02A0
 	cmp dx, word ptr _g_4340
 	jl L02A0
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L02A0:
 	mov ax, word ptr [bp+6]
 	cmp ax, word ptr [bp+0Ah]
@@ -597,12 +597,12 @@ L03E2:
 	je L03FE
 	test byte ptr _g_4331, 0FFh
 	je L040A
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L040A
 L03FE:
 	test byte ptr _g_4366, 0FFh
 	jne L040A
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L040A:
 	dec byte ptr _g_3DD4
 	pop di
@@ -610,9 +610,9 @@ L040A:
 	mov sp, bp
 	pop bp
 	retf
-_o01_3126_024C	endp
+_gfx_mono_fill_or_pattern_box	endp
 
-_o01_3126_0414	proc	far
+_gfx_mono_ginvbox	proc	far
 	push bp
 	mov bp, sp
 	call near ptr L0BDC
@@ -622,14 +622,14 @@ _o01_3126_0414	proc	far
 	push word ptr [bp+0Ah]
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _o01_3126_024C
+	call far ptr _gfx_mono_fill_or_pattern_box
 	add sp, 0Ah
 	call near ptr L0BCB
 	pop bp
 	retf
-_o01_3126_0414	endp
+_gfx_mono_ginvbox	endp
 
-_o01_3126_0437	proc	far
+_gfx_mono_picture_size	proc	far
 	push bp
 	mov bp, sp
 	call near ptr L0444
@@ -650,9 +650,9 @@ L0444:
 	sub bx, word ptr [bp+8]
 	mul bx
 	retn
-_o01_3126_0437	endp
+_gfx_mono_picture_size	endp
 
-_o01_3126_045D	proc	far
+_gfx_mono_capture_box	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -674,7 +674,7 @@ _o01_3126_045D	proc	far
 	jg L049A
 	cmp dx, word ptr _g_4340
 	jl L049A
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L049A:
 	les di, dword ptr [bp+0Eh]
 	mov si, word ptr [bp+8]
@@ -719,12 +719,12 @@ L04D2:
 	je L0500
 	test byte ptr _g_4331, 0FFh
 	je L050C
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L050C
 L0500:
 	test byte ptr _g_4366, 0FFh
 	jne L050C
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L050C:
 	dec byte ptr _g_3DD4
 	pop di
@@ -732,17 +732,17 @@ L050C:
 	mov sp, bp
 	pop bp
 	retf
-_o01_3126_045D	endp
+_gfx_mono_capture_box	endp
 
-_o01_3126_0516	proc	far
+_gfx_mono_gputimgs	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o01_3126_0523
+	je _gfx_mono_put_image_raw
 	call far ptr _f_1D8E_070E
 	retf
-_o01_3126_0516	endp
+_gfx_mono_gputimgs	endp
 
-_o01_3126_0523	proc	far
+_gfx_mono_put_image_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 4
@@ -768,7 +768,7 @@ _o01_3126_0523	proc	far
 	jg L056C
 	cmp dx, word ptr _g_4340
 	jl L056C
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L056C:
 	mov di, word ptr [bp+8]
 	add di, di
@@ -781,7 +781,7 @@ L056C:
 L0580:
 	sar ax, cl
 	mov word ptr [bp-4], ax
-	call near ptr _o01_3126_083D
+	call near ptr _gfx_mono_prepare_bitmap_row
 	mov bx, word ptr [bp+8]
 	and bx, 3
 	shl bx, 1
@@ -821,12 +821,12 @@ L05C1:
 	je L05DE
 	test byte ptr _g_4331, 0FFh
 	je L05EA
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L05EA
 L05DE:
 	test byte ptr _g_4366, 0FFh
 	jne L05EA
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L05EA:
 	dec byte ptr _g_3DD4
 	pop di
@@ -837,7 +837,7 @@ L05EA:
 L05F4:
 	sar ax, cl
 	mov word ptr [bp-4], ax
-	call near ptr _o01_3126_083D
+	call near ptr _gfx_mono_prepare_bitmap_row
 	mov bx, word ptr [bp+8]
 	and bx, 3
 	shl bx, 1
@@ -853,7 +853,7 @@ L060F:
 	mov di, word ptr ss:[di+_g_3DFC]
 	assume ss:nothing
 	add di, word ptr [bp-4]
-	call near ptr _o01_3126_069C
+	call near ptr _gfx_mono_shift_mono_image_row
 	pop bx
 	add bx, 2
 	and bx, 0F7h
@@ -934,9 +934,9 @@ L0696:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o01_3126_0523	endp
+_gfx_mono_put_image_raw	endp
 
-_o01_3126_069C	proc	far
+_gfx_mono_shift_mono_image_row	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 5Ch
@@ -1033,17 +1033,17 @@ L0737:
 	mov sp, bp
 	pop bp
 	retn
-_o01_3126_069C	endp
+_gfx_mono_shift_mono_image_row	endp
 
-_o01_3126_073C	proc	far
+_gfx_mono_gputpics	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o01_3126_0749
+	je _gfx_mono_put_picture_raw
 	call far ptr _f_1D8E_07F6
 	retf
-_o01_3126_073C	endp
+_gfx_mono_gputpics	endp
 
-_o01_3126_0749	proc	far
+_gfx_mono_put_picture_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 4
@@ -1069,7 +1069,7 @@ _o01_3126_0749	proc	far
 	jg L0792
 	cmp dx, word ptr _g_4340
 	jl L0792
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0792:
 	mov bx, word ptr [bp+8]
 	add bx, bx
@@ -1082,7 +1082,7 @@ L0792:
 L07A6:
 	sar ax, cl
 	mov word ptr [bp-4], ax
-	call near ptr _o01_3126_083D
+	call near ptr _gfx_mono_prepare_bitmap_row
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-2], dx
 	assume ss:DGROUP
@@ -1095,7 +1095,7 @@ L07BC:
 	mov di, word ptr ss:[di+_g_3DFC]
 	assume ss:nothing
 	add di, word ptr [bp-4]
-	call near ptr _o01_3126_08E3
+	call near ptr _gfx_mono_blit_row_rop
 	pop di
 	inc di
 	inc di
@@ -1109,12 +1109,12 @@ L07D0:
 	je L07ED
 	test byte ptr _g_4331, 0FFh
 	je L07F9
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L07F9
 L07ED:
 	test byte ptr _g_4366, 0FFh
 	jne L07F9
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L07F9:
 	dec byte ptr _g_3DD4
 	pop di
@@ -1128,7 +1128,7 @@ L0803:
 	mov di, word ptr ss:[di+_g_3DFC]
 	assume ss:nothing
 	add di, word ptr [bp-4]
-	call near ptr _o01_3126_093C
+	call near ptr _gfx_mono_blit_row_copy
 	pop di
 	inc di
 	inc di
@@ -1138,7 +1138,7 @@ L0803:
 L0819:
 	sar ax, cl
 	mov word ptr [bp-4], ax
-	call near ptr _o01_3126_083D
+	call near ptr _gfx_mono_prepare_bitmap_row
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-2], dx
 L0827:
@@ -1147,16 +1147,16 @@ L0827:
 	mov di, word ptr ss:[di+_g_3DFC]
 	assume ss:nothing
 	add di, word ptr [bp-4]
-	call near ptr _o01_3126_098E
+	call near ptr _gfx_mono_shift_bitmap_row
 	pop di
 	inc di
 	inc di
 	dec word ptr [bp-2]
 	jne L0827
 	jmp L07D0
-_o01_3126_0749	endp
+_gfx_mono_put_picture_raw	endp
 
-_o01_3126_083D	proc	far
+_gfx_mono_prepare_bitmap_row	proc	far
 	mov cl, 3
 	mov ax, word ptr _fd_55B3_3DE6
 	mov bx, word ptr [bp+6]
@@ -1223,9 +1223,9 @@ L08C8:
 	mov byte ptr ss:_g_3DF1, bl
 	assume ss:nothing
 	retn
-_o01_3126_083D	endp
+_gfx_mono_prepare_bitmap_row	endp
 
-_o01_3126_08E3	proc	far
+_gfx_mono_blit_row_rop	proc	far
 	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
 	assume ss:nothing
@@ -1281,9 +1281,9 @@ L0936:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o01_3126_08E3	endp
+_gfx_mono_blit_row_rop	endp
 
-_o01_3126_093C	proc	far
+_gfx_mono_blit_row_copy	proc	far
 	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
 	assume ss:nothing
@@ -1333,9 +1333,9 @@ L0988:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o01_3126_093C	endp
+_gfx_mono_blit_row_copy	endp
 
-_o01_3126_098E	proc	far
+_gfx_mono_shift_bitmap_row	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 5Ch
@@ -1422,9 +1422,9 @@ L0A1B:
 	mov sp, bp
 	pop bp
 	retn
-_o01_3126_098E	endp
+_gfx_mono_shift_bitmap_row	endp
 
-_o01_3126_0A20	proc	far
+_gfx_mono_set_xor	proc	far
 	mov ax, word ptr cs:L0BFB
 	mov word ptr cs:L0653, ax
 	mov word ptr cs:L0674, ax
@@ -1448,9 +1448,9 @@ _o01_3126_0A20	proc	far
 	mov word ptr cs:L0F03, ax
 	mov byte ptr _g_3DD2, 18h
 	retf
-_o01_3126_0A20	endp
+_gfx_mono_set_xor	endp
 
-_o01_3126_0A7A	proc	far
+_gfx_mono_set_copy	proc	far
 	mov ax, word ptr cs:L0BED
 	mov word ptr cs:L0653, ax
 	mov word ptr cs:L0674, ax
@@ -1472,9 +1472,9 @@ _o01_3126_0A7A	proc	far
 	mov word ptr cs:L0D54, ax
 	mov byte ptr _g_3DD2, 0
 	retf
-_o01_3126_0A7A	endp
+_gfx_mono_set_copy	endp
 
-_o01_3126_0ACC	proc	far
+_gfx_mono_set_and	proc	far
 	mov ax, word ptr cs:L0BF1
 	mov word ptr cs:L0653, ax
 	mov word ptr cs:L0674, ax
@@ -1498,9 +1498,9 @@ _o01_3126_0ACC	proc	far
 	mov word ptr cs:L0F03, ax
 	mov byte ptr _g_3DD2, 8
 	retf
-_o01_3126_0ACC	endp
+_gfx_mono_set_and	endp
 
-_o01_3126_0B26	proc	far
+_gfx_mono_set_or	proc	far
 	mov ax, word ptr cs:L0BFD
 	mov word ptr cs:L0653, ax
 	mov word ptr cs:L0674, ax
@@ -1628,43 +1628,43 @@ L0C4D:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o01_3126_0B26	endp
+_gfx_mono_set_or	endp
 
-_o01_3126_0C53	proc	far
+_gfx_mono_set_raster_op	proc	far
 	push bp
 	mov bp, sp
 	push cs
 	mov ax, word ptr [bp+6]
 	cmp al, 10h
 	jne L0C63
-	call near ptr _o01_3126_0B26
+	call near ptr _gfx_mono_set_or
 	jmp short L0C78
 L0C63:
 	cmp al, 18h
 	jne L0C6C
-	call near ptr _o01_3126_0A20
+	call near ptr _gfx_mono_set_xor
 	jmp short L0C78
 L0C6C:
 	cmp al, 8
 	jne L0C75
-	call near ptr _o01_3126_0ACC
+	call near ptr _gfx_mono_set_and
 	jmp short L0C78
 L0C75:
-	call near ptr _o01_3126_0A7A
+	call near ptr _gfx_mono_set_copy
 L0C78:
 	pop bp
 	retf
-_o01_3126_0C53	endp
+_gfx_mono_set_raster_op	endp
 
-_o01_3126_0C7A	proc	far
+_gfx_mono_gline	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o01_3126_0C87
+	je _gfx_mono_draw_line_raw
 	call far ptr _f_1D8E_0435
 	retf
-_o01_3126_0C7A	endp
+_gfx_mono_gline	endp
 
-_o01_3126_0C87	proc	far
+_gfx_mono_draw_line_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ch
@@ -1693,7 +1693,7 @@ L0CBC:
 	jg L0CCD
 	cmp dx, word ptr _g_4340
 	jl L0CCD
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0CCD:
 	mov ax, word ptr _g_3DB0
 	mov es, ax
@@ -1829,12 +1829,12 @@ L0DE5:
 	je L0E01
 	test byte ptr _g_4331, 0FFh
 	je L0E0D
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0E0D
 L0E01:
 	test byte ptr _g_4366, 0FFh
 	jne L0E0D
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0E0D:
 	dec byte ptr _g_3DD4
 	pop di
@@ -1971,9 +1971,9 @@ L0F03:
 	dec cx
 	jge L0EFB
 	retn
-_o01_3126_0C87	endp
+_gfx_mono_draw_line_raw	endp
 
-_o01_3126_0F33	proc	far
+_gfx_mono_reset_gc	proc	far
 	mov al, 5
 	mov dx, 3CEh
 	out dx, al
@@ -2005,9 +2005,9 @@ _o01_3126_0F33	proc	far
 	mov al, 0
 	out dx, al
 	retn
-_o01_3126_0F33	endp
+_gfx_mono_reset_gc	endp
 
-_o01_3126_0F66	proc	far
+_gfx_mono_tile_noop	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2016,9 +2016,9 @@ _o01_3126_0F66	proc	far
 	pop si
 	pop bp
 	retf
-_o01_3126_0F66	endp
+_gfx_mono_tile_noop	endp
 
-_o01_3126_0F6F	proc	far
+_gfx_mono_reserved_noop	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2027,16 +2027,16 @@ _o01_3126_0F6F	proc	far
 	pop si
 	pop bp
 	retf
-_o01_3126_0F6F	endp
+_gfx_mono_reserved_noop	endp
 
-_o01_3126_0F78	proc	far
+_gfx_mono_restore_text_mode	proc	far
 	push word ptr _g_3DAC
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	retf
-_o01_3126_0F78	endp
+_gfx_mono_restore_text_mode	endp
 
-_o01_3126_0F83	proc	far
+_gfx_mono_move_linear_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2057,7 +2057,7 @@ _o01_3126_0F83	proc	far
 	jg L0FC0
 	cmp dx, word ptr _g_4340
 	jl L0FC0
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	jmp L0FF3
 L0FC0:
 	mov ax, word ptr [bp+0Eh]
@@ -2076,7 +2076,7 @@ L0FC0:
 	jg L0FF3
 	cmp dx, word ptr _g_4342
 	jl L0FF3
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0FF3:
 	mov cx, word ptr [bp+10h]
 	mov dx, word ptr _g_3DB6
@@ -2144,21 +2144,21 @@ L1060:
 	je L1089
 	test byte ptr _g_4331, 0FFh
 	je L1095
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L1095
 L1089:
 	test byte ptr _g_4366, 0FFh
 	jne L1095
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L1095:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o01_3126_0F83	endp
+_gfx_mono_move_linear_box	endp
 
-_o01_3126_109D	proc	far
+_gfx_mono_move_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2179,7 +2179,7 @@ _o01_3126_109D	proc	far
 	jg L10DA
 	cmp dx, word ptr _g_4340
 	jl L10DA
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	jmp L110D
 L10DA:
 	mov ax, word ptr [bp+0Eh]
@@ -2198,7 +2198,7 @@ L10DA:
 	jg L110D
 	cmp dx, word ptr _g_4342
 	jl L110D
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L110D:
 	mov cx, word ptr [bp+10h]
 	mov dx, word ptr _g_3DB6
@@ -2279,12 +2279,12 @@ L119D:
 	je L11BB
 	test byte ptr _g_4331, 0FFh
 	je L11C7
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L11C7
 L11BB:
 	test byte ptr _g_4366, 0FFh
 	jne L11C7
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L11C7:
 	dec byte ptr _g_3DD4
 	pop di
@@ -2309,9 +2309,9 @@ L11EB:
 	dec bx
 	jne L11CF
 	jmp L119D
-_o01_3126_109D	endp
+_gfx_mono_move_box	endp
 
-_o01_3126_11F0	proc	far
+_gfx_mono_move_box_640x400	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2332,7 +2332,7 @@ _o01_3126_11F0	proc	far
 	jg L122D
 	cmp dx, word ptr _g_4340
 	jl L122D
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	jmp L1260
 L122D:
 	mov ax, word ptr [bp+0Eh]
@@ -2351,7 +2351,7 @@ L122D:
 	jg L1260
 	cmp dx, word ptr _g_4342
 	jl L1260
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L1260:
 	mov cx, word ptr [bp+10h]
 	mov dx, word ptr _g_3DB6
@@ -2432,12 +2432,12 @@ L12F0:
 	je L130E
 	test byte ptr _g_4331, 0FFh
 	je L131A
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L131A
 L130E:
 	test byte ptr _g_4366, 0FFh
 	jne L131A
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L131A:
 	dec byte ptr _g_3DD4
 	pop di
@@ -2462,9 +2462,9 @@ L133E:
 	dec bx
 	jne L1322
 	jmp L12F0
-_o01_3126_11F0	endp
+_gfx_mono_move_box_640x400	endp
 
-_o01_3126_1343	proc	far
+_gfx_mono_draw_life_tile	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2613,15 +2613,15 @@ _o01_3126_1343	proc	far
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _o01_3126_073C
+	call far ptr _gfx_mono_gputpics
 	add sp, 0Ch
 	pop di
 	pop si
 	pop bp
 	retf
-_o01_3126_1343	endp
+_gfx_mono_draw_life_tile	endp
 
-_o01_3126_14B6	proc	far
+_gfx_mono_compose_life_tile	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2766,9 +2766,9 @@ _o01_3126_14B6	proc	far
 	pop si
 	pop bp
 	retf
-_o01_3126_14B6	endp
+_gfx_mono_compose_life_tile	endp
 
-_o01_3126_1610	proc	far
+_gfx_mono_set_hercules_graphics	proc	far
 	mov dx, 3BFh
 	mov al, 1
 	out dx, al
@@ -2776,28 +2776,28 @@ _o01_3126_1610	proc	far
 	lea si, _g_2184
 	mov bx, 0
 	mov cx, 4000h
-	call near ptr _o01_3126_1658
+	call near ptr _gfx_mono_program_mono_crtc
 	xor ax, ax
 	mov es, ax
 	mov byte ptr es:[449h], 6
 	mov word ptr es:[44Ah], 5Ah
 	retf
-_o01_3126_1610	endp
+_gfx_mono_set_hercules_graphics	endp
 
-_o01_3126_1637	proc	far
+_gfx_mono_set_mda_text	proc	far
 	mov al, 20h
 	lea si, _g_2190
 	mov bx, 720h
 	mov cx, 7D0h
-	call near ptr _o01_3126_1658
+	call near ptr _gfx_mono_program_mono_crtc
 	xor ax, ax
 	mov es, ax
 	mov byte ptr es:[449h], 7
 	mov word ptr es:[44Ah], 50h
 	retf
-_o01_3126_1637	endp
+_gfx_mono_set_mda_text	endp
 
-_o01_3126_1658	proc	far
+_gfx_mono_program_mono_crtc	proc	far
 	push ds
 	push es
 	push ax
@@ -2831,7 +2831,7 @@ L1669:
 	pop es
 	pop ds
 	retn
-_o01_3126_1658	endp
+_gfx_mono_program_mono_crtc	endp
 
 S01A_TEXT	ends
 	end

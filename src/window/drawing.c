@@ -35,22 +35,22 @@ extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far clip_Push(void);
 extern void far clip_SubInclude(char far *obj);
 extern void far clip_Pop(void);
-extern void _fastcall f_23E6_0392(char far *obj);
-extern void _fastcall f_23E6_066C(char far *obj);
+extern void _fastcall list_draw_visible_rows(char far *obj);
+extern void _fastcall win_draw_vertical_slider(char far *obj);
 extern void _fastcall win_DrawBitMapAtObj(int id, struct Rect far *rect);
 extern char far * far _fstrchr(char far *s, int c);
 extern char far * far mem_Lock(char far * far *handle);
 extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
 extern void _fastcall win_LockWinHigh(int win);
-extern char far * far f_2505_0006(int win);
+extern char far * far win_locked_resource_ptr(int win);
 extern int far sprintf(char far *buffer, char far *format, ...);
 extern void far f_1E57_0296(void);
-extern void far f_1E57_0A9C(char far *p);
+extern void far clip_restrict_rect(char far *p);
 extern void far clip_SetWin(int win);
 extern void far clip_Off(void);
 extern void far clip_SubExclude(struct Rect far *rect);
-extern void far f_1FD2_05FD(void);
+extern void far win_redraw_desktop_menu(void);
 extern void far mem_Unlock(char far * far *handle);
 
 extern char near g_5A97;
@@ -245,7 +245,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         win_RectFill(rect);
         break;
     case 4:
-        f_23E6_0392((char far *)obj);
+        list_draw_visible_rows((char far *)obj);
         break;
     case 5:
         GRectFill(rect, colorEntry[2] * 0x101);
@@ -260,7 +260,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         break;
     case 7:
     case 8:
-        f_23E6_066C((char far *)obj);
+        win_draw_vertical_slider((char far *)obj);
         break;
     case 12:
         win_RectFill(rect);
@@ -338,7 +338,7 @@ void _fastcall win_DrawObjectNum(int objNum)
     win_UnlockWin(objNum);
 }
 
-void _fastcall f_21FA_077D(char far *w)
+void _fastcall win_draw_frame_controls(char far *w)
 {
     struct Rect rect;
     struct Pt size;
@@ -396,7 +396,7 @@ void _fastcall win_DrawWindow(int win)
     sprintf(buf, "!!W:%x", win);
     win_LockWinHigh(win);
     sprintf(buf, "QQW:%x", win);
-    w = f_2505_0006(win);
+    w = win_locked_resource_ptr(win);
     if ((*(int far *)(w + 0x1c) & 0x20) == 0) {
         if (g_5AAC != 0 && g_5AAC[1] == (int)0x8000)
             goto hooks;
@@ -413,7 +413,7 @@ void _fastcall win_DrawWindow(int win)
             sprintf(buf, "xxw:%x, i:%x", win, i);
         }
         sprintf(buf, "zzw:%x, i:%x", win, i);
-        f_21FA_077D(w);
+        win_draw_frame_controls(w);
 hooks:
         sprintf(buf, "ppw:%x, i:%x", win, i);
         if (win_drawHooks[win >> 8])
@@ -427,7 +427,7 @@ void _fastcall win_DrawTitle(int win)
 {
     win_DrawObjectNum(win);
     win_LockWin(win);
-    f_21FA_077D(f_2505_0006(win));
+    win_draw_frame_controls(win_locked_resource_ptr(win));
     win_UnlockWin(win);
 }
 
@@ -436,37 +436,37 @@ void _fastcall f_21FA_0AD2(char far *p)
     int i;
 
     f_1E57_0296();
-    f_1E57_0A9C(p);
-    f_1FD2_05FD();
+    clip_restrict_rect(p);
+    win_redraw_desktop_menu();
     for (i = 0; g_5702[i] != (int)0x8000; i++)
         ;
     while (--i >= 0) {
         clip_SetWin(g_5702[i]);
-        f_1E57_0A9C(p);
+        clip_restrict_rect(p);
         win_DrawWindow(g_5702[i]);
     }
     clip_Off();
 }
 
-void _fastcall f_21FA_0B4B(char far *p)
+void _fastcall win_redraw_exposed_windows(char far *p)
 {
     char buf[20];
     struct Rect r;
     int i;
 
     f_1E57_0296();
-    f_1E57_0A9C(p);
+    clip_restrict_rect(p);
     if (g_5702[0] != (int)0x8000) {
         win_GetObjRect(g_5702[0], &r);
         clip_SubExclude(&r);
     }
-    f_1FD2_05FD();
+    win_redraw_desktop_menu();
     for (i = 0; g_5702[i] != (int)0x8000; i++)
         ;
     while (--i >= 1) {
         clip_SetWin(g_5702[i]);
         sprintf(buf, "i:%x", i);
-        f_1E57_0A9C(p);
+        clip_restrict_rect(p);
         sprintf(buf, "!!i:%x", i);
         clip_SubExclude(&r);
         sprintf(buf, "@@i:%x", i);

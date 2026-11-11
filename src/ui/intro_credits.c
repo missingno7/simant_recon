@@ -24,7 +24,7 @@ void far DrawSimPayoff(void);
 void far AboutDialog(void);
 void far ShowIntro(void);
 void far LoadMonoPats(void);
-void far o15_384C_0152(char far *msg, int flag);
+void far app_cleanup_and_exit(char far *msg, int flag);
 
 static int g_2C2C[6][2] = {
     { 0x4a, 0x48 }, { 0x42, 0x57 }, { 0x40, 0xaf },
@@ -41,9 +41,9 @@ extern void far myDelay(long ticks);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_SetObjBitmap(int obj, int bitmap);
 extern int near g_3DB2;
-extern void _fastcall f_22BF_00AA(int obj, struct Rect far *r);
+extern void _fastcall win_get_obj_layout_rect(int obj, struct Rect far *r);
 extern struct Rect far fd_50F6_393C;
-extern void _fastcall f_22BF_00DD(int obj, struct Rect far *r);
+extern void _fastcall win_set_obj_layout_rect(int obj, struct Rect far *r);
 extern void far win_Open(int win);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void _fastcall win_UnlockWin(int win);
@@ -78,11 +78,11 @@ void far DrawSimPayoff(void)
     win_LockWin(0x1a00);
     win_SetObjBitmap(0x1a01, 0x3f48);
     if (g_3DB2 == 0x140) {
-        f_22BF_00AA(0x1a01, &saved);
+        win_get_obj_layout_rect(0x1a01, &saved);
         bounds = saved;
         bounds.left = 4;
         bounds.top = fd_50F6_393C.bottom + 3;
-        f_22BF_00DD(0x1a01, &bounds);
+        win_set_obj_layout_rect(0x1a01, &bounds);
     }
     win_Open(0x1a00);
     win_GetObjRect(0x1a01, &rect);
@@ -117,7 +117,7 @@ void far DrawSimPayoff(void)
     myDelay(0x12cL);
     win_Close(0x1a00);
     if (g_3DB2 == 0x140)
-        f_22BF_00DD(0x1a01, &saved);
+        win_set_obj_layout_rect(0x1a01, &saved);
 }
 
 extern char far * far * far LoadStringAnt(int object);
@@ -127,7 +127,7 @@ extern int far WaitedEnough(long far *timer, int delay);
 extern int far win_Events(void);
 extern void far win_FlushEvents(void);
 extern void _fastcall win_DrawObjectNum(int objNum);
-extern void far f_1E57_0FDC(struct Rect far *r);
+extern void far clip_set_screen_intersection(struct Rect far *r);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far font_SetFont(int font);
 extern int far font_FontHeight(void);
@@ -174,7 +174,7 @@ void far AboutDialog(void)
         count++;
         win_GetObjRect(0x1f02, &rect);
         win_DrawObjectNum(0x1f01);
-        f_1E57_0FDC(&rect);
+        clip_set_screen_intersection(&rect);
         win_SetColorFromObjNum(0x1f02);
         line = 0;
         pix = 0;

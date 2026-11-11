@@ -21,13 +21,13 @@ extern int far atexit(void (far *func)(void));
 extern void far * far _fmemcpy(void far *dst, void far *src, int n);
 extern long far lseek(int fd, long offset, int origin);
 extern int far read(int fd, void far *buffer, unsigned int count);
-extern void far f_195A_001D(void);
-extern void far f_195A_0035(void);
-extern int far f_195A_004B(int pages);
-extern void far f_195A_0062(int handle, int logical, int physical);
-extern void far f_195A_007D(int handle);
-extern void far f_195A_01CB(int handle, char far *name);
-extern int far f_195A_0260(void);
+extern void far ems_query_page_frame(void);
+extern void far ems_query_page_counts(void);
+extern int far ems_allocate_pages(int pages);
+extern void far ems_map_page(int handle, int logical, int physical);
+extern void far ems_free_handle(int handle);
+extern void far ems_set_handle_name(int handle, char far *name);
+extern int far ems_initialize(void);
 extern EmsSlot far * far * far f_2CFB_0002(long size, int flags, char far *name);
 
 void far f_19DC_04B9(void);
@@ -40,7 +40,7 @@ int g_38A0 = 0;
 void far f_19DC_0008(void)
 {
     if (g_389C)
-        f_195A_007D(g_389C);
+        ems_free_handle(g_389C);
 }
 
 int far f_19DC_001A(long size)
@@ -52,9 +52,9 @@ int far f_19DC_001A(long size)
 
     if (g_389C)
         return 1;
-    if (!f_195A_0260() || fd_55B3_360C < 0x40)
+    if (!ems_initialize() || fd_55B3_360C < 0x40)
         return 0;
-    f_195A_0035();
+    ems_query_page_counts();
     pages = (int)((size + 0x3FFF) >> 14);
     avail = fd_55B3_3612 - g_38A0;
     g_389E = avail > pages ? pages : avail;
@@ -62,9 +62,9 @@ int far f_19DC_001A(long size)
         g_389E = 0;
         return 0;
     }
-    f_195A_001D();
-    g_389C = f_195A_004B(g_389E);
-    f_195A_01CB(g_389C, "DBEMSXXX");
+    ems_query_page_frame();
+    g_389C = ems_allocate_pages(g_389E);
+    ems_set_handle_name(g_389C, "DBEMSXXX");
     fd_50F6_3B48 = fd_55B3_360E - 0x4000;
     fd_50F6_3B4C = f_2CFB_0002((long)g_389E * 6, 0, "DBEMSLIST");
     slot = *fd_50F6_3B4C;
@@ -72,7 +72,7 @@ int far f_19DC_001A(long size)
         slot->age = 0;
         slot->file = slot->page = -1;
     }
-    f_195A_0062(g_389C, 0, 3);
+    ems_map_page(g_389C, 0, 3);
     atexit(f_19DC_0008);
     return 1;
 }
@@ -102,7 +102,7 @@ char far * far f_19DC_0148(int file, int page)
             continue;
         }
         if (slot->file == file && slot->page == page) {
-            f_195A_0062(g_389C, i, 3);
+            ems_map_page(g_389C, i, 3);
             g_38B6 = i;
             slot->age = 0;
             found = 1;
@@ -121,7 +121,7 @@ char far * far f_19DC_0148(int file, int page)
         slot = &(*fd_50F6_3B4C)[i];
         slot->file = file;
         slot->page = page;
-        f_195A_0062(g_389C, i, 3);
+        ems_map_page(g_389C, i, 3);
         g_38B6 = i;
         slot->age = 0;
         while ((int)lseek(file, (long)page << 14, 0) == -1)
@@ -140,18 +140,18 @@ char far * far f_19DC_0148(int file, int page)
 
 static long s_8C76;
 
-int far f_19DC_02FB(int file, long offset, char far *buffer, long count);
+int far db_read_cached_range(int file, long offset, char far *buffer, long count);
 
-void far f_19DC_02D9(int file, char far *buffer, long count)
+void far db_read_at_cursor(int file, char far *buffer, long count)
 {
-    f_19DC_02FB(file, s_8C76, buffer, count);
+    db_read_cached_range(file, s_8C76, buffer, count);
 }
 
 int g_390C = 0;
 
 #define CHECK_FILE() if (s_8C74 != file) Punt("Handle mismatch")
 
-int far f_19DC_02FB(int file, long offset, char far *buffer, long count)
+int far db_read_cached_range(int file, long offset, char far *buffer, long count)
 {
     int page;
     unsigned int off;

@@ -38,7 +38,7 @@ int far f_1D8E_0002(int x, int y, struct Rect far *r)
     return code;
 }
 
-struct Rect far * far f_1D8E_003F(struct Rect far *r, struct Rect far *c,
+struct Rect far * far clip_split_rect(struct Rect far *r, struct Rect far *c,
                                   struct Rect far *in, struct Rect far *out)
 {
     struct Rect t;
@@ -132,7 +132,7 @@ struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *list,
         res = in;
     if (list && list->top != RECT_END) {
         for (; list->top != RECT_END; list++) {
-            res = f_1D8E_003F(list, c, in, out);
+            res = clip_split_rect(list, c, in, out);
             if (out)
                 out = res;
             else
@@ -174,7 +174,7 @@ void far f_1D8E_0384(void (far *fn)(int, int, int, int, int), int unused1, int u
     r.right = right;
     r.bottom = bottom;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        f_1D8E_003F(&r, clip, pieces, 0);
+        clip_split_rect(&r, clip, pieces, 0);
         for (i = 0; pieces[i].top != RECT_END; i++)
             fn(pieces[i].left, pieces[i].top, pieces[i].right, pieces[i].bottom, color);
     }
@@ -260,7 +260,7 @@ void far f_1D8E_070E(char far *port, int x, int y, char far *bits, int width, in
     r.right = x + width;
     r.bottom = y + height;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        f_1D8E_003F(&r, clip, pieces, 0);
+        clip_split_rect(&r, clip, pieces, 0);
         for (i = 0; pieces[i].top != RECT_END; i++) {
             fd_55B3_3DE8 = r.right - pieces[i].right;
             fd_55B3_3DE6 = pieces[i].left - r.left;
@@ -289,7 +289,7 @@ void far f_1D8E_07F6(char far *port, int x, int y, char far *bits, int width, in
     r.top = y;
     r.bottom = y + height;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        f_1D8E_003F(&r, clip, pieces, 0);
+        clip_split_rect(&r, clip, pieces, 0);
         for (i = 0; pieces[i].top != RECT_END; i++) {
             fd_55B3_3DE8 = r.right - pieces[i].right;
             fd_55B3_3DE6 = pieces[i].left - r.left;
@@ -317,7 +317,7 @@ void far f_1D8E_08EA(char far *port, int x, int y, char far *bits, int width, in
     r.right = x + width;
     r.bottom = y + height;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        f_1D8E_003F(&r, clip, pieces, 0);
+        clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
             fd_55B3_3DE8 = r.right - p->right;
             fd_55B3_3DE6 = p->left - r.left;
@@ -344,7 +344,7 @@ void far f_1D8E_09DE(char far *port, int x, int y, char far *bits, int width, in
     r.right = x + width;
     r.bottom = y + height;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        f_1D8E_003F(&r, clip, pieces, 0);
+        clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
             fd_55B3_3DE8 = r.right - p->right;
             fd_55B3_3DE6 = p->left - r.left;
@@ -371,7 +371,7 @@ void far f_1D8E_0AC7(char far *port, int x, int y, char far *bits, int width, in
     r.right = x + width;
     r.bottom = y + height;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        f_1D8E_003F(&r, clip, pieces, 0);
+        clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
             fd_55B3_3DE8 = r.right - p->right;
             fd_55B3_3DE6 = p->left - r.left;
@@ -398,7 +398,7 @@ void far f_1D8E_0BAE(char far *port, int x, int y, char far *bits, int width, in
     r.right = x + width;
     r.bottom = y + height;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        f_1D8E_003F(&r, clip, pieces, 0);
+        clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
             fd_55B3_3DE8 = r.right - p->right;
             fd_55B3_3DE6 = p->left - r.left;

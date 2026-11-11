@@ -64,31 +64,31 @@ _g_2236	db	00Fh, 00Fh, 0F0h, 0F0h, 00Fh, 00Fh, 0F0h, 0F0h, 00Fh, 00Fh, 0F0h, 0F0
 	db	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	db	0, 0, 0, 0
 DispatchS03	label	dword
-	dd	_o03_3126_019E
-	dd	_o03_3126_01BE
-	dd	_o03_3126_01DB
-	dd	_o03_3126_059C
-	dd	_o03_3126_03C2
-	dd	_o03_3126_070A
-	dd	_o03_3126_072D
-	dd	_o03_3126_072D
-	dd	_o03_3126_074E
-	dd	_o03_3126_091F
-	dd	_o03_3126_092C
-	dd	_o03_3126_0C11
-	dd	_o03_3126_0C1E
-	dd	_o03_3126_08B8
-	dd	_o03_3126_080A
-	dd	_o03_3126_087E
-	dd	_o03_3126_0844
-	dd	_o03_3126_104D
-	dd	_o03_3126_105A
-	dd	_o03_3126_01F8
-	dd	_o03_3126_01B3
-	dd	_o03_3126_1180
-	dd	_o03_3126_1189
-	dd	_o03_3126_08F2
-	dd	_o03_3126_1192
+	dd	_gfx_tandy_gsetattrib
+	dd	_gfx_tandy_select_small_font
+	dd	_gfx_tandy_select_big_font
+	dd	_gfx_tandy_gboxfill
+	dd	_gfx_tandy_gpatbox
+	dd	_gfx_tandy_ginvbox
+	dd	_gfx_tandy_picture_size
+	dd	_gfx_tandy_picture_size
+	dd	_gfx_tandy_capture_box
+	dd	_gfx_tandy_gputpics
+	dd	_gfx_tandy_put_picture_raw
+	dd	_gfx_tandy_gputimgs
+	dd	_gfx_tandy_put_image_raw
+	dd	_gfx_tandy_set_or
+	dd	_gfx_tandy_set_xor
+	dd	_gfx_tandy_set_and
+	dd	_gfx_tandy_set_copy
+	dd	_gfx_tandy_gline
+	dd	_gfx_tandy_draw_line_raw
+	dd	_gfx_tandy_dither_box
+	dd	_gfx_tandy_restore_text_mode
+	dd	_gfx_tandy_tile_noop
+	dd	_gfx_tandy_reserved_noop
+	dd	_gfx_tandy_set_raster_op
+	dd	_gfx_tandy_move_box
 _g_22DA	dd	DGROUP:DispatchS03
 	db	0
 _g_22DF	db	0FFh, 00Fh, 0
@@ -100,11 +100,11 @@ _g_22E8	db	0, 0, 011h, 011h, 022h, 022h, 033h, 033h, 044h, 044h, 055h, 055h
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_f_1B4E_015B:far
-	extrn	_f_1B4E_0165:far
-	extrn	_f_1B73_00D9:far
-	extrn	_f_1B73_0196:far
-	extrn	_f_1B73_04BB:far
+	extrn	_gfx_video_bios_ax:far
+	extrn	_gfx_install_driver_callbacks:far
+	extrn	_mouse_show_cursor:far
+	extrn	_mouse_hide_cursor:far
+	extrn	_mouse_refresh_cursor:far
 	extrn	_f_1D8E_0384:far
 	extrn	_f_1D8E_0435:far
 	extrn	_f_1D8E_08EA:far
@@ -113,43 +113,43 @@ DGROUP	group	_DATA
 S03A_TEXT	segment word public 'CODE'
 	assume	cs:S03A_TEXT, ds:DGROUP
 
-	public	_o03_3126_0140
-	public	_o03_3126_019E
-	public	_o03_3126_01B3
-	public	_o03_3126_01BE
-	public	_o03_3126_01DB
-	public	_o03_3126_01F8
-	public	_o03_3126_0210
-	public	_o03_3126_03C2
-	public	_o03_3126_03DA
-	public	_o03_3126_059C
-	public	_o03_3126_070A
-	public	_o03_3126_072D
-	public	_o03_3126_074E
-	public	_o03_3126_080A
-	public	_o03_3126_0844
-	public	_o03_3126_087E
-	public	_o03_3126_08B8
-	public	_o03_3126_08F2
-	public	_o03_3126_091F
-	public	_o03_3126_092C
-	public	_o03_3126_0A4D
-	public	_o03_3126_0AEF
-	public	_o03_3126_0B3F
-	public	_o03_3126_0B88
-	public	_o03_3126_0C11
-	public	_o03_3126_0C1E
-	public	_o03_3126_0F5D
-	public	_o03_3126_104D
-	public	_o03_3126_105A
-	public	_o03_3126_1180
-	public	_o03_3126_1189
-	public	_o03_3126_1192
+	public	_gfx_tandy_init_tandy
+	public	_gfx_tandy_gsetattrib
+	public	_gfx_tandy_restore_text_mode
+	public	_gfx_tandy_select_small_font
+	public	_gfx_tandy_select_big_font
+	public	_gfx_tandy_dither_box
+	public	_gfx_tandy_dither_box_raw
+	public	_gfx_tandy_gpatbox
+	public	_gfx_tandy_pattern_box_raw
+	public	_gfx_tandy_gboxfill
+	public	_gfx_tandy_ginvbox
+	public	_gfx_tandy_picture_size
+	public	_gfx_tandy_capture_box
+	public	_gfx_tandy_set_xor
+	public	_gfx_tandy_set_copy
+	public	_gfx_tandy_set_and
+	public	_gfx_tandy_set_or
+	public	_gfx_tandy_set_raster_op
+	public	_gfx_tandy_gputpics
+	public	_gfx_tandy_put_picture_raw
+	public	_gfx_tandy_prepare_bitmap_row
+	public	_gfx_tandy_blit_row_rop
+	public	_gfx_tandy_blit_row_copy
+	public	_gfx_tandy_shift_bitmap_row
+	public	_gfx_tandy_gputimgs
+	public	_gfx_tandy_put_image_raw
+	public	_gfx_tandy_shift_mono_row
+	public	_gfx_tandy_gline
+	public	_gfx_tandy_draw_line_raw
+	public	_gfx_tandy_tile_noop
+	public	_gfx_tandy_reserved_noop
+	public	_gfx_tandy_move_box
 
 ; Address the source-owned buffer symbolically so a same-segment contribution
 ; prefix cannot redirect its four CS-relative fill/copy accesses.
 linebuf	db	320 dup (0)
-_o03_3126_0140	proc	far
+_gfx_tandy_init_tandy	proc	far
 	push ds
 	push es
 	push si
@@ -171,10 +171,10 @@ L016A:
 L0173:
 	loop L016A
 	les si, dword ptr _g_22DA
-	call far ptr _f_1B4E_0165
+	call far ptr _gfx_install_driver_callbacks
 	mov ax, 9
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	mov ax, ds
 	mov es, ax
@@ -187,9 +187,9 @@ L0173:
 	pop es
 	pop ds
 	retf
-_o03_3126_0140	endp
+_gfx_tandy_init_tandy	endp
 
-_o03_3126_019E	proc	far
+_gfx_tandy_gsetattrib	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
@@ -200,17 +200,17 @@ _o03_3126_019E	proc	far
 	mov byte ptr _g_3DE2, al
 	pop bp
 	retf
-_o03_3126_019E	endp
+_gfx_tandy_gsetattrib	endp
 
-_o03_3126_01B3	proc	far
+_gfx_tandy_restore_text_mode	proc	far
 	mov ax, 3
 	push ax
-	call far ptr _f_1B4E_015B
+	call far ptr _gfx_video_bios_ax
 	pop ax
 	retf
-_o03_3126_01B3	endp
+_gfx_tandy_restore_text_mode	endp
 
-_o03_3126_01BE	proc	far
+_gfx_tandy_select_small_font	proc	far
 	les bx, dword ptr _g_3DA8
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
@@ -218,9 +218,9 @@ _o03_3126_01BE	proc	far
 	mov byte ptr _fontWidth, 4
 	mov word ptr _g_3DDA, 6
 	retf
-_o03_3126_01BE	endp
+_gfx_tandy_select_small_font	endp
 
-_o03_3126_01DB	proc	far
+_gfx_tandy_select_big_font	proc	far
 	les bx, dword ptr _g_3DA4
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
@@ -228,22 +228,22 @@ _o03_3126_01DB	proc	far
 	mov byte ptr _fontWidth, 8
 	mov word ptr _g_3DDA, 8
 	retf
-_o03_3126_01DB	endp
+_gfx_tandy_select_big_font	endp
 
-_o03_3126_01F8	proc	far
+_gfx_tandy_dither_box	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o03_3126_0210
+	je _gfx_tandy_dither_box_raw
 	mov ax, S03A_TEXT
 	push ax
-	mov ax, OFFSET _o03_3126_0210
+	mov ax, OFFSET _gfx_tandy_dither_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_o03_3126_01F8	endp
+_gfx_tandy_dither_box	endp
 
-_o03_3126_0210	proc	far
+_gfx_tandy_dither_box_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 6
@@ -276,7 +276,7 @@ L0234:
 	jg L0268
 	cmp dx, word ptr _g_4340
 	jl L0268
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0268:
 	xor bh, bh
 	mov bl, byte ptr __foreColor
@@ -419,12 +419,12 @@ L0390:
 	je L03AC
 	test byte ptr _g_4331, 0FFh
 	je L03B8
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L03B8
 L03AC:
 	test byte ptr _g_4366, 0FFh
 	jne L03B8
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L03B8:
 	dec byte ptr _g_3DD4
 	pop di
@@ -432,22 +432,22 @@ L03B8:
 	mov sp, bp
 	pop bp
 	retf
-_o03_3126_0210	endp
+_gfx_tandy_dither_box_raw	endp
 
-_o03_3126_03C2	proc	far
+_gfx_tandy_gpatbox	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o03_3126_03DA
+	je _gfx_tandy_pattern_box_raw
 	mov ax, S03A_TEXT
 	push ax
-	mov ax, OFFSET _o03_3126_03DA
+	mov ax, OFFSET _gfx_tandy_pattern_box_raw
 	push ax
 	call far ptr _f_1D8E_0384
 	add sp, 4
 	retf
-_o03_3126_03C2	endp
+_gfx_tandy_gpatbox	endp
 
-_o03_3126_03DA	proc	far
+_gfx_tandy_pattern_box_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 6
@@ -480,7 +480,7 @@ L03FE:
 	jg L0432
 	cmp dx, word ptr _g_4340
 	jl L0432
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0432:
 	xor bh, bh
 	mov bl, byte ptr __foreColor
@@ -628,12 +628,12 @@ L056A:
 	je L0586
 	test byte ptr _g_4331, 0FFh
 	je L0592
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0592
 L0586:
 	test byte ptr _g_4366, 0FFh
 	jne L0592
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0592:
 	dec byte ptr _g_3DD4
 	pop di
@@ -641,9 +641,9 @@ L0592:
 	mov sp, bp
 	pop bp
 	retf
-_o03_3126_03DA	endp
+_gfx_tandy_pattern_box_raw	endp
 
-_o03_3126_059C	proc	far
+_gfx_tandy_gboxfill	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je L05B4
@@ -686,7 +686,7 @@ L05D5:
 	jg L0609
 	cmp dx, word ptr _g_4340
 	jl L0609
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0609:
 	mov bx, word ptr [bp+0Eh]
 	and bx, 0Fh
@@ -799,21 +799,21 @@ L06DA:
 	je L06F6
 	test byte ptr _g_4331, 0FFh
 	je L0702
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0702
 L06F6:
 	test byte ptr _g_4366, 0FFh
 	jne L0702
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0702:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o03_3126_059C	endp
+_gfx_tandy_gboxfill	endp
 
-_o03_3126_070A	proc	far
+_gfx_tandy_ginvbox	proc	far
 	push bp
 	mov bp, sp
 	call near ptr L0EB8
@@ -823,14 +823,14 @@ _o03_3126_070A	proc	far
 	push word ptr [bp+0Ah]
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _o03_3126_059C
+	call far ptr _gfx_tandy_gboxfill
 	add sp, 0Ah
 	call near ptr L0EDA
 	pop bp
 	retf
-_o03_3126_070A	endp
+_gfx_tandy_ginvbox	endp
 
-_o03_3126_072D	proc	far
+_gfx_tandy_picture_size	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+0Ah]
@@ -847,9 +847,9 @@ _o03_3126_072D	proc	far
 	adc dx, 0
 	pop bp
 	retf
-_o03_3126_072D	endp
+_gfx_tandy_picture_size	endp
 
-_o03_3126_074E	proc	far
+_gfx_tandy_capture_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -870,7 +870,7 @@ _o03_3126_074E	proc	far
 	jg L0788
 	cmp dx, word ptr _g_4340
 	jl L0788
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0788:
 	les di, dword ptr [bp+0Eh]
 	mov bx, 0A0h
@@ -917,21 +917,21 @@ L07D9:
 	je L07F6
 	test byte ptr _g_4331, 0FFh
 	je L0802
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0802
 L07F6:
 	test byte ptr _g_4366, 0FFh
 	jne L0802
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0802:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o03_3126_074E	endp
+_gfx_tandy_capture_box	endp
 
-_o03_3126_080A	proc	far
+_gfx_tandy_set_xor	proc	far
 	mov ax, word ptr cs:L091B
 	mov word ptr cs:L0B05, ax
 	mov word ptr cs:L0B21, ax
@@ -947,9 +947,9 @@ _o03_3126_080A	proc	far
 	mov word ptr cs:L0FDC, ax
 	mov byte ptr _g_3DD2, 18h
 	retf
-_o03_3126_080A	endp
+_gfx_tandy_set_xor	endp
 
-_o03_3126_0844	proc	far
+_gfx_tandy_set_copy	proc	far
 	mov ax, word ptr cs:L0EEB
 	mov word ptr cs:L0E68, ax
 	mov word ptr cs:L0E87, ax
@@ -965,9 +965,9 @@ _o03_3126_0844	proc	far
 	mov word ptr cs:L0C01, ax
 	mov byte ptr _g_3DD2, 0
 	retf
-_o03_3126_0844	endp
+_gfx_tandy_set_copy	endp
 
-_o03_3126_087E	proc	far
+_gfx_tandy_set_and	proc	far
 	mov ax, word ptr cs:L0919
 	mov word ptr cs:L0E68, ax
 	mov word ptr cs:L0E87, ax
@@ -983,9 +983,9 @@ _o03_3126_087E	proc	far
 	mov word ptr cs:L0C01, ax
 	mov byte ptr _g_3DD2, 8
 	retf
-_o03_3126_087E	endp
+_gfx_tandy_set_and	endp
 
-_o03_3126_08B8	proc	far
+_gfx_tandy_set_or	proc	far
 	mov ax, word ptr cs:L091D
 	mov word ptr cs:L0E68, ax
 	mov word ptr cs:L0E87, ax
@@ -1001,29 +1001,29 @@ _o03_3126_08B8	proc	far
 	mov word ptr cs:L0C01, ax
 	mov byte ptr _g_3DD2, 10h
 	retf
-_o03_3126_08B8	endp
+_gfx_tandy_set_or	endp
 
-_o03_3126_08F2	proc	far
+_gfx_tandy_set_raster_op	proc	far
 	push bp
 	mov bp, sp
 	push cs
 	mov ax, word ptr [bp+6]
 	cmp al, 10h
 	jne L0902
-	call near ptr _o03_3126_08B8
+	call near ptr _gfx_tandy_set_or
 	jmp short L0917
 L0902:
 	cmp al, 18h
 	jne L090B
-	call near ptr _o03_3126_080A
+	call near ptr _gfx_tandy_set_xor
 	jmp short L0917
 L090B:
 	cmp al, 8
 	jne L0914
-	call near ptr _o03_3126_087E
+	call near ptr _gfx_tandy_set_and
 	jmp short L0917
 L0914:
-	call near ptr _o03_3126_0844
+	call near ptr _gfx_tandy_set_copy
 L0917:
 	pop bp
 	retf
@@ -1033,17 +1033,17 @@ L091B:
 	xor al, ah
 L091D:
 	or al, ah
-_o03_3126_08F2	endp
+_gfx_tandy_set_raster_op	endp
 
-_o03_3126_091F	proc	far
+_gfx_tandy_gputpics	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o03_3126_092C
+	je _gfx_tandy_put_picture_raw
 	call far ptr _f_1D8E_09DE
 	retf
-_o03_3126_091F	endp
+_gfx_tandy_gputpics	endp
 
-_o03_3126_092C	proc	far
+_gfx_tandy_put_picture_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -1069,7 +1069,7 @@ _o03_3126_092C	proc	far
 	jg L0975
 	cmp dx, word ptr _g_4340
 	jl L0975
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0975:
 	mov bx, word ptr [bp+8]
 	add bx, bx
@@ -1103,7 +1103,7 @@ L09A8:
 L09B8:
 	sar ax, 1
 	add di, ax
-	call near ptr _o03_3126_0A4D
+	call near ptr _gfx_tandy_prepare_bitmap_row
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-2], dx
 	assume ss:DGROUP
@@ -1112,7 +1112,7 @@ L09B8:
 	je L0A14
 L09CD:
 	push di
-	call near ptr _o03_3126_0AEF
+	call near ptr _gfx_tandy_blit_row_rop
 	pop di
 	add di, 2000h
 	jns L09DC
@@ -1128,12 +1128,12 @@ L09E1:
 	je L09FE
 	test byte ptr _g_4331, 0FFh
 	je L0A0A
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0A0A
 L09FE:
 	test byte ptr _g_4366, 0FFh
 	jne L0A0A
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0A0A:
 	dec byte ptr _g_3DD4
 	pop di
@@ -1143,7 +1143,7 @@ L0A0A:
 	retf
 L0A14:
 	push di
-	call near ptr _o03_3126_0B3F
+	call near ptr _gfx_tandy_blit_row_copy
 	pop di
 	add di, 2000h
 	jns L0A23
@@ -1155,12 +1155,12 @@ L0A23:
 L0A2A:
 	sar ax, 1
 	add di, ax
-	call near ptr _o03_3126_0A4D
+	call near ptr _gfx_tandy_prepare_bitmap_row
 	mov dx, word ptr [bp+10h]
 	mov word ptr [bp-2], dx
 L0A37:
 	push di
-	call near ptr _o03_3126_0B88
+	call near ptr _gfx_tandy_shift_bitmap_row
 	pop di
 	add di, 2000h
 	jns L0A46
@@ -1169,9 +1169,9 @@ L0A46:
 	dec word ptr [bp-2]
 	jne L0A37
 	jmp L09E1
-_o03_3126_092C	endp
+_gfx_tandy_put_picture_raw	endp
 
-_o03_3126_0A4D	proc	far
+_gfx_tandy_prepare_bitmap_row	proc	far
 	mov ax, word ptr _fd_55B3_3DE6
 	mov bx, word ptr [bp+6]
 	mov bh, al
@@ -1237,9 +1237,9 @@ L0AD7:
 	sub bl, byte ptr ss:_g_3DEF
 	assume ss:nothing
 	retn
-_o03_3126_0A4D	endp
+_gfx_tandy_prepare_bitmap_row	endp
 
-_o03_3126_0AEF	proc	far
+_gfx_tandy_blit_row_rop	proc	far
 	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
 	assume ss:nothing
@@ -1289,9 +1289,9 @@ L0B39:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o03_3126_0AEF	endp
+_gfx_tandy_blit_row_rop	endp
 
-_o03_3126_0B3F	proc	far
+_gfx_tandy_blit_row_copy	proc	far
 	assume ss:DGROUP
 	add si, word ptr ss:_g_3DEF
 	assume ss:nothing
@@ -1335,9 +1335,9 @@ L0B82:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o03_3126_0B3F	endp
+_gfx_tandy_blit_row_copy	endp
 
-_o03_3126_0B88	proc	far
+_gfx_tandy_shift_bitmap_row	proc	far
 	push ds
 	push bp
 	mov bp, sp
@@ -1414,17 +1414,17 @@ L0C0B:
 	pop bp
 	pop ds
 	retn
-_o03_3126_0B88	endp
+_gfx_tandy_shift_bitmap_row	endp
 
-_o03_3126_0C11	proc	far
+_gfx_tandy_gputimgs	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o03_3126_0C1E
+	je _gfx_tandy_put_image_raw
 	call far ptr _f_1D8E_08EA
 	retf
-_o03_3126_0C11	endp
+_gfx_tandy_gputimgs	endp
 
-_o03_3126_0C1E	proc	far
+_gfx_tandy_put_image_raw	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 2
@@ -1450,7 +1450,7 @@ _o03_3126_0C1E	proc	far
 	jg L0C67
 	cmp dx, word ptr _g_4340
 	jl L0C67
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L0C67:
 	mov bl, byte ptr __foreColor
 	shl bl, 1
@@ -1502,12 +1502,12 @@ L0CD3:
 	je L0CF0
 	test byte ptr _g_4331, 0FFh
 	je L0CFC
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L0CFC
 L0CF0:
 	test byte ptr _g_4366, 0FFh
 	jne L0CFC
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L0CFC:
 	dec byte ptr _g_3DD4
 	pop di
@@ -1810,9 +1810,9 @@ L0EFA:
 	assume ss:DGROUP
 	add si, word ptr ss:_g_222C
 	assume ss:nothing
-_o03_3126_0C1E	endp
+_gfx_tandy_put_image_raw	endp
 
-_o03_3126_0F5D	proc	far
+_gfx_tandy_shift_mono_row	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0A2h
@@ -1947,17 +1947,17 @@ L1047:
 	add si, word ptr ss:_g_3DEA
 	assume ss:nothing
 	retn
-_o03_3126_0F5D	endp
+_gfx_tandy_shift_mono_row	endp
 
-_o03_3126_104D	proc	far
+_gfx_tandy_gline	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
-	je _o03_3126_105A
+	je _gfx_tandy_draw_line_raw
 	call far ptr _f_1D8E_0435
 	retf
-_o03_3126_104D	endp
+_gfx_tandy_gline	endp
 
-_o03_3126_105A	proc	far
+_gfx_tandy_draw_line_raw	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1985,7 +1985,7 @@ L108C:
 	jg L109D
 	cmp dx, word ptr _g_4340
 	jl L109D
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L109D:
 	mov bx, word ptr [bp+0Eh]
 	and bx, 0Fh
@@ -2076,21 +2076,21 @@ L1150:
 	je L116C
 	test byte ptr _g_4331, 0FFh
 	je L1178
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L1178
 L116C:
 	test byte ptr _g_4366, 0FFh
 	jne L1178
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L1178:
 	dec byte ptr _g_3DD4
 	pop di
 	pop si
 	pop bp
 	retf
-_o03_3126_105A	endp
+_gfx_tandy_draw_line_raw	endp
 
-_o03_3126_1180	proc	far
+_gfx_tandy_tile_noop	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2099,9 +2099,9 @@ _o03_3126_1180	proc	far
 	pop si
 	pop bp
 	retf
-_o03_3126_1180	endp
+_gfx_tandy_tile_noop	endp
 
-_o03_3126_1189	proc	far
+_gfx_tandy_reserved_noop	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2110,9 +2110,9 @@ _o03_3126_1189	proc	far
 	pop si
 	pop bp
 	retf
-_o03_3126_1189	endp
+_gfx_tandy_reserved_noop	endp
 
-_o03_3126_1192	proc	far
+_gfx_tandy_move_box	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2133,7 +2133,7 @@ _o03_3126_1192	proc	far
 	jg L11CF
 	cmp dx, word ptr _g_4340
 	jl L11CF
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 	jmp L1202
 L11CF:
 	mov ax, word ptr [bp+0Eh]
@@ -2152,7 +2152,7 @@ L11CF:
 	jg L1202
 	cmp dx, word ptr _g_4342
 	jl L1202
-	call far ptr _f_1B73_0196
+	call far ptr _mouse_hide_cursor
 L1202:
 	mov cx, word ptr [bp+10h]
 	mov dx, 0A0h
@@ -2227,12 +2227,12 @@ L1285:
 	je L12A3
 	test byte ptr _g_4331, 0FFh
 	je L12AF
-	call far ptr _f_1B73_04BB
+	call far ptr _mouse_refresh_cursor
 	jmp short L12AF
 L12A3:
 	test byte ptr _g_4366, 0FFh
 	jne L12AF
-	call far ptr _f_1B73_00D9
+	call far ptr _mouse_show_cursor
 L12AF:
 	dec byte ptr _g_3DD4
 	pop di
@@ -2257,7 +2257,7 @@ L12D3:
 	dec bx
 	jne L12B7
 	jmp L1285
-_o03_3126_1192	endp
+_gfx_tandy_move_box	endp
 
 S03A_TEXT	ends
 	end

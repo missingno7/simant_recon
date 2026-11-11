@@ -52,7 +52,7 @@ Validation: **PASS** (2026-11-11)
 | data_bytes_opaque_unmarked | 6,333 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `26c15b18b628415b7bb6d9f06b30656504df345a6028775a3a90571416b7d9a0`
+Manifest: `cb8355a1f76f28ea93db823a8518b69eb388b04a3b022c6f55edd63b93b7584d`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 

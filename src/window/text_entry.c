@@ -2,17 +2,17 @@
 
 extern char near fontWidth;
 extern char near g_3DDC;
-extern void far f_1B4E_0110(int x, int y, int c);
+extern void far gfx_put_fixed_font_char(int x, int y, int c);
 
 char g_2970 = 0;
 
-int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags);
+int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags);
 
 /* draws count blanks from (x, y) */
 void far o09_36EE_000A(int x, int y, int count)
 {
     while (count--) {
-        f_1B4E_0110(x, y, ' ');
+        gfx_put_fixed_font_char(x, y, ' ');
         x += fontWidth;
     }
 }
@@ -20,7 +20,7 @@ void far o09_36EE_000A(int x, int y, int count)
 /* text-cell to pixel coordinates, then edit */
 void far o09_36EE_003C(int col, int row, char far *text, int maxLen, int flags)
 {
-    o09_36EE_0092(col = (col >> 8) + fontWidth * (col & 0xff),
+    ui_edit_text_field(col = (col >> 8) + fontWidth * (col & 0xff),
                   row = g_3DDC * (row & 0xff) + (char)(row >> 8) * g_3DDC / 14,
                   text, maxLen, flags);
 }
@@ -40,22 +40,22 @@ extern int g_5702;
 extern char g_4366;
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern int far f_1FD2_0542(void);
-extern void far f_1B73_0A40(void);
+extern void far kbd_disable_mouse_emulation(void);
 extern void far f_1C62_0737(void);
 extern unsigned far _fstrlen(char far *s);
 extern void far GPutStr(int x, int y, char far *text);
 extern char far * far _fstrcpy(char far *d, char far *s);
-extern int far f_1F58_0038(void);
+extern int far kbd_poll_bios_key(void);
 extern int far win_Events(void);
 extern long far TickCount(void);
-extern int far f_1F58_005A(void);
+extern int far kbd_read_bios_char(void);
 extern char far * far _fstrchr(char far *s, int c);
 extern void far * far _fmemmove(void far *dst, void far *src, unsigned n);
 extern void far f_00DF_016C(void);
-extern void far f_1B73_0A6C(void);
+extern void far kbd_enable_mouse_emulation(void);
 
 /* edits a text field at (x, y); returns the new length + 1, 0 when cancelled */
-int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
+int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
 {
     char buf[100];
     struct Event ev;
@@ -74,7 +74,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
     saved = g_5702;
     while (win_GetEvent(&ev) || f_1FD2_0542())
         ;
-    f_1B73_0A40();
+    kbd_disable_mouse_emulation();
     f_1C62_0737();
     if (g_5702 != saved)
         return 0;
@@ -98,7 +98,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
         if (key == 0)
             key = ' ';
         for (;;) {
-            if (f_1F58_0038() || g_2970 || win_Events()) {
+            if (kbd_poll_bios_key() || g_2970 || win_Events()) {
                 if (blink != 1)
                     break;
             } else {
@@ -112,14 +112,14 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
                     continue;
             }
             blink = !blink;
-            f_1B4E_0110(x, y, blink ? '_' : key);
+            gfx_put_fixed_font_char(x, y, blink ? '_' : key);
             cnt = 0;
         }
         if (win_Events())
             goto done;
         if (g_2970 == 0) {
-            if ((key = f_1F58_005A()) == 0)
-                key = f_1F58_005A() + 0x800;
+            if ((key = kbd_read_bios_char()) == 0)
+                key = kbd_read_bios_char() + 0x800;
         } else {
             key = g_2970;
             g_2970 = 0;
@@ -153,7 +153,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
             }
             _fmemmove(&buf[pos], &buf[pos + 1], len - pos + 1);
             GPutStr(x, y, &buf[pos]);
-            f_1B4E_0110(x + (--len - pos) * fontWidth, y, ' ');
+            gfx_put_fixed_font_char(x + (--len - pos) * fontWidth, y, ' ');
             break;
         case 9:
         case 0x852:
@@ -200,7 +200,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
             if (key < ' ' || key > 0x7f)
                 break;
             buf[pos] = key;
-            f_1B4E_0110(x, y, key);
+            gfx_put_fixed_font_char(x, y, key);
             x += fontWidth;
             pos++;
             break;
@@ -216,7 +216,7 @@ cancel:
     len = -1;
 out:
     g_4366 = 0;
-    f_1B73_0A6C();
+    kbd_enable_mouse_emulation();
     g_2970 = 0;
     return len + 1;
 }

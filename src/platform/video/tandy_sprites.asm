@@ -7,18 +7,18 @@ _DATA	segment word public 'DATA'
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_o03_3126_091F:far
+	extrn	_gfx_tandy_gputpics:far
 
 S03C_TEXT	segment word public 'CODE'
 	assume	cs:S03C_TEXT, ds:DGROUP
 
-	public	_o03_3258_040C
-	public	_o03_3258_040D
-	public	_o03_3258_04CE
-	public	_o03_3258_05A7
-	public	_o03_3258_0690
-	public	_o03_3258_0F04
-	public	_o03_3258_175F
+	public	_gfx_tandy_buffer_noop
+	public	_gfx_tandy_mask_to_buffer
+	public	_gfx_tandy_copy_to_buffer
+	public	_gfx_tandy_buffer_intersection
+	public	_gfx_tandy_draw_life_tile
+	public	_gfx_tandy_compose_life_tile
+	public	_gfx_tandy_scratch_to_buffer
 
 ; LEA uses linker-owned table offsets; the historical contribution started at
 ; frame offset 0Ch, while an independent link may give it a different origin.
@@ -66,11 +66,11 @@ hi	=	hi + 1
 	nibmap	4
 	nibmap	8
 	nibmap	0Eh
-_o03_3258_040C	proc	far
+_gfx_tandy_buffer_noop	proc	far
 	retf
-_o03_3258_040C	endp
+_gfx_tandy_buffer_noop	endp
 
-_o03_3258_040D	proc	far
+_gfx_tandy_mask_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ah
@@ -172,9 +172,9 @@ L0491:
 	mov sp, bp
 	pop bp
 	retf
-_o03_3258_040D	endp
+_gfx_tandy_mask_to_buffer	endp
 
-_o03_3258_04CE	proc	far
+_gfx_tandy_copy_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 0Ch
@@ -290,9 +290,9 @@ L0575:
 	mov sp, bp
 	pop bp
 	retf
-_o03_3258_04CE	endp
+_gfx_tandy_copy_to_buffer	endp
 
-_o03_3258_05A7	proc	far
+_gfx_tandy_buffer_intersection	proc	far
 	push bp
 	mov bp, sp
 	sub sp, 10h
@@ -401,9 +401,9 @@ L067D:
 	mov sp, bp
 	pop bp
 	retf
-_o03_3258_05A7	endp
+_gfx_tandy_buffer_intersection	endp
 
-_o03_3258_0690	proc	far
+_gfx_tandy_draw_life_tile	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -1512,15 +1512,15 @@ L06B8:
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call far ptr _o03_3126_091F
+	call far ptr _gfx_tandy_gputpics
 	add sp, 0Ch
 	pop di
 	pop si
 	pop bp
 	retf
-_o03_3258_0690	endp
+_gfx_tandy_draw_life_tile	endp
 
-_o03_3258_0F04	proc	far
+_gfx_tandy_compose_life_tile	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2625,9 +2625,9 @@ L0F2C:
 	pop si
 	pop bp
 	retf
-_o03_3258_0F04	endp
+_gfx_tandy_compose_life_tile	endp
 
-_o03_3258_175F	proc	far
+_gfx_tandy_scratch_to_buffer	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -2689,7 +2689,7 @@ _o03_3258_175F	proc	far
 	pop si
 	pop bp
 	retf
-_o03_3258_175F	endp
+_gfx_tandy_scratch_to_buffer	endp
 
 S03C_TEXT	ends
 	end

@@ -156,7 +156,7 @@ extern void _fastcall win_SetColorNum(int color);
 extern struct Rect far fd_50F6_10D2;
 extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
 
-void far o13_384C_01E5(void)
+void far yard_update_message(void)
 {
     if (mapMessage) {
         if (TickCount() > fd_55B3_299E) {
@@ -177,9 +177,9 @@ extern void far win_ObjFormatPrint(int obj, ...);
 extern int far ColonyTotalBlack;
 extern int far ColonyTotalRed;
 
-void far o13_384C_027C(void)
+void far yard_draw_content_totals(void)
 {
-    o13_384C_01E5();
+    yard_update_message();
     Draw_SimYard(YardMode, 1);
     win_ObjFormatPrint(0x190c, QueenStorageB);
     win_ObjFormatPrint(0x1912, ColonyTotalBlack);
@@ -205,7 +205,7 @@ void far win_DrawYardWindow(int flags)
         if (YardMode > 1) {
             if (YardMode > 2 || fd_55B3_29A2 || !(flags & 4) || YardMode != g_2A54) {
                 if (g_3DB2 != 320 && !(g_5A97 & 1)) {
-                    o13_384C_01E5();
+                    yard_update_message();
                     win_DrawObjectNum(0x1914);
                     win_GetObjRect(0x1914, &r);
                     y = r.bottom;
@@ -224,7 +224,7 @@ void far win_DrawYardWindow(int flags)
     }
     if (flags & 2) {
         newMapForce = 0;
-        o13_384C_027C();
+        yard_draw_content_totals();
         fd_55B3_29A2 = newMapForce;
         DrawYardCursor();
     }
@@ -234,12 +234,12 @@ extern int _fastcall win_IsWinOpen(int win);
 extern void far clip_SetWin(int win);
 extern void far clip_Off(void);
 
-void far o13_384C_03F8(void)
+void far yard_refresh_message_area(void)
 {
     if (win_IsWinOpen(0x1900) && fd_55B3_29A2) {
         clip_SetWin(0x1900);
         EraseYardCursor();
-        o13_384C_01E5();
+        yard_update_message();
         win_DrawObjectNum(0x1914);
         DrawYardCursor();
         clip_Off();
@@ -581,7 +581,7 @@ void far Draw_SimYard(int mode, int force)
     DrawYardCursor();
 }
 
-extern long far f_24AB_0002(long text);
+extern long far font_make_display_bitmap(long text);
 extern int far out_buffer;
 
 void far DrawAnimYardMessage(void)
@@ -596,7 +596,7 @@ void far DrawAnimYardMessage(void)
     }
     if (mapMessage) {
         font_SetFont(2);
-        g_2A3A = f_24AB_0002(mapMessage);
+        g_2A3A = font_make_display_bitmap(mapMessage);
         font_SetFont(0);
         g_2A40 = hanim_AddAnimObject(yardAnimHandle,
                              (fd_50F6_10D2.right - out_buffer + fd_50F6_10D2.left) / 2,

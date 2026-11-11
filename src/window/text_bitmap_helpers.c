@@ -43,7 +43,7 @@ void far f_208F_002B(int obj, int col)
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far font_PrintStr(int x, int y, char far *text);
 
-void far f_208F_005B(int obj, char far *text, int dx, int dy)
+void far win_print_text_at_obj_offset(int obj, char far *text, int dx, int dy)
 {
     struct Rect r;
 
@@ -254,16 +254,16 @@ void far f_208F_04D0(int delay)
     fd_50F6_46D0 = delay;
 }
 
-extern int far f_1F58_0038(void);
-extern int far f_1F58_0090(void);
+extern int far kbd_poll_bios_key(void);
+extern int far kbd_read_key_code(void);
 extern int far WaitedEnough(long far *timer, int delay);
 
 int far f_208F_04EE(void)
 {
     int key;
 
-    if ((key = f_1F58_0038()) != 0) {
-        key = f_1F58_0090();
+    if ((key = kbd_poll_bios_key()) != 0) {
+        key = kbd_read_key_code();
         if (key != 13 && key != 27)
             key = 0;
     }
@@ -291,8 +291,8 @@ int far f_208F_055B(void)
 
 int far f_208F_056A(void)
 {
-    while (f_1F58_0038())
-        if (f_1F58_0090() == 0x1b)
+    while (kbd_poll_bios_key())
+        if (kbd_read_key_code() == 0x1b)
             return 1;
     return 0;
 }

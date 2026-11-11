@@ -17,7 +17,7 @@ SUITE = "ralloc_memory_v3_startup_handles"
 DG = match.DGROUP_SEG
 # Original startup stores an offset-zero s_2F46; four-byte master slots wrap
 # below it in the same segment. These 64 slots end one paragraph before the
-# heap, matching f_171C_07BE's master reservation plus its extra paragraph.
+# heap, matching mem_init_movable_heap's master reservation plus its extra paragraph.
 # The reserved stack remains in DGROUP.
 HEAP_SEG, HEAP_PARAS = 0xA100, 0x100
 HANDLE_SEG, MASTER_FIRST, MASTER_ONE_PAST = 0x90FF, 0xFFFC, 0
@@ -144,7 +144,7 @@ def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contr
 
 
 
-TARGETS = ("f_171C_09CC", "f_171C_0ADC", "f_171C_0CF4", "f_171C_0FBC")
+TARGETS = ("mem_resize_in_place", "f_171C_0ADC", "f_171C_0CF4", "f_171C_0FBC")
 TRACKED_FUNCTIONS = TARGETS + ("mem_Lock", "mem_Unlock", "f_171C_0BE2", "RallocFree")
 SEQUENCE_EFFECTS = ["operation return", "allocator and master-table state",
     "heap headers and payload bytes", "handle identity and payload preservation",
@@ -196,7 +196,7 @@ def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
         ("f_171C_0CF4", None, "compact later fitting blocks; preserve handles and contents"),
         ("mem_Lock", None, "lock the live soft handle through original manager helper"),
         ("mem_Unlock", None, "unlock the same live soft handle through original manager helper"),
-        ("f_171C_09CC", None, "resize the relocated soft handle and split a real free tail"),
+        ("mem_resize_in_place", None, "resize the relocated soft handle and split a real free tail"),
         ("f_171C_0BE2", None, "reclaim the oldest unlocked soft handle into DiscardEntry"),
         ("RallocFree", None, "free the relocated firm handle through original manager helper"),
         ("f_171C_0FBC", None, "allocate from the updated free list after reclaim/free"),
@@ -224,7 +224,7 @@ def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
             if target == "f_171C_0CF4": args=[0]; result="s16"
             elif target == "mem_Lock": args=[MASTER_FIRST,HANDLE_SEG]; result="farptr"
             elif target == "mem_Unlock": args=[MASTER_FIRST,HANDLE_SEG]; result="farptr"
-            elif target == "f_171C_09CC": args=[MASTER_FIRST,HANDLE_SEG,resize_to,3]; result="s16"
+            elif target == "mem_resize_in_place": args=[MASTER_FIRST,HANDLE_SEG,resize_to,3]; result="s16"
             elif target == "f_171C_0BE2": args=[0]; result="s16"
             elif target == "RallocFree": args=[MASTER_FIRST-4,HANDLE_SEG]; result="void"
             elif target == "f_171C_0FBC": args=[allocation_paras,allocation_type]; result="farptr"
@@ -269,11 +269,11 @@ def completed_allocation_sequence(sequence_id="directed/completed-allocation"):
         args=[160,0,1,0,0xB200], result="farptr", extra=[(0xB2000,b"public-live\0")],
         contract="free arena for two completed original public allocations")
     plan = [
-        ("f_171C_125C", initial, "farptr"),
-        ("f_171C_125C", [32,0,1,0,0xB200], "farptr"),
+        ("mem_alloc_handle_block", initial, "farptr"),
+        ("mem_alloc_handle_block", [32,0,1,0,0xB200], "farptr"),
         ("RallocFree", [MASTER_FIRST,HANDLE_SEG], "void"),
         ("f_171C_0CF4", [0], "s16"),
-        ("f_171C_2136", [0,HEAP_SEG+2], "farptr"),
+        ("mem_handle_from_pointer", [0,HEAP_SEG+2], "farptr"),
         ("RallocFree", [MASTER_FIRST-4,HANDLE_SEG], "void"),
         ("f_171C_0CF4", [0], "s16"),
     ]

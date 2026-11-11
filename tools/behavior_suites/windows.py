@@ -76,7 +76,7 @@ def _window_services():
         "win_UnlockWin": behavior.Callback(0, unlock, ("ax",)),
         "f_2505_02D7": behavior.Callback(0, object_addr, ("ax",)),
         "win_ObjAddr": behavior.Callback(0, object_addr, ("ax",)),
-        "f_2505_0006": behavior.Callback(1, window_addr),
+        "win_locked_resource_ptr": behavior.Callback(1, window_addr),
         "win_Recalc": behavior.Callback(0, recalc, ("ax",)),
     }
 
@@ -169,7 +169,7 @@ def _field_service_fixture(label, obj_index, kind, count, fields):
         state={"lock_depth": 0},
         metadata={"suite": SUITE, "contract": "win_GetVal indexed word result or 0x8000 sentinel, complete synthetic window header and lock trace",
                   "abi": "fastcall: AX=obj, DX=kind; target retf with no immediate stack pop",
-                  "helper_policy": "win_LockWin/win_UnlockWin and f_2505_0006 are deterministic synthetic host services; candidate/original field dereference runs normally",
+                  "helper_policy": "win_LockWin/win_UnlockWin and win_locked_resource_ptr are deterministic synthetic host services; candidate/original field dereference runs normally",
                   "validity": "window 1 with a valid object pointer table; count and index selected by case"})
 
 
@@ -215,11 +215,11 @@ def unlock_case(label, lock_depth, flags, count=0):
                  behavior.Range("g_8CF2", g8cf2, 90),
                  behavior.Range("win_handles", handles, 180)],
         callbacks={"RallocType": behavior.Callback(2, lambda m, a: 0),
-                   "f_171C_2086": behavior.Callback(2, lambda m, a: None)},
+                   "mem_unlock_encoded_handle": behavior.Callback(2, lambda m, a: None)},
         return_kind="void", registers=_registers(ax=WIN_ID), state={},
         metadata={"suite": SUITE, "contract": "nested unlock decrements lock count without entering final release branch",
                   "abi": "fastcall: AX=window; target retf with no immediate stack pop",
-                  "helper_policy": "RallocType reports non-discarded handle; f_171C_2086 is trace-only; only depth > 1 is a valid bounded fixture",
+                  "helper_policy": "RallocType reports non-discarded handle; mem_unlock_encoded_handle is trace-only; only depth > 1 is a valid bounded fixture",
                   "validity": "g_644C enabled; lock byte starts above one; final release path intentionally not reached"})
 
 
@@ -291,7 +291,7 @@ def unlock_live_case(label, object_types=(0,), window_flags=0x800, redraw_pendin
         metadata={"suite": SUITE,
                   "contract": "final-release win_UnlockWin branch with original Ralloc type lookup, lock decrement, free, unlock, type update, globals, and map copy",
                   "abi": "fastcall AX=window; target retf with no immediate stack pop",
-                  "helper_policy": "RallocType, RallocFree, f_171C_2086 and f_171C_20E2 execute actual DOS code; no mocked allocator callbacks",
+                  "helper_policy": "RallocType, RallocFree, mem_unlock_encoded_handle and mem_mark_discardable_20e2 execute actual DOS code; no mocked allocator callbacks",
                   "validity": {"handle": f"real master slot pointer {master_seg:04X}:{master_top:04X}",
                                "block_data": f"{block_data_seg:04x}:0000", "window": 1,
                                "Ralloc_block": "firm type 1, lock count 1, valid linked free tail",
@@ -330,7 +330,7 @@ def clip_empty_case(label):
         callbacks={}, return_kind="void", registers=_registers(),
         metadata={"suite": SUITE, "contract": "empty window stack sets g_574A to the default clip list and clears active clipping pointer",
                   "abi": "void far function; no parameters; retf",
-                  "helper_policy": "original f_1E57_0009 executes; null handles avoid allocator dependencies",
+                  "helper_policy": "original clip_reset_temporary_state executes; null handles avoid allocator dependencies",
                   "validity": "g_5702[0] is the empty-stack sentinel; no window objects or clip handles are live",
                   "coverage_limit": "does not exercise rectangle subtraction, per-window clip lists, handle allocation, 45-entry cache pressure, or window lock state"})
 
@@ -421,7 +421,7 @@ def clip_live_case(label, rects, seed=0x1E57038E, win_ids=None, cache_pressure=F
         callbacks={"win_GetObjRect": cb}, return_kind="void",
         registers=_registers(), state={"rect_provider_calls": []}, observe_at_calls=False,
         metadata={"suite": SUITE, "contract": "ordered per-window clip lists and all allocator-backed rectangle bytes after rebuilding the active window stack",
-                  "abi": "void far f_1E57_038E(void); win_GetObjRect fastcall AX=window, stack far rect, callback pop=4",
+                  "abi": "void far win_rebuild_visible_clips(void); win_GetObjRect fastcall AX=window, stack far rect, callback pop=4",
                   "helper_policy": "actual original Ralloc allocation/lock/unlock/resize/free, _fmemcpy/_fmemset, and actual original f_1D8E_02BD rectangle subtraction; only win_GetObjRect supplies deterministic window geometry",
                   "validity": {"windows": wins, "rectangles": [list(r) for r in rects], "screen": list(screen),
                               "screen_bounds": "normalized signed rectangles within bounded DOS logical coordinates; zero-width/height and partial/off-screen spans are allowed against the 640x400 clip screen",

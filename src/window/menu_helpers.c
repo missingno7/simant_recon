@@ -39,8 +39,8 @@ struct Event {
     int xE;
 };
 
-extern void far f_1B73_030F();
-extern void far f_1B73_0D4B();
+extern void far input_enqueue_event_args();
+extern void far mouse_default_cursor_thunk();
 
 int g_5FE6 = 0x707;
 int g_5FE8 = 0x707;
@@ -50,10 +50,10 @@ int g_5FEE = 0xf0f;
 struct Event near input_queue[7];
 int g_5FF0 = 7;
 struct Timer g_5FF2 = { { 0, 0, 0, 0xff }, 0, (int)(struct Event near *)input_queue, 5, 0, 10, 0 };
-struct Timer g_6004 = { { 0, 0, 100, 100 }, f_1B73_030F, 1, 1, 1, 0, 10 };
-struct Timer g_6016 = { { 0, 0, 100, 100 }, f_1B73_0D4B, 1, 1, 1, 0, -1 };
-struct Timer g_6028 = { { 0, 0, 100, 100 }, f_1B73_0D4B, 1, 1, 1, 0, -1 };
-struct Timer g_603A = { { 0, 0, 0x27f, 0x10 }, f_1B73_030F, 0, 0, 0, 0, 0x1f };
+struct Timer g_6004 = { { 0, 0, 100, 100 }, input_enqueue_event_args, 1, 1, 1, 0, 10 };
+struct Timer g_6016 = { { 0, 0, 100, 100 }, mouse_default_cursor_thunk, 1, 1, 1, 0, -1 };
+struct Timer g_6028 = { { 0, 0, 100, 100 }, mouse_default_cursor_thunk, 1, 1, 1, 0, -1 };
+struct Timer g_603A = { { 0, 0, 0x27f, 0x10 }, input_enqueue_event_args, 0, 0, 0, 0, 0x1f };
 int g_604C = 0;
 int g_604E = 0x100;
 int g_6050 = 0;
@@ -181,20 +181,20 @@ void far f_1FD2_02B1(int mode)
 extern struct Rect far * far f_1CE2_000C(void);
 void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks);
 
-void far f_1FD2_02FF(void)
+void far input_capture_screen(void)
 {
-    f_1FD2_032F(f_1CE2_000C(), f_1B73_0D4B, 100);
+    f_1FD2_032F(f_1CE2_000C(), mouse_default_cursor_thunk, 100);
 }
 
 extern char far fd_5071_0728[];
-extern void far f_1B73_0B5B(int ticks, char far *slot);
+extern void far hotbox_remove_id(int ticks, char far *slot);
 
-void far f_1FD2_031A(void)
+void far input_release_screen_capture(void)
 {
-    f_1B73_0B5B(100, fd_5071_0728);
+    hotbox_remove_id(100, fd_5071_0728);
 }
 
-extern void far f_1B73_0B00(struct Timer far *t, char far *slot);
+extern void far hotbox_prepend(struct Timer far *t, char far *slot);
 
 void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks)
 {
@@ -204,15 +204,15 @@ void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks)
     g_6016.r.bottom = r->bottom;
     g_6016.ticks = ticks;
     g_6016.fn = fn;
-    f_1B73_0B00(&g_6016, fd_5071_0728);
+    hotbox_prepend(&g_6016, fd_5071_0728);
 }
 
 void far f_1FD2_0379(int ticks)
 {
-    f_1B73_0B5B(ticks, fd_5071_0728);
+    hotbox_remove_id(ticks, fd_5071_0728);
 }
 
-extern void far f_1B73_0AC3(struct Timer far *t, char far *slot);
+extern void far hotbox_append(struct Timer far *t, char far *slot);
 
 void far f_1FD2_0390(struct Rect far *r, void (far *fn)(), int ticks)
 {
@@ -222,26 +222,26 @@ void far f_1FD2_0390(struct Rect far *r, void (far *fn)(), int ticks)
     g_6016.r.bottom = r->bottom;
     g_6016.ticks = ticks;
     g_6016.fn = fn;
-    f_1B73_0B5B(ticks, fd_5071_0728);
-    f_1B73_0AC3(&g_6016, fd_5071_0728);
+    hotbox_remove_id(ticks, fd_5071_0728);
+    hotbox_append(&g_6016, fd_5071_0728);
 }
 
 extern char far fd_5071_03C4[];
 
-void far f_1FD2_03EB(struct Rect far *r, int ticks)
+void far input_register_object_rect(struct Rect far *r, int ticks)
 {
     g_6004.r.left = r->left;
     g_6004.r.top = r->top;
     g_6004.r.right = r->right;
     g_6004.r.bottom = r->bottom;
     g_6004.ticks = ticks;
-    f_1B73_0B5B(ticks, fd_5071_03C4);
-    f_1B73_0B00(&g_6004, fd_5071_03C4);
+    hotbox_remove_id(ticks, fd_5071_03C4);
+    hotbox_prepend(&g_6004, fd_5071_03C4);
 }
 
-void far f_1FD2_0438(int ticks)
+void far input_remove_object_rect(int ticks)
 {
-    f_1B73_0B5B(ticks, fd_5071_03C4);
+    hotbox_remove_id(ticks, fd_5071_03C4);
 }
 
 extern char far fd_5071_0060[];
@@ -253,20 +253,20 @@ void far f_1FD2_044F(struct Rect far *r, int ticks)
     g_603A.r.right = r->right;
     g_603A.r.bottom = r->bottom;
     g_603A.ticks = ticks;
-    f_1B73_0B5B(ticks, fd_5071_0060);
-    f_1B73_0B00(&g_603A, fd_5071_0060);
+    hotbox_remove_id(ticks, fd_5071_0060);
+    hotbox_prepend(&g_603A, fd_5071_0060);
 }
 
 void far f_1FD2_049C(int ticks)
 {
-    f_1B73_0B5B(ticks, fd_5071_0060);
+    hotbox_remove_id(ticks, fd_5071_0060);
 }
 
-extern int far f_1B73_0C42(int id, char far *slot, struct Rect far *out);
+extern int far hotbox_get_rect(int id, char far *slot, struct Rect far *out);
 
 int far f_1FD2_04B3(int id, struct Rect far *out)
 {
-    return f_1B73_0C42(id, fd_5071_03C4, out);
+    return hotbox_get_rect(id, fd_5071_03C4, out);
 }
 
 extern int near g_9122;
@@ -285,24 +285,24 @@ int far PointInRect(Point far *pt, struct Rect far *r)
     return 0;
 }
 
-extern void far f_1B73_0BC5(int ticks, char far *slot);
+extern void far hotbox_contains_pointer(int ticks, char far *slot);
 
 void far f_1FD2_052B(int ticks)
 {
-    f_1B73_0BC5(ticks, fd_5071_03C4);
+    hotbox_contains_pointer(ticks, fd_5071_03C4);
 }
 
 extern unsigned char near g_9120;
-extern int far f_1B73_0A30(int key);
+extern int far kbd_scan_state(int key);
 
 int far StillDown(void)
 {
     int mods;
 
     mods = g_9120 & 3;
-    if (f_1B73_0A30(0x52) || f_1B73_0A30(0x39))
+    if (kbd_scan_state(0x52) || kbd_scan_state(0x39))
         mods |= 1;
-    if (f_1B73_0A30(0x53))
+    if (kbd_scan_state(0x53))
         mods |= 2;
     return mods;
 }
@@ -349,7 +349,7 @@ void far ButtonHeldEnd(void)
 extern void far GMixedFill(struct Rect far *r, int fore, int back);
 int far f_1FD2_0663(int draw);
 
-void far f_1FD2_05FD(void)
+void far win_redraw_desktop_menu(void)
 {
     GMixedFill(f_1CE2_000C(), g_5FE6, g_5FE8);
     f_1FD2_0663(1);
@@ -415,8 +415,8 @@ int far f_1FD2_0663(int draw)
     return 1;
 }
 
-extern void far f_1B73_09E9(int x, int y);
-extern int far o10_35F5_01C3(struct Event far *ev);
+extern void far mouse_set_position(int x, int y);
+extern int far menu_track_bar_selection(struct Event far *ev);
 
 void far f_1FD2_07CB(int menu)
 {
@@ -426,28 +426,28 @@ void far f_1FD2_07CB(int menu)
     x = fontWidth * 4 + fd_50F6_46A8[menu];
     ev.code = menu;
     ev.modHi = 0;
-    f_1B73_09E9(x, 1);
-    o10_35F5_01C3(&ev);
+    mouse_set_position(x, 1);
+    menu_track_bar_selection(&ev);
 }
 
-extern int far f_1B73_032A(void);
-extern void far f_1B73_032E(struct Event far *ev);
+extern int far input_event_count(void);
+extern void far input_pop_event(struct Event far *ev);
 
 void far f_1FD2_080D(void)
 {
     struct Event ev;
 
-    while (f_1B73_032A())
-        f_1B73_032E(&ev);
+    while (input_event_count())
+        input_pop_event(&ev);
 }
 
-extern int far f_1F58_0038(void);
-extern int far f_1F58_0090(void);
+extern int far kbd_poll_bios_key(void);
+extern int far kbd_read_key_code(void);
 
 int far f_1FD2_082E(void)
 {
-    while (f_1F58_0038())
-        if (f_1F58_0090() == 13)
+    while (kbd_poll_bios_key())
+        if (kbd_read_key_code() == 13)
             return 1;
     return 0;
 }
@@ -457,7 +457,7 @@ extern int _fastcall win_GetEvent(struct Event far *ev);
 int far f_1FD2_084F(struct Event far *ev)
 {
     while (!win_GetEvent(ev))
-        if (f_1F58_0038() && f_1F58_0090() == 0x1b)
+        if (kbd_poll_bios_key() && kbd_read_key_code() == 0x1b)
             return 0;
     ButtonHeldEnd();
     return 1;
@@ -476,8 +476,8 @@ void far f_1FD2_0883(int x, int y, int object, int ticks, int show)
         r.right = x + size.x;
         r.top = y;
         r.bottom = y + size.y;
-        f_1FD2_03EB(&r, ticks);
+        input_register_object_rect(&r, ticks);
     } else {
-        f_1FD2_0438(ticks);
+        input_remove_object_rect(ticks);
     }
 }

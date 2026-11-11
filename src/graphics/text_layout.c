@@ -13,7 +13,7 @@ struct Pt {
 };
 
 struct Pt far f_1F80_000C(char far *);
-void far f_1F80_0081(int);
+void far timer_wait_double_ticks(int);
 char far * far f_1F80_00B8(char far *, int);
 int far f_1F80_0109(int);
 void far f_1F80_0122(struct Rect far *, int, char far *);
@@ -51,7 +51,7 @@ struct Pt far f_1F80_000C(char far *text)
 
 extern long far TickCount(void);
 
-void far f_1F80_0081(int ticks)
+void far timer_wait_double_ticks(int ticks)
 {
     long t;
 
@@ -128,10 +128,10 @@ void far f_1F80_01F3(struct Rect far *r, int x, int y, int width, int height)
 }
 
 extern void far f_1CE2_016C(int x, int y, char far *format, ...);
-extern int far f_1F58_005A(void);
+extern int far kbd_read_bios_char(void);
 
 void far f_1F80_0280(char far *msg)
 {
     f_1CE2_016C(0, 0x16, "FATAL: %s", msg);
-    f_1F58_005A();
+    kbd_read_bios_char();
 }

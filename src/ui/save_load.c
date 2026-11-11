@@ -23,10 +23,10 @@ extern int far fd_3D57_07AA;
 extern char far fd_50F6_3862[];
 extern struct SaveRec far fd_4E4B_0000[];
 
-extern int far o15_384C_0239(int a);
-extern void far f_1C62_00AC(char far *msg);
-extern int far f_1C62_0415(char far *msg, int a);
-extern void far f_1C62_00C0(char far *msg);
+extern int far ui_prompt_save_discard_cancel(int a);
+extern void far ui_message_acknowledge(char far *msg);
+extern int far ui_choice_prompt(char far *msg, int a);
+extern void far ui_message_transient(char far *msg);
 extern void far f_15D9_009C(void far *p, long a, int b);
 extern void far o11_35F5_0000(void);
 extern void far o11_35F5_0088(int a);
@@ -72,7 +72,7 @@ int far SaveGame(int useLast);
 int far o09_35F5_03C6(char far *name, char far *title, char far *verb, int save);
 void far DoPreLoadInits(void);
 void far DoLoadInitializations(void);
-void far o09_35F5_0D2B(char far *name);
+void far save_normalize_basename(char far *name);
 
 /* 128-byte MacBinary-style header written in front of a saved game */
 unsigned char g_2776[128] = {
@@ -98,7 +98,7 @@ int far LoadGame(void)
     ok = 0;
     if (gGameNeedsSaving != 0) {
         do {
-            r = o15_384C_0239(0);
+            r = ui_prompt_save_discard_cancel(0);
             if (r == 2)
                 return 0;
         } while (r == 1 && SaveGame(0) == 0);
@@ -108,7 +108,7 @@ int far LoadGame(void)
         gGameNeedsSaving = 0;
         fd = open(name, O_RDONLY | O_BINARY);
         if (fd <= 0)
-            f_1C62_00AC(sys_errlist[errno]);
+            ui_message_acknowledge(sys_errlist[errno]);
         else {
             n = 0;
             for (p = fd_4E4B_0000; p->count != 0; p++)
@@ -116,7 +116,7 @@ int far LoadGame(void)
             DoPreLoadInits();
             for (p = fd_4E4B_0000; p->count != 0; p++) {
                 if ((r = read(fd, p->data, n = p->count * p->size)) != n) {
-                    f_1C62_00AC("  Read error  \ngame not loaded");
+                    ui_message_acknowledge("  Read error  \ngame not loaded");
                     CurGameType = -1;
                     goto done;
                 }
@@ -161,14 +161,14 @@ tryit:
     fd = open(name, O_RDWR | O_BINARY);
     if (fd > 0) {
         sprintf(msg, "OVERWRITE\n%s", name);
-        if (f_1C62_0415(msg, 0) == 0)
+        if (ui_choice_prompt(msg, 0) == 0)
             goto write;
         close(fd);
         goto select;
     }
     fd = open(name, O_RDWR | O_CREAT | O_TRUNC | O_BINARY, S_IREAD | S_IWRITE);
     if (fd <= 0) {
-        f_1C62_00AC(sys_errlist[errno]);
+        ui_message_acknowledge(sys_errlist[errno]);
         *fd_50F6_3862 = 0;
         goto done;
     }
@@ -182,7 +182,7 @@ write:
     for (p = fd_4E4B_0000; p->count != 0; p++) {
         if (write(fd, p->data, p->count * p->size) == -1) {
             *fd_50F6_3862 = 0;
-            f_1C62_00AC(sys_errlist[errno]);
+            ui_message_acknowledge(sys_errlist[errno]);
             close(fd);
             remove(name);
             return 0;
@@ -191,7 +191,7 @@ write:
     WinPrintf("\nWRITING");
     gGameNeedsSaving = 0;
     sprintf(msg, "%s\nSaved correctly", name);
-    f_1C62_00C0(msg);
+    ui_message_transient(msg);
     _fstrcpy(fd_50F6_3862, name);
     ok = 1;
     close(fd);
@@ -223,14 +223,14 @@ extern int far fd_50F6_38B6;
 extern char far * far fd_50F6_38B2;
 extern char far g_2970;
 
-extern int far f_1F66_00AF(int drive, char far *path);
+extern int far file_drive_current_directory(int drive, char far *path);
 extern Handle far Ralloc(long size, int flags, char far *name);
 extern void far RallocFree(Handle h);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern void far win_SetObjFormatStr(int obj, ...);
-extern void _fastcall f_22BF_00AA(int obj, struct Rect far *r);
-extern void _fastcall f_22BF_00DD(int obj, struct Rect far *r);
+extern void _fastcall win_get_obj_layout_rect(int obj, struct Rect far *r);
+extern void _fastcall win_set_obj_layout_rect(int obj, struct Rect far *r);
 extern void _fastcall win_MakeGroupUnselectable(int win, int group);
 extern void _fastcall win_MakeGroupInvisible(int win, int group);
 extern void _fastcall win_MakeGroupSelectable(int win, int group);
@@ -239,23 +239,23 @@ extern void far win_Open(int win);
 extern void _fastcall win_Close(int win);
 extern void _fastcall win_DrawObjectNum(int objNum);
 extern void _fastcall win_MakeObjSelected(int obj);
-extern void far f_208F_005B(int obj, char far *text, int dx, int dy);
+extern void far win_print_text_at_obj_offset(int obj, char far *text, int dx, int dy);
 extern void far win_ClearObjToEOL(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far font_FontHeight(void);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far GPutStr(int x, int y, char far *text);
-extern int far f_1F66_002D(char far *pattern, char far *name);
-extern void far f_1F58_0017(void far *a, void far *b, unsigned n);
-extern void _fastcall f_23E6_0266(int obj, char far *text);
-extern int far f_1F58_0038(void);
-extern int far f_1F58_0090(void);
-extern void _fastcall f_23E6_016B(int obj);
-extern void far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags);
+extern int far file_wildcard_match(char far *pattern, char far *name);
+extern void far mem_exchange_byte_ranges(void far *a, void far *b, unsigned n);
+extern void _fastcall list_replace_text(int obj, char far *text);
+extern int far kbd_poll_bios_key(void);
+extern int far kbd_read_key_code(void);
+extern void _fastcall list_clear_selection(int obj);
+extern void far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags);
 extern int _fastcall win_GetEvent(struct Event far *ev);
-extern int _fastcall f_23E6_0109(int obj);
-extern int _fastcall f_23E6_009F(int obj, int line);
-extern char far * _fastcall f_23E6_0132(int obj, int line);
+extern int _fastcall list_line_count(int obj);
+extern int _fastcall list_is_line_selected(int obj, int line);
+extern char far * _fastcall list_line_record(int obj, int line);
 
 
 static int s_2966 = 0;
@@ -299,7 +299,7 @@ int far o09_35F5_03C6(char far *name, char far *title, char far *verb, int save)
     chdir(lastDir);
     if (s_2966 == 0)
         s_2966 = fd_50F6_38B6;
-    if (*name != 0 && f_1F66_00AF(s_2966 - '@', path) != 0) {
+    if (*name != 0 && file_drive_current_directory(s_2966 - '@', path) != 0) {
         if (path[_fstrlen(path) - 1] != '\\')
             _fstrcat(path, "\\");
         sprintf(buf, "%s%s", path, name);
@@ -311,13 +311,13 @@ int far o09_35F5_03C6(char far *name, char far *title, char far *verb, int save)
     win_LockWin(0x1600);
     win_SetObjFormatStr(0x1613, verb);
     win_SetObjFormatStr(0x1601, title);
-    f_22BF_00AA(0x1602, &r);
+    win_get_obj_layout_rect(0x1602, &r);
     if (save != 1) {
         win_MakeGroupUnselectable(0x1600, 5);
         win_MakeGroupInvisible(0x1600, 5);
         r2 = r;
         r2.bottom = 0;
-        f_22BF_00DD(0x1602, &r2);
+        win_set_obj_layout_rect(0x1602, &r2);
     } else {
         win_MakeGroupSelectable(0x1600, 5);
         win_MakeGroupVisible(0x1600, 5);
@@ -331,16 +331,16 @@ redraw:
     oneFloppy = (*(unsigned char far *)0x00000410L & 0xC0) == 0;
     if (s_2966 == 'B' && oneFloppy)
         s_2966 = 'A';
-    if (f_1F66_00AF(s_2966 - '@', path) == 0) {
+    if (file_drive_current_directory(s_2966 - '@', path) == 0) {
 retry:
         sprintf(buf, "Cannot read drive %c", s_2966);
-        f_1C62_00AC(buf);
+        ui_message_acknowledge(buf);
         s_2966 = oldDrive;
-        if ((s_2966 == 0 || f_1F66_00AF(s_2966 - '@', path) == 0) && ((unsigned)save >= 0)) {
+        if ((s_2966 == 0 || file_drive_current_directory(s_2966 - '@', path) == 0) && ((unsigned)save >= 0)) {
             if (fd_50F6_38B6 == s_2966)
-                f_1C62_00AC("Can't read disk\nAborting");
+                ui_message_acknowledge("Can't read disk\nAborting");
             sprintf(buf, "Cannot read drive %c", s_2966);
-            f_1C62_00AC(buf);
+            ui_message_acknowledge(buf);
             oldDrive = fd_50F6_38B6;
             goto retry;
         }
@@ -353,9 +353,9 @@ retry:
     if (path[_fstrlen(path) - 1] != '\\')
         _fstrcat(path, "\\");
     sprintf(buf, "%s*.*", path);
-    f_208F_005B(0x1606, "", 0, 0);
+    win_print_text_at_obj_offset(0x1606, "", 0, 0);
     win_ClearObjToEOL(0x1606);
-    f_208F_005B(0x1606, path, 4, 0);
+    win_print_text_at_obj_offset(0x1606, path, 4, 0);
     if (save == 1) {
         win_GetObjRect(0x1603, &r3);
         tmp2 = r3.top;
@@ -386,7 +386,7 @@ first:
             p += 16;
         } else {
             _fstrlen(ff.name);
-            if (f_1F66_002D("*.ant", ff.name) == 0)
+            if (file_wildcard_match("*.ant", ff.name) == 0)
                 continue;
             nFiles++;
             *p++ = '0';
@@ -406,7 +406,7 @@ first:
                 if (_fmemcmp(best, q, 16) > 0)
                     best = q;
             if (p != best)
-                f_1F58_0017(p, best, 16);
+                mem_exchange_byte_ranges(p, best, 16);
         }
     }
     p = q = list;
@@ -420,12 +420,12 @@ first:
         q += 16;
     }
     *p = 0;
-    f_23E6_0266(0x1609, *h);
+    list_replace_text(0x1609, *h);
     win_DrawObjectNum(0x1609);
     win_DrawObjectNum(0x1608);
     for (;;) {
-        if (f_1F58_0038() && ((unsigned)path >= 0)) {
-            key = f_1F58_0090();
+        if (kbd_poll_bios_key() && ((unsigned)path >= 0)) {
+            key = kbd_read_key_code();
             if (!(key & 0x800) && isalnum(key) && save == 1) {
                 g_2970 = key;
                 goto edit;
@@ -445,10 +445,10 @@ first:
         switch (ev.code) {
         case 0x1604:
 edit:
-            f_23E6_016B(0x1609);
+            list_clear_selection(0x1609);
             win_DrawObjectNum(0x1603);
             win_SetColorFromObjNum(0x1604);
-            o09_36EE_0092(x, y, name, 9, 0);
+            ui_edit_text_field(x, y, name, 9, 0);
             break;
         case 0x1613:
             goto accept;
@@ -458,10 +458,10 @@ edit:
             WinPrintf("\nDEFAULT:Event=%x,%x", ev.code, ev.modifiers);
             if (ev.code == 0x1609) {
                 if (ev.modifiers & 0x0A00) {
-                    n = f_23E6_0109(0x1609);
+                    n = list_line_count(0x1609);
                     sel = -1;
                     for (i = 0; i < n; i++)
-                        if (f_23E6_009F(0x1609, i)) {
+                        if (list_is_line_selected(0x1609, i)) {
                             sel = i;
                             break;
                         }
@@ -473,9 +473,9 @@ edit:
                     }
                 }
                 if (ev.modifiers & 0x6000) {
-                    n = f_23E6_0109(0x1609);
+                    n = list_line_count(0x1609);
                     for (i = 0; i < n; i++)
-                        if (f_23E6_009F(0x1609, i)) {
+                        if (list_is_line_selected(0x1609, i)) {
                             if ((i == sel) && ((unsigned)i >= 0))
                                 goto accept;
                             break;
@@ -488,10 +488,10 @@ edit:
 accept:
         if (*name != 0)
             goto done;
-        n = f_23E6_0109(0x1609);
+        n = list_line_count(0x1609);
         for (i = 0; i < n; i++)
-            if (f_23E6_009F(0x1609, i)) {
-                _fstrcpy(name, f_23E6_0132(0x1609, i) + 1);
+            if (list_is_line_selected(0x1609, i)) {
+                _fstrcpy(name, list_line_record(0x1609, i) + 1);
                 break;
             }
         if (*name == 0)
@@ -516,11 +516,11 @@ done:
     ok = 1;
 close:
     win_Close(0x1600);
-    f_22BF_00DD(0x1602, &r);
+    win_set_obj_layout_rect(0x1602, &r);
     win_UnlockWin(0x1600);
     if (*name != 0) {
         WinPrintf("\nFilename:%s", name);
-        o09_35F5_0D2B(name);
+        save_normalize_basename(name);
         WinPrintf("->%s", name);
     }
     RallocFree(h);
@@ -533,7 +533,7 @@ close:
 }
 
 /* append the default extension to a file name (max. 8 characters) */
-void far o09_35F5_0D2B(char far *name)
+void far save_normalize_basename(char far *name)
 {
     int i;
 

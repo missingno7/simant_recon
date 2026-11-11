@@ -19,11 +19,11 @@ int g_7578 = 0;
 #define SONGP(off) ((unsigned char _based(g_8DFC) *)(off))
 #define SONG(off) (*SONGP(off))
 
-extern void far f_0000_046F(void);
+extern void far snd_service_pending(void);
 
-int far f_284A_0004(void)
+int far snd_service_and_test_stopped(void)
 {
-    f_0000_046F();
+    snd_service_pending();
     return g_756E == 0;
 }
 
@@ -44,7 +44,7 @@ extern int far fd_50F6_4B8E[];
 extern int far fd_50F6_4BAA[];
 extern void far f_29F0_0022(void);
 
-void far f_284A_0013(int number)
+void far snd_load_and_start_song(int number)
 {
     int i;
 
@@ -70,15 +70,15 @@ void far f_284A_0013(int number)
     f_29F0_0022();
 }
 
-extern void far f_0000_039B(struct Song far *song, int number);
-extern void far f_295C_0391(void);
+extern void far snd_release_song_resources(struct Song far *song, int number);
+extern void far snd_stop_assigned_voices(void);
 
 void far StopSong(void)
 {
     if (g_756E) {
         g_756E = 0;
-        f_0000_039B(fd_55B3_00B4, g_7578);
-        f_295C_0391();
+        snd_release_song_resources(fd_55B3_00B4, g_7578);
+        snd_stop_assigned_voices();
     }
 }
 

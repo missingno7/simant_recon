@@ -103,18 +103,18 @@ void far f_0000_0149(struct Sample far *s)
         f_0000_00DE();
 }
 
-extern int far f_284A_0004(void);
+extern int far snd_service_and_test_stopped(void);
 extern void far StopSong(void);
 extern unsigned far FlipWord(unsigned value);
 extern int far g_7576;
 extern int far g_7578;
 extern void far db_UnhookObject(int object, int kind);
 extern void far f_171C_1E86(Handle h, int flags);
-extern int far f_171C_1E9A(Handle h);
+extern int far mem_handle_above_ems_boundary(Handle h);
 extern void far RallocFree(Handle h);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
 extern struct Instr far fd_50F6_0000[];
-void far f_0000_039B(struct Song far *song, int number);
+void far snd_release_song_resources(struct Song far *song, int number);
 
 int far f_0000_0193(struct Song far *song, int number)
 {
@@ -124,7 +124,7 @@ int far f_0000_0193(struct Song far *song, int number)
     unsigned n;
     int i;
 
-    if (f_284A_0004() == 0)
+    if (snd_service_and_test_stopped() == 0)
         StopSong();
     h = f_1A53_00BA(number, 0x12);
     if (h == 0)
@@ -141,7 +141,7 @@ int far f_0000_0193(struct Song far *song, int number)
     f_171C_1E86(song->data, 0x31);
     if (song->data == 0)
         return -1;
-    if (f_171C_1E9A(song->data) != 0) {
+    if (mem_handle_above_ems_boundary(song->data) != 0) {
         old = song->data;
         n = mem_Size(old);
         song->data = Ralloc((long)n, 0x39, "song");
@@ -156,7 +156,7 @@ int far f_0000_0193(struct Song far *song, int number)
     for (i = 0; i < 14; i++) {
         if (fd_50F6_0000[song->bank[i]].kind == 1) {
             if (f_0000_0090(fd_50F6_0000[song->bank[i]].sample) == -1) {
-                f_0000_039B(song, number);
+                snd_release_song_resources(song, number);
                 return -1;
             }
             fd_50F6_0000[song->bank[i]].sample->loaded = 2;
@@ -165,7 +165,7 @@ int far f_0000_0193(struct Song far *song, int number)
     return 0;
 }
 
-void far f_0000_039B(struct Song far *song, int number)
+void far snd_release_song_resources(struct Song far *song, int number)
 {
     int i;
     struct Sample far *s;
@@ -183,14 +183,14 @@ void far f_0000_039B(struct Song far *song, int number)
     }
 }
 
-extern void far f_295C_0391(void);
+extern void far snd_stop_assigned_voices(void);
 
 void far f_0000_0429(void)
 {
     int i;
 
     StopSong();
-    f_295C_0391();
+    snd_stop_assigned_voices();
     for (i = 0; i < 56; i++)
         if (fd_50F6_0000[i].kind == 1)
             f_0000_0149(fd_50F6_0000[i].sample);
@@ -201,7 +201,7 @@ extern int far g_756E;
 extern struct Song far * far fd_55B3_00B4;
 extern void far f_295C_0015(void);
 
-void far f_0000_046F(void)
+void far snd_service_pending(void)
 {
     if (fd_50F6_01F0[0] != 0) {
         if (g_756E == 2)

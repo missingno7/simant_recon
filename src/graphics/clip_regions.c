@@ -31,7 +31,7 @@ void far f_1E57_0007(void)
 extern void far mem_Free(Handle h);
 extern struct Rect far * near g_5AAC;
 
-void far f_1E57_0009(void)
+void far clip_reset_temporary_state(void)
 {
     if (g_5742) {
         mem_Free(g_5742);
@@ -42,14 +42,14 @@ void far f_1E57_0009(void)
     g_5AAC = 0;
 }
 
-void far f_1E57_00B1(int win);
+void far win_raise_and_reclip(int win);
 
 void far f_1E57_0043(int win)
 {
-    f_1E57_00B1(win);
+    win_raise_and_reclip(win);
 }
 
-void far f_1E57_038E(void);
+void far win_rebuild_visible_clips(void);
 
 void far f_1E57_0052(int win)
 {
@@ -66,12 +66,12 @@ void far f_1E57_0052(int win)
     }
     g_5702[j] = win;
     g_5702[j + 1] = 0x8000;
-    f_1E57_038E();
+    win_rebuild_visible_clips();
 }
 
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
 
-void far f_1E57_00B1(int win)
+void far win_raise_and_reclip(int win)
 {
     int buf[32];
     int i;
@@ -87,7 +87,7 @@ void far f_1E57_00B1(int win)
     }
     buf[j] = 0x8000;
     _fmemcpy(g_5702, buf, sizeof(buf));
-    f_1E57_038E();
+    win_rebuild_visible_clips();
 }
 
 extern int far WinPrintf(char far *format, ...);
@@ -107,7 +107,7 @@ void far clip_KillWin(int win)
     }
     if (i >= 31)
         WinPrintf("\nWARNING: i>=MAXWINDOWS-1 in KillWin(%d)", win);
-    f_1E57_038E();
+    win_rebuild_visible_clips();
 }
 
 extern int _fastcall win_IsWinOpen(int win);
@@ -122,7 +122,7 @@ void far clip_SetWin(int win)
     struct Rect far *p;
     int size;
 
-    f_1E57_0009();
+    clip_reset_temporary_state();
     win &= 0xff00;
     if (win_IsWinOpen(win)) {
         g_5746 = fd_50F6_3B60[win >> 8];
@@ -160,7 +160,7 @@ void far f_1E57_0296(void)
     struct Rect far *p;
     int size;
 
-    f_1E57_0009();
+    clip_reset_temporary_state();
     if (g_574A == &g_574E) {
         g_5AAC = &g_5A9C;
         return;
@@ -180,13 +180,13 @@ void far f_1E57_0296(void)
 
 void far f_1E57_0351(void)
 {
-    f_1E57_0009();
+    clip_reset_temporary_state();
     g_5AAC = &g_5A9C;
 }
 
 void far clip_Off(void)
 {
-    f_1E57_0009();
+    clip_reset_temporary_state();
     g_5AAC = 0;
 }
 
@@ -209,7 +209,7 @@ extern struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *li
 extern Handle far mem_Realloc(Handle h, long size, int flags);
 
 
-void far f_1E57_038E(void)
+void far win_rebuild_visible_clips(void)
 {
     int i;
     int next;
@@ -221,7 +221,7 @@ void far f_1E57_038E(void)
     Handle tmpH;
     struct Rect far *tmp;
 
-    f_1E57_0009();
+    clip_reset_temporary_state();
     if (!s_584C) {
         _fmemset(fd_50F6_3B60, 0, sizeof(fd_50F6_3B60));
         s_584C = 1;
@@ -284,7 +284,7 @@ void far f_1E57_038E(void)
 }
 
 
-extern struct Rect far * far f_1D8E_003F(struct Rect far *r, struct Rect far *c,
+extern struct Rect far * far clip_split_rect(struct Rect far *r, struct Rect far *c,
                                          struct Rect far *in, struct Rect far *out);
 
 void far clip_SubInclude(struct Rect far *r)
@@ -303,7 +303,7 @@ void far clip_SubInclude(struct Rect far *r)
             *p = *r;
         } else {
             for (; g_5AAC->top != (int)0x8000; g_5AAC++)
-                p = f_1D8E_003F(g_5AAC, r, p, 0L);
+                p = clip_split_rect(g_5AAC, r, p, 0L);
             if ((n = p - buf) >= 256)
                 Punt("CL074:Temp clip overflow in SubInclude");
         }
@@ -313,7 +313,7 @@ void far clip_SubInclude(struct Rect far *r)
     mem_Unlock(h);
     if (!(h = mem_Realloc(h, (long)(n + 1) << 3, 1)))
         Punt("Clip out of memory!!!");
-    f_1E57_0009();
+    clip_reset_temporary_state();
     g_5AAC = fd_50F6_3C14;
     _fmemcpy(g_5AAC, mem_Lock(h), (n + 1) << 3);
     mem_Unlock(h);
@@ -339,7 +339,7 @@ void far f_1E57_08F5(struct Rect far *r)
         } else {
             for (; r->top != (int)0x8000; r++)
                 for (c = g_5AAC; c->top != (int)0x8000; c++)
-                    p = f_1D8E_003F(c, r, p, 0L);
+                    p = clip_split_rect(c, r, p, 0L);
             if ((n = p - buf) >= 256)
                 Punt("CL074:Temp clip overflow in SubInclude");
         }
@@ -349,7 +349,7 @@ void far f_1E57_08F5(struct Rect far *r)
     mem_Unlock(h);
     if (!(h = mem_Realloc(h, (long)(n + 1) << 3, 1)))
         Punt("Clip out of memory!!!");
-    f_1E57_0009();
+    clip_reset_temporary_state();
     g_5AAC = fd_50F6_3C14;
     _fmemcpy(g_5AAC, mem_Lock(h), (n + 1) << 3);
     mem_Unlock(h);
@@ -357,7 +357,7 @@ void far f_1E57_08F5(struct Rect far *r)
     f_1E57_0006(n, 1);
 }
 
-void far f_1E57_0A9C(struct Rect far *r)
+void far clip_restrict_rect(struct Rect far *r)
 {
     clip_SubInclude(r);
 }
@@ -375,7 +375,7 @@ void far clip_SubExclude(struct Rect far *r)
         if (!g_5AAC)
             g_5AAC = &g_5A9C;
         for (p = buf; g_5AAC->top != (int)0x8000; g_5AAC++)
-            p = f_1D8E_003F(g_5AAC, r, 0L, p);
+            p = clip_split_rect(g_5AAC, r, 0L, p);
         if ((n = p - buf) >= 256)
             Punt("CL074:Temp clip overflow in SubExclude");
     } else
@@ -385,7 +385,7 @@ void far clip_SubExclude(struct Rect far *r)
     mem_Unlock(h);
     if (!(h = mem_Realloc(h, (long)(n + 1) << 3, 1)))
         Punt("Clip out of memory!!!");
-    f_1E57_0009();
+    clip_reset_temporary_state();
     g_5AAC = fd_50F6_3C14;
     _fmemcpy(g_5AAC, mem_Lock(h), (n + 1) << 3);
     mem_Unlock(h);
@@ -412,7 +412,7 @@ void far f_1E57_0C2D(struct Rect far *r)
             for (c = g_5AAC, p = buf; c->top != (int)0x8000; c++, p++)
                 *p = *c;
             for (; g_5AAC->top != (int)0x8000; g_5AAC++)
-                p = f_1D8E_003F(r, g_5AAC, 0L, p);
+                p = clip_split_rect(r, g_5AAC, 0L, p);
             if ((n = p - buf) >= 256)
                 Punt("CL174:Temp clip overflow in SubExclude");
         } else {
@@ -423,7 +423,7 @@ void far f_1E57_0C2D(struct Rect far *r)
         Punt("include NULL rect!!");
     f_1E57_0006(n, 1);
     buf[n].top = 0x8000;
-    f_1E57_0009();
+    clip_reset_temporary_state();
     g_5AAC = fd_50F6_3C14;
     _fmemcpy(g_5AAC, buf, (n + 1) << 3);
     mem_Unlock(h);
@@ -472,7 +472,7 @@ void far clip_Pop(void)
 
     if (!g_5756)
         Punt("Clip_Pop w/ nothing on the stack: E9073");
-    f_1E57_0009();
+    clip_reset_temporary_state();
     g_5742 = fd_50F6_3B5C;
     node = (Handle far *)mem_Lock(g_5742);
     fd_50F6_3B5C = node[0];
@@ -499,11 +499,11 @@ void far f_1E57_0F8E(struct Rect far *r)
 }
 
 
-void far f_1E57_0FDC(struct Rect far *r)
+void far clip_set_screen_intersection(struct Rect far *r)
 {
     if (r) {
-        f_1E57_0009();
+        clip_reset_temporary_state();
         g_5AAC = fd_50F6_3C14;
-        f_1D8E_003F(r, &g_5A9C, fd_50F6_3C14, 0L);
+        clip_split_rect(r, &g_5A9C, fd_50F6_3C14, 0L);
     }
 }

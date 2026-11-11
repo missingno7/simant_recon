@@ -17,30 +17,30 @@ DGROUP	group	_DATA
 KBD_TEXT	segment word public 'CODE'
 	assume	cs:KBD_TEXT, ds:DGROUP
 
-	public	_f_1F58_0006
-	public	_f_1F58_0014
-	public	_f_1F58_0017
-	public	_f_1F58_0038
-	public	_f_1F58_005A
-	public	_f_1F58_007F
-	public	_f_1F58_0090
-	public	_f_1F58_00A1
-	public	_f_1F58_00B8
+	public	_timer_bios_tick_count
+	public	_input_return_zero
+	public	_mem_exchange_byte_ranges
+	public	_kbd_poll_bios_key
+	public	_kbd_read_bios_char
+	public	_kbd_unread_char
+	public	_kbd_read_key_code
+	public	_kbd_restore_ctrl_break_vector
+	public	_kbd_install_ctrl_break_vector
 
-_f_1F58_0006	proc	far
+_timer_bios_tick_count	proc	far
 	xor ax, ax
 	mov es, ax
 	mov ax, word ptr es:[46Ch]
 	mov dx, word ptr es:[46Eh]
 	retf
-_f_1F58_0006	endp
+_timer_bios_tick_count	endp
 
-_f_1F58_0014	proc	far
+_input_return_zero	proc	far
 	xor ax, ax
 	retf
-_f_1F58_0014	endp
+_input_return_zero	endp
 
-_f_1F58_0017	proc	far
+_mem_exchange_byte_ranges	proc	far
 	push bp
 	mov bp, sp
 	push ds
@@ -63,9 +63,9 @@ L0033:
 	pop ds
 	pop bp
 	retf
-_f_1F58_0017	endp
+_mem_exchange_byte_ranges	endp
 
-_f_1F58_0038	proc	far
+_kbd_poll_bios_key	proc	far
 	mov ax, word ptr _g_5A2A
 	and ax, ax
 	jne L0047
@@ -81,9 +81,9 @@ L0047:
 	and word ptr es:[417h], not NumLockState
 L0059:
 	retf
-_f_1F58_0038	endp
+_kbd_poll_bios_key	endp
 
-_f_1F58_005A	proc	far
+_kbd_read_bios_char	proc	far
 	mov ax, word ptr _g_5A2A
 	and ax, ax
 	jne L0072
@@ -103,9 +103,9 @@ L0072:
 	xchg word ptr _g_5A2C, cx
 	mov word ptr _g_5A2A, cx
 	retf
-_f_1F58_005A	endp
+_kbd_read_bios_char	endp
 
-_f_1F58_007F	proc	far
+_kbd_unread_char	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
@@ -114,19 +114,19 @@ _f_1F58_007F	proc	far
 	mov word ptr _g_5A2C, ax
 	pop bp
 	retf
-_f_1F58_007F	endp
+_kbd_unread_char	endp
 
-_f_1F58_0090	proc	far
-	call far ptr _f_1F58_005A
+_kbd_read_key_code	proc	far
+	call far ptr _kbd_read_bios_char
 	and ax, ax
 	jne L00A0
-	call far ptr _f_1F58_005A
+	call far ptr _kbd_read_bios_char
 	mov ah, 8
 L00A0:
 	retf
-_f_1F58_0090	endp
+_kbd_read_key_code	endp
 
-_f_1F58_00A1	proc	far
+_kbd_restore_ctrl_break_vector	proc	far
 	cli
 	xor ax, ax
 	mov es, ax
@@ -136,9 +136,9 @@ _f_1F58_00A1	proc	far
 	mov word ptr es:[8Eh], dx
 	sti
 	retf
-_f_1F58_00A1	endp
+_kbd_restore_ctrl_break_vector	endp
 
-_f_1F58_00B8	proc	far
+_kbd_install_ctrl_break_vector	proc	far
 	push bp
 	mov bp, sp
 	cli
@@ -152,7 +152,7 @@ _f_1F58_00B8	proc	far
 	mov word ptr _g_5A30, dx
 	push cs
 	assume	ds:KBD_TEXT
-	lea bx, _f_1F58_00A1
+	lea bx, _kbd_restore_ctrl_break_vector
 	assume	ds:DGROUP
 	push bx
 	call far ptr _atexit
@@ -160,7 +160,7 @@ _f_1F58_00B8	proc	far
 	sti
 	pop bp
 	retf
-_f_1F58_00B8	endp
+_kbd_install_ctrl_break_vector	endp
 
 KBD_TEXT	ends
 

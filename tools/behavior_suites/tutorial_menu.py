@@ -292,10 +292,10 @@ def _menu_callbacks():
         machine.state["host_trace"].append(["flush-key", args[0]])
 
     def cleanup(machine, args):
-        machine.state["host_trace"].append(["input-cleanup", "f_1FD2_031A"])
+        machine.state["host_trace"].append(["input-cleanup", "input_release_screen_capture"])
 
     def cursor_cleanup(machine, args):
-        machine.state["host_trace"].append(["cursor-cleanup", "f_1B73_0A6C"])
+        machine.state["host_trace"].append(["cursor-cleanup", "kbd_enable_mouse_emulation"])
 
     def mouse_setup(machine, args):
         # Original implementation queries INT 33h and initializes the DOS
@@ -306,21 +306,21 @@ def _menu_callbacks():
     return {
         "malloc": b.Callback(1, alloc), "free": b.Callback(2, release),
         "f_1B73_0504": b.Callback(0, tick_count),
-        "f_1F80_0081": b.Callback(1, delay_ticks), "f_1B73_0A40": b.Callback(0, mouse_setup),
+        "timer_wait_double_ticks": b.Callback(1, delay_ticks), "kbd_disable_mouse_emulation": b.Callback(0, mouse_setup),
         "GetMousePos": b.Callback(2, point, project=lambda m,a:{"destination":"logical-point"}),
         "f_1FD2_0542": b.Callback(0, still_down),
-        "f_1F58_0038": b.Callback(0, key_ready), "f_1F58_0090": b.Callback(0, key_read),
-        "f_1B73_032A": b.Callback(0, event_ready),
-        "f_1B73_032E": b.Callback(2, event_read, project=lambda m,a:{"destination":"logical-event"}),
+        "kbd_poll_bios_key": b.Callback(0, key_ready), "kbd_read_key_code": b.Callback(0, key_read),
+        "input_event_count": b.Callback(0, event_ready),
+        "input_pop_event": b.Callback(2, event_read, project=lambda m,a:{"destination":"logical-event"}),
         "GPutStr": b.Callback(4,draw_font_text,project=lambda m,a:{"x":a[0],"y":a[1],
             "text":_str_read(m,a[2],a[3]).hex()}),
-        "f_1FD2_02B1": b.Callback(1, draw_mode), "f_1FD2_02FF": b.Callback(0),
+        "f_1FD2_02B1": b.Callback(1, draw_mode), "input_capture_screen": b.Callback(0),
         "GSaveRect": b.Callback(2, save_rect, project=lambda m,a:{"rect":_rect(m,a[0],a[1])}),
-        "f_1CE2_056C": b.Callback(4, restore_rect,
+        "gfx_restore_and_free_rect": b.Callback(4, restore_rect,
             project=lambda m,a:{"rect":_rect(m,a[0],a[1]),"surface":"saved-menu-rectangle"}),
-        "f_1B73_09E9": b.Callback(2, warp), "f_1B73_030F": b.Callback(5, dispatch),
-        "f_1F58_007F": b.Callback(1, key_flush), "f_1B73_0A6C": b.Callback(0, cursor_cleanup),
-        "f_1FD2_031A": b.Callback(0, cleanup),
+        "mouse_set_position": b.Callback(2, warp), "input_enqueue_event_args": b.Callback(5, dispatch),
+        "kbd_unread_char": b.Callback(1, key_flush), "kbd_enable_mouse_emulation": b.Callback(0, cursor_cleanup),
+        "input_release_screen_capture": b.Callback(0, cleanup),
     }
 
 
@@ -373,7 +373,7 @@ def menu_case(label, keys, *, curmenu=-1, events=(), points=(), down=(), items=N
             "abi":"far C routine: stack far char* selection, stack far far* items; caller cleanup 8 bytes",
             "validity":{"item_table":items,"sentinel":"null far pointer","initial_selection":selected,
                 "current_menu":curmenu,"screen":[width,height],"line_height":line_height,"char_width":char_width},
-            "modeled_boundary":"Host keyboard/mouse/event providers, display save/draw/restore/cursor commands, DOS mouse setup (INT 33h query), asynchronous TickCount, DOS f_1F80_0081 delay ticks, and one successful 4000-byte menu-buffer allocation are deterministic providers. f_1F80_0081 advances the deterministic timer by exactly its positive tick argument; TickCount advances one tick per call so original delay helpers run. The allocator returns a zeroed bounded scratch buffer and verifies the matching release. Original sprintf and f_1FD2_0008/vsprintf formatters execute; GPutStr is projected as a C string at the actual renderer sink. Both runtime-proved cursor views retain cursor advancement and remaining capacity while abstracting only invocation-stack pointer homes; if a stream record points to the modeled menu heap, the record remains raw. Raw writes and traces remain in the evidence ledger. Sink projections, per-call snapshots, final globals, all final nonstack writes, strings, rectangles, and input consumption remain compared. Original rectangle adjustment/containment, strings, formatter, and all other semantic helpers run in DOS code.",
+            "modeled_boundary":"Host keyboard/mouse/event providers, display save/draw/restore/cursor commands, DOS mouse setup (INT 33h query), asynchronous TickCount, DOS timer_wait_double_ticks delay ticks, and one successful 4000-byte menu-buffer allocation are deterministic providers. timer_wait_double_ticks advances the deterministic timer by exactly its positive tick argument; TickCount advances one tick per call so original delay helpers run. The allocator returns a zeroed bounded scratch buffer and verifies the matching release. Original sprintf and f_1FD2_0008/vsprintf formatters execute; GPutStr is projected as a C string at the actual renderer sink. Both runtime-proved cursor views retain cursor advancement and remaining capacity while abstracting only invocation-stack pointer homes; if a stream record points to the modeled menu heap, the record remains raw. Raw writes and traces remain in the evidence ledger. Sink projections, per-call snapshots, final globals, all final nonstack writes, strings, rectangles, and input consumption remain compared. Original rectangle adjustment/containment, strings, formatter, and all other semantic helpers run in DOS code.",
             "input":{"keys":list(keys),"events":list(events),"points":list(points),"down":list(down)}})
 
 
@@ -446,8 +446,8 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
         # attribute writes remain observable sink calls with the same ABI.
         machine.state["input_phase"]="live"
         machine.state["host_trace"].append(["dialog-attribute",list(args)])
-    callbacks["f_1F58_0038"]=b.Callback(0,keyboard_ready)
-    callbacks["f_1F58_005A"]=b.Callback(0,pending_key)
+    callbacks["kbd_poll_bios_key"]=b.Callback(0,keyboard_ready)
+    callbacks["kbd_read_bios_char"]=b.Callback(0,pending_key)
     callbacks["f_1FD2_02B1"]=b.Callback(3,video_attribute,
         project=lambda m,a:{"boundary":"HOST:g_9128 attribute setter","args":list(a)})
     return b.Case(label=label,args=[msg_off,DATA_SEG,set_id],writes=writes,

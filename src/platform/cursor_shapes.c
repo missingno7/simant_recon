@@ -43,8 +43,8 @@ void far f_1B28_0069(void)
 
 extern int far fd_55B3_6262;
 int near g_8CBC;
-extern void far f_1B73_01E1(char far *image, char far *mask);
-extern void far f_1B73_00D9(void);
+extern void far mouse_set_cursor_bitmaps(char far *image, char far *mask);
+extern void far mouse_show_cursor(void);
 
 int far f_1B28_006A(int shape)
 {
@@ -68,8 +68,8 @@ int far f_1B28_006A(int shape)
             g_3D02 = image;
             g_3D06 = mask;
         }
-        f_1B73_01E1(*g_3D02, *g_3D06);
-        f_1B73_00D9();
+        mouse_set_cursor_bitmaps(*g_3D02, *g_3D06);
+        mouse_show_cursor();
     }
     g_3D0E = 0;
     return 1;
@@ -77,7 +77,7 @@ int far f_1B28_006A(int shape)
 
 extern void far RallocFree(Handle h);
 
-int far f_1B28_0129(int object)
+int far mouse_load_cursor_resources(int object)
 {
     Handle image;
     Handle mask;

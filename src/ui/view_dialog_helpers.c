@@ -83,37 +83,37 @@ static long g_8BA4;
 extern int far WaitedEnough(long far *, int);
 extern int far fd_55B3_2CBC;
 extern char far fd_55B3_2CBA;
-void far f_00F8_01BE(void);
+void far ui_pump_events_edge_scroll(void);
 
 void far f_00F8_017D(void)
 {
     if (WaitedEnough(&g_8BA4, 2) && fd_55B3_2CBC == 0) {
         fd_55B3_2CBA = 1;
-        f_00F8_01BE();
+        ui_pump_events_edge_scroll();
         fd_55B3_2CBA = 0;
     }
 }
 
 extern int far win_Events(void);
-extern int far f_1F58_0038(void);
-extern int far f_1B73_0A30(int);
+extern int far kbd_poll_bios_key(void);
+extern int far kbd_scan_state(int);
 extern void far DoEvent(void);
-extern int far f_1B73_0EEE(void);
+extern int far kbd_scroll_lock_state(void);
 extern int near g_9122;
 extern int near g_3DB2;
 extern int near g_9124;
 extern int near g_3DB4;
-extern int far f_0250_0D10(int dx, int dy);
+extern int far edit_scroll_and_redraw(int dx, int dy);
 
-void far f_00F8_01BE(void)
+void far ui_pump_events_edge_scroll(void)
 {
     int dx, dy;
 
-    if (win_Events() || f_1F58_0038() || f_1B73_0A30(0x1d) || fd_55B3_2CBC)
+    if (win_Events() || kbd_poll_bios_key() || kbd_scan_state(0x1d) || fd_55B3_2CBC)
         DoEvent();
     do {
         dx = dy = 0;
-        if (f_1B73_0EEE())
+        if (kbd_scroll_lock_state())
             break;
         if (g_9122 <= 1)
             dx = -1;
@@ -125,7 +125,7 @@ void far f_00F8_01BE(void)
             dy = 1;
         if (!dx && !dy)
             break;
-    } while (f_0250_0D10(dx, dy));
+    } while (edit_scroll_and_redraw(dx, dy));
 }
 
 extern void _fastcall win_MakeGroupUnselected(int win, int group);
@@ -147,12 +147,12 @@ void far myDelay(unsigned ticks)
         ;
 }
 
-extern void far f_0000_046F(void);
+extern void far snd_service_pending(void);
 extern int far StillDown(void);
 
 void far myButton(void)
 {
-    f_0000_046F();
+    snd_service_pending();
     StillDown();
 }
 
@@ -254,13 +254,13 @@ int far TileIsVisible(int plane, int x, int y)
     return r;
 }
 
-extern int far f_1F58_0090(void);
+extern int far kbd_read_key_code(void);
 
 int far f_00F8_040F(void)
 {
     int k;
 
-    if (f_1F58_0038() && (k = f_1F58_0090() == 0x1b) || k == 12)
+    if (kbd_poll_bios_key() && (k = kbd_read_key_code() == 0x1b) || k == 12)
         return 1;
     return 0;
 }
@@ -340,24 +340,24 @@ char far * far f_00F8_0543(int object, int type)
 
 extern void far ch_SetCacheHooks(char far * (far *cache)(int object, int type));
 
-void far f_00F8_0585(void)
+void far res_install_cache_hook(void)
 {
     ch_SetCacheHooks(f_00F8_0543);
 }
 
 extern int far WinPrintf(char far *format, ...);
-void far f_00F8_05B4(void);
+void far win_redraw_current_clip(void);
 
 void far UpdateEverything(void)
 {
     WinPrintf("\nUPDATEEVERYTHING!");
-    f_00F8_05B4();
+    win_redraw_current_clip();
 }
 
 extern void _fastcall f_21FA_0AD2(struct Rect far *rect);
 extern struct Rect far g_5A9C;
 
-void far f_00F8_05B4(void)
+void far win_redraw_current_clip(void)
 {
     f_21FA_0AD2(&g_5A9C);
 }
@@ -366,7 +366,7 @@ int far DialogAbort(void)
 {
     if (DialogWait())
         return 1;
-    if (f_1F58_0038() && f_1F58_0090() == 0x1b)
+    if (kbd_poll_bios_key() && kbd_read_key_code() == 0x1b)
         return 1;
     return 0;
 }
@@ -378,8 +378,8 @@ int far DialogAbortOrCont(void)
     if (DialogWait()) {
         WinPrintf("WAIT YES");
         r = 1;
-    } else if (f_1F58_0038()) {
-        r = f_1F58_0090();
+    } else if (kbd_poll_bios_key()) {
+        r = kbd_read_key_code();
     } else {
         r = 0;
     }

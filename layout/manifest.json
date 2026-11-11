@@ -24,10 +24,10 @@
     "end": 203475
    },
    "source": "src/platform/video/planar_minimap.asm",
-   "source_sha256": "759e12a0bc410565f75846b60e76b9b727edda9f0944ed62c8524445f1405efe",
+   "source_sha256": "e3e1eaef5c466a6a1d5fe292df331d11a83a349944a7f923d195e2aeba4109ad",
    "claims": [
     {
-     "name": "o00_3126_0000",
+     "name": "gfx_planar_map128_pack2",
      "unit": "S00",
      "seg": 12582,
      "off": 0,
@@ -38,7 +38,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_3126_0137",
+     "name": "gfx_planar_map64_pack2",
      "unit": "S00",
      "seg": 12582,
      "off": 311,
@@ -49,7 +49,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_3126_026A",
+     "name": "gfx_planar_map128_pack4",
      "unit": "S00",
      "seg": 12582,
      "off": 618,
@@ -60,7 +60,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_3126_03A9",
+     "name": "gfx_planar_map64_pack4",
      "unit": "S00",
      "seg": 12582,
      "off": 937,
@@ -71,7 +71,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_3126_04D8",
+     "name": "gfx_planar_map128_pack8",
      "unit": "S00",
      "seg": 12582,
      "off": 1240,
@@ -82,7 +82,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_3126_06A3",
+     "name": "gfx_planar_map64_pack8",
      "unit": "S00",
      "seg": 12582,
      "off": 1699,
@@ -93,7 +93,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_3126_086E",
+     "name": "gfx_planar_fatal_display_jump",
      "unit": "S00",
      "seg": 12582,
      "off": 2158,
@@ -105,7 +105,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "83fc831d43cbbf17aee7840876d2c9b5c760e2c37dc4d1a4dcba83cee5fc44b4",
+   "object_sha256": "053552fcde71b6627cef7ddd933a9943678fa2e26505355bf757875392d640ea",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -130,10 +130,10 @@
     "end": 214403
    },
    "source": "src/platform/video/planar_raster.asm",
-   "source_sha256": "5fa9d5545eb7dd2cd421b4248c57d65b75a1e661fa0b4d7d91f44f01fc7e3fe3",
+   "source_sha256": "14ffc7252a27236cdafbb293f5c95a457efa291d5ed8b459ddbe9c0dfee621cd",
    "claims": [
     {
-     "name": "o00_31AD_0004",
+     "name": "gfx_planar_dither_box",
      "unit": "S00",
      "seg": 12717,
      "off": 4,
@@ -144,7 +144,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_001C",
+     "name": "gfx_planar_dither_box_raw",
      "unit": "S00",
      "seg": 12717,
      "off": 28,
@@ -155,7 +155,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "GPatBox",
+     "name": "gfx_planar_gpatbox",
      "unit": "S00",
      "seg": 12717,
      "off": 290,
@@ -166,7 +166,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_013A",
+     "name": "gfx_planar_pattern_box_raw",
      "unit": "S00",
      "seg": 12717,
      "off": 314,
@@ -177,7 +177,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "GInvBox",
+     "name": "gfx_planar_ginvbox",
      "unit": "S00",
      "seg": 12717,
      "off": 892,
@@ -188,7 +188,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_0394",
+     "name": "gfx_planar_invert_box_raw",
      "unit": "S00",
      "seg": 12717,
      "off": 916,
@@ -199,7 +199,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "GPicSize",
+     "name": "gfx_planar_gpicsize",
      "unit": "S00",
      "seg": 12717,
      "off": 1314,
@@ -210,7 +210,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_0550",
+     "name": "gfx_planar_capture_box",
      "unit": "S00",
      "seg": 12717,
      "off": 1360,
@@ -221,7 +221,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_062A",
+     "name": "gfx_planar_set_or",
      "unit": "S00",
      "seg": 12717,
      "off": 1578,
@@ -232,7 +232,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_062E",
+     "name": "gfx_planar_set_xor",
      "unit": "S00",
      "seg": 12717,
      "off": 1582,
@@ -243,7 +243,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_0632",
+     "name": "gfx_planar_set_and",
      "unit": "S00",
      "seg": 12717,
      "off": 1586,
@@ -254,7 +254,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_0636",
+     "name": "gfx_planar_set_copy",
      "unit": "S00",
      "seg": 12717,
      "off": 1590,
@@ -265,7 +265,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_063C",
+     "name": "gfx_planar_set_raster_op",
      "unit": "S00",
      "seg": 12717,
      "off": 1596,
@@ -276,7 +276,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_0647",
+     "name": "gfx_planar_put_cached_tile",
      "unit": "S00",
      "seg": 12717,
      "off": 1607,
@@ -287,7 +287,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_0839",
+     "name": "gfx_planar_mask_tile_to_screen",
      "unit": "S00",
      "seg": 12717,
      "off": 2105,
@@ -298,7 +298,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "GPutPicS",
+     "name": "gfx_planar_gputpics",
      "unit": "S00",
      "seg": 12717,
      "off": 3321,
@@ -309,7 +309,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_0D06",
+     "name": "gfx_planar_put_picture_raw",
      "unit": "S00",
      "seg": 12717,
      "off": 3334,
@@ -320,7 +320,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_0F56",
+     "name": "gfx_planar_prepare_bitmap_row",
      "unit": "S00",
      "seg": 12717,
      "off": 3926,
@@ -331,7 +331,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1002",
+     "name": "gfx_planar_blit_row_rop",
      "unit": "S00",
      "seg": 12717,
      "off": 4098,
@@ -342,7 +342,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1065",
+     "name": "gfx_planar_blit_row_copy",
      "unit": "S00",
      "seg": 12717,
      "off": 4197,
@@ -353,7 +353,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_110C",
+     "name": "gfx_planar_shift_and_blit_row",
      "unit": "S00",
      "seg": 12717,
      "off": 4364,
@@ -364,7 +364,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "GImgSize",
+     "name": "gfx_planar_gimgsize",
      "unit": "S00",
      "seg": 12717,
      "off": 4603,
@@ -375,7 +375,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "GPutImgS",
+     "name": "gfx_planar_gputimgs",
      "unit": "S00",
      "seg": 12717,
      "off": 4614,
@@ -386,7 +386,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1213",
+     "name": "gfx_planar_put_image_raw",
      "unit": "S00",
      "seg": 12717,
      "off": 4627,
@@ -397,7 +397,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_142B",
+     "name": "gfx_planar_reset_gc",
      "unit": "S00",
      "seg": 12717,
      "off": 5163,
@@ -408,7 +408,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_145E",
+     "name": "gfx_planar_install_dispatch",
      "unit": "S00",
      "seg": 12717,
      "off": 5214,
@@ -419,7 +419,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1468",
+     "name": "gfx_planar_video_capacity",
      "unit": "S00",
      "seg": 12717,
      "off": 5224,
@@ -430,7 +430,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1481",
+     "name": "gfx_planar_restore_text_mode",
      "unit": "S00",
      "seg": 12717,
      "off": 5249,
@@ -441,7 +441,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "GLine",
+     "name": "gfx_planar_gline",
      "unit": "S00",
      "seg": 12717,
      "off": 5260,
@@ -452,7 +452,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1499",
+     "name": "gfx_planar_draw_line_raw",
      "unit": "S00",
      "seg": 12717,
      "off": 5273,
@@ -463,7 +463,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "GSetAttrib",
+     "name": "gfx_planar_gsetattrib",
      "unit": "S00",
      "seg": 12717,
      "off": 5721,
@@ -474,7 +474,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_166A",
+     "name": "gfx_planar_select_small_font",
      "unit": "S00",
      "seg": 12717,
      "off": 5738,
@@ -485,7 +485,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_168C",
+     "name": "gfx_planar_select_big_font",
      "unit": "S00",
      "seg": 12717,
      "off": 5772,
@@ -496,7 +496,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "GBoxFill",
+     "name": "gfx_planar_gboxfill",
      "unit": "S00",
      "seg": 12717,
      "off": 5801,
@@ -507,7 +507,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_16E4",
+     "name": "gfx_planar_fill_box_unsorted",
      "unit": "S00",
      "seg": 12717,
      "off": 5860,
@@ -518,7 +518,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_16FC",
+     "name": "gfx_planar_fill_box_raw",
      "unit": "S00",
      "seg": 12717,
      "off": 5884,
@@ -529,7 +529,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_186A",
+     "name": "gfx_planar_upload_plane",
      "unit": "S00",
      "seg": 12717,
      "off": 6250,
@@ -540,7 +540,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_18BA",
+     "name": "gfx_planar_upload_tiles",
      "unit": "S00",
      "seg": 12717,
      "off": 6330,
@@ -551,7 +551,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1950",
+     "name": "gfx_planar_move_box",
      "unit": "S00",
      "seg": 12717,
      "off": 6480,
@@ -562,7 +562,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_1A8F",
+     "name": "gfx_planar_read_tile_plane",
      "unit": "S00",
      "seg": 12717,
      "off": 6799,
@@ -573,7 +573,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1AC4",
+     "name": "gfx_planar_select_tiny_font",
      "unit": "S00",
      "seg": 12717,
      "off": 6852,
@@ -584,7 +584,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1AE7",
+     "name": "gfx_planar_init_320x200",
      "unit": "S00",
      "seg": 12717,
      "off": 6887,
@@ -595,7 +595,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1B49",
+     "name": "gfx_planar_draw_life_320",
      "unit": "S00",
      "seg": 12717,
      "off": 6985,
@@ -606,7 +606,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1B7D",
+     "name": "gfx_planar_compose_life_320",
      "unit": "S00",
      "seg": 12717,
      "off": 7037,
@@ -618,7 +618,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "edde4e4096be4bae6ea6d300c3d2f234d8e6d5b4187d18b386dd7358b7ae56c9",
+   "object_sha256": "1e9b3453f9dda98a788bd46d313c39ecab4653fd88342c0e550ae396df5e71c0",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -645,10 +645,10 @@
     "end": 219749
    },
    "source": "src/platform/video/planar_mode_blits.asm",
-   "source_sha256": "539aed888bce9236f4a9ca7a259bc5a65df7fa27e2582ad5047d0659d27cfd0e",
+   "source_sha256": "f930c0e349a14498c9e467847da7e74c5a9504ff5344fb5510108c2526efd0c6",
    "claims": [
     {
-     "name": "o00_31AD_2AB4",
+     "name": "gfx_planar_init_640x350",
      "unit": "S00",
      "seg": 12717,
      "off": 10932,
@@ -659,7 +659,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_2AE5",
+     "name": "gfx_planar_init_640x480",
      "unit": "S00",
      "seg": 12717,
      "off": 10981,
@@ -670,7 +670,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_2B1A",
+     "name": "gfx_planar_compose_life_ems",
      "unit": "S00",
      "seg": 12717,
      "off": 11034,
@@ -681,7 +681,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_2FDA",
+     "name": "gfx_planar_draw_life_ems",
      "unit": "S00",
      "seg": 12717,
      "off": 12250,
@@ -692,7 +692,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_300B",
+     "name": "gfx_planar_draw_life_hires",
      "unit": "S00",
      "seg": 12717,
      "off": 12299,
@@ -703,7 +703,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_303F",
+     "name": "gfx_planar_compose_life_hires",
      "unit": "S00",
      "seg": 12717,
      "off": 12351,
@@ -715,7 +715,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "b71396961ff99aa746d319eee92ede1707d4b453750468732a1acd30343d5d5a",
+   "object_sha256": "87f8aaf4374cd0dfb40049a070f5f7516e7764193be1e8be74c59d58425688a1",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -740,10 +740,10 @@
     "end": 220994
    },
    "source": "src/platform/video/planar_sprites.asm",
-   "source_sha256": "62a8b50548f6f2e39d3620f2e9063a6d4b817266e950655b6a22f54abc55dac1",
+   "source_sha256": "e72b813a87f1662f337a9672abe4ec954715344bf4fb22ef5856dddb942dcaca",
    "claims": [
     {
-     "name": "o00_35A6_0006",
+     "name": "gfx_planar_buffer_noop",
      "unit": "S00",
      "seg": 13734,
      "off": 6,
@@ -754,7 +754,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_35A6_0007",
+     "name": "gfx_planar_mask_to_buffer",
      "unit": "S00",
      "seg": 13734,
      "off": 7,
@@ -765,7 +765,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_35A6_0177",
+     "name": "gfx_planar_copy_to_buffer",
      "unit": "S00",
      "seg": 13734,
      "off": 375,
@@ -776,7 +776,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_35A6_02FD",
+     "name": "gfx_planar_buffer_intersection",
      "unit": "S00",
      "seg": 13734,
      "off": 765,
@@ -787,7 +787,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_35A6_0406",
+     "name": "gfx_planar_scratch_to_buffer",
      "unit": "S00",
      "seg": 13734,
      "off": 1030,
@@ -799,7 +799,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "349a48b9d517a3992ee3e193828697289c37139090d9bcc3722937f4ac4d6cf1",
+   "object_sha256": "8b20ecb52cdcef7ff2824ee4f1f3f09158e6750fddb1dd7f626198603a394733",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -830,10 +830,10 @@
     "end": 207082
    },
    "source": "src/platform/video/mono_raster.asm",
-   "source_sha256": "bd2b025d59c04957e2cc4ec49bb2da62587d26126dc6cc135872bf1d8fbc33e5",
+   "source_sha256": "0e78db2bec3e1c18469d2f727fb97d41280f092215f5e827a94c52f057b1aa0d",
    "claims": [
     {
-     "name": "o01_3126_0000",
+     "name": "gfx_mono_init_banked_640x400",
      "unit": "S01",
      "seg": 12582,
      "off": 0,
@@ -844,7 +844,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0068",
+     "name": "gfx_mono_init_ega480_mono",
      "unit": "S01",
      "seg": 12582,
      "off": 104,
@@ -855,7 +855,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_007D",
+     "name": "gfx_mono_init_ega350_mono",
      "unit": "S01",
      "seg": 12582,
      "off": 125,
@@ -866,7 +866,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_010A",
+     "name": "gfx_mono_init_hercules",
      "unit": "S01",
      "seg": 12582,
      "off": 266,
@@ -877,7 +877,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_0167",
+     "name": "gfx_mono_gsetattrib",
      "unit": "S01",
      "seg": 12582,
      "off": 359,
@@ -888,7 +888,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_019A",
+     "name": "gfx_mono_select_small_font",
      "unit": "S01",
      "seg": 12582,
      "off": 410,
@@ -899,7 +899,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_01B2",
+     "name": "gfx_mono_select_big_font",
      "unit": "S01",
      "seg": 12582,
      "off": 434,
@@ -910,7 +910,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_01CA",
+     "name": "gfx_mono_dither_box",
      "unit": "S01",
      "seg": 12582,
      "off": 458,
@@ -921,7 +921,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_024C",
+     "name": "gfx_mono_fill_or_pattern_box",
      "unit": "S01",
      "seg": 12582,
      "off": 588,
@@ -932,7 +932,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_0414",
+     "name": "gfx_mono_ginvbox",
      "unit": "S01",
      "seg": 12582,
      "off": 1044,
@@ -943,7 +943,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0437",
+     "name": "gfx_mono_picture_size",
      "unit": "S01",
      "seg": 12582,
      "off": 1079,
@@ -954,7 +954,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_045D",
+     "name": "gfx_mono_capture_box",
      "unit": "S01",
      "seg": 12582,
      "off": 1117,
@@ -965,7 +965,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_0516",
+     "name": "gfx_mono_gputimgs",
      "unit": "S01",
      "seg": 12582,
      "off": 1302,
@@ -976,7 +976,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0523",
+     "name": "gfx_mono_put_image_raw",
      "unit": "S01",
      "seg": 12582,
      "off": 1315,
@@ -987,7 +987,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_069C",
+     "name": "gfx_mono_shift_mono_image_row",
      "unit": "S01",
      "seg": 12582,
      "off": 1692,
@@ -998,7 +998,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_073C",
+     "name": "gfx_mono_gputpics",
      "unit": "S01",
      "seg": 12582,
      "off": 1852,
@@ -1009,7 +1009,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0749",
+     "name": "gfx_mono_put_picture_raw",
      "unit": "S01",
      "seg": 12582,
      "off": 1865,
@@ -1020,7 +1020,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_083D",
+     "name": "gfx_mono_prepare_bitmap_row",
      "unit": "S01",
      "seg": 12582,
      "off": 2109,
@@ -1031,7 +1031,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_08E3",
+     "name": "gfx_mono_blit_row_rop",
      "unit": "S01",
      "seg": 12582,
      "off": 2275,
@@ -1042,7 +1042,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_093C",
+     "name": "gfx_mono_blit_row_copy",
      "unit": "S01",
      "seg": 12582,
      "off": 2364,
@@ -1053,7 +1053,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_098E",
+     "name": "gfx_mono_shift_bitmap_row",
      "unit": "S01",
      "seg": 12582,
      "off": 2446,
@@ -1064,7 +1064,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0A20",
+     "name": "gfx_mono_set_xor",
      "unit": "S01",
      "seg": 12582,
      "off": 2592,
@@ -1075,7 +1075,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0A7A",
+     "name": "gfx_mono_set_copy",
      "unit": "S01",
      "seg": 12582,
      "off": 2682,
@@ -1086,7 +1086,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0ACC",
+     "name": "gfx_mono_set_and",
      "unit": "S01",
      "seg": 12582,
      "off": 2764,
@@ -1097,7 +1097,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0B26",
+     "name": "gfx_mono_set_or",
      "unit": "S01",
      "seg": 12582,
      "off": 2854,
@@ -1108,7 +1108,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0C53",
+     "name": "gfx_mono_set_raster_op",
      "unit": "S01",
      "seg": 12582,
      "off": 3155,
@@ -1119,7 +1119,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0C7A",
+     "name": "gfx_mono_gline",
      "unit": "S01",
      "seg": 12582,
      "off": 3194,
@@ -1130,7 +1130,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0C87",
+     "name": "gfx_mono_draw_line_raw",
      "unit": "S01",
      "seg": 12582,
      "off": 3207,
@@ -1141,7 +1141,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_0F33",
+     "name": "gfx_mono_reset_gc",
      "unit": "S01",
      "seg": 12582,
      "off": 3891,
@@ -1152,7 +1152,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0F66",
+     "name": "gfx_mono_tile_noop",
      "unit": "S01",
      "seg": 12582,
      "off": 3942,
@@ -1163,7 +1163,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0F6F",
+     "name": "gfx_mono_reserved_noop",
      "unit": "S01",
      "seg": 12582,
      "off": 3951,
@@ -1174,7 +1174,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0F78",
+     "name": "gfx_mono_restore_text_mode",
      "unit": "S01",
      "seg": 12582,
      "off": 3960,
@@ -1185,7 +1185,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_0F83",
+     "name": "gfx_mono_move_linear_box",
      "unit": "S01",
      "seg": 12582,
      "off": 3971,
@@ -1196,7 +1196,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_109D",
+     "name": "gfx_mono_move_box",
      "unit": "S01",
      "seg": 12582,
      "off": 4253,
@@ -1207,7 +1207,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_11F0",
+     "name": "gfx_mono_move_box_640x400",
      "unit": "S01",
      "seg": 12582,
      "off": 4592,
@@ -1218,7 +1218,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o01_3126_1343",
+     "name": "gfx_mono_draw_life_tile",
      "unit": "S01",
      "seg": 12582,
      "off": 4931,
@@ -1229,7 +1229,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_14B6",
+     "name": "gfx_mono_compose_life_tile",
      "unit": "S01",
      "seg": 12582,
      "off": 5302,
@@ -1240,7 +1240,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_1610",
+     "name": "gfx_mono_set_hercules_graphics",
      "unit": "S01",
      "seg": 12582,
      "off": 5648,
@@ -1251,7 +1251,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_1637",
+     "name": "gfx_mono_set_mda_text",
      "unit": "S01",
      "seg": 12582,
      "off": 5687,
@@ -1262,7 +1262,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_3126_1658",
+     "name": "gfx_mono_program_mono_crtc",
      "unit": "S01",
      "seg": 12582,
      "off": 5720,
@@ -1274,7 +1274,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "abb48283968125d676dcbb433f3cee427272fe2f68641b4a8b6176362c7cf3c5",
+   "object_sha256": "0f01ffc16da8c42977f08f02079e3f4f9f71f821f54dfe921519bbccce57eafa",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -1372,10 +1372,10 @@
     "end": 208363
    },
    "source": "src/platform/video/mono_sprites.asm",
-   "source_sha256": "446836eb5562f7ceee6f9d5e862d2cccd7c59b327421cf9e06ad3e420590b22d",
+   "source_sha256": "9f09a46235693a4c2c809b96cb9fe0a4f40c1a5ca8efe73f18837f582eef809e",
    "claims": [
     {
-     "name": "o01_32B5_000E",
+     "name": "gfx_mono_buffer_noop",
      "unit": "S01",
      "seg": 12981,
      "off": 14,
@@ -1386,7 +1386,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_32B5_000F",
+     "name": "gfx_mono_mask_bitmap_to_buffer",
      "unit": "S01",
      "seg": 12981,
      "off": 15,
@@ -1397,7 +1397,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_32B5_00AA",
+     "name": "gfx_mono_copy_bitmap_to_buffer",
      "unit": "S01",
      "seg": 12981,
      "off": 170,
@@ -1408,7 +1408,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_32B5_0152",
+     "name": "gfx_mono_buffer_intersection",
      "unit": "S01",
      "seg": 12981,
      "off": 338,
@@ -1419,7 +1419,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_32B5_024F",
+     "name": "gfx_mono_scratch_to_buffer",
      "unit": "S01",
      "seg": 12981,
      "off": 591,
@@ -1431,7 +1431,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0c434b53880629a3fc1594cc1fefd8dafef7350f93d0339d3748abbbf306989d",
+   "object_sha256": "d48a3f94fab4656ac27012628006a66ae6538e58b5412d9f342300d893535f12",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -1462,10 +1462,10 @@
     "end": 203721
    },
    "source": "src/platform/video/vga8_raster.asm",
-   "source_sha256": "1044853c5bd7bce148b417f6ef50d5a2514f6d69e31b43441174d1cf60e14b15",
+   "source_sha256": "8a13fccf5f6d7dfe06dfea277a42738c9f5de23294a225bcad0e63bb8f64f18d",
    "claims": [
     {
-     "name": "o02_3126_0000",
+     "name": "gfx_vga8_init_vga256",
      "unit": "S02",
      "seg": 12582,
      "off": 0,
@@ -1476,7 +1476,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0040",
+     "name": "gfx_vga8_gsetattrib",
      "unit": "S02",
      "seg": 12582,
      "off": 64,
@@ -1487,7 +1487,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0051",
+     "name": "gfx_vga8_restore_text_mode",
      "unit": "S02",
      "seg": 12582,
      "off": 81,
@@ -1498,7 +1498,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_005C",
+     "name": "gfx_vga8_select_small_font",
      "unit": "S02",
      "seg": 12582,
      "off": 92,
@@ -1509,7 +1509,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0079",
+     "name": "gfx_vga8_select_big_font",
      "unit": "S02",
      "seg": 12582,
      "off": 121,
@@ -1520,7 +1520,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0096",
+     "name": "gfx_vga8_dither_box",
      "unit": "S02",
      "seg": 12582,
      "off": 150,
@@ -1531,7 +1531,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_00AE",
+     "name": "gfx_vga8_dither_box_raw",
      "unit": "S02",
      "seg": 12582,
      "off": 174,
@@ -1542,7 +1542,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o02_3126_0185",
+     "name": "gfx_vga8_gpatbox",
      "unit": "S02",
      "seg": 12582,
      "off": 389,
@@ -1553,7 +1553,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_019D",
+     "name": "gfx_vga8_pattern_box_raw",
      "unit": "S02",
      "seg": 12582,
      "off": 413,
@@ -1564,7 +1564,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o02_3126_027C",
+     "name": "gfx_vga8_gboxfill",
      "unit": "S02",
      "seg": 12582,
      "off": 636,
@@ -1575,7 +1575,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o02_3126_03B1",
+     "name": "gfx_vga8_ginvbox",
      "unit": "S02",
      "seg": 12582,
      "off": 945,
@@ -1586,7 +1586,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_03D4",
+     "name": "gfx_vga8_picture_size",
      "unit": "S02",
      "seg": 12582,
      "off": 980,
@@ -1597,7 +1597,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_03EF",
+     "name": "gfx_vga8_capture_box",
      "unit": "S02",
      "seg": 12582,
      "off": 1007,
@@ -1608,7 +1608,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o02_3126_0490",
+     "name": "gfx_vga8_set_xor",
      "unit": "S02",
      "seg": 12582,
      "off": 1168,
@@ -1619,7 +1619,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_04A2",
+     "name": "gfx_vga8_set_copy",
      "unit": "S02",
      "seg": 12582,
      "off": 1186,
@@ -1630,7 +1630,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_04B4",
+     "name": "gfx_vga8_set_and",
      "unit": "S02",
      "seg": 12582,
      "off": 1204,
@@ -1641,7 +1641,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_04C6",
+     "name": "gfx_vga8_set_or",
      "unit": "S02",
      "seg": 12582,
      "off": 1222,
@@ -1652,7 +1652,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_04D8",
+     "name": "gfx_vga8_set_raster_op",
      "unit": "S02",
      "seg": 12582,
      "off": 1240,
@@ -1663,7 +1663,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0505",
+     "name": "gfx_vga8_gputpics",
      "unit": "S02",
      "seg": 12582,
      "off": 1285,
@@ -1674,7 +1674,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0512",
+     "name": "gfx_vga8_put_picture_raw",
      "unit": "S02",
      "seg": 12582,
      "off": 1298,
@@ -1685,7 +1685,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o02_3126_0636",
+     "name": "gfx_vga8_gputimgs",
      "unit": "S02",
      "seg": 12582,
      "off": 1590,
@@ -1696,7 +1696,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0643",
+     "name": "gfx_vga8_put_image_raw",
      "unit": "S02",
      "seg": 12582,
      "off": 1603,
@@ -1707,7 +1707,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o02_3126_073A",
+     "name": "gfx_vga8_gline",
      "unit": "S02",
      "seg": 12582,
      "off": 1850,
@@ -1718,7 +1718,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0747",
+     "name": "gfx_vga8_draw_line_raw",
      "unit": "S02",
      "seg": 12582,
      "off": 1863,
@@ -1729,7 +1729,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o02_3126_084E",
+     "name": "gfx_vga8_tile_noop",
      "unit": "S02",
      "seg": 12582,
      "off": 2126,
@@ -1740,7 +1740,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0857",
+     "name": "gfx_vga8_reserved_noop",
      "unit": "S02",
      "seg": 12582,
      "off": 2135,
@@ -1751,7 +1751,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o02_3126_0860",
+     "name": "gfx_vga8_move_box",
      "unit": "S02",
      "seg": 12582,
      "off": 2144,
@@ -1763,7 +1763,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "edc58133634ce8ee80c6648d025a49b6c65af4f73d0a3bfc10886cab9de7e6b2",
+   "object_sha256": "ecb7aac446fe820799d304884d4c6b3f9700f3a64f14309dae6f8832be7dd4fa",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -1794,10 +1794,10 @@
     "end": 206136
    },
    "source": "src/platform/video/tandy_raster.asm",
-   "source_sha256": "334764a947c5960c95995b4dfd923295a96e917c6e341c8513d92548d0c6cba8",
+   "source_sha256": "3d8a30f4612215b9c2cb8ab1fad3392ce4876cbb4d57248d647aff7982088425",
    "claims": [
     {
-     "name": "o03_3126_0140",
+     "name": "gfx_tandy_init_tandy",
      "unit": "S03",
      "seg": 12582,
      "off": 320,
@@ -1808,7 +1808,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_019E",
+     "name": "gfx_tandy_gsetattrib",
      "unit": "S03",
      "seg": 12582,
      "off": 414,
@@ -1819,7 +1819,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_01B3",
+     "name": "gfx_tandy_restore_text_mode",
      "unit": "S03",
      "seg": 12582,
      "off": 435,
@@ -1830,7 +1830,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_01BE",
+     "name": "gfx_tandy_select_small_font",
      "unit": "S03",
      "seg": 12582,
      "off": 446,
@@ -1841,7 +1841,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_01DB",
+     "name": "gfx_tandy_select_big_font",
      "unit": "S03",
      "seg": 12582,
      "off": 475,
@@ -1852,7 +1852,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_01F8",
+     "name": "gfx_tandy_dither_box",
      "unit": "S03",
      "seg": 12582,
      "off": 504,
@@ -1863,7 +1863,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_0210",
+     "name": "gfx_tandy_dither_box_raw",
      "unit": "S03",
      "seg": 12582,
      "off": 528,
@@ -1874,7 +1874,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o03_3126_03C2",
+     "name": "gfx_tandy_gpatbox",
      "unit": "S03",
      "seg": 12582,
      "off": 962,
@@ -1885,7 +1885,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_03DA",
+     "name": "gfx_tandy_pattern_box_raw",
      "unit": "S03",
      "seg": 12582,
      "off": 986,
@@ -1896,7 +1896,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o03_3126_059C",
+     "name": "gfx_tandy_gboxfill",
      "unit": "S03",
      "seg": 12582,
      "off": 1436,
@@ -1907,7 +1907,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o03_3126_070A",
+     "name": "gfx_tandy_ginvbox",
      "unit": "S03",
      "seg": 12582,
      "off": 1802,
@@ -1918,7 +1918,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_072D",
+     "name": "gfx_tandy_picture_size",
      "unit": "S03",
      "seg": 12582,
      "off": 1837,
@@ -1929,7 +1929,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_074E",
+     "name": "gfx_tandy_capture_box",
      "unit": "S03",
      "seg": 12582,
      "off": 1870,
@@ -1940,7 +1940,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o03_3126_080A",
+     "name": "gfx_tandy_set_xor",
      "unit": "S03",
      "seg": 12582,
      "off": 2058,
@@ -1951,7 +1951,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_0844",
+     "name": "gfx_tandy_set_copy",
      "unit": "S03",
      "seg": 12582,
      "off": 2116,
@@ -1962,7 +1962,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_087E",
+     "name": "gfx_tandy_set_and",
      "unit": "S03",
      "seg": 12582,
      "off": 2174,
@@ -1973,7 +1973,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_08B8",
+     "name": "gfx_tandy_set_or",
      "unit": "S03",
      "seg": 12582,
      "off": 2232,
@@ -1984,7 +1984,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_08F2",
+     "name": "gfx_tandy_set_raster_op",
      "unit": "S03",
      "seg": 12582,
      "off": 2290,
@@ -1995,7 +1995,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_091F",
+     "name": "gfx_tandy_gputpics",
      "unit": "S03",
      "seg": 12582,
      "off": 2335,
@@ -2006,7 +2006,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_092C",
+     "name": "gfx_tandy_put_picture_raw",
      "unit": "S03",
      "seg": 12582,
      "off": 2348,
@@ -2017,7 +2017,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o03_3126_0A4D",
+     "name": "gfx_tandy_prepare_bitmap_row",
      "unit": "S03",
      "seg": 12582,
      "off": 2637,
@@ -2028,7 +2028,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_0AEF",
+     "name": "gfx_tandy_blit_row_rop",
      "unit": "S03",
      "seg": 12582,
      "off": 2799,
@@ -2039,7 +2039,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_0B3F",
+     "name": "gfx_tandy_blit_row_copy",
      "unit": "S03",
      "seg": 12582,
      "off": 2879,
@@ -2050,7 +2050,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_0B88",
+     "name": "gfx_tandy_shift_bitmap_row",
      "unit": "S03",
      "seg": 12582,
      "off": 2952,
@@ -2061,7 +2061,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_0C11",
+     "name": "gfx_tandy_gputimgs",
      "unit": "S03",
      "seg": 12582,
      "off": 3089,
@@ -2072,7 +2072,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_0C1E",
+     "name": "gfx_tandy_put_image_raw",
      "unit": "S03",
      "seg": 12582,
      "off": 3102,
@@ -2083,7 +2083,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o03_3126_0F5D",
+     "name": "gfx_tandy_shift_mono_row",
      "unit": "S03",
      "seg": 12582,
      "off": 3933,
@@ -2094,7 +2094,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_104D",
+     "name": "gfx_tandy_gline",
      "unit": "S03",
      "seg": 12582,
      "off": 4173,
@@ -2105,7 +2105,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_105A",
+     "name": "gfx_tandy_draw_line_raw",
      "unit": "S03",
      "seg": 12582,
      "off": 4186,
@@ -2116,7 +2116,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o03_3126_1180",
+     "name": "gfx_tandy_tile_noop",
      "unit": "S03",
      "seg": 12582,
      "off": 4480,
@@ -2127,7 +2127,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_1189",
+     "name": "gfx_tandy_reserved_noop",
      "unit": "S03",
      "seg": 12582,
      "off": 4489,
@@ -2138,7 +2138,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3126_1192",
+     "name": "gfx_tandy_move_box",
      "unit": "S03",
      "seg": 12582,
      "off": 4498,
@@ -2161,7 +2161,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3ec2e5babced60d3fc8f5d111f38352bf5f290153bfcf8dd514b1eefb5c32852",
+   "object_sha256": "dc269c0460283bd364b62522ed8c10a7a60e669b7e55506e2dcb3be859cd71ad",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -2192,10 +2192,10 @@
     "end": 206220
    },
    "source": "src/platform/video/tandy_minimap.asm",
-   "source_sha256": "4a8a6f126921b9828fee7d827c083190ddf4bbaa1f569a1ae927ca65a3ace080",
+   "source_sha256": "2620c063dfbf1b65cebb0cd6e49fa660ba3bbd690dba15d47abc62106650288d",
    "claims": [
     {
-     "name": "o03_3253_0008",
+     "name": "gfx_tandy_map_duplicate_rows",
      "unit": "S03",
      "seg": 12883,
      "off": 8,
@@ -2218,7 +2218,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a75823c95078e20c0ca617dcb5c1dae045ab18e954c3f95b41106cd7dbfa4231",
+   "object_sha256": "a808898ef5f7463916f91191a0c041fe78fb4c11e78a1602910c47f7c854a854",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -2243,10 +2243,10 @@
     "end": 212275
    },
    "source": "src/platform/video/tandy_sprites.asm",
-   "source_sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
+   "source_sha256": "d60189264c34626da49883f3a13d39dd088051c4c9fd8ced1dd0ecfd872f4822",
    "claims": [
     {
-     "name": "o03_3258_040C",
+     "name": "gfx_tandy_buffer_noop",
      "unit": "S03",
      "seg": 12888,
      "off": 1036,
@@ -2257,7 +2257,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3258_040D",
+     "name": "gfx_tandy_mask_to_buffer",
      "unit": "S03",
      "seg": 12888,
      "off": 1037,
@@ -2268,7 +2268,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3258_04CE",
+     "name": "gfx_tandy_copy_to_buffer",
      "unit": "S03",
      "seg": 12888,
      "off": 1230,
@@ -2279,7 +2279,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3258_05A7",
+     "name": "gfx_tandy_buffer_intersection",
      "unit": "S03",
      "seg": 12888,
      "off": 1447,
@@ -2290,7 +2290,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3258_0690",
+     "name": "gfx_tandy_draw_life_tile",
      "unit": "S03",
      "seg": 12888,
      "off": 1680,
@@ -2301,7 +2301,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3258_0F04",
+     "name": "gfx_tandy_compose_life_tile",
      "unit": "S03",
      "seg": 12888,
      "off": 3844,
@@ -2312,7 +2312,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3258_175F",
+     "name": "gfx_tandy_scratch_to_buffer",
      "unit": "S03",
      "seg": 12888,
      "off": 5983,
@@ -2335,7 +2335,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ce1efe24548b04185500f3c0fd4387ffebfde2f5a90237ec23fe1da9352d6fee",
+   "object_sha256": "58dae6ffc6fff341961a95fee504c606f9f896f1a2a8e464295b265f88315e96",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -2374,7 +2374,7 @@
     "end": 223440
    },
    "source": "src/ui/minimap.c",
-   "source_sha256": "3cbc5fdbb1a1dd159f8f1c4903692811efd8c0323aeb01808082e8158bd0b484",
+   "source_sha256": "89e52e26f7805cedeada848487345af7362db07667d4539234e7132dd9fedc09",
    "claims": [
     {
      "name": "MapToolsMenu",
@@ -2455,7 +2455,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8ccda8927af8b76ec3265a8ce9b010d9b9a8a0f62d1f6dac0b0ed979f8ee78e2",
+   "object_sha256": "08c02ca56d065b282d528dcbd2b24f811bb8d1d7e0dd68c2a38ac7a4069d39c3",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -2626,7 +2626,7 @@
     "end": 223516
    },
    "source": "src/ui/experiment_menu.c",
-   "source_sha256": "b8e5aa00e0cd0a8054354eaf49cc6566dc78214294ad04df3903d4b250096239",
+   "source_sha256": "f181ad7e88b2b4f0e2c37603ce225d805f939907d5b343e152ebb4d65999cd23",
    "claims": [
     {
      "name": "DoExpMenu",
@@ -2642,7 +2642,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3c382cd8dfddeaac39067a88437006f53bd86cdaaf781622ff0dbfb91285e022",
+   "object_sha256": "c8650e8f3560575ef35af1e0ce648fe0ca1fc0720a896ca936b4213c82ccb283",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -3286,7 +3286,7 @@
     "end": 225002
    },
    "source": "src/ui/save_load.c",
-   "source_sha256": "818381b957334be3c35d6ff249b735c9abbf708df642312c1adde63a70dbaeb3",
+   "source_sha256": "09b87afabb30f64131366aee81527377b7320c628c76ccec5a5773d29cd7c24b",
    "claims": [
     {
      "name": "LoadGame",
@@ -3311,7 +3311,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o09_35F5_0D2B",
+     "name": "save_normalize_basename",
      "unit": "S09",
      "seg": 13813,
      "off": 3371,
@@ -3357,7 +3357,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "26192eef5ae3bdf97e5c03a2e460a57840675e3f5e084b9fb82e566477a4d76a",
+   "object_sha256": "071a1ce3eeb5dbb7b267421a86c3595ea98319cbee5e1a052a5c9a6d1a5e1eb6",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -3395,7 +3395,7 @@
     "end": 226233
    },
    "source": "src/window/text_entry.c",
-   "source_sha256": "757133ea7fd8f67f1f5ca95c87c162fe215e3d3385d4fa27f0f7201c529840d0",
+   "source_sha256": "0661baa0141968dd071e8a7f59e9e733c0a481faa0dc9f814c7bd618a5a0801a",
    "claims": [
     {
      "name": "o09_36EE_000A",
@@ -3420,7 +3420,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o09_36EE_0092",
+     "name": "ui_edit_text_field",
      "unit": "S09",
      "seg": 14062,
      "off": 146,
@@ -3432,7 +3432,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "455d2d200e9ae3ad0033e304a9aecdd80ee56c75d1ccc1d5087f911b63568ccc",
+   "object_sha256": "3d21eed12d5b799651ea19f54c2fad60200f6d89df462b9e3e7cfe0797615099",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -3468,7 +3468,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/window/menu_tracking.c",
-   "source_sha256": "14cd39a31eda9df80421c5e70a4c1a9cf4008a5c711b7a2106b92d9a4cd27a7a",
+   "source_sha256": "5207493f0885cf6e841bdcb53e07c32afaa6dd6492373cbbe526ab61e47a48a3",
    "claims": [
     {
      "name": "o10_35F5_0000",
@@ -3493,7 +3493,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o10_35F5_01C3",
+     "name": "menu_track_bar_selection",
      "unit": "S10",
      "seg": 13813,
      "off": 451,
@@ -3527,7 +3527,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "510b008c45f36d3b1fa837cfbb428bc2981cf2e3ab9b5520addc9d63bae03a47",
+   "object_sha256": "abe32ee0625246416019465580386de74a7477dd2c8dca25a734a101ab655b7e",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -3647,7 +3647,7 @@
    },
    "lang": "c",
    "source": "src/ui/map_window.c",
-   "source_sha256": "a615617870b0a37dcf4bde20dc5887cf45c9478e1ba906f5e8874f3aa7b5817c",
+   "source_sha256": "1d228b3bfab031c2275b4e7ec3088fe75ca655f29ed0baa10c2709f872cc8a23",
    "claims": [
     {
      "name": "DeinitMapFunctions",
@@ -3738,7 +3738,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o12_384C_0706",
+     "name": "map_expand_scent_colours",
      "unit": "S12",
      "seg": 14412,
      "off": 1798,
@@ -3749,7 +3749,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o12_384C_080E",
+     "name": "map_generate_nest_colours",
      "unit": "S12",
      "seg": 14412,
      "off": 2062,
@@ -3826,7 +3826,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o12_384C_0432",
+     "name": "map_generate_surface_colours",
      "unit": "S12",
      "seg": 14412,
      "off": 1074,
@@ -3837,7 +3837,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o12_384C_0B76",
+     "name": "map_render_immediate",
      "unit": "S12",
      "seg": 14412,
      "off": 2934,
@@ -3849,7 +3849,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0362dd5a30fdedbef8a974061957602feac4c8c923aa71fbcc5b64bb74fdd189",
+   "object_sha256": "7823fcd8432f20d9a4f47941ce4e9cb5dd750ae8f3fd5cbe0480de71b7788a5b",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -3884,7 +3884,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/ui/yard_window.c",
-   "source_sha256": "ea11f8d3e5b3bdd715feaa4d5f6e9a3005a7463972a591c718a32aa0ae05bdd4",
+   "source_sha256": "3585cebf34f46a3a6e23da61470e36fc66beaf3a93a91becfc492b6e1eae5870",
    "claims": [
     {
      "name": "ProcYardEvent",
@@ -3920,7 +3920,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o13_384C_01E5",
+     "name": "yard_update_message",
      "unit": "S13",
      "seg": 14412,
      "off": 485,
@@ -3931,7 +3931,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o13_384C_027C",
+     "name": "yard_draw_content_totals",
      "unit": "S13",
      "seg": 14412,
      "off": 636,
@@ -3953,7 +3953,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o13_384C_03F8",
+     "name": "yard_refresh_message_area",
      "unit": "S13",
      "seg": 14412,
      "off": 1016,
@@ -4141,7 +4141,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "307239bb4818f11b9b926d370f5ba8212e9e9d578667dd6d4afa96badbd9e140",
+   "object_sha256": "c2fed4ad41c0c92840767446b1594cd0948fde0c5da8909f518fb7c3b238436a",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -4183,7 +4183,7 @@
     "end": 235245
    },
    "source": "src/ui/scenario_dialogs.c",
-   "source_sha256": "0962e556a6c7f879e0d54402ed912def104264562a0eb8f50639e974c71e96de",
+   "source_sha256": "8d3086a5bcd7dac1f95bce160ec0f88310149e909834fb646fa3dc4e32ca7474",
    "claims": [
     {
      "name": "DoScenario",
@@ -4311,7 +4311,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a6334d72b13f37d17a26d5095957f77c09e57a2880acde6c5033c7c10132f669",
+   "object_sha256": "f6474a5c680acf178223a3c76f2e286ddacd5a7de8bed1aefc6532b4918910a5",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -4345,7 +4345,7 @@
    },
    "lang": "c",
    "source": "src/startup/game_session.c",
-   "source_sha256": "7c8b75e2ecb54347fd7f9ef71191fc15b74397fdb44d2862b1f3acdbc0741005",
+   "source_sha256": "1c5807e8933d6d20efca186815154ae6e845349c9eff15b27fe9906ac60a21ee",
    "claims": [
     {
      "name": "o15_384C_0000",
@@ -4370,7 +4370,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o15_384C_0125",
+     "name": "bios_probe_reset_disks",
      "unit": "S15",
      "seg": 14412,
      "off": 293,
@@ -4414,7 +4414,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o15_384C_0152",
+     "name": "app_cleanup_and_exit",
      "unit": "S15",
      "seg": 14412,
      "off": 338,
@@ -4426,7 +4426,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "36ed878ebde9c8f7439b73f63b27d9cd016cc445d7b32f5d595237061fcf3fd6",
+   "object_sha256": "38fea495fb6ec99149ee5d2b32e4af953101bc7ae816e036d869c0f9d7d8c3bc",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -4465,7 +4465,7 @@
     "end": 232355
    },
    "source": "src/ui/intro_credits.c",
-   "source_sha256": "58517952115392618185b30bb0f20c80231fa9969727cb248baaaaaa250eaf9d",
+   "source_sha256": "a7ecb470d48f7aa8f13cc4f430a07ec05f3f13691fba633d9342780366bf7627",
    "claims": [
     {
      "name": "DrawSimPayoff",
@@ -4476,7 +4476,7 @@
      "target_sha256": "5b805963f05a3dde35714347bb090b415a3f56ea03f1e2d0b2ba576686cd2315",
      "kind": "C",
      "provenance": "EXACT_STEERED",
-     "steered": "declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact)",
+     "steered": "declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact)",
      "reloc_order": "GROUPED"
     },
     {
@@ -4488,7 +4488,7 @@
      "target_sha256": "e80df6afc0cd8ca2a0a34db0f7ed76e50311619f793914acc3c3e23b150ebafd",
      "kind": "C",
      "provenance": "EXACT_STEERED",
-     "steered": "declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact)",
+     "steered": "declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact)",
      "reloc_order": "GROUPED"
     },
     {
@@ -4500,12 +4500,12 @@
      "target_sha256": "f3a71c0980a85ca4ffc2c09317108671e6c5d2631968e369a4824dc689888e0c",
      "kind": "C",
      "provenance": "EXACT_STEERED",
-     "steered": "declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact)",
+     "steered": "declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact)",
      "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "9eb635854053bf3010f9e4236fb01b9504259f7114bacef24670ba502cffdd84",
+   "object_sha256": "9f8ffc5f7350617d01661181c316ee4a5f63744d8652f1df5281011ecc57d486",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -4540,10 +4540,10 @@
     "end": 231035
    },
    "source": "src/window/menu_setup.c",
-   "source_sha256": "c3ee2c5181ef16a6f974d7d557448b4f0d263c9184d89c2159616562325832ff",
+   "source_sha256": "231ad5e7bc22df34550c37505999ab02576fd6c9ecc5636aaa59d1bb07f31fac",
    "claims": [
     {
-     "name": "o17_384C_0000",
+     "name": "input_init_desktop_region",
      "unit": "S17",
      "seg": 14412,
      "off": 0,
@@ -4554,7 +4554,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o17_384C_0143",
+     "name": "menu_set_state_colours",
      "unit": "S17",
      "seg": 14412,
      "off": 323,
@@ -4565,7 +4565,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o17_384C_0169",
+     "name": "win_set_desktop_colours",
      "unit": "S17",
      "seg": 14412,
      "off": 361,
@@ -4587,7 +4587,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o17_384C_0039",
+     "name": "menu_load_and_register",
      "unit": "S17",
      "seg": 14412,
      "off": 57,
@@ -4600,7 +4600,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8be85dc1565c89fd737b8195192be414faa8e50133838bdedb1a3cc0861a6297",
+   "object_sha256": "4b36a13f9f5c8ce1c0b09bc94ac02b46f7fa0e2118274e270d2cbdf5bba42352",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -4933,7 +4933,7 @@
     "end": 231712
    },
    "source": "src/ui/game_events.c",
-   "source_sha256": "511d172318d671af9562823c3af8e6e448b5b7629679d86eca94155d212ebe21",
+   "source_sha256": "3d689cc7fa1f4f1de7bb0cc5abd1671d1cf15459b48f73f765c4003e7990fd00",
    "claims": [
     {
      "name": "DoEvent",
@@ -4947,7 +4947,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o19_384C_0246",
+     "name": "input_dispatch_game_key",
      "unit": "S19",
      "seg": 14412,
      "off": 582,
@@ -4969,7 +4969,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o19_384C_0383",
+     "name": "input_translate_special_key",
      "unit": "S19",
      "seg": 14412,
      "off": 899,
@@ -4981,7 +4981,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "cbb841f38dcb9ccededc3b4b85ec2d7a8e3a72ef75f63cfee968e362e08410b2",
+   "object_sha256": "5919a675c9eb8cac2df398e3780b094992349231754114b5ee904837836ae8aa",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -5234,7 +5234,7 @@
     "end": 238743
    },
    "source": "src/startup/dos_config.c",
-   "source_sha256": "9bc2a6faba4099f98b9f919e73ceff9c0b2f02629796b3abd18f812c48597ff2",
+   "source_sha256": "e8fbfa0a23b6c2a8296fe24e5fa4ff78f4d47115228e2e6ccdf1874f1ce1b064",
    "claims": [
     {
      "name": "IBMInitStuff",
@@ -5282,7 +5282,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "988112a5b6430f0598e1896de05d277b252ebdee564dc92bb19c7ce99203d87d",
+   "object_sha256": "718b7c5565b1f1a05840c8a48a13f26451035cb220bdfdf26eaedbd7008c631b",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -5466,7 +5466,7 @@
     "end": 244698
    },
    "source": "src/ui/yellow_commands.c",
-   "source_sha256": "1fc3e09dcd48619931a1d573975416b5d5027f3700cf60ba8c83d0c29e6d5857",
+   "source_sha256": "ba76e9eb31683e25da9327ecc0d65acb2422ab85ab9b0c6419a6906819b6b0c5",
    "claims": [
     {
      "name": "processEdit",
@@ -5637,7 +5637,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ec51e2979e43e37f512e3c57817279c2705aa00e20722c17fac0ee362be08575",
+   "object_sha256": "648a44b90b698c26e3728b406d21cc43515c919f712c77ceaa2d8ae2229c2f03",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -5980,7 +5980,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/ui/info_cards.c",
-   "source_sha256": "1084b0ada5f824f173825a3ee451f75092130491c9af3587be26e2605c40b2ce",
+   "source_sha256": "763f80e3698f5a6e4ea33b9e18d68da6538d93dae43c9fcd8da180d6708df926",
    "claims": [
     {
      "name": "XFlipLong",
@@ -6057,7 +6057,7 @@
      "target_sha256": "22ee1c4f28b33778ce02fd0891365025461271fd14ddd1de22aaea68e756c5fd",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "layout_inferred": "SYM-1 and TU-1: bring real f_1A53_00F0/mem_Lock loader/locker prototypes earlier; declaration position inferred with full-module gate, no padding symbols",
+     "layout_inferred": "SYM-1 and TU-1: bring real res_load_with_alloc_type/mem_Lock loader/locker prototypes earlier; declaration position inferred with full-module gate, no padding symbols",
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
@@ -6073,7 +6073,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9c95adc7171a3f10c3bb169256d1e6c516864c701a7f4a9c6bee485de20e4ede",
+   "object_sha256": "e61799325240c041345fdb4f01cffebf1c93bc8ca0157a5435832a364aa13460",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -6811,10 +6811,10 @@
     "end": 238892
    },
    "source": "src/window/move_resize.c",
-   "source_sha256": "91c5fca2fb53e637613d1a7ea089834afe394ff0a35cec04933fdb3fed40043e",
+   "source_sha256": "c7b8e44c0b9152bd9d8d050f42f7a07f76efb8bbc80289309225b887ddc12b2d",
    "claims": [
     {
-     "name": "o26_39C7_0000",
+     "name": "win_toggle_zoom",
      "unit": "S26",
      "seg": 14791,
      "off": 0,
@@ -6859,7 +6859,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "69378b044c39cdd3168650e41a03b3b04687bc19ffc7440190b8e99a6709aa2a",
+   "object_sha256": "2ec65df36fec48ef7c21dc8f24c46b5f11deaf484e35abfde0b8ec777db69c99",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -7083,7 +7083,7 @@
     "end": 1193
    },
    "source": "src/sound/resource_loading.c",
-   "source_sha256": "f5108c46131442327d540662ed72ab0bc6376d5422e1142678d4fbb8cde49bae",
+   "source_sha256": "5dd4f768375a7c4e5912353c380834f6b407677a5cf5c2c127c884d83a645511",
    "claims": [
     {
      "name": "f_0000_0000",
@@ -7141,7 +7141,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0000_039B",
+     "name": "snd_release_song_resources",
      "unit": "root",
      "seg": 0,
      "off": 923,
@@ -7163,7 +7163,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0000_046F",
+     "name": "snd_service_pending",
      "unit": "root",
      "seg": 0,
      "off": 1135,
@@ -7175,7 +7175,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1eac1ff87d7f91be19cdbd7b19032ec91d7ea695392ccc32af4464e399e21243",
+   "object_sha256": "b67a353aa207efc3c3469f374de0f55acebe66f5fa0b3e48bfe8d3e4dae58b4e",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -7621,7 +7621,7 @@
     "end": 3561
    },
    "source": "src/startup/application_windows.c",
-   "source_sha256": "395a1e3828e58ddf0db1098d48ece336971ce651436ea07feb9ef732f4602734",
+   "source_sha256": "efa4184175d94689d8658d9997b71f6c6c2a2b913bfe7a521151c1734694109a",
    "claims": [
     {
      "name": "InitApplicationStuff",
@@ -7680,7 +7680,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ec231d2ac4cfa4b8a4ebcf544724c11de5eaddd23283852678141e3c3a5ddd8f",
+   "object_sha256": "59373002224a2b1449adedde9bc50da6d60e00772d10fbc36b12f88a019f7c81",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -7754,7 +7754,7 @@
     "end": 3969
    },
    "source": "src/sound/game_interface.c",
-   "source_sha256": "4f2d3d8ec85eb6d54bc4cce386c219fd297620041a035949868919cb8ed3f696",
+   "source_sha256": "bc5ad84bd69cabbc3c4cead913d1a2568026930f134b8ec3063e9407c721f7a3",
    "claims": [
     {
      "name": "myBeginSoundReverse",
@@ -7768,7 +7768,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_00DF_0004",
+     "name": "snd_init_driver_once",
      "unit": "root",
      "seg": 223,
      "off": 4,
@@ -7890,7 +7890,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "fddb82c901b98cb150d5dc0a7fd3030d4c6db6017dd2a863cd913f39963729d9",
+   "object_sha256": "78e94a45cb6c90b1219b227aef45ad32a947218c3506dcf6bd0f51359b17dd12",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -7933,7 +7933,7 @@
     "end": 5565
    },
    "source": "src/ui/view_dialog_helpers.c",
-   "source_sha256": "b1a668061e455d66edbda53708d5593dbdfb17fca0a43925b4b534a5b573e2ac",
+   "source_sha256": "7be5f47ce65e13f0a3aba7a540fa534623564194e4b5eb525d1c0e6a2987cbf4",
    "claims": [
     {
      "name": "ABS",
@@ -7991,7 +7991,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_00F8_01BE",
+     "name": "ui_pump_events_edge_scroll",
      "unit": "root",
      "seg": 248,
      "off": 446,
@@ -8321,7 +8321,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_00F8_0585",
+     "name": "res_install_cache_hook",
      "unit": "root",
      "seg": 248,
      "off": 1413,
@@ -8343,7 +8343,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_00F8_05B4",
+     "name": "win_redraw_current_clip",
      "unit": "root",
      "seg": 248,
      "off": 1460,
@@ -8377,7 +8377,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "af3ec77f3960a7a84971962107c785a6aacf294e52ce37505d65eb07e38170c9",
+   "object_sha256": "1f3c809597f0a5e81f267d30f2b08fda6b904cdb8d7669c46419e50655fbcd30",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -8764,10 +8764,10 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/ui/edit_view.c",
-   "source_sha256": "1f49034864daa16ee4c2ce819ccce298e69c67dc1a8fcc8ceab809abdae66f1b",
+   "source_sha256": "3349181fbf7b668b755e57456023a993ca9f812481dfae85fe600f308edf7129",
    "claims": [
     {
-     "name": "f_0250_0CF6",
+     "name": "edit_scroll_delta",
      "unit": "root",
      "seg": 592,
      "off": 3318,
@@ -8811,7 +8811,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_012D",
+     "name": "edit_alloc_tile_ems",
      "unit": "root",
      "seg": 592,
      "off": 301,
@@ -8822,7 +8822,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_01E7",
+     "name": "edit_release_life_tiles",
      "unit": "root",
      "seg": 592,
      "off": 487,
@@ -8833,7 +8833,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_0256",
+     "name": "edit_load_terrain_tiles",
      "unit": "root",
      "seg": 592,
      "off": 598,
@@ -8866,7 +8866,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_05CB",
+     "name": "edit_invalidate_life_cache",
      "unit": "root",
      "seg": 592,
      "off": 1483,
@@ -8888,7 +8888,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_062A",
+     "name": "edit_restore_tile_ems_map",
      "unit": "root",
      "seg": 592,
      "off": 1578,
@@ -8899,7 +8899,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_0643",
+     "name": "edit_prepare_life_tiles",
      "unit": "root",
      "seg": 592,
      "off": 1603,
@@ -8921,7 +8921,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_0915",
+     "name": "edit_compose_life_tile",
      "unit": "root",
      "seg": 592,
      "off": 2325,
@@ -8943,7 +8943,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0250_0B86",
+     "name": "edit_copy_ground_tile",
      "unit": "root",
      "seg": 592,
      "off": 2950,
@@ -8965,7 +8965,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_0D10",
+     "name": "edit_scroll_and_redraw",
      "unit": "root",
      "seg": 592,
      "off": 3344,
@@ -9240,7 +9240,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0250_5058",
+     "name": "edit_set_viewport_clip",
      "unit": "root",
      "seg": 592,
      "off": 20568,
@@ -9262,7 +9262,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "f_0250_13A6",
+     "name": "edit_render_viewport",
      "unit": "root",
      "seg": 592,
      "off": 5030,
@@ -9281,7 +9281,7 @@
      "target_sha256": "1f21a1300251dcd9f2024c1c7e314e8422bc40fbe8d4f3819618b054eb268495",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "layout_inferred": "extern Pnt far MapPnt declared after the Rect/win_GetObjRect declarations (still before its first use in f_0250_0D10): six identifiers before it make BalloonIsVisible exact (idscan: +3..15 at the old position)",
+     "layout_inferred": "extern Pnt far MapPnt declared after the Rect/win_GetObjRect declarations (still before its first use in edit_scroll_and_redraw): six identifiers before it make BalloonIsVisible exact (idscan: +3..15 at the old position)",
      "reloc_order": "EXACT"
     },
     {
@@ -9333,7 +9333,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "b004a5e69b699fd9e9df1472e12d7608acbfd5b18e5422aaa37eca268b114ba0",
+   "object_sha256": "b86eba5a0f8c9886e97a059c37d6f8e6d5a4ef77509c27617e07a829eca7af19",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -9371,7 +9371,7 @@
     "end": 30956
    },
    "source": "src/resources/game_strings.c",
-   "source_sha256": "ca0b89101b12f71b33a2801ffe51a68d1c49d1e122edbebf82fc1c43e77dfc81",
+   "source_sha256": "e7e00d131d12c1028473fc679f35cf35d301970b37d761395845bcbc7cc9bac9",
    "claims": [
     {
      "name": "initStuff",
@@ -9430,7 +9430,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d9b3f67f315e5b57241a4d6a8f1ec6b888d70fb3d84b6325d41909848382040c",
+   "object_sha256": "d81f2c5bcfb6f0b8b4a5b120f5d32cc870d027b966ee67b820fac92f8c1ee606",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -12996,7 +12996,7 @@
     "end": 90779
    },
    "source": "src/startup/main.c",
-   "source_sha256": "f9eb4c7d91d727038145d63599065ba9d201aaa21df89b824bb80b71de98dba6",
+   "source_sha256": "1d85fa0dfe202bcaed909c0050abd9990c9a9e5f5e4255dc4747c9bc3883b3df",
    "claims": [
     {
      "name": "main",
@@ -13022,7 +13022,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a75d3a2c57c3f2f6138127054b47945af8270f724284f10811dff1ba78153215",
+   "object_sha256": "952e1ea222114b08a40ffce19f7f79a05947da31352663e836d3035ffe3bc2ef",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -13218,10 +13218,10 @@
     "end": 94658
    },
    "source": "src/graphics/lines.asm",
-   "source_sha256": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
+   "source_sha256": "b960e8c5f2d87c1e5e96ba18148e8698ef06b58432e2bbc80f27a7dab184b410",
    "claims": [
     {
-     "name": "f_16B5_0008",
+     "name": "gfx_buffer_line",
      "unit": "root",
      "seg": 5813,
      "off": 8,
@@ -13232,7 +13232,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_0033",
+     "name": "gfx_buffer_line_target",
      "unit": "root",
      "seg": 5813,
      "off": 51,
@@ -13243,7 +13243,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_007F",
+     "name": "gfx_buffer_line_init_mono",
      "unit": "root",
      "seg": 5813,
      "off": 127,
@@ -13254,7 +13254,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_00A5",
+     "name": "gfx_buffer_line_init_planar",
      "unit": "root",
      "seg": 5813,
      "off": 165,
@@ -13265,7 +13265,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_00AB",
+     "name": "gfx_buffer_line_init_packed4",
      "unit": "root",
      "seg": 5813,
      "off": 171,
@@ -13276,7 +13276,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_00B1",
+     "name": "gfx_buffer_line_mono",
      "unit": "root",
      "seg": 5813,
      "off": 177,
@@ -13287,7 +13287,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_01D4",
+     "name": "gfx_buffer_line_planar4",
      "unit": "root",
      "seg": 5813,
      "off": 468,
@@ -13298,7 +13298,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_03B5",
+     "name": "gfx_buffer_line_packed4",
      "unit": "root",
      "seg": 5813,
      "off": 949,
@@ -13309,7 +13309,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_16B5_04D8",
+     "name": "gfx_buffer_clip_line",
      "unit": "root",
      "seg": 5813,
      "off": 1240,
@@ -13321,7 +13321,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d02556eedcf90181da671c3b1cee5d5a0620af2d69a779e8fadcf33dd0a69f81",
+   "object_sha256": "633aee76c8d018c27acec340de71f18a7a7e29471cab91825ad52a0048aa2902",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -13360,10 +13360,10 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/memory/ralloc.c",
-   "source_sha256": "81ea959f69d4fae9cedfe189341d6850ef77dc252b377f615a7c989d6c9db6f9",
+   "source_sha256": "00378850059334a41b4313d48fd8b99547b5f7b3df820b5badecf619527ed4b4",
    "claims": [
     {
-     "name": "f_171C_068C",
+     "name": "mem_carve_free_block",
      "unit": "root",
      "seg": 5916,
      "off": 1676,
@@ -13374,7 +13374,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_1246",
+     "name": "mem_release_handle_slot",
      "unit": "root",
      "seg": 5916,
      "off": 4678,
@@ -13407,7 +13407,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_171C_1FC2",
+     "name": "mem_lock_handle",
      "unit": "root",
      "seg": 5916,
      "off": 8130,
@@ -13418,7 +13418,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "f_171C_2136",
+     "name": "mem_handle_from_pointer",
      "unit": "root",
      "seg": 5916,
      "off": 8502,
@@ -13429,7 +13429,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_21CC",
+     "name": "mem_malloc_bridge",
      "unit": "root",
      "seg": 5916,
      "off": 8652,
@@ -13528,7 +13528,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_0EDE",
+     "name": "mem_compact_any_region",
      "unit": "root",
      "seg": 5916,
      "off": 3806,
@@ -13539,7 +13539,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_125C",
+     "name": "mem_alloc_handle_block",
      "unit": "root",
      "seg": 5916,
      "off": 4700,
@@ -13550,7 +13550,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "f_171C_14BE",
+     "name": "mem_handle_age_delta",
      "unit": "root",
      "seg": 5916,
      "off": 5310,
@@ -13704,7 +13704,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_1C82",
+     "name": "mem_mark_discardable_1c82",
      "unit": "root",
      "seg": 5916,
      "off": 7298,
@@ -13737,7 +13737,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_1E9A",
+     "name": "mem_handle_above_ems_boundary",
      "unit": "root",
      "seg": 5916,
      "off": 7834,
@@ -13748,7 +13748,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_1EFA",
+     "name": "mem_discard_soft_blocks",
      "unit": "root",
      "seg": 5916,
      "off": 7930,
@@ -13770,7 +13770,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_20E2",
+     "name": "mem_mark_discardable_20e2",
      "unit": "root",
      "seg": 5916,
      "off": 8418,
@@ -13869,7 +13869,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_07BE",
+     "name": "mem_init_movable_heap",
      "unit": "root",
      "seg": 5916,
      "off": 1982,
@@ -13880,7 +13880,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_171C_2086",
+     "name": "mem_unlock_encoded_handle",
      "unit": "root",
      "seg": 5916,
      "off": 8326,
@@ -13957,7 +13957,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "f_171C_0EEA",
+     "name": "mem_find_free_block",
      "unit": "root",
      "seg": 5916,
      "off": 3818,
@@ -13980,7 +13980,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "f_171C_0160",
+     "name": "mem_free_and_coalesce",
      "unit": "root",
      "seg": 5916,
      "off": 352,
@@ -14014,7 +14014,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8ec68b879dc5d4cb03194d8e132c5d2019bc0070c8e98046168995914d9e5325",
+   "object_sha256": "161bc1301a330d899dc58e3c71187489e8cd8e87437b2c64b96612e98d8fffda",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -14039,10 +14039,10 @@
     "end": 103825
    },
    "source": "src/platform/memory_helpers.asm",
-   "source_sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+   "source_sha256": "d361ebc1d6e21fb4c93889b07d980ac7b04e74b20ac9f69c798ee015aeaa8499",
    "claims": [
     {
-     "name": "f_194D_0006",
+     "name": "mem_copy_paragraphs",
      "unit": "root",
      "seg": 6477,
      "off": 6,
@@ -14053,7 +14053,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_194D_003F",
+     "name": "gfx_probe_tandy_video_area",
      "unit": "root",
      "seg": 6477,
      "off": 63,
@@ -14064,7 +14064,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_194D_008F",
+     "name": "mem_block_dword_checksum",
      "unit": "root",
      "seg": 6477,
      "off": 143,
@@ -14076,7 +14076,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "af5c576252f7619c22139b18b1289cd5dc9ed83503b8f18edf9ebf02f5063fdd",
+   "object_sha256": "e9e1dafab19e3d087f86562feb36396a3b493b20c5627e9dc6864e805d4df584",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -14158,10 +14158,10 @@
     "end": 104547
    },
    "source": "src/memory/ems.asm",
-   "source_sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+   "source_sha256": "50fc140f83202e58e6f1b84e2d97dc104dca5332d5b6b14eba00f78e4d5e02e5",
    "claims": [
     {
-     "name": "f_195A_000C",
+     "name": "ems_query_version",
      "unit": "root",
      "seg": 6490,
      "off": 12,
@@ -14172,7 +14172,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0018",
+     "name": "ems_query_status",
      "unit": "root",
      "seg": 6490,
      "off": 24,
@@ -14183,7 +14183,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_001D",
+     "name": "ems_query_page_frame",
      "unit": "root",
      "seg": 6490,
      "off": 29,
@@ -14194,7 +14194,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0035",
+     "name": "ems_query_page_counts",
      "unit": "root",
      "seg": 6490,
      "off": 53,
@@ -14205,7 +14205,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_004B",
+     "name": "ems_allocate_pages",
      "unit": "root",
      "seg": 6490,
      "off": 75,
@@ -14216,7 +14216,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0062",
+     "name": "ems_map_page",
      "unit": "root",
      "seg": 6490,
      "off": 98,
@@ -14227,7 +14227,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_007D",
+     "name": "ems_free_handle",
      "unit": "root",
      "seg": 6490,
      "off": 125,
@@ -14238,7 +14238,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0092",
+     "name": "ems_get_page_map",
      "unit": "root",
      "seg": 6490,
      "off": 146,
@@ -14249,7 +14249,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_00AC",
+     "name": "ems_set_page_map",
      "unit": "root",
      "seg": 6490,
      "off": 172,
@@ -14260,7 +14260,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_00C8",
+     "name": "ems_exchange_page_map",
      "unit": "root",
      "seg": 6490,
      "off": 200,
@@ -14271,7 +14271,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_00F8",
+     "name": "ems_save_handle_map",
      "unit": "root",
      "seg": 6490,
      "off": 248,
@@ -14282,7 +14282,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_010D",
+     "name": "ems_restore_handle_map",
      "unit": "root",
      "seg": 6490,
      "off": 269,
@@ -14293,7 +14293,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0122",
+     "name": "ems_map_multiple_pages",
      "unit": "root",
      "seg": 6490,
      "off": 290,
@@ -14304,7 +14304,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0144",
+     "name": "ems_map_multiple_segments",
      "unit": "root",
      "seg": 6490,
      "off": 324,
@@ -14315,7 +14315,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0166",
+     "name": "ems_move_region",
      "unit": "root",
      "seg": 6490,
      "off": 358,
@@ -14326,7 +14326,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0182",
+     "name": "ems_resize_handle",
      "unit": "root",
      "seg": 6490,
      "off": 386,
@@ -14337,7 +14337,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_01AF",
+     "name": "ems_get_mappable_pages",
      "unit": "root",
      "seg": 6490,
      "off": 431,
@@ -14348,7 +14348,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_01CB",
+     "name": "ems_set_handle_name",
      "unit": "root",
      "seg": 6490,
      "off": 459,
@@ -14359,7 +14359,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_01DF",
+     "name": "ems_find_named_handle",
      "unit": "root",
      "seg": 6490,
      "off": 479,
@@ -14370,7 +14370,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_01F2",
+     "name": "ems_set_alternate_map",
      "unit": "root",
      "seg": 6490,
      "off": 498,
@@ -14381,7 +14381,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0222",
+     "name": "ems_free_alternate_map",
      "unit": "root",
      "seg": 6490,
      "off": 546,
@@ -14392,7 +14392,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_023A",
+     "name": "ems_detect_manager",
      "unit": "root",
      "seg": 6490,
      "off": 570,
@@ -14403,7 +14403,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0260",
+     "name": "ems_initialize",
      "unit": "root",
      "seg": 6490,
      "off": 608,
@@ -14414,7 +14414,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_195A_02B7",
+     "name": "ems_fatal_error",
      "unit": "root",
      "seg": 6490,
      "off": 695,
@@ -14425,7 +14425,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_00E9",
+     "name": "ems_query_page_map_size",
      "unit": "root",
      "seg": 6490,
      "off": 233,
@@ -14436,7 +14436,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_019C",
+     "name": "ems_query_mappable_count",
      "unit": "root",
      "seg": 6490,
      "off": 412,
@@ -14447,7 +14447,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0206",
+     "name": "ems_get_alternate_map",
      "unit": "root",
      "seg": 6490,
      "off": 518,
@@ -14458,7 +14458,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_0210",
+     "name": "ems_query_alternate_map_size",
      "unit": "root",
      "seg": 6490,
      "off": 528,
@@ -14469,7 +14469,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_195A_021A",
+     "name": "ems_allocate_alternate_map",
      "unit": "root",
      "seg": 6490,
      "off": 538,
@@ -14492,7 +14492,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a949e4dfede00503b645194eedcc72e0bcf16527f4a116916444789ad5a238ab",
+   "object_sha256": "9867d7abb0375cc911ad17025cedbb166f5a171d2d02ff1b9ffda5c87ab6450b",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -14648,7 +14648,7 @@
     "end": 105927
    },
    "source": "src/resources/database_records.c",
-   "source_sha256": "fa4f3fad25e071fcf2c32568d762300e8221c2df87528e132f88255aece9ec43",
+   "source_sha256": "1fe3f132f449e9f1f94b072315e53835b9297691b2e957bfc455a284fbb8a1ee",
    "claims": [
     {
      "name": "f_19A9_0008",
@@ -14718,7 +14718,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1cacf60cc7c66c903efc233cddc097db1fbe7d28b75bfda1dd36d9acdf249904",
+   "object_sha256": "3e9e6546d928c29643f7935464da6021979779e98d0e3060050db6b4d79e8b6e",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -14761,7 +14761,7 @@
     "end": 107142
    },
    "source": "src/resources/database_ems.c",
-   "source_sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+   "source_sha256": "831f78735bc10ac8cc31413e7258d50a58faa77f697ec30374478a0002700993",
    "claims": [
     {
      "name": "f_19DC_0008",
@@ -14775,7 +14775,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_19DC_02D9",
+     "name": "db_read_at_cursor",
      "unit": "root",
      "seg": 6620,
      "off": 729,
@@ -14819,7 +14819,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_19DC_02FB",
+     "name": "db_read_cached_range",
      "unit": "root",
      "seg": 6620,
      "off": 763,
@@ -14831,7 +14831,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3aabcb16c50a056626b5352d5839fc382e6b41227564b454d5691d98f50ac0e7",
+   "object_sha256": "c78e9e473ad7462c25999b0f5662cf0880c9365525d41d2d3a4e1ccbe3aa4b3f",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -14981,7 +14981,7 @@
     "end": 108908
    },
    "source": "src/resources/database_objects.c",
-   "source_sha256": "2dd88955634e00f44fdca37009e40a0652d78a8c047119cc416cc49b234ca50b",
+   "source_sha256": "6250e844ce6d0bfd9648b964888df4c6b837435a9e640636a08c6331bed8756c",
    "claims": [
     {
      "name": "db_Exists",
@@ -15017,7 +15017,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A53_00F0",
+     "name": "res_load_with_alloc_type",
      "unit": "root",
      "seg": 6739,
      "off": 240,
@@ -15128,7 +15128,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "59e9774ca3432afc258d0360f90fbf55d91408c22c14f636ccf7967f36e6d44c",
+   "object_sha256": "b705fb768d6d519400ffba3d8e5d461dd735a2f3778e942ccd56aa504dc78c22",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -15167,7 +15167,7 @@
     "end": 110680
    },
    "source": "src/resources/object_cache.c",
-   "source_sha256": "caa563f72577706a178f907df149a58d2eb93fb751c0d18e01216e6069b3d2c6",
+   "source_sha256": "7b95bc81fe49406bdaaa6956a2f9c76dad1a1554b109b5ebbd66c1db5a1d6e21",
    "claims": [
     {
      "name": "ch_RemoveEntry",
@@ -15292,7 +15292,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1cf71247a31222f2c0a59e105acdd1cee0619f3ca5ffe30be64ca3a1cfdc0953",
+   "object_sha256": "782fa080cc19c41c4a12d5b397599d0e2ab21cd749c19282a7fa785c95941dc2",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -15436,7 +15436,7 @@
     "end": 111851
    },
    "source": "src/platform/cursor_shapes.c",
-   "source_sha256": "fbf7625776c79ad746e8f9017cf1146ca3d14f5d36654684cd5fa6e957ee5776",
+   "source_sha256": "44751c399c05f4d8e776478af7fa4a80f650ffea43b9a3a3851bf0826767ca77",
    "claims": [
     {
      "name": "f_1B28_0006",
@@ -15483,7 +15483,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B28_0129",
+     "name": "mouse_load_cursor_resources",
      "unit": "root",
      "seg": 6952,
      "off": 297,
@@ -15506,7 +15506,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "65c6760c86a59b97cf60f937913dec24cdc9550036815472335204e9679571de",
+   "object_sha256": "df7de1d0fc1ccb45e04238eb8f7bd7b121fdf1a28cc512e51199621324841562",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -15537,10 +15537,10 @@
     "end": 112438
    },
    "source": "src/platform/video/bios_bitmap.asm",
-   "source_sha256": "bcf3ab21a46e5f94424ed3f0372af0ec49c8993cc0f2b362eaf0271954349ce1",
+   "source_sha256": "7bd1b00c711772f5c829962dc3b5d2f309de74ecf674faca3d7544ac971d2491",
    "claims": [
     {
-     "name": "f_1B4E_000C",
+     "name": "gfx_empty_driver_callback",
      "unit": "root",
      "seg": 6990,
      "off": 12,
@@ -15562,7 +15562,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0025",
+     "name": "gfx_reset_driver_callbacks",
      "unit": "root",
      "seg": 6990,
      "off": 37,
@@ -15595,7 +15595,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0081",
+     "name": "gfx_put_fixed_font_chars",
      "unit": "root",
      "seg": 6990,
      "off": 129,
@@ -15606,7 +15606,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_00CE",
+     "name": "gfx_put_string_at_pen",
      "unit": "root",
      "seg": 6990,
      "off": 206,
@@ -15617,7 +15617,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0110",
+     "name": "gfx_put_fixed_font_char",
      "unit": "root",
      "seg": 6990,
      "off": 272,
@@ -15628,7 +15628,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_015B",
+     "name": "gfx_video_bios_ax",
      "unit": "root",
      "seg": 6990,
      "off": 347,
@@ -15639,7 +15639,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0165",
+     "name": "gfx_install_driver_callbacks",
      "unit": "root",
      "seg": 6990,
      "off": 357,
@@ -15650,7 +15650,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0177",
+     "name": "gfx_set_dac_palette_inplace",
      "unit": "root",
      "seg": 6990,
      "off": 375,
@@ -15661,7 +15661,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_01A1",
+     "name": "gfx_set_ega_palette",
      "unit": "root",
      "seg": 6990,
      "off": 417,
@@ -15672,7 +15672,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_01AE",
+     "name": "gfx_set_dac_palette",
      "unit": "root",
      "seg": 6990,
      "off": 430,
@@ -15683,7 +15683,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0228",
+     "name": "gfx_set_border_colour",
      "unit": "root",
      "seg": 6990,
      "off": 552,
@@ -15694,7 +15694,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0235",
+     "name": "gfx_get_bios_video_mode",
      "unit": "root",
      "seg": 6990,
      "off": 565,
@@ -15705,7 +15705,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_0240",
+     "name": "gfx_set_bios_video_mode",
      "unit": "root",
      "seg": 6990,
      "off": 576,
@@ -15728,7 +15728,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a2112527a8d5da9d65cd72cde2edb1d596483bb80fc8b9e522ef14e5e4c74577",
+   "object_sha256": "e2179c5fdb3baebd5a4a83922679f4ebcc63a70eb6a8b6d1816796c3ae84841a",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -15764,10 +15764,10 @@
     "end": 116268
    },
    "source": "src/platform/input_timer.asm",
-   "source_sha256": "7e3419e0143330db326bbeb0a70bcbf183b170202d4dcd8dd0b449e135ef3a67",
+   "source_sha256": "fa04e00a975a5ec0090a92c5b134e520f077890c1facf476a1586cbe2988e6f7",
    "claims": [
     {
-     "name": "f_1B73_0024",
+     "name": "mouse_absent_driver_iret",
      "unit": "root",
      "seg": 7027,
      "off": 36,
@@ -15778,7 +15778,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0025",
+     "name": "mouse_remove_absent_stub",
      "unit": "root",
      "seg": 7027,
      "off": 37,
@@ -15789,7 +15789,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0046",
+     "name": "mouse_initialize_driver",
      "unit": "root",
      "seg": 7027,
      "off": 70,
@@ -15800,7 +15800,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_00D9",
+     "name": "mouse_show_cursor",
      "unit": "root",
      "seg": 7027,
      "off": 217,
@@ -15811,7 +15811,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0122",
+     "name": "mouse_cursor_action",
      "unit": "root",
      "seg": 7027,
      "off": 290,
@@ -15822,7 +15822,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_0196",
+     "name": "mouse_hide_cursor",
      "unit": "root",
      "seg": 7027,
      "off": 406,
@@ -15833,7 +15833,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_01CB",
+     "name": "mouse_begin_screen_access",
      "unit": "root",
      "seg": 7027,
      "off": 459,
@@ -15844,7 +15844,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_01D5",
+     "name": "mouse_end_screen_access",
      "unit": "root",
      "seg": 7027,
      "off": 469,
@@ -15855,7 +15855,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_01E1",
+     "name": "mouse_set_cursor_bitmaps",
      "unit": "root",
      "seg": 7027,
      "off": 481,
@@ -15866,7 +15866,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0218",
+     "name": "mouse_set_mickey_ratio",
      "unit": "root",
      "seg": 7027,
      "off": 536,
@@ -15877,7 +15877,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0228",
+     "name": "mouse_set_double_speed",
      "unit": "root",
      "seg": 7027,
      "off": 552,
@@ -15888,7 +15888,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0235",
+     "name": "input_install_hooks",
      "unit": "root",
      "seg": 7027,
      "off": 565,
@@ -15899,7 +15899,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_02A9",
+     "name": "input_remove_hooks",
      "unit": "root",
      "seg": 7027,
      "off": 681,
@@ -15910,7 +15910,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_030F",
+     "name": "input_enqueue_event_args",
      "unit": "root",
      "seg": 7027,
      "off": 783,
@@ -15921,7 +15921,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_032A",
+     "name": "input_event_count",
      "unit": "root",
      "seg": 7027,
      "off": 810,
@@ -15932,7 +15932,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_032E",
+     "name": "input_pop_event",
      "unit": "root",
      "seg": 7027,
      "off": 814,
@@ -15943,7 +15943,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_036E",
+     "name": "input_enqueue_event",
      "unit": "root",
      "seg": 7027,
      "off": 878,
@@ -15954,7 +15954,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_03EE",
+     "name": "mouse_mickey_callback",
      "unit": "root",
      "seg": 7027,
      "off": 1006,
@@ -15965,7 +15965,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0445",
+     "name": "mouse_event_callback",
      "unit": "root",
      "seg": 7027,
      "off": 1093,
@@ -15976,7 +15976,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_04BB",
+     "name": "mouse_refresh_cursor",
      "unit": "root",
      "seg": 7027,
      "off": 1211,
@@ -15987,7 +15987,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_050E",
+     "name": "input_noop_050e",
      "unit": "root",
      "seg": 7027,
      "off": 1294,
@@ -15998,7 +15998,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_050F",
+     "name": "input_noop_050f",
      "unit": "root",
      "seg": 7027,
      "off": 1295,
@@ -16009,7 +16009,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0510",
+     "name": "input_noop_0510",
      "unit": "root",
      "seg": 7027,
      "off": 1296,
@@ -16020,7 +16020,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0511",
+     "name": "timer_disable_tick_count",
      "unit": "root",
      "seg": 7027,
      "off": 1297,
@@ -16031,7 +16031,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0518",
+     "name": "timer_enable_tick_count",
      "unit": "root",
      "seg": 7027,
      "off": 1304,
@@ -16042,7 +16042,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_051F",
+     "name": "timer_input_interrupt",
      "unit": "root",
      "seg": 7027,
      "off": 1311,
@@ -16053,7 +16053,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_065A",
+     "name": "kbd_int15_scan_hook",
      "unit": "root",
      "seg": 7027,
      "off": 1626,
@@ -16064,7 +16064,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_06E3",
+     "name": "kbd_int09_hook",
      "unit": "root",
      "seg": 7027,
      "off": 1763,
@@ -16075,7 +16075,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0747",
+     "name": "kbd_process_scan",
      "unit": "root",
      "seg": 7027,
      "off": 1863,
@@ -16086,7 +16086,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_09E9",
+     "name": "mouse_set_position",
      "unit": "root",
      "seg": 7027,
      "off": 2537,
@@ -16097,7 +16097,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_09F7",
+     "name": "mouse_refresh_position",
      "unit": "root",
      "seg": 7027,
      "off": 2551,
@@ -16108,7 +16108,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_09FF",
+     "name": "mouse_update_position_regs",
      "unit": "root",
      "seg": 7027,
      "off": 2559,
@@ -16119,7 +16119,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0A1B",
+     "name": "kbd_dispatch_pointer_action",
      "unit": "root",
      "seg": 7027,
      "off": 2587,
@@ -16130,7 +16130,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0A30",
+     "name": "kbd_scan_state",
      "unit": "root",
      "seg": 7027,
      "off": 2608,
@@ -16141,7 +16141,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0A40",
+     "name": "kbd_disable_mouse_emulation",
      "unit": "root",
      "seg": 7027,
      "off": 2624,
@@ -16152,7 +16152,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0A6C",
+     "name": "kbd_enable_mouse_emulation",
      "unit": "root",
      "seg": 7027,
      "off": 2668,
@@ -16163,7 +16163,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0A89",
+     "name": "hotbox_find_id",
      "unit": "root",
      "seg": 7027,
      "off": 2697,
@@ -16174,7 +16174,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0AA3",
+     "name": "hotbox_initialize_dispatch",
      "unit": "root",
      "seg": 7027,
      "off": 2723,
@@ -16185,7 +16185,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0AC3",
+     "name": "hotbox_append",
      "unit": "root",
      "seg": 7027,
      "off": 2755,
@@ -16196,7 +16196,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_0B00",
+     "name": "hotbox_prepend",
      "unit": "root",
      "seg": 7027,
      "off": 2816,
@@ -16207,7 +16207,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_0B5B",
+     "name": "hotbox_remove_id",
      "unit": "root",
      "seg": 7027,
      "off": 2907,
@@ -16218,7 +16218,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_0BC5",
+     "name": "hotbox_contains_pointer",
      "unit": "root",
      "seg": 7027,
      "off": 3013,
@@ -16229,7 +16229,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0BFF",
+     "name": "hotbox_pointer_hit_id",
      "unit": "root",
      "seg": 7027,
      "off": 3071,
@@ -16240,7 +16240,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0C42",
+     "name": "hotbox_get_rect",
      "unit": "root",
      "seg": 7027,
      "off": 3138,
@@ -16251,7 +16251,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0C80",
+     "name": "hotbox_center_pointer",
      "unit": "root",
      "seg": 7027,
      "off": 3200,
@@ -16262,7 +16262,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0CB3",
+     "name": "hotbox_dispatch_event",
      "unit": "root",
      "seg": 7027,
      "off": 3251,
@@ -16273,7 +16273,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0CEF",
+     "name": "hotbox_hit_and_callback",
      "unit": "root",
      "seg": 7027,
      "off": 3311,
@@ -16284,7 +16284,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0D4B",
+     "name": "mouse_default_cursor_thunk",
      "unit": "root",
      "seg": 7027,
      "off": 3403,
@@ -16295,7 +16295,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0D4C",
+     "name": "mouse_default_cursor_action",
      "unit": "root",
      "seg": 7027,
      "off": 3404,
@@ -16306,7 +16306,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B73_0DA4",
+     "name": "mouse_draw_default_cursor",
      "unit": "root",
      "seg": 7027,
      "off": 3492,
@@ -16317,7 +16317,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B73_0EEE",
+     "name": "kbd_scroll_lock_state",
      "unit": "root",
      "seg": 7027,
      "off": 3822,
@@ -16373,7 +16373,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f961e343dfc165c833f120aa40a5e25aaf5445bdb9c4b7d898c7dd996597b455",
+   "object_sha256": "5341a0ee4c8be3b7c188852a38f5a7e32525394950943932015d090f701ef461",
    "code_data_publics": {
     "fd_1B73_0006": 6
    },
@@ -16416,7 +16416,7 @@
    },
    "lang": "c",
    "source": "src/window/alerts.c",
-   "source_sha256": "2589124ab7d98e23c2699388f5e4539faabb761d5e3c0a00e8f0131d482c51ad",
+   "source_sha256": "a2bb1be8716caaa256db887bb348ea8752b7f5e0668a0f5fe081cf4839ba27a0",
    "claims": [
     {
      "name": "Punt",
@@ -16452,7 +16452,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1C62_00AC",
+     "name": "ui_message_acknowledge",
      "unit": "root",
      "seg": 7266,
      "off": 172,
@@ -16463,7 +16463,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1C62_00C0",
+     "name": "ui_message_transient",
      "unit": "root",
      "seg": 7266,
      "off": 192,
@@ -16552,7 +16552,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f54527c502e58115a88bd7d91764bdf9bd8a95573069a0736f2c4519bea95459",
+   "object_sha256": "5251b2489163eacafd14085492a8c31b801b17cf59a0a22697a45274f1e92182",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -16596,7 +16596,7 @@
     "end": 121057
    },
    "source": "src/graphics/screen_rects.c",
-   "source_sha256": "14412bf890fed0af75bc397e50ab437e1baa0252b6305873205edbad903a85da",
+   "source_sha256": "c8ff52f697ead88c62c4237f2e718d362e68d7fbb561cc1e66c665fe5b7552bd",
    "claims": [
     {
      "name": "f_1CE2_000C",
@@ -16698,7 +16698,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1CE2_01C3",
+     "name": "gfx_printf_at",
      "unit": "root",
      "seg": 7394,
      "off": 451,
@@ -16830,7 +16830,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_056C",
+     "name": "gfx_restore_and_free_rect",
      "unit": "root",
      "seg": 7394,
      "off": 1388,
@@ -16908,7 +16908,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "808143816746dd5f9340805dc3d025c7c150ed464f4d8d119a8c83c144e53040",
+   "object_sha256": "642f12cdd608457a05ceb70d9f4934c83a0d69c0e8afc5c1719bef131ea946f4",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -16942,7 +16942,7 @@
     "end": 124277
    },
    "source": "src/graphics/clip_rects.c",
-   "source_sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+   "source_sha256": "c2f2cb7761ae9ed24dcbc0272757bb2ecfe1812ada862c89ccd756a538ababe2",
    "claims": [
     {
      "name": "f_1D8E_0002",
@@ -16956,7 +16956,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1D8E_003F",
+     "name": "clip_split_rect",
      "unit": "root",
      "seg": 7566,
      "off": 63,
@@ -17067,7 +17067,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5c14a42d28ac3e3887892e032401096762988a55c98e462556a0dec584de5b55",
+   "object_sha256": "da59f86f4df5740097ef1f7795c6fca734fd16d1e0d58cc7bd058fd8731fde9f",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -17103,7 +17103,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/graphics/clip_regions.c",
-   "source_sha256": "c7ceb45929ec402857caffa2f3d7d49c35190d55d83542f0daaec88d33f9140a",
+   "source_sha256": "2076ceed6fea9c26c1ea4ea2308d2b8db86c30b1af9d620f81318f37a1fbfec6",
    "claims": [
     {
      "name": "f_1E57_0006",
@@ -17128,7 +17128,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1E57_0009",
+     "name": "clip_reset_temporary_state",
      "unit": "root",
      "seg": 7767,
      "off": 9,
@@ -17161,7 +17161,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1E57_00B1",
+     "name": "win_raise_and_reclip",
      "unit": "root",
      "seg": 7767,
      "off": 177,
@@ -17271,7 +17271,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1E57_0A9C",
+     "name": "clip_restrict_rect",
      "unit": "root",
      "seg": 7767,
      "off": 2716,
@@ -17359,7 +17359,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1E57_0FDC",
+     "name": "clip_set_screen_intersection",
      "unit": "root",
      "seg": 7767,
      "off": 4060,
@@ -17370,7 +17370,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1E57_038E",
+     "name": "win_rebuild_visible_clips",
      "unit": "root",
      "seg": 7767,
      "off": 910,
@@ -17382,7 +17382,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "b5b026869dead7e54dbfa60993945326cdb83c698dbe60625d47eaf6e42f759e",
+   "object_sha256": "fe7553cff6a1c44e19a35dd833107ef4100776a824bee288764954a48ac92a95",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -17413,10 +17413,10 @@
     "end": 128616
    },
    "source": "src/platform/bios_helpers.asm",
-   "source_sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+   "source_sha256": "915bc79f5a56bfcc8a0cb0bdd3a0006982f256cd18a25e579c1e85437018e6bb",
    "claims": [
     {
-     "name": "f_1F58_0006",
+     "name": "timer_bios_tick_count",
      "unit": "root",
      "seg": 8024,
      "off": 6,
@@ -17427,7 +17427,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_0014",
+     "name": "input_return_zero",
      "unit": "root",
      "seg": 8024,
      "off": 20,
@@ -17438,7 +17438,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_0017",
+     "name": "mem_exchange_byte_ranges",
      "unit": "root",
      "seg": 8024,
      "off": 23,
@@ -17449,7 +17449,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_0038",
+     "name": "kbd_poll_bios_key",
      "unit": "root",
      "seg": 8024,
      "off": 56,
@@ -17460,7 +17460,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_005A",
+     "name": "kbd_read_bios_char",
      "unit": "root",
      "seg": 8024,
      "off": 90,
@@ -17471,7 +17471,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_007F",
+     "name": "kbd_unread_char",
      "unit": "root",
      "seg": 8024,
      "off": 127,
@@ -17482,7 +17482,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_0090",
+     "name": "kbd_read_key_code",
      "unit": "root",
      "seg": 8024,
      "off": 144,
@@ -17493,7 +17493,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_00A1",
+     "name": "kbd_restore_ctrl_break_vector",
      "unit": "root",
      "seg": 8024,
      "off": 161,
@@ -17504,7 +17504,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F58_00B8",
+     "name": "kbd_install_ctrl_break_vector",
      "unit": "root",
      "seg": 8024,
      "off": 184,
@@ -17516,7 +17516,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a5656c890171744eb635d2e8515214fc2bbf7551190accdba84c51ebb990a800",
+   "object_sha256": "36b2796105aacbbc03b14ef5b48e7418a42637107f98ae56ed59117cb151f379",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -17541,10 +17541,10 @@
     "end": 129035
    },
    "source": "src/platform/file_helpers.asm",
-   "source_sha256": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+   "source_sha256": "0f6dac150891894b09f49b71675376425eba187e43e611d8d83eb704cc3b46b8",
    "claims": [
     {
-     "name": "f_1F66_0029",
+     "name": "file_wildcard_search",
      "unit": "root",
      "seg": 8038,
      "off": 41,
@@ -17555,7 +17555,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F66_002D",
+     "name": "file_wildcard_match",
      "unit": "root",
      "seg": 8038,
      "off": 45,
@@ -17566,7 +17566,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F66_00AF",
+     "name": "file_drive_current_directory",
      "unit": "root",
      "seg": 8038,
      "off": 175,
@@ -17577,7 +17577,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F66_00DA",
+     "name": "data_rotating_byte_checksum",
      "unit": "root",
      "seg": 8038,
      "off": 218,
@@ -17588,7 +17588,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F66_00F6",
+     "name": "file_dos_drive_count",
      "unit": "root",
      "seg": 8038,
      "off": 246,
@@ -17599,7 +17599,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1F66_0107",
+     "name": "system_register_stress",
      "unit": "root",
      "seg": 8038,
      "off": 263,
@@ -17622,7 +17622,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0336355a81481027fb652fd1eeaaecda59437b382a126da5ee6d8e6615a44862",
+   "object_sha256": "807cdc2fb86c57637e944de72469dfa17c68c956a347f41d48743fedb8c579f7",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -17665,10 +17665,10 @@
     "end": 129701
    },
    "source": "src/graphics/text_layout.c",
-   "source_sha256": "543af9cb4d6a0dec0bcbb4e1641f5cf7794464b05bf32df2492dd764f463821b",
+   "source_sha256": "569d50e9f7f6696fa5a1ca2c6fe139ab17ea285c3b824af2c52e5875ff07df1c",
    "claims": [
     {
-     "name": "f_1F80_0081",
+     "name": "timer_wait_double_ticks",
      "unit": "root",
      "seg": 8064,
      "off": 129,
@@ -17768,7 +17768,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "26b4fe197282c8eb784c2873aeb4391f298d16220bb7e0592a77950766004310",
+   "object_sha256": "776768e7060b9939c1b7d49c0fff4158bd40232c8d83f1f14a4d7ee5b4c04d75",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -17842,7 +17842,7 @@
     "end": 130343
    },
    "source": "src/graphics/bitmap_text.asm",
-   "source_sha256": "686f7e67a289a209108068f8f175552d9cec21ffe2be311d937f7c3a634d0597",
+   "source_sha256": "3b7ce449559b8a1c9a1e53aacd7a295d5405a2d5fe13cf3f152039ea77cc07ab",
    "claims": [
     {
      "name": "GPutStr",
@@ -17857,7 +17857,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3704c4f517fd67434543bbded0539871177562264cdb7d0803a47bfd1cd119b6",
+   "object_sha256": "6dd747cacb5a1516dd7f947ab9b9d08c838e8c5ea9a8a7a9865671584fde73a4",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -17902,7 +17902,7 @@
     "end": 132596
    },
    "source": "src/window/menu_helpers.c",
-   "source_sha256": "8228d0bb5176a3492e09944dfe570813e301975f1e66b9e336b11ac9d1a44ce4",
+   "source_sha256": "7708598597a9d33468fc61393b28b632d1305c5568ddc83db8cd0b023d3287cc",
    "claims": [
     {
      "name": "f_1FD2_0008",
@@ -17993,7 +17993,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1FD2_02FF",
+     "name": "input_capture_screen",
      "unit": "root",
      "seg": 8146,
      "off": 767,
@@ -18004,7 +18004,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1FD2_031A",
+     "name": "input_release_screen_capture",
      "unit": "root",
      "seg": 8146,
      "off": 794,
@@ -18048,7 +18048,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1FD2_03EB",
+     "name": "input_register_object_rect",
      "unit": "root",
      "seg": 8146,
      "off": 1003,
@@ -18059,7 +18059,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1FD2_0438",
+     "name": "input_remove_object_rect",
      "unit": "root",
      "seg": 8146,
      "off": 1080,
@@ -18180,7 +18180,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1FD2_05FD",
+     "name": "win_redraw_desktop_menu",
      "unit": "root",
      "seg": 8146,
      "off": 1533,
@@ -18269,7 +18269,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "03238b27202e8802d87e0b937dc1f64b7090a954e9524340156900ae7f8300ca",
+   "object_sha256": "00c6d6fe438983309f0930c58e7b6c48229de6ec3323ab5f2718570148aba790",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -18308,10 +18308,10 @@
     "end": 133367
    },
    "source": "src/platform/video/driver_select.c",
-   "source_sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+   "source_sha256": "45603c83a09b423d316e21bbeda2d46d6fcd4e533c48d6367a299b1348690395",
    "claims": [
     {
-     "name": "f_205F_0004",
+     "name": "gfx_select_driver_resources",
      "unit": "root",
      "seg": 8287,
      "off": 4,
@@ -18323,7 +18323,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "361f874c8816be008361d54db2df6b4441305f30b7f28692b3b61ea763a3255a",
+   "object_sha256": "b91b34f4a31ba26330029d05de49308e46ff34f5d0ce4dda53a2d2f2d869a354",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -18366,7 +18366,7 @@
     "end": 134783
    },
    "source": "src/window/text_bitmap_helpers.c",
-   "source_sha256": "c145b2c72df94c1fd8d70af53e0b60fdc78b9e7d9918821ef1ba1acf90fdf06f",
+   "source_sha256": "ccf628d27684d598d57918eab8e3225f2153d028d44e19cd837093ac5eeae620",
    "claims": [
     {
      "name": "f_208F_0008",
@@ -18391,7 +18391,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_208F_005B",
+     "name": "win_print_text_at_obj_offset",
      "unit": "root",
      "seg": 8335,
      "off": 91,
@@ -18634,7 +18634,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "43e724e311f78104abbae5e8d452cbe614237d1b584ba07bc408fc20f0522854",
+   "object_sha256": "6209496cad751dcafc7df6bf807767271bb8e1cabda2a4ce2e0be9ebcaea055b",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -18670,7 +18670,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/window/lifecycle.c",
-   "source_sha256": "7347884f2ae95bb552c695a7671519069b63b5aafac8920dc3361d788a015b66",
+   "source_sha256": "b751d17f9de44632304be30d6dc91648ae4faf2bf5c2950a40bf5642cc3852fc",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -18751,7 +18751,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_20E8_088B",
+     "name": "win_set_state_change_hook",
      "unit": "root",
      "seg": 8424,
      "off": 2187,
@@ -18762,7 +18762,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_20E8_089F",
+     "name": "win_set_before_close_hook",
      "unit": "root",
      "seg": 8424,
      "off": 2207,
@@ -18795,7 +18795,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_20E8_08DB",
+     "name": "win_set_layout_change_hook",
      "unit": "root",
      "seg": 8424,
      "off": 2267,
@@ -18817,7 +18817,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_20E8_0A21",
+     "name": "win_close_auto_dismiss",
      "unit": "root",
      "seg": 8424,
      "off": 2593,
@@ -18851,7 +18851,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "156f1cc4022063df0a7c823f5434022b072ffc4acd33ca70d015243a268e8f1c",
+   "object_sha256": "99f3f5433552e8b0635e5341680ecc8b6d91708c0a9770b13af4b39766878f71",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -18895,7 +18895,7 @@
     "end": 139170
    },
    "source": "src/window/events.c",
-   "source_sha256": "6af632fc1b65d2e86ae84617bd4de825f629639fcb36809bce2ac74c240d1b78",
+   "source_sha256": "aff53a294307419ed440d236d8a4722acad7daaa83760979764cadcb96a7a96f",
    "claims": [
     {
      "name": "f_218D_000C",
@@ -18953,7 +18953,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_218D_02D5",
+     "name": "win_translate_pending_event",
      "unit": "root",
      "seg": 8589,
      "off": 725,
@@ -19031,7 +19031,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3a7b45487e389f4bbeb7247242f676ed2e35c1ae3656391e825a6d0a3c94e16c",
+   "object_sha256": "58f36c8f02e98976ec835e9f9faacdd57bedb6e22982f9bcf81b10a1afd24466",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -19076,7 +19076,7 @@
     "end": 142329
    },
    "source": "src/window/drawing.c",
-   "source_sha256": "0fa15c05c2cfef071e00f8869b051698daf20f7e7466e60c0f54aec3b2129009",
+   "source_sha256": "f39b5ffa1959853e16b6973e44f7ffb7d38119874c618b83b024a6097800b131",
    "claims": [
     {
      "name": "gr_JustifyStrInRect",
@@ -19222,7 +19222,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_077D",
+     "name": "win_draw_frame_controls",
      "unit": "root",
      "seg": 8698,
      "off": 1917,
@@ -19255,7 +19255,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_21FA_0B4B",
+     "name": "win_redraw_exposed_windows",
      "unit": "root",
      "seg": 8698,
      "off": 2891,
@@ -19290,7 +19290,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c84b61f64d3543a9637c033f9f3b6f41c7fa4321bf950f97df2103076bffd633",
+   "object_sha256": "9538f5a7f060c21225100b0685eef9656d58ebce68909181349de5f3c7637802",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -19330,7 +19330,7 @@
     "end": 146148
    },
    "source": "src/window/object_attributes.c",
-   "source_sha256": "9c09a6595a06569582328e319449f9446cdf92c703eda8c2faca8eed2affcb17",
+   "source_sha256": "fcbff3d02e5fd5f0c863802702693939d92ec83d7a637f87af429752ed611004",
    "claims": [
     {
      "name": "win_StringSize",
@@ -19355,7 +19355,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_00AA",
+     "name": "win_get_obj_layout_rect",
      "unit": "root",
      "seg": 8895,
      "off": 170,
@@ -19366,7 +19366,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_00DD",
+     "name": "win_set_obj_layout_rect",
      "unit": "root",
      "seg": 8895,
      "off": 221,
@@ -19663,7 +19663,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0A65",
+     "name": "win_is_zoomed",
      "unit": "root",
      "seg": 8895,
      "off": 2661,
@@ -19696,7 +19696,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0AEF",
+     "name": "win_set_flag_0040",
      "unit": "root",
      "seg": 8895,
      "off": 2799,
@@ -19707,7 +19707,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0B25",
+     "name": "win_clear_flag_0040",
      "unit": "root",
      "seg": 8895,
      "off": 2853,
@@ -19785,7 +19785,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_0E83",
+     "name": "win_copy_obj_layout_origin",
      "unit": "root",
      "seg": 8895,
      "off": 3715,
@@ -19852,7 +19852,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9d119f1fb969c478df5f8d14bccd8194be0803b418f536659e869aad40580206",
+   "object_sha256": "df722d4f07acf9eee52daa124ad772ff033ff1ef53c958430bcee63ce8dfb482",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -19893,7 +19893,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/window/locking.c",
-   "source_sha256": "0d806e24af44b368fca74f3065f4481cde11f989b9daa532480f0c99432330fc",
+   "source_sha256": "adce0b413d4820bac31931bc61c544feb38ac010aa0710ac40e5f2ba7d3149ec",
    "claims": [
     {
      "name": "win_NoWindowsShouldBeLocked",
@@ -19929,7 +19929,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_23AE_0069",
+     "name": "win_load_and_lock_resource",
      "unit": "root",
      "seg": 9134,
      "off": 105,
@@ -19985,7 +19985,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "cfd7ab2a92c086984c3db7cceac839bd29e76a8608d7b179c541d7d117b51036",
+   "object_sha256": "e210a9e9a5e2b2523ca849792629228cb90dad6ecfc3e6dbd60d6a4340a8bd9a",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20021,10 +20021,10 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/window/lists_sliders.c",
-   "source_sha256": "5f99a92583e4954e04ee26fb2de0184446bf40d74f06f43a3c8abad76e5b8092",
+   "source_sha256": "e38d857196801fd191e80a2833a32f30871625713b75183d574837c8c44eb1eb",
    "claims": [
     {
-     "name": "f_23E6_009F",
+     "name": "list_is_line_selected",
      "unit": "root",
      "seg": 9190,
      "off": 159,
@@ -20035,7 +20035,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_0109",
+     "name": "list_line_count",
      "unit": "root",
      "seg": 9190,
      "off": 265,
@@ -20046,7 +20046,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_23E6_0132",
+     "name": "list_line_record",
      "unit": "root",
      "seg": 9190,
      "off": 306,
@@ -20057,7 +20057,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_23E6_016B",
+     "name": "list_clear_selection",
      "unit": "root",
      "seg": 9190,
      "off": 363,
@@ -20079,7 +20079,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_0266",
+     "name": "list_replace_text",
      "unit": "root",
      "seg": 9190,
      "off": 614,
@@ -20090,7 +20090,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_0392",
+     "name": "list_draw_visible_rows",
      "unit": "root",
      "seg": 9190,
      "off": 914,
@@ -20112,7 +20112,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_066C",
+     "name": "win_draw_vertical_slider",
      "unit": "root",
      "seg": 9190,
      "off": 1644,
@@ -20123,7 +20123,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_23E6_06F1",
+     "name": "list_scroll_to_line",
      "unit": "root",
      "seg": 9190,
      "off": 1777,
@@ -20134,7 +20134,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_07A2",
+     "name": "list_scroll_forward_line",
      "unit": "root",
      "seg": 9190,
      "off": 1954,
@@ -20179,7 +20179,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e0a979398bacb244503aab93ef537b799999d2ab9bc563409c98cfdd196e71dc",
+   "object_sha256": "aa8edf81406c6db0f054b256868fa2a843fa321c3207e5c86ad21112503d6e3f",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20219,10 +20219,10 @@
     "end": 151460
    },
    "source": "src/graphics/font_output.c",
-   "source_sha256": "35121798a9bc365018b1e99a6be2f641b944f7f8abe9e92b8864a9566574e4b5",
+   "source_sha256": "44fbc60e6ac9ea3bf71427f322f1e5dbb94d9c0d40377bef991e33bf141fc210",
    "claims": [
     {
-     "name": "f_24AB_0002",
+     "name": "font_make_display_bitmap",
      "unit": "root",
      "seg": 9387,
      "off": 2,
@@ -20299,7 +20299,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_24AB_042B",
+     "name": "font_print_and_clear_row",
      "unit": "root",
      "seg": 9387,
      "off": 1067,
@@ -20322,7 +20322,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "81d0231c024652c832c1139eb0ac06320b2d0d305e1a4e52f6561402f60983d5",
+   "object_sha256": "671e77a7135f1a6fea75649280e3d879ae82aca3d69a0248fe400774a9e314b8",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20347,7 +20347,7 @@
     "end": 151638
    },
    "source": "src/graphics/pixel_helpers.asm",
-   "source_sha256": "0c7dc1ce797647f9460feb23beb31504fe33a9b34727eacdde847b9b7bd9d562",
+   "source_sha256": "c6cd81407a6b7ed6de1d0421d65622079f3dc8fdb015b04479bcde09b9cde841",
    "claims": [
     {
      "name": "MemRChr",
@@ -20383,7 +20383,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_24FA_00B5",
+     "name": "debug_breakpoint",
      "unit": "root",
      "seg": 9466,
      "off": 181,
@@ -20406,7 +20406,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3938b6c2836e6189fba299ac5745839c84ee05ce3db5bf917e5b8479117e8c05",
+   "object_sha256": "eeec4f6fcb03522e6ae7d62b18fd17aacfc97f41309cd7a381468afc500dd4bc",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20447,10 +20447,10 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/window/object_geometry.c",
-   "source_sha256": "7ef32a8bea6be8bb056d6c00695a3763719467e7b77a6dccbc2b33a1270642cb",
+   "source_sha256": "80d5cfd8c97bf7e2907a3b56234ec657e9ea4decc7e56d3d5db617ff177926ab",
    "claims": [
     {
-     "name": "f_2505_0006",
+     "name": "win_locked_resource_ptr",
      "unit": "root",
      "seg": 9477,
      "off": 6,
@@ -20583,7 +20583,7 @@
      "steered": "identifier count only: named temporaries windowIndex/result (with the unnamed win_GetVal forward prototype) keep the original code of every later function; the original identifiers are unknown"
     },
     {
-     "name": "f_2505_0511",
+     "name": "win_sort_rect_coords",
      "unit": "root",
      "seg": 9477,
      "off": 1297,
@@ -20605,7 +20605,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2505_0831",
+     "name": "win_activate_pointer_regions",
      "unit": "root",
      "seg": 9477,
      "off": 2097,
@@ -20616,7 +20616,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2505_08EA",
+     "name": "win_deactivate_pointer_regions",
      "unit": "root",
      "seg": 9477,
      "off": 2282,
@@ -20672,7 +20672,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ea3bc86ccfbc859884dd890273f5a398042673218b48b04415fef434229f081d",
+   "object_sha256": "69c56d337b20ec40e725337b31a9e530daaa1a418cf35d12b4f80e458665a1aa",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20703,7 +20703,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/window/pictures.c",
-   "source_sha256": "a29df4ab84199e47b0bca978b355f33bb2a924ca79fd28b91cc04ce02d2949aa",
+   "source_sha256": "bdf79d2a8573baef5a5917ef8aabd0f10cf5f50aff43a02c16b8f29a490f8a92",
    "claims": [
     {
      "name": "win_DrawBitMapAtObj",
@@ -20740,7 +20740,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a8d5110abce47332839947d6cc3237d2dc5411b76ae3411949cc80d1dd193e48",
+   "object_sha256": "138fbc7cca9646fd60ddd187a9a5119dfaa65d94c0ea994b5385083d12b4feab",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20776,10 +20776,10 @@
     "end": 156933
    },
    "source": "src/graphics/font_resources.c",
-   "source_sha256": "a6d93095e81a207358e83e03dcec0f1a722080260054cb4029b3e11d63b0f366",
+   "source_sha256": "875cbe33b364f0dd367b34e81e668e225c403db9f7e067bf83ce3d2b836dc374",
    "claims": [
     {
-     "name": "f_25E7_0008",
+     "name": "font_read_big_endian_words",
      "unit": "root",
      "seg": 9703,
      "off": 8,
@@ -20868,7 +20868,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d6083ccbb92606ab2706278def2fad6bed07bb1a52a8180ade8f2c191c624b74",
+   "object_sha256": "b9a966e69930457147b692bb66953044826dba024317b1e131c76c95526321d5",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20975,7 +20975,7 @@
     "end": 161754
    },
    "source": "src/graphics/anim.c",
-   "source_sha256": "a149d0f48a82f22872ce3caa9bb7da51088b20b43ab28d901d320806e672838f",
+   "source_sha256": "7483666133fb74fef1e819d8564efe457a8e9676d3a192d2a96f0b3a205da17d",
    "claims": [
     {
      "name": "hanim_PrintSet",
@@ -20989,7 +20989,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2662_0100",
+     "name": "anim_lock_render_buffers",
      "unit": "root",
      "seg": 9826,
      "off": 256,
@@ -21000,7 +21000,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2662_01B5",
+     "name": "anim_unlock_render_buffers",
      "unit": "root",
      "seg": 9826,
      "off": 437,
@@ -21011,7 +21011,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2662_023F",
+     "name": "anim_capture_screen_rect",
      "unit": "root",
      "seg": 9826,
      "off": 575,
@@ -21022,7 +21022,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2662_0262",
+     "name": "anim_compose_object_range",
      "unit": "root",
      "seg": 9826,
      "off": 610,
@@ -21143,7 +21143,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2662_1120",
+     "name": "anim_bitmap_to_buffer",
      "unit": "root",
      "seg": 9826,
      "off": 4384,
@@ -21167,7 +21167,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "633f2cc56dde1d85249c7003b6728b9e12503133d1eea56c6444adc96e77dc12",
+   "object_sha256": "5359d0a3fcba0daf4d4219020584e152277d05dce46fd77ec04bee4929c11695",
    "source_name_kind": "recovered",
    "source_path_history": [
     {
@@ -21301,7 +21301,7 @@
     "end": 164186
    },
    "source": "src/sound/device_channels.c",
-   "source_sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+   "source_sha256": "5a3cadb2b83cf17420e1b86cec7b683c6b094d286483159cd5fb3ce62f4cbdd6",
    "claims": [
     {
      "name": "f_277E_0000",
@@ -21503,7 +21503,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "592e24698e616450543b26519a92fe7ac1b57650fb492cd9eb0eb7af980ab31f",
+   "object_sha256": "d8cb1ec3bb2f9fa4aa76cc86c9852ff558fad5749ffae939b65ab55333124632",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -21539,7 +21539,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/sound/opl2_voices.c",
-   "source_sha256": "6d7a3e90d0e6555dc5c1d205f18ad9df9579c743d829ba86011e36c95a2010eb",
+   "source_sha256": "196514c2a6ab6b94fa4cca5d17ccc6ada9b815b791e3c840ad57cfde3aa1b48d",
    "claims": [
     {
      "name": "f_2815_0118",
@@ -21588,7 +21588,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8eee22a8d5f97c0d68cf07aac90e62bfb8939ebf8b5297bbce411e3fc6f7e179",
+   "object_sha256": "ceba4ba80fd3507b3103e30b6627616e7e7f09f96d867cf9b1cb1d5897c55250",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -21613,10 +21613,10 @@
     "end": 165028
    },
    "source": "src/sound/opl2_registers.asm",
-   "source_sha256": "c7fc07dbb9830dfad40597e5fe377c4a62bc9d3551a80aef602dad3925daa0c5",
+   "source_sha256": "0c6fbf0a13b03f46366d1ca37a4bb8eb89daeff60f419fee4914b838e3c4ef79",
    "claims": [
     {
-     "name": "f_283E_000A",
+     "name": "snd_opl_write",
      "unit": "root",
      "seg": 10302,
      "off": 10,
@@ -21627,7 +21627,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_283E_0020",
+     "name": "snd_opl_write_regs",
      "unit": "root",
      "seg": 10302,
      "off": 32,
@@ -21638,7 +21638,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_283E_0035",
+     "name": "snd_opl_probe_tone",
      "unit": "root",
      "seg": 10302,
      "off": 53,
@@ -21650,7 +21650,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c45c43d10fbce2ac2ff21dc246f582bf99fd19e0c79042f6a2f7cde3267a5fd3",
+   "object_sha256": "fa421aadf0f18fa4f384d545fd03ad06548fc55820566acafa8156c220c0f33f",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -21690,10 +21690,10 @@
    },
    "lang": "c",
    "source": "src/sound/midi_player.c",
-   "source_sha256": "7c995a2589e9bb1a12f4f13a90fed1f5860d1b487584339119de105492dba581",
+   "source_sha256": "c3ab171b6fced6e6c784f8218928effb748d742e353fe730b01524cdc68f36eb",
    "claims": [
     {
-     "name": "f_284A_0004",
+     "name": "snd_service_and_test_stopped",
      "unit": "root",
      "seg": 10314,
      "off": 4,
@@ -21704,7 +21704,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_284A_0013",
+     "name": "snd_load_and_start_song",
      "unit": "root",
      "seg": 10314,
      "off": 19,
@@ -21892,7 +21892,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3864e67ad9637e56e8fba9f914f750da03e4b9cd943f7d766f58fca0ee47fe90",
+   "object_sha256": "c153a8e685c2e57d9ecba908f5b282f73eda281475bb0b46aef08557514d18d1",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -21923,7 +21923,7 @@
     "end": 168157
    },
    "source": "src/sound/sample_timer.asm",
-   "source_sha256": "e1b3d7a49330d3e7f817da331c3142ce0db64bd03de8c75ad3c7e6cddf4b82cf",
+   "source_sha256": "3007e8d5ce200b033e26457f1f1d1a4de7005f3262244035bdb9a655a8a70b6d",
    "claims": [
     {
      "name": "f_28BC_0000",
@@ -21937,7 +21937,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_000E",
+     "name": "snd_timer_reentrant_exit",
      "unit": "root",
      "seg": 10428,
      "off": 14,
@@ -21948,7 +21948,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_0015",
+     "name": "snd_timer_mix_two_channels",
      "unit": "root",
      "seg": 10428,
      "off": 21,
@@ -21959,7 +21959,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_28BC_020E",
+     "name": "snd_timer_mix_four_channels",
      "unit": "root",
      "seg": 10428,
      "off": 526,
@@ -21970,7 +21970,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_0354",
+     "name": "snd_slow_timer_interrupt",
      "unit": "root",
      "seg": 10428,
      "off": 852,
@@ -21981,7 +21981,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_28BC_03CC",
+     "name": "snd_start_sample_timer",
      "unit": "root",
      "seg": 10428,
      "off": 972,
@@ -21992,7 +21992,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_040C",
+     "name": "snd_slow_sample_timer",
      "unit": "root",
      "seg": 10428,
      "off": 1036,
@@ -22003,7 +22003,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_0422",
+     "name": "snd_install_slow_timer_regs",
      "unit": "root",
      "seg": 10428,
      "off": 1058,
@@ -22014,7 +22014,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_046B",
+     "name": "snd_select_four_channel_timer",
      "unit": "root",
      "seg": 10428,
      "off": 1131,
@@ -22025,7 +22025,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_0488",
+     "name": "snd_select_two_channel_timer",
      "unit": "root",
      "seg": 10428,
      "off": 1160,
@@ -22036,7 +22036,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_28BC_04E0",
+     "name": "snd_restore_bios_timer",
      "unit": "root",
      "seg": 10428,
      "off": 1248,
@@ -22048,7 +22048,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "39357ec9d16b8cc7fbcf18ccdea0be0aada274579cde478577b698eba4aeafa3",
+   "object_sha256": "2a064736d28cb55db028280c3c2ce82b6d6cd5a6e0ddf59faa8654a4f60783c7",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -22088,7 +22088,7 @@
     "end": 168870
    },
    "source": "src/sound/sample_voices.c",
-   "source_sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+   "source_sha256": "e683c2784593e23598c78ba49c60e073647f84eeca2f6eefdfdc8c14e78d0543",
    "claims": [
     {
      "name": "f_290D_0098",
@@ -22137,7 +22137,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0ee43c869d6518db99d59029a5754db4ab04c3f89a126579397241eec90da655",
+   "object_sha256": "dc6e6233434fe2ae00745bd0391379f9289bf13a638e9b0ec2a7dde029e36225",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -22177,7 +22177,7 @@
     "end": 169418
    },
    "source": "src/sound/device_probe.c",
-   "source_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+   "source_sha256": "07b48145c7e546843a11498cde4d6e4547105982674c031ed24dc3f1d8cec80f",
    "claims": [
     {
      "name": "f_293A_0006",
@@ -22282,7 +22282,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "684595d316bdb6073a2229e5ab59f75ef4a506b66b6e0b20a766f3955da5641c",
+   "object_sha256": "cc02d3e8fd1e6f7086472ebf7d288ccd76ae59ab941bd42e6568cb4ee450ca6e",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -22322,7 +22322,7 @@
     "end": 170880
    },
    "source": "src/sound/midi_voices.c",
-   "source_sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+   "source_sha256": "e80634c53d4ff4660dad7c6e33c8fae82a6b71d44c0cf3fb1761eba53a80b6b9",
    "claims": [
     {
      "name": "f_295C_0015",
@@ -22358,7 +22358,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_295C_0367",
+     "name": "snd_start_configured_effect",
      "unit": "root",
      "seg": 10588,
      "off": 871,
@@ -22479,7 +22479,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_295C_0391",
+     "name": "snd_stop_assigned_voices",
      "unit": "root",
      "seg": 10588,
      "off": 913,
@@ -22492,7 +22492,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "adab4cde1aac881324e868640bd6ee3efda6779761f883d8ac7fddc91b7ab7fa",
+   "object_sha256": "90d760997f3e334a02cf184b276706b441f96f01e736f16006f4c5ca6a15bafa",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -22572,10 +22572,10 @@
     "end": 171370
    },
    "source": "src/sound/chip_registers.asm",
-   "source_sha256": "bb40cbd77f380b56c0ab0c27d41f08b40f63deb3b8c14f53b15e3d526fa753ac",
+   "source_sha256": "4d3d53447464bff9063aac803ca411ec2447e8545956b898048dada79882171c",
    "claims": [
     {
-     "name": "f_29BF_0008",
+     "name": "snd_regchip_initialize",
      "unit": "root",
      "seg": 10687,
      "off": 8,
@@ -22586,7 +22586,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_003F",
+     "name": "snd_regchip_reset_default",
      "unit": "root",
      "seg": 10687,
      "off": 63,
@@ -22597,7 +22597,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_0048",
+     "name": "snd_regchip_init_channels",
      "unit": "root",
      "seg": 10687,
      "off": 72,
@@ -22608,7 +22608,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_0059",
+     "name": "snd_regchip_reset",
      "unit": "root",
      "seg": 10687,
      "off": 89,
@@ -22619,7 +22619,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_00B7",
+     "name": "snd_regchip_fill_registers",
      "unit": "root",
      "seg": 10687,
      "off": 183,
@@ -22630,7 +22630,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_00C1",
+     "name": "snd_regchip_set_mode",
      "unit": "root",
      "seg": 10687,
      "off": 193,
@@ -22641,7 +22641,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_00CE",
+     "name": "snd_regchip_channel_write",
      "unit": "root",
      "seg": 10687,
      "off": 206,
@@ -22652,7 +22652,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_00E6",
+     "name": "snd_regchip_write",
      "unit": "root",
      "seg": 10687,
      "off": 230,
@@ -22663,7 +22663,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_0108",
+     "name": "snd_regchip_write_checked",
      "unit": "root",
      "seg": 10687,
      "off": 264,
@@ -22674,7 +22674,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_0139",
+     "name": "snd_regchip_detect",
      "unit": "root",
      "seg": 10687,
      "off": 313,
@@ -22685,7 +22685,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_29BF_014B",
+     "name": "snd_regchip_probe_ports",
      "unit": "root",
      "seg": 10687,
      "off": 331,
@@ -22697,7 +22697,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5f9d2d5a2e9cbc83c0e010469000c8d63729c3f10c4147f93a42947d7a7d20cf",
+   "object_sha256": "84667ee6638ca4a99ed65536464353bed20965222c4101420e15c6642541b529",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -22733,7 +22733,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/sound/psg_voices.c",
-   "source_sha256": "bb96401b33bdf7b5f13ae57849c112ac744bff0a48dece78ac057b9fa09b9c1a",
+   "source_sha256": "bce104a10d596869aa937d3c9f843791d3ef166df34bdbf38507c1a0b7fbfb24",
    "claims": [
     {
      "name": "f_29D6_0082",
@@ -22803,7 +22803,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "97034277304a71ba9bf6e0c59a5fa641aad1b79b499e1e0ab60b6de693432b81",
+   "object_sha256": "52e37b7340a9ec56e38d04435bf3da9c2959798ee62beb9f9e875f90d57c9c40",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -22924,10 +22924,10 @@
     "end": 184292
    },
    "source": "src/memory/hook_thunks.asm",
-   "source_sha256": "36580a1355703e04abf09fb4e3f03bf21e9b5c04fad75b0af887fe8ee4fce655",
+   "source_sha256": "338d7cc13909d7ba2866c74c81763f28e037e449bfa9cb24ca84676578d3d017",
    "claims": [
     {
-     "name": "jt_171C_13CA",
+     "name": "mem_hook_ralloc",
      "unit": "root",
      "seg": 11515,
      "off": 2,
@@ -22938,7 +22938,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_13E4",
+     "name": "mem_hook_rallocfree",
      "unit": "root",
      "seg": 11515,
      "off": 7,
@@ -22949,7 +22949,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_152C",
+     "name": "mem_hook_rallocfreshen",
      "unit": "root",
      "seg": 11515,
      "off": 12,
@@ -22960,7 +22960,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_14BE",
+     "name": "mem_hook_age_delta",
      "unit": "root",
      "seg": 11515,
      "off": 17,
@@ -22971,7 +22971,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_16EA",
+     "name": "mem_hook_rallocsize",
      "unit": "root",
      "seg": 11515,
      "off": 22,
@@ -22982,7 +22982,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_1794",
+     "name": "mem_hook_rallocfreed",
      "unit": "root",
      "seg": 11515,
      "off": 27,
@@ -22993,7 +22993,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_1750",
+     "name": "mem_hook_rallocmemoryfree",
      "unit": "root",
      "seg": 11515,
      "off": 32,
@@ -23004,7 +23004,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_18A6",
+     "name": "mem_hook_rallocrealloc",
      "unit": "root",
      "seg": 11515,
      "off": 37,
@@ -23015,7 +23015,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_1686",
+     "name": "mem_hook_ralloctype",
      "unit": "root",
      "seg": 11515,
      "off": 42,
@@ -23026,7 +23026,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "jt_171C_15A2",
+     "name": "mem_hook_rallocsettype",
      "unit": "root",
      "seg": 11515,
      "off": 47,
@@ -23038,7 +23038,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9428229251fdf40b49cd473e057fd3cfa119a840fe9c4bf292f9f3793af97f6a",
+   "object_sha256": "b8fce2a0084a6f5ee27a9b05da399d75679195b8c9d8b4fa803200c7fc62988d",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {

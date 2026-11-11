@@ -67,7 +67,7 @@ char far * far f_1A53_00BA(int object, int kind)
     return handle;
 }
 
-char far * far f_1A53_00F0(int object, int kind, int type)
+char far * far res_load_with_alloc_type(int object, int kind, int type)
 {
     char far *handle;
 

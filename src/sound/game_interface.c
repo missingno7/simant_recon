@@ -8,7 +8,7 @@ extern int far f_277E_0000(int mode, int flag);
 extern void far WinPrintf(char *fmt, ...);
 extern int far * far fd_55B3_74FE;
 
-void far f_00DF_0004(void)
+void far snd_init_driver_once(void)
 {
     if (g_1926)
         return;
@@ -36,14 +36,14 @@ void far f_00DF_009D(void)
 }
 
 extern int far OptionStates[];
-extern void far f_0250_01E7(void);
-extern void far f_284A_0013(int song);
+extern void far edit_release_life_tiles(void);
+extern void far snd_load_and_start_song(int song);
 
 void far myBeginSong(int song)
 {
     if (g_1926 && OptionStates[1]) {
-        f_0250_01E7();
-        f_284A_0013(song);
+        edit_release_life_tiles();
+        snd_load_and_start_song(song);
     }
 }
 
@@ -51,12 +51,12 @@ void far f_00DF_00E0(void)
 {
 }
 
-extern void far f_295C_0367(int sound);
+extern void far snd_start_configured_effect(int sound);
 
 void far myBeginSound(int a, int b, int c)
 {
     if (g_1926 && OptionStates[2])
-        f_295C_0367(a);
+        snd_start_configured_effect(a);
 }
 
 void far myBeginSoundReverse(int a, int b, int c)
@@ -69,12 +69,12 @@ int far mySoundIsDone(void)
     return 1;
 }
 
-extern int far f_284A_0004(void);
+extern int far snd_service_and_test_stopped(void);
 
 int far mySongIsDone(void)
 {
     if (g_1926 && OptionStates[1])
-        return f_284A_0004();
+        return snd_service_and_test_stopped();
     return 1;
 }
 
@@ -89,5 +89,5 @@ void far f_00DF_0164(void)
 void far f_00DF_016C(void)
 {
     if (g_1926 && OptionStates[1])
-        f_295C_0367(1);
+        snd_start_configured_effect(1);
 }

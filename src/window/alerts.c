@@ -40,8 +40,8 @@ extern int far vsprintf(char far *buffer, char far *format, char far *args);
 extern int far sprintf(char far *buffer, char far *format, ...);
 extern int far printf(char far *format, ...);
 extern void (far * near g_9128)(int fore, int back, int pattern);
-extern void far f_1CE2_01C3(int x, int y, char far *format, ...);
-extern void far o15_384C_0152(char far *message, int code);
+extern void far gfx_printf_at(int x, int y, char far *format, ...);
+extern void far app_cleanup_and_exit(char far *message, int code);
 
 void far Punt(char far *format, ...)
 {
@@ -54,8 +54,8 @@ void far Punt(char far *format, ...)
         sprintf(text, "FATAL ERROR: PROGRAM ABORTED\n%s", msg);
         printf("\n\n\n\n");
         g_9128(0, 15, 0);
-        f_1CE2_01C3(0, 0, text);
-        o15_384C_0152(text, 1);
+        gfx_printf_at(0, 0, text);
+        app_cleanup_and_exit(text, 1);
     }
 }
 
@@ -68,13 +68,13 @@ void far f_1C62_0090(void)
         g_9178();
 }
 
-extern void far f_1B73_02A9(void);
-extern void far f_1B73_0025(void);
+extern void far input_remove_hooks(void);
+extern void far mouse_remove_absent_stub(void);
 
 void far f_1C62_00A1(void)
 {
-    f_1B73_02A9();
-    f_1B73_0025();
+    input_remove_hooks();
+    mouse_remove_absent_stub();
 }
 
 /* Alert box.  The only exit from the key switch is "goto done"; under /Zi that label would
@@ -83,12 +83,12 @@ void far f_1C62_00A1(void)
  * hit[] carries the original's dead store of -1 ([bp-0Ch], never read). */
 void far f_1C62_00D5(char far *msg, int timed);
 
-void far f_1C62_00AC(char far *msg)
+void far ui_message_acknowledge(char far *msg)
 {
     f_1C62_00D5(msg, 0);
 }
 
-void far f_1C62_00C0(char far *msg)
+void far ui_message_transient(char far *msg)
 {
     f_1C62_00D5(msg, 1);
 }
@@ -110,21 +110,21 @@ void far f_1C62_0306(struct Rect far *r, int line, char far *text);
 extern int far f_1F80_0177(struct Rect far *r, char far *text);
 extern char near fontWidth;
 extern void far o10_35F5_0000(int x, int y, char far *label, int id);
-extern void far f_1FD2_02FF(void);
-extern void far f_1B73_0510(void);
+extern void far input_capture_screen(void);
+extern void far input_noop_0510(void);
 extern long far TickCount(void);
 extern int far StillDown(void);
 int far WaitedEnough(long far *timer, int delay);
-extern int far f_1F58_0038(void);
-extern int far f_1F58_005A(void);
+extern int far kbd_poll_bios_key(void);
+extern int far kbd_read_bios_char(void);
 extern unsigned char near _ctype[];
-extern int far f_1B73_032A(void);
-extern void far f_1B73_032E(struct Event far *ev);
-extern void far f_1FD2_0438(int objNum);
-extern void far f_1FD2_031A(void);
-extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
+extern int far input_event_count(void);
+extern void far input_pop_event(struct Event far *ev);
+extern void far input_remove_object_rect(int objNum);
+extern void far input_release_screen_capture(void);
+extern void far gfx_restore_and_free_rect(struct Rect far *r, char far *buf);
 extern void far win_FlushEvents(void);
-extern void far f_1B73_050E(void);
+extern void far input_noop_050e(void);
 
 void far f_1C62_00D5(char far *msg, int timed)
 {
@@ -157,16 +157,16 @@ void far f_1C62_00D5(char far *msg, int timed)
     g_9128(g_8CBE->frame, g_8CBE->text, 0xc0);
     o10_35F5_0000(x, y, "Continue", 0x900);
     g_9128(g_8CBE->frame, g_8CBE->text, 0);
-    f_1FD2_02FF();
-    f_1B73_0510();
+    input_capture_screen();
+    input_noop_0510();
     stamp = TickCount();
     down = StillDown();
     for (;;) {
         if (timed && WaitedEnough(&stamp, 0x21c))
             break;
-        if (f_1F58_0038()) {
-            if ((c = f_1F58_005A()) == 0)
-                f_1F58_005A();
+        if (kbd_poll_bios_key()) {
+            if ((c = kbd_read_bios_char()) == 0)
+                kbd_read_bios_char();
             switch ((_ctype[c + 1] & 2) ? c - 0x20 : c) {
             case '\n':
             case '\r':
@@ -178,20 +178,20 @@ void far f_1C62_00D5(char far *msg, int timed)
             down = StillDown();
         else if (StillDown())
             break;
-        if (f_1B73_032A()) {
-            f_1B73_032E(&ev);
+        if (input_event_count()) {
+            input_pop_event(&ev);
             if ((ev.code >> 8) == 9)
                 break;
         }
     }
 done:
-    f_1FD2_0438(0x900);
-    f_1FD2_031A();
-    f_1CE2_056C(&pr, save);
+    input_remove_object_rect(0x900);
+    input_release_screen_capture();
+    gfx_restore_and_free_rect(&pr, save);
     while (StillDown())
         ;
     win_FlushEvents();
-    f_1B73_050E();
+    input_noop_050e();
 }
 
 extern int far font_FontHeight(void);
@@ -226,14 +226,14 @@ void far f_1C62_0306(struct Rect far *r, int line, char far *text)
     }
 }
 
-int far f_1C62_0415(char far *msg, int set);
+int far ui_choice_prompt(char far *msg, int set);
 
 int far f_1C62_03DA(char far *what)
 {
     char buf[150];
 
     sprintf(buf, "%s: Are you sure?", what);
-    return f_1C62_0415(buf, 0) == 0;
+    return ui_choice_prompt(buf, 0) == 0;
 }
 
 static char far *g_5554[] = { "\rYes", "\033No" };
@@ -244,14 +244,14 @@ static struct Rect g_557C = { 9, 30, 14, 50 };
 static int g_5584[] = { 2, 3, 2 };
 
 void far f_1C62_0737(void);
-extern int far f_1F58_0090(void);
+extern int far kbd_read_key_code(void);
 extern void far o10_35F5_0A63(int key, int far *sel, int count, int id);
 
 
 extern char far * near sys_errlist[];
 extern int near sys_nerr;
 extern char near g_8CCB;
-int far f_1C62_0415(char far *msg, int set)
+int far ui_choice_prompt(char far *msg, int set)
 {
     int c;
     int i;
@@ -300,9 +300,9 @@ int far f_1C62_0415(char far *msg, int set)
         o10_35F5_0000(h, v, labels[j] + 1, j + 0x900);
         h += widths[j] + 2;
     }
-    f_1FD2_02FF();
+    input_capture_screen();
     for (;;) {
-        if (f_1F58_0038() && (c = f_1F58_0090()) > 0) {
+        if (kbd_poll_bios_key() && (c = kbd_read_key_code()) > 0) {
             if (_ctype[c + 1] & 2)
                 c -= 0x20;
             for (i = 0; i < count; i++) {
@@ -313,17 +313,17 @@ int far f_1C62_0415(char far *msg, int set)
             }
             o10_35F5_0A63(c, &sel, count, 0x900);
         }
-        if (f_1B73_032A()) {
-            f_1B73_032E(&ev);
+        if (input_event_count()) {
+            input_pop_event(&ev);
             if ((ev.code >> 8) == 9)
                 break;
         }
     }
 done:
     for (i = 0; i < count; i++)
-        f_1FD2_0438(i + 0x900);
-    f_1FD2_031A();
-    f_1CE2_056C(&pr, save);
+        input_remove_object_rect(i + 0x900);
+    input_release_screen_capture();
+    gfx_restore_and_free_rect(&pr, save);
     return (unsigned char)ev.code;
 }
 
@@ -373,8 +373,8 @@ int far WaitedEnough(long far *timer, int delay)
 
 void far f_1C62_0737(void)
 {
-    while (f_1F58_0038())
-        f_1F58_005A();
+    while (kbd_poll_bios_key())
+        kbd_read_bios_char();
 }
 
 char far * far f_1C62_074E(struct Rect far *r, int width, int height, int timed)

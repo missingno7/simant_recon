@@ -23,9 +23,9 @@ extern void far GPutImg(int x, int y, char far *image);
 extern char far * far malloc(unsigned int size);
 extern void far free(char far *block);
 extern int far WinPrintf(char far *format, ...);
-extern void far o03_3258_040D(char far *image, char far *buffer, int shift, int flag);
-extern void far o01_32B5_000F(char far *image, char far *buffer, int shift, int flag);
-extern void far o00_35A6_0007(char far *image, char far *buffer, int shift, int flag);
+extern void far gfx_tandy_mask_to_buffer(char far *image, char far *buffer, int shift, int flag);
+extern void far gfx_mono_mask_bitmap_to_buffer(char far *image, char far *buffer, int shift, int flag);
+extern void far gfx_planar_mask_to_buffer(char far *image, char far *buffer, int shift, int flag);
 extern void far GRectFill(struct Rect far *rect, int color);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_UnlockWin(int win);
@@ -79,7 +79,7 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
                 y1 = pic->height + y;
                 h = malloc((*g_9140)(x & ~1, y, x1, y1));
                 (*g_9148)(x & ~1, y, x1, y1, h);
-                o03_3258_040D((char far *)pic + 8, h, x & 1, 0);
+                gfx_tandy_mask_to_buffer((char far *)pic + 8, h, x & 1, 0);
                 GPutPic(x & ~1, y, h);
                 free(h);
             } else {
@@ -92,9 +92,9 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
                 (*g_9148)(x & ~7, y, x1, y1, h);
                 WinPrintf("\nGPutPic size AA %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
                 if (g_5A97 & 1)
-                    o01_32B5_000F((char far *)pic + 8, h, x & 7, 0);
+                    gfx_mono_mask_bitmap_to_buffer((char far *)pic + 8, h, x & 7, 0);
                 else
-                    o00_35A6_0007((char far *)pic + 8, h, x & 7, 0);
+                    gfx_planar_mask_to_buffer((char far *)pic + 8, h, x & 7, 0);
                 WinPrintf("\nGPutPic size %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
                 GPutPic(x & ~7, y, h);
                 free(h);

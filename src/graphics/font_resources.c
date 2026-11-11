@@ -31,7 +31,7 @@ int g_6740 = 16;
 
 extern unsigned far fread(void far *buf, unsigned size, unsigned count, FILE far *fp);
 
-void far f_25E7_0008(int far *p, int count, FILE far *fp)
+void far font_read_big_endian_words(int far *p, int count, FILE far *fp)
 {
     int w;
     int i;
@@ -70,7 +70,7 @@ struct Font far * far font_ReadFont(char far *name)
         f_171C_2276(font);
         return 0;
     }
-    f_25E7_0008((int far *)font, 13, fp);
+    font_read_big_endian_words((int far *)font, 13, fp);
     if (font->fRectHeight > g_6740) {
         f_171C_2276(font);
         return 0;
@@ -81,8 +81,8 @@ struct Font far * far font_ReadFont(char far *name)
     font->locTable = (int far *)mem_malloc(count * 2, "locTable");
     font->owTable = (int far *)mem_malloc(count * 2, "owTable");
     fread(font->image, size, 1, fp);
-    f_25E7_0008(font->locTable, count, fp);
-    f_25E7_0008(font->owTable, count, fp);
+    font_read_big_endian_words(font->locTable, count, fp);
+    font_read_big_endian_words(font->owTable, count, fp);
     fclose(fp);
     font->proportional = (font->fontType & 0x2000) == 0;
     font->missing = font->lastChar - font->firstChar + 1;

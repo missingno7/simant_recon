@@ -37,8 +37,8 @@ extern int far PointInRect(struct Pt far *pt, struct Rect far *r);
 extern void far WinPrintf(char far *fmt, ...);
 extern void _fastcall win_Close(int win);
 extern void _fastcall win_ObjInv(int obj);
-extern int far f_1F58_0038(void);
-extern int far f_1F58_0090(void);
+extern int far kbd_poll_bios_key(void);
+extern int far kbd_read_key_code(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern int far win_GetProxEvent(void);
 extern char far fd_3D57_07B6[];
@@ -86,8 +86,8 @@ int far DoExpMenu(int x, int y)
             }
         }
     }
-    if (f_1F58_0038()) {
-        switch (f_1F58_0090()) {
+    if (kbd_poll_bios_key()) {
+        switch (kbd_read_key_code()) {
         case 13:
             goto accept;
         case 27:

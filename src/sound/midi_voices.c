@@ -169,7 +169,7 @@ void far f_295C_02E8(int dev, int note)
 
 extern struct Song far fd_55B3_0A82[];
 
-void far f_295C_0367(int n)
+void far snd_start_configured_effect(int n)
 {
     f_295C_01EC(fd_55B3_0A82[n].b, fd_55B3_0A82[n].c, fd_55B3_0A82[n].a, fd_55B3_0A82[n].d);
 }
@@ -179,7 +179,7 @@ extern void far f_29F0_002A(int port, int value);
 
 /* CSE-1: the folded unsigned-byte >= 0 check retains the original byte
  * temporary and index spill. STEERED: original eliminated expression unknown. */
-void far f_295C_0391(void)
+void far snd_stop_assigned_voices(void)
 {
     int i;
     for (i = 0; fd_50F6_4A4E[i].type; i++) {

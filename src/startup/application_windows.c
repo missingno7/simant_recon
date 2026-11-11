@@ -21,13 +21,13 @@ extern void far win_DrawModeWindow(int flags);
 extern void far win_DrawCasteWindow(int flags);
 extern void far win_DrawYardWindow(int flags);
 extern void far win_DrawInfoWindow(int flags);
-extern void _fastcall f_20E8_088B(void (far *hook)(void));
+extern void _fastcall win_set_state_change_hook(void (far *hook)(void));
 void far f_00BA_0228(void);
-extern void _fastcall f_20E8_08DB(void (far *hook)(int item));
+extern void _fastcall win_set_layout_change_hook(void (far *hook)(int item));
 void far f_00BA_01C3(int item);
-extern void _fastcall f_20E8_089F(void (far *hook)(void));
+extern void _fastcall win_set_before_close_hook(void (far *hook)(void));
 void far f_00BA_0211(void);
-extern void far f_22BF_0E83(int, int);
+extern void far win_copy_obj_layout_origin(int, int);
 extern void far InitMapFunctions(void);
 extern int far fd_50F6_10D0;
 /* read() and lseek() are called without prototypes (no <io.h>): with the MSC prototype
@@ -53,10 +53,10 @@ void far InitApplicationWindows(void)
     win_SetWinDrawHook(0x1300, win_DrawCasteWindow);
     win_SetWinDrawHook(0x1900, win_DrawYardWindow);
     win_SetWinDrawHook(0x500, win_DrawInfoWindow);
-    f_20E8_088B(f_00BA_0228);
-    f_20E8_08DB(f_00BA_01C3);
-    f_20E8_089F(f_00BA_0211);
-    f_22BF_0E83(0x1900, 0x100);
+    win_set_state_change_hook(f_00BA_0228);
+    win_set_layout_change_hook(f_00BA_01C3);
+    win_set_before_close_hook(f_00BA_0211);
+    win_copy_obj_layout_origin(0x1900, 0x100);
     InitMapFunctions();
     if (fd_50F6_10D0 == 0)
         return;
@@ -91,10 +91,10 @@ void far f_00BA_01C3(int item)
 {
     switch (item) {
     case 0x100:
-        f_22BF_0E83(0x100, 0x1900);
+        win_copy_obj_layout_origin(0x100, 0x1900);
         break;
     case 0x1900:
-        f_22BF_0E83(0x1900, 0x100);
+        win_copy_obj_layout_origin(0x1900, 0x100);
         break;
     }
     win_CasteControlChanged();
