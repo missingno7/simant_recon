@@ -611,7 +611,7 @@ def write_status():
         f'{len(residual)} ranges |',
         '| 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | '
         f'relocation order inside a group unproven for {len(order_pending)} functions |',
-        '| 6. Whole executable | not built | the 1991 RTLink/Plus release is missing; its '
+        '| 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its '
         f'{num(progress["rtlink_manager_bytes_unaccepted"])}-byte overlay manager is not reproduced |',
         f'| 7. Names and comments | functions: {named["C"][0]} C and {named["ASM"][0]} assembly named; '
         f'data: {data_named} named | {named["C"][1]} C and {named["ASM"][1]} assembly functions and '

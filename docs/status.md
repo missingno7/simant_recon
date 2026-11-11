@@ -17,7 +17,7 @@ Last gate result: **PASS** (2026-11-11).
 | 3. Data: one owner, type, size | 113,838 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 175 bytes unresolved |
 | 4. Layout assumptions explained | 78 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 19 functions |
-| 6. Whole executable | not built | the 1991 RTLink/Plus release is missing; its 17,001-byte overlay manager is not reproduced |
+| 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
 | 7. Names and comments | functions: 683 C and 11 assembly named; data: 135 named | 570 C and 356 assembly functions and 840 data objects keep address-based identifiers; 164 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 

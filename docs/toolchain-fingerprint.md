@@ -89,3 +89,37 @@ the probes. Original tools stay outside Git (`C:\tools` catalog with provenance)
    `dec mem; jnz` loops were found) to split 6.00 from 6.00A.
 2. Bind the located runtime members symbolically (`promote_runtime`) — equality under
    binding upgrades "located" to "accepted historical runtime".
+
+## Overlay linker release (searched 2026-11-11)
+
+The linker's overlay manager occupies load-image `0x2CFB0–0x31259` (17,066 bytes, 215
+relocated words). It carries no version or copyright string. Its release is bracketed from
+code and from the vendor's own release notes:
+
+* **Newer than 4.14** (files dated March–April 1991): the manager contains the message
+  `eov0010` and the environment names `RTOVEXP`, `RTOVEXT`, `RTOVCONV`; none of them occurs
+  anywhere in the 4.14 library, linker or shipped assembly sources. They do occur in 6.10.
+* **Older than 5.01**: the 6.10 `READ.ME` says 5.01 added `$$OVLSAVE_SPARMS` and
+  `$$OVLRESTORE_SPARMS` to the overlay manager and 5.02 added `$$RTOVEXEOFFSET`, a 32-bit
+  value added before every overlay file seek. The manager has neither: `$$OVLSAVE` follows
+  `$$OVLSAVESIZE` directly, and its two section seeks go straight to `int 21h` function 42h.
+* That leaves **5.00** (its manuals are dated October 1991; the game was built
+  `Fri Dec 06 14:51:14 1991`) or **4.15**, which a reseller list confirms existed. Which of
+  the two introduced `RTOVEXP` is not established.
+
+Fingerprint check: of 1,919 sixteen-byte windows of the manager that avoid relocated
+words, the runtime library of each release in hand contains 78 (2.x), 358 (4.00),
+442 (4.14) and 641 (6.10). Two distinctive routines (the entry stack switch at `2D6FF` and
+the EMS detection at `2FBED`) occur in no release in hand. No release matches.
+
+In hand, none of them the original: `C:	ools\RTLink-Plus-4.00-DiscMaster`,
+`C:	oolstlink-plus-4.14-discmaster-ibm0041` (downloaded 2026-11-11, see its
+`PROVENANCE.txt`; unpacked with a data-only parser of the vendor's installer archive,
+nothing executed), `C:	oolstlink-plus-6.10`. Both 4.14 and 6.10 ship the overlay
+manager's assembly source (`OVLMGR.ASM`), which brackets the 5.00 manager for a source-level
+reconstruction; the cache and virtual-memory modules have no source in either.
+
+Not found in any reachable archive: 4.15, 5.00, 5.01, 5.02, 5.10. Leads that need a
+person: a used-software dealer that search summaries report as listing RTLink/Plus 5.00
+(EMS Professional Software, unverified), and the vendor (Pocket Soft, Houston).
+The search scripts and results are in ignored `build/workers/rtlink-search/`.
