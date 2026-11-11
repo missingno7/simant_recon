@@ -31,15 +31,15 @@ extern void far f_22BF_0E83(int, int);
 extern void far InitMapFunctions(void);
 extern int far fd_50F6_10D0;
 /* read() and lseek() are called without prototypes (no <io.h>): with the MSC prototype
-   (unsigned count) the 0x100 size argument of f_171C_1A9E is pushed as mov ax,100h; cwd
+   (unsigned count) the 0x100 size argument of mem_Alloc is pushed as mov ax,100h; cwd
    instead of the original mov cx,100h; sub dx,dx (PROTO-1 family, worker resG). */
-extern Handle far f_171C_1A9E(long size, int flags, char far *name);
-extern char far * far f_171C_1B84(Handle h);
-extern Handle far f_171C_1BBA(Handle h);
-extern void far f_171C_1C0A(Handle h);
+extern Handle far mem_Alloc(long size, int flags, char far *name);
+extern char far * far mem_Lock(Handle h);
+extern Handle far mem_Unlock(Handle h);
+extern void far mem_Free(Handle h);
 extern Handle far fd_50F6_10CC;
 
-void far f_00BA_0002(void)
+void far InitApplicationWindows(void)
 {
     struct WinFileHeader hdr;
     Handle h;
@@ -63,20 +63,20 @@ void far f_00BA_0002(void)
     lseek(fd_50F6_10D0, 0L, 0);
     read(fd_50F6_10D0, &hdr, sizeof hdr);
     lseek(fd_50F6_10D0, hdr.headers + sizeof hdr, 0);
-    h = f_171C_1A9E(0x100UL, 1, "winheaders");
-    n = read(fd_50F6_10D0, f_171C_1B84(h), 0x100);
-    read(fd_50F6_10D0, f_171C_1B84(h), 1);
-    f_171C_1BBA(h);
-    f_171C_1BBA(h);
+    h = mem_Alloc(0x100UL, 1, "winheaders");
+    n = read(fd_50F6_10D0, mem_Lock(h), 0x100);
+    read(fd_50F6_10D0, mem_Lock(h), 1);
+    mem_Unlock(h);
+    mem_Unlock(h);
     if (n != 0x100)
-        f_171C_1C0A(h);
+        mem_Free(h);
     else
         fd_50F6_10CC = h;
 }
 
 extern void far initStuff(void);
 
-void far f_00BA_01B6(void)
+void far InitApplicationStuff(void)
 {
     initStuff();
 }

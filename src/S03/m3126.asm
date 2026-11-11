@@ -24,7 +24,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DDA:byte
 	extrn	_g_3DDC:byte
 	extrn	_g_3DDE:byte
-	extrn	_g_3DE0:byte
+	extrn	__foreColor:byte
 	extrn	_g_3DE2:byte
 	extrn	_g_3DEA:byte
 	extrn	_g_3DEC:byte
@@ -194,7 +194,7 @@ _o03_3126_019E	proc	far
 	mov bp, sp
 	mov ax, word ptr [bp+6]
 	and al, 0Fh
-	mov byte ptr _g_3DE0, al
+	mov byte ptr __foreColor, al
 	mov ax, word ptr [bp+8]
 	and al, 0Fh
 	mov byte ptr _g_3DE2, al
@@ -279,7 +279,7 @@ L0234:
 	call far ptr _f_1B73_0196
 L0268:
 	xor bh, bh
-	mov bl, byte ptr _g_3DE0
+	mov bl, byte ptr __foreColor
 	shl bl, 1
 	mov ax, word ptr [bx+_g_22E8]
 	mov byte ptr [bp-4], al
@@ -483,7 +483,7 @@ L03FE:
 	call far ptr _f_1B73_0196
 L0432:
 	xor bh, bh
-	mov bl, byte ptr _g_3DE0
+	mov bl, byte ptr __foreColor
 	shl bl, 1
 	mov ax, word ptr [bx+_g_22E8]
 	mov byte ptr [bp-4], al
@@ -1452,7 +1452,7 @@ _o03_3126_0C1E	proc	far
 	jl L0C67
 	call far ptr _f_1B73_0196
 L0C67:
-	mov bl, byte ptr _g_3DE0
+	mov bl, byte ptr __foreColor
 	shl bl, 1
 	xor bh, bh
 	mov al, byte ptr [bx+_g_22E8]

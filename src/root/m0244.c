@@ -7,7 +7,7 @@ void far BlockMove(void far *src, void far *dst, unsigned n)
     _fmemcpy(dst, src, n);
 }
 
-extern long far f_171C_16EA(void far * far *h);
+extern long far RallocSize(void far * far *h);
 extern int far WinPrintf(char far *format, ...);
 
 void far f_0244_0022(unsigned far * far *h)
@@ -17,7 +17,7 @@ void far f_0244_0022(unsigned far * far *h)
     int i;
     unsigned w;
 
-    n = f_171C_16EA(h) / 2L;
+    n = RallocSize(h) / 2L;
     p = *h;
     for (i = 0; i < n; i++, p++) {
         w = *p;

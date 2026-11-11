@@ -28,9 +28,9 @@ DGROUP	group	_DATA
 TEXTOUT_TEXT	segment word public 'CODE'
 	assume	cs:TEXTOUT_TEXT, ds:DGROUP
 
-	public	_f_1FBD_0000
+	public	_GPutStr
 
-_f_1FBD_0000	proc	far
+_GPutStr	proc	far
 	push bp
 	mov bp, sp
 	push si
@@ -207,7 +207,7 @@ L0130:
 	pop si
 	pop bp
 	retf
-_f_1FBD_0000	endp
+_GPutStr	endp
 
 TEXTOUT_TEXT	ends
 	end

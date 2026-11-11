@@ -1,9 +1,9 @@
 {
   "schema": "simant-canonical-semantic-review-v1",
-  "function": "o25_3BA4_1686",
+  "function": "GetMyRandDirs",
   "module": "S25:3BA4",
   "status": "BEHAVIOR_EXACT_CONFIRMED",
-  "definition_sha256": "55ba082ecb8858a4f8eba289e9313ac21e22c182eca25237f84f07e1293a7b96",
+  "definition_sha256": "47b291e3f55fbee2ba3e80657d159e923dd1da088d5b1d5e4569c768671a54f2",
   "historical_review": {
     "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
     "path": "work/source-only-dos/static-completeness/o25_3BA4_1686.json",
@@ -519,5 +519,2341 @@
     "codegen_only_residue": true,
     "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
   },
-  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt.",
+  "renamed": [
+    {
+      "renames": [
+        {
+          "old": "f_20E8_0725",
+          "new": "win_ToTop",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_ToTop, reviewed 2026-11-11: Three confirmed caller positions now available: OpenMapYard, ProcMapEvent and SpecialXfer call DOS20E8:0725 at the Win16 win_ToTop slot, supplying the same window id. This supplies the independent graph anchor missing from the older MEDIUM review.; Implementation/stack anchor: DOS compares the requested window with g_5702[0], closes the old top if its auto-close flag1 is set, then win_Open(request"
+        },
+        {
+          "old": "f_2505_03B9",
+          "new": "_win_CalcObjElement",
+          "kind": "recovered",
+          "why": "Win16 symbol __win_CalcObjElement, reviewed 2026-11-11: Corrected family assignment; proposed _win_GetVal is REJECTED. Original switch anchor: DOS03B9 and Win16 __win_CalcObjElement7:E5AE both select obj->kind[axis] at+0x18 with cases0..5: zero; referenced-object coordinate0/1/2/3; window argument. Both preserve0x8000 unresolved, otherwise add obj->offset[axis] at+8. Win16 inlines the two DOS access helpers.; Independent confirmed-caller/return-use anc"
+        },
+        {
+          "old": "f_2505_0453",
+          "new": "win_GetVal",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_GetVal, reviewed 2026-11-11: Corrected family assignment; proposed __win_CalcObjElement is REJECTED. DOS0453 and Win16 win_GetVal7:E4E8 split objectNumber into window=object&0xFF00 and slot=object&0xFF, check window count or window>=0x2800, lock it, bounds-check object count, retrieve objects[slot][index], unlock in both success/failure branches, and return0x8000 if invalid. This is the accessor, not a six-case resolver.; Ind"
+        },
+        {
+          "old": "f_2505_04D7",
+          "new": "win_GetArg",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_GetArg, reviewed 2026-11-11: Body/constant anchor: DOS04D7 and Win16 win_GetArg7:E572 derive windowIndex=win>>8; reject when index>=win_numOfWindows and win<0x2800 with0x8000; otherwise return word at windowRecord+0x10+2*idx. There is no object-list lookup or LockWin, distinguishing this from0453/win_GetVal.; Independent matched-caller role: DOS03B9's kind5 uses04D7(currentWin,obj->argument[axis]); Win16 __win_CalcObjElement7"
+        },
+        {
+          "old": "o09_35F5_0188",
+          "new": "SaveGame",
+          "kind": "recovered",
+          "why": "Win16 symbol _SaveGame, reviewed 2026-09-30: (a) unique string '%s\\nSaved correctly' carried only by DOS 0188 and Win16 _SaveGame; (c) called by LoadGame (CONFIRMED) before FileSelect, and calls FileSelect (03C6) itself, as Win16 SaveGame; runtime sprintf/unlink shared"
+        },
+        {
+          "old": "o12_384C_100A",
+          "new": "DrawMap",
+          "kind": "recovered",
+          "why": "Win16 symbol _DrawMap, reviewed 2026-09-30: body win_IsWinOpen, clip_SetWin, DrawMapData, clip_Off as Win16; callers ReDrawMapEdit, PlaceQueenInYard, and XferPatch at the same call position"
+        },
+        {
+          "old": "o09_35F5_0DBB",
+          "new": "DoLoadInitializations",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoLoadInitializations, reviewed 2026-09-30: (c) callee order OverlayTileSet!, SetMyLife!, FullCount, o15_384C_037F, CenterEdit (f_0250_0FC4), SetDefaultWindPrompt! = Win16 _DoLoadInitializations call_seq (OverlayTileSet, SetMyLife, FullCount, SetDefaultWindows, CenterEdit, UpdateLayQueenModeDisplay, SetDefaultWindPrompt); SetDefaultWindPrompt callers include it on both sides; (c) sole caller LoadGame (CONFIRMED above) on both sides; the Ove"
+        },
+        {
+          "old": "f_1FD2_0135",
+          "new": "SetMenuOptionText",
+          "kind": "recovered",
+          "why": "Win16 symbol _SetMenuOptionText, reviewed 2026-11-11: Confirmed caller SetMenuEntries uses DOS1FD2:0135 and Win16 SetMenuOptionText to replace item0x41 with Pause/Unpause text at the same branch positions; the two arguments are encoded item id and far string pointer.; Independent menu-id/state anchor: DOS decodes id>>4 to choose the menu, low nibble to choose title versus item text and copies the new string into that menu's storage; Win16 SetMenuOpti"
+        },
+        {
+          "old": "f_208F_0419",
+          "new": "gr_BitMapSize",
+          "kind": "recovered",
+          "why": "Win16 symbol _gr_BitMapSize, reviewed 2026-09-30: 7 shared named callers (IBMInitStuff, PictureDialog, hanim_AddAnimObject, hanim_SetObjectPos, initControls, win_AutoSize, win_DrawYardWindow); callee order db_LoadObject, lock, unpack-init, unpack, unlock, db_ReleaseObject as Win16"
+        },
+        {
+          "old": "o06_35F5_0000",
+          "new": "InitSimYard",
+          "kind": "recovered",
+          "why": "Win16 symbol _InitSimYard, reviewed 2026-11-11: Confirmed caller position: RandYard calls S06:0000 at the Win16 InitSimYard position; this is the no-argument reset, before the periodic yard simulation.; Distinctive initializer anchor: both initialize Boy position(0xB4,0x49), turn count12, wait20; Dog position(0xFA,0x96), direction/turn defaults; clear Bird/Cat delays and creature/rain flags, set BirdFrame and LastColonyPopB/R to1, BoyMsgOffset "
+        },
+        {
+          "old": "o06_35F5_0173",
+          "new": "DoSimYard",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoSimYard, reviewed 2026-11-11: Confirmed caller position: DoAntSim invokes DOS S06:0173 at Win16 DoSimYard's slot before DoWater and the ant/creature simulation passes; the already confirmed SimKidInside call is the first dispatch branch.; Independent scheduling constants/control anchor: increments YardCycle and wraps at0x400; NodeNum<0x26 selects inside versus outside kid, then Bird, Cat, Dog only if ForSaleState==0, rain upda"
+        },
+        {
+          "old": "o06_35F5_11FF",
+          "new": "SimBird",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimBird, reviewed 2026-11-11: Confirmed-callee sequence: InvalQueenStorageDisp -> SRand2 -> myBeginSound -> SRand2 -> SRand64 matches SimBird 7:28AA; the queen-storage invalidation is specific among the yard creatures.; Flight/predation anchor: state1 advances x by16 and steers y by4 or1 toward the goal; state2 advances x by8 and y by-8; boundary0x1FF/0xFF despawns, and reaching the goal removes ceil(value/8) from both colonie"
+        },
+        {
+          "old": "o06_35F5_14CC",
+          "new": "SimCat",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimCat, reviewed 2026-11-11: Confirmed-callee order: SRand16 -> SRand64 -> myBeginSound -> SRand16 -> GetDis -> MacTickCount three times -> SRand16 matches SimCat 7:2B24, independently of the newly reviewed yard dispatcher.; Distinctive constants/state anchor: Cat movement uses Dx8/Dy8*4 with x bounds0xFC..0x1EF; CatCycle>50 and distance<=0x960 enters state3/frame20; states1/2 animate direction2/6 and frames1..2/4..5 or11..12"
+        },
+        {
+          "old": "o06_35F5_1803",
+          "new": "SimDog",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimDog, reviewed 2026-11-11: Confirmed-random-call anchor: SimDog original card 7:2DBC has SRand1(3) for a four-direction turn, then SRand1(10), SRand2()+4, and finally SRand1(6)/SRand4 for frames100..103. DOS 1803 has the same sequence with the steering/sound helpers factored out.; Independent coordinate/state anchor: dog frame combines dogD[dir] with cycle&1 or dogC[cycle&3]; updates DogY and computes (DogY-38)/10, then Dog"
+        },
+        {
+          "old": "o06_35F5_1E54",
+          "new": "SimColonies",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimColonies, reviewed 2026-11-11: Rare resource constants: both contain song IDs0x4E22/0x4E23/0x4E25 and dialog IDs0x2744/45/46/47/49 in the colony outcome paths, not an incidental address constant (DOS1E54; Win16 SimColonies7:35F8).; Independent confirmed-callee order: SRand1/SRand8 swarm handling -> myBeginSong/PictStrnDialog outcome pairs -> DrawSimPayoff -> final PictStrnDialog. DOS traverses the12x16 black/red population grid"
+        },
+        {
+          "old": "o12_384C_12D3",
+          "new": "MapToYellowAnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _MapToYellowAnt, reviewed 2026-11-11: Confirmed-callee sequence: win_GetObjRect -> AddSomeAnts -> AddFood -> GotoMyAnt matches MapToYellowAnt3:D40A; the DOS-only Alt branches additionally kill ants or subtract food.; Modifier/argument anchor: Ctrl+Shift gets object0x110's Rect and chooses ant side by event.x versus (left+right)/2; Ctrl alone AddFood(0x96,1); no Ctrl GotoMyAnt(). Win16 uses GetAsyncKeyState(VK_CONTROL/VK_SHIFT) for the"
+        },
+        {
+          "old": "o19_384C_0000",
+          "new": "DoEvent",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoEvent, reviewed 2026-11-11: Ordered confirmed-callee anchor: ProcEditEvent -> ProcMapEvent -> ProcInfoEvent -> ProcModeEvent -> ProcCasteEvent -> ProcHistoryEvent -> ProcYardEvent, matching the central game event dispatcher Win16 DoEvent1:0BC2; the seven distinct handlers agree, not just generic window helpers.; Event-domain anchor: DOS dispatches ev.code&0xFF00 to0/0x100/0x500/0x1200/0x1300/0x1500/0x1900 for those handlers;"
+        },
+        {
+          "old": "o25_39C7_0000",
+          "new": "DoAntSimB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoAntSimB, reviewed 2026-11-11: Confirmed caller position: DoAntSim calls DOS S25:0000 between DoAntSimA and already confirmed DoAntSimR, matching the Win16 DoAntSimB position. This separates the black list traversal from the red and yellow passes.; Traversal/data anchor: initializes shared index from ListIndexB, counts downward, reads B-list x,y&0xFF,attribute and dispatches nonzero attributes to the black nest dispatcher (x,y,"
+        },
+        {
+          "old": "o25_39C7_006D",
+          "new": "DoNestAntB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoNestAntB, reviewed 2026-11-11: Switch anchor: both original feature tables show an 18-entry task switch. DOS decodes caste=(attr&0x78)>>3 and BlistM[Tindex], dispatching task 1 DoNestingB, 3 DoFoodInB, 4 DoDigInB, 8 SimEggB, 9 SimQueenB, 10 DoNestFightB, with the same black-nest dispatcher in Win16 6:2DAE (its larger body inlines several DOS helpers).; Independent confirmed-callee chain: SRand256 -> SRand32 before black task di"
+        },
+        {
+          "old": "o25_39C7_038F",
+          "new": "RaidInB",
+          "kind": "recovered",
+          "why": "Win16 symbol _RaidInB, reviewed 2026-11-11: Confirmed-callee alignment: both call SRand1(3), attempt movement, then GetEnterDirB(x,y,dirHint&7), optionally SRand1(8), and try movement again (Win16 RaidInB 6:3524). GetEnterDirB independently fixes the B/inbound variant.; Food/state/constant anchor: MapB tile in 0x10..0x13 consumes food, sets B-list mode 3 and attr|8 then returns; otherwise first direction=(SRand1(3)+dirHint-2)&7 and failure "
+        },
+        {
+          "old": "o25_39C7_0460",
+          "new": "RaidOutB",
+          "kind": "recovered",
+          "why": "Win16 symbol _RaidOutB, reviewed 2026-11-11: Independent TU/order anchor: DOS S25:39C7 and Win16 SIMANT1 6:2D4E..5343 have the same30 functions in order (full map in RESULT.md);0460 is the RaidOutB slot between reviewed RaidInB and DoRestB, with independently fixed DoNestingB/DoDigInB/DoDigOutB farther in the run.; Behavior/callee anchor: GetExitDirB(x,y,8), interpret0 as SRand8 else subtract1, attempt TryMoveDirB then a random retry, and re"
+        },
+        {
+          "old": "o25_39C7_04E5",
+          "new": "DoRestB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRestB, reviewed 2026-11-11: TU/order anchor:04E5 is the DoRestB slot after RaidOutB and before DoDrownB in the exact30-member black-nest run DOS S25:39C7 <-> Win16 6:2D4E..5343, bracketed elsewhere by the already paired black nest operations.; Independent body/control anchor: first handles CheckNestFightB, otherwise restores LifeB from BlistT; SRand1(20)==0 sets BlistM from GetNewMode((attr&0x78)>>3,attr), else OptionStates["
+        },
+        {
+          "old": "o25_39C7_0590",
+          "new": "DoDrownB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoDrownB, reviewed 2026-11-11: TU/order anchor:0590 follows DoRestB and precedes DoRandB in the matching30-member DOS/Win16 black-nest run, occupying Win16 DoDrownB6:37A4's slot.; Independent constants/state anchor: MapB tile<0x14 returns to GetNewModeB; otherwise turns direction with(SRand1(3)+attr-1)&7 preserving0xF8 bits, writes BlistT/LifeB, and with SRand1(100)==0 clears the ant and increments the death counter selected by"
+        },
+        {
+          "old": "o25_39C7_0677",
+          "new": "DoRandB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRandB, reviewed 2026-11-11: TU/order anchor:0677 is the DoRandB member between DoDrownB and DoRecruitN in the exact30-member black-module order shared with Win16; reviewed SimEggB/SimQueenB/GetBestDir later in the run fix its orientation.; Independent behavior/callee anchor: SRand32()==0 chooses GetNewModeB(caste), then checks black nest combat, tries current attr&7 direction and falls back to TryMoveDirB(x,y,SRand8()). Win1"
+        },
+        {
+          "old": "o25_39C7_06E2",
+          "new": "DoRecruitN",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRecruitN, reviewed 2026-11-11: TU/order anchor:06E2 is immediately after DoRandB and before independently reviewed DoNestFightB in the exact30-member black DOS/Win16 run; Win16 symbol at6:396C is spelled DoRecruitN (no invented B suffix).; Independent behavior/callee anchor: if MePlane!=2 dispatches confirmed DoDigOutB; otherwise handles black nest fight, tries attr&7 via TryMoveDirB then randomSRand8 retry. Win16 DoRecruitN6:3"
+        },
+        {
+          "old": "o25_39C7_0746",
+          "new": "DoNestFightB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoNestFightB, reviewed 2026-11-11: Confirmed-callee sequence: SRand1(7) -> SRand16 -> (tail-ant restoration) -> GetNewMode -> FightBalloons, matching Win16 DoNestFightB original card 6:3A54. FightBalloons is called with plane 2, distinguishing the black nest.; Fight-state anchor: replaces low direction bits with SRand1(7), writes current B-list attribute to LifeB, and on the 1/16 branch restores the saved attribute, handles caste m"
+        },
+        {
+          "old": "o25_39C7_0853",
+          "new": "CheckNestFightB",
+          "kind": "recovered",
+          "why": "Win16 symbol _CheckNestFightB, reviewed 2026-11-11: TU/order anchor:0853 lies between independently reviewed DoNestFightB and DropFoodB in the matching30-member black nest run; it is Win16 CheckNestFightB6:3BA2. Its many callers lost explicit edges because Win16 inlined the helper.; Independent combat/constant anchor: reads LifeB[x,y]; IsYellowAnt and MeColor!=0 calls YellowFight(2,Tindex) and returns1; otherwise0x87<ant<0xE8 plus FindInBList yield"
+        },
+        {
+          "old": "o25_39C7_090A",
+          "new": "DropFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DropFoodB, reviewed 2026-11-11: TU/order anchor:090A is between CheckNestFightB and independently reviewed SimEggB in the exact30-member black-nest run, matching Win16 DropFoodB6:3C3C.; Independent food-state/result anchor: MapB tile below0x10 becomes0x10, below0x13 increments, both return success1; otherwise success0. Always increments FoodB and clears carrying bit8 from the current B-list attribute. Win16 DropFoodB preserves t"
+        },
+        {
+          "old": "o25_39C7_0980",
+          "new": "SimEggB",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimEggB, reviewed 2026-11-11: Confirmed-callee order: SGRand(255) -> GetNewModeB -> EggBalloons, in both SimEggB 6:3CA0 and DOS 0980; EggBalloons takes plane 2, unlike the red egg member.; Egg-state/masks anchor: BpopT<=2 selects cycle mask 0x1F else 0x7F; increments the egg's low age until (attr&0xF)==8, tests ModeAuto or modeLevels[2]>>7 against SGRand(255), makes (mode<<3)+2 or increments TotalEggsDiedB, writes LifeB/BlistT"
+        },
+        {
+          "old": "o25_39C7_0AB0",
+          "new": "SimQueenB",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimQueenB, reviewed 2026-11-11: Rare resource/argument anchor: on caste 12, SRand64()==0 and HealthB==0, DOS 0AB0 calls PictStrnDialog(0,0x271F,1); Win16 SimQueenB card 6:3E03..3E0A passes the same dialog triple. The red queen member has a different colony's state/resource behavior.; Independent confirmed-callee order/black-state anchor: SRand64 -> PictStrnDialog -> QueenMoveB -> black-list tail checks -> QueenBalloons(...,2) ->"
+        },
+        {
+          "old": "o25_39C7_0CBD",
+          "new": "GetBestDir",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetBestDir, reviewed 2026-11-11: Two confirmed caller positions: MoveSpider and QueenMoveR use DOS 0CBD at the Win16 GetBestDir slot with plane,x,y,targetX,targetY, consuming a direction code. The black queen also uses the same plane-parameterized helper, so the name has no B/R suffix.; Independent ordered-callee/control anchor: GetDis -> GetMap -> IsNotObstacle -> IsThisPebble -> GetDis -> GetLife -> IsClearTile; scans eight Dx8"
+        },
+        {
+          "old": "o25_39C7_0DAF",
+          "new": "QueenMoveB",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenMoveB, reviewed 2026-11-11: Confirmed-callee order: GetBestDir -> SRand8 -> movement -> FindInBList, matching QueenMoveB 6:4154; the confirmed FindInBList call is specific to the B-list, unlike QueenMoveR.; Queen-tail/constant anchor: first call is GetBestDir(2,x,y,TileMassXB,TileMassYB); y<3 permits only directions 3..5. After moving, computes opposite=(dirHint^0xFC)&7, clears the old tail LifeB cell, searches FindInBList(."
+        },
+        {
+          "old": "o25_39C7_0EC2",
+          "new": "MakeNewTailB",
+          "kind": "recovered",
+          "why": "Win16 symbol _MakeNewTailB, reviewed 2026-11-11: TU/order anchor:0EC2 follows reviewed QueenMoveB and precedes KillTailB in the matching30-member DOS/Win16 black nest run; Win16 MakeNewTailB is6:424A.; Independent tail/callee anchor: reads BlistT[index], takes opposite=(attr&7)^4, adds Dx8/Dy8 to the B-list position and calls confirmed AddAntToBList(newX,newY,attr+8,9,0). Win16 recovered MakeNewTailB has the same opposite-direction and+8 tail-ma"
+        },
+        {
+          "old": "o25_39C7_0F30",
+          "new": "KillTailB",
+          "kind": "recovered",
+          "why": "Win16 symbol _KillTailB, reviewed 2026-11-11: TU/order anchor:0F30 follows MakeNewTailB and precedes LostHeadB in the exact30-member black nest run, matching Win16 KillTailB6:42B0.; Independent state/index anchor: takes a B-list index and clears both BlistT[index] and LifeB[BlistX[index],BlistY[index]], preserving coordinates and other entries. Win16 recovered KillTailB does exactly those two clears after forming (x&0xFF)<<6+y. LostHeadB/Lost"
+        },
+        {
+          "old": "o25_39C7_0F76",
+          "new": "LostHeadB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LostHeadB, reviewed 2026-11-11: TU/order anchor:0F76 is after KillTailB and before LostTailB in the matching30-member black nest run, placing it at Win16 LostHeadB6:42DE.; Independent head/tail discriminator: uses forward direction attr&7 and expected head marker attr-8; returns0 if LifeB at x+Dx8,y+Dy8 already has that marker or FindInBList finds it, else1. Win16 LostHeadB has the same signed steps, minus8 marker and two tests;"
+        },
+        {
+          "old": "o25_39C7_0FE7",
+          "new": "LostTailB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LostTailB, reviewed 2026-11-11: TU/order anchor:0FE7 is after LostHeadB and before reviewed TryMoveDirB in the exact30-member DOS/Win16 black nest run, matching Win16 LostTailB6:433C.; Independent tail/head discriminator: takes opposite direction(attr^0xFC)&7, expects attr+8 at the neighbouring LifeB cell, then checks FindInBList for that same marker; returns1 only when both fail. Win16 LostTailB has exactly this opposite-direct"
+        },
+        {
+          "old": "o25_39C7_105B",
+          "new": "TryMoveDirB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TryMoveDirB, reviewed 2026-11-11: Confirmed-caller/callee anchor: DoNestingB uses this three-argument movement helper; it calls confirmed DoTroph only for the occupied 0xFF destination/MeWantFood condition, as Win16 TryMoveDirB 6:439E. The black-family GetOutB boundary call agrees independently.; Movement/state anchor: adds Dx8/Dy8[dir], rejects x outside 0..63, y>63, dir<0 and MapB destination>=0x1C; y<1 delegates to GetOutB. Suc"
+        },
+        {
+          "old": "o25_39C7_13EF",
+          "new": "TryEatFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TryEatFoodB, reviewed 2026-11-11: TU/order anchor:13EF follows already named DoNestingB and precedes EatFoodB,StealFoodB,DecEatB in the exact30-member DOS/Win16 run; Win16 TryEatFoodB is6:47C6. Named DoNestingB/DoDigInB/DoDigOutB contain the same operation inlined in Win16, yielding misleading SRand8-only gaps.; Independent guarded-consumption anchor: reads MapB[firstCoord*64+secondCoord], returns unless tile is0x10..0x13, replace"
+        },
+        {
+          "old": "o25_39C7_14A8",
+          "new": "EatFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _EatFoodB, reviewed 2026-11-11: TU/order anchor:14A8 follows TryEatFoodB and precedes StealFoodB/DecEatB in the exact30-member black-nest run, matching Win16 EatFoodB6:4844. Named DoFoodInB inlines it in Win16 at the same food-consumption stage.; Independent unguarded-consumption anchor: no initial0x10..0x13 validity test; tile0x10 becomes SRand8, otherwise decremented; positive FoodB--, EatCountB+=5, threshold(BpopT+CastePopB[2"
+        },
+        {
+          "old": "o25_39C7_154F",
+          "new": "StealFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _StealFoodB, reviewed 2026-11-11: TU/order anchor:154F follows EatFoodB and precedes independently reviewed DecEatB and named DoFoodInB in the exact30-member black-module run; Win16 StealFoodB6:48B4 occupies that same slot.; Independent state/body anchor: tile0x10 becomes SRand8 else MapB tile decrements, then FoodB decrements only when positive; it does NOT advance EatCountB or increase HealthB. Win16 StealFoodB-6266e996e9.c has "
+        },
+        {
+          "old": "o25_39C7_15B4",
+          "new": "DecEatB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DecEatB, reviewed 2026-11-11: Missed call-position/family anchor: named DoAntSimY has the ordered black/red alternatives PlaceEggB ->15B4, PlaceEggR -> already CONFIRMED DecEatR; Win16 DoAntSimY6:7CF6 has PlaceEggB ->DecEatB, PlaceEggR ->DecEatR. Both parent bodies were compared: MeType0x60, Cycle&0xF, two-tile opposite direction and SRand128<=MeHealth gates agree, so the B/R branch is independently grounded.; Independent blac"
+        },
+        {
+          "old": "o25_39C7_1BBB",
+          "new": "LeaveNestB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LeaveNestB, reviewed 2026-11-11: Confirmed-callee chain: MakeNewHoleB -> SRand8 -> ExitHole, with the same order and black-specific hole map, matching LeaveNestB 6:515E (neither version has callers).; Body/argument anchor: takes x,y, clears current B-list attr, ensures HoleMapB[x], and calls ExitHole(hole,x,random+(oldAttr&0xF8),mode,state); success clears LifeB[x,y], failure restores attr and clears mode. GetOutB instead takes o"
+        },
+        {
+          "old": "o25_39C7_1C81",
+          "new": "GetOutB",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetOutB, reviewed 2026-11-11: Independent confirmed-callee chain: MakeNewHoleB -> SRand8 -> ExitHole -> SRand2 -> IsItDirt twice -> DigTileThemB -> SRand8, in the same ordered branches as Win16 GetOutB 6:520A. Confirmed DoDigInB/DoDigOutB/DoFoodInB call this helper.; Black-state/geometry anchor: at MapB[x,0]==0x18 it temporarily clears the current B-list attribute, creates HoleMapB[x] if absent, and passes its high five attrib"
+        },
+        {
+          "old": "o25_3BA4_0999",
+          "new": "AnimYellowFight",
+          "kind": "recovered",
+          "why": "Win16 symbol _AnimYellowFight, reviewed 2026-11-11: Rare sound constants/argument anchor: both originals contain 0x32C8 and 0x55F0 in the fight/death animation; DOS uses myBeginSound(0x25,0x32C8,0x7E) for kind0 and (0x31,0x55F0,0x7F) for kind10, matching Win16 AnimYellowFight 6:7E56.; Independent confirmed call sequence/caller anchor: YellowDeath calls this six-argument animation; SetMyLife -> DoEditUpdateDraw -> win_IsWinInFront -> MacTickCount/my"
+        },
+        {
+          "old": "o25_3BA4_0C01",
+          "new": "AnimYellowInsane",
+          "kind": "recovered",
+          "why": "Win16 symbol _AnimYellowInsane, reviewed 2026-11-11: Unique self diagnostic: both originals reference AnimYellowInsane (DOS S25:3BA4:0C01; Win16 6:8078); no machine-code metric is used.; Independent confirmed-callee order: YellowDeath calls the animation, whose body does SetMyLife -> DoEditUpdateDraw -> win_IsWinInFront -> MacTickCount/myDelay timing -> GetDis/RRand/RRand/GetBestDir -> SRand8 -> MoveMyLife -> DoEditUpdateDraw -> ClearMyLife. The 32-"
+        },
+        {
+          "old": "o25_3BA4_0DFB",
+          "new": "YellowFight",
+          "kind": "recovered",
+          "why": "Win16 symbol _YellowFight, reviewed 2026-11-11: Multiple confirmed caller positions: CheckNestFightR, DoAttackAnt, DoRandAntA/AA, DoRecruitAnt and DoToAlarm call S25:3BA4:0DFB where Win16 calls YellowFight, passing enemy list and index.; Independent callee/control anchor: ClearLife -> GetWinner -> conditional GotoMyAnt -> animation -> SetMyLife/DeadAntHere/ResetYellowVars on victory, or SetLife/DeadAntHere/YellowDeath(0) on loss. The list<=1/=="
+        },
+        {
+          "old": "o25_3BA4_1035",
+          "new": "EnterNest",
+          "kind": "recovered",
+          "why": "Win16 symbol _EnterNest, reviewed 2026-11-11: Confirmed-callee order: TryAntTheme -> optional SetAlarmDropState(0,1) -> ClearMyLife -> DigMyTile -> SetMyLife, matching EnterNest 6:8408. Confirmed TryMyDropOrLift calls it in the same gap.; Coordinate/state anchor: chooses MePlane=3 if MeLocX>0x40 else2, copies MeLocY to MeLocX, sets new MeLocY to2 for MeType==0x60 else1, direction4, then digs and stores yellow life with 0xFF. This exact entran"
+        },
+        {
+          "old": "o25_3BA4_1581",
+          "new": "GetMyBestDirs",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMyBestDirs, reviewed 2026-11-11: Confirmed-callee order: GetDis -> TileCanBeMovedOn -> GetDis -> GetLife -> IsClearTile matches Win16 GetMyBestDirs 6:8828 and fixes the distance-ranked search family (not the GetDir-driven rotational search).; Family discriminator/body anchor: TileCanBeMovedOn receives the global MeGoalPlane/MeGoalX/MeGoalY and flag=(MeCmd==2), rather than GetRedBestDirs' plane,a,b,0 tuple. It scans eight neighbou"
+        },
+        {
+          "old": "o25_3BA4_1686",
+          "new": "GetMyRandDirs",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMyRandDirs, reviewed 2026-11-11: Confirmed-callee sequence: GetDis -> TileCanBeMovedOn -> GetDir twice in the uncommitted-turn branches -> GetDis -> GetDir, matching Win16 GetMyRandDirs original card 6:8928..8B3F.; Rotational-search/argument anchor: two leading far output pointers (rot,dir), followed by plane,x,y,a,b; builds an eight-byte allowed-neighbour array excluding the previous Me tile, scans clockwise/counterclockwise, se"
+        },
+        {
+          "old": "o25_3BA4_1A9F",
+          "new": "GetMyDir",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMyDir, reviewed 2026-11-11: Two confirmed caller positions: DoAntMoveY and ExitNest call S25:3BA4:1A9F where Win16 calls GetMyDir, using six scalar arguments (source plane,x,y,target plane,x,y) and consuming a direction code.; Independent inter-plane routing anchor: source<=1 with target<=1 uses the direct target; target 2/3 selects black/red outside entrance coordinates; source>1 with different target selects the correspond"
+        },
+        {
+          "old": "f_00BA_0002",
+          "new": "InitApplicationWindows",
+          "kind": "recovered",
+          "why": "Win16 symbol _InitApplicationWindows, reviewed 2026-11-11: Confirmed-callee order: win_LoadAllWindows -> repeated win_SetWinDrawHook -> InitMapFunctions, matching InitApplicationWindows1:5464. Confirmed IBMInitStuff invokes it immediately after InitApplicationStuff and before the second SetMenuEntries call in both versions.; Independent hook-table argument anchor: registrations agree for windows0x000(edit),0x100(map),0x1500(history),0x1200(mode),0x1300(ca"
+        },
+        {
+          "old": "f_00BA_01B6",
+          "new": "InitApplicationStuff",
+          "kind": "recovered",
+          "why": "Win16 symbol _InitApplicationStuff, reviewed 2026-11-11: Confirmed caller IBMInitStuff calls DOS00BA:01B6 and Win16 InitApplicationStuff immediately after LoadTiles and before InitApplicationWindows, with no arguments (Win16 card2:07D7).; Independent confirmed-callee anchor: each is a sole no-argument wrapper around already confirmed initStuff, not merely an empty stub. DOS m00BA.c01B6 and Win16 src/initapp.c InitApplicationStuff1:552A preserve that exa"
+        },
+        {
+          "old": "f_0DEF_0000",
+          "new": "MakeRedInitiator",
+          "kind": "recovered",
+          "why": "Win16 symbol _MakeRedInitiator, reviewed 2026-11-11: Confirmed caller TallyModePop calls DOS0DEF:0000/Win16 MakeRedInitiator after the same black/red mode-population tally and only when TemRModePop[19]<1. It is a no-argument initializer, unlike DoRedInitiator(index). Win16 also has a DoAntSim caller that has no direct DOS counterpart; that extra caller is not counted as an anchor.; Distinctive state/constants anchor: clears RedInitOn; when BpopT>=30"
+        },
+        {
+          "old": "f_0DEF_006B",
+          "new": "DoRedInitiator",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRedInitiator, reviewed 2026-11-11: Confirmed caller DoAntSimA invokes 0DEF:006B in its red-initiator mode slot, corresponding to Win16 DoRedInitiator 6:96D4; it passes an A-list index, rather than a nest x,y pair.; Independent confirmed-callee/body anchor: the red task selector (inlined UnRecruitRed/SRand1/RecruitRed in Win16) is followed by GetRedBestDirs(1,RedLocX,RedLocY,RedDestX,RedDestY), SRand1(10), IsYellowAnt -> YellowFight"
+        },
+        {
+          "old": "f_0DEF_0233",
+          "new": "GetNewRedTask",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetNewRedTask, reviewed 2026-11-11: Confirmed-callee sequence: UnRecruitRed -> SRand1(32) -> SRand1(10) -> RecruitRed, with the alternative final RecruitRed on the food-target path, matching Win16 GetNewRedTask 6:9940.; Independent constants/state anchor: on MePlane==1 and SRand1(32)+0x40<MeLocX, recruits ModePopB[5] and sets RedTask=2; otherwise offsets LastFoodDrop using x>30, y<20/y>40 by five, recruits (CastePopR[1]+[2])>>2 if p"
+        },
+        {
+          "old": "f_0DEF_031F",
+          "new": "GetRedBestDirs",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetRedBestDirs, reviewed 2026-11-11: Confirmed-callee order: GetDis -> TileCanBeMovedOn -> GetDis -> GetLife -> IsClearTile, matching Win16 GetRedBestDirs 6:9A18; unlike GetBestDir, it calls TileCanBeMovedOn rather than GetMap/IsNotObstacle/IsThisPebble.; Family discriminator/body anchor: every candidate neighbour is checked with TileCanBeMovedOn(plane,nx,ny,plane,a,b,0)==1. GetMyBestDirs instead passes the global MeGoal plane/coordi"
+        },
+        {
+          "old": "f_14EE_0C9C",
+          "new": "FixExitMapB",
+          "kind": "recovered",
+          "why": "Win16 symbol _FixExitMapB, reviewed 2026-11-11: Black-family confirmed caller positions: DigTileB, DigTileThemB and DoDigInB invoke14EE:0C9C at Win16 FixExitMapB positions, while the red callers use0D71; DoAntMoveY also selects the correct member by plane.; Independent gradient/body anchor: y<2 writes0xFF for MapB tile0x18 else0xFE; otherwise takes the maximum of eight bounded0..63 ExitMapB neighbours and writes max-1 or0. Win16 FixExitMapB5:28"
+        },
+        {
+          "old": "f_14EE_0D71",
+          "new": "FixExitMapR",
+          "kind": "recovered",
+          "why": "Win16 symbol _FixExitMapR, reviewed 2026-11-11: Red-family confirmed caller positions: DigTileR, DigTileThemR and DoDigInR invoke14EE:0D71 where Win16 calls FixExitMapR; the black counterparts call0C9C instead. Both also have the correct red/black branch from DoAntMoveY.; Independent gradient/body anchor: y<2 sets ExitMapR to0xFF for MapR tile0x18 else0xFE; otherwise scans eight bounded0..63 neighbours and sets the red exit scent to maxNeighbou"
+        },
+        {
+          "old": "f_1699_00A6",
+          "new": "MoveTextToBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _MoveTextToBalloon, reviewed 2026-11-11: Confirmed MakeBalloon calls DOS1699:00A6 at Win16 MoveTextToBalloon4:6CF8's slot, supplying source text bitmap, destination balloon bitmap and x/y placement.; Independent bitmap algorithm anchor: destination pitch=width>>3, row placement includes y*2*pitch, source stride=(sourceWidth+7)>>3 and height from source header, then copies each source byte XOR0xFF into the destination with a2*destinationP"
+        },
+        {
+          "old": "f_1699_0110",
+          "new": "MaskMono2Tandy",
+          "kind": "recovered",
+          "why": "Win16 symbol _MaskMono2Tandy, reviewed 2026-11-11: Confirmed ConvertMonoMaskToTandy calls 1699:0110/Win16 MaskMono2Tandy on the source mask and allocated destination bitmap at the same conversion stage; the source/destination far-pointer roles agree.; Distinctive pixel algorithm: both clear the destination, read paired one-bit planes from source+4, select nibble 0xD for the clear-mask branch, otherwise derive a 0x0/0xF nibble from the source bit, "
+        },
+        {
+          "old": "f_171C_13CA",
+          "new": "Ralloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _Ralloc, reviewed 2026-11-11: Original proposed _mem_malloc is REJECTED:13CA returns a master record/handle, not malloc's data pointer. Independent confirmed caller alignment: both win_SetObjFormatStr and win_ObjFormatPrint allocate their missing format record with DOS13CA/Win16 Ralloc after computing length, then store it at object+0x2A.; Specific argument/record anchor: those calls pass(long)(strlen(formattedText)+1+8),kind1"
+        },
+        {
+          "old": "f_171C_13E4",
+          "new": "RallocFree",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocFree, reviewed 2026-11-11: Preserved nine-member run: DOS13E4 Free,14BE Age,152C Freshen,15A2 SetType,1686 Type,16EA Size,1750 MemoryFree,1772 MemorySoft,1794 Freed matches Win16 RallocFree2:5936..RallocFreed2:59CC in exactly that order;15A2 has its own RallocSetType diagnostic and1750 has independent named callers.; Direct-record operation anchor:13E4 resolves the record, returns its block to free storage and releases the "
+        },
+        {
+          "old": "f_171C_152C",
+          "new": "RallocFreshen",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocFreshen, reviewed 2026-11-11: Preserved-member anchor:152C is between the Age and the self-diagnosed RallocSetType15A2 in the nine-member RallocFree..RallocFreed run, matching Win16 RallocFreshen2:597E's position between RallocAge and RallocSetType.; Independent operation/field anchor: DOS resolves a direct record and refreshes its long age field from the advancing allocation clock; Win16 RallocFreshen writes the long timestam"
+        },
+        {
+          "old": "f_171C_15A2",
+          "new": "RallocSetType",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocSetType, reviewed 2026-11-11: Corrected layer assignment; proposed _mem_SetType is REJECTED as a unique identity. DOS15A2's own diagnostic explicitly spells RallocSetType to illegal type, and its body changes the direct Ralloc block's type/attribute/accounting. Win16 RallocSetType2:5994 changes the direct record's type. DOS1E86 is a separate wrapper forwarding handle+kind to15A2, matching the separation of the Ralloc and mem A"
+        },
+        {
+          "old": "f_171C_1686",
+          "new": "RallocType",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocType, reviewed 2026-11-11: Preserved-member anchor:1686 lies after15A2 RallocSetType and before16EA RallocSize in the matching nine-member RallocFree..RallocFreed run; Win162:59A4 RallocType lies immediately between RallocSetType and RallocSize.; Independent operation/contract anchor: returns the direct allocation record's stored type field without changing it; the separate size member returns a long requested size and SetT"
+        },
+        {
+          "old": "f_171C_16EA",
+          "new": "RallocSize",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocSize, reviewed 2026-11-11: Preserved-member anchor:16EA is immediately after the record type getter and before independently anchored1750 RallocMemoryFree, matching Win16 RallocType2:59A4,RallocSize2:59B0,RallocMemoryFree2:59C0 in the same nine-member run.; Independent operation/contract anchor: returns the direct Ralloc record's requested byte size as a long, matching Win16 RallocSize(record)->record->size. DOS has a separ"
+        },
+        {
+          "old": "f_171C_1750",
+          "new": "RallocMemoryFree",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocMemoryFree, reviewed 2026-11-11: Two confirmed caller positions: IBMInitStuff calls 1750/RallocMemoryFree after command-line/environment handling and before its memory threshold check; InitMapFunctions calls it alongside the soft-memory query before allocating the 0x2000 generated map buffer.; Quantity/return contract: DOS 1750 returns the free-paragraph total s_2F3E shifted left four as a 32-bit byte count; Win16 RallocMemoryFre"
+        },
+        {
+          "old": "f_171C_1772",
+          "new": "RallocMemorySoft",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocMemorySoft, reviewed 2026-11-11: Confirmed caller InitMapFunctions queries both1750/free and1772/soft before allocating the generated map buffer. Win16 InitMapFunctions3:C19C queries RallocMemorySoft and RallocMemoryFree in the opposite evaluation order before the same allocation; DOS uses the two values in its FREE+SOFT AT INITMAP diagnostic.; Independent member/data-domain anchor:1772 immediately follows1750 RallocMemoryFree an"
+        },
+        {
+          "old": "f_171C_1794",
+          "new": "RallocFreed",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocFreed, reviewed 2026-11-11: Preserved-member anchor:1794 closes the nine-member Free/Age/Freshen/SetType/Type/Size/MemoryFree/MemorySoft/Freed run after independently anchored1750/1772, matching Win16 RallocFreed2:59CC immediately after RallocMemorySoft.; Independent discard-state predicate: DOS resolves a record and returns whether its header type==5 (discarded); Win16 RallocFreed tests whether the direct record's data poin"
+        },
+        {
+          "old": "f_171C_18A6",
+          "new": "RallocRealloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocRealloc, reviewed 2026-11-11: Two confirmed caller alignments: win_SetObjFormatStr and win_ObjFormatPrint use DOS18A6/Win16 RallocRealloc on the existing format record, then store the returned record back into object+0x2A; the subsequent new-record alternative uses13CA/Ralloc.; Specific contract/implementation anchor: size=(long)(formattedLength+4),kind1, with reallocation gated by old string length+1 (setter) or+2 (printer). "
+        },
+        {
+          "old": "f_171C_1A9E",
+          "new": "mem_Alloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Alloc, reviewed 2026-11-11: Caller alignment: confirmed hanim_AddAnimObject allocates the per-object backing buffer after its object/bitmap setup and before the two unlocks; InitMapFunctions allocates the generated map buffer in the corresponding slot on both versions.; Argument/result discrimination: InitMapFunctions passes 0x2000L, kind 1 and the literal Generated buffer window; hanim_AddAnimObject passes obj->size*3, kind"
+        },
+        {
+          "old": "f_171C_1AD4",
+          "new": "mem_LockLevel",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_LockLevel, reviewed 2026-11-11: Missed two-caller alignment: confirmed ch_CleanupTable and ch_DumpOldest invoke DOS1AD4 where Win16 calls mem_LockLevel, after checking discard/type status and before reclaiming an unlocked cached handle (Win16 cards7:980B and7:991E).; Independent lock-state contract: DOS resolves the encoded handle and returns HDR(h)->lock; Win16 mem_LockLevel2:5492 returns the low lock-count byte of GlobalFlags "
+        },
+        {
+          "old": "f_171C_1B2C",
+          "new": "mem_Realloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Realloc, reviewed 2026-11-11: Confirmed caller hanim_AddAnimObject: when count==max, both versions grow capacity by two and assign the result of DOS 1B2C/Win16 mem_Realloc to set->objs before locking it again (Win16 2:644C). Handle, long byte size and kind 1 agree, including the result assignment.; Implementation anchor: DOS 1B2C resolves the encoded handle then 18A6 resizes the allocation, preserving old data and replacing th"
+        },
+        {
+          "old": "f_171C_1B84",
+          "new": "mem_Lock",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Lock, reviewed 2026-11-11: Caller alignment: confirmed hanim_HideObject and hanim_ShowObject begin with set-handle then object-array-handle calls, matching Win16 mem_Lock at 2:690F/6927 and 2:69C3/69DB; paired unlocks occur at the tail.; Return-use/implementation anchor: DOS 1B84 calls 1FC2 to acquire the handle, returns null on failure or dereferences the master pointer into DX:AX; callers use that result as the AnimSet/An"
+        },
+        {
+          "old": "f_171C_1BBA",
+          "new": "mem_Unlock",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Unlock, reviewed 2026-11-11: Caller alignment: confirmed hanim_HideObject and hanim_ShowObject each finish by unlocking the object-array handle and then the set handle; DOS 1BBA occupies both Win16 mem_Unlock slots (cards 2:69A2/69AD and 2:6A56/6A61).; Implementation/contract: DOS 1BBA resolves a 0F0F:index handle then delegates to 2086, decrementing the block lock count; Win16 2:559C is the GlobalUnlock wrapper. The same han"
+        },
+        {
+          "old": "f_171C_1C0A",
+          "new": "mem_Free",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
+        },
+        {
+          "old": "f_171C_1C1C",
+          "new": "mem_Size",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Size, reviewed 2026-11-11: Original proposed _db_GetObjectSize is REJECTED: DOS1C1C takes an allocation handle, whereas Win16 db_GetObjectSize takes a resource name and DBRecall/free loops. Corrected caller alignment: LoadTiles queries the loaded tile handle's byte length via1C1C/mem_Size before locking/copying it; hanim_RenderAnimSet's inlined preparation also queries the buffer handle (Win16 card2:6FC3).; Independent retu"
+        },
+        {
+          "old": "f_171C_2190",
+          "new": "mem_malloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_malloc, reviewed 2026-11-11: Confirmed font_ReadFont calls DOS 2190/Win16 mem_malloc four times: 0x2A header, image rowWords*height*2, locTable count*2, owTable count*2; their call order around fopen/fread/fclose agrees (Win16 card 7:AA58, AB0B, AB2A, AB44).; Return/implementation discrimination: 2190 temporarily raises the fixed-allocation guard s_2F2A and returns *13CA(size,0,name), a raw far pointer; Win16 mem_malloc retur"
+        },
+        {
+          "old": "f_1B4E_000D",
+          "new": "ConvColor",
+          "kind": "recovered",
+          "why": "Win16 symbol _ConvColor, reviewed 2026-11-11: Confirmed caller alignment: DrawColonyBars, DrawEditGraphs and win_DrawHistoryWindow call 1B4E:000D where Win16 calls ConvColor, using its return as the drawing colour; IBMInitStuff passes 15 before filling the initial screen in both versions.; Transformation anchor: DOS symbolic m1B4E.asm preserves the high colour nibble and replaces the low nibble through g_41C0; Win16 ConvColor preserves color&"
+        },
+        {
+          "old": "f_1CE2_01F8",
+          "new": "GBoxOutline",
+          "kind": "recovered",
+          "why": "Win16 symbol _GBoxOutline, reviewed 2026-11-11: Confirmed caller drawHistGraph calls 1CE2:01F8 at the Win16 GBoxOutline slot with five scalar coordinates/thickness arguments; it is separate from the rectangle-pointer wrapper 044D/GRectOutline.; Geometry/control anchor: nonzero thickness draws top,bottom,left,right strips with the current foreground colour; each strip uses the same inset corner formulas in DOS and Win16 wf_GBoxOutline-26008b9ec1"
+        },
+        {
+          "old": "f_1CE2_0430",
+          "new": "GRectInv",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectInv, reviewed 2026-11-11: Confirmed DrawEditGraphs and win_DrawObjectI call 1CE2:0430 at the positions occupied by Win16 GRectInv; further confirmed win_SetObjSelectedStateI and win_SetObjVisibleState agree.; Contract/body anchor: this member takes only a Rect pointer and expands left,top,right,bottom into the inversion-box driver, with no colour or thickness. Win16 GRectInv.c (2:0EB2) does the same via GInvBox. The rectan"
+        },
+        {
+          "old": "f_1CE2_044D",
+          "new": "GRectOutline",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectOutline, reviewed 2026-11-11: Confirmed callers win_RectFillOutline, DrawControlLevels and DrawEditGraphs invoke DOS 044D at Win16 GRectOutline positions; this independently extends the tool's single win_RectFillOutline gap.; Body/argument anchor: 044D expands (Rect*,width) into scalar GBoxOutline; 01F8 draws four inset strips only when width is nonzero. Win16 2:0EDE GRectOutline performs those four fills inline, including Win"
+        },
+        {
+          "old": "f_1CE2_046D",
+          "new": "GRectFill",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectFill, reviewed 2026-11-11: Confirmed callers win_DrawBitMapAtObj, win_DrawBitMapAtObjNum, win_DrawHBar and win_DrawVBar use 1CE2:046D at their GRectFill positions; DrawColonyBars and DrawEditGraphs agree independently.; Argument-expansion/body anchor: 046D takes (Rect*,colour) and sends left,top,right,bottom,colour to the fill-box driver; Win16 GRectFill expands the same Rect fields into GBoxFill (2:0F98 GRectFill.c). This "
+        },
+        {
+          "old": "f_1CE2_09E2",
+          "new": "GRectPartialMixedOutline",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectPartialMixedOutline, reviewed 2026-11-11: Confirmed caller positions: win_RectHOutline and win_RectVOutline call 1CE2:09E2 where Win16 calls GRectPartialMixedOutline with rect,thickness,side-mask,foreground,background.; Branch/mask anchor: both return on zero thickness; equal colours or monochrome delegates to partial solid outline; otherwise set attributes with pattern 0x20 and test sides in order 2,8,1,4 to draw the four inset edges. Wi"
+        },
+        {
+          "old": "f_1FAA_0006",
+          "new": "TrapFill",
+          "kind": "recovered",
+          "why": "Win16 symbol _TrapFill, reviewed 2026-11-11: Two confirmed caller positions: InvertPatch and DrawSimColonies invoke DOS1FAA:0006 where Win16 calls TrapFill, passing four-point geometry plus foreground/background.; Independent fixed-point geometry anchor: computes two16.16 edge slopes from points0/3 and1/2 over bottom-top with two long divides, then walks scanlines, inverting when fore==-1, solid filling when fore==back, otherwise pattern0x20"
+        },
+        {
+          "old": "f_1FBD_0000",
+          "new": "GPutStr",
+          "kind": "recovered",
+          "why": "Win16 symbol _GPutStr, reviewed 2026-11-11: Matched caller anchor: font_PrintStr's current-font-null/default-font branch passes(x,y,text) to DOS1FBD:0000 and Win16 GPutStr2:1792, distinct from the loaded-font font_MakeImage branch.; Independent output-state anchor: DOS symbolic m1FBD.asm builds the built-in-font bitmap and updates g_3DA0.x=x+renderedWidth,g_3DA0.y=y after drawing; Win16 GPutStr uses TextOut/GetTextExtent and updates lastStr"
+        },
+        {
+          "old": "f_1FD2_04D0",
+          "new": "GetMousePos",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMousePos, reviewed 2026-11-11: Confirmed caller positions: MapAreaEvent, OpenMiniMapWin, PlaceQueenInYard, ProcCasteEvent and ProcModeEvent use DOS1FD2:04D0 where Win16 calls GetMousePos.; Output/implementation anchor: a single far Point* receives x then y. DOS copies current mouse globals g_9122/g_9124; Win16 GetMousePos2:4A1C delegates to GetCursorPos(point). Paired callers use those two outputs for the same map/window hit te"
+        },
+        {
+          "old": "f_1FD2_04E5",
+          "new": "PointInRect",
+          "kind": "recovered",
+          "why": "Win16 symbol _PointInRect, reviewed 2026-11-11: Multiple confirmed caller positions: MapAreaEvent, ProcInfoEvent and OpenMiniMapWin call DOS1FD2:04E5 at the Win16 PointInRect slot to decide whether the mouse point hits a UI rectangle.; Predicate/argument anchor: both take (Point*,Rect*) and compare x/y against left/top/right/bottom; DOS uses left/top inclusive and right/bottom exclusive. Win16 PointInRect2:497A uses that same predicate when rib"
+        },
+        {
+          "old": "f_22BF_0C38",
+          "new": "win_ClearObjToEOL",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_ClearObjToEOL, reviewed 2026-11-11: Confirmed caller DrawControlLevels invokes DOS22BF:0C38 in the same slot as Win16 win_ClearObjToEOL7:D792 after printing control text, passing the object id whose remainder is erased.; Independent drawing-state/body anchor: obtains the object's Rect and colour selector at+0x26, selects mono/colour table entries3/2, duplicates the colour into both bytes, clamps top=max(lastStrPos.y,rect.top), and f"
+        },
+        {
+          "old": "f_24AB_02AD",
+          "new": "font_SetFont",
+          "kind": "recovered",
+          "why": "Win16 symbol _font_SetFont, reviewed 2026-11-11: Confirmed caller positions: DrawControlLevels and DrawSimKid select the font via 24AB:02AD/Win16 font_SetFont before their text rendering; win_GetStyleTextHeight switches it repeatedly for the two style fonts.; Switch/domain anchor: both distinguish fonts 0 and 1 (built-in font, clear current font pointer), then bound the loaded-font domain to 2..5 with fallback 2. The DOS built-in large/small dri"
+        },
+        {
+          "old": "f_24AB_038D",
+          "new": "font_PrintStr",
+          "kind": "recovered",
+          "why": "Win16 symbol _font_PrintStr, reviewed 2026-11-11: Confirmed caller sequence: drawHistGraph, win_PrintStyleTextInRect and win_PrintTextInRect call 24AB:038D/Win16 font_PrintStr to render the positioned string, after measuring/selecting font; the call takes x,y,text.; Body anchor: both handle empty text by updating lastStrPos and returning; default font delegates to GPutStr, otherwise font_MakeImage(text,0,currentFont), blit image, set lastStrPos=("
+        },
+        {
+          "old": "f_24FA_00A0",
+          "new": "invert",
+          "kind": "recovered",
+          "why": "Win16 symbol _invert, reviewed 2026-11-11: Confirmed ConvertMonoMaskToColor calls 24FA:00A0 at Win16 invert's position after producing the monochrome mask and before completing the converted bitmap; both pass the mask's far byte pointer and its byte count.; Semantic/body anchor: both m24FA.asm and Win16 invert-7998fd5316.asm (7:F846) negate every byte in place in a count-controlled forward walk, with no source buffer or colour argument. Th"
+        },
+        {
+          "old": "f_2650_000F",
+          "new": "DrawChar",
+          "kind": "recovered",
+          "why": "Win16 symbol _DrawChar, reviewed 2026-11-11: Missed caller position: confirmed font_MakeImage calls2650:000F/Win16 DrawChar after ClearBuffer while laying out glyphs, using source/destination bitmaps, width,height and source/destination bit offsets; this pair was absent from the candidate table.; Independent raster algorithm anchor: both symbolic sources split bit offsets into byte index and low3-bit shift, combine shifted source words by OR"
+        },
+        {
+          "old": "f_2650_0107",
+          "new": "ClearBuffer",
+          "kind": "recovered",
+          "why": "Win16 symbol _ClearBuffer, reviewed 2026-11-11: Two confirmed caller alignments: MakeBalloon and font_MakeImage use 2650:0107 exactly where Win16 calls ClearBuffer, passing the destination pixel buffer and its byte count before rasterizing text.; Distinctive clearing semantics: both symbolic assembly sources clear count/2 zero words then write a zero byte at the final position selected by count parity (even count backs the pointer up one byte)."
+        }
+      ],
+      "note": "Lexical identifier rename; semantic review unchanged.",
+      "prior_receipt_sha256": "bd24c31b4f94e9061f76e491cd04a1e7854cc0e20c6a83963cb8a63e9f291a7e"
+    },
+    {
+      "renames": [
+        {
+          "old": "fd_3D57_006C",
+          "new": "absSearchDirs",
+          "kind": "recovered",
+          "why": "Win16 symbol _absSearchDirs (evidence/cross_version/data-alignment, tier A): same reference position in ExitNest, DropMyFood and 2 more function pairs; 8 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0074",
+          "new": "IsCarryCaste",
+          "kind": "recovered",
+          "why": "Win16 symbol _IsCarryCaste (evidence/cross_version/data-alignment, tier A): 32 initial bytes agree exactly; consistent spacing across 9 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0094",
+          "new": "UnCarryCaste",
+          "kind": "recovered",
+          "why": "Win16 symbol _UnCarryCaste (evidence/cross_version/data-alignment, tier A): same reference position in YellowDeath, DoLifeExchange; 16 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_00A4",
+          "new": "YMapPopB",
+          "kind": "recovered",
+          "why": "Win16 symbol _YMapPopB (evidence/cross_version/data-alignment, tier A): save record index 27 of 307, same element size and count; same reference position in GenerateTutorial, ClrArrays and 4 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0164",
+          "new": "YMapPopR",
+          "kind": "recovered",
+          "why": "Win16 symbol _YMapPopR (evidence/cross_version/data-alignment, tier A): save record index 28 of 307, same element size and count; same reference position in CheatKeys, GenerateTutorial and 4 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02A4",
+          "new": "LastNewExitB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastNewExitB (evidence/cross_version/data-alignment, tier A): save record index 53 of 307, same element size and count; same reference position in CreateNewHole, MakeNewHoleB; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02A8",
+          "new": "LastNewExitR",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastNewExitR (evidence/cross_version/data-alignment, tier A): save record index 54 of 307, same element size and count; same reference position in CreateNewHole, MakeNewHoleR; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02AC",
+          "new": "LastNewHoleB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastNewHoleB (evidence/cross_version/data-alignment, tier A): save record index 55 of 307, same element size and count; same reference position in PickupMyFood, GetNestDir and 2 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02B0",
+          "new": "LastNewHoleR",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastNewHoleR (evidence/cross_version/data-alignment, tier A): save record index 56 of 307, same element size and count; same reference position in GetNestDir, CreateNewHole and 1 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02B4",
+          "new": "LastBlackEgg",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastBlackEgg (evidence/cross_version/data-alignment, tier A): save record index 51 of 307, same element size and count; same reference position in RandWorld, PlaceBlackQueen; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02B8",
+          "new": "LastRedEgg",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastRedEgg (evidence/cross_version/data-alignment, tier A): save record index 57 of 307, same element size and count; same reference position in RandWorld, PlaceRedQueen and 1 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02BC",
+          "new": "LastFoodDrop",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastFoodDrop (evidence/cross_version/data-alignment, tier A): save record index 52 of 307, same element size and count; spacing to mapped neighboring objects agrees; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_3D57_02C0",
+          "new": "LayDownQueenMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _LayDownQueenMode (evidence/cross_version/data-alignment, tier A): save record index 177 of 307, same element size and count; same reference position in PlaceQueenInYard; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_02C2",
+          "new": "gGameNeedsSaving",
+          "kind": "recovered",
+          "why": "Win16 symbol _gGameNeedsSaving (evidence/cross_version/data-alignment, tier A): same reference position in NewGame, DoAntSim; spacing to mapped neighboring objects agrees; 3 shared users among 5 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_3D57_030E",
+          "new": "CTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _CTab (evidence/cross_version/data-alignment, tier A): 144 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_039E",
+          "new": "HTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _HTab (evidence/cross_version/data-alignment, tier A): 208 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_046E",
+          "new": "LTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _LTab (evidence/cross_version/data-alignment, tier A): 32 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_04CE",
+          "new": "bw_CTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _bw_CTab (evidence/cross_version/data-alignment, tier A): 128 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_054E",
+          "new": "bw_HTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _bw_HTab (evidence/cross_version/data-alignment, tier A): 208 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_061E",
+          "new": "bw_LTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _bw_LTab (evidence/cross_version/data-alignment, tier A): 32 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07A2",
+          "new": "TutorCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _TutorCnt (evidence/cross_version/data-alignment, tier A): save record index 282 of 307, same element size and count; same reference position in RunTutor; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07A4",
+          "new": "TutLesson",
+          "kind": "recovered",
+          "why": "Win16 symbol _TutLesson (evidence/cross_version/data-alignment, tier A): save record index 281 of 307, same element size and count; same reference position in RunTutor; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07A6",
+          "new": "TutGiven",
+          "kind": "recovered",
+          "why": "Win16 symbol _TutGiven (evidence/cross_version/data-alignment, tier A): save record index 279 of 307, same element size and count; same reference position in RunTutor; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07A8",
+          "new": "OptionStates",
+          "kind": "recovered",
+          "why": "Win16 symbol _OptionStates (evidence/cross_version/data-alignment, tier A): save record index 100 of 307, same element size and count; same reference position in DoAntMoveY, MoveSpider; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07BE",
+          "new": "ELayerMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _ELayerMode (evidence/cross_version/data-alignment, tier A): same reference position in EditScentMenu, InitYelloAnt and 2 more function pairs; 4 shared users among 4 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_3D57_07C0",
+          "new": "MapPlane2EditTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _MapPlane2EditTab (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_07C8",
+          "new": "MapMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _MapMode (evidence/cross_version/data-alignment, tier A): save record index 184 of 307, same element size and count; same reference position in SimKidInside, RandYard and 3 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07CC",
+          "new": "GameSpeed",
+          "kind": "recovered",
+          "why": "Win16 symbol _GameSpeed (evidence/cross_version/data-alignment, tier A): save record index 166 of 307, same element size and count; same reference position in InitSimVars, SetMenuEntries; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07EA",
+          "new": "ShowPercentCaste",
+          "kind": "recovered",
+          "why": "Win16 symbol _ShowPercentCaste (evidence/cross_version/data-alignment, tier A): save record index 305 of 307, same element size and count; same reference position in initControls; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_07EC",
+          "new": "casteLevelDefaults",
+          "kind": "recovered",
+          "why": "Win16 symbol _casteLevelDefaults (evidence/cross_version/data-alignment, tier A): 6 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_07F2",
+          "new": "casteSetLevels",
+          "kind": "recovered",
+          "why": "Win16 symbol _casteSetLevels (evidence/cross_version/data-alignment, tier A): save record index 75 of 307, same element size and count; 24 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_080A",
+          "new": "modeLevelDefaults",
+          "kind": "recovered",
+          "why": "Win16 symbol _modeLevelDefaults (evidence/cross_version/data-alignment, tier A): 6 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0810",
+          "new": "modeSetLevels",
+          "kind": "recovered",
+          "why": "Win16 symbol _modeSetLevels (evidence/cross_version/data-alignment, tier A): save record index 77 of 307, same element size and count; same reference position in initControls; 24 initial bytes agree exactly."
+        },
+        {
+          "old": "fd_3D57_0828",
+          "new": "HistCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _HistCnt (evidence/cross_version/data-alignment, tier A): save record index 169 of 307, same element size and count; same reference position in ClearHistory, HistUpdate; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_082A",
+          "new": "HistGraphs",
+          "kind": "recovered",
+          "why": "Win16 symbol _HistGraphs (evidence/cross_version/data-alignment, tier A): all 10 initialized pointer targets agree; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0852",
+          "new": "AltHistGraphs",
+          "kind": "recovered",
+          "why": "Win16 symbol _AltHistGraphs (evidence/cross_version/data-alignment, tier A): all 10 initialized pointer targets agree; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_087A",
+          "new": "HistGraphColors",
+          "kind": "recovered",
+          "why": "Win16 symbol _HistGraphColors (evidence/cross_version/data-alignment, tier A): 20 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0994",
+          "new": "SpX",
+          "kind": "recovered",
+          "why": "Win16 symbol _SpX (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_099C",
+          "new": "SpY",
+          "kind": "recovered",
+          "why": "Win16 symbol _SpY (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09A4",
+          "new": "SeatX",
+          "kind": "recovered",
+          "why": "Win16 symbol _SeatX (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09AC",
+          "new": "SeatY",
+          "kind": "recovered",
+          "why": "Win16 symbol _SeatY (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09B4",
+          "new": "AnTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _AnTab (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09BC",
+          "new": "BodX",
+          "kind": "recovered",
+          "why": "Win16 symbol _BodX (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09C4",
+          "new": "BodY",
+          "kind": "recovered",
+          "why": "Win16 symbol _BodY (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09CC",
+          "new": "DBodX",
+          "kind": "recovered",
+          "why": "Win16 symbol _DBodX (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09D0",
+          "new": "DBodY",
+          "kind": "recovered",
+          "why": "Win16 symbol _DBodY (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09E4",
+          "new": "PxT",
+          "kind": "recovered",
+          "why": "Win16 symbol _PxT (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09E8",
+          "new": "PyT",
+          "kind": "recovered",
+          "why": "Win16 symbol _PyT (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09EC",
+          "new": "PxT2",
+          "kind": "recovered",
+          "why": "Win16 symbol _PxT2 (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09F0",
+          "new": "PyT2",
+          "kind": "recovered",
+          "why": "Win16 symbol _PyT2 (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09F4",
+          "new": "PxD",
+          "kind": "recovered",
+          "why": "Win16 symbol _PxD (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09F8",
+          "new": "PyD",
+          "kind": "recovered",
+          "why": "Win16 symbol _PyD (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_09FC",
+          "new": "PxD2",
+          "kind": "recovered",
+          "why": "Win16 symbol _PxD2 (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A00",
+          "new": "PyD2",
+          "kind": "recovered",
+          "why": "Win16 symbol _PyD2 (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A04",
+          "new": "Lx",
+          "kind": "recovered",
+          "why": "Win16 symbol _Lx (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A08",
+          "new": "Ly",
+          "kind": "recovered",
+          "why": "Win16 symbol _Ly (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A0C",
+          "new": "L1xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L1xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A14",
+          "new": "L1xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L1xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A1C",
+          "new": "L2xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L2xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A24",
+          "new": "L2xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L2xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A2C",
+          "new": "L3xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L3xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A34",
+          "new": "L3xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L3xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A3C",
+          "new": "L4xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L4xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A44",
+          "new": "L4xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L4xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A4C",
+          "new": "L1yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L1yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A54",
+          "new": "L1yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L1yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A5C",
+          "new": "L2yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L2yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A64",
+          "new": "L2yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L2yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A6C",
+          "new": "L3yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L3yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A74",
+          "new": "L3yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L3yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A7C",
+          "new": "L4yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _L4yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A84",
+          "new": "L4yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _L4yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A90",
+          "new": "Dy",
+          "kind": "recovered",
+          "why": "Win16 symbol _Dy (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A94",
+          "new": "D1xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D1xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0A9C",
+          "new": "D1yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D1yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AA4",
+          "new": "D2xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D2xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AAC",
+          "new": "D2yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D2yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AB4",
+          "new": "D3xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D3xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0ABC",
+          "new": "D3yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D3yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AC4",
+          "new": "D4xA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D4xA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0ACC",
+          "new": "D4yA",
+          "kind": "recovered",
+          "why": "Win16 symbol _D4yA (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AD4",
+          "new": "D1xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D1xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0ADC",
+          "new": "D1yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D1yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AE4",
+          "new": "D2xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D2xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AEC",
+          "new": "D2yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D2yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AF4",
+          "new": "D3xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D3xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0AFC",
+          "new": "D3yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D3yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0B04",
+          "new": "D4xB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D4xB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0B0C",
+          "new": "D4yB",
+          "kind": "recovered",
+          "why": "Win16 symbol _D4yB (evidence/cross_version/data-alignment, tier A): 8 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0B14",
+          "new": "LionTrapPnts",
+          "kind": "recovered",
+          "why": "Win16 symbol _LionTrapPnts (evidence/cross_version/data-alignment, tier A): 16 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0B24",
+          "new": "YellowEatPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _YellowEatPnt (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0B36",
+          "new": "CasteTabC",
+          "kind": "recovered",
+          "why": "Win16 symbol _CasteTabC (evidence/cross_version/data-alignment, tier A): 48 initial bytes agree exactly; consistent spacing across 29 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0C0E",
+          "new": "MakeMe",
+          "kind": "recovered",
+          "why": "Win16 symbol _MakeMe (evidence/cross_version/data-alignment, tier A): save record index 183 of 307, same element size and count; same reference position in SetCasteProd; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C12",
+          "new": "RevSpider",
+          "kind": "recovered",
+          "why": "Win16 symbol _RevSpider (evidence/cross_version/data-alignment, tier A): save record index 304 of 307, same element size and count; same reference position in CheatKeys, MysteryButton and 2 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C14",
+          "new": "Invincible",
+          "kind": "recovered",
+          "why": "Win16 symbol _Invincible (evidence/cross_version/data-alignment, tier A): save record index 296 of 307, same element size and count; same reference position in CheatKeys, RandYard and 2 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C16",
+          "new": "NeverHungry",
+          "kind": "recovered",
+          "why": "Win16 symbol _NeverHungry (evidence/cross_version/data-alignment, tier A): save record index 302 of 307, same element size and count; same reference position in CheatKeys, RandYard and 1 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C18",
+          "new": "AlwaysHealthy",
+          "kind": "recovered",
+          "why": "Win16 symbol _AlwaysHealthy (evidence/cross_version/data-alignment, tier A): save record index 289 of 307, same element size and count; same reference position in CheatKeys, RandYard and 3 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C1A",
+          "new": "NextFeed",
+          "kind": "recovered",
+          "why": "Win16 symbol _NextFeed (evidence/cross_version/data-alignment, tier A): save record index 224 of 307, same element size and count; same reference position in FeedAnts; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C1C",
+          "new": "RedInitOn",
+          "kind": "recovered",
+          "why": "Win16 symbol _RedInitOn (evidence/cross_version/data-alignment, tier A): save record index 303 of 307, same element size and count; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C1E",
+          "new": "ClearRainFlag",
+          "kind": "recovered",
+          "why": "Win16 symbol _ClearRainFlag (evidence/cross_version/data-alignment, tier A): save record index 134 of 307, same element size and count; same reference position in DoWater; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C20",
+          "new": "ColonyUpdateFlag",
+          "kind": "recovered",
+          "why": "Win16 symbol _ColonyUpdateFlag (evidence/cross_version/data-alignment, tier A): save record index 137 of 307, same element size and count; same reference position in PlaceQueenInYard; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C22",
+          "new": "MeEggCarried",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeEggCarried (evidence/cross_version/data-alignment, tier A): save record index 195 of 307, same element size and count; same reference position in InitYelloAnt, DoLifeExchange and 2 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C24",
+          "new": "MeNestStarted",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeNestStarted (evidence/cross_version/data-alignment, tier A): save record index 208 of 307, same element size and count; same reference position in RandYard, InitYelloAnt and 5 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C26",
+          "new": "MeFoodInType",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeFoodInType (evidence/cross_version/data-alignment, tier A): save record index 196 of 307, same element size and count; same reference position in PickupMyEgg, PickupMyFood and 1 more function pairs; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C28",
+          "new": "BoyHere",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyHere (evidence/cross_version/data-alignment, tier A): save record index 116 of 307, same element size and count; same reference position in DrawMower; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_3D57_0C2C",
+          "new": "BoyX",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyX (evidence/cross_version/data-alignment, tier A): save record index 124 of 307, same element size and count; same reference position in SimKidInside; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C2E",
+          "new": "BoyY",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyY (evidence/cross_version/data-alignment, tier A): save record index 125 of 307, same element size and count; same reference position in SimKidInside, DrawMower; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C30",
+          "new": "BoyDir",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyDir (evidence/cross_version/data-alignment, tier A): save record index 114 of 307, same element size and count; same reference position in SimKidInside, FootFall; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_3D57_0C32",
+          "new": "BoyFrame",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyFrame (evidence/cross_version/data-alignment, tier A): save record index 115 of 307, same element size and count; same reference position in SimKidInside, DrawMower; used by the same 4 function pairs."
+        },
+        {
+          "old": "fd_3D57_0C34",
+          "new": "BoyTurnCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyTurnCnt (evidence/cross_version/data-alignment, tier A): save record index 122 of 307, same element size and count; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C36",
+          "new": "BxTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _BxTab (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 4 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0C3A",
+          "new": "ByTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _ByTab (evidence/cross_version/data-alignment, tier A): 4 initial bytes agree exactly; consistent spacing across 4 layout anchors."
+        },
+        {
+          "old": "fd_3D57_0C3E",
+          "new": "FootHere",
+          "kind": "recovered",
+          "why": "Win16 symbol _FootHere (evidence/cross_version/data-alignment, tier A): save record index 160 of 307, same element size and count; same reference position in SimKidInside; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C40",
+          "new": "BoyStandCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyStandCnt (evidence/cross_version/data-alignment, tier A): save record index 121 of 307, same element size and count; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C42",
+          "new": "FootTog",
+          "kind": "recovered",
+          "why": "Win16 symbol _FootTog (evidence/cross_version/data-alignment, tier A): save record index 293 of 307, same element size and count; same reference position in SimKidInside; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3D57_0C44",
+          "new": "ForSaleState",
+          "kind": "recovered",
+          "why": "Win16 symbol _ForSaleState (evidence/cross_version/data-alignment, tier A): save record index 294 of 307, same element size and count; same reference position in SimKidInside, RandYard and 1 more function pairs; used by the same 4 function pairs."
+        },
+        {
+          "old": "fd_3D57_0C46",
+          "new": "NodeCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _NodeCnt (evidence/cross_version/data-alignment, tier A): save record index 225 of 307, same element size and count; spacing to mapped neighboring objects agrees; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_3D57_0C48",
+          "new": "NodeNum",
+          "kind": "recovered",
+          "why": "Win16 symbol _NodeNum (evidence/cross_version/data-alignment, tier A): save record index 226 of 307, same element size and count; same reference position in SimKidInside; spacing to mapped neighboring objects agrees."
+        },
+        {
+          "old": "fd_3E1D_D89F",
+          "new": "PherMapF",
+          "kind": "recovered",
+          "why": "Win16 symbol _PherMapF (evidence/cross_version/data-alignment, tier A): same reference position in RandWorld, ClrArrays and 1 more function pairs; spacing to mapped neighboring objects agrees; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0200",
+          "new": "TileMassXR",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileMassXR (evidence/cross_version/data-alignment, tier A): save record index 274 of 307, same element size and count; same reference position in RandWorld, QueenMoveR and 2 more function pairs; 4 shared users among 4 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0204",
+          "new": "TimeTemp",
+          "kind": "recovered",
+          "why": "Win16 symbol _TimeTemp (evidence/cross_version/data-alignment, tier A): same reference position in RandYard, RunTutor and 2 more function pairs; 4 shared users among 4 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_020A",
+          "new": "BFightMsgs",
+          "kind": "recovered",
+          "why": "Win16 symbol _BFightMsgs (evidence/cross_version/data-alignment, tier A): same reference position in PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_020E",
+          "new": "TileMassYR",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileMassYR (evidence/cross_version/data-alignment, tier A): save record index 276 of 307, same element size and count; same reference position in RandWorld, QueenMoveR and 2 more function pairs; 4 shared users among 4 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0214",
+          "new": "LastThemeTime",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastThemeTime (evidence/cross_version/data-alignment, tier A): same reference position in RandYard, TryAntTheme; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_021C",
+          "new": "EggMsgs",
+          "kind": "recovered",
+          "why": "Win16 symbol _EggMsgs (evidence/cross_version/data-alignment, tier A): same reference position in PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0224",
+          "new": "TilesDugB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TilesDugB (evidence/cross_version/data-alignment, tier A): save record index 277 of 307, same element size and count; same reference position in RandWorld, FillDirtB and 6 more function pairs; 8 shared users among 8 DOS and 10 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0226",
+          "new": "EatCountR",
+          "kind": "recovered",
+          "why": "Win16 symbol _EatCountR (evidence/cross_version/data-alignment, tier A): save record index 154 of 307, same element size and count; same reference position in DecEatR; 3 shared users among 3 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0228",
+          "new": "LastThemeSong",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastThemeSong (evidence/cross_version/data-alignment, tier A): save record index 176 of 307, same element size and count; same reference position in RandYard, TryAntTheme; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0234",
+          "new": "QueenMsgs",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenMsgs (evidence/cross_version/data-alignment, tier A): same reference position in PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_023E",
+          "new": "BoyPy",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyPy (evidence/cross_version/data-alignment, tier A): save record index 120 of 307, same element size and count; same reference position in SimKidInside; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0242",
+          "new": "WaterTable",
+          "kind": "recovered",
+          "why": "Win16 symbol _WaterTable (evidence/cross_version/data-alignment, tier A): save record index 283 of 307, same element size and count; same reference position in RandWorld, DoWater; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0246",
+          "new": "BoyPx",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyPx (evidence/cross_version/data-alignment, tier A): save record index 119 of 307, same element size and count; same reference position in SimKidInside; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_024E",
+          "new": "casteButtonState",
+          "kind": "recovered",
+          "why": "Win16 symbol _casteButtonState (evidence/cross_version/data-alignment, tier A): save record index 287 of 307, same element size and count; same reference position in initControls; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0254",
+          "new": "CatOn",
+          "kind": "recovered",
+          "why": "Win16 symbol _CatOn (evidence/cross_version/data-alignment, tier A): save record index 130 of 307, same element size and count; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0256",
+          "new": "RxTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _RxTab (evidence/cross_version/data-alignment, tier A): save record index 72 of 307, same element size and count; same reference position in DoWater, PlaceDrop; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_02BA",
+          "new": "HistGraphStrs",
+          "kind": "recovered",
+          "why": "Win16 symbol _HistGraphStrs (evidence/cross_version/data-alignment, tier A): same reference position in drawHistGraph, PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_02C0",
+          "new": "RyTab",
+          "kind": "recovered",
+          "why": "Win16 symbol _RyTab (evidence/cross_version/data-alignment, tier A): save record index 73 of 307, same element size and count; same reference position in DoWater, PlaceDrop; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0332",
+          "new": "OldMapPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _OldMapPlane (evidence/cross_version/data-alignment, tier A): save record index 227 of 307, same element size and count; same reference position in SetMapPlaneLocation, SetMapPlane; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_034C",
+          "new": "WindPromptStrs",
+          "kind": "recovered",
+          "why": "Win16 symbol _WindPromptStrs (evidence/cross_version/data-alignment, tier A): same reference position in SetPause, ProcYardEvent and 8 more function pairs; 11 shared users among 11 DOS and 13 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0352",
+          "new": "RainOn",
+          "kind": "recovered",
+          "why": "Win16 symbol _RainOn (evidence/cross_version/data-alignment, tier A): save record index 238 of 307, same element size and count; same reference position in DoWater; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0354",
+          "new": "JustXfered",
+          "kind": "recovered",
+          "why": "Win16 symbol _JustXfered (evidence/cross_version/data-alignment, tier A): save record index 297 of 307, same element size and count; same reference position in XferPatch, CountAnts; 3 shared users among 3 DOS and 4 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_035E",
+          "new": "BlkQueens",
+          "kind": "recovered",
+          "why": "Win16 symbol _BlkQueens (evidence/cross_version/data-alignment, tier A): save record index 112 of 307, same element size and count; same reference position in RandWorld, MakeBlkQueen and 1 more function pairs; 3 shared users among 3 DOS and 4 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0366",
+          "new": "BlackWon",
+          "kind": "recovered",
+          "why": "Win16 symbol _BlackWon (evidence/cross_version/data-alignment, tier A): save record index 291 of 307, same element size and count; same reference position in RandYard, YellowDeath and 1 more function pairs; used by the same 4 function pairs."
+        },
+        {
+          "old": "fd_50F6_036C",
+          "new": "RedQueens",
+          "kind": "recovered",
+          "why": "Win16 symbol _RedQueens (evidence/cross_version/data-alignment, tier A): save record index 247 of 307, same element size and count; same reference position in RandWorld, MakeRedQueen and 1 more function pairs; 4 shared users among 4 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0370",
+          "new": "modeButtonState",
+          "kind": "recovered",
+          "why": "Win16 symbol _modeButtonState (evidence/cross_version/data-alignment, tier A): save record index 288 of 307, same element size and count; same reference position in initControls; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0376",
+          "new": "IsGameOver",
+          "kind": "recovered",
+          "why": "Win16 symbol _IsGameOver (evidence/cross_version/data-alignment, tier A): save record index 295 of 307, same element size and count; same reference position in RandYard, YellowDeath and 1 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_037C",
+          "new": "DeadX",
+          "kind": "recovered",
+          "why": "Win16 symbol _DeadX (evidence/cross_version/data-alignment, tier A): save record index 65 of 307, same element size and count; same reference position in DeadAntHere; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_03E0",
+          "new": "FootX",
+          "kind": "recovered",
+          "why": "Win16 symbol _FootX (evidence/cross_version/data-alignment, tier A): save record index 161 of 307, same element size and count; same reference position in SimKidInside; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_03E2",
+          "new": "ColonyTotalBlack",
+          "kind": "recovered",
+          "why": "Win16 symbol _ColonyTotalBlack (evidence/cross_version/data-alignment, tier A): save record index 135 of 307, same element size and count; same reference position in YellowDeath, XferPatch; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0400",
+          "new": "ColonyTotalRed",
+          "kind": "recovered",
+          "why": "Win16 symbol _ColonyTotalRed (evidence/cross_version/data-alignment, tier A): save record index 136 of 307, same element size and count; same reference position in CountAnts; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0404",
+          "new": "DeadY",
+          "kind": "recovered",
+          "why": "Win16 symbol _DeadY (evidence/cross_version/data-alignment, tier A): save record index 66 of 307, same element size and count; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0468",
+          "new": "ShowPercentMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _ShowPercentMode (evidence/cross_version/data-alignment, tier A): save record index 306 of 307, same element size and count; same reference position in initControls; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_046A",
+          "new": "FootY",
+          "kind": "recovered",
+          "why": "Win16 symbol _FootY (evidence/cross_version/data-alignment, tier A): save record index 162 of 307, same element size and count; same reference position in SimKidInside; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_046C",
+          "new": "MwinTitle",
+          "kind": "recovered",
+          "why": "Win16 symbol _MwinTitle (evidence/cross_version/data-alignment, tier A): same reference position in SetMapTitle, PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0472",
+          "new": "EditMsgDelay",
+          "kind": "recovered",
+          "why": "Win16 symbol _EditMsgDelay (evidence/cross_version/data-alignment, tier A): same reference position in RandWorld, EatMyFood; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0476",
+          "new": "DdPtr",
+          "kind": "recovered",
+          "why": "Win16 symbol _DdPtr (evidence/cross_version/data-alignment, tier A): save record index 143 of 307, same element size and count; same reference position in DeadAntHere; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0478",
+          "new": "HouseColonies",
+          "kind": "recovered",
+          "why": "Win16 symbol _HouseColonies (evidence/cross_version/data-alignment, tier A): save record index 171 of 307, same element size and count; same reference position in RandYard; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_047E",
+          "new": "GamePaused",
+          "kind": "recovered",
+          "why": "Win16 symbol _GamePaused (evidence/cross_version/data-alignment, tier A): save record index 165 of 307, same element size and count; same reference position in SetPause, DrawMower and 4 more function pairs; 11 shared users among 12 DOS and 16 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_048E",
+          "new": "SaveGamePaused",
+          "kind": "recovered",
+          "why": "Win16 symbol _SaveGamePaused (evidence/cross_version/data-alignment, tier A): same reference position in EndTargetMode, EndLifeTransferMode; 4 shared users among 4 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0496",
+          "new": "MeDir",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeDir (evidence/cross_version/data-alignment, tier A): save record index 192 of 307, same element size and count; same reference position in MapToolsMenu, EditToolsMenu and 15 more function pairs; used by the same 17 function pairs."
+        },
+        {
+          "old": "fd_50F6_049A",
+          "new": "MeBase",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeBase (evidence/cross_version/data-alignment, tier A): save record index 186 of 307, same element size and count; same reference position in InitYelloAnt, DoLifeExchange; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_04BE",
+          "new": "DogX",
+          "kind": "recovered",
+          "why": "Win16 symbol _DogX (evidence/cross_version/data-alignment, tier A): save record index 150 of 307, same element size and count; same reference position in DrawDog; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_04C2",
+          "new": "MeType",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeType (evidence/cross_version/data-alignment, tier A): save record index 219 of 307, same element size and count; same reference position in MapToolsMenu, EditToolsMenu and 26 more function pairs; 33 shared users among 33 DOS and 35 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_04C4",
+          "new": "MeScent",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeScent (evidence/cross_version/data-alignment, tier A): save record index 212 of 307, same element size and count; same reference position in DoAntMoveY, PickupMyFood; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_04C6",
+          "new": "DogY",
+          "kind": "recovered",
+          "why": "Win16 symbol _DogY (evidence/cross_version/data-alignment, tier A): save record index 151 of 307, same element size and count; same reference position in DrawDog; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_04E2",
+          "new": "MeColor",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeColor (evidence/cross_version/data-alignment, tier A): save record index 188 of 307, same element size and count; same reference position in InitYelloAnt, processEdit and 15 more function pairs; 18 shared users among 18 DOS and 24 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_04E4",
+          "new": "DogFrame",
+          "kind": "recovered",
+          "why": "Win16 symbol _DogFrame (evidence/cross_version/data-alignment, tier A): save record index 146 of 307, same element size and count; same reference position in DrawDog; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_04F4",
+          "new": "HistStart",
+          "kind": "recovered",
+          "why": "Win16 symbol _HistStart (evidence/cross_version/data-alignment, tier A): save record index 170 of 307, same element size and count; same reference position in CalcScore, ClearHistory and 2 more function pairs; used by the same 4 function pairs."
+        },
+        {
+          "old": "fd_50F6_0502",
+          "new": "MeEgg",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeEgg (evidence/cross_version/data-alignment, tier A): save record index 194 of 307, same element size and count; same reference position in YellowBirth, DoLifeExchange; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0504",
+          "new": "JustToBeMean",
+          "kind": "recovered",
+          "why": "Win16 symbol _JustToBeMean (evidence/cross_version/data-alignment, tier A): save record index 173 of 307, same element size and count; same reference position in RandYard, GstrR and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0508",
+          "new": "MapPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _MapPnt (evidence/cross_version/data-alignment, tier A): save record index 58 of 307, same element size and count; same reference position in MapAreaEvent, MagnifyMenu and 9 more function pairs; 16 shared users among 17 DOS and 24 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0516",
+          "new": "H_BPop",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_BPop (evidence/cross_version/data-alignment, tier A): save record index 84 of 307, same element size and count; same reference position in HistUpdate; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0596",
+          "new": "AMapPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _AMapPnt (evidence/cross_version/data-alignment, tier A): save record index 48 of 307, same element size and count; same reference position in RandWorld, RandYard and 1 more function pairs; 3 shared users among 3 DOS and 4 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_05A0",
+          "new": "H_RPop",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_RPop (evidence/cross_version/data-alignment, tier A): save record index 90 of 307, same element size and count; same reference position in HistUpdate; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0626",
+          "new": "H_BFood",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_BFood (evidence/cross_version/data-alignment, tier A): save record index 82 of 307, same element size and count; same reference position in CalcScore, HistUpdate; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_06A6",
+          "new": "BMapPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _BMapPnt (evidence/cross_version/data-alignment, tier A): save record index 49 of 307, same element size and count; same reference position in RandWorld, RandYard and 1 more function pairs; 3 shared users among 3 DOS and 4 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_06AA",
+          "new": "SwarmCntB",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmCntB (evidence/cross_version/data-alignment, tier A): save record index 268 of 307, same element size and count; same reference position in InitSimVars, XferPatch and 1 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_06AC",
+          "new": "MeSMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeSMode (evidence/cross_version/data-alignment, tier A): save record index 211 of 307, same element size and count; same reference position in processSpider, YellowCommand and 6 more function pairs; used by the same 8 function pairs."
+        },
+        {
+          "old": "fd_50F6_06AE",
+          "new": "H_RFood",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_RFood (evidence/cross_version/data-alignment, tier A): save record index 88 of 307, same element size and count; same reference position in CalcScore, HistUpdate; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_072E",
+          "new": "RMapPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _RMapPnt (evidence/cross_version/data-alignment, tier A): save record index 59 of 307, same element size and count; same reference position in RandWorld, RandYard and 1 more function pairs; 3 shared users among 3 DOS and 4 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_073A",
+          "new": "SwarmCntR",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmCntR (evidence/cross_version/data-alignment, tier A): save record index 269 of 307, same element size and count; same reference position in InitSimVars, XferPatch and 1 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_073C",
+          "new": "H_BHeal",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_BHeal (evidence/cross_version/data-alignment, tier A): save record index 83 of 307, same element size and count; same reference position in CalcScore, HistUpdate; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_07BC",
+          "new": "YMapPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _YMapPnt (evidence/cross_version/data-alignment, tier A): save record index 60 of 307, same element size and count; same reference position in RandYard, SetMapPlaneLocation and 2 more function pairs; 7 shared users among 7 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_07C0",
+          "new": "MeTargIndex",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeTargIndex (evidence/cross_version/data-alignment, tier A): save record index 214 of 307, same element size and count; same reference position in processEdit, DoAntMoveY; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_07C8",
+          "new": "QueenStorageB",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenStorageB (evidence/cross_version/data-alignment, tier A): save record index 233 of 307, same element size and count; same reference position in CheatKeys, InitSimVars and 3 more function pairs; 7 shared users among 7 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_07CA",
+          "new": "CurYardPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurYardPnt (evidence/cross_version/data-alignment, tier A): save record index 50 of 307, same element size and count; same reference position in SimKidInside, RandYard and 8 more function pairs; 10 shared users among 10 DOS and 13 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_07CE",
+          "new": "H_RHeal",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_RHeal (evidence/cross_version/data-alignment, tier A): save record index 89 of 307, same element size and count; same reference position in HistUpdate; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_084E",
+          "new": "MeTargLife",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeTargLife (evidence/cross_version/data-alignment, tier A): save record index 215 of 307, same element size and count; same reference position in processEdit, DoAntMoveY; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0850",
+          "new": "QueenStorageR",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenStorageR (evidence/cross_version/data-alignment, tier A): save record index 234 of 307, same element size and count; same reference position in InitSimVars, XferPatch and 1 more function pairs; 5 shared users among 5 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0852",
+          "new": "LastEggPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastEggPnt (evidence/cross_version/data-alignment, tier A): same reference position in EggBalloons; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0856",
+          "new": "H_FoodA",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_FoodA (evidence/cross_version/data-alignment, tier A): save record index 86 of 307, same element size and count; same reference position in HistUpdate; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_08DA",
+          "new": "MeTargLifePlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeTargLifePlane (evidence/cross_version/data-alignment, tier A): save record index 216 of 307, same element size and count; same reference position in processEdit, DoAntMoveY; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_08DC",
+          "new": "FlyAwayB",
+          "kind": "recovered",
+          "why": "Win16 symbol _FlyAwayB (evidence/cross_version/data-alignment, tier A): save record index 155 of 307, same element size and count; same reference position in ProcYardEvent, ClrModePop and 2 more function pairs; 4 shared users among 4 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_08DE",
+          "new": "CurEggPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurEggPnt (evidence/cross_version/data-alignment, tier A): same reference position in EggBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_08E2",
+          "new": "MeTargLifeX",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeTargLifeX (evidence/cross_version/data-alignment, tier A): save record index 217 of 307, same element size and count; same reference position in processEdit, DoAntMoveY; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_08E8",
+          "new": "FlyAwayR",
+          "kind": "recovered",
+          "why": "Win16 symbol _FlyAwayR (evidence/cross_version/data-alignment, tier A): save record index 156 of 307, same element size and count; same reference position in ClrModePop, DoRepoLoit and 3 more function pairs; 5 shared users among 5 DOS and 7 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_08EC",
+          "new": "LastFightPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastFightPnt (evidence/cross_version/data-alignment, tier A): same reference position in DrawCurBalloons; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_08F0",
+          "new": "H_ADead",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_ADead (evidence/cross_version/data-alignment, tier A): save record index 81 of 307, same element size and count; same reference position in HistUpdate; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0970",
+          "new": "H_PDead",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_PDead (evidence/cross_version/data-alignment, tier A): save record index 87 of 307, same element size and count; same reference position in HistUpdate; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_09F0",
+          "new": "MeTargLifeY",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeTargLifeY (evidence/cross_version/data-alignment, tier A): save record index 218 of 307, same element size and count; same reference position in processEdit, DoAntMoveY; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_09F2",
+          "new": "CurFightPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurFightPnt (evidence/cross_version/data-alignment, tier A): same reference position in DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_09FA",
+          "new": "BlackLost",
+          "kind": "recovered",
+          "why": "Win16 symbol _BlackLost (evidence/cross_version/data-alignment, tier A): save record index 111 of 307, same element size and count; same reference position in RandWorld, CalcScore and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A00",
+          "new": "RedLost",
+          "kind": "recovered",
+          "why": "Win16 symbol _RedLost (evidence/cross_version/data-alignment, tier A): save record index 245 of 307, same element size and count; same reference position in RandWorld, CalcScore and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A02",
+          "new": "LastQueenPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastQueenPnt (evidence/cross_version/data-alignment, tier A): same reference position in QueenBalloons, DrawCurBalloons; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A06",
+          "new": "MeMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeMode (evidence/cross_version/data-alignment, tier A): save record index 206 of 307, same element size and count; same reference position in MapToolsMenu, EditToolsMenu and 14 more function pairs; used by the same 21 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A0A",
+          "new": "H_FDead",
+          "kind": "recovered",
+          "why": "Win16 symbol _H_FDead (evidence/cross_version/data-alignment, tier A): save record index 85 of 307, same element size and count; same reference position in HistUpdate; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A8A",
+          "new": "CurQueenPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurQueenPnt (evidence/cross_version/data-alignment, tier A): same reference position in QueenBalloons, DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A8E",
+          "new": "MeCmd",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeCmd (evidence/cross_version/data-alignment, tier A): save record index 187 of 307, same element size and count; same reference position in processEdit, processSpider and 3 more function pairs; 5 shared users among 5 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A90",
+          "new": "BColoniesStarted",
+          "kind": "recovered",
+          "why": "Win16 symbol _BColoniesStarted (evidence/cross_version/data-alignment, tier A): save record index 103 of 307, same element size and count; same reference position in CalcScore, ClearHistory and 1 more function pairs; used by the same 4 function pairs."
+        },
+        {
+          "old": "fd_50F6_0A9E",
+          "new": "BColoniesKilled",
+          "kind": "recovered",
+          "why": "Win16 symbol _BColoniesKilled (evidence/cross_version/data-alignment, tier A): save record index 102 of 307, same element size and count; same reference position in CalcScore, ClearHistory; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AA0",
+          "new": "MeMoveMe",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeMoveMe (evidence/cross_version/data-alignment, tier A): save record index 207 of 307, same element size and count; same reference position in ResetYellowVars, YellowCommandKey and 2 more function pairs; 5 shared users among 6 DOS and 7 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AA2",
+          "new": "LastRestPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastRestPnt (evidence/cross_version/data-alignment, tier A): same reference position in RestBalloons, DrawCurBalloons; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AB2",
+          "new": "CurRestPnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurRestPnt (evidence/cross_version/data-alignment, tier A): same reference position in RestBalloons, DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AB6",
+          "new": "MeLastX",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeLastX (evidence/cross_version/data-alignment, tier A): save record index 202 of 307, same element size and count; same reference position in ResetYellowVars, DoAntMoveY; 2 shared users among 2 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AC4",
+          "new": "RColoniesStarted",
+          "kind": "recovered",
+          "why": "Win16 symbol _RColoniesStarted (evidence/cross_version/data-alignment, tier A): save record index 236 of 307, same element size and count; same reference position in CheatKeys, CalcScore and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AC6",
+          "new": "MeLastY",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeLastY (evidence/cross_version/data-alignment, tier A): save record index 203 of 307, same element size and count; same reference position in ResetYellowVars, DoAntMoveY; 2 shared users among 2 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AC8",
+          "new": "RColoniesKilled",
+          "kind": "recovered",
+          "why": "Win16 symbol _RColoniesKilled (evidence/cross_version/data-alignment, tier A): save record index 235 of 307, same element size and count; same reference position in ClearHistory; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0ACA",
+          "new": "LastEggPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastEggPlane (evidence/cross_version/data-alignment, tier A): same reference position in EggBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AD6",
+          "new": "MeGoalX",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeGoalX (evidence/cross_version/data-alignment, tier A): save record index 198 of 307, same element size and count; same reference position in ResetYellowVars, SetGoalsY and 2 more function pairs; 4 shared users among 4 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AD8",
+          "new": "CurEggPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurEggPlane (evidence/cross_version/data-alignment, tier A): same reference position in EggBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0ADA",
+          "new": "OverallScore",
+          "kind": "recovered",
+          "why": "Win16 symbol _OverallScore (evidence/cross_version/data-alignment, tier A): save record index 38 of 307, same element size and count; same reference position in ScoreDialog, ClearHistory; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AE8",
+          "new": "MeGoalY",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeGoalY (evidence/cross_version/data-alignment, tier A): save record index 199 of 307, same element size and count; same reference position in ResetYellowVars, SetGoalsY and 2 more function pairs; 4 shared users among 4 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AEA",
+          "new": "LastFightPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastFightPlane (evidence/cross_version/data-alignment, tier A): same reference position in DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AEC",
+          "new": "CastePopB",
+          "kind": "recovered",
+          "why": "Win16 symbol _CastePopB (evidence/cross_version/data-alignment, tier A): save record index 78 of 307, same element size and count; same reference position in CountAnts; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AF8",
+          "new": "MeGoalPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeGoalPlane (evidence/cross_version/data-alignment, tier A): save record index 197 of 307, same element size and count; same reference position in ResetYellowVars, SetGoalsY and 2 more function pairs; 4 shared users among 4 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0AFA",
+          "new": "CastePopR",
+          "kind": "recovered",
+          "why": "Win16 symbol _CastePopR (evidence/cross_version/data-alignment, tier A): save record index 79 of 307, same element size and count; same reference position in DrawCastePopUp, CountAnts; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0B06",
+          "new": "CurFightPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurFightPlane (evidence/cross_version/data-alignment, tier A): same reference position in DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0B08",
+          "new": "LastQueenPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastQueenPlane (evidence/cross_version/data-alignment, tier A): same reference position in QueenBalloons, DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0B12",
+          "new": "ModePopB",
+          "kind": "recovered",
+          "why": "Win16 symbol _ModePopB (evidence/cross_version/data-alignment, tier A): save record index 92 of 307, same element size and count; same reference position in DrawControlLevels, TallyModePop; 3 shared users among 3 DOS and 4 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0B1E",
+          "new": "MeDis",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeDis (evidence/cross_version/data-alignment, tier A): save record index 193 of 307, same element size and count; same reference position in ResetYellowVars, PickupMyFood; 3 shared users among 3 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0C26",
+          "new": "GameTime",
+          "kind": "recovered",
+          "why": "Win16 symbol _GameTime (evidence/cross_version/data-alignment, tier A): save record index 37 of 307, same element size and count; same reference position in RandYard, DoAntSim; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0C2A",
+          "new": "ModePopR",
+          "kind": "recovered",
+          "why": "Win16 symbol _ModePopR (evidence/cross_version/data-alignment, tier A): save record index 93 of 307, same element size and count; same reference position in TallyModePop; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0C38",
+          "new": "MePrevDis",
+          "kind": "recovered",
+          "why": "Win16 symbol _MePrevDis (evidence/cross_version/data-alignment, tier A): save record index 210 of 307, same element size and count; same reference position in ResetYellowVars, PickupMyFood; 2 shared users among 2 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0C3A",
+          "new": "CurQueenPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurQueenPlane (evidence/cross_version/data-alignment, tier A): same reference position in QueenBalloons, DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0C3E",
+          "new": "MeSteps",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeSteps (evidence/cross_version/data-alignment, tier A): save record index 213 of 307, same element size and count; same reference position in ResetYellowVars, DoAntMoveY; 2 shared users among 2 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0D68",
+          "new": "LastRestPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastRestPlane (evidence/cross_version/data-alignment, tier A): same reference position in RestBalloons, DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0D6C",
+          "new": "MeCrazyCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeCrazyCnt (evidence/cross_version/data-alignment, tier A): save record index 189 of 307, same element size and count; same reference position in ResetYellowVars, SetGoalsY; 2 shared users among 2 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0D70",
+          "new": "CurEditMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurEditMode (evidence/cross_version/data-alignment, tier A): save record index 138 of 307, same element size and count; same reference position in SetEditMode; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0D9A",
+          "new": "CurRestPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurRestPlane (evidence/cross_version/data-alignment, tier A): same reference position in RestBalloons, DrawCurBalloons; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0EAC",
+          "new": "CurGameType",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurGameType (evidence/cross_version/data-alignment, tier A): save record index 141 of 307, same element size and count; same reference position in MapToolsMenu, EditToolsMenu and 19 more function pairs; 22 shared users among 25 DOS and 24 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0EF6",
+          "new": "EggBalloonCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _EggBalloonCnt (evidence/cross_version/data-alignment, tier A): same reference position in EggBalloons, DoAntSim; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0EFC",
+          "new": "BAntsKilled",
+          "kind": "recovered",
+          "why": "Win16 symbol _BAntsKilled (evidence/cross_version/data-alignment, tier A): save record index 32 of 307, same element size and count; same reference position in YellowDeath, ClearHistory and 2 more function pairs; used by the same 4 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F06",
+          "new": "FightBalloonCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _FightBalloonCnt (evidence/cross_version/data-alignment, tier A): same reference position in DrawCurBalloons; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F0C",
+          "new": "SpidOn",
+          "kind": "recovered",
+          "why": "Win16 symbol _SpidOn (evidence/cross_version/data-alignment, tier A): save record index 256 of 307, same element size and count; same reference position in GotoSpider, PreDrawSpider and 3 more function pairs; 5 shared users among 5 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F0E",
+          "new": "RebornX",
+          "kind": "recovered",
+          "why": "Win16 symbol _RebornX (evidence/cross_version/data-alignment, tier A): save record index 239 of 307, same element size and count; same reference position in InitYelloAnt, PlaceBlackQueen and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F10",
+          "new": "QueenBalloonCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenBalloonCnt (evidence/cross_version/data-alignment, tier A): same reference position in QueenBalloons, DrawCurBalloons and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F12",
+          "new": "SpidX",
+          "kind": "recovered",
+          "why": "Win16 symbol _SpidX (evidence/cross_version/data-alignment, tier A): save record index 258 of 307, same element size and count; same reference position in SimKidInside, ExpKillAnts and 10 more function pairs; used by the same 14 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F26",
+          "new": "RebornY",
+          "kind": "recovered",
+          "why": "Win16 symbol _RebornY (evidence/cross_version/data-alignment, tier A): save record index 240 of 307, same element size and count; same reference position in InitYelloAnt, YellowDeath; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F2E",
+          "new": "RestBalloonCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _RestBalloonCnt (evidence/cross_version/data-alignment, tier A): same reference position in RestBalloons, DrawCurBalloons and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F30",
+          "new": "BAntsExpired",
+          "kind": "recovered",
+          "why": "Win16 symbol _BAntsExpired (evidence/cross_version/data-alignment, tier A): save record index 31 of 307, same element size and count; same reference position in YellowDeath, ClearHistory and 3 more function pairs; 5 shared users among 5 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F34",
+          "new": "SpidY",
+          "kind": "recovered",
+          "why": "Win16 symbol _SpidY (evidence/cross_version/data-alignment, tier A): save record index 259 of 307, same element size and count; same reference position in SimKidInside, ExpKillAnts and 10 more function pairs; used by the same 14 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F36",
+          "new": "hScrollMax",
+          "kind": "recovered",
+          "why": "Win16 symbol _hScrollMax (evidence/cross_version/data-alignment, tier A): same reference position in SetMapPlaneLocation, SetMapPlane; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F3E",
+          "new": "RAntsKilled",
+          "kind": "recovered",
+          "why": "Win16 symbol _RAntsKilled (evidence/cross_version/data-alignment, tier A): save record index 41 of 307, same element size and count; same reference position in ClearHistory, GetWinner; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0F44",
+          "new": "YellowDied",
+          "kind": "recovered",
+          "why": "Win16 symbol _YellowDied (evidence/cross_version/data-alignment, tier A): save record index 286 of 307, same element size and count; same reference position in processEdit; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_0FB6",
+          "new": "EditColumns",
+          "kind": "recovered",
+          "why": "Win16 symbol _EditColumns (evidence/cross_version/data-alignment, tier A): same reference position in RandWorld, SetAlarmDropState and 2 more function pairs; 4 shared users among 4 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0FBA",
+          "new": "MeWarnHealth",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeWarnHealth (evidence/cross_version/data-alignment, tier A): save record index 220 of 307, same element size and count; same reference position in DoHealthSetY, InitSimVars and 2 more function pairs; 5 shared users among 5 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0FBC",
+          "new": "RAntsExpired",
+          "kind": "recovered",
+          "why": "Win16 symbol _RAntsExpired (evidence/cross_version/data-alignment, tier A): save record index 40 of 307, same element size and count; same reference position in ClearHistory, DoNestAntR and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_0FC2",
+          "new": "TotalEggsLaidB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TotalEggsLaidB (evidence/cross_version/data-alignment, tier A): save record index 47 of 307, same element size and count; same reference position in CalcScore, ClearHistory; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_0FFA",
+          "new": "EditRows",
+          "kind": "recovered",
+          "why": "Win16 symbol _EditRows (evidence/cross_version/data-alignment, tier A): same reference position in RandWorld, SetAlarmDropState and 2 more function pairs; 4 shared users among 4 DOS and 6 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_0FFE",
+          "new": "BlkWarnHealth",
+          "kind": "recovered",
+          "why": "Win16 symbol _BlkWarnHealth (evidence/cross_version/data-alignment, tier A): save record index 113 of 307, same element size and count; same reference position in DoWarnSetB, InitSimVars and 1 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_1000",
+          "new": "TotalEggsDiedB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TotalEggsDiedB (evidence/cross_version/data-alignment, tier A): save record index 46 of 307, same element size and count; same reference position in CalcScore, ClearHistory; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_1004",
+          "new": "SpidDir",
+          "kind": "recovered",
+          "why": "Win16 symbol _SpidDir (evidence/cross_version/data-alignment, tier A): save record index 255 of 307, same element size and count; same reference position in InitSpider, MoveSpider and 1 more function pairs; used by the same 5 function pairs."
+        },
+        {
+          "old": "fd_50F6_1006",
+          "new": "MeHealthCntDwn",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeHealthCntDwn (evidence/cross_version/data-alignment, tier A): save record index 201 of 307, same element size and count; same reference position in DoAntSimY, SetMyHealth; 2 shared users among 2 DOS and 4 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_103C",
+          "new": "SwarmCentX",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmCentX (evidence/cross_version/data-alignment, tier A): save record index 266 of 307, same element size and count; same reference position in DrawSwarm; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_1040",
+          "new": "FoodA",
+          "kind": "recovered",
+          "why": "Win16 symbol _FoodA (evidence/cross_version/data-alignment, tier A): save record index 157 of 307, same element size and count; same reference position in RandWorld, AddFood and 5 more function pairs; 9 shared users among 9 DOS and 11 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_1044",
+          "new": "MeWantFood",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeWantFood (evidence/cross_version/data-alignment, tier A): save record index 300 of 307, same element size and count; same reference position in DoRandAntA, DoToNestAnt and 4 more function pairs; 6 shared users among 6 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_1048",
+          "new": "SwarmCentY",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmCentY (evidence/cross_version/data-alignment, tier A): save record index 267 of 307, same element size and count; same reference position in DrawSwarm; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_104E",
+          "new": "MeDropAlarm",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeDropAlarm (evidence/cross_version/data-alignment, tier A): save record index 298 of 307, same element size and count; same reference position in InitYelloAnt, YellowDeath and 3 more function pairs; used by the same 6 function pairs."
+        },
+        {
+          "old": "fd_50F6_1058",
+          "new": "MeStartedFight",
+          "kind": "recovered",
+          "why": "Win16 symbol _MeStartedFight (evidence/cross_version/data-alignment, tier A): save record index 299 of 307, same element size and count; same reference position in YellowDeath, DoAntMoveY; used by the same 2 function pairs."
+        },
+        {
+          "old": "fd_50F6_105E",
+          "new": "CurGameTool",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurGameTool (evidence/cross_version/data-alignment, tier A): save record index 140 of 307, same element size and count; same reference position in RandYard, SetPause and 7 more function pairs; 10 shared users among 11 DOS and 13 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_1068",
+          "new": "TileTotXB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileTotXB (evidence/cross_version/data-alignment, tier A): save record index 42 of 307, same element size and count; same reference position in RandWorld, FillDirtB and 2 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_1074",
+          "new": "LessonTemp",
+          "kind": "recovered",
+          "why": "Win16 symbol _LessonTemp (evidence/cross_version/data-alignment, tier A): save record index 178 of 307, same element size and count; same reference position in ProcMapEvent, GotoMyAnt and 2 more function pairs; used by the same 7 function pairs."
+        },
+        {
+          "old": "fd_50F6_1082",
+          "new": "TileTotYB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileTotYB (evidence/cross_version/data-alignment, tier A): save record index 44 of 307, same element size and count; same reference position in RandWorld, FillDirtB and 2 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_108C",
+          "new": "BirdFrame",
+          "kind": "recovered",
+          "why": "Win16 symbol _BirdFrame (evidence/cross_version/data-alignment, tier A): save record index 105 of 307, same element size and count; same reference position in DrawSimBird; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_108E",
+          "new": "TileTotXR",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileTotXR (evidence/cross_version/data-alignment, tier A): save record index 43 of 307, same element size and count; same reference position in RandWorld, FillDirtR and 2 more function pairs; 4 shared users among 4 DOS and 9 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_109C",
+          "new": "BoyMsgCnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyMsgCnt (evidence/cross_version/data-alignment, tier A): save record index 34 of 307, same element size and count; same reference position in DrawSimKid; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_10A0",
+          "new": "BirdOn",
+          "kind": "recovered",
+          "why": "Win16 symbol _BirdOn (evidence/cross_version/data-alignment, tier A): save record index 108 of 307, same element size and count; used by the same 1 function pairs."
+        },
+        {
+          "old": "fd_50F6_10A2",
+          "new": "TileTotYR",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileTotYR (evidence/cross_version/data-alignment, tier A): save record index 45 of 307, same element size and count; same reference position in RandWorld, FillDirtR and 2 more function pairs; 4 shared users among 4 DOS and 9 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_10A6",
+          "new": "StrategicModeR",
+          "kind": "recovered",
+          "why": "Win16 symbol _StrategicModeR (evidence/cross_version/data-alignment, tier A): save record index 263 of 307, same element size and count; same reference position in SimEggR, GetStrategy and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_10A8",
+          "new": "BoyMsgs",
+          "kind": "recovered",
+          "why": "Win16 symbol _BoyMsgs (evidence/cross_version/data-alignment, tier A): same reference position in DrawSimKid, PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_10AC",
+          "new": "BirdX",
+          "kind": "recovered",
+          "why": "Win16 symbol _BirdX (evidence/cross_version/data-alignment, tier A): save record index 109 of 307, same element size and count; same reference position in DrawSimBird; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_10B2",
+          "new": "TileMassXB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileMassXB (evidence/cross_version/data-alignment, tier A): save record index 273 of 307, same element size and count; same reference position in RandWorld, DigTileB and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_10B8",
+          "new": "TutHowLong",
+          "kind": "recovered",
+          "why": "Win16 symbol _TutHowLong (evidence/cross_version/data-alignment, tier A): save record index 280 of 307, same element size and count; same reference position in RunTutor; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_10BA",
+          "new": "BirdY",
+          "kind": "recovered",
+          "why": "Win16 symbol _BirdY (evidence/cross_version/data-alignment, tier A): save record index 110 of 307, same element size and count; same reference position in DrawSimBird; 1 shared users among 1 DOS and 2 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_10C0",
+          "new": "TileMassYB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TileMassYB (evidence/cross_version/data-alignment, tier A): save record index 275 of 307, same element size and count; same reference position in RandWorld, DigTileB and 1 more function pairs; used by the same 3 function pairs."
+        },
+        {
+          "old": "fd_50F6_110C",
+          "new": "editTileRect",
+          "kind": "recovered",
+          "why": "Win16 symbol _editTileRect (evidence/cross_version/data-alignment, tier A): same reference position in processEdit; used by the same 7 function pairs."
+        },
+        {
+          "old": "fd_50F6_3856",
+          "new": "mapXsize",
+          "kind": "recovered",
+          "why": "Win16 symbol _mapXsize (evidence/cross_version/data-alignment, tier A): same reference position in DrawMapCursor; 5 shared users among 5 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_3858",
+          "new": "mapYsize",
+          "kind": "recovered",
+          "why": "Win16 symbol _mapYsize (evidence/cross_version/data-alignment, tier A): same reference position in DrawMapCursor; 5 shared users among 5 DOS and 8 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_38C2",
+          "new": "mapCursorRect",
+          "kind": "recovered",
+          "why": "Win16 symbol _mapCursorRect (evidence/cross_version/data-alignment, tier A): same reference position in DrawMapCursor, EraseMapCursor; 2 shared users among 2 DOS and 3 Win16 function pairs."
+        },
+        {
+          "old": "fd_50F6_3958",
+          "new": "openDBData",
+          "kind": "recovered",
+          "why": "Win16 symbol _openDBData (evidence/cross_version/data-alignment, tier A): 2 member references imply the same object base; both boundary distances are 496 bytes."
+        },
+        {
+          "old": "fd_55B3_19BE",
+          "new": "tileWidth",
+          "kind": "recovered",
+          "why": "Win16 symbol _tileWidth (evidence/cross_version/data-alignment, tier A): same reference position in processEdit, PreDrawSpider; spacing to mapped neighboring objects agrees; 9 shared users among 10 DOS and 11 Win16 function pairs."
+        },
+        {
+          "old": "fd_55B3_19C0",
+          "new": "tileHeight",
+          "kind": "recovered",
+          "why": "Win16 symbol _tileHeight (evidence/cross_version/data-alignment, tier A): same reference position in processEdit, processExp and 1 more function pairs; spacing to mapped neighboring objects agrees; 9 shared users among 10 DOS and 11 Win16 function pairs."
+        },
+        {
+          "old": "g_3DE0",
+          "new": "_foreColor",
+          "kind": "recovered",
+          "why": "Win16 symbol __foreColor (evidence/cross_version/data-alignment, tier A): same reference position in DrawCastePopUp, win_RectVOutline and 3 more function pairs; 7 shared users among 10 DOS and 8 Win16 function pairs."
+        }
+      ],
+      "note": "Lexical identifier rename; semantic review unchanged.",
+      "prior_receipt_sha256": "26e8a7ed354c16d947fe1290a4f0031c776307e97651f6b61f020dc192394765"
+    }
+  ]
 }

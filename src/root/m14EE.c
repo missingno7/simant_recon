@@ -8,27 +8,27 @@ extern int far IsItDigable(int colony, int x, int y);
 extern int far TERRAINset;
 extern unsigned char far MapA[128][64];
 extern unsigned char far HoleMapB[];
-extern int far fd_3D57_02AC[2];
-extern int far fd_3D57_02A4[2];
+extern int far LastNewHoleB[2];
+extern int far LastNewExitB[2];
 extern unsigned char far HoleMapR[];
-extern int far fd_3D57_02B0[2];
-extern int far fd_3D57_02A8[2];
+extern int far LastNewHoleR[2];
+extern int far LastNewExitR[2];
 extern unsigned char far MapB[64][64];
 extern unsigned char far MapR[64][64];
 extern char far Dy8[8];
 extern char far Dx8[8];
 unsigned char g_1BB2[8] = { 0x19, 0x1A, 0x1C, 0x1F, 0x1E, 0x1D, 0x1B, 0x18 };
 extern int far IsItDirt(int value);
-extern long far fd_50F6_1068;
-extern long far fd_50F6_1082;
-extern int far fd_50F6_0224;
-extern int far fd_50F6_10B2;
-extern int far fd_50F6_10C0;
-extern long far fd_50F6_108E;
-extern long far fd_50F6_10A2;
+extern long far TileTotXB;
+extern long far TileTotYB;
+extern int far TilesDugB;
+extern int far TileMassXB;
+extern int far TileMassYB;
+extern long far TileTotXR;
+extern long far TileTotYR;
 extern int far TilesDugR;
-extern int far fd_50F6_0200;
-extern int far fd_50F6_020E;
+extern int far TileMassXR;
+extern int far TileMassYR;
 extern unsigned char far ExitMapB[64][64];
 extern unsigned char far ExitMapR[64][64];
 
@@ -42,8 +42,8 @@ void far DigTileR(int x, int y);
 void far SmoothEdgesB(int x, int y);
 void far SmoothEdgesR(int x, int y);
 int far RIsItDirt(int v);
-void far f_14EE_0C9C(int x, int y);
-void far f_14EE_0D71(int x, int y);
+void far FixExitMapB(int x, int y);
+void far FixExitMapR(int x, int y);
 
 int far DigMyNewHole(int x, int y)
 {
@@ -76,17 +76,17 @@ void far CreateNewHole(int x, int y)
     if (x < 0x40) {
         HoleMapB[y] = x;
         DigTileB(y, 1);
-        fd_3D57_02AC[0] = x;
-        fd_3D57_02AC[1] = y;
-        fd_3D57_02A4[0] = y;
-        fd_3D57_02A4[1] = 0;
+        LastNewHoleB[0] = x;
+        LastNewHoleB[1] = y;
+        LastNewExitB[0] = y;
+        LastNewExitB[1] = 0;
     } else {
         HoleMapR[y] = x;
         DigTileR(y, 1);
-        fd_3D57_02B0[0] = x;
-        fd_3D57_02B0[1] = y;
-        fd_3D57_02A8[0] = y;
-        fd_3D57_02A8[1] = 0;
+        LastNewHoleR[0] = x;
+        LastNewHoleR[1] = y;
+        LastNewExitR[0] = y;
+        LastNewExitR[1] = 0;
     }
 }
 
@@ -127,10 +127,10 @@ void far MakeNewHoleB(int x)
             v = CanBeHouseHole(MapA[y][x]);
             if (v) {
                 MapA[y][x] = v;
-                fd_3D57_02AC[0] = y;
-                fd_3D57_02AC[1] = x;
-                fd_3D57_02A4[0] = x;
-                fd_3D57_02A4[1] = 0;
+                LastNewHoleB[0] = y;
+                LastNewHoleB[1] = x;
+                LastNewExitB[0] = x;
+                LastNewExitB[1] = 0;
                 break;
             }
         }
@@ -141,10 +141,10 @@ void far MakeNewHoleB(int x)
             y = (i + start) % 32 + 2;
             if (IsClear3x3(1, y, x)) {
                 MapA[y][x] = 0x50;
-                fd_3D57_02AC[0] = y;
-                fd_3D57_02AC[1] = x;
-                fd_3D57_02A4[0] = x;
-                fd_3D57_02A4[1] = 0;
+                LastNewHoleB[0] = y;
+                LastNewHoleB[1] = x;
+                LastNewExitB[0] = x;
+                LastNewExitB[1] = 0;
                 HoleBorder(y, x);
                 break;
             }
@@ -189,10 +189,10 @@ void far MakeNewHoleR(int x)
             v = CanBeHouseHole(MapA[y][x]);
             if (v) {
                 MapA[y][x] = v;
-                fd_3D57_02B0[0] = y;
-                fd_3D57_02B0[1] = x;
-                fd_3D57_02A8[0] = x;
-                fd_3D57_02A8[1] = 0;
+                LastNewHoleR[0] = y;
+                LastNewHoleR[1] = x;
+                LastNewExitR[0] = x;
+                LastNewExitR[1] = 0;
                 break;
             }
         }
@@ -203,10 +203,10 @@ void far MakeNewHoleR(int x)
             y = 0x7e - (i + start) % 32;
             if (IsClear3x3(1, y, x)) {
                 MapA[y][x] = 0x50;
-                fd_3D57_02B0[0] = y;
-                fd_3D57_02B0[1] = x;
-                fd_3D57_02A8[0] = x;
-                fd_3D57_02A8[1] = 0;
+                LastNewHoleR[0] = y;
+                LastNewHoleR[1] = x;
+                LastNewExitR[0] = x;
+                LastNewExitR[1] = 0;
                 HoleBorder(y, x);
                 break;
             }
@@ -238,12 +238,12 @@ void far DigTileB(int x, int y)
 {
     if (IsItDirt(MapB[x][y])) {
         MapB[x][y] = SRand8();
-        fd_50F6_1068 += x;
-        fd_50F6_1082 += y;
-        fd_50F6_0224++;
-        if (fd_50F6_0224 > 0) {
-            fd_50F6_10B2 = fd_50F6_1068 / fd_50F6_0224;
-            fd_50F6_10C0 = fd_50F6_1082 / fd_50F6_0224;
+        TileTotXB += x;
+        TileTotYB += y;
+        TilesDugB++;
+        if (TilesDugB > 0) {
+            TileMassXB = TileTotXB / TilesDugB;
+            TileMassYB = TileTotYB / TilesDugB;
         }
         if (y > 0x35 && SRand1(64) == 0) {
             MapB[x][y] = 0x14;
@@ -255,26 +255,26 @@ void far DigTileB(int x, int y)
     SmoothEdgesB(x + 1, y);
     SmoothEdgesB(x, y + 1);
     SmoothEdgesB(x - 1, y);
-    f_14EE_0C9C(x, y);
+    FixExitMapB(x, y);
 }
 
 void far DigTileR(int x, int y)
 {
     if (IsItDirt(MapR[x][y])) {
         MapR[x][y] = SRand8();
-        fd_50F6_108E += x;
-        fd_50F6_10A2 += y;
+        TileTotXR += x;
+        TileTotYR += y;
         TilesDugR++;
         if (TilesDugR > 0) {
-            fd_50F6_0200 = fd_50F6_108E / TilesDugR;
-            fd_50F6_020E = fd_50F6_10A2 / TilesDugR;
+            TileMassXR = TileTotXR / TilesDugR;
+            TileMassYR = TileTotYR / TilesDugR;
         }
     }
     SmoothEdgesR(x, y - 1);
     SmoothEdgesR(x + 1, y);
     SmoothEdgesR(x, y + 1);
     SmoothEdgesR(x - 1, y);
-    f_14EE_0D71(x, y);
+    FixExitMapR(x, y);
 }
 
 int far DigTileThemB(int x, int y)
@@ -290,18 +290,18 @@ int far DigTileThemB(int x, int y)
         MakeNewHoleB(x);
     } else
         MapB[x][y] = SRand8();
-    fd_50F6_1068 += x;
-    fd_50F6_1082 += y;
-    fd_50F6_0224++;
-    if (fd_50F6_0224 > 0) {
-        fd_50F6_10B2 = fd_50F6_1068 / fd_50F6_0224;
-        fd_50F6_10C0 = fd_50F6_1082 / fd_50F6_0224;
+    TileTotXB += x;
+    TileTotYB += y;
+    TilesDugB++;
+    if (TilesDugB > 0) {
+        TileMassXB = TileTotXB / TilesDugB;
+        TileMassYB = TileTotYB / TilesDugB;
     }
     SmoothEdgesB(x, y - 1);
     SmoothEdgesB(x + 1, y);
     SmoothEdgesB(x, y + 1);
     SmoothEdgesB(x - 1, y);
-    f_14EE_0C9C(x, y);
+    FixExitMapB(x, y);
     return 1;
 }
 
@@ -324,18 +324,18 @@ int far DigTileThemR(int x, int y)
         MakeNewHoleR(x);
     } else
         MapR[x][y] = SRand8();
-    fd_50F6_108E += x;
-    fd_50F6_10A2 += y;
+    TileTotXR += x;
+    TileTotYR += y;
     TilesDugR++;
     if (TilesDugR > 0) {
-        fd_50F6_0200 = fd_50F6_108E / TilesDugR;
-        fd_50F6_020E = fd_50F6_10A2 / TilesDugR;
+        TileMassXR = TileTotXR / TilesDugR;
+        TileMassYR = TileTotYR / TilesDugR;
     }
     SmoothEdgesR(x, y - 1);
     SmoothEdgesR(x + 1, y);
     SmoothEdgesR(x, y + 1);
     SmoothEdgesR(x - 1, y);
-    f_14EE_0D71(x, y);
+    FixExitMapR(x, y);
     return 1;
 }
 
@@ -437,7 +437,7 @@ void far SmoothEdgesR(int x, int y)
 
 
 /* autosearch: exact after rules CSE-INLINE, STMT-SWAP */
-void far f_14EE_0C9C(int x, int y)
+void far FixExitMapB(int x, int y)
 {
     int i;
     int nx;
@@ -467,7 +467,7 @@ void far f_14EE_0C9C(int x, int y)
 }
 
 /* autosearch: exact after rules CSE-INLINE, STMT-SWAP */
-void far f_14EE_0D71(int x, int y)
+void far FixExitMapR(int x, int y)
 {
     int i;
     int nx;

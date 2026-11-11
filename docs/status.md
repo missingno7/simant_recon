@@ -12,13 +12,13 @@ Last gate result: **PASS** (2026-11-11).
 
 | Item | State | Open |
 | --- | --- | --- |
-| 1. Code exact | 1,620 of 1,640 game functions | 20 functions, 10,878 bytes; 25 of 122 code modules are not yet complete translation units |
-| 2. No unexplained steering | 26 exact functions depend on a steering construct | 14,832 bytes |
+| 1. Code exact | 1,623 of 1,640 game functions | 17 functions, 8,123 bytes; 25 of 122 code modules are not yet complete translation units |
+| 2. No unexplained steering | 28 exact functions depend on a steering construct | 15,828 bytes |
 | 3. Data: one owner, type, size | 113,838 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 175 bytes unresolved |
 | 4. Layout assumptions explained | 78 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 19 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 683 C and 11 assembly named; data: 135 named | 570 C and 356 assembly functions and 840 data objects keep address-based identifiers; 164 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 769 C and 18 assembly named; data: 428 named | 487 C and 349 assembly functions and 547 data objects keep address-based identifiers; 71 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -39,17 +39,14 @@ Last gate result: **PASS** (2026-11-11).
 
 | Module | Function | Bytes |
 | --- | --- | ---: |
-| `S10:35F5` | `o10_35F5_0384` | 1759 |
 | `S12:384C` | `DrawMapCursor` | 205 |
 | `S13:384C` | `InvertPatch` | 261 |
 | `S15:384C` | `o15_384C_0239` | 326 |
 | `S23:39C7` | `DisplayCard` | 1457 |
-| `S24:39C7` | `drawHistGraph` | 732 |
-| `S25:3BA4` | `o25_3BA4_1035` | 281 |
-| `S25:3BA4` | `o25_3BA4_1686` | 516 |
+| `S25:3BA4` | `EnterNest` | 281 |
+| `S25:3BA4` | `GetMyRandDirs` | 516 |
 | `root:0250` | `DrawBalloons` | 1060 |
 | `root:0250` | `f_0250_1018` | 646 |
-| `root:0250` | `f_0250_129E` | 264 |
 | `root:0E2E` | `LessonDone` | 723 |
 | `root:171C` | `f_171C_09CC` | 144 |
 | `root:171C` | `f_171C_0CF4` | 490 |
@@ -67,29 +64,31 @@ They stay here until a natural spelling replaces it.
 
 | Module | Function | Bytes | Construct |
 | --- | --- | ---: | --- |
-| `S06:35F5` | `o06_35F5_1E54` | 1216 | record order only: the nested 'if (fd_50F6_0EAC == 2) if (x < 2 ...)' test adds one /Zi line entry so the 52-entry LINNUM flush falls in 229F..2309; the cumulative count also depends on the SimKidInside scaffold draft's line count (bytes are natural: r reused for the population clamps, b loaded before r) |
+| `S06:35F5` | `SimColonies` | 1216 | record order only: the nested 'if (CurGameType == 2) if (x < 2 ...)' test adds one /Zi line entry so the 52-entry LINNUM flush falls in 229F..2309; the cumulative count also depends on the SimKidInside scaffold draft's line count (bytes are natural: r reused for the population clamps, b loaded before r) |
 | `S08:35F5` | `RandWorld` | 1355 | RandWorld=ZERO-1: folded unsigned seed < 0 supplies the original AX-to-DI zero initialization; its eliminated original expression is unknown |
 | `S09:35F5` | `o09_35F5_03C6` | 2405 | USE-2: folded unsigned path/save/index reads; original eliminated expressions unknown. |
 | `S16:384C` | `AboutDialog` | 657 | declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S16:384C` | `DrawSimPayoff` | 481 | declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S16:384C` | `ShowIntro` | 625 | declaration count: module header prototypes (LoadMonoPats, o15_384C_0152 with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
+| `S24:39C7` | `drawHistGraph` | 732 | drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown |
+| `S25:3BA4` | `AnimYellowFight` | 616 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight (SRand2 sites 0AB8/0AEF in separate records) |
+| `S25:3BA4` | `AnimYellowInsane` | 506 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
 | `S25:3BA4` | `DoAntMoveY` | 1990 | USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown |
-| `S25:3BA4` | `DoAntSimY` | 459 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 (SRand2 sites 0AB8/0AEF in separate records) |
-| `S25:3BA4` | `ExitNest` | 605 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_0999` | 616 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 (SRand2 sites 0AB8/0AEF in separate records) |
-| `S25:3BA4` | `o25_3BA4_0C01` | 506 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_0DFB` | 570 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_13AB` | 470 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_1581` | 261 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_188A` | 171 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_1935` | 120 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_19AD` | 96 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
-| `S25:3BA4` | `o25_3BA4_1A0D` | 146 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 |
+| `S25:3BA4` | `DoAntSimY` | 459 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight (SRand2 sites 0AB8/0AEF in separate records) |
+| `S25:3BA4` | `ExitNest` | 605 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `GetMyBestDirs` | 261 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `YellowFight` | 570 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `o25_3BA4_13AB` | 470 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `o25_3BA4_188A` | 171 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `o25_3BA4_1935` | 120 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `o25_3BA4_19AD` | 96 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `o25_3BA4_1A0D` | 146 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `root:0250` | `f_0250_129E` | 264 | f_0250_129E=a point local of which only y is read keeps two frame words, and copying y through the later index variable selects the early DI load; the original locals are unknown |
 | `root:0798` | `GetTriLatDist` | 294 | three unused locals x, y, j in DrawControlLevels -> identifier count before GetTriLatDist (+5..7 mod 17 after DrawControlLevels selects the dx-w CSE/operand order) |
 | `root:0CDB` | `SpiderScan` | 392 | SpiderScan=two constructs with no other reason: a local aggregate holding the scan state (keeps the initial radius store and the frame homes) and a folded unsigned x check (selects SI/DI for x and y); the original declarations and the eliminated expression are unknown |
-| `root:171C` | `f_171C_15A2` | 228 | volatile int type in f_171C_15A2 -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX |
+| `root:171C` | `RallocSetType` | 228 | volatile int type in RallocSetType -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX |
 | `root:1986` | `FindIndex` | 267 | FindIndex=block layout only: goto into the else block reproduces the original order of the two search branches; the original control structure is unknown |
-| `root:2505` | `f_2505_04D7` | 58 | identifier count only: named temporaries windowIndex/result (with the unnamed f_2505_0453 forward prototype) keep the original code of every later function; the original identifiers are unknown |
+| `root:2505` | `win_GetArg` | 58 | identifier count only: named temporaries windowIndex/result (with the unnamed win_GetVal forward prototype) keep the original code of every later function; the original identifiers are unknown |
 | `root:2662` | `hanim_SetObjectPos` | 598 | named redeclarations of f_2662_0348 and f_2662_059C before f_2662_090D -> identifier count (+7 mod 17) selecting 090D's operand order; 090D's reinsert flag is only read in a constant-folded test (keeps the dead store and frees DI) |
 | `root:293A` | `f_293A_017F` | 171 | LIFE-1: folded unsigned success-flag check retains lifetime through the retry loop; eliminated original expression unknown |
 | `root:295C` | `f_295C_0391` | 75 | CSE-1: folded unsigned-byte c3 >= 0 check retains the byte CSE temporary and index spill; the eliminated original expression is unknown |
@@ -195,7 +194,7 @@ use, not original sizes.
 
 ## Relocation order still unproven
 
-`SimKidInside`, `o06_35F5_14CC`, `o06_35F5_1803`, `o06_35F5_1E54`, `RandWorld`, `win_GetStyleTextHeight`, `ExitNest`, `o25_3BA4_0999`, `o25_3BA4_0C01`, `o25_3BA4_13AB`, `o25_3BA4_1581`, `DrawCurBalloons`, `f_0250_5058`, `f_171C_0A5C`, `f_171C_125C`, `f_171C_15A2`, `f_171C_1FC2`, `clip_Push`, `clip_SubExclude`
+`SimCat`, `SimColonies`, `SimDog`, `SimKidInside`, `RandWorld`, `win_GetStyleTextHeight`, `AnimYellowFight`, `AnimYellowInsane`, `ExitNest`, `GetMyBestDirs`, `o25_3BA4_13AB`, `DrawCurBalloons`, `DrawEditGraphs`, `RallocSetType`, `f_171C_0A5C`, `f_171C_125C`, `f_171C_1FC2`, `clip_Push`, `clip_SubExclude`
 
 ## Upper layers
 

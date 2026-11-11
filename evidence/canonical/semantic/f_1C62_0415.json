@@ -3,7 +3,7 @@
   "function": "f_1C62_0415",
   "module": "root:1C62",
   "status": "BEHAVIOR_EXACT_CONFIRMED",
-  "definition_sha256": "6cd5c6dab7579f167f2f04a0fcee8d33d2d186cfc7c939dd9c7e39ff131e6e91",
+  "definition_sha256": "b2fefbae69510b81474bd119086ad89757ac5e76c1ad5e2654c86965a09befbb",
   "historical_review": {
     "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
     "path": "work/source-only-dos/static-completeness/f_1C62_0415.json",
@@ -694,5 +694,577 @@
     "codegen_only_residue": true,
     "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
   },
-  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt."
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt.",
+  "renamed": [
+    {
+      "renames": [
+        {
+          "old": "f_20E8_0725",
+          "new": "win_ToTop",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_ToTop, reviewed 2026-11-11: Three confirmed caller positions now available: OpenMapYard, ProcMapEvent and SpecialXfer call DOS20E8:0725 at the Win16 win_ToTop slot, supplying the same window id. This supplies the independent graph anchor missing from the older MEDIUM review.; Implementation/stack anchor: DOS compares the requested window with g_5702[0], closes the old top if its auto-close flag1 is set, then win_Open(request"
+        },
+        {
+          "old": "f_2505_03B9",
+          "new": "_win_CalcObjElement",
+          "kind": "recovered",
+          "why": "Win16 symbol __win_CalcObjElement, reviewed 2026-11-11: Corrected family assignment; proposed _win_GetVal is REJECTED. Original switch anchor: DOS03B9 and Win16 __win_CalcObjElement7:E5AE both select obj->kind[axis] at+0x18 with cases0..5: zero; referenced-object coordinate0/1/2/3; window argument. Both preserve0x8000 unresolved, otherwise add obj->offset[axis] at+8. Win16 inlines the two DOS access helpers.; Independent confirmed-caller/return-use anc"
+        },
+        {
+          "old": "f_2505_0453",
+          "new": "win_GetVal",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_GetVal, reviewed 2026-11-11: Corrected family assignment; proposed __win_CalcObjElement is REJECTED. DOS0453 and Win16 win_GetVal7:E4E8 split objectNumber into window=object&0xFF00 and slot=object&0xFF, check window count or window>=0x2800, lock it, bounds-check object count, retrieve objects[slot][index], unlock in both success/failure branches, and return0x8000 if invalid. This is the accessor, not a six-case resolver.; Ind"
+        },
+        {
+          "old": "f_2505_04D7",
+          "new": "win_GetArg",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_GetArg, reviewed 2026-11-11: Body/constant anchor: DOS04D7 and Win16 win_GetArg7:E572 derive windowIndex=win>>8; reject when index>=win_numOfWindows and win<0x2800 with0x8000; otherwise return word at windowRecord+0x10+2*idx. There is no object-list lookup or LockWin, distinguishing this from0453/win_GetVal.; Independent matched-caller role: DOS03B9's kind5 uses04D7(currentWin,obj->argument[axis]); Win16 __win_CalcObjElement7"
+        },
+        {
+          "old": "o09_35F5_0188",
+          "new": "SaveGame",
+          "kind": "recovered",
+          "why": "Win16 symbol _SaveGame, reviewed 2026-09-30: (a) unique string '%s\\nSaved correctly' carried only by DOS 0188 and Win16 _SaveGame; (c) called by LoadGame (CONFIRMED) before FileSelect, and calls FileSelect (03C6) itself, as Win16 SaveGame; runtime sprintf/unlink shared"
+        },
+        {
+          "old": "o12_384C_100A",
+          "new": "DrawMap",
+          "kind": "recovered",
+          "why": "Win16 symbol _DrawMap, reviewed 2026-09-30: body win_IsWinOpen, clip_SetWin, DrawMapData, clip_Off as Win16; callers ReDrawMapEdit, PlaceQueenInYard, and XferPatch at the same call position"
+        },
+        {
+          "old": "o09_35F5_0DBB",
+          "new": "DoLoadInitializations",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoLoadInitializations, reviewed 2026-09-30: (c) callee order OverlayTileSet!, SetMyLife!, FullCount, o15_384C_037F, CenterEdit (f_0250_0FC4), SetDefaultWindPrompt! = Win16 _DoLoadInitializations call_seq (OverlayTileSet, SetMyLife, FullCount, SetDefaultWindows, CenterEdit, UpdateLayQueenModeDisplay, SetDefaultWindPrompt); SetDefaultWindPrompt callers include it on both sides; (c) sole caller LoadGame (CONFIRMED above) on both sides; the Ove"
+        },
+        {
+          "old": "f_1FD2_0135",
+          "new": "SetMenuOptionText",
+          "kind": "recovered",
+          "why": "Win16 symbol _SetMenuOptionText, reviewed 2026-11-11: Confirmed caller SetMenuEntries uses DOS1FD2:0135 and Win16 SetMenuOptionText to replace item0x41 with Pause/Unpause text at the same branch positions; the two arguments are encoded item id and far string pointer.; Independent menu-id/state anchor: DOS decodes id>>4 to choose the menu, low nibble to choose title versus item text and copies the new string into that menu's storage; Win16 SetMenuOpti"
+        },
+        {
+          "old": "f_208F_0419",
+          "new": "gr_BitMapSize",
+          "kind": "recovered",
+          "why": "Win16 symbol _gr_BitMapSize, reviewed 2026-09-30: 7 shared named callers (IBMInitStuff, PictureDialog, hanim_AddAnimObject, hanim_SetObjectPos, initControls, win_AutoSize, win_DrawYardWindow); callee order db_LoadObject, lock, unpack-init, unpack, unlock, db_ReleaseObject as Win16"
+        },
+        {
+          "old": "o06_35F5_0000",
+          "new": "InitSimYard",
+          "kind": "recovered",
+          "why": "Win16 symbol _InitSimYard, reviewed 2026-11-11: Confirmed caller position: RandYard calls S06:0000 at the Win16 InitSimYard position; this is the no-argument reset, before the periodic yard simulation.; Distinctive initializer anchor: both initialize Boy position(0xB4,0x49), turn count12, wait20; Dog position(0xFA,0x96), direction/turn defaults; clear Bird/Cat delays and creature/rain flags, set BirdFrame and LastColonyPopB/R to1, BoyMsgOffset "
+        },
+        {
+          "old": "o06_35F5_0173",
+          "new": "DoSimYard",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoSimYard, reviewed 2026-11-11: Confirmed caller position: DoAntSim invokes DOS S06:0173 at Win16 DoSimYard's slot before DoWater and the ant/creature simulation passes; the already confirmed SimKidInside call is the first dispatch branch.; Independent scheduling constants/control anchor: increments YardCycle and wraps at0x400; NodeNum<0x26 selects inside versus outside kid, then Bird, Cat, Dog only if ForSaleState==0, rain upda"
+        },
+        {
+          "old": "o06_35F5_11FF",
+          "new": "SimBird",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimBird, reviewed 2026-11-11: Confirmed-callee sequence: InvalQueenStorageDisp -> SRand2 -> myBeginSound -> SRand2 -> SRand64 matches SimBird 7:28AA; the queen-storage invalidation is specific among the yard creatures.; Flight/predation anchor: state1 advances x by16 and steers y by4 or1 toward the goal; state2 advances x by8 and y by-8; boundary0x1FF/0xFF despawns, and reaching the goal removes ceil(value/8) from both colonie"
+        },
+        {
+          "old": "o06_35F5_14CC",
+          "new": "SimCat",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimCat, reviewed 2026-11-11: Confirmed-callee order: SRand16 -> SRand64 -> myBeginSound -> SRand16 -> GetDis -> MacTickCount three times -> SRand16 matches SimCat 7:2B24, independently of the newly reviewed yard dispatcher.; Distinctive constants/state anchor: Cat movement uses Dx8/Dy8*4 with x bounds0xFC..0x1EF; CatCycle>50 and distance<=0x960 enters state3/frame20; states1/2 animate direction2/6 and frames1..2/4..5 or11..12"
+        },
+        {
+          "old": "o06_35F5_1803",
+          "new": "SimDog",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimDog, reviewed 2026-11-11: Confirmed-random-call anchor: SimDog original card 7:2DBC has SRand1(3) for a four-direction turn, then SRand1(10), SRand2()+4, and finally SRand1(6)/SRand4 for frames100..103. DOS 1803 has the same sequence with the steering/sound helpers factored out.; Independent coordinate/state anchor: dog frame combines dogD[dir] with cycle&1 or dogC[cycle&3]; updates DogY and computes (DogY-38)/10, then Dog"
+        },
+        {
+          "old": "o06_35F5_1E54",
+          "new": "SimColonies",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimColonies, reviewed 2026-11-11: Rare resource constants: both contain song IDs0x4E22/0x4E23/0x4E25 and dialog IDs0x2744/45/46/47/49 in the colony outcome paths, not an incidental address constant (DOS1E54; Win16 SimColonies7:35F8).; Independent confirmed-callee order: SRand1/SRand8 swarm handling -> myBeginSong/PictStrnDialog outcome pairs -> DrawSimPayoff -> final PictStrnDialog. DOS traverses the12x16 black/red population grid"
+        },
+        {
+          "old": "o12_384C_12D3",
+          "new": "MapToYellowAnt",
+          "kind": "recovered",
+          "why": "Win16 symbol _MapToYellowAnt, reviewed 2026-11-11: Confirmed-callee sequence: win_GetObjRect -> AddSomeAnts -> AddFood -> GotoMyAnt matches MapToYellowAnt3:D40A; the DOS-only Alt branches additionally kill ants or subtract food.; Modifier/argument anchor: Ctrl+Shift gets object0x110's Rect and chooses ant side by event.x versus (left+right)/2; Ctrl alone AddFood(0x96,1); no Ctrl GotoMyAnt(). Win16 uses GetAsyncKeyState(VK_CONTROL/VK_SHIFT) for the"
+        },
+        {
+          "old": "o19_384C_0000",
+          "new": "DoEvent",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoEvent, reviewed 2026-11-11: Ordered confirmed-callee anchor: ProcEditEvent -> ProcMapEvent -> ProcInfoEvent -> ProcModeEvent -> ProcCasteEvent -> ProcHistoryEvent -> ProcYardEvent, matching the central game event dispatcher Win16 DoEvent1:0BC2; the seven distinct handlers agree, not just generic window helpers.; Event-domain anchor: DOS dispatches ev.code&0xFF00 to0/0x100/0x500/0x1200/0x1300/0x1500/0x1900 for those handlers;"
+        },
+        {
+          "old": "o25_39C7_0000",
+          "new": "DoAntSimB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoAntSimB, reviewed 2026-11-11: Confirmed caller position: DoAntSim calls DOS S25:0000 between DoAntSimA and already confirmed DoAntSimR, matching the Win16 DoAntSimB position. This separates the black list traversal from the red and yellow passes.; Traversal/data anchor: initializes shared index from ListIndexB, counts downward, reads B-list x,y&0xFF,attribute and dispatches nonzero attributes to the black nest dispatcher (x,y,"
+        },
+        {
+          "old": "o25_39C7_006D",
+          "new": "DoNestAntB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoNestAntB, reviewed 2026-11-11: Switch anchor: both original feature tables show an 18-entry task switch. DOS decodes caste=(attr&0x78)>>3 and BlistM[Tindex], dispatching task 1 DoNestingB, 3 DoFoodInB, 4 DoDigInB, 8 SimEggB, 9 SimQueenB, 10 DoNestFightB, with the same black-nest dispatcher in Win16 6:2DAE (its larger body inlines several DOS helpers).; Independent confirmed-callee chain: SRand256 -> SRand32 before black task di"
+        },
+        {
+          "old": "o25_39C7_038F",
+          "new": "RaidInB",
+          "kind": "recovered",
+          "why": "Win16 symbol _RaidInB, reviewed 2026-11-11: Confirmed-callee alignment: both call SRand1(3), attempt movement, then GetEnterDirB(x,y,dirHint&7), optionally SRand1(8), and try movement again (Win16 RaidInB 6:3524). GetEnterDirB independently fixes the B/inbound variant.; Food/state/constant anchor: MapB tile in 0x10..0x13 consumes food, sets B-list mode 3 and attr|8 then returns; otherwise first direction=(SRand1(3)+dirHint-2)&7 and failure "
+        },
+        {
+          "old": "o25_39C7_0460",
+          "new": "RaidOutB",
+          "kind": "recovered",
+          "why": "Win16 symbol _RaidOutB, reviewed 2026-11-11: Independent TU/order anchor: DOS S25:39C7 and Win16 SIMANT1 6:2D4E..5343 have the same30 functions in order (full map in RESULT.md);0460 is the RaidOutB slot between reviewed RaidInB and DoRestB, with independently fixed DoNestingB/DoDigInB/DoDigOutB farther in the run.; Behavior/callee anchor: GetExitDirB(x,y,8), interpret0 as SRand8 else subtract1, attempt TryMoveDirB then a random retry, and re"
+        },
+        {
+          "old": "o25_39C7_04E5",
+          "new": "DoRestB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRestB, reviewed 2026-11-11: TU/order anchor:04E5 is the DoRestB slot after RaidOutB and before DoDrownB in the exact30-member black-nest run DOS S25:39C7 <-> Win16 6:2D4E..5343, bracketed elsewhere by the already paired black nest operations.; Independent body/control anchor: first handles CheckNestFightB, otherwise restores LifeB from BlistT; SRand1(20)==0 sets BlistM from GetNewMode((attr&0x78)>>3,attr), else OptionStates["
+        },
+        {
+          "old": "o25_39C7_0590",
+          "new": "DoDrownB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoDrownB, reviewed 2026-11-11: TU/order anchor:0590 follows DoRestB and precedes DoRandB in the matching30-member DOS/Win16 black-nest run, occupying Win16 DoDrownB6:37A4's slot.; Independent constants/state anchor: MapB tile<0x14 returns to GetNewModeB; otherwise turns direction with(SRand1(3)+attr-1)&7 preserving0xF8 bits, writes BlistT/LifeB, and with SRand1(100)==0 clears the ant and increments the death counter selected by"
+        },
+        {
+          "old": "o25_39C7_0677",
+          "new": "DoRandB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRandB, reviewed 2026-11-11: TU/order anchor:0677 is the DoRandB member between DoDrownB and DoRecruitN in the exact30-member black-module order shared with Win16; reviewed SimEggB/SimQueenB/GetBestDir later in the run fix its orientation.; Independent behavior/callee anchor: SRand32()==0 chooses GetNewModeB(caste), then checks black nest combat, tries current attr&7 direction and falls back to TryMoveDirB(x,y,SRand8()). Win1"
+        },
+        {
+          "old": "o25_39C7_06E2",
+          "new": "DoRecruitN",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRecruitN, reviewed 2026-11-11: TU/order anchor:06E2 is immediately after DoRandB and before independently reviewed DoNestFightB in the exact30-member black DOS/Win16 run; Win16 symbol at6:396C is spelled DoRecruitN (no invented B suffix).; Independent behavior/callee anchor: if MePlane!=2 dispatches confirmed DoDigOutB; otherwise handles black nest fight, tries attr&7 via TryMoveDirB then randomSRand8 retry. Win16 DoRecruitN6:3"
+        },
+        {
+          "old": "o25_39C7_0746",
+          "new": "DoNestFightB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoNestFightB, reviewed 2026-11-11: Confirmed-callee sequence: SRand1(7) -> SRand16 -> (tail-ant restoration) -> GetNewMode -> FightBalloons, matching Win16 DoNestFightB original card 6:3A54. FightBalloons is called with plane 2, distinguishing the black nest.; Fight-state anchor: replaces low direction bits with SRand1(7), writes current B-list attribute to LifeB, and on the 1/16 branch restores the saved attribute, handles caste m"
+        },
+        {
+          "old": "o25_39C7_0853",
+          "new": "CheckNestFightB",
+          "kind": "recovered",
+          "why": "Win16 symbol _CheckNestFightB, reviewed 2026-11-11: TU/order anchor:0853 lies between independently reviewed DoNestFightB and DropFoodB in the matching30-member black nest run; it is Win16 CheckNestFightB6:3BA2. Its many callers lost explicit edges because Win16 inlined the helper.; Independent combat/constant anchor: reads LifeB[x,y]; IsYellowAnt and MeColor!=0 calls YellowFight(2,Tindex) and returns1; otherwise0x87<ant<0xE8 plus FindInBList yield"
+        },
+        {
+          "old": "o25_39C7_090A",
+          "new": "DropFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DropFoodB, reviewed 2026-11-11: TU/order anchor:090A is between CheckNestFightB and independently reviewed SimEggB in the exact30-member black-nest run, matching Win16 DropFoodB6:3C3C.; Independent food-state/result anchor: MapB tile below0x10 becomes0x10, below0x13 increments, both return success1; otherwise success0. Always increments FoodB and clears carrying bit8 from the current B-list attribute. Win16 DropFoodB preserves t"
+        },
+        {
+          "old": "o25_39C7_0980",
+          "new": "SimEggB",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimEggB, reviewed 2026-11-11: Confirmed-callee order: SGRand(255) -> GetNewModeB -> EggBalloons, in both SimEggB 6:3CA0 and DOS 0980; EggBalloons takes plane 2, unlike the red egg member.; Egg-state/masks anchor: BpopT<=2 selects cycle mask 0x1F else 0x7F; increments the egg's low age until (attr&0xF)==8, tests ModeAuto or modeLevels[2]>>7 against SGRand(255), makes (mode<<3)+2 or increments TotalEggsDiedB, writes LifeB/BlistT"
+        },
+        {
+          "old": "o25_39C7_0AB0",
+          "new": "SimQueenB",
+          "kind": "recovered",
+          "why": "Win16 symbol _SimQueenB, reviewed 2026-11-11: Rare resource/argument anchor: on caste 12, SRand64()==0 and HealthB==0, DOS 0AB0 calls PictStrnDialog(0,0x271F,1); Win16 SimQueenB card 6:3E03..3E0A passes the same dialog triple. The red queen member has a different colony's state/resource behavior.; Independent confirmed-callee order/black-state anchor: SRand64 -> PictStrnDialog -> QueenMoveB -> black-list tail checks -> QueenBalloons(...,2) ->"
+        },
+        {
+          "old": "o25_39C7_0CBD",
+          "new": "GetBestDir",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetBestDir, reviewed 2026-11-11: Two confirmed caller positions: MoveSpider and QueenMoveR use DOS 0CBD at the Win16 GetBestDir slot with plane,x,y,targetX,targetY, consuming a direction code. The black queen also uses the same plane-parameterized helper, so the name has no B/R suffix.; Independent ordered-callee/control anchor: GetDis -> GetMap -> IsNotObstacle -> IsThisPebble -> GetDis -> GetLife -> IsClearTile; scans eight Dx8"
+        },
+        {
+          "old": "o25_39C7_0DAF",
+          "new": "QueenMoveB",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenMoveB, reviewed 2026-11-11: Confirmed-callee order: GetBestDir -> SRand8 -> movement -> FindInBList, matching QueenMoveB 6:4154; the confirmed FindInBList call is specific to the B-list, unlike QueenMoveR.; Queen-tail/constant anchor: first call is GetBestDir(2,x,y,TileMassXB,TileMassYB); y<3 permits only directions 3..5. After moving, computes opposite=(dirHint^0xFC)&7, clears the old tail LifeB cell, searches FindInBList(."
+        },
+        {
+          "old": "o25_39C7_0EC2",
+          "new": "MakeNewTailB",
+          "kind": "recovered",
+          "why": "Win16 symbol _MakeNewTailB, reviewed 2026-11-11: TU/order anchor:0EC2 follows reviewed QueenMoveB and precedes KillTailB in the matching30-member DOS/Win16 black nest run; Win16 MakeNewTailB is6:424A.; Independent tail/callee anchor: reads BlistT[index], takes opposite=(attr&7)^4, adds Dx8/Dy8 to the B-list position and calls confirmed AddAntToBList(newX,newY,attr+8,9,0). Win16 recovered MakeNewTailB has the same opposite-direction and+8 tail-ma"
+        },
+        {
+          "old": "o25_39C7_0F30",
+          "new": "KillTailB",
+          "kind": "recovered",
+          "why": "Win16 symbol _KillTailB, reviewed 2026-11-11: TU/order anchor:0F30 follows MakeNewTailB and precedes LostHeadB in the exact30-member black nest run, matching Win16 KillTailB6:42B0.; Independent state/index anchor: takes a B-list index and clears both BlistT[index] and LifeB[BlistX[index],BlistY[index]], preserving coordinates and other entries. Win16 recovered KillTailB does exactly those two clears after forming (x&0xFF)<<6+y. LostHeadB/Lost"
+        },
+        {
+          "old": "o25_39C7_0F76",
+          "new": "LostHeadB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LostHeadB, reviewed 2026-11-11: TU/order anchor:0F76 is after KillTailB and before LostTailB in the matching30-member black nest run, placing it at Win16 LostHeadB6:42DE.; Independent head/tail discriminator: uses forward direction attr&7 and expected head marker attr-8; returns0 if LifeB at x+Dx8,y+Dy8 already has that marker or FindInBList finds it, else1. Win16 LostHeadB has the same signed steps, minus8 marker and two tests;"
+        },
+        {
+          "old": "o25_39C7_0FE7",
+          "new": "LostTailB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LostTailB, reviewed 2026-11-11: TU/order anchor:0FE7 is after LostHeadB and before reviewed TryMoveDirB in the exact30-member DOS/Win16 black nest run, matching Win16 LostTailB6:433C.; Independent tail/head discriminator: takes opposite direction(attr^0xFC)&7, expects attr+8 at the neighbouring LifeB cell, then checks FindInBList for that same marker; returns1 only when both fail. Win16 LostTailB has exactly this opposite-direct"
+        },
+        {
+          "old": "o25_39C7_105B",
+          "new": "TryMoveDirB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TryMoveDirB, reviewed 2026-11-11: Confirmed-caller/callee anchor: DoNestingB uses this three-argument movement helper; it calls confirmed DoTroph only for the occupied 0xFF destination/MeWantFood condition, as Win16 TryMoveDirB 6:439E. The black-family GetOutB boundary call agrees independently.; Movement/state anchor: adds Dx8/Dy8[dir], rejects x outside 0..63, y>63, dir<0 and MapB destination>=0x1C; y<1 delegates to GetOutB. Suc"
+        },
+        {
+          "old": "o25_39C7_13EF",
+          "new": "TryEatFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _TryEatFoodB, reviewed 2026-11-11: TU/order anchor:13EF follows already named DoNestingB and precedes EatFoodB,StealFoodB,DecEatB in the exact30-member DOS/Win16 run; Win16 TryEatFoodB is6:47C6. Named DoNestingB/DoDigInB/DoDigOutB contain the same operation inlined in Win16, yielding misleading SRand8-only gaps.; Independent guarded-consumption anchor: reads MapB[firstCoord*64+secondCoord], returns unless tile is0x10..0x13, replace"
+        },
+        {
+          "old": "o25_39C7_14A8",
+          "new": "EatFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _EatFoodB, reviewed 2026-11-11: TU/order anchor:14A8 follows TryEatFoodB and precedes StealFoodB/DecEatB in the exact30-member black-nest run, matching Win16 EatFoodB6:4844. Named DoFoodInB inlines it in Win16 at the same food-consumption stage.; Independent unguarded-consumption anchor: no initial0x10..0x13 validity test; tile0x10 becomes SRand8, otherwise decremented; positive FoodB--, EatCountB+=5, threshold(BpopT+CastePopB[2"
+        },
+        {
+          "old": "o25_39C7_154F",
+          "new": "StealFoodB",
+          "kind": "recovered",
+          "why": "Win16 symbol _StealFoodB, reviewed 2026-11-11: TU/order anchor:154F follows EatFoodB and precedes independently reviewed DecEatB and named DoFoodInB in the exact30-member black-module run; Win16 StealFoodB6:48B4 occupies that same slot.; Independent state/body anchor: tile0x10 becomes SRand8 else MapB tile decrements, then FoodB decrements only when positive; it does NOT advance EatCountB or increase HealthB. Win16 StealFoodB-6266e996e9.c has "
+        },
+        {
+          "old": "o25_39C7_15B4",
+          "new": "DecEatB",
+          "kind": "recovered",
+          "why": "Win16 symbol _DecEatB, reviewed 2026-11-11: Missed call-position/family anchor: named DoAntSimY has the ordered black/red alternatives PlaceEggB ->15B4, PlaceEggR -> already CONFIRMED DecEatR; Win16 DoAntSimY6:7CF6 has PlaceEggB ->DecEatB, PlaceEggR ->DecEatR. Both parent bodies were compared: MeType0x60, Cycle&0xF, two-tile opposite direction and SRand128<=MeHealth gates agree, so the B/R branch is independently grounded.; Independent blac"
+        },
+        {
+          "old": "o25_39C7_1BBB",
+          "new": "LeaveNestB",
+          "kind": "recovered",
+          "why": "Win16 symbol _LeaveNestB, reviewed 2026-11-11: Confirmed-callee chain: MakeNewHoleB -> SRand8 -> ExitHole, with the same order and black-specific hole map, matching LeaveNestB 6:515E (neither version has callers).; Body/argument anchor: takes x,y, clears current B-list attr, ensures HoleMapB[x], and calls ExitHole(hole,x,random+(oldAttr&0xF8),mode,state); success clears LifeB[x,y], failure restores attr and clears mode. GetOutB instead takes o"
+        },
+        {
+          "old": "o25_39C7_1C81",
+          "new": "GetOutB",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetOutB, reviewed 2026-11-11: Independent confirmed-callee chain: MakeNewHoleB -> SRand8 -> ExitHole -> SRand2 -> IsItDirt twice -> DigTileThemB -> SRand8, in the same ordered branches as Win16 GetOutB 6:520A. Confirmed DoDigInB/DoDigOutB/DoFoodInB call this helper.; Black-state/geometry anchor: at MapB[x,0]==0x18 it temporarily clears the current B-list attribute, creates HoleMapB[x] if absent, and passes its high five attrib"
+        },
+        {
+          "old": "o25_3BA4_0999",
+          "new": "AnimYellowFight",
+          "kind": "recovered",
+          "why": "Win16 symbol _AnimYellowFight, reviewed 2026-11-11: Rare sound constants/argument anchor: both originals contain 0x32C8 and 0x55F0 in the fight/death animation; DOS uses myBeginSound(0x25,0x32C8,0x7E) for kind0 and (0x31,0x55F0,0x7F) for kind10, matching Win16 AnimYellowFight 6:7E56.; Independent confirmed call sequence/caller anchor: YellowDeath calls this six-argument animation; SetMyLife -> DoEditUpdateDraw -> win_IsWinInFront -> MacTickCount/my"
+        },
+        {
+          "old": "o25_3BA4_0C01",
+          "new": "AnimYellowInsane",
+          "kind": "recovered",
+          "why": "Win16 symbol _AnimYellowInsane, reviewed 2026-11-11: Unique self diagnostic: both originals reference AnimYellowInsane (DOS S25:3BA4:0C01; Win16 6:8078); no machine-code metric is used.; Independent confirmed-callee order: YellowDeath calls the animation, whose body does SetMyLife -> DoEditUpdateDraw -> win_IsWinInFront -> MacTickCount/myDelay timing -> GetDis/RRand/RRand/GetBestDir -> SRand8 -> MoveMyLife -> DoEditUpdateDraw -> ClearMyLife. The 32-"
+        },
+        {
+          "old": "o25_3BA4_0DFB",
+          "new": "YellowFight",
+          "kind": "recovered",
+          "why": "Win16 symbol _YellowFight, reviewed 2026-11-11: Multiple confirmed caller positions: CheckNestFightR, DoAttackAnt, DoRandAntA/AA, DoRecruitAnt and DoToAlarm call S25:3BA4:0DFB where Win16 calls YellowFight, passing enemy list and index.; Independent callee/control anchor: ClearLife -> GetWinner -> conditional GotoMyAnt -> animation -> SetMyLife/DeadAntHere/ResetYellowVars on victory, or SetLife/DeadAntHere/YellowDeath(0) on loss. The list<=1/=="
+        },
+        {
+          "old": "o25_3BA4_1035",
+          "new": "EnterNest",
+          "kind": "recovered",
+          "why": "Win16 symbol _EnterNest, reviewed 2026-11-11: Confirmed-callee order: TryAntTheme -> optional SetAlarmDropState(0,1) -> ClearMyLife -> DigMyTile -> SetMyLife, matching EnterNest 6:8408. Confirmed TryMyDropOrLift calls it in the same gap.; Coordinate/state anchor: chooses MePlane=3 if MeLocX>0x40 else2, copies MeLocY to MeLocX, sets new MeLocY to2 for MeType==0x60 else1, direction4, then digs and stores yellow life with 0xFF. This exact entran"
+        },
+        {
+          "old": "o25_3BA4_1581",
+          "new": "GetMyBestDirs",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMyBestDirs, reviewed 2026-11-11: Confirmed-callee order: GetDis -> TileCanBeMovedOn -> GetDis -> GetLife -> IsClearTile matches Win16 GetMyBestDirs 6:8828 and fixes the distance-ranked search family (not the GetDir-driven rotational search).; Family discriminator/body anchor: TileCanBeMovedOn receives the global MeGoalPlane/MeGoalX/MeGoalY and flag=(MeCmd==2), rather than GetRedBestDirs' plane,a,b,0 tuple. It scans eight neighbou"
+        },
+        {
+          "old": "o25_3BA4_1686",
+          "new": "GetMyRandDirs",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMyRandDirs, reviewed 2026-11-11: Confirmed-callee sequence: GetDis -> TileCanBeMovedOn -> GetDir twice in the uncommitted-turn branches -> GetDis -> GetDir, matching Win16 GetMyRandDirs original card 6:8928..8B3F.; Rotational-search/argument anchor: two leading far output pointers (rot,dir), followed by plane,x,y,a,b; builds an eight-byte allowed-neighbour array excluding the previous Me tile, scans clockwise/counterclockwise, se"
+        },
+        {
+          "old": "o25_3BA4_1A9F",
+          "new": "GetMyDir",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMyDir, reviewed 2026-11-11: Two confirmed caller positions: DoAntMoveY and ExitNest call S25:3BA4:1A9F where Win16 calls GetMyDir, using six scalar arguments (source plane,x,y,target plane,x,y) and consuming a direction code.; Independent inter-plane routing anchor: source<=1 with target<=1 uses the direct target; target 2/3 selects black/red outside entrance coordinates; source>1 with different target selects the correspond"
+        },
+        {
+          "old": "f_00BA_0002",
+          "new": "InitApplicationWindows",
+          "kind": "recovered",
+          "why": "Win16 symbol _InitApplicationWindows, reviewed 2026-11-11: Confirmed-callee order: win_LoadAllWindows -> repeated win_SetWinDrawHook -> InitMapFunctions, matching InitApplicationWindows1:5464. Confirmed IBMInitStuff invokes it immediately after InitApplicationStuff and before the second SetMenuEntries call in both versions.; Independent hook-table argument anchor: registrations agree for windows0x000(edit),0x100(map),0x1500(history),0x1200(mode),0x1300(ca"
+        },
+        {
+          "old": "f_00BA_01B6",
+          "new": "InitApplicationStuff",
+          "kind": "recovered",
+          "why": "Win16 symbol _InitApplicationStuff, reviewed 2026-11-11: Confirmed caller IBMInitStuff calls DOS00BA:01B6 and Win16 InitApplicationStuff immediately after LoadTiles and before InitApplicationWindows, with no arguments (Win16 card2:07D7).; Independent confirmed-callee anchor: each is a sole no-argument wrapper around already confirmed initStuff, not merely an empty stub. DOS m00BA.c01B6 and Win16 src/initapp.c InitApplicationStuff1:552A preserve that exa"
+        },
+        {
+          "old": "f_0DEF_0000",
+          "new": "MakeRedInitiator",
+          "kind": "recovered",
+          "why": "Win16 symbol _MakeRedInitiator, reviewed 2026-11-11: Confirmed caller TallyModePop calls DOS0DEF:0000/Win16 MakeRedInitiator after the same black/red mode-population tally and only when TemRModePop[19]<1. It is a no-argument initializer, unlike DoRedInitiator(index). Win16 also has a DoAntSim caller that has no direct DOS counterpart; that extra caller is not counted as an anchor.; Distinctive state/constants anchor: clears RedInitOn; when BpopT>=30"
+        },
+        {
+          "old": "f_0DEF_006B",
+          "new": "DoRedInitiator",
+          "kind": "recovered",
+          "why": "Win16 symbol _DoRedInitiator, reviewed 2026-11-11: Confirmed caller DoAntSimA invokes 0DEF:006B in its red-initiator mode slot, corresponding to Win16 DoRedInitiator 6:96D4; it passes an A-list index, rather than a nest x,y pair.; Independent confirmed-callee/body anchor: the red task selector (inlined UnRecruitRed/SRand1/RecruitRed in Win16) is followed by GetRedBestDirs(1,RedLocX,RedLocY,RedDestX,RedDestY), SRand1(10), IsYellowAnt -> YellowFight"
+        },
+        {
+          "old": "f_0DEF_0233",
+          "new": "GetNewRedTask",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetNewRedTask, reviewed 2026-11-11: Confirmed-callee sequence: UnRecruitRed -> SRand1(32) -> SRand1(10) -> RecruitRed, with the alternative final RecruitRed on the food-target path, matching Win16 GetNewRedTask 6:9940.; Independent constants/state anchor: on MePlane==1 and SRand1(32)+0x40<MeLocX, recruits ModePopB[5] and sets RedTask=2; otherwise offsets LastFoodDrop using x>30, y<20/y>40 by five, recruits (CastePopR[1]+[2])>>2 if p"
+        },
+        {
+          "old": "f_0DEF_031F",
+          "new": "GetRedBestDirs",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetRedBestDirs, reviewed 2026-11-11: Confirmed-callee order: GetDis -> TileCanBeMovedOn -> GetDis -> GetLife -> IsClearTile, matching Win16 GetRedBestDirs 6:9A18; unlike GetBestDir, it calls TileCanBeMovedOn rather than GetMap/IsNotObstacle/IsThisPebble.; Family discriminator/body anchor: every candidate neighbour is checked with TileCanBeMovedOn(plane,nx,ny,plane,a,b,0)==1. GetMyBestDirs instead passes the global MeGoal plane/coordi"
+        },
+        {
+          "old": "f_14EE_0C9C",
+          "new": "FixExitMapB",
+          "kind": "recovered",
+          "why": "Win16 symbol _FixExitMapB, reviewed 2026-11-11: Black-family confirmed caller positions: DigTileB, DigTileThemB and DoDigInB invoke14EE:0C9C at Win16 FixExitMapB positions, while the red callers use0D71; DoAntMoveY also selects the correct member by plane.; Independent gradient/body anchor: y<2 writes0xFF for MapB tile0x18 else0xFE; otherwise takes the maximum of eight bounded0..63 ExitMapB neighbours and writes max-1 or0. Win16 FixExitMapB5:28"
+        },
+        {
+          "old": "f_14EE_0D71",
+          "new": "FixExitMapR",
+          "kind": "recovered",
+          "why": "Win16 symbol _FixExitMapR, reviewed 2026-11-11: Red-family confirmed caller positions: DigTileR, DigTileThemR and DoDigInR invoke14EE:0D71 where Win16 calls FixExitMapR; the black counterparts call0C9C instead. Both also have the correct red/black branch from DoAntMoveY.; Independent gradient/body anchor: y<2 sets ExitMapR to0xFF for MapR tile0x18 else0xFE; otherwise scans eight bounded0..63 neighbours and sets the red exit scent to maxNeighbou"
+        },
+        {
+          "old": "f_1699_00A6",
+          "new": "MoveTextToBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _MoveTextToBalloon, reviewed 2026-11-11: Confirmed MakeBalloon calls DOS1699:00A6 at Win16 MoveTextToBalloon4:6CF8's slot, supplying source text bitmap, destination balloon bitmap and x/y placement.; Independent bitmap algorithm anchor: destination pitch=width>>3, row placement includes y*2*pitch, source stride=(sourceWidth+7)>>3 and height from source header, then copies each source byte XOR0xFF into the destination with a2*destinationP"
+        },
+        {
+          "old": "f_1699_0110",
+          "new": "MaskMono2Tandy",
+          "kind": "recovered",
+          "why": "Win16 symbol _MaskMono2Tandy, reviewed 2026-11-11: Confirmed ConvertMonoMaskToTandy calls 1699:0110/Win16 MaskMono2Tandy on the source mask and allocated destination bitmap at the same conversion stage; the source/destination far-pointer roles agree.; Distinctive pixel algorithm: both clear the destination, read paired one-bit planes from source+4, select nibble 0xD for the clear-mask branch, otherwise derive a 0x0/0xF nibble from the source bit, "
+        },
+        {
+          "old": "f_171C_13CA",
+          "new": "Ralloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _Ralloc, reviewed 2026-11-11: Original proposed _mem_malloc is REJECTED:13CA returns a master record/handle, not malloc's data pointer. Independent confirmed caller alignment: both win_SetObjFormatStr and win_ObjFormatPrint allocate their missing format record with DOS13CA/Win16 Ralloc after computing length, then store it at object+0x2A.; Specific argument/record anchor: those calls pass(long)(strlen(formattedText)+1+8),kind1"
+        },
+        {
+          "old": "f_171C_13E4",
+          "new": "RallocFree",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocFree, reviewed 2026-11-11: Preserved nine-member run: DOS13E4 Free,14BE Age,152C Freshen,15A2 SetType,1686 Type,16EA Size,1750 MemoryFree,1772 MemorySoft,1794 Freed matches Win16 RallocFree2:5936..RallocFreed2:59CC in exactly that order;15A2 has its own RallocSetType diagnostic and1750 has independent named callers.; Direct-record operation anchor:13E4 resolves the record, returns its block to free storage and releases the "
+        },
+        {
+          "old": "f_171C_152C",
+          "new": "RallocFreshen",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocFreshen, reviewed 2026-11-11: Preserved-member anchor:152C is between the Age and the self-diagnosed RallocSetType15A2 in the nine-member RallocFree..RallocFreed run, matching Win16 RallocFreshen2:597E's position between RallocAge and RallocSetType.; Independent operation/field anchor: DOS resolves a direct record and refreshes its long age field from the advancing allocation clock; Win16 RallocFreshen writes the long timestam"
+        },
+        {
+          "old": "f_171C_15A2",
+          "new": "RallocSetType",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocSetType, reviewed 2026-11-11: Corrected layer assignment; proposed _mem_SetType is REJECTED as a unique identity. DOS15A2's own diagnostic explicitly spells RallocSetType to illegal type, and its body changes the direct Ralloc block's type/attribute/accounting. Win16 RallocSetType2:5994 changes the direct record's type. DOS1E86 is a separate wrapper forwarding handle+kind to15A2, matching the separation of the Ralloc and mem A"
+        },
+        {
+          "old": "f_171C_1686",
+          "new": "RallocType",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocType, reviewed 2026-11-11: Preserved-member anchor:1686 lies after15A2 RallocSetType and before16EA RallocSize in the matching nine-member RallocFree..RallocFreed run; Win162:59A4 RallocType lies immediately between RallocSetType and RallocSize.; Independent operation/contract anchor: returns the direct allocation record's stored type field without changing it; the separate size member returns a long requested size and SetT"
+        },
+        {
+          "old": "f_171C_16EA",
+          "new": "RallocSize",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocSize, reviewed 2026-11-11: Preserved-member anchor:16EA is immediately after the record type getter and before independently anchored1750 RallocMemoryFree, matching Win16 RallocType2:59A4,RallocSize2:59B0,RallocMemoryFree2:59C0 in the same nine-member run.; Independent operation/contract anchor: returns the direct Ralloc record's requested byte size as a long, matching Win16 RallocSize(record)->record->size. DOS has a separ"
+        },
+        {
+          "old": "f_171C_1750",
+          "new": "RallocMemoryFree",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocMemoryFree, reviewed 2026-11-11: Two confirmed caller positions: IBMInitStuff calls 1750/RallocMemoryFree after command-line/environment handling and before its memory threshold check; InitMapFunctions calls it alongside the soft-memory query before allocating the 0x2000 generated map buffer.; Quantity/return contract: DOS 1750 returns the free-paragraph total s_2F3E shifted left four as a 32-bit byte count; Win16 RallocMemoryFre"
+        },
+        {
+          "old": "f_171C_1772",
+          "new": "RallocMemorySoft",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocMemorySoft, reviewed 2026-11-11: Confirmed caller InitMapFunctions queries both1750/free and1772/soft before allocating the generated map buffer. Win16 InitMapFunctions3:C19C queries RallocMemorySoft and RallocMemoryFree in the opposite evaluation order before the same allocation; DOS uses the two values in its FREE+SOFT AT INITMAP diagnostic.; Independent member/data-domain anchor:1772 immediately follows1750 RallocMemoryFree an"
+        },
+        {
+          "old": "f_171C_1794",
+          "new": "RallocFreed",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocFreed, reviewed 2026-11-11: Preserved-member anchor:1794 closes the nine-member Free/Age/Freshen/SetType/Type/Size/MemoryFree/MemorySoft/Freed run after independently anchored1750/1772, matching Win16 RallocFreed2:59CC immediately after RallocMemorySoft.; Independent discard-state predicate: DOS resolves a record and returns whether its header type==5 (discarded); Win16 RallocFreed tests whether the direct record's data poin"
+        },
+        {
+          "old": "f_171C_18A6",
+          "new": "RallocRealloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _RallocRealloc, reviewed 2026-11-11: Two confirmed caller alignments: win_SetObjFormatStr and win_ObjFormatPrint use DOS18A6/Win16 RallocRealloc on the existing format record, then store the returned record back into object+0x2A; the subsequent new-record alternative uses13CA/Ralloc.; Specific contract/implementation anchor: size=(long)(formattedLength+4),kind1, with reallocation gated by old string length+1 (setter) or+2 (printer). "
+        },
+        {
+          "old": "f_171C_1A9E",
+          "new": "mem_Alloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Alloc, reviewed 2026-11-11: Caller alignment: confirmed hanim_AddAnimObject allocates the per-object backing buffer after its object/bitmap setup and before the two unlocks; InitMapFunctions allocates the generated map buffer in the corresponding slot on both versions.; Argument/result discrimination: InitMapFunctions passes 0x2000L, kind 1 and the literal Generated buffer window; hanim_AddAnimObject passes obj->size*3, kind"
+        },
+        {
+          "old": "f_171C_1AD4",
+          "new": "mem_LockLevel",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_LockLevel, reviewed 2026-11-11: Missed two-caller alignment: confirmed ch_CleanupTable and ch_DumpOldest invoke DOS1AD4 where Win16 calls mem_LockLevel, after checking discard/type status and before reclaiming an unlocked cached handle (Win16 cards7:980B and7:991E).; Independent lock-state contract: DOS resolves the encoded handle and returns HDR(h)->lock; Win16 mem_LockLevel2:5492 returns the low lock-count byte of GlobalFlags "
+        },
+        {
+          "old": "f_171C_1B2C",
+          "new": "mem_Realloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Realloc, reviewed 2026-11-11: Confirmed caller hanim_AddAnimObject: when count==max, both versions grow capacity by two and assign the result of DOS 1B2C/Win16 mem_Realloc to set->objs before locking it again (Win16 2:644C). Handle, long byte size and kind 1 agree, including the result assignment.; Implementation anchor: DOS 1B2C resolves the encoded handle then 18A6 resizes the allocation, preserving old data and replacing th"
+        },
+        {
+          "old": "f_171C_1B84",
+          "new": "mem_Lock",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Lock, reviewed 2026-11-11: Caller alignment: confirmed hanim_HideObject and hanim_ShowObject begin with set-handle then object-array-handle calls, matching Win16 mem_Lock at 2:690F/6927 and 2:69C3/69DB; paired unlocks occur at the tail.; Return-use/implementation anchor: DOS 1B84 calls 1FC2 to acquire the handle, returns null on failure or dereferences the master pointer into DX:AX; callers use that result as the AnimSet/An"
+        },
+        {
+          "old": "f_171C_1BBA",
+          "new": "mem_Unlock",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Unlock, reviewed 2026-11-11: Caller alignment: confirmed hanim_HideObject and hanim_ShowObject each finish by unlocking the object-array handle and then the set handle; DOS 1BBA occupies both Win16 mem_Unlock slots (cards 2:69A2/69AD and 2:6A56/6A61).; Implementation/contract: DOS 1BBA resolves a 0F0F:index handle then delegates to 2086, decrementing the block lock count; Win16 2:559C is the GlobalUnlock wrapper. The same han"
+        },
+        {
+          "old": "f_171C_1C0A",
+          "new": "mem_Free",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
+        },
+        {
+          "old": "f_171C_1C1C",
+          "new": "mem_Size",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_Size, reviewed 2026-11-11: Original proposed _db_GetObjectSize is REJECTED: DOS1C1C takes an allocation handle, whereas Win16 db_GetObjectSize takes a resource name and DBRecall/free loops. Corrected caller alignment: LoadTiles queries the loaded tile handle's byte length via1C1C/mem_Size before locking/copying it; hanim_RenderAnimSet's inlined preparation also queries the buffer handle (Win16 card2:6FC3).; Independent retu"
+        },
+        {
+          "old": "f_171C_2190",
+          "new": "mem_malloc",
+          "kind": "recovered",
+          "why": "Win16 symbol _mem_malloc, reviewed 2026-11-11: Confirmed font_ReadFont calls DOS 2190/Win16 mem_malloc four times: 0x2A header, image rowWords*height*2, locTable count*2, owTable count*2; their call order around fopen/fread/fclose agrees (Win16 card 7:AA58, AB0B, AB2A, AB44).; Return/implementation discrimination: 2190 temporarily raises the fixed-allocation guard s_2F2A and returns *13CA(size,0,name), a raw far pointer; Win16 mem_malloc retur"
+        },
+        {
+          "old": "f_1B4E_000D",
+          "new": "ConvColor",
+          "kind": "recovered",
+          "why": "Win16 symbol _ConvColor, reviewed 2026-11-11: Confirmed caller alignment: DrawColonyBars, DrawEditGraphs and win_DrawHistoryWindow call 1B4E:000D where Win16 calls ConvColor, using its return as the drawing colour; IBMInitStuff passes 15 before filling the initial screen in both versions.; Transformation anchor: DOS symbolic m1B4E.asm preserves the high colour nibble and replaces the low nibble through g_41C0; Win16 ConvColor preserves color&"
+        },
+        {
+          "old": "f_1CE2_01F8",
+          "new": "GBoxOutline",
+          "kind": "recovered",
+          "why": "Win16 symbol _GBoxOutline, reviewed 2026-11-11: Confirmed caller drawHistGraph calls 1CE2:01F8 at the Win16 GBoxOutline slot with five scalar coordinates/thickness arguments; it is separate from the rectangle-pointer wrapper 044D/GRectOutline.; Geometry/control anchor: nonzero thickness draws top,bottom,left,right strips with the current foreground colour; each strip uses the same inset corner formulas in DOS and Win16 wf_GBoxOutline-26008b9ec1"
+        },
+        {
+          "old": "f_1CE2_0430",
+          "new": "GRectInv",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectInv, reviewed 2026-11-11: Confirmed DrawEditGraphs and win_DrawObjectI call 1CE2:0430 at the positions occupied by Win16 GRectInv; further confirmed win_SetObjSelectedStateI and win_SetObjVisibleState agree.; Contract/body anchor: this member takes only a Rect pointer and expands left,top,right,bottom into the inversion-box driver, with no colour or thickness. Win16 GRectInv.c (2:0EB2) does the same via GInvBox. The rectan"
+        },
+        {
+          "old": "f_1CE2_044D",
+          "new": "GRectOutline",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectOutline, reviewed 2026-11-11: Confirmed callers win_RectFillOutline, DrawControlLevels and DrawEditGraphs invoke DOS 044D at Win16 GRectOutline positions; this independently extends the tool's single win_RectFillOutline gap.; Body/argument anchor: 044D expands (Rect*,width) into scalar GBoxOutline; 01F8 draws four inset strips only when width is nonzero. Win16 2:0EDE GRectOutline performs those four fills inline, including Win"
+        },
+        {
+          "old": "f_1CE2_046D",
+          "new": "GRectFill",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectFill, reviewed 2026-11-11: Confirmed callers win_DrawBitMapAtObj, win_DrawBitMapAtObjNum, win_DrawHBar and win_DrawVBar use 1CE2:046D at their GRectFill positions; DrawColonyBars and DrawEditGraphs agree independently.; Argument-expansion/body anchor: 046D takes (Rect*,colour) and sends left,top,right,bottom,colour to the fill-box driver; Win16 GRectFill expands the same Rect fields into GBoxFill (2:0F98 GRectFill.c). This "
+        },
+        {
+          "old": "f_1CE2_09E2",
+          "new": "GRectPartialMixedOutline",
+          "kind": "recovered",
+          "why": "Win16 symbol _GRectPartialMixedOutline, reviewed 2026-11-11: Confirmed caller positions: win_RectHOutline and win_RectVOutline call 1CE2:09E2 where Win16 calls GRectPartialMixedOutline with rect,thickness,side-mask,foreground,background.; Branch/mask anchor: both return on zero thickness; equal colours or monochrome delegates to partial solid outline; otherwise set attributes with pattern 0x20 and test sides in order 2,8,1,4 to draw the four inset edges. Wi"
+        },
+        {
+          "old": "f_1FAA_0006",
+          "new": "TrapFill",
+          "kind": "recovered",
+          "why": "Win16 symbol _TrapFill, reviewed 2026-11-11: Two confirmed caller positions: InvertPatch and DrawSimColonies invoke DOS1FAA:0006 where Win16 calls TrapFill, passing four-point geometry plus foreground/background.; Independent fixed-point geometry anchor: computes two16.16 edge slopes from points0/3 and1/2 over bottom-top with two long divides, then walks scanlines, inverting when fore==-1, solid filling when fore==back, otherwise pattern0x20"
+        },
+        {
+          "old": "f_1FBD_0000",
+          "new": "GPutStr",
+          "kind": "recovered",
+          "why": "Win16 symbol _GPutStr, reviewed 2026-11-11: Matched caller anchor: font_PrintStr's current-font-null/default-font branch passes(x,y,text) to DOS1FBD:0000 and Win16 GPutStr2:1792, distinct from the loaded-font font_MakeImage branch.; Independent output-state anchor: DOS symbolic m1FBD.asm builds the built-in-font bitmap and updates g_3DA0.x=x+renderedWidth,g_3DA0.y=y after drawing; Win16 GPutStr uses TextOut/GetTextExtent and updates lastStr"
+        },
+        {
+          "old": "f_1FD2_04D0",
+          "new": "GetMousePos",
+          "kind": "recovered",
+          "why": "Win16 symbol _GetMousePos, reviewed 2026-11-11: Confirmed caller positions: MapAreaEvent, OpenMiniMapWin, PlaceQueenInYard, ProcCasteEvent and ProcModeEvent use DOS1FD2:04D0 where Win16 calls GetMousePos.; Output/implementation anchor: a single far Point* receives x then y. DOS copies current mouse globals g_9122/g_9124; Win16 GetMousePos2:4A1C delegates to GetCursorPos(point). Paired callers use those two outputs for the same map/window hit te"
+        },
+        {
+          "old": "f_1FD2_04E5",
+          "new": "PointInRect",
+          "kind": "recovered",
+          "why": "Win16 symbol _PointInRect, reviewed 2026-11-11: Multiple confirmed caller positions: MapAreaEvent, ProcInfoEvent and OpenMiniMapWin call DOS1FD2:04E5 at the Win16 PointInRect slot to decide whether the mouse point hits a UI rectangle.; Predicate/argument anchor: both take (Point*,Rect*) and compare x/y against left/top/right/bottom; DOS uses left/top inclusive and right/bottom exclusive. Win16 PointInRect2:497A uses that same predicate when rib"
+        },
+        {
+          "old": "f_22BF_0C38",
+          "new": "win_ClearObjToEOL",
+          "kind": "recovered",
+          "why": "Win16 symbol _win_ClearObjToEOL, reviewed 2026-11-11: Confirmed caller DrawControlLevels invokes DOS22BF:0C38 in the same slot as Win16 win_ClearObjToEOL7:D792 after printing control text, passing the object id whose remainder is erased.; Independent drawing-state/body anchor: obtains the object's Rect and colour selector at+0x26, selects mono/colour table entries3/2, duplicates the colour into both bytes, clamps top=max(lastStrPos.y,rect.top), and f"
+        },
+        {
+          "old": "f_24AB_02AD",
+          "new": "font_SetFont",
+          "kind": "recovered",
+          "why": "Win16 symbol _font_SetFont, reviewed 2026-11-11: Confirmed caller positions: DrawControlLevels and DrawSimKid select the font via 24AB:02AD/Win16 font_SetFont before their text rendering; win_GetStyleTextHeight switches it repeatedly for the two style fonts.; Switch/domain anchor: both distinguish fonts 0 and 1 (built-in font, clear current font pointer), then bound the loaded-font domain to 2..5 with fallback 2. The DOS built-in large/small dri"
+        },
+        {
+          "old": "f_24AB_038D",
+          "new": "font_PrintStr",
+          "kind": "recovered",
+          "why": "Win16 symbol _font_PrintStr, reviewed 2026-11-11: Confirmed caller sequence: drawHistGraph, win_PrintStyleTextInRect and win_PrintTextInRect call 24AB:038D/Win16 font_PrintStr to render the positioned string, after measuring/selecting font; the call takes x,y,text.; Body anchor: both handle empty text by updating lastStrPos and returning; default font delegates to GPutStr, otherwise font_MakeImage(text,0,currentFont), blit image, set lastStrPos=("
+        },
+        {
+          "old": "f_24FA_00A0",
+          "new": "invert",
+          "kind": "recovered",
+          "why": "Win16 symbol _invert, reviewed 2026-11-11: Confirmed ConvertMonoMaskToColor calls 24FA:00A0 at Win16 invert's position after producing the monochrome mask and before completing the converted bitmap; both pass the mask's far byte pointer and its byte count.; Semantic/body anchor: both m24FA.asm and Win16 invert-7998fd5316.asm (7:F846) negate every byte in place in a count-controlled forward walk, with no source buffer or colour argument. Th"
+        },
+        {
+          "old": "f_2650_000F",
+          "new": "DrawChar",
+          "kind": "recovered",
+          "why": "Win16 symbol _DrawChar, reviewed 2026-11-11: Missed caller position: confirmed font_MakeImage calls2650:000F/Win16 DrawChar after ClearBuffer while laying out glyphs, using source/destination bitmaps, width,height and source/destination bit offsets; this pair was absent from the candidate table.; Independent raster algorithm anchor: both symbolic sources split bit offsets into byte index and low3-bit shift, combine shifted source words by OR"
+        },
+        {
+          "old": "f_2650_0107",
+          "new": "ClearBuffer",
+          "kind": "recovered",
+          "why": "Win16 symbol _ClearBuffer, reviewed 2026-11-11: Two confirmed caller alignments: MakeBalloon and font_MakeImage use 2650:0107 exactly where Win16 calls ClearBuffer, passing the destination pixel buffer and its byte count before rasterizing text.; Distinctive clearing semantics: both symbolic assembly sources clear count/2 zero words then write a zero byte at the final position selected by count parity (even count backs the pointer up one byte)."
+        }
+      ],
+      "note": "Lexical identifier rename; semantic review unchanged.",
+      "prior_receipt_sha256": "ea0b2957164b3072132a6422d3b8230d3530e0dcc6f332e368f7db88bbec717c"
+    }
+  ]
 }

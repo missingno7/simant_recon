@@ -36,7 +36,7 @@ extern char far * far * far fd_50F6_4B28;
 static int g_8DD8[18];
 static _segment g_8DFC;
 extern int far fd_50F6_4B2C;
-extern int far f_171C_1C1C(char far * far *handle);
+extern int far mem_Size(char far * far *handle);
 void far f_284A_0256(void);
 void far f_284A_02E4(void);
 extern int far fd_55B3_6B42;
@@ -58,7 +58,7 @@ void far f_284A_0013(int number)
     fd_50F6_4B28 = fd_55B3_00B4->data;
     g_8DFC = ((_segment far *)fd_50F6_4B28)[1];
     WinPrintf("Seg=%x, buf=%p, handle=%p", g_8DFC, *fd_50F6_4B28, fd_50F6_4B28);
-    fd_50F6_4B2C = f_171C_1C1C(fd_50F6_4B28);
+    fd_50F6_4B2C = mem_Size(fd_50F6_4B28);
     f_284A_0256();
     f_284A_02E4();
     g_756E = 1;

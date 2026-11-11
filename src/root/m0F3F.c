@@ -12,8 +12,8 @@ extern int far SRand256(void);
 extern int far SRand32(void);
 extern int far HealthR;
 extern unsigned char far LifeR[64][64];
-extern long far fd_50F6_0FBC;
-extern int far fd_50F6_08E8;
+extern long far RAntsExpired;
+extern int far FlyAwayR;
 extern int far fd_50F6_0D40[20];
 extern int far f_0EC1_032C(int x, int y, int ant);
 extern int far GetWinner(int a, int b);
@@ -28,39 +28,39 @@ extern int far f_1383_0976(int caste, int type);
 extern int far fd_3D57_07B2;
 extern void far f_0250_43F2(int x, int y, int plane);
 extern int far f_1383_0A30(int mode);
-extern long far fd_50F6_0F30;
+extern long far BAntsExpired;
 extern int far SRand16(void);
 extern void far f_0250_4302(int x, int y, int plane);
 extern int far IsYellowAnt(int value);
-extern int far fd_50F6_04E2;
-extern void far o25_3BA4_0DFB(int a, int index);
+extern int far MeColor;
+extern void far YellowFight(int a, int index);
 extern int far FoodR;
 extern int far RpopT;
 extern int far Cycle;
-extern signed char far fd_3D57_0B36[];
-extern int far fd_50F6_10A6;
+extern signed char far CasteTabC[];
+extern int far StrategicModeR;
 extern void far f_0250_428A(int x, int y, int plane);
 extern int far SRand64(void);
 extern void far o14_384C_0B6A(int a, int b, int c);
-extern int far fd_50F6_036C;
+extern int far RedQueens;
 extern void far f_0250_437A(int x, int y, int plane);
 extern signed char far Dx8[8];
 extern signed char far Dy8[8];
 extern int far InNestBounds(int x, int y);
-extern int far fd_3D57_02B8[2];
+extern int far LastRedEgg[2];
 extern int far SRand128(void);
 extern void far PlaceEggR(int x, int y, int life);
-extern int far o25_39C7_0CBD(int kind, int x, int y, int tx, int ty);
-extern int far fd_50F6_0200;
-extern int far fd_50F6_020E;
+extern int far GetBestDir(int kind, int x, int y, int tx, int ty);
+extern int far TileMassXR;
+extern int far TileMassYR;
 extern void far AddAntToRList(int x, int y, int type, int mode, int state);
 extern int far SRand4(void);
-extern int far fd_50F6_0AFA[6];
-extern int far fd_50F6_0226;
+extern int far CastePopR[6];
+extern int far EatCountR;
 extern int far IsItDirt(int value);
 extern int far DigTileThemR(int x, int y);
 extern void far myBeginSound(int a, int b, int c);
-extern void far f_14EE_0D71(int x, int y);
+extern void far FixExitMapR(int x, int y);
 extern void far AddAntToBList(int x, int y, int type, int mode, int state);
 extern unsigned char far LifeB[64][64];
 extern int far RandTurn(int dir);
@@ -117,7 +117,7 @@ void far DoAntSimR(void)
     }
 }
 
-/* Locals follow the accepted black twin S25 o25_39C7_006D (caste reused for the cell value, t for
+/* Locals follow the accepted black twin S25 DoNestAntB (caste reused for the cell value, t for
    the mode and the fight winner).  The grouping of the DoDigOutR case labels is only partly
    decided by the bytes: 5/6/7 and 11/12 merged with 15 and 16 separate is one of several forms
    that give `mov bx,si` for the mode index; the fully merged 15/16 form gives `mov bx,ax`
@@ -136,7 +136,7 @@ void far DoNestAntR(int x, int y, int attr)
         if (SRand256() == 0 && t != 9 && SRand32() > HealthR) {
             RlistT[Tindex] = 0;
             LifeR[x][y] = 0;
-            fd_50F6_0FBC++;
+            RAntsExpired++;
             return;
         }
         switch (t) {
@@ -178,7 +178,7 @@ void far DoNestAntR(int x, int y, int attr)
             break;
         case 14:
             DoRandR(x, y, attr, caste);
-            if (fd_50F6_08E8 > 100)
+            if (FlyAwayR > 100)
                 RlistM[Tindex] = 0xf;
             break;
         case 15:
@@ -329,9 +329,9 @@ void far DoDrownR(int x, int y, int attr)
     if (SRand1(100) == 0) {
         RlistT[Tindex] = LifeR[x][y] = 0;
         if (attr & 0x80)
-            fd_50F6_0FBC++;
+            RAntsExpired++;
         else
-            fd_50F6_0F30++;
+            BAntsExpired++;
     }
 }
 
@@ -383,8 +383,8 @@ int far CheckNestFightR(int x, int y, int attacker)
             RlistM[index] = 0xa;
             return 1;
         }
-    } else if (IsYellowAnt(ant) && fd_50F6_04E2 == 0) {
-        o25_3BA4_0DFB(3, Tindex);
+    } else if (IsYellowAnt(ant) && MeColor == 0) {
+        YellowFight(3, Tindex);
         return 1;
     }
     return 0;
@@ -425,7 +425,7 @@ void far SimEggR(int x, int y)
     if (!(Cycle & mask)) {
         attr++;
         if ((attr & 0xf) == 8) {
-            mode = fd_3D57_0B36[((fd_50F6_10A6 % 7) << 3) + SRand8()];
+            mode = CasteTabC[((StrategicModeR % 7) << 3) + SRand8()];
             attr = (mode << 3) + 0x82;
             RlistM[Tindex] = f_1383_0A30(mode);
         }
@@ -457,7 +457,7 @@ void far SimQueenR(int x, int y, int caste, int attr)
         if (LostTailR(x, y, type)) {
             type = 0;
             RlistT[Tindex] = 0;
-            fd_50F6_036C--;
+            RedQueens--;
         }
         LifeR[x][y] = type;
         if (fd_3D57_07B2 != 0)
@@ -465,16 +465,16 @@ void far SimQueenR(int x, int y, int caste, int attr)
     } else if (caste == 13) {
         type = RlistT[Tindex];
         LifeR[x][y] = type;
-        if (fd_50F6_036C > 0 && LostHeadR(x, y, type)) {
-            fd_50F6_036C--;
+        if (RedQueens > 0 && LostHeadR(x, y, type)) {
+            RedQueens--;
             LifeR[x][y] = RlistT[Tindex] = 0;
             return;
         }
         nx = x + Dx8[(attr ^ 0xfc) & 7];
         ny = y + Dy8[(attr ^ 0xfc) & 7];
         if (InNestBounds(nx, ny)) {
-            fd_3D57_02B8[0] = nx;
-            fd_3D57_02B8[1] = ny;
+            LastRedEgg[0] = nx;
+            LastRedEgg[1] = ny;
             if ((Cycle & 0xf) == 0 && SRand128() <= HealthR) {
                 PlaceEggR(nx, ny, 0x81);
                 DecEatR();
@@ -491,7 +491,7 @@ int far QueenMoveR(int x, int y, int dirHint)
     int opp;
     int index;
 
-    dir = o25_39C7_0CBD(3, x, y, fd_50F6_0200, fd_50F6_020E);
+    dir = GetBestDir(3, x, y, TileMassXR, TileMassYR);
     if (dir < 0) {
         if (dir == -1)
             return 0;
@@ -662,10 +662,10 @@ void far TryEatFoodR(int y, int x)
         MapR[y][x]--;
     if (FoodR > 0)
         FoodR--;
-    threshold = (RpopT + fd_50F6_0AFA[2]) >> 4;
-    fd_50F6_0226 += 5;
-    if (threshold < fd_50F6_0226) {
-        fd_50F6_0226 = 0;
+    threshold = (RpopT + CastePopR[2]) >> 4;
+    EatCountR += 5;
+    if (threshold < EatCountR) {
+        EatCountR = 0;
         if (HealthR < 100)
             HealthR++;
     }
@@ -679,9 +679,9 @@ void far EatFoodR(int x, int y)
         MapR[x][y]--;
     if (FoodR > 0)
         FoodR--;
-    fd_50F6_0226 += 5;
-    if ((RpopT + fd_50F6_0AFA[2]) >> 4 < fd_50F6_0226) {
-        fd_50F6_0226 = 0;
+    EatCountR += 5;
+    if ((RpopT + CastePopR[2]) >> 4 < EatCountR) {
+        EatCountR = 0;
         if (HealthR < 100)
             HealthR++;
     }
@@ -699,9 +699,9 @@ void far StealFoodR(int x, int y)
 
 void far DecEatR(void)
 {
-    --fd_50F6_0226;
-    if (fd_50F6_0226 < 0) {
-        fd_50F6_0226 = RpopT >> 5;
+    --EatCountR;
+    if (EatCountR < 0) {
+        EatCountR = RpopT >> 5;
         if (HealthR > 0)
             --HealthR;
     }
@@ -797,7 +797,7 @@ void far DoDigInR(int x, int y, int attr, int caste)
     if (SRand64() > HealthR)
         TryEatFoodR(x, y);
     if (SRand4() == 0)
-        f_14EE_0D71(nx, ny);
+        FixExitMapR(nx, ny);
     if (MapR[nx][ny] == 0x14) {
         LifeR[nx][ny] = RlistT[Tindex] = 0;
         /* constant-left comparison: `(newattr & 0x7f) < 0x30 ? ...` lays the 0xb0 arm out first

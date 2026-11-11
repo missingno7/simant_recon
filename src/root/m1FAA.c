@@ -14,7 +14,7 @@ extern void (far * near g_913C)(int left, int top, int right, int bottom);
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
 extern void (far * near g_9138)(int x0, int y0, int x1, int y1, int color);
 
-void far f_1FAA_0006(struct Pt far *q, int fore, int back)
+void far TrapFill(struct Pt far *q, int fore, int back)
 {
     int top;
     int x0;

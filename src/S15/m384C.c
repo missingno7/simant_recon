@@ -118,41 +118,41 @@ void far o15_384C_0152(char far *msg, int flag)
     exit(0);
 }
 
-extern int far fd_3D57_02C2;
+extern int far gGameNeedsSaving;
 int far o15_384C_0239(int which);
-extern int far o09_35F5_0188(int flag);
+extern int far SaveGame(int flag);
 
 int far MenuQuit(void)
 {
     int r;
 
-    if (fd_3D57_02C2) {
+    if (gGameNeedsSaving) {
         do {
             r = o15_384C_0239(1);
             if (r == 2)
                 return 0;
             if (r != 1)
                 break;
-        } while (o09_35F5_0188(0) == 0);
+        } while (SaveGame(0) == 0);
     }
     o15_384C_0152("SimAnt was brought to you by the people at MAXIS.  Thank you for playing.", 0);
 }
 
 extern void far win_Open(int win);
 extern Handle far f_1A53_00F0(int object, int kind, int type);
-extern char far * far f_171C_1B84(Handle h);
+extern char far * far mem_Lock(Handle h);
 extern int near g_3DB2;
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern char near g_5A97;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void (far * near g_9128)(int a, int b, int c);
-extern void far f_1CE2_044D(struct Rect far *rect, int width);
+extern void far GRectOutline(struct Rect far *rect, int width);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *rect);
 extern int far f_1F58_0038(void);
 extern int far f_1F58_0090(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
-extern Handle far f_171C_1BBA(Handle h);
+extern Handle far mem_Unlock(Handle h);
 extern void far db_ReleaseHandle(Handle handle);
 extern void _fastcall win_Close(int win);
 
@@ -167,18 +167,18 @@ extern void far SetMapTitle(void);
 extern void far OpenEditWindow(void);
 extern int far DoScenario(int flag);
 extern int far LoadGame(int a, int b);
-extern int far fd_50F6_0EAC;
-extern int far fd_50F6_105E;
+extern int far CurGameType;
+extern int far CurGameTool;
 extern void far EndLifeTransferMode(void);
 extern void far EndTargetMode(void);
 extern void far SetDefaultWindPrompt(int);
-extern int far fd_50F6_0354;
-extern int far fd_50F6_07C8;
+extern int far JustXfered;
+extern int far QueenStorageB;
 extern void far RandYard(void);
 extern int far MePlane;
 extern int far WinPrintf(char far *format, ...);
-extern int far fd_3D57_07A4;
-extern int far fd_3D57_07A6;
+extern int far TutLesson;
+extern int far TutGiven;
 extern int far f_22BF_0A65(void);
 extern void far o26_39C7_0000(void);
 extern int far MeLocY;
@@ -195,17 +195,17 @@ int far o15_384C_0239(int which)
 
     win_Open(0x2100);
     h = f_1A53_00F0((0x41 - which) * 2, 10, 1);
-    text = f_171C_1B84(h);
-    f_24AB_02AD(g_3DB2 == 0x140 ? 2 : 4);
+    text = mem_Lock(h);
+    font_SetFont(g_3DB2 == 0x140 ? 2 : 4);
     if (g_5A97 & 1) {
         win_GetObjRect(0x2100, &r);
         (*g_9128)(0, 0, 0);
-        f_1CE2_044D(&r, 2);
+        GRectOutline(&r, 2);
     }
     win_GetObjRect(0x2101, &r);
     win_SetColorFromObjNum(0x2101);
     win_PrintTextInRect(0, text, &r);
-    f_24AB_02AD(0);
+    font_SetFont(0);
     for (;;) {
         if (f_1F58_0038()) {
             switch (f_1F58_0090()) {
@@ -240,7 +240,7 @@ int far o15_384C_0239(int which)
         }
     }
 done:
-    f_171C_1BBA(h);
+    mem_Unlock(h);
     db_ReleaseHandle(h);
     win_Close(0x2100);
     return result;
@@ -270,18 +270,18 @@ void far SetDefaultWindows(void)
 
 extern int far DoScenario(int flag);
 extern int far LoadGame(int a, int b);
-extern int far fd_50F6_0EAC;
-extern int far fd_50F6_105E;
+extern int far CurGameType;
+extern int far CurGameTool;
 extern void far EndLifeTransferMode(void);
 extern void far EndTargetMode(void);
 extern void far SetDefaultWindPrompt(int);
-extern int far fd_50F6_0354;
-extern int far fd_50F6_07C8;
+extern int far JustXfered;
+extern int far QueenStorageB;
 extern void far RandYard(void);
 extern int far MePlane;
 extern int far WinPrintf(char far *format, ...);
-extern int far fd_3D57_07A4;
-extern int far fd_3D57_07A6;
+extern int far TutLesson;
+extern int far TutGiven;
 extern int far f_22BF_0A65(void);
 extern void far o26_39C7_0000(void);
 extern int far MeLocY;
@@ -293,7 +293,7 @@ int far NewGame(int flag)
 {
     int r;
 
-    fd_3D57_02C2 = 0;
+    gGameNeedsSaving = 0;
     for (;;) {
         r = DoScenario(flag);
         if (r == 0x205)
@@ -318,21 +318,21 @@ int far NewGame(int flag)
                 break;
             }
             if (r >= 0 && r < 4) {
-                fd_50F6_0EAC = r;
-                if (fd_50F6_105E == 10)
+                CurGameType = r;
+                if (CurGameTool == 10)
                     EndLifeTransferMode();
-                else if (fd_50F6_105E == 11)
+                else if (CurGameTool == 11)
                     EndTargetMode();
                 SetDefaultWindPrompt(1);
                 SetEditWinTitle(0L);
-                fd_50F6_0354 = 1;
-                fd_50F6_07C8 = 0;
+                JustXfered = 1;
+                QueenStorageB = 0;
                 RandYard();
                 WinPrintf("MePLane=%d", MePlane);
                 SetMapPlane(MePlane);
-                if (fd_50F6_0EAC == 0) {
-                    fd_3D57_07A4 = 1;
-                    fd_3D57_07A6 = 0;
+                if (CurGameType == 0) {
+                    TutLesson = 1;
+                    TutGiven = 0;
                     if (flag == 0)
                         win_Open(0);
                 }
@@ -346,6 +346,6 @@ int far NewGame(int flag)
         o26_39C7_0000();
     CenterEdit(MeLocX, MeLocY);
     UpdateEdit();
-    fd_3D57_02C2 = 0;
+    gGameNeedsSaving = 0;
     return r;
 }

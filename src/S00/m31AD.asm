@@ -33,7 +33,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DDA:byte
 	extrn	_g_3DDC:byte
 	extrn	_g_3DDE:byte
-	extrn	_g_3DE0:byte
+	extrn	__foreColor:byte
 	extrn	_g_3DE2:byte
 	extrn	_g_3DEA:byte
 	extrn	_g_3DEC:byte
@@ -169,7 +169,7 @@ L0074:
 	mov dx, 3CEh
 	out dx, al
 	inc dx
-	mov al, byte ptr _g_3DE0
+	mov al, byte ptr __foreColor
 	out dx, al
 	mov al, 2
 	mov dx, 3C4h
@@ -296,7 +296,7 @@ L0192:
 	mov dx, 3CEh
 	out dx, al
 	inc dx
-	mov al, byte ptr _g_3DE0
+	mov al, byte ptr __foreColor
 	out dx, al
 	mov al, 2
 	mov dx, 3C4h
@@ -2621,7 +2621,7 @@ _o00_31AD_1213	proc	far
 	jl L125C
 	call far ptr _f_1B73_0196
 L125C:
-	mov al, byte ptr _g_3DE0
+	mov al, byte ptr __foreColor
 	mov byte ptr [bp-2], al
 	mov ah, byte ptr _g_3DE2
 	mov byte ptr [bp-4], ah
@@ -3136,7 +3136,7 @@ _o00_31AD_1659	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
-	mov byte ptr _g_3DE0, al
+	mov byte ptr __foreColor, al
 	mov ax, word ptr [bp+8]
 	mov byte ptr _g_3DE2, al
 	pop bp

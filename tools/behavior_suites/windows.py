@@ -167,7 +167,7 @@ def _field_service_fixture(label, obj_index, kind, count, fields):
         callbacks=_window_services(), return_kind="s16", registers=_registers(
             ax=(WIN_ID | obj_index), dx=kind),
         state={"lock_depth": 0},
-        metadata={"suite": SUITE, "contract": "f_2505_0453 indexed word result or 0x8000 sentinel, complete synthetic window header and lock trace",
+        metadata={"suite": SUITE, "contract": "win_GetVal indexed word result or 0x8000 sentinel, complete synthetic window header and lock trace",
                   "abi": "fastcall: AX=obj, DX=kind; target retf with no immediate stack pop",
                   "helper_policy": "win_LockWin/win_UnlockWin and f_2505_0006 are deterministic synthetic host services; candidate/original field dereference runs normally",
                   "validity": "window 1 with a valid object pointer table; count and index selected by case"})
@@ -214,12 +214,12 @@ def unlock_case(label, lock_depth, flags, count=0):
                  behavior.Range("g_8DA6", locks, 45),
                  behavior.Range("g_8CF2", g8cf2, 90),
                  behavior.Range("win_handles", handles, 180)],
-        callbacks={"f_171C_1686": behavior.Callback(2, lambda m, a: 0),
+        callbacks={"RallocType": behavior.Callback(2, lambda m, a: 0),
                    "f_171C_2086": behavior.Callback(2, lambda m, a: None)},
         return_kind="void", registers=_registers(ax=WIN_ID), state={},
         metadata={"suite": SUITE, "contract": "nested unlock decrements lock count without entering final release branch",
                   "abi": "fastcall: AX=window; target retf with no immediate stack pop",
-                  "helper_policy": "f_171C_1686 reports non-discarded handle; f_171C_2086 is trace-only; only depth > 1 is a valid bounded fixture",
+                  "helper_policy": "RallocType reports non-discarded handle; f_171C_2086 is trace-only; only depth > 1 is a valid bounded fixture",
                   "validity": "g_644C enabled; lock byte starts above one; final release path intentionally not reached"})
 
 
@@ -291,7 +291,7 @@ def unlock_live_case(label, object_types=(0,), window_flags=0x800, redraw_pendin
         metadata={"suite": SUITE,
                   "contract": "final-release win_UnlockWin branch with original Ralloc type lookup, lock decrement, free, unlock, type update, globals, and map copy",
                   "abi": "fastcall AX=window; target retf with no immediate stack pop",
-                  "helper_policy": "f_171C_1686, f_171C_13E4, f_171C_2086 and f_171C_20E2 execute actual DOS code; no mocked allocator callbacks",
+                  "helper_policy": "RallocType, RallocFree, f_171C_2086 and f_171C_20E2 execute actual DOS code; no mocked allocator callbacks",
                   "validity": {"handle": f"real master slot pointer {master_seg:04X}:{master_top:04X}",
                                "block_data": f"{block_data_seg:04x}:0000", "window": 1,
                                "Ralloc_block": "firm type 1, lock count 1, valid linked free tail",

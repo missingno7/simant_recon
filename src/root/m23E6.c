@@ -16,8 +16,8 @@ struct List {
     char far * far *text;
 };
 
-extern char far * far f_171C_1B84(char far * far *handle);
-extern void far f_171C_1BBA(char far * far *handle);
+extern char far * far mem_Lock(char far * far *handle);
+extern void far mem_Unlock(char far * far *handle);
 extern unsigned int far _fstrlen(char far *s);
 
 
@@ -36,7 +36,7 @@ char far * _fastcall f_23E6_0000(int line, struct List far *list)
             off = list->topOff;
     } else
         off = n = 0;
-    s = f_171C_1B84(list->text) + off;
+    s = mem_Lock(list->text) + off;
     while (n < line) {
         if (*s == 0)
             break;
@@ -44,7 +44,7 @@ char far * _fastcall f_23E6_0000(int line, struct List far *list)
         s++;
         n++;
     }
-    f_171C_1BBA(list->text);
+    mem_Unlock(list->text);
     return s;
 }
 
@@ -60,9 +60,9 @@ int _fastcall f_23E6_009F(int obj, int line)
 
     win_LockWin(obj);
     list = (struct List far *)(win_ObjAddr(obj) + 0x2a);
-    f_171C_1B84(list->text);
+    mem_Lock(list->text);
     sel = *f_23E6_0000(line, list) & 1;
-    f_171C_1BBA(list->text);
+    mem_Unlock(list->text);
     win_UnlockWin(obj);
     return sel;
 }
@@ -96,9 +96,9 @@ void _fastcall f_23E6_016B(int obj)
     win_LockWin(obj);
     o = win_ObjAddr(obj);
     list = (struct List far *)(o + 0x2a);
-    for (s = f_171C_1B84(list->text); *s; s += _fstrlen(s) + 1)
+    for (s = mem_Lock(list->text); *s; s += _fstrlen(s) + 1)
         *s &= ~1;
-    f_171C_1BBA(list->text);
+    mem_Unlock(list->text);
     win_UnlockWin(obj);
 }
 
@@ -112,7 +112,7 @@ void _fastcall f_23E6_01DC(int obj, int line, int sel)
     o = win_ObjAddr(obj);
     list = (struct List far *)(o + 0x2a);
     if (list->text) {
-        f_171C_1B84(list->text);
+        mem_Lock(list->text);
         if (list->count > line) {
             s = f_23E6_0000(line, list);
             if (sel)
@@ -121,14 +121,14 @@ void _fastcall f_23E6_01DC(int obj, int line, int sel)
                 *s &= ~1;
             win_UnlockWin(obj);
         }
-        f_171C_1BBA(list->text);
+        mem_Unlock(list->text);
     }
 }
 
-extern char far * far * far f_171C_18A6(char far * far *handle, long size, int flags);
-extern char far * far * far f_171C_13CA(long size, int flags, char far *name);
+extern char far * far * far RallocRealloc(char far * far *handle, long size, int flags);
+extern char far * far * far Ralloc(long size, int flags, char far *name);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 
 void _fastcall f_23E6_0266(int obj, char far *text)
 {
@@ -148,19 +148,19 @@ void _fastcall f_23E6_0266(int obj, char far *text)
     list = (struct List far *)(o + 0x2a);
     h = list->text;
     if (h)
-        h = f_171C_18A6(h, (long)len, 1);
+        h = RallocRealloc(h, (long)len, 1);
     else
-        h = f_171C_13CA((long)len, 1, "list");
-    _fmemcpy(f_171C_1B84(h), text, len);
-    f_171C_1BBA(h);
+        h = Ralloc((long)len, 1, "list");
+    _fmemcpy(mem_Lock(h), text, len);
+    mem_Unlock(h);
     r = *(struct Rect far *)o;
-    f_24AB_02AD(o[0x28]);
+    font_SetFont(o[0x28]);
     list->count = n;
     list->top = 0;
     list->topOff = 0;
     list->endOff = -1;
     list->text = h;
-    f_24AB_02AD(0);
+    font_SetFont(0);
     win_UnlockWin(obj);
 }
 
@@ -190,11 +190,11 @@ void _fastcall f_23E6_0392(char far *o)
     list = (struct List far *)(o + 0x2a);
     if (list->text == 0)
         return;
-    f_24AB_02AD(o[0x28]);
+    font_SetFont(o[0x28]);
     clip_Push();
     r = (struct Rect far *)o;
     clip_SubInclude(r);
-    base = f_171C_1B84(list->text);
+    base = mem_Lock(list->text);
     s = base + list->topOff;
     color0 = o[0x26];
     color1 = o[0x27];
@@ -219,9 +219,9 @@ void _fastcall f_23E6_0392(char far *o)
         y += h;
     }
     list->endOff = s - base;
-    f_24AB_02AD(0);
+    font_SetFont(0);
     clip_Pop();
-    f_171C_1BBA(list->text);
+    mem_Unlock(list->text);
 }
 
 extern void far Punt(char far *format, ...);
@@ -232,7 +232,7 @@ struct Pt {
 
 extern struct Pt far fd_50F6_47DA;
 extern int far WinPrintf(char far *format, ...);
-extern int near g_3DE0;
+extern int near _foreColor;
 
 void _fastcall win_DrawElevator(char far *o)
 {
@@ -268,7 +268,7 @@ void _fastcall win_DrawElevator(char far *o)
     if (eleTop > 0)
         g_9134(r.left, r.top, r.right, r.top + eleTop, g_3DE2);
     WinPrintf(" eleTop= %d", eleTop);
-    g_9134(r.left, r.top + eleTop, r.right, eleTop + eleHeight + r.top, g_3DE0);
+    g_9134(r.left, r.top + eleTop, r.right, eleTop + eleHeight + r.top, _foreColor);
     if (eleTop + eleHeight < height)
         g_9134(r.left, eleTop + eleHeight + r.top, r.right, r.bottom, g_3DE2);
 }
@@ -301,7 +301,7 @@ void _fastcall f_23E6_06F1(int line, char far *o)
     if (n == line)
         return;
     off = list->topOff;
-    s = base = f_171C_1B84(list->text);
+    s = base = mem_Lock(list->text);
     if (line < n) {
         n = 0;
         off = 0;
@@ -317,7 +317,7 @@ void _fastcall f_23E6_06F1(int line, char far *o)
     list->top = n;
     list->topOff = off;
     f_23E6_0392(o);
-    f_171C_1BBA(list->text);
+    mem_Unlock(list->text);
 }
 
 extern void (far * near g_9188)(int left, int top, int right, int bottom, int x, int y);
@@ -333,8 +333,8 @@ int _fastcall f_23E6_07A2(char far *o)
     if (list->top + list->visible >= list->count)
         return 0;
     r = *(struct Rect far *)o;
-    base = f_171C_1B84(list->text);
-    f_24AB_02AD(o[0x28]);
+    base = mem_Lock(list->text);
+    font_SetFont(o[0x28]);
     h = f_24AB_030B();
     clip_Push();
     clip_SubInclude(&r);
@@ -346,7 +346,7 @@ int _fastcall f_23E6_07A2(char far *o)
     f_24AB_042B(&r, r.bottom - h, base + 1);
     list->endOff += _fstrlen(base) + 1;
     clip_Pop();
-    f_171C_1BBA(list->text);
+    mem_Unlock(list->text);
 }
 
 extern char far * far f_24FA_0004(char far *p, char c, unsigned int n);
@@ -363,8 +363,8 @@ int _fastcall PrevListLine(char far *o)
     if (list->top == 0)
         return 0;
     r = *(struct Rect far *)o;
-    base = f_171C_1B84(list->text);
-    f_24AB_02AD(o[0x28]);
+    base = mem_Lock(list->text);
+    font_SetFont(o[0x28]);
     h = f_24AB_030B();
     clip_Push();
     clip_SubInclude(&r);
@@ -383,7 +383,7 @@ found:
     f_24AB_042B(&r, r.top, s + 1);
     list->endOff = f_24FA_0004(base + list->endOff - 2, 0, 0xffff) - base + 1;
     clip_Pop();
-    f_171C_1BBA(list->text);
+    mem_Unlock(list->text);
 }
 
 struct Event {
@@ -407,7 +407,7 @@ void _fastcall f_23E6_0A53(struct Event far *ev)
 
     o = win_ObjAddr(ev->code);
     list = (struct List far *)(o + 0x2a);
-    f_24AB_02AD(o[0x28]);
+    font_SetFont(o[0x28]);
     h = f_24AB_030B();
     line = (ev->v - ((struct Rect far *)o)->top) / h + list->top;
     sel = f_23E6_009F(ev->code, line);

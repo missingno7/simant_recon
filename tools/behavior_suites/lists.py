@@ -50,7 +50,7 @@ def make_case(label, lines, top, visible, line, age=0, lock=0):
                  b.Range('text',DATA[1]*16,len(text)),
                  b.Range('block_header',(DATA[1]-2)*16,32),
                  b.Range('age',dg+0x2F30,4)],
-        callbacks={'f_171C_1B84':b.Callback(2),'f_171C_1BBA':b.Callback(2),
+        callbacks={'mem_Lock':b.Callback(2),'mem_Unlock':b.Callback(2),
                    '_fstrlen':b.Callback(2)},
         metadata={'line':line,'top':top,'visible':visible,'lengths':list(map(len,lines)),
                   'helpers':'all original; no modeled callbacks'})

@@ -31,9 +31,9 @@ extern void _fastcall _win_SetProxItem(int obj);
 extern void far f_1FD2_057F(void);
 extern int _fastcall win_IsWinOpen(int win);
 extern int _fastcall win_IsWinInFront(int win);
-extern void far f_1FD2_04D0(struct Pt far *pt);
+extern void far GetMousePos(struct Pt far *pt);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern int far f_1FD2_04E5(struct Pt far *pt, struct Rect far *r);
+extern int far PointInRect(struct Pt far *pt, struct Rect far *r);
 extern void far WinPrintf(char far *fmt, ...);
 extern void _fastcall win_Close(int win);
 extern void _fastcall win_ObjInv(int obj);
@@ -69,10 +69,10 @@ int far DoExpMenu(int x, int y)
     if (!win_IsWinOpen(0x900))
         goto release;
     if (!win_IsWinInFront(0x900)) {
-        f_1FD2_04D0(&pt);
+        GetMousePos(&pt);
         for (i = 0x902; i <= 0x909; i++) {
             win_GetObjRect(i, &r);
-            if (f_1FD2_04E5(&pt, &r) && cur + 0x902 != i) {
+            if (PointInRect(&pt, &r) && cur + 0x902 != i) {
     WinPrintf("\nL: item=%x, openSub=%x", i, openSub);
     if (openSub != -1) {
         win_Close(openSub);

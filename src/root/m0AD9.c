@@ -29,8 +29,8 @@ extern int far IsThisFood(int category, int tile);
 extern char far Dy9[9];
 extern char far Dx9[9];
 extern int far IsYellowAnt(int value);
-extern int far fd_50F6_0496;
-extern int far fd_50F6_04C2;
+extern int far MeDir;
+extern int far MeType;
 extern void far MoveMyLife(int plane, int x, int y, int type, int dir);
 extern void far o22_39C7_0D21(int code);
 extern int far SRand8(void);
@@ -223,7 +223,7 @@ void far DoAntLions(void)
                     continue;
                 }
                 if (IsYellowAnt(tile) == 1) {
-                    MoveMyLife(1, LionListX[i], LionListY[i], fd_50F6_04C2, fd_50F6_0496);
+                    MoveMyLife(1, LionListX[i], LionListY[i], MeType, MeDir);
                     o22_39C7_0D21(2);
                 } else {
                     if (SRand8() == 0)

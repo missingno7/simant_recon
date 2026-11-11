@@ -20,11 +20,11 @@ DGROUP	group	_DATA
 BLIT_TEXT	segment word public 'CODE'
 	assume	cs:BLIT_TEXT, ds:DGROUP
 
-	public	_f_2650_000F
-	public	_f_2650_0107
+	public	_DrawChar
+	public	_ClearBuffer
 
 LeftMasks	db	0, 80h, 0C0h, 0E0h, 0F0h, 0F8h, 0FCh, 0FEh, 0FFh
-_f_2650_000F	proc	far
+_DrawChar	proc	far
 	push bp
 	mov bp, sp
 	add bp, 6
@@ -142,9 +142,9 @@ L0101:
 	pop es
 	pop bp
 	retf
-_f_2650_000F	endp
+_DrawChar	endp
 
-_f_2650_0107	proc	far
+_ClearBuffer	proc	far
 	push bp
 	mov bp, sp
 	add bp, 6
@@ -165,7 +165,7 @@ _f_2650_0107	proc	far
 	pop es
 	pop bp
 	retf
-_f_2650_0107	endp
+_ClearBuffer	endp
 
 BLIT_TEXT	ends
 	end

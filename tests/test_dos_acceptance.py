@@ -18,7 +18,7 @@ class SaveComparisonTests(unittest.TestCase):
         self.assertEqual(len(self.schema), 307)
         self.assertEqual(self.size, 48386)
         self.assertEqual(self.schema[0][4], "MapA")
-        self.assertIn("fd_50F6_109C", self.offsets)
+        self.assertIn("BoyMsgCnt", self.offsets)
 
     def test_state_record_difference_fails(self):
         a = bytearray(self.size)

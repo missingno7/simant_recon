@@ -16,7 +16,7 @@ extern void far o14_384C_0B6A(int a, int b, int c);
 extern char far Dx8[8];
 extern char far Dy8[8];
 extern unsigned char far fd_3D57_0184[][16];
-extern int far fd_3D57_0C1E;
+extern int far ClearRainFlag;
 extern unsigned char far MapA[128][64];
 extern unsigned char far MapB[64][64];
 extern unsigned char far MapR[64][64];
@@ -28,37 +28,37 @@ extern unsigned char far AlistT[];
 extern unsigned char far BlistT[];
 extern unsigned char far RlistT[];
 extern unsigned char far PherMapA[64][32];
-extern unsigned char far fd_3E1D_D89F[64][32];
+extern unsigned char far PherMapF[64][32];
 extern unsigned char far PherMapBN[64][32];
 extern unsigned char far PherMapBT[64][32];
 extern unsigned char far PherMapRN[64][32];
 extern unsigned char far PherMapRT[64][32];
-extern long far fd_50F6_0214;
-extern int far fd_50F6_0228;
-extern int far fd_50F6_0242;
-unsigned char far fd_50F6_0256[100];
-unsigned char far fd_50F6_02C0[100];
+extern long far LastThemeTime;
+extern int far LastThemeSong;
+extern int far WaterTable;
+unsigned char far RxTab[100];
+unsigned char far RyTab[100];
 int far BpopT;
 int far RpopT;
-extern int far fd_50F6_0352;
-extern int far fd_50F6_0354;
-extern int far fd_50F6_0366;
-extern int far fd_50F6_0376;
-extern int far fd_50F6_0400;
-extern int far fd_50F6_04C2;
-extern int far fd_50F6_04E2;
-extern int far fd_50F6_07CA[2];
-extern int far fd_50F6_0A06;
-extern int far fd_50F6_0AEC[6];
-extern int far fd_50F6_0AFA[6];
+extern int far RainOn;
+extern int far JustXfered;
+extern int far BlackWon;
+extern int far IsGameOver;
+extern int far ColonyTotalRed;
+extern int far MeType;
+extern int far MeColor;
+extern int far CurYardPnt[2];
+extern int far MeMode;
+extern int far CastePopB[6];
+extern int far CastePopR[6];
 extern int far ListIndexA;
 extern int far ListIndexB;
 extern int far ListIndexR;
-extern int far fd_50F6_0EAC;
+extern int far CurGameType;
 extern int far fd_50F6_0EB6[32];
 extern int far TERRAINset;
 extern int far fd_50F6_0F3A;
-extern int far fd_50F6_1040;
+extern int far FoodA;
 extern int far FoodB;
 extern int far FoodR;
 unsigned char g_1B9A[4] = { 0, 1, 0, 0xFF };
@@ -88,8 +88,8 @@ void far CountAnts(void)
     int n;
     int v;
 
-    fd_50F6_0AFA[0] = 0;
-    fd_50F6_0AEC[0] = 0;
+    CastePopR[0] = 0;
+    CastePopB[0] = 0;
     for (i = 0; i < 32; i++)
         fd_50F6_0EB6[i] = 0;
     for (n = ListIndexA; n > 0; ) {
@@ -107,47 +107,47 @@ void far CountAnts(void)
         if (v)
             fd_50F6_0EB6[v >> 3]++;
     }
-    if (fd_50F6_0A06 == 0) {
-        if (fd_50F6_04E2 == 0)
-            fd_50F6_0EB6[fd_50F6_04C2 >> 3]++;
+    if (MeMode == 0) {
+        if (MeColor == 0)
+            fd_50F6_0EB6[MeType >> 3]++;
         else
-            fd_50F6_0EB6[(fd_50F6_04C2 | 0x80) >> 3]++;
+            fd_50F6_0EB6[(MeType | 0x80) >> 3]++;
     }
-    fd_50F6_0AEC[0] = fd_50F6_0EB6[0];
-    fd_50F6_0AEC[1] = fd_50F6_0EB6[1] + fd_50F6_0EB6[2] + fd_50F6_0EB6[3] + fd_50F6_0EB6[5];
-    fd_50F6_0AEC[2] = fd_50F6_0EB6[6] + fd_50F6_0EB6[7] + fd_50F6_0EB6[9];
-    fd_50F6_0AEC[3] = fd_50F6_0EB6[4];
-    fd_50F6_0AEC[4] = fd_50F6_0EB6[8];
-    if (fd_50F6_0AEC[5] && fd_50F6_0EB6[12] == 0 && fd_50F6_0354 == 0) {
+    CastePopB[0] = fd_50F6_0EB6[0];
+    CastePopB[1] = fd_50F6_0EB6[1] + fd_50F6_0EB6[2] + fd_50F6_0EB6[3] + fd_50F6_0EB6[5];
+    CastePopB[2] = fd_50F6_0EB6[6] + fd_50F6_0EB6[7] + fd_50F6_0EB6[9];
+    CastePopB[3] = fd_50F6_0EB6[4];
+    CastePopB[4] = fd_50F6_0EB6[8];
+    if (CastePopB[5] && fd_50F6_0EB6[12] == 0 && JustXfered == 0) {
         myBeginSong(0x2b0c, 0x7e);
         o14_384C_0B6A(0, 0x271a, 1);
-        if (fd_50F6_0EAC <= 1) {
+        if (CurGameType <= 1) {
             o14_384C_0B6A(0, 0x271b, 1);
-            fd_50F6_0376 = 1;
-            fd_50F6_0366 = 0;
+            IsGameOver = 1;
+            BlackWon = 0;
         }
     }
-    fd_50F6_0AEC[5] = fd_50F6_0EB6[12];
-    fd_50F6_0AFA[0] = fd_50F6_0EB6[16];
-    fd_50F6_0AFA[1] = fd_50F6_0EB6[18] + fd_50F6_0EB6[19] + fd_50F6_0EB6[21] + fd_50F6_0EB6[17];
-    fd_50F6_0AFA[2] = fd_50F6_0EB6[23] + fd_50F6_0EB6[22] + fd_50F6_0EB6[25];
-    fd_50F6_0AFA[3] = fd_50F6_0EB6[20];
-    fd_50F6_0AFA[4] = fd_50F6_0EB6[24];
-    if (fd_50F6_0AFA[5] && fd_50F6_0EB6[28] == 0 && fd_50F6_0354 == 0) {
+    CastePopB[5] = fd_50F6_0EB6[12];
+    CastePopR[0] = fd_50F6_0EB6[16];
+    CastePopR[1] = fd_50F6_0EB6[18] + fd_50F6_0EB6[19] + fd_50F6_0EB6[21] + fd_50F6_0EB6[17];
+    CastePopR[2] = fd_50F6_0EB6[23] + fd_50F6_0EB6[22] + fd_50F6_0EB6[25];
+    CastePopR[3] = fd_50F6_0EB6[20];
+    CastePopR[4] = fd_50F6_0EB6[24];
+    if (CastePopR[5] && fd_50F6_0EB6[28] == 0 && JustXfered == 0) {
         myBeginSong(0x2b0d, 0x7e);
         o14_384C_0B6A(0, 0x271c, 1);
-        if (fd_50F6_0EAC <= 1) {
+        if (CurGameType <= 1) {
             o14_384C_0B6A(0, 0x271d, 1);
-            fd_50F6_0376 = 1;
-            fd_50F6_0366 = 1;
+            IsGameOver = 1;
+            BlackWon = 1;
         }
-        if (fd_50F6_0EAC == 2 && fd_50F6_0400 == 1 && fd_50F6_07CA[0] == 0xb && fd_50F6_07CA[1] == 8)
+        if (CurGameType == 2 && ColonyTotalRed == 1 && CurYardPnt[0] == 0xb && CurYardPnt[1] == 8)
             fd_3D57_0184[SRand1(6)][0] = 0x14;
     }
-    BpopT = fd_50F6_0AEC[3] + fd_50F6_0AEC[1] + fd_50F6_0AEC[2] + fd_50F6_0AEC[4] + fd_50F6_0AEC[5];
-    fd_50F6_0AFA[5] = fd_50F6_0EB6[28];
-    RpopT = fd_50F6_0AFA[5] + fd_50F6_0AFA[4] + fd_50F6_0AFA[1] + fd_50F6_0AFA[3] + fd_50F6_0AFA[2];
-    fd_50F6_0354 = 0;
+    BpopT = CastePopB[3] + CastePopB[1] + CastePopB[2] + CastePopB[4] + CastePopB[5];
+    CastePopR[5] = fd_50F6_0EB6[28];
+    RpopT = CastePopR[5] + CastePopR[4] + CastePopR[1] + CastePopR[3] + CastePopR[2];
+    JustXfered = 0;
 }
 
 
@@ -169,17 +169,17 @@ void far DoWater(void)
     int y;
     int v;
 
-    if (fd_50F6_0352 && !TERRAINset) {
+    if (RainOn && !TERRAINset) {
         if (SRand1(50) == 0)
             myBeginSound(0x29, 0, 0x40);
-        fd_3D57_0C1E = 1;
-        if (SRand1(10) == 0 && fd_50F6_0242 > 4) {
-            --fd_50F6_0242;
-            AddWater(fd_50F6_0242);
+        ClearRainFlag = 1;
+        if (SRand1(10) == 0 && WaterTable > 4) {
+            --WaterTable;
+            AddWater(WaterTable);
         }
         for (i = 0; i < 100; i++) {
-            x = fd_50F6_0256[i];
-            y = fd_50F6_02C0[i];
+            x = RxTab[i];
+            y = RyTab[i];
             v = MapA[x][y];
             if (v >= 0x74 && v < 0x77)
                 MapA[x][y]++;
@@ -190,19 +190,19 @@ void far DoWater(void)
             }
         }
     } else if (!TERRAINset) {
-        if (fd_3D57_0C1E == 1) {
-            fd_3D57_0C1E = 0;
+        if (ClearRainFlag == 1) {
+            ClearRainFlag = 0;
             for (i = 0; i < 100; i++) {
-                x = fd_50F6_0256[i];
-                y = fd_50F6_02C0[i];
+                x = RxTab[i];
+                y = RyTab[i];
                 v = MapA[x][y];
                 if (v >= 0x74 && v <= 0x77)
                     MapA[x][y] = SRand1(14);
             }
         }
-        if (fd_50F6_0242 < 0x40 && SRand1(10) == 0) {
-            DropWater(fd_50F6_0242);
-            fd_50F6_0242++;
+        if (WaterTable < 0x40 && SRand1(10) == 0) {
+            DropWater(WaterTable);
+            WaterTable++;
         }
     }
 }
@@ -214,13 +214,13 @@ void far PlaceDrop(int i)
 
     x = RRand(128);
     y = RRand(64);
-    fd_50F6_0256[i] = x;
-    fd_50F6_02C0[i] = y;
+    RxTab[i] = x;
+    RyTab[i] = y;
     if (MapA[x][y] < 0xe) {
         MapA[x][y] = 0x74;
         x >>= 1;
         y >>= 1;
-        fd_3E1D_D89F[x][y] = PherMapA[x][y] = 0;
+        PherMapF[x][y] = PherMapA[x][y] = 0;
         if (PherMapBN[x][y] >= 0x14)
             PherMapBN[x][y] -= 0x14;
         else
@@ -308,8 +308,8 @@ void far PickupFoodA(int x, int y)
         else
             MapA[x][y]--;
     }
-    if (fd_50F6_1040 > 0)
-        fd_50F6_1040--;
+    if (FoodA > 0)
+        FoodA--;
 }
 
 int far DropFoodA(int x, int y)
@@ -320,18 +320,18 @@ int far DropFoodA(int x, int y)
     if (TERRAINset == 1) {
         if (v < 4) {
             MapA[x][y] = (v + 6) << 2;
-            fd_50F6_1040++;
+            FoodA++;
             return 1;
         }
         if (v >= 8 && v < 0x18) {
             v = (v - 8) >> 2;
             MapA[x][y] = (v + 6) << 2;
-            fd_50F6_1040++;
+            FoodA++;
             return 1;
         }
         if (v >= 0x18 && v < 0x27) {
             MapA[x][y]++;
-            fd_50F6_1040++;
+            FoodA++;
             return 1;
         }
         if (v < 0x40) {
@@ -342,11 +342,11 @@ int far DropFoodA(int x, int y)
         if (v < 0x4b) {
             if (v >= 0x48) {
                 MapA[x][y]++;
-                fd_50F6_1040++;
+                FoodA++;
                 return 1;
             }
             MapA[x][y] = 0x48;
-            fd_50F6_1040++;
+            FoodA++;
             return 1;
         }
     }
@@ -367,7 +367,7 @@ void far FoodFall(int a, int b)
         v = MapA[x][y];
         if (v < 4) {
             MapA[x][y] = (v + 6) << 2;
-            fd_50F6_1040++;
+            FoodA++;
             go = 0;
         }
         x += g_1B9A[fd_50F6_0F3A];
@@ -620,11 +620,11 @@ int far GetEnterDirR(int x, int y, int dir)
 
 void far TryAntTheme(void)
 {
-    if (TickCount() >= fd_50F6_0214 + 0x1c20) {
-        fd_50F6_0214 = TickCount();
-        if (++fd_50F6_0228 > 2)
-            fd_50F6_0228 = 0;
-        myBeginSong(fd_50F6_0228 + 0x2713, 0x7e);
+    if (TickCount() >= LastThemeTime + 0x1c20) {
+        LastThemeTime = TickCount();
+        if (++LastThemeSong > 2)
+            LastThemeSong = 0;
+        myBeginSong(LastThemeSong + 0x2713, 0x7e);
     }
 }
 

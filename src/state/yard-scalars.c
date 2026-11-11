@@ -1,9 +1,9 @@
 /* Candidate source-functional storage provider for RandYard's eight FAR_BSS words. */
-int far fd_50F6_105E;
-int far fd_50F6_0478;
-int far fd_50F6_0504;
-int far fd_50F6_0228;
+int far CurGameTool;
+int far HouseColonies;
+int far JustToBeMean;
+int far LastThemeSong;
 int far MapPlane;
 int far YardMode;
-int far fd_50F6_0366;
-int far fd_50F6_0376;
+int far BlackWon;
+int far IsGameOver;

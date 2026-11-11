@@ -22,13 +22,13 @@ typedef struct {
 
 typedef CacheTable far * far *CacheHandle;
 
-extern void far * far f_171C_13CA(long size, int flags, char far *name);
-extern void far f_171C_13E4(void far *handle);
+extern void far * far Ralloc(long size, int flags, char far *name);
+extern void far RallocFree(void far *handle);
 extern unsigned long far f_171C_14BE(char far *handle);
-extern void far f_171C_152C(char far *handle);
-extern int far f_171C_1686(char far *handle);
-extern int far f_171C_1794(char far *handle);
-extern int far f_171C_1AD4(char far *handle);
+extern void far RallocFreshen(char far *handle);
+extern int far RallocType(char far *handle);
+extern int far RallocFreed(char far *handle);
+extern int far mem_LockLevel(char far *handle);
 extern void far * far malloc(int size);
 extern void far free(void far *p);
 extern void far Punt(char far *format, ...);
@@ -55,7 +55,7 @@ CacheHandle far ch_CreateTable(int size)
         size = 503;
     else
         size = ch_GetPrime(size);
-    _fmemset(*(table = f_171C_13CA((long)(size * 8 + 4), 0, "cachetable")), -1, (size + 1) * 4);
+    _fmemset(*(table = Ralloc((long)(size * 8 + 4), 0, "cachetable")), -1, (size + 1) * 4);
     (*table)->count = size;
     (*table)->used = 0;
     return table;
@@ -82,9 +82,9 @@ void far ch_PurgeCache(CacheHandle table)
     p = (*table)->e;
     for (i = 0; i < count; p++, i++) {
         if (p->k.id != -1)
-            f_171C_13E4((*table)->e[i + count].h);
+            RallocFree((*table)->e[i + count].h);
     }
-    f_171C_13E4(table);
+    RallocFree(table);
 }
 
 int far ch_LookUpHandle(char far *handle, CacheHandle table, int far *object, int far *type)
@@ -146,11 +146,11 @@ found:
     s_3B88++;
     s_3B86 = i;
     handle = (*table)->e[count + i].h;
-    if (f_171C_1794(handle)) {
+    if (RallocFreed(handle)) {
         ch_CleanupTable(table);
         goto missing;
     }
-    f_171C_152C(handle);
+    RallocFreshen(handle);
     return handle;
 missing:
     s_3B86 = i;
@@ -202,8 +202,8 @@ int far ch_CleanupTable(CacheHandle table)
     hp = &(*table)->e[count];
     kp = (*table)->e;
     while (count--) {
-        if (kp->k.id != -1 && hp->h && f_171C_1794(hp->h) && !f_171C_1AD4(hp->h)) {
-            f_171C_13E4(hp->h);
+        if (kp->k.id != -1 && hp->h && RallocFreed(hp->h) && !mem_LockLevel(hp->h)) {
+            RallocFree(hp->h);
             kp->k.id = -1;
             (*table)->used--;
         }
@@ -233,7 +233,7 @@ int far ch_DumpOldest(CacheHandle table)
         while (count--) {
             if (kp->k.id != -1) {
                 age = f_171C_14BE(hp->h);
-                if (age > oldest && f_171C_1686(hp->h) == 3 && !f_171C_1AD4(hp->h)) {
+                if (age > oldest && RallocType(hp->h) == 3 && !mem_LockLevel(hp->h)) {
                     oldest = age;
                     oldH = hp;
                     oldK = kp;
@@ -244,7 +244,7 @@ int far ch_DumpOldest(CacheHandle table)
         }
         if (oldest == 0L)
             Punt("no memory over 0 in age!");
-        f_171C_13E4(oldH->h);
+        RallocFree(oldH->h);
         oldK->k.id = -1;
         oldH->h = 0L;
         (*table)->used--;

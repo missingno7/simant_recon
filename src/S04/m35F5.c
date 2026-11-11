@@ -28,18 +28,18 @@ static int subMenus[8] = { -1, 0xc00, 0xf00, 0x1000, 0x1100, 0xd00, 0xe00, -1 };
 
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern int far fd_50F6_0EAC;
+extern int far CurGameType;
 extern void _fastcall win_GetObjSize(int obj, struct Pt far *size);
 extern int far win_DoProxMenu();
 extern void far SetExpTool(int tool);
 extern int far fd_50F6_104C;
-extern int far fd_50F6_0496;
-extern int far fd_50F6_04C2;
+extern int far MeDir;
+extern int far MeType;
 extern int far MeLocY;
 extern int far MeLocX;
 extern int far MePlane;
 extern void far ClearMyLife(int plane, int x, int y, int type, int dir);
-extern int far fd_50F6_0A06;
+extern int far MeMode;
 extern void far InitSpider(void);
 extern void far SetEditWinTitle();
 extern void far myBeginSound(int sound, int a, int b);
@@ -55,21 +55,21 @@ extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
 extern void far clip_Pop(void);
 extern struct Rect far fd_50F6_10D2;
-extern int far f_1FD2_04E5(struct Pt far *pt, struct Rect far *r);
+extern int far PointInRect(struct Pt far *pt, struct Rect far *r);
 extern void far WinPrintf(char far *fmt, ...);
-extern int far fd_50F6_3858;
-extern int far fd_50F6_3856;
-extern int far fd_50F6_0508[2];
-extern int far fd_55B3_19BE;
-extern int far fd_50F6_110C[2];
-extern int far fd_55B3_19C0;
+extern int far mapYsize;
+extern int far mapXsize;
+extern int far MapPnt[2];
+extern int far tileWidth;
+extern int far editTileRect[2];
+extern int far tileHeight;
 extern void far processEdit(struct Event far *ev);
 extern int far fd_50F6_3854;
 extern void far EraseMapCursor(void);
 extern void far f_0250_0FC4(int x, int y);
 extern void far f_0250_0E9D(void);
 extern void far DrawMapCursor(void);
-extern void far f_1FD2_04D0(struct Pt far *pt);
+extern void far GetMousePos(struct Pt far *pt);
 extern int far f_00F8_02AC(void);
 extern void far OpenEditWindow(void);
 extern char near g_5A97;
@@ -81,26 +81,26 @@ extern void far o01_328E_012C(char far *src, char far *dst, int y);
 extern struct Rect far fd_50F6_3842;
 extern int far fd_50F6_3852;
 extern int far fd_55B3_2996;
-extern char far * far f_171C_1A9E(long size, int flag, char far *name);
+extern char far * far mem_Alloc(long size, int flag, char far *name);
 extern char far * far fd_50F6_385E;
 extern char far * far fd_50F6_385A;
 extern void far o12_384C_0432(void);
 extern void far o12_384C_080E(void);
 extern int near g_8BD2;
-extern int far fd_3D57_07C8;
+extern int far MapMode;
 extern void far o12_384C_0706(unsigned char far *map);
 extern unsigned char far PherMapBN[];
 extern unsigned char far PherMapBT[];
 extern unsigned char far PherMapRN[];
 extern unsigned char far PherMapRT[];
 extern unsigned char far PherMapA[];
-extern int far f_1B4E_000D(int color);
+extern int far ConvColor(int color);
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
-extern char far * far f_171C_1B84(char far *handle);
+extern char far * far mem_Lock(char far *handle);
 extern int near g_8BD4;
 extern void (far * near g_914C)(int x, int y, char far *line, int width, int height);
-extern void far f_171C_1BBA(char far *handle);
-extern void far f_171C_1C0A(char far *handle);
+extern void far mem_Unlock(char far *handle);
+extern void far mem_Free(char far *handle);
 extern void far win_Open();
 extern void _fastcall win_Close(int win);
 extern void far OpenMapYard(void);
@@ -126,15 +126,15 @@ void far MapToolsMenu(void)
     int item;
 
     win_GetObjRect(0x117, &r);
-    switch (fd_50F6_0EAC) {
+    switch (CurGameType) {
     case 1:
         win_GetObjSize(0xa00, &size);
         if (win_DoProxMenu(0xa00, -1, (r.right - size.x + r.left) / 2, r.top - size.y - 4) < 0)
             break;
         SetExpTool(fd_50F6_104C);
-        fd_50F6_0EAC = 3;
-        ClearMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496);
-        fd_50F6_0A06 = 2;
+        CurGameType = 3;
+        ClearMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir);
+        MeMode = 2;
         InitSpider();
         SetEditWinTitle(0, 0);
         myBeginSound(2, 0, 0x7e);
@@ -149,10 +149,10 @@ void far MapToolsMenu(void)
         if (item == -1)
             break;
         if (item == 7) {
-            fd_50F6_0EAC = 1;
+            CurGameType = 1;
             InitYelloAnt();
             if (fd_50F6_032E == 1)
-                SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+                SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
             SetEditWinTitle(0, 0);
             f_00DF_00B1(0x2afb, 0x7e);
         }
@@ -182,14 +182,14 @@ void far MapAreaEvent(struct Event far *ev)
     int x;
     int y;
 
-    if (!f_1FD2_04E5((struct Pt far *)&ev->h, &fd_50F6_10D2))
+    if (!PointInRect((struct Pt far *)&ev->h, &fd_50F6_10D2))
         return;
     last.x = (int)0x8000;
     WinPrintf("ePtr->mouse_flags=%x, MRPRESSED=%x", ev->modifiers, 0x800);
     if (ev->modifiers & 0x4800) {
-        y = (ev->v - fd_50F6_10D2.top) / fd_50F6_3858;
-        ev->h = ((ev->h - fd_50F6_10D2.left) / fd_50F6_3856 - fd_50F6_0508[0]) * fd_55B3_19BE + fd_50F6_110C[0];
-        ev->v = (y - fd_50F6_0508[1]) * fd_55B3_19C0 + fd_50F6_110C[1];
+        y = (ev->v - fd_50F6_10D2.top) / mapYsize;
+        ev->h = ((ev->h - fd_50F6_10D2.left) / mapXsize - MapPnt[0]) * tileWidth + editTileRect[0];
+        ev->v = (y - MapPnt[1]) * tileHeight + editTileRect[1];
         if (ev->modifiers & 0x4000)
             ev->modifiers = 0x2000;
         else
@@ -200,10 +200,10 @@ void far MapAreaEvent(struct Event far *ev)
     do {
         if (last.x != ev->h || last.y != ev->v) {
             last = *(struct Pt far *)&ev->h;
-            x = (ev->h - fd_50F6_10D2.left) / fd_50F6_3856;
+            x = (ev->h - fd_50F6_10D2.left) / mapXsize;
             if (fd_50F6_3854 == 0x40)
                 x -= 0x20;
-            y = (ev->v - fd_50F6_10D2.top) / fd_50F6_3858;
+            y = (ev->v - fd_50F6_10D2.top) / mapYsize;
             if (x >= 0 && x < fd_50F6_3854) {
                 EraseMapCursor();
                 f_0250_0FC4(x, y);
@@ -215,7 +215,7 @@ void far MapAreaEvent(struct Event far *ev)
             OpenEditWindow();
             return;
         }
-        f_1FD2_04D0((struct Pt far *)&ev->h);
+        GetMousePos((struct Pt far *)&ev->h);
     } while (f_00F8_02AC());
 }
 
@@ -258,8 +258,8 @@ void far Mini_DrawMapI(void)
     fd_50F6_3854 = 0x80;
     fd_50F6_3852 = 0;
     if (fd_55B3_2996 == 0) {
-        fd_50F6_385E = f_171C_1A9E(0x400L, 1, "Map window image");
-        fd_50F6_385A = f_171C_1A9E(0x2000L, 1, "Generated map window");
+        fd_50F6_385E = mem_Alloc(0x400L, 1, "Map window image");
+        fd_50F6_385A = mem_Alloc(0x2000L, 1, "Generated map window");
     }
     if (fd_50F6_032E < 2)
         o12_384C_0432();
@@ -268,7 +268,7 @@ void far Mini_DrawMapI(void)
         fd_50F6_3854 = 0x40;
         fd_50F6_3852 = g_8BD2 << 5;
     }
-    switch (fd_3D57_07C8) {
+    switch (MapMode) {
     case 4:
         o12_384C_0706(PherMapBN);
         break;
@@ -286,22 +286,22 @@ void far Mini_DrawMapI(void)
         break;
     }
     (*g_9134)(fd_50F6_3842.left, fd_50F6_3842.top, fd_50F6_3842.left + fd_50F6_3852,
-              fd_50F6_3842.bottom, f_1B4E_000D(15));
+              fd_50F6_3842.bottom, ConvColor(15));
     (*g_9134)(fd_50F6_3842.right - fd_50F6_3852 - 1, fd_50F6_3842.top, fd_50F6_3842.right,
-              fd_50F6_3842.bottom, f_1B4E_000D(15));
-    table = f_171C_1B84(fd_50F6_385A);
-    line = f_171C_1B84(fd_50F6_385E);
+              fd_50F6_3842.bottom, ConvColor(15));
+    table = mem_Lock(fd_50F6_385A);
+    line = mem_Lock(fd_50F6_385E);
     n = 64;
     y = fd_50F6_3842.top;
     for (i = 0; i < n; i++, y += g_8BD4) {
         Mini_MakeTable(table + fd_50F6_3854 * i, line, y);
         (*g_914C)(fd_50F6_3842.left + fd_50F6_3852, y, line, fd_50F6_3854 * g_8BD2, g_8BD4);
     }
-    f_171C_1BBA(fd_50F6_385E);
-    f_171C_1BBA(fd_50F6_385A);
+    mem_Unlock(fd_50F6_385E);
+    mem_Unlock(fd_50F6_385A);
     if (fd_55B3_2996 == 0) {
-        f_171C_1C0A(fd_50F6_385E);
-        f_171C_1C0A(fd_50F6_385A);
+        mem_Free(fd_50F6_385E);
+        mem_Free(fd_50F6_385A);
     }
 }
 
@@ -323,8 +323,8 @@ void far OpenMiniMapWin(void)
     if (f_00F8_02AC()) {
         while (f_00F8_02AC())
             ;
-        f_1FD2_04D0(&pt);
-        if (f_1FD2_04E5(&pt, &fd_50F6_3842)) {
+        GetMousePos(&pt);
+        if (PointInRect(&pt, &fd_50F6_3842)) {
             win_Close(0x1400);
             OpenMapYard();
             return;
@@ -332,7 +332,7 @@ void far OpenMiniMapWin(void)
     }
     while (win_IsWinOpen(0x1400)) {
         if (!win_GetEvent(&ev) || !win_IsWinOpen(0x1400) ||
-            !f_1FD2_04E5((struct Pt far *)&ev.h, &fd_50F6_3842))
+            !PointInRect((struct Pt far *)&ev.h, &fd_50F6_3842))
             continue;
         pt.x = (int)0x8000;
         do {
@@ -351,7 +351,7 @@ void far OpenMiniMapWin(void)
                     DrawMiniMapCursor();
                 }
             }
-            f_1FD2_04D0((struct Pt far *)&ev.h);
+            GetMousePos((struct Pt far *)&ev.h);
         } while (f_00F8_02AC());
     }
     win_FlushEvents();
@@ -360,8 +360,8 @@ void far OpenMiniMapWin(void)
 
 void far DrawMiniMapCursor(void)
 {
-    fd_50F6_384A.left = fd_50F6_0508[0] * g_8BD2 + fd_50F6_3842.left + fd_50F6_3852;
-    fd_50F6_384A.top = fd_50F6_0508[1] * g_8BD4 + fd_50F6_3842.top;
+    fd_50F6_384A.left = MapPnt[0] * g_8BD2 + fd_50F6_3842.left + fd_50F6_3852;
+    fd_50F6_384A.top = MapPnt[1] * g_8BD4 + fd_50F6_3842.top;
     fd_50F6_384A.bottom = fd_50F6_384A.top + fd_50F6_10DE * g_8BD4;
     fd_50F6_384A.right = fd_50F6_384A.left + fd_50F6_10E0 * g_8BD2;
     f_1CE2_0410(&fd_50F6_384A, 1);

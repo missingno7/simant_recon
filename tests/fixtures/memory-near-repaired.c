@@ -106,11 +106,11 @@ Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems)
 Block far * far f_171C_0FBC(unsigned paras, int type);
 void far f_171C_11F2(Block far *b);
 void far f_171C_1246(Handle h);
-Handle far f_171C_13CA(long size, int flags, char far *name);
-void far f_171C_13E4(Handle h);
-void far f_171C_15A2(Handle h, int flags);
+Handle far Ralloc(long size, int flags, char far *name);
+void far RallocFree(Handle h);
+void far RallocSetType(Handle h, int flags);
 void far f_171C_1804(Handle h);
-Handle far f_171C_18A6(Handle h, long size, int flags);
+Handle far RallocRealloc(Handle h, long size, int flags);
 Handle far f_171C_1FC2(Handle h);
 Handle far f_171C_2086(Handle h);
 Handle far f_171C_2136(char far *p);
@@ -397,7 +397,7 @@ void far f_171C_07BE(void)
         fd_50F6_3950 = s_8C70 = SEG(g_91A8);
     }
     _fmemset(s_2F46 - s_2F4A, 0, s_2F4A * 4);
-    fd_50F6_3948 = *f_171C_13CA(0x20L, 0, "DiscardEntry");
+    fd_50F6_3948 = *Ralloc(0x20L, 0, "DiscardEntry");
     _fmemcpy(fd_50F6_3948, &s_2F4E, 0x20);
     atexit(f_171C_0678);
 }
@@ -696,12 +696,12 @@ Handle far f_171C_125C(long size, int flags, char far *name, int unused)
     return h;
 }
 
-Handle far f_171C_13CA(long size, int flags, char far *name)
+Handle far Ralloc(long size, int flags, char far *name)
 {
     return f_171C_125C(size, flags, name);
 }
 
-void far f_171C_13E4(Handle h)
+void far RallocFree(Handle h)
 {
     Block far *b;
     char name[13];
@@ -727,14 +727,14 @@ long far f_171C_14BE(Handle h)
     return HDR(h)->age - s_2F30;
 }
 
-void far f_171C_152C(Handle h)
+void far RallocFreshen(Handle h)
 {
     INIT();
     CHECKH(h);
     HDR(h)->age = s_2F30++;
 }
 
-void far f_171C_15A2(Handle h, int flags)
+void far RallocSetType(Handle h, int flags)
 {
     long paras;
     volatile int type;
@@ -778,33 +778,33 @@ void far f_171C_15A2(Handle h, int flags)
     HDR(h)->type = flags;
 }
 
-int far f_171C_1686(Handle h)
+int far RallocType(Handle h)
 {
     INIT();
     CHECKH(h);
     return HDR(h)->type;
 }
 
-long far f_171C_16EA(Handle h)
+long far RallocSize(Handle h)
 {
     INIT();
     CHECKH(h);
     return HDR(h)->size;
 }
 
-long far f_171C_1750(void)
+long far RallocMemoryFree(void)
 {
     INIT();
     return (unsigned long)s_2F3E << 4;
 }
 
-long far f_171C_1772(void)
+long far RallocMemorySoft(void)
 {
     INIT();
     return (unsigned long)s_2F38 << 4;
 }
 
-int far f_171C_1794(Handle h)
+int far RallocFreed(Handle h)
 {
     INIT();
     CHECKH(h);
@@ -826,7 +826,7 @@ void far f_171C_1804(Handle h)
     }
 }
 
-Handle far f_171C_18A6(Handle h, long size, int flags)
+Handle far RallocRealloc(Handle h, long size, int flags)
 {
     unsigned paras;
     int type;
@@ -866,7 +866,7 @@ Handle far f_171C_18A6(Handle h, long size, int flags)
     return h;
 }
 
-Handle far f_171C_1A9E(long size, int flags, char far *name)
+Handle far mem_Alloc(long size, int flags, char far *name)
 {
     Handle h;
 
@@ -874,19 +874,19 @@ Handle far f_171C_1A9E(long size, int flags, char far *name)
     return (Handle)((long)(s_2F46 - h) + 0xF0EFFFFL);
 }
 
-int far f_171C_1AD4(Handle h)
+int far mem_LockLevel(Handle h)
 {
     CHECKH(h);
     return HDR(h)->lock;
 }
 
-Handle far f_171C_1B2C(Handle h, long size, int flags)
+Handle far mem_Realloc(Handle h, long size, int flags)
 {
     CHECKH(h);
-    return f_171C_18A6(h, size, flags);
+    return RallocRealloc(h, size, flags);
 }
 
-char far * far f_171C_1B84(Handle h)
+char far * far mem_Lock(Handle h)
 {
     Handle p;
 
@@ -896,18 +896,18 @@ char far * far f_171C_1B84(Handle h)
     return *p;
 }
 
-Handle far f_171C_1BBA(Handle h)
+Handle far mem_Unlock(Handle h)
 {
     CHECKH(h);
     return f_171C_2086(h);
 }
 
-void far f_171C_1C0A(Handle h)
+void far mem_Free(Handle h)
 {
-    f_171C_13E4(h);
+    RallocFree(h);
 }
 
-long far f_171C_1C1C(Handle h)
+long far mem_Size(Handle h)
 {
     INIT();
     CHECKH(h);
@@ -917,7 +917,7 @@ long far f_171C_1C1C(Handle h)
 void far f_171C_1C82(Handle h)
 {
     CHECKH(h);
-    f_171C_15A2(h, 3);
+    RallocSetType(h, 3);
 }
 
 char far * far f_171C_1CD6(Handle h)
@@ -947,7 +947,7 @@ char far * far f_171C_1D40(Handle h)
     if (HDR(h)->lock)
         Punt("Attempt to move block high which is locked");
     if ((unsigned)(s_8C70 - SEG(p)) - paras < 0x1800)
-        return f_171C_1B84(h);
+        return mem_Lock(h);
     BLK(SEG(p) - 2)->type = 1;
     nb = f_171C_0FBC(paras, type);
     b = HDR(h);
@@ -956,12 +956,12 @@ char far * far f_171C_1D40(Handle h)
     nb->paras = paras;
     *h = (char far *)((long)nb + 0x20000L);
     f_171C_0160(b, 1);
-    return f_171C_1B84(h);
+    return mem_Lock(h);
 }
 
 void far f_171C_1E86(Handle h, int flags)
 {
-    f_171C_15A2(h, flags);
+    RallocSetType(h, flags);
 }
 
 int far f_171C_1E9A(Handle h)
@@ -1023,7 +1023,7 @@ Handle far f_171C_2086(Handle h)
 void far f_171C_20E2(Handle h)
 {
     CHECKH(h);
-    f_171C_15A2(h, 3);
+    RallocSetType(h, 3);
 }
 
 Handle far f_171C_2136(char far *p)
@@ -1038,13 +1038,13 @@ Handle far f_171C_2136(char far *p)
     return h;
 }
 
-char far * far f_171C_2190(unsigned size, char far *name)
+char far * far mem_malloc(unsigned size, char far *name)
 {
     char far *p;
 
     INIT();
     s_2F2A++;
-    p = *f_171C_13CA((long)size, 0, name);
+    p = *Ralloc((long)size, 0, name);
     s_2F2A--;
     return p;
 }
@@ -1055,7 +1055,7 @@ char far * far f_171C_21CC(unsigned size)
 
     INIT();
     s_2F2A++;
-    p = *f_171C_13CA((long)size, 0, "malloc");
+    p = *Ralloc((long)size, 0, "malloc");
     s_2F2A--;
     return p;
 }
@@ -1075,7 +1075,7 @@ void far _ffree(char far *p)
     if (!h)
         Punt("_ffree: Could not find memory ptr");
     HDR(h)->lock = 0;
-    f_171C_13E4(h);
+    RallocFree(h);
     s_2F2A--;
 }
 
@@ -1095,7 +1095,7 @@ char far * far _frealloc(char far *p, unsigned size)
     h = f_171C_2136(p);
     if (!h)
         Punt("_frealloc: Could not find memory ptr");
-    h = f_171C_18A6(h, (long)size, 0);
+    h = RallocRealloc(h, (long)size, 0);
     s_2F2A--;
     return *h;
 }

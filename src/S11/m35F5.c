@@ -1,11 +1,11 @@
 /* Overlay section S11, code frame 35F5: menu entry states (Win16 SetMenuEntries twin), pause
  * switch (Win16 PauseGame/SetPause twins) and the menu command dispatcher ProcMenu. */
 
-extern int far fd_3D57_07CC;
+extern int far GameSpeed;
 extern void far SetMenuItemState(int id, int state);
-extern int far fd_50F6_047E;
-extern void far f_1FD2_0135(int id, char far *text);
-extern int far fd_3D57_07A8[];
+extern int far GamePaused;
+extern void far SetMenuOptionText(int id, char far *text);
+extern int far OptionStates[];
 
 void far SetMenuEntries(void)
 {
@@ -13,10 +13,10 @@ void far SetMenuEntries(void)
     int i;
 
     for (item = 0x43; item <= 0x46; item++)
-        SetMenuItemState(item - 1, (fd_3D57_07CC == item - 0x43) ? 0x10 : 0x20);
-    f_1FD2_0135(0x41, fd_50F6_047E ? " Unpause" : " Pause");
+        SetMenuItemState(item - 1, (GameSpeed == item - 0x43) ? 0x10 : 0x20);
+    SetMenuOptionText(0x41, GamePaused ? " Unpause" : " Pause");
     for (i = 0, item = 0x31; item <= 0x36; i++, item++)
-        SetMenuItemState(item - 1, fd_3D57_07A8[i] ? 0x10 : 0x20);
+        SetMenuItemState(item - 1, OptionStates[i] ? 0x10 : 0x20);
 }
 
 void far SetPause(int value);
@@ -26,10 +26,10 @@ void far PauseGame(int value)
     SetPause(value);
 }
 
-extern int far fd_50F6_105E;
+extern int far CurGameTool;
 extern void far EndLifeTransferMode(void);
 extern void far EndTargetMode(void);
-extern char far * far * far fd_50F6_034C;
+extern char far * far * far WindPromptStrs;
 extern void far EditMessage(void far *, long, int);
 extern void far clip_SetWin(int win);
 extern void _fastcall win_SetObjSelectedState(int obj, int state);
@@ -38,19 +38,19 @@ extern void far clip_Off(void);
 void far SetPause(int value)
 {
     if (value == 0) {
-        if (fd_50F6_105E == 10)
+        if (CurGameTool == 10)
             EndLifeTransferMode();
-        else if (fd_50F6_105E == 11)
+        else if (CurGameTool == 11)
             EndTargetMode();
     }
-    fd_50F6_047E = value;
+    GamePaused = value;
     if (value != 0) {
-        if (fd_50F6_105E == -1)
-            EditMessage(fd_50F6_034C[2], -2L, 1);
-        else if (fd_50F6_105E == 10)
-            EditMessage(fd_50F6_034C[3], -2L, 1);
-        else if (fd_50F6_105E == 11)
-            EditMessage(fd_50F6_034C[17], -2L, 1);
+        if (CurGameTool == -1)
+            EditMessage(WindPromptStrs[2], -2L, 1);
+        else if (CurGameTool == 10)
+            EditMessage(WindPromptStrs[3], -2L, 1);
+        else if (CurGameTool == 11)
+            EditMessage(WindPromptStrs[17], -2L, 1);
     } else
         EditMessage(0L, -2L, 1);
     clip_SetWin(0);
@@ -152,12 +152,12 @@ void far ProcMenu(struct Event far *ev)
     case 0x32:
         StopSong();
     toggle:
-        fd_3D57_07A8[item - 0x31] = !fd_3D57_07A8[item - 0x31];
+        OptionStates[item - 0x31] = !OptionStates[item - 0x31];
         SetMenuEntries();
         break;
     case 0x41:
-        fd_50F6_047E ^= 1;
-        SetPause(fd_50F6_047E);
+        GamePaused ^= 1;
+        SetPause(GamePaused);
         break;
     case 0x43:
         n = 0;
@@ -171,7 +171,7 @@ void far ProcMenu(struct Event far *ev)
     case 0x46:
         n = 3;
     speed:
-        fd_3D57_07CC = n;
+        GameSpeed = n;
         SetMenuEntries();
         break;
     default:

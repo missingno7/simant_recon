@@ -4,67 +4,67 @@
  * (ExitNest's MePlane/MeGoalPlane compare, GetMyDis' GetDis call order), and this
  * order (0D6C/0EF8 first, MeLastX/Y before MeGoalY, entrance arrays A4,B0,A8,AC)
  * reproduces them. */
-extern int far fd_50F6_0D6C;
+extern int far MeCrazyCnt;
 extern int far fd_50F6_0EF8;
 
-extern int far fd_50F6_0AA0;
-extern int far fd_50F6_0A8E;
-extern int far fd_50F6_07C0;
-extern int far fd_50F6_08DA;
+extern int far MeMoveMe;
+extern int far MeCmd;
+extern int far MeTargIndex;
+extern int far MeTargLifePlane;
 extern int far GetAntIndex(int list, int index, int far *x, int far *y,
                            int far *attr, int far *state, int far *dir);
-extern int far fd_50F6_084E;
+extern int far MeTargLife;
 extern int far MePlane;
 extern int far MeLocX;
 extern int far ABS(int value);
-extern int far fd_50F6_0AD6;
+extern int far MeGoalX;
 extern int far MeLocY;
 extern int far GetDir(int x1, int y1, int x2, int y2);
-extern int far fd_50F6_0496;
+extern int far MeDir;
 extern void far DoEditUpdateDraw(void);
-extern int far fd_50F6_08E2;
-extern int far fd_50F6_09F0;
-extern int far fd_50F6_0AB6;
-extern int far fd_50F6_0AC6;
-extern int far fd_50F6_0AE8;
-extern int far fd_50F6_0AF8;
+extern int far MeTargLifeX;
+extern int far MeTargLifeY;
+extern int far MeLastX;
+extern int far MeLastY;
+extern int far MeGoalY;
+extern int far MeGoalPlane;
 extern signed char far Dx9[];
 extern signed char far Dy9[];
 extern int far TryMyDropOrLift(int plane, int x, int y);
-int far o25_3BA4_1A9F(int plane, int x, int y, int gplane, int gx, int gy);
+int far GetMyDir(int plane, int x, int y, int gplane, int gx, int gy);
 extern signed char far Dy8[];
-extern int far fd_50F6_04C2;
+extern int far MeType;
 extern signed char far Dx8[];
 extern void far MoveMyLife(int plane, int x, int y, int type, int dir);
-extern int far fd_50F6_0C3E;
-extern int far fd_50F6_04C4;
-extern int far fd_50F6_04E2;
+extern int far MeSteps;
+extern int far MeScent;
+extern int far MeColor;
 extern void far JamScentBT(int, int, int);
 extern void far JamScentRT(int, int, int);
-extern int far fd_50F6_104E;
+extern int far MeDropAlarm;
 extern void far AlarmHere(int, int, int);
-extern void far f_14EE_0C9C(int x, int y);
-extern void far f_14EE_0D71(int x, int y);
-extern int far fd_3D57_0C24;
+extern void far FixExitMapB(int x, int y);
+extern void far FixExitMapR(int x, int y);
+extern int far MeNestStarted;
 extern int far HealthB;
-extern int far fd_3D57_0C18;
+extern int far AlwaysHealthy;
 extern int far MeHealth;
 extern void far SetMyHealth(int health);
 extern int far IsItHole(int, int);
 extern void far DoEditAndMapUpdateDraw(void);
-void far o25_3BA4_1035(void);
+void far EnterNest(void);
 extern int far MapPlane;
-extern int far fd_3D57_07A8[];
+extern int far OptionStates[];
 extern void far GotoMyAnt(void);
 void far ExitNest(void);
 extern int far GetMap(int plane, int x, int y);
 extern void far ClearMyLife(int plane, int x, int y, int type, int dir);
 extern void far SetMyLife(int plane, int x, int y, int type, int dir, int code);
 extern void far myBeginSound(int sound, int a, int b);
-extern void far * far * far fd_50F6_034C;
+extern void far * far * far WindPromptStrs;
 extern void far EditMessage(void far *, long, int);
-extern int far fd_50F6_1058;
-void far o25_3BA4_0DFB(int list, int index);
+extern int far MeStartedFight;
+void far YellowFight(int list, int index);
 extern void far SetAntIndex(int list, int index, int x, int y,
                             int attr, int state, int dir);
 extern void far SetLife(int plane, int x, int y, int value);
@@ -93,88 +93,88 @@ void far DoAntMoveY(void)
     int dy;
     int tile;
 
-    if (fd_50F6_0AA0 == 0)
+    if (MeMoveMe == 0)
         return;
     result = 0;
-    if (fd_50F6_0A8E >= 3) {
-        if (GetAntIndex(fd_50F6_08DA, fd_50F6_07C0, &tx, &ty, &tattr, &tstate, &tdir) == 0
-            || (((unsigned)tattr >= 0) && ((fd_50F6_084E ^ tattr) & 0xf0) != 0)) {
+    if (MeCmd >= 3) {
+        if (GetAntIndex(MeTargLifePlane, MeTargIndex, &tx, &ty, &tattr, &tstate, &tdir) == 0
+            || (((unsigned)tattr >= 0) && ((MeTargLife ^ tattr) & 0xf0) != 0)) {
             result = -2;
             goto done;
         }
-        if (MePlane == fd_50F6_08DA) {
+        if (MePlane == MeTargLifePlane) {
             dx = ABS(MeLocX - tx);
             dy = ABS(MeLocY - ty);
             if (dx <= 1 && dy <= 1) {
                 d = GetDir(MeLocX, MeLocY, tx, ty) - 1;
                 if (d >= 0)
-                    fd_50F6_0496 = d;
+                    MeDir = d;
                 DoEditUpdateDraw();
                 goto moved;
             }
         }
-        fd_50F6_0AD6 = fd_50F6_08E2 = tx;
-        fd_50F6_0AE8 = fd_50F6_09F0 = ty;
+        MeGoalX = MeTargLifeX = tx;
+        MeGoalY = MeTargLifeY = ty;
     }
-    if (fd_50F6_0A8E == 1 && fd_50F6_0AF8 == MePlane) {
-        dir = GetDir(MeLocX, MeLocY, fd_50F6_0AD6, fd_50F6_0AE8);
+    if (MeCmd == 1 && MeGoalPlane == MePlane) {
+        dir = GetDir(MeLocX, MeLocY, MeGoalX, MeGoalY);
         x = Dx9[dir] + MeLocX;
         y = Dy9[dir] + MeLocY;
         if (x < 0 || x > 0x7f)
             x = MeLocX;
         if (y < 0 || y > 0x3f)
             y = MeLocY;
-        if (fd_50F6_0AD6 == x && fd_50F6_0AE8 == y) {
+        if (MeGoalX == x && MeGoalY == y) {
             if ((result = TryMyDropOrLift(MePlane, x, y)) != 0) {
                 result = (result == 1) ? -1 : -2;
                 goto done;
             }
         }
     }
-    d = o25_3BA4_1A9F(MePlane, MeLocX, MeLocY,
-                      fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8);
+    d = GetMyDir(MePlane, MeLocX, MeLocY,
+                      MeGoalPlane, MeGoalX, MeGoalY);
     if (d < 0) {
         result = d;
         goto done;
     }
     x = Dx8[d] + MeLocX;
     y = Dy8[d] + MeLocY;
-    fd_50F6_0AB6 = MeLocX;
-    fd_50F6_0AC6 = MeLocY;
-    MoveMyLife(MePlane, x, y, fd_50F6_04C2, d);
-    fd_50F6_0C3E++;
+    MeLastX = MeLocX;
+    MeLastY = MeLocY;
+    MoveMyLife(MePlane, x, y, MeType, d);
+    MeSteps++;
     if (MePlane == 1) {
-        if (fd_50F6_04C4 > 0 && (fd_50F6_04C2 == 0x18 || fd_50F6_04C2 == 0x38)) {
-            if (fd_50F6_04E2 == 0)
-                JamScentBT(MeLocX, MeLocY, fd_50F6_04C4);
+        if (MeScent > 0 && (MeType == 0x18 || MeType == 0x38)) {
+            if (MeColor == 0)
+                JamScentBT(MeLocX, MeLocY, MeScent);
             else
-                JamScentRT(MeLocX, MeLocY, fd_50F6_04C4);
-            if (fd_50F6_04C4 > 10)
-                fd_50F6_04C4--;
+                JamScentRT(MeLocX, MeLocY, MeScent);
+            if (MeScent > 10)
+                MeScent--;
         }
-        if (fd_50F6_104E != 0)
+        if (MeDropAlarm != 0)
             AlarmHere(MeLocX, MeLocY, 50);
     } else if (MePlane == 2)
-        f_14EE_0C9C(MeLocX, MeLocY);
+        FixExitMapB(MeLocX, MeLocY);
     else
-        f_14EE_0D71(MeLocX, MeLocY);
-    if (fd_50F6_0C3E & 1) {
-        if (fd_50F6_04C2 == 0x40 && fd_3D57_0C24 == 0 && HealthB > 0 && fd_3D57_0C18 == 0)
+        FixExitMapR(MeLocX, MeLocY);
+    if (MeSteps & 1) {
+        if (MeType == 0x40 && MeNestStarted == 0 && HealthB > 0 && AlwaysHealthy == 0)
             HealthB--;
         SetMyHealth(MeHealth - 1);
     }
     if (MePlane == 1) {
         if (IsItHole(MeLocX, MeLocY) == 0)
             goto done;
-        if (fd_50F6_0AF8 > 1 || (fd_50F6_0AF8 == MePlane && fd_50F6_0AD6 == MeLocX
-                                 && fd_50F6_0AE8 == MeLocY)) {
+        if (MeGoalPlane > 1 || (MeGoalPlane == MePlane && MeGoalX == MeLocX
+                                 && MeGoalY == MeLocY)) {
             DoEditAndMapUpdateDraw();
             d = MePlane;
-            o25_3BA4_1035();
-            if (fd_50F6_0AF8 != d || fd_50F6_0AD6 != x || fd_50F6_0AE8 != y
+            EnterNest();
+            if (MeGoalPlane != d || MeGoalX != x || MeGoalY != y
                 || MePlane == MapPlane)
                 goto done;
-            if (fd_3D57_07A8[0] == 0)
+            if (OptionStates[0] == 0)
                 GotoMyAnt();
             goto moved;
         }
@@ -184,49 +184,49 @@ void far DoAntMoveY(void)
         DoEditAndMapUpdateDraw();
         d = MePlane;
         ExitNest();
-        if (fd_50F6_0AF8 != d || fd_50F6_0AD6 != x || fd_50F6_0AE8 != y
+        if (MeGoalPlane != d || MeGoalX != x || MeGoalY != y
             || MePlane == MapPlane)
             goto done;
-        if (fd_3D57_07A8[0] == 0)
+        if (OptionStates[0] == 0)
             GotoMyAnt();
         goto moved;
     }
-    if (GetMap(MePlane, fd_50F6_0AD6, fd_50F6_0AE8) != 0x14)
+    if (GetMap(MePlane, MeGoalX, MeGoalY) != 0x14)
         goto done;
-    if (fd_50F6_04C2 == 0x60 || fd_50F6_0AD6 != MeLocX || fd_50F6_0AE8 != MeLocY)
+    if (MeType == 0x60 || MeGoalX != MeLocX || MeGoalY != MeLocY)
         goto done;
-    ClearMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496);
+    ClearMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir);
     if (MePlane == 2)
         MePlane = 3;
     else
         MePlane = 2;
-    SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+    SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
     myBeginSound(1, 0, 0x7e);
     GotoMyAnt();
     if (MePlane == 3)
-        EditMessage(fd_50F6_034C[4], 360L, 0);
+        EditMessage(WindPromptStrs[4], 360L, 0);
 moved:
     result = -1;
 done:
-    if (fd_3D57_07A8[0] != 0)
+    if (OptionStates[0] != 0)
         GotoMyAnt();
-    if (result == 0 && fd_50F6_0AF8 == MePlane && fd_50F6_0AD6 == MeLocX
-        && fd_50F6_0AE8 == MeLocY && fd_50F6_0A8E == 0)
+    if (result == 0 && MeGoalPlane == MePlane && MeGoalX == MeLocX
+        && MeGoalY == MeLocY && MeCmd == 0)
         result = -1;
     if (result == 0)
         return;
     if (result == -2) {
         myBeginSound(1, 0, 0x7e);
         GotoMyAnt();
-    } else if (fd_50F6_0A8E == 3) {
-        fd_50F6_1058 = 1;
-        o25_3BA4_0DFB(fd_50F6_08DA, fd_50F6_07C0);
-        fd_50F6_1058 = 0;
-    } else if (fd_50F6_0A8E == 4) {
+    } else if (MeCmd == 3) {
+        MeStartedFight = 1;
+        YellowFight(MeTargLifePlane, MeTargIndex);
+        MeStartedFight = 0;
+    } else if (MeCmd == 4) {
         d = GetDir(tx, ty, MeLocX, MeLocY) - 1;
         if (d >= 0 && (tattr & 0x70) != 0x60) {
             tattr = (tattr & 0xf8) | d;
-            SetAntIndex(MePlane, fd_50F6_07C0, tx, ty, tattr, tstate, tdir);
+            SetAntIndex(MePlane, MeTargIndex, tx, ty, tattr, tstate, tdir);
             SetLife(MePlane, tx, ty, tattr);
             DoEditUpdateDraw();
         }
@@ -240,15 +240,15 @@ done:
     }
 }
 
-extern int far fd_50F6_0A06;
+extern int far MeMode;
 extern unsigned char far Cycle;
 extern int far InNestBounds(int x, int y);
 extern int far SRand128(void);
 extern void far PlaceEggB(int x, int y, int type);
-extern void far o25_39C7_15B4(void);
+extern void far DecEatB(void);
 extern void far PlaceEggR(int x, int y, int type);
 extern void far DecEatR(void);
-extern int far fd_50F6_1006;
+extern int far MeHealthCntDwn;
 
 void far DoAntSimY(void)
 {
@@ -256,10 +256,10 @@ void far DoAntSimY(void)
     int mapval;
     int bx;
 
-    if (fd_50F6_0A06 != 0)
+    if (MeMode != 0)
         return;
 
-    SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+    SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
 
     if (!(Cycle & 0x3f))
         SetMyHealth(MeHealth - 1);
@@ -270,15 +270,15 @@ void far DoAntSimY(void)
             SetMyHealth(MeHealth - 1);
     }
 
-    if (fd_50F6_04C2 == 0x60 && MePlane > 1 && !(Cycle & 0xf)) {
-        bx = fd_50F6_0496 ^ 4;
+    if (MeType == 0x60 && MePlane > 1 && !(Cycle & 0xf)) {
+        bx = MeDir ^ 4;
         newx = MeLocX + 2 * Dx8[bx];
         newy = MeLocY + 2 * Dy8[bx];
         if (InNestBounds(newx, newy)) {
             if (SRand128() <= MeHealth) {
-                if (fd_50F6_04E2 == 0) {
+                if (MeColor == 0) {
                     PlaceEggB(newx, newy, 1);
-                    o25_39C7_15B4();
+                    DecEatB();
                 } else {
                     PlaceEggR(newx, newy, 1);
                     DecEatR();
@@ -289,7 +289,7 @@ void far DoAntSimY(void)
     }
 
     if (MeHealth <= 0) {
-        if (++fd_50F6_1006 >= 100) {
+        if (++MeHealthCntDwn >= 100) {
             if (MePlane >= 2 && mapval >= 0x4e)
                 YellowDeath(7);
             else
@@ -307,7 +307,7 @@ extern int far mySongIsDone(void);
 extern void far SetMap(int plane, int x, int y, int value);
 extern int far SRand8(void);
 
-void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
+void far AnimYellowFight(int plane, int x, int y, int dir, int type, int kind)
 {
     long t;
     int count;
@@ -320,17 +320,17 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
     int svPlane;
     int svX;
 
-    SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+    SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
     DoEditUpdateDraw();
     svPlane = plane;
     svX = x;
     svY = y;
-    svType = fd_50F6_04C2;
+    svType = MeType;
     svDir = dir;
     if (kind == 0)
         count = 6;
     else if (win_IsWinInFront(0))
-        count = fd_3D57_07A8[1] ? 0x40 : 0x20;
+        count = OptionStates[1] ? 0x40 : 0x20;
     else
         count = 8;
     if (kind == 10) {
@@ -351,7 +351,7 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
             myBeginSound(0x31, 0x55f0, 0x7f);
             MapA[x][y] = SRand2() ? tile - 3 : tile;
         }
-        if (kind != 0 && kind < 10 && fd_3D57_07A8[1] != 0 && mySongIsDone())
+        if (kind != 0 && kind < 10 && OptionStates[1] != 0 && mySongIsDone())
             break;
         if (kind == 2) {
             SetMap(plane, x, y, n + 0x38);
@@ -365,20 +365,20 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
     }
     if (kind == 10)
         MapA[x][y] = tile;
-    ClearMyLife(plane, x, y, type, fd_50F6_0496);
+    ClearMyLife(plane, x, y, type, MeDir);
     MePlane = svPlane;
     MeLocX = svX;
     MeLocY = svY;
-    fd_50F6_04C2 = svType;
-    fd_50F6_0496 = svDir;
+    MeType = svType;
+    MeDir = svDir;
 }
 
 extern int far WinPrintf(char far *format, ...);
 extern long far GetDis(int x1, int y1, int x2, int y2);
 extern int far RRand(int range);
-extern int far o25_39C7_0CBD(int plane, int x, int y, int gx, int gy);
+extern int far GetBestDir(int plane, int x, int y, int gx, int gy);
 
-void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
+void far AnimYellowInsane(int plane, int x, int y, int dir, int type)
 {
     long t;
     int d;
@@ -391,12 +391,12 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
     int svPlane;
 
     WinPrintf("AnimYellowInsane");
-    SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+    SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
     DoEditUpdateDraw();
     svPlane = plane;
     svX = x;
     svY = y;
-    svType = fd_50F6_04C2;
+    svType = MeType;
     svDir = dir;
     count = win_IsWinInFront(0) ? 0x20 : 8;
     t = MacTickCount();
@@ -406,9 +406,9 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
         t = MacTickCount() + 3;
         f_00DF_015C();
         if ((int)GetDis(x, y, svX, svY) == 0 && count - i - 1 != 0)
-            d = o25_39C7_0CBD(plane, x, y, RRand(7) + x - 3, RRand(7) + y - 3);
+            d = GetBestDir(plane, x, y, RRand(7) + x - 3, RRand(7) + y - 3);
         else
-            d = o25_39C7_0CBD(plane, x, y, svX, svY);
+            d = GetBestDir(plane, x, y, svX, svY);
         if (d >= 0) {
             x += Dx8[d];
             y += Dy8[d];
@@ -418,12 +418,12 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
         WinPrintf("2");
         DoEditUpdateDraw();
     }
-    ClearMyLife(plane, x, y, type, fd_50F6_0496);
+    ClearMyLife(plane, x, y, type, MeDir);
     MePlane = svPlane;
     MeLocX = svX;
     MeLocY = svY;
-    fd_50F6_04C2 = svType;
-    fd_50F6_0496 = svDir;
+    MeType = svType;
+    MeDir = svDir;
     WinPrintf("3");
 }
 
@@ -440,7 +440,7 @@ extern void far ClearLife(int plane, int x, int y, int value);
 extern int far GetWinner(int a, int b);
 extern void far DeadAntHere(int x, int y, int type);
 
-void far o25_3BA4_0DFB(int list, int index)
+void far YellowFight(int list, int index)
 {
     int type;
     unsigned char far *pl;
@@ -461,21 +461,21 @@ void far o25_3BA4_0DFB(int list, int index)
         pl = RlistT;
     }
     ClearLife(list, px[index], py[index], pl[index]);
-    type = GetWinner(fd_50F6_04C2, pl[index]);
-    if (fd_50F6_04C2 != type)
+    type = GetWinner(MeType, pl[index]);
+    if (MeType != type)
         GotoMyAnt();
-    o25_3BA4_0999(MePlane, MeLocX, MeLocY, fd_50F6_0496, 0x70, 0);
-    if (fd_50F6_04C2 == type) {
-        SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+    AnimYellowFight(MePlane, MeLocX, MeLocY, MeDir, 0x70, 0);
+    if (MeType == type) {
+        SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
         if (list <= 1)
             DeadAntHere(px[index], py[index], pl[index] & 0x80);
         pl[index] = 0;
-        if (fd_50F6_0A8E == 3 && MePlane == fd_50F6_08DA && fd_50F6_07C0 == index)
+        if (MeCmd == 3 && MePlane == MeTargLifePlane && MeTargIndex == index)
             ResetYellowVars(MePlane, MeLocX, MeLocY);
     } else {
         SetLife(list, px[index], py[index], pl[index]);
         if (list <= 1)
-            DeadAntHere(MeLocX, MeLocY, fd_50F6_04E2);
+            DeadAntHere(MeLocX, MeLocY, MeColor);
         YellowDeath(0);
     }
 }
@@ -487,39 +487,39 @@ extern unsigned char far HoleMapB[];
 extern void far MakeNewHoleB(int x);
 extern unsigned char far HoleMapR[];
 extern void far MakeNewHoleR(int x);
-extern signed char far fd_3D57_006C[];
+extern signed char far absSearchDirs[];
 extern int far IsNotObstacle(int plane, int x, int y);
 
 
-extern int far fd_3D57_02A4[2];
-extern int far fd_3D57_02B0[2];
-extern int far fd_3D57_02A8[2];
-extern int far fd_3D57_02AC[2];
+extern int far LastNewExitB[2];
+extern int far LastNewHoleR[2];
+extern int far LastNewExitR[2];
+extern int far LastNewHoleB[2];
 extern int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
 extern int far GetLife(int plane, int x, int y);
 extern int far IsClearTile(int plane, int x, int y);
 extern int far fd_50F6_0EFA;
-void far o25_3BA4_1035(void)
+void far EnterNest(void)
 {
     TryAntTheme();
-    if (fd_50F6_104E != 0)
+    if (MeDropAlarm != 0)
         SetAlarmDropState(0, 1);
-    ClearMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496);
+    ClearMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir);
     if (MeLocX > 0x40)
         MePlane = 3;
     else
         MePlane = 2;
     MeLocX = MeLocY;
-    if (fd_50F6_04C2 == 0x60)
+    if (MeType == 0x60)
         MeLocY = 2;
     else
         MeLocY = 1;
-    fd_50F6_0496 = 4;
+    MeDir = 4;
     if (MePlane == 2)
         DigMyTile(MePlane, MeLocX, MeLocY);
     else
         DigMyTile(MePlane, MeLocX, MeLocY);
-    SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+    SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
 }
 
 
@@ -533,7 +533,7 @@ void far ExitNest(void)
     int d;
 
     TryAntTheme();
-    SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0);
+    SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0);
     MeLocY = MeLocX & 0x3f;
     if (MePlane == 2) {
         if (HoleMapB[MeLocY] == 0)
@@ -544,45 +544,45 @@ void far ExitNest(void)
             MakeNewHoleR(MeLocX);
         MeLocX = HoleMapR[MeLocY];
     }
-    step = (fd_50F6_04C2 == 0x60) ? 2 : 1;
-    if (fd_50F6_0AF8 == 1) {
-        d = GetDir(MeLocX, MeLocY, fd_50F6_0AD6, fd_50F6_0AE8);
+    step = (MeType == 0x60) ? 2 : 1;
+    if (MeGoalPlane == 1) {
+        d = GetDir(MeLocX, MeLocY, MeGoalX, MeGoalY);
         if (d > 0)
             d--;
-    } else if (MePlane == fd_50F6_0AF8) {
+    } else if (MePlane == MeGoalPlane) {
         if (MeLocX < 0x40)
             d = 2;
         else
             d = 6;
     } else {
-        d = o25_3BA4_1A9F(1, MeLocX, MeLocY, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8);
+        d = GetMyDir(1, MeLocX, MeLocY, MeGoalPlane, MeGoalX, MeGoalY);
         if (d < 0)
             d = SRand8();
     }
     i = 0;
     dir = d;
     for (; i < 8; i++) {
-        d = (fd_3D57_006C[i] + dir) & 7;
+        d = (absSearchDirs[i] + dir) & 7;
         nx = Dx8[d] * step + MeLocX;
         ny = Dy8[d] * step + MeLocY;
         if (IsNotObstacle(1, nx, ny)) {
             MeLocX = nx;
             MeLocY = ny;
-            fd_50F6_0496 = d;
+            MeDir = d;
             break;
         }
     }
     if (i == 8) {
-        fd_50F6_0496 = dir;
+        MeDir = dir;
         MeLocX = (MeLocX + step) & 0x7f;
     }
-    SetMyLife(MePlane = 1, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+    SetMyLife(MePlane = 1, MeLocX, MeLocY, MeType, MeDir, 0xff);
 }
 
-extern int far fd_3D57_02A4[2];
-extern int far fd_3D57_02B0[2];
-extern int far fd_3D57_02A8[2];
-extern int far fd_3D57_02AC[2];
+extern int far LastNewExitB[2];
+extern int far LastNewHoleR[2];
+extern int far LastNewExitR[2];
+extern int far LastNewHoleB[2];
 
 int far o25_3BA4_13AB(int p1, int x1, int y1, int p2, int x2, int y2)
 {
@@ -590,32 +590,32 @@ int far o25_3BA4_13AB(int p1, int x1, int y1, int p2, int x2, int y2)
         return GetDis(x1, y1, x2, y2);
     if (p1 == 1 && p2 > p1) {
         if (p2 == 2)
-            return GetDis(x1, y1, fd_3D57_02AC[0], fd_3D57_02AC[1])
-                 + GetDis(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
-        return GetDis(x1, y1, fd_3D57_02B0[0], fd_3D57_02B0[1])
-             + GetDis(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
+            return GetDis(x1, y1, LastNewHoleB[0], LastNewHoleB[1])
+                 + GetDis(LastNewExitB[0], LastNewExitB[1], x2, y2);
+        return GetDis(x1, y1, LastNewHoleR[0], LastNewHoleR[1])
+             + GetDis(LastNewExitB[0], LastNewExitB[1], x2, y2);
     }
     if (p2 == 1) {
         if (p1 == 2)
-            return GetDis(x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1])
-                 + GetDis(fd_3D57_02AC[0], fd_3D57_02AC[1], x2, y2);
-        return GetDis(x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1])
-             + GetDis(fd_3D57_02B0[0], fd_3D57_02B0[1], x2, y2);
+            return GetDis(x1, y1, LastNewExitB[0], LastNewExitB[1])
+                 + GetDis(LastNewHoleB[0], LastNewHoleB[1], x2, y2);
+        return GetDis(x1, y1, LastNewExitR[0], LastNewExitR[1])
+             + GetDis(LastNewHoleR[0], LastNewHoleR[1], x2, y2);
     }
     if (p1 == 2)
-        return GetDis(x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1])
-             + GetDis(fd_3D57_02AC[0], fd_3D57_02AC[1], fd_3D57_02B0[0], fd_3D57_02B0[1])
-             + GetDis(fd_3D57_02A8[0], fd_3D57_02A8[1], x2, y2);
-    return GetDis(x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1])
-         + GetDis(fd_3D57_02B0[0], fd_3D57_02B0[1], fd_3D57_02AC[0], fd_3D57_02AC[1])
-         + GetDis(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
+        return GetDis(x1, y1, LastNewExitB[0], LastNewExitB[1])
+             + GetDis(LastNewHoleB[0], LastNewHoleB[1], LastNewHoleR[0], LastNewHoleR[1])
+             + GetDis(LastNewExitR[0], LastNewExitR[1], x2, y2);
+    return GetDis(x1, y1, LastNewExitR[0], LastNewExitR[1])
+         + GetDis(LastNewHoleR[0], LastNewHoleR[1], LastNewHoleB[0], LastNewHoleB[1])
+         + GetDis(LastNewExitB[0], LastNewExitB[1], x2, y2);
 }
 
 extern int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
 extern int far GetLife(int plane, int x, int y);
 extern int far IsClearTile(int plane, int x, int y);
 
-int far o25_3BA4_1581(int plane, int x, int y, int a, int b)
+int far GetMyBestDirs(int plane, int x, int y, int a, int b)
 {
     int best;
     int fallback;
@@ -630,11 +630,11 @@ int far o25_3BA4_1581(int plane, int x, int y, int a, int b)
     threshold = GetDis(x, y, a, b);
     if (threshold > 0) {
         fallback = -2;
-        flag = (fd_50F6_0A8E == 2) ? 1 : 0;
+        flag = (MeCmd == 2) ? 1 : 0;
         for (dir = 0; dir < 8; dir++) {
             nx = Dx8[dir] + x;
             ny = Dy8[dir] + y;
-            if (TileCanBeMovedOn(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag) != 0) {
+            if (TileCanBeMovedOn(plane, nx, ny, MeGoalPlane, MeGoalX, MeGoalY, flag) != 0) {
                 dis = GetDis(nx, ny, a, b);
                 if (dis < threshold) {
                     if (GetLife(plane, nx, ny) > 0 || IsClearTile(plane, nx, ny) == 0)
@@ -652,7 +652,7 @@ int far o25_3BA4_1581(int plane, int x, int y, int a, int b)
 }
 
 
-int far o25_3BA4_1686(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
+int far GetMyRandDirs(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
 {
     int flag;
     int d;
@@ -670,12 +670,12 @@ int far o25_3BA4_1686(int far *rot, int far *dir, int plane, int x, int y, int a
     threshold = GetDis(x, y, a, b);
     if (threshold > 0) {
         best = -2;
-        flag = (fd_50F6_0A8E == 2) ? 1 : 0;
+        flag = (MeCmd == 2) ? 1 : 0;
         for (i = 0; i < 8; i++) {
             nx = Dx8[i] + x;
             ny = Dy8[i] + y;
-            if ((nx != fd_50F6_0AB6 || ny != fd_50F6_0AC6)
-                && TileCanBeMovedOn(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag)) {
+            if ((nx != MeLastX || ny != MeLastY)
+                && TileCanBeMovedOn(plane, nx, ny, MeGoalPlane, MeGoalX, MeGoalY, flag)) {
                 best = i;
                 ok[i] = 1;
             } else
@@ -737,12 +737,12 @@ int far o25_3BA4_188A(int far *steps, int plane, int x, int y, int a, int b)
     int dir;
 
     count = 0;
-    dir = o25_3BA4_1581(plane, x, y, a, b);
+    dir = GetMyBestDirs(plane, x, y, a, b);
     if (dir >= 0) {
         nx = Dx8[dir] + x;
         ny = Dy8[dir] + y;
         while (dir >= 0 && count < 0x40) {
-            dir = o25_3BA4_1581(plane, nx, ny, a, b);
+            dir = GetMyBestDirs(plane, nx, ny, a, b);
             if (dir >= 0) {
                 nx += Dx8[dir];
                 ny += Dy8[dir];
@@ -764,10 +764,10 @@ int far o25_3BA4_1935(int plane, int x, int y, int a, int b)
     int steps;
 
     if (o25_3BA4_188A(&steps, plane, x, y, a, b) == -2)
-        dir = o25_3BA4_1686(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+        dir = GetMyRandDirs(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
     else {
-        fd_50F6_0D6C = -1;
-        dir = o25_3BA4_1581(plane, x, y, a, b);
+        MeCrazyCnt = -1;
+        dir = GetMyBestDirs(plane, x, y, a, b);
     }
     return dir;
 }
@@ -775,29 +775,29 @@ int far o25_3BA4_1935(int plane, int x, int y, int a, int b)
 int far o25_3BA4_19AD(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
 {
     fd_50F6_0EF8 = GetDir(x, y, a, b) - 1;
-    fd_50F6_0D6C = 0x10;
+    MeCrazyCnt = 0x10;
     fd_50F6_0EFA = 0;
-    o25_3BA4_1686(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+    GetMyRandDirs(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
 }
 
 int far o25_3BA4_1A0D(int plane, int x, int y, int a, int b)
 {
     int dir;
 
-    if (fd_50F6_0D6C < 0) {
-        dir = o25_3BA4_1581(plane, x, y, a, b);
-        if (dir == -2 && fd_50F6_0D6C == -2)
+    if (MeCrazyCnt < 0) {
+        dir = GetMyBestDirs(plane, x, y, a, b);
+        if (dir == -2 && MeCrazyCnt == -2)
             dir = o25_3BA4_19AD(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
     } else {
         dir = o25_3BA4_1935(plane, x, y, a, b);
-        fd_50F6_0D6C--;
+        MeCrazyCnt--;
     }
     return dir;
 }
 
 /* The result goes through a local that MSC eliminates (value only returned); as a
  * register candidate it still takes SI first, so p1 lands in DI as in the original. */
-int far o25_3BA4_1A9F(int p1, int x1, int y1, int p2, int x2, int y2)
+int far GetMyDir(int p1, int x1, int y1, int p2, int x2, int y2)
 {
     int r;
 
@@ -805,14 +805,14 @@ int far o25_3BA4_1A9F(int p1, int x1, int y1, int p2, int x2, int y2)
         if (p2 <= 1)
             r = o25_3BA4_1A0D(p1, x1, y1, x2, y2);
         else if (p2 == 2)
-            r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02AC[0], fd_3D57_02AC[1]);
+            r = o25_3BA4_1A0D(p1, x1, y1, LastNewHoleB[0], LastNewHoleB[1]);
         else
-            r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02B0[0], fd_3D57_02B0[1]);
+            r = o25_3BA4_1A0D(p1, x1, y1, LastNewHoleR[0], LastNewHoleR[1]);
     } else if (p2 == p1)
         r = o25_3BA4_1A0D(p1, x1, y1, x2, y2);
     else if (p1 == 2)
-        r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1]);
+        r = o25_3BA4_1A0D(p1, x1, y1, LastNewExitB[0], LastNewExitB[1]);
     else
-        r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1]);
+        r = o25_3BA4_1A0D(p1, x1, y1, LastNewExitR[0], LastNewExitR[1]);
     return r;
 }

@@ -18,14 +18,14 @@ int g_62BE = 0xa000;
 int g_62C0 = 5;
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern void far f_1CE2_0430(struct Rect far *rect);
+extern void far GRectInv(struct Rect far *rect);
 
 void far f_208F_0008(int obj)
 {
     struct Rect r;
 
     win_GetObjRect(obj, &r);
-    f_1CE2_0430(&r);
+    GRectInv(&r);
 }
 
 extern char near g_3DDE;
@@ -41,7 +41,7 @@ void far f_208F_002B(int obj, int col)
 }
 
 extern void _fastcall win_SetColorFromObjNum(int obj);
-extern void far f_24AB_038D(int x, int y, char far *text);
+extern void far font_PrintStr(int x, int y, char far *text);
 
 void far f_208F_005B(int obj, char far *text, int dx, int dy)
 {
@@ -49,7 +49,7 @@ void far f_208F_005B(int obj, char far *text, int dx, int dy)
 
     win_GetObjRect(obj, &r);
     win_SetColorFromObjNum(obj);
-    f_24AB_038D(r.left + dx, r.top + dy, text);
+    font_PrintStr(r.left + dx, r.top + dy, text);
 }
 
 extern int far f_24AB_0329(char far *text);
@@ -70,7 +70,7 @@ void far f_208F_0093(struct Rect far *rect, char far *text)
     r.right = x + w;
     r.top += (r.bottom - f_24AB_030B() - r.top) / 2;
     r.bottom = f_24AB_030B() + r.top;
-    f_24AB_038D(r.left, r.top, text);
+    font_PrintStr(r.left, r.top, text);
 }
 
 extern int near g_3DE2;
@@ -91,7 +91,7 @@ void far f_208F_011F(struct Rect far *rect, char far *text)
     r.right = x + w;
     r.top += (r.bottom - f_24AB_030B() - r.top) / 2;
     r.bottom = f_24AB_030B() + r.top;
-    f_24AB_038D(r.left, r.top, text);
+    font_PrintStr(r.left, r.top, text);
     if (rect->left < r.left)
         g_9134(rect->left, r.top, r.left, r.bottom, g_3DE2);
     if (rect->right > r.right)
@@ -113,11 +113,11 @@ void far f_208F_021B(int obj, char far *text)
 
     win_SetColorFromObjNum(obj);
     win_GetObjRect(obj, &r);
-    f_24AB_038D(r.left, r.top, text);
+    font_PrintStr(r.left, r.top, text);
 }
 
 extern void (far * near g_9128)(int a, int b, int c);
-extern void far f_1CE2_044D(struct Rect far *rect, int width);
+extern void far GRectOutline(struct Rect far *rect, int width);
 
 void far f_208F_024B(int obj, int color, int width)
 {
@@ -125,7 +125,7 @@ void far f_208F_024B(int obj, int color, int width)
 
     win_GetObjRect(obj, &r);
     g_9128(color, color, color);
-    f_1CE2_044D(&r, width);
+    GRectOutline(&r, width);
 }
 
 extern unsigned char near g_5A97;
@@ -194,7 +194,7 @@ void far f_208F_03BC(int obj, char far *format, ...)
     win_SetColorFromObjNum(obj);
     win_GetObjRect(obj, &r);
     vsprintf(buf, format, (char far *)(&format + 1));
-    f_24AB_038D(r.left, r.top, buf);
+    font_PrintStr(r.left, r.top, buf);
 }
 
 void far f_208F_0403(void)
@@ -212,13 +212,13 @@ void far f_208F_0405(char far *handle)
     db_PurgeHandle(handle);
 }
 
-extern char far * far f_171C_1B84(char far *h);
+extern char far * far mem_Lock(char far *h);
 extern void far f_1B05_0008(char far *packed, int length);
 extern unsigned int far f_1B05_0046(char far *dest, unsigned int length);
-extern void far f_171C_1BBA(char far *h);
+extern void far mem_Unlock(char far *h);
 extern void far db_ReleaseObject(unsigned int object, int kind);
 
-int far f_208F_0419(Point far *size, int object)
+int far gr_BitMapSize(Point far *size, int object)
 {
     char far *h;
     int far *p;
@@ -229,7 +229,7 @@ int far f_208F_0419(Point far *size, int object)
         size->x = size->y = 1;
         return 0;
     }
-    p = (int far *)f_171C_1B84(h);
+    p = (int far *)mem_Lock(h);
     if (p[0] == -1) {
         f_1B05_0008((char far *)(p + 2), p[1]);
         f_1B05_0046((char far *)hdr, 12);
@@ -239,7 +239,7 @@ int far f_208F_0419(Point far *size, int object)
         size->x = p[4];
         size->y = p[5];
     }
-    f_171C_1BBA(h);
+    mem_Unlock(h);
     db_ReleaseObject(object, 2);
     return 1;
 }

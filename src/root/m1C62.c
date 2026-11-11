@@ -104,8 +104,8 @@ extern struct Pt far f_1F80_000C(char far *text);
 extern void far f_1F80_01A8(struct Rect far *r, int width, int height);
 extern struct Rect far * far f_1CE2_039B(struct Rect far *r);
 extern char far * far GSaveRect(struct Rect far *r);
-extern void far f_1CE2_046D(struct Rect far *r, int color);
-extern void far f_1CE2_044D(struct Rect far *r, int width);
+extern void far GRectFill(struct Rect far *r, int color);
+extern void far GRectOutline(struct Rect far *r, int width);
 void far f_1C62_0306(struct Rect far *r, int line, char far *text);
 extern int far f_1F80_0177(struct Rect far *r, char far *text);
 extern char near g_3DDE;
@@ -147,9 +147,9 @@ void far f_1C62_00D5(char far *msg, int timed)
     f_1F80_01A8(&r, size.x + 2, size.y + 4);
     pr = *f_1CE2_039B(&r);
     save = GSaveRect(&pr);
-    f_1CE2_046D(&pr, g_8CBE->fill);
+    GRectFill(&pr, g_8CBE->fill);
     g_9128(g_8CBE->frame, g_8CBE->frame, 0x20);
-    f_1CE2_044D(&pr, 4);
+    GRectOutline(&pr, 4);
     g_9128(0x404, g_8CBE->fill, 0);
     f_1C62_0306(&r, r.top, msg);
     x = f_1F80_0177(&pr, "Continue") / g_3DDE;
@@ -198,7 +198,7 @@ extern int far f_24AB_030B(void);
 extern char far * far _fstrchr(char far *s, int c);
 extern unsigned int far _fstrlen(char far *s);
 extern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);
-extern void far f_1FBD_0000(int x, int y, char far *text);
+extern void far GPutStr(int x, int y, char far *text);
 
 void far f_1C62_0306(struct Rect far *r, int line, char far *text)
 {
@@ -221,7 +221,7 @@ void far f_1C62_0306(struct Rect far *r, int line, char far *text)
         buf[len] = 0;
         text = nl + 1;
         line += f_24AB_030B();
-        f_1FBD_0000(f_1F80_0177(&pr, buf), line, buf);
+        GPutStr(f_1F80_0177(&pr, buf), line, buf);
         n++;
     }
 }
@@ -286,11 +286,11 @@ int far f_1C62_0415(char far *msg, int set)
     f_1F80_01A8(&g_557C, width + 2, size.y + 4);
     pr = *f_1CE2_039B(&g_557C);
     save = GSaveRect(&pr);
-    f_1CE2_046D(&pr, 0xf2f);
+    GRectFill(&pr, 0xf2f);
     g_9128(0x404, 0x404, 0x40);
-    f_1CE2_044D(&pr, 4);
+    GRectOutline(&pr, 4);
     g_9128(0, 0, 0);
-    f_1CE2_044D(&pr, 1);
+    GRectOutline(&pr, 1);
     g_9128(0x404, 0xf0f, 0xc0);
     f_1C62_0306(&g_557C, g_557C.top, msg);
     h = (width - h - 2) / 2 + g_557C.left;
@@ -386,9 +386,9 @@ char far * far f_1C62_074E(struct Rect far *r, int width, int height, int timed)
     save = GSaveRect(r);
     g_8CBE = &g_550C[timed];
     g_5AAC = 0;
-    f_1CE2_046D(r, g_8CBE->fill);
+    GRectFill(r, g_8CBE->fill);
     g_9128(g_8CBE->frame, g_8CBE->frame, 0x20);
-    f_1CE2_044D(r, 4);
+    GRectOutline(r, 4);
     g_9128(0x404, g_8CBE->fill, 0);
     return save;
 }

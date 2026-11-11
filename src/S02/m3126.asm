@@ -23,7 +23,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DDA:byte
 	extrn	_g_3DDC:byte
 	extrn	_g_3DDE:byte
-	extrn	_g_3DE0:byte
+	extrn	__foreColor:byte
 	extrn	_g_3DE1:byte
 	extrn	_g_3DE2:byte
 	extrn	_g_3DE3:byte
@@ -152,7 +152,7 @@ _o02_3126_0040	proc	far
 	push bp
 	mov bp, sp
 	mov ax, word ptr [bp+6]
-	mov word ptr _g_3DE0, ax
+	mov word ptr __foreColor, ax
 	mov ax, word ptr [bp+8]
 	mov word ptr _g_3DE2, ax
 	pop bp

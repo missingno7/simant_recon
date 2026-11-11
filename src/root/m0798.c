@@ -114,14 +114,14 @@ extern int far CasteAuto;
 extern void _fastcall win_MakeGroupInvisible(int win, int group);
 extern void _fastcall win_MakeObjSelected(int obj);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
-extern struct TriLevel far fd_3D57_07F2[];
+extern struct TriLevel far casteSetLevels[];
 void far win_DrawCasteWindow(int flags);
 int far IsPointInIsoTri(struct Pt far *pt, struct Rect far *r);
 extern void _fastcall win_MakeGroupVisible(int win, int group);
 extern int far _fmemcmp(void far *a, void far *b, unsigned n);
 void far BoundPointToTri(struct Pt far *pt, struct Rect far *r);
 void far GetTriLatDist(struct TriLevel far *level, struct TriPoints far *tri, struct Pt far *pt);
-extern void far f_1FD2_04D0(struct Pt far *pt);
+extern void far GetMousePos(struct Pt far *pt);
 extern int far StillDown(void);
 void far cvtLevels2IdealCaste(int far *ideal);
 extern int far IdealCaste[4];
@@ -147,9 +147,9 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
     case 4:
     case 5:
         win_MakeObjSelected(0x1305);
-        _fmemcpy(&fd_3D57_07F2[g_1B4E], &casteLevels, 6);
+        _fmemcpy(&casteSetLevels[g_1B4E], &casteLevels, 6);
         g_1B4E = msg->code - 0x1306;
-        _fmemcpy(&casteLevels, &fd_3D57_07F2[g_1B4E], 6);
+        _fmemcpy(&casteLevels, &casteSetLevels[g_1B4E], 6);
         clip_SetWin(0x1300);
         win_DrawCasteWindow(3);
     case 2:
@@ -176,9 +176,9 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
                 GetTriLatDist(&casteLevels, &fd_50F6_3822, &msg->pt);
                 win_DrawCasteWindow(3);
             }
-            f_1FD2_04D0(&msg->pt);
+            GetMousePos(&msg->pt);
         } while (StillDown());
-        _fmemcpy(&fd_3D57_07F2[g_1B4E], &casteLevels, 6);
+        _fmemcpy(&casteSetLevels[g_1B4E], &casteLevels, 6);
         cvtLevels2IdealCaste(IdealCaste);
         break;
     case 12:
@@ -192,7 +192,7 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
 }
 
 extern int far ModeAuto;
-extern struct TriLevel far fd_3D57_0810[];
+extern struct TriLevel far modeSetLevels[];
 void far win_DrawModeWindow(int flags);
 
 void far ProcModeEvent(struct CtlMsg far *msg)
@@ -215,9 +215,9 @@ void far ProcModeEvent(struct CtlMsg far *msg)
     case 4:
     case 5:
         win_MakeObjSelected(0x1205);
-        _fmemcpy(&fd_3D57_0810[g_1B50], &modeLevels, 6);
+        _fmemcpy(&modeSetLevels[g_1B50], &modeLevels, 6);
         g_1B50 = msg->code - 0x1206;
-        _fmemcpy(&modeLevels, &fd_3D57_0810[g_1B50], 6);
+        _fmemcpy(&modeLevels, &modeSetLevels[g_1B50], 6);
         clip_SetWin(0x1200);
         win_DrawModeWindow(3);
     case 2:
@@ -244,9 +244,9 @@ void far ProcModeEvent(struct CtlMsg far *msg)
                 GetTriLatDist(&modeLevels, &fd_50F6_3816, &msg->pt);
                 win_DrawModeWindow(3);
             }
-            f_1FD2_04D0(&msg->pt);
+            GetMousePos(&msg->pt);
         } while (StillDown());
-        _fmemcpy(&fd_3D57_0810[g_1B50], &modeLevels, 6);
+        _fmemcpy(&modeSetLevels[g_1B50], &modeLevels, 6);
         break;
     case 12:
     case 13:
@@ -389,15 +389,15 @@ void far win_CasteControlClosed(void)
 }
 
 extern int near g_3DB2;
-extern void far f_24AB_02AD(int font);
-extern int far fd_50F6_0B12[6];
-extern int far fd_50F6_0AEC;
+extern void far font_SetFont(int font);
+extern int far ModePopB[6];
+extern int far CastePopB;
 extern void far win_PrintfAtObj(int obj, char far *format, ...);
-extern void far f_22BF_0C38(int obj);
-extern int far f_1B4E_000D(int color);
-extern void far f_1CE2_046D(struct Rect far *r, int color);
+extern void far win_ClearObjToEOL(int obj);
+extern int far ConvColor(int color);
+extern void far GRectFill(struct Rect far *r, int color);
 extern void (far * near g_9128)(int fore, int back, int pattern);
-extern void far f_1CE2_044D(struct Rect far *r, int width);
+extern void far GRectOutline(struct Rect far *r, int width);
 
 void far DrawControlLevels(int win, int unused, int percent)
 {
@@ -416,18 +416,18 @@ void far DrawControlLevels(int win, int unused, int percent)
     int y;
     int j;
 
-    f_24AB_02AD(g_3DB2 == 0x140 ? 0 : 4);
+    font_SetFont(g_3DB2 == 0x140 ? 0 : 4);
     win_GetObjRect((win & 0xff00) + 12, &rect);
     w = (rect.right - rect.left) / 5;
     h = rect.bottom - rect.top;
     if (win == 0x1200) {
         levels = (unsigned far *)&modeLevels;
         colors = g_1B4A;
-        total = (long)fd_50F6_0B12[2] + fd_50F6_0B12[1] + fd_50F6_0B12[0];
+        total = (long)ModePopB[2] + ModePopB[1] + ModePopB[0];
     } else {
         levels = (unsigned far *)&casteLevels;
         colors = g_1B46;
-        total = fd_50F6_0AEC;
+        total = CastePopB;
     }
     for (i = 0; i < 3; i++) {
         obj = (win & 0xff00) + i + 9;
@@ -438,23 +438,23 @@ void far DrawControlLevels(int win, int unused, int percent)
             val = (levels[i] * (unsigned long)total + 0x3fff) / 0xffff;
             win_PrintfAtObj(obj, "%-ld", val);
         }
-        f_22BF_0C38(obj);
+        win_ClearObjToEOL(obj);
         r.left = w * i * 2 + rect.left;
         r.right = r.left + w;
         r.bottom = rect.bottom;
         r.top = (long)levels[i] * h / -65535L + rect.bottom;
         if (r.top + 1 < rect.bottom) {
-            color = f_1B4E_000D(colors[i]);
-            f_1CE2_046D(&r, color);
-            (*g_9128)(f_1B4E_000D(15), f_1B4E_000D(15), 0);
-            f_1CE2_044D(&r, 1);
+            color = ConvColor(colors[i]);
+            GRectFill(&r, color);
+            (*g_9128)(ConvColor(15), ConvColor(15), 0);
+            GRectOutline(&r, 1);
         } else
             r.top = rect.bottom;
         r.bottom = r.top;
         r.top = rect.top - 1;
-        f_1CE2_046D(&r, f_1B4E_000D(0x40));
+        GRectFill(&r, ConvColor(0x40));
     }
-    f_24AB_02AD(0);
+    font_SetFont(0);
 }
 
 void far cvtLevels2IdealCaste(int far *ideal)
@@ -507,32 +507,32 @@ void far SetTriLatPoint(struct TriLevel far *level, struct TriPoints far *tri, s
         out->x = (long)(row - 3) * level->weight / (long)(0xffffU - level->frac) + tri->leftX + w + 2;
 }
 
-extern void far f_208F_0419(struct Pt far *size, int id);
-extern int far fd_50F6_0468;
-extern int far fd_3D57_07EA;
-extern int far fd_50F6_0370;
-extern int far fd_50F6_024E;
-extern int far fd_3D57_080A[3];
-extern int far fd_3D57_07EC[3];
+extern void far gr_BitMapSize(struct Pt far *size, int id);
+extern int far ShowPercentMode;
+extern int far ShowPercentCaste;
+extern int far modeButtonState;
+extern int far casteButtonState;
+extern int far modeLevelDefaults[3];
+extern int far casteLevelDefaults[3];
 
 void far initControls(void)
 {
     struct Rect rect;
     int i;
 
-    f_208F_0419(&knobSize, 0x578);
+    gr_BitMapSize(&knobSize, 0x578);
     win_GetObjRect(0x120d, &rect);
     ModeAuto = 1;
     CasteAuto = 1;
-    fd_50F6_0468 = 1;
-    fd_3D57_07EA = 1;
-    fd_50F6_0370 = -1;
-    fd_50F6_024E = -1;
+    ShowPercentMode = 1;
+    ShowPercentCaste = 1;
+    modeButtonState = -1;
+    casteButtonState = -1;
     for (i = 0; i < 3; i++) {
-        (&modeLevels.frac)[i] = fd_3D57_080A[i];
-        (&fd_3D57_0810[0].frac)[i] = fd_3D57_080A[i];
-        (&casteLevels.frac)[i] = fd_3D57_07EC[i];
-        (&fd_3D57_07F2[0].frac)[i] = fd_3D57_07EC[i];
+        (&modeLevels.frac)[i] = modeLevelDefaults[i];
+        (&modeSetLevels[0].frac)[i] = modeLevelDefaults[i];
+        (&casteLevels.frac)[i] = casteLevelDefaults[i];
+        (&casteSetLevels[0].frac)[i] = casteLevelDefaults[i];
     }
     win_ModeControlChanged();
     win_CasteControlChanged();

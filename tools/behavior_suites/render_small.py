@@ -69,10 +69,10 @@ def _map_cursor_case(label, xorigin, yorigin, width, height, sx, sy,
                      left, top, offset, draw=True, window=True):
     b = behavior
     writes = [
-        (b.symbol_address("fd_50F6_0508"), _w(xorigin) + _w(yorigin)),
+        (b.symbol_address("MapPnt"), _w(xorigin) + _w(yorigin)),
         (b.symbol_address("fd_50F6_10D2"), _w(left) + _w(top) + _w(left + 320) + _w(top + 200)),
-        (b.symbol_address("fd_50F6_3856"), _w(sx)),
-        (b.symbol_address("fd_50F6_3858"), _w(sy)),
+        (b.symbol_address("mapXsize"), _w(sx)),
+        (b.symbol_address("mapYsize"), _w(sy)),
         (b.symbol_address("fd_50F6_38C0"), _w(offset)),
         (b.symbol_address("fd_50F6_10E0"), _w(width)),
         (b.symbol_address("fd_50F6_10DE"), _w(height)),
@@ -85,7 +85,7 @@ def _map_cursor_case(label, xorigin, yorigin, width, height, sx, sy,
         "f_1CE2_0410": _callback(3, _noop, project=_capture_rect),
     }
     return b.Case(label, writes=writes,
-                  observe=[_range("fd_50F6_38C2", 8)],
+                  observe=[_range("mapCursorRect", 8)],
                   callbacks=callbacks, return_kind="void",
                   state={"window_open": window},
                   metadata={"suite": SUITE, "contract": "DrawMapCursor ordered clip/draw boundary trace, semantic Rect pointer and cursor state", "host_boundary": "f_22BF_09B0 window query; clip calls; f_1CE2_0410 XOR rectangle"})
@@ -118,10 +118,10 @@ def _invert_case(label, x, y, left, top, resolution):
               (b.symbol_address("g_3DB2"), _w(resolution)),
               (b.symbol_address("fd_55B3_2A42"), b"".join(_w(q) for pt in shape for q in pt))]
     callbacks = {"clip_Push": _callback(handler=_noop), "clip_SetWin": _callback(1, _noop),
-                 "clip_Pop": _callback(handler=_noop), "f_1FAA_0006": _callback(4, _noop, project=_capture_quad)}
+                 "clip_Pop": _callback(handler=_noop), "TrapFill": _callback(4, _noop, project=_capture_quad)}
     return b.Case(label, args=[x, y], writes=writes,
         callbacks=callbacks, observe=[_range("fd_50F6_10D2", 8)], return_kind="void",
-        metadata={"suite": SUITE, "contract": "InvertPatch semantic four-point polygon and ordered clip/draw trace", "host_boundary": "clip calls and f_1FAA_0006 polygon XOR"})
+        metadata={"suite": SUITE, "contract": "InvertPatch semantic four-point polygon and ordered clip/draw trace", "host_boundary": "clip calls and TrapFill polygon XOR"})
 
 
 def invert_cases(random_count=1000, seed=0x1A7E):
@@ -140,11 +140,11 @@ def invert_cases(random_count=1000, seed=0x1A7E):
 def _project_map_draw_intent(machine, args):
     """Project draw arguments together with all implicit helper input globals."""
     word = lambda name: machine.word(behavior.symbol_address(name))
-    clip = list(struct.unpack("<4h", machine.read(behavior.symbol_address("fd_50F6_110C"), 8)))
+    clip = list(struct.unpack("<4h", machine.read(behavior.symbol_address("editTileRect"), 8)))
     return {"xy": list(args), "tile": word("g_94E4"), "life_or_draw_code": word("g_9126"),
             "plane": word("MapPlane"), "mode": word("fd_50F6_1102"),
             "display_family": machine.read(behavior.symbol_address("g_5A97"), 1)[0],
-            "tile_scale": [word("fd_55B3_19BE"), word("fd_55B3_19C0")], "clip_rect": clip,
+            "tile_scale": [word("tileWidth"), word("tileHeight")], "clip_rect": clip,
             "g_19D0": machine.word(memory_suite.dga(0x19D0)),
             "tile_buffer_pointers": machine.read(behavior.symbol_address("fd_50F6_10E6"), 8).hex(),
             "tile_source_pointer": machine.read(behavior.symbol_address("fd_50F6_10EE"), 4).hex(),
@@ -157,12 +157,12 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
     # Arrays in DOS are row-major with the first subscript outermost.
     xcell, ycell = (x & (0x7f if plane < 2 else 0x3f)), y & 0x3f
     writes = [
-        (b.symbol_address("MapPlane"), _w(plane)), (b.symbol_address("fd_3D57_07BE"), _w(view)),
-        (b.symbol_address("fd_50F6_0508"), _w(0) + _w(0)),
+        (b.symbol_address("MapPlane"), _w(plane)), (b.symbol_address("ELayerMode"), _w(view)),
+        (b.symbol_address("MapPnt"), _w(0) + _w(0)),
         (b.symbol_address("g_94E4"), _w(0x7777)), (b.symbol_address("g_9126"), _w(0x6666)),
-        (b.symbol_address("fd_50F6_049A"), _w(2)), (b.symbol_address("fd_50F6_04C2"), _w(3)),
-        (b.symbol_address("fd_50F6_0502"), _w(4)), (b.symbol_address("fd_50F6_0496"), _w(5)),
-        (b.symbol_address("fd_55B3_19BE"), _w(16)), (b.symbol_address("fd_55B3_19C0"), _w(16)),
+        (b.symbol_address("MeBase"), _w(2)), (b.symbol_address("MeType"), _w(3)),
+        (b.symbol_address("MeEgg"), _w(4)), (b.symbol_address("MeDir"), _w(5)),
+        (b.symbol_address("tileWidth"), _w(16)), (b.symbol_address("tileHeight"), _w(16)),
         (b.symbol_address("fd_55B3_19CE"), _w(topflag)),
         (b.symbol_address("fd_50F6_15C4"), _w(cache) * 1200),
         (b.symbol_address("fd_50F6_1114"), bytes([tilecache & 255]) * 1200),
@@ -179,7 +179,7 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
             (memory_suite.dga(0x19D0), _w(0)),
             (b.symbol_address("fd_50F6_10E6"), _w(0) + _w(safe_base) + _w(0) + _w(safe_base)),
             (b.symbol_address("fd_50F6_10EE"), _w(0) + _w(safe_base)),
-            (b.symbol_address("fd_50F6_110C"), _w(0) + _w(0) + _w(640) + _w(480)),
+            (b.symbol_address("editTileRect"), _w(0) + _w(0) + _w(640) + _w(480)),
             (b.symbol_address("g_914C"), b"\0" * 4),
             (b.symbol_address("g_917C"), b"\0" * 4),
             (safe_base * 16, bytes(0x2000)),
@@ -209,7 +209,7 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
                _range("fd_50F6_1102", 2), _range("g_5A97", 1),
                b.Range("g_19D0", memory_suite.dga(0x19D0), 2),
                _range("fd_50F6_10E6", 8), _range("fd_50F6_10EE", 4),
-               _range("fd_50F6_110C", 8), _range("g_914C", 4), _range("g_917C", 4),
+               _range("editTileRect", 8), _range("g_914C", 4), _range("g_917C", 4),
                _range("fd_50F6_15C4", 2400), _range("fd_50F6_1114", 1200)]
     return b.Case(label, args=[x, y], writes=writes, observe=observe, callbacks=callbacks,
         return_kind="void", metadata={"suite": SUITE,
@@ -415,7 +415,7 @@ def _font_select(machine, args):
 
 def _window_clip_setup(machine, args):
     machine.state.setdefault("window_clip_setups", []).append(
-        machine.read(behavior.symbol_address("fd_50F6_110C"), 8).hex())
+        machine.read(behavior.symbol_address("editTileRect"), 8).hex())
 
 
 def _balloon_printf_project(machine, args):
@@ -432,7 +432,7 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
                   spider_clip=False):
     b = behavior
     # One real firm Ralloc block is the message picture; the remaining free
-    # paragraphs back the real f_171C_1A9E/f_171C_1B84/f_171C_1BBA/f_171C_1C0A
+    # paragraphs back the real mem_Alloc/mem_Lock/mem_Unlock/mem_Free
     # allocation lifecycle for the temporary composition buffer.
     rows = [(16, 1, {"size": 224, "age": 1}), (0xF0, 0x80)]
     arena = memory_suite.heap_case(label + "/ralloc", rows, handles=[0],
@@ -459,9 +459,9 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
         (b.symbol_address("fd_50F6_04E6"), _w(0)),
         (b.symbol_address("fd_50F6_04A6"), struct.pack("<HH", *BALLOON_TEXT)),
         (b.symbol_address("MapPlane"), _w(plane)),
-        (b.symbol_address("fd_50F6_0508"), _w(0) + _w(0)),
+        (b.symbol_address("MapPnt"), _w(0) + _w(0)),
         (b.symbol_address("fd_50F6_10E0"), _w(40)), (b.symbol_address("fd_50F6_10DE"), _w(30)),
-        (b.symbol_address("fd_50F6_110C"), _w(0) + _w(0) + _w(640) + _w(480)),
+        (b.symbol_address("editTileRect"), _w(0) + _w(0) + _w(640) + _w(480)),
         (b.symbol_address("fd_50F6_1102"), _w(mode)),
         (b.symbol_address("fd_50F6_37D2"), _w(0 if spider_clip else 500)),
         (b.symbol_address("fd_50F6_37D4"), _w(0 if spider_clip else 500)),
@@ -475,7 +475,7 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
         (b.symbol_address("fd_50F6_37E6"), struct.pack("<HH", b.symbol("f_0250_0ADB")["off"], b.symbol("f_0250_0ADB")["seg"])),
         (b.symbol_address("fd_50F6_37EA"), struct.pack("<HH", b.symbol("f_0250_0721")["off"], b.symbol("f_0250_0721")["seg"])),
         (b.symbol_address("fd_50F6_37EE"), struct.pack("<HH", b.symbol("f_0250_0D10")["off"], b.symbol("f_0250_0D10")["seg"])),
-        (b.symbol_address("fd_55B3_19BE"), _w(16)), (b.symbol_address("fd_55B3_19C0"), _w(16)),
+        (b.symbol_address("tileWidth"), _w(16)), (b.symbol_address("tileHeight"), _w(16)),
         (b.symbol_address("fd_50F6_10E6"), b"\0" * 4),
         (b.symbol_address("fd_50F6_10EA"), b"\0" * 4),
         (memory_suite.dga(0x19D0), _w(0)),
@@ -497,10 +497,10 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
         "db_ReleaseHandle": b.Callback(2, _tile_resource_release),
         "f_0250_062A": b.Callback(0, project=lambda m, a: a),
         "f_0250_0643": b.Callback(1, project=lambda m, a: a),
-        "f_171C_1B84": b.Callback(2), "f_171C_1BBA": b.Callback(2),
-        "f_171C_1C0A": b.Callback(2),
-        "f_171C_1A9E": b.Callback(5),
-        "f_24AB_02AD": b.Callback(1, _font_select), "WinPrintf": b.Callback(6, _winprintf, project=_balloon_printf_project),
+        "mem_Lock": b.Callback(2), "mem_Unlock": b.Callback(2),
+        "mem_Free": b.Callback(2),
+        "mem_Alloc": b.Callback(5),
+        "font_SetFont": b.Callback(1, _font_select), "WinPrintf": b.Callback(6, _winprintf, project=_balloon_printf_project),
         "f_0250_5058": b.Callback(0, _window_clip_setup),
         "f_0250_0915": b.Callback(0, _render_tile), "f_0250_0B86": b.Callback(0, _render_tile),
         "f_0250_0ADB": b.Callback(3, _copy_tile),
@@ -532,7 +532,7 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
                   "coordinates": {"x": x, "y": y},
                   "buffer_layout": {"mode": mode, "bytes_per_tile": bpp, "rowbytes_per_tile": rowbytes, "width_tiles": wt, "height_tiles": ht, "allocation_bytes": buf_size},
                   "host_boundaries": ["f_1629_000C resource acquisition", "f_0250_0643 tile-set switch", "f_0250_0915/f_0250_0B86 source tile renderer", "fd_50F6_37E6 tile pixel transfer", "fd_50F6_37EA picture overlay", "fd_50F6_37EE clipping save/restore"],
-                  "helper_policy": "f_171C_1A9E/1B84/1BBA/1C0A execute original Ralloc code over the memory_suite valid arena; resource acquisition and host pixel/render calls are explicit callbacks",
+                  "helper_policy": "mem_Alloc/1B84/1BBA/1C0A execute original Ralloc code over the memory_suite valid arena; resource acquisition and host pixel/render calls are explicit callbacks",
                   "limits": "normalized render/copy traces and complete pointed source/destination bytes; no display framebuffer is modeled or claimed"})
 
 

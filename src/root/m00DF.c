@@ -35,13 +35,13 @@ void far f_00DF_009D(void)
     WinPrintf("BEEP");
 }
 
-extern int far fd_3D57_07A8[];
+extern int far OptionStates[];
 extern void far f_0250_01E7(void);
 extern void far f_284A_0013(int song);
 
 void far myBeginSong(int song)
 {
-    if (g_1926 && fd_3D57_07A8[1]) {
+    if (g_1926 && OptionStates[1]) {
         f_0250_01E7();
         f_284A_0013(song);
     }
@@ -55,7 +55,7 @@ extern void far f_295C_0367(int sound);
 
 void far myBeginSound(int a, int b, int c)
 {
-    if (g_1926 && fd_3D57_07A8[2])
+    if (g_1926 && OptionStates[2])
         f_295C_0367(a);
 }
 
@@ -73,7 +73,7 @@ extern int far f_284A_0004(void);
 
 int far mySongIsDone(void)
 {
-    if (g_1926 && fd_3D57_07A8[1])
+    if (g_1926 && OptionStates[1])
         return f_284A_0004();
     return 1;
 }
@@ -88,6 +88,6 @@ void far f_00DF_0164(void)
 
 void far f_00DF_016C(void)
 {
-    if (g_1926 && fd_3D57_07A8[1])
+    if (g_1926 && OptionStates[1])
         f_295C_0367(1);
 }

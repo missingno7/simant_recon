@@ -94,12 +94,12 @@ static int g_8C22;
 static int g_8C24;
 
 extern unsigned int far _fstrlen(char far *s);
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern int far f_24AB_030B(void);
 extern void far Punt(char far *format, ...);
 extern char far * far _fstrncpy(char far *, char far *, unsigned int);
 extern int far WinPrintf(char far *format, ...);
-extern void far f_24AB_038D(int x, int y, char far *text);
+extern void far font_PrintStr(int x, int y, char far *text);
 extern char far * far _fstrcpy(char far *dst, char far *src);
 extern unsigned char near _ctype[];
 extern int far _fstrcmp(char far *a, char far *b);
@@ -133,18 +133,18 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
     len = _fstrlen(text);
     width = rect->right - rect->left;
     y = rect->top + 4;
-    f_24AB_02AD(font1);
+    font_SetFont(font1);
     lineH = f_24AB_030B();
-    f_24AB_02AD(font2);
+    font_SetFont(font2);
     if (f_24AB_030B() > lineH)
         lineH = f_24AB_030B();
     maxLines = (rect->bottom - rect->top) / lineH;
     if (record)
         g_8C24 = 0;
     if (styl && styles->face == 0x100)
-        f_24AB_02AD(font2);
+        font_SetFont(font2);
     else
-        f_24AB_02AD(font1);
+        font_SetFont(font1);
     for (line = 0; len > pos && line < firstLine + maxLines; line++) {
         w = 0;
         done = 0;
@@ -161,7 +161,7 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
                     _fstrncpy(buf, &text[start], n);
                     buf[n] = 0;
                     WinPrintf("%d(%d)(%d): [%s]\n", pos, n, styles[styleIdx].face, buf);
-                    f_24AB_038D(x, y, buf);
+                    font_PrintStr(x, y, buf);
                     if (record && styles[styleIdx - 1].face == 0x100) {
                         idx = 0;
                         while (buf[idx] == ' ')
@@ -186,9 +186,9 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
                 }
                 x = rect->left + w + 1;
                 if (styles[styleIdx].face == 0x100)
-                    f_24AB_02AD(font2);
+                    font_SetFont(font2);
                 else
-                    f_24AB_02AD(font1);
+                    font_SetFont(font1);
                 start = pos;
             }
             w += f_24AB_0367(text[pos]);
@@ -226,7 +226,7 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
         if (line >= firstLine && (n = pos - start) > 0) {
             _fstrncpy(buf, &text[start], n);
             buf[n] = 0;
-            f_24AB_038D(x, y, buf);
+            font_PrintStr(x, y, buf);
         }
         while (text[pos] == ' ')
             pos++;
@@ -238,7 +238,7 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
 
 
 extern char far * far f_1A53_00F0(int object, int kind, int type);
-extern char far * far f_171C_1B84(char far *handle);
+extern char far * far mem_Lock(char far *handle);
 
 int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int font1, int font2)
 {
@@ -257,18 +257,18 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
     lines = 0;
     styles = styl ? (struct StyleRun far *)(styl + 1) : 0;
     len = _fstrlen(text);
-    f_24AB_02AD(font1);
+    font_SetFont(font1);
     lineH = f_24AB_030B();
-    f_24AB_02AD(font2);
+    font_SetFont(font2);
     if (f_24AB_030B() > lineH)
         lineH = f_24AB_030B();
     if (styl) {
         if (styles->face == 0x100)
-            f_24AB_02AD(font2);
+            font_SetFont(font2);
         else
-            f_24AB_02AD(font1);
+            font_SetFont(font1);
     } else
-        f_24AB_02AD(font1);
+        font_SetFont(font1);
     while (pos < len) {
         w = 0;
         done = 0;
@@ -277,9 +277,9 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
             if (styl && styleIdx + 1 < *styl && styles[styleIdx + 1].pos <= (long)pos) {
                 styleIdx++;
                 if (styles[styleIdx].face == 0x100)
-                    f_24AB_02AD(font2);
+                    font_SetFont(font2);
                 else
-                    f_24AB_02AD(font1);
+                    font_SetFont(font1);
             }
             w += f_24AB_0367(text[pos]);
             if (w < width) {
@@ -321,13 +321,13 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
 
 
 extern void far win_SetObjFormatStr(int obj, char far *text);
-extern void far f_171C_1BBA(char far *handle);
+extern void far mem_Unlock(char far *handle);
 extern void far db_PurgeObject(int object, int kind);
 extern void _fastcall win_DrawTitle(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far clip_SetWin(int win);
 extern void far clip_SubInclude(struct Rect far *rect);
-extern long far f_171C_1C1C(char far *handle);
+extern long far mem_Size(char far *handle);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
@@ -385,20 +385,20 @@ void far DisplayCard(int card)
     }
     h2 = f_1A53_00F0(card, 0x13, 1);
     if (h2 != 0) {
-        p = f_171C_1B84(h2);
+        p = mem_Lock(h2);
         for (q = p; *q; q++)
             if (*q == '_')
                 *q = ' ';
         win_SetObjFormatStr(0x501, p);
-        f_171C_1BBA(h2);
+        mem_Unlock(h2);
         db_PurgeObject(card, 0x13);
         win_DrawTitle(0x501);
     }
     win_GetObjRect(0x502, &r);
     clip_SetWin(0x500);
     clip_SubInclude(&r);
-    size = f_171C_1C1C(h1);
-    base = f_171C_1B84(h1);
+    size = mem_Size(h1);
+    base = mem_Lock(h1);
     win_SetColorFromObjNum(0x502);
     g_8C22 = 0;
     while (off < size) {
@@ -445,11 +445,11 @@ void far DisplayCard(int card)
                     continue;
                 hStyl = f_1A53_00F0(rez, 0x15, 1);
                 styl = 0;
-                text = f_171C_1B84(hText);
-                tlen = f_171C_1C1C(hText);
+                text = mem_Lock(hText);
+                tlen = mem_Size(hText);
                 if (hStyl != 0) {
-                    styl = (int far *)f_171C_1B84(hStyl);
-                    FlipWords((unsigned char far *)styl, f_171C_1C1C(hStyl));
+                    styl = (int far *)mem_Lock(hStyl);
+                    FlipWords((unsigned char far *)styl, mem_Size(hStyl));
                     styles = styl ? (struct StyleRun far *)(styl + 1) : 0;
                     for (k = 0; k < *styl; k++)
                         XFlipLong((unsigned far *)&styles[k]);
@@ -478,11 +478,11 @@ void far DisplayCard(int card)
                 tr.r.right += r.left;
                 tr.r.bottom += r.top;
                 win_PrintStyleTextInRect(text, styl, &tr.r, 0, 2, 5, 1);
-                f_24AB_02AD(0);
-                f_171C_1BBA(hText);
+                font_SetFont(0);
+                mem_Unlock(hText);
                 db_PurgeObject(rez, 10);
                 if (hStyl != 0) {
-                    f_171C_1BBA(hStyl);
+                    mem_Unlock(hStyl);
                     db_PurgeObject(rez, 0x15);
                 }
             }
@@ -493,7 +493,7 @@ void far DisplayCard(int card)
             break;
         }
     }
-    f_171C_1BBA(h1);
+    mem_Unlock(h1);
     db_PurgeObject(card, 0x11);
 }
 
@@ -541,7 +541,7 @@ void far OpenInfoWindow(void)
 extern void far clip_Push(void);
 extern char far * far GSaveRect(struct Rect far *r);
 extern unsigned char near g_5A97;
-extern int near g_3DE0;
+extern int near _foreColor;
 extern void far f_1CE2_0013(int left, int top, int right, int bottom, int width);
 extern int far StillDown(void);
 extern void far win_Events(void);
@@ -584,10 +584,10 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
     if (hText != 0) {
         hStyl = f_1A53_00F0(rez, 0x15, 1);
         styl = 0;
-        text = f_171C_1B84(hText);
+        text = mem_Lock(hText);
         if (hStyl != 0) {
-            styl = (int far *)f_171C_1B84(hStyl);
-            FlipWords((unsigned char far *)styl, f_171C_1C1C(hStyl));
+            styl = (int far *)mem_Lock(hStyl);
+            FlipWords((unsigned char far *)styl, mem_Size(hStyl));
             styles = styl ? (struct StyleRun far *)(styl + 1) : 0;
             for (k = 0; k < *styl; k++)
                 XFlipLong((unsigned far *)&styles[k]);
@@ -615,13 +615,13 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
         bits = GSaveRect(&frame);
         win_SetColorFromObjNum(0x502);
         if (g_5A97 & 1)
-            g_3DE0 = 0x80;
+            _foreColor = 0x80;
         f_1CE2_0013(frame.left, frame.top, frame.right, frame.bottom, 1);
         win_PrintStyleTextInRect(text, styl, &box, 0, 2, 5, 0);
-        f_171C_1BBA(hText);
+        mem_Unlock(hText);
         db_PurgeObject(rez, 10);
         if (hStyl != 0) {
-            f_171C_1BBA(hStyl);
+            mem_Unlock(hStyl);
             db_PurgeObject(rez, 0x15);
         }
     }
@@ -631,7 +631,7 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
     clip_Pop();
 }
 
-extern int far f_1FD2_04E5(struct Point far *pt, struct Rect far *rect);
+extern int far PointInRect(struct Point far *pt, struct Rect far *rect);
 extern void _fastcall win_DrawWindow(int win);
 
 void far ProcInfoEvent(struct Event far *ev)
@@ -649,7 +649,7 @@ void far ProcInfoEvent(struct Event far *ev)
     pt.x = ev->where.x - wr.left;
     pt.y = ev->where.y - wr.top;
     for (; i < g_8C22 && found == 0; i++) {
-        if (f_1FD2_04E5(&pt, &fd_4EE5_0280[i].r)) {
+        if (PointInRect(&pt, &fd_4EE5_0280[i].r)) {
             if (fd_4EE5_0280[i].id == 1) {
                 prev = g_2E04[(g_2E24 - 1) & 0xf];
                 if (prev) {
@@ -671,7 +671,7 @@ void far ProcInfoEvent(struct Event far *ev)
     }
     pt = ev->where;
     for (i = 0; i < g_8C24 && found == 0; i++) {
-        if (f_1FD2_04E5(&pt, &fd_4EE5_0000[i].r)) {
+        if (PointInRect(&pt, &fd_4EE5_0000[i].r)) {
             PopUpInfoWindow((fd_4EE5_0000[i].r.right - fd_4EE5_0000[i].r.left) / 2 + fd_4EE5_0000[i].r.left - wr.left,
                             fd_4EE5_0000[i].r.top - wr.top, fd_4EE5_0000[i].r.bottom - wr.top, fd_4EE5_0000[i].id);
             found = 1;

@@ -227,8 +227,8 @@ struct Rect {
 };
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern int far f_1FD2_04E5(int far *pt, struct Rect far *rect);
-extern void _fastcall f_20E8_0725(int win);
+extern int far PointInRect(int far *pt, struct Rect far *rect);
+extern void _fastcall win_ToTop(int win);
 
 void _fastcall f_218D_0451(struct Event far *ev)
 {
@@ -243,14 +243,14 @@ void _fastcall f_218D_0451(struct Event far *ev)
     win_GetObjRect(top, &r);
     win_LockWin(top);
     noClose = (*(unsigned far *)(win_WinAddr(top) + 0x1c) & 0x40) >> 6;
-    if (!f_1FD2_04E5(&ev->h, &r) && (*(int far *)(win_WinAddr(top) + 0x1c) & 1))
+    if (!PointInRect(&ev->h, &r) && (*(int far *)(win_WinAddr(top) + 0x1c) & 1))
         win_Close(top);
     win_UnlockWin(top);
     if (noClose == 0) {
         for (i = 0; g_5702[i] != (int)0x8000; i++) {
             win_GetObjRect(g_5702[i], &r);
-            if (f_1FD2_04E5(&ev->h, &r)) {
-                f_20E8_0725(g_5702[i]);
+            if (PointInRect(&ev->h, &r)) {
+                win_ToTop(g_5702[i]);
                 break;
             }
         }
@@ -263,7 +263,7 @@ struct Pt {
 };
 
 extern char far * far f_2505_0006(int win);
-extern void far f_1FD2_04D0(struct Pt far *pt);
+extern void far GetMousePos(struct Pt far *pt);
 extern void far f_1B73_0C80(int obj);
 
 int far f_218D_052F(void)
@@ -284,11 +284,11 @@ int far f_218D_052F(void)
     best = 0xffffffffL;
     win_LockWin(top);
     w = f_2505_0006(top);
-    f_1FD2_04D0(&pt);
+    GetMousePos(&pt);
     for (i = 1; i < *(int far *)(w + 0xc); i++) {
         obj = ((char far * far *)(w + 0x2c))[i];
         if (*(int far *)(obj + 0x24) & 2) {
-            if (f_1FD2_04E5((int far *)&pt, (struct Rect far *)obj)) {
+            if (PointInRect((int far *)&pt, (struct Rect far *)obj)) {
                 win_UnlockWin(top);
                 return top + i;
             }

@@ -21,13 +21,13 @@ struct Sides {
 
 extern int far f_24AB_030B(void);
 extern int far f_24AB_0329(char far *text);
-extern void far f_24AB_038D(int x, int y, char far *text);
-extern void far f_24AB_02AD(int font);
-extern void far f_1CE2_046D(struct Rect far *rect, int color);
-extern void far f_1CE2_044D(struct Rect far *rect, int width);
-extern void far f_1CE2_09E2(struct Rect far *rect, int width, struct Sides sides, int light, int dark);
+extern void far font_PrintStr(int x, int y, char far *text);
+extern void far font_SetFont(int font);
+extern void far GRectFill(struct Rect far *rect, int color);
+extern void far GRectOutline(struct Rect far *rect, int width);
+extern void far GRectPartialMixedOutline(struct Rect far *rect, int width, struct Sides sides, int light, int dark);
 extern void far f_1CE2_0278(struct Rect far *rect, int width, struct Sides sides, int color);
-extern void far f_1CE2_0430(struct Rect far *rect);
+extern void far GRectInv(struct Rect far *rect);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
@@ -39,8 +39,8 @@ extern void _fastcall f_23E6_0392(char far *obj);
 extern void _fastcall f_23E6_066C(char far *obj);
 extern void _fastcall win_DrawBitMapAtObj(int id, struct Rect far *rect);
 extern char far * far _fstrchr(char far *s, int c);
-extern char far * far f_171C_1B84(char far * far *handle);
-extern void far f_208F_0419(struct Pt far *size, int id);
+extern char far * far mem_Lock(char far * far *handle);
+extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
 extern void _fastcall win_LockWinHigh(int win);
 extern char far * far f_2505_0006(int win);
@@ -51,10 +51,10 @@ extern void far clip_SetWin(int win);
 extern void far clip_Off(void);
 extern void far clip_SubExclude(struct Rect far *rect);
 extern void far f_1FD2_05FD(void);
-extern void far f_171C_1BBA(char far * far *handle);
+extern void far mem_Unlock(char far * far *handle);
 
 extern char near g_5A97;
-extern int near g_3DE0;
+extern int near _foreColor;
 extern char near g_3DDC;
 extern int near g_3DE2;
 extern int g_3DA0;
@@ -91,7 +91,7 @@ void _fastcall gr_JustifyStrInRect(int mode, struct Rect far *rect, char far *te
     if (r.left > x)
         x = r.left;
     r.top = (r.bottom + (r.top - f_24AB_030B())) / 2;
-    f_24AB_038D(x, r.top, text);
+    font_PrintStr(x, r.top, text);
     if (mode == 3) {
         (*g_9134)(g_3DA0, r.top, rect->right, r.top + g_3DDC, g_3DE2);
         (*g_9134)(rect->left, r.top, x, r.top + g_3DDC, g_3DE2);
@@ -133,7 +133,7 @@ void _fastcall win_RectFill(struct Rect far *rect)
         (*g_9138)(rect->left, rect->top, rect->right, rect->bottom, 0);
         (*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
     } else
-        f_1CE2_046D(rect, colorEntry[2] * 0x101);
+        GRectFill(rect, colorEntry[2] * 0x101);
 }
 
 void _fastcall win_FillObjRect(int obj, int color)
@@ -141,18 +141,18 @@ void _fastcall win_FillObjRect(int obj, int color)
     struct Rect r;
 
     win_GetObjRect(obj, &r);
-    f_1CE2_046D(&r, color);
+    GRectFill(&r, color);
 }
 
 void _fastcall win_RectFillOutline(int width, struct Rect far *rect)
 {
     win_RectFill(rect);
-    f_1CE2_044D(rect, width);
+    GRectOutline(rect, width);
 }
 
 void far win_RectOutline(struct Rect far *rect, int width)
 {
-    f_1CE2_044D(rect, width);
+    GRectOutline(rect, width);
 }
 
 void far win_RectVOutline(struct Rect far *rect, int width)
@@ -163,7 +163,7 @@ void far win_RectVOutline(struct Rect far *rect, int width)
     sides.right = 0;
     sides.top = 1;
     sides.bottom = 1;
-    f_1CE2_09E2(rect, width, sides, g_3DE0, g_3DE0);
+    GRectPartialMixedOutline(rect, width, sides, _foreColor, _foreColor);
 }
 
 void far win_RectHOutline(struct Rect far *rect, int width)
@@ -174,7 +174,7 @@ void far win_RectHOutline(struct Rect far *rect, int width)
     sides.right = 1;
     sides.top = 0;
     sides.bottom = 0;
-    f_1CE2_09E2(rect, width, sides, g_3DE0, g_3DE0);
+    GRectPartialMixedOutline(rect, width, sides, _foreColor, _foreColor);
 }
 
 void _fastcall win_DrawButtonBorder(char far *obj)
@@ -197,20 +197,20 @@ void _fastcall win_DrawButtonBorder(char far *obj)
             sides.right = 0;
             sides.top = 1;
             sides.bottom = 1;
-            f_1CE2_09E2(rect, i, sides, entry[2] * 0x101, entry[3] * 0x101);
+            GRectPartialMixedOutline(rect, i, sides, entry[2] * 0x101, entry[3] * 0x101);
         }
     } else {
         (*g_9128)(entry[0] * 0x101, entry[0] * 0x101, entry[0] * 0x101);
-        f_1CE2_044D(rect, 3);
+        GRectOutline(rect, 3);
         if ((g_5A97 & 1) == 0) {
             (*g_9128)(entry[3] * 0x101, entry[3] * 0x101, entry[1] * 0x101);
-            f_1CE2_044D(rect, 2);
+            GRectOutline(rect, 2);
         }
     }
 }
 
 /* Unclaimed draft below (win_DrawObjectI): bytes exact, but the FIXUPP order inside the
- * f_1CE2_046D and f_24AB_02AD relocation groups differs (the original object had
+ * GRectFill and font_SetFont relocation groups differs (the original object had
  * LEDATA record breaks inside this function). */
 struct WinObj {
     struct Rect rect;
@@ -248,7 +248,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         f_23E6_0392((char far *)obj);
         break;
     case 5:
-        f_1CE2_046D(rect, colorEntry[2] * 0x101);
+        GRectFill(rect, colorEntry[2] * 0x101);
         win_DrawButtonBorder((char far *)obj);
         win_SetColorFromObj((char far *)obj);
     case 9:
@@ -273,26 +273,26 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         win_RectOutline(rect, *(char far *)&obj->data[1]);
         break;
     case 17:
-        f_1CE2_046D(rect, colorEntry[2] * 0x101);
+        GRectFill(rect, colorEntry[2] * 0x101);
         win_DrawButtonBorder((char far *)obj);
         win_SetColorFromObj((char far *)obj);
     case 16:
     formatText:
-        f_24AB_02AD(*(char far *)&obj->data[1]);
+        font_SetFont(*(char far *)&obj->data[1]);
         if (*(char far * far * far *)&obj->data[2] == 0) {
             text = (char far *)obj + 0x2e;
             if (g_6300 != 0 || _fstrchr(text, '%') == 0) {
         drawText:
-                f_24AB_02AD(*(char far *)&obj->data[1]);
+                font_SetFont(*(char far *)&obj->data[1]);
                 gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, text);
             }
         } else {
             h = *(char far * far * far *)&obj->data[2];
-            p = f_171C_1B84(h);
+            p = mem_Lock(h);
             gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, p);
-            f_171C_1BBA(h);
+            mem_Unlock(h);
         }
-        f_24AB_02AD(0);
+        font_SetFont(0);
         break;
     case 18:
         win_RectFill(rect);
@@ -317,7 +317,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         switch (obj->type) {
         case 1:
         case 6:
-            f_1CE2_0430((struct Rect far *)obj);
+            GRectInv((struct Rect far *)obj);
             break;
         }
     }
@@ -356,20 +356,20 @@ void _fastcall f_21FA_077D(char far *w)
         (*g_9128)(0, 0, 0x40);
     if (*(int far *)(w + 0x1c) & 4) {
         win_DrawBitMap(rect.left, rect.top, 0x64);
-        f_208F_0419(&size, 0x64);
+        gr_BitMapSize(&size, 0x64);
         rect.left += size.x;
     }
     if (*(int far *)(w + 0x1c) & 8) {
-        f_208F_0419(&size, 0x70);
+        gr_BitMapSize(&size, 0x70);
         win_DrawBitMap(rect.right - size.x, rect.bottom - size.y, 0x70);
     }
     if (*(int far *)(w + 0x1c) & 0x100) {
         if (*(int far *)(w + 0x1c) & 0x80) {
-            f_208F_0419(&size, 0x66);
+            gr_BitMapSize(&size, 0x66);
             rect.right -= size.x;
             win_DrawBitMap(rect.right, rect.top, 0x66);
         } else {
-            f_208F_0419(&size, 0x67);
+            gr_BitMapSize(&size, 0x67);
             rect.right -= size.x;
             win_DrawBitMap(rect.right, rect.top, 0x67);
         }
@@ -377,7 +377,7 @@ void _fastcall f_21FA_077D(char far *w)
     if (*(int far *)(w + 0x1c) & 0x10)
         win_DrawBitMap(rect.left, rect.top, 0x65);
     if (*(int far *)(w + 0x1c) & 0x400) {
-        f_208F_0419(&size, 0x69);
+        gr_BitMapSize(&size, 0x69);
         rect.right -= size.x;
         win_DrawBitMap(rect.right, rect.top, 0x69);
     }

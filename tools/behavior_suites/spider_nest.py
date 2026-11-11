@@ -6,7 +6,7 @@ dependencies were executed from the original EXE and which were modeled.
 
 Run through tools/behavior.py once its public API is available:
     python tools/behavior.py SpiderScan --suite spider_nest
-    python tools/behavior.py o25_3BA4_1035 --suite spider_nest
+    python tools/behavior.py EnterNest --suite spider_nest
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ HELPER_STACK_WORDS = {
         "SRand1": 1, "SRand4": 0, "fracSIN": 1, "fracCOS": 1,
         "FindAntIndex": 4, "DeadAntHere": 3,
     },
-    "o25_3BA4_1035": {
+    "EnterNest": {
         "SRand1": 1, "SRand4": 0, "ClearMyLife": 5,
         "SetMyLife": 6, "DigMyTile": 3, "TryAntTheme": 0,
         "SetAlarmDropState": 2,
@@ -37,7 +37,7 @@ CONTRACTS = {
         "helper_policy": "In original-helper mode, SRand1/SRand4/fracSIN/fracCOS/FindAntIndex/DeadAntHere execute as original overlay/oracle helpers and are entry-watched. Default mode retains source-derived trig/RNG callbacks. DoLaserFire is trace-only.",
         "boundedness": "DoLaserFire output is represented by its ordered call/argument trace; rendering/audio device effects are outside this simulation contract.",
     },
-    "o25_3BA4_1035": {
+    "EnterNest": {
         "target": "S25:3BA4:1035",
         "current_residue": "Target and best source are both 281 bytes; normalized body and CFG match; two register-role operand bytes differ and strict relocation-order proof is grouped.",
         "compared": ["return", "MePlane/MeLocX/MeLocY", "ant type/direction/alarm globals", "LifeB/LifeR", "MapA/MapB/MapR", "hole maps", "LFSR state and callback results", "audio/window/invalidation callback traces", "all non-stack writes"],
@@ -211,9 +211,9 @@ def _spider_callbacks():
 
 def _spider_observations():
     return [
-        _range("fd_50F6_1004", 2),
-        _range("fd_50F6_0F12", 2),
-        _range("fd_50F6_0F34", 2),
+        _range("SpidDir", 2),
+        _range("SpidX", 2),
+        _range("SpidY", 2),
         _range("LifeA", 128 * 64),
         _range("AlistX", 1000),
         _range("AlistY", 1000),
@@ -221,9 +221,9 @@ def _spider_observations():
         _range("ListIndexA", 2),
         _range("g_8BA2", 2),
         _range("MapA", 128 * 64),
-        _range("fd_50F6_0476", 2),
-        _range("fd_50F6_037C", 100),
-        _range("fd_50F6_0404", 100),
+        _range("DdPtr", 2),
+        _range("DeadX", 100),
+        _range("DeadY", 100),
     ]
 
 
@@ -232,20 +232,20 @@ def _spider_case(label: str, *, direction: int, sx: int, sy: int,
     # The arrays are deliberately zero-initialized before sparse overlays.
     # LifeA is x-major in the DOS image: offset x*64+y.
     writes = [
-        _word_write("fd_50F6_1004", direction),
-        _word_write("fd_50F6_0F12", sx),
-        _word_write("fd_50F6_0F34", sy),
+        _word_write("SpidDir", direction),
+        _word_write("SpidX", sx),
+        _word_write("SpidY", sy),
         _blob_write("LifeA", bytes(128 * 64)),
         _blob_write("AlistX", bytes(1000)),
         _blob_write("AlistY", bytes(1000)),
         _blob_write("AlistT", bytes(1000)),
         _word_write("ListIndexA", len(ants) if count is None else count),
         _word_write("g_8BA2", lfsr_seed),
-        _word_write("fd_50F6_0476", 0),
+        _word_write("DdPtr", 0),
         _word_write("TERRAINset", 0),
         _blob_write("MapA", bytes(128 * 64)),
-        _blob_write("fd_50F6_037C", bytes(100)),
-        _blob_write("fd_50F6_0404", bytes(100)),
+        _blob_write("DeadX", bytes(100)),
+        _blob_write("DeadY", bytes(100)),
     ]
     life_base = _behavior().symbol_address("LifeA")
     ax = _behavior().symbol_address("AlistX")
@@ -405,9 +405,9 @@ def _tick_count(machine, args):
 
 def _nest_observations():
     return [
-        _range("fd_50F6_0496", 2),
-        _range("fd_50F6_04C2", 2),
-        _range("fd_50F6_104E", 2),
+        _range("MeDir", 2),
+        _range("MeType", 2),
+        _range("MeDropAlarm", 2),
         _range("MePlane", 2),
         _range("MeLocX", 2),
         _range("MeLocY", 2),
@@ -427,9 +427,9 @@ def _nest_case(label: str, *, plane: int, x: int, y: int, ant_type: int,
     # Initial board bytes are explicit, so the map and life effects of the
     # original ClearMyLife/SetMyLife/DigMyTile helpers remain observable.
     writes = [
-        _word_write("fd_50F6_0496", direction),
-        _word_write("fd_50F6_04C2", ant_type),
-        _word_write("fd_50F6_104E", alarm),
+        _word_write("MeDir", direction),
+        _word_write("MeType", ant_type),
+        _word_write("MeDropAlarm", alarm),
         _word_write("MePlane", plane),
         _word_write("MeLocX", x),
         _word_write("MeLocY", y),
@@ -548,13 +548,13 @@ def make_cases(function: str, *, directed: bool = True,
             case.metadata["function"] = function
             yield enable_original_helpers(case, original_helpers)
         return
-    if function in ("o25_3BA4_1035", "EnterNest"):
+    if function in ("EnterNest", "EnterNest"):
         if directed:
             for case in _enter_nest_directed():
-                case.metadata["function"] = "o25_3BA4_1035"
+                case.metadata["function"] = "EnterNest"
                 yield enable_original_helpers(case, original_helpers)
         for case in _enter_nest_random(random_seed, random_count):
-            case.metadata["function"] = "o25_3BA4_1035"
+            case.metadata["function"] = "EnterNest"
             yield enable_original_helpers(case, original_helpers)
         return
     raise KeyError(f"no spider_nest suite for {function}")

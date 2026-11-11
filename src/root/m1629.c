@@ -29,14 +29,14 @@ extern void far Punt(char far *format, ...);
 extern char far * far _fstrcpy(char far *dest, char far *src);
 extern int far f_24AB_0329(char far *text, void far *font);
 extern int far _font_FontHeight(void far *font);
-extern Handle far f_171C_13CA(long size, int flags, char far *name);
-extern char far * far f_171C_1B84(Handle h);
-extern void far f_2650_0107(char far *buf, int size);
+extern Handle far Ralloc(long size, int flags, char far *name);
+extern char far * far mem_Lock(Handle h);
+extern void far ClearBuffer(char far *buf, int size);
 extern void far f_1699_0000(unsigned char far *pattern, int x, int y, char far *dest);
 extern void far f_1699_0050(unsigned char far *pattern, int dx, int y, char far *dest, int count);
 extern char far * far font_MakeImage(char far *s, int x, void far *font);
-extern void far f_1699_00A6(char far *image, char far *dest, int x, int y);
-extern Handle far f_171C_1BBA(Handle h);
+extern void far MoveTextToBalloon(char far *image, char far *dest, int x, int y);
+extern Handle far mem_Unlock(Handle h);
 extern void far f_171C_2276(char far *p);
 extern unsigned char near g_5A97;
 Handle far ConvertMonoMaskToTandy(Handle h);
@@ -87,9 +87,9 @@ Handle far MakeBalloon(char far *text, int tail)
     widest += 16;
     widest = (widest + 7) & ~7;
     bytes = (height + 1) * widest / 4;
-    h = f_171C_13CA((long)(bytes + 12), 1, "balloon");
-    p = f_171C_1B84(h);
-    f_2650_0107(p + 8, bytes);
+    h = Ralloc((long)(bytes + 12), 1, "balloon");
+    p = mem_Lock(h);
+    ClearBuffer(p + 8, bytes);
     *(int far *)(p + 8) = widest;
     *(int far *)(p + 10) = height;
     bottom = height - 8;
@@ -103,7 +103,7 @@ Handle far MakeBalloon(char far *text, int tail)
         f_1699_0000(g_1D3A, cols + 1, i, p + 8);
     }
     for (i = 0; i <= n; i++)
-        f_1699_00A6(font_MakeImage(lines[i], (unsigned)(-f_24AB_0329(lines[i], fd_55B3_65A4) & 6) >> 1,
+        MoveTextToBalloon(font_MakeImage(lines[i], (unsigned)(-f_24AB_0329(lines[i], fd_55B3_65A4) & 6) >> 1,
                                    fd_55B3_65A4), p + 8, 1, _font_FontHeight(fd_55B3_65A4) * i + 6);
     bottom = _font_FontHeight(fd_55B3_65A4) * i + 6;
     f_1699_0000(g_1D6A, cols + 1, bottom, p + 8);
@@ -116,7 +116,7 @@ Handle far MakeBalloon(char far *text, int tail)
     (*(int far *)(p + 10))--;
     if (n < 1)
         (*(int far *)(p + 10))--;
-    f_171C_1BBA(h);
+    mem_Unlock(h);
     f_171C_2276(buf);
     rowBytes = *(int far *)(p + 8) / 8;
     if (g_5A97 == 2)
@@ -134,8 +134,8 @@ Handle far MakeBalloon(char far *text, int tail)
     return h;
 }
 
-extern void far f_1699_0110(char far *src, char far *dst);
-extern void far f_171C_1C0A(Handle h);
+extern void far MaskMono2Tandy(char far *src, char far *dst);
+extern void far mem_Free(Handle h);
 
 Handle far ConvertMonoMaskToTandy(Handle h)
 {
@@ -145,26 +145,26 @@ Handle far ConvertMonoMaskToTandy(Handle h)
     int width;
     int height;
 
-    src = (struct Mask far *)f_171C_1B84(h);
+    src = (struct Mask far *)mem_Lock(h);
     width = src->width;
     height = src->height;
-    nh = f_171C_13CA((long)(src->height * src->width / 2 + 12), 1, "tdyballoon");
-    dst = (struct Mask far *)f_171C_1B84(nh);
+    nh = Ralloc((long)(src->height * src->width / 2 + 12), 1, "tdyballoon");
+    dst = (struct Mask far *)mem_Lock(nh);
     dst->width = width;
     dst->height = height;
     dst->type = 3;
     dst->flag = 4;
-    f_1699_0110((char far *)src + 8, (char far *)dst + 8);
-    f_171C_1BBA(h);
-    f_171C_1BBA(nh);
-    f_171C_1C0A(h);
+    MaskMono2Tandy((char far *)src + 8, (char far *)dst + 8);
+    mem_Unlock(h);
+    mem_Unlock(nh);
+    mem_Free(h);
     return nh;
 }
 
 extern int far WinPrintf(char far *, ...);
 extern void far * far _fmemcpy(void far *, void far *, unsigned);
 extern int near g_3DB2;
-extern void far f_24FA_00A0(char far *, int);
+extern void far invert(char far *, int);
 
 Handle far ConvertMonoMaskToColor(Handle h)
 {
@@ -178,11 +178,11 @@ Handle far ConvertMonoMaskToColor(Handle h)
     char far *s;
     char far *d;
 
-    src = (struct Mask far *)f_171C_1B84(h);
+    src = (struct Mask far *)mem_Lock(h);
     width = src->width;
     height = src->height;
-    nh = f_171C_13CA((long)(width / 8 * height * 5 + 12), 1, "clrbln");
-    dst = (struct Mask far *)f_171C_1B84(nh);
+    nh = Ralloc((long)(width / 8 * height * 5 + 12), 1, "clrbln");
+    dst = (struct Mask far *)mem_Lock(nh);
     dst->width = width;
     dst->height = height;
     dst->flag = 4;
@@ -195,7 +195,7 @@ Handle far ConvertMonoMaskToColor(Handle h)
         _fmemcpy(d, s + rb, rb);
         d += rb;
         if (g_3DB2 != 0x140)
-            f_24FA_00A0(s, rb);
+            invert(s, rb);
         _fmemcpy(d, s, rb);
         d += rb;
         _fmemcpy(d, s, rb);
@@ -207,8 +207,8 @@ Handle far ConvertMonoMaskToColor(Handle h)
         s += rb;
         s += rb;
     }
-    f_171C_1BBA(h);
-    f_171C_1BBA(nh);
-    f_171C_1C0A(h);
+    mem_Unlock(h);
+    mem_Unlock(nh);
+    mem_Free(h);
     return nh;
 }

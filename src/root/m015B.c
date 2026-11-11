@@ -70,7 +70,7 @@ void far KillSomeAnts(int mode)
 extern unsigned char far MapA[128][64];
 extern int far IsItFood(int tile);
 extern int far SRand16(void);
-extern int far fd_50F6_1040;
+extern int far FoodA;
 
 void far SubtractFood(void)
 {
@@ -80,19 +80,19 @@ void far SubtractFood(void)
         for (column = 0; column < 0x40; column++)
             if (IsItFood(MapA[row][column]) == 1)
                 MapA[row][column] = SRand16();
-    fd_50F6_1040 = 0;
+    FoodA = 0;
 }
 
-extern int far fd_50F6_0D70;
+extern int far CurEditMode;
 
 void far SetEditMode(int value)
 {
-    fd_50F6_0D70 = value;
+    CurEditMode = value;
 }
 
 static int g_1960[5] = { 0x109, 0x10a, 0x10c, 0x10d, 0x10b };
 
-extern int far fd_3D57_07C8;
+extern int far MapMode;
 extern int far YardMode;
 void far SetYardMode(int newMode);
 extern int far MapPlane;
@@ -103,11 +103,11 @@ extern void _fastcall win_MakeGroupUnselected(int win, int group);
 
 void far SetMapModeAnt(int mode)
 {
-    if (fd_3D57_07C8 == mode && mode >= 4 && mode <= 8)
+    if (MapMode == mode && mode >= 4 && mode <= 8)
         mode = 1;
     switch (mode) {
     case 0:
-        fd_3D57_07C8 = mode;
+        MapMode = mode;
         SetYardMode(YardMode);
         break;
     case 4:
@@ -120,7 +120,7 @@ void far SetMapModeAnt(int mode)
     case 1:
     case 2:
     case 3:
-        fd_3D57_07C8 = mode;
+        MapMode = mode;
         SetMapTitle();
         if (mode >= 4 && mode <= 8)
             win_MakeObjSelected(g_1960[mode - 4]);
@@ -132,7 +132,7 @@ void far SetMapModeAnt(int mode)
 
 static int g_1984[4] = { 0x1908, 0x1908, 0x1909, 0x190a };
 
-extern int far fd_50F6_0332;
+extern int far OldMapPlane;
 extern int far WinPrintf(char far *format, ...);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_MakeObjInvisible(int obj);
@@ -152,7 +152,7 @@ extern void far DrawYard(void);
 void far SetYardMode(int newMode)
 {
     if (newMode == 4) {
-        SetMapPlane(fd_50F6_0332);
+        SetMapPlane(OldMapPlane);
     } else {
         WinPrintf("\nYardmode=%d, newMode=%d", YardMode, newMode);
         if (newMode != 0 && newMode != 1) {
@@ -197,15 +197,15 @@ typedef struct {
     int y;
 } Point;
 
-extern int far fd_50F6_0FFA;
-extern int far fd_50F6_0FB6;
+extern int far EditRows;
+extern int far EditColumns;
 extern void far InvalEuMap(int left, int top, int right, int bottom);
-extern int far fd_50F6_0F36;
+extern int far hScrollMax;
 extern void far CenterEdit(int x, int y);
 extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
-extern Point far fd_50F6_07CA;
-extern Point far fd_50F6_07BC;
+extern Point far CurYardPnt;
+extern Point far YMapPnt;
 extern void far clip_Off(void);
 
 void far SetMapPlaneLocation(int plane, int x, int y)
@@ -213,20 +213,20 @@ void far SetMapPlaneLocation(int plane, int x, int y)
     int win, obj;
 
     if (plane != 0)
-        InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
+        InvalEuMap(0, 0, EditColumns, EditRows);
     else
-        fd_50F6_0332 = MapPlane;
+        OldMapPlane = MapPlane;
     MapPlane = plane;
     if (plane == 1)
-        fd_50F6_0F36 = 0x80 - fd_50F6_0FB6;
+        hScrollMax = 0x80 - EditColumns;
     else
-        fd_50F6_0F36 = 0x40 - fd_50F6_0FB6;
+        hScrollMax = 0x40 - EditColumns;
     if (MapPlane != 0) {
         CenterEdit(x, y);
         UpdateEdit();
         f_0250_0ED2();
     } else {
-        fd_50F6_07BC = fd_50F6_07CA;
+        YMapPnt = CurYardPnt;
     }
     SetMapModeAnt(MapPlane);
     win = obj = 0;
@@ -272,37 +272,37 @@ void far GotoMapPoint(int plane, int x, int y)
     }
 }
 
-extern int far fd_3D57_07C0[];
-extern Point far fd_50F6_0596;
-extern Point far fd_50F6_06A6;
-extern Point far fd_50F6_072E;
+extern int far MapPlane2EditTab[];
+extern Point far AMapPnt;
+extern Point far BMapPnt;
+extern Point far RMapPnt;
 
 void far SetMapPlane(int plane)
 {
     Point pt;
 
     if (plane != 0)
-        InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
+        InvalEuMap(0, 0, EditColumns, EditRows);
     else
-        fd_50F6_0332 = MapPlane;
+        OldMapPlane = MapPlane;
     MapPlane = plane;
     if (plane == 1)
-        fd_50F6_0F36 = 0x80 - fd_50F6_0FB6;
+        hScrollMax = 0x80 - EditColumns;
     else
-        fd_50F6_0F36 = 0x40 - fd_50F6_0FB6;
-    SetEditMode(fd_3D57_07C0[MapPlane]);
+        hScrollMax = 0x40 - EditColumns;
+    SetEditMode(MapPlane2EditTab[MapPlane]);
     switch (MapPlane) {
     case 0:
-        pt = fd_50F6_07BC;
+        pt = YMapPnt;
         break;
     case 1:
-        pt = fd_50F6_0596;
+        pt = AMapPnt;
         break;
     case 2:
-        pt = fd_50F6_06A6;
+        pt = BMapPnt;
         break;
     case 3:
-        pt = fd_50F6_072E;
+        pt = RMapPnt;
         break;
     }
     SetMapPlaneLocation(plane, pt.x, pt.y);
@@ -312,55 +312,55 @@ void far SetMapPlane(int plane)
     UpdateEdit();
 }
 
-extern int far fd_50F6_1074;
+extern int far LessonTemp;
 extern int far MePlane;
 extern int far MeLocY;
 extern int far MeLocX;
 
 void far CenterAnt(void)
 {
-    fd_50F6_1074 = 1;
+    LessonTemp = 1;
     if (MePlane != MapPlane)
         SetMapPlane(MePlane);
     CenterEdit(MeLocX, MeLocY);
 }
 
-extern int far fd_50F6_0EAC;
+extern int far CurGameType;
 extern void far myBeginSound(int a, int b, int c);
 
 void far GotoMyAnt(void)
 {
-    fd_50F6_1074 = 1;
-    if (fd_50F6_0EAC == 3)
+    LessonTemp = 1;
+    if (CurGameType == 3)
         myBeginSound(1, 0, 0x7e);
     else
         GotoMapPoint(MePlane, MeLocX, MeLocY);
 }
 
-extern int far fd_50F6_0F0C;
-extern int far fd_50F6_0F34;
-extern int far fd_50F6_0F12;
+extern int far SpidOn;
+extern int far SpidY;
+extern int far SpidX;
 
 void far GotoSpider(void)
 {
-    if (fd_50F6_0F0C == 0)
+    if (SpidOn == 0)
         myBeginSound(1, 0, 0x7e);
     else
-        GotoMapPoint(1, fd_50F6_0F12 >> 4, fd_50F6_0F34 >> 4);
+        GotoMapPoint(1, SpidX >> 4, SpidY >> 4);
 }
 
-extern Point far fd_3D57_02B4;
+extern Point far LastBlackEgg;
 
 void far GotoBQueen(void)
 {
-    GotoMapPoint(2, fd_3D57_02B4.x, fd_3D57_02B4.y);
+    GotoMapPoint(2, LastBlackEgg.x, LastBlackEgg.y);
 }
 
-extern Point far fd_3D57_02B8;
+extern Point far LastRedEgg;
 
 void far GotoRQueen(void)
 {
-    GotoMapPoint(3, fd_3D57_02B8.x, fd_3D57_02B8.y);
+    GotoMapPoint(3, LastRedEgg.x, LastRedEgg.y);
 }
 
 void far f_015B_0780(void)
@@ -375,22 +375,22 @@ void far f_015B_0790(void)
 {
 }
 
-extern int far fd_50F6_03E2;
+extern int far ColonyTotalBlack;
 extern int far BpopT;
 extern void far PictStrnDialog(int a, int b, int c);
-extern unsigned char far fd_3D57_00A4[][16];
-extern int far fd_50F6_04C2;
-extern int far fd_3D57_0C24;
+extern unsigned char far YMapPopB[][16];
+extern int far MeType;
+extern int far MeNestStarted;
 extern void far myBeginSong(int id, int arg);
-extern void far o12_384C_100A(void);
-extern int far fd_50F6_0354;
-extern int far fd_50F6_07C8;
-extern int far fd_50F6_0850;
-extern int far fd_50F6_06AA;
-extern int far fd_50F6_073A;
+extern void far DrawMap(void);
+extern int far JustXfered;
+extern int far QueenStorageB;
+extern int far QueenStorageR;
+extern int far SwarmCntB;
+extern int far SwarmCntR;
 extern void far InvalQueenStorageDisp(void);
 extern int far fd_3E1D_0000[][12];
-extern unsigned char far fd_3D57_0164[][16];
+extern unsigned char far YMapPopR[][16];
 extern void far RandWorld(unsigned seed, int blackSize, int redSize, int x, int y);
 extern int far HealthR;
 
@@ -398,33 +398,33 @@ void far XferPatch(void)
 {
     int x, y;
 
-    y = fd_50F6_07BC.y;
-    x = fd_50F6_07BC.x;
-    if (x == fd_50F6_07CA.x && fd_50F6_07CA.y == y)
+    y = YMapPnt.y;
+    x = YMapPnt.x;
+    if (x == CurYardPnt.x && CurYardPnt.y == y)
         return;
-    if (fd_50F6_0EAC != 2) {
+    if (CurGameType != 2) {
         myBeginSound(1, 0, 0x7e);
         PictStrnDialog(0, 0x2710, 1);
-    } else if (fd_50F6_03E2 <= 1 && BpopT <= 1) {
+    } else if (ColonyTotalBlack <= 1 && BpopT <= 1) {
         myBeginSound(1, 0, 0x7e);
         PictStrnDialog(0, 0x2712, 1);
-    } else if (fd_3D57_00A4[x][y] < 1 && (fd_50F6_04C2 != 0x40 || fd_3D57_0C24 != 0)) {
+    } else if (YMapPopB[x][y] < 1 && (MeType != 0x40 || MeNestStarted != 0)) {
         myBeginSound(1, 0, 0x7e);
         PictStrnDialog(0, 0x2714, 1);
     } else {
         myBeginSong(0x2afa, 0x7e);
-        fd_50F6_07CA.x = x;
-        fd_50F6_07CA.y = y;
-        o12_384C_100A();
-        fd_50F6_0354 = 1;
-        fd_50F6_07C8 = 0;
-        fd_50F6_0850 = 0;
-        fd_50F6_06AA = 0;
-        fd_50F6_073A = 0;
+        CurYardPnt.x = x;
+        CurYardPnt.y = y;
+        DrawMap();
+        JustXfered = 1;
+        QueenStorageB = 0;
+        QueenStorageR = 0;
+        SwarmCntB = 0;
+        SwarmCntR = 0;
         InvalQueenStorageDisp();
-        fd_3D57_0C24 = 1;
-        RandWorld(fd_3E1D_0000[y][x], fd_3D57_00A4[x][y], fd_3D57_0164[x][y], x, y);
-        if (fd_3D57_0164[x][y] == 0)
+        MeNestStarted = 1;
+        RandWorld(fd_3E1D_0000[y][x], YMapPopB[x][y], YMapPopR[x][y], x, y);
+        if (YMapPopR[x][y] == 0)
             HealthR = 0;
         if ((x << 4) + y > 0x24)
             PictStrnDialog(0, 0x2716, 0);
@@ -450,17 +450,17 @@ struct Event {
     int xE;
 };
 
-extern void far * far * far fd_50F6_034C;
+extern void far * far * far WindPromptStrs;
 extern void far EditMessage(void far *, long, int);
-extern int far fd_3D57_02C0;
+extern int far LayDownQueenMode;
 extern int _fastcall win_GetEvent(struct Event far *);
-extern void far f_1FD2_04D0(Point far *);
+extern void far GetMousePos(Point far *);
 extern int _fastcall win_IsWinInFront(int);
 extern Point far fd_50F6_10D2;
 extern Point far fd_55B3_2A42;
 extern void far InvertPatch(int, int);
-extern int far fd_50F6_0A90;
-extern int far fd_3D57_0C20;
+extern int far BColoniesStarted;
+extern int far ColonyUpdateFlag;
 extern void far MakeDMap(int);
 extern void far UpdateYard(void);
 extern void far myDelay(long);
@@ -476,20 +476,20 @@ void far PlaceQueenInYard(void)
     struct Event ev;
 
     patchX = -1;
-    if (fd_50F6_07C8 < 1) {
+    if (QueenStorageB < 1) {
         myBeginSound(1, 0, 0x7e);
-        if (fd_50F6_0EAC != 2)
-            EditMessage(fd_50F6_034C[16], 180L, 1);
+        if (CurGameType != 2)
+            EditMessage(WindPromptStrs[16], 180L, 1);
         else
-            EditMessage(fd_50F6_034C[7], 180L, 1);
+            EditMessage(WindPromptStrs[7], 180L, 1);
         return;
     }
-    if (fd_3D57_02C0 == 1)
-        fd_3D57_02C0 = 0;
-    r.left = fd_50F6_07CA.x - 3;
-    r.right = fd_50F6_07CA.x + 3;
-    r.top = fd_50F6_07CA.y - 3;
-    r.bottom = fd_50F6_07CA.y + 3;
+    if (LayDownQueenMode == 1)
+        LayDownQueenMode = 0;
+    r.left = CurYardPnt.x - 3;
+    r.right = CurYardPnt.x + 3;
+    r.top = CurYardPnt.y - 3;
+    r.bottom = CurYardPnt.y + 3;
     if (r.left < 0)
         r.left = 0;
     else if (r.left > 11)
@@ -507,7 +507,7 @@ void far PlaceQueenInYard(void)
     else if (r.bottom > 15)
         r.bottom = 15;
     do {
-        EditMessage(fd_50F6_034C[8], -2L, 1);
+        EditMessage(WindPromptStrs[8], -2L, 1);
         lastY = lastX = -1;
         done = 0;
         while (!done) {
@@ -515,7 +515,7 @@ void far PlaceQueenInYard(void)
                 pt = ev.where;
                 done = 1;
             } else {
-                f_1FD2_04D0(&pt);
+                GetMousePos(&pt);
             }
             if (!win_IsWinInFront(0x1900))
                 goto out;
@@ -536,13 +536,13 @@ void far PlaceQueenInYard(void)
                     patchX = -1;
                 }
                 if (r.left <= x && r.right >= x && y >= r.top && y <= r.bottom) {
-                    if (fd_50F6_07CA.x != x || fd_50F6_07CA.y != y) {
+                    if (CurYardPnt.x != x || CurYardPnt.y != y) {
                         InvertPatch(x, y);
                         patchX = x;
                         patchY = y;
                     }
-                    fd_50F6_07BC.x = x;
-                    fd_50F6_07BC.y = y;
+                    YMapPnt.x = x;
+                    YMapPnt.y = y;
                 }
             }
         }
@@ -552,17 +552,17 @@ void far PlaceQueenInYard(void)
         }
         if (r.left <= x && r.right >= x && y >= r.top && y <= r.bottom) {
             myBeginSong(0x2afb, 0x7e);
-            fd_50F6_07C8--;
-            fd_3D57_00A4[x][y]++;
-            fd_50F6_0A90++;
-            MakeDMap(fd_3D57_0C20 = 1);
-            o12_384C_100A();
-            EditMessage(fd_50F6_034C[9], 120L, 1);
-            if (fd_50F6_07C8 <= 0)
+            QueenStorageB--;
+            YMapPopB[x][y]++;
+            BColoniesStarted++;
+            MakeDMap(ColonyUpdateFlag = 1);
+            DrawMap();
+            EditMessage(WindPromptStrs[9], 120L, 1);
+            if (QueenStorageB <= 0)
                 return;
             UpdateYard();
         } else {
-            EditMessage(fd_50F6_034C[10], 120L, 1);
+            EditMessage(WindPromptStrs[10], 120L, 1);
             myBeginSound(1, 0, 0x7e);
             if (*(char far *)0x00000417L & 3)
                 myDelay(30L);
@@ -579,11 +579,11 @@ extern void far myBeginSoundReverse(int a, int b, int c);
 extern void far f_00DF_00E0(int a);
 extern void far MakeNewHoleR(int x);
 extern void far MakeNewHoleB(int x);
-extern int far fd_3D57_0C18;
+extern int far AlwaysHealthy;
 extern int far HealthB;
-extern int far fd_3D57_0C14;
-extern int far fd_3D57_0C12;
-extern int far fd_50F6_06AC;
+extern int far Invincible;
+extern int far RevSpider;
+extern int far MeSMode;
 
 void far MysteryButton(void)
 {
@@ -626,18 +626,18 @@ void far MysteryButton(void)
             MakeNewHoleB(i * 2);
         break;
     case 10:
-        fd_3D57_0C18 = 0;
+        AlwaysHealthy = 0;
         HealthB = 0;
         HealthR = 0;
         break;
     case 11:
-        if (fd_3D57_0C14 = !fd_3D57_0C14)
+        if (Invincible = !Invincible)
             myBeginSound(2, 0, 0x7e);
         else
             myBeginSound(1, 0, 0x7e);
         break;
     case 12:
-        fd_3D57_0C12 = !fd_3D57_0C12;
+        RevSpider = !RevSpider;
         break;
     case 13:
         PictStrnDialog(0, 0x2726, 0);
@@ -645,7 +645,7 @@ void far MysteryButton(void)
         PictStrnDialog(0, 0x2728, 0);
         break;
     case 14:
-        fd_50F6_06AC = 8;
+        MeSMode = 8;
         myBeginSound(2, 0x2b77, 0x7e);
         break;
     }

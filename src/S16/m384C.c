@@ -129,7 +129,7 @@ extern void far win_FlushEvents(void);
 extern void _fastcall win_DrawObjectNum(int objNum);
 extern void far f_1E57_0FDC(struct Rect far *r);
 extern void _fastcall win_SetColorFromObjNum(int obj);
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern int far f_24AB_030B(void);
 extern void (far * near g_9188)(int left, int top, int right, int bottom, int x, int y);
 extern void _fastcall gr_JustifyStrInRect(int mode, struct Rect far *rect, char far *text);
@@ -191,7 +191,7 @@ void far AboutDialog(void)
                 }
             }
             count++;
-            f_24AB_02AD(4);
+            font_SetFont(4);
             height = f_24AB_030B();
             y = rect.top - pix;
             idx = line;
@@ -215,7 +215,7 @@ void far AboutDialog(void)
                 pix = 0;
                 line++;
             }
-            f_24AB_02AD(0);
+            font_SetFont(0);
             drawn = 1;
         }
         clip_Off();
@@ -229,14 +229,14 @@ out:
 }
 
 extern Handle far fd_50F6_10CC[];
-extern Handle far f_171C_1A9E(long size, int flags, char far *name);
+extern Handle far mem_Alloc(long size, int flags, char far *name);
 extern Handle far fd_50F6_3836;
 extern Handle far fd_50F6_3938;
 extern Handle far fd_50F6_3934;
-extern char far * far f_171C_1B84(Handle h);
+extern char far * far mem_Lock(Handle h);
 extern void far * far _fmemcpy(void far *dest, void far *src, unsigned n);
-extern Handle far f_171C_1BBA(Handle h);
-extern void far f_171C_1C0A(Handle h);
+extern Handle far mem_Unlock(Handle h);
+extern void far mem_Free(Handle h);
 extern int _fastcall win_IsWinOpen(int win);
 
 void far ShowIntro(void)
@@ -250,27 +250,27 @@ void far ShowIntro(void)
     myBeginSong(0x2711, 0x7e);
     DialogWaitInit(0x28);
     if (fd_50F6_10CC[0] != 0) {
-        fd_50F6_3836 = f_171C_1A9E(0x28L, 1, "Malloc");
-        fd_50F6_3938 = f_171C_1A9E(0x32L, 1, "Malloc");
-        fd_50F6_3934 = f_171C_1A9E(0x1eL, 1, "Malloc");
-        p = f_171C_1B84(fd_50F6_10CC[0]);
-        a = f_171C_1B84(fd_50F6_3836);
-        b = f_171C_1B84(fd_50F6_3938);
+        fd_50F6_3836 = mem_Alloc(0x28L, 1, "Malloc");
+        fd_50F6_3938 = mem_Alloc(0x32L, 1, "Malloc");
+        fd_50F6_3934 = mem_Alloc(0x1eL, 1, "Malloc");
+        p = mem_Lock(fd_50F6_10CC[0]);
+        a = mem_Lock(fd_50F6_3836);
+        b = mem_Lock(fd_50F6_3938);
         _fmemcpy(a, p + 0x80, 0x1e);
         _fmemcpy(b, p + 0x9e, 0x1e);
-        p = f_171C_1B84(fd_50F6_3934);
+        p = mem_Lock(fd_50F6_3934);
         for (i = 0; i < 0x100; i++) {
             a[i % 30] ^= (char)(i + 0x55);
             p[i % 8] = (a[i % 30] + p[i % 8] + i) % 10 + '0';
             b[i % 30] ^= (char)(i + 0x55);
         }
         p[8] = 0;
-        f_171C_1BBA(fd_50F6_10CC[0]);
-        f_171C_1C0A(fd_50F6_10CC[0]);
+        mem_Unlock(fd_50F6_10CC[0]);
+        mem_Free(fd_50F6_10CC[0]);
         fd_50F6_10CC[0] = 0;
-        f_171C_1BBA(fd_50F6_3934);
-        f_171C_1BBA(fd_50F6_3938);
-        f_171C_1BBA(fd_50F6_3836);
+        mem_Unlock(fd_50F6_3934);
+        mem_Unlock(fd_50F6_3938);
+        mem_Unlock(fd_50F6_3836);
     }
     while (win_IsWinOpen(0x300)) {
         if (win_Events() || DialogAbortOrCont())

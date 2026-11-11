@@ -100,7 +100,7 @@ class HeapFixturePremise(unittest.TestCase):
     def test_sparse_handle_history_preserves_high_water_counter(self):
         case = m.heap_case('sparse-live-slot',[(8,1,{"lock":1}),(32,0x80)],handles=[2],
             args=[m.MASTER_FIRST-8,m.HANDLE_SEG],result='farptr')
-        vm = self.original_machine('f_171C_1BBA')
+        vm = self.original_machine('mem_Unlock')
         vm.run(case)
         self.assertEqual(vm.word(m.dga(0x2F42)),3)
         self.assertEqual(vm.word(m.dga(0x2F44)),1)
@@ -113,14 +113,14 @@ class HeapFixturePremise(unittest.TestCase):
         self.assertEqual(int.from_bytes(vm.read(slot,4),'little'),m.DISCARD_DATA_SEG<<16)
         self.assertEqual(int.from_bytes(vm.read(b.symbol_address('fd_50F6_3948'),4),'little'),
                          m.DISCARD_HEADER_SEG<<16)
-        for target,expected in (('f_171C_1686',5),('f_171C_1794',1)):
+        for target,expected in (('RallocType',5),('RallocFreed',1)):
             result = vm.run(b.Case(label=target,args=[m.MASTER_FIRST,m.HANDLE_SEG]),
                 preserve=True,original_entry=functions.get(target))
             self.assertEqual(result['return'],expected)
         heap_before = vm.read(m.HEAP_SEG*16,40*16)
         counters_before = vm.read(m.dga(0x2F36),12)
         vm.run(b.Case(label='free-discarded',args=[m.MASTER_FIRST,m.HANDLE_SEG],return_kind='void'),
-            preserve=True,original_entry=functions.get('f_171C_13E4'))
+            preserve=True,original_entry=functions.get('RallocFree'))
         self.assertEqual(vm.read(m.HEAP_SEG*16,40*16),heap_before)
         self.assertEqual(vm.read(m.dga(0x2F36),12),counters_before)
         self.assertEqual(vm.word(m.dga(0x2F44)),0)
@@ -137,7 +137,7 @@ class HeapFixturePremise(unittest.TestCase):
         with self.assertRaisesRegex(b.ExecutionError,'original discarded-lock Punt reached'):
             vm.run(b.Case(label='lock-discarded',args=[m.MASTER_FIRST,m.HANDLE_SEG],
                 return_kind='farptr',callbacks={'Punt':b.Callback(2,rejected_discard)}),
-                preserve=True,original_entry=functions.get('f_171C_1B84'))
+                preserve=True,original_entry=functions.get('mem_Lock'))
 
 
 if __name__ == '__main__':

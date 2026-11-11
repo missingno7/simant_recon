@@ -12,7 +12,7 @@ BITS_TEXT	segment word public 'CODE'
 
 	public	_f_24FA_0004
 	public	_f_24FA_0029
-	public	_f_24FA_00A0
+	public	_invert
 	public	_f_24FA_00B5
 
 _f_24FA_0004	proc	far
@@ -109,7 +109,7 @@ L0096:
 	retf
 _f_24FA_0029	endp
 
-_f_24FA_00A0	proc	far
+_invert	proc	far
 	push bp
 	mov bp, sp
 	push di
@@ -123,7 +123,7 @@ L00AA:
 	pop di
 	pop bp
 	retf
-_f_24FA_00A0	endp
+_invert	endp
 
 _f_24FA_00B5	proc	far
 	int 3

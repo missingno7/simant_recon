@@ -48,7 +48,7 @@ void far f_25E7_0008(int far *p, int count, FILE far *fp)
     }
 }
 
-extern char far * far f_171C_2190(unsigned size, char far *name);
+extern char far * far mem_malloc(unsigned size, char far *name);
 extern FILE far * far fopen(char far *name, char far *mode);
 extern void far f_171C_2276(void far *p);
 extern int far fclose(FILE far *fp);
@@ -62,7 +62,7 @@ struct Font far * far font_ReadFont(char far *name)
     int count;
     int size;
 
-    font = (struct Font far *)f_171C_2190(0x2a, "FontHeader");
+    font = (struct Font far *)mem_malloc(0x2a, "FontHeader");
     if (font == 0)
         return 0;
     fp = fopen(name, "rb");
@@ -77,9 +77,9 @@ struct Font far * far font_ReadFont(char far *name)
     }
     count = font->lastChar - font->firstChar + 3;
     size = font->rowWords * font->fRectHeight * 2;
-    font->image = f_171C_2190(size, "FONTIMAGE");
-    font->locTable = (int far *)f_171C_2190(count * 2, "locTable");
-    font->owTable = (int far *)f_171C_2190(count * 2, "owTable");
+    font->image = mem_malloc(size, "FONTIMAGE");
+    font->locTable = (int far *)mem_malloc(count * 2, "locTable");
+    font->owTable = (int far *)mem_malloc(count * 2, "owTable");
     fread(font->image, size, 1, fp);
     f_25E7_0008(font->locTable, count, fp);
     f_25E7_0008(font->owTable, count, fp);
@@ -113,10 +113,10 @@ struct Bitmap {
 };
 
 extern struct Bitmap far fd_50F6_392C;
-extern void far f_2650_0107(char far *buf, int size);
+extern void far ClearBuffer(char far *buf, int size);
 extern int far fd_55B3_6770;
 extern int far fd_55B3_6772;
-extern void far f_2650_000F(char far *, char far *, int, int, int, int);
+extern void far DrawChar(char far *, char far *, int, int, int, int);
 
 int far _font_StringWidth(unsigned char far *s, struct Font far *font)
 {
@@ -198,7 +198,7 @@ struct Bitmap far * far font_MakeImage(unsigned char far *s, int x, struct Font 
     i = 0;
     pen = x;
     width = font->widMax;
-    f_2650_0107(fd_50F6_392C.bits, g_673E * g_6740);
+    ClearBuffer(fd_50F6_392C.bits, g_673E * g_6740);
     fd_55B3_6770 = font->rowWords * 2;
     fd_55B3_6772 = (_font_StringWidth(s, font) + x + 7) >> 3;
     fd_50F6_392C.height = font->fRectHeight;
@@ -218,7 +218,7 @@ struct Bitmap far * far font_MakeImage(unsigned char far *s, int x, struct Font 
         } else {
             xofs = font->kernMax + kk;
         }
-        f_2650_000F(font->image + fd_55B3_6770, fd_50F6_392C.bits, glyphWidth, font->fRectHeight - 1, sx, pen + xofs);
+        DrawChar(font->image + fd_55B3_6770, fd_50F6_392C.bits, glyphWidth, font->fRectHeight - 1, sx, pen + xofs);
         pen += width;
     }
     fd_50F6_392C.width = pen;

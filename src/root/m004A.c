@@ -1,5 +1,5 @@
-/* Root module 004A: map view scrolling (view origin fd_50F6_0508 clamped to
- * 0..fd_50F6_0F36/0F38) and per-plane view centre bookkeeping. */
+/* Root module 004A: map view scrolling (view origin MapPnt clamped to
+ * 0..hScrollMax/0F38) and per-plane view centre bookkeeping. */
 
 typedef struct {
     int x;
@@ -18,8 +18,8 @@ void far f_004A_02AD(void);
 void far f_004A_038B(void);
 void far f_004A_040E(void);
 
-extern int far fd_50F6_0F36;
-extern Point far fd_50F6_0508;
+extern int far hScrollMax;
+extern Point far MapPnt;
 extern void far f_00F8_0385(void);
 
 int far f_004A_000A(int n)
@@ -27,9 +27,9 @@ int far f_004A_000A(int n)
     register int moved;
 
     moved = 0;
-    fd_50F6_0508.x += n;
-    if (fd_50F6_0508.x > fd_50F6_0F36) {
-        fd_50F6_0508.x = fd_50F6_0F36;
+    MapPnt.x += n;
+    if (MapPnt.x > hScrollMax) {
+        MapPnt.x = hScrollMax;
     } else {
         if (n == 1)
             f_00F8_0385();
@@ -46,9 +46,9 @@ int far f_004A_0052(int n)
     register int moved;
 
     moved = 0;
-    fd_50F6_0508.x -= n;
-    if (fd_50F6_0508.x < 0) {
-        fd_50F6_0508.x = 0;
+    MapPnt.x -= n;
+    if (MapPnt.x < 0) {
+        MapPnt.x = 0;
     } else {
         if (n == 1)
             f_00F8_039D();
@@ -66,9 +66,9 @@ int far f_004A_008A(int n)
     register int moved;
 
     moved = 0;
-    fd_50F6_0508.y += n;
-    if (fd_50F6_0508.y > fd_50F6_0F38) {
-        fd_50F6_0508.y = fd_50F6_0F38;
+    MapPnt.y += n;
+    if (MapPnt.y > fd_50F6_0F38) {
+        MapPnt.y = fd_50F6_0F38;
     } else {
         if (n == 1)
             f_00F8_037D();
@@ -85,9 +85,9 @@ int far f_004A_00D2(int n)
     register int moved;
 
     moved = 0;
-    fd_50F6_0508.y -= n;
-    if (fd_50F6_0508.y < 0) {
-        fd_50F6_0508.y = 0;
+    MapPnt.y -= n;
+    if (MapPnt.y < 0) {
+        MapPnt.y = 0;
     } else {
         if (n == 1)
             f_00F8_0375();
@@ -105,16 +105,16 @@ int far f_004A_010A(int step)
     register int moved;
 
     moved = 0;
-    if (--fd_50F6_0508.y < 0) {
-        fd_50F6_0508.y = 0;
+    if (--MapPnt.y < 0) {
+        MapPnt.y = 0;
     } else {
         if (step == 1)
             f_00F8_036D();
         moved = 1;
     }
-    fd_50F6_0508.x++;
-    if (fd_50F6_0508.x > fd_50F6_0F36) {
-        fd_50F6_0508.x = fd_50F6_0F36;
+    MapPnt.x++;
+    if (MapPnt.x > hScrollMax) {
+        MapPnt.x = hScrollMax;
     } else {
         if (step == 1)
             f_00F8_038D();
@@ -131,17 +131,17 @@ int far f_004A_0172(int step)
     register int moved;
 
     moved = 0;
-    fd_50F6_0508.y++;
-    if (fd_50F6_0508.y > fd_50F6_0F38) {
-        fd_50F6_0508.y = fd_50F6_0F38;
+    MapPnt.y++;
+    if (MapPnt.y > fd_50F6_0F38) {
+        MapPnt.y = fd_50F6_0F38;
     } else {
         if (step == 1)
             f_00F8_0365();
         moved = 1;
     }
-    fd_50F6_0508.x++;
-    if (fd_50F6_0508.x > fd_50F6_0F36) {
-        fd_50F6_0508.x = fd_50F6_0F36;
+    MapPnt.x++;
+    if (MapPnt.x > hScrollMax) {
+        MapPnt.x = hScrollMax;
     } else {
         if (step == 1)
             f_00F8_038D();
@@ -156,16 +156,16 @@ int far f_004A_01E9(int step)
     register int moved;
 
     moved = 0;
-    fd_50F6_0508.y++;
-    if (fd_50F6_0508.y > fd_50F6_0F38) {
-        fd_50F6_0508.y = fd_50F6_0F38;
+    MapPnt.y++;
+    if (MapPnt.y > fd_50F6_0F38) {
+        MapPnt.y = fd_50F6_0F38;
     } else {
         if (step == 1)
             f_00F8_0365();
         moved = 1;
     }
-    if (--fd_50F6_0508.x < 0) {
-        fd_50F6_0508.x = 0;
+    if (--MapPnt.x < 0) {
+        MapPnt.x = 0;
     } else {
         if (step == 1)
             f_00F8_038D();
@@ -180,15 +180,15 @@ int far f_004A_0253(int step)
     register int moved;
 
     moved = 0;
-    if (--fd_50F6_0508.y < 0) {
-        fd_50F6_0508.y = 0;
+    if (--MapPnt.y < 0) {
+        MapPnt.y = 0;
     } else {
         if (step == 1)
             f_00F8_0365();
         moved = 1;
     }
-    if (--fd_50F6_0508.x < 0) {
-        fd_50F6_0508.x = 0;
+    if (--MapPnt.x < 0) {
+        MapPnt.x = 0;
     } else {
         if (step == 1)
             f_00F8_038D();
@@ -199,11 +199,11 @@ int far f_004A_0253(int step)
 }
 
 extern int far MapPlane;
-extern int far fd_50F6_0FB6;
-extern Point far fd_50F6_0596;
-extern int far fd_50F6_0FFA;
-extern Point far fd_50F6_06A6;
-extern Point far fd_50F6_072E;
+extern int far EditColumns;
+extern Point far AMapPnt;
+extern int far EditRows;
+extern Point far BMapPnt;
+extern Point far RMapPnt;
 extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
 
@@ -211,16 +211,16 @@ void far f_004A_02AD(void)
 {
     switch (MapPlane) {
     case 1:
-        fd_50F6_0596.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
-        fd_50F6_0596.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
+        AMapPnt.x = EditColumns / 2 + MapPnt.x;
+        AMapPnt.y = EditRows / 2 + MapPnt.y;
         break;
     case 2:
-        fd_50F6_06A6.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
-        fd_50F6_06A6.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
+        BMapPnt.x = EditColumns / 2 + MapPnt.x;
+        BMapPnt.y = EditRows / 2 + MapPnt.y;
         break;
     case 3:
-        fd_50F6_072E.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
-        fd_50F6_072E.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
+        RMapPnt.x = EditColumns / 2 + MapPnt.x;
+        RMapPnt.y = EditRows / 2 + MapPnt.y;
         break;
     }
     UpdateEdit();
@@ -231,13 +231,13 @@ void far f_004A_038B(void)
 {
     switch (MapPlane) {
     case 1:
-        fd_50F6_0596.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
+        AMapPnt.x = EditColumns / 2 + MapPnt.x;
         break;
     case 2:
-        fd_50F6_06A6.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
+        BMapPnt.x = EditColumns / 2 + MapPnt.x;
         break;
     case 3:
-        fd_50F6_072E.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
+        RMapPnt.x = EditColumns / 2 + MapPnt.x;
         break;
     }
     UpdateEdit();
@@ -248,13 +248,13 @@ void far f_004A_040E(void)
 {
     switch (MapPlane) {
     case 1:
-        fd_50F6_0596.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
+        AMapPnt.y = EditRows / 2 + MapPnt.y;
         break;
     case 2:
-        fd_50F6_06A6.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
+        BMapPnt.y = EditRows / 2 + MapPnt.y;
         break;
     case 3:
-        fd_50F6_072E.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
+        RMapPnt.y = EditRows / 2 + MapPnt.y;
         break;
     }
     UpdateEdit();

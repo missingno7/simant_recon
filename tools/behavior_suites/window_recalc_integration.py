@@ -162,7 +162,7 @@ def live_case(label, seed, *, count=None, target_index=None, forced_modes=None,
             "contract": "f_20E8_0903 using actual DOS Ralloc window lock, object lookup, iterative win_Recalc, and final unlock",
             "abi": "AX=window-object id; stack far pointer to normalized logical-screen rectangle; target retf 4",
             "actual_original_helpers": ["win_LockWin", "f_2505_02D7", "win_Recalc", "win_UnlockWin",
-                                        "f_171C_1686", "f_171C_1B84", "f_171C_1BBA", "f_171C_2086"],
+                                        "RallocType", "mem_Lock", "mem_Unlock", "f_171C_2086"],
             "validity": {
                 "window_id": WIN_ID,
                 "object_count": count,
@@ -215,7 +215,7 @@ def unlock_cases(count=500, seed=0x23AE01DB):
     cases = []
     actual_helpers = {
         name: behavior.Callback(2, None)
-        for name in ("f_171C_1686", "f_171C_13E4", "f_171C_2086", "f_171C_20E2")
+        for name in ("RallocType", "RallocFree", "f_171C_2086", "f_171C_20E2")
     }
     for depth in (2, 3, 255):
         case = window_suite.unlock_live_case(f"nested-depth-{depth}", (4, 18))

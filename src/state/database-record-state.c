@@ -52,5 +52,5 @@ typedef struct OpenDBRec {
     int dirty;
 } OpenDBRec;
 
-OpenDBRec far fd_50F6_3958[4];
+OpenDBRec far openDBData[4];
 int far db_handles[4];

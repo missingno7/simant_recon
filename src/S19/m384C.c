@@ -33,10 +33,10 @@ int g_2D3A = 0;
 
 extern void far win_NoWindowsShouldBeLocked(void);
 extern int far LoadGame(char far *name);
-extern int far fd_50F6_0EAC;
+extern int far CurGameType;
 extern int far NewGame(int a);
 extern void far MenuQuit(void);
-extern int far o09_35F5_0188(int useLast);
+extern int far SaveGame(int useLast);
 extern int far win_Events(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern void far f_20E8_0A21(void);
@@ -51,14 +51,14 @@ extern void far ProcMenu(struct Event far *ev);
 extern void far f_1FD2_02FF(void);
 extern void (far * near g_9130)(void);
 extern int far o10_35F5_01C3(struct Event far *ev);
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern void far f_1FD2_031A(void);
 extern int far f_1B73_0A30(int key);
 extern int far f_0250_0D10(int dx, int dy);
 extern int far f_1F58_0038(void);
 void far o19_384C_0246(void);
 
-int far o19_384C_0000(void)
+int far DoEvent(void)
 {
     struct Event ev;
     int dy;
@@ -70,14 +70,14 @@ int far o19_384C_0000(void)
     if (fd_55B3_2CBC) {
         switch (fd_55B3_2CBC) {
         case 4:
-            if (LoadGame(0L) == 0 && fd_50F6_0EAC == -1 && NewGame(1) < 0)
+            if (LoadGame(0L) == 0 && CurGameType == -1 && NewGame(1) < 0)
                 MenuQuit();
             break;
         case 5:
-            o09_35F5_0188(1);
+            SaveGame(1);
             break;
         case 6:
-            o09_35F5_0188(0);
+            SaveGame(0);
             break;
         case 8:
             MenuQuit();
@@ -121,7 +121,7 @@ int far o19_384C_0000(void)
             f_1FD2_02FF();
             (*g_9130)();
             o10_35F5_01C3(&ev);
-            f_24AB_02AD(0);
+            font_SetFont(0);
             f_1FD2_031A();
             break;
         }
@@ -204,8 +204,8 @@ void far o19_384C_0246(void)
     }
 }
 
-extern long far f_171C_1750(void);
-extern long far f_171C_1772(void);
+extern long far RallocMemoryFree(void);
+extern long far RallocMemorySoft(void);
 extern long far fd_50F6_3944;
 extern int far sprintf(char far *buf, const char far *fmt, ...);
 
@@ -214,7 +214,7 @@ void far o19_384C_0320(void)
     char buf[200];
 
     sprintf(buf, "%ld bytes @ startup\n %ld bytes free now\n %ld bytes discardable stuff\n %ld AVAILABLE",
-            fd_50F6_3944, f_171C_1750(), f_171C_1772(), f_171C_1750() + f_171C_1772());
+            fd_50F6_3944, RallocMemoryFree(), RallocMemorySoft(), RallocMemoryFree() + RallocMemorySoft());
     f_1C62_00C0(buf);
 }
 

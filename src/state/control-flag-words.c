@@ -1,4 +1,4 @@
 /* Scratch-only natural data owner candidate for three control-state words. */
-int far fd_50F6_0468;
-int far fd_50F6_0370;
-int far fd_50F6_024E;
+int far ShowPercentMode;
+int far modeButtonState;
+int far casteButtonState;

@@ -102,7 +102,7 @@ def domains(count, seed, full):
             live_windows.randomized_cases(max(8, count), seed)),
         'win_UnlockWin': lambda: live_windows.unlock_cases(count, seed),
         'f_23E6_0000': lambda: cases_only(lists.cases(count, seed)),
-        'f_2505_0453': lambda: itertools.chain(windows.field_cases(count, seed),
+        'win_GetVal': lambda: itertools.chain(windows.field_cases(count, seed),
             live_windows.field_cases(max(8, count), seed)),
         'win_DrawBitMap': lambda: render_small.bitmap_cases(count, seed),
         'f_2815_0165': lambda: itertools.chain(adlib.directed_cases(), adlib.random_cases(count, seed)),
@@ -118,10 +118,10 @@ def domains(count, seed, full):
         'win_PrintStyleTextInRect': lambda: cases_only(text_card.cases(count, seed)),
         'DisplayCard': lambda: cases_only(text_card.card_cases(count, seed)),
         'drawHistGraph': lambda: cases_only(text_card.history_cases(count, seed)),
-        'o25_3BA4_1035': lambda: spider_nest.make_cases('o25_3BA4_1035', random_count=count,
+        'EnterNest': lambda: spider_nest.make_cases('EnterNest', random_count=count,
             random_seed=seed, original_helpers=('SRand1', 'SRand4', 'ClearMyLife', 'SetMyLife',
                                                 'DigMyTile', 'TryAntTheme', 'SetAlarmDropState')),
-        'o25_3BA4_1686': lambda: randdir_cases(count, seed, full),
+        'GetMyRandDirs': lambda: randdir_cases(count, seed, full),
     }
 
 
@@ -130,8 +130,8 @@ MUTATIONS = {
     'f_0250_129E': ('if (g_9126)\n            f_0250_0721', 'if (!g_9126)\n            f_0250_0721'),
     'DrawBalloons': ('wpix = g_19BE * wt;', 'wpix = g_19BE * wt + 1;'),
     'SpiderScan': ('DeadAntHere(x, y, life & 0x80);', '/* negative control: omit corpse */;'),
-    'LessonDone': ('case 3:\n        if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)',
-                   'case 3:\n        if (fd_50F6_0224 >= fd_50F6_0204 && fd_50F6_0AA0 == 0)'),
+    'LessonDone': ('case 3:\n        if (TilesDugB > TimeTemp && MeMoveMe == 0)',
+                   'case 3:\n        if (TilesDugB >= TimeTemp && MeMoveMe == 0)'),
     'FindIndex': ('return fd_50F6_3952;', 'return 0L;'),
     'f_1C62_0415': ('labels[i][0] == c || labels[i][1] == c', 'labels[i][0] == c'),
     'f_1E57_038E': ('win_GetObjRect(win, &r);\n    fd_50F6_3B60[win >> 8]',
@@ -140,22 +140,22 @@ MUTATIONS = {
                    'else\n            origin[i] = rect[(i + 1) & 3] - o[i];'),
     'win_UnlockWin': ('if (--g_8DA6[n] == 0) {', 'if (--g_8DA6[n] == 1) {'),
     'f_23E6_0000': ('s++;\n        n++;', 's++;\n        n += 2;'),
-    'f_2505_0453': ('return r[kind];', 'return r[kind] ^ 1;'),
+    'win_GetVal': ('return r[kind];', 'return r[kind] ^ 1;'),
     'win_DrawBitMap': ('f_1B4E_003B(x, y, (char far *)pic + 8);', 'f_1B4E_003B(x, y, (char far *)pic + 9);'),
     'f_2815_0165': ('f_283E_000A(voice + 0xa0, g_6924[note % 12]);',
                    'f_283E_000A(voice + 0xa1, g_6924[note % 12]);'),
     'f_284A_0138': ('return SONG(off) << 8 | SONG(off + 1);', 'return SONG(off + 1) << 8 | SONG(off);'),
     'f_29D6_000A': ('f_29F0_002A(0x205, f >> 4);', 'f_29F0_002A(0x205, (f >> 4) ^ 1);'),
     'o10_35F5_0384': ('k = (k + 1) % nItems;', 'k = (k + 2) % nItems;'),
-    'DrawMapCursor': ('fd_50F6_3856 * fd_50F6_0508[0]', 'fd_50F6_3856 * fd_50F6_0508[1]'),
+    'DrawMapCursor': ('mapXsize * MapPnt[0]', 'mapXsize * MapPnt[1]'),
     'InvertPatch': ('h = (h >> 1) + fd_50F6_10D2.left + 4;', 'h = (h >> 1) + fd_50F6_10D2.left + 5;'),
     'o15_384C_0239': ("case 's':\n                result = 1;", "case 's':\n                result = 2;"),
     'win_PrintStyleTextInRect': ('x = rect->left + 1;', 'x = rect->left + 2;'),
     'DisplayCard': ('win_DrawBitMap(pic.left + r.left, pic.top + r.top, pic.id);',
                     'win_DrawBitMap(pic.left + r.left + 1, pic.top + r.top, pic.id);'),
     'drawHistGraph': ('x = n * width / 64 + slot + r.left;', 'x = n * width / 64 + slot + r.left + 1;'),
-    'o25_3BA4_1035': ('if (MeLocX > 0x40)', 'if (MeLocX >= 0x40)'),
-    'o25_3BA4_1686': ('*rot = 1;', '*rot = -1;'),
+    'EnterNest': ('if (MeLocX > 0x40)', 'if (MeLocX >= 0x40)'),
+    'GetMyRandDirs': ('*rot = 1;', '*rot = -1;'),
     'f_171C_09CC': ('if (b->paras < paras + 0x20)', 'if (b->paras <= paras + 0x20)'),
     'f_171C_0ADC': ('(long)b + 0x20000L', '(long)b + 0x30000L'),
     'f_171C_0CF4': ('return (int)moved;', 'return 0;'),
@@ -225,7 +225,7 @@ def balloon_width_controls(pair, out):
     pair = b.PreparedPair('DrawBalloons', out=out / 'width-positive')
     mutant = b.PreparedPair('DrawBalloons', out=out / 'width-negative',
         mutation=('(long)(int)(n + 4)', '(long)(n + 4)'))
-    address = b.symbol_address('f_171C_1A9E')
+    address = b.symbol_address('mem_Alloc')
 
     def capture(prepared, case):
         rows = []

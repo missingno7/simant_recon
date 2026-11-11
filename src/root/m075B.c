@@ -48,49 +48,49 @@ void far f_075B_00A6(void)
 }
 
 StrList far LoadStringAnt(int object);
-extern StrList far fd_50F6_046C;
+extern StrList far MwinTitle;
 extern StrList far fd_50F6_0324;
-extern StrList far fd_50F6_034C;
+extern StrList far WindPromptStrs;
 extern StrList far AdviceStrs;
-extern StrList far fd_50F6_02BA;
+extern StrList far HistGraphStrs;
 extern StrList far fd_50F6_106E;
 extern StrList far fd_50F6_1078;
 extern StrList far fd_50F6_1086;
 extern StrList far fd_50F6_1096;
-extern StrList far fd_50F6_10A8;
+extern StrList far BoyMsgs;
 extern StrList far fd_50F6_10B4;
-extern StrList far fd_50F6_020A;
+extern StrList far BFightMsgs;
 extern StrList far fd_50F6_0218;
-extern StrList far fd_50F6_021C;
-extern StrList far fd_50F6_0234;
+extern StrList far EggMsgs;
+extern StrList far QueenMsgs;
 extern StrList far fd_50F6_023A;
 extern StrList far fd_50F6_0328;
 extern StrList far fd_50F6_0368;
 
 void far PrepareStrings(void)
 {
-    fd_50F6_046C = LoadStringAnt(1000);
+    MwinTitle = LoadStringAnt(1000);
     fd_50F6_0324 = LoadStringAnt(1001);
-    fd_50F6_034C = LoadStringAnt(1010);
+    WindPromptStrs = LoadStringAnt(1010);
     AdviceStrs = LoadStringAnt(1020);
-    fd_50F6_02BA = LoadStringAnt(1050);
+    HistGraphStrs = LoadStringAnt(1050);
     fd_50F6_106E = LoadStringAnt(1100);
     fd_50F6_1078 = LoadStringAnt(1101);
     fd_50F6_1086 = LoadStringAnt(1102);
     fd_50F6_1096 = LoadStringAnt(1103);
-    fd_50F6_10A8 = LoadStringAnt(1200);
+    BoyMsgs = LoadStringAnt(1200);
     fd_50F6_10B4 = LoadStringAnt(1210);
-    fd_50F6_020A = LoadStringAnt(1220);
+    BFightMsgs = LoadStringAnt(1220);
     fd_50F6_0218 = LoadStringAnt(1230);
-    fd_50F6_021C = LoadStringAnt(1240);
-    fd_50F6_0234 = LoadStringAnt(1250);
+    EggMsgs = LoadStringAnt(1240);
+    QueenMsgs = LoadStringAnt(1250);
     fd_50F6_023A = LoadStringAnt(1260);
     fd_50F6_0328 = LoadStringAnt(1900);
     fd_50F6_0368 = LoadStringAnt(1800);
 }
 
-extern Handle far f_171C_1A9E(long size, int flags, char far *name);
-extern char far * far f_171C_1B84(Handle h);
+extern Handle far mem_Alloc(long size, int flags, char far *name);
+extern char far * far mem_Lock(Handle h);
 extern void far * far _fmemmove(void far *dst, void far *src, unsigned n);
 
 StrList far LoadStringAnt(int object)
@@ -109,7 +109,7 @@ StrList far LoadStringAnt(int object)
     }
     p = (unsigned char far *)*h + 1;
     count = *p++;
-    list = (StrList)f_171C_1B84(f_171C_1A9E((long)(count + 1) << 2, 0, "strptrs"));
+    list = (StrList)mem_Lock(mem_Alloc((long)(count + 1) << 2, 0, "strptrs"));
     for (i = 0; i < count; i++) {
         list[i] = p;
         len = *p;

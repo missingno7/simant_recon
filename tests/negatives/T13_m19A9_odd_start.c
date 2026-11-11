@@ -29,7 +29,7 @@ typedef struct {
     int dirty;
 } OpenDBRec;
 
-extern OpenDBRec far fd_50F6_3958[];
+extern OpenDBRec far openDBData[];
 
 extern int far sprintf(char far *buffer, char far *format, ...);
 extern int far printf(char far *format, ...);
@@ -38,8 +38,8 @@ extern void far Punt(char far *format, ...);
 extern IndexEntry far * far FindIndex(int db, int id, int kind);
 extern void far f_19DC_02D9(int file, void far *buffer, unsigned long count);
 extern void far f_19DC_02FB(int file, long offset, void far *buffer, long count);
-extern char far * far f_171C_1B84(char far *handle);
-extern void far f_171C_1BBA(char far *handle);
+extern char far * far mem_Lock(char far *handle);
+extern void far mem_Unlock(char far *handle);
 extern void far f_1B05_0008(char far *packed, int length);
 extern unsigned int far f_1B05_0046(char far *dest, unsigned int length);
 extern char far * far f_2CFB_0002(unsigned long size, int flags, char far *name);
@@ -94,7 +94,7 @@ char far * far DBRecall(int db, int object, int type, int far *size)
     entry = FindIndex(db, object, type);
     if (!entry)
         return 0L;
-    file = fd_50F6_3958[db].file;
+    file = openDBData[db].file;
     f_19DC_02FB(file, entry->offset + 14, &header, 10L);
     length = header.size;
     if (type <= 22)
@@ -106,26 +106,26 @@ char far * far DBRecall(int db, int object, int type, int far *size)
     } else if (entry->flags & 1) {
         if (entry->flags & 4) {
             handle = f_2CFB_0002((unsigned long)length + 2, 0, name);
-            p = f_171C_1B84(handle);
+            p = mem_Lock(handle);
             if (!handle)
                 Punt("Couldn't allocate a buffer for DBRecall");
             f_19DC_02D9(file, p + 2, (unsigned long)length);
             *(int far *)p = -1;
             length += 2;
-            f_171C_1BBA(handle);
+            mem_Unlock(handle);
         } else {
             f_19DC_02D9(file, &unpacked, 2L);
             destHandle = f_2CFB_0002((unsigned long)unpacked, 1, name);
             handle = f_2CFB_0002((unsigned long)length + 2, 0, name);
-            dest = f_171C_1B84(destHandle);
-            f_19DC_02D9(file, p = f_171C_1B84(handle), (unsigned long)length - 2);
+            dest = mem_Lock(destHandle);
+            f_19DC_02D9(file, p = mem_Lock(handle), (unsigned long)length - 2);
             f_1B05_0008(p, length - 2);
             if (f_1B05_0046(dest, unpacked) != unpacked) {
                 printf("\a\aDBRecall Unpack error!!! - object=%d, type=%d", object, type);
                 WinPrintf("\a\aDBRecall Unpack error!!! - object=%d, type=%d", object, type);
             }
-            f_171C_1BBA(handle);
-            f_171C_1BBA(destHandle);
+            mem_Unlock(handle);
+            mem_Unlock(destHandle);
             f_2CFB_0007(handle);
             f_2CFB_002F(destHandle, 0);
             handle = destHandle;
@@ -135,8 +135,8 @@ char far * far DBRecall(int db, int object, int type, int far *size)
         handle = f_2CFB_0002((unsigned long)length, 0, name);
         if (!handle)
             Punt("Couldn't allocate a buffer for DBRecall");
-        f_19DC_02D9(file, f_171C_1B84(handle), (unsigned long)length);
-        f_171C_1BBA(handle);
+        f_19DC_02D9(file, mem_Lock(handle), (unsigned long)length);
+        mem_Unlock(handle);
     }
     *size = length;
     (*g_36F2)(&handle, size, object, type);

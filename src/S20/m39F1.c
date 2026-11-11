@@ -18,7 +18,7 @@ extern int far printf(char far *fmt, ...);
 extern void far exit(int code);
 extern char far * far getenv(char far *name);
 extern int far stricmp(char far *a, char far *b);
-extern long far f_171C_1750(void);
+extern long far RallocMemoryFree(void);
 extern long far fd_50F6_3944;
 extern char far * far fd_55B3_1CD8;
 extern void far f_277D_000D();
@@ -40,10 +40,10 @@ extern void far _harderr(int (far *handler)());
 extern int near g_3DB2;
 extern void far o17_384C_0143(int a, int b, int c);
 extern void far o17_384C_0169(int a, int b);
-extern int far f_1B4E_000D(int color);
+extern int far ConvColor(int color);
 extern int near g_3DB4;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
-extern void far f_208F_0419(struct Pt far *size, int id);
+extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
 extern void far f_171C_1EFA(void);
 extern void far f_171C_0EDE(void);
@@ -53,8 +53,8 @@ extern int far o17_384C_0039(int a);
 extern void far Punt(char far *fmt, ...);
 extern void far SetMenuEntries(void);
 extern void far LoadTiles(void);
-extern void far f_00BA_01B6(void);
-extern void far f_00BA_0002(void);
+extern void far InitApplicationStuff(void);
+extern void far InitApplicationWindows(void);
 extern int far WaitedEnough(long far *timer, int delay);
 extern void far f_1FD2_05FD(void);
 
@@ -121,7 +121,7 @@ void far IBMInitStuff(int argc, char far * far *argv)
     }
     if (getenv("BUG") && stricmp(getenv("BUG"), "MSMOUSE") == 0)
         g_432A = 1;
-    fd_50F6_3944 = f_171C_1750();
+    fd_50F6_3944 = RallocMemoryFree();
     if (!g_6108 && fd_50F6_3944 < 0x1fbd0L) {
         printf(fd_55B3_1CD8);
         exit(1);
@@ -159,9 +159,9 @@ void far IBMInitStuff(int argc, char far * far *argv)
         o17_384C_0143(7, 14, 12);
         o17_384C_0169(7, 7);
     }
-    (*g_9134)(0, 0, g_3DB2, g_3DB4, f_1B4E_000D(15));
+    (*g_9134)(0, 0, g_3DB2, g_3DB4, ConvColor(15));
     i = g_610C[g_5A97];
-    f_208F_0419(&size, i);
+    gr_BitMapSize(&size, i);
     win_DrawBitMap((g_3DB2 - size.x) / 2, (g_3DB4 - size.y) / 2, i);
     f_171C_1EFA();
     f_171C_0EDE();
@@ -172,8 +172,8 @@ void far IBMInitStuff(int argc, char far * far *argv)
             Punt("Cannot load menu");
     SetMenuEntries();
     LoadTiles();
-    f_00BA_01B6();
-    f_00BA_0002();
+    InitApplicationStuff();
+    InitApplicationWindows();
     SetMenuEntries();
     while (!WaitedEnough(&t, 0x48))
         ;

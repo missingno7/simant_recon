@@ -32,7 +32,7 @@ extern char far * _fastcall win_ObjAddr(int obj);
 extern int g_5702[];
 extern void far f_1FD2_03EB(char far *obj, int objNum);
 extern void far f_1FD2_0438(int objNum);
-extern void far f_1CE2_0430(char far *rect);
+extern void far GRectInv(char far *rect);
 int _fastcall win_IsWinOpen(int win);
 extern void _fastcall win_DrawBitMapAtObj(int id, char far *obj);
 extern void _fastcall win_DrawObject(char far *obj);
@@ -42,17 +42,17 @@ extern char far * far _fstrcpy(char far *dst, char far *src);
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
 extern int far WinPrintf(char far *format, ...);
 extern unsigned int far _fstrlen(char far *s);
-extern char far * far * far f_171C_18A6(char far * far *handle, long size, int flags);
-extern char far * far * far f_171C_13CA(long size, int flags, char far *name);
-extern char far * far f_171C_1B84(char far * far *handle);
-extern void far f_171C_1BBA(char far * far *handle);
+extern char far * far * far RallocRealloc(char far * far *handle, long size, int flags);
+extern char far * far * far Ralloc(long size, int flags, char far *name);
+extern char far * far mem_Lock(char far * far *handle);
+extern void far mem_Unlock(char far * far *handle);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far clip_Push(void);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern void far f_208F_011F(struct Rect far *rect, char far *text);
 extern void far clip_Pop(void);
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern char far * far * far db_LoadObject(int object, int kind);
 extern char near g_5A97;
 extern void far f_1B4E_01A1(char far *pal, int count);
@@ -70,8 +70,8 @@ extern void _fastcall win_Close(int win);
 extern char far win_colors[][6];
 extern struct Pt g_3DA0;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
-extern void far f_1CE2_046D(struct Rect far *rect, int color);
-extern int near g_3DE0;
+extern void far GRectFill(struct Rect far *rect, int color);
+extern int near _foreColor;
 extern int near g_3DE2;
 extern void _fastcall win_Recalc(int win);
 
@@ -116,7 +116,7 @@ int _fastcall f_22BF_0AEF(int);
 int _fastcall f_22BF_0B25(int);
 void _fastcall f_22BF_0B5B(struct Rect far *, struct Rect far *, int, int, int, int);
 int far win_DoProxMenu(int, int, ...);
-void far f_22BF_0C38(int);
+void far win_ClearObjToEOL(int);
 void far f_22BF_0CDD(int);
 void far win_PrintfAtObj(int, char far *, ...);
 void far win_DrawHBar(int, long);
@@ -230,7 +230,7 @@ void _fastcall win_ObjInv(int obj)
 
     win_LockWin(obj);
     w = f_2505_0006(obj);
-    f_1CE2_0430(((char far * far *)(w + 0x2c))[obj & 0xff]);
+    GRectInv(((char far * far *)(w + 0x2c))[obj & 0xff]);
     win_UnlockWin(obj);
 }
 
@@ -248,7 +248,7 @@ void _fastcall win_SetObjSelectedStateI(int obj, int selected)
             else if (o[0x21] == 5 || o[0x21] == 17)
                 win_DrawObject(o);
             else
-                f_1CE2_0430(o);
+                GRectInv(o);
         }
     }
     *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4;
@@ -311,7 +311,7 @@ void _fastcall win_SetObjVisibleState(int obj, int visible)
     if ((o[0x24] & 1) != visible) {
         *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ visible) & 1;
         if ((o[0x24] & 4) && o[0x21] == 1)
-            f_1CE2_0430((char far *)o);
+            GRectInv((char far *)o);
     }
 }
 
@@ -340,7 +340,7 @@ void _fastcall win_SetGroupVisibleState(int win, int group, int visible)
         if (o[0x20] == group && (o[0x24] & 1) != visible) {
             *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ visible) & 1;
             if ((o[0x24] & 4) && o[0x21] != 13 && o[0x21] != 5)
-                f_1CE2_0430((char far *)o);
+                GRectInv((char far *)o);
         }
     }
     win_UnlockWin(win);
@@ -379,15 +379,15 @@ void far win_SetObjFormatStr(int obj, ...)
     len = _fstrlen(buf) + 1;
     if ((rec = *(char far * far * far *)(o + 0x2a)) != 0) {
         if (_fstrlen(*rec) + 1 < len) {
-            rec = f_171C_18A6(rec, (long)(len + 4), 1);
+            rec = RallocRealloc(rec, (long)(len + 4), 1);
             *(char far * far * far *)(o + 0x2a) = rec;
         }
     } else {
-        rec = f_171C_13CA((long)(len + 8), 1, "formatStr");
+        rec = Ralloc((long)(len + 8), 1, "formatStr");
         *(char far * far * far *)(o + 0x2a) = rec;
     }
-    _fstrcpy(f_171C_1B84(rec), buf);
-    f_171C_1BBA(rec);
+    _fstrcpy(mem_Lock(rec), buf);
+    mem_Unlock(rec);
     win_UnlockWin(obj);
 }
 
@@ -417,18 +417,18 @@ void far win_ObjFormatPrint(int obj, ...)
     len = _fstrlen(buf) + 1;
     if ((rec = *(char far * far * far *)(o + 0x2a)) != 0) {
         if (_fstrlen(*rec) + 2 < len) {
-            rec = f_171C_18A6(rec, (long)(len + 4), 1);
+            rec = RallocRealloc(rec, (long)(len + 4), 1);
             *(char far * far * far *)(o + 0x2a) = rec;
         }
     } else {
-        rec = f_171C_13CA((long)(len + 8), 1, "formatStr");
+        rec = Ralloc((long)(len + 8), 1, "formatStr");
         *(char far * far * far *)(o + 0x2a) = rec;
     }
-    _fstrcpy(f_171C_1B84(rec), buf);
-    f_24AB_02AD(o[0x28]);
+    _fstrcpy(mem_Lock(rec), buf);
+    font_SetFont(o[0x28]);
     win_CenterStrAtObj(obj, buf);
-    f_24AB_02AD(0);
-    f_171C_1BBA(rec);
+    font_SetFont(0);
+    mem_Unlock(rec);
     win_UnlockWin(obj);
 }
 
@@ -488,9 +488,9 @@ int _fastcall win_IsWinOpen(int win)
 
     open = 0;
     if ((h = win_handles[win >> 8]) != 0) {
-        if ((w = f_171C_1B84(h)) != 0) {
+        if ((w = mem_Lock(h)) != 0) {
             open = (*(unsigned far *)(w + 0x1c) & 0x200) >> 9;
-            f_171C_1BBA(h);
+            mem_Unlock(h);
         } else {
             win_handles[win >> 8] = 0;
         }
@@ -608,7 +608,7 @@ int far win_DoProxMenu(int win, int item, ...)
     return result;
 }
 
-void far f_22BF_0C38(int obj)
+void far win_ClearObjToEOL(int obj)
 {
     struct Rect r;
     int c;
@@ -670,12 +670,12 @@ void far win_DrawHBar(int obj, long fraction)
     }
     if (r.right <= r.left)
         goto rest;
-    f_1CE2_046D(&r, g_3DE0);
+    GRectFill(&r, _foreColor);
 rest:
     if (r.right < right) {
         r.left = r.right;
         r.right = right;
-        f_1CE2_046D(&r, g_3DE2);
+        GRectFill(&r, g_3DE2);
     }
 }
 
@@ -694,11 +694,11 @@ void far win_DrawVBar(int obj, long fraction)
         r.top = end - (int)(((long)height * fraction) / 65536L);
     }
     if (r.top < r.bottom)
-        f_1CE2_046D(&r, g_3DE0);
+        GRectFill(&r, _foreColor);
     if (r.top > top) {
         r.bottom = r.top;
         r.top = top;
-        f_1CE2_046D(&r, g_3DE2);
+        GRectFill(&r, g_3DE2);
     }
 }
 

@@ -43,7 +43,7 @@ extern int far f_1FD2_0542(void);
 extern void far f_1B73_0A40(void);
 extern void far f_1C62_0737(void);
 extern unsigned far _fstrlen(char far *s);
-extern void far f_1FBD_0000(int x, int y, char far *text);
+extern void far GPutStr(int x, int y, char far *text);
 extern char far * far _fstrcpy(char far *d, char far *s);
 extern int far f_1F58_0038(void);
 extern int far win_Events(void);
@@ -80,7 +80,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
         return 0;
     if (flags) {
         len = _fstrlen(text);
-        f_1FBD_0000(x, y, text);
+        GPutStr(x, y, text);
         _fstrcpy(buf, text);
     } else
         len = 0;
@@ -152,7 +152,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
                 break;
             }
             _fmemmove(&buf[pos], &buf[pos + 1], len - pos + 1);
-            f_1FBD_0000(x, y, &buf[pos]);
+            GPutStr(x, y, &buf[pos]);
             f_1B4E_0110(x + (--len - pos) * g_3DDE, y, ' ');
             break;
         case 9:
@@ -163,7 +163,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
             }
             _fmemmove(&buf[pos + 1], &buf[pos], len + 1);
             buf[pos] = ' ';
-            f_1FBD_0000(x, y, &buf[pos]);
+            GPutStr(x, y, &buf[pos]);
             len++;
             break;
         case 10:

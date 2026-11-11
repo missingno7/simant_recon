@@ -32,11 +32,11 @@ int _fastcall win_IsWinLocked(int win)
 
 extern char far * far * near win_handles[];
 extern void far win_LoadWindow(int win);
-extern int far f_171C_1AD4(char far * far *handle);
+extern int far mem_LockLevel(char far * far *handle);
 void far f_23AE_035D(void);
 extern char far * far f_171C_1D40(char far * far *handle);
-extern char far * far f_171C_1B84(char far * far *handle);
-extern void far f_171C_1C0A(char far * far *handle);
+extern char far * far mem_Lock(char far * far *handle);
+extern void far mem_Free(char far * far *handle);
 extern void far f_171C_1E86(char far * far *handle, int flag);
 extern void _fastcall RepointObjects(int win);
 extern void _fastcall win_Recalc(int win);
@@ -61,22 +61,22 @@ void _fastcall f_23AE_0069(int win, int high)
     h = win_handles[n];
     if (g_8DA6[n] == 0) {
         g_8DA6[n]++;
-        if (f_171C_1AD4(h)) {
+        if (mem_LockLevel(h)) {
             high = 0;
             f_23AE_035D();
         }
         if (high)
             w = f_171C_1D40(h);
         else
-            w = f_171C_1B84(h);
+            w = mem_Lock(h);
         if (w == 0) {
-            f_171C_1C0A(h);
+            mem_Free(h);
             win_LoadWindow(win);
             h = win_handles[n];
             if (high)
                 w = f_171C_1D40(h);
             else
-                w = f_171C_1B84(h);
+                w = mem_Lock(h);
         }
         if (*(int far *)(w + 0x1c) & 0x800)
             f_171C_1E86(h, 1);
@@ -119,8 +119,8 @@ struct Win {
     struct Obj far *objs[1];
 };
 
-extern int far f_171C_1686(struct Win far * far *handle);
-extern void far f_171C_13E4(char far * far *handle);
+extern int far RallocType(struct Win far * far *handle);
+extern void far RallocFree(char far * far *handle);
 extern void far f_171C_2086(struct Win far * far *handle);
 extern void far f_171C_20E2(struct Win far * far *handle);
 extern struct Rect far win_offsets[];
@@ -141,7 +141,7 @@ void _fastcall win_UnlockWin(int win)
         h = (struct Win far * far *)win_handles[n];
         if (g_8DA6[n] == 0)
             Punt("Attemp to unlock when not locked!!");
-        if (f_171C_1686(h) == 5)
+        if (RallocType(h) == 5)
             Punt("Attemp to unlock when discarded win %x", win);
         if (--g_8DA6[n] == 0) {
             if (!((*h)->flags & 0x200) && ((*h)->flags & 0x800) && g_644E == 0) {
@@ -153,7 +153,7 @@ void _fastcall win_UnlockWin(int win)
                     case 10:
                         p = &obj->h34;
                         if (*p) {
-                            f_171C_13E4(*p);
+                            RallocFree(*p);
                             *p = 0;
                         }
                         break;
@@ -162,7 +162,7 @@ void _fastcall win_UnlockWin(int win)
                     case 18:
                         p = &obj->h2a;
                         if (*p) {
-                            f_171C_13E4(*p);
+                            RallocFree(*p);
                             *p = 0;
                         }
                         break;

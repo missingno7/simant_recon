@@ -56,16 +56,16 @@ void far win_MapChanged(void)
     }
 }
 
-extern int far fd_3D57_07C8;
-extern char far * far * far fd_50F6_046C;
+extern int far MapMode;
+extern char far * far * far MwinTitle;
 extern void far win_SetObjFormatStr(int obj, ...);
 extern int far YardMode;
 extern void _fastcall win_DrawTitle(int win);
 
 void far SetMapTitle(void)
 {
-    win_SetObjFormatStr(0x101, fd_50F6_046C[fd_3D57_07C8]);
-    win_SetObjFormatStr(0x1901, fd_50F6_046C[YardMode + 9]);
+    win_SetObjFormatStr(0x101, MwinTitle[MapMode]);
+    win_SetObjFormatStr(0x1901, MwinTitle[YardMode + 9]);
     if (win_IsWinOpen(0x100)) {
         clip_Push();
         clip_SetWin(0x100);
@@ -97,7 +97,7 @@ void far f_00F8_017D(void)
 extern int far win_Events(void);
 extern int far f_1F58_0038(void);
 extern int far f_1B73_0A30(int);
-extern void far o19_384C_0000(void);
+extern void far DoEvent(void);
 extern int far f_1B73_0EEE(void);
 extern int near g_9122;
 extern int near g_3DB2;
@@ -110,7 +110,7 @@ void far f_00F8_01BE(void)
     int dx, dy;
 
     if (win_Events() || f_1F58_0038() || f_1B73_0A30(0x1d) || fd_55B3_2CBC)
-        o19_384C_0000();
+        DoEvent();
     do {
         dx = dy = 0;
         if (f_1B73_0EEE())
@@ -241,7 +241,7 @@ void far MakeDMap(void)
 }
 
 extern int far MapPlane;
-extern Point far fd_50F6_0508;
+extern Point far MapPnt;
 extern int far fd_50F6_10E0;
 extern int far fd_50F6_10DE;
 
@@ -249,8 +249,8 @@ int far TileIsVisible(int plane, int x, int y)
 {
     int r;
 
-    r = MapPlane == plane && fd_50F6_0508.x <= x && fd_50F6_0508.x + fd_50F6_10E0 > x
-        && fd_50F6_0508.y <= y && fd_50F6_0508.y + fd_50F6_10DE > y;
+    r = MapPlane == plane && MapPnt.x <= x && MapPnt.x + fd_50F6_10E0 > x
+        && MapPnt.y <= y && MapPnt.y + fd_50F6_10DE > y;
     return r;
 }
 
@@ -310,14 +310,14 @@ void far MapToYard(void)
     }
 }
 
-extern void _fastcall f_20E8_0725(int win);
+extern void _fastcall win_ToTop(int win);
 
 void far OpenMapYard(int unused)
 {
     if (win_IsWinOpen(0x100))
-        f_20E8_0725(0x100);
+        win_ToTop(0x100);
     else if (win_IsWinOpen(0x1900))
-        f_20E8_0725(0x1900);
+        win_ToTop(0x1900);
     else
         YardToMap();
 }

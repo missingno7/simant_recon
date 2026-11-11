@@ -28,13 +28,13 @@ void far f_1E57_0007(void)
 {
 }
 
-extern void far f_171C_1C0A(Handle h);
+extern void far mem_Free(Handle h);
 extern struct Rect far * near g_5AAC;
 
 void far f_1E57_0009(void)
 {
     if (g_5742) {
-        f_171C_1C0A(g_5742);
+        mem_Free(g_5742);
         g_5742 = 0;
     }
     if (g_5746)
@@ -113,9 +113,9 @@ void far clip_KillWin(int win)
 extern int _fastcall win_IsWinOpen(int win);
 extern Handle far fd_50F6_3B60[45];
 extern void far Punt(char far *format, ...);
-extern char far * far f_171C_1B84(Handle h);
+extern char far * far mem_Lock(Handle h);
 extern struct Rect far fd_50F6_3C14[];
-extern Handle far f_171C_1BBA(Handle h);
+extern Handle far mem_Unlock(Handle h);
 
 void far clip_SetWin(int win)
 {
@@ -128,12 +128,12 @@ void far clip_SetWin(int win)
         g_5746 = fd_50F6_3B60[win >> 8];
         if (!g_5746)
             Punt("SetWin: Window open but clip is NULL");
-        p = (struct Rect far *)f_171C_1B84(g_5746);
+        p = (struct Rect far *)mem_Lock(g_5746);
         g_5AAC = p;
         for (size = 8; g_5AAC->top != (int)0x8000; size += 8, g_5AAC++)
             ;
         _fmemcpy(fd_50F6_3C14, p, size);
-        f_171C_1BBA(g_5746);
+        mem_Unlock(g_5746);
         g_5AAC = fd_50F6_3C14;
     } else
         g_5AAC = 0;
@@ -146,12 +146,12 @@ int far f_1E57_0239(int win)
     int r;
 
     h = fd_50F6_3B60[win >> 8];
-    p = (struct Rect far *)f_171C_1B84(h);
+    p = (struct Rect far *)mem_Lock(h);
     if (h && p->top != (int)0x8000)
         r = 1;
     else
         r = 0;
-    f_171C_1BBA(h);
+    mem_Unlock(h);
     return r;
 }
 
@@ -168,13 +168,13 @@ void far f_1E57_0296(void)
     g_5746 = g_574A;
     if (!g_5746)
         Punt("\n\aERROR MEMNULL winClipHandle");
-    p = (struct Rect far *)f_171C_1B84(g_5746);
+    p = (struct Rect far *)mem_Lock(g_5746);
     if (p) {
         for (size = 8, g_5AAC = p; g_5AAC->top != (int)0x8000; size += 8, g_5AAC++)
             ;
         _fmemcpy(fd_50F6_3C14, p, size);
         g_5AAC = fd_50F6_3C14;
-        f_171C_1BBA(g_5746);
+        mem_Unlock(g_5746);
     }
 }
 
@@ -202,11 +202,11 @@ int far f_1E57_036F(struct Rect far *r)
 int s_584C = 0;
 
 extern void far * far _fmemset(void far *dst, int c, unsigned n);
-extern Handle far f_171C_1A9E(long size, int flags, char far *name);
+extern Handle far mem_Alloc(long size, int flags, char far *name);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *list,
                                          struct Rect far *in, struct Rect far *out);
-extern Handle far f_171C_1B2C(Handle h, long size, int flags);
+extern Handle far mem_Realloc(Handle h, long size, int flags);
 
 
 void far f_1E57_038E(void)
@@ -227,28 +227,28 @@ void far f_1E57_038E(void)
         s_584C = 1;
     }
     if (g_574A && g_574A != &g_574E)
-        f_171C_1C0A(g_574A);
+        mem_Free(g_574A);
     win = g_5702[0];
     if (win == (int)0x8000) {
         g_574A = &g_574E;
         return;
     }
-    tmpH = f_171C_1A9E(256 * sizeof(struct Rect), 0, "tmprects");
-    tmp = (struct Rect far *)f_171C_1B84(tmpH);
-    g_574A = f_171C_1A9E(256 * sizeof(struct Rect), 0, "clipout");
+    tmpH = mem_Alloc(256 * sizeof(struct Rect), 0, "tmprects");
+    tmp = (struct Rect far *)mem_Lock(tmpH);
+    g_574A = mem_Alloc(256 * sizeof(struct Rect), 0, "clipout");
     for (i = 0; i < 45; i++) {
         if (fd_50F6_3B60[i]) {
-            f_171C_1C0A(fd_50F6_3B60[i]);
+            mem_Free(fd_50F6_3B60[i]);
             fd_50F6_3B60[i] = 0;
         }
     }
-    list = (struct Rect far *)f_171C_1B84(g_574A);
+    list = (struct Rect far *)mem_Lock(g_574A);
     *list = g_5A9C;
     list[1].top = 0x8000;
     win_GetObjRect(win, &r);
-    fd_50F6_3B60[win >> 8] = f_171C_1A9E(n = (f_1D8E_02BD(&r, list, tmp, 0L) - tmp + 1) * sizeof(struct Rect), 1, "winClipList");
-    _fmemcpy(f_171C_1B84(fd_50F6_3B60[win >> 8]), tmp, n);
-    f_171C_1BBA(fd_50F6_3B60[win >> 8]);
+    fd_50F6_3B60[win >> 8] = mem_Alloc(n = (f_1D8E_02BD(&r, list, tmp, 0L) - tmp + 1) * sizeof(struct Rect), 1, "winClipList");
+    _fmemcpy(mem_Lock(fd_50F6_3B60[win >> 8]), tmp, n);
+    mem_Unlock(fd_50F6_3B60[win >> 8]);
     for (i = 1; i < 32; i++) {
         next = g_5702[i];
         if (next == (int)0x8000)
@@ -263,9 +263,9 @@ void far f_1E57_038E(void)
         if ((n = end - tmp) >= 256)
             Punt("C098: Clip overflow %d", (end - tmp));
         f_1E57_0006(n, 0);
-        fd_50F6_3B60[next >> 8] = f_171C_1A9E(n = (n + 1) * sizeof(struct Rect), 1, "winClipList");
-        _fmemcpy(f_171C_1B84(fd_50F6_3B60[next >> 8]), tmp, n);
-        f_171C_1BBA(fd_50F6_3B60[next >> 8]);
+        fd_50F6_3B60[next >> 8] = mem_Alloc(n = (n + 1) * sizeof(struct Rect), 1, "winClipList");
+        _fmemcpy(mem_Lock(fd_50F6_3B60[next >> 8]), tmp, n);
+        mem_Unlock(fd_50F6_3B60[next >> 8]);
         win = next;
     }
     win_GetObjRect(win, &r);
@@ -276,10 +276,10 @@ void far f_1E57_038E(void)
     f_1E57_0006(n, 0);
     n = (n + 1) * sizeof(struct Rect);
     _fmemcpy(list, tmp, n);
-    f_171C_1BBA(g_574A);
-    g_574A = f_171C_1B2C(g_574A, n, 1);
-    f_171C_1BBA(tmpH);
-    f_171C_1C0A(tmpH);
+    mem_Unlock(g_574A);
+    g_574A = mem_Realloc(g_574A, n, 1);
+    mem_Unlock(tmpH);
+    mem_Free(tmpH);
     f_1E57_0007();
 }
 
@@ -295,8 +295,8 @@ void far clip_SubInclude(struct Rect far *r)
     int n;
 
     if (r) {
-        h = f_171C_1A9E(2048, 0, "subinclude");
-        buf = (struct Rect far *)f_171C_1B84(h);
+        h = mem_Alloc(2048, 0, "subinclude");
+        buf = (struct Rect far *)mem_Lock(h);
         p = buf;
         if (!g_5AAC) {
             n = 1;
@@ -310,13 +310,13 @@ void far clip_SubInclude(struct Rect far *r)
     } else
         Punt("Sub include NULL rect!!");
     buf[n].top = 0x8000;
-    f_171C_1BBA(h);
-    if (!(h = f_171C_1B2C(h, (long)(n + 1) << 3, 1)))
+    mem_Unlock(h);
+    if (!(h = mem_Realloc(h, (long)(n + 1) << 3, 1)))
         Punt("Clip out of memory!!!");
     f_1E57_0009();
     g_5AAC = fd_50F6_3C14;
-    _fmemcpy(g_5AAC, f_171C_1B84(h), (n + 1) << 3);
-    f_171C_1BBA(h);
+    _fmemcpy(g_5AAC, mem_Lock(h), (n + 1) << 3);
+    mem_Unlock(h);
     g_5742 = h;
     f_1E57_0006(n, 1);
 }
@@ -330,8 +330,8 @@ void far f_1E57_08F5(struct Rect far *r)
     int n;
 
     if (r) {
-        h = f_171C_1A9E(2048, 0, "subinclude");
-        buf = (struct Rect far *)f_171C_1B84(h);
+        h = mem_Alloc(2048, 0, "subinclude");
+        buf = (struct Rect far *)mem_Lock(h);
         p = buf;
         if (!g_5AAC) {
             for (n = 0; r->top != (int)0x8000; p++, r++, n++)
@@ -346,14 +346,14 @@ void far f_1E57_08F5(struct Rect far *r)
     } else
         Punt("Sub include NULL rect!!");
     buf[n].top = 0x8000;
-    f_171C_1BBA(h);
-    if (!(h = f_171C_1B2C(h, (long)(n + 1) << 3, 1)))
+    mem_Unlock(h);
+    if (!(h = mem_Realloc(h, (long)(n + 1) << 3, 1)))
         Punt("Clip out of memory!!!");
     f_1E57_0009();
     g_5AAC = fd_50F6_3C14;
-    _fmemcpy(g_5AAC, f_171C_1B84(h), (n + 1) << 3);
-    f_171C_1BBA(h);
-    f_171C_1C0A(h);
+    _fmemcpy(g_5AAC, mem_Lock(h), (n + 1) << 3);
+    mem_Unlock(h);
+    mem_Free(h);
     f_1E57_0006(n, 1);
 }
 
@@ -370,8 +370,8 @@ void far clip_SubExclude(struct Rect far *r)
     int n;
 
     if (r) {
-        h = f_171C_1A9E(2048, 0, "subexclude");
-        buf = (struct Rect far *)f_171C_1B84(h);
+        h = mem_Alloc(2048, 0, "subexclude");
+        buf = (struct Rect far *)mem_Lock(h);
         if (!g_5AAC)
             g_5AAC = &g_5A9C;
         for (p = buf; g_5AAC->top != (int)0x8000; g_5AAC++)
@@ -382,13 +382,13 @@ void far clip_SubExclude(struct Rect far *r)
         Punt("Sub exclude NULL rect!!");
     f_1E57_0006(n, 1);
     buf[n].top = 0x8000;
-    f_171C_1BBA(h);
-    if (!(h = f_171C_1B2C(h, (long)(n + 1) << 3, 1)))
+    mem_Unlock(h);
+    if (!(h = mem_Realloc(h, (long)(n + 1) << 3, 1)))
         Punt("Clip out of memory!!!");
     f_1E57_0009();
     g_5AAC = fd_50F6_3C14;
-    _fmemcpy(g_5AAC, f_171C_1B84(h), (n + 1) << 3);
-    f_171C_1BBA(h);
+    _fmemcpy(g_5AAC, mem_Lock(h), (n + 1) << 3);
+    mem_Unlock(h);
     g_5742 = h;
 }
 
@@ -406,8 +406,8 @@ void far f_1E57_0C2D(struct Rect far *r)
     int n;
 
     if (r) {
-        h = f_171C_1A9E(2048, 0, "include");
-        buf = (struct Rect far *)f_171C_1B84(h);
+        h = mem_Alloc(2048, 0, "include");
+        buf = (struct Rect far *)mem_Lock(h);
         if (g_5AAC && g_5AAC->top != (int)0x8000) {
             for (c = g_5AAC, p = buf; c->top != (int)0x8000; c++, p++)
                 *p = *c;
@@ -426,8 +426,8 @@ void far f_1E57_0C2D(struct Rect far *r)
     f_1E57_0009();
     g_5AAC = fd_50F6_3C14;
     _fmemcpy(g_5AAC, buf, (n + 1) << 3);
-    f_171C_1BBA(h);
-    f_171C_1C0A(h);
+    mem_Unlock(h);
+    mem_Free(h);
 }
 
 void far f_1E57_0D97(struct Rect far *r)
@@ -451,9 +451,9 @@ void far clip_Push(void)
         size = (char far *)p - (char far *)g_5AAC + sizeof(struct Rect);
         g_5758 += size / (int)sizeof(struct Rect);
     }
-    if (!(h = f_171C_1A9E(size + 8L, 1, "clip_Push")))
+    if (!(h = mem_Alloc(size + 8L, 1, "clip_Push")))
         Punt("Cannot allocate memory in clip_Push");
-    node = (Handle far *)f_171C_1B84(h);
+    node = (Handle far *)mem_Lock(h);
     if (size)
         _fmemcpy(node + 2, g_5AAC, size);
     node[0] = fd_50F6_3B5C;
@@ -461,7 +461,7 @@ void far clip_Push(void)
     fd_50F6_3B5C = h;
     if (++g_5756 > 20)
         Punt("Error CL98463: Pushed it too far");
-    f_171C_1BBA(h);
+    mem_Unlock(h);
 }
 
 void far clip_Pop(void)
@@ -474,7 +474,7 @@ void far clip_Pop(void)
         Punt("Clip_Pop w/ nothing on the stack: E9073");
     f_1E57_0009();
     g_5742 = fd_50F6_3B5C;
-    node = (Handle far *)f_171C_1B84(g_5742);
+    node = (Handle far *)mem_Lock(g_5742);
     fd_50F6_3B5C = node[0];
     if (!((struct Rect far * far *)node)[1])
         g_5AAC = 0;
@@ -486,7 +486,7 @@ void far clip_Pop(void)
         g_5AAC = fd_50F6_3C14;
     }
     g_5756--;
-    f_171C_1BBA(g_5742);
+    mem_Unlock(g_5742);
 }
 
 void far f_1E57_0F8E(struct Rect far *r)

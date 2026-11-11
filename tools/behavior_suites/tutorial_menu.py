@@ -93,22 +93,22 @@ def _diff_summary(diff):
 def tutorial_case(label, lesson, values, queries):
     """State uses named world facts; modeled game-query helpers are explicit."""
     names = {
-        "MePlane": 2, "MeLocX": 2, "MeLocY": 2, "fd_50F6_0224": 2,
-        "fd_50F6_0204": 4, "fd_50F6_0AA0": 2, "fd_50F6_0B1E": 2,
-        "fd_50F6_1074": 2, "fd_50F6_104E": 2, "fd_50F6_04C2": 2,
+        "MePlane": 2, "MeLocX": 2, "MeLocY": 2, "TilesDugB": 2,
+        "TimeTemp": 4, "MeMoveMe": 2, "MeDis": 2,
+        "LessonTemp": 2, "MeDropAlarm": 2, "MeType": 2,
         "fd_50F6_032E": 2, "fd_50F6_035C": 2,
-        "fd_3D57_07BE": 2, "fd_50F6_0FB6": 2, "fd_50F6_0FFA": 2,
+        "ELayerMode": 2, "EditColumns": 2, "EditRows": 2,
     }
     writes = [(addr(name), _long(values.get(name, 0)) if size == 4 else w(values.get(name, 0)))
               for name, size in names.items()]
-    writes += [(addr("fd_50F6_0508"), w(values.get("pt_y", 0), values.get("pt_x", 0))),
+    writes += [(addr("MapPnt"), w(values.get("pt_y", 0), values.get("pt_x", 0))),
                (addr("modeLevels"), w(*values.get("modeLevels", (0, 0, 0)))),
-               (addr("fd_50F6_0B12"), bytes(values.get("b12", bytes(12)))),
+               (addr("ModePopB"), bytes(values.get("b12", bytes(12)))),
                (addr("MapA"), bytes(values.get("map", bytes(128 * 64))))]
     observe = [b.Range(name, addr(name), size) for name, size in names.items()]
-    observe += [b.Range("lesson_point", addr("fd_50F6_0508"), 4),
+    observe += [b.Range("lesson_point", addr("MapPnt"), 4),
                 b.Range("mode_levels", addr("modeLevels"), 6),
-                b.Range("tutorial_array", addr("fd_50F6_0B12"), 12),
+                b.Range("tutorial_array", addr("ModePopB"), 12),
                 b.Range("tutorial_map", addr("MapA"), 128 * 64)]
     requested_clock = tuple(queries.get("clock", (0, 0)))
     tick_count = _inverse_mac_ticks(requested_clock)
@@ -148,21 +148,21 @@ def tutorial_cases(random_count=600, seed=0x0E2E065E):
     # recovered switch domain. Keep base state just below most thresholds.
     for lesson in list(range(-2, 60)) + [0x7FFF, -0x8000]:
         vals = {"MePlane": 1, "MeLocX": 4, "MeLocY": 5,
-                "fd_50F6_0224": 9, "fd_50F6_0204": -1,
-                "fd_50F6_1074": 9, "pt_y": 4, "pt_x": 5,
+                "TilesDugB": 9, "TimeTemp": -1,
+                "LessonTemp": 9, "pt_y": 4, "pt_x": 5,
                 "modeLevels": (3, 6, 0), "b12": w(0, 0, 0, 0, 0, 2)}
         mapdata = bytearray(128 * 64); mapdata[4 * 64 + 5] = 0x48; vals["map"] = bytes(mapdata)
         out.append(tutorial_case(f"directed/{lesson}", lesson, vals,
             {"clock": (11, 0), "top_window": 0x0100}))
         # Flip each condition-driving fact to exercise the opposite edge.
         for field, choices in (("MePlane", (0, 1, 2, 3)),
-                               ("fd_50F6_0224", (9, 10, 11)),
-                               ("fd_50F6_0204", (9, 10, 0x10000)),
-                               ("fd_50F6_0AA0", (0, 1)),
-                               ("fd_50F6_0B1E", (0, 1)),
-                               ("fd_50F6_1074", (8, 9, 10)),
-                               ("fd_50F6_104E", (0, 1)),
-                               ("fd_50F6_04C2", (0x10, 0x18, 0x28)),
+                               ("TilesDugB", (9, 10, 11)),
+                               ("TimeTemp", (9, 10, 0x10000)),
+                               ("MeMoveMe", (0, 1)),
+                               ("MeDis", (0, 1)),
+                               ("LessonTemp", (8, 9, 10)),
+                               ("MeDropAlarm", (0, 1)),
+                               ("MeType", (0x10, 0x18, 0x28)),
                                ("fd_50F6_032E", (0, 1)),
                                ("fd_50F6_035C", (0, 1))):
             for value in choices:
@@ -174,10 +174,10 @@ def tutorial_cases(random_count=600, seed=0x0E2E065E):
     for i in range(random_count):
         mapdata = bytearray(rng.randrange(256) for _ in range(128 * 64))
         vals = {"MePlane": rng.randrange(-2, 5), "MeLocX": rng.randrange(64),
-                "MeLocY": rng.randrange(32), "fd_50F6_0224": rng.randrange(-50, 101),
-                "fd_50F6_0204": rng.randrange(-0x80000000, 0x80000000), "fd_50F6_0AA0": rng.randrange(2),
-                "fd_50F6_0B1E": rng.randrange(2), "fd_50F6_1074": rng.randrange(-100, 201),
-                "fd_50F6_104E": rng.randrange(2), "fd_50F6_04C2": rng.randrange(64),
+                "MeLocY": rng.randrange(32), "TilesDugB": rng.randrange(-50, 101),
+                "TimeTemp": rng.randrange(-0x80000000, 0x80000000), "MeMoveMe": rng.randrange(2),
+                "MeDis": rng.randrange(2), "LessonTemp": rng.randrange(-100, 201),
+                "MeDropAlarm": rng.randrange(2), "MeType": rng.randrange(64),
                 "fd_50F6_032E": rng.randrange(2), "fd_50F6_035C": rng.randrange(2),
                 "pt_y": rng.randrange(-100, 101), "pt_x": rng.randrange(-100, 101),
                 "modeLevels": tuple(rng.randrange(-20, 21) for _ in range(3)),
@@ -307,12 +307,12 @@ def _menu_callbacks():
         "malloc": b.Callback(1, alloc), "free": b.Callback(2, release),
         "f_1B73_0504": b.Callback(0, tick_count),
         "f_1F80_0081": b.Callback(1, delay_ticks), "f_1B73_0A40": b.Callback(0, mouse_setup),
-        "f_1FD2_04D0": b.Callback(2, point, project=lambda m,a:{"destination":"logical-point"}),
+        "GetMousePos": b.Callback(2, point, project=lambda m,a:{"destination":"logical-point"}),
         "f_1FD2_0542": b.Callback(0, still_down),
         "f_1F58_0038": b.Callback(0, key_ready), "f_1F58_0090": b.Callback(0, key_read),
         "f_1B73_032A": b.Callback(0, event_ready),
         "f_1B73_032E": b.Callback(2, event_read, project=lambda m,a:{"destination":"logical-event"}),
-        "f_1FBD_0000": b.Callback(4,draw_font_text,project=lambda m,a:{"x":a[0],"y":a[1],
+        "GPutStr": b.Callback(4,draw_font_text,project=lambda m,a:{"x":a[0],"y":a[1],
             "text":_str_read(m,a[2],a[3]).hex()}),
         "f_1FD2_02B1": b.Callback(1, draw_mode), "f_1FD2_02FF": b.Callback(0),
         "GSaveRect": b.Callback(2, save_rect, project=lambda m,a:{"rect":_rect(m,a[0],a[1])}),
@@ -373,7 +373,7 @@ def menu_case(label, keys, *, curmenu=-1, events=(), points=(), down=(), items=N
             "abi":"far C routine: stack far char* selection, stack far far* items; caller cleanup 8 bytes",
             "validity":{"item_table":items,"sentinel":"null far pointer","initial_selection":selected,
                 "current_menu":curmenu,"screen":[width,height],"line_height":line_height,"char_width":char_width},
-            "modeled_boundary":"Host keyboard/mouse/event providers, display save/draw/restore/cursor commands, DOS mouse setup (INT 33h query), asynchronous TickCount, DOS f_1F80_0081 delay ticks, and one successful 4000-byte menu-buffer allocation are deterministic providers. f_1F80_0081 advances the deterministic timer by exactly its positive tick argument; TickCount advances one tick per call so original delay helpers run. The allocator returns a zeroed bounded scratch buffer and verifies the matching release. Original sprintf and f_1FD2_0008/vsprintf formatters execute; f_1FBD_0000 is projected as a C string at the actual renderer sink. Both runtime-proved cursor views retain cursor advancement and remaining capacity while abstracting only invocation-stack pointer homes; if a stream record points to the modeled menu heap, the record remains raw. Raw writes and traces remain in the evidence ledger. Sink projections, per-call snapshots, final globals, all final nonstack writes, strings, rectangles, and input consumption remain compared. Original rectangle adjustment/containment, strings, formatter, and all other semantic helpers run in DOS code.",
+            "modeled_boundary":"Host keyboard/mouse/event providers, display save/draw/restore/cursor commands, DOS mouse setup (INT 33h query), asynchronous TickCount, DOS f_1F80_0081 delay ticks, and one successful 4000-byte menu-buffer allocation are deterministic providers. f_1F80_0081 advances the deterministic timer by exactly its positive tick argument; TickCount advances one tick per call so original delay helpers run. The allocator returns a zeroed bounded scratch buffer and verifies the matching release. Original sprintf and f_1FD2_0008/vsprintf formatters execute; GPutStr is projected as a C string at the actual renderer sink. Both runtime-proved cursor views retain cursor advancement and remaining capacity while abstracting only invocation-stack pointer homes; if a stream record points to the modeled menu heap, the record remains raw. Raw writes and traces remain in the evidence ledger. Sink projections, per-call snapshots, final globals, all final nonstack writes, strings, rectangles, and input consumption remain compared. Original rectangle adjustment/containment, strings, formatter, and all other semantic helpers run in DOS code.",
             "input":{"keys":list(keys),"events":list(events),"points":list(points),"down":list(down)}})
 
 

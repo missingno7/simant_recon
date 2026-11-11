@@ -50,7 +50,7 @@ class SemanticSpansTests(unittest.TestCase):
 
     def test_new_consumer_must_be_declared(self):
         texts=dict(self.texts)
-        texts['src/root/m00DF.c']+='\nint span_probe(void) { return fd_3D57_07A8[5]; }\n'
+        texts['src/root/m00DF.c']+='\nint span_probe(void) { return OptionStates[5]; }\n'
         doc=copy.deepcopy(self.document)
         for fact in doc['owner_layout'].values():
             if fact['source']=='src/root/m00DF.c':
@@ -95,26 +95,26 @@ class SemanticSpansTests(unittest.TestCase):
         words=[0,1,1,1,1,0]
         siblings=[r for r in self.contract.cross_accesses if r['file']!='src/root/m00DF.c']
         self.assertEqual(len(siblings),29)
-        checks='\n'.join(f'if (fd_3D57_07A8[{r["index"]}] != {words[r["index"]]}) return {30+i};' for i,r in enumerate(self.contract.cross_accesses))
+        checks='\n'.join(f'if (OptionStates[{r["index"]}] != {words[r["index"]]}) return {30+i};' for i,r in enumerate(self.contract.cross_accesses))
         driver='''#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-extern int16_t fd_3D57_07A8[];
-extern unsigned char fd_3D57_0164[32],fd_3D57_0184[160];
+extern int16_t OptionStates[];
+extern unsigned char YMapPopR[32],fd_3D57_0184[160];
 extern unsigned char fd_3D57_07AA[4],fd_3D57_07AE[2],fd_3D57_07B0[2],fd_3D57_07B2[4];
 struct SaveRec { int16_t size,count; void *data; };
 int main(int argc,char **argv) {
  const int16_t dos_options[6]={0,1,1,1,1,0};
  unsigned char bytes[192]; int i;
- struct SaveRec records[2]={{2,96,fd_3D57_0164},{2,6,fd_3D57_07A8}};
+ struct SaveRec records[2]={{2,96,YMapPopR},{2,6,OptionStates}};
  FILE *f;
- if (memcmp(fd_3D57_07A8,dos_options,12)) return 10;
+ if (memcmp(OptionStates,dos_options,12)) return 10;
  CHECKS
- for (i=0;i<6;i++) { fd_3D57_07A8[i]=(int16_t)(0x1200+i); }
+ for (i=0;i<6;i++) { OptionStates[i]=(int16_t)(0x1200+i); }
  if (fd_3D57_07AA[0]!=1 || fd_3D57_07AA[2]!=2 || fd_3D57_07AE[0]!=3 || fd_3D57_07B0[0]!=4 || fd_3D57_07B2[0]!=5) return 11;
  fd_3D57_07B2[2]=0x5a;fd_3D57_07B2[3]=0xa5;
  for (i=0;i<192;i++) bytes[i]=(unsigned char)(i*37+11);
- memcpy(fd_3D57_0164,bytes,32);memcpy(fd_3D57_0184,bytes+32,160);
+ memcpy(YMapPopR,bytes,32);memcpy(fd_3D57_0184,bytes+32,160);
  for (i=0;i<2;i++) {
    struct SaveRec *p=&records[i];unsigned int n=p->count*p->size;
    unsigned char before[192];memcpy(before,p->data,n);

@@ -134,7 +134,7 @@ extern void far o00_31AD_18BA(char far *p, unsigned seg, int n);
 extern void far o00_31AD_186A(char far *p, unsigned seg, int page, unsigned n);
 extern void far db_PurgeObject(int object, int kind);
 extern Handle far fd_50F6_10EE;
-extern void far f_171C_1C0A(Handle h);
+extern void far mem_Free(Handle h);
 extern void far db_UnhookObject(int object, int kind);
 
 void far f_0250_0256(int set)
@@ -147,7 +147,7 @@ void far f_0250_0256(int set)
     TERRAINset = set;
     if ((g_5A97 & 1) || g_5A97 == 2) {
         if (fd_50F6_10EE)
-            f_171C_1C0A(fd_50F6_10EE);
+            mem_Free(fd_50F6_10EE);
         fd_50F6_10EE = f_1A53_00BA(10 - set, 9);
         db_UnhookObject(10 - set, 9);
     } else {
@@ -178,16 +178,16 @@ void far OverlayTileSet(int type, int id)
 
 extern int far fd_50F6_1102;
 extern Handle far f_1A53_00F0(int object, int kind, int type);
-extern long far f_171C_1C1C(Handle h);
+extern long far mem_Size(Handle h);
 extern int far f_171C_1E9A(Handle h);
-extern Handle far f_171C_13CA(long size, int flags, char far *name);
-extern char far * far f_171C_1B84(Handle h);
+extern Handle far Ralloc(long size, int flags, char far *name);
+extern char far * far mem_Lock(Handle h);
 extern void far * far _fmemcpy(void far *dest, void far *src, unsigned n);
 extern void far f_195A_00F8(int handle);
 extern void far f_195A_0122(int handle, int n, int far *map);
 extern char far * far fd_55B3_360E;
 extern void far f_195A_010D(int handle);
-extern Handle far f_171C_1BBA(Handle h);
+extern Handle far mem_Unlock(Handle h);
 
 void far LoadTiles(void)
 {
@@ -209,23 +209,23 @@ void far LoadTiles(void)
         if (g_19D0) {
             for (i = 0; i < 6; i++) {
                 fd_50F6_10E6 = f_1A53_00F0(i + 15, 9, 1);
-                n = f_171C_1C1C(fd_50F6_10E6);
+                n = mem_Size(fd_50F6_10E6);
                 if (f_171C_1E9A(fd_50F6_10E6)) {
-                    h = f_171C_13CA((long)n, 9, "emstiles");
-                    p = f_171C_1B84(h);
-                    _fmemcpy(p, f_171C_1B84(fd_50F6_10E6), n);
+                    h = Ralloc((long)n, 9, "emstiles");
+                    p = mem_Lock(h);
+                    _fmemcpy(p, mem_Lock(fd_50F6_10E6), n);
                 } else {
                     h = 0;
-                    p = f_171C_1B84(fd_50F6_10E6);
+                    p = mem_Lock(fd_50F6_10E6);
                 }
                 f_195A_00F8(g_19D0);
                 f_195A_0122(g_19D0, 4, i < 3 ? g_19D2 : g_19E2);
                 _fmemcpy(fd_55B3_360E + i % 3 * 0x5000, p, n);
                 f_195A_010D(g_19D0);
-                f_171C_1BBA(fd_50F6_10E6);
+                mem_Unlock(fd_50F6_10E6);
                 if (h) {
-                    f_171C_1BBA(h);
-                    f_171C_1C0A(h);
+                    mem_Unlock(h);
+                    mem_Free(h);
                 }
                 db_PurgeObject(i + 15, 9);
             }
@@ -447,7 +447,7 @@ extern void far GotoMyAnt(void);
 extern void far GotoSpider(void);
 extern void far GotoBQueen(void);
 extern void far GotoRQueen(void);
-extern int far fd_50F6_047E;
+extern int far GamePaused;
 extern void far SetPause(int pause);
 extern void far EditScentMenu(void);
 extern void far DoHealthSetY(struct Event far *event);
@@ -493,7 +493,7 @@ void far ProcEditEvent(struct Event far *event)
         GotoRQueen();
         break;
     case 15:
-        SetPause(fd_50F6_047E == 0);
+        SetPause(GamePaused == 0);
         break;
     case 16:
         EditScentMenu();
@@ -530,9 +530,9 @@ struct Rect {
     int bottom;
 };
 
-extern struct Rect far fd_50F6_110C;
+extern struct Rect far editTileRect;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern Pnt far fd_50F6_0508;
+extern Pnt far MapPnt;
 
 int far f_0250_0D10(int dx, int dy)
 {
@@ -565,10 +565,10 @@ int far f_0250_0D10(int dx, int dy)
     if (yDistance >= xDistance) {
         fraction = ((unsigned long)xDistance << 16) / yDistance;
         for (i = 0; i < yDistance; i++) {
-            fd_50F6_0508.y += yStep;
+            MapPnt.y += yStep;
             error += fraction;
             if ((error >> 16) & 1) {
-                fd_50F6_0508.x += xStep;
+                MapPnt.x += xStep;
                 error ^= 0x10000L;
             }
         }
@@ -578,10 +578,10 @@ int far f_0250_0D10(int dx, int dy)
     } else {
         fraction = ((unsigned long)yDistance << 16) / xDistance;
         for (i = 0; i < xDistance; i++) {
-            fd_50F6_0508.x += xStep;
+            MapPnt.x += xStep;
             error += fraction;
             if ((error >> 16) & 1) {
-                fd_50F6_0508.y += yStep;
+                MapPnt.y += yStep;
                 error ^= 0x10000L;
             }
         }
@@ -593,9 +593,9 @@ int far f_0250_0D10(int dx, int dy)
 
 void far f_0250_0E15(void)
 {
-    win_GetObjRect(4, &fd_50F6_110C);
-    fd_50F6_10E0 = (fd_50F6_110C.right - fd_50F6_110C.left) / g_19BE;
-    fd_50F6_10DE = (fd_50F6_110C.bottom - fd_50F6_110C.top) / g_19C0 + 1;
+    win_GetObjRect(4, &editTileRect);
+    fd_50F6_10E0 = (editTileRect.right - editTileRect.left) / g_19BE;
+    fd_50F6_10DE = (editTileRect.bottom - editTileRect.top) / g_19C0 + 1;
     f_0250_05CB();
     g_19CE = 1;
     f_0250_0F2C();
@@ -644,7 +644,7 @@ void far f_0250_0ED2(void)
 {
 }
 
-extern int far fd_50F6_0EAC;
+extern int far CurGameType;
 extern int far CurExpTool;
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
@@ -657,7 +657,7 @@ void far f_0250_0EDA(int flags)
         f_0250_0E15();
         f_0250_13A6();
         f_0250_0E15();
-        if (fd_50F6_0EAC == 3)
+        if (CurGameType == 3)
             id = CurExpTool + 0x13ec;
         else
             id = 0x13f3;
@@ -680,14 +680,14 @@ void far f_0250_0F2C(void)
     default:
         limit = 0x40;
     }
-    if (fd_50F6_0508.x < 0)
-        fd_50F6_0508.x = 0;
-    else if (fd_50F6_0508.x + fd_50F6_10E0 > limit)
-        fd_50F6_0508.x = limit - fd_50F6_10E0;
-    if (fd_50F6_0508.y < 0)
-        fd_50F6_0508.y = 0;
-    else if (fd_50F6_0508.y + fd_50F6_10DE > ylimit)
-        fd_50F6_0508.y = ylimit - fd_50F6_10DE;
+    if (MapPnt.x < 0)
+        MapPnt.x = 0;
+    else if (MapPnt.x + fd_50F6_10E0 > limit)
+        MapPnt.x = limit - fd_50F6_10E0;
+    if (MapPnt.y < 0)
+        MapPnt.y = 0;
+    else if (MapPnt.y + fd_50F6_10DE > ylimit)
+        MapPnt.y = ylimit - fd_50F6_10DE;
 }
 
 void far CenterEdit(int x, int y)
@@ -702,11 +702,11 @@ void far CenterEdit(int x, int y)
     default:
         width = 0x40;
     }
-    f_0250_0CF6(x - fd_50F6_10E0 / 2 - fd_50F6_0508.x, y - fd_50F6_10DE / 2 - fd_50F6_0508.y);
+    f_0250_0CF6(x - fd_50F6_10E0 / 2 - MapPnt.x, y - fd_50F6_10DE / 2 - MapPnt.y);
     f_0250_0F2C();
 }
 
-extern int far fd_3D57_07BE;
+extern int far ELayerMode;
 extern unsigned char far PherMapA[64][32];
 extern unsigned char far PherMapBN[64][32];
 extern unsigned char far PherMapBT[64][32];
@@ -714,10 +714,10 @@ extern unsigned char far PherMapRN[64][32];
 extern unsigned char far PherMapRT[64][32];
 extern unsigned char far MapA[128][64];
 extern unsigned char far LifeA[128][64];
-extern int far fd_50F6_049A;
-extern int far fd_50F6_04C2;
-extern int far fd_50F6_0502;
-extern int far fd_50F6_0496;
+extern int far MeBase;
+extern int far MeType;
+extern int far MeEgg;
+extern int far MeDir;
 extern unsigned char far MapB[64][64];
 extern unsigned char far LifeB[64][64];
 extern unsigned char far MapR[64][64];
@@ -731,8 +731,8 @@ extern unsigned char far LifeR[64][64];
 extern void (far * far fd_50F6_37EA)(char far *src, char far *dst, int x, int y);
 
 
-extern int far fd_50F6_03E0;
-extern int far fd_50F6_046A;
+extern int far FootX;
+extern int far FootY;
 
 void far f_0250_1018(int x, int y)
 {
@@ -740,8 +740,8 @@ void far f_0250_1018(int x, int y)
     int mx;
     int my;
 
-    mx = fd_50F6_0508.x + x;
-    my = fd_50F6_0508.y + y;
+    mx = MapPnt.x + x;
+    my = MapPnt.y + y;
     if (my > 0x3f) {
         mx += 0x40;
         my &= 0x3f;
@@ -752,7 +752,7 @@ void far f_0250_1018(int x, int y)
     case 0:
     case 1:
         mx &= 0x7f;
-        switch (fd_3D57_07BE) {
+        switch (ELayerMode) {
         case 0:
             v = PherMapA[mx >> 1][my >> 1];
             break;
@@ -782,13 +782,13 @@ noscent:
         if (v == 0)
             return;
         if (v == 0xff) {
-            g_9126 = fd_50F6_049A + fd_50F6_04C2 + 0x380;
-            if (fd_50F6_04C2 < 8)
-                g_9126 += fd_50F6_0502;
+            g_9126 = MeBase + MeType + 0x380;
+            if (MeType < 8)
+                g_9126 += MeEgg;
             else
-                g_9126 += fd_50F6_0496;
+                g_9126 += MeDir;
         } else if (v == 0xfe)
-            g_9126 = fd_50F6_049A + fd_50F6_0496 + fd_50F6_04C2 + 0x388;
+            g_9126 = MeBase + MeDir + MeType + 0x388;
         else
             g_9126 = v + 0x100;
         break;
@@ -800,14 +800,14 @@ noscent:
             return;
         switch (v) {
         case 0xfe:
-            g_9126 = fd_50F6_049A + fd_50F6_0496 + fd_50F6_04C2 + 0x308;
+            g_9126 = MeBase + MeDir + MeType + 0x308;
             break;
         case 0xff:
-            g_9126 = fd_50F6_049A + fd_50F6_04C2 + 0x300;
-            if (fd_50F6_04C2 < 8)
-                g_9126 += fd_50F6_0502;
+            g_9126 = MeBase + MeType + 0x300;
+            if (MeType < 8)
+                g_9126 += MeEgg;
             else
-                g_9126 += fd_50F6_0496;
+                g_9126 += MeDir;
             break;
         default:
             g_9126 = v + 0x200;
@@ -821,14 +821,14 @@ noscent:
             return;
         switch (v) {
         case 0xfe:
-            g_9126 = fd_50F6_049A + fd_50F6_0496 + fd_50F6_04C2 + 0x308;
+            g_9126 = MeBase + MeDir + MeType + 0x308;
             break;
         case 0xff:
-            g_9126 = fd_50F6_049A + fd_50F6_04C2 + 0x300;
-            if (fd_50F6_04C2 < 8)
-                g_9126 += fd_50F6_0502;
+            g_9126 = MeBase + MeType + 0x300;
+            if (MeType < 8)
+                g_9126 += MeEgg;
             else
-                g_9126 += fd_50F6_0496;
+                g_9126 += MeDir;
             break;
         default:
             g_9126 = v + 0x200;
@@ -851,7 +851,7 @@ void far f_0250_129E(int x, int y)
 
     i = y;
     row = i;
-    absolute.y = fd_50F6_0508.y + row;
+    absolute.y = MapPnt.y + row;
     if (x < 0 || row < 0 || x >= 40 || row >= 30)
         return;
     if (absolute.y > 0x3f)
@@ -864,9 +864,9 @@ void far f_0250_129E(int x, int y)
     }
     if (fd_50F6_15C4[0][i] != g_9126 || fd_50F6_1114[i] != g_94E4 || (row == 0 && g_19CE != 0)) {
         if (g_9126)
-            f_0250_0721(g_19BE * x + fd_50F6_110C.left, g_19C0 * row + fd_50F6_110C.top);
+            f_0250_0721(g_19BE * x + editTileRect.left, g_19C0 * row + editTileRect.top);
         else
-            f_0250_0ADB(g_19BE * x + fd_50F6_110C.left, row * g_19C0 + fd_50F6_110C.top);
+            f_0250_0ADB(g_19BE * x + editTileRect.left, row * g_19C0 + editTileRect.top);
         fd_50F6_15C4[0][i] = g_9126;
         fd_50F6_1114[i] = g_94E4;
     }
@@ -918,7 +918,7 @@ void far f_0250_13A6(void)
             g_19C6 = 0;
         } else {
             win_SetColorNum(3);
-            f_15D9_0006(g_19C6, &fd_50F6_110C, fd_50F6_110C.top + 4);
+            f_15D9_0006(g_19C6, &editTileRect, editTileRect.top + 4);
         }
     }
     PreDrawSpider();
@@ -927,9 +927,9 @@ void far f_0250_13A6(void)
         DrawSpider();
     DrawBalloons();
     f_0250_0643(MapPlane / 2);
-    py = fd_50F6_110C.top;
+    py = editTileRect.top;
     for (y = 0; y < fd_50F6_10DE; y++, py += g_19C0) {
-        px = fd_50F6_110C.left;
+        px = editTileRect.left;
         for (x = 0; x < fd_50F6_10E0; x++, px += 16) {
             if (x >= balTileRect.left && x < balTileRect.right && y >= balTileRect.top && y < balTileRect.bottom)
                 goto drawballoon;
@@ -953,8 +953,8 @@ void far f_0250_13A6(void)
     }
     f_0250_062A();
     if (balTileRect.left != 500) {
-        f_171C_1BBA(balBufHandle);
-        f_171C_1C0A(balBufHandle);
+        mem_Unlock(balBufHandle);
+        mem_Free(balBufHandle);
     }
     clip_Pop();
     g_19CE = 0;
@@ -963,15 +963,15 @@ void far f_0250_13A6(void)
 extern int far MeHealth;
 extern int far HealthB;
 extern int far HealthR;
-extern int near g_3DE0;
-extern void far f_1CE2_046D(struct Rect far *rect, int color);
+extern int near _foreColor;
+extern void far GRectFill(struct Rect far *rect, int color);
 extern void (far * near g_9128)(int a, int b, int c);
-extern void far f_1CE2_044D(struct Rect far *rect, int width);
+extern void far GRectOutline(struct Rect far *rect, int width);
 extern int near g_3DE2;
-extern int far fd_50F6_0FBA;
-extern int far f_1B4E_000D(int color);
-extern int far fd_50F6_0FFE;
-extern void far f_1CE2_0430(struct Rect far *rect);
+extern int far MeWarnHealth;
+extern int far ConvColor(int color);
+extern int far BlkWarnHealth;
+extern void far GRectInv(struct Rect far *rect);
 
 /* h is computed from r before top is copied: /Og then sinks h = r.bottom - r.top into the
  * __aFlmul argument list (after the 0x10000L and frac pushes) as in the original.  The three
@@ -998,27 +998,27 @@ void far DrawEditGraphs(void)
         top = r.top;
         r.top = r.bottom - (int)(h * frac / 0x10000L);
         if (r.top < r.bottom) {
-            f_1CE2_046D(&r, g_3DE0);
+            GRectFill(&r, _foreColor);
             if ((g_5A97 & 1) && i == 0) {
                 (*g_9128)(0, 0, 0);
-                f_1CE2_044D(&r, 1);
+                GRectOutline(&r, 1);
                 win_SetColorFromObjNum(obj);
             }
         }
         if (r.top > top) {
             r.bottom = r.top;
             r.top = top;
-            f_1CE2_046D(&r, g_3DE2);
+            GRectFill(&r, g_3DE2);
         }
         if (i == 0) {
-            r.top = (100 - fd_50F6_0FBA) * h / 100 + top;
+            r.top = (100 - MeWarnHealth) * h / 100 + top;
             r.bottom = r.top + 1;
-            f_1CE2_046D(&r, f_1B4E_000D(15));
+            GRectFill(&r, ConvColor(15));
         }
         if (i == 1) {
-            r.top = (100 - fd_50F6_0FFE) * h / 100 + top;
+            r.top = (100 - BlkWarnHealth) * h / 100 + top;
             r.bottom = r.top + 1;
-            f_1CE2_0430(&r);
+            GRectInv(&r);
         }
     }
 }
@@ -1036,7 +1036,7 @@ void far SetEditWinTitle(void)
 
     _fstrcpy(buf, "SimAnt");
     _fstrcat(buf, fd_50F6_0368[15]);
-    _fstrcat(buf, fd_50F6_0324[fd_50F6_0EAC]);
+    _fstrcat(buf, fd_50F6_0324[CurGameType]);
     win_SetObjFormatStr(1, buf);
     if (win_IsWinOpen(0)) {
         clip_Push();
@@ -1046,9 +1046,9 @@ void far SetEditWinTitle(void)
     }
 }
 
-extern int far fd_50F6_0F0C;
-extern int far fd_50F6_0F12;
-extern int far fd_50F6_0F34;
+extern int far SpidOn;
+extern int far SpidX;
+extern int far SpidY;
 
 void far PreDrawSpider(void)
 {
@@ -1058,14 +1058,14 @@ void far PreDrawSpider(void)
     fd_50F6_37D6.top = 0x8000;
     fd_50F6_37D2 = 500;
     fd_50F6_37D4 = 500;
-    if (!fd_50F6_0F0C)
+    if (!SpidOn)
         return;
-    y = fd_50F6_0508.y;
-    x = fd_50F6_0508.x;
+    y = MapPnt.y;
+    x = MapPnt.x;
     px = x * g_19BE;
     py = y * g_19C0;
-    sx = fd_50F6_0F12;
-    sy = fd_50F6_0F34;
+    sx = SpidX;
+    sy = SpidY;
     if (g_5A97 == 2) {
         sx = sx * 3 / 4;
         sy = sy * 3 / 4;
@@ -1082,8 +1082,8 @@ void far PreDrawSpider(void)
         return;
     fd_50F6_1F26.x = 7 * g_19BE;
     fd_50F6_1F26.y = 7 * g_19C0;
-    fd_50F6_37D2 = fd_50F6_0F12 / 16 - x - 3;
-    fd_50F6_37D4 = fd_50F6_0F34 / 16 - y - 3;
+    fd_50F6_37D2 = SpidX / 16 - x - 3;
+    fd_50F6_37D4 = SpidY / 16 - y - 3;
 }
 
 void far DrawEditGraphs(void);
@@ -1094,11 +1094,11 @@ extern void (far * far fd_50F6_37E6)(char far *p, int stride);
 extern void far f_16B5_0033(Pnt far *buf, int mode);
 extern int far SMode;
 extern int far Scycle;
-extern char far fd_3D57_09CC[];
-extern char far fd_3D57_09D0[];
-extern int far fd_50F6_1004;
-extern char far fd_3D57_09BC[];
-extern char far fd_3D57_09C4[];
+extern char far DBodX[];
+extern char far DBodY[];
+extern int far SpidDir;
+extern char far BodX[];
+extern char far BodY[];
 extern int far fd_3D57_07B2;
 extern long far fd_3D57_098E;
 extern int far SRand64(void);
@@ -1134,19 +1134,19 @@ void far DrawSpider(void)
     int ly;
     int px;
 
-    px = fd_50F6_0508.x * g_19BE;
-    py = fd_50F6_0508.y * g_19C0;
+    px = MapPnt.x * g_19BE;
+    py = MapPnt.y * g_19C0;
     if (g_5A97 == 2) {
-        sx = fd_50F6_0F12 * 3 / 4;
+        sx = SpidX * 3 / 4;
         modx = sx % 12;
-        mody = (fd_50F6_0F34 * 3 / 4) % 12;
-        left = sx - modx + fd_50F6_110C.left - px - 0x24;
-        top = fd_50F6_0F34 * 3 / 4 - mody + fd_50F6_110C.top - py - 0x24;
+        mody = (SpidY * 3 / 4) % 12;
+        left = sx - modx + editTileRect.left - px - 0x24;
+        top = SpidY * 3 / 4 - mody + editTileRect.top - py - 0x24;
     } else {
-        modx = fd_50F6_0F12 & 0xf;
-        mody = fd_50F6_0F34 & 0xf;
-        left = fd_50F6_0F12 - modx + fd_50F6_110C.left - px - 0x30;
-        top = fd_50F6_0F34 - mody + fd_50F6_110C.top - py - 0x30;
+        modx = SpidX & 0xf;
+        mody = SpidY & 0xf;
+        left = SpidX - modx + editTileRect.left - px - 0x30;
+        top = SpidY - mody + editTileRect.top - py - 0x30;
     }
     fd_50F6_37D6.left = left;
     fd_50F6_37D6.top = top;
@@ -1185,8 +1185,8 @@ void far DrawSpider(void)
     f_0250_062A();
     (g_5A97 & 1) ? f_16B5_0033(&fd_50F6_1F26, 0) : (g_5A97 == 2 ? f_16B5_0033(&fd_50F6_1F26, 1) : f_16B5_0033(&fd_50F6_1F26, 2));
     if (SMode == 5) {
-        lx = fd_3D57_09CC[Scycle] + 0x30;
-        ly = fd_3D57_09D0[Scycle] + 0x30;
+        lx = DBodX[Scycle] + 0x30;
+        ly = DBodY[Scycle] + 0x30;
         if (g_5A97 == 2) {
             lx = lx * 3 / 4 + modx;
             ly = ly * 3 / 4 + mody;
@@ -1196,20 +1196,20 @@ void far DrawSpider(void)
         }
         f_2662_1120(lx, ly, &fd_50F6_1F26, Scycle + 0x41a);
     } else {
-        lx = fd_3D57_09BC[fd_50F6_1004] + 0x30;
-        ly = fd_3D57_09C4[fd_50F6_1004] + 0x30;
+        lx = BodX[SpidDir] + 0x30;
+        ly = BodY[SpidDir] + 0x30;
         if (g_5A97 == 2) {
-            f_2662_1120(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &fd_50F6_1F26, fd_50F6_1004 + 1000);
-            DrawLegs((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, fd_50F6_1004, Scycle & 7);
-            DrawPalps((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, fd_50F6_1004);
+            f_2662_1120(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &fd_50F6_1F26, SpidDir + 1000);
+            DrawLegs((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir, Scycle & 7);
+            DrawPalps((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir);
         } else {
-            f_2662_1120(modx + lx, mody + ly, &fd_50F6_1F26, fd_50F6_1004 + 1000);
-            DrawLegs(modx + 0x30, mody + 0x30, fd_50F6_1004, Scycle & 7);
-            DrawPalps(modx + 0x30, mody + 0x30, fd_50F6_1004);
+            f_2662_1120(modx + lx, mody + ly, &fd_50F6_1F26, SpidDir + 1000);
+            DrawLegs(modx + 0x30, mody + 0x30, SpidDir, Scycle & 7);
+            DrawPalps(modx + 0x30, mody + 0x30, SpidDir);
         }
     }
     if (fd_3D57_07B2) {
-        if (fd_50F6_047E == 0 && fd_3D57_098E < TickCount()) {
+        if (GamePaused == 0 && fd_3D57_098E < TickCount()) {
             fd_3D57_098E = TickCount() + SRand64() + 180;
             if (SRand2() == 0) {
                 fd_50F6_0D6E = 1;
@@ -1220,7 +1220,7 @@ void far DrawSpider(void)
         }
         if (SMode == fd_50F6_0EB4 && SMode <= 4) {
             if (fd_50F6_0D6E)
-                AddMsgBalloon((Dx8[fd_50F6_1004] << 3) + fd_50F6_0F12, (Dy8[fd_50F6_1004] << 3) + fd_50F6_0F34, 1, 10,
+                AddMsgBalloon((Dx8[SpidDir] << 3) + SpidX, (Dy8[SpidDir] << 3) + SpidY, 1, 10,
                               fd_50F6_10B4[SMode * 5 + fd_3D57_0992]);
         } else {
             fd_3D57_098E = TickCount() + SRand32() + 30;
@@ -1231,8 +1231,8 @@ void far DrawSpider(void)
 }
 
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
-extern int far fd_3D57_0C30;
-extern int far fd_3D57_0C28;
+extern int far BoyDir;
+extern int far BoyHere;
 extern int far fd_50F6_0470;
 extern int far fd_50F6_047A;
 
@@ -1244,25 +1244,25 @@ void far f_0250_1E80(void)
     int y;
     int t;
 
-    if (fd_50F6_0508.x + fd_50F6_10E0 >= fd_50F6_03E0 && fd_50F6_03E0 + 15 >= fd_50F6_0508.x
-        && fd_50F6_0508.y + fd_50F6_10DE >= fd_50F6_046A && fd_50F6_046A + 15 >= fd_50F6_0508.y) {
-        x = (fd_50F6_03E0 - fd_50F6_0508.x) * g_19BE + fd_50F6_110C.left;
-        y = (fd_50F6_046A - fd_50F6_0508.y) * g_19C0 + fd_50F6_110C.top;
+    if (MapPnt.x + fd_50F6_10E0 >= FootX && FootX + 15 >= MapPnt.x
+        && MapPnt.y + fd_50F6_10DE >= FootY && FootY + 15 >= MapPnt.y) {
+        x = (FootX - MapPnt.x) * g_19BE + editTileRect.left;
+        y = (FootY - MapPnt.y) * g_19C0 + editTileRect.top;
         (*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x10);
-        x = fd_50F6_03E0 - fd_50F6_0508.x;
-        y = fd_50F6_046A - fd_50F6_0508.y;
-        if (fd_3D57_0C30 & 1)
+        x = FootX - MapPnt.x;
+        y = FootY - MapPnt.y;
+        if (BoyDir & 1)
             InvalEuMap(x, y, x + 16, y + 6);
         else
             InvalEuMap(x, y, x + 6, y + 16);
-        if (fd_3D57_0C28 == 3 || fd_3D57_0C28 == 4) {
-            if (fd_50F6_0508.x + fd_50F6_10E0 >= fd_50F6_0470 && fd_50F6_0470 + 0x1b >= fd_50F6_0508.x
-                && fd_50F6_0508.y + fd_50F6_10DE >= fd_50F6_047A && fd_50F6_047A + 0x1b >= fd_50F6_0508.x) {
-                x = (fd_50F6_0470 - fd_50F6_0508.x) * g_19BE + fd_50F6_110C.left;
-                y = (fd_50F6_047A - fd_50F6_0508.y) * g_19C0 + fd_50F6_110C.top;
+        if (BoyHere == 3 || BoyHere == 4) {
+            if (MapPnt.x + fd_50F6_10E0 >= fd_50F6_0470 && fd_50F6_0470 + 0x1b >= MapPnt.x
+                && MapPnt.y + fd_50F6_10DE >= fd_50F6_047A && fd_50F6_047A + 0x1b >= MapPnt.x) {
+                x = (fd_50F6_0470 - MapPnt.x) * g_19BE + editTileRect.left;
+                y = (fd_50F6_047A - MapPnt.y) * g_19C0 + editTileRect.top;
                 (*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x20);
-                x = fd_50F6_0470 - fd_50F6_0508.x;
-                y = fd_50F6_047A - fd_50F6_0508.y;
+                x = fd_50F6_0470 - MapPnt.x;
+                y = fd_50F6_047A - MapPnt.y;
                 InvalEuMap(x, y, x + 0x1b, y + 0x1b);
             }
         }
@@ -1287,362 +1287,362 @@ void far ed_LineTo(int x, int y)
         x = x * 3 / 4;
         y = y * 3 / 4;
     }
-    f_16B5_0008(edPenPos.x, edPenPos.y, x, y, g_3DE0);
+    f_16B5_0008(edPenPos.x, edPenPos.y, x, y, _foreColor);
     edPenPos.x = x;
     edPenPos.y = y;
 }
 
-extern int far fd_50F6_06AC;
+extern int far MeSMode;
 extern int far SRand1(int range);
-extern int far fd_50F6_0A06;
-extern char far fd_3D57_09E8[4];
-extern char far fd_3D57_09E4[4];
-extern char far fd_3D57_09F0[4];
-extern char far fd_3D57_09EC[4];
-extern char far fd_3D57_09F8[4];
-extern char far fd_3D57_09F4[4];
-extern char far fd_3D57_0A00[4];
-extern char far fd_3D57_09FC[4];
+extern int far MeMode;
+extern char far PyT[4];
+extern char far PxT[4];
+extern char far PyT2[4];
+extern char far PxT2[4];
+extern char far PyD[4];
+extern char far PxD[4];
+extern char far PyD2[4];
+extern char far PxD2[4];
 void far DrawPalps(int x, int y, int dir)
 {
     int r;
 
-    if (SMode <= 1 && fd_50F6_06AC < 6)
+    if (SMode <= 1 && MeSMode < 6)
         r = 0;
     else
         r = SRand1(4);
-    if (fd_50F6_0A06 == 1)
-        (*g_9128)(f_1B4E_000D(1), 0, 0);
+    if (MeMode == 1)
+        (*g_9128)(ConvColor(1), 0, 0);
     else
-        (*g_9128)(f_1B4E_000D(15), 0, 0);
+        (*g_9128)(ConvColor(15), 0, 0);
     switch (dir) {
     case 0:
         ed_MoveTo(x + 4, y - 10);
-        ed_LineTo(x + fd_3D57_09E4[r], y + fd_3D57_09E8[r]);
-        ed_LineTo(x + fd_3D57_09EC[r], y + fd_3D57_09F0[r]);
+        ed_LineTo(x + PxT[r], y + PyT[r]);
+        ed_LineTo(x + PxT2[r], y + PyT2[r]);
         ed_MoveTo(x - 4, y - 10);
-        ed_LineTo(x - fd_3D57_09E4[r], y + fd_3D57_09E8[r]);
-        ed_LineTo(x - fd_3D57_09EC[r], y + fd_3D57_09F0[r]);
+        ed_LineTo(x - PxT[r], y + PyT[r]);
+        ed_LineTo(x - PxT2[r], y + PyT2[r]);
         break;
     case 1:
         ed_MoveTo(x + 10, y - 3);
-        ed_LineTo(x + fd_3D57_09F4[r], y + fd_3D57_09F8[r]);
-        ed_LineTo(x + fd_3D57_09FC[r], y + fd_3D57_0A00[r]);
+        ed_LineTo(x + PxD[r], y + PyD[r]);
+        ed_LineTo(x + PxD2[r], y + PyD2[r]);
         ed_MoveTo(x + 3, y - 10);
-        ed_LineTo(x - fd_3D57_09F8[r], y - fd_3D57_09F4[r]);
-        ed_LineTo(x - fd_3D57_0A00[r], y - fd_3D57_09FC[r]);
+        ed_LineTo(x - PyD[r], y - PxD[r]);
+        ed_LineTo(x - PyD2[r], y - PxD2[r]);
         break;
     case 2:
         ed_MoveTo(x + 10, y - 4);
-        ed_LineTo(x - fd_3D57_09E8[r], y - fd_3D57_09E4[r]);
-        ed_LineTo(x - fd_3D57_09F0[r], y - fd_3D57_09EC[r]);
+        ed_LineTo(x - PyT[r], y - PxT[r]);
+        ed_LineTo(x - PyT2[r], y - PxT2[r]);
         ed_MoveTo(x + 10, y + 4);
-        ed_LineTo(x - fd_3D57_09E8[r], y + fd_3D57_09E4[r]);
-        ed_LineTo(x - fd_3D57_09F0[r], y + fd_3D57_09EC[r]);
+        ed_LineTo(x - PyT[r], y + PxT[r]);
+        ed_LineTo(x - PyT2[r], y + PxT2[r]);
         break;
     case 3:
         ed_MoveTo(x + 10, y + 3);
-        ed_LineTo(x + fd_3D57_09F4[r], y - fd_3D57_09F8[r]);
-        ed_LineTo(x + fd_3D57_09FC[r], y - fd_3D57_0A00[r]);
+        ed_LineTo(x + PxD[r], y - PyD[r]);
+        ed_LineTo(x + PxD2[r], y - PyD2[r]);
         ed_MoveTo(x + 3, y + 10);
-        ed_LineTo(x - fd_3D57_09F8[r], y + fd_3D57_09F4[r]);
-        ed_LineTo(x - fd_3D57_0A00[r], y + fd_3D57_09FC[r]);
+        ed_LineTo(x - PyD[r], y + PxD[r]);
+        ed_LineTo(x - PyD2[r], y + PxD2[r]);
         break;
     case 4:
         ed_MoveTo(x + 4, y + 10);
-        ed_LineTo(x + fd_3D57_09E4[r], y - fd_3D57_09E8[r]);
-        ed_LineTo(x + fd_3D57_09EC[r], y - fd_3D57_09F0[r]);
+        ed_LineTo(x + PxT[r], y - PyT[r]);
+        ed_LineTo(x + PxT2[r], y - PyT2[r]);
         ed_MoveTo(x - 4, y + 10);
-        ed_LineTo(x - fd_3D57_09E4[r], y - fd_3D57_09E8[r]);
-        ed_LineTo(x - fd_3D57_09EC[r], y - fd_3D57_09F0[r]);
+        ed_LineTo(x - PxT[r], y - PyT[r]);
+        ed_LineTo(x - PxT2[r], y - PyT2[r]);
         break;
     case 5:
         ed_MoveTo(x - 10, y + 3);
-        ed_LineTo(x - fd_3D57_09F4[r], y - fd_3D57_09F8[r]);
-        ed_LineTo(x - fd_3D57_09FC[r], y - fd_3D57_0A00[r]);
+        ed_LineTo(x - PxD[r], y - PyD[r]);
+        ed_LineTo(x - PxD2[r], y - PyD2[r]);
         ed_MoveTo(x - 3, y + 10);
-        ed_LineTo(x + fd_3D57_09F8[r], y + fd_3D57_09F4[r]);
-        ed_LineTo(x + fd_3D57_0A00[r], y + fd_3D57_09FC[r]);
+        ed_LineTo(x + PyD[r], y + PxD[r]);
+        ed_LineTo(x + PyD2[r], y + PxD2[r]);
         break;
     case 6:
         ed_MoveTo(x - 10, y - 4);
-        ed_LineTo(x + fd_3D57_09E8[r], y - fd_3D57_09E4[r]);
-        ed_LineTo(x + fd_3D57_09F0[r], y - fd_3D57_09EC[r]);
+        ed_LineTo(x + PyT[r], y - PxT[r]);
+        ed_LineTo(x + PyT2[r], y - PxT2[r]);
         ed_MoveTo(x - 10, y + 4);
-        ed_LineTo(x + fd_3D57_09E8[r], y + fd_3D57_09E4[r]);
-        ed_LineTo(x + fd_3D57_09F0[r], y + fd_3D57_09EC[r]);
+        ed_LineTo(x + PyT[r], y + PxT[r]);
+        ed_LineTo(x + PyT2[r], y + PxT2[r]);
         break;
     case 7:
         ed_MoveTo(x - 10, y - 3);
-        ed_LineTo(x - fd_3D57_09F4[r], y + fd_3D57_09F8[r]);
-        ed_LineTo(x - fd_3D57_09FC[r], y + fd_3D57_0A00[r]);
+        ed_LineTo(x - PxD[r], y + PyD[r]);
+        ed_LineTo(x - PxD2[r], y + PyD2[r]);
         ed_MoveTo(x - 3, y - 10);
-        ed_LineTo(x + fd_3D57_09F8[r], y - fd_3D57_09F4[r]);
-        ed_LineTo(x + fd_3D57_0A00[r], y - fd_3D57_09FC[r]);
+        ed_LineTo(x + PyD[r], y - PxD[r]);
+        ed_LineTo(x + PyD2[r], y - PxD2[r]);
         break;
     }
 }
 
-extern char far fd_3D57_0A08[4];
-extern char far fd_3D57_0A04[4];
-extern char far fd_3D57_0A4C[8];
-extern char far fd_3D57_0A0C[8];
-extern char far fd_3D57_0A54[8];
-extern char far fd_3D57_0A14[8];
-extern char far fd_3D57_0A5C[8];
-extern char far fd_3D57_0A1C[8];
-extern char far fd_3D57_0A64[8];
-extern char far fd_3D57_0A24[8];
-extern char far fd_3D57_0A6C[8];
-extern char far fd_3D57_0A2C[8];
-extern char far fd_3D57_0A74[8];
-extern char far fd_3D57_0A34[8];
-extern char far fd_3D57_0A7C[8];
-extern char far fd_3D57_0A3C[8];
-extern char far fd_3D57_0A84[8];
-extern char far fd_3D57_0A44[8];
-extern char far fd_3D57_0A90[4];
+extern char far Ly[4];
+extern char far Lx[4];
+extern char far L1yA[8];
+extern char far L1xA[8];
+extern char far L1yB[8];
+extern char far L1xB[8];
+extern char far L2yA[8];
+extern char far L2xA[8];
+extern char far L2yB[8];
+extern char far L2xB[8];
+extern char far L3yA[8];
+extern char far L3xA[8];
+extern char far L3yB[8];
+extern char far L3xB[8];
+extern char far L4yA[8];
+extern char far L4xA[8];
+extern char far L4yB[8];
+extern char far L4xB[8];
+extern char far Dy[4];
 extern char far fd_3D57_0A8C[4];
-extern char far fd_3D57_0A9C[8];
-extern char far fd_3D57_0A94[8];
-extern char far fd_3D57_0ADC[8];
-extern char far fd_3D57_0AD4[8];
-extern char far fd_3D57_0AAC[8];
-extern char far fd_3D57_0AA4[8];
-extern char far fd_3D57_0AEC[8];
-extern char far fd_3D57_0AE4[8];
-extern char far fd_3D57_0ABC[8];
-extern char far fd_3D57_0AB4[8];
-extern char far fd_3D57_0AFC[8];
-extern char far fd_3D57_0AF4[8];
-extern char far fd_3D57_0ACC[8];
-extern char far fd_3D57_0AC4[8];
-extern char far fd_3D57_0B0C[8];
-extern char far fd_3D57_0B04[8];
+extern char far D1yA[8];
+extern char far D1xA[8];
+extern char far D1yB[8];
+extern char far D1xB[8];
+extern char far D2yA[8];
+extern char far D2xA[8];
+extern char far D2yB[8];
+extern char far D2xB[8];
+extern char far D3yA[8];
+extern char far D3xA[8];
+extern char far D3yB[8];
+extern char far D3xB[8];
+extern char far D4yA[8];
+extern char far D4xA[8];
+extern char far D4yB[8];
+extern char far D4xB[8];
 void far DrawLegs(int x, int y, int dir, int frame)
 {
     int other;
 
     other = (frame + 4) & 7;
-    (*g_9128)(f_1B4E_000D(15), 0, 0);
+    (*g_9128)(ConvColor(15), 0, 0);
     switch (dir) {
     case 0:
-        ed_MoveTo(x + fd_3D57_0A04[0], y + fd_3D57_0A08[0]);
-        ed_LineTo(x + fd_3D57_0A0C[frame], y + fd_3D57_0A4C[frame]);
-        ed_LineTo(x + fd_3D57_0A14[frame], y + fd_3D57_0A54[frame]);
-        ed_MoveTo(x + fd_3D57_0A04[1], y + fd_3D57_0A08[1]);
-        ed_LineTo(x + fd_3D57_0A1C[frame], y + fd_3D57_0A5C[frame]);
-        ed_LineTo(x + fd_3D57_0A24[frame], y + fd_3D57_0A64[frame]);
-        ed_MoveTo(x + fd_3D57_0A04[2], y + fd_3D57_0A08[2]);
-        ed_LineTo(x + fd_3D57_0A2C[frame], y + fd_3D57_0A6C[frame]);
-        ed_LineTo(x + fd_3D57_0A34[frame], y + fd_3D57_0A74[frame]);
-        ed_MoveTo(x + fd_3D57_0A04[3], y + fd_3D57_0A08[3]);
-        ed_LineTo(x + fd_3D57_0A3C[frame], y + fd_3D57_0A7C[frame]);
-        ed_LineTo(x + fd_3D57_0A44[frame], y + fd_3D57_0A84[frame]);
-        ed_MoveTo(x - fd_3D57_0A04[0], y + fd_3D57_0A08[0]);
-        ed_LineTo(x - fd_3D57_0A0C[other], y + fd_3D57_0A4C[other]);
-        ed_LineTo(x - fd_3D57_0A14[other], y + fd_3D57_0A54[other]);
-        ed_MoveTo(x - fd_3D57_0A04[1], y + fd_3D57_0A08[1]);
-        ed_LineTo(x - fd_3D57_0A1C[other], y + fd_3D57_0A5C[other]);
-        ed_LineTo(x - fd_3D57_0A24[other], y + fd_3D57_0A64[other]);
-        ed_MoveTo(x - fd_3D57_0A04[2], y + fd_3D57_0A08[2]);
-        ed_LineTo(x - fd_3D57_0A2C[other], y + fd_3D57_0A6C[other]);
-        ed_LineTo(x - fd_3D57_0A34[other], y + fd_3D57_0A74[other]);
-        ed_MoveTo(x - fd_3D57_0A04[3], y + fd_3D57_0A08[3]);
-        ed_LineTo(x - fd_3D57_0A3C[other], y + fd_3D57_0A7C[other]);
-        ed_LineTo(x - fd_3D57_0A44[other], y + fd_3D57_0A84[other]);
+        ed_MoveTo(x + Lx[0], y + Ly[0]);
+        ed_LineTo(x + L1xA[frame], y + L1yA[frame]);
+        ed_LineTo(x + L1xB[frame], y + L1yB[frame]);
+        ed_MoveTo(x + Lx[1], y + Ly[1]);
+        ed_LineTo(x + L2xA[frame], y + L2yA[frame]);
+        ed_LineTo(x + L2xB[frame], y + L2yB[frame]);
+        ed_MoveTo(x + Lx[2], y + Ly[2]);
+        ed_LineTo(x + L3xA[frame], y + L3yA[frame]);
+        ed_LineTo(x + L3xB[frame], y + L3yB[frame]);
+        ed_MoveTo(x + Lx[3], y + Ly[3]);
+        ed_LineTo(x + L4xA[frame], y + L4yA[frame]);
+        ed_LineTo(x + L4xB[frame], y + L4yB[frame]);
+        ed_MoveTo(x - Lx[0], y + Ly[0]);
+        ed_LineTo(x - L1xA[other], y + L1yA[other]);
+        ed_LineTo(x - L1xB[other], y + L1yB[other]);
+        ed_MoveTo(x - Lx[1], y + Ly[1]);
+        ed_LineTo(x - L2xA[other], y + L2yA[other]);
+        ed_LineTo(x - L2xB[other], y + L2yB[other]);
+        ed_MoveTo(x - Lx[2], y + Ly[2]);
+        ed_LineTo(x - L3xA[other], y + L3yA[other]);
+        ed_LineTo(x - L3xB[other], y + L3yB[other]);
+        ed_MoveTo(x - Lx[3], y + Ly[3]);
+        ed_LineTo(x - L4xA[other], y + L4yA[other]);
+        ed_LineTo(x - L4xB[other], y + L4yB[other]);
         break;
     case 1:
-        ed_MoveTo(x + fd_3D57_0A8C[0], y + fd_3D57_0A90[0]);
-        ed_LineTo(x + fd_3D57_0A94[frame], y + fd_3D57_0A9C[frame]);
-        ed_LineTo(x + fd_3D57_0AD4[frame], y + fd_3D57_0ADC[frame]);
-        ed_MoveTo(x + fd_3D57_0A8C[1], y + fd_3D57_0A90[1]);
-        ed_LineTo(x + fd_3D57_0AA4[frame], y + fd_3D57_0AAC[frame]);
-        ed_LineTo(x + fd_3D57_0AE4[frame], y + fd_3D57_0AEC[frame]);
-        ed_MoveTo(x + fd_3D57_0A8C[2], y + fd_3D57_0A90[2]);
-        ed_LineTo(x + fd_3D57_0AB4[frame], y + fd_3D57_0ABC[frame]);
-        ed_LineTo(x + fd_3D57_0AF4[frame], y + fd_3D57_0AFC[frame]);
-        ed_MoveTo(x + fd_3D57_0A8C[3], y + fd_3D57_0A90[3]);
-        ed_LineTo(x + fd_3D57_0AC4[frame], y + fd_3D57_0ACC[frame]);
-        ed_LineTo(x + fd_3D57_0B04[frame], y + fd_3D57_0B0C[frame]);
-        ed_MoveTo(x - fd_3D57_0A90[0], y - fd_3D57_0A8C[0]);
-        ed_LineTo(x - fd_3D57_0A9C[other], y - fd_3D57_0A94[other]);
-        ed_LineTo(x - fd_3D57_0ADC[other], y - fd_3D57_0AD4[other]);
-        ed_MoveTo(x - fd_3D57_0A90[1], y - fd_3D57_0A8C[1]);
-        ed_LineTo(x - fd_3D57_0AAC[other], y - fd_3D57_0AA4[other]);
-        ed_LineTo(x - fd_3D57_0AEC[other], y - fd_3D57_0AE4[other]);
-        ed_MoveTo(x - fd_3D57_0A90[2], y - fd_3D57_0A8C[2]);
-        ed_LineTo(x - fd_3D57_0ABC[other], y - fd_3D57_0AB4[other]);
-        ed_LineTo(x - fd_3D57_0AFC[other], y - fd_3D57_0AF4[other]);
-        ed_MoveTo(x - fd_3D57_0A90[3], y - fd_3D57_0A8C[3]);
-        ed_LineTo(x - fd_3D57_0ACC[other], y - fd_3D57_0AC4[other]);
-        ed_LineTo(x - fd_3D57_0B0C[other], y - fd_3D57_0B04[other]);
+        ed_MoveTo(x + fd_3D57_0A8C[0], y + Dy[0]);
+        ed_LineTo(x + D1xA[frame], y + D1yA[frame]);
+        ed_LineTo(x + D1xB[frame], y + D1yB[frame]);
+        ed_MoveTo(x + fd_3D57_0A8C[1], y + Dy[1]);
+        ed_LineTo(x + D2xA[frame], y + D2yA[frame]);
+        ed_LineTo(x + D2xB[frame], y + D2yB[frame]);
+        ed_MoveTo(x + fd_3D57_0A8C[2], y + Dy[2]);
+        ed_LineTo(x + D3xA[frame], y + D3yA[frame]);
+        ed_LineTo(x + D3xB[frame], y + D3yB[frame]);
+        ed_MoveTo(x + fd_3D57_0A8C[3], y + Dy[3]);
+        ed_LineTo(x + D4xA[frame], y + D4yA[frame]);
+        ed_LineTo(x + D4xB[frame], y + D4yB[frame]);
+        ed_MoveTo(x - Dy[0], y - fd_3D57_0A8C[0]);
+        ed_LineTo(x - D1yA[other], y - D1xA[other]);
+        ed_LineTo(x - D1yB[other], y - D1xB[other]);
+        ed_MoveTo(x - Dy[1], y - fd_3D57_0A8C[1]);
+        ed_LineTo(x - D2yA[other], y - D2xA[other]);
+        ed_LineTo(x - D2yB[other], y - D2xB[other]);
+        ed_MoveTo(x - Dy[2], y - fd_3D57_0A8C[2]);
+        ed_LineTo(x - D3yA[other], y - D3xA[other]);
+        ed_LineTo(x - D3yB[other], y - D3xB[other]);
+        ed_MoveTo(x - Dy[3], y - fd_3D57_0A8C[3]);
+        ed_LineTo(x - D4yA[other], y - D4xA[other]);
+        ed_LineTo(x - D4yB[other], y - D4xB[other]);
         break;
     case 2:
-        ed_MoveTo(x - fd_3D57_0A08[0], y + fd_3D57_0A04[0]);
-        ed_LineTo(x - fd_3D57_0A4C[frame], y + fd_3D57_0A0C[frame]);
-        ed_LineTo(x - fd_3D57_0A54[frame], y + fd_3D57_0A14[frame]);
-        ed_MoveTo(x - fd_3D57_0A08[1], y + fd_3D57_0A04[1]);
-        ed_LineTo(x - fd_3D57_0A5C[frame], y + fd_3D57_0A1C[frame]);
-        ed_LineTo(x - fd_3D57_0A64[frame], y + fd_3D57_0A24[frame]);
-        ed_MoveTo(x - fd_3D57_0A08[2], y + fd_3D57_0A04[2]);
-        ed_LineTo(x - fd_3D57_0A6C[frame], y + fd_3D57_0A2C[frame]);
-        ed_LineTo(x - fd_3D57_0A74[frame], y + fd_3D57_0A34[frame]);
-        ed_MoveTo(x - fd_3D57_0A08[3], y + fd_3D57_0A04[3]);
-        ed_LineTo(x - fd_3D57_0A7C[frame], y + fd_3D57_0A3C[frame]);
-        ed_LineTo(x - fd_3D57_0A84[frame], y + fd_3D57_0A44[frame]);
-        ed_MoveTo(x - fd_3D57_0A08[0], y - fd_3D57_0A04[0]);
-        ed_LineTo(x - fd_3D57_0A4C[other], y - fd_3D57_0A0C[other]);
-        ed_LineTo(x - fd_3D57_0A54[other], y - fd_3D57_0A14[other]);
-        ed_MoveTo(x - fd_3D57_0A08[1], y - fd_3D57_0A04[1]);
-        ed_LineTo(x - fd_3D57_0A5C[other], y - fd_3D57_0A1C[other]);
-        ed_LineTo(x - fd_3D57_0A64[other], y - fd_3D57_0A24[other]);
-        ed_MoveTo(x - fd_3D57_0A08[2], y - fd_3D57_0A04[2]);
-        ed_LineTo(x - fd_3D57_0A6C[other], y - fd_3D57_0A2C[other]);
-        ed_LineTo(x - fd_3D57_0A74[other], y - fd_3D57_0A34[other]);
-        ed_MoveTo(x - fd_3D57_0A08[3], y - fd_3D57_0A04[3]);
-        ed_LineTo(x - fd_3D57_0A7C[other], y - fd_3D57_0A3C[other]);
-        ed_LineTo(x - fd_3D57_0A84[other], y - fd_3D57_0A44[other]);
+        ed_MoveTo(x - Ly[0], y + Lx[0]);
+        ed_LineTo(x - L1yA[frame], y + L1xA[frame]);
+        ed_LineTo(x - L1yB[frame], y + L1xB[frame]);
+        ed_MoveTo(x - Ly[1], y + Lx[1]);
+        ed_LineTo(x - L2yA[frame], y + L2xA[frame]);
+        ed_LineTo(x - L2yB[frame], y + L2xB[frame]);
+        ed_MoveTo(x - Ly[2], y + Lx[2]);
+        ed_LineTo(x - L3yA[frame], y + L3xA[frame]);
+        ed_LineTo(x - L3yB[frame], y + L3xB[frame]);
+        ed_MoveTo(x - Ly[3], y + Lx[3]);
+        ed_LineTo(x - L4yA[frame], y + L4xA[frame]);
+        ed_LineTo(x - L4yB[frame], y + L4xB[frame]);
+        ed_MoveTo(x - Ly[0], y - Lx[0]);
+        ed_LineTo(x - L1yA[other], y - L1xA[other]);
+        ed_LineTo(x - L1yB[other], y - L1xB[other]);
+        ed_MoveTo(x - Ly[1], y - Lx[1]);
+        ed_LineTo(x - L2yA[other], y - L2xA[other]);
+        ed_LineTo(x - L2yB[other], y - L2xB[other]);
+        ed_MoveTo(x - Ly[2], y - Lx[2]);
+        ed_LineTo(x - L3yA[other], y - L3xA[other]);
+        ed_LineTo(x - L3yB[other], y - L3xB[other]);
+        ed_MoveTo(x - Ly[3], y - Lx[3]);
+        ed_LineTo(x - L4yA[other], y - L4xA[other]);
+        ed_LineTo(x - L4yB[other], y - L4xB[other]);
         break;
     case 3:
-        ed_MoveTo(x + fd_3D57_0A8C[0], y - fd_3D57_0A90[0]);
-        ed_LineTo(x + fd_3D57_0A94[frame], y - fd_3D57_0A9C[frame]);
-        ed_LineTo(x + fd_3D57_0AD4[frame], y - fd_3D57_0ADC[frame]);
-        ed_MoveTo(x + fd_3D57_0A8C[1], y - fd_3D57_0A90[1]);
-        ed_LineTo(x + fd_3D57_0AA4[frame], y - fd_3D57_0AAC[frame]);
-        ed_LineTo(x + fd_3D57_0AE4[frame], y - fd_3D57_0AEC[frame]);
-        ed_MoveTo(x + fd_3D57_0A8C[2], y - fd_3D57_0A90[2]);
-        ed_LineTo(x + fd_3D57_0AB4[frame], y - fd_3D57_0ABC[frame]);
-        ed_LineTo(x + fd_3D57_0AF4[frame], y - fd_3D57_0AFC[frame]);
-        ed_MoveTo(x + fd_3D57_0A8C[3], y - fd_3D57_0A90[3]);
-        ed_LineTo(x + fd_3D57_0AC4[frame], y - fd_3D57_0ACC[frame]);
-        ed_LineTo(x + fd_3D57_0B04[frame], y - fd_3D57_0B0C[frame]);
-        ed_MoveTo(x - fd_3D57_0A90[0], y + fd_3D57_0A8C[0]);
-        ed_LineTo(x - fd_3D57_0A9C[other], y + fd_3D57_0A94[other]);
-        ed_LineTo(x - fd_3D57_0ADC[other], y + fd_3D57_0AD4[other]);
-        ed_MoveTo(x - fd_3D57_0A90[1], y + fd_3D57_0A8C[1]);
-        ed_LineTo(x - fd_3D57_0AAC[other], y + fd_3D57_0AA4[other]);
-        ed_LineTo(x - fd_3D57_0AEC[other], y + fd_3D57_0AE4[other]);
-        ed_MoveTo(x - fd_3D57_0A90[2], y + fd_3D57_0A8C[2]);
-        ed_LineTo(x - fd_3D57_0ABC[other], y + fd_3D57_0AB4[other]);
-        ed_LineTo(x - fd_3D57_0AFC[other], y + fd_3D57_0AF4[other]);
-        ed_MoveTo(x - fd_3D57_0A90[3], y + fd_3D57_0A8C[3]);
-        ed_LineTo(x - fd_3D57_0ACC[other], y + fd_3D57_0AC4[other]);
-        ed_LineTo(x - fd_3D57_0B0C[other], y + fd_3D57_0B04[other]);
+        ed_MoveTo(x + fd_3D57_0A8C[0], y - Dy[0]);
+        ed_LineTo(x + D1xA[frame], y - D1yA[frame]);
+        ed_LineTo(x + D1xB[frame], y - D1yB[frame]);
+        ed_MoveTo(x + fd_3D57_0A8C[1], y - Dy[1]);
+        ed_LineTo(x + D2xA[frame], y - D2yA[frame]);
+        ed_LineTo(x + D2xB[frame], y - D2yB[frame]);
+        ed_MoveTo(x + fd_3D57_0A8C[2], y - Dy[2]);
+        ed_LineTo(x + D3xA[frame], y - D3yA[frame]);
+        ed_LineTo(x + D3xB[frame], y - D3yB[frame]);
+        ed_MoveTo(x + fd_3D57_0A8C[3], y - Dy[3]);
+        ed_LineTo(x + D4xA[frame], y - D4yA[frame]);
+        ed_LineTo(x + D4xB[frame], y - D4yB[frame]);
+        ed_MoveTo(x - Dy[0], y + fd_3D57_0A8C[0]);
+        ed_LineTo(x - D1yA[other], y + D1xA[other]);
+        ed_LineTo(x - D1yB[other], y + D1xB[other]);
+        ed_MoveTo(x - Dy[1], y + fd_3D57_0A8C[1]);
+        ed_LineTo(x - D2yA[other], y + D2xA[other]);
+        ed_LineTo(x - D2yB[other], y + D2xB[other]);
+        ed_MoveTo(x - Dy[2], y + fd_3D57_0A8C[2]);
+        ed_LineTo(x - D3yA[other], y + D3xA[other]);
+        ed_LineTo(x - D3yB[other], y + D3xB[other]);
+        ed_MoveTo(x - Dy[3], y + fd_3D57_0A8C[3]);
+        ed_LineTo(x - D4yA[other], y + D4xA[other]);
+        ed_LineTo(x - D4yB[other], y + D4xB[other]);
         break;
     case 4:
-        ed_MoveTo(x - fd_3D57_0A04[0], y - fd_3D57_0A08[0]);
-        ed_LineTo(x - fd_3D57_0A0C[frame], y - fd_3D57_0A4C[frame]);
-        ed_LineTo(x - fd_3D57_0A14[frame], y - fd_3D57_0A54[frame]);
-        ed_MoveTo(x - fd_3D57_0A04[1], y - fd_3D57_0A08[1]);
-        ed_LineTo(x - fd_3D57_0A1C[frame], y - fd_3D57_0A5C[frame]);
-        ed_LineTo(x - fd_3D57_0A24[frame], y - fd_3D57_0A64[frame]);
-        ed_MoveTo(x - fd_3D57_0A04[2], y - fd_3D57_0A08[2]);
-        ed_LineTo(x - fd_3D57_0A2C[frame], y - fd_3D57_0A6C[frame]);
-        ed_LineTo(x - fd_3D57_0A34[frame], y - fd_3D57_0A74[frame]);
-        ed_MoveTo(x - fd_3D57_0A04[3], y - fd_3D57_0A08[3]);
-        ed_LineTo(x - fd_3D57_0A3C[frame], y - fd_3D57_0A7C[frame]);
-        ed_LineTo(x - fd_3D57_0A44[frame], y - fd_3D57_0A84[frame]);
-        ed_MoveTo(x + fd_3D57_0A04[0], y - fd_3D57_0A08[0]);
-        ed_LineTo(x + fd_3D57_0A0C[other], y - fd_3D57_0A4C[other]);
-        ed_LineTo(x + fd_3D57_0A14[other], y - fd_3D57_0A54[other]);
-        ed_MoveTo(x + fd_3D57_0A04[1], y - fd_3D57_0A08[1]);
-        ed_LineTo(x + fd_3D57_0A1C[other], y - fd_3D57_0A5C[other]);
-        ed_LineTo(x + fd_3D57_0A24[other], y - fd_3D57_0A64[other]);
-        ed_MoveTo(x + fd_3D57_0A04[2], y - fd_3D57_0A08[2]);
-        ed_LineTo(x + fd_3D57_0A2C[other], y - fd_3D57_0A6C[other]);
-        ed_LineTo(x + fd_3D57_0A34[other], y - fd_3D57_0A74[other]);
-        ed_MoveTo(x + fd_3D57_0A04[3], y - fd_3D57_0A08[3]);
-        ed_LineTo(x + fd_3D57_0A3C[other], y - fd_3D57_0A7C[other]);
-        ed_LineTo(x + fd_3D57_0A44[other], y - fd_3D57_0A84[other]);
+        ed_MoveTo(x - Lx[0], y - Ly[0]);
+        ed_LineTo(x - L1xA[frame], y - L1yA[frame]);
+        ed_LineTo(x - L1xB[frame], y - L1yB[frame]);
+        ed_MoveTo(x - Lx[1], y - Ly[1]);
+        ed_LineTo(x - L2xA[frame], y - L2yA[frame]);
+        ed_LineTo(x - L2xB[frame], y - L2yB[frame]);
+        ed_MoveTo(x - Lx[2], y - Ly[2]);
+        ed_LineTo(x - L3xA[frame], y - L3yA[frame]);
+        ed_LineTo(x - L3xB[frame], y - L3yB[frame]);
+        ed_MoveTo(x - Lx[3], y - Ly[3]);
+        ed_LineTo(x - L4xA[frame], y - L4yA[frame]);
+        ed_LineTo(x - L4xB[frame], y - L4yB[frame]);
+        ed_MoveTo(x + Lx[0], y - Ly[0]);
+        ed_LineTo(x + L1xA[other], y - L1yA[other]);
+        ed_LineTo(x + L1xB[other], y - L1yB[other]);
+        ed_MoveTo(x + Lx[1], y - Ly[1]);
+        ed_LineTo(x + L2xA[other], y - L2yA[other]);
+        ed_LineTo(x + L2xB[other], y - L2yB[other]);
+        ed_MoveTo(x + Lx[2], y - Ly[2]);
+        ed_LineTo(x + L3xA[other], y - L3yA[other]);
+        ed_LineTo(x + L3xB[other], y - L3yB[other]);
+        ed_MoveTo(x + Lx[3], y - Ly[3]);
+        ed_LineTo(x + L4xA[other], y - L4yA[other]);
+        ed_LineTo(x + L4xB[other], y - L4yB[other]);
         break;
     case 5:
-        ed_MoveTo(x - fd_3D57_0A8C[0], y - fd_3D57_0A90[0]);
-        ed_LineTo(x - fd_3D57_0A94[frame], y - fd_3D57_0A9C[frame]);
-        ed_LineTo(x - fd_3D57_0AD4[frame], y - fd_3D57_0ADC[frame]);
-        ed_MoveTo(x - fd_3D57_0A8C[1], y - fd_3D57_0A90[1]);
-        ed_LineTo(x - fd_3D57_0AA4[frame], y - fd_3D57_0AAC[frame]);
-        ed_LineTo(x - fd_3D57_0AE4[frame], y - fd_3D57_0AEC[frame]);
-        ed_MoveTo(x - fd_3D57_0A8C[2], y - fd_3D57_0A90[2]);
-        ed_LineTo(x - fd_3D57_0AB4[frame], y - fd_3D57_0ABC[frame]);
-        ed_LineTo(x - fd_3D57_0AF4[frame], y - fd_3D57_0AFC[frame]);
-        ed_MoveTo(x - fd_3D57_0A8C[3], y - fd_3D57_0A90[3]);
-        ed_LineTo(x - fd_3D57_0AC4[frame], y - fd_3D57_0ACC[frame]);
-        ed_LineTo(x - fd_3D57_0B04[frame], y - fd_3D57_0B0C[frame]);
-        ed_MoveTo(x + fd_3D57_0A90[0], y + fd_3D57_0A8C[0]);
-        ed_LineTo(x + fd_3D57_0A9C[other], y + fd_3D57_0A94[other]);
-        ed_LineTo(x + fd_3D57_0ADC[other], y + fd_3D57_0AD4[other]);
-        ed_MoveTo(x + fd_3D57_0A90[1], y + fd_3D57_0A8C[1]);
-        ed_LineTo(x + fd_3D57_0AAC[other], y + fd_3D57_0AA4[other]);
-        ed_LineTo(x + fd_3D57_0AEC[other], y + fd_3D57_0AE4[other]);
-        ed_MoveTo(x + fd_3D57_0A90[2], y + fd_3D57_0A8C[2]);
-        ed_LineTo(x + fd_3D57_0ABC[other], y + fd_3D57_0AB4[other]);
-        ed_LineTo(x + fd_3D57_0AFC[other], y + fd_3D57_0AF4[other]);
-        ed_MoveTo(x + fd_3D57_0A90[3], y + fd_3D57_0A8C[3]);
-        ed_LineTo(x + fd_3D57_0ACC[other], y + fd_3D57_0AC4[other]);
-        ed_LineTo(x + fd_3D57_0B0C[other], y + fd_3D57_0B04[other]);
+        ed_MoveTo(x - fd_3D57_0A8C[0], y - Dy[0]);
+        ed_LineTo(x - D1xA[frame], y - D1yA[frame]);
+        ed_LineTo(x - D1xB[frame], y - D1yB[frame]);
+        ed_MoveTo(x - fd_3D57_0A8C[1], y - Dy[1]);
+        ed_LineTo(x - D2xA[frame], y - D2yA[frame]);
+        ed_LineTo(x - D2xB[frame], y - D2yB[frame]);
+        ed_MoveTo(x - fd_3D57_0A8C[2], y - Dy[2]);
+        ed_LineTo(x - D3xA[frame], y - D3yA[frame]);
+        ed_LineTo(x - D3xB[frame], y - D3yB[frame]);
+        ed_MoveTo(x - fd_3D57_0A8C[3], y - Dy[3]);
+        ed_LineTo(x - D4xA[frame], y - D4yA[frame]);
+        ed_LineTo(x - D4xB[frame], y - D4yB[frame]);
+        ed_MoveTo(x + Dy[0], y + fd_3D57_0A8C[0]);
+        ed_LineTo(x + D1yA[other], y + D1xA[other]);
+        ed_LineTo(x + D1yB[other], y + D1xB[other]);
+        ed_MoveTo(x + Dy[1], y + fd_3D57_0A8C[1]);
+        ed_LineTo(x + D2yA[other], y + D2xA[other]);
+        ed_LineTo(x + D2yB[other], y + D2xB[other]);
+        ed_MoveTo(x + Dy[2], y + fd_3D57_0A8C[2]);
+        ed_LineTo(x + D3yA[other], y + D3xA[other]);
+        ed_LineTo(x + D3yB[other], y + D3xB[other]);
+        ed_MoveTo(x + Dy[3], y + fd_3D57_0A8C[3]);
+        ed_LineTo(x + D4yA[other], y + D4xA[other]);
+        ed_LineTo(x + D4yB[other], y + D4xB[other]);
         break;
     case 6:
-        ed_MoveTo(x + fd_3D57_0A08[0], y - fd_3D57_0A04[0]);
-        ed_LineTo(x + fd_3D57_0A4C[frame], y - fd_3D57_0A0C[frame]);
-        ed_LineTo(x + fd_3D57_0A54[frame], y - fd_3D57_0A14[frame]);
-        ed_MoveTo(x + fd_3D57_0A08[1], y - fd_3D57_0A04[1]);
-        ed_LineTo(x + fd_3D57_0A5C[frame], y - fd_3D57_0A1C[frame]);
-        ed_LineTo(x + fd_3D57_0A64[frame], y - fd_3D57_0A24[frame]);
-        ed_MoveTo(x + fd_3D57_0A08[2], y - fd_3D57_0A04[2]);
-        ed_LineTo(x + fd_3D57_0A6C[frame], y - fd_3D57_0A2C[frame]);
-        ed_LineTo(x + fd_3D57_0A74[frame], y - fd_3D57_0A34[frame]);
-        ed_MoveTo(x + fd_3D57_0A08[3], y - fd_3D57_0A04[3]);
-        ed_LineTo(x + fd_3D57_0A7C[frame], y - fd_3D57_0A3C[frame]);
-        ed_LineTo(x + fd_3D57_0A84[frame], y - fd_3D57_0A44[frame]);
-        ed_MoveTo(x + fd_3D57_0A08[0], y + fd_3D57_0A04[0]);
-        ed_LineTo(x + fd_3D57_0A4C[other], y + fd_3D57_0A0C[other]);
-        ed_LineTo(x + fd_3D57_0A54[other], y + fd_3D57_0A14[other]);
-        ed_MoveTo(x + fd_3D57_0A08[1], y + fd_3D57_0A04[1]);
-        ed_LineTo(x + fd_3D57_0A5C[other], y + fd_3D57_0A1C[other]);
-        ed_LineTo(x + fd_3D57_0A64[other], y + fd_3D57_0A24[other]);
-        ed_MoveTo(x + fd_3D57_0A08[2], y + fd_3D57_0A04[2]);
-        ed_LineTo(x + fd_3D57_0A6C[other], y + fd_3D57_0A2C[other]);
-        ed_LineTo(x + fd_3D57_0A74[other], y + fd_3D57_0A34[other]);
-        ed_MoveTo(x + fd_3D57_0A08[3], y + fd_3D57_0A04[3]);
-        ed_LineTo(x + fd_3D57_0A7C[other], y + fd_3D57_0A3C[other]);
-        ed_LineTo(x + fd_3D57_0A84[other], y + fd_3D57_0A44[other]);
+        ed_MoveTo(x + Ly[0], y - Lx[0]);
+        ed_LineTo(x + L1yA[frame], y - L1xA[frame]);
+        ed_LineTo(x + L1yB[frame], y - L1xB[frame]);
+        ed_MoveTo(x + Ly[1], y - Lx[1]);
+        ed_LineTo(x + L2yA[frame], y - L2xA[frame]);
+        ed_LineTo(x + L2yB[frame], y - L2xB[frame]);
+        ed_MoveTo(x + Ly[2], y - Lx[2]);
+        ed_LineTo(x + L3yA[frame], y - L3xA[frame]);
+        ed_LineTo(x + L3yB[frame], y - L3xB[frame]);
+        ed_MoveTo(x + Ly[3], y - Lx[3]);
+        ed_LineTo(x + L4yA[frame], y - L4xA[frame]);
+        ed_LineTo(x + L4yB[frame], y - L4xB[frame]);
+        ed_MoveTo(x + Ly[0], y + Lx[0]);
+        ed_LineTo(x + L1yA[other], y + L1xA[other]);
+        ed_LineTo(x + L1yB[other], y + L1xB[other]);
+        ed_MoveTo(x + Ly[1], y + Lx[1]);
+        ed_LineTo(x + L2yA[other], y + L2xA[other]);
+        ed_LineTo(x + L2yB[other], y + L2xB[other]);
+        ed_MoveTo(x + Ly[2], y + Lx[2]);
+        ed_LineTo(x + L3yA[other], y + L3xA[other]);
+        ed_LineTo(x + L3yB[other], y + L3xB[other]);
+        ed_MoveTo(x + Ly[3], y + Lx[3]);
+        ed_LineTo(x + L4yA[other], y + L4xA[other]);
+        ed_LineTo(x + L4yB[other], y + L4xB[other]);
         break;
     case 7:
-        ed_MoveTo(x - fd_3D57_0A8C[0], y + fd_3D57_0A90[0]);
-        ed_LineTo(x - fd_3D57_0A94[frame], y + fd_3D57_0A9C[frame]);
-        ed_LineTo(x - fd_3D57_0AD4[frame], y + fd_3D57_0ADC[frame]);
-        ed_MoveTo(x - fd_3D57_0A8C[1], y + fd_3D57_0A90[1]);
-        ed_LineTo(x - fd_3D57_0AA4[frame], y + fd_3D57_0AAC[frame]);
-        ed_LineTo(x - fd_3D57_0AE4[frame], y + fd_3D57_0AEC[frame]);
-        ed_MoveTo(x - fd_3D57_0A8C[2], y + fd_3D57_0A90[2]);
-        ed_LineTo(x - fd_3D57_0AB4[frame], y + fd_3D57_0ABC[frame]);
-        ed_LineTo(x - fd_3D57_0AF4[frame], y + fd_3D57_0AFC[frame]);
-        ed_MoveTo(x - fd_3D57_0A8C[3], y + fd_3D57_0A90[3]);
-        ed_LineTo(x - fd_3D57_0AC4[frame], y + fd_3D57_0ACC[frame]);
-        ed_LineTo(x - fd_3D57_0B04[frame], y + fd_3D57_0B0C[frame]);
-        ed_MoveTo(x + fd_3D57_0A90[0], y - fd_3D57_0A8C[0]);
-        ed_LineTo(x + fd_3D57_0A9C[other], y - fd_3D57_0A94[other]);
-        ed_LineTo(x + fd_3D57_0ADC[other], y - fd_3D57_0AD4[other]);
-        ed_MoveTo(x + fd_3D57_0A90[1], y - fd_3D57_0A8C[1]);
-        ed_LineTo(x + fd_3D57_0AAC[other], y - fd_3D57_0AA4[other]);
-        ed_LineTo(x + fd_3D57_0AEC[other], y - fd_3D57_0AE4[other]);
-        ed_MoveTo(x + fd_3D57_0A90[2], y - fd_3D57_0A8C[2]);
-        ed_LineTo(x + fd_3D57_0ABC[other], y - fd_3D57_0AB4[other]);
-        ed_LineTo(x + fd_3D57_0AFC[other], y - fd_3D57_0AF4[other]);
-        ed_MoveTo(x + fd_3D57_0A90[3], y - fd_3D57_0A8C[3]);
-        ed_LineTo(x + fd_3D57_0ACC[other], y - fd_3D57_0AC4[other]);
-        ed_LineTo(x + fd_3D57_0B0C[other], y - fd_3D57_0B04[other]);
+        ed_MoveTo(x - fd_3D57_0A8C[0], y + Dy[0]);
+        ed_LineTo(x - D1xA[frame], y + D1yA[frame]);
+        ed_LineTo(x - D1xB[frame], y + D1yB[frame]);
+        ed_MoveTo(x - fd_3D57_0A8C[1], y + Dy[1]);
+        ed_LineTo(x - D2xA[frame], y + D2yA[frame]);
+        ed_LineTo(x - D2xB[frame], y + D2yB[frame]);
+        ed_MoveTo(x - fd_3D57_0A8C[2], y + Dy[2]);
+        ed_LineTo(x - D3xA[frame], y + D3yA[frame]);
+        ed_LineTo(x - D3xB[frame], y + D3yB[frame]);
+        ed_MoveTo(x - fd_3D57_0A8C[3], y + Dy[3]);
+        ed_LineTo(x - D4xA[frame], y + D4yA[frame]);
+        ed_LineTo(x - D4xB[frame], y + D4yB[frame]);
+        ed_MoveTo(x + Dy[0], y - fd_3D57_0A8C[0]);
+        ed_LineTo(x + D1yA[other], y - D1xA[other]);
+        ed_LineTo(x + D1yB[other], y - D1xB[other]);
+        ed_MoveTo(x + Dy[1], y - fd_3D57_0A8C[1]);
+        ed_LineTo(x + D2yA[other], y - D2xA[other]);
+        ed_LineTo(x + D2yB[other], y - D2xB[other]);
+        ed_MoveTo(x + Dy[2], y - fd_3D57_0A8C[2]);
+        ed_LineTo(x + D3yA[other], y - D3xA[other]);
+        ed_LineTo(x + D3yB[other], y - D3xB[other]);
+        ed_MoveTo(x + Dy[3], y - fd_3D57_0A8C[3]);
+        ed_LineTo(x + D4yA[other], y - D4xA[other]);
+        ed_LineTo(x + D4yB[other], y - D4xB[other]);
         break;
     }
 }
 
 void far f_0250_41CA(void)
 {
-    InvalEuMap((fd_50F6_0F12 - fd_50F6_0508.x * g_19BE) / g_19BE - 3,
-                (fd_50F6_0F34 - fd_50F6_0508.y * g_19C0) / g_19C0 - 3,
-                (fd_50F6_0F12 - fd_50F6_0508.x * g_19BE) / g_19BE + 3,
-                (fd_50F6_0F34 - fd_50F6_0508.y * g_19C0) / g_19C0 + 3);
+    InvalEuMap((SpidX - MapPnt.x * g_19BE) / g_19BE - 3,
+                (SpidY - MapPnt.y * g_19C0) / g_19C0 - 3,
+                (SpidX - MapPnt.x * g_19BE) / g_19BE + 3,
+                (SpidY - MapPnt.y * g_19C0) / g_19C0 + 3);
 }
 
 /* OPEN: residue as f_0250_1E80: original keeps MapPnt.x in AX after the compare and adds
@@ -1651,95 +1651,95 @@ int far BalloonIsVisible(int plane, int x, int y)
 {
     if (plane != MapPlane)
         return 0;
-    if (x < fd_50F6_0508.x || x >= fd_50F6_0508.x + fd_50F6_10E0)
+    if (x < MapPnt.x || x >= MapPnt.x + fd_50F6_10E0)
         return 0;
-    if (y - 3 < fd_50F6_0508.y || y >= fd_50F6_0508.y + fd_50F6_10DE)
+    if (y - 3 < MapPnt.y || y >= MapPnt.y + fd_50F6_10DE)
         return 0;
     return 1;
 }
 
-extern int far fd_50F6_0EF6;
-extern Pnt far fd_50F6_08DE;
-extern int far fd_50F6_0AD8;
-extern Pnt far fd_50F6_0852;
-extern int far fd_50F6_0ACA;
+extern int far EggBalloonCnt;
+extern Pnt far CurEggPnt;
+extern int far CurEggPlane;
+extern Pnt far LastEggPnt;
+extern int far LastEggPlane;
 
 void far EggBalloons(int x, int y, int plane)
 {
-    if (fd_50F6_0EF6 != 0)
+    if (EggBalloonCnt != 0)
         return;
     if (!BalloonIsVisible(plane, x, y))
         return;
-    if (fd_50F6_08DE.x == x && fd_50F6_08DE.y == y && fd_50F6_0AD8 == plane) {
-        fd_50F6_0EF6++;
+    if (CurEggPnt.x == x && CurEggPnt.y == y && CurEggPlane == plane) {
+        EggBalloonCnt++;
         return;
     }
-    fd_50F6_0852.x = x;
-    fd_50F6_0852.y = y;
-    fd_50F6_0ACA = plane;
+    LastEggPnt.x = x;
+    LastEggPnt.y = y;
+    LastEggPlane = plane;
 }
 
-extern int far fd_50F6_0F06;
-extern Pnt far fd_50F6_09F2;
-extern int far fd_50F6_0B06;
-extern Pnt far fd_50F6_08EC;
-extern int far fd_50F6_0AEA;
+extern int far FightBalloonCnt;
+extern Pnt far CurFightPnt;
+extern int far CurFightPlane;
+extern Pnt far LastFightPnt;
+extern int far LastFightPlane;
 
 void far FightBalloons(int x, int y, int plane)
 {
-    if (fd_50F6_0F06 != 0)
+    if (FightBalloonCnt != 0)
         return;
     if (!BalloonIsVisible(plane, x, y))
         return;
-    if (fd_50F6_09F2.x == x && fd_50F6_09F2.y == y && fd_50F6_0B06 == plane) {
-        fd_50F6_0F06++;
+    if (CurFightPnt.x == x && CurFightPnt.y == y && CurFightPlane == plane) {
+        FightBalloonCnt++;
         return;
     }
-    fd_50F6_08EC.x = x;
-    fd_50F6_08EC.y = y;
-    fd_50F6_0AEA = plane;
+    LastFightPnt.x = x;
+    LastFightPnt.y = y;
+    LastFightPlane = plane;
 }
 
-extern int far fd_50F6_0F10;
-extern Pnt far fd_50F6_0A8A;
-extern int far fd_50F6_0C3A;
-extern Pnt far fd_50F6_0A02;
-extern int far fd_50F6_0B08;
+extern int far QueenBalloonCnt;
+extern Pnt far CurQueenPnt;
+extern int far CurQueenPlane;
+extern Pnt far LastQueenPnt;
+extern int far LastQueenPlane;
 
 void far QueenBalloons(int x, int y, int plane)
 {
-    if (fd_50F6_0F10 != 0)
+    if (QueenBalloonCnt != 0)
         return;
     if (!BalloonIsVisible(plane, x, y))
         return;
-    if (fd_50F6_0A8A.x == x && fd_50F6_0A8A.y == y && fd_50F6_0C3A == plane) {
-        fd_50F6_0F10++;
+    if (CurQueenPnt.x == x && CurQueenPnt.y == y && CurQueenPlane == plane) {
+        QueenBalloonCnt++;
         return;
     }
-    fd_50F6_0A02.x = x;
-    fd_50F6_0A02.y = y;
-    fd_50F6_0B08 = plane;
+    LastQueenPnt.x = x;
+    LastQueenPnt.y = y;
+    LastQueenPlane = plane;
 }
 
-extern int far fd_50F6_0F2E;
-extern Pnt far fd_50F6_0AB2;
-extern int far fd_50F6_0D9A;
-extern Pnt far fd_50F6_0AA2;
-extern int far fd_50F6_0D68;
+extern int far RestBalloonCnt;
+extern Pnt far CurRestPnt;
+extern int far CurRestPlane;
+extern Pnt far LastRestPnt;
+extern int far LastRestPlane;
 
 void far RestBalloons(int x, int y, int plane)
 {
-    if (fd_50F6_0F2E != 0)
+    if (RestBalloonCnt != 0)
         return;
     if (!BalloonIsVisible(plane, x, y))
         return;
-    if (fd_50F6_0AB2.x == x && fd_50F6_0AB2.y == y && fd_50F6_0D9A == plane) {
-        fd_50F6_0F2E++;
+    if (CurRestPnt.x == x && CurRestPnt.y == y && CurRestPlane == plane) {
+        RestBalloonCnt++;
         return;
     }
-    fd_50F6_0AA2.x = x;
-    fd_50F6_0AA2.y = y;
-    fd_50F6_0D68 = plane;
+    LastRestPnt.x = x;
+    LastRestPnt.y = y;
+    LastRestPlane = plane;
 }
 
 extern int far fd_50F6_1092;
@@ -1774,7 +1774,7 @@ void far AddMsgBalloon(int x, int y, int plane, int style, char far *msg)
 
 extern int far fd_50F6_1046;
 extern int far fd_50F6_0F3C;
-extern char far * far * far fd_50F6_020A;
+extern char far * far * far BFightMsgs;
 extern int far fd_50F6_1064;
 extern int far fd_50F6_0FF8;
 extern char far * far * far fd_50F6_0218;
@@ -1785,17 +1785,17 @@ extern long far fd_50F6_059A;
 extern long far fd_50F6_0620;
 extern int far SRand4(void);
 extern int far fd_50F6_0F7A;
-extern char far * far * far fd_50F6_021C;
+extern char far * far * far EggMsgs;
 extern int far fd_50F6_1062;
 extern int far fd_50F6_0FC0;
-extern char far * far * far fd_50F6_0234;
+extern char far * far * far QueenMsgs;
 extern int far fd_50F6_107C;
 extern int far fd_50F6_103A;
 extern char far * far * far fd_50F6_023A;
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern Handle far MakeBalloon(char far *msg, int flags);
 extern long far fd_50F6_07C4;
-extern Handle far f_171C_1A9E(long size, int flags, char far *name);
+extern Handle far mem_Alloc(long size, int flags, char far *name);
 extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void far *d);
 
 /* OPEN: residue only the operand order of the five TickCount() vs long-timer compares
@@ -1803,22 +1803,22 @@ extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void
  * that fixes all five in a different DrawSpider state; it is count-coupled with DrawSpider. */
 void far DrawCurBalloons(void)
 {
-    if (!fd_3D57_07B2 || fd_3D57_07BE != -1)
+    if (!fd_3D57_07B2 || ELayerMode != -1)
         return;
-    if (fd_50F6_0F06 == 0 && fd_50F6_08EC.x >= 0 && fd_50F6_08EC.y >= 0) {
-        fd_50F6_09F2 = fd_50F6_08EC;
-        fd_50F6_0B06 = fd_50F6_0AEA;
-        fd_50F6_0F06++;
+    if (FightBalloonCnt == 0 && LastFightPnt.x >= 0 && LastFightPnt.y >= 0) {
+        CurFightPnt = LastFightPnt;
+        CurFightPlane = LastFightPlane;
+        FightBalloonCnt++;
         fd_50F6_0732 = 0;
         fd_50F6_050C = 0;
     }
-    if (fd_50F6_0F06 > 0) {
-        if (fd_50F6_047E == 0) {
+    if (FightBalloonCnt > 0) {
+        if (GamePaused == 0) {
             if (fd_50F6_050C < TickCount()) {
                 fd_50F6_050C = TickCount() + SRand32() + 60;
                 if (SRand2() == 0) {
                     fd_50F6_1046 = 1;
-                    if (fd_50F6_020A[++fd_50F6_0F3C] == 0)
+                    if (BFightMsgs[++fd_50F6_0F3C] == 0)
                         fd_50F6_0F3C = 0;
                 } else
                     fd_50F6_1046 = 0;
@@ -1834,59 +1834,59 @@ void far DrawCurBalloons(void)
             }
         }
         if (fd_50F6_1046)
-            AddMsgBalloon(fd_50F6_09F2.x, fd_50F6_09F2.y, fd_50F6_0B06, 0, fd_50F6_020A[fd_50F6_0F3C]);
+            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 0, BFightMsgs[fd_50F6_0F3C]);
         if (fd_50F6_1064)
-            AddMsgBalloon(fd_50F6_09F2.x, fd_50F6_09F2.y, fd_50F6_0B06, 1, fd_50F6_0218[fd_50F6_0FF8]);
+            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 1, fd_50F6_0218[fd_50F6_0FF8]);
     }
-    if (fd_50F6_0EF6 == 0 && fd_50F6_0852.x >= 0 && fd_50F6_0852.y >= 0) {
-        fd_50F6_08DE = fd_50F6_0852;
-        fd_50F6_0AD8 = fd_50F6_0ACA;
-        fd_50F6_0EF6++;
+    if (EggBalloonCnt == 0 && LastEggPnt.x >= 0 && LastEggPnt.y >= 0) {
+        CurEggPnt = LastEggPnt;
+        CurEggPlane = LastEggPlane;
+        EggBalloonCnt++;
         fd_50F6_059A = 0;
         fd_50F6_104A = 0;
     }
-    if (fd_50F6_0EF6 > 0) {
-        if (fd_50F6_047E == 0 && fd_50F6_059A < TickCount()) {
+    if (EggBalloonCnt > 0) {
+        if (GamePaused == 0 && fd_50F6_059A < TickCount()) {
             fd_50F6_059A = TickCount() + SRand32() + 170;
             if (SRand4() == 0) {
                 fd_50F6_104A = 1;
-                if (fd_50F6_021C[++fd_50F6_0F7A] == 0)
+                if (EggMsgs[++fd_50F6_0F7A] == 0)
                     fd_50F6_0F7A = 0;
             } else
                 fd_50F6_104A = 0;
         }
         if (fd_50F6_104A)
-            AddMsgBalloon(fd_50F6_08DE.x, fd_50F6_08DE.y, fd_50F6_0AD8, 2, fd_50F6_021C[fd_50F6_0F7A]);
+            AddMsgBalloon(CurEggPnt.x, CurEggPnt.y, CurEggPlane, 2, EggMsgs[fd_50F6_0F7A]);
     }
-    if (fd_50F6_0F10 == 0 && fd_50F6_0A02.x >= 0 && fd_50F6_0A02.y >= 0) {
-        fd_50F6_0A8A = fd_50F6_0A02;
-        fd_50F6_0C3A = fd_50F6_0B08;
-        fd_50F6_0F10++;
+    if (QueenBalloonCnt == 0 && LastQueenPnt.x >= 0 && LastQueenPnt.y >= 0) {
+        CurQueenPnt = LastQueenPnt;
+        CurQueenPlane = LastQueenPlane;
+        QueenBalloonCnt++;
         fd_50F6_0620 = 0;
         fd_50F6_1062 = 0;
     }
-    if (fd_50F6_0F10 > 0) {
-        if (fd_50F6_047E == 0 && fd_50F6_0620 < TickCount()) {
+    if (QueenBalloonCnt > 0) {
+        if (GamePaused == 0 && fd_50F6_0620 < TickCount()) {
             fd_50F6_0620 = TickCount() + SRand32() + 180;
             if (SRand4() == 0) {
                 fd_50F6_1062 = 1;
-                if (fd_50F6_0234[++fd_50F6_0FC0] == 0)
+                if (QueenMsgs[++fd_50F6_0FC0] == 0)
                     fd_50F6_0FC0 = 0;
             } else
                 fd_50F6_1062 = 0;
         }
         if (fd_50F6_1062)
-            AddMsgBalloon(fd_50F6_0A8A.x, fd_50F6_0A8A.y, fd_50F6_0C3A, 2, fd_50F6_0234[fd_50F6_0FC0]);
+            AddMsgBalloon(CurQueenPnt.x, CurQueenPnt.y, CurQueenPlane, 2, QueenMsgs[fd_50F6_0FC0]);
     }
-    if (fd_50F6_0F2E == 0 && fd_50F6_0AA2.x >= 0 && fd_50F6_0AA2.y >= 0) {
-        fd_50F6_0AB2 = fd_50F6_0AA2;
-        fd_50F6_0D9A = fd_50F6_0D68;
-        fd_50F6_0F2E++;
+    if (RestBalloonCnt == 0 && LastRestPnt.x >= 0 && LastRestPnt.y >= 0) {
+        CurRestPnt = LastRestPnt;
+        CurRestPlane = LastRestPlane;
+        RestBalloonCnt++;
         fd_50F6_07C4 = 0;
         fd_50F6_107C = 0;
     }
-    if (fd_50F6_0F2E > 0) {
-        if (fd_50F6_047E == 0 && fd_50F6_07C4 < TickCount()) {
+    if (RestBalloonCnt > 0) {
+        if (GamePaused == 0 && fd_50F6_07C4 < TickCount()) {
             fd_50F6_07C4 = TickCount() + SRand64() + 120;
             if (SRand2() == 0) {
                 fd_50F6_107C = 1;
@@ -1896,7 +1896,7 @@ void far DrawCurBalloons(void)
                 fd_50F6_107C = 0;
         }
         if (fd_50F6_107C)
-            AddMsgBalloon(fd_50F6_0AB2.x, fd_50F6_0AB2.y, fd_50F6_0D9A, 2, fd_50F6_023A[fd_50F6_103A]);
+            AddMsgBalloon(CurRestPnt.x, CurRestPnt.y, CurRestPlane, 2, fd_50F6_023A[fd_50F6_103A]);
     }
 }
 
@@ -1905,7 +1905,7 @@ void far EditMsgBalloon(int x, int y, int plane, int style, char far *msg)
     char line1[256];
     char line2[256];
 
-    if (BalloonIsVisible(plane, (x >> 4) + fd_50F6_0508.x, (y >> 4) + fd_50F6_0508.y) && msg != 0) {
+    if (BalloonIsVisible(plane, (x >> 4) + MapPnt.x, (y >> 4) + MapPnt.y) && msg != 0) {
         line2[0] = 0;
         line1[0] = 0;
     }
@@ -1946,7 +1946,7 @@ void far DrawBalloons(void)
     int row;
     unsigned n; /* low-word byte count retained for _fmemset */
 
-    f_24AB_02AD(2);
+    font_SetFont(2);
     bpp = 2;
     rowbytes = 0x80;
     switch (fd_50F6_1102) {
@@ -1973,28 +1973,28 @@ void far DrawBalloons(void)
         WinPrintf("Vis message %s at %d,%d", fd_50F6_04A6[i], pos.x, pos.y);
         shown++;
         hs[i] = h = MakeBalloon(fd_50F6_04A6[i], 0);
-        pic = (int far *)f_171C_1B84(h);
+        pic = (int far *)mem_Lock(h);
         by = pos.y - pic[5] - 4;
         bx = pos.x + 4;
         wt = (bx % g_19BE + pic[4] + g_19BE - 1) / g_19BE;
         ht = (by % g_19C0 + pic[5] + g_19C0 - 1) / g_19C0;
-        balTileRect.top = by / g_19C0 - fd_50F6_0508.y;
-        balTileRect.left = bx / g_19BE - fd_50F6_0508.x;
+        balTileRect.top = by / g_19C0 - MapPnt.y;
+        balTileRect.left = bx / g_19BE - MapPnt.x;
         balTileRect.bottom = ht + balTileRect.top;
         balTileRect.right = balTileRect.left + wt;
         wpix = g_19BE * wt;
         n = ht * wt * rowbytes;
         /* Original CWD-sign-extends the 16-bit allocation sum; keep n unsigned for _fmemset. */
-        balBufHandle = f_171C_1A9E((long)(int)(n + 4), 9, "balbuf");
-        balBufPtr = f_171C_1B84(balBufHandle);
+        balBufHandle = mem_Alloc((long)(int)(n + 4), 9, "balbuf");
+        balBufPtr = mem_Lock(balBufHandle);
         bufp = balBufPtr;
         ((int far *)bufp)[0] = g_19BE * wt;
         ((int far *)bufp)[1] = g_19C0 * ht;
         skip = g_19C0 / div * ((int far *)bufp)[0] - wt * bpp;
         dst = bufp + 4;
         _fmemset(dst, 0, n);
-        balloonRect.left = g_19BE * balTileRect.left + fd_50F6_110C.left;
-        balloonRect.top = g_19C0 * balTileRect.top + fd_50F6_110C.top;
+        balloonRect.left = g_19BE * balTileRect.left + editTileRect.left;
+        balloonRect.top = g_19C0 * balTileRect.top + editTileRect.top;
         balloonRect.bottom = balloonRect.top + ((int far *)bufp)[1];
         balloonRect.right = balloonRect.left + ((int far *)bufp)[0];
         f_0250_0643(MapPlane / 2);
@@ -2018,11 +2018,11 @@ void far DrawBalloons(void)
         (*fd_50F6_37EA)((char far *)pic + 8, bufp, bx % g_19BE, by % g_19C0);
         if (fd_50F6_37D2 != 500)
             (*fd_50F6_37EE)(&balloonRect, bufp, &fd_50F6_37D6, &fd_50F6_1F26);
-        f_171C_1BBA(h);
-        f_171C_1C0A(h);
+        mem_Unlock(h);
+        mem_Free(h);
         i = saved;
     }
-    f_24AB_02AD(0);
+    font_SetFont(0);
     fd_50F6_1092 = 0;
 }
 
@@ -2035,7 +2035,7 @@ void far f_0250_5058(void)
     struct Rect rects[3];
 
     win_GetObjRect(0x15, &fd_50F6_1104);
-    rects[0] = fd_50F6_110C;
+    rects[0] = editTileRect;
     rects[1] = fd_50F6_1104;
     rects[2].top = 0x8000;
     f_1E57_08F5(rects);

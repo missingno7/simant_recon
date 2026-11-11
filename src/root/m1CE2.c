@@ -16,12 +16,12 @@ char far * far f_1CE2_000C(void)
 
 extern int near g_3DE2;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
-void far f_1CE2_01F8(int left, int top, int right, int bottom, int width);
+void far GBoxOutline(int left, int top, int right, int bottom, int width);
 
 void far f_1CE2_0013(int left, int top, int right, int bottom, int width)
 {
     g_9134(left, top, right, bottom, g_3DE2);
-    f_1CE2_01F8(left, top, right, bottom, width);
+    GBoxOutline(left, top, right, bottom, width);
 }
 
 extern void far f_1B4E_0110(int x, int y, int c);
@@ -31,7 +31,7 @@ extern char near g_3DDE;
 void far f_1CE2_0043(int x, int y, int c, int width)
 {
     f_1B4E_0110(x, y, c);
-    f_1CE2_01F8(x, y, g_3DDE + x, g_3DDC + y, width);
+    GBoxOutline(x, y, g_3DDE + x, g_3DDC + y, width);
 }
 
 #define CELLY(v) (((v) & 0xff) * g_3DDC + (char)((v) >> 8) * g_3DDC / 14)
@@ -43,7 +43,7 @@ void far f_1CE2_0077(int left, int top, int right, int bottom, int color)
 
 void far f_1CE2_00D5(int left, int top, int right, int bottom, int width)
 {
-    f_1CE2_01F8(left << 3, g_3DDC * top, right << 3, g_3DDC * (bottom + 1), width);
+    GBoxOutline(left << 3, g_3DDC * top, right << 3, g_3DDC * (bottom + 1), width);
 }
 
 extern void (far * near g_9174)(int left, int top, int right, int bottom, int mode);
@@ -53,28 +53,28 @@ void far f_1CE2_0104(struct Rect far *r, int mode)
     g_9174(r->left, r->top, r->right, r->bottom, mode);
 }
 
-extern int near g_3DE0;
+extern int near _foreColor;
 extern void (far * near g_9138)(int left, int top, int right, int bottom, int mode);
 
 void far f_1CE2_0124(struct Rect far *r)
 {
-    g_9138(r->left, r->top, r->right, r->bottom, (char)((g_3DE0 >> 8) + 0x10) << 8 | 0x20);
+    g_9138(r->left, r->top, r->right, r->bottom, (char)((_foreColor >> 8) + 0x10) << 8 | 0x20);
 }
 
 void far f_1CE2_014B(int left, int top, int right, int bottom)
 {
-    g_9138(left, top, right, bottom, (char)((g_3DE0 >> 8) + 0x10) << 8 | 0x20);
+    g_9138(left, top, right, bottom, (char)((_foreColor >> 8) + 0x10) << 8 | 0x20);
 }
 
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
-extern void far f_24AB_038D(int x, int y, char far *text);
+extern void far font_PrintStr(int x, int y, char far *text);
 
 void far f_1CE2_016C(int x, int y, char far *format, ...)
 {
     char buf[200];
 
     vsprintf(buf, format, (char far *)(&format + 1));
-    f_24AB_038D((x & 0xff) << 3, CELLY(y), buf);
+    font_PrintStr((x & 0xff) << 3, CELLY(y), buf);
 }
 
 void far f_1CE2_01C3(int x, int y, char far *format, ...)
@@ -82,16 +82,16 @@ void far f_1CE2_01C3(int x, int y, char far *format, ...)
     char buf[200];
 
     vsprintf(buf, format, (char far *)(&format + 1));
-    f_24AB_038D(x, y, buf);
+    font_PrintStr(x, y, buf);
 }
 
-void far f_1CE2_01F8(int left, int top, int right, int bottom, int width)
+void far GBoxOutline(int left, int top, int right, int bottom, int width)
 {
     if (width) {
-        g_9134(left + width, top + width, right - width, top, g_3DE0);
-        g_9134(left + width, bottom - width, right - width, bottom, g_3DE0);
-        g_9134(left + width, top, left, bottom, g_3DE0);
-        g_9134(right, top, right - width, bottom, g_3DE0);
+        g_9134(left + width, top + width, right - width, top, _foreColor);
+        g_9134(left + width, bottom - width, right - width, bottom, _foreColor);
+        g_9134(left + width, top, left, bottom, _foreColor);
+        g_9134(right, top, right - width, bottom, _foreColor);
     }
 }
 
@@ -137,17 +137,17 @@ void far GRectInvOutline(struct Rect far *r, int width)
     f_1CE2_032B(r->left, r->top, r->right, r->bottom, width);
 }
 
-void far f_1CE2_0430(struct Rect far *r)
+void far GRectInv(struct Rect far *r)
 {
     g_913C(r->left, r->top, r->right, r->bottom);
 }
 
-void far f_1CE2_044D(struct Rect far *r, int width)
+void far GRectOutline(struct Rect far *r, int width)
 {
-    f_1CE2_01F8(r->left, r->top, r->right, r->bottom, width);
+    GBoxOutline(r->left, r->top, r->right, r->bottom, width);
 }
 
-void far f_1CE2_046D(struct Rect far *r, int color)
+void far GRectFill(struct Rect far *r, int color)
 {
     g_9134(r->left, r->top, r->right, r->bottom, color);
 }
@@ -155,12 +155,12 @@ void far f_1CE2_046D(struct Rect far *r, int color)
 void far f_1CE2_048D(struct Rect far *r, int width)
 {
     g_9134(r->left, r->top, r->right, r->bottom, g_3DE2);
-    f_1CE2_01F8(r->left, r->top, r->right, r->bottom, width);
+    GBoxOutline(r->left, r->top, r->right, r->bottom, width);
 }
 
 extern char near g_21A4;
 extern int (far * near g_9140)(int left, int top, int right, int bottom);
-extern char far * far f_171C_2190(int size, char far *name);
+extern char far * far mem_malloc(int size, char far *name);
 extern void (far * near g_9148)(int left, int top, int right, int bottom, char far *buffer);
 
 char far * far GSaveRect(struct Rect far *r)
@@ -174,7 +174,7 @@ char far * far GSaveRect(struct Rect far *r)
     size = g_9140(x, r->top, r->right, r->bottom);
     if (size > 0xffdc)
         return 0;
-    p = f_171C_2190(size, "GSaveRect");
+    p = mem_malloc(size, "GSaveRect");
     if (p)
         g_9148(x, r->top, r->right, r->bottom, p);
     g_21A4 = 0;
@@ -235,11 +235,11 @@ extern void (far * near g_914C)();
 extern void (far * near g_9154)();
 extern int (far * near g_9144)(int, int, int, int);
 extern void far Punt(char far *format, ...);
-extern char far * far * far f_171C_1A9E(long size, int flags, char far *name);
-extern char far * far f_171C_1B84(char far * far *handle);
+extern char far * far * far mem_Alloc(long size, int flags, char far *name);
+extern char far * far mem_Lock(char far * far *handle);
 extern void (far * far fd_50F6_37EA)();
-extern void far f_171C_1BBA(char far * far *handle);
-extern void far f_171C_1C0A(char far * far *handle);
+extern void far mem_Unlock(char far * far *handle);
+extern void far mem_Free(char far * far *handle);
 
 void far GPutPacked(int x, int y, char far *pic)
 {
@@ -275,16 +275,16 @@ void far GPutPacked(int x, int y, char far *pic)
             len = len / (unsigned char)hdr.depth * ((unsigned char)hdr.depth + 1);
         right = (hdr.width + x + 15) & ~7;
         saveLen = size(x, 0, right, 1) - 4;
-        h = f_171C_1A9E(((long)len << 3) + 4, 1, "PutPackedBuf");
-        save = (int far *)f_171C_2190((saveLen << 3) + 4, "GPutPacked");
-        buf = (int far *)f_171C_1B84(h);
+        h = mem_Alloc(((long)len << 3) + 4, 1, "PutPackedBuf");
+        save = (int far *)mem_malloc((saveLen << 3) + 4, "GPutPacked");
+        buf = (int far *)mem_Lock(h);
         buf[0] = hdr.width;
         buf[1] = 8;
         save[0] = hdr.width;
         save[1] = 8;
     } else {
-        h = f_171C_1A9E(((long)len << 3) + 4, 1, "PutPackedBuf");
-        buf = (int far *)f_171C_1B84(h);
+        h = mem_Alloc(((long)len << 3) + 4, 1, "PutPackedBuf");
+        buf = (int far *)mem_Lock(h);
     }
     for (; row < hdr.height; y += 8, row += 8) {
         if (!f_1B05_0046((char far *)(buf + 2), len << 3))
@@ -310,8 +310,8 @@ void far GPutPacked(int x, int y, char far *pic)
             free((char far *)save);
         }
     }
-    f_171C_1BBA(h);
-    f_171C_1C0A(h);
+    mem_Unlock(h);
+    mem_Free(h);
 }
 
 extern void (far * near g_9128)(int fore, int back, int pattern);
@@ -323,12 +323,12 @@ void far f_1CE2_0951(struct Rect far *r, int fore, int back)
             g_9128(fore, back, 0x20);
             f_1CE2_0124(r);
         } else
-            f_1CE2_046D(r, fore);
+            GRectFill(r, fore);
     } else if (back != fore) {
         g_9128(fore, back, 0x20);
         f_1CE2_0124(r);
     } else
-        f_1CE2_046D(r, fore);
+        GRectFill(r, fore);
 }
 
 void far f_1CE2_099C(int left, int top, int right, int bottom, int fore, int back)
@@ -341,7 +341,7 @@ void far f_1CE2_099C(int left, int top, int right, int bottom, int fore, int bac
     g_9134(left, top, right, bottom, fore);
 }
 
-void far f_1CE2_09E2(struct Rect far *r, int width, char sides, int fore, int back)
+void far GRectPartialMixedOutline(struct Rect far *r, int width, char sides, int fore, int back)
 {
     if (width == 0)
         return;

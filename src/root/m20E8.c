@@ -78,14 +78,14 @@ extern void far win_LockInit(void);
 extern void (far * far win_drawHooks[])(int phase);
 extern char near g_5A97;
 extern char far * far * far db_LoadObject(int object, int kind);
-extern char far * far f_171C_1B84(char far * far *handle);
-extern void far f_171C_1BBA(char far * far *handle);
+extern char far * far mem_Lock(char far * far *handle);
+extern void far mem_Unlock(char far * far *handle);
 extern void far db_PurgeObject(int object, int kind);
 struct Pt {
     int x;
     int y;
 };
-extern void far f_208F_0419(struct Pt far *size, int id);
+extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern struct Pt far fd_50F6_47DA;
 extern int far win_numOfWindows;
 extern int far win_numOfColors;
@@ -107,11 +107,11 @@ int far win_LoadAllWindows(void)
     for (i = 0; i < 45; i++) win_offsets[i] = g_635C;
     h = db_LoadObject(g_5A97, 9);
     if (h) {
-        _fmemcpy(win_offsets, f_171C_1B84(h), 0x140);
-        f_171C_1BBA(h);
+        _fmemcpy(win_offsets, mem_Lock(h), 0x140);
+        mem_Unlock(h);
         db_PurgeObject(g_5A97, 9);
     }
-    f_208F_0419(&fd_50F6_47DA, 0x6f);
+    gr_BitMapSize(&fd_50F6_47DA, 0x6f);
     h = db_LoadObject(0x80, 0);
     if (h == 0) {
         Punt("Cannot load resource\nplease try another");
@@ -290,7 +290,7 @@ void _fastcall win_Close(int win)
 
 extern char far * _fastcall win_WinAddr(int win);
 
-void _fastcall f_20E8_0725(int win)
+void _fastcall win_ToTop(int win)
 {
     int top;
     int flag;

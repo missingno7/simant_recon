@@ -9,49 +9,49 @@ extern unsigned char far MapB[64][64];
 extern unsigned char far MapR[64][64];
 extern int far MeLocX;
 extern int far MeLocY;
-extern int far fd_50F6_0496;
-extern int far fd_50F6_04C2;
+extern int far MeDir;
+extern int far MeType;
 extern int far MePlane;
-extern int far fd_50F6_105E;
-extern int far fd_50F6_047E;
-extern int far fd_50F6_048E;
-extern int far fd_50F6_1074;
-extern int far fd_50F6_0F34;
-extern int far fd_50F6_0F12;
-extern int far fd_3D57_0C22;
-extern signed char far fd_3D57_0094[];
-extern int far fd_50F6_04E2;
+extern int far CurGameTool;
+extern int far GamePaused;
+extern int far SaveGamePaused;
+extern int far LessonTemp;
+extern int far SpidY;
+extern int far SpidX;
+extern int far MeEggCarried;
+extern signed char far UnCarryCaste[];
+extern int far MeColor;
 extern int far Starg;
 extern int far SuserX;
 extern int far SuserY;
-extern int far fd_50F6_0A06;
+extern int far MeMode;
 extern int far SMode;
-extern int far fd_50F6_06AC;
+extern int far MeSMode;
 extern int far fd_3D57_0798;
-extern int far fd_50F6_049A;
-extern int far fd_50F6_0502;
-extern signed char far fd_3D57_006C[];
+extern int far MeBase;
+extern int far MeEgg;
+extern signed char far absSearchDirs[];
 extern int far FoodB;
 extern int far FoodR;
 extern unsigned char far HoleMapB[];
 extern unsigned char far HoleMapR[];
 extern int far TERRAINset;
-extern int far fd_3D57_0C16;
-extern int far fd_50F6_0FBA;
+extern int far NeverHungry;
+extern int far MeWarnHealth;
 extern int far MeHealth;
-extern int far fd_50F6_1006;
-extern int far fd_50F6_1044;
-extern long far fd_50F6_0472;
-extern void far * far * far fd_50F6_034C;
+extern int far MeHealthCntDwn;
+extern int far MeWantFood;
+extern long far EditMsgDelay;
+extern void far * far * far WindPromptStrs;
 extern int far BpopT;
 extern int far HealthB;
-extern int far fd_3D57_0C26;
-extern int far fd_50F6_1044;
-extern int far fd_50F6_04C4;
-extern int far fd_3D57_02AC[];
-extern int far fd_50F6_0B1E;
-extern int far fd_50F6_0C38;
-extern int far fd_3D57_0C24;
+extern int far MeFoodInType;
+extern int far MeWantFood;
+extern int far MeScent;
+extern int far LastNewHoleB[];
+extern int far MeDis;
+extern int far MePrevDis;
+extern int far MeNestStarted;
 extern int far ListIndexA;
 extern unsigned char far AlistX[];
 extern unsigned char far AlistY[];
@@ -89,7 +89,7 @@ void far o22_39C7_07FD(int, int, int);
 int far IsItYellow(int, int, int);
 void far SetMyHealth(int);
 int far DigMyNewHole(int, int);
-void far o25_3BA4_1035(void);
+void far EnterNest(void);
 void far f_015B_06A2(void);
 int far IsItHole(int, int);
 void far PickupFoodA(int, int);
@@ -498,8 +498,8 @@ void far SetMyLife(int plane, int x, int y, int type, int dir, int life)
         if (life != 0) {
             MeLocX = x;
             MeLocY = y;
-            fd_50F6_0496 = dir;
-            fd_50F6_04C2 = type;
+            MeDir = dir;
+            MeType = type;
             MePlane = plane;
         }
     }
@@ -507,7 +507,7 @@ void far SetMyLife(int plane, int x, int y, int type, int dir, int life)
 
 void far MoveMyLife(int plane, int x, int y, int type, int dir)
 {
-    ClearMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496);
+    ClearMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir);
     SetMyLife(plane == 0 ? 1 : plane, x, y, type, dir, 0xff);
 }
 
@@ -523,44 +523,44 @@ void far DoEditAndMapUpdateDraw(void)
 
 void far TargetAnt(void)
 {
-    if (fd_50F6_105E == 0xb) {
+    if (CurGameTool == 0xb) {
         EndTargetMode();
         return;
     }
-    fd_50F6_048E = fd_50F6_047E;
-    fd_50F6_105E = 0xb;
+    SaveGamePaused = GamePaused;
+    CurGameTool = 0xb;
     PauseGame(1);
 }
 
 void far EndTargetMode(void)
 {
-    fd_50F6_105E = -1;
-    PauseGame(fd_50F6_048E);
+    CurGameTool = -1;
+    PauseGame(SaveGamePaused);
 }
 
 void far StartLifeTransfer(void)
 {
-    if (fd_50F6_105E == 0xa) {
+    if (CurGameTool == 0xa) {
         EndLifeTransferMode();
         return;
     }
-    fd_50F6_048E = fd_50F6_047E;
-    fd_50F6_105E = 0xa;
+    SaveGamePaused = GamePaused;
+    CurGameTool = 0xa;
     PauseGame(1);
 }
 
 void far EndLifeTransferMode(void)
 {
-    fd_50F6_105E = -1;
-    PauseGame(fd_50F6_048E);
+    CurGameTool = -1;
+    PauseGame(SaveGamePaused);
 }
 
 void far ExchangeLives(int a, int b, int c)
 {
-    fd_50F6_1074 = 1;
+    LessonTemp = 1;
     if (DoLifeExchange(a, b, c) == 1) {
         EndLifeTransferMode();
-        if (fd_50F6_04C2 == 0x60) {
+        if (MeType == 0x60) {
             myBeginSound(0xf, 0, 0x7e);
             DoEditUpdateDraw();
             while (!mySoundIsDone())
@@ -594,36 +594,36 @@ int far DoLifeExchange(int plane, int x, int y)
     if (life <= 0) {
         if (plane != 1)
             goto fail;
-        if (GetDis(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) >= 0x200)
+        if (GetDis(x * 16 + 8, y * 16 + 8, SpidX, SpidY) >= 0x200)
             goto fail;
-        newLife = (fd_50F6_04C2 & 0x78) >> 3;
+        newLife = (MeType & 0x78) >> 3;
         egg = 0;
-        if (fd_50F6_04C2 & 8) {
+        if (MeType & 8) {
             if (newLife == 5 || newLife == 9)
-                newLife = fd_3D57_0094[newLife];
+                newLife = UnCarryCaste[newLife];
             else if (newLife == 1)
-                egg = fd_3D57_0C22;
+                egg = MeEggCarried;
         }
-        life = (fd_50F6_04E2 & 0x80) | fd_50F6_0496 | (newLife << 3);
-        if (fd_50F6_04C2 == 0x60)
+        life = (MeColor & 0x80) | MeDir | (newLife << 3);
+        if (MeType == 0x60)
             t = 9;
         else
             t = 0;
         if (!AddAntToList(MePlane, MeLocX, MeLocY, life, t, egg))
             goto fail;
-        if (fd_50F6_04C2 == 0x60) {
-            if (!AddAntToList(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
-                             MeLocY + Dy8[fd_50F6_0496 ^ 4], life + 8, t, 0))
+        if (MeType == 0x60) {
+            if (!AddAntToList(MePlane, MeLocX + Dx8[MeDir ^ 4],
+                             MeLocY + Dy8[MeDir ^ 4], life + 8, t, 0))
                 goto fail;
         }
-        SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0);
+        SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0);
         Starg = -2;
-        SuserX = fd_50F6_0F12 >> 4;
-        SuserY = fd_50F6_0F34 >> 4;
-        fd_50F6_0A06 = 1;
+        SuserX = SpidX >> 4;
+        SuserY = SpidY >> 4;
+        MeMode = 1;
         SMode = 0;
-        fd_50F6_06AC = 0;
-        fd_50F6_04E2 = 0;
+        MeSMode = 0;
+        MeColor = 0;
         o22_39C7_07FD(plane, SuserX, SuserY);
         SetMyHealth(100);
         goto done;
@@ -649,18 +649,18 @@ int far DoLifeExchange(int plane, int x, int y)
         index2 = FindAntIndex(plane, x2, y2, newLife);
     if (index < 0)
         goto fail;
-    if (fd_50F6_0A06 == 0) {
+    if (MeMode == 0) {
         int c;
 
-        u = (fd_50F6_04C2 & 0x78) >> 3;
+        u = (MeType & 0x78) >> 3;
         egg = 0;
-        if (fd_50F6_04C2 & 8) {
+        if (MeType & 8) {
             if (u == 5 || u == 9)
-                u = fd_3D57_0094[u];
+                u = UnCarryCaste[u];
             else if (u == 1)
-                egg = fd_3D57_0C22;
+                egg = MeEggCarried;
         }
-        newLife = (u << 3) | fd_50F6_0496 | (life & 0x80);
+        newLife = (u << 3) | MeDir | (life & 0x80);
         if (life & 0x80) {
             if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3))
                 goto fail;
@@ -671,16 +671,16 @@ int far DoLifeExchange(int plane, int x, int y)
                 goto fail;
         }
         if (c == 5 || c == 9)
-            life = (fd_3D57_0094[(life & 0x78) >> 3] << 3) | (life & 7);
+            life = (UnCarryCaste[(life & 0x78) >> 3] << 3) | (life & 7);
         else if (c == 1) {
             GetAntIndex(plane, index, &lifeField, &column, &attribute, &state, &direction);
-            fd_3D57_0C22 = direction;
+            MeEggCarried = direction;
         }
-        t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
+        t = (MeType == 0x60) ? 9 : 0;
         ZapEuMapAt(MePlane, MeLocX, MeLocY);
         if (t)
-            ZapEuMapAt(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
-                        MeLocY + Dy8[fd_50F6_0496 ^ 4]);
+            ZapEuMapAt(MePlane, MeLocX + Dx8[MeDir ^ 4],
+                        MeLocY + Dy8[MeDir ^ 4]);
         ZapEuMapAt(plane, x, y);
         if (caste == 0xc)
             ZapEuMapAt(plane, x2, y2);
@@ -689,9 +689,9 @@ int far DoLifeExchange(int plane, int x, int y)
             SetAntIndex(plane, index2, 0, 0, 0, 0, 0);
         if (!AddAntToList(MePlane, MeLocX, MeLocY, newLife, t, egg))
             goto fail;
-        if (fd_50F6_04C2 == 0x60) {
-            if (!AddAntToList(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
-                             MeLocY + Dy8[fd_50F6_0496 ^ 4], newLife + 8, t, 0))
+        if (MeType == 0x60) {
+            if (!AddAntToList(MePlane, MeLocX + Dx8[MeDir ^ 4],
+                             MeLocY + Dy8[MeDir ^ 4], newLife + 8, t, 0))
                 goto fail;
         }
     } else {
@@ -707,23 +707,23 @@ int far DoLifeExchange(int plane, int x, int y)
                 goto fail;
         }
         if (c == 5 || c == 9)
-            life = (fd_3D57_0094[(life & 0x78) >> 3] << 3) | (life & 7);
+            life = (UnCarryCaste[(life & 0x78) >> 3] << 3) | (life & 7);
         else if (c == 1) {
             GetAntIndex(plane, index, &lifeField, &column, &attribute, &state, &direction);
-            fd_3D57_0C22 = direction;
+            MeEggCarried = direction;
         }
         SetAntIndex(plane, index, 0, 0, 0, 0, 0);
         if (caste == 0xc)
             SetAntIndex(plane, index2, 0, 0, 0, 0, 0);
     }
-    fd_50F6_04E2 = life & 0x80;
-    fd_50F6_049A = 0;
-    fd_50F6_0A06 = 0;
-    fd_50F6_06AC = 0;
+    MeColor = life & 0x80;
+    MeBase = 0;
+    MeMode = 0;
+    MeSMode = 0;
     SetMyHealth(100);
     SetMyLife(plane, x, y, life & 0x78, life & 7, 0xff);
-    if (fd_50F6_04C2 < 8)
-        fd_50F6_0502 = fd_50F6_0496;
+    if (MeType < 8)
+        MeEgg = MeDir;
 done:
     return 1;
 fail:
@@ -740,18 +740,18 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
     int ny;
     int d;
 
-    if (fd_50F6_04C2 != 0x18 && fd_50F6_04C2 != 0x38)
+    if (MeType != 0x18 && MeType != 0x38)
         return 0;
     done = 0;
     dir = GetDir(x, y, tx, ty);
     if (dir > 0)
         dir--;
     else
-        dir = fd_50F6_0496;
+        dir = MeDir;
     for (i = 0; !done; i++) {
         if (i >= 8)
             break;
-        d = (fd_3D57_006C[i] + dir) & 7;
+        d = (absSearchDirs[i] + dir) & 7;
         nx = x + Dx8[d];
         ny = y + Dy8[d];
         if (IsValidLocation(plane, nx, ny)) {
@@ -783,7 +783,7 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
         }
     }
     if (done) {
-        fd_50F6_0496 = d;
+        MeDir = d;
         if (plane <= 1)
             DropFoodA(nx, ny);
         else {
@@ -794,7 +794,7 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
                 FoodR++;
         }
         if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8)))
-            fd_50F6_04C2 &= 0xf7;
+            MeType &= 0xf7;
         myBeginSound(0x1d, 0, 0x7e);
     }
     return done;
@@ -830,18 +830,18 @@ int far DropMyRock(int plane, int x, int y, int tx, int ty)
     int nx;
     int d;
 
-    if (fd_50F6_04C2 != 0x28 && fd_50F6_04C2 != 0x48)
+    if (MeType != 0x28 && MeType != 0x48)
         return 0;
     done = 0;
     dir = GetDir(x, y, tx, ty);
     if (dir > 0)
         dir--;
     else
-        dir = fd_50F6_0496;
+        dir = MeDir;
     for (i = 0; !done; i++) {
         if (i >= 8)
             break;
-        d = (fd_3D57_006C[i] + dir) & 7;
+        d = (absSearchDirs[i] + dir) & 7;
         nx = x + Dx8[d];
         ny = y + Dy8[d];
         if (IsValidLocation(plane, nx, ny)) {
@@ -873,11 +873,11 @@ int far DropMyRock(int plane, int x, int y, int tx, int ty)
         }
     }
     if (done) {
-        fd_50F6_0496 = d;
+        MeDir = d;
         DropPebble(plane, nx, ny);
         if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8))) {
-            if (fd_50F6_04C2 == 0x28 || fd_50F6_04C2 == 0x48)
-                fd_50F6_04C2 -= 0x18;
+            if (MeType == 0x28 || MeType == 0x48)
+                MeType -= 0x18;
         }
         myBeginSound(0x1e, 0, 0x7e);
     }
@@ -893,18 +893,18 @@ int far DropMyEgg(int plane, int x, int y, int tx, int ty)
     int nx;
     int d;
 
-    if (fd_50F6_04C2 != 8)
+    if (MeType != 8)
         return 0;
     done = 0;
     dir = GetDir(x, y, tx, ty);
     if (dir > 0)
         dir--;
     else
-        dir = fd_50F6_0496;
+        dir = MeDir;
     for (i = 0; !done; i++) {
         if (i >= 8)
             break;
-        d = (fd_3D57_006C[i] + dir) & 7;
+        d = (absSearchDirs[i] + dir) & 7;
         nx = x + Dx8[d];
         ny = y + Dy8[d];
         if (IsValidLocation(plane, nx, ny)) {
@@ -924,14 +924,14 @@ int far DropMyEgg(int plane, int x, int y, int tx, int ty)
         }
     }
     if (done)
-        done = AddAntToList(plane, nx, ny, fd_3D57_0C22, 8, 0);
+        done = AddAntToList(plane, nx, ny, MeEggCarried, 8, 0);
     if (done) {
-        fd_50F6_0496 = d;
+        MeDir = d;
         if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8))) {
-            fd_50F6_04C2 = 0x10;
-            fd_3D57_0C22 = 0xfd;
+            MeType = 0x10;
+            MeEggCarried = 0xfd;
         }
-        SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+        SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
         myBeginSound(0x1c, 0, 0x7e);
     }
     return done;
@@ -942,7 +942,7 @@ int far PickupMyRock(int plane, int x, int y)
     int tile;
     int done;
 
-    if (fd_50F6_04C2 != 0x10 && fd_50F6_04C2 != 0x30)
+    if (MeType != 0x10 && MeType != 0x30)
         return 0;
     done = 0;
     tile = GetMap(plane, x, y);
@@ -984,10 +984,10 @@ int far PickupMyRock(int plane, int x, int y)
         done = 1;
     }
     if (done) {
-        if (fd_50F6_04C2 == 0x10)
-            fd_50F6_04C2 = 0x28;
+        if (MeType == 0x10)
+            MeType = 0x28;
         else
-            fd_50F6_04C2 = 0x48;
+            MeType = 0x48;
         myBeginSound(0x1e, 0, 0x7e);
     }
     return done;
@@ -1043,20 +1043,20 @@ int far FindLifeAt(int far *index, int plane, int x, int y)
 
 void far SetMyHealth(int health)
 {
-    if (!fd_3D57_0C16)
+    if (!NeverHungry)
         MeHealth = health;
     else
         MeHealth = 100;
     if (MeHealth > 0)
-        fd_50F6_1006 = 0;
+        MeHealthCntDwn = 0;
     if (MeHealth > 100)
         MeHealth = 100;
     else if (MeHealth < 0)
         MeHealth = 0;
-    if (MeHealth > fd_50F6_0FBA && MeHealth >= 10)
-        fd_50F6_1044 = 0;
+    if (MeHealth > MeWarnHealth && MeHealth >= 10)
+        MeWantFood = 0;
     else
-        fd_50F6_1044 = 1;
+        MeWantFood = 1;
 }
 
 void far EatMyFood(int kind)
@@ -1068,19 +1068,19 @@ void far EatMyFood(int kind)
         break;
     case 1:
         o22_39C7_188D(0x2396, -1);
-        fd_50F6_0472 = 0L;
-        EditMessage(fd_50F6_034C[11], 120L, 0);
+        EditMsgDelay = 0L;
+        EditMessage(WindPromptStrs[11], 120L, 0);
         break;
     case 2:
-        EditMessage(fd_50F6_034C[12], 120L, 0);
+        EditMessage(WindPromptStrs[12], 120L, 0);
         break;
     case 3:
         myBeginSound(0x2c, 0, 0x7e);
         while (!mySoundIsDone())
             myDelay(5L);
         myBeginSound(10, 0, 0x7e);
-        fd_50F6_0472 = 0L;
-        EditMessage(fd_50F6_034C[13], 180L, 0);
+        EditMsgDelay = 0L;
+        EditMessage(WindPromptStrs[13], 180L, 0);
         break;
     }
     if (kind != 2) {
@@ -1099,8 +1099,8 @@ int far PickupMyEgg(int plane, int x, int y)
     int egg;
     int index;
 
-    if (fd_50F6_04C2 == 0x10 || MeHealth < 10) {
-        fd_3D57_0C22 = 0xfd;
+    if (MeType == 0x10 || MeHealth < 10) {
+        MeEggCarried = 0xfd;
         egg = FindEggAt(&index, plane, x, y);
         if (egg >= 0) {
             SetAntIndex(plane, index, 0, 0, 0, 0, 0);
@@ -1108,10 +1108,10 @@ int far PickupMyEgg(int plane, int x, int y)
                 SetLife(plane, x, y, 0);
             if (MeHealth >= 10) {
                 myBeginSound(0x1c, 0, 0x7e);
-                fd_3D57_0C22 = egg;
-                fd_50F6_04C2 = 8;
+                MeEggCarried = egg;
+                MeType = 8;
             } else
-                fd_3D57_0C26 = 3;
+                MeFoodInType = 3;
             return 1;
         }
     }
@@ -1125,19 +1125,19 @@ int far PickupMyFood(int plane, int x, int y)
 
     if (!IsItFoodAt(plane, x, y))
         return 0;
-    if (fd_50F6_1044)
+    if (MeWantFood)
         eat = 1;
-    else if (fd_50F6_04C2 == 0x10 || fd_50F6_04C2 == 0x30)
+    else if (MeType == 0x10 || MeType == 0x30)
         eat = 0;
     else
         return 0;
     if (plane <= 1) {
         PickupFoodA(x, y);
         if (!eat) {
-            fd_50F6_04C4 = 200;
-            fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);
-            fd_50F6_0C38 = fd_50F6_0B1E + 1;
-            f_1496_043C(x, y, fd_50F6_04C4);
+            MeScent = 200;
+            MeDis = GetDis(x, y, LastNewHoleB[0], LastNewHoleB[1]);
+            MePrevDis = MeDis + 1;
+            f_1496_043C(x, y, MeScent);
         }
     } else {
         tile = GetMap(plane, x, y);
@@ -1153,17 +1153,17 @@ int far PickupMyFood(int plane, int x, int y)
             FoodR--;
     }
     if (eat)
-        fd_3D57_0C26 = 0;
+        MeFoodInType = 0;
     else {
         myBeginSound(0x1d, 0, 0x7e);
-        fd_50F6_04C2 += 8;
+        MeType += 8;
     }
     return 1;
 }
 
 int far DropMyObject(int first, int second, int third, int fourth, int fifth)
 {
-    switch (fd_50F6_04C2) {
+    switch (MeType) {
     case 8:
         return DropMyEgg(first, second, third, fourth, fifth);
     case 0x18:
@@ -1180,7 +1180,7 @@ int far PickupMyObject(int plane, int x, int y)
 {
     int result;
 
-    if (fd_50F6_04C2 & 8)
+    if (MeType & 8)
         return 0;
     result = PickupMyEgg(plane, x, y);
     if (result == 0) {
@@ -1292,10 +1292,10 @@ int far IsItYellow(int plane, int x, int y)
 
     if (!IsSamePlane(plane))
         return 0;
-    if (fd_50F6_0A06 == 1) {
+    if (MeMode == 1) {
         if (plane > 1)
             return 0;
-        if (GetDis(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) < 0x200)
+        if (GetDis(x * 16 + 8, y * 16 + 8, SpidX, SpidY) < 0x200)
             return 1;
         return 0;
     }
@@ -1344,13 +1344,13 @@ int far TryMyDropOrLift(int plane, int x, int y)
     int dir;
     int result;
 
-    if (fd_50F6_04C2 & 8)
+    if (MeType & 8)
         result = DropMyObject(plane, MeLocX, MeLocY, x, y) ? 1 : -1;
     else if (!PickupMyObject(plane, x, y)) {
-        if ((fd_3D57_0798 || (fd_50F6_04C2 == 0x40 && !fd_3D57_0C24)) &&
+        if ((fd_3D57_0798 || (MeType == 0x40 && !MeNestStarted)) &&
             MePlane == 1 && MeLocX == x && MeLocY == y) {
             if (DigMyNewHole(x, y)) {
-                o25_3BA4_1035();
+                EnterNest();
                 f_015B_06A2();
                 result = 1;
             } else
@@ -1360,11 +1360,11 @@ int far TryMyDropOrLift(int plane, int x, int y)
     } else {
         dir = GetDir(MeLocX, MeLocY, x, y);
         if (dir > 0)
-            MoveMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, dir - 1);
+            MoveMyLife(MePlane, MeLocX, MeLocY, MeType, dir - 1);
         DoEditUpdateDraw();
-        if (fd_3D57_0C26 >= 0) {
-            EatMyFood(fd_3D57_0C26);
-            fd_3D57_0C26 = -1;
+        if (MeFoodInType >= 0) {
+            EatMyFood(MeFoodInType);
+            MeFoodInType = -1;
         }
         result = 1;
     }

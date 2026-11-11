@@ -62,7 +62,7 @@ struct MenuData far *g_6054 = 0;
 
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
 void far f_1FD2_02B1(int mode);
-extern void far f_1FBD_0000(int x, int y, char far *text);
+extern void far GPutStr(int x, int y, char far *text);
 
 void far f_1FD2_0008(int x, int y, int color, char far *format, ...)
 {
@@ -75,7 +75,7 @@ void far f_1FD2_0008(int x, int y, int color, char far *format, ...)
     } else {
         f_1FD2_02B1(color);
     }
-    f_1FBD_0000(x, y, buf);
+    GPutStr(x, y, buf);
 }
 
 void far f_1FD2_0198(int id);
@@ -113,7 +113,7 @@ void far f_1FD2_00D6(int id)
 
 extern char far * far _fstrcpy(char far *dest, char far *src);
 
-void far f_1FD2_0135(int id, char far *text)
+void far SetMenuOptionText(int id, char far *text)
 {
     char far *p;
 
@@ -272,13 +272,13 @@ int far f_1FD2_04B3(int id, struct Rect far *out)
 extern int near g_9122;
 extern int near g_9124;
 
-void far f_1FD2_04D0(Point far *pt)
+void far GetMousePos(Point far *pt)
 {
     pt->x = g_9122;
     pt->y = g_9124;
 }
 
-int far f_1FD2_04E5(Point far *pt, struct Rect far *r)
+int far PointInRect(Point far *pt, struct Rect far *r)
 {
     if (r->right > pt->x && r->left <= pt->x && r->top <= pt->y && pt->y < r->bottom)
         return 1;
@@ -369,7 +369,7 @@ extern struct Rect far fd_50F6_393C;
 extern char near g_3DDC;
 extern int near g_3DE4;
 extern int near g_3DE2;
-extern void far f_1CE2_046D(struct Rect far *rect, int color);
+extern void far GRectFill(struct Rect far *rect, int color);
 extern unsigned far _fstrlen(char far *s);
 extern int far fd_50F6_46BC[];
 extern char near g_3DDE;
@@ -389,7 +389,7 @@ int far f_1FD2_0663(int draw)
     fd_50F6_393C.bottom = g_3DDC + fd_50F6_393C.top + 3;
     f_1FD2_02B1(1);
     if (draw)
-        f_1CE2_046D(&fd_50F6_393C, g_3DE2 | g_3DE4);
+        GRectFill(&fd_50F6_393C, g_3DE2 | g_3DE4);
     i = 0;
     total = 0;
     for (t = g_6054->titles; *t; t++) {
@@ -463,7 +463,7 @@ int far f_1FD2_084F(struct Event far *ev)
     return 1;
 }
 
-extern int far f_208F_0419(Point far *size, int object);
+extern int far gr_BitMapSize(Point far *size, int object);
 
 void far f_1FD2_0883(int x, int y, int object, int ticks, int show)
 {
@@ -471,7 +471,7 @@ void far f_1FD2_0883(int x, int y, int object, int ticks, int show)
     struct Rect r;
 
     if (show) {
-        f_208F_0419(&size, object);
+        gr_BitMapSize(&size, object);
         r.left = x;
         r.right = x + size.x;
         r.top = y;

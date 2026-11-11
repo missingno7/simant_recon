@@ -168,13 +168,13 @@ class Records1383(unittest.TestCase):
 
 
 class RecordsS06(unittest.TestCase):
-    """S06 o06_35F5_14CC / 1803 are byte-exact in-place drafts whose within-group relocation
+    """S06 SimCat / 1803 are byte-exact in-place drafts whose within-group relocation
     order fails; the cause is a /Zi line-number flush inside a FORBID interval (on 2026-09-30:
     14CC (1629,17AF] broken at 1665, 1803 (18F1,19CC] broken at 1998)."""
 
     def test_flush_violations(self):
         ctx = modctx.resolve(module="S06:35F5")
-        names = ("o06_35F5_14CC", "o06_35F5_1803")
+        names = ("SimCat", "SimDog")
         if {c["name"] for c in ctx.claims} & set(names):
             self.skipTest("S06 14CC/1803 are claimed now")
         an = records.Analysis(ctx)

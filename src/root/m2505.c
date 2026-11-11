@@ -30,7 +30,7 @@ struct Win {
 };
 
 extern struct Pt _fastcall win_StringSize(char far *text);
-extern void far f_208F_0419(struct Pt far *size, int id);
+extern void far gr_BitMapSize(struct Pt far *size, int id);
 
 extern int g_6300;
 extern int g_5702;
@@ -130,7 +130,7 @@ struct Pt _fastcall win_AutoSize(char far *obj)
         break;
     case 6:
     case 13:
-        f_208F_0419(&size, *(int far *)(obj + 0x28));
+        gr_BitMapSize(&size, *(int far *)(obj + 0x28));
         break;
     case 9:
         size = win_StringSize(obj + 0x28);
@@ -200,10 +200,10 @@ void _fastcall f_2505_0382(struct Pt far *center, struct Rect far *rect)
 }
 
 extern void far f_1F58_0090(void);
-int _fastcall f_2505_0453(int, int);
-int _fastcall f_2505_04D7(int win, int idx);
+int _fastcall win_GetVal(int, int);
+int _fastcall win_GetArg(int win, int idx);
 
-int _fastcall f_2505_03B9(int axis, int win, char far *obj)
+int _fastcall _win_CalcObjElement(int axis, int win, char far *obj)
 {
     int v;
     int kind;
@@ -227,10 +227,10 @@ int _fastcall f_2505_03B9(int axis, int win, char far *obj)
     case 4:
         kind = 3;
     get:
-        v = f_2505_0453(((int far *)(obj + 0x10))[axis], kind);
+        v = win_GetVal(((int far *)(obj + 0x10))[axis], kind);
         break;
     case 5:
-        v = f_2505_04D7(win, ((int far *)(obj + 0x10))[axis]);
+        v = win_GetArg(win, ((int far *)(obj + 0x10))[axis]);
         break;
     }
     if (v != (int)0x8000)
@@ -240,7 +240,7 @@ int _fastcall f_2505_03B9(int axis, int win, char far *obj)
 
 extern int far win_numOfWindows;
 
-int _fastcall f_2505_0453(int obj, int kind)
+int _fastcall win_GetVal(int obj, int kind)
 {
     int win;
     int idx;
@@ -261,10 +261,10 @@ int _fastcall f_2505_0453(int obj, int kind)
     return 0x8000;
 }
 
-int _fastcall f_2505_04D7(int win, int idx)
+int _fastcall win_GetArg(int win, int idx)
 {
     /* Byte-equivalent unknown: two named temporaries here and the unnamed forward
-     * prototype of f_2505_0453 give every function of the file its original code;
+     * prototype of win_GetVal give every function of the file its original code;
      * which identifiers the original declared is not recovered. */
     int windowIndex;
     int result;
@@ -295,8 +295,8 @@ void _fastcall f_2505_0511(struct Rect far *r)
 void _fastcall win_Recalc(int win);
 void _fastcall f_2505_06B9(int flag, char far *w);
 void _fastcall f_2505_0831(int win);
-extern char far * far f_171C_1B84(char far * far *handle);
-extern void far f_171C_1BBA(char far * far *handle);
+extern char far * far mem_Lock(char far * far *handle);
+extern void far mem_Unlock(char far * far *handle);
 
 void _fastcall win_Recalc(int win)
 {
@@ -314,7 +314,7 @@ void _fastcall win_Recalc(int win)
     struct Rect far *r;
 
     handle = (char far * far *)win_handles[win >> 8];
-    w = f_171C_1B84(handle);
+    w = mem_Lock(handle);
     n = *(int far *)(w + 0xc);
     for (i = 0; i < n; i++) {
         r = ((struct Rect far * far *)(w + 0x2c))[i];
@@ -333,7 +333,7 @@ void _fastcall win_Recalc(int win)
             }
             p = (int far *)obj;
             for (k = 0; k < 4; k++, p++) {
-                v = f_2505_03B9(k, win, obj);
+                v = _win_CalcObjElement(k, win, obj);
                 if (*p != v) {
                     *p = v;
                     changed++;
@@ -346,7 +346,7 @@ void _fastcall win_Recalc(int win)
     for (i = 0; i < n; i++)
         f_2505_0511(((struct Rect far * far *)(w + 0x2c))[i]);
     *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
-    f_171C_1BBA(handle);
+    mem_Unlock(handle);
 }
 
 extern void far f_1FD2_0883(int x, int y, int id, int mode, int flag);
@@ -365,26 +365,26 @@ void _fastcall f_2505_06B9(int flag, char far *w)
     rect.bottom -= m;
     if (*(int far *)(w + 0x1c) & 4) {
         f_1FD2_0883(rect.left, rect.top, 0x64, 0xf083, flag);
-        f_208F_0419(&size, 0x64);
+        gr_BitMapSize(&size, 0x64);
         rect.left += size.x;
     }
     if (*(int far *)(w + 0x1c) & 8) {
-        f_208F_0419(&size, 0x70);
+        gr_BitMapSize(&size, 0x70);
         f_1FD2_0883(rect.right - size.x, rect.bottom - size.y, 0x70, 0xf084, flag);
     }
     if (*(int far *)(w + 0x1c) & 0x100) {
         if (*(int far *)(w + 0x1c) & 0x80) {
-            f_208F_0419(&size, 0x66);
+            gr_BitMapSize(&size, 0x66);
             f_1FD2_0883(rect.right -= size.x, rect.top, 0x66, 0xf085, flag);
         } else {
-            f_208F_0419(&size, 0x67);
+            gr_BitMapSize(&size, 0x67);
             f_1FD2_0883(rect.right -= size.x, rect.top, 0x67, 0xf085, flag);
         }
     }
     if (*(int far *)(w + 0x1c) & 0x10)
         f_1FD2_0883(rect.left, rect.top, 0x65, 0xf088, flag);
     if (*(int far *)(w + 0x1c) & 0x400) {
-        f_208F_0419(&size, 0x69);
+        gr_BitMapSize(&size, 0x69);
         f_1FD2_0883(rect.right -= size.x, rect.top, 0x69, 0xf082, flag);
     }
 }

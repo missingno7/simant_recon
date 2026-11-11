@@ -19,7 +19,7 @@ typedef struct {
     int dirty;
 } OpenDBRec;
 
-extern OpenDBRec far fd_50F6_3958[];
+extern OpenDBRec far openDBData[];
 extern int near errno;
 extern char far * near sys_errlist[];
 
@@ -49,20 +49,20 @@ int far OpenDB(char far *name)
 
     db = GetFreeHandle();
     if (db == -1) Punt("Out of handles.");
-    CopyRootName(fd_50F6_3958[db].name, name);
-    sprintf(path, "%s.dat", fd_50F6_3958[db].name);
-    if ((fd_50F6_3958[db].file = open(path, 0x8002)) <= 0) {
-        if ((fd_50F6_3958[db].file = open(path, 0x8102, 0x180)) <= 0)
+    CopyRootName(openDBData[db].name, name);
+    sprintf(path, "%s.dat", openDBData[db].name);
+    if ((openDBData[db].file = open(path, 0x8002)) <= 0) {
+        if ((openDBData[db].file = open(path, 0x8102, 0x180)) <= 0)
             DosPunt("Cannot create data file.");
-        fd_50F6_3958[db].header.magic = 0x12345678L;
-        fd_50F6_3958[db].header.freeBytes = 0L;
-        fd_50F6_3958[db].header.wastedBytes = 0L;
-        CreateIndex(fd_50F6_3958[db].name, db);
-        fd_50F6_3958[db].dirty = 1;
+        openDBData[db].header.magic = 0x12345678L;
+        openDBData[db].header.freeBytes = 0L;
+        openDBData[db].header.wastedBytes = 0L;
+        CreateIndex(openDBData[db].name, db);
+        openDBData[db].dirty = 1;
     } else {
-        read(fd_50F6_3958[db].file, &fd_50F6_3958[db].header, 14);
-        OpenIndex(fd_50F6_3958[db].name, db);
-        fd_50F6_3958[db].dirty = 0;
+        read(openDBData[db].file, &openDBData[db].header, 14);
+        OpenIndex(openDBData[db].name, db);
+        openDBData[db].dirty = 0;
     }
     return db;
 }
@@ -75,14 +75,14 @@ void far CloseDB(int db)
 {
     int file;
 
-    file = fd_50F6_3958[db].file;
-    if (fd_50F6_3958[db].dirty) {
+    file = openDBData[db].file;
+    if (openDBData[db].dirty) {
         lseek(file, 0L, 0);
-        write(file, &fd_50F6_3958[db].header, 14);
+        write(file, &openDBData[db].header, 14);
     }
     close(file);
     CloseIndex(db);
-    fd_50F6_3958[db].name[0] = 0;
+    openDBData[db].name[0] = 0;
 }
 
 void far CopyRootName(char far *dst, char far *src)
@@ -104,10 +104,10 @@ int far GetFreeHandle(void)
     if (!s_394E) {
         s_394E = 1;
         for (i = 0; i < 4; i++)
-            fd_50F6_3958[i].name[0] = 0;
+            openDBData[i].name[0] = 0;
     }
     for (i = 0; i < 4; i++)
-        if (fd_50F6_3958[i].name[0] == 0)
+        if (openDBData[i].name[0] == 0)
             return i;
     return -1;
 }

@@ -75,7 +75,7 @@ int far f_1B28_006A(int shape)
     return 1;
 }
 
-extern void far f_171C_13E4(Handle h);
+extern void far RallocFree(Handle h);
 
 int far f_1B28_0129(int object)
 {
@@ -89,8 +89,8 @@ int far f_1B28_0129(int object)
     db_UnhookObject(object, 8);
     db_UnhookObject(object, 7);
     if (g_3D10 != 0) {
-        f_171C_13E4(g_3D10);
-        f_171C_13E4(g_3D14);
+        RallocFree(g_3D10);
+        RallocFree(g_3D14);
     }
     g_3D10 = image;
     g_3D14 = mask;
@@ -109,8 +109,8 @@ int far f_1B28_01CB(int object)
     if (image == 0 || mask == 0)
         return 0;
     if (g_3D18 != 0) {
-        f_171C_13E4(g_3D18);
-        f_171C_13E4(g_3D1C);
+        RallocFree(g_3D18);
+        RallocFree(g_3D1C);
     }
     g_3D18 = image;
     g_3D1C = mask;

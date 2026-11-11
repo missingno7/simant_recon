@@ -26,16 +26,16 @@ extern int far WinPrintf(char far *format, ...);
 extern void far o03_3258_040D(char far *image, char far *buffer, int shift, int flag);
 extern void far o01_32B5_000F(char far *image, char far *buffer, int shift, int flag);
 extern void far o00_35A6_0007(char far *image, char far *buffer, int shift, int flag);
-extern void far f_1CE2_046D(struct Rect far *rect, int color);
+extern void far GRectFill(struct Rect far *rect, int color);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
 extern int far f_24AB_030B(void);
 extern int far f_24AB_0367(int c);
-extern void far f_24AB_038D(int x, int y, char far *text);
+extern void far font_PrintStr(int x, int y, char far *text);
 extern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);
 
-extern int near g_3DE0;
+extern int near _foreColor;
 extern char near g_3DE4;
 extern char near g_5A97;
 extern unsigned int (far * near g_9140)(int x0, int y0, int x1, int y1);
@@ -111,7 +111,7 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
 void _fastcall win_DrawBitMapAtObj(int id, struct Rect far *rect)
 {
     if (!win_DrawBitMap(rect->left, rect->top, id))
-        f_1CE2_046D(rect, g_3DE4 | g_3DE0);
+        GRectFill(rect, g_3DE4 | _foreColor);
 }
 
 void _fastcall win_DrawBitMapAtObjNum(int obj, int id)
@@ -121,7 +121,7 @@ void _fastcall win_DrawBitMapAtObjNum(int obj, int id)
     win_LockWin(obj);
     rect = (struct Rect far *)win_ObjAddr(obj);
     if (!win_DrawBitMap(rect->left, rect->top, id))
-        f_1CE2_046D(rect, g_3DE4 | g_3DE0);
+        GRectFill(rect, g_3DE4 | _foreColor);
     win_UnlockWin(obj);
 }
 
@@ -191,7 +191,7 @@ void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *r
             len = brk + 1;
             _fstrncpy(buf, text, len);
             buf[len] = 0;
-            f_24AB_038D(rect->left, y, buf);
+            font_PrintStr(rect->left, y, buf);
         }
         text += len;
         while (*text == ' ')

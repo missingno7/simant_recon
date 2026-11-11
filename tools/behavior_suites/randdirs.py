@@ -22,7 +22,7 @@ from dataclasses import asdict, dataclass, replace
 from typing import Any, Iterable
 
 
-FUNCTION = "o25_3BA4_1686"
+FUNCTION = "GetMyRandDirs"
 DOS_FUNCTION = "S25:3BA4:1686"
 ORACLE_HELPERS = ("f_0BE8_0B83", "f_0BE8_0B21", "TileCanBeMovedOn")
 
@@ -347,12 +347,12 @@ def to_case(s: Scenario, *, actual_tile: bool = False):
     writes = [
         _write("fd_50F6_0EFA", s.rot),
         _write("fd_50F6_0EF8", s.direction),
-        _write("fd_50F6_0A8E", s.mode),
-        _write("fd_50F6_0AF8", s.from_plane),
-        _write("fd_50F6_0AD6", s.from_x),
-        _write("fd_50F6_0AE8", s.from_y),
-        _write("fd_50F6_0AB6", s.previous_x),
-        _write("fd_50F6_0AC6", s.previous_y),
+        _write("MeCmd", s.mode),
+        _write("MeGoalPlane", s.from_plane),
+        _write("MeGoalX", s.from_x),
+        _write("MeGoalY", s.from_y),
+        _write("MeLastX", s.previous_x),
+        _write("MeLastY", s.previous_y),
     ]
     if actual_tile:
         writes.extend(_tile_fixture_writes(s))
@@ -366,9 +366,9 @@ def to_case(s: Scenario, *, actual_tile: bool = False):
               [s.plane, s.x, s.y, s.a, s.b]),
         writes=writes,
         observe=[_observe(n) for n in (
-            "fd_50F6_0EFA", "fd_50F6_0EF8", "fd_50F6_0A8E",
-            "fd_50F6_0AF8", "fd_50F6_0AD6", "fd_50F6_0AE8",
-            "fd_50F6_0AB6", "fd_50F6_0AC6")],
+            "fd_50F6_0EFA", "fd_50F6_0EF8", "MeCmd",
+            "MeGoalPlane", "MeGoalX", "MeGoalY",
+            "MeLastX", "MeLastY")],
         callbacks={"TileCanBeMovedOn": callback},
         return_kind="s16",
         metadata={

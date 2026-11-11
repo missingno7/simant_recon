@@ -36,7 +36,7 @@ class RegisterReturns(unittest.TestCase):
                 if row['function']=='f_00F8_02EF':
                     self.assertEqual(census.constant(returns[0].expr),0)
                 else:
-                    expected={'myButton':'StillDown','o25_3BA4_19AD':'o25_3BA4_1686'}[row['function']]
+                    expected={'myButton':'StillDown','o25_3BA4_19AD':'GetMyRandDirs'}[row['function']]
                     self.assertIsInstance(returns[0].expr,census.C.FuncCall)
                     self.assertEqual(returns[0].expr.name.name,expected)
 

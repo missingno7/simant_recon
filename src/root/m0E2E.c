@@ -11,36 +11,36 @@ void far RunTutor(void);
 void far GiveLesson(int lesson);
 int far LessonDone(int lesson);
 
-extern int far fd_50F6_0EAC;
+extern int far CurGameType;
 void far RunTutor(void);
 extern int far fd_3D57_07B0;
-extern int far fd_50F6_0A06;
+extern int far MeMode;
 extern int far MeHealth;
-extern int far fd_50F6_0FBA;
+extern int far MeWarnHealth;
 extern void far * far * far AdviceStrs;
 extern void far EditMessage(void far *, long, int);
-extern int far fd_50F6_0FFE;
+extern int far BlkWarnHealth;
 extern int far HealthB;
-extern int far fd_50F6_0224;
+extern int far TilesDugB;
 extern int far BpopT;
-extern int far fd_3D57_0C24;
+extern int far MeNestStarted;
 extern void far SetDefaultWindPrompt(int);
 
 void far Feedback(void)
 {
-    if (fd_50F6_0EAC == 0)
+    if (CurGameType == 0)
         RunTutor();
     if (fd_3D57_07B0 == 0)
         return;
-    if (fd_50F6_0A06 == 0 && (fd_50F6_0FBA > MeHealth || MeHealth < 10)) {
+    if (MeMode == 0 && (MeWarnHealth > MeHealth || MeHealth < 10)) {
         if (MeHealth < 10)
             EditMessage(AdviceStrs[0], 120L, 1);
         else
             EditMessage(AdviceStrs[1], 120L, 0);
-    } else if (HealthB < fd_50F6_0FFE) {
+    } else if (HealthB < BlkWarnHealth) {
         EditMessage(AdviceStrs[2], 120L, 0);
-    } else if (BpopT > fd_50F6_0224) {
-        if (fd_50F6_0A06 == 0 && fd_3D57_0C24 == 0 && fd_50F6_0224 == 0)
+    } else if (BpopT > TilesDugB) {
+        if (MeMode == 0 && MeNestStarted == 0 && TilesDugB == 0)
             EditMessage(AdviceStrs[3], 120L, 0);
         else
             EditMessage(AdviceStrs[4], 120L, 0);
@@ -49,39 +49,39 @@ void far Feedback(void)
     }
 }
 
-extern int far fd_3D57_07A2;
-extern int far fd_50F6_10B8;
-extern int far fd_3D57_07A6;
-extern int far fd_3D57_07A4;
+extern int far TutorCnt;
+extern int far TutHowLong;
+extern int far TutGiven;
+extern int far TutLesson;
 void far GiveLesson(int lesson);
 int far LessonDone(int lesson);
 extern long far MacTickCount(void);
-extern long far fd_50F6_0204;
+extern long far TimeTemp;
 
 void far RunTutor(void)
 {
-    if (++fd_3D57_07A2 > 0x400)
-        fd_3D57_07A2 = 0;
-    if (fd_3D57_07A2 & 7)
+    if (++TutorCnt > 0x400)
+        TutorCnt = 0;
+    if (TutorCnt & 7)
         return;
-    fd_50F6_10B8++;
-    if (fd_3D57_07A6 == 0) {
-        GiveLesson(fd_3D57_07A4);
-        fd_3D57_07A6 = 1;
-        fd_50F6_10B8 = 0;
-    } else if (LessonDone(fd_3D57_07A4)) {
-        fd_3D57_07A4++;
-        fd_3D57_07A6 = 0;
-    } else if (fd_50F6_10B8 > 15 && MacTickCount() > fd_50F6_0204) {
-        fd_3D57_07A6 = 0;
+    TutHowLong++;
+    if (TutGiven == 0) {
+        GiveLesson(TutLesson);
+        TutGiven = 1;
+        TutHowLong = 0;
+    } else if (LessonDone(TutLesson)) {
+        TutLesson++;
+        TutGiven = 0;
+    } else if (TutHowLong > 15 && MacTickCount() > TimeTemp) {
+        TutGiven = 0;
     }
 }
 
 extern void far PictStrnDialog(int picture, int object, int force);
 extern int far MeLocY;
 extern int far MeLocX;
-extern int far fd_50F6_1074;
-extern Point far fd_50F6_0508;
+extern int far LessonTemp;
+extern Point far MapPnt;
 extern void far SetMyHealth(int);
 extern void far AddBlackAnts(int count);
 extern int far fd_3D57_049E[3];
@@ -100,11 +100,11 @@ void far GiveLesson(int lesson)
         break;
     case 3:
         PictStrnDialog(0, 0x2afc, 1);
-        fd_50F6_0204 = fd_50F6_0224 + 2;
+        TimeTemp = TilesDugB + 2;
         break;
     case 4:
         PictStrnDialog(0, 0x2afe, 1);
-        fd_50F6_0204 = fd_50F6_0224 + 10;
+        TimeTemp = TilesDugB + 10;
         break;
     case 5:
         PictStrnDialog(0x4269, 0x2b00, 1);
@@ -114,17 +114,17 @@ void far GiveLesson(int lesson)
         break;
     case 7:
         PictStrnDialog(0, 0x2b04, 1);
-        fd_50F6_1074 = MeLocY + MeLocX;
-        fd_50F6_0204 = MacTickCount() + 0x258L;
+        LessonTemp = MeLocY + MeLocX;
+        TimeTemp = MacTickCount() + 0x258L;
         break;
     case 8:
         PictStrnDialog(0, 0x2b06, 1);
-        fd_50F6_1074 = 0;
+        LessonTemp = 0;
         break;
     case 9:
         PictStrnDialog(0, 0x2b08, 1);
-        fd_50F6_1074 = fd_50F6_0508.y + fd_50F6_0508.x;
-        fd_50F6_0204 = MacTickCount() + 0x258L;
+        LessonTemp = MapPnt.y + MapPnt.x;
+        TimeTemp = MacTickCount() + 0x258L;
         break;
     case 10:
         PictStrnDialog(0, 0x2b0a, 1);
@@ -178,12 +178,12 @@ void far GiveLesson(int lesson)
         break;
     case 26:
         PictStrnDialog(0, 0x2b2a, 1);
-        fd_50F6_1074 = MeLocY + MeLocX;
-        fd_50F6_0204 = MacTickCount() + 0x258L;
+        LessonTemp = MeLocY + MeLocX;
+        TimeTemp = MacTickCount() + 0x258L;
         break;
     case 27:
         PictStrnDialog(0, 0x2b2c, 1);
-        fd_50F6_1074 = MeLocY + MeLocX;
+        LessonTemp = MeLocY + MeLocX;
         break;
     case 28:
         PictStrnDialog(0, 0x2b2e, 1);
@@ -193,7 +193,7 @@ void far GiveLesson(int lesson)
         break;
     case 30:
         PictStrnDialog(0, 0x2b32, 1);
-        fd_50F6_1074 = 0;
+        LessonTemp = 0;
         break;
     case 31:
         PictStrnDialog(0, 0x2b34, 1);
@@ -227,14 +227,14 @@ void far GiveLesson(int lesson)
         break;
     case 41:
         PictStrnDialog(0x4270, 0x2b48, 1);
-        fd_50F6_1074 = fd_3D57_049E[1] + fd_3D57_049E[0];
+        LessonTemp = fd_3D57_049E[1] + fd_3D57_049E[0];
         break;
     case 42:
         PictStrnDialog(0, 0x2b4a, 1);
         break;
     case 43:
         PictStrnDialog(0x4271, 0x2b4c, 1);
-        fd_50F6_1074 = 0;
+        LessonTemp = 0;
         break;
     case 44:
         PictStrnDialog(0x4271, 0x2b4e, 1);
@@ -244,7 +244,7 @@ void far GiveLesson(int lesson)
         break;
     case 46:
         PictStrnDialog(0x4272, 0x2b52, 1);
-        fd_50F6_1074 = 0;
+        LessonTemp = 0;
         break;
     case 47:
         PictStrnDialog(0x4273, 0x2b54, 1);
@@ -261,7 +261,7 @@ void far GiveLesson(int lesson)
         break;
     case 50:
         PictStrnDialog(0x4274, 0x2b5a, 1);
-        fd_50F6_1074 = 0;
+        LessonTemp = 0;
         break;
     case 51:
         PictStrnDialog(0, 0x2b5c, 1);
@@ -276,7 +276,7 @@ void far GiveLesson(int lesson)
         PictStrnDialog(0, 0x2b62, 1);
         break;
     case 55:
-        if (fd_50F6_1074 == 0)
+        if (LessonTemp == 0)
             PictStrnDialog(0, 0x2b64, 1);
         else
             PictStrnDialog(0, 0x2b66, 1);
@@ -287,14 +287,14 @@ void far GiveLesson(int lesson)
     }
 }
 
-extern int far fd_50F6_0AA0;
+extern int far MeMoveMe;
 extern int far MePlane;
-extern int far fd_50F6_0B1E;
+extern int far MeDis;
 extern unsigned char far MapA[128][64];
 extern int _fastcall win_IsWinInFront(int);
-extern int far fd_50F6_04C2;
-extern int far fd_50F6_0B12[6];
-extern int far fd_50F6_104E;
+extern int far MeType;
+extern int far ModePopB[6];
+extern int far MeDropAlarm;
 extern void far SetAlarmDropState(int state, int quiet);
 extern int far MapPlane;
 extern int far YardMode;
@@ -308,11 +308,11 @@ int far LessonDone(int lesson)
     case 2:
         return 1;
     case 3:
-        if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)
+        if (TilesDugB > TimeTemp && MeMoveMe == 0)
             return 1;
         break;
     case 4:
-        if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)
+        if (TilesDugB > TimeTemp && MeMoveMe == 0)
             return 1;
         break;
     case 5:
@@ -320,11 +320,11 @@ int far LessonDone(int lesson)
     case 6:
         return 1;
     case 7:
-        if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && MacTickCount() > fd_50F6_0204)
+        if (MeLocY + MeLocX != LessonTemp && MeDis == 0 && MacTickCount() > TimeTemp)
             return 1;
         break;
     case 9:
-        if (fd_50F6_0508.y + fd_50F6_0508.x != fd_50F6_1074 || MacTickCount() > fd_50F6_0204)
+        if (MapPnt.y + MapPnt.x != LessonTemp || MacTickCount() > TimeTemp)
             return 1;
         break;
     case 10:
@@ -342,31 +342,31 @@ int far LessonDone(int lesson)
     case 15:
         return 1;
     case 16:
-        return fd_50F6_04C2 == 0x18;
+        return MeType == 0x18;
     case 17:
         return 1;
     case 18:
         return MePlane == 2;
     case 19:
-        return fd_50F6_04C2 == 0x10;
+        return MeType == 0x10;
     case 20:
         return MePlane == 1;
     case 21:
-        return fd_50F6_04C2 == 0x28;
+        return MeType == 0x28;
     case 22:
-        return fd_50F6_04C2 == 0x10;
+        return MeType == 0x10;
     case 23:
         return 1;
     case 24:
-        return fd_50F6_0B12[5] > 1;
+        return ModePopB[5] > 1;
     case 25:
         return 1;
     case 26:
-        if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && MacTickCount() > fd_50F6_0204)
+        if (MeLocY + MeLocX != LessonTemp && MeDis == 0 && MacTickCount() > TimeTemp)
             return 1;
         break;
     case 27:
-        if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_104E != 0 && fd_50F6_0B1E == 0)
+        if (MeLocY + MeLocX != LessonTemp && MeDropAlarm != 0 && MeDis == 0)
             return 1;
         break;
     case 28:
@@ -374,13 +374,13 @@ int far LessonDone(int lesson)
     case 29:
         return 1;
     case 30:
-        if (fd_50F6_104E != 0)
+        if (MeDropAlarm != 0)
             SetAlarmDropState(0, 1);
     case 8:
     case 43:
     case 46:
     case 50:
-        return fd_50F6_1074 != 0;
+        return LessonTemp != 0;
     case 31:
         return 1;
     case 32:
@@ -402,7 +402,7 @@ int far LessonDone(int lesson)
     case 40:
         return 1;
     case 41:
-        return fd_3D57_049E[1] + fd_3D57_049E[0] != fd_50F6_1074;
+        return fd_3D57_049E[1] + fd_3D57_049E[0] != LessonTemp;
     case 42:
         return win_IsWinInFront(0x100) != 0;
     case 44:
@@ -418,16 +418,16 @@ int far LessonDone(int lesson)
     case 51:
         return 1;
     case 52:
-        return fd_50F6_0B12[5] > 0x28;
+        return ModePopB[5] > 0x28;
     case 53:
         return 1;
     case 54:
         if (MePlane == 3) {
-            fd_50F6_1074 = 0;
+            LessonTemp = 0;
             return 1;
         }
         if (MePlane == 2) {
-            fd_50F6_1074 = 1;
+            LessonTemp = 1;
             return 1;
         }
         break;

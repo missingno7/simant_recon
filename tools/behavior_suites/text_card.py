@@ -45,7 +45,7 @@ def style_record(pos, face, height=12, ascent=9, font=2, size=12):
 def _fixture_fonts():
     """Build valid, disjoint far-font records for original metric helpers.
 
-    The raster-producing f_24AB_038D entry is still an explicit logical draw
+    The raster-producing font_PrintStr entry is still an explicit logical draw
     boundary, but the caller's font selection, height, string-width, and
     character-width helpers now read real Font records and tables in the VM.
     """
@@ -157,14 +157,14 @@ def make_case(label, text, rect, styles=(), first_line=0, record=0,
         # intentionally lack public oracle symbols. The VM compares every
         # nonstack byte written by either side, including those private writes.
         observe=[],
-        callbacks={"f_24AB_038D": b.Callback(4, draw, project=render_project)},
+        callbacks={"font_PrintStr": b.Callback(4, draw, project=render_project)},
         return_kind="void", callee_pop=0,
         state={"draws": [], "volatile": volatile},
         metadata={"rect": list(rect), "styles": [list(s) for s in styles],
                   "first_line": first_line, "record": record,
                   "text_hex": text.hex(), "volatile": volatile,
                   "font_records": font_records,
-                  "metrics": "original f_24AB_02AD/030B/0329/0367 and MSC far-string helpers over four valid VM Font records: proportional variable widths, proportional negative-kern bonus and missing glyphs, fixed zero width, and fixed width 7; raster remains the logical f_24AB_038D draw-request boundary"})
+                  "metrics": "original font_SetFont/030B/0329/0367 and MSC far-string helpers over four valid VM Font records: proportional variable widths, proportional negative-kern bonus and missing glyphs, fixed zero width, and fixed width 7; raster remains the logical font_PrintStr draw-request boundary"})
 
 
 def cases(count, seed):
@@ -360,9 +360,9 @@ def _resource_case(label, scenario, volatile=0xA55A, seed=0x5A23):
 
     callbacks = {
         "f_1A53_00F0": b.Callback(3, res),
-        "f_171C_1B84": b.Callback(2, lock),
-        "f_171C_1C1C": b.Callback(2, size),
-        "f_171C_1BBA": b.Callback(2, unlock),
+        "mem_Lock": b.Callback(2, lock),
+        "mem_Size": b.Callback(2, size),
+        "mem_Unlock": b.Callback(2, unlock),
         "db_PurgeObject": b.Callback(2, purge),
         "WinPrintf": b.Callback(0, print_log, ("ax",)),
         "f_22BF_059A": b.Callback(3, simple),
@@ -374,7 +374,7 @@ def _resource_case(label, scenario, volatile=0xA55A, seed=0x5A23):
         "clip_SubInclude": b.Callback(2, simple, project=get_rect_input),
         "win_SetColorFromObjNum": b.Callback(0, simple, ("ax",)),
         "win_DrawBitMap": b.Callback(0, bitmap, ("ax", "dx", "bx")),
-        "f_24AB_038D": b.Callback(4, draw, project=render_project),
+        "font_PrintStr": b.Callback(4, draw, project=render_project),
     }
     return b.Case(label, args=[card_id], writes=memory_writes, callbacks=callbacks,
         return_kind="void", callee_pop=0,
@@ -404,7 +404,7 @@ def _history_case(label, graph, hilite, slot, start, count, rect, seed,
     x = b.exe.load()
     data_ptrs = []
     table_index = (graph & 1) * 5 + (graph >> 1)
-    for table_name in ("fd_3D57_082A", "fd_3D57_0852"):
+    for table_name in ("HistGraphs", "AltHistGraphs"):
         table = b.symbol_address(table_name)
         raw = x.sections[27].data
         offset = b.symbol(table_name)["off"] + table_index * 4
@@ -429,8 +429,8 @@ def _history_case(label, graph, hilite, slot, start, count, rect, seed,
     writes = arrays + [
         (b.symbol_address("g_916C"), far(*line_draw_ptr)),
         (b.symbol_address("g_9128"), far(*color_ptr)),
-        (b.symbol_address("fd_50F6_04F4"), struct.pack("<h", start)),
-        (b.symbol_address("fd_3D57_0828"), struct.pack("<h", count)),
+        (b.symbol_address("HistStart"), struct.pack("<h", start)),
+        (b.symbol_address("HistCnt"), struct.pack("<h", count)),
         (b.symbol_address("g_3DB2"), struct.pack("<H", 320)),
         (b.symbol_address("g_3DDC"), struct.pack("<b", 12)),
         (b.symbol_address("g_3DDE"), struct.pack("<b", 8)),
@@ -451,8 +451,8 @@ def _history_case(label, graph, hilite, slot, start, count, rect, seed,
                                   "result_rect": list(m.state["rect"])}),
         "win_DrawBitMap": b.Callback(5, line),
         "win_SetColorFromObjNum": b.Callback(3, color),
-        "f_24AB_038D": b.Callback(4, label_draw, project=render_project),
-        "f_1CE2_01F8": b.Callback(5, box),
+        "font_PrintStr": b.Callback(4, label_draw, project=render_project),
+        "GBoxOutline": b.Callback(5, box),
     }
     return b.Case(label, args=[graph, hilite, slot], writes=writes,
         callbacks=callbacks, return_kind="void", callee_pop=0,

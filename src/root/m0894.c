@@ -12,81 +12,81 @@ extern int far SRand32(void);
 extern int far SRand256(void);
 
 extern int far Cycle;
-extern unsigned long far fd_50F6_0C26;
+extern unsigned long far GameTime;
 extern int far fd_3D57_07B2;
-extern int far fd_50F6_0F06;
-extern int far fd_50F6_0F2E;
-extern int far fd_50F6_0F10;
-extern int far fd_50F6_0EF6;
+extern int far FightBalloonCnt;
+extern int far RestBalloonCnt;
+extern int far QueenBalloonCnt;
+extern int far EggBalloonCnt;
 typedef struct {
     int v;
     int h;
 } Point;
 
-extern Point far fd_50F6_08EC;
-extern Point far fd_50F6_0AA2;
-extern Point far fd_50F6_0A02;
-extern Point far fd_50F6_0852;
-extern int far fd_50F6_0376;
-extern int far fd_3D57_02C2;
+extern Point far LastFightPnt;
+extern Point far LastRestPnt;
+extern Point far LastQueenPnt;
+extern Point far LastEggPnt;
+extern int far IsGameOver;
+extern int far gGameNeedsSaving;
 extern int far fd_50F6_0D40[20];
 extern int far fd_50F6_0D72[20];
-extern int far fd_50F6_08DC;
-extern int far fd_50F6_08E8;
-extern int far fd_50F6_0B12[6];
-extern int far fd_50F6_0C2A[6];
-extern int far fd_3D57_0C18;
+extern int far FlyAwayB;
+extern int far FlyAwayR;
+extern int far ModePopB[6];
+extern int far ModePopR[6];
+extern int far AlwaysHealthy;
 extern int far HealthB;
 extern int far HealthR;
-extern int far fd_50F6_0EAC;
-extern int far fd_3D57_0C1A;
-extern int far fd_50F6_1040;
+extern int far CurGameType;
+extern int far NextFeed;
+extern int far FoodA;
 extern int far ListIndexA;
 extern int far Tindex;
 extern unsigned char far AlistT[];
 extern unsigned char far AlistY[];
 extern unsigned char far AlistX[];
-extern long far fd_50F6_0F30;
+extern long far BAntsExpired;
 extern unsigned char far AlistM[];
 extern unsigned char far LifeA[128][64];
 extern char far Dy8[8];
 extern char far Dx8[8];
 extern unsigned char far PherMapRN[64][32];
 extern unsigned char far PherMapBN[64][32];
-extern int far fd_50F6_06AA;
-extern int far fd_50F6_073A;
-extern int far fd_50F6_07C8;
-extern int far fd_50F6_0850;
+extern int far SwarmCntB;
+extern int far SwarmCntR;
+extern int far QueenStorageB;
+extern int far QueenStorageR;
 extern unsigned char far MapA[128][64];
 extern int far Barrier;
 extern unsigned char far AlistS[];
-extern int far fd_50F6_04E2;
-extern int far fd_50F6_1044;
+extern int far MeColor;
+extern int far MeWantFood;
 extern signed char far TurnTab[8][8];
 extern unsigned char far PherMapA[64][32];
 extern int far ListIndexB;
 extern unsigned char far HoleMapB[];
 extern int far ListIndexR;
 extern unsigned char far HoleMapR[];
-extern int far fd_3D57_0C14;
-extern long far fd_50F6_0F3E;
-extern int far fd_50F6_09FA;
-extern long far fd_50F6_0EFC;
-extern int far fd_50F6_0A00;
-extern int far fd_50F6_0476;
-extern unsigned char far fd_50F6_037C[100];
-extern unsigned char far fd_50F6_0404[100];
+extern int far Invincible;
+extern long far RAntsKilled;
+extern int far BlackLost;
+extern long far BAntsKilled;
+extern int far RedLost;
+extern int far DdPtr;
+extern unsigned char far DeadX[100];
+extern unsigned char far DeadY[100];
 extern int far TERRAINset;
-extern int far fd_3D57_0074[16];
-extern signed char far fd_3D57_0094[];
+extern int far IsCarryCaste[16];
+extern signed char far UnCarryCaste[];
 
-extern void far o06_35F5_0173(void);
+extern void far DoSimYard(void);
 extern void far DoWater(void);
 extern void far f_0AD9_03D3(void);
 extern void far f_0CDB_00B3(void);
 extern void far f_0AD9_093C(void);
 extern void far f_1383_0002(void);
-extern void far o25_39C7_0000(void);
+extern void far DoAntSimB(void);
 extern void far DoAntSimR(void);
 extern void far DoAntSimY(void);
 extern void far DoAntMoveY(void);
@@ -104,9 +104,9 @@ extern void far f_0EC1_0100(void);
 extern void far f_1496_0089(void);
 extern void far f_1496_0153(void);
 extern void far f_1496_01FE(void);
-extern void far f_0DEF_0000(void);
+extern void far MakeRedInitiator(void);
 extern void far AddFood(int count, int sound);
-extern void far f_0DEF_006B(int index);
+extern void far DoRedInitiator(int index);
 extern int far f_0EC1_0291(int x, int y);
 extern void far f_0250_43F2(int x, int y, int a);
 extern void far InvalQueenStorageDisp(void);
@@ -116,7 +116,7 @@ extern void far f_1496_0404(int x, int y, int level);
 extern void far f_1496_03CC(int x, int y, int level);
 extern void far f_1496_04AC(int x, int y, int colour);
 extern int far IsYellowAnt(int value);
-extern void far o25_3BA4_0DFB(int a, int index);
+extern void far YellowFight(int a, int index);
 extern void far o22_39C7_19E5(int x, int y, int dir);
 extern int far f_1383_0976(int caste, int type);
 extern int far f_1383_10A8(int x, int y);
@@ -169,23 +169,23 @@ void far DoAntSim(void)
 {
     if (++Cycle > 0x1000)
         Cycle = 0;
-    fd_50F6_0C26++;
+    GameTime++;
     if (fd_3D57_07B2 == 1) {
-        fd_50F6_0F06 = 0;
-        fd_50F6_0F2E = 0;
-        fd_50F6_0F10 = 0;
-        fd_50F6_0EF6 = 0;
-        fd_50F6_08EC.h = -1;
-        fd_50F6_08EC.v = -1;
-        fd_50F6_0AA2 = fd_50F6_08EC;
-        fd_50F6_0A02 = fd_50F6_08EC;
-        fd_50F6_0852 = fd_50F6_08EC;
+        FightBalloonCnt = 0;
+        RestBalloonCnt = 0;
+        QueenBalloonCnt = 0;
+        EggBalloonCnt = 0;
+        LastFightPnt.h = -1;
+        LastFightPnt.v = -1;
+        LastRestPnt = LastFightPnt;
+        LastQueenPnt = LastFightPnt;
+        LastEggPnt = LastFightPnt;
     }
     if ((Cycle & 0x3f) == 0)
         FeedAnts();
     if ((Cycle & 0x1f) == 0)
         DoSmells();
-    o06_35F5_0173();
+    DoSimYard();
     DoWater();
     f_0AD9_03D3();
     f_0CDB_00B3();
@@ -194,15 +194,15 @@ void far DoAntSim(void)
     f_1383_0002();
     ClrModePop();
     DoAntSimA();
-    o25_39C7_0000();
+    DoAntSimB();
     DoAntSimR();
     DoAntSimY();
     TallyModePop();
     DoAntMoveY();
     f_0E2E_000A();
-    if (fd_50F6_0376)
+    if (IsGameOver)
         o14_384C_0DE5(0);
-    fd_3D57_02C2 = 1;
+    gGameNeedsSaving = 1;
 }
 
 void far DoSmells(void)
@@ -242,44 +242,44 @@ void far ClrModePop(void)
         fd_50F6_0D40[i] = 0;
         fd_50F6_0D72[i] = 0;
     }
-    if (fd_50F6_08DC)
-        --fd_50F6_08DC;
-    if (fd_50F6_08E8)
-        --fd_50F6_08E8;
+    if (FlyAwayB)
+        --FlyAwayB;
+    if (FlyAwayR)
+        --FlyAwayR;
 }
 
 void far TallyModePop(void)
 {
-    fd_50F6_0B12[0] = fd_50F6_0D40[2] + fd_50F6_0D40[3];
-    fd_50F6_0B12[1] = fd_50F6_0D40[4] + fd_50F6_0D40[5];
-    fd_50F6_0B12[2] = fd_50F6_0D40[1];
-    fd_50F6_0B12[3] = fd_50F6_0D40[7];
-    fd_50F6_0B12[4] = fd_50F6_0D40[12];
-    fd_50F6_0B12[5] = fd_50F6_0D40[6];
-    fd_50F6_0C2A[0] = fd_50F6_0D72[2] + fd_50F6_0D72[3];
-    fd_50F6_0C2A[1] = fd_50F6_0D72[4] + fd_50F6_0D72[5];
-    fd_50F6_0C2A[2] = fd_50F6_0D72[1];
-    fd_50F6_0C2A[3] = fd_50F6_0D72[7];
-    fd_50F6_0C2A[4] = fd_50F6_0D72[12];
-    fd_50F6_0C2A[5] = fd_50F6_0D72[6];
+    ModePopB[0] = fd_50F6_0D40[2] + fd_50F6_0D40[3];
+    ModePopB[1] = fd_50F6_0D40[4] + fd_50F6_0D40[5];
+    ModePopB[2] = fd_50F6_0D40[1];
+    ModePopB[3] = fd_50F6_0D40[7];
+    ModePopB[4] = fd_50F6_0D40[12];
+    ModePopB[5] = fd_50F6_0D40[6];
+    ModePopR[0] = fd_50F6_0D72[2] + fd_50F6_0D72[3];
+    ModePopR[1] = fd_50F6_0D72[4] + fd_50F6_0D72[5];
+    ModePopR[2] = fd_50F6_0D72[1];
+    ModePopR[3] = fd_50F6_0D72[7];
+    ModePopR[4] = fd_50F6_0D72[12];
+    ModePopR[5] = fd_50F6_0D72[6];
     if (fd_50F6_0D72[19] < 1)
-        f_0DEF_0000();
+        MakeRedInitiator();
 }
 
 void far FeedAnts(void)
 {
-    if (fd_3D57_0C18 == 0) {
+    if (AlwaysHealthy == 0) {
         if (--HealthB < 0)
             HealthB = 0;
     }
     if (--HealthR < 0)
         HealthR = 0;
-    if (fd_50F6_0EAC == 3)
+    if (CurGameType == 3)
         return;
-    if (fd_50F6_1040 >= fd_3D57_0C1A)
+    if (FoodA >= NextFeed)
         return;
     AddFood(0x96, 1);
-    fd_3D57_0C1A = SRand1(0x32) + 1;
+    NextFeed = SRand1(0x32) + 1;
 }
 
 void far DoAntSimA(void)
@@ -301,7 +301,7 @@ void far DoAntSimA(void)
                     DeadAntHere(AlistX[Tindex], AlistY[Tindex],
                                 AlistT[Tindex] & 0x80);
                     AlistT[Tindex] = 0;
-                    fd_50F6_0F30++;
+                    BAntsExpired++;
                 }
             }
         }
@@ -364,7 +364,7 @@ void far DoAntSimA(void)
             DoRepoFly(Tindex);
             break;
         case 19:
-            f_0DEF_006B(Tindex);
+            DoRedInitiator(Tindex);
             break;
         }
     }
@@ -440,10 +440,10 @@ void far DoRepoLoit(int index)
     else
         DoToNestAnt(index);
     if (AlistT[index] & 0x80) {
-        if (fd_50F6_08E8 > 100)
+        if (FlyAwayR > 100)
             AlistM[Tindex] = 0xf;
     } else {
-        if (fd_50F6_08DC > 100)
+        if (FlyAwayB > 100)
             AlistM[Tindex] = 0xf;
     }
 }
@@ -461,10 +461,10 @@ void far DoRepoExit(int index)
     else
         DoRandAntAA(index);
     if (AlistT[index] & 0x80) {
-        if (fd_50F6_08E8 != 0 && (fd_50F6_08E8 == 1 || SRand1(fd_50F6_08E8) == 0))
+        if (FlyAwayR != 0 && (FlyAwayR == 1 || SRand1(FlyAwayR) == 0))
             AlistM[Tindex] = 0x10;
     } else {
-        if (fd_50F6_08DC != 0 && (fd_50F6_08DC == 1 || SRand1(fd_50F6_08DC) == 0))
+        if (FlyAwayB != 0 && (FlyAwayB == 1 || SRand1(FlyAwayB) == 0))
             AlistM[Tindex] = 0x10;
     }
 }
@@ -475,20 +475,20 @@ void far DoRepoFly(int index)
 
     red = AlistT[index] & 0x80;
     if (SRand32() == 0) {
-        if ((red == 0 && fd_50F6_06AA < 50) || (red != 0 && fd_50F6_073A < 50)) {
+        if ((red == 0 && SwarmCntB < 50) || (red != 0 && SwarmCntR < 50)) {
             AlistT[index] = 0;
             LifeA[AlistX[index]][AlistY[index]] = 0;
-            if (fd_50F6_0EAC == 2) {
+            if (CurGameType == 2) {
                 if (red == 0)
-                    fd_50F6_06AA++;
+                    SwarmCntB++;
                 else
-                    fd_50F6_073A++;
+                    SwarmCntR++;
                 if (SRand16() == 0) {
                     if (red == 0) {
-                        fd_50F6_07C8++;
+                        QueenStorageB++;
                         InvalQueenStorageDisp();
                     } else
-                        fd_50F6_0850++;
+                        QueenStorageR++;
                 }
             }
         }
@@ -568,11 +568,11 @@ void far DoRandAntA(int index)
         return;
     }
     if (IsYellowAnt(tile) == 1) {
-        if ((fd_50F6_04E2 ^ attribute) & 0x80) {
-            o25_3BA4_0DFB(1, index);
+        if ((MeColor ^ attribute) & 0x80) {
+            YellowFight(1, index);
             return;
         }
-        if (fd_50F6_1044 == 1) {
+        if (MeWantFood == 1) {
             AlistT[index] = dir | flags;
             LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
@@ -628,8 +628,8 @@ void far DoRandAntAA(int index)
         return;
     }
     if (IsYellowAnt(tile) == 1) {
-        if ((fd_50F6_04E2 ^ attribute) & 0x80) {
-            o25_3BA4_0DFB(1, index);
+        if ((MeColor ^ attribute) & 0x80) {
+            YellowFight(1, index);
             return;
         }
         AlistT[index] = RandTurn(attribute & 7) | flags;
@@ -760,11 +760,11 @@ void far DoToNestAnt(int index)
         return;
     }
     if (IsYellowAnt(tile) == 1) {
-        if ((fd_50F6_04E2 ^ attribute) & 0x80) {
-            o25_3BA4_0DFB(1, index);
+        if ((MeColor ^ attribute) & 0x80) {
+            YellowFight(1, index);
             return;
         }
-        if (fd_50F6_1044 == 1) {
+        if (MeWantFood == 1) {
             AlistT[index] = dir | flags;
             LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
@@ -823,8 +823,8 @@ void far DoToAlarm(int index)
         return;
     }
     if (IsYellowAnt(tile) == 1) {
-        if ((fd_50F6_04E2 ^ attribute) & 0x80) {
-            o25_3BA4_0DFB(1, index);
+        if ((MeColor ^ attribute) & 0x80) {
+            YellowFight(1, index);
             return;
         }
         AlistT[index] = RandTurn(attribute & 7) | flags;
@@ -963,11 +963,11 @@ void far DoForageAnt(int index)
         return;
     }
     if (IsYellowAnt(tile) == 1) {
-        if ((fd_50F6_04E2 ^ attribute) & 0x80) {
-            o25_3BA4_0DFB(1, index);
+        if ((MeColor ^ attribute) & 0x80) {
+            YellowFight(1, index);
             return;
         }
-        if (fd_50F6_1044 == 1) {
+        if (MeWantFood == 1) {
             AlistT[index] = dir | flags;
             LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
@@ -1025,11 +1025,11 @@ void far DoRecruitAnt(int index)
         return;
     }
     if (IsYellowAnt(tile)) {
-        if ((fd_50F6_04E2 ^ attribute) & 0x80) {
-            o25_3BA4_0DFB(1, index);
+        if ((MeColor ^ attribute) & 0x80) {
+            YellowFight(1, index);
             return;
         }
-        if (fd_50F6_1044) {
+        if (MeWantFood) {
             AlistT[index] = dir | flags;
             LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
@@ -1102,8 +1102,8 @@ int far GetWinner(int a, int b)
     int levelB;
     int threshold;
 
-    if (fd_3D57_0C14 == 1) {
-        fd_50F6_0F3E++;
+    if (Invincible == 1) {
+        RAntsKilled++;
         if (a & 0x80)
             return b;
         return a;
@@ -1113,20 +1113,20 @@ int far GetWinner(int a, int b)
     threshold = combatOdds[(levelA << 2) + levelB];
     if (RRand(10) < threshold) {
         if (a & 0x80) {
-            fd_50F6_09FA++;
-            fd_50F6_0EFC++;
+            BlackLost++;
+            BAntsKilled++;
         } else {
-            fd_50F6_0A00++;
-            fd_50F6_0F3E++;
+            RedLost++;
+            RAntsKilled++;
         }
         return a;
     }
     if (b & 0x80) {
-        fd_50F6_09FA++;
-        fd_50F6_0EFC++;
+        BlackLost++;
+        BAntsKilled++;
     } else {
-        fd_50F6_0A00++;
-        fd_50F6_0F3E++;
+        RedLost++;
+        RAntsKilled++;
     }
     return b;
 }
@@ -1156,16 +1156,16 @@ void far DeadAntHere(int x, int y, int type)
     int oldY;
     int otile;
 
-    if (++fd_50F6_0476 >= 100)
-        fd_50F6_0476 = 0;
-    oldX = fd_50F6_037C[fd_50F6_0476];
-    oldY = fd_50F6_0404[fd_50F6_0476];
+    if (++DdPtr >= 100)
+        DdPtr = 0;
+    oldX = DeadX[DdPtr];
+    oldY = DeadY[DdPtr];
     otile = MapA[oldX][oldY];
     if (TERRAINset == 0) {
         if (otile >= 0x10 && otile < 0x18)
             MapA[oldX][oldY] = SRand16();
-        fd_50F6_037C[fd_50F6_0476] = x;
-        fd_50F6_0404[fd_50F6_0476] = y;
+        DeadX[DdPtr] = x;
+        DeadY[DdPtr] = y;
         if (MapA[x][y] < 0x18) {
             if (type != 0)
                 MapA[x][y] = SRand4() + 0x14;
@@ -1175,8 +1175,8 @@ void far DeadAntHere(int x, int y, int type)
     } else {
         if (otile >= 8 && otile < 0x18)
             MapA[oldX][oldY] = (otile - 8) >> 2;
-        fd_50F6_037C[fd_50F6_0476] = x;
-        fd_50F6_0404[fd_50F6_0476] = y;
+        DeadX[DdPtr] = x;
+        DeadY[DdPtr] = y;
         otile = MapA[x][y];
         if (otile < 4) {
             if (type != 0)
@@ -1213,8 +1213,8 @@ void far DoAttackAnt(int index)
         return;
     }
     caste = (attribute & 0x78) >> 3;
-    if (fd_3D57_0074[caste] == 1)
-        attribute = (fd_3D57_0094[caste] << 3) | (attribute & 0x87);
+    if (IsCarryCaste[caste] == 1)
+        attribute = (UnCarryCaste[caste] << 3) | (attribute & 0x87);
     flags = attribute & 0xf8;
     dir = f_1383_0C2A(x, y, attribute & 7, attribute ^ 0x80);
     nx = x + Dx8[dir];
@@ -1233,8 +1233,8 @@ void far DoAttackAnt(int index)
         return;
     }
     if (IsYellowAnt(tile) == 1) {
-        if ((fd_50F6_04E2 ^ attribute) & 0x80) {
-            o25_3BA4_0DFB(1, index);
+        if ((MeColor ^ attribute) & 0x80) {
+            YellowFight(1, index);
             return;
         }
         AlistT[index] = RandTurn(attribute & 7) | flags;

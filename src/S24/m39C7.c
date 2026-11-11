@@ -34,7 +34,7 @@ static char histShown[10];
 extern void far DoWinHelp(int topic);
 void far ToggleHistButton(int item);
 extern void far clip_SetWin(int win);
-extern int far f_1B4E_000D(int color);
+extern int far ConvColor(int color);
 extern void _fastcall win_FillObjRect(int obj, int color);
 void far drawHistGraph(int graph, int hilite, int slot);
 extern int far StillDown(void);
@@ -51,7 +51,7 @@ void far ProcHistoryEvent(struct Event far *ev)
         break;
     case 0x150e:
         clip_SetWin(0x1500);
-        win_FillObjRect(0x150e, f_1B4E_000D(0));
+        win_FillObjRect(0x150e, ConvColor(0));
         for (i = 0; i < 4; i++)
             if (shownGraphs[i] != (int)0x8000)
                 drawHistGraph(shownGraphs[i], 1, i);
@@ -110,65 +110,65 @@ void far ToggleHistButton(int item)
     clip_Off();
 }
 
-int far fd_50F6_0516[64];
-int far fd_50F6_05A0[64];
-int far fd_50F6_0626[64];
-int far fd_50F6_06AE[64];
-int far fd_50F6_073C[64];
-int far fd_50F6_07CE[64];
-int far fd_50F6_0856[64];
-int far fd_50F6_08F0[64];
-int far fd_50F6_0970[64];
-int far fd_50F6_0A0A[64];
-extern long far fd_50F6_0ADA;
-extern int far fd_50F6_0A90;
-extern int far fd_50F6_0AC4;
-extern int far fd_50F6_0A9E;
-extern int far fd_50F6_0AC8;
-extern int far fd_50F6_04F4;
-extern int far fd_3D57_0828;
+int far H_BPop[64];
+int far H_RPop[64];
+int far H_BFood[64];
+int far H_RFood[64];
+int far H_BHeal[64];
+int far H_RHeal[64];
+int far H_FoodA[64];
+int far H_ADead[64];
+int far H_PDead[64];
+int far H_FDead[64];
+extern long far OverallScore;
+extern int far BColoniesStarted;
+extern int far RColoniesStarted;
+extern int far BColoniesKilled;
+extern int far RColoniesKilled;
+extern int far HistStart;
+extern int far HistCnt;
 extern long far BAntsEaten;
-extern long far fd_50F6_0F30;
-extern long far fd_50F6_0EFC;
+extern long far BAntsExpired;
+extern long far BAntsKilled;
 extern long far RAntsEaten;
-extern long far fd_50F6_0FBC;
-extern long far fd_50F6_0F3E;
-extern long far fd_50F6_0FC2;
-extern long far fd_50F6_1000;
+extern long far RAntsExpired;
+extern long far RAntsKilled;
+extern long far TotalEggsLaidB;
+extern long far TotalEggsDiedB;
 
 void far ClearHistory(int newGame)
 {
     int i;
 
     for (i = 0; i < 64; i++) {
-        fd_50F6_0516[i] = 0;
-        fd_50F6_05A0[i] = 0;
-        fd_50F6_0626[i] = 0;
-        fd_50F6_06AE[i] = 0;
-        fd_50F6_073C[i] = 0;
-        fd_50F6_07CE[i] = 0;
-        fd_50F6_0856[i] = 0;
-        fd_50F6_08F0[i] = 0;
-        fd_50F6_0970[i] = 0;
-        fd_50F6_0A0A[i] = 0;
+        H_BPop[i] = 0;
+        H_RPop[i] = 0;
+        H_BFood[i] = 0;
+        H_RFood[i] = 0;
+        H_BHeal[i] = 0;
+        H_RHeal[i] = 0;
+        H_FoodA[i] = 0;
+        H_ADead[i] = 0;
+        H_PDead[i] = 0;
+        H_FDead[i] = 0;
     }
     if (newGame == 1) {
-        fd_50F6_0ADA = 0;
-        fd_50F6_0A90 = 1;
-        fd_50F6_0AC4 = 1;
-        fd_50F6_0A9E = 0;
-        fd_50F6_0AC8 = 0;
+        OverallScore = 0;
+        BColoniesStarted = 1;
+        RColoniesStarted = 1;
+        BColoniesKilled = 0;
+        RColoniesKilled = 0;
     }
-    fd_50F6_04F4 = 0x3f;
-    fd_3D57_0828 = 0;
+    HistStart = 0x3f;
+    HistCnt = 0;
     BAntsEaten = 0;
-    fd_50F6_0F30 = 0;
-    fd_50F6_0EFC = 0;
+    BAntsExpired = 0;
+    BAntsKilled = 0;
     RAntsEaten = 0;
-    fd_50F6_0FBC = 0;
-    fd_50F6_0F3E = 0;
-    fd_50F6_0FC2 = 0;
-    fd_50F6_1000 = 0;
+    RAntsExpired = 0;
+    RAntsKilled = 0;
+    TotalEggsLaidB = 0;
+    TotalEggsDiedB = 0;
 }
 
 void far win_DrawHistoryWindow(int flags)
@@ -176,7 +176,7 @@ void far win_DrawHistoryWindow(int flags)
     int i;
 
     if (flags & 2) {
-        win_FillObjRect(0x150e, f_1B4E_000D(0));
+        win_FillObjRect(0x150e, ConvColor(0));
         i = 0;
         while (i < 4) {
             if (shownGraphs[i] != (int)0x8000)
@@ -187,17 +187,17 @@ void far win_DrawHistoryWindow(int flags)
 }
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern int far * far fd_3D57_082A[];
-extern int far * far fd_3D57_0852[];
+extern int far * far HistGraphs[];
+extern int far * far AltHistGraphs[];
 extern void (far * near g_916C)(int, int, int, int, int);
-extern char far * far * far fd_50F6_02BA;
+extern char far * far * far HistGraphStrs;
 extern int far sprintf(char far *buf, char far *fmt, ...);
 extern void (far * near g_9128)(int, int, int);
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern int far f_24AB_030B(void);
-extern void far f_24AB_038D(int x, int y, char far *text);
+extern void far font_PrintStr(int x, int y, char far *text);
 extern int far f_24AB_0329(char far *text);
-extern void far f_1CE2_01F8(int, int, int, int, int);
+extern void far GBoxOutline(int, int, int, int, int);
 
 
 void far drawHistGraph(int graph, int hilite, int slot)
@@ -232,10 +232,10 @@ void far drawHistGraph(int graph, int hilite, int slot)
     r.top += 8;
     height = r.bottom - r.top;
     graph = (graph & 1) * 5 + (graph >> 1);
-    data = fd_3D57_082A[graph];
-    data2 = fd_3D57_0852[graph];
-    range.start = fd_50F6_04F4;
-    range.count = fd_3D57_0828;
+    data = HistGraphs[graph];
+    data2 = AltHistGraphs[graph];
+    range.start = HistStart;
+    range.count = HistCnt;
     j = (range.start - range.count) & 0x3f;
     max = 0;
     for (n = 0; range.count > n; n++) {
@@ -276,17 +276,17 @@ void far drawHistGraph(int graph, int hilite, int slot)
         py = y;
     }
     if (hilite == 0)
-        s = fd_50F6_02BA[graph];
+        s = HistGraphStrs[graph];
     else {
         sprintf(range.label, "%d", data[j]);
         s = range.label;
     }
     (*g_9128)(color, 0, color);
-    f_24AB_02AD(3);
-    f_24AB_038D(x, ty = y - (th = f_24AB_030B()) / 2, s);
+    font_SetFont(3);
+    font_PrintStr(x, ty = y - (th = f_24AB_030B()) / 2, s);
     width = f_24AB_0329(s);
-    f_1CE2_01F8(x - 1, ty - 1, width + x + 1, ty + th + 1, 1);
-    f_24AB_02AD(0);
+    GBoxOutline(x - 1, ty - 1, width + x + 1, ty + th + 1, 1);
+    font_SetFont(0);
 }
 
 
@@ -296,24 +296,24 @@ extern int far FoodB;
 extern int far FoodR;
 extern int far HealthB;
 extern int far HealthR;
-extern int far fd_50F6_1040;
+extern int far FoodA;
 extern int _fastcall win_IsWinOpen(int win);
 
 void far HistUpdate(void)
 {
-    fd_50F6_0516[fd_50F6_04F4] = BpopT;
-    fd_50F6_05A0[fd_50F6_04F4] = RpopT;
-    fd_50F6_0626[fd_50F6_04F4] = FoodB;
-    fd_50F6_06AE[fd_50F6_04F4] = FoodR;
-    fd_50F6_073C[fd_50F6_04F4] = HealthB;
-    fd_50F6_07CE[fd_50F6_04F4] = HealthR;
-    fd_50F6_0856[fd_50F6_04F4] = fd_50F6_1040;
-    fd_50F6_08F0[fd_50F6_04F4] = (int)fd_50F6_0F30;
-    fd_50F6_0970[fd_50F6_04F4] = (int)BAntsEaten;
-    fd_50F6_0A0A[fd_50F6_04F4] = (int)fd_50F6_0EFC;
-    if (fd_3D57_0828 < 0x3f)
-        fd_3D57_0828++;
-    fd_50F6_04F4 = (fd_50F6_04F4 + 1) & 0x3f;
+    H_BPop[HistStart] = BpopT;
+    H_RPop[HistStart] = RpopT;
+    H_BFood[HistStart] = FoodB;
+    H_RFood[HistStart] = FoodR;
+    H_BHeal[HistStart] = HealthB;
+    H_RHeal[HistStart] = HealthR;
+    H_FoodA[HistStart] = FoodA;
+    H_ADead[HistStart] = (int)BAntsExpired;
+    H_PDead[HistStart] = (int)BAntsEaten;
+    H_FDead[HistStart] = (int)BAntsKilled;
+    if (HistCnt < 0x3f)
+        HistCnt++;
+    HistStart = (HistStart + 1) & 0x3f;
     if (win_IsWinOpen(0x1500)) {
         clip_SetWin(0x1500);
         win_DrawHistoryWindow(3);

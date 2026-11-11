@@ -24,7 +24,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DB4:byte
 	extrn	_g_3DD2:byte
 	extrn	_g_3DD4:byte
-	extrn	_g_3DE0:byte
+	extrn	__foreColor:byte
 	extrn	_g_3DE2:byte
 	extrn	_g_3DE4:byte
 	extrn	_g_5AAC:byte
@@ -363,7 +363,7 @@ _f_1B73_0122	proc	near
 	push word ptr _g_3DD2
 	push word ptr _g_3DE4
 	push word ptr _g_3DE2
-	push word ptr _g_3DE0
+	push word ptr __foreColor
 	push ax
 	call dword ptr _g_9168
 	pop ax

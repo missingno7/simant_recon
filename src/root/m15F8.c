@@ -38,20 +38,20 @@ extern void far o15_384C_0152(char far *message, int code);
 extern int far fd_50F6_0A9C;
 extern int far fd_50F6_0AA6;
 extern long far MacTickCount(void);
-extern int far fd_3D57_07CC;
+extern int far GameSpeed;
 extern void far win_NoWindowsShouldBeLocked(void);
 extern void far f_0000_046F(void);
 extern long far fd_50F6_383A;
 void far f_15F8_0313(void);
-extern int far fd_50F6_047E;
-extern int far fd_50F6_0AA0;
-extern int far fd_50F6_105E;
+extern int far GamePaused;
+extern int far MeMoveMe;
+extern int far CurGameTool;
 extern int far fd_3D57_07CE[];
 extern void far DoAntSim(void);
 extern int _fastcall win_IsWinOpen(int win);
 extern int _fastcall win_IsWinInFront(int win);
 extern int far fd_50F6_04C0;
-extern void far o12_384C_100A(void);
+extern void far DrawMap(void);
 extern void far MakeDMap(int a);
 extern int far WaitedEnough(long *stamp, int delay);
 extern int far YardMode;
@@ -102,7 +102,7 @@ void main(int argc, char far * far *argv)
     fd_50F6_0AA6 = 0;
     frames = 0;
     MacTickCount();
-    fd_3D57_07CC = 1;
+    GameSpeed = 1;
     for (;;) {
         win_NoWindowsShouldBeLocked();
         frames++;
@@ -110,21 +110,21 @@ void main(int argc, char far * far *argv)
         fd_50F6_383A++;
         f_15F8_0313();
         i = MacTickCount();
-        if (fd_50F6_047E == 0 || (fd_50F6_0AA0 != 0 && fd_50F6_105E < 10)) {
-            i += fd_3D57_07CE[fd_3D57_07CC];
+        if (GamePaused == 0 || (MeMoveMe != 0 && CurGameTool < 10)) {
+            i += fd_3D57_07CE[GameSpeed];
             DoAntSim();
         }
-        if (fd_3D57_07CC != 3 || (fd_50F6_0A9C & 3) == 0) {
+        if (GameSpeed != 3 || (fd_50F6_0A9C & 3) == 0) {
             if (win_IsWinOpen(0x100)) {
-                if (fd_50F6_0AA6 >= 0 && !win_IsWinInFront(0x100) && fd_3D57_07CC != 3) {
+                if (fd_50F6_0AA6 >= 0 && !win_IsWinInFront(0x100) && GameSpeed != 3) {
                     if (fd_50F6_04C0 == 0) {
                         if (fd_50F6_0AA6 & 1)
-                            o12_384C_100A();
+                            DrawMap();
                         fd_50F6_0AA6 ^= 1;
                     }
                 } else {
                     MakeDMap(0);
-                    o12_384C_100A();
+                    DrawMap();
                     fd_50F6_0AA6 = 0;
                 }
             }

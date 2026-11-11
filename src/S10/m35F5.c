@@ -31,12 +31,12 @@ static int curMenu = -1;
 
 extern char near g_3DDE;
 extern char near g_3DDC;
-extern void far f_1CE2_044D(struct Rect far *r, int width);
+extern void far GRectOutline(struct Rect far *r, int width);
 extern int near g_3DE4;
-extern int near g_3DE0;
+extern int near _foreColor;
 extern int near g_3DE2;
 extern void (far * near g_9128)(int a, int b, int c);
-extern void far f_1FBD_0000(int x, int y, char far *s);
+extern void far GPutStr(int x, int y, char far *s);
 extern void far f_1FD2_03EB(struct Rect far *r, int v);
 
 void far o10_35F5_0000(int x, int y, char far *s, int v)
@@ -49,11 +49,11 @@ void far o10_35F5_0000(int x, int y, char far *s, int v)
     r.right = x + g_3DDE * len - 1;
     r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;
     r.bottom = y + g_3DDC - 1;
-    f_1CE2_044D(&r, -3);
-    (*g_9128)(g_3DE2, g_3DE0, g_3DE4);
-    f_1CE2_044D(&r, -2);
-    (*g_9128)(g_3DE2, g_3DE0, g_3DE4);
-    f_1FBD_0000(x, y, s);
+    GRectOutline(&r, -3);
+    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
+    GRectOutline(&r, -2);
+    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
+    GPutStr(x, y, s);
     f_1FD2_03EB(&r, v);
 }
 
@@ -69,10 +69,10 @@ void far o10_35F5_00D7(int x, int y, char far *s, int v)
     r.right = x + g_3DDE - 1;
     r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;
     r.bottom = y + g_3DDC * len - 1;
-    f_1CE2_044D(&r, -5);
-    (*g_9128)(g_3DE2, g_3DE0, g_3DE4);
-    f_1CE2_044D(&r, -2);
-    (*g_9128)(g_3DE2, g_3DE0, g_3DE4);
+    GRectOutline(&r, -5);
+    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
+    GRectOutline(&r, -2);
+    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
     while (*s) {
         f_1B4E_0110(x, y, *s);
         s++;
@@ -150,7 +150,7 @@ extern char far * far malloc(unsigned size);
 extern char far * near g_5AAC;
 extern void far f_1F80_0081(int a);
 extern void far f_1B73_0A40(void);
-extern void far f_1FD2_04D0(struct Pt far *pt);
+extern void far GetMousePos(struct Pt far *pt);
 extern int far fd_50F6_46BC[];
 extern int far fd_55B3_5AA0[2];
 extern char far * far GSaveRect(struct Rect far *r);
@@ -159,7 +159,7 @@ extern void far Punt(char far *fmt, ...);
 extern void far f_1FD2_02FF(void);
 extern int far f_1B73_032A(void);
 extern void far f_1B73_032E(struct Event far *ev);
-extern int far f_1FD2_04E5(struct Pt far *pt, struct Rect far *r);
+extern int far PointInRect(struct Pt far *pt, struct Rect far *r);
 extern int far f_1F58_0090(void);
 extern void far f_1B73_030F();
 extern void far f_1FD2_031A(void);
@@ -202,7 +202,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     g_5AAC = 0; last.x = last.y = -1;
     f_1F80_0081(1); f_1B73_0A40();
     mode = curMenu == -1 ? 0 : 1;
-    f_1FD2_04D0(&pt);
+    GetMousePos(&pt);
     maxLen = i = 0;
     for (; items[i] != 0; i++) {
         len = _fstrlen(items[i]);
@@ -241,9 +241,9 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     r.top += 3;
     r.bottom -= 3;
     f_1FD2_02B1(1);
-    f_1CE2_044D(&r, -3);
+    GRectOutline(&r, -3);
     f_1FD2_02B1(0);
-    f_1CE2_044D(&r, -1);
+    GRectOutline(&r, -1);
     f_1FD2_02B1(1);
     x = r.left;
     j = r.top;
@@ -283,11 +283,11 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
                 goto other;
         }
         if (down) {
-            f_1FD2_04D0(&pt);
+            GetMousePos(&pt);
             if (_fmemcmp(&pt, &last, 4) == 0)
                 continue;
             last = pt;
-            if (f_1FD2_04E5(&pt, &r)) {
+            if (PointInRect(&pt, &r)) {
                 i = (pt.y - r.top) / g_3DDC;
                 if (i >= 0 && i < nItems &&
                     items[i][1] != '-' && !(items[i][0] & 0x80))

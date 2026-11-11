@@ -22,16 +22,16 @@ void far DoTool(int x, int y);
 void far ExpAddAnt(int x, int y);
 void far ReDrawMapEdit(int flags);
 extern int far myButton(void);
-extern void far f_1FD2_04D0(struct Pt far *pt);
+extern void far GetMousePos(struct Pt far *pt);
 extern int far fd_50F6_0A9C;
 extern int _fastcall win_IsWinInFront(int win);
 extern int far fd_50F6_10D2[2];
-extern int far fd_50F6_3856;
-extern int far fd_50F6_3858;
-extern int far fd_50F6_110C[2];
-extern int far fd_55B3_19BE;
-extern int far fd_50F6_0508[2];
-extern int far fd_55B3_19C0;
+extern int far mapXsize;
+extern int far mapYsize;
+extern int far editTileRect[2];
+extern int far tileWidth;
+extern int far MapPnt[2];
+extern int far tileHeight;
 extern int far CurExpTool;
 extern unsigned char far fd_50F6_106C;
 
@@ -50,16 +50,16 @@ void far processExp(int x, int y, int shift)
             DoTool(x, y);
         ReDrawMapEdit(count);
         while (myButton() == 1) {
-            f_1FD2_04D0(&pt);
+            GetMousePos(&pt);
             fd_50F6_0A9C++;
             if (win_IsWinInFront(0x100)) {
-                nx = (pt.x - fd_50F6_10D2[0]) / fd_50F6_3856;
-                ny = (pt.y - fd_50F6_10D2[1]) / fd_50F6_3858;
+                nx = (pt.x - fd_50F6_10D2[0]) / mapXsize;
+                ny = (pt.y - fd_50F6_10D2[1]) / mapYsize;
                 if (MapPlane > 1)
                     nx -= 32;
             } else {
-                nx = (pt.x - fd_50F6_110C[0]) / fd_55B3_19BE + fd_50F6_0508[0];
-                ny = (pt.y - fd_50F6_110C[1]) / fd_55B3_19C0 + fd_50F6_0508[1];
+                nx = (pt.x - editTileRect[0]) / tileWidth + MapPnt[0];
+                ny = (pt.y - editTileRect[1]) / tileHeight + MapPnt[1];
             }
             if (nx != x || ny != y) {
                 fd_50F6_09FC[0] = x;
@@ -120,7 +120,7 @@ extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
 extern int _fastcall f_22BF_09B0(int win);
 extern void far MakeDMap(int mode);
-extern void far o12_384C_100A(void);
+extern void far DrawMap(void);
 
 void far ReDrawMapEdit(int flags)
 {
@@ -132,12 +132,12 @@ void far ReDrawMapEdit(int flags)
         if (flags & 3)
             return;
         MakeDMap(1);
-        o12_384C_100A();
+        DrawMap();
         return;
     }
 
     MakeDMap(1);
-    o12_384C_100A();
+    DrawMap();
     if (!f_22BF_09B0(0))
         return;
     if (flags & 3)
@@ -192,7 +192,7 @@ void far DropWall(int fromX, int fromY, int tx, int ty)
 }
 
 extern int far DigMyNewHole(int x, int y);
-extern void far * far * far fd_50F6_034C;
+extern void far * far * far WindPromptStrs;
 extern void far EditMessage(void far *msg, long ticks, int mode);
 extern int far IsItDigable(int plane, int x, int y);
 extern void far DigTileB(int x, int y);
@@ -227,7 +227,7 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
                     myBeginSound(0x13, 0, 0x7e);
                 } else {
                     myBeginSound(1, 0, 0x7e);
-                    EditMessage(fd_50F6_034C[22], 120L, 1);
+                    EditMessage(WindPromptStrs[22], 120L, 1);
                 }
                 break;
             case 2:
@@ -251,7 +251,7 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
             switch (MapPlane) {
             case 1:
                 myBeginSound(1, 0, 0x7e);
-                EditMessage(fd_50F6_034C[21], 180L, 1);
+                EditMessage(WindPromptStrs[21], 180L, 1);
                 break;
             case 2:
                 if (IsItDigable(2, x, y) || y == 0)
@@ -414,8 +414,8 @@ extern int far FindInAList(int x, int y);
 extern int far Tindex;
 extern unsigned char far AlistT[];
 extern void far DeadAntHere(int x, int y, int type);
-extern int far fd_50F6_0F12;
-extern int far fd_50F6_0F34;
+extern int far SpidX;
+extern int far SpidY;
 extern void far f_0CDB_0DE0(void);
 extern int far FindInLionList(int x, int y);
 extern void far KillAntLion(int index);
@@ -452,7 +452,7 @@ void far ExpKillAnts(int x, int y)
                         LifeA[kx][ky] = 0;
                     }
                 }
-                if ((fd_50F6_0F12 >> 4) == kx && (fd_50F6_0F34 >> 4) == ky)
+                if ((SpidX >> 4) == kx && (SpidY >> 4) == ky)
                     f_0CDB_0DE0();
                 v = MapA[kx][ky];
                 if (v >= 0x38 && v <= 0x3e)
@@ -484,7 +484,7 @@ void far ExpKillAnts(int x, int y)
 }
 
 extern int far GetMap(int plane, int x, int y);
-extern int far fd_50F6_1040;
+extern int far FoodA;
 extern int far FoodB;
 extern int far FoodR;
 extern void far SetMap(int plane, int x, int y, int value);
@@ -509,8 +509,8 @@ int far IncFoodHere(int x, int y)
             return 0;
         v = SRand1(8);
         if (MapPlane == 1)
-            if (fd_50F6_1040 > 0)
-                fd_50F6_1040--;
+            if (FoodA > 0)
+                FoodA--;
         else if (MapPlane == 2)
             if (FoodB > 0)
                 FoodB--;
@@ -525,7 +525,7 @@ int far IncFoodHere(int x, int y)
                 v = base;
         } else v++;
         if (MapPlane == 1)
-            fd_50F6_1040++;
+            FoodA++;
         else if (MapPlane == 2)
             FoodB++;
         else
@@ -586,9 +586,9 @@ int far IsItWall(int value)
     return value >= 0x60 && value <= 0x67;
 }
 
-extern int far fd_50F6_0224;
-extern long far fd_50F6_1068;
-extern long far fd_50F6_1082;
+extern int far TilesDugB;
+extern long far TileTotXB;
+extern long far TileTotYB;
 extern void far SmoothEdgesB(int x, int y);
 extern unsigned char far ExitMapB[64][64];
 
@@ -597,14 +597,14 @@ void far FillDirtB(int x, int y)
     MapB[x][y] = '.';
     LifeB[x][y] = 0;
 
-    if (fd_50F6_0224 > 1) {
-        fd_50F6_1068 -= x;
-        if (fd_50F6_1068 < 0)
-            fd_50F6_1068 = 0;
-        fd_50F6_1082 -= y;
-        if (fd_50F6_1082 < 0)
-            fd_50F6_1082 = 0;
-        --fd_50F6_0224;
+    if (TilesDugB > 1) {
+        TileTotXB -= x;
+        if (TileTotXB < 0)
+            TileTotXB = 0;
+        TileTotYB -= y;
+        if (TileTotYB < 0)
+            TileTotYB = 0;
+        --TilesDugB;
     }
 
     SmoothEdgesB(x, y - 1);
@@ -616,8 +616,8 @@ void far FillDirtB(int x, int y)
 }
 
 extern int far TilesDugR;
-extern long far fd_50F6_108E;
-extern long far fd_50F6_10A2;
+extern long far TileTotXR;
+extern long far TileTotYR;
 extern void far SmoothEdgesR(int x, int y);
 extern unsigned char far ExitMapR[64][64];
 
@@ -627,12 +627,12 @@ void far FillDirtR(int x, int y)
     LifeR[x][y] = 0;
 
     if (TilesDugR > 1) {
-        fd_50F6_108E -= x;
-        if (fd_50F6_108E < 0)
-            fd_50F6_108E = 0;
-        fd_50F6_10A2 -= y;
-        if (fd_50F6_10A2 < 0)
-            fd_50F6_10A2 = 0;
+        TileTotXR -= x;
+        if (TileTotXR < 0)
+            TileTotXR = 0;
+        TileTotYR -= y;
+        if (TileTotYR < 0)
+            TileTotYR = 0;
         --TilesDugR;
     }
 

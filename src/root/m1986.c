@@ -30,7 +30,7 @@ typedef struct {
     int dirty;
 } OpenDBRec;
 
-extern OpenDBRec far fd_50F6_3958[];
+extern OpenDBRec far openDBData[];
 extern int far fd_50F6_3956;
 extern IndexEntry far * far fd_50F6_3952;
 
@@ -40,7 +40,7 @@ extern int far read(int fd, void far *buffer, unsigned int count);
 extern int far close(int fd);
 extern void far Punt(char far *format, ...);
 extern void far DosPunt(char far *message);
-extern void far * far * far f_171C_13CA(long size, int flags, char far *name);
+extern void far * far * far Ralloc(long size, int flags, char far *name);
 extern void far free(void far *p);
 
 void far OpenIndex(char far *path, int db)
@@ -51,12 +51,12 @@ void far OpenIndex(char far *path, int db)
     IndexEntry far *index;
 
     sprintf(name, "%s.ndx", path);
-    fd = fd_50F6_3958[db].indexFile = open(name, 0x8002);
+    fd = openDBData[db].indexFile = open(name, 0x8002);
     if (fd <= 0)
         DosPunt("Index file missing");
-    read(fd, &fd_50F6_3958[db].indexHeader, 20);
-    size = fd_50F6_3958[db].indexHeader.count << 3;
-    index = fd_50F6_3958[db].index = *f_171C_13CA((long)size, 0, name);
+    read(fd, &openDBData[db].indexHeader, 20);
+    size = openDBData[db].indexHeader.count << 3;
+    index = openDBData[db].index = *Ralloc((long)size, 0, name);
     if (index == 0L)
         Punt("Not enough memory to read index file in.");
     read(fd, index, size);
@@ -69,8 +69,8 @@ void far CreateIndex(char far *name, int db)
 
 void far CloseIndex(int db)
 {
-    if (fd_50F6_3958[db].index)
-        free(fd_50F6_3958[db].index);
+    if (openDBData[db].index)
+        free(openDBData[db].index);
 }
 
 
@@ -80,12 +80,12 @@ IndexEntry far * far FindIndex(int db, int id, int kind)
     int top;
 
     fd_50F6_3956 = 0;
-    top = fd_50F6_3958[db].indexHeader.count - 1;
+    top = openDBData[db].indexHeader.count - 1;
     if (top == -1)
         return 0L;
     while (fd_50F6_3956 <= top) {
         mid = (fd_50F6_3956 + top) / 2;
-        fd_50F6_3952 = &fd_50F6_3958[db].index[mid];
+        fd_50F6_3952 = &openDBData[db].index[mid];
         if (fd_50F6_3952->kind > kind) goto high;
         else {
             if (fd_50F6_3952->kind != kind || fd_50F6_3952->id < id) {
@@ -96,7 +96,7 @@ high:
             top = mid - 1;
         }
     }
-    fd_50F6_3952 = &fd_50F6_3958[db].index[fd_50F6_3956];
+    fd_50F6_3952 = &openDBData[db].index[fd_50F6_3956];
     if (fd_50F6_3952->id == id && fd_50F6_3952->kind == kind)
         return fd_50F6_3952;
     return 0L;

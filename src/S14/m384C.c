@@ -1,7 +1,7 @@
 /* Overlay section S14, code frame 384C: score, scenario and picture dialogs.
  *
  * Source-form evidence (worker resF):
- *  - Every font choice is written `if (g_3DB2 == 320) f_24AB_02AD(a); else f_24AB_02AD(b);`
+ *  - Every font choice is written `if (g_3DB2 == 320) font_SetFont(a); else font_SetFont(b);`
  *    (six sites).  The two calls are cross-jumped into the same bytes as a `?:` argument, but
  *    each if/else adds two /Zi line entries; with all six the 52-entry LINNUM flushes land where
  *    the oracle's relocation order needs record breaks (DrawCastePopUp, PictureDialog,
@@ -29,22 +29,22 @@ void far SpiderDialog(void);
 void far CustomerIDDialog(void);
 
 
-extern int far fd_50F6_04F4;
-extern int far fd_3D57_0828;
-extern int far fd_50F6_073C[64];
-extern int far fd_50F6_0626[64];
-extern int far fd_50F6_06AE[64];
-extern long far fd_50F6_0FC2;
-extern long far fd_50F6_1000;
-extern int far fd_50F6_09FA;
-extern int far fd_50F6_0A00;
-extern int far fd_50F6_0EAC;
-extern int far fd_50F6_0A90;
-extern int far fd_50F6_0AC4;
-extern int far fd_50F6_0A9E;
-extern unsigned char far fd_3D57_00A4[12][16];
+extern int far HistStart;
+extern int far HistCnt;
+extern int far H_BHeal[64];
+extern int far H_BFood[64];
+extern int far H_RFood[64];
+extern long far TotalEggsLaidB;
+extern long far TotalEggsDiedB;
+extern int far BlackLost;
+extern int far RedLost;
+extern int far CurGameType;
+extern int far BColoniesStarted;
+extern int far RColoniesStarted;
+extern int far BColoniesKilled;
+extern unsigned char far YMapPopB[12][16];
 extern int far MeHealth;
-extern long far fd_50F6_0C26;
+extern long far GameTime;
 
 static char weights[8] = { 13, 17, 19, 23, 29, 31, 37, 41 };
 
@@ -57,10 +57,10 @@ long far CalcScore(int far *scores)
     for (i = 0; i < 8; i++)
         scores[i] = 0;
 
-    k = (fd_50F6_04F4 - fd_3D57_0828) & 0x3f;
+    k = (HistStart - HistCnt) & 0x3f;
     sum = 0;
-    for (i = 0; i < fd_3D57_0828; i++) {
-        sum += fd_50F6_073C[k];
+    for (i = 0; i < HistCnt; i++) {
+        sum += H_BHeal[k];
         k = (k + 1) & 0x3f;
     }
     if (i > 0)
@@ -70,11 +70,11 @@ long far CalcScore(int far *scores)
 
     {
         int historyIndex;
-        historyIndex = (fd_50F6_04F4 - fd_3D57_0828) & 0x3f;
+        historyIndex = (HistStart - HistCnt) & 0x3f;
         sum = sum2 = 0;
-        for (k = 0; k < fd_3D57_0828; k++) {
-            sum += fd_50F6_0626[historyIndex];
-            sum2 += fd_50F6_06AE[historyIndex];
+        for (k = 0; k < HistCnt; k++) {
+            sum += H_BFood[historyIndex];
+            sum2 += H_RFood[historyIndex];
             historyIndex = (historyIndex + 1) & 0x3f;
         }
         historyIndex = sum2 + sum;
@@ -84,33 +84,33 @@ long far CalcScore(int far *scores)
             scores[1] = 0;
     }
 
-    if (fd_50F6_0FC2 > 0)
-        scores[2] = (fd_50F6_0FC2 - fd_50F6_1000) * 100 / fd_50F6_0FC2;
+    if (TotalEggsLaidB > 0)
+        scores[2] = (TotalEggsLaidB - TotalEggsDiedB) * 100 / TotalEggsLaidB;
     else
         scores[2] = 100;
 
-    n = fd_50F6_09FA + fd_50F6_0A00;
+    n = BlackLost + RedLost;
     if (n > 0)
-        scores[3] = fd_50F6_09FA * 100 / n;
+        scores[3] = BlackLost * 100 / n;
     else
         scores[3] = 100;
 
-    if (fd_50F6_0EAC == 2 || fd_50F6_0EAC == 3) {
-        n = fd_50F6_0AC4 + fd_50F6_0A90;
+    if (CurGameType == 2 || CurGameType == 3) {
+        n = RColoniesStarted + BColoniesStarted;
         if (n > 0)
-            scores[4] = (long)fd_50F6_0A90 * 100 / n;
+            scores[4] = (long)BColoniesStarted * 100 / n;
         else
             scores[4] = 100;
-        n = fd_50F6_0A9E + fd_50F6_0A90;
+        n = BColoniesKilled + BColoniesStarted;
         if (n > 0)
-            scores[5] = (long)fd_50F6_0A90 * 100 / n;
+            scores[5] = (long)BColoniesStarted * 100 / n;
         else
             scores[5] = 100;
 
         sum = 0;
         for (j = 0; j < 16; j++)
             for (k = j < 5 ? 3 : 2; k < 12; k++)
-                if (fd_3D57_00A4[k][j])
+                if (YMapPopB[k][j])
                     sum++;
         if (sum > 0)
             scores[6] = (long)sum * 100 / 155;
@@ -120,7 +120,7 @@ long far CalcScore(int far *scores)
         sum = 0;
         for (j = 0; j < 16; j++)
             for (k = 0; k < 2 || (j < 5 && k < 3); k++)
-                if (fd_3D57_00A4[k][j])
+                if (YMapPopB[k][j])
                     sum++;
         if (sum > 0)
             scores[7] = (long)sum * 100 / 37;
@@ -132,24 +132,24 @@ long far CalcScore(int far *scores)
     for (k = 0; k < 8; k++)
         score += (long)scores[k] * weights[k] * 51;
 
-    if (fd_50F6_0EAC != 2) {
+    if (CurGameType != 2) {
         score = score * 29 / 10;
-        if (fd_50F6_0C26 < 4100) {
-            q = fd_50F6_0C26 / 100;
+        if (GameTime < 4100) {
+            q = GameTime / 100;
             if (q <= 0)
                 q = 1;
             score = q * score / 41;
         }
     } else {
-        if (fd_50F6_0C26 < 8100) {
-            q = fd_50F6_0C26 / 100;
+        if (GameTime < 8100) {
+            q = GameTime / 100;
             if (q <= 0)
                 q = 1;
             score = q * score / 81;
         }
         score *= 5;
     }
-    return fd_50F6_0C26 + score;
+    return GameTime + score;
 }
 
 
@@ -254,11 +254,11 @@ void far DoWinHelp(int win)
     f_23AE_01DB(win);
 }
 
-extern long far fd_50F6_0ADA;
+extern long far OverallScore;
 extern void far f_22BF_059A(int obj, ...);
-extern char far * far * far fd_50F6_034C;
+extern char far * far * far WindPromptStrs;
 extern int near g_3DB2;
-extern void far f_24AB_02AD(int font);
+extern void far font_SetFont(int font);
 extern void far f_22BF_0D53(int obj, char far *format, ...);
 extern char far * far * far fd_50F6_0368;
 extern char far * far * far fd_50F6_0324;
@@ -270,18 +270,18 @@ void far ScoreDialog(void)
     char title[80];
     int i;
 
-    fd_50F6_0ADA = CalcScore(scores);
+    OverallScore = CalcScore(scores);
     f_23AE_0377(0x1800);
     for (i = 0; i < 4; i++)
         f_22BF_059A(0x1802 + i, scores[i]);
-    f_22BF_059A(0x180c, fd_50F6_034C[14]);
+    f_22BF_059A(0x180c, WindPromptStrs[14]);
     f_218D_042B();
     f_20E8_04B6(0x1800);
     if (g_3DB2 == 320)
-        f_24AB_02AD(0);
+        font_SetFont(0);
     else
-        f_24AB_02AD(4);
-    if (fd_50F6_0EAC == 2) {
+        font_SetFont(4);
+    if (CurGameType == 2) {
         for (i = 4; i < 8; i++)
             f_22BF_0D53(0x1802 + i, "%d%%", scores[i]);
     } else {
@@ -289,23 +289,23 @@ void far ScoreDialog(void)
             f_22BF_0D53(0x1802 + i, fd_50F6_0368[16]);
     }
     if (g_3DB2 == 320)
-        f_24AB_02AD(3);
+        font_SetFont(3);
     else
-        f_24AB_02AD(4);
-    if (fd_50F6_0EAC == 3) {
+        font_SetFont(4);
+    if (CurGameType == 3) {
         f_22BF_0D53(0x180a, fd_50F6_0368[17]);
         f_22BF_0D53(0x180b, fd_50F6_0368[18]);
         ev.code = 0;
     } else {
         title[0] = 0;
         _fstrcat(title, fd_50F6_0368[13]);
-        _fstrcat(title, fd_50F6_0324[fd_50F6_0EAC]);
+        _fstrcat(title, fd_50F6_0324[CurGameType]);
         _fstrcat(title, fd_50F6_0368[14]);
         f_22BF_0D53(0x180a, title);
-        f_22BF_0D53(0x180b, "%ld", fd_50F6_0ADA);
+        f_22BF_0D53(0x180b, "%ld", OverallScore);
         ev.code = 0;
     }
-    f_24AB_02AD(0);
+    font_SetFont(0);
     while (f_22BF_09B0(0x1800)) {
         if (f_218D_03F1(&ev) && !(ev.code & 0x8000))
             break;
@@ -315,14 +315,14 @@ void far ScoreDialog(void)
     f_23AE_01DB(0x1800);
 }
 
-extern int far fd_50F6_1074;
+extern int far LessonTemp;
 extern int far f_24AB_0367(int c);
 extern int far f_24AB_030B(void);
-extern int far fd_50F6_0AEC[];
-extern int far fd_50F6_0AFA[];
+extern int far CastePopB[];
+extern int far CastePopR[];
 extern void _fastcall win_SetColorFromObjNum(int obj);
-extern void far f_24AB_038D(int x, int y, char far *text);
-extern int near g_3DE0;
+extern void far font_PrintStr(int x, int y, char far *text);
+extern int near _foreColor;
 extern void (far * near g_9134)(int, int, int, int, int);
 
 void far DrawCastePopUp(void)
@@ -332,16 +332,16 @@ void far DrawCastePopUp(void)
     int half, rem, acc, gap, lineh, width, left, maxw, h, top;
     int i, w, y, max, a, b;
 
-    fd_50F6_1074 = 1;
+    LessonTemp = 1;
     half = g_3DB2 == 320 ? 1 : 2;
     f_20E8_04B6(0x1700);
     f_1FD2_057F();
     win_GetObjRect(0x1702, &r);
     clip_SubInclude(&r);
     if (g_3DB2 == 320)
-        f_24AB_02AD(0);
+        font_SetFont(0);
     else
-        f_24AB_02AD(2);
+        font_SetFont(2);
     maxw = 0;
     for (i = '0'; i <= '9'; i++) {
         w = f_24AB_0367(i);
@@ -363,10 +363,10 @@ void far DrawCastePopUp(void)
     y = top = r.top;
     max = 1;
     for (i = 1; i < 6; i++) {
-        if (fd_50F6_0AEC[i] > max)
-            max = fd_50F6_0AEC[i];
-        if (fd_50F6_0AFA[i] > max)
-            max = fd_50F6_0AFA[i];
+        if (CastePopB[i] > max)
+            max = CastePopB[i];
+        if (CastePopR[i] > max)
+            max = CastePopR[i];
     }
     for (i = 0; i < 6; i++, y += lineh * 2 + gap) {
         acc += rem;
@@ -376,20 +376,20 @@ void far DrawCastePopUp(void)
         }
         if (i == 5)
             y--;
-        a = fd_50F6_0AEC[i] * (long)width / max;
-        b = fd_50F6_0AFA[i] * (long)width / max;
+        a = CastePopB[i] * (long)width / max;
+        b = CastePopR[i] * (long)width / max;
         win_SetColorFromObjNum(0x1703);
-        sprintf(buf, "%d", fd_50F6_0AEC[i]);
-        f_24AB_038D(r.left, y, buf);
+        sprintf(buf, "%d", CastePopB[i]);
+        font_PrintStr(r.left, y, buf);
         if (i)
-            (*g_9134)(left, half / 2 + y, left + a, h - half + y, g_3DE0);
+            (*g_9134)(left, half / 2 + y, left + a, h - half + y, _foreColor);
         win_SetColorFromObjNum(0x1704);
-        sprintf(buf, "%d", fd_50F6_0AFA[i]);
-        f_24AB_038D(r.left, h + y, buf);
+        sprintf(buf, "%d", CastePopR[i]);
+        font_PrintStr(r.left, h + y, buf);
         if (i)
-            (*g_9134)(left, half / 2 + h + y, left + b, h * 2 - half + y, g_3DE0);
+            (*g_9134)(left, half / 2 + h + y, left + b, h * 2 - half + y, _foreColor);
     }
-    f_24AB_02AD(0);
+    font_SetFont(0);
     f_1FD2_057F();
     do
         f_218D_03E8();
@@ -398,23 +398,23 @@ void far DrawCastePopUp(void)
 }
 
 
-extern int far fd_50F6_047E;
-extern int far fd_50F6_105E;
+extern int far GamePaused;
+extern int far CurGameTool;
 extern void far f_15D9_009C(void far *text, long pos, int mode);
 
 void far SetDefaultWindPrompt(int mode)
 {
-    if (fd_50F6_047E == 0)
+    if (GamePaused == 0)
         f_15D9_009C(0L, -2L, mode);
-    else if (fd_50F6_105E == -1)
-        f_15D9_009C(fd_50F6_034C[2], -2L, mode);
-    else if (fd_50F6_105E == 10)
-        f_15D9_009C(fd_50F6_034C[3], -2L, mode);
-    else if (fd_50F6_105E == 11)
-        f_15D9_009C(fd_50F6_034C[17], -2L, mode);
+    else if (CurGameTool == -1)
+        f_15D9_009C(WindPromptStrs[2], -2L, mode);
+    else if (CurGameTool == 10)
+        f_15D9_009C(WindPromptStrs[3], -2L, mode);
+    else if (CurGameTool == 11)
+        f_15D9_009C(WindPromptStrs[17], -2L, mode);
 }
 
-extern int far fd_3D57_07A8[];
+extern int far OptionStates[];
 extern char far * far * far f_075B_0242(int object);
 void far PictureDialog(char far * far *, int, int, int);
 extern void far free(char far * far *block);
@@ -426,7 +426,7 @@ void far PictStrnDialog(int picture, int object, int force)
     char far * far *strings;
 
     WinPrintf("StrnID=%d", object);
-    if (force || fd_3D57_07A8[3]) {
+    if (force || OptionStates[3]) {
         count = 0;
         strings = f_075B_0242(object);
         if (strings)
@@ -440,7 +440,7 @@ void far PictStrnDialog(int picture, int object, int force)
     }
 }
 
-extern void far f_208F_0419(struct Pt far *size, int id);
+extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int far f_24AB_0329(char far *text);
 extern int near g_3DB4;
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
@@ -456,12 +456,12 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     struct Event ev;
 
     if (g_3DB2 == 320)
-        f_24AB_02AD(3);
+        font_SetFont(3);
     else
-        f_24AB_02AD(4);
+        font_SetFont(4);
     lineh = f_24AB_030B();
     if (picture)
-        f_208F_0419(&size, picture);
+        gr_BitMapSize(&size, picture);
     h = (picture ? size.v + 2 : 0) + count * lineh + 8;
     maxw = 50;
     for (i = 0; i < count; i++) {
@@ -481,9 +481,9 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
         r.top += size.v + 2;
     }
     if (g_3DB2 == 320)
-        f_24AB_02AD(3);
+        font_SetFont(3);
     else
-        f_24AB_02AD(4);
+        font_SetFont(4);
     win_SetColorFromObjNum(0x1e01);
     for (i = 0; i < count; i++) {
         r.bottom = r.top + lineh;
@@ -498,11 +498,11 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     }
     f_20E8_0635(0x1e00);
     WinPrintf("PictStrnDialog: %d", picture);
-    f_24AB_02AD(0);
+    font_SetFont(0);
 }
 
 
-extern int far fd_50F6_0366;
+extern int far BlackWon;
 extern void far f_00DF_00B1(int id, int arg);
 extern char far * far * far fd_50F6_0328;
 extern int far f_00DF_0138(void);
@@ -516,16 +516,16 @@ void far EndGameDialog(void)
     long score, s;
     int level, played;
 
-    if (fd_3D57_07A8[1]) {
-        if (fd_50F6_0366 == 0)
+    if (OptionStates[1]) {
+        if (BlackWon == 0)
             f_00DF_00B1(0x271a, 0x7e);
-        else if (fd_50F6_0EAC == 2)
+        else if (CurGameType == 2)
             f_00DF_00B1(0x2718, 0x7e);
         else
             f_00DF_00B1(0x2718, 0x7e);
     }
     score = CalcScore(scores);
-    s = fd_50F6_0EAC == 2 ? score / 5 : score;
+    s = CurGameType == 2 ? score / 5 : score;
     if (s < 214220L)
         level = 0;
     else if (s < 428440L)
@@ -536,18 +536,18 @@ void far EndGameDialog(void)
         level = 3;
     else
         level = 4;
-    if (fd_50F6_0366 == 0)
+    if (BlackWon == 0)
         level += 5;
     f_20E8_04B6(0x400);
     if (g_3DB2 == 320)
-        f_24AB_02AD(2);
+        font_SetFont(2);
     else
-        f_24AB_02AD(4);
-    f_22BF_0D53(0x402, fd_50F6_0324[fd_50F6_0EAC]);
+        font_SetFont(4);
+    f_22BF_0D53(0x402, fd_50F6_0324[CurGameType]);
     f_22BF_0D53(0x403, "%ld", score);
     f_22BF_0D53(0x404, fd_50F6_0328[level]);
     played = 0;
-    f_24AB_02AD(0);
+    font_SetFont(0);
     f_00F8_02F7(100);
     while (f_22BF_09B0(0x400)) {
         if (f_218D_03E8() || f_00F8_05F2())
@@ -564,7 +564,7 @@ void far EndGameDialog(void)
 extern void _fastcall f_22BF_0967(int obj, int bitmap);
 extern void far myBeginSound(int sound, int a, int b);
 extern long far f_00F8_02BE(void);
-extern int far fd_3D57_09B4[];
+extern int far AnTab[];
 extern void far f_00F8_0265(long ticks);
 extern int far SRand1(int range);
 
@@ -598,7 +598,7 @@ void far SpiderDialog(void)
                 frame = 0;
                 myBeginSound(0x2d, frame, 0x7e);
             }
-            bmp = fd_3D57_09B4[frame] + 0x2ee1;
+            bmp = AnTab[frame] + 0x2ee1;
             win_DrawBitMap(r.left, r.top, bmp);
         }
         f_00F8_0265(1L);
@@ -614,13 +614,13 @@ void far SpiderDialog(void)
 
 
 extern char far * far * far db_LoadObject(int object, int kind);
-extern char far * far f_171C_1B84(char far * far *handle);
+extern char far * far mem_Lock(char far * far *handle);
 extern char far * far * far fd_50F6_3836;
 extern char far * far * far fd_50F6_3938;
 extern char far * far * far fd_50F6_3934;
 extern int far f_1F58_0038(void);
 extern void far f_1F58_0090(void);
-extern void far f_171C_1BBA(char far * far *handle);
+extern void far mem_Unlock(char far * far *handle);
 extern void far db_ReleaseHandle(char far * far *handle);
 
 void far CustomerIDDialog(void)
@@ -631,20 +631,20 @@ void far CustomerIDDialog(void)
 
     h83 = db_LoadObject(0x83, 10);
     h84 = db_LoadObject(0x84, 10);
-    strings[0] = f_171C_1B84(h83);
-    strings[1] = f_171C_1B84(fd_50F6_3836);
-    strings[2] = f_171C_1B84(fd_50F6_3938);
+    strings[0] = mem_Lock(h83);
+    strings[1] = mem_Lock(fd_50F6_3836);
+    strings[2] = mem_Lock(fd_50F6_3938);
     strings[3] = " ";
-    strings[4] = f_171C_1B84(h84);
-    strings[5] = f_171C_1B84(fd_50F6_3934);
+    strings[4] = mem_Lock(h84);
+    strings[5] = mem_Lock(fd_50F6_3934);
     f_218D_042B();
     while (f_1F58_0038())
         f_1F58_0090();
     PictureDialog(strings, 6, 0, 1);
-    f_171C_1BBA(h83);
-    f_171C_1BBA(h84);
-    f_171C_1BBA(fd_50F6_3836);
-    f_171C_1BBA(fd_50F6_3934);
+    mem_Unlock(h83);
+    mem_Unlock(h84);
+    mem_Unlock(fd_50F6_3836);
+    mem_Unlock(fd_50F6_3934);
     db_ReleaseHandle(h83);
     db_ReleaseHandle(h84);
 }

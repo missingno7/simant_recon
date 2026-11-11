@@ -14,8 +14,8 @@ extern void far * far ch_CreateTable(int size);
 extern char far * far ch_LookUpId(int object, int kind, void far *table);
 extern int far ch_AddEntry(int object, int kind, void far *table, char far *handle);
 extern char far * far DBRecall(int db, int object, int kind, int far *size);
-extern void far f_171C_15A2(char far *handle, int type);
-extern void far f_171C_13E4(char far *handle);
+extern void far RallocSetType(char far *handle, int type);
+extern void far RallocFree(char far *handle);
 extern int far ch_LookUpHandle(char far *handle, void far *table, int far *object, int far *kind);
 extern void far ch_DeleteEntry(int object, int kind, void far *table);
 extern void far ch_RemoveEntry(int object, int kind, void far *table);
@@ -63,7 +63,7 @@ char far * far f_1A53_00BA(int object, int kind)
 
     handle = db_LoadObject(object, kind);
     if (handle)
-        f_171C_15A2(handle, 1);
+        RallocSetType(handle, 1);
     return handle;
 }
 
@@ -73,7 +73,7 @@ char far * far f_1A53_00F0(int object, int kind, int type)
 
     handle = db_LoadObject(object, kind);
     if (handle)
-        f_171C_15A2(handle, type);
+        RallocSetType(handle, type);
     return handle;
 }
 
@@ -98,7 +98,7 @@ char far * far db_LoadObject(int object, int kind)
         WinPrintf("Memory full or object missing - cannot load object:id=%d, type=%d", object, kind);
         return 0L;
     }
-    f_171C_15A2(handle, 0);
+    RallocSetType(handle, 0);
     return handle;
 }
 
@@ -111,7 +111,7 @@ void far db_PurgeObject(int object, int kind)
     handle = ch_LookUpId(object, kind, db_cacheTable);
     if (handle) {
         ch_DeleteEntry(object, kind, db_cacheTable);
-        f_171C_13E4(handle);
+        RallocFree(handle);
     }
 }
 
@@ -124,14 +124,14 @@ void far db_PurgeHandle(char far *handle)
         Punt("Purge attempt with database closed");
     if (ch_LookUpHandle(handle, db_cacheTable, &object, &kind)) {
         ch_DeleteEntry(object, kind, db_cacheTable);
-        f_171C_13E4(handle);
+        RallocFree(handle);
     } else
         WinPrintf("\a\nPurge handle - handle not found!! handle=%p", handle);
 }
 
 void far db_ReleaseHandle(char far *handle)
 {
-    f_171C_15A2(handle, 3);
+    RallocSetType(handle, 3);
 }
 
 void far db_ReleaseObject(unsigned int object, int kind)
@@ -143,7 +143,7 @@ void far db_ReleaseObject(unsigned int object, int kind)
             Punt("Purge attempt with database closed");
         handle = ch_LookUpId(object, kind, db_cacheTable);
         if (handle)
-            f_171C_15A2(handle, 3);
+            RallocSetType(handle, 3);
         else
             Punt("Release %d not in cache! ");
     }

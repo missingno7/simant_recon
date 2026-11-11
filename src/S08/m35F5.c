@@ -1,13 +1,13 @@
 /* Overlay section S08, code frame 35F5: world generation (RandWorld unit). */
 
-extern int far fd_3D57_07CC;
-int far fd_50F6_0FBA;
-int far fd_50F6_0FFE;
+extern int far GameSpeed;
+int far MeWarnHealth;
+int far BlkWarnHealth;
 int far CurExpTool;
-int far fd_50F6_073A;
-int far fd_50F6_06AA;
-int far fd_50F6_0850;
-int far fd_50F6_07C8;
+int far SwarmCntR;
+int far SwarmCntB;
+int far QueenStorageR;
+int far QueenStorageB;
 
 extern unsigned char far MapA[128][64];
 extern unsigned char far MapB[64][64];
@@ -18,7 +18,7 @@ extern unsigned char far LifeA[128][64];
 extern unsigned char far LifeB[64][64];
 extern unsigned char far LifeR[64][64];
 extern unsigned char far PherMapA[64][32];
-extern unsigned char far fd_3E1D_D89F[64][32];
+extern unsigned char far PherMapF[64][32];
 extern unsigned char far PherMapBN[64][32];
 extern unsigned char far PherMapBT[64][32];
 extern unsigned char far PherMapRN[64][32];
@@ -26,37 +26,37 @@ extern unsigned char far PherMapRT[64][32];
 extern unsigned char far HoleMapB[64];
 extern unsigned char far HoleMapR[64];
 extern int far TERRAINset;
-extern int far fd_50F6_0EAC;
-extern long far fd_50F6_10A2;
-extern long far fd_50F6_108E;
-extern long far fd_50F6_1082;
-extern long far fd_50F6_1068;
-extern int far fd_50F6_0224;
+extern int far CurGameType;
+extern long far TileTotYR;
+extern long far TileTotXR;
+extern long far TileTotYB;
+extern long far TileTotXB;
+extern int far TilesDugB;
 extern int far TilesDugR;
-extern int far fd_50F6_020E;
-extern int far fd_50F6_0200;
-extern int far fd_50F6_10C0;
-extern int far fd_50F6_10B2;
-extern int far fd_50F6_0242;
-extern int far fd_50F6_035E;
-extern int far fd_50F6_036C;
-extern int far fd_3D57_02B4[2];
-extern int far fd_3D57_02B8[2];
+extern int far TileMassYR;
+extern int far TileMassXR;
+extern int far TileMassYB;
+extern int far TileMassXB;
+extern int far WaterTable;
+extern int far BlkQueens;
+extern int far RedQueens;
+extern int far LastBlackEgg[2];
+extern int far LastRedEgg[2];
 int far FoodB;
 int far FoodR;
-extern int far fd_50F6_1040;
+extern int far FoodA;
 int far HealthB;
 int far HealthR;
-extern unsigned long far fd_50F6_0472;
-extern int far fd_50F6_09FA;
-extern int far fd_50F6_0A00;
+extern unsigned long far EditMsgDelay;
+extern int far BlackLost;
+extern int far RedLost;
 int far Cycle;
-extern int far fd_50F6_0FFA;
-extern int far fd_50F6_0FB6;
-extern int far fd_50F6_0508[2];
-extern int far fd_50F6_0596[2];
-extern int far fd_50F6_06A6[2];
-extern int far fd_50F6_072E[2];
+extern int far EditRows;
+extern int far EditColumns;
+extern int far MapPnt[2];
+extern int far AMapPnt[2];
+extern int far BMapPnt[2];
+extern int far RMapPnt[2];
 
 extern void far SetSRandSeed(unsigned long seed);
 extern void far f_0CDB_0000(void);
@@ -77,35 +77,35 @@ extern void far o24_39C7_01B8(int a);
 extern void far CountAnts(void);
 extern void far InvalEuMap(int a, int b, int columns, int rows);
 
-extern int far fd_50F6_07CA[2];
-extern int far fd_50F6_07BC[2];
-extern int far fd_50F6_105E;
-extern unsigned long far fd_50F6_0214;
-extern unsigned long far fd_50F6_0204;
-extern int far fd_50F6_0228;
-extern int far fd_50F6_0478;
-extern int far fd_50F6_0504;
-extern int far fd_50F6_0366;
-extern int far fd_50F6_0376;
-extern int far fd_3D57_0C44;
-extern int far fd_3D57_0C18;
-extern int far fd_3D57_0C16;
-extern int far fd_3D57_0C14;
-extern unsigned long far fd_50F6_0C26;
+extern int far CurYardPnt[2];
+extern int far YMapPnt[2];
+extern int far CurGameTool;
+extern unsigned long far LastThemeTime;
+extern unsigned long far TimeTemp;
+extern int far LastThemeSong;
+extern int far HouseColonies;
+extern int far JustToBeMean;
+extern int far BlackWon;
+extern int far IsGameOver;
+extern int far ForSaleState;
+extern int far AlwaysHealthy;
+extern int far NeverHungry;
+extern int far Invincible;
+extern unsigned long far GameTime;
 extern int far MapPlane;
-extern int far fd_3D57_07C8;
+extern int far MapMode;
 extern int far YardMode;
 extern int far fd_3E1D_0000[16][12];
-extern int far fd_3D57_0C24;
+extern int far MeNestStarted;
 extern int far MePlane;
 extern int far MeLocX;
 extern int far MeLocY;
 
-extern void far o06_35F5_0000(void);
+extern void far InitSimYard(void);
 extern void far f_0798_0F0D(void);
 extern int far RRand(int range);
-extern unsigned char far fd_3D57_00A4[12][16];
-extern unsigned char far fd_3D57_0164[12][16];
+extern unsigned char far YMapPopB[12][16];
+extern unsigned char far YMapPopR[12][16];
 void far AddBlackAnts(int count);
 void far AddRedAnts(int count);
 extern void far FullCount(void);
@@ -132,18 +132,18 @@ extern char far Dy8[];
 extern int far DigTileThemB(int x, int y);
 extern void far DigTileB(int x, int y);
 extern int far DigTileThemR(int x, int y);
-extern int far fd_50F6_049A;
-extern int far fd_3D57_0C22;
-extern int far fd_50F6_104E;
-extern int far fd_3D57_07BE;
-extern int far fd_50F6_04E2;
-extern int far fd_50F6_0A06;
-extern int far fd_50F6_0F26;
-extern int far fd_50F6_0F0E;
-extern int far fd_50F6_04C2;
+extern int far MeBase;
+extern int far MeEggCarried;
+extern int far MeDropAlarm;
+extern int far ELayerMode;
+extern int far MeColor;
+extern int far MeMode;
+extern int far RebornY;
+extern int far RebornX;
+extern int far MeType;
 extern void far SetMyHealth(int health);
 extern int far * far fd_50F6_0B22;
-extern int far fd_3D57_02BC[2];
+extern int far LastFoodDrop[2];
 extern int far ListIndexA;
 extern unsigned char far AlistT[1000];
 extern unsigned char far AlistM[1000];
@@ -176,14 +176,14 @@ void far AddFood(int count, int sound);
 
 void far InitSimVars(void)
 {
-    fd_3D57_07CC = 1;
-    fd_50F6_0FBA = 30;
-    fd_50F6_0FFE = 30;
+    GameSpeed = 1;
+    MeWarnHealth = 30;
+    BlkWarnHealth = 30;
     CurExpTool = 0;
-    fd_50F6_073A = 0;
-    fd_50F6_06AA = 0;
-    fd_50F6_0850 = 0;
-    fd_50F6_07C8 = 0;
+    SwarmCntR = 0;
+    SwarmCntB = 0;
+    QueenStorageR = 0;
+    QueenStorageB = 0;
 }
 
 /* STEERED (ZERO-1): seed is unsigned, so seed < 0 is always false.
@@ -235,7 +235,7 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
 
     for (count = 0; count < 64; count++) {
         for (x = 0; x < 32; x++) {
-            fd_3E1D_D89F[count][x] = 0;
+            PherMapF[count][x] = 0;
             PherMapA[count][x] = 0;
             PherMapBN[count][x] = 0;
             PherMapBT[count][x] = 0;
@@ -303,22 +303,22 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
         HoleMapR[x] = 0;
     }
 
-    if (fd_50F6_0EAC != 2 || blackSize >= 1)
+    if (CurGameType != 2 || blackSize >= 1)
         MakeNewHoleB(0x20);
     if (redSize >= 1)
         MakeNewHoleR(0x20);
 
-    fd_50F6_10A2 = 0;
-    fd_50F6_108E = 0;
-    fd_50F6_1082 = 0;
-    fd_50F6_1068 = 0;
-    fd_50F6_0224 = 0;
+    TileTotYR = 0;
+    TileTotXR = 0;
+    TileTotYB = 0;
+    TileTotXB = 0;
+    TilesDugB = 0;
     TilesDugR = 0;
-    fd_50F6_020E = 0;
-    fd_50F6_0200 = 0;
-    fd_50F6_10C0 = 0;
-    fd_50F6_10B2 = 0;
-    fd_50F6_0242 = 0x40;
+    TileMassYR = 0;
+    TileMassXR = 0;
+    TileMassYB = 0;
+    TileMassXB = 0;
+    WaterTable = 0x40;
 
     if (blackSize > 1)
         DigOutBNest(blackSize << 4);
@@ -329,12 +329,12 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
     f_0EC1_07C1();
     f_0EC1_07D4();
 
-    fd_50F6_035E = 0;
-    fd_50F6_036C = 0;
-    fd_3D57_02B4[0] = -1;
-    fd_3D57_02B4[1] = -1;
-    fd_3D57_02B8[0] = -1;
-    fd_3D57_02B8[1] = -1;
+    BlkQueens = 0;
+    RedQueens = 0;
+    LastBlackEgg[0] = -1;
+    LastBlackEgg[1] = -1;
+    LastRedEgg[0] = -1;
+    LastRedEgg[1] = -1;
 
     if (redSize > 0)
         PlaceRedQueen();
@@ -344,30 +344,30 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
 
     FoodB = 0;
     FoodR = 0;
-    fd_50F6_1040 = 0;
-    if (fd_50F6_0EAC != 3)
+    FoodA = 0;
+    if (CurGameType != 3)
         AddFood(-1, 0);
 
     HealthB = 100;
     HealthR = 100;
 
-    fd_50F6_0472 = 0;
-    fd_50F6_09FA = 0;
-    fd_50F6_0A00 = 0;
+    EditMsgDelay = 0;
+    BlackLost = 0;
+    RedLost = 0;
     Cycle = 0;
 
     o24_39C7_01B8(0);
     CountAnts();
-    InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
+    InvalEuMap(0, 0, EditColumns, EditRows);
 
-    fd_50F6_0508[0] = 0x40;
-    fd_50F6_0596[0] = 0x40;
-    fd_50F6_0508[1] = 0x20;
-    fd_50F6_0596[1] = 0x20;
-    fd_50F6_06A6[0] = 0x20;
-    fd_50F6_072E[0] = 0x20;
-    fd_50F6_06A6[1] = 1;
-    fd_50F6_072E[1] = 1;
+    MapPnt[0] = 0x40;
+    AMapPnt[0] = 0x40;
+    MapPnt[1] = 0x20;
+    AMapPnt[1] = 0x20;
+    BMapPnt[0] = 0x20;
+    RMapPnt[0] = 0x20;
+    BMapPnt[1] = 1;
+    RMapPnt[1] = 1;
 }
 
 void far RandYard(void)
@@ -378,51 +378,51 @@ void far RandYard(void)
     o24_39C7_01B8(1);
     f_0798_0F0D();
 
-    *fd_50F6_07CA = 11;
-    *fd_50F6_07BC = 11;
-    *(fd_50F6_07CA + 1) = 8;
-    *(fd_50F6_07BC + 1) = 8;
+    *CurYardPnt = 11;
+    *YMapPnt = 11;
+    *(CurYardPnt + 1) = 8;
+    *(YMapPnt + 1) = 8;
 
-    o06_35F5_0000();
+    InitSimYard();
 
-    fd_50F6_105E = -1;
-    fd_50F6_0214 = 0;
-    fd_50F6_0204 = 0;
-    fd_50F6_0228 = 0;
-    fd_50F6_0478 = 0;
-    fd_50F6_0504 = 0;
-    fd_50F6_0366 = 0;
-    fd_50F6_0376 = 0;
-    fd_3D57_0C44 = 0;
-    fd_3D57_0C18 = 0;
-    fd_3D57_0C16 = 0;
-    fd_3D57_0C14 = 0;
-    fd_50F6_0C26 = 0L;
+    CurGameTool = -1;
+    LastThemeTime = 0;
+    TimeTemp = 0;
+    LastThemeSong = 0;
+    HouseColonies = 0;
+    JustToBeMean = 0;
+    BlackWon = 0;
+    IsGameOver = 0;
+    ForSaleState = 0;
+    AlwaysHealthy = 0;
+    NeverHungry = 0;
+    Invincible = 0;
+    GameTime = 0L;
 
-    if (fd_50F6_0EAC <= 1)
+    if (CurGameType <= 1)
         MapPlane = 2;
     else
         MapPlane = 1;
-    fd_3D57_07C8 = MapPlane;
+    MapMode = MapPlane;
     YardMode = 0;
 
     for (i = 0; i < 192; i++)
         fd_3E1D_0000[0][i] = (RRand(0x7fff) - 0xc000) & 0x7fff;
 
-    if (fd_50F6_0EAC == 2)
-        RandWorld(fd_3E1D_0000[*(fd_50F6_07CA + 1)][*fd_50F6_07CA], fd_3D57_0C24 = 0, 1, *fd_50F6_07BC, *(fd_50F6_07BC + 1));
+    if (CurGameType == 2)
+        RandWorld(fd_3E1D_0000[*(CurYardPnt + 1)][*CurYardPnt], MeNestStarted = 0, 1, *YMapPnt, *(YMapPnt + 1));
     else
-        RandWorld(fd_3E1D_0000[*(fd_50F6_07CA + 1)][*fd_50F6_07CA], fd_3D57_0C24 = 1, 1, *fd_50F6_07BC, *(fd_50F6_07BC + 1));
+        RandWorld(fd_3E1D_0000[*(CurYardPnt + 1)][*CurYardPnt], MeNestStarted = 1, 1, *YMapPnt, *(YMapPnt + 1));
 
     if (MePlane <= 1) {
-        fd_50F6_0596[0] = MeLocX;
-        fd_50F6_0596[1] = MeLocY;
+        AMapPnt[0] = MeLocX;
+        AMapPnt[1] = MeLocY;
     } else if (MePlane == 2) {
-        fd_50F6_06A6[0] = MeLocX;
-        fd_50F6_06A6[1] = MeLocY;
+        BMapPnt[0] = MeLocX;
+        BMapPnt[1] = MeLocY;
     } else {
-        fd_50F6_072E[0] = MeLocX;
-        fd_50F6_072E[1] = MeLocY;
+        RMapPnt[0] = MeLocX;
+        RMapPnt[1] = MeLocY;
     }
 }
 
@@ -430,16 +430,16 @@ void far GenerateTutorial(void)
 {
     int i;
 
-    fd_50F6_0EAC = 1;
+    CurGameType = 1;
     RandYard();
     AddBlackAnts(32);
     AddRedAnts(32);
     FullCount();
-    fd_50F6_0EAC = 2;
+    CurGameType = 2;
     f_015B_053C(MePlane);
     for (i = 0; i < 30; i++) {
-        fd_3D57_00A4[tutorialX[i]][tutorialY[i]] = tutorialBlack[i] << 5;
-        fd_3D57_0164[tutorialX[i]][tutorialY[i]] = tutorialRed[i] << 5;
+        YMapPopB[tutorialX[i]][tutorialY[i]] = tutorialBlack[i] << 5;
+        YMapPopR[tutorialX[i]][tutorialY[i]] = tutorialRed[i] << 5;
     }
 }
 
@@ -515,19 +515,19 @@ void far DigOutRNest(int count)
 
 void far InitYelloAnt(void)
 {
-    fd_50F6_049A = 0;
-    fd_3D57_0C22 = 0xfd;
-    if (fd_50F6_104E != 0) {
-        fd_50F6_104E = 0;
-        fd_3D57_07BE = -1;
+    MeBase = 0;
+    MeEggCarried = 0xfd;
+    if (MeDropAlarm != 0) {
+        MeDropAlarm = 0;
+        ELayerMode = -1;
     }
     SetMyHealth(100);
 
-    if (fd_50F6_0EAC != 3) {
-        fd_50F6_04E2 = 0;
-        fd_50F6_0A06 = 0;
-        if (fd_50F6_0EAC != 2 || fd_3D57_0C24 != 0) {
-            SetMyLife(2, fd_50F6_0F0E, fd_50F6_0F26, 0x10, 2, 0xff);
+    if (CurGameType != 3) {
+        MeColor = 0;
+        MeMode = 0;
+        if (CurGameType != 2 || MeNestStarted != 0) {
+            SetMyLife(2, RebornX, RebornY, 0x10, 2, 0xff);
         } else {
             int x, y;
 
@@ -551,11 +551,11 @@ void far InitYelloAnt(void)
         goto done;
     }
     MePlane = 1;
-    fd_50F6_04E2 = 0;
-    fd_50F6_0A06 = 2;
+    MeColor = 0;
+    MeMode = 2;
     MeLocX = 0x40;
     MeLocY = 0x20;
-    fd_50F6_04C2 = 0x10;
+    MeType = 0x10;
 
 done:
     o22_39C7_07FD(MePlane, MeLocX, MeLocY);
@@ -581,10 +581,10 @@ void far PlaceBlackQueen(void)
         y++;
     }
     DigTileB(x, y);
-    fd_3D57_02B4[0] = x;
-    fd_3D57_02B4[1] = y;
-    fd_50F6_0F0E = x;
-    fd_50F6_0F26 = y;
+    LastBlackEgg[0] = x;
+    LastBlackEgg[1] = y;
+    RebornX = x;
+    RebornY = y;
     MakeBlkQueen(x + 2, y, 2);
 }
 
@@ -598,7 +598,7 @@ void far MakeBlkQueen(int x, int y, int dir)
     DigTileB(x + 2 * Dx8[d], y + 2 * Dy8[d]);
     AddAntToBList(x, y, dir + 0x60, 9, 0);
     AddAntToBList(x + Dx8[d], y + Dy8[d], dir + 0x68, 9, 0);
-    fd_50F6_035E++;
+    BlkQueens++;
 }
 
 void far PlaceRedQueen(void)
@@ -619,8 +619,8 @@ void far PlaceRedQueen(void)
         y++;
     }
     DigTileR(x, y);
-    fd_3D57_02B8[0] = x;
-    fd_3D57_02B8[1] = y;
+    LastRedEgg[0] = x;
+    LastRedEgg[1] = y;
     MakeRedQueen(x + 2, y, 2);
 }
 
@@ -634,7 +634,7 @@ void far MakeRedQueen(int x, int y, int dir)
     DigTileR(x + 2 * Dx8[d], y + 2 * Dy8[d]);
     AddAntToRList(x, y, dir + 0xE0, 9, 0);
     AddAntToRList(x + Dx8[d], y + Dy8[d], dir + 0xE8, 9, 0);
-    fd_50F6_036C++;
+    RedQueens++;
 }
 
 int far fracSIN(int angle)
@@ -677,8 +677,8 @@ void far AddFood(int count, int sound)
         cx = SRand128();
         cy = SRand64();
     }
-    fd_3D57_02BC[0] = cx;
-    fd_3D57_02BC[1] = cy;
+    LastFoodDrop[0] = cx;
+    LastFoodDrop[1] = cy;
     radius = SRand8() + 5;
     for (i = 0; i < count; i++) {
         angle = SRand256();
@@ -693,18 +693,18 @@ void far AddFood(int count, int sound)
                         MapA[x][y] = (angle + 6) << 2;
                     else
                         MapA[x][y] = ((angle - 8) & 0xfc) + 0x18;
-                    fd_50F6_1040++;
+                    FoodA++;
                 } else if (angle < 0x28 && angle % 4 < 3) {
                     MapA[x][y]++;
-                    fd_50F6_1040++;
+                    FoodA++;
                 }
             } else {
                 if (angle < 0x18) {
                     MapA[x][y] = 0x48;
-                    fd_50F6_1040++;
+                    FoodA++;
                 } else if (angle >= 0x48 && angle < 0x4b) {
                     MapA[x][y]++;
-                    fd_50F6_1040++;
+                    FoodA++;
                 }
             }
         }
@@ -828,7 +828,7 @@ void far ClrArrays(void)
     }
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
-            fd_3E1D_D89F[x][y] = v;
+            PherMapF[x][y] = v;
             PherMapA[x][y] = v;
             PherMapBN[x][y] = v;
             PherMapBT[x][y] = v;
@@ -851,8 +851,8 @@ void far ClrArrays(void)
     }
     for (x = 0; x < 12; x++) {
         for (y = 0; y < 16; y++) {
-            fd_3D57_00A4[x][y] = v;
-            fd_3D57_0164[x][y] = v;
+            YMapPopB[x][y] = v;
+            YMapPopR[x][y] = v;
         }
     }
 }

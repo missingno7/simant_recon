@@ -9,8 +9,8 @@ typedef struct {
     int y;
 } Point;
 
-Point far fd_50F6_0508;
-Point far fd_50F6_0596;
-Point far fd_50F6_06A6;
-Point far fd_50F6_072E;
-Point far fd_50F6_07BC;
+Point far MapPnt;
+Point far AMapPnt;
+Point far BMapPnt;
+Point far RMapPnt;
+Point far YMapPnt;

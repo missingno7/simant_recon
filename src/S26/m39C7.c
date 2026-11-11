@@ -213,7 +213,7 @@ extern void far ButtonHeldInit(void);
 extern int far ButtonHeld(void);
 extern int near g_9122;
 extern int near g_9124;
-extern void far f_1FD2_04D0(struct Pt far *pt);
+extern void far GetMousePos(struct Pt far *pt);
 extern struct Rect far win_offsets[];
 extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
 extern int far StillDown(void);
@@ -262,7 +262,7 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
     while (ButtonHeld()) {
         if (pt.x != g_9122 || pt.y != g_9124) {
             GRectInvOutline(&r, 2);
-            f_1FD2_04D0(&pt);
+            GetMousePos(&pt);
             f_22BF_0B5B(&r, wr, pt.x - start.x, pt.y - start.y, pt.x - start.x, pt.y - start.y);
             GRectInvOutline(&r, 2);
         }
@@ -334,7 +334,7 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
     while (ButtonHeld()) {
         if (pt.x != g_9122 || pt.y != g_9124) {
             GRectInvOutline(&r, 2);
-            f_1FD2_04D0(&pt);
+            GetMousePos(&pt);
             f_22BF_0B5B(&r, &orig, 0, 0, pt.x - start.x, pt.y - start.y);
             if (r.right - r.left < min.x)
                 r.right = min.x + r.left;

@@ -7,29 +7,29 @@ extern int far MeLocX;
 extern int far FuzLocX;
 extern int far MeLocY;
 extern int far FuzLocY;
-extern int far fd_50F6_0F0C;
+extern int far SpidOn;
 extern long far GetDis(int x1, int y1, int x2, int y2);
-extern int far fd_50F6_0F12;
-extern int far fd_50F6_0F34;
+extern int far SpidX;
+extern int far SpidY;
 extern int far StrategicModeB;
-extern int far fd_50F6_10A6;
+extern int far StrategicModeR;
 extern int far HealthB;
 extern int far BpopT;
-extern int far fd_50F6_036C;
-extern int far fd_50F6_0224;
-extern int far fd_50F6_0AEC[6];
+extern int far RedQueens;
+extern int far TilesDugB;
+extern int far CastePopB[6];
 extern int far IdealCaste[4];
 extern int far CasteTabB[4];
-extern int far fd_3D57_0C0E;
-extern int far fd_50F6_0B12[6];
+extern int far MakeMe;
+extern int far ModePopB[6];
 extern unsigned int far modeLevels[3];
 extern int far ModeTabB[3];
 extern int far ModeMe;
-extern int far fd_50F6_08E8;
-extern int far fd_50F6_0AFA[6];
-extern int far fd_50F6_0504;
+extern int far FlyAwayR;
+extern int far CastePopR[6];
+extern int far JustToBeMean;
 extern int far HealthR;
-extern int far fd_50F6_035E;
+extern int far BlkQueens;
 extern int far TilesDugR;
 extern int far RpopT;
 extern int far SRand32(void);
@@ -66,14 +66,14 @@ extern unsigned char far PherMapRN[64][32];
 extern unsigned char far PherMapBN[64][32];
 extern int far SRand2(void);
 extern int far GetDir(int x1, int y1, int x2, int y2);
-extern int far fd_3D57_02B0[2];
+extern int far LastNewHoleR[2];
 extern int far SRand4(void);
-extern int far fd_3D57_02AC[2];
+extern int far LastNewHoleB[2];
 extern unsigned char far PherMapA[64][32];
 extern int far RedPlane;
 extern int far RedLocY;
 extern int far RedLocX;
-extern int far fd_50F6_0C2A[6];
+extern int far ModePopR[6];
 
 int far GstrB(void);
 void far SetCasteProd(void);
@@ -101,32 +101,32 @@ void far GetStrategy(void)
             FuzLocY = 0;
         if (FuzLocY > 63)
             FuzLocY = 63;
-        if (fd_50F6_0F0C) {
-            dis = (int)GetDis(fd_50F6_0F12 >> 4, fd_50F6_0F34 >> 4, MeLocX, MeLocY);
+        if (SpidOn) {
+            dis = (int)GetDis(SpidX >> 4, SpidY >> 4, MeLocX, MeLocY);
             if (dis < 100)
                 ChaseSpid = 1;
         }
     }
     FuzLocX = MeLocX;
     StrategicModeB = GstrB();
-    fd_50F6_10A6 = GstrR();
+    StrategicModeR = GstrR();
     SetCasteProd();
     SetModeProd();
 }
 
 int far GstrB(void)
 {
-    if (HealthB < 10 && (BpopT >> 1) > RpopT && RpopT > 0 && fd_50F6_036C > 0)
+    if (HealthB < 10 && (BpopT >> 1) > RpopT && RpopT > 0 && RedQueens > 0)
         return 0;
     if (HealthB < 30)
         return 5;
     if (HealthB < 50)
         return 4;
-    if (fd_50F6_0224 < BpopT)
+    if (TilesDugB < BpopT)
         return 3;
-    if (fd_50F6_0224 < BpopT * 2)
+    if (TilesDugB < BpopT * 2)
         return 2;
-    if (BpopT > 100 && RpopT > 0 && fd_50F6_036C > 0 && BpopT / 3 > RpopT)
+    if (BpopT > 100 && RpopT > 0 && RedQueens > 0 && BpopT / 3 > RpopT)
         return 0;
     return 1;
 }
@@ -145,14 +145,14 @@ void far SetCasteProd(void)
         total = 0;
         ideal = 0;
         for (i = 0; i < 4; i++) {
-            total += fd_50F6_0AEC[i + 1];
+            total += CastePopB[i + 1];
             ideal += IdealCaste[i];
         }
         for (i = 0; i < 4; i++) {
             if (total <= 0)
                 pct[i] = 0;
             else
-                pct[i] = 100L * fd_50F6_0AEC[i + 1] / total;
+                pct[i] = 100L * CastePopB[i + 1] / total;
             if (ideal <= 0)
                 want[i] = 0;
             else
@@ -172,7 +172,7 @@ void far SetCasteProd(void)
                 chosen = i;
             }
         }
-        fd_3D57_0C0E = CasteTabB[chosen];
+        MakeMe = CasteTabB[chosen];
     }
 }
 
@@ -187,11 +187,11 @@ void far SetModeProd(void)
 
     total = 0;
     for (i = 0; i < 3; i++)
-        total += fd_50F6_0B12[i];
+        total += ModePopB[i];
     for (i = 0; i < 3; i++)
         scaled[i] = (unsigned long)modeLevels[i] * (long)total / 65535UL;
     for (i = 0; i < 3; i++)
-        diff[i] = scaled[i] - fd_50F6_0B12[i];
+        diff[i] = scaled[i] - ModePopB[i];
     max = 0;
     best = 0;
     for (i = 0; i < 3; i++) {
@@ -205,13 +205,13 @@ void far SetModeProd(void)
 
 int far GstrR(void)
 {
-    if (fd_50F6_08E8 == 0 && fd_50F6_0AFA[3] + fd_50F6_0AFA[4] > 20)
-        fd_50F6_08E8 = 200;
-    if (fd_50F6_0504) {
-        fd_50F6_0504--;
+    if (FlyAwayR == 0 && CastePopR[3] + CastePopR[4] > 20)
+        FlyAwayR = 200;
+    if (JustToBeMean) {
+        JustToBeMean--;
         return 0;
     }
-    if (HealthR < 10 && (RpopT >> 1) > BpopT && BpopT > 0 && fd_50F6_035E > 0) {
+    if (HealthR < 10 && (RpopT >> 1) > BpopT && BpopT > 0 && BlkQueens > 0) {
         StartAttack();
         return 0;
     }
@@ -223,7 +223,7 @@ int far GstrR(void)
         return 3;
     if (TilesDugR < RpopT * 2)
         return 2;
-    if (RpopT > 100 && BpopT > 0 && fd_50F6_035E > 0 && RpopT / 3 > BpopT) {
+    if (RpopT > 100 && BpopT > 0 && BlkQueens > 0 && RpopT / 3 > BpopT) {
         StartAttack();
         return 0;
     }
@@ -236,7 +236,7 @@ int far GstrR(void)
 
 void far StartAttack(void)
 {
-    fd_50F6_0504 = SRand1(100) + 30;
+    JustToBeMean = SRand1(100) + 30;
     myBeginSong(0x2b0a, 0x3f);
     EditMessage(AdviceStrs[5], 120L, 0);
 }
@@ -454,9 +454,9 @@ int far GetNewModeB(int caste)
 int far GetNewModeR(int caste)
 {
     if (caste == 2)
-        return ModeTabWB[fd_50F6_10A6][SRand8()];
+        return ModeTabWB[StrategicModeR][SRand8()];
     if (caste == 6)
-        return ModeTabSB[fd_50F6_10A6][SRand8()];
+        return ModeTabSB[StrategicModeR][SRand8()];
     return CasteModeTabB[caste];
 }
 
@@ -565,10 +565,10 @@ int far GetNestDir(int x, int y, int dir, int type)
         return TurnTab[value][bestDir];
     }
     if (plane) {
-        nx = GetDir(x, y, fd_3D57_02B0[0], fd_3D57_02B0[1]);
+        nx = GetDir(x, y, LastNewHoleR[0], LastNewHoleR[1]);
         if (nx && SRand4()) return TurnTab[dir][nx - 1];
     } else {
-        nx = GetDir(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);
+        nx = GetDir(x, y, LastNewHoleB[0], LastNewHoleB[1]);
         if (nx == 0 || SRand4() == 0) return TurnTab[dir][SRand8()];
         return TurnTab[dir][nx - 1];
     }
@@ -620,10 +620,10 @@ int far GetDefendDir(int x, int y, int dir)
     switch (MePlane) {
     case 1:
         if (ChaseSpid == 1)
-            r = GetDir(x, y, fd_50F6_0F12 >> 4, fd_50F6_0F34 >> 4);
+            r = GetDir(x, y, SpidX >> 4, SpidY >> 4);
         else {
             r = GetDis(x, y, FuzLocX, FuzLocY);
-            if (fd_50F6_0B12[5] >> 1 < r)
+            if (ModePopB[5] >> 1 < r)
                 r = GetDir(x, y, FuzLocX, FuzLocY);
             else
                 r = SRand1(8) + 1;
@@ -647,7 +647,7 @@ int far GetRedDefendDir(int x, int y, int dir)
     switch (RedPlane) {
     case 1:
         r = GetDis(x, y, RedLocX, RedLocY);
-        if (fd_50F6_0C2A[5] >> 1 < r)
+        if (ModePopR[5] >> 1 < r)
             r = GetDir(x, y, RedLocX, RedLocY);
         else
             r = SRand1(8) + 1;

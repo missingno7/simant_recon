@@ -10,7 +10,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_9128:byte
 	public	_g_3D20, _g_3DA0, _g_3DA2, _g_3DA4, _g_3DA8, _g_3DAA, _g_3DAC, _g_3DAE
 	public	_g_3DB0, _g_3DB2, _g_3DB4, _g_3DB6, _g_3DC1, _g_3DCA, _g_3DD2, _g_3DD4
-	public	_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _g_3DDE, _g_3DE0, _g_3DE1, _g_3DE2
+	public	_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _g_3DDE, __foreColor, _g_3DE1, _g_3DE2
 	public	_g_3DE3, _g_3DE4, _g_3DE5, _fd_55B3_3DE6, _fd_55B3_3DE8, _g_3DEA, _g_3DEC
 	public	_g_3DED, _g_3DEE, _g_3DEF, _g_3DF1, _g_3DF2, _g_3DF4, _g_3DF8, _g_3DFC
 	public	_g_41C0, _g_41D0, _g_4220
@@ -36,7 +36,7 @@ _g_3DD8		dw	0
 _g_3DDA		dw	0
 _g_3DDC		dw	0		; character cell height, width
 _g_3DDE		dw	8
-_g_3DE0		db	0Fh		; pen colour
+__foreColor		db	0Fh		; pen colour
 _g_3DE1		db	0
 _g_3DE2		db	0
 _g_3DE3		db	0
@@ -83,13 +83,13 @@ _g_4220		db	16 dup (0)
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_f_1FBD_0000:far
+	extrn	_GPutStr:far
 
 VIDEO_TEXT	segment word public 'CODE'
 	assume	cs:VIDEO_TEXT, ds:DGROUP
 
 	public	_f_1B4E_000C
-	public	_f_1B4E_000D
+	public	_ConvColor
 	public	_f_1B4E_0025
 	public	_f_1B4E_003B
 	public	_f_1B4E_005E
@@ -109,7 +109,7 @@ _f_1B4E_000C	proc	far
 	retf
 _f_1B4E_000C	endp
 
-_f_1B4E_000D	proc	far
+_ConvColor	proc	far
 	push bp
 	mov bp, sp
 	lea bx, _g_41C0
@@ -122,7 +122,7 @@ _f_1B4E_000D	proc	far
 	mov ax, cx
 	pop bp
 	retf
-_f_1B4E_000D	endp
+_ConvColor	endp
 
 _f_1B4E_0025	proc	far
 	push di
@@ -225,7 +225,7 @@ _f_1B4E_00CE	proc	far
 	push bx
 	push word ptr _g_3DA2
 	push word ptr _g_3DA0
-	call far ptr _f_1FBD_0000
+	call far ptr _GPutStr
 	add sp, 8
 	pop bp
 	retf

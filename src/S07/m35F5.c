@@ -3,22 +3,22 @@
 extern int far fd_3D57_06DE;
 extern char far fd_50F6_0B0A[];
 extern char far fd_3D57_067E[][4];
-extern int far fd_50F6_0850;
+extern int far QueenStorageR;
 extern int far MeLocY;
 extern int far MeLocX;
 extern char far Dy8[];
 extern char far Dx8[];
 extern int far HealthB;
 extern int far HealthR;
-extern int far fd_3D57_0C18;
-extern int far fd_50F6_07C8;
-extern int far fd_3D57_0C14;
-extern int far fd_3D57_0C12;
-extern unsigned char far fd_3D57_00A4[12][16];
-extern int far fd_50F6_0A90;
-extern unsigned char far fd_3D57_0164[12][16];
-extern int far fd_50F6_0AC4;
-extern int far fd_3D57_0C16;
+extern int far AlwaysHealthy;
+extern int far QueenStorageB;
+extern int far Invincible;
+extern int far RevSpider;
+extern unsigned char far YMapPopB[12][16];
+extern int far BColoniesStarted;
+extern unsigned char far YMapPopR[12][16];
+extern int far RColoniesStarted;
+extern int far NeverHungry;
 extern int far MeHealth;
 
 extern void far WinPrintf(char far *fmt, ...);
@@ -68,7 +68,7 @@ void far CheatKeys(int key)
     switch (i) {
     case 0:
         myBeginSound(10, 0, 0x7e);
-        fd_50F6_0850 += 10;
+        QueenStorageR += 10;
         break;
     case 1:
         myBeginSound(1, 0, 0x7e);
@@ -121,24 +121,24 @@ void far CheatKeys(int key)
         HealthR = 0;
         break;
     case 14:
-        fd_3D57_0C18 = 0;
+        AlwaysHealthy = 0;
         HealthB = 0;
         break;
     case 15:
-        fd_50F6_07C8 += 10;
+        QueenStorageB += 10;
         InvalQueenStorageDisp();
         myBeginSound(0x29, 0, 0x7e);
         break;
     case 16:
-        fd_3D57_0C14 = !fd_3D57_0C14;
-        if (fd_3D57_0C14)
+        Invincible = !Invincible;
+        if (Invincible)
             myBeginSound(2, 0, 0x7e);
         else
             myBeginSound(1, 0, 0x7e);
         break;
     case 17:
-        fd_3D57_0C12 = !fd_3D57_0C12;
-        if (fd_3D57_0C12)
+        RevSpider = !RevSpider;
+        if (RevSpider)
             myBeginSound(2, 0, 0x7e);
         else
             myBeginSound(1, 0, 0x7e);
@@ -147,8 +147,8 @@ void far CheatKeys(int key)
         myBeginSound(2, 0, 0x7e);
         for (i = 0; i < 12; i++)
             for (j = 0; j < 16; j++) {
-                fd_3D57_00A4[i][j] += 4;
-                fd_50F6_0A90++;
+                YMapPopB[i][j] += 4;
+                BColoniesStarted++;
             }
         break;
     case 19:
@@ -156,11 +156,11 @@ void far CheatKeys(int key)
         for (i = 0; i < 12; i++)
             for (j = 0; j < 16; j++) {
                 if (SRand2() == 0) {
-                    fd_3D57_00A4[i][j]++;
-                    fd_50F6_0A90++;
+                    YMapPopB[i][j]++;
+                    BColoniesStarted++;
                 } else {
-                    fd_3D57_0164[i][j]++;
-                    fd_50F6_0AC4++;
+                    YMapPopR[i][j]++;
+                    RColoniesStarted++;
                 }
             }
         break;
@@ -168,16 +168,16 @@ void far CheatKeys(int key)
         DrawSimPayoff();
         break;
     case 21:
-        fd_3D57_0C16 = !fd_3D57_0C16;
-        if (fd_3D57_0C16) {
+        NeverHungry = !NeverHungry;
+        if (NeverHungry) {
             MeHealth = 100;
             myBeginSound(2, 0, 0x7e);
         } else
             myBeginSound(1, 0, 0x7e);
         break;
     case 22:
-        fd_3D57_0C18 = !fd_3D57_0C18;
-        if (fd_3D57_0C18) {
+        AlwaysHealthy = !AlwaysHealthy;
+        if (AlwaysHealthy) {
             HealthB = 100;
             myBeginSound(2, 0, 0x7e);
         } else

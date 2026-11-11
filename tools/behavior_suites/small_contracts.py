@@ -22,7 +22,7 @@ import behavior
 import behavior_ledger
 
 SUITE = "small_contracts_v1"
-FIND_DB = "fd_50F6_3958"
+FIND_DB = "openDBData"
 FIND_LOW = "fd_50F6_3956"
 FIND_PTR = "fd_50F6_3952"
 DB_RECORD_BYTES = 124

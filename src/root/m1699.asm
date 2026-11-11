@@ -17,8 +17,8 @@ BALLOON_TEXT	segment word public 'CODE'
 
 	public	_f_1699_0000
 	public	_f_1699_0050
-	public	_f_1699_00A6
-	public	_f_1699_0110
+	public	_MoveTextToBalloon
+	public	_MaskMono2Tandy
 	public	_f_1699_01AA
 
 _f_1699_0000	proc	far
@@ -111,7 +111,7 @@ L0096:
 	retf
 _f_1699_0050	endp
 
-_f_1699_00A6	proc	far
+_MoveTextToBalloon	proc	far
 	push bp
 	mov bp, sp
 	add bp, 6
@@ -167,9 +167,9 @@ L00FE:
 	pop es
 	pop bp
 	retf
-_f_1699_00A6	endp
+_MoveTextToBalloon	endp
 
-_f_1699_0110	proc	far
+_MaskMono2Tandy	proc	far
 	push bp
 	mov bp, sp
 	add bp, 6
@@ -246,7 +246,7 @@ L018E:
 	pop es
 	pop bp
 	retf
-_f_1699_0110	endp
+_MaskMono2Tandy	endp
 
 _f_1699_01AA	proc	far
 	push bp

@@ -1,7 +1,7 @@
 /* Root module 0DEF: red colony initiator ant (Win16 unit MakeRedInitiator,
  * DoRedInitiator, GetNewRedTask, GetRedBestDirs; SIMANT1 segment order). */
 
-extern int far fd_3D57_0C1C;
+extern int far RedInitOn;
 extern int far BpopT;
 extern int far ListIndexA;
 extern unsigned char far AlistT[];
@@ -9,11 +9,11 @@ extern unsigned char far AlistM[];
 extern unsigned char far AlistS[];
 extern int far fd_50F6_04A4;
 
-void far f_0DEF_0000(void)
+void far MakeRedInitiator(void)
 {
     int index;
 
-    fd_3D57_0C1C = 0;
+    RedInitOn = 0;
     if (BpopT >= 30) {
         index = ListIndexA;
         while (index > 0) {
@@ -23,7 +23,7 @@ void far f_0DEF_0000(void)
                 AlistM[index] = 0x13;
                 AlistS[index] = 0;
                 fd_50F6_04A4 = 0;
-                fd_3D57_0C1C = 1;
+                RedInitOn = 1;
                 return;
             }
         }
@@ -35,22 +35,22 @@ extern unsigned char far AlistX[];
 extern int far RedLocX;
 extern int far RedLocY;
 extern int far RedPlane;
-void far f_0DEF_0233(void);
+void far GetNewRedTask(void);
 extern int far MePlane;
 extern int far FuzLocX;
 extern int far fd_50F6_04E0;
 extern int far FuzLocY;
 extern int far fd_50F6_04F2;
-int far f_0DEF_031F(int plane, int x, int y, int a, int b);
+int far GetRedBestDirs(int plane, int x, int y, int a, int b);
 extern int far SRand1(int range);
 extern signed char far Dy8[];
 extern signed char far Dx8[];
 extern unsigned char far LifeA[][64];
 extern int far IsYellowAnt(int life);
-extern void far o25_3BA4_0DFB(int a, int index);
+extern void far YellowFight(int a, int index);
 extern int far RandTurn(int dir);
 
-void far f_0DEF_006B(register int i)
+void far DoRedInitiator(register int i)
 {
     int y;
     int x;
@@ -70,7 +70,7 @@ void far f_0DEF_006B(register int i)
     RedPlane = 1;
     switch (fd_50F6_04A4) {
     case 0:
-        f_0DEF_0233();
+        GetNewRedTask();
         break;
     case 2:
         if (MePlane == 1) {
@@ -79,7 +79,7 @@ void far f_0DEF_006B(register int i)
         }
         break;
     }
-    dir = f_0DEF_031F(1, RedLocX, RedLocY, fd_50F6_04E0, fd_50F6_04F2);
+    dir = GetRedBestDirs(1, RedLocX, RedLocY, fd_50F6_04E0, fd_50F6_04F2);
     if (dir < 0) {
         if (SRand1(10) == 0)
             fd_50F6_04A4 = 0;
@@ -93,7 +93,7 @@ void far f_0DEF_006B(register int i)
             AlistX[i] = nx;
             AlistY[i] = ny;
         } else if (IsYellowAnt(life) == 1) {
-            o25_3BA4_0DFB(1, i);
+            YellowFight(1, i);
         } else if (life > 0x7f) {
             AlistT[i] = RandTurn(t & 7) | caste;
             LifeA[x][y] = AlistT[i];
@@ -102,28 +102,28 @@ void far f_0DEF_006B(register int i)
 }
 
 extern int far MeLocX;
-extern int far fd_3D57_02BC[];
-extern int far fd_50F6_0B12[];
-extern int far fd_50F6_0AFA[];
+extern int far LastFoodDrop[];
+extern int far ModePopB[];
+extern int far CastePopR[];
 extern void far UnRecruitRed(void);
 extern void far RecruitRed(int count);
 
-void far f_0DEF_0233(void)
+void far GetNewRedTask(void)
 {
     int redPopulation;
 
     UnRecruitRed();
     if (MePlane == 1) {
         if (SRand1(32) + 0x40 < MeLocX) {
-            if (SRand1(10) < fd_50F6_0B12[5]) {
+            if (SRand1(10) < ModePopB[5]) {
                 fd_50F6_04A4 = 2;
-                RecruitRed(fd_50F6_0B12[5]);
+                RecruitRed(ModePopB[5]);
                 return;
             }
         }
     }
-    fd_50F6_04F2 = fd_3D57_02BC[1];
-    fd_50F6_04E0 = fd_3D57_02BC[0];
+    fd_50F6_04F2 = LastFoodDrop[1];
+    fd_50F6_04E0 = LastFoodDrop[0];
     if (fd_50F6_04E0 > 0x1e) {
         fd_50F6_04E0 -= 5;
     } else {
@@ -132,7 +132,7 @@ void far f_0DEF_0233(void)
         else if (fd_50F6_04F2 > 0x28)
             fd_50F6_04F2 -= 5;
     }
-    redPopulation = fd_50F6_0AFA[1] + fd_50F6_0AFA[2];
+    redPopulation = CastePopR[1] + CastePopR[2];
     if (redPopulation < 0x14)
         RecruitRed(redPopulation >> 2);
     else
@@ -145,7 +145,7 @@ extern int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int from
 extern int far GetLife(int plane, int x, int y);
 extern int far IsClearTile(int plane, int x, int y);
 
-int far f_0DEF_031F(int plane, int x, int y, int a, int b)
+int far GetRedBestDirs(int plane, int x, int y, int a, int b)
 {
     int best;
     int fallback;

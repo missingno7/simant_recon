@@ -6,14 +6,14 @@ extern int far SCorpseBase;
 extern int far Scycle;
 extern int far Scycle2;
 extern int far SpidRevenge;
-extern int far fd_50F6_1004;
-extern int far fd_3D57_0C12;
-extern int far fd_50F6_0EAC;
-extern int far fd_50F6_0F0C;
-extern int far fd_50F6_0F12;
-extern int far fd_50F6_0F34;
+extern int far SpidDir;
+extern int far RevSpider;
+extern int far CurGameType;
+extern int far SpidOn;
+extern int far SpidX;
+extern int far SpidY;
 extern int far SMode;
-extern int far fd_50F6_06AC;
+extern int far MeSMode;
 extern int far Starg;
 extern int far StargLife;
 extern int far SuserX;
@@ -27,34 +27,34 @@ void far InitSpider(void)
     Scycle = 0;
     Scycle2 = 0;
     SpidRevenge = 0;
-    fd_50F6_1004 = 0;
-    fd_3D57_0C12 = 0;
-    if (fd_50F6_0EAC)
-        fd_50F6_0F0C = 1;
+    SpidDir = 0;
+    RevSpider = 0;
+    if (CurGameType)
+        SpidOn = 1;
     else
-        fd_50F6_0F0C = 0;
-    fd_50F6_0F12 = 0x400;
-    fd_50F6_0F34 = 0x200;
-    fd_50F6_06AC = SMode = 0;
+        SpidOn = 0;
+    SpidX = 0x400;
+    SpidY = 0x200;
+    MeSMode = SMode = 0;
     Starg = -2;
     StargLife = -1;
     SuserY = SuserX = 64;
 }
 
-extern int far fd_50F6_0A06;
+extern int far MeMode;
 int far SFoundAnt(void);
 extern unsigned char far AlistT[];
 int far SpiderScan(void);
 extern int far MeLocY;
 extern int far MeLocX;
 extern unsigned long far GetDis(int x1, int y1, int x2, int y2);
-extern int far o25_39C7_0CBD(int plane, int x, int y, int gx, int gy);
+extern int far GetBestDir(int plane, int x, int y, int gx, int gy);
 extern int far GetDir(int x1, int y1, int x2, int y2);
 extern signed char far TurnTab[][8];
-extern int far fd_50F6_0A8E;
-extern signed char far fd_3D57_0994[];
-extern signed char far fd_3D57_099C[];
-extern int far fd_3D57_07A8[];
+extern int far MeCmd;
+extern signed char far SpX[];
+extern signed char far SpY[];
+extern int far OptionStates[];
 extern void far GotoMyAnt(void);
 extern int far SRand1(int range);
 int far ScanForAnts(void);
@@ -73,10 +73,10 @@ extern long far RAntsEaten;
 extern long far BAntsEaten;
 extern unsigned char far LifeA[128][64];
 extern void far MoveMyLife(int plane, int x, int y, int type, int dir);
-extern int far fd_50F6_04C2;
-extern int far fd_50F6_0496;
-extern signed char far fd_3D57_09AC[];
-extern signed char far fd_3D57_09A4[];
+extern int far MeType;
+extern int far MeDir;
+extern signed char far SeatY[];
+extern signed char far SeatX[];
 extern int far TERRAINset;
 extern unsigned char far MapA[128][64];
 extern int far SRand4(void);
@@ -92,10 +92,10 @@ void far MoveSpider(void)
     int r;
 
     Scycle2 = (Scycle2 + 1) & 0x3ff;
-    x = fd_50F6_0F12 >> 4;
-    y = fd_50F6_0F34 >> 4;
-    if (fd_50F6_0A06 == 1 && SMode != 2 && SMode != 3) {
-        if (fd_50F6_06AC == 7) {
+    x = SpidX >> 4;
+    y = SpidY >> 4;
+    if (MeMode == 1 && SMode != 2 && SMode != 3) {
+        if (MeSMode == 7) {
             Starg = SFoundAnt();
             if (Starg != -2) {
                 SMode = 2;
@@ -105,14 +105,14 @@ void far MoveSpider(void)
                     StargLife = 0xff;
                 return;
             }
-        } else if (fd_50F6_06AC == 8)
+        } else if (MeSMode == 8)
             SpiderScan();
         d = (int)GetDis(MeLocX, MeLocY, SuserX, SuserY);
         if (d < 1) {
             Scycle = 2;
             return;
         }
-        r = o25_39C7_0CBD(1, MeLocX, MeLocY, SuserX, SuserY);
+        r = GetBestDir(1, MeLocX, MeLocY, SuserX, SuserY);
         if (r == -1)
             return;
         if (r == -2) {
@@ -120,36 +120,36 @@ void far MoveSpider(void)
             if (r < 0)
                 return;
         }
-        fd_50F6_1004 = TurnTab[fd_50F6_1004][r];
-        if (fd_50F6_0A8E && d > 2) {
-            fd_50F6_0F12 += 5 * fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 += 5 * fd_3D57_099C[fd_50F6_1004];
+        SpidDir = TurnTab[SpidDir][r];
+        if (MeCmd && d > 2) {
+            SpidX += 5 * SpX[SpidDir];
+            SpidY += 5 * SpY[SpidDir];
             Scycle = (Scycle + 2) & 0x3ff;
         } else {
-            fd_50F6_0F12 += fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 += fd_3D57_099C[fd_50F6_1004];
+            SpidX += SpX[SpidDir];
+            SpidY += SpY[SpidDir];
             Scycle = (Scycle + 1) & 0x3ff;
         }
-        MeLocX = fd_50F6_0F12 >> 4;
-        MeLocY = fd_50F6_0F34 >> 4;
-        if (fd_3D57_07A8[0])
+        MeLocX = SpidX >> 4;
+        MeLocY = SpidY >> 4;
+        if (OptionStates[0])
             GotoMyAnt();
         return;
     }
-    if (!fd_50F6_0F0C) {
-        if (!fd_50F6_0EAC)
+    if (!SpidOn) {
+        if (!CurGameType)
             return;
         if (SRand1(300))
             return;
-        fd_50F6_0F12 = SRand1(0x400) + 0x200;
-        SMode = fd_50F6_0F0C = 1;
-        fd_3D57_0C12 = 0;
+        SpidX = SRand1(0x400) + 0x200;
+        SMode = SpidOn = 1;
+        RevSpider = 0;
         if (SRand1(2)) {
-            fd_50F6_0F34 = 1;
-            fd_50F6_1004 = 4;
+            SpidY = 1;
+            SpidDir = 4;
         } else {
-            fd_50F6_0F34 = 0x3ff;
-            fd_50F6_1004 = 0;
+            SpidY = 0x3ff;
+            SpidDir = 0;
         }
         return;
     }
@@ -157,30 +157,30 @@ void far MoveSpider(void)
         r = ScanForAnts();
         if (r > 8) {
             KillSpider();
-            if (fd_50F6_0A06 != 1) {
+            if (MeMode != 1) {
                 PictStrnDialog(0, 0x273e, 0);
                 if (SpidRevenge < 5)
                     SpidRevenge++;
                 if (SpidRevenge < 3)
                     return;
                 if (SpidRevenge >= 5)
-                    fd_50F6_06AC = 8;
+                    MeSMode = 8;
                 else
-                    fd_50F6_06AC = 7;
+                    MeSMode = 7;
                 if (SpidRevenge >= 6 && !SRand2()) {
                     SpidRevenge = 0;
-                    fd_50F6_06AC = 0;
+                    MeSMode = 0;
                 }
                 return;
             }
-            fd_50F6_0A06 = 0;
+            MeMode = 0;
             YellowDeath(3);
             return;
         }
         if (r > 4)
             SMode = 4;
     }
-    if (SMode < 4 && fd_50F6_06AC == 8)
+    if (SMode < 4 && MeSMode == 8)
         SpiderScan();
     switch (SMode) {
     case 0:
@@ -196,22 +196,22 @@ void far MoveSpider(void)
             return;
         }
         if (!SRand1(30))
-            fd_50F6_1004 = TurnTab[fd_50F6_1004][SRand1(8)];
-        if (fd_50F6_06AC == 8)
+            SpidDir = TurnTab[SpidDir][SRand1(8)];
+        if (MeSMode == 8)
             SpiderScan();
         break;
     case 1:
-        if (fd_3D57_0C12) {
-            fd_50F6_0F12 -= fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 -= fd_3D57_099C[fd_50F6_1004];
+        if (RevSpider) {
+            SpidX -= SpX[SpidDir];
+            SpidY -= SpY[SpidDir];
             Scycle = (Scycle - 1) & 0x3ff;
         } else {
-            fd_50F6_0F12 += fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 += fd_3D57_099C[fd_50F6_1004];
+            SpidX += SpX[SpidDir];
+            SpidY += SpY[SpidDir];
             Scycle = (Scycle + 1) & 0x3ff;
         }
         if (!SRand1(20))
-            fd_50F6_1004 = TurnTab[fd_50F6_1004][SRand1(8)];
+            SpidDir = TurnTab[SpidDir][SRand1(8)];
         if ((Starg = SFoundAnt()) != -2) {
             SMode = 2;
             if (Starg >= 0)
@@ -230,17 +230,17 @@ void far MoveSpider(void)
             if ((AlistT[Starg] ^ StargLife) & 0xf0) {
                 SMode = 0;
                 Starg = -2;
-                if (fd_50F6_0A06 != 1)
+                if (MeMode != 1)
                     return;
-                y = fd_50F6_0F34 >> 4;
-                x = fd_50F6_0F12 >> 4;
+                y = SpidY >> 4;
+                x = SpidX >> 4;
                 SuserY = y;
                 SuserX = x;
                 MeLocX = x;
                 MeLocY = y;
-                if (fd_50F6_06AC == 6)
-                    fd_50F6_06AC = 0;
-                if (fd_3D57_07A8[0])
+                if (MeSMode == 6)
+                    MeSMode = 0;
+                if (OptionStates[0])
                     GotoMyAnt();
                 return;
             }
@@ -253,50 +253,50 @@ void far MoveSpider(void)
             d = SGetDis(x, y, MeLocX, MeLocY);
         else
             d = SGetDis(x, y, AlistX[Starg], AlistY[Starg]);
-        if (d > 64 && fd_50F6_0A06 != 1) {
+        if (d > 64 && MeMode != 1) {
             SMode = 0;
             Starg = -2;
             return;
         }
         if (d < 2) {
             SMode = 3;
-            fd_50F6_0F12 = (fd_50F6_0F12 & 0xfff0) + 8;
-            fd_50F6_0F34 = (fd_50F6_0F34 & 0xfff0) + 8;
+            SpidX = (SpidX & 0xfff0) + 8;
+            SpidY = (SpidY & 0xfff0) + 8;
             goto eat;
         }
         if (Starg < 0)
             d = GetDir(x, y, MeLocX, MeLocY);
         else
             d = GetDir(x, y, AlistX[Starg], AlistY[Starg]);
-        fd_50F6_1004 = TurnTab[fd_50F6_1004][d - 1];
+        SpidDir = TurnTab[SpidDir][d - 1];
         if (Starg < 0)
             myBeginSound(0x2f, 0, 0x7e);
         else
             myBeginSound(0x2f, 0, -5);
-        if (fd_3D57_0C12) {
-            fd_50F6_0F12 -= 5 * fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 -= 5 * fd_3D57_099C[fd_50F6_1004];
+        if (RevSpider) {
+            SpidX -= 5 * SpX[SpidDir];
+            SpidY -= 5 * SpY[SpidDir];
             Scycle = (Scycle - 2) & 0x3ff;
         } else {
-            fd_50F6_0F12 += 5 * fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 += 5 * fd_3D57_099C[fd_50F6_1004];
+            SpidX += 5 * SpX[SpidDir];
+            SpidY += 5 * SpY[SpidDir];
             Scycle = (Scycle + 2) & 0x3ff;
         }
-        if (fd_50F6_0A06 == 1) {
-            MeLocX = fd_50F6_0F12 >> 4;
-            MeLocY = fd_50F6_0F34 >> 4;
-            if (fd_3D57_07A8[0])
+        if (MeMode == 1) {
+            MeLocX = SpidX >> 4;
+            MeLocY = SpidY >> 4;
+            if (OptionStates[0])
                 GotoMyAnt();
         }
         break;
     case 3:
     eat:
-        if (fd_50F6_0A06 == 1) {
-            MeLocX = fd_50F6_0F12 >> 4;
-            MeLocY = fd_50F6_0F34 >> 4;
-            if (fd_50F6_06AC == 6)
-                fd_50F6_06AC = 0;
-            if (fd_3D57_07A8[0])
+        if (MeMode == 1) {
+            MeLocX = SpidX >> 4;
+            MeLocY = SpidY >> 4;
+            if (MeSMode == 6)
+                MeSMode = 0;
+            if (OptionStates[0])
                 GotoMyAnt();
         }
         if (Starg != -2) {
@@ -316,16 +316,16 @@ void far MoveSpider(void)
                     goto done;
                 }
             } else {
-                MoveMyLife(MePlane, (fd_3D57_09A4[fd_50F6_1004] + x) & 0x7f,
-                           (fd_3D57_09AC[fd_50F6_1004] + y) & 0x3f, fd_50F6_04C2, fd_50F6_0496);
+                MoveMyLife(MePlane, (SeatX[SpidDir] + x) & 0x7f,
+                           (SeatY[SpidDir] + y) & 0x3f, MeType, MeDir);
                 YellowDeath(1);
                 SCorpseBase = 0;
             }
             Starg = -2;
-            EatCnt = fd_50F6_06AC >= 7 ? 11 : 50;
+            EatCnt = MeSMode >= 7 ? 11 : 50;
         }
-        d = (fd_3D57_09A4[fd_50F6_1004] + x) & 0x7f;
-        r = (fd_3D57_09AC[fd_50F6_1004] + y) & 0x3f;
+        d = (SeatX[SpidDir] + x) & 0x7f;
+        r = (SeatY[SpidDir] + y) & 0x3f;
         if (!TERRAINset && MapA[d][r] < 0x18)
             MapA[d][r] = SRand4() + SCorpseBase + 0x10;
         if (EatCnt > 0) {
@@ -336,28 +336,28 @@ void far MoveSpider(void)
         }
         if (--SpidBurpCnt == 0) {
             SpidBurpCnt = 10;
-            if (fd_3D57_07A8[5] && !SRand2())
+            if (OptionStates[5] && !SRand2())
                 myBeginSound(10, 0, 10);
         }
         DeadAntHere(d, r, SCorpseBase);
     done:
         SMode = 0;
-        if (fd_50F6_0A06 == 1) {
-            if (fd_50F6_06AC == 6)
-                fd_50F6_06AC = 0;
+        if (MeMode == 1) {
+            if (MeSMode == 6)
+                MeSMode = 0;
             SuserX = x;
             SuserY = y;
         }
         break;
     case 4:
-        fd_50F6_1004 = TurnTab[fd_50F6_1004][SRand1(8)];
-        if (fd_3D57_0C12) {
-            fd_50F6_0F12 -= 5 * fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 -= 5 * fd_3D57_099C[fd_50F6_1004];
+        SpidDir = TurnTab[SpidDir][SRand1(8)];
+        if (RevSpider) {
+            SpidX -= 5 * SpX[SpidDir];
+            SpidY -= 5 * SpY[SpidDir];
             Scycle = (Scycle - 2) & 0x3ff;
         } else {
-            fd_50F6_0F12 += 5 * fd_3D57_0994[fd_50F6_1004];
-            fd_50F6_0F34 += 5 * fd_3D57_099C[fd_50F6_1004];
+            SpidX += 5 * SpX[SpidDir];
+            SpidY += 5 * SpY[SpidDir];
             Scycle = (Scycle + 2) & 0x3ff;
         }
         if (!SRand1(50)) {
@@ -367,7 +367,7 @@ void far MoveSpider(void)
         break;
     case 5:
         if (--DeathCnt == 0) {
-            SMode = fd_50F6_0F0C = 0;
+            SMode = SpidOn = 0;
             DropFoodA(x, y);
             DropFoodA(x, y);
             DropFoodA(x, y);
@@ -381,15 +381,15 @@ void far MoveSpider(void)
         }
         break;
     }
-    if (!IsValidA(fd_50F6_0F12 >> 4, fd_50F6_0F34 >> 4)) {
-        fd_50F6_0F0C = 0;
-        if (fd_50F6_0A06 == 1) {
-            fd_50F6_0A06 = 0;
+    if (!IsValidA(SpidX >> 4, SpidY >> 4)) {
+        SpidOn = 0;
+        if (MeMode == 1) {
+            MeMode = 0;
             YellowDeath(4);
         }
     }
-    if (TERRAINset && MapA[fd_50F6_0F12 >> 4][fd_50F6_0F34 >> 4] > 0x90)
-        fd_50F6_0F0C = 0;
+    if (TERRAINset && MapA[SpidX >> 4][SpidY >> 4] > 0x90)
+        SpidOn = 0;
 }
 
 int far ScanForAnts(void)
@@ -402,8 +402,8 @@ int far ScanForAnts(void)
     int tx;
     int ty;
 
-    x = fd_50F6_0F12 >> 4;
-    y = fd_50F6_0F34 >> 4;
+    x = SpidX >> 4;
+    y = SpidY >> 4;
     count = 0;
     for (i = -1; i < 3; i++)
         for (j = -1; j < 3; j++) {
@@ -440,21 +440,21 @@ int far SFoundAnt(void)
     int life;
     int n;
 
-    sx = fd_50F6_0F12 >> 4;
-    sy = fd_50F6_0F34 >> 4;
+    sx = SpidX >> 4;
+    sy = SpidY >> 4;
     x = sx;
     y = sy;
-    if (fd_50F6_06AC == 7) {
+    if (MeSMode == 7) {
         for (i = ListIndexA - 1; i >= 0; i--)
             if (AlistT[i] && GetDis(sx, sy, AlistX[i], AlistY[i]) <= 800)
                 return i;
-        if (fd_50F6_0A06 == 0 && MePlane == 1 && GetDis(sx, sy, MeLocX, MeLocY) <= 800)
+        if (MeMode == 0 && MePlane == 1 && GetDis(sx, sy, MeLocX, MeLocY) <= 800)
             return -1;
         return -2;
     }
     for (i = 0; i < 20; i++) {
-        y += Dy8[fd_50F6_1004];
-        x += Dx8[fd_50F6_1004];
+        y += Dy8[SpidDir];
+        x += Dx8[SpidDir];
         if (!IsValidA(x, y))
             return -2;
         if (GetDis(sx, sy, x, y) > 400)
@@ -485,9 +485,9 @@ int far SpiderScan(void)
     int x;
     int y;
 
-    scan.dir = ((fd_50F6_1004 - 2) & 7) << 5;
-    scan.sx = fd_50F6_0F12 >> 4;
-    scan.sy = fd_50F6_0F34 >> 4;
+    scan.dir = ((SpidDir - 2) & 7) << 5;
+    scan.sx = SpidX >> 4;
+    scan.sy = SpidY >> 4;
     scan.found = -1;
     scan.r = 0;
     for (scan.pass = 0; scan.pass < 2; scan.pass++) {
@@ -497,7 +497,7 @@ int far SpiderScan(void)
             y = (int)(fracSIN(scan.a) * (long)scan.r / 32767L) + scan.sy;
             if ((unsigned)x >= 0 && x >= 0 && x <= 127 && y >= 0 && y <= 63 && (scan.life = LifeA[x][y]) != 0 &&
                 (scan.found = FindAntIndex(1, x, y, scan.life)) >= 0) {
-                DoLaserFire(fd_50F6_0F12, fd_50F6_0F34, (x << 4) + 7, (y << 4) + 7);
+                DoLaserFire(SpidX, SpidY, (x << 4) + 7, (y << 4) + 7);
                 if (SRand4()) {
                     LifeA[x][y] = 0;
                     AlistT[scan.found] = 0;

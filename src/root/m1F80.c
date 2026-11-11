@@ -88,11 +88,11 @@ int far f_1F80_0109(int width)
 }
 
 extern int far f_24AB_030B(void);
-extern void far f_1FBD_0000(int x, int y, char far *text);
+extern void far GPutStr(int x, int y, char far *text);
 
 void far f_1F80_0122(struct Rect far *r, int line, char far *text)
 {
-    f_1FBD_0000(((r->right - _fstrlen(text) - r->left) / 2 + r->left) * g_3DDE,
+    GPutStr(((r->right - _fstrlen(text) - r->left) / 2 + r->left) * g_3DDE,
                 f_24AB_030B() * (line & 0xff) + (char)(line >> 8), text);
 }
 
