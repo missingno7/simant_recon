@@ -1,15 +1,16 @@
 # SimAnt reconstruction
 
-The best reviewed reconstruction of the 1991 DOS game lives in `src/`.
-`src/program.json` is the single source inventory for both historical DOS and
-SDL3. Published checkpoints remain immutable; active reconstruction is corrigible.
+A matching reconstruction of the 1991 DOS game lives in `src/`; `src/program.json` is
+its single inventory for both the DOS build and the SDL3 port.
 
-The SDL3 executable runs the converted original main as a bounded preview.
-Manual playtesting found broken sound, a logo-click hang and a discrepancy in
-the intended VGA display. Standalone reconstructed DOS closure now takes priority
-over native fixes. Independent DOS linking remains blocked. See [current status](docs/status.md),
-[architecture](docs/canonical-source.md), [DOS closure strategy](docs/dos-closure.md),
-and [cleanup results](docs/cleanup.md).
+The original `SIMANT.EXE` is the only oracle, and the goal is to rebuild it completely.
+1,617 of 1,640 game functions are byte-exact today; 23 are only behaviour-reviewed, and
+data ownership, layout and the original link are not reproduced yet
+([progress](docs/progress.md)). `dos/build.py` links a working DOS build from this source
+whose recorded replays matched the original
+([receipt](evidence/canonical/validation/canonical-dos-acceptance.json)); it is a test
+vehicle, not an oracle. The SDL3 port lowers the same source mechanically
+([port method](docs/port-repair.md)). Working rules are in [AGENTS.md](AGENTS.md).
 
 ## Build and validation
 
@@ -27,14 +28,11 @@ python portable/build.py
 build/current/portable/simant-canonical.exe
 ```
 
-The canonical DOS command links `build/current/dos/link/SOURCE.EXE` from canonical
-source alone: no storage imports, no open semantic gates, no provisional storage
-and no original executable bytes. 30 bytes in five ranges remain documented
-[historical layout debt](evidence/canonical/historical-layout/review.md); physical
-DGROUP layout equivalence is not claimed. The build passed human gameplay
-acceptance and is tagged `functional-source-oracle-v1`; its
-[deterministic acceptance](evidence/canonical/validation/canonical-dos-acceptance.json)
-matches the original in three scenarios including sound port traffic.
+The DOS command links `build/current/dos/link/SOURCE.EXE` from canonical source alone:
+no original executable bytes. Its data layout is ours, not the original's (73 storage
+units and 30 unattributed bytes are open debt), so it is not a match of the image.
+`dos/acceptance.py` replays a scenario on the original and on this build and compares
+simulation state, saves and sound port traffic.
 Both build paths use zero original executable fallback. [Portable validation commands](portable/README.md) cover
 resources, RNG, simulation, VGA and Save/Load with their supported scopes.
 Bounded DOS checks now save all 307 records in both executables and load the same

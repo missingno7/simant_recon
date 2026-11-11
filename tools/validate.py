@@ -443,7 +443,7 @@ def main() -> int:
         "canonical_translation_units": len(program['modules']) if program else 0,
         "canonical_storage_units": sum('storage_contract' in m for m in program['modules']) if program else 0,
         "canonical_program_sha256": sha(canonical.PROGRAM.read_bytes()) if program else None,
-        "whole_executable": "NOT_BUILT (canonical DOS link has open semantic gates; see docs/canonical-source.md)",
+        "whole_executable": "FUNCTIONAL_SOURCE_BUILD (dos/build.py links the canonical source; the original image layout is not reproduced; see docs/dos-closure.md)",
         "validation": "PASS" if not failures else "FAIL",
         "failures": failures,
     }
