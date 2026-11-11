@@ -6342,7 +6342,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/S25/m3BA4.c",
-   "source_sha256": "e7a6cd56d94b33618bd778466becb680c0979fe9b1f745bdda29658d42b1e423",
+   "source_sha256": "231ca50716c965b543db3f280503285efc68c876131f6fed1d58b6b8643b38c4",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -6498,10 +6498,21 @@
      "provenance": "EXACT_STEERED",
      "steered": "USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EnterNest",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 4149,
+     "size": 281,
+     "target_sha256": "8d1b45d177f95186f067c1814a568241d95c775edc96fd649cebd710964029ab",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "bf0ff72fdb2d1ededaa4ad36fc29541039c548f85a3e8ffa9c42a975feb327a2"
+   "object_sha256": "8088ee9c2478daccc2b5356cf820b0115be5f630097f25b14194344a63eaff6b"
   },
   "S26:39C7": {
    "unit": "S26",
@@ -10268,7 +10279,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m0CDB.c",
-   "source_sha256": "78cf65307ab7bfbe710176011fe1a7b936e3c52683f6d1dd44d9d4326b4e6b6a",
+   "source_sha256": "510be88ef72e2efb919a4f97047ea93845864b72fc09438ffa04cf0e457f3b27",
    "claims": [
     {
      "name": "InitSpider",
@@ -10344,13 +10355,18 @@
      "size": 392,
      "target_sha256": "650be461544c9e00de673f776a184395b75ff88009dc9ea0ea68d029a15630d6",
      "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "SpiderScan=two constructs with no other reason: a local aggregate holding the scan state (keeps the initial radius store and the frame homes) and a folded unsigned x check (selects SI/DI for x and y); the original declarations and the eliminated expression are unknown",
-     "reloc_order": "GROUPED"
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "steered_history": [
+      {
+       "steered": "SpiderScan=two constructs with no other reason: a local aggregate holding the scan state (keeps the initial radius store and the frame homes) and a folded unsigned x check (selects SI/DI for x and y); the original declarations and the eliminated expression are unknown",
+       "cleared": "the Macintosh build (CODE 12, 1B6A) keeps a separate kill counter cleared on entry and incremented after each kill; with that counter ordinary locals reproduce the code, so the scan aggregate and the folded check are gone"
+      }
+     ]
     }
    ],
    "scaffold": [],
-   "object_sha256": "d7fb9936912d7e815d8888d600e5bd9e5694b2f0ba46dc60c867f928e1271e1e"
+   "object_sha256": "86d95264214a36aa15520e5656272fcf277a6c3f73c356bddd221cb39db44e48"
   },
   "root:0DEF": {
    "unit": "root",

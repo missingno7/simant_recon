@@ -515,11 +515,13 @@ void far EnterNest(void)
     else
         MeLocY = 1;
     MeDir = 4;
-    if (MePlane == 2)
+    if (MePlane == 2) {
         DigMyTile(MePlane, MeLocX, MeLocY);
-    else
+        SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
+    } else {
         DigMyTile(MePlane, MeLocX, MeLocY);
-    SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
+        SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
+    }
 }
 
 
