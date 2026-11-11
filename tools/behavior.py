@@ -541,8 +541,17 @@ class PreparedPair:
         if self.definition_sha256 != semantics[name]['definition_sha256']:
             raise ExecutionError(f'current canonical definition pin differs: {name}')
         self.review_pins = {}
+        exact_claims = {c['name'] for c in modules.load_manifest()['modules'].get(key, {}).get('claims', [])}
         for active in {name} | self.sequence_targets:
-            registration = semantics[active]
+            registration = semantics.get(active)
+            if registration is None:
+                # A sequence entry that has since been matched byte for byte is proven by
+                # the manifest claim; it stays in the sequence as an ordinary peer.
+                if active not in exact_claims:
+                    raise ExecutionError(f'{active} is neither registered nor an exact claim of {key}')
+                self.review_pins[active] = {'exact_claim': True,
+                                            'definition_sha256': canonical.definition_sha(text, active)}
+                continue
             review_path = ROOT / registration['receipt']
             review = json.loads(review_path.read_text())
             definition_pin = canonical.definition_sha(text, active)

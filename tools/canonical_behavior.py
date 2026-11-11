@@ -157,7 +157,7 @@ MUTATIONS = {
     'o25_3BA4_1035': ('if (MeLocX > 0x40)', 'if (MeLocX >= 0x40)'),
     'o25_3BA4_1686': ('*rot = 1;', '*rot = -1;'),
     'f_171C_09CC': ('if (b->paras < paras + 0x20)', 'if (b->paras <= paras + 0x20)'),
-    'f_171C_0ADC': ('(unsigned long)b + 0x20000L', '(unsigned long)b + 0x30000L'),
+    'f_171C_0ADC': ('(long)b + 0x20000L', '(long)b + 0x30000L'),
     'f_171C_0CF4': ('return (int)moved;', 'return 0;'),
     'f_171C_0FBC': ('return n;', 'return 0L;'),
 }

@@ -37,10 +37,9 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-try:
-    import capstone  # noqa: F401
-except ImportError:  # sandboxed users cannot see the per-user site-packages
-    import sys as _sys
+import sys as _sys
+# The pinned decoder comes first: a newer per-user Capstone must not shadow it.
+if "C:/tools/capstone-5.0.3" not in _sys.path:
     _sys.path.insert(0, "C:/tools/capstone-5.0.3")
 from capstone import Cs, CS_ARCH_X86, CS_MODE_16
 
@@ -330,8 +329,9 @@ def rank(dos: dict, w16: dict, decisions: dict) -> list[dict]:
             pairs.append({"dos": d, "dos_address": dos.get(d, {}).get("address"), "win16": w["win16"],
                           "win16_address": w16.get(w["win16"], {}).get("address"), "confidence": w["confidence"],
                           "score": None, "mutual_best": None, "evidence": w.get("evidence", []), "method": "reviewed"})
-    order = {"CONFIRMED": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3, "REJECTED": 4}
-    pairs.sort(key=lambda p: (order[p["confidence"]], -(p["score"] or 0)))
+    # reviewed decisions also carry DOS-STRING (rule DOS-1) and THIRD-PARTY; they sort with CONFIRMED
+    order = {"CONFIRMED": 0, "DOS-STRING": 0, "THIRD-PARTY": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3, "REJECTED": 4}
+    pairs.sort(key=lambda p: (order.get(p["confidence"], 3), -(p["score"] or 0)))
     return pairs
 
 

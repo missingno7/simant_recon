@@ -82,6 +82,20 @@ class PromotionInventoryControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'declaration context changed'):
             self.update(self.text, {**self.module, 'flags': ['/AL', '/J']})
 
+    def test_exact_claim_supersedes_only_its_own_registration(self):
+        text = self.text.replace('return value;', 'return value + 0;')
+        claim = lambda *names: c.exact_inventory(
+            self.program, self.key, self.module, text.encode('latin1'), self.module,
+            source=self.source, exact_claims=frozenset(names))
+        with self.assertRaisesRegex(ValueError, 'definition/review differs'):
+            claim()
+        with self.assertRaisesRegex(ValueError, 'definition/review differs'):
+            claim('helper')
+        after = claim('strict')
+        self.assertEqual(after['semantics'], [])
+        self.assertEqual(len(self.program['semantics']), 1)
+        self.assertEqual(after['modules'][0]['source_sha256'], c.sha(text.encode()))
+
     def test_macro_inside_unregistered_helper_still_is_context(self):
         changed = self.text.replace('return 1;', '\n#define VALUE 2\nreturn 1;')
         with self.assertRaisesRegex(ValueError, 'declaration context changed'):

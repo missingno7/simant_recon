@@ -29,10 +29,9 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-try:
-    import capstone  # noqa: F401
-except ImportError:
-    import sys as _sys
+import sys as _sys
+# The pinned decoder comes first: a newer per-user Capstone must not shadow it.
+if "C:/tools/capstone-5.0.3" not in _sys.path:
     _sys.path.insert(0, "C:/tools/capstone-5.0.3")
 from capstone import Cs, CS_ARCH_X86, CS_MODE_16
 

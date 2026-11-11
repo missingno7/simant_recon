@@ -197,11 +197,16 @@ def check_semantic_review(row: dict, text: str) -> dict:
 
 
 def exact_inventory(program: dict, key: str, module: dict, raw: bytes,
-                    previous: dict | None, *, source: str) -> dict:
+                    previous: dict | None, *, source: str,
+                    exact_claims: frozenset = frozenset()) -> dict:
     """Prepare metadata for an already exact promotion, without writing files.
 
     A normal exact promotion cannot replace a registered behavioral definition
     or its declaration context. Those changes use a reviewed canonical plan.
+    The one exception is the stronger proof: a registered function that this
+    promotion claims byte-exact (``exact_claims``, verified by the caller
+    against the oracle) no longer needs its behavioral registration, which is
+    dropped. Registrations that remain keep both requirements.
     """
     after = copy.deepcopy(program)
     items = {m['key']: m for m in after['modules']}
@@ -219,12 +224,16 @@ def exact_inventory(program: dict, key: str, module: dict, raw: bytes,
             raise ValueError('source path/language replacement requires a canonical plan: ' + key)
         old_text, text = old_raw.decode('latin1'), raw.decode('latin1')
         registered = [s for s in program.get('semantics', []) if s['module'] == key]
+        remaining = [s for s in registered if s['function'] not in exact_claims]
         for semantic in registered:
             check_semantic_review(semantic, old_text)
+        for semantic in remaining:
             check_semantic_review(semantic, text)
         compiler_changed = any(module[field] != item[field] for field in ('lang', 'profile', 'flags'))
-        if registered and (compiler_changed or semantic_context_sha(old_text) != semantic_context_sha(text)):
+        if remaining and (compiler_changed or semantic_context_sha(old_text) != semantic_context_sha(text)):
             raise ValueError('registered semantic declaration context changed; use a reviewed canonical plan: ' + key)
+        after['semantics'] = [s for s in after.get('semantics', [])
+                              if s['module'] != key or s['function'] not in exact_claims]
         if item.get('storage_contract'):
             raise ValueError('provider storage changes require a canonical plan: ' + key)
     elif item is not None or (ROOT / source).exists():

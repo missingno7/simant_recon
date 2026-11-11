@@ -45,9 +45,8 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 SCRATCH = ROOT / "build" / "scratch" / "helpers" / "autosearch"
 
-try:
-    import capstone  # noqa: F401
-except ImportError:
+# The pinned decoder comes first: a newer per-user Capstone must not shadow it.
+if "C:/tools/capstone-5.0.3" not in sys.path:
     sys.path.insert(0, "C:/tools/capstone-5.0.3")
 from capstone import CS_ARCH_X86, CS_MODE_16, Cs  # noqa: E402
 

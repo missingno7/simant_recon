@@ -506,7 +506,10 @@ def main() -> int:
         path = module_path(unit, seg, origin, lang)
         source = path.relative_to(ROOT).as_posix()
         data = text.replace("\r\n", "\n").encode("latin1")
-        program_after = canonical.exact_inventory(program, key, module, data, mod, source=source)
+        program_after = canonical.exact_inventory(program, key, module, data, mod, source=source,
+                                                  exact_claims=frozenset(c["name"] for c in claims))
+        superseded = sorted({s["function"] for s in program.get("semantics", [])}
+                            - {s["function"] for s in program_after.get("semantics", [])})
         if mod and mod.get("canonical_admission"):
             prior_text = (ROOT / mod["source"]).read_bytes().decode("latin1")
             prior_result = modmod.verify_module(prior_text, mod, mod["claims"], man=man)
@@ -537,6 +540,7 @@ def main() -> int:
                                  "new_claims": [c["name"] for c in new_claims], "profile": profile,
                                  "placements": sorted(placements),
                                  **({"released": released} if released else {}),
+                                 **({"superseded_semantic_registrations": superseded} if superseded else {}),
                                  **({"dropped_extent": dropped} if dropped else {}),
                                  **({"unsteered": a.unsteer} if a.unsteer else {}),
                                  **({"marked_steered": marked} if marked else {}),
