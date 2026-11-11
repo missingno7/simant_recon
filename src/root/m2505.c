@@ -200,7 +200,7 @@ void _fastcall f_2505_0382(struct Pt far *center, struct Rect far *rect)
 }
 
 extern void far f_1F58_0090(void);
-int _fastcall f_2505_0453(int obj, int kind);
+int _fastcall f_2505_0453(int, int);
 int _fastcall f_2505_04D7(int win, int idx);
 
 int _fastcall f_2505_03B9(int axis, int win, char far *obj)
@@ -240,14 +240,6 @@ int _fastcall f_2505_03B9(int axis, int win, char far *obj)
 
 extern int far win_numOfWindows;
 
-extern char far * far f_171C_1B84(char far * far *handle);
-extern void far f_171C_1BBA(char far * far *handle);
-extern void far f_1FD2_0883(int x, int y, int id, int mode, int flag);
-extern void far f_1FD2_03EB(char far *obj, int objNum);
-extern void far f_1FD2_044F(char far *w, int id);
-extern void far f_218D_01EB(void);
-extern void far f_1FD2_0438(int objNum);
-extern void far f_1FD2_049C(int id);
 int _fastcall f_2505_0453(int obj, int kind)
 {
     int win;
@@ -258,9 +250,8 @@ int _fastcall f_2505_0453(int obj, int kind)
     win = obj & 0xff00;
     if ((win >> 8) < win_numOfWindows || win >= 0x2800) {
         win_LockWin(win);
-        idx = obj & 0xff;
         w = f_2505_0006(win);
-        if (*(int far *)(w + 0xc) > idx) {
+        if (*(int far *)(w + 0xc) > (idx = obj & 0xff)) {
             r = ((int far * far *)(w + 0x2c))[idx];
             win_UnlockWin(win);
             return r[kind];
@@ -272,9 +263,17 @@ int _fastcall f_2505_0453(int obj, int kind)
 
 int _fastcall f_2505_04D7(int win, int idx)
 {
-    if (win_numOfWindows <= (win >> 8) && win < 0x2800)
+    /* Byte-equivalent unknown: two named temporaries here and the unnamed forward
+     * prototype of f_2505_0453 give every function of the file its original code;
+     * which identifiers the original declared is not recovered. */
+    int windowIndex;
+    int result;
+
+    windowIndex = win >> 8;
+    if (win_numOfWindows <= windowIndex && win < 0x2800)
         return 0x8000;
-    return ((int far *)(f_2505_0006(win) + 0x10))[idx];
+    result = ((int far *)(f_2505_0006(win) + 0x10))[idx];
+    return result;
 }
 
 void _fastcall f_2505_0511(struct Rect far *r)

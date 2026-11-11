@@ -209,9 +209,6 @@ extern struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *li
 extern Handle far f_171C_1B2C(Handle h, long size, int flags);
 
 
-extern struct Rect far * far f_1D8E_003F(struct Rect far *r, struct Rect far *c,
-                                         struct Rect far *in, struct Rect far *out);
-extern Handle far fd_50F6_3B5C;
 void far f_1E57_038E(void)
 {
     int i;
@@ -223,7 +220,6 @@ void far f_1E57_038E(void)
     struct Rect r;
     Handle tmpH;
     struct Rect far *tmp;
-    int count;
 
     f_1E57_0009();
     if (!s_584C) {
@@ -259,15 +255,13 @@ void far f_1E57_038E(void)
             break;
         win_GetObjRect(win, &r);
         end = f_1D8E_02BD(&r, list, 0L, tmp);
-        count = end - tmp;
-        if (count >= 256)
-            Punt("C097: Clip overflow %d", count);
-        _fmemcpy(list, tmp, (count + 1) * sizeof(struct Rect));
+        if ((n = end - tmp) >= 256)
+            Punt("C097: Clip overflow %d", (end - tmp));
+        _fmemcpy(list, tmp, ((end - tmp) + 1) * sizeof(struct Rect));
         win_GetObjRect(next, &r);
         end = f_1D8E_02BD(&r, list, tmp, 0L);
-        n = count = end - tmp;
-        if (count >= 256)
-            Punt("C098: Clip overflow %d", count);
+        if ((n = end - tmp) >= 256)
+            Punt("C098: Clip overflow %d", (end - tmp));
         f_1E57_0006(n, 0);
         fd_50F6_3B60[next >> 8] = f_171C_1A9E(n = (n + 1) * sizeof(struct Rect), 1, "winClipList");
         _fmemcpy(f_171C_1B84(fd_50F6_3B60[next >> 8]), tmp, n);

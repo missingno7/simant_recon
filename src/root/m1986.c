@@ -86,10 +86,15 @@ IndexEntry far * far FindIndex(int db, int id, int kind)
     while (fd_50F6_3956 <= top) {
         mid = (fd_50F6_3956 + top) / 2;
         fd_50F6_3952 = &fd_50F6_3958[db].index[mid];
-        if (!(fd_50F6_3952->kind < kind || (fd_50F6_3952->kind == kind && fd_50F6_3952->id < id)))
+        if (fd_50F6_3952->kind > kind) goto high;
+        else {
+            if (fd_50F6_3952->kind != kind || fd_50F6_3952->id < id) {
+                fd_50F6_3956 = mid + 1;
+                continue;
+            }
+high:
             top = mid - 1;
-        else
-            fd_50F6_3956 = mid + 1;
+        }
     }
     fd_50F6_3952 = &fd_50F6_3958[db].index[fd_50F6_3956];
     if (fd_50F6_3952->id == id && fd_50F6_3952->kind == kind)

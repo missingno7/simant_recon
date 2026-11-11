@@ -21,28 +21,6 @@ extern void far f_171C_1BBA(char far * far *handle);
 extern unsigned int far _fstrlen(char far *s);
 
 
-extern void _fastcall win_LockWin(int win);
-extern char far * _fastcall win_ObjAddr(int obj);
-extern void _fastcall win_UnlockWin(int win);
-extern char far * far * far f_171C_18A6(char far * far *handle, long size, int flags);
-extern char far * far * far f_171C_13CA(long size, int flags, char far *name);
-extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
-extern void far f_24AB_02AD(int font);
-extern void far clip_Push(void);
-extern void far clip_SubInclude(struct Rect far *rect);
-extern int far f_24AB_030B(void);
-extern void _fastcall win_SetColorNum(int color);
-extern void far f_24AB_042B(struct Rect far *rect, int y, char far *text);
-extern int near g_3DE2;
-extern void far clip_Pop(void);
-extern void far Punt(char far *format, ...);
-extern struct Pt far fd_50F6_47DA;
-extern int far WinPrintf(char far *format, ...);
-extern int near g_3DE0;
-extern int _fastcall win_DrawBitMap(int x, int y, int id);
-extern char far * far f_24FA_0004(char far *p, char c, unsigned int n);
-extern void far f_1F80_0081(int ticks);
-extern int far StillDown(void);
 char far * _fastcall f_23E6_0000(int line, struct List far *list)
 {
     int n;

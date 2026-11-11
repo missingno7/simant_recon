@@ -106,43 +106,12 @@ extern int far _fstrcmp(char far *a, char far *b);
 extern int far f_24AB_0367(int c);
 
 
-extern char far * far f_1A53_00F0(int object, int kind, int type);
-extern char far * far f_171C_1B84(char far *handle);
-extern void far win_SetObjFormatStr(int obj, char far *text);
-extern void far f_171C_1BBA(char far *handle);
-extern void far db_PurgeObject(int object, int kind);
-extern void _fastcall win_DrawTitle(int obj);
-extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern void far clip_SetWin(int win);
-extern void far clip_SubInclude(struct Rect far *rect);
-extern long far f_171C_1C1C(char far *handle);
-extern void _fastcall win_SetColorFromObjNum(int obj);
-extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
-extern int _fastcall win_DrawBitMap(int x, int y, int id);
-extern void far * far _fmemchr(void far *buf, int c, unsigned int n);
-extern void far * far _fmemmove(void far *dst, void far *src, unsigned int n);
-extern void far f_277D_000B(char far *text);
-extern int _fastcall win_IsWinOpen(int win);
-extern void far win_Open(int win);
-extern int near g_3DB2;
-extern int _fastcall win_GetEvent(struct Event far *ev);
-extern void far clip_Push(void);
-extern char far * far GSaveRect(struct Rect far *r);
-extern unsigned char near g_5A97;
-extern int near g_3DE0;
-extern void far f_1CE2_0013(int left, int top, int right, int bottom, int width);
-extern int far StillDown(void);
-extern void far win_Events(void);
-extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
-extern void far clip_Pop(void);
-extern int far f_1FD2_04E5(struct Point far *pt, struct Rect far *rect);
-extern void _fastcall win_DrawWindow(int win);
 void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far *rect,
                                   int firstLine, int font1, int font2, int record)
 {
     char buf[120];
-    int end;
     int n;
+    int idx;
     int x;
     int start;
     int brk;
@@ -176,7 +145,7 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
         f_24AB_02AD(font2);
     else
         f_24AB_02AD(font1);
-    for (line = 0; pos < len && line < firstLine + maxLines; line++) {
+    for (line = 0; len > pos && line < firstLine + maxLines; line++) {
         w = 0;
         done = 0;
         brk = 0;
@@ -189,26 +158,26 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
                 if (n > 0) {
                     if (n > 110)
                         Punt("len = %d", n);
-                    _fstrncpy(buf, text + start, n);
+                    _fstrncpy(buf, &text[start], n);
                     buf[n] = 0;
                     WinPrintf("%d(%d)(%d): [%s]\n", pos, n, styles[styleIdx].face, buf);
                     f_24AB_038D(x, y, buf);
                     if (record && styles[styleIdx - 1].face == 0x100) {
-                        start = 0;
-                        while (buf[start] == ' ')
-                            _fstrcpy(buf + start, buf + start + 1);
-                        for (; buf[start]; start++)
-                            if ((_ctype + 1)[buf[start]] & 2)
-                                buf[start] -= 0x20;
-                        for (start = 0; fd_4EE5_0500[start].id != 0; start++)
-                            if (_fstrcmp(buf, fd_4EE5_0500[start].name) == 0)
+                        idx = 0;
+                        while (buf[idx] == ' ')
+                            _fstrcpy(buf + idx, buf + idx + 1);
+                        for (; buf[idx]; idx++)
+                            if ((_ctype + 1)[buf[idx]] & 2)
+                                buf[idx] -= 0x20;
+                        for (idx = 0; fd_4EE5_0500[idx].id != 0; idx++)
+                            if (_fstrcmp(buf, fd_4EE5_0500[idx].name) == 0)
                                 break;
-                        if (fd_4EE5_0500[start].id != 0) {
+                        if (fd_4EE5_0500[idx].id != 0) {
                             fd_4EE5_0000[g_8C24].r.left = x;
                             fd_4EE5_0000[g_8C24].r.right = rect->left + w;
                             fd_4EE5_0000[g_8C24].r.top = y;
                             fd_4EE5_0000[g_8C24].r.bottom = y + lineH;
-                            fd_4EE5_0000[g_8C24].id = fd_4EE5_0500[start].id;
+                            fd_4EE5_0000[g_8C24].id = fd_4EE5_0500[idx].id;
                             g_8C24++;
                         } else {
                             WinPrintf("\nERROR: Cannot file text rez(%s)\n", buf);
@@ -249,22 +218,20 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
             }
             pos++;
         }
-        end = pos;
         if (brk != 0) {
-            end = brk;
-            if (end < start)
-                start = end;
+            pos = brk;
+            if (pos < start)
+                start = pos;
         }
-        if (line >= firstLine && (n = end - start) > 0) {
-            _fstrncpy(buf, text + start, n);
+        if (line >= firstLine && (n = pos - start) > 0) {
+            _fstrncpy(buf, &text[start], n);
             buf[n] = 0;
             f_24AB_038D(x, y, buf);
         }
-        while (text[end] == ' ')
-            end++;
-        if (text[end] == '\n' || text[end] == '\r')
-            end++;
-        pos = end;
+        while (text[pos] == ' ')
+            pos++;
+        if (text[pos] == '\n' || text[pos] == '\r')
+            pos++;
         y += lineH;
     }
 }

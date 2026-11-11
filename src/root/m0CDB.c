@@ -475,37 +475,39 @@ extern int far fracSIN(int angle);
 extern void far DoLaserFire(int x1, int y1, int x2, int y2);
 
 
+/* Byte-exact matching hypothesis: the scan-state aggregate retains the initial
+ * radius store and its member order reproduces the cold-local homes. The
+ * folded unsigned x check is STEERED (USE-family allocation effect); the
+ * eliminated expression and original aggregate declaration are unknown. */
 int far SpiderScan(void)
 {
-    int dir = ((fd_50F6_1004 - 2) & 7) << 5;
-    int sx = fd_50F6_0F12 >> 4;
-    int sy = fd_50F6_0F34 >> 4;
-    int found = -1;
-    int r = 0;
-    int pass;
-    int a;
+    struct { int sx, sy, found, dir, pass, life, a, r; } scan;
     int x;
     int y;
-    int life;
 
-    for (pass = 0; pass < 2; pass++) {
-        for (a = dir - 32; a < dir + 32; a++) {
-            r = SRand1(12) + 1;
-            x = (int)(fracCOS(a) * (long)r / 32767L) + sx;
-            y = (int)(fracSIN(a) * (long)r / 32767L) + sy;
-            if (x >= 0 && x <= 127 && y >= 0 && y <= 63 && (life = LifeA[x][y]) != 0 &&
-                (found = FindAntIndex(1, x, y, life)) >= 0) {
+    scan.dir = ((fd_50F6_1004 - 2) & 7) << 5;
+    scan.sx = fd_50F6_0F12 >> 4;
+    scan.sy = fd_50F6_0F34 >> 4;
+    scan.found = -1;
+    scan.r = 0;
+    for (scan.pass = 0; scan.pass < 2; scan.pass++) {
+        for (scan.a = scan.dir - 32; scan.a < scan.dir + 32; scan.a++) {
+            scan.r = SRand1(12) + 1;
+            x = (int)(fracCOS(scan.a) * (long)scan.r / 32767L) + scan.sx;
+            y = (int)(fracSIN(scan.a) * (long)scan.r / 32767L) + scan.sy;
+            if ((unsigned)x >= 0 && x >= 0 && x <= 127 && y >= 0 && y <= 63 && (scan.life = LifeA[x][y]) != 0 &&
+                (scan.found = FindAntIndex(1, x, y, scan.life)) >= 0) {
                 DoLaserFire(fd_50F6_0F12, fd_50F6_0F34, (x << 4) + 7, (y << 4) + 7);
                 if (SRand4()) {
                     LifeA[x][y] = 0;
-                    AlistT[found] = 0;
-                    DeadAntHere(x, y, life & 0x80);
+                    AlistT[scan.found] = 0;
+                    DeadAntHere(x, y, scan.life & 0x80);
                 }
-                return found;
+                return scan.found;
             }
         }
     }
-    return found;
+    return scan.found;
 }
 
 

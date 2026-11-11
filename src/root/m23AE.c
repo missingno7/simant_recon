@@ -152,18 +152,20 @@ void _fastcall win_UnlockWin(int win)
                     case 4:
                     case 10:
                         p = &obj->h34;
+                        if (*p) {
+                            f_171C_13E4(*p);
+                            *p = 0;
+                        }
                         break;
                     case 16:
                     case 17:
                     case 18:
                         p = &obj->h2a;
+                        if (*p) {
+                            f_171C_13E4(*p);
+                            *p = 0;
+                        }
                         break;
-                    default:
-                        continue;
-                    }
-                    if (*p) {
-                        f_171C_13E4(*p);
-                        *p = 0;
                     }
                 }
                 f_171C_2086(h);

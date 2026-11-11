@@ -33,11 +33,12 @@ void far f_29D6_000A(int a, int note, int vol, int chan)
 
     chan <<= 5;
     f = g_75E8[note % 12] >> note / 12;
-    f_29F0_002A(0x205, (f & 0xf) + ((char)chan + 0x80));
+    chan += 0x80;
+    f_29F0_002A(0x205, (f & 0xf) + (char)chan);
     f_29F0_002A(0x205, f >> 4);
     vol >>= 3;
     vol = 0xf - vol;
-    f_29F0_002A(0x205, vol + ((char)chan + 0x80) + 0x10);
+    f_29F0_002A(0x205, vol + (char)chan + 0x10);
 }
 
 extern void far f_29BF_00E6(int reg, int value);

@@ -447,13 +447,13 @@ void far f_171C_0ADC(Block far *b)
 {
     Block far *n;
     Block save;
-    unsigned long seg;
+    unsigned long seg;   /* unused; byte-equivalent unknown: the code never needs it, but
+                          * f_171C_0CF4's draft is closest with one identifier here */
 
     save = *b;
-    seg = SEG(b);
-    f_194D_0006(b, NEXTBLK(b), NEXTBLK(b)->paras);
-    *(Handle)((char far *)s_2F46 + b->handle) = (char far *)((unsigned long)b + 0x20000L);
-    b = BLK(b->paras + seg);
+    f_194D_0006(b, BLK((unsigned)SEG(b) + (unsigned long)b->paras), BLK((unsigned)SEG(b) + (unsigned long)b->paras)->paras);
+    *(Handle)((char far *)s_2F46 + b->handle) = (char far *)((long)b + 0x20000L);
+    b = BLK(b->paras + (unsigned long)(unsigned)SEG(b));
     *b = save;
     if (b->prev)
         BLK(b->prev)->next = SEG(b);
@@ -466,7 +466,7 @@ void far f_171C_0ADC(Block far *b)
             b->paras += n->paras;
             n = BLK(b->next);
         }
-        if (n)
+        if ((unsigned)SEG(n))
             n->prev = SEG(b);
     }
 }
@@ -585,6 +585,7 @@ Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems)
 
 Block far * far f_171C_0FBC(unsigned paras, int type)
 {
+    int t;
     int first;
     Block far *b;
     Block far *best;
@@ -595,27 +596,28 @@ Block far * far f_171C_0FBC(unsigned paras, int type)
     first = 1;
     compacted = 0;
     for (;;) {
-        best = g_91AC;
-        for (b = g_91AC; b; b = BLK(b->next))
+        best = b = g_91AC;
+        for (; b; b = BLK(b->next))
             if (b->paras >= paras)
                 best = b;
         if (best && best->paras >= paras) {
             if (first) {
-                for (n = BLK(SEG(best) + best->paras); SEG(n) < s_8C70; n = BLK(SEG(n) + n->paras))
-                    if (!n->lock && (n->type == 1 || n->type == 3 || n->type == 0x80))
+                for (n = BLK((unsigned)SEG(best) + (unsigned long)best->paras); (unsigned)SEG(n) < s_8C70; n = BLK((unsigned)SEG(n) + (unsigned long)n->paras))
+                    if ((t = n->type, !n->lock) && (t == 1 || t == 3 || t == 0x80))
                         goto again;
             }
-            if (best->paras > paras + 4) {
+            if ((t = best->paras) > paras + 4) {
                 WinPrintf("<SPLIT>");
-                f_171C_068C(best, best->paras - paras, 0);
-                n = BLK(SEG(best) + best->paras);
+                f_171C_068C(best, t - paras, 0);
+                n = BLK((unsigned)SEG(best) + (unsigned long)best->paras);
                 f_171C_068C(n, paras, type);
                 f_171C_0160(best, 1);
-                return n;
+                goto done;
             }
             WinPrintf("<WHOLE>");
-            f_171C_068C(best, paras, type);
-            return best;
+            n = best;
+            f_171C_068C(n, paras, type);
+            goto done;
         }
         if (!first) {
             sprintf(buffer, "Cannot find a big enough space! (%ld bytes)", (unsigned long)paras << 4);
@@ -625,7 +627,7 @@ again:
         if (!compacted) {
             WinPrintf("<CL>");
             if (s_2F3E > paras && f_171C_0CF4(0)) {
-                first = compacted = 1;
+                compacted = first = 1;
                 continue;
             }
         }
@@ -639,6 +641,8 @@ again:
         } else
             first = 0;
     }
+done:
+    return n;
 }
 
 

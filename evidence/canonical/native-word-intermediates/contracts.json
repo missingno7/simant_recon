@@ -58,7 +58,7 @@
       "id": "routine-word-f_0250_0F2C",
       "function": "f_0250_0F2C",
       "source": "src/root/m0250.c",
-      "source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+      "source_sha256": "675e8caf319424b88c92bf005db081f574fa934212cc842c145959d9e1cdfc2a",
       "original_address": "root:0250:0F2C",
       "summary": "Signed comparisons consume the low word sums; clamped stores already narrow through int16 storage.",
       "sites": [
@@ -88,7 +88,7 @@
       "id": "routine-word-BalloonIsVisible",
       "function": "BalloonIsVisible",
       "source": "src/root/m0250.c",
-      "source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+      "source_sha256": "675e8caf319424b88c92bf005db081f574fa934212cc842c145959d9e1cdfc2a",
       "original_address": "root:0250:4225",
       "summary": "Viewport sums and y-3 are signed low words before comparisons. The published failing witness is an X-sum wrap, not a y-3 wrap.",
       "sites": [

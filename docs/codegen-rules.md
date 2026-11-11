@@ -163,6 +163,14 @@ that remain open and the freshly compiled execution controls.
   while identifiers at the top of the file (a natural `#include <string.h>`, unnamed-prototype
   blocks) did (S12 0B76, S13 01E5, S14 PictureDialog). A function's own locals affect only later
   functions (worker rootC, 0798/2662).
+* **Duplicate declarations are not neutral** (2026-11-11): a block of repeated `extern`
+  declarations inserted before the first behaviour-reviewed function of five modules entered
+  those identifiers earlier and made nine exact functions inexact (commuted additions,
+  reversed comparisons: PopUpInfoWindow, DrawCurBalloons, DrawSpider, PrevListLine,
+  f_23E6_0392, win_Recalc, f_2505_0831, f_2505_08EA, f_1E57_0F8E). Removing the block
+  restored all nine (`evidence/canonical/declaration-context/publication.json`). Keep each
+  declaration where the file first needs it; a draft tuned inside a hoisted block is tuned
+  to the wrong context (f_1C62_0415 goes from 1 differing byte to +4 bytes without its block).
 * **Pointer walks**: the /Og strength-reduced shape comes from explicit pointer increments in the
   `for` header (`y++, p += 64`), not from `/Ol` (S12 0432/080E).
 * **Block layout**: `if (c) goto L;` pulls L's chain inline and moves the fall-through after it;

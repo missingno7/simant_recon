@@ -5730,7 +5730,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/S23/m39C7.c",
-   "source_sha256": "c9a26f97557c8a1b9cd4db2c17eb910787e7719aec0499041dcfd2c69eee1301",
+   "source_sha256": "0fa81ee28728bfc135ed4dd96615c260a4e40d0053ae30bc2d419e11cf61ab7a",
    "claims": [
     {
      "name": "XFlipLong",
@@ -5785,8 +5785,7 @@
      "target_sha256": "ce4008881c82c42f52b06ff27b4fa020c239bb1ec556400e1acd4f9f3dbef65c",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "ProcInfoEvent",
@@ -5809,17 +5808,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "layout_inferred": "SYM-1 and TU-1: bring real f_1A53_00F0/f_171C_1B84 loader/locker prototypes earlier; declaration position inferred with full-module gate, no padding symbols",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "win_PrintStyleTextInRect",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 146,
+     "size": 1039,
+     "target_sha256": "372ebfdaaac7d3f86918bd638ca8e5a76c561fe9d4356983e2de8c7171c85d31",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "a3d8555df45e30bc062be150788ede6aba6f53545c2fceef3c94b146ab2405f5",
-   "canonical_admission": {
-    "receipt": "evidence/canonical/icon-handle-view/publication.json",
-    "historical_checkpoint": "2be85a8",
-    "current_byte_exact": false,
-    "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
-   }
+   "object_sha256": "5058391a54ef1870623fdde879e80b6af4413a06a95aae92eb7bd0abb99e76ca"
   },
   "S24:39C7": {
    "unit": "S24",
@@ -8353,7 +8357,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m0250.c",
-   "source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+   "source_sha256": "675e8caf319424b88c92bf005db081f574fa934212cc842c145959d9e1cdfc2a",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -8894,8 +8898,7 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "layout_inferred": "SYM-1: move real fd_50F6_37EA callback prototype before f_0250_1018; inferred declaration placement, no dummy identifiers",
-     "reloc_order": "WITHIN_GROUP_PENDING",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "DrawSpider",
@@ -8907,18 +8910,11 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "layout_inferred": "SYM-1 and OE-1: move two real far-variable declarations earlier, emit rectangle left before top, and use conditional image-mode calls; whole-module gate verifies the resulting register and stack allocation",
-     "reloc_order": "GROUPED",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "12675e0cfa17dbe0989fc3d67b2a48816fc0767c7ebd7009fb84492b0e64db25",
-   "canonical_admission": {
-    "receipt": "evidence/canonical/icon-handle-view/publication.json",
-    "historical_checkpoint": "2be85a8",
-    "current_byte_exact": false,
-    "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
-   }
+   "object_sha256": "8742f77792644f9380fcb128d97c10cff71b295aadc90c32b40d2c0b98c0f4ce"
   },
   "root:075B": {
    "unit": "root",
@@ -10233,8 +10229,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m0CDB.c",
-   "source_sha256": "a118a8c5096cee9fa887e4414ea36b6f96fa9069ccad86bcd4cc411826fa31dd",
+   "source_sha256": "e674479e82de72d0b4635af0683329bb25056a238b972611e29e7321dd9aec67",
    "claims": [
     {
      "name": "InitSpider",
@@ -10301,10 +10298,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SpiderScan",
+     "unit": "root",
+     "seg": 3291,
+     "off": 3984,
+     "size": 392,
+     "target_sha256": "650be461544c9e00de673f776a184395b75ff88009dc9ea0ea68d029a15630d6",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "SpiderScan=two constructs with no other reason: a local aggregate holding the scan state (keeps the initial radius store and the frame homes) and a folded unsigned x check (selects SI/DI for x and y); the original declarations and the eliminated expression are unknown",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "9cc70aa387403c45b55bc8e28604a422f231fb6f425b519da7b78a7d1092ecf3"
+   "object_sha256": "41f48146c95a3e38549db6c81bf35e0722b0f78d1441878cd369636f06d2dda4"
   },
   "root:0DEF": {
    "unit": "root",
@@ -12780,7 +12789,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m171C.c",
-   "source_sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+   "source_sha256": "dbbf26026a9046daabf95a447e89882d93d3ab7cba7b589f176da56623237cbe",
    "claims": [
     {
      "name": "f_171C_068C",
@@ -12835,7 +12844,7 @@
      "target_sha256": "0e2240f99617b1e9308a177841fe40e87dc33d679cb7443849bfe64a3c20810d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "f_171C_2136",
@@ -13363,7 +13372,7 @@
      "target_sha256": "34cbd81d7e15eddc867b9408c123440d3032ce91a917b241de214ffb17673afd",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_171C_0A5C",
@@ -13409,10 +13418,32 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0ADC",
+     "unit": "root",
+     "seg": 5916,
+     "off": 2780,
+     "size": 262,
+     "target_sha256": "5d9d2ae2fbd19f4d647ad57b820599467e646bac028e6035eab2a813b6dd745c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0FBC",
+     "unit": "root",
+     "seg": 5916,
+     "off": 4028,
+     "size": 566,
+     "target_sha256": "487d534acbf914989efda2c9ebbc4eef0c81463cc66250e05551dc2d97a6e793",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "cc4fa8fb421a7f4c703c356e98fac2a08aa8e2085e018d2e7ee270ce65ea1160"
+   "object_sha256": "3dc1caa9bea230784ddfaf8870f5117f413e50e2dedd581fe51ae663b4231e96"
   },
   "root:194D": {
    "unit": "root",
@@ -13897,7 +13928,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m1986.c",
-   "source_sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+   "source_sha256": "c9c9e8db067b93a9f536767093f432db9aa697246e3817e9c4da5c632c4f1e7d",
    "claims": [
     {
      "name": "OpenIndex",
@@ -13964,10 +13995,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "FindIndex",
+     "unit": "root",
+     "seg": 6534,
+     "off": 298,
+     "size": 267,
+     "target_sha256": "cd7dc4c9f31b0130089cdd098142e038285519096270ec05a653e61c07baf64d",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "FindIndex=block layout only: goto into the else block reproduces the original order of the two search branches; the original control structure is unknown",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "5fcdd8fd5970ac6bcee75ee3fe7fb9577932f403e6404237354133d479c461d8"
+   "object_sha256": "27e53d7fd5524675b4a9231a019e719de4952b49b5daea61d3f647288e5490e8"
   },
   "root:19A9": {
    "unit": "root",
@@ -16368,8 +16411,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m1E57.c",
-   "source_sha256": "1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084",
+   "source_sha256": "bc9c2c947a689b211565b2ae91e248919a1fc9cf3cae8aa7c739dbda5665b4e8",
    "claims": [
     {
      "name": "f_1E57_0006",
@@ -16523,7 +16567,7 @@
      "target_sha256": "8e782305bd59f2f2361dd038636e4b1802bcc5fe477d370a4d17aafe7dff6116",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_1E57_08F5",
@@ -16556,7 +16600,7 @@
      "target_sha256": "d4d1047d2803beb945878282d05d1ab0455390084e3afb3a845380f72398f402",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "f_1E57_0C1A",
@@ -16622,8 +16666,7 @@
      "target_sha256": "b782e6e94e944ec9b1bd3a69b6f8a8b5ae7f3e05ce63352a92e86447555bf8b7",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "EXACT"
     },
     {
      "name": "f_1E57_0FDC",
@@ -16635,16 +16678,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1E57_038E",
+     "unit": "root",
+     "seg": 7767,
+     "off": 910,
+     "size": 997,
+     "target_sha256": "4e148867620043df835c5481381d1bdafdbfca426e4c6a43ac41e7abec188e59",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "476cef55acc341d339d27fd09d920a0cb13505b86c5c11b4808a440c16f9b22a",
-   "canonical_admission": {
-    "receipt": "evidence/canonical/icon-handle-view/publication.json",
-    "historical_checkpoint": "2be85a8",
-    "current_byte_exact": false,
-    "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
-   }
+   "object_sha256": "92ee19554136fafc1ac8a1c60f1b9937c5e805c0fdf2cd43b42d57ac38816447"
   },
   "root:1F58": {
    "unit": "root",
@@ -19062,8 +19110,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m23AE.c",
-   "source_sha256": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+   "source_sha256": "dfd4910cec1feb7729f14929d61342893e272fe5f7305ab424b5abff1f2882d6",
    "claims": [
     {
      "name": "win_NoWindowsShouldBeLocked",
@@ -19141,10 +19190,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_UnlockWin",
+     "unit": "root",
+     "seg": 9134,
+     "off": 475,
+     "size": 386,
+     "target_sha256": "ea9f824c02968d1b0dbd6f5a2e315c738c13a16fc20c5854c67f28e25f6a2d6e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "cd339c9838e7ef48eebd38a9e94463c45976b6b444bdbef8be421520be4f974c"
+   "object_sha256": "96bc6373cf7769badf4a0ecf463bc603e0b4cb0d5887d1934e7a64086ba207e9"
   },
   "root:23E6": {
    "unit": "root",
@@ -19173,7 +19233,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m23E6.c",
-   "source_sha256": "d0a490f75ee880984374da56620d49d146da879e50895c81802b537cff7d2bc3",
+   "source_sha256": "ad8a050bf54ccc8f8427aa38bfe130c2b05a6f05f0ff068b34971736ea77f031",
    "claims": [
     {
      "name": "f_23E6_009F",
@@ -19250,8 +19310,7 @@
      "target_sha256": "a1e1b2a57b22558f81445951e5ab2e2ac7a5e74fb986a0ce46b6cb029ffadb97",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "win_DrawElevator",
@@ -19306,8 +19365,7 @@
      "target_sha256": "0879bd53d95ebaf5349da75538d3b7d848b61cd960c107bf4db14b084f8a7e76",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_23E6_0A53",
@@ -19333,13 +19391,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "bf4c9346c93cc6413aaa67d4d44bde4a3388b40cb67cada0ceac89b61dc25f44",
-   "canonical_admission": {
-    "receipt": "evidence/canonical/icon-handle-view/publication.json",
-    "historical_checkpoint": "2be85a8",
-    "current_byte_exact": false,
-    "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
-   }
+   "object_sha256": "e0752547b278c96559f8f931c8d3d280c4eae4265e256f31a6799cb407b4aadb"
   },
   "root:24AB": {
    "unit": "root",
@@ -19584,8 +19636,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m2505.c",
-   "source_sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+   "source_sha256": "9e1eb662797f87e8b29d60301082a9eca45a3a47e18001d6ea22c19a92240764",
    "claims": [
     {
      "name": "f_2505_0006",
@@ -19716,8 +19769,9 @@
      "size": 58,
      "target_sha256": "f2ae8c368a8279d20803e005dd681d296df20e83475db88842d41b26523d3076",
      "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "provenance": "EXACT_STEERED",
+     "reloc_order": "EXACT",
+     "steered": "identifier count only: named temporaries windowIndex/result (with the unnamed f_2505_0453 forward prototype) keep the original code of every later function; the original identifiers are unknown"
     },
     {
      "name": "f_2505_0511",
@@ -19739,8 +19793,7 @@
      "target_sha256": "b142cab1334f46271c11561816f5d6464f3b2e1fad71509bb098058d1e17b13c",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_2505_0831",
@@ -19751,8 +19804,7 @@
      "target_sha256": "3f3d0e90d73a10551d26af5277a9f759d9fe58ef9f5c48cb1b73f61ba249c2da",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_2505_08EA",
@@ -19763,8 +19815,7 @@
      "target_sha256": "7e3ae557103b529590624ca110312d6fcda26acee1b1bb297962d8a544118c2d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "current_proof": "HISTORICAL_EXACT_SOURCE_REBUILT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_2505_06B9",
@@ -19798,16 +19849,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2505_0453",
+     "unit": "root",
+     "seg": 9477,
+     "off": 1107,
+     "size": 132,
+     "target_sha256": "940694ff5a0ebffda405073476bd8cdfcfc725adc594e3653fb2df83df058905",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "3cea33717f2147f8ac4757247b17b6831b5e2425728af0db443ccabb6b7bdd57",
-   "canonical_admission": {
-    "receipt": "evidence/canonical/icon-handle-view/publication.json",
-    "historical_checkpoint": "2be85a8",
-    "current_byte_exact": false,
-    "reason": "Reviewed canonical declaration/body context changes MSC allocation and equivalent instruction ordering; historical source authority preserved in Git."
-   }
+   "object_sha256": "5cc4e825e7eab0d22476bc9b8989436b028774ca82f9fd386906b66c6f9abe56"
   },
   "root:259D": {
    "unit": "root",
@@ -21754,8 +21810,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m29D6.c",
-   "source_sha256": "0dcb236ba6b49894f48a70c24365d089eece095e2ee30ba2b96ebb4d316f36f6",
+   "source_sha256": "bb96401b33bdf7b5f13ae57849c112ac744bff0a48dece78ac057b9fa09b9c1a",
    "claims": [
     {
      "name": "f_29D6_0082",
@@ -21811,10 +21868,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_29D6_000A",
+     "unit": "root",
+     "seg": 10710,
+     "off": 10,
+     "size": 120,
+     "target_sha256": "d41e24f536d9409872dc389db47acb261a32430397f1e2411982486a54157592",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "3193cec8a054eb838eee07fa5d6e602b0f5ca01e7a0f30079b213218871182fa"
+   "object_sha256": "97034277304a71ba9bf6e0c59a5fa641aad1b79b499e1e0ab60b6de693432b81"
   },
   "root:29F0": {
    "unit": "root",
