@@ -93,8 +93,19 @@ def module_key(unit: str, seg: int, origin: int | None = None) -> str:
     return f"{unit}:{seg:04X}" + (f"@{origin:04X}" if origin else "")
 
 
-def module_source(unit: str, seg: int, origin: int | None, lang: str) -> str:
-    """Canonical source path (relative to the repository root)."""
+def module_source(unit: str, seg: int, origin: int | None, lang: str, *, man: dict | None = None) -> str:
+    """Recorded source is authoritative; address paths are defaults for new units.
+
+    This names a host source file, never the compiler's DOS-visible basename.
+    Historical verification continues to compile UNIT.C / UNIT.ASM.
+    """
+    recorded = (load_manifest() if man is None else man).get('modules', {}).get(module_key(unit, seg, origin), {}).get('source')
+    if recorded:
+        path = Path(recorded)
+        if (path.is_absolute() or '..' in path.parts or not path.parts or path.parts[0] != 'src'
+                or path.suffix != ('.asm' if lang == 'asm' else '.c')):
+            raise ValueError('invalid recorded canonical source: ' + recorded)
+        return path.as_posix()
     if unit == DATA_UNIT:
         return f"src/data/d{seg:04X}" + (f"_{origin:04X}" if origin else "") + (".asm" if lang == "asm" else ".c")
     return f"src/{unit}/m{seg:04X}" + (f"_{origin:04X}" if origin else "") + (".asm" if lang == "asm" else ".c")

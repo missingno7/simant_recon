@@ -1,6 +1,7 @@
 """Invented canonical modules; publication is confined to a temporary root."""
 from contextlib import ExitStack, redirect_stdout
 import io
+import copy
 import json
 from pathlib import Path
 import sys
@@ -16,7 +17,10 @@ sys.path.insert(0, str(ROOT))
 import rename as r
 import canonical
 import lockfile
+import modules
+import promote
 from omf import ObjectModule
+REAL_VERIFY_MODULE = modules.verify_module
 
 
 def row(old='old', new='fresh', kind='descriptive'):
@@ -139,7 +143,7 @@ class TransactionControls(unittest.TestCase):
             'extent': {'exact': not failed, 'reasons': ['length differs'] if failed else [],
                        'reloc_order': 'GROUPED'},
             'scaffold': [], 'object_sha256': canonical.sha(text.encode()), 'contribution_sha256': 'live'}
-        collect = kwargs['collect']
+        collect = kwargs.get('collect', {})
         collect['code'] = [{'name': name, 'bytes': b'\x90\xcb' if not failed else b'\x91\xcb'}]
         collect['object'] = b'invented'
         return result
@@ -402,6 +406,243 @@ class TransactionControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'definition/review differs'):
             self.run_batch()
         self.assertEqual(self.snapshot(), before)
+
+    def revise_source(self, text):
+        self.text = text
+        self.module['source_sha256'] = canonical.sha(text.encode())
+        self.program['modules'][0]['source_sha256'] = self.module['source_sha256']
+        self.write(self.source, text)
+        self.persist()
+
+    def external_fixture(self, succeeds=True):
+        self.write('tools/behavior.py', 'TARGET = "old"\nOTHER = "old_suffix"\n')
+        self.write('tools/behavior_suites/current.py', 'TARGET = "old"\n')
+        self.write('tools/behavior_suites/archive/retired.py', 'TARGET = "old"\n')
+        assertion = 'assertIn' if succeeds else 'assertNotIn'
+        self.write('tests/test_external_ref.py', 'import unittest\nfrom pathlib import Path\n'
+            'class References(unittest.TestCase):\n'
+            '    def test_selected(self):\n'
+            f'        self.{assertion}("old", (Path(__file__).resolve().parents[1]/"{self.source}").read_text())\n'
+            '    def test_unrelated(self):\n'
+            '        raise AssertionError("unrelated test must not run")\n')
+
+    def test_external_references_and_only_affected_method_are_transactional(self):
+        self.external_fixture()
+        code, output = self.run_batch()
+        self.assertEqual(code, 0, output)
+        self.assertIn('TARGET = "fresh"', (self.root / 'tools/behavior.py').read_text())
+        self.assertIn('"old_suffix"', (self.root / 'tools/behavior.py').read_text())
+        self.assertEqual((self.root / 'tools/behavior_suites/archive/retired.py').read_text(), 'TARGET = "old"\n')
+        self.assertIn('reference: tests/test_external_ref.py', output)
+        report = json.loads(next((self.root / 'build/scratch').glob('rename-*/result.json')).read_text())
+        self.assertEqual(report['unit_tests']['selected'], ['test_external_ref.References.test_selected'])
+        self.assertTrue(report['unit_tests']['passed'])
+
+    def test_failed_affected_unit_test_refuses_sources_and_external_files(self):
+        self.external_fixture(succeeds=False)
+        before = {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
+        code, output = self.run_batch()
+        self.assertEqual(code, 1)
+        self.assertIn('affected unit tests failed', output)
+        for path, raw in before.items():
+            self.assertEqual((self.root / path).read_bytes(), raw)
+
+    def test_underscore_twins_keep_both_c_and_object_names_distinct(self):
+        self.syms['code']['_fresh'] = {'unit': 'root', 'seg': 1, 'off': 8}
+        self.syms['code']['_old'] = {'unit': 'root', 'seg': 1, 'off': 12}
+        self.module['claims'].append({'name': '_old', 'unit': 'root', 'seg': 1, 'off': 12, 'size': 3})
+        self.revise_source(self.text + 'int _fresh(void) { return 1; }\nint _old(void) { return 2; }\n')
+        self.write('tools/behavior.py', 'TARGET = "_old"\n')
+        code, output = self.run_batch()
+        self.assertEqual(code, 0, output)
+        text = (self.root / self.source).read_text()
+        self.assertIn('int fresh(', text)
+        self.assertIn('int _fresh(', text)
+        self.assertIn('int _old(', text)
+        self.assertEqual((self.root / 'tools/behavior.py').read_text(), 'TARGET = "_old"\n')
+        names = [c['name'] for c in self.read('layout/manifest.json')['modules'][self.key]['claims']]
+        self.assertIn('_old', names)
+        self.assertNotIn('old', self.read('layout/symbols.json')['code'])
+
+    def test_double_underscore_object_does_not_collide_with_runtime_single_underscore(self):
+        code, output = self.run_batch([row(new='_malloc')])
+        self.assertEqual(code, 0, output)
+
+    def test_masm_register_name_is_refused_only_when_emitted_as_asm_token(self):
+        code, output = self.run_batch([row(new='Dx')], verify_only=True)
+        self.assertEqual(code, 0, output)
+        self.revise_source(self.text.replace('return value;', '_asm { mov ax,old } return value;'))
+        with self.assertRaisesRegex(r.RenameError, 'MASM-reserved'):
+            self.run_batch([row(new='Dx')])
+
+    def test_address_registration_without_source_identifier_adds_no_storage(self):
+        registration = {'address': '0002:0010', 'new': 'TableEntry', 'kind': 'recovered', 'why': 'reviewed address evidence'}
+        raw = (self.root / self.source).read_bytes()
+        code, output = self.run_batch([registration])
+        self.assertEqual(code, 0, output)
+        self.assertEqual((self.root / self.source).read_bytes(), raw)
+        record = self.read('layout/symbols.json')['data']['TableEntry']
+        self.assertEqual((record['seg'], record['off']), (2, 16))
+        self.assertEqual(record['name_kind'], 'recovered')
+        self.assertNotIn('size', record)
+        self.assertEqual(self.verifier.call_count, 0)
+
+    def test_address_registration_renames_an_existing_unregistered_global(self):
+        self.revise_source(self.text + 'int g_0040 = 3;\n')
+        code, output = self.run_batch([{'address': '55B3:0040', 'new': 'CountLimit',
+                                       'kind': 'descriptive', 'why': 'original operand and declaration'}])
+        self.assertEqual(code, 0, output)
+        self.assertIn('int CountLimit = 3;', (self.root / self.source).read_text())
+        self.assertNotIn('g_0040', self.read('layout/symbols.json')['data'])
+        self.assertEqual(self.verifier.call_count, 2)
+
+    def test_interior_registration_requires_explicit_field_and_keeps_owner(self):
+        self.syms['data']['value']['size'] = 8
+        self.persist()
+        field = {'address': '0002:0002', 'new': 'Member', 'kind': 'descriptive', 'why': 'reviewed member', 'size': 2}
+        before = self.snapshot()
+        with self.assertRaisesRegex(r.RenameError, 'field_of is required'):
+            self.run_batch([field])
+        self.assertEqual(before, self.snapshot())
+        field['field_of'] = 'value'
+        code, output = self.run_batch([field])
+        self.assertEqual(code, 0, output)
+        symbols = self.read('layout/symbols.json')['data']
+        self.assertIn('value', symbols)
+        self.assertEqual(symbols['Member']['field_of'], 'value')
+        self.assertEqual(symbols['Member']['alias_of'], 'value')
+        self.assertEqual(symbols['Member']['alias_offset'], 2)
+        self.assertEqual(self.read('src/program.json')['aliases'][-1]['offset'], 2)
+
+    def test_unregistered_address_cannot_split_an_object_with_unknown_extent(self):
+        self.syms['data']['opaque_object'] = {'seg': 2, 'off': 8, 'grounding': 'original operand'}
+        self.persist()
+        with self.assertRaisesRegex(r.RenameError, 'extent is unknown'):
+            self.run_batch([{'address': '0002:000A', 'new': 'InteriorMaybe', 'kind': 'descriptive', 'why': 'address only'}])
+
+    def test_field_registration_does_not_split_far_bss_storage_accounting(self):
+        import farbss
+        self.syms['data'].update(Parent={'seg': 0x50F6, 'off': 0, 'size': 4}, Next={'seg': 0x50F6, 'off': 4})
+        self.persist()
+        code, output = self.run_batch([{'address': '50F6:0002', 'new': 'HighWord', 'field_of': 'Parent',
+                                       'kind': 'descriptive', 'why': 'high word of existing owner'}])
+        self.assertEqual(code, 0, output)
+        registry = self.read('layout/symbols.json')
+        class ZeroOracle:
+            def read(self, unit, start, size):
+                return bytes(size)
+        with r.binding(registry), patch.object(farbss.exemod, 'load', return_value=ZeroOracle()), \
+                patch.object(farbss, 'save_table_sizes', return_value={}):
+            report = farbss.account(comdefs={'Parent': [(4, 'invented')]})
+        self.assertEqual(report['variables'], 2)
+        self.assertEqual(report['rows'][0]['size'], 4)
+        self.assertEqual(report['failures'], [])
+
+    def test_moves_update_all_layer_references_but_preserve_port_and_file_bytes(self):
+        self.write('layout/repository.json', json.dumps({'source': self.source}))
+        self.write('evidence/path.json', json.dumps({'source': self.source, 'source_sha256': self.module['source_sha256']}))
+        self.write('docs/path.md', f'[{self.source}]({self.source}:12)\n')
+        self.write('tools/path.py', f'SOURCE = "{self.source}"\n')
+        self.write('portable/semantic-spans.json', json.dumps({'source': self.source}))
+        self.write('evidence/native-pin.json', json.dumps({'schema': 'canonical-native-pin-v1', 'source': self.source}))
+        words_pin = 'evidence/canonical/native-word-intermediates/contracts.json'
+        self.write(words_pin, json.dumps({'schema': 'simant-instruction-word-intermediates-v1', 'source': self.source}))
+        old_receipt = (self.root / 'evidence/path.json').read_bytes()
+        self.write('evidence/index.json', json.dumps({'path': 'evidence/path.json', 'sha256': canonical.sha(old_receipt)}))
+        self.write('tests/test_moved_ref.py', 'import unittest\nfrom pathlib import Path\n'
+            'class References(unittest.TestCase):\n    def test_path(self):\n'
+            f'        self.assertTrue((Path(__file__).resolve().parents[1]/"{self.source}").is_file())\n')
+        new = 'src/simulation/readable.c'
+        raw = (self.root / self.source).read_bytes()
+        code, output = self.run_batch([{'module': self.key, 'path': new, 'kind': 'descriptive', 'why': 'inferred grouping'}])
+        self.assertEqual(code, 0, output)
+        self.assertFalse((self.root / self.source).exists())
+        self.assertEqual((self.root / new).read_bytes(), raw)
+        record = self.read('layout/manifest.json')['modules'][self.key]
+        self.assertEqual(record['source_name_kind'], 'descriptive')
+        self.assertEqual(record['source_path_history'][0]['was'], self.source)
+        for rel in ('layout/repository.json', 'evidence/path.json'):
+            self.assertEqual(self.read(rel)['source'], new)
+        self.assertEqual(self.read('portable/semantic-spans.json')['source'], self.source)
+        self.assertEqual(self.read('evidence/native-pin.json')['source'], self.source)
+        self.assertEqual(self.read(words_pin)['source'], self.source)
+        self.assertEqual(self.read('evidence/index.json')['sha256'], canonical.sha((self.root / 'evidence/path.json').read_bytes()))
+        self.assertIn('port reference (unchanged): portable/semantic-spans.json', output)
+        self.assertEqual(self.read('src/program.json')['modules'][0]['source'], new)
+        self.assertEqual(modules.module_source('root', 1, None, 'c', man=self.read('layout/manifest.json')), new)
+        with patch.object(promote, 'ROOT', self.root), patch.object(modules, 'MANIFEST', self.root / 'layout/manifest.json'):
+            self.assertEqual(promote.module_path('root', 1, None, 'c'), self.root / new)
+
+    def test_failed_move_rolls_back_destinations_deletions_and_ledgers(self):
+        before = self.snapshot()
+        original = r.os.replace
+        def failing(source, target):
+            if str(target).endswith('symbols.json'):
+                raise OSError('move publication failure')
+            return original(source, target)
+        with patch.object(r.os, 'replace', side_effect=failing):
+            with self.assertRaisesRegex(OSError, 'publication failure'):
+                self.run_batch([{'module': self.key, 'path': 'src/readable.c', 'kind': 'descriptive', 'why': 'inferred'}])
+        self.assertEqual(before, self.snapshot())
+
+    def test_move_rejects_escape_extension_and_existing_destinations(self):
+        for path in ('../escape.c', 'src/../../escape.c', 'src/name.asm', self.source, 'src/program.json'):
+            with self.assertRaises(r.RenameError):
+                self.run_batch([{'module': self.key, 'path': path, 'kind': 'descriptive', 'why': 'test'}])
+
+    def test_promotion_after_a_move_retains_recorded_path_and_name_evidence(self):
+        destination = 'src/simulation/readable.c'
+        self.run_batch([{'module': self.key, 'path': destination, 'kind': 'descriptive', 'why': 'inferred unit'}])
+        candidate = self.root / 'draft.c'
+        candidate.write_text(self.text + '/* revised comment */\n')
+        with patch.multiple(promote, ROOT=self.root, JOURNAL=self.root / 'evidence/promotions.jsonl'), \
+                patch.object(modules, 'MANIFEST', self.root / 'layout/manifest.json'), \
+                patch.object(promote.exemod, 'load', return_value=object()), \
+                patch.object(sys, 'argv', ['promote.py', str(candidate), '--module', self.key]), r.binding(self.syms), redirect_stdout(io.StringIO()):
+            self.assertEqual(promote.main(), 0)
+        record = self.read('layout/manifest.json')['modules'][self.key]
+        self.assertEqual(record['source'], destination)
+        self.assertEqual(record['source_name_kind'], 'descriptive')
+        self.assertEqual(record['source_path_history'][0]['why'], 'inferred unit')
+        self.assertFalse((self.root / self.source).exists())
+
+    def test_proof_compiler_basename_and_live_segments_ignore_source_path(self):
+        cases = [('c', 'msc600ax', ['/AL', '/Os'],
+                  'unsigned char far sample[2] = {1,2};\nint far sample_func(void) { return 3; }\n'),
+                 ('asm', 'masm510', ['/Mx'],
+                  "_TEXT SEGMENT WORD PUBLIC 'CODE'\nPUBLIC _sample_func\n_sample_func PROC FAR\n"
+                  ' mov ax,3\n retf\n_sample_func ENDP\n_TEXT ENDS\nEND\n')]
+        with patch.object(r.compiler, 'WORK', self.root / 'build/scratch/compiler-name-control'):
+            for lang, profile, flags, text in cases:
+                compiled = []
+                for source in (f'src/root/m0001.{lang}', f'src/readable/renamed.{lang}'):
+                    module = {'unit': 'root', 'seg': 1, 'profile': profile, 'flags': flags, 'lang': lang,
+                              'source': source, 'placements': {}}
+                    collect = {}
+                    run = r.compiler.assemble if lang == 'asm' else r.compiler.compile_c
+                    name = 'assemble' if lang == 'asm' else 'compile_c'
+                    with patch.object(r.compiler, name, wraps=run) as compiler_call:
+                        result = REAL_VERIFY_MODULE(text, module, [], collect=collect, man={'modules': {}})
+                    self.assertTrue(result['compile_ok'], result.get('log'))
+                    self.assertEqual(compiler_call.call_args.kwargs.get('basename', 'UNIT'), 'UNIT')
+                    compiled.append(result['contribution_sha256'])
+                self.assertEqual(compiled[0], compiled[1])
+
+    def test_move_cli_accepts_multiple_pairs_after_one_option(self):
+        with patch.object(r, 'run', return_value=0) as run:
+            self.assertEqual(r.main(['--move', 'root:0001=src/a.c', 'S01:0002=src/b.c', '--why', 'inferred', '--verify-only']), 0)
+        self.assertEqual([v['module'] for v in run.call_args.args[0]], ['root:0001', 'S01:0002'])
+        self.assertTrue(run.call_args.kwargs['verify_only'])
+
+    def test_field_parent_can_be_renamed_in_same_batch(self):
+        self.syms['data']['value']['size'] = 8
+        self.persist()
+        operations = [row('value', 'NewValue'), {'address': '0002:0002', 'new': 'Member',
+                      'field_of': 'value', 'kind': 'descriptive', 'why': 'member view'}]
+        code, output = self.run_batch(operations)
+        self.assertEqual(code, 0, output)
+        self.assertEqual(self.read('layout/symbols.json')['data']['Member']['field_of'], 'NewValue')
+        self.assertEqual(self.read('src/program.json')['aliases'][-1]['target'], '_NewValue')
 
 
 if __name__ == '__main__':

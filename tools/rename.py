@@ -2,6 +2,21 @@
 
     python tools/rename.py OLD=NEW ... --kind descriptive --why "DOS evidence"
     python tools/rename.py --batch renames.json --verify-only
+    python tools/rename.py --move root:0250=src/render/pixels.c S12:384C=src/map.c --why "inferred"
+
+Batches accept {old,new,kind,why}, {address:"SSSS:OOOO",new,kind,why}, or
+{module,path,kind,why}. An address row may give old (an unregistered source
+identifier), field_of (a registered containing object), and size (reviewed bytes).
+Absent old, an existing address-spelled fd_SSSS_OOOO / g_OOOO is recognized;
+otherwise registration adds only a name, never source storage or a guessed owner.
+Moves preserve file bytes, module order and the compiler's UNIT basename. The
+recorded manifest source is authoritative; source_name_kind labels the filename.
+
+Live behavior tools and tests receive whole-identifier substitutions in quoted
+names and fixtures too; behavior_suites/archive is excluded. Only affected unit
+methods (or a module with affected shared fixtures) run, in a scratch copy with
+host writes prohibited. Moves stage reconstruction path references and current
+path/hash pairs, while reporting port references/pins without changing them.
 
 Provenance: starts from SimAnt 0eab5e5:tools/rename.py; token/literal separation
 informed by duke1_recon/tools/rename.py, ordered before/after object checks and
@@ -18,6 +33,7 @@ optimistically pinned transaction with rollback on a failed file replacement.
 from __future__ import annotations
 
 import argparse
+import ast
 import copy
 from contextlib import contextmanager
 from concurrent.futures import ThreadPoolExecutor
@@ -26,6 +42,8 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
+import subprocess
 import sys
 import tempfile
 import threading
@@ -52,6 +70,50 @@ ASM_TOKEN = re.compile(
     r'|(?P<num>[0-9][A-Za-z0-9]*)|(?P<id>[A-Za-z_$?@][A-Za-z0-9_$?@]*)|(?P<other>.)', re.S)
 ADDRESS = re.compile(r'(?:f_[0-9A-F]{4}_[0-9A-F]{4}|o\d+_[0-9A-F]{4}_[0-9A-F]{4}'
                      r'|(?:fd|cd|d|b)_[A-Za-z0-9_]+)\Z')
+MASM_RESERVED = set(('ax bx cx dx al ah bl bh cl ch dl dh si di sp bp cs ds es ss '
+    'eax ebx ecx edx esi edi esp ebp cr0 cr2 cr3 dr0 dr1 dr2 dr3 dr6 dr7 '
+    'byte word dword qword tbyte ptr near far short offset seg dup this type length size '
+    'proc endp segment ends group assume public extrn extern label equ org db dw dd dq dt '
+    'include includelib end model code data const stack mov push pop call ret retf retn '
+    'jmp je jne jz jnz ja jb jae jbe jg jl jge jle loop add sub mul imul div idiv '
+    'inc dec neg not and or xor test cmp shl shr sar sal rol ror rcl rcr xchg lea '
+    'lds les int iret in out cli sti cld std rep repe repne movs movsb movsw stos stosb '
+    'stosw lods lodsb lodsw cmps cmpsb cmpsw scas scasb scasw nop wait hlt').split())
+
+
+def c_mapping(rows):
+    return {r['old']: r['new'] for r in rows if 'old' in r}
+
+
+def comparison_after(result, mapping, objmap):
+    out = copy.deepcopy(result)
+    out['claims'] = {mapping.get(n, n): renamed(v, objmap) for n, v in result.get('claims', {}).items()}
+    for field in ('scaffold', 'inplace_drafts'):
+        if field in out:
+            out[field] = [mapping.get(n, n) for n in out[field]]
+    for field in ('communals', 'data', 'extent', 'module_reasons'):
+        if field in out:
+            out[field] = renamed(out[field], objmap)
+    if 'opaque_data' in out:
+        out['opaque_data'] = renamed(out['opaque_data'], mapping)
+    return out
+
+
+def operation_label(row):
+    return (row.get('old', row.get('address', row.get('module', '?'))) + '=' +
+            row.get('new', row.get('path', '?')))
+
+
+def replace_paths(text, mapping):
+    """Replace full path tokens, including Windows and JSON-escaped spellings."""
+    variants = {}
+    for old, new in mapping.items():
+        for separator in ('/', '\\', '\\\\'):
+            variants[old.replace('/', separator)] = new.replace('/', separator)
+    if not variants:
+        return text
+    pattern = re.compile(r'(?<![A-Za-z0-9_.-])(?:' + '|'.join(re.escape(p) for p in sorted(variants, key=len, reverse=True)) + r')(?![A-Za-z0-9_.-])')
+    return pattern.sub(lambda m: variants[m[0]], text)
 
 
 def spellings(mapping: dict, registry: dict) -> dict:
@@ -112,7 +174,7 @@ def lexical_tokens(text: str, lang: str):
     for t in csrc.tokenize(text):
         if t.kind == 'asm':
             for kind, value, start, end in asm_tokens(t.text):
-                yield kind, value, t.s + start, t.s + end
+                yield 'inline_id' if kind == 'id' else kind, value, t.s + start, t.s + end
         elif t.kind == 'pp':
             # The preprocessor line is opaque to csrc. Re-lex its contents,
             # protecting header names (including angle-bracket paths).
@@ -127,7 +189,7 @@ def lexical_tokens(text: str, lang: str):
 
 
 def identifiers(text: str, lang: str) -> set:
-    return {value for kind, value, _, _ in lexical_tokens(text, lang) if kind == 'id'}
+    return {value for kind, value, _, _ in lexical_tokens(text, lang) if kind in ('id', 'inline_id')}
 
 
 def replace_tokens(text: str, mapping: dict, lang: str = 'c') -> str:
@@ -137,7 +199,7 @@ def replace_tokens(text: str, mapping: dict, lang: str = 'c') -> str:
 def replace_spans(text, mapping, tokens):
     edits = []
     for kind, value, start, end in tokens:
-        new = mapping.get(value, value) if kind == 'id' else comment(value, mapping) if kind == 'cmt' else value
+        new = mapping.get(value, value) if kind in ('id', 'inline_id') else comment(value, mapping) if kind == 'cmt' else value
         if new != value:
             edits.append((start, end, new))
     parts, previous = [], 0
@@ -191,20 +253,41 @@ def binding(registry):
 
 def registry_after(registry, rows, used):
     result = copy.deepcopy(registry)
-    mapping = {r['old']: r['new'] for r in rows}
+    mapping = c_mapping(rows)
     for row in rows:
-        old, new = row['old'], row['new']
+        if 'module' in row:
+            continue
+        new = row['new']
+        if 'address' in row:
+            seg, off = (int(v, 16) for v in row['address'].split(':'))
+            record = {'seg': seg, 'off': off, 'grounding': row['why'], 'name_kind': row['kind']}
+            for field in ('field_of', 'size'):
+                if field in row:
+                    record[field] = row[field]
+            if 'field_of' in record:
+                record['field_of'] = mapping.get(record['field_of'], record['field_of'])
+                parent = registry['data'][row['field_of']]
+                record['alias_of'] = record['field_of']
+                record['alias_offset'] = seg * 16 + off - parent['seg'] * 16 - parent['off']
+            if 'old' in row:
+                record['history'] = [{'was': row['old'], 'why': row['why']}]
+            result['data'][new] = record
+            continue
+        old = row['old']
         section = 'code' if old in result['code'] else 'data'
         record = result[section].pop(old)
         record.setdefault('history', []).append({'was': old, 'why': row['why']})
         record['name_kind'] = row['kind']
         result[section][new] = record
-        if old in used or '_' + old in used or '@' + old in used:
+        if (old in used['c'] or '_' + old in used['object'] or '@' + old in used['object']
+                or (record.get('convention') == 'pascal' and old.upper() in used['object'])):
             result[section][old] = {k: v for k, v in record.items() if k != 'history'} | {'alias_of': new}
     for section in ('code', 'data'):
         for record in result[section].values():
             if record.get('alias_of') in mapping:
                 record['alias_of'] = mapping[record['alias_of']]
+            if record.get('field_of') in mapping:
+                record['field_of'] = mapping[record['field_of']]
         result[section] = dict(sorted(result[section].items()))
     return result
 
@@ -215,6 +298,55 @@ def json_bytes(value, indent=2):
 
 class RenameError(ValueError):
     pass
+
+
+def repository_files(root):
+    """Current files only; ignored output and originals are never rewrite inputs."""
+    for directory, dirs, files in os.walk(root):
+        dirs[:] = sorted(d for d in dirs if d not in {'.git', 'build', 'to_delete', 'assets', '__pycache__', '.venv', 'node_modules'})
+        for name in sorted(files):
+            path = Path(directory) / name
+            if path.suffix.lower() in {'.py', '.json', '.jsonl', '.md', '.txt', '.toml', '.c', '.h', '.asm', '.inc', '.yaml', '.yml', '.csv'}:
+                yield path.relative_to(root).as_posix()
+
+
+def external_identifier_file(rel):
+    return (rel in ('tools/canonical_behavior.py', 'tools/behavior.py') or rel.startswith('tests/') or
+            (rel.startswith('tools/behavior_suites/') and 'archive' not in Path(rel).parts))
+
+
+def port_reference_file(rel, raw):
+    """Port outputs/pins can live in evidence as well as under portable/."""
+    if (rel.startswith('portable/') or rel.startswith(('docs/port-', 'docs/native-')) or
+            rel == 'evidence/canonical/native-word-intermediates/contracts.json'):
+        # The last file is the WORDS port pin declared in portable/refresh_pins.py.
+        return True
+    if rel.startswith('evidence/') and rel.endswith('.json'):
+        data = json.loads(raw)
+        if isinstance(data, dict):
+            schema = data.get('schema', '').lower()
+            return schema.startswith(('native-', 'canonical-native-', 'simant-native-', 'portable-', 'simant-portable-'))
+    return False
+
+
+def selected_unit_tests(rel, text, needles):
+    """Select methods directly affected, or their module when a shared fixture changes."""
+    if not rel.startswith('tests/') or not rel.endswith('.py'):
+        return []
+    tree = ast.parse(text, filename=rel)
+    lines = text.splitlines(keepends=True)
+    methods = []
+    for node in tree.body:
+        if isinstance(node, ast.ClassDef):
+            for child in node.body:
+                if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef)) and child.name.startswith('test'):
+                    methods.append((node.name + '.' + child.name, child.lineno, child.end_lineno))
+    module = rel.removeprefix('tests/').removesuffix('.py').replace('/', '.')
+    hit = lambda s: any(re.search(r'(?<![A-Za-z0-9_])' + re.escape(needle) + r'(?![A-Za-z0-9_])', s) for needle in needles)
+    shared = ''.join(line for i, line in enumerate(lines, 1) if not any(lo <= i <= hi for _, lo, hi in methods))
+    if methods and hit(shared):
+        return [module]
+    return [module + '.' + name for name, lo, hi in methods if hit(''.join(lines[lo-1:hi]))]
 
 
 class Session:
@@ -233,6 +365,7 @@ class Session:
         self.by_source = {m['source']: m for m in self.program['modules']}
         self.sources = {}
         self.lexed = {}
+        self.reference_files = list(repository_files(ROOT))
         for path in sorted((ROOT / 'src').rglob('*')):
             if path.suffix.lower() in SOURCE_SUFFIXES:
                 rel = path.relative_to(ROOT).as_posix()
@@ -240,9 +373,9 @@ class Session:
                 lang = 'asm' if path.suffix.lower() in ('.asm', '.inc') else 'c'
                 tokens = [(kind, value, start, end)
                           for kind, value, start, end in lexical_tokens(raw.decode('latin1'), lang)
-                          if kind in ('id', 'cmt')]
+                          if kind in ('id', 'inline_id', 'cmt')]
                 self.lexed[rel] = tokens
-                self.sources[rel] = (raw, lang, {value for kind, value, _, _ in tokens if kind == 'id'})
+                self.sources[rel] = (raw, lang, {value for kind, value, _, _ in tokens if kind in ('id', 'inline_id')})
         for item in self.items.values():
             raw = self.sources[item['source']][0]
             if canonical.sha(raw) != item['source_sha256']:
@@ -254,6 +387,45 @@ class Session:
                         raise RenameError('canonical/historical context differs: ' + item['key'] + ': ' + field)
         self.baseline = {}
         self.cache = {}
+        self.fastcall_names = {m[1] for raw, lang, _ in self.sources.values() if lang == 'c'
+            for m in re.finditer(r'\b_?_fastcall\s+(?:far\s+)?([A-Za-z_]\w*)\s*\(', raw.decode('latin1'))}
+
+    def object_mapping(self, mapping):
+        out = {}
+        for old, new in mapping.items():
+            convention = self.registry['code'].get(old, {}).get('convention')
+            if convention == 'pascal':
+                out[old.upper()] = new.upper()
+            else:
+                prefix = '@' if old in self.fastcall_names else '_'
+                out[prefix + old] = prefix + new
+        return out
+
+    def data_extents(self):
+        """Known sizes only: recorded sizes, accepted COMDEFs, simple sized arrays.
+
+        Never equate the gap to the next registration with an object's size.
+        """
+        sizes = {n: rec['size'] for n, rec in self.registry['data'].items() if isinstance(rec.get('size'), int)}
+        for item in self.items.values():
+            for communal in item.get('storage_contract', {}).get('communals', []):
+                if communal['name'].startswith('_'):
+                    sizes[communal['name'][1:]] = communal['length']
+        declaration = re.compile(r'(?m)^\s*(?:(?:extern|static)\s+)?(?:unsigned\s+|signed\s+)?'
+            r'(char|int|short|long)\s+(?:far\s+)?([A-Za-z_]\w*)\s*((?:\[\s*(?:0x[0-9A-Fa-f]+|\d+)\s*\])*)\s*(?:=|;)', re.M)
+        declared = {}
+        for raw, lang, _ in self.sources.values():
+            if lang != 'c':
+                continue
+            for match_ in declaration.finditer(raw.decode('latin1')):
+                width = {'char': 1, 'int': 2, 'short': 2, 'long': 4}[match_[1]]
+                for count in re.findall(r'0x[0-9A-Fa-f]+|\d+', match_[3]):
+                    width *= int(count, 16 if count.lower().startswith('0x') else 10)
+                declared[match_[2]] = max(declared.get(match_[2], 0), width)
+        for name, width in declared.items():
+            sizes.setdefault(name, width)
+        return [(n, rec['seg'] * 16 + rec['off'], sizes[n]) for n, rec in self.registry['data'].items()
+                if n in sizes and not rec.get('alias_of')]
 
     def read(self, rel, optional=False):
         path = ROOT / rel
@@ -275,57 +447,133 @@ class Session:
     def validate_rows(self, rows):
         if not isinstance(rows, list) or not rows:
             raise RenameError('a nonempty rename batch is required')
-        old_names, new_names = set(), set()
+        rows = copy.deepcopy(rows)
+        old_names, new_names, destinations, moved = set(), set(), set(), set()
+        c_names = set(self.registry['code']) | set(self.registry['data'])
+        obj_names = set(self.object_mapping({n: n for n in c_names})) | set(self.registry.get('runtime', {}))
+        present = set().union(*(s[2] for s in self.sources.values()))
+        extents = self.data_extents()
+        addresses = set()
+        batch_objects = set()
         for row in rows:
-            if not isinstance(row, dict) or set(row) != {'old', 'new', 'kind', 'why'}:
-                raise RenameError('each rename requires exactly old, new, kind, why')
-            old, new = row['old'], row['new']
-            if not isinstance(old, str) or not IDENT.fullmatch(old) or not isinstance(new, str) or not IDENT.fullmatch(new):
-                raise RenameError(f'bad identifier (maximum 31 characters): {old!r}={new!r}')
-            if row['kind'] not in ('recovered', 'descriptive') or not isinstance(row['why'], str) or not row['why'].strip():
-                raise RenameError(f'{old}: kind and nonempty evidence required')
-            if old == new or old in old_names or new in new_names:
+            if not isinstance(row, dict):
+                raise RenameError('each operation must be an object')
+            if row.get('kind') not in ('recovered', 'descriptive') or not isinstance(row.get('why'), str) or not row['why'].strip():
+                raise RenameError('kind and nonempty evidence required')
+            if 'module' in row:
+                if set(row) != {'module', 'path', 'kind', 'why'} or row['module'] not in self.items:
+                    raise RenameError('move requires a known module, path, kind, why')
+                item = self.items[row['module']]
+                path = row['path'].replace('\\', '/')
+                target = ROOT / path
+                if (not path.startswith('src/') or ':' in path or '..' in Path(path).parts
+                        or Path(path).suffix != Path(item['source']).suffix
+                        or not target.resolve().is_relative_to((ROOT / 'src').resolve())):
+                    raise RenameError('move destination must be a same-language file under src/: ' + path)
+                if row['module'] in moved or path.casefold() in destinations or target.exists() or any(
+                        p.casefold() == path.casefold() for p in self.sources):
+                    raise RenameError('move destination/module collision: ' + path)
+                if any(parent.is_file() for parent in target.parents if parent.is_relative_to(ROOT)):
+                    raise RenameError('move destination has a file as parent: ' + path)
+                row['path'] = path
+                moved.add(row['module'])
+                destinations.add(path.casefold())
+                self.read(path, optional=True)
+                continue
+            allowed = {'old', 'new', 'kind', 'why'} | ({'address', 'field_of', 'size'} if 'address' in row else set())
+            if set(row) - allowed or not {'new', 'kind', 'why'} <= row.keys() or ('old' not in row and 'address' not in row):
+                raise RenameError('rename requires old/new or address/new, kind and why')
+            new = row['new']
+            if not isinstance(new, str) or not IDENT.fullmatch(new):
+                raise RenameError(f'bad identifier (maximum 31 characters): {new!r}')
+            if 'address' in row:
+                if not re.fullmatch(r'[0-9A-Fa-f]{4}:[0-9A-Fa-f]{4}', row['address']):
+                    raise RenameError('data address must be SSSS:OOOO')
+                seg, off = (int(v, 16) for v in row['address'].split(':'))
+                linear = seg * 16 + off
+                if linear in addresses:
+                    raise RenameError('duplicate data address in batch: ' + row['address'])
+                addresses.add(linear)
+                parent = row.get('field_of')
+                hits = [(n, start, size) for n, start, size in extents if start <= linear < start + size]
+                same = [n for n, r in self.registry['data'].items() if r['seg'] * 16 + r['off'] == linear]
+                if (hits or same) and not parent:
+                    raise RenameError(f'{row["address"]} lies inside registered object(s) {same or [h[0] for h in hits]}; field_of is required')
+                if parent and not any(n == parent for n, _, _ in hits):
+                    raise RenameError('field_of has no proven containing extent: ' + str(parent))
+                if 'size' in row and (not isinstance(row['size'], int) or row['size'] <= 0 or
+                        (parent and any(linear + row['size'] > start + size for n, start, size in hits if n == parent))):
+                    raise RenameError('invalid field/object size')
+                if not parent and 'size' in row and any(linear < start + size and start < linear + row['size'] for _, start, size in extents):
+                    raise RenameError('new data extent overlaps a registered object')
+                if 'size' in row and any(linear < rec['seg'] * 16 + rec['off'] < linear + row['size']
+                                         for rec in self.registry['data'].values()):
+                    raise RenameError('new data extent contains another registered object')
+                if 'old' not in row:
+                    candidates = [f'fd_{seg:04X}_{off:04X}']
+                    if seg == match.DGROUP_SEG:
+                        candidates.append(f'g_{off:04X}')
+                    candidates = [n for n in candidates if n in present and n not in c_names]
+                    if len(candidates) > 1:
+                        raise RenameError('ambiguous unregistered source identifier; supply old explicitly')
+                    if candidates:
+                        row['old'] = candidates[0]
+                if not hits and not parent and 'old' not in row:
+                    preceding = [(rec['off'], name) for name, rec in self.registry['data'].items()
+                                 if rec['seg'] == seg and rec['off'] < off and not rec.get('alias_of')]
+                    previous = max(preceding)[1] if preceding else None
+                    if previous and not any(name == previous for name, _, _ in extents):
+                        raise RenameError(f'{row["address"]}: cannot exclude an interior address of {previous}; its extent is unknown')
+                record = {}
+            else:
+                record = self.registry['code'].get(row['old']) or self.registry['data'].get(row['old'])
+                if record is None or (record.get('alias_of') and not record.get('field_of')):
+                    raise RenameError(f'{row["old"]}: must be a registered primary game symbol')
+            old = row.get('old')
+            if 'address' in row and old in c_names:
+                raise RenameError('address registration cannot redirect an existing registered identifier: ' + old)
+            if old is not None and (not isinstance(old, str) or not IDENT.fullmatch(old)):
+                raise RenameError('bad old identifier')
+            if (old == new and 'address' not in row) or (old and old in old_names) or new in new_names:
                 raise RenameError(f'duplicate or identity rename: {old}={new}')
-            old_names.add(old)
+            if old:
+                old_names.add(old)
             new_names.add(new)
-            record = self.registry['code'].get(old) or self.registry['data'].get(old)
-            if record is None or record.get('alias_of'):
-                raise RenameError(f'{old}: must be a registered primary game symbol')
             if new in csrc.KEYWORDS | csrc.QUALIFIERS | csrc.ASM_WORDS:
                 raise RenameError('reserved identifier: ' + new)
-            decorated = spellings({old: new}, self.registry)
-            targets = set(decorated.values())
-            occupied = set(self.registry.get('runtime', {}))
-            for kind in ('code', 'data'):
-                occupied.update(spellings({n: n for n in self.registry[kind]}, self.registry))
-            # MASM and Pascal case folding can collide even when C differs.
-            folded = record.get('convention') == 'pascal'
-            if targets & occupied or (folded and {n.upper() for n in targets} & {n.upper() for n in occupied}):
+            targets = set(self.object_mapping({old: new}).values()) if old else {'_' + new}
+            if new in c_names or targets & (obj_names | batch_objects):
                 raise RenameError('registered name or runtime collision: ' + new)
-        mapping = spellings({r['old']: r['new'] for r in rows}, self.registry)
-        targets = set(mapping.values())
-        if len(targets) != len(mapping):
-            raise RenameError('batch has colliding decorated spellings')
-        present = set().union(*(s[2] for s in self.sources.values()))
+            batch_objects.update(targets)
+        mapping = c_mapping(rows)
+        objmap = self.object_mapping(mapping)
         for row in rows:
-            variants = set(spellings({row['old']: row['new']}, self.registry))
-            if not variants & present:
+            if ('module' not in row and 'old' in row and row['old'] not in present
+                    and not self.registry['data'].get(row['old'], {}).get('field_of')
+                    and not set(self.object_mapping({row['old']: row['new']})) & present):
                 raise RenameError(row['old'] + ': no canonical identifier occurrence')
         for rel, (_, lang, ids) in self.sources.items():
-            if not ids & set(mapping):
+            actual = {**mapping, **objmap} if lang == 'asm' else mapping
+            if not ids & set(actual):
                 continue
-            clash = ids & targets
+            clash = ids & (set(actual.values()) - set(actual))
             if lang == 'asm':
-                clash |= {n for n in ids if n.upper() in {t.upper() for t in targets}}
+                clash |= {n for n in ids if n.upper() in {t.upper() for t in actual.values()} and n not in actual}
+            for kind, name, _, _ in self.lexed[rel]:
+                if name in actual and actual[name].lower() in MASM_RESERVED and (lang == 'asm' or kind == 'inline_id'):
+                    raise RenameError(f'{rel}: MASM-reserved identifier: {actual[name]}')
             if clash:
                 raise RenameError(f'{rel}: identifier collision: {sorted(clash)}')
+        return rows
 
     def prepare(self, rows):
-        mapping = spellings({r['old']: r['new'] for r in rows}, self.registry)
+        mapping = c_mapping(rows)
+        objmap = self.object_mapping(mapping)
         changed = {}
         for rel, (raw, lang, ids) in self.sources.items():
             # Comments may name an identifier even in a module without a use.
-            new = replace_spans(raw.decode('latin1'), mapping, self.lexed[rel]).encode('latin1')
+            actual = {**mapping, **objmap} if lang == 'asm' else mapping
+            new = replace_spans(raw.decode('latin1'), actual, self.lexed[rel]).encode('latin1')
             if new != raw:
                 if rel not in self.by_source:
                     # Current compiler's include policy admits include/, not src/
@@ -336,20 +584,190 @@ class Session:
         for item in program['modules']:
             for field in ('storage_contract', 'owned_code_references', 'data_frame_references', 'supported_domain'):
                 if field in item:
-                    item[field] = renamed(item[field], mapping)
+                    item[field] = renamed(item[field], mapping if field == 'supported_domain' else objmap)
             if item['key'] in changed:
                 item['source_sha256'] = canonical.sha(changed[item['key']])
-        program['aliases'] = renamed(program.get('aliases', []), mapping)
+        program['aliases'] = renamed(program.get('aliases', []), objmap)
+        for row in rows:
+            if row.get('field_of'):
+                seg, off = (int(v, 16) for v in row['address'].split(':'))
+                parent = self.registry['data'][row['field_of']]
+                target = '_' + row['field_of']
+                program['aliases'].append({'alias': '_' + row['new'], 'target': objmap.get(target, target),
+                    'offset': seg * 16 + off - parent['seg'] * 16 - parent['off'], 'kind': 'data',
+                    'reason': row['why'], 'view': {'kind': 'field_of', 'rule': 'Reviewed interior name; adds no storage.'}})
         if 'dos' in program:
-            program['dos'] = renamed(program['dos'], mapping)
+            program['dos'] = renamed(program['dos'], {**objmap, **mapping})
         man = copy.deepcopy(self.man)
         for key, module in man['modules'].items():
             for field in ('claims', 'scaffold', 'layout_inferred', 'steered', 'code_data_publics'):
                 if field in module:
                     module[field] = renamed(module[field], mapping, keys=field == 'code_data_publics')
-        used = {mapping.get(name, name) for _, _, ids in self.sources.values() for name in ids}
+        used = {'c': set(), 'object': set()}
+        for _, lang, ids in self.sources.values():
+            actual = {**mapping, **objmap} if lang == 'asm' else mapping
+            used['object' if lang == 'asm' else 'c'].update(actual.get(name, name) for name in ids)
         registry = registry_after(self.registry, rows, used)
+        for row in rows:
+            if 'module' in row:
+                key = row['module']
+                changed[key] = self.sources[self.items[key]['source']][0]
+                next(m for m in program['modules'] if m['key'] == key)['source'] = row['path']
+                if key in man['modules']:
+                    man['modules'][key]['source'] = row['path']
+                    man['modules'][key]['source_name_kind'] = row['kind']
+                    man['modules'][key].setdefault('source_path_history', []).append({'was': self.items[key]['source'], 'why': row['why']})
+            elif 'address' in row:
+                seg, off = (int(v, 16) for v in row['address'].split(':'))
+                linear = seg * 16 + off
+                for key, module in man['modules'].items():
+                    owner_used = row.get('field_of') in self.sources[self.items[key]['source']][2]
+                    if owner_used or any(p['seg'] * 16 + p['off'] <= linear < p['seg'] * 16 + p['off'] + p.get('size', 0)
+                                         for p in module.get('placements', {}).values()):
+                        changed.setdefault(key, self.sources[self.items[key]['source']][0])
         return mapping, changed, program, man, registry
+
+    def external_changes(self, rows, mapping):
+        objmap = self.object_mapping(mapping)
+        registered = set(self.registry['code']) | set(self.registry['data'])
+        references = {**{k: v for k, v in objmap.items() if k not in registered}, **mapping}
+        paths = {self.items[r['module']]['source']: r['path'] for r in rows if 'module' in r}
+        changes, tests, port = {}, set(), []
+        for rel in self.reference_files:
+            if rel.startswith('src/') or rel in ('layout/manifest.json', 'layout/symbols.json', 'layout/oracle.lock.json', 'src/program.json', 'evidence/promotions.jsonl'):
+                continue
+            if not paths and not external_identifier_file(rel):
+                continue
+            raw = (ROOT / rel).read_bytes()
+            text = raw.decode('latin1')
+            relocated = replace_paths(text, paths)
+            if port_reference_file(rel, raw):
+                if relocated != text:
+                    port.append(rel)
+                continue
+            changed = words(relocated, references) if external_identifier_file(rel) else relocated
+            if changed != text:
+                self.read(rel)
+                changes[rel] = changed.encode('latin1')
+                needles = list(references) if external_identifier_file(rel) else []
+                tests.update(selected_unit_tests(rel, raw.decode('utf-8-sig'), needles + list(paths)))
+        return changes, sorted(tests), sorted(port)
+
+    def repin_path_references(self, changes):
+        """Update explicit current path/hash pairs, never historical or oracle pins.
+
+        Source bytes of a move are unchanged. Receipt text can change, so an
+        active receipt index may need a new content pin as well. Only a pin
+        equal to that file's snapshotted predecessor can be advanced.
+        """
+        documents = {}
+        for rel in self.reference_files:
+            if not rel.endswith('.json') or rel.startswith('src/') or rel == 'layout/oracle.lock.json':
+                continue
+            raw = changes.get(rel, (ROOT / rel).read_bytes())
+            if raw is not None and not port_reference_file(rel, raw):
+                documents[rel] = json.loads(raw)
+        for _ in range(len(documents) + 1):
+            advanced = False
+            for rel, doc in documents.items():
+                touched = False
+                def walk(value, historical=False):
+                    nonlocal touched
+                    if isinstance(value, list):
+                        for item in value:
+                            walk(item, historical)
+                    elif isinstance(value, dict):
+                        historical |= any(k in value for k in ('git_commit', 'base_commit', 'prior_commit'))
+                        if not historical:
+                            for path_field, pin_field in (('path', 'sha256'), ('source', 'source_sha256'), ('receipt', 'receipt_sha256')):
+                                target = value.get(path_field)
+                                if not isinstance(target, str) or target not in changes or changes[target] is None:
+                                    continue
+                                before = self.pins.get(target)
+                                if before is not None and value.get(pin_field) == canonical.sha(before):
+                                    after = canonical.sha(changes[target])
+                                    if after != value[pin_field]:
+                                        value[pin_field] = after
+                                        touched = True
+                        for key, item in value.items():
+                            walk(item, historical or key in ('supersedes', 'history', 'renamed', 'moved'))
+                walk(doc)
+                if touched:
+                    if rel not in self.pins:
+                        self.read(rel)
+                    changes[rel] = json_bytes(doc)
+                    advanced = True
+            if not advanced:
+                return
+        raise RenameError('cyclic receipt content pins cannot be advanced by a path-only transaction')
+
+    def verify_selected_tests(self, changes, tests):
+        if not tests:
+            return {'selected': [], 'passed': True}
+        overlay = Path(tempfile.mkdtemp(prefix='tests-', dir=self.scratch))
+        for rel in self.reference_files:
+            target = overlay / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / rel).read_bytes())
+        if (ROOT / 'assets').exists():
+            shutil.copytree(ROOT / 'assets', overlay / 'assets')
+        dependency = ROOT / 'build/deps/unicorn'
+        if dependency.exists():
+            shutil.copytree(dependency, overlay / 'build/deps/unicorn')
+        for rel, raw in changes.items():
+            path = overlay / rel
+            if raw is None:
+                path.unlink(missing_ok=True)
+            else:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(raw)
+        # The guard is inherited by Python subprocesses too. Test outputs must
+        # remain in this overlay, including hard-coded accidental host writes.
+        guard = overlay / '_test_guard'
+        guard.mkdir()
+        (guard / 'sitecustomize.py').write_text(
+            'import os,sys\nfrom pathlib import Path\n'
+            'root=Path(os.environ["SIMANT_RENAME_TEST_ROOT"]).resolve()\n'
+            'def audit(event,args):\n'
+            '    paths=[]\n'
+            '    if event=="open" and isinstance(args[0],(str,bytes,os.PathLike)) and '
+            '(isinstance(args[1],str) and any(c in args[1] for c in "wax+") or '
+            'isinstance(args[2],int) and args[2] & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC)):\n'
+            '        paths=[args[0]]\n'
+            '    elif event in ("os.mkdir","os.remove","os.rmdir"):\n'
+            '        paths=[args[0]]\n'
+            '    elif event in ("os.rename","os.link","os.symlink"):\n'
+            '        paths=args[:2]\n'
+            '    for value in paths:\n'
+            '        if not Path(os.fsdecode(value)).resolve().is_relative_to(root):\n'
+            '            raise PermissionError("rename test attempted a write outside scratch: "+str(value))\n'
+            'sys.addaudithook(audit)\n', encoding='utf8')
+        runner = overlay / '_run_selected.py'
+        runner.write_text('import sys,unittest\nfrom pathlib import Path\n'
+            'root=Path(__file__).resolve().parent\n'
+            'sys.path[:0]=[str(root/"tests"),str(root/"tools"),str(root)]\n'
+            'import threading\n'
+            'gate=threading.BoundedSemaphore(4)\n'
+            'def bounded(function):\n'
+            '    def run(*a,**k):\n'
+            '        with gate: return function(*a,**k)\n'
+            '    return run\n'
+            'if (root/"tools/compiler.py").exists():\n'
+            '    import compiler\n'
+            '    compiler.compile_c=bounded(compiler.compile_c)\n'
+            '    compiler.assemble=bounded(compiler.assemble)\n'
+            'suite=unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromName(n) for n in sys.argv[1:])\n'
+            'result=unittest.TextTestRunner(verbosity=2).run(suite)\n'
+            'raise SystemExit(not result.wasSuccessful())\n', encoding='utf8')
+        env = os.environ.copy()
+        env.update(PYTHONDONTWRITEBYTECODE='1', PYTHONPATH=str(guard),
+                   SIMANT_RENAME_TEST_ROOT=str(overlay), TEMP=str(overlay), TMP=str(overlay))
+        result = subprocess.run([sys.executable, '-B', str(runner), *tests], cwd=overlay, env=env,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=600,
+            creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+        log = overlay / 'selected-tests.log'
+        log.write_bytes(result.stdout)
+        return {'selected': tests, 'passed': result.returncode == 0, 'log': str(log)}
 
     def compile_one(self, key, raw, program, man):
         item = next(m for m in program['modules'] if m['key'] == key)
@@ -412,10 +830,11 @@ class Session:
             self.baseline[key] = pair
 
     def evaluate(self, rows):
-        cache_key = tuple(r['old'] for r in rows)
+        cache_key = json.dumps(rows, sort_keys=True)
         if cache_key in self.cache:
             return self.cache[cache_key]
         mapping, changed, program, man, registry = self.prepare(rows)
+        objmap = self.object_mapping(mapping)
         print(f'Checking {len(rows)} rename(s) across {len(changed)} module(s)', flush=True)
         self.establish_baseline(changed)
         results = self.compile_many(changed, program, man, registry)
@@ -425,7 +844,7 @@ class Session:
             reasons = []
             if module.get('canonical_admission'):
                 prior_result, prior_collect = self.baseline[key]
-                if canonical.observed(result) != renamed(canonical.observed(prior_result), mapping):
+                if canonical.observed(result) != comparison_after(canonical.observed(prior_result), mapping, objmap):
                     reasons.append('full historical comparison differs from reviewed context')
                 # Contribution identity includes names. Change only those symbolic
                 # fields in a copy of the predecessor; bytes/indices/order remain.
@@ -435,15 +854,28 @@ class Session:
                     prior_obj = OmfReader(communals=True).read(prior_collect['object'])
                     after_obj = OmfReader(communals=True).read(collect['object'])
                     for field in ('publics', 'local_publics', 'linker_fixups', 'communals', 'externals'):
-                        setattr(prior_obj, field, renamed(getattr(prior_obj, field), mapping))
+                        setattr(prior_obj, field, renamed(getattr(prior_obj, field), objmap))
                     if modules.contribution_sha256(prior_obj) != modules.contribution_sha256(after_obj):
                         reasons.append('live bytes/layout/ordered fixups differ from reviewed context')
             elif not result['exact']:
                 reasons.append('not every claim, private datum and complete-unit extent is exact')
+            if any(r.get('module') == key for r in rows) and (
+                    canonical.observed(result) != canonical.observed(self.baseline[key][0]) or
+                    result.get('contribution_sha256') != self.baseline[key][0].get('contribution_sha256')):
+                reasons.append('source move changed the historical comparison or live compiler contributions')
             if reasons:
                 failures[key] = self.diagnostic(key, result, collect, mapping, reasons)
         outcome = {'mapping': mapping, 'changed': changed, 'program': program, 'man': man,
                    'registry': registry, 'results': results, 'failures': failures}
+        external, tests, port = self.external_changes(rows, mapping)
+        outcome.update(external=external, selected_tests=tests, port_references=port)
+        if not failures:
+            changes = self.stage_metadata(rows, outcome)
+            outcome['publication'] = changes
+            test_result = self.verify_selected_tests(changes, tests)
+            outcome['unit_tests'] = test_result
+            if not test_result['passed']:
+                failures['unit-tests'] = ['affected unit tests failed; see ' + test_result['log']]
         self.cache[cache_key] = outcome
         return outcome
 
@@ -485,7 +917,13 @@ class Session:
     def stage_metadata(self, rows, outcome):
         mapping = outcome['mapping']
         program, man = outcome['program'], outcome['man']
-        changes = {self.items[k]['source']: raw for k, raw in outcome['changed'].items()}
+        items = {m['key']: m for m in program['modules']}
+        changes = dict(outcome.get('external', {}))
+        paths = {self.items[r['module']]['source']: r['path'] for r in rows if 'module' in r}
+        for key, raw in outcome['changed'].items():
+            changes[items[key]['source']] = raw
+            if self.items[key]['source'] != items[key]['source']:
+                changes[self.items[key]['source']] = None
         receipts = {}
         def review(rel):
             if rel not in receipts:
@@ -521,19 +959,36 @@ class Session:
                 row['definition_sha256'] = pin
                 receipt.update(function=row['function'], definition_sha256=pin)
         for rel, receipt in receipts.items():
-            receipt.setdefault('renamed', []).append({'renames': rows,
-                'note': 'Lexical identifier rename; semantic review unchanged.',
+            receipt.setdefault('moved' if paths and not mapping else 'renamed', []).append({'operations': rows,
+                'note': 'Source path move; bytes unchanged.' if paths and not mapping else 'Lexical identifier rename; semantic review unchanged.',
                 'prior_receipt_sha256': canonical.sha(self.pins[rel])})
             changes[rel] = json_bytes(receipt)
         changes['layout/manifest.json'] = json_bytes(man, 1)
         changes['src/program.json'] = json_bytes(program)
         changes['layout/symbols.json'] = json_bytes(outcome['registry'], 1)
+        for rel, raw in list(changes.items()):
+            if raw is None or (rel.startswith('src/') and rel != 'src/program.json'):
+                continue
+            if rel == 'layout/manifest.json':
+                # The prior path is historical provenance, not an active reference.
+                history = {k: copy.deepcopy(m.get('source_path_history')) for k, m in man['modules'].items()}
+                doc = json.loads(replace_paths(raw.decode('utf8'), paths))
+                for key, value in history.items():
+                    if value is not None:
+                        doc['modules'][key]['source_path_history'] = value
+                changes[rel] = json_bytes(doc, 1)
+            else:
+                changes[rel] = replace_paths(raw.decode('latin1'), paths).encode('latin1')
+        if paths:
+            self.repin_path_references(changes)
         record = {'time': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'),
                   'module': 'RENAME', 'renames': rows, 'modules_reproven': sorted(outcome['changed']),
+                  'files_changed': sorted(changes), 'port_references_unmodified': outcome.get('port_references', []),
                   'prior_program_sha256': canonical.sha(self.pins['src/program.json']),
                   'program_sha256': canonical.sha(changes['src/program.json']),
                   'objects': {k: r[0].get('object_sha256') for k, r in outcome['results'].items()}}
         journal = self.pins['evidence/promotions.jsonl'] or b''
+        journal = replace_paths(journal.decode('latin1'), paths).encode('latin1')
         changes['evidence/promotions.jsonl'] = journal + (b'\n' if journal and not journal.endswith(b'\n') else b'') + json_bytes(record, None)
         return changes
 
@@ -545,7 +1000,8 @@ class Session:
         stage.mkdir()
         for i, (rel, raw) in enumerate(changes.items()):
             staged[rel] = stage / f'{i}.new'
-            staged[rel].write_bytes(raw)
+            if raw is not None:
+                staged[rel].write_bytes(raw)
             old = self.pins[rel]
             if old is not None:
                 backups[rel] = stage / f'{i}.old'
@@ -564,7 +1020,10 @@ class Session:
             try:
                 for rel, path in staged.items():
                     (ROOT / rel).parent.mkdir(parents=True, exist_ok=True)
-                    os.replace(path, ROOT / rel)
+                    if changes[rel] is None:
+                        (ROOT / rel).unlink()
+                    else:
+                        os.replace(path, ROOT / rel)
                     written.append(rel)
             except BaseException:
                 for rel in reversed(written):
@@ -637,7 +1096,7 @@ def run(rows, *, verify_only=False, keep_going=False, jobs=4):
         compiler.WORK = scratch / 'cc'
         compiler.pinned_tree = isolated_tree
         session = Session(scratch, jobs)
-        session.validate_rows(rows)
+        rows = session.validate_rows(rows)
         remaining, refused = list(rows), []
         outcome = session.evaluate(remaining)
         while outcome['failures'] and remaining:
@@ -645,11 +1104,11 @@ def run(rows, *, verify_only=False, keep_going=False, jobs=4):
             diagnosis = session.evaluate(culprit)['failures']
             excluded = culprit[-1:] if keep_going else culprit
             refused.append({'renames': excluded, 'failing_set': culprit, 'failures': diagnosis})
-            print('REFUSED SET:', ', '.join(r['old'] + '=' + r['new'] for r in culprit), flush=True)
+            print('REFUSED SET:', ', '.join(operation_label(r) for r in culprit), flush=True)
             for key, details in diagnosis.items():
                 print(' ', key, '\n    ' + '\n    '.join(details), flush=True)
             if keep_going and len(culprit) > 1:
-                print('  Excluding ' + excluded[0]['old'] + ' and checking the complete surviving batch', flush=True)
+                print('  Excluding ' + operation_label(excluded[0]) + ' and checking the complete surviving batch', flush=True)
             remaining = [r for r in remaining if r not in excluded]
             outcome = session.evaluate(remaining) if remaining else None
             if outcome is None:
@@ -658,8 +1117,10 @@ def run(rows, *, verify_only=False, keep_going=False, jobs=4):
         if remaining and (not refused or keep_going):
             # Reuse only this run's already fresh proof for the final complete
             # surviving batch. Never publish independent singleton successes.
-            changes = session.stage_metadata(remaining, outcome)
+            changes = outcome['publication']
             for rel, raw in changes.items():
+                if raw is None:
+                    continue
                 proposal = scratch / 'proposed' / rel
                 proposal.parent.mkdir(parents=True, exist_ok=True)
                 proposal.write_bytes(raw)
@@ -669,11 +1130,21 @@ def run(rows, *, verify_only=False, keep_going=False, jobs=4):
             for key in outcome['changed']:
                 label = 'REVIEWED CONTEXT PRESERVED' if session.man['modules'].get(key, {}).get('canonical_admission') else 'EXACT' if key in session.man['modules'] else 'STORAGE'
                 print(' ', key + ':', label, flush=True)
+            for rel in outcome.get('external', {}):
+                print('  reference:', rel, flush=True)
+            for rel in outcome.get('port_references', []):
+                print('  port reference (unchanged):', rel, flush=True)
+            if outcome.get('selected_tests'):
+                print('  unit tests:', ', '.join(outcome['selected_tests']), flush=True)
         report = {'requested': len(rows), 'proven': remaining, 'refused': refused,
                   'verify_only': verify_only, 'published': published,
                   'modules_reproven': sorted(outcome['changed']) if outcome else [],
                   'comparisons': {k: canonical.observed(pair[0]) for k, pair in outcome['results'].items()} if outcome else {},
                   'objects': {k: pair[0].get('object_sha256') for k, pair in outcome['results'].items()} if outcome else {},
+                  'files_changed': sorted(outcome.get('publication', {})) if outcome else [],
+                  'unit_tests': outcome.get('unit_tests', {}) if outcome else {},
+                  'port_references_unmodified': outcome.get('port_references', []) if outcome else [],
+                  'deleted_sources': sorted(rel for rel, raw in outcome.get('publication', {}).items() if raw is None) if outcome else [],
                   'seconds': round(time.perf_counter() - started, 3)}
         (scratch / 'result.json').write_bytes(json_bytes(report))
         if published:
@@ -694,14 +1165,25 @@ def main(argv=None):
     parser.add_argument('--kind', choices=('recovered', 'descriptive'))
     parser.add_argument('--why')
     parser.add_argument('--batch', type=Path)
+    parser.add_argument('--move', nargs='+', action='append', default=[], metavar='KEY=NEW_PATH')
     parser.add_argument('--verify-only', action='store_true')
     parser.add_argument('--keep-going', action='store_true')
     parser.add_argument('--jobs', type=int, choices=range(1, 5), default=4)
     args = parser.parse_args(argv)
     if args.batch:
-        if args.pairs or args.kind or args.why:
+        if args.pairs or args.move or args.kind or args.why:
             parser.error('--batch cannot be combined with pairs, --kind or --why')
         rows = json.loads(args.batch.read_text(encoding='utf-8-sig'))
+    elif args.move:
+        if args.pairs or not args.why:
+            parser.error('--move requires --why and cannot be combined with identifier pairs')
+        rows = []
+        for move in [pair for group in args.move for pair in group]:
+            if move.count('=') != 1:
+                parser.error('expected KEY=NEW_PATH: ' + move)
+            key, path = move.split('=')
+            rows.append({'module': key.replace(';', ':'), 'path': path,
+                         'kind': args.kind or 'descriptive', 'why': args.why})
     else:
         if not args.pairs or not args.kind or not args.why:
             parser.error('OLD=NEW requires --kind and --why')
