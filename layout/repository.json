@@ -2,7 +2,6 @@
   "schema": "simant-current-repository-v1",
   "behavior_attribution_ledger": "evidence/canonical/behavior-attribution/ledger.json",
   "retired_paths": [
-    "tools/rename.py",
     "portable/canonical_native_abi/window_parameter_abi_v1.py",
     "portable/canonical_native_abi/window_swap_parameter_abi_v2.py",
     "docs/consolidation.md",
@@ -123,6 +122,14 @@
     {
       "path": "portable/package.py",
       "role": "Current Windows drop-in human playtest package"
+    },
+    {
+      "path": "tools/rename.py",
+      "role": "Rename functions and data everywhere they are used and re-prove every changed module"
+    },
+    {
+      "path": "tests/test_rename.py",
+      "role": "Permanent acceptance/negative controls"
     },
     {
       "path": "portable/refresh_pins.py",

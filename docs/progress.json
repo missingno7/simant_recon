@@ -1,22 +1,12 @@
 {
  "schema": "simant-progress-v1",
- "generated": "2026-10-07",
+ "generated": "2026-11-11",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "known_functions": 1730,
  "known_game_functions": 1640,
- "exact_c_functions": 1235,
- "historical_exact_source_rebuilt_functions": [
-  "DrawCurBalloons",
-  "DrawSpider",
-  "PopUpInfoWindow",
-  "PrevListLine",
-  "f_1E57_0F8E",
-  "f_23E6_0392",
-  "f_2505_0831",
-  "f_2505_08EA",
-  "win_Recalc"
- ],
- "exact_c_bytes": 232114,
+ "exact_c_functions": 1253,
+ "historical_exact_source_rebuilt_functions": [],
+ "exact_c_bytes": 241682,
  "exact_asm_functions": 367,
  "exact_asm_bytes": 50441,
  "exact_code_segment_data_bytes": 1481,
@@ -25,7 +15,7 @@
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1692,
+ "owned_functions": 1710,
  "rtlink_manager_bytes_unaccepted": 17001,
  "data_bytes_accepted": 113838,
  "far_data_bytes_accepted": 80310,
@@ -46,7 +36,7 @@
  "far_bss_sizes_unverified_bytes": 14928,
  "bss_bytes_placed": 496,
  "game_code_span_bytes": 304798,
- "unresolved_code_bytes": 20762,
+ "unresolved_code_bytes": 11194,
  "unresolved_data_bytes": 175,
  "overlay_coverage": {
   "S00": {
@@ -143,7 +133,7 @@
   },
   "S23": {
    "bytes": 4368,
-   "claimed": 1142
+   "claimed": 2905
   },
   "S24": {
    "bytes": 1808,
@@ -158,18 +148,18 @@
    "claimed": 2236
   }
  },
- "root_claimed_bytes": 158694,
+ "root_claimed_bytes": 166499,
  "scaffold_functions": 0,
  "exact_translation_units": 97,
- "claims_within_group_order_pending": 17,
- "inplace_draft_functions": 29,
- "claims_exact_steered": 23,
+ "claims_within_group_order_pending": 19,
+ "inplace_draft_functions": 20,
+ "claims_exact_steered": 26,
  "exact_c_bytes_in_complete_tus": 153413,
- "exact_c_bytes_in_partial_modules": 78701,
- "exact_c_bytes_steered": 14115,
- "exact_c_bytes_layout_inferred": 17754,
- "exact_c_bytes_within_group_pending": 10062,
- "claims_layout_inferred": 22,
+ "exact_c_bytes_in_partial_modules": 88269,
+ "exact_c_bytes_steered": 14832,
+ "exact_c_bytes_layout_inferred": 20867,
+ "exact_c_bytes_within_group_pending": 12044,
+ "claims_layout_inferred": 24,
  "modules_layout_inferred": [
   "S14:384C",
   "root:1383",
@@ -182,19 +172,49 @@
  "runtime_oracle_derived_words": 244,
  "released_claims_unowned": [],
  "modules_origin_unevidenced": [],
- "manifest_sha256": "628e1e427e82952f5918a94a26076d8de27e8a347296ad91ed4661f8b4615f4f",
+ "manifest_sha256": "573682e77d5111d9e0648045d2ebffdc14c555cbd206650e77dfd408f6cb2cdd",
  "complete_tus_relocation_order_proven": 95,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD",
   "root:1B73"
  ],
  "codegen_rules_reproduced": 50,
- "behavior_exact_confirmed_functions": 29,
- "historical_exact_source_rebuilt_function_count": 9,
+ "behavior_exact_confirmed_functions": 20,
+ "historical_exact_source_rebuilt_function_count": 0,
  "canonical_translation_units": 200,
  "canonical_storage_units": 73,
- "canonical_program_sha256": "14dac2b588562b6e62dbf17714f393a8eb902b6dd4c11688b592963144217fdb",
- "whole_executable": "NOT_BUILT (canonical DOS link has open semantic gates; see docs/canonical-source.md)",
+ "canonical_program_sha256": "f08c641782a2792b69ba1fced890ecc3c88afbf1c5dc941c9bd4139021a46893",
+ "whole_executable": "FUNCTIONAL_SOURCE_BUILD (dos/build.py links the canonical source; the original image layout is not reproduced; see docs/dos-closure.md)",
  "validation": "PASS",
- "failures": []
+ "failures": [],
+ "verdicts": {
+  "code": {
+   "verdict": "NOT EQUAL",
+   "detail": "1620 of 1640 game functions exact; 20 not exact",
+   "proves": "each exact function's bytes, fixups and relocations, compiled from the current source by the pinned tools in its whole module",
+   "excludes": "where the linker places the module; functions listed as not exact"
+  },
+  "data": {
+   "verdict": "NOT EQUAL",
+   "detail": "113838 initialised bytes exact; 73 storage units of our own; uninitialised far data sizes unverified for 14928 of 19408 bytes; 175 bytes unresolved",
+   "proves": "the bytes and relocations of every accepted initialised data placement",
+   "excludes": "owning file, type and size of data without an accepted placement; meaning of opaque bytes"
+  },
+  "layout": {
+   "verdict": "NOT REPRODUCED",
+   "detail": "the working DOS build orders data its own way; no link from this source reproduces the original placement",
+   "proves": "nothing yet beyond the per-module placements checked under code and data",
+   "excludes": "segment order, communal placement, overlay structure, relocation table order"
+  },
+  "whole_executable": {
+   "verdict": "NOT BUILT",
+   "detail": "the 1991 RTLink/Plus release is missing; its 17001-byte overlay manager is not reproduced",
+   "proves": "nothing",
+   "excludes": "everything about the image as a file"
+  },
+  "not_rebuilt_from_source": [
+   "90 members of the pinned Microsoft C 6.00 runtime libraries (12339 code bytes, 2021 data bytes), linked from those libraries as the original was",
+   "the linker's overlay manager and vector table"
+  ]
+ }
 }

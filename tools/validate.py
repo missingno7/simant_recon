@@ -45,6 +45,14 @@ import modules as modmod  # noqa: E402
 
 ROOT = exemod.ROOT
 
+# Tests that exercise the working DOS build or the SDL3 port.  They depend on builds on
+# disk or on port contracts, so they are not part of the reconstruction gate.
+UPPER_LAYER_TESTS = {
+    "test_closure_graph", "test_dos_acceptance", "test_dos_diagnostic", "test_dos_linker",
+    "test_instruction_word_sites", "test_native_acceptance", "test_native_register_returns",
+    "test_native_word_expressions", "test_semantic_spans",
+}
+
 
 def sha(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
@@ -53,6 +61,8 @@ def sha(b: bytes) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-tests", action="store_true")
+    ap.add_argument("--upper-tests", action="store_true",
+                    help="also run the tests of the working DOS build and the port (reported, not gating)")
     ap.add_argument("--no-farbss-probe", action="store_true",
                     help="skip the compile-only FAR_BSS declaration probes (tools/farbss.py probe_declarations)")
     a = ap.parse_args()
@@ -275,12 +285,24 @@ def main() -> int:
     print(f"codegen rules reproduced: {rules_ok}")
 
     if not a.no_tests:
-        t = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "tests"), "-q"],
-                           capture_output=True, text=True, cwd=ROOT)
-        print(t.stderr.strip().splitlines()[-1] if t.stderr.strip() else t.stdout.strip())
-        if t.returncode:
-            failures.append("unit tests")
-            print(t.stderr[-2000:])
+        # The reconstruction gate runs only tests that depend on the current source and the
+        # pinned tools.  Tests of the working DOS build and of the port read builds that
+        # happen to be on disk and belong to the upper layers; they run on request and are
+        # reported separately, never as part of the exactness verdicts.
+        names = sorted(p.stem for p in (ROOT / "tests").glob("test_*.py"))
+        groups = [("reconstruction tests", [n for n in names if n not in UPPER_LAYER_TESTS], True)]
+        if a.upper_tests:
+            groups.append(("upper-layer tests", [n for n in names if n in UPPER_LAYER_TESTS], False))
+        for label, selected, gating in groups:
+            t = subprocess.run([sys.executable, "-m", "unittest", "-q", *selected],
+                               capture_output=True, text=True, cwd=ROOT / "tests")
+            print(label + ": " + (t.stderr.strip().splitlines()[-1] if t.stderr.strip() else t.stdout.strip()))
+            if t.returncode:
+                print(t.stderr[-2000:])
+                if gating:
+                    failures.append(label)
+                else:
+                    print(label + " FAILED (reported only; the upper layers may be stale)")
 
     # ---- historical runtime: fresh re-binding of every accepted member -------------------
     runtime_bytes = 0
@@ -447,6 +469,41 @@ def main() -> int:
         "validation": "PASS" if not failures else "FAIL",
         "failures": failures,
     }
+    open_functions = len(program['semantics']) if program else 0
+    own_units = sum('storage_contract' in m for m in program['modules']) if program else 0
+    progress["verdicts"] = {
+        "code": {
+            "verdict": "EQUAL" if not open_functions and not failures else "NOT EQUAL",
+            "detail": f"{exact_c + progress['exact_asm_functions']} of {progress['known_game_functions']} game "
+                      f"functions exact; {open_functions} not exact",
+            "proves": "each exact function's bytes, fixups and relocations, compiled from the current source "
+                      "by the pinned tools in its whole module",
+            "excludes": "where the linker places the module; functions listed as not exact"},
+        "data": {
+            "verdict": "NOT EQUAL" if own_units or progress["unresolved_data_bytes"]
+                       or progress["far_bss_sizes_unverified_bytes"] else "EQUAL",
+            "detail": f"{data_bytes} initialised bytes exact; {own_units} storage units of our own; "
+                      f"uninitialised far data sizes unverified for {progress['far_bss_sizes_unverified_bytes']} of "
+                      f"{far_bss_bytes} bytes; {progress['unresolved_data_bytes']} bytes unresolved",
+            "proves": "the bytes and relocations of every accepted initialised data placement",
+            "excludes": "owning file, type and size of data without an accepted placement; meaning of opaque bytes"},
+        "layout": {
+            "verdict": "NOT REPRODUCED",
+            "detail": "the working DOS build orders data its own way; no link from this source reproduces "
+                      "the original placement",
+            "proves": "nothing yet beyond the per-module placements checked under code and data",
+            "excludes": "segment order, communal placement, overlay structure, relocation table order"},
+        "whole_executable": {
+            "verdict": "NOT BUILT",
+            "detail": f"the 1991 RTLink/Plus release is missing; its {progress['rtlink_manager_bytes_unaccepted']}-byte "
+                      "overlay manager is not reproduced",
+            "proves": "nothing",
+            "excludes": "everything about the image as a file"},
+        "not_rebuilt_from_source": [
+            f"{runtime_members} members of the pinned Microsoft C 6.00 runtime libraries "
+            f"({runtime_bytes} code bytes, {runtime_data_bytes} data bytes), linked from those libraries as the original was",
+            "the linker's overlay manager and vector table"],
+    }
     (ROOT / "docs").mkdir(exist_ok=True)
     (ROOT / "docs" / "progress.json").write_text(json.dumps(progress, indent=1) + "\n")
     md = ["# Progress (generated by tools/validate.py)", "",
@@ -492,6 +549,14 @@ def main() -> int:
           "ASM transcribed {asm_transcribed_bytes}; opaque data unmarked {data_bytes_opaque_unmarked}; "
           "runtime oracle-derived words {runtime_oracle_derived_words}".format(**progress))
     print(f"manifest sha256 {progress['manifest_sha256']}")
+    print(f"verdicts against the original SIMANT.EXE (sha256 {progress['oracle_sha256']}):")
+    for key in ("code", "data", "layout", "whole_executable"):
+        v = progress["verdicts"][key]
+        print(f"  {key.upper().replace('_', ' '):<17}{v['verdict']:<16}{v['detail']}")
+        print(f"  {'':<17}proves: {v['proves']}")
+        print(f"  {'':<17}excludes: {v['excludes']}")
+    for item in progress["verdicts"]["not_rebuilt_from_source"]:
+        print(f"  not rebuilt from source: {item}")
     if failures:
         print("VALIDATION FAILED:")
         for f in failures:

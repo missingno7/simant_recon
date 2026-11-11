@@ -130,7 +130,8 @@ concrete obstacle and the smallest useful evidence references.
 | `tools/context.py FUNCTION` | original disassembly, frame, callers, callees |
 | `tools/search.py FUNCTION draft.c` | compile a draft and compare strictly |
 | `tools/promote.py` | verify and publish a module; the only canonical writer |
-| `tools/validate.py` | the gate: every exact claim re-proven, tests, progress page |
+| `tools/rename.py` | rename functions and data everywhere they are used and re-prove every changed module |
+| `tools/validate.py` | the gate: every exact claim re-proven from current source, reconstruction tests, separate verdicts for code, data, layout and whole executable (`--upper-tests` also runs the working-build and port tests, reported only) |
 | `tools/repository.py --write-status` | regenerate the status page of remaining gaps |
 | `tools/xver.py` | DOS ↔ Win16 function correspondence and name policy |
 | `tools/canonical_behavior.py` | differential checks of the functions that are not yet exact |

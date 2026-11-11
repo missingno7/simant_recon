@@ -182,7 +182,8 @@ class ArchitectureControls(unittest.TestCase):
 
     def test_retired_api_cannot_reappear(self):
         issues = []
-        with patch.object(Path, 'exists', lambda p: p == ROOT / 'tools/rename.py'):
+        retired = ROOT / 'portable/canonical_native_abi/window_parameter_abi_v1.py'
+        with patch.object(Path, 'exists', lambda p: p == retired):
             repository._check_spec(self.spec, issues)
         self.assertTrue(any(row['code'] == 'retired_path_present' for row in issues))
 
