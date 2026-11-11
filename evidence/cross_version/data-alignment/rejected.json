@@ -1,0 +1,720 @@
+[
+  {
+    "row": {
+      "dos": "50F6:10DC",
+      "dos_name": null,
+      "win16": "_yardAnimHandle",
+      "delta": 0,
+      "method": "order",
+      "round": 1,
+      "order_votes": 1,
+      "strict_votes": 1,
+      "width_votes": 0,
+      "jaccard": 0.909091,
+      "shared_users": 10,
+      "dos_users": 11,
+      "win16_users": 10,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_win_YardClosed"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [],
+      "usage": {
+        "jaccard": 0.909091,
+        "shared": 10,
+        "dos": 11,
+        "win16": 10
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "single-gap base conflicts with multiple member addresses and the 14-byte object boundary",
+    "replacement": "55B3:2A28"
+  },
+  {
+    "row": {
+      "dos": "55B3:2A40",
+      "dos_name": null,
+      "win16": "_win_hwnd",
+      "delta": 70,
+      "method": "order",
+      "round": 2,
+      "order_votes": 1,
+      "strict_votes": 1,
+      "width_votes": 0,
+      "jaccard": 0.666667,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 3,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_DrawAnimYardMessage"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_DrawAnimYardMessage"
+      ],
+      "usage": {
+        "jaccard": 0.666667,
+        "shared": 2,
+        "dos": 2,
+        "win16": 3
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:2A52",
+      "dos_name": null,
+      "win16": "_patchRgn2",
+      "delta": 18,
+      "method": "order",
+      "round": 0,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 0.4,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 5,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_DrawYardCursor",
+        "_EraseYardCursor"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_DrawYardCursor",
+        "_EraseYardCursor"
+      ],
+      "usage": {
+        "jaccard": 0.4,
+        "shared": 2,
+        "dos": 2,
+        "win16": 5
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:2E04",
+      "dos_name": null,
+      "win16": "_yardMsgHandle",
+      "delta": 1294,
+      "method": "order",
+      "round": 2,
+      "order_votes": 1,
+      "strict_votes": 1,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 2,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_OpenInfoWindow"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_OpenInfoWindow"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 2,
+        "dos": 2,
+        "win16": 2
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:2E26",
+      "dos_name": null,
+      "win16": "_yardMsgHandle",
+      "delta": 1328,
+      "method": "order",
+      "round": 0,
+      "order_votes": 1,
+      "strict_votes": 1,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 4,
+      "dos_users": 4,
+      "win16_users": 4,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_win_DrawInfoWindow"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_win_DrawInfoWindow",
+        "_OpenInfoWindow"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 4,
+        "dos": 4,
+        "win16": 4
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:2EF0",
+      "dos_name": null,
+      "win16": "_win_hwnd",
+      "delta": 42,
+      "method": "order",
+      "round": 0,
+      "order_votes": 1,
+      "strict_votes": 1,
+      "width_votes": 0,
+      "jaccard": 0.666667,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 3,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_ProcHistoryEvent"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_ProcHistoryEvent"
+      ],
+      "usage": {
+        "jaccard": 0.666667,
+        "shared": 2,
+        "dos": 2,
+        "win16": 3
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:3B86",
+      "dos_name": null,
+      "win16": "_releaseHook",
+      "delta": 16,
+      "method": "order",
+      "round": 0,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 4,
+      "dos_users": 4,
+      "win16_users": 4,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_ch_RemoveEntry",
+        "_ch_DeleteEntry"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_ch_RemoveEntry",
+        "_ch_DeleteEntry"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 4,
+        "dos": 4,
+        "win16": 4
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:3DB2",
+      "dos_name": "g_3DB2",
+      "win16": "_win_hwnd",
+      "delta": 52,
+      "method": "order",
+      "round": 1,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 0.125,
+      "shared_users": 4,
+      "dos_users": 32,
+      "win16_users": 4,
+      "second_dos_votes": 1,
+      "second_win16_votes": 0,
+      "functions": [
+        "_SpiderDialog",
+        "_LionDialog"
+      ],
+      "rivals": [
+        {
+          "win16": "_win_hwnd",
+          "delta": 48,
+          "votes": 1
+        },
+        {
+          "win16": "_win_hwnd",
+          "delta": 68,
+          "votes": 1
+        },
+        {
+          "win16": "_win_hwnd",
+          "delta": 8,
+          "votes": 1
+        }
+      ],
+      "leave_one_out_order": [
+        "_SpiderDialog",
+        "_LionDialog"
+      ],
+      "usage": {
+        "jaccard": 0.125,
+        "shared": 4,
+        "dos": 32,
+        "win16": 4
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8BA2",
+      "dos_name": "g_8BA2",
+      "win16": "__caption",
+      "delta": 1290,
+      "method": "order",
+      "round": 0,
+      "order_votes": 12,
+      "strict_votes": 12,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 12,
+      "dos_users": 12,
+      "win16_users": 12,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_SetSRandSeed",
+        "_GetSRandSeed",
+        "_SeedSRand",
+        "_SRand1",
+        "_SRand2",
+        "_SRand4",
+        "_SRand8",
+        "_SRand16",
+        "_SRand32",
+        "_SRand64",
+        "_SRand128",
+        "_SRand256"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_SetSRandSeed",
+        "_GetSRandSeed",
+        "_SeedSRand",
+        "_SRand1",
+        "_SRand2",
+        "_SRand4",
+        "_SRand8",
+        "_SRand16",
+        "_SRand32",
+        "_SRand64",
+        "_SRand128",
+        "_SRand256"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 12,
+        "dos": 12,
+        "win16": 12
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8C26",
+      "dos_name": null,
+      "win16": "_editBufInvalidFlag",
+      "delta": 26,
+      "method": "order",
+      "round": 0,
+      "order_votes": 1,
+      "strict_votes": 1,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 2,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_drawHistGraph"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_drawHistGraph"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 2,
+        "dos": 2,
+        "win16": 2
+      },
+      "widths": {
+        "dos": [
+          "byte",
+          "word"
+        ],
+        "win16": [
+          "byte",
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8CDC",
+      "dos_name": null,
+      "win16": "_pack_buf",
+      "delta": 29228,
+      "method": "order",
+      "round": 0,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 2,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 2,
+        "dos": 2,
+        "win16": 2
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8CDE",
+      "dos_name": null,
+      "win16": "_pack_buf",
+      "delta": 29230,
+      "method": "order",
+      "round": 0,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 2,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 2,
+        "dos": 2,
+        "win16": 2
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8CE0",
+      "dos_name": null,
+      "win16": "_pack_buf",
+      "delta": 29232,
+      "method": "order",
+      "round": 0,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 2,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 2,
+        "dos": 2,
+        "win16": 2
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8CE2",
+      "dos_name": null,
+      "win16": "_pack_buf",
+      "delta": 29234,
+      "method": "order",
+      "round": 0,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 2,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_ButtonHeldInit",
+        "_ButtonHeld"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 2,
+        "dos": 2,
+        "win16": 2
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8CEE",
+      "dos_name": null,
+      "win16": "__caption",
+      "delta": 1392,
+      "method": "order",
+      "round": 1,
+      "order_votes": 3,
+      "strict_votes": 3,
+      "width_votes": 0,
+      "jaccard": 1.0,
+      "shared_users": 4,
+      "dos_users": 4,
+      "win16_users": 4,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_win_SetColorNum",
+        "_win_SetColorFromObj",
+        "_win_RectFill"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_win_SetColorNum",
+        "_win_SetColorFromObj",
+        "_win_RectFill"
+      ],
+      "usage": {
+        "jaccard": 1.0,
+        "shared": 4,
+        "dos": 4,
+        "win16": 4
+      },
+      "widths": {
+        "dos": [
+          "dword",
+          "word"
+        ],
+        "win16": [
+          "dword",
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  },
+  {
+    "row": {
+      "dos": "55B3:8CF0",
+      "dos_name": null,
+      "win16": "__caption",
+      "delta": 1394,
+      "method": "order",
+      "round": 1,
+      "order_votes": 2,
+      "strict_votes": 2,
+      "width_votes": 0,
+      "jaccard": 0.666667,
+      "shared_users": 2,
+      "dos_users": 2,
+      "win16_users": 3,
+      "second_dos_votes": 0,
+      "second_win16_votes": 0,
+      "functions": [
+        "_win_SetColorNum",
+        "_win_SetColorFromObj"
+      ],
+      "rivals": [],
+      "leave_one_out_order": [
+        "_win_SetColorNum",
+        "_win_SetColorFromObj"
+      ],
+      "usage": {
+        "jaccard": 0.666667,
+        "shared": 2,
+        "dos": 2,
+        "win16": 3
+      },
+      "widths": {
+        "dos": [
+          "word"
+        ],
+        "win16": [
+          "word"
+        ]
+      }
+    },
+    "reason": "no consistent independently named object base; nearest-public arithmetic does not establish ownership"
+  }
+]
