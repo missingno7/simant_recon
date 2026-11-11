@@ -8029,12 +8029,17 @@
    ]
   },
   "S06:35F5:01CA": {
-   "win16": "_MacTickCount",
-   "confidence": "REJECTED",
+   "win16": "_SendBoyMsg",
+   "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "DOS01CA takes a yard message index, accepts it only when<=22, sets BoyMsgCnt=MacTickCount()+300, BoyMessOn=1 and BoyMsgOffset=index. Win16 MacTickCount is the clock query called inside the corresponding inlined message code. A SimKidInside gap matched the wrapper to its nested timer call; their arguments/results and state changes contradict identity."
-   ]
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member3, _SendBoyMsg at Win16 7:15AE.",
+    "For message<=22, stores BoyMsgCnt=MacTickCount()+300, BoyMessOn=1 and BoyMsgOffset=message. DOS SimKidInside calls this message setter; Win16 inlines the same setter there. It consumes a message index, not a clock-query interface."
+   ],
+   "supersedes": {
+    "win16": "_MacTickCount",
+    "confidence": "REJECTED"
+   }
   },
   "S06:35F5:11FF": {
    "win16": "_SimBird",
@@ -8780,12 +8785,19 @@
    ]
   },
   "root:1CE2:032B": {
-   "win16": "_GInvBox",
-   "confidence": "REJECTED",
+   "win16": "_GInvOutline",
+   "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "DOS 1CE2:032B takes FIVE scalar arguments and inverts FOUR edge strips conditional on nonzero width; Win16 GInvBox takes FOUR coordinates and inverts one filled rectangle. The GRectInvOutline caller was expanded into four GInvBox calls in Win16. DOS 032B instead has the semantic body of Win16 GInvOutline; that alternative still lacks a second independent identity anchor because Win16 GInvOutline has no callers and DOS/Win16 graphics member order is not 1:1."
-   ]
+    "src/root/m1CE2.c:114 (f_1CE2_032B); original-dos.json#root:1CE2:032B",
+    "Win16 evidence/disassembly/cards.jsonl 2:0D8A _GInvOutline; original-win16.json#_GInvOutline",
+    "Anchor 1: GRectInvOutline forwards its four Rect bounds and width to this helper on both sides.",
+    "Anchor 2: Four inverted bands occur in matching top,bottom,left,right order; zero width returns. Windows adjusts edge coordinates, DOS does not."
+   ],
+   "supersedes": {
+    "win16": "_GInvBox",
+    "confidence": "REJECTED"
+   }
   },
   "root:1CE2:0430": {
    "win16": "_GRectInv",
@@ -9043,6 +9055,1052 @@
    "reviewed": "2026-11-11",
    "evidence": [
     "DOS283E:0035 programs AdLib/OPL register pairs at port0x388 and uses the PIT for timing (m283E.asm);0x80F0 is one hardware register/value pair. Win16 RemoveFromAList5:2B42 compacts five ant arrays with BlockMove, called by ant simulation. The shared immediate is incidental and the state domains are incompatible."
+   ]
+  },
+  "S01:328E:000A": {
+   "win16": "_WindowsMono_MakeTable4x4a",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.",
+    "Distinct layout/constant anchor: 64 output byte columns; four rows at offsets0/0x40/0x80/0xC0, alternately mask0xF0/0x0F. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/2x2 are distinguished by the entire row/column/mask layout, not byte similarity. The2x2 pair additionally occupies the corresponding display branches of named Mini_MakeTable."
+   ]
+  },
+  "S01:328E:009D": {
+   "win16": "_WindowsMono_MakeTable4x4b",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.",
+    "Distinct layout/constant anchor: 32 output byte columns; four rows at offsets0/0x20/0x40/0x60, alternately mask0xF0/0x0F. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/2x2 are distinguished by the entire row/column/mask layout, not byte similarity. The2x2 pair additionally occupies the corresponding display branches of named Mini_MakeTable."
+   ]
+  },
+  "S01:328E:012C": {
+   "win16": "_WindowsMono_MakeTable2x2a",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.",
+    "Distinct layout/constant anchor: 32 output byte columns; two rows0/0x20, four source pixels merged with masks0xC0/0x30/0x0C/0x03. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/2x2 are distinguished by the entire row/column/mask layout, not byte similarity. The2x2 pair additionally occupies the corresponding display branches of named Mini_MakeTable."
+   ]
+  },
+  "S01:328E:01D5": {
+   "win16": "_WindowsMono_MakeTable2x2b",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.",
+    "Distinct layout/constant anchor: 16 output byte columns; two rows0/0x10, four source pixels merged with masks0xC0/0x30/0x0C/0x03. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/2x2 are distinguished by the entire row/column/mask layout, not byte similarity. The2x2 pair additionally occupies the corresponding display branches of named Mini_MakeTable."
+   ]
+  },
+  "S03:3253:002F": {
+   "win16": "_Windows_MakeTable1x1",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Confirmed caller/argument anchor: Mini_MakeTable color/packed-pixel branch supplies source,destination,count to DOS S03:3253:002F and Win _Windows_MakeTable1x1, distinguished from the two mono branches.",
+    "Algorithm/constant anchor: consumes two input color bytes per output byte; first translates through a high-nibble table, second through adjacent table+0x10, ORs them, and iterates count/2. Game bitmap assembly, not CRT."
+   ]
+  },
+  "S06:35F5:020C": {
+   "win16": "_SimRain",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member4, _SimRain at Win16 7:15EA.",
+    "TERRAINset!=1; when dry, GlobalKey0xA8 bypasses RRand(32)/RRand(128) gates; starts RainCnt=SRand1(150)+150, calls InitWater and sets boy message0. Otherwise counts down and clears RainOn. Win16 DoSimYard inlines this exact routine; the standalone SimRain body has the same constants and state."
+   ]
+  },
+  "S06:35F5:02B9": {
+   "win16": "_SimKidOutside",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member5, _SimKidOutside at Win16 7:169C.",
+    "Independent confirmed caller DoSimYard selects this no-argument branch when NodeNum>=0x26; the other branch is already confirmed SimKidInside. The Win16 DoSimYard source has the identical NodeNum boundary and outside/inside choice, and the surrounding named Bird/Cat/Dog calls fix the scheduler position."
+   ]
+  },
+  "S06:35F5:0967": {
+   "win16": "_GetMowDir",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member6, _GetMowDir at Win16 7:1F5C.",
+    "Scans four kid directions3 down to0, bounds-checks proposed yard coordinates and consumes an unmowed GrassMap bit; fallback x>10->0,y>14->1,y<1 sets message6/BoyHere4 and returns2, else YardCycle&3. Win16 card7:1F5C inlines IsValidYard/NotMowed/SendBoyMsg and preserves each bound and fallback."
+   ]
+  },
+  "S06:35F5:09F7": {
+   "win16": "_NotMowed",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member7, _NotMowed at Win16 7:203E.",
+    "Tests GrassMap[first coordinate] against1<<second coordinate; if set subtracts that mask and returns1, else0. Win16 NotMowed preserves this test-and-consume operation, distinguishing a mutating mowing query from the pure IsValidYard predicate."
+   ]
+  },
+  "S06:35F5:0A32": {
+   "win16": "_IsValidYard",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member8, _IsValidYard at Win16 7:2072.",
+    "Pure two-coordinate boolean requiring x>=0,y>=0,x<=11,y<=15 on the12x16 yard. Win16 recovered IsValidYard has the identical coordinate order and inclusive bounds, unlike the neighbouring grass-bit setter/query."
+   ]
+  },
+  "S06:35F5:0A5F": {
+   "win16": "_InitGrassMap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member9, _InitGrassMap at Win16 7:2096.",
+    "Writes the first three GrassMap words0 and the next nine words-1. Win16 InitGrassMap initializes the same12-word bit map with the same3+9 partition; this is distinct from per-cell NotMowed and terrain generation."
+   ]
+  },
+  "S06:35F5:1A0F": {
+   "win16": "_FollowBoyDir",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member14, _FollowBoyDir at Win16 7:316E.",
+    "Computes DogPx-BoyPx and DogPy-BoyPy and absolute distances; a co-located mowing boy triggers bark(1,0x7F). At distances<2 returns YardCycle&3, else dy<0->2,dy>1->0,dx<0->1,dx>1->3. Win16 inlines MakeBark and has exactly this boy-relative steering; FollowCatDir instead uses fixed x thresholds5/8."
+   ]
+  },
+  "S06:35F5:1ABF": {
+   "win16": "_FollowCatDir",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member15, _FollowCatDir at Win16 7:32A6.",
+    "Returns1 for DogPx<5,3 for DogPx>8,0 for DogPy>0, otherwise YardCycle&3. Win16 FollowCatDir preserves these thresholds/return codes; unlike FollowBoyDir it does not subtract Boy position or emit a proximity bark."
+   ]
+  },
+  "S06:35F5:1B08": {
+   "win16": "_MakeBark",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member16, _MakeBark at Win16 7:32EA.",
+    "Requires MapMode0,YardMode<2,MacTickCount()>DogBarkDelay; kind0/2 plays sound0x17,kind1 sound0x15,kind3 sound0x16 at caller level. Updates delay=MacTickCount()+SRand1(30)+60. Win16 MakeBark has the same switch, sounds and gating, independently excluding other sound helpers."
+   ]
+  },
+  "S06:35F5:1CEA": {
+   "win16": "_MowerFall",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member18, _MowerFall at Win16 7:34DA.",
+    "Original Win16 callee sequence SRand4,SRand4,KillSpider,SRand4,YellowDeath matches DOS mowing-kill helper: unless tutorial, clears yard A-list ants with3/4 probability, can kill spider and yellow ant (death reason6). The black/red list traversals and FootFall neighbours have different affected state."
+   ]
+  },
+  "S06:35F5:1D9D": {
+   "win16": "_MaintainSwarm",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member19, _MaintainSwarm at Win16 7:3580.",
+    "Applies the same formula separately to B and R swarm counts: positive n>=4 loses n>>2 else loses1; floor by QueenStorage for that colony; cap50. Win16 MaintainSwarm has both colony formulas and same ordering. This is not MowerFall, which kills yard creatures."
+   ]
+  },
+  "S06:35F5:2314": {
+   "win16": "_GetNearbyPatches",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member21, _GetNearbyPatches at Win16 7:3CE4.",
+    "Scans six PatchX/PatchY offsets, bounds0<=x<12/0<=y<16, adds3 for a nonzero black patch and subtracts3 for a nonzero red patch. Win16 GetNearbyPatches preserves the same signed scoring and first-coordinate*16+second indexing."
+   ]
+  },
+  "S06:35F5:2381": {
+   "win16": "_Reproduce",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member22, _Reproduce at Win16 7:3D4C.",
+    "Two ordered SGSRand(4) calls offset the supplied x,y, clamp to0..11/0..15, reject unchanged cell, then increment selected YMapPopB/R and its ColoniesStarted counter only on transition from zero. Win16 Reproduce has the same two RNG calls and black/red grid update; the colony argument discriminates both paths."
+   ]
+  },
+  "S06:35F5:2433": {
+   "win16": "_StartMigrate",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member23, _StartMigrate at Win16 7:3DF2.",
+    "Converts screen point to patch y=(y-0x42)/10,x=(x+y-0xEE)/28; stores selected source and invalidates source x=-1 when outside12x16 or no black population. Original Win16 StartMigrate7:3DF2 has the identical transforms, bounds and nonzero-source check."
+   ]
+  },
+  "S06:35F5:24CA": {
+   "win16": "_EndMigrate",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member24, _EndMigrate at Win16 7:3E6C.",
+    "Requires a selected valid source, applies the same screen-to-patch transform, validates destination, transfers half of source YMapPopB to destination and caps destination at0xFA when sum>=0xFB. Win16 EndMigrate7:3E6C preserves the half-transfer/cap, distinguishing destination commit from StartMigrate selection."
+   ]
+  },
+  "S09:35F5:0D7A": {
+   "win16": "_DoPreLoadInits",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Caller/dataflow anchor: DOS named LoadGame invokes S09:0D7A after opening and before reading the save-record array; Win retains this helper in the same load unit (Win source tu_antedit_9248), although optimized caller code can inline it.",
+    "Distinct state/constant anchor: exact sequence JustXfered=1, LastThemeTime=0, TimeTemp=300, EditMsgDelay=0, then named RandYard(). The300 value, four state writes and callee distinguish it from generic initialization."
+   ]
+  },
+  "S12:384C:1035": {
+   "win16": "_win_DrawMapWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent confirmed-caller registration anchor: DOS and Win named InitApplicationWindows pass DOS S12:1035 / Win3:CE46 to win_SetWinDrawHook(0x100,...), after editor0 and before history0x1500/mode0x1200/caste0x1300/yard0x1900/info0x500 hooks. This establishes the callback boundary, not the larger immediate renderer S12:0B76.",
+    "Control-flow/TU anchor: flags&2 gates repaint and MapMode==0 routes to named MapToYard, otherwise sets clipping for0x100 and draws the map. Followed in both map runs by spider and foot overlay helpers. Win paints a DIB and inlines cursor helpers; DOS calls immediate renderer plus toolbar/data drawing."
+   ]
+  },
+  "S12:384C:10A5": {
+   "win16": "_DrawMapSpider",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: immediately follows the now anchored map-window callback in DOS S12 m384C.c; spider then foot order matches Win3:D10E/D226.",
+    "Distinct resource/state anchor: three scalar arguments x,y,kind; selects bitmap kind+0x44C, then invalidates five cached map rows beginning y-2 by writing0xFF, clipped to rows0..63. Win renders into mapBuf and invalidates HWND regions; DOS renders directly and supports half scale at320 pixels. This distinguishes the two overlays despite their shared lock/unlock tail."
+   ]
+  },
+  "S12:384C:1181": {
+   "win16": "_DrawMapFoot",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: immediately follows the now anchored map-window callback in DOS S12 m384C.c; spider then foot order matches Win3:D10E/D226.",
+    "Distinct resource/state anchor: FootHere gate, FootX/FootY scaling, bitmap BoyDir+0x4B0; BoyHere3/4 adds mower bitmap0x4BA+(direction parity); invalidates eight cached rows starting FootY, writes0xFF, sets newMapForce=1. Win renders into mapBuf and invalidates HWND regions; DOS renders directly and supports half scale at320 pixels. This distinguishes the two overlays despite their shared lock/unlock tail."
+   ]
+  },
+  "S25:3BA4:13AB": {
+   "win16": "_GetMyDis",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member8 _GetMyDis.",
+    "Independent call/body anchor: both consist of GetDis calls routed by source/target planes: same plane uses direct distance; yard/nest paths sum distances through the corresponding last hole/exit, and crossing the two nests adds the yard leg. This six-scalar coordinate/plane distance function lies between ExitNest and GetMyBestDirs and differs from the direction-returning routing wrapper GetMyDir."
+   ]
+  },
+  "S25:3BA4:188A": {
+   "win16": "_CheckMyBestDirs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member11 _CheckMyBestDirs.",
+    "Independent body/callee anchor: calls confirmed GetMyBestDirs once then repeatedly from successive Dx8/Dy8 positions until negative or count64; stores step count through its leading far pointer, converts any still-nonnegative direction to-1 and returns it. Win16 recovered CheckMyBestDirs6:8B40 is the same bounded forward probe, not a random-direction chooser."
+   ]
+  },
+  "S25:3BA4:1935": {
+   "win16": "_GetMyNextRandDirs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member12 _GetMyNextRandDirs.",
+    "Independent caller-body anchor: CheckMyBestDirs tests whether the straight best-direction path yields-2; then call GetMyRandDirs with the two global crazy-direction outputs, otherwise set MeCrazyCnt=-1 and call GetMyBestDirs. Win16 card6:8BEA inlines the same64-step CheckMyBestDirs loop before that branch, retaining the-2 test and fallback. It advances an existing random phase rather than initializing it."
+   ]
+  },
+  "S25:3BA4:19AD": {
+   "win16": "_GetMyInitialRandDir",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member13 _GetMyInitialRandDir.",
+    "Independent state/callee anchor: sets MeCrazyDir=GetDir(x,y,a,b)-1, MeCrazyCnt=0x10, MeCrazyRot=0, then calls GetMyRandDirs with addresses of those global state words. Win16 InitialRandDir6:8CDE performs exactly those stores/calls. Recovered prototypes differ in unused slots/return spelling, so only observed argument roles and state effects are claimed."
+   ]
+  },
+  "S25:3BA4:1A0D": {
+   "win16": "_GetMyBestDir",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member14 _GetMyBestDir.",
+    "Independent state-machine anchor: MeCrazyCnt<0 first uses GetMyBestDirs; direction-2 AND counter-2 starts initial random state, while a nonnegative counter uses the next-random-phase calculation and decrements the counter. Win16 card6:8D3A inlines InitialRandDir/NextRandDirs and preserves that counter-branch/return contract. The outer GetMyDir separately handles cross-plane goals."
+   ]
+  },
+  "root:004A:000A": {
+   "win16": "_goStepRight",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: x += step, cap at hScrollMax; moved=1 only on the non-clamped path; step==1 invokes the right scroll hook. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:0052": {
+   "win16": "_goStepLeft",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: x -= step, floor at zero; step==1 invokes the left scroll hook. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:008A": {
+   "win16": "_goStepDown",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: y += step, cap at vertical maximum; step==1 invokes the down scroll hook. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:00D2": {
+   "win16": "_goStepUp",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: y -= step, floor at zero; step==1 invokes the up scroll hook. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:010A": {
+   "win16": "_goStepNE",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: decrement y and increment x independently, clamp each; set moved if either axis succeeds. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:0172": {
+   "win16": "_goStepSE",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: increment both y and x, clamp independently. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:01E9": {
+   "win16": "_goStepSW",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: increment y and decrement x, clamp independently. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:0253": {
+   "win16": "_goStepNW",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.",
+    "State/control-flow anchor: decrement both y and x, floor independently. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish helper; Win inlines that exact tail. Both return the moved boolean."
+   ]
+  },
+  "root:004A:02AD": {
+   "win16": "_FinishDiagStep",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: final three entries of the same complete eight-direction plus three-finisher module, matching Win 7676/774E/77C6 in order.",
+    "Switch/state anchor: MapPlane cases 1/2/3 update AMapPnt/BMapPnt/RMapPnt both x and y using EditColumns/2 and/or EditRows/2 plus MapPnt; tail calls UpdateEdit then the empty drawing hook. This distinguishes the complete family."
+   ]
+  },
+  "root:004A:038B": {
+   "win16": "_FinishHorzStep",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: final three entries of the same complete eight-direction plus three-finisher module, matching Win 7676/774E/77C6 in order.",
+    "Switch/state anchor: MapPlane cases 1/2/3 update AMapPnt/BMapPnt/RMapPnt x only using EditColumns/2 and/or EditRows/2 plus MapPnt; tail calls UpdateEdit then the empty drawing hook. This distinguishes the complete family."
+   ]
+  },
+  "root:004A:040E": {
+   "win16": "_FinishVertStep",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: final three entries of the same complete eight-direction plus three-finisher module, matching Win 7676/774E/77C6 in order.",
+    "Switch/state anchor: MapPlane cases 1/2/3 update AMapPnt/BMapPnt/RMapPnt y only using EditColumns/2 and/or EditRows/2 plus MapPnt; tail calls UpdateEdit then the empty drawing hook. This distinguishes the complete family."
+   ]
+  },
+  "root:0244:0022": {
+   "win16": "_FlipHandleWords",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Caller/dataflow anchor: named initStuff loads resource1000/type9, checks failure, calls this helper, then accesses FracSineTab and proceeds to initSimWindows/OverlayOutsideTiles in both versions.",
+    "Algorithm/TU anchor: second entry after BlockMove before the Barrier0x50/0x90 setter pair; visits allocation_size/2 words and swaps each word high/low byte. DOS uses RallocSize and direct handle dereference plus debug logging, Win mem_Size/Lock/Unlock; these are platform memory-layer differences."
+   ]
+  },
+  "root:0244:00A7": {
+   "win16": "_OverlayOutsideTiles",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m0244.c consists of named BlockMove, word-swap helper, outside setter, inside setter; Win SIMTWO has the same four-member run BlockMove7850, FlipHandleWords7860, OverlayOutsideTiles78B2, OverlayInsideTiles78BE.",
+    "Distinct state anchor: writes Barrier=0x50 and nothing else; outside and inside cannot be swapped because their constants differ."
+   ]
+  },
+  "root:0244:00BA": {
+   "win16": "_OverlayInsideTiles",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m0244.c consists of named BlockMove, word-swap helper, outside setter, inside setter; Win SIMTWO has the same four-member run BlockMove7850, FlipHandleWords7860, OverlayOutsideTiles78B2, OverlayInsideTiles78BE.",
+    "Distinct state anchor: writes Barrier=0x90 and nothing else; outside and inside cannot be swapped because their constants differ."
+   ]
+  },
+  "root:0250:0E15": {
+   "win16": "_win_EditChanged",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU/callback anchor: DOS m0250.c places this entry immediately before named OpenEditWindow, ForceUpdateEdit, DoEditUpdateDraw, UpdateEdit, UpdateEditWindow, DrawEdit, window-draw callback and BoundEditPosition, matching the Win ANTEDIT 0C62..15B4 editor run.",
+    "Geometry/state anchor: win_GetObjRect(4) obtains editTileRect; computes tile columns/rows, invalidates tile deltas, then clamps MapPnt to a MapPlane-selected width 128 or 64 and height64. Win replaces fixed DOS delta arrays with allocated buffers and inlines the same bound helper. This does not revive the rejected DOS 1E57:038E clip-list pair."
+   ]
+  },
+  "root:0250:0EC6": {
+   "win16": "_UpdateEditWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: immediately after named UpdateEdit and before DrawEdit/window-draw/BoundEditPosition in both editor runs (Win1496,14EE,14F0,15B4).",
+    "Call/argument anchor: exact no-argument UpdateEdit-only wrapper, with no extra graphics or event work; distinguished from the other DOS UpdateEdit callers by that complete body and run position."
+   ]
+  },
+  "root:0250:0EDA": {
+   "win16": "_win_DrawEditWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Independent confirmed-caller registration: DOS InitApplicationWindows registers root0250:0EDA for window0 with win_SetWinDrawHook; Win registers win_DrawEditWindow for the same window0 in the otherwise matched seven-hook sequence.",
+    "Callback/TU anchor: following DrawEdit and preceding BoundEditPosition in the paired editor run; receives flags and gates repaint on flags&2 in both versions.",
+    "Object/state anchor: repaint handles edit content then editor controls/object7. DOS calls edit geometry reset around its immediate tile renderer and draws object7 bitmap (CurGameType3 selects CurExpTool+0x13EC, else0x13F3); Win paints editBuf, draws edit graphs, and retrieves object7 rect. Platform buffer implementation differs; callback identity and object7 role remain."
+   ]
+  },
+  "root:0250:0F2C": {
+   "win16": "_BoundEditPosition",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Switch anchor: same MapPlane switch cases0/1 -> width0x80, default ->0x40, with all y coordinates bounded to0x40 and negative coordinates clamped to zero.",
+    "TU/dataflow anchor: follows the paired edit-window callback, precedes named CenterEdit, and is called at the end of DOS win_EditChanged; Win inlines the same computation at the end of its win_EditChanged while also retaining this out-of-line entry."
+   ]
+  },
+  "root:0250:1018": {
+   "win16": "_DoCalcTile",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Switch/data anchor: DOS root0250:1018 and Win _TEXT4A6B select MapPlane0/1 surface,2 black,3 red; surface ELayerMode0..4 selects PherMapA/BN/BT/RN/RT with half-resolution indexing, then derives separate ground/life tile results. DOS accepts editor-relative coordinates and adds MapPnt, Win accepts absolute coordinates.",
+    "Rare resource constant anchor: same life markers0xFF/0xFE choose MeBase+MeType+(MeEgg or MeDir) with surface bases0x380/0x388, nest bases0x300/0x308; ordinary life adds0x100 surface or0x200 nest, nest ground subtracts0x70. This combined resource-number scheme distinguishes it from generic tile copying.",
+    "Checked the original DOS instructions directly (dos-original-cards-2.json): 1070..110E selects the five scent arrays, 112A..1145 falls back to MapA, 1160..11A1 contains FF/FE and0x380/0x388 resource construction, and11B1..1294 handles distinct black/red nests with0x300/0x308. This address has no current exact claim in layout/manifest.json; the naming conclusion relies on these original operations, not an unverified source-match claim."
+   ]
+  },
+  "root:14EE:0E46": {
+   "win16": "_FloodNestB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Whole-TU anchor: final member of DOS m14EE.c after the preceding16 digging/smoothing members of the17-member module DigMyNewHole,CreateNewHole,DigMyTile,MakeNewHoleB,CanBeHouseHole,MakeNewHoleR,HoleBorder,DigTileB/R,DigTileThemB/R,SmoothEdgesB,RIsItDirt,SmoothEdgesR,FixExitMapB/R; Win SIMONE16AE..29DA preserves the complete order, ending FloodNestB immediately after named FixExitMapR.",
+    "Distinct tile-transform anchor: original Win card5:29DA and DOS body scan all64 MapB columns and rows3..63; tile values0x20..0x2D add0x31, otherwise values<=0x13 become0x50. Red MapR is never touched, so this cannot be swapped with a red-colony helper."
+   ]
+  },
+  "root:1699:0000": {
+   "win16": "_CopyChar",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Confirmed caller anchor: named MakeBalloon calls this entry at the corresponding glyph, repeated-fill, or buffer-swap position with the corresponding far pointers and scalar arguments.",
+    "Distinct algorithm/TU anchor: DOS m1699.asm and Win CopyText assembly preserve CopyChar then CopyCharRep and later exchange; copies one source byte per row for exactly16 rows, advancing destination by bitmap_width/8; x/y placement uses the bitmap header. This is game balloon drawing assembly, not compiler runtime."
+   ]
+  },
+  "root:1699:0050": {
+   "win16": "_CopyCharRep",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Confirmed caller anchor: named MakeBalloon calls this entry at the corresponding glyph, repeated-fill, or buffer-swap position with the corresponding far pointers and scalar arguments.",
+    "Distinct algorithm/TU anchor: DOS m1699.asm and Win CopyText assembly preserve CopyChar then CopyCharRep and later exchange; same16-row glyph layout but repeats each source row byte count times using the extra count argument. This is game balloon drawing assembly, not compiler runtime."
+   ]
+  },
+  "root:1699:01AA": {
+   "win16": "_exchange",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Confirmed caller anchor: named MakeBalloon calls this entry at the corresponding glyph, repeated-fill, or buffer-swap position with the corresponding far pointers and scalar arguments.",
+    "Distinct algorithm/TU anchor: DOS m1699.asm and Win CopyText assembly preserve CopyChar then CopyCharRep and later exchange; exchanges exactly count bytes between two far buffers, writing each displaced destination byte back to its source. This is game balloon drawing assembly, not compiler runtime."
+   ]
+  },
+  "root:1959:0002": {
+   "win16": "_FlipWord",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Whole-module anchor: DOS m1959.asm contains exactly the word-then-long byte-order helper pair, in the same order as Win _TEXT7356/7360; these are explicit game assembly helpers, not imported CRT symbols.",
+    "Interface/data-transform anchor: 16-bit argument: swap its two bytes, return in AX. The family is distinguished by word versus long input/result and actual byte permutation. Word helper is used while loading music resource0x12 in DOS f0000:0193, reached from named myBeginSong; Win myBeginSong/ExtractWord use FlipWord for the same endian conversion.",
+    "Independent original confirmed-caller anchor checked in Win myBeginSong2:85BD..8603: load resource kind0x12, lock it, FlipWord(header word+0), then FlipWord(header word+6), unlock/release. DOS named myBeginSong reaches f0000:0193, which loads kind0x12 and calls root1959:0002 on hdr[0] and hdr[3] before releasing the handle."
+   ]
+  },
+  "root:1959:000C": {
+   "win16": "_FlipLong",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Whole-module anchor: DOS m1959.asm contains exactly the word-then-long byte-order helper pair, in the same order as Win _TEXT7356/7360; these are explicit game assembly helpers, not imported CRT symbols.",
+    "Interface/data-transform anchor: 32-bit argument: reverse bytes within each word and exchange high/low word roles, return DX:AX. The family is distinguished by word versus long input/result and actual byte permutation. Word helper is used while loading music resource0x12 in DOS f0000:0193, reached from named myBeginSong; Win myBeginSong/ExtractWord use FlipWord for the same endian conversion."
+   ]
+  },
+  "root:1B05:0008": {
+   "win16": "_UnpackInit",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Confirmed caller positions: DBRecall, GPutPacked and gr_BitMapSize each call1B05:0008 to initialize compressed input before1B05:0046 decodes it, matching Win16 UnpackInit/Unpack. Both pass compressed far pointer and signed input length.",
+    "Independent decoder constants/state: fills0xFEE ring bytes with spaces0x20, sets ring position0xFEE and flag/resume state0, and converts negative input length to0x7FFF. Win16 UnpackInit7:A62A has exactly that initialization; it is followed by Unpack/SetBuf/FileOpen/FileRead/FileClose in the same six-member decoder run as DOS."
+   ]
+  },
+  "root:1B05:0046": {
+   "win16": "_Unpack",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Confirmed caller positions: DBRecall, GPutPacked and gr_BitMapSize call0046 at Win16 Unpack's output-producing slots after the corresponding input initializer, passing destination pointer and requested output count and consuming bytes-produced.",
+    "Independent LZSS state-machine anchor:4096-byte ring masked0xFFF, flag-marker byte0xFF, literal/back-reference token branches, high-nibble offset plus low-nibble length with bias2, and saved resume modes1..5 when input/output ends mid-token. Both original symbolic bodies preserve the same ring/input/flag state across calls; no code-byte similarity is counted."
+   ]
+  },
+  "root:1B05:0178": {
+   "win16": "_UnpackSetBuf",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Preserved TU run: DOS0008,0046,0178,018E,01C7,022A = Win16 UnpackInit7:A62A,UnpackA668,UnpackSetBufA79A,UnpackFileOpenA7B0,UnpackFileReadA7E9,UnpackFileCloseA84C in the same six-member order; the first two are independently fixed by three named callers.",
+    "Independent state/argument anchor:0178 takes a far read-buffer pointer and word capacity, stores both pointer words and capacity without decoding, opening or reading. Win16 UnpackSetBuf does the same three state stores; the subsequent file-open/read helpers use those exact fields."
+   ]
+  },
+  "root:1B05:018E": {
+   "win16": "_UnpackFileOpen",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Six-member TU anchor:018E occupies FileOpen between SetBuf and FileRead in the decoder run independently oriented by DBRecall/GPutPacked/gr_BitMapSize's Init/Unpack calls.",
+    "Independent runtime/control contract:open(path,0x8000), save descriptor, return0 when fd<=0; otherwise initialize UnpackInit(configuredBuffer,0) and return1. Win16 UnpackFileOpen7:A7B0 has the same binary-open flag, success threshold, configured-buffer argument and initializer call."
+   ]
+  },
+  "root:1B05:01C7": {
+   "win16": "_UnpackFileRead",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Six-member TU anchor:01C7 lies after FileOpen and before FileClose, matching Win16 UnpackFileRead7:A7E9 in the run oriented independently by Init/Unpack callers.",
+    "Independent runtime/loop anchor: when compressed input is exhausted read(handle,configuredBuffer,capacity), stop on read<=0; call Unpack(dest+done,requested-done), accumulate produced bytes and refill until requested output is complete. Returns partial byte count on EOF. Win16 preserves that refill/decode loop and same argument/result use."
+   ]
+  },
+  "root:1B05:022A": {
+   "win16": "_UnpackFileClose",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "Six-member TU anchor:022A is the final FileClose entry after the verified FileOpen/FileRead members, matching Win16 UnpackFileClose7:A84C.",
+    "Independent state/runtime anchor: closes the single descriptor stored by its own FileOpen, with no caller-supplied descriptor, output buffer or object handle. Win16 FileClose uses the same module-owned unpack handle; this differentiates it from generic CRT close and resource/cache cleanup routines."
+   ]
+  },
+  "root:24FA:0004": {
+   "win16": "_MemRChr",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS m24FA.asm preserves reverse-byte-search, mono-to-Tandy expansion, named invert and final INT3 entry in that order; Win SIMTWO F774/F7CF/F846/F85B preserves the same complete four-role run, including already named invert. The gap before Win F7CF is not another symbol boundary.",
+    "Interface/algorithm anchor: takes a far end pointer, search byte and count; scans backwards, restores forward direction, returns matched far address (post-scan pointer+1) or null. DOS named PrevListLine uses it to find previous list-line boundaries. This distinguishes it from forward memchr and from the adjacent pixel converter."
+   ]
+  },
+  "root:24FA:0029": {
+   "win16": "_ConvertMonoToTandy",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: second of the same four-role reverse-search / pixel-expansion / named invert / INT3 module in DOS m24FA.asm and Win SIMTWO F774..F85B. The final named invert independently anchors this run.",
+    "Argument/layout anchor: destination far pointer, source far pointer, width,height; each row emits ceil(width/2) bytes by extracting successive2-bit groups through a four-entry CS lookup table, with four unrolled groups per input byte. DOS font bitmap builder root24AB:0002 invokes it specifically for display mode2; no byte-similarity score used."
+   ]
+  },
+  "root:2505:033C": {
+   "win16": "_win_WinObjAddr",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "TU anchor: DOS2505:033C sits immediately between named win_ObjAddr and win_WinAddr, exactly as Win7:C376 between C32E andC3CE.",
+    "Argument/dataflow anchor: takes windowPart,objectPart and resolves (windowPart&0xFF00)+objectPart through win_ObjAddr; Win inlines the object-count bounds check, same diagnostic \"Attempt to get obj address outsize window\", and indexed pointer fetch. DOS wrapper delegates that check to the confirmed win_ObjAddr."
+   ]
+  },
+  "S00:31AD:0122": {
+   "win16": "_GPatBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:247 (o00_31AD_0122); original-dos.json#S00:31AD:0122",
+    "Win16 evidence/disassembly/cards.jsonl 2:1AB2 _GPatBox; original-win16.json#_GPatBox",
+    "Anchor 1: win_RectFill and GRectPartialMixedOutline use g_9138; GMixedFill helpers supply 0x20 with a high-byte pattern selector; bodies use pattern/colour tables.",
+    "Anchor 2: Win16 GRectPartialMixedOutline supplies the same 0x20 checker selector and foreground/background attribute pair; DOS pattern bodies consume the same colour/pattern convention."
+   ]
+  },
+  "S00:31AD:037C": {
+   "win16": "_GInvBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:546 (o00_31AD_037C); original-dos.json#S00:31AD:037C",
+    "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
+    "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
+    "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
+   ]
+  },
+  "S00:31AD:0522": {
+   "win16": "_GPicSize",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:751 (o00_31AD_0522); original-dos.json#S00:31AD:0522",
+    "Win16 evidence/disassembly/cards.jsonl 2:3DB2 _GPicSize; original-win16.json#_GPicSize",
+    "Anchor 1: GPutPacked chooses slot 6 for colour-depth resources, just as the Win16 caller chooses GPicSize.",
+    "Anchor 2: S00 byte-count body multiplies covered byte columns by height and four planes, then adds the two-word header; Win16 GPicSize has the same four-plane/header convention (edge convention differs)."
+   ]
+  },
+  "S00:31AD:0CF9": {
+   "win16": "_GPutPicS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:1908 (o00_31AD_0CF9); original-dos.json#S00:31AD:0CF9",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
+    "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
+    "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
+   ]
+  },
+  "S00:31AD:11FB": {
+   "win16": "_GImgSize",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:2579 (o00_31AD_11FB); original-dos.json#S00:31AD:11FB",
+    "Win16 evidence/disassembly/cards.jsonl 2:3DD6 _GImgSize; original-win16.json#_GImgSize",
+    "Anchor 1: GPutPacked chooses slot 7 for monochrome-depth resources, just as Win16 chooses GImgSize.",
+    "Anchor 2: Body shares the covered-byte-column helper with colour size but omits its plane multiplier and adds 4, matching the independent one-bit/header contract."
+   ]
+  },
+  "S00:31AD:1206": {
+   "win16": "_GPutImgS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:2588 (o00_31AD_1206); original-dos.json#S00:31AD:1206",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
+    "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
+    "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
+   ]
+  },
+  "S00:31AD:148C": {
+   "win16": "_GLine",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:2910 (o00_31AD_148C); original-dos.json#S00:31AD:148C",
+    "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
+    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
+   ]
+  },
+  "S00:31AD:1659": {
+   "win16": "_GSetAttrib",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:3135 (o00_31AD_1659); original-dos.json#S00:31AD:1659",
+    "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
+    "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
+    "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
+   ]
+  },
+  "S00:31AD:16A9": {
+   "win16": "_GBoxFill",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S00/m31AD.asm:3173 (o00_31AD_16A9); original-dos.json#S00:31AD:16A9",
+    "Win16 evidence/disassembly/cards.jsonl 2:19E6 _GBoxFill; original-win16.json#_GBoxFill",
+    "Anchor 1: GRectFill, GBoxOutline and DrawEditGraphs pass left, top, right, bottom, colour through g_9134; bodies fill VRAM rows with edge handling.",
+    "Anchor 2: Win16 GRectFill and GBoxOutline invoke GBoxFill with the same ordered coordinates and colour; DOS bodies normalize edges and paint VRAM rows."
+   ]
+  },
+  "S01:3126:0167": {
+   "win16": "_GSetAttrib",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S01/m3126.asm:316 (o01_3126_0167); original-dos.json#S01:3126:0167",
+    "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
+    "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
+    "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
+   ]
+  },
+  "S01:3126:024C": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S01/m3126.asm:406 (o01_3126_024C); original-dos.json#S01:3126:024C",
+    "Dispatch slots3 and4 are the same address. Win16 _GBoxFill and _GPatBox are separate symbols; neither uniquely identifies the combined mono rasterizer. Same purpose in both API roles is established, but a unique recovered spelling is not."
+   ]
+  },
+  "S01:3126:0414": {
+   "win16": "_GInvBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S01/m3126.asm:615 (o01_3126_0414); original-dos.json#S01:3126:0414",
+    "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
+    "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
+    "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
+   ]
+  },
+  "S01:3126:0437": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S01/m3126.asm:632 (o01_3126_0437); original-dos.json#S01:3126:0437",
+    "Dispatch slots 6 and 7 are the same address. Win16 _GPicSize and _GImgSize are separate symbols; neither uniquely identifies this shared native-size routine. Use a DOS descriptive name."
+   ]
+  },
+  "S01:3126:0516": {
+   "win16": "_GPutImgS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S01/m3126.asm:737 (o01_3126_0516); original-dos.json#S01:3126:0516",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
+    "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
+    "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
+   ]
+  },
+  "S01:3126:073C": {
+   "win16": "_GPutPicS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S01/m3126.asm:1038 (o01_3126_073C); original-dos.json#S01:3126:073C",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
+    "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
+    "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
+   ]
+  },
+  "S01:3126:0C7A": {
+   "win16": "_GLine",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S01/m3126.asm:1659 (o01_3126_0C7A); original-dos.json#S01:3126:0C7A",
+    "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
+    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
+   ]
+  },
+  "S02:3126:0040": {
+   "win16": "_GSetAttrib",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:151 (o02_3126_0040); original-dos.json#S02:3126:0040",
+    "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
+    "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
+    "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
+   ]
+  },
+  "S02:3126:0185": {
+   "win16": "_GPatBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:294 (o02_3126_0185); original-dos.json#S02:3126:0185",
+    "Win16 evidence/disassembly/cards.jsonl 2:1AB2 _GPatBox; original-win16.json#_GPatBox",
+    "Anchor 1: win_RectFill and GRectPartialMixedOutline use g_9138; GMixedFill helpers supply 0x20 with a high-byte pattern selector; bodies use pattern/colour tables.",
+    "Anchor 2: Win16 GRectPartialMixedOutline supplies the same 0x20 checker selector and foreground/background attribute pair; DOS pattern bodies consume the same colour/pattern convention."
+   ]
+  },
+  "S02:3126:027C": {
+   "win16": "_GBoxFill",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:401 (o02_3126_027C); original-dos.json#S02:3126:027C",
+    "Win16 evidence/disassembly/cards.jsonl 2:19E6 _GBoxFill; original-win16.json#_GBoxFill",
+    "Anchor 1: GRectFill, GBoxOutline and DrawEditGraphs pass left, top, right, bottom, colour through g_9134; bodies fill VRAM rows with edge handling.",
+    "Anchor 2: Win16 GRectFill and GBoxOutline invoke GBoxFill with the same ordered coordinates and colour; DOS bodies normalize edges and paint VRAM rows."
+   ]
+  },
+  "S02:3126:03B1": {
+   "win16": "_GInvBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:542 (o02_3126_03B1); original-dos.json#S02:3126:03B1",
+    "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
+    "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
+    "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
+   ]
+  },
+  "S02:3126:03D4": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:559 (o02_3126_03D4); original-dos.json#S02:3126:03D4",
+    "Dispatch slots 6 and 7 are the same address. Win16 _GPicSize and _GImgSize are separate symbols; neither uniquely identifies this shared native-size routine. Use a DOS descriptive name."
+   ]
+  },
+  "S02:3126:0505": {
+   "win16": "_GPutPicS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:704 (o02_3126_0505); original-dos.json#S02:3126:0505",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
+    "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
+    "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
+   ]
+  },
+  "S02:3126:0636": {
+   "win16": "_GPutImgS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:835 (o02_3126_0636); original-dos.json#S02:3126:0636",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
+    "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
+    "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
+   ]
+  },
+  "S02:3126:073A": {
+   "win16": "_GLine",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S02/m3126.asm:947 (o02_3126_073A); original-dos.json#S02:3126:073A",
+    "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
+    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
+   ]
+  },
+  "S03:3126:019E": {
+   "win16": "_GSetAttrib",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:192 (o03_3126_019E); original-dos.json#S03:3126:019E",
+    "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
+    "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
+    "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
+   ]
+  },
+  "S03:3126:03C2": {
+   "win16": "_GPatBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:437 (o03_3126_03C2); original-dos.json#S03:3126:03C2",
+    "Win16 evidence/disassembly/cards.jsonl 2:1AB2 _GPatBox; original-win16.json#_GPatBox",
+    "Anchor 1: win_RectFill and GRectPartialMixedOutline use g_9138; GMixedFill helpers supply 0x20 with a high-byte pattern selector; bodies use pattern/colour tables.",
+    "Anchor 2: Win16 GRectPartialMixedOutline supplies the same 0x20 checker selector and foreground/background attribute pair; DOS pattern bodies consume the same colour/pattern convention."
+   ]
+  },
+  "S03:3126:059C": {
+   "win16": "_GBoxFill",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:646 (o03_3126_059C); original-dos.json#S03:3126:059C",
+    "Win16 evidence/disassembly/cards.jsonl 2:19E6 _GBoxFill; original-win16.json#_GBoxFill",
+    "Anchor 1: GRectFill, GBoxOutline and DrawEditGraphs pass left, top, right, bottom, colour through g_9134; bodies fill VRAM rows with edge handling.",
+    "Anchor 2: Win16 GRectFill and GBoxOutline invoke GBoxFill with the same ordered coordinates and colour; DOS bodies normalize edges and paint VRAM rows."
+   ]
+  },
+  "S03:3126:070A": {
+   "win16": "_GInvBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:816 (o03_3126_070A); original-dos.json#S03:3126:070A",
+    "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
+    "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
+    "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
+   ]
+  },
+  "S03:3126:072D": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:833 (o03_3126_072D); original-dos.json#S03:3126:072D",
+    "Dispatch slots 6 and 7 are the same address. Win16 _GPicSize and _GImgSize are separate symbols; neither uniquely identifies this shared native-size routine. Use a DOS descriptive name."
+   ]
+  },
+  "S03:3126:091F": {
+   "win16": "_GPutPicS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:1038 (o03_3126_091F); original-dos.json#S03:3126:091F",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
+    "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
+    "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
+   ]
+  },
+  "S03:3126:0C11": {
+   "win16": "_GPutImgS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:1419 (o03_3126_0C11); original-dos.json#S03:3126:0C11",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
+    "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
+    "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
+   ]
+  },
+  "S03:3126:104D": {
+   "win16": "_GLine",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/S03/m3126.asm:1952 (o03_3126_104D); original-dos.json#S03:3126:104D",
+    "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
+    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
+   ]
+  },
+  "root:1B4E:003B": {
+   "win16": "_GPutPic",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1B4E.asm:143 (f_1B4E_003B); original-dos.json#root:1B4E:003B",
+    "Win16 evidence/disassembly/cards.jsonl 2:3C9A _GPutPic; original-win16.json#_GPutPic",
+    "Anchor 1: win_DrawBitMap on both sides chooses this colour-picture header adapter; DOS caller src/root/m259D.c and Win16 _win_DrawBitMap.",
+    "Anchor 2: Both read width,height from the first four bytes and pass payload+4 with x,y to the colour rendering path. Windows adds a mask parameter; DOS uses current raster state."
+   ]
+  },
+  "root:1B4E:005E": {
+   "win16": "_GPutImg",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1B4E.asm:162 (f_1B4E_005E); original-dos.json#root:1B4E:005E",
+    "Win16 evidence/disassembly/cards.jsonl 2:3D02 _GPutImg; original-win16.json#_GPutImg",
+    "Anchor 1: win_DrawBitMap selects this header adapter for monochrome data on both sides.",
+    "Anchor 2: Both forward the first two header words and payload+4 to monochrome rendering; DOS calls slot 11 and Windows calls DoMonoBitmap."
+   ]
+  },
+  "root:1CE2:0013": {
+   "win16": "_GBoxFillOutline",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:21 (f_1CE2_0013); original-dos.json#root:1CE2:0013",
+    "Win16 evidence/disassembly/cards.jsonl 2:0B18 _GBoxFillOutline; original-win16.json#_GBoxFillOutline",
+    "Anchor 1: Signature is five rectangle/thickness words; positioned before text/checker/outline adapters on both sides.",
+    "Anchor 2: Fill uses background colour then already paired GBoxOutline; independent five-band effect and fore/back state agree (Windows inlines outline)."
+   ]
+  },
+  "root:1CE2:0077": {
+   "win16": "_GTextBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:39 (f_1CE2_0077); original-dos.json#root:1CE2:0077",
+    "Win16 evidence/disassembly/cards.jsonl 2:0BBC _GTextBox; original-win16.json#_GTextBox",
+    "Anchor 1: Five coordinate/colour arguments, text-coordinate adapter before checker helpers in the same graphics family.",
+    "Anchor 2: Both shift left/right by3 and include bottom+1; DOS additionally maps encoded text rows through font-cell height, a platform coordinate adaptation."
+   ]
+  },
+  "root:1CE2:0124": {
+   "win16": "_GRectChecker",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:59 (f_1CE2_0124); original-dos.json#root:1CE2:0124",
+    "Win16 evidence/disassembly/cards.jsonl 2:0BE0 _GRectChecker; original-win16.json#_GRectChecker",
+    "Anchor 1: Rect-pointer entry followed by coordinate-form sibling immediately before formatted text/outline family.",
+    "Anchor 2: Exact distinctive selector ((_foreColor high byte+0x10)<<8)|0x20 and Rect fields passed to paired pattern slot4 agree."
+   ]
+  },
+  "root:1CE2:014B": {
+   "win16": "_GCheckerBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:64 (f_1CE2_014B); original-dos.json#root:1CE2:014B",
+    "Win16 evidence/disassembly/cards.jsonl 2:0C10 _GCheckerBox; original-win16.json#_GCheckerBox",
+    "Anchor 1: Coordinate-form sibling of Rect checker adapter.",
+    "Anchor 2: Same four ordered bounds and distinctive foreground-high-byte+0x10, low0x20 pattern selector on both sides."
+   ]
+  },
+  "root:1CE2:0278": {
+   "win16": "_GRectPartialOutline",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:98 (f_1CE2_0278); original-dos.json#root:1CE2:0278",
+    "Win16 evidence/disassembly/cards.jsonl 2:0CC2 _GRectPartialOutline; original-win16.json#_GRectPartialOutline",
+    "Anchor 1: GRectPartialMixedOutline calls this when colours equal/mono on both sides.",
+    "Anchor 2: Four side-mask bits2,8,1,4 select top,bottom,left,right bands, same Rect/thickness/colour parameter order; Windows adds null guard."
+   ]
+  },
+  "root:1CE2:048D": {
+   "win16": "_GRectFillOutline",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:155 (f_1CE2_048D); original-dos.json#root:1CE2:048D",
+    "Win16 evidence/disassembly/cards.jsonl 2:0FC6 _GRectFillOutline; original-win16.json#_GRectFillOutline",
+    "Anchor 1: Rect/thickness wrapper directly after named GRectFill before GSaveRect/GPutPacked family.",
+    "Anchor 2: Background rectangle fill followed by foreground GBoxOutline; Windows inlines the latter and adds null check."
+   ]
+  },
+  "root:1CE2:0951": {
+   "win16": "_GMixedFill",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:319 (f_1CE2_0951); original-dos.json#root:1CE2:0951",
+    "Win16 evidence/disassembly/cards.jsonl 2:131C _GMixedFill; original-win16.json#_GMixedFill",
+    "Anchor 1: Located after GPutPacked and before coordinate mixed-fill / named GRectPartialMixedOutline family.",
+    "Anchor 2: Unique mono (fore XOR back)&0xF0 test plus nonmono fore!=back; unequal colours set attribute pattern0x20 then checker fill; equal colours solid fill."
+   ]
+  },
+  "root:1CE2:099C": {
+   "win16": "_GMixedFillBox",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m1CE2.c:334 (f_1CE2_099C); original-dos.json#root:1CE2:099C",
+    "Win16 evidence/disassembly/cards.jsonl 2:139E _GMixedFillBox; original-win16.json#_GMixedFillBox",
+    "Anchor 1: Coordinate mixed-fill sibling between Rect variant and named GRectPartialMixedOutline.",
+    "Anchor 2: Same fore!=back branch, pattern0x20 attribute call and distinctive checker selector; equal case passes colour to box fill."
+   ]
+  },
+  "root:208F:0093": {
+   "win16": "_gr_CenterStrInRect",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m208F.c:58 (f_208F_0093); original-dos.json#root:208F:0093",
+    "Win16 evidence/disassembly/cards.jsonl 2:48F0 _gr_CenterStrInRect; original-win16.json#_gr_CenterStrInRect",
+    "Anchor 1: Both call the independently paired font_StringWidth, font_FontHeight twice and font_PrintStr in that order with the supplied string/current font. Rect+string interface is also shared with the adjacent clearing sibling.",
+    "Anchor 2: Both copy Rect, center using width/height, clamp left, set right=left+width and bottom=top+height, then print at the adjusted top-left. The distinctive geometry and field layout establish the data/effect anchor independently of the named font-callee sequence; direct callers differ between versions."
+   ]
+  },
+  "root:208F:011F": {
+   "win16": "_gr_CenterStrInRectClear",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-11",
+   "evidence": [
+    "src/root/m208F.c:79 (f_208F_011F); original-dos.json#root:208F:011F",
+    "Win16 evidence/disassembly/cards.jsonl 2:4816 _gr_CenterStrInRectClear; original-win16.json#_gr_CenterStrInRectClear",
+    "Anchor 1: Named win_CenterStrAtObj calls this Rect+string helper in DOS and the named Windows helper; Windows additionally shares it from formatted object-print wrappers.",
+    "Anchor 2: Same centering sequence as non-clearing sibling, then two conditional left/right strips filled with background colour through slot3/GBoxFill. Win16 applies right/bottom-minus1 adjustments, a documented platform edge difference."
    ]
   }
  }
