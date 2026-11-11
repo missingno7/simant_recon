@@ -58,7 +58,7 @@ int far goStepLeft(int n)
     return moved;
 }
 
-extern int far fd_50F6_0F38;
+extern int far vScrollMax;
 extern void far f_00F8_037D(void);
 
 int far goStepDown(int n)
@@ -67,8 +67,8 @@ int far goStepDown(int n)
 
     moved = 0;
     MapPnt.y += n;
-    if (MapPnt.y > fd_50F6_0F38) {
-        MapPnt.y = fd_50F6_0F38;
+    if (MapPnt.y > vScrollMax) {
+        MapPnt.y = vScrollMax;
     } else {
         if (n == 1)
             f_00F8_037D();
@@ -132,8 +132,8 @@ int far goStepSE(int step)
 
     moved = 0;
     MapPnt.y++;
-    if (MapPnt.y > fd_50F6_0F38) {
-        MapPnt.y = fd_50F6_0F38;
+    if (MapPnt.y > vScrollMax) {
+        MapPnt.y = vScrollMax;
     } else {
         if (step == 1)
             f_00F8_0365();
@@ -157,8 +157,8 @@ int far goStepSW(int step)
 
     moved = 0;
     MapPnt.y++;
-    if (MapPnt.y > fd_50F6_0F38) {
-        MapPnt.y = fd_50F6_0F38;
+    if (MapPnt.y > vScrollMax) {
+        MapPnt.y = vScrollMax;
     } else {
         if (step == 1)
             f_00F8_0365();

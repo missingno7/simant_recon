@@ -16,7 +16,7 @@ struct Pt {
 };
 
 extern int far MapPlane;
-extern int far fd_50F6_09FC[2];
+extern int far ExpLastPnt[2];
 extern int far IsValidLocation(int plane, int x, int y);
 void far DoTool(int x, int y);
 void far ExpAddAnt(int x, int y);
@@ -44,8 +44,8 @@ void far processExp(int x, int y, int shift)
 
     if (MapPlane) {
         count = 0;
-        fd_50F6_09FC[0] = x;
-        fd_50F6_09FC[1] = y;
+        ExpLastPnt[0] = x;
+        ExpLastPnt[1] = y;
         if (IsValidLocation(MapPlane, x, y))
             DoTool(x, y);
         ReDrawMapEdit(count);
@@ -62,8 +62,8 @@ void far processExp(int x, int y, int shift)
                 ny = (pt.y - editTileRect[1]) / tileHeight + MapPnt[1];
             }
             if (nx != x || ny != y) {
-                fd_50F6_09FC[0] = x;
-                fd_50F6_09FC[1] = y;
+                ExpLastPnt[0] = x;
+                ExpLastPnt[1] = y;
                 x = nx;
                 y = ny;
                 if (IsValidLocation(MapPlane, x, y))
@@ -96,10 +96,10 @@ void far DoTool(int x, int y)
         break;
     case 1:
         if (MapPlane == 1)
-            DropWall(fd_50F6_09FC[0], fd_50F6_09FC[1], x, y);
+            DropWall(ExpLastPnt[0], ExpLastPnt[1], x, y);
         break;
     case 2:
-        ExpDig(fd_50F6_09FC[0], fd_50F6_09FC[1], x, y);
+        ExpDig(ExpLastPnt[0], ExpLastPnt[1], x, y);
         break;
     case 3:
         ExpAddAnt(x, y);

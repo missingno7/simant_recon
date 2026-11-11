@@ -11,7 +11,7 @@ int far TutHowLong;
 int far BirdY;
 Handle far fd_50F6_10CC;
 int far fd_50F6_10D0;
-Handle far fd_50F6_10DA;
+Handle far yardAnimHandle;
 int far fd_50F6_10DE;
 int far fd_50F6_10E0;
 char far * far * far fd_50F6_10E2;

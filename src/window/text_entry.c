@@ -1,6 +1,6 @@
 /* Overlay section S09, code frame 36EE: text entry field helpers. */
 
-extern char near g_3DDE;
+extern char near fontWidth;
 extern char near g_3DDC;
 extern void far f_1B4E_0110(int x, int y, int c);
 
@@ -13,14 +13,14 @@ void far o09_36EE_000A(int x, int y, int count)
 {
     while (count--) {
         f_1B4E_0110(x, y, ' ');
-        x += g_3DDE;
+        x += fontWidth;
     }
 }
 
 /* text-cell to pixel coordinates, then edit */
 void far o09_36EE_003C(int col, int row, char far *text, int maxLen, int flags)
 {
-    o09_36EE_0092(col = (col >> 8) + g_3DDE * (col & 0xff),
+    o09_36EE_0092(col = (col >> 8) + fontWidth * (col & 0xff),
                   row = g_3DDC * (row & 0xff) + (char)(row >> 8) * g_3DDC / 14,
                   text, maxLen, flags);
 }
@@ -127,12 +127,12 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
         switch (key) {
         case 2:
         case 0x847:
-            x -= pos * g_3DDE;
+            x -= pos * fontWidth;
             pos = 0;
             break;
         case 5:
         case 0x84F:
-            x += _fstrlen(&buf[pos]) * g_3DDE;
+            x += _fstrlen(&buf[pos]) * fontWidth;
             pos = len;
             break;
         case 8:
@@ -141,7 +141,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
                 f_00DF_016C();
             else {
                 pos--;
-                x -= g_3DDE;
+                x -= fontWidth;
             }
             if (key != 8)
                 break;
@@ -153,7 +153,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
             }
             _fmemmove(&buf[pos], &buf[pos + 1], len - pos + 1);
             GPutStr(x, y, &buf[pos]);
-            f_1B4E_0110(x + (--len - pos) * g_3DDE, y, ' ');
+            f_1B4E_0110(x + (--len - pos) * fontWidth, y, ' ');
             break;
         case 9:
         case 0x852:
@@ -180,7 +180,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
         case 21:
         case 0x84D:
             if (len > pos) {
-                x += g_3DDE;
+                x += fontWidth;
                 pos++;
             } else
                 f_00DF_016C();
@@ -188,7 +188,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
         case 27:
             if (len == 0)
                 goto cancel;
-            x -= pos * g_3DDE;
+            x -= pos * fontWidth;
             o09_36EE_000A(x, y, len);
             pos = len = 0;
             break;
@@ -201,7 +201,7 @@ int far o09_36EE_0092(int x, int y, char far *text, int maxLen, int flags)
                 break;
             buf[pos] = key;
             f_1B4E_0110(x, y, key);
-            x += g_3DDE;
+            x += fontWidth;
             pos++;
             break;
         }

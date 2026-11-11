@@ -19973,6 +19973,18 @@
     }
    ]
   },
+  "BirdDelay": {
+   "seg": 20726,
+   "off": 4222,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8460 = 50F6]; es:[107E] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_107E",
+     "why": "Win16 symbol _BirdDelay (evidence/cross_version/data-alignment, tier A): save record index 33 of 307, same element size and count; same reference position in InitSimYard, SimBird; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "BirdFrame": {
    "seg": 20726,
    "off": 4236,
@@ -19981,6 +19993,30 @@
     {
      "was": "fd_50F6_108C",
      "why": "Win16 symbol _BirdFrame (evidence/cross_version/data-alignment, tier A): save record index 105 of 307, same element size and count; same reference position in DrawSimBird; 1 shared users among 1 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "BirdGoalX": {
+   "seg": 20726,
+   "off": 520,
+   "grounding": "o06_35F5_11FF: mov es,[CONST 84DE = 50F6]; es:[0208] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0208",
+     "why": "Win16 symbol _BirdGoalX (evidence/cross_version/data-alignment, tier A): save record index 106 of 307, same element size and count; same reference position in SimBird; used by the same 1 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "BirdGoalY": {
+   "seg": 20726,
+   "off": 528,
+   "grounding": "o06_35F5_11FF: mov es,[CONST 84DA = 50F6]; es:[0210] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0210",
+     "why": "Win16 symbol _BirdGoalY (evidence/cross_version/data-alignment, tier A): save record index 107 of 307, same element size and count; same reference position in SimBird; used by the same 1 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -20184,6 +20220,30 @@
    ],
    "name_kind": "recovered"
   },
+  "BoyIsMowing": {
+   "seg": 20726,
+   "off": 514,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8494 = 50F6]; es:[0202] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0202",
+     "why": "Win16 symbol _BoyIsMowing (evidence/cross_version/data-alignment, tier A): save record index 290 of 307, same element size and count; same reference position in InitSimYard, SimKidOutside; 3 shared users among 3 DOS and 4 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "BoyMessOn": {
+   "seg": 20726,
+   "off": 4272,
+   "grounding": "o06_35F5_0000: mov es,[CONST 846C = 50F6]; es:[10B0] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_10B0",
+     "why": "Win16 symbol _BoyMessOn (evidence/cross_version/data-alignment, tier A): save record index 117 of 307, same element size and count; same reference position in InitSimYard, SendBoyMsg; 3 shared users among 3 DOS and 8 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "BoyMsgCnt": {
    "seg": 20726,
    "off": 4252,
@@ -20192,6 +20252,18 @@
     {
      "was": "fd_50F6_109C",
      "why": "Win16 symbol _BoyMsgCnt (evidence/cross_version/data-alignment, tier A): save record index 34 of 307, same element size and count; same reference position in DrawSimKid; 1 shared users among 1 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "BoyMsgOffset": {
+   "seg": 20726,
+   "off": 4284,
+   "grounding": "o06_35F5_0000: mov es,[CONST 84A2 = 50F6]; es:[10BC] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_10BC",
+     "why": "Win16 symbol _BoyMsgOffset (evidence/cross_version/data-alignment, tier A): stores a 2-byte parameter at BP+6 in SendBoyMsg; save record index 118 of 307, same element size and count; same reference position in InitSimYard, SendBoyMsg."
     }
    ],
    "name_kind": "recovered"
@@ -20252,6 +20324,18 @@
     {
      "was": "fd_3D57_0C34",
      "why": "Win16 symbol _BoyTurnCnt (evidence/cross_version/data-alignment, tier A): save record index 122 of 307, same element size and count; spacing to mapped neighboring objects agrees."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "BoyWait": {
+   "seg": 15703,
+   "off": 3114,
+   "grounding": "o06_35F5_0000: mov es,[CONST 845E = 3D57]; es:[0C2A] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_3D57_0C2A",
+     "why": "Win16 symbol _BoyWait (evidence/cross_version/data-alignment, tier A): save record index 123 of 307, same element size and count; same reference position in InitSimYard; used by the same 1 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -20327,6 +20411,18 @@
    ],
    "name_kind": "recovered"
   },
+  "CTabR": {
+   "seg": 15703,
+   "off": 1190,
+   "grounding": "S12:384C:080E map image generation: mov es,[869E]; mov al,es:[bx+04A6] byte colour table (own CONST word)",
+   "history": [
+    {
+     "was": "fd_3D57_04A6",
+     "why": "Win16 symbol _CTabR (evidence/cross_version/data-alignment, tier A): 24 initial bytes agree exactly; consistent spacing across 6 layout anchors."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "CasteAuto": {
    "seg": 15703,
    "off": 2024,
@@ -20367,6 +20463,18 @@
    ],
    "name_kind": "recovered"
   },
+  "CasteStr": {
+   "seg": 20726,
+   "off": 4216,
+   "grounding": "o05_35F5_025C: mov es,[CONST 843A]; les bx,es:[1078]; es:[bx+di], di=caste*4 -> far pointer to caste name string table",
+   "history": [
+    {
+     "was": "fd_50F6_1078",
+     "why": "Win16 symbol _CasteStr (evidence/cross_version/data-alignment, tier A): stores the result of LoadStringAnt with resource 1101 (4 DOS / 4 Win16 bytes); spacing to mapped neighboring objects agrees; 1 shared users among 2 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "CasteTabB": {
    "seg": 15703,
    "off": 2918,
@@ -20384,6 +20492,54 @@
    ],
    "name_kind": "recovered"
   },
+  "CatCycle": {
+   "seg": 20726,
+   "off": 556,
+   "grounding": "o06_35F5_0000: mov es,[CONST 847E = 50F6]; es:[022C] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_022C",
+     "why": "Win16 symbol _CatCycle (evidence/cross_version/data-alignment, tier A): save record index 127 of 307, same element size and count; same reference position in InitSimYard, SimCat; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CatDelay": {
+   "seg": 20726,
+   "off": 544,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8462 = 50F6]; es:[0220] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0220",
+     "why": "Win16 symbol _CatDelay (evidence/cross_version/data-alignment, tier A): save record index 35 of 307, same element size and count; same reference position in InitSimYard, SimCat; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CatDir": {
+   "seg": 20726,
+   "off": 576,
+   "grounding": "o06_35F5_14CC: mov es,[CONST 84EA = 50F6]; es:[0240] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0240",
+     "why": "Win16 symbol _CatDir (evidence/cross_version/data-alignment, tier A): save record index 128 of 307, same element size and count; same reference position in SimCat; used by the same 1 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CatFrame": {
+   "seg": 20726,
+   "off": 580,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8480 = 50F6]; es:[0244] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0244",
+     "why": "Win16 symbol _CatFrame (evidence/cross_version/data-alignment, tier A): save record index 129 of 307, same element size and count; same reference position in InitSimYard, SimCat; 3 shared users among 3 DOS and 4 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "CatOn": {
    "seg": 20726,
    "off": 596,
@@ -20392,6 +20548,30 @@
     {
      "was": "fd_50F6_0254",
      "why": "Win16 symbol _CatOn (evidence/cross_version/data-alignment, tier A): save record index 130 of 307, same element size and count; used by the same 1 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CatX": {
+   "seg": 20726,
+   "off": 702,
+   "grounding": "o06_35F5_14CC: mov es,[CONST 84EE = 50F6]; es:[02BE] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_02BE",
+     "why": "Win16 symbol _CatX (evidence/cross_version/data-alignment, tier A): save record index 131 of 307, same element size and count; same reference position in SimCat; 2 shared users among 2 DOS and 3 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CatY": {
+   "seg": 20726,
+   "off": 812,
+   "grounding": "o06_35F5_14CC: mov es,[CONST 84F0 = 50F6]; es:[032C] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_032C",
+     "why": "Win16 symbol _CatY (evidence/cross_version/data-alignment, tier A): save record index 132 of 307, same element size and count; 2 shared users among 2 DOS and 3 Win16 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -20894,6 +21074,30 @@
     }
    ]
   },
+  "DogBarkDelay": {
+   "seg": 20726,
+   "off": 1846,
+   "grounding": "o06_35F5_1B08: mov es,[CONST 84F8 = 50F6]; es:[0736] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0736",
+     "why": "Win16 symbol _DogBarkDelay (evidence/cross_version/data-alignment, tier A): save record index 36 of 307, same element size and count; same reference position in MakeBark; 1 shared users among 1 DOS and 3 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "DogDir": {
+   "seg": 20726,
+   "off": 1286,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8486 = 50F6]; es:[0506] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0506",
+     "why": "Win16 symbol _DogDir (evidence/cross_version/data-alignment, tier A): save record index 145 of 307, same element size and count; same reference position in InitSimYard, SimCat; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "DogFrame": {
    "seg": 20726,
    "off": 1252,
@@ -20902,6 +21106,42 @@
     {
      "was": "fd_50F6_04E4",
      "why": "Win16 symbol _DogFrame (evidence/cross_version/data-alignment, tier A): save record index 146 of 307, same element size and count; same reference position in DrawDog; 1 shared users among 1 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "DogPx": {
+   "seg": 20726,
+   "off": 1296,
+   "grounding": "o06_35F5_1A0F: mov es,[CONST 84F6 = 50F6]; es:[0510] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0510",
+     "why": "Win16 symbol _DogPx (evidence/cross_version/data-alignment, tier A): save record index 147 of 307, same element size and count; same reference position in FollowBoyDir, FollowCatDir; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "DogPy": {
+   "seg": 20726,
+   "off": 1438,
+   "grounding": "o06_35F5_1A0F: mov es,[CONST 84F4 = 50F6]; es:[059E] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_059E",
+     "why": "Win16 symbol _DogPy (evidence/cross_version/data-alignment, tier A): save record index 148 of 307, same element size and count; same reference position in FollowBoyDir, FollowCatDir; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "DogTurnCnt": {
+   "seg": 20726,
+   "off": 1572,
+   "grounding": "o06_35F5_0000: mov es,[CONST 846A = 50F6]; es:[0624] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0624",
+     "why": "Win16 symbol _DogTurnCnt (evidence/cross_version/data-alignment, tier A): save record index 149 of 307, same element size and count; same reference position in InitSimYard, SimDog; used by the same 2 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -21009,6 +21249,18 @@
     }
    ]
   },
+  "EatCountB": {
+   "seg": 20726,
+   "off": 530,
+   "grounding": "S25:39C7 o25_39C7_15B4:15BF dec word es:[0212] (CONST 893A=50F6); Win16 DecEatB EatCountB",
+   "history": [
+    {
+     "was": "fd_50F6_0212",
+     "why": "Win16 symbol _EatCountB (evidence/cross_version/data-alignment, tier A): save record index 153 of 307, same element size and count; same reference position in DecEatB; 3 shared users among 3 DOS and 8 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "EatCountR": {
    "seg": 20726,
    "off": 550,
@@ -21102,6 +21354,18 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "ExpLastPnt": {
+   "seg": 20726,
+   "off": 2556,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 884E, mov es:[09FC],x / es:[09FE],y (ExpLastPnt pair; DoTool passes both to DropWall/ExpDig)",
+   "history": [
+    {
+     "was": "fd_50F6_09FC",
+     "why": "Win16 symbol _ExpLastPnt (evidence/cross_version/data-alignment, tier A): passed as the first argument to DropWall in DoTool; stores a 4-byte parameter at BP+6 in processExp; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "ExpSubStates": {
    "seg": 15703,
@@ -21286,6 +21550,18 @@
     {
      "was": "fd_50F6_0C26",
      "why": "Win16 symbol _GameTime (evidence/cross_version/data-alignment, tier A): save record index 37 of 307, same element size and count; same reference position in RandYard, DoAntSim; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GlobalKey": {
+   "seg": 20726,
+   "off": 2848,
+   "grounding": "o06_35F5_020C: mov es,[CONST 84AA = 50F6]; es:[0B20] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0B20",
+     "why": "Win16 symbol _GlobalKey (evidence/cross_version/data-alignment, tier A): same reference position in SimRain, SimCat; 2 shared users among 2 DOS and 3 Win16 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -21824,6 +22100,30 @@
    ],
    "name_kind": "recovered"
   },
+  "LastColonyPopB": {
+   "seg": 20726,
+   "off": 868,
+   "grounding": "o06_35F5_0000: mov es,[CONST 849E = 50F6]; es:[0364] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0364",
+     "why": "Win16 symbol _LastColonyPopB (evidence/cross_version/data-alignment, tier A): same reference position in InitSimYard, SimColonies; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "LastColonyPopR": {
+   "seg": 20726,
+   "off": 878,
+   "grounding": "o06_35F5_0000: mov es,[CONST 84A0 = 50F6]; es:[036E] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_036E",
+     "why": "Win16 symbol _LastColonyPopR (evidence/cross_version/data-alignment, tier A): same reference position in InitSimYard, SimColonies; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "LastEggPlane": {
    "seg": 20726,
    "off": 2762,
@@ -21880,6 +22180,30 @@
     {
      "was": "fd_3D57_02BC",
      "why": "Win16 symbol _LastFoodDrop (evidence/cross_version/data-alignment, tier A): save record index 52 of 307, same element size and count; spacing to mapped neighboring objects agrees; used by the same 1 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "LastMowX": {
+   "seg": 20726,
+   "off": 1160,
+   "grounding": "o06_35F5_02B9: mov es,[CONST 84AE = 50F6]; es:[0488] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0488",
+     "why": "Win16 symbol _LastMowX (evidence/cross_version/data-alignment, tier A): save record index 174 of 307, same element size and count; used by the same 1 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "LastMowY": {
+   "seg": 20726,
+   "off": 1170,
+   "grounding": "o06_35F5_02B9: mov es,[CONST 84B0 = 50F6]; es:[0492] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0492",
+     "why": "Win16 symbol _LastMowY (evidence/cross_version/data-alignment, tier A): save record index 175 of 307, same element size and count; used by the same 1 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -22312,6 +22636,30 @@
    ],
    "name_kind": "recovered"
   },
+  "MeCrazyDir": {
+   "seg": 20726,
+   "off": 3832,
+   "grounding": "S25:3BA4 o25_3BA4_19AD:19CF mov es:[0EF8],ax (GetDir-1; CONST seg word 899E = 50F6); passed by far address to o25_3BA4_1686",
+   "history": [
+    {
+     "was": "fd_50F6_0EF8",
+     "why": "Win16 symbol _MeCrazyDir (evidence/cross_version/data-alignment, tier A): save record index 190 of 307, same element size and count; same reference position in GetMyNextRandDirs, GetMyInitialRandDir; 3 shared users among 3 DOS and 4 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "MeCrazyRot": {
+   "seg": 20726,
+   "off": 3834,
+   "grounding": "S25:3BA4 o25_3BA4_19AD:19E2 mov word es:[0EFA],0 (CONST seg word 89A0 = 50F6); passed by far address to o25_3BA4_1686",
+   "history": [
+    {
+     "was": "fd_50F6_0EFA",
+     "why": "Win16 symbol _MeCrazyRot (evidence/cross_version/data-alignment, tier A): save record index 191 of 307, same element size and count; same reference position in GetMyNextRandDirs, GetMyInitialRandDir; 3 shared users among 3 DOS and 4 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "MeDir": {
    "seg": 20726,
    "off": 1174,
@@ -22692,6 +23040,30 @@
    ],
    "name_kind": "recovered"
   },
+  "MigrateX": {
+   "seg": 20726,
+   "off": 890,
+   "grounding": "o06_35F5_2433: mov es,[CONST 851E = 50F6]; es:[037A] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_037A",
+     "why": "Win16 symbol _MigrateX (evidence/cross_version/data-alignment, tier A): same reference position in StartMigrate, EndMigrate; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "MigrateY": {
+   "seg": 20726,
+   "off": 1026,
+   "grounding": "o06_35F5_2433: mov es,[CONST 851C = 50F6]; es:[0402] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0402",
+     "why": "Win16 symbol _MigrateY (evidence/cross_version/data-alignment, tier A): same reference position in StartMigrate, EndMigrate; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "ModeAuto": {
    "seg": 20726,
    "off": 888,
@@ -22746,6 +23118,30 @@
    "seg": 15703,
    "off": 2974,
    "grounding": "GetNewModeB (root:1383:09D2): byte [0B9E + StrategicModeB*8 + SRand8()] for caste 2; Win16 ModeTabWB[StrategicModeB][SRand8()]"
+  },
+  "MowX": {
+   "seg": 20726,
+   "off": 1136,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8490 = 50F6]; es:[0470] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0470",
+     "why": "Win16 symbol _MowX (evidence/cross_version/data-alignment, tier A): save record index 222 of 307, same element size and count; same reference position in InitSimYard, SimKidOutside; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "MowY": {
+   "seg": 20726,
+   "off": 1146,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8492 = 50F6]; es:[047A] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_047A",
+     "why": "Win16 symbol _MowY (evidence/cross_version/data-alignment, tier A): save record index 223 of 307, same element size and count; same reference position in InitSimYard, SimKidOutside; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "MwinTitle": {
    "seg": 20726,
@@ -23137,6 +23533,18 @@
    ],
    "name_kind": "recovered"
   },
+  "RFightMsgs": {
+   "seg": 20726,
+   "off": 536,
+   "grounding": "DrawCurBalloons: mov es,[7FB4]; les si,es:[218] far string table",
+   "history": [
+    {
+     "was": "fd_50F6_0218",
+     "why": "Win16 symbol _RFightMsgs (evidence/cross_version/data-alignment, tier A): stores the result of LoadStringAnt with resource 1230 (4 DOS / 4 Win16 bytes); same reference position in DrawCurBalloons, PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "RMapPnt": {
    "seg": 20726,
    "off": 1838,
@@ -23158,6 +23566,18 @@
    "seg": 15703,
    "off": 2242,
    "grounding": "AddRock5 (S18:384C:0FA6): mov es,[CONST 87A8]; es:[si+08C2] 6x5x5 rock stencils (shape*25+row*5+col); Win16 MAPSYM _RT5 at SIMANT_DATA_GROUP 870A, same delta 0x7E48 as IdealCaste (3D57:07DA <-> 8622), size 0x96 = 6*25 to _RT3"
+  },
+  "RainCnt": {
+   "seg": 20726,
+   "off": 854,
+   "grounding": "o06_35F5_020C: mov es,[CONST 84AC = 50F6]; es:[0356] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_0356",
+     "why": "Win16 symbol _RainCnt (evidence/cross_version/data-alignment, tier A): save record index 237 of 307, same element size and count; same reference position in SimRain; 1 shared users among 1 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "RainOn": {
    "seg": 20726,
@@ -23191,6 +23611,30 @@
     {
      "was": "fd_50F6_0F26",
      "why": "Win16 symbol _RebornY (evidence/cross_version/data-alignment, tier A): save record index 240 of 307, same element size and count; same reference position in InitYelloAnt, YellowDeath; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "RedDestX": {
+   "seg": 20726,
+   "off": 1248,
+   "grounding": "f_0DEF_0233: mov es,[81B4] (CONST 50F6); es:[04E0] = es:[3D57:02BC], adjusted by 5 - Win16 GetNewRedTask RedDestX (worker rootF)",
+   "history": [
+    {
+     "was": "fd_50F6_04E0",
+     "why": "Win16 symbol _RedDestX (evidence/cross_version/data-alignment, tier A): save record index 241 of 307, same element size and count; same reference position in GetNewRedTask; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "RedDestY": {
+   "seg": 20726,
+   "off": 1266,
+   "grounding": "f_0DEF_0233: mov bx,04F2; mov es,[81B8] (CONST 50F6) = es:[3D57:02BE] - Win16 GetNewRedTask RedDestY (worker rootF)",
+   "history": [
+    {
+     "was": "fd_50F6_04F2",
+     "why": "Win16 symbol _RedDestY (evidence/cross_version/data-alignment, tier A): save record index 242 of 307, same element size and count; same reference position in GetNewRedTask; used by the same 2 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -23246,6 +23690,18 @@
    ],
    "name_kind": "recovered"
   },
+  "RedTask": {
+   "seg": 20726,
+   "off": 1188,
+   "grounding": "f_0DEF_0000: mov es,[81A4] (CONST 50F6); mov es:[04A4],0 - Win16 MakeRedInitiator/GetNewRedTask RedTask (worker rootF)",
+   "history": [
+    {
+     "was": "fd_50F6_04A4",
+     "why": "Win16 symbol _RedTask (evidence/cross_version/data-alignment, tier A): save record index 248 of 307, same element size and count; same reference position in MakeRedInitiator, DoRedInitiator and 1 more function pairs; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "RestBalloonCnt": {
    "seg": 20726,
    "off": 3886,
@@ -23254,6 +23710,18 @@
     {
      "was": "fd_50F6_0F2E",
      "why": "Win16 symbol _RestBalloonCnt (evidence/cross_version/data-alignment, tier A): same reference position in RestBalloons, DrawCurBalloons and 1 more function pairs; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "RestMsgs": {
+   "seg": 20726,
+   "off": 570,
+   "grounding": "DrawCurBalloons: mov es,[7FCC]; les si,es:[23A] far string table",
+   "history": [
+    {
+     "was": "fd_50F6_023A",
+     "why": "Win16 symbol _RestMsgs (evidence/cross_version/data-alignment, tier A): stores the result of LoadStringAnt with resource 1260 (4 DOS / 4 Win16 bytes); same reference position in DrawCurBalloons, PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -23692,6 +24160,30 @@
    ],
    "name_kind": "recovered"
   },
+  "SwarmDelayB": {
+   "seg": 20726,
+   "off": 4188,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8498 = 50F6]; es:[105C] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_105C",
+     "why": "Win16 symbol _SwarmDelayB (evidence/cross_version/data-alignment, tier A): save record index 270 of 307, same element size and count; same reference position in InitSimYard, SimColonies; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "SwarmDelayR": {
+   "seg": 20726,
+   "off": 4198,
+   "grounding": "o06_35F5_0000: mov es,[CONST 849A = 50F6]; es:[1066] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_1066",
+     "why": "Win16 symbol _SwarmDelayR (evidence/cross_version/data-alignment, tier A): save record index 271 of 307, same element size and count; same reference position in InitSimYard, SimColonies; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "TERRAINset": {
    "seg": 20726,
    "off": 3876,
@@ -24000,6 +24492,18 @@
    ],
    "name_kind": "recovered"
   },
+  "YardCycle": {
+   "seg": 20726,
+   "off": 1986,
+   "grounding": "o06_35F5_0000: mov es,[CONST 84A4 = 50F6]; es:[07C2] (S06:35F5 InitSimYard/yard sim unit)",
+   "history": [
+    {
+     "was": "fd_50F6_07C2",
+     "why": "Win16 symbol _YardCycle (evidence/cross_version/data-alignment, tier A): save record index 284 of 307, same element size and count; same reference position in InitSimYard, DoSimYard and 4 more function pairs; used by the same 8 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "YardMode": {
    "seg": 20726,
    "off": 860,
@@ -24081,6 +24585,18 @@
    ],
    "name_kind": "recovered"
   },
+  "bw_CTabR": {
+   "seg": 15703,
+   "off": 1622,
+   "grounding": "S12:384C:080E map image generation: mov es,[869C]; mov al,es:[bx+0656] byte colour table (own CONST word)",
+   "history": [
+    {
+     "was": "fd_3D57_0656",
+     "why": "Win16 symbol _bw_CTabR (evidence/cross_version/data-alignment, tier A): 24 initial bytes agree exactly; consistent spacing across 10 layout anchors."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "bw_HTab": {
    "seg": 15703,
    "off": 1358,
@@ -24101,6 +24617,18 @@
     {
      "was": "fd_3D57_061E",
      "why": "Win16 symbol _bw_LTab (evidence/cross_version/data-alignment, tier A): 32 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "casteAnimHandle": {
+   "seg": 20726,
+   "off": 14322,
+   "grounding": "win_CasteControlClosed (root:0798 (control-triangle unit)): far Handle es:[37F2] caste anim set freed by f_2662_0C06",
+   "history": [
+    {
+     "was": "fd_50F6_37F2",
+     "why": "Win16 symbol _casteAnimHandle (evidence/cross_version/data-alignment, tier A): stores the result of hanim_MakeAnimSet (4 DOS / 2 Win16 bytes); passed as the first argument to hanim_RemoveAnimSet in win_CasteControlClosed; 2 shared users among 2 DOS and 3 Win16 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -24152,6 +24680,18 @@
    ],
    "name_kind": "recovered"
   },
+  "curFontPtr": {
+   "seg": 21939,
+   "off": 26020,
+   "grounding": "MakeBalloon (root:1629:000C): mov bx,65A4; mov es,[83E0] (CONST word 55B3: DGROUP declared far); or es:[bx],es:[bx+2] -> Punt 'BAD font in MakeBaloon'; the far pointer is passed as the font to the string-width/height/image calls (current balloon font)",
+   "history": [
+    {
+     "was": "fd_55B3_65A4",
+     "why": "Win16 symbol _curFontPtr (evidence/cross_version/data-alignment, tier A): same reference position in font_FontHeight, font_StringWidth and 1 more function pairs; used by the same 6 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "db_handles": {
    "seg": 20726,
    "off": 15184,
@@ -24162,6 +24702,18 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "dest_bitmap_width": {
+   "seg": 21939,
+   "off": 26482,
+   "grounding": "font_MakeImage: mov es,[8A56] (CONST 55B3); mov es:[6772],ax = (width+x+7)>>3 (destination row bytes)",
+   "history": [
+    {
+     "was": "fd_55B3_6772",
+     "why": "Win16 symbol _dest_bitmap_width (evidence/cross_version/data-alignment, tier A): same reference position in font_MakeImage, DrawChar; spacing to mapped neighboring objects agrees; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "editTileRect": {
    "seg": 20726,
@@ -24245,16 +24797,6 @@
     }
    ]
   },
-  "fd_3D57_04A6": {
-   "seg": 15703,
-   "off": 1190,
-   "grounding": "S12:384C:080E map image generation: mov es,[869E]; mov al,es:[bx+04A6] byte colour table (own CONST word)"
-  },
-  "fd_3D57_0656": {
-   "seg": 15703,
-   "off": 1622,
-   "grounding": "S12:384C:080E map image generation: mov es,[869C]; mov al,es:[bx+0656] byte colour table (own CONST word)"
-  },
   "fd_3D57_067E": {
    "seg": 15703,
    "off": 1662,
@@ -24319,11 +24861,6 @@
    "seg": 15703,
    "off": 2700,
    "grounding": "DrawLegs (0250:2744): mov al,es:[A8C(+si/di/k)]; cbw (signed leg offset table)"
-  },
-  "fd_3D57_0C2A": {
-   "seg": 15703,
-   "off": 3114,
-   "grounding": "o06_35F5_0000: mov es,[CONST 845E = 3D57]; es:[0C2A] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_3E1D_0000": {
    "seg": 15901,
@@ -24535,41 +25072,6 @@
    "off": 510,
    "alias_of": "HealthR"
   },
-  "fd_50F6_0202": {
-   "seg": 20726,
-   "off": 514,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8494 = 50F6]; es:[0202] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_0208": {
-   "seg": 20726,
-   "off": 520,
-   "grounding": "o06_35F5_11FF: mov es,[CONST 84DE = 50F6]; es:[0208] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_0210": {
-   "seg": 20726,
-   "off": 528,
-   "grounding": "o06_35F5_11FF: mov es,[CONST 84DA = 50F6]; es:[0210] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_0212": {
-   "seg": 20726,
-   "off": 530,
-   "grounding": "S25:39C7 o25_39C7_15B4:15BF dec word es:[0212] (CONST 893A=50F6); Win16 DecEatB EatCountB"
-  },
-  "fd_50F6_0218": {
-   "seg": 20726,
-   "off": 536,
-   "grounding": "DrawCurBalloons: mov es,[7FB4]; les si,es:[218] far string table"
-  },
-  "fd_50F6_0220": {
-   "seg": 20726,
-   "off": 544,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8462 = 50F6]; es:[0220] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_022C": {
-   "seg": 20726,
-   "off": 556,
-   "grounding": "o06_35F5_0000: mov es,[CONST 847E = 50F6]; es:[022C] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_022E": {
    "seg": 20726,
    "off": 558,
@@ -24580,26 +25082,6 @@
    "off": 562,
    "alias_of": "TilesDugR"
   },
-  "fd_50F6_023A": {
-   "seg": 20726,
-   "off": 570,
-   "grounding": "DrawCurBalloons: mov es,[7FCC]; les si,es:[23A] far string table"
-  },
-  "fd_50F6_0240": {
-   "seg": 20726,
-   "off": 576,
-   "grounding": "o06_35F5_14CC: mov es,[CONST 84EA = 50F6]; es:[0240] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_0244": {
-   "seg": 20726,
-   "off": 580,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8480 = 50F6]; es:[0244] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_02BE": {
-   "seg": 20726,
-   "off": 702,
-   "grounding": "o06_35F5_14CC: mov es,[CONST 84EE = 50F6]; es:[02BE] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_0324": {
    "seg": 20726,
    "off": 804,
@@ -24609,11 +25091,6 @@
    "seg": 20726,
    "off": 808,
    "grounding": "EndGameDialog (S14:384C:0DE5): mov es,[876E]; les bx,es:[0328]; push es:[bx+di+2]/[bx+di] far string table"
-  },
-  "fd_50F6_032C": {
-   "seg": 20726,
-   "off": 812,
-   "grounding": "o06_35F5_14CC: mov es,[CONST 84F0 = 50F6]; es:[032C] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_032E": {
    "seg": 20726,
@@ -24635,11 +25112,6 @@
    "off": 848,
    "alias_of": "RpopT"
   },
-  "fd_50F6_0356": {
-   "seg": 20726,
-   "off": 854,
-   "grounding": "o06_35F5_020C: mov es,[CONST 84AC = 50F6]; es:[0356] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_0358": {
    "seg": 20726,
    "off": 856,
@@ -24650,45 +25122,15 @@
    "off": 860,
    "alias_of": "YardMode"
   },
-  "fd_50F6_0364": {
-   "seg": 20726,
-   "off": 868,
-   "grounding": "o06_35F5_0000: mov es,[CONST 849E = 50F6]; es:[0364] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_0368": {
    "seg": 20726,
    "off": 872,
    "grounding": "ScoreDialog/SetDefaultWindPrompt (S14): mov es,[875E]; les bx,es:[0368]; push es:[bx+42]/[bx+40] far string table"
   },
-  "fd_50F6_036E": {
-   "seg": 20726,
-   "off": 878,
-   "grounding": "o06_35F5_0000: mov es,[CONST 84A0 = 50F6]; es:[036E] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_0378": {
    "seg": 20726,
    "off": 888,
    "alias_of": "ModeAuto"
-  },
-  "fd_50F6_037A": {
-   "seg": 20726,
-   "off": 890,
-   "grounding": "o06_35F5_2433: mov es,[CONST 851E = 50F6]; es:[037A] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_0402": {
-   "seg": 20726,
-   "off": 1026,
-   "grounding": "o06_35F5_2433: mov es,[CONST 851C = 50F6]; es:[0402] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_0470": {
-   "seg": 20726,
-   "off": 1136,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8490 = 50F6]; es:[0470] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_047A": {
-   "seg": 20726,
-   "off": 1146,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8492 = 50F6]; es:[047A] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_047C": {
    "seg": 20726,
@@ -24705,11 +25147,6 @@
    "off": 1154,
    "alias_of": "casteLevels"
   },
-  "fd_50F6_0488": {
-   "seg": 20726,
-   "off": 1160,
-   "grounding": "o06_35F5_02B9: mov es,[CONST 84AE = 50F6]; es:[0488] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_048A": {
    "seg": 20726,
    "off": 1162,
@@ -24720,20 +25157,10 @@
    "off": 1164,
    "alias_of": "MePlane"
   },
-  "fd_50F6_0492": {
-   "seg": 20726,
-   "off": 1170,
-   "grounding": "o06_35F5_02B9: mov es,[CONST 84B0 = 50F6]; es:[0492] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_049E": {
    "seg": 20726,
    "off": 1182,
    "alias_of": "modeLevels"
-  },
-  "fd_50F6_04A4": {
-   "seg": 20726,
-   "off": 1188,
-   "grounding": "f_0DEF_0000: mov es,[81A4] (CONST 50F6); mov es:[04A4],0 - Win16 MakeRedInitiator/GetNewRedTask RedTask (worker rootF)"
   },
   "fd_50F6_04A6": {
    "seg": 20726,
@@ -24750,85 +25177,40 @@
    "off": 1224,
    "grounding": "AddMsgBalloon: es:[bx+4C8]/[bx+4CA] = x,y with bx=count*4 (Win16 CurBalloonPnts)"
   },
-  "fd_50F6_04E0": {
-   "seg": 20726,
-   "off": 1248,
-   "grounding": "f_0DEF_0233: mov es,[81B4] (CONST 50F6); es:[04E0] = es:[3D57:02BC], adjusted by 5 - Win16 GetNewRedTask RedDestX (worker rootF)"
-  },
   "fd_50F6_04E6": {
    "seg": 20726,
    "off": 1254,
    "grounding": "AddMsgBalloon: es:[si+4E6]=style (Win16 CurBalloonFlags)"
-  },
-  "fd_50F6_04F2": {
-   "seg": 20726,
-   "off": 1266,
-   "grounding": "f_0DEF_0233: mov bx,04F2; mov es,[81B8] (CONST 50F6) = es:[3D57:02BE] - Win16 GetNewRedTask RedDestY (worker rootF)"
   },
   "fd_50F6_04F6": {
    "seg": 20726,
    "off": 1270,
    "grounding": "AddMsgBalloon: es:[si+4F6]=plane with si=count*2 (Win16 CurBalloonPlane)"
   },
-  "fd_50F6_0506": {
-   "seg": 20726,
-   "off": 1286,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8486 = 50F6]; es:[0506] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_050C": {
    "seg": 20726,
    "off": 1292,
    "grounding": "DrawCurBalloons: mov es,[7FA8]; long es:[50C]/[50E] timer vs TickCount()"
-  },
-  "fd_50F6_0510": {
-   "seg": 20726,
-   "off": 1296,
-   "grounding": "o06_35F5_1A0F: mov es,[CONST 84F6 = 50F6]; es:[0510] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_059A": {
    "seg": 20726,
    "off": 1434,
    "grounding": "DrawCurBalloons: mov es,[7FB6]; long es:[59A]/[59C] egg balloon timer"
   },
-  "fd_50F6_059E": {
-   "seg": 20726,
-   "off": 1438,
-   "grounding": "o06_35F5_1A0F: mov es,[CONST 84F4 = 50F6]; es:[059E] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_0620": {
    "seg": 20726,
    "off": 1568,
    "grounding": "DrawCurBalloons: mov es,[7FBE]; long es:[620]/[622] queen balloon timer"
-  },
-  "fd_50F6_0624": {
-   "seg": 20726,
-   "off": 1572,
-   "grounding": "o06_35F5_0000: mov es,[CONST 846A = 50F6]; es:[0624] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0732": {
    "seg": 20726,
    "off": 1842,
    "grounding": "DrawCurBalloons (0250:454D): mov es,[7FA6]; long es:[732]/[734] timer vs TickCount()"
   },
-  "fd_50F6_0736": {
-   "seg": 20726,
-   "off": 1846,
-   "grounding": "o06_35F5_1B08: mov es,[CONST 84F8 = 50F6]; es:[0736] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_07C2": {
-   "seg": 20726,
-   "off": 1986,
-   "grounding": "o06_35F5_0000: mov es,[CONST 84A4 = 50F6]; es:[07C2] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_07C4": {
    "seg": 20726,
    "off": 1988,
    "grounding": "DrawCurBalloons: mov es,[7FC6]; long es:[7C4]/[7C6] rest balloon timer"
-  },
-  "fd_50F6_09FC": {
-   "seg": 20726,
-   "off": 2556,
-   "grounding": "processExp (S22:3BBD:000A): CONST word 884E, mov es:[09FC],x / es:[09FE],y (ExpLastPnt pair; DoTool passes both to DropWall/ExpDig)"
   },
   "fd_50F6_0A9C": {
    "seg": 20726,
@@ -24844,11 +25226,6 @@
    "seg": 20726,
    "off": 2826,
    "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
-  },
-  "fd_50F6_0B20": {
-   "seg": 20726,
-   "off": 2848,
-   "grounding": "o06_35F5_020C: mov es,[CONST 84AA = 50F6]; es:[0B20] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0B22": {
    "seg": 20726,
@@ -24895,16 +25272,6 @@
    "off": 3766,
    "grounding": "f_0BE8_0002: mov es,[DS:80EA] (CONST 50F6); 32-word counter array es:[si*2+0EB6]"
   },
-  "fd_50F6_0EF8": {
-   "seg": 20726,
-   "off": 3832,
-   "grounding": "S25:3BA4 o25_3BA4_19AD:19CF mov es:[0EF8],ax (GetDir-1; CONST seg word 899E = 50F6); passed by far address to o25_3BA4_1686"
-  },
-  "fd_50F6_0EFA": {
-   "seg": 20726,
-   "off": 3834,
-   "grounding": "S25:3BA4 o25_3BA4_19AD:19E2 mov word es:[0EFA],0 (CONST seg word 89A0 = 50F6); passed by far address to o25_3BA4_1686"
-  },
   "fd_50F6_0F08": {
    "seg": 20726,
    "off": 3848,
@@ -24919,11 +25286,6 @@
    "seg": 20726,
    "off": 3876,
    "alias_of": "TERRAINset"
-  },
-  "fd_50F6_0F38": {
-   "seg": 20726,
-   "off": 3896,
-   "grounding": "f_004A_008A: mov es,[7DE8] (CONST word 50F6); mov ax,es:[0F38] = upper bound of es:[050A] (view y) - separate CONST word from 0F36 (worker rootF)"
   },
   "fd_50F6_0F3A": {
    "seg": 20726,
@@ -25035,11 +25397,6 @@
    "off": 4186,
    "alias_of": "SCorpseBase"
   },
-  "fd_50F6_105C": {
-   "seg": 20726,
-   "off": 4188,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8498 = 50F6]; es:[105C] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_1060": {
    "seg": 20726,
    "off": 4192,
@@ -25054,11 +25411,6 @@
    "seg": 20726,
    "off": 4196,
    "grounding": "DrawCurBalloons: mov es,[7FB0]; es:[1064]=1/0 after SRand2()"
-  },
-  "fd_50F6_1066": {
-   "seg": 20726,
-   "off": 4198,
-   "grounding": "o06_35F5_0000: mov es,[CONST 849A = 50F6]; es:[1066] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_106C": {
    "seg": 20726,
@@ -25080,20 +25432,10 @@
    "off": 4214,
    "alias_of": "SpidBurpCnt"
   },
-  "fd_50F6_1078": {
-   "seg": 20726,
-   "off": 4216,
-   "grounding": "o05_35F5_025C: mov es,[CONST 843A]; les bx,es:[1078]; es:[bx+di], di=caste*4 -> far pointer to caste name string table"
-  },
   "fd_50F6_107C": {
    "seg": 20726,
    "off": 4220,
    "grounding": "DrawCurBalloons: mov es,[7FC8]; es:[107C]=1/0 after SRand2()"
-  },
-  "fd_50F6_107E": {
-   "seg": 20726,
-   "off": 4222,
-   "grounding": "o06_35F5_0000: mov es,[CONST 8460 = 50F6]; es:[107E] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_1086": {
    "seg": 20726,
@@ -25125,20 +25467,10 @@
    "off": 4270,
    "alias_of": "StargLife"
   },
-  "fd_50F6_10B0": {
-   "seg": 20726,
-   "off": 4272,
-   "grounding": "o06_35F5_0000: mov es,[CONST 846C = 50F6]; es:[10B0] (S06:35F5 InitSimYard/yard sim unit)"
-  },
   "fd_50F6_10B4": {
    "seg": 20726,
    "off": 4276,
    "grounding": "DrawSpider: mov es,[7F06]; les si,es:[10B4]; push es:[bx+si+2],es:[bx+si] (far pointer to far string table) passed to AddMsgBalloon"
-  },
-  "fd_50F6_10BC": {
-   "seg": 20726,
-   "off": 4284,
-   "grounding": "o06_35F5_0000: mov es,[CONST 84A2 = 50F6]; es:[10BC] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_10BE": {
    "seg": 20726,
@@ -25159,11 +25491,6 @@
    "seg": 20726,
    "off": 4306,
    "grounding": "processExp (S22:3BBD:000A): CONST word 8852, pt.x-es:[10D2], pt.y-es:[10D4] (map window origin pair)"
-  },
-  "fd_50F6_10DA": {
-   "seg": 20726,
-   "off": 4314,
-   "grounding": "S13 DrawDog/DrawSimBird/...: mov es,[86EC]; push es:[10DC]; push es:[10DA] animation handle passed to f_2662_090D/0348 (hanim)"
   },
   "fd_50F6_10DE": {
    "seg": 20726,
@@ -25255,16 +25582,6 @@
    "off": 14318,
    "grounding": "f_2662_0262: mov es,[8A58]; lcall es:[37EE] (rect, buffer, clip, dest) far function pointer"
   },
-  "fd_50F6_37F2": {
-   "seg": 20726,
-   "off": 14322,
-   "grounding": "win_CasteControlClosed (root:0798 (control-triangle unit)): far Handle es:[37F2] caste anim set freed by f_2662_0C06"
-  },
-  "fd_50F6_37F6": {
-   "seg": 20726,
-   "off": 14326,
-   "grounding": "win_ModeControlClosed (root:0798 (control-triangle unit)): far Handle es:[37F6] mode anim set freed by f_2662_0C06"
-  },
   "fd_50F6_37FA": {
    "seg": 20726,
    "off": 14330,
@@ -25340,11 +25657,6 @@
    "off": 14418,
    "grounding": "S04 Mini_DrawMapI: es:[3852] = 0 or miniXSize<<5; added to rect.left for the map (Win16 miniJust)"
   },
-  "fd_50F6_3854": {
-   "seg": 20726,
-   "off": 14420,
-   "grounding": "S12:384C:03D0: mov es,[8688]; mov ax,es:[3854]; cmp ax,40"
-  },
   "fd_50F6_385A": {
    "seg": 20726,
    "off": 14426,
@@ -25399,11 +25711,6 @@
    "seg": 20726,
    "off": 14602,
    "grounding": "S13:384C:0EE0 (DrawSwarm): bx=si*2+390A; mov es,[8730]; int hanim object ids (memset -1, 0x22 bytes)"
-  },
-  "fd_50F6_392C": {
-   "seg": 20726,
-   "off": 14636,
-   "grounding": "S13:384C:0D3B: mov es,[8718]; sub ax,es:[392C] message bitmap width"
   },
   "fd_50F6_3934": {
    "seg": 20726,
@@ -25740,20 +26047,10 @@
    "off": 7396,
    "grounding": "ReadConfig (S20:39F1:047E): mov es,[CONST 8A02 = 55B3]; push es:[1CE6],es:[1CE4]; call _open(name, 0) -> far pointer to configuration file name"
   },
-  "fd_55B3_2990": {
-   "seg": 21939,
-   "off": 10640,
-   "grounding": "S13:384C:02D7: mov es,[86E4] (=55B3); mov es:[2990],0 flag defined in S12 _DATA (S12 0B76/1181 near access)"
-  },
   "fd_55B3_2996": {
    "seg": 21939,
    "off": 10646,
    "grounding": "S04 Mini_DrawMapI: mov es,[CONST 8406 = 55B3]; cmp es:[2996],0 guards allocation/free of the two map buffers (far int in DGROUP)"
-  },
-  "fd_55B3_299A": {
-   "seg": 21939,
-   "off": 10650,
-   "grounding": "S13:384C:01E5: mov bx,299A; mov es,[86D6] (=55B3); es:[bx]/[bx+2] long message pointer; defined in S12 _DATA (0B76 near access)"
   },
   "fd_55B3_299E": {
    "seg": 21939,
@@ -25764,11 +26061,6 @@
    "seg": 21939,
    "off": 10658,
    "grounding": "DoLaserFire (S22:39C7:06B4): mov es,[CONST 87DE = 55B3]; mov word es:[29A2],1 after map-window laser draw (far variable in DGROUP)"
-  },
-  "fd_55B3_2A36": {
-   "seg": 21939,
-   "off": 10806,
-   "grounding": "f_00F8_0543: mov es,[7E16] (CONST 55B3); returns es:[2A36]:[2A38] (far pointer) for object 30000 kind 2 (cache hook)"
   },
   "fd_55B3_2A3A": {
    "seg": 21939,
@@ -25854,21 +26146,6 @@
    "seg": 21939,
    "off": 25186,
    "grounding": "f_1C62_0090: mov es,[89C8 (CONST segword 55B3)]; cmp word ptr es:[6262],0 (far int flag)"
-  },
-  "fd_55B3_65A4": {
-   "seg": 21939,
-   "off": 26020,
-   "grounding": "MakeBalloon (root:1629:000C): mov bx,65A4; mov es,[83E0] (CONST word 55B3: DGROUP declared far); or es:[bx],es:[bx+2] -> Punt 'BAD font in MakeBaloon'; the far pointer is passed as the font to the string-width/height/image calls (current balloon font)"
-  },
-  "fd_55B3_6770": {
-   "seg": 21939,
-   "off": 26480,
-   "grounding": "font_MakeImage (root:25E7:04BE): mov es,[8A54] (CONST 55B3, DGROUP declared far); mov es:[6770],ax = font->rowWords*2 (image row bytes)"
-  },
-  "fd_55B3_6772": {
-   "seg": 21939,
-   "off": 26482,
-   "grounding": "font_MakeImage: mov es,[8A56] (CONST 55B3); mov es:[6772],ax = (width+x+7)>>3 (destination row bytes)"
   },
   "fd_55B3_6B42": {
    "seg": 21939,
@@ -25964,6 +26241,18 @@
    "seg": 21939,
    "off": 30052,
    "grounding": "f_277E_04E8: mov bx,7564h; mov es,[8A80] (address of far int taken; cmp es:[bx],210h)"
+  },
+  "fontWidth": {
+   "seg": 21939,
+   "off": 15838,
+   "grounding": "o09_36EE_000A: mov al,[3DDE]; cbw; add [bp+6],ax (text cell width advance)",
+   "history": [
+    {
+     "was": "g_3DDE",
+     "why": "Win16 symbol _fontWidth (evidence/cross_version/data-alignment, tier A): same reference position in font_StringWidth, font_CharWidth; 2 shared users among 3 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "gGameNeedsSaving": {
    "seg": 15703,
@@ -26446,11 +26735,6 @@
    "seg": 21939,
    "off": 15836,
    "grounding": "f_21FA_0002: mov al,[3DDC]; cbw; add ax,y (underline offset byte)"
-  },
-  "g_3DDE": {
-   "seg": 21939,
-   "off": 15838,
-   "grounding": "o09_36EE_000A: mov al,[3DDE]; cbw; add [bp+6],ax (text cell width advance)"
   },
   "g_3DE1": {
    "seg": 21939,
@@ -27422,6 +27706,18 @@
    ],
    "name_kind": "recovered"
   },
+  "mapMessage": {
+   "seg": 21939,
+   "off": 10650,
+   "grounding": "S13:384C:01E5: mov bx,299A; mov es,[86D6] (=55B3); es:[bx]/[bx+2] long message pointer; defined in S12 _DATA (0B76 near access)",
+   "history": [
+    {
+     "was": "fd_55B3_299A",
+     "why": "Win16 symbol _mapMessage (evidence/cross_version/data-alignment, tier A): stores a 4-byte parameter at BP+6 in EditMessage; spacing to mapped neighboring objects agrees; 2 shared users among 2 DOS and 3 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "mapXsize": {
    "seg": 20726,
    "off": 14422,
@@ -27442,6 +27738,18 @@
     {
      "was": "fd_50F6_3858",
      "why": "Win16 symbol _mapYsize (evidence/cross_version/data-alignment, tier A): same reference position in DrawMapCursor; 5 shared users among 5 DOS and 8 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "modeAnimHandle": {
+   "seg": 20726,
+   "off": 14326,
+   "grounding": "win_ModeControlClosed (root:0798 (control-triangle unit)): far Handle es:[37F6] mode anim set freed by f_2662_0C06",
+   "history": [
+    {
+     "was": "fd_50F6_37F6",
+     "why": "Win16 symbol _modeAnimHandle (evidence/cross_version/data-alignment, tier A): stores the result of hanim_MakeAnimSet (4 DOS / 2 Win16 bytes); passed as the first argument to hanim_RemoveAnimSet in win_ModeControlClosed; 2 shared users among 2 DOS and 3 Win16 function pairs."
     }
    ],
    "name_kind": "recovered"
@@ -27498,6 +27806,30 @@
    "off": 26796,
    "grounding": "Canonical source consolidation: independently reviewed source owner and original symbolic operand; evidence/canonical/source-dispositions.json."
   },
+  "multiplier": {
+   "seg": 20726,
+   "off": 14420,
+   "grounding": "S12:384C:03D0: mov es,[8688]; mov ax,es:[3854]; cmp ax,40",
+   "history": [
+    {
+     "was": "fd_50F6_3854",
+     "why": "Win16 symbol _multiplier (evidence/cross_version/data-alignment, tier A): same reference position in Mini_MakeTable, DrawMapSpider; used by the same 6 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "newMapForce": {
+   "seg": 21939,
+   "off": 10640,
+   "grounding": "S13:384C:02D7: mov es,[86E4] (=55B3); mov es:[2990],0 flag defined in S12 _DATA (S12 0B76/1181 near access)",
+   "history": [
+    {
+     "was": "fd_55B3_2990",
+     "why": "Win16 symbol _newMapForce (evidence/cross_version/data-alignment, tier A): same reference position in DrawMapFoot; spacing to mapped neighboring objects agrees; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "openDBData": {
    "seg": 20726,
    "off": 14680,
@@ -27510,10 +27842,34 @@
    ],
    "name_kind": "recovered"
   },
+  "out_buffer": {
+   "seg": 20726,
+   "off": 14636,
+   "grounding": "S13:384C:0D3B: mov es,[8718]; sub ax,es:[392C] message bitmap width",
+   "history": [
+    {
+     "was": "fd_50F6_392C",
+     "why": "Win16 symbol _out_buffer (evidence/cross_version/data-alignment, tier A): same reference position in font_MakeImage; 2 shared users among 3 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "packed_tail_masks": {
    "seg": 21939,
    "off": 26804,
    "grounding": "Canonical source consolidation: independently reviewed source owner and original symbolic operand; evidence/canonical/source-dispositions.json."
+  },
+  "source_bitmap_width": {
+   "seg": 21939,
+   "off": 26480,
+   "grounding": "font_MakeImage (root:25E7:04BE): mov es,[8A54] (CONST 55B3, DGROUP declared far); mov es:[6770],ax = font->rowWords*2 (image row bytes)",
+   "history": [
+    {
+     "was": "fd_55B3_6770",
+     "why": "Win16 symbol _source_bitmap_width (evidence/cross_version/data-alignment, tier A): same reference position in font_MakeImage, DrawChar; spacing to mapped neighboring objects agrees; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "sys_errlist": {
    "seg": 21939,
@@ -27593,6 +27949,18 @@
     }
    ]
   },
+  "vScrollMax": {
+   "seg": 20726,
+   "off": 3896,
+   "grounding": "f_004A_008A: mov es,[7DE8] (CONST word 50F6); mov ax,es:[0F38] = upper bound of es:[050A] (view y) - separate CONST word from 0F36 (worker rootF)",
+   "history": [
+    {
+     "was": "fd_50F6_0F38",
+     "why": "Win16 symbol _vScrollMax (evidence/cross_version/data-alignment, tier A): same reference position in goStepSE, goStepSW; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "win_colors": {
    "seg": 20726,
    "off": 18146,
@@ -27669,6 +28037,30 @@
      "why": "sentinel fill + 0x140 memcpy in LoadAllWindows"
     }
    ]
+  },
+  "yardAnimHandle": {
+   "seg": 20726,
+   "off": 4314,
+   "grounding": "S13 DrawDog/DrawSimBird/...: mov es,[86EC]; push es:[10DC]; push es:[10DA] animation handle passed to f_2662_090D/0348 (hanim)",
+   "history": [
+    {
+     "was": "fd_50F6_10DA",
+     "why": "Win16 symbol _yardAnimHandle (evidence/cross_version/data-alignment, tier A): stores the result of hanim_MakeAnimSet (4 DOS / 2 Win16 bytes); passed as the first argument to hanim_AddAnimObject in DrawDog; 10 shared users among 11 DOS and 10 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "yardBalloon": {
+   "seg": 21939,
+   "off": 10806,
+   "grounding": "f_00F8_0543: mov es,[7E16] (CONST 55B3); returns es:[2A36]:[2A38] (far pointer) for object 30000 kind 2 (cache hook)",
+   "history": [
+    {
+     "was": "fd_55B3_2A36",
+     "why": "Win16 symbol _yardBalloon (evidence/cross_version/data-alignment, tier A): stores the result of MakeBalloon (4 DOS / 2 Win16 bytes); passed as the first argument to mem_Free in DrawSimKid; used by the same 2 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
   }
  },
  "runtime": {

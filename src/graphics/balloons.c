@@ -24,7 +24,7 @@ unsigned char g_1D9A[16] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x3e, 0xff, 0x0
 unsigned char g_1DAA[16] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7c, 0xff, 0x70, 0xf8, 0x60, 0xf0, 0x40, 0xe0, 0, 0x40 };
 
 extern char far * far f_171C_2208(unsigned size);
-extern void far * far fd_55B3_65A4;
+extern void far * far curFontPtr;
 extern void far Punt(char far *format, ...);
 extern char far * far _fstrcpy(char far *dest, char far *src);
 extern int far font_StringWidth(char far *text, void far *font);
@@ -65,7 +65,7 @@ Handle far MakeBalloon(char far *text, int tail)
     char far * *lp;
 
     buf = f_171C_2208(300);
-    if (fd_55B3_65A4 == 0)
+    if (curFontPtr == 0)
         Punt("BAD font in MakeBaloon");
     _fstrcpy(buf, text);
     lp = lines;
@@ -81,9 +81,9 @@ Handle far MakeBalloon(char far *text, int tail)
     }
     widest = 0;
     for (i = 0; i <= n; i++)
-        if (font_StringWidth(lines[i], fd_55B3_65A4) > widest)
-            widest = font_StringWidth(lines[i], fd_55B3_65A4);
-    height = _font_FontHeight(fd_55B3_65A4) * (n + 1) + 16;
+        if (font_StringWidth(lines[i], curFontPtr) > widest)
+            widest = font_StringWidth(lines[i], curFontPtr);
+    height = _font_FontHeight(curFontPtr) * (n + 1) + 16;
     widest += 16;
     widest = (widest + 7) & ~7;
     bytes = (height + 1) * widest / 4;
@@ -103,9 +103,9 @@ Handle far MakeBalloon(char far *text, int tail)
         CopyChar(g_1D3A, cols + 1, i, p + 8);
     }
     for (i = 0; i <= n; i++)
-        MoveTextToBalloon(font_MakeImage(lines[i], (unsigned)(-font_StringWidth(lines[i], fd_55B3_65A4) & 6) >> 1,
-                                   fd_55B3_65A4), p + 8, 1, _font_FontHeight(fd_55B3_65A4) * i + 6);
-    bottom = _font_FontHeight(fd_55B3_65A4) * i + 6;
+        MoveTextToBalloon(font_MakeImage(lines[i], (unsigned)(-font_StringWidth(lines[i], curFontPtr) & 6) >> 1,
+                                   curFontPtr), p + 8, 1, _font_FontHeight(curFontPtr) * i + 6);
+    bottom = _font_FontHeight(curFontPtr) * i + 6;
     CopyChar(g_1D6A, cols + 1, bottom, p + 8);
     CopyChar(g_1D5A, 0, bottom, p + 8);
     CopyCharRep(g_1D7A, 1, bottom, p + 8, cols);

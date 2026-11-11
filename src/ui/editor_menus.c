@@ -129,7 +129,7 @@ extern int near g_3DB2;
 extern int near g_3DB4;
 extern void far win_Open();
 extern char far * far * far fd_50F6_106E;
-extern char far * far * far fd_50F6_1078;
+extern char far * far * far CasteStr;
 extern void far font_SetFont(int font);
 extern void far win_PrintfAtObj(int obj, char far *format, ...);
 extern int far FindInAList(int x, int y);
@@ -183,7 +183,7 @@ int far MagnifyMenu(int x, int y, int plane)
     if (caste == 0)
         name = fd_50F6_106E[t & 7];
     else
-        name = fd_50F6_1078[caste];
+        name = CasteStr[caste];
     font_SetFont(2);
     win_PrintfAtObj(0x1d02, name);
     switch (plane) {

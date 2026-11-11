@@ -26,12 +26,12 @@ void far GBoxFillOutline(int left, int top, int right, int bottom, int width)
 
 extern void far f_1B4E_0110(int x, int y, int c);
 extern char near g_3DDC;
-extern char near g_3DDE;
+extern char near fontWidth;
 
 void far f_1CE2_0043(int x, int y, int c, int width)
 {
     f_1B4E_0110(x, y, c);
-    GBoxOutline(x, y, g_3DDE + x, g_3DDC + y, width);
+    GBoxOutline(x, y, fontWidth + x, g_3DDC + y, width);
 }
 
 #define CELLY(v) (((v) & 0xff) * g_3DDC + (char)((v) >> 8) * g_3DDC / 14)
@@ -125,8 +125,8 @@ static struct Rect g_8CCC;
 
 struct Rect far * far f_1CE2_039B(struct Rect far *r)
 {
-    g_8CCC.left = (r->left & 0xff) * g_3DDE;
-    g_8CCC.right = (r->right & 0xff) * g_3DDE;
+    g_8CCC.left = (r->left & 0xff) * fontWidth;
+    g_8CCC.right = (r->right & 0xff) * fontWidth;
     g_8CCC.top = CELLY(r->top);
     g_8CCC.bottom = CELLY(r->bottom);
     return &g_8CCC;

@@ -64,7 +64,7 @@ extern int far tileWidth;
 extern int far editTileRect[2];
 extern int far tileHeight;
 extern void far processEdit(struct Event far *ev);
-extern int far fd_50F6_3854;
+extern int far multiplier;
 extern void far EraseMapCursor(void);
 extern void far f_0250_0FC4(int x, int y);
 extern void far f_0250_0E9D(void);
@@ -201,10 +201,10 @@ void far MapAreaEvent(struct Event far *ev)
         if (last.x != ev->h || last.y != ev->v) {
             last = *(struct Pt far *)&ev->h;
             x = (ev->h - fd_50F6_10D2.left) / mapXsize;
-            if (fd_50F6_3854 == 0x40)
+            if (multiplier == 0x40)
                 x -= 0x20;
             y = (ev->v - fd_50F6_10D2.top) / mapYsize;
-            if (x >= 0 && x < fd_50F6_3854) {
+            if (x >= 0 && x < multiplier) {
                 EraseMapCursor();
                 f_0250_0FC4(x, y);
                 f_0250_0E9D();
@@ -226,18 +226,18 @@ void far Mini_MakeTable(char far *src, char far *dst, int y)
     case 0:
     case 4:
     case 8:
-        if (fd_50F6_3854 == 0x40)
+        if (multiplier == 0x40)
             o00_3126_06A3(src, dst);
         else
             o00_3126_04D8(src, dst);
         break;
     case 2:
-        Windows_MakeTable1x1(src, dst, fd_50F6_3854);
+        Windows_MakeTable1x1(src, dst, multiplier);
         break;
     case 3:
     case 5:
     case 7:
-        if (fd_50F6_3854 == 0x40)
+        if (multiplier == 0x40)
             WindowsMono_MakeTable2x2b(src, dst, y);
         else
             WindowsMono_MakeTable2x2a(src, dst, y);
@@ -255,7 +255,7 @@ void far Mini_DrawMapI(void)
     int n;
 
     win_GetObjRect(0x1401, &fd_50F6_3842);
-    fd_50F6_3854 = 0x80;
+    multiplier = 0x80;
     fd_50F6_3852 = 0;
     if (fd_55B3_2996 == 0) {
         fd_50F6_385E = mem_Alloc(0x400L, 1, "Map window image");
@@ -265,7 +265,7 @@ void far Mini_DrawMapI(void)
         o12_384C_0432();
     if (fd_50F6_032E > 1 && fd_50F6_032E < 4) {
         o12_384C_080E();
-        fd_50F6_3854 = 0x40;
+        multiplier = 0x40;
         fd_50F6_3852 = g_8BD2 << 5;
     }
     switch (MapMode) {
@@ -294,8 +294,8 @@ void far Mini_DrawMapI(void)
     n = 64;
     y = fd_50F6_3842.top;
     for (i = 0; i < n; i++, y += g_8BD4) {
-        Mini_MakeTable(table + fd_50F6_3854 * i, line, y);
-        (*g_914C)(fd_50F6_3842.left + fd_50F6_3852, y, line, fd_50F6_3854 * g_8BD2, g_8BD4);
+        Mini_MakeTable(table + multiplier * i, line, y);
+        (*g_914C)(fd_50F6_3842.left + fd_50F6_3852, y, line, multiplier * g_8BD2, g_8BD4);
     }
     mem_Unlock(fd_50F6_385E);
     mem_Unlock(fd_50F6_385A);
@@ -339,10 +339,10 @@ void far OpenMiniMapWin(void)
             if (pt.x != ev.h || pt.y != ev.v) {
                 pt = *(struct Pt far *)&ev.h;
                 x = (ev.h - fd_50F6_3842.left) / g_8BD2;
-                if (fd_50F6_3854 == 0x40)
+                if (multiplier == 0x40)
                     x -= 0x20;
                 y = (ev.v - fd_50F6_3842.top) / g_8BD4;
-                if (x >= 0 && x < fd_50F6_3854) {
+                if (x >= 0 && x < multiplier) {
                     EraseMiniMapCursor();
                     EraseMapCursor();
                     f_0250_0FC4(x, y);

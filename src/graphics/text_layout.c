@@ -79,12 +79,12 @@ char far * far f_1F80_00B8(char far *text, int width)
     return fd_50EF_0000;
 }
 
-extern char near g_3DDE;
+extern char near fontWidth;
 extern int near g_3DB2;
 
 int far f_1F80_0109(int width)
 {
-    return (g_3DB2 / g_3DDE - width) / 2;
+    return (g_3DB2 / fontWidth - width) / 2;
 }
 
 extern int far font_FontHeight(void);
@@ -92,20 +92,20 @@ extern void far GPutStr(int x, int y, char far *text);
 
 void far f_1F80_0122(struct Rect far *r, int line, char far *text)
 {
-    GPutStr(((r->right - _fstrlen(text) - r->left) / 2 + r->left) * g_3DDE,
+    GPutStr(((r->right - _fstrlen(text) - r->left) / 2 + r->left) * fontWidth,
                 font_FontHeight() * (line & 0xff) + (char)(line >> 8), text);
 }
 
 int far f_1F80_0177(struct Rect far *r, char far *text)
 {
-    return (r->right - _fstrlen(text) * g_3DDE - r->left) / 2 + r->left;
+    return (r->right - _fstrlen(text) * fontWidth - r->left) / 2 + r->left;
 }
 
 extern int near g_3DB4;
 
 void far f_1F80_01A8(struct Rect far *r, int width, int height)
 {
-    r->left = (g_3DB2 / g_3DDE - width) / 2;
+    r->left = (g_3DB2 / fontWidth - width) / 2;
     r->right = r->left + width;
     r->top = (g_3DB4 / font_FontHeight() - height) / 2;
     r->bottom = r->top + height;
@@ -115,8 +115,8 @@ void far f_1F80_01F3(struct Rect far *r, int x, int y, int width, int height)
 {
     if (x < 0)
         x = 0;
-    else if (g_3DB2 / g_3DDE <= x + width)
-        x = g_3DB2 / g_3DDE - width - 1;
+    else if (g_3DB2 / fontWidth <= x + width)
+        x = g_3DB2 / fontWidth - width - 1;
     if (y < 1)
         y = 1;
     else if (g_3DB4 / font_FontHeight() <= y + height)

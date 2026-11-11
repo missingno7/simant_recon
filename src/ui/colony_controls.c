@@ -318,7 +318,7 @@ void far BoundPointToTri(struct Pt far *pt, struct Rect far *r)
     pt->y = y;
 }
 
-extern Handle far fd_50F6_37F6;
+extern Handle far modeAnimHandle;
 void far DrawControlLevels(int win, int unused, int percent);
 extern Handle far hanim_MakeAnimSet(void);
 extern struct Pt far knobSize;
@@ -330,61 +330,61 @@ extern void far hanim_RenderAnimSet(Handle h);
 void far win_DrawModeWindow(int flags)
 {
     if (flags & 1) {
-        if (!fd_50F6_37F6)
+        if (!modeAnimHandle)
             clip_SetWin(0x1200);
     }
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1200, 0, g_1B62);
     SetTriLatPoint(&modeLevels, &fd_50F6_3816, &fd_50F6_0358);
-    if (!fd_50F6_37F6) {
-        fd_50F6_37F6 = hanim_MakeAnimSet();
-        fd_50F6_37FC = hanim_AddAnimObject(fd_50F6_37F6, fd_50F6_0358.x - knobSize.x / 2,
+    if (!modeAnimHandle) {
+        modeAnimHandle = hanim_MakeAnimSet();
+        fd_50F6_37FC = hanim_AddAnimObject(modeAnimHandle, fd_50F6_0358.x - knobSize.x / 2,
                                    fd_50F6_0358.y - knobSize.y / 2, 0x578, 0);
     } else
         hanim_SetObjectPos(fd_50F6_0358.x - knobSize.x / 2, fd_50F6_0358.y - knobSize.y / 2,
-                    0x8000, fd_50F6_37F6, fd_50F6_37FC, 0x8000);
-    hanim_RenderAnimSet(fd_50F6_37F6);
+                    0x8000, modeAnimHandle, fd_50F6_37FC, 0x8000);
+    hanim_RenderAnimSet(modeAnimHandle);
 }
 
 extern void far hanim_RemoveAnimSet(Handle h);
 
 void far win_ModeControlClosed(void)
 {
-    if (fd_50F6_37F6) {
-        hanim_RemoveAnimSet(fd_50F6_37F6);
-        fd_50F6_37F6 = 0;
+    if (modeAnimHandle) {
+        hanim_RemoveAnimSet(modeAnimHandle);
+        modeAnimHandle = 0;
     }
 }
 
-extern Handle far fd_50F6_37F2;
+extern Handle far casteAnimHandle;
 extern int far fd_50F6_37FA;
 
 void far win_DrawCasteWindow(int flags)
 {
     if (flags & 1) {
-        if (!fd_50F6_37F2)
+        if (!casteAnimHandle)
             clip_SetWin(0x1300);
     }
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1300, 0, g_1B64);
     SetTriLatPoint(&casteLevels, &fd_50F6_3822, &fd_50F6_022E);
-    if (!fd_50F6_37F2) {
-        fd_50F6_37F2 = hanim_MakeAnimSet();
-        fd_50F6_37FA = hanim_AddAnimObject(fd_50F6_37F2, fd_50F6_022E.x - knobSize.x / 2,
+    if (!casteAnimHandle) {
+        casteAnimHandle = hanim_MakeAnimSet();
+        fd_50F6_37FA = hanim_AddAnimObject(casteAnimHandle, fd_50F6_022E.x - knobSize.x / 2,
                                    fd_50F6_022E.y - knobSize.y / 2, 0x578, 0);
     } else
         hanim_SetObjectPos(fd_50F6_022E.x - knobSize.x / 2, fd_50F6_022E.y - knobSize.y / 2,
-                    0x8000, fd_50F6_37F2, fd_50F6_37FA, 0x8000);
-    hanim_RenderAnimSet(fd_50F6_37F2);
+                    0x8000, casteAnimHandle, fd_50F6_37FA, 0x8000);
+    hanim_RenderAnimSet(casteAnimHandle);
 }
 
 void far win_CasteControlClosed(void)
 {
-    if (fd_50F6_37F2) {
-        hanim_RemoveAnimSet(fd_50F6_37F2);
-        fd_50F6_37F2 = 0;
+    if (casteAnimHandle) {
+        hanim_RemoveAnimSet(casteAnimHandle);
+        casteAnimHandle = 0;
     }
 }
 

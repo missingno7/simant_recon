@@ -5,11 +5,11 @@
 ; code segment, push es; push ds; push si; push di saves (MSC saves DI first, rule ASM-2).
 
 _DATA	segment word public 'DATA'
-	public	_fd_55B3_6770, _fd_55B3_6772, _glyph_edge_masks
+	public	_source_bitmap_width, _dest_bitmap_width, _glyph_edge_masks
 _g_676C		dw	0		; source, destination segment
 _g_676E		dw	0
-_fd_55B3_6770	dw	0		; source, destination row bytes (set by module 25E7)
-_fd_55B3_6772	dw	0
+_source_bitmap_width	dw	0		; source, destination row bytes (set by module 25E7)
+_dest_bitmap_width	dw	0
 		dw	0		; not referenced
 _g_6776		dw	0		; row count
 _glyph_edge_masks label byte
@@ -118,8 +118,8 @@ L00CA:
 	je L0101
 	mov ax, DGROUP
 	mov ds, ax
-	add si, word ptr _fd_55B3_6770
-	add di, word ptr _fd_55B3_6772
+	add si, word ptr _source_bitmap_width
+	add di, word ptr _dest_bitmap_width
 	mov ax, si
 	and si, 0Fh
 	shr ax, 1

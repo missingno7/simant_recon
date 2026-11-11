@@ -89,7 +89,7 @@ def text_input(m,args):
         if not v: break
         text.append(v)
     else: raise AssertionError('unterminated dialog resource')
-    font=b.symbol('fd_55B3_65A4')
+    font=b.symbol('curFontPtr')
     font_pointer=list(struct.unpack('<HH',m.read(font['seg']*16+font['off'],4)))
     return {'first':args[0],'rect':list(struct.unpack('<4h',m.read(linear(args,1),8))),
             'font_pointer':font_pointer,'text':bytes(text).hex()}

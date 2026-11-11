@@ -7,7 +7,7 @@ extern int far ListIndexA;
 extern unsigned char far AlistT[];
 extern unsigned char far AlistM[];
 extern unsigned char far AlistS[];
-extern int far fd_50F6_04A4;
+extern int far RedTask;
 
 void far MakeRedInitiator(void)
 {
@@ -22,7 +22,7 @@ void far MakeRedInitiator(void)
                 AlistT[index] = 0xb0;
                 AlistM[index] = 0x13;
                 AlistS[index] = 0;
-                fd_50F6_04A4 = 0;
+                RedTask = 0;
                 RedInitOn = 1;
                 return;
             }
@@ -38,9 +38,9 @@ extern int far RedPlane;
 void far GetNewRedTask(void);
 extern int far MePlane;
 extern int far FuzLocX;
-extern int far fd_50F6_04E0;
+extern int far RedDestX;
 extern int far FuzLocY;
-extern int far fd_50F6_04F2;
+extern int far RedDestY;
 int far GetRedBestDirs(int plane, int x, int y, int a, int b);
 extern int far SRand1(int range);
 extern signed char far Dy8[];
@@ -68,21 +68,21 @@ void far DoRedInitiator(register int i)
     RedLocX = x;
     RedLocY = y;
     RedPlane = 1;
-    switch (fd_50F6_04A4) {
+    switch (RedTask) {
     case 0:
         GetNewRedTask();
         break;
     case 2:
         if (MePlane == 1) {
-            fd_50F6_04E0 = FuzLocX;
-            fd_50F6_04F2 = FuzLocY;
+            RedDestX = FuzLocX;
+            RedDestY = FuzLocY;
         }
         break;
     }
-    dir = GetRedBestDirs(1, RedLocX, RedLocY, fd_50F6_04E0, fd_50F6_04F2);
+    dir = GetRedBestDirs(1, RedLocX, RedLocY, RedDestX, RedDestY);
     if (dir < 0) {
         if (SRand1(10) == 0)
-            fd_50F6_04A4 = 0;
+            RedTask = 0;
         LifeA[x][y] = AlistT[i];
     } else {
         nx = Dx8[dir] + x;
@@ -116,28 +116,28 @@ void far GetNewRedTask(void)
     if (MePlane == 1) {
         if (SRand1(32) + 0x40 < MeLocX) {
             if (SRand1(10) < ModePopB[5]) {
-                fd_50F6_04A4 = 2;
+                RedTask = 2;
                 RecruitRed(ModePopB[5]);
                 return;
             }
         }
     }
-    fd_50F6_04F2 = LastFoodDrop[1];
-    fd_50F6_04E0 = LastFoodDrop[0];
-    if (fd_50F6_04E0 > 0x1e) {
-        fd_50F6_04E0 -= 5;
+    RedDestY = LastFoodDrop[1];
+    RedDestX = LastFoodDrop[0];
+    if (RedDestX > 0x1e) {
+        RedDestX -= 5;
     } else {
-        if (fd_50F6_04F2 < 0x14)
-            fd_50F6_04F2 += 5;
-        else if (fd_50F6_04F2 > 0x28)
-            fd_50F6_04F2 -= 5;
+        if (RedDestY < 0x14)
+            RedDestY += 5;
+        else if (RedDestY > 0x28)
+            RedDestY -= 5;
     }
     redPopulation = CastePopR[1] + CastePopR[2];
     if (redPopulation < 0x14)
         RecruitRed(redPopulation >> 2);
     else
         RecruitRed(redPopulation >> 3);
-    fd_50F6_04A4 = 1;
+    RedTask = 1;
 }
 
 extern int far GetDis(int x1, int y1, int x2, int y2);

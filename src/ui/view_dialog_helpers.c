@@ -14,7 +14,7 @@ typedef struct {
 
 typedef char far * far *Handle;
 
-extern Handle far fd_50F6_10DA;
+extern Handle far yardAnimHandle;
 extern void far clip_Push(void);
 extern void far clip_SetWin(int win);
 extern void far hanim_RemoveAllAnimObjects(Handle);
@@ -28,14 +28,14 @@ extern void far EraseYardCursor(void);
 
 void far win_YardClosed(void)
 {
-    if (fd_50F6_10DA) {
+    if (yardAnimHandle) {
         clip_Push();
         clip_SetWin(0x1900);
-        hanim_RemoveAllAnimObjects(fd_50F6_10DA);
-        hanim_RenderAnimSet(fd_50F6_10DA);
-        hanim_RemoveAnimSet(fd_50F6_10DA);
+        hanim_RemoveAllAnimObjects(yardAnimHandle);
+        hanim_RenderAnimSet(yardAnimHandle);
+        hanim_RemoveAnimSet(yardAnimHandle);
         clip_Pop();
-        fd_50F6_10DA = 0;
+        yardAnimHandle = 0;
     }
     if (win_IsWinOpen(0x1902)) {
         win_GetObjRect(0x1902, &fd_50F6_10D2);
@@ -322,7 +322,7 @@ void far OpenMapYard(int unused)
         YardToMap();
 }
 
-extern char far *far fd_55B3_2A36;
+extern char far *far yardBalloon;
 extern char far *far fd_55B3_2A3A;
 
 char far * far f_00F8_0543(int object, int type)
@@ -330,7 +330,7 @@ char far * far f_00F8_0543(int object, int type)
     if (type == 2) {
         switch (object) {
         case 30000:
-            return fd_55B3_2A36;
+            return yardBalloon;
         case 30001:
             return fd_55B3_2A3A;
         }

@@ -103,14 +103,14 @@ extern long far BoyMsgCnt;
 extern int far BoyX;
 extern int far BoyY;
 extern int far BoyTurnCnt;
-extern int far fd_3D57_0C2A;
-extern long far fd_50F6_107E;
-extern long far fd_50F6_0220;
+extern int far BoyWait;
+extern long far BirdDelay;
+extern long far CatDelay;
 extern int far DogY;
 extern int far DogX;
 extern int far BoyDir;
-extern int far fd_50F6_0624;
-extern int far fd_50F6_10B0;
+extern int far DogTurnCnt;
+extern int far BoyMessOn;
 extern int far BoyPx;
 extern int far BoyPy;
 extern int far BoyFrame;
@@ -119,32 +119,32 @@ extern int far BoyStandCnt;
 extern int far NodeCnt;
 extern int far NodeNum;
 extern int far BirdOn;
-extern int far fd_50F6_022C;
-extern int far fd_50F6_0244;
+extern int far CatCycle;
+extern int far CatFrame;
 extern int far CatOn;
 extern int far DogFrame;
-extern int far fd_50F6_0506;
+extern int far DogDir;
 extern int far FootHere;
 extern int far FootTog;
 extern int far FootX;
 extern int far FootY;
-extern int far fd_50F6_0470;
-extern int far fd_50F6_047A;
-extern int far fd_50F6_0202;
+extern int far MowX;
+extern int far MowY;
+extern int far BoyIsMowing;
 extern int far RainOn;
-extern int far fd_50F6_105C;
-extern int far fd_50F6_1066;
+extern int far SwarmDelayB;
+extern int far SwarmDelayR;
 extern int far BirdFrame;
-extern int far fd_50F6_0364;
-extern int far fd_50F6_036E;
-extern int far fd_50F6_10BC;
-extern int far fd_50F6_07C2;
+extern int far LastColonyPopB;
+extern int far LastColonyPopR;
+extern int far BoyMsgOffset;
+extern int far YardCycle;
 extern int far ForSaleState;
 extern int far fd_50F6_0F24;
-extern int far fd_50F6_0B20;
-extern int far fd_50F6_0356;
-extern int far fd_50F6_0488;
-extern int far fd_50F6_0492;
+extern int far GlobalKey;
+extern int far RainCnt;
+extern int far LastMowX;
+extern int far LastMowY;
 extern int far CurGameType;
 extern char far BxTab[4];
 extern char far ByTab[4];
@@ -162,14 +162,14 @@ void far InitSimYard(void)
     BoyX = 0xb4;        /* BoyX */
     BoyY = 0x49;        /* BoyY */
     BoyTurnCnt = 0xc;         /* BoyTurnCnt */
-    fd_3D57_0C2A = 0x14;        /* BoyWait */
-    fd_50F6_107E = 0L;          /* BirdDelay */
-    fd_50F6_0220 = 0L;          /* CatDelay */
+    BoyWait = 0x14;        /* BoyWait */
+    BirdDelay = 0L;          /* BirdDelay */
+    CatDelay = 0L;          /* CatDelay */
     DogX = 0xfa;        /* DogX */
     DogY = 0x96;        /* DogY */
     BoyDir = 2;           /* BoyDir */
-    fd_50F6_0624 = 2;           /* DogTurnCnt */
-    fd_50F6_10B0 = 0;           /* BoyMessOn */
+    DogTurnCnt = 2;           /* DogTurnCnt */
+    BoyMessOn = 0;           /* BoyMessOn */
     BoyPx = 0;           /* BoyPx */
     BoyPy = 0;           /* BoyPy */
     BoyFrame = 0;           /* BoyFrame */
@@ -178,26 +178,26 @@ void far InitSimYard(void)
     NodeCnt = 0;           /* NodeCnt */
     NodeNum = 0;           /* NodeNum */
     BirdOn = 0;           /* BirdOn */
-    fd_50F6_022C = 0;           /* CatCycle */
-    fd_50F6_0244 = 0;           /* CatFrame */
+    CatCycle = 0;           /* CatCycle */
+    CatFrame = 0;           /* CatFrame */
     CatOn = 0;           /* CatOn */
     DogFrame = 0;           /* DogFrame */
-    fd_50F6_0506 = 0;           /* DogDir */
+    DogDir = 0;           /* DogDir */
     FootHere = 0;           /* FootHere */
     FootTog = 0;           /* FootTog */
     FootX = 0;           /* FootX */
     FootY = 0;           /* FootY */
-    fd_50F6_0470 = 0;           /* MowX */
-    fd_50F6_047A = 0;           /* MowY */
-    fd_50F6_0202 = 0;           /* BoyIsMowing */
+    MowX = 0;           /* MowX */
+    MowY = 0;           /* MowY */
+    BoyIsMowing = 0;           /* BoyIsMowing */
     RainOn = 0;           /* RainOn */
-    fd_50F6_105C = 0;           /* SwarmDelayB */
-    fd_50F6_1066 = 0;           /* SwarmDelayR */
+    SwarmDelayB = 0;           /* SwarmDelayB */
+    SwarmDelayR = 0;           /* SwarmDelayR */
     BirdFrame = 1;           /* BirdFrame */
-    fd_50F6_0364 = 1;           /* LastColonyPopB */
-    fd_50F6_036E = 1;           /* LastColonyPopR */
-    fd_50F6_10BC = -1;          /* BoyMsgOffset */
-    fd_50F6_07C2 = -1;          /* YardCycle */
+    LastColonyPopB = 1;           /* LastColonyPopB */
+    LastColonyPopR = 1;           /* LastColonyPopR */
+    BoyMsgOffset = -1;          /* BoyMsgOffset */
+    YardCycle = -1;          /* YardCycle */
 }
 
 
@@ -205,9 +205,9 @@ void far InitSimYard(void)
 /* DoSimYard */
 void far DoSimYard(void)
 {
-    fd_50F6_07C2++;
-    if (fd_50F6_07C2 >= 0x400)
-        fd_50F6_07C2 = 0;
+    YardCycle++;
+    if (YardCycle >= 0x400)
+        YardCycle = 0;
     if (NodeNum < 0x26)
         SimKidInside();
     else
@@ -226,8 +226,8 @@ void far SendBoyMsg(int message)
 {
     if (message <= 22) {
         BoyMsgCnt = MacTickCount() + 300L;
-        fd_50F6_10B0 = 1;
-        fd_50F6_10BC = message;
+        BoyMessOn = 1;
+        BoyMsgOffset = message;
     }
 }
 
@@ -237,21 +237,21 @@ void far SimRain(void)
 {
     if (fd_50F6_0F24 != 1) {            /* TERRAINset */
         if (RainOn == 0) {
-            if (fd_50F6_0B20 != 0xa8) { /* GlobalKey */
+            if (GlobalKey != 0xa8) { /* GlobalKey */
                 if (RRand(32) != 0)
                     return;
                 if (RRand(128) != 0)
                     return;
             }
             RainOn = 1;
-            fd_50F6_0356 = SRand1(150) + 150;   /* RainCnt */
+            RainCnt = SRand1(150) + 150;   /* RainCnt */
             f_0BE8_063A();                      /* InitWater */
             SendBoyMsg(0);
             return;
         }
-        if (fd_50F6_0356 > 0)
-            fd_50F6_0356--;
-        if (fd_50F6_0356 < 1)
+        if (RainCnt > 0)
+            RainCnt--;
+        if (RainCnt < 1)
             RainOn = 0;
     }
 }
@@ -263,10 +263,10 @@ void far SimKidOutside(void)
 {
     register int v;
 
-    if (FootHere != 0 && (fd_50F6_07C2 & 3) != 0)
+    if (FootHere != 0 && (YardCycle & 3) != 0)
         return;
-    if (fd_50F6_0202 != 0) {
-        if (fd_50F6_0488 != BoyPx || fd_50F6_0492 != BoyPy)
+    if (BoyIsMowing != 0) {
+        if (LastMowX != BoyPx || LastMowY != BoyPy)
             BoyDir = GetMowDir(BoyPx, BoyPy);
     } else if (--BoyTurnCnt < 0) {
         BoyDir = (SRand1(3) + BoyDir - 1) & 3;
@@ -296,9 +296,9 @@ void far SimKidOutside(void)
             BoyDir = 3;
         else {
             BoyHere = 3;
-            fd_50F6_0488 = 3;
-            fd_50F6_0492 = 13;
-            fd_50F6_0202 = 1;
+            LastMowX = 3;
+            LastMowY = 13;
+            BoyIsMowing = 1;
             InitGrassMap();
             BoyDir = 2;
             BoyX = 0x7d;
@@ -312,9 +312,9 @@ void far SimKidOutside(void)
             SendBoyMsg(6);
             BoyHere = 4;
         }
-        fd_50F6_0488 = BoyPx;
-        fd_50F6_0492 = BoyPy;
-        fd_50F6_0202 = 1;
+        LastMowX = BoyPx;
+        LastMowY = BoyPy;
+        BoyIsMowing = 1;
         break;
     case 4:
         if (BoyPy < 12)
@@ -325,10 +325,10 @@ void far SimKidOutside(void)
             BoyDir = 3;
         else {
             BoyHere = 5;
-            fd_50F6_0202 = 0;
+            BoyIsMowing = 0;
         }
-        fd_50F6_0488 = BoyPx;
-        fd_50F6_0492 = BoyPy;
+        LastMowX = BoyPx;
+        LastMowY = BoyPy;
         break;
     case 5:
         if (BoyPy < 5)
@@ -341,8 +341,8 @@ void far SimKidOutside(void)
             BoyHere = 1;
         break;
     }
-    BoyFrame = dirFrame[BoyDir] + stepAnim[fd_50F6_07C2 & 3];
-    if (fd_50F6_0202 != 0) {
+    BoyFrame = dirFrame[BoyDir] + stepAnim[YardCycle & 3];
+    if (BoyIsMowing != 0) {
         BoyFrame += 100;
         BoyX += BxTab[BoyDir];
         BoyY += ByTab[BoyDir];
@@ -365,7 +365,7 @@ void far SimKidOutside(void)
         BoyPx = 0;
     if (BoyPx > 11)
         BoyPx = 11;
-    if (fd_50F6_0202 == 0) {
+    if (BoyIsMowing == 0) {
         if (BoyPy < 1)
             BoyDir = 2;
         else if (BoyPy > 14)
@@ -393,8 +393,8 @@ void far SimKidOutside(void)
         FootX = (BoyX + BoyY - 200) % 28;
         FootX = ((FootX << 2) + 6) & 0x7f;
         FootY = ((FootY + 1) * 6) & 0x3f;
-        fd_50F6_0470 = FootX + footDx[BoyDir & 3];
-        fd_50F6_047A = FootY + footDy[BoyDir & 3];
+        MowX = FootX + footDx[BoyDir & 3];
+        MowY = FootY + footDy[BoyDir & 3];
         if (BoyDir & 1) {
             if (FootTog != 0)
                 FootY += 6;
@@ -407,9 +407,9 @@ void far SimKidOutside(void)
                 FootX -= 6;
         }
         FootFall(FootX, FootY);
-        if (fd_50F6_0202 != 0)
-            MowerFall(fd_50F6_0470, fd_50F6_047A);
-    } else if (fd_50F6_0202 != 0) {
+        if (BoyIsMowing != 0)
+            MowerFall(MowX, MowY);
+    } else if (BoyIsMowing != 0) {
         if ((v = YMapPopB[BoyPx][BoyPy]) != 0) {
             if ((v -= v >> 2) == 0)
                 BColoniesKilled++;
@@ -443,7 +443,7 @@ int far GetMowDir(int x, int y)
         BoyHere = 4;
         return 2;
     }
-    return fd_50F6_07C2 & 3;
+    return YardCycle & 3;
 }
 
 
@@ -716,9 +716,9 @@ void far SimKidInside(void)
 }
 
 extern int far BirdX;
-extern int far fd_50F6_0210;
+extern int far BirdGoalY;
 extern int far BirdY;
-extern int far fd_50F6_0208;
+extern int far BirdGoalX;
 extern int far SwarmCntB;
 extern int far QueenStorageB;
 extern int far SwarmCntR;
@@ -742,7 +742,7 @@ void far SimBird(void)
         else
             BirdX += 8;
         if (BirdOn == 1) {
-            d = fd_50F6_0210 - BirdY;
+            d = BirdGoalY - BirdY;
             if (d != 0) {
                 if (((d >= 0) ? d : -d) >= 4)
                     BirdY += d > 0 ? 4 : -4;
@@ -754,13 +754,13 @@ void far SimBird(void)
         BirdFrame = (BirdFrame + 1) & 1;
         if (BirdX < 0 || BirdX > 0x1ff || BirdY < 0 || BirdY > 0xff) {
             BirdOn = 0;
-            fd_50F6_107E = fd_50F6_383A + 30L;
+            BirdDelay = fd_50F6_383A + 30L;
             return;
         }
         if (BirdOn != 1)
             return;
-        if (BirdX < fd_50F6_0208 || BirdY < fd_50F6_0210 - 4 ||
-            BirdY > fd_50F6_0210 + 4)
+        if (BirdX < BirdGoalX || BirdY < BirdGoalY - 4 ||
+            BirdY > BirdGoalY + 4)
             return;
         if (SwarmCntB > 0)
             SwarmCntB -= (SwarmCntB + 7) >> 3;
@@ -777,12 +777,12 @@ void far SimBird(void)
                 f_00DF_00E8(7, 0, 6);
         }
         BirdOn = 2;
-    } else if (fd_50F6_383A > fd_50F6_107E) {
-        fd_50F6_107E = fd_50F6_383A + 20L;
+    } else if (fd_50F6_383A > BirdDelay) {
+        BirdDelay = fd_50F6_383A + 20L;
         if (CurYardPnt[0] >= 5 && SRand2() == 0 &&
             (SwarmCntB > 0 || SwarmCntR > 0)) {
-            fd_50F6_0208 = CurYardPnt[0] * 0x1c - CurYardPnt[1] * 10 + 0xb2;
-            fd_50F6_0210 = CurYardPnt[1] * 10 + 0x2e;
+            BirdGoalX = CurYardPnt[0] * 0x1c - CurYardPnt[1] * 10 + 0xb2;
+            BirdGoalY = CurYardPnt[1] * 10 + 0x2e;
             BirdOn = 1;
             BirdX = 0;
             BirdY = SRand64() + 4;
@@ -791,12 +791,12 @@ void far SimBird(void)
     }
 }
 
-extern int far fd_50F6_0240;
+extern int far CatDir;
 extern char far fd_3D57_0000[];
-extern int far fd_50F6_02BE;
-extern int far fd_50F6_032C;
+extern int far CatX;
+extern int far CatY;
 extern char far fd_3D57_0008[];
-extern int far fd_50F6_0506;
+extern int far DogDir;
 extern int far SRand16(void);
 extern unsigned long far f_0BE8_0B83(int x1, int y1, int x2, int y2);
 
@@ -807,77 +807,77 @@ void far SimCat(void)
     register int newY;
 
     if (CatOn != 0) {
-        fd_50F6_022C = (fd_50F6_022C + 1) & 0xfff;
+        CatCycle = (CatCycle + 1) & 0xfff;
         if (CatOn == 1) {
-            newX = fd_50F6_02BE + fd_3D57_0000[fd_50F6_0240] * 4;
-            newY = fd_50F6_032C + fd_3D57_0008[fd_50F6_0240] * 4;
+            newX = CatX + fd_3D57_0000[CatDir] * 4;
+            newY = CatY + fd_3D57_0008[CatDir] * 4;
             if (SRand16() != 0 && newX >= 0xfc && newX <= 0x1ef) {
-                fd_50F6_02BE = newX;
-                fd_50F6_032C = newY;
-                fd_50F6_0244++;
-                if (fd_50F6_0240 == 2) {
-                    if (fd_50F6_0244 >= 3)
-                        fd_50F6_0244 = 1;
+                CatX = newX;
+                CatY = newY;
+                CatFrame++;
+                if (CatDir == 2) {
+                    if (CatFrame >= 3)
+                        CatFrame = 1;
                 } else {
-                    if (fd_50F6_0244 >= 6)
-                        fd_50F6_0244 = 4;
+                    if (CatFrame >= 6)
+                        CatFrame = 4;
                 }
-            } else if (fd_50F6_0240 == 2) {
-                fd_50F6_0240 = 6;
-                fd_50F6_0244 = 4;
+            } else if (CatDir == 2) {
+                CatDir = 6;
+                CatFrame = 4;
             } else {
-                fd_50F6_0240 = 2;
-                fd_50F6_0244 = 1;
+                CatDir = 2;
+                CatFrame = 1;
             }
             if (MapMode == 0 && YardMode < 2 && SRand64() == 0) {
                 f_00DF_00E8(0xd, 0, 5);
                 return;
             }
-            if (SRand16() == 0 && fd_50F6_022C > 100 && fd_50F6_0506 == 2 && BoyHere == 0) {
+            if (SRand16() == 0 && CatCycle > 100 && DogDir == 2 && BoyHere == 0) {
                 CatOn = 2;
-                fd_50F6_022C = 0;
-                fd_50F6_0244 = 10;
+                CatCycle = 0;
+                CatFrame = 10;
                 return;
             }
-            if (fd_50F6_022C > 50) {
-                if (f_0BE8_0B83(fd_50F6_02BE, fd_50F6_032C, DogX, DogY) <= 0x960) {
+            if (CatCycle > 50) {
+                if (f_0BE8_0B83(CatX, CatY, DogX, DogY) <= 0x960) {
                     CatOn = 3;
-                    fd_50F6_0244 = 20;
+                    CatFrame = 20;
                     if (MapMode == 0 && YardMode < 2)
                         f_00DF_00E8(0xe, 0, 5);
                 }
             }
         } else if (CatOn == 2) {
-            if (++fd_50F6_0244 >= 13)
-                fd_50F6_0244 = 11;
-            if (++fd_50F6_022C > 30) {
-                fd_50F6_022C = 0;
+            if (++CatFrame >= 13)
+                CatFrame = 11;
+            if (++CatCycle > 30) {
+                CatCycle = 0;
                 CatOn = 1;
-                fd_50F6_0244 = (fd_50F6_0240 == 2) ? 0 : 3;
+                CatFrame = (CatDir == 2) ? 0 : 3;
             }
         } else {
-            if (++fd_50F6_0244 >= 30) {
-                fd_50F6_0244 = 0;
+            if (++CatFrame >= 30) {
+                CatFrame = 0;
                 CatOn = 0;
-                fd_50F6_0220 = MacTickCount() + 600L;
+                CatDelay = MacTickCount() + 600L;
             }
         }
-    } else if (MacTickCount() > fd_50F6_0220) {
-        fd_50F6_0220 = MacTickCount() + 200L;
-        if (SRand16() == 0 || fd_50F6_0B20 == 0x8d) {
+    } else if (MacTickCount() > CatDelay) {
+        CatDelay = MacTickCount() + 200L;
+        if (SRand16() == 0 || GlobalKey == 0x8d) {
             CatOn = 1;
-            fd_50F6_02BE = 0xfc;
-            fd_50F6_032C = 0x19;
-            fd_50F6_0240 = 2;
-            fd_50F6_0244 = 0;
-            fd_50F6_022C = 0;
+            CatX = 0xfc;
+            CatY = 0x19;
+            CatDir = 2;
+            CatFrame = 0;
+            CatCycle = 0;
         }
     }
 }
 
-extern long far fd_50F6_0736;
-extern int far fd_50F6_059E;
-extern int far fd_50F6_0510;
+extern long far DogBarkDelay;
+extern int far DogPy;
+extern int far DogPx;
 int far FollowBoyDir(void);
 int far FollowCatDir(void);
 void far MakeBark(int kind, int level);
@@ -885,43 +885,43 @@ void far MakeBark(int kind, int level);
 /* SimDog (Win16 unit order) */
 void far SimDog(void)
 {
-    if (--fd_50F6_0624 < 0) {
+    if (--DogTurnCnt < 0) {
         if (CatOn != 0)
-            fd_50F6_0506 = FollowCatDir();
+            DogDir = FollowCatDir();
         else if (NodeNum < 0x26)
-            fd_50F6_0506 = (SRand1(3) + fd_50F6_0506 - 1) & 3;
+            DogDir = (SRand1(3) + DogDir - 1) & 3;
         else
-            fd_50F6_0506 = FollowBoyDir();
-        fd_50F6_0624 = 4;
+            DogDir = FollowBoyDir();
+        DogTurnCnt = 4;
     }
-    if (fd_50F6_0506 == 1 && SRand1(10) == 0) {
-        fd_50F6_0506 = SRand2() + 4;
-        fd_50F6_0624 = 6;
+    if (DogDir == 1 && SRand1(10) == 0) {
+        DogDir = SRand2() + 4;
+        DogTurnCnt = 6;
     }
-    if (fd_50F6_0506 > 3)
-        DogFrame = dogD[fd_50F6_0506] + (fd_50F6_07C2 & 1);
+    if (DogDir > 3)
+        DogFrame = dogD[DogDir] + (YardCycle & 1);
     else
-        DogFrame = dogD[fd_50F6_0506] + dogC[fd_50F6_07C2 & 3];
-    DogY += dogB[fd_50F6_0506];
-    fd_50F6_059E = (DogY - 38) / 10;
-    DogX += dogA[fd_50F6_0506];
-    fd_50F6_0510 = (DogX + DogY - 200) / 28;
-    if (fd_50F6_059E < 0)
-        fd_50F6_059E = 0;
-    if (fd_50F6_059E > 15)
-        fd_50F6_059E = 15;
-    if (fd_50F6_0510 < 0)
-        fd_50F6_0510 = 0;
-    if (fd_50F6_0510 > 11)
-        fd_50F6_0510 = 11;
-    if (fd_50F6_059E < 1)
-        fd_50F6_0506 = 2;
-    else if (fd_50F6_059E > 14)
-        fd_50F6_0506 = 0;
-    if (fd_50F6_0510 > 10)
-        fd_50F6_0506 = 3;
-    else if (fd_50F6_0510 < 4)
-        fd_50F6_0506 = 1;
+        DogFrame = dogD[DogDir] + dogC[YardCycle & 3];
+    DogY += dogB[DogDir];
+    DogPy = (DogY - 38) / 10;
+    DogX += dogA[DogDir];
+    DogPx = (DogX + DogY - 200) / 28;
+    if (DogPy < 0)
+        DogPy = 0;
+    if (DogPy > 15)
+        DogPy = 15;
+    if (DogPx < 0)
+        DogPx = 0;
+    if (DogPx > 11)
+        DogPx = 11;
+    if (DogPy < 1)
+        DogDir = 2;
+    else if (DogPy > 14)
+        DogDir = 0;
+    if (DogPx > 10)
+        DogDir = 3;
+    else if (DogPx < 4)
+        DogDir = 1;
     if (DogFrame >= 100 && DogFrame <= 103 && SRand1(6) == 0)
         MakeBark(SRand4(), 5);
 }
@@ -934,8 +934,8 @@ int far FollowBoyDir(void)
     register int ady;
     int adx;
 
-    dy = fd_50F6_059E - BoyPy;
-    dx = fd_50F6_0510 - BoyPx;
+    dy = DogPy - BoyPy;
+    dx = DogPx - BoyPx;
     if (dx < 0)
         adx = -dx;
     else
@@ -944,10 +944,10 @@ int far FollowBoyDir(void)
         ady = -dy;
     else
         ady = dy;
-    if (adx < 1 && ady < 1 && fd_50F6_0202 != 0)
+    if (adx < 1 && ady < 1 && BoyIsMowing != 0)
         MakeBark(1, 0x7f);
     if (adx < 2 && ady < 2)
-        return fd_50F6_07C2 & 3;
+        return YardCycle & 3;
     if (dy < 0)
         return 2;
     if (dy > 1)
@@ -956,25 +956,25 @@ int far FollowBoyDir(void)
         return 1;
     if (dx > 1)
         return 3;
-    return fd_50F6_07C2 & 3;
+    return YardCycle & 3;
 }
 
 /* FollowCatDir (Win16 unit order) */
 int far FollowCatDir(void)
 {
-    if (fd_50F6_0510 < 5)
+    if (DogPx < 5)
         return 1;
-    if (fd_50F6_0510 > 8)
+    if (DogPx > 8)
         return 3;
-    if (fd_50F6_059E > 0)
+    if (DogPy > 0)
         return 0;
-    return fd_50F6_07C2 & 3;
+    return YardCycle & 3;
 }
 
 /* MakeBark (Win16 unit order) */
 void far MakeBark(int kind, int level)
 {
-    if (MapMode == 0 && YardMode < 2 && MacTickCount() > fd_50F6_0736) {
+    if (MapMode == 0 && YardMode < 2 && MacTickCount() > DogBarkDelay) {
         switch (kind) {
         case 0:
         case 2:
@@ -987,7 +987,7 @@ void far MakeBark(int kind, int level)
             f_00DF_00E8(0x16, 0, level);
             break;
         }
-        fd_50F6_0736 = MacTickCount() + SRand1(30) + 60;
+        DogBarkDelay = MacTickCount() + SRand1(30) + 60;
     }
 }
 
@@ -1113,7 +1113,7 @@ void far SimColonies(void)
     int patches, b, y, r;
     int x;
 
-    if (fd_50F6_07C2 & 0x1f)
+    if (YardCycle & 0x1f)
         return;
     ColonyUpdateFlag = 1;
     MaintainSwarm();
@@ -1185,18 +1185,18 @@ void far SimColonies(void)
         }
     }
     if (LayDownQueenMode == 1) {
-        fd_50F6_105C++;
-        if (fd_50F6_105C > SRand8() + 10) {
-            fd_50F6_105C = 0;
+        SwarmDelayB++;
+        if (SwarmDelayB > SRand8() + 10) {
+            SwarmDelayB = 0;
             while (QueenStorageB > 0) {
                 Reproduce(CurYardPnt[0], CurYardPnt[1], 0);
                 QueenStorageB--;
             }
         }
     }
-    fd_50F6_1066++;
-    if (fd_50F6_1066 > SRand8() + 10) {
-        fd_50F6_1066 = 0;
+    SwarmDelayR++;
+    if (SwarmDelayR > SRand8() + 10) {
+        SwarmDelayR = 0;
         while (QueenStorageR > 0) {
             Reproduce(CurYardPnt[0], CurYardPnt[1], 1);
             QueenStorageR--;
@@ -1204,14 +1204,14 @@ void far SimColonies(void)
     }
     if (CurGameType != 2)
         return;
-    if (ColonyTotalRed == 0 && fd_50F6_036E != 0) {
+    if (ColonyTotalRed == 0 && LastColonyPopR != 0) {
         myBeginSong(0x4e22, 0x7e);
         o14_384C_0B6A(0, 0x2744, 1);
         if (ForSaleState == 0)
             o14_384C_0B6A(0, 0x2747, 1);
     }
-    fd_50F6_0364 = ColonyTotalBlack;
-    fd_50F6_036E = ColonyTotalRed;
+    LastColonyPopB = ColonyTotalBlack;
+    LastColonyPopR = ColonyTotalRed;
     if (ForSaleState == 0 && HouseColonies > 24) {
         ForSaleState = 1;
         NodeNum = 0;
@@ -1290,18 +1290,18 @@ void far Reproduce(int x, int y, int colony)
     }
 }
 
-extern int far fd_50F6_0402;
-extern int far fd_50F6_037A;
+extern int far MigrateY;
+extern int far MigrateX;
 
 /* picks the source colony cell under a yard position */
 void far StartMigrate(int x, int y)
 {
-    fd_50F6_0402 = (y - 0x42) / 10;
-    fd_50F6_037A = (x + y - 0xee) / 28;
-    if (fd_50F6_037A < 0 || fd_50F6_0402 < 0 || fd_50F6_037A > 11 || fd_50F6_0402 > 15)
-        fd_50F6_037A = -1;
-    if (YMapPopB[fd_50F6_037A][fd_50F6_0402] == 0)
-        fd_50F6_037A = -1;
+    MigrateY = (y - 0x42) / 10;
+    MigrateX = (x + y - 0xee) / 28;
+    if (MigrateX < 0 || MigrateY < 0 || MigrateX > 11 || MigrateY > 15)
+        MigrateX = -1;
+    if (YMapPopB[MigrateX][MigrateY] == 0)
+        MigrateX = -1;
 }
 
 /* moves half of the source colony to the yard cell under a position */
@@ -1311,14 +1311,14 @@ void far EndMigrate(int x, int y)
     register int nx;
     register int ny;
 
-    if (fd_50F6_037A < 0)
+    if (MigrateX < 0)
         return;
     ny = (y - 0x42) / 10;
     nx = (x + y - 0xee) / 28;
     if (nx < 0 || ny < 0 || nx > 11 || ny > 15)
         return;
-    half = YMapPopB[fd_50F6_037A][fd_50F6_0402] >> 1;
-    YMapPopB[fd_50F6_037A][fd_50F6_0402] -= half;
+    half = YMapPopB[MigrateX][MigrateY] >> 1;
+    YMapPopB[MigrateX][MigrateY] -= half;
     sum = YMapPopB[nx][ny] + half;
     if (sum < 0xfb)
         YMapPopB[nx][ny] = sum;

@@ -10,7 +10,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_9128:byte
 	public	_g_3D20, _g_3DA0, _g_3DA2, _g_3DA4, _g_3DA8, _g_3DAA, _g_3DAC, _g_3DAE
 	public	_g_3DB0, _g_3DB2, _g_3DB4, _g_3DB6, _g_3DC1, _g_3DCA, _g_3DD2, _g_3DD4
-	public	_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _g_3DDE, __foreColor, _g_3DE1, _g_3DE2
+	public	_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _fontWidth, __foreColor, _g_3DE1, _g_3DE2
 	public	_g_3DE3, _g_3DE4, _g_3DE5, _fd_55B3_3DE6, _fd_55B3_3DE8, _g_3DEA, _g_3DEC
 	public	_g_3DED, _g_3DEE, _g_3DEF, _g_3DF1, _g_3DF2, _g_3DF4, _g_3DF8, _g_3DFC
 	public	_g_41C0, _g_41D0, _g_4220
@@ -35,7 +35,7 @@ _g_3DD6		dw	0		; current font bitmap (far pointer)
 _g_3DD8		dw	0
 _g_3DDA		dw	0
 _g_3DDC		dw	0		; character cell height, width
-_g_3DDE		dw	8
+_fontWidth		dw	8
 __foreColor		db	0Fh		; pen colour
 _g_3DE1		db	0
 _g_3DE2		db	0
@@ -187,14 +187,14 @@ _f_1B4E_0081	proc	far
 	push word ptr _g_3DDC
 	les si, dword ptr [bp+0Ah]
 	mov bx, word ptr [bp+8]
-	sub di, word ptr _g_3DDE
+	sub di, word ptr _fontWidth
 L0097:
 	mov al, byte ptr es:[si]
 	inc si
 	and al, al
 	je L00BB
 	cbw
-	add di, word ptr _g_3DDE
+	add di, word ptr _fontWidth
 	js L0097
 	push es
 	push ax
@@ -206,7 +206,7 @@ L0097:
 	cmp di, word ptr _g_3DB2
 	jb L0097
 L00BB:
-	add di, word ptr _g_3DDE
+	add di, word ptr _fontWidth
 	mov word ptr _g_3DA0, di
 	mov ax, word ptr [bp+8]
 	mov word ptr _g_3DA2, ax
@@ -256,7 +256,7 @@ L0135:
 	les si, dword ptr _g_3DD6
 	add si, ax
 	push word ptr _g_3DDC
-	push word ptr _g_3DDE
+	push word ptr _fontWidth
 	push es
 	push si
 	push word ptr [bp+8]

@@ -723,7 +723,7 @@ void far DoNestingB(int x, int y, int attr, int caste)
 }
 
 extern int far CastePopB[6];
-extern int far fd_50F6_0212;
+extern int far EatCountB;
 extern int far AlwaysHealthy;
 
 void far TryEatFoodB(int x, int y)
@@ -741,9 +741,9 @@ void far TryEatFoodB(int x, int y)
     if (fd_50F6_1050 > 0)
         fd_50F6_1050--;
     threshold = (BpopT + CastePopB[2]) >> 4;
-    fd_50F6_0212 += 5;
-    if (threshold < fd_50F6_0212) {
-        fd_50F6_0212 = 0;
+    EatCountB += 5;
+    if (threshold < EatCountB) {
+        EatCountB = 0;
         if (fd_50F6_10BE < 100)
             fd_50F6_10BE++;
     }
@@ -757,9 +757,9 @@ void far EatFoodB(int x, int y)
         fd_3E1D_2180[x][y]--;
     if (fd_50F6_1050 > 0)
         fd_50F6_1050--;
-    fd_50F6_0212 += 5;
-    if ((BpopT + CastePopB[2]) >> 4 < fd_50F6_0212) {
-        fd_50F6_0212 = 0;
+    EatCountB += 5;
+    if ((BpopT + CastePopB[2]) >> 4 < EatCountB) {
+        EatCountB = 0;
         if (fd_50F6_10BE < 100)
             fd_50F6_10BE++;
     }
@@ -777,9 +777,9 @@ void far StealFoodB(int x, int y)
 
 void far DecEatB(void)
 {
-    --fd_50F6_0212;
-    if (fd_50F6_0212 < 0) {
-        fd_50F6_0212 = BpopT >> 5;
+    --EatCountB;
+    if (EatCountB < 0) {
+        EatCountB = BpopT >> 5;
         if (fd_50F6_10BE > 0 && !AlwaysHealthy)
             --fd_50F6_10BE;
     }

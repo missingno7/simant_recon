@@ -21,13 +21,13 @@ struct Pt {
     int y;
 };
 
-void far *fd_55B3_65A4 = 0;
+void far *curFontPtr = 0;
 
 extern struct Bitmap far * far font_MakeImage(char far *s, int x, void far *font);
 extern char near g_5A97;
 extern Handle far Ralloc(long size, int flags, char far *name);
 extern char far * far mem_Lock(Handle h);
-extern struct Bitmap far fd_50F6_392C;
+extern struct Bitmap far out_buffer;
 extern void far ConvertMonoToTandy(char far *dst, char far *src, int width, int height);
 extern int near g_3DB2;
 extern void far invert(char far *bits, int size);
@@ -44,22 +44,22 @@ Handle far f_24AB_0002(char far *text)
     char far *src;
     char far *dst;
 
-    font_MakeImage(text, 0, fd_55B3_65A4);
+    font_MakeImage(text, 0, curFontPtr);
     if ((g_5A97 & 1) == 0) {
         if (g_5A97 == 2) {
-            h = Ralloc((long)((fd_50F6_392C.width + 1) / 2 * fd_50F6_392C.height + 12), 1, "fontBuf");
+            h = Ralloc((long)((out_buffer.width + 1) / 2 * out_buffer.height + 12), 1, "fontBuf");
             p = mem_Lock(h);
-            ConvertMonoToTandy(p + 12, fd_50F6_392C.bits, fd_50F6_392C.width, fd_50F6_392C.height);
+            ConvertMonoToTandy(p + 12, out_buffer.bits, out_buffer.width, out_buffer.height);
         } else {
-            bpr = (fd_50F6_392C.width + 7) / 8;
-            size = bpr * fd_50F6_392C.height * 4;
+            bpr = (out_buffer.width + 7) / 8;
+            size = bpr * out_buffer.height * 4;
             h = Ralloc((long)(size + 12), 1, "fontBuf");
             p = mem_Lock(h);
-            src = fd_50F6_392C.bits;
+            src = out_buffer.bits;
             dst = p + 12;
             if (g_3DB2 == 320)
                 invert(src, size);
-            for (i = 0; i < fd_50F6_392C.height; i++) {
+            for (i = 0; i < out_buffer.height; i++) {
                 _fmemcpy(dst, src, bpr);
                 dst += bpr;
                 _fmemcpy(dst, src, bpr);
@@ -72,16 +72,16 @@ Handle far f_24AB_0002(char far *text)
             }
         }
     } else {
-        size = (fd_50F6_392C.width + 7) / 8 * fd_50F6_392C.height;
+        size = (out_buffer.width + 7) / 8 * out_buffer.height;
         h = Ralloc((long)(size + 12), 1, "fontBuf");
         p = mem_Lock(h);
-        invert(fd_50F6_392C.bits, size);
-        _fmemcpy(p + 12, fd_50F6_392C.bits, size);
+        invert(out_buffer.bits, size);
+        _fmemcpy(p + 12, out_buffer.bits, size);
     }
     *(int far *)p = 0;
     p[2] = (g_5A97 & 1) ? 1 : 4;
-    ((int far *)p)[4] = fd_50F6_392C.width;
-    ((int far *)p)[5] = fd_50F6_392C.height;
+    ((int far *)p)[4] = out_buffer.width;
+    ((int far *)p)[5] = out_buffer.height;
     mem_Unlock(h);
     return h;
 }
@@ -98,19 +98,19 @@ void far font_SetFont(int font)
             (*g_912C)();
         else
             (*g_9130)();
-        fd_55B3_65A4 = 0;
+        curFontPtr = 0;
         break;
     case 1:
         if (g_3DB2 == 320)
             (*g_9130)();
         else
             (*g_912C)();
-        fd_55B3_65A4 = 0;
+        curFontPtr = 0;
         break;
     default:
         if (font > 5 || font < 0)
             font = 2;
-        fd_55B3_65A4 = fd_50F6_4A1A[font - 2];
+        curFontPtr = fd_50F6_4A1A[font - 2];
         break;
     }
 }
@@ -120,29 +120,29 @@ extern int far _font_FontHeight(void far *font);
 
 int far font_FontHeight(void)
 {
-    if (fd_55B3_65A4 == 0)
+    if (curFontPtr == 0)
         return g_3DDC;
-    return _font_FontHeight(fd_55B3_65A4);
+    return _font_FontHeight(curFontPtr);
 }
 
 extern unsigned far _fstrlen(char far *s);
-extern char near g_3DDE;
+extern char near fontWidth;
 extern int far _font_StringWidth(char far *s, void far *font);
 
 int far font_StringWidth(char far *s)
 {
-    if (fd_55B3_65A4 == 0)
-        return _fstrlen(s) * g_3DDE;
-    return _font_StringWidth(s, fd_55B3_65A4);
+    if (curFontPtr == 0)
+        return _fstrlen(s) * fontWidth;
+    return _font_StringWidth(s, curFontPtr);
 }
 
 extern int far _font_CharWidth(int c, void far *font);
 
 int far font_CharWidth(int c)
 {
-    if (fd_55B3_65A4 == 0)
-        return g_3DDE;
-    return _font_CharWidth(c, fd_55B3_65A4);
+    if (curFontPtr == 0)
+        return fontWidth;
+    return _font_CharWidth(c, curFontPtr);
 }
 
 extern struct Pt far g_3DA0;
@@ -156,13 +156,13 @@ void far font_PrintStr(int x, int y, char far *text)
         g_3DA0.y = y;
         return;
     }
-    if (fd_55B3_65A4 == 0) {
+    if (curFontPtr == 0) {
         GPutStr(x, y, text);
         return;
     }
-    font_MakeImage(text, 0, fd_55B3_65A4);
-    (*g_9154)(x, y, fd_50F6_392C.bits, fd_50F6_392C.width, fd_50F6_392C.height);
-    g_3DA0.x = fd_50F6_392C.width + x;
+    font_MakeImage(text, 0, curFontPtr);
+    (*g_9154)(x, y, out_buffer.bits, out_buffer.width, out_buffer.height);
+    g_3DA0.x = out_buffer.width + x;
     g_3DA0.y = y;
 }
 
@@ -190,7 +190,7 @@ extern void far * far font_ReadFont(char far *name);
 
 void far font_InitFonts(void)
 {
-    fd_50F6_392C.bits = g_5ABE;
+    out_buffer.bits = g_5ABE;
     fd_50F6_4A1A[0] = font_ReadFont("font1");
     fd_50F6_4A1A[1] = font_ReadFont("font2");
     fd_50F6_4A1A[2] = font_ReadFont("font3");

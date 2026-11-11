@@ -84,7 +84,7 @@ void far o17_384C_0169(int a, int b)
 }
 
 extern char near g_3DDC;
-extern char near g_3DDE;
+extern char near fontWidth;
 
 void far o17_384C_0184(int x, int len, int id)
 {
@@ -93,6 +93,6 @@ void far o17_384C_0184(int x, int len, int id)
     r.top = 1;
     r.bottom = g_3DDC + 1;
     r.left = x;
-    r.right = g_3DDE * len + x;
+    r.right = fontWidth * len + x;
     f_1FD2_03EB(&r, id);
 }

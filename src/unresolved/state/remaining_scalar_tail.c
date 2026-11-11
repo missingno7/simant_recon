@@ -1,10 +1,10 @@
-int far fd_50F6_04E0;
-int far fd_50F6_04F2;
+int far RedDestX;
+int far RedDestY;
 int far MeEgg;
-int far fd_50F6_0510;
-int far fd_50F6_059E;
+int far DogPx;
+int far DogPy;
 int far MeSMode;
-long far fd_50F6_0736;
+long far DogBarkDelay;
 int far FlyAwayB;
 int far FlyAwayR;
 int far CurRestPlane;

@@ -1233,8 +1233,8 @@ void far DrawSpider(void)
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
 extern int far BoyDir;
 extern int far BoyHere;
-extern int far fd_50F6_0470;
-extern int far fd_50F6_047A;
+extern int far MowX;
+extern int far MowY;
 
 /* OPEN: residue commutative operand order MapPnt.x + EditColumns (original loads the
  * MapPnt member first) - structural, not changed by names or preceding declaration counts. */
@@ -1256,13 +1256,13 @@ void far f_0250_1E80(void)
         else
             InvalEuMap(x, y, x + 6, y + 16);
         if (BoyHere == 3 || BoyHere == 4) {
-            if (MapPnt.x + fd_50F6_10E0 >= fd_50F6_0470 && fd_50F6_0470 + 0x1b >= MapPnt.x
-                && MapPnt.y + fd_50F6_10DE >= fd_50F6_047A && fd_50F6_047A + 0x1b >= MapPnt.x) {
-                x = (fd_50F6_0470 - MapPnt.x) * g_19BE + editTileRect.left;
-                y = (fd_50F6_047A - MapPnt.y) * g_19C0 + editTileRect.top;
+            if (MapPnt.x + fd_50F6_10E0 >= MowX && MowX + 0x1b >= MapPnt.x
+                && MapPnt.y + fd_50F6_10DE >= MowY && MowY + 0x1b >= MapPnt.x) {
+                x = (MowX - MapPnt.x) * g_19BE + editTileRect.left;
+                y = (MowY - MapPnt.y) * g_19C0 + editTileRect.top;
                 (*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x20);
-                x = fd_50F6_0470 - MapPnt.x;
-                y = fd_50F6_047A - MapPnt.y;
+                x = MowX - MapPnt.x;
+                y = MowY - MapPnt.y;
                 InvalEuMap(x, y, x + 0x1b, y + 0x1b);
             }
         }
@@ -1777,7 +1777,7 @@ extern int far fd_50F6_0F3C;
 extern char far * far * far BFightMsgs;
 extern int far fd_50F6_1064;
 extern int far fd_50F6_0FF8;
-extern char far * far * far fd_50F6_0218;
+extern char far * far * far RFightMsgs;
 extern int far fd_50F6_104A;
 extern long far fd_50F6_050C;
 extern long far fd_50F6_0732;
@@ -1791,7 +1791,7 @@ extern int far fd_50F6_0FC0;
 extern char far * far * far QueenMsgs;
 extern int far fd_50F6_107C;
 extern int far fd_50F6_103A;
-extern char far * far * far fd_50F6_023A;
+extern char far * far * far RestMsgs;
 extern void far font_SetFont(int font);
 extern Handle far MakeBalloon(char far *msg, int flags);
 extern long far fd_50F6_07C4;
@@ -1827,7 +1827,7 @@ void far DrawCurBalloons(void)
                 fd_50F6_0732 = TickCount() + SRand32() + 60;
                 if (SRand2() == 0) {
                     fd_50F6_1064 = 1;
-                    if (fd_50F6_0218[++fd_50F6_0FF8] == 0)
+                    if (RFightMsgs[++fd_50F6_0FF8] == 0)
                         fd_50F6_0FF8 = 0;
                 } else
                     fd_50F6_1064 = 0;
@@ -1836,7 +1836,7 @@ void far DrawCurBalloons(void)
         if (fd_50F6_1046)
             AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 0, BFightMsgs[fd_50F6_0F3C]);
         if (fd_50F6_1064)
-            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 1, fd_50F6_0218[fd_50F6_0FF8]);
+            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 1, RFightMsgs[fd_50F6_0FF8]);
     }
     if (EggBalloonCnt == 0 && LastEggPnt.x >= 0 && LastEggPnt.y >= 0) {
         CurEggPnt = LastEggPnt;
@@ -1890,13 +1890,13 @@ void far DrawCurBalloons(void)
             fd_50F6_07C4 = TickCount() + SRand64() + 120;
             if (SRand2() == 0) {
                 fd_50F6_107C = 1;
-                if (fd_50F6_023A[++fd_50F6_103A] == 0)
+                if (RestMsgs[++fd_50F6_103A] == 0)
                     fd_50F6_103A = 0;
             } else
                 fd_50F6_107C = 0;
         }
         if (fd_50F6_107C)
-            AddMsgBalloon(CurRestPnt.x, CurRestPnt.y, CurRestPlane, 2, fd_50F6_023A[fd_50F6_103A]);
+            AddMsgBalloon(CurRestPnt.x, CurRestPnt.y, CurRestPlane, 2, RestMsgs[fd_50F6_103A]);
     }
 }
 

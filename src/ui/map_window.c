@@ -21,12 +21,12 @@ struct Rect {
 };
 
 static int g_298E = 0;
-int fd_55B3_2990 = 0;
+int newMapForce = 0;
 static int g_2992 = -1;
 static int g_2994 = 0;
 int g_2996 = 0;
 static int g_2998 = -1;
-long fd_55B3_299A = 0;
+long mapMessage = 0;
 long fd_55B3_299E = 0;
 int fd_55B3_29A2 = 0;
 static int g_29A4 = 0;
@@ -153,7 +153,7 @@ extern void far GRectInvOutline(struct Rect far *rect, int width);
 extern void far clip_Pop(void);
 
 
-extern int far fd_50F6_3854;
+extern int far multiplier;
 extern void far win_MapChanged(void);
 extern int far MapMode;
 extern char far * far * far fd_50F6_385A;
@@ -172,8 +172,8 @@ extern unsigned char far LifeR[64][64];
 extern unsigned char far MapR[64][64];
 extern unsigned char far LifeB[64][64];
 extern unsigned char far MapB[64][64];
-extern unsigned char far fd_3D57_0656[];
-extern unsigned char far fd_3D57_04A6[];
+extern unsigned char far bw_CTabR[];
+extern unsigned char far CTabR[];
 extern int far BpopT;
 extern int far RpopT;
 extern int far HealthR;
@@ -211,8 +211,8 @@ extern int far FootX;
 extern int far FootY;
 extern int far BoyDir;
 extern int far BoyHere;
-extern int far fd_50F6_0470;
-extern int far fd_50F6_047A;
+extern int far MowX;
+extern int far MowY;
 extern void far AddFood(int count, int sound);
 extern void far myBeginSound(int sound, int a, int b);
 extern void far KillSomeAnts(int side);
@@ -256,14 +256,14 @@ void far ToggleMapCursor(void)
         DrawMapCursor();
 }
 
-extern int far fd_50F6_3854;
+extern int far multiplier;
 
 void far o12_384C_03D0(char far *src, char far *dst, int n)
 {
-    if (fd_50F6_3854 == 64)
-        (*fd_50F6_38BC)(src, dst, fd_50F6_3854, n);
+    if (multiplier == 64)
+        (*fd_50F6_38BC)(src, dst, multiplier, n);
     else
-        (*fd_50F6_38B8)(src, dst, fd_50F6_3854, n);
+        (*fd_50F6_38B8)(src, dst, multiplier, n);
 }
 
 extern void far win_MapChanged(void);
@@ -377,8 +377,8 @@ extern unsigned char far LifeR[64][64];
 extern unsigned char far MapR[64][64];
 extern unsigned char far LifeB[64][64];
 extern unsigned char far MapB[64][64];
-extern unsigned char far fd_3D57_0656[];
-extern unsigned char far fd_3D57_04A6[];
+extern unsigned char far bw_CTabR[];
+extern unsigned char far CTabR[];
 
 void far o12_384C_080E(void)
 {
@@ -412,7 +412,7 @@ void far o12_384C_080E(void)
                 c = *p;
                 switch (c) {
                 case 0:
-                    if (!fresh) *buf++ = fd_3D57_0656[*q >> 2]; else buf++;
+                    if (!fresh) *buf++ = bw_CTabR[*q >> 2]; else buf++;
                     break;
                 case 0xfe:
                 case 0xff:
@@ -429,7 +429,7 @@ void far o12_384C_080E(void)
                 c = *p;
                 switch (c) {
                 case 0:
-                    if (!fresh) *buf++ = fd_3D57_04A6[*q >> 2]; else buf++;
+                    if (!fresh) *buf++ = CTabR[*q >> 2]; else buf++;
                     break;
                 case 0xfe:
                 case 0xff:
@@ -510,8 +510,8 @@ void far o12_384C_0B76(void)
         MapToYard();
         return;
     }
-    fd_50F6_3854 = 0x80;
-    fd_50F6_38C0 = fd_55B3_2990 = 0;
+    multiplier = 0x80;
+    fd_50F6_38C0 = newMapForce = 0;
     fd_50F6_385E = mem_Alloc(0x400L, 1, "Map window image");
     fd_50F6_385A = mem_Alloc(0x2000L, 1, "Generated map window");
     if (MapMode != g_2992)
@@ -526,7 +526,7 @@ void far o12_384C_0B76(void)
     case 2:
     case 3:
         o12_384C_080E();
-        fd_50F6_3854 = 0x40;
+        multiplier = 0x40;
         fd_50F6_38C0 = mapXsize << 5;
         break;
     case 4:
@@ -554,14 +554,14 @@ void far o12_384C_0B76(void)
     (*g_9134)(fd_50F6_10D2.right - fd_50F6_38C0, fd_50F6_10D2.top, fd_50F6_10D2.right,
               fd_50F6_10D2.bottom, ConvColor(15));
     EraseMapCursor();
-    if (fd_55B3_299A) {
+    if (mapMessage) {
         if (TickCount() > fd_55B3_299E) {
-            if (fd_55B3_299A)
+            if (mapMessage)
                 g_29A4 = 1;
-            fd_55B3_299A = 0;
+            mapMessage = 0;
         } else {
             win_SetColorNum(3);
-            f_15D9_0006(fd_55B3_299A, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
+            f_15D9_0006(mapMessage, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
         }
     }
     clip_Push();
@@ -576,12 +576,12 @@ void far o12_384C_0B76(void)
     old = mem_Lock(fd_50F6_10E2);
     y = fd_50F6_10D2.top;
     for (row = 0, off = 0; row < n; row++, y += mapYsize) {
-        if (_fmemcmp(old + off, img + off, fd_50F6_3854) || fd_55B3_29A2 || (row < 8 && g_29A4)) {
-            _fmemcpy(old + off, img + off, fd_50F6_3854);
+        if (_fmemcmp(old + off, img + off, multiplier) || fd_55B3_29A2 || (row < 8 && g_29A4)) {
+            _fmemcpy(old + off, img + off, multiplier);
             o12_384C_03D0(img + off, gen, y);
-            (*g_914C)(fd_50F6_10D2.left + fd_50F6_38C0, y, gen, fd_50F6_3854 * mapXsize, mapYsize);
+            (*g_914C)(fd_50F6_10D2.left + fd_50F6_38C0, y, gen, multiplier * mapXsize, mapYsize);
         }
-        off += fd_50F6_3854;
+        off += multiplier;
         if (sy != 0x7fff && sy + 4 <= row) {
             DrawMapSpider(sx, sy, SpidDir);
             sy = 0x7fff;
@@ -598,7 +598,7 @@ void far o12_384C_0B76(void)
         DrawMapFoot();
     DrawMapCursor();
     clip_Pop();
-    fd_55B3_29A2 = fd_55B3_2990;
+    fd_55B3_29A2 = newMapForce;
     g_29A4 = 0;
 }
 
@@ -657,8 +657,8 @@ void far DrawMapSpider(int x, int y, int kind)
     y -= 2;
     if (fd_50F6_10E2) {
         p = (unsigned char far *)mem_Lock(fd_50F6_10E2);
-        p += fd_50F6_3854 * y;
-        for (x = y + 5; y < x; y++, p += fd_50F6_3854) {
+        p += multiplier * y;
+        for (x = y + 5; y < x; y++, p += multiplier) {
             if (y >= 64)
                 break;
             if (y >= 0)
@@ -673,8 +673,8 @@ extern int far FootX;
 extern int far FootY;
 extern int far BoyDir;
 extern int far BoyHere;
-extern int far fd_50F6_0470;
-extern int far fd_50F6_047A;
+extern int far MowX;
+extern int far MowY;
 
 void far DrawMapFoot(void)
 {
@@ -691,8 +691,8 @@ void far DrawMapFoot(void)
     }
     win_DrawBitMap(x + fd_50F6_10D2.left, y + fd_50F6_10D2.top, BoyDir + 0x4b0);
     if (BoyHere == 3 || BoyHere == 4) {
-        x = fd_50F6_0470 << 2;
-        y = fd_50F6_047A << 2;
+        x = MowX << 2;
+        y = MowY << 2;
         if (g_3DB2 == 320) {
             x >>= 1;
             y >>= 1;
@@ -702,8 +702,8 @@ void far DrawMapFoot(void)
     y = FootY;
     if (fd_50F6_10E2) {
         p = (unsigned char far *)mem_Lock(fd_50F6_10E2);
-        p += fd_50F6_3854 * y;
-        for (end = y + 8; y < end; y++, p += fd_50F6_3854) {
+        p += multiplier * y;
+        for (end = y + 8; y < end; y++, p += multiplier) {
             if (y >= 64)
                 break;
             if (y >= 0)
@@ -711,7 +711,7 @@ void far DrawMapFoot(void)
         }
         mem_Unlock(fd_50F6_10E2);
     }
-    fd_55B3_2990 = 1;
+    newMapForce = 1;
 }
 
 extern void far AddFood(int count, int sound);

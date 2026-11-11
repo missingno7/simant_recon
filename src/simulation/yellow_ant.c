@@ -5,7 +5,7 @@
  * order (0D6C/0EF8 first, MeLastX/Y before MeGoalY, entrance arrays A4,B0,A8,AC)
  * reproduces them. */
 extern int far MeCrazyCnt;
-extern int far fd_50F6_0EF8;
+extern int far MeCrazyDir;
 
 extern int far MeMoveMe;
 extern int far MeCmd;
@@ -498,7 +498,7 @@ extern int far LastNewHoleB[2];
 extern int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
 extern int far GetLife(int plane, int x, int y);
 extern int far IsClearTile(int plane, int x, int y);
-extern int far fd_50F6_0EFA;
+extern int far MeCrazyRot;
 void far EnterNest(void)
 {
     TryAntTheme();
@@ -758,7 +758,7 @@ int far CheckMyBestDirs(int far *steps, int plane, int x, int y, int a, int b)
     return dir;
 }
 
-extern int far fd_50F6_0EFA;
+extern int far MeCrazyRot;
 
 int far GetMyNextRandDirs(int plane, int x, int y, int a, int b)
 {
@@ -766,7 +766,7 @@ int far GetMyNextRandDirs(int plane, int x, int y, int a, int b)
     int steps;
 
     if (CheckMyBestDirs(&steps, plane, x, y, a, b) == -2)
-        dir = GetMyRandDirs(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+        dir = GetMyRandDirs(&MeCrazyRot, &MeCrazyDir, plane, x, y, a, b);
     else {
         MeCrazyCnt = -1;
         dir = GetMyBestDirs(plane, x, y, a, b);
@@ -776,10 +776,10 @@ int far GetMyNextRandDirs(int plane, int x, int y, int a, int b)
 
 int far o25_3BA4_19AD(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
 {
-    fd_50F6_0EF8 = GetDir(x, y, a, b) - 1;
+    MeCrazyDir = GetDir(x, y, a, b) - 1;
     MeCrazyCnt = 0x10;
-    fd_50F6_0EFA = 0;
-    GetMyRandDirs(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+    MeCrazyRot = 0;
+    GetMyRandDirs(&MeCrazyRot, &MeCrazyDir, plane, x, y, a, b);
 }
 
 int far GetMyBestDir(int plane, int x, int y, int a, int b)
@@ -789,7 +789,7 @@ int far GetMyBestDir(int plane, int x, int y, int a, int b)
     if (MeCrazyCnt < 0) {
         dir = GetMyBestDirs(plane, x, y, a, b);
         if (dir == -2 && MeCrazyCnt == -2)
-            dir = o25_3BA4_19AD(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+            dir = o25_3BA4_19AD(&MeCrazyRot, &MeCrazyDir, plane, x, y, a, b);
     } else {
         dir = GetMyNextRandDirs(plane, x, y, a, b);
         MeCrazyCnt--;

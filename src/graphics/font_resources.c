@@ -112,10 +112,10 @@ struct Bitmap {
     char far *bits;
 };
 
-extern struct Bitmap far fd_50F6_392C;
+extern struct Bitmap far out_buffer;
 extern void far ClearBuffer(char far *buf, int size);
-extern int far fd_55B3_6770;
-extern int far fd_55B3_6772;
+extern int far source_bitmap_width;
+extern int far dest_bitmap_width;
 extern void far DrawChar(char far *, char far *, int, int, int, int);
 
 int far _font_StringWidth(unsigned char far *s, struct Font far *font)
@@ -198,10 +198,10 @@ struct Bitmap far * far font_MakeImage(unsigned char far *s, int x, struct Font 
     i = 0;
     pen = x;
     width = font->widMax;
-    ClearBuffer(fd_50F6_392C.bits, g_673E * g_6740);
-    fd_55B3_6770 = font->rowWords * 2;
-    fd_55B3_6772 = (_font_StringWidth(s, font) + x + 7) >> 3;
-    fd_50F6_392C.height = font->fRectHeight;
+    ClearBuffer(out_buffer.bits, g_673E * g_6740);
+    source_bitmap_width = font->rowWords * 2;
+    dest_bitmap_width = (_font_StringWidth(s, font) + x + 7) >> 3;
+    out_buffer.height = font->fRectHeight;
     edge = (g_673E << 3) - font->fRectWidth;
     for (i = 0; s[i] && pen < edge; i++) {
         ch = s[i];
@@ -218,10 +218,10 @@ struct Bitmap far * far font_MakeImage(unsigned char far *s, int x, struct Font 
         } else {
             xofs = font->kernMax + kk;
         }
-        DrawChar(font->image + fd_55B3_6770, fd_50F6_392C.bits, glyphWidth, font->fRectHeight - 1, sx, pen + xofs);
+        DrawChar(font->image + source_bitmap_width, out_buffer.bits, glyphWidth, font->fRectHeight - 1, sx, pen + xofs);
         pen += width;
     }
-    fd_50F6_392C.width = pen;
-    fd_50F6_392C.height--;
-    return &fd_50F6_392C;
+    out_buffer.width = pen;
+    out_buffer.height--;
+    return &out_buffer;
 }

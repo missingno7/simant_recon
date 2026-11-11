@@ -148,7 +148,7 @@ def make_case(label, text, rect, styles=(), first_line=0, record=0,
               # from the four valid far Font records below.
               (b.symbol_address("g_3DB2"), struct.pack("<H", 320)),
               (b.symbol_address("g_3DDC"), struct.pack("<b", 12)),
-              (b.symbol_address("g_3DDE"), struct.pack("<b", 8)),
+              (b.symbol_address("fontWidth"), struct.pack("<b", 8)),
               *font_writes]
     if styles:
         writes.append((STYLES[1] * 16 + STYLES[0], style_bytes))
@@ -433,7 +433,7 @@ def _history_case(label, graph, hilite, slot, start, count, rect, seed,
         (b.symbol_address("HistCnt"), struct.pack("<h", count)),
         (b.symbol_address("g_3DB2"), struct.pack("<H", 320)),
         (b.symbol_address("g_3DDC"), struct.pack("<b", 12)),
-        (b.symbol_address("g_3DDE"), struct.pack("<b", 8)),
+        (b.symbol_address("fontWidth"), struct.pack("<b", 8)),
     ]
     def rectangle(machine, args):
         machine.write(args[2] * 16 + args[1], struct.pack("<4h", *machine.state["rect"]))

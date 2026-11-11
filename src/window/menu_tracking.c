@@ -29,7 +29,7 @@ struct Pt {
 
 static int curMenu = -1;
 
-extern char near g_3DDE;
+extern char near fontWidth;
 extern char near g_3DDC;
 extern void far GRectOutline(struct Rect far *r, int width);
 extern int near g_3DE4;
@@ -45,8 +45,8 @@ void far o10_35F5_0000(int x, int y, char far *s, int v)
     struct Rect r;
 
     len = _fstrlen(s);
-    r.left = x = (char)(x >> 8) + (x & 0xff) * g_3DDE;
-    r.right = x + g_3DDE * len - 1;
+    r.left = x = (char)(x >> 8) + (x & 0xff) * fontWidth;
+    r.right = x + fontWidth * len - 1;
     r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;
     r.bottom = y + g_3DDC - 1;
     GRectOutline(&r, -3);
@@ -65,8 +65,8 @@ void far o10_35F5_00D7(int x, int y, char far *s, int v)
     struct Rect r;
 
     len = _fstrlen(s);
-    r.left = x = (char)(x >> 8) + (x & 0xff) * g_3DDE;
-    r.right = x + g_3DDE - 1;
+    r.left = x = (char)(x >> 8) + (x & 0xff) * fontWidth;
+    r.right = x + fontWidth - 1;
     r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;
     r.bottom = y + g_3DDC * len - 1;
     GRectOutline(&r, -5);
@@ -142,7 +142,7 @@ next:
         prev = m;
         goto next;
     }
-    f_1B73_09E9(fd_50F6_46A8[m] + g_3DDE * 3, g_3DDC / 2);
+    f_1B73_09E9(fd_50F6_46A8[m] + fontWidth * 3, g_3DDC / 2);
     goto again;
 }
 
@@ -215,12 +215,12 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
         r.left = (pt.x & ~7) + 16;
         r.top = g_3DDC * (1 - i) + pt.y - 3;
     } else {
-        r.left = ((fd_50F6_46BC[curMenu] - maxLen) >> 1) * g_3DDE + fd_50F6_46A8[curMenu];
+        r.left = ((fd_50F6_46BC[curMenu] - maxLen) >> 1) * fontWidth + fd_50F6_46A8[curMenu];
         if (r.left < 0)
             r.left = 0;
         r.top = g_3DDC + 1;
     }
-    r.right = g_3DDE * maxLen + r.left + 16;
+    r.right = fontWidth * maxLen + r.left + 16;
     if (r.right > fd_55B3_5AA0[0]) {
         d = r.right - fd_55B3_5AA0[0];
         r.right -= d;
@@ -236,8 +236,8 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     }
     saveBuf = GSaveRect(&r);
     saveR = r;
-    r.left += g_3DDE;
-    r.right -= g_3DDE;
+    r.left += fontWidth;
+    r.right -= fontWidth;
     r.top += 3;
     r.bottom -= 3;
     f_1FD2_02B1(1);
@@ -366,7 +366,7 @@ moved:
 found:
     i = j;
 warp:
-    f_1B73_09E9(g_3DDE * 4 + x, g_3DDC / 2 + g_3DDC * i + r.top);
+    f_1B73_09E9(fontWidth * 4 + x, g_3DDC / 2 + g_3DDC * i + r.top);
     goto moved;
 flush:
     f_1F58_007F(key & 0xff);

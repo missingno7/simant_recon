@@ -420,7 +420,7 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
     msg_off=0x3000
     data=bytes(message)+b"\0"
     writes=[(lin(msg_off),data),(addr("g_3DDC"),bytes([line_height&255])),
-            (addr("g_3DDE"),bytes([char_width&255])),
+            (addr("fontWidth"),bytes([char_width&255])),
             (addr("fd_55B3_5AA0"),w(*screen))]
     # g_9128 is an unset BSS host video-function pointer in this isolated DOS
     # startup state. Route it to a separate three-word callback adapter; the

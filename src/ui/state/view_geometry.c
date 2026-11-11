@@ -17,4 +17,4 @@ struct Bitmap {
 struct Rect far fd_50F6_10D2;
 struct Rect far editTileRect;
 struct Rect far fd_50F6_1104;
-struct Bitmap far fd_50F6_392C;
+struct Bitmap far out_buffer;

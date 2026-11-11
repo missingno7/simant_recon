@@ -2,8 +2,8 @@
 int far CurGameType;
 int far fd_50F6_0EB4;
 int far EggBalloonCnt;
-int far fd_50F6_0EF8;
-int far fd_50F6_0EFA;
+int far MeCrazyDir;
+int far MeCrazyRot;
 int far FightBalloonCnt;
 int far SpidOn;
 int far RebornX;

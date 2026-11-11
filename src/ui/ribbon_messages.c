@@ -40,7 +40,7 @@ extern long far fd_55B3_19CA;
 extern long far TickCount(void);
 extern int far fd_55B3_19CE;
 extern long far fd_55B3_299E;
-extern char far * far fd_55B3_299A;
+extern char far * far mapMessage;
 extern int far fd_55B3_29A2;
 
 void far EditMessage(char far *message, long duration, int mode)
@@ -61,8 +61,8 @@ void far EditMessage(char far *message, long duration, int mode)
         fd_55B3_299E = TickCount() + (duration * 3L) / 2L;
     else
         fd_55B3_299E = 0x7fffffffL;
-    if (message != fd_55B3_299A) {
-        fd_55B3_299A = message;
+    if (message != mapMessage) {
+        mapMessage = message;
         fd_55B3_29A2 = 1;
     }
 }

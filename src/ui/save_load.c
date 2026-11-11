@@ -627,10 +627,10 @@ extern unsigned char far fd_3E1D_0000[];
 extern unsigned char far BAntsEaten[];
 extern unsigned char far BAntsExpired[];
 extern unsigned char far BAntsKilled[];
-extern unsigned char far fd_50F6_107E[];
+extern unsigned char far BirdDelay[];
 extern unsigned char far BoyMsgCnt[];
-extern unsigned char far fd_50F6_0220[];
-extern unsigned char far fd_50F6_0736[];
+extern unsigned char far CatDelay[];
+extern unsigned char far DogBarkDelay[];
 extern unsigned char far GameTime[];
 extern unsigned char far OverallScore[];
 extern unsigned char far RAntsEaten[];
@@ -700,8 +700,8 @@ extern unsigned char far BColoniesKilled[];
 extern unsigned char far BColoniesStarted[];
 extern unsigned char far Barrier[];
 extern unsigned char far BirdFrame[];
-extern unsigned char far fd_50F6_0208[];
-extern unsigned char far fd_50F6_0210[];
+extern unsigned char far BirdGoalX[];
+extern unsigned char far BirdGoalY[];
 extern unsigned char far BirdOn[];
 extern unsigned char far BirdX[];
 extern unsigned char far BirdY[];
@@ -711,22 +711,22 @@ extern unsigned char far BlkWarnHealth[];
 extern unsigned char far BoyDir[];
 extern unsigned char far BoyFrame[];
 extern unsigned char far BoyHere[];
-extern unsigned char far fd_50F6_10B0[];
-extern unsigned char far fd_50F6_10BC[];
+extern unsigned char far BoyMessOn[];
+extern unsigned char far BoyMsgOffset[];
 extern unsigned char far BoyPx[];
 extern unsigned char far BoyPy[];
 extern unsigned char far BoyStandCnt[];
 extern unsigned char far BoyTurnCnt[];
-extern unsigned char far fd_3D57_0C2A[];
+extern unsigned char far BoyWait[];
 extern unsigned char far BoyX[];
 extern unsigned char far BoyY[];
 extern unsigned char far BpopT[];
-extern unsigned char far fd_50F6_022C[];
-extern unsigned char far fd_50F6_0240[];
-extern unsigned char far fd_50F6_0244[];
+extern unsigned char far CatCycle[];
+extern unsigned char far CatDir[];
+extern unsigned char far CatFrame[];
 extern unsigned char far CatOn[];
-extern unsigned char far fd_50F6_02BE[];
-extern unsigned char far fd_50F6_032C[];
+extern unsigned char far CatX[];
+extern unsigned char far CatY[];
 extern unsigned char far ChaseSpid[];
 extern unsigned char far ClearRainFlag[];
 extern unsigned char far ColonyTotalBlack[];
@@ -738,15 +738,15 @@ extern unsigned char far CurGameTool[];
 extern unsigned char far Cycle[];
 extern unsigned char far DdPtr[];
 extern unsigned char far DeathCnt[];
-extern unsigned char far fd_50F6_0506[];
+extern unsigned char far DogDir[];
 extern unsigned char far DogFrame[];
-extern unsigned char far fd_50F6_0510[];
-extern unsigned char far fd_50F6_059E[];
-extern unsigned char far fd_50F6_0624[];
+extern unsigned char far DogPx[];
+extern unsigned char far DogPy[];
+extern unsigned char far DogTurnCnt[];
 extern unsigned char far DogX[];
 extern unsigned char far DogY[];
 extern unsigned char far EatCnt[];
-extern unsigned char far fd_50F6_0212[];
+extern unsigned char far EatCountB[];
 extern unsigned char far EatCountR[];
 extern unsigned char far FlyAwayB[];
 extern unsigned char far FlyAwayR[];
@@ -767,8 +767,8 @@ extern unsigned char far HistStart[];
 extern unsigned char far HouseColonies[];
 extern unsigned char far InitialLions[];
 extern unsigned char far JustToBeMean[];
-extern unsigned char far fd_50F6_0488[];
-extern unsigned char far fd_50F6_0492[];
+extern unsigned char far LastMowX[];
+extern unsigned char far LastMowY[];
 extern unsigned char far LastThemeSong[];
 extern unsigned char far LayDownQueenMode[];
 extern unsigned char far LessonTemp[];
@@ -780,8 +780,8 @@ extern unsigned char far MeBase[];
 extern unsigned char far MeCmd[];
 extern unsigned char far MeColor[];
 extern unsigned char far MeCrazyCnt[];
-extern unsigned char far fd_50F6_0EF8[];
-extern unsigned char far fd_50F6_0EFA[];
+extern unsigned char far MeCrazyDir[];
+extern unsigned char far MeCrazyRot[];
 extern unsigned char far MeDis[];
 extern unsigned char far MeEgg[];
 extern unsigned char far MeEggCarried[];
@@ -806,8 +806,8 @@ extern unsigned char far MeTargLifeX[];
 extern unsigned char far MeTargLifeY[];
 extern unsigned char far MeWarnHealth[];
 extern unsigned char far ModeMe[];
-extern unsigned char far fd_50F6_0470[];
-extern unsigned char far fd_50F6_047A[];
+extern unsigned char far MowX[];
+extern unsigned char far MowY[];
 extern unsigned char far NextFeed[];
 extern unsigned char far NodeCnt[];
 extern unsigned char far NodeNum[];
@@ -821,18 +821,18 @@ extern unsigned char far QueenStorageB[];
 extern unsigned char far QueenStorageR[];
 extern unsigned char far RColoniesKilled[];
 extern unsigned char far RColoniesStarted[];
-extern unsigned char far fd_50F6_0356[];
+extern unsigned char far RainCnt[];
 extern unsigned char far RainOn[];
 extern unsigned char far RebornX[];
 extern unsigned char far RebornY[];
-extern unsigned char far fd_50F6_04E0[];
-extern unsigned char far fd_50F6_04F2[];
+extern unsigned char far RedDestX[];
+extern unsigned char far RedDestY[];
 extern unsigned char far RedLocX[];
 extern unsigned char far RedLocY[];
 extern unsigned char far RedLost[];
 extern unsigned char far RedPlane[];
 extern unsigned char far RedQueens[];
-extern unsigned char far fd_50F6_04A4[];
+extern unsigned char far RedTask[];
 extern unsigned char far RpopT[];
 extern unsigned char far SCorpseBase[];
 extern unsigned char far SMode[];
@@ -854,8 +854,8 @@ extern unsigned char far SwarmCentX[];
 extern unsigned char far SwarmCentY[];
 extern unsigned char far SwarmCntB[];
 extern unsigned char far SwarmCntR[];
-extern unsigned char far fd_50F6_105C[];
-extern unsigned char far fd_50F6_1066[];
+extern unsigned char far SwarmDelayB[];
+extern unsigned char far SwarmDelayR[];
 extern unsigned char far TileMassXB[];
 extern unsigned char far TileMassXR[];
 extern unsigned char far TileMassYB[];
@@ -867,13 +867,13 @@ extern unsigned char far TutHowLong[];
 extern unsigned char far TutLesson[];
 extern unsigned char far TutorCnt[];
 extern unsigned char far WaterTable[];
-extern unsigned char far fd_50F6_07C2[];
+extern unsigned char far YardCycle[];
 extern unsigned char far YardMode[];
 extern unsigned char far YellowDied[];
 extern unsigned char far casteButtonState[];
 extern unsigned char far modeButtonState[];
 extern unsigned char far AlwaysHealthy[];
-extern unsigned char far fd_50F6_0202[];
+extern unsigned char far BoyIsMowing[];
 extern unsigned char far BlackWon[];
 extern unsigned char far CasteAuto[];
 extern unsigned char far FootTog[];
@@ -924,10 +924,10 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 4, 1, (void far *)&BAntsEaten },
     { 4, 1, (void far *)&BAntsExpired },
     { 4, 1, (void far *)&BAntsKilled },
-    { 4, 1, (void far *)&fd_50F6_107E },
+    { 4, 1, (void far *)&BirdDelay },
     { 4, 1, (void far *)&BoyMsgCnt },
-    { 4, 1, (void far *)&fd_50F6_0220 },
-    { 4, 1, (void far *)&fd_50F6_0736 },
+    { 4, 1, (void far *)&CatDelay },
+    { 4, 1, (void far *)&DogBarkDelay },
     { 4, 1, (void far *)&GameTime },
     { 4, 1, (void far *)&OverallScore },
     { 4, 1, (void far *)&RAntsEaten },
@@ -997,8 +997,8 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&BColoniesStarted },
     { 2, 1, (void far *)&Barrier },
     { 2, 1, (void far *)&BirdFrame },
-    { 2, 1, (void far *)&fd_50F6_0208 },
-    { 2, 1, (void far *)&fd_50F6_0210 },
+    { 2, 1, (void far *)&BirdGoalX },
+    { 2, 1, (void far *)&BirdGoalY },
     { 2, 1, (void far *)&BirdOn },
     { 2, 1, (void far *)&BirdX },
     { 2, 1, (void far *)&BirdY },
@@ -1008,22 +1008,22 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&BoyDir },
     { 2, 1, (void far *)&BoyFrame },
     { 2, 1, (void far *)&BoyHere },
-    { 2, 1, (void far *)&fd_50F6_10B0 },
-    { 2, 1, (void far *)&fd_50F6_10BC },
+    { 2, 1, (void far *)&BoyMessOn },
+    { 2, 1, (void far *)&BoyMsgOffset },
     { 2, 1, (void far *)&BoyPx },
     { 2, 1, (void far *)&BoyPy },
     { 2, 1, (void far *)&BoyStandCnt },
     { 2, 1, (void far *)&BoyTurnCnt },
-    { 2, 1, (void far *)&fd_3D57_0C2A },
+    { 2, 1, (void far *)&BoyWait },
     { 2, 1, (void far *)&BoyX },
     { 2, 1, (void far *)&BoyY },
     { 2, 1, (void far *)&BpopT },
-    { 2, 1, (void far *)&fd_50F6_022C },
-    { 2, 1, (void far *)&fd_50F6_0240 },
-    { 2, 1, (void far *)&fd_50F6_0244 },
+    { 2, 1, (void far *)&CatCycle },
+    { 2, 1, (void far *)&CatDir },
+    { 2, 1, (void far *)&CatFrame },
     { 2, 1, (void far *)&CatOn },
-    { 2, 1, (void far *)&fd_50F6_02BE },
-    { 2, 1, (void far *)&fd_50F6_032C },
+    { 2, 1, (void far *)&CatX },
+    { 2, 1, (void far *)&CatY },
     { 2, 1, (void far *)&ChaseSpid },
     { 2, 1, (void far *)&ClearRainFlag },
     { 2, 1, (void far *)&ColonyTotalBlack },
@@ -1036,15 +1036,15 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&Cycle },
     { 2, 1, (void far *)&DdPtr },
     { 2, 1, (void far *)&DeathCnt },
-    { 2, 1, (void far *)&fd_50F6_0506 },
+    { 2, 1, (void far *)&DogDir },
     { 2, 1, (void far *)&DogFrame },
-    { 2, 1, (void far *)&fd_50F6_0510 },
-    { 2, 1, (void far *)&fd_50F6_059E },
-    { 2, 1, (void far *)&fd_50F6_0624 },
+    { 2, 1, (void far *)&DogPx },
+    { 2, 1, (void far *)&DogPy },
+    { 2, 1, (void far *)&DogTurnCnt },
     { 2, 1, (void far *)&DogX },
     { 2, 1, (void far *)&DogY },
     { 2, 1, (void far *)&EatCnt },
-    { 2, 1, (void far *)&fd_50F6_0212 },
+    { 2, 1, (void far *)&EatCountB },
     { 2, 1, (void far *)&EatCountR },
     { 2, 1, (void far *)&FlyAwayB },
     { 2, 1, (void far *)&FlyAwayR },
@@ -1065,8 +1065,8 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&HouseColonies },
     { 2, 1, (void far *)&InitialLions },
     { 2, 1, (void far *)&JustToBeMean },
-    { 2, 1, (void far *)&fd_50F6_0488 },
-    { 2, 1, (void far *)&fd_50F6_0492 },
+    { 2, 1, (void far *)&LastMowX },
+    { 2, 1, (void far *)&LastMowY },
     { 2, 1, (void far *)&LastThemeSong },
     { 2, 1, (void far *)&LayDownQueenMode },
     { 2, 1, (void far *)&LessonTemp },
@@ -1081,8 +1081,8 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&MeCmd },
     { 2, 1, (void far *)&MeColor },
     { 2, 1, (void far *)&MeCrazyCnt },
-    { 2, 1, (void far *)&fd_50F6_0EF8 },
-    { 2, 1, (void far *)&fd_50F6_0EFA },
+    { 2, 1, (void far *)&MeCrazyDir },
+    { 2, 1, (void far *)&MeCrazyRot },
     { 2, 1, (void far *)&MeDir },
     { 2, 1, (void far *)&MeDis },
     { 2, 1, (void far *)&MeEgg },
@@ -1113,8 +1113,8 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&MeType },
     { 2, 1, (void far *)&MeWarnHealth },
     { 2, 1, (void far *)&ModeMe },
-    { 2, 1, (void far *)&fd_50F6_0470 },
-    { 2, 1, (void far *)&fd_50F6_047A },
+    { 2, 1, (void far *)&MowX },
+    { 2, 1, (void far *)&MowY },
     { 2, 1, (void far *)&NextFeed },
     { 2, 1, (void far *)&NodeCnt },
     { 2, 1, (void far *)&NodeNum },
@@ -1128,18 +1128,18 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&QueenStorageR },
     { 2, 1, (void far *)&RColoniesKilled },
     { 2, 1, (void far *)&RColoniesStarted },
-    { 2, 1, (void far *)&fd_50F6_0356 },
+    { 2, 1, (void far *)&RainCnt },
     { 2, 1, (void far *)&RainOn },
     { 2, 1, (void far *)&RebornX },
     { 2, 1, (void far *)&RebornY },
-    { 2, 1, (void far *)&fd_50F6_04E0 },
-    { 2, 1, (void far *)&fd_50F6_04F2 },
+    { 2, 1, (void far *)&RedDestX },
+    { 2, 1, (void far *)&RedDestY },
     { 2, 1, (void far *)&RedLocX },
     { 2, 1, (void far *)&RedLocY },
     { 2, 1, (void far *)&RedLost },
     { 2, 1, (void far *)&RedPlane },
     { 2, 1, (void far *)&RedQueens },
-    { 2, 1, (void far *)&fd_50F6_04A4 },
+    { 2, 1, (void far *)&RedTask },
     { 2, 1, (void far *)&RpopT },
     { 2, 1, (void far *)&SCorpseBase },
     { 2, 1, (void far *)&SMode },
@@ -1161,8 +1161,8 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&SwarmCentY },
     { 2, 1, (void far *)&SwarmCntB },
     { 2, 1, (void far *)&SwarmCntR },
-    { 2, 1, (void far *)&fd_50F6_105C },
-    { 2, 1, (void far *)&fd_50F6_1066 },
+    { 2, 1, (void far *)&SwarmDelayB },
+    { 2, 1, (void far *)&SwarmDelayR },
     { 2, 1, (void far *)&TERRAINset },
     { 2, 1, (void far *)&TileMassXB },
     { 2, 1, (void far *)&TileMassXR },
@@ -1175,13 +1175,13 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 1, (void far *)&TutLesson },
     { 2, 1, (void far *)&TutorCnt },
     { 2, 1, (void far *)&WaterTable },
-    { 2, 1, (void far *)&fd_50F6_07C2 },
+    { 2, 1, (void far *)&YardCycle },
     { 2, 1, (void far *)&YardMode },
     { 2, 1, (void far *)&YellowDied },
     { 2, 1, (void far *)&casteButtonState },
     { 2, 1, (void far *)&modeButtonState },
     { 2, 1, (void far *)&AlwaysHealthy },
-    { 2, 1, (void far *)&fd_50F6_0202 },
+    { 2, 1, (void far *)&BoyIsMowing },
     { 2, 1, (void far *)&BlackWon },
     { 2, 1, (void far *)&CasteAuto },
     { 2, 1, (void far *)&FootTog },

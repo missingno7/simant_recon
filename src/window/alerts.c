@@ -108,7 +108,7 @@ extern void far GRectFill(struct Rect far *r, int color);
 extern void far GRectOutline(struct Rect far *r, int width);
 void far f_1C62_0306(struct Rect far *r, int line, char far *text);
 extern int far f_1F80_0177(struct Rect far *r, char far *text);
-extern char near g_3DDE;
+extern char near fontWidth;
 extern void far o10_35F5_0000(int x, int y, char far *label, int id);
 extern void far f_1FD2_02FF(void);
 extern void far f_1B73_0510(void);
@@ -152,7 +152,7 @@ void far f_1C62_00D5(char far *msg, int timed)
     GRectOutline(&pr, 4);
     g_9128(0x404, g_8CBE->fill, 0);
     f_1C62_0306(&r, r.top, msg);
-    x = f_1F80_0177(&pr, "Continue") / g_3DDE;
+    x = f_1F80_0177(&pr, "Continue") / fontWidth;
     y = r.bottom - 2;
     g_9128(g_8CBE->frame, g_8CBE->text, 0xc0);
     o10_35F5_0000(x, y, "Continue", 0x900);

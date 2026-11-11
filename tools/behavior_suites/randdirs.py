@@ -345,8 +345,8 @@ def _tile_fixture_writes(s: Scenario):
 def to_case(s: Scenario, *, actual_tile: bool = False):
     b = _behavior()
     writes = [
-        _write("fd_50F6_0EFA", s.rot),
-        _write("fd_50F6_0EF8", s.direction),
+        _write("MeCrazyRot", s.rot),
+        _write("MeCrazyDir", s.direction),
         _write("MeCmd", s.mode),
         _write("MeGoalPlane", s.from_plane),
         _write("MeGoalX", s.from_x),
@@ -362,11 +362,11 @@ def to_case(s: Scenario, *, actual_tile: bool = False):
                           handler=None if actual_tile else _move_fixture(s), pop=0)
     return b.Case(
         label=s.case_id,
-        args=(_far_symbol("fd_50F6_0EFA") + _far_symbol("fd_50F6_0EF8") +
+        args=(_far_symbol("MeCrazyRot") + _far_symbol("MeCrazyDir") +
               [s.plane, s.x, s.y, s.a, s.b]),
         writes=writes,
         observe=[_observe(n) for n in (
-            "fd_50F6_0EFA", "fd_50F6_0EF8", "MeCmd",
+            "MeCrazyRot", "MeCrazyDir", "MeCmd",
             "MeGoalPlane", "MeGoalX", "MeGoalY",
             "MeLastX", "MeLastY")],
         callbacks={"TileCanBeMovedOn": callback},

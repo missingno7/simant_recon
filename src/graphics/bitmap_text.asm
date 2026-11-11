@@ -9,7 +9,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DD6:byte
 	extrn	_g_3DDA:byte
 	extrn	_g_3DDC:byte
-	extrn	_g_3DDE:byte
+	extrn	_fontWidth:byte
 	extrn	_g_5A97:byte
 	public	_g_5ABA, _g_5ABC, _g_5ABE
 _g_5ABA		dw	0		; text bitmap: width, height, pixel rows
@@ -78,10 +78,10 @@ L004A:
 	pop bp
 	retf
 L0057:
-	cmp byte ptr _g_3DDE, 8
+	cmp byte ptr _fontWidth, 8
 	jne L00A5
 	mov byte ptr _g_5F1D, 0
-	mov al, byte ptr _g_3DDE
+	mov al, byte ptr _fontWidth
 	mul dl
 	mov word ptr _g_5ABA, ax
 	dec ax
@@ -118,7 +118,7 @@ L00A2:
 	jmp near ptr L0130
 L00A5:
 	mov byte ptr _g_5F1D, 0
-	mov al, byte ptr _g_3DDE
+	mov al, byte ptr _fontWidth
 	mul dl
 	mov word ptr _g_5ABA, ax
 	dec ax

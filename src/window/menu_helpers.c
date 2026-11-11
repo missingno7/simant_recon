@@ -372,7 +372,7 @@ extern int near g_3DE2;
 extern void far GRectFill(struct Rect far *rect, int color);
 extern unsigned far _fstrlen(char far *s);
 extern int far fd_50F6_46BC[];
-extern char near g_3DDE;
+extern char near fontWidth;
 extern int near g_3DB2;
 
 int far f_1FD2_0663(int draw)
@@ -399,7 +399,7 @@ int far f_1FD2_0663(int draw)
     }
     g_604C = i;
     if (i > 1) {
-        g_6050 = (g_3DB2 / g_3DDE - total) / (i - 1);
+        g_6050 = (g_3DB2 / fontWidth - total) / (i - 1);
         if (g_6050 > 3)
             g_6050 = 3;
         else if (g_6050 < 1)
@@ -409,7 +409,7 @@ int far f_1FD2_0663(int draw)
             fd_50F6_46A8[i] = x;
             if (draw)
                 f_1FD2_0008(x, 1, 1, *t);
-            x += (fd_50F6_46BC[i] + g_6050) * g_3DDE;
+            x += (fd_50F6_46BC[i] + g_6050) * fontWidth;
         }
     }
     return 1;
@@ -423,7 +423,7 @@ void far f_1FD2_07CB(int menu)
     struct Event ev;
     int x;
 
-    x = g_3DDE * 4 + fd_50F6_46A8[menu];
+    x = fontWidth * 4 + fd_50F6_46A8[menu];
     ev.code = menu;
     ev.modHi = 0;
     f_1B73_09E9(x, 1);

@@ -22,7 +22,7 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DD8:byte
 	extrn	_g_3DDA:byte
 	extrn	_g_3DDC:byte
-	extrn	_g_3DDE:byte
+	extrn	_fontWidth:byte
 	extrn	__foreColor:byte
 	extrn	_g_3DE1:byte
 	extrn	_g_3DE2:byte
@@ -172,7 +172,7 @@ _o02_3126_005C	proc	far
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
 	mov byte ptr _g_3DDC, 6
-	mov byte ptr _g_3DDE, 4
+	mov byte ptr _fontWidth, 4
 	mov word ptr _g_3DDA, 18h
 	retf
 _o02_3126_005C	endp
@@ -182,7 +182,7 @@ _o02_3126_0079	proc	far
 	mov word ptr _g_3DD6, bx
 	mov word ptr _g_3DD8, es
 	mov byte ptr _g_3DDC, 8
-	mov byte ptr _g_3DDE, 8
+	mov byte ptr _fontWidth, 8
 	mov word ptr _g_3DDA, 40h
 	retf
 _o02_3126_0079	endp

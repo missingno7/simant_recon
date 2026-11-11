@@ -1,13 +1,13 @@
 typedef char far * far *StrList;
 StrList far BFightMsgs;
-StrList far fd_50F6_0218;
+StrList far RFightMsgs;
 StrList far EggMsgs;
 StrList far QueenMsgs;
-StrList far fd_50F6_023A;
+StrList far RestMsgs;
 StrList far WindPromptStrs;
 StrList far MwinTitle;
 StrList far fd_50F6_106E;
-StrList far fd_50F6_1078;
+StrList far CasteStr;
 StrList far fd_50F6_1086;
 StrList far fd_50F6_1096;
 StrList far BoyMsgs;

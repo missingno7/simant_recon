@@ -28,7 +28,7 @@ void far f_208F_0008(int obj)
     GRectInv(&r);
 }
 
-extern char near g_3DDE;
+extern char near fontWidth;
 extern Point far g_3DA0;
 
 void far f_208F_002B(int obj, int col)
@@ -36,7 +36,7 @@ void far f_208F_002B(int obj, int col)
     struct Rect r;
 
     win_GetObjRect(obj, &r);
-    g_3DA0.x = g_3DDE * col + r.left;
+    g_3DA0.x = fontWidth * col + r.left;
     g_3DA0.y = r.top;
 }
 
