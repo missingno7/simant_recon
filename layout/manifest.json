@@ -11057,178 +11057,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/simulation/yellow_ant.c",
-   "source_sha256": "a12c52b6c1f29a25429d7e241adebd83de1791d2c1b373c9b8a7086dce4d1edc",
-   "claims": [
-    {
-     "name": "DoAntSimY",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 1998,
-     "size": 459,
-     "target_sha256": "0c78c4097fbe73bb29c696fcf2e7890bd7e46d3be2b702aa719e0ac62d59ab78",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight (SRand2 sites 0AB8/0AEF in separate records)",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "AnimYellowFight",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 2457,
-     "size": 616,
-     "target_sha256": "b5e562b101f820145e9edf2092bd50b9b9570711f8eae27b67beb9948457a050",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight (SRand2 sites 0AB8/0AEF in separate records)",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "AnimYellowInsane",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 3073,
-     "size": 506,
-     "target_sha256": "639bc123b08318ab3694125b4e4f72098075ac99b63b4c466368b3f863991152",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "YellowFight",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 3579,
-     "size": 570,
-     "target_sha256": "0778a1e6ee1e455a387c3af9c71ec8a967dd6c2b65f2810e74d7949b90548bda",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetMyBestDirs",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 5505,
-     "size": 261,
-     "target_sha256": "531016239825f5bc1f53ef58733bf8a7706bd234593683a28fe3968fe7b58926",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "CheckMyBestDirs",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 6282,
-     "size": 171,
-     "target_sha256": "f4c9d8bbffde74f0184a4a0316f305a0869b210054d6405ce5a8673a65c15841",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "GetMyNextRandDirs",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 6453,
-     "size": 120,
-     "target_sha256": "adfd85951a7ca45a4cc1803b2aa0194e69c9e4e63715c972f92c0b6fe5080edd",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "o25_3BA4_19AD",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 6573,
-     "size": 96,
-     "target_sha256": "1c7028ba036dda2d794f5d1f74cee0a7bbb804314070c68735cbba7a12520d06",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetMyBestDir",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 6669,
-     "size": 146,
-     "target_sha256": "f766fc29dcc74eeef23e1a7c078655424ca37d18995971aa99fccbdae6e9b338",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "ExitNest",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 4430,
-     "size": 605,
-     "target_sha256": "edc7be9b191aba7e328eda64c7ea99f4d6ed9bd16995d9db8f0a75a4f8d9362c",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "GetMyDis",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 5035,
-     "size": 470,
-     "target_sha256": "552cbca6f61c7bdbff16e397dec1fabe730bb02e67ada14f2b51d84e286c6a02",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "GetMyDir",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 6815,
-     "size": 131,
-     "target_sha256": "fea4087fede4bf28d0d04e2f254614e773b5ad86d9a2b0cb058d7ef8a1061701",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DoAntMoveY",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 8,
-     "size": 1990,
-     "target_sha256": "972b0bdc52cf2602c3648410e00feae365406cbade83f255396fd90cae6e65f3",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "EnterNest",
-     "unit": "S25",
-     "seg": 15268,
-     "off": 4149,
-     "size": 281,
-     "target_sha256": "8d1b45d177f95186f067c1814a568241d95c775edc96fd649cebd710964029ab",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "e28e3a83ecad851bb2b417adf357fd06f665513bd37d8ebaf6c888f49b540a41",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -11236,8 +11064,8 @@
      "why": "Advances the player yellow ant and chooses its movement directions. It handles nest exit, fighting and fight animation."
     }
    ],
-   "summary": "Advances the player yellow ant and chooses its movement directions. It handles nest exit, fighting and fight animation.",
    "windows_group": "SIMANT1",
+   "summary": "Advances the player yellow ant and chooses its movement directions. It handles nest exit, fighting and fight animation.",
    "file_header": {
     "text": "Advances the player yellow ant and chooses its movement directions. It handles nest exit,\nfighting and fight animation.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 25 (S25); segment 3BA4; partial original translation unit.\nWindows: SIMANT1, from recorded function pairs in the Windows symbol inventory.\nFunctions not yet exact: GetMyRandDirs.\nSteered functions: DoAntSimY, AnimYellowFight, AnimYellowInsane, YellowFight, GetMyBestDirs,\nCheckMyBestDirs, GetMyNextRandDirs, o25_3BA4_19AD, GetMyBestDir, ExitNest, GetMyDis,\nDoAntMoveY.\n\nBuilt /AL /Os /Oe /Og /Zi.  The order of the extern declarations is part of the\nfingerprint: MSC 6.00A breaks some operand-order ties by symbol-table state\n(ExitNest's MePlane/MeGoalPlane compare, GetMyDis' GetDis call order), and this\norder (0D6C/0EF8 first, MeLastX/Y before MeGoalY, entrance arrays A4,B0,A8,AC)\nreproduces them.",
     "name_kind": "descriptive",
@@ -11424,7 +11252,190 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "source": "src/simulation/yellow_ant.c",
+   "source_sha256": "f429e07cf85cd9cd881e60e9db57c624200bae7e0c582a1b17a6eb5f6b8178fc",
+   "claims": [
+    {
+     "name": "DoAntSimY",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 1998,
+     "size": 459,
+     "target_sha256": "0c78c4097fbe73bb29c696fcf2e7890bd7e46d3be2b702aa719e0ac62d59ab78",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight (SRand2 sites 0AB8/0AEF in separate records)",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "AnimYellowFight",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 2457,
+     "size": 616,
+     "target_sha256": "b5e562b101f820145e9edf2092bd50b9b9570711f8eae27b67beb9948457a050",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight (SRand2 sites 0AB8/0AEF in separate records)",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "AnimYellowInsane",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 3073,
+     "size": 506,
+     "target_sha256": "639bc123b08318ab3694125b4e4f72098075ac99b63b4c466368b3f863991152",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "YellowFight",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 3579,
+     "size": 570,
+     "target_sha256": "0778a1e6ee1e455a387c3af9c71ec8a967dd6c2b65f2810e74d7949b90548bda",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetMyBestDirs",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 5505,
+     "size": 261,
+     "target_sha256": "531016239825f5bc1f53ef58733bf8a7706bd234593683a28fe3968fe7b58926",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "CheckMyBestDirs",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6282,
+     "size": 171,
+     "target_sha256": "f4c9d8bbffde74f0184a4a0316f305a0869b210054d6405ce5a8673a65c15841",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetMyNextRandDirs",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6453,
+     "size": 120,
+     "target_sha256": "adfd85951a7ca45a4cc1803b2aa0194e69c9e4e63715c972f92c0b6fe5080edd",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o25_3BA4_19AD",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6573,
+     "size": 96,
+     "target_sha256": "1c7028ba036dda2d794f5d1f74cee0a7bbb804314070c68735cbba7a12520d06",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetMyBestDir",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6669,
+     "size": 146,
+     "target_sha256": "f766fc29dcc74eeef23e1a7c078655424ca37d18995971aa99fccbdae6e9b338",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "ExitNest",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 4430,
+     "size": 605,
+     "target_sha256": "edc7be9b191aba7e328eda64c7ea99f4d6ed9bd16995d9db8f0a75a4f8d9362c",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "GetMyDis",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 5035,
+     "size": 470,
+     "target_sha256": "552cbca6f61c7bdbff16e397dec1fabe730bb02e67ada14f2b51d84e286c6a02",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "GetMyDir",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6815,
+     "size": 131,
+     "target_sha256": "fea4087fede4bf28d0d04e2f254614e773b5ad86d9a2b0cb058d7ef8a1061701",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoAntMoveY",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 8,
+     "size": 1990,
+     "target_sha256": "972b0bdc52cf2602c3648410e00feae365406cbade83f255396fd90cae6e65f3",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EnterNest",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 4149,
+     "size": 281,
+     "target_sha256": "8d1b45d177f95186f067c1814a568241d95c775edc96fd649cebd710964029ab",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetMyRandDirs",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 5766,
+     "size": 516,
+     "target_sha256": "b04d9e5e78f5f1e8077f16ffa58a834271b2d64cdacd0c73d4f2429b1d5de98c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "febe260a1843a2ebb697bbddbb3d477018c9d1417a1bd14b5af05d7509a42264"
   },
   "S26:39C7": {
    "unit": "S26",
@@ -36241,57 +36252,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/sound/opl2_voices.c",
-   "source_sha256": "51ddc848877613a60205cd4b4202292b75a404288ab995f9006a484f25b5a831",
-   "claims": [
-    {
-     "name": "f_2815_0118",
-     "unit": "root",
-     "seg": 10261,
-     "off": 280,
-     "size": 77,
-     "target_sha256": "ee3a52ec357a67c42885e6cbcdf23632ccb7b256682d383adbc7dcb15b67ac45",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_2815_024D",
-     "unit": "root",
-     "seg": 10261,
-     "off": 589,
-     "size": 40,
-     "target_sha256": "155d8aa2fa7c303055dc8e9768d47c62ca318840c83d5c60553a260672e7b667",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_2815_000A",
-     "unit": "root",
-     "seg": 10261,
-     "off": 10,
-     "size": 270,
-     "target_sha256": "47943f62f8a9f74035a568556ddeb3e387c64c198b581713246946a767e58303",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_2815_0275",
-     "unit": "root",
-     "seg": 10261,
-     "off": 629,
-     "size": 36,
-     "target_sha256": "a1abb5bd708b9fbbf73348b01e6b475c47d284fc46484b5ed08c35744e95ab7c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "layout_inferred": "CONST-1: legitimate first-use sequencing in the earlier unclaimed AdLib body places its instrument-array segment word at the original private CONST offset",
-     "reloc_order": "EXACT"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "eda1885739393adf14657c9068e5adc1e41a59aaf8b501a5e120f976383a0825",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -36299,8 +36259,8 @@
      "why": "Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume data into chip register writes."
     }
    ],
-   "summary": "Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume data into chip register writes.",
    "windows_group": "none (DOS only)",
+   "summary": "Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume data into chip register writes.",
    "file_header": {
     "text": "Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume\ndata into chip register writes.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 2815; partial original translation unit.\nWindows: none (DOS only), based on the platform-specific code or DOS release data.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.\nFunctions not yet exact: f_2815_0165.",
     "name_kind": "descriptive",
@@ -36352,7 +36312,69 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "source": "src/sound/opl2_voices.c",
+   "source_sha256": "cd5f745ba88deea8756370058b64bcc4a2c5d1986f058fb0214d3f5bcc9efb09",
+   "claims": [
+    {
+     "name": "f_2815_0118",
+     "unit": "root",
+     "seg": 10261,
+     "off": 280,
+     "size": 77,
+     "target_sha256": "ee3a52ec357a67c42885e6cbcdf23632ccb7b256682d383adbc7dcb15b67ac45",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2815_024D",
+     "unit": "root",
+     "seg": 10261,
+     "off": 589,
+     "size": 40,
+     "target_sha256": "155d8aa2fa7c303055dc8e9768d47c62ca318840c83d5c60553a260672e7b667",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2815_000A",
+     "unit": "root",
+     "seg": 10261,
+     "off": 10,
+     "size": 270,
+     "target_sha256": "47943f62f8a9f74035a568556ddeb3e387c64c198b581713246946a767e58303",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2815_0275",
+     "unit": "root",
+     "seg": 10261,
+     "off": 629,
+     "size": 36,
+     "target_sha256": "a1abb5bd708b9fbbf73348b01e6b475c47d284fc46484b5ed08c35744e95ab7c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "CONST-1: legitimate first-use sequencing in the earlier unclaimed AdLib body places its instrument-array segment word at the original private CONST offset",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2815_0165",
+     "unit": "root",
+     "seg": 10261,
+     "off": 357,
+     "size": 232,
+     "target_sha256": "be091d696773b17f44f57d37e2222a7edb919849d260ed0060cf4b84012d25ce",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "c0e82539f6ad493647df4930698d8820aa21249f0d31ac9cbe59f3454d7d7f8e"
   },
   "root:283E": {
    "unit": "root",

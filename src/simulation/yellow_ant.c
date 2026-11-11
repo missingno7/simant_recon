@@ -4,7 +4,6 @@
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
  * DOS: overlay section 25 (S25); segment 3BA4; partial original translation unit.
  * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
- * Functions not yet exact: GetMyRandDirs.
  * Steered functions: DoAntSimY, AnimYellowFight, AnimYellowInsane, YellowFight, GetMyBestDirs,
  * CheckMyBestDirs, GetMyNextRandDirs, o25_3BA4_19AD, GetMyBestDir, ExitNest, GetMyDis,
  * DoAntMoveY.
@@ -666,80 +665,89 @@ int far GetMyBestDirs(int plane, int x, int y, int a, int b)
 }
 
 
+/* Picks a step direction around (x, y) when the direct way to (a, b) is blocked.
+ * ok[] marks the eight neighbours the ant may step on, excluding the tile it just
+ * left. With *rot == 0 it searches outwards from *dir on both sides and records
+ * the side taken in *rot (1 or -1); otherwise it keeps turning to that side, and
+ * once the step is no farther from the goal than (x, y) it resets *dir and *rot.
+ * Returns the direction, -1 if already at the goal or nothing found, -2 if no
+ * neighbour is usable.
+ * `right` is also the index of the neighbour scan and `result` its last usable
+ * neighbour: the frame has no separate words for them (the Macintosh build keeps
+ * the same pairs in one register each). */
 int far GetMyRandDirs(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
 {
     int flag;
-    int d;
+    int right;
     int left;
-    int best;
+    int result;
     int threshold;
     char ok[8];
     int i;
-    int right;
     int nx;
     int ny;
-    int dis;
 
-    best = -1;
+    result = -1;
     threshold = GetDis(x, y, a, b);
     if (threshold > 0) {
-        best = -2;
+        result = -2;
         flag = (MeCmd == 2) ? 1 : 0;
-        for (i = 0; i < 8; i++) {
-            nx = Dx8[i] + x;
-            ny = Dy8[i] + y;
+        for (right = 0; right < 8; right++) {
+            nx = Dx8[right] + x;
+            ny = Dy8[right] + y;
             if ((nx != MeLastX || ny != MeLastY)
                 && TileCanBeMovedOn(plane, nx, ny, MeGoalPlane, MeGoalX, MeGoalY, flag)) {
-                best = i;
-                ok[i] = 1;
+                result = right;
+                ok[right] = 1;
             } else
-                ok[i] = 0;
+                ok[right] = 0;
         }
-        if (best < 0)
-            return best;
-        best = -1;
-        right = left = *dir;
-        if (*rot == 0) {
-            for (i = 0; i < 8; i++) {
-                if (ok[right]) {
-                    best = right;
-                    *dir = GetDir(x, y, a, b) - 1;
-                    *rot = 1;
-                    break;
-                }
-                if (ok[left]) {
-                    best = left;
-                    *dir = GetDir(x, y, a, b) - 1;
-                    *rot = -1;
-                    break;
-                }
-                right = (right + 1) & 7;
-                left = (left - 1) & 7;
-            }
-        } else {
-            for (i = 0; i < 8; i++) {
-                if (*rot > 0) {
+        if (result >= 0) {
+            result = -1;
+            left = right = *dir;
+            if (*rot == 0) {
+                for (i = 0; i < 8; i++) {
                     if (ok[right]) {
-                        d = right;
-                        goto found;
+                        result = right;
+                        *dir = GetDir(x, y, a, b) - 1;
+                        *rot = 1;
+                        break;
                     }
-                } else if (ok[left]) {
-                    right = left;
-                    goto found;
+                    if (ok[left]) {
+                        result = left;
+                        *dir = GetDir(x, y, a, b) - 1;
+                        *rot = -1;
+                        break;
+                    }
+                    right = (right + 1) & 7;
+                    left = (left - 1) & 7;
                 }
-                right = (right + 1) & 7;
-                left = (left - 1) & 7;
+            } else {
+                for (i = 0; i < 8; i++) {
+                    if (*rot > 0) {
+                        if (ok[right]) {
+                            result = right;
+                            if ((int)GetDis(Dx8[right] + x, Dy8[right] + y, a, b) <= threshold) {
+                                *dir = GetDir(x, y, a, b) - 1;
+                                *rot = 0;
+                            }
+                            break;
+                        }
+                    } else if (ok[left]) {
+                        result = left;
+                        if ((int)GetDis(Dx8[left] + x, Dy8[left] + y, a, b) <= threshold) {
+                            *dir = GetDir(x, y, a, b) - 1;
+                            *rot = 0;
+                        }
+                        break;
+                    }
+                    right = (right + 1) & 7;
+                    left = (left - 1) & 7;
+                }
             }
         }
     }
-    return best;
-found:
-    dis = GetDis(Dx8[right] + x, Dy8[right] + y, a, b);
-    if (dis <= threshold) {
-        *dir = GetDir(x, y, a, b) - 1;
-        *rot = 0;
-    }
-    return right;
+    return result;
 }
 
 

@@ -219,3 +219,24 @@ that remain open and the freshly compiled execution controls.
   name-dependent code generation, after NAME-3 (/Od) and NAME-4 (`_asm`).
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).
+* **Frame words are shared by lifetime** (supervisor, 2026-11-12; GetMyRandDirs, S25:3BA4). With
+  `/Oe` two locals whose lifetimes do not overlap get the same frame word, whatever the
+  declaration order. A local that keeps a word of its own is therefore live at the same time as
+  its neighbours: in GetMyRandDirs the unshared flag word showed that `right` is also the index
+  of the earlier scan loop. Positive control: the promoted source; negative contrast: the same
+  source with a separate scan index (frame 16 instead of 18).
+* **Duplicated branches share their common tail** (GetMyRandDirs): two branches that each contain the same call and test, differing only in the
+  index variable, compile to two argument prefixes that join in the middle of the argument
+  evaluation. A shared block reached by `goto`, or branches that end in different jumps, do not.
+* **`(x & m) ^ m` in one expression folds to `~x & m`; through an `int` local it does not**
+  (f_2815_0165, root:2815). `level = p[2] & 0x3f;` followed by a use of `level ^ 0x3f` keeps the
+  byte `AND`/`XOR` pair; an `unsigned char` local or a single expression folds.
+* **An always-true unsigned comparison is folded late** (f_2815_0165): `if (u >= 0) v += a;`
+  emits no test, but `v` is not merged with a later `v += b` into one sum, which every other
+  spelling tried (`if (1)`, `do {} while (0)`, a block, `sizeof`) allows. In the source the test
+  is written on an unsigned parameter; that reading is a hypothesis.
+* **Switch bodies are not laid out in source order** (LessonDone, root:0E2E, not yet exact):
+  moving or stacking `case` labels in the source changes nothing. Bodies appear in the order
+  the jump table first reaches them; of two bodies with identical code one survives, and which
+  one depends on how each is written. `build/workers/claude/settle/lesson/swdis.py` (scratch)
+  lists such a function with the table decoded.

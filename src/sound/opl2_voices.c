@@ -5,7 +5,6 @@
  * DOS: resident code; segment 2815; partial original translation unit.
  * Windows: none (DOS only), based on the platform-specific code or DOS release data.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
- * Functions not yet exact: f_2815_0165.
  */
 
 struct Instr {
@@ -57,19 +56,31 @@ extern struct Instr far fd_50F6_0000[];
 extern int far fd_55B3_6BA4[];
 
 
-void far f_2815_0165(int instr, int note, int vol, int voice)
+/* Sets the output level and pitch of one OPL2 voice. The instrument's carrier
+ * level (low six bits of byte 2, 0 = loudest) is scaled by the volume table entry
+ * and written back with the key-scale bits unchanged; then the note, shifted by the
+ * instrument's octave offset, is written as frequency number and block (key off).
+ * The comparison of the unsigned parameter with zero is always true and produces no
+ * code, but the original keeps the two volume additions apart exactly as this test
+ * does. That the test was written on this parameter is a hypothesis. */
+void far f_2815_0165(int instr, int note, unsigned vol, int voice)
 {
     unsigned char far *p;
+    int volume;
+    unsigned level;
 
-    vol += fd_50F6_4B16;
+    volume = vol;
+    if (vol >= 0)
+        volume += fd_50F6_4B16;
     p = fd_50F6_0000[instr].p;
-    vol += *(int far *)(p + 0xd);
-    if (vol < 0)
-        vol = 0;
-    if (vol > 0x7f)
-        vol = 0x7f;
-    snd_opl_write(g_6912[g_6908[voice]] + 0x40,
-                ((unsigned)(0x3f - (unsigned char)fd_55B3_6BA4[vol]) * ((p[2] & 0x3f) ^ 0x3f) >> 6 ^ 0x3f) | (p[2] & 0xc0));
+    volume += *(int far *)(p + 0xd);
+    if (volume < 0)
+        volume = 0;
+    if (volume > 0x7f)
+        volume = 0x7f;
+    level = p[2] & 0x3f;
+    level = (unsigned)(0x3f - (unsigned char)fd_55B3_6BA4[volume]) * (level ^ 0x3f) >> 6;
+    snd_opl_write(g_6912[g_6908[voice]] + 0x40, (level ^ 0x3f) | (p[2] & 0xc0));
     note += *(int far *)(p + 0xb) * 12;
     if (note >= 0 && note <= 0x7f) {
         snd_opl_write(voice + 0xa0, g_6924[note % 12]);
